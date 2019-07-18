@@ -26,10 +26,15 @@ export function uiTasking(context) {
     var _taskingManagerContainer = d3_select(null);
     var _taskingTaskContainer = d3_select(null);
 
-    var _task = taskingService.currTask();
+    var _task = taskingService.currentTask();
 
     var settingsCustomTasking = uiSettingsCustomTasking(context)
         .on('change', customTaskingChanged);
+
+    // zoom to data
+    taskingService.event.on('loadedTask', function fitZoom() {
+        layer.fitZoom();
+    });
 
 
 
@@ -54,13 +59,50 @@ export function uiTasking(context) {
     }
 
 
-    function toggleLayer() {
-        setLayer(!showsLayer());
+    function setManager(d) {
+
+        function layerSupported() {
+            return layer && layer.supported();
+        }
+
+        taskingService.currentManager(d); // set new manager
+
+        if (d.managerId === 'none') {
+            taskingService.resetProjectAndTask();
+            setLayer(false);
+
+        } else {
+
+            // check if layer is supported
+            if (!layerSupported() || d.managerId !== 'custom') return;
+
+            // handle custom manager
+            if (d.managerId === 'custom') {
+
+                var project = taskingService.getProject(taskingService.customSettings().projectId);
+                var task = taskingService.getTask(taskingService.customSettings().taskId);
+
+                if (project && task) {
+                    // load project & task
+                    taskingService.currentProject(project);
+                    taskingService.currentTask(task);
+                }
+            }
+
+            setLayer(true); // enable layer
+
+        }
+
+        update();
+    }
+
+    function showsManager(d) {
+        return taskingService.currentManager() && taskingService.currentManager().managerId === d.managerId;
     }
 
 
     function update() {
-        _task = taskingService.currTask();
+        _task = taskingService.currentTask();
 
         if (!_pane.select('.disclosure-wrap-tasking_managers').classed('hide')) {
             updateTaskingManagers();
@@ -79,6 +121,22 @@ export function uiTasking(context) {
         _taskingManagerContainer = container.enter()
             .append('div')
             .attr('class', 'tasking-managers-container')
+
+
+        var ul = _taskingManagerContainer
+            .selectAll('.layer-list-tasking')
+            .data(layer ? [0] : []);
+
+        // Exit
+        ul.exit()
+            .remove();
+
+        // Enter
+        ul.enter()
+            .append('ul')
+            .attr('class', 'layer-list layer-list-tasking');
+
+        _taskingManagerContainer
             .merge(container);
 
         updateTaskingManagers();
@@ -86,12 +144,94 @@ export function uiTasking(context) {
 
 
     function updateTaskingManagers() {
-        _taskingManagerContainer
-            .call(drawCustomTaskingItems);
+        _taskingManagerContainer.selectAll('.layer-list-tasking')
+            .call(drawListItems, taskingService.managers(), 'radio', 'manager', setManager, showsManager);
+
+        // _taskingManagerContainer
+        //     .call(drawManagerItems);
     }
 
 
-    function drawCustomTaskingItems(selection) {
+    function drawListItems(selection, data, type, name, change, active) {
+
+        var items = selection.selectAll('li')
+            .data(data);
+
+        // Exit
+        items.exit()
+            .remove();
+
+        // Enter
+        var enter = items.enter()
+            .append('li')
+            .attr('class', function(d) { return 'manager-' + d.managerId; })
+            .call(tooltip()
+                .title(function(d) {
+                    return t('tasking.manager.managers.' + d.managerId + '.tooltip') || null;
+                })
+                .placement('bottom')
+            );
+
+        var customManager = enter.filter(function(d) { return d.managerId === 'custom'; });
+
+        customManager
+            .append('button')
+            .attr('class', 'manager-browse')
+            .on('click', editCustomTasking)
+            .call(svgIcon('#iD-icon-more'));
+
+        customManager
+            .append('button')
+            .call(tooltip()
+                .title(t('tasking.manager.managers.custom.zoom'))
+                .placement((textDirection === 'rtl') ? 'right' : 'left')
+            )
+            .on('click', function() {
+                d3_event.preventDefault();
+                d3_event.stopPropagation();
+                layer.fitZoom();
+            })
+            .call(svgIcon('#iD-icon-search'));
+
+        var label = enter
+            .append('label');
+
+        label
+            .append('input')
+            .attr('type', type)
+            .attr('name', name)
+            .on('change', change);
+
+        label
+            .append('span')
+            .text(function(d) { return d.name; });
+
+
+        // Update
+        items = items
+            .merge(enter);
+
+        items
+            .classed('active', active)
+            .selectAll('input')
+            .property('checked', active);
+
+        // // enable/disable custom if there is data
+        // var hasData = layer && layer.hasData();
+
+        // items
+        //     .selectAll('.manager-custom')
+        //     .selectAll('label')
+        //         .property('class', 'testingClass')
+        //         .classed('deemphasize', !hasData)
+        //         .property('disabled', !hasData);
+
+    }
+
+    // NOTE: TAH - update drawListItems so that custom is disabled (like below) without data. Then, handle custom data & make sure toggle updates colors
+
+
+    function drawManagerItems(selection) {
         var hasData = layer && layer.hasData();
         var showsData = hasData && layer.enabled();
 
@@ -108,23 +248,25 @@ export function uiTasking(context) {
             .append('ul')
             .attr('class', 'layer-list layer-list-tasking');
 
-        var liEnter = ulEnter
-            .append('li')
-            .attr('class', 'list-item-tasking');
 
-        liEnter
+        // Enter custom
+        var liEnterCustom = ulEnter
+            .append('li')
+            .attr('class', 'list-item-tasking custom');
+
+        liEnterCustom
             .append('button')
             .call(tooltip()
-                .title(t('settings.custom_tasking.tooltip'))
+                .title(t('tasking.manager.managers.custom.settings.tooltip'))
                 .placement((textDirection === 'rtl') ? 'right' : 'left')
             )
             .on('click', editCustomTasking)
             .call(svgIcon('#iD-icon-more'));
 
-        liEnter
+        liEnterCustom
             .append('button')
             .call(tooltip()
-                .title(t('tasking.custom_tasking.zoom'))
+                .title(t('tasking.manager.managers.custom.zoom'))
                 .placement((textDirection === 'rtl') ? 'right' : 'left')
             )
             .on('click', function() {
@@ -134,21 +276,43 @@ export function uiTasking(context) {
             })
             .call(svgIcon('#iD-icon-search'));
 
-        var labelEnter = liEnter
+        var labelEnterCustom = liEnterCustom
             .append('label')
             .call(tooltip()
-                .title(t('tasking.custom_tasking.tooltip'))
+                .title(t('tasking.manager.managers.custom.tooltip'))
                 .placement('bottom')
             );
 
-        labelEnter
+            labelEnterCustom
             .append('input')
             .attr('type', 'checkbox')
-            .on('change', function() { toggleLayer(); });
+            .on('change', function() { toggleManager(); });
 
-        labelEnter
+        labelEnterCustom
             .append('span')
-            .text(t('tasking.custom_tasking.title'));
+            .text(t('tasking.manager.managers.custom.title'));
+
+
+        // Enter none
+        var liEnterNone = ulEnter
+            .append('li')
+            .attr('class', 'list-item-tasking none');
+
+        var labelEnterNone = liEnterNone
+            .append('label')
+            .call(tooltip()
+                .title(t('tasking.manager.managers.none.tooltip'))
+                .placement('bottom')
+            );
+
+        labelEnterNone
+            .append('input')
+            .attr('type', 'checkbox')
+            .on('change', function() { toggleManager(); });
+
+        labelEnterNone
+            .append('span')
+            .text(t('tasking.manager.managers.none.title'));
 
         // Update
         ul = ul
@@ -173,17 +337,14 @@ export function uiTasking(context) {
 
     function customTaskingChanged(settings) {
 
-        // load custom data
-        var taskingService = context.tasking();
         if (settings && settings.url) {
-            taskingService.setCustom(settings);
-        }
 
-        // zoom to data
-        taskingService.event.on('loadedTask', function fitZoom() {
-            layer.fitZoom();
-            update();
-        });
+            // load custom data
+            taskingService.setCustom(settings);
+
+            // // set manager
+            setManager(taskingService.getManager('custom'));
+        }
     }
 
 

@@ -10,11 +10,6 @@ export function task() {
 }
 
 
-task.id = function() {
-    return task.id.next--;
-};
-
-
 Object.assign(task.prototype, {
 
     type: 'task',
@@ -35,15 +30,39 @@ Object.assign(task.prototype, {
             }
         }
 
-        if (!this.id) {
-            this.id = task.id() + '';  // as string
-        }
-
         return this;
+    },
+
+    id: function() {
+        return this.properties.taskId;
     },
 
     extent: function() {
         return new geoExtent(this.geometry.coordinates);
+    },
+
+    projectId: function() {
+        return this.properties.projectId;
+    },
+
+    status: function() {
+        return this.properties.status;
+    },
+
+    history: function() {
+        return this.properties.history;
+    },
+
+    comments: function() {
+        return this.properties.comments;
+    },
+
+    description: function() {
+        return this.properties.description;
+    },
+
+    instructions: function() {
+        return this.properties.instructions;
     },
 
     lock: function(user) {

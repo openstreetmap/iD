@@ -1,48 +1,164 @@
 
-import _throttle from 'lodash-es/throttle';
-
 import stringify from 'fast-json-stable-stringify';
 import { utilHashcode, utilRebind } from '../../util';
+import { t } from '../../util/locale';
 
 import _filter from 'lodash-es/filter';
 import { dispatch as d3_dispatch } from 'd3-dispatch';
-import { json as d3_json, text as d3_text } from 'd3-fetch';
+import { text as d3_text } from 'd3-fetch';
 
-import { task } from '../../osm';
+import { task, project, manager } from '../../osm';
+import { dataTaskingManagers } from '../../../data';
 
 import rbush from 'rbush';
 
-var apibase = 'http://127.0.0.1:5000/api/v1/'; // TODO: TAH - change to list of real manager urls when published
+
+
+var apibases = {
+    local:  'http://127.0.0.1:5000/api/v1/', // TODO: TAH - change to list of real manager urls when published
+    hot: 'https://tasks.hotosm.org/api/v1/',
+};
 var dispatch = d3_dispatch('loaded', 'loadedProject', 'loadedTask', 'loadedTasks', 'change', 'redraw', 'loadedCustom');
 var _taskingCache = {};
 var _enabled = false;
 
 
+
+function parseProject(result, parsedUrl) {
+    var json = JSON.parse(result);
+
+    function parseHOTProject(result) {
+        var hotProject = {
+            geometry: {},
+            properties: {
+                projectId: result.projectId,
+                name: result.projectInfo.name,
+                status: result.projectStatus,
+                tasks: result.tasks
+            },
+        };
+
+        return hotProject;
+    }
+
+    switch (parsedUrl.managerSource) {
+        case '127.0.0.1:5000' || 'HOT': // TODO: TAH - remove localhost
+            json = parseHOTProject(json);
+            break;
+        default:
+            break;
+    }
+
+    return json;
+}
+
+
+function parseTask(that, result, parsedUrl) {
+
+    var json = JSON.parse(result);
+
+
+    function parseHOTTask(json) {
+
+        function getTaskGeoJSON(projectId, taskId) {
+
+            var _project = that.getProject(projectId);
+            if (!_project) return;
+
+            if (_project && _project.properties.tasks && _project.properties.tasks.features && _project.properties.tasks.features.length) {
+                var features = _project.properties.tasks.features;
+
+                // get the task geometry
+                var taskGeoJSON = _filter(features, function(feature) { return feature.properties.taskId === taskId; })[0];
+
+
+                return ensureIDs(taskGeoJSON);
+
+            }
+        }
+
+        var projectId = json.projectId;
+
+        if (that.currentManager().managerId === 'HOT' || (that.currentManager().managerId === 'custom' && that.customSettings().managerSource === '127.0.0.1:5000')) { // TAH - TODO: change to HOT once local manager is gone
+            var taskGeoJSON = getTaskGeoJSON(projectId, json.taskId);
+
+            // add json to geojson properties
+            for (var prop in json) {
+                if (Object.prototype.hasOwnProperty.call(json, prop)) {
+                    if (json[prop] === undefined) {
+                        delete this[prop];
+                    } else {
+                        taskGeoJSON.properties[prop] = json[prop];
+                    }
+                }
+            }
+
+            return taskGeoJSON;
+        }
+        return '';
+    }
+
+
+    switch (parsedUrl.managerSource) {
+        case '127.0.0.1:5000' || 'HOT': // TODO: TAH - remove localhost
+            json = parseHOTTask(json);
+            break;
+        default:
+            break;
+    }
+
+    return json;
+
+
+}
+
+
 var parsers = {
-    parseTask: function(gj) {
+
+    manager: function(values) {
+        var newManager = new manager(values);
+
+        return newManager;
+    },
+
+
+    project: function(values) {
+
+
+        var _project = {
+            geometry: values.geometry,
+            properties: {
+                projectId: values.properties.projectId,
+                name: values.properties.name,
+                status: values.properties.status,
+                tasks: values.properties.tasks
+            },
+        };
+
+        var newProject = new project(_project);
+
+
+        return newProject;
+    },
+
+    task: function(values) {
 
         // TODO: parse differently depending on manager (i.e., combine HOT task details from two API calls)
 
-        // if geojson is multipolygon, pull off first feature
-        if (gj.features.length > 1) {
-            console.log('TAH more than one feature when trying to create a task');
-        }
-
-
-        var feature = gj.features[0];
-        var properties = feature.properties;
 
         var _task = {
-            geometry: feature.geometry,
+            type: values.type,
+            geometry: values.geometry,
             properties: {
-                projectId: properties.projectId,
-                status: properties.taskStatus,
-                history: properties.taskHistory,
+                taskId: values.properties.taskId,
+                projectId: values.properties.projectId,
+                status: values.properties.taskStatus,
+                history: values.properties.taskHistory,
                 comments: 'TBD',
                 description: 'TBD',
-                instructions: properties.perTaskInstructions,
+                instructions: values.properties.perTaskInstructions,
             },
-            __featurehash__: feature.__featurehash__
+            __featurehash__: values.__featurehash__
         };
 
         var newTask = new task(_task);
@@ -69,7 +185,6 @@ function parseUrl(url, defaultExtension) {
     var splitUrl = url.split('?');
     var path = splitUrl[0];
     var params = splitUrl[1];
-    // parsedUrl.manager = getUrlManager(path); // TODO: TAH - add after adding managers
 
     // strip off any querystring/hash from the url before checking extension
     var testUrl = url.split(/[?#]/)[0];
@@ -85,12 +200,22 @@ function parseUrl(url, defaultExtension) {
     var urlType = _containsTask ? 'task' : _containsProject ? 'project' : undefined;
     var url_slugs = url.split('?')[0].split('/');
 
+    var managers = [
+        '127.0.0.1:5000',
+        'HOT'
+    ];
+
+
+    // NOTE: make manager an object, pull away from this parser, make sure in loadProject, getManager works to set manager!
+
+
+    function getManager(slug) {
+        return managers.find(function(element){ return element = slug; });
+    }
+
+    var managerSource = getManager(url_slugs[2]);
     var projectId;
     var taskId;
-
-    if (_containsTask) {
-        taskId = url_slugs[url_slugs.length - 1];
-    }
 
     if (_containsProject) {
         if (_containsTask) {
@@ -100,6 +225,10 @@ function parseUrl(url, defaultExtension) {
         }
     }
 
+    if (_containsTask) {
+        taskId = url_slugs[url_slugs.length - 1];
+    }
+
     parsedUrl = {
         url: url,
         path: path,
@@ -107,11 +236,31 @@ function parseUrl(url, defaultExtension) {
         urlType: urlType,
         extension: extension,
         url_slugs: url_slugs,
-        projectId: projectId,
-        taskId: taskId,
+        managerSource: managerSource,
+        projectId: parseInt(projectId, 10),
+        taskId: parseInt(taskId, 10),
     };
 
     return parsedUrl;
+}
+
+
+function formulateUrl(parsedUrl, type) {
+    var path;
+    switch (parsedUrl.managerSource) {
+        case '127.0.0.1:5000' || 'HOT': // TODO: TAH - remove localhost
+
+            path = apibases.local + 'project/' + parsedUrl.projectId; // TODO: TAH - remove apibase.local
+            if (type === 'task') {
+                path += parsedUrl.taskId ? '/task/' + parsedUrl.taskId : '';
+            }
+            path += '?as_file=false';
+            break;
+        default:
+            break;
+    }
+
+    return path;
 }
 
 
@@ -138,6 +287,26 @@ function ensureFeatureID(feature) {
 }
 
 
+function initManagers() {
+    // Add all the available tasking manager sources (TODO: TAH - add add managers for task searching)
+    var _managers = dataTaskingManagers.map(function(manager) {
+        parsers.manager(manager);
+    });
+
+    // add custom and none managers
+    _managers.push(parsers.manager({
+        managerId: 'custom',
+        name: t('tasking.manager.managers.custom.name')
+    }));
+    _managers.push(parsers.manager({
+        managerId: 'none',
+        name: t('tasking.manager.managers.none.name')
+    }));
+
+    return _managers;
+}
+
+
 export default {
 
 
@@ -151,13 +320,24 @@ export default {
     init: function () {
         this.event = utilRebind(this, dispatch, 'on');
 
+        var that = this;
+
+        // create managers
+        var managers = initManagers();
+
+
         _taskingCache = {
+            managers: managers,
             projects: [],
             tasks: [],
-            currTask: {},
-            currProject: {},
-            customSettings: { url: '', extension: '', data: {} }
+            currentManager: {},
+            currentProject: {},
+            currentTask: {},
+            customSettings: {}
         };
+
+        // set starting manager
+        that.currentManager(that.getManager('none'));
     },
 
 
@@ -166,23 +346,26 @@ export default {
     },
 
 
-    currTask: function(d) {
-        if (!arguments.length) return _taskingCache.currTask;
-
-        _taskingCache.currTask = d;
+    managers: function() {
+        return _taskingCache.managers;
     },
 
 
-    loadFromUrl: function(url, defaultExtension) {
+    getManager: function(managerId) {
+        return _taskingCache.managers.find(function(manager) {
+            return manager.managerId && manager.managerId === managerId;
+        });
+    },
+
+
+    loadFromUrl: function(parsedUrl) {
 
 
         var that = this;
 
-        // parse url to get type, project, and task (if present)
-        var parsedUrl = parseUrl(url, defaultExtension);
-
+        // if url is for raw data
         if (parsedUrl.extension) {
-            d3_text(url)
+            d3_text(parsedUrl.url)
                 .then(function(data) {
 
                     var gj;
@@ -195,9 +378,14 @@ export default {
 
                     gj = gj || {};
                     if (Object.keys(gj).length) {
-                        var newTask = parsers.parseTask(ensureIDs(gj)); // create new task
-                        _taskingCache.tasks.push(newTask); // add task to tasks
-                        that.currTask(newTask); // set task as current task
+                        var newTask = ensureIDs(gj); // create new task
+
+                        // if task doesn't already exist, add it
+                        if (!that.getTask(parsedUrl.taskId)) {
+                            that.addNewTask(newTask); // add task to tasks
+                        }
+
+                        that.currentTask(newTask); // set task as current task
 
                         dispatch.call('loadedTask');
                         dispatch.call('change');
@@ -205,17 +393,19 @@ export default {
 
 
                 })
-                .catch(function() {
+                .catch(function(error) {
+                    console.log('error in loadFromUrl: ', error);
                     /* ignore */
                 });
 
+        // if the url is to a tasking manager api endpoint
         } else {
             switch (parsedUrl.urlType) {
                 case 'task':
-                    that.loadTask();
+                    that.loadTask(parsedUrl);
                     break;
                 case 'project':
-                    that.loadProject();
+                    that.loadProject(parsedUrl);
                     break;
                 case undefined:
                     console.log('undefined url result: ', parsedUrl); // TODO: TAH - better handling of urlType
@@ -230,11 +420,145 @@ export default {
     },
 
 
+    loadProject: function(parsedUrl) {
+        var that = this;
+
+        // var managerId = parsedUrl.manager;
+        var projectId = parsedUrl.projectId;
+
+        // // set manager if it isn't already set
+        // if (!that.currentManager().id || !that.currentManager().id === managerId) {
+        //     that.currentManager(that.getManager(managerId));
+        // }
+
+
+        // load project if it hasn't been loaded
+        if (!that.getProject(projectId)) {
+            d3_text(formulateUrl(parsedUrl, 'project'))
+                .then(function(result) {
+                    if (result) {
+
+                        // reformulate result based on manager
+                        var json = parseProject(result, parsedUrl);
+
+                        // create project
+                        var newProject = parsers.project(json);
+
+                        // add to projects
+                        that.addNewProject(newProject);
+
+                        // set as current project
+                        that.currentProject(newProject);
+
+                        dispatch.call('loadedProject');
+
+                        // load task if requested
+                        if (parsedUrl.urlType === 'task') { that.loadTask(parsedUrl); }
+                    }
+                })
+                .catch(function(err) {
+                    console.log('loadProject error: ', err); // TODO: TAH - better handling of errors
+                });
+        }
+
+    },
+
+    projects: function() {
+        return _taskingCache.projects;
+    },
+
+
+    getProject: function(projectId) {
+        return _taskingCache.projects.find(function(project) {
+            return project.properties.projectId && project.properties.projectId === projectId;
+        });
+    },
+
+
+    addNewProject: function(project) {
+        _taskingCache.projects.push(project);
+    },
+
+
+    loadTask: function(parsedUrl) {
+
+        var that = this;
+
+        var taskId = parsedUrl.taskId;
+        var projectId = parsedUrl.projectId;
+
+        // load project first if it hasn't been loaded
+        if (!that.getProject(projectId)) {
+            that.loadProject(parsedUrl);
+            return;
+
+        // if the project is loaded but not current, make current
+        } else if (!that.currentProject().id === projectId) {
+            that.currentProject(that.getProject(projectId));
+        }
+
+        // load task if it hasn't been loaded
+        if (!that.getTask(taskId)) {
+
+            d3_text(formulateUrl(parsedUrl, 'task'))
+                .then(function(result) {
+                    if (result) {
+
+                        // reformulate result based on manager
+                        var json = parseTask(that, result, parsedUrl);
+
+                        // create task
+                        var newTask = parsers.task(json);
+
+                        // add to tasks
+                        that.addNewTask(newTask);
+
+                        // set as current task
+                        that.currentTask(newTask);
+
+                        dispatch.call('loadedTask');
+                    }
+                })
+                .catch(function(err) {
+                    console.log('loadTask error: ', err); // TODO: TAH - better handling of errors
+                });
+        } else {
+            // set task if it has already been loaded
+            that.currentTask(that.getTask(taskId));
+
+            // TODO: TAH - figure out if I need the next lines
+            // if (_taskingCache.task[taskId]) {
+            //     dispatch.call('loadedTask');
+            // }
+        }
+    },
+
+    tasks: function() {
+        return _taskingCache.tasks;
+    },
+
+
+    getTask: function(taskId) {
+        return _taskingCache.tasks.find(function(task) {
+            return task.properties.taskId && task.properties.taskId === taskId;
+        });
+    },
+
+
+    addNewTask: function(task) {
+        _taskingCache.tasks.push(task);
+    },
+
+
     setCustom: function(settings) {
         var that = this;
 
-        that.loadFromUrl(settings.url);
-        that.customSettings(settings);
+        var parsedUrl = parseUrl(settings.url);
+
+        that.currentManager(that.getManager('custom')); // set manager to custom
+        that.loadFromUrl(parsedUrl); // load data from url
+
+        that.customSettings(parsedUrl); // save custom settings
 
         return this;
     },
@@ -254,11 +578,24 @@ export default {
     },
 
 
+    currentManager: function(d) {
+
+        if (!arguments.length) return _taskingCache.currentManager;
+
+        _taskingCache.currentManager = d;
+
+        dispatch.call('change');
+        dispatch.call('redraw');
+
+        return this;
+    },
+
+
     currentProject: function(d) {
 
-        if (!arguments.length) return _taskingCache.currProject;
+        if (!arguments.length) return _taskingCache.currentProject;
 
-        _taskingCache.currProject = d;
+        _taskingCache.currentProject = d;
 
         dispatch.call('change');
         dispatch.call('redraw');
@@ -269,7 +606,7 @@ export default {
 
     currentTask: function(d) {
 
-        if (!arguments.length) return _taskingCache.currTask;
+        if (!arguments.length) return _taskingCache.currentTask;
 
         _taskingCache.currentTask = d;
 
@@ -281,12 +618,12 @@ export default {
 
 
     resetTask: function() {
-        _taskingCache.currTask = {};
+        _taskingCache.currentTask = {};
     },
 
 
     resetProject: function() {
-        _taskingCache.currProject = {};
+        _taskingCache.currentProject = {};
     },
 
 

@@ -1,0 +1,28 @@
+{
+    "dataTaskingManagers": [
+    ],
+    "futureManagers": [
+        {
+            "managerId": "HOT",
+            "name": "HOT Tasking Manager",
+            "template": "",
+            "zoomExtent": [0, 22],
+            "terms_url": "https://wiki.openstreetmap.org/wiki/Tasking_Manager",
+            "terms_text": "Terms & Feedback",
+            "default": true,
+            "description": "HOT tasking manager.",
+            "urlRoot": "127.0.0.1:5000"
+        },
+        {
+            "managerId": "Maproulette",
+            "name": "Maproulette",
+            "template": "",
+            "zoomExtent": [0, 22],
+            "terms_url": "https://wiki.openstreetmap.org/wiki/MapRoulette",
+            "terms_text": "Terms & Feedback",
+            "default": true,
+            "description": "Maproulette tasking manager.",
+            "urlRoot": "maproulette.org"
+        }
+    ]
+}

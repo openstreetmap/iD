@@ -689,12 +689,6 @@ en:
       url:
         instructions: "Enter a data file URL or vector tile URL template. Valid tokens are:\n   {zoom} or {z}, {x}, {y} for Z/X/Y tile scheme"
         placeholder: Enter a url
-    custom_tasking:
-      tooltip: Edit custom tasking manager
-      header: Custom Tasking Manager Settings
-      instructions: "Enter a tasking manager URL template. Valid tokens are: \n- {manager} \tfor manager \n- {p} \t\tfor project \n- {t} \t\tfor task \n\nOutline:\n{placeholder} \n\nExample:\n{example}"
-      url:
-        placeholder: Enter a url template
   restore:
     heading: You have unsaved changes
     description: "Do you wish to restore unsaved changes from a previous editing session?"
@@ -1092,9 +1086,25 @@ en:
   tasking:
     title: Tasking
     description: Tasks
-    key: M
+    key: T
     manager:
       name: Manager
+      managers:
+        custom:
+            tooltip: tasking tooltip
+            title: Custom Tasking Manager
+            zoom: Zoom to task
+            settings:
+              tooltip: Edit custom tasking manager
+              header: Custom Tasking Manager Settings
+              instructions: "Enter a tasking manager URL template. Valid tokens are: \n- {manager} \tfor manager \n- {p} \t\tfor project \n- {t} \t\tfor task \n\nOutline:\n{placeholder} \n\nExample:\n{example}"
+              url:
+                placeholder: Enter a url template
+            name: Custom
+        none:
+          tooltip: Turn of tasking
+          title: None
+          name: None
     task:
       name: Task
       id: "Task ID: {taskId}"
@@ -1112,10 +1122,6 @@ en:
     started_task:
       task_help: "You're editing task {taskId}{br}For details, click the {taskingButton} Tasking button or press the '{taskingKey}' key.{br}Need help? Click the {helpButton} Help button or pressing the '{helpKey}' key"
       stop_task: Stop task
-    custom_tasking:
-        tooltip: "tasking tooltip"
-        title: Custom Tasking Manager
-        zoom: Zoom to task
   help:
     title: Help
     key: H

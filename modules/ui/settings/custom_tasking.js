@@ -12,9 +12,11 @@ export function uiSettingsCustomTasking(context) {
 
         // keep separate copies of original and current settings
         var _origSettings = {
+            manager: 'custom',
             url: context.tasking().customSettings().url
         };
         var _currSettings = {
+            manager: 'custom',
             url: context.tasking().customSettings().url
         };
 
@@ -29,7 +31,7 @@ export function uiSettingsCustomTasking(context) {
 
         modal.select('.modal-section.header')
             .append('h3')
-            .text(t('settings.custom_tasking.header'));
+            .text(t('tasking.manager.managers.custom.settings.header'));
 
 
         var textSection = modal.select('.modal-section.message-text');
@@ -37,12 +39,12 @@ export function uiSettingsCustomTasking(context) {
         textSection
             .append('pre')
             .attr('class', 'instructions-url')
-            .text(t('settings.custom_tasking.instructions', { placeholder: placeholder, example: example }));
+            .text(t('tasking.manager.managers.custom.settings.instructions', { placeholder: placeholder, example: example }));
 
         textSection
             .append('textarea')
             .attr('class', 'field-url')
-            .attr('placeholder', t('settings.custom_tasking.url.placeholder'))
+            .attr('placeholder', t('tasking.manager.managers.custom.settings.url.placeholder'))
             .call(utilNoAuto)
             .property('value', _currSettings.url);
 

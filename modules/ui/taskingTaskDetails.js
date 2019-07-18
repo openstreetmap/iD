@@ -54,7 +54,7 @@ export function uiTaskingTaskDetails() {
             .text(function(d) {
                 return t('tasking.task.status', { status:
                     function() {
-                        var status = 'tasking.task.statuses.' + d.properties.taskStatus.toLowerCase();
+                        var status = 'tasking.task.statuses.' + d.properties.status.toLowerCase();
                         return t(status);
                     }()
                 });

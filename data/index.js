@@ -10,6 +10,7 @@ export { dataShortcuts } from './shortcuts.json';
 export { default as dataImperial } from './imperial.json';
 export { default as dataDriveLeft } from './drive-left.json';
 export { en as dataEn } from '../dist/locales/en.json';
+export { dataTaskingManagers } from './tasking_managers.json';
 
 import {
     features as ociFeatures,

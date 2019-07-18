@@ -13,7 +13,7 @@ import { utilArrayFlatten, utilArrayUnion } from '../util';
 
 var _initialized = false;
 var _enabled = false;
-var _geojson;
+var _task;
 
 var _extent;
 var _centroid;
@@ -31,8 +31,8 @@ export function svgTasking(projection, context, dispatch) {
     function init() {
         if (_initialized) return;  // run once
 
-        _geojson = {};
-        _enabled = true;
+        _task = {};
+        _enabled = false;
         _initialized = true;
     }
 
@@ -86,18 +86,6 @@ export function svgTasking(projection, context, dispatch) {
     }
 
 
-    // Prefer an array of Features instead of a FeatureCollection
-    function getFeatures(gj) {
-        if (!gj) return [];
-
-        if (gj.type === 'FeatureCollection') {
-            return gj.features;
-        } else {
-            return [gj];
-        }
-    }
-
-
     function featureKey(d) {
         return d.__featurehash__;
     }
@@ -123,35 +111,25 @@ export function svgTasking(projection, context, dispatch) {
     }
 
 
-    function drawTasking(selection) {
+    function editOn() {
         var getPath = svgPath(projection).geojson;
         var getAreaPath = svgPath(projection, null, true).geojson;
-        var hasData = drawTasking.hasData();
-
-        layer = selection.selectAll('.layer-maptasking')
-            .data(_enabled && hasData ? [0] : []);
-
-        layer.exit()
-            .remove();
-
-        layer = layer.enter()
-            .append('g')
-            .attr('class', 'layer-maptasking')
-            .merge(layer);
 
         var surface = context.surface();
         if (!surface || surface.empty()) return;  // not ready to draw yet, starting up
 
-
         // Gather data
-        var geoData, polygonData;
+        var geoData = [];
+        var polygonData = [];
 
-        _geojson = getService().currTask();
+        _task = getService().currentTask();
 
-        geoData = getFeatures(_geojson);
-
-        geoData = geoData.filter(getPath);
-        polygonData = geoData.filter(isPolygon);
+        if (Object.keys(_task).length) {
+            // geoData = getFeatures(_task);
+            geoData = [_task];
+            geoData = geoData.filter(getPath);
+            polygonData = geoData.filter(isPolygon);
+        }
 
 
         // Draw clip paths for polygons
@@ -257,7 +235,7 @@ export function svgTasking(projection, context, dispatch) {
 
 
         // draw curtain around task
-        if (geoData && geoData.length && drawTasking.enabled()) {
+        if (geoData && !!geoData.length && drawTasking.enabled()) {
             drawTasking.showCurtain(true);
         } else {
             drawTasking.showCurtain(false);
@@ -307,11 +285,36 @@ export function svgTasking(projection, context, dispatch) {
                 });
 
             function finishTasking(value) {
-                console.log(value);
+                console.log('clicked finish tasking');
             }
         }
+    }
 
 
+    function editOff() {
+        _curtain.remove();
+    }
+
+
+    function drawTasking(selection) {
+        var hasData = drawTasking.hasData();
+
+        layer = selection.selectAll('.layer-maptasking')
+            .data(_enabled && hasData ? [0] : []);
+
+        layer.exit()
+            .remove();
+
+        layer = layer.enter()
+            .append('g')
+            .attr('class', 'layer-maptasking')
+            .merge(layer);
+
+        if (_enabled) {
+            editOn();
+        } else {
+            editOff();
+        }
     }
 
 
@@ -338,19 +341,27 @@ export function svgTasking(projection, context, dispatch) {
     };
 
 
-    drawTasking.hasData = function() {
-        _geojson = getService().currTask();
+    drawTasking.supported = function() {
+        return !!getService();
+    };
 
-        var gj = _geojson || {};
+
+    drawTasking.hasData = function() {
+        _task = getService().currentTask();
+
+        var gj = _task || {};
         return !!(Object.keys(gj).length);
     };
 
 
     drawTasking.fitZoom = function() {
-        _geojson = getService().currTask();
 
-        var features = getFeatures(_geojson);
+        _task = getService().currentTask();
+
+        var features = [_task];
+
         if (!features.length) return;
+
 
         var map = context.map();
         var viewport = map.trimmedExtent().polygon();
