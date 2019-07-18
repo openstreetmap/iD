@@ -31,9 +31,13 @@ export function uiTasking(context) {
     var settingsCustomTasking = uiSettingsCustomTasking(context)
         .on('change', customTaskingChanged);
 
+    taskingService.event.on('setManager', function fitZoom() {
+        update();
+    });
+
     taskingService.event.on('setTask', function fitZoom() {
         layer.fitZoom();
-        updateTaskingTask();
+        update();
     });
 
 
@@ -52,8 +56,6 @@ export function uiTasking(context) {
 
         if (layer) {
             layer.enabled(enabled);
-
-            update();
         }
     }
 
@@ -174,12 +176,13 @@ export function uiTasking(context) {
 
         customManager
             .append('button')
-            .attr('class', 'manager-browse')
+            .attr('class', 'custom-manager-browse')
             .on('click', editCustomTasking)
             .call(svgIcon('#iD-icon-more'));
 
         customManager
             .append('button')
+            .attr('class', 'custom-manager-zoom')
             .call(tooltip()
                 .title(t('tasking.manager.managers.custom.zoom'))
                 .placement((textDirection === 'rtl') ? 'right' : 'left')
@@ -214,114 +217,30 @@ export function uiTasking(context) {
             .selectAll('input')
             .property('checked', active);
 
-        // // enable/disable custom if there is data
-        // var hasData = layer && layer.hasData();
 
-        // items
-        //     .selectAll('.manager-custom')
-        //     .selectAll('label')
-        //         .property('class', 'testingClass')
-        //         .classed('deemphasize', !hasData)
-        //         .property('disabled', !hasData);
+        // deemphasize & disable custom label & zoom when no data loaded
+        function hasData() {
 
-    }
+            var settings = taskingService.customSettings();
+            var hasLoadedCustom = !!taskingService.getTask(settings.taskId);
 
-    // NOTE: TAH - update drawListItems so that custom is disabled (like below) without data. Then, handle custom data & make sure toggle updates colors
+            var data = layer && layer.hasData();
 
+            return hasLoadedCustom || data;
+        }
 
-    function drawManagerItems(selection) {
-        var hasData = layer && layer.hasData();
         var showsData = hasData && layer.enabled();
 
-        var ul = selection
-            .selectAll('.layer-list-tasking')
-            .data(layer ? [0] : []);
-
-        // Exit
-        ul.exit()
-            .remove();
-
-        // Enter
-        var ulEnter = ul.enter()
-            .append('ul')
-            .attr('class', 'layer-list layer-list-tasking');
-
-
-        // Enter custom
-        var liEnterCustom = ulEnter
-            .append('li')
-            .attr('class', 'list-item-tasking custom');
-
-        liEnterCustom
-            .append('button')
-            .call(tooltip()
-                .title(t('tasking.manager.managers.custom.settings.tooltip'))
-                .placement((textDirection === 'rtl') ? 'right' : 'left')
-            )
-            .on('click', editCustomTasking)
-            .call(svgIcon('#iD-icon-more'));
-
-        liEnterCustom
-            .append('button')
-            .call(tooltip()
-                .title(t('tasking.manager.managers.custom.zoom'))
-                .placement((textDirection === 'rtl') ? 'right' : 'left')
-            )
-            .on('click', function() {
-                d3_event.preventDefault();
-                d3_event.stopPropagation();
-                layer.fitZoom();
-            })
-            .call(svgIcon('#iD-icon-search'));
-
-        var labelEnterCustom = liEnterCustom
-            .append('label')
-            .call(tooltip()
-                .title(t('tasking.manager.managers.custom.tooltip'))
-                .placement('bottom')
-            );
-
-            labelEnterCustom
-            .append('input')
-            .attr('type', 'checkbox')
-            .on('change', function() { toggleManager(); });
-
-        labelEnterCustom
-            .append('span')
-            .text(t('tasking.manager.managers.custom.title'));
-
-
-        // Enter none
-        var liEnterNone = ulEnter
-            .append('li')
-            .attr('class', 'list-item-tasking none');
-
-        var labelEnterNone = liEnterNone
-            .append('label')
-            .call(tooltip()
-                .title(t('tasking.manager.managers.none.tooltip'))
-                .placement('bottom')
-            );
-
-        labelEnterNone
-            .append('input')
-            .attr('type', 'checkbox')
-            .on('change', function() { toggleManager(); });
-
-        labelEnterNone
-            .append('span')
-            .text(t('tasking.manager.managers.none.title'));
-
-        // Update
-        ul = ul
-            .merge(ulEnter);
-
-        ul.selectAll('.list-item-tasking')
-            .classed('active', showsData)
+        selection.selectAll('.manager-custom')
             .selectAll('label')
-            .classed('deemphasize', !hasData)
+            .classed('deemphasize', !hasData())
             .selectAll('input')
-            .property('disabled', !hasData)
+            .property('disabled', !hasData())
+            .property('checked', showsData);
+
+        selection.selectAll('.custom-manager-zoom')
+            .classed('deemphasize', !hasData())
+            .property('disabled', !hasData())
             .property('checked', showsData);
     }
 
@@ -431,10 +350,10 @@ export function uiTasking(context) {
             .attr('class', 'pane-content');
 
 
-            // tasking
+        // tasking
         content
             .append('div')
-            .attr('class', 'map-data-tasking')
+            .attr('class', 'tasking-manager-container')
             .call(uiDisclosure(context, 'tasking_managers', false)
                 .title(t('tasking.manager.name'))
                 .content(renderTaskingManagers)
