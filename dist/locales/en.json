@@ -3809,6 +3809,9 @@
                 "product": {
                     "label": "Products"
                 },
+                "public_bookcase/type": {
+                    "label": "Type"
+                },
                 "railway": {
                     "label": "Type"
                 },
@@ -8022,9 +8025,6 @@
                 "power/transformer": {
                     "name": "Transformer",
                     "terms": ""
-                },
-                "public_bookcase/type": {
-                    "label": "Type"
                 },
                 "public_transport/platform_point": {
                     "name": "Transit Stop / Platform",

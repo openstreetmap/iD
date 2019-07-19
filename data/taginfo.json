@@ -1566,6 +1566,7 @@
     {"key": "preschool", "description": "🄵 Preschool"},
     {"key": "produce", "description": "🄵 Produce"},
     {"key": "product", "description": "🄵 Products"},
+    {"key": "public_bookcase:type", "description": "🄵 Type"},
     {"key": "railway:position", "description": "🄵 Milestone Position"},
     {"key": "railway:signal:direction", "value": "forward", "description": "🄵 Direction Affected"},
     {"key": "railway:signal:direction", "value": "backward", "description": "🄵 Direction Affected"},
