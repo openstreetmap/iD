@@ -275,6 +275,7 @@
     "preschool": {"key": "preschool", "type": "check", "label": "Preschool"},
     "produce": {"key": "produce", "type": "semiCombo", "label": "Produce"},
     "product": {"key": "product", "type": "semiCombo", "label": "Products"},
+    "public_bookcase/type": {"key": "public_bookcase:type", "type": "combo", "label": "Type"},
     "railway": {"key": "railway", "type": "typeCombo", "label": "Type"},
     "railway/position": {"key": "railway:position", "type": "text", "placeholder": "Distance to one decimal (123.4)", "label": "Milestone Position"},
     "railway/signal/direction": {"key": "railway:signal:direction", "type": "combo", "label": "Direction Affected", "strings": {"options": {"forward": "Forward", "backward": "Backward", "both": "Both / All"}}},
