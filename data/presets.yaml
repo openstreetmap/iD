@@ -3029,7 +3029,7 @@ en:
         terms: '<translate with synonyms or related terms for ''Public Bookcase'', separated by commas>'
       public_bookcase/type:
         # public_bookcase:type=*
-        label: Type of public bookcases
+        label: Type
       amenity/ranger_station:
         # amenity=ranger_station
         name: Ranger Station
