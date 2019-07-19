@@ -8023,6 +8023,9 @@
                     "name": "Transformer",
                     "terms": ""
                 },
+                "public_bookcase/type": {
+                    "label": "Type"
+                },
                 "public_transport/platform_point": {
                     "name": "Transit Stop / Platform",
                     "terms": "platform,public transit,public transportation,transit,transportation"
