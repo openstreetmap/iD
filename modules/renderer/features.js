@@ -10,7 +10,6 @@ export function rendererFeatures(context) {
     var dispatch = d3_dispatch('change', 'redraw');
     var features = utilRebind({}, dispatch, 'on');
     var _deferred = new Set();
-    var toggleableGroups = groupManager.toggleableGroups();
 
     var _cullFactor = 1;
     var _cache = {};
@@ -65,8 +64,8 @@ export function rendererFeatures(context) {
         _rulesArray.push(_rules[k]);
     }
 
-    for (var id in toggleableGroups) {
-        var group = toggleableGroups[id];
+    for (var id in groupManager.toggleableGroups) {
+        var group = groupManager.toggleableGroups[id];
         defineRule(group.basicID(), group.matchesTags, group.localizedName(), group.localizedDescription(), group.toggleableMax());
     }
 

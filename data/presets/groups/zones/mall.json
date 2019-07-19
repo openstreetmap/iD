@@ -1,0 +1,42 @@
+{
+    "matches": {
+        "anyTags": {
+            "shop": "mall"
+        }
+    },
+    "nearby": {
+        "anyTags": {
+            "amenity": {
+                "drinking_water": true,
+                "fast_food": true,
+                "food_court": true,
+                "parking": true,
+                "restaurant": true,
+                "toilets": true
+            },
+            "clothes": {
+                "underwear": true
+            },
+            "highway": {
+                "corridor": true
+            },
+            "shop": {
+                "clothes": true,
+                "cosmetics": true,
+                "department_store": true,
+                "electronics": true,
+                "optician": true,
+                "jewelry": true,
+                "massage": true,
+                "mobile_phone": true,
+                "perfumery": true,
+                "shoes": true,
+                "toys": true
+            },
+            "tourism": {
+                "information": true
+            }
+        },
+        "allowOtherTags": false
+    }
+}

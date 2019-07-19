@@ -1,0 +1,43 @@
+{
+    "matches": {
+        "anyTags": {
+            "amenity": "fuel"
+        }
+    },
+    "nearby": {
+        "any": [
+            {
+                "allTags": {
+                    "amenity": {
+                        "vending_machine": true
+                    },
+                    "vending": {
+                        "fuel": true
+                    }
+                }
+            },
+            {
+                "anyTags": {
+                    "amenity": {
+                        "car_wash": true,
+                        "compressed_air": true
+                    },
+                    "building": {
+                        "roof": true
+                    },
+                    "highway": {
+                        "street_lamp": true
+                    },
+                    "man_made": {
+                        "storage_tank": true
+                    },
+                    "shop": {
+                        "convenience": true,
+                        "car_repair": true
+                    }
+                },
+                "allowOtherTags": false
+            }
+        ]
+    }
+}

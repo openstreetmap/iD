@@ -8,6 +8,7 @@ import { presetCollection } from './collection';
 import { presetField } from './field';
 import { presetPreset } from './preset';
 import { utilArrayUniq, utilRebind } from '../util';
+import { groupManager } from '../entities/group_manager';
 
 export { presetCategory };
 export { presetCollection };
@@ -264,6 +265,8 @@ export function presetIndex(context) {
         _universal = [];
         _favorites = null;
         _recents = null;
+        
+        groupManager.clearCachedPresets();
 
         // Index of presets by (geometry, tag key).
         _index = {

@@ -22,8 +22,8 @@ export function modeAddPoint(context, mode) {
         .on('cancel', cancel)
         .on('finish', finish);
 
-    var defaultTags = {};
-    if (mode.preset) defaultTags = mode.preset.setTags(defaultTags, 'point');
+    mode.defaultTags = {};
+    if (mode.preset) mode.defaultTags = mode.preset.setTags(mode.defaultTags, 'point');
 
     var _repeatAddedFeature = false;
     var _allAddedEntityIDs = [];
@@ -41,7 +41,7 @@ export function modeAddPoint(context, mode) {
     };
 
     function add(loc) {
-        var node = osmNode({ loc: loc, tags: defaultTags });
+        var node = osmNode({ loc: loc, tags: mode.defaultTags });
 
         context.perform(
             actionAddEntity(node),
@@ -53,7 +53,7 @@ export function modeAddPoint(context, mode) {
 
 
     function addWay(loc, edge) {
-        var node = osmNode({ tags: defaultTags });
+        var node = osmNode({ tags: mode.defaultTags });
 
         context.perform(
             actionAddMidpoint({loc: loc, edge: edge}, node),
@@ -64,14 +64,14 @@ export function modeAddPoint(context, mode) {
     }
 
     function addNode(node) {
-        if (Object.keys(defaultTags).length === 0) {
+        if (Object.keys(mode.defaultTags).length === 0) {
             didFinishAdding(node);
             return;
         }
 
         var tags = Object.assign({}, node.tags);  // shallow copy
-        for (var key in defaultTags) {
-            tags[key] = defaultTags[key];
+        for (var key in mode.defaultTags) {
+            tags[key] = mode.defaultTags[key];
         }
 
         context.perform(

@@ -1,15 +1,28 @@
 {
     "title": "Entity Group",
-    "description": "Defines a grouping of features that have something in common",
+    "description": "A grouping of features that have something in common",
     "type": "object",
     "properties": {
         "name": {
-            "description": "The English name for the group, if needed for the UI. Translatable",
+            "description": "The name for the group, if needed for the UI. American English; translatable",
             "type": "string"
         },
         "description": {
-            "description": "A short English description for the group, if needed for the UI. Translatable",
+            "description": "A short description for the group, if needed for the UI. American English; translatable",
             "type": "string"
+        },
+        "matches": {
+            "description": "The root rule defining the features in this group",
+            "$ref": "#/definitions/rule",
+            "required": true
+        },
+        "nearby": {
+            "description": "Features that are often found within or around features in this group",
+            "$ref": "#/definitions/ruleOrGroupName"
+        },
+        "vertexOf": {
+            "description": "Way features that features in this group can be member nodes of",
+            "$ref": "#/definitions/ruleOrGroupName"
         },
         "toggleable": {
             "anyOf": [
@@ -30,9 +43,6 @@
                     }
                 }
             ]
-        },
-        "matches": {
-            "$ref": "#/definitions/rule"
         }
     },
     "additionalProperties": false,
@@ -45,6 +55,9 @@
             "type": "object",
             "additionalProperties": {
                 "anyOf": [
+                    {
+                        "type": "boolean"
+                    },
                     {
                         "type": "string"
                     },
@@ -116,6 +129,7 @@
                                     "$ref": "#/definitions/geometry"
                                 },
                                 {
+                                    "description": "ANY geometry must match",
                                     "type": "array",
                                     "items": {
                                         "$ref": "#/definitions/geometry"
@@ -132,6 +146,14 @@
                             "description": "ALL tag/value combinations must be present",
                             "$ref": "#/definitions/tags"
                         },
+                        "notAnyTags": {
+                            "description": "NOT ANY tag/value combinations must be present",
+                            "$ref": "#/definitions/tags"
+                        },
+                        "allowOtherTags": {
+                            "description": "If false, ALL tags must be specified by the tag object",
+                            "type": "boolean"
+                        },
                         "groups": {
                             "description": "ALL external groups must pass",
                             "type": "object",
@@ -141,6 +163,16 @@
                         }
                     },
                     "additionalProperties": false
+                }
+            ]
+        },
+        "ruleOrGroupName": {
+            "anyOf": [
+                {
+                    "type": "string"
+                },
+                {
+                    "$ref": "#/definitions/rule"
                 }
             ]
         }

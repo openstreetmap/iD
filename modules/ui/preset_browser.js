@@ -5,11 +5,13 @@ import {
 } from 'd3-selection';
 
 import { t, textDirection } from '../util/locale';
+import { services } from '../services';
 import { svgIcon } from '../svg/index';
 import { tooltip } from '../util/tooltip';
 import { uiTagReference } from './tag_reference';
 import { uiPresetFavoriteButton } from './preset_favorite_button';
 import { uiPresetIcon } from './preset_icon';
+import { groupManager } from '../entities/group_manager';
 import { utilKeybinding, utilNoAuto } from '../util';
 
 export function uiPresetBrowser(context, allowedGeometry, onChoose, onCancel) {
@@ -20,15 +22,17 @@ export function uiPresetBrowser(context, allowedGeometry, onChoose, onCancel) {
     var presets;
 
     var shownGeometry = [];
+    updateShownGeometry(allowedGeometry);
 
     var popover = d3_select(null),
         search = d3_select(null),
         popoverContent = d3_select(null);
 
+    var _countryCode;
+
     var browser = {};
 
     browser.render = function(selection) {
-        updateShownGeometry(allowedGeometry.slice());   // shallow copy
 
         popover = selection.selectAll('.preset-browser')
             .data([0]);
@@ -85,14 +89,59 @@ export function uiPresetBrowser(context, allowedGeometry, onChoose, onCancel) {
         footer.append('div')
             .attr('class', 'message');
 
+        footer.append('div')
+            .attr('class', 'filter-wrap');
+
+        popover = popoverEnter.merge(popover);
+        search = popover.selectAll('.search-input');
+        popoverContent = popover.selectAll('.popover-content');
+
+        renderFilterButtons();
+        updateResultsList();
+    };
+
+    browser.isShown = function() {
+        return popover && !popover.empty() && !popover.classed('hide');
+    };
+
+    browser.show = function() {
+        popover.classed('hide', false);
+        search.node().focus();
+        search.node().setSelectionRange(0, search.property('value').length);
+
+        updateResultsList();
+
+        context.features()
+            .on('change.preset-browser.' + uid , updateForFeatureHiddenState);
+
+        // reload in case the user moved countries
+        reloadCountryCode();
+    };
+
+    browser.hide = function() {
+        search.node().blur();
+    };
+
+    function renderFilterButtons() {
+        var selection = popover.select('.popover-footer .filter-wrap');
+
         var geomForButtons = allowedGeometry.slice();
         var vertexIndex = geomForButtons.indexOf('vertex');
         if (vertexIndex !== -1) geomForButtons.splice(vertexIndex, 1);
 
-        footer.append('div')
-            .attr('class', 'filter-wrap')
+        if (geomForButtons.length === 1) {
+            // don't show filter buttons if only one geometry allowed
+            geomForButtons = [];
+        }
+
+        var buttons = selection
             .selectAll('button.filter')
-            .data(geomForButtons)
+            .data(geomForButtons, function(d) { return d; });
+
+        buttons.exit()
+            .remove();
+
+        buttons
             .enter()
             .append('button')
             .attr('class', 'filter active')
@@ -105,50 +154,27 @@ export function uiPresetBrowser(context, allowedGeometry, onChoose, onCancel) {
             .on('click', function(d) {
                 toggleShownGeometry(d);
                 if (shownGeometry.length === 0) {
-                    updateShownGeometry(allowedGeometry.slice());   // shallow copy
+                    updateShownGeometry(allowedGeometry);
                     toggleShownGeometry(d);
                 }
                 updateFilterButtonsStates();
                 updateResultsList();
             });
 
-        popover = popoverEnter.merge(popover);
-        search = popover.selectAll('.search-input');
-        popoverContent = popover.selectAll('.popover-content');
-
-        updateResultsList();
-    };
-
-    browser.isShown = function() {
-        return !popover.classed('hide');
-    };
-
-    browser.show = function() {
-        popover.classed('hide', false);
-        search.node().focus();
-        search.node().setSelectionRange(0, search.property('value').length);
-
-        updateForFeatureHiddenState();
-
-        context.features()
-            .on('change.preset-browser.' + uid , updateForFeatureHiddenState);
-    };
-
-    browser.hide = function() {
-        search.node().blur();
-    };
+        updateFilterButtonsStates();
+    }
 
 
     browser.setAllowedGeometry = function(array) {
         allowedGeometry = array;
-        updateShownGeometry(array.slice());
-        updateFilterButtonsStates();
+        updateShownGeometry(array);
+        renderFilterButtons();
         updateResultsList();
     };
 
 
     function updateShownGeometry(geom) {
-        shownGeometry = geom.sort();
+        shownGeometry = geom.slice().sort();
         presets = context.presets().matchAnyGeometry(shownGeometry);
     }
 
@@ -241,32 +267,172 @@ export function uiPresetBrowser(context, allowedGeometry, onChoose, onCancel) {
         }
     }
 
-    function updateResultsList() {
+    function getDefaultResults() {
 
-        if (search.empty()) return;
+        var graph = context.graph();
+
+        var superGroups = groupManager.groupsWithNearby;
+        var scoredGroups = {};
+        var scoredPresets = {};
+
+        context.presets().getRecents().slice(0, 15).forEach(function(item, index) {
+            var score = (15 - index) / 15;
+
+            var id = item.preset.id;
+            if (!scoredPresets[id]) {
+                scoredPresets[id] = {
+                    preset: item.preset,
+                    score: score,
+                    geometry: [item.geometry]
+                };
+            } else if (scoredPresets[id].geometry.indexOf(item.geometry) === -1) {
+                scoredPresets[id].geometry.push(item.geometry);
+            }
+        });
+
+        var queryExtent = context.map().extent();
+        var nearbyEntities = context.history().tree().intersects(queryExtent, graph);
+        for (var i in nearbyEntities) {
+            var entity = nearbyEntities[i];
+            // ignore boring features
+            if (!entity.hasInterestingTags()) continue;
+
+            var geom = entity.geometry(graph);
+
+            // evaluate preset
+            var preset = context.presets().match(entity, graph);
+            if (preset.searchable !== false && // don't recommend unsearchables
+                !preset.isFallback() && // don't recommend generics
+                !preset.suggestion) { // don't recommend brand suggestions again
+                if (!scoredPresets[preset.id]) {
+                    scoredPresets[preset.id] = {
+                        preset: preset,
+                        score: 0,
+                        geometry: [geom]
+                    };
+                } else if (scoredPresets[preset.id].geometry.indexOf(geom) === -1) {
+                    scoredPresets[preset.id].geometry.push(geom);
+                }
+                scoredPresets[preset.id].score += 1;
+            }
+
+            // evaluate groups
+            for (var j in superGroups) {
+                var group = superGroups[j];
+                if (group.matchesTags(entity.tags, geom)) {
+                    var nearbyGroupID = group.nearby;
+                    if (!scoredGroups[nearbyGroupID]) {
+                        scoredGroups[nearbyGroupID] = {
+                            group: groupManager.group(nearbyGroupID),
+                            score: 0
+                        };
+                    }
+                    var entityScore;
+                    if (geom === 'area') {
+                        // significantly prefer area features that dominate the viewport
+                        // (e.g. editing within a park or school grounds)
+                        var containedPercent = queryExtent.percentContainedIn(entity.extent(graph));
+                        entityScore = Math.max(1, containedPercent * 10);
+                    } else {
+                        entityScore = 1;
+                    }
+                    scoredGroups[nearbyGroupID].score += entityScore;
+                }
+            }
+        }
+
+        Object.values(scoredGroups).forEach(function(scoredGroupItem) {
+            scoredGroupItem.group.scoredPresets().forEach(function(groupScoredPreset) {
+                var combinedScore = groupScoredPreset.score * scoredGroupItem.score;
+                if (!scoredPresets[groupScoredPreset.preset.id]) {
+                    scoredPresets[groupScoredPreset.preset.id] = {
+                        preset: groupScoredPreset.preset,
+                        score: combinedScore
+                    };
+                } else {
+                    scoredPresets[groupScoredPreset.preset.id].score += combinedScore;
+                }
+            });
+        });
+
+        return Object.values(scoredPresets).sort(function(item1, item2) {
+            return item2.score - item1.score;
+        }).map(function(item) {
+            return item.geometry ? item : item.preset;
+        }).filter(function(d) {
+            var preset = d.preset || d;
+            // skip non-visible
+            if (preset.visible && !preset.visible()) return false;
+
+            // skip presets not valid in this country
+            if (_countryCode && preset.countryCodes && preset.countryCodes.indexOf(_countryCode) === -1) return false;
+
+            var geometry = d.geometry || preset.geometry;
+
+            for (var i in shownGeometry) {
+                if (geometry.indexOf(shownGeometry[i]) !== -1) {
+                    // skip currently hidden features
+                    if (!context.features().isHiddenPreset(preset, shownGeometry[i])) return true;
+                }
+            }
+            return false;
+        }).slice(0, 50);
+    }
+
+
+    function reloadCountryCode() {
+        if (!services.geocoder) return;
+
+        var center = context.map().center();
+        services.geocoder.countryCode(center, function countryCallback(err, countryCode) {
+            if (_countryCode !== countryCode) {
+                _countryCode = countryCode;
+                updateResultsList();
+            }
+        });
+    }
+
+    function getRawResults() {
+        if (search.empty()) return [];
 
         var value = search.property('value');
         var results;
         if (value.length) {
-            results = presets.search(value, shownGeometry).collection;
+            results = presets.search(value, shownGeometry, _countryCode).collection
+                .filter(function(d) {
+                    if (d.members) {
+                        return d.members.collection.some(function(preset) {
+                            return preset.visible();
+                        });
+                    }
+                    return d.visible();
+                });
         } else {
-            var recents = context.presets().getRecents();
-            recents = recents.filter(function(d) {
-                return shownGeometry.indexOf(d.geometry) !== -1;
-            });
-            results = recents.slice(0, 35);
+            results = getDefaultResults();
         }
+        return results;
+    }
 
-        var list = popoverContent.selectAll('.list').call(drawList, results);
+    function updateResultsList() {
 
-        popover.selectAll('.list .list-item.focused')
+        if (!browser.isShown()) return;
+
+        var list = popoverContent.selectAll('.list');
+
+        if (search.empty() || list.empty()) return;
+
+        var results = getRawResults();
+        list.call(drawList, results);
+
+        list.selectAll('.list-item.focused')
             .classed('focused', false);
         focusListItem(popover.selectAll('.list > .list-item:first-child'), false);
 
         popoverContent.node().scrollTop = 0;
 
         var resultCount = results.length;
-        popover.selectAll('.popover-footer .message').text(t('modes.add_feature.' + (resultCount === 1 ? 'result' : 'results'), { count: resultCount }));
+        popover.selectAll('.popover-footer .message')
+            .text(t('modes.add_feature.' + (resultCount === 1 ? 'result' : 'results'), { count: resultCount }));
     }
 
     function focusListItem(selection, scrollingToShow) {
@@ -294,25 +460,26 @@ export function uiPresetBrowser(context, allowedGeometry, onChoose, onCancel) {
         }
     }
 
-    function itemForPreset(preset) {
-        if (preset.members) {
-            return CategoryItem(preset);
+    function itemForPreset(d) {
+        if (d.members) {
+            return CategoryItem(d);
         }
-        if (preset.preset && preset.geometry) {
+        var preset = d.preset || d;
+        if (d.preset && d.geometry && typeof d.geometry === 'string') {
             return AddablePresetItem(preset.preset, preset.geometry);
         }
-        var supportedGeometry = preset.geometry.filter(function(geometry) {
+        var geometry = d.geometry.filter(function(geometry) {
             return shownGeometry.indexOf(geometry) !== -1;
         }).sort();
-        var vertexIndex = supportedGeometry.indexOf('vertex');
-        if (vertexIndex !== -1 && supportedGeometry.indexOf('point') !== -1) {
+        var vertexIndex = geometry.indexOf('vertex');
+        if (vertexIndex !== -1 && geometry.indexOf('point') !== -1) {
             // both point and vertex allowed, just show point
-            supportedGeometry.splice(vertexIndex, 1);
+            geometry.splice(vertexIndex, 1);
         }
-        if (supportedGeometry.length === 1) {
-            return AddablePresetItem(preset, supportedGeometry[0]);
+        if (geometry.length === 1) {
+            return AddablePresetItem(preset, geometry[0]);
         }
-        return MultiGeometryPresetItem(preset, supportedGeometry);
+        return MultiGeometryPresetItem(preset, geometry);
     }
 
     function drawList(list, data) {
@@ -510,9 +677,13 @@ export function uiPresetBrowser(context, allowedGeometry, onChoose, onCancel) {
             chooseExpandable(item, d3_select(selection.node().closest('.list-item')));
         };
         item.subitems = function() {
-            return preset.members.matchAnyGeometry(shownGeometry).collection.map(function(preset) {
-                return itemForPreset(preset);
-            });
+            return preset.members.matchAnyGeometry(shownGeometry).collection
+                .filter(function(preset) {
+                    return preset.visible();
+                })
+                .map(function(preset) {
+                    return itemForPreset(preset);
+                });
         };
         return item;
     }
@@ -598,6 +769,9 @@ export function uiPresetBrowser(context, allowedGeometry, onChoose, onCancel) {
         };
         return item;
     }
+
+    // load the initial country code
+    reloadCountryCode();
 
     return browser;
 }

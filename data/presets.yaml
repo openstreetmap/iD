@@ -301,6 +301,11 @@ en:
       building:
         # building=*
         label: Building
+      building/levels/underground:
+        # 'building:levels:underground=*'
+        label: Underground Levels
+        # building/levels/underground field placeholder
+        placeholder: '2, 4, 6...'
       building/levels_building:
         # 'building:levels=*'
         label: Building Levels
@@ -1516,6 +1521,9 @@ en:
       power_supply:
         # power_supply=*
         label: Power Supply
+      preschool:
+        # preschool=*
+        label: Preschool
       produce:
         # produce=*
         label: Produce
@@ -2707,6 +2715,11 @@ en:
         name: Dojo / Martial Arts Academy
         # 'terms: martial arts,dojang'
         terms: '<translate with synonyms or related terms for ''Dojo / Martial Arts Academy'', separated by commas>'
+      amenity/dressing_room:
+        # amenity=dressing_room
+        name: Changing Room
+        # 'terms: changeroom,dressing room,fitting room,locker room'
+        terms: '<translate with synonyms or related terms for ''Changing Room'', separated by commas>'
       amenity/drinking_water:
         # amenity=drinking_water
         name: Drinking Water
@@ -2892,6 +2905,11 @@ en:
         name: Multilevel Parking Garage
         # 'terms: car,indoor parking,multistorey car park,parkade,parking building,parking deck,parking garage,parking ramp,parking structure'
         terms: '<translate with synonyms or related terms for ''Multilevel Parking Garage'', separated by commas>'
+      amenity/parking/park_ride:
+        # 'amenity=parking, park_ride=yes'
+        name: Park & Ride Lot
+        # 'terms: commuter parking lot,incentive parking lot,metro parking lot,park and pool lot,park and ride lot,P+R,public transport parking lot,public transit parking lot,train parking lot'
+        terms: '<translate with synonyms or related terms for ''Park & Ride Lot'', separated by commas>'
       amenity/parking/underground:
         # 'amenity=parking, parking=underground'
         name: Underground Parking
@@ -6331,6 +6349,7 @@ en:
       power/line:
         # power=line
         name: Power Line
+        # 'terms: electric power transmission line,high voltage line,high tension line'
         terms: '<translate with synonyms or related terms for ''Power Line'', separated by commas>'
       power/minor_line:
         # power=minor_line
@@ -7906,4 +7925,5 @@ en:
       waterway/weir:
         # waterway=weir
         name: Weir
+        # 'terms: low-head dam,low-rise dam,wier'
         terms: '<translate with synonyms or related terms for ''Weir'', separated by commas>'

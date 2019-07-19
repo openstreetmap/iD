@@ -1,0 +1,30 @@
+{
+    "icon": "maki-clothing-store",
+    "fields": [
+        "operator",
+        "access_simple",
+        "gender",
+        "wheelchair",
+        "building_area"
+    ],
+    "moreFields": [
+        "fee",
+        "opening_hours",
+        "payment_multi_fee",
+        "ref"
+    ],
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "terms": [
+        "changeroom",
+        "dressing room",
+        "fitting room",
+        "locker room"
+    ],
+    "tags": {
+        "amenity": "dressing_room"
+    },
+    "name": "Changing Room"
+}

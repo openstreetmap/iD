@@ -1,0 +1,29 @@
+{
+    "matches": {
+        "anyTags": {
+            "amenity": "grave_yard",
+            "landuse": "cemetery"
+        }
+    },
+    "nearby": {
+        "anyTags": {
+            "barrier": {
+                "fence": true
+            },
+            "highway": {
+                "footway": true,
+                "service": true
+            },
+            "historic": {
+                "memorial": true
+            },
+            "landuse": {
+                "grass": true
+            },
+            "memorial": {
+                "plaque": true
+            }
+        },
+        "allowOtherTags": false
+    }
+}

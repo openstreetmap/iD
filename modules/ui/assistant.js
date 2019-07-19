@@ -14,7 +14,6 @@ import { uiSuccess } from './success';
 import { uiPresetIcon } from './preset_icon';
 import { uiEntityEditor } from './entity_editor';
 import { uiFeatureList } from './feature_list';
-import { uiSelectionList } from './selection_list';
 import { uiNoteEditor } from './note_editor';
 import { uiKeepRightEditor } from './keepRight_editor';
 import { uiImproveOsmEditor } from './improveOSM_editor';
@@ -53,7 +52,6 @@ export function uiAssistant(context) {
         header = d3_select(null),
         body = d3_select(null);
 
-    var entityEditor = uiEntityEditor(context);
     var featureSearch = uiFeatureList(context);
 
     var savedChangeset = null;
@@ -197,16 +195,15 @@ export function uiAssistant(context) {
             iconCol.call(panel.renderHeaderIcon);
         }
 
-        body.html('');
+        body.text('');
         if (panel.renderBody) {
             body.call(panel.renderBody);
         }
 
         var headerBody = headerMainCol.selectAll('.header-body');
+        headerBody.text('');
         if (panel.renderHeaderBody) {
             headerBody.call(panel.renderHeaderBody);
-        } else {
-            headerBody.text('');
         }
 
         if (panel.message) {
@@ -224,7 +221,7 @@ export function uiAssistant(context) {
                 .append('div')
                 .attr('class', 'body-text');
 
-            bodyTextArea.text(panel.message);
+            bodyTextArea.html(panel.message);
         }
     }
 
@@ -248,11 +245,7 @@ export function uiAssistant(context) {
 
         } else if (mode.id === 'select') {
 
-            var selectedIDs = mode.selectedIDs();
-            if (selectedIDs.length === 1) {
-                return panelSelectSingle(context, selectedIDs[0]);
-            }
-            return panelSelectMultiple(context, selectedIDs);
+            return panelSelect(context, mode.selectedIDs());
 
         } else if (mode.id === 'select-note') {
             var note = context.connection() && context.connection().getNote(mode.selectedNoteID());
@@ -675,65 +668,62 @@ export function uiAssistant(context) {
             icon = 'iD-icon-area';
         }
 
+        var message = t('assistant.instructions.' + mode.id.replace('-', '_'));
+
         var modeLabelID;
         if (mode.id.indexOf('add') !== -1) {
             modeLabelID = 'adding';
         } else {
             modeLabelID = 'drawing';
+
+            var way = context.entity(mode.wayID);
+            if (way.nodes.length >= 4) {
+                message += '<br/>' + t('assistant.instructions.finishing');
+            }
         }
 
         var panel = {
             headerIcon: icon,
             modeLabel: t('assistant.mode.' + modeLabelID),
             title: mode.title,
-            message: t('assistant.instructions.' + mode.id.replace('-', '_'))
+            message: message
         };
 
         return panel;
     }
 
-    function panelSelectSingle(context, id) {
-
-        var entity = context.entity(id);
-        var geometry = entity.geometry(context.graph());
-        var preset = context.presets().match(entity, context.graph());
+    function panelSelect(context, selectedIDs) {
 
         var panel = {
             theme: 'light',
             modeLabel: t('assistant.mode.editing'),
-            title: utilDisplayLabel(entity, context)
+            title: selectedIDs.length === 1 ? utilDisplayLabel(context.entity(selectedIDs[0]), context) :
+                t('assistant.feature_count.multiple', { count: selectedIDs.length.toString() })
         };
 
         panel.renderHeaderIcon = function(selection) {
-            selection.call(uiPresetIcon(context)
-                .geometry(geometry)
-                .preset(preset)
-                .sizeClass('small')
-                .pointMarker(false));
+
+            if (selectedIDs.length === 1) {
+                var entity = context.entity(selectedIDs[0]);
+                var geometry = entity.geometry(context.graph());
+                var preset = context.presets().match(entity, context.graph());
+
+                selection.call(uiPresetIcon(context)
+                    .geometry(geometry)
+                    .preset(preset)
+                    .sizeClass('small')
+                    .pointMarker(false));
+            } else {
+                selection.call(svgIcon('#fas-edit'));
+            }
         };
 
         panel.renderBody = function(selection) {
+            var entityEditor = uiEntityEditor(context);
             entityEditor
                 .state('select')
-                .entityID(id);
+                .entityIDs(selectedIDs);
             selection.call(entityEditor);
-        };
-
-        return panel;
-    }
-
-    function panelSelectMultiple(context, selectedIDs) {
-
-        var panel = {
-            headerIcon: 'fas-edit',
-            modeLabel: t('assistant.mode.editing'),
-            title: t('assistant.feature_count.multiple', { count: selectedIDs.length.toString() })
-        };
-
-        panel.renderBody = function() {
-            var selectionList = uiSelectionList(context, selectedIDs);
-            body
-                .call(selectionList);
         };
 
         return panel;

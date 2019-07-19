@@ -1,0 +1,25 @@
+{
+    "matches": {
+        "anyTags": {
+            "aeroway": "aerodrome"
+        }
+    },
+    "nearby": {
+        "anyTags": {
+            "aeroway": "*",
+            "amenity": {
+                "police": true
+            },
+            "building": {
+                "hangar": true
+            },
+            "highway": {
+                "service": true
+            },
+            "surveillance:type": "camera",
+            "tourism": {
+                "hotel": true
+            }
+        }
+    }
+}

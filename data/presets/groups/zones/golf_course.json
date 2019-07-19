@@ -1,0 +1,13 @@
+{
+    "matches": {
+        "anyTags": {
+            "leisure": "golf_course"
+        }
+    },
+    "nearby": {
+        "anyTags": {
+            "golf": true,
+            "sport": "golf"
+        }
+    }
+}

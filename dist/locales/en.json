@@ -58,11 +58,12 @@
                 "viewing": "Viewing"
             },
             "instructions": {
-                "add_point": "Click or tap the center of the feature.",
-                "add_line": "Click or tap the starting location.",
+                "add_point": "Click the center of the feature.",
+                "add_line": "Click the starting point of the feature.",
                 "draw_line": "Place points along the feature's centerline.",
-                "add_area": "Click or tap any corner of the feature.",
-                "draw_area": "Place points along the feature's outline."
+                "add_area": "Click any corner of the feature.",
+                "draw_area": "Place points along the feature's outline.",
+                "finishing": "When you're done, click the last point again or click <b>Finish</b>."
             },
             "global_location": "Planet Earth",
             "greetings": {
@@ -2779,6 +2780,10 @@
                     "label": "Building Levels",
                     "placeholder": "2, 4, 6..."
                 },
+                "building/levels/underground": {
+                    "label": "Underground Levels",
+                    "placeholder": "2, 4, 6..."
+                },
                 "building/material": {
                     "label": "Material"
                 },
@@ -3794,6 +3799,9 @@
                 },
                 "power": {
                     "label": "Type"
+                },
+                "preschool": {
+                    "label": "Preschool"
                 },
                 "produce": {
                     "label": "Produce"
@@ -4875,6 +4883,10 @@
                     "name": "Dojo / Martial Arts Academy",
                     "terms": "martial arts,dojang"
                 },
+                "amenity/dressing_room": {
+                    "name": "Changing Room",
+                    "terms": "changeroom,dressing room,fitting room,locker room"
+                },
                 "amenity/drinking_water": {
                     "name": "Drinking Water",
                     "terms": "potable water source,water fountain,drinking fountain,bubbler,water tap"
@@ -5030,6 +5042,10 @@
                 "amenity/parking/multi-storey": {
                     "name": "Multilevel Parking Garage",
                     "terms": "car,indoor parking,multistorey car park,parkade,parking building,parking deck,parking garage,parking ramp,parking structure"
+                },
+                "amenity/parking/park_ride": {
+                    "name": "Park & Ride Lot",
+                    "terms": "commuter parking lot,incentive parking lot,metro parking lot,park and pool lot,park and ride lot,P+R,public transport parking lot,public transit parking lot,train parking lot"
                 },
                 "amenity/parking/underground": {
                     "name": "Underground Parking",
@@ -7977,7 +7993,7 @@
                 },
                 "power/line": {
                     "name": "Power Line",
-                    "terms": ""
+                    "terms": "electric power transmission line,high voltage line,high tension line"
                 },
                 "power/minor_line": {
                     "name": "Minor Power Line",
@@ -9345,7 +9361,7 @@
                 },
                 "waterway/weir": {
                     "name": "Weir",
-                    "terms": ""
+                    "terms": "low-head dam,low-rise dam,wier"
                 }
             }
         },

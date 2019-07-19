@@ -1,0 +1,23 @@
+{
+    "matches": {
+        "anyTags": {
+            "leisure": "water_park"
+        }
+    },
+    "nearby": {
+        "anyTags": {
+            "amenity": {
+                "dressing_room": true,
+                "shower": true,
+                "toilets": true
+            },
+            "attraction": {
+                "water_slide": true
+            },
+            "leisure": {
+                "swimming_pool": true
+            }
+        },
+        "allowOtherTags": false
+    }
+}

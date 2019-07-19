@@ -31,5 +31,6 @@
         "truck parking",
         "vehicle parking"
     ],
+    "matchScore": 1.05,
     "name": "Underground Parking"
 }

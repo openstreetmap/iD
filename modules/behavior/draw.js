@@ -7,6 +7,7 @@ import {
     touches as d3_touches
 } from 'd3-selection';
 
+import { schemaManager } from '../entities/schema_manager';
 import { behaviorEdit } from './edit';
 import { behaviorHover } from './hover';
 import { behaviorTail } from './tail';
@@ -114,9 +115,6 @@ export function behaviorDraw(context) {
         _mouseLeave = true;
     }
 
-    function allowsVertex(d) {
-        return d.geometry(context.graph()) === 'vertex' || context.presets().allowsVertex(d, context.graph());
-    }
 
     // related code
     // - `mode/drag_node.js`     `doMode()`
@@ -128,20 +126,39 @@ export function behaviorDraw(context) {
 
         var mode = context.mode();
 
-        if (target && target.type === 'node' && allowsVertex(target)) {   // Snap to a node
-            dispatch.call('clickNode', this, target, d);
-            return;
+        var targetGeometry = target && target.geometry(context.graph());
 
-        } else if (target && target.type === 'way' && (mode.id !== 'add-point' || mode.preset.matchGeometry('vertex'))) {   // Snap to a way
+        if (target && target.type === 'node') {   // Snap to a node
+
+            if (targetGeometry !== 'vertex' && !context.presets().allowsVertex(target, context.graph())) return;
+
+            if (mode.id === 'add-point') {
+                if (!schemaManager.canSnapNodeWithTagsToNode(mode.defaultTags, target, context.graph())) return;
+            }
+
+            dispatch.call('clickNode', this, target, d);
+
+        } else if (target && target.type === 'way') {   // Snap to a way
+
+            if (mode.id === 'add-point') {
+                if (!mode.preset.matchGeometry('vertex')) return;
+
+                if (!schemaManager.canAddNodeWithTagsToWay(mode.defaultTags, target, context.graph())) return;
+            }
+
             var choice = geoChooseEdge(
                 context.childNodes(target), context.mouse(), context.projection, context.activeID()
             );
-            if (choice) {
-                var edge = [target.nodes[choice.index - 1], target.nodes[choice.index]];
-                dispatch.call('clickWay', this, choice.loc, edge, d);
-                return;
-            }
-        } else if (mode.id !== 'add-point' || mode.preset.matchGeometry('point')) {
+            if (!choice) return;
+
+            var edge = [target.nodes[choice.index - 1], target.nodes[choice.index]];
+
+            dispatch.call('clickWay', this, choice.loc, edge, d);
+
+        } else {
+
+            if (mode.id === 'add-point' && !mode.preset.matchGeometry('point')) return;
+
             dispatch.call('click', this, context.map().mouseCoordinates(), d);
         }
 
