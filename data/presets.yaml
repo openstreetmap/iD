@@ -3030,29 +3030,6 @@ en:
       public_bookcase/type:
         # public_bookcase:type=*
         label: Type of public bookcases
-        options:
-          # public_bookcase:type=reading_box
-          reading_box: Reading box
-          # public_bookcase:type=phone_box
-          phone_box: Converted cell phone
-          # public_bookcase:type=wooden_cabinet
-          wooden_cabinet: Wooden cabinet
-          # public_bookcase:type=metal_cabinet
-          metal_cabinet: Metal cabinet with glass doors
-          # public_bookcase:type=shelf
-          shelf: Bookcase within a building
-          # public_bookcase:type=shelter
-          shelter: Bookcase in a shelter
-          # public_bookcase:type=glass_cabinet
-          glass_cabinet: Glass cabinet
-          # public_bookcase:type=sculpture
-          sculpture: Special sculpture/Special design
-          # public_bookcase:type=building
-          building: Building used exclusively as a bookcase
-          # public_bookcase:type=movable_cabinet
-          movable_cabinet: Movable bookcase/Transportable version
-          # public_bookcase:type=download
-          download: Downloading books
       amenity/ranger_station:
         # amenity=ranger_station
         name: Ranger Station
