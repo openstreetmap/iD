@@ -241,7 +241,7 @@ export function modeSelect(context, selectedIDs) {
 
         if (missingMemberIDs.size) {
             var missingMemberIDsArray = Array.from(missingMemberIDs)
-                .slice(0, 450); // limit number of members downloaded at once to avoid blocking iD
+                .slice(0, 150); // limit number of members downloaded at once to avoid blocking iD
             context.loadEntities(missingMemberIDsArray);
         }
     }
