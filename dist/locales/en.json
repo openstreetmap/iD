@@ -3184,10 +3184,10 @@
                     }
                 },
                 "iata": {
-                    "label": "IATA"
+                    "label": "IATA Airport Code"
                 },
                 "icao": {
-                    "label": "ICAO"
+                    "label": "ICAO Airport Code"
                 },
                 "incline_steps": {
                     "label": "Incline",

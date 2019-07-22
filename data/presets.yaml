@@ -892,10 +892,10 @@ en:
           undefined: 'No'
       iata:
         # iata=*
-        label: IATA
+        label: IATA Airport Code
       icao:
         # icao=*
-        label: ICAO
+        label: ICAO Airport Code
       incline:
         # incline=*
         label: Incline
