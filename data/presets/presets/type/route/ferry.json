@@ -1,20 +1,10 @@
 {
     "icon": "maki-ferry",
     "fields": [
-        "name",
-        "ref_route",
-        "operator",
-        "network",
-        "to",
-        "from"
+        "{route/ferry}"
     ],
     "moreFields" : [
-        "interval",
-        "maxheight",
-        "maxweight",
-        "opening_hours",
-        "duration",
-        "wheelchair"
+        "{route/ferry}"
     ],
     "geometry": [
         "relation"

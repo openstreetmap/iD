@@ -8308,7 +8308,7 @@
                 },
                 "route/ferry": {
                     "name": "Ferry Route",
-                    "terms": ""
+                    "terms": "boat,merchant vessel,ship,water bus,water shuttle,water taxi"
                 },
                 "seamark/beacon_isolated_danger": {
                     "name": "Danger Beacon",

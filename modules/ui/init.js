@@ -215,9 +215,9 @@ export function uiInit(context) {
         ui.onResize();
         map.redrawEnable(true);
 
-        var hash = behaviorHash(context);
-        hash();
-        if (!hash.hadHash) {
+        ui.hash = behaviorHash(context);
+        ui.hash();
+        if (!ui.hash.hadHash) {
             map.centerZoom([0, 0], 2);
         }
 
@@ -313,8 +313,8 @@ export function uiInit(context) {
 
         _initCounter++;
 
-        if (hash.startWalkthrough) {
-            hash.startWalkthrough = false;
+        if (ui.hash.startWalkthrough) {
+            ui.hash.startWalkthrough = false;
             context.container().call(uiIntro(context));
         }
 

@@ -62,6 +62,21 @@ export function uiCommit(context) {
         // Initialize changeset if one does not exist yet.
         // Also pull values from local storage.
         if (!_changeset) {
+
+            // load in the URL hash values, if any
+            var hash = context.ui().hash;
+            if (hash.comment) {
+                context.storage('comment', hash.comment);
+                context.storage('commentDate', Date.now());
+            }
+            if (hash.source) {
+                context.storage('source', hash.source);
+                context.storage('commentDate', Date.now());
+            }
+            if (hash.hashtags) {
+                context.storage('hashtags', hash.hashtags);
+            }
+
             var detected = utilDetect();
             tags = {
                 comment: context.storage('comment') || '',
