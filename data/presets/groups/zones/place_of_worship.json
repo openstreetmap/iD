@@ -1,0 +1,19 @@
+{
+    "matches": {
+        "anyTags": {
+            "amenity": "place_of_worship"
+        }
+    },
+    "nearby": {
+        "anyTags": {
+            "amenity": {
+                "grave_yard": true,
+                "school": true
+            },
+            "landuse": {
+                "religious": true
+            }
+        },
+        "allowOtherTags": false
+    }
+}
