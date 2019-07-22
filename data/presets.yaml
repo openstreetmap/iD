@@ -6666,6 +6666,7 @@ en:
       route/ferry:
         # route=ferry
         name: Ferry Route
+        # 'terms: boat,merchant vessel,ship,water bus,water shuttle,water taxi'
         terms: '<translate with synonyms or related terms for ''Ferry Route'', separated by commas>'
       seamark:
         # 'seamark:type=*'
