@@ -643,7 +643,14 @@ export function coreHistory(context) {
 
         clearSaved: function() {
             context.debouncedSave.cancel();
-            if (lock.locked()) context.storage(getKey('saved_history'), null);
+            if (lock.locked()) {
+                context.storage(getKey('saved_history'), null);
+
+                // clear the changeset metadata associated with the saved history
+                context.storage('comment', null);
+                context.storage('hashtags', null);
+                context.storage('source', null);
+            }
             return history;
         },
 
