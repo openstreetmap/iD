@@ -1,0 +1,13 @@
+{
+    "icon": "maki-airport",
+    "geometry": [
+        "vertex"
+    ],
+    "fields": [
+        "ref"
+    ],
+    "tags": {
+        "aeroway": "holding_position"
+    },
+    "name": "Aircraft Holding Position"
+}

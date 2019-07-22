@@ -892,10 +892,10 @@ en:
           undefined: 'No'
       iata:
         # iata=*
-        label: IATA
+        label: IATA Airport Code
       icao:
         # icao=*
-        label: ICAO
+        label: ICAO Airport Code
       incline:
         # incline=*
         label: Incline
@@ -2471,11 +2471,19 @@ en:
         name: Helipad
         # 'terms: helicopter,helipad,heliport'
         terms: '<translate with synonyms or related terms for ''Helipad'', separated by commas>'
+      aeroway/holding_position:
+        # aeroway=holding_position
+        name: Aircraft Holding Position
+        terms: '<translate with synonyms or related terms for ''Aircraft Holding Position'', separated by commas>'
       aeroway/jet_bridge:
         # aeroway=jet_bridge
         name: Jet Bridge
         # 'terms: aerobridge,air jetty,airbridge,finger,gangway,jet way,jetway,passenger boarding bridge,PBB,portal,skybridge,terminal gate connector'
         terms: '<translate with synonyms or related terms for ''Jet Bridge'', separated by commas>'
+      aeroway/parking_position:
+        # aeroway=parking_position
+        name: Aircraft Parking Position
+        terms: '<translate with synonyms or related terms for ''Aircraft Parking Position'', separated by commas>'
       aeroway/runway:
         # aeroway=runway
         name: Runway
