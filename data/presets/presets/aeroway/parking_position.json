@@ -1,0 +1,15 @@
+{
+    "icon": "maki-airport",
+    "geometry": [
+        "vertex",
+        "point",
+        "line"
+    ],
+    "fields": [
+        "ref"
+    ],
+    "tags": {
+        "aeroway": "parking_position"
+    },
+    "name": "Aircraft Parking Position"
+}
