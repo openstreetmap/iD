@@ -60,8 +60,10 @@ export function uiEntityEditor(context) {
             .append('div')
             .attr('class', 'entity-editor inspector-body sep-top');
 
-        bodyEnter
-            .call(presetBrowser.render);
+        if (!bodyEnter.empty()) {
+            bodyEnter
+                .call(presetBrowser.render);
+        }
 
         // Update
         body = body
