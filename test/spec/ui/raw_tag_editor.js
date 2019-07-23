@@ -3,9 +3,9 @@ describe('iD.uiRawTagEditor', function() {
 
     function render(tags) {
         taglist = iD.uiRawTagEditor(context)
-            .entityID(entity.id)
-            .preset({isFallback: function() { return false; }})
             .tags(tags)
+            .entityIDs([entity.id])
+            .preset({isFallback: function() { return false; }})
             .expanded(true);
 
         element = d3.select('body')
@@ -15,10 +15,10 @@ describe('iD.uiRawTagEditor', function() {
     }
 
     beforeEach(function () {
-        entity = iD.osmNode({id: 'n12345'});
+        entity = iD.osmNode({id: 'n12345', tags: { highway: 'residential' }});
         context = iD.coreContext();
         context.history().merge([entity]);
-        render({highway: 'residential'});
+        render();
     });
 
     afterEach(function () {
