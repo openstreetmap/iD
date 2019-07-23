@@ -833,7 +833,7 @@
     "office/research": {"icon": "maki-suitcase", "geometry": ["point", "area"], "tags": {"office": "research"}, "terms": [], "name": "Research Office"},
     "office/surveyor": {"icon": "maki-suitcase", "geometry": ["point", "area"], "tags": {"office": "surveyor"}, "terms": [], "name": "Surveyor Office"},
     "office/tax_advisor": {"icon": "maki-suitcase", "geometry": ["point", "area"], "tags": {"office": "tax_advisor"}, "terms": ["tax", "tax consultant"], "name": "Tax Advisor Office"},
-    "office/telecommunication": {"icon": "maki-telephone", "geometry": ["point", "area"], "tags": {"office": "telecommunication"}, "terms": ["communication", "internet", "phone", "voice"], "name": "Telecom Office"},
+    "office/telecommunication": {"icon": "maki-telephone", "geometry": ["point", "area"], "tags": {"office": "telecommunication"}, "terms": ["communication", "internet service provider", "isp", "network", "telephone", "voice"], "name": "Telecom Office"},
     "office/therapist": {"icon": "maki-suitcase", "geometry": ["point", "area"], "tags": {"office": "therapist"}, "terms": ["therapy"], "name": "Therapist Office"},
     "office/water_utility": {"icon": "maki-suitcase", "fields": ["{office}", "operator"], "geometry": ["point", "area"], "tags": {"office": "water_utility"}, "terms": ["water board", "utility"], "name": "Water Utility Office"},
     "piste/downhill": {"icon": "fas-skiing", "fields": ["name", "piste/type", "piste/difficulty_downhill", "piste/grooming_downhill", "oneway", "lit"], "geometry": ["line", "area"], "terms": ["ski", "alpine", "snowboard", "downhill", "piste"], "tags": {"piste:type": "downhill"}, "name": "Downhill Piste/Ski Run"},

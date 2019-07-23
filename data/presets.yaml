@@ -6125,7 +6125,7 @@ en:
       office/telecommunication:
         # office=telecommunication
         name: Telecom Office
-        # 'terms: communication,internet,phone,voice'
+        # 'terms: communication,internet service provider,isp,network,telephone,voice'
         terms: '<translate with synonyms or related terms for ''Telecom Office'', separated by commas>'
       office/therapist:
         # office=therapist
