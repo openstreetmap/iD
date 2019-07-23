@@ -894,28 +894,14 @@ button.add-preset.disabled .preset-icon-container {
     height: 100%;
 }
 
-.field-help-title button.close,
-.entity-editor-pane .header button.preset-close,
-.preset-list-pane .header button.preset-choose {
+.field-help-title button.close {
     position: absolute;
     right: 0;
     top: 0;
 }
-[dir='rtl'] .field-help-title button.close,
-[dir='rtl'] .entity-editor-pane .header button.preset-close,
-[dir='rtl'] .preset-list-pane .header button.preset-choose {
+[dir='rtl'] .field-help-title button.close {
     left: 0;
     right: auto;
-}
-
-.entity-editor-pane .header button.preset-choose {
-    position: absolute;
-    left: 0;
-    top: 0;
-}
-[dir='rtl'] .entity-editor-pane .header button.preset-choose {
-    left: auto;
-    right: 0;
 }
 
 .preset-choose {
@@ -1416,14 +1402,6 @@ a.hide-toggle {
 
 /* Inspector
 ------------------------------------------------------- */
-.entity-editor-pane {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    border: 1px solid #ccc;
-    border-radius: inherit;
-}
-
 .inspector-hidden {
     display: none;
 }
@@ -1460,6 +1438,9 @@ a.hide-toggle {
     position: relative;
 }
 
+.entity-editor {
+    padding-bottom: 15px;
+}
 
 /* Preset List and Icons
 ------------------------------------------------------- */
@@ -1788,9 +1769,6 @@ button.preset-favorite-button.active .icon {
 .entity-issues .disclosure-wrap-entity_issues:empty,
 .preset-editor .form-fields-container:empty {
     display: none;
-}
-.entity-editor-pane .preset-list-item {
-    margin-bottom: 0;
 }
 
 /*
@@ -4238,8 +4216,7 @@ li.issue-fix-item:not(.actionable) .fix-icon {
 }
 
 /* Unstyle button fields */
-.inspector-hover .form-field-input-radio label.active,
-.inspector-hover .entity-editor-pane a.hide-toggle {
+.inspector-hover .form-field-input-radio label.active {
     opacity: 1;
     background-color: transparent;
     color: #666;

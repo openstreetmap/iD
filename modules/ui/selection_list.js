@@ -28,7 +28,9 @@ export function uiSelectionList(context) {
 
     function selectionList(selection) {
 
-        var list = selection
+        var list = selection.selectAll('.feature-list')
+            .data([0])
+            .enter()
             .append('div')
             .attr('class', 'feature-list');
 

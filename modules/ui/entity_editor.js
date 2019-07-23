@@ -189,12 +189,11 @@ export function uiEntityEditor(context) {
                 );
         });
 
-        manageSection('raw-tag-editor inspector-inner', entityID, function(section) {
+        manageSection('raw-tag-editor inspector-inner', true, function(section) {
             section
                 .call(rawTagEditor
                     .preset(_activePreset)
-                    .entityID(entityID)
-                    .tags(tags)
+                    .entityIDs(_entityIDs)
                     .state(_state)
                 );
         });
