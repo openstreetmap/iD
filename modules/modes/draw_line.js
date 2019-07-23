@@ -19,6 +19,12 @@ export function modeDrawLine(context, wayID, startGraph, baselineGraph, button, 
     var behavior;
 
     mode.enter = function() {
+
+        if (addMode) {
+            // add in case this draw mode was entered from somewhere besides the add mode itself
+            addMode.addAddedEntityID(wayID);
+        }
+
         var way = context.entity(wayID);
         var index = (affix === 'prefix') ? 0 : undefined;
         var headID = (affix === 'prefix') ? way.first() : way.last();

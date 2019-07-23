@@ -39,6 +39,12 @@ export function modeAddLine(context, mode) {
         });
     };
 
+    mode.addAddedEntityID = function(entityID) {
+        if (_allAddedEntityIDs.indexOf(entityID) === -1) {
+            _allAddedEntityIDs.push(entityID);
+        }
+    };
+
     function start(loc) {
         var startGraph = context.graph();
         var node = osmNode({ loc: loc });
