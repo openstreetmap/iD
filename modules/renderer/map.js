@@ -513,7 +513,7 @@ export function rendererMap(context) {
             if (!_currTask.extent().intersects(map.center())) {
                 surface.interrupt();
                 uiFlash().text(t('cannot_pan_task'))();
-                setCenterZoom(_previousCenter, map.zoom(), 0, true);
+                setCenterZoom(_previousCenter || _currTask.center(), map.zoom(), 0, true);
                 scheduleRedraw();
                 // dispatch.call('move', this, map);
                 return;
