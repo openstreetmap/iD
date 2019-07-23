@@ -1,7 +1,7 @@
 {
     "matches": {
         "allTags": {
-            "train": "yes",
+            "light_rail": "yes",
             "public_transport": {
                 "platform": true,
                 "station": true,
@@ -25,7 +25,7 @@
                         "steps": true
                     },
                     "railway": {
-                        "rail": true
+                        "light_rail": true
                     },
                     "surveillance:type": "camera",
                     "vending": "public_transport_tickets"
@@ -33,7 +33,7 @@
             },
             {
                 "allTags": {
-                    "train": "yes",
+                    "light_rail": "yes",
                     "public_transport": {
                         "platform": true,
                         "station": true,
