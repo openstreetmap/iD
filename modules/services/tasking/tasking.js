@@ -555,7 +555,7 @@ export default {
 
 
     addTask: function(task) {
-        _taskingCache[task.id()] = task;
+        _taskingCache.tasks[task.id()] = task;
     },
 
 
