@@ -10,7 +10,7 @@
             },
             "landuse": "railway"
         },
-        "groups": {
+        "allGroups": {
             "toggleable/traffic_roads": false,
             "toggleable/service_roads": false,
             "toggleable/paths": false

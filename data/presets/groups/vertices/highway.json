@@ -14,11 +14,7 @@
                 "turning_loop": true
             },
             "traffic_calming": true,
-            "traffic_sign": true,
-            "railway": {
-                "crossing": true,
-                "level_crossing": true
-            }
+            "traffic_sign": true
         }
     },
     "vertexOf": {

@@ -4,7 +4,7 @@
     "toggleable": true,
     "matches": {
         "geometry": "area",
-        "groups": {
+        "allGroups": {
             "toggleable/buildings": false,
             "toggleable/building_parts": false,
             "toggleable/paths": false,

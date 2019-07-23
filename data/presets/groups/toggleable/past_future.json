@@ -23,7 +23,7 @@
             "demolished": "*",
             "obliterated": "*"
         },
-        "groups": {
+        "allGroups": {
             "toggleable/paths": false,
             "toggleable/traffic_roads": false,
             "toggleable/service_roads": false

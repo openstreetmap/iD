@@ -4,9 +4,7 @@
         "anyTags": {
             "railway": {
                 "buffer_stop": true,
-                "crossing": true,
                 "derail": true,
-                "level_crossing": true,
                 "milestone": true,
                 "signal": true,
                 "station": true,
@@ -19,10 +17,8 @@
     "vertexOf": {
         "geometry": "line",
         "anyTags": {
-            "railway": {
-                "rail": true, "light_rail": true, "tram": true, "subway": true,
-                "monorail": true, "funicular": true, "miniature": true, "narrow_gauge": true,
-                "disused": true, "preserved": true, "abandoned": true, "construction": true
+            "anyGroups": {
+                "railway/lines": true
             }
         }
     }

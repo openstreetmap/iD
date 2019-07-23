@@ -1,0 +1,15 @@
+{
+    "matches": {
+        "geometry": "vertex",
+        "anyTags": {
+            "railway": "level_crossing"
+        }
+    },
+    "vertexOf": {
+        "geometry": "line",
+        "anyGroups": {
+            "highway/vehicular": true,
+            "railway/lines": true
+        }
+    }
+}

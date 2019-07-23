@@ -167,17 +167,37 @@ function entityGroup(id, group) {
                 }
             }
 
-            if (rule.groups) {
-                for (var otherGroupID in rule.groups) {
+            var otherGroupID, matchesOther;
+
+            if (rule.allGroups) {
+                for (otherGroupID in rule.allGroups) {
                     // avoid simple infinte recursion
                     if (otherGroupID === group.id) continue;
                     // skip erroneous group IDs
                     if (!allGroups[otherGroupID]) continue;
 
-                    var matchesOther = allGroups[otherGroupID].matchesTags(tags, geometry);
-                    if ((rule.groups[otherGroupID] && !matchesOther) ||
-                        (!rule.groups[otherGroupID] && matchesOther)) return false;
+                    matchesOther = allGroups[otherGroupID].matchesTags(tags, geometry);
+                    if ((rule.allGroups[otherGroupID] && !matchesOther) ||
+                        (!rule.allGroups[otherGroupID] && matchesOther)) return false;
                 }
+            }
+
+            if (rule.anyGroups) {
+                var didMatchGroup = false;
+                for (otherGroupID in rule.anyGroups) {
+                    // avoid simple infinte recursion
+                    if (otherGroupID === group.id) continue;
+                    // skip erroneous group IDs
+                    if (!allGroups[otherGroupID]) continue;
+
+                    matchesOther = allGroups[otherGroupID].matchesTags(tags, geometry);
+                    if ((rule.anyGroups[otherGroupID] && matchesOther) ||
+                        (!rule.anyGroups[otherGroupID] && !matchesOther)) {
+                        didMatchGroup = true;
+                        break;
+                    }
+                }
+                if (!didMatchGroup) return false;
             }
 
             return true;

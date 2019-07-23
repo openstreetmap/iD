@@ -3,6 +3,10 @@
     "description": "A grouping of features that have something in common",
     "type": "object",
     "properties": {
+        "note": {
+            "description": "Developer documentation for this group",
+            "type": "string"
+        },
         "name": {
             "description": "The name for the group, if needed for the UI. American English; translatable",
             "type": "string"
@@ -154,7 +158,14 @@
                             "description": "If false, ALL tags must be specified by the tag object",
                             "type": "boolean"
                         },
-                        "groups": {
+                        "anyGroups": {
+                            "description": "ANY external group must pass",
+                            "type": "object",
+                            "additionalProperties": {
+                                "type": "boolean"
+                            }
+                        },
+                        "allGroups": {
                             "description": "ALL external groups must pass",
                             "type": "object",
                             "additionalProperties": {

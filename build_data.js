@@ -239,6 +239,11 @@ function generateGroups(tstrings) {
             tstrings.groups[id] = t;
         }
 
+        if (group.note) {
+            // notes are only used for developer documentation
+            delete group.note;
+        }
+
         groups[id] = group;
     });
     return groups;
