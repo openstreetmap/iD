@@ -657,7 +657,7 @@ export function uiRawTagEditor(context) {
         });
 
         for (var key in combinedTags) {
-            if (sharedKeys[key] === null) {
+            if (!sharedKeys.hasOwnProperty(key)) {
                 // treat tags that aren't shared by all entities the same as if there are multiple values
                 combinedTags[key] = true;
             }
