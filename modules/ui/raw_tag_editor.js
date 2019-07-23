@@ -628,7 +628,7 @@ export function uiRawTagEditor(context) {
                 }
             } else {
                 for (var sharedKey in sharedKeys) {
-                    if (!entityTags[sharedKey]) {
+                    if (!entityTags.hasOwnProperty(sharedKey)) {
                         delete sharedKeys[sharedKey];
                     }
                 }
@@ -638,13 +638,13 @@ export function uiRawTagEditor(context) {
 
                 var entityValue = entityTags[entityKey];
 
-                if (!_keyValues[entityKey]) {
+                if (!_keyValues.hasOwnProperty(entityKey)) {
                     _keyValues[entityKey] = new Set();
                 }
                 _keyValues[entityKey].add(entityValue);
 
-                var combinedValue = combinedTags[entityKey];
-                if (combinedValue !== undefined) {
+                if (combinedTags.hasOwnProperty(entityKey)) {
+                    var combinedValue = combinedTags[entityKey];
                     if (combinedValue !== true &&
                         combinedValue !== entityValue) {
 
