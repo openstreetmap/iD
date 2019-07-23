@@ -766,6 +766,8 @@ en:
     in: Zoom in
     out: Zoom out
   cannot_zoom: "Cannot zoom out further in current mode."
+  cannot_zoom_task: Cannot zoom away from current task
+  cannot_pan_task: Cannot pan away from current task
   full_screen: Toggle Full Screen
   QA:
     improveOSM:

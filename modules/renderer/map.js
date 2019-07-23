@@ -54,6 +54,7 @@ export function rendererMap(context) {
     var _minzoom = 0;
     var _getMouseCoords;
     var _mouseEvent;
+    var _previousCenter;
 
     var zoom = d3_zoom()
         .scaleExtent([kMin, kMax])
@@ -494,6 +495,34 @@ export function rendererMap(context) {
             return;
         }
 
+        if (context.layers().layer('tasking').enabled()) {
+
+            var _currTask = context.tasking().currentTask();
+
+            // restrict if trying to zoom too far out
+            if (geoScaleToZoom(k, TILESIZE) < _currTask.minZoom()) {
+                surface.interrupt();
+                uiFlash().text(t('cannot_zoom_task'))();
+                setCenterZoom(map.center(), _currTask.minZoom(), 0, true);
+                scheduleRedraw();
+                dispatch.call('move', this, map);
+                return;
+            }
+
+            // restrict if trying to pan outside task
+            if (!_currTask.extent().intersects(map.center())) {
+                surface.interrupt();
+                uiFlash().text(t('cannot_pan_task'))();
+                setCenterZoom(_previousCenter, map.zoom(), 0, true);
+                scheduleRedraw();
+                // dispatch.call('move', this, map);
+                return;
+            }
+
+            _previousCenter = map.center();
+        }
+
+
         projection.transform(eventTransform);
 
         var scale = k / _transformStart.k;
@@ -744,7 +773,7 @@ export function rendererMap(context) {
         var proj = geoRawMercator().transform(projection.transform());  // copy projection
         // use the target zoom to calculate the offset center
         proj.scale(geoZoomToScale(zoom, TILESIZE));
-        
+
         var locPx = proj(loc);
         var offsetLocPx = [locPx[0] + offset[0], locPx[1] + offset[1]];
         var offsetLoc = proj.invert(offsetLocPx);

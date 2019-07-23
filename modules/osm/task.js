@@ -1,5 +1,10 @@
 import { geoExtent } from '../geo';
 
+/* Constants */
+var EXTENT_CONSTRAINT = 250; // meter buffer around task for curtain
+
+var MIN_ZOOM = 14;
+var MIN_ZOOM_PAD = 0.25;
 
 export function task() {
     if (!(this instanceof task)) {
@@ -30,6 +35,20 @@ Object.assign(task.prototype, {
             }
         }
 
+        // calculate extent
+        var coords = this.geometry.coordinates[0][0];
+        this.properties.extent = new geoExtent(coords[3], coords[1]);
+
+        // calculate center
+        this.properties.center = this.properties.extent.center();
+
+        // calculate extentPanConstraint
+        var extentPanConstraint = new geoExtent(coords[3], coords[1]);
+        this.properties.extentPanConstraint = extentPanConstraint.padByMeters(EXTENT_CONSTRAINT);
+
+        // set starting minimum zoom
+        this.properties.minZoom = MIN_ZOOM;
+
         return this;
     },
 
@@ -38,7 +57,27 @@ Object.assign(task.prototype, {
     },
 
     extent: function() {
-        return new geoExtent(this.geometry.coordinates);
+        return this.properties.extent;
+    },
+
+    center: function() {
+        return this.properties.center;
+    },
+
+    extentPad: function() {
+        return this.properties.extentPad;
+    },
+
+    extentPanConstraint: function() {
+        return this.properties.extentPanConstraint;
+    },
+
+
+    minZoom: function(extentZoom) {
+        if (!arguments.length) return this.properties.minZoom;
+
+        this.properties.minZoom = Math.floor(extentZoom - MIN_ZOOM_PAD);
+        return this;
     },
 
     projectId: function() {
@@ -67,7 +106,7 @@ Object.assign(task.prototype, {
 
     lock: function(user) {
 
-        var canLock = this.status !== 'locked'  && user.permissions.includes(this.status);
+        var canLock = this.status !== 'locked'  && user.permissions.includes(this.status); // TODO: TAH - get user permissions
 
         if (canLock) {
             this.locked = true;
@@ -81,9 +120,5 @@ Object.assign(task.prototype, {
         this.locked = false;
         this.status = status; // TODO: TAH - set status based on what user was doing & if they completed it
     },
-
-    // update: function(attrs) {
-    //     return task(this, attrs); // {v: 1 + (this.v || 0)}
-    // },
 
 });

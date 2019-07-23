@@ -2,21 +2,17 @@ import _throttle from 'lodash-es/throttle';
 
 import { t } from '../util/locale';
 import { icon } from '../ui/intro/helper';
-import { geoBounds as d3_geoBounds, geoPath as d3_geoPath } from 'd3-geo';
+import { geoPath as d3_geoPath } from 'd3-geo';
 import { select as d3_select } from 'd3-selection';
 
-import { geoExtent } from '../geo';
 import { services } from '../services';
 import { uiCurtain } from '../ui';
 import { svgPath } from './helpers';
-import { utilArrayFlatten, utilArrayUnion } from '../util';
+
 
 var _initialized = false;
 var _enabled = false;
 var _task;
-
-var _extent;
-var _centroid;
 
 
 export function svgTasking(projection, context, dispatch) {
@@ -117,11 +113,11 @@ export function svgTasking(projection, context, dispatch) {
         var surface = context.surface();
         if (!surface || surface.empty()) return;  // not ready to draw yet, starting up
 
+        if (!drawTasking.hasData()) return; // return if no data
+
         // Gather data
         var geoData = [];
         var polygonData = [];
-
-        _task = getService().currentTask();
 
         if (Object.keys(_task).length) {
             // geoData = getFeatures(_task);
@@ -243,17 +239,17 @@ export function svgTasking(projection, context, dispatch) {
 
         if (drawTasking.showCurtain()) { drawCurtain(); }
 
-        function revealTask(padding, text, options) {
 
-            var left = context.projection(_extent[0])[0];
-            var top = context.projection(_extent[0])[1];
-            var right = context.projection(_extent[1])[0];
-            var bottom = context.projection(_extent[1])[1];
+        function revealTask(extent, text, options) {
+            var left = context.projection(extent[0])[0];
+            var top = context.projection(extent[0])[1];
+            var right = context.projection(extent[1])[0];
+            var bottom = context.projection(extent[1])[1];
             var box = {
-            left: left - padding,
-            top: top + padding,
-            width: right - left + (2 * padding),
-            height: bottom - top - (2 * padding)
+                left: left,
+                top: top,
+                width: right - left,
+                height: bottom - top
             };
 
             _curtain.reveal(box, text, options);
@@ -263,25 +259,25 @@ export function svgTasking(projection, context, dispatch) {
             _curtain.remove();
             context.container().select('.layer-data').call(_curtain);
 
-            var padding = 20;
-
             revealTask(
-                padding,
-                t('tasking.started_task.task_help',
-                    {
-                        taskId: '1',
-                        taskingButton: icon('#iD-icon-tasking', 'pre-text'),
-                        taskingKey: t('tasking.key'),
-                        helpButton: icon('#iD-icon-help', 'pre-text'),
-                        helpKey: t('help.key')
-                    }
-                ),
-                {
-                    tooltipClass: 'intro-points-describe',
-                    duration: 500,
-                    buttonText: t('tasking.started_task.stop_task'),
-                    buttonCallback: function() { finishTasking('value'); }
-                });
+                _task.extentPanConstraint()
+                // TODO: TAH - add tooltip back if needed
+                // ,
+                // t('tasking.started_task.task_help',
+                //     {
+                //         taskId: '1',
+                //         taskingButton: icon('#iD-icon-tasking', 'pre-text'),
+                //         taskingKey: t('tasking.key'),
+                //         helpButton: icon('#iD-icon-help', 'pre-text'),
+                //         helpKey: t('help.key')
+                //     }
+                // ),{
+                //     tooltipClass: 'intro-points-describe',
+                //     duration: 500,
+                //     buttonText: t('tasking.started_task.stop_task'),
+                //     buttonCallback: function() { finishTasking('value'); }
+                // }
+                );
 
             function finishTasking(value) {
                 console.log('clicked finish tasking');
@@ -346,54 +342,24 @@ export function svgTasking(projection, context, dispatch) {
 
 
     drawTasking.hasData = function() {
-        _task = getService().currentTask();
+        _task = getService().currentTask() || {};
 
-        var gj = _task || {};
-        return !!(Object.keys(gj).length);
+        return !!(Object.keys(_task).length);
     };
 
 
     drawTasking.fitZoom = function() {
+        drawTasking.hasData();
 
-        _task = getService().currentTask();
-
-        var features = [_task];
-
-        if (!features.length) return;
-
-
+        // set task min zoom
         var map = context.map();
-        var viewport = map.trimmedExtent().polygon();
-        var coords = features.reduce(function(coords, feature) {
-            var c = feature.geometry.coordinates;
+        _task.minZoom(map.trimmedExtentZoom(_task.extent()));
+        getService().replaceTask(_task); // update task in cache
 
-            /* eslint-disable no-fallthrough */
-            switch (feature.geometry.type) {
-                case 'Point':
-                    c = [c];
-                case 'MultiPoint':
-                case 'LineString':
-                    break;
-
-                case 'MultiPolygon':
-                    c = utilArrayFlatten(c);
-                case 'Polygon':
-                case 'MultiLineString':
-                    c = utilArrayFlatten(c);
-                    break;
-            }
-            /* eslint-enable no-fallthrough */
-
-            return utilArrayUnion(coords, c);
-        }, []);
-
-        _extent = geoExtent(d3_geoBounds({ type: 'LineString', coordinates: coords }));
-        _centroid = _extent.center();
-
-        map.centerZoom(_centroid, map.trimmedExtentZoom(_extent) - 0.25); // TODO: TAH - better way to zoom out a bit
+        map.centerZoom(_task.center(), _task.minZoom()); // TODO: TAH - better way to zoom out a bit
 
         // if (!geoPolygonIntersectsPolygon(viewport, coords, true)) {
-        //     map.centerZoom(_centroid, map.trimmedExtentZoom(_extent));
+        //     map.centerZoom(_taskCentroid, map.trimmedExtentZoom(_taskExtent));
         // }
 
         return this;

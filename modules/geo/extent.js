@@ -124,6 +124,28 @@ Object.assign(geoExtent.prototype, {
         );
     },
 
+    padByPercent: function(percent) {
+        if (isNaN(percent)) return;
+        var positive = percent > 0; // reduce size if negative percentage
+
+        var w = Math.abs(this[1][0] - this[0][0]) * (percent / 100);
+        var h = Math.abs(this[1][1] - this[0][1]) * (percent / 100);
+
+
+        if (positive) {
+            return geoExtent(
+                [this[0][0] + w / 2, this[0][1] + h / 2],
+                [this[1][0] - w / 2, this[1][1] - h / 2]
+            );
+
+        } else {
+            return geoExtent(
+                [this[0][0] - w / 2, this[0][1] - h / 2],
+                [this[1][0] + w / 2, this[1][1] + h / 2]
+            );
+        }
+    },
+
 
     toParam: function() {
         return this.rectangle().join(',');

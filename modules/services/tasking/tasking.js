@@ -177,6 +177,9 @@ function getExtension(fileName) {
 
 
 function parseUrl(url, defaultExtension) {
+
+    if (!url) return;
+
     var parsedUrl = {};
 
     // split url into path and params
@@ -326,8 +329,8 @@ export default {
 
         _taskingCache = {
             managers: managers,
-            projects: [],
-            tasks: [],
+            projects: {},
+            tasks: {},
             currentManager: {},
             currentProject: {},
             currentTask: {},
@@ -380,7 +383,7 @@ export default {
 
                         // if task doesn't already exist, add it
                         if (!that.getTask(parsedUrl.taskId)) {
-                            that.addNewTask(newTask); // add task to tasks
+                            that.addTask(newTask); // add task to tasks
                         }
 
                         that.currentTask(newTask); // set task as current task
@@ -442,7 +445,7 @@ export default {
                         var newProject = parsers.project(json);
 
                         // add to projects
-                        that.addNewProject(newProject);
+                        that.addProject(newProject);
 
                         // set as current project
                         that.currentProject(newProject);
@@ -466,14 +469,12 @@ export default {
 
 
     getProject: function(projectId) {
-        return _taskingCache.projects.find(function(project) {
-            return project.properties.projectId && project.properties.projectId === projectId;
-        });
+        return _taskingCache.projects[projectId];
     },
 
 
-    addNewProject: function(project) {
-        _taskingCache.projects.push(project);
+    addProject: function(project) {
+        _taskingCache.projects[project.id()] = project;
     },
 
 
@@ -508,7 +509,7 @@ export default {
                         var newTask = parsers.task(json);
 
                         // add to tasks
-                        that.addNewTask(newTask);
+                        that.addTask(newTask);
 
                         // set as current task
                         that.currentTask(newTask);
@@ -531,23 +532,40 @@ export default {
 
 
     getTask: function(taskId) {
-        return _taskingCache.tasks.find(function(task) {
-            return task.properties.taskId && task.properties.taskId === taskId;
-        });
+        return _taskingCache.tasks[taskId];
     },
 
 
-    addNewTask: function(task) {
-        _taskingCache.tasks.push(task);
+    replaceTask: function(t) {
+        if (!(t instanceof task) || !t.taskId) return;
+
+        _taskingCache.tasks[t.taskId] = t;
+
+        // if currentTask, set again
+        if (t.taskId && this.currentTask().taskId === t.taskId) this.currentTask(t);
+        return t;
+    },
+
+
+    removeTask: function(t) {
+        if (!(t instanceof task) || !t.taskId) return;
+
+        delete _taskingCache.tasks[t.taskId];
+    },
+
+
+    addTask: function(task) {
+        _taskingCache[task.id()] = task;
     },
 
 
     customSettings: function(d) {
         if (!arguments.length) return _taskingCache.customSettings;
 
-        var parsedUrl = parseUrl(d.url); // parse url
-
-        _taskingCache.customSettings = parsedUrl; // save custom settings
+        if (d.url) {
+            var parsedUrl = parseUrl(d.url); // parse url
+            _taskingCache.customSettings = parsedUrl; // save custom settings
+        }
 
         return this;
     },
