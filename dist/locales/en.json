@@ -7693,7 +7693,7 @@
                 },
                 "office/telecommunication": {
                     "name": "Telecom Office",
-                    "terms": "communication,internet,phone,voice"
+                    "terms": "communication,internet service provider,isp,network,telephone,voice"
                 },
                 "office/therapist": {
                     "name": "Therapist Office",
