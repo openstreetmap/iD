@@ -1934,6 +1934,7 @@ button.preset-favorite-button.active .icon {
 }
 [dir='rtl'] .form-field-input-wrap > button:last-of-type {
     border-bottom-left-radius: 4px;
+    border-bottom-right-radius: 0;
 }
 
 
