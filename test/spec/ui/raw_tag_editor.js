@@ -2,6 +2,11 @@ describe('iD.uiRawTagEditor', function() {
     var taglist, element, entity, context;
 
     function render(tags) {
+
+        entity = iD.osmNode({ id: 'n12345', tags: tags });
+        context = iD.coreContext();
+        context.history().merge([entity]);
+
         taglist = iD.uiRawTagEditor(context)
             .tags(tags)
             .entityIDs([entity.id])
@@ -15,10 +20,7 @@ describe('iD.uiRawTagEditor', function() {
     }
 
     beforeEach(function () {
-        entity = iD.osmNode({id: 'n12345', tags: { highway: 'residential' }});
-        context = iD.coreContext();
-        context.history().merge([entity]);
-        render();
+        render({ highway: 'residential' });
     });
 
     afterEach(function () {
