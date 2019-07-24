@@ -3,6 +3,7 @@
         "geometry": "vertex",
         "anyTags": {
             "highway": {
+                "crossing": true,
                 "emergency_bay": true,
                 "give_way": true,
                 "milestone": true,
