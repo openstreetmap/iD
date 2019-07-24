@@ -5,7 +5,7 @@ import { select as d3_select } from 'd3-selection';
 import { coreDifference } from './difference';
 import { coreGraph } from './graph';
 import { coreTree } from './tree';
-import { osmEntity } from '../osm/entity';
+import { entityEntity } from '../entities/entity';
 import { uiLoading } from '../ui/loading';
 import {
     utilArrayDifference, utilArrayGroupBy, utilArrayUnion,
@@ -419,7 +419,7 @@ export function coreHistory(context) {
             function copyIntroEntity(source) {
                 var copy = utilObjectOmit(source, ['type', 'user', 'v', 'version', 'visible']);
 
-                // Note: the copy is no longer an osmEntity, so it might not have `tags`
+                // Note: the copy is no longer an entityEntity, so it might not have `tags`
                 if (copy.tags && !Object.keys(copy.tags)) {
                     delete copy.tags;
                 }
@@ -457,7 +457,7 @@ export function coreHistory(context) {
                 Object.keys(i.graph.entities).forEach(function(id) {
                     var entity = i.graph.entities[id];
                     if (entity) {
-                        var key = osmEntity.key(entity);
+                        var key = entity.key();
                         allEntities[key] = entity;
                         modified.push(key);
                     } else {
@@ -506,7 +506,7 @@ export function coreHistory(context) {
                 entities: Object.values(allEntities),
                 baseEntities: Object.values(baseEntities),
                 stack: s,
-                nextIDs: osmEntity.id.next,
+                nextIDs: entityEntity.id.next,
                 index: _index,
                 timestamp: (new Date()).getTime()
             });
@@ -517,21 +517,22 @@ export function coreHistory(context) {
             var h = JSON.parse(json);
             var loadComplete = true;
 
-            osmEntity.id.next = h.nextIDs;
+            entityEntity.id.next = h.nextIDs;
             _index = h.index;
 
             if (h.version === 2 || h.version === 3) {
                 var allEntities = {};
 
-                h.entities.forEach(function(entity) {
-                    allEntities[osmEntity.key(entity)] = osmEntity(entity);
+                h.entities.forEach(function(protoEntity) {
+                    var entity = entityEntity(protoEntity);
+                    allEntities[entity.key()] = entity;
                 });
 
                 if (h.version === 3) {
                     // This merges originals for changed entities into the base of
                     // the _stack even if the current _stack doesn't have them (for
                     // example when iD has been restarted in a different region)
-                    var baseEntities = h.baseEntities.map(function(d) { return osmEntity(d); });
+                    var baseEntities = h.baseEntities.map(function(d) { return entityEntity(d); });
                     var stack = _stack.map(function(state) { return state.graph; });
                     _stack[0].graph.rebase(baseEntities, stack, true);
                     _tree.rebase(baseEntities, true);
@@ -619,7 +620,7 @@ export function coreHistory(context) {
 
                     for (var i in d.entities) {
                         var entity = d.entities[i];
-                        entities[i] = entity === 'undefined' ? undefined : osmEntity(entity);
+                        entities[i] = entity === 'undefined' ? undefined : entityEntity(entity);
                     }
 
                     d.graph = coreGraph(_stack[0].graph).load(entities);

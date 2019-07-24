@@ -1,5 +1,4 @@
 import { geoScaleToZoom } from '../geo';
-import { osmEntity } from '../osm';
 import { svgPointTransform } from './helpers';
 import { svgTagClasses } from './tag_classes';
 
@@ -23,7 +22,7 @@ export function svgPoints(projection, context) {
     function fastEntityKey(d) {
         var mode = context.mode();
         var isMoving = mode && /^(add|draw|drag|move|rotate)/.test(mode.id);
-        return isMoving ? d.id : osmEntity.key(d);
+        return isMoving ? d.id : d.key();
     }
 
 

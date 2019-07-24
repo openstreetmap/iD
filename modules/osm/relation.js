@@ -1,6 +1,7 @@
 import { geoArea as d3_geoArea } from 'd3-geo';
 
 import { osmEntity } from './entity';
+import { entityEntity } from '../entities/entity';
 import { osmJoinWays } from './multipolygon';
 import { geoExtent, geoPolygonContainsPolygon, geoPolygonIntersectsPolygon } from '../geo';
 
@@ -14,14 +15,14 @@ export function osmRelation() {
 }
 
 
-osmEntity.relation = osmRelation;
+entityEntity.relation = osmRelation;
 
 osmRelation.prototype = Object.create(osmEntity.prototype);
 
 
 osmRelation.creationOrder = function(a, b) {
-    var aId = parseInt(osmEntity.id.toOSM(a.id), 10);
-    var bId = parseInt(osmEntity.id.toOSM(b.id), 10);
+    var aId = parseInt(entityEntity.id.toUntyped(a.id), 10);
+    var bId = parseInt(entityEntity.id.toUntyped(b.id), 10);
 
     if (aId < 0 || bId < 0) return aId - bId;
     return bId - aId;
@@ -191,14 +192,14 @@ Object.assign(osmRelation.prototype, {
     asJXON: function(changeset_id) {
         var r = {
             relation: {
-                '@id': this.osmId(),
+                '@id': this.untypedID(),
                 '@version': this.version || 0,
                 member: this.members.map(function(member) {
                     return {
                         keyAttributes: {
                             type: member.type,
                             role: member.role,
-                            ref: osmEntity.id.toOSM(member.id)
+                            ref: entityEntity.id.toUntyped(member.id)
                         }
                     };
                 }, this),

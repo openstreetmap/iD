@@ -198,7 +198,7 @@ export function uiPanelHistory(context) {
         links
             .append('a')
             .attr('class', 'pewu-history-viewer-link')
-            .attr('href', 'https://pewu.github.io/osm-history/#/' + entity.type + '/' + entity.osmId())
+            .attr('href', 'https://pewu.github.io/osm-history/#/' + entity.type + '/' + entity.untypedID())
             .attr('target', '_blank')
             .attr('tabindex', -1)
             .text('PeWu');

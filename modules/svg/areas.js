@@ -1,6 +1,6 @@
 import { bisector as d3_bisector } from 'd3-array';
 
-import { osmEntity, osmIsOldMultipolygonOuterMember } from '../osm';
+import { osmIsOldMultipolygonOuterMember } from '../osm';
 import { svgPath, svgSegmentWay } from './helpers';
 import { svgTagClasses } from './tag_classes';
 
@@ -226,7 +226,7 @@ export function svgAreas(projection, context) {
 
         var clipPaths = context.surface().selectAll('defs').selectAll('.clipPath-osm')
            .filter(filter)
-           .data(data.clip, osmEntity.key);
+           .data(data.clip, function(d) { return d.key(); });
 
         clipPaths.exit()
            .remove();
@@ -260,7 +260,7 @@ export function svgAreas(projection, context) {
         var paths = areagroup
             .selectAll('path')
             .filter(filter)
-            .data(function(layer) { return data[layer]; }, osmEntity.key);
+            .data(function(layer) { return data[layer]; }, function(d) { return d.key(); });
 
         paths.exit()
             .remove();

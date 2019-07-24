@@ -20,18 +20,18 @@ describe('iD.osmEntity', function () {
 
     describe('.id', function () {
         it('generates unique IDs', function () {
-            expect(iD.osmEntity.id('node')).not.to.equal(iD.osmEntity.id('node'));
+            expect(iD.entityEntity.id('node')).not.to.equal(iD.entityEntity.id('node'));
         });
 
-        describe('.fromOSM', function () {
+        describe('.toTyped', function () {
             it('returns a ID string unique across entity types', function () {
-                expect(iD.osmEntity.id.fromOSM('node', '1')).to.equal('n1');
+                expect(iD.entityEntity.id.toTyped('node', '1')).to.equal('n1');
             });
         });
 
-        describe('.toOSM', function () {
-            it('reverses fromOSM', function () {
-                expect(iD.osmEntity.id.toOSM(iD.osmEntity.id.fromOSM('node', '1'))).to.equal('1');
+        describe('.toUntyped', function () {
+            it('reverses toTyped', function () {
+                expect(iD.entityEntity.id.toUntyped(iD.entityEntity.id.toTyped('node', '1'))).to.equal('1');
             });
         });
     });
@@ -165,11 +165,11 @@ describe('iD.osmEntity', function () {
         });
     });
 
-    describe('#osmId', function () {
+    describe('#untypedID', function () {
         it('returns an OSM ID as a string', function () {
-            expect(iD.osmEntity({id: 'w1234'}).osmId()).to.eql('1234');
-            expect(iD.osmEntity({id: 'n1234'}).osmId()).to.eql('1234');
-            expect(iD.osmEntity({id: 'r1234'}).osmId()).to.eql('1234');
+            expect(iD.osmEntity({id: 'w1234'}).untypedID()).to.eql('1234');
+            expect(iD.osmEntity({id: 'n1234'}).untypedID()).to.eql('1234');
+            expect(iD.osmEntity({id: 'r1234'}).untypedID()).to.eql('1234');
         });
     });
 

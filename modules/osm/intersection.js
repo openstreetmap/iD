@@ -3,7 +3,7 @@ import { actionReverse } from '../actions/reverse';
 import { actionSplit } from '../actions/split';
 import { coreGraph } from '../core/graph';
 import { geoAngle, geoSphericalDistance } from '../geo';
-import { osmEntity } from './entity';
+import { entityEntity } from '../entities/entity';
 import { utilArrayDifference, utilArrayUniq } from '../util';
 
 
@@ -157,7 +157,7 @@ export function osmIntersection(graph, startVertexId, maxDistance) {
 
 
     // STEP 4:  Split ways on key vertices
-    var origCount = osmEntity.id.next.way;
+    var origCount = entityEntity.id.next.way;
     vertices.forEach(function(v) {
         // This is an odd way to do it, but we need to find all the ways that
         // will be split here, then split them one at a time to ensure that these
@@ -184,7 +184,7 @@ export function osmIntersection(graph, startVertexId, maxDistance) {
     //     these actions later if the user decides to create a turn restriction
     //  2. Avoids churning way ids just by hovering over a vertex
     //     and displaying the turn restriction editor
-    osmEntity.id.next.way = origCount;
+    entityEntity.id.next.way = origCount;
 
 
     // STEP 5:  Update arrays to point to vgraph entities

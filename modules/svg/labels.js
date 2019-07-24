@@ -9,7 +9,6 @@ import {
     geoScaleToZoom, geoVecInterp, geoVecLength
 } from '../geo';
 
-import { osmEntity } from '../osm';
 import { utilDetect } from '../util/detect';
 import { utilDisplayName, utilDisplayNameForPath, utilEntitySelector } from '../util';
 
@@ -99,7 +98,7 @@ export function svgLabels(projection, context) {
     function drawLinePaths(selection, entities, filter, classes, labels) {
         var paths = selection.selectAll('path')
             .filter(filter)
-            .data(entities, osmEntity.key);
+            .data(entities, function(d) { return d.key(); });
 
         // exit
         paths.exit()
@@ -119,7 +118,7 @@ export function svgLabels(projection, context) {
     function drawLineLabels(selection, entities, filter, classes, labels) {
         var texts = selection.selectAll('text.' + classes)
             .filter(filter)
-            .data(entities, osmEntity.key);
+            .data(entities, function(d) { return d.key(); });
 
         // exit
         texts.exit()
@@ -136,7 +135,7 @@ export function svgLabels(projection, context) {
         // update
         selection.selectAll('text.' + classes).selectAll('.textpath')
             .filter(filter)
-            .data(entities, osmEntity.key)
+            .data(entities, function(d) { return d.key(); })
             .attr('startOffset', '50%')
             .attr('xlink:href', function(d) { return '#labelpath-' + d.id; })
             .text(utilDisplayNameForPath);
@@ -146,7 +145,7 @@ export function svgLabels(projection, context) {
     function drawPointLabels(selection, entities, filter, classes, labels) {
         var texts = selection.selectAll('text.' + classes)
             .filter(filter)
-            .data(entities, osmEntity.key);
+            .data(entities, function(d) { return d.key(); });
 
         // exit
         texts.exit()
@@ -183,7 +182,7 @@ export function svgLabels(projection, context) {
     function drawAreaIcons(selection, entities, filter, classes, labels) {
         var icons = selection.selectAll('use.' + classes)
             .filter(filter)
-            .data(entities, osmEntity.key);
+            .data(entities, function(d) { return d.key(); });
 
         // exit
         icons.exit()

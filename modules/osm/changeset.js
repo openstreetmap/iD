@@ -1,4 +1,5 @@
 import { osmEntity } from './entity';
+import { entityEntity } from '../entities/entity';
 import { geoExtent } from '../geo';
 
 
@@ -11,7 +12,7 @@ export function osmChangeset() {
 }
 
 
-osmEntity.changeset = osmChangeset;
+entityEntity.changeset = osmChangeset;
 
 osmChangeset.prototype = Object.create(osmEntity.prototype);
 

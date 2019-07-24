@@ -1,7 +1,6 @@
 import { event as d3_event, select as d3_select } from 'd3-selection';
 
 import { modeSelect } from '../modes/select';
-import { osmEntity } from '../osm';
 import { svgIcon } from '../svg/icon';
 import { utilDisplayName, utilHighlightEntities } from '../util';
 
@@ -48,7 +47,7 @@ export function uiSelectionList(context) {
                 .filter(function(entity) { return entity; });
 
             var items = list.selectAll('.feature-list-item')
-                .data(entities, osmEntity.key);
+                .data(entities, function(d) { return d.key(); });
 
             items.exit()
                 .remove();

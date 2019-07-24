@@ -11,6 +11,7 @@ import { geoSphericalDistance } from '../geo/geo';
 import { geoExtent, geoChooseEdge } from '../geo';
 import { modeSelect } from '../modes/select';
 import { osmEntity } from '../osm/entity';
+import { entityEntity } from '../entities/entity';
 import { services } from '../services';
 import { svgIcon } from '../svg/icon';
 import { uiCmd } from './cmd';
@@ -179,7 +180,7 @@ export function uiFeatureList(context) {
 
                 // Make a temporary osmEntity so we can preset match
                 // and better localize the search result - #4725
-                var id = osmEntity.id.fromOSM(d.osm_type, d.osm_id);
+                var id = entityEntity.id.toTyped(d.osm_type, d.osm_id);
                 var tags = {};
                 tags[d.class] = d.type;
 

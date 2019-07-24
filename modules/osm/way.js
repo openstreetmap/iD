@@ -2,6 +2,7 @@ import { geoArea as d3_geoArea } from 'd3-geo';
 
 import { geoExtent, geoVecCross } from '../geo';
 import { osmEntity } from './entity';
+import { entityEntity } from '../entities/entity';
 import { osmLanes } from './lanes';
 import { osmAreaKeys, osmOneWayTags, osmRightSideIsInsideTags } from './tags';
 import { utilArrayUniq } from '../util';
@@ -16,7 +17,7 @@ export function osmWay() {
 }
 
 
-osmEntity.way = osmWay;
+entityEntity.way = osmWay;
 
 osmWay.prototype = Object.create(osmEntity.prototype);
 
@@ -430,10 +431,10 @@ Object.assign(osmWay.prototype, {
     asJXON: function(changeset_id) {
         var r = {
             way: {
-                '@id': this.osmId(),
+                '@id': this.untypedID(),
                 '@version': this.version || 0,
                 nd: this.nodes.map(function(id) {
-                    return { keyAttributes: { ref: osmEntity.id.toOSM(id) } };
+                    return { keyAttributes: { ref: entityEntity.id.toUntyped(id) } };
                 }, this),
                 tag: Object.keys(this.tags).map(function(k) {
                     return { keyAttributes: { k: k, v: this.tags[k] } };

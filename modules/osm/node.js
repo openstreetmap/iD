@@ -1,4 +1,5 @@
 import { osmEntity } from './entity';
+import { entityEntity } from '../entities/entity';
 import { geoAngle, geoExtent } from '../geo';
 import { utilArrayUniq } from '../util';
 
@@ -11,7 +12,7 @@ export function osmNode() {
     }
 }
 
-osmEntity.node = osmNode;
+entityEntity.node = osmNode;
 
 osmNode.prototype = Object.create(osmEntity.prototype);
 
@@ -214,7 +215,7 @@ Object.assign(osmNode.prototype, {
     asJXON: function(changeset_id) {
         var r = {
             node: {
-                '@id': this.osmId(),
+                '@id': this.untypedID(),
                 '@lon': this.loc[0],
                 '@lat': this.loc[1],
                 '@version': (this.version || 0),

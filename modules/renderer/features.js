@@ -1,6 +1,5 @@
 import { dispatch as d3_dispatch } from 'd3-dispatch';
 
-import { osmEntity } from '../osm';
 import { utilRebind } from '../util/rebind';
 import { groupManager } from '../entities/group_manager';
 import { utilArrayGroupBy, utilArrayUnion, utilQsString, utilStringQs } from '../util';
@@ -226,7 +225,7 @@ export function rendererFeatures(context) {
 
 
     features.clearEntity = function(entity) {
-        delete _cache[osmEntity.key(entity)];
+        delete _cache[entity.key()];
     };
 
 
@@ -249,7 +248,7 @@ export function rendererFeatures(context) {
         if (geometry === 'vertex' ||
             (geometry === 'relation' && !relationShouldBeChecked(entity))) return {};
 
-        var ent = osmEntity.key(entity);
+        var ent = entity.key();
         if (!_cache[ent]) {
             _cache[ent] = {};
         }
@@ -278,7 +277,7 @@ export function rendererFeatures(context) {
                             // IMPORTANT:
                             // For this to work, getMatches must be called on relations before ways.
                             //
-                            var pkey = osmEntity.key(parents[0]);
+                            var pkey = parents[0].key();
                             if (_cache[pkey] && _cache[pkey].matches) {
                                 matches = Object.assign({}, _cache[pkey].matches);  // shallow copy
                                 continue;
@@ -301,7 +300,7 @@ export function rendererFeatures(context) {
     features.getParents = function(entity, resolver, geometry) {
         if (geometry === 'point') return [];
 
-        var ent = osmEntity.key(entity);
+        var ent = entity.key();
         if (!_cache[ent]) {
             _cache[ent] = {};
         }
