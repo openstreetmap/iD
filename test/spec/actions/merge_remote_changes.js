@@ -6,7 +6,7 @@ describe('iD.actionMergeRemoteChanges', function () {
             iD.entityNode({id: 'p2', loc: [ 10, -10], version: '1'}),
             iD.entityNode({id: 'p3', loc: [-10, -10], version: '1'}),
             iD.entityNode({id: 'p4', loc: [-10,  10], version: '1'}),
-            iD.osmWay({
+            iD.entityWay({
                 id: 'w1',
                 nodes: ['p1', 'p2', 'p3', 'p4', 'p1'],
                 version: '1',
@@ -17,14 +17,14 @@ describe('iD.actionMergeRemoteChanges', function () {
             iD.entityNode({id: 'q2', loc: [ 5, -5], version: '1'}),
             iD.entityNode({id: 'q3', loc: [-5, -5], version: '1'}),
             iD.entityNode({id: 'q4', loc: [-5,  5], version: '1'}),
-            iD.osmWay({
+            iD.entityWay({
                 id: 'w2',
                 nodes: ['q1', 'q2', 'q3', 'q4', 'q1'],
                 version: '1',
                 tags: {foo: 'foo', area: 'yes'}
             }),
 
-            iD.osmRelation({
+            iD.entityRelation({
                 id: 'r',
                 members: [{id: 'w1', role: 'outer'}, {id: 'w2', role: 'inner'}],
                 version: '1',
@@ -37,7 +37,7 @@ describe('iD.actionMergeRemoteChanges', function () {
         r2 = iD.entityNode({id: 'r2', loc: [ 12, -12], version: '1'}),
         r3 = iD.entityNode({id: 'r3', loc: [-12, -12], version: '1'}),
         r4 = iD.entityNode({id: 'r4', loc: [-12,  12], version: '1'}),
-        w3 = iD.osmWay({
+        w3 = iD.entityWay({
                 id: 'w3',
                 nodes: ['r1', 'r2', 'r3', 'r4', 'r1'],
                 version: '1',
@@ -48,7 +48,7 @@ describe('iD.actionMergeRemoteChanges', function () {
         s2 = iD.entityNode({id: 's2', loc: [ 6, -6], version: '1'}),
         s3 = iD.entityNode({id: 's3', loc: [-6, -6], version: '1'}),
         s4 = iD.entityNode({id: 's4', loc: [-6,  6], version: '1'}),
-        w4 = iD.osmWay({
+        w4 = iD.entityWay({
                 id: 'w4',
                 nodes: ['s1', 's2', 's3', 's4', 's1'],
                 version: '1',

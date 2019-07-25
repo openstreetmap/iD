@@ -3,7 +3,7 @@ import { diff3Merge } from 'node-diff3';
 
 import { t } from '../util/locale';
 import { actionDeleteMultiple } from './delete_multiple';
-import { osmEntity } from '../osm';
+import { entityEntity } from '../entities/entity';
 import { dataDiscarded } from '../../data';
 import { utilArrayUnion, utilArrayUniq } from '../util';
 
@@ -107,14 +107,14 @@ export function actionMergeRemoteChanges(id, localGraph, remoteGraph, formatUser
                 updates.replacements.push(remote);
 
             } else if (_option === 'force_local' && local) {
-                target = osmEntity(local);
+                target = entityEntity(local);
                 if (remote) {
                     target = target.update({ version: remote.version });
                 }
                 updates.replacements.push(target);
 
             } else if (_option === 'safe' && local && remote && local.version !== remote.version) {
-                target = osmEntity(local, { version: remote.version });
+                target = entityEntity(local, { version: remote.version });
                 if (remote.visible) {
                     target = mergeLocation(remote, target);
                 } else {
@@ -209,7 +209,7 @@ export function actionMergeRemoteChanges(id, localGraph, remoteGraph, formatUser
         var base = graph.base().entities[id];
         var local = localGraph.entity(id);
         var remote = remoteGraph.entity(id);
-        var target = osmEntity(local, { version: remote.version });
+        var target = entityEntity(local, { version: remote.version });
 
         // delete/undelete
         if (!remote.visible) {
