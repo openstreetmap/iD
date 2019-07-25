@@ -4,7 +4,7 @@ describe('iD.actionMove', function() {
     // This was moved to operationMove.  We should test operations and move this test there.
     // describe('#disabled', function() {
     //     it('returns falsy by default', function() {
-    //         var node  = iD.osmNode({loc: [0, 0]}),
+    //         var node  = iD.entityNode({loc: [0, 0]}),
     //             action = iD.actionMove([node.id], [0, 0], projection),
     //             graph = iD.coreGraph([node]);
     //         expect(action.disabled(graph)).not.to.be.ok;
@@ -18,7 +18,7 @@ describe('iD.actionMove', function() {
     //     });
 
     //     it('returns falsy for a complete relation', function() {
-    //         var node  = iD.osmNode({loc: [0, 0]}),
+    //         var node  = iD.entityNode({loc: [0, 0]}),
     //             relation = iD.osmRelation({members: [{id: node.id}]}),
     //             action = iD.actionMove([relation.id], [0, 0], projection),
     //             graph = iD.coreGraph([node, relation]);
@@ -27,8 +27,8 @@ describe('iD.actionMove', function() {
     // });
 
     it('moves all nodes in a way by the given amount', function() {
-        var node1  = iD.osmNode({loc: [0, 0]}),
-            node2  = iD.osmNode({loc: [5, 10]}),
+        var node1  = iD.entityNode({loc: [0, 0]}),
+            node2  = iD.entityNode({loc: [5, 10]}),
             way    = iD.osmWay({nodes: [node1.id, node2.id]}),
             delta  = [2, 3],
             graph  = iD.actionMove([way.id], delta, projection)(iD.coreGraph([node1, node2, way])),
@@ -41,7 +41,7 @@ describe('iD.actionMove', function() {
     });
 
     it('moves repeated nodes only once', function() {
-        var node   = iD.osmNode({loc: [0, 0]}),
+        var node   = iD.entityNode({loc: [0, 0]}),
             way    = iD.osmWay({nodes: [node.id, node.id]}),
             delta  = [2, 3],
             graph  = iD.actionMove([way.id], delta, projection)(iD.coreGraph([node, way])),
@@ -51,7 +51,7 @@ describe('iD.actionMove', function() {
     });
 
     it('moves multiple ways', function() {
-        var node   = iD.osmNode({loc: [0, 0]}),
+        var node   = iD.entityNode({loc: [0, 0]}),
             way1   = iD.osmWay({nodes: [node.id]}),
             way2   = iD.osmWay({nodes: [node.id]}),
             delta  = [2, 3],
@@ -62,7 +62,7 @@ describe('iD.actionMove', function() {
     });
 
     it('moves leaf nodes of a relation', function() {
-        var node     = iD.osmNode({loc: [0, 0]}),
+        var node     = iD.entityNode({loc: [0, 0]}),
             way      = iD.osmWay({nodes: [node.id]}),
             relation = iD.osmRelation({members: [{id: way.id}]}),
             delta    = [2, 3],

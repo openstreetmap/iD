@@ -4,9 +4,9 @@ describe('iD.actionRestrictTurn', function() {
         // u === * --- w
         //
         var graph = iD.coreGraph([
-            iD.osmNode({id: 'u'}),
-            iD.osmNode({id: '*'}),
-            iD.osmNode({id: 'w'}),
+            iD.entityNode({id: 'u'}),
+            iD.entityNode({id: '*'}),
+            iD.entityNode({id: 'w'}),
             iD.osmWay({id: '=', nodes: ['u', '*']}),
             iD.osmWay({id: '-', nodes: ['*', 'w']})
         ]);
@@ -44,10 +44,10 @@ describe('iD.actionRestrictTurn', function() {
         // w --- v2
         //
         var graph = iD.coreGraph([
-            iD.osmNode({id: 'u'}),
-            iD.osmNode({id: 'v1'}),
-            iD.osmNode({id: 'v2'}),
-            iD.osmNode({id: 'w'}),
+            iD.entityNode({id: 'u'}),
+            iD.entityNode({id: 'v1'}),
+            iD.entityNode({id: 'v2'}),
+            iD.entityNode({id: 'w'}),
             iD.osmWay({id: '=', nodes: ['u', 'v1']}),
             iD.osmWay({id: '|', nodes: ['v1', 'v2']}),
             iD.osmWay({id: '-', nodes: ['v2', 'w']})

@@ -4,9 +4,9 @@ describe('iD.actionUnrestrictTurn', function() {
         // u === * --- w
         //
         var graph = iD.coreGraph([
-            iD.osmNode({ id: 'u' }),
-            iD.osmNode({ id: '*' }),
-            iD.osmNode({ id: 'w' }),
+            iD.entityNode({ id: 'u' }),
+            iD.entityNode({ id: '*' }),
+            iD.entityNode({ id: 'w' }),
             iD.osmWay({ id: '=', nodes: ['u', '*'], tags: { highway: 'residential' } }),
             iD.osmWay({ id: '-', nodes: ['*', 'w'], tags: { highway: 'residential' } }),
             iD.osmRelation({ id: 'r', tags: { type: 'restriction' }, members: [

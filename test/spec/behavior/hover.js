@@ -32,8 +32,8 @@ describe('iD.behaviorHover', function() {
 
     describe('mouseover', function () {
         it('adds the .hover class to all elements to which the same datum is bound', function () {
-            var a = iD.osmNode({id: 'a'});
-            var b = iD.osmNode({id: 'b'});
+            var a = iD.entityNode({id: 'a'});
+            var b = iD.entityNode({id: 'b'});
             _graph = iD.coreGraph([a, b]);
 
             _container.selectAll('span')
@@ -49,7 +49,7 @@ describe('iD.behaviorHover', function() {
 
         it('adds the .hover class to all members of a relation', function() {
             var a = iD.osmRelation({id: 'a', members: [{id: 'b'}]});
-            var b = iD.osmNode({id: 'b'});
+            var b = iD.entityNode({id: 'b'});
             _graph = iD.coreGraph([a, b]);
 
             _container.selectAll('span')

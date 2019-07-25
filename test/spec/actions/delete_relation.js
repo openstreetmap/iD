@@ -16,7 +16,7 @@ describe('iD.actionDeleteRelation', function () {
     });
 
     it('deletes member nodes not referenced by another parent', function() {
-        var node     = iD.osmNode(),
+        var node     = iD.entityNode(),
             relation = iD.osmRelation({members: [{id: node.id}]}),
             action   = iD.actionDeleteRelation(relation.id),
             graph    = action(iD.coreGraph([node, relation]));
@@ -24,7 +24,7 @@ describe('iD.actionDeleteRelation', function () {
     });
 
     it('does not delete member nodes referenced by another parent', function() {
-        var node     = iD.osmNode(),
+        var node     = iD.entityNode(),
             way      = iD.osmWay({nodes: [node.id]}),
             relation = iD.osmRelation({members: [{id: node.id}]}),
             action   = iD.actionDeleteRelation(relation.id),
@@ -33,7 +33,7 @@ describe('iD.actionDeleteRelation', function () {
     });
 
     it('does not delete member nodes with interesting tags', function() {
-        var node     = iD.osmNode({tags: {highway: 'traffic_signals'}}),
+        var node     = iD.entityNode({tags: {highway: 'traffic_signals'}}),
             relation = iD.osmRelation({members: [{id: node.id}]}),
             action   = iD.actionDeleteRelation(relation.id),
             graph    = action(iD.coreGraph([node, relation]));
@@ -58,7 +58,7 @@ describe('iD.actionDeleteRelation', function () {
     });
 
     it('does not delete member ways with interesting tags', function() {
-        var way      = iD.osmNode({tags: {highway: 'residential'}}),
+        var way      = iD.entityNode({tags: {highway: 'residential'}}),
             relation = iD.osmRelation({members: [{id: way.id}]}),
             action   = iD.actionDeleteRelation(relation.id),
             graph    = action(iD.coreGraph([way, relation]));
@@ -66,7 +66,7 @@ describe('iD.actionDeleteRelation', function () {
     });
 
     it('deletes nodes of deleted member ways', function() {
-        var node     = iD.osmNode(),
+        var node     = iD.entityNode(),
             way      = iD.osmWay({nodes: [node.id]}),
             relation = iD.osmRelation({members: [{id: way.id}]}),
             action   = iD.actionDeleteRelation(relation.id),

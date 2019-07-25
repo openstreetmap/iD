@@ -3,10 +3,10 @@ describe('iD.actionReflect', function() {
 
     it('does not create or remove nodes', function () {
         var graph = iD.coreGraph([
-                iD.osmNode({id: 'a', loc: [0, 0]}),
-                iD.osmNode({id: 'b', loc: [4, 0]}),
-                iD.osmNode({id: 'c', loc: [4, 2]}),
-                iD.osmNode({id: 'd', loc: [1, 2]}),
+                iD.entityNode({id: 'a', loc: [0, 0]}),
+                iD.entityNode({id: 'b', loc: [4, 0]}),
+                iD.entityNode({id: 'c', loc: [4, 2]}),
+                iD.entityNode({id: 'd', loc: [1, 2]}),
                 iD.osmWay({id: '-', nodes: ['a', 'b', 'c', 'd', 'a']})
             ]);
         graph = iD.actionReflect(['-'], projection)(graph);
@@ -21,10 +21,10 @@ describe('iD.actionReflect', function() {
         //  a ---- b        d -- c
         //
         var graph = iD.coreGraph([
-                iD.osmNode({id: 'a', loc: [0, 0]}),
-                iD.osmNode({id: 'b', loc: [4, 0]}),
-                iD.osmNode({id: 'c', loc: [4, 2]}),
-                iD.osmNode({id: 'd', loc: [1, 2]}),
+                iD.entityNode({id: 'a', loc: [0, 0]}),
+                iD.entityNode({id: 'b', loc: [4, 0]}),
+                iD.entityNode({id: 'c', loc: [4, 2]}),
+                iD.entityNode({id: 'd', loc: [1, 2]}),
                 iD.osmWay({id: '-', nodes: ['a', 'b', 'c', 'd', 'a']})
             ]);
         graph = iD.actionReflect(['-'], projection)(graph);
@@ -46,10 +46,10 @@ describe('iD.actionReflect', function() {
         //  a ---- b      b ---- a
         //
         var graph = iD.coreGraph([
-                iD.osmNode({id: 'a', loc: [0, 0]}),
-                iD.osmNode({id: 'b', loc: [4, 0]}),
-                iD.osmNode({id: 'c', loc: [4, 2]}),
-                iD.osmNode({id: 'd', loc: [1, 2]}),
+                iD.entityNode({id: 'a', loc: [0, 0]}),
+                iD.entityNode({id: 'b', loc: [4, 0]}),
+                iD.entityNode({id: 'c', loc: [4, 2]}),
+                iD.entityNode({id: 'd', loc: [1, 2]}),
                 iD.osmWay({id: '-', nodes: ['a', 'b', 'c', 'd', 'a']})
             ]);
         graph = iD.actionReflect(['-'], projection).useLongAxis(false)(graph);
@@ -71,10 +71,10 @@ describe('iD.actionReflect', function() {
 
         it('reflect long at t = 0', function() {
             var graph = iD.coreGraph([
-                    iD.osmNode({id: 'a', loc: [0, 0]}),
-                    iD.osmNode({id: 'b', loc: [4, 0]}),
-                    iD.osmNode({id: 'c', loc: [4, 2]}),
-                    iD.osmNode({id: 'd', loc: [1, 2]}),
+                    iD.entityNode({id: 'a', loc: [0, 0]}),
+                    iD.entityNode({id: 'b', loc: [4, 0]}),
+                    iD.entityNode({id: 'c', loc: [4, 2]}),
+                    iD.entityNode({id: 'd', loc: [1, 2]}),
                     iD.osmWay({id: '-', nodes: ['a', 'b', 'c', 'd', 'a']})
                 ]);
             graph = iD.actionReflect(['-'], projection)(graph, 0);
@@ -90,10 +90,10 @@ describe('iD.actionReflect', function() {
 
         it('reflect long at t = 0.5', function() {
             var graph = iD.coreGraph([
-                    iD.osmNode({id: 'a', loc: [0, 0]}),
-                    iD.osmNode({id: 'b', loc: [4, 0]}),
-                    iD.osmNode({id: 'c', loc: [4, 2]}),
-                    iD.osmNode({id: 'd', loc: [1, 2]}),
+                    iD.entityNode({id: 'a', loc: [0, 0]}),
+                    iD.entityNode({id: 'b', loc: [4, 0]}),
+                    iD.entityNode({id: 'c', loc: [4, 2]}),
+                    iD.entityNode({id: 'd', loc: [1, 2]}),
                     iD.osmWay({id: '-', nodes: ['a', 'b', 'c', 'd', 'a']})
                 ]);
             graph = iD.actionReflect(['-'], projection)(graph, 0.5);
@@ -109,10 +109,10 @@ describe('iD.actionReflect', function() {
 
         it('reflect long at t = 1', function() {
             var graph = iD.coreGraph([
-                    iD.osmNode({id: 'a', loc: [0, 0]}),
-                    iD.osmNode({id: 'b', loc: [4, 0]}),
-                    iD.osmNode({id: 'c', loc: [4, 2]}),
-                    iD.osmNode({id: 'd', loc: [1, 2]}),
+                    iD.entityNode({id: 'a', loc: [0, 0]}),
+                    iD.entityNode({id: 'b', loc: [4, 0]}),
+                    iD.entityNode({id: 'c', loc: [4, 2]}),
+                    iD.entityNode({id: 'd', loc: [1, 2]}),
                     iD.osmWay({id: '-', nodes: ['a', 'b', 'c', 'd', 'a']})
                 ]);
             graph = iD.actionReflect(['-'], projection)(graph, 1);
@@ -128,10 +128,10 @@ describe('iD.actionReflect', function() {
 
         it('reflect short at t = 0', function() {
             var graph = iD.coreGraph([
-                    iD.osmNode({id: 'a', loc: [0, 0]}),
-                    iD.osmNode({id: 'b', loc: [4, 0]}),
-                    iD.osmNode({id: 'c', loc: [4, 2]}),
-                    iD.osmNode({id: 'd', loc: [1, 2]}),
+                    iD.entityNode({id: 'a', loc: [0, 0]}),
+                    iD.entityNode({id: 'b', loc: [4, 0]}),
+                    iD.entityNode({id: 'c', loc: [4, 2]}),
+                    iD.entityNode({id: 'd', loc: [1, 2]}),
                     iD.osmWay({id: '-', nodes: ['a', 'b', 'c', 'd', 'a']})
                 ]);
             graph = iD.actionReflect(['-'], projection).useLongAxis(false)(graph, 0);
@@ -147,10 +147,10 @@ describe('iD.actionReflect', function() {
 
         it('reflect short at t = 0.5', function() {
             var graph = iD.coreGraph([
-                    iD.osmNode({id: 'a', loc: [0, 0]}),
-                    iD.osmNode({id: 'b', loc: [4, 0]}),
-                    iD.osmNode({id: 'c', loc: [4, 2]}),
-                    iD.osmNode({id: 'd', loc: [1, 2]}),
+                    iD.entityNode({id: 'a', loc: [0, 0]}),
+                    iD.entityNode({id: 'b', loc: [4, 0]}),
+                    iD.entityNode({id: 'c', loc: [4, 2]}),
+                    iD.entityNode({id: 'd', loc: [1, 2]}),
                     iD.osmWay({id: '-', nodes: ['a', 'b', 'c', 'd', 'a']})
                 ]);
             graph = iD.actionReflect(['-'], projection).useLongAxis(false)(graph, 0.5);
@@ -166,10 +166,10 @@ describe('iD.actionReflect', function() {
 
         it('reflect short at t = 1', function() {
             var graph = iD.coreGraph([
-                    iD.osmNode({id: 'a', loc: [0, 0]}),
-                    iD.osmNode({id: 'b', loc: [4, 0]}),
-                    iD.osmNode({id: 'c', loc: [4, 2]}),
-                    iD.osmNode({id: 'd', loc: [1, 2]}),
+                    iD.entityNode({id: 'a', loc: [0, 0]}),
+                    iD.entityNode({id: 'b', loc: [4, 0]}),
+                    iD.entityNode({id: 'c', loc: [4, 2]}),
+                    iD.entityNode({id: 'd', loc: [1, 2]}),
                     iD.osmWay({id: '-', nodes: ['a', 'b', 'c', 'd', 'a']})
                 ]);
             graph = iD.actionReflect(['-'], projection).useLongAxis(false)(graph, 1);

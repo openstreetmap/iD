@@ -26,12 +26,12 @@ describe('iD.operationExtract', function () {
             // e - node with tags, no parent way
             // f - node with no tags, no parent way
             graph = iD.coreGraph([
-                iD.osmNode(createFakeNode('a', true)),
-                iD.osmNode(createFakeNode('b', true)),
-                iD.osmNode(createFakeNode('c', false)),
-                iD.osmNode(createFakeNode('d', false)),
-                iD.osmNode(createFakeNode('e', true)),
-                iD.osmNode(createFakeNode('f', false)),
+                iD.entityNode(createFakeNode('a', true)),
+                iD.entityNode(createFakeNode('b', true)),
+                iD.entityNode(createFakeNode('c', false)),
+                iD.entityNode(createFakeNode('d', false)),
+                iD.entityNode(createFakeNode('e', true)),
+                iD.entityNode(createFakeNode('f', false)),
                 iD.osmWay({ id: 'x', nodes: ['a', 'b', 'c', 'd'] }),
                 iD.osmWay({ id: 'y', nodes: ['b', 'd'] })
             ]);
@@ -92,9 +92,9 @@ describe('iD.operationExtract', function () {
     describe('disabled', function () {
         it('returns enabled for non-related node', function () {
             graph = iD.coreGraph([
-                iD.osmNode(createFakeNode('a', false)),
-                iD.osmNode(createFakeNode('b', true)),
-                iD.osmNode(createFakeNode('c', false)),
+                iD.entityNode(createFakeNode('a', false)),
+                iD.entityNode(createFakeNode('b', true)),
+                iD.entityNode(createFakeNode('c', false)),
                 iD.osmWay({ id: 'x', nodes: ['a', 'b', 'c'] })
             ]);
             var result = iD.operationExtract(['b'], fakeContext).disabled();
@@ -103,9 +103,9 @@ describe('iD.operationExtract', function () {
 
         it('returns enabled for non-restriction related node', function () {
             graph = iD.coreGraph([
-                iD.osmNode(createFakeNode('a', false)),
-                iD.osmNode(createFakeNode('b', true)),
-                iD.osmNode(createFakeNode('c', false)),
+                iD.entityNode(createFakeNode('a', false)),
+                iD.entityNode(createFakeNode('b', true)),
+                iD.entityNode(createFakeNode('c', false)),
                 iD.osmWay({ id: 'x', nodes: ['a', 'b', 'c'] }),
                 iD.osmRelation({ id: 'r', members: [{ id: 'b', role: 'label' }] })
             ]);
@@ -117,13 +117,13 @@ describe('iD.operationExtract', function () {
             // https://wiki.openstreetmap.org/wiki/Relation:restriction indicates that
             // from & to roles are only appropriate for Ways
             graph = iD.coreGraph([
-                iD.osmNode(createFakeNode('a', false)),
-                iD.osmNode(createFakeNode('b', false)),
-                iD.osmNode(createFakeNode('c', false)),
-                iD.osmNode(createFakeNode('d', true)),
-                iD.osmNode(createFakeNode('e', false)),
-                iD.osmNode(createFakeNode('f', false)),
-                iD.osmNode(createFakeNode('g', false)),
+                iD.entityNode(createFakeNode('a', false)),
+                iD.entityNode(createFakeNode('b', false)),
+                iD.entityNode(createFakeNode('c', false)),
+                iD.entityNode(createFakeNode('d', true)),
+                iD.entityNode(createFakeNode('e', false)),
+                iD.entityNode(createFakeNode('f', false)),
+                iD.entityNode(createFakeNode('g', false)),
                 iD.osmWay({ id: 'x', nodes: ['a', 'b', 'c'] }),
                 iD.osmWay({ id: 'y', nodes: ['e', 'f', 'g'] }),
                 iD.osmRelation({id: 'r', tags: {type: 'restriction', restriction: 'no_right_turn'},
@@ -142,13 +142,13 @@ describe('iD.operationExtract', function () {
             // https://wiki.openstreetmap.org/wiki/Relation:restriction indicates that
             // from & to roles are only appropriate for Ways
             graph = iD.coreGraph([
-                iD.osmNode(createFakeNode('a', false)),
-                iD.osmNode(createFakeNode('b', false)),
-                iD.osmNode(createFakeNode('c', false)),
-                iD.osmNode(createFakeNode('d', true)),
-                iD.osmNode(createFakeNode('e', false)),
-                iD.osmNode(createFakeNode('f', false)),
-                iD.osmNode(createFakeNode('g', false)),
+                iD.entityNode(createFakeNode('a', false)),
+                iD.entityNode(createFakeNode('b', false)),
+                iD.entityNode(createFakeNode('c', false)),
+                iD.entityNode(createFakeNode('d', true)),
+                iD.entityNode(createFakeNode('e', false)),
+                iD.entityNode(createFakeNode('f', false)),
+                iD.entityNode(createFakeNode('g', false)),
                 iD.osmWay({ id: 'x', nodes: ['a', 'b'] }),
                 iD.osmWay({ id: 'y', nodes: ['e', 'f', 'g'] }),
                 iD.osmRelation({id: 'r', tags: {type: 'restriction', restriction: 'no_right_turn'},

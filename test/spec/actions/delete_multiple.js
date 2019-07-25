@@ -1,6 +1,6 @@
 describe('iD.actionDeleteMultiple', function () {
     it('deletes multiple entities of heterogeneous types', function () {
-        var n      = iD.osmNode(),
+        var n      = iD.entityNode(),
             w      = iD.osmWay(),
             r      = iD.osmRelation(),
             action = iD.actionDeleteMultiple([n.id, w.id, r.id]),
@@ -11,7 +11,7 @@ describe('iD.actionDeleteMultiple', function () {
     });
 
     it('deletes a way and one of its nodes', function () {
-        var n      = iD.osmNode(),
+        var n      = iD.entityNode(),
             w      = iD.osmWay({nodes: [n.id]}),
             action = iD.actionDeleteMultiple([w.id, n.id]),
             graph  = action(iD.coreGraph([n, w]));
@@ -22,7 +22,7 @@ describe('iD.actionDeleteMultiple', function () {
     // This was moved to operationDelete.  We should test operations and move this test there.
     // describe('#disabled', function () {
     //     it('returns the result of the first action that is disabled', function () {
-    //         var node     = iD.osmNode(),
+    //         var node     = iD.entityNode(),
     //             relation = iD.osmRelation({members: [{id: 'w'}]}),
     //             graph    = iD.coreGraph([node, relation]),
     //             action   = iD.actionDeleteMultiple([node.id, relation.id]);

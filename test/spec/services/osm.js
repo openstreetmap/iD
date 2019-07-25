@@ -84,7 +84,7 @@ describe('iD.serviceOsm', function () {
 
     describe('#entityURL', function() {
         it('provides an entity url for a node', function() {
-            var e = iD.osmNode({id: 'n1'});
+            var e = iD.entityNode({id: 'n1'});
             expect(connection.entityURL(e)).to.eql('http://www.openstreetmap.org/node/1');
         });
         it('provides an entity url for a way', function() {
@@ -99,7 +99,7 @@ describe('iD.serviceOsm', function () {
 
     describe('#historyURL', function() {
         it('provides a history url for a node', function() {
-            var e = iD.osmNode({id: 'n1'});
+            var e = iD.entityNode({id: 'n1'});
             expect(connection.historyURL(e)).to.eql('http://www.openstreetmap.org/node/1/history');
         });
         it('provides a history url for a way', function() {
@@ -317,7 +317,7 @@ describe('iD.serviceOsm', function () {
             var id = 'n1';
             connection.loadEntity(id, function(err, result) {
                 var entity = result.data.find(function(e) { return e.id === id; });
-                expect(entity).to.be.an.instanceOf(iD.osmNode);
+                expect(entity).to.be.an.instanceOf(iD.entityNode);
                 done();
             });
 
@@ -343,10 +343,10 @@ describe('iD.serviceOsm', function () {
             var id = 'n1';
             connection.loadEntity(id, function(err1, result1) {
                 var entity1 = result1.data.find(function(e1) { return e1.id === id; });
-                expect(entity1).to.be.an.instanceOf(iD.osmNode);
+                expect(entity1).to.be.an.instanceOf(iD.entityNode);
                 connection.loadEntity(id, function(err2, result2) {
                     var entity2 = result2.data.find(function(e2) { return e2.id === id; });
-                    expect(entity2).to.be.an.instanceOf(iD.osmNode);
+                    expect(entity2).to.be.an.instanceOf(iD.entityNode);
                     done();
                 });
                 serverFetch.respond();
@@ -373,7 +373,7 @@ describe('iD.serviceOsm', function () {
             var id = 'n1';
             connection.loadEntityVersion(id, 1, function(err, result) {
                 var entity = result.data.find(function(e) { return e.id === id; });
-                expect(entity).to.be.an.instanceOf(iD.osmNode);
+                expect(entity).to.be.an.instanceOf(iD.entityNode);
                 done();
             });
 
@@ -399,10 +399,10 @@ describe('iD.serviceOsm', function () {
             var id = 'n1';
             connection.loadEntityVersion(id, 1, function(err1, result1) {
                 var entity1 = result1.data.find(function(e1) { return e1.id === id; });
-                expect(entity1).to.be.an.instanceOf(iD.osmNode);
+                expect(entity1).to.be.an.instanceOf(iD.entityNode);
                 connection.loadEntityVersion(id, 1, function(err2, result2) {
                     var entity2 = result2.data.find(function(e2) { return e2.id === id; });
-                    expect(entity2).to.be.an.instanceOf(iD.osmNode);
+                    expect(entity2).to.be.an.instanceOf(iD.entityNode);
                     done();
                 });
                 serverFetch.respond();

@@ -6,8 +6,8 @@ describe('iD.validations.disconnected_way', function () {
     });
 
     function createWay(tags) {
-        var n1 = iD.osmNode({id: 'n-1', loc: [4,4]});
-        var n2 = iD.osmNode({id: 'n-2', loc: [4,5]});
+        var n1 = iD.entityNode({id: 'n-1', loc: [4,4]});
+        var n2 = iD.entityNode({id: 'n-2', loc: [4,5]});
         var w = iD.osmWay({id: 'w-1', nodes: ['n-1', 'n-2'], tags: tags});
 
         context.perform(
@@ -18,9 +18,9 @@ describe('iD.validations.disconnected_way', function () {
     }
 
     function createConnectingWays(tags1, tags2) {
-        var n1 = iD.osmNode({id: 'n-1', loc: [4,4]});
-        var n2 = iD.osmNode({id: 'n-2', loc: [4,5]});
-        var n3 = iD.osmNode({id: 'n-3', loc: [5,5]});
+        var n1 = iD.entityNode({id: 'n-1', loc: [4,4]});
+        var n2 = iD.entityNode({id: 'n-2', loc: [4,5]});
+        var n3 = iD.entityNode({id: 'n-3', loc: [5,5]});
         var w = iD.osmWay({id: 'w-1', nodes: ['n-1', 'n-2'], tags: tags1});
         var w2 = iD.osmWay({id: 'w-2', nodes: ['n-1', 'n-3'], tags: tags2});
 
@@ -73,9 +73,9 @@ describe('iD.validations.disconnected_way', function () {
 
     it('ignores highway with connected entrance vertex', function() {
 
-        var n1 = iD.osmNode({id: 'n-1', loc: [4,4], tags: {'entrance': 'yes'}});
-        var n2 = iD.osmNode({id: 'n-2', loc: [4,5]});
-        var n3 = iD.osmNode({id: 'n-3', loc: [5,5]});
+        var n1 = iD.entityNode({id: 'n-1', loc: [4,4], tags: {'entrance': 'yes'}});
+        var n2 = iD.entityNode({id: 'n-2', loc: [4,5]});
+        var n3 = iD.entityNode({id: 'n-3', loc: [5,5]});
         var w = iD.osmWay({id: 'w-1', nodes: ['n-1', 'n-2'], tags: {'highway': 'unclassified'}});
         var w2 = iD.osmWay({id: 'w-2', nodes: ['n-1', 'n-3']});
 

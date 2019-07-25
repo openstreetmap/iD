@@ -18,8 +18,8 @@ describe('iD.svgLines', function () {
 
 
     it('adds way and line classes', function () {
-        var a = iD.osmNode({loc: [0, 0]});
-        var b = iD.osmNode({loc: [1, 1]});
+        var a = iD.entityNode({loc: [0, 0]});
+        var b = iD.entityNode({loc: [1, 1]});
         var line = iD.osmWay({nodes: [a.id, b.id]});
         var graph = iD.coreGraph([a, b, line]);
 
@@ -30,8 +30,8 @@ describe('iD.svgLines', function () {
     });
 
     it('adds tag classes', function () {
-        var a = iD.osmNode({loc: [0, 0]});
-        var b = iD.osmNode({loc: [1, 1]});
+        var a = iD.entityNode({loc: [0, 0]});
+        var b = iD.entityNode({loc: [1, 1]});
         var line = iD.osmWay({nodes: [a.id, b.id], tags: {highway: 'residential'}});
         var graph = iD.coreGraph([a, b, line]);
 
@@ -42,8 +42,8 @@ describe('iD.svgLines', function () {
     });
 
     it('adds stroke classes for the tags of the parent relation of multipolygon members', function() {
-        var a = iD.osmNode({loc: [0, 0]});
-        var b = iD.osmNode({loc: [1, 1]});
+        var a = iD.entityNode({loc: [0, 0]});
+        var b = iD.entityNode({loc: [1, 1]});
         var line = iD.osmWay({nodes: [a.id, b.id]});
         var relation = iD.osmRelation({members: [{id: line.id}], tags: {type: 'multipolygon', natural: 'wood'}});
         var graph = iD.coreGraph([a, b, line, relation]);
@@ -54,9 +54,9 @@ describe('iD.svgLines', function () {
     });
 
     it('renders stroke for outer way of multipolygon with tags on the outer way', function() {
-        var a = iD.osmNode({loc: [1, 1]});
-        var b = iD.osmNode({loc: [2, 2]});
-        var c = iD.osmNode({loc: [3, 3]});
+        var a = iD.entityNode({loc: [1, 1]});
+        var b = iD.entityNode({loc: [2, 2]});
+        var c = iD.entityNode({loc: [3, 3]});
         var w = iD.osmWay({id: 'w-1', tags: {natural: 'wood'}, nodes: [a.id, b.id, c.id, a.id]});
         var r = iD.osmRelation({members: [{id: w.id}], tags: {type: 'multipolygon'}});
         var graph = iD.coreGraph([a, b, c, w, r]);
@@ -68,9 +68,9 @@ describe('iD.svgLines', function () {
     });
 
     it('adds stroke classes for the tags of the outer way of multipolygon with tags on the outer way', function() {
-        var a = iD.osmNode({loc: [1, 1]});
-        var b = iD.osmNode({loc: [2, 2]});
-        var c = iD.osmNode({loc: [3, 3]});
+        var a = iD.entityNode({loc: [1, 1]});
+        var b = iD.entityNode({loc: [2, 2]});
+        var c = iD.entityNode({loc: [3, 3]});
         var o = iD.osmWay({id: 'w-1', nodes: [a.id, b.id, c.id, a.id], tags: {natural: 'wood'}});
         var i = iD.osmWay({id: 'w-2', nodes: [a.id, b.id, c.id, a.id]});
         var r = iD.osmRelation({members: [{id: o.id, role: 'outer'}, {id: i.id, role: 'inner'}], tags: {type: 'multipolygon'}});
@@ -86,10 +86,10 @@ describe('iD.svgLines', function () {
 
     describe('z-indexing', function() {
         var graph = iD.coreGraph([
-            iD.osmNode({id: 'a', loc: [0, 0]}),
-            iD.osmNode({id: 'b', loc: [1, 1]}),
-            iD.osmNode({id: 'c', loc: [0, 0]}),
-            iD.osmNode({id: 'd', loc: [1, 1]}),
+            iD.entityNode({id: 'a', loc: [0, 0]}),
+            iD.entityNode({id: 'b', loc: [1, 1]}),
+            iD.entityNode({id: 'c', loc: [0, 0]}),
+            iD.entityNode({id: 'd', loc: [1, 1]}),
             iD.osmWay({id: 'lo', tags: {highway: 'residential', layer: '0'}, nodes: ['a', 'b']}),
             iD.osmWay({id: 'hi', tags: {highway: 'residential', layer: '1'}, nodes: ['c', 'd']})
         ]);
@@ -134,9 +134,9 @@ describe('iD.svgLines', function () {
             // use 1e-2 to make sure segments are long enough to get
             // markers, but not so long that they get split and have
             // multiple marker segments.
-            var a = iD.osmNode({id: 'a', loc: [0, 0]});
-            var b = iD.osmNode({id: 'b', loc: [1e-2, 0]});
-            var c = iD.osmNode({id: 'c', loc: [0, 1e-2]});
+            var a = iD.entityNode({id: 'a', loc: [0, 0]});
+            var b = iD.entityNode({id: 'b', loc: [1e-2, 0]});
+            var c = iD.entityNode({id: 'c', loc: [0, 1e-2]});
 
             var i_o = iD.osmWay({id: 'implied-oneway', tags: {waterway: 'stream'}, nodes: [a.id, b.id]});
             var e_o = iD.osmWay({id: 'explicit-oneway', tags: {highway: 'residential', oneway: 'yes'}, nodes: [a.id, c.id]});
@@ -155,8 +155,8 @@ describe('iD.svgLines', function () {
         });
 
         it('has two marker layers for alternating oneway ways', function() {
-            var a = iD.osmNode({id: 'a', loc: [0, 0]});
-            var b = iD.osmNode({id: 'b', loc: [1e-2, 0]});
+            var a = iD.entityNode({id: 'a', loc: [0, 0]});
+            var b = iD.entityNode({id: 'b', loc: [1e-2, 0]});
 
             var e_a = iD.osmWay({id: 'explicit-alternating', tags: {highway: 'residential', oneway: 'alternating'}, nodes: [a.id, b.id]});
 
@@ -171,9 +171,9 @@ describe('iD.svgLines', function () {
         });
 
         it('has no marker layer for oneway=no ways', function() {
-            var a = iD.osmNode({id: 'a', loc: [0, 0]});
-            var b = iD.osmNode({id: 'b', loc: [1e-2, 0]});
-            var c = iD.osmNode({id: 'c', loc: [0, 1e-2]});
+            var a = iD.entityNode({id: 'a', loc: [0, 0]});
+            var b = iD.entityNode({id: 'b', loc: [1e-2, 0]});
+            var c = iD.entityNode({id: 'c', loc: [0, 1e-2]});
 
             var e_no = iD.osmWay({id: 'explicit-no-oneway', tags: {highway: 'residential', oneway: 'no'}, nodes: [a.id, b.id]});
             var i_no = iD.osmWay({id: 'implied-no-oneway', tags: {highway: 'residential' }, nodes: [a.id, c.id]});
@@ -188,10 +188,10 @@ describe('iD.svgLines', function () {
 
     describe('sided-markers', function() {
         it('has marker layer for sided way', function() {
-            var a = iD.osmNode({id: 'a', loc: [0, 0]});
-            var b = iD.osmNode({id: 'b', loc: [1e-2, 0]});
-            var c = iD.osmNode({id: 'c', loc: [0, 1e-2]});
-            var d = iD.osmNode({id: 'd', loc: [1e-2, 1e-2]});
+            var a = iD.entityNode({id: 'a', loc: [0, 0]});
+            var b = iD.entityNode({id: 'b', loc: [1e-2, 0]});
+            var c = iD.entityNode({id: 'c', loc: [0, 1e-2]});
+            var d = iD.entityNode({id: 'd', loc: [1e-2, 1e-2]});
 
             var i_n = iD.osmWay({id: 'implied-natural', tags: {natural: 'cliff'}, nodes: [a.id, b.id]});
             var i_nc = iD.osmWay({id: 'implied-coastline', tags: {natural: 'coastline'}, nodes: [a.id, c.id]});
@@ -210,8 +210,8 @@ describe('iD.svgLines', function () {
         });
 
         it('has no marker layer for two_sided way', function() {
-            var a = iD.osmNode({id: 'a', loc: [0, 0]});
-            var b = iD.osmNode({id: 'b', loc: [1e-2, 0]});
+            var a = iD.entityNode({id: 'a', loc: [0, 0]});
+            var b = iD.entityNode({id: 'b', loc: [1e-2, 0]});
 
             var e_ts = iD.osmWay({id: 'explicit-two-sided', tags: {barrier: 'city_wall', two_sided: 'yes'}, nodes: [a.id, b.id]});
 

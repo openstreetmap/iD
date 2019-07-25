@@ -2,8 +2,8 @@ describe('iD.util', function() {
 
     describe('utilGetAllNodes', function() {
         it('gets all descendant nodes of a way', function() {
-            var a = iD.osmNode({ id: 'a' });
-            var b = iD.osmNode({ id: 'b' });
+            var a = iD.entityNode({ id: 'a' });
+            var b = iD.entityNode({ id: 'b' });
             var w = iD.osmWay({ id: 'w', nodes: ['a','b','a'] });
             var graph = iD.coreGraph([a, b, w]);
             var result = iD.utilGetAllNodes(['w'], graph);
@@ -13,9 +13,9 @@ describe('iD.util', function() {
         });
 
         it('gets all descendant nodes of a relation', function() {
-            var a = iD.osmNode({ id: 'a' });
-            var b = iD.osmNode({ id: 'b' });
-            var c = iD.osmNode({ id: 'c' });
+            var a = iD.entityNode({ id: 'a' });
+            var b = iD.entityNode({ id: 'b' });
+            var c = iD.entityNode({ id: 'c' });
             var w = iD.osmWay({ id: 'w', nodes: ['a','b','a'] });
             var r = iD.osmRelation({ id: 'r', members: [{id: 'w'}, {id: 'c'}] });
             var graph = iD.coreGraph([a, b, c, w, r]);
@@ -26,11 +26,11 @@ describe('iD.util', function() {
         });
 
         it('gets all descendant nodes of multiple ids', function() {
-            var a = iD.osmNode({ id: 'a' });
-            var b = iD.osmNode({ id: 'b' });
-            var c = iD.osmNode({ id: 'c' });
-            var d = iD.osmNode({ id: 'd' });
-            var e = iD.osmNode({ id: 'e' });
+            var a = iD.entityNode({ id: 'a' });
+            var b = iD.entityNode({ id: 'b' });
+            var c = iD.entityNode({ id: 'c' });
+            var d = iD.entityNode({ id: 'd' });
+            var e = iD.entityNode({ id: 'e' });
             var w1 = iD.osmWay({ id: 'w1', nodes: ['a','b','a'] });
             var w2 = iD.osmWay({ id: 'w2', nodes: ['c','b','a','c'] });
             var r = iD.osmRelation({ id: 'r', members: [{id: 'w1'}, {id: 'd'}] });
@@ -42,7 +42,7 @@ describe('iD.util', function() {
         });
 
         it('handles recursive relations', function() {
-            var a = iD.osmNode({ id: 'a' });
+            var a = iD.entityNode({ id: 'a' });
             var r1 = iD.osmRelation({ id: 'r1', members: [{id: 'r2'}] });
             var r2 = iD.osmRelation({ id: 'r2', members: [{id: 'r1'}, {id: 'a'}] });
             var graph = iD.coreGraph([a, r1, r2]);

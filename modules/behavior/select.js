@@ -6,7 +6,8 @@ import { modeSelect } from '../modes/select';
 import { modeSelectData } from '../modes/select_data';
 import { modeSelectNote } from '../modes/select_note';
 import { modeSelectError } from '../modes/select_error';
-import { osmEntity, osmNote, qaError } from '../osm';
+import { entityEntity } from '../entities/entity';
+import { osmNote, qaError } from '../osm';
 
 
 export function behaviorSelect(context) {
@@ -131,7 +132,7 @@ export function behaviorSelect(context) {
             datum = datum.parents[0];
         }
 
-        if (datum instanceof osmEntity) {    // clicked an entity..
+        if (datum instanceof entityEntity) {    // clicked an entity..
             var selectedIDs = context.selectedIDs();
 
             if (!isMultiselect) {

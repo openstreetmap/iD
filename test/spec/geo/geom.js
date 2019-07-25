@@ -57,7 +57,7 @@ describe('iD.geo - geometry', function() {
         });
 
         it('returns null for a degenerate way (single node)', function() {
-            expect(iD.geoChooseEdge([iD.osmNode({loc: [0, 0]})], [0, 0], projection)).to.be.null;
+            expect(iD.geoChooseEdge([iD.entityNode({loc: [0, 0]})], [0, 0], projection)).to.be.null;
         });
 
         it('calculates the orthogonal projection of a point onto a segment', function() {
@@ -69,7 +69,7 @@ describe('iD.geo - geometry', function() {
             var a = [0, 0];
             var b = [5, 0];
             var c = [2, 1];
-            var nodes = [ iD.osmNode({loc: a}), iD.osmNode({loc: b}) ];
+            var nodes = [ iD.entityNode({loc: a}), iD.entityNode({loc: b}) ];
             var choice = iD.geoChooseEdge(nodes, c, projection);
             expect(choice.index).to.eql(1);
             expect(choice.distance).to.eql(1);
@@ -80,7 +80,7 @@ describe('iD.geo - geometry', function() {
             var a = [0, 0];
             var b = [5, 0];
             var c = [-3, 4];
-            var nodes = [ iD.osmNode({loc: a}), iD.osmNode({loc: b}) ];
+            var nodes = [ iD.entityNode({loc: a}), iD.entityNode({loc: b}) ];
             var choice = iD.geoChooseEdge(nodes, c, projection);
             expect(choice.index).to.eql(1);
             expect(choice.distance).to.eql(5);
@@ -91,7 +91,7 @@ describe('iD.geo - geometry', function() {
             var a = [0, 0];
             var b = [5, 0];
             var c = [8, 4];
-            var nodes = [ iD.osmNode({loc: a}), iD.osmNode({loc: b}) ];
+            var nodes = [ iD.entityNode({loc: a}), iD.entityNode({loc: b}) ];
             var choice = iD.geoChooseEdge(nodes, c, projection);
             expect(choice.index).to.eql(1);
             expect(choice.distance).to.eql(5);
@@ -112,11 +112,11 @@ describe('iD.geo - geometry', function() {
             var d = [2, 5];
             var e = [2, 0.1];  // e.g. user is dragging e onto ab
             var nodes = [
-                iD.osmNode({id: 'a', loc: a}),
-                iD.osmNode({id: 'b', loc: b}),
-                iD.osmNode({id: 'c', loc: c}),
-                iD.osmNode({id: 'd', loc: d}),
-                iD.osmNode({id: 'e', loc: e})
+                iD.entityNode({id: 'a', loc: a}),
+                iD.entityNode({id: 'b', loc: b}),
+                iD.entityNode({id: 'c', loc: c}),
+                iD.entityNode({id: 'd', loc: d}),
+                iD.entityNode({id: 'e', loc: e})
             ];
             var choice = iD.geoChooseEdge(nodes, e, projection, 'e');
             expect(choice.index).to.eql(1);
@@ -138,11 +138,11 @@ describe('iD.geo - geometry', function() {
             var d = [2, 0.1];  // e.g. user is dragging d onto ab
             var e = [0, 5];
             var nodes = [
-                iD.osmNode({id: 'a', loc: a}),
-                iD.osmNode({id: 'b', loc: b}),
-                iD.osmNode({id: 'c', loc: c}),
-                iD.osmNode({id: 'd', loc: d}),
-                iD.osmNode({id: 'e', loc: e})
+                iD.entityNode({id: 'a', loc: a}),
+                iD.entityNode({id: 'b', loc: b}),
+                iD.entityNode({id: 'c', loc: c}),
+                iD.entityNode({id: 'd', loc: d}),
+                iD.entityNode({id: 'e', loc: e})
             ];
             var choice = iD.geoChooseEdge(nodes, d, projection, 'd');
             expect(choice.index).to.eql(1);
@@ -152,8 +152,8 @@ describe('iD.geo - geometry', function() {
 
         it('returns null if all nodes are skipped', function() {
             var nodes = [
-                iD.osmNode({id: 'a', loc: [0, 0]}),
-                iD.osmNode({id: 'b', loc: [5, 0]}),
+                iD.entityNode({id: 'a', loc: [0, 0]}),
+                iD.entityNode({id: 'b', loc: [5, 0]}),
             ];
             var choice = iD.geoChooseEdge(nodes, [2, 2], projection, 'a');
             expect(choice).to.be.null;
@@ -166,10 +166,10 @@ describe('iD.geo - geometry', function() {
         });
 
         it('returns false if no activeID', function() {
-            var a = iD.osmNode({id: 'a', loc: [2, 2]});
-            var b = iD.osmNode({id: 'b', loc: [4, 2]});
-            var c = iD.osmNode({id: 'c', loc: [4, 4]});
-            var d = iD.osmNode({id: 'd', loc: [2, 4]});
+            var a = iD.entityNode({id: 'a', loc: [2, 2]});
+            var b = iD.entityNode({id: 'b', loc: [4, 2]});
+            var c = iD.entityNode({id: 'c', loc: [4, 4]});
+            var d = iD.entityNode({id: 'd', loc: [2, 4]});
             var nodes = [a, b, c, d, a];
             expect(iD.geoHasLineIntersections(nodes, '')).to.be.false;
         });
@@ -183,14 +183,14 @@ describe('iD.geo - geometry', function() {
             //  |  d --- c  |
             //  |           |
             //  h --------- g
-            var a = iD.osmNode({id: 'a', loc: [2, 2]});
-            var b = iD.osmNode({id: 'b', loc: [4, 2]});
-            var c = iD.osmNode({id: 'c', loc: [4, 4]});
-            var d = iD.osmNode({id: 'd', loc: [2, 4]});
-            var e = iD.osmNode({id: 'e', loc: [0, 0]});
-            var f = iD.osmNode({id: 'f', loc: [8, 0]});
-            var g = iD.osmNode({id: 'g', loc: [8, 8]});
-            var h = iD.osmNode({id: 'h', loc: [0, 8]});
+            var a = iD.entityNode({id: 'a', loc: [2, 2]});
+            var b = iD.entityNode({id: 'b', loc: [4, 2]});
+            var c = iD.entityNode({id: 'c', loc: [4, 4]});
+            var d = iD.entityNode({id: 'd', loc: [2, 4]});
+            var e = iD.entityNode({id: 'e', loc: [0, 0]});
+            var f = iD.entityNode({id: 'f', loc: [8, 0]});
+            var g = iD.entityNode({id: 'g', loc: [8, 8]});
+            var h = iD.entityNode({id: 'h', loc: [0, 8]});
             var inner = [a, b, c, d, a];
             var outer = [e, f, g, h, e];
             expect(iD.geoHasLineIntersections(inner, outer, 'a')).to.be.false;
@@ -212,14 +212,14 @@ describe('iD.geo - geometry', function() {
             //  |  d --- c  |
             //  |           |
             //  h --------- g
-            var a = iD.osmNode({id: 'a', loc: [2, 2]});
-            var b = iD.osmNode({id: 'b', loc: [10, 2]});
-            var c = iD.osmNode({id: 'c', loc: [4, 4]});
-            var d = iD.osmNode({id: 'd', loc: [2, 4]});
-            var e = iD.osmNode({id: 'e', loc: [0, 0]});
-            var f = iD.osmNode({id: 'f', loc: [8, 0]});
-            var g = iD.osmNode({id: 'g', loc: [8, 8]});
-            var h = iD.osmNode({id: 'h', loc: [0, 8]});
+            var a = iD.entityNode({id: 'a', loc: [2, 2]});
+            var b = iD.entityNode({id: 'b', loc: [10, 2]});
+            var c = iD.entityNode({id: 'c', loc: [4, 4]});
+            var d = iD.entityNode({id: 'd', loc: [2, 4]});
+            var e = iD.entityNode({id: 'e', loc: [0, 0]});
+            var f = iD.entityNode({id: 'f', loc: [8, 0]});
+            var g = iD.entityNode({id: 'g', loc: [8, 8]});
+            var h = iD.entityNode({id: 'h', loc: [0, 8]});
             var inner = [a, b, c, d, a];
             var outer = [e, f, g, h, e];
             expect(iD.geoHasLineIntersections(inner, outer, 'a')).to.be.true;
@@ -239,10 +239,10 @@ describe('iD.geo - geometry', function() {
         });
 
         it('returns false if no activeID', function() {
-            var a = iD.osmNode({id: 'a', loc: [0, 0]});
-            var b = iD.osmNode({id: 'b', loc: [2, 0]});
-            var c = iD.osmNode({id: 'c', loc: [2, 2]});
-            var d = iD.osmNode({id: 'd', loc: [0, 2]});
+            var a = iD.entityNode({id: 'a', loc: [0, 0]});
+            var b = iD.entityNode({id: 'b', loc: [2, 0]});
+            var c = iD.entityNode({id: 'c', loc: [2, 2]});
+            var d = iD.entityNode({id: 'd', loc: [0, 2]});
             var nodes = [a, b, c, d, a];
             expect(iD.geoHasSelfIntersections(nodes, '')).to.be.false;
         });
@@ -252,10 +252,10 @@ describe('iD.geo - geometry', function() {
             //  |     |
             //  |     |
             //  d --- c
-            var a = iD.osmNode({id: 'a', loc: [0, 0]});
-            var b = iD.osmNode({id: 'b', loc: [2, 0]});
-            var c = iD.osmNode({id: 'c', loc: [2, 2]});
-            var d = iD.osmNode({id: 'd', loc: [0, 2]});
+            var a = iD.entityNode({id: 'a', loc: [0, 0]});
+            var b = iD.entityNode({id: 'b', loc: [2, 0]});
+            var c = iD.entityNode({id: 'c', loc: [2, 2]});
+            var d = iD.entityNode({id: 'd', loc: [0, 2]});
             var nodes = [a, b, c, d, a];
             expect(iD.geoHasSelfIntersections(nodes, 'a')).to.be.false;
             expect(iD.geoHasSelfIntersections(nodes, 'b')).to.be.false;
@@ -269,10 +269,10 @@ describe('iD.geo - geometry', function() {
             //  |  /  |
             //  | / \ |
             //  d     b
-            var a = iD.osmNode({id: 'a', loc: [0, 0]});
-            var b = iD.osmNode({id: 'b', loc: [2, 2]});
-            var c = iD.osmNode({id: 'c', loc: [2, 0]});
-            var d = iD.osmNode({id: 'd', loc: [0, 2]});
+            var a = iD.entityNode({id: 'a', loc: [0, 0]});
+            var b = iD.entityNode({id: 'b', loc: [2, 2]});
+            var c = iD.entityNode({id: 'c', loc: [2, 0]});
+            var d = iD.entityNode({id: 'd', loc: [0, 2]});
             var nodes = [a, b, c, d, a];
             expect(iD.geoHasSelfIntersections(nodes, 'a')).to.be.true;
             expect(iD.geoHasSelfIntersections(nodes, 'b')).to.be.true;
@@ -286,11 +286,11 @@ describe('iD.geo - geometry', function() {
             //  |  x  |
             //  | / \ |
             //  d     b
-            var a = iD.osmNode({id: 'a', loc: [0, 0]});
-            var b = iD.osmNode({id: 'b', loc: [2, 2]});
-            var c = iD.osmNode({id: 'c', loc: [2, 0]});
-            var d = iD.osmNode({id: 'd', loc: [0, 2]});
-            var x = iD.osmNode({id: 'x', loc: [1, 1]});
+            var a = iD.entityNode({id: 'a', loc: [0, 0]});
+            var b = iD.entityNode({id: 'b', loc: [2, 2]});
+            var c = iD.entityNode({id: 'c', loc: [2, 0]});
+            var d = iD.entityNode({id: 'd', loc: [0, 2]});
+            var x = iD.entityNode({id: 'x', loc: [1, 1]});
             var nodes = [a, x, b, c, x, d, a];
             expect(iD.geoHasSelfIntersections(nodes, 'a')).to.be.false;
             expect(iD.geoHasSelfIntersections(nodes, 'b')).to.be.false;
@@ -304,10 +304,10 @@ describe('iD.geo - geometry', function() {
             //        |
             //        |
             //  d --- c
-            var a = iD.osmNode({id: 'a', loc: [0, 0]});
-            var b = iD.osmNode({id: 'b', loc: [2, 0]});
-            var c = iD.osmNode({id: 'c', loc: [2, 2]});
-            var d = iD.osmNode({id: 'd', loc: [0, 2]});
+            var a = iD.entityNode({id: 'a', loc: [0, 0]});
+            var b = iD.entityNode({id: 'b', loc: [2, 0]});
+            var c = iD.entityNode({id: 'c', loc: [2, 2]});
+            var d = iD.entityNode({id: 'd', loc: [0, 2]});
             var nodes = [a, b, c, d];
             expect(iD.geoHasSelfIntersections(nodes, 'a')).to.be.false;
             expect(iD.geoHasSelfIntersections(nodes, 'b')).to.be.false;
@@ -321,10 +321,10 @@ describe('iD.geo - geometry', function() {
             //     /  |
             //    / \ |
             //  d     b
-            var a = iD.osmNode({id: 'a', loc: [0, 0]});
-            var b = iD.osmNode({id: 'b', loc: [2, 2]});
-            var c = iD.osmNode({id: 'c', loc: [2, 0]});
-            var d = iD.osmNode({id: 'd', loc: [0, 2]});
+            var a = iD.entityNode({id: 'a', loc: [0, 0]});
+            var b = iD.entityNode({id: 'b', loc: [2, 2]});
+            var c = iD.entityNode({id: 'c', loc: [2, 0]});
+            var d = iD.entityNode({id: 'd', loc: [0, 2]});
             var nodes = [a, b, c, d];
             expect(iD.geoHasSelfIntersections(nodes, 'a')).to.be.true;
             expect(iD.geoHasSelfIntersections(nodes, 'b')).to.be.true;
@@ -338,11 +338,11 @@ describe('iD.geo - geometry', function() {
             //     x  |
             //    / \ |
             //  d     b
-            var a = iD.osmNode({id: 'a', loc: [0, 0]});
-            var b = iD.osmNode({id: 'b', loc: [2, 2]});
-            var c = iD.osmNode({id: 'c', loc: [2, 0]});
-            var d = iD.osmNode({id: 'd', loc: [0, 2]});
-            var x = iD.osmNode({id: 'x', loc: [1, 1]});
+            var a = iD.entityNode({id: 'a', loc: [0, 0]});
+            var b = iD.entityNode({id: 'b', loc: [2, 2]});
+            var c = iD.entityNode({id: 'c', loc: [2, 0]});
+            var d = iD.entityNode({id: 'd', loc: [0, 2]});
+            var x = iD.entityNode({id: 'x', loc: [1, 1]});
             var nodes = [a, x, b, c, x, d];
             expect(iD.geoHasSelfIntersections(nodes, 'a')).to.be.false;
             expect(iD.geoHasSelfIntersections(nodes, 'b')).to.be.false;

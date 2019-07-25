@@ -6,9 +6,9 @@ describe('iD.validations.generic_name', function () {
     });
 
     function createWay(tags) {
-        var n1 = iD.osmNode({id: 'n-1', loc: [4,4]});
-        var n2 = iD.osmNode({id: 'n-2', loc: [4,5]});
-        var n3 = iD.osmNode({id: 'n-3', loc: [5,5]});
+        var n1 = iD.entityNode({id: 'n-1', loc: [4,4]});
+        var n2 = iD.entityNode({id: 'n-2', loc: [4,5]});
+        var n3 = iD.entityNode({id: 'n-3', loc: [5,5]});
         var w = iD.osmWay({id: 'w-1', nodes: ['n-1', 'n-2', 'n-3'], tags: tags});
 
         context.perform(

@@ -51,10 +51,10 @@ describe('iD.actionCircularize', function () {
         //    |      |
         //    a ---- b
         var graph = iD.coreGraph([
-                iD.osmNode({id: 'a', loc: [0, 0]}),
-                iD.osmNode({id: 'b', loc: [2, 0]}),
-                iD.osmNode({id: 'c', loc: [2, 2]}),
-                iD.osmNode({id: 'd', loc: [0, 2]}),
+                iD.entityNode({id: 'a', loc: [0, 0]}),
+                iD.entityNode({id: 'b', loc: [2, 0]}),
+                iD.entityNode({id: 'c', loc: [2, 2]}),
+                iD.entityNode({id: 'd', loc: [0, 2]}),
                 iD.osmWay({id: '-', nodes: ['a', 'b', 'c', 'd', 'a']})
             ]);
 
@@ -69,11 +69,11 @@ describe('iD.actionCircularize', function () {
         //    |      |
         //    a ---- b
         var graph = iD.coreGraph([
-                iD.osmNode({id: 'a', loc: [0, 0]}),
-                iD.osmNode({id: 'b', loc: [2, 0]}),
-                iD.osmNode({id: 'c', loc: [2, 2]}),
-                iD.osmNode({id: 'd', loc: [0, 2]}),
-                iD.osmNode({id: 'e', loc: [0, 2]}),
+                iD.entityNode({id: 'a', loc: [0, 0]}),
+                iD.entityNode({id: 'b', loc: [2, 0]}),
+                iD.entityNode({id: 'c', loc: [2, 2]}),
+                iD.entityNode({id: 'd', loc: [0, 2]}),
+                iD.entityNode({id: 'e', loc: [0, 2]}),
                 iD.osmWay({id: '-', nodes: ['a', 'b', 'c', 'd', 'e', 'a']})
             ]),
             nodes;
@@ -95,10 +95,10 @@ describe('iD.actionCircularize', function () {
         //    |      |
         //    c ---- d
         var graph = iD.coreGraph([
-                iD.osmNode({id: 'a', loc: [2, 2]}),
-                iD.osmNode({id: 'b', loc: [-2, 2]}),
-                iD.osmNode({id: 'c', loc: [-2, -2]}),
-                iD.osmNode({id: 'd', loc: [2, -2]}),
+                iD.entityNode({id: 'a', loc: [2, 2]}),
+                iD.entityNode({id: 'b', loc: [-2, 2]}),
+                iD.entityNode({id: 'c', loc: [-2, -2]}),
+                iD.entityNode({id: 'd', loc: [2, -2]}),
                 iD.osmWay({id: '-', nodes: ['a', 'b', 'c', 'd', 'a']}),
                 iD.osmWay({id: '=', nodes: ['d']})
             ]);
@@ -114,10 +114,10 @@ describe('iD.actionCircularize', function () {
         //    |      |
         //    a ---- b
         var graph = iD.coreGraph([
-                iD.osmNode({id: 'a', loc: [0, 0]}),
-                iD.osmNode({id: 'b', loc: [2, 0]}),
-                iD.osmNode({id: 'c', loc: [2, 2]}),
-                iD.osmNode({id: 'd', loc: [0, 2]}),
+                iD.entityNode({id: 'a', loc: [0, 0]}),
+                iD.entityNode({id: 'b', loc: [2, 0]}),
+                iD.entityNode({id: 'c', loc: [2, 2]}),
+                iD.entityNode({id: 'd', loc: [0, 2]}),
                 iD.osmWay({id: '-', nodes: ['a', 'b', 'c', 'd', 'a']})
             ]),
             centroid, points;
@@ -141,10 +141,10 @@ describe('iD.actionCircularize', function () {
         //    |      |
         //    a ---- b
         var graph = iD.coreGraph([
-                iD.osmNode({id: 'a', loc: [0, 0]}),
-                iD.osmNode({id: 'b', loc: [2, 0]}),
-                iD.osmNode({id: 'c', loc: [2, 2]}),
-                iD.osmNode({id: 'd', loc: [0, 2]}),
+                iD.entityNode({id: 'a', loc: [0, 0]}),
+                iD.entityNode({id: 'b', loc: [2, 0]}),
+                iD.entityNode({id: 'c', loc: [2, 2]}),
+                iD.entityNode({id: 'd', loc: [0, 2]}),
                 iD.osmWay({id: '+', nodes: ['a', 'd', 'c', 'b', 'a']})
             ]);
 
@@ -161,10 +161,10 @@ describe('iD.actionCircularize', function () {
         //    |      |
         //    a ---- b
         var graph = iD.coreGraph([
-                iD.osmNode({id: 'a', loc: [0, 0]}),
-                iD.osmNode({id: 'b', loc: [2, 0]}),
-                iD.osmNode({id: 'c', loc: [2, 2]}),
-                iD.osmNode({id: 'd', loc: [0, 2]}),
+                iD.entityNode({id: 'a', loc: [0, 0]}),
+                iD.entityNode({id: 'b', loc: [2, 0]}),
+                iD.entityNode({id: 'c', loc: [2, 2]}),
+                iD.entityNode({id: 'd', loc: [0, 2]}),
                 iD.osmWay({id: '-', nodes: ['a', 'b', 'c', 'd', 'a']})
             ]);
 
@@ -187,13 +187,13 @@ describe('iD.actionCircularize', function () {
         //  a-b-f-g-e-a is clockwise
         //
         var graph = iD.coreGraph([
-                iD.osmNode({id: 'a', loc: [ 0,  0]}),
-                iD.osmNode({id: 'b', loc: [ 1,  2]}),
-                iD.osmNode({id: 'c', loc: [-2,  2]}),
-                iD.osmNode({id: 'd', loc: [-2, -2]}),
-                iD.osmNode({id: 'e', loc: [ 1, -2]}),
-                iD.osmNode({id: 'f', loc: [ 3,  2]}),
-                iD.osmNode({id: 'g', loc: [ 3, -2]}),
+                iD.entityNode({id: 'a', loc: [ 0,  0]}),
+                iD.entityNode({id: 'b', loc: [ 1,  2]}),
+                iD.entityNode({id: 'c', loc: [-2,  2]}),
+                iD.entityNode({id: 'd', loc: [-2, -2]}),
+                iD.entityNode({id: 'e', loc: [ 1, -2]}),
+                iD.entityNode({id: 'f', loc: [ 3,  2]}),
+                iD.entityNode({id: 'g', loc: [ 3, -2]}),
                 iD.osmWay({id: '-', nodes: ['a', 'b', 'c', 'd', 'e', 'a']}),
                 iD.osmWay({id: '=', nodes: ['a', 'b', 'f', 'g', 'e', 'a']})
             ]);
@@ -221,13 +221,13 @@ describe('iD.actionCircularize', function () {
         //  a-e-g-f-b-a is counterclockwise
         //
         var graph = iD.coreGraph([
-                iD.osmNode({id: 'a', loc: [ 0,  0]}),
-                iD.osmNode({id: 'b', loc: [ 1,  2]}),
-                iD.osmNode({id: 'c', loc: [-2,  2]}),
-                iD.osmNode({id: 'd', loc: [-2, -2]}),
-                iD.osmNode({id: 'e', loc: [ 1, -2]}),
-                iD.osmNode({id: 'f', loc: [ 3,  2]}),
-                iD.osmNode({id: 'g', loc: [ 3, -2]}),
+                iD.entityNode({id: 'a', loc: [ 0,  0]}),
+                iD.entityNode({id: 'b', loc: [ 1,  2]}),
+                iD.entityNode({id: 'c', loc: [-2,  2]}),
+                iD.entityNode({id: 'd', loc: [-2, -2]}),
+                iD.entityNode({id: 'e', loc: [ 1, -2]}),
+                iD.entityNode({id: 'f', loc: [ 3,  2]}),
+                iD.entityNode({id: 'g', loc: [ 3, -2]}),
                 iD.osmWay({id: '-', nodes: ['a', 'b', 'c', 'd', 'e', 'a']}),
                 iD.osmWay({id: '=', nodes: ['a', 'e', 'g', 'f', 'b', 'a']})
             ]);
@@ -254,13 +254,13 @@ describe('iD.actionCircularize', function () {
         //  a-b-c-d-e-a is extremely concave and 'a' is to the left of centoid..
         //
         var graph = iD.coreGraph([
-                iD.osmNode({id: 'a', loc: [ 0,  0]}),
-                iD.osmNode({id: 'b', loc: [10,  2]}),
-                iD.osmNode({id: 'c', loc: [-2,  2]}),
-                iD.osmNode({id: 'd', loc: [-2, -2]}),
-                iD.osmNode({id: 'e', loc: [10, -2]}),
-                iD.osmNode({id: 'f', loc: [15,  2]}),
-                iD.osmNode({id: 'g', loc: [15, -2]}),
+                iD.entityNode({id: 'a', loc: [ 0,  0]}),
+                iD.entityNode({id: 'b', loc: [10,  2]}),
+                iD.entityNode({id: 'c', loc: [-2,  2]}),
+                iD.entityNode({id: 'd', loc: [-2, -2]}),
+                iD.entityNode({id: 'e', loc: [10, -2]}),
+                iD.entityNode({id: 'f', loc: [15,  2]}),
+                iD.entityNode({id: 'g', loc: [15, -2]}),
                 iD.osmWay({id: '-', nodes: ['a', 'b', 'c', 'd', 'e', 'a']}),
                 iD.osmWay({id: '=', nodes: ['a', 'b', 'f', 'g', 'e', 'a']})
             ]);
@@ -276,8 +276,8 @@ describe('iD.actionCircularize', function () {
 
     it('circularizes a closed single line way', function () {
         var graph = iD.coreGraph([
-                iD.osmNode({id: 'a', loc: [0, 0]}),
-                iD.osmNode({id: 'b', loc: [0, 2]}),
+                iD.entityNode({id: 'a', loc: [0, 0]}),
+                iD.entityNode({id: 'b', loc: [0, 2]}),
                 iD.osmWay({id: '-', nodes: ['a', 'b', 'a']})
             ]);
 
@@ -296,10 +296,10 @@ describe('iD.actionCircularize', function () {
 
         it('circularize at t = 0', function() {
             var graph = iD.coreGraph([
-                    iD.osmNode({id: 'a', loc: [0, 0]}),
-                    iD.osmNode({id: 'b', loc: [2, 0]}),
-                    iD.osmNode({id: 'c', loc: [2, 2]}),
-                    iD.osmNode({id: 'd', loc: [0, 2]}),
+                    iD.entityNode({id: 'a', loc: [0, 0]}),
+                    iD.entityNode({id: 'b', loc: [2, 0]}),
+                    iD.entityNode({id: 'c', loc: [2, 2]}),
+                    iD.entityNode({id: 'd', loc: [0, 2]}),
                     iD.osmWay({id: '-', nodes: ['a', 'b', 'c', 'd', 'a']})
                 ]);
             graph = iD.actionCircularize('-', projection)(graph, 0);
@@ -310,10 +310,10 @@ describe('iD.actionCircularize', function () {
 
         it('circularize at t = 0.5', function() {
             var graph = iD.coreGraph([
-                    iD.osmNode({id: 'a', loc: [0, 0]}),
-                    iD.osmNode({id: 'b', loc: [2, 0]}),
-                    iD.osmNode({id: 'c', loc: [2, 2]}),
-                    iD.osmNode({id: 'd', loc: [0, 2]}),
+                    iD.entityNode({id: 'a', loc: [0, 0]}),
+                    iD.entityNode({id: 'b', loc: [2, 0]}),
+                    iD.entityNode({id: 'c', loc: [2, 2]}),
+                    iD.entityNode({id: 'd', loc: [0, 2]}),
                     iD.osmWay({id: '-', nodes: ['a', 'b', 'c', 'd', 'a']})
                 ]);
             graph = iD.actionCircularize('-', projection)(graph, 0.5);
@@ -324,10 +324,10 @@ describe('iD.actionCircularize', function () {
 
         it('circularize at t = 1', function() {
             var graph = iD.coreGraph([
-                    iD.osmNode({id: 'a', loc: [0, 0]}),
-                    iD.osmNode({id: 'b', loc: [2, 0]}),
-                    iD.osmNode({id: 'c', loc: [2, 2]}),
-                    iD.osmNode({id: 'd', loc: [0, 2]}),
+                    iD.entityNode({id: 'a', loc: [0, 0]}),
+                    iD.entityNode({id: 'b', loc: [2, 0]}),
+                    iD.entityNode({id: 'c', loc: [2, 2]}),
+                    iD.entityNode({id: 'd', loc: [0, 2]}),
                     iD.osmWay({id: '-', nodes: ['a', 'b', 'c', 'd', 'a']})
                 ]);
             graph = iD.actionCircularize('-', projection)(graph, 1);

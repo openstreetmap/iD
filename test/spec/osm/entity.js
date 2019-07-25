@@ -40,7 +40,7 @@ describe('iD.osmEntity', function () {
         it('returns a new Entity', function () {
             var n = iD.osmEntity({id: 'n'});
             var result = n.copy(null, {});
-            expect(result).to.be.an.instanceof(iD.osmEntity);
+            expect(result).to.be.an.instanceof(iD.entityEntity);
             expect(result).not.to.equal(n);
         });
 
@@ -82,7 +82,7 @@ describe('iD.osmEntity', function () {
         it('returns a new Entity', function () {
             var a = iD.osmEntity();
             var b = a.update({});
-            expect(b instanceof iD.osmEntity).to.be.true;
+            expect(b instanceof iD.entityEntity).to.be.true;
             expect(a).not.to.equal(b);
         });
 
@@ -126,7 +126,7 @@ describe('iD.osmEntity', function () {
         it('returns a new Entity if changed', function () {
             var a = iD.osmEntity({tags: {a: 'a'}});
             var b = a.mergeTags({a: 'b'});
-            expect(b instanceof iD.osmEntity).to.be.true;
+            expect(b instanceof iD.entityEntity).to.be.true;
             expect(a).not.to.equal(b);
         });
 

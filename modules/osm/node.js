@@ -1,6 +1,7 @@
 import { osmEntity } from './entity';
 import { entityEntity } from '../entities/entity';
-import { geoAngle, geoExtent } from '../geo';
+import { entityNode } from '../entities/node';
+import { geoAngle } from '../geo';
 import { utilArrayUniq } from '../util';
 
 
@@ -12,39 +13,17 @@ export function osmNode() {
     }
 }
 
+// use this class for nodes
 entityEntity.node = osmNode;
 
-osmNode.prototype = Object.create(osmEntity.prototype);
+// inherit from entityNode
+osmNode.prototype = Object.create(entityNode.prototype);
+
+// Use common properties of osmEntity.
+// This is not prototype inheritance. osmNode is not an `instanceof` osmEntity.
+Object.assign(osmNode.prototype, osmEntity.prototype);
 
 Object.assign(osmNode.prototype, {
-    type: 'node',
-    loc: [9999, 9999],
-
-    extent: function() {
-        return new geoExtent(this.loc);
-    },
-
-
-    geometry: function(graph) {
-        return graph.transient(this, 'geometry', function() {
-            return graph.isPoi(this) ? 'point' : 'vertex';
-        });
-    },
-
-
-    move: function(loc) {
-        return this.update({loc: loc});
-    },
-
-
-    isDegenerate: function() {
-        return !(
-            Array.isArray(this.loc) && this.loc.length === 2 &&
-            this.loc[0] >= -180 && this.loc[0] <= 180 &&
-            this.loc[1] >= -90 && this.loc[1] <= 90
-        );
-    },
-
 
     // Inspect tags and geometry to determine which direction(s) this node/vertex points
     directions: function(resolver, projection) {
@@ -142,44 +121,6 @@ Object.assign(osmNode.prototype, {
         return utilArrayUniq(results);
     },
 
-
-    isEndpoint: function(resolver) {
-        return resolver.transient(this, 'isEndpoint', function() {
-            var id = this.id;
-            return resolver.parentWays(this).filter(function(parent) {
-                return !parent.isClosed() && !!parent.affix(id);
-            }).length > 0;
-        });
-    },
-
-
-    isConnected: function(resolver) {
-        return resolver.transient(this, 'isConnected', function() {
-            var parents = resolver.parentWays(this);
-
-            function isLine(entity) {
-                return entity.geometry(resolver) === 'line' &&
-                    entity.hasInterestingTags();
-            }
-
-            // vertex is connected to multiple parent lines
-            if (parents.length > 1 && parents.some(isLine)) {
-                return true;
-
-            } else if (parents.length === 1) {
-                var way = parents[0];
-                var nodes = way.nodes.slice();
-                if (way.isClosed()) { nodes.pop(); }  // ignore connecting node if closed
-
-                // return true if vertex appears multiple times (way is self intersecting)
-                return nodes.indexOf(this.id) !== nodes.lastIndexOf(this.id);
-            }
-
-            return false;
-        });
-    },
-
-
     isIntersection: function(resolver) {
         return resolver.transient(this, 'isIntersection', function() {
             return resolver.parentWays(this).filter(function(parent) {
@@ -192,7 +133,6 @@ Object.assign(osmNode.prototype, {
         });
     },
 
-
     isHighwayIntersection: function(resolver) {
         return resolver.transient(this, 'isHighwayIntersection', function() {
             return resolver.parentWays(this).filter(function(parent) {
@@ -201,7 +141,6 @@ Object.assign(osmNode.prototype, {
         });
     },
 
-
     isOnAddressLine: function(resolver) {
         return resolver.transient(this, 'isOnAddressLine', function() {
             return resolver.parentWays(this).filter(function(parent) {
@@ -209,30 +148,6 @@ Object.assign(osmNode.prototype, {
                     parent.geometry(resolver) === 'line';
             }).length > 0;
         });
-    },
-
-
-    asJXON: function(changeset_id) {
-        var r = {
-            node: {
-                '@id': this.untypedID(),
-                '@lon': this.loc[0],
-                '@lat': this.loc[1],
-                '@version': (this.version || 0),
-                tag: Object.keys(this.tags).map(function(k) {
-                    return { keyAttributes: { k: k, v: this.tags[k] } };
-                }, this)
-            }
-        };
-        if (changeset_id) r.node['@changeset'] = changeset_id;
-        return r;
-    },
-
-
-    asGeoJSON: function() {
-        return {
-            type: 'Point',
-            coordinates: this.loc
-        };
     }
+
 });

@@ -1,5 +1,6 @@
 import { t } from '../util/locale';
-import { osmEntity, osmNote } from '../osm';
+import { entityEntity } from '../entities/entity';
+import { osmNote } from '../osm';
 import { svgIcon } from '../svg/icon';
 
 
@@ -9,7 +10,7 @@ export function uiViewOnOSM(context) {
 
     function viewOnOSM(selection) {
         var url;
-        if (_what instanceof osmEntity) {
+        if (_what instanceof entityEntity) {
             url = context.connection().entityURL(_what);
         } else if (_what instanceof osmNote) {
             url = context.connection().noteURL(_what);

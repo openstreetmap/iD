@@ -12,10 +12,10 @@ describe('iD.actionAddMember', function() {
 
         it('handles incomplete relations', function () {
             var graph = iD.coreGraph([
-                iD.osmNode({id: 'a', loc: [0, 0]}),
-                iD.osmNode({id: 'b', loc: [0, 0]}),
-                iD.osmNode({id: 'c', loc: [0, 0]}),
-                iD.osmNode({id: 'd', loc: [0, 0]}),
+                iD.entityNode({id: 'a', loc: [0, 0]}),
+                iD.entityNode({id: 'b', loc: [0, 0]}),
+                iD.entityNode({id: 'c', loc: [0, 0]}),
+                iD.entityNode({id: 'd', loc: [0, 0]}),
                 iD.osmWay({id: '-', nodes: ['a', 'b', 'c']}),
                 iD.osmWay({id: '=', nodes: ['c','d']}),
                 iD.osmRelation({id: 'r', members: [
@@ -30,8 +30,8 @@ describe('iD.actionAddMember', function() {
 
         it('adds the member to a relation with no members', function() {
             var graph = iD.coreGraph([
-                iD.osmNode({id: 'a', loc: [0, 0]}),
-                iD.osmNode({id: 'b', loc: [0, 0]}),
+                iD.entityNode({id: 'a', loc: [0, 0]}),
+                iD.entityNode({id: 'b', loc: [0, 0]}),
                 iD.osmWay({id: '-', nodes: ['a', 'b']}),
                 iD.osmRelation({id: 'r'})
             ]);
@@ -44,10 +44,10 @@ describe('iD.actionAddMember', function() {
             // Before:  a ---> b
             // After:   a ---> b .. c ===> d
             var graph = iD.coreGraph([
-                iD.osmNode({id: 'a', loc: [0, 0]}),
-                iD.osmNode({id: 'b', loc: [0, 0]}),
-                iD.osmNode({id: 'c', loc: [0, 0]}),
-                iD.osmNode({id: 'd', loc: [0, 0]}),
+                iD.entityNode({id: 'a', loc: [0, 0]}),
+                iD.entityNode({id: 'b', loc: [0, 0]}),
+                iD.entityNode({id: 'c', loc: [0, 0]}),
+                iD.entityNode({id: 'd', loc: [0, 0]}),
                 iD.osmWay({id: '-', nodes: ['a', 'b']}),
                 iD.osmWay({id: '=', nodes: ['c', 'd']}),
                 iD.osmRelation({id: 'r', members: [
@@ -63,9 +63,9 @@ describe('iD.actionAddMember', function() {
             // Before:   a ---> b
             // After:    a ---> b ===> c
             var graph = iD.coreGraph([
-                iD.osmNode({id: 'a', loc: [0, 0]}),
-                iD.osmNode({id: 'b', loc: [0, 0]}),
-                iD.osmNode({id: 'c', loc: [0, 0]}),
+                iD.entityNode({id: 'a', loc: [0, 0]}),
+                iD.entityNode({id: 'b', loc: [0, 0]}),
+                iD.entityNode({id: 'c', loc: [0, 0]}),
                 iD.osmWay({id: '-', nodes: ['a', 'b']}),
                 iD.osmWay({id: '=', nodes: ['b', 'c']}),
                 iD.osmRelation({id: 'r', members: [
@@ -81,10 +81,10 @@ describe('iD.actionAddMember', function() {
             // Before:          b ---> c ~~~> d
             // After:    a ===> b ---> c ~~~> d
             var graph = iD.coreGraph([
-                iD.osmNode({id: 'a', loc: [0, 0]}),
-                iD.osmNode({id: 'b', loc: [0, 0]}),
-                iD.osmNode({id: 'c', loc: [0, 0]}),
-                iD.osmNode({id: 'd', loc: [0, 0]}),
+                iD.entityNode({id: 'a', loc: [0, 0]}),
+                iD.entityNode({id: 'b', loc: [0, 0]}),
+                iD.entityNode({id: 'c', loc: [0, 0]}),
+                iD.entityNode({id: 'd', loc: [0, 0]}),
                 iD.osmWay({id: '=', nodes: ['a', 'b']}),
                 iD.osmWay({id: '-', nodes: ['b', 'c']}),
                 iD.osmWay({id: '~', nodes: ['c', 'd']}),
@@ -102,10 +102,10 @@ describe('iD.actionAddMember', function() {
             // Before:  a ---> b  ..  c ~~~> d
             // After:   a ---> b ===> c ~~~> d
             var graph = iD.coreGraph([
-                iD.osmNode({id: 'a', loc: [0, 0]}),
-                iD.osmNode({id: 'b', loc: [0, 0]}),
-                iD.osmNode({id: 'c', loc: [0, 0]}),
-                iD.osmNode({id: 'd', loc: [0, 0]}),
+                iD.entityNode({id: 'a', loc: [0, 0]}),
+                iD.entityNode({id: 'b', loc: [0, 0]}),
+                iD.entityNode({id: 'c', loc: [0, 0]}),
+                iD.entityNode({id: 'd', loc: [0, 0]}),
                 iD.osmWay({id: '-', nodes: ['a', 'b']}),
                 iD.osmWay({id: '=', nodes: ['b', 'c']}),
                 iD.osmWay({id: '~', nodes: ['c', 'd']}),
@@ -123,10 +123,10 @@ describe('iD.actionAddMember', function() {
             // Before:  a ---> b  ..  c ~~~> d <~~~ c  ..  b <--- a
             // After:   a ---> b ===> c ~~~> d <~~~ c <=== b <--- a
             var graph = iD.coreGraph([
-                iD.osmNode({id: 'a', loc: [0, 0]}),
-                iD.osmNode({id: 'b', loc: [0, 0]}),
-                iD.osmNode({id: 'c', loc: [0, 0]}),
-                iD.osmNode({id: 'd', loc: [0, 0]}),
+                iD.entityNode({id: 'a', loc: [0, 0]}),
+                iD.entityNode({id: 'b', loc: [0, 0]}),
+                iD.entityNode({id: 'c', loc: [0, 0]}),
+                iD.entityNode({id: 'd', loc: [0, 0]}),
                 iD.osmWay({id: '-', nodes: ['a', 'b']}),
                 iD.osmWay({id: '=', nodes: ['b', 'c']}),
                 iD.osmWay({id: '~', nodes: ['c', 'd']}),
@@ -152,10 +152,10 @@ describe('iD.actionAddMember', function() {
             // Before:         b <=== c ~~~> d <~~~ c ===> b
             // After:   a <--- b <=== c ~~~> d <~~~ c ===> b ---> a
             var graph = iD.coreGraph([
-                iD.osmNode({id: 'a', loc: [0, 0]}),
-                iD.osmNode({id: 'b', loc: [0, 0]}),
-                iD.osmNode({id: 'c', loc: [0, 0]}),
-                iD.osmNode({id: 'd', loc: [0, 0]}),
+                iD.entityNode({id: 'a', loc: [0, 0]}),
+                iD.entityNode({id: 'b', loc: [0, 0]}),
+                iD.entityNode({id: 'c', loc: [0, 0]}),
+                iD.entityNode({id: 'd', loc: [0, 0]}),
                 iD.osmWay({id: '-', nodes: ['b', 'a']}),
                 iD.osmWay({id: '=', nodes: ['c', 'b']}),
                 iD.osmWay({id: '~', nodes: ['c', 'd']}),
@@ -179,9 +179,9 @@ describe('iD.actionAddMember', function() {
 
         it('keeps stops and platforms ordered before node, way, relation (for PTv2 routes)', function() {
             var graph = iD.coreGraph([
-                iD.osmNode({id: 'a', loc: [0, 0]}),
-                iD.osmNode({id: 'b', loc: [0, 0]}),
-                iD.osmNode({id: 'c', loc: [0, 0]}),
+                iD.entityNode({id: 'a', loc: [0, 0]}),
+                iD.entityNode({id: 'b', loc: [0, 0]}),
+                iD.entityNode({id: 'c', loc: [0, 0]}),
                 iD.osmWay({id: '-', nodes: ['a', 'b']}),
                 iD.osmWay({id: '=', nodes: ['b', 'c']}),
                 iD.osmRelation({id: 'r', members: [

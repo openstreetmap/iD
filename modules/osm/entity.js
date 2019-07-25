@@ -41,13 +41,10 @@ osmEntity.deprecatedTagValuesByKey = function() {
     return _deprecatedTagValuesByKey;
 };
 
+// inherit from entityEntity
 osmEntity.prototype = Object.create(entityEntity.prototype);
 
 Object.assign(osmEntity.prototype, {
-
-    update: function(attrs) {
-        return osmEntity(this, attrs, { v: 1 + (this.v || 0) });
-    },
 
     hasNonGeometryTags: function() {
         return Object.keys(this.tags).some(function(k) { return k !== 'area'; });

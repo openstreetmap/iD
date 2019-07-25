@@ -45,7 +45,7 @@ describe('iD.uiFieldWikipedia', function() {
     });
 
     beforeEach(function() {
-        entity = iD.osmNode({id: 'n12345'});
+        entity = iD.entityNode({id: 'n12345'});
         context = iD.coreContext();
         context.history().merge([entity]);
         selection = d3.select(document.createElement('div'));

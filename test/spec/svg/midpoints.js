@@ -26,8 +26,8 @@ describe('iD.svgMidpoints', function () {
 
 
     it('creates midpoint on segment completely within the extent', function () {
-        var a = iD.osmNode({loc: [0, 0]});
-        var b = iD.osmNode({loc: [1, 0]});
+        var a = iD.entityNode({loc: [0, 0]});
+        var b = iD.entityNode({loc: [1, 0]});
         var line = iD.osmWay({nodes: [a.id, b.id]});
         var graph = iD.coreGraph([a, b, line]);
         var extent = iD.geoExtent([0, 0], [1, 1]);
@@ -41,8 +41,8 @@ describe('iD.svgMidpoints', function () {
     });
 
     it('doesn\'t create midpoint on segment with pixel length less than 40', function () {
-        var a = iD.osmNode({loc: [0, 0]});
-        var b = iD.osmNode({loc: [0.0001, 0]});
+        var a = iD.entityNode({loc: [0, 0]});
+        var b = iD.entityNode({loc: [0.0001, 0]});
         var line = iD.osmWay({nodes: [a.id, b.id]});
         var graph = iD.coreGraph([a, b, line]);
         var extent = iD.geoExtent([0, 0], [1, 1]);
@@ -56,8 +56,8 @@ describe('iD.svgMidpoints', function () {
     });
 
     it('doesn\'t create midpoint on segment completely outside of the extent', function () {
-        var a = iD.osmNode({loc: [-1, 0]});
-        var b = iD.osmNode({loc: [-0.5, 0]});
+        var a = iD.entityNode({loc: [-1, 0]});
+        var b = iD.entityNode({loc: [-0.5, 0]});
         var line = iD.osmWay({nodes: [a.id, b.id]});
         var graph = iD.coreGraph([a, b, line]);
         var extent = iD.geoExtent([0, 0], [1, 1]);
@@ -71,8 +71,8 @@ describe('iD.svgMidpoints', function () {
     });
 
     it('creates midpoint on extent edge for segment partially outside of the extent', function () {
-        var a = iD.osmNode({loc: [0.5, 0]});
-        var b = iD.osmNode({loc: [2, 0]});
+        var a = iD.entityNode({loc: [0.5, 0]});
+        var b = iD.entityNode({loc: [2, 0]});
         var line = iD.osmWay({nodes: [a.id, b.id]});
         var graph = iD.coreGraph([a, b, line]);
         var extent = iD.geoExtent([0, 0], [1, 1]);
@@ -86,8 +86,8 @@ describe('iD.svgMidpoints', function () {
     });
 
     it('doesn\'t create midpoint on extent edge for segment with pixel length less than 20', function () {
-        var a = iD.osmNode({loc: [0.9999, 0]});
-        var b = iD.osmNode({loc: [2, 0]});
+        var a = iD.entityNode({loc: [0.9999, 0]});
+        var b = iD.entityNode({loc: [2, 0]});
         var line = iD.osmWay({nodes: [a.id, b.id]});
         var graph = iD.coreGraph([a, b, line]);
         var extent = iD.geoExtent([0, 0], [1, 1]);

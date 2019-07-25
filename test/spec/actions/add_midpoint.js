@@ -1,8 +1,8 @@
 describe('iD.actionAddMidpoint', function () {
     it('adds the node at the midpoint location', function () {
-        var node = iD.osmNode(),
-            a = iD.osmNode(),
-            b = iD.osmNode(),
+        var node = iD.entityNode(),
+            a = iD.entityNode(),
+            b = iD.entityNode(),
             midpoint = {loc: [1, 2], edge: [a.id, b.id]},
             graph = iD.actionAddMidpoint(midpoint, node)(iD.coreGraph([a, b]));
 
@@ -10,9 +10,9 @@ describe('iD.actionAddMidpoint', function () {
     });
 
     it('adds the node to a way that contains the given edge in forward order', function () {
-        var node = iD.osmNode(),
-            a = iD.osmNode(),
-            b = iD.osmNode(),
+        var node = iD.entityNode(),
+            a = iD.entityNode(),
+            b = iD.entityNode(),
             w1 = iD.osmWay(),
             w2 = iD.osmWay({nodes: [a.id, b.id]}),
             midpoint = {loc: [1, 2], edge: [a.id, b.id]},
@@ -23,9 +23,9 @@ describe('iD.actionAddMidpoint', function () {
     });
 
     it('adds the node to a way that contains the given edge in reverse order', function () {
-        var node = iD.osmNode(),
-            a = iD.osmNode(),
-            b = iD.osmNode(),
+        var node = iD.entityNode(),
+            a = iD.entityNode(),
+            b = iD.entityNode(),
             w1 = iD.osmWay(),
             w2 = iD.osmWay({nodes: [b.id, a.id]}),
             midpoint = {loc: [1, 2], edge: [a.id, b.id]},
@@ -42,9 +42,9 @@ describe('iD.actionAddMidpoint', function () {
         //  \ /
         //   c
 
-        var a = iD.osmNode(),
-            b = iD.osmNode(),
-            c = iD.osmNode(),
+        var a = iD.entityNode(),
+            b = iD.entityNode(),
+            c = iD.entityNode(),
             w = iD.osmWay({nodes: [a.id, b.id, a.id]}),
             midpoint = {loc: [1, 2], edge: [a.id, b.id]},
             graph = iD.actionAddMidpoint(midpoint, c)(iD.coreGraph([a, b, w]));

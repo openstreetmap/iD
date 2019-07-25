@@ -6,7 +6,8 @@ import {
 } from 'd3-selection';
 
 import { schemaManager } from '../entities/schema_manager';
-import { osmEntity, osmNote, qaError } from '../osm';
+import { entityEntity } from '../entities/entity';
+import { osmNote, qaError } from '../osm';
 import { utilKeybinding, utilRebind } from '../util';
 
 /*
@@ -145,13 +146,13 @@ export function behaviorHover(context) {
                 entity = datum;
                 selector = '.note-' + datum.id;
 
-            } else if (datum instanceof osmEntity) {
+            } else if (datum instanceof entityEntity) {
                 entity = datum;
                 selector = '.' + entity.id;
                 if (entity.type === 'relation') {
                     entity.members.forEach(function(member) { selector += ', .' + member.id; });
                 }
-            } else if (datum && datum.properties && (datum.properties.entity instanceof osmEntity)) {
+            } else if (datum && datum.properties && (datum.properties.entity instanceof entityEntity)) {
                 entity = datum.properties.entity;
                 selector = '.' + entity.id;
                 if (entity.type === 'relation') {

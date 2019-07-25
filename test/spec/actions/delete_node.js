@@ -1,15 +1,15 @@
 describe('iD.actionDeleteNode', function () {
     it('removes the node from the graph', function () {
-        var node   = iD.osmNode(),
+        var node   = iD.entityNode(),
             action = iD.actionDeleteNode(node.id),
             graph  = action(iD.coreGraph([node]));
         expect(graph.hasEntity(node.id)).to.be.undefined;
     });
 
     it('removes the node from parent ways', function () {
-        var node1  = iD.osmNode(),
-            node2  = iD.osmNode(),
-            node3  = iD.osmNode(),
+        var node1  = iD.entityNode(),
+            node2  = iD.entityNode(),
+            node3  = iD.entityNode(),
             way    = iD.osmWay({nodes: [node1.id, node2.id, node3.id]}),
             action = iD.actionDeleteNode(node1.id),
             graph  = action(iD.coreGraph([node1, node2, node3, way]));
@@ -17,8 +17,8 @@ describe('iD.actionDeleteNode', function () {
     });
 
     it('removes the node from parent relations', function () {
-        var node1    = iD.osmNode(),
-            node2    = iD.osmNode(),
+        var node1    = iD.entityNode(),
+            node2    = iD.entityNode(),
             relation = iD.osmRelation({members: [{ id: node1.id }, { id: node2.id }]}),
             action   = iD.actionDeleteNode(node1.id),
             graph    = action(iD.coreGraph([node1, node2, relation]));
@@ -26,8 +26,8 @@ describe('iD.actionDeleteNode', function () {
     });
 
     it('deletes parent ways that would otherwise have less than two nodes', function () {
-        var node1  = iD.osmNode(),
-            node2  = iD.osmNode(),
+        var node1  = iD.entityNode(),
+            node2  = iD.entityNode(),
             way    = iD.osmWay({nodes: [node1.id, node2.id]}),
             action = iD.actionDeleteNode(node1.id),
             graph  = action(iD.coreGraph([node1, node2, way]));
@@ -35,8 +35,8 @@ describe('iD.actionDeleteNode', function () {
     });
 
     it('deletes degenerate circular ways', function () {
-        var node1  = iD.osmNode(),
-            node2  = iD.osmNode(),
+        var node1  = iD.entityNode(),
+            node2  = iD.entityNode(),
             way    = iD.osmWay({nodes: [node1.id, node2.id, node1.id]}),
             action = iD.actionDeleteNode(node2.id),
             graph  = action(iD.coreGraph([node1, node2, way]));
@@ -44,7 +44,7 @@ describe('iD.actionDeleteNode', function () {
     });
 
     it('deletes parent relations that become empty', function () {
-        var node1    = iD.osmNode(),
+        var node1    = iD.entityNode(),
             relation = iD.osmRelation({members: [{ id: node1.id }]}),
             action   = iD.actionDeleteNode(node1.id),
             graph    = action(iD.coreGraph([node1, relation]));

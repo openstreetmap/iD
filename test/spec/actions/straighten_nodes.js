@@ -4,10 +4,10 @@ describe('iD.actionStraightenNodes', function () {
 
     it('straightens points', function() {
         var graph = iD.coreGraph([
-            iD.osmNode({ id: 'a', loc: [0, -1] }),
-            iD.osmNode({ id: 'b', loc: [5, 1], tags: { foo: 'bar' } }),
-            iD.osmNode({ id: 'c', loc: [10, -1] }),  // untagged
-            iD.osmNode({ id: 'd', loc: [15, 1] })
+            iD.entityNode({ id: 'a', loc: [0, -1] }),
+            iD.entityNode({ id: 'b', loc: [5, 1], tags: { foo: 'bar' } }),
+            iD.entityNode({ id: 'c', loc: [10, -1] }),  // untagged
+            iD.entityNode({ id: 'd', loc: [15, 1] })
         ]);
 
         graph = iD.actionStraightenNodes(['a','b','c','d'], projection)(graph);
@@ -29,10 +29,10 @@ describe('iD.actionStraightenNodes', function () {
 
         it('straighten at t = 0', function() {
             var graph = iD.coreGraph([
-                iD.osmNode({ id: 'a', loc: [0, -1] }),
-                iD.osmNode({ id: 'b', loc: [5, 1], tags: { foo: 'bar' } }),
-                iD.osmNode({ id: 'c', loc: [10, -1] }),  // untagged
-                iD.osmNode({ id: 'd', loc: [15, 1] })
+                iD.entityNode({ id: 'a', loc: [0, -1] }),
+                iD.entityNode({ id: 'b', loc: [5, 1], tags: { foo: 'bar' } }),
+                iD.entityNode({ id: 'c', loc: [10, -1] }),  // untagged
+                iD.entityNode({ id: 'd', loc: [15, 1] })
             ]);
 
             graph = iD.actionStraightenNodes(['a','b','c','d'], projection)(graph, 0);
@@ -48,10 +48,10 @@ describe('iD.actionStraightenNodes', function () {
 
         it('straighten at t = 0.5', function() {
             var graph = iD.coreGraph([
-                iD.osmNode({ id: 'a', loc: [0, -1] }),
-                iD.osmNode({ id: 'b', loc: [5, 1], tags: { foo: 'bar' } }),
-                iD.osmNode({ id: 'c', loc: [10, -1] }),  // untagged
-                iD.osmNode({ id: 'd', loc: [15, 1] })
+                iD.entityNode({ id: 'a', loc: [0, -1] }),
+                iD.entityNode({ id: 'b', loc: [5, 1], tags: { foo: 'bar' } }),
+                iD.entityNode({ id: 'c', loc: [10, -1] }),  // untagged
+                iD.entityNode({ id: 'd', loc: [15, 1] })
             ]);
 
             graph = iD.actionStraightenNodes(['a','b','c','d'], projection)(graph, 0.5);
@@ -67,10 +67,10 @@ describe('iD.actionStraightenNodes', function () {
 
         it('straighten at t = 1', function() {
             var graph = iD.coreGraph([
-                iD.osmNode({ id: 'a', loc: [0, -1] }),
-                iD.osmNode({ id: 'b', loc: [5, 1], tags: { foo: 'bar' } }),
-                iD.osmNode({ id: 'c', loc: [10, -1] }),  // untagged
-                iD.osmNode({ id: 'd', loc: [15, 1] })
+                iD.entityNode({ id: 'a', loc: [0, -1] }),
+                iD.entityNode({ id: 'b', loc: [5, 1], tags: { foo: 'bar' } }),
+                iD.entityNode({ id: 'c', loc: [10, -1] }),  // untagged
+                iD.entityNode({ id: 'd', loc: [15, 1] })
             ]);
 
             graph = iD.actionStraightenNodes(['a','b','c','d'], projection)(graph, 1);

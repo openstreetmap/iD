@@ -1,7 +1,7 @@
 describe('iD.actionDeleteMember', function () {
     it('removes the member at the specified index', function () {
-        var a      = iD.osmNode({id: 'a'}),
-            b      = iD.osmNode({id: 'b'}),
+        var a      = iD.entityNode({id: 'a'}),
+            b      = iD.entityNode({id: 'b'}),
             r      = iD.osmRelation({members: [{id: 'a'}, {id: 'b'}]}),
             action = iD.actionDeleteMember(r.id, 0),
             graph  = action(iD.coreGraph([a, b, r]));
@@ -9,7 +9,7 @@ describe('iD.actionDeleteMember', function () {
     });
 
     it('deletes relations that become degenerate', function () {
-        var a      = iD.osmNode({id: 'a'}),
+        var a      = iD.entityNode({id: 'a'}),
             r      = iD.osmRelation({id: 'r', members: [{id: 'a'}]}),
             action = iD.actionDeleteMember(r.id, 0),
             graph  = action(iD.coreGraph([a, r]));

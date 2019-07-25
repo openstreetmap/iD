@@ -54,11 +54,11 @@ describe('iD.rendererFeatures', function() {
     describe('#gatherStats', function() {
         it('counts features', function() {
             var graph = iD.coreGraph([
-                iD.osmNode({id: 'point_bar', tags: {amenity: 'bar'}, version: 1}),
-                iD.osmNode({id: 'point_dock', tags: {waterway: 'dock'}, version: 1}),
-                iD.osmNode({id: 'point_rail_station', tags: {railway: 'station'}, version: 1}),
-                iD.osmNode({id: 'point_generator', tags: {power: 'generator'}, version: 1}),
-                iD.osmNode({id: 'point_old_rail_station', tags: {railway: 'station', disused: 'yes'}, version: 1}),
+                iD.entityNode({id: 'point_bar', tags: {amenity: 'bar'}, version: 1}),
+                iD.entityNode({id: 'point_dock', tags: {waterway: 'dock'}, version: 1}),
+                iD.entityNode({id: 'point_rail_station', tags: {railway: 'station'}, version: 1}),
+                iD.entityNode({id: 'point_generator', tags: {power: 'generator'}, version: 1}),
+                iD.entityNode({id: 'point_old_rail_station', tags: {railway: 'station', disused: 'yes'}, version: 1}),
                 iD.osmWay({id: 'motorway', tags: {highway: 'motorway'}, version: 1}),
                 iD.osmWay({id: 'building_yes', tags: {area: 'yes', amenity: 'school', building: 'yes'}, version: 1}),
                 iD.osmWay({id: 'boundary', tags: {boundary: 'administrative'}, version: 1}),
@@ -88,11 +88,11 @@ describe('iD.rendererFeatures', function() {
     describe('matching', function() {
         var graph = iD.coreGraph([
             // Points
-            iD.osmNode({id: 'point_bar', tags: {amenity: 'bar'}, version: 1}),
-            iD.osmNode({id: 'point_dock', tags: {waterway: 'dock'}, version: 1}),
-            iD.osmNode({id: 'point_rail_station', tags: {railway: 'station'}, version: 1}),
-            iD.osmNode({id: 'point_generator', tags: {power: 'generator'}, version: 1}),
-            iD.osmNode({id: 'point_old_rail_station', tags: {railway: 'station', disused: 'yes'}, version: 1}),
+            iD.entityNode({id: 'point_bar', tags: {amenity: 'bar'}, version: 1}),
+            iD.entityNode({id: 'point_dock', tags: {waterway: 'dock'}, version: 1}),
+            iD.entityNode({id: 'point_rail_station', tags: {railway: 'station'}, version: 1}),
+            iD.entityNode({id: 'point_generator', tags: {power: 'generator'}, version: 1}),
+            iD.entityNode({id: 'point_old_rail_station', tags: {railway: 'station', disused: 'yes'}, version: 1}),
 
             // Traffic Roads
             iD.osmWay({id: 'motorway', tags: {highway: 'motorway'}, version: 1}),
@@ -533,8 +533,8 @@ describe('iD.rendererFeatures', function() {
 
     describe('hiding', function() {
         it('hides child vertices on a hidden way', function() {
-            var a = iD.osmNode({id: 'a', version: 1});
-            var b = iD.osmNode({id: 'b', version: 1});
+            var a = iD.entityNode({id: 'a', version: 1});
+            var b = iD.entityNode({id: 'b', version: 1});
             var w = iD.osmWay({id: 'w', nodes: [a.id, b.id], tags: {highway: 'path'}, version: 1});
             var graph = iD.coreGraph([a, b, w]);
             var geometry = a.geometry(graph);
@@ -578,8 +578,8 @@ describe('iD.rendererFeatures', function() {
         });
 
         it('hides only versioned entities', function() {
-            var a = iD.osmNode({id: 'a', version: 1});
-            var b = iD.osmNode({id: 'b'});
+            var a = iD.entityNode({id: 'a', version: 1});
+            var b = iD.entityNode({id: 'b'});
             var graph = iD.coreGraph([a, b]);
             var ageo = a.geometry(graph);
             var bgeo = b.geometry(graph);
@@ -593,7 +593,7 @@ describe('iD.rendererFeatures', function() {
         });
 
         it('#forceVisible', function() {
-            var a = iD.osmNode({id: 'a', version: 1});
+            var a = iD.entityNode({id: 'a', version: 1});
             var graph = iD.coreGraph([a]);
             var ageo = a.geometry(graph);
             var all = Object.values(graph.base().entities);
@@ -611,7 +611,7 @@ describe('iD.rendererFeatures', function() {
             var all, hidden, autoHidden, i, msg;
 
             for (i = 0; i < maxPoints; i++) {
-                graph.rebase([iD.osmNode({version: 1})], [graph]);
+                graph.rebase([iD.entityNode({version: 1})], [graph]);
             }
 
             all = Object.values(graph.base().entities);
@@ -623,7 +623,7 @@ describe('iD.rendererFeatures', function() {
             expect(hidden, msg).to.not.include('points');
             expect(autoHidden, msg).to.not.include('points');
 
-            graph.rebase([iD.osmNode({version: 1})], [graph]);
+            graph.rebase([iD.entityNode({version: 1})], [graph]);
 
             all = Object.values(graph.base().entities);
             features.gatherStats(all, graph, dimensions);
@@ -642,7 +642,7 @@ describe('iD.rendererFeatures', function() {
             var all, hidden, autoHidden, i, msg;
 
             for (i = 0; i < maxPoints; i++) {
-                graph.rebase([iD.osmNode({version: 1})], [graph]);
+                graph.rebase([iD.entityNode({version: 1})], [graph]);
             }
 
             all = Object.values(graph.base().entities);
@@ -654,7 +654,7 @@ describe('iD.rendererFeatures', function() {
             expect(hidden, msg).to.not.include('points');
             expect(autoHidden, msg).to.not.include('points');
 
-            graph.rebase([iD.osmNode({version: 1})], [graph]);
+            graph.rebase([iD.entityNode({version: 1})], [graph]);
 
             all = Object.values(graph.base().entities);
             features.gatherStats(all, graph, dimensions);

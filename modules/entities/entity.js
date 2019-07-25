@@ -95,6 +95,8 @@ entityEntity.prototype = {
         return copy;
     },
 
+    // The raw numeric ID without the type prefix.
+    // This could collide with untyped IDs from entities of other types.
     untypedID: function() {
         return entityEntity.id.toUntyped(this.id);
     },

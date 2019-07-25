@@ -16,7 +16,7 @@ describe('iD.actionDeleteWay', function() {
     });
 
     it('deletes member nodes not referenced by another parent', function() {
-        var node   = iD.osmNode(),
+        var node   = iD.entityNode(),
             way    = iD.osmWay({nodes: [node.id]}),
             action = iD.actionDeleteWay(way.id),
             graph  = iD.coreGraph([node, way]).update(action);
@@ -24,7 +24,7 @@ describe('iD.actionDeleteWay', function() {
     });
 
     it('does not delete member nodes referenced by another parent', function() {
-        var node   = iD.osmNode(),
+        var node   = iD.entityNode(),
             way1   = iD.osmWay({nodes: [node.id]}),
             way2   = iD.osmWay({nodes: [node.id]}),
             action = iD.actionDeleteWay(way1.id),
@@ -33,8 +33,8 @@ describe('iD.actionDeleteWay', function() {
     });
 
     it('deletes multiple member nodes', function() {
-        var a      = iD.osmNode(),
-            b      = iD.osmNode(),
+        var a      = iD.entityNode(),
+            b      = iD.entityNode(),
             way    = iD.osmWay({nodes: [a.id, b.id]}),
             action = iD.actionDeleteWay(way.id),
             graph  = iD.coreGraph([a, b, way]).update(action);
@@ -43,9 +43,9 @@ describe('iD.actionDeleteWay', function() {
     });
 
     it('deletes a circular way\'s start/end node', function() {
-        var a      = iD.osmNode(),
-            b      = iD.osmNode(),
-            c      = iD.osmNode(),
+        var a      = iD.entityNode(),
+            b      = iD.entityNode(),
+            c      = iD.entityNode(),
             way    = iD.osmWay({nodes: [a.id, b.id, c.id, a.id]}),
             action = iD.actionDeleteWay(way.id),
             graph  = iD.coreGraph([a, b, c, way]).update(action);
@@ -55,7 +55,7 @@ describe('iD.actionDeleteWay', function() {
     });
 
     it('does not delete member nodes with interesting tags', function() {
-        var node   = iD.osmNode({tags: {highway: 'traffic_signals'}}),
+        var node   = iD.entityNode({tags: {highway: 'traffic_signals'}}),
             way    = iD.osmWay({nodes: [node.id]}),
             action = iD.actionDeleteWay(way.id),
             graph  = iD.coreGraph([node, way]).update(action);

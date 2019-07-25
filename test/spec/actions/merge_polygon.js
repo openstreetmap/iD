@@ -1,7 +1,7 @@
 describe('iD.actionMergePolygon', function () {
 
     function node(id, x, y) {
-        e.push(iD.osmNode({ id: id, loc: [x, y] }));
+        e.push(iD.entityNode({ id: id, loc: [x, y] }));
     }
 
     function way(id, nodes) {

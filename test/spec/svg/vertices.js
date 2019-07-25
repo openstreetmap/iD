@@ -17,7 +17,7 @@ describe('iD.svgVertices', function () {
 
 
     it('adds the .shared class to vertices that are members of two or more ways', function () {
-        var node = iD.osmNode({loc: [0, 0]});
+        var node = iD.entityNode({loc: [0, 0]});
         var way1 = iD.osmWay({nodes: [node.id], tags: {highway: 'residential'}});
         var way2 = iD.osmWay({nodes: [node.id], tags: {highway: 'residential'}});
         var graph = iD.coreGraph([node, way1, way2]);
