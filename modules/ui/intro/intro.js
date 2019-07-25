@@ -9,7 +9,7 @@ import { localize } from './helper';
 import { coreGraph } from '../../core/graph';
 import { dataIntroGraph } from '../../../data/intro_graph.json';
 import { modeBrowse } from '../../modes/browse';
-import { osmEntity } from '../../osm/entity';
+import { entityEntity } from '../../entities/entity';
 import { services } from '../../services';
 import { svgIcon } from '../../svg/icon';
 import { uiCurtain } from '../curtain';
@@ -52,7 +52,7 @@ export function uiIntro(context) {
 
     // create entities for intro graph and localize names
     for (var id in dataIntroGraph) {
-        introGraph[id] = osmEntity(localize(dataIntroGraph[id]));
+        introGraph[id] = entityEntity(localize(dataIntroGraph[id]));
     }
 
 

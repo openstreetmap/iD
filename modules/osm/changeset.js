@@ -1,6 +1,6 @@
 import { osmEntity } from './entity';
+import { entityChangeset } from '../entities/changeset';
 import { entityEntity } from '../entities/entity';
-import { geoExtent } from '../geo';
 
 
 export function osmChangeset() {
@@ -11,25 +11,15 @@ export function osmChangeset() {
     }
 }
 
-
 entityEntity.changeset = osmChangeset;
 
-osmChangeset.prototype = Object.create(osmEntity.prototype);
+osmChangeset.prototype = Object.create(entityChangeset.prototype);
+
+// Use common properties of osmEntity.
+// This is not prototype inheritance. osmChangeset is not an `instanceof` osmEntity.
+Object.assign(osmChangeset.prototype, osmEntity.prototype);
 
 Object.assign(osmChangeset.prototype, {
-
-    type: 'changeset',
-
-
-    extent: function() {
-        return new geoExtent();
-    },
-
-
-    geometry: function() {
-        return 'changeset';
-    },
-
 
     asJXON: function() {
         return {
@@ -127,11 +117,6 @@ Object.assign(osmChangeset.prototype, {
                 'delete': Object.assign(nest(changes.deleted.map(rep), ['relation', 'way', 'node']), { '@if-unused': true })
             }
         };
-    },
-
-
-    asGeoJSON: function() {
-        return {};
     }
 
 });

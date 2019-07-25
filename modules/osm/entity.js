@@ -1,22 +1,8 @@
-import { entityEntity } from '../entities/entity';
 import { osmIsInterestingTag } from './tags';
 import { dataDeprecated } from '../../data/index';
 
 
-export function osmEntity(attrs) {
-    // For prototypal inheritance.
-    if (this instanceof osmEntity) return;
-
-    // Create the appropriate subtype.
-    if (attrs && attrs.type) {
-        return entityEntity[attrs.type].apply(this, arguments);
-    } else if (attrs && attrs.id) {
-        return entityEntity[entityEntity.id.type(attrs.id)].apply(this, arguments);
-    }
-
-    // Initialize a generic Entity (used only in tests).
-    return (new osmEntity()).initialize(arguments);
-}
+export function osmEntity() {}
 
 var _deprecatedTagValuesByKey;
 
@@ -41,10 +27,7 @@ osmEntity.deprecatedTagValuesByKey = function() {
     return _deprecatedTagValuesByKey;
 };
 
-// inherit from entityEntity
-osmEntity.prototype = Object.create(entityEntity.prototype);
-
-Object.assign(osmEntity.prototype, {
+osmEntity.prototype = {
 
     hasNonGeometryTags: function() {
         return Object.keys(this.tags).some(function(k) { return k !== 'area'; });
@@ -100,4 +83,4 @@ Object.assign(osmEntity.prototype, {
         return deprecated;
     }
 
-});
+};

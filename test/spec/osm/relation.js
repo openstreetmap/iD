@@ -813,15 +813,15 @@ describe('iD.osmRelation', function () {
         specify('orders existing relations newest-first', function () {
             var a = iD.osmRelation({ id: 'r1' });
             var b = iD.osmRelation({ id: 'r2' });
-            expect(iD.osmRelation.creationOrder(a, b)).to.be.above(0);
-            expect(iD.osmRelation.creationOrder(b, a)).to.be.below(0);
+            expect(iD.entityRelation.creationOrder(a, b)).to.be.above(0);
+            expect(iD.entityRelation.creationOrder(b, a)).to.be.below(0);
         });
 
         specify('orders new relations newest-first', function () {
             var a = iD.osmRelation({ id: 'r-1' });
             var b = iD.osmRelation({ id: 'r-2' });
-            expect(iD.osmRelation.creationOrder(a, b)).to.be.above(0);
-            expect(iD.osmRelation.creationOrder(b, a)).to.be.below(0);
+            expect(iD.entityRelation.creationOrder(a, b)).to.be.above(0);
+            expect(iD.entityRelation.creationOrder(b, a)).to.be.below(0);
         });
     });
 });

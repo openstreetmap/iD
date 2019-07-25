@@ -19,9 +19,10 @@ entityEntity.way = entityWay;
 entityWay.prototype = Object.create(entityEntity.prototype);
 
 Object.assign(entityWay.prototype, {
-    type: 'way',
-    nodes: [],
 
+    type: 'way',
+
+    nodes: [],
 
     copy: function(resolver, copies) {
         if (copies[this.id]) return copies[this.id];
@@ -38,7 +39,6 @@ Object.assign(entityWay.prototype, {
         return copy;
     },
 
-
     extent: function(resolver) {
         return resolver.transient(this, 'extent', function() {
             var extent = geoExtent();
@@ -52,37 +52,30 @@ Object.assign(entityWay.prototype, {
         });
     },
 
-
     first: function() {
         return this.nodes[0];
     },
-
 
     last: function() {
         return this.nodes[this.nodes.length - 1];
     },
 
-
     contains: function(node) {
         return this.nodes.indexOf(node) >= 0;
     },
-
 
     affix: function(node) {
         if (this.nodes[0] === node) return 'prefix';
         if (this.nodes[this.nodes.length - 1] === node) return 'suffix';
     },
 
-
     layer: function() {
         return 0;
     },
 
-
     isClosed: function() {
         return this.nodes.length > 1 && this.first() === this.last();
     },
-
 
     isConvex: function(resolver) {
         if (!this.isClosed() || this.isDegenerate()) return null;
@@ -113,11 +106,9 @@ Object.assign(entityWay.prototype, {
         return false;
     },
 
-
     isDegenerate: function() {
         return (new Set(this.nodes).size < (this.isArea() ? 3 : 2));
     },
-
 
     areAdjacent: function(n1, n2) {
         for (var i = 0; i < this.nodes.length; i++) {
@@ -129,13 +120,11 @@ Object.assign(entityWay.prototype, {
         return false;
     },
 
-
     geometry: function(graph) {
         return graph.transient(this, 'geometry', function() {
             return this.isArea() ? 'area' : 'line';
         });
     },
-
 
     // If this way is not closed, append the beginning node to the end of the nodelist to close it.
     close: function() {
@@ -146,7 +135,6 @@ Object.assign(entityWay.prototype, {
         nodes.push(nodes[0]);
         return this.update({ nodes: nodes });
     },
-
 
     // If this way is closed, remove any connector nodes from the end of the nodelist to unclose it.
     unclose: function() {
@@ -165,7 +153,6 @@ Object.assign(entityWay.prototype, {
         nodes = nodes.filter(noRepeatNodes);
         return this.update({ nodes: nodes });
     },
-
 
     // Adds a node (id) in front of the node which is currently at position index.
     // If index is undefined, the node will be added to the end of the way for linear ways,
@@ -217,7 +204,6 @@ Object.assign(entityWay.prototype, {
         return this.update({ nodes: nodes });
     },
 
-
     // Replaces the node which is currently at position index with the given node (id).
     // Consecutive duplicates are eliminated including existing ones.
     // Circularity is preserved when updating a node.
@@ -262,7 +248,6 @@ Object.assign(entityWay.prototype, {
         return this.update({nodes: nodes});
     },
 
-
     // Replaces each occurrence of node id needle with replacement.
     // Consecutive duplicates are eliminated including existing ones.
     // Circularity is preserved.
@@ -286,7 +271,6 @@ Object.assign(entityWay.prototype, {
         return this.update({nodes: nodes});
     },
 
-
     // Removes each occurrence of node id.
     // Consecutive duplicates are eliminated including existing ones.
     // Circularity is preserved.
@@ -305,7 +289,6 @@ Object.assign(entityWay.prototype, {
 
         return this.update({nodes: nodes});
     },
-
 
     asJXON: function(changeset_id) {
         var r = {
@@ -326,7 +309,6 @@ Object.assign(entityWay.prototype, {
         return r;
     },
 
-
     asGeoJSON: function(resolver) {
         return resolver.transient(this, 'GeoJSON', function() {
             var coordinates = resolver.childNodes(this)
@@ -345,7 +327,6 @@ Object.assign(entityWay.prototype, {
             }
         });
     },
-
 
     area: function(resolver) {
         return resolver.transient(this, 'area', function() {
@@ -372,6 +353,7 @@ Object.assign(entityWay.prototype, {
             return isNaN(area) ? 0 : area;
         });
     }
+
 });
 
 

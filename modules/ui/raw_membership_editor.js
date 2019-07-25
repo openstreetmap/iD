@@ -11,6 +11,7 @@ import { actionChangeMember } from '../actions/change_member';
 import { actionDeleteMember } from '../actions/delete_member';
 
 import { modeSelect } from '../modes/select';
+import { entityRelation } from '../entities/relation';
 import { osmRelation } from '../osm';
 import { services } from '../services';
 import { svgIcon } from '../svg/icon';
@@ -116,7 +117,7 @@ export function uiRawMembershipEditor(context) {
         });
 
         result.sort(function(a, b) {
-            return osmRelation.creationOrder(a.relation, b.relation);
+            return entityRelation.creationOrder(a.relation, b.relation);
         });
 
         // Dedupe identical names by appending relation id - see #2891
