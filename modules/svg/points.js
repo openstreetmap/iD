@@ -22,7 +22,7 @@ export function svgPoints(projection, context) {
     function fastEntityKey(d) {
         var mode = context.mode();
         var isMoving = mode && /^(add|draw|drag|move|rotate)/.test(mode.id);
-        return isMoving ? d.id : d.key();
+        return (!isMoving && d.key) ? d.key() : d.id;
     }
 
 
