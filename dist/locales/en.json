@@ -8811,6 +8811,10 @@
                     "name": "Photography Store",
                     "terms": "camera,film"
                 },
+                "shop/printer_ink": {
+                    "name": "Printer Ink Store",
+                    "terms": "copier ink,fax ink,ink cartridges,toner"
+                },
                 "shop/pyrotechnics": {
                     "name": "Fireworks Store",
                     "terms": "fireworks"
