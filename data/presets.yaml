@@ -7250,6 +7250,11 @@ en:
         name: Photography Store
         # 'terms: camera,film'
         terms: '<translate with synonyms or related terms for ''Photography Store'', separated by commas>'
+      shop/printer_ink:
+        # shop=printer_ink
+        name: Printer Ink Store
+        # 'terms: copier ink,fax ink,ink cartridges,toner'
+        terms: '<translate with synonyms or related terms for ''Printer Ink Store'', separated by commas>'
       shop/pyrotechnics:
         # shop=pyrotechnics
         name: Fireworks Store
