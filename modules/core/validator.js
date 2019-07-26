@@ -94,7 +94,7 @@ export function coreValidator(context) {
 
         // rerun for all buildings
         buildings.forEach(function(entity) {
-            var detected = checkUnsquareWay(entity, context);
+            var detected = checkUnsquareWay(entity, context.graph());
             if (detected.length !== 1) return;
 
             var issue = detected[0];
