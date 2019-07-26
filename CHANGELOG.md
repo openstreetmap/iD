@@ -70,7 +70,7 @@ _Breaking changes, which may affect downstream projects or sites that embed iD, 
 * Add Dressing Room preset ([#6643])
 * Add Pool Supply Store preset ([#6599])
 * Add Address Interpolation line preset ([#4220])
-* Add Park & Ride Lot, Aircraft Holding Position, and Aircraft Parking Position presets
+* Add Printer Ink Store, Park & Ride Lot, Aircraft Holding Position, and Aircraft Parking Position presets
 * Add Type and Address fields to Public Bookcase preset ([#6564], thanks [@ToastHawaii])
 * Add Underground Levels field to building presets ([#6628])
 * Add more fields to the Kindergarten, Ferry Route, Ford, Dam, Weir, and Bridge Support presets
