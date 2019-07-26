@@ -2,7 +2,6 @@
     "icon": "maki-pitch",
     "geometry": [
         "point",
-        "line",
         "area"
     ],
     "tags": {
