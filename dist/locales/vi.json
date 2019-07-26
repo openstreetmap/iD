@@ -2481,12 +2481,6 @@
                         "undefined": "Không"
                     }
                 },
-                "iata": {
-                    "label": "IATA"
-                },
-                "icao": {
-                    "label": "ICAO"
-                },
                 "incline": {
                     "label": "Độ dốc"
                 },

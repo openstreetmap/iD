@@ -2571,12 +2571,6 @@
                         "undefined": "아니오"
                     }
                 },
-                "iata": {
-                    "label": "IATA"
-                },
-                "icao": {
-                    "label": "ICAO"
-                },
                 "incline": {
                     "label": "경사"
                 },

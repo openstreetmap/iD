@@ -1493,12 +1493,6 @@
                         "undefined": "Nie"
                     }
                 },
-                "iata": {
-                    "label": "IATA"
-                },
-                "icao": {
-                    "label": "ICAO"
-                },
                 "incline": {
                     "label": "Sklon"
                 },

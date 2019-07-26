@@ -1280,12 +1280,6 @@
                     "label": "Gelung",
                     "placeholder": "1, 2, 4..."
                 },
-                "iata": {
-                    "label": "IATA"
-                },
-                "icao": {
-                    "label": "ICAO"
-                },
                 "incline": {
                     "label": "Kecenderungan, Kecondongan"
                 },

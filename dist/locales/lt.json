@@ -1899,12 +1899,6 @@
                         "undefined": "Ne"
                     }
                 },
-                "iata": {
-                    "label": "IATA"
-                },
-                "icao": {
-                    "label": "ICAO"
-                },
                 "incline": {
                     "label": "Nuolydis"
                 },

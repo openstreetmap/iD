@@ -1710,7 +1710,7 @@
                 "tip": "Finde nicht routingfähige Straßen, Wege und Fährrouten.",
                 "routable": {
                     "message": {
-                        "multiple": "{count} routingfähige Objekte sind nur untereinander vunden."
+                        "multiple": "{count} routingfähige Objekte sind nur untereinander verbunden."
                     },
                     "reference": "Alle Straßen, Wege und Fährrouten sollten verbunden sein und ein zusammenhängendes routingfähiges Netzwerk bilden."
                 },
@@ -1719,8 +1719,8 @@
                 }
             },
             "fixme_tag": {
-                "title": "„FIXME“ Ersuchen",
-                "message": "{feature} mit „FIXME“ Ersuchen",
+                "title": "Ersuchen um Verbesserung („Fix Me“)",
+                "message": "{feature} mit Ersuchen um Verbesserung („Fix Me“)",
                 "tip": "Finde Objekte mit einer „fixme“ Eigenschaft",
                 "reference": "Eine „fixme“ Eigenschaft weist darauf hin, dass ein Mapper um Hilfe mit einem Objekt ersucht hat."
             },
@@ -1951,6 +1951,9 @@
                 },
                 "use_different_layers": {
                     "title": "Benutze verschiedene Ebenen"
+                },
+                "use_different_layers_or_levels": {
+                    "title": "Benutze verschiedene Ebenen oder Stockwerke (level/layer)"
                 },
                 "use_different_levels": {
                     "title": "Benutze verschiedene Stockwerke"
@@ -2460,6 +2463,15 @@
                 "access_simple": {
                     "label": "Erlaubter Zugang"
                 },
+                "addr/interpolation": {
+                    "label": "Typ",
+                    "options": {
+                        "all": "Alle",
+                        "alphabetic": "Alphabetisch",
+                        "even": "Gerade",
+                        "odd": "Ungerade"
+                    }
+                },
                 "address": {
                     "label": "Adresse",
                     "placeholders": {
@@ -2649,6 +2661,10 @@
                 },
                 "building": {
                     "label": "Gebäude"
+                },
+                "building/levels/underground": {
+                    "label": "Unterirdische Geschosse",
+                    "placeholder": "2, 4, 6..."
                 },
                 "building/levels_building": {
                     "label": "Gebäudeetagen",
@@ -3168,10 +3184,10 @@
                     }
                 },
                 "iata": {
-                    "label": "IATA"
+                    "label": "IATA Flughafen Code"
                 },
                 "icao": {
-                    "label": "ICAO"
+                    "label": "ICAO Flughafen Code"
                 },
                 "incline": {
                     "label": "Neigung"
@@ -3673,11 +3689,17 @@
                 "power_supply": {
                     "label": "Stromversorgung"
                 },
+                "preschool": {
+                    "label": "Vorschule"
+                },
                 "produce": {
                     "label": "Erzeugnisse"
                 },
                 "product": {
                     "label": "Produkte"
+                },
+                "public_bookcase/type": {
+                    "label": "Typ"
                 },
                 "railway": {
                     "label": "Typ"
@@ -4337,6 +4359,9 @@
                 }
             },
             "presets": {
+                "addr/interpolation": {
+                    "name": "Address-Interpolation"
+                },
                 "address": {
                     "name": "Adresse",
                     "terms": "Adresse"
@@ -4430,9 +4455,17 @@
                     "name": "Hubschrauberlandeplatz",
                     "terms": "Hubschrauberlandeplatz, Helikopterlandeplatz, Heliport"
                 },
+                "aeroway/holding_position": {
+                    "name": "Rollhalteort",
+                    "terms": "Rollhalteort, Rollhalt"
+                },
                 "aeroway/jet_bridge": {
                     "name": "Jetbrücke",
                     "terms": "Jetbrücke, Flugzeugbrücke, Passagierbrücke,"
+                },
+                "aeroway/parking_position": {
+                    "name": "Flugzeugparkposition",
+                    "terms": "Flugzeugparkposition"
                 },
                 "aeroway/runway": {
                     "name": "Start- und Landebahn",
@@ -4639,6 +4672,10 @@
                     "name": "Kampfsportstudio",
                     "terms": "Kampfsportstudio, Kampfsportzentrum, Karatestudio, Dojo"
                 },
+                "amenity/dressing_room": {
+                    "name": "Umkleideraum",
+                    "terms": "Umkleideraum, Umkleidekabine"
+                },
                 "amenity/drinking_water": {
                     "name": "Trinkwasser",
                     "terms": "Brunnen,Trinkwasserbrunnen,Wasserhahn,Trinkbrunnen"
@@ -4741,7 +4778,7 @@
                     "terms": "Karaoke Klub, Karaoke, Raum, Karaoke TV"
                 },
                 "amenity/kindergarten": {
-                    "name": "Kindergarten, Kindergartengelände, Kindertagesstätte, Kindertagesstättengelände",
+                    "name": "Vorschule/Kindergarten, Kindergartengelände, Kindertagesstätte, Kindertagesstättengelände",
                     "terms": "Kindergartengelände"
                 },
                 "amenity/language_school": {
@@ -4794,6 +4831,10 @@
                 "amenity/parking/multi-storey": {
                     "name": "Mehrstöckige Parkgarage",
                     "terms": "Mehrstöckige Parkgarage"
+                },
+                "amenity/parking/park_ride": {
+                    "name": "Park & Ride Platz",
+                    "terms": "Pendlerparkplatz, Park&Pool, Park&Ride, P+R, öffentlicher Verkehr, U-Bahn, Eisenbahnparkplatz"
                 },
                 "amenity/parking/underground": {
                     "name": "Tiefgarage",
@@ -6997,6 +7038,10 @@
                     "name": "Fahrsilo",
                     "terms": "offener Schüttgutbunker, Fahrsilokammer"
                 },
+                "man_made/cairn": {
+                    "name": "Steinmännchen",
+                    "terms": "Steinhügel, Steinmänner, Steinmandl, Steinmanderl, Steindauben"
+                },
                 "man_made/chimney": {
                     "name": "Schornstein",
                     "terms": "Schornstein, Kamin"
@@ -8409,6 +8454,10 @@
                     "name": "HiFi-Laden",
                     "terms": "HiFi-Geschäft"
                 },
+                "shop/hobby": {
+                    "name": "Bastelgeschäft",
+                    "terms": "Bastelgeschäft, Hobbyshop"
+                },
                 "shop/houseware": {
                     "name": "Haushaltswarengeschäft",
                     "terms": "Haushaltswarengeschäft, Haushaltswarenladen"
@@ -8601,6 +8650,10 @@
                     "name": "Supermarkt",
                     "terms": "Supermarkt"
                 },
+                "shop/swimming_pool": {
+                    "name": "Swimmingpoolbedarf",
+                    "terms": "Swimmingpoolbedarf"
+                },
                 "shop/tailor": {
                     "name": "Schneider",
                     "terms": "Schneider, Herrenschneider"
@@ -8742,6 +8795,10 @@
                 "tourism/attraction": {
                     "name": "Sehenswürdigkeit",
                     "terms": "Touristenattraktion"
+                },
+                "tourism/camp_pitch": {
+                    "name": "Zeltplatz/Wohnwagenplatz",
+                    "terms": "Zelt, Wohnwagen"
                 },
                 "tourism/camp_site": {
                     "name": "Campingplatz",
@@ -9799,6 +9856,10 @@
                 "description": "YouthMappers Ortsverband an der Universität von Nigerie, Enugu Campus",
                 "extendedDescription": "Das LionMappersTeam (LMT) Enugu Campus ist ein Teil des YouthMappers Network. Das einzige Ziel ist, Mitgliedern die Möglichkeit zu geben, ihre Fähigkeiten im Bereich der Geoinformatik zu erlernen und zu verbessern sowie offene geografische Daten und Analysen zu erstellen, die lokal definierten Herausforderungen auf globaler Ebene begegnen. Es handelt sich um ein Team von Freiwilligen für die Bereitstellung von Crowdsourced-Mapping und Geoinformationen unter Verwendung von Openstreetmap, Citizen Science und anderer Geospatial-Technologie für Forschung, Schulung und Reaktion auf widerstandsfähige gesellschaftliche Herausforderungen. Wir sind in den Bereichen Web-Kartografie, GIS und Fernerkundung und Forschung involviert. Wir beschäftigen uns mit Freiwilligen Geografischen Informationen. GIS und Gerechtigkeit und Citizen Science. Zu unseren Hauptaktivitäten zählen Online-Crowdsourcing-Kartografie, Field Mapping, Schulungsworkshops und Schulungen zu High School sowie humanitärer Katastrophenhilfe."
             },
+            "osm-africa-telegram": {
+                "name": "OpenStreetMap Afrika Telegram",
+                "description": "OpenStreetMap Telegram für Afrika"
+            },
             "ym-Insititue-d-Enseignement-Superieur-de-Ruhengeri": {
                 "name": "YouthMappers INES Ruhengeri",
                 "description": "YouthMappers Ortsverband am Institut für Hochschulbildung in Ruhengeri",
@@ -9924,6 +9985,10 @@
                 "name": "UZMappers",
                 "description": "YouthMappers chapter at University of Zimbabwe",
                 "extendedDescription": "UzMappersTeam Zimbabwe is a team of Volunteers using OpenStreetMap for Open Data Mapping and Humanitarian Disaster response mapping .The team empowers its members with open source geospatial technology skills."
+            },
+            "osm-afghanistan-facebook": {
+                "name": "OpenStreetMap Afghanistan",
+                "description": "Verbessere OpenStreetMap in Afghanistan"
             },
             "OSM-BGD-facebook": {
                 "name": "OpenStreetMap Bangladesch",
@@ -10460,6 +10525,10 @@
                 "name": "OpenStreetMap Kosovo auf Telegram",
                 "description": "Halboffizielle öffentliche Gesamt-Kosovo Telegram Gruppe. Mapper von überall in jeder Sprache sind willkommen."
             },
+            "lu-mailinglist": {
+                "name": "Talk-lu Mailing Liste",
+                "description": "Offizielle Mailing Liste für die Luxembourgische OSM Gemeinschaft"
+            },
             "ym-Universit-Mohammed-V-Rabat": {
                 "name": "Brahmapoutre at Rabat",
                 "description": "YouthMappers chapter at Université Mohammed V Rabat",
@@ -10488,6 +10557,14 @@
             "OSM-PL-forum": {
                 "name": "OpenStreetMap Polen Web Forum",
                 "description": "Forum der polnischen OpenStreetMap-Community"
+            },
+            "pt-mailinglist": {
+                "name": "Talk-pt Mailing Liste",
+                "description": "Talk-pt ist die offizielle Mailingliste für die Portugiesische OSM-Gemeinschaft"
+            },
+            "pt-telegram": {
+                "name": "OpenStreetMap Portugal no Telegram",
+                "description": "Telegram Gruppe der Portugiesischen OpenStreetMap Gemeinschaft {url}"
             },
             "si-forum": {
                 "name": "OpenStreetMap Slowenien Forum",
@@ -10978,6 +11055,10 @@
                 "name": "Geography Club",
                 "description": "YouthMappers chapter at Western Michigan University"
             },
+            "geogeeks_perth_meetup": {
+                "name": "GeoGeeks Perth Treffen",
+                "description": "Treffen in Perth für Menschen die sich für GIS-Daten, Mappen und Open Source interessieren. Wir beschäftigen uns mit allen Angelegenheiten von lokaler Bedeutung."
+            },
             "talk-au": {
                 "name": "Talk-au Mailing Liste",
                 "description": "Mappers in Australien chatten hier"
@@ -11033,6 +11114,10 @@
                 "name": "OpenStreetMap Brasília Telegram Gruppe",
                 "description": "Beteiligte dich an der OpenStreetMap Brasília Gemeinschaft auf Telegram",
                 "extendedDescription": "Mach mit, um mehr über OpenStreetMap zu erfahren, Fragen zu stellen oder an unseren Treffen teilzunehmen. Alle sind willkommen!"
+            },
+            "OSM-br-discord": {
+                "name": "OpenStreetMap Brasil Discord",
+                "description": "Beteilige dich an der OpenStreetMap Brasilien Community auf Discord"
             },
             "OSM-br-mailinglist": {
                 "name": "Talk-br Mailingliste",
@@ -11170,6 +11255,18 @@
             "uy-mailinglist": {
                 "name": "Talk-uy Mailing Liste",
                 "description": "Talk-uy ist die offizielle Mailingliste für die OSM Gemeinschaft in Uruguay"
+            },
+            "ve-forum": {
+                "name": "OpenStreetMap VE Forum",
+                "description": "OpenStreetMap Venezuela web forum"
+            },
+            "ve-mailinglist": {
+                "name": "Talk-ve Mailing Liste",
+                "description": "Talk-ve ist die offizielle Mailingliste für die OSM Community in Venezuela."
+            },
+            "ve-telegram": {
+                "name": "OpenStreetMap Venezuela Telegram",
+                "description": "Mach mit bei der OpenStreetMap Venezuela Gemeinschaft auf Telegram"
             },
             "LATAM-Facebook": {
                 "name": "OpenStreetMap Lateinamerika Facebook",

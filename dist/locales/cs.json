@@ -160,7 +160,9 @@
                     "points": "Narovnáno několik bodů.",
                     "line": "Narovnána linie."
                 },
-                "too_bendy": "Nelze narovnat, protože je příliš zakroucený."
+                "too_bendy": "Nelze narovnat, protože je příliš zakroucený.",
+                "connected_to_hidden": "Nemůže být narovnáno, protože je připojeno k neviditelnému prvku.",
+                "not_downloaded": "Nemůže být narovnáno, protože některé jeho části nebyly zcela staženy."
             },
             "delete": {
                 "title": "Smazat",
@@ -191,10 +193,21 @@
                 "connected_to_hidden": {
                     "single": "Nelze smazat, protože je napojen na skrytý prvek.",
                     "multiple": "Nelze smazat, protože jsou napojené na skryté prvky."
+                },
+                "not_downloaded": {
+                    "single": "Prvek nemůže být smazán, neboť některé jeho části nebyly dosud staženy.",
+                    "multiple": "Tyto prvky nemohou být smazány, neboť některé jejich části nebyly dosud staženy."
                 }
             },
             "downgrade": {
-                "title": "Degradovat"
+                "title": "Degradovat",
+                "annotation": {
+                    "building": {
+                        "single": "Prvek degradován na základní budovu.",
+                        "multiple": "Degradováno {n} prvků na základní budovy."
+                    },
+                    "multiple": "Degradováno {n} prvků."
+                }
             },
             "add_member": {
                 "annotation": "Přidán člen do relace."
@@ -375,6 +388,9 @@
                     "create": "Přidáno omezení odbočování",
                     "delete": "Smazáno omezení odbočování"
                 }
+            },
+            "extract": {
+                "key": "E"
             }
         },
         "restriction": {
@@ -450,11 +466,11 @@
             "rateLimit": "API omezuje anonymní připojení. Můžete to vyřešit tím, že se přihlásíte."
         },
         "commit": {
-            "title": "Nahrát na OpenStreetMap",
+            "title": "Odeslat na OpenStreetMap",
             "upload_explanation": "Vámi provedené změny budou viditelné na všech mapách postavených na datech z OpenStreetMap.",
             "upload_explanation_with_user": "Změny provedené pod jménem {user} budou viditelné na všech mapách postavených na datech z OpenStreetMap.",
             "request_review": "Rád bych, kdyby se na mé změny někdo podíval.",
-            "save": "Nahrát",
+            "save": "Odeslat",
             "cancel": "Storno",
             "changes": "{count} změn",
             "download_changes": "Stáhnout soubor osmChange",
@@ -471,7 +487,7 @@
         },
         "contributors": {
             "list": "Přispěli {users}",
-            "truncated_list": "Přispěli {users} a {count} další."
+            "truncated_list": "Přispěli {users} a dalších {count}."
         },
         "info_panels": {
             "key": "I",
@@ -573,6 +589,9 @@
             "edit_reference": "editovat / přeložit",
             "wiki_reference": "Zobrazit dokumentaci",
             "wiki_en_reference": "Zobrazit dokumentaci v angličtině",
+            "hidden_preset": {
+                "zoom": "{features} jsou skryté. Pro jejich zobrazení přibližte."
+            },
             "back_tooltip": "Změnit prvek",
             "remove": "Odstranit",
             "search": "Hledat",
@@ -723,6 +742,9 @@
                 "description": "Železnice",
                 "tooltip": "Koleje, nádraží atd."
             },
+            "pistes": {
+                "description": "Stezky"
+            },
             "power": {
                 "description": "Energetika",
                 "tooltip": "Elektrická vedení, elektrárny, transformátory atd."
@@ -816,6 +838,7 @@
         "success": {
             "just_edited": "Právě jste upravili OpenStreetMap!",
             "thank_you": "Děkujeme za vylepšení mapy.",
+            "thank_you_location": "Děkujeme za vylepšení mapy kolem {where}.",
             "thank_you_where": {
                 "format": "{place}{separator}{region}",
                 "separator": ", "
@@ -1293,8 +1316,8 @@
                 "save_h": "Uložit",
                 "save": "Stiskněte{save} **Uložit** pro ukončení svých úprav a jejich nahrání na OpenStreetMap. Pamatujte na časté ukládání své práce!",
                 "save_validation": "Na obrazovce ukládání budete mít šanci prohlédnout si své úpravy. iD také provede některé základní kontroly ohledně chybějících informací a případně Vám může pomoci návrhy a varováními, pokud se něco nebude zdát v pořádku.",
-                "upload_h": "Nahrát",
-                "upload": "Před nahráním vašich změn musíte vložit [popis vaší sady změn](https://wiki.openstreetmap.org/wiki/Good_changeset_comments). Poté klikněte na tlačítko **Nahrát** pro odeslání vašich změn do OpenStreetMap, kde budou připojeny do mapy a veřejně viditelné pro všechny.",
+                "upload_h": "Odeslat",
+                "upload": "Před nahráním vašich změn musíte vložit [popis vaší sady změn](https://wiki.openstreetmap.org/wiki/Good_changeset_comments). Poté klikněte na tlačítko **Odeslat** pro odeslání vašich změn do OpenStreetMap, kde budou připojeny do mapy a veřejně viditelné pro všechny.",
                 "backups_h": "Automatické zálohy",
                 "backups": "Pokud nemůžete dokončit vaše změny najednou, například pokud vám spadne počítač nebo zavřete panel prohlížeče, vaše změny jsou uloženy v úložišti vašeho prohlížeče. Ke změnám se můžete vrátit (ve stejném prohlížeči na stejném počítači) a iD vám nabídne obnovení vaší neuložené práce.",
                 "keyboard_h": "Klávesové zkratky",
@@ -1422,6 +1445,7 @@
             },
             "options": {
                 "what": {
+                    "title": "Hledat:",
                     "edited": "Mé úpravy",
                     "all": "Všechno"
                 },
@@ -1445,7 +1469,10 @@
                 "title": "Skoro spojení"
             },
             "close_nodes": {
-                "title": "Body sobě velmi blízko"
+                "title": "Body sobě velmi blízko",
+                "detached": {
+                    "message": "{feature} je příliš blízko {feature2}"
+                }
             },
             "crossing_ways": {
                 "title": "Křížení linií",
@@ -1456,6 +1483,13 @@
             },
             "fixme_tag": {
                 "title": "Žádosti na opravu"
+            },
+            "generic_name": {
+                "title": "Podezřelé názvy",
+                "message": "{feature} má podezřelý název \"{name}\""
+            },
+            "incompatible_source": {
+                "title": "Podezřelé zdroje"
             },
             "invalid_format": {
                 "title": "Neplatné formátování",
@@ -1491,6 +1525,11 @@
             "impossible_oneway": {
                 "title": "Nemožné jednosměrky"
             },
+            "unsquare_way": {
+                "title": "Nepravoúhlé rohy (do {val}°)",
+                "message": "{feature} má nepravoúhlé rohy",
+                "tip": "Najít prvky s nepravoúhlými rohy, které by mohly být zakresleny lépe"
+            },
             "fix": {
                 "connect_almost_junction": {
                     "annotation": "Připojeny velmi blízké prvky."
@@ -1521,12 +1560,15 @@
                 },
                 "tag_as_disconnected": {
                     "title": "Označit jako odpojené"
+                },
+                "tag_as_unsquare": {
+                    "title": "Označit jako fyzicky nepravoúhlé"
                 }
             }
         },
         "intro": {
             "done": "hotovo",
-            "ok": "OK",
+            "ok": "Vskutku",
             "graph": {
                 "block_number": "<value for addr:block_number>",
                 "city": "Meziříčí",
@@ -1927,8 +1969,14 @@
                 "category-building": {
                     "name": "Budovy"
                 },
+                "category-golf": {
+                    "name": "Golfové prvky"
+                },
                 "category-landuse": {
                     "name": "Využití krajiny"
+                },
+                "category-natural": {
+                    "name": "Přírodní prvky"
                 },
                 "category-path": {
                     "name": "Pěší cesty"
@@ -2009,6 +2057,15 @@
                 },
                 "access_simple": {
                     "label": "Povolený vstup/vjezd"
+                },
+                "addr/interpolation": {
+                    "label": "Druh",
+                    "options": {
+                        "all": "Vše",
+                        "alphabetic": "Abecední",
+                        "even": "Sudý",
+                        "odd": "Lichý"
+                    }
                 },
                 "address": {
                     "label": "Adresa",
@@ -2196,6 +2253,10 @@
                 },
                 "building": {
                     "label": "Budova"
+                },
+                "building/levels/underground": {
+                    "label": "Podzemní patra",
+                    "placeholder": "2, 4, 6,..."
                 },
                 "building/levels_building": {
                     "label": "Patra budovy",
@@ -2705,12 +2766,6 @@
                         "stables": "Ano",
                         "undefined": "Ne"
                     }
-                },
-                "iata": {
-                    "label": "IATA"
-                },
-                "icao": {
-                    "label": "ICAO"
                 },
                 "incline": {
                     "label": "Sklon"
@@ -3310,6 +3365,9 @@
                 "sanitary_dump_station": {
                     "label": "Výlevka pro WC"
                 },
+                "screen": {
+                    "placeholder": "1, 4, 8,…"
+                },
                 "scuba_diving": {
                     "label": "Služby"
                 },
@@ -3609,8 +3667,15 @@
                     "options": {
                         "bucket": "Nádrž na odpad",
                         "chemical": "Chemický",
-                        "flush": "Splachovací"
+                        "flush": "Splachovací",
+                        "pitlatrine": "Kadibudka"
                     }
+                },
+                "toilets/handwashing": {
+                    "label": "Mytí rukou"
+                },
+                "toilets/position": {
+                    "label": "Pozice"
                 },
                 "toll": {
                     "label": "Mýtné"
@@ -3649,6 +3714,7 @@
                     "label": "Dopravní značka"
                 },
                 "traffic_sign/direction": {
+                    "label": "Dotčený směr",
                     "options": {
                         "backward": "Zpátky",
                         "both": "Oba/všechny směry",
@@ -3659,6 +3725,7 @@
                     "label": "Typ"
                 },
                 "traffic_signals/direction": {
+                    "label": "Dotčený směr",
                     "options": {
                         "backward": "Zpátky",
                         "both": "Oba/všechny směry",
@@ -3695,6 +3762,9 @@
                 },
                 "trench": {
                     "label": "Typ"
+                },
+                "trolley_wire": {
+                    "label": "Trolejové vedení"
                 },
                 "tunnel": {
                     "label": "Typ",
@@ -3774,7 +3844,8 @@
                     "label": "Typ"
                 },
                 "website": {
-                    "label": "Webová stránka"
+                    "label": "Webová stránka",
+                    "placeholder": "https://priklad.cz"
                 },
                 "wetland": {
                     "label": "Typ"
@@ -3804,6 +3875,7 @@
                         "delta": "Trojúhelník",
                         "leblanc": "LeBlanc",
                         "open": "Otevřít",
+                        "open-delta": "Otevřená delta",
                         "star": "Hvězda",
                         "zigzag": "Cikcak"
                     }
@@ -5133,6 +5205,9 @@
                     "name": "Brod",
                     "terms": "brod,přejezd vody,ford"
                 },
+                "ford_line": {
+                    "name": "Brod"
+                },
                 "golf/bunker": {
                     "name": "Pískový bunker",
                     "terms": "pískový bunker,písková překážka,písečná překážka,bunker,hazard"
@@ -5888,6 +5963,9 @@
                     "name": "Stadion",
                     "terms": "stadion,fotbal,fotbalový stadión,hřiště"
                 },
+                "leisure/swimming_area": {
+                    "name": "Přírodní koupaliště"
+                },
                 "leisure/swimming_pool": {
                     "name": "Plavecký bazén",
                     "terms": "plovárna,koupaliště"
@@ -5895,6 +5973,18 @@
                 "leisure/track": {
                     "name": "Závodní dráha (ne pro motorsport)",
                     "terms": "jezdit na kole,pes,chrt,kůň,koně,chrti,chrtů,závod*,dráha"
+                },
+                "leisure/track/horse_racing": {
+                    "name": "Jezdecká dráha"
+                },
+                "leisure/track/horse_racing_point": {
+                    "name": "Jezdecká dráha"
+                },
+                "leisure/track/running": {
+                    "name": "Běžecká dráha"
+                },
+                "leisure/track/running_point": {
+                    "name": "Běžecká dráha"
                 },
                 "leisure/water_park": {
                     "name": "Akvapark",
@@ -6033,6 +6123,9 @@
                 },
                 "man_made/tower/observation": {
                     "name": "Vyhlídková věž"
+                },
+                "man_made/tunnel": {
+                    "name": "Tunel"
                 },
                 "man_made/wastewater_plant": {
                     "name": "Čistírna odpadních vod",
@@ -6199,7 +6292,7 @@
                     "terms": "mokřad,mokřina,rašeliniště,slatiniště,slatina,bažina,slanisko,slať,slatě,mangrovy"
                 },
                 "natural/wood": {
-                    "name": "Prales",
+                    "name": "Les",
                     "terms": "prales,přírodní les,neudržovaný les,nehospodářský les"
                 },
                 "noexit/yes": {
@@ -7589,6 +7682,22 @@
                 "name": "Nejaktuálnější letecké snímky AIV Flanders"
             },
             "AGIV10cm": {
+                "attribution": {
+                    "text": "© agentschap Informatie Vlaanderen"
+                }
+            },
+            "AGIVFlandersGRB": {
+                "attribution": {
+                    "text": "© agentschap Informatie Vlaanderen"
+                },
+                "name": "AIV Flanders GRB"
+            },
+            "AIV_DHMV_II_HILL_25cm": {
+                "attribution": {
+                    "text": "© agentschap Informatie Vlaanderen"
+                }
+            },
+            "AIV_DHMV_II_SVF_25cm": {
                 "attribution": {
                     "text": "© agentschap Informatie Vlaanderen"
                 }

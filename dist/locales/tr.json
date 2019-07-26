@@ -1690,12 +1690,6 @@
                         "undefined": "Hayır"
                     }
                 },
-                "iata": {
-                    "label": "IATA"
-                },
-                "icao": {
-                    "label": "ICAO"
-                },
                 "incline": {
                     "label": "Meyil"
                 },

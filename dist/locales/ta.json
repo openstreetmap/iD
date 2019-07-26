@@ -971,12 +971,6 @@
                         "undefined": "இல்லை"
                     }
                 },
-                "iata": {
-                    "label": "IATA"
-                },
-                "icao": {
-                    "label": "ICAO"
-                },
                 "incline": {
                     "label": "சாய்வு தளம்"
                 },

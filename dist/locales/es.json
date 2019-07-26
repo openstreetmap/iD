@@ -1952,6 +1952,9 @@
                 "use_different_layers": {
                     "title": "Use capas diferentes"
                 },
+                "use_different_layers_or_levels": {
+                    "title": "Use diferentes capas o niveles"
+                },
                 "use_different_levels": {
                     "title": "Use niveles diferentes"
                 },
@@ -2460,6 +2463,15 @@
                 "access_simple": {
                     "label": "Acceso permitido"
                 },
+                "addr/interpolation": {
+                    "label": "Tipo",
+                    "options": {
+                        "all": "Todo",
+                        "alphabetic": "Alfabético",
+                        "even": "Par",
+                        "odd": "Impar"
+                    }
+                },
                 "address": {
                     "label": "Dirección",
                     "placeholders": {
@@ -2649,6 +2661,10 @@
                 },
                 "building": {
                     "label": "Edificio"
+                },
+                "building/levels/underground": {
+                    "label": "Niveles subterráneos",
+                    "placeholder": "2, 4, 6..."
                 },
                 "building/levels_building": {
                     "label": "Niveles del edificio",
@@ -2844,7 +2860,7 @@
                     "label": "Diseño"
                 },
                 "destination/ref_oneway": {
-                    "label": "Números de carretera de destino"
+                    "label": "Números de vía de destino"
                 },
                 "destination/symbol_oneway": {
                     "label": "Símbolos de destino"
@@ -3168,10 +3184,10 @@
                     }
                 },
                 "iata": {
-                    "label": "IATA"
+                    "label": "Código de aeropuerto IATA"
                 },
                 "icao": {
-                    "label": "ICAO"
+                    "label": "Código de aeropuerto de la OACI - ICAO"
                 },
                 "incline": {
                     "label": "Pendiente"
@@ -3673,11 +3689,17 @@
                 "power_supply": {
                     "label": "Fuente de energía"
                 },
+                "preschool": {
+                    "label": "Preescolar"
+                },
                 "produce": {
                     "label": "Produce"
                 },
                 "product": {
                     "label": "Productos"
+                },
+                "public_bookcase/type": {
+                    "label": "Tipo"
                 },
                 "railway": {
                     "label": "Tipo"
@@ -4337,6 +4359,9 @@
                 }
             },
             "presets": {
+                "addr/interpolation": {
+                    "name": "Interpolación de direcciones"
+                },
                 "address": {
                     "name": "Dirección",
                     "terms": "dirección, altura, domicilio, residencia"
@@ -4430,9 +4455,17 @@
                     "name": "Helipuerto",
                     "terms": "helipuerto, pista de aterrizaje para helicópteros, pista de despegue para helicópteros, helicóptero"
                 },
+                "aeroway/holding_position": {
+                    "name": "Posición de espera de aviones",
+                    "terms": "aeronave, avión, posición, espera"
+                },
                 "aeroway/jet_bridge": {
                     "name": "Manga de aeropuerto",
                     "terms": "puente avión, puente aéreo, pasarela, puente de embarque de pasajeros, PBB, portal, conector de puerta de terminal"
+                },
+                "aeroway/parking_position": {
+                    "name": "Posición de estacionamiento de aviones",
+                    "terms": "aeronave, avión, posición, estacionamiento, parqueo"
                 },
                 "aeroway/runway": {
                     "name": "Pista de aterrizaje",
@@ -4639,6 +4672,10 @@
                     "name": "Academia de artes marciales",
                     "terms": "dojo, academia, artes marciales, karate, judo, taekwondo, kendo, ninjutsu, kung fu"
                 },
+                "amenity/dressing_room": {
+                    "name": "Vestuario",
+                    "terms": "Cambio de ropa, vestidor, vestuario"
+                },
                 "amenity/drinking_water": {
                     "name": "Fuente de agua potable",
                     "terms": "agua,potable,bebible,fuente,manantial, fontana, fontanal, hontanar, venero, bebedero"
@@ -4794,6 +4831,10 @@
                 "amenity/parking/multi-storey": {
                     "name": "Garaje de estacionamiento multinivel",
                     "terms": "aparcamiento, estacionamiento, estacionamiento de varios pisos, estructura de estacionamiento, rampa de estacionamiento, plataforma de estacionamiento, estacionamiento cubierto"
+                },
+                "amenity/parking/park_ride": {
+                    "name": "Estacionamiento con transporte público",
+                    "terms": "cercanías, incentivo, estacionamiento, P + R, park, ride, transporte público, bus, metro, subte"
                 },
                 "amenity/parking/underground": {
                     "name": "Estacionamiento subterráneo",
@@ -5192,8 +5233,8 @@
                     "terms": "correo, paquete, retiro, envio, productos"
                 },
                 "amenity/vending_machine/parking_tickets": {
-                    "name": "Máquina expendedora de boletos de aparcamiento",
-                    "terms": "ticket, boleto, recibo, expendedor, coche, carro, auto, automóvil, vehículo, aparcamiento, parking, aparcadero, estacionamiento, garaje, parqueadero, parqueo"
+                    "name": "Parquímetro",
+                    "terms": "ticket, boleto, recibo, expendedor, aparcamiento, parking, aparcadero, estacionamiento, parqueadero, parqueo, parquímetro"
                 },
                 "amenity/vending_machine/public_transport_tickets": {
                     "name": "Máquina expendedora del boleto de transporte",
@@ -6997,6 +7038,10 @@
                     "name": "Silo búnker",
                     "terms": "silo búnker, silo, bunker"
                 },
+                "man_made/cairn": {
+                    "name": "Mojón",
+                    "terms": "pila de piedra, pila de piedras, càrn"
+                },
                 "man_made/chimney": {
                     "name": "Chimenea",
                     "terms": "chimenea, fogón, fuego"
@@ -8410,6 +8455,10 @@
                     "name": "Tienda de equipos de sonido",
                     "terms": "sonido, hifi, alta fidelidad, altavoz, amplificador, equipos HIFI"
                 },
+                "shop/hobby": {
+                    "name": "Tienda de pasatiempos",
+                    "terms": "manga, figuras, modelo"
+                },
                 "shop/houseware": {
                     "name": "Tienda de artículos del hogar ",
                     "terms": "artículos del hogar, enseres del hogar, hogar, houseware"
@@ -8602,6 +8651,10 @@
                     "name": "Supermercado",
                     "terms": "supermercado, supermercados, cadena de supermercados, hipermercado"
                 },
+                "shop/swimming_pool": {
+                    "name": "Tienda de suministros para piscinas",
+                    "terms": "equipos para jacuzzis, cuidado de jacuzzis, suministros para jacuzzis, tienda de piscinas, piscinas, instalación de piscinas, mantenimiento de piscinas, insumos de piscinas, jacuzzi, piscina, pileta, alberca"
+                },
                 "shop/tailor": {
                     "name": "Sastrería",
                     "terms": "Sastre,  taller de costura, costura, taller de sastrería, sastrería"
@@ -8743,6 +8796,10 @@
                 "tourism/attraction": {
                     "name": "Atracción turística",
                     "terms": "punto de interés, interés turístico, atracción turística, atracciones turísticas, atractivos turísticos, lugares turísticos"
+                },
+                "tourism/camp_pitch": {
+                    "name": "Lugar para acampar",
+                    "terms": "lugar, patio, cancha, terreno, camping, cámping, campamento, acampe, tienda, carpa, rv, motorhome, motor home, caravana, autocaravana,"
                 },
                 "tourism/camp_site": {
                     "name": "Campamento",
@@ -9800,6 +9857,10 @@
                 "description": "Capítulo de los YouthMappers en la Universidad de Nigeria, Campus Enugu",
                 "extendedDescription": "El LionMappersTeam (LMT) Enugu Campus es un afiliado de YouthMappers Network, con el único objetivo de brindar a los miembros la oportunidad de aprender y mejorar sus habilidades en el campo de la geoinformática y crear datos geográficos abiertos y análisis que aborden los desafíos definidos localmente a nivel mundial. Es un equipo de voluntarios para la provisión de información geográfica y de mapas de colaboración colectiva que utiliza Openstreetmap, Citizen Science y otras tecnologías geoespaciales para la investigación, la capacitación y la respuesta a los desafíos de la comunidad resistente. Participamos en aplicaciones de cartografía web, SIG y teledetección e investigación. Nos apasiona la información geográfica voluntaria. El SIG participativo y la ciencia ciudadana. Nuestras actividades principales incluyen cartografía en línea, cartografía de campo, talleres de capacitación y divulgación a la escuela secundaria, así como Mapeo de Respuesta Humanitaria / Desastres."
             },
+            "osm-africa-telegram": {
+                "name": "Telegram de OpenStreetMap África",
+                "description": "Telegram de OpenStreetMap África"
+            },
             "ym-Insititue-d-Enseignement-Superieur-de-Ruhengeri": {
                 "name": "YouthMappers en INES Ruhengeri",
                 "description": "El capítulo de YouthMappers en el Instituto de Educación Superior de Ruhengeri",
@@ -9925,6 +9986,10 @@
                 "name": "UZMappers",
                 "description": "El capítulo de YouthMappers en la Universidad de Zimbabwe",
                 "extendedDescription": "UzMappersTeam Zimbabwe es un equipo de voluntarios que utilizan OpenStreetMap para el mapeo de datos abiertos y el mapeo de respuesta ante desastres humanitarios. El equipo capacita a sus miembros con habilidades de tecnología geoespacial de código abierto."
+            },
+            "osm-afghanistan-facebook": {
+                "name": "OpenStreetMap Afganistán",
+                "description": "Mejore OpenStreetMap en Afganistán"
             },
             "OSM-BGD-facebook": {
                 "name": "OpenStreetMap Bangladesh",
@@ -10461,6 +10526,10 @@
                 "name": "OpenStreetMap Kosovo en Telegram",
                 "description": "Grupo público de Telegram semi-oficial sobre Kosovo. Damos la bienvenida a todos los mapeadores de cualquier lugar en cualquier idioma."
             },
+            "lu-mailinglist": {
+                "name": "Lista de correo de Talk-lu",
+                "description": "Lista de correo oficial para la comunidad OSM de Luxemburgo"
+            },
             "ym-Universit-Mohammed-V-Rabat": {
                 "name": "Brahmapoutre en Rabat",
                 "description": "Capítulo de YouthMapper en la Université Mohammed V Rabat",
@@ -10489,6 +10558,14 @@
             "OSM-PL-forum": {
                 "name": "Foro de OpenStreetMap Polonia",
                 "description": "Foro de la comunidad polaca OpenStreetMap"
+            },
+            "pt-mailinglist": {
+                "name": "Lista de correo de Talk-pt",
+                "description": "Talk-pt es la lista de correo oficial de la comunidad OSM portuguesa"
+            },
+            "pt-telegram": {
+                "name": "Telegram de OpenStreetMap en Portugal",
+                "description": "Grupo de Telegram de la comunidad portuguesa de OpenStreetMap {url}"
             },
             "si-forum": {
                 "name": "Foro de OpenStreetMap Eslovenia",
@@ -10979,6 +11056,10 @@
                 "name": "Club de geografía",
                 "description": "El capítulo de YouthMappers en la Universidad de Western Michigan"
             },
+            "geogeeks_perth_meetup": {
+                "name": "Grupo de Meetup de GeoGeeks Perth",
+                "description": "Grupo de reuniones basado en Perth para personas interesadas en mapas, datos geoespaciales y código abierto. Estaremos trabajando en cualquier cosa que implique un sentido de lugar."
+            },
             "talk-au": {
                 "name": "Lista de correo Talk-au",
                 "description": "Lugar para que los mapeadores australianos chateen"
@@ -11034,6 +11115,10 @@
                 "name": "Grupo de Telegram de OpenStreetMap Brasilia",
                 "description": "Únase a la comunidad de OpenStreetMap Brasília en Telegram",
                 "extendedDescription": "Únase a la comunidad para obtener más información sobre OpenStreetMap, hacer preguntas o participar en nuestras reuniones. ¡Todos son bienvenidos!"
+            },
+            "OSM-br-discord": {
+                "name": "Discord de OpenStreetMap Brasil",
+                "description": "Únete a la comunidad de OpenStreetMap Brasil en Discord"
             },
             "OSM-br-mailinglist": {
                 "name": "Lista de correo Talk-br",
@@ -11171,6 +11256,18 @@
             "uy-mailinglist": {
                 "name": "Lista de correo de Talk-uy",
                 "description": "Talk-uy es la lista de correo oficial de la comunidad uruguaya de OSM"
+            },
+            "ve-forum": {
+                "name": "Foro de OpenStreetMap VE",
+                "description": "Foro web de OpenStreetMap Venezuela"
+            },
+            "ve-mailinglist": {
+                "name": "Lista de correo de Talk-ve",
+                "description": "Talk-ve es la lista de correo oficial de la comunidad OSM de Venezuela"
+            },
+            "ve-telegram": {
+                "name": "Telegram de OpenStreetMap Venezuela",
+                "description": "Únase a la comunidad de OpenStreetMap Venezuela en Telegram"
             },
             "LATAM-Facebook": {
                 "name": "Facebook de OpenStreetMap Latam",

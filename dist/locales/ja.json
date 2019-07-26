@@ -1952,6 +1952,9 @@
                 "use_different_layers": {
                     "title": "別のレイヤを使う"
                 },
+                "use_different_layers_or_levels": {
+                    "title": "違うlayerかlevelを使ってください"
+                },
                 "use_different_levels": {
                     "title": "別の階を使う"
                 },
@@ -2460,6 +2463,15 @@
                 "access_simple": {
                     "label": "アクセス制限"
                 },
+                "addr/interpolation": {
+                    "label": "補間の種類",
+                    "options": {
+                        "all": "すべて",
+                        "alphabetic": "アルファベット補間",
+                        "even": "最初が奇数",
+                        "odd": "最初が偶数"
+                    }
+                },
                 "address": {
                     "label": "住所",
                     "placeholders": {
@@ -2649,6 +2661,10 @@
                 },
                 "building": {
                     "label": "建物"
+                },
+                "building/levels/underground": {
+                    "label": "地下階数",
+                    "placeholder": "2, 4, 6..."
                 },
                 "building/levels_building": {
                     "label": "建物の地上階数",
@@ -3168,10 +3184,10 @@
                     }
                 },
                 "iata": {
-                    "label": "IATA"
+                    "label": "IATA空港コード"
                 },
                 "icao": {
-                    "label": "ICAO"
+                    "label": "ICAO空港コード"
                 },
                 "incline": {
                     "label": "傾斜"
@@ -3673,11 +3689,17 @@
                 "power_supply": {
                     "label": "電源"
                 },
+                "preschool": {
+                    "label": "幼児教育"
+                },
                 "produce": {
                     "label": "生産物"
                 },
                 "product": {
                     "label": "製品"
+                },
+                "public_bookcase/type": {
+                    "label": "種類"
                 },
                 "railway": {
                     "label": "路線の種類"
@@ -4337,6 +4359,9 @@
                 }
             },
             "presets": {
+                "addr/interpolation": {
+                    "name": "住所補間"
+                },
                 "address": {
                     "name": "住所",
                     "terms": "住所"
@@ -4430,9 +4455,17 @@
                     "name": "ヘリパッド",
                     "terms": "ヘリパッド, ヘリコプター発着所, ヘリポート"
                 },
+                "aeroway/holding_position": {
+                    "name": "停止ポイント（空港）",
+                    "terms": "停止ポイント, 飛行機, 空港"
+                },
                 "aeroway/jet_bridge": {
                     "name": "ボーディング・ブリッジ",
                     "terms": "ボーディング・ブリッジ, 搭乗橋, 空港, 飛行機"
+                },
+                "aeroway/parking_position": {
+                    "name": "駐機ポイント（空港）",
+                    "terms": "駐機ポイント, 飛行機, 空港"
                 },
                 "aeroway/runway": {
                     "name": "滑走路",
@@ -4639,6 +4672,10 @@
                     "name": "道場",
                     "terms": "道場, スポーツ, 訓練, 稽古, 練習, 習い事, 教習, トレーニング, 教室, 体操, 運動"
                 },
+                "amenity/dressing_room": {
+                    "name": "更衣室",
+                    "terms": "更衣室, 着替え, 脱衣所, ロッカールーム, 試着室"
+                },
                 "amenity/drinking_water": {
                     "name": "水飲み場",
                     "terms": "水飲み場, 水道, 飲用水, 飲料水, 飲み水, 蛇口, 公園"
@@ -4794,6 +4831,10 @@
                 "amenity/parking/multi-storey": {
                     "name": "立体駐車場",
                     "terms": "複数階の駐車場, 駐車場, 立体駐車場, 立駐"
+                },
+                "amenity/parking/park_ride": {
+                    "name": "パーク＆ライド",
+                    "terms": "駐車場, 自動車, パーキング, コインパーキング, パーク＆ライド, 通勤, 乗り換え, 公共交通機関"
                 },
                 "amenity/parking/underground": {
                     "name": "地下駐車場",
@@ -5347,7 +5388,7 @@
                 },
                 "barrier/fence": {
                     "name": "フェンス",
-                    "terms": "フェンス, 柵, 障害物, バリア"
+                    "terms": "フェンス, 柵, 障害物, バリア, 塀, ブロック塀"
                 },
                 "barrier/fence/railing": {
                     "name": "ガードレール（歩行者用）",
@@ -5889,8 +5930,8 @@
                     "name": "行き先に用事がある緊急車両, 救命"
                 },
                 "emergency/fire_alarm": {
-                    "name": "火災通報ボックス",
-                    "terms": "火災通報ボックス, 火災通報装置"
+                    "name": "火災放置機",
+                    "terms": "火災通報ボックス, 火災通報装置, 火災放置機, 火事, 消防"
                 },
                 "emergency/fire_extinguisher": {
                     "name": "消火器",
@@ -6997,6 +7038,10 @@
                 "man_made/bunker_silo": {
                     "name": "バンカーサイロ",
                     "terms": "バンカーサイロ, サイロ"
+                },
+                "man_made/cairn": {
+                    "name": "ケルン",
+                    "terms": "ケルン,ケアン, 積み石,石積み, 小石"
                 },
                 "man_made/chimney": {
                     "name": "煙突",
@@ -8411,6 +8456,10 @@
                     "name": "音響機器店",
                     "terms": "音響機器店, オーディオ店, 音楽"
                 },
+                "shop/hobby": {
+                    "name": "ホビーショップ",
+                    "terms": "ホビーショップ, ホビー店, プラモデル, フィギュア, マンガ, ミリタリー, 模型"
+                },
                 "shop/houseware": {
                     "name": "家庭用品店",
                     "terms": "雑貨屋, 家庭用品, 日用雑貨, バス用品, お風呂用品, 台所用品, キッチン用品, 生活雑貨, 料理道具, 調理器具, 食器, クッション, 茶碗, 皿, 包丁, ナイフ, フォーク, 箸"
@@ -8603,6 +8652,10 @@
                     "name": "スーパーマーケット",
                     "terms": "スーパーマーケット, スーパー, 買い物, ショッピング"
                 },
+                "shop/swimming_pool": {
+                    "name": "プール用品店",
+                    "terms": "プール用品店, スポーツ, 遊泳プール, 店舗, お店"
+                },
                 "shop/tailor": {
                     "name": "仕立屋",
                     "terms": "仕立屋, テイラー, 洋裁店, 衣類, 衣料, 仕立て屋, 縫製, 服, スーツ"
@@ -8744,6 +8797,10 @@
                 "tourism/attraction": {
                     "name": "観光地",
                     "terms": "観光名所, 見どころ, アトラクション, 見もの, 名所, 旧跡, 名勝, 観光地"
+                },
+                "tourism/camp_pitch": {
+                    "name": "キャンプ区画(キャンプ場内)",
+                    "terms": "キャンプ区画, テント, アウトドア"
                 },
                 "tourism/camp_site": {
                     "name": "キャンプ場",
@@ -9801,6 +9858,10 @@
                 "description": "YouthMappers chapter at University of Nigeria, Enugu Campus",
                 "extendedDescription": "The LionMappersTeam(LMT)Enugu Campus is an affiliate of YouthMappers Network, with the sole aim of providing members the opportunity to learn and improve their skills in the field of Geoinformatics and to create open geographic data and analysis that addresses locally defined challenges globally. It is a team of volunteers for Crowdsourced Mapping and Geographic Information provision using Openstreetmap, Citizen Science and other Geospatial Technology for research, training and response to resilient community challenges. We are involved in Web-Cartography, GIS and Remote Sensing Applications and ResearchWe are passionate about Volunteered Geographic Information.Paticipatory GIS and Citizen Science.Our major activities include online crowdsourced-Cartography, Field Mapping ,Training workshops and outreaches to High School as well as Humanitarian/Disaster Response Mapping."
             },
+            "osm-africa-telegram": {
+                "name": "OpenStreetMap Africa Telegram",
+                "description": "OpenStreetMap Telegram for Africa"
+            },
             "ym-Insititue-d-Enseignement-Superieur-de-Ruhengeri": {
                 "name": "YouthMappers at INES Ruhengeri",
                 "description": "YouthMappers chapter at Insititue d' Enseignement Superieur de Ruhengeri",
@@ -9926,6 +9987,10 @@
                 "name": "UZMappers",
                 "description": "YouthMappers chapter at University of Zimbabwe",
                 "extendedDescription": "UzMappersTeam Zimbabwe is a team of Volunteers using OpenStreetMap for Open Data Mapping and Humanitarian Disaster response mapping .The team empowers its members with open source geospatial technology skills."
+            },
+            "osm-afghanistan-facebook": {
+                "name": "OpenStreetMap Afghanistan",
+                "description": "Improve OpenStreetMap in Afghanistan"
             },
             "OSM-BGD-facebook": {
                 "name": "OpenStreetMap Bangladesh",
@@ -10462,6 +10527,10 @@
                 "name": "OpenStreetMap Kosovo on Telegram",
                 "description": "Semi-official all-Kosovo Telegram public group. We welcome all mappers from anywhere in any language."
             },
+            "lu-mailinglist": {
+                "name": "Talk-lu Mailing List",
+                "description": "Official mailing list for the Luxembourgish OSM community"
+            },
             "ym-Universit-Mohammed-V-Rabat": {
                 "name": "Brahmapoutre at Rabat",
                 "description": "YouthMappers chapter at Université Mohammed V Rabat",
@@ -10490,6 +10559,14 @@
             "OSM-PL-forum": {
                 "name": "OpenStreetMap Poland Forum",
                 "description": "Forum of Polish OpenStreetMap community"
+            },
+            "pt-mailinglist": {
+                "name": "Talk-pt Mailing List",
+                "description": "Talk-pt is the official mailing list for the Portuguese OSM community"
+            },
+            "pt-telegram": {
+                "name": "OpenStreetMap Portugal no Telegram",
+                "description": "Telegram Group of the Portuguese OpenStreetMap community {url}"
             },
             "si-forum": {
                 "name": "OpenStreetMap Slovenia Forum",
@@ -10980,6 +11057,10 @@
                 "name": "Geography Club",
                 "description": "YouthMappers chapter at Western Michigan University"
             },
+            "geogeeks_perth_meetup": {
+                "name": "GeoGeeks Perth Meetup",
+                "description": "Perth-based meetup group for people interested in mapping, geospatial data, and open source. We'll be working on anything that involves a sense of place."
+            },
             "talk-au": {
                 "name": "Talk-au Mailing List",
                 "description": "Place for Aussie mappers to chat"
@@ -11035,6 +11116,10 @@
                 "name": "OpenStreetMap Brasília Telegram Group",
                 "description": "Join the OpenStreetMap Brasília community on Telegram",
                 "extendedDescription": "Join the community to learn more about OpenStreetMap, ask questions or participate in our meetings. Everyone is welcome!"
+            },
+            "OSM-br-discord": {
+                "name": "OpenStreetMap Brasil Discord",
+                "description": "Join the OpenStreetMap Brasil community on Discord"
             },
             "OSM-br-mailinglist": {
                 "name": "Talk-br Mailing List",
@@ -11172,6 +11257,18 @@
             "uy-mailinglist": {
                 "name": "Talk-uy Mailing List",
                 "description": "Talk-uy is the official mailing list for the Uruguayan OSM community"
+            },
+            "ve-forum": {
+                "name": "OpenStreetMap VE Forum",
+                "description": "OpenStreetMap Venezuela web forum"
+            },
+            "ve-mailinglist": {
+                "name": "Talk-ve Mailing List",
+                "description": "Talk-ve is the official mailing list for the Venezuelan OSM community"
+            },
+            "ve-telegram": {
+                "name": "OpenStreetMap Venezuela Telegram",
+                "description": "Join the OpenStreetMap Venezuela community on Telegram"
             },
             "LATAM-Facebook": {
                 "name": "OpenStreetMap Latam Facebook",

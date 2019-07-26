@@ -1952,6 +1952,9 @@
                 "use_different_layers": {
                     "title": "使用不同图层"
                 },
+                "use_different_layers_or_levels": {
+                    "title": "使用不同图层或楼层"
+                },
                 "use_different_levels": {
                     "title": "使用不同楼层数"
                 },
@@ -3156,12 +3159,6 @@
                         "stables": "是",
                         "undefined": "否"
                     }
-                },
-                "iata": {
-                    "label": "IATA (国际航空运输协会)"
-                },
-                "icao": {
-                    "label": "ICAO(国际民航组织)"
                 },
                 "incline": {
                     "label": "斜度"

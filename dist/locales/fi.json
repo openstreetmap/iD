@@ -19,6 +19,7 @@
         },
         "modes": {
             "add_feature": {
+                "title": "Lisää karttakohde",
                 "key": "Välilehti",
                 "result": "{count} tulos",
                 "results": "{count} tulosta"
@@ -203,10 +204,26 @@
                 }
             },
             "downgrade": {
+                "title": "Yksinkertaista",
                 "description": {
-                    "building_address": "Poista kaikki osoitteet ja rakennukset ilman ominaisuustietoja",
+                    "building_address": "Poista kaikki muut ominaisuustiedot paitsi osoite- ja rakennustiedot.",
                     "building": "Poista kaikki rakennukset ilman ominaisuustietoja.",
-                    "address": "Poista kaikki osoitteet ilman ominaisuustietoja."
+                    "address": "Poista kaikki muut ominaisuustiedot paitsi osoitteet."
+                },
+                "annotation": {
+                    "building": {
+                        "single": "Karttakohde yksinkertaistettu tavalliseksi rakennukseksi.",
+                        "multiple": "{n} karttakohdetta yksinkertaistettu tavalliseksi rakennukseksi."
+                    },
+                    "address": {
+                        "single": "Karttakohde yksinkertaistettu pelkäksi osoitteeksi.",
+                        "multiple": "{n} karttakohdetta yksinkertaistettu pelkäksi osoitteeksi."
+                    },
+                    "multiple": "Yksinkertaistettu {n} karttakohdetta"
+                },
+                "has_wikidata_tag": {
+                    "single": "Tätä kohdetta ei voi yksinkertaistaa, sillä se on kytketty Wikidata-tietokantaan.",
+                    "multiple": "Näitä kohteita ei voi yksinkertaistaa, sillä jotknin niistä on kytketty Wikidata-tietokantaan."
                 }
             },
             "add_member": {
@@ -718,7 +735,7 @@
                 "tooltip": "Rakennukset, katokset, autotallit jne."
             },
             "building_parts": {
-                "description": "Rakennuksen osat",
+                "description": "Rakennusten osat",
                 "tooltip": "3D-rakennukset ja -kattokomponentit"
             },
             "indoor": {
@@ -1184,7 +1201,7 @@
                 "open_data_h": "Avoin data",
                 "open_data": "Tekemäsi muokkaukset näkyvät kaikille käyttäjille. Muokkauksesi voi perustua paikallistuntemukseen, paikan päällä tehtyihin havaintoihin tai ilmakuva- ja katutasokuvamateriaaleihin. Tietojen kopiointi kaupallisista lähteistä, kuten Google-kartoista, [on ehdottomasti kielletty](https://www.openstreetmap.org/copyright).",
                 "before_start_h": "Ennen aloittamista",
-                "before_start": "Tutustu huolellisesti OpenStreetMapiin ja tähän muokkausohjelmaan ennen muokkaamisen aloittamista. Tämän kartanmuokkausohjelman aloitusoppaan avulla voit harjoitella interaktiivisesti OpenStreetMapin muokkaamista. Aloita harjoittelu napsauttamalla Aloitusopas - se vie vain 15 minuuttia.",
+                "before_start": "Tutustu huolellisesti OpenStreetMapiin ja tähän kartanmuokkausohjelmaan ennen muokkaamisen aloittamista. Aloitusoppaan avulla voit harjoitella muokkaamista vuorovaikutteisesti. Aloita harjoittelu napsauttamalla Aloitusopas - se vie vain 15 minuuttia.",
                 "open_source_h": "Avoin lähdekoodi",
                 "open_source": "Tämä avoimen lähdekoodin iD-ohjelman versio {version} perustuu vapaaehtoisten käyttäjien työhön. Lähdekoodi on saatavilla [GitHub-palvelusta](https://github.com/openstreetmap/iD).",
                 "open_source_help": "Voit osallistua projektiin auttamalla ohjelman [kääntämisessä](https://github.com/openstreetmap/iD/blob/master/CONTRIBUTING.md#translating) tai [ilmoittamalla ohjelmistovirheistä](https://github.com/openstreetmap/iD/issues)."
@@ -2092,7 +2109,7 @@
                     "name": "Luontokohteet"
                 },
                 "category-path": {
-                    "name": "Kävely- ja pyörätiet "
+                    "name": "Kävely- ja pyörätiet"
                 },
                 "category-rail": {
                     "name": "Raidekohteet"
@@ -2170,6 +2187,15 @@
                 },
                 "access_simple": {
                     "label": "Sallittu käyttäjäryhmä"
+                },
+                "addr/interpolation": {
+                    "label": "Tyyppi",
+                    "options": {
+                        "all": "Kaikki",
+                        "alphabetic": "Aakkosellinen",
+                        "even": "Parillinen",
+                        "odd": "Pariton"
+                    }
                 },
                 "address": {
                     "label": "Osoite",
@@ -2437,7 +2463,8 @@
                     "label": "Liikkeen suunta",
                     "options": {
                         "backward": "taaksepäin",
-                        "forward": "eteenpäin"
+                        "forward": "eteenpäin",
+                        "reversible": "Suuntaa vaihtava"
                     }
                 },
                 "country": {
@@ -2558,6 +2585,10 @@
                 "devices": {
                     "label": "Laitteet",
                     "placeholder": "1, 2, 3..."
+                },
+                "diameter": {
+                    "label": "Läpimitta",
+                    "placeholder": "5 mm, 10 cm, 15 in, …"
                 },
                 "diaper": {
                     "label": "Vaipanvaihtomahdollisuus"
@@ -2816,6 +2847,12 @@
                 "historic/wreck/date_sunk": {
                     "label": "Uppoamispäivä"
                 },
+                "historic/wreck/visible_at_high_tide": {
+                    "label": "Näkyvissä nousuveden aikaan"
+                },
+                "historic/wreck/visible_at_low_tide": {
+                    "label": "Näkyvissä laskuveden aikaan"
+                },
                 "hoops": {
                     "label": "Koritelineet",
                     "placeholder": "1, 2, 4..."
@@ -2849,12 +2886,6 @@
                         "undefined": "Ei"
                     }
                 },
-                "iata": {
-                    "label": "IATA"
-                },
-                "icao": {
-                    "label": "ICAO"
-                },
                 "incline": {
                     "label": "Kaltevuus"
                 },
@@ -2867,6 +2898,9 @@
                 },
                 "indoor": {
                     "label": "Sisätila"
+                },
+                "indoor_type": {
+                    "label": "Tyyppi"
                 },
                 "industrial": {
                     "label": "Tyyppi"
@@ -2984,6 +3018,9 @@
                 "levels": {
                     "label": "Kerroslukumäärä",
                     "placeholder": "2, 4, 6..."
+                },
+                "liaison": {
+                    "label": "Tyyppi"
                 },
                 "lit": {
                     "label": "Valaistus"
@@ -3206,7 +3243,30 @@
                 },
                 "piste/difficulty": {
                     "label": "Haastavuus",
+                    "options": {
+                        "advanced": "Vaikea",
+                        "easy": "Helppo",
+                        "freeride": "Vapaalasku",
+                        "intermediate": "Keskivaikea",
+                        "novice": "Erittäin helppo"
+                    },
                     "placeholder": "Helppo, keskivaikea, vaikea..."
+                },
+                "piste/difficulty_downhill": {
+                    "label": "Vaikeusaste",
+                    "options": {
+                        "advanced": "Vaikea (musta)",
+                        "easy": "Helppo (sininen)",
+                        "freeride": "Vapaalasku (off-piste)",
+                        "intermediate": "Keskivaikea (punainen)",
+                        "novice": "Erittäin helppo (vihreä / opettelu)"
+                    }
+                },
+                "piste/difficulty_nordic": {
+                    "label": "Vaikeusaste"
+                },
+                "piste/difficulty_skitour": {
+                    "label": "Vaikeusaste"
                 },
                 "piste/grooming": {
                     "label": "Rinne/latupohja",
@@ -3289,6 +3349,7 @@
                     "placeholder": "Etäisyys yhden desimaalin tarkkuudella (123.4)"
                 },
                 "railway/signal/direction": {
+                    "label": "Vaikutussuunta",
                     "options": {
                         "backward": "Taaksepäin",
                         "both": "Molemmat/kaikki",
@@ -3639,7 +3700,7 @@
                     "label": "Tyyppi"
                 },
                 "tracktype": {
-                    "label": "Raidetyyppi",
+                    "label": "Tiepohja",
                     "options": {
                         "grade1": "Kiinteä: päällystetty tai voimakkaasti pakkaantunut, kova pinta",
                         "grade2": "Enimmäkseen kiinteä: soraa/kiveä johon sekoittunut hieman pehmeää maa-ainesta",
@@ -3659,6 +3720,7 @@
                     "label": "Liikennemerkki"
                 },
                 "traffic_sign/direction": {
+                    "label": "Vaikutussuunta",
                     "options": {
                         "backward": "Taaksepäin",
                         "both": "Molemmat/kaikki",
@@ -3669,6 +3731,7 @@
                     "label": "Tyyppi"
                 },
                 "traffic_signals/direction": {
+                    "label": "Vaikutussuunta",
                     "options": {
                         "backward": "Taaksepäin",
                         "both": "Molemmat/kaikki",
@@ -4038,7 +4101,7 @@
                     "name": "Kongressikeskus"
                 },
                 "amenity/courthouse": {
-                    "name": "Käräjäoikeus",
+                    "name": "Tuomioistuin",
                     "terms": "oikeustalo, käräjätalo, alioikeus, kihlakunnanoikeus, syyttäjäntalo, raastupa, käräjätuomari, syyttäjä, lautamies, käräjäoikeus"
                 },
                 "amenity/coworking_space": {
@@ -7279,7 +7342,7 @@
                     "name": "Taajamaliikennemerkki"
                 },
                 "traffic_sign_vertex": {
-                    "name": "Liikennemerkk"
+                    "name": "Liikennemerkki"
                 },
                 "type/boundary": {
                     "name": "Raja"

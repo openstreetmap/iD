@@ -1952,6 +1952,9 @@
                 "use_different_layers": {
                     "title": "Utiliser des couches différentes"
                 },
+                "use_different_layers_or_levels": {
+                    "title": "Utiliser des couches ou des niveaux différents"
+                },
                 "use_different_levels": {
                     "title": "Utiliser des niveaux différents"
                 },
@@ -2460,6 +2463,15 @@
                 "access_simple": {
                     "label": "Accès autorisé"
                 },
+                "addr/interpolation": {
+                    "label": "Adresses interpolées",
+                    "options": {
+                        "all": "Toutes",
+                        "alphabetic": "Alphabétique",
+                        "even": "Paires",
+                        "odd": "Impaires"
+                    }
+                },
                 "address": {
                     "label": "Adresse",
                     "placeholders": {
@@ -2649,6 +2661,10 @@
                 },
                 "building": {
                     "label": "Bâtiment "
+                },
+                "building/levels/underground": {
+                    "label": "Niveaux souterrains",
+                    "placeholder": "2, 4, 6…"
                 },
                 "building/levels_building": {
                     "label": "Nombre de niveaux",
@@ -3167,12 +3183,6 @@
                         "undefined": "Non"
                     }
                 },
-                "iata": {
-                    "label": "Code AITA (*IATA*)"
-                },
-                "icao": {
-                    "label": "Code OACI (*ICAO*)"
-                },
                 "incline": {
                     "label": "Pente"
                 },
@@ -3672,6 +3682,9 @@
                 },
                 "power_supply": {
                     "label": "Source de courant"
+                },
+                "preschool": {
+                    "label": "École maternelle"
                 },
                 "produce": {
                     "label": "Produits agricoles"
@@ -4337,6 +4350,9 @@
                 }
             },
             "presets": {
+                "addr/interpolation": {
+                    "name": "Interpolation d'adresse"
+                },
                 "address": {
                     "name": "Adresse",
                     "terms": "Adresse, localisation, BAN, address"
@@ -4638,6 +4654,10 @@
                 "amenity/dojo": {
                     "name": "Dojo",
                     "terms": "dojo, arts martiaux, art martial, tatami, judo, karate, aikido, aïkido, kendo, jujitsu, jujutsu, ju-jitsu, ju-jutsu, jūjutsu, jiu-jitsu, akhara, dojang, gelanggang, silat melayu, heya, sumo, kalari, kalaripayat, sasaran, pencak silat, wuguan, wushu, shorinji kempo, yoseikan budo, budo, aïkibudo, kenjutsu, bujutsu, katana, wakizashi, bokken, kobudo, bo-jutsu, bojustu, kendō, bō-jutsu, taijitsu, taijutsu"
+                },
+                "amenity/dressing_room": {
+                    "name": "Vestiaire",
+                    "terms": "vestiaire,cabine d'essayage,cabine de plage"
                 },
                 "amenity/drinking_water": {
                     "name": "Eau potable",
@@ -6996,6 +7016,10 @@
                     "name": "Silo-couloir",
                     "terms": "Silo-couloir, trémie"
                 },
+                "man_made/cairn": {
+                    "name": "Cairn",
+                    "terms": "cairn,pierres,tas de cailloux,pile de cailloux"
+                },
                 "man_made/chimney": {
                     "name": "Cheminée",
                     "terms": "Cheminée"
@@ -8409,6 +8433,10 @@
                     "name": "Magasin de matériel hi-fi",
                     "terms": "Magasin d'appareils audio-visuel"
                 },
+                "shop/hobby": {
+                    "name": "Magasin pour hobby (non spécifié)",
+                    "terms": "manga,figurine,modèle,modélisme"
+                },
                 "shop/houseware": {
                     "name": "Magasin d’articles ménagers",
                     "terms": "Vente d'articles de cuisine"
@@ -8601,6 +8629,10 @@
                     "name": "Supermarché",
                     "terms": "Supermarché"
                 },
+                "shop/swimming_pool": {
+                    "name": "Magasin de matériel de piscine",
+                    "terms": "spa,cuve thermale,maintenance,piscine"
+                },
                 "shop/tailor": {
                     "name": "Tailleur",
                     "terms": "Habilleur, Giletier"
@@ -8742,6 +8774,10 @@
                 "tourism/attraction": {
                     "name": "Attraction touristique",
                     "terms": "Attraction touristique"
+                },
+                "tourism/camp_pitch": {
+                    "name": "Parcelle dans un camping",
+                    "terms": "emplacement de camping,tente,caravane,camping-car,parcelle"
                 },
                 "tourism/camp_site": {
                     "name": "Camping",
@@ -9859,12 +9895,18 @@
                 "name": "Jeunes cartographes de l'Open University of Tanzania",
                 "description": "Groupe des jeunes cartographes de l'Open University of Tanzania"
             },
+            "ym-Sokoine-University-of-Agriculture": {
+                "description": "Chapitre YouthMappers à l'Université d'Agriculture Sokoine"
+            },
             "ym-University-of-Dar-es-Salaam": {
                 "name": "YouthMappers à l'Université de Dar es Salaam",
-                "description": "Chapitre YouthMappers à l'Université de Dar es Salaam"
+                "description": "Chapitre YouthMappers à l'Université de Dar es Salaam",
+                "extendedDescription": "Le but du chapitre YouthMappers de l'Université de Dar es Salaam est d'utiliser et de promouvoir les données open source et les technologies SIG pour cartographier les zones de catastrophe potentielle, fournir des ressources pour les interventions d'urgence, mettre en contact ses membres avec les organismes travaillant sur l'open source et les SIG dans la ville de Dar es Salaam, et contribuer aux besoins futurs de nos partenaires."
             },
             "ym-Busitema-University": {
-                "description": "Chapitre YouthMappers à l'Université de Busitema"
+                "name": "Good Mappers",
+                "description": "Chapitre YouthMappers à l'Université de Busitema",
+                "extendedDescription": "Good mappers est une équipe d'étudiants de l'Université de Busitema. Son principal objectif est de créer une communauté de cartographes expérimentés qui pourront contribuer à cartographier le monde."
             },
             "ym-Gulu-University": {
                 "description": "Chapitre YouthMappers à l'Université de Gulu"
@@ -9874,6 +9916,9 @@
             },
             "ym-Makerere-University": {
                 "description": "Chapitre YouthMappers à l'Université de Makerere"
+            },
+            "ym-Mbarara-University-of-Science-and-Technology": {
+                "description": "Chapitre YouthMappers à l'Université des Sciences et Technologies de Mbarara"
             },
             "ym-St.-Augustine-International-University": {
                 "name": "YouthMappers à l'Université Internationale de St Augustine",
@@ -10007,6 +10052,9 @@
                 "name": "OpenStreetMap Népal",
                 "description": "Améliorez OpenStreetMap au Népal",
                 "extendedDescription": "Vous cartographiez au Népal ? Vous avez des questions, vous souhaitez rencontrer la communauté ? Rejoignez-nous sur {Url}. Vous êtes tous les bienvenus !"
+            },
+            "ym-Kathmandu-University": {
+                "description": "Chapitre YouthMappers à l'Université de Katmandou"
             },
             "OSM-Asia-mailinglist": {
                 "name": "Liste de diffusion OpenStreetMap Asie",
@@ -10317,11 +10365,16 @@
                 "description": "Liste de discussion OpenStreetMap Italie régionale pour Trentino."
             },
             "ym-Yarmouk-University": {
-                "name": "YouthMappers à YU"
+                "name": "YouthMappers à YU",
+                "description": "Chapitre YouthMappers à l'Université de Yarmouk"
             },
             "kosovo-telegram": {
                 "name": "OpenStreetMap Kosovo sur Telegram",
                 "description": "Groupe Telegram public semi-officiel pour tout le Kosovo.  Nous accueillons tous les cartographes de n'importe où dans toutes les langues."
+            },
+            "lu-mailinglist": {
+                "name": "Liste de diffusion Talk-lu",
+                "description": "Liste de diffusion officielle pour la communauté luxembourgeoise d'OSM"
             },
             "ym-Universit-Mohammed-V-Rabat": {
                 "name": "Brahmapoutre à Rabat",
@@ -10351,6 +10404,13 @@
                 "name": "Forum d'OpenStreetMap Pologne",
                 "description": "Forum de la communauté polonaise d'OpenStreetMap"
             },
+            "pt-mailinglist": {
+                "name": "Liste de diffusion Talk-pt",
+                "description": "Talk-pt est la liste de diffusion officielle de la communauté portugaise d'OSM"
+            },
+            "pt-telegram": {
+                "description": "Groupe Telegram de la communauté portugaise d'OpenStreetMap {url}"
+            },
             "si-forum": {
                 "name": "Forum d'OpenStreetMap Slovénie",
                 "description": "Forum de la communauté OpenStreetMap en Slovénie"
@@ -10375,6 +10435,9 @@
                 "name": "YouthMappers à l'UAM",
                 "description": "Chapitre YouthMappers à l'Université Autonome de Madrid"
             },
+            "ym-Universidad-Politcnica-de-Madrid": {
+                "description": "Chapitre YouthMappers à l'Université Polytechnique de Madrid"
+            },
             "osm-se": {
                 "name": "OpenStreetMap.se",
                 "description": "Des nouvelles de la communauté OpenStreetMap suédoise"
@@ -10398,6 +10461,10 @@
             "se-twitter": {
                 "name": "OpenStreetMap Suède sur Twitter",
                 "description": "Suivez-nous sur Twitter : {url}"
+            },
+            "ym-Istanbul-Technical-University": {
+                "name": "YouthMappers ITU",
+                "description": "Chapitre YouthMappers à l'Université Technique d'Istanbul"
             },
             "Nottingham-OSM-pub-meetup": {
                 "name": "Rencontres mensuelles dans un pub de East Midlands (Nottingham)",
@@ -10424,6 +10491,10 @@
             "ym-University-of-Warwick": {
                 "description": "Chapitre YouthMappers à l'Université de Warwick"
             },
+            "ym-Sacred-Heart-Junior-College": {
+                "name": "YouthMappers au Sacred Heart Junior College",
+                "description": "Chapitre YouthMappers au Sacred Heart Junior College"
+            },
             "OSM-CA-Slack": {
                 "name": "Slack OSM-CA",
                 "description": "Vous êtes tous les bienvenus ! Enregistrez-vous sur {signupUrl}."
@@ -10432,13 +10503,27 @@
                 "name": "OpenStreetMap Vancouver",
                 "description": "Cartographes et utilisateurs d'OpenStreetMap à Vancouver"
             },
+            "ym-Universidad-de-Costa-Rica": {
+                "description": "Chapitre YouthMappers à l'Université du Costa Rica"
+            },
             "OSM-CU-telegram": {
                 "name": "OSM Cuba sur Telegram",
                 "description": "Chat Telegram d'OpenStreetMap Cuba"
             },
+            "ym-Universidad-Nacional-Autnoma-de-Honduras": {
+                "description": "Chapitre YouthMappers à l'Université Nationale Autonome du Honduras"
+            },
             "OSM-NI-telegram": {
                 "name": "OSM Nicaragua sur Telegram",
                 "description": "Chat Telegram d'OpenStreetMap Nicaragua"
+            },
+            "ym-University-of-Panama": {
+                "name": "YouthMappers UP",
+                "description": "Chapitre YouthMappers à l'Université du Panama"
+            },
+            "ym-Universidad-de-Puerto-Rico-Rio-Piedras": {
+                "name": "YouthMappers à l'UPR",
+                "description": "Chapitre YouthMappers à l'Université de Puerto Rico - Rio Piedras"
             },
             "Bay-Area-OpenStreetMappers": {
                 "name": "Bay Area OpenStreetMappers",
@@ -10552,8 +10637,15 @@
                 "description": "Nous aidons OpenStreetMap à grandir et à s'améliorer aux États-Unis.",
                 "extendedDescription": "Nous soutenons OpenStreetMap en organisant des conférences annuelles, en fournissant des moyens à la communauté, en établissant des partenariats, et en relayant les informations. Rejoignez OpenStreetMap États-Unis ici: {signupUrl}",
                 "events": {
+                    "sotmus2019-cfs": {
+                        "name": "Proposez un sujet pour le SotM-US 2019",
+                        "description": "Nous invitons tous les membres de la communauté OpenStreetMap à partager leurs idées et leurs propositions d'intervention pour la rencontre State of the Map US 2019. Que vous soyez nouveau ou expérimenté, n'hésitez pas à vous manifester!",
+                        "where": "Minneapolis, Minnesota"
+                    },
                     "sotmus2019": {
-                        "name": "State of the Map USA 2019"
+                        "name": "State of the Map USA 2019",
+                        "description": "Rejoignez la communauté OpenStreetMap au State of the Map US à Minneapolis, Minnesota. Établissez des contacts avec d'autres cartographes, entrepreneurs, agences gouvernementales et à but non lucratif, collaborant tous à la carte libre du monde.",
+                        "where": "Minneapolis, Minnesota"
                     }
                 }
             },
@@ -10585,8 +10677,17 @@
                 "description": "Cartographes et utilisateurs d'OpenStreetMap autour de Grand Junction, CO",
                 "extendedDescription": "Le but de ce groupe est de présenter OpenStreetMap aux communautés, développer une communauté de cartographes, créer la meilleure donnée géographique possible par n'importe quel moyen et finalement d'élaborer une stratégie pour communiquer cette donnée aux communautés. Imaginez des panneaux indicatifs sur les chemins de randonnées ! Imaginez un meilleur développement des voies cyclables ! Imaginez tout ce que vous voulez, c'est le plaisir d'OpenStreetMap !"
             },
+            "ym-Central-Washington-University": {
+                "description": "Chapitre YouthMappers à la Central Washington University"
+            },
+            "ym-Jacksonville-State-University": {
+                "description": "Chapitre YouthMappers à l'Université d’État de Jacksonville"
+            },
             "ym-Kansas-State-University": {
                 "description": "Chapitre YouthMappers à l'Université d’État du Kansas"
+            },
+            "ym-McGill-University": {
+                "description": "Chapitre YouthMappers à l'Université McGill"
             },
             "ym-Miami-University": {
                 "description": "Chapitre YouthMappers à l'Université de Miami"

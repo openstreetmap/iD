@@ -1952,6 +1952,9 @@
                 "use_different_layers": {
                     "title": "Usar camadas diferentes"
                 },
+                "use_different_layers_or_levels": {
+                    "title": "Usar camadas ou níveis diferentes "
+                },
                 "use_different_levels": {
                     "title": "Usar níveis diferentes"
                 },
@@ -2424,11 +2427,11 @@
                             "title": "Destino"
                         },
                         "dismount": {
-                            "description": "Acesso permitido mas o cavaleiro deve desmontar",
+                            "description": "Acesso permitido, mas o cavaleiro deve desmontar",
                             "title": "Desmontar"
                         },
                         "no": {
-                            "description": "Acesso não permitido para o público geral",
+                            "description": "Acesso não permitido ao público em geral",
                             "title": "Proibido"
                         },
                         "permissive": {
@@ -2459,6 +2462,15 @@
                 },
                 "access_simple": {
                     "label": "Acesso permitido"
+                },
+                "addr/interpolation": {
+                    "label": "Tipo",
+                    "options": {
+                        "all": "Tudo",
+                        "alphabetic": "Alfabética",
+                        "even": "Par",
+                        "odd": "Ímpar"
+                    }
                 },
                 "address": {
                     "label": "Morada",
@@ -2649,6 +2661,10 @@
                 },
                 "building": {
                     "label": "Edifício"
+                },
+                "building/levels/underground": {
+                    "label": "Níveis no subsolo",
+                    "placeholder": "2, 4, 6..."
                 },
                 "building/levels_building": {
                     "label": "Pisos do edifício",
@@ -3168,10 +3184,10 @@
                     }
                 },
                 "iata": {
-                    "label": "IATA"
+                    "label": "Código aeroportuário IATA"
                 },
                 "icao": {
-                    "label": "ICAO"
+                    "label": "Código aeroportuário ICAO"
                 },
                 "incline": {
                     "label": "Inclinação"
@@ -3499,6 +3515,9 @@
                 "operator": {
                     "label": "Organismo operador"
                 },
+                "operator/type": {
+                    "label": "Tipo de operador"
+                },
                 "outdoor_seating": {
                     "label": "Cadeiras exteriores"
                 },
@@ -3670,11 +3689,17 @@
                 "power_supply": {
                     "label": "Fonte de energia"
                 },
+                "preschool": {
+                    "label": "Pré-escola"
+                },
                 "produce": {
                     "label": "produz"
                 },
                 "product": {
                     "label": "Produtos"
+                },
+                "public_bookcase/type": {
+                    "label": "Tipo"
                 },
                 "railway": {
                     "label": "Tipo"
@@ -4334,6 +4359,9 @@
                 }
             },
             "presets": {
+                "addr/interpolation": {
+                    "name": "Interpolação de endereço"
+                },
                 "address": {
                     "name": "Morada / nº de porta",
                     "terms": "endereço, morada, endereçamento, código postal, localização, número de porta, nº de porta, n.º de porta, número de polícia, nº de polícia, n.º de polícia, número"
@@ -4427,9 +4455,17 @@
                     "name": "Heliporto / heliponto",
                     "terms": "Helicóptero"
                 },
+                "aeroway/holding_position": {
+                    "name": "Ponto de espera de avião",
+                    "terms": "aircraft holding position, ponto de espera de avião, posição de espera de avião"
+                },
                 "aeroway/jet_bridge": {
                     "name": "Ponte de embarque",
                     "terms": "jet bridge, jetway, finger, aerobridge, ponte de embarque, ponte telescópica, manga, manga de embarque, ponte de aeroporto"
+                },
+                "aeroway/parking_position": {
+                    "name": "Área de estacionamento de avião",
+                    "terms": "aircraft parking position, área de estacionamento de avião, ponto de estacionamento de avião, lugar de estacionamento de avião"
                 },
                 "aeroway/runway": {
                     "name": "Pista de aterragem e descolagem",
@@ -4636,6 +4672,10 @@
                     "name": "Centro de artes marciais",
                     "terms": "Dojo, Karaté, Taekwondo, Judo, Jiu-jitsu, Jiu-jitsu Brasileiro, Kung Fu, Capoeira, Eskrima, Escrima, Escryma, Muay Thai, Krav Magá, Jeet Kune Do"
                 },
+                "amenity/dressing_room": {
+                    "name": "Cabine de provas",
+                    "terms": "changing room, cabine de provas, sala de provas, troca de roupa, trocar de roupa, mudar de roupa"
+                },
                 "amenity/drinking_water": {
                     "name": "Água potável",
                     "terms": "fonte de água, água potável, água, bebedouro, bebedoiro, fontanário, fontenário, beber"
@@ -4733,6 +4773,10 @@
                     "name": "Cibercafé",
                     "terms": "cyber café, cyber cafe, cyber-café, cyber-cafe, ciber café, ciber cafe, ciber-café, ciber-cafe, cybercafe, cibercafe, cibercafé, cybercafé, internet café, internet cafe, internet, acesso à internet, wi-fi"
                 },
+                "amenity/karaoke": {
+                    "name": "Sala de karaoke",
+                    "terms": "karaoke box, karaoke, caraoque, karaoque, caraoke, noraebang"
+                },
                 "amenity/kindergarten": {
                     "name": "Jardim infantil / infantário",
                     "terms": "preschool, kindergarten, grounds, pré-escola, pré escola, creche, jardim de infância, jardim-de-infância, jardim infantil, pré-escola, pré-escolar, infantário"
@@ -4787,6 +4831,10 @@
                 "amenity/parking/multi-storey": {
                     "name": "Garagem de estacionamento multi nível",
                     "terms": "Garagem de estacionamento de vários níveis, silo"
+                },
+                "amenity/parking/park_ride": {
+                    "name": "Estacionamento Pare e Siga",
+                    "terms": "Parque de estacionamento integrado,parque de estacionamento de incentivo,parque de estacionamento de metro,parque de estacionamento dissuasor,P&R,Park & Ride"
                 },
                 "amenity/parking/underground": {
                     "name": "Estacionamento subterrâneo",
@@ -5941,6 +5989,9 @@
                     "name": "Vau (ponto de passagem num curso de água baixo)",
                     "terms": "Baixio, Banco, Parel"
                 },
+                "ford_line": {
+                    "name": "Vau / almegue"
+                },
                 "golf/bunker": {
                     "name": "Banco de areia",
                     "terms": "Sand Trap"
@@ -6008,6 +6059,10 @@
                 "healthcare/blood_donation": {
                     "name": "Banco de sangue ",
                     "terms": "Centro de Doação de Sangue, doação de sangue, transfusão de sangue, blood donor center"
+                },
+                "healthcare/counselling": {
+                    "name": "Centro de aconselhamento",
+                    "terms": "counselling center, centro de aconselhamento, aconselhamento, aconcelhamento"
                 },
                 "healthcare/hospice": {
                     "name": "Unidade de cuidados paliativos",
@@ -6984,6 +7039,10 @@
                     "name": "Silo tipo búnquer",
                     "terms": "silo-corredor, funil, silo, búnquer, bunquer, búnker, bunker, armazenamento"
                 },
+                "man_made/cairn": {
+                    "name": "Moledros / mariolas",
+                    "terms": "cairn, moledros, moledos, melédros, mariolas, moledro, moledo, melédro, mariola"
+                },
                 "man_made/chimney": {
                     "name": "Chaminé",
                     "terms": "Chimney"
@@ -7080,6 +7139,10 @@
                     "name": "Tubagem no subsolo",
                     "terms": "tubo, tubos, pipeline, tubagem, gasoduto, oleoduto, canalização"
                 },
+                "man_made/pipeline/valve": {
+                    "name": "Válvula de pipeline",
+                    "terms": "pipeline valve, válvula de pipeline, válvula, torneira, pipeline, oleoduto, gasoduto, tubo, tubagem, canalização"
+                },
                 "man_made/pumping_station": {
                     "name": "Estação de bombeamento",
                     "terms": "Pumping Station"
@@ -7111,6 +7174,10 @@
                 "man_made/survey_point": {
                     "name": "Vértice geodésico / talefe",
                     "terms": "Survey Point"
+                },
+                "man_made/torii": {
+                    "name": "Torii",
+                    "terms": "torii, tori, tóri"
                 },
                 "man_made/tower": {
                     "name": "Torre",
@@ -8295,6 +8362,10 @@
                 "shop/fashion": {
                     "name": "Loja de moda"
                 },
+                "shop/fashion_accessories": {
+                    "name": "Loja de acessórios de moda",
+                    "terms": "fashion accessories store, loja de acessórios de moda, acessórios de moda, acessórios, bijuteria, mala, bolsa, chapéu, joalharia, joalheria, óculos de sol, carteira"
+                },
                 "shop/fireplace": {
                     "name": "Loja de lareiras",
                     "terms": "Lareira, fogo, lenha"
@@ -8384,6 +8455,10 @@
                 "shop/hifi": {
                     "name": "Loja de alta fidelidade",
                     "terms": "Hifi Store, Som"
+                },
+                "shop/hobby": {
+                    "name": "Loja de passatempos",
+                    "terms": "hobby shop, loja de passatempos, loja de hobbys, passatempo, passa-tempo, hobby, hoby, hobi, obby, oby, hobie, obie"
                 },
                 "shop/houseware": {
                     "name": "Loja de utensílios",
@@ -8577,6 +8652,10 @@
                     "name": "Supermercado / hipermercado",
                     "terms": "Hiper-mercado, Hiper mercado, Super-mercado, Super mercado, Compras, Loja, Alimentar, Alimentos"
                 },
+                "shop/swimming_pool": {
+                    "name": "Loja de artigos para piscinas",
+                    "terms": "pool supply store, artigos para piscinas, piscina, picina, pissina, pisina"
+                },
                 "shop/tailor": {
                     "name": "Alfaiate",
                     "terms": "Tailor, Vestido, Fato, Roupa"
@@ -8718,6 +8797,10 @@
                 "tourism/attraction": {
                     "name": "Atração turística",
                     "terms": "ponto turístico, turismo, atração turística, atração, atracção"
+                },
+                "tourism/camp_pitch": {
+                    "name": "Alvéolo de parque de campismo",
+                    "terms": "camp pitch, alvéolo, talhão, secção, parte, parque de campismo"
                 },
                 "tourism/camp_site": {
                     "name": "Parque de campismo",
@@ -10068,6 +10151,14 @@
             "OSM-PL-forum": {
                 "name": "Fórum OpenStreetMap Polónia",
                 "description": "Fórum da comunidade polaca OpenStreetMap"
+            },
+            "pt-mailinglist": {
+                "name": "Mailing List Talk-pt",
+                "description": "Talk-pt faz parte da mailing list oficial para a comunidade portuguesa do OSM"
+            },
+            "pt-telegram": {
+                "name": "OpenStreetMap Portugal no Telegram",
+                "description": "Grupo do Telegram da comunidade Portuguesa do OpenStreetMap {url}"
             },
             "si-forum": {
                 "name": "Fórum do OpenStreetMap Eslovénia",

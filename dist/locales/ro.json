@@ -1110,12 +1110,6 @@
                         "undefined": "Nu"
                     }
                 },
-                "iata": {
-                    "label": "IATA"
-                },
-                "icao": {
-                    "label": "ICAO"
-                },
                 "incline": {
                     "label": "Înclinare"
                 },

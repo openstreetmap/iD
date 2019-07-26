@@ -1115,12 +1115,6 @@
                 "horse_riding": {
                     "label": "Ratsutamine"
                 },
-                "iata": {
-                    "label": "IATA"
-                },
-                "icao": {
-                    "label": "ICAO"
-                },
                 "indoor": {
                     "label": "Siseruum"
                 },
