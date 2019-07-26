@@ -841,7 +841,7 @@
     {"key": "playground", "value": "sandpit", "description": "🄿 Sandpit", "object_types": ["node", "area"], "icon_url": "https://cdn.jsdelivr.net/gh/mapbox/maki/icons/playground-15.svg"},
     {"key": "playground", "value": "seesaw", "description": "🄿 Seesaw", "object_types": ["node"], "icon_url": "https://cdn.jsdelivr.net/gh/mapbox/maki/icons/playground-15.svg"},
     {"key": "playground", "value": "slide", "description": "🄿 Slide", "object_types": ["node", "way"], "icon_url": "https://cdn.jsdelivr.net/gh/mapbox/maki/icons/playground-15.svg"},
-    {"key": "playground", "value": "structure", "description": "🄿 Play Structure", "object_types": ["node", "way", "area"], "icon_url": "https://cdn.jsdelivr.net/gh/mapbox/maki/icons/pitch-15.svg"},
+    {"key": "playground", "value": "structure", "description": "🄿 Play Structure", "object_types": ["node", "area"], "icon_url": "https://cdn.jsdelivr.net/gh/mapbox/maki/icons/pitch-15.svg"},
     {"key": "playground", "value": "swing", "description": "🄿 Swing", "object_types": ["node"], "icon_url": "https://cdn.jsdelivr.net/gh/mapbox/maki/icons/playground-15.svg"},
     {"key": "playground", "value": "zipwire", "description": "🄿 Zip Wire", "object_types": ["node", "way"], "icon_url": "https://cdn.jsdelivr.net/gh/mapbox/maki/icons/playground-15.svg"},
     {"key": "polling_station", "description": "🄿 Temporary Polling Place, 🄵 Polling Place", "object_types": ["node", "area"], "icon_url": "https://cdn.jsdelivr.net/gh/openstreetmap/iD/svg/fontawesome/fas-vote-yea.svg"},
