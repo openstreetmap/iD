@@ -360,12 +360,6 @@
                 "historic": {
                     "label": "类型"
                 },
-                "iata": {
-                    "label": "国际航空运输协会IATA"
-                },
-                "icao": {
-                    "label": "国际民航组织ICAO"
-                },
                 "incline": {
                     "label": "斜度"
                 },

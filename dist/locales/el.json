@@ -1913,12 +1913,6 @@
                         "undefined": "Όχι"
                     }
                 },
-                "iata": {
-                    "label": "IATA"
-                },
-                "icao": {
-                    "label": "ICAO"
-                },
                 "incline": {
                     "label": "Κλίση"
                 },
@@ -4852,6 +4846,9 @@
                 "leisure/slipway": {
                     "name": "Γλίστρα",
                     "terms": "Γλίστρα, Νεωλκείο"
+                },
+                "leisure/slipway_point": {
+                    "name": "Γλίστρα"
                 },
                 "leisure/sports_centre": {
                     "name": "Αθλητικό Κέντρο/ Συγκρότημα",

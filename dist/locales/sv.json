@@ -1952,6 +1952,9 @@
                 "use_different_layers": {
                     "title": "Använd olika lager"
                 },
+                "use_different_layers_or_levels": {
+                    "title": "Använd olika lager eller våningar"
+                },
                 "use_different_levels": {
                     "title": "Använd olika våningar"
                 },
@@ -2460,6 +2463,15 @@
                 "access_simple": {
                     "label": "Tillåten åtkomst"
                 },
+                "addr/interpolation": {
+                    "label": "Typ",
+                    "options": {
+                        "all": "Alla",
+                        "alphabetic": "Alfabetisk",
+                        "even": "Jämna",
+                        "odd": "Udda"
+                    }
+                },
                 "address": {
                     "label": "Adress",
                     "placeholders": {
@@ -2649,6 +2661,10 @@
                 },
                 "building": {
                     "label": "Byggnad"
+                },
+                "building/levels/underground": {
+                    "label": "Underjordiska våningar",
+                    "placeholder": "2, 4, 6..."
                 },
                 "building/levels_building": {
                     "label": "Byggnadsvåning",
@@ -3167,12 +3183,6 @@
                         "undefined": "Nej"
                     }
                 },
-                "iata": {
-                    "label": "IATA"
-                },
-                "icao": {
-                    "label": "ICAO"
-                },
                 "incline": {
                     "label": "Lutning"
                 },
@@ -3499,6 +3509,9 @@
                 "operator": {
                     "label": "Operatör"
                 },
+                "operator/type": {
+                    "label": "Typ av operatör"
+                },
                 "outdoor_seating": {
                     "label": "Utomhusplatser"
                 },
@@ -3658,6 +3671,9 @@
                 "playground/min_age": {
                     "label": "Lägsta ålder"
                 },
+                "polling_station": {
+                    "label": "Vallokal"
+                },
                 "population": {
                     "label": "Folkmängd"
                 },
@@ -3666,6 +3682,9 @@
                 },
                 "power_supply": {
                     "label": "Strömförsörjning"
+                },
+                "preschool": {
+                    "label": "Förskola"
                 },
                 "produce": {
                     "label": "Naturprodukt"
@@ -4331,6 +4350,9 @@
                 }
             },
             "presets": {
+                "addr/interpolation": {
+                    "name": "Adressinterpolering"
+                },
                 "address": {
                     "name": "Adress",
                     "terms": "Adress, husnummer, destination, gatuadress, postnummer, postort, postadress"
@@ -4813,6 +4835,10 @@
                 "amenity/police": {
                     "name": "Polis",
                     "terms": "Polis, ordningsmakt, polisväsende, polismyndighet, polismakt, polisstation, snut, konstapel, poliskonstapel, polisman, pass, kriminalare, lag"
+                },
+                "amenity/polling_station": {
+                    "name": "Permanent vallokal",
+                    "terms": "vallokal, valurna, valsedel, val, rösta, röstning, folkomröstning, omröstning, röstmaskin, valmaskin, omröstningsapparat, valbås"
                 },
                 "amenity/post_box": {
                     "name": "Postlåda",
@@ -7341,6 +7367,10 @@
                 "point": {
                     "name": "Punkt",
                     "terms": "Punkt, fläck, läge, ställe, plats"
+                },
+                "polling_station": {
+                    "name": "Tillfällig vallokal",
+                    "terms": "vallokal, valurna, valsedel, val, rösta, röstning, folkomröstning, omröstning, röstmaskin, valmaskin, omröstningsapparat, valbås"
                 },
                 "power": {
                     "name": "Elförsörjning"

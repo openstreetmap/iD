@@ -1423,12 +1423,6 @@
                         "undefined": "Nē"
                     }
                 },
-                "iata": {
-                    "label": "IATA"
-                },
-                "icao": {
-                    "label": "ICAO"
-                },
                 "incline": {
                     "label": "Slīpums"
                 },

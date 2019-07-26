@@ -699,7 +699,7 @@
             "imagery_source_faq": "Про фонове зображення/Повідомити про проблему",
             "reset": "скинути",
             "reset_all": "Скинути все",
-            "display_options": "Параметри відображення",
+            "display_options": "Параметри зображення",
             "brightness": "Яскравість",
             "contrast": "Контрастність",
             "saturation": "Насиченість",
@@ -1952,6 +1952,9 @@
                 "use_different_layers": {
                     "title": "Використовуйте різні шари"
                 },
+                "use_different_layers_or_levels": {
+                    "title": "Використовуйте відмінні параметри для layer або level"
+                },
                 "use_different_levels": {
                     "title": "Використовуйте різні рівні"
                 },
@@ -2253,7 +2256,7 @@
                     "keyboard": "Покзати комбінації клавіш"
                 },
                 "display_options": {
-                    "title": "Параметри відображення",
+                    "title": "Параметри екрану",
                     "background": "Налаштування тла",
                     "background_switch": "Перейти до останнього фонового зображення",
                     "map_data": "Налаштування даних мапи",
@@ -2460,6 +2463,15 @@
                 "access_simple": {
                     "label": "Доступ"
                 },
+                "addr/interpolation": {
+                    "label": "Тип",
+                    "options": {
+                        "all": "Всі",
+                        "alphabetic": "Алфавітний",
+                        "even": "Парні",
+                        "odd": "Непарні"
+                    }
+                },
                 "address": {
                     "label": "Адреса",
                     "placeholders": {
@@ -2649,6 +2661,10 @@
                 },
                 "building": {
                     "label": "Будівля"
+                },
+                "building/levels/underground": {
+                    "label": "Підземні поверхи",
+                    "placeholder": "2, 4, 6…"
                 },
                 "building/levels_building": {
                     "label": "Кількість поверхів",
@@ -3167,12 +3183,6 @@
                         "undefined": "Ні"
                     }
                 },
-                "iata": {
-                    "label": "IATA"
-                },
-                "icao": {
-                    "label": "ICAO"
-                },
                 "incline": {
                     "label": "Нахил"
                 },
@@ -3662,7 +3672,7 @@
                     "label": "Мінімальний вік"
                 },
                 "polling_station": {
-                    "label": "Виборча дільниця"
+                    "label": "Місце для голосування"
                 },
                 "population": {
                     "label": "Населення"
@@ -3672,6 +3682,9 @@
                 },
                 "power_supply": {
                     "label": "Розетка"
+                },
+                "preschool": {
+                    "label": "Дошкільний заклад"
                 },
                 "produce": {
                     "label": "Вирощується"
@@ -4337,6 +4350,9 @@
                 }
             },
             "presets": {
+                "addr/interpolation": {
+                    "name": "Інтерполяція адрес"
+                },
                 "address": {
                     "name": "Адреса",
                     "terms": "address,адреса,місце,квартира,будинок,корпус,flhtcf,vscwt,rdfhnbhf,elbyjr,rjhgec"
@@ -4639,6 +4655,10 @@
                     "name": "Додзьо / Школа бойових мистецтв",
                     "terms": "додзьо, бій, навчання, бойові мистецтва"
                 },
+                "amenity/dressing_room": {
+                    "name": "Роздягальня",
+                    "terms": "перевдягальня,примірочна"
+                },
                 "amenity/drinking_water": {
                     "name": "Питна вода",
                     "terms": "Drinking Water, gbnyf djlf, бювет, питна вода, вода"
@@ -4878,6 +4898,10 @@
                 "amenity/police": {
                     "name": "Міліція/Поліція",
                     "terms": "Police, vskswsz, gjkswsz, міліція, поліція, охорона порядку"
+                },
+                "amenity/polling_station": {
+                    "name": "Виборча дільниця",
+                    "terms": "вибори,голос,дільниця,виборці,бюлетень,кабінка,машина,голосування,кандидат"
                 },
                 "amenity/post_box": {
                     "name": "Поштова скриня",
@@ -5940,6 +5964,9 @@
                     "name": "Брід",
                     "terms": "брід, переправа"
                 },
+                "ford_line": {
+                    "name": "Брід"
+                },
                 "golf/bunker": {
                     "name": "Піщана пастка",
                     "terms": "піщана пастка, гольф"
@@ -6007,6 +6034,10 @@
                 "healthcare/blood_donation": {
                     "name": "Банк крові",
                     "terms": "донор,кров,банк,плазма,переливання,плазмаферез"
+                },
+                "healthcare/counselling": {
+                    "name": "Консультаційний центр",
+                    "terms": "здоров'я,хвороба,лікар,консультація,діагноз,пацієнт"
                 },
                 "healthcare/hospice": {
                     "name": "Хоспіс",
@@ -6893,7 +6924,8 @@
                     "terms": "зал,спортивний центр,спорт"
                 },
                 "leisure/sports_centre/climbing": {
-                    "name": "Скеледром"
+                    "name": "Скеледром",
+                    "terms": "скелі,спорт,розваги,стіна,каміння"
                 },
                 "leisure/sports_centre/swimming": {
                     "name": "Плавальний басейн",
@@ -6965,6 +6997,10 @@
                 "man_made/bunker_silo": {
                     "name": "Силосна яма",
                     "terms": "силос,яма,бункер,корм,сховище"
+                },
+                "man_made/cairn": {
+                    "name": "Тур",
+                    "terms": "гурій,каїрн,пірамідка,каміння,гірка"
                 },
                 "man_made/chimney": {
                     "name": "Димохід",
@@ -7095,7 +7131,8 @@
                     "terms": "Survey Point, utjltpbxybq geyrn, місце спостереження"
                 },
                 "man_made/torii": {
-                    "name": "Торії"
+                    "name": "Торії",
+                    "terms": "ворота,храм,сінто"
                 },
                 "man_made/tower": {
                     "name": "Вежа",
@@ -7166,7 +7203,8 @@
                     "terms": "люк,колодязь,кабель,зв'язок,телефон,інтернет,діра,дріт"
                 },
                 "military/nuclear_explosion_site": {
-                    "name": "Місце ядерного вибуху"
+                    "name": "Місце ядерного вибуху",
+                    "terms": "атом,бомба,вибух,випробування,радиація,полігон"
                 },
                 "natural": {
                     "name": "Природа"
@@ -7306,6 +7344,10 @@
                 "natural/water/stream": {
                     "name": "Струмок",
                     "terms": "вода,потік,берег"
+                },
+                "natural/water/wastewater": {
+                    "name": "Накопичувач стоків",
+                    "terms": "стоки,відстійник,відходи"
                 },
                 "natural/wetland": {
                     "name": "Заболочені землі",
@@ -7623,6 +7665,10 @@
                 "point": {
                     "name": "Точка",
                     "terms": "Point, njxrf, точка"
+                },
+                "polling_station": {
+                    "name": "Тимчасова виборча дільниця",
+                    "terms": "вибори,голос,дільниця,виборці,бюлетень,кабінка,машина,голосування,кандидат"
                 },
                 "power": {
                     "name": "Енергетика"
@@ -8839,7 +8885,8 @@
                     "terms": "легкорейковий,транспорт,електричка,міська,колії,трамвай"
                 },
                 "type/route/monorail": {
-                    "name": "Монорейковий маршрут"
+                    "name": "Маршрут монорейки",
+                    "terms": "монорейка,траснспорт,потяг,пасажир,станція,вокзал,колія,маршрут"
                 },
                 "type/route/pipeline": {
                     "name": "Трубопровід",

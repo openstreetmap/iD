@@ -1952,6 +1952,9 @@
                 "use_different_layers": {
                     "title": "Usa livelli differenti"
                 },
+                "use_different_layers_or_levels": {
+                    "title": "Usa differenti livelli o piani"
+                },
                 "use_different_levels": {
                     "title": "Usa livelli differenti"
                 },
@@ -3166,12 +3169,6 @@
                         "stables": "Sì",
                         "undefined": "No"
                     }
-                },
-                "iata": {
-                    "label": "IATA"
-                },
-                "icao": {
-                    "label": "ICAO"
                 },
                 "incline": {
                     "label": "Pendenza"

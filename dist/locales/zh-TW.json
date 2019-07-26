@@ -1952,6 +1952,9 @@
                 "use_different_layers": {
                     "title": "使用不同階層"
                 },
+                "use_different_layers_or_levels": {
+                    "title": "使用不同階層或樓層"
+                },
                 "use_different_levels": {
                     "title": "使用不同樓層"
                 },
@@ -2460,6 +2463,15 @@
                 "access_simple": {
                     "label": "允許通行"
                 },
+                "addr/interpolation": {
+                    "label": "類型",
+                    "options": {
+                        "all": "全部",
+                        "alphabetic": "字母",
+                        "even": "偶數",
+                        "odd": "奇數"
+                    }
+                },
                 "address": {
                     "label": "地址",
                     "placeholders": {
@@ -2649,6 +2661,10 @@
                 },
                 "building": {
                     "label": "建築物"
+                },
+                "building/levels/underground": {
+                    "label": "地下樓層數",
+                    "placeholder": "2, 4, 6..."
                 },
                 "building/levels_building": {
                     "label": "建築物樓層",
@@ -3168,10 +3184,10 @@
                     }
                 },
                 "iata": {
-                    "label": "IATA"
+                    "label": "IATA 機場代碼"
                 },
                 "icao": {
-                    "label": "ICAO"
+                    "label": "ICAO 機場代碼"
                 },
                 "incline": {
                     "label": "斜度"
@@ -3673,11 +3689,17 @@
                 "power_supply": {
                     "label": "電源供應器"
                 },
+                "preschool": {
+                    "label": "育幼院"
+                },
                 "produce": {
                     "label": "生產產品"
                 },
                 "product": {
                     "label": "產品"
+                },
+                "public_bookcase/type": {
+                    "label": "類型"
                 },
                 "railway": {
                     "label": "種類"
@@ -4337,6 +4359,9 @@
                 }
             },
             "presets": {
+                "addr/interpolation": {
+                    "name": "地址插補"
+                },
                 "address": {
                     "name": "地址",
                     "terms": "地址,位置,位址"
@@ -4637,6 +4662,10 @@
                     "name": "道場/武術研習班",
                     "terms": "道場/武術學院,道場/武藝研習班"
                 },
+                "amenity/dressing_room": {
+                    "name": "更衣室",
+                    "terms": "更衣室"
+                },
                 "amenity/drinking_water": {
                     "name": "飲水機",
                     "terms": "飲水,水源,活水,飲處,取水處"
@@ -4792,6 +4821,10 @@
                 "amenity/parking/multi-storey": {
                     "name": "立體停車場",
                     "terms": "多層停車場,停車塔"
+                },
+                "amenity/parking/park_ride": {
+                    "name": "轉乘停車場",
+                    "terms": "泊車轉乘"
                 },
                 "amenity/parking/underground": {
                     "name": "地下停車場"
@@ -6984,6 +7017,10 @@
                     "name": "地面筒倉",
                     "terms": "地面筒倉;筒倉"
                 },
+                "man_made/cairn": {
+                    "name": "石標",
+                    "terms": "石標"
+                },
                 "man_made/chimney": {
                     "name": "煙囪",
                     "terms": "煙筒"
@@ -8387,6 +8424,10 @@
                     "name": "音響店",
                     "terms": "音響店"
                 },
+                "shop/hobby": {
+                    "name": "嗜好商店",
+                    "terms": "嗜好商店"
+                },
                 "shop/houseware": {
                     "name": "家庭用品店",
                     "terms": "家居用品店"
@@ -8579,6 +8620,10 @@
                     "name": "超級市場",
                     "terms": "超市"
                 },
+                "shop/swimming_pool": {
+                    "name": "泳池用品商店",
+                    "terms": "泳池用品商店"
+                },
                 "shop/tailor": {
                     "name": "裁縫",
                     "terms": "裁縫師,成衣訂作,成衣匠"
@@ -8720,6 +8765,10 @@
                 "tourism/attraction": {
                     "name": "觀光景點",
                     "terms": "觀光點"
+                },
+                "tourism/camp_pitch": {
+                    "name": "營地",
+                    "terms": "營地"
                 },
                 "tourism/camp_site": {
                     "name": "露營地",

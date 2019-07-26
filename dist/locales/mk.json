@@ -271,6 +271,7 @@
                     "single": "Не може да се оддели бидејќи не е наполно видливо."
                 },
                 "not_connected": "Нема доволно линии/подрачја за одделување.",
+                "not_downloaded": "Не може да се одврзе бидејќи не е наполно преземено.",
                 "connected_to_hidden": "Не може да се оддели бидејќи е поврзано со скриен елемент.",
                 "relation": "Не може да се оддели бидејќи поврзува членови на однос."
             },
@@ -312,6 +313,10 @@
                 "connected_to_hidden": {
                     "single": "Овој елемент не може да се премести бидејќи е поврзан со скриен елемент.",
                     "multiple": "Овие елементи не можат да се преместат бидејќи се поврзани со скриени елементи."
+                },
+                "not_downloaded": {
+                    "single": "Не може да се премести бидејќи не е наполно преземено.",
+                    "multiple": "Не можат да се преместат бидејќи не се наполно преземени."
                 }
             },
             "reflect": {
@@ -354,6 +359,10 @@
                 "connected_to_hidden": {
                     "single": "Овој елемент не може да се преслика бидејќи не е поврзан со скриен елемент.",
                     "multiple": "Овие елементи не можат да се пресликаат бидејќи се поврзани со скриени елементи."
+                },
+                "not_downloaded": {
+                    "single": "Не може да се одрази бидејќи не е наполно преземено.",
+                    "multiple": "Не можат да се одразат бидејќи не се наполно преземени."
                 }
             },
             "rotate": {
@@ -379,6 +388,10 @@
                 "connected_to_hidden": {
                     "single": "Овој елемент не може да се сврти бидејќи е поврзан со скриен елемент.",
                     "multiple": "Овие елементи не можат да се свртат бидејќи се поврзани со скриени елементи."
+                },
+                "not_downloaded": {
+                    "single": "Не може да се сврти бидејќи не е наполно преземено.",
+                    "multiple": "Не можат да се свртат бидејќи не се наполно преземени."
                 }
             },
             "reverse": {
@@ -412,6 +425,7 @@
             },
             "extract": {
                 "title": "Извади",
+                "key": "ИГД",
                 "description": {
                     "vertex": {
                         "single": "Извади ја точкава од нејзините матички линии/подрачја."
@@ -604,6 +618,7 @@
         },
         "geocoder": {
             "search": "Пребарај по светот...",
+            "no_results_visible": "На подрачјево нема видливи исходни ставки",
             "no_results_worldwide": "Не најдов ништо"
         },
         "geolocate": {
@@ -850,6 +865,12 @@
                 }
             }
         },
+        "restore": {
+            "heading": "Имате незачувани промени",
+            "description": "Дали сакате да ги повратите незачуваните промени од претходното уредување?",
+            "restore": "Поврати ги промените",
+            "reset": "Отфрли ги промените"
+        },
         "save": {
             "title": "Зачувај",
             "help": "Прегледајте ги направените промени и подигнете ги на OpenStreetMap, со што ќе станат видливи за јавноста.",
@@ -884,10 +905,14 @@
             }
         },
         "success": {
+            "just_edited": "Штотуку го уредивте OpenStreetMap!",
+            "thank_you": "Ви благодариме што ја подобривте картата.",
+            "thank_you_location": "Ви благодариме што ја подобривте картата околу  {where}.",
             "thank_you_where": {
                 "format": "{place}{separator}{region}",
                 "separator": ", "
             },
+            "help_html": "Вашите промени треба да се појават на OpenStreetMap во рок од неколку минути. Ќе им треба подолго да се појават на други карти.",
             "help_link_text": "Подробно",
             "help_link_url": "https://wiki.openstreetmap.org/wiki/FAQ#I_have_just_made_some_changes_to_the_map._How_do_I_get_to_see_my_changes.3F",
             "view_on_osm": "Погледајте ги промените на OSM",
@@ -902,6 +927,12 @@
         "confirm": {
             "okay": "ОК",
             "cancel": "Откажи"
+        },
+        "splash": {
+            "welcome": "Добре дојдовте на уредникот ID за OpenStreetMap",
+            "text": "iD е достапна, но моќна алатка за учество во најдобрата слободна карта на светот. Ова е верзијата {version}. Повеќе информации ќе најдете на {website}. Грешките пријавувајте ги на {github}.",
+            "walkthrough": "Започнете ја прошетката",
+            "start": "Уреди сега"
         },
         "source_switch": {
             "live": "во живо",
@@ -1457,6 +1488,20 @@
                 "message": "{feature} има барање „Поправи ме“",
                 "tip": "Најди елементи со ознаки „поправи ме“"
             },
+            "invalid_format": {
+                "title": "Неважечко форматирање",
+                "tip": "Најди ознаки со неочекувани формати",
+                "email": {
+                    "message": "{feature} има неважечка е-пошта.",
+                    "message_multi": "{feature} има повеќе неважечки е-пошти.",
+                    "reference": "Е-поштенските адреси треба да бидат од обликот „user@example.com“."
+                },
+                "website": {
+                    "message": "{feature} има неважечко мрежно место.",
+                    "message_multi": "{feature} има повеќе неважечки мрежни места.",
+                    "reference": "Мрежните места мора да почнуваат со „http“ или „https“."
+                }
+            },
             "missing_tag": {
                 "title": "Отсутни ознаки",
                 "any": {
@@ -1473,6 +1518,10 @@
                 "incomplete": {
                     "message": "{feature} има непотполни ознаки",
                     "reference": "Некои елементи треба да имаат дополнителни ознаки."
+                },
+                "noncanonical_brand": {
+                    "message": "{feature} делува како марка со нестандардни ознаки",
+                    "reference": "Сите елементи со истата марка треба да се означат на истиот начин."
                 }
             },
             "private_data": {
@@ -1591,6 +1640,9 @@
                 },
                 "use_different_layers": {
                     "title": "Користи различни слоеви"
+                },
+                "use_different_layers_or_levels": {
+                    "title": "Користи различни слоеви или степени"
                 },
                 "use_different_levels": {
                     "title": "Користи различни нивоа"
@@ -1931,6 +1983,15 @@
                 "access_simple": {
                     "label": "Дозволен пристап"
                 },
+                "addr/interpolation": {
+                    "label": "Вид",
+                    "options": {
+                        "all": "Сите",
+                        "alphabetic": "Азбучно",
+                        "even": "Парни",
+                        "odd": "Непарни"
+                    }
+                },
                 "address": {
                     "label": "Адреса",
                     "placeholders": {
@@ -2120,6 +2181,10 @@
                 },
                 "building": {
                     "label": "Градба"
+                },
+                "building/levels/underground": {
+                    "label": "Подземни катови",
+                    "placeholder": "2, 4, 6..."
                 },
                 "building/levels_building": {
                     "label": "Катови на градбата",
@@ -2639,10 +2704,10 @@
                     }
                 },
                 "iata": {
-                    "label": "IATA"
+                    "label": "Аеродромски код по IATA"
                 },
                 "icao": {
-                    "label": "ICAO"
+                    "label": "Аеродромски код по ICAO"
                 },
                 "incline": {
                     "label": "Наклон"
@@ -3144,11 +3209,17 @@
                 "power_supply": {
                     "label": "Напојување"
                 },
+                "preschool": {
+                    "label": "Претшколски"
+                },
                 "produce": {
                     "label": "Пилјарска стока"
                 },
                 "product": {
                     "label": "Производи"
+                },
+                "public_bookcase/type": {
+                    "label": "Вид"
                 },
                 "railway": {
                     "label": "Вид"
@@ -3808,6 +3879,9 @@
                 }
             },
             "presets": {
+                "addr/interpolation": {
+                    "name": "Вметнување на адреси"
+                },
                 "address": {
                     "name": "Адреса"
                 },
@@ -3880,8 +3954,14 @@
                 "aeroway/helipad": {
                     "name": "Хеликоптерско слетувалиште"
                 },
+                "aeroway/holding_position": {
+                    "name": "Чекална положба на леталото"
+                },
                 "aeroway/jet_bridge": {
                     "name": "Авионски пристапен мост"
+                },
+                "aeroway/parking_position": {
+                    "name": "Паркирна положба на леталото"
                 },
                 "aeroway/runway": {
                     "name": "Писта"
@@ -4039,6 +4119,9 @@
                 "amenity/dojo": {
                     "name": "Училиште за боречки вештини"
                 },
+                "amenity/dressing_room": {
+                    "name": "Соблекувална"
+                },
                 "amenity/drinking_water": {
                     "name": "Пивка вода"
                 },
@@ -4158,6 +4241,9 @@
                 },
                 "amenity/parking/multi-storey": {
                     "name": "Катна гаража"
+                },
+                "amenity/parking/park_ride": {
+                    "name": "Преодно паркиралиште"
                 },
                 "amenity/parking/underground": {
                     "name": "Подземно паркиралиште"
@@ -5846,6 +5932,9 @@
                 "man_made/bunker_silo": {
                     "name": "Бункерски силос"
                 },
+                "man_made/cairn": {
+                    "name": "Могила"
+                },
                 "man_made/chimney": {
                     "name": "Оџак"
                 },
@@ -6926,6 +7015,9 @@
                 "shop/hifi": {
                     "name": "Продавница за аудиоопрема"
                 },
+                "shop/hobby": {
+                    "name": "Хобистичка продавница"
+                },
                 "shop/houseware": {
                     "name": "Продавница за домот"
                 },
@@ -7071,6 +7163,9 @@
                 "shop/supermarket": {
                     "name": "Супермаркет"
                 },
+                "shop/swimming_pool": {
+                    "name": "Базенски залихи"
+                },
                 "shop/tailor": {
                     "name": "Кројач"
                 },
@@ -7178,6 +7273,9 @@
                 },
                 "tourism/attraction": {
                     "name": "Знаменитост"
+                },
+                "tourism/camp_pitch": {
+                    "name": "Логориште"
                 },
                 "tourism/camp_site": {
                     "name": "Камп"

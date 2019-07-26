@@ -1952,6 +1952,9 @@
                 "use_different_layers": {
                     "title": "Ustaw różne warstwy (tag layer)"
                 },
+                "use_different_layers_or_levels": {
+                    "title": "Ustaw różne warstwy lub kondygnacje"
+                },
                 "use_different_levels": {
                     "title": "Ustaw różne kondygnacje"
                 },
@@ -2460,6 +2463,15 @@
                 "access_simple": {
                     "label": "Dozwolony wstęp"
                 },
+                "addr/interpolation": {
+                    "label": "Rodzaj",
+                    "options": {
+                        "all": "Wszystkie",
+                        "alphabetic": "Alfabetycznie",
+                        "even": "Parzyste",
+                        "odd": "Nieparzyste"
+                    }
+                },
                 "address": {
                     "label": "Adres",
                     "placeholders": {
@@ -2649,6 +2661,10 @@
                 },
                 "building": {
                     "label": "Budynek"
+                },
+                "building/levels/underground": {
+                    "label": "Kondygnacje podziemne",
+                    "placeholder": "2, 4, 6..."
                 },
                 "building/levels_building": {
                     "label": "Liczba kondygnacji",
@@ -3168,10 +3184,10 @@
                     }
                 },
                 "iata": {
-                    "label": "IATA"
+                    "label": "Kod lotniska - IATA"
                 },
                 "icao": {
-                    "label": "ICAO"
+                    "label": "Kod lotniska - ICAO"
                 },
                 "incline": {
                     "label": "Nachylenie"
@@ -3497,10 +3513,10 @@
                     "placeholder": "24/7, sunrise-sunset, Mo-Sa 08:00-20:00"
                 },
                 "operator": {
-                    "label": "Operator"
+                    "label": "Zarządca"
                 },
                 "operator/type": {
-                    "label": "Operator (rodzaj)"
+                    "label": "Zarządca (rodzaj)"
                 },
                 "outdoor_seating": {
                     "label": "Ogródek restauracyjny"
@@ -3673,11 +3689,17 @@
                 "power_supply": {
                     "label": "Zasilacz"
                 },
+                "preschool": {
+                    "label": "Przedszkole"
+                },
                 "produce": {
                     "label": "Produkt rolny"
                 },
                 "product": {
                     "label": "Produkty"
+                },
+                "public_bookcase/type": {
+                    "label": "Typ"
                 },
                 "railway": {
                     "label": "Rodzaj"
@@ -4337,6 +4359,9 @@
                 }
             },
             "presets": {
+                "addr/interpolation": {
+                    "name": "Interpolacja adresów"
+                },
                 "address": {
                     "name": "Adres",
                     "terms": "namiar, numer"
@@ -4430,9 +4455,17 @@
                     "name": "Lądowisko dla helikopterów",
                     "terms": "lądowisko dla helikopterów, lądowisko dla śmigłowców, śmigłowiec, lotnisko"
                 },
+                "aeroway/holding_position": {
+                    "name": "Punkt oczekiwania dla samolotu",
+                    "terms": "punkt oczekiwania dla samolotu, pozycja oczekiwania dla samolotu, holding position"
+                },
                 "aeroway/jet_bridge": {
                     "name": "Rękaw lotniczy",
                     "terms": "rękaw lotniczy, pomost lotniczy"
+                },
+                "aeroway/parking_position": {
+                    "name": "Miejsce postoju samolotu",
+                    "terms": "miejsce postoju samolotu, miejsce postoju dla samolotu, pozycja parkowania dla samolotu, pozycja parkowania samolotu"
                 },
                 "aeroway/runway": {
                     "name": "Pas startowy",
@@ -4639,6 +4672,10 @@
                     "name": "Dojo/szkoła sztuk walki",
                     "terms": "Dojo, szkoła walki"
                 },
+                "amenity/dressing_room": {
+                    "name": "Przebieralnia",
+                    "terms": "przebieralnia, szatnia"
+                },
                 "amenity/drinking_water": {
                     "name": "Woda pitna",
                     "terms": "wodotrysk,woda pitna,poidło"
@@ -4794,6 +4831,10 @@
                 "amenity/parking/multi-storey": {
                     "name": "Parking wielopoziomowy",
                     "terms": "parking wielopiętrowy,samochód,parking wewnętrzny,parking wielopoziomowy,budynek parkingu,pokład parkingowy,garaż parkingowy,rampa parkingowa,struktura parkingowa"
+                },
+                "amenity/parking/park_ride": {
+                    "name": "Parking \"parkuj i jedź\"",
+                    "terms": "parking parkuj i jedź, park & ride, p&r"
                 },
                 "amenity/parking/underground": {
                     "name": "Parking podziemny",
@@ -5074,7 +5115,7 @@
                 },
                 "amenity/social_facility/homeless_shelter": {
                     "name": "Schronisko dla bezdomnych",
-                    "terms": "przytułek dla bezdomnych"
+                    "terms": "schronisko dla bezdomnych, przytułek dla bezdomnych, noclegownia"
                 },
                 "amenity/social_facility/nursing_home": {
                     "name": "Dom opieki",
@@ -5125,7 +5166,7 @@
                 },
                 "amenity/university": {
                     "name": "Teren uczelni",
-                    "terms": "teren uniwersytetu,teren akademii,teren politechniki"
+                    "terms": "teren uniwersytetu, teren akademii, teren politechniki, uniwersytet, akademia, politechnika, uczelnia, wydział, instytut"
                 },
                 "amenity/vehicle_inspection": {
                     "name": "Stacja kontroli pojazdów",
@@ -5591,7 +5632,7 @@
                     "terms": "ruiny,wyburzony"
                 },
                 "building/school": {
-                    "name": "Budynek wyglądający jak szkoła",
+                    "name": "Budynek szkolny",
                     "terms": "budynek szkolny"
                 },
                 "building/semidetached_house": {
@@ -5880,7 +5921,7 @@
                 },
                 "emergency/defibrillator": {
                     "name": "Defibrylator",
-                    "terms": "defibrylator"
+                    "terms": "defibrylator aed"
                 },
                 "emergency/designated": {
                     "name": "Wyznaczony dojazd dla służb ratowniczych"
@@ -6637,7 +6678,7 @@
                 },
                 "leisure/amusement_arcade": {
                     "name": "Salon gier",
-                    "terms": "salon gier,automaty wrzutowe,gry wideo,symulatory jazdy,pinball"
+                    "terms": "salon gier, automaty wrzutowe, gry wideo, gry video, symulatory jazdy, symulatory jazdy, symulator lotu, pinball, wirtualna rzeczywistość, rzeczywistość wirtualna"
                 },
                 "leisure/bandstand": {
                     "name": "Estrada",
@@ -6877,7 +6918,7 @@
                 },
                 "leisure/pitch/table_tennis": {
                     "name": "Stół do tenisa stołowego",
-                    "terms": "stół do ping ponga"
+                    "terms": "stół do tenisa stołowego, stół do ping ponga, stół do ping-ponga, stół do pingponga, tenis stołowy"
                 },
                 "leisure/pitch/tennis": {
                     "name": "Kort tenisowy",
@@ -6997,6 +7038,10 @@
                 "man_made/bunker_silo": {
                     "name": "Silos",
                     "terms": "silos,zbiornik,magazyn"
+                },
+                "man_made/cairn": {
+                    "name": "Kopiec",
+                    "terms": "kopiec kamieni"
                 },
                 "man_made/chimney": {
                     "name": "Komin",
@@ -8411,6 +8456,10 @@
                     "name": "Sklep ze sprzętem hi-fi",
                     "terms": "hi-fi, hifi, audio, stereo, wieże, głośniki, wzmacniacze, amplitunery"
                 },
+                "shop/hobby": {
+                    "name": "Sklep hobbystyczny",
+                    "terms": "sklep hobbystyczny"
+                },
                 "shop/houseware": {
                     "name": "Sklep z małymi artykułami gospodarstwa domowego",
                     "terms": "sztućce, garnki, artykuły kuchenne, małe agd"
@@ -8603,6 +8652,10 @@
                     "name": "Supermarket",
                     "terms": "supermarket,biedronka,netto,dino"
                 },
+                "shop/swimming_pool": {
+                    "name": "Sklep z akcesoriami do basenów",
+                    "terms": "Sklep z akcesoriami do basenów, akcesoria do basenów, materiały do basenów, baseny"
+                },
                 "shop/tailor": {
                     "name": "Krawiec",
                     "terms": "krawiec, krawcowa, szycie na miarę, odzież na miarę, rzemiosło, rzemieślnik, rzemieślnicy"
@@ -8656,11 +8709,11 @@
                 },
                 "shop/video": {
                     "name": "Sklep/wypożyczalnia z filmami wideo/dvd",
-                    "terms": "filmy wideo, filmy dvd, filmy bluray"
+                    "terms": "sklep z filmami, wypożyczalnia filmów, filmy wideo, filmy video, filmy dvd, filmy blu-ray, vhs"
                 },
                 "shop/video_games": {
                     "name": "Sklep z grami wideo",
-                    "terms": "gry wideo"
+                    "terms": "sklep z grami wideo, gry wideo, gry video, gry komputerowe, gry konsolowe, gry na konsole"
                 },
                 "shop/watches": {
                     "name": "Sklep z zegarkami",
@@ -8707,7 +8760,7 @@
                 },
                 "tourism/apartment": {
                     "name": "Mieszkanie na wynajem",
-                    "terms": "aparatament na wynajem, apartamenty na wynajem, mieszkanie na wynajem, mieszkania na wynajem, apartament, apartamenty, do wynajęcia"
+                    "terms": "mieszkanie na wynajem, mieszkania na wynajem, apartament na wynajem, apartamenty na wynajem, apartament, apartamenty, do wynajęcia, nocleg"
                 },
                 "tourism/aquarium": {
                     "name": "Akwarium",
@@ -8744,6 +8797,10 @@
                 "tourism/attraction": {
                     "name": "Atrakcja turystyczna",
                     "terms": "atrakcja turystyczna"
+                },
+                "tourism/camp_pitch": {
+                    "name": "Miejsce na kempingu",
+                    "terms": "miejsce na kempingu, miejsce na rozbicie namiotu, miejsce na namiot, miejsce na kampera"
                 },
                 "tourism/camp_site": {
                     "name": "Kemping",
@@ -9626,7 +9683,8 @@
                 "name": "Eco-Club"
             },
             "ym-University-of-Ghana": {
-                "name": "YouthMappers z Uniwersytetu w Ghanie"
+                "name": "YouthMappers z Uniwersytetu w Ghanie",
+                "description": "Oddział YouthMappers na Uniwersytecie w Ghanie"
             },
             "ym-University-of-Mines-and-Technology": {
                 "name": "YouthMappers UMaT"
@@ -9639,6 +9697,9 @@
             },
             "ym-Dedan-Kimathi-University-of-Technology": {
                 "name": "GDEV"
+            },
+            "ym-University-of-Nairobi": {
+                "description": "Oddział YouthMappers na Uniwersytecie w Nairobi"
             },
             "ym-African-Methodist-Episcopal-University": {
                 "name": "YouthMappers-AMEU"
@@ -9654,6 +9715,9 @@
                 "name": "Lista dyskusyjna Talk-mg",
                 "description": "Miejsce rozmów twórców, społeczności i użytkowników OpenStreetMap na Madagaskarze."
             },
+            "ym-University-of-Malawi": {
+                "description": "Oddział YouthMappers na Uniwersytecie w Malawi"
+            },
             "ym-Ignatius-Ajuru-University-of-Education": {
                 "name": "IgnatiusMappersTeam (IMT)"
             },
@@ -9665,6 +9729,10 @@
             },
             "ym-University-of-Nigeria-Enugu-Campus": {
                 "name": "LionMappersTeam (LMT) Enugu"
+            },
+            "osm-africa-telegram": {
+                "name": "OpenStreetMap Afryka na Telegramie",
+                "description": "Kanał OpenStreetMap Afryka na Telegramie"
             },
             "ym-Insititue-d-Enseignement-Superieur-de-Ruhengeri": {
                 "name": "YouthMappers z INES Ruhengeri"
@@ -9678,16 +9746,33 @@
             "ym-Njala-University-Njala-Campus": {
                 "name": "YouthMappers Njala University, Njala Campus"
             },
+            "ym-University-of-Pretoria": {
+                "description": "Oddział YouthMappers na Uniwersytecie w Pretorii"
+            },
             "ym-Sokoine-University-of-Agriculture": {
                 "name": "SMCoSE YouthMappers"
             },
             "ym-University-of-Dar-es-Salaam": {
                 "name": "YouthMappers na Uniwersytecie Dar es Salaam"
             },
+            "ym-The-University-of-Zambia": {
+                "description": "Oddział YouthMappers na Uniwersytecie w Zambii"
+            },
+            "ym-University-of-Zimbabwe": {
+                "name": "UZMappers",
+                "description": "Oddział YouthMappers na Uniwersytecie w Zimbabwe"
+            },
+            "osm-afghanistan-facebook": {
+                "name": "OpenStreetMap Afganistan",
+                "description": "Ulepsz OpenStreetMap w Afganistanie"
+            },
             "OSM-BGD-facebook": {
                 "name": "OpenStreetMap Bangladesz",
                 "description": "Ulepsz OpenStreetMap w Bangladeszu",
                 "extendedDescription": "Mapujesz w Bangladeszu? Masz pytania lub chcesz dołączyć do naszej społeczności? Wejdź na {url}. Zapraszamy wszystkich!"
+            },
+            "ym-Khulna-University": {
+                "name": "OpenStreetMap"
             },
             "OSM-India-facebook": {
                 "name": "OpenStreetMap Indie – Uczestniczący w mapowaniu sąsiedztwa",
@@ -9753,6 +9838,12 @@
                 "description": "Ulepsz OpenStreetMap w Indonezji",
                 "extendedDescription": "Mapujesz w Indonezji? Masz pytania lub chcesz dołączyć do naszej społeczności? Wejdź na {url}. Zapraszamy wszystkich!"
             },
+            "ym-Universitas-Negeri-Makassar": {
+                "name": "Kontur Geografi"
+            },
+            "ym-University-Muhammadiyah-Surakarta": {
+                "name": "SpaceTime"
+            },
             "osm-iran-aparat": {
                 "name": "OpenStreetMap Iran Aparat",
                 "description": "Subskrybuj nasz kanał: {url}",
@@ -9809,6 +9900,9 @@
                 "name": "OpenStreetMap Nepal",
                 "description": "Ulepsz OpenStreetMap w Nepalu",
                 "extendedDescription": "Mapujesz w Nepalu? Masz pytania lub chcesz dołączyć do naszej społeczności? Wejdź na {url}. Zapraszamy wszystkich!"
+            },
+            "ym-Kathmandu-University": {
+                "description": "Oddział YouthMappers na Uniwersytecie w Katmandu"
             },
             "OSM-Asia-mailinglist": {
                 "name": "Lista dyskusyjna OpenStreetMap Azja",
@@ -9923,8 +10017,8 @@
             },
             "be-irc": {
                 "name": "OpenStreetMap Belgia na IRC",
-                "description": "Dołącz do #osmbe na irc.oftc.net (port 6667)",
-                "extendedDescription": "Dołącz do #osmbe na irc.oftc.net (port 6667), który jest połączony z kanałem Matrixa"
+                "description": "Wejdź na kanał #osmbe na irc.oftc.net (port 6667)",
+                "extendedDescription": "Wejdź na kanał #osmbe na irc.oftc.net (port 6667), który jest połączony z kanałem Matrixa"
             },
             "be-mailinglist": {
                 "name": "Lista dyskusyjna Talk-be",
@@ -9950,7 +10044,7 @@
             },
             "hr-irc": {
                 "name": "OpenStreetMap Chorwacja na IRC",
-                "description": "Dołącz do #osm-hr na irc.freenode.org (port 6667)"
+                "description": "Wejdź na kanał do #osm-hr na irc.freenode.org (port 6667)"
             },
             "hr-mailinglist": {
                 "name": "Lista dyskusyjna Talk-hr",
@@ -9978,11 +10072,14 @@
             },
             "dk-irc": {
                 "name": "OpenStreetMap Dania na IRC",
-                "description": "Dołącz do #osm-dk na irc.oftc.net (port 6667)"
+                "description": "Wejdź na kanał #osm-dk na irc.oftc.net (port 6667)"
             },
             "dk-mailinglist": {
                 "name": "Lista dyskusyjna Talk-dk",
                 "description": "Lista dyskusyjna OpenStreetMap w Danii"
+            },
+            "ym-Queen-Mary-University-of-London": {
+                "description": "Oddział YouthMappers na Queen Mary University of London"
             },
             "fi-forum": {
                 "name": "Forum OpenStreetMap FI",
@@ -9990,7 +10087,7 @@
             },
             "fi-irc": {
                 "name": "OpenStreetMap Finlandia na IRC",
-                "description": "Dołącz do #osm-fi na irc.oftc.net (port 6667)"
+                "description": "Wejdź na kanał #osm-fi na irc.oftc.net (port 6667)"
             },
             "fi-mailinglist": {
                 "name": "Lista dyskusyjna Talk-fi",
@@ -10006,7 +10103,7 @@
             },
             "fr-irc": {
                 "name": "OpenStreetMap Francja na IRC",
-                "description": "Dołącz do #osm-fr na irc.oftc.net (port 6667)"
+                "description": "Wejdź na kanał #osm-fr na irc.oftc.net (port 6667)"
             },
             "fr-mailinglist": {
                 "name": "Lista dyskusyjna Talk-fr",
@@ -10038,7 +10135,7 @@
             },
             "de-irc": {
                 "name": "OpenStreetMap Niemcy na IRC",
-                "description": "Dołącza do #osm-de na irc.oftc.net (port 6667)"
+                "description": "Wejdź na kanał #osm-de na irc.oftc.net (port 6667)"
             },
             "de-mailinglist": {
                 "name": "Lista dyskusyjna Talk-de",
@@ -10055,6 +10152,9 @@
             "osm-de": {
                 "name": "OpenStreetMap Niemcy",
                 "description": "Platofrma z informacjami o OpenStreetMap w Niemczech"
+            },
+            "ym-Heidelberg-University": {
+                "description": "Oddział YouthMappers na Uniwersytecie w Heidelbergu"
             },
             "hu-facebook": {
                 "name": "OpenStreetMap HU na Facebooku",
@@ -10074,7 +10174,7 @@
             },
             "is-mailinglist": {
                 "name": "Lista dyskusyjna Talk-is",
-                "description": "Talk-be to oficjalna lista dyskusyjna islandzkiej społeczności OSM"
+                "description": "Talk-is to oficjalna lista dyskusyjna islandzkiej społeczności OSM"
             },
             "is-twitter": {
                 "name": "OSM Islandia na Twitterze",
@@ -10086,11 +10186,11 @@
             },
             "it-irc": {
                 "name": "OpenStreetMap Włochy na IRC",
-                "description": "Dołącz do #osm-it na irc.oftc.net (port 6667)"
+                "description": "Wejdź na kanał #osm-it na irc.oftc.net (port 6667)"
             },
             "it-mailinglist": {
                 "name": "Lista dyskusyjna Talk-it",
-                "description": "Talk-at  to oficjalna lista dyskusyjna włoskiej społeczności OSM"
+                "description": "Talk-it to oficjalna lista dyskusyjna włoskiej społeczności OSM"
             },
             "it-telegram": {
                 "name": "@OpenStreetMapItalia na Telegramie",
@@ -10118,9 +10218,17 @@
                 "name": "Lista dyskusyjna OpenStreetMap dla Trydentu",
                 "description": "Regionalna lista dyskusyjna OpenStreetMap Włochy dla Trydentu"
             },
+            "ym-Politecnico-di-Milano": {
+                "name": "PoliMappers",
+                "description": "Oddział YouthMappers na Politechnice w Milanie"
+            },
             "kosovo-telegram": {
-                "name": "OpenStreetMap Kosowa na Telegramie",
+                "name": "OpenStreetMap Kosowo na Telegramie",
                 "description": "Półoficjalna grupa publiczna na Telegramie dla Kosowa i okolic. Zapraszamy wszystkich mapujących z dowolnego kraju i z dowolnym językiem."
+            },
+            "lu-mailinglist": {
+                "name": "Lista dyskusyjna Talk-lu",
+                "description": "Oficjalna lista dyskusyjna luksemburskiej społeczności OSM"
             },
             "no-forum": {
                 "name": "Forum www OpenStreetMap Norwegia",
@@ -10146,6 +10254,14 @@
                 "name": "Forum OpenStreetMap Polska",
                 "description": "Forum dyskusyjne polskiej społeczności OpenStreetMap"
             },
+            "pt-mailinglist": {
+                "name": "Lista dyskusyjna Talk-pt",
+                "description": "Talk-pt to oficjalna lista dyskusyjna portugalskiej społeczności OSM"
+            },
+            "pt-telegram": {
+                "name": "OpenStreetMap Portugalia na Telegramie",
+                "description": "Grupa na Telegramie portugalskiej społeczności OpenStreetMap {url}"
+            },
             "si-forum": {
                 "name": "Forum OpenStreetMap Słowenia",
                 "description": "Forum społeczności OpenStreetMap w Słowenii"
@@ -10166,6 +10282,9 @@
                 "name": "@OSMes na Telegramie",
                 "description": "Kanał OpenStreetMap Hiszpania na Telegramie"
             },
+            "ym-Universidad-Politcnica-de-Madrid": {
+                "description": "Oddział YouthMappers na Politechnice w Madrycie"
+            },
             "osm-se": {
                 "name": "OpenStreetMap.se",
                 "description": "Zapewniaj usługi OSM i informacje dla lokalnej społeczności w Szwecji"
@@ -10180,7 +10299,7 @@
             },
             "se-irc": {
                 "name": "OpenStreetMap Szwecja na IRC",
-                "description": "Dołącz do #osm.se na irc.oftc.net (port 6667)"
+                "description": "Wejdź na kanał #osm.se na irc.oftc.net (port 6667)"
             },
             "se-mailinglist": {
                 "name": "Lista dyskusyjna Talk-se",
@@ -10206,8 +10325,14 @@
             },
             "gb-irc": {
                 "name": "OpenStreetMap Zjednoczone Królestwo na IRC",
-                "description": "Dołącz do #osm-gb na irc.oftc.net (port 6667)",
-                "extendedDescription": "Dołącz do #osm-gb na irc.oftc.net (port 6667), prosimy o cierpliwość i chwilę oczekiwania po zadaniu pytania"
+                "description": "Wejdź na kanał #osm-gb na irc.oftc.net (port 6667)",
+                "extendedDescription": "Wejdź na kanał #osm-gb na irc.oftc.net (port 6667), prosimy o cierpliwość i chwilę oczekiwania po zadaniu pytania"
+            },
+            "ym-University-of-Exeter": {
+                "description": "Oddział YouthMappers na Uniwersytecie w Exeter"
+            },
+            "ym-University-of-Warwick": {
+                "description": "Oddział YouthMappers na Uniwersytecie w Warwick"
             },
             "OSM-CA-Slack": {
                 "name": "OSM-CA na Slacku",
@@ -10227,6 +10352,9 @@
             },
             "ym-Universidad-Nacional-de-Ingenieria": {
                 "name": "Yeka Street MGA"
+            },
+            "ym-University-of-Panama": {
+                "description": "Oddział YouthMappers na Uniwersytecie w Panamie"
             },
             "Bay-Area-OpenStreetMappers": {
                 "name": "Mapujący OpenStreetMap z Bay Area",
@@ -10376,8 +10504,36 @@
                 "description": "Mapujący i użytkownicy OpenStreetMap z okolic Grand Junction",
                 "extendedDescription": "Celem tej grupy jest przedstawienie OpenStreetMap społeczności, utworzenie wspólnoty mapujących, stworzenie najbardziej niesamowitych danych geograficznych używając wszystkich dostępnych metod, które znamy i ostatecznie zintegrowanie tego wszystkiego, aby przedstawić nasze osiągnięcia. Wyobraź sobie dokładne oznakowania szlaków! Wyobraź sobie dalszy rozwój ścieżek rowerowych! Wyobraź sobie cokolwiek chcesz! To jest właśnie radość z OpenStreetMap!"
             },
+            "ym-George-Mason-University": {
+                "name": "Mason Mappers",
+                "description": "Oddział YouthMappers na George Mason University"
+            },
+            "ym-Kansas-State-University": {
+                "description": "Oddział YouthMappers na Uniwersytecie Stanowym Kansas"
+            },
+            "ym-Miami-University": {
+                "description": "Oddział YouthMappers na Uniwersytecie Miami w Oxford, Ohio"
+            },
+            "ym-Montgomery-College": {
+                "name": "GeoMC"
+            },
+            "ym-New-York-University": {
+                "description": "Oddział YouthMappers na Uniwersytecie Nowojorskim"
+            },
+            "ym-State-University-of-New-York-Geneseo": {
+                "name": "Stowarzyszenie SUNY Geneseo GIS"
+            },
+            "ym-SUNY-at-Fredonia": {
+                "name": "Geoventurers"
+            },
+            "ym-The-Pennsylvania-State-University": {
+                "description": "Oddział YouthMappers na Uniwersytecie Stanowym Pensylwanii"
+            },
             "ym-University-of-California-Davis": {
                 "name": "Mapping Club"
+            },
+            "ym-University-of-Chicago": {
+                "description": "Oddział YouthMappers na Uniwersytecie Chicagowskim"
             },
             "ym-University-of-Southern-California": {
                 "name": "SC Mappers"
@@ -10385,9 +10541,21 @@
             "ym-UW-Madison": {
                 "name": "BadgerMaps"
             },
+            "ym-Vassar-College": {
+                "name": "Hudson Valley Mappers"
+            },
+            "ym-Western-Michigan-University": {
+                "name": "Geography Club"
+            },
+            "geogeeks_perth_meetup": {
+                "name": "Spotkania GeoGeeks Perth"
+            },
             "talk-au": {
                 "name": "Lista dyskusyjna Talk-au",
                 "description": "Miejsce rozmów mapujących z Aussie"
+            },
+            "talk-nz": {
+                "name": "Lista dyskusyjna Talk-nz"
             },
             "OSM-AR-facebook": {
                 "name": "OpenStreetMap Argentyna na Facebooku",
@@ -10401,7 +10569,7 @@
             },
             "OSM-AR-irc": {
                 "name": "OpenStreetMap Argentyna na IRC",
-                "description": "Dołącz do #osm-ar na irc.oftc.net (port 6667)",
+                "description": "Wejdź na kanał #osm-ar na irc.oftc.net (port 6667)",
                 "extendedDescription": "Możesz znaleźć największego geeka w społeczności."
             },
             "OSM-AR-mailinglist": {
@@ -10432,6 +10600,10 @@
                 "name": "Grupa OpenStreetMap Brazylia na Telegramie",
                 "description": "Dołącz do społeczności OpenStreetMap Brazylia na Telegramie",
                 "extendedDescription": "Dołącz do społeczności, aby dowiedzieć się więcej o OpenStreetMap, zadawać pytania i brać udział w naszych spotkaniach. Zapraszamy wszystkich!"
+            },
+            "OSM-br-discord": {
+                "name": "OpenStreetMap Brazylia na Discord",
+                "description": "Dołącz do społeczności OpenStreetMap Brazylia na Discord"
             },
             "OSM-br-mailinglist": {
                 "name": "Lista dyskusyjna Talk-br",
@@ -10495,6 +10667,15 @@
                 "name": "OpenStreetMap Kolumbia",
                 "description": "Wiadomości z kolumbijskiej społeczności OpenStreetMap i fundacji OSMCo"
             },
+            "ym-Universidad-de-Antioquia": {
+                "name": "Geomatica UDEA"
+            },
+            "ym-Universidad-de-La-Guajira": {
+                "name": "Grupo Mesh"
+            },
+            "ym-Universidad-Nacional-de-Colombia": {
+                "name": "Grupo UN"
+            },
             "OSM-EC-telegram": {
                 "name": "OSM Ekwador na Telegramie",
                 "description": "Kanał OpenStreetMap Ekwador na Telegramie"
@@ -10526,6 +10707,31 @@
             "OSM-PE": {
                 "name": "OpenStreetMap Peru",
                 "description": "Wiadomości i zasoby z peruwiańskiej społeczności OpenStreetMap"
+            },
+            "uy-forum": {
+                "name": "Forum OpenStreetMap UY",
+                "description": "Forum OpenStreetMap Urugwaj"
+            },
+            "uy-irc": {
+                "name": "OpenStreetMap Urugwaj na IRC",
+                "description": "Wejdź na kanał #osmuruguay na irc.freenode.org (port 6667)",
+                "extendedDescription": "Wejdź na kanał #osmuruguay na irc.freenode.org"
+            },
+            "uy-mailinglist": {
+                "name": "Lista dyskusyjna Talk-uy",
+                "description": "Talk-uy to oficjalna lista dyskusyjna urugwajskiej społeczności OSM"
+            },
+            "ve-forum": {
+                "name": "Forum OpenStreetMap VE",
+                "description": "Forum www OpenStreetMap Wenezuela"
+            },
+            "ve-mailinglist": {
+                "name": "Lista dyskusyjna Talk-ve",
+                "description": "Talk-ve to oficjalna lista dyskusyjna wenezuelskiej społeczności OSM"
+            },
+            "ve-telegram": {
+                "name": "OSM Wenezuela na Telegramie",
+                "description": "Dołącz do społeczności OpenStreetMap Wenezuela na Telegramie"
             },
             "LATAM-Facebook": {
                 "name": "OpenStreetMap Latam na Facebooku",
@@ -10565,7 +10771,7 @@
             },
             "OSM-IRC": {
                 "name": "IRC OpenStreetMap",
-                "description": "Dołącz do #osm na serwerze irc.oftc.net (port 6667)"
+                "description": "Wejdź na kanał #osm na irc.oftc.net (port 6667)"
             },
             "OSM-Reddit": {
                 "name": "OpenStreetMap  na Reddit",

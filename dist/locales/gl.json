@@ -1952,6 +1952,9 @@
                 "use_different_layers": {
                     "title": "Emprega capas diferentes"
                 },
+                "use_different_layers_or_levels": {
+                    "title": "Emprega diferentes capas ou niveis"
+                },
                 "use_different_levels": {
                     "title": "Emprega niveis diferentes"
                 },
@@ -3162,12 +3165,6 @@
                         "stables": "Si",
                         "undefined": "Non"
                     }
-                },
-                "iata": {
-                    "label": "IATA"
-                },
-                "icao": {
-                    "label": "ICAO"
                 },
                 "incline": {
                     "label": "Inclinación"
@@ -4496,7 +4493,7 @@
                 },
                 "amenity/bicycle_rental": {
                     "name": "Alugamento de bicicletas",
-                    "terms": "bici, bicicleta, alugueiro, préstamo"
+                    "terms": "bici, bicicleta, alugueiro, préstamo, alugamento, locación"
                 },
                 "amenity/bicycle_repair_station": {
                     "name": "Lugar para ferramentas de reparación de bicicletas",
@@ -4507,8 +4504,8 @@
                     "terms": "cervexa, bar, terraza, xardín, ó ar libre, ao aire libre, biergarten"
                 },
                 "amenity/boat_rental": {
-                    "name": "Aluguer de botes",
-                    "terms": "aluguer, bote, barca, lancha"
+                    "name": "Alugamento de embarcacións",
+                    "terms": "alugueiro, alugamento, locación, bote, barca, lancha, embarcación, embarcacións"
                 },
                 "amenity/bureau_de_change": {
                     "name": "Troco de divisas",
@@ -4526,8 +4523,8 @@
                     "terms": "car pool, car pooling, transporte, automóbil, vehículo, auto, carro, coche, compartido"
                 },
                 "amenity/car_rental": {
-                    "name": "Aluguer de automóbiles",
-                    "terms": "aluguer, coche, automóbil, rent-a-car"
+                    "name": "Alugamento de automóbiles",
+                    "terms": "alugueiro, alugamento, locación, coche, automóbil, vehículo, rent-a-car"
                 },
                 "amenity/car_sharing": {
                     "name": "Auto compartido",
@@ -4555,7 +4552,7 @@
                 },
                 "amenity/clinic": {
                     "name": "Clínica ou centro de saúde",
-                    "terms": "clínica, médico, saúde, urxencias"
+                    "terms": "clínica, médico, saúde, urxencias, clinica, ambulatorio, saude"
                 },
                 "amenity/clinic/abortion": {
                     "name": "Clínica de aborto",
@@ -4614,7 +4611,7 @@
                 },
                 "amenity/doctors": {
                     "name": "Doutor",
-                    "terms": "doutor, médico, clínica, saúde"
+                    "terms": "doutor, médico, clínica, saúde, clinica, saude"
                 },
                 "amenity/dojo": {
                     "name": "Dojo/academia de artes marciais",
@@ -4691,7 +4688,7 @@
                 },
                 "amenity/hospital": {
                     "name": "Hospital",
-                    "terms": "hospital, clínica, urxencias, sanidade, saúde, médico"
+                    "terms": "clínica, urxencias, sanidade, saúde, médico, clinica, saude, ambulatorio"
                 },
                 "amenity/hunting_stand": {
                     "name": "Stand de Caza"
@@ -4859,7 +4856,8 @@
                     "terms": "centro de reciclaxe, punto limpo"
                 },
                 "amenity/recycling_container": {
-                    "name": "Colector de reciclaxe"
+                    "name": "Colector de reciclaxe",
+                    "terms": "reciclaxe, colector, contenedor, contedor, lixo, basura"
                 },
                 "amenity/register_office": {
                     "name": "Oficina do rexistro"
@@ -5137,7 +5135,7 @@
                 },
                 "attraction/drop_tower": {
                     "name": "Torre de caída",
-                    "terms": "caída, torre, atracción"
+                    "terms": "caída, torre, atracción, pilar de caída, piar de caída, xogo mecánico, xogo de feria, feira"
                 },
                 "attraction/maze": {
                     "name": "Labirinto"
@@ -6040,7 +6038,7 @@
                     "name": "Conca"
                 },
                 "landuse/brownfield": {
-                    "name": "Solar anteriormente edificado"
+                    "name": "Soar urbanizado abandonado"
                 },
                 "landuse/cemetery": {
                     "name": "Cemiterio"
@@ -6253,6 +6251,10 @@
                 "leisure/nature_reserve": {
                     "name": "Reserva natural"
                 },
+                "leisure/outdoor_seating": {
+                    "name": "Área de asentos ó exterior",
+                    "terms": "ó ar libre, ó aire libre, ao ar libre, ao aire libre, xardín de cervexa, comedor, cafetería, cafetaría, cafeteria, restaurante, pub, bar, patio, terraza, mesas, estar, sombrilla, parasol, antuca, catasol"
+                },
                 "leisure/park": {
                     "name": "Parque",
                     "terms": "parque, zona verde, xardín, alameda"
@@ -6449,7 +6451,24 @@
                     "terms": "vértice xeodésico, xeodesia"
                 },
                 "man_made/tower": {
-                    "name": "Torre"
+                    "name": "Torre",
+                    "terms": "torre, mastro, edificio, estrutura alta"
+                },
+                "man_made/tower/bell_tower": {
+                    "name": "Campanil",
+                    "terms": "campanario, campanil, torre da igrexa, campá, sino"
+                },
+                "man_made/tower/communication": {
+                    "name": "Torre de comunicación",
+                    "terms": "antena, torre de transmisión, torre de telefonía celular, torre de telefonía móbil, mastro de comunicación, torre de comunicación, torre adaptada, torre de telefonía móbil, mastro de radio, torre de radio, torre de televisión, mastro de transmisión, torre de transmisión, torre de televisión"
+                },
+                "man_made/tower/defensive": {
+                    "name": "Torre defensiva",
+                    "terms": "torre fortificada, torre do castelo"
+                },
+                "man_made/tower/observation": {
+                    "name": "Torre de observación",
+                    "terms": "torre de vixiancia, torre de lume"
                 },
                 "man_made/wastewater_plant": {
                     "name": "Depuradora de augas",
@@ -6850,16 +6869,26 @@
                     "name": "Subestación"
                 },
                 "power/tower": {
-                    "name": "Torre de Alta Tensión"
+                    "name": "Torre de alta tensión",
+                    "terms": "torre de alto voltaxe, torres de alta tensión, torre de electricidade"
                 },
                 "power/transformer": {
                     "name": "Transformador"
+                },
+                "public_transport/platform/light_rail": {
+                    "name": "Plataforma de tren lixeiro"
+                },
+                "public_transport/platform/light_rail_point": {
+                    "name": "Paraxe / Plataforma de tren lixeiro"
                 },
                 "public_transport/station": {
                     "name": "Estación de transporte público"
                 },
                 "public_transport/station_bus": {
                     "name": "Estación de autobuses"
+                },
+                "public_transport/station_light_rail": {
+                    "name": "Estación de tren lixeiro"
                 },
                 "public_transport/station_subway": {
                     "name": "Estación de metro"
@@ -6912,6 +6941,9 @@
                 "railway/level_crossing": {
                     "name": "Paso a nivel (estrada)",
                     "terms": "paso a nivel, cruzamento ferroviario, paso ferroviario, cruzamento a nivel"
+                },
+                "railway/light_rail": {
+                    "name": "Tren lixeiro"
                 },
                 "railway/milestone": {
                     "name": "Fito de Vía"
@@ -7127,6 +7159,10 @@
                     "name": "Tenda de enmarcado",
                     "terms": "enmarcado, marco, enmarcar, cadro"
                 },
+                "shop/frozen_food": {
+                    "name": "Conxelados",
+                    "terms": "alimentos, comidas, conxeladas, conxelados"
+                },
                 "shop/funeral_directors": {
                     "name": "Funeraria",
                     "terms": "funeraria, tanatorio, velorio, abellón"
@@ -7184,6 +7220,10 @@
                 },
                 "shop/leather": {
                     "name": "Tenda de peles"
+                },
+                "shop/lighting": {
+                    "name": "Tenda de iluminación",
+                    "terms": "Iluminación fluorescente, lámpadas, LEDs, luminarias"
                 },
                 "shop/locksmith": {
                     "name": "Cerralleiro",
@@ -7287,7 +7327,7 @@
                     "name": "Papelaría"
                 },
                 "shop/storage_rental": {
-                    "name": "Aluguer de almacéns"
+                    "name": "Alugamento de almacéns"
                 },
                 "shop/supermarket": {
                     "name": "Supermercado"
@@ -7546,6 +7586,9 @@
                 },
                 "type/route/horse": {
                     "name": "Rota de equitación"
+                },
+                "type/route/light_rail": {
+                    "name": "Rota de tren lixeiro"
                 },
                 "type/route/pipeline": {
                     "name": "Rota de tubaxe"

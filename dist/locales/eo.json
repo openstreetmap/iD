@@ -1950,6 +1950,9 @@
                 "use_different_layers": {
                     "title": "Uzi malsamajn tavolojn"
                 },
+                "use_different_layers_or_levels": {
+                    "title": "Uzi malsamajn tavolojn aŭ etaĝojn"
+                },
                 "use_different_levels": {
                     "title": "Uzi malsamajn etaĝojn"
                 },
@@ -2458,6 +2461,15 @@
                 "access_simple": {
                     "label": "Aliro permesata"
                 },
+                "addr/interpolation": {
+                    "label": "Maniero",
+                    "options": {
+                        "all": "Ĉiuj",
+                        "alphabetic": "Alfabeta",
+                        "even": "Parnombra",
+                        "odd": "Neparnombra"
+                    }
+                },
                 "address": {
                     "label": "Adreso",
                     "placeholders": {
@@ -2647,6 +2659,10 @@
                 },
                 "building": {
                     "label": "Konstruaĵo"
+                },
+                "building/levels/underground": {
+                    "label": "Kiom da subteraj etaĝoj",
+                    "placeholder": "2, 4, 6…"
                 },
                 "building/levels_building": {
                     "label": "Etaĝoj de konstruaĵo",
@@ -3165,12 +3181,6 @@
                         "undefined": "Ne"
                     }
                 },
-                "iata": {
-                    "label": "IATA"
-                },
-                "icao": {
-                    "label": "ICAO"
-                },
                 "incline": {
                     "label": "Klino"
                 },
@@ -3670,6 +3680,9 @@
                 },
                 "power_supply": {
                     "label": "Energi-fonto"
+                },
+                "preschool": {
+                    "label": "Infanvartejo"
                 },
                 "produce": {
                     "label": "Produktaĵo"
@@ -4335,6 +4348,9 @@
                 }
             },
             "presets": {
+                "addr/interpolation": {
+                    "name": "Interpolado de adresoj"
+                },
                 "address": {
                     "name": "Adreso",
                     "terms": "stratnomo,domnumero,numero"
@@ -4637,6 +4653,10 @@
                     "name": "Doĵo / batalart-lernejo",
                     "terms": "dojho,dojxo,batalarto,luktoarto,luktarto"
                 },
+                "amenity/dressing_room": {
+                    "name": "Vestejo",
+                    "terms": "travestejo,tualetejo"
+                },
                 "amenity/drinking_water": {
                     "name": "Trinkakvejo",
                     "terms": "ŝprucakvo,shprucakvo,sxprucakvo,trinkejo,akvokrano,krano"
@@ -4792,6 +4812,10 @@
                 "amenity/parking/multi-storey": {
                     "name": "Pluretaĝa parkumejo",
                     "terms": "parkejo,parkumejo,aŭtejo,aŭtoparkejo"
+                },
+                "amenity/parking/park_ride": {
+                    "name": "Parkumejo P+R (ĉe publika transporto)",
+                    "terms": "parkumejo"
                 },
                 "amenity/parking/underground": {
                     "name": "Parkumejo subtera",
@@ -6996,6 +7020,10 @@
                     "name": "Stokejo senkovra",
                     "terms": "turstokejo,stokturo,silo,magazeno"
                 },
+                "man_made/cairn": {
+                    "name": "Ŝtonamaso",
+                    "terms": "shtonamaso,sxtonamaso,kairno,amasaĵo"
+                },
                 "man_made/chimney": {
                     "name": "Kamentubo",
                     "terms": "kameno,fumtubo"
@@ -8589,6 +8617,10 @@
                     "name": "Superbazaro",
                     "terms": "vendejaro,vendejego"
                 },
+                "shop/swimming_pool": {
+                    "name": "Vendejo de naĝej-akcesoriaĵoj",
+                    "terms": "naĝejo,naĝbaseno"
+                },
                 "shop/tailor": {
                     "name": "Tajlora laborejo/vendejo",
                     "terms": "tajloro"
@@ -8730,6 +8762,10 @@
                 "tourism/attraction": {
                     "name": "Turisma vidindaĵo",
                     "terms": "vidindaĵo,vidindajho,vidindajxo,atrakcio,vizitindaĵo"
+                },
+                "tourism/camp_pitch": {
+                    "name": "Loko por kampadveturilo/tendo",
+                    "terms": "kampadejo,tendo,kampadveturilo"
                 },
                 "tourism/camp_site": {
                     "name": "Kampadejo",

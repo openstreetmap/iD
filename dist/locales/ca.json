@@ -1888,12 +1888,6 @@
                         "undefined": "No"
                     }
                 },
-                "iata": {
-                    "label": "IATA"
-                },
-                "icao": {
-                    "label": "ICAO"
-                },
                 "incline": {
                     "label": "Pendent"
                 },

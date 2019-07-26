@@ -1952,6 +1952,9 @@
                 "use_different_layers": {
                     "title": "שימוש בשכבות שונות"
                 },
+                "use_different_layers_or_levels": {
+                    "title": "להשתמש בשכבות או רמות שונים"
+                },
                 "use_different_levels": {
                     "title": "שימוש ברמות שונות"
                 },
@@ -2460,6 +2463,15 @@
                 "access_simple": {
                     "label": "הכניסה מותרת"
                 },
+                "addr/interpolation": {
+                    "label": "סוג",
+                    "options": {
+                        "all": "הכול",
+                        "alphabetic": "אלפביתית",
+                        "even": "זוגית",
+                        "odd": "אי־זוגית"
+                    }
+                },
                 "address": {
                     "label": "כתובת",
                     "placeholders": {
@@ -2649,6 +2661,10 @@
                 },
                 "building": {
                     "label": "בניין"
+                },
+                "building/levels/underground": {
+                    "label": "קומות תת־קרקעיות",
+                    "placeholder": "2, 4, 6..."
                 },
                 "building/levels_building": {
                     "label": "קומות בבניין",
@@ -3168,10 +3184,10 @@
                     }
                 },
                 "iata": {
-                    "label": "IATA"
+                    "label": "קוד נמל תעופה של IATA"
                 },
                 "icao": {
-                    "label": "ICAO"
+                    "label": "קוד נמל תעופה של ICAO"
                 },
                 "incline": {
                     "label": "שיפוע"
@@ -3673,11 +3689,17 @@
                 "power_supply": {
                     "label": "הספק חשמל"
                 },
+                "preschool": {
+                    "label": "גן חובה"
+                },
                 "produce": {
                     "label": "ירקות"
                 },
                 "product": {
                     "label": "מוצרים"
+                },
+                "public_bookcase/type": {
+                    "label": "סוג"
                 },
                 "railway": {
                     "label": "סוג"
@@ -4337,6 +4359,9 @@
                 }
             },
             "presets": {
+                "addr/interpolation": {
+                    "name": "שיטת חלוקת כתובות"
+                },
                 "address": {
                     "name": "כתובת",
                     "terms": "כתובת,מען"
@@ -4429,6 +4454,10 @@
                 "aeroway/helipad": {
                     "name": "מנחת מסוקים",
                     "terms": "מנחת מסוקים"
+                },
+                "aeroway/holding_position": {
+                    "name": "תבנית ריתוק כלי טיס",
+                    "terms": "תנוחת המתנה כלי טיס,תנוחת מעגל המתנה כלי טיס,תבנית המתנה מטוס,תבנית מעגל המתנה מטוס,תנוחת ריתוק מטוס,תנוחת ריתוק כלי טיס"
                 },
                 "aeroway/jet_bridge": {
                     "name": "גשר עלייה למטוס",
@@ -4639,6 +4668,10 @@
                     "name": "דוג׳ו / מרכז לאומנויות לחימה",
                     "terms": "אקדמיה למקצועות לחימה"
                 },
+                "amenity/dressing_room": {
+                    "name": "חדר הלבשה",
+                    "terms": "חדר החלפה,תא מדידה,חדר מדידה,תא הלבשה"
+                },
                 "amenity/drinking_water": {
                     "name": "מי שתייה",
                     "terms": "מי שתייה"
@@ -4794,6 +4827,10 @@
                 "amenity/parking/multi-storey": {
                     "name": "חניון רב קומות",
                     "terms": "מבנה חנייה"
+                },
+                "amenity/parking/park_ride": {
+                    "name": "חניון חנה וסע",
+                    "terms": "מגרש חניה,חניון,חניון תחבורה ציבורית,מתחם חנייה"
                 },
                 "amenity/parking/underground": {
                     "name": "חנייה תת־קרקעית",
@@ -5199,11 +5236,11 @@
                 },
                 "amenity/veterinary": {
                     "name": "וטרינר",
-                    "terms": "וטרינר"
+                    "terms": "רופא חיות"
                 },
                 "amenity/waste/dog_excrement": {
                     "name": "שקי-קקי",
-                    "terms": "שקי-קקי"
+                    "terms": "שקית לאיסוף צרכים"
                 },
                 "amenity/waste_basket": {
                     "name": "סל אשפה",
@@ -5339,14 +5376,16 @@
                     "terms": "גדר"
                 },
                 "barrier/fence/railing": {
-                    "name": "מעקה"
+                    "name": "מעקה",
+                    "terms": "מעקה מדרגות"
                 },
                 "barrier/gate": {
                     "name": "שער",
                     "terms": "שער"
                 },
                 "barrier/guard_rail": {
-                    "name": "מעקה בטיחות"
+                    "name": "מעקה בטיחות",
+                    "terms": "מעקה"
                 },
                 "barrier/hedge": {
                     "name": "גדר חיה",
@@ -5361,17 +5400,20 @@
                     "terms": "שפת המדרכה,אבני השפה,מדרכה,אבני שפה"
                 },
                 "barrier/kerb/flush": {
-                    "name": "אבן שפה משופעת"
+                    "name": "אבן שפה משופעת",
+                    "terms": "מדרכה משופעת"
                 },
                 "barrier/kerb/lowered": {
                     "name": "שפת מדרכה מונמכת",
                     "terms": "שפת המדרכה,אבני שפה מונמכות,מדרכה מונמכת,אבני שפה מונמכות"
                 },
                 "barrier/kerb/raised": {
-                    "name": "אבן שפה מוגבהת"
+                    "name": "אבן שפה מוגבהת",
+                    "terms": "אבן שפה עם הגבהה,מדרכה מוגבהת,הגבהת מדרכה"
                 },
                 "barrier/kerb/rolled": {
-                    "name": "תעלה חד־שיפועית"
+                    "name": "תעלה חד־שיפועית",
+                    "terms": "תעלת ניקוז,מרזב"
                 },
                 "barrier/kissing_gate": {
                     "name": "מחסום חיות",
@@ -5425,7 +5467,8 @@
                     "terms": "בניין"
                 },
                 "building/apartments": {
-                    "name": "בניין דירות"
+                    "name": "בניין דירות",
+                    "terms": "בניין מגורים"
                 },
                 "building/barn": {
                     "name": "אסם",
@@ -5636,7 +5679,8 @@
                     "terms": "מועדון"
                 },
                 "club/sport": {
-                    "name": "מועדון ספורט"
+                    "name": "מועדון ספורט",
+                    "terms": "מועדון אתלטיקה,מועדון התעמלות,מכון התעמלות,מכון כושר,מגרש אתלטיקה,רחבת אתלטיקה"
                 },
                 "craft": {
                     "name": "מלאכה",
@@ -5684,7 +5728,7 @@
                 },
                 "craft/chimney_sweeper": {
                     "name": "מנקה ארובות",
-                    "terms": "מנקה ארובות"
+                    "terms": "מנקת ארובות"
                 },
                 "craft/clockmaker": {
                     "name": "שען",
@@ -5708,7 +5752,7 @@
                 },
                 "craft/electronics_repair": {
                     "name": "חנות תיקון אלקטרוניקה",
-                    "terms": "חנות תיקון אלקטרוניקה"
+                    "terms": "חנות תיקון מוצרי אלקטרוניקה"
                 },
                 "craft/floorer": {
                     "name": "ריצוף",
@@ -5776,7 +5820,7 @@
                     "terms": "שרברבית"
                 },
                 "craft/pottery": {
-                    "name": "כלי חרס",
+                    "name": "קדרות",
                     "terms": "כלי חרס"
                 },
                 "craft/rigger": {
@@ -5797,7 +5841,7 @@
                 },
                 "craft/sawmill": {
                     "name": "מנסרה",
-                    "terms": "מנסרה"
+                    "terms": "נגריה,בית מלאכה,בית עץ"
                 },
                 "craft/scaffolder": {
                     "name": "התקנת פיגומים",
@@ -5926,6 +5970,9 @@
                     "name": "מקום צליחה",
                     "terms": "מקום צליחה"
                 },
+                "ford_line": {
+                    "name": "מעברה"
+                },
                 "golf/bunker": {
                     "name": "מכשול חול",
                     "terms": "מכשול חול"
@@ -5951,7 +5998,8 @@
                     "terms": "חור גולף"
                 },
                 "golf/lateral_water_hazard": {
-                    "name": "מכשול מים צדדי"
+                    "name": "מכשול מים צדדי",
+                    "terms": "נקודת חצייה,מעבר על מים"
                 },
                 "golf/path": {
                     "name": "נתיב הליכה לגולף",
@@ -6018,7 +6066,7 @@
                 },
                 "healthcare/physiotherapist": {
                     "name": "פיזיותרפיה",
-                    "terms": "פזיווטרפיה"
+                    "terms": "פיזיוטרפיה"
                 },
                 "healthcare/podiatrist": {
                     "name": "פודיאטור",
@@ -6026,15 +6074,15 @@
                 },
                 "healthcare/psychotherapist": {
                     "name": "פסיכותרפיסט",
-                    "terms": "פסיכותרפיסט"
+                    "terms": "פסיכותרפיסטית,בריאות הנפש"
                 },
                 "healthcare/rehabilitation": {
                     "name": "מוסד שיקומי",
-                    "terms": "מוסד שיקומי"
+                    "terms": "מוסד גמילה"
                 },
                 "healthcare/speech_therapist": {
                     "name": "קלינאית תקשורת",
-                    "terms": "קלינאי תקשורת"
+                    "terms": "קלינאי תקשורת,קלינאות תקשורת"
                 },
                 "highway": {
                     "name": "כביש בין־עירוני"
@@ -6051,7 +6099,8 @@
                     "name": "תחנת אוטובוס"
                 },
                 "highway/construction": {
-                    "name": "כביש סגור"
+                    "name": "כביש סגור",
+                    "terms": "סגירה,חסימה,מחסום,חסום,סגור"
                 },
                 "highway/corridor": {
                     "name": "מסדרון",
@@ -6094,10 +6143,12 @@
                     "name": "מעבר אופניים"
                 },
                 "highway/cycleway/crossing/marked": {
-                    "name": "מעבר דו־גלגליים מסומן"
+                    "name": "מעבר דו־גלגליים מסומן",
+                    "terms": "מעבר לאופניים,מעבר לאופנועים,מעבר לקורקינט"
                 },
                 "highway/cycleway/crossing/unmarked": {
-                    "name": "מעבר דו־גלגליים בלתי מסומן"
+                    "name": "מעבר דו־גלגליים בלתי מסומן",
+                    "terms": "מעבר לאופניים,מעבר לאופנועים,מעבר לקורקינט"
                 },
                 "highway/elevator": {
                     "name": "מעלית",
@@ -6404,7 +6455,8 @@
                     "name": "חדר"
                 },
                 "indoor/wall": {
-                    "name": "קיר פנימי"
+                    "name": "קיר פנימי",
+                    "terms": "גבול פנימי,תחימה פנימית"
                 },
                 "internet_access/wlan": {
                     "name": "נקודת רשת אלחוטית חמה",
@@ -6762,7 +6814,7 @@
                 },
                 "leisure/pitch": {
                     "name": "מגרש ספורט",
-                    "terms": "צגרש,כדורגל,כדורסל,טניס"
+                    "terms": "מגרש,כדורגל,כדורסל,טניס"
                 },
                 "leisure/pitch/american_football": {
                     "name": "מגרש פוטבול",
@@ -8334,6 +8386,10 @@
                     "name": "חנות הגברה",
                     "terms": "חנות ציוד הגברה"
                 },
+                "shop/hobby": {
+                    "name": "חנות תחביבים",
+                    "terms": "חנות פנאי,מנגה,אנימה,דמויות,דגם,בובה,פנאי"
+                },
                 "shop/houseware": {
                     "name": "חנות כלי בית",
                     "terms": "חנות כלי בית"
@@ -8525,6 +8581,10 @@
                 "shop/supermarket": {
                     "name": "סופרמרקט",
                     "terms": "סופרמרקט"
+                },
+                "shop/swimming_pool": {
+                    "name": "חנות ציוד לבריכות",
+                    "terms": "ציוד שחייה,ציוד לבריכות,תחזוקת ג׳קוזי,חנות בריכות,בריכת שחייה,חנות ציוד,ברכת שחייה,חנות להתקנת ברכת שחייה,חנות להתקנת בריכת שחייה,חנות לתחזוקת ברכות,חנות לתחזוקת בריכות,חנות ציוד לברכות"
                 },
                 "shop/tailor": {
                     "name": "חייט",
