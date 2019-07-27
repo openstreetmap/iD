@@ -1107,6 +1107,8 @@ en:
           tooltip: Turn of tasking
           title: None
           name: None
+        errors:
+          tooltip: Before setting a tasking manager, you must address errors
     task:
       name: Task
       id: "Task ID: {taskId}"
@@ -1124,6 +1126,7 @@ en:
     started_task:
       task_help: "You're editing task {taskId}{br}For details, click the {taskingButton} Tasking button or press the '{taskingKey}' key.{br}Need help? Click the {helpButton} Help button or pressing the '{helpKey}' key"
       stop_task: Stop task
+    unsavedEdits: You must save edits before starting a task.
   help:
     title: Help
     key: H

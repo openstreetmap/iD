@@ -2,6 +2,7 @@ import _debounce from 'lodash-es/debounce';
 import { event as d3_event, select as d3_select } from 'd3-selection';
 
 import { t, textDirection } from '../util/locale';
+import { modeSave } from '../modes';
 import { svgIcon } from '../svg/icon';
 import { uiDisclosure } from './disclosure';
 import { uiTooltipHtml } from './tooltipHtml';
@@ -13,7 +14,7 @@ import { uiTaskingTaskEditor } from './taskingTaskEditor';
 
 export function uiTasking(context) {
 
-  var taskingTaskEditor = uiTaskingTaskEditor(context);
+    var taskingTaskEditor = uiTaskingTaskEditor(context);
 
     var key = t('tasking.key');
 
@@ -23,11 +24,18 @@ export function uiTasking(context) {
 
     var _pane = d3_select(null);
     var _toggleButton = d3_select(null);
+
+    var _taskingContainer = d3_select(null);
     var _taskingManagerContainer = d3_select(null);
     var _taskingTaskContainer = d3_select(null);
+    var _taskingErrorsContainer = d3_select(null);
+
+    var _errors = taskingService.errors();
 
     var _task = taskingService.currentTask();
+    var _project = taskingService.currentProject();
 
+    // listeners
     var settingsCustomTasking = uiSettingsCustomTasking(context)
         .on('change', customTaskingChanged);
 
@@ -39,6 +47,65 @@ export function uiTasking(context) {
         layer.fitZoom();
         update();
     });
+
+    context.validator().on('validated', function() { updateOnChange(); });
+    context.history().on('change', function() { updateOnChange(); });
+
+    function updateOnChange() {
+
+        function iterateErrors(errors, _id, _property, _value) {
+            for (var error in _errors) {
+                if (errors[error].id === _id) {
+                    errors[error][_property] = _value;
+                   break;
+                }
+            }
+            return errors;
+        }
+        if (context.history().hasChanges() && layer.enabled() === false) {
+            _errors = iterateErrors(_errors, 'unsavedEdits', 'active', true);
+        } else {
+            _errors = iterateErrors(_errors, 'unsavedEdits', 'active', false);
+        }
+
+        taskingService.errors(_errors);
+        update();
+    }
+
+
+    function addNotificationBadge(selection) {
+        var d = 10;
+        selection.selectAll('svg.notification-badge')
+            .data([0])
+            .enter()
+            .append('svg')
+            .attr('viewbox', '0 0 ' + d + ' ' + d)
+            .attr('class', 'notification-badge hide')
+            .append('circle')
+            .attr('cx', d / 2)
+            .attr('cy', d / 2)
+            .attr('r', (d / 2) - 1)
+            .attr('fill', 'currentColor');
+    }
+
+    function activeErrors(errors) {
+        var activeErrors = errors.filter(function(error) { return error.active; });
+
+        return activeErrors.length ? activeErrors : [];
+    }
+
+    function isSaving() {
+        var mode = context.mode();
+        return mode && mode.id === 'save';
+    }
+
+
+    function save() {
+        d3_event.preventDefault();
+        if (!context.inIntro() && !isSaving() && context.history().hasChanges() && !showsLayer() && !taskingService.edits()) {
+            context.enter(modeSave(context));
+        }
+    }
 
 
     function showsLayer() {
@@ -66,9 +133,13 @@ export function uiTasking(context) {
             return layer && layer.supported();
         }
 
-        taskingService.currentManager(d); // set new manager
+        taskingService.currentManager(d); // set manager
 
         if (d.managerId === 'none') {
+            taskingService.resetProjectAndTask();
+            setLayer(false);
+
+        } else if (context.history().hasChanges()) {
             taskingService.resetProjectAndTask();
             setLayer(false);
 
@@ -81,21 +152,19 @@ export function uiTasking(context) {
             if (d.managerId === 'custom') {
 
                 // get project and task from custom settings
-                var project = taskingService.getProject(taskingService.customSettings().projectId);
-                var task = taskingService.getTask(taskingService.customSettings().taskId);
+                _project = taskingService.getProject(taskingService.customSettings().projectId);
+                _task = taskingService.getTask(taskingService.customSettings().taskId);
 
                 // set project & task
-                if (project && task) {
-                    taskingService.currentProject(project);
-                    taskingService.currentTask(task);
+                if (_project && _task) {
+                    taskingService.currentProject(_project);
+                    taskingService.currentTask(_task);
                 }
             }
 
             setLayer(true); // enable layer
 
         }
-
-        update();
     }
 
     function showsManager(d) {
@@ -104,6 +173,14 @@ export function uiTasking(context) {
 
 
     function update() {
+        updateTaskingErrors();
+
+        var errors = activeErrors(_errors);
+
+        _toggleButton.selectAll('.notification-badge')
+            .classed('error', (errors.length > 0))
+            .classed('hide', (errors.length === 0));
+
         if (!_pane.select('.disclosure-wrap-tasking_managers').classed('hide')) {
             updateTaskingManagers();
         }
@@ -111,6 +188,101 @@ export function uiTasking(context) {
         if (!_pane.select('.disclosure-wrap-tasking_task').classed('hide')) {
             updateTaskingTask();
         }
+
+        // if (context.history().hasChanges()) {
+        //     _taskingErrorsContainer
+        //         .call(drawErrorsList, _errors);
+
+        //     // remove tasking
+        //     _taskingManagerContainer.remove();
+        //     _taskingTaskContainer.remove();
+
+        // } else {
+        //     if (!_pane.select('.disclosure-wrap-tasking_managers').classed('hide')) {
+        //         updateTaskingManagers();
+        //     }
+
+        //     if (!_pane.select('.disclosure-wrap-tasking_task').classed('hide')) {
+        //         updateTaskingTask();
+        //     }
+        // }
+    }
+
+
+    function renderTaskingErrors(selection) {
+        _taskingErrorsContainer = selection
+            .call(drawErrorsList, _errors);
+
+    }
+
+    function updateTaskingErrors() {
+        _errors = taskingService.errors(); // get current errors
+
+        _taskingErrorsContainer
+            .call(drawErrorsList, _errors);
+    }
+
+    function drawErrorsList(selection, errors) {
+        var list = selection.selectAll('.tasking-errors-list')
+            .data([0]);
+
+        // Exit
+        list.exit()
+            .remove();
+
+        // Enter
+        list.enter()
+            .append('ul')
+            .attr('class', 'layer-list layer-list-tasking tasking-errors-list errors-list')
+            .merge(list);
+
+        var items = list.selectAll('li')
+            .data(activeErrors(errors), function(d) {
+                return d.id;
+            });
+
+        // Exit
+        items.exit()
+            .remove();
+
+        // Enter
+        var itemsEnter = items.enter()
+            .append('li')
+            .attr('class', function (d) { return 'issue severity-' + d.severity; })
+            .on('click', function(d) {
+                if (d.id === 'unsavedEdits') { save(); }
+            });
+
+
+        var labelsEnter = itemsEnter
+            .append('div')
+            .attr('class', 'issue-label');
+
+        var textEnter = labelsEnter
+            .append('span')
+            .attr('class', 'issue-text');
+
+        textEnter
+            .append('span')
+            .attr('class', 'issue-icon')
+            .each(function(d) {
+                var iconName = '#iD-icon-' + (d.severity === 'warning' ? 'alert' : 'error');
+                d3_select(this)
+                    .call(svgIcon(iconName));
+            });
+
+        textEnter
+            .append('span')
+            .attr('class', 'tasking-error-message issue-message');
+
+        // Update
+        items = items
+            .merge(itemsEnter);
+
+        items.selectAll('.tasking-error-message')
+            .text(function(d) {
+                return d.message;
+            });
     }
 
 
@@ -120,7 +292,7 @@ export function uiTasking(context) {
 
         _taskingManagerContainer = container.enter()
             .append('div')
-            .attr('class', 'tasking-managers-container')
+            .attr('class', 'tasking-managers-container');
 
 
         var ul = _taskingManagerContainer
@@ -167,7 +339,9 @@ export function uiTasking(context) {
             .attr('class', function(d) { return 'manager-' + d.managerId; })
             .call(tooltip()
                 .title(function(d) {
-                    return t('tasking.manager.managers.' + d.managerId + '.tooltip') || null;
+                    return !activeErrors(_errors).length ?
+                        t('tasking.manager.managers.' + d.managerId + '.tooltip') :
+                        t('tasking.manager.managers.errors.tooltip');
                 })
                 .placement('bottom')
             );
@@ -207,15 +381,19 @@ export function uiTasking(context) {
             .append('span')
             .text(function(d) { return d.name; });
 
+        items
+            .classed('active', active)
+            .selectAll('input')
+            .property('checked', active)
+            .property('disabled', !!activeErrors(_errors).length);
+
+        items
+            .selectAll('label')
+            .classed('deemphasize', !!activeErrors(_errors).length);
 
         // Update
         items = items
             .merge(enter);
-
-        items
-            .classed('active', active)
-            .selectAll('input')
-            .property('checked', active);
 
 
         // deemphasize & disable custom label & zoom when no data loaded
@@ -235,12 +413,12 @@ export function uiTasking(context) {
             .selectAll('label')
             .classed('deemphasize', !hasData())
             .selectAll('input')
-            .property('disabled', !hasData())
+            .property('disabled', !hasData() && !!activeErrors(_errors).length)
             .property('checked', showsData);
 
         selection.selectAll('.custom-manager-zoom')
-            .classed('deemphasize', !hasData())
-            .property('disabled', !hasData())
+            .classed('deemphasize', !hasData() && !!activeErrors(_errors).length)
+            .property('disabled', !hasData() && !!activeErrors(_errors).length)
             .property('checked', showsData);
     }
 
@@ -316,10 +494,10 @@ export function uiTasking(context) {
             .attr('tabindex', -1)
             .on('click', uiTasking.togglePane)
             .call(svgIcon('#iD-icon-tasking', 'light'))
-            // .call(addNotificationBadge) // TODO: TAH - add notification when details within the pane has changed
+            .call(addNotificationBadge)
             .call(paneTooltip);
 
-            // TODO: change color of button when tasking is enabled
+            // TODO: TAH - change color of button when tasking is enabled
     };
 
 
@@ -349,9 +527,19 @@ export function uiTasking(context) {
             .append('div')
             .attr('class', 'pane-content');
 
+        _taskingContainer = content.enter()
+            .append('div')
+            .attr('class', 'tasking-container')
+            .merge(content);
+
+        // errors
+        _taskingContainer
+                 .append('div')
+                 .attr('class', 'tasking-errors-container')
+                 .call(renderTaskingErrors);
 
         // tasking
-        content
+        _taskingContainer
             .append('div')
             .attr('class', 'tasking-manager-container')
             .call(uiDisclosure(context, 'tasking_managers', false)
@@ -361,7 +549,7 @@ export function uiTasking(context) {
 
 
         // task
-        content
+        _taskingContainer
             .append('div')
             .attr('class', 'tasking-task-container')
             .call(uiDisclosure(context, 'tasking_task', true)

@@ -76,7 +76,7 @@ Object.assign(task.prototype, {
     minZoom: function(extentZoom) {
         if (!arguments.length) return this.properties.minZoom;
 
-        this.properties.minZoom = Math.floor(extentZoom - MIN_ZOOM_PAD);
+        this.properties.minZoom = extentZoom; // Math.floor(extentZoom) - MIN_ZOOM_PAD;
         return this;
     },
 

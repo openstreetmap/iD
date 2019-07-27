@@ -334,7 +334,16 @@ export default {
             currentManager: {},
             currentProject: {},
             currentTask: {},
-            customSettings: {}
+            customSettings: {},
+            editsWhileTasking: false,
+            errors: [
+                {
+                    id: 'unsavedEdits',
+                    severity: 'error',
+                    message: t('tasking.unsavedEdits'),
+                    active: false
+                }
+            ],
         };
 
         // set starting manager
@@ -343,7 +352,31 @@ export default {
 
 
     reset: function() {
+        var that = this;
 
+        // create managers
+        var managers = initManagers();
+
+        _taskingCache = {
+            managers: managers,
+            projects: {},
+            tasks: {},
+            currentManager: {},
+            currentProject: {},
+            currentTask: {},
+            customSettings: {},
+            editsWhileTasking: false,
+            errors: {
+                'unsavedEdits': {
+                    severity: 'error',
+                    message: t('tasking.unsavedEdits')
+                }
+            },
+            currErrors: {}
+        };
+
+        // set starting manager
+        that.currentManager(that.getManager('none'));
     },
 
 
@@ -601,7 +634,6 @@ export default {
 
 
     currentTask: function(d) {
-
         if (!arguments.length) return _taskingCache.currentTask;
 
         _taskingCache.currentTask = d;
@@ -627,6 +659,19 @@ export default {
 
         that.resetProject();
         that.resetTask();
+    },
+
+
+    edits: function(val) {
+        if (!arguments.length) return _taskingCache.editsWhileTasking;
+
+        _taskingCache.editsWhileTasking = val;
+
+        return this;
+    },
+
+    errors: function() {
+        return _taskingCache.errors;
     }
 
 };
