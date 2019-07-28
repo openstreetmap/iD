@@ -486,6 +486,12 @@ export function uiTasking(context) {
         context.ui().togglePanes(!_pane.classed('shown') ? _pane : undefined);
     };
 
+    uiTasking.showPane = function() {
+        if (d3_event) d3_event.preventDefault();
+        paneTooltip.hide(_toggleButton);
+        context.ui().togglePanes(_pane);
+    };
+
 
     uiTasking.renderToggleButton = function(selection) {
 

@@ -115,7 +115,7 @@ export function uiSidebar(context) {
 
 
         function hover(datum) {
-            if (datum && datum.__featurehash__) {   // hovering on data
+            if (datum && datum.__featurehash__ && !datum.constructor.name === 'task') {   // hovering on data
                 _wasData = true;
                 sidebar
                     .show(dataEditor.datum(datum));

@@ -17,7 +17,6 @@ var _task;
 
 export function svgTasking(projection, context, dispatch) {
     var throttledRedraw = _throttle(function () { dispatch.call('change'); }, 1000);
-    var _showLabels = true;
     var _showCurtain = false;
     var _curtain = uiCurtain();
     var layer = d3_select(null);
@@ -191,44 +190,6 @@ export function svgTasking(projection, context, dispatch) {
             });
 
 
-        // Draw labels
-        layer
-            .call(drawLabels, 'label-halo', geoData)
-            .call(drawLabels, 'label', geoData);
-
-
-        function drawLabels(selection, textClass, data) {
-            var labelPath = d3_geoPath(projection);
-            var labelData = data.filter(function(d) {
-                return _showLabels && d.properties && (d.properties.desc || d.properties.name);
-            });
-
-            var labels = selection.selectAll('text.' + textClass)
-                .data(labelData, featureKey);
-
-            // exit
-            labels.exit()
-                .remove();
-
-            // enter/update
-            labels = labels.enter()
-                .append('text')
-                .attr('class', function(d) { return textClass + ' ' + featureClasses(d); })
-                .merge(labels)
-                .text(function(d) {
-                    return d.properties.desc || d.properties.name;
-                })
-                .attr('x', function(d) {
-                    var centroid = labelPath.centroid(d);
-                    return centroid[0] + 11;
-                })
-                .attr('y', function(d) {
-                    var centroid = labelPath.centroid(d);
-                    return centroid[1];
-                });
-        }
-
-
         // draw curtain around task
         if (geoData && !!geoData.length && drawTasking.enabled()) {
             drawTasking.showCurtain(true);
@@ -294,7 +255,7 @@ export function svgTasking(projection, context, dispatch) {
     function drawTasking(selection) {
         var hasData = drawTasking.hasData();
 
-        layer = selection.selectAll('.layer-maptasking')
+        layer = selection.selectAll('.layer-map-tasking')
             .data(_enabled && hasData ? [0] : []);
 
         layer.exit()
@@ -302,7 +263,7 @@ export function svgTasking(projection, context, dispatch) {
 
         layer = layer.enter()
             .append('g')
-            .attr('class', 'layer-maptasking')
+            .attr('class', 'layer-map-tasking')
             .merge(layer);
 
         if (_enabled) {
@@ -311,14 +272,6 @@ export function svgTasking(projection, context, dispatch) {
             editOff();
         }
     }
-
-
-    drawTasking.showLabels = function(val) {
-        if (!arguments.length) return _showLabels;
-
-        _showLabels = val;
-        return this;
-    };
 
 
     drawTasking.enabled = function(val) {

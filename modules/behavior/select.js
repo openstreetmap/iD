@@ -163,7 +163,7 @@ export function behaviorSelect(context) {
                 }
             }
 
-        } else if (datum && datum.__featurehash__ && !isMultiselect) {    // clicked Data..
+        } else if (datum && datum.__featurehash__ && !isMultiselect && !datum.constructor.name === 'task') {    // clicked Data..
             context
                 .selectedNoteID(null)
                 .enter(modeSelectData(context, datum));
