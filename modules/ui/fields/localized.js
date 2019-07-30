@@ -64,16 +64,30 @@ export function uiFieldLocalized(field, context) {
         field.locked(isLocked);
     }
 
-
+    // update _multilingual, maintaining the existing order
     function calcMultilingual(tags) {
-        _multilingual = [];
+        var existingLangsOrdered = _multilingual.map(function(item) {
+            return item.lang;
+        });
+        var existingLangs = new Set(existingLangsOrdered.filter(Boolean));
+
         for (var k in tags) {
             var m = k.match(/^(.*):([a-zA-Z_-]+)$/);
             if (m && m[1] === field.key && m[2]) {
-                _multilingual.push({ lang: m[2], value: tags[k] });
+                var item = { lang: m[2], value: tags[k] };
+                if (existingLangs.has(item.lang)) {
+                    // update the value
+                    _multilingual[existingLangsOrdered.indexOf(item.lang)].value = item.value;
+                    existingLangs.delete(item.lang);
+                } else {
+                    _multilingual.push(item);
+                }
             }
         }
-        _multilingual.reverse();
+
+        _multilingual = _multilingual.filter(function(item) {
+            return !item.lang || !existingLangs.has(item.lang);
+        });
     }
 
 
@@ -291,11 +305,16 @@ export function uiFieldLocalized(field, context) {
             var isLangEn = defaultLang.indexOf('en') > -1;
             if (isLangEn || langExists) {
                 defaultLang = '';
+                langExists = _multilingual.find(function(datum) { return datum.lang === defaultLang; });
             }
-            _multilingual.push({ lang: defaultLang, value: '' });
 
-            localizedInputs
-                .call(renderMultilingual);
+            if (!langExists) {
+                // prepend the value so it appears at the top
+                _multilingual.unshift({ lang: defaultLang, value: '' });
+
+                localizedInputs
+                    .call(renderMultilingual);
+            }
         }
 
 
@@ -348,8 +367,10 @@ export function uiFieldLocalized(field, context) {
 
     function changeValue(d) {
         if (!d.lang) return;
+        var value = utilGetSetValue(d3_select(this)) || undefined;
         var t = {};
-        t[key(d.lang)] = utilGetSetValue(d3_select(this)) || undefined;
+        t[key(d.lang)] = value;
+        d.value = value;
         dispatch.call('change', this, t);
     }
 
@@ -368,21 +389,20 @@ export function uiFieldLocalized(field, context) {
 
 
     function renderMultilingual(selection) {
-        var wraps = selection.selectAll('div.entry')
+        var entries = selection.selectAll('div.entry')
             .data(_multilingual, function(d) { return d.lang; });
 
-        wraps.exit()
+        entries.exit()
+            .style('top', '0')
+            .style('max-height', '240px')
             .transition()
             .duration(200)
-            .style('max-height', '0px')
             .style('opacity', '0')
-            .style('top', '-10px')
+            .style('max-height', '0px')
             .remove();
 
-        var innerWrap = wraps.enter()
-            .insert('div', ':first-child');
-
-        innerWrap
+        var entriesEnter = entries.enter()
+            .append('div')
             .attr('class', 'entry')
             .each(function() {
                 var wrap = d3_select(this);
@@ -407,19 +427,20 @@ export function uiFieldLocalized(field, context) {
                 label
                     .append('button')
                     .attr('class', 'remove-icon-multilingual')
-                    .on('click', function(d){
+                    .on('click', function(d, index) {
                         if (field.locked()) return;
                         d3_event.preventDefault();
-                        var t = {};
-                        t[key(d.lang)] = undefined;
-                        dispatch.call('change', this, t);
-                        d3_select(this.parentNode.parentNode.parentNode)
-                            .style('top', '0')
-                            .style('max-height', '240px')
-                            .transition()
-                            .style('opacity', '0')
-                            .style('max-height', '0px')
-                            .remove();
+
+                        if (!d.lang || !d.value) {
+                            _multilingual.splice(index, 1);
+                            renderMultilingual(selection);
+                        } else {
+                            // remove from entity tags
+                            var t = {};
+                            t[key(d.lang)] = undefined;
+                            dispatch.call('change', this, t);
+                        }
+
                     })
                     .call(svgIcon('#iD-operation-delete'));
 
@@ -441,7 +462,7 @@ export function uiFieldLocalized(field, context) {
                     .on('change', changeValue);
             });
 
-        innerWrap
+        entriesEnter
             .style('margin-top', '0px')
             .style('max-height', '0px')
             .style('opacity', '0')
@@ -456,15 +477,16 @@ export function uiFieldLocalized(field, context) {
                     .style('overflow', 'visible');
             });
 
+        entries = entries.merge(entriesEnter);
 
-        var entry = selection.selectAll('.entry');
+        entries.order();
 
-        utilGetSetValue(entry.select('.localized-lang'), function(d) {
+        utilGetSetValue(entries.select('.localized-lang'), function(d) {
             var lang = dataWikipedia.find(function(lang) { return lang[2] === d.lang; });
             return lang ? lang[1] : d.lang;
         });
 
-        utilGetSetValue(entry.select('.localized-value'),
+        utilGetSetValue(entries.select('.localized-value'),
             function(d) { return d.value; });
     }
 
