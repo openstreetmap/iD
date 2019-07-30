@@ -50,6 +50,21 @@ function parseProject(result, parsedUrl) {
     return json;
 }
 
+var historyActions = {
+    'STATE_CHANGE': 'stateChange',
+    'COMMENT': 'comment',
+    'LOCKED_FOR_VALIDATION': 'lockedValidation',
+    'LOCKED_FOR_MAPPING': 'locked',
+};
+
+var stateChange = {
+    'READY': 'ready',
+    'MAPPED': 'mapped',
+    'VALIDATED': 'validated',
+    'INVALIDATED': 'invalidated',
+    'BADIMAGERY': 'badimagery'
+}
+
 
 function parseTask(that, result, parsedUrl) {
 
@@ -57,6 +72,39 @@ function parseTask(that, result, parsedUrl) {
 
 
     function parseHOTTask(json) {
+
+        function parseHistory(geoJSON) {
+            var history = geoJSON.properties.taskHistory;
+            var status = geoJSON.properties.taskStatus;
+
+            geoJSON.history = history.map(function(element) {
+
+                // get state change
+                if (element.action === 'STATE_CHANGE') {
+                    element.stateChange = stateChange[status];
+                }
+
+                // get cleaner history action
+                element.action = historyActions[element.action];
+
+                // rename text
+                element.text = element.actionText;
+                delete element.actionText;
+
+                // rename date
+                element.date = element.actionDate;
+                delete element.actionDate;
+
+                // TODO: TAH - get uid for avatar
+
+                return element;
+            });
+
+            // delete old named history property
+            delete geoJSON.taskHistory;
+
+            return geoJSON;
+        }
 
         function getTaskGeoJSON(projectId, taskId) {
 
@@ -90,6 +138,10 @@ function parseTask(that, result, parsedUrl) {
                     }
                 }
             }
+
+            // parse history
+            taskGeoJSON = parseHistory(taskGeoJSON);
+
 
             return taskGeoJSON;
         }
@@ -152,7 +204,6 @@ var parsers = {
                 projectId: values.properties.projectId,
                 status: values.properties.taskStatus,
                 history: values.properties.taskHistory,
-                comments: 'TBD',
                 description: 'TBD',
                 instructions: values.properties.perTaskInstructions,
             },

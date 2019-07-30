@@ -1112,17 +1112,29 @@ en:
     task:
       name: Task
       id: "Task ID: {taskId}"
+      date: "{when}"
+      actions:
+        stateChange: '{status}'
+        comment: 'Comment'
+        locked: 'Locked for mapping'
+        lockedValidation: 'Locked for validation'
+      author:
+        anonymous: Anonymous
       status: "Status: {status}"
       statuses:
         ready: Ready
         mapped: Mapped
-        badImagery: Bad imagery
+        badimagery: Bad imagery
         validated: Validated
         invalidated: Invalidated
         locked: Locked
         lockedByYou: Locked by you
       no_task:
         message: No task selected
+      tabs:
+        complete: Complete
+        instructions: Instructions
+        history: History
     started_task:
       task_help: "You're editing task {taskId}{br}For details, click the {taskingButton} Tasking button or press the '{taskingKey}' key.{br}Need help? Click the {helpButton} Help button or pressing the '{helpKey}' key"
       stop_task: Stop task

@@ -463,7 +463,7 @@ export function uiTasking(context) {
         _task = taskingService.currentTask(); // get current task
 
         _taskingTaskContainer
-            .call(taskingTaskEditor.datum(
+            .call(taskingTaskEditor.task(
                 function(){ return showsLayer() ? _task : undefined; }()
             ));
     }

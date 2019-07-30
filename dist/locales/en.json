@@ -1391,11 +1391,21 @@
             "task": {
                 "name": "Task",
                 "id": "Task ID: {taskId}",
+                "date": "{when}",
+                "actions": {
+                    "stateChange": "{status}",
+                    "comment": "Comment",
+                    "locked": "Locked for mapping",
+                    "lockedValidation": "Locked for validation"
+                },
+                "author": {
+                    "anonymous": "Anonymous"
+                },
                 "status": "Status: {status}",
                 "statuses": {
                     "ready": "Ready",
                     "mapped": "Mapped",
-                    "badImagery": "Bad imagery",
+                    "badimagery": "Bad imagery",
                     "validated": "Validated",
                     "invalidated": "Invalidated",
                     "locked": "Locked",
@@ -1403,6 +1413,11 @@
                 },
                 "no_task": {
                     "message": "No task selected"
+                },
+                "tabs": {
+                    "complete": "Complete",
+                    "instructions": "Instructions",
+                    "history": "History"
                 }
             },
             "started_task": {

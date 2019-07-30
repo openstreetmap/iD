@@ -1,14 +1,106 @@
 import { event as d3_event } from 'd3-selection';
 import { uiQuickLinks } from './quick_links';
 
+import { uiTaskHistory } from './taskingTaskHistory';
+
 import { t } from '../util/locale';
 
 export function uiTaskingTaskDetails() {
 
     var quickLinks = uiQuickLinks();
+    var taskHistory = uiTaskHistory();
 
-    var _datum;
+    var _task;
     var _context;
+    var _activeTab;
+
+    var taskingTabs = [
+        {
+            'tab': 'complete'
+        },
+        {
+            'tab': 'instructions'
+        },
+        {
+            'tab': 'history'
+        },
+    ];
+
+
+    function taskTabs(selection) {
+
+        var wrapper = selection
+            .selectAll('.wrapper')
+            .data([0]);
+
+        var wrapperEnter = wrapper
+            .enter()
+            .append('div')
+            .attr('class', 'wrapper tasking-tabs');
+
+        var tabsBar = wrapperEnter
+            .append('div')
+            .attr('class', 'tabs-bar');
+
+        var sectionsList = wrapperEnter
+            .append('div')
+            .attr('class', 'sections-list');
+
+        wrapper = wrapper.merge(wrapperEnter);
+
+        var tabs = tabsBar
+            .selectAll('.tab')
+            .data(taskingTabs);
+
+        var tabsEnter = tabs
+            .enter()
+            .append('div')
+            .attr('class', 'tab')
+            .on('click', function (d, i) {
+                _activeTab = i;
+                taskTabs(selection);
+            });
+
+        tabsEnter
+            .append('span')
+            .text(function (d) { return t('tasking.task.tabs.' + d.tab); });
+
+        tabs = tabs
+            .merge(tabsEnter);
+
+
+        var sections = sectionsList
+            .selectAll('.section-tab')
+            .data(taskingTabs);
+
+        var sectionsEnter = sections
+            .enter()
+            .append('div')
+            .attr('class', function(d) { return 'section-tab section-tab-' + d.tab; });
+
+        sections = sections
+            .merge(sectionsEnter);
+
+        // add complete tab
+        // sectionsList.selectAll('.section-tab-complete').call(taskComplete.task(_task));
+
+        // add instructions tab
+        // sectionsList.selectAll('.section-tab-instructions').call(taskInstructions.task(_task));
+
+        // add history tab
+        sectionsList.selectAll('.section-tab-history').call(taskHistory.task(_task));
+
+        // Update
+        wrapper.selectAll('.tab')
+            .classed('active', function (d, i) {
+                return i === _activeTab;
+            });
+
+        wrapper.selectAll('.section-tab')
+            .style('display', function (d, i) {
+                return i === _activeTab ? 'flex' : 'none';
+            });
+    }
 
 
     function taskingTaskDetails(selection) {
@@ -26,7 +118,7 @@ export function uiTaskingTaskDetails() {
 
         var details = selection.selectAll('.task-details')
             .data(
-                (_datum && _datum.properties ? [_datum] : []),
+                (_task && _task.properties ? [_task] : []),
                 function(d) { return d.__featurehash__; }
             );
 
@@ -48,7 +140,8 @@ export function uiTaskingTaskDetails() {
             .merge(details);
 
         details
-            .call(quickLinks.choices(choices));
+            .call(quickLinks.choices(choices))
+            .call(taskTabs);
 
         details.select('.task-status')
             .text(function(d) {
@@ -59,13 +152,12 @@ export function uiTaskingTaskDetails() {
                     }()
                 });
             });
-
     }
 
 
-    taskingTaskDetails.datum = function(val, context) {
-        if (!arguments.length) return _datum;
-        _datum = val;
+    taskingTaskDetails.task = function(val, context) {
+        if (!arguments.length) return _task;
+        _task = val;
 
         if (context) { _context = context; }
         return this;

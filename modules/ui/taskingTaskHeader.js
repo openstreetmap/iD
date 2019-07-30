@@ -3,13 +3,13 @@ import { svgIcon } from '../svg/icon';
 
 
 export function uiTaskingTaskHeader() {
-    var _datum;
+    var _task;
 
 
     function taskingTaskHeader(selection) {
         var header = selection.selectAll('.task-header')
             .data(
-                (_datum && _datum.properties ? [_datum] : [0]),
+                (_task && _task.properties ? [_task] : [0]),
                 function(d) { return d.__featurehash__; }
             );
 
@@ -41,7 +41,7 @@ export function uiTaskingTaskHeader() {
 
         header.select('.task-header-label')
             .text(function(d) {
-                return _datum && _datum.properties ?
+                return _task && _task.properties ?
                     function() {
                         return t('tasking.task.id', { taskId: d.properties.taskId });
                     }() :
@@ -50,9 +50,9 @@ export function uiTaskingTaskHeader() {
     }
 
 
-    taskingTaskHeader.datum = function(val) {
-        if (!arguments.length) return _datum;
-        _datum = val;
+    taskingTaskHeader.task = function(val) {
+        if (!arguments.length) return _task;
+        _task = val;
         return this;
     };
 

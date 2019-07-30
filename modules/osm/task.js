@@ -4,7 +4,6 @@ import { geoExtent } from '../geo';
 var EXTENT_CONSTRAINT = 250; // meter buffer around task for curtain
 
 var MIN_ZOOM = 14;
-var MIN_ZOOM_PAD = 0.25;
 
 export function task() {
     if (!(this instanceof task)) {
@@ -62,10 +61,6 @@ Object.assign(task.prototype, {
 
     center: function() {
         return this.properties.center;
-    },
-
-    extentPad: function() {
-        return this.properties.extentPad;
     },
 
     extentPanConstraint: function() {

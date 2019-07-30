@@ -2807,6 +2807,7 @@ input.key-trap {
     padding: 1px 10px;
     border-radius: 8px;
     margin-top: 20px;
+    width: 100%;
 }
 
 .comment {
@@ -2846,6 +2847,9 @@ input.key-trap {
 .comment-author {
     font-weight: bold;
     color: #333;
+}
+.comment-action {
+    color: #aaa;
 }
 .comment-date {
     color: #aaa;
@@ -4867,23 +4871,37 @@ img.tile-debug {
 }
 
 
-/* Shortcuts Modal
+/* Shortcuts Modal / Tasking Tabs
 ------------------------------------------------------- */
+.tasking-tabs {
+    padding-top: 15px;
+}
+
 .modal-shortcuts {
     width: 90%;
     max-width: 950px;
 }
 
+.tasking-tabs .modal-section:last-child,
 .modal-shortcuts .modal-section:last-child {
     padding-top: 10px;
     min-height: 275px;
 }
 
+.tasking-tabs .tabs-bar,
 .modal-shortcuts .tabs-bar {
     text-align: center;
     padding-bottom: 5px;
     font-size: 16px;
     font-weight: bold;
+}
+
+.tasking-tabs .tab {
+    display: inline-block;
+    padding: 5px 10px;
+    margin: 0 5px;
+    cursor: pointer;
+    color: #666;
 }
 
 .modal-shortcuts .tab {
@@ -4893,25 +4911,32 @@ img.tile-debug {
     cursor: pointer;
     color: #666;
 }
+
+.tasking-tabs .tab.active,
 .modal-shortcuts .tab.active {
     color: #7092ff;
     border-bottom: 2px solid;
 }
+
+.tasking-tabs .tab:hover,
 .modal-shortcuts .tab:hover {
     color: #597be7;
     background-color: #efefef;
 }
 
+.tasking-tabs .section-tab,
 .modal-shortcuts .shortcut-tab {
     display: flex;
     flex-flow: row wrap;
     justify-content: center;
 }
 
+.tasking-tabs .shortcut-column,
 .modal-shortcuts .shortcut-column {
     width: auto;
 }
 
+.tasking-tabs .section-tab-tools .shortcut-column,
 .modal-shortcuts .shortcut-tab-tools .shortcut-column {
     flex: 1 1 100%;
     width: 100%;

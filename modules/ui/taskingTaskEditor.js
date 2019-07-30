@@ -8,7 +8,7 @@ export function uiTaskingTaskEditor(context) {
 
     var taskHeader = uiTaskingTaskHeader();
     var taskDetails = uiTaskingTaskDetails();
-    var _datum;
+    var _task;
 
 
     function taskEditor(selection) {
@@ -28,21 +28,21 @@ export function uiTaskingTaskEditor(context) {
         // enter/update
         var editorEnter = editor.enter()
             .append('div')
-            .attr('class', 'modal-section tasking-editor');
+            .attr('class', 'tasking-editor');
 
         // update
         editor = editorEnter
             .merge(editor)
-            .call(taskHeader.datum(_datum))
-            .call(taskDetails.datum(_datum, context));
+            .call(taskHeader.task(_task))
+            .call(taskDetails.task(_task, context));
 
 
     }
 
 
-    taskEditor.datum = function(val) {
-        if (!arguments.length) return _datum;
-        _datum = val;
+    taskEditor.task = function(val) {
+        if (!arguments.length) return _task;
+        _task = val;
         return this;
     };
 
