@@ -26,13 +26,41 @@ function parseProject(result, parsedUrl) {
     var json = JSON.parse(result);
 
     function parseHOTProject(result) {
+
+        function parseProjectTasks(tasks) {
+
+            var _tasks = {
+                type: 'FeatureCollection',
+                features: {}
+            };
+
+            var features = tasks.features;
+
+            features.forEach(function(feature) {
+                var _taskId = feature.properties.taskId;
+
+                _tasks.features[_taskId] = feature;
+            });
+
+            return _tasks;
+        }
+
         var hotProject = {
             geometry: {},
             properties: {
                 projectId: result.projectId,
                 name: result.projectInfo.name,
+                author: result.author,
+                shortDescription: result.projectInfo.shortDescription,
+                description: result.projectInfo.description,
+                instructions: result.projectInfo.instructions,
                 status: result.projectStatus,
-                tasks: result.tasks
+                priority: result.projectPriority,
+                defaultLocale: result.defaultLocale,
+                campaignTag: result.campaignTag,
+                organisationTag: result.organisationTag,
+                tasks: parseProjectTasks(result.tasks),
+                mappingTypes: result.mappingTypes
             },
         };
 
@@ -63,7 +91,7 @@ var stateChange = {
     'VALIDATED': 'validated',
     'INVALIDATED': 'invalidated',
     'BADIMAGERY': 'badimagery'
-}
+};
 
 
 function parseTask(that, result, parsedUrl) {
@@ -77,7 +105,7 @@ function parseTask(that, result, parsedUrl) {
             var history = geoJSON.properties.taskHistory;
             var status = geoJSON.properties.taskStatus;
 
-            geoJSON.history = history.map(function(element) {
+            geoJSON.properties.history = history.map(function(element) {
 
                 // get state change
                 if (element.action === 'STATE_CHANGE') {
@@ -101,32 +129,20 @@ function parseTask(that, result, parsedUrl) {
             });
 
             // delete old named history property
-            delete geoJSON.taskHistory;
+            delete geoJSON.properties.taskHistory;
 
             return geoJSON;
         }
 
-        function getTaskGeoJSON(projectId, taskId) {
-
-            var _project = that.getProject(projectId);
-            if (!_project) return;
-
-            if (_project && _project.properties.tasks && _project.properties.tasks.features && _project.properties.tasks.features.length) {
-                var features = _project.properties.tasks.features;
-
-                // get the task geometry
-                var taskGeoJSON = _filter(features, function(feature) { return feature.properties.taskId === taskId; })[0];
-
-
-                return ensureIDs(taskGeoJSON);
-
-            }
-        }
-
         var projectId = json.projectId;
+        var _project = that.getProject(projectId);
 
         if (that.currentManager().managerId === 'HOT' || (that.currentManager().managerId === 'custom' && that.customSettings().managerSource === '127.0.0.1:5000')) { // TAH - TODO: change to HOT once local manager is gone
-            var taskGeoJSON = getTaskGeoJSON(projectId, json.taskId);
+
+            if (_project) {
+                var taskGeoJSON = ensureIDs(_project.getTask(json.taskId));
+                //var taskGeoJSON = getTaskGeoJSON(_project, json.taskId);
+            }
 
             // add json to geojson properties
             for (var prop in json) {
@@ -141,6 +157,9 @@ function parseTask(that, result, parsedUrl) {
 
             // parse history
             taskGeoJSON = parseHistory(taskGeoJSON);
+
+            // parse instructions
+            taskGeoJSON.properties.instructions = _project.properties.instructions;
 
 
             return taskGeoJSON;
@@ -181,7 +200,16 @@ var parsers = {
                 projectId: values.properties.projectId,
                 name: values.properties.name,
                 status: values.properties.status,
-                tasks: values.properties.tasks
+                tasks: values.properties.tasks,
+                author: values.properties.author,
+                shortDescription: values.properties.shortDescription,
+                description: values.properties.description,
+                instructions: values.properties.instructions,
+                priority: values.properties.projectPriority,
+                defaultLocale: values.properties.defaultLocale,
+                campaignTag: values.properties.campaignTag,
+                organisationTag: values.properties.organisationTag,
+                mappingTypes: values.properties.mappingTypes
             },
         };
 
@@ -203,9 +231,9 @@ var parsers = {
                 taskId: values.properties.taskId,
                 projectId: values.properties.projectId,
                 status: values.properties.taskStatus,
-                history: values.properties.taskHistory,
-                description: 'TBD',
-                instructions: values.properties.perTaskInstructions,
+                history: values.properties.history,
+                instructions: values.properties.instructions,
+                perTaskInstructions: values.properties.perTaskInstructions,
             },
             __featurehash__: values.__featurehash__
         };

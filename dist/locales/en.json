@@ -1415,9 +1415,16 @@
                     "message": "No task selected"
                 },
                 "tabs": {
-                    "complete": "Complete",
-                    "instructions": "Instructions",
-                    "history": "History"
+                    "complete": {
+                        "title": "Complete"
+                    },
+                    "instructions": {
+                        "title": "Instructions",
+                        "perTaskInstructions": "Per Task Instructions"
+                    },
+                    "history": {
+                        "title": "History"
+                    }
                 }
             },
             "started_task": {

@@ -1132,9 +1132,13 @@ en:
       no_task:
         message: No task selected
       tabs:
-        complete: Complete
-        instructions: Instructions
-        history: History
+        complete:
+          title: Complete
+        instructions:
+          title: Instructions
+          perTaskInstructions: Per Task Instructions
+        history:
+          title: History
     started_task:
       task_help: "You're editing task {taskId}{br}For details, click the {taskingButton} Tasking button or press the '{taskingKey}' key.{br}Need help? Click the {helpButton} Help button or pressing the '{helpKey}' key"
       stop_task: Stop task

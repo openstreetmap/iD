@@ -2,6 +2,7 @@ import { event as d3_event } from 'd3-selection';
 import { uiQuickLinks } from './quick_links';
 
 import { uiTaskHistory } from './taskingTaskHistory';
+import { uiTaskInstructions } from './taskingTaskInstructions';
 
 import { t } from '../util/locale';
 
@@ -9,6 +10,7 @@ export function uiTaskingTaskDetails() {
 
     var quickLinks = uiQuickLinks();
     var taskHistory = uiTaskHistory();
+    var taskInstructions = uiTaskInstructions();
 
     var _task;
     var _context;
@@ -63,7 +65,7 @@ export function uiTaskingTaskDetails() {
 
         tabsEnter
             .append('span')
-            .text(function (d) { return t('tasking.task.tabs.' + d.tab); });
+            .text(function (d) { return t('tasking.task.tabs.' + d.tab + '.title'); });
 
         tabs = tabs
             .merge(tabsEnter);
@@ -85,7 +87,7 @@ export function uiTaskingTaskDetails() {
         // sectionsList.selectAll('.section-tab-complete').call(taskComplete.task(_task));
 
         // add instructions tab
-        // sectionsList.selectAll('.section-tab-instructions').call(taskInstructions.task(_task));
+        sectionsList.selectAll('.section-tab-instructions').call(taskInstructions.task(_task));
 
         // add history tab
         sectionsList.selectAll('.section-tab-history').call(taskHistory.task(_task));

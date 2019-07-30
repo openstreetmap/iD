@@ -73,6 +73,10 @@ Object.assign(project.prototype, {
 
     tasks: function() {
         return this.properties.tasks;
+    },
+
+    getTask: function(taskId) {
+        return this.properties.tasks.features[taskId];
     }
 
     // lock: function(user) {

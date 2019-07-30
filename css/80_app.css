@@ -4873,6 +4873,10 @@ img.tile-debug {
 
 /* Shortcuts Modal / Tasking Tabs
 ------------------------------------------------------- */
+.task-instructions {
+    padding-bottom: 15px;
+}
+
 .tasking-tabs {
     padding-top: 15px;
 }

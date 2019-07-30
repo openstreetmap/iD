@@ -91,12 +91,12 @@ Object.assign(task.prototype, {
         return this.properties.comments;
     },
 
-    description: function() {
-        return this.properties.description;
-    },
-
     instructions: function() {
         return this.properties.instructions;
+    },
+
+    perTaskInstructions: function() {
+        return this.properties.perTaskInstructions;
     },
 
     lock: function(user) {
