@@ -4,7 +4,8 @@
         "area"
     ],
     "tags": {
-        "man_made": "clearcut"
+        "man_made": "clearcut",
+        "natural": "scrub"
     },
     "terms": [
         "cut",
