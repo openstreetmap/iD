@@ -14,7 +14,7 @@ export function uiTaskingTaskDetails() {
 
     var _task;
     var _context;
-    var _activeTab;
+    var _activeTab = 0;
 
     var taskingTabs = [
         {
