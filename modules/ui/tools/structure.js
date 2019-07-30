@@ -28,6 +28,10 @@ export function uiToolStructure(context) {
         label: t('presets.fields.structure.options.bridge'),
         tags: {
             bridge: 'yes'
+        },
+        addTags: {
+            bridge: 'yes',
+            layer: '1'
         }
     };
     var structureTunnel = {
@@ -36,6 +40,10 @@ export function uiToolStructure(context) {
         label: t('presets.fields.structure.options.tunnel'),
         tags: {
             tunnel: 'yes'
+        },
+        addTags: {
+            tunnel: 'yes',
+            layer: '-1'
         }
     };
 
@@ -63,14 +71,14 @@ export function uiToolStructure(context) {
         var tags = Object.assign({}, activeTags());
 
         var priorStructure = tool.activeItem();
-        var tagsToRemove = priorStructure.tags;
+        var tagsToRemove = priorStructure.addTags || priorStructure.tags;
         for (var key in tagsToRemove) {
             if (tags[key]) {
                 delete tags[key];
             }
         }
         // add tags for structure
-        Object.assign(tags, d.tags);
+        Object.assign(tags, d.addTags || d.tags);
 
         var mode = context.mode();
         if (mode.id === 'add-line') {
