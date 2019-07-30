@@ -69,6 +69,12 @@ export function modeSelect(context, selectedIDs) {
         }
     }
 
+    function selectedEntities() {
+        return selectedIDs.map(function(id) {
+            return context.hasEntity(id);
+        }).filter(Boolean);
+    }
+
 
     function checkSelectedIDs() {
         var ids = [];
@@ -192,10 +198,7 @@ export function modeSelect(context, selectedIDs) {
 
 
     mode.zoomToSelected = function() {
-        var entity = singular();
-        if (entity) {
-            context.map().zoomToEase(entity);
-        }
+        context.map().zoomToEase(selectedEntities());
     };
 
 

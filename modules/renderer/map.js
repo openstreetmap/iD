@@ -854,8 +854,20 @@ export function rendererMap(context) {
     };
 
 
-    map.zoomToEase = function(entity, duration) {
-        var extent = entity.extent(context.graph());
+    map.zoomToEase = function(obj, duration) {
+        var extent;
+        if (Array.isArray(obj)) {
+            obj.forEach(function(entity) {
+                var entityExtent = entity.extent(context.graph());
+                if (!extent) {
+                    extent = entityExtent;
+                } else {
+                    extent = extent.extend(entityExtent);
+                }
+            });
+        } else {
+            extent = obj.extent(context.graph());
+        }
         if (!isFinite(extent.area())) return map;
 
         var z2 = clamp(map.trimmedExtentZoom(extent), 0, 20);
