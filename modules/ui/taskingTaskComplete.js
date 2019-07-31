@@ -24,6 +24,8 @@ export function uiTaskComplete() {
     var osm = services.osm;
     var tasking = services.tasking;
 
+    var completeDetails = ['editStatusOptions', 'leaveAComment', 'saveEdits'];
+
 
     function taskComplete(selection) {
         if (!_task) return;
@@ -43,11 +45,33 @@ export function uiTaskComplete() {
     function taskSaveSection(selection) {
 
         var taskSave = selection.selectAll('.task-save')
-            .data([0]);
+            .data([_task]);
 
         // exit
         taskSave.exit()
             .remove();
+
+        taskSave.enter()
+            .append('h3')
+            .attr('class', 'task-complete-header')
+            .text(function(d) {
+                var status = d.status();
+                var statusText = status === 'lockedForMapping' ? 'mapping' : status === 'lockedForValidation' ? 'validating' : '';
+
+                return t('tasking.complete-header', { status: t('tasking.' + statusText) });
+                });
+
+
+        taskSave.enter()
+            .append('ul')
+            .attr('class', 'task-complete-details')
+            .selectAll('li')
+            .data(completeDetails)
+            .enter()
+            .append('li')
+            .attr('class', 'task-complete-details-item')
+            .text(function(d) { return t('tasking.' + d); });
+
 
         // enter
         var taskSaveEnter = taskSave.enter()

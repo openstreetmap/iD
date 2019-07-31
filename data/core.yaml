@@ -1146,6 +1146,12 @@ en:
       stop_task: Stop task
     comment: Write a comment (optional)
     inputPlaceholder: Enter a comment to share with other users.
+    complete-header: Once you have finished {status}
+    mapping: mapping
+    validating: validating
+    editStatusOptions: Select an edit status
+    leaveAComment: Leave a comment (optional)
+    saveEdits: Submit your work
     saving:
       stop_mapping: Stop mapping
       stop_mapping_comment: Stop mapping and comment

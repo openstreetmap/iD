@@ -4879,6 +4879,17 @@ img.tile-debug {
 
 /* Shortcuts Modal / Tasking Tabs
 ------------------------------------------------------- */
+.task-complete-header {
+    margin-top: 10px
+}
+.task-complete-details {
+    padding-top: 10px;
+    margin-left: 15px;
+    list-style-type: 'circle'
+}
+.task-complete-details-item {
+
+}
 .task-instructions {
     padding-bottom: 15px;
 }
