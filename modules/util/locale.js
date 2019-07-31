@@ -1,7 +1,10 @@
+import { dataLanguages } from '../../../data';
+
 var translations = Object.create(null);
 
 export var currentLocale = 'en';
 export var textDirection = 'ltr';
+export var languageNames = {};
 
 export function setLocale(val) {
     if (translations[val] !== undefined) {
@@ -72,4 +75,30 @@ export function t(s, o, loc) {
 
 export function setTextDirection(dir) {
     textDirection = dir;
+}
+
+export function setLanguageNames(obj) {
+    languageNames = obj;
+}
+
+export function languageName(code, options = {}) {
+    if (languageNames[code]) { // name in locale langauge
+        return languageNames[code];
+    }
+    // sometimes we only want the local name
+    if (options.localOnly) return null;
+
+    if (dataLanguages[code]) { // language info
+        if (dataLanguages[code].nativeName) { // name in native language
+            return t('translate.language_and_code', { language: dataLanguages[code].nativeName, code: code });
+        } else if (dataLanguages[code].base && dataLanguages[code].script) {
+            var base = dataLanguages[code].base;
+            if (languageNames[base]) { // base name in locale langauge
+                return t('translate.language_and_code', { language: languageNames[base], code: code });
+            } else if (dataLanguages[code] && dataLanguages[code].nativeName) {
+                return t('translate.language_and_code', { language: dataLanguages[base].nativeName, code: code });
+            }
+        }
+    }
+    return code; // if not found, use the code
 }

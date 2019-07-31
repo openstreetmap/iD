@@ -1,4 +1,4 @@
-import { currentLocale, setTextDirection } from './locale';
+import { currentLocale, setTextDirection, setLanguageNames } from './locale';
 import { dataLocales } from '../../data/index';
 import { utilStringQs } from './util';
 
@@ -97,13 +97,14 @@ export function utilDetect(force) {
     }
 
     // detect text direction
-    var lang = dataLocales[detected.locale];
+    var lang = dataLocales[detected.locale] || dataLocales[detected.language];
     if ((lang && lang.rtl) || (q.rtl === 'true')) {
         detected.textDirection = 'rtl';
     } else {
         detected.textDirection = 'ltr';
     }
     setTextDirection(detected.textDirection);
+    setLanguageNames((lang && lang.languageNames) || {});
 
     // detect host
     var loc = window.top.location;
