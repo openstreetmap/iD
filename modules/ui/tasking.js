@@ -181,6 +181,10 @@ export function uiTasking(context) {
             .classed('error', (errors.length > 0))
             .classed('hide', (errors.length === 0));
 
+        _pane.selectAll('.tasking-manager-toggle').classed('hide', (errors.length));
+        _pane.selectAll('.tasking-project-toggle').classed('hide', (errors.length));
+        _pane.selectAll('.tasking-task-toggle').classed('hide', (errors.length));
+
         if (!_pane.select('.disclosure-wrap-tasking_managers').classed('hide')) {
             updateTaskingManagers();
         }
@@ -188,24 +192,6 @@ export function uiTasking(context) {
         if (!_pane.select('.disclosure-wrap-tasking_task').classed('hide')) {
             updateTaskingTask();
         }
-
-        // if (context.history().hasChanges()) {
-        //     _taskingErrorsContainer
-        //         .call(drawErrorsList, _errors);
-
-        //     // remove tasking
-        //     _taskingManagerContainer.remove();
-        //     _taskingTaskContainer.remove();
-
-        // } else {
-        //     if (!_pane.select('.disclosure-wrap-tasking_managers').classed('hide')) {
-        //         updateTaskingManagers();
-        //     }
-
-        //     if (!_pane.select('.disclosure-wrap-tasking_task').classed('hide')) {
-        //         updateTaskingTask();
-        //     }
-        // }
     }
 
 
@@ -547,7 +533,7 @@ export function uiTasking(context) {
         // tasking
         _taskingContainer
             .append('div')
-            .attr('class', 'tasking-manager-container')
+            .attr('class', 'tasking-manager-toggle')
             .call(uiDisclosure(context, 'tasking_managers', false)
                 .title(t('tasking.manager.name'))
                 .content(renderTaskingManagers)
@@ -557,7 +543,7 @@ export function uiTasking(context) {
         // task
         _taskingContainer
             .append('div')
-            .attr('class', 'tasking-task-container')
+            .attr('class', 'tasking-task-toggle')
             .call(uiDisclosure(context, 'tasking_task', true)
                 .title(t('tasking.task.name'))
                 .content(renderTaskingTask)
