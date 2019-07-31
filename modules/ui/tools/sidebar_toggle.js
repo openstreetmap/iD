@@ -15,7 +15,6 @@ export function uiToolSidebarToggle(context) {
         selection
             .append('button')
             .attr('class', 'bar-button')
-            .attr('tabindex', -1)
             .on('click', function() {
                 context.ui().sidebar.toggle();
             })

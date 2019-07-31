@@ -55,7 +55,6 @@ export function uiZoom(context) {
             .data(zooms)
             .enter()
             .append('button')
-            .attr('tabindex', -1)
             .attr('class', function(d) { return d.id; })
             .on('click.editor', function(d) { d.action(); })
             .call(tooltip()

@@ -273,7 +273,6 @@ export function uiCommit(context) {
                 .attr('class', 'user-info')
                 .text(user.display_name)
                 .attr('href', osm.userURL(user.display_name))
-                .attr('tabindex', -1)
                 .attr('target', '_blank');
 
             prose

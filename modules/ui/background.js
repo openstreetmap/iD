@@ -236,7 +236,6 @@ export function uiBackground(context) {
             .attr('class', 'imagery-faq')
             .append('a')
             .attr('target', '_blank')
-            .attr('tabindex', -1)
             .call(svgIcon('#iD-icon-out-link', 'inline'))
             .attr('href', 'https://github.com/openstreetmap/iD/blob/master/FAQ.md#how-can-i-report-an-issue-with-background-imagery')
             .append('span')
@@ -316,7 +315,6 @@ export function uiBackground(context) {
 
         _toggleButton = selection
             .append('button')
-            .attr('tabindex', -1)
             .on('click', uiBackground.togglePane)
             .call(svgIcon('#iD-icon-layers', 'light'))
             .call(paneTooltip);

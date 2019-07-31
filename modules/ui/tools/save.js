@@ -84,7 +84,6 @@ export function uiToolSave(context) {
         button = selection
             .append('button')
             .attr('class', 'save disabled bar-button')
-            .attr('tabindex', -1)
             .on('click', save)
             .call(tooltipBehavior);
 
@@ -94,6 +93,7 @@ export function uiToolSave(context) {
         button
             .append('span')
             .attr('class', 'count')
+            .attr('aria-hidden', 'true')
             .text('0');
 
         updateCount();
