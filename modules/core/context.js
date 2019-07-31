@@ -569,15 +569,12 @@ export function coreContext() {
             osmSetVertexTags(presets.vertexTags());
         });
     } else {
-        var isVisible;
+        var addablePresetIDs;
         if (presetsParameter) {
             // assume list of allowed preset IDs
-            var visiblePresetIDs = new Set(presetsParameter.split(','));
-            isVisible = function(presetID) {
-                return visiblePresetIDs.has(presetID);
-            };
+            addablePresetIDs = presetsParameter.split(',');
         }
-        presets.init(isVisible);
+        presets.init(addablePresetIDs);
         osmSetAreaKeys(presets.areaKeys());
         osmSetPointTags(presets.pointTags());
         osmSetVertexTags(presets.vertexTags());

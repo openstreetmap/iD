@@ -26,6 +26,8 @@ export function presetIndex(context) {
     var _fields = {};
     var _universal = [];
     var _favorites, _recents;
+    // presets that the user can add
+    var _addablePresetIDs;
 
     // Index of presets by (geometry, tag key).
     var _index = {
@@ -220,8 +222,14 @@ export function presetIndex(context) {
             });
         }
 
-        if (d.defaults) {
-            var getItem = (all.item).bind(all);
+        var getItem = (all.item).bind(all);
+        if (_addablePresetIDs) {
+            ['area', 'line', 'point', 'vertex', 'relation'].forEach(function(geometry) {
+                _defaults[geometry] = presetCollection(_addablePresetIDs.map(getItem).filter(function(preset) {
+                    return preset.geometry.indexOf(geometry) !== -1;
+                }));
+            });
+        } else if (d.defaults) {
             _defaults = {
                 area: presetCollection(d.defaults.area.map(getItem)),
                 line: presetCollection(d.defaults.line.map(getItem)),
@@ -245,15 +253,23 @@ export function presetIndex(context) {
         return all;
     };
 
-    all.init = function(shouldShow) {
+    all.init = function(addablePresetIDs) {
         all.collection = [];
         _favorites = null;
         _recents = null;
+        _addablePresetIDs = addablePresetIDs;
         _fields = {};
         _universal = [];
         _index = { point: {}, vertex: {}, line: {}, area: {}, relation: {} };
 
-        return all.build(data.presets, shouldShow || true);
+        var show = true;
+        if (addablePresetIDs) {
+            show = function(presetID) {
+                return addablePresetIDs.indexOf(presetID) !== -1;
+            };
+        }
+
+        return all.build(data.presets, show);
     };
 
 
