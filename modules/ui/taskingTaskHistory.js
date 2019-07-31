@@ -13,12 +13,12 @@ export function uiTaskHistory() {
     function taskHistory(selection) {
         if (!_task) return;
 
-        var history = selection.selectAll('.tasking-history-container')
+        var history = selection.selectAll('.task-history-container')
             .data([0]);
 
         history = history.enter()
             .append('div')
-            .attr('class', 'tasking-history-container')
+            .attr('class', 'task-history-container')
             .merge(history);
 
         var historyEnter = history.selectAll('.comment')

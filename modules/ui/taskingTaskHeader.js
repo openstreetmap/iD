@@ -43,7 +43,7 @@ export function uiTaskingTaskHeader() {
             .text(function(d) {
                 return _task && _task.properties ?
                     function() {
-                        return t('tasking.task.id', { taskId: d.properties.taskId });
+                        return t('tasking.task.id', { taskId: d.id() });
                     }() :
                     t('tasking.task.no_task.message');
             });

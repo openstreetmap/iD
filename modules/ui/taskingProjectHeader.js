@@ -9,8 +9,7 @@ export function uiTaskingProjectHeader() {
     function taskingProjectHeader(selection) {
         var header = selection.selectAll('.project-header')
             .data(
-                (_project && _project.properties ? [_project] : [0]),
-                function(d) { return d.__featurehash__; }
+                (_project && _project.properties ? [_project] : [0])
             );
 
         // exit
@@ -41,9 +40,9 @@ export function uiTaskingProjectHeader() {
 
         header.select('.project-header-label')
             .text(function(d) {
-                return _project && _project.properties ?
+                return d && d.properties ?
                     function() {
-                        return t('tasking.project.id', { projectId: d.properties.projectId });
+                        return t('tasking.project.id', { projectId: d.id() });
                     }() :
                     t('tasking.project.no_project.message');
             });

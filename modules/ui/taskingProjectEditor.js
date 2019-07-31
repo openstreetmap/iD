@@ -1,13 +1,13 @@
 
 
 import { uiTaskingProjectHeader } from './taskingProjectHeader';
-// import { uiTaskingProjectDetails } from './taskingProjectDetails';
+import { uiTaskingProjectDetails } from './taskingProjectDetails';
 
 
 export function uiTaskingProjectEditor(context) {
 
     var projectHeader = uiTaskingProjectHeader();
-    // var projectDetails = uiTaskingProjectDetails();
+    var projectDetails = uiTaskingProjectDetails();
     var _project;
 
 
@@ -33,8 +33,8 @@ export function uiTaskingProjectEditor(context) {
         // update
         editor = editorEnter
             .merge(editor)
-            .call(projectHeader.project(_project));
-            // .call(projectDetails.project(_project, context));
+            .call(projectHeader.project(_project))
+            .call(projectDetails.project(_project, context));
 
 
     }

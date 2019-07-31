@@ -562,16 +562,6 @@ export function uiTasking(context) {
                  .call(renderTaskingErrors);
 
 
-        // managers
-        _taskingContainer
-            .append('div')
-            .attr('class', 'tasking-manager-toggle')
-            .call(uiDisclosure(context, 'tasking_managers', false)
-                .title(t('tasking.manager.name'))
-                .content(renderTaskingManagers)
-            );
-
-
         // task
         _taskingContainer
             .append('div')
@@ -590,6 +580,16 @@ export function uiTasking(context) {
                 .title(t('tasking.project.name'))
                 .content(renderTaskingProject)
             );
+
+
+        // managers
+        _taskingContainer
+        .append('div')
+        .attr('class', 'tasking-manager-toggle')
+        .call(uiDisclosure(context, 'tasking_managers', false)
+            .title(t('tasking.manager.name'))
+            .content(renderTaskingManagers)
+        );
 
 
         context.keybinding()

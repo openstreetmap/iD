@@ -1,27 +1,20 @@
-import { event as d3_event } from 'd3-selection';
-import { uiQuickLinks } from './quick_links';
-
-import { uiTaskComplete } from './taskingTaskComplete';
-import { uiTaskHistory } from './taskingTaskHistory';
-import { uiTaskInstructions } from './taskingTaskInstructions';
+import { uiProjectDescription } from './taskingProjectDescription';
+import { uiProjectInformation } from './taskingProjectInformation';
 
 import { t } from '../util/locale';
 
-export function uiTaskingTaskDetails() {
+export function uiTaskingProjectDetails() {
+    var projectInformation = uiProjectInformation();
+    var projectDescription = uiProjectDescription();
 
-    var quickLinks = uiQuickLinks();
-    var taskHistory = uiTaskHistory();
-    var taskInstructions = uiTaskInstructions();
-    var taskComplete = uiTaskComplete();
-
-    var _task;
+    var _project;
     var _context;
     var _activeTab = 0;
 
-    var taskingTabs = [{ 'tab': 'complete'}, { 'tab': 'instructions'}, { 'tab': 'history'}];
+    var taskingTabs = [{ 'tab': 'information'}, { 'tab': 'description'}];
 
 
-    function taskTabs(selection) {
+    function projectTabs(selection) {
 
         var wrapper = selection
             .selectAll('.wrapper')
@@ -52,12 +45,12 @@ export function uiTaskingTaskDetails() {
             .attr('class', 'tab')
             .on('click', function (d, i) {
                 _activeTab = i;
-                taskTabs(selection);
+                projectTabs(selection);
             });
 
         tabsEnter
             .append('span')
-            .text(function (d) { return t('tasking.task.tabs.' + d.tab + '.title'); });
+            .text(function (d) { return t('tasking.project.tabs.' + d.tab + '.title'); });
 
         tabs = tabs
             .merge(tabsEnter);
@@ -75,14 +68,12 @@ export function uiTaskingTaskDetails() {
         sections = sections
             .merge(sectionsEnter);
 
-        // add complete tab
-        sectionsList.selectAll('.section-tab-complete').call(taskComplete.task(_task, _context));
 
-        // add instructions tab
-        sectionsList.selectAll('.section-tab-instructions').call(taskInstructions.task(_task));
+        // add information tab
+        sectionsList.selectAll('.section-tab-information').call(projectInformation.project(_project));
 
-        // add history tab
-        sectionsList.selectAll('.section-tab-history').call(taskHistory.task(_task));
+        // add description tab
+        sectionsList.selectAll('.section-tab-description').call(projectDescription.project(_project, _context));
 
         // Update
         wrapper.selectAll('.tab')
@@ -97,22 +88,10 @@ export function uiTaskingTaskDetails() {
     }
 
 
-    function taskingTaskDetails(selection) {
-         // quick links
-         var choices = [{
-            id: 'zoom_to',
-            label: 'inspector.zoom_to.title',
-            click: function zoomTo() {
-              d3_event.preventDefault();
-              d3_event.stopPropagation();
-              _context.layers().layer('tasking').fitZoom();
-            }
-        }];
-
-
-        var details = selection.selectAll('.task-details')
+    function taskingProjectDetails(selection) {
+        var details = selection.selectAll('.project-details')
             .data(
-                (_task && _task.properties ? [_task] : []),
+                (_project && _project.properties ? [_project] : []),
                 function(d) { return d.__featurehash__; }
             );
 
@@ -123,25 +102,24 @@ export function uiTaskingTaskDetails() {
         // enter
         var detailsEnter = details.enter()
             .append('div')
-            .attr('class', 'task-details');
+            .attr('class', 'project-details');
 
         detailsEnter
             .append('div')
-            .attr('class', 'task-status');
+            .attr('class', 'project-status');
 
 
         details = detailsEnter
             .merge(details);
 
         details
-            .call(quickLinks.choices(choices))
-            .call(taskTabs);
+            .call(projectTabs);
 
-        details.select('.task-status')
+        details.select('.project-status')
             .text(function(d) {
-                return t('tasking.task.status', { status:
+                return t('tasking.project.status', { status:
                     function() {
-                        var status = 'tasking.task.statuses.' + d.status();
+                        var status = 'tasking.project.statuses.' + d.status();
                         return t(status);
                     }()
                 });
@@ -149,14 +127,14 @@ export function uiTaskingTaskDetails() {
     }
 
 
-    taskingTaskDetails.task = function(val, context) {
-        if (!arguments.length) return _task;
-        _task = val;
+    taskingProjectDetails.project = function(val, context) {
+        if (!arguments.length) return _project;
+        _project = val;
 
         if (context) { _context = context; }
         return this;
     };
 
 
-    return taskingTaskDetails;
+    return taskingProjectDetails;
 }

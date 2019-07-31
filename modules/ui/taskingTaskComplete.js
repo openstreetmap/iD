@@ -31,12 +31,12 @@ export function uiTaskComplete() {
         if (!_task) return;
 
         // add complete button
-        var complete = selection.selectAll('.tasking-complete-container')
+        var complete = selection.selectAll('.task-complete-container')
             .data([0]);
 
         complete = complete.enter()
             .append('div')
-            .attr('class', 'tasking-complete-container')
+            .attr('class', 'task-complete-container')
             .merge(complete)
             .call(taskSaveSection);
 

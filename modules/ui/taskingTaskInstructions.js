@@ -8,12 +8,12 @@ export function uiTaskInstructions() {
     function taskInstructions(selection) {
         if (!_task) return;
 
-        var instructions = selection.selectAll('.tasking-instructions-container')
+        var instructions = selection.selectAll('.task-instructions-container')
             .data([0]);
 
         instructions = instructions.enter()
             .append('div')
-            .attr('class', 'tasking-instructions-container')
+            .attr('class', 'task-instructions-container')
             .merge(instructions);
 
         instructions

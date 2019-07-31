@@ -2802,9 +2802,11 @@ input.key-trap {
     margin: 20px 0px;
 }
 
-.tasking-complete-container,
-.tasking-instructions-container,
-.tasking-history-container,
+.project-information-container,
+.project-description-container,
+.task-complete-container,
+.task-instructions-container,
+.task-history-container,
 .comments-container {
     background: #ececec;
     padding: 1px 10px;

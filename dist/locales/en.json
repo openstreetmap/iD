@@ -1393,6 +1393,25 @@
                 "id": "Project ID: {projectId}",
                 "no_project": {
                     "message": "No project selected"
+                },
+                "status": "Status: {status}",
+                "statuses": {
+                    "published": "Published",
+                    "unpublished": "Upublished"
+                },
+                "priorities": {
+                    "high": "High",
+                    "medium": "Medium",
+                    "low": "Low"
+                },
+                "tabs": {
+                    "information": {
+                        "title": "Information",
+                        "priority": "Priority"
+                    },
+                    "description": {
+                        "title": "Description"
+                    }
                 }
             },
             "task": {
