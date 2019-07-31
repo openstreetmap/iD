@@ -1679,6 +1679,8 @@
     {"key": "social_facility:for", "description": "🄵 People Served"},
     {"key": "social_facility", "description": "🄵 Type"},
     {"key": "source", "description": "🄵 Sources"},
+    {"key": "species:wikidata", "description": "🄵 Species Wikidata"},
+    {"key": "species:wikipedia", "description": "🄵 Species Wikidata"},
     {"key": "sport", "description": "🄵 Sports"},
     {"key": "stars", "description": "🄵 Stars"},
     {"key": "start_date", "description": "🄵 Start Date"},

@@ -4020,6 +4020,9 @@
                 "source": {
                     "label": "Sources"
                 },
+                "species/wikidata": {
+                    "label": "Species Wikidata"
+                },
                 "sport_ice": {
                     "label": "Sports"
                 },
