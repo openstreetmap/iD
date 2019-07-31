@@ -504,7 +504,8 @@
             "translate": "Translate",
             "localized_translation_label": "Multilingual Name",
             "localized_translation_language": "Choose language",
-            "localized_translation_name": "Name"
+            "localized_translation_name": "Name",
+            "language_and_code": "{language} ({code})"
         },
         "zoom_in_edit": "Zoom in to edit",
         "login": "Log In",
