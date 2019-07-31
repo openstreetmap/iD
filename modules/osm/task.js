@@ -116,4 +116,8 @@ Object.assign(task.prototype, {
         this.status = status; // TODO: TAH - set status based on what user was doing & if they completed it
     },
 
+    update: function(attrs) {
+        return task(this, attrs); // {v: 1 + (this.v || 0)}
+    },
+
 });

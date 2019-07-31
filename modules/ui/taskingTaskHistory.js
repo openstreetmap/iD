@@ -13,26 +13,26 @@ export function uiTaskHistory() {
     function taskHistory(selection) {
         if (!_task) return;
 
-        var comments = selection.selectAll('.comments-container')
+        var history = selection.selectAll('.tasking-history-container')
             .data([0]);
 
-        comments = comments.enter()
+        history = history.enter()
             .append('div')
-            .attr('class', 'comments-container')
-            .merge(comments);
+            .attr('class', 'tasking-history-container')
+            .merge(history);
 
-        var commentEnter = comments.selectAll('.comment')
+        var historyEnter = history.selectAll('.comment')
             .data(_task.history())
             .enter()
             .append('div')
             .attr('class', 'comment');
 
-        commentEnter
+        historyEnter
             .append('div')
             .attr('class', function(d) { return 'comment-avatar user-' + d.historyId; })
             .call(svgIcon('#iD-icon-avatar', 'comment-avatar-icon'));
 
-        var mainEnter = commentEnter
+        var mainEnter = historyEnter
             .append('div')
             .attr('class', 'comment-main');
 
@@ -83,6 +83,7 @@ export function uiTaskHistory() {
             .attr('class', 'comment-text')
             .html(function(d) { if (d.action === 'comment') { return d.text; } });
 
+        // TODO: TAH - get uid from tasking manager to display avatars
         // comments
         //     .call(replaceAvatars);
     }
@@ -91,8 +92,6 @@ export function uiTaskHistory() {
     function replaceAvatars(selection) {
         var osm = services.osm;
         if (!osm) return;
-
-        // TODO: parse history objects first!
 
         var uids = {};  // gather uids in the comment thread
         _task.history.forEach(function(d) {

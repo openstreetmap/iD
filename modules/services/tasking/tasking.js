@@ -81,16 +81,18 @@ function parseProject(result, parsedUrl) {
 var historyActions = {
     'STATE_CHANGE': 'stateChange',
     'COMMENT': 'comment',
-    'LOCKED_FOR_VALIDATION': 'lockedValidation',
     'LOCKED_FOR_MAPPING': 'locked',
+    'LOCKED_FOR_VALIDATION': 'lockedValidation',
 };
 
-var stateChange = {
+var status = {
     'READY': 'ready',
     'MAPPED': 'mapped',
     'VALIDATED': 'validated',
     'INVALIDATED': 'invalidated',
-    'BADIMAGERY': 'badimagery'
+    'BADIMAGERY': 'badimagery',
+    'LOCKED_FOR_MAPPING': 'lockedForMapping',
+    'LOCKED_FOR_VALIDATION': 'lockedForValidation'
 };
 
 
@@ -102,14 +104,16 @@ function parseTask(that, result, parsedUrl) {
     function parseHOTTask(json) {
 
         function parseHistory(geoJSON) {
+
             var history = geoJSON.properties.taskHistory;
-            var status = geoJSON.properties.taskStatus;
 
             geoJSON.properties.history = history.map(function(element) {
 
+                var _status = taskGeoJSON.properties.status;
+
                 // get state change
                 if (element.action === 'STATE_CHANGE') {
-                    element.stateChange = stateChange[status];
+                    element.stateChange = status[_status];
                 }
 
                 // get cleaner history action
@@ -154,6 +158,10 @@ function parseTask(that, result, parsedUrl) {
                     }
                 }
             }
+
+            // clean up status
+            taskGeoJSON.properties.status = status[taskGeoJSON.properties.taskStatus];
+            delete taskGeoJSON.properties.taskStatus;
 
             // parse history
             taskGeoJSON = parseHistory(taskGeoJSON);
@@ -230,7 +238,7 @@ var parsers = {
             properties: {
                 taskId: values.properties.taskId,
                 projectId: values.properties.projectId,
-                status: values.properties.taskStatus,
+                status: values.properties.status,
                 history: values.properties.history,
                 instructions: values.properties.instructions,
                 perTaskInstructions: values.properties.perTaskInstructions,
@@ -751,6 +759,16 @@ export default {
 
     errors: function() {
         return _taskingCache.errors;
-    }
+    },
+
+
+    postTaskUpdate: function() {
+        console.log('TODO: postTaskUpdate');
+    },
+
+
+    cancelTasking: function() {
+        console.log('TODO: cancelTasking');
+    },
 
 };

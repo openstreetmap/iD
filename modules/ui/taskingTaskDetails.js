@@ -1,6 +1,7 @@
 import { event as d3_event } from 'd3-selection';
 import { uiQuickLinks } from './quick_links';
 
+import { uiTaskComplete } from './taskingTaskComplete';
 import { uiTaskHistory } from './taskingTaskHistory';
 import { uiTaskInstructions } from './taskingTaskInstructions';
 
@@ -11,6 +12,7 @@ export function uiTaskingTaskDetails() {
     var quickLinks = uiQuickLinks();
     var taskHistory = uiTaskHistory();
     var taskInstructions = uiTaskInstructions();
+    var taskComplete = uiTaskComplete();
 
     var _task;
     var _context;
@@ -84,7 +86,7 @@ export function uiTaskingTaskDetails() {
             .merge(sectionsEnter);
 
         // add complete tab
-        // sectionsList.selectAll('.section-tab-complete').call(taskComplete.task(_task));
+        sectionsList.selectAll('.section-tab-complete').call(taskComplete.task(_task, _context));
 
         // add instructions tab
         sectionsList.selectAll('.section-tab-instructions').call(taskInstructions.task(_task));
@@ -149,7 +151,7 @@ export function uiTaskingTaskDetails() {
             .text(function(d) {
                 return t('tasking.task.status', { status:
                     function() {
-                        var status = 'tasking.task.statuses.' + d.properties.status.toLowerCase();
+                        var status = 'tasking.task.statuses.' + d.status();
                         return t(status);
                     }()
                 });
