@@ -81,8 +81,10 @@ function parseProject(result, parsedUrl) {
 var historyActions = {
     'STATE_CHANGE': 'stateChange',
     'COMMENT': 'comment',
-    'LOCKED_FOR_MAPPING': 'locked',
-    'LOCKED_FOR_VALIDATION': 'lockedValidation',
+    'LOCKED_FOR_MAPPING': 'lockedForMapping',
+    'AUTO_UNLOCKED_FOR_MAPPING': 'autoUnlockedForMapping',
+    'LOCKED_FOR_VALIDATION': 'lockedForValidation',
+    'AUTO_UNLOCKED_FOR_VALIDATION': 'autoUnlockedForValidation'
 };
 
 var status = {

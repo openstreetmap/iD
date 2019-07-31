@@ -1421,8 +1421,10 @@
                 "actions": {
                     "stateChange": "{status}",
                     "comment": "Comment",
-                    "locked": "Locked for mapping",
-                    "lockedValidation": "Locked for validation"
+                    "lockedForMapping": "Locked for mapping",
+                    "autoUnlockedForMapping": "Auto unlocked for mapping",
+                    "lockedForValidation": "Locked for validation",
+                    "autoUnlockedForValidation": "Auto unlocked for validation"
                 },
                 "author": {
                     "anonymous": "Anonymous"
