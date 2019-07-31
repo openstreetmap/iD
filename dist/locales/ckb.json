@@ -1,13 +1,22 @@
 {
     "ckb": {
         "icons": {
-            "information": "زانیاری"
+            "download": "دابەزاندن",
+            "information": "زانیاری",
+            "remove": "لابردن",
+            "copy": "لەبەرگرتنەوە",
+            "open_wikidata": "کردنەوە لە ماڵپەڕی wikidata.org"
         },
         "modes": {
+            "add_feature": {
+                "result": "{count} ئەنجام",
+                "results": "{count} ئەنجام"
+            },
             "add_area": {
                 "title": "ناوچە",
                 "description": "زیادکردنی باخچە و بینا و گۆم و شوێنی تر بۆ سەر نەخشەکە.",
-                "tail": "کرتە لەسەر نەخشەکە بکە بۆ کێشانی ناوچەیەک، وەک باخچە، و دەریاچە یان باڵەخانە."
+                "tail": "کرتە لەسەر نەخشەکە بکە بۆ کێشانی ناوچەیەک، وەک باخچە، و دەریاچە یان باڵەخانە.",
+                "filter_tooltip": "ناوچەکان"
             },
             "add_line": {
                 "title": "هێڵ"
@@ -182,28 +191,120 @@
             }
         },
         "success": {
+            "thank_you_where": {
+                "format": "{place}{separator}{region}",
+                "separator": "،"
+            },
             "help_link_text": "وردەکارییەکان",
             "help_link_url": "https://wiki.openstreetmap.org/wiki/FAQ#I_have_just_made_some_changes_to_the_map._How_do_I_get_to_see_my_changes.3F",
+            "view_on_osm": "پێشاندانی گۆڕانکارییەکان لە OSM",
             "more": "زۆرتر",
             "events": "بۆنەکان",
-            "languages": "زمان: {languages}"
+            "languages": "زمان: {languages}",
+            "tell_us": "پێمان بڵێ!"
         },
         "confirm": {
             "okay": "باشە",
             "cancel": "هەڵوەشاندنەوە"
         },
+        "splash": {
+            "welcome": "بەخێربێیت بۆ دەستکاریکەری iD OpenStreetMap",
+            "start": "دەست بکە بە دەستکاریکردن"
+        },
         "version": {
             "whats_new": "چی نوێ هەیە لە iD {version}"
+        },
+        "QA": {
+            "improveOSM": {
+                "geometry_types": {
+                    "road": "ڕێگاکان"
+                },
+                "directions": {
+                    "east": "ڕۆژهەڵات",
+                    "north": "باکوور",
+                    "northeast": "باکووری ڕۆژهەڵات",
+                    "northwest": "باکووری ڕۆژاوا",
+                    "south": "باشوور",
+                    "southeast": "باشووری ڕۆژهەڵات",
+                    "southwest": "باشووری ڕۆژاوا",
+                    "west": "ڕۆژاوا"
+                }
+            },
+            "keepRight": {
+                "detail_description": "پێناسە",
+                "comment": "سەرنج",
+                "save_comment": "پاشەکەوتکردنی سەرنج",
+                "error_parts": {
+                    "this_way": "ئەم ڕێگەیە",
+                    "this_railway": "ئەم هێڵی شەمەندەفەرە",
+                    "this_crossing": "ئەم یەکتربڕە",
+                    "this_railway_crossing": "ئەم یەکتربڕەی هێڵی شەمەندەفەر",
+                    "this_bridge": "ئەم پردە",
+                    "this_tunnel": "ئەم تونێلە",
+                    "railway": "هێڵی شەمەندەفەر",
+                    "place_of_worship": "پەرستگا",
+                    "restaurant": "خواردنگە",
+                    "school": "قوتابخانە",
+                    "university": "زانکۆ",
+                    "hospital": "نەخۆشخانە",
+                    "library": "پەڕتووکخانە",
+                    "theatre": "شانۆ",
+                    "courthouse": "دادگا",
+                    "bank": "بانک",
+                    "cinema": "سینەما",
+                    "pharmacy": "دەرمانخانە",
+                    "cafe": "قاوەخانە",
+                    "fast_food": "خواردنگەی خێرا",
+                    "from": "لە",
+                    "to": "بۆ",
+                    "left_hand": "دەستەچەپ",
+                    "right_hand": "دەستەڕاست"
+                },
+                "errorTypes": {
+                    "281": {
+                        "description": "{var1} هیچ ناوێکی نییە."
+                    }
+                }
+            }
+        },
+        "streetside": {
+            "hires": "جۆریەتی بەرز"
+        },
+        "mapillary": {
+            "title": "Mapillary"
+        },
+        "openstreetcam": {
+            "title": "OpenStreetCam"
+        },
+        "note": {
+            "note": "تێبینی",
+            "title": "دەستکاریکردنی تێبینی",
+            "anonymous": "نەناسراو",
+            "closed": "(Closed)",
+            "commentTitle": "سەرنجەکان",
+            "status": {
+                "opened": "کراوەیە {when}",
+                "closed": "داخراوە {when}"
+            },
+            "newComment": "سەرنجێکی نوێ",
+            "close": "داخستنی تێبینی",
+            "comment": "سەرنج",
+            "new": "تێبینی نوێ",
+            "save": "پاشەکەوتکردنی تێبینی"
         },
         "help": {
             "title": "یارمەتی",
             "help": {
                 "title": "یارمەتی",
+                "open_data_h": "دراوەی کراوە",
                 "before_start_h": "پێش ئەوەی دەستپێبکەی",
                 "open_source_h": "سەرچاوە کراوە"
             },
             "editing": {
+                "title": "دەستکاریکردن و پاشەکەوتکردن",
+                "select_h": "دیاریکردن",
                 "save_h": "پاشەکەوتکردن",
+                "upload_h": "بەرزکردنەوە",
                 "keyboard_h": "کورتبڕەکانی تەختەکلیل"
             },
             "lines": {
@@ -217,7 +318,33 @@
                 }
             }
         },
+        "issues": {
+            "fixme_tag": {
+                "title": "داواکاری \"چاکم بکەوە\""
+            },
+            "invalid_format": {
+                "email": {
+                    "reference": "پێویستە پۆستی ئەلیکترۆنییەکەت لەوە بچێت\n\"user@example.com\"."
+                }
+            },
+            "private_data": {
+                "title": "زانیاری تایبەتی"
+            },
+            "fix": {
+                "select_road_type": {
+                    "title": "هەڵبژاردنی جۆری ڕێگا"
+                },
+                "use_bridge_or_tunnel": {
+                    "title": "پرد یان تونێل بەکاربهێنە"
+                },
+                "use_tunnel": {
+                    "title": "تونێل بەکاربهێنە"
+                }
+            }
+        },
         "intro": {
+            "done": "تەواو",
+            "ok": "باشە",
             "graph": {
                 "block_number": "<value for addr:block_number>",
                 "county": "<value for addr:county>",
@@ -232,6 +359,20 @@
                 "suburb": "<value for addr:suburb>",
                 "countrycode": "tr"
             },
+            "welcome": {
+                "title": "بەرخێربێیت"
+            },
+            "areas": {
+                "title": "ناوچەکان",
+                "search_playground": "**گەڕان بە دوای '{preset}'.**"
+            },
+            "lines": {
+                "retry_delete": "کرتەت لەسەر دوگمەی سڕینەوە نەکردووە. دووبارەی بکەوە."
+            },
+            "buildings": {
+                "retry_square": "کرتەت لەسەر دوگمە چوارگۆشەییەکە نەکردووە. دووبارەی بکەوە.",
+                "search_tank": "**گەڕان بە دوای '{preset}'.**"
+            },
             "startediting": {
                 "title": "دەستپێکردنی دەستکاری",
                 "start": "دەستکردن بە نەخشەکێشان!"
@@ -239,6 +380,14 @@
         },
         "shortcuts": {
             "title": "کورتبڕەکانی تەختەکلیل",
+            "tooltip": "پیشاندانی کورتبڕەکانی تەختەکلیل",
+            "toggle": {
+                "key": "؟"
+            },
+            "key": {
+                "alt": "Alt",
+                "delete": "سڕینەوە"
+            },
             "or": "-یان-",
             "browsing": {
                 "help": {
@@ -271,12 +420,27 @@
             }
         },
         "units": {
+            "feet": "{quantity} پێ",
+            "miles": "{quantity} میل",
+            "square_feet": "{quantity} پێ چوارگۆشە",
+            "square_miles": "{quantity} میل چوارگۆشە",
+            "meters": "{quantity} م",
+            "kilometers": "{quantity} کم",
+            "square_meters": "{quantity} م²",
+            "square_kilometers": "{quantity} کم²",
+            "area_pair": "{area1} ({area2})",
+            "arcdegrees": "{quantity}°",
+            "arcminutes": "{quantity}′",
+            "arcseconds": "{quantity}″",
             "north": "باکوور",
             "south": "باشوور",
             "east": "ڕۆژهەڵات",
             "west": "ڕۆژئاوا",
             "coordinate": "{coordinate}{direction}",
             "coordinate_pair": "{latitude}, {longitude}"
+        },
+        "wikidata": {
+            "description": "پێناسە"
         },
         "presets": {
             "fields": {

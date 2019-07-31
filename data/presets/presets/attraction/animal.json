@@ -2,7 +2,8 @@
     "icon": "maki-zoo",
     "fields": [
         "name",
-        "operator"
+        "operator",
+        "species/wikidata"
     ],
     "geometry": [
         "point",

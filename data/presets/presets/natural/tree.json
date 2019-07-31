@@ -6,6 +6,9 @@
         "denotation",
         "diameter"
     ],
+    "moreFields": [
+        "species/wikidata"
+    ],
     "geometry": [
         "point",
         "vertex"

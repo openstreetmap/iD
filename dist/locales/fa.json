@@ -544,7 +544,7 @@
             "comment_needed_message": "لطفاً ابتدا توضیحی برای بستهٔ تغییرات خود بنویسید.",
             "about_changeset_comments": "دربارهٔ توضیح تغییرات",
             "about_changeset_comments_link": "//wiki.openstreetmap.org/wiki/Fa:Good_changeset_comments",
-            "google_warning": "شما در توضیحات خود از گوگل نام بردید. لطفا توجه داشته باشید که کپی کردن از نقشه‌های گوگل، ممنوع است.",
+            "google_warning": "شما در توضیحات خود از گوگل نام بردید.: به یاد داشته باشید که کپی کردن از نقشه‌های گوگل، شدیداً ممنوع است.",
             "google_warning_link": "https://www.openstreetmap.org/copyright"
         },
         "contributors": {
@@ -6580,8 +6580,8 @@
                     "name": "پارک تفریحی, شهربازی"
                 },
                 "tourism/viewpoint": {
-                    "name": "چشم‌انداز",
-                    "terms": "منظره, ویو"
+                    "name": "نقطه دید",
+                    "terms": "چشم‌انداز"
                 },
                 "tourism/zoo": {
                     "name": "باغ وحش",

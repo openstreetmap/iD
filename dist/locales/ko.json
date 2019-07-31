@@ -7926,10 +7926,6 @@
                 "name": "오픈스트리트맵 쿠바 텔레그램",
                 "description": "오픈스트리트맵 쿠바 텔레그램 대화방"
             },
-            "OSM-NI-telegram": {
-                "name": "오픈스트리트맵 니카라과 텔레그램",
-                "description": "오픈스트리트맵 니카라과 텔레그램 대화방"
-            },
             "Bay-Area-OpenStreetMappers": {
                 "description": "베이에어리어 내 오픈스트리트맵 개선하기"
             },

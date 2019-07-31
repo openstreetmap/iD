@@ -4455,8 +4455,16 @@
                     "name": "直昇機坪",
                     "terms": "直昇機停機坪,直升機停機坪"
                 },
+                "aeroway/holding_position": {
+                    "name": "飛機停靠點",
+                    "terms": "飛機停靠點"
+                },
                 "aeroway/jet_bridge": {
                     "name": "空橋"
+                },
+                "aeroway/parking_position": {
+                    "name": "停機坪",
+                    "terms": "停機坪"
                 },
                 "aeroway/runway": {
                     "name": "機場跑道",
@@ -8572,6 +8580,10 @@
                     "name": "攝影用品店",
                     "terms": "照相店"
                 },
+                "shop/printer_ink": {
+                    "name": "印表機墨水商店",
+                    "terms": "印表機墨水商店"
+                },
                 "shop/pyrotechnics": {
                     "name": "煙火商",
                     "terms": "煙火用品店"
@@ -10229,10 +10241,6 @@
             "OSM-CU-telegram": {
                 "name": "OSM 古巴在 Telegram",
                 "description": "開放街圖古巴 Telegram 聊天室"
-            },
-            "OSM-NI-telegram": {
-                "name": "OSM 尼加拉瓜在 Telegram",
-                "description": "開放街圖尼加拉瓜 Telegram 聊天室"
             },
             "Bay-Area-OpenStreetMappers": {
                 "name": "灣區的 OpenStreetMap 圖客",

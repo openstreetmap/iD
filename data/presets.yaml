@@ -1921,6 +1921,9 @@ en:
       source:
         # source=*
         label: Sources
+      species/wikidata:
+        # 'species:wikidata=*, species:wikipedia=*'
+        label: Species Wikidata
       sport:
         # sport=*
         label: Sports

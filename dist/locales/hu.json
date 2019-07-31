@@ -83,7 +83,7 @@
             "add": {
                 "annotation": {
                     "point": "Pont hozzáadva.",
-                    "vertex": "Pont hozzáadva a vonalhoz.",
+                    "vertex": "Pont hozzáadva vonalhoz.",
                     "relation": "Kapcsolat hozzáadva.",
                     "note": "Hozzáadott egy megjegyzést."
                 }
@@ -218,6 +218,9 @@
             "delete_member": {
                 "annotation": "Egy tag eltávolítva a kapcsolatból"
             },
+            "reorder_members": {
+                "annotation": "Egy kapcsolat tagjainak újrarendezése."
+            },
             "connect": {
                 "annotation": {
                     "from_vertex": {
@@ -241,9 +244,19 @@
             "disconnect": {
                 "title": "Szétválasztás",
                 "description": "Vonalak/területek szétválasztása egymástól.",
+                "line": {
+                    "description": "Vonal leválasztása más elemektől."
+                },
+                "area": {
+                    "description": "Terület leválasztása más elemektől."
+                },
                 "key": "D",
                 "annotation": "Vonalak/területek szétválasztva.",
+                "too_large": {
+                    "single": "Nem lehet leválasztani, mert nem látszik az egész alakzat."
+                },
                 "not_connected": "Nincsenek szétválasztható vonalak/területek.",
+                "not_downloaded": "Nem törölhető, mert nem lett teljesen letöltve.",
                 "connected_to_hidden": "Nem választható szét, mert egy rejtett elemhez csatlakozik.",
                 "relation": "Nem választható szét, mert egy kapcsolat tagjait köti össze."
             },
@@ -472,7 +485,7 @@
             "title": "Feltöltés az OpenStreetMapre",
             "upload_explanation": "Az általad feltöltött változtatások minden OpenStreetMapet használó térképen láthatóak lesznek.",
             "upload_explanation_with_user": "Az általad {user} néven feltöltött változtatások minden OpenStreetMapet használó térképen láthatóak lesznek.",
-            "request_review": "Szeretném ha valaki ellenőrizné a szerkesztéseimet.",
+            "request_review": "Szeretném, ha valaki ellenőrizné a szerkesztéseimet.",
             "save": "Feltöltés",
             "cancel": "Mégsem",
             "changes": "{count} módosítás",
@@ -623,7 +636,10 @@
             "way": "Út",
             "relation": "Kapcsolat",
             "location": "Pozíció",
-            "add_fields": "Mező hozzáadása:"
+            "add_fields": "Mező hozzáadása:",
+            "lock": {
+                "suggestion": "A \"{label}\" mező zárolva van, mert van hozzá Wikidata címke. Törölhető, vagy a címkék szerkeszthetők a \"Minden címke\" szakaszban."
+            }
         },
         "background": {
             "title": "Háttér",
@@ -720,6 +736,10 @@
             "buildings": {
                 "description": "Épületek",
                 "tooltip": "Épületek, menhelyek, garázsok, stb."
+            },
+            "building_parts": {
+                "description": "Épületrész",
+                "tooltip": "3D épület és tető összetevők"
             },
             "indoor": {
                 "description": "Beltéri elemek",
@@ -839,7 +859,7 @@
                 "format": "{place}{separator}{region}",
                 "separator": ", "
             },
-            "help_html": "Módosításaid pár percen belül meg kell, hogy jelenjenek az OpenStreetMap felületén. Más térképeken a frissítéshez hosszabb idő kell.",
+            "help_html": "Módosításaidnak pár perc kell, hogy megjelenjenek az OpenStreetMap felületén. Más térképeken a frissítésekig hosszabb idő szükséges.",
             "help_link_text": "Részletek",
             "help_link_url": "https://wiki.openstreetmap.org/wiki/Hu:FAQ#V.C3.A1ltoztat.C3.A1sokat_eszk.C3.B6z.C3.B6ltem_a_t.C3.A9rk.C3.A9pen.2C_hogyan_l.C3.A1thatom_ezeket.3F",
             "view_on_osm": "Változtatások megtekintése OSM-en",
@@ -1466,7 +1486,7 @@
                 "hidden_issues": {
                     "none": "Az észlelt problémák itt fognak megjelenni",
                     "elsewhere": "Problémák máshol: {count}",
-                    "disabled_rules": "Problémák száma a kikapcsolt szabályokkal: {count}",
+                    "disabled_rules": "Problémák száma a kikapcsolt szabályoknál: {count}",
                     "ignored_issues": "Hanyagolt problémák: {count}",
                     "ignored_issues_elsewhere": "Hanyagolt problémák máshol: {count}"
                 }
@@ -1475,7 +1495,7 @@
                 "what": {
                     "title": "Ellenőrzés:",
                     "edited": "Szerkesztéseim",
-                    "all": "Minden"
+                    "all": "Mindenkié"
                 },
                 "where": {
                     "title": "Hol:",
@@ -1485,7 +1505,7 @@
             },
             "suggested": "Javasolt frissítések:",
             "enable_all": "Mindent engedélyez",
-            "disable_all": "Mindent tilt",
+            "disable_all": "Mindent kikapcsol",
             "reset_ignored": "Hanyagolt problémák nullázása ({count})",
             "fix_one": {
                 "title": "javít"
@@ -1501,6 +1521,8 @@
             "close_nodes": {
                 "title": "Nagyon közeli pontok",
                 "tip": "Olyan pontok keresése, amik valószínűleg ugyanazt írják le.",
+                "message": "Két pont itt:  {way}  nagyon közel van egymáshoz.",
+                "reference": "A túl közeli pontokat vagy összevonni vagy elmozgatni szükséges.",
                 "detached": {
                     "message": "{feature} nagyon közel van ehhez: {feature2}"
                 }
@@ -1529,7 +1551,10 @@
                 }
             },
             "disconnected_way": {
-                "title": "Szétkapcsolt utak"
+                "title": "Szétkapcsolt utak",
+                "highway": {
+                    "message": "{highway} nem kapcsolódik más úthoz"
+                }
             },
             "fixme_tag": {
                 "title": "\"Javíts ki\" kérés",
@@ -1567,7 +1592,8 @@
                 }
             },
             "missing_role": {
-                "title": "Hiányzó szerep"
+                "title": "Hiányzó szerep",
+                "tip": "Olyan kapcsolatok keresése, ahol hiányzik vagy hibás egy tag szerepe."
             },
             "missing_tag": {
                 "title": "Hiányzó címke",
@@ -1609,6 +1635,7 @@
             },
             "impossible_oneway": {
                 "title": "Lehetetlen egyirányú út",
+                "tip": "Egyirányú úttal kapcsolatos problémák",
                 "highway": {
                     "start": {
                         "message": "{feature}  elérhetetlen",
@@ -1630,6 +1657,9 @@
                 },
                 "connect_feature": {
                     "title": "Elem összekötése"
+                },
+                "connect_features": {
+                    "title": "Elemek összekötése"
                 },
                 "continue_from_start": {
                     "title": "Rajzolás folytatása a kezdettől"
@@ -1672,6 +1702,19 @@
                 },
                 "remove_tags": {
                     "title": "A címkék eltávolítása"
+                },
+                "reposition_features": {
+                    "title": "Elemek áthelyezése"
+                },
+                "select_preset": {
+                    "title": "Elemtípus kiválasztása"
+                },
+                "select_road_type": {
+                    "title": "Úttípus kiválasztása"
+                },
+                "tag_as_disconnected": {
+                    "title": "Szétkapcsoltnak jelölöm",
+                    "annotation": "Közeli elemek szétkapcsoltnak jelölve."
                 },
                 "upgrade_tags": {
                     "title": "Címke frissítése",
@@ -4582,7 +4625,7 @@
                     "terms": "vécé, illemhely, toalett, klotyó, árnyékszék, budi, pottyantós"
                 },
                 "amenity/toilets/disposal/flush": {
-                    "name": "WC"
+                    "name": "WC (öblítéses)"
                 },
                 "amenity/toilets/disposal/pitlatrine": {
                     "name": "Árnyékszék"
@@ -4625,7 +4668,7 @@
                     "name": "Ételárusító automata"
                 },
                 "amenity/vending_machine/fuel": {
-                    "name": "Benzinkút"
+                    "name": "Benzinautomata"
                 },
                 "amenity/vending_machine/ice_cream": {
                     "name": "Jégkrém árusító automata"
@@ -4774,7 +4817,7 @@
                     "terms": "bicikliakadály"
                 },
                 "barrier/ditch": {
-                    "name": "Árok",
+                    "name": "Árok (akadály)",
                     "terms": "árok, gödör"
                 },
                 "barrier/entrance": {
@@ -6235,7 +6278,7 @@
                     "name": "Víztartály"
                 },
                 "man_made/surveillance": {
-                    "name": "Térfigyelő kamera",
+                    "name": "Térfigyelő eszköz vagy őrség",
                     "terms": "biztonsági kamera, CCTV, zártláncú kamera"
                 },
                 "man_made/surveillance/camera": {
@@ -7764,7 +7807,7 @@
                     "terms": "vízerőmű, tározó, víztározó, gát"
                 },
                 "waterway/ditch": {
-                    "name": "Árok",
+                    "name": "Árok (vízelvezető)",
                     "terms": "árok, vízelvezető"
                 },
                 "waterway/dock": {

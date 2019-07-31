@@ -630,6 +630,10 @@
       "replace": {"roof:colour": "$1"}
     },
     {
+      "old": {"roof:shape": "half_hipped"},
+      "replace": {"roof:shape": "half-hipped"}
+    },
+    {
       "old": {"route": "ncn"},
       "replace": {"route": "bicycle", "network": "ncn"}
     },

@@ -5244,6 +5244,10 @@
                 "barrier/retaining_wall": {
                     "name": "Muro de contención"
                 },
+                "barrier/sally_port": {
+                    "name": "Poterna",
+                    "terms": "poterna, porta lateral do castelo, porta esclusa, porta de seguridade, porta de seguranza, porta de castelo, porta castelo, poterna castelo"
+                },
                 "barrier/stile": {
                     "name": "Escada",
                     "terms": "escada, escaleira, valado, cerca, reixa"
@@ -6847,6 +6851,10 @@
                 "power/generator": {
                     "name": "Xerador de enerxía"
                 },
+                "power/generator/method/photovoltaic": {
+                    "name": "Panel solar",
+                    "terms": "módulo fotovoltaico, FV, PV, luz solar, solar, panel"
+                },
                 "power/generator/source/wind": {
                     "name": "Turbina eólica"
                 },
@@ -7514,6 +7522,10 @@
                 "traffic_calming/rumble_strip": {
                     "name": "Bandas sonoras",
                     "terms": "bandas reductoras de velocidade, bandas sonoras"
+                },
+                "traffic_calming/table": {
+                    "name": "Redutor de velocidade",
+                    "terms": "redutor de velocidade ancho, lomo de burro, lomada, velocidade, lento, lombo, badén, baden, lomba, lombada"
                 },
                 "traffic_sign": {
                     "name": "Sinal de tráfico"

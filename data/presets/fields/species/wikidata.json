@@ -1,0 +1,9 @@
+{
+    "key": "species:wikidata",
+    "keys": [
+        "species:wikidata",
+        "species:wikipedia"
+    ],
+    "type": "wikidata",
+    "label": "Species Wikidata"
+}

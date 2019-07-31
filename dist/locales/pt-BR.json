@@ -8595,6 +8595,10 @@
                     "name": "Loja de Fotografia",
                     "terms": "Loja de Fotografia, Foto, Produtos fotográficos"
                 },
+                "shop/printer_ink": {
+                    "name": "Loja de tinta de impressora",
+                    "terms": "Loja de tinta de impressora"
+                },
                 "shop/pyrotechnics": {
                     "name": "Loja de Fogos de Artifício",
                     "terms": "loja de fogos de artifício"
@@ -9652,8 +9656,14 @@
                 "name": "Mapeando Botsuana no Twitter",
                 "description": "Twitter do OpenStreetMap no Botsuana"
             },
+            "ym-Centre-Universitaire-de-Recherche-et-dApplication-en-Tldtection-CURAT-de-lUniversit-Felix-Houphouet-Boigny": {
+                "name": "YouthMappers CURAT"
+            },
+            "ym-The-Gambia-YMCA-University-of-the-Gambia": {
+                "name": "YouthMappers conectado"
+            },
             "cape-coast-youthmappers": {
-                "name": "Universidade de Cape Coast YouthMappers",
+                "name": "YouthMappers da Universidade de Cape Coast",
                 "description": "Siga-nos no Twitter: {url}",
                 "extendedDescription": "Esta é a descrição oficial do capítulo Youth Mappers da Universidade de Cape Coast, no Gana. adoramos mapas, os dados abertos e ajudar os mais vulneráveis."
             },
@@ -9669,6 +9679,12 @@
             "talk-gh": {
                 "name": "Lista de Discussão Talk-gh",
                 "description": "Talk-gh é a lista de discussão oficial para a comunidade OSM de Gana"
+            },
+            "ym-Kwame-Nkrumah-University-of-Science-and-Technology": {
+                "description": "YouthMappers na Universidade de Ciência e Tecnologia de Kwame Nkrumah"
+            },
+            "ym-Dedan-Kimathi-University-of-Technology": {
+                "name": "GDEV"
             },
             "osm-mg-facebook": {
                 "name": "Grupo OpenStreetMap Madagascar no Facebook",
@@ -10089,10 +10105,6 @@
                 "name": "OSM Cuba no Telegram",
                 "description": "Bate-papo do OpenStreetMap Cuba no Telegram"
             },
-            "OSM-NI-telegram": {
-                "name": "OSM Nicarágua no Telegram",
-                "description": "Bate-papo do OpenStreetMap Nicarágua no Telegram"
-            },
             "Bay-Area-OpenStreetMappers": {
                 "name": "OpenStreetMappers da Bay Area",
                 "description": "Melhorar o OpenStreetMap na Área da Baía",
@@ -10184,6 +10196,9 @@
             "PHXGeo-twitter": {
                 "description": "Siga-nos no Twitter em {url}"
             },
+            "ym-Western-Michigan-University": {
+                "name": "Clube de Geografia"
+            },
             "talk-au": {
                 "name": "Lista de Discussão Talk-au"
             },
@@ -10198,7 +10213,8 @@
             },
             "OSM-AR-irc": {
                 "name": "IRC OpenStreetMap Argentina",
-                "description": "Junte-se à #osm-ar no irc.oftc.net (porta 6667)"
+                "description": "Junte-se à #osm-ar no irc.oftc.net (porta 6667)",
+                "extendedDescription": "Você pode encontrar o usuário mais nerd da comunidade."
             },
             "OSM-AR-mailinglist": {
                 "name": "Lista de Discussão Talk-ar",
@@ -10267,6 +10283,9 @@
                 "name": "Twitter OpenStreetMap Chile",
                 "description": "Siga-nos no Twitter em {url}"
             },
+            "Maptime-Bogota": {
+                "name": "Horário de Bogotá"
+            },
             "OSM-CO-facebook": {
                 "description": "Junte-se à comunidade OpenStreetMap Colômbia no Facebook",
                 "extendedDescription": "Entre na comunidade para aprender mais sobre o OpenStreetMap. Todos são bem-vindos!"
@@ -10285,6 +10304,9 @@
             },
             "OSM-CO": {
                 "name": "OpenStreetMap Colômbia"
+            },
+            "ym-Universidad-de-Los-Andes": {
+                "description": "YouthMappers na Universidade de Los Andes"
             },
             "OSM-EC-telegram": {
                 "name": "OSM Equador no Telegram",

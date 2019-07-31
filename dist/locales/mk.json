@@ -7127,6 +7127,9 @@
                 "shop/photo": {
                     "name": "Фотографски дуќан"
                 },
+                "shop/printer_ink": {
+                    "name": "Продавница за печатарска боја"
+                },
                 "shop/pyrotechnics": {
                     "name": "Продавница за огномет"
                 },
@@ -8332,10 +8335,6 @@
             "OSM-CU-telegram": {
                 "name": "OSM Куба на Telegram",
                 "description": "Разговори на OpenStreetMap Куба на Telegram"
-            },
-            "OSM-NI-telegram": {
-                "name": "OSM Никарагва на Telegram",
-                "description": "Разговори на OpenStreetMap Никарагва на Telegram"
             },
             "MaptimeHRVA-twitter": {
                 "name": "MaptimeHRVA на Twitter",
