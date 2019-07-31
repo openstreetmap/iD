@@ -8604,6 +8604,10 @@
                     "name": "写真店",
                     "terms": "写真屋, 写真店, 現像, ビデオ, デジカメ"
                 },
+                "shop/printer_ink": {
+                    "name": "プリンタ用インク店",
+                    "terms": "プリンタ用インク店, プリンタ, インクカートリッジ, トナー"
+                },
                 "shop/pyrotechnics": {
                     "name": "花火店",
                     "terms": "花火店"
@@ -10685,9 +10689,25 @@
                 "description": "YouthMappers chapter at University of the West Indies, Mona Campus",
                 "extendedDescription": "The UWI, Mona Campus Library engages in public, outreach and special projects. This will allow our library the means to be a catalyst for spatial literacy and advocate for spatial data sharing and access to Jamaican and Caribbean interests. We have disaster relief and communication needs and   extensive earth science and geo-hazards needs to better serve our campus and community. Specifically, we hace a Science Library to showcase such to all faculty and students."
             },
-            "OSM-NI-telegram": {
+            "ni-facebook": {
+                "name": "OpenStreetMap NI Community",
+                "description": "Mappers and OpenStreetMap on Facebook in Nicaragua"
+            },
+            "ni-mailinglist": {
+                "name": "Talk-ni Mailing List",
+                "description": "Talk-ni is the official mailing list for the Nicaraguan OSM community"
+            },
+            "ni-telegram": {
                 "name": "OSM Nicaragua on Telegram",
                 "description": "OpenStreetMap Nicaragua Telegram chat"
+            },
+            "ni-twitter": {
+                "name": "OpenStreetMap Nicaragua Twitter",
+                "description": "OSM Nicaragua on Twitter: @osm_ni"
+            },
+            "osm-ni": {
+                "name": "MapaNica.net",
+                "description": "Provide OSM services and information for the local community in Nicaragua"
             },
             "ym-Universidad-Nacional-de-Ingenieria": {
                 "name": "Yeka Street MGA",

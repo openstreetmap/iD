@@ -3183,6 +3183,12 @@
                         "undefined": "Ні"
                     }
                 },
+                "iata": {
+                    "label": "IATA"
+                },
+                "icao": {
+                    "label": "ICAO"
+                },
                 "incline": {
                     "label": "Нахил"
                 },
@@ -3691,6 +3697,9 @@
                 },
                 "product": {
                     "label": "Виробляє"
+                },
+                "public_bookcase/type": {
+                    "label": "Тип"
                 },
                 "railway": {
                     "label": "Тип"
@@ -10045,10 +10054,6 @@
             "OSM-CU-telegram": {
                 "name": "OSM Куба в Telegram",
                 "description": "OpenStreetMap Куба чат в Telegram"
-            },
-            "OSM-NI-telegram": {
-                "name": "OSM Нікарагуа в Telegram",
-                "description": "OpenStreetMap Нікарагуа чат в Telegram"
             },
             "Bay-Area-OpenStreetMappers": {
                 "name": "Bay Area OpenStreetMappers",

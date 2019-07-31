@@ -3183,6 +3183,12 @@
                         "undefined": "Nej"
                     }
                 },
+                "iata": {
+                    "label": "IATA-flygplatskod"
+                },
+                "icao": {
+                    "label": "ICAO-flygplatskod"
+                },
                 "incline": {
                     "label": "Lutning"
                 },
@@ -3691,6 +3697,9 @@
                 },
                 "product": {
                     "label": "Produkter"
+                },
+                "public_bookcase/type": {
+                    "label": "Typ"
                 },
                 "railway": {
                     "label": "Typ"
@@ -9662,10 +9671,6 @@
             "OSM-CU-telegram": {
                 "name": "OSM Kuba på Telegram",
                 "description": "Telegram-chatt för OpenStreetMap Kuba"
-            },
-            "OSM-NI-telegram": {
-                "name": "OSM Nicaragua på Telegram",
-                "description": "Telegram-chatt för OpenStreetMap Nicaragua"
             },
             "Bay-Area-OpenStreetMappers": {
                 "name": "Bay Area OpenStreetMappers",
