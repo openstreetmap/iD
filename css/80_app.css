@@ -717,6 +717,7 @@ button.add-note svg.icon {
 .preset-browser .popover-header {
     height: 40px;
     border-bottom: 2px solid #DCDCDC;
+    flex: 0 0 auto;
 }
 .preset-browser .popover-footer {
     padding: 5px 10px 5px 10px;
