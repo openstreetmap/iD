@@ -14,21 +14,21 @@ export function uiTaskingTaskEditor(context) {
     function taskEditor(selection) {
 
 
-        var body = selection.selectAll('.tasking-body')
+        var body = selection.selectAll('.tasking-task-body')
             .data([0]);
 
         body = body.enter()
             .append('div')
-            .attr('class', 'tasking-body')
+            .attr('class', 'tasking-task-body')
             .merge(body);
 
-        var editor = body.selectAll('.tasking-editor')
+        var editor = body.selectAll('.tasking-task-editor')
             .data([0]);
 
         // enter/update
         var editorEnter = editor.enter()
             .append('div')
-            .attr('class', 'tasking-editor');
+            .attr('class', 'tasking-task-editor');
 
         // update
         editor = editorEnter

@@ -2915,6 +2915,7 @@ input.key-trap {
 
 /* Custom Data & Tasking Editor
 ------------------------------------------------------- */
+.project-header,
 .task-header,
 .data-header {
     background-color: #f6f6f6;
@@ -2925,6 +2926,7 @@ input.key-trap {
     align-items: center;
 }
 
+.project-header-icon,
 .task-header-icon,
 .data-header-icon {
     background-color: #fff;
@@ -2936,6 +2938,8 @@ input.key-trap {
     border-right: 1px solid #ccc;
     border-radius: 5px 0 0 5px;
 }
+
+[dir='rtl'] .project-header-icon,
 [dir='rtl'] .task-header-icon,
 [dir='rtl'] .data-header-icon {
     border-right: unset;
@@ -2943,12 +2947,14 @@ input.key-trap {
     border-radius: 0 5px 5px 0;
 }
 
+.project-header-icon .icon-wrap,
 .task-header-icon .icon-wrap,
 .data-header-icon .icon-wrap {
     position: absolute;
     top: 0px;
 }
 
+.project-header-label,
 .task-header-label,
 .data-header-label {
     background-color: #f6f6f6;
@@ -2959,6 +2965,7 @@ input.key-trap {
     border-radius: 0 5px 5px 0;
 }
 
+[dir='rtl'] .project-header-label,
 [dir='rtl'] .task-header-label,
 [dir='rtl'] .data-header-label {
     border-radius: 5px 0 0 5px;

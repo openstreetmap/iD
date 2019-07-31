@@ -1388,6 +1388,13 @@
                     }
                 }
             },
+            "project": {
+                "name": "Project",
+                "id": "Project ID: {projectId}",
+                "no_project": {
+                    "message": "No project selected"
+                }
+            },
             "task": {
                 "name": "Task",
                 "id": "Task ID: {taskId}",

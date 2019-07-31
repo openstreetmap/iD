@@ -9,11 +9,13 @@ import { uiTooltipHtml } from './tooltipHtml';
 import { tooltip } from '../util/tooltip';
 
 import { uiSettingsCustomTasking } from './settings/custom_tasking';
+import { uiTaskingProjectEditor } from './taskingProjectEditor';
 import { uiTaskingTaskEditor } from './taskingTaskEditor';
 
 
 export function uiTasking(context) {
 
+    var taskingProjectEditor = uiTaskingProjectEditor(context);
     var taskingTaskEditor = uiTaskingTaskEditor(context);
 
     var key = t('tasking.key');
@@ -26,9 +28,11 @@ export function uiTasking(context) {
     var _toggleButton = d3_select(null);
 
     var _taskingContainer = d3_select(null);
-    var _taskingManagerContainer = d3_select(null);
-    var _taskingTaskContainer = d3_select(null);
+
     var _taskingErrorsContainer = d3_select(null);
+    var _taskingManagerContainer = d3_select(null);
+    var _taskingProjectContainer = d3_select(null);
+    var _taskingTaskContainer = d3_select(null);
 
     var _errors = taskingService.errors();
 
@@ -187,6 +191,10 @@ export function uiTasking(context) {
 
         if (!_pane.select('.disclosure-wrap-tasking_managers').classed('hide')) {
             updateTaskingManagers();
+        }
+
+        if (!_pane.select('.disclosure-wrap-tasking_project').classed('hide')) {
+            updateTaskingProject();
         }
 
         if (!_pane.select('.disclosure-wrap-tasking_task').classed('hide')) {
@@ -432,6 +440,29 @@ export function uiTasking(context) {
     }
 
 
+    function renderTaskingProject(selection) {
+        var container = selection.selectAll('.tasking-project-container')
+            .data([0]);
+
+        _taskingProjectContainer = container.enter()
+            .append('div')
+            .attr('class', 'tasking-project-container')
+            .merge(container);
+
+            updateTaskingProject();
+    }
+
+
+    function updateTaskingProject() {
+        _project = taskingService.currentProject(); // get current project
+
+        _taskingProjectContainer
+            .call(taskingProjectEditor.project(
+                function(){ return showsLayer() ? _project : undefined; }()
+            ));
+    }
+
+
     function renderTaskingTask(selection) {
         var container = selection.selectAll('.tasking-task-container')
             .data([0]);
@@ -530,7 +561,8 @@ export function uiTasking(context) {
                  .attr('class', 'tasking-errors-container')
                  .call(renderTaskingErrors);
 
-        // tasking
+
+        // managers
         _taskingContainer
             .append('div')
             .attr('class', 'tasking-manager-toggle')
@@ -547,6 +579,16 @@ export function uiTasking(context) {
             .call(uiDisclosure(context, 'tasking_task', true)
                 .title(t('tasking.task.name'))
                 .content(renderTaskingTask)
+            );
+
+
+        // project
+        _taskingContainer
+            .append('div')
+            .attr('class', 'tasking-project-toggle')
+            .call(uiDisclosure(context, 'tasking_project', false)
+                .title(t('tasking.project.name'))
+                .content(renderTaskingProject)
             );
 
 
