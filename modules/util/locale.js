@@ -81,12 +81,12 @@ export function setLanguageNames(obj) {
     languageNames = obj;
 }
 
-export function languageName(code, options = {}) {
+export function languageName(code, options) {
     if (languageNames[code]) { // name in locale langauge
         return languageNames[code];
     }
     // sometimes we only want the local name
-    if (options.localOnly) return null;
+    if (options && options.localOnly) return null;
 
     if (dataLanguages[code]) { // language info
         if (dataLanguages[code].nativeName) { // name in native language
