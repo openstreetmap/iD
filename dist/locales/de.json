@@ -1660,28 +1660,28 @@
                     "reference": "Gebäude sollen sich nicht kreuzen, ausgenommen auf verschiedenen Ebenen."
                 },
                 "building-highway": {
-                    "reference": "Straßen die Gebäude kreuzen sollten Brücken, Tunnel, Überdachungen oder Einfahrten benutzen."
+                    "reference": "Straßen, die Gebäude kreuzen, sollten Brücken, Tunnel, Überdachungen oder Einfahrten benutzen."
                 },
                 "building-railway": {
-                    "reference": "Eisenbahnen die Gebäude kreuzen sollten Brücken oder Tunnel benutzen."
+                    "reference": "Eisenbahnen, die Gebäude kreuzen, sollten Brücken oder Tunnel benutzen."
                 },
                 "building-waterway": {
-                    "reference": "Wasserwege die Gebäude kreuzen sollten Tunnel oder verschiedene Ebenen benutzen."
+                    "reference": "Wasserwege, die Gebäude kreuzen, sollten Tunnel oder verschiedene Ebenen benutzen."
                 },
                 "highway-highway": {
                     "reference": "Kreuzende Straßen sollten Brücken oder Tunnel benutzen oder verbunden sein."
                 },
                 "highway-railway": {
-                    "reference": "Straßen die Eisenbahnen kreuzen sollten Brücken, Tunnel oder Eisenbahnkreuzungen verwenden."
+                    "reference": "Straßen, die Eisenbahnen kreuzen, sollten Brücken, Tunnel oder Eisenbahnkreuzungen verwenden."
                 },
                 "highway-waterway": {
-                    "reference": "Straßen die Wasserwege kreuzen sollten Brücken, Tunnel oder Furten benutzen."
+                    "reference": "Straßen, die Wasserwege kreuzen, sollten Brücken, Tunnel oder Furten benutzen."
                 },
                 "railway-railway": {
                     "reference": "Kreuzende Eisenbahnen sollten verbunden sein oder Brücken oder Tunnel benutzen."
                 },
                 "railway-waterway": {
-                    "reference": "Eisenbahnen die Wasserwege kreuzen sollten Brücken oder Tunnel verwenden."
+                    "reference": "Eisenbahnen, die Wasserwege kreuzen, sollten Brücken oder Tunnel verwenden."
                 },
                 "waterway-waterway": {
                     "reference": "Kreuezende Wasserwege sollten verbunden sein oder Tunnel benutzen."
@@ -7056,7 +7056,7 @@
                 },
                 "man_made/cross": {
                     "name": "Gipfelkreuz",
-                    "terms": "Gipfelkreuz, Kreuz ohne historischem oder religiösem Wert"
+                    "terms": "Gipfelkreuz, Kreuz ohne historischen oder religiösen Wert"
                 },
                 "man_made/cutline": {
                     "name": "Schneise",
@@ -8601,6 +8601,10 @@
                 "shop/photo": {
                     "name": "Fotofachgeschäft",
                     "terms": "Fotoladen, Fotograf, Fotogeschäft"
+                },
+                "shop/printer_ink": {
+                    "name": "Druckertintengeschäft",
+                    "terms": "Kopierertinte, Faxtinte, Toner"
                 },
                 "shop/pyrotechnics": {
                     "name": "Feuerwerksgeschäft",
@@ -10683,9 +10687,25 @@
                 "description": "YouthMappers chapter at University of the West Indies, Mona Campus",
                 "extendedDescription": "The UWI, Mona Campus Library engages in public, outreach and special projects. This will allow our library the means to be a catalyst for spatial literacy and advocate for spatial data sharing and access to Jamaican and Caribbean interests. We have disaster relief and communication needs and   extensive earth science and geo-hazards needs to better serve our campus and community. Specifically, we hace a Science Library to showcase such to all faculty and students."
             },
-            "OSM-NI-telegram": {
+            "ni-facebook": {
+                "name": "OpenStreetMap Nicaragua Gemeinschaft",
+                "description": "Mapper und OpenStreetMap Benutzer auf Facebook in Nicaragua"
+            },
+            "ni-mailinglist": {
+                "name": "Talk-ni Mailing Liste",
+                "description": "Talk-ni ist die offizielle Mail8ng Liste für die OSM Gemeinschaft in Nicaragua"
+            },
+            "ni-telegram": {
                 "name": "OSM Nicaragua auf Telegram",
                 "description": "OpenStreetMap Nicaragua Telegram chat"
+            },
+            "ni-twitter": {
+                "name": "OpenStreetMap Nicaragua Twitter",
+                "description": "OSM Nicaragua auf Twitter: @osm_ni"
+            },
+            "osm-ni": {
+                "name": "MapaNica.net",
+                "description": "Stelle OSM service und Information für die lokale Gemeinschaft in Nicaragua zur Verfügung"
             },
             "ym-Universidad-Nacional-de-Ingenieria": {
                 "name": "Yeka Street MGA",

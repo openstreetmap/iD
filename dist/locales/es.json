@@ -1602,7 +1602,7 @@
                     "elsewhere": "Problemas en otra parte: {count}",
                     "other_features": "Problemas con otros elementos: {count}",
                     "other_features_elsewhere": "Problemas en otros lugares con otros elementos: {count}",
-                    "disabled_rules": "Problemas con las reglas desactivadas: {count}",
+                    "disabled_rules": "Problemas con reglas desactivadas: {count}",
                     "disabled_rules_elsewhere": "Problemas en otros lugares con reglas desactivadas: {count}",
                     "ignored_issues": "Problemas ignorados: {count}",
                     "ignored_issues_elsewhere": "Problemas ignorados en otros lugares: {count}"
@@ -8603,6 +8603,10 @@
                     "name": "Tienda de fotografía",
                     "terms": "fotografía, fotógrafo, cámara, retratista, revelado, film, rollo, impresión, fotos"
                 },
+                "shop/printer_ink": {
+                    "name": "Tienda de tinta para impresora",
+                    "terms": "tinta, cartuchos, toner, tóner, copiadora, fax, impresora, laser, chorro de tinta, insumos"
+                },
                 "shop/pyrotechnics": {
                     "name": "Tienda de fuegos artificiales",
                     "terms": "fuegos artificiales, pirotecnia"
@@ -10684,9 +10688,25 @@
                 "description": "Capítulo de los YouthMappers en la Universidad de las Indias Occidentales, Campus Mona",
                 "extendedDescription": "La Biblioteca Universitaria Mona de la UWI participa en proyectos públicos, de divulgación y especiales. Esto permitirá a nuestra biblioteca los medios para ser un catalizador para la alfabetización espacial y abogar por el intercambio de datos espaciales y el acceso a los intereses de Jamaica y el Caribe. Tenemos necesidades de comunicación y socorro en casos de desastre, y una amplia variedad de necesidades de geomedia y ciencias de la Tierra para servir mejor a nuestro campus y comunidad. Específicamente, tenemos una biblioteca de ciencias para mostrar a todos los profesores y estudiantes."
             },
-            "OSM-NI-telegram": {
+            "ni-facebook": {
+                "name": "Comunidad OpenStreetMap NI",
+                "description": "Mapeadores y OpenStreetMap en Facebook Nicaragua"
+            },
+            "ni-mailinglist": {
+                "name": "Lista de correo Talk-ni",
+                "description": "Talk-ni es la lista de correo oficial de la comunidad nicaragüense de OSM"
+            },
+            "ni-telegram": {
                 "name": "OSM Nicaragua en Telegram",
-                "description": "Chat de Telegram de OpenStreetMap Nicaragua "
+                "description": "Chat de Telegram de OpenStreetMap Nicaragua"
+            },
+            "ni-twitter": {
+                "name": "Twitter de OpenStreetMap Nicaragua",
+                "description": "OSM Nicaragua en Twitter: @osm_ni"
+            },
+            "osm-ni": {
+                "name": "MapaNica.net",
+                "description": "Proporciona servicios e información de OSM para la comunidad local en Nicaragua"
             },
             "ym-Universidad-Nacional-de-Ingenieria": {
                 "name": "Yeka Street MGA",
@@ -11141,10 +11161,10 @@
             "OSM-CL-facebook": {
                 "name": "Facebook de OpenStreetMap Chile",
                 "description": "Únase a la comunidad de OpenStreetMap Chile en Facebook",
-                "extendedDescription": "Únase a la comunidad para obtener más información sobre OpenStreetMap, hacer preguntas o participar en nuestras reuniones. ¡Todos son bienvenidos!"
+                "extendedDescription": "Únase a la comunidad para obtener más información sobre OpenStreetMap, hacer preguntas o participar en nuestras reuniones ¡Todos son bienvenidos!"
             },
             "OSM-CL-mailinglist": {
-                "name": "Lista de correo Talk-br",
+                "name": "Lista de correo Talk-cl",
                 "description": "Una lista de correo para discutir OpenStreetMap en Chile"
             },
             "OSM-CL-telegram": {
