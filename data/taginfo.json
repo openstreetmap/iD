@@ -1924,6 +1924,7 @@
     {"key": "religion", "value": "catholic", "description": "🄳 ➜ religion=christian + denomination=catholic"},
     {"key": "reservations", "description": "🄳 ➜ reservation=*"},
     {"key": "roof:color", "description": "🄳 ➜ roof:colour=*"},
+    {"key": "roof:shape", "value": "half_hipped", "description": "🄳 ➜ roof:shape=half-hipped"},
     {"key": "route", "value": "ncn", "description": "🄳 ➜ route=bicycle + network=ncn"},
     {"key": "shop", "value": "adult", "description": "🄳 ➜ shop=erotic"},
     {"key": "shop", "value": "antique", "description": "🄳 ➜ shop=antiques"},
