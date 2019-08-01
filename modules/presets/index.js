@@ -281,7 +281,7 @@ export function presetIndex(context) {
         _universal = [];
         _favorites = null;
         _recents = null;
-        
+
         groupManager.clearCachedPresets();
 
         // Index of presets by (geometry, tag key).
@@ -387,13 +387,28 @@ export function presetIndex(context) {
 
     all.getFavorites = function() {
         if (!_favorites) {
+
             // fetch from local storage
-            _favorites = (JSON.parse(context.storage('preset_favorites')) || [
-                    // use the generic presets as the default favorites
-                    { pID: 'point', geom: 'point'},
-                    { pID: 'line', geom: 'line'},
-                    { pID: 'area', geom: 'area'}
-                ]).reduce(function(output, d) {
+            var rawFavorites = JSON.parse(context.storage('preset_favorites'));
+
+            if (!rawFavorites) {
+                // no saved favorites
+
+                if (!context.isFirstSession) {
+                    // assume existing user coming from iD 2, use the generic presets as defaults
+                    rawFavorites = [
+                        { pID: 'point', geom: 'point'},
+                        { pID: 'line', geom: 'line'},
+                        { pID: 'area', geom: 'area'}
+                    ];
+                } else {
+                    // new user, no default favorites
+                    rawFavorites = [];
+                }
+                context.storage('preset_favorites', JSON.stringify(rawFavorites));
+            }
+
+            _favorites = rawFavorites.reduce(function(output, d) {
                     var item = ribbonItemForMinified(d, 'favorite');
                     if (item) output.push(item);
                     return output;

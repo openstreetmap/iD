@@ -57,7 +57,7 @@ export function uiAssistant(context) {
     var savedChangeset = null;
     var savedChangeCount = null;
     var didEditAnythingYet = false;
-    var isFirstSession = !context.storage('sawSplash');
+
     context.storage('sawSplash', true);
 
     var assistant = function(selection) {
@@ -350,11 +350,11 @@ export function uiAssistant(context) {
             var mainFooter = selection.append('div')
                 .attr('class', 'main-footer');
 
-            bodyTextArea.html(t('assistant.welcome.' + (isFirstSession ? 'first_time' : 'return')));
+            bodyTextArea.html(t('assistant.welcome.' + (context.isFirstSession ? 'first_time' : 'return')));
             bodyTextArea.selectAll('a')
                 .attr('href', '#')
                 .on('click', function() {
-                    isFirstSession = false;
+                    context.isFirstSession = false;
                     updateDidEditStatus();
                     context.container().call(uiIntro(context));
                     redraw();

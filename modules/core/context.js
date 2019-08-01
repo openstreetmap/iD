@@ -622,5 +622,7 @@ export function coreContext() {
         osmSetVertexTags(presets.vertexTags());
     }
 
+    context.isFirstSession = !context.storage('sawSplash');
+
     return context;
 }
