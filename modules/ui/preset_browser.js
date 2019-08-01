@@ -97,7 +97,6 @@ export function uiPresetBrowser(context, allowedGeometry, onChoose, onCancel) {
         popoverContent = popover.selectAll('.popover-content');
 
         renderFilterButtons();
-        updateResultsList();
     };
 
     browser.isShown = function() {
