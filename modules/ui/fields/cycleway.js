@@ -63,6 +63,7 @@ export function uiFieldCycleway(field, context) {
                     );
             });
 
+        items = items.merge(enter);
 
         // Update
         wrap.selectAll('.preset-input-cycleway')
