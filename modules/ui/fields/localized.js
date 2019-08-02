@@ -1,14 +1,28 @@
 import { dispatch as d3_dispatch } from 'd3-dispatch';
 import { select as d3_select, event as d3_event } from 'd3-selection';
 
-import { t } from '../../util/locale';
-import { dataWikipedia } from '../../../data';
+import { t, languageName } from '../../util/locale';
+import { dataLanguages } from '../../../data';
 import { services } from '../../services';
 import { svgIcon } from '../../svg';
 import { tooltip } from '../../util/tooltip';
 import { uiCombobox } from '../combobox';
 import { utilDetect } from '../../util/detect';
 import { utilEditDistance, utilGetSetValue, utilNoAuto, utilRebind } from '../../util';
+
+var languagesArray = [];
+function loadLanguagesArray() {
+    if (languagesArray.length !== 0) return;
+
+    for (var code in dataLanguages) {
+        languagesArray.push({
+            localName: languageName(code, { localOnly: true }),
+            nativeName: dataLanguages[code].nativeName,
+            code: code,
+            label: languageName(code)
+        });
+    }
+}
 
 
 export function uiFieldLocalized(field, context) {
@@ -92,6 +106,9 @@ export function uiFieldLocalized(field, context) {
 
 
     function localized(selection) {
+        // load if needed
+        loadLanguagesArray();
+
         _selection = selection;
         calcLocked();
         var isLocked = field.locked();
@@ -340,12 +357,13 @@ export function uiFieldLocalized(field, context) {
     function changeLang(d) {
         var lang = utilGetSetValue(d3_select(this));
         var t = {};
-        var language = dataWikipedia.find(function(d) {
-            return d[0].toLowerCase() === lang.toLowerCase() ||
-                d[1].toLowerCase() === lang.toLowerCase();
+        var language = languagesArray.find(function(d) {
+            return (d.localName && d.localName.toLowerCase() === lang.toLowerCase()) ||
+                d.label.toLowerCase() === lang.toLowerCase() ||
+                (d.nativeName && d.nativeName.toLowerCase() === lang.toLowerCase());
         });
 
-        if (language) lang = language[2];
+        if (language) lang = language.code;
 
         if (d.lang && d.lang !== lang) {
             t[key(d.lang)] = undefined;
@@ -378,12 +396,13 @@ export function uiFieldLocalized(field, context) {
     function fetchLanguages(value, cb) {
         var v = value.toLowerCase();
 
-        cb(dataWikipedia.filter(function(d) {
-            return d[0].toLowerCase().indexOf(v) >= 0 ||
-            d[1].toLowerCase().indexOf(v) >= 0 ||
-            d[2].toLowerCase().indexOf(v) >= 0;
+        cb(languagesArray.filter(function(d) {
+            return d.label.toLowerCase().indexOf(v) >= 0 ||
+                (d.localName && d.localName.toLowerCase().indexOf(v) >= 0) ||
+                (d.nativeName && d.nativeName.toLowerCase().indexOf(v) >= 0) ||
+                d.code.toLowerCase().indexOf(v) >= 0;
         }).map(function(d) {
-            return { value: d[1] };
+            return { value: d.label };
         }));
     }
 
@@ -482,8 +501,7 @@ export function uiFieldLocalized(field, context) {
         entries.order();
 
         utilGetSetValue(entries.select('.localized-lang'), function(d) {
-            var lang = dataWikipedia.find(function(lang) { return lang[2] === d.lang; });
-            return lang ? lang[1] : d.lang;
+            return languageName(d.lang);
         });
 
         utilGetSetValue(entries.select('.localized-value'),

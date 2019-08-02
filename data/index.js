@@ -3,6 +3,7 @@ export { wikipedia as dataWikipedia } from 'wmf-sitematrix';
 export { dataAddressFormats } from './address-formats.json';
 export { dataDeprecated } from './deprecated.json';
 export { dataDiscarded } from './discarded.json';
+export { dataLanguages } from './languages.json';
 export { dataLocales } from './locales.json';
 export { dataPhoneFormats } from './phone-formats.json';
 export { dataShortcuts } from './shortcuts.json';
