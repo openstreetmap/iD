@@ -3,17 +3,9 @@ import { uiTooltipHtml } from '../tooltipHtml';
 import { tooltip } from '../../util/tooltip';
 import { utilFunctor } from '../../util/util';
 
-export function uiToolSimpleButton(id, label, iconName, onClick, tooltipText, tooltipKey, barButtonClass) {
+export function uiToolSimpleButton(protoTool) {
 
-    var tool = {
-        id: id,
-        label: label,
-        iconName: iconName,
-        onClick: onClick,
-        tooltipText: tooltipText,
-        tooltipKey: tooltipKey,
-        barButtonClass: barButtonClass
-    };
+    var tool = protoTool || {};
 
     tool.render = function(selection) {
 

@@ -24,20 +24,40 @@ export function uiTopToolbar(context) {
         structure = uiToolStructure(context),
         repeatAdd = uiToolRepeatAdd(context),
         centerZoom = uiToolCenterZoom(context),
-        deselect = uiToolSimpleButton('deselect', t('toolbar.deselect.title'), 'iD-icon-close', function() {
-            context.enter(modeBrowse(context));
-        }, null, 'Esc'),
-        cancelDrawing = uiToolSimpleButton('cancel', t('confirm.cancel'), 'iD-icon-close', function() {
-            context.enter(modeBrowse(context));
-        }, null, 'Esc', 'wide'),
-        finishDrawing = uiToolSimpleButton('finish', t('toolbar.finish'), 'iD-icon-apply', function() {
-            var mode = context.mode();
-            if (mode.finish) {
-                mode.finish();
-            } else {
+        deselect = uiToolSimpleButton({
+            id: 'deselect',
+            label: t('toolbar.deselect.title'),
+            iconName: 'iD-icon-close',
+            onClick: function() {
                 context.enter(modeBrowse(context));
-            }
-        }, null, 'Esc', 'wide');
+            },
+            tooltipKey: 'Esc'
+        }),
+        cancelDrawing = uiToolSimpleButton({
+            id: 'cancel',
+            label: t('confirm.cancel'),
+            iconName: 'iD-icon-close',
+            onClick: function() {
+                context.enter(modeBrowse(context));
+            },
+            tooltipKey: 'Esc',
+            barButtonClass: 'wide'
+        }),
+        finishDrawing = uiToolSimpleButton({
+            id: 'finish',
+            label: t('toolbar.finish'),
+            iconName: 'iD-icon-apply',
+            onClick: function() {
+                var mode = context.mode();
+                if (mode.finish) {
+                    mode.finish();
+                } else {
+                    context.enter(modeBrowse(context));
+                }
+            },
+            tooltipKey:  'Esc',
+            barButtonClass: 'wide'
+        });
 
     var supportedOperationIDs = ['circularize', 'continue', 'delete', 'disconnect', 'downgrade', 'extract', 'merge', 'orthogonalize', 'reverse', 'split', 'straighten'];
 

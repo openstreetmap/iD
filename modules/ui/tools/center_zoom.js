@@ -4,12 +4,14 @@ import { t } from '../../util/locale';
 
 export function uiToolCenterZoom(context) {
 
-    var tool = uiToolSimpleButton(
-        'center_zoom',
-        t('toolbar.center_zoom.title'),
-        'iD-icon-frame-pin', function() {
+    var tool = uiToolSimpleButton({
+        id: 'center_zoom',
+        label: t('toolbar.center_zoom.title'),
+        iconName: 'iD-icon-frame-pin',
+        onClick: function() {
             context.mode().zoomToSelected();
-        }, function() {
+        },
+        tooltipText: function() {
             var mode = context.mode();
             if (mode.id === 'select') {
                 return t('inspector.zoom_to.tooltip_feature');
@@ -21,9 +23,9 @@ export function uiToolCenterZoom(context) {
                 return t('inspector.zoom_to.tooltip_issue');
             }
         },
-        t('inspector.zoom_to.key'),
-        'wide'
-    );
+        tooltipKey: t('inspector.zoom_to.key'),
+        barButtonClass: 'wide'
+    });
 
     return tool;
 }
