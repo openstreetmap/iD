@@ -1,7 +1,7 @@
 import { dispatch as d3_dispatch } from 'd3-dispatch';
 import { select as d3_select } from 'd3-selection';
 
-import { t } from '../util/locale';
+import { t, languageName } from '../util/locale';
 import { data } from '../../data';
 import { svgIcon } from '../svg/icon';
 import { uiDisclosure } from '../ui/disclosure';
@@ -296,10 +296,14 @@ export function uiSuccess(context) {
             }
 
             if (d.languageCodes && d.languageCodes.length) {
+                var languageList = d.languageCodes.map(function(code) {
+                    return languageName(code);
+                }).join(', ');
+
                 moreEnter
                     .append('div')
                     .attr('class', 'community-languages')
-                    .text(t('success.languages', { languages: d.languageCodes.join(', ') }));
+                    .text(t('success.languages', { languages: languageList }));
             }
         }
 
