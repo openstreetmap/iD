@@ -5,6 +5,7 @@ var translations = Object.create(null);
 export var currentLocale = 'en';
 export var textDirection = 'ltr';
 export var languageNames = {};
+export var scriptNames = {};
 
 export function setLocale(val) {
     if (translations[val] !== undefined) {
@@ -81,21 +82,41 @@ export function setLanguageNames(obj) {
     languageNames = obj;
 }
 
+export function setScriptNames(obj) {
+    scriptNames = obj;
+}
+
 export function languageName(code, options) {
     if (languageNames[code]) { // name in locale langauge
+
+        // e.g. German
         return languageNames[code];
     }
     // sometimes we only want the local name
     if (options && options.localOnly) return null;
 
-    if (dataLanguages[code]) { // language info
-        if (dataLanguages[code].nativeName) { // name in native language
-            return t('translate.language_and_code', { language: dataLanguages[code].nativeName, code: code });
-        } else if (dataLanguages[code].base && dataLanguages[code].script) {
-            var base = dataLanguages[code].base;
-            if (languageNames[base]) { // base name in locale langauge
-                return t('translate.language_and_code', { language: languageNames[base], code: code });
-            } else if (dataLanguages[code] && dataLanguages[code].nativeName) {
+    var langInfo = dataLanguages[code];
+
+    if (langInfo) {
+        if (langInfo.nativeName) { // name in native language
+
+            // e.g. Deutsch (de)
+            return t('translate.language_and_code', { language: langInfo.nativeName, code: code });
+
+        } else if (langInfo.base && langInfo.script) {
+
+            var base = langInfo.base; // the code of the langauge this is based on
+
+            if (languageNames[base]) { // base language name in locale langauge
+                var scriptCode = langInfo.script;
+                var script = scriptNames[scriptCode] || scriptCode;
+
+                // e.g. Serbian (Cyrillic)
+                return t('translate.language_and_code', { language: languageNames[base], code: script });
+
+            } else if (dataLanguages[base] && dataLanguages[base].nativeName) {
+
+                // e.g. српски (sr-Cyrl)
                 return t('translate.language_and_code', { language: dataLanguages[base].nativeName, code: code });
             }
         }

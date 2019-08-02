@@ -29,6 +29,8 @@ const sourceCommunity = YAML.load(fs.readFileSync('./node_modules/osm-community-
 
 const cldrMainDir = './node_modules/cldr-localenames-full/main/';
 
+var referencedScripts = [];
+
 const languageInfo = {
     dataLanguages: getLangNamesInNativeLang()
 };
@@ -50,7 +52,7 @@ asyncMap(resources, getResource, function(err, results) {
 
     // write files and fetch language info for each locale
     var dataLocales = {
-        en: { rtl: false, languageNames: foreignLanguageNamesInLanguageOf('en') }
+        en: { rtl: false, languageNames: languageNamesInLanguageOf('en'), scriptNames: scriptNamesInLanguageOf('en') }
     };
     asyncMap(Object.keys(allStrings),
         function(code, done) {
@@ -69,8 +71,11 @@ asyncMap(resources, getResource, function(err, results) {
                     } else if (code === 'ku') {
                         rtl = false;
                     }
-                    var langTranslations = foreignLanguageNamesInLanguageOf(code);
-                    dataLocales[code] = { rtl: rtl, languageNames: langTranslations || {} };
+                    dataLocales[code] = {
+                        rtl: rtl,
+                        languageNames: languageNamesInLanguageOf(code) || {},
+                        scriptNames: scriptNamesInLanguageOf(code) || {}
+                    };
                     done();
                 });
             }
@@ -230,6 +235,8 @@ function getLangNamesInNativeLang() {
 
         var script = identity.script;
         if (script) {
+            referencedScripts.push(script);
+
             info.base = identity.language;
             info.script = script;
         }
@@ -250,7 +257,7 @@ function getLangNamesInNativeLang() {
 
 var rematchCodes = { 'ar-AA': 'ar', 'zh-CN': 'zh', 'zh-HK': 'zh-Hant-HK', 'zh-TW': 'zh', 'pt-BR': 'pt', 'pt': 'pt-PT' };
 
-function foreignLanguageNamesInLanguageOf(code) {
+function languageNamesInLanguageOf(code) {
 
     if (rematchCodes[code]) code = rematchCodes[code];
 
@@ -283,4 +290,23 @@ function foreignLanguageNamesInLanguageOf(code) {
     }
 
     return translatedLangsByCode;
+}
+
+function scriptNamesInLanguageOf(code) {
+    if (rematchCodes[code]) code = rematchCodes[code];
+
+    var languageFilePath = cldrMainDir + code + '/scripts.json';
+    if (!fs.existsSync(languageFilePath)) {
+        return null;
+    }
+    var allTranslatedScriptsByCode = JSON.parse(fs.readFileSync(languageFilePath, 'utf8')).main[code].localeDisplayNames.scripts;
+
+    var translatedScripts = {};
+    referencedScripts.forEach(function(script) {
+        if (!allTranslatedScriptsByCode[script] || script === allTranslatedScriptsByCode[script]) return;
+        
+        translatedScripts[script] = allTranslatedScriptsByCode[script];
+    });
+
+    return translatedScripts;
 }

@@ -1,4 +1,4 @@
-import { currentLocale, setTextDirection, setLanguageNames } from './locale';
+import { currentLocale, setTextDirection, setLanguageNames, setScriptNames } from './locale';
 import { dataLocales } from '../../data/index';
 import { utilStringQs } from './util';
 
@@ -105,6 +105,7 @@ export function utilDetect(force) {
     }
     setTextDirection(detected.textDirection);
     setLanguageNames((lang && lang.languageNames) || {});
+    setScriptNames((lang && lang.scriptNames) || {});
 
     // detect host
     var loc = window.top.location;
