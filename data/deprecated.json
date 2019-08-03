@@ -9,6 +9,10 @@
       "replace": {"aeroway": "jet_bridge"}
     },
     {
+      "old": {"access": "public"},
+      "replace": {"access": "yes"}
+    },
+    {
       "old": {"amenity": "advertising"},
       "replace": {"advertising": "*"}
     },

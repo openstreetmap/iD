@@ -1792,6 +1792,7 @@
     {"key": "windings:configuration", "value": "leblanc", "description": "🄵 Windings Configuration"},
     {"key": "aerialway", "value": "canopy", "description": "🄳 ➜ aerialway=zip_line"},
     {"key": "aeroway", "value": "aerobridge", "description": "🄳 ➜ aeroway=jet_bridge"},
+    {"key": "access", "value": "public", "description": "🄳 ➜ access=yes"},
     {"key": "amenity", "value": "advertising", "description": "🄳 ➜ advertising=*"},
     {"key": "amenity", "value": "artwork", "description": "🄳 ➜ tourism=artwork"},
     {"key": "amenity", "value": "bail_bonds", "description": "🄳 ➜ office=bail_bond_agent"},
