@@ -3336,6 +3336,7 @@ div.full-screen > button:hover {
     background-color: #fff;
     color: #7092ff;
     position: relative;
+    display: flex;
 }
 
 .layer-list:empty {
@@ -3366,9 +3367,8 @@ div.full-screen > button:hover {
 }
 
 .layer-list li.best > div.best {
-    display: inline-block;
     padding: 5px;
-    float: right;
+    flex: 0 0 auto;
 }
 
 [dir='rtl'] .list-item-data-browse svg {
@@ -3382,9 +3382,9 @@ div.full-screen > button:hover {
 }
 
 .layer-list label {
-    display: block;
     padding: 5px 10px;
     cursor: pointer;
+    flex: 1 1 auto;
 }
 
 [dir='ltr'] .layer-list .indented label {
@@ -3403,7 +3403,6 @@ div.full-screen > button:hover {
 
 .map-data-pane .layer-list button,
 .background-pane .layer-list button {
-    float: right;
     height: 100%;
     border-left: 1px solid #ccc;
     border-radius: 0;
@@ -3412,7 +3411,6 @@ div.full-screen > button:hover {
 }
 [dir='rtl'] .map-data-pane .layer-list button,
 [dir='rtl'] .background-pane .layer-list button {
-    float: left;
     border-left: none;
     border-right: 1px solid #ccc;
 }
@@ -3422,12 +3420,12 @@ div.full-screen > button:hover {
     opacity: 0.5;
 }
 
-.map-data-pane .layer-list button:first-of-type,
-.background-pane .layer-list button:first-of-type {
+.map-data-pane .layer-list button:last-of-type,
+.background-pane .layer-list button:last-of-type {
     border-radius: 0 3px 3px 0;
 }
-[dir='rtl'] .map-data-pane .layer-list button:first-of-type,
-[dir='rtl'] .background-pane .layer-list button:first-of-type {
+[dir='rtl'] .map-data-pane .layer-list button:last-of-type,
+[dir='rtl'] .background-pane .layer-list button:last-of-type {
     border-radius: 3px 0 0 3px;
 }
 
