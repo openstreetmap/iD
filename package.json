@@ -48,7 +48,7 @@
     "martinez-polygon-clipping": "0.5.0",
     "node-diff3": "1.0.0",
     "osm-auth": "1.0.2",
-    "pannellum": "2.5.1",
+    "pannellum": "2.4.1",
     "q": "1.5.1",
     "rbush": "2.0.2",
     "which-polygon": "2.2.0",
@@ -84,7 +84,7 @@
     "osm-community-index": "0.11.0",
     "phantomjs-prebuilt": "~2.1.11",
     "request": "^2.88.0",
-    "rollup": "~1.16.2",
+    "rollup": "~1.17.0",
     "rollup-plugin-commonjs": "^10.0.0",
     "rollup-plugin-includepaths": "~0.2.3",
     "rollup-plugin-json": "^4.0.0",
@@ -102,7 +102,10 @@
   },
   "greenkeeper": {
     "label": "chore-greenkeeper",
-    "ignore": []
+    "ignore": [
+      "pannellum",
+      "sinon"
+    ]
   },
   "engines": {
     "node": ">=8.0.0",
