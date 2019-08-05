@@ -103,7 +103,8 @@
   "greenkeeper": {
     "label": "chore-greenkeeper",
     "ignore": [
-      "pannellum"
+      "pannellum",
+      "sinon"
     ]
   },
   "engines": {
