@@ -6,6 +6,7 @@
         "supervised",
         "fee",
         "payment_multi_fee",
+        "charge_fee",
         "lit"
     ],
     "moreFields": [

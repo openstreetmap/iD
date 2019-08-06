@@ -2821,6 +2821,14 @@
                 "castle_type": {
                     "label": "Type"
                 },
+                "charge_fee": {
+                    "label": "Fee Amount",
+                    "placeholder": "€1, $5, ¥10…"
+                },
+                "charge_toll": {
+                    "label": "Toll Amount",
+                    "placeholder": "€1, $5, ¥10…"
+                },
                 "check_date": {
                     "label": "Last Checked Date"
                 },

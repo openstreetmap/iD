@@ -354,6 +354,16 @@ en:
       castle_type:
         # castle_type=*
         label: Type
+      charge_fee:
+        # charge=*
+        label: Fee Amount
+        # charge_fee field placeholder
+        placeholder: '€1, $5, ¥10…'
+      charge_toll:
+        # charge=*
+        label: Toll Amount
+        # charge_toll field placeholder
+        placeholder: '€1, $5, ¥10…'
       check_date:
         # check_date=*
         label: Last Checked Date

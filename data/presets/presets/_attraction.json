@@ -7,6 +7,7 @@
         "opening_hours"
     ],
     "moreFields": [
+        "charge_fee",
         "opening_hours",
         "fee",
         "payment_multi",

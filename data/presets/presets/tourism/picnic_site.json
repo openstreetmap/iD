@@ -8,6 +8,7 @@
         "capacity"
     ],
     "moreFields": [
+        "charge_fee",
         "internet_access",
         "internet_access/fee",
         "internet_access/ssid",

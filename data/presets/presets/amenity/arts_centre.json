@@ -8,6 +8,7 @@
         "website"
     ],
     "moreFields": [
+        "charge_fee",
         "email",
         "fax",
         "fee",

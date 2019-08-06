@@ -5,7 +5,8 @@
         "operator",
         "access_simple",
         "fee",
-        "payment_multi_fee"
+        "payment_multi_fee",
+        "charge_fee"
     ],
     "moreFields": [
         "website",
