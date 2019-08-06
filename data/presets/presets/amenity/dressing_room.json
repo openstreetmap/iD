@@ -8,6 +8,7 @@
         "building_area"
     ],
     "moreFields": [
+        "charge_fee",
         "fee",
         "opening_hours",
         "payment_multi_fee",

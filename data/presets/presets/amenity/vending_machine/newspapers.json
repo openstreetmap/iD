@@ -5,6 +5,7 @@
         "operator",
         "fee",
         "payment_multi_fee",
+        "charge_fee",
         "currency_multi"
     ],
     "geometry": [

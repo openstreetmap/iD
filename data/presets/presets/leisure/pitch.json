@@ -8,6 +8,7 @@
         "lit"
     ],
     "moreFields": [
+        "charge_fee",
         "covered",
         "fee",
         "indoor",

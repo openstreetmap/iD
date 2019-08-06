@@ -2,7 +2,8 @@
     "icon": "maki-rail",
     "fields": [
         "{attraction}",
-        "fee"
+        "fee",
+        "charge_fee"
     ],
     "geometry": [
         "point",

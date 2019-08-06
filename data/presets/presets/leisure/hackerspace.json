@@ -8,6 +8,7 @@
         "website",
         "fee",
         "payment_multi_fee",
+        "charge_fee",
         "internet_access",
         "internet_access/fee",
         "internet_access/ssid"
