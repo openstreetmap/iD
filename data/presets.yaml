@@ -1525,6 +1525,9 @@ en:
       population:
         # population=*
         label: Population
+      post:
+        # 'post:block_number=*, post:city=*, post:block_number=*, post:conscriptionnumber=*, post:county=*, post:country=*, post:county=*, post:district=*, post:floor=*, post:hamlet=*, post:housename=*, post:housenumber=*, post:neighbourhood=*, post:place=*, post:postcode=*, post:province=*, post:quarter=*, post:state=*, post:street=*, post:subdistrict=*, post:suburb=*, post:unit=*'
+        label: Delivery Address
       power:
         # power=*
         label: Type
@@ -2874,6 +2877,11 @@ en:
         name: Language School
         # 'terms: esl'
         terms: '<translate with synonyms or related terms for ''Language School'', separated by commas>'
+      amenity/letter_box:
+        # amenity=letter_box
+        name: Letter Box
+        # 'terms: curbside delivery box,home delivery box,direct-to-door delivery box,letter hole,letter plate,letter slot,letterbox,letterhole,letterplate,letterslot,mail box,mail hole,mail slot,mailbox,mailhole,mailslot,through-door delivery box'
+        terms: '<translate with synonyms or related terms for ''Letter Box'', separated by commas>'
       amenity/library:
         # amenity=library
         name: Library

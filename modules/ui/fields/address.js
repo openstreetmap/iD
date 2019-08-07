@@ -14,6 +14,8 @@ export function uiFieldAddress(field, context) {
     var wrap = d3_select(null);
     var _isInitialized = false;
     var _entity;
+    // needed for placeholder strings
+    var addrField = context.presets().field('address');
 
     function getNearStreets() {
         var extent = _entity.extent(context.graph());
@@ -159,8 +161,8 @@ export function uiFieldAddress(field, context) {
             .property('type', 'text')
             .attr('placeholder', function (d) {
                 var localkey = d.id + '!' + countryCode;
-                var tkey = field.strings.placeholders[localkey] ? localkey : d.id;
-                return field.t('placeholders.' + tkey);
+                var tkey = addrField.strings.placeholders[localkey] ? localkey : d.id;
+                return addrField.t('placeholders.' + tkey);
             })
             .attr('class', function (d) { return 'addr-' + d.id; })
             .call(utilNoAuto)
@@ -220,8 +222,8 @@ export function uiFieldAddress(field, context) {
             var tags = {};
 
             wrap.selectAll('input')
-                .each(function (field) {
-                    tags['addr:' + field.id] = this.value || undefined;
+                .each(function (subfield) {
+                    tags[field.key + ':' + subfield.id] = this.value || undefined;
                 });
 
             dispatch.call('change', this, tags, onInput);
@@ -230,8 +232,8 @@ export function uiFieldAddress(field, context) {
 
 
     function updateTags(tags) {
-        utilGetSetValue(wrap.selectAll('input'), function (field) {
-            return tags['addr:' + field.id] || '';
+        utilGetSetValue(wrap.selectAll('input'), function (subfield) {
+            return tags[field.key + ':' + subfield.id] || '';
         });
     }
 
