@@ -11,6 +11,8 @@ en:
   toolbar:
     center_zoom:
       title: Center
+      return_tooltip: Undo centering on this.
+    return: Return
     deselect:
       title: Deselect
     undo_redo: Undo / Redo

@@ -12,8 +12,10 @@
         },
         "toolbar": {
             "center_zoom": {
-                "title": "Center"
+                "title": "Center",
+                "return_tooltip": "Undo centering on this."
             },
+            "return": "Return",
             "deselect": {
                 "title": "Deselect"
             },
