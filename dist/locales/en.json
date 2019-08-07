@@ -3692,6 +3692,9 @@
                 "population": {
                     "label": "Population"
                 },
+                "post": {
+                    "label": "Delivery Address"
+                },
                 "power_supply": {
                     "label": "Power Supply"
                 },
@@ -4902,6 +4905,10 @@
                 "amenity/language_school": {
                     "name": "Language School",
                     "terms": "esl"
+                },
+                "amenity/letter_box": {
+                    "name": "Letter Box",
+                    "terms": "curbside delivery box,home delivery box,direct-to-door delivery box,letter hole,letter plate,letter slot,letterbox,letterhole,letterplate,letterslot,mail box,mail hole,mail slot,mailbox,mailhole,mailslot,through-door delivery box"
                 },
                 "amenity/library": {
                     "name": "Library",
