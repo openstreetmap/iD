@@ -102,6 +102,10 @@ export function uiToolNotes(context) {
             .merge(buttonsEnter)
             .classed('disabled', function(d) { return !enabled(d); });
     }
+    
+    tool.available = function() {
+        return notesEnabled();
+    };
 
     tool.install = function() {
 

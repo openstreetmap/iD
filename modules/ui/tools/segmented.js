@@ -29,11 +29,6 @@ export function uiToolSegemented(context) {
         // override in subclass
     };
 
-    tool.shouldShow = function() {
-        if (tool.loadItems) tool.loadItems();
-        return tool.items.length > 1;
-    };
-
     var container = d3_select(null);
 
     tool.render = function(selection) {
@@ -94,6 +89,11 @@ export function uiToolSegemented(context) {
 
         setActiveItem(tool.items[index]);
     }
+
+    tool.available = function() {
+        if (tool.loadItems) tool.loadItems();
+        return tool.items.length > 1;
+    };
 
     tool.install = function() {
         if (tool.key) {

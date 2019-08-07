@@ -6,7 +6,7 @@ import { svgIcon } from '../../svg/icon';
 import { uiTooltipHtml } from '../tooltipHtml';
 import { tooltip } from '../../util/tooltip';
 
-export function uiToolOperation() {
+export function uiToolOperation(context, operationClass) {
 
     var operation;
 
@@ -46,16 +46,26 @@ export function uiToolOperation() {
         button.classed('disabled', operation.disabled());
     };
 
-    tool.setOperation = function(op) {
+    function setOperation(op) {
         operation = op;
 
         tool.id = operation.id;
         tool.label = operation.title;
+    }
+
+    tool.available = function() {
+        var mode = context.mode();
+        if (mode.id !== 'select') return false;
+        var op = operationClass(mode.selectedIDs(), context);
+        if (op.available()) {
+            setOperation(op);
+            return true;
+        }
+        return false;
     };
 
     tool.uninstall = function() {
         button = null;
-        operation = null;
     };
 
     return tool;

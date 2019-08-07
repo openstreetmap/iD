@@ -7,23 +7,31 @@ export function uiToolSimpleButton(protoTool) {
 
     var tool = protoTool || {};
 
+    var tooltipBehavior = tooltip()
+        .placement('bottom')
+        .html(true);
+
     tool.render = function(selection) {
 
-        var tooltipBehavior = tooltip()
-            .placement('bottom')
-            .html(true)
-            .title(uiTooltipHtml(utilFunctor(tool.tooltipText)(), utilFunctor(tool.tooltipKey)()));
+        tooltipBehavior.title(uiTooltipHtml(utilFunctor(tool.tooltipText)(), utilFunctor(tool.tooltipKey)()));
 
-        selection
+        var button = selection
             .selectAll('.bar-button')
-            .data([0])
+            .data([0]);
+
+        var buttonEnter = button
             .enter()
             .append('button')
             .attr('class', 'bar-button ' + (utilFunctor(tool.barButtonClass)() || ''))
             .attr('tabindex', -1)
             .call(tooltipBehavior)
             .on('click', tool.onClick)
-            .call(svgIcon('#' + utilFunctor(tool.iconName)()));
+            .call(svgIcon('#'));
+
+        button = buttonEnter.merge(button);
+
+        button.selectAll('.icon use')
+            .attr('href', '#' + utilFunctor(tool.iconName)());
     };
 
     return tool;

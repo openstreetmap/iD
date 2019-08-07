@@ -164,5 +164,11 @@ export function uiToolStructure(context) {
         return structureNone;
     };
 
+    var parentAvailable = tool.available;
+    tool.available = function() {
+        var modeID = context.mode().id;
+        return parentAvailable() && (modeID === 'add-line' || modeID === 'draw-line');
+    };
+
     return tool;
 }

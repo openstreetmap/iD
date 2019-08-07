@@ -50,6 +50,12 @@ export function uiToolRepeatAdd(context) {
         button.classed('active', mode.repeatAddedFeature());
     }
 
+    tool.available = function() {
+        var mode = context.mode();
+        if (mode.id === 'add-point' || mode.id === 'add-line' || mode.id === 'add-area') return true;
+        return (mode.id === 'draw-line' || mode.id === 'draw-area') && !mode.isContinuing;
+    };
+
     tool.install = function() {
         context.keybinding()
             .on(key, toggleRepeat, true);

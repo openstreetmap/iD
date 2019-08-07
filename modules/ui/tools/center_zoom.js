@@ -27,5 +27,11 @@ export function uiToolCenterZoom(context) {
         barButtonClass: 'wide'
     });
 
+    tool.available = function() {
+        var modeID = context.mode().id;
+        return (modeID === 'select' && !context.mode().newFeature()) || modeID === 'select-note' ||
+            modeID === 'select-data' || modeID === 'select-error';
+    };
+
     return tool;
 }

@@ -3,16 +3,33 @@ import {
     select as d3_select
 } from 'd3-selection';
 import { t } from '../util/locale';
+import { utilFunctor } from '../util/util';
 import { modeBrowse } from '../modes/browse';
 import _debounce from 'lodash-es/debounce';
+import { operationCircularize, operationContinue, operationDelete, operationDisconnect,
+    operationDowngrade, operationExtract, operationMerge, operationOrthogonalize,
+    operationReverse, operationSplit, operationStraighten } from '../operations';
 import { uiToolAddFavorite, uiToolAddRecent, uiToolNotes, uiToolOperation, uiToolSave, uiToolAddFeature, uiToolUndoRedo } from './tools';
 import { uiToolSimpleButton } from './tools/simple_button';
 import { uiToolWaySegments } from './tools/way_segments';
 import { uiToolRepeatAdd } from './tools/repeat_add';
 import { uiToolStructure } from './tools/structure';
 import { uiToolCenterZoom } from './tools/center_zoom';
+import { uiToolStopDraw } from './tools/stop_draw';
 
 export function uiTopToolbar(context) {
+
+    var circularize = uiToolOperation(context, operationCircularize),
+        continueTool = uiToolOperation(context, operationContinue),
+        deleteTool = uiToolOperation(context, operationDelete),
+        disconnect = uiToolOperation(context, operationDisconnect),
+        downgrade = uiToolOperation(context, operationDowngrade),
+        extract = uiToolOperation(context, operationExtract),
+        merge = uiToolOperation(context, operationMerge),
+        orthogonalize = uiToolOperation(context, operationOrthogonalize),
+        reverse = uiToolOperation(context, operationReverse),
+        split = uiToolOperation(context, operationSplit),
+        straighten = uiToolOperation(context, operationStraighten);
 
     var addFeature = uiToolAddFeature(context),
         addFavorite = uiToolAddFavorite(context),
@@ -24,6 +41,7 @@ export function uiTopToolbar(context) {
         structure = uiToolStructure(context),
         repeatAdd = uiToolRepeatAdd(context),
         centerZoom = uiToolCenterZoom(context),
+        stopDraw = uiToolStopDraw(context),
         deselect = uiToolSimpleButton({
             id: 'deselect',
             label: t('toolbar.deselect.title'),
@@ -33,7 +51,7 @@ export function uiTopToolbar(context) {
             },
             tooltipKey: 'Esc'
         }),
-        cancelDrawing = uiToolSimpleButton({
+        cancelSave = uiToolSimpleButton({
             id: 'cancel',
             label: t('confirm.cancel'),
             iconName: 'iD-icon-close',
@@ -41,158 +59,97 @@ export function uiTopToolbar(context) {
                 context.enter(modeBrowse(context));
             },
             tooltipKey: 'Esc',
-            barButtonClass: 'wide'
-        }),
-        finishDrawing = uiToolSimpleButton({
-            id: 'finish',
-            label: t('toolbar.finish'),
-            iconName: 'iD-icon-apply',
-            onClick: function() {
-                var mode = context.mode();
-                if (mode.finish) {
-                    mode.finish();
-                } else {
-                    context.enter(modeBrowse(context));
-                }
-            },
-            tooltipKey:  'Esc',
-            barButtonClass: 'wide'
+            available: function() {
+                return context.mode().id === 'save';
+            }
         });
 
-    var supportedOperationIDs = ['circularize', 'continue', 'delete', 'disconnect', 'downgrade', 'extract', 'merge', 'orthogonalize', 'reverse', 'split', 'straighten'];
-
-    var operationToolsByID = {};
-
-    function notesEnabled() {
-        var noteLayer = context.layers().layer('notes');
-        return noteLayer && noteLayer.enabled();
-    }
-
-    function operationTool(operation) {
-        if (!operationToolsByID[operation.id]) {
-            // cache the tools
-            operationToolsByID[operation.id] = uiToolOperation(context);
-        }
-        var tool = operationToolsByID[operation.id];
-        tool.setOperation(operation);
-        return tool;
-    }
-
-    function toolsToShow() {
-
-        var tools = [];
+    function allowedTools() {
 
         var mode = context.mode();
-        if (!mode) return tools;
+        if (!mode) return [];
+
+        var tools;
 
         if (mode.id === 'save') {
-            tools.push(cancelDrawing);
-            tools.push('spacer');
+
+            tools = [
+                cancelSave,
+                'spacer'
+            ];
+
         } else if (mode.id === 'select' &&
             !mode.newFeature() &&
-            mode.selectedIDs().every(function(id) { return context.graph().hasEntity(id); })) {
+            mode.selectedIDs().every(function(id) {
+                return context.graph().hasEntity(id);
+            })) {
 
-            tools.push(deselect);
-            tools.push('spacer');
-            tools.push(centerZoom);
-            tools.push('spacer');
-
-            var operationTools = [];
-            var operations = mode.operations().filter(function(operation) {
-                return supportedOperationIDs.indexOf(operation.id) !== -1;
-            });
-            var deleteTool;
-            for (var i in operations) {
-                var operation = operations[i];
-                var tool = operationTool(operation);
-                if (operation.id !== 'delete' && operation.id !== 'downgrade') {
-                    operationTools.push(tool);
-                } else {
-                    deleteTool = tool;
-                }
-            }
-            tools = tools.concat(operationTools);
-            if (deleteTool) {
-                // keep the delete button apart from the others
-                if (operationTools.length > 0) {
-                    tools.push('spacer');
-                }
-                tools.push(deleteTool);
-            }
-            tools.push('spacer');
-
-            tools = tools.concat([undoRedo, save]);
+            tools = [
+                deselect,
+                'spacer',
+                centerZoom,
+                'spacer',
+                circularize,
+                continueTool,
+                disconnect,
+                extract,
+                merge,
+                orthogonalize,
+                reverse,
+                split,
+                straighten,
+                'spacer',
+                downgrade,
+                deleteTool,
+                'spacer',
+                undoRedo,
+                save
+            ];
 
         } else if (mode.id === 'add-point' || mode.id === 'add-line' || mode.id === 'add-area' ||
             mode.id === 'draw-line' || mode.id === 'draw-area') {
 
-            tools.push('spacer');
-
-            if (mode.id.indexOf('line') !== -1 && structure.shouldShow()) {
-                tools.push(structure);
-                tools.push('spacer');
-            }
-
-            if (mode.id.indexOf('line') !== -1 || mode.id.indexOf('area') !== -1) {
-                tools.push(waySegments);
-                tools.push('spacer');
-            }
-
-            if (mode.id.indexOf('draw') !== -1) {
-
-                if (!mode.isContinuing) {
-                    tools.push(repeatAdd);
-                }
-                tools.push(undoRedo);
-
-                var way = context.hasEntity(mode.wayID);
-                var wayIsDegenerate = way && new Set(way.nodes).size - 1 < (way.isArea() ? 3 : 2);
-                if (!wayIsDegenerate) {
-                    tools.push(finishDrawing);
-                } else {
-                    tools.push(cancelDrawing);
-                }
-            } else {
-
-                tools.push(repeatAdd);
-
-                tools.push(undoRedo);
-
-                if (mode.addedEntityIDs().length > 0) {
-                    tools.push(finishDrawing);
-                } else {
-                    tools.push(cancelDrawing);
-                }
-            }
+            tools = [
+                'spacer',
+                structure,
+                'spacer',
+                waySegments,
+                'spacer',
+                repeatAdd,
+                undoRedo,
+                stopDraw
+            ];
 
         } else {
 
-            tools.push('spacer');
-
-            if (mode.id === 'select-note' || mode.id === 'select-data' || mode.id === 'select-error') {
-                tools.push(centerZoom);
-                tools.push('spacer');
-            }
-
-            tools.push(addFeature);
-
-            if (context.presets().getFavorites().length > 0) {
-                tools.push(addFavorite);
-            }
-
-            if (addRecent.shouldShow()) {
-                tools.push(addRecent);
-            }
-
-            tools.push('spacer');
-
-            if (notesEnabled()) {
-                tools = tools.concat([notes, 'spacer']);
-            }
-            tools = tools.concat([undoRedo, save]);
+            tools = [
+                'spacer',
+                centerZoom,
+                'spacer',
+                addFeature,
+                addFavorite,
+                addRecent,
+                'spacer',
+                notes,
+                'spacer',
+                undoRedo,
+                save
+            ];
         }
 
-        return tools;
+        tools = tools.filter(function(tool) {
+            return !tool.available || tool.available();
+        });
+
+        var deduplicatedTools = [];
+        // remove adjacent duplicates (i.e. spacers)
+        tools.forEach(function(tool) {
+            if (!deduplicatedTools.length || deduplicatedTools[deduplicatedTools.length - 1] !== tool) {
+                deduplicatedTools.push(tool);
+            }
+        });
+
+        return deduplicatedTools;
     }
 
     function topToolbar(bar) {
@@ -217,7 +174,7 @@ export function uiTopToolbar(context) {
 
         function update() {
 
-            var tools = toolsToShow();
+            var tools = allowedTools();
 
             var toolbarItems = bar.selectAll('.toolbar-item')
                 .data(tools, function(d) {
@@ -258,14 +215,16 @@ export function uiTopToolbar(context) {
 
             actionableItems
                 .append('div')
-                .attr('class', 'item-label')
-                .text(function(d) {
-                    return d.label;
-                });
+                .attr('class', 'item-label');
 
-            toolbarItems.merge(itemsEnter)
+            toolbarItems = toolbarItems.merge(itemsEnter)
                 .each(function(d){
                     if (d.render) d3_select(this).select('.item-content').call(d.render, bar);
+                });
+
+            toolbarItems.selectAll('.item-label')
+                .text(function(d) {
+                    return utilFunctor(d.label)();
                 });
         }
 

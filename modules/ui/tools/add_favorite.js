@@ -252,6 +252,10 @@ export function uiToolAddFavorite(context) {
             .classed('disabled', function(d) { return !enabled(d); });
     }
 
+    tool.available = function() {
+        return context.presets().getFavorites().length > 0;
+    };
+
     tool.install = function() {
         context
             .on('enter.editor.favorite', function(entered) {

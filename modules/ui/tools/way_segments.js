@@ -31,5 +31,10 @@ export function uiToolWaySegments(context) {
         return tool.items.filter(function(d) { return d.id === id; })[0];
     };
 
+    tool.available = function() {
+        var mode = context.mode();
+        return mode.id.indexOf('line') !== -1 || mode.id.indexOf('area') !== -1;
+    };
+
     return tool;
 }

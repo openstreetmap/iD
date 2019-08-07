@@ -76,10 +76,6 @@ export function uiToolAddRecent(context) {
         return items;
     }
 
-    tool.shouldShow = function() {
-        return recentsToDraw().length > 0;
-    };
-
     var selection = d3_select(null);
     tool.render = function(sel) {
         selection = sel;
@@ -291,6 +287,10 @@ export function uiToolAddRecent(context) {
             .merge(buttonsEnter)
             .classed('disabled', function(d) { return !enabled(d); });
     }
+
+    tool.available = function() {
+        return recentsToDraw().length > 0;
+    };
 
     tool.install = function() {
         context
