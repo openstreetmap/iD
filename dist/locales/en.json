@@ -2825,11 +2825,11 @@
                 },
                 "charge_fee": {
                     "label": "Fee Amount",
-                    "placeholder": "€1, $5, ¥10…"
+                    "placeholder": "1 EUR, 5 USD, 10 JPY…"
                 },
                 "charge_toll": {
                     "label": "Toll Amount",
-                    "placeholder": "€1, $5, ¥10…"
+                    "placeholder": "1 EUR, 5 USD, 10 JPY…"
                 },
                 "check_date": {
                     "label": "Last Checked Date"

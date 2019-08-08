@@ -358,12 +358,12 @@ en:
         # charge=*
         label: Fee Amount
         # charge_fee field placeholder
-        placeholder: '€1, $5, ¥10…'
+        placeholder: '1 EUR, 5 USD, 10 JPY…'
       charge_toll:
         # charge=*
         label: Toll Amount
         # charge_toll field placeholder
-        placeholder: '€1, $5, ¥10…'
+        placeholder: '1 EUR, 5 USD, 10 JPY…'
       check_date:
         # check_date=*
         label: Last Checked Date

@@ -2,7 +2,7 @@
     "key": "charge",
     "type": "text",
     "label": "Toll Amount",
-    "placeholder": "€1, $5, ¥10…",
+    "placeholder": "1 EUR, 5 USD, 10 JPY…",
     "prerequisiteTag": {
         "key": "toll",
         "valueNot": "no"
