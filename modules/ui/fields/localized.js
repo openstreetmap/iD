@@ -1,14 +1,15 @@
 import { dispatch as d3_dispatch } from 'd3-dispatch';
 import { select as d3_select, event as d3_event } from 'd3-selection';
 
-import { t, languageName } from '../../util/locale';
+import { currentLocale, t, languageName } from '../../util/locale';
 import { dataLanguages } from '../../../data';
+import { dataTerritoryLanguages } from '../../../data';
 import { services } from '../../services';
 import { svgIcon } from '../../svg';
 import { tooltip } from '../../util/tooltip';
 import { uiCombobox } from '../combobox';
 import { utilDetect } from '../../util/detect';
-import { utilEditDistance, utilGetSetValue, utilNoAuto, utilRebind } from '../../util';
+import { utilArrayUniq, utilEditDistance, utilGetSetValue, utilNoAuto, utilRebind } from '../../util';
 
 var languagesArray = [];
 function loadLanguagesArray() {
@@ -30,6 +31,7 @@ export function uiFieldLocalized(field, context) {
     var wikipedia = services.wikipedia;
     var input = d3_select(null);
     var localizedInputs = d3_select(null);
+    var _countryCode;
 
     var allSuggestions = context.presets().collection.filter(function(p) {
         return p.suggestion === true;
@@ -396,7 +398,23 @@ export function uiFieldLocalized(field, context) {
     function fetchLanguages(value, cb) {
         var v = value.toLowerCase();
 
-        cb(languagesArray.filter(function(d) {
+        // show the user's language first
+        var langCodes = [currentLocale, currentLocale.split('-')[0]];
+
+        if (_countryCode && dataTerritoryLanguages[_countryCode]) {
+            langCodes = langCodes.concat(dataTerritoryLanguages[_countryCode]);
+        }
+
+        var langItems = [];
+        langCodes.forEach(function(code) {
+            var langItem = languagesArray.find(function(item) {
+                return item.code === code;
+            });
+            if (langItem) langItems.push(langItem);
+        });
+        langItems = utilArrayUniq(langItems.concat(languagesArray));
+
+        cb(langItems.filter(function(d) {
             return d.label.toLowerCase().indexOf(v) >= 0 ||
                 (d.localName && d.localName.toLowerCase().indexOf(v) >= 0) ||
                 (d.nativeName && d.nativeName.toLowerCase().indexOf(v) >= 0) ||
@@ -540,8 +558,18 @@ export function uiFieldLocalized(field, context) {
         if (!arguments.length) return _entity;
         _entity = val;
         _multilingual = [];
+        loadCountryCode();
         return localized;
     };
+
+    function loadCountryCode() {
+        var center = _entity.extent(context.graph()).center();
+        services.geocoder.countryCode(center, function(err, result) {
+            if (!err && result) {
+                _countryCode = result;
+            }
+        });
+    }
 
     return utilRebind(localized, dispatch, 'on');
 }

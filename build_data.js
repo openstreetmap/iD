@@ -81,6 +81,7 @@ module.exports = function buildData() {
             'data/presets/presets.json',
             'data/presets.yaml',
             'data/taginfo.json',
+            'data/territory-languages.json',
             'dist/locales/en.json',
             'svg/fontawesome/*.svg',
         ]);
@@ -93,6 +94,7 @@ module.exports = function buildData() {
         var defaults = read('data/presets/defaults.json');
         var translations = generateTranslations(fields, presets, tstrings);
         var taginfo = generateTaginfo(presets, fields);
+        var territoryLanguages = generateTerritoryLanguages();
 
         // Additional consistency checks
         validateCategoryPresets(categories, presets);
@@ -124,6 +126,10 @@ module.exports = function buildData() {
             writeFileProm(
                 'data/taginfo.json',
                 prettyStringify(taginfo, { maxLength: 9999 })
+            ),
+            writeFileProm(
+                'data/territory-languages.json',
+                prettyStringify({ dataTerritoryLanguages: territoryLanguages }, { maxLength: 9999 })
             ),
             writeEnJson(tstrings),
             writeFaIcons(faIcons),
@@ -607,6 +613,23 @@ function generateTaginfo(presets, fields) {
     }
 
     return taginfo;
+}
+
+function generateTerritoryLanguages() {
+    var allRawInfo = read('./node_modules/cldr-core/supplemental/territoryInfo.json').supplemental.territoryInfo;
+    var territoryLanguages = {};
+    Object.keys(allRawInfo).forEach(function(territoryCode) {
+        var territoryLangInfo = allRawInfo[territoryCode].languagePopulation;
+        if (!territoryLangInfo) return;
+        var langCodes = Object.keys(territoryLangInfo);
+        territoryLanguages[territoryCode.toLowerCase()] = langCodes.sort(function(langCode1, langCode2) {
+            return parseFloat(territoryLangInfo[langCode2]._populationPercent) -
+                   parseFloat(territoryLangInfo[langCode1]._populationPercent);
+        }).map(function(langCode) {
+            return langCode.replace('_', '-');
+        });
+    });
+    return territoryLanguages;
 }
 
 function validateCategoryPresets(categories, presets) {
