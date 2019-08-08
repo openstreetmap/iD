@@ -17,7 +17,7 @@ module.exports = function buildSrc() {
 
         // Start clean
         shell.rm('-f', [
-            'docs/statistics.html',
+            //'docs/statistics.html',
             'dist/iD.js',
             'dist/iD.js.map'
         ]);
@@ -43,10 +43,11 @@ module.exports = function buildSrc() {
                     }),
                     commonjs(),
                     json({ indent: '' }),
-                    visualizer({
-                        filename: 'docs/statistics.html',
-                        sourcemap: true
-                    })
+                    // viz causes src build to take about 3x longer; skip
+                    // visualizer({
+                    //     filename: 'docs/statistics.html',
+                    //     sourcemap: true
+                    // })
                 ]
             })
             .then(function (bundle) {
