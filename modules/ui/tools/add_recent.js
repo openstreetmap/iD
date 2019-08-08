@@ -45,7 +45,7 @@ export function uiToolAddRecent(context) {
 
     function recentsToDraw() {
         var maxShown = 10;
-        var maxRecents = 10;
+        var maxRecents = 5;
 
         var favorites = context.presets().getFavorites().slice(0, maxShown);
 
