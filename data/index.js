@@ -7,6 +7,7 @@ export { dataLanguages } from './languages.json';
 export { dataLocales } from './locales.json';
 export { dataPhoneFormats } from './phone-formats.json';
 export { dataShortcuts } from './shortcuts.json';
+export { dataTerritoryLanguages } from './territory-languages.json';
 
 export { default as dataImperial } from './imperial.json';
 export { default as dataMPH } from './mph.json';
