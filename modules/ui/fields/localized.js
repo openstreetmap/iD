@@ -66,7 +66,7 @@ export function uiFieldLocalized(field, context) {
         }
 
         var hasOriginalName = (latest.tags.name && latest.tags.name === _entity.tags.name);
-        var hasWikidata = latest.tags.wikidata;
+        var hasWikidata = latest.tags.wikidata || latest.tags['name:etymology:wikidata'];
         var preset = context.presets().match(latest, context.graph());
         var isSuggestion = preset && preset.suggestion;
         var showsBrand = preset && preset.fields

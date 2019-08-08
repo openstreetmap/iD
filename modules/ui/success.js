@@ -83,7 +83,9 @@ export function uiSuccess(context) {
 
         summaryDetail
             .append('div')
-            .text(t('success.changeset_id', { changeset_id: _changeset.id }));
+            .html(t('success.changeset_id', {
+                changeset_id: '<a href="' + changesetURL + '" target="_blank">' + _changeset.id + '</a>'
+            }));
 
 
         // Gather community polygon IDs intersecting the map..
