@@ -3355,6 +3355,11 @@ en:
         # amenity=vending_machine
         name: Vending Machine
         terms: '<translate with synonyms or related terms for ''Vending Machine'', separated by commas>'
+      amenity/vending_machine/bottle_return:
+        # 'amenity=vending_machine, vending=bottle_return'
+        name: Bottle Return Machine
+        # 'terms: bottle return'
+        terms: '<translate with synonyms or related terms for ''Bottle Return Machine'', separated by commas>'
       amenity/vending_machine/cigarettes:
         # 'amenity=vending_machine, vending=cigarettes'
         name: Cigarette Vending Machine

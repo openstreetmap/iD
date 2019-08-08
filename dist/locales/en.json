@@ -5400,6 +5400,10 @@
                     "name": "Vending Machine",
                     "terms": ""
                 },
+                "amenity/vending_machine/bottle_return": {
+                    "name": "Bottle Return Machine",
+                    "terms": "bottle return"
+                },
                 "amenity/vending_machine/cigarettes": {
                     "name": "Cigarette Vending Machine",
                     "terms": "cigarette"
