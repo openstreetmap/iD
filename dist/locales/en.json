@@ -1907,6 +1907,9 @@
                 "connect_features": {
                     "title": "Connect the features"
                 },
+                "connect_using_ford": {
+                    "title": "Connect using a ford"
+                },
                 "continue_from_start": {
                     "title": "Continue drawing from start"
                 },
