@@ -28,10 +28,14 @@ export function uiCombobox(context, klass) {
 
     var _fetcher = function(val, cb) {
         cb(_data.filter(function(d) {
-            return d.value
-                .toString()
-                .toLowerCase()
-                .indexOf(val.toLowerCase()) !== -1;
+            var terms = d.terms || [];
+            terms.push(d.value);
+            return terms.some(function(term) {
+                return term
+                    .toString()
+                    .toLowerCase()
+                    .indexOf(val.toLowerCase()) !== -1;
+            });
         }));
     };
 

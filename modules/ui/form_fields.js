@@ -57,7 +57,8 @@ export function uiFormFields(context) {
             return {
                 title: label,
                 value: label,
-                field: field
+                field: field,
+                terms: field.terms().concat(field.key)
             };
         });
 

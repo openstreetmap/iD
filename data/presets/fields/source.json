@@ -12,5 +12,8 @@
         "gps",
         "aerial imagery",
         "streetlevel imagery"
+    ],
+    "terms": [
+        "reference"
     ]
 }

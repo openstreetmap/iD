@@ -74,6 +74,9 @@ module.exports = function buildData() {
             'tnp-2009642': {} // car in tunnel
         };
 
+        // all fields searchable under "add field"
+        var searchableFieldIDs = {};
+
         // Start clean
         shell.rm('-f', [
             'data/presets/categories.json',
@@ -89,10 +92,10 @@ module.exports = function buildData() {
         var groups = generateGroups(tstrings);
 
         var categories = generateCategories(tstrings, faIcons, tnpIcons);
-        var fields = generateFields(tstrings, faIcons);
-        var presets = generatePresets(tstrings, faIcons, tnpIcons);
+        var fields = generateFields(tstrings, faIcons, tnpIcons, searchableFieldIDs);
+        var presets = generatePresets(tstrings, faIcons, tnpIcons, searchableFieldIDs);
         var defaults = read('data/presets/defaults.json');
-        var translations = generateTranslations(fields, presets, tstrings);
+        var translations = generateTranslations(fields, presets, tstrings, searchableFieldIDs);
         var taginfo = generateTaginfo(presets, fields);
         var territoryLanguages = generateTerritoryLanguages();
 
@@ -191,7 +194,7 @@ function generateCategories(tstrings, faIcons, tnpIcons) {
 }
 
 
-function generateFields(tstrings, faIcons, tnpIcons) {
+function generateFields(tstrings, faIcons, tnpIcons, searchableFieldIDs) {
     var fields = {};
     glob.sync(__dirname + '/data/presets/fields/**/*.json').forEach(function(file) {
         var field = read(file);
@@ -200,8 +203,13 @@ function generateFields(tstrings, faIcons, tnpIcons) {
         validate(file, field, fieldSchema);
 
         var t = tstrings.fields[id] = {
-            label: field.label
+            label: field.label,
+            terms: (field.terms || []).join(',')
         };
+
+        if (field.universal) {
+            searchableFieldIDs[id] = true;
+        }
 
         if (field.placeholder) {
             t.placeholder = field.placeholder;
@@ -366,7 +374,7 @@ function stripLeadingUnderscores(str) {
 }
 
 
-function generatePresets(tstrings, faIcons, tnpIcons) {
+function generatePresets(tstrings, faIcons, tnpIcons, searchableFieldIDs) {
     var presets = {};
 
     glob.sync(__dirname + '/data/presets/presets/**/*.json').forEach(function(file) {
@@ -379,6 +387,12 @@ function generatePresets(tstrings, faIcons, tnpIcons) {
             name: preset.name,
             terms: (preset.terms || []).join(',')
         };
+
+        if (preset.moreFields) {
+            preset.moreFields.forEach(function(fieldID) {
+                searchableFieldIDs[fieldID] = true;
+            });
+        }
 
         presets[id] = preset;
 
@@ -397,7 +411,7 @@ function generatePresets(tstrings, faIcons, tnpIcons) {
 }
 
 
-function generateTranslations(fields, presets, tstrings) {
+function generateTranslations(fields, presets, tstrings, searchableFieldIDs) {
     var translations = JSON.parse(JSON.stringify(tstrings));  // deep clone
 
     Object.keys(translations.fields).forEach(function(id) {
@@ -424,6 +438,15 @@ function generateTranslations(fields, presets, tstrings) {
 
         if (f.placeholder) {
             field['placeholder#'] = id + ' field placeholder';
+        }
+
+        if (searchableFieldIDs[id]) {
+            if (f.terms && f.terms.length) {
+                field['terms#'] = 'terms: ' + f.terms.join();
+            }
+            field.terms = '<translate with synonyms or related terms for \'' + field.label + '\', separated by commas>';
+        } else {
+            delete field.terms;
         }
     });
 

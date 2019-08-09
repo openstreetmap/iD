@@ -1,5 +1,8 @@
 {
     "key": "seamark:type",
     "type": "combo",
-    "label": "Seamark"
+    "label": "Seamark",
+    "terms": [
+        "marine"
+    ]
 }

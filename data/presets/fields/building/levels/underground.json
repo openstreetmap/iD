@@ -3,5 +3,8 @@
     "type": "number",
     "minValue": 0,
     "label": "Underground Levels",
-    "placeholder": "2, 4, 6..."
+    "placeholder": "2, 4, 6...",
+    "terms": [
+        "basement levels"
+    ]
 }

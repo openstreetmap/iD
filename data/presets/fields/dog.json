@@ -8,5 +8,9 @@
             "leashed": "Leashed Only",
             "no": "Not Allowed"
         }
-    }
+    },
+    "terms": [
+        "animals",
+        "pets"
+    ]
 }

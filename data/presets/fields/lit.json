@@ -1,5 +1,9 @@
 {
     "key": "lit",
     "type": "check",
-    "label": "Lit"
+    "label": "Lit",
+    "terms": [
+        "lamp",
+        "lighting"
+    ]
 }

@@ -61,5 +61,8 @@
           "suburb!jp": "Ward",
           "unit": "Unit"
         }
-    }
+    },
+    "terms": [
+        "location"
+    ]
 }
