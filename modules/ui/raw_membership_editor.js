@@ -110,7 +110,7 @@ export function uiRawMembershipEditor(context) {
             var entityName = utilDisplayName(entity) || '';
 
             var value = presetName + ' ' + entityName;
-            if (q && value.toLowerCase().indexOf(q.toLowerCase()) === -1) return;
+            if (q && (value + ' ' + entity.id).toLowerCase().indexOf(q.toLowerCase()) === -1) return;
 
             result.push({ relation: entity, value: value });
         });
