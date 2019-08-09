@@ -3,5 +3,11 @@
     "type": "url",
     "icon": "website",
     "placeholder": "https://example.com",
-    "label": "Website"
+    "label": "Website",
+    "terms": [
+        "internet presence",
+        "uri",
+        "url",
+        "webpage"
+    ]
 }

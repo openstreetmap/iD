@@ -151,6 +151,13 @@
                 },
                 "additionalProperties": false
             }
+        },
+        "terms": {
+            "description": "English synonyms or related search terms",
+            "type": "array",
+            "items": {
+                "type": "string"
+            }
         }
     },
     "additionalProperties": false

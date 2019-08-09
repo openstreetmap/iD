@@ -5,5 +5,8 @@
     "prerequisiteTag": {
         "key": "internet_access",
         "valueNot": "no"
-    }
+    },
+    "terms": [
+        "wifi fee"
+    ]
 }

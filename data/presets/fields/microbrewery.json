@@ -1,5 +1,9 @@
 {
     "key": "microbrewery",
     "type": "check",
-    "label": "Microbrewery"
+    "label": "Microbrewery",
+    "terms": [
+        "brewpub",
+        "craft beer"
+    ]
 }

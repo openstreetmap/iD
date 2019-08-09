@@ -30,5 +30,12 @@ export function presetField(id, field) {
     };
 
 
+    field.originalTerms = (field.terms || []).join();
+
+    field.terms = function() {
+        return field.t('terms', { 'default': field.originalTerms }).toLowerCase().trim().split(/\s*,+\s*/);
+    };
+
+
     return field;
 }

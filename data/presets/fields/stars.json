@@ -1,5 +1,8 @@
 {
     "key": "stars",
     "type": "combo",
-    "label": "Stars"
+    "label": "Stars",
+    "terms": [
+        "rating"
+    ]
 }

@@ -1,5 +1,17 @@
 {
     "key": "diet:",
     "type": "multiCombo",
-    "label": "Diet Types"
+    "label": "Diet Types",
+    "terms": [
+        "gluten free",
+        "fruitarian",
+        "halal",
+        "kosher",
+        "lactose free",
+        "meat",
+        "pescatarian",
+        "raw",
+        "vegan",
+        "vegetarian"
+    ]
 }
