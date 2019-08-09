@@ -99,35 +99,52 @@ export function uiRawMembershipEditor(context) {
 
     function fetchNearbyRelations(q, callback) {
         var newRelation = { relation: null, value: t('inspector.new_relation') };
+
         var result = [];
+
         var graph = context.graph();
 
-        context.intersects(context.extent()).forEach(function(entity) {
-            if (entity.type !== 'relation' || entity.id === _entityID) return;
-
+        function baseDisplayLabel(entity) {
             var matched = context.presets().match(entity, graph);
             var presetName = (matched && matched.name()) || t('inspector.relation');
             var entityName = utilDisplayName(entity) || '';
 
-            var value = presetName + ' ' + entityName;
-            if (q && value.toLowerCase().indexOf(q.toLowerCase()) === -1) return;
+            return presetName + ' ' + entityName;
+        }
 
-            result.push({ relation: entity, value: value });
-        });
+        var explicitRelation = q && context.hasEntity(q.toLowerCase());
+        if (explicitRelation && explicitRelation.type === 'relation' && explicitRelation.id !== _entityID) {
+            // loaded relation is specified explicitly, only show that
 
-        result.sort(function(a, b) {
-            return osmRelation.creationOrder(a.relation, b.relation);
-        });
-
-        // Dedupe identical names by appending relation id - see #2891
-        var dupeGroups = Object.values(utilArrayGroupBy(result, 'value'))
-            .filter(function(v) { return v.length > 1; });
-
-        dupeGroups.forEach(function(group) {
-            group.forEach(function(obj) {
-                obj.value += ' ' + obj.relation.id;
+            result.push({
+                relation: explicitRelation,
+                value: baseDisplayLabel(explicitRelation) + ' ' + explicitRelation.id
             });
-        });
+        } else {
+
+            context.intersects(context.extent()).forEach(function(entity) {
+                if (entity.type !== 'relation' || entity.id === _entityID) return;
+
+                var value = baseDisplayLabel(entity);
+                if (q && (value + ' ' + entity.id).toLowerCase().indexOf(q.toLowerCase()) === -1) return;
+
+                result.push({ relation: entity, value: value });
+            });
+
+            result.sort(function(a, b) {
+                return osmRelation.creationOrder(a.relation, b.relation);
+            });
+
+            // Dedupe identical names by appending relation id - see #2891
+            var dupeGroups = Object.values(utilArrayGroupBy(result, 'value'))
+                .filter(function(v) { return v.length > 1; });
+
+            dupeGroups.forEach(function(group) {
+                group.forEach(function(obj) {
+                    obj.value += ' ' + obj.relation.id;
+                });
+            });
+        }
 
         result.forEach(function(obj) {
             obj.title = obj.value;
