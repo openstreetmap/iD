@@ -6,7 +6,7 @@ const json = require('rollup-plugin-json');
 const nodeResolve = require('rollup-plugin-node-resolve');
 const rollup = require('rollup');
 const shell = require('shelljs');
-const visualizer = require('rollup-plugin-visualizer');
+//const visualizer = require('rollup-plugin-visualizer');
 
 
 module.exports = function buildSrc() {
