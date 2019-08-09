@@ -129,13 +129,17 @@ export function uiAssistant(context) {
 
     function drawPanel(panel) {
 
-        var isCollapsible = !panel.prominent && (panel.renderBody || panel.message);
+        var hasBody = panel.renderBody || panel.message;
+
+        var isCollapsible = !panel.prominent && hasBody;
 
         container.attr('class',
             'assistant ' +
             (panel.theme || 'dark') +
             ' ' +
             (panel.prominent ? 'prominent' : '') +
+            ' ' +
+            (hasBody ? 'has-body' : '') +
             ' ' +
             (isCollapsible && !isBodyOpen ? 'body-collapsed' : '')
         );

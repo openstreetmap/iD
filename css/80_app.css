@@ -1057,7 +1057,7 @@ a.hide-toggle {
     border-top-left-radius: inherit;
     border-top-right-radius: inherit;
 }
-.assistant.light:not(.body-collapsed):not(.prominent) .assistant-header{
+.assistant.light:not(.body-collapsed) .assistant-header {
     background: #fff;
 }
 .assistant .icon-col {
@@ -1190,8 +1190,15 @@ a.hide-toggle {
     display: none;
 }
 /* prominent assistant */
-.assistant.prominent .assistant-header .body-col {
-    padding-bottom: 16px;
+.assistant.prominent .assistant-header {
+    padding-bottom: 5px;
+    padding-top: 5px;
+}
+.assistant.light.prominent:not(.has-body) {
+    background: rgba(255, 255, 255, 0.97);
+}
+.assistant.light.prominent:not(.has-body) .assistant-header {
+    background: transparent;
 }
 .assistant.prominent .icon-col {
     min-width: 60px;
