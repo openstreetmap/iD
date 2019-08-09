@@ -20,6 +20,7 @@
         "maxheight",
         "maxspeed/advisory",
         "maxweight_bridge",
+        "not/name",
         "smoothness",
         "trolley_wire"
     ],

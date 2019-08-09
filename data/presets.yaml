@@ -1352,6 +1352,11 @@ en:
       network_road:
         # network=*
         label: Network
+      not/name:
+        # 'not:name=*'
+        label: Incorrect Names
+        # 'terms: common mistake names,wrong names'
+        terms: '<translate with synonyms or related terms for ''Incorrect Names'', separated by commas>'
       note:
         # note=*
         label: Note

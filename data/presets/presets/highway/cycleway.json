@@ -15,6 +15,7 @@
         "lit",
         "maxspeed",
         "maxweight_bridge",
+        "not/name",
         "smoothness",
         "wheelchair"
     ],
