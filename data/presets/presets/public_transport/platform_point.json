@@ -27,5 +27,5 @@
         "transportation"
     ],
     "name": "Transit Stop / Platform",
-    "matchScore": 0.2
+    "matchScore": 0.6
 }
