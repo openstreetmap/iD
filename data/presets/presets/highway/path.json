@@ -9,19 +9,21 @@
         "incline"
     ],
     "moreFields": [
-        "wheelchair",
+        "covered",
+        "dog",
+        "horse_scale",
         "lit",
-        "smoothness",
-        "trail_visibility",
-        "sac_scale",
         "maxweight_bridge",
         "mtb/scale",
         "mtb/scale/uphill",
         "mtb/scale/imba",
-        "horse_scale",
-        "covered",
+        "not/name",
         "ref",
-        "dog"
+        "sac_scale",
+        "smoothness",
+        "stroller",
+        "trail_visibility",
+        "wheelchair"
     ],
     "geometry": [
         "line"

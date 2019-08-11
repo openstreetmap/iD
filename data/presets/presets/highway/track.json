@@ -17,7 +17,9 @@
         "maxweight_bridge",
         "mtb/scale",
         "mtb/scale/uphill",
-        "mtb/scale/imba"
+        "mtb/scale/imba",
+        "stroller",
+        "wheelchair"
     ],
     "geometry": [
         "line"

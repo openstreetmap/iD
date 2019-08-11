@@ -2885,6 +2885,10 @@
                     "label": "Type",
                     "terms": ""
                 },
+                "changing_table": {
+                    "label": "Diaper Changing Table",
+                    "terms": ""
+                },
                 "charge_fee": {
                     "label": "Fee Amount",
                     "terms": "",
@@ -3099,10 +3103,6 @@
                     "label": "Diameter",
                     "terms": "",
                     "placeholder": "5 mm, 10 cm, 15 in…"
-                },
-                "diaper": {
-                    "label": "Diaper Changing Available",
-                    "terms": ""
                 },
                 "diet_multi": {
                     "label": "Diet Types",
@@ -3839,6 +3839,10 @@
                     "label": "Network",
                     "terms": ""
                 },
+                "not/name": {
+                    "label": "Incorrect Names",
+                    "terms": "common mistake names,wrong names"
+                },
                 "note": {
                     "label": "Note",
                     "terms": "comment"
@@ -4539,6 +4543,10 @@
                 "street_cabinet": {
                     "label": "Type",
                     "terms": ""
+                },
+                "stroller": {
+                    "label": "Stroller Access",
+                    "terms": "baby carriage,perambulator,pram,pushchair"
                 },
                 "structure_waterway": {
                     "label": "Structure",

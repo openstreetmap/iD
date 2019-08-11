@@ -10,7 +10,8 @@
     "moreFields": [
         "covered",
         "indoor",
-        "maxheight"
+        "maxheight",
+        "stroller"
     ],
     "geometry": [
         "line"

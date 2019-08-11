@@ -21,6 +21,7 @@
         "maxheight",
         "maxspeed/advisory",
         "maxweight_bridge",
+        "not/name",
         "oneway/bicycle",
         "smoothness",
         "toll",

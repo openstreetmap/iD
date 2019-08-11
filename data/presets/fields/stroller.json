@@ -1,0 +1,16 @@
+{
+    "key": "stroller",
+    "type": "check",
+    "options": [
+        "yes",
+        "limited",
+        "no"
+    ],
+    "label": "Stroller Access",
+    "terms": [
+        "baby carriage",
+        "perambulator",
+        "pram",
+        "pushchair"
+    ]
+}
