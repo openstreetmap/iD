@@ -4430,6 +4430,10 @@
                     "label": "Type",
                     "terms": ""
                 },
+                "stroller": {
+                    "label": "Stroller Access",
+                    "terms": "baby carriage,perambulator,pram,pushchair"
+                },
                 "structure_waterway": {
                     "label": "Structure",
                     "terms": "",

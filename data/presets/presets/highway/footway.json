@@ -15,6 +15,7 @@
         "maxweight_bridge",
         "not/name",
         "smoothness",
+        "stroller",
         "wheelchair"
     ],
     "geometry": [

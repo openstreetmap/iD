@@ -2112,6 +2112,11 @@ en:
       street_cabinet:
         # street_cabinet=*
         label: Type
+      stroller:
+        # stroller=*
+        label: Stroller Access
+        # 'terms: baby carriage,perambulator,pram,pushchair'
+        terms: '<translate with synonyms or related terms for ''Stroller Access'', separated by commas>'
       structure:
         # 'bridge=*, tunnel=*, embankment=*, cutting=*, ford=*'
         label: Structure

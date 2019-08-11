@@ -1712,6 +1712,7 @@
     {"key": "stop", "value": "all", "description": "🄵 Stop Type"},
     {"key": "stop", "value": "minor", "description": "🄵 Stop Type"},
     {"key": "street_cabinet", "description": "🄵 Type"},
+    {"key": "stroller", "description": "🄵 Stroller Access"},
     {"key": "tunnel", "description": "🄵 Structure, 🄵 Type"},
     {"key": "studio", "description": "🄵 Type"},
     {"key": "substance", "description": "🄵 Substance"},
