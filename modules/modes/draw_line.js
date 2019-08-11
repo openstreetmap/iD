@@ -2,8 +2,13 @@ import { t } from '../util/locale';
 import { behaviorDrawWay } from '../behavior/draw_way';
 import { modeSelect } from './select';
 import { utilDisplayLabel } from '../util';
+import { modeAddLine } from '../modes';
 
 export function modeDrawLine(context, wayID, startGraph, baselineGraph, button, affix, addMode) {
+    if (addMode === true) {
+        addMode = modeAddLine(context, {});
+    }
+
     var mode = {
         button: button,
         id: 'draw-line',
