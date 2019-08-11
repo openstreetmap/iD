@@ -265,6 +265,22 @@
       "replace": {"kerb": "$1"}
     },
     {
+      "old": {"diaper": "1"},
+      "replace": {"changing_table": "yes", "changing_table:count": "1"}
+    },
+    {
+      "old": {"diaper": "no"},
+      "replace": {"changing_table": "no"}
+    },
+    {
+      "old": {"diaper": "room"},
+      "replace": {"changing_table": "yes", "changing_table:location": "room"}
+    },
+    {
+      "old": {"diaper": "yes"},
+      "replace": {"changing_table": "yes"}
+    },
+    {
       "old": {"drinkable": "*"},
       "replace": {"drinking_water": "$1"}
     },

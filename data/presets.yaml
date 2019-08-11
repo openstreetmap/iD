@@ -378,6 +378,9 @@ en:
       castle_type:
         # castle_type=*
         label: Type
+      changing_table:
+        # changing_table=*
+        label: Diaper Changing Table
       charge_fee:
         # charge=*
         label: Fee Amount
@@ -581,9 +584,6 @@ en:
         label: Diameter
         # diameter field placeholder
         placeholder: '5 mm, 10 cm, 15 in…'
-      diaper:
-        # diaper=*
-        label: Diaper Changing Available
       diet_multi:
         # 'diet:=*'
         label: Diet Types

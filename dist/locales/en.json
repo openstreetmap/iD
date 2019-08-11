@@ -2771,6 +2771,10 @@
                     "label": "Type",
                     "terms": ""
                 },
+                "changing_table": {
+                    "label": "Diaper Changing Table",
+                    "terms": ""
+                },
                 "charge_fee": {
                     "label": "Fee Amount",
                     "terms": "",
@@ -2985,10 +2989,6 @@
                     "label": "Diameter",
                     "terms": "",
                     "placeholder": "5 mm, 10 cm, 15 in…"
-                },
-                "diaper": {
-                    "label": "Diaper Changing Available",
-                    "terms": ""
                 },
                 "diet_multi": {
                     "label": "Diet Types",
