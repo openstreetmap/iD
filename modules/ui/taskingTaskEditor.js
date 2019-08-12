@@ -7,7 +7,7 @@ import { uiTaskingTaskDetails } from './taskingTaskDetails';
 export function uiTaskingTaskEditor(context) {
 
     var taskHeader = uiTaskingTaskHeader();
-    var taskDetails = uiTaskingTaskDetails();
+    var taskDetails = uiTaskingTaskDetails(context);
     var _task;
 
 

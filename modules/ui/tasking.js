@@ -519,8 +519,6 @@ export function uiTasking(context) {
             .call(svgIcon('#iD-icon-tasking', 'light'))
             .call(addNotificationBadge)
             .call(paneTooltip);
-
-            // TODO: TAH - change color of button when tasking is enabled
     };
 
 

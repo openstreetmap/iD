@@ -8,7 +8,6 @@ export function uiTaskingProjectDetails() {
     var projectDescription = uiProjectDescription();
 
     var _project;
-    var _context;
     var _activeTab = 0;
 
     var taskingTabs = [{ 'tab': 'information'}, { 'tab': 'description'}];
@@ -73,7 +72,7 @@ export function uiTaskingProjectDetails() {
         sectionsList.selectAll('.section-tab-information').call(projectInformation.project(_project));
 
         // add description tab
-        sectionsList.selectAll('.section-tab-description').call(projectDescription.project(_project, _context));
+        sectionsList.selectAll('.section-tab-description').call(projectDescription.project(_project));
 
         // Update
         wrapper.selectAll('.tab')
@@ -127,11 +126,10 @@ export function uiTaskingProjectDetails() {
     }
 
 
-    taskingProjectDetails.project = function(val, context) {
+    taskingProjectDetails.project = function(val) {
         if (!arguments.length) return _project;
         _project = val;
 
-        if (context) { _context = context; }
         return this;
     };
 

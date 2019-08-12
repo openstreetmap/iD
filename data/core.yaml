@@ -1165,6 +1165,13 @@ en:
     started_task:
       task_help: "You're editing task {taskId}{br}For details, click the {taskingButton} Tasking button or press the '{taskingKey}' key.{br}Need help? Click the {helpButton} Help button or pressing the '{helpKey}' key"
       stop_task: Stop task
+    cancel:
+      header: Cancel this tasking session
+      body: Are you sure you want to cancel this tasking session?
+      s: s
+      changes: " You'll undo {number_edits} edit{plural}."
+      accept: Yes, cancel session
+      dont_cancel: No, don't cancel
     comment: Write a comment (optional)
     inputPlaceholder: Enter a comment to share with other users.
     complete-header: Once you have finished {status}

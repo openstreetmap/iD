@@ -6,37 +6,37 @@ import {
 
 import { t } from '../util/locale';
 import { services } from '../services';
+import { modeBrowse } from '../modes/browse';
 import { svgIcon } from '../svg/icon';
 
-import { utilNoAuto } from '../util';
+import {
+    utilNoAuto
+} from '../util';
 
-import { uiTaskingCancel } from './taskingCancel';
 
-
-export function uiTaskComplete(context) {
+export function uiTaskOverview() {
     var dispatch = d3_dispatch('change');
 
-    var taskingCancel = uiTaskingCancel(context);
-
+    var _context;
     var _task;
 
     var osm = services.osm;
     var tasking = services.tasking;
 
-    var completeDetails = ['editStatusOptions', 'leaveAComment', 'saveEdits'];
+    var overviewDetails = ['editStatusOptions', 'leaveAComment', 'saveEdits'];
 
 
-    function taskComplete(selection) {
+    function taskOverview(selection) {
         if (!_task) return;
 
-        // add complete button
-        var complete = selection.selectAll('.task-complete-container')
+        // add overview button
+        var overview = selection.selectAll('.task-overview-container')
             .data([0]);
 
-        complete = complete.enter()
+        overview = overview.enter()
             .append('div')
-            .attr('class', 'task-complete-container')
-            .merge(complete)
+            .attr('class', 'task-overview-container')
+            .merge(overview)
             .call(taskSaveSection);
 
     }
@@ -52,23 +52,23 @@ export function uiTaskComplete(context) {
 
         taskSave.enter()
             .append('h3')
-            .attr('class', 'task-complete-header')
+            .attr('class', 'task-overview-header')
             .text(function(d) {
                 var status = d.status();
                 var statusText = status === 'lockedForMapping' ? 'mapping' : status === 'lockedForValidation' ? 'validating' : '';
 
-                return t('tasking.complete-header', { status: t('tasking.' + statusText) });
+                return t('tasking.task.tabs.overview.header', { status: t('tasking.' + statusText) });
                 });
 
 
         taskSave.enter()
             .append('ul')
-            .attr('class', 'task-complete-details')
+            .attr('class', 'task-overview-details')
             .selectAll('li')
-            .data(completeDetails)
+            .data(overviewDetails)
             .enter()
             .append('li')
-            .attr('class', 'task-complete-details-item')
+            .attr('class', 'task-overview-details-item')
             .text(function(d) { return t('tasking.' + d); });
 
 
@@ -270,7 +270,7 @@ export function uiTaskComplete(context) {
                 // TODO: TAH - create a HOTOSM TaskComment object when saving
 
                 var andComment = (d.newComment ? '_comment' : '');
-                return t('tasking.saving.stop_' + statusText + andComment);
+                return t('tasking.task.tabs.overview.saving.stop_' + statusText + andComment);
             })
             .attr('disabled', isSaveDisabled)
             .on('click.status', clickSave);
@@ -282,16 +282,20 @@ export function uiTaskComplete(context) {
             return (
                 hasAuth &&
                 (status === 'lockedForMapping' || status === 'lockedForValidation') &&
-                 context.history().hasChanges()
+                 _context.history().hasChanges()
             ) ? null : true;
         }
     }
 
 
-    function clickCancel() {
-        d3_event.preventDefault();
-        context.container()
-            .call(taskingCancel);
+    function clickCancel(d) {
+        this.blur();    // avoid keeping focus on the button - #4641
+
+        if (tasking) {
+            tasking.cancelTasking(d);
+        }
+        _context.enter(modeBrowse(_context));
+        dispatch.call('change');
     }
 
 
@@ -306,13 +310,14 @@ export function uiTaskComplete(context) {
     }
 
 
-    taskComplete.task = function(val) {
+    taskOverview.task = function(val, context) {
         if (!arguments.length) return _task;
         _task = val;
 
+        if (context) { _context = context; }
         return this;
     };
 
 
-    return taskComplete;
+    return taskOverview;
 }
