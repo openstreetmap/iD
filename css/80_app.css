@@ -3013,6 +3013,11 @@ input.key-trap {
     background: #7092ff;
 }
 
+.map-tasking-control > button.enabled,
+.map-tasking-control > button.enabled:hover {
+    background: rgb(112, 255, 112, 1);
+}
+
 
 /* Fullscreen Button (disabled)
 ------------------------------------------------------- */
@@ -3084,6 +3089,10 @@ div.full-screen > button:hover {
 
 /* Background / Map Data / Tasking Settings
 ------------------------------------------------------- */
+.tasking_manager-welcome-link {
+    display: inline-block;
+}
+
 .map-data-control,
 .background-control {
     position: relative;

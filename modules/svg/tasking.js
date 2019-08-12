@@ -1,9 +1,7 @@
 import _throttle from 'lodash-es/throttle';
 
-import { t } from '../util/locale';
-import { icon } from '../ui/intro/helper';
-import { geoPath as d3_geoPath } from 'd3-geo';
-import { select as d3_select } from 'd3-selection';
+
+import { select as d3_select, selectAll as d3_selectAll } from 'd3-selection';
 
 import { services } from '../services';
 import { uiCurtain } from '../ui';
@@ -283,6 +281,10 @@ export function svgTasking(projection, context, dispatch) {
         } else {
             hideLayer();
         }
+
+        // change color of tasking pane button
+        d3_selectAll('.map-tasking-control button')
+                .classed('enabled', _enabled);
 
         dispatch.call('change');
         return this;
