@@ -90,7 +90,7 @@ export function uiToolSegemented(context) {
         setActiveItem(tool.items[index]);
     }
 
-    tool.available = function() {
+    tool.allowed = function() {
         if (tool.loadItems) tool.loadItems();
         return tool.items.length > 1;
     };

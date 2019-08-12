@@ -9,13 +9,14 @@ import _debounce from 'lodash-es/debounce';
 import { operationCircularize, operationContinue, operationDelete, operationDisconnect,
     operationDowngrade, operationExtract, operationMerge, operationOrthogonalize,
     operationReverse, operationSplit, operationStraighten } from '../operations';
-import { uiToolAddFavorite, uiToolAddRecent, uiToolNotes, uiToolOperation, uiToolSave, uiToolAddFeature, uiToolUndoRedo } from './tools';
+import { uiToolAddFavorite, uiToolAddFeature, uiToolAddRecent, uiToolNotes, uiToolOperation, uiToolSave, uiToolUndoRedo } from './tools';
 import { uiToolSimpleButton } from './tools/simple_button';
 import { uiToolWaySegments } from './tools/way_segments';
 import { uiToolRepeatAdd } from './tools/repeat_add';
 import { uiToolStructure } from './tools/structure';
 import { uiToolCenterZoom } from './tools/center_zoom';
 import { uiToolStopDraw } from './tools/stop_draw';
+import { uiToolToolbox } from './tools/toolbox';
 
 export function uiTopToolbar(context) {
 
@@ -31,7 +32,8 @@ export function uiTopToolbar(context) {
         split = uiToolOperation(context, operationSplit),
         straighten = uiToolOperation(context, operationStraighten);
 
-    var addFeature = uiToolAddFeature(context),
+    var toolbox = uiToolToolbox(context),
+        addFeature = uiToolAddFeature(context),
         addFavorite = uiToolAddFavorite(context),
         addRecent = uiToolAddRecent(context),
         notes = uiToolNotes(context),
@@ -49,7 +51,8 @@ export function uiTopToolbar(context) {
             onClick: function() {
                 context.enter(modeBrowse(context));
             },
-            tooltipKey: 'Esc'
+            tooltipKey: 'Esc',
+            barButtonClass: 'wide'
         }),
         cancelSave = uiToolSimpleButton({
             id: 'cancel',
@@ -59,7 +62,7 @@ export function uiTopToolbar(context) {
                 context.enter(modeBrowse(context));
             },
             tooltipKey: 'Esc',
-            available: function() {
+            allowed: function() {
                 return context.mode().id === 'save';
             }
         });
@@ -74,8 +77,9 @@ export function uiTopToolbar(context) {
         if (mode.id === 'save') {
 
             tools = [
-                cancelSave,
-                'spacer'
+                toolbox,
+                'spacer',
+                cancelSave
             ];
 
         } else if (mode.id === 'select' &&
@@ -85,6 +89,8 @@ export function uiTopToolbar(context) {
             })) {
 
             tools = [
+                toolbox,
+                'spacer',
                 deselect,
                 'spacer',
                 centerZoom,
@@ -110,6 +116,7 @@ export function uiTopToolbar(context) {
             mode.id === 'draw-line' || mode.id === 'draw-area') {
 
             tools = [
+                toolbox,
                 'spacer',
                 structure,
                 'spacer',
@@ -123,6 +130,7 @@ export function uiTopToolbar(context) {
         } else {
 
             tools = [
+                toolbox,
                 'spacer',
                 centerZoom,
                 'spacer',
@@ -138,18 +146,10 @@ export function uiTopToolbar(context) {
         }
 
         tools = tools.filter(function(tool) {
-            return !tool.available || tool.available();
+            return !tool.allowed || tool.allowed();
         });
 
-        var deduplicatedTools = [];
-        // remove adjacent duplicates (i.e. spacers)
-        tools.forEach(function(tool) {
-            if (!deduplicatedTools.length || deduplicatedTools[deduplicatedTools.length - 1] !== tool) {
-                deduplicatedTools.push(tool);
-            }
-        });
-
-        return deduplicatedTools;
+        return tools;
     }
 
     function topToolbar(bar) {
@@ -175,6 +175,21 @@ export function uiTopToolbar(context) {
         function update() {
 
             var tools = allowedTools();
+
+            toolbox.setAllowedTools(tools);
+
+            tools = tools.filter(function(tool) {
+                return tool.userToggleable === false || tool.isToggledOn !== false;
+            });
+
+            var deduplicatedTools = [];
+            // remove adjacent duplicates (i.e. spacers)
+            tools.forEach(function(tool) {
+                if (!deduplicatedTools.length || deduplicatedTools[deduplicatedTools.length - 1] !== tool) {
+                    deduplicatedTools.push(tool);
+                }
+            });
+            tools = deduplicatedTools;
 
             var toolbarItems = bar.selectAll('.toolbar-item')
                 .data(tools, function(d) {

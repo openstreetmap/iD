@@ -15,6 +15,8 @@ export function uiToolStructure(context) {
     tool.id = 'structure';
     tool.label = t('presets.fields.structure.label');
     tool.key = t('toolbar.structure.key');
+    tool.iconName = 'maki-bridge-15';
+    tool.iconClass = 'icon-30';
 
     var structureNone = {
         id: 'none',
@@ -164,8 +166,8 @@ export function uiToolStructure(context) {
         return structureNone;
     };
 
-    var parentAvailable = tool.available;
-    tool.available = function() {
+    var parentAvailable = tool.allowed;
+    tool.allowed = function() {
         var modeID = context.mode().id;
         return parentAvailable() && (modeID === 'add-line' || modeID === 'draw-line');
     };

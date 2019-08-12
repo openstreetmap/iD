@@ -26,7 +26,7 @@ export function uiToolSimpleButton(protoTool) {
             .attr('tabindex', -1)
             .call(tooltipBehavior)
             .on('click', tool.onClick)
-            .call(svgIcon('#'));
+            .call(svgIcon('#', utilFunctor(tool.iconClass)()));
 
         button = buttonEnter.merge(button);
 

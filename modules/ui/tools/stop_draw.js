@@ -33,7 +33,7 @@ export function uiToolStopDraw(context) {
         barButtonClass: 'wide'
     });
 
-    tool.available = function() {
+    tool.allowed = function() {
         var newCancelOrFinish = drawCancelOrFinish();
         if (newCancelOrFinish) {
             cancelOrFinish = newCancelOrFinish;

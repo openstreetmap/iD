@@ -103,7 +103,7 @@ export function uiToolNotes(context) {
             .classed('disabled', function(d) { return !enabled(d); });
     }
     
-    tool.available = function() {
+    tool.allowed = function() {
         return notesEnabled();
     };
 

@@ -16,7 +16,9 @@ export function uiToolAddFeature(context) {
 
     var tool = {
         id: 'add_feature',
-        label: t('toolbar.add_feature')
+        label: t('toolbar.add_feature'),
+        iconName: 'iD-logo-features',
+        iconClass: 'icon-30'
     };
 
     var allowedGeometry = ['point', 'vertex', 'line', 'area'];
@@ -59,7 +61,7 @@ export function uiToolAddFeature(context) {
                 .html(true)
                 .title(function() { return uiTooltipHtml(t('modes.add_feature.description'), key); })
             )
-            .call(svgIcon('#iD-logo-features'));
+            .call(svgIcon('#' + tool.iconName, tool.iconClass));
 
         buttonEnter
             .append('span')

@@ -6,6 +6,7 @@ export function uiToolAddFavorite(context) {
     var tool = uiToolQuickPresets(context);
     tool.id = 'add_favorite';
     tool.label = t('toolbar.favorites');
+    tool.iconName = 'iD-icon-favorite';
 
     tool.itemsToDraw = function() {
         var items = context.presets().getFavorites().slice(0, 10);

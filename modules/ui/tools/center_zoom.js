@@ -15,6 +15,7 @@ export function uiToolCenterZoom(context) {
                 return t('toolbar.return');
             }
         },
+        toolboxLabel: t('toolbar.center_zoom.title'),
         iconName: function() {
             if (!originTransform) {
                 return 'iD-icon-frame-pin';
@@ -22,6 +23,8 @@ export function uiToolCenterZoom(context) {
                 return 'iD-icon-frame-back';
             }
         },
+        toolboxIconName: 'iD-icon-frame-pin',
+        iconClass: 'operation-icon',
         onClick: function() {
             if (!originTransform) {
                 context.mode().zoomToSelected();
@@ -51,7 +54,7 @@ export function uiToolCenterZoom(context) {
         barButtonClass: 'wide'
     });
 
-    tool.available = function() {
+    tool.allowed = function() {
         var modeID = context.mode().id;
         return (modeID === 'select' && !context.mode().newFeature()) || modeID === 'select-note' ||
             modeID === 'select-data' || modeID === 'select-error';

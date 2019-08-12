@@ -16,7 +16,8 @@ export function uiToolUndoRedo(context) {
 
     var tool = {
         id: 'undo_redo',
-        label: t('toolbar.undo_redo')
+        label: t('toolbar.undo_redo'),
+        iconName: textDirection === 'rtl' ? 'iD-icon-redo' : 'iD-icon-undo'
     };
 
     var commands = [{
@@ -60,13 +61,12 @@ export function uiToolUndoRedo(context) {
             .call(tooltipBehavior);
 
         buttonsEnter.each(function(d) {
-            var iconName = d.id;
+            var iconName;
             if (textDirection === 'rtl') {
-                if (iconName === 'undo') {
-                    iconName = 'redo';
-                } else if (iconName === 'redo') {
-                    iconName = 'undo';
-                }
+                // reverse the icons for right-to-left layout
+                iconName = d.id === 'undo' ? 'redo' : 'undo';
+            } else {
+                iconName = d.id;
             }
             d3_select(this)
                 .call(svgIcon('#iD-icon-' + iconName));
@@ -89,7 +89,7 @@ export function uiToolUndoRedo(context) {
             });
     }
 
-    tool.available = function() {
+    tool.allowed = function() {
         return context.mode().id !== 'save';
     };
 

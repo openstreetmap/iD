@@ -37,6 +37,8 @@ en:
       none:
         title: None
       key: S
+    toolbox:
+      title: Tools
   assistant:
     mode:
       adding: Adding

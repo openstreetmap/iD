@@ -256,7 +256,7 @@ export function uiToolQuickPresets(context) {
             .classed('disabled', function(d) { return !enabled(d); });
     }
 
-    tool.available = function() {
+    tool.allowed = function() {
         return tool.itemsToDraw().length > 0;
     };
 

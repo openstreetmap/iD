@@ -8,6 +8,8 @@ export function uiToolWaySegments(context) {
     tool.id = 'way_segments';
     tool.label = t('toolbar.segments.title');
     tool.key = t('toolbar.segments.key');
+    tool.iconName = 'iD-segment-straight';
+    tool.iconClass = 'icon-30';
 
     tool.items = [
         {
@@ -31,7 +33,7 @@ export function uiToolWaySegments(context) {
         return tool.items.filter(function(d) { return d.id === id; })[0];
     };
 
-    tool.available = function() {
+    tool.allowed = function() {
         var mode = context.mode();
         return mode.id.indexOf('line') !== -1 || mode.id.indexOf('area') !== -1;
     };

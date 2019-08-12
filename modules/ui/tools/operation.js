@@ -11,7 +11,8 @@ export function uiToolOperation(context, operationClass) {
     var operation;
 
     var tool = {
-        itemClass: 'operation'
+        itemClass: 'operation',
+        iconClass: 'operation-icon'
     };
 
     var button,
@@ -39,7 +40,7 @@ export function uiToolOperation(context, operationClass) {
                 button.call(tooltipBehavior.hide);
                 operation();
             })
-            .call(svgIcon('#iD-operation-' + operation.id));
+            .call(svgIcon('#' + tool.iconName, tool.iconClass));
 
         button = buttonEnter.merge(button);
 
@@ -51,9 +52,10 @@ export function uiToolOperation(context, operationClass) {
 
         tool.id = operation.id;
         tool.label = operation.title;
+        tool.iconName = 'iD-operation-' + operation.id;
     }
 
-    tool.available = function() {
+    tool.allowed = function() {
         var mode = context.mode();
         if (mode.id !== 'select') return false;
         var op = operationClass(mode.selectedIDs(), context);
