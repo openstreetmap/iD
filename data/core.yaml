@@ -1089,6 +1089,12 @@ en:
     title: Tasking
     description: Tasks
     key: T
+    welcome:
+      header: Want something to work on?
+      manager: HOT tasking manager
+      suggestion: tasking manager and pick a task that you're interested in
+      suggestion_with_link: "Try visiting {tasking_manager} and pick a task that you're interested in."
+      redirect: "Once selected, you'll be redirected back here."
     manager:
       name: Manager
       managers:
@@ -1181,7 +1187,7 @@ en:
     login: You must log in to change or comment on this task.
     upload_explanation: "The changes you upload will be visible on all maps that use OpenStreetMap data."
     upload_explanation_with_user: "The changes you upload as {user} will be visible on all maps that use OpenStreetMap data."
-    unsavedEdits: You must save edits before starting a task.
+    unsavedEdits: Thanks for your edits! But before starting a task, please save your existing edits.
   help:
     title: Help
     key: H

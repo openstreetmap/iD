@@ -30,6 +30,7 @@ export function uiTasking(context) {
     var _taskingContainer = d3_select(null);
 
     var _taskingErrorsContainer = d3_select(null);
+    var _taskingWelcomeContainer = d3_select(null);
     var _taskingManagerContainer = d3_select(null);
     var _taskingProjectContainer = d3_select(null);
     var _taskingTaskContainer = d3_select(null);
@@ -38,6 +39,9 @@ export function uiTasking(context) {
 
     var _task = taskingService.currentTask();
     var _project = taskingService.currentProject();
+    var _managers = taskingService.managers();
+
+    var _hot_tm_url = 'https://tasks.hotosm.org/';
 
     // listeners
     var settingsCustomTasking = uiSettingsCustomTasking(context)
@@ -83,13 +87,13 @@ export function uiTasking(context) {
             .data([0])
             .enter()
             .append('svg')
-            .attr('viewbox', '0 0 ' + d + ' ' + d)
-            .attr('class', 'notification-badge hide')
-            .append('circle')
-            .attr('cx', d / 2)
-            .attr('cy', d / 2)
-            .attr('r', (d / 2) - 1)
-            .attr('fill', 'currentColor');
+                .attr('viewbox', '0 0 ' + d + ' ' + d)
+                .attr('class', 'notification-badge hide')
+                .append('circle')
+                    .attr('cx', d / 2)
+                    .attr('cy', d / 2)
+                    .attr('r', (d / 2) - 1)
+                    .attr('fill', 'currentColor');
     }
 
     function activeErrors(errors) {
@@ -177,6 +181,10 @@ export function uiTasking(context) {
 
 
     function update() {
+
+        _task = taskingService.currentTask(); // get current task
+        _project = taskingService.currentProject(); // get current project
+
         updateTaskingErrors();
 
         var errors = activeErrors(_errors);
@@ -188,6 +196,8 @@ export function uiTasking(context) {
         _pane.selectAll('.tasking-manager-toggle').classed('hide', (errors.length));
         _pane.selectAll('.tasking-project-toggle').classed('hide', (errors.length));
         _pane.selectAll('.tasking-task-toggle').classed('hide', (errors.length));
+
+        updateTaskingWelcome();
 
         if (!_pane.select('.disclosure-wrap-tasking_managers').classed('hide')) {
             updateTaskingManagers();
@@ -227,8 +237,8 @@ export function uiTasking(context) {
         // Enter
         list.enter()
             .append('ul')
-            .attr('class', 'layer-list layer-list-tasking tasking-errors-list errors-list')
-            .merge(list);
+                .attr('class', 'layer-list layer-list-tasking tasking-errors-list issues-list errors-list')
+                .merge(list);
 
         var items = list.selectAll('li')
             .data(activeErrors(errors), function(d) {
@@ -242,32 +252,32 @@ export function uiTasking(context) {
         // Enter
         var itemsEnter = items.enter()
             .append('li')
-            .attr('class', function (d) { return 'issue severity-' + d.severity; })
-            .on('click', function(d) {
-                if (d.id === 'unsavedEdits') { save(); }
-            });
+                .attr('class', function (d) { return 'issue severity-' + d.severity; })
+                .on('click', function(d) {
+                    if (d.id === 'unsavedEdits') { save(); }
+                });
 
 
         var labelsEnter = itemsEnter
             .append('div')
-            .attr('class', 'issue-label');
+                .attr('class', 'issue-label');
 
         var textEnter = labelsEnter
             .append('span')
-            .attr('class', 'issue-text');
+                .attr('class', 'issue-text');
 
         textEnter
             .append('span')
-            .attr('class', 'issue-icon')
-            .each(function(d) {
-                var iconName = '#iD-icon-' + (d.severity === 'warning' ? 'alert' : 'error');
-                d3_select(this)
-                    .call(svgIcon(iconName));
-            });
+                .attr('class', 'issue-icon')
+                .each(function(d) {
+                    var iconName = '#iD-icon-' + (d.severity === 'warning' ? 'alert' : 'error');
+                    d3_select(this)
+                        .call(svgIcon(iconName));
+                });
 
         textEnter
             .append('span')
-            .attr('class', 'tasking-error-message issue-message');
+                .attr('class', 'tasking-error-message issue-message');
 
         // Update
         items = items
@@ -280,13 +290,110 @@ export function uiTasking(context) {
     }
 
 
+    function renderTaskingWelcome(selection) {
+        var container = selection.selectAll('tasking-welcome-container')
+            .data([0]);
+
+        _taskingWelcomeContainer = container.enter()
+            .append('div')
+                .attr('class', 'tasking-welcome-container')
+                .merge(container);
+
+            updateTaskingWelcome();
+    }
+
+
+    function updateTaskingWelcome() {
+        var welcome = _taskingWelcomeContainer.selectAll('.tasking-welcome')
+            .data(Object.keys(_task).length ? [] : [0]);
+
+        welcome.exit()
+            .remove();
+
+        var welcomeEnter = welcome.enter()
+            .append('div')
+                .attr('class', 'tasking-welcome');
+
+        welcomeEnter
+            .append('h3')
+                .attr('class', 'tasking-welcome-header')
+                .text(t('tasking.welcome.header'));
+
+        var welcomeSuggestion = welcomeEnter
+            .append('p')
+                .attr('class', 'tasking-welcome-suggestion')
+                .text(t('tasking.welcome.suggestion'));
+
+
+        var taskingManagerLink = d3_select(document.createElement('div'));
+
+        taskingManagerLink
+            .append('a')
+            .attr('class', 'tasking_manager-welcome-link')
+            .text(t('tasking.welcome.manager'))
+            .attr('href', _hot_tm_url)
+            .attr('tabindex', -1)
+            .attr('target', '_blank');
+
+        welcomeSuggestion
+            .html(function() {
+                return t('tasking.welcome.suggestion_with_link', { tasking_manager: taskingManagerLink.html() })
+                + t('tasking.welcome.redirect');
+            });
+
+        welcome = welcomeEnter.merge(welcome);
+    }
+
+
+    function renderTaskingTask(selection) {
+        var container = selection.selectAll('.tasking-task-container')
+            .data([0]);
+
+        _taskingTaskContainer = container.enter()
+            .append('div')
+                .attr('class', 'tasking-task-container')
+                .merge(container);
+
+            updateTaskingTask();
+    }
+
+
+    function updateTaskingTask() {
+        _taskingTaskContainer
+            .call(taskingTaskEditor.task(
+                function(){ return showsLayer() ? _task : undefined; }()
+            ));
+    }
+
+
+    function renderTaskingProject(selection) {
+        var container = selection.selectAll('.tasking-project-container')
+            .data([0]);
+
+        _taskingProjectContainer = container.enter()
+            .append('div')
+                .attr('class', 'tasking-project-container')
+                .merge(container);
+
+            updateTaskingProject();
+    }
+
+
+    function updateTaskingProject() {
+        _taskingProjectContainer
+            .call(taskingProjectEditor.project(
+                function(){ return showsLayer() ? _project : undefined; }()
+            ));
+    }
+
+
     function renderTaskingManagers(selection) {
         var container = selection.selectAll('.tasking-managers-container')
             .data([0]);
 
         _taskingManagerContainer = container.enter()
             .append('div')
-            .attr('class', 'tasking-managers-container');
+                .attr('class', 'tasking-managers-container');
 
 
         var ul = _taskingManagerContainer
@@ -300,7 +407,7 @@ export function uiTasking(context) {
         // Enter
         ul.enter()
             .append('ul')
-            .attr('class', 'layer-list layer-list-tasking');
+                .attr('class', 'layer-list layer-list-tasking');
 
         _taskingManagerContainer
             .merge(container);
@@ -311,14 +418,11 @@ export function uiTasking(context) {
 
     function updateTaskingManagers() {
         _taskingManagerContainer.selectAll('.layer-list-tasking')
-            .call(drawListItems, taskingService.managers(), 'radio', 'manager', setManager, showsManager);
-
-        // _taskingManagerContainer
-        //     .call(drawManagerItems);
+            .call(drawManagerListItems, _managers, 'radio', 'manager', setManager, showsManager);
     }
 
 
-    function drawListItems(selection, data, type, name, change, active) {
+    function drawManagerListItems(selection, data, type, name, change, active) {
 
         var items = selection.selectAll('li')
             .data(data);
@@ -330,50 +434,50 @@ export function uiTasking(context) {
         // Enter
         var enter = items.enter()
             .append('li')
-            .attr('class', function(d) { return 'manager-' + d.managerId; })
-            .call(tooltip()
-                .title(function(d) {
-                    return !activeErrors(_errors).length ?
-                        t('tasking.manager.managers.' + d.managerId + '.tooltip') :
-                        t('tasking.manager.managers.errors.tooltip');
-                })
-                .placement('bottom')
-            );
+                .attr('class', function(d) { return 'manager-' + d.managerId; })
+                .call(tooltip()
+                    .title(function(d) {
+                        return !activeErrors(_errors).length ?
+                            t('tasking.manager.managers.' + d.managerId + '.tooltip') :
+                            t('tasking.manager.managers.errors.tooltip');
+                    })
+                    .placement('bottom')
+                );
 
         var customManager = enter.filter(function(d) { return d.managerId === 'custom'; });
 
         customManager
             .append('button')
-            .attr('class', 'custom-manager-browse')
-            .on('click', editCustomTasking)
-            .call(svgIcon('#iD-icon-more'));
+                .attr('class', 'custom-manager-browse')
+                .on('click', editCustomTasking)
+                .call(svgIcon('#iD-icon-more'));
 
         customManager
             .append('button')
-            .attr('class', 'custom-manager-zoom')
-            .call(tooltip()
-                .title(t('tasking.manager.managers.custom.zoom'))
-                .placement((textDirection === 'rtl') ? 'right' : 'left')
-            )
-            .on('click', function() {
-                d3_event.preventDefault();
-                d3_event.stopPropagation();
-                layer.fitZoom();
-            })
-            .call(svgIcon('#iD-icon-search'));
+                .attr('class', 'custom-manager-zoom')
+                .call(tooltip()
+                    .title(t('tasking.manager.managers.custom.zoom'))
+                    .placement((textDirection === 'rtl') ? 'right' : 'left')
+                )
+                .on('click', function() {
+                    d3_event.preventDefault();
+                    d3_event.stopPropagation();
+                    layer.fitZoom();
+                })
+                .call(svgIcon('#iD-icon-search'));
 
         var label = enter
             .append('label');
 
         label
             .append('input')
-            .attr('type', type)
-            .attr('name', name)
-            .on('change', change);
+                .attr('type', type)
+                .attr('name', name)
+                .on('change', change);
 
         label
             .append('span')
-            .text(function(d) { return d.name; });
+                .text(function(d) { return d.name; });
 
         items
             .classed('active', active)
@@ -440,52 +544,6 @@ export function uiTasking(context) {
     }
 
 
-    function renderTaskingProject(selection) {
-        var container = selection.selectAll('.tasking-project-container')
-            .data([0]);
-
-        _taskingProjectContainer = container.enter()
-            .append('div')
-            .attr('class', 'tasking-project-container')
-            .merge(container);
-
-            updateTaskingProject();
-    }
-
-
-    function updateTaskingProject() {
-        _project = taskingService.currentProject(); // get current project
-
-        _taskingProjectContainer
-            .call(taskingProjectEditor.project(
-                function(){ return showsLayer() ? _project : undefined; }()
-            ));
-    }
-
-
-    function renderTaskingTask(selection) {
-        var container = selection.selectAll('.tasking-task-container')
-            .data([0]);
-
-        _taskingTaskContainer = container.enter()
-            .append('div')
-            .attr('class', 'tasking-task-container')
-            .merge(container);
-
-            updateTaskingTask();
-    }
-
-
-    function updateTaskingTask() {
-        _task = taskingService.currentTask(); // get current task
-
-        _taskingTaskContainer
-            .call(taskingTaskEditor.task(
-                function(){ return showsLayer() ? _task : undefined; }()
-            ));
-    }
-
-
     function hidePane() {
         context.ui().togglePanes();
     }
@@ -514,11 +572,11 @@ export function uiTasking(context) {
 
         _toggleButton = selection
             .append('button')
-            .attr('tabindex', -1)
-            .on('click', uiTasking.togglePane)
-            .call(svgIcon('#iD-icon-tasking', 'light'))
-            .call(addNotificationBadge)
-            .call(paneTooltip);
+                .attr('tabindex', -1)
+                .on('click', uiTasking.togglePane)
+                .call(svgIcon('#iD-icon-tasking', 'light'))
+                .call(addNotificationBadge)
+                .call(paneTooltip);
 
             // TODO: TAH - change color of button when tasking is enabled
     };
@@ -528,68 +586,73 @@ export function uiTasking(context) {
 
         _pane = selection
             .append('div')
-            .attr('class', 'fillL map-pane tasking-pane hide')
-            .attr('pane', 'map-tasking');
+                .attr('class', 'fillL map-pane tasking-pane hide')
+                .attr('pane', 'map-tasking');
 
 
         var heading = _pane
             .append('div')
-            .attr('class', 'pane-heading');
+                .attr('class', 'pane-heading');
 
         heading
             .append('h2')
-            .text(t('tasking.title'));
+                .text(t('tasking.title'));
 
         heading
             .append('button')
-            .on('click', hidePane)
-            .call(svgIcon('#iD-icon-close'));
+                .on('click', hidePane)
+                .call(svgIcon('#iD-icon-close'));
 
 
         var content = _pane
             .append('div')
-            .attr('class', 'pane-content');
+                .attr('class', 'pane-content');
 
         _taskingContainer = content.enter()
             .append('div')
-            .attr('class', 'tasking-container')
-            .merge(content);
+                .attr('class', 'tasking-container')
+                .merge(content);
 
         // errors
         _taskingContainer
-                 .append('div')
-                 .attr('class', 'tasking-errors-container')
-                 .call(renderTaskingErrors);
+            .append('div')
+                .attr('class', 'tasking-errors-container')
+                .call(renderTaskingErrors);
+
+
+        // welcome
+        _taskingContainer
+            .call(renderTaskingWelcome);
 
 
         // task
         _taskingContainer
             .append('div')
-            .attr('class', 'tasking-task-toggle')
-            .call(uiDisclosure(context, 'tasking_task', true)
-                .title(t('tasking.task.name'))
-                .content(renderTaskingTask)
-            );
+                .attr('class', 'tasking-task-toggle')
+                .call(uiDisclosure(context, 'tasking_task', true)
+                    .title(t('tasking.task.name'))
+                    .content(renderTaskingTask)
+                );
 
 
         // project
         _taskingContainer
             .append('div')
-            .attr('class', 'tasking-project-toggle')
-            .call(uiDisclosure(context, 'tasking_project', false)
-                .title(t('tasking.project.name'))
-                .content(renderTaskingProject)
-            );
+                .attr('class', 'tasking-project-toggle')
+                .call(uiDisclosure(context, 'tasking_project', false)
+                    .title(t('tasking.project.name'))
+                    .content(renderTaskingProject)
+                );
 
 
         // managers
         _taskingContainer
         .append('div')
-        .attr('class', 'tasking-manager-toggle')
-        .call(uiDisclosure(context, 'tasking_managers', false)
-            .title(t('tasking.manager.name'))
-            .content(renderTaskingManagers)
-        );
+            .attr('class', 'tasking-manager-toggle')
+            .call(uiDisclosure(context, 'tasking_managers', false)
+                .title(t('tasking.manager.name'))
+                .content(renderTaskingManagers)
+            );
 
 
         context.keybinding()
