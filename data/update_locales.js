@@ -119,6 +119,20 @@ function getResource(resource, callback) {
                                 }
                             }
                         }
+                    } else if (resource === 'fields') {
+                        // remove terms that were not really translated
+                        var fields = (result.presets && result.presets.fields) || {};
+                        for (const key of Object.keys(fields)) {
+                            var field = fields[key];
+                            if (!field.terms) continue;
+                            field.terms = field.terms.replace(/[.*]/, '').trim();
+                            if (!field.terms) {
+                                delete field.terms;
+                                if (!Object.keys(preset).length) {
+                                    delete fields[key];
+                                }
+                            }
+                        }
                     }
 
                     locale[codes[i]] = result;
@@ -304,7 +318,7 @@ function scriptNamesInLanguageOf(code) {
     var translatedScripts = {};
     referencedScripts.forEach(function(script) {
         if (!allTranslatedScriptsByCode[script] || script === allTranslatedScriptsByCode[script]) return;
-        
+
         translatedScripts[script] = allTranslatedScriptsByCode[script];
     });
 
