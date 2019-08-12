@@ -399,7 +399,7 @@ function generateTranslations(fields, presets, tstrings, searchableFieldIDs) {
             if (f.terms && f.terms.length) {
                 field['terms#'] = 'terms: ' + f.terms.join();
             }
-            field.terms = '<translate with synonyms or related terms for \'' + field.label + '\', separated by commas>';
+            field.terms = '[translate with synonyms or related terms for \'' + field.label + '\', separated by commas]';
         } else {
             delete field.terms;
         }

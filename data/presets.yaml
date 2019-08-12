@@ -78,7 +78,7 @@ en:
             title: Allowed
         # access field placeholder
         placeholder: Not Specified
-        terms: '<translate with synonyms or related terms for ''Allowed Access'', separated by commas>'
+        terms: '[translate with synonyms or related terms for ''Allowed Access'', separated by commas]'
         types:
           access: All
           bicycle: Bicycles
@@ -89,7 +89,7 @@ en:
         # access=*
         label: Allowed Access
         # 'terms: permitted,private,public'
-        terms: '<translate with synonyms or related terms for ''Allowed Access'', separated by commas>'
+        terms: '[translate with synonyms or related terms for ''Allowed Access'', separated by commas]'
       addr/interpolation:
         # 'addr:interpolation=*'
         label: Type
@@ -138,7 +138,7 @@ en:
           suburb!jp: Ward
           unit: Unit
         # 'terms: location'
-        terms: '<translate with synonyms or related terms for ''Address'', separated by commas>'
+        terms: '[translate with synonyms or related terms for ''Address'', separated by commas]'
       admin_level:
         # admin_level=*
         label: Admin Level
@@ -196,7 +196,7 @@ en:
         # air_conditioning=*
         label: Air Conditioning
         # 'terms: cooling system,refrigeration'
-        terms: '<translate with synonyms or related terms for ''Air Conditioning'', separated by commas>'
+        terms: '[translate with synonyms or related terms for ''Air Conditioning'', separated by commas]'
       amenity:
         # amenity=*
         label: Type
@@ -213,7 +213,7 @@ en:
         # architect=*
         label: Architect
         # 'terms: building designer'
-        terms: '<translate with synonyms or related terms for ''Architect'', separated by commas>'
+        terms: '[translate with synonyms or related terms for ''Architect'', separated by commas]'
       area/highway:
         # 'area:highway=*'
         label: Type
@@ -235,7 +235,7 @@ en:
       bar:
         # bar=*
         label: Bar
-        terms: '<translate with synonyms or related terms for ''Bar'', separated by commas>'
+        terms: '[translate with synonyms or related terms for ''Bar'', separated by commas]'
       barrier:
         # barrier=*
         label: Type
@@ -265,7 +265,7 @@ en:
         # bench=*
         label: Bench
         # 'terms: seating'
-        terms: '<translate with synonyms or related terms for ''Bench'', separated by commas>'
+        terms: '[translate with synonyms or related terms for ''Bench'', separated by commas]'
       bicycle_parking:
         # bicycle_parking=*
         label: Type
@@ -273,7 +273,7 @@ en:
         # bin=*
         label: Waste Bin
         # 'terms: garbage can,trash can'
-        terms: '<translate with synonyms or related terms for ''Waste Bin'', separated by commas>'
+        terms: '[translate with synonyms or related terms for ''Waste Bin'', separated by commas]'
       blood_components:
         # 'blood:=*'
         label: Blood Components
@@ -301,12 +301,12 @@ en:
       brand:
         # brand=*
         label: Brand
-        terms: '<translate with synonyms or related terms for ''Brand'', separated by commas>'
+        terms: '[translate with synonyms or related terms for ''Brand'', separated by commas]'
       brewery:
         # brewery=*
         label: Draft Beers
         # 'terms: on tap'
-        terms: '<translate with synonyms or related terms for ''Draft Beers'', separated by commas>'
+        terms: '[translate with synonyms or related terms for ''Draft Beers'', separated by commas]'
       bridge:
         # bridge=*
         label: Type
@@ -319,24 +319,24 @@ en:
         # building=*
         label: Building
         # 'terms: structure'
-        terms: '<translate with synonyms or related terms for ''Building'', separated by commas>'
+        terms: '[translate with synonyms or related terms for ''Building'', separated by commas]'
       building/levels/underground:
         # 'building:levels:underground=*'
         label: Underground Levels
         # building/levels/underground field placeholder
         placeholder: '2, 4, 6...'
         # 'terms: basement levels'
-        terms: '<translate with synonyms or related terms for ''Underground Levels'', separated by commas>'
+        terms: '[translate with synonyms or related terms for ''Underground Levels'', separated by commas]'
       building/levels_building:
         # 'building:levels=*'
         label: Building Levels
         # building/levels_building field placeholder
         placeholder: '2, 4, 6...'
-        terms: '<translate with synonyms or related terms for ''Building Levels'', separated by commas>'
+        terms: '[translate with synonyms or related terms for ''Building Levels'', separated by commas]'
       building/material:
         # 'building:material=*'
         label: Material
-        terms: '<translate with synonyms or related terms for ''Material'', separated by commas>'
+        terms: '[translate with synonyms or related terms for ''Material'', separated by commas]'
       building_area:
         # building=*
         label: Building
@@ -371,7 +371,7 @@ en:
         label: Capacity
         # capacity field placeholder
         placeholder: '50, 100, 200...'
-        terms: '<translate with synonyms or related terms for ''Capacity'', separated by commas>'
+        terms: '[translate with synonyms or related terms for ''Capacity'', separated by commas]'
       cash_in:
         # cash_in=*
         label: Cash In
@@ -386,13 +386,13 @@ en:
         label: Fee Amount
         # charge_fee field placeholder
         placeholder: '1 EUR, 5 USD, 10 JPY…'
-        terms: '<translate with synonyms or related terms for ''Fee Amount'', separated by commas>'
+        terms: '[translate with synonyms or related terms for ''Fee Amount'', separated by commas]'
       charge_toll:
         # charge=*
         label: Toll Amount
         # charge_toll field placeholder
         placeholder: '1 EUR, 5 USD, 10 JPY…'
-        terms: '<translate with synonyms or related terms for ''Toll Amount'', separated by commas>'
+        terms: '[translate with synonyms or related terms for ''Toll Amount'', separated by commas]'
       check_date:
         # check_date=*
         label: Last Checked Date
@@ -408,7 +408,7 @@ en:
       colour:
         # colour=*
         label: Color
-        terms: '<translate with synonyms or related terms for ''Color'', separated by commas>'
+        terms: '[translate with synonyms or related terms for ''Color'', separated by commas]'
       comment:
         # comment=*
         label: Changeset Comment
@@ -417,7 +417,7 @@ en:
       communication_multi:
         # 'communication:=*'
         label: Communication Types
-        terms: '<translate with synonyms or related terms for ''Communication Types'', separated by commas>'
+        terms: '[translate with synonyms or related terms for ''Communication Types'', separated by commas]'
       construction:
         # construction=*
         label: Type
@@ -453,7 +453,7 @@ en:
       covered:
         # covered=*
         label: Covered
-        terms: '<translate with synonyms or related terms for ''Covered'', separated by commas>'
+        terms: '[translate with synonyms or related terms for ''Covered'', separated by commas]'
       craft:
         # craft=*
         label: Type
@@ -480,7 +480,7 @@ en:
         # 'currency:=*'
         label: Currency Types
         # 'terms: bills,cash,coins,money'
-        terms: '<translate with synonyms or related terms for ''Currency Types'', separated by commas>'
+        terms: '[translate with synonyms or related terms for ''Currency Types'', separated by commas]'
       cutting:
         # cutting=*
         label: Type
@@ -523,7 +523,7 @@ en:
             title: Bike track
         # cycleway field placeholder
         placeholder: none
-        terms: '<translate with synonyms or related terms for ''Bike Lanes'', separated by commas>'
+        terms: '[translate with synonyms or related terms for ''Bike Lanes'', separated by commas]'
         types:
           'cycleway:left': Left side
           'cycleway:right': Right side
@@ -536,11 +536,11 @@ en:
       delivery:
         # delivery=*
         label: Delivery
-        terms: '<translate with synonyms or related terms for ''Delivery'', separated by commas>'
+        terms: '[translate with synonyms or related terms for ''Delivery'', separated by commas]'
       denomination:
         # denomination=*
         label: Denomination
-        terms: '<translate with synonyms or related terms for ''Denomination'', separated by commas>'
+        terms: '[translate with synonyms or related terms for ''Denomination'', separated by commas]'
       denotation:
         # denotation=*
         label: Denotation
@@ -560,7 +560,7 @@ en:
         # description=*
         label: Description
         # 'terms: summary'
-        terms: '<translate with synonyms or related terms for ''Description'', separated by commas>'
+        terms: '[translate with synonyms or related terms for ''Description'', separated by commas]'
       design:
         # design=*
         label: Design
@@ -570,7 +570,7 @@ en:
       destination/symbol_oneway:
         # 'destination:symbol=*'
         label: Destination Symbols
-        terms: '<translate with synonyms or related terms for ''Destination Symbols'', separated by commas>'
+        terms: '[translate with synonyms or related terms for ''Destination Symbols'', separated by commas]'
       destination_oneway:
         # destination=*
         label: Destinations
@@ -588,7 +588,7 @@ en:
         # 'diet:=*'
         label: Diet Types
         # 'terms: gluten free,fruitarian,halal,kosher,lactose free,meat,pescatarian,raw,vegan,vegetarian'
-        terms: '<translate with synonyms or related terms for ''Diet Types'', separated by commas>'
+        terms: '[translate with synonyms or related terms for ''Diet Types'', separated by commas]'
       diplomatic:
         # diplomatic=*
         label: Type
@@ -677,7 +677,7 @@ en:
           # dog=yes
           'yes': Allowed
         # 'terms: animals,pets'
-        terms: '<translate with synonyms or related terms for ''Dogs'', separated by commas>'
+        terms: '[translate with synonyms or related terms for ''Dogs'', separated by commas]'
       door:
         # door=*
         label: Door
@@ -687,13 +687,13 @@ en:
       drive_through:
         # drive_through=*
         label: Drive-Through
-        terms: '<translate with synonyms or related terms for ''Drive-Through'', separated by commas>'
+        terms: '[translate with synonyms or related terms for ''Drive-Through'', separated by commas]'
       duration:
         # duration=*
         label: Duration
         # duration field placeholder
         placeholder: '00:00'
-        terms: '<translate with synonyms or related terms for ''Duration'', separated by commas>'
+        terms: '[translate with synonyms or related terms for ''Duration'', separated by commas]'
       electrified:
         # electrified=*
         label: Electrification
@@ -712,13 +712,13 @@ en:
         # ele=*
         label: Elevation
         # 'terms: altitude'
-        terms: '<translate with synonyms or related terms for ''Elevation'', separated by commas>'
+        terms: '[translate with synonyms or related terms for ''Elevation'', separated by commas]'
       email:
         # email=*
         label: Email
         # email field placeholder
         placeholder: example@example.com
-        terms: '<translate with synonyms or related terms for ''Email'', separated by commas>'
+        terms: '[translate with synonyms or related terms for ''Email'', separated by commas]'
       embankment:
         # embankment=*
         label: Type
@@ -750,22 +750,22 @@ en:
         label: Fax
         # fax field placeholder
         placeholder: +31 42 123 4567
-        terms: '<translate with synonyms or related terms for ''Fax'', separated by commas>'
+        terms: '[translate with synonyms or related terms for ''Fax'', separated by commas]'
       fee:
         # fee=*
         label: Fee
-        terms: '<translate with synonyms or related terms for ''Fee'', separated by commas>'
+        terms: '[translate with synonyms or related terms for ''Fee'', separated by commas]'
       fence_type:
         # fence_type=*
         label: Type
       fire_hydrant/diameter:
         # 'fire_hydrant:diameter=*'
         label: 'Diameter (mm, in, or letters)'
-        terms: '<translate with synonyms or related terms for ''Diameter (mm, in, or letters)'', separated by commas>'
+        terms: '[translate with synonyms or related terms for ''Diameter (mm, in, or letters)'', separated by commas]'
       fire_hydrant/pressure:
         # 'fire_hydrant:pressure=*'
         label: Pressure (bar)
-        terms: '<translate with synonyms or related terms for ''Pressure (bar)'', separated by commas>'
+        terms: '[translate with synonyms or related terms for ''Pressure (bar)'', separated by commas]'
       fire_hydrant/type:
         # 'fire_hydrant:type=*'
         label: Shape
@@ -784,7 +784,7 @@ en:
       fishing:
         # fishing=*
         label: Fishing
-        terms: '<translate with synonyms or related terms for ''Fishing'', separated by commas>'
+        terms: '[translate with synonyms or related terms for ''Fishing'', separated by commas]'
       fitness_station:
         # fitness_station=*
         label: Equipment Type
@@ -792,7 +792,7 @@ en:
         # fixme=*
         label: Fix Me
         # 'terms: help request'
-        terms: '<translate with synonyms or related terms for ''Fix Me'', separated by commas>'
+        terms: '[translate with synonyms or related terms for ''Fix Me'', separated by commas]'
       flag/type:
         # 'flag:type=*'
         label: Flag Type
@@ -802,7 +802,7 @@ en:
       flood_prone:
         # flood_prone=*
         label: Flood Prone
-        terms: '<translate with synonyms or related terms for ''Flood Prone'', separated by commas>'
+        terms: '[translate with synonyms or related terms for ''Flood Prone'', separated by commas]'
       ford:
         # ford=*
         label: Type
@@ -811,11 +811,11 @@ en:
       frequency:
         # frequency=*
         label: Operating Frequency
-        terms: '<translate with synonyms or related terms for ''Operating Frequency'', separated by commas>'
+        terms: '[translate with synonyms or related terms for ''Operating Frequency'', separated by commas]'
       frequency_electrified:
         # frequency=*
         label: Operating Frequency
-        terms: '<translate with synonyms or related terms for ''Operating Frequency'', separated by commas>'
+        terms: '[translate with synonyms or related terms for ''Operating Frequency'', separated by commas]'
       from:
         # from=*
         label: From
@@ -841,7 +841,7 @@ en:
         # gender field placeholder
         placeholder: Unknown
         # 'terms: access,female,male,unisex'
-        terms: '<translate with synonyms or related terms for ''Gender'', separated by commas>'
+        terms: '[translate with synonyms or related terms for ''Gender'', separated by commas]'
       generator/method:
         # 'generator:method=*'
         label: Method
@@ -887,15 +887,15 @@ en:
       height:
         # height=*
         label: Height (Meters)
-        terms: '<translate with synonyms or related terms for ''Height (Meters)'', separated by commas>'
+        terms: '[translate with synonyms or related terms for ''Height (Meters)'', separated by commas]'
       height_building:
         # height=*
         label: Building Height (Meters)
-        terms: '<translate with synonyms or related terms for ''Building Height (Meters)'', separated by commas>'
+        terms: '[translate with synonyms or related terms for ''Building Height (Meters)'', separated by commas]'
       highspeed:
         # highspeed=*
         label: High-Speed
-        terms: '<translate with synonyms or related terms for ''High-Speed'', separated by commas>'
+        terms: '[translate with synonyms or related terms for ''High-Speed'', separated by commas]'
       highway:
         # highway=*
         label: Type
@@ -953,7 +953,7 @@ en:
           impossible: 'Impassable: Way or bridge not passable for horses. Too narrow, insuffient support, obstacles like ladders. Danger of life.'
         # horse_scale field placeholder
         placeholder: 'Difficult, Dangerous...'
-        terms: '<translate with synonyms or related terms for ''Horseback Riding Difficulty'', separated by commas>'
+        terms: '[translate with synonyms or related terms for ''Horseback Riding Difficulty'', separated by commas]'
       horse_stables:
         # amenity=*
         label: Riding Stable
@@ -971,7 +971,7 @@ en:
       incline:
         # incline=*
         label: Incline
-        terms: '<translate with synonyms or related terms for ''Incline'', separated by commas>'
+        terms: '[translate with synonyms or related terms for ''Incline'', separated by commas]'
       incline_steps:
         # incline=*
         label: Incline
@@ -983,7 +983,7 @@ en:
       indoor:
         # indoor=*
         label: Indoor
-        terms: '<translate with synonyms or related terms for ''Indoor'', separated by commas>'
+        terms: '[translate with synonyms or related terms for ''Indoor'', separated by commas]'
       indoor_type:
         # indoor=*
         label: Type
@@ -996,11 +996,11 @@ en:
       inscription:
         # inscription=*
         label: Inscription
-        terms: '<translate with synonyms or related terms for ''Inscription'', separated by commas>'
+        terms: '[translate with synonyms or related terms for ''Inscription'', separated by commas]'
       intermittent:
         # intermittent=*
         label: Intermittent
-        terms: '<translate with synonyms or related terms for ''Intermittent'', separated by commas>'
+        terms: '[translate with synonyms or related terms for ''Intermittent'', separated by commas]'
       intermittent_yes:
         # intermittent=*
         label: Intermittent
@@ -1019,25 +1019,25 @@ en:
           # internet_access=yes
           'yes': 'Yes'
         # 'terms: wifi,wlan'
-        terms: '<translate with synonyms or related terms for ''Internet Access'', separated by commas>'
+        terms: '[translate with synonyms or related terms for ''Internet Access'', separated by commas]'
       internet_access/fee:
         # 'internet_access:fee=*'
         label: Internet Access Fee
         # 'terms: wifi fee'
-        terms: '<translate with synonyms or related terms for ''Internet Access Fee'', separated by commas>'
+        terms: '[translate with synonyms or related terms for ''Internet Access Fee'', separated by commas]'
       internet_access/ssid:
         # 'internet_access:ssid=*'
         label: Wifi Network Name
         # 'terms: ssid'
-        terms: '<translate with synonyms or related terms for ''Wifi Network Name'', separated by commas>'
+        terms: '[translate with synonyms or related terms for ''Wifi Network Name'', separated by commas]'
       interval:
         # interval=*
         label: Interval
-        terms: '<translate with synonyms or related terms for ''Interval'', separated by commas>'
+        terms: '[translate with synonyms or related terms for ''Interval'', separated by commas]'
       junction/ref_oneway:
         # 'junction:ref=*'
         label: Junction Number
-        terms: '<translate with synonyms or related terms for ''Junction Number'', separated by commas>'
+        terms: '[translate with synonyms or related terms for ''Junction Number'', separated by commas]'
       junction_line:
         # junction=*
         label: Junction
@@ -1048,7 +1048,7 @@ en:
           jughandle: Jughandle
           # junction=roundabout
           roundabout: Roundabout
-        terms: '<translate with synonyms or related terms for ''Junction'', separated by commas>'
+        terms: '[translate with synonyms or related terms for ''Junction'', separated by commas]'
       kerb:
         # kerb=*
         label: Curb
@@ -1069,7 +1069,7 @@ en:
         label: Lanes
         # lanes field placeholder
         placeholder: '1, 2, 3...'
-        terms: '<translate with synonyms or related terms for ''Lanes'', separated by commas>'
+        terms: '[translate with synonyms or related terms for ''Lanes'', separated by commas]'
       language_multi:
         # 'language:=*'
         label: Languages
@@ -1078,7 +1078,7 @@ en:
         label: Layer
         # layer field placeholder
         placeholder: '0'
-        terms: '<translate with synonyms or related terms for ''Layer'', separated by commas>'
+        terms: '[translate with synonyms or related terms for ''Layer'', separated by commas]'
       leaf_cycle:
         # leaf_cycle=*
         label: Leaf Cycle
@@ -1137,13 +1137,13 @@ en:
         # level=*
         label: Level
         # 'terms: building floor,deck,storey,story'
-        terms: '<translate with synonyms or related terms for ''Level'', separated by commas>'
+        terms: '[translate with synonyms or related terms for ''Level'', separated by commas]'
       levels:
         # 'building:levels=*'
         label: Levels
         # levels field placeholder
         placeholder: '2, 4, 6...'
-        terms: '<translate with synonyms or related terms for ''Levels'', separated by commas>'
+        terms: '[translate with synonyms or related terms for ''Levels'', separated by commas]'
       liaison:
         # liaison=*
         label: Type
@@ -1151,11 +1151,11 @@ en:
         # lit=*
         label: Lit
         # 'terms: lamp,lighting'
-        terms: '<translate with synonyms or related terms for ''Lit'', separated by commas>'
+        terms: '[translate with synonyms or related terms for ''Lit'', separated by commas]'
       location:
         # location=*
         label: Location
-        terms: '<translate with synonyms or related terms for ''Location'', separated by commas>'
+        terms: '[translate with synonyms or related terms for ''Location'', separated by commas]'
       location_pool:
         # location=*
         label: Location
@@ -1178,7 +1178,7 @@ en:
       manufacturer:
         # manufacturer=*
         label: Manufacturer
-        terms: '<translate with synonyms or related terms for ''Manufacturer'', separated by commas>'
+        terms: '[translate with synonyms or related terms for ''Manufacturer'', separated by commas]'
       map_size:
         # map_size=*
         label: Coverage
@@ -1188,37 +1188,37 @@ en:
       material:
         # material=*
         label: Material
-        terms: '<translate with synonyms or related terms for ''Material'', separated by commas>'
+        terms: '[translate with synonyms or related terms for ''Material'', separated by commas]'
       maxheight:
         # maxheight=*
         label: Max Height
         # maxheight field placeholder
         placeholder: '4, 4.5, 5, 14''0", 14''6", 15''0"'
-        terms: '<translate with synonyms or related terms for ''Max Height'', separated by commas>'
+        terms: '[translate with synonyms or related terms for ''Max Height'', separated by commas]'
       maxspeed:
         # maxspeed=*
         label: Speed Limit
         # maxspeed field placeholder
         placeholder: '40, 50, 60...'
-        terms: '<translate with synonyms or related terms for ''Speed Limit'', separated by commas>'
+        terms: '[translate with synonyms or related terms for ''Speed Limit'', separated by commas]'
       maxspeed/advisory:
         # 'maxspeed:advisory=*'
         label: Advisory Speed Limit
         # maxspeed/advisory field placeholder
         placeholder: '40, 50, 60...'
-        terms: '<translate with synonyms or related terms for ''Advisory Speed Limit'', separated by commas>'
+        terms: '[translate with synonyms or related terms for ''Advisory Speed Limit'', separated by commas]'
       maxstay:
         # maxstay=*
         label: Max Stay
-        terms: '<translate with synonyms or related terms for ''Max Stay'', separated by commas>'
+        terms: '[translate with synonyms or related terms for ''Max Stay'', separated by commas]'
       maxweight:
         # maxweight=*
         label: Max Weight
-        terms: '<translate with synonyms or related terms for ''Max Weight'', separated by commas>'
+        terms: '[translate with synonyms or related terms for ''Max Weight'', separated by commas]'
       maxweight_bridge:
         # maxweight=*
         label: Max Weight
-        terms: '<translate with synonyms or related terms for ''Max Weight'', separated by commas>'
+        terms: '[translate with synonyms or related terms for ''Max Weight'', separated by commas]'
       memorial:
         # memorial=*
         label: Type
@@ -1226,13 +1226,13 @@ en:
         # microbrewery=*
         label: Microbrewery
         # 'terms: brewpub,craft beer'
-        terms: '<translate with synonyms or related terms for ''Microbrewery'', separated by commas>'
+        terms: '[translate with synonyms or related terms for ''Microbrewery'', separated by commas]'
       minspeed:
         # minspeed=*
         label: Minimum Speed Limit
         # minspeed field placeholder
         placeholder: '20, 30, 40...'
-        terms: '<translate with synonyms or related terms for ''Minimum Speed Limit'', separated by commas>'
+        terms: '[translate with synonyms or related terms for ''Minimum Speed Limit'', separated by commas]'
       monitoring_multi:
         # 'monitoring:=*'
         label: Monitoring
@@ -1256,7 +1256,7 @@ en:
           '6': '6: Not rideable except by the very best mountain bikers'
         # mtb/scale field placeholder
         placeholder: '0, 1, 2, 3...'
-        terms: '<translate with synonyms or related terms for ''Mountain Biking Difficulty'', separated by commas>'
+        terms: '[translate with synonyms or related terms for ''Mountain Biking Difficulty'', separated by commas]'
       mtb/scale/imba:
         # 'mtb:scale:imba=*'
         label: IMBA Trail Difficulty
@@ -1273,7 +1273,7 @@ en:
           '4': Extremely Difficult (double black diamond)
         # mtb/scale/imba field placeholder
         placeholder: 'Easy, Medium, Difficult...'
-        terms: '<translate with synonyms or related terms for ''IMBA Trail Difficulty'', separated by commas>'
+        terms: '[translate with synonyms or related terms for ''IMBA Trail Difficulty'', separated by commas]'
       mtb/scale/uphill:
         # 'mtb:scale:uphill=*'
         label: Mountain Biking Uphill Difficulty
@@ -1292,21 +1292,21 @@ en:
           '5': '5: Very steep, bike generally needs to be pushed or carried'
         # mtb/scale/uphill field placeholder
         placeholder: '0, 1, 2, 3...'
-        terms: '<translate with synonyms or related terms for ''Mountain Biking Uphill Difficulty'', separated by commas>'
+        terms: '[translate with synonyms or related terms for ''Mountain Biking Uphill Difficulty'', separated by commas]'
       name:
         # name=*
         label: Name
         # name field placeholder
         placeholder: Common name (if any)
         # 'terms: label,title'
-        terms: '<translate with synonyms or related terms for ''Name'', separated by commas>'
+        terms: '[translate with synonyms or related terms for ''Name'', separated by commas]'
       natural:
         # natural=*
         label: Natural
       network:
         # network=*
         label: Network
-        terms: '<translate with synonyms or related terms for ''Network'', separated by commas>'
+        terms: '[translate with synonyms or related terms for ''Network'', separated by commas]'
       network_bicycle:
         # network=*
         label: Network Type
@@ -1356,12 +1356,12 @@ en:
         # 'not:name=*'
         label: Incorrect Names
         # 'terms: common mistake names,wrong names'
-        terms: '<translate with synonyms or related terms for ''Incorrect Names'', separated by commas>'
+        terms: '[translate with synonyms or related terms for ''Incorrect Names'', separated by commas]'
       note:
         # note=*
         label: Note
         # 'terms: comment'
-        terms: '<translate with synonyms or related terms for ''Note'', separated by commas>'
+        terms: '[translate with synonyms or related terms for ''Note'', separated by commas]'
       office:
         # office=*
         label: Type
@@ -1382,7 +1382,7 @@ en:
       oneway/bicycle:
         # 'oneway:bicycle=*'
         label: One Way (Bicycles)
-        terms: '<translate with synonyms or related terms for ''One Way (Bicycles)'', separated by commas>'
+        terms: '[translate with synonyms or related terms for ''One Way (Bicycles)'', separated by commas]'
       oneway_yes:
         # oneway=*
         label: One Way
@@ -1405,18 +1405,18 @@ en:
         label: Hours
         # opening_hours field placeholder
         placeholder: Unknown
-        terms: '<translate with synonyms or related terms for ''Hours'', separated by commas>'
+        terms: '[translate with synonyms or related terms for ''Hours'', separated by commas]'
       operator:
         # operator=*
         label: Operator
-        terms: '<translate with synonyms or related terms for ''Operator'', separated by commas>'
+        terms: '[translate with synonyms or related terms for ''Operator'', separated by commas]'
       operator/type:
         # 'operator:type=*'
         label: Operator Type
       outdoor_seating:
         # outdoor_seating=*
         label: Outdoor Seating
-        terms: '<translate with synonyms or related terms for ''Outdoor Seating'', separated by commas>'
+        terms: '[translate with synonyms or related terms for ''Outdoor Seating'', separated by commas]'
       par:
         # par=*
         label: Par
@@ -1425,7 +1425,7 @@ en:
       park_ride:
         # park_ride=*
         label: Park and Ride
-        terms: '<translate with synonyms or related terms for ''Park and Ride'', separated by commas>'
+        terms: '[translate with synonyms or related terms for ''Park and Ride'', separated by commas]'
       parking:
         # parking=*
         label: Type
@@ -1447,11 +1447,11 @@ en:
       payment_multi:
         # 'payment:=*'
         label: Payment Types
-        terms: '<translate with synonyms or related terms for ''Payment Types'', separated by commas>'
+        terms: '[translate with synonyms or related terms for ''Payment Types'', separated by commas]'
       payment_multi_fee:
         # 'payment:=*'
         label: Payment Types
-        terms: '<translate with synonyms or related terms for ''Payment Types'', separated by commas>'
+        terms: '[translate with synonyms or related terms for ''Payment Types'', separated by commas]'
       phases:
         # phases=*
         label: Phases
@@ -1463,7 +1463,7 @@ en:
         # phone field placeholder
         placeholder: +31 42 123 4567
         # 'terms: phone number'
-        terms: '<translate with synonyms or related terms for ''Telephone'', separated by commas>'
+        terms: '[translate with synonyms or related terms for ''Telephone'', separated by commas]'
       piste/difficulty:
         # 'piste:difficulty=*'
         label: Difficulty
@@ -1639,7 +1639,7 @@ en:
         # polling_station=*
         label: Polling Place
         # 'terms: voting place'
-        terms: '<translate with synonyms or related terms for ''Polling Place'', separated by commas>'
+        terms: '[translate with synonyms or related terms for ''Polling Place'', separated by commas]'
       population:
         # population=*
         label: Population
@@ -1652,7 +1652,7 @@ en:
       power_supply:
         # power_supply=*
         label: Power Supply
-        terms: '<translate with synonyms or related terms for ''Power Supply'', separated by commas>'
+        terms: '[translate with synonyms or related terms for ''Power Supply'', separated by commas]'
       preschool:
         # preschool=*
         label: Preschool
@@ -1662,7 +1662,7 @@ en:
       product:
         # product=*
         label: Products
-        terms: '<translate with synonyms or related terms for ''Products'', separated by commas>'
+        terms: '[translate with synonyms or related terms for ''Products'', separated by commas]'
       public_bookcase/type:
         # 'public_bookcase:type=*'
         label: Type
@@ -1703,7 +1703,7 @@ en:
       ref:
         # ref=*
         label: Reference Code
-        terms: '<translate with synonyms or related terms for ''Reference Code'', separated by commas>'
+        terms: '[translate with synonyms or related terms for ''Reference Code'', separated by commas]'
       ref/isil:
         # 'ref:isil=*'
         label: ISIL Code
@@ -1724,14 +1724,14 @@ en:
       ref_road_number:
         # ref=*
         label: Road Number
-        terms: '<translate with synonyms or related terms for ''Road Number'', separated by commas>'
+        terms: '[translate with synonyms or related terms for ''Road Number'', separated by commas]'
       ref_room_number:
         # ref=*
         label: Room Number
       ref_route:
         # ref=*
         label: Route Number
-        terms: '<translate with synonyms or related terms for ''Route Number'', separated by commas>'
+        terms: '[translate with synonyms or related terms for ''Route Number'', separated by commas]'
       ref_runway:
         # ref=*
         label: Runway Number
@@ -1751,7 +1751,7 @@ en:
       religion:
         # religion=*
         label: Religion
-        terms: '<translate with synonyms or related terms for ''Religion'', separated by commas>'
+        terms: '[translate with synonyms or related terms for ''Religion'', separated by commas]'
       reservation:
         # reservation=*
         label: Reservations
@@ -1764,7 +1764,7 @@ en:
           required: Required
           # reservation=yes
           'yes': Accepted
-        terms: '<translate with synonyms or related terms for ''Reservations'', separated by commas>'
+        terms: '[translate with synonyms or related terms for ''Reservations'', separated by commas]'
       resort:
         # resort=*
         label: Type
@@ -1779,7 +1779,7 @@ en:
       roof/colour:
         # 'roof:colour=*'
         label: Roof Color
-        terms: '<translate with synonyms or related terms for ''Roof Color'', separated by commas>'
+        terms: '[translate with synonyms or related terms for ''Roof Color'', separated by commas]'
       room:
         # room=*
         label: Type
@@ -1810,16 +1810,16 @@ en:
           mountain_hiking: 'T2: Mountain Hiking'
         # sac_scale field placeholder
         placeholder: 'Mountain Hiking, Alpine Hiking...'
-        terms: '<translate with synonyms or related terms for ''Hiking Difficulty'', separated by commas>'
+        terms: '[translate with synonyms or related terms for ''Hiking Difficulty'', separated by commas]'
       salt:
         # salt=*
         label: Salt
         # 'terms: saline,salinated'
-        terms: '<translate with synonyms or related terms for ''Salt'', separated by commas>'
+        terms: '[translate with synonyms or related terms for ''Salt'', separated by commas]'
       sanitary_dump_station:
         # sanitary_dump_station=*
         label: Toilet Disposal
-        terms: '<translate with synonyms or related terms for ''Toilet Disposal'', separated by commas>'
+        terms: '[translate with synonyms or related terms for ''Toilet Disposal'', separated by commas]'
       screen:
         # screen=*
         label: Screens
@@ -1938,7 +1938,7 @@ en:
         # 'seamark:type=*'
         label: Seamark
         # 'terms: marine'
-        terms: '<translate with synonyms or related terms for ''Seamark'', separated by commas>'
+        terms: '[translate with synonyms or related terms for ''Seamark'', separated by commas]'
       seamark/wreck/category:
         # 'seamark:wreck:category=*'
         label: Category
@@ -1962,7 +1962,7 @@ en:
           'yes': 'Yes'
         # second_hand field placeholder
         placeholder: 'Yes, No, Only'
-        terms: '<translate with synonyms or related terms for ''Sells Used'', separated by commas>'
+        terms: '[translate with synonyms or related terms for ''Sells Used'', separated by commas]'
       self_service:
         # self_service=*
         label: Self-Service
@@ -1987,7 +1987,7 @@ en:
           spur: Spur
           # service=yard
           yard: Yard
-        terms: '<translate with synonyms or related terms for ''Service Type'', separated by commas>'
+        terms: '[translate with synonyms or related terms for ''Service Type'', separated by commas]'
       service_times:
         # service_times=*
         label: Service Times
@@ -2037,7 +2037,7 @@ en:
           'yes': Allowed everywhere
         # smoking field placeholder
         placeholder: 'No, Separated, Yes...'
-        terms: '<translate with synonyms or related terms for ''Smoking'', separated by commas>'
+        terms: '[translate with synonyms or related terms for ''Smoking'', separated by commas]'
       smoothness:
         # smoothness=*
         label: Smoothness
@@ -2060,7 +2060,7 @@ en:
           very_horrible: 'Specialized off-road: tractor, ATV'
         # smoothness field placeholder
         placeholder: 'Thin Rollers, Wheels, Off-Road...'
-        terms: '<translate with synonyms or related terms for ''Smoothness'', separated by commas>'
+        terms: '[translate with synonyms or related terms for ''Smoothness'', separated by commas]'
       social_facility:
         # social_facility=*
         label: Type
@@ -2071,11 +2071,11 @@ en:
         # source=*
         label: Sources
         # 'terms: reference'
-        terms: '<translate with synonyms or related terms for ''Sources'', separated by commas>'
+        terms: '[translate with synonyms or related terms for ''Sources'', separated by commas]'
       species/wikidata:
         # 'species:wikidata=*, species:wikipedia=*'
         label: Species Wikidata
-        terms: '<translate with synonyms or related terms for ''Species Wikidata'', separated by commas>'
+        terms: '[translate with synonyms or related terms for ''Species Wikidata'', separated by commas]'
       sport:
         # sport=*
         label: Sports
@@ -2092,12 +2092,12 @@ en:
         # stars=*
         label: Stars
         # 'terms: rating'
-        terms: '<translate with synonyms or related terms for ''Stars'', separated by commas>'
+        terms: '[translate with synonyms or related terms for ''Stars'', separated by commas]'
       start_date:
         # start_date=*
         label: Start Date
         # 'terms: inception'
-        terms: '<translate with synonyms or related terms for ''Start Date'', separated by commas>'
+        terms: '[translate with synonyms or related terms for ''Start Date'', separated by commas]'
       step_count:
         # step_count=*
         label: Number of Steps
@@ -2116,7 +2116,7 @@ en:
         # stroller=*
         label: Stroller Access
         # 'terms: baby carriage,perambulator,pram,pushchair'
-        terms: '<translate with synonyms or related terms for ''Stroller Access'', separated by commas>'
+        terms: '[translate with synonyms or related terms for ''Stroller Access'', separated by commas]'
       structure:
         # 'bridge=*, tunnel=*, embankment=*, cutting=*, ford=*'
         label: Structure
@@ -2154,7 +2154,7 @@ en:
         # supervised=*
         label: Supervised
         # 'terms: guarded,manned'
-        terms: '<translate with synonyms or related terms for ''Supervised'', separated by commas>'
+        terms: '[translate with synonyms or related terms for ''Supervised'', separated by commas]'
       support:
         # support=*
         label: Support
@@ -2180,7 +2180,7 @@ en:
       survey/date:
         # 'survey:date=*'
         label: Last Survey Date
-        terms: '<translate with synonyms or related terms for ''Last Survey Date'', separated by commas>'
+        terms: '[translate with synonyms or related terms for ''Last Survey Date'', separated by commas]'
       swimming_pool:
         # swimming_pool=*
         label: Type
@@ -2212,14 +2212,14 @@ en:
         # takeaway field placeholder
         placeholder: 'Yes, No, Takeaway Only...'
         # 'terms: take out,takeout'
-        terms: '<translate with synonyms or related terms for ''Takeaway'', separated by commas>'
+        terms: '[translate with synonyms or related terms for ''Takeaway'', separated by commas]'
       target:
         # target=*
         label: Target
       tidal:
         # tidal=*
         label: Tidal
-        terms: '<translate with synonyms or related terms for ''Tidal'', separated by commas>'
+        terms: '[translate with synonyms or related terms for ''Tidal'', separated by commas]'
       to:
         # to=*
         label: To
@@ -2238,15 +2238,15 @@ en:
       toilets/handwashing:
         # 'toilets:handwashing=*'
         label: Handwashing
-        terms: '<translate with synonyms or related terms for ''Handwashing'', separated by commas>'
+        terms: '[translate with synonyms or related terms for ''Handwashing'', separated by commas]'
       toilets/position:
         # 'toilets:position=*'
         label: Positions
-        terms: '<translate with synonyms or related terms for ''Positions'', separated by commas>'
+        terms: '[translate with synonyms or related terms for ''Positions'', separated by commas]'
       toll:
         # toll=*
         label: Toll
-        terms: '<translate with synonyms or related terms for ''Toll'', separated by commas>'
+        terms: '[translate with synonyms or related terms for ''Toll'', separated by commas]'
       tomb:
         # tomb=*
         label: Type
@@ -2327,7 +2327,7 @@ en:
           'no': 'No: pathless, excellent orientation skills required'
         # trail_visibility field placeholder
         placeholder: 'Excellent, Good, Bad...'
-        terms: '<translate with synonyms or related terms for ''Trail Visibility'', separated by commas>'
+        terms: '[translate with synonyms or related terms for ''Trail Visibility'', separated by commas]'
       transformer:
         # transformer=*
         label: Type
@@ -2357,7 +2357,7 @@ en:
       trolley_wire:
         # trolley_wire=*
         label: Overhead Trolley Wires
-        terms: '<translate with synonyms or related terms for ''Overhead Trolley Wires'', separated by commas>'
+        terms: '[translate with synonyms or related terms for ''Overhead Trolley Wires'', separated by commas]'
       tunnel:
         # tunnel=*
         label: Type
@@ -2379,7 +2379,7 @@ en:
           test: Test
           # usage=tourism
           tourism: Tourism
-        terms: '<translate with synonyms or related terms for ''Usage Type'', separated by commas>'
+        terms: '[translate with synonyms or related terms for ''Usage Type'', separated by commas]'
       valve:
         # valve=*
         label: Type
@@ -2422,19 +2422,19 @@ en:
       voltage/primary:
         # 'voltage:primary=*'
         label: Primary Voltage
-        terms: '<translate with synonyms or related terms for ''Primary Voltage'', separated by commas>'
+        terms: '[translate with synonyms or related terms for ''Primary Voltage'', separated by commas]'
       voltage/secondary:
         # 'voltage:secondary=*'
         label: Secondary Voltage
-        terms: '<translate with synonyms or related terms for ''Secondary Voltage'', separated by commas>'
+        terms: '[translate with synonyms or related terms for ''Secondary Voltage'', separated by commas]'
       voltage/tertiary:
         # 'voltage:tertiary=*'
         label: Tertiary Voltage
-        terms: '<translate with synonyms or related terms for ''Tertiary Voltage'', separated by commas>'
+        terms: '[translate with synonyms or related terms for ''Tertiary Voltage'', separated by commas]'
       voltage_electrified:
         # voltage=*
         label: Voltage
-        terms: '<translate with synonyms or related terms for ''Voltage'', separated by commas>'
+        terms: '[translate with synonyms or related terms for ''Voltage'', separated by commas]'
       wall:
         # wall=*
         label: Type
@@ -2450,7 +2450,7 @@ en:
       water_volume:
         # water_volume=*
         label: Water Reserve Volume (m³)
-        terms: '<translate with synonyms or related terms for ''Water Reserve Volume (m³)'', separated by commas>'
+        terms: '[translate with synonyms or related terms for ''Water Reserve Volume (m³)'', separated by commas]'
       waterway:
         # waterway=*
         label: Type
@@ -2460,7 +2460,7 @@ en:
         # website field placeholder
         placeholder: 'https://example.com'
         # 'terms: internet presence,uri,url,webpage'
-        terms: '<translate with synonyms or related terms for ''Website'', separated by commas>'
+        terms: '[translate with synonyms or related terms for ''Website'', separated by commas]'
       wetland:
         # wetland=*
         label: Type
@@ -2468,28 +2468,28 @@ en:
         # wheelchair=*
         label: Wheelchair Access
         # 'terms: handicap access'
-        terms: '<translate with synonyms or related terms for ''Wheelchair Access'', separated by commas>'
+        terms: '[translate with synonyms or related terms for ''Wheelchair Access'', separated by commas]'
       wholesale:
         # wholesale=*
         label: Wholesale
       width:
         # width=*
         label: Width (Meters)
-        terms: '<translate with synonyms or related terms for ''Width (Meters)'', separated by commas>'
+        terms: '[translate with synonyms or related terms for ''Width (Meters)'', separated by commas]'
       wikidata:
         # 'wikidata=*, wikipedia=*'
         label: Wikidata
-        terms: '<translate with synonyms or related terms for ''Wikidata'', separated by commas>'
+        terms: '[translate with synonyms or related terms for ''Wikidata'', separated by commas]'
       wikipedia:
         # 'wikipedia=*, wikidata=*'
         label: Wikipedia
-        terms: '<translate with synonyms or related terms for ''Wikipedia'', separated by commas>'
+        terms: '[translate with synonyms or related terms for ''Wikipedia'', separated by commas]'
       windings:
         # windings=*
         label: Windings
         # windings field placeholder
         placeholder: '1, 2, 3...'
-        terms: '<translate with synonyms or related terms for ''Windings'', separated by commas>'
+        terms: '[translate with synonyms or related terms for ''Windings'', separated by commas]'
       windings/configuration:
         # 'windings:configuration=*'
         label: Windings Configuration
@@ -2508,7 +2508,7 @@ en:
           star: Star / Wye
           # 'windings:configuration=zigzag'
           zigzag: Zig Zag
-        terms: '<translate with synonyms or related terms for ''Windings Configuration'', separated by commas>'
+        terms: '[translate with synonyms or related terms for ''Windings Configuration'', separated by commas]'
     presets:
       addr/interpolation:
         # 'addr:interpolation=*'
