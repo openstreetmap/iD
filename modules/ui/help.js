@@ -181,6 +181,13 @@ export function uiHelp(context) {
             'tracing',
             'upload'
         ]],
+        ['tasks', [
+            'intro',
+            'tools_h',
+            'tools',
+            'tasks_h',
+            'tasks'
+        ]],
         ['qa', [
             'intro',
             'tools_h',
@@ -234,6 +241,8 @@ export function uiHelp(context) {
         'help.imagery.offsets_h': 3,
         'help.streetlevel.using_h': 3,
         'help.gps.using_h': 3,
+        'help.tasks.tools_h': 3,
+        'help.tasks.tasks_h': 3,
         'help.qa.tools_h': 3,
         'help.qa.issues_h': 3
     };
@@ -249,6 +258,7 @@ export function uiHelp(context) {
         disconnect: icon('#iD-operation-disconnect', 'pre-text'),
         layers: icon('#iD-icon-layers', 'pre-text'),
         data: icon('#iD-icon-data', 'pre-text'),
+        tasks: icon('#iD-icon-tasking', 'pre-text'),
         inspect: icon('#iD-icon-inspect', 'pre-text'),
         move: icon('#iD-operation-move', 'pre-text'),
         merge: icon('#iD-operation-merge', 'pre-text'),
