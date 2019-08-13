@@ -109,7 +109,13 @@ export function uiToolStructure(context) {
                         context.perform(action);
 
                         context.enter(
-                            modeDrawLine(context, prevWay.id, context.graph(), context.graph(), mode.button, false, mode.addMode)
+                            modeDrawLine(context, {
+                                wayID: prevWay.id,
+                                startGraph: context.graph(),
+                                baselineGraph: context.graph(),
+                                button: mode.button,
+                                addMode: mode.addMode
+                            })
                         );
                     }
                 }
@@ -128,9 +134,15 @@ export function uiToolStructure(context) {
                 );
 
                 prevWayID = way.id;
-
                 context.enter(
-                    modeDrawLine(context, newWay.id, startGraph, context.graph(), mode.button, isLast ? false : 'prefix', mode.addMode)
+                    modeDrawLine(context, {
+                        wayID: newWay.id,
+                        startGraph: startGraph,
+                        baselineGraph: context.graph(),
+                        button: mode.button,
+                        affix: isLast ? false : 'prefix',
+                        addMode: mode.addMode
+                    })
                 );
             }
         }
