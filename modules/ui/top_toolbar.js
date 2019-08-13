@@ -46,6 +46,7 @@ export function uiTopToolbar(context) {
         repeatAdd = uiToolRepeatAdd(context),
         centerZoom = uiToolCenterZoom(context),
         stopDraw = uiToolStopDraw(context),
+        /*
         deselect = uiToolSimpleButton({
             id: 'deselect',
             label: t('toolbar.deselect.title'),
@@ -56,6 +57,7 @@ export function uiTopToolbar(context) {
             tooltipKey: 'Esc',
             barButtonClass: 'wide'
         }),
+        */
         cancelSave = uiToolSimpleButton({
             id: 'cancel',
             label: t('confirm.cancel'),

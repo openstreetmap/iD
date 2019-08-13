@@ -17,6 +17,7 @@ export function uiToolAddFeature(context) {
     var tool = {
         id: 'add_feature',
         label: t('toolbar.add_feature'),
+        itemClass: 'disclosing',
         iconName: 'iD-logo-features',
         iconClass: 'icon-30'
     };

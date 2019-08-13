@@ -39,6 +39,7 @@ en:
       key: S
     toolbox:
       title: Tools
+      tooltip: Customize the toolbar.
   assistant:
     mode:
       adding: Adding

@@ -1,5 +1,3 @@
-import _debounce from 'lodash-es/debounce';
-
 import {
     event as d3_event,
     select as d3_select,
@@ -8,7 +6,6 @@ import {
 import { t } from '../../util/locale';
 import { svgIcon } from '../../svg/icon';
 import { tooltip } from '../../util/tooltip';
-import { uiTooltipHtml } from '../tooltipHtml';
 import { utilFunctor } from '../../util/util';
 
 export function uiToolToolbox(context) {
@@ -16,13 +13,14 @@ export function uiToolToolbox(context) {
     var tool = {
         id: 'toolbox',
         label: t('toolbar.toolbox.title'),
+        itemClass: 'disclosing',
         userToggleable: false
     };
 
-    var button = d3_select(null);
     var allowedTools = [];
 
-    var popover = d3_select(null);
+    var button = d3_select(null),
+        popover = d3_select(null);
 
     tool.render = function(selection) {
 
@@ -55,6 +53,11 @@ export function uiToolToolbox(context) {
                     popover.node().blur();
                 }
             })
+            .call(tooltip()
+                .placement('bottom')
+                .html(true)
+                .title(t('toolbar.toolbox.tooltip'))
+            )
             .call(svgIcon('#fas-toolbox'));
 
         buttonEnter
@@ -162,7 +165,7 @@ export function uiToolToolbox(context) {
 
         items.selectAll('.accessory')
             .classed('hide', function(d) {
-                return d.isToggledOn === false
+                return d.isToggledOn === false;
             });
     }
 
@@ -176,7 +179,7 @@ export function uiToolToolbox(context) {
             if (isToggledOn !== null) {
                 d.isToggledOn = isToggledOn === 'true';
             }
-        })
+        });
     };
 
     return tool;

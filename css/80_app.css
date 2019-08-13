@@ -576,6 +576,7 @@ button.bar-button.dragging {
     opacity: 0.75;
     z-index: 200;
 }
+.toolbar-item.disclosing button.bar-button.active .tooltip,
 button.bar-button.dragging .tooltip {
     display: none;
 }
@@ -637,13 +638,6 @@ button.add-note svg.icon {
 }
 [dir='rtl'] .undo-redo button:first-of-type {
     margin-left: 1px;
-}
-
-/* Add Feature toolbar item
-------------------------------------------------------- */
-
-.add-feature .bar-button.active .tooltip {
-    display: none;
 }
 
 /* Popover
