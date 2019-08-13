@@ -3,33 +3,30 @@ import { behaviorDrawWay } from '../behavior/draw_way';
 import { modeSelect } from './select';
 import { utilDisplayLabel } from '../util';
 
-export function modeDrawLine(context, wayID, startGraph, baselineGraph, button, affix, addMode) {
-    var mode = {
-        button: button,
-        id: 'draw-line',
-        title: (addMode && addMode.title) || utilDisplayLabel(context.entity(wayID), context)
-    };
+export function modeDrawLine(context, mode) {
 
-    mode.addMode = addMode;
+    if (!mode) mode = {};
 
-    mode.wayID = wayID;
+    mode.id = 'draw-line';
+    mode.button = mode.button || 'line';
+    mode.title =  (mode.addMode && mode.addMode.title) || utilDisplayLabel(context.entity(mode.wayID), context);
 
-    mode.isContinuing = !!affix;
+    mode.isContinuing = !!mode.affix;
 
     var behavior;
 
     mode.enter = function() {
 
-        if (addMode) {
+        if (mode.addMode) {
             // add in case this draw mode was entered from somewhere besides the add mode itself
-            addMode.addAddedEntityID(wayID);
+            mode.addMode.addAddedEntityID(mode.wayID);
         }
 
-        var way = context.entity(wayID);
-        var index = (affix === 'prefix') ? 0 : undefined;
-        var headID = (affix === 'prefix') ? way.first() : way.last();
+        var way = context.entity(mode.wayID);
+        var index = (mode.affix === 'prefix') ? 0 : undefined;
+        var headID = (mode.affix === 'prefix') ? way.first() : way.last();
 
-        behavior = behaviorDrawWay(context, wayID, index, mode, startGraph, baselineGraph)
+        behavior = behaviorDrawWay(context, mode.wayID, index, mode, mode.startGraph, mode.baselineGraph)
             .tail(t('modes.draw_line.tail'));
 
         var addNode = behavior.addNode;
@@ -50,11 +47,11 @@ export function modeDrawLine(context, wayID, startGraph, baselineGraph, button, 
     };
 
     mode.repeatAddedFeature = function(val) {
-        if (addMode) return addMode.repeatAddedFeature(val);
+        if (mode.addMode) return mode.addMode.repeatAddedFeature(val);
     };
 
     mode.addedEntityIDs = function() {
-        if (addMode) return addMode.addedEntityIDs();
+        if (mode.addMode) return mode.addMode.addedEntityIDs();
     };
 
     mode.didFinishAdding = function() {
@@ -62,13 +59,13 @@ export function modeDrawLine(context, wayID, startGraph, baselineGraph, button, 
             context.enter(mode.addMode);
         }
         else {
-            context.enter(modeSelect(context, mode.addedEntityIDs() || [wayID]).newFeature(!mode.isContinuing));
+            context.enter(modeSelect(context, mode.addedEntityIDs() || [mode.wayID]).newFeature(!mode.isContinuing));
         }
     };
 
 
     mode.selectedIDs = function() {
-        return [wayID];
+        return [mode.wayID];
     };
 
 

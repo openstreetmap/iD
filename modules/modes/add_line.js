@@ -91,7 +91,13 @@ export function modeAddLine(context, mode) {
 
     function enterDrawMode(way, startGraph) {
         _allAddedEntityIDs.push(way.id);
-        var drawMode = modeDrawLine(context, way.id, startGraph, context.graph(), mode.button, null, mode);
+        var drawMode = modeDrawLine(context, {
+            wayID: way.id,
+            startGraph: startGraph,
+            baselineGraph: context.graph(),
+            button: mode.button,
+            addMode: mode
+        });
         context.enter(drawMode);
     }
 
