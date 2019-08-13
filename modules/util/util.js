@@ -1,3 +1,4 @@
+import stringify from 'fast-json-stable-stringify';
 import { remove as removeDiacritics } from 'diacritics';
 import { fixRTLTextForSvg, rtlRegex } from './svg_paths_rtl_fix';
 
@@ -41,6 +42,28 @@ export function utilTagDiff(oldTags, newTags) {
         }
     });
     return tagDiff;
+}
+
+// ensure that all geojson features in a collection have IDs
+export function utilEnsureIDs(gj) {
+
+    // ensure that each single Feature object has a unique ID
+    function ensureFeatureID(feature) {
+        if (!feature) return;
+        feature.__featurehash__ = utilHashcode(stringify(feature));
+        return feature;
+    }
+
+    if (!gj) return null;
+
+    if (gj.type === 'FeatureCollection') {
+        for (var i = 0; i < gj.features.length; i++) {
+            ensureFeatureID(gj.features[i]);
+        }
+    } else {
+        ensureFeatureID(gj);
+    }
+    return gj;
 }
 
 

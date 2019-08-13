@@ -1495,7 +1495,8 @@
             "upload_explanation_with_user": "The changes you upload as {user} will be visible on all maps that use OpenStreetMap data.",
             "errors": {
                 "unsavedEdits": "Thanks for your edits! But before starting a task, please save your existing edits.",
-                "alreadyLocked": "Task is already locked."
+                "mappingNotAllowed": "The selected task is not in a state that allows mapping.",
+                "validationNotAllowed": "The selected task is not in a state that allows validation."
             }
         },
         "help": {

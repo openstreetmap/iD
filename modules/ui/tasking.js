@@ -63,16 +63,20 @@ export function uiTasking(context) {
 
 
 
-    var nonEditableStatuses = ['lockedForMapping', 'lockedForValidating'];
+    var mappingAllowed = ['ready', 'invalidated', 'locked'];
+    var validationAllowedStates = ['mapped', 'validated', 'badimagery'];
 
 
     function updateErrorsOnChange(task) {
 
 
+        // unsaved edits
         _errors.unsavedEdits.active = context.history().hasChanges() && layer.enabled() === false;
 
+        // invalid state for mapping or validation
         if (task) {
-            _errors.alreadyLocked.active = nonEditableStatuses.includes(task.status()); // TODO: TAH - also check who's locked it, if it's current user, allow
+            _errors.mappingNotAllowed.active = !mappingAllowed.includes(task.status()); // TODO: TAH - also check who's locked it, if it's current user, allow
+            _errors.validationNotAllowed.active = !validationAllowedStates.includes(task.status()); // TODO: TAH - also check who's locked it, if it's current user, allow
         }
 
         taskingService.errors(_errors);
@@ -144,6 +148,12 @@ export function uiTasking(context) {
             return layer && layer.supported();
         }
 
+        function authorized (task) {
+            return true;
+            // var status = task.status();
+            // var user
+        }
+
         taskingService.currentManager(d); // set manager
 
         if (d.managerId === 'none') {
@@ -166,14 +176,19 @@ export function uiTasking(context) {
                 _project = taskingService.getProject(taskingService.customSettings().projectId);
                 _task = taskingService.getTask(taskingService.customSettings().taskId);
 
-                // set project & task
-                if (_project && _task) {
-                    taskingService.currentProject(_project);
-                    taskingService.currentTask(_task);
+                if (authorized(_task)) {
+                    // set project & task
+                    if (_project && _task) {
+                        taskingService.currentProject(_project);
+                        taskingService.currentTask(_task);
+                    }
                 }
             }
 
-            setLayer(true); // enable layer
+            // enable layer if no active errors
+            if (!activeErrors(_errors)) {
+                setLayer(true);
+            }
 
         }
     }

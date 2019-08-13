@@ -4,14 +4,13 @@ import { geoBounds as d3_geoBounds, geoPath as d3_geoPath } from 'd3-geo';
 import { text as d3_text } from 'd3-fetch';
 import { event as d3_event, select as d3_select } from 'd3-selection';
 
-import stringify from 'fast-json-stable-stringify';
 import toGeoJSON from '@mapbox/togeojson';
 
 import { geoExtent, geoPolygonIntersectsPolygon } from '../geo';
 import { services } from '../services';
 import { svgPath } from './helpers';
 import { utilDetect } from '../util/detect';
-import { utilArrayFlatten, utilArrayUnion, utilHashcode } from '../util';
+import { utilArrayFlatten, utilArrayUnion, utilEnsureIDs, utilHashcode } from '../util';
 
 
 var _initialized = false;
@@ -101,29 +100,6 @@ export function svgData(projection, context, dispatch) {
     function layerOff() {
         layer.selectAll('.viewfield-group').remove();
         layer.style('display', 'none');
-    }
-
-
-    // ensure that all geojson features in a collection have IDs
-    function ensureIDs(gj) {
-        if (!gj) return null;
-
-        if (gj.type === 'FeatureCollection') {
-            for (var i = 0; i < gj.features.length; i++) {
-                ensureFeatureID(gj.features[i]);
-            }
-        } else {
-            ensureFeatureID(gj);
-        }
-        return gj;
-    }
-
-
-    // ensure that each single Feature object has a unique ID
-    function ensureFeatureID(feature) {
-        if (!feature) return;
-        feature.__featurehash__ = utilHashcode(stringify(feature));
-        return feature;
     }
 
 
@@ -337,7 +313,7 @@ export function svgData(projection, context, dispatch) {
 
         gj = gj || {};
         if (Object.keys(gj).length) {
-            _geojson = ensureIDs(gj);
+            _geojson = utilEnsureIDs(gj);
             _src = extension + ' data file';
             this.fitZoom();
         }
