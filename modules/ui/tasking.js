@@ -483,7 +483,6 @@ export function uiTasking(context) {
             .append('span')
                 .text(function(d) { return d.name; });
 
-        // Update
         items = items
             .merge(enter);
 
@@ -513,18 +512,18 @@ export function uiTasking(context) {
             return hasLoadedCustom || data;
         }
 
-        var showsData = hasData && layer.enabled();
+        var showsData = hasData() && layer.enabled() && !activeErrors(_errors).length;
 
         selection.selectAll('.manager-custom')
             .selectAll('label')
-            .classed('deemphasize', !hasData())
+            .classed('deemphasize', !showsData)
             .selectAll('input')
-            .property('disabled', !hasData() || !!activeErrors(_errors).length)
+            .property('disabled', !showsData)
             .property('checked', showsData);
 
         selection.selectAll('.custom-manager-zoom')
-            .classed('deemphasize', !hasData() || !!activeErrors(_errors).length)
-            .property('disabled', !hasData() || !!activeErrors(_errors).length)
+            .classed('deemphasize', !showsData)
+            .property('disabled', !showsData)
             .property('checked', showsData);
     }
 
@@ -547,9 +546,8 @@ export function uiTasking(context) {
                 // load data
                 taskingService.loadFromUrl(taskingService.customSettings()); // TODO: TAH - pull out when other managers added
 
-                // set manager
-                clickManager(taskingService.getManager('custom'));
-            }
+            // set manager
+            clickManager(taskingService.getManager('custom'));
         }
     }
 
@@ -582,13 +580,11 @@ export function uiTasking(context) {
 
         _toggleButton = selection
             .append('button')
-                .attr('tabindex', -1)
-                .on('click', uiTasking.togglePane)
-                .call(svgIcon('#iD-icon-tasking', 'light'))
-                .call(addNotificationBadge)
-                .call(paneTooltip);
-
-            // TODO: TAH - change color of button when tasking is enabled
+            .attr('tabindex', -1)
+            .on('click', uiTasking.togglePane)
+            .call(svgIcon('#iD-icon-tasking', 'light'))
+            .call(addNotificationBadge)
+            .call(paneTooltip);
     };
 
 

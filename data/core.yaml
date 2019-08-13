@@ -1171,6 +1171,13 @@ en:
     started_task:
       task_help: "You're editing task {taskId}{br}For details, click the {taskingButton} Tasking button or press the '{taskingKey}' key.{br}Need help? Click the {helpButton} Help button or pressing the '{helpKey}' key"
       stop_task: Stop task
+    cancel:
+      header: Cancel this tasking session
+      body: Are you sure you want to cancel this tasking session?
+      s: s
+      changes: " You'll undo {number_edits} edit{plural}."
+      accept: Yes, cancel session
+      dont_cancel: No, don't cancel
     comment: Write a comment (optional)
     inputPlaceholder: Enter a comment to share with other users.
     complete-header: Once you have finished {status}
@@ -1360,6 +1367,13 @@ en:
       tools: "The following tools are currently supported: [KeepRight](https://www.keepright.at/) and [ImproveOSM](https://improveosm.org/en/). Expect iD to support [Osmose](https://osmose.openstreetmap.fr/) and more Q/A tools in the future."
       issues_h: "Handling Issues"
       issues: "Handling Q/A issues is similar to handling notes. Click on a marker to view the issue details in the sidebar. Each tool has its own capabilities, but generally you can comment and/or close an issue."
+    tasks:
+      title: Tasks
+      intro: "A task is part of a coordinated mapping project. Each task has a description and instructions on what to map. To work on a task, visit a supported tasking manager website, select a task, and you'll be redirected back to the editor. To see task detials, click the {tasks} **Tasks** panel."
+      tools_h: Tools
+      tools: "The following tasking managers are supported: [HOT Tasking Manager](https://www.tasks.hotosm.org). Expect iD to support [Maproulette](https://maproulette.org/) and more tasking managers in the future. For details on other managers, please visit the [OSM tasking manager wiki](https://wiki.openstreetmap.org/wiki/Tasking_Manager)."
+      tasks_h: "Working on a Task"
+      tasks: "Working on a task is just regular mapping, except that you'll be restricted in what and where you can edit. When you're finished mapping or validating a mapped area, select an edit status, leave a comment (optional), and submit your work."
     field:
       restrictions:
         title: Turn Restrictions Help

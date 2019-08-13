@@ -7,15 +7,14 @@ import { uiTaskInstructions } from './taskingTaskInstructions';
 
 import { t } from '../util/locale';
 
-export function uiTaskingTaskDetails() {
+export function uiTaskingTaskDetails(context) {
 
     var quickLinks = uiQuickLinks();
     var taskHistory = uiTaskHistory();
     var taskInstructions = uiTaskInstructions();
-    var taskComplete = uiTaskComplete();
+    var taskComplete = uiTaskComplete(context);
 
     var _task;
-    var _context;
     var _activeTab = 0;
 
     var taskingTabs = [{ 'tab': 'complete'}, { 'tab': 'instructions'}, { 'tab': 'history'}];
@@ -76,7 +75,7 @@ export function uiTaskingTaskDetails() {
             .merge(sectionsEnter);
 
         // add complete tab
-        sectionsList.selectAll('.section-tab-complete').call(taskComplete.task(_task, _context));
+        sectionsList.selectAll('.section-tab-complete').call(taskComplete.task(_task));
 
         // add instructions tab
         sectionsList.selectAll('.section-tab-instructions').call(taskInstructions.task(_task));
@@ -105,7 +104,7 @@ export function uiTaskingTaskDetails() {
             click: function zoomTo() {
               d3_event.preventDefault();
               d3_event.stopPropagation();
-              _context.layers().layer('tasking').fitZoom();
+              context.layers().layer('tasking').fitZoom();
             }
         }];
 
@@ -149,11 +148,10 @@ export function uiTaskingTaskDetails() {
     }
 
 
-    taskingTaskDetails.task = function(val, context) {
+    taskingTaskDetails.task = function(val) {
         if (!arguments.length) return _task;
         _task = val;
 
-        if (context) { _context = context; }
         return this;
     };
 

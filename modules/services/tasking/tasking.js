@@ -746,11 +746,28 @@ export default {
     },
 
 
+    resetManager: function() {
+        var that = this;
+
+        that.currentManager(that.getManager('none'));
+    },
+
+
     resetProjectAndTask: function() {
         var that = this;
 
         that.resetProject();
         that.resetTask();
+    },
+
+
+    resetAll: function() {
+        var that = this;
+
+        that.resetManager();
+        that.resetProjectAndTask();
+
+        return this;
     },
 
 
@@ -773,11 +790,6 @@ export default {
 
     postTaskUpdate: function() {
         console.log('TODO: postTaskUpdate');
-    },
-
-
-    cancelTasking: function() {
-        console.log('TODO: cancelTasking');
     },
 
 };
