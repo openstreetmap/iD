@@ -135,7 +135,7 @@ export function uiTasking(context) {
     }
 
 
-    function setManager(d) {
+    function clickManager(d) {
 
         function layerSupported() {
             return layer && layer.supported();
@@ -418,7 +418,7 @@ export function uiTasking(context) {
 
     function updateTaskingManagers() {
         _taskingManagerContainer.selectAll('.layer-list-tasking')
-            .call(drawManagerListItems, _managers, 'radio', 'manager', setManager, showsManager);
+            .call(drawManagerListItems, _managers, 'radio', 'manager', clickManager, showsManager);
     }
 
 
@@ -479,6 +479,9 @@ export function uiTasking(context) {
             .append('span')
                 .text(function(d) { return d.name; });
 
+        items = items
+            .merge(enter);
+
         items
             .classed('active', active)
             .selectAll('input')
@@ -505,18 +508,18 @@ export function uiTasking(context) {
             return hasLoadedCustom || data;
         }
 
-        var showsData = hasData && layer.enabled();
+        var showsData = hasData() && layer.enabled() && !activeErrors(_errors).length;
 
         selection.selectAll('.manager-custom')
             .selectAll('label')
-            .classed('deemphasize', !hasData())
+            .classed('deemphasize', !showsData)
             .selectAll('input')
-            .property('disabled', !hasData() && !!activeErrors(_errors).length)
+            .property('disabled', !showsData)
             .property('checked', showsData);
 
         selection.selectAll('.custom-manager-zoom')
-            .classed('deemphasize', !hasData() && !!activeErrors(_errors).length)
-            .property('disabled', !hasData() && !!activeErrors(_errors).length)
+            .classed('deemphasize', !showsData)
+            .property('disabled', !showsData)
             .property('checked', showsData);
     }
 
@@ -539,7 +542,7 @@ export function uiTasking(context) {
             taskingService.loadFromUrl(taskingService.customSettings()); // TODO: TAH - pull out when other managers added
 
             // set manager
-            setManager(taskingService.getManager('custom'));
+            clickManager(taskingService.getManager('custom'));
         }
     }
 
