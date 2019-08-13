@@ -269,7 +269,7 @@ export function rendererMap(context) {
         if (difference) {
             var complete = difference.complete(map.extent());
             data = Object.values(complete).filter(Boolean);
-            set = new Set(data.map(function(entity) { return entity.id; }));
+            set = new Set(Object.keys(complete));
             filter = function(d) { return set.has(d.id); };
             features.clear(data);
 
@@ -744,7 +744,7 @@ export function rendererMap(context) {
         var proj = geoRawMercator().transform(projection.transform());  // copy projection
         // use the target zoom to calculate the offset center
         proj.scale(geoZoomToScale(zoom, TILESIZE));
-        
+
         var locPx = proj(loc);
         var offsetLocPx = [locPx[0] + offset[0], locPx[1] + offset[1]];
         var offsetLoc = proj.invert(offsetLocPx);
