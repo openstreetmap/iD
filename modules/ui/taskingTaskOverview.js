@@ -27,7 +27,7 @@ export function uiTaskOverview() {
 
 
     function taskOverview(selection) {
-        if (!_task) return;
+        if (!Object.keys(_task).length) return;
 
         // add overview button
         var overview = selection.selectAll('.task-overview-container')

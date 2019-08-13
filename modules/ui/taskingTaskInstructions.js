@@ -6,7 +6,7 @@ export function uiTaskInstructions() {
 
 
     function taskInstructions(selection) {
-        if (!_task) return;
+        if (!Object.keys(_task).length) return;
 
         var instructions = selection.selectAll('.task-instructions-container')
             .data([0]);

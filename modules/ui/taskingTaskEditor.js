@@ -8,7 +8,7 @@ export function uiTaskingTaskEditor(context) {
 
     var taskHeader = uiTaskingTaskHeader();
     var taskDetails = uiTaskingTaskDetails(context);
-    var _task;
+    var _task = {};
 
 
     function taskEditor(selection) {

@@ -1,7 +1,7 @@
 import { event as d3_event } from 'd3-selection';
 import { uiQuickLinks } from './quick_links';
 
-import { uiTaskComplete } from './taskingTaskComplete';
+import { uiTaskOverview } from './taskingTaskOverview';
 import { uiTaskHistory } from './taskingTaskHistory';
 import { uiTaskInstructions } from './taskingTaskInstructions';
 
@@ -12,7 +12,7 @@ export function uiTaskingTaskDetails(context) {
     var quickLinks = uiQuickLinks();
     var taskHistory = uiTaskHistory();
     var taskInstructions = uiTaskInstructions();
-    var taskComplete = uiTaskComplete(context);
+    var taskOverview = uiTaskOverview(context);
 
     var _task;
     var _activeTab = 0;
@@ -75,7 +75,7 @@ export function uiTaskingTaskDetails(context) {
             .merge(sectionsEnter);
 
         // add complete tab
-        sectionsList.selectAll('.section-tab-complete').call(taskComplete.task(_task));
+        sectionsList.selectAll('.section-tab-complete').call(taskOverview.task(_task));
 
         // add instructions tab
         sectionsList.selectAll('.section-tab-instructions').call(taskInstructions.task(_task));

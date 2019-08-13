@@ -364,9 +364,7 @@ export function uiTasking(context) {
 
     function updateTaskingTask() {
         _taskingTaskContainer
-            .call(taskingTaskEditor.task(
-                function(){ return showsLayer() ? _task : undefined; }()
-            ));
+            .call(taskingTaskEditor.task(_task));
     }
 
 
@@ -546,8 +544,10 @@ export function uiTasking(context) {
                 // load data
                 taskingService.loadFromUrl(taskingService.customSettings()); // TODO: TAH - pull out when other managers added
 
-            // set manager
-            clickManager(taskingService.getManager('custom'));
+                // set manager
+                clickManager(taskingService.getManager('custom'));
+
+            }
         }
     }
 
