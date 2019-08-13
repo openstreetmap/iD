@@ -131,6 +131,7 @@ export function uiToolToolbox(context) {
             .attr('class', 'choose')
             .on('click', function(d) {
                 d.isToggledOn = !(d.isToggledOn !== false);
+                context.storage('tool.' + d.id + '.toggledOn', d.isToggledOn);
                 updateToolList();
                 if (tool.onChange) tool.onChange();
             });
@@ -169,6 +170,13 @@ export function uiToolToolbox(context) {
         allowedTools = newItems.filter(function(item) {
             return typeof item === 'object' && item.userToggleable !== false;
         });
+
+        allowedTools.forEach(function(d) {
+            var isToggledOn = context.storage('tool.' + d.id + '.toggledOn');
+            if (isToggledOn !== null) {
+                d.isToggledOn = isToggledOn === 'true';
+            }
+        })
     };
 
     return tool;
