@@ -135,13 +135,8 @@ export function uiTasking(context) {
     }
 
 
-<<<<<<< Updated upstream
     function toggleLayer() {
         setLayer(!showsLayer());
-=======
-    function toggleLayer(which) {
-        setLayer(which, !showsLayer(which));
->>>>>>> Stashed changes
     }
 
 
@@ -427,121 +422,10 @@ export function uiTasking(context) {
 
 
     function updateTaskingManagers() {
-<<<<<<< Updated upstream
         _taskingManagerContainer
-=======
-        _taskingManagerContainer.selectAll('.layer-list-tasking')
->>>>>>> Stashed changes
             // .call(drawCustomManagerListItem, _managers, 'radio', 'manager', clickManager, showsManager);
             .call(drawCustomManagerListItem);
     }
-
-    // TODO: TAH - figure out call between renderTaskingManager and updateTaskingManagers & single item
-
-<<<<<<< Updated upstream
-    // function drawManagerListItems2(selection, data, type, name, change, active) {
-
-    //     var items = selection.selectAll('li')
-    //         .data(data);
-=======
-
-    function drawManagerListItems2(selection, data, type, name, change, active) {
->>>>>>> Stashed changes
-
-    //     // Exit
-    //     items.exit()
-    //         .remove();
-
-    //     // Enter
-    //     var enter = items.enter()
-    //         .append('li')
-    //             .attr('class', function(d) { return 'manager-' + d.managerId; })
-    //             .call(tooltip()
-    //                 .title(function(d) {
-    //                     return !activeErrors(_errors).length ?
-    //                         t('tasking.manager.managers.' + d.managerId + '.tooltip') :
-    //                         t('tasking.manager.managers.errors.tooltip');
-    //                 })
-    //                 .placement('bottom')
-    //             );
-
-    //     var customManager = enter.filter(function(d) { return d.managerId === 'custom'; });
-
-    //     customManager
-    //         .append('button')
-    //             .attr('class', 'custom-manager-browse')
-    //             .on('click', editCustomTasking)
-    //             .call(svgIcon('#iD-icon-more'));
-
-    //     customManager
-    //         .append('button')
-    //             .attr('class', 'custom-manager-zoom')
-    //             .call(tooltip()
-    //                 .title(t('tasking.manager.managers.custom.zoom'))
-    //                 .placement((textDirection === 'rtl') ? 'right' : 'left')
-    //             )
-    //             .on('click', function() {
-    //                 d3_event.preventDefault();
-    //                 d3_event.stopPropagation();
-    //                 layer.fitZoom();
-    //             })
-    //             .call(svgIcon('#iD-icon-search'));
-
-    //     var label = enter
-    //         .append('label');
-
-    //     label
-    //         .append('input')
-    //             .attr('type', type)
-    //             .attr('name', name)
-    //             .on('change', change);
-
-    //     label
-    //         .append('span')
-    //             .text(function(d) { return d.name; });
-
-    //     items = items
-    //         .merge(enter);
-
-    //     items
-    //         .classed('active', active)
-    //         .selectAll('input')
-    //         .property('checked', active)
-    //         .property('disabled', !!activeErrors(_errors).length);
-
-    //     items
-    //         .selectAll('label')
-    //         .classed('deemphasize', !!activeErrors(_errors).length);
-
-    //     // Update
-    //     items = items
-    //         .merge(enter);
-
-
-    //     // deemphasize & disable custom label & zoom when no data loaded
-    //     function hasData() {
-
-    //         var settings = taskingService.customSettings();
-    //         var hasLoadedCustom = !!taskingService.getTask(settings.taskId);
-
-    //         var data = layer && layer.hasData();
-
-    //         return hasLoadedCustom || data;
-    //     }
-
-    //     var showsData = hasData() && layer.enabled() && !activeErrors(_errors).length;
-
-    //     selection.selectAll('.manager-custom')
-    //         .selectAll('label')
-    //         .classed('deemphasize', !showsData)
-    //         .selectAll('input')
-    //         .property('disabled', !showsData)
-    //         .property('checked', showsData);
-
-    //     selection.selectAll('.custom-manager-zoom')
-    //         .classed('deemphasize', !showsData)
-    //         .property('disabled', !showsData);
-    // }
 
 
     function drawCustomManagerListItem(selection) {
