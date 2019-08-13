@@ -16,10 +16,24 @@ var apibases = {
     local:  'http://127.0.0.1:5000/api/v1/', // TODO: TAH - change to list of real manager urls when published
     hot: 'https://tasks.hotosm.org/api/v1/',
 };
-var dispatch = d3_dispatch('change', 'loadedCustom', 'setManager', 'setProject', 'setTask');
+var dispatch = d3_dispatch('change', 'loadedTask', 'loadedCustomSettings', 'setManager', 'setProject', 'setTask');
 var _taskingCache = {};
 var _enabled = false;
 
+var _errors = {
+    'unsavedEdits': {
+        severity: 'error',
+        message: function() {
+            return t('tasking.errors.unsavedEdits');
+        }
+    },
+    'alreadyLocked': {
+        severity: 'error',
+        message: function() {
+            return t('tasking.errors.alreadyLocked'); // TODO: TAH - change text to include user and status
+        }
+    }
+};
 
 
 function parseProject(result, parsedUrl) {
@@ -425,14 +439,7 @@ export default {
             currentTask: {},
             customSettings: {},
             editsWhileTasking: false,
-            errors: [
-                {
-                    id: 'unsavedEdits',
-                    severity: 'error',
-                    message: t('tasking.unsavedEdits'),
-                    active: false
-                }
-            ],
+            errors: _errors,
         };
 
         // set starting manager
@@ -455,13 +462,7 @@ export default {
             currentTask: {},
             customSettings: {},
             editsWhileTasking: false,
-            errors: {
-                'unsavedEdits': {
-                    severity: 'error',
-                    message: t('tasking.unsavedEdits')
-                }
-            },
-            currErrors: {}
+            errors: _errors,
         };
 
         // set starting manager
@@ -508,16 +509,13 @@ export default {
                             that.addTask(newTask); // add task to tasks
                         }
 
-                        that.currentTask(newTask); // set task as current task
-
                         dispatch.call('change');
                     }
 
 
                 })
-                .catch(function(error) {
-                    console.log('error in loadFromUrl: ', error);
-                    /* ignore */
+                .catch(function(err) {
+                    console.log('loadFromUrl error: ', err); // TODO: TAH - better handling of error
                 });
 
         // if the url is to a tasking manager api endpoint
@@ -633,18 +631,13 @@ export default {
                         // add to tasks
                         that.addTask(newTask);
 
-                        // set as current task
-                        that.currentTask(newTask);
-
+                        dispatch.call('loadedTask', {}, newTask);
                         dispatch.call('change');
                     }
                 })
                 .catch(function(err) {
                     console.log('loadTask error: ', err); // TODO: TAH - better handling of errors
                 });
-        } else {
-            // set task if it has already been loaded
-            that.currentTask(that.getTask(taskId));
         }
     },
 
@@ -689,6 +682,8 @@ export default {
             _taskingCache.customSettings = parsedUrl; // save custom settings
         }
 
+        dispatch.call('loadedCustomSettings');
+
         return this;
     },
 
@@ -725,9 +720,17 @@ export default {
     currentTask: function(d) {
         if (!arguments.length) return _taskingCache.currentTask;
 
-        _taskingCache.currentTask = d;
+        function canSetTask(d) {
+            var _status = d.status; // check status
+            var _permission = ''; // check user permissions
 
-        dispatch.call('setTask');
+            return _permission && _status;
+        }
+
+        if (canSetTask(d)) {
+            _taskingCache.currentTask = d;
+            dispatch.call('setTask');
+        }
 
         return this;
     },
@@ -759,8 +762,12 @@ export default {
         return this;
     },
 
-    errors: function() {
-        return _taskingCache.errors;
+    errors: function(val) {
+        if (!arguments.length) return _taskingCache.errors;
+
+        _taskingCache.errors = val;
+
+        return this;
     },
 
 

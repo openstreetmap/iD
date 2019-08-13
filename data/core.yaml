@@ -1187,7 +1187,9 @@ en:
     login: You must log in to change or comment on this task.
     upload_explanation: "The changes you upload will be visible on all maps that use OpenStreetMap data."
     upload_explanation_with_user: "The changes you upload as {user} will be visible on all maps that use OpenStreetMap data."
-    unsavedEdits: Thanks for your edits! But before starting a task, please save your existing edits.
+    errors:
+      unsavedEdits: Thanks for your edits! But before starting a task, please save your existing edits.
+      alreadyLocked: "This task is already locked for {state} by user {user}."
   help:
     title: Help
     key: H

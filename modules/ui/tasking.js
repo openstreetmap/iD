@@ -36,7 +36,6 @@ export function uiTasking(context) {
     var _taskingTaskContainer = d3_select(null);
 
     var _errors = taskingService.errors();
-
     var _task = taskingService.currentTask();
     var _project = taskingService.currentProject();
     var _managers = taskingService.managers();
@@ -47,33 +46,33 @@ export function uiTasking(context) {
     var settingsCustomTasking = uiSettingsCustomTasking(context)
         .on('change', customTaskingChanged);
 
-    taskingService.event.on('setManager', function fitZoom() {
+    taskingService.event.on('setManager', function() {
         update();
     });
 
-    taskingService.event.on('setTask', function fitZoom() {
+    taskingService.event.on('setTask', function() {
         layer.fitZoom();
         update();
     });
 
-    context.validator().on('validated', function() { updateOnChange(); });
-    context.history().on('change', function() { updateOnChange(); });
+    context.history().on('change', function() { updateErrorsOnChange(); });
+    taskingService.event.on('loadedTask', function(task) { updateErrorsOnChange(task); });
+    taskingService.event.on('loadedCustomSettings', function() {
 
-    function updateOnChange() {
+    });
 
-        function iterateErrors(errors, _id, _property, _value) {
-            for (var error in _errors) {
-                if (errors[error].id === _id) {
-                    errors[error][_property] = _value;
-                   break;
-                }
-            }
-            return errors;
-        }
-        if (context.history().hasChanges() && layer.enabled() === false) {
-            _errors = iterateErrors(_errors, 'unsavedEdits', 'active', true);
-        } else {
-            _errors = iterateErrors(_errors, 'unsavedEdits', 'active', false);
+
+
+    var nonEditableStatuses = ['lockedForMapping', 'lockedForValidating'];
+
+
+    function updateErrorsOnChange(task) {
+
+
+        _errors.unsavedEdits.active = context.history().hasChanges() && layer.enabled() === false;
+
+        if (task) {
+            _errors.alreadyLocked.active = nonEditableStatuses.includes(task.status()); // TODO: TAH - also check who's locked it, if it's current user, allow
         }
 
         taskingService.errors(_errors);
@@ -97,9 +96,13 @@ export function uiTasking(context) {
     }
 
     function activeErrors(errors) {
-        var activeErrors = errors.filter(function(error) { return error.active; });
+        var _activeErrors = [];
 
-        return activeErrors.length ? activeErrors : [];
+        for (var error in errors) {
+            if (errors[error].active) { _activeErrors.push(errors[error]); }
+        }
+
+        return _activeErrors;
     }
 
     function isSaving() {
@@ -135,7 +138,7 @@ export function uiTasking(context) {
     }
 
 
-    function setManager(d) {
+    function clickManager(d) {
 
         function layerSupported() {
             return layer && layer.supported();
@@ -176,7 +179,8 @@ export function uiTasking(context) {
     }
 
     function showsManager(d) {
-        return taskingService.currentManager() && taskingService.currentManager().managerId === d.managerId;
+        var _currManager = taskingService.currentManager();
+        return _currManager && _currManager.managerId === d.managerId;
     }
 
 
@@ -285,7 +289,7 @@ export function uiTasking(context) {
 
         items.selectAll('.tasking-error-message')
             .text(function(d) {
-                return d.message;
+                return d.message();
             });
     }
 
@@ -418,7 +422,7 @@ export function uiTasking(context) {
 
     function updateTaskingManagers() {
         _taskingManagerContainer.selectAll('.layer-list-tasking')
-            .call(drawManagerListItems, _managers, 'radio', 'manager', setManager, showsManager);
+            .call(drawManagerListItems, _managers, 'radio', 'manager', clickManager, showsManager);
     }
 
 
@@ -479,6 +483,10 @@ export function uiTasking(context) {
             .append('span')
                 .text(function(d) { return d.name; });
 
+        // Update
+        items = items
+            .merge(enter);
+
         items
             .classed('active', active)
             .selectAll('input')
@@ -511,12 +519,12 @@ export function uiTasking(context) {
             .selectAll('label')
             .classed('deemphasize', !hasData())
             .selectAll('input')
-            .property('disabled', !hasData() && !!activeErrors(_errors).length)
+            .property('disabled', !hasData() || !!activeErrors(_errors).length)
             .property('checked', showsData);
 
         selection.selectAll('.custom-manager-zoom')
-            .classed('deemphasize', !hasData() && !!activeErrors(_errors).length)
-            .property('disabled', !hasData() && !!activeErrors(_errors).length)
+            .classed('deemphasize', !hasData() || !!activeErrors(_errors).length)
+            .property('disabled', !hasData() || !!activeErrors(_errors).length)
             .property('checked', showsData);
     }
 
@@ -532,14 +540,16 @@ export function uiTasking(context) {
 
         if (settings && settings.url) {
 
-            // set custom settings
-            taskingService.customSettings(settings);
+            if (taskingService.customSettings() !== settings) {
+                // set custom settings
+                taskingService.customSettings(settings);
 
-            // load data
-            taskingService.loadFromUrl(taskingService.customSettings()); // TODO: TAH - pull out when other managers added
+                // load data
+                taskingService.loadFromUrl(taskingService.customSettings()); // TODO: TAH - pull out when other managers added
 
-            // set manager
-            setManager(taskingService.getManager('custom'));
+                // set manager
+                clickManager(taskingService.getManager('custom'));
+            }
         }
     }
 
