@@ -6,14 +6,14 @@ import { svgIcon } from '../../svg/icon';
 import { uiTooltipHtml } from '../tooltipHtml';
 import { tooltip } from '../../util/tooltip';
 
-export function uiToolOperation(context, operationClass) {
+export function uiToolOperation(context, operationClass, tool) {
+
+    if (!tool) tool = {};
 
     var operation;
 
-    var tool = {
-        itemClass: 'operation',
-        iconClass: 'operation-icon'
-    };
+    tool.itemClass = 'operation';
+    tool.iconClass = 'operation-icon';
 
     var button,
         tooltipBehavior = tooltip()

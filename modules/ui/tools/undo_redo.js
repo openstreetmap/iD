@@ -17,7 +17,8 @@ export function uiToolUndoRedo(context) {
     var tool = {
         id: 'undo_redo',
         label: t('toolbar.undo_redo'),
-        iconName: textDirection === 'rtl' ? 'iD-icon-redo' : 'iD-icon-undo'
+        iconName: textDirection === 'rtl' ? 'iD-icon-redo' : 'iD-icon-undo',
+        userToggleable: false
     };
 
     var commands = [{

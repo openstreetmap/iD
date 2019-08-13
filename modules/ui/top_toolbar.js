@@ -25,7 +25,9 @@ export function uiTopToolbar(context) {
         deleteTool = uiToolOperation(context, operationDelete),
         disconnect = uiToolOperation(context, operationDisconnect),
         downgrade = uiToolOperation(context, operationDowngrade),
-        extract = uiToolOperation(context, operationExtract),
+        extract = uiToolOperation(context, operationExtract, {
+            isToggledOn: false
+        }),
         merge = uiToolOperation(context, operationMerge),
         orthogonalize = uiToolOperation(context, operationOrthogonalize),
         reverse = uiToolOperation(context, operationReverse),
@@ -91,19 +93,22 @@ export function uiTopToolbar(context) {
             tools = [
                 toolbox,
                 'spacer',
+                /*
                 deselect,
                 'spacer',
+                */
                 centerZoom,
                 'spacer',
+                straighten,
+                orthogonalize,
                 circularize,
-                continueTool,
+                'spacer',
+                reverse,
+                split,
                 disconnect,
                 extract,
                 merge,
-                orthogonalize,
-                reverse,
-                split,
-                straighten,
+                continueTool,
                 'spacer',
                 downgrade,
                 deleteTool,
@@ -169,6 +174,9 @@ export function uiTopToolbar(context) {
             .on('favoritePreset.topToolbar', update)
             .on('recentsChange.topToolbar', update);
 
+        toolbox.onChange = function() {
+            update();
+        };
 
         update();
 

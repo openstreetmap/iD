@@ -806,6 +806,7 @@ button.add-note svg.icon {
 }
 .popover .list-item .checkmark {
     color: #7092ff;
+    padding: 0 3px;
 }
 .popover .subsection {
     background-color: #CBCBCB;

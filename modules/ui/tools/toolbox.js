@@ -132,6 +132,7 @@ export function uiToolToolbox(context) {
             .on('click', function(d) {
                 d.isToggledOn = !(d.isToggledOn !== false);
                 updateToolList();
+                if (tool.onChange) tool.onChange();
             });
 
         row.each(function(d) {

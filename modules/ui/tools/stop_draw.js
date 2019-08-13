@@ -30,7 +30,8 @@ export function uiToolStopDraw(context) {
             }
         },
         tooltipKey: 'Esc',
-        barButtonClass: 'wide'
+        barButtonClass: 'wide',
+        userToggleable: false
     });
 
     tool.allowed = function() {
