@@ -27,7 +27,7 @@ export function uiTaskComplete(context) {
 
 
     function taskComplete(selection) {
-        if (!_task) return;
+        if (!Object.keys(_task).length) return;
 
         // add complete button
         var complete = selection.selectAll('.task-complete-container')

@@ -10,62 +10,61 @@ import { text as d3_text } from 'd3-fetch';
 import { task, project, manager } from '../../osm';
 import { dataTaskingManagers } from '../../../data';
 
+import { parseHOTTask, parseHOTProject } from './parseHOT';
+
 
 
 var apibases = {
     local:  'http://127.0.0.1:5000/api/v1/', // TODO: TAH - change to list of real manager urls when published
     hot: 'https://tasks.hotosm.org/api/v1/',
 };
-var dispatch = d3_dispatch('change', 'loadedCustom', 'setManager', 'setProject', 'setTask');
+var dispatch = d3_dispatch('change', 'loadedTask', 'loadedCustomSettings', 'setManager', 'setProject', 'setTask');
 var _taskingCache = {};
 var _enabled = false;
 
+var _errors = {
+    'unsavedEdits': {
+        severity: 'error',
+        message: function() {
+            return t('tasking.errors.unsavedEdits');
+        }
+    },
+    'mappingNotAllowed': {
+        severity: 'error',
+        message: function() {
+            return t('tasking.errors.mappingNotAllowed'); // TODO: TAH - change text to include user and status
+        }
+    },
+    'validationNotAllowed': {
+        severity: 'error',
+        message: function() {
+            return t('tasking.errors.validationNotAllowed'); // TODO: TAH - change text to include user and status
+        }
+    }
+};
+
+
+function parseTask(that, result, parsedUrl) {
+
+    var json = JSON.parse(result);
+
+    switch (parsedUrl.managerSource) {
+        case '127.0.0.1:5000' || 'HOT': // TODO: TAH - remove localhost
+            json = parseHOTTask(that, json);
+            break;
+        default:
+            break;
+    }
+
+    return json;
+
+
+}
 
 
 function parseProject(result, parsedUrl) {
+
     var json = JSON.parse(result);
-
-    function parseHOTProject(result) {
-
-        function parseProjectTasks(tasks) {
-
-            var _tasks = {
-                type: 'FeatureCollection',
-                features: {}
-            };
-
-            var features = tasks.features;
-
-            features.forEach(function(feature) {
-                var _taskId = feature.properties.taskId;
-
-                _tasks.features[_taskId] = feature;
-            });
-
-            return _tasks;
-        }
-
-        var hotProject = {
-            geometry: {},
-            properties: {
-                projectId: result.projectId,
-                name: result.projectInfo.name,
-                author: result.author,
-                shortDescription: result.projectInfo.shortDescription,
-                description: result.projectInfo.description,
-                instructions: result.projectInfo.instructions,
-                status: result.projectStatus.toLowerCase(),
-                priority: result.projectPriority.toLowerCase(),
-                defaultLocale: result.defaultLocale,
-                campaignTag: result.campaignTag,
-                organisationTag: result.organisationTag,
-                tasks: parseProjectTasks(result.tasks),
-                mappingTypes: result.mappingTypes
-            },
-        };
-
-        return hotProject;
-    }
 
     switch (parsedUrl.managerSource) {
         case '127.0.0.1:5000' || 'HOT': // TODO: TAH - remove localhost
@@ -76,119 +75,6 @@ function parseProject(result, parsedUrl) {
     }
 
     return json;
-}
-
-var historyActions = {
-    'STATE_CHANGE': 'stateChange',
-    'COMMENT': 'comment',
-    'LOCKED_FOR_MAPPING': 'lockedForMapping',
-    'AUTO_UNLOCKED_FOR_MAPPING': 'autoUnlockedForMapping',
-    'LOCKED_FOR_VALIDATION': 'lockedForValidation',
-    'AUTO_UNLOCKED_FOR_VALIDATION': 'autoUnlockedForValidation'
-};
-
-var status = {
-    'READY': 'ready',
-    'MAPPED': 'mapped',
-    'VALIDATED': 'validated',
-    'INVALIDATED': 'invalidated',
-    'BADIMAGERY': 'badimagery',
-    'LOCKED_FOR_MAPPING': 'lockedForMapping',
-    'LOCKED_FOR_VALIDATION': 'lockedForValidation'
-};
-
-
-function parseTask(that, result, parsedUrl) {
-
-    var json = JSON.parse(result);
-
-
-    function parseHOTTask(json) {
-
-        function parseHistory(geoJSON) {
-
-            var history = geoJSON.properties.taskHistory;
-
-            geoJSON.properties.history = history.map(function(element) {
-
-                var _status = taskGeoJSON.properties.status;
-
-                // get state change
-                if (element.action === 'STATE_CHANGE') {
-                    element.stateChange = status[_status];
-                }
-
-                // get cleaner history action
-                element.action = historyActions[element.action];
-
-                // rename text
-                element.text = element.actionText;
-                delete element.actionText;
-
-                // rename date
-                element.date = element.actionDate;
-                delete element.actionDate;
-
-                // TODO: TAH - get uid for avatar
-
-                return element;
-            });
-
-            // delete old named history property
-            delete geoJSON.properties.taskHistory;
-
-            return geoJSON;
-        }
-
-        var projectId = json.projectId;
-        var _project = that.getProject(projectId);
-
-        if (that.currentManager().managerId === 'HOT' || (that.currentManager().managerId === 'custom' && that.customSettings().managerSource === '127.0.0.1:5000')) { // TAH - TODO: change to HOT once local manager is gone
-
-            if (_project) {
-                var taskGeoJSON = ensureIDs(_project.getTask(json.taskId));
-                //var taskGeoJSON = getTaskGeoJSON(_project, json.taskId);
-            }
-
-            // add json to geojson properties
-            for (var prop in json) {
-                if (Object.prototype.hasOwnProperty.call(json, prop)) {
-                    if (json[prop] === undefined) {
-                        delete this[prop];
-                    } else {
-                        taskGeoJSON.properties[prop] = json[prop];
-                    }
-                }
-            }
-
-            // clean up status
-            taskGeoJSON.properties.status = status[taskGeoJSON.properties.taskStatus];
-            delete taskGeoJSON.properties.taskStatus;
-
-            // parse history
-            taskGeoJSON = parseHistory(taskGeoJSON);
-
-            // parse instructions
-            taskGeoJSON.properties.instructions = _project.properties.instructions;
-
-
-            return taskGeoJSON;
-        }
-        return '';
-    }
-
-
-    switch (parsedUrl.managerSource) {
-        case '127.0.0.1:5000' || 'HOT': // TODO: TAH - remove localhost
-            json = parseHOTTask(json);
-            break;
-        default:
-            break;
-    }
-
-    return json;
-
-
 }
 
 
@@ -425,14 +311,7 @@ export default {
             currentTask: {},
             customSettings: {},
             editsWhileTasking: false,
-            errors: [
-                {
-                    id: 'unsavedEdits',
-                    severity: 'error',
-                    message: t('tasking.unsavedEdits'),
-                    active: false
-                }
-            ],
+            errors: _errors,
         };
 
         // set starting manager
@@ -455,13 +334,7 @@ export default {
             currentTask: {},
             customSettings: {},
             editsWhileTasking: false,
-            errors: {
-                'unsavedEdits': {
-                    severity: 'error',
-                    message: t('tasking.unsavedEdits')
-                }
-            },
-            currErrors: {}
+            errors: _errors,
         };
 
         // set starting manager
@@ -508,16 +381,13 @@ export default {
                             that.addTask(newTask); // add task to tasks
                         }
 
-                        that.currentTask(newTask); // set task as current task
-
                         dispatch.call('change');
                     }
 
 
                 })
-                .catch(function(error) {
-                    console.log('error in loadFromUrl: ', error);
-                    /* ignore */
+                .catch(function(err) {
+                    console.log('loadFromUrl error: ', err); // TODO: TAH - better handling of error
                 });
 
         // if the url is to a tasking manager api endpoint
@@ -633,18 +503,13 @@ export default {
                         // add to tasks
                         that.addTask(newTask);
 
-                        // set as current task
-                        that.currentTask(newTask);
-
+                        dispatch.call('loadedTask', {}, newTask);
                         dispatch.call('change');
                     }
                 })
                 .catch(function(err) {
                     console.log('loadTask error: ', err); // TODO: TAH - better handling of errors
                 });
-        } else {
-            // set task if it has already been loaded
-            that.currentTask(that.getTask(taskId));
         }
     },
 
@@ -689,6 +554,8 @@ export default {
             _taskingCache.customSettings = parsedUrl; // save custom settings
         }
 
+        dispatch.call('loadedCustomSettings');
+
         return this;
     },
 
@@ -725,9 +592,17 @@ export default {
     currentTask: function(d) {
         if (!arguments.length) return _taskingCache.currentTask;
 
-        _taskingCache.currentTask = d;
+        function canSetTask(d) {
+            var _status = d.status; // check status
+            var _permission = ''; // check user permissions
 
-        dispatch.call('setTask');
+            return _permission && _status;
+        }
+
+        if (canSetTask(d)) {
+            _taskingCache.currentTask = d;
+            dispatch.call('setTask');
+        }
 
         return this;
     },
@@ -776,8 +651,12 @@ export default {
         return this;
     },
 
-    errors: function() {
-        return _taskingCache.errors;
+    errors: function(val) {
+        if (!arguments.length) return _taskingCache.errors;
+
+        _taskingCache.errors = val;
+
+        return this;
     },
 
 

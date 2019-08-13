@@ -11,7 +11,7 @@ export function uiTaskHistory() {
 
 
     function taskHistory(selection) {
-        if (!_task) return;
+        if (!Object.keys(_task).length) return;
 
         var history = selection.selectAll('.task-history-container')
             .data([0]);
