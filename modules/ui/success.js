@@ -12,16 +12,17 @@ import { utilRebind } from '../util/rebind';
 export function uiSuccess(context) {
     var MAXEVENTS = 2;
 
-    // All else being equal, rank more "social" communities higher
+    // All else being equal, rank communities higher when
+    // OSM has more influence on who's there
     // (anything not in this list receives no adjustment)
     var COMMUNITYRANK = {
         'meetup': +5,
-        'slack': +4,
-        'facebook': +3,
-        'reddit': +2,
-        'forum': -2,
-        'mailinglist': -3,
-        'irc': -4
+        'slack': -1,
+        'facebook': -3,
+        'reddit': -2,
+        'forum': +3,
+        'mailinglist': +2,
+        'irc': +1
     };
 
     var detected = utilDetect();
