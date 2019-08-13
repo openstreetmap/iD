@@ -1099,7 +1099,7 @@ en:
       name: Manager
       managers:
         custom:
-            tooltip: tasking tooltip
+            tooltip: Supply a task API endpoint
             title: Custom Tasking Manager
             zoom: Zoom to task
             settings:

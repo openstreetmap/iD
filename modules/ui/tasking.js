@@ -135,6 +135,11 @@ export function uiTasking(context) {
     }
 
 
+    function toggleLayer() {
+        setLayer(!showsLayer());
+    }
+
+
     function clickManager(d) {
 
         function layerSupported() {
@@ -417,110 +422,187 @@ export function uiTasking(context) {
 
 
     function updateTaskingManagers() {
-        _taskingManagerContainer.selectAll('.layer-list-tasking')
-            .call(drawManagerListItems, _managers, 'radio', 'manager', clickManager, showsManager);
+        _taskingManagerContainer
+            // .call(drawCustomManagerListItem, _managers, 'radio', 'manager', clickManager, showsManager);
+            .call(drawCustomManagerListItem);
     }
 
 
-    function drawManagerListItems(selection, data, type, name, change, active) {
+    // function drawManagerListItems2(selection, data, type, name, change, active) {
 
-        var items = selection.selectAll('li')
-            .data(data);
+    //     var items = selection.selectAll('li')
+    //         .data(data);
+
+    //     // Exit
+    //     items.exit()
+    //         .remove();
+
+    //     // Enter
+    //     var enter = items.enter()
+    //         .append('li')
+    //             .attr('class', function(d) { return 'manager-' + d.managerId; })
+    //             .call(tooltip()
+    //                 .title(function(d) {
+    //                     return !activeErrors(_errors).length ?
+    //                         t('tasking.manager.managers.' + d.managerId + '.tooltip') :
+    //                         t('tasking.manager.managers.errors.tooltip');
+    //                 })
+    //                 .placement('bottom')
+    //             );
+
+    //     var customManager = enter.filter(function(d) { return d.managerId === 'custom'; });
+
+    //     customManager
+    //         .append('button')
+    //             .attr('class', 'custom-manager-browse')
+    //             .on('click', editCustomTasking)
+    //             .call(svgIcon('#iD-icon-more'));
+
+    //     customManager
+    //         .append('button')
+    //             .attr('class', 'custom-manager-zoom')
+    //             .call(tooltip()
+    //                 .title(t('tasking.manager.managers.custom.zoom'))
+    //                 .placement((textDirection === 'rtl') ? 'right' : 'left')
+    //             )
+    //             .on('click', function() {
+    //                 d3_event.preventDefault();
+    //                 d3_event.stopPropagation();
+    //                 layer.fitZoom();
+    //             })
+    //             .call(svgIcon('#iD-icon-search'));
+
+    //     var label = enter
+    //         .append('label');
+
+    //     label
+    //         .append('input')
+    //             .attr('type', type)
+    //             .attr('name', name)
+    //             .on('change', change);
+
+    //     label
+    //         .append('span')
+    //             .text(function(d) { return d.name; });
+
+    //     items = items
+    //         .merge(enter);
+
+    //     items
+    //         .classed('active', active)
+    //         .selectAll('input')
+    //         .property('checked', active)
+    //         .property('disabled', !!activeErrors(_errors).length);
+
+    //     items
+    //         .selectAll('label')
+    //         .classed('deemphasize', !!activeErrors(_errors).length);
+
+    //     // Update
+    //     items = items
+    //         .merge(enter);
+
+
+    //     // deemphasize & disable custom label & zoom when no data loaded
+    //     function hasData() {
+
+    //         var settings = taskingService.customSettings();
+    //         var hasLoadedCustom = !!taskingService.getTask(settings.taskId);
+
+    //         var data = layer && layer.hasData();
+
+    //         return hasLoadedCustom || data;
+    //     }
+
+    //     var showsData = hasData() && layer.enabled() && !activeErrors(_errors).length;
+
+    //     selection.selectAll('.manager-custom')
+    //         .selectAll('label')
+    //         .classed('deemphasize', !showsData)
+    //         .selectAll('input')
+    //         .property('disabled', !showsData)
+    //         .property('checked', showsData);
+
+    //     selection.selectAll('.custom-manager-zoom')
+    //         .classed('deemphasize', !showsData)
+    //         .property('disabled', !showsData);
+    // }
+
+
+    function drawCustomManagerListItem(selection) {
+        var hasData = layer && layer.hasData();
+        var showsData = hasData && layer.enabled();
+
+        var ul = selection.selectAll('.layer-list-tasking');
+
+        var items = ul.selectAll('li')
+            .data([0]);
 
         // Exit
         items.exit()
             .remove();
 
-        // Enter
-        var enter = items.enter()
+        var liEnter = items.enter()
             .append('li')
-                .attr('class', function(d) { return 'manager-' + d.managerId; })
-                .call(tooltip()
-                    .title(function(d) {
-                        return !activeErrors(_errors).length ?
-                            t('tasking.manager.managers.' + d.managerId + '.tooltip') :
-                            t('tasking.manager.managers.errors.tooltip');
-                    })
-                    .placement('bottom')
-                );
+            .attr('class', 'list-item-tasking manager-custom');
 
-        var customManager = enter.filter(function(d) { return d.managerId === 'custom'; });
-
-        customManager
+        liEnter
             .append('button')
-                .attr('class', 'custom-manager-browse')
-                .on('click', editCustomTasking)
-                .call(svgIcon('#iD-icon-more'));
+            .attr('class', 'tasking-custom-settings')
+            .call(tooltip()
+                .title(t('tasking.manager.managers.custom.settings.tooltip'))
+                .placement((textDirection === 'rtl') ? 'right' : 'left')
+            )
+            .on('click', editCustomTasking)
+            .call(svgIcon('#iD-icon-more'));
 
-        customManager
+        liEnter
             .append('button')
-                .attr('class', 'custom-manager-zoom')
-                .call(tooltip()
-                    .title(t('tasking.manager.managers.custom.zoom'))
-                    .placement((textDirection === 'rtl') ? 'right' : 'left')
-                )
-                .on('click', function() {
-                    d3_event.preventDefault();
-                    d3_event.stopPropagation();
-                    layer.fitZoom();
-                })
-                .call(svgIcon('#iD-icon-search'));
+            .attr('class', 'tasking-custom-zoom')
+            .call(tooltip()
+                .title(t('tasking.manager.managers.custom.zoom'))
+                .placement((textDirection === 'rtl') ? 'right' : 'left')
+            )
+            .on('click', function() {
+                d3_event.preventDefault();
+                d3_event.stopPropagation();
+                layer.fitZoom();
+            })
+            .call(svgIcon('#iD-icon-search'));
 
-        var label = enter
-            .append('label');
+        var labelEnter = liEnter
+            .append('label')
+            .call(tooltip()
+                .title(t('tasking.manager.managers.custom.tooltip'))
+                .placement('top')
+            );
 
-        label
+        labelEnter
             .append('input')
-                .attr('type', type)
-                .attr('name', name)
-                .on('change', change);
+            .attr('type', 'checkbox')
+            .on('change', function() { toggleLayer(); });
 
-        label
+        labelEnter
             .append('span')
-                .text(function(d) { return d.name; });
-
-        items = items
-            .merge(enter);
-
-        items
-            .classed('active', active)
-            .selectAll('input')
-            .property('checked', active)
-            .property('disabled', !!activeErrors(_errors).length);
-
-        items
-            .selectAll('label')
-            .classed('deemphasize', !!activeErrors(_errors).length);
+            .text(t('tasking.manager.managers.custom.title'));
 
         // Update
         items = items
-            .merge(enter);
+            .merge(liEnter);
 
-
-        // deemphasize & disable custom label & zoom when no data loaded
-        function hasData() {
-
-            var settings = taskingService.customSettings();
-            var hasLoadedCustom = !!taskingService.getTask(settings.taskId);
-
-            var data = layer && layer.hasData();
-
-            return hasLoadedCustom || data;
-        }
-
-        var showsData = hasData() && layer.enabled() && !activeErrors(_errors).length;
-
-        selection.selectAll('.manager-custom')
+        // set as active if has and shows data
+        items
+            .classed('active', showsData)
             .selectAll('label')
-            .classed('deemphasize', !showsData)
+            .classed('deemphasize', !hasData)
             .selectAll('input')
-            .property('disabled', !showsData)
+            .property('disabled', !hasData)
             .property('checked', showsData);
 
-        selection.selectAll('.custom-manager-zoom')
-            .classed('deemphasize', !showsData)
-            .property('disabled', !showsData)
-            .property('checked', showsData);
+        // disable zoom if no data
+        items.selectAll('.tasking-custom-zoom')
+            .classed('deemphasize', !hasData)
+            .property('disabled', !hasData);
     }
 
 
@@ -542,7 +624,7 @@ export function uiTasking(context) {
             taskingService.loadFromUrl(taskingService.customSettings()); // TODO: TAH - pull out when other managers added
 
             // set manager
-            clickManager(taskingService.getManager('custom'));
+            // clickManager(taskingService.getManager('custom'));
         }
     }
 
@@ -648,12 +730,12 @@ export function uiTasking(context) {
 
         // managers
         _taskingContainer
-        .append('div')
-            .attr('class', 'tasking-manager-toggle')
-            .call(uiDisclosure(context, 'tasking_managers', false)
-                .title(t('tasking.manager.name'))
-                .content(renderTaskingManagers)
-            );
+            .append('div')
+                .attr('class', 'tasking-manager-toggle')
+                .call(uiDisclosure(context, 'tasking_managers', false)
+                    .title(t('tasking.manager.name'))
+                    .content(renderTaskingManagers)
+                );
 
 
         context.keybinding()
