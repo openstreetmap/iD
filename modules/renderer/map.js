@@ -279,7 +279,7 @@ export function rendererMap(context) {
         } else if (difference) {
             var complete = difference.complete(map.extent());
             data = Object.values(complete).filter(Boolean);
-            set = new Set(data.map(function(entity) { return entity.id; }));
+            set = new Set(Object.keys(complete));
             filter = function(d) { return set.has(d.id); };
             features.clear(data);
 
