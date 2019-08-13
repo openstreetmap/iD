@@ -135,8 +135,13 @@ export function uiTasking(context) {
     }
 
 
+<<<<<<< Updated upstream
     function toggleLayer() {
         setLayer(!showsLayer());
+=======
+    function toggleLayer(which) {
+        setLayer(which, !showsLayer(which));
+>>>>>>> Stashed changes
     }
 
 
@@ -205,7 +210,7 @@ export function uiTasking(context) {
         updateTaskingWelcome();
 
         if (!_pane.select('.disclosure-wrap-tasking_managers').classed('hide')) {
-            updateTaskingManagers();
+            updateCUstomManagerItem();
         }
 
         if (!_pane.select('.disclosure-wrap-tasking_project').classed('hide')) {
@@ -422,16 +427,26 @@ export function uiTasking(context) {
 
 
     function updateTaskingManagers() {
+<<<<<<< Updated upstream
         _taskingManagerContainer
+=======
+        _taskingManagerContainer.selectAll('.layer-list-tasking')
+>>>>>>> Stashed changes
             // .call(drawCustomManagerListItem, _managers, 'radio', 'manager', clickManager, showsManager);
             .call(drawCustomManagerListItem);
     }
 
+    // TODO: TAH - figure out call between renderTaskingManager and updateTaskingManagers & single item
 
+<<<<<<< Updated upstream
     // function drawManagerListItems2(selection, data, type, name, change, active) {
 
     //     var items = selection.selectAll('li')
     //         .data(data);
+=======
+
+    function drawManagerListItems2(selection, data, type, name, change, active) {
+>>>>>>> Stashed changes
 
     //     // Exit
     //     items.exit()
@@ -601,6 +616,89 @@ export function uiTasking(context) {
 
         // disable zoom if no data
         items.selectAll('.tasking-custom-zoom')
+            .classed('deemphasize', !hasData)
+            .property('disabled', !hasData);
+    }
+
+
+    function drawCustomManagerListItem() {
+        var hasData = layer && layer.hasData();
+        var showsData = hasData && layer.enabled();
+
+        var ul = selection
+            .selectAll('.layer-list-tasking')
+            .data(layer ? [0] : []);
+
+        // Exit
+        ul.exit()
+            .remove();
+
+        // Enter
+        var ulEnter = ul.enter()
+            .append('ul')
+            .attr('class', 'layer-list layer-list-tasking');
+
+        var ulEnter =     layer-list-tasking
+
+        var liEnter = ulEnter
+            .append('li')
+            .attr('class', 'list-item-tasking manager-custom');
+
+        liEnter
+            .append('button')
+            .attr('class', 'tasking-custom-settings')
+            .call(tooltip()
+                .title(t('tasking.manager.managers.custom.settings.tooltip'))
+                .placement((textDirection === 'rtl') ? 'right' : 'left')
+            )
+            .on('click', editCustomTasking)
+            .call(svgIcon('#iD-icon-more'));
+
+        liEnter
+            .append('button')
+            .attr('class', 'tasking-custom-zoom')
+            .call(tooltip()
+                .title(t('tasking.manager.managers.custom.zoom'))
+                .placement((textDirection === 'rtl') ? 'right' : 'left')
+            )
+            .on('click', function() {
+                d3_event.preventDefault();
+                d3_event.stopPropagation();
+                layer.fitZoom();
+            })
+            .call(svgIcon('#iD-icon-search'));
+
+        var labelEnter = liEnter
+            .append('label')
+            .call(tooltip()
+                .title(t('tasking.manager.managers.custom.tooltip'))
+                .placement('top')
+            );
+
+        labelEnter
+            .append('input')
+            .attr('type', 'checkbox')
+            .on('change', function() { toggleLayer('data'); });
+
+        labelEnter
+            .append('span')
+            .text(t('tasking.manager.managers.custom.title'));
+
+        // Update
+        ul = ul
+            .merge(ulEnter);
+
+        // set as active if has and shows data
+        ul.selectAll('.list-item-tasking')
+            .classed('active', showsData)
+            .selectAll('label')
+            .classed('deemphasize', !hasData)
+            .selectAll('input')
+            .property('disabled', !hasData)
+            .property('checked', showsData);
+
+        // disable zoom if no data
+        ul.selectAll('.tasking-custom-zoom')
             .classed('deemphasize', !hasData)
             .property('disabled', !hasData);
     }
