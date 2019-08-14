@@ -601,12 +601,12 @@ export default {
     },
 
 
-    resetTask: function() {
+    resetCurrentTask: function() {
         _taskingCache.currentTask = {};
     },
 
 
-    resetProject: function() {
+    resetCurrentProject: function() {
         _taskingCache.currentProject = {};
     },
 
@@ -618,11 +618,13 @@ export default {
     },
 
 
-    resetProjectAndTask: function() {
+    resetCurrentProjectAndTask: function() {
         var that = this;
 
-        that.resetProject();
-        that.resetTask();
+        that.resetCurrentProject();
+        that.resetCurrentTask();
+
+        // TODO: TAH - when reenabling toggle, load current task & project again. Somehow get from storage
     },
 
 

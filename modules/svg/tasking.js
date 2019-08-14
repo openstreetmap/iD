@@ -281,7 +281,14 @@ export function svgTasking(projection, context, dispatch) {
 
 
     drawTasking.hasData = function() {
-        _task = getService().currentTask() || {};
+        // TODO: TAH - don't just check customSettings
+        var _taskId = getService().customSettings().taskId;
+
+        if (!_taskId) return false;
+
+        _task = getService().getTask(_taskId);
+
+        if (!_task) return false;
 
         return !!(Object.keys(_task).length);
     };

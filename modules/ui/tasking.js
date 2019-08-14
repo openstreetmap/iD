@@ -55,7 +55,7 @@ export function uiTasking(context) {
     });
 
     taskingService.event.on('loadedCustomSettings', function() {
-        // load data
+        // load data once custom settings have been set
         taskingService.loadFromUrl(taskingService.customSettings());
     });
 
@@ -163,10 +163,14 @@ export function uiTasking(context) {
         if (mode && /^draw/.test(mode.id)) return;
 
         if (layer) {
+            // toggle layer enabled
             layer.enabled(enabled);
 
-            // zoom to layer if enabled
-            if (enabled) layer.fitZoom();
+            if (enabled) {
+                layer.fitZoom(); // zoom to layer if enabled
+            } else {
+                taskingService.resetCurrentProjectAndTask(); // otherwise, remove current task & project
+            }
         }
     }
 
