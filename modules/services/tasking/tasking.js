@@ -587,14 +587,8 @@ export default {
     currentTask: function(d) {
         if (!arguments.length) return _taskingCache.currentTask;
 
-        // function canSetTask(d) {
-        //     var _status = d.status; // check status
-        //     var _permission = ''; // check user permissions
-
-        //     return _permission && _status;
-        // }
-
         _taskingCache.currentTask = d;
+
         dispatch.call('setTask');
 
         return this;

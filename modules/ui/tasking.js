@@ -65,8 +65,10 @@ export function uiTasking(context) {
         // check if layer is supported
         if (!(layer && layer.supported())) return;
 
-        // set project
-        taskingService.currentProject(project);
+        if (!activeErrors(_errors).length) {
+            // set project
+            taskingService.currentProject(project);
+        }
     });
 
     taskingService.event.on('loadedTask', function(task) {
@@ -79,12 +81,16 @@ export function uiTasking(context) {
         // check if layer is supported
         if (!(layer && layer.supported())) return;
 
-        // set task
-        taskingService.currentTask(task);
-
         // enable layer if no active errors
         if (!activeErrors(_errors).length) {
+
+            // set task
+            taskingService.currentTask(task);
+
+            // enable layer
             toggleLayer(true);
+        } else {
+            toggleLayer(false);
         }
     }
 
@@ -169,13 +175,18 @@ export function uiTasking(context) {
             if (enabled) {
                 layer.fitZoom(); // zoom to layer if enabled
             } else {
-                taskingService.resetCurrentProjectAndTask(); // otherwise, remove current task & project
+                // taskingService.resetCurrentProjectAndTask(); // otherwise, remove current task & project
             }
         }
     }
 
 
     function toggleLayer(val) {
+        if (activeErrors(_errors).length) {
+            setLayer(false);
+            return;
+        }
+
         if (val) setLayer(val);
 
         else setLayer(!showsLayer());
@@ -253,11 +264,6 @@ export function uiTasking(context) {
         _toggleButton.selectAll('.notification-badge')
             .classed('error', (errors.length > 0))
             .classed('hide', (errors.length === 0));
-
-        // hide disclosures if errors
-        _pane.selectAll('.tasking-task-toggle').classed('hide', (errors.length));
-        _pane.selectAll('.tasking-project-toggle').classed('hide', (errors.length));
-        _pane.selectAll('.tasking-manager-toggle').classed('hide', (errors.length));
 
         // update disclosures
         if (!_pane.select('.disclosure-wrap-tasking_task').classed('hide')) {
@@ -420,8 +426,9 @@ export function uiTasking(context) {
 
 
     function updateTaskingTask() {
+
         _taskingTaskContainer
-            .call(taskingTaskEditor.task(_task));
+            .call(taskingTaskEditor.task(!activeErrors(_errors).length ? _task : []));
     }
 
 
@@ -440,7 +447,7 @@ export function uiTasking(context) {
 
     function updateTaskingProject() {
         _taskingProjectContainer
-            .call(taskingProjectEditor.project(_project));
+            .call(taskingProjectEditor.project(!activeErrors(_errors).length ? _project : []));
     }
 
 
