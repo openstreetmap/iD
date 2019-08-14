@@ -543,7 +543,7 @@ export function uiTasking(context) {
             .selectAll('label')
             .classed('deemphasize', !hasData)
             .selectAll('input')
-            .property('disabled', !hasData)
+            .property('disabled', !hasData) // TODO: TAH - disable if tasking has started & edits have been made
             .property('checked', showsData);
 
         // disable zoom if no data

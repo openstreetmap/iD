@@ -147,7 +147,10 @@ export function svgTasking(projection, context, dispatch) {
         // Draw fill, shadow, stroke layers
         var datagroups = layer
             .selectAll('g.datagroup')
-            .data(['fill', 'shadow', 'stroke']);
+            .data([
+                    // 'fill',
+                    'shadow', 'stroke'
+                ]);
 
         datagroups = datagroups.enter()
             .append('g')
@@ -157,7 +160,7 @@ export function svgTasking(projection, context, dispatch) {
 
         // Draw paths
         var pathData = {
-            fill: polygonData,
+            // fill: polygonData,
             shadow: geoData,
             stroke: geoData
         };
@@ -218,29 +221,10 @@ export function svgTasking(projection, context, dispatch) {
             _curtain.remove();
             context.container().select('.layer-data').call(_curtain);
 
-            revealTask(
-                _task.extentPanConstraint()
-                // TODO: TAH - add tooltip back if needed
-                // ,
-                // t('tasking.started_task.task_help',
-                //     {
-                //         taskId: '1',
-                //         taskingButton: icon('#iD-icon-tasking', 'pre-text'),
-                //         taskingKey: t('tasking.key'),
-                //         helpButton: icon('#iD-icon-help', 'pre-text'),
-                //         helpKey: t('help.key')
-                //     }
-                // ),{
-                //     tooltipClass: 'intro-points-describe',
-                //     duration: 500,
-                //     buttonText: t('tasking.started_task.stop_task'),
-                //     buttonCallback: function() { finishTasking('value'); }
-                // }
-                );
+            // TODO: TAH - draw inner curtain
 
-            function finishTasking(value) {
-                console.log('clicked finish tasking');
-            }
+            // reveal opening
+            revealTask(_task.extentPanConstraint());
         }
     }
 
