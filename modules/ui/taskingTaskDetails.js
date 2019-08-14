@@ -17,7 +17,7 @@ export function uiTaskingTaskDetails(context) {
     var _task;
     var _activeTab = 0;
 
-    var taskingTabs = [{ 'tab': 'complete'}, { 'tab': 'instructions'}, { 'tab': 'history'}];
+    var taskingTabs = [{'tab': 'overview'}, { 'tab': 'instructions'}, { 'tab': 'history'}];
 
 
     function taskTabs(selection) {
@@ -74,8 +74,8 @@ export function uiTaskingTaskDetails(context) {
         sections = sections
             .merge(sectionsEnter);
 
-        // add complete tab
-        sectionsList.selectAll('.section-tab-complete').call(taskOverview.task(_task));
+        // add overview tab
+        sectionsList.selectAll('.section-tab-overview').call(taskOverview.task(_task));
 
         // add instructions tab
         sectionsList.selectAll('.section-tab-instructions').call(taskInstructions.task(_task));

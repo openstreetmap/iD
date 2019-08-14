@@ -56,41 +56,39 @@ export function parseHOTTask(that, json) {
         return geoJSON;
     }
 
+    // TODO: TAH - have a check to make sure that the manager is set
+
     var projectId = json.projectId;
     var _project = that.getProject(projectId);
 
-    if (that.currentManager().managerId === 'HOT' || (that.currentManager().managerId === 'custom' && that.customSettings().managerSource === '127.0.0.1:5000')) { // TAH - TODO: change to HOT once local manager is gone
+    if (_project) {
+        var taskGeoJSON = utilEnsureIDs(_project.getTask(json.taskId));
+        //var taskGeoJSON = getTaskGeoJSON(_project, json.taskId);
+    }
 
-        if (_project) {
-            var taskGeoJSON = utilEnsureIDs(_project.getTask(json.taskId));
-            //var taskGeoJSON = getTaskGeoJSON(_project, json.taskId);
-        }
-
-        // add json to geojson properties
-        for (var prop in json) {
-            if (Object.prototype.hasOwnProperty.call(json, prop)) {
-                if (json[prop] === undefined) {
-                    delete this[prop];
-                } else {
-                    taskGeoJSON.properties[prop] = json[prop];
-                }
+    // add json to geojson properties
+    for (var prop in json) {
+        if (Object.prototype.hasOwnProperty.call(json, prop)) {
+            if (json[prop] === undefined) {
+                delete this[prop];
+            } else {
+                taskGeoJSON.properties[prop] = json[prop];
             }
         }
-
-        // clean up status
-        taskGeoJSON.properties.status = status[taskGeoJSON.properties.taskStatus];
-        delete taskGeoJSON.properties.taskStatus;
-
-        // parse history
-        taskGeoJSON = parseHistory(taskGeoJSON);
-
-        // parse instructions
-        taskGeoJSON.properties.instructions = _project.properties.instructions;
-
-
-        return taskGeoJSON;
     }
-    return '';
+
+    // clean up status
+    taskGeoJSON.properties.status = status[taskGeoJSON.properties.taskStatus];
+    delete taskGeoJSON.properties.taskStatus;
+
+    // parse history
+    taskGeoJSON = parseHistory(taskGeoJSON);
+
+    // parse instructions
+    taskGeoJSON.properties.instructions = _project.properties.instructions;
+
+
+    return taskGeoJSON;
 }
 
 

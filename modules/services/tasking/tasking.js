@@ -18,7 +18,7 @@ var apibases = {
     local:  'http://127.0.0.1:5000/api/v1/', // TODO: TAH - change to list of real manager urls when published
     hot: 'https://tasks.hotosm.org/api/v1/',
 };
-var dispatch = d3_dispatch('change', 'loadedTask', 'loadedCustomSettings', 'setManager', 'setProject', 'setTask');
+var dispatch = d3_dispatch('change', 'loadedTask', 'loadedProject', 'loadedCustomSettings', 'setManager', 'setProject', 'setTask');
 var _taskingCache = {};
 var _enabled = false;
 
@@ -27,19 +27,22 @@ var _errors = {
         severity: 'error',
         message: function() {
             return t('tasking.errors.unsavedEdits');
-        }
+        },
+        active: false
     },
     'mappingNotAllowed': {
         severity: 'error',
         message: function() {
             return t('tasking.errors.mappingNotAllowed'); // TODO: TAH - change text to include user and status
-        }
+        },
+        active: false
     },
     'validationNotAllowed': {
         severity: 'error',
         message: function() {
             return t('tasking.errors.validationNotAllowed'); // TODO: TAH - change text to include user and status
-        }
+        },
+        active: false
     }
 };
 
@@ -418,12 +421,6 @@ export default {
         // var managerId = parsedUrl.manager;
         var projectId = parsedUrl.projectId;
 
-        // // set manager if it isn't already set
-        // if (!that.currentManager().id || !that.currentManager().id === managerId) {
-        //     that.currentManager(that.getManager(managerId));
-        // }
-
-
         // load project if it hasn't been loaded
         if (!that.getProject(projectId)) {
             d3_text(formulateUrl(parsedUrl, 'project'))
@@ -439,9 +436,7 @@ export default {
                         // add to projects
                         that.addProject(newProject);
 
-                        // set as current project
-                        that.currentProject(newProject);
-
+                        dispatch.call('loadedProject', {}, newProject);
                         dispatch.call('change');
 
                         // load task if requested
@@ -592,17 +587,15 @@ export default {
     currentTask: function(d) {
         if (!arguments.length) return _taskingCache.currentTask;
 
-        function canSetTask(d) {
-            var _status = d.status; // check status
-            var _permission = ''; // check user permissions
+        // function canSetTask(d) {
+        //     var _status = d.status; // check status
+        //     var _permission = ''; // check user permissions
 
-            return _permission && _status;
-        }
+        //     return _permission && _status;
+        // }
 
-        if (canSetTask(d)) {
-            _taskingCache.currentTask = d;
-            dispatch.call('setTask');
-        }
+        _taskingCache.currentTask = d;
+        dispatch.call('setTask');
 
         return this;
     },

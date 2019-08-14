@@ -38,7 +38,6 @@ export function uiTasking(context) {
     var _errors = taskingService.errors();
     var _task = taskingService.currentTask();
     var _project = taskingService.currentProject();
-    var _managers = taskingService.managers();
 
     var _hot_tm_url = 'https://tasks.hotosm.org/';
 
@@ -46,8 +45,8 @@ export function uiTasking(context) {
     var settingsCustomTasking = uiSettingsCustomTasking(context)
         .on('change', customTaskingChanged);
 
-    taskingService.event.on('setManager', function() {
-        update();
+    context.history().on('change', function() {
+        updateErrorsOnChange();
     });
 
     taskingService.event.on('setTask', function() {
@@ -55,12 +54,39 @@ export function uiTasking(context) {
         update();
     });
 
-    context.history().on('change', function() { updateErrorsOnChange(); });
-    taskingService.event.on('loadedTask', function(task) { updateErrorsOnChange(task); });
     taskingService.event.on('loadedCustomSettings', function() {
-
+        // load data
+        taskingService.loadFromUrl(taskingService.customSettings());
     });
 
+    taskingService.event.on('loadedProject', function(project) {
+        updateErrorsOnChange();
+
+        // check if layer is supported
+        if (!(layer && layer.supported())) return;
+
+        // set project
+        taskingService.currentProject(project);
+    });
+
+    taskingService.event.on('loadedTask', function(task) {
+        updateErrorsOnChange(task);
+
+        setTask(task);
+    });
+
+    function setTask(task) {
+        // check if layer is supported
+        if (!(layer && layer.supported())) return;
+
+        // set task
+        taskingService.currentTask(task);
+
+        // enable layer if no active errors
+        if (!activeErrors(_errors).length) {
+            toggleLayer(true);
+        }
+    }
 
 
     var mappingAllowed = ['ready', 'invalidated', 'locked'];
@@ -76,7 +102,7 @@ export function uiTasking(context) {
         // invalid state for mapping or validation
         if (task) {
             _errors.mappingNotAllowed.active = !mappingAllowed.includes(task.status()); // TODO: TAH - also check who's locked it, if it's current user, allow
-            _errors.validationNotAllowed.active = !validationAllowedStates.includes(task.status()); // TODO: TAH - also check who's locked it, if it's current user, allow
+            // _errors.validationNotAllowed.active = !validationAllowedStates.includes(task.status()); // TODO: TAH - also check who's locked it, if it's current user, allow
         }
 
         taskingService.errors(_errors);
@@ -138,70 +164,76 @@ export function uiTasking(context) {
 
         if (layer) {
             layer.enabled(enabled);
+
+            // zoom to layer if enabled
+            if (enabled) layer.fitZoom();
         }
     }
 
 
-    function toggleLayer() {
-        setLayer(!showsLayer());
+    function toggleLayer(val) {
+        if (val) setLayer(val);
+
+        else setLayer(!showsLayer());
+        update();
     }
 
 
-    function clickManager(d) {
+    // function clickManager(d) {
 
-        function layerSupported() {
-            return layer && layer.supported();
-        }
+    //     function layerSupported() {
+    //         return layer && layer.supported();
+    //     }
 
-        function authorized (task) {
-            return true;
-            // var status = task.status();
-            // var user
-        }
+    //     function authorized (task) {
+    //         return true;
+    //         // var status = task.status();
+    //         // var user
+    //     }
 
-        taskingService.currentManager(d); // set manager
+    //     taskingService.currentManager(d); // set manager
 
-        if (d.managerId === 'none') {
-            taskingService.resetProjectAndTask();
-            setLayer(false);
+    //     if (d.managerId === 'none') {
+    //         taskingService.resetProjectAndTask();
+    //         setLayer(false);
 
-        } else if (context.history().hasChanges()) {
-            taskingService.resetProjectAndTask();
-            setLayer(false);
+    //     } else if (context.history().hasChanges()) {
+    //         taskingService.resetProjectAndTask();
+    //         setLayer(false);
 
-        } else {
+    //     } else {
 
-            // check if layer is supported
-            if (!layerSupported() || d.managerId !== 'custom') return;
+    //         // check if layer is supported
+    //         if (!layerSupported() || d.managerId !== 'custom') return;
 
-            // handle custom manager
-            if (d.managerId === 'custom') {
+    //         // handle custom manager
+    //         if (d.managerId === 'custom') {
 
-                // get project and task from custom settings
-                _project = taskingService.getProject(taskingService.customSettings().projectId);
-                _task = taskingService.getTask(taskingService.customSettings().taskId);
+    //             // get project and task from custom settings
+    //             _project = taskingService.getProject(taskingService.customSettings().projectId);
+    //             _task = taskingService.getTask(taskingService.customSettings().taskId);
 
-                if (authorized(_task)) {
-                    // set project & task
-                    if (_project && _task) {
-                        taskingService.currentProject(_project);
-                        taskingService.currentTask(_task);
-                    }
-                }
-            }
+    //             if (authorized(_task)) {
+    //                 // set project & task
+    //                 if (_project && _task) {
+    //                     taskingService.currentProject(_project);
+    //                     taskingService.currentTask(_task);
+    //                 }
+    //             }
+    //         }
 
-            // enable layer if no active errors
-            if (!activeErrors(_errors)) {
-                setLayer(true);
-            }
+    //         // enable layer if no active errors
+    //         if (!activeErrors(_errors).length) {
+    //             toggleLayer(true);
+    //         }
 
-        }
-    }
+    //     }
+    // }
 
-    function showsManager(d) {
-        var _currManager = taskingService.currentManager();
-        return _currManager && _currManager.managerId === d.managerId;
-    }
+    // function showsManager(d) {
+    //     var _currManager = taskingService.currentManager();
+    //     return _currManager && _currManager.managerId === d.managerId;
+    // }
 
 
     function update() {
@@ -210,6 +242,7 @@ export function uiTasking(context) {
         _project = taskingService.currentProject(); // get current project
 
         updateTaskingErrors();
+        updateTaskingWelcome();
 
         var errors = activeErrors(_errors);
 
@@ -217,22 +250,22 @@ export function uiTasking(context) {
             .classed('error', (errors.length > 0))
             .classed('hide', (errors.length === 0));
 
-        _pane.selectAll('.tasking-manager-toggle').classed('hide', (errors.length));
-        _pane.selectAll('.tasking-project-toggle').classed('hide', (errors.length));
+        // hide disclosures if errors
         _pane.selectAll('.tasking-task-toggle').classed('hide', (errors.length));
+        _pane.selectAll('.tasking-project-toggle').classed('hide', (errors.length));
+        _pane.selectAll('.tasking-manager-toggle').classed('hide', (errors.length));
 
-        updateTaskingWelcome();
-
-        if (!_pane.select('.disclosure-wrap-tasking_managers').classed('hide')) {
-            updateCUstomManagerItem();
+        // update disclosures
+        if (!_pane.select('.disclosure-wrap-tasking_task').classed('hide')) {
+            updateTaskingTask();
         }
 
         if (!_pane.select('.disclosure-wrap-tasking_project').classed('hide')) {
             updateTaskingProject();
         }
 
-        if (!_pane.select('.disclosure-wrap-tasking_task').classed('hide')) {
-            updateTaskingTask();
+        if (!_pane.select('.disclosure-wrap-tasking_managers').classed('hide')) {
+            updateTaskingManagers();
         }
     }
 
@@ -403,9 +436,7 @@ export function uiTasking(context) {
 
     function updateTaskingProject() {
         _taskingProjectContainer
-            .call(taskingProjectEditor.project(
-                function(){ return showsLayer() ? _project : undefined; }()
-            ));
+            .call(taskingProjectEditor.project(_project));
     }
 
 
@@ -533,15 +564,11 @@ export function uiTasking(context) {
 
         if (settings && settings.url) {
 
+            // if settings have changed
             if (taskingService.customSettings() !== settings) {
                 // set custom settings
                 taskingService.customSettings(settings);
-
-                // load data
-                taskingService.loadFromUrl(taskingService.customSettings()); // TODO: TAH - pull out when other managers added
-
-            // set manager
-            // clickManager(taskingService.getManager('custom'));
+            }
         }
     }
 

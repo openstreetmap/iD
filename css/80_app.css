@@ -2815,6 +2815,13 @@ input.key-trap {
     width: 100%;
 }
 
+.task-history-container {
+    max-height: 500px;
+    overflow: scroll;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+
 .comment {
     background-color: #fff;
     border-radius: 5px;

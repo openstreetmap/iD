@@ -6,7 +6,7 @@ export function uiProjectDescription() {
 
 
     function projectDescription(selection) {
-        if (!Object.keys(selection).length) return;
+        if (!Object.keys(_project).length) return;
 
         var description = selection.selectAll('.project-description-container')
             .data([0]);

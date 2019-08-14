@@ -34,7 +34,7 @@ export function uiTaskingProjectEditor(context) {
         editor = editorEnter
             .merge(editor)
             .call(projectHeader.project(_project))
-            .call(projectDetails.project(_project, context));
+            .call(projectDetails.project(_project));
 
 
     }

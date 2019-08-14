@@ -69,10 +69,12 @@ export function uiTaskingProjectDetails() {
 
 
         // add information tab
-        sectionsList.selectAll('.section-tab-information').call(projectInformation.project(_project));
+        sectionsList.selectAll('.section-tab-information')
+            .call(projectInformation.project(_project));
 
         // add description tab
-        sectionsList.selectAll('.section-tab-description').call(projectDescription.project(_project));
+        sectionsList.selectAll('.section-tab-description')
+            .call(projectDescription.project(_project));
 
         // Update
         wrapper.selectAll('.tab')

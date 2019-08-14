@@ -1161,8 +1161,14 @@ en:
       no_task:
         message: No task selected
       tabs:
-        complete:
-          title: Complete
+        overview:
+          title: Overview
+          header: Overview
+          saving:
+            stop_mapping: Stop mapping
+            stop_mapping_comment: Stop mapping and comment
+            stop_validating: Stop validating
+            stop_validating_comment: Stop validating and comment
         instructions:
           title: Instructions
           perTaskInstructions: Per Task Instructions
@@ -1186,11 +1192,6 @@ en:
     editStatusOptions: Select an edit status
     leaveAComment: Leave a comment (optional)
     saveEdits: Submit your work
-    saving:
-      stop_mapping: Stop mapping
-      stop_mapping_comment: Stop mapping and comment
-      stop_validating: Stop validating
-      stop_validating_comment: Stop validating and comment
     login: You must log in to change or comment on this task.
     upload_explanation: "The changes you upload will be visible on all maps that use OpenStreetMap data."
     upload_explanation_with_user: "The changes you upload as {user} will be visible on all maps that use OpenStreetMap data."
