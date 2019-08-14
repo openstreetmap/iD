@@ -828,7 +828,7 @@
     "office/newspaper": {"icon": "fas-newspaper", "geometry": ["point", "area"], "tags": {"office": "newspaper"}, "terms": [], "name": "Newspaper Office"},
     "office/ngo": {"icon": "maki-suitcase", "geometry": ["point", "area"], "tags": {"office": "ngo"}, "terms": ["ngo", "non government", "non-government", "organization", "organisation"], "name": "NGO Office"},
     "office/notary": {"icon": "fas-stamp", "geometry": ["point", "area"], "tags": {"office": "notary"}, "terms": ["clerk", "deeds", "estate", "signature", "wills"], "name": "Notary Office"},
-    "office/political_party": {"icon": "maki-town-hall", "geometry": ["point", "area"], "tags": {"office": "political_party"}, "terms": [], "name": "Political Party"},
+    "office/political_party": {"icon": "maki-town-hall", "geometry": ["point", "area"], "tags": {"office": "political_party"}, "terms": [], "name": "Political Party Office"},
     "office/private_investigator": {"icon": "fas-user-secret", "geometry": ["point", "area"], "tags": {"office": "private_investigator"}, "terms": ["PI", "private eye", "private detective"], "name": "Private Investigator Office"},
     "office/quango": {"icon": "maki-suitcase", "geometry": ["point", "area"], "tags": {"office": "quango"}, "terms": ["ngo", "non government", "non-government", "organization", "organisation", "quasi autonomous", "quasi-autonomous"], "name": "Quasi-NGO Office"},
     "office/religion": {"icon": "maki-suitcase", "fields": ["{office}", "religion", "denomination"], "geometry": ["point", "area"], "tags": {"office": "religion"}, "terms": [], "name": "Religious Office"},

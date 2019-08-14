@@ -6247,8 +6247,8 @@ en:
         name: Physician
       office/political_party:
         # office=political_party
-        name: Political Party
-        terms: '<translate with synonyms or related terms for ''Political Party'', separated by commas>'
+        name: Political Party Office
+        terms: '<translate with synonyms or related terms for ''Political Party Office'', separated by commas>'
       office/private_investigator:
         # office=private_investigator
         name: Private Investigator Office

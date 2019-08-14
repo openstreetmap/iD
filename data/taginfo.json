@@ -798,7 +798,7 @@
     {"key": "office", "value": "newspaper", "description": "🄿 Newspaper Office", "object_types": ["node", "area"], "icon_url": "https://cdn.jsdelivr.net/gh/openstreetmap/iD/svg/fontawesome/fas-newspaper.svg"},
     {"key": "office", "value": "ngo", "description": "🄿 NGO Office", "object_types": ["node", "area"], "icon_url": "https://cdn.jsdelivr.net/gh/mapbox/maki/icons/suitcase-15.svg"},
     {"key": "office", "value": "notary", "description": "🄿 Notary Office", "object_types": ["node", "area"], "icon_url": "https://cdn.jsdelivr.net/gh/openstreetmap/iD/svg/fontawesome/fas-stamp.svg"},
-    {"key": "office", "value": "political_party", "description": "🄿 Political Party", "object_types": ["node", "area"], "icon_url": "https://cdn.jsdelivr.net/gh/mapbox/maki/icons/town-hall-15.svg"},
+    {"key": "office", "value": "political_party", "description": "🄿 Political Party Office", "object_types": ["node", "area"], "icon_url": "https://cdn.jsdelivr.net/gh/mapbox/maki/icons/town-hall-15.svg"},
     {"key": "office", "value": "private_investigator", "description": "🄿 Private Investigator Office", "object_types": ["node", "area"], "icon_url": "https://cdn.jsdelivr.net/gh/openstreetmap/iD/svg/fontawesome/fas-user-secret.svg"},
     {"key": "office", "value": "quango", "description": "🄿 Quasi-NGO Office", "object_types": ["node", "area"], "icon_url": "https://cdn.jsdelivr.net/gh/mapbox/maki/icons/suitcase-15.svg"},
     {"key": "office", "value": "religion", "description": "🄿 Religious Office", "object_types": ["node", "area"], "icon_url": "https://cdn.jsdelivr.net/gh/mapbox/maki/icons/suitcase-15.svg"},

@@ -8121,7 +8121,7 @@
                     "terms": "clerk,deeds,estate,signature,wills"
                 },
                 "office/political_party": {
-                    "name": "Political Party",
+                    "name": "Political Party Office",
                     "terms": ""
                 },
                 "office/private_investigator": {
