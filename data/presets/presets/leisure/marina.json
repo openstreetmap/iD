@@ -22,9 +22,9 @@
         "fax"
     ],
     "geometry": [
+        "area",
         "point",
-        "vertex",
-        "area"
+        "vertex"
     ],
     "terms": [
         "boat"

@@ -9,8 +9,8 @@
         "access_simple"
     ],
     "geometry": [
-        "point",
-        "area"
+        "area",
+        "point"
     ],
     "terms": [
         "jungle gym",

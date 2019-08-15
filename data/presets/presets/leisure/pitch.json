@@ -15,8 +15,8 @@
         "payment_multi_fee"
     ],
     "geometry": [
-        "point",
-        "area"
+        "area",
+        "point"
     ],
     "tags": {
         "leisure": "pitch"

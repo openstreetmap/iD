@@ -1,8 +1,8 @@
 {
     "icon": "maki-volleyball",
     "geometry": [
-        "point",
-        "area"
+        "area",
+        "point"
     ],
     "tags": {
         "leisure": "pitch",

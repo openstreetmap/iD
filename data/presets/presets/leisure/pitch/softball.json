@@ -1,20 +1,20 @@
 {
-  "icon": "maki-baseball",
-  "geometry": [
-    "point",
-    "area"
-  ],
-  "tags": {
-    "leisure": "pitch",
-    "sport": "softball"
-  },
-  "reference": {
-    "key": "sport",
-    "value": "softball"
-  },
-  "terms": [
-    "softball",
-    "diamond"
-  ],
-  "name": "Softball Field"
+    "icon": "maki-baseball",
+    "geometry": [
+        "area",
+        "point"
+    ],
+    "tags": {
+        "leisure": "pitch",
+        "sport": "softball"
+    },
+    "reference": {
+        "key": "sport",
+        "value": "softball"
+    },
+    "terms": [
+        "softball",
+        "diamond"
+    ],
+    "name": "Softball Field"
 }

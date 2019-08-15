@@ -1,8 +1,8 @@
 {
     "icon": "temaki-horseshoes",
     "geometry": [
-        "point",
-        "area"
+        "area",
+        "point"
     ],
     "tags": {
         "leisure": "pitch",

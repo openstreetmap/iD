@@ -6,8 +6,8 @@
         "{leisure/pitch}"
     ],
     "geometry": [
-        "point",
-        "area"
+        "area",
+        "point"
     ],
     "tags": {
         "leisure": "pitch",
