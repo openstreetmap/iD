@@ -23,8 +23,8 @@ export function uiToolQuickPresets(context) {
         return [];
     };
 
-    function enabled() {
-        return context.editable();
+    function enabled(d) {
+        return d.id && context.editable();
     }
 
     function toggleMode(d) {
@@ -71,13 +71,20 @@ export function uiToolQuickPresets(context) {
 
             var geometry = d.preset.defaultAddGeometry(context);
 
-            var tooltipTitleID = 'modes.add_preset.title';
             var protoMode = Object.assign({}, d);  // shallow copy
             protoMode.geometry = geometry;
             protoMode.button = markerClass;
             protoMode.title = presetName;
-            protoMode.description = t(tooltipTitleID, { feature: '<strong>' + presetName + '</strong>' });
-            protoMode.key = d.key;
+
+            if (geometry) {
+                protoMode.description = t('modes.add_preset.title', { feature: '<strong>' + presetName + '</strong>' });
+            } else {
+                var hiddenPresetFeatures = context.features().isHiddenPreset(d.preset, d.preset.geometry[0]);
+                var isAutoHidden = context.features().autoHidden(hiddenPresetFeatures.key);
+                var tooltipIdSuffix = isAutoHidden ? 'zoom' : 'manual';
+                protoMode.description = t('inspector.hidden_preset.' + tooltipIdSuffix, { features: hiddenPresetFeatures.title });
+                protoMode.key = null;
+            }
 
             var mode;
             switch (geometry) {
@@ -92,14 +99,14 @@ export function uiToolQuickPresets(context) {
                     mode = modeAddArea(context, protoMode);
             }
 
-            if (mode.key) {
-                context.keybinding().off(mode.key);
-                context.keybinding().on(mode.key, function() {
-                    toggleMode(mode);
+            if (protoMode.key && mode) {
+                context.keybinding().off(protoMode.key);
+                context.keybinding().on(protoMode.key, function() {
+                     toggleMode(mode);
                 });
             }
 
-            return mode;
+            return mode || protoMode;
         });
 
         var buttons = selection.selectAll('button.add-button')
@@ -117,16 +124,15 @@ export function uiToolQuickPresets(context) {
                 return d.button + ' add-button bar-button';
             })
             .on('click.mode-buttons', function(d) {
-
-                // When drawing, ignore accidental clicks on mode buttons - #4042
-                if (/^draw/.test(context.mode().id)) return;
-
+                if (d3_select(this).classed('disabled')) return;
                 toggleMode(d);
             })
             .call(tooltip()
                 .placement('bottom')
                 .html(true)
-                .title(function(d) { return uiTooltipHtml(d.description, d.key); })
+                .title(function(d) {
+                    return d.key ? uiTooltipHtml(d.description, d.key) : d.description;
+                })
             );
 
         buttonsEnter

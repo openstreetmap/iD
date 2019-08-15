@@ -360,13 +360,7 @@ export function uiPresetBrowser(context, allowedGeometry, onChoose, onCancel) {
             // skip presets not valid in this country
             if (_countryCode && preset.countryCodes && preset.countryCodes.indexOf(_countryCode) === -1) return false;
 
-            for (var i in shownGeometry) {
-                if (preset.geometry.indexOf(shownGeometry[i]) !== -1) {
-                    // skip currently hidden features
-                    if (!context.features().isHiddenPreset(preset, shownGeometry[i])) return true;
-                }
-            }
-            return false;
+            return preset.defaultAddGeometry(context, shownGeometry);
         }).slice(0, 50);
     }
 
@@ -579,26 +573,33 @@ export function uiPresetBrowser(context, allowedGeometry, onChoose, onCancel) {
         listItem.selectAll('button.choose').call(tooltip().destroyAny);
 
         listItem.each(function(item, index) {
-            if (!item.geometry) return;
 
-            var hiddenPresetFeatures = context.features().isHiddenPreset(item.preset, item.geometry);
-            var isHiddenPreset = !!hiddenPresetFeatures;
+            var hiddenPresetFeatures;
+
+            for (var i in item.preset.geometry) {
+                if (shownGeometry.indexOf(item.preset.geometry[i]) !== -1) {
+                    hiddenPresetFeatures = context.features().isHiddenPreset(item.preset, item.preset.geometry[i]);
+                    if (!hiddenPresetFeatures) {
+                        break;
+                    }
+                }
+            }
 
             var button = d3_select(this).selectAll('button.choose');
 
-            d3_select(this).classed('disabled', isHiddenPreset);
-            button.classed('disabled', isHiddenPreset);
+            d3_select(this).classed('disabled', !!hiddenPresetFeatures);
+            button.classed('disabled', !!hiddenPresetFeatures);
 
-            if (isHiddenPreset) {
-                var isAutoHidden = context.features().autoHidden(hiddenPresetFeatures.key);
-                var tooltipIdSuffix = isAutoHidden ? 'zoom' : 'manual';
-                var tooltipObj = { features: hiddenPresetFeatures.title };
-                button.call(tooltip('dark')
-                    .html(true)
-                    .title(t('inspector.hidden_preset.' + tooltipIdSuffix, tooltipObj))
-                    .placement(index < 2 ? 'bottom' : 'top')
-                );
-            }
+            if (!hiddenPresetFeatures) return;
+
+            var isAutoHidden = context.features().autoHidden(hiddenPresetFeatures.key);
+            var tooltipIdSuffix = isAutoHidden ? 'zoom' : 'manual';
+            var tooltipObj = { features: hiddenPresetFeatures.title };
+            button.call(tooltip('dark')
+                .html(true)
+                .title(t('inspector.hidden_preset.' + tooltipIdSuffix, tooltipObj))
+                .placement(index < 2 ? 'bottom' : 'top')
+            );
         });
     }
 

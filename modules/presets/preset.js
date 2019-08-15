@@ -307,12 +307,12 @@ export function presetPreset(id, preset, fields, visible, rawPresets) {
 
     // The geometry type to use when adding a new feature of this preset
     preset.defaultAddGeometry = function(context, allowedGeometries) {
-        var geometry = preset.geometry.slice();
-        if (allowedGeometries) {
-            geometry = geometry.filter(function(geom) {
-                return allowedGeometries.indexOf(geom) !== -1;
-            });
-        }
+        var geometry = preset.geometry.slice().filter(function(geom) {
+            if (allowedGeometries && allowedGeometries.indexOf(geom) === -1) return false;
+            if (context.features().isHiddenPreset(preset, geom)) return false;
+            return true;
+        });
+
         var mostRecentAddGeom = context.storage('preset.' + preset.id + '.addGeom');
         if (mostRecentAddGeom === 'vertex') mostRecentAddGeom = 'point';
         if (mostRecentAddGeom && geometry.indexOf(mostRecentAddGeom) !== -1) {
