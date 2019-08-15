@@ -19,6 +19,8 @@ export function validationGenericName() {
     function isGenericName(entity) {
         var name = entity.tags.name;
         if (!name) return false;
+        // a generic name is okay if it's a known brand or entity
+        if (entity.hasWikidata()) return false;
         name = name.toLowerCase();
 
         var i, key, val;
