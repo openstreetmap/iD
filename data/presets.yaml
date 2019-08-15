@@ -5036,6 +5036,11 @@ en:
         name: Farmyard
         # 'terms: crop,grow,plant'
         terms: '<translate with synonyms or related terms for ''Farmyard'', separated by commas>'
+      landuse/flowerbed:
+        # landuse=flowerbed
+        name: Flowerbed
+        # 'terms: floral garden,flower garden'
+        terms: '<translate with synonyms or related terms for ''Flowerbed'', separated by commas>'
       landuse/forest:
         # landuse=forest
         name: Managed Forest
