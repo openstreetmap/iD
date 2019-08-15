@@ -9,7 +9,7 @@
             "required": true
         },
         "geometry": {
-            "description": "Valid geometry types for the feature",
+            "description": "Valid geometry types for the feature, in order of preference",
             "type": "array",
             "minItems": 1,
             "uniqueItems": true,

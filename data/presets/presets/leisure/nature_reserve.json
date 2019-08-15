@@ -1,8 +1,8 @@
 {
     "icon": "maki-park",
     "geometry": [
-        "point",
-        "area"
+        "area",
+        "point"
     ],
     "fields": [
         "name",

@@ -1,8 +1,8 @@
 {
     "icon": "maki-soccer",
     "geometry": [
-        "point",
-        "area"
+        "area",
+        "point"
     ],
     "tags": {
         "leisure": "pitch",

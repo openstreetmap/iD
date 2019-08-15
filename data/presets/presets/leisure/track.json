@@ -15,8 +15,8 @@
         "level"
     ],
     "geometry": [
-        "point",
         "line",
+        "point",
         "area"
     ],
     "tags": {

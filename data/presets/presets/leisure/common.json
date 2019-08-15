@@ -9,8 +9,8 @@
         "website"
     ],
     "geometry": [
-        "point",
-        "area"
+        "area",
+        "point"
     ],
     "terms": [
         "open space"
