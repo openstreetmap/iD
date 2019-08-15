@@ -18,7 +18,7 @@ export function uiToolAddFeature(context) {
         id: 'add_feature',
         label: t('toolbar.add_feature'),
         itemClass: 'disclosing',
-        iconName: 'iD-logo-features',
+        iconName: 'iD-presets-grid',
         iconClass: 'icon-30'
     };
 
@@ -133,7 +133,7 @@ export function uiToolAddFeature(context) {
                 return;
         }
 
-        context.presets().setMostRecent(preset, geometry);
+        context.presets().setMostRecent(preset);
 
         context.enter(mode);
     }

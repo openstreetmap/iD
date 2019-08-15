@@ -8,8 +8,6 @@ import { svgIcon } from '../svg/icon';
 
 export function uiPresetFavoriteButton(preset, geom, context, klass) {
 
-    geom = context.presets().fallback(geom).id;
-
     var presetFavorite = {};
 
     var _button = d3_select(null);
@@ -37,7 +35,7 @@ export function uiPresetFavoriteButton(preset, geom, context, klass) {
                 d3_event.stopPropagation();
                 d3_event.preventDefault();
 
-                context.presets().toggleFavorite(preset, geom);
+                context.presets().toggleFavorite(preset);
 
                 update();
             });
@@ -47,10 +45,10 @@ export function uiPresetFavoriteButton(preset, geom, context, klass) {
 
     function update() {
         _button
-            .classed('active', context.presets().favoriteMatching(preset, geom));
+            .classed('active', context.presets().favoriteMatching(preset));
     }
 
-    context.presets().on('favoritePreset.button-' + preset.id.replace(/[^a-zA-Z\d:]/g, '-') + '-' + geom, update);
+    context.presets().on('favoritePreset.button-' + preset.id.replace(/[^a-zA-Z\d:]/g, '-'), update);
 
     return presetFavorite;
 }

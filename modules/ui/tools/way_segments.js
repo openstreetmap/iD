@@ -15,12 +15,14 @@ export function uiToolWaySegments(context) {
         {
             id: 'straight',
             icon: 'iD-segment-straight',
-            label: t('toolbar.segments.straight.title')
+            label: t('toolbar.segments.straight.title'),
+            iconClass: 'icon-30'
         },
         {
             id: 'orthogonal',
             icon: 'iD-segment-orthogonal',
-            label: t('toolbar.segments.orthogonal.title')
+            label: t('toolbar.segments.orthogonal.title'),
+            iconClass: 'icon-30'
         }
     ];
 

@@ -663,34 +663,32 @@ export function uiAssistant(context) {
 
     function panelAddDrawGeometry(context, mode) {
 
-        var icon;
-        if (mode.id.indexOf('point') !== -1) {
-            icon = 'iD-icon-point';
-        } else if (mode.id.indexOf('line') !== -1) {
-            icon = 'iD-icon-line';
-        } else {
-            icon = 'iD-icon-area';
-        }
-
         var message = t('assistant.instructions.' + mode.id.replace('-', '_'));
-
-        var modeLabelID;
-        if (mode.id.indexOf('add') !== -1) {
-            modeLabelID = 'adding';
-        } else {
-            modeLabelID = 'drawing';
-
+        if (mode.id.indexOf('draw') !== -1) {
             var way = context.entity(mode.wayID);
             if (way.nodes.length >= 4) {
                 message += '<br/>' + t('assistant.instructions.finishing');
             }
         }
 
+        var modeLabelID = 'drawing';
+
+        if (mode.id === 'add-point') {
+            modeLabelID = 'placing';
+        }
+
         var panel = {
-            headerIcon: icon,
             modeLabel: t('assistant.mode.' + modeLabelID),
             title: mode.title,
             message: message
+        };
+
+        panel.renderHeaderIcon = function(selection) {
+            selection.call(uiPresetIcon(context)
+                .geometry(mode.geometry)
+                .preset(mode.preset)
+                .sizeClass('small')
+                .pointMarker(false));
         };
 
         return panel;

@@ -10,8 +10,11 @@ export function modeDrawLine(context, mode) {
     mode.id = 'draw-line';
     mode.button = mode.button || 'line';
     mode.title =  (mode.addMode && mode.addMode.title) || utilDisplayLabel(context.entity(mode.wayID), context);
+    mode.geometry = 'line';
 
     mode.isContinuing = !!mode.affix;
+
+    mode.preset = context.presets().match(context.entity(mode.wayID), context.graph());
 
     var behavior;
 

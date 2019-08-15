@@ -1,9 +1,9 @@
 {
     "icon": "maki-car",
     "geometry": [
+        "area",
         "point",
-        "vertex",
-        "area"
+        "vertex"
     ],
     "tags": {
         "amenity": "parking",

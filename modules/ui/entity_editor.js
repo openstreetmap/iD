@@ -264,11 +264,10 @@ export function uiEntityEditor(context) {
         }
     }
 
-    function choosePreset(preset, geometry) {
+    function choosePreset(preset) {
         var entityID = singularEntityID();
         if (!entityID) return;
 
-        context.presets().setMostRecent(preset, geometry);
         context.perform(
             actionChangePreset(entityID, _activePreset, preset),
             t('operations.change_tags.annotation')

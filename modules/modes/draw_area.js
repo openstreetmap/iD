@@ -7,12 +7,15 @@ export function modeDrawArea(context, wayID, startGraph, baselineGraph, button, 
     var mode = {
         button: button,
         id: 'draw-area',
-        title: (addMode && addMode.title) || utilDisplayLabel(context.entity(wayID), context)
+        title: (addMode && addMode.title) || utilDisplayLabel(context.entity(wayID), context),
+        geometry: 'area'
     };
 
     mode.addMode = addMode;
 
     mode.wayID = wayID;
+
+    mode.preset = context.presets().match(context.entity(mode.wayID), context.graph());
 
     var behavior;
 

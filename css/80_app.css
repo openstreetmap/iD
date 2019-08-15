@@ -564,12 +564,10 @@ button.bar-button .label {
     margin-right: 6px;
 }
 [dir='ltr'] .toolbar-item.add-feature .disclosure-icon {
-    margin-left: 2px;
-    margin-right: -2px;
+    margin-left: 4px;
 }
 [dir='rtl'] .toolbar-item.add-feature .disclosure-icon {
-    margin-left: -2px;
-    margin-right: 2px;
+    margin-right: 4px;
 }
 
 button.bar-button.dragging {

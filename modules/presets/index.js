@@ -334,10 +334,9 @@ export function presetIndex(context) {
         })));
     };
 
-    function RibbonItem(preset, geometry, source) {
+    function RibbonItem(preset, source) {
         var item = {};
         item.preset = preset;
-        item.geometry = geometry;
         item.source = source;
 
         item.isFavorite = function() {
@@ -346,32 +345,22 @@ export function presetIndex(context) {
         item.isRecent = function() {
             return item.source === 'recent';
         };
-        item.matches = function(preset, geometry) {
-            return item.preset.id === preset.id && item.geometry === geometry;
+        item.matches = function(preset) {
+            return item.preset.id === preset.id;
         };
         item.minified = function() {
             return {
-                pID: item.preset.id,
-                geom: item.geometry
+                pID: item.preset.id
             };
         };
         return item;
     }
 
     function ribbonItemForMinified(d, source) {
-        if (d && d.pID && d.geom) {
+        if (d && d.pID) {
             var preset = all.item(d.pID);
             if (!preset) return null;
-
-            var geom = d.geom;
-            // treat point and vertex features as one geometry
-            if (geom === 'vertex') geom = 'point';
-
-            // iD's presets could have changed since this was saved,
-            // so make sure it's still valid.
-            if (preset.matchGeometry(geom) || (geom === 'point' && preset.matchGeometry('vertex'))) {
-                return RibbonItem(preset, geom, source);
-            }
+            return RibbonItem(preset, source);
         }
         return null;
     }
@@ -397,9 +386,9 @@ export function presetIndex(context) {
                 if (!context.isFirstSession) {
                     // assume existing user coming from iD 2, use the generic presets as defaults
                     rawFavorites = [
-                        { pID: 'point', geom: 'point'},
-                        { pID: 'line', geom: 'line'},
-                        { pID: 'area', geom: 'area'}
+                        { pID: 'point'},
+                        { pID: 'line'},
+                        { pID: 'area'}
                     ];
                 } else {
                     // new user, no default favorites
@@ -438,10 +427,9 @@ export function presetIndex(context) {
         return _recents;
     };
 
-    all.toggleFavorite = function(preset, geometry) {
-        geometry = all.fallback(geometry).id;
+    all.toggleFavorite = function(preset) {
         var favs = all.getFavorites();
-        var favorite = all.favoriteMatching(preset, geometry);
+        var favorite = all.favoriteMatching(preset);
         if (favorite) {
             favs.splice(favs.indexOf(favorite), 1);
         } else {
@@ -451,14 +439,13 @@ export function presetIndex(context) {
                 favs.pop();
             }
             // append array
-            favs.push(RibbonItem(preset, geometry, 'favorite'));
+            favs.push(RibbonItem(preset, 'favorite'));
         }
         setFavorites(favs);
     };
 
-    all.removeFavorite = function(preset, geometry) {
-        geometry = all.fallback(geometry).id;
-        var item = all.favoriteMatching(preset, geometry);
+    all.removeFavorite = function(preset) {
+        var item = all.favoriteMatching(preset);
         if (item) {
             var items = all.getFavorites();
             items.splice(items.indexOf(item), 1);
@@ -466,8 +453,8 @@ export function presetIndex(context) {
         }
     };
 
-    all.removeRecent = function(preset, geometry) {
-        var item = all.recentMatching(preset, geometry);
+    all.removeRecent = function(preset) {
+        var item = all.recentMatching(preset);
         if (item) {
             var items = all.getRecents();
             items.splice(items.indexOf(item), 1);
@@ -475,21 +462,19 @@ export function presetIndex(context) {
         }
     };
 
-    all.favoriteMatching = function(preset, geometry) {
-        geometry = all.fallback(geometry).id;
+    all.favoriteMatching = function(preset) {
         var favs = all.getFavorites();
         for (var index in favs) {
-            if (favs[index].matches(preset, geometry)) {
+            if (favs[index].matches(preset)) {
                 return favs[index];
             }
         }
         return null;
     };
-    all.recentMatching = function(preset, geometry) {
-        geometry = all.fallback(geometry).id;
+    all.recentMatching = function(preset) {
         var items = all.getRecents();
         for (var index in items) {
-            if (items[index].matches(preset, geometry)) {
+            if (items[index].matches(preset)) {
                 return items[index];
             }
         }
@@ -517,18 +502,16 @@ export function presetIndex(context) {
         if (items) setRecents(items);
     };
 
-    all.setMostRecent = function(preset, geometry) {
+    all.setMostRecent = function(preset) {
         if (context.inIntro()) return;
         if (preset.searchable === false) return;
 
-        geometry = all.fallback(geometry).id;
-
         var items = all.getRecents();
-        var item = all.recentMatching(preset, geometry);
+        var item = all.recentMatching(preset);
         if (item) {
             items.splice(items.indexOf(item), 1);
         } else {
-            item = RibbonItem(preset, geometry, 'recent');
+            item = RibbonItem(preset, 'recent');
         }
         // allow 30 recents
         if (items.length === 30) {

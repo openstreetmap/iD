@@ -42,7 +42,7 @@ export function uiToolQuickPresets(context) {
             if (d.preset &&
                 // don't set a recent as most recent to avoid reordering buttons
                 !d.isRecent()) {
-                context.presets().setMostRecent(d.preset, d.geometry);
+                context.presets().setMostRecent(d.preset);
             }
             context.enter(d);
         }
@@ -63,36 +63,24 @@ export function uiToolQuickPresets(context) {
 
         var modes = items.map(function(d) {
             var presetName = d.preset.name().split(' – ')[0];
-            var markerClass = 'add-preset add-' + d.geometry + ' add-preset-' + presetName.replace(/\s+/g, '_')
-                + '-' + d.geometry + ' add-' + d.source; // replace spaces with underscores to avoid css interpretation
+            var markerClass = 'add-preset add-preset-' + presetName.replace(/\s+/g, '_')
+                + ' add-' + d.source; // replace spaces with underscores to avoid css interpretation
             if (d.preset.isFallback()) {
                 markerClass += ' add-generic-preset';
             }
 
-            var supportedGeometry = d.preset.geometry.filter(function(geometry) {
-                return ['vertex', 'point', 'line', 'area'].indexOf(geometry) !== -1;
-            });
-            var vertexIndex = supportedGeometry.indexOf('vertex');
-            if (vertexIndex !== -1 && supportedGeometry.indexOf('point') !== -1) {
-                // both point and vertex allowed, just combine them
-                supportedGeometry.splice(vertexIndex, 1);
-            }
+            var geometry = d.preset.defaultAddGeometry(context);
+
             var tooltipTitleID = 'modes.add_preset.title';
-            if (supportedGeometry.length !== 1) {
-                if (d.preset.setTags({}, d.geometry).building) {
-                    tooltipTitleID = 'modes.add_preset.building.title';
-                } else {
-                    tooltipTitleID = 'modes.add_preset.' + context.presets().fallback(d.geometry).id + '.title';
-                }
-            }
             var protoMode = Object.assign({}, d);  // shallow copy
+            protoMode.geometry = geometry;
             protoMode.button = markerClass;
             protoMode.title = presetName;
             protoMode.description = t(tooltipTitleID, { feature: '<strong>' + presetName + '</strong>' });
             protoMode.key = d.key;
 
             var mode;
-            switch (d.geometry) {
+            switch (geometry) {
                 case 'point':
                 case 'vertex':
                     mode = modeAddPoint(context, protoMode);
@@ -143,9 +131,16 @@ export function uiToolQuickPresets(context) {
 
         buttonsEnter
             .each(function(d) {
+
+                var geometry = d.preset.geometry[0];
+                if (d.preset.geometry.length !== 1 ||
+                    (geometry !== 'area' && geometry !== 'line' && geometry !== 'vertex')) {
+                    geometry = null;
+                }
+
                 d3_select(this)
                     .call(uiPresetIcon(context)
-                        .geometry((d.geometry === 'point' && !d.preset.matchGeometry(d.geometry)) ? 'vertex' : d.geometry)
+                        .geometry(geometry)
                         .preset(d.preset)
                         .sizeClass('small')
                         .pointMarker(true)
@@ -231,19 +226,19 @@ export function uiToolQuickPresets(context) {
                 if (y > 50) {
                     // dragged out of the top bar, remove
                     if (d.isFavorite()) {
-                        context.presets().removeFavorite(d.preset, d.geometry);
+                        context.presets().removeFavorite(d.preset);
                         // also remove this as a recent so it doesn't still appear
-                        context.presets().removeRecent(d.preset, d.geometry);
+                        context.presets().removeRecent(d.preset);
                     } else if (d.isRecent()) {
-                        context.presets().removeRecent(d.preset, d.geometry);
+                        context.presets().removeRecent(d.preset);
                     }
                 } else if (targetIndex !== null) {
                     // dragged to a new position, reorder
                     if (d.isFavorite()) {
                         context.presets().moveFavorite(index, targetIndex);
                     } else if (d.isRecent()) {
-                        var item = context.presets().recentMatching(d.preset, d.geometry);
-                        var beforeItem = context.presets().recentMatching(targetData.preset, targetData.geometry);
+                        var item = context.presets().recentMatching(d.preset);
+                        var beforeItem = context.presets().recentMatching(targetData.preset);
                         context.presets().moveRecent(item, beforeItem);
                     }
                 }

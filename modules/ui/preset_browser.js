@@ -281,11 +281,8 @@ export function uiPresetBrowser(context, allowedGeometry, onChoose, onCancel) {
             if (!scoredPresets[id]) {
                 scoredPresets[id] = {
                     preset: item.preset,
-                    score: score,
-                    geometry: [item.geometry]
+                    score: score
                 };
-            } else if (scoredPresets[id].geometry.indexOf(item.geometry) === -1) {
-                scoredPresets[id].geometry.push(item.geometry);
             }
         });
 
@@ -306,11 +303,8 @@ export function uiPresetBrowser(context, allowedGeometry, onChoose, onCancel) {
                 if (!scoredPresets[preset.id]) {
                     scoredPresets[preset.id] = {
                         preset: preset,
-                        score: 0,
-                        geometry: [geom]
+                        score: 0
                     };
-                } else if (scoredPresets[preset.id].geometry.indexOf(geom) === -1) {
-                    scoredPresets[preset.id].geometry.push(geom);
                 }
                 scoredPresets[preset.id].score += 1;
             }
@@ -357,7 +351,7 @@ export function uiPresetBrowser(context, allowedGeometry, onChoose, onCancel) {
         return Object.values(scoredPresets).sort(function(item1, item2) {
             return item2.score - item1.score;
         }).map(function(item) {
-            return item.geometry ? item : item.preset;
+            return item.preset ? item.preset : item;
         }).filter(function(d) {
             var preset = d.preset || d;
             // skip non-visible
@@ -366,10 +360,8 @@ export function uiPresetBrowser(context, allowedGeometry, onChoose, onCancel) {
             // skip presets not valid in this country
             if (_countryCode && preset.countryCodes && preset.countryCodes.indexOf(_countryCode) === -1) return false;
 
-            var geometry = d.geometry || preset.geometry;
-
             for (var i in shownGeometry) {
-                if (geometry.indexOf(shownGeometry[i]) !== -1) {
+                if (preset.geometry.indexOf(shownGeometry[i]) !== -1) {
                     // skip currently hidden features
                     if (!context.features().isHiddenPreset(preset, shownGeometry[i])) return true;
                 }
@@ -464,44 +456,16 @@ export function uiPresetBrowser(context, allowedGeometry, onChoose, onCancel) {
             return CategoryItem(d);
         }
         var preset = d.preset || d;
-        if (d.preset && d.geometry && typeof d.geometry === 'string') {
-            return AddablePresetItem(preset.preset, preset.geometry);
-        }
-        var geometry = d.geometry.filter(function(geometry) {
-            return shownGeometry.indexOf(geometry) !== -1;
-        }).sort();
-        var vertexIndex = geometry.indexOf('vertex');
-        if (vertexIndex !== -1 && geometry.indexOf('point') !== -1) {
-            // both point and vertex allowed, just show point
-            geometry.splice(vertexIndex, 1);
-        }
-        if (geometry.length === 1) {
-            return AddablePresetItem(preset, geometry[0]);
-        }
-        return MultiGeometryPresetItem(preset, geometry);
+        return AddablePresetItem(preset);
     }
 
-    function drawList(list, data) {
+    function drawList(list, rawItems) {
 
         list.selectAll('.subsection.subitems').remove();
 
-        var dataItems = [];
-        for (var i = 0; i < data.length; i++) {
-            var preset = data[i];
-            if (i < data.length - 1) {
-                var nextPreset = data[i+1];
-                // group neighboring presets with the same name
-                if (preset.name && nextPreset.name && preset.name() === nextPreset.name()) {
-                    var groupedPresets = [preset, nextPreset].sort(function(p1, p2) {
-                        return (p1.geometry[0] < p2.geometry[0]) ? -1 : 1;
-                    });
-                    dataItems.push(MultiPresetItem(groupedPresets));
-                    i++; // skip the next preset since we accounted for it
-                    continue;
-                }
-            }
-            dataItems.push(itemForPreset(preset));
-        }
+        var dataItems = rawItems.map(function(rawItem) {
+            return itemForPreset(rawItem);
+        });
 
         var items = list.selectAll('.list-item')
             .data(dataItems, function(d) { return d.id(); });
@@ -550,9 +514,14 @@ export function uiPresetBrowser(context, allowedGeometry, onChoose, onCancel) {
             });
 
         row.each(function(d) {
+            var geometry = d.preset.geometry[0];
+            if (d.preset.geometry.length !== 1 ||
+                (geometry !== 'area' && geometry !== 'line' && geometry !== 'vertex')) {
+                geometry = null;
+            }
             d3_select(this).call(
                 uiPresetIcon(context)
-                    .geometry(d.geometry)
+                    .geometry(geometry)
                     .preset(d.preset || d.presets[0])
                     .sizeClass('small')
             );
@@ -581,15 +550,15 @@ export function uiPresetBrowser(context, allowedGeometry, onChoose, onCancel) {
         });
 
         row.each(function(d) {
-            if (d.geometry) {
-                var presetFavorite = uiPresetFavoriteButton(d.preset, d.geometry, context, 'accessory');
+            if (d.preset) {
+                var presetFavorite = uiPresetFavoriteButton(d.preset, null, context, 'accessory');
                 d3_select(this).call(presetFavorite.button);
             }
         });
         item.each(function(d) {
-            if ((d.geometry && (!d.isSubitem || d.isInNameGroup)) || d.geometries) {
+            if ((d.preset && (!d.isSubitem || d.isInNameGroup)) || d.geometries) {
 
-                var reference = uiTagReference(d.preset.reference(d.geometry || d.geometries[0]), context);
+                var reference = uiTagReference(d.preset.reference(d.preset.defaultAddGeometry(context, shownGeometry)), context);
 
                 var thisItem = d3_select(this);
                 thisItem.selectAll('.row').call(reference.button, 'accessory', 'info');
@@ -687,82 +656,21 @@ export function uiPresetBrowser(context, allowedGeometry, onChoose, onCancel) {
         return item;
     }
 
-    function MultiPresetItem(presets) {
+    function AddablePresetItem(preset, isSubitem, isInNameGroup) {
         var item = {};
         item.id = function() {
-            return presets.map(function(preset) { return preset.id; }).join();
+            return preset.id + isSubitem;
         };
         item.name = function() {
-            return presets[0].name();
-        };
-        item.subsection = d3_select(null);
-        item.presets = presets;
-        item.choose = function() {
-            var selection = d3_select(this);
-            if (selection.classed('disabled')) return;
-            chooseExpandable(item, d3_select(selection.node().closest('.list-item')));
-        };
-        item.subitems = function() {
-            var items = [];
-            presets.forEach(function(preset) {
-                preset.geometry.filter(function(geometry) {
-                    return shownGeometry.indexOf(geometry) !== -1;
-                }).forEach(function(geometry) {
-                    items.push(AddablePresetItem(preset, geometry, true, true));
-                });
-            });
-            return items;
-        };
-        return item;
-    }
-
-    function MultiGeometryPresetItem(preset, geometries) {
-
-        var item = {};
-        item.id = function() {
-            return preset.id + geometries;
-        };
-        item.name = function() {
-            return preset.name();
-        };
-        item.subsection = d3_select(null);
-        item.preset = preset;
-        item.geometries = geometries;
-        item.choose = function() {
-            var selection = d3_select(this);
-            if (selection.classed('disabled')) return;
-            chooseExpandable(item, d3_select(selection.node().closest('.list-item')));
-        };
-        item.subitems = function() {
-            return geometries.map(function(geometry) {
-                return AddablePresetItem(preset, geometry, true);
-            });
-        };
-        return item;
-    }
-
-    function AddablePresetItem(preset, geometry, isSubitem, isInNameGroup) {
-        var item = {};
-        item.id = function() {
-            return preset.id + geometry + isSubitem;
-        };
-        item.name = function() {
-            if (isSubitem) {
-                if (preset.setTags({}, geometry).building) {
-                    return t('presets.presets.building.name');
-                }
-                return t('modes.add_' + context.presets().fallback(geometry).id + '.title');
-            }
             return preset.name();
         };
         item.isInNameGroup = isInNameGroup;
         item.isSubitem = isSubitem;
         item.preset = preset;
-        item.geometry = geometry;
         item.choose = function() {
             if (d3_select(this).classed('disabled')) return;
 
-            if (onChoose) onChoose(preset, geometry);
+            if (onChoose) onChoose(preset, preset.defaultAddGeometry(context, shownGeometry));
 
             search.node().blur();
         };

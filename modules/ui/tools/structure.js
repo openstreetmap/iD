@@ -22,12 +22,14 @@ export function uiToolStructure(context) {
         id: 'none',
         icon: 'iD-other-line',
         label: t('toolbar.structure.none.title'),
+        iconClass: 'icon-30',
         tags: {}
     };
     var structureBridge = {
         id: 'bridge',
         icon: 'maki-bridge-15',
         label: t('presets.fields.structure.options.bridge'),
+        iconClass: 'icon-30',
         tags: {
             bridge: 'yes'
         },
@@ -40,6 +42,7 @@ export function uiToolStructure(context) {
         id: 'tunnel',
         icon: 'tnp-2009642',
         label: t('presets.fields.structure.options.tunnel'),
+        iconClass: 'icon-30',
         tags: {
             tunnel: 'yes'
         },

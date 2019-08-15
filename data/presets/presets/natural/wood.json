@@ -6,8 +6,8 @@
         "leaf_cycle"
     ],
     "geometry": [
-        "point",
-        "area"
+        "area",
+        "point"
     ],
     "tags": {
         "natural": "wood"

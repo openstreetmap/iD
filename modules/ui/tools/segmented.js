@@ -54,13 +54,14 @@ export function uiToolSegemented(context) {
                 setActiveItem(d);
             })
             .each(function(d) {
+                var title = tool.key ? uiTooltipHtml(d.label, tool.key) : d.label;
                 var tooltipBehavior = tooltip()
                     .placement('bottom')
                     .html(true)
-                    .title(uiTooltipHtml(d.label, tool.key));
+                    .title(title);
                 d3_select(this)
                     .call(tooltipBehavior)
-                    .call(svgIcon('#' + d.icon, 'icon-30'));
+                    .call(svgIcon('#' + d.icon, d.iconClass));
             });
     };
 

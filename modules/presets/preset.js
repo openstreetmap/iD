@@ -305,5 +305,36 @@ export function presetPreset(id, preset, fields, visible, rawPresets) {
         preset.groupsByGeometry = loadGroups();
     }
 
+    // The geometry type to use when adding a new feature of this preset
+    preset.defaultAddGeometry = function(context, allowedGeometries) {
+        var geometry = preset.geometry.slice();
+        if (allowedGeometries) {
+            geometry = geometry.filter(function(geom) {
+                return allowedGeometries.indexOf(geom) !== -1;
+            });
+        }
+        var mostRecentAddGeom = context.storage('preset.' + preset.id + '.addGeom');
+        if (mostRecentAddGeom === 'vertex') mostRecentAddGeom = 'point';
+        if (mostRecentAddGeom && geometry.indexOf(mostRecentAddGeom) !== -1) {
+            return mostRecentAddGeom;
+        }
+        var vertexIndex = geometry.indexOf('vertex');
+        if (vertexIndex !== -1 && geometry.indexOf('point') !== -1) {
+            // both point and vertex allowed, just use point
+            geometry.splice(vertexIndex, 1);
+        }
+        if (geometry.length) {
+            return geometry[0];
+        }
+        return null;
+    };
+
+    preset.setMostRecentAddGeometry = function(context, geometry) {
+        if (preset.geometry.length > 1 &&
+            preset.geometry.indexOf(geometry) !== -1) {
+            context.storage('preset.' + preset.id + '.addGeom', geometry);
+        }
+    };
+
     return preset;
 }

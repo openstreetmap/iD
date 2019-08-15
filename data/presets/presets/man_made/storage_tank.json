@@ -14,8 +14,8 @@
         "manufacturer"
     ],
     "geometry": [
-        "point",
-        "area"
+        "area",
+        "point"
     ],
     "terms": [
         "water",
