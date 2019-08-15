@@ -452,6 +452,10 @@
       "replace": {"landuse": "farmland"}
     },
     {
+      "old": {"landuse": "garden"},
+      "replace": {"leisure": "garden"}
+    },
+    {
       "old": {"landuse": "pond"},
       "replace": {"natural": "water", "water": "pond"}
     },

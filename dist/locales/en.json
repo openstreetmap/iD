@@ -7218,6 +7218,10 @@
                     "name": "Farmyard",
                     "terms": "crop,grow,plant"
                 },
+                "landuse/flowerbed": {
+                    "name": "Flowerbed",
+                    "terms": "floral garden,flower garden"
+                },
                 "landuse/forest": {
                     "name": "Managed Forest",
                     "terms": "cut,forest,forestry,lumber,silviculture,tree"
