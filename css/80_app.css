@@ -1086,6 +1086,19 @@ a.hide-toggle {
 .assistant.light:not(.body-collapsed) .assistant-header {
     background: #fff;
 }
+.assistant.collapsible .assistant-header {
+    cursor: pointer;
+}
+.assistant.collapsible .assistant-header * {
+    /* disable text selection caused by double clicking */
+    pointer-events: none;
+    -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+    -khtml-user-select: none; /* Konqueror HTML */
+    -moz-user-select: none; /* Firefox */
+    -ms-user-select: none; /* Internet Explorer/Edge */
+    user-select: none; /* Non-prefixed version, currently */
+}
 .assistant .icon-col {
     flex: 0 0 auto;
     padding: 10px;
