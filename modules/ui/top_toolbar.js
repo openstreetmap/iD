@@ -106,7 +106,6 @@ export function uiTopToolbar(context) {
                 straighten,
                 orthogonalize,
                 circularize,
-                'spacer',
                 reverse,
                 split,
                 disconnect,
