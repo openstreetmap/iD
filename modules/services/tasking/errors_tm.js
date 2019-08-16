@@ -76,9 +76,11 @@ function handleError(task, requestError, errors) {
             break;
     }
 
-    // set error as active
-    errors[_errorName].active = true;
-    errors[_errorName].task = task;
+    if (_errorName) {
+        // set error as active
+        errors[_errorName].active = true;
+        errors[_errorName].task = task;
+    }
 
     // get error message
     switch (requestError.status) {

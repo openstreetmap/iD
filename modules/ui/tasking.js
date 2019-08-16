@@ -2,7 +2,7 @@ import _debounce from 'lodash-es/debounce';
 import { event as d3_event, select as d3_select } from 'd3-selection';
 
 import { t, textDirection } from '../util/locale';
-import { modeSave } from '../modes';
+import { modeSave, modeBrowse } from '../modes';
 import { svgIcon } from '../svg/icon';
 import { uiDisclosure } from './disclosure';
 import { uiTooltipHtml } from './tooltipHtml';
@@ -58,6 +58,21 @@ export function uiTasking(context) {
         // load data once custom settings have been set
         tasking.loadFromUrl(tasking.customSettings());
     });
+
+
+    tasking.event.on('cancelTasking', function() {
+        // reset edits
+        context.history().reset();
+
+        // disable tasking
+        layer.enabled(false);
+
+        // set mode to browse
+        context.enter(modeBrowse(context));
+
+        update();
+    });
+
 
     tasking.event.on('loadedProject', function(project) {
         updateActiveErrors();

@@ -20,7 +20,7 @@ var apibases = {
     local:  'http://127.0.0.1:5000/api/v1/', // TODO: TAH - change to list of real manager urls when published
     hot: 'https://tasks.hotosm.org/api/v1/',
 };
-var dispatch = d3_dispatch('change', 'loadedTask', 'loadedProject', 'loadedCustomSettings', 'setManager', 'setProject', 'setTask');
+var dispatch = d3_dispatch('change', 'loadedTask', 'loadedProject', 'loadedCustomSettings', 'setManager', 'setProject', 'setTask', 'cancelTasking');
 var _taskingCache = {};
 var _enabled = false;
 
@@ -523,7 +523,7 @@ export default {
                 break;
         }
 
-        return postData(baseUrl, action, {})
+        return postData(baseUrl, action)
             .then(function(data) {
 
                 // reformulate result based on manager
@@ -548,6 +548,51 @@ export default {
                 // return message;
             });
 
+    },
+
+
+    unlockTask: function(task) {
+        var that = this;
+
+        var _currProject = that.currentProject();
+        var baseUrl = apibases.local + 'project/' + _currProject.id() + '/task/' + task.id() + '/';
+        var action = '';
+
+        switch (that.currentManager().id) {
+
+            case 'HOT':
+                action = 'stop-mapping';
+                break;
+            default:
+                break;
+        }
+
+        // body comment
+        var _data = {
+            'comment': 'mapping stopped before editing'
+        };
+
+        return postData(baseUrl, action, _data)
+            .then(function(data) {
+
+                // reformulate result based on manager
+                var json = parseTask(that, data);
+
+                // create task
+                var updatedTask = parsers.task(json);
+
+                that.replaceTask(updatedTask);
+
+                return data;
+            })
+            .catch(function(err) {
+                var { errors, message } = handleError(task, err, that.errors());
+
+                // update cache errors
+                that.errors(errors);
+
+                // return message;
+            });
     },
 
 
@@ -616,12 +661,12 @@ export default {
 
 
     resetCurrentTask: function() {
-        _taskingCache.currentTask = '';
+        _taskingCache.currentTaskId = '';
     },
 
 
     resetCurrentProject: function() {
-        _taskingCache.currentProject = '';
+        _taskingCache.currentProjectId = '';
     },
 
 
@@ -685,5 +730,22 @@ export default {
     postTaskUpdate: function() {
         console.log('TODO: postTaskUpdate');
     },
+
+
+    cancelTasking: function() {
+        var that = this;
+
+        // unlock task
+        that.unlockTask(that.currentTask())
+            .then(function(unlockResponse) {
+                console.log('unlock response: ', unlockResponse);
+            })
+            .catch(function(err) { console.log('unlockTask err: ', err ); });
+
+        // reset current project and task
+        that.resetCurrentProjectAndTask();
+
+        dispatch.call('cancelTasking');
+    }
 
 };

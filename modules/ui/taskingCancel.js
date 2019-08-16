@@ -1,7 +1,5 @@
 import { dispatch as d3_dispatch } from 'd3-dispatch';
 
-import { modeBrowse } from '../modes/browse';
-
 import { t } from '../util/locale';
 import { uiConfirm } from './confirm';
 import { utilRebind } from '../util';
@@ -10,12 +8,11 @@ import { utilRebind } from '../util';
 export function uiTaskingCancel(context) {
     var dispatch = d3_dispatch('change');
 
+    var tasking = context.tasking();
+
     function render(selection) {
 
         var _number_changes = context.history().hasChanges() && context.history().difference().length();
-
-        var tasking = context.tasking();
-        var svg = context.layers().layer('tasking');
 
         var modal = uiConfirm(selection).okButton();
 
@@ -75,19 +72,10 @@ export function uiTaskingCancel(context) {
 
         // cancel tasking
         function clickConfirm() {
-            // disable tasking
-            svg.enabled(false);
-
-            // reset current manager, project, and task
-            tasking.resetProjectAndTask();
-
-            // reset edits
-            context.history().reset();
-
-            context.enter(modeBrowse(context));
-
             this.blur();
             modal.close();
+
+            tasking.cancelTasking();
 
             dispatch.call('change', this);
         }

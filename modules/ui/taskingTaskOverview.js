@@ -4,9 +4,10 @@ import {
     select as d3_select
 } from 'd3-selection';
 
+import { uiTaskingCancel } from './taskingCancel';
+
 import { t } from '../util/locale';
 import { services } from '../services';
-import { modeBrowse } from '../modes/browse';
 import { svgIcon } from '../svg/icon';
 
 import {
@@ -20,9 +21,12 @@ export function uiTaskOverview(context) {
     var _task;
 
     var osm = services.osm;
-    var tasking = services.tasking;
+    var tasking = context.tasking();
 
     var overviewDetails = ['editStatusOptions', 'leaveAComment', 'saveEdits'];
+
+    // listeners
+    var taskingCancel = uiTaskingCancel(context);
 
 
     function taskOverview(selection) {
@@ -290,11 +294,9 @@ export function uiTaskOverview(context) {
     function clickCancel(d) {
         this.blur();    // avoid keeping focus on the button - #4641
 
-        if (tasking) {
-            tasking.cancelTasking(d);
-        }
-        context.enter(modeBrowse(context));
-        dispatch.call('change');
+        d3_event.preventDefault();
+        context.container()
+            .call(taskingCancel);
     }
 
 
