@@ -1,4 +1,3 @@
-
 export function manager() {
     if (!(this instanceof manager)) {
         return (new manager()).initialize(arguments);
@@ -26,21 +25,6 @@ Object.assign(manager.prototype, {
             }
         }
 
-        if (!this.id) {
-            this.id = manager.id() + '';  // as string
-        }
-
         return this;
     },
-
-    // NOTE: TAH - these functions (along with those in the other objects) are not reachable atm
-
-    id: function() {
-        return this.id;
-    },
-
-    name: function() {
-        return this.name;
-    }
-
 });

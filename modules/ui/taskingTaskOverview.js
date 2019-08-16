@@ -14,10 +14,9 @@ import {
 } from '../util';
 
 
-export function uiTaskOverview() {
+export function uiTaskOverview(context) {
     var dispatch = d3_dispatch('change');
 
-    var _context;
     var _task;
 
     var osm = services.osm;
@@ -282,7 +281,7 @@ export function uiTaskOverview() {
             return (
                 hasAuth &&
                 (status === 'lockedForMapping' || status === 'lockedForValidation') &&
-                 _context.history().hasChanges()
+                 context.history().hasChanges()
             ) ? null : true;
         }
     }
@@ -294,7 +293,7 @@ export function uiTaskOverview() {
         if (tasking) {
             tasking.cancelTasking(d);
         }
-        _context.enter(modeBrowse(_context));
+        context.enter(modeBrowse(context));
         dispatch.call('change');
     }
 
@@ -310,11 +309,10 @@ export function uiTaskOverview() {
     }
 
 
-    taskOverview.task = function(val, context) {
+    taskOverview.task = function(val) {
         if (!arguments.length) return _task;
         _task = val;
 
-        if (context) { _context = context; }
         return this;
     };
 

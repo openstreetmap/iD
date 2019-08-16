@@ -300,7 +300,7 @@ export function svgTasking(projection, context, dispatch) {
         // set task min zoom
         var map = context.map();
         _task.minZoom(map.trimmedExtentZoom(_task.extent()));
-        getService().replaceTask(_task); // update task in cache
+        _task = getService().replaceTask(_task); // update task in cache
 
         map.centerZoom(_task.center(), _task.minZoom()); // TODO: TAH - better way to zoom out a bit
 

@@ -18,8 +18,6 @@ Object.assign(task.prototype, {
 
     type: 'task',
 
-    locked: false,
-
     initialize: function(sources) {
         for (var i = 0; i < sources.length; ++i) {
             var source = sources[i];
@@ -69,10 +67,11 @@ Object.assign(task.prototype, {
 
 
     minZoom: function(extentZoom) {
-        if (!arguments.length) return this.properties.minZoom;
+        if (!extentZoom || !arguments.length && !isNaN(extentZoom)) return this.properties.minZoom;
 
         this.properties.minZoom = extentZoom; // Math.floor(extentZoom) - MIN_ZOOM_PAD;
-        return this;
+
+        return this.properties.minZoom;
     },
 
     projectId: function() {

@@ -67,7 +67,7 @@ export function uiTasking(context) {
 
         if (!activeErrors(_errors).length) {
             // set project
-            tasking.currentProject(project);
+            tasking.currentProject(project.id());
         }
     });
 
@@ -90,10 +90,12 @@ export function uiTasking(context) {
                 .then(function(lockResponse) {
                     updateActiveErrors();
 
-                    if (lockResponse === 'locked') {
+                    if (lockResponse && Object.keys(lockResponse).length) {
 
                         // enable layer
                         toggleLayer(true);
+
+                        update();
                     }
                 })
                 .catch(function(err) { console.log('locking task attempt error: ', err); });
@@ -101,6 +103,7 @@ export function uiTasking(context) {
         } else {
             toggleLayer(false);
         }
+
         update();
     }
 
@@ -212,7 +215,7 @@ export function uiTasking(context) {
 
     //     tasking.currentManager(d); // set manager
 
-    //     if (d.managerId === 'none') {
+    //     if (d.id === 'none') {
     //         tasking.resetProjectAndTask();
     //         setLayer(false);
 
@@ -223,10 +226,10 @@ export function uiTasking(context) {
     //     } else {
 
     //         // check if layer is supported
-    //         if (!layerSupported() || d.managerId !== 'custom') return;
+    //         if (!layerSupported() || d.id !== 'custom') return;
 
     //         // handle custom manager
-    //         if (d.managerId === 'custom') {
+    //         if (d.id === 'custom') {
 
     //             // get project and task from custom settings
     //             _project = tasking.getProject(tasking.customSettings().projectId);
@@ -251,7 +254,7 @@ export function uiTasking(context) {
 
     // function showsManager(d) {
     //     var _currManager = tasking.currentManager();
-    //     return _currManager && _currManager.managerId === d.managerId;
+    //     return _currManager && _currManager.id === d.id;
     // }
 
 
