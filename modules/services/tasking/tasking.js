@@ -374,43 +374,46 @@ export default {
 
 
     loadProject: function(parsedUrl) {
-        var that = this;
+        try {
+            var that = this;
 
-        // var id = parsedUrl.manager;
-        var projectId = parsedUrl.projectId;
+            // var id = parsedUrl.manager;
+            var projectId = parsedUrl.projectId;
 
-        // load project if it hasn't been loaded
-        if (!Object.keys(that.getProject(projectId)).length) {
-            getData(formulateUrl(that, parsedUrl, 'project'))
-                .then(function(result) {
-                    if (result) {
+            // load project if it hasn't been loaded
+            if (!Object.keys(that.getProject(projectId)).length) {
+                getData(formulateUrl(that, parsedUrl, 'project'))
+                    .then(function(result) {
+                        if (result) {
 
-                        // reformulate result based on manager
-                        var json = parseProject(that, result, parsedUrl);
+                            // reformulate result based on manager
+                            var json = parseProject(that, result, parsedUrl);
 
-                        // create project
-                        var newProject = parsers.project(json);
+                            // create project
+                            var newProject = parsers.project(json);
 
-                        // add to projects
-                        that.addProject(newProject);
+                            // add to projects
+                            that.addProject(newProject);
 
-                        dispatch.call('loadedProject', {}, newProject);
-                        dispatch.call('change');
+                            dispatch.call('loadedProject', {}, newProject);
+                            dispatch.call('change');
 
-                        // load task if requested
-                        if (parsedUrl.urlType === 'task') { that.loadTask(parsedUrl); }
-                    }
-                })
-                .catch(function(err) {
-                    var { errors, message } = handleError(task, err, that.errors());
+                            // load task if requested
+                            if (parsedUrl.urlType === 'task') { that.loadTask(parsedUrl); }
+                        }
+                    })
+                    .catch(function(err) {
+                        var { errors, message } = handleError(task, err, that.errors());
 
-                    // update cache errors
-                    that.errors(errors);
+                        // update cache errors
+                        that.errors(errors);
 
-                    return message;
-                });
+                        return message;
+                    });
+            }
+        } catch (error) {
+            console.log('loadProject error: ', error);
         }
-
     },
 
     projects: function() {
@@ -429,51 +432,54 @@ export default {
 
 
     loadTask: function(parsedUrl) {
+        try {
+            var that = this;
 
-        var that = this;
+            var taskId = parsedUrl.taskId;
 
-        var taskId = parsedUrl.taskId;
+            var _project = that.getProject(parsedUrl.projectId);
 
-        var _project = that.getProject(parsedUrl.projectId);
+            // load project first if it hasn't been loaded
+            if (!Object.keys(_project).length) {
+                that.loadProject(parsedUrl);
+                return;
 
-        // load project first if it hasn't been loaded
-        if (!Object.keys(_project).length) {
-            that.loadProject(parsedUrl);
-            return;
+            // if the project is loaded but not current, make current
+            } else {
+                that.currentProject(_project.id());
+            }
 
-        // if the project is loaded but not current, make current
-        } else {
-            that.currentProject(_project.id());
-        }
+            // load task if it hasn't been loaded
+            if (!Object.keys(that.getTask(taskId)).length) {
 
-        // load task if it hasn't been loaded
-        if (!Object.keys(that.getTask(taskId)).length) {
+                getData(formulateUrl(that, parsedUrl, 'task'))
+                    .then(function(result) {
+                        if (result) {
 
-            getData(formulateUrl(that, parsedUrl, 'task'))
-                .then(function(result) {
-                    if (result) {
+                            // reformulate result based on manager
+                            var json = parseTask(that, result);
 
-                        // reformulate result based on manager
-                        var json = parseTask(that, result);
+                            // create task
+                            var newTask = parsers.task(json);
 
-                        // create task
-                        var newTask = parsers.task(json);
+                            // add to tasks
+                            that.addTask(newTask);
 
-                        // add to tasks
-                        that.addTask(newTask);
+                            dispatch.call('loadedTask', {}, newTask);
+                            dispatch.call('change');
+                        }
+                    })
+                    .catch(function(err) {
+                        var { errors, message } = handleError(task, err, that.errors());
 
-                        dispatch.call('loadedTask', {}, newTask);
-                        dispatch.call('change');
-                    }
-                })
-                .catch(function(err) {
-                    var { errors, message } = handleError(task, err, that.errors());
+                        // update cache errors
+                        that.errors(errors);
 
-                    // update cache errors
-                    that.errors(errors);
-
-                    return message;
-                });
+                        return message;
+                    });
+            }
+        } catch (error) {
+            console.log('loadTask error: ', error);
         }
     },
 

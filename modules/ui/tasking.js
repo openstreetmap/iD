@@ -598,7 +598,7 @@ export function uiTasking(context) {
         if (settings && settings.url) {
 
             // if settings have changed
-            if (tasking.customSettings() !== settings) {
+            if (tasking.customSettings().url !== settings.url) {
                 // set custom settings
                 tasking.customSettings(settings);
             }

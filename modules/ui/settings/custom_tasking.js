@@ -8,17 +8,11 @@ import { utilNoAuto, utilRebind } from '../../util';
 export function uiSettingsCustomTasking(context) {
     var dispatch = d3_dispatch('change');
 
-    function render(selection) {
+    // keep separate copies of original and current settings
+    var _origSettings = {};
+    var _currSettings = {};
 
-        // keep separate copies of original and current settings
-        var _origSettings = {
-            manager: 'custom',
-            url: context.tasking().customSettings().url
-        };
-        var _currSettings = {
-            manager: 'custom',
-            url: context.tasking().customSettings().url
-        };
+    function render(selection) {
 
         var placeholder = 'https://{m}/project/{p}/task/{t}';
         var example = 'https://tasks.hotosm.org/api/v1/project/1/task/10?as_file=false';
@@ -74,7 +68,7 @@ export function uiSettingsCustomTasking(context) {
         // restore the original url
         function clickCancel() {
             textSection.select('.field-url').property('value', _origSettings.url);
-            context.tasking().customSettings(_origSettings);
+            // context.tasking().customSettings(_origSettings);
 
             this.blur();
             modal.close();
@@ -83,6 +77,7 @@ export function uiSettingsCustomTasking(context) {
         // accept the current url
         function clickSave() {
             _currSettings.url = textSection.select('.field-url').property('value').trim();
+            _origSettings = _currSettings;
 
             this.blur();
             modal.close();
