@@ -1054,11 +1054,11 @@ a.hide-toggle {
     display: flex;
     flex: 0 0 auto;
 }
-.assistant.body-collapsed {
+.assistant.body-collapsed.minimal {
     width: auto !important;
     max-width: 350px;
 }
-.assistant:not(.body-collapsed) {
+.assistant:not(.minimal) {
     min-width: 250px;
 }
 .assistant > .resizer-x {

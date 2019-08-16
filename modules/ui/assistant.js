@@ -123,8 +123,17 @@ export function uiAssistant(context) {
     function toggleBody() {
         isBodyOpen = !isBodyOpen;
         container.classed('body-collapsed', !isBodyOpen);
+        container.classed('minimal', false);
         container.selectAll('.assistant-header .control-col .icon use')
             .attr('href', '#iD-icon-' + (isBodyOpen ? 'up' : 'down'));
+
+        if (!isBodyOpen) {
+            container.on('mouseleave.minimal', function() {
+                container.classed('minimal', true);
+            });
+        } else {
+            container.on('mouseleave.minimal', null);
+        }
     }
 
     function drawPanel(panel) {
@@ -141,7 +150,7 @@ export function uiAssistant(context) {
             ' ' +
             (hasBody ? 'has-body' : '') +
             ' ' +
-            (isCollapsible && !isBodyOpen ? 'body-collapsed' : '')
+            (isCollapsible && !isBodyOpen ? 'body-collapsed minimal' : '')
         );
 
         var iconCol = header.selectAll('.icon-col')
