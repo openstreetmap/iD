@@ -433,16 +433,17 @@ export default {
         var that = this;
 
         var taskId = parsedUrl.taskId;
-        var projectId = parsedUrl.projectId;
+
+        var _project = that.getProject(parsedUrl.projectId);
 
         // load project first if it hasn't been loaded
-        if (!Object.keys(that.getProject(projectId)).length) {
+        if (!Object.keys(_project).length) {
             that.loadProject(parsedUrl);
             return;
 
         // if the project is loaded but not current, make current
-        } else if (!that.currentProject().id === projectId) {
-            that.currentProject(that.getProject(projectId));
+        } else {
+            that.currentProject(_project.id());
         }
 
         // load task if it hasn't been loaded
