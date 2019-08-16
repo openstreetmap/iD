@@ -1135,6 +1135,26 @@ a.hide-toggle {
     font-size: 14px;
     font-weight: bold;
     line-height: normal;
+    display: flex;
+}
+.assistant .subject-title span {
+    flex: 1 1 auto;
+}
+.assistant .subject-title .controls {
+    flex: 0 0 auto;
+    margin-top: -3px;
+    margin-bottom: -10px
+}
+.assistant .subject-title .controls button {
+    color: #999;
+    background: transparent;
+    border-radius: 100%;
+    height: 30px;
+    width: 30px;
+}
+.assistant .subject-title .controls button:hover {
+    color: #666;
+    background: rgba(0, 0, 0, 0.1);
 }
 .assistant .control-col {
     flex: 0 0 auto;
