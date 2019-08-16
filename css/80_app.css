@@ -3248,7 +3248,7 @@ div.full-screen > button:hover {
 }
 .issue-text .issue-message {
     flex: 1 1 auto;
-    padding: 5px 0;
+    padding: 5px 5px 5px 0px;
 }
 .issue-label .issue-autofix {
     flex: 0 0 auto;

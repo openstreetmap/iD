@@ -1495,9 +1495,12 @@
             "upload_explanation": "The changes you upload will be visible on all maps that use OpenStreetMap data.",
             "upload_explanation_with_user": "The changes you upload as {user} will be visible on all maps that use OpenStreetMap data.",
             "errors": {
+                "_403": "Tasking not allowed.",
                 "unsavedEdits": "Thanks for your edits! But before starting a task, please save your existing edits.",
-                "mappingNotAllowed": "The selected task is not in a state that allows mapping.",
-                "validationNotAllowed": "The selected task is not in a state that allows validation."
+                "taskAlreadyLocked": "You cannot edit this task because task {taskId} is already locked.",
+                "invalidStateMapping": "Mapping isn't allowed for task {taskId} with status \"{status}\"",
+                "taskNotFound": "Task {taskId} not found",
+                "validationNotAllowed": "Validation isn't allowed for task {taskId} with status \"{status}\""
             }
         },
         "help": {

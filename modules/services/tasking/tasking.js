@@ -11,6 +11,8 @@ import { task, project, manager } from '../../osm';
 import { dataTaskingManagers } from '../../../data';
 
 import { parseHOTTask, parseHOTProject } from './parseHOT';
+import { getData, postData } from './fetch_tm';
+import { _errors, handleError } from './errors_tm';
 
 
 
@@ -22,36 +24,10 @@ var dispatch = d3_dispatch('change', 'loadedTask', 'loadedProject', 'loadedCusto
 var _taskingCache = {};
 var _enabled = false;
 
-var _errors = {
-    'unsavedEdits': {
-        severity: 'error',
-        message: function() {
-            return t('tasking.errors.unsavedEdits');
-        },
-        active: false
-    },
-    'mappingNotAllowed': {
-        severity: 'error',
-        message: function() {
-            return t('tasking.errors.mappingNotAllowed'); // TODO: TAH - change text to include user and status
-        },
-        active: false
-    },
-    'validationNotAllowed': {
-        severity: 'error',
-        message: function() {
-            return t('tasking.errors.validationNotAllowed'); // TODO: TAH - change text to include user and status
-        },
-        active: false
-    }
-};
 
+function parseTask(that, json) {
 
-function parseTask(that, result, parsedUrl) {
-
-    var json = JSON.parse(result);
-
-    switch (parsedUrl.managerSource) {
+    switch (that.currentManager()) {
         case '127.0.0.1:5000' || 'HOT': // TODO: TAH - remove localhost
             json = parseHOTTask(that, json);
             break;
@@ -65,11 +41,9 @@ function parseTask(that, result, parsedUrl) {
 }
 
 
-function parseProject(result, parsedUrl) {
+function parseProject(that, json) {
 
-    var json = JSON.parse(result);
-
-    switch (parsedUrl.managerSource) {
+    switch (that.currentManager()) {
         case '127.0.0.1:5000' || 'HOT': // TODO: TAH - remove localhost
             json = parseHOTProject(json);
             break;
@@ -224,9 +198,9 @@ function parseUrl(url, defaultExtension) {
 }
 
 
-function formulateUrl(parsedUrl, type) {
+function formulateUrl(that, parsedUrl, type) {
     var path;
-    switch (parsedUrl.managerSource) {
+    switch (that.currentManager()) {
         case '127.0.0.1:5000' || 'HOT': // TODO: TAH - remove localhost
 
             path = apibases.local + 'project/' + parsedUrl.projectId; // TODO: TAH - remove apibase.local
@@ -390,7 +364,12 @@ export default {
 
                 })
                 .catch(function(err) {
-                    console.log('loadFromUrl error: ', err); // TODO: TAH - better handling of error
+                    var { errors, message } = handleError(task, err, that.errors());
+
+                    // update cache errors
+                    that.errors(errors);
+
+                    return message;
                 });
 
         // if the url is to a tasking manager api endpoint
@@ -423,12 +402,12 @@ export default {
 
         // load project if it hasn't been loaded
         if (!that.getProject(projectId)) {
-            d3_text(formulateUrl(parsedUrl, 'project'))
+            getData(formulateUrl(that, parsedUrl, 'project'))
                 .then(function(result) {
                     if (result) {
 
                         // reformulate result based on manager
-                        var json = parseProject(result, parsedUrl);
+                        var json = parseProject(that, result, parsedUrl);
 
                         // create project
                         var newProject = parsers.project(json);
@@ -444,7 +423,12 @@ export default {
                     }
                 })
                 .catch(function(err) {
-                    console.log('loadProject error: ', err); // TODO: TAH - better handling of errors
+                    var { errors, message } = handleError(task, err, that.errors());
+
+                    // update cache errors
+                    that.errors(errors);
+
+                    return message;
                 });
         }
 
@@ -485,12 +469,12 @@ export default {
         // load task if it hasn't been loaded
         if (!that.getTask(taskId)) {
 
-            d3_text(formulateUrl(parsedUrl, 'task'))
+            getData(formulateUrl(that, parsedUrl, 'task'))
                 .then(function(result) {
                     if (result) {
 
                         // reformulate result based on manager
-                        var json = parseTask(that, result, parsedUrl);
+                        var json = parseTask(that, result);
 
                         // create task
                         var newTask = parsers.task(json);
@@ -503,7 +487,12 @@ export default {
                     }
                 })
                 .catch(function(err) {
-                    console.log('loadTask error: ', err); // TODO: TAH - better handling of errors
+                    var { errors, message } = handleError(task, err, that.errors());
+
+                    // update cache errors
+                    that.errors(errors);
+
+                    return message;
                 });
         }
     },
@@ -541,12 +530,49 @@ export default {
     },
 
 
+    lockTaskForMapping: function(task) {
+        var that = this;
+
+        var baseUrl = apibases.local + 'project/' + that.currentProject().id() + '/task/' + task.id() + '/';
+        var action = '';
+
+        switch (that.currentManager()) {
+
+            case '127.0.0.1:5000' || 'HOT':
+                action = 'lock-for-mapping';
+                break;
+            default:
+                break;
+        }
+
+        return postData(baseUrl, action, {})
+            .then(function(data) {
+                return data;
+            })
+            .catch(function(err) {
+                var { errors, message } = handleError(task, err, that.errors());
+
+                // update cache errors
+                that.errors(errors);
+
+                return message;
+            });
+
+    },
+
+
     customSettings: function(d) {
+        var that = this;
+
         if (!arguments.length) return _taskingCache.customSettings;
 
         if (d.url) {
-            var parsedUrl = parseUrl(d.url); // parse url
-            _taskingCache.customSettings = parsedUrl; // save custom settings
+            var parsedUrl = parseUrl(d.url); // parse url,
+            _taskingCache.customSettings = parsedUrl; //save custom settings
+            if (parsedUrl.managerSource) {
+                // set manager
+                that.currentManager(parsedUrl.managerSource);
+            }
         }
 
         dispatch.call('loadedCustomSettings');
@@ -644,6 +670,19 @@ export default {
         if (!arguments.length) return _taskingCache.errors;
 
         _taskingCache.errors = val;
+
+        return this;
+    },
+
+    resetActiveErrors: function() {
+        var that = this;
+
+        var _errors = that.errors();
+
+        // reset active errors
+        for (var error in _errors) {
+            _errors[error].active = false;
+        }
 
         return this;
     },

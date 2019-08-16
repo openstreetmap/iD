@@ -20,7 +20,7 @@ export function uiTasking(context) {
 
     var key = t('tasking.key');
 
-    var taskingService = context.tasking();
+    var tasking = context.tasking();
 
     var layer = context.layers().layer('tasking');
 
@@ -35,9 +35,9 @@ export function uiTasking(context) {
     var _taskingProjectContainer = d3_select(null);
     var _taskingTaskContainer = d3_select(null);
 
-    var _errors = taskingService.errors();
-    var _task = taskingService.currentTask();
-    var _project = taskingService.currentProject();
+    var _errors = tasking.errors();
+    var _task = tasking.currentTask();
+    var _project = tasking.currentProject();
 
     var _hot_tm_url = 'https://tasks.hotosm.org/';
 
@@ -46,72 +46,76 @@ export function uiTasking(context) {
         .on('change', customTaskingChanged);
 
     context.history().on('change', function() {
-        updateErrorsOnChange();
+        updateActiveErrors();
     });
 
-    taskingService.event.on('setTask', function() {
+    tasking.event.on('setTask', function() {
         layer.fitZoom();
         update();
     });
 
-    taskingService.event.on('loadedCustomSettings', function() {
+    tasking.event.on('loadedCustomSettings', function() {
         // load data once custom settings have been set
-        taskingService.loadFromUrl(taskingService.customSettings());
+        tasking.loadFromUrl(tasking.customSettings());
     });
 
-    taskingService.event.on('loadedProject', function(project) {
-        updateErrorsOnChange();
+    tasking.event.on('loadedProject', function(project) {
+        updateActiveErrors();
 
         // check if layer is supported
         if (!(layer && layer.supported())) return;
 
         if (!activeErrors(_errors).length) {
             // set project
-            taskingService.currentProject(project);
+            tasking.currentProject(project);
         }
     });
 
-    taskingService.event.on('loadedTask', function(task) {
-        updateErrorsOnChange(task);
+    tasking.event.on('loadedTask', function(task) {
+        updateActiveErrors();
 
         setTask(task);
     });
 
     function setTask(task) {
+
         // check if layer is supported
         if (!(layer && layer.supported())) return;
 
         // enable layer if no active errors
         if (!activeErrors(_errors).length) {
 
-            // set task
-            taskingService.currentTask(task);
+            // attempt to lock task
+            tasking.lockTaskForMapping(task)
+                .then(function(lockResponse) {
+                    updateActiveErrors();
 
-            // enable layer
-            toggleLayer(true);
+                    if (lockResponse === 'locked') {
+
+                        // enable layer
+                        toggleLayer(true);
+                    }
+                })
+                .catch(function(err) { console.log('locking task attempt error: ', err); });
+
         } else {
             toggleLayer(false);
         }
+        update();
     }
 
 
-    var mappingAllowed = ['ready', 'invalidated', 'locked'];
-    var validationAllowedStates = ['mapped', 'validated', 'badimagery'];
+    function updateActiveErrors() {
 
-
-    function updateErrorsOnChange(task) {
-
+        // reset active errors
+    //    tasking.resetActiveErrors();
+       _errors = tasking.errors();
 
         // unsaved edits
         _errors.unsavedEdits.active = context.history().hasChanges() && layer.enabled() === false;
 
-        // invalid state for mapping or validation
-        if (task) {
-            _errors.mappingNotAllowed.active = !mappingAllowed.includes(task.status()); // TODO: TAH - also check who's locked it, if it's current user, allow
-            // _errors.validationNotAllowed.active = !validationAllowedStates.includes(task.status()); // TODO: TAH - also check who's locked it, if it's current user, allow
-        }
-
-        taskingService.errors(_errors);
+        // push updates to errors
+        _errors = tasking.errors(_errors);
         update();
     }
 
@@ -149,7 +153,7 @@ export function uiTasking(context) {
 
     function save() {
         d3_event.preventDefault();
-        if (!context.inIntro() && !isSaving() && context.history().hasChanges() && !showsLayer() && !taskingService.edits()) {
+        if (!context.inIntro() && !isSaving() && context.history().hasChanges() && !showsLayer() && !tasking.edits()) {
             context.enter(modeSave(context));
         }
     }
@@ -175,7 +179,7 @@ export function uiTasking(context) {
             if (enabled) {
                 layer.fitZoom(); // zoom to layer if enabled
             } else {
-                // taskingService.resetCurrentProjectAndTask(); // otherwise, remove current task & project
+                // tasking.resetCurrentProjectAndTask(); // otherwise, remove current task & project
             }
         }
     }
@@ -206,14 +210,14 @@ export function uiTasking(context) {
     //         // var user
     //     }
 
-    //     taskingService.currentManager(d); // set manager
+    //     tasking.currentManager(d); // set manager
 
     //     if (d.managerId === 'none') {
-    //         taskingService.resetProjectAndTask();
+    //         tasking.resetProjectAndTask();
     //         setLayer(false);
 
     //     } else if (context.history().hasChanges()) {
-    //         taskingService.resetProjectAndTask();
+    //         tasking.resetProjectAndTask();
     //         setLayer(false);
 
     //     } else {
@@ -225,14 +229,14 @@ export function uiTasking(context) {
     //         if (d.managerId === 'custom') {
 
     //             // get project and task from custom settings
-    //             _project = taskingService.getProject(taskingService.customSettings().projectId);
-    //             _task = taskingService.getTask(taskingService.customSettings().taskId);
+    //             _project = tasking.getProject(tasking.customSettings().projectId);
+    //             _task = tasking.getTask(tasking.customSettings().taskId);
 
     //             if (authorized(_task)) {
     //                 // set project & task
     //                 if (_project && _task) {
-    //                     taskingService.currentProject(_project);
-    //                     taskingService.currentTask(_task);
+    //                     tasking.currentProject(_project);
+    //                     tasking.currentTask(_task);
     //                 }
     //             }
     //         }
@@ -246,15 +250,15 @@ export function uiTasking(context) {
     // }
 
     // function showsManager(d) {
-    //     var _currManager = taskingService.currentManager();
+    //     var _currManager = tasking.currentManager();
     //     return _currManager && _currManager.managerId === d.managerId;
     // }
 
 
     function update() {
 
-        _task = taskingService.currentTask(); // get current task
-        _project = taskingService.currentProject(); // get current project
+        _task = tasking.currentTask(); // get current task
+        _project = tasking.currentProject(); // get current project
 
         updateTaskingErrors();
         updateTaskingWelcome();
@@ -287,7 +291,7 @@ export function uiTasking(context) {
     }
 
     function updateTaskingErrors() {
-        _errors = taskingService.errors(); // get current errors
+        _errors = tasking.errors(); // get current errors
 
         _taskingErrorsContainer
             .call(drawErrorsList, _errors);
@@ -352,7 +356,7 @@ export function uiTasking(context) {
 
         items.selectAll('.tasking-error-message')
             .text(function(d) {
-                return d.message();
+                return d.message(d.task);
             });
     }
 
@@ -576,9 +580,9 @@ export function uiTasking(context) {
         if (settings && settings.url) {
 
             // if settings have changed
-            if (taskingService.customSettings() !== settings) {
+            if (tasking.customSettings() !== settings) {
                 // set custom settings
-                taskingService.customSettings(settings);
+                tasking.customSettings(settings);
             }
         }
     }
