@@ -20,7 +20,7 @@ var apibases = {
     local:  'http://127.0.0.1:5000/api/v1/', // TODO: TAH - change to list of real manager urls when published
     hot: 'https://tasks.hotosm.org/api/v1/',
 };
-var dispatch = d3_dispatch('change', 'loadedTask', 'loadedProject', 'loadedCustomSettings', 'setManager', 'setProject', 'setTask', 'cancelTasking');
+var dispatch = d3_dispatch('change', 'loadedTask', 'loadedProject', 'loadedCustomSettings', 'setManager', 'setProject', 'setTask', 'lockForMapping', 'unlockTask', 'postTaskUpdate', 'cancelTasking');
 var _taskingCache = {};
 var _enabled = false;
 
@@ -514,95 +514,6 @@ export default {
     },
 
 
-    lockTaskForMapping: function(task) {
-        var that = this;
-
-        var _currProject = that.currentProject();
-        var baseUrl = apibases.local + 'project/' + _currProject.id() + '/task/' + task.id() + '/';
-        var action = '';
-
-        switch (that.currentManager().id) {
-
-            case 'HOT':
-                action = 'lock-for-mapping';
-                break;
-            default:
-                break;
-        }
-
-        return postData(baseUrl, action)
-            .then(function(data) {
-
-                // reformulate result based on manager
-                var json = parseTask(that, data);
-
-                // create task
-                var updatedTask = parsers.task(json);
-
-                that.replaceTask(updatedTask);
-
-                // set task as current
-                that.currentTask(updatedTask.id());
-
-                return data;
-            })
-            .catch(function(err) {
-                var { errors, message } = handleError(task, err, that.errors());
-
-                // update cache errors
-                that.errors(errors);
-
-                // return message;
-            });
-
-    },
-
-
-    unlockTask: function(task) {
-        var that = this;
-
-        var _currProject = that.currentProject();
-        var baseUrl = apibases.local + 'project/' + _currProject.id() + '/task/' + task.id() + '/';
-        var action = '';
-
-        switch (that.currentManager().id) {
-
-            case 'HOT':
-                action = 'stop-mapping';
-                break;
-            default:
-                break;
-        }
-
-        // body comment
-        var _data = {
-            'comment': 'mapping stopped before editing'
-        };
-
-        return postData(baseUrl, action, _data)
-            .then(function(data) {
-
-                // reformulate result based on manager
-                var json = parseTask(that, data);
-
-                // create task
-                var updatedTask = parsers.task(json);
-
-                that.replaceTask(updatedTask);
-
-                return data;
-            })
-            .catch(function(err) {
-                var { errors, message } = handleError(task, err, that.errors());
-
-                // update cache errors
-                that.errors(errors);
-
-                // return message;
-            });
-    },
-
-
     customSettings: function(d) {
         var that = this;
 
@@ -734,8 +645,147 @@ export default {
     },
 
 
-    postTaskUpdate: function() {
-        console.log('TODO: postTaskUpdate');
+    lockTaskForMapping: function(task) {
+        var that = this;
+
+        var _currProject = that.currentProject();
+        var baseUrl = apibases.local + 'project/' + _currProject.id() + '/task/' + task.id() + '/';
+        var action = '';
+
+        switch (that.currentManager().id) {
+
+            case 'HOT':
+                action = 'lock-for-mapping';
+                break;
+            default:
+                break;
+        }
+
+        return postData(baseUrl, action)
+            .then(function(data) {
+
+                // reformulate result based on manager
+                var json = parseTask(that, data);
+
+                // create task
+                var updatedTask = parsers.task(json);
+
+                that.replaceTask(updatedTask);
+
+                // set task as current
+                that.currentTask(updatedTask.id());
+
+                dispatch.call('lockForMapping');
+
+                return data;
+            })
+            .catch(function(err) {
+                var { errors, message } = handleError(task, err, that.errors());
+
+                // update cache errors
+                that.errors(errors);
+
+                // return message;
+            });
+
+    },
+
+
+    unlockTask: function(task) {
+        var that = this;
+
+        var _currProject = that.currentProject();
+        var baseUrl = apibases.local + 'project/' + _currProject.id() + '/task/' + task.id() + '/';
+        var action = '';
+
+        switch (that.currentManager().id) {
+
+            case 'HOT':
+                action = 'stop-mapping';
+                break;
+            default:
+                break;
+        }
+
+        // body comment
+        var _data = {
+            'comment': 'mapping stopped before editing'
+        };
+
+        return postData(baseUrl, action, _data)
+            .then(function(data) {
+
+                // reformulate result based on manager
+                var json = parseTask(that, data);
+
+                // create task
+                var updatedTask = parsers.task(json);
+
+                that.replaceTask(updatedTask);
+
+                dispatch.call('unlockTask');
+
+                return data;
+            })
+            .catch(function(err) {
+                var { errors, message } = handleError(task, err, that.errors());
+
+                // update cache errors
+                that.errors(errors);
+
+                // return message;
+            });
+    },
+
+
+    postTaskUpdate: function(task) {
+        var that = this;
+
+        var _currTask = that.currentTask();
+        if (task.id() !== _currTask.id()) return;
+
+        var _currProject = that.currentProject();
+        var baseUrl = apibases.local + 'project/' + _currProject.id() + '/task/' + task.id() + '/';
+        var action = '';
+
+        switch (that.currentManager().id) {
+
+            case 'HOT':
+                action = 'unlock-after-mapping';
+                break;
+            default:
+                break;
+        }
+
+        var _data = {
+            'comment': task.newComment,
+            'status': task.newStatus.toUpperCase()
+        };
+
+        return postData(baseUrl, action, _data)
+            .then(function(data) {
+
+                // reformulate result based on manager
+                var json = parseTask(that, data);
+
+                // create task
+                var updatedTask = parsers.task(json);
+
+                that.replaceTask(updatedTask);
+
+                dispatch.call('postTaskUpdate');
+
+                return data;
+            })
+            .catch(function(err) {
+                var { errors, message } = handleError(task, err, that.errors());
+
+                // update cache errors
+                that.errors(errors);
+
+                // return message;
+            });
+
     },
 
 
@@ -745,7 +795,7 @@ export default {
         // unlock task
         that.unlockTask(that.currentTask())
             .then(function(unlockResponse) {
-                console.log('unlock response: ', unlockResponse);
+                return unlockResponse;
             })
             .catch(function(err) { console.log('unlockTask err: ', err ); });
 

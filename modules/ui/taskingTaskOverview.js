@@ -1,4 +1,3 @@
-import { dispatch as d3_dispatch } from 'd3-dispatch';
 import {
     event as d3_event,
     select as d3_select
@@ -7,6 +6,7 @@ import {
 import { uiTaskingCancel } from './taskingCancel';
 
 import { t } from '../util/locale';
+import { tooltip } from '../util/tooltip';
 import { services } from '../services';
 import { svgIcon } from '../svg/icon';
 
@@ -16,12 +16,14 @@ import {
 
 
 export function uiTaskOverview(context) {
-    var dispatch = d3_dispatch('change');
+    var _statusList = d3_select(null);
 
     var _task;
 
     var osm = services.osm;
     var tasking = context.tasking();
+
+    var statuses = ['mapped', 'badimagery'];
 
     var overviewDetails = ['editStatusOptions', 'leaveAComment', 'saveEdits'];
 
@@ -93,15 +95,73 @@ export function uiTaskOverview(context) {
             .property('value', function(d) { return d.newComment; })
             .call(utilNoAuto)
             .on('keydown.task-comment-input', keydown)
-            .on('input.task-comment-input', changeInput)
-            .on('blur.task-comment-input', changeInput);
+            .on('input.task-comment-input', changeCommentInput)
+            .on('blur.task-comment-input', changeCommentInput);
 
         // update
         taskSave = taskSaveEnter
             .merge(taskSave)
-            .call(userDetails)
+            .call(renderStatusList)
+            // .call(userDetails) // TODO: TAH - add prose or comment to alert user of saving results
             .call(taskSaveButtons);
 
+
+        // update buttons on history change
+        context.history().on('change', function() {
+            taskSave
+                .call(taskSaveButtons);
+        });
+
+
+        function renderStatusList(selection) {
+            var container = selection.selectAll('.layer-fill-list')
+                .data([0]);
+
+            _statusList = container.enter()
+                .append('ul')
+                .attr('class', 'layer-list layer-fill-list')
+                .merge(container);
+
+            _statusList
+                .call(drawListItems, statuses, 'radio', 'statuses');
+        }
+
+
+        function drawListItems(selection, data, type, name) {
+            var items = selection.selectAll('li')
+                .data(data);
+
+            // Exit
+            items.exit()
+                .remove();
+
+            // Enter
+            var enter = items.enter()
+                .append('li')
+                .call(tooltip()
+                    .title(function(d) {
+                        return t('tasking.task.tabs.overview.saving.statuses.' + d);
+                    })
+                    .placement('top')
+                );
+
+            var label = enter
+                .append('label');
+
+            label
+                .append('input')
+                .attr('type', type)
+                .attr('name', name)
+                .on('change', changeStatusInput);
+
+            label
+                .append('span')
+                .text(function(d) { return t('tasking.task.statuses.' + d); });
+
+            // Update
+            items = items
+                .merge(enter);
+        }
 
         // fast submit if user presses cmd+enter
         function keydown() {
@@ -124,12 +184,25 @@ export function uiTaskOverview(context) {
         }
 
 
-        function changeInput() {
+        function changeCommentInput() {
             var input = d3_select(this);
             var val = input.property('value').trim() || undefined;
 
             // store the unsaved comment with the task itself
             _task = _task.update({ newComment: val });
+
+            if (tasking) {
+                tasking.replaceTask(_task);  // update task cache
+            }
+
+            taskSave
+                .call(taskSaveButtons);
+        }
+
+        function changeStatusInput(d) {
+
+            // store the unsaved comment with the task itself
+            _task = _task.update({ newStatus: d });
 
             if (tasking) {
                 tasking.replaceTask(_task);  // update task cache
@@ -285,7 +358,8 @@ export function uiTaskOverview(context) {
             return (
                 hasAuth &&
                 (status === 'lockedForMapping' || status === 'lockedForValidation') &&
-                 context.history().hasChanges()
+                 context.history().hasChanges() &&
+                 d.newStatus
             ) ? null : true;
         }
     }
@@ -303,10 +377,7 @@ export function uiTaskOverview(context) {
     function clickSave(d) {
         this.blur();    // avoid keeping focus on the button - #4641
         if (tasking) {
-            var setStatus = 'temp set status';
-            tasking.postTaskUpdate(d, function(err, task) {
-                dispatch.call('change', task);
-            });
+            tasking.postTaskUpdate(d);
         }
     }
 

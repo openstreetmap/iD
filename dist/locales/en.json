@@ -1456,6 +1456,10 @@
                         "title": "Overview",
                         "header": "Overview",
                         "saving": {
+                            "statuses": {
+                                "mapped": "I completely mapped this task",
+                                "badimagery": "The satellite imagery is not good"
+                            },
                             "stop_mapping": "Stop mapping",
                             "stop_mapping_comment": "Stop mapping and comment",
                             "stop_validating": "Stop validating",
