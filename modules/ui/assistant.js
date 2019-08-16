@@ -112,22 +112,30 @@ export function uiAssistant(context) {
         redraw();
     };
 
+    function isBodyOpen(collapseCategory) {
+        return collapseCategory && (context.storage('assistant.collapse.' + collapseCategory) || 'true') === 'true';
+    }
+
+    function setIsBodyOpen(collapseCategory, flag) {
+        if (collapseCategory) context.storage('assistant.collapse.' + collapseCategory, flag);
+    }
+
     function updateDidEditStatus() {
         savedChangeset = null;
         savedChangeCount = null;
         didEditAnythingYet = true;
     }
 
-    var isBodyOpen = true;
+    function toggleBody(collapseCategory) {
+        var bodyOpen = !isBodyOpen(collapseCategory);
+        setIsBodyOpen(collapseCategory, bodyOpen);
 
-    function toggleBody() {
-        isBodyOpen = !isBodyOpen;
-        container.classed('body-collapsed', !isBodyOpen);
+        container.classed('body-collapsed', !bodyOpen);
         container.classed('minimal', false);
         container.selectAll('.assistant-header .control-col .icon use')
-            .attr('href', '#iD-icon-' + (isBodyOpen ? 'up' : 'down'));
+            .attr('href', '#iD-icon-' + (bodyOpen ? 'up' : 'down'));
 
-        if (!isBodyOpen) {
+        if (!bodyOpen) {
             container.on('mouseleave.minimal', function() {
                 container.classed('minimal', true);
             });
@@ -152,7 +160,7 @@ export function uiAssistant(context) {
             ' ' +
             (isCollapsible ? 'collapsible' : '') +
             ' ' +
-            (isCollapsible && !isBodyOpen ? 'body-collapsed minimal' : '')
+            (isCollapsible && !isBodyOpen(panel.collapseCategory) ? 'body-collapsed minimal' : '')
         );
 
         var iconCol = header.selectAll('.icon-col')
@@ -190,14 +198,14 @@ export function uiAssistant(context) {
             .append('div')
             .attr('class', 'control-col')
             .append('button')
-            .call(svgIcon('#iD-icon-' + (isBodyOpen ? 'up' : 'down')));
+            .call(svgIcon('#iD-icon-' + (isBodyOpen(panel.collapseCategory) ? 'up' : 'down')));
 
         if (isCollapsible) {
             // make the assistant collapsible by its whole header
             header.on('click', function() {
                 d3_event.preventDefault();
                 d3_event.stopPropagation();
-                toggleBody();
+                toggleBody(panel.collapseCategory);
             });
         } else {
             header.on('click', null);
@@ -487,7 +495,8 @@ export function uiAssistant(context) {
             headerIcon: 'fas-map-marked-alt',
             modeLabel: t('assistant.mode.mapping'),
             title: currLocation,
-            titleClass: 'map-center-location'
+            titleClass: 'map-center-location',
+            collapseCategory: 'browse'
         };
 
         panel.renderBody = function(selection) {
@@ -526,7 +535,8 @@ export function uiAssistant(context) {
         var panel = {
             theme: 'light',
             modeLabel: t('QA.keepRight.title'),
-            title: errorTitle(error)
+            title: errorTitle(error),
+            collapseCategory: 'inspect'
         };
 
         panel.renderHeaderIcon = function(selection) {
@@ -571,7 +581,8 @@ export function uiAssistant(context) {
         var panel = {
             theme: 'light',
             modeLabel: t('QA.improveOSM.title'),
-            title: errorTitle(error)
+            title: errorTitle(error),
+            collapseCategory: 'inspect'
         };
 
         panel.renderHeaderIcon = function(selection) {
@@ -635,7 +646,8 @@ export function uiAssistant(context) {
             theme: 'light',
             modeLabel: t('assistant.mode.viewing'),
             headerIcon: 'iD-icon-data',
-            title: t('map_data.layers.custom.title')
+            title: t('map_data.layers.custom.title'),
+            collapseCategory: 'inspect'
         };
 
         panel.renderBody = function(selection) {
@@ -652,7 +664,8 @@ export function uiAssistant(context) {
         var panel = {
             theme: 'light',
             modeLabel: t('assistant.mode.editing'),
-            title: note.label()
+            title: note.label(),
+            collapseCategory: 'inspect'
         };
 
         panel.renderHeaderIcon = function(selection) {
@@ -699,7 +712,8 @@ export function uiAssistant(context) {
         var panel = {
             modeLabel: t('assistant.mode.' + modeLabelID),
             title: mode.title,
-            message: message
+            message: message,
+            collapseCategory: 'draw'
         };
 
         panel.renderHeaderIcon = function(selection) {
@@ -719,7 +733,8 @@ export function uiAssistant(context) {
             theme: 'light',
             modeLabel: t('assistant.mode.editing'),
             title: selectedIDs.length === 1 ? utilDisplayLabel(context.entity(selectedIDs[0]), context) :
-                t('assistant.feature_count.multiple', { count: selectedIDs.length.toString() })
+                t('assistant.feature_count.multiple', { count: selectedIDs.length.toString() }),
+            collapseCategory: 'inspect'
         };
 
         panel.renderHeaderIcon = function(selection) {
@@ -757,7 +772,8 @@ export function uiAssistant(context) {
             headerIcon: 'iD-icon-save',
             modeLabel: t('assistant.mode.authenticating'),
             title: t('assistant.commit.auth.osm_account'),
-            message: t('assistant.commit.auth.message')
+            message: t('assistant.commit.auth.message'),
+            collapseCategory: 'save'
         };
 
         return panel;
@@ -772,7 +788,8 @@ export function uiAssistant(context) {
             theme: 'light',
             headerIcon: 'iD-icon-save',
             modeLabel: t('assistant.mode.saving'),
-            title: t('commit.' + titleID, { count: summary.length })
+            title: t('commit.' + titleID, { count: summary.length }),
+            collapseCategory: 'save'
         };
 
         panel.renderBody = function(selection) {
@@ -798,7 +815,8 @@ export function uiAssistant(context) {
             prominent: true,
             theme: 'light',
             headerIcon: savedIcon,
-            title: t('assistant.commit.success.thank_you')
+            title: t('assistant.commit.success.thank_you'),
+            collapseCategory: 'save'
         };
 
         panel.renderHeaderBody = function(selection) {
