@@ -846,7 +846,11 @@ export function uiAssistant(context) {
             theme: 'light',
             headerIcon: savedIcon,
             title: t('assistant.commit.success.thank_you'),
-            collapseCategory: 'save'
+            collapseCategory: 'save',
+            onClose: function() {
+                updateDidEditStatus();
+                redraw();
+            }
         };
 
         panel.renderHeaderBody = function(selection) {
@@ -877,15 +881,6 @@ export function uiAssistant(context) {
 
             link
                 .call(svgIcon('#iD-icon-out-link', 'inline'));
-
-            mainFooter.append('button')
-                .attr('class', 'primary')
-                .on('click', function() {
-                    updateDidEditStatus();
-                    redraw();
-                })
-                .append('span')
-                .text(t('assistant.commit.continue_mapping'));
         };
 
         panel.renderBody = function(selection) {

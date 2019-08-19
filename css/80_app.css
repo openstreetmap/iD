@@ -1114,7 +1114,7 @@ a.hide-toggle {
 .assistant .main-col {
     flex: 1 1 auto;
     padding-top: 10px;
-    padding-bottom: 10px;
+    padding-bottom: 12px;
 }
 [dir='ltr'] .assistant .main-col {
     padding-right: 10px;
@@ -1166,7 +1166,7 @@ a.hide-toggle {
     width: 40px;
 }
 .assistant .assistant-header .header-body {
-    margin-top: 8px;
+    margin-top: 10px;
 }
 .assistant .assistant-header .header-body:empty {
     display: none;
@@ -1197,7 +1197,7 @@ a.hide-toggle {
 }
 .assistant br {
     display: block;
-    margin-top: 10px;
+    margin-top: 12px;
     content: " ";
 }
 .assistant .search-header {

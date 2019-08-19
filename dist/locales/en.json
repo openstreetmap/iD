@@ -100,8 +100,7 @@
                     "thank_you": "Thank You!",
                     "just_improved": "You've just improved OpenStreetMap around {location}.",
                     "propagation_help": "Your changes will be live momentarily. Some maps take longer to update than others."
-                },
-                "continue_mapping": "Continue Mapping"
+                }
             },
             "feature_count": {
                 "multiple": "{count} Features"
