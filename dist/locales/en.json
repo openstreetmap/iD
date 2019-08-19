@@ -57,11 +57,10 @@
             "mode": {
                 "authenticating": "Authenticating",
                 "drawing": "Drawing",
-                "editing": "Editing",
+                "inspecting": "Inspecting",
                 "mapping": "Mapping",
                 "placing": "Placing",
-                "saving": "Saving",
-                "viewing": "Viewing"
+                "saving": "Saving"
             },
             "instructions": {
                 "add_point": "Click the center of the feature.",

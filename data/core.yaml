@@ -44,11 +44,10 @@ en:
     mode:
       authenticating: Authenticating
       drawing: Drawing
-      editing: Editing
+      inspecting: Inspecting
       mapping: Mapping
       placing: Placing
       saving: Saving
-      viewing: Viewing
     instructions:
       add_point: Click the center of the feature.
       add_line: Click the starting point of the feature.

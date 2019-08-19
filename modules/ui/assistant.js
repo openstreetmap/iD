@@ -674,7 +674,7 @@ export function uiAssistant(context) {
 
         var panel = {
             theme: 'light',
-            modeLabel: t('assistant.mode.viewing'),
+            modeLabel: t('assistant.mode.inspecting'),
             headerIcon: 'iD-icon-data',
             title: t('map_data.layers.custom.title'),
             collapseCategory: 'inspect'
@@ -693,7 +693,7 @@ export function uiAssistant(context) {
 
         var panel = {
             theme: 'light',
-            modeLabel: t('assistant.mode.editing'),
+            modeLabel: t('assistant.mode.inspecting'),
             title: note.label(),
             collapseCategory: 'inspect'
         };
@@ -761,7 +761,7 @@ export function uiAssistant(context) {
 
         var panel = {
             theme: 'light',
-            modeLabel: t('assistant.mode.editing'),
+            modeLabel: t('assistant.mode.inspecting'),
             title: selectedIDs.length === 1 ? utilDisplayLabel(context.entity(selectedIDs[0]), context) :
                 t('assistant.feature_count.multiple', { count: selectedIDs.length.toString() }),
             collapseCategory: 'inspect'
