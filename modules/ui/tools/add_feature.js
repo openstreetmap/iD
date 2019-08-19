@@ -75,6 +75,11 @@ export function uiToolAddFeature(context) {
         updateEnabledState();
     };
 
+    tool.allowed = function() {
+        var addableCount = context.presets().getAddable().length;
+        return addableCount === 0 || addableCount > 10;
+    };
+
     tool.install = function() {
 
         context.keybinding().on(keys, function() {

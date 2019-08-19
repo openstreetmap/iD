@@ -1,15 +1,16 @@
 import { t } from '../../util/locale';
 import { uiToolQuickPresets } from './quick_presets';
 
-export function uiToolAddFavorite(context) {
+export function uiToolAddAddablePresets(context) {
 
     var tool = uiToolQuickPresets(context);
-    tool.id = 'add_favorite';
-    tool.label = t('toolbar.favorites');
-    tool.iconName = 'iD-icon-favorite';
+    tool.id = 'add_addable_preset';
+    tool.label = t('toolbar.add_feature');
+    tool.userToggleable = false;
 
     tool.itemsToDraw = function() {
-        var items = context.presets().getFavorites().slice(0, 10);
+
+        var items = context.presets().getAddable().slice(0, 10);
 
         items.forEach(function(item, index) {
             var keyCode;
@@ -26,12 +27,6 @@ export function uiToolAddFavorite(context) {
         });
 
         return items;
-    };
-
-    tool.willUpdate = function() {
-        for (var i = 0; i <= 9; i++) {
-            context.keybinding().off(i.toString());
-        }
     };
 
     return tool;

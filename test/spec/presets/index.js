@@ -162,7 +162,7 @@ describe('iD.presetIndex', function () {
             presets.build(morePresets, false);
             entities.forEach(function (entity) {
                 var preset = presets.match(entity, graph);
-                expect(preset.visible()).to.be.false;
+                expect(preset.addable()).to.be.false;
             });
         });
     });
@@ -279,7 +279,7 @@ describe('iD.presetIndex', function () {
 
             iD.coreContext().presets().fromExternal(url, function(externalPresets) {
                 var external = externalPresets.collection.reduce(function(presets, preset) {
-                    if (!preset.hasOwnProperty('members') && preset.visible()) {
+                    if (!preset.hasOwnProperty('members') && preset.addable()) {
                         presets.push(preset.id);
                     }
                     return presets;

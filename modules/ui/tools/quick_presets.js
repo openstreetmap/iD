@@ -155,7 +155,9 @@ export function uiToolQuickPresets(context) {
 
         var dragOrigin, dragMoved, targetIndex, targetData;
 
-        buttonsEnter.call(d3_drag()
+        buttonsEnter
+            .filter('.add-favorite,.add-recent')
+            .call(d3_drag()
             .on('start', function() {
                 dragOrigin = {
                     x: d3_event.x,

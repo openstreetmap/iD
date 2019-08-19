@@ -4,7 +4,7 @@ import { groupManager } from '../entities/group_manager';
 import { utilArrayUniq, utilObjectOmit } from '../util';
 
 
-export function presetPreset(id, preset, fields, visible, rawPresets) {
+export function presetPreset(id, preset, fields, addable, rawPresets) {
     preset = Object.assign({}, preset);   // shallow copy
 
     preset.id = id;
@@ -99,7 +99,7 @@ export function presetPreset(id, preset, fields, visible, rawPresets) {
 
     preset.geometry = (preset.geometry || []);
 
-    visible = visible || false;
+    addable = addable || false;
 
     preset.matchGeometry = function(geometry) {
         return preset.geometry.indexOf(geometry) >= 0;
@@ -166,10 +166,10 @@ export function presetPreset(id, preset, fields, visible, rawPresets) {
         return tagCount === 0 || (tagCount === 1 && preset.tags.hasOwnProperty('area'));
     };
 
-    preset.visible = function(val) {
-        if (!arguments.length) return visible;
-        visible = val;
-        return visible;
+    preset.addable = function(val) {
+        if (!arguments.length) return addable;
+        addable = val;
+        return addable;
     };
 
 

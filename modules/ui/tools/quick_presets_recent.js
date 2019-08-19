@@ -9,6 +9,8 @@ export function uiToolAddRecent(context) {
     tool.iconName = 'fas-clock';
 
     tool.itemsToDraw = function() {
+        if (context.presets().getAddable().length) return [];
+
         var maxShown = 10;
         var maxRecents = 5;
 

@@ -355,7 +355,7 @@ export function uiPresetBrowser(context, allowedGeometry, onChoose, onCancel) {
         }).filter(function(d) {
             var preset = d.preset || d;
             // skip non-visible
-            if (preset.visible && !preset.visible()) return false;
+            if (preset.addable && !preset.addable()) return false;
 
             // skip presets not valid in this country
             if (_countryCode && preset.countryCodes && preset.countryCodes.indexOf(_countryCode) === -1) return false;
@@ -387,10 +387,10 @@ export function uiPresetBrowser(context, allowedGeometry, onChoose, onCancel) {
                 .filter(function(d) {
                     if (d.members) {
                         return d.members.collection.some(function(preset) {
-                            return preset.visible();
+                            return preset.addable();
                         });
                     }
-                    return d.visible();
+                    return d.addable();
                 });
         } else {
             results = getDefaultResults();
@@ -648,7 +648,7 @@ export function uiPresetBrowser(context, allowedGeometry, onChoose, onCancel) {
         item.subitems = function() {
             return preset.members.matchAnyGeometry(shownGeometry).collection
                 .filter(function(preset) {
-                    return preset.visible();
+                    return preset.addable();
                 })
                 .map(function(preset) {
                     return itemForPreset(preset);

@@ -186,7 +186,7 @@ export function presetIndex(context) {
         }, {});
     };
 
-    all.build = function(d, visible) {
+    all.build = function(d, addable) {
         if (d.fields) {
             Object.keys(d.fields).forEach(function(id) {
                 var f = d.fields[id];
@@ -202,11 +202,11 @@ export function presetIndex(context) {
             Object.keys(d.presets).forEach(function(id) {
                 var p = d.presets[id];
                 var existing = all.index(id);
-                var isVisible = typeof visible === 'function' ? visible(id, p) : visible;
+                var isAddable = typeof addable === 'function' ? addable(id, p) : addable;
                 if (existing !== -1) {
-                    all.collection[existing] = presetPreset(id, p, _fields, isVisible, rawPresets);
+                    all.collection[existing] = presetPreset(id, p, _fields, isAddable, rawPresets);
                 } else {
-                    all.collection.push(presetPreset(id, p, _fields, isVisible, rawPresets));
+                    all.collection.push(presetPreset(id, p, _fields, isAddable, rawPresets));
                 }
             });
         }
@@ -263,14 +263,14 @@ export function presetIndex(context) {
         _universal = [];
         _index = { point: {}, vertex: {}, line: {}, area: {}, relation: {} };
 
-        var show = true;
+        var addable = true;
         if (addablePresetIDs) {
-            show = function(presetID) {
+            addable = function(presetID) {
                 return addablePresetIDs.indexOf(presetID) !== -1;
             };
         }
 
-        return all.build(data.presets, show);
+        return all.build(data.presets, addable);
     };
 
 
@@ -300,8 +300,11 @@ export function presetIndex(context) {
         all.reset();
         d3_json(external)
             .then(function(externalPresets) {
-                all.build(data.presets, false);    // make default presets hidden to begin
-                all.build(externalPresets, true);  // make the external visible
+                all.build(data.presets, false);    // load the default presets as non-addable to start
+
+                _addablePresetIDs = externalPresets.presets && Object.keys(externalPresets.presets);
+                
+                all.build(externalPresets, true);  // then load the external presets as addable
             })
             .catch(function() {
                 all.init();
@@ -398,10 +401,10 @@ export function presetIndex(context) {
             }
 
             _favorites = rawFavorites.reduce(function(output, d) {
-                    var item = ribbonItemForMinified(d, 'favorite');
-                    if (item) output.push(item);
-                    return output;
-                }, []);
+                var item = ribbonItemForMinified(d, 'favorite');
+                if (item && item.preset.addable()) output.push(item);
+                return output;
+            }, []);
         }
         return _favorites;
     };
@@ -414,13 +417,24 @@ export function presetIndex(context) {
         dispatch.call('recentsChange');
     }
 
+    all.getAddable = function() {
+        if (!_addablePresetIDs) return [];
+
+        return _addablePresetIDs.map(function(id) {
+            var preset = all.item(id);
+            if (preset) {
+                return RibbonItem(preset, 'addable');
+            }
+        }).filter(Boolean);
+    };
+
     all.getRecents = function() {
         if (!_recents) {
             // fetch from local storage
             _recents = (JSON.parse(context.storage('preset_recents')) || [])
                 .reduce(function(output, d) {
                     var item = ribbonItemForMinified(d, 'recent');
-                    if (item) output.push(item);
+                    if (item && item.preset.addable()) output.push(item);
                     return output;
                 }, []);
         }
