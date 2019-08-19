@@ -4,9 +4,6 @@
         "line"
     ],
     "tags": {
-        "service": "alley"
-    },
-    "addTags": {
         "highway": "service",
         "service": "alley"
     },
