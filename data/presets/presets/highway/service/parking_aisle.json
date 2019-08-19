@@ -4,9 +4,6 @@
         "line"
     ],
     "tags": {
-        "service": "parking_aisle"
-    },
-    "addTags": {
         "highway": "service",
         "service": "parking_aisle"
     },
