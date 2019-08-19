@@ -493,6 +493,8 @@ export function uiAssistant(context) {
                 .attr('class', 'primary')
                 .on('click', function() {
                     updateDidEditStatus();
+                    context.container().selectAll('#content')
+                        .attr('class', 'active');
                     context.history().restore();
                     redraw();
                 })
@@ -504,6 +506,8 @@ export function uiAssistant(context) {
                 .on('click', function() {
                     // don't show another welcome screen after discarding changes
                     updateDidEditStatus();
+                    context.container().selectAll('#content')
+                        .attr('class', 'active');
                     context.history().clearSaved();
                     context.map().pan([0,0]);  // trigger a map redraw
                     redraw();
