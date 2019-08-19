@@ -221,8 +221,9 @@ export function uiAssistant(context) {
 
         var subjectTitle = headerMainCol.selectAll('.subject-title');
 
-        subjectTitle.attr('class', 'subject-title ' + (panel.titleClass || ''));
-        subjectTitle.selectAll('span').text(panel.title);
+        subjectTitle.selectAll('span')
+            .attr('class', panel.titleClass || '')
+            .text(panel.title);
 
         var subjectTitleControls = subjectTitle.selectAll('.controls');
         subjectTitleControls.text('');
