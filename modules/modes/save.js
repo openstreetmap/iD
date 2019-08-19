@@ -450,6 +450,9 @@ export function modeSave(context) {
 
     mode.enter = function() {
 
+        // make sure the save UI is initially visible
+        context.storage('assistant.collapsed.save', null);
+
         keybindingOn();
 
         context.container().selectAll('#content')

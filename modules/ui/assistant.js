@@ -112,12 +112,13 @@ export function uiAssistant(context) {
         redraw();
     };
 
-    function isBodyOpen(collapseCategory) {
-        return collapseCategory && (context.storage('assistant.collapse.' + collapseCategory) || 'true') === 'true';
+    function isBodyCollapsed(collapseCategory) {
+        return collapseCategory && context.storage('assistant.collapsed.' + collapseCategory) === 'true';
     }
 
-    function setIsBodyOpen(collapseCategory, flag) {
-        if (collapseCategory) context.storage('assistant.collapse.' + collapseCategory, flag);
+    function setIsBodyCollapsed(collapseCategory, flag) {
+        if (!flag) flag = null;
+        if (collapseCategory) context.storage('assistant.collapsed.' + collapseCategory, flag);
     }
 
     function updateDidEditStatus() {
@@ -127,8 +128,8 @@ export function uiAssistant(context) {
     }
 
     function toggleBody(collapseCategory) {
-        var bodyOpen = !isBodyOpen(collapseCategory);
-        setIsBodyOpen(collapseCategory, bodyOpen);
+        var bodyOpen = isBodyCollapsed(collapseCategory);
+        setIsBodyCollapsed(collapseCategory, !bodyOpen);
 
         container.classed('body-collapsed', !bodyOpen);
         container.classed('minimal', false);
@@ -160,7 +161,7 @@ export function uiAssistant(context) {
             ' ' +
             (isCollapsible ? 'collapsible' : '') +
             ' ' +
-            (isCollapsible && !isBodyOpen(panel.collapseCategory) ? 'body-collapsed minimal' : '')
+            (isCollapsible && isBodyCollapsed(panel.collapseCategory) ? 'body-collapsed minimal' : '')
         );
 
         var iconCol = header.selectAll('.icon-col')
@@ -203,7 +204,7 @@ export function uiAssistant(context) {
             .append('div')
             .attr('class', 'control-col')
             .append('button')
-            .call(svgIcon('#iD-icon-' + (isBodyOpen(panel.collapseCategory) ? 'up' : 'down')));
+            .call(svgIcon('#iD-icon-' + (isBodyCollapsed(panel.collapseCategory) ? 'down' : 'up')));
 
         if (isCollapsible) {
             // make the assistant collapsible by its whole header
