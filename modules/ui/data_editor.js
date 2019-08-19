@@ -83,7 +83,7 @@ export function uiDataEditor(context) {
                 .state('hover')
             )
             .selectAll('textarea.tag-text')
-            .property('disabled', true)
+            .attr('readonly', true)
             .classed('readonly', true);
     }
 

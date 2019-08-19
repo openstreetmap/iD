@@ -268,12 +268,16 @@ export function uiRawTagEditor(context) {
         items.selectAll('input.key')
             .attr('title', function(d) { return d.key; })
             .call(utilGetSetValue, function(d) { return d.key; })
-            .property('disabled', isReadOnly);
+            .attr('readonly', function(d) {
+                return isReadOnly(d) || null;
+            });
 
         items.selectAll('input.value')
             .attr('title', function(d) { return d.value; })
             .call(utilGetSetValue, function(d) { return d.value; })
-            .property('disabled', isReadOnly);
+            .attr('readonly', function(d) {
+                return isReadOnly(d) || null;
+            });
 
         items.selectAll('button.remove')
             .on('mousedown', removeTag);  // 'click' fires too late - #5878
