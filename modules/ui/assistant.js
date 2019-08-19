@@ -231,7 +231,11 @@ export function uiAssistant(context) {
         if (panel.onClose) {
             subjectTitleControls.append('button')
                 .attr('class', 'close')
-                .on('click', panel.onClose)
+                .on('click', function() {
+                    d3_event.preventDefault();
+                    d3_event.stopPropagation();
+                    panel.onClose();
+                })
                 .call(svgIcon('#iD-icon-close'));
         }
 
