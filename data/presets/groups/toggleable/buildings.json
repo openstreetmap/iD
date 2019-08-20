@@ -1,0 +1,22 @@
+{
+    "name": "Buildings",
+    "description": "Houses, Shelters, Garages, etc.",
+    "toggleable": {
+        "maxShown": 250
+    },
+    "matches": {
+        "geometry": "area",
+        "anyTags": {
+            "building": {
+                "*": true,
+                "no": false
+            },
+            "parking": {
+                "multi-storey": true,
+                "sheds": true,
+                "carports": true,
+                "garage_boxes": true
+            }
+        }
+    }
+}

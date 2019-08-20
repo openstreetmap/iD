@@ -1,13 +1,15 @@
 import { event as d3_event, select as d3_select } from 'd3-selection';
 
-import { t } from '../util/locale';
 import { modeSelect } from '../modes/select';
 import { osmEntity } from '../osm';
 import { svgIcon } from '../svg/icon';
 import { utilDisplayName, utilHighlightEntities } from '../util';
 
 
-export function uiSelectionList(context, selectedIDs) {
+export function uiSelectionList(context) {
+
+    var selectedIDs = [];
+
 
     function selectEntity(entity) {
         context.enter(modeSelect(context, [entity.id]));
@@ -25,24 +27,12 @@ export function uiSelectionList(context, selectedIDs) {
 
 
     function selectionList(selection) {
-        selection.classed('selection-list-pane', true);
 
-        var header = selection
+        var list = selection.selectAll('.feature-list')
+            .data([0])
+            .enter()
             .append('div')
-            .attr('class', 'header fillL cf');
-
-        header
-            .append('h3')
-            .text(t('inspector.multiselect'));
-
-        var listWrap = selection
-            .append('div')
-            .attr('class', 'inspector-body');
-
-        var list = listWrap
-            .append('div')
-            .attr('class', 'feature-list cf');
-
+            .attr('class', 'feature-list');
 
         context.history()
             .on('change.selectionList', function(difference) {
@@ -118,6 +108,11 @@ export function uiSelectionList(context, selectedIDs) {
                 .text(function(entity) { return utilDisplayName(entity); });
         }
     }
+
+    selectionList.setSelectedIDs = function(val) {
+        selectedIDs = val;
+        return selectionList;
+    };
 
     return selectionList;
 }

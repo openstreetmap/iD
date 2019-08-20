@@ -1,5 +1,6 @@
 {
     "type": "address",
+    "key": "addr",
     "keys": [
         "addr:block_number",
         "addr:city",
@@ -24,7 +25,6 @@
         "addr:suburb",
         "addr:unit"
     ],
-    "reference": {"key": "addr"},
     "icon": "address",
     "label": "Address",
     "strings": {
@@ -61,5 +61,8 @@
           "suburb!jp": "Ward",
           "unit": "Unit"
         }
-    }
+    },
+    "terms": [
+        "location"
+    ]
 }

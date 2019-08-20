@@ -3,5 +3,9 @@
     "type": "localized",
     "label": "Name",
     "universal": true,
-    "placeholder": "Common name (if any)"
+    "placeholder": "Common name (if any)",
+    "terms": [
+        "label",
+        "title"
+    ]
 }

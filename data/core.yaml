@@ -9,16 +9,86 @@ en:
     open_wikidata: open on wikidata.org
     favorite: favorite
   toolbar:
-    inspect: Inspect
+    center_zoom:
+      title: Center
+      return_tooltip: Undo centering on this.
+    return: Return
+    deselect:
+      title: Deselect
     undo_redo: Undo / Redo
     recent: Recent
     favorites: Favorites
     add_feature: Add Feature
+    finish: Finish
+    repeat:
+      title: Repeat
+      tooltip:
+        point: "Add another {feature} after this one."
+        way: "Start another {feature} after finishing this one."
+      key: R
+    segments:
+      title: Segments
+      straight:
+        title: Straight
+      orthogonal:
+        title: Rectangular
+      key: A
+    structure:
+      none:
+        title: None
+      key: S
+    toolbox:
+      title: Tools
+      tooltip: Customize the toolbar.
+  assistant:
+    mode:
+      authenticating: Authenticating
+      drawing: Drawing
+      inspecting: Inspecting
+      mapping: Mapping
+      placing: Placing
+      saving: Saving
+    instructions:
+      add_point: Click the center of the feature.
+      add_line: Click the starting point of the feature.
+      draw_line: Place points along the feature's centerline.
+      add_area: Click any corner of the feature.
+      draw_area: Place points along the feature's outline.
+      finishing: When you're done, click the last point again or click <b>Finish</b>.
+    global_location: Planet Earth
+    greetings:
+      morning: Good Morning
+      afternoon: Good Afternoon
+      evening: Good Evening
+      # "Good Night" isn't a greeting in English but it can be in some languages
+      night: Good Evening
+    welcome:
+      first_time: "You’re editing <b>OpenStreetMap</b>: the free, collaborative world map.<br/>If this is your first time here, consider taking the <a>quick-start tutorial</a>.<br/>Thanks for contributing. Have fun!"
+      return: "Welcome back. Ready to make the map even better?"
+      start_mapping: Start Mapping
+    restore:
+      title: Restore
+      discard: Discard
+      info:
+        count_loc: "You have {count} unsaved changes around {location}."
+        count_loc_time: "You have {count} unsaved changes from {duration} ago around {location}."
+      ask: Would you like to restore them?
+    commit:
+      auth:
+        osm_account: OpenStreetMap Account
+        message: You must sign in to upload your changes.
+      success:
+        thank_you: Thank You!
+        just_improved: "You've just improved OpenStreetMap around {location}."
+        propagation_help: Your changes will be live momentarily. Some maps take longer to update than others.
+    feature_count:
+      multiple: "{count} Features"
   modes:
     add_feature:
-      title: Add a feature
-      description: "Search for features to add to the map."
-      key: Tab
+      search_placeholder: Search feature types
+      description: "Browse features to add to the map."
+      # The hotkey to open the Add Feature preset browser. Expect the key adjacent to the number row.
+      key: "`"
       result: "{count} result"
       results: "{count} results"
     add_area:
@@ -44,14 +114,6 @@ en:
       key: N
     add_preset:
       title: "Add {feature}"
-      point:
-        title: "Add {feature} as a point"
-      line:
-        title: "Add {feature} as a line"
-      area:
-        title: "Add {feature} as an area"
-      building:
-        title: "Add {feature} as a building"
     browse:
       title: Browse
       description: Pan and zoom the map.
@@ -103,20 +165,40 @@ en:
     orthogonalize:
       title: Square
       description:
-        vertex: Square this corner.
-        line: Square the corners of this line.
-        area: Square the corners of this area.
+        corner:
+          single: Square this corner.
+          multiple: Square these corners.
+        feature:
+          single: Square the corners of this feature.
+          multiple: Square the corners of these features.
       key: Q
       annotation:
-        vertex: Squared a single corner.
-        line: Squared the corners of a line.
-        area: Squared the corners of an area.
-      end_vertex: This can't be squared because it is an end node.
-      square_enough: This can't be made more square than it already is.
-      not_squarish: This can't be made square because it is not squarish.
-      too_large: This can't be made square because not enough of it is currently visible.
-      connected_to_hidden: This can't be made square because it is connected to a hidden feature.
-      not_downloaded: This can't be made square because parts of it have not yet been downloaded.
+        corner:
+          single: Squared a corner.
+          multiple: Squared several corners.
+        feature:
+          single: Squared the corners of a feature.
+          multiple: Squared the corners of several features.
+      multiple_blockers:
+        multiple: These can't be squared for multiple reasons.
+      end_vertex:
+        single: This can't be squared because it is an endpoint.
+        multiple: These can't be squared because they are endpoints.
+      square_enough:
+        single: This can't be made more square than it already is.
+        multiple: These can't be made more square than they already are.
+      not_squarish:
+        single: This can't be made square because it is not squarish.
+        multiple: These can't be made square because they are not squarish.
+      too_large:
+        single: This can't be made square because not enough of it is currently visible.
+        multiple: These can't be made square because not enought of them are currently visible.
+      connected_to_hidden:
+        single: This can't be made square because it is connected to a hidden feature.
+        multiple: These can't be made square because some are connected to hidden features.
+      not_downloaded:
+        single: This can't be made square because parts of it have not yet been downloaded.
+        multiple: These can't be made square because parts of them have not yet been downloaded.
     straighten:
       title: Straighten
       description:
@@ -391,15 +473,13 @@ en:
     localized_translation_label: Multilingual Name
     localized_translation_language: Choose language
     localized_translation_name: Name
+    language_and_code: "{language} ({code})"
   zoom_in_edit: Zoom in to edit
   login: Log In
   logout: Log Out
   loading_auth: "Connecting to OpenStreetMap..."
   report_a_bug: Report a bug
   help_translate: Help translate
-  sidebar:
-    key: '`'
-    tooltip: Toggle the sidebar.
   feature_info:
     hidden_warning: "{count} hidden features"
     hidden_details: "These features are currently hidden: {details}"
@@ -415,15 +495,18 @@ en:
     request_review: "I would like someone to review my edits."
     save: Upload
     cancel: Cancel
+    change: "1 Change"
     changes: "{count} Changes"
+    changes_parenthetical: "Changes ({count})"
     download_changes: Download osmChange file
     errors: Errors
     warnings: Warnings
     modified: Modified
     deleted: Deleted
     created: Created
-    outstanding_errors_message: "Please resolve all errors first. {count} remaining."
-    comment_needed_message: Please add a changeset comment first.
+    blocker_message:
+      outstanding_errors: "Please resolve all errors before uploading."
+      comment_needed: Please add a changeset comment before uploading. This helps others understand your edits.
     about_changeset_comments: About changeset comments
     about_changeset_comments_link: //wiki.openstreetmap.org/wiki/Good_changeset_comments
     google_warning: "You mentioned Google in this comment: remember that copying from Google Maps is strictly forbidden."
@@ -492,7 +575,6 @@ en:
     note: note
   geocoder:
     search: Search worldwide...
-    no_results_visible: No results in visible map area
     no_results_worldwide: No results found
   geolocate:
     title: Show My Location
@@ -500,7 +582,6 @@ en:
   inspector:
     zoom_to:
       key: Z
-      title: Zoom to this
       tooltip_feature: "Center and zoom the map to focus on this feature."
       tooltip_note: "Center and zoom the map to focus on this note."
       tooltip_data: "Center and zoom the map to focus on this data."
@@ -508,10 +589,10 @@ en:
     show_more: Show More
     view_on_osm: View on openstreetmap.org
     view_on_keepRight: View on keepright.at
-    all_fields: All fields
-    all_tags: All tags
-    all_members: All members
-    all_relations: All relations
+    all_fields: Fields
+    all_tags: Tags
+    all_members: Members
+    all_relations: Relations
     add_to_relation: Add to a relation
     new_relation: New relation...
     choose_relation: Choose a parent relation
@@ -522,6 +603,7 @@ en:
     edit_reference: "edit/translate"
     wiki_reference: View documentation
     wiki_en_reference: View documentation in English
+    multiple_values: Multiple Values
     hidden_preset:
       manual: "{features} are hidden. Enable them in the Map Data pane."
       zoom: "{features} are hidden. Zoom in to enable them."
@@ -613,51 +695,6 @@ en:
         title: "Panoramic Photos"
         tooltip: "360° photos"
   feature:
-    points:
-      description: Points
-      tooltip: "Points of Interest"
-    traffic_roads:
-      description: Traffic Roads
-      tooltip: "Highways, Streets, etc."
-    service_roads:
-      description: Service Roads
-      tooltip: "Service Roads, Parking Aisles, Tracks, etc."
-    paths:
-      description: Paths
-      tooltip: "Sidewalks, Foot Paths, Cycle Paths, etc."
-    buildings:
-      description: Buildings
-      tooltip: "Buildings, Shelters, Garages, etc."
-    building_parts:
-      description: Building Parts
-      tooltip: "3D Building and Roof Components"
-    indoor:
-      description: Indoor Features
-      tooltip: "Rooms, Corridors, Stairwells, etc."
-    landuse:
-      description: Landuse Features
-      tooltip: "Forests, Farmland, Parks, Residential, Commercial, etc."
-    boundaries:
-      description: Boundaries
-      tooltip: "Administrative Boundaries"
-    water:
-      description: Water Features
-      tooltip: "Rivers, Lakes, Ponds, Basins, etc."
-    rail:
-      description: Rail Features
-      tooltip: "Railways"
-    pistes:
-      description: Pistes
-      tooltip: "Ski Slopes, Sled Runs, Ice Skating Trails, etc."
-    aerialways:
-      description: Aerial Features
-      tooltip: "Chair Lifts, Gondolas, Zip Lines, etc."
-    power:
-      description: Power Features
-      tooltip: "Power Lines, Power Plants, Substations, etc."
-    past_future:
-      description: Past/Future Features
-      tooltip: "Proposed, Construction, Abandoned, Demolished, etc."
     others:
       description: Other Features
       tooltip: "Everything Else"
@@ -689,11 +726,6 @@ en:
       url:
         instructions: "Enter a data file URL or vector tile URL template. Valid tokens are:\n   {zoom} or {z}, {x}, {y} for Z/X/Y tile scheme"
         placeholder: Enter a url
-  restore:
-    heading: You have unsaved changes
-    description: "Do you wish to restore unsaved changes from a previous editing session?"
-    restore: Restore my changes
-    reset: Discard my changes
   save:
     title: Save
     help: "Review your changes and upload them to OpenStreetMap, making them visible to other users."
@@ -727,13 +759,9 @@ en:
       memberlist: 'Relation members were changed by both you and {user}.'
       tags: 'You changed the <b>{tag}</b> tag to "{local}" and {user} changed it to "{remote}".'
   success:
-    just_edited: "You just edited OpenStreetMap!"
-    thank_you: "Thank you for improving the map."
-    thank_you_location: "Thank you for improving the map around {where}."
     thank_you_where:
       format: "{place}{separator}{region}"
       separator: ", "
-    help_html: Your changes should appear on OpenStreetMap within a few minutes. It may take longer for maps elsewhere to receive updates.
     help_link_text: Details
     help_link_url: "https://wiki.openstreetmap.org/wiki/FAQ#I_have_just_made_some_changes_to_the_map._How_do_I_get_to_see_my_changes.3F"
     view_on_osm: "View Changes on OSM"
@@ -748,10 +776,7 @@ en:
     okay: "OK"
     cancel: "Cancel"
   splash:
-    welcome: Welcome to the iD OpenStreetMap editor
-    text: "iD is a friendly but powerful tool for contributing to the world's best free world map. This is version {version}. For more information see {website} and report bugs at {github}."
     walkthrough: "Start the Walkthrough"
-    start: "Edit now"
   source_switch:
     live: live
     lose_changes: "You have unsaved changes. Switching the map server will discard them. Are you sure you want to switch servers?"
@@ -771,7 +796,7 @@ en:
   full_screen: Toggle Full Screen
   QA:
     improveOSM:
-      title: ImproveOSM Detection
+      title: ImproveOSM
       geometry_types:
         path: paths
         parking: parking
@@ -798,7 +823,7 @@ en:
           title: Missing Turn Restriction
           description: '{num_passed} of {num_trips} recorded trips (travelling {travel_direction}) make a turn from {from_way} to {to_way} at {junction}. There may be a missing "{turn_restriction}" restriction.'
     keepRight:
-      title: KeepRight Error
+      title: KeepRight
       detail_title: Error
       detail_description: Description
       comment: Comment
@@ -1625,6 +1650,8 @@ en:
         title: Connect this feature
       connect_features:
         title: Connect the features
+      connect_using_ford:
+        title: Connect using a ford
       continue_from_start:
         title: Continue drawing from start
       continue_from_end:
@@ -1687,6 +1714,8 @@ en:
         title: Use a bridge or tunnel
       use_different_layers:
         title: Use different layers
+      use_different_layers_or_levels:
+        title: Use different layers or levels
       use_different_levels:
         title: Use different levels
       use_tunnel:
@@ -2061,6 +2090,14 @@ en:
     west: "W"
     coordinate: "{coordinate}{direction}"
     coordinate_pair: "{latitude}, {longitude}"
+    second: "1 second"
+    seconds: "{quantity} seconds"
+    minute: "1 minute"
+    minutes: "{quantity} minutes"
+    hour: "1 hour"
+    hours: "{quantity} hours"
+    day: "1 day"
+    days: "{quantity} days"
   wikidata:
     identifier: "Identifier"
     label: "Label"

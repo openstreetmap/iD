@@ -99,7 +99,7 @@ export function svgImproveOSM(projection, context, dispatch) {
         if (!_improveOsmVisible || !_improveOsmEnabled) return;
 
         var service = getService();
-        var selectedID = context.selectedErrorID();
+        var selectedID = context.mode() && context.mode().selectedErrorID && context.mode().selectedErrorID();
         var data = (service ? service.getErrors(projection) : []);
         var getTransform = svgPointTransform(projection);
 
@@ -242,7 +242,7 @@ export function svgImproveOSM(projection, context, dispatch) {
             layerOn();
         } else {
             layerOff();
-            if (context.selectedErrorID()) {
+            if (context.mode().id === 'select-error') {
                 context.enter(modeBrowse(context));
             }
         }

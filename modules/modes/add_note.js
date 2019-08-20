@@ -33,7 +33,6 @@ export function modeAddNote(context) {
         context.pan([0,0]);
 
         context
-            .selectedNoteID(note.id)
             .enter(modeSelectNote(context, note.id).newFeature(true));
     }
 

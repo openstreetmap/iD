@@ -1,5 +1,5 @@
 import { geoExtent } from '../geo';
-
+import { t } from '../util/locale';
 
 export function osmNote() {
     if (!(this instanceof osmNote)) {
@@ -57,6 +57,14 @@ Object.assign(osmNote.prototype, {
 
     move: function(loc) {
         return this.update({ loc: loc });
+    },
+
+    label: function() {
+        if (this.isNew()) {
+            return t('note.new');
+        }
+        return t('note.note') + ' ' + this.id + ' ' +
+            (this.status === 'closed' ? t('note.closed') : '');
     }
 
 });

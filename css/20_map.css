@@ -292,6 +292,14 @@ g.point.tag-wikidata path.stroke {
 }
 
 
+/* Selected Members */
+g.vertex.selected-member .shadow,
+g.point.selected-member .shadow,
+path.shadow.selected-member {
+    stroke-opacity: 0.95;
+    stroke: #FFDE70;
+}
+
 /* Highlighting */
 g.point.highlighted .shadow,
 path.shadow.highlighted {

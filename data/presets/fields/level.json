@@ -2,5 +2,11 @@
     "key": "level",
     "type": "combo",
     "label": "Level",
-    "universal": true
+    "universal": true,
+    "terms": [
+        "building floor",
+        "deck",
+        "storey",
+        "story"
+    ]
 }

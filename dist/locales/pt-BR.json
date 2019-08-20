@@ -1952,6 +1952,9 @@
                 "use_different_layers": {
                     "title": "Use camadas diferentes"
                 },
+                "use_different_layers_or_levels": {
+                    "title": "Use camadas ou níveis diferentes"
+                },
                 "use_different_levels": {
                     "title": "Use níveis diferentes"
                 },
@@ -2460,6 +2463,15 @@
                 "access_simple": {
                     "label": "Acesso permitido"
                 },
+                "addr/interpolation": {
+                    "label": "Tipo",
+                    "options": {
+                        "all": "Tudo",
+                        "alphabetic": "Alfabético",
+                        "even": "Par",
+                        "odd": "Ímpar"
+                    }
+                },
                 "address": {
                     "label": "Endereço",
                     "placeholders": {
@@ -2649,6 +2661,10 @@
                 },
                 "building": {
                     "label": "Edifício"
+                },
+                "building/levels/underground": {
+                    "label": "Níveis subterrâneos",
+                    "placeholder": "2, 4, 6..."
                 },
                 "building/levels_building": {
                     "label": "Níveis do edifício ",
@@ -3168,10 +3184,10 @@
                     }
                 },
                 "iata": {
-                    "label": "Código IATA"
+                    "label": "Código do aeroporto IATA"
                 },
                 "icao": {
-                    "label": "Código ICAO"
+                    "label": "Código do aeroporto da ICAO"
                 },
                 "incline": {
                     "label": "Declividade"
@@ -3673,11 +3689,17 @@
                 "power_supply": {
                     "label": "Fonte de Energia"
                 },
+                "preschool": {
+                    "label": "Educação infantil"
+                },
                 "produce": {
                     "label": "Tipo de Produção"
                 },
                 "product": {
                     "label": "Produtos"
+                },
+                "public_bookcase/type": {
+                    "label": "Tipo"
                 },
                 "railway": {
                     "label": "Tipo"
@@ -4337,6 +4359,9 @@
                 }
             },
             "presets": {
+                "addr/interpolation": {
+                    "name": "Interpolação de endereços"
+                },
                 "address": {
                     "name": "Endereço",
                     "terms": "Endereço"
@@ -4429,9 +4454,17 @@
                     "name": "Heliponto",
                     "terms": "Heliponto, ponto de pouso de helicópteros, Heliporto"
                 },
+                "aeroway/holding_position": {
+                    "name": "Posição de retenção de aeronaves",
+                    "terms": "Posição de retenção de aeronaves"
+                },
                 "aeroway/jet_bridge": {
                     "name": "Ponte telescópica",
                     "terms": "Ponte telescópica"
+                },
+                "aeroway/parking_position": {
+                    "name": "Posição de estacionamento de aeronaves",
+                    "terms": "Posição de estacionamento de aeronaves"
                 },
                 "aeroway/runway": {
                     "name": "Pista de Pouso e Decolagem",
@@ -4572,7 +4605,7 @@
                 },
                 "amenity/clinic": {
                     "name": "Clínica ou Posto de Saúde",
-                    "terms": "Clínica, Consultório, Posto de Saúde, Médico, Atendimento médico especializado, hospital"
+                    "terms": "clínica, consultório, posto de saúde, unidade de saúde, unidade básica de saúde, ubs, pronto atendimento, enfermaria, doutor, médico, atendimento médico especializado, hospital"
                 },
                 "amenity/clinic/abortion": {
                     "name": "Clínica de Aborto",
@@ -4636,6 +4669,10 @@
                 "amenity/dojo": {
                     "name": "Academia de Artes Marciais",
                     "terms": "Judô, Karatê, hapkidô, jiu-jítsu, ju-jitsu boxe, savate, ninjitsu, esgrima, luta olímpica, krav magá, capoeira, artes marciais, luta, taekwondo, kickboxing"
+                },
+                "amenity/dressing_room": {
+                    "name": "Vestiário",
+                    "terms": "provador, vestiário, cabine de trocar de roupa"
                 },
                 "amenity/drinking_water": {
                     "name": "Bebedouro",
@@ -4735,8 +4772,8 @@
                     "terms": "Cyber Café"
                 },
                 "amenity/karaoke": {
-                    "name": "Karaoke Box",
-                    "terms": "Karaoke Box"
+                    "name": "Caixa de Karaokê",
+                    "terms": "Caixa de Karaokê"
                 },
                 "amenity/kindergarten": {
                     "name": "Pré-escola",
@@ -4791,6 +4828,10 @@
                 "amenity/parking/multi-storey": {
                     "name": "Estacionamento de carros multinível",
                     "terms": "Estacionamento de carros multinível"
+                },
+                "amenity/parking/park_ride": {
+                    "name": "Estacionamento Pare e Siga",
+                    "terms": "Parque de estacionamento integrado,parque de estacionamento de incentivo,parque de estacionamento de metro,parque de estacionamento dissuasor,P&R,Park & Ride"
                 },
                 "amenity/parking/underground": {
                     "name": "Estacionamento subterrâneo",
@@ -5078,7 +5119,7 @@
                 },
                 "amenity/studio": {
                     "name": "Estúdio de rádio/TV ou de gravação",
-                    "terms": "Estúdio, rádio, ensaio, música, banda, gravação, TV, cinema, produtora,"
+                    "terms": "Estúdio, rádio, ensaio, música, banda, gravação, TV, televisão, filmes, cinema, produtora,"
                 },
                 "amenity/swimming_pool": {
                     "name": "Piscina"
@@ -6990,6 +7031,10 @@
                     "name": "Silo Bunker",
                     "terms": "Bunker de silo"
                 },
+                "man_made/cairn": {
+                    "name": "Moledros",
+                    "terms": "Moledros,Moledos,Melédros"
+                },
                 "man_made/chimney": {
                     "name": "Chaminé",
                     "terms": "Lareira, Forno, Fábrica, Indústria, Gás"
@@ -8287,7 +8332,7 @@
                 },
                 "shop/electronics": {
                     "name": "Loja de Eletrônicos",
-                    "terms": "Loja de Eletrônicos, Equipamentos Eletrônicos, TV, Eletrodomésticos"
+                    "terms": "loja de eletrônicos, equipamentos eletrônicos, TV, eletrodomésticos, televisão, bluray, câmera, celular, smartphone, vídeo, computador, áudio, som, rádio"
                 },
                 "shop/erotic": {
                     "name": "Sex Shop",
@@ -8401,6 +8446,10 @@
                 "shop/hifi": {
                     "name": "Loja de Aparelhos Hi-Fi",
                     "terms": "Loja de Equipamentos de Áudio, Loja de Aparelhos de Alta Fidelidade"
+                },
+                "shop/hobby": {
+                    "name": "Loja de passatempo",
+                    "terms": "Loja de passatempo,Loja de hobbies"
                 },
                 "shop/houseware": {
                     "name": "Loja de Utensílios Domésticos",
@@ -8546,6 +8595,10 @@
                     "name": "Loja de Fotografia",
                     "terms": "Loja de Fotografia, Foto, Produtos fotográficos"
                 },
+                "shop/printer_ink": {
+                    "name": "Loja de tinta de impressora",
+                    "terms": "Loja de tinta de impressora"
+                },
                 "shop/pyrotechnics": {
                     "name": "Loja de Fogos de Artifício",
                     "terms": "loja de fogos de artifício"
@@ -8593,6 +8646,10 @@
                 "shop/supermarket": {
                     "name": "Supermercado",
                     "terms": "Supermercado"
+                },
+                "shop/swimming_pool": {
+                    "name": "Loja de suprimentos para piscinas",
+                    "terms": "Loja de suprimentos para piscinas"
                 },
                 "shop/tailor": {
                     "name": "Alfaiataria",
@@ -8735,6 +8792,10 @@
                 "tourism/attraction": {
                     "name": "Atração Turística",
                     "terms": "ponto turístico, atração turística, parque turístico, turismo"
+                },
+                "tourism/camp_pitch": {
+                    "name": "Acampamento de arremesso",
+                    "terms": "Acampamento de arremesso"
                 },
                 "tourism/camp_site": {
                     "name": "Local de Acampamento",
@@ -9595,8 +9656,14 @@
                 "name": "Mapeando Botsuana no Twitter",
                 "description": "Twitter do OpenStreetMap no Botsuana"
             },
+            "ym-Centre-Universitaire-de-Recherche-et-dApplication-en-Tldtection-CURAT-de-lUniversit-Felix-Houphouet-Boigny": {
+                "name": "YouthMappers CURAT"
+            },
+            "ym-The-Gambia-YMCA-University-of-the-Gambia": {
+                "name": "YouthMappers conectado"
+            },
             "cape-coast-youthmappers": {
-                "name": "Universidade de Cape Coast YouthMappers",
+                "name": "YouthMappers da Universidade de Cape Coast",
                 "description": "Siga-nos no Twitter: {url}",
                 "extendedDescription": "Esta é a descrição oficial do capítulo Youth Mappers da Universidade de Cape Coast, no Gana. adoramos mapas, os dados abertos e ajudar os mais vulneráveis."
             },
@@ -9612,6 +9679,12 @@
             "talk-gh": {
                 "name": "Lista de Discussão Talk-gh",
                 "description": "Talk-gh é a lista de discussão oficial para a comunidade OSM de Gana"
+            },
+            "ym-Kwame-Nkrumah-University-of-Science-and-Technology": {
+                "description": "YouthMappers na Universidade de Ciência e Tecnologia de Kwame Nkrumah"
+            },
+            "ym-Dedan-Kimathi-University-of-Technology": {
+                "name": "GDEV"
             },
             "osm-mg-facebook": {
                 "name": "Grupo OpenStreetMap Madagascar no Facebook",
@@ -10032,10 +10105,6 @@
                 "name": "OSM Cuba no Telegram",
                 "description": "Bate-papo do OpenStreetMap Cuba no Telegram"
             },
-            "OSM-NI-telegram": {
-                "name": "OSM Nicarágua no Telegram",
-                "description": "Bate-papo do OpenStreetMap Nicarágua no Telegram"
-            },
             "Bay-Area-OpenStreetMappers": {
                 "name": "OpenStreetMappers da Bay Area",
                 "description": "Melhorar o OpenStreetMap na Área da Baía",
@@ -10127,6 +10196,9 @@
             "PHXGeo-twitter": {
                 "description": "Siga-nos no Twitter em {url}"
             },
+            "ym-Western-Michigan-University": {
+                "name": "Clube de Geografia"
+            },
             "talk-au": {
                 "name": "Lista de Discussão Talk-au"
             },
@@ -10141,7 +10213,8 @@
             },
             "OSM-AR-irc": {
                 "name": "IRC OpenStreetMap Argentina",
-                "description": "Junte-se à #osm-ar no irc.oftc.net (porta 6667)"
+                "description": "Junte-se à #osm-ar no irc.oftc.net (porta 6667)",
+                "extendedDescription": "Você pode encontrar o usuário mais nerd da comunidade."
             },
             "OSM-AR-mailinglist": {
                 "name": "Lista de Discussão Talk-ar",
@@ -10169,6 +10242,10 @@
                 "name": "Grupo de Telegram do OpenStreetMap Brasília",
                 "description": "Junte-se à comunidade OpenStreetMap Brasília no Telegram",
                 "extendedDescription": "Entre na comunidade para aprender mais sobre o OpenStreetMap, fazer perguntas ou participar dos nossos encontros. Todos são bem-vindos!"
+            },
+            "OSM-br-discord": {
+                "name": "Discord do OpenStreetMap Brasil",
+                "description": "Junte-se à comunidade do OpenStreetMap Brasil no Discord"
             },
             "OSM-br-mailinglist": {
                 "name": "Lista de Discussão Talk-br",
@@ -10206,6 +10283,9 @@
                 "name": "Twitter OpenStreetMap Chile",
                 "description": "Siga-nos no Twitter em {url}"
             },
+            "Maptime-Bogota": {
+                "name": "Horário de Bogotá"
+            },
             "OSM-CO-facebook": {
                 "description": "Junte-se à comunidade OpenStreetMap Colômbia no Facebook",
                 "extendedDescription": "Entre na comunidade para aprender mais sobre o OpenStreetMap. Todos são bem-vindos!"
@@ -10224,6 +10304,9 @@
             },
             "OSM-CO": {
                 "name": "OpenStreetMap Colômbia"
+            },
+            "ym-Universidad-de-Los-Andes": {
+                "description": "YouthMappers na Universidade de Los Andes"
             },
             "OSM-EC-telegram": {
                 "name": "OSM Equador no Telegram",

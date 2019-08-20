@@ -1,5 +1,8 @@
 {
     "key": "architect",
     "type": "text",
-    "label": "Architect"
+    "label": "Architect",
+    "terms": [
+        "building designer"
+    ]
 }

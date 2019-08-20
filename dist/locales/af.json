@@ -327,12 +327,6 @@
                 "historic": {
                     "label": "Tipe"
                 },
-                "iata": {
-                    "label": "IATA"
-                },
-                "icao": {
-                    "label": "ICAO"
-                },
                 "incline": {
                     "label": "Steilte"
                 },

@@ -162,9 +162,44 @@ export function dmsCoordinatePair(coord) {
  *
  * @param {Array<Number>} coord longitude and latitude
  */
-export function decimalCoordinatePair(coord) {
+export function decimalCoordinatePair(coord, precision) {
+    if (!precision) precision = OSM_PRECISION;
     return t('units.coordinate_pair', {
-        latitude: clamp(coord[1], -90, 90).toFixed(OSM_PRECISION),
-        longitude: wrap(coord[0], -180, 180).toFixed(OSM_PRECISION)
+        latitude: clamp(coord[1], -90, 90).toFixed(precision),
+        longitude: wrap(coord[0], -180, 180).toFixed(precision)
     });
+}
+
+/**
+ * Returns the given duration in a rounded, readable format (e.g. 17 days)
+ *
+ * @param {Number} milliseconds
+ */
+export function formattedRoundedDuration(milliseconds) {
+    var seconds = Math.round(milliseconds / 1000);
+    if (seconds <= 1) {
+        return t('units.second');
+    } else if (seconds < 60) {
+        return t('units.seconds', { quantity: seconds } );
+    }
+
+    var minutes = Math.round(milliseconds / 1000 / 60);
+    if (minutes <= 1) {
+        return t('units.minute');
+    } else if (minutes < 60) {
+        return t('units.minutes', { quantity: minutes } );
+    }
+
+    var hours = Math.round(milliseconds / 1000 / 60 / 60);
+    if (hours <= 1) {
+        return t('units.hour');
+    } else if (hours < 24) {
+        return t('units.hours', { quantity: hours } );
+    }
+    
+    var days = Math.round(milliseconds / 1000 / 60 / 60 / 24);
+    if (days <= 1) {
+        return t('units.day');
+    }
+    return t('units.days', { quantity: days } );
 }

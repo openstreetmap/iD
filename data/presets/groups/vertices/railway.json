@@ -1,0 +1,25 @@
+{
+    "matches": {
+        "geometry": "vertex",
+        "anyTags": {
+            "railway": {
+                "buffer_stop": true,
+                "derail": true,
+                "milestone": true,
+                "signal": true,
+                "station": true,
+                "switch": true,
+                "train_wash": true,
+                "tram_stop": true
+            }
+        }
+    },
+    "vertexOf": {
+        "geometry": "line",
+        "anyTags": {
+            "anyGroups": {
+                "railway/lines": true
+            }
+        }
+    }
+}

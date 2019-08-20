@@ -1952,6 +1952,9 @@
                 "use_different_layers": {
                     "title": "使用不同图层"
                 },
+                "use_different_layers_or_levels": {
+                    "title": "使用不同图层或楼层"
+                },
                 "use_different_levels": {
                     "title": "使用不同楼层数"
                 },
@@ -2436,7 +2439,8 @@
                             "title": "默许"
                         },
                         "permit": {
-                            "description": "仅限凭证驶入"
+                            "description": "仅限凭证驶入",
+                            "title": "许可证"
                         },
                         "private": {
                             "title": "私人"
@@ -3156,12 +3160,6 @@
                         "stables": "是",
                         "undefined": "否"
                     }
-                },
-                "iata": {
-                    "label": "IATA (国际航空运输协会)"
-                },
-                "icao": {
-                    "label": "ICAO(国际民航组织)"
                 },
                 "incline": {
                     "label": "斜度"
@@ -6539,8 +6537,8 @@
                     "terms": "电力,电源,电,能源,煤气,天然气,电网,公司"
                 },
                 "office/estate_agent": {
-                    "name": "地产代理",
-                    "terms": "地产代理"
+                    "name": "地产中介",
+                    "terms": "地产代理,地产中介,房产中介,中介,房屋中介"
                 },
                 "office/financial": {
                     "name": "金融机构",
@@ -6626,7 +6624,7 @@
                 },
                 "office/telecommunication": {
                     "name": "电信办公室",
-                    "terms": "电信公司"
+                    "terms": "电信公司,营业厅,电信营业厅"
                 },
                 "office/therapist": {
                     "name": "治疗师工作室",
@@ -7929,11 +7927,43 @@
             }
         },
         "imagery": {
+            "AGIV": {
+                "attribution": {
+                    "text": "© agentschap Informatie Vlaanderen"
+                },
+                "name": "AIV Flanders 最近的航拍图"
+            },
+            "AGIV10cm": {
+                "attribution": {
+                    "text": "© agentschap Informatie Vlaanderen"
+                },
+                "name": "AIV Flanders 2013-2015 的 10厘米 航拍图"
+            },
+            "AGIVFlandersGRB": {
+                "attribution": {
+                    "text": "© agentschap Informatie Vlaanderen"
+                },
+                "name": "AIV Flanders GRB"
+            },
+            "AIV_DHMV_II_HILL_25cm": {
+                "attribution": {
+                    "text": "© agentschap Informatie Vlaanderen"
+                }
+            },
+            "AIV_DHMV_II_SVF_25cm": {
+                "attribution": {
+                    "text": "© agentschap Informatie Vlaanderen"
+                },
+                "name": "AIV Digitaal Hoogtemodel Vlaanderen II, 0.25 米 Skyview"
+            },
             "Bing": {
                 "description": "卫星和航空影像",
                 "name": "必应航空影像"
             },
             "EOXAT2018CLOUDLESS": {
+                "attribution": {
+                    "text": "Sentinel-2 无云 - https://s2maps.eu by EOX IT Services GmbH (包含已修改的 Copernicus Sentinel data 2017 & 2018)"
+                },
                 "description": "经后期处理的 Sentinel 卫星影像。",
                 "name": "eox.at 2018 无云"
             },
@@ -7969,12 +7999,14 @@
                 "attribution": {
                     "text": "条款与反馈"
                 },
+                "description": "Maxar Premium 是由 Maxar 底图所组成的拼接图，特定区域以 +Vivid 或自订照片填充，其解析度为 50 厘米或更高，且会不断更新。",
                 "name": "Maxar 优质影像 (Beta)"
             },
             "Maxar-Standard": {
                 "attribution": {
                     "text": "条款与反馈"
                 },
+                "description": "Maxar Standard 是一套经过精心选取，覆盖地球上 86% 的陆地面积，其解析度为 30-60 厘米，不足的部份以 Landsat 填满。平均更新时间为 2.31 年，部份地区每年更新两次。",
                 "name": "Maxar 标准影像 (Beta)"
             },
             "OSM_Inspector-Addresses": {
@@ -8019,6 +8051,12 @@
                 },
                 "name": "OSM查看器：标签"
             },
+            "SPW_ORTHO_LAST": {
+                "name": "SPW(allonie) 最新航空影像"
+            },
+            "SPW_PICC": {
+                "name": "SPW(allonie) PICC 数字图像"
+            },
             "US-TIGER-Roads-2014": {
                 "description": "在缩放等级16级以上是来自美国人口调查局的公共领域地图数据。低缩放等级下仅包含自2006年以来的变更，不含已纳入 OpenStreetMap 的变更。",
                 "name": "TIGER 道路 2014"
@@ -8031,9 +8069,19 @@
                 "description": "黄色 = 来自美国人口调查局的公共领域地图数据。红色 = 在 OpenStreetMap 中找不到数据。",
                 "name": "TIGER 道路 2018"
             },
+            "USDA-NAIP": {
+                "description": "近年来自美国各州的国家农业影像计划 (NAIP) 的 DOQQ。",
+                "name": "国家农业影像计划"
+            },
             "US_Forest_Service_roads_overlay": {
                 "description": "公路：绿色线框 = 未分级。棕色线框 = 未铺设路面。表面：沙砾 = 浅棕色填充，沥青 = 黑色，已铺设 = 灰色，土地 = 白色，混凝土 = 蓝色，草地 = 绿色。季节性 = 白色条状",
                 "name": "美国森林道路叠加层"
+            },
+            "UrbISOrtho2016": {
+                "attribution": {
+                    "text": "道路：绿色外框 = 非分类道路。棕色外框 = 土路。路面：碎石路 = 亮棕色实心填满，柏油 = 黑色，有铺面 = 灰色，地面 = 白色，水泥 = 蓝色，草地 = 绿色。季节性 = 白色条纹"
+                },
+                "name": "UrbIS-Ortho 2016"
             },
             "Waymarked_Trails-Cycling": {
                 "attribution": {
@@ -8143,6 +8191,22 @@
             }
         },
         "community": {
+            "bw-facebook": {
+                "name": "在 Facebook 上的 Mapping Botswana",
+                "description": "OpenStreetMap in Botswana 的页面"
+            },
+            "bw-twitter": {
+                "name": "在 Twitter 上的 Mapping Botswana",
+                "description": "OpenStreetMap in Botswana 的 Twitter"
+            },
+            "ym-Centre-Universitaire-de-Recherche-et-dApplication-en-Tldtection-CURAT-de-lUniversit-Felix-Houphouet-Boigny": {
+                "name": "YouthMappers CURAT",
+                "extendedDescription": "我们分会目的是推广自由画地图的协同使用，以及在研究与决策应用时运用开放街图资料，帮助学生产生他们研究时自己的资料。"
+            },
+            "ym-The-Gambia-YMCA-University-of-the-Gambia": {
+                "name": "YouthMappers 接触",
+                "description": "Connected YouthMappers 由年轻甘比亚组成，希望能改变和协助国家发展"
+            },
             "cape-coast-youthmappers": {
                 "name": "海岸角大学 YouthMappers",
                 "description": "在 Twitter 上关注我们：{url}",

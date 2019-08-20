@@ -11,6 +11,7 @@
         "access"
     ],
     "moreFields": [
+        "charge_toll",
         "covered",
         "cycleway",
         "flood_prone",
@@ -20,6 +21,7 @@
         "maxheight",
         "maxspeed/advisory",
         "maxweight_bridge",
+        "not/name",
         "oneway/bicycle",
         "smoothness",
         "toll",

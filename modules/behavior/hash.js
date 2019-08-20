@@ -94,22 +94,16 @@ export function behaviorHash(context) {
             var q = utilStringQs(window.location.hash.substring(1));
 
             if (q.id) {
-                context.zoomToEntity(q.id.split(',')[0], !q.map);
+                if (!context.history().hasRestorableChanges()) {
+                    context.zoomToEntity(q.id.split(',')[0], true /* ignore `map` parameter */);
+                }
             }
 
-            if (q.comment) {
-                context.storage('comment', q.comment);
-                context.storage('commentDate', Date.now());
-            }
-
-            if (q.source) {
-                context.storage('source', q.source);
-                context.storage('commentDate', Date.now());
-            }
-
-            if (q.hashtags) {
-                context.storage('hashtags', q.hashtags);
-            }
+            // Store these here instead of updating local storage since local
+            // storage could be flushed if the user discards pending changes
+            if (q.comment)  behavior.comment = q.comment;
+            if (q.source)   behavior.source = q.source;
+            if (q.hashtags) behavior.hashtags = q.hashtags;
 
             if (q.walkthrough === 'true') {
                 behavior.startWalkthrough = true;

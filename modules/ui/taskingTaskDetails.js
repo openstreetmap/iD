@@ -1,5 +1,5 @@
 import { event as d3_event } from 'd3-selection';
-import { uiQuickLinks } from './quick_links';
+// import { uiQuickLinks } from './quick_links';
 
 import { uiTaskOverview } from './taskingTaskOverview';
 import { uiTaskHistory } from './taskingTaskHistory';
@@ -9,7 +9,7 @@ import { t } from '../util/locale';
 
 export function uiTaskingTaskDetails(context) {
 
-    var quickLinks = uiQuickLinks();
+    // var quickLinks = uiQuickLinks();
     var taskHistory = uiTaskHistory();
     var taskInstructions = uiTaskInstructions();
     var taskOverview = uiTaskOverview(context);
@@ -133,7 +133,7 @@ export function uiTaskingTaskDetails(context) {
             .merge(details);
 
         details
-            .call(quickLinks.choices(choices))
+            // .call(quickLinks.choices(choices))
             .call(taskTabs);
 
         details.select('.task-status')

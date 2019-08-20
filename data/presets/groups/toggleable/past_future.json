@@ -1,0 +1,32 @@
+{
+    "name": "Past/Future Features",
+    "description": "Proposed, Construction, Abandoned, Demolished, etc.",
+    "toggleable": true,
+    "matches": {
+        "anyTags": {
+            "*": {
+                "proposed": true,
+                "construction": true,
+                "abandoned": true,
+                "dismantled": true,
+                "disused": true,
+                "razed": true,
+                "demolished": true,
+                "obliterated": true
+            },
+            "proposed": "*",
+            "construction": "*",
+            "abandoned": "*",
+            "dismantled": "*",
+            "disused": "*",
+            "razed": "*",
+            "demolished": "*",
+            "obliterated": "*"
+        },
+        "allGroups": {
+            "toggleable/paths": false,
+            "toggleable/traffic_roads": false,
+            "toggleable/service_roads": false
+        }
+    }
+}

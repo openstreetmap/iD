@@ -2,5 +2,8 @@
     "key": "fixme",
     "type": "textarea",
     "label": "Fix Me",
-    "universal": true
+    "universal": true,
+    "terms": [
+        "help request"
+    ]
 }

@@ -4,7 +4,7 @@ import { svgIcon, svgTagClasses } from '../svg';
 import { utilFunctor } from '../util';
 
 export function uiPresetIcon(context) {
-    var preset, geometry, sizeClass = 'medium';
+    var preset, geometry, sizeClass = 'medium', pointMarker = true;
 
     function isSmall() {
         return sizeClass === 'small';
@@ -31,6 +31,22 @@ export function uiPresetIcon(context) {
             return 'maki-marker-stroked';
     }
 
+    function renderCategoryBorder(enter) {
+
+        var w = 40, h = 40;
+
+        enter = enter
+            .append('svg')
+            .attr('class', 'preset-icon-fill preset-icon-category-border')
+            .attr('width', w)
+            .attr('height', h)
+            .attr('viewBox', '0 0 ' + w + ' ' + h);
+
+        enter.append('path')
+            .attr('transform', 'translate(4.5, 5)')
+            .attr('d', 'M2.40138782,0.75 L0.75,3.22708173 L0.75,24 C0.75,25.7949254 2.20507456,27.25 4,27.25 L27,27.25 C28.7949254,27.25 30.25,25.7949254 30.25,24 L30.25,7 C30.25,5.20507456 28.7949254,3.75 27,3.75 L13.5986122,3.75 L11.5986122,0.75 L2.40138782,0.75 Z');
+    }
+
     function renderPointBorder(enter) {
         var w = 40, h = 40;
         enter = enter
@@ -46,7 +62,8 @@ export function uiPresetIcon(context) {
     }
 
     function renderCircleFill(fillEnter) {
-        var w = 60, h = 60, d = 40;
+        var d = isSmall() ? 40 : 60;
+        var w = d, h = d, r = d/3;
         fillEnter = fillEnter
             .append('svg')
             .attr('class', 'preset-icon-fill preset-icon-fill-vertex')
@@ -57,7 +74,7 @@ export function uiPresetIcon(context) {
         fillEnter.append('circle')
             .attr('cx', w/2)
             .attr('cy', h/2)
-            .attr('r', d/2);
+            .attr('r', r);
     }
 
     function renderSquareFill(fillEnter) {
@@ -209,12 +226,13 @@ export function uiPresetIcon(context) {
         var isTnp = picon && /^tnp-/.test(picon);
         var isiDIcon = picon && !(isMaki || isTemaki || isFa || isTnp);
         var isCategory = !p.setTags;
-        var drawPoint = picon && geom === 'point' && isSmall() && !isFallback;
+        var drawCategoryBorder = isCategory;
+        var drawPoint = geom === 'point' && !imageURL && (pointMarker || !picon) && !isFallback;
         var drawVertex = picon !== null && geom === 'vertex' && (!isSmall() || !isFallback);
         var drawLine = picon && geom === 'line' && !isFallback && !isCategory;
         var drawArea = picon && geom === 'area' && !isFallback;
         var drawRoute = picon && geom === 'route';
-        var isFramed = (drawVertex || drawArea || drawLine || drawRoute);
+        var isFramed = (drawCategoryBorder || drawPoint || drawVertex || drawArea || drawLine || drawRoute);
 
         var tags = !isCategory ? p.setTags({}, geom) : {};
         for (var k in tags) {
@@ -249,6 +267,16 @@ export function uiPresetIcon(context) {
 
         imageIcon
             .attr('src', imageURL);
+
+        var categoryBorder = container.selectAll('.preset-icon-category-border')
+            .data(drawCategoryBorder ? [0] : []);
+
+        categoryBorder.exit()
+            .remove();
+
+        var categoryBorderEnter = categoryBorder.enter();
+        renderCategoryBorder(categoryBorderEnter);
+        categoryBorder = categoryBorderEnter.merge(categoryBorder);
 
         var pointBorder = container.selectAll('.preset-icon-point-border')
             .data(drawPoint ? [0] : []);
@@ -343,7 +371,7 @@ export function uiPresetIcon(context) {
             .merge(icon);
 
         icon
-            .attr('class', 'preset-icon ' + (geom ? geom + '-geom' : ''))
+            .attr('class', 'preset-icon ' + (geom ? geom + '-geom ' : '') + (isCategory ? 'category' : ''))
             .classed('framed', isFramed)
             .classed('preset-icon-iD', isiDIcon);
 
@@ -377,6 +405,14 @@ export function uiPresetIcon(context) {
         sizeClass = val;
         return presetIcon;
     };
+
+
+    presetIcon.pointMarker = function(val) {
+        if (!arguments.length) return pointMarker;
+        pointMarker = val;
+        return presetIcon;
+    };
+
 
     return presetIcon;
 }

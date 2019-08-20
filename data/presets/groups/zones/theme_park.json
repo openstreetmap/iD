@@ -1,0 +1,41 @@
+{
+    "matches": {
+        "anyTags": {
+            "tourism": "theme_park"
+        }
+    },
+    "nearby": {
+        "anyTags": {
+            "amenity": {
+                "bench": true,
+                "drinking_water": true,
+                "fast_food": true,
+                "theatre": true,
+                "toilets": true
+            },
+            "attraction": true,
+            "emergency": {
+                "defibrillator": true,
+                "first_aid_kit": true
+            },
+            "highway": {
+                "footway": true
+            },
+            "information": {
+                "map": true
+            },
+            "leisure": {
+                "amusement_arcade": true,
+                "miniature_golf": true
+            },
+            "shop": {
+                "gift": true,
+                "ticket": true
+            },
+            "tourism": {
+                "information": true
+            }
+        },
+        "allowOtherTags": false
+    }
+}

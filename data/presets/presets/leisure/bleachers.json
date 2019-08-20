@@ -1,7 +1,7 @@
 {
     "geometry": [
-        "point",
-        "area"
+        "area",
+        "point"
     ],
     "tags": {
         "leisure": "bleachers"

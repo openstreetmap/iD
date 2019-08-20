@@ -1310,12 +1310,6 @@
                     "label": "Обручи",
                     "placeholder": "1, 2, 4..."
                 },
-                "iata": {
-                    "label": "ИАТА"
-                },
-                "icao": {
-                    "label": "ИЦАО"
-                },
                 "incline": {
                     "label": "Успон"
                 },

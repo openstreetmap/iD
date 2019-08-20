@@ -15,8 +15,8 @@
         "fax"
     ],
     "geometry": [
-        "point",
-        "area"
+        "area",
+        "point"
     ],
     "terms": [
         "esplanade",

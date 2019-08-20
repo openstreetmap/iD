@@ -7,10 +7,11 @@
     ],
     "moreFields": [
         "address",
-        "website",
-        "phone",
         "email",
-        "fax"
+        "fax",
+        "phone",
+        "species/wikidata",
+        "website"
     ],
     "geometry": [
         "area"

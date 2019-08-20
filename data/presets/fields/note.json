@@ -3,5 +3,8 @@
     "type": "textarea",
     "universal": true,
     "icon": "note",
-    "label": "Note"
+    "label": "Note",
+    "terms": [
+        "comment"
+    ]
 }

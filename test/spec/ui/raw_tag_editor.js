@@ -2,10 +2,15 @@ describe('iD.uiRawTagEditor', function() {
     var taglist, element, entity, context;
 
     function render(tags) {
+
+        entity = iD.osmNode({ id: 'n12345', tags: tags });
+        context = iD.coreContext();
+        context.history().merge([entity]);
+
         taglist = iD.uiRawTagEditor(context)
-            .entityID(entity.id)
-            .preset({isFallback: function() { return false; }})
             .tags(tags)
+            .entityIDs([entity.id])
+            .preset({isFallback: function() { return false; }})
             .expanded(true);
 
         element = d3.select('body')
@@ -15,10 +20,7 @@ describe('iD.uiRawTagEditor', function() {
     }
 
     beforeEach(function () {
-        entity = iD.osmNode({id: 'n12345'});
-        context = iD.coreContext();
-        context.history().merge([entity]);
-        render({highway: 'residential'});
+        render({ highway: 'residential' });
     });
 
     afterEach(function () {

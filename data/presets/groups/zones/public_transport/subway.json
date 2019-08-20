@@ -1,0 +1,47 @@
+{
+    "matches": {
+        "allTags": {
+            "subway": "yes",
+            "public_transport": {
+                "platform": true,
+                "station": true,
+                "stop_area": true,
+                "stop_position": true
+            }
+        }
+    },
+    "nearby": {
+        "any": [
+            {
+                "allTags": {
+                    "amenity": "parking",
+                    "park_ride": "yes"
+                }
+            },
+            {
+                "anyTags": {
+                    "highway": {
+                        "elevator": true,
+                        "steps": true
+                    },
+                    "railway": {
+                        "subway": true,
+                        "subway_entrance": true
+                    },
+                    "surveillance:type": "camera",
+                    "vending": "public_transport_tickets"
+                }
+            },
+            {
+                "allTags": {
+                    "subway": "yes",
+                    "public_transport": {
+                        "platform": true,
+                        "station": true,
+                        "stop_position": true
+                    }
+                }
+            }
+        ]
+    }
+}

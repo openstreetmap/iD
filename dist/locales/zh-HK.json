@@ -1780,12 +1780,6 @@
                         "undefined": "否"
                     }
                 },
-                "iata": {
-                    "label": "萬國航空運輸協會（IATA）"
-                },
-                "icao": {
-                    "label": "萬國民航組織（ICAO）"
-                },
                 "incline": {
                     "label": "斜"
                 },

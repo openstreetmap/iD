@@ -1,7 +1,11 @@
+import { dataLanguages } from '../../../data';
+
 var translations = Object.create(null);
 
 export var currentLocale = 'en';
 export var textDirection = 'ltr';
+export var languageNames = {};
+export var scriptNames = {};
 
 export function setLocale(val) {
     if (translations[val] !== undefined) {
@@ -72,4 +76,50 @@ export function t(s, o, loc) {
 
 export function setTextDirection(dir) {
     textDirection = dir;
+}
+
+export function setLanguageNames(obj) {
+    languageNames = obj;
+}
+
+export function setScriptNames(obj) {
+    scriptNames = obj;
+}
+
+export function languageName(code, options) {
+    if (languageNames[code]) { // name in locale langauge
+
+        // e.g. German
+        return languageNames[code];
+    }
+    // sometimes we only want the local name
+    if (options && options.localOnly) return null;
+
+    var langInfo = dataLanguages[code];
+
+    if (langInfo) {
+        if (langInfo.nativeName) { // name in native language
+
+            // e.g. Deutsch (de)
+            return t('translate.language_and_code', { language: langInfo.nativeName, code: code });
+
+        } else if (langInfo.base && langInfo.script) {
+
+            var base = langInfo.base; // the code of the langauge this is based on
+
+            if (languageNames[base]) { // base language name in locale langauge
+                var scriptCode = langInfo.script;
+                var script = scriptNames[scriptCode] || scriptCode;
+
+                // e.g. Serbian (Cyrillic)
+                return t('translate.language_and_code', { language: languageNames[base], code: script });
+
+            } else if (dataLanguages[base] && dataLanguages[base].nativeName) {
+
+                // e.g. српски (sr-Cyrl)
+                return t('translate.language_and_code', { language: dataLanguages[base].nativeName, code: code });
+            }
+        }
+    }
+    return code; // if not found, use the code
 }

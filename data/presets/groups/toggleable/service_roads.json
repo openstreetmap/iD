@@ -1,0 +1,15 @@
+{
+    "name": "Service Roads",
+    "description": "Driveways, Parking Aisles, Tracks, etc.",
+    "toggleable": true,
+    "matches": {
+        "geometry": "line",
+        "allTags": {
+            "highway": {
+                "service": true,
+                "road": true,
+                "track": true
+            }
+        }
+    }
+}

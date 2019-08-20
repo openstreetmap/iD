@@ -1,0 +1,38 @@
+{
+    "matches": {
+        "allTags": {
+            "bus": "yes",
+            "public_transport": {
+                "platform": true,
+                "stop_area": true,
+                "stop_position": true
+            }
+        }
+    },
+    "nearby": {
+        "any": [
+            {
+                "anyTags": {
+                    "amenity": {
+                        "bench": true
+                    },
+                    "footway": "sidewalk",
+                    "information": {
+                        "board": true
+                    },
+                    "shelter_type": "public_transport",
+                    "vending": "public_transport_tickets"
+                }
+            },
+            {
+                "allTags": {
+                    "bus": "yes",
+                    "public_transport": {
+                        "platform": true,
+                        "stop_position": true
+                    }
+                }
+            }
+        ]
+    }
+}

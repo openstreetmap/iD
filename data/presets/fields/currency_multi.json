@@ -1,5 +1,11 @@
 {
     "key": "currency:",
     "type": "multiCombo",
-    "label": "Currency Types"
+    "label": "Currency Types",
+    "terms": [
+        "bills",
+        "cash",
+        "coins",
+        "money"
+    ]
 }

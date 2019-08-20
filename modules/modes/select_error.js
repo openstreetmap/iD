@@ -13,8 +13,6 @@ import { services } from '../services';
 import { modeBrowse } from './browse';
 import { modeDragNode } from './drag_node';
 import { modeDragNote } from './drag_note';
-import { uiImproveOsmEditor } from '../ui/improveOSM_editor';
-import { uiKeepRightEditor } from '../ui/keepRight_editor';
 import { utilKeybinding } from '../util';
 
 
@@ -27,30 +25,6 @@ export function modeSelectError(context, selectedErrorID, selectedErrorService) 
     var keybinding = utilKeybinding('select-error');
 
     var errorService = services[selectedErrorService];
-    var errorEditor;
-    switch (selectedErrorService) {
-        case 'improveOSM':
-            errorEditor = uiImproveOsmEditor(context)
-            .on('change', function() {
-                context.map().pan([0,0]);  // trigger a redraw
-                var error = checkSelectedID();
-                if (!error) return;
-                context.ui().sidebar
-                    .show(errorEditor.error(error));
-            });
-            break;
-        case 'keepRight':
-            errorEditor = uiKeepRightEditor(context)
-            .on('change', function() {
-                context.map().pan([0,0]);  // trigger a redraw
-                var error = checkSelectedID();
-                if (!error) return;
-                context.ui().sidebar
-                    .show(errorEditor.error(error));
-            });
-            break;
-    }
-
 
     var behaviors = [
         behaviorBreathe(context),
@@ -70,6 +44,15 @@ export function modeSelectError(context, selectedErrorID, selectedErrorService) 
         }
         return error;
     }
+
+
+    mode.selectedErrorService = function() {
+        return selectedErrorService;
+    };
+
+    mode.selectedErrorID = function() {
+        return selectedErrorID;
+    };
 
 
     mode.zoomToSelected = function() {
@@ -95,9 +78,6 @@ export function modeSelectError(context, selectedErrorID, selectedErrorService) 
 
         selectError();
 
-        var sidebar = context.ui().sidebar;
-        sidebar.show(errorEditor.error(error));
-
         context.map()
             .on('drawn.select-error', selectError);
 
@@ -120,8 +100,6 @@ export function modeSelectError(context, selectedErrorID, selectedErrorService) 
             } else {
                 selection
                     .classed('selected', true);
-
-                context.selectedErrorID(selectedErrorID);
             }
         }
 
@@ -145,10 +123,6 @@ export function modeSelectError(context, selectedErrorID, selectedErrorService) 
         context.map()
             .on('drawn.select-error', null);
 
-        context.ui().sidebar
-            .hide();
-
-        context.selectedErrorID(null);
         context.features().forceVisible([]);
     };
 

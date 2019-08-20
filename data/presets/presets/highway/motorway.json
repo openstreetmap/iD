@@ -11,6 +11,7 @@
         "access"
     ],
     "moreFields": [
+        "charge_toll",
         "covered",
         "incline",
         "junction_line",
@@ -18,6 +19,7 @@
         "maxheight",
         "maxweight_bridge",
         "minspeed",
+        "not/name",
         "smoothness",
         "toll"
     ],

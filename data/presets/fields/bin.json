@@ -1,5 +1,9 @@
 {
     "key": "bin",
     "type": "check",
-    "label": "Waste Bin"
+    "label": "Waste Bin",
+    "terms": [
+        "garbage can",
+        "trash can"
+    ]
 }

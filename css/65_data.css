@@ -28,16 +28,7 @@
 }
 
 /* slight adjustments to preset icon for note icons */
-.note-header-icon .preset-icon-28 {
-    top: 18px;
-}
-.note-header-icon .note-icon-annotation {
-    position: absolute;
-    top: 22px;
-    left: 22px;
-    margin: auto;
-}
-.note-header-icon .note-icon-annotation .icon {
+.note-header-icon .icon-annotation {
     width: 15px;
     height: 15px;
 }

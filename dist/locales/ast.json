@@ -1214,12 +1214,6 @@
                     "label": "Númberu d'aros",
                     "placeholder": "1, 2, 4..."
                 },
-                "iata": {
-                    "label": "IATA"
-                },
-                "icao": {
-                    "label": "ICAO"
-                },
                 "incline": {
                     "label": "Pendiente"
                 },

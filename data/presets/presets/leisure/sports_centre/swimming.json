@@ -1,8 +1,8 @@
 {
     "icon": "fas-swimmer",
     "geometry": [
-        "point",
-        "area"
+        "area",
+        "point"
     ],
     "terms": [
         "dive",

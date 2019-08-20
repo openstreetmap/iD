@@ -4,9 +4,6 @@
         "line"
     ],
     "tags": {
-        "service": "emergency_access"
-    },
-    "addTags": {
         "highway": "service",
         "service": "emergency_access"
     },

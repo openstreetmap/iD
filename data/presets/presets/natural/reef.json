@@ -1,8 +1,8 @@
 {
     "icon": "temaki-beach",
     "geometry": [
-        "point",
-        "area"
+        "area",
+        "point"
     ],
     "tags": {
         "natural": "reef"

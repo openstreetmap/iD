@@ -4,11 +4,12 @@
         "toilets/disposal",
         "access_simple",
         "gender",
-        "diaper",
+        "changing_table",
         "wheelchair",
         "building_area"
     ],
     "moreFields": [
+        "charge_fee",
         "fee",
         "opening_hours",
         "operator",

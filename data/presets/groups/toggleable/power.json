@@ -1,0 +1,13 @@
+{
+    "name": "Power Features",
+    "description": "Power Lines, Power Plants, Substations, etc.",
+    "toggleable": true,
+    "matches": {
+        "allTags": {
+            "power": {
+                "*": true,
+                "no": false
+            }
+        }
+    }
+}

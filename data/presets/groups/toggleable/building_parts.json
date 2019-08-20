@@ -1,0 +1,13 @@
+{
+    "name": "Building Parts",
+    "description": "3D Building and Roof Components",
+    "toggleable": true,
+    "matches": {
+        "allTags": {
+            "building:part": {
+                "*": true,
+                "no": false
+            }
+        }
+    }
+}

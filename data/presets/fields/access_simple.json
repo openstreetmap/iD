@@ -2,5 +2,10 @@
     "key": "access",
     "type": "combo",
     "label": "Allowed Access",
-    "options": ["yes", "permissive", "private", "customers", "permit", "no"]
+    "options": ["yes", "permissive", "private", "customers", "permit", "no"],
+    "terms": [
+        "permitted",
+        "private",
+        "public"
+    ]
 }

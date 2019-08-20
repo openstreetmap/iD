@@ -12,6 +12,7 @@
         "access"
     ],
     "moreFields": [
+        "charge_toll",
         "covered",
         "destination/symbol_oneway",
         "incline",

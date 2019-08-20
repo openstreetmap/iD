@@ -2481,12 +2481,6 @@
                         "undefined": "Không"
                     }
                 },
-                "iata": {
-                    "label": "IATA"
-                },
-                "icao": {
-                    "label": "ICAO"
-                },
                 "incline": {
                     "label": "Độ dốc"
                 },
@@ -8552,10 +8546,6 @@
             "OSM-CU-telegram": {
                 "name": "OSM Cuba tại Telegram",
                 "description": "Trò chuyện Telegram của OpenStreetMap Cuba"
-            },
-            "OSM-NI-telegram": {
-                "name": "OSM Nicaragua tại Telegram",
-                "description": "Trò chuyện Telegram của OpenStreetMap Nicaragua"
             },
             "Bay-Area-OpenStreetMappers": {
                 "name": "Cộng đồng OpenStreetMap tại Khu vực vịnh",

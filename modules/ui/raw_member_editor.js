@@ -94,6 +94,8 @@ export function uiRawMemberEditor(context) {
     function updateDisclosureContent(selection) {
         _contentSelection = selection;
 
+        if (selection.empty()) return;
+
         var memberships = [];
         var entity = context.entity(_entityID);
         entity.members.slice(0, _maxMembers).forEach(function(member, index) {
@@ -379,6 +381,11 @@ export function uiRawMemberEditor(context) {
             })
             .content(updateDisclosureContent)
         );
+
+        context.history().on('merge', function() {
+            // update the UI in case the merge includes newly-downloaded members
+            updateDisclosureContent(_contentSelection);
+        });
     }
 
     rawMemberEditor.entityID = function(val) {

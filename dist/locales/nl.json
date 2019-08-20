@@ -2806,12 +2806,6 @@
                         "undefined": "Nee"
                     }
                 },
-                "iata": {
-                    "label": "IATA"
-                },
-                "icao": {
-                    "label": "ICAO"
-                },
                 "incline": {
                     "label": "Helling"
                 },
@@ -8935,10 +8929,6 @@
             "OSM-CU-telegram": {
                 "name": "OSM Cuba op Telegram",
                 "description": "OpenStreetMap Cuba Telegram-chat"
-            },
-            "OSM-NI-telegram": {
-                "name": "OSM Nicaragua op Telegram",
-                "description": "OpenStreetMap Nicaragua Telegram-chat"
             },
             "Bay-Area-OpenStreetMappers": {
                 "name": "Bay Area OpenStreetMappers",

@@ -104,7 +104,7 @@ export function svgNotes(projection, context, dispatch) {
         if (!_notesVisible || !_notesEnabled) return;
 
         var service = getService();
-        var selectedID = context.selectedNoteID();
+        var selectedID = context.mode().selectedNoteID && context.mode().selectedNoteID();
         var data = (service ? service.notes(projection) : []);
         var getTransform = svgPointTransform(projection);
 
@@ -243,7 +243,7 @@ export function svgNotes(projection, context, dispatch) {
             layerOn();
         } else {
             layerOff();
-            if (context.selectedNoteID()) {
+            if (context.mode().id === 'select-note') {
                 context.enter(modeBrowse(context));
             }
         }

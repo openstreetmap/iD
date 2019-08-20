@@ -9,6 +9,7 @@
     ],
     "moreFields": [
         "air_conditioning",
+        "charge_fee",
         "fee",
         "payment_multi_fee",
         "website",

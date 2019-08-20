@@ -10,7 +10,8 @@
         "access_simple",
         "direction",
         "fee",
-        "payment_multi_fee"
+        "payment_multi_fee",
+        "charge_fee"
     ],
     "tags": {
         "natural": "cave_entrance"

@@ -78,6 +78,8 @@ An array of possible geometry types that a feature must have in order to match t
 
 Closed ways can be treated as both `line` or `area` geometry. If a preset allows both, iD will add an additional `area=yes` tag when choosing the preset for an area feature.
 
+The geometry types should be listed in order of preference. For example, the preset for `leisure=swimming_pool` lists `area` before `point`.
+
 This property is required. There is no default.
 
 ##### `tags`
@@ -203,7 +205,7 @@ When possible, use `deprecated.json` instead to specify upgrade paths for old ta
 
 A key and optionally a value to link to the wiki documentation for this preset. Only necessary if the preset consists of several tags.
 
-For example, 
+For example,
 ```javascript
 "reference": {
     "key": "tower:type",

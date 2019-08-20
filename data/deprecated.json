@@ -9,6 +9,10 @@
       "replace": {"aeroway": "jet_bridge"}
     },
     {
+      "old": {"access": "public"},
+      "replace": {"access": "yes"}
+    },
+    {
       "old": {"amenity": "advertising"},
       "replace": {"advertising": "*"}
     },
@@ -23,6 +27,10 @@
     {
       "old": {"amenity": "car_repair"},
       "replace": {"shop": "car_repair"}
+    },
+    {
+      "old": {"amenity": "changing_room"},
+      "replace": {"amenity": "dressing_room"}
     },
     {
       "old": {"amenity": "citymap_post"},
@@ -90,7 +98,7 @@
     },
     {
       "old": {"amenity": "preschool"},
-      "replace": {"amenity": "kindergarten"}
+      "replace": {"amenity": "kindergarten", "preschool": "yes"}
     },
     {
       "old": {"amenity": "public_building"},
@@ -255,6 +263,22 @@
     {
       "old": {"curb": "*"},
       "replace": {"kerb": "$1"}
+    },
+    {
+      "old": {"diaper": "1"},
+      "replace": {"changing_table": "yes", "changing_table:count": "1"}
+    },
+    {
+      "old": {"diaper": "no"},
+      "replace": {"changing_table": "no"}
+    },
+    {
+      "old": {"diaper": "room"},
+      "replace": {"changing_table": "yes", "changing_table:location": "room"}
+    },
+    {
+      "old": {"diaper": "yes"},
+      "replace": {"changing_table": "yes"}
     },
     {
       "old": {"drinkable": "*"},
@@ -426,6 +450,10 @@
     {
       "old": {"landuse": "field"},
       "replace": {"landuse": "farmland"}
+    },
+    {
+      "old": {"landuse": "garden"},
+      "replace": {"leisure": "garden"}
     },
     {
       "old": {"landuse": "pond"},
@@ -624,6 +652,10 @@
     {
       "old": {"roof:color": "*"},
       "replace": {"roof:colour": "$1"}
+    },
+    {
+      "old": {"roof:shape": "half_hipped"},
+      "replace": {"roof:shape": "half-hipped"}
     },
     {
       "old": {"route": "ncn"},
@@ -856,6 +888,10 @@
     {
       "old": {"tourism": "bed_and_breakfast"},
       "replace": {"tourism": "guest_house", "guest_house": "bed_and_breakfast"}
+    },
+    {
+      "old": {"tower:type": "power"},
+      "replace": {"power": "tower"}
     },
     {
       "old": {"type": "broad_leaved"},

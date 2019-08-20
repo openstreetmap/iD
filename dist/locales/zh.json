@@ -250,6 +250,17 @@
             }
         },
         "presets": {
+            "categories": {
+                "category-barrier": {
+                    "name": "障碍物要素"
+                },
+                "category-building": {
+                    "name": "建筑物要素"
+                },
+                "category-golf": {
+                    "name": "高尔夫要素"
+                }
+            },
             "fields": {
                 "access": {
                     "options": {
@@ -359,12 +370,6 @@
                 },
                 "historic": {
                     "label": "类型"
-                },
-                "iata": {
-                    "label": "国际航空运输协会IATA"
-                },
-                "icao": {
-                    "label": "国际民航组织ICAO"
                 },
                 "incline": {
                     "label": "斜度"

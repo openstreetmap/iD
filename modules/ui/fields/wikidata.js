@@ -29,6 +29,11 @@ export function uiFieldWikidata(field, context) {
     var _wikiURL = '';
     var _entity;
 
+    var _wikipediaKey = field.keys && field.keys.find(function(key) {
+            return key.includes('wikipedia');
+        }),
+        _hintKey = field.key === 'wikidata' ? 'name' : field.key.split(':')[0];
+
     var combobox = uiCombobox(context, 'combo-' + field.safeid)
         .caseSensitive(true)
         .minItems(1);
@@ -137,7 +142,7 @@ export function uiFieldWikidata(field, context) {
     function fetchWikidataItems(q, callback) {
 
         if (!q && _entity) {
-            q = context.entity(_entity.id).tags.name || '';
+            q = (_hintKey && context.entity(_entity.id).tags[_hintKey]) || '';
         }
 
         wikidata.itemsForSearchQuery(q, function(err, data) {
@@ -186,35 +191,37 @@ export function uiFieldWikidata(field, context) {
 
             var currTags = Object.assign({}, context.entity(initEntityID).tags);  // shallow copy
 
-            var foundPreferred;
-            for (var i in langs) {
-                var lang = langs[i];
-                var siteID = lang.replace('-', '_') + 'wiki';
-                if (entity.sitelinks[siteID]) {
-                    foundPreferred = true;
-                    currTags.wikipedia = lang + ':' + entity.sitelinks[siteID].title;
-                    // use the first match
-                    break;
-                }
-            }
-
-            if (!foundPreferred) {
-                // No wikipedia sites available in the user's language or the fallback languages,
-                // default to any wikipedia sitelink
-
-                var wikiSiteKeys = Object.keys(entity.sitelinks).filter(function(site) {
-                    return site.endsWith('wiki');
-                });
-
-                if (wikiSiteKeys.length === 0) {
-                    // if no wikipedia pages are linked to this wikidata entity, delete that tag
-                    if (currTags.wikipedia) {
-                        delete currTags.wikipedia;
+            if (_wikipediaKey) {
+                var foundPreferred;
+                for (var i in langs) {
+                    var lang = langs[i];
+                    var siteID = lang.replace('-', '_') + 'wiki';
+                    if (entity.sitelinks[siteID]) {
+                        foundPreferred = true;
+                        currTags[_wikipediaKey] = lang + ':' + entity.sitelinks[siteID].title;
+                        // use the first match
+                        break;
                     }
-                } else {
-                    var wikiLang = wikiSiteKeys[0].slice(0, -4).replace('_', '-');
-                    var wikiTitle = entity.sitelinks[wikiSiteKeys[0]].title;
-                    currTags.wikipedia = wikiLang + ':' + wikiTitle;
+                }
+
+                if (!foundPreferred) {
+                    // No wikipedia sites available in the user's language or the fallback languages,
+                    // default to any wikipedia sitelink
+
+                    var wikiSiteKeys = Object.keys(entity.sitelinks).filter(function(site) {
+                        return site.endsWith('wiki');
+                    });
+
+                    if (wikiSiteKeys.length === 0) {
+                        // if no wikipedia pages are linked to this wikidata entity, delete that tag
+                        if (currTags[_wikipediaKey]) {
+                            delete currTags[_wikipediaKey];
+                        }
+                    } else {
+                        var wikiLang = wikiSiteKeys[0].slice(0, -4).replace('_', '-');
+                        var wikiTitle = entity.sitelinks[wikiSiteKeys[0]].title;
+                        currTags[_wikipediaKey] = wikiLang + ':' + wikiTitle;
+                    }
                 }
             }
 

@@ -11,6 +11,7 @@
     "moreFields": [
         "air_conditioning",
         "building/levels_building",
+        "charge_fee",
         "height_building",
         "fee",
         "internet_access",

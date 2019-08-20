@@ -29,6 +29,61 @@ _Breaking changes, which may affect downstream projects or sites that embed iD, 
 [@xxxx]: https://github.com/xxxx
 -->
 
+# 2.15.4
+##### 2019-Jul-26
+
+#### :tada: New Features
+* Render side direction arrows on weirs ([#6615])
+
+[#6615]: https://github.com/openstreetmap/iD/issues/6615
+
+#### :sparkles: Usability
+* Don't reuse the changeset comment, sources, and hashtags by default after uploading or discarding edits ([#6642])
+
+[#6642]: https://github.com/openstreetmap/iD/issues/6642
+
+#### :white_check_mark: Validation
+* Don't flag very close points on different layers or levels ([#6612])
+* Don't flag Google Books as a source ([#6556])
+* Add `preschool=yes` when upgrading `amenity=preschool` ([#6636])
+
+[#6612]: https://github.com/openstreetmap/iD/issues/6612
+[#6556]: https://github.com/openstreetmap/iD/issues/6556
+[#6636]: https://github.com/openstreetmap/iD/issues/6636
+
+#### :bug: Bugfixes
+* Fix issue where the info in the Background panel wouldn't update when switching backgrounds ([#6627])
+* Fix issue where side direction arrows might not update when switching presets ([#6032])
+
+[#6627]: https://github.com/openstreetmap/iD/issues/6627
+[#6032]: https://github.com/openstreetmap/iD/issues/6032
+
+#### :earth_asia: Localization
+* Default speed limit units to miles per hour in Puerto Rico ([#6626])
+* Fix issue where Arabic numerals would not render correctly on the map ([#6679], [#6682], thanks [@mapmeld])
+
+[#6626]: https://github.com/openstreetmap/iD/issues/6626
+[#6679]: https://github.com/openstreetmap/iD/issues/6679
+[#6682]: https://github.com/openstreetmap/iD/issues/6682
+
+#### :rocket: Presets
+* Add Dressing Room preset ([#6643])
+* Add Pool Supply Store preset ([#6599])
+* Add Address Interpolation line preset ([#4220])
+* Add Printer Ink Store, Park & Ride Lot, Aircraft Holding Position, and Aircraft Parking Position presets
+* Add Type and Address fields to Public Bookcase preset ([#6564], thanks [@ToastHawaii])
+* Add Underground Levels field to building presets ([#6628])
+* Add more fields to the Kindergarten, Ferry Route, Ford, Dam, Weir, and Bridge Support presets
+* Fix tag misspelling for the Camp Pitch preset ([#6608])
+* Update icons for the Cairn, Sandwich Fast Food, Hifi Store, and Party Store presets
+
+[#6643]: https://github.com/openstreetmap/iD/issues/6643
+[#6564]: https://github.com/openstreetmap/iD/issues/6564
+[#6628]: https://github.com/openstreetmap/iD/issues/6628
+[#4220]: https://github.com/openstreetmap/iD/issues/4220
+[#6599]: https://github.com/openstreetmap/iD/issues/6599
+[#6608]: https://github.com/openstreetmap/iD/issues/6608
+
 # 2.15.3
 ##### 2019-Jun-30
 

@@ -8,14 +8,15 @@
         "lit"
     ],
     "moreFields": [
+        "charge_fee",
         "covered",
         "fee",
         "indoor",
         "payment_multi_fee"
     ],
     "geometry": [
-        "point",
-        "area"
+        "area",
+        "point"
     ],
     "tags": {
         "leisure": "pitch"

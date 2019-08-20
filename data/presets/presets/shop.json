@@ -20,8 +20,10 @@
         "internet_access",
         "internet_access/fee",
         "internet_access/ssid",
+        "not/name",
         "phone",
         "second_hand",
+        "stroller",
         "website",
         "wheelchair"
     ],

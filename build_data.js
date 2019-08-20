@@ -10,6 +10,7 @@ const YAML = require('js-yaml');
 
 const fieldSchema = require('./data/presets/schema/field.json');
 const presetSchema = require('./data/presets/schema/preset.json');
+const groupSchema = require('./data/presets/schema/group.json');
 const nsi = require('name-suggestion-index');
 const deprecated = require('./data/deprecated.json').dataDeprecated;
 
@@ -48,20 +49,35 @@ module.exports = function buildData() {
         // Translation strings
         var tstrings = {
             categories: {},
+            groups: {},
             fields: {},
             presets: {}
         };
 
         // Font Awesome icons used
         var faIcons = {
+            'fas-smile-beam': {},
+            'fas-grin-beam': {},
+            'fas-laugh-beam': {},
+            'fas-sun': {},
+            'fas-moon': {},
+            'fas-edit': {},
+            'fas-map-marked-alt': {},
             'fas-i-cursor': {},
             'fas-lock': {},
             'fas-long-arrow-alt-right': {},
-            'fas-th-list': {}
+            'fas-th-list': {},
+            'fas-toolbox': {},
+            'fas-clock': {}
         };
 
         // The Noun Project icons used
-        var tnpIcons = {};
+        var tnpIcons = {
+            'tnp-2009642': {} // car in tunnel
+        };
+
+        // all fields searchable under "add field"
+        var searchableFieldIDs = {};
 
         // Start clean
         shell.rm('-f', [
@@ -70,16 +86,20 @@ module.exports = function buildData() {
             'data/presets/presets.json',
             'data/presets.yaml',
             'data/taginfo.json',
+            'data/territory-languages.json',
             'dist/locales/en.json',
             'svg/fontawesome/*.svg',
         ]);
 
+        var groups = generateGroups(tstrings);
+
         var categories = generateCategories(tstrings, faIcons, tnpIcons);
-        var fields = generateFields(tstrings, faIcons);
-        var presets = generatePresets(tstrings, faIcons, tnpIcons);
+        var fields = generateFields(tstrings, faIcons, tnpIcons, searchableFieldIDs);
+        var presets = generatePresets(tstrings, faIcons, tnpIcons, searchableFieldIDs);
         var defaults = read('data/presets/defaults.json');
-        var translations = generateTranslations(fields, presets, tstrings);
+        var translations = generateTranslations(fields, presets, tstrings, searchableFieldIDs);
         var taginfo = generateTaginfo(presets, fields);
+        var territoryLanguages = generateTerritoryLanguages();
 
         // Additional consistency checks
         validateCategoryPresets(categories, presets);
@@ -101,12 +121,20 @@ module.exports = function buildData() {
                 prettyStringify({ presets: presets }, { maxLength: 9999 })
             ),
             writeFileProm(
+                'data/presets/groups.json',
+                prettyStringify({ groups: groups }, { maxLength: 1000 })
+            ),
+            writeFileProm(
                 'data/presets.yaml',
                 translationsToYAML(translations)
             ),
             writeFileProm(
                 'data/taginfo.json',
                 prettyStringify(taginfo, { maxLength: 9999 })
+            ),
+            writeFileProm(
+                'data/territory-languages.json',
+                prettyStringify({ dataTerritoryLanguages: territoryLanguages }, { maxLength: 9999 })
             ),
             writeEnJson(tstrings),
             writeFaIcons(faIcons),
@@ -168,7 +196,7 @@ function generateCategories(tstrings, faIcons, tnpIcons) {
 }
 
 
-function generateFields(tstrings, faIcons, tnpIcons) {
+function generateFields(tstrings, faIcons, tnpIcons, searchableFieldIDs) {
     var fields = {};
     glob.sync(__dirname + '/data/presets/fields/**/*.json').forEach(function(file) {
         var field = read(file);
@@ -177,8 +205,13 @@ function generateFields(tstrings, faIcons, tnpIcons) {
         validate(file, field, fieldSchema);
 
         var t = tstrings.fields[id] = {
-            label: field.label
+            label: field.label,
+            terms: (field.terms || []).join(',')
         };
+
+        if (field.universal) {
+            searchableFieldIDs[id] = true;
+        }
 
         if (field.placeholder) {
             t.placeholder = field.placeholder;
@@ -202,6 +235,34 @@ function generateFields(tstrings, faIcons, tnpIcons) {
         }
     });
     return fields;
+}
+
+function generateGroups(tstrings) {
+    var groups = {};
+    glob.sync(__dirname + '/data/presets/groups/**/*.json').forEach(function(file) {
+        var group = read(file);
+        var id = stripLeadingUnderscores(file.match(/presets\/groups\/([^.]*)\.json/)[1]);
+        validate(file, group, groupSchema);
+
+        var t = {};
+        if (group.name) {
+            t.name = group.name;
+        }
+        if (group.description) {
+            t.description = group.description;
+        }
+        if (Object.keys(t).length > 0) {
+            tstrings.groups[id] = t;
+        }
+
+        if (group.note) {
+            // notes are only used for developer documentation
+            delete group.note;
+        }
+
+        groups[id] = group;
+    });
+    return groups;
 }
 
 
@@ -315,7 +376,7 @@ function stripLeadingUnderscores(str) {
 }
 
 
-function generatePresets(tstrings, faIcons, tnpIcons) {
+function generatePresets(tstrings, faIcons, tnpIcons, searchableFieldIDs) {
     var presets = {};
 
     glob.sync(__dirname + '/data/presets/presets/**/*.json').forEach(function(file) {
@@ -328,6 +389,12 @@ function generatePresets(tstrings, faIcons, tnpIcons) {
             name: preset.name,
             terms: (preset.terms || []).join(',')
         };
+
+        if (preset.moreFields) {
+            preset.moreFields.forEach(function(fieldID) {
+                searchableFieldIDs[fieldID] = true;
+            });
+        }
 
         presets[id] = preset;
 
@@ -346,7 +413,7 @@ function generatePresets(tstrings, faIcons, tnpIcons) {
 }
 
 
-function generateTranslations(fields, presets, tstrings) {
+function generateTranslations(fields, presets, tstrings, searchableFieldIDs) {
     var translations = JSON.parse(JSON.stringify(tstrings));  // deep clone
 
     Object.keys(translations.fields).forEach(function(id) {
@@ -373,6 +440,15 @@ function generateTranslations(fields, presets, tstrings) {
 
         if (f.placeholder) {
             field['placeholder#'] = id + ' field placeholder';
+        }
+
+        if (searchableFieldIDs[id]) {
+            if (f.terms && f.terms.length) {
+                field['terms#'] = 'terms: ' + f.terms.join();
+            }
+            field.terms = '[translate with synonyms or related terms for \'' + field.label + '\', separated by commas]';
+        } else {
+            delete field.terms;
         }
     });
 
@@ -562,6 +638,23 @@ function generateTaginfo(presets, fields) {
     }
 
     return taginfo;
+}
+
+function generateTerritoryLanguages() {
+    var allRawInfo = read('./node_modules/cldr-core/supplemental/territoryInfo.json').supplemental.territoryInfo;
+    var territoryLanguages = {};
+    Object.keys(allRawInfo).forEach(function(territoryCode) {
+        var territoryLangInfo = allRawInfo[territoryCode].languagePopulation;
+        if (!territoryLangInfo) return;
+        var langCodes = Object.keys(territoryLangInfo);
+        territoryLanguages[territoryCode.toLowerCase()] = langCodes.sort(function(langCode1, langCode2) {
+            return parseFloat(territoryLangInfo[langCode2]._populationPercent) -
+                   parseFloat(territoryLangInfo[langCode1]._populationPercent);
+        }).map(function(langCode) {
+            return langCode.replace('_', '-');
+        });
+    });
+    return territoryLanguages;
 }
 
 function validateCategoryPresets(categories, presets) {

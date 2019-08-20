@@ -1,0 +1,42 @@
+{
+    "matches": {
+        "anyTags": {
+            "leisure": "park"
+        }
+    },
+    "nearby": {
+        "anyTags": {
+            "amenity": {
+                "bbq": true,
+                "bench": true,
+                "drinking_water": true,
+                "fountain": true,
+                "toilets": true,
+                "waste_basket": true
+            },
+            "information": {
+                "board": true
+            },
+            "leisure": {
+                "playground": true,
+                "firepit": true,
+                "dog_park": true,
+                "picnic_table": true
+            },
+            "natural": {
+                "tree": true
+            },
+            "highway": {
+                "footway": true,
+                "path": true,
+                "service": true,
+                "street_lamp": true
+            },
+            "tourism": {
+                "information": true,
+                "picnic_site": true
+            }
+        },
+        "allowOtherTags": false
+    }
+}

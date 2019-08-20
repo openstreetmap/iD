@@ -2,6 +2,7 @@
     "icon": "maki-library",
     "fields": [
         "name",
+        "public_bookcase/type",
         "operator",
         "opening_hours",
         "capacity",
@@ -11,6 +12,7 @@
     "moreFields": [
         "wheelchair",
         "location",
+        "address",
         "access_simple", 
         "brand",
         "email",

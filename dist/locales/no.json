@@ -1517,12 +1517,6 @@
                         "undefined": "Nei"
                     }
                 },
-                "iata": {
-                    "label": "IATA"
-                },
-                "icao": {
-                    "label": "ICAO"
-                },
                 "incline": {
                     "label": "Stigning"
                 },

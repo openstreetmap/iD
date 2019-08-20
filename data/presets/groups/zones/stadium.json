@@ -1,0 +1,38 @@
+{
+    "matches": {
+        "anyTags": {
+            "leisure": "stadium"
+        }
+    },
+    "nearby": {
+        "anyTags": {
+            "amenity": {
+                "drinking_water": true,
+                "toilets": true
+            },
+            "building": {
+                "stadium": true
+            },
+            "emergency": {
+                "defibrillator": true,
+                "first_aid_kit": true
+            },
+            "highway": {
+                "footway": true,
+                "steps": true
+            },
+            "leisure": {
+                "bleachers": true,
+                "pitch": true,
+                "track": true
+            },
+            "shop": {
+                "ticket": true
+            },
+            "tourism": {
+                "information": true
+            }
+        },
+        "allowOtherTags": false
+    }
+}

@@ -1423,12 +1423,6 @@
                         "undefined": "Nē"
                     }
                 },
-                "iata": {
-                    "label": "IATA"
-                },
-                "icao": {
-                    "label": "ICAO"
-                },
                 "incline": {
                     "label": "Slīpums"
                 },
@@ -4624,10 +4618,6 @@
             "OSM-CU-telegram": {
                 "name": "OSM Kubas Telegram",
                 "description": "OpenStreetMap Kubas Telegram čats"
-            },
-            "OSM-NI-telegram": {
-                "name": "OSM Nikaragva Telegrammā",
-                "description": "OpenStreetMap Nikaragvas Telegram čats"
             },
             "Bay-Area-OpenStreetMappers": {
                 "name": "Līča rajona OpenStreetMappers",

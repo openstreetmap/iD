@@ -1,0 +1,46 @@
+{
+    "matches": {
+        "anyTags": {
+            "tourism": "zoo"
+        }
+    },
+    "nearby": {
+        "anyTags": {
+            "amenity": {
+                "bench": true,
+                "drinking_water": true,
+                "fast_food": true,
+                "fountain": true,
+                "toilets": true
+            },
+            "attraction": "animal",
+            "barrier": {
+                "fence": true,
+                "wall": true
+            },
+            "emergency": {
+                "defibrillator": true,
+                "first_aid_kit": true
+            },
+            "highway": {
+                "footway": true
+            },
+            "information": {
+                "board": true,
+                "map": true
+            },
+            "natural": {
+                "tree": true,
+                "water": true
+            },
+            "shop": {
+                "gift": true,
+                "ticket": true
+            },
+            "tourism": {
+                "information": true
+            }
+        },
+        "allowOtherTags": false
+    }
+}

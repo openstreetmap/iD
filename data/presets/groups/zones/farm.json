@@ -1,0 +1,36 @@
+{
+    "matches": {
+        "anyTags": {
+            "landuse": {
+                "farmland": true,
+                "orchard": true
+            }
+        }
+    },
+    "nearby": {
+        "anyTags": {
+            "building": {
+                "barn": true,
+                "farm": true,
+                "farm_auxiliary": true
+            },
+            "highway": {
+                "service": true,
+                "track": true
+            },
+            "landuse": {
+                "farmyard": true
+            },
+            "man_made": {
+                "beehive": true,
+                "silo": true
+            },
+            "shop": {
+                "farm": true
+            },
+            "water": {
+                "pond": true
+            }
+        }
+    }
+}

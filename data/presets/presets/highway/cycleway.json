@@ -1,5 +1,5 @@
 {
-    "icon": "maki-bicycle",
+    "icon": "fas-biking",
     "fields": [
         "name",
         "oneway",
@@ -15,7 +15,9 @@
         "lit",
         "maxspeed",
         "maxweight_bridge",
+        "not/name",
         "smoothness",
+        "stroller",
         "wheelchair"
     ],
     "geometry": [

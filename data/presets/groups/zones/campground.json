@@ -1,0 +1,37 @@
+{
+    "matches": {
+        "anyTags": {
+            "tourism": {
+                "camp_site": true,
+                "caravan_site": true
+            }
+        }
+    },
+    "nearby": {
+        "anyTags": {
+            "amenity": {
+                "bbq": true,
+                "bench": true,
+                "drinking_water": true,
+                "sanitary_dump_station": true,
+                "shower": true,
+                "toilets": true,
+                "water_point": true,
+                "waste_basket": true
+            },
+            "highway": {
+                "service": true,
+                "street_lamp": true
+            },
+            "leisure": {
+                "playground": true,
+                "firepit": true,
+                "picnic_table": true
+            },
+            "tourism": {
+                "camp_pitch": true
+            }
+        },
+        "allowOtherTags": false
+    }
+}

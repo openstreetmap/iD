@@ -1,9 +1,10 @@
 import { t } from '../util/locale';
 import { osmAreaKeys } from '../osm/tags';
+import { groupManager } from '../entities/group_manager';
 import { utilArrayUniq, utilObjectOmit } from '../util';
 
 
-export function presetPreset(id, preset, fields, visible, rawPresets) {
+export function presetPreset(id, preset, fields, addable, rawPresets) {
     preset = Object.assign({}, preset);   // shallow copy
 
     preset.id = id;
@@ -91,14 +92,14 @@ export function presetPreset(id, preset, fields, visible, rawPresets) {
 
     preset.fields = (preset.fields || []).map(getFields);
     preset.moreFields = (preset.moreFields || []).map(getFields);
-    preset.geometry = (preset.geometry || []);
-
-    visible = visible || false;
 
     function getFields(f) {
         return fields[f];
     }
 
+    preset.geometry = (preset.geometry || []);
+
+    addable = addable || false;
 
     preset.matchGeometry = function(geometry) {
         return preset.geometry.indexOf(geometry) >= 0;
@@ -165,10 +166,10 @@ export function presetPreset(id, preset, fields, visible, rawPresets) {
         return tagCount === 0 || (tagCount === 1 && preset.tags.hasOwnProperty('area'));
     };
 
-    preset.visible = function(val) {
-        if (!arguments.length) return visible;
-        visible = val;
-        return visible;
+    preset.addable = function(val) {
+        if (!arguments.length) return addable;
+        addable = val;
+        return addable;
     };
 
 
@@ -265,6 +266,75 @@ export function presetPreset(id, preset, fields, visible, rawPresets) {
         return tags;
     };
 
+
+    function loadGroups() {
+        if (preset.suggestion) return {};
+        var groupsByGeometry = {};
+        var tags = preset.tags;
+
+        var allGroups = groupManager.groupsArray();
+
+        preset.geometry.forEach(function(geom) {
+            allGroups.forEach(function(group) {
+                if (!group.matchesTags(tags, geom)) return;
+
+                var score = 1;
+                /*
+                for (var key in tags) {
+                    var subtags = {};
+                    subtags[key] = tags[key];
+                    if (!group.matchesTags(subtags, geom)) return;
+                    score += 0.15;
+                }
+                */
+                if (!groupsByGeometry[geom]) groupsByGeometry[geom] = [];
+                groupsByGeometry[geom].push({
+                    group: group,
+                    score: score
+                });
+                if (!group.scoredPresetsByGeometry[geom]) group.scoredPresetsByGeometry[geom] = [];
+                group.scoredPresetsByGeometry[geom].push({
+                    preset: preset,
+                    score: score
+                });
+            });
+        });
+        return groupsByGeometry;
+    }
+    if (!window.mocha) {
+        preset.groupsByGeometry = loadGroups();
+    }
+
+    // The geometry type to use when adding a new feature of this preset
+    preset.defaultAddGeometry = function(context, allowedGeometries) {
+        var geometry = preset.geometry.slice().filter(function(geom) {
+            if (allowedGeometries && allowedGeometries.indexOf(geom) === -1) return false;
+            if (context.features().isHiddenPreset(preset, geom)) return false;
+            return true;
+        });
+
+        var mostRecentAddGeom = context.storage('preset.' + preset.id + '.addGeom');
+        if (mostRecentAddGeom === 'vertex') mostRecentAddGeom = 'point';
+        if (mostRecentAddGeom && geometry.indexOf(mostRecentAddGeom) !== -1) {
+            return mostRecentAddGeom;
+        }
+        var vertexIndex = geometry.indexOf('vertex');
+        if (vertexIndex !== -1 && geometry.indexOf('point') !== -1) {
+            // both point and vertex allowed, just use point
+            geometry.splice(vertexIndex, 1);
+        }
+        if (geometry.length) {
+            return geometry[0];
+        }
+        return null;
+    };
+
+    preset.setMostRecentAddGeometry = function(context, geometry) {
+        if (preset.geometry.length > 1 &&
+            preset.geometry.indexOf(geometry) !== -1) {
+            context.storage('preset.' + preset.id + '.addGeom', geometry);
+        }
+    };
 
     return preset;
 }

@@ -49,8 +49,9 @@ export function uiPanelMeasurement(context) {
 
 
     function redraw(selection) {
+        var mode = context.mode();
         var resolver = context.graph();
-        var selectedNoteID = context.selectedNoteID();
+        var selectedNoteID = mode.selectedNoteID && mode.selectedNoteID();
         var osm = services.osm;
 
         var selected, center, entity, note, geometry;

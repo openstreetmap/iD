@@ -16,6 +16,7 @@
         "internet_access",
         "internet_access/fee",
         "internet_access/ssid",
+        "not/name",
         "operator",
         "phone",
         "smoking",

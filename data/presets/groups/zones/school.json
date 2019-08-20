@@ -1,0 +1,45 @@
+{
+    "matches": {
+        "anyTags": {
+            "amenity": "school"
+        }
+    },
+    "nearby": {
+        "anyTags": {
+            "amenity": {
+                "bench": true,
+                "waste_basket": true
+            },
+            "building": {
+                "school": true
+            },
+            "highway": {
+                "service": true,
+                "street_lamp": true
+            },
+            "leisure": {
+                "pitch": true,
+                "picnic_table": true,
+                "playground": true
+            },
+            "man_made": {
+                "flagpole": true
+            },
+            "natural": {
+                "tree": true
+            },
+            "sport": {
+                "american_football": true,
+                "baseball": true,
+                "basketball": true,
+                "cricket": true,
+                "field_hockey": true,
+                "running": true,
+                "soccer": true,
+                "softball": true,
+                "tennis": true
+            }
+        },
+        "allowOtherTags": false
+    }
+}

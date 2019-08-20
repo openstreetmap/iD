@@ -171,8 +171,8 @@ export function svgLines(projection, context) {
             markers = markers.enter()
                 .append('path')
                 .attr('class', pathclass)
-                .attr('marker-mid', marker)
                 .merge(markers)
+                .attr('marker-mid', marker)
                 .attr('d', function(d) { return d.d; });
 
             if (detected.ie) {

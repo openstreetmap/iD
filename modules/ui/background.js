@@ -135,6 +135,19 @@ export function uiBackground(context) {
             .classed('layer-custom', function(d) { return d.id === 'custom'; })
             .classed('best', function(d) { return d.best(); });
 
+        var label = enter
+            .append('label');
+
+        label
+            .append('input')
+            .attr('type', type)
+            .attr('name', 'layers')
+            .on('change', change);
+
+        label
+            .append('span')
+            .text(function(d) { return d.name(); });
+
         enter.filter(function(d) { return d.id === 'custom'; })
             .append('button')
             .attr('class', 'layer-browse')
@@ -155,23 +168,9 @@ export function uiBackground(context) {
             .append('span')
             .html('&#9733;');
 
-        var label = enter
-            .append('label');
-
-        label
-            .append('input')
-            .attr('type', type)
-            .attr('name', 'layers')
-            .on('change', change);
-
-        label
-            .append('span')
-            .text(function(d) { return d.name(); });
-
 
         layerList.selectAll('li')
-            .sort(sortSources)
-            .style('display', layerList.selectAll('li').data().length > 0 ? 'block' : 'none');
+            .sort(sortSources);
 
         layerList
             .call(updateLayerSelections);

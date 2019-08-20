@@ -9,7 +9,9 @@
     ],
     "moreFields": [
         "architect",
+        "building/levels/underground",
         "building/material",
+        "not/name",
         "layer",
         "operator",
         "roof/colour",

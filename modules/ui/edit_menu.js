@@ -94,6 +94,7 @@ export function uiEditMenu(context, operations) {
 
         buttonsEnter
             .append('use')
+            .attr('class', 'operation-icon')
             .attr('width', '20')
             .attr('height', '20')
             .attr('transform', function () { return 'translate(' + [2 * p, 5] + ')'; })

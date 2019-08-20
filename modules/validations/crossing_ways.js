@@ -404,7 +404,7 @@ export function validationCrossingWays(context) {
 
         var fixes = [];
         if (connectionTags) {
-            fixes.push(makeConnectWaysFix());
+            fixes.push(makeConnectWaysFix(connectionTags));
         }
 
         var useFixIcon = 'iD-icon-layers';
@@ -476,10 +476,16 @@ export function validationCrossingWays(context) {
         }
     }
 
-    function makeConnectWaysFix() {
+    function makeConnectWaysFix(connectionTags) {
+
+        var fixTitleID = 'connect_features';
+        if (connectionTags.ford) {
+            fixTitleID = 'connect_using_ford';
+        }
+
         return new validationIssueFix({
             icon: 'iD-icon-crossing',
-            title: t('issues.fix.connect_features.title'),
+            title: t('issues.fix.' + fixTitleID + '.title'),
             onClick: function(context) {
                 var loc = this.issue.loc;
                 var connectionTags = this.issue.data.connectionTags;

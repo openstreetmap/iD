@@ -1952,6 +1952,9 @@
                 "use_different_layers": {
                     "title": "Usa livelli differenti"
                 },
+                "use_different_layers_or_levels": {
+                    "title": "Usa differenti livelli o piani"
+                },
                 "use_different_levels": {
                     "title": "Usa livelli differenti"
                 },
@@ -2460,6 +2463,15 @@
                 "access_simple": {
                     "label": "Accesso consentito"
                 },
+                "addr/interpolation": {
+                    "label": "Tipo",
+                    "options": {
+                        "all": "Tutti",
+                        "alphabetic": "Alfabetico",
+                        "even": "Pari",
+                        "odd": "Dispari"
+                    }
+                },
                 "address": {
                     "label": "Indirizzo",
                     "placeholders": {
@@ -2649,6 +2661,10 @@
                 },
                 "building": {
                     "label": "Edificio"
+                },
+                "building/levels/underground": {
+                    "label": "Piani sotterranei",
+                    "placeholder": "2, 4, 6..."
                 },
                 "building/levels_building": {
                     "label": "Piani dell’edificio",
@@ -3168,10 +3184,10 @@
                     }
                 },
                 "iata": {
-                    "label": "IATA"
+                    "label": "Codice aeroportuale IATA"
                 },
                 "icao": {
-                    "label": "ICAO"
+                    "label": "Codice aeroportuale ICAO"
                 },
                 "incline": {
                     "label": "Pendenza"
@@ -3499,6 +3515,9 @@
                 "operator": {
                     "label": "Operatore"
                 },
+                "operator/type": {
+                    "label": "Tipo operatore"
+                },
                 "outdoor_seating": {
                     "label": "Seduta all'aperto"
                 },
@@ -3672,6 +3691,9 @@
                 },
                 "product": {
                     "label": "Prodotti"
+                },
+                "public_bookcase/type": {
+                    "label": "Tipo"
                 },
                 "railway": {
                     "label": "Tipo"
@@ -7402,7 +7424,7 @@
                 },
                 "place/village": {
                     "name": "Villaggio",
-                    "terms": "Frazione"
+                    "terms": "Paese,villaggio,frazione"
                 },
                 "playground": {
                     "name": "Giochi"
@@ -9742,10 +9764,6 @@
             "OSM-CU-telegram": {
                 "name": "OSM di Cuba su Telegram",
                 "description": "La chat su Telegram di OpenStreetMap di Cuba"
-            },
-            "OSM-NI-telegram": {
-                "name": "OSM Nicaragua su Telegram",
-                "description": "La chat su Telegram di OpenStreetMap del Nicaragua"
             },
             "Bay-Area-OpenStreetMappers": {
                 "name": "OpenStreetMappers a Bay Area",

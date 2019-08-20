@@ -1560,7 +1560,7 @@
                             "title": "Αντίθετη ποδηλατολωρίδα"
                         },
                         "share_busway": {
-                            "description": "Μία Ποδηλατολωρίδα που είναι και Λεωφορειολωρίδα",
+                            "description": "Ποδηλατολωρίδα και Λεωφορειολωρίδα μαζί",
                             "title": "Ποδηλατολωρίδα κοινόχρηστη με λεωφορείο"
                         },
                         "shared_lane": {
@@ -1912,12 +1912,6 @@
                         "stables": "Ναι",
                         "undefined": "Όχι"
                     }
-                },
-                "iata": {
-                    "label": "IATA"
-                },
-                "icao": {
-                    "label": "ICAO"
                 },
                 "incline": {
                     "label": "Κλίση"
@@ -3099,7 +3093,7 @@
                     "name": "Ανταλλακτήριο Συναλλάγματος"
                 },
                 "amenity/bus_station": {
-                    "name": "Τερματικός Σταθμός Λεωφορείων"
+                    "name": "Τερματικός Σταθμός Λεωφορείου"
                 },
                 "amenity/cafe": {
                     "name": "Καφετέρια",
@@ -4251,10 +4245,10 @@
                     "name": "Διαδρομή Ιππασίας"
                 },
                 "highway/bus_guideway": {
-                    "name": "Λεωφορειόδρομος"
+                    "name": "Κατευθυντήριος Λεωφορείου"
                 },
                 "highway/bus_stop": {
-                    "name": "Στάση Λεωφορείου δίπλα στη διαδρομή"
+                    "name": "Στάση Λεωφορείου"
                 },
                 "highway/construction": {
                     "name": "Κλειστός Δρόμος"
@@ -4428,7 +4422,7 @@
                     "terms": "Σύνδεσμος τριτεύουσας οδού"
                 },
                 "highway/track": {
-                    "name": "Ανώμαλη Δρόμος Μη Συντηρούμενος"
+                    "name": "Ανώμαλος Δρόμος μη Συντηρούμενος"
                 },
                 "highway/traffic_mirror": {
                     "name": "Οδικός Καθρέπτης"
@@ -4852,6 +4846,9 @@
                 "leisure/slipway": {
                     "name": "Γλίστρα",
                     "terms": "Γλίστρα, Νεωλκείο"
+                },
+                "leisure/slipway_point": {
+                    "name": "Γλίστρα"
                 },
                 "leisure/sports_centre": {
                     "name": "Αθλητικό Κέντρο/ Συγκρότημα",
@@ -5435,10 +5432,10 @@
                     "name": "Στάση / Αποβάθρα Αερομεταφοράς"
                 },
                 "public_transport/platform/bus": {
-                    "name": "Αποβάθρα Λεωφορείου δίπλα στη διαδρομή"
+                    "name": "Αποβάθρα Λεωφορείου"
                 },
                 "public_transport/platform/bus_point": {
-                    "name": "Στάση Λεωφορείου δίπλα στη διαδρομή"
+                    "name": "Στάση Λεωφορείου"
                 },
                 "public_transport/platform/ferry": {
                     "name": "Αποβάθρα Ferry Boat"
@@ -5465,10 +5462,10 @@
                     "name": "Στάση / Αποβάθρα Τραμ"
                 },
                 "public_transport/platform/trolleybus": {
-                    "name": "Αποβάθρα Τρόλεϊ δίπλα στη διαδρομή"
+                    "name": "Αποβάθρα Τρόλεϊ"
                 },
                 "public_transport/platform/trolleybus_point": {
-                    "name": "Στάση Τρόλεϊ δίπλα στη διαδρομή"
+                    "name": "Στάση Τρόλεϊ"
                 },
                 "public_transport/platform_point": {
                     "name": "Στάση / Αποβάθρα Διέλευσης"
@@ -5477,7 +5474,7 @@
                     "name": "Σταθμός Μετεπιβίβασης"
                 },
                 "public_transport/station_bus": {
-                    "name": "Σταθμός / Τέρμα Λεωφορείου δίπλα στη διαδρομή"
+                    "name": "Σταθμός / Τέρμα Λεωφορείου"
                 },
                 "public_transport/station_ferry": {
                     "name": "Πορθμείο Φέρι Μπωτ"
@@ -5498,7 +5495,7 @@
                     "name": "Σταθμός Τραμ"
                 },
                 "public_transport/station_trolleybus": {
-                    "name": "Σταθμός / Τέρμα Τρόλεϊ δίπλα στη διαδρομή"
+                    "name": "Σταθμός / Τέρμα Τρόλεϊ"
                 },
                 "public_transport/stop_area": {
                     "name": "Περιοχή Στάσης για Διέλευση"
@@ -5510,7 +5507,7 @@
                     "name": "Τοποθεσία Στάσης Αεροσκαφών"
                 },
                 "public_transport/stop_position_bus": {
-                    "name": "Τοποθεσία Στάσης Λεωφορείου πάνω στη διαδρομή"
+                    "name": "Χώρος Στάσης Λεωφορείου"
                 },
                 "public_transport/stop_position_ferry": {
                     "name": "Τοποθεσία Στάσης Ferry Boat"
@@ -5525,7 +5522,7 @@
                     "name": "Τοποθεσία Στάσης Τραμ πάνω στις ράγες"
                 },
                 "public_transport/stop_position_trolleybus": {
-                    "name": "Τοποθεσία Στάσης Τρόλεϊ πάνω στη διαδρομή"
+                    "name": "Χώρος Στάσης Τρόλεϊ"
                 },
                 "railway": {
                     "name": "Σιδηροδρομικός Διάδρομος"
@@ -6286,7 +6283,7 @@
                     "terms": "Διαδρομή ποδηλάτου, Ποδηλατόδρομος"
                 },
                 "type/route/bus": {
-                    "name": "Διαδρομή Λεωφορείων",
+                    "name": "Δρομολόγιο Λεωφορείου",
                     "terms": "Διαδρομή Λεωφορείου"
                 },
                 "type/route/detour": {

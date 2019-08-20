@@ -189,12 +189,17 @@ export function validationDisconnectedWay() {
     function continueDrawing(way, vertex, context) {
         // make sure the vertex is actually visible and editable
         var map = context.map();
-        if (!map.editable() || !map.trimmedExtent().contains(vertex.loc)) {
+        if (!context.editable() || !map.trimmedExtent().contains(vertex.loc)) {
             map.zoomToEase(vertex);
         }
 
         context.enter(
-            modeDrawLine(context, way.id, context.graph(), context.graph(), 'line', way.affix(vertex.id), true)
+            modeDrawLine(context, {
+                wayID: way.id,
+                startGraph: context.graph(),
+                baselineGraph: context.graph(),
+                affix: way.affix(vertex.id)
+            })
         );
     }
 

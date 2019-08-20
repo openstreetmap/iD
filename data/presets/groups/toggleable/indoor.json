@@ -1,0 +1,13 @@
+{
+    "name": "Indoor Features",
+    "description": "Rooms, Corridors, Stairwells, etc.",
+    "toggleable": true,
+    "matches": {
+        "allTags": {
+            "indoor": {
+                "*": true,
+                "no": false
+            }
+        }
+    }
+}

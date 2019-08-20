@@ -3,6 +3,11 @@
 [![Build Status](https://travis-ci.org/openstreetmap/iD.svg?branch=master)](https://travis-ci.org/openstreetmap/iD)
 [![Greenkeeper badge](https://badges.greenkeeper.io/openstreetmap/iD.svg)](https://greenkeeper.io/)
 
+:warning: _The [`master`](https://github.com/openstreetmap/iD/tree/master) branch
+is undergoing significant breaking changes for v3 over the next few months.
+[`2.15`](https://github.com/openstreetmap/iD/tree/2.15) is considerably
+more stable and is currently the recommended branch for downstream development._
+
 ## Basics
 
 * iD is a JavaScript [OpenStreetMap](https://www.openstreetmap.org/) editor.
@@ -33,7 +38,7 @@ Come on in, the water's lovely. More help? Ping `bhousel` or `quincylvania` on:
 
 ## Prerequisites
 
-* [Node.js](https://nodejs.org/) version 6 or newer
+* [Node.js](https://nodejs.org/) version 8 or newer
 * [`git`](https://www.atlassian.com/git/tutorials/install-git/) for your platform
   * Note for Windows users:
     * Edit `$HOME\.gitconfig`:<br/>
