@@ -1,13 +1,13 @@
 {
     "fields": [
-        "design",
         "ref",
-        "material",
         "operator",
-        "manufacturer"
+        "design",
+        "material",
+        "line_attachment"
     ],
     "moreFields": [
-        "line_attachment"
+        "manufacturer"
     ],
     "geometry": [
         "point",

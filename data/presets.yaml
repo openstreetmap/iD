@@ -1153,7 +1153,6 @@ en:
       line_attachment:
         # line_attachment=*
         label: Line Attachment
-        terms: '[translate with synonyms or related terms for ''Line Attachment'', separated by commas]'
       lit:
         # lit=*
         label: Lit
