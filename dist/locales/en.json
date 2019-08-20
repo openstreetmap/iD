@@ -5492,6 +5492,10 @@
                     "name": "Mailbox",
                     "terms": "letter drop,mail box,package drop,post box,postal box"
                 },
+                "amenity/post_depot": {
+                    "name": "Post Sorting Office",
+                    "terms": "mail processing and distribution center,post depot"
+                },
                 "amenity/post_office": {
                     "name": "Post Office",
                     "terms": "letter,mail"
