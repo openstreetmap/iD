@@ -3234,6 +3234,11 @@ en:
       amenity/recycling:
         # amenity=recycling
         name: Recycling
+      amenity/recycling/container/electrical_items:
+        # 'amenity=recycling, recycling_type=container, recycling:electrical_items=yes'
+        name: E-Waste Container
+        # 'terms: computers,electronic waste,electronics recycling,ewaste bin,phones,tablets'
+        terms: '<translate with synonyms or related terms for ''E-Waste Container'', separated by commas>'
       amenity/recycling/container/green_waste:
         # 'amenity=recycling, recycling_type=container, recycling:green_waste=yes'
         name: Green Waste Container

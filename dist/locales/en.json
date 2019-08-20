@@ -5532,6 +5532,10 @@
                     "name": "Recycling Container",
                     "terms": "bin,can,bottle,glass,garbage,rubbish,scrap,trash"
                 },
+                "amenity/recycling/container/electrical_items": {
+                    "name": "E-Waste Container",
+                    "terms": "computers,electronic waste,electronics recycling,ewaste bin,phones,tablets"
+                },
                 "amenity/recycling/container/green_waste": {
                     "name": "Green Waste Container",
                     "terms": "biodegradable,biological,compost,decomposable,garbage bin,garden waste,organic,rubbish,food scrap"
