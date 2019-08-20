@@ -473,6 +473,9 @@ en:
       crossing:
         # crossing=*
         label: Type
+      crossing/island:
+        # 'crossing:island=*'
+        label: Refuge Island
       cuisine:
         # cuisine=*
         label: Cuisines

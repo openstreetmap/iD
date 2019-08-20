@@ -3,7 +3,8 @@
         "crossing",
         "access",
         "surface",
-        "tactile_paving"
+        "tactile_paving",
+        "crossing/island"
     ],
     "geometry": [
         "line"

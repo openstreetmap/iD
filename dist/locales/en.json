@@ -2874,6 +2874,10 @@
                     "label": "Type",
                     "terms": ""
                 },
+                "crossing/island": {
+                    "label": "Refuge Island",
+                    "terms": ""
+                },
                 "cuisine": {
                     "label": "Cuisines",
                     "terms": ""
