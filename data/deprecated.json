@@ -898,6 +898,14 @@
       "replace": {"power": "tower"}
     },
     {
+      "old": {"tower:type": "anchor"},
+      "replace": {"line_attachment": "anchor"}
+    },
+    {
+      "old": {"tower:type": "suspension"},
+      "replace": {"line_attachment": "suspension"}
+    },
+    {
       "old": {"type": "broad_leaved"},
       "replace": {"leaf_type": "broadleaved"}
     },
