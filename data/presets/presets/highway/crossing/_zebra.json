@@ -2,7 +2,8 @@
     "icon": "temaki-pedestrian",
     "fields": [
         "crossing",
-        "tactile_paving"
+        "tactile_paving",
+        "crossing/island"
     ],
     "geometry": [
         "vertex"

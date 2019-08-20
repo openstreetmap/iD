@@ -237,6 +237,10 @@
       "replace": {"craft": "sculptor"}
     },
     {
+      "old": {"crossing": "island"},
+      "replace": {"crossing:island": "yes"}
+    },
+    {
       "old": {"crossing": "zebra"},
       "replace": {"crossing": "marked"}
     },
