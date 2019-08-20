@@ -1,0 +1,29 @@
+{
+    "icon": "fas-mail-bulk",
+    "fields": [
+        "name",
+        "operator",
+        "address",
+        "building_area",
+        "phone"
+    ],
+    "moreFields": [
+        "email",
+        "fax",
+        "opening_hours",
+        "website",
+        "wheelchair"
+    ],
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "terms": [
+        "mail processing and distribution center",
+        "post depot"
+    ],
+    "tags": {
+        "amenity": "post_depot"
+    },
+    "name": "Post Sorting Office"
+}

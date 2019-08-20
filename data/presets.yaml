@@ -1150,6 +1150,10 @@ en:
       liaison:
         # liaison=*
         label: Type
+      line_attachment:
+        # line_attachment=*
+        label: Line Attachment
+        terms: '[translate with synonyms or related terms for ''Line Attachment'', separated by commas]'
       lit:
         # lit=*
         label: Lit
@@ -3232,6 +3236,11 @@ en:
         name: Mailbox
         # 'terms: letter drop,mail box,package drop,post box,postal box'
         terms: '<translate with synonyms or related terms for ''Mailbox'', separated by commas>'
+      amenity/post_depot:
+        # amenity=post_depot
+        name: Post Sorting Office
+        # 'terms: mail processing and distribution center,post depot'
+        terms: '<translate with synonyms or related terms for ''Post Sorting Office'', separated by commas>'
       amenity/post_office:
         # amenity=post_office
         name: Post Office

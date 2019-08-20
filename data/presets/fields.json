@@ -208,6 +208,7 @@
     "level": {"key": "level", "type": "combo", "label": "Level", "universal": true, "terms": ["building floor", "deck", "storey", "story"]},
     "levels": {"key": "building:levels", "type": "number", "minValue": 0, "label": "Levels", "placeholder": "2, 4, 6..."},
     "liaison": {"key": "liaison", "type": "combo", "label": "Type"},
+    "line_attachment": {"key": "line_attachment", "type": "combo", "label": "Line Attachment"},
     "lit": {"key": "lit", "type": "check", "label": "Lit", "terms": ["lamp", "lighting"]},
     "location_pool": {"key": "location", "type": "typeCombo", "label": "Location", "strings": {"options": {"outdoor": "Outdoor", "indoor": "Indoor", "roof": "Rooftop"}}},
     "location": {"key": "location", "type": "combo", "label": "Location"},

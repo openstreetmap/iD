@@ -3655,6 +3655,10 @@
                     "label": "Type",
                     "terms": ""
                 },
+                "line_attachment": {
+                    "label": "Line Attachment",
+                    "terms": ""
+                },
                 "lit": {
                     "label": "Lit",
                     "terms": "lamp,lighting"
@@ -5591,6 +5595,10 @@
                 "amenity/post_box": {
                     "name": "Mailbox",
                     "terms": "letter drop,mail box,package drop,post box,postal box"
+                },
+                "amenity/post_depot": {
+                    "name": "Post Sorting Office",
+                    "terms": "mail processing and distribution center,post depot"
                 },
                 "amenity/post_office": {
                     "name": "Post Office",

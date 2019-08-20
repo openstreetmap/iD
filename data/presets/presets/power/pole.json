@@ -5,6 +5,9 @@
         "operator",
         "manufacturer"
     ],
+    "moreFields": [
+        "line_attachment"
+    ],
     "geometry": [
         "point",
         "vertex"
