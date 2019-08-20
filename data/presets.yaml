@@ -3234,6 +3234,11 @@ en:
       amenity/recycling:
         # amenity=recycling
         name: Recycling
+      amenity/recycling/container/green_waste:
+        # 'amenity=recycling, recycling_type=container, recycling:green_waste=yes'
+        name: Green Waste Container
+        # 'terms: biodegradable,biological,compost,decomposable,garbage bin,garden waste,organic,rubbish,food scrap'
+        terms: '<translate with synonyms or related terms for ''Green Waste Container'', separated by commas>'
       amenity/recycling_centre:
         # 'amenity=recycling, recycling_type=centre'
         name: Recycling Center

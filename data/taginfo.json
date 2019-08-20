@@ -180,6 +180,7 @@
     {"key": "amenity", "value": "ranger_station", "description": "🄿 Ranger Station", "object_types": ["node", "area"], "icon_url": "https://cdn.jsdelivr.net/gh/mapbox/maki/icons/ranger-station-15.svg"},
     {"key": "recycling_type", "value": "centre", "description": "🄿 Recycling Center, 🄵 Type", "object_types": ["node", "area"], "icon_url": "https://cdn.jsdelivr.net/gh/mapbox/maki/icons/recycling-15.svg"},
     {"key": "recycling_type", "value": "container", "description": "🄿 Recycling Container, 🄵 Type", "object_types": ["node", "area"], "icon_url": "https://cdn.jsdelivr.net/gh/mapbox/maki/icons/recycling-15.svg"},
+    {"key": "recycling:green_waste", "value": "yes", "description": "🄿 Green Waste Container", "object_types": ["node", "area"], "icon_url": "https://cdn.jsdelivr.net/gh/mapbox/maki/icons/recycling-15.svg"},
     {"key": "amenity", "value": "restaurant", "description": "🄿 Restaurant", "object_types": ["node", "area"], "icon_url": "https://cdn.jsdelivr.net/gh/mapbox/maki/icons/restaurant-15.svg"},
     {"key": "cuisine", "value": "american", "description": "🄿 American Restaurant", "object_types": ["node", "area"], "icon_url": "https://cdn.jsdelivr.net/gh/mapbox/maki/icons/restaurant-15.svg"},
     {"key": "cuisine", "value": "asian", "description": "🄿 Asian Restaurant", "object_types": ["node", "area"], "icon_url": "https://cdn.jsdelivr.net/gh/mapbox/maki/icons/restaurant-noodle-15.svg"},
