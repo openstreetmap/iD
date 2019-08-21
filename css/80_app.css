@@ -5691,3 +5691,9 @@ li.hide + li.version .badge .tooltip .tooltip-arrow {
     width: 100px;
     color: #7092ff;
 }
+
+
+.list-item-photos.list-item-mapillary-map-features .request-data-link {
+    float: right;
+    margin-top: -20px;
+}
