@@ -2205,6 +2205,7 @@ en:
       tactile_paving:
         # tactile_paving=*
         label: Tactile Paving
+        terms: '[translate with synonyms or related terms for ''Tactile Paving'', separated by commas]'
       takeaway:
         # takeaway=*
         label: Takeaway
@@ -7687,7 +7688,7 @@ en:
         name: Wine Shop
         terms: '<translate with synonyms or related terms for ''Wine Shop'', separated by commas>'
       tactile_paving:
-        # tactile_paving=*
+        # tactile_paving=yes
         name: Tactile Paving
         # 'terms: blind path,detectable warning surfaces,tactile ground surface indicators,tactile walking surface indicators,truncated domes,visually impaired path'
         terms: '<translate with synonyms or related terms for ''Tactile Paving'', separated by commas>'
