@@ -509,14 +509,15 @@ export function uiPresetBrowser(context, allowedGeometry, onChoose, onCancel) {
 
         row.each(function(d) {
             var geometry = d.preset.geometry[0];
-            if (d.preset.geometry.length !== 1 ||
+            if (d.subitems ||
+                d.preset.geometry.length !== 1 ||
                 (geometry !== 'area' && geometry !== 'line' && geometry !== 'vertex')) {
                 geometry = null;
             }
             d3_select(this).call(
                 uiPresetIcon(context)
                     .geometry(geometry)
-                    .preset(d.preset || d.presets[0])
+                    .preset(d.preset)
                     .sizeClass('small')
             );
         });
