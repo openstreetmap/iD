@@ -1349,6 +1349,11 @@
         "mapillary_images": {
             "tooltip": "Street-level photos from Mapillary"
         },
+        "mapillary_map_features": {
+            "title": "Map Features",
+            "tooltip": "Map features from Mapillary",
+            "request_data": "Request Data"
+        },
         "mapillary": {
             "title": "Mapillary",
             "signs": {
@@ -9837,44 +9842,53 @@
         "imagery": {
             "AGIV": {
                 "attribution": {
-                    "text": "© agentschap Informatie Vlaanderen"
+                    "text": "Orthophoto Flanders most recent © AGIV"
                 },
-                "name": "AIV Flanders most recent aerial imagery"
+                "name": "AGIV Flanders most recent aerial imagery"
             },
             "AGIV10cm": {
                 "attribution": {
-                    "text": "© agentschap Informatie Vlaanderen"
+                    "text": "Orthophoto Flanders © AGIV"
                 },
-                "name": "AIV Flanders 2013-2015 aerial imagery 10cm"
+                "name": "AGIV Flanders 2013-2015 aerial imagery 10cm"
             },
             "AGIVFlandersGRB": {
                 "attribution": {
-                    "text": "© agentschap Informatie Vlaanderen"
+                    "text": "GRB Flanders © AGIV"
                 },
-                "name": "AIV Flanders GRB"
-            },
-            "AIV_DHMV_II_HILL_25cm": {
-                "attribution": {
-                    "text": "© agentschap Informatie Vlaanderen"
-                },
-                "name": "AIV Digitaal Hoogtemodel Vlaanderen II, multidirectionale hillshade 0,25 m"
-            },
-            "AIV_DHMV_II_SVF_25cm": {
-                "attribution": {
-                    "text": "© agentschap Informatie Vlaanderen"
-                },
-                "name": "AIV Digitaal Hoogtemodel Vlaanderen II, Skyview factor 0,25 m"
+                "name": "AGIV Flanders GRB"
             },
             "Bing": {
                 "description": "Satellite and aerial imagery.",
                 "name": "Bing aerial imagery"
             },
-            "EOXAT2018CLOUDLESS": {
+            "DigitalGlobe-Premium": {
                 "attribution": {
-                    "text": "Sentinel-2 cloudless - https://s2maps.eu by EOX IT Services GmbH (Contains modified Copernicus Sentinel data 2017 & 2018)"
+                    "text": "Terms & Feedback"
                 },
-                "description": "Post-processed Sentinel Satellite imagery.",
-                "name": "eox.at 2018 cloudless"
+                "description": "DigitalGlobe-Premium is a mosaic composed of DigitalGlobe basemap with select regions filled with +Vivid or custom area of interest imagery, 50cm resolution or better, and refreshed more frequently with ongoing updates.",
+                "name": "DigitalGlobe Premium Imagery"
+            },
+            "DigitalGlobe-Premium-vintage": {
+                "attribution": {
+                    "text": "Terms & Feedback"
+                },
+                "description": "Imagery boundaries and capture dates. Labels appear at zoom level 13 and higher.",
+                "name": "DigitalGlobe Premium Imagery Vintage"
+            },
+            "DigitalGlobe-Standard": {
+                "attribution": {
+                    "text": "Terms & Feedback"
+                },
+                "description": "DigitalGlobe-Standard is a curated set of imagery covering 86% of the earth’s landmass, with 30-60cm resolution where available, backfilled by Landsat. Average age is 2.31 years, with some areas updated 2x per year.",
+                "name": "DigitalGlobe Standard Imagery"
+            },
+            "DigitalGlobe-Standard-vintage": {
+                "attribution": {
+                    "text": "Terms & Feedback"
+                },
+                "description": "Imagery boundaries and capture dates. Labels appear at zoom level 13 and higher.",
+                "name": "DigitalGlobe Standard Imagery Vintage"
             },
             "EsriWorldImagery": {
                 "attribution": {
@@ -9903,20 +9917,6 @@
                 },
                 "description": "Satellite and aerial imagery.",
                 "name": "Mapbox Satellite"
-            },
-            "Maxar-Premium": {
-                "attribution": {
-                    "text": "Terms & Feedback"
-                },
-                "description": "Maxar Premium is a mosaic composed of Maxar basemap with select regions filled with +Vivid or custom area of interest imagery, 50cm resolution or better, and refreshed more frequently with ongoing updates.",
-                "name": "Maxar Premium Imagery (Beta)"
-            },
-            "Maxar-Standard": {
-                "attribution": {
-                    "text": "Terms & Feedback"
-                },
-                "description": "Maxar Standard is a curated set of imagery covering 86% of the earth’s landmass, with 30-60cm resolution where available, backfilled by Landsat. Average age is 2.31 years, with some areas updated 2x per year.",
-                "name": "Maxar Standard Imagery (Beta)"
             },
             "OSM_Inspector-Addresses": {
                 "attribution": {
@@ -9966,6 +9966,9 @@
             "SPW_PICC": {
                 "name": "SPW(allonie) PICC numerical imagery"
             },
+            "US-TIGER-Roads-2012": {
+                "name": "TIGER Roads 2012"
+            },
             "US-TIGER-Roads-2014": {
                 "description": "At zoom level 16+, public domain map data from the US Census. At lower zooms, only changes since 2006 minus changes already incorporated into OpenStreetMap",
                 "name": "TIGER Roads 2014"
@@ -9973,14 +9976,6 @@
             "US-TIGER-Roads-2017": {
                 "description": "Yellow = Public domain map data from the US Census. Red = Data not found in OpenStreetMap",
                 "name": "TIGER Roads 2017"
-            },
-            "US-TIGER-Roads-2018": {
-                "description": "Yellow = Public domain map data from the US Census. Red = Data not found in OpenStreetMap",
-                "name": "TIGER Roads 2018"
-            },
-            "USDA-NAIP": {
-                "description": "The most recent year of DOQQs from the National Agriculture Imagery Program (NAIP) for each state in the contiguous United States.",
-                "name": "National Agriculture Imagery Program"
             },
             "US_Forest_Service_roads_overlay": {
                 "description": "Highway: Green casing = unclassified. Brown casing = track. Surface: gravel = light brown fill, Asphalt = black, paved = gray, ground =white, concrete = blue, grass = green. Seasonal = white bars",
@@ -9997,12 +9992,6 @@
                     "text": "Realized by means of Brussels UrbIS®© - Distribution & Copyright CIRB"
                 },
                 "name": "UrbIS-Ortho 2017"
-            },
-            "UrbISOrtho2018": {
-                "attribution": {
-                    "text": "Realized by means of Brussels UrbIS®© - Distribution & Copyright CIRB"
-                },
-                "name": "UrbIS-Ortho 2018"
             },
             "UrbisAdmFR": {
                 "attribution": {
@@ -10060,131 +10049,11 @@
                 "description": "Orthofoto layer provided by basemap.at. \"Successor\" of geoimage.at imagery.",
                 "name": "basemap.at Orthofoto"
             },
-            "basemap.at-overlay": {
+            "hike_n_bike": {
                 "attribution": {
-                    "text": "basemap.at"
+                    "text": "© OpenStreetMap contributors"
                 },
-                "description": "Annotation overlay provided by basemap.at.",
-                "name": "basemap.at Overlay"
-            },
-            "basemap.at-surface": {
-                "attribution": {
-                    "text": "basemap.at"
-                },
-                "description": "Surface layer provided by basemap.at.",
-                "name": "basemap.at Surface"
-            },
-            "basemap.at-terrain": {
-                "attribution": {
-                    "text": "basemap.at"
-                },
-                "description": "Terrain layer provided by basemap.at.",
-                "name": "basemap.at Terrain"
-            },
-            "eufar-balaton": {
-                "attribution": {
-                    "text": "EUFAR Balaton ortofotó 2010"
-                },
-                "description": "1940 geo-tagged photography from Balaton Limnological Institute.",
-                "name": "EUFAR Balaton orthophotos"
-            },
-            "finds.jp_KBN_2500": {
-                "attribution": {
-                    "text": "GSI KIBAN 2500"
-                },
-                "description": "GSI Kiban 2500 via finds.jp. Good for tracing, but a bit older.",
-                "name": "Japan GSI KIBAN 2500"
-            },
-            "gsi.go.jp": {
-                "attribution": {
-                    "text": "GSI Japan"
-                },
-                "description": "Japan GSI ortho Imagery. Usually better than bing, but a bit older.",
-                "name": "Japan GSI ortho Imagery"
-            },
-            "gsi.go.jp_airphoto": {
-                "attribution": {
-                    "text": "GSI Japan"
-                },
-                "description": "Japan GSI airphoto Imagery. Not fully orthorectified, but a bit newer and/or differently covered than GSI ortho Imagery.",
-                "name": "Japan GSI airphoto Imagery"
-            },
-            "gsi.go.jp_seamlessphoto": {
-                "attribution": {
-                    "text": "GSI Japan seamless photo"
-                },
-                "description": "Japan GSI seamlessphoto Imagery. The collection of latest imageries of GSI ortho, airphoto, post disaster and others.",
-                "name": "Japan GSI seamlessphoto Imagery"
-            },
-            "gsi.go.jp_std_map": {
-                "attribution": {
-                    "text": "GSI Japan"
-                },
-                "description": "Japan GSI Standard Map. Widely covered.",
-                "name": "Japan GSI Standard Map"
-            },
-            "helsingborg-orto": {
-                "attribution": {
-                    "text": "© Helsingborg municipality"
-                },
-                "description": "Orthophotos from the municipality of Helsingborg 2016, public domain",
-                "name": "Helsingborg Orthophoto"
-            },
-            "kalmar-orto-2014": {
-                "attribution": {
-                    "text": "© Kalmar municipality"
-                },
-                "description": "Orthophotos for the north coast of the municipality of Kalmar 2014",
-                "name": "Kalmar North Orthophoto 2014"
-            },
-            "kalmar-orto-2016": {
-                "attribution": {
-                    "text": "© Kalmar municipality"
-                },
-                "description": "Orthophotos for the south coast of the municipality of Kalmar 2016",
-                "name": "Kalmar South Orthophoto 2016"
-            },
-            "kalmar-orto-2018": {
-                "attribution": {
-                    "text": "© Kalmar municipality"
-                },
-                "description": "Orthophotos for urban areas of the municipality of Kalmar 2018",
-                "name": "Kalmar Urban Orthophoto 2018"
-            },
-            "kelkkareitit": {
-                "attribution": {
-                    "text": "© Kelkkareitit.fi"
-                },
-                "description": "Kelkkareitit.fi snowmobile trails from OSM (Nordic coverage)",
-                "name": "Nordic snowmobile overlay"
-            },
-            "lantmateriet-orto1960": {
-                "attribution": {
-                    "text": "© Lantmäteriet, CC0"
-                },
-                "description": "Mosaic of Swedish orthophotos from the period 1955–1965. Older and younger pictures may occur.",
-                "name": "Lantmäteriet Historic Orthophoto 1960"
-            },
-            "lantmateriet-orto1975": {
-                "attribution": {
-                    "text": "© Lantmäteriet, CC0"
-                },
-                "description": "Mosaic of Swedish orthophotos from the period 1970–1980. Is under construction.",
-                "name": "Lantmäteriet Historic Orthophoto 1975"
-            },
-            "lantmateriet-topowebb": {
-                "attribution": {
-                    "text": "© Lantmäteriet, CC0"
-                },
-                "description": "Topographic map of Sweden 1:50 000",
-                "name": "Lantmäteriet Topographic Map"
-            },
-            "linkoping-orto": {
-                "attribution": {
-                    "text": "© Linköping municipality"
-                },
-                "description": "Orthophotos from the municipality of Linköping 2010, open data",
-                "name": "Linköping Orthophoto"
+                "name": "Hike & Bike"
             },
             "mapbox_locator_overlay": {
                 "attribution": {
@@ -10222,8 +10091,8 @@
                 "attribution": {
                     "text": "© Lantmäteriet"
                 },
-                "description": "Scan of \"Economic maps\" ca. 1950–1980",
-                "name": "Lantmäteriet Economic Map 1950–1980"
+                "description": "Scan of ´Economic maps´ ca 1950-1980",
+                "name": "Lantmäteriet Economic Map (historic)"
             },
             "qa_no_address": {
                 "attribution": {
@@ -10237,25 +10106,11 @@
                 },
                 "name": "skobbler"
             },
-            "skoterleder": {
-                "attribution": {
-                    "text": "© Skoterleder.org"
-                },
-                "description": "Snowmobile trails",
-                "name": "Snowmobile map Sweden"
-            },
             "stamen-terrain-background": {
                 "attribution": {
                     "text": "Map tiles by Stamen Design, under CC BY 3.0. Data by OpenStreetMap, under ODbL"
                 },
                 "name": "Stamen Terrain"
-            },
-            "stockholm-orto": {
-                "attribution": {
-                    "text": "© Stockholm municipality, CC0"
-                },
-                "description": "Orthophotos from the municipality of Stockholm 2016, CC0 license",
-                "name": "Stockholm Orthophoto"
             },
             "tf-cycle": {
                 "attribution": {
