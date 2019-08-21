@@ -48,6 +48,16 @@
                 },
                 "key": "S"
             },
+            "support": {
+                "title": "Support",
+                "pole": {
+                    "title": "Pole"
+                },
+                "tower": {
+                    "title": "Tower"
+                },
+                "key": "S"
+            },
             "toolbox": {
                 "title": "Tools",
                 "tooltip": "Customize the toolbar."
