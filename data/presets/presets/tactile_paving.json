@@ -11,7 +11,7 @@
         "area"
     ],
     "tags": {
-        "tactile_paving": "*"
+        "tactile_paving": "yes"
     },
     "matchScore": 0.25,
     "terms": [
