@@ -89,7 +89,6 @@ export function uiToolSave(context) {
             .enter()
             .append('button')
             .attr('class', 'save disabled bar-button')
-            .attr('tabindex', -1)
             .on('click', save)
             .call(tooltipBehavior);
 
@@ -99,6 +98,7 @@ export function uiToolSave(context) {
         buttonEnter
             .append('span')
             .attr('class', 'count')
+            .attr('aria-hidden', 'true')
             .text('0');
 
         button = buttonEnter.merge(button);

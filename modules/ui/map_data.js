@@ -797,7 +797,6 @@ export function uiMapData(context) {
 
         _toggleButton = selection
             .append('button')
-            .attr('tabindex', -1)
             .on('click', uiMapData.togglePane)
             .call(svgIcon('#iD-icon-data', 'light'))
             .call(paneTooltip);

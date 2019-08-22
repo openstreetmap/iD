@@ -43,7 +43,6 @@ export function uiSourceSwitch(context) {
             .attr('href', '#')
             .text(t('source_switch.live'))
             .classed('live', true)
-            .attr('tabindex', -1)
             .on('click', click);
     };
 
