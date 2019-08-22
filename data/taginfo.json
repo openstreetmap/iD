@@ -858,7 +858,7 @@
     {"key": "generator:source", "value": "hydro", "description": "🄿 Water Turbine", "object_types": ["node", "area"], "icon_url": "https://cdn.jsdelivr.net/gh/bhousel/temaki/icons/power.svg"},
     {"key": "generator:method", "value": "fission", "description": "🄿 Nuclear Reactor", "object_types": ["node", "area"], "icon_url": "https://cdn.jsdelivr.net/gh/bhousel/temaki/icons/radiation.svg"},
     {"key": "generator:method", "value": "wind_turbine", "description": "🄿 Wind Turbine", "object_types": ["node", "area"], "icon_url": "https://cdn.jsdelivr.net/gh/bhousel/temaki/icons/wind_turbine.svg"},
-    {"key": "power", "value": "line", "description": "🄿 Power Line", "object_types": ["way"], "icon_url": "https://cdn.jsdelivr.net/gh/openstreetmap/iD/svg/iD-sprite/presets/power-line.svg"},
+    {"key": "power", "value": "line", "description": "🄿 Power Line", "object_types": ["way"], "icon_url": "https://cdn.jsdelivr.net/gh/bhousel/temaki/icons/power_tower.svg"},
     {"key": "power", "value": "minor_line", "description": "🄿 Minor Power Line", "object_types": ["way"], "icon_url": "https://cdn.jsdelivr.net/gh/openstreetmap/iD/svg/iD-sprite/presets/power-line.svg"},
     {"key": "power", "value": "plant", "description": "🄿 Power Station Grounds", "object_types": ["area"], "icon_url": "https://cdn.jsdelivr.net/gh/mapbox/maki/icons/industry-15.svg"},
     {"key": "power", "value": "pole", "description": "🄿 Power Pole", "object_types": ["node"], "icon_url": "https://cdn.jsdelivr.net/gh/bhousel/temaki/icons/utility_pole.svg"},
