@@ -859,9 +859,6 @@ export function uiAssistant(context) {
                 .append('div')
                 .attr('class', 'body-text');
 
-            var mainFooter = selection.append('div')
-                .attr('class', 'main-footer');
-
             bodyTextArea.html(
                 '<b>' + t('assistant.commit.success.just_improved', { location: currLocation }) + '</b>' +
                 '<br/>'
