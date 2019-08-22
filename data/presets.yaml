@@ -5782,6 +5782,10 @@ en:
         name: Monitoring Station
         # 'terms: weather,earthquake,seismology,air,gps'
         terms: '<translate with synonyms or related terms for ''Monitoring Station'', separated by commas>'
+      man_made/obelisk:
+        # man_made=obelisk
+        name: Obelisk
+        terms: '<translate with synonyms or related terms for ''Obelisk'', separated by commas>'
       man_made/observatory:
         # man_made=observatory
         name: Observatory
@@ -7687,11 +7691,6 @@ en:
         # shop=wine
         name: Wine Shop
         terms: '<translate with synonyms or related terms for ''Wine Shop'', separated by commas>'
-      tactile_paving:
-        # tactile_paving=yes
-        name: Tactile Paving
-        # 'terms: blind path,detectable warning surfaces,tactile ground surface indicators,tactile walking surface indicators,truncated domes,visually impaired path'
-        terms: '<translate with synonyms or related terms for ''Tactile Paving'', separated by commas>'
       telecom/data_center:
         # telecom=data_center
         name: Data Center
