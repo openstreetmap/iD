@@ -2977,7 +2977,8 @@ input.key-trap {
     border-radius: 0;
 }
 
-.map-control > button:hover {
+.map-control > button:hover,
+.map-control > button:focus {
     background: rgba(0, 0, 0, .8);
 }
 
@@ -5134,7 +5135,8 @@ svg.mouseclick use.right {
     border-radius: 8px;
 }
 
-.notice .zoom-to:hover {
+.notice .zoom-to:hover,
+.notice .zoom-to:focus {
     background: rgba(0,0,0,0.6);
 }
 

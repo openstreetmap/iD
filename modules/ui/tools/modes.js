@@ -113,7 +113,6 @@ export function uiToolOldDrawModes(context) {
             // enter
             var buttonsEnter = buttons.enter()
                 .append('button')
-                .attr('tabindex', -1)
                 .attr('class', function(d) { return d.id + ' add-button bar-button'; })
                 .on('click.mode-buttons', function(d) {
                     if (!enabled(d)) return;

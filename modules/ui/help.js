@@ -299,7 +299,6 @@ export function uiHelp(context) {
     uiHelp.renderToggleButton = function(selection) {
 
         _toggleButton = selection.append('button')
-            .attr('tabindex', -1)
             .on('click', uiHelp.togglePane)
             .call(svgIcon('#iD-icon-help', 'light'))
             .call(paneTooltip);

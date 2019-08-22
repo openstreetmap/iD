@@ -66,7 +66,6 @@ export function uiGeolocate(context) {
 
         selection
             .append('button')
-            .attr('tabindex', -1)
             .attr('title', t('geolocate.title'))
             .on('click', click)
             .call(svgIcon('#iD-icon-geolocate', 'light'))
