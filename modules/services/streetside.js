@@ -599,7 +599,7 @@ export default {
 
 
         // Register viewer resize handler
-        context.ui().photoviewer.on('resize', function() {
+        context.ui().photoviewer.on('resize.streetside', function() {
             if (_pannellumViewer) {
                 _pannellumViewer.resize();
             }
