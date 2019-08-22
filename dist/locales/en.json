@@ -9320,10 +9320,6 @@
                     "name": "Wine Shop",
                     "terms": ""
                 },
-                "tactile_paving": {
-                    "name": "Tactile Paving",
-                    "terms": "blind path,detectable warning surfaces,tactile ground surface indicators,tactile walking surface indicators,truncated domes,visually impaired path"
-                },
                 "telecom/data_center": {
                     "name": "Data Center",
                     "terms": "computer systems storage,information technology,server farm,the cloud,telecommunications"
