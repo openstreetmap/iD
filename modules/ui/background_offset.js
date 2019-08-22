@@ -98,7 +98,6 @@ export function uiBackgroundOffset(context) {
 
 
     function dragOffset() {
-        d3_event.preventDefault();
         if (d3_event.button !== 0) return;
 
         var origin = [d3_event.clientX, d3_event.clientY];
