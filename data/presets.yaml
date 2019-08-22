@@ -5736,6 +5736,10 @@ en:
         name: Monitoring Station
         # 'terms: weather,earthquake,seismology,air,gps'
         terms: '<translate with synonyms or related terms for ''Monitoring Station'', separated by commas>'
+      man_made/obelisk:
+        # man_made=obelisk
+        name: Obelisk
+        terms: '<translate with synonyms or related terms for ''Obelisk'', separated by commas>'
       man_made/observatory:
         # man_made=observatory
         name: Observatory

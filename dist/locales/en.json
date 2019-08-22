@@ -7684,6 +7684,10 @@
                     "name": "Monitoring Station",
                     "terms": "weather,earthquake,seismology,air,gps"
                 },
+                "man_made/obelisk": {
+                    "name": "Obelisk",
+                    "terms": ""
+                },
                 "man_made/observatory": {
                     "name": "Observatory",
                     "terms": "astronomical,meteorological"

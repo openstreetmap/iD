@@ -690,6 +690,7 @@
     {"key": "communication:television", "value": "yes", "description": "🄿 Television Broadcast Mast", "object_types": ["node"], "icon_url": "https://cdn.jsdelivr.net/gh/mapbox/maki/icons/communications-tower-15.svg"},
     {"key": "man_made", "value": "mineshaft", "description": "🄿 Mineshaft", "object_types": ["node", "area"], "icon_url": "https://cdn.jsdelivr.net/gh/mapbox/maki/icons/triangle-15.svg"},
     {"key": "man_made", "value": "monitoring_station", "description": "🄿 Monitoring Station", "object_types": ["node", "area"], "icon_url": "https://cdn.jsdelivr.net/gh/bhousel/temaki/icons/antenna.svg"},
+    {"key": "man_made", "value": "obelisk", "description": "🄿 Obelisk", "object_types": ["node", "area"], "icon_url": "https://cdn.jsdelivr.net/gh/mapbox/maki/icons/monument-15.svg"},
     {"key": "man_made", "value": "observatory", "description": "🄿 Observatory", "object_types": ["node", "area"]},
     {"key": "man_made", "value": "petroleum_well", "description": "🄿 Oil Well", "object_types": ["node"], "icon_url": "https://cdn.jsdelivr.net/gh/bhousel/temaki/icons/storage_tank.svg"},
     {"key": "man_made", "value": "pier", "description": "🄿 Pier", "object_types": ["way", "area"], "icon_url": "https://cdn.jsdelivr.net/gh/bhousel/temaki/icons/pedestrian.svg"},
