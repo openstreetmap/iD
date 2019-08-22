@@ -367,7 +367,7 @@ export default {
         defs.call(svgDefs(context).addSprites, ['mapillary-sprite'], false /* don't override colors */ );
 
         // Register viewer resize handler
-        context.ui().photoviewer.on('resize', function() {
+        context.ui().photoviewer.on('resize.mapillary', function() {
             if (_mlyViewer) {
                 _mlyViewer.resize();
             }
