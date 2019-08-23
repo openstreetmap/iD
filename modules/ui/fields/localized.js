@@ -15,12 +15,22 @@ var languagesArray = [];
 function loadLanguagesArray() {
     if (languagesArray.length !== 0) return;
 
+    // some conversion is needed to ensure correct OSM tags are used
+    var replacements = {
+        sr: 'sr-Cyrl',      // in OSM, `sr` implies Cyrillic
+        'sr-Cyrl': false    // `sr-Cyrl` isn't used in OSM
+    };
+
     for (var code in dataLanguages) {
+        if (replacements[code] === false) continue;
+        var metaCode = code;
+        if (replacements[code]) metaCode = replacements[code];
+
         languagesArray.push({
-            localName: languageName(code, { localOnly: true }),
-            nativeName: dataLanguages[code].nativeName,
+            localName: languageName(metaCode, { localOnly: true }),
+            nativeName: dataLanguages[metaCode].nativeName,
             code: code,
-            label: languageName(code)
+            label: languageName(metaCode)
         });
     }
 }
