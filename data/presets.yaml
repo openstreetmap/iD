@@ -6697,6 +6697,8 @@ en:
       public_transport/platform/tram_point:
         # 'public_transport=platform, tram=yes'
         name: Tram Stop / Platform
+        # 'terms: electric,light rail,platform,public transit,public transportation,rail,streetcar,track,tram,trolley,transit,transportation'
+        terms: '<translate with synonyms or related terms for ''Tram Stop / Platform'', separated by commas>'
       public_transport/platform/trolleybus:
         # 'public_transport=platform, trolleybus=yes'
         name: Trolleybus Platform
