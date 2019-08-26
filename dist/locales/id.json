@@ -1940,9 +1940,6 @@
                 "office/ngo": {
                     "name": "Kantor LSM"
                 },
-                "office/political_party": {
-                    "name": "Partai Politik"
-                },
                 "office/research": {
                     "name": "Kantor Riset"
                 },

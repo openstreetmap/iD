@@ -1303,6 +1303,7 @@
                     "label": "Dozvoljen pristup"
                 },
                 "addr/interpolation": {
+                    "label": "Vrsta",
                     "options": {
                         "all": "Sve",
                         "alphabetic": "Abecedno",
@@ -1642,9 +1643,6 @@
                 },
                 "diameter": {
                     "label": "Promjer"
-                },
-                "diaper": {
-                    "label": "Omogućeno mijenjanje pelena"
                 },
                 "direction_cardinal": {
                     "options": {
@@ -3055,17 +3053,35 @@
                 "building/stable": {
                     "name": "Staja"
                 },
+                "building/stadium": {
+                    "name": "Zgrada stadiona"
+                },
                 "building/static_caravan": {
                     "name": "Statičan mobilan dom"
                 },
                 "building/terrace": {
                     "name": "Kuće u nizu"
                 },
+                "building/train_station": {
+                    "name": "Zgrada željezničkog kolodvora"
+                },
                 "building/university": {
                     "name": "Zgrada sveučilišta"
                 },
                 "building/warehouse": {
                     "name": "Skladište"
+                },
+                "building_part": {
+                    "name": "Dio građevine"
+                },
+                "building_point": {
+                    "name": "Građevina"
+                },
+                "club": {
+                    "name": "Klub"
+                },
+                "club/sport": {
+                    "name": "Sportski klub"
                 },
                 "craft": {
                     "name": "Zanat"
@@ -3179,6 +3195,9 @@
                 "craft/scaffolder": {
                     "name": "Građevinska skela"
                 },
+                "craft/sculptor": {
+                    "name": "Kipar"
+                },
                 "craft/shoemaker": {
                     "name": "Obućar"
                 },
@@ -3217,6 +3236,10 @@
                     "name": "Požarni hidrant",
                     "terms": "hidrant"
                 },
+                "emergency/lifeguard": {
+                    "name": "Spasilac",
+                    "terms": "plaži,spasioc"
+                },
                 "emergency/phone": {
                     "name": "Telefon za nuždu"
                 },
@@ -3245,6 +3268,9 @@
                 "golf/rough": {
                     "name": "Grubo"
                 },
+                "healthcare/alternative/chiropractic": {
+                    "name": "Kiropraktičar"
+                },
                 "highway": {
                     "name": "Prometnica"
                 },
@@ -3262,6 +3288,9 @@
                 },
                 "highway/crossing/marked": {
                     "name": "Označeni pješački prijelaz"
+                },
+                "highway/crossing/marked-raised": {
+                    "name": "Uzdignuti pješački prijelaz"
                 },
                 "highway/crossing/unmarked": {
                     "name": "Neoznačeni pješački prijelaz"
@@ -3302,6 +3331,9 @@
                 "highway/living_street": {
                     "name": "Područje smirenog prometa"
                 },
+                "highway/milestone": {
+                    "name": "Miljokaz prometnice"
+                },
                 "highway/mini_roundabout": {
                     "name": "Mali kružni tok",
                     "terms": "mali kružni tok,kružni tok"
@@ -3315,8 +3347,14 @@
                 "highway/motorway_link": {
                     "name": "Pristupna cesta autoceste"
                 },
+                "highway/passing_place": {
+                    "name": "Mjesto za preticanje"
+                },
                 "highway/path": {
                     "name": "Staza"
+                },
+                "highway/pedestrian_area": {
+                    "name": "Površina za pješake"
                 },
                 "highway/pedestrian_line": {
                     "name": "Pješačka ulica"
@@ -3326,6 +3364,9 @@
                 },
                 "highway/primary_link": {
                     "name": "Pristupna cesta državne ceste"
+                },
+                "highway/raceway": {
+                    "name": "Staza za utrkivanje motornih vozila"
                 },
                 "highway/residential": {
                     "name": "Ulica"
@@ -3363,6 +3404,9 @@
                 "highway/services": {
                     "name": "Odmorište"
                 },
+                "highway/speed_camera": {
+                    "name": "Kamera za brzinu"
+                },
                 "highway/steps": {
                     "name": "Stepenice"
                 },
@@ -3384,6 +3428,9 @@
                 },
                 "highway/track": {
                     "name": "Šumski ili poljski put"
+                },
+                "highway/traffic_mirror": {
+                    "name": "Prometno ogledalo"
                 },
                 "highway/traffic_signals": {
                     "name": "Semafor",
@@ -3960,9 +4007,6 @@
                 },
                 "office/physician": {
                     "name": "Liječnička praksa"
-                },
-                "office/political_party": {
-                    "name": "Politička stranka"
                 },
                 "office/research": {
                     "name": "Ured za istraživanje"
@@ -4636,7 +4680,7 @@
                     "terms": "park za rekreativna vozila,park za kamp-prikolice,RV park,kamp,kamp za kamp kućice,kamp za kamp prikolice,kamp prikolica,park za kamp prikolice,kamp za kamp-prikolice"
                 },
                 "tourism/chalet": {
-                    "name": "Kuća za odmor",
+                    "name": "Bungalov",
                     "terms": "Kuća za iznajmljivanje"
                 },
                 "tourism/gallery": {
@@ -4707,7 +4751,7 @@
                     "terms": "ležeći policajac"
                 },
                 "traffic_calming/island": {
-                    "name": "Pješački otok"
+                    "name": "Prometni otok"
                 },
                 "type/boundary": {
                     "name": "Granica",

@@ -1205,9 +1205,6 @@
                     "label": "Ierīces",
                     "placeholder": "1, 2, 3..."
                 },
-                "diaper": {
-                    "label": "Pamperu Maiņas vieta Pieejama"
-                },
                 "direction": {
                     "label": "Virziens (Grādi, pulksteņrādītāja virzienā)",
                     "placeholder": "45, 90, 180, 270"

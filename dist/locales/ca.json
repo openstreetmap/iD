@@ -1660,9 +1660,6 @@
                     "label": "Dispositius",
                     "placeholder": "1, 2, 3..."
                 },
-                "diaper": {
-                    "label": "Canviadors per a nadons"
-                },
                 "diet_multi": {
                     "label": "Tipus de dieta"
                 },
@@ -4462,10 +4459,6 @@
                 },
                 "office/physician": {
                     "name": "Metge"
-                },
-                "office/political_party": {
-                    "name": "Local de partit polític",
-                    "terms": "Partit polític"
                 },
                 "office/research": {
                     "name": "Oficines d'R+D"

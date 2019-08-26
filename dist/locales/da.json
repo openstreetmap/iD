@@ -791,6 +791,12 @@
                 }
             }
         },
+        "restore": {
+            "heading": "Du har ikke-gemte ændringer",
+            "description": "Vil du gendanne ikke-gemte ændringer fra en tidligere redigeringssession?",
+            "restore": "Gendan mine ændringer",
+            "reset": "Kasser mine ændringer"
+        },
         "save": {
             "title": "Gem",
             "help": "Gennemse dine ændringer og upload dem til OpenStreetMap, dette gør dem synlige for alle andre brugere.",
@@ -825,6 +831,10 @@
             }
         },
         "success": {
+            "just_edited": "Du har lige redigeret OpenStreetMap!",
+            "thank_you": "Mange tak for at du forbedrede kortet.",
+            "thank_you_location": "Mange tak for at du forbedrede kortet omkring {where}.",
+            "help_html": "Dine ændringer burde dukke op på OpenStreetMap indenfor få minutter. Det kan tage længere for andre kort at blive opdateret.",
             "help_link_text": "Detaljer",
             "help_link_url": "https://wiki.openstreetmap.org/wiki/FAQ#I_have_just_made_some_changes_to_the_map._How_do_I_get_to_see_my_changes.3F",
             "view_on_osm": "Vis ændringer på OSM",
@@ -839,6 +849,12 @@
         "confirm": {
             "okay": "OK",
             "cancel": "Annuller"
+        },
+        "splash": {
+            "welcome": "Velkommen til OpenStreetMap-redigeringsværktøjet iD.",
+            "text": "iD er et brugervenligt men kraftfuldt værktøj til at bidrage til verdens bedste frie verdenskort.  Dette er version {version}. Mere information kan findes på {website}, og fejl kan rapporteres på {github}.",
+            "walkthrough": "Start gennemgangen",
+            "start": "Rediger nu"
         },
         "source_switch": {
             "live": "live",
@@ -1425,7 +1441,7 @@
             "points": {
                 "title": "Punkter",
                 "add_point": "*Punkter* kan bruges til at repræsentere objekter såsom forretninger, restauranter og monumenter.{br}De markerer en bestemt lokation, og beskriver hvad der findes der. **Klik på {button} Punkt-knappen for at tilføje et nyt punkt.**",
-                "place_point": "For at placere det nye punkt på kortet, skal du placere muse-pilen der hvor punktet skal være, og så venstreklikke eller taste mellemrum. **Flyt muse-pilen hen over denne bygning, derefter vesntre-klik eller tast mellemrum.**",
+                "place_point": "For at placere det nye punkt på kortet, skal du placere muse-pilen der hvor punktet skal være, og så venstreklikke eller taste mellemrum. **Flyt muse-pilen hen over denne bygning, derefter venstre-klik eller tast mellemrum.**",
                 "search_cafe": "Der er mange forskellige objekter der kan repræsenteres med punkter. Punktet du lige har tilføjet er en café. **Søg efter '{preset}'.**",
                 "choose_cafe": "**Vælg {preset} fra listen.**",
                 "feature_editor": "Punktet er nu markeret som en cafe. Brug objekteditoren, så vi kan tilføje mere information om cafeen.",
@@ -2111,9 +2127,6 @@
                 "devices": {
                     "label": "Enheder",
                     "placeholder": "1, 2, 3..."
-                },
-                "diaper": {
-                    "label": "Babybleskifte"
                 },
                 "direction": {
                     "label": "Retning (grader med uret)",
@@ -5204,10 +5217,6 @@
                 },
                 "office/physician": {
                     "name": "Læge"
-                },
-                "office/political_party": {
-                    "name": "Politisk parti",
-                    "terms": "Politisk parti"
                 },
                 "office/research": {
                     "name": "Forskning",

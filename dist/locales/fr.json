@@ -504,7 +504,8 @@
             "translate": "Traduire",
             "localized_translation_label": "Nom multilingue",
             "localized_translation_language": "Choisir une langue",
-            "localized_translation_name": "Nom"
+            "localized_translation_name": "Nom",
+            "language_and_code": "{language} ({code}) "
         },
         "zoom_in_edit": " Zoomer pour Modifier ",
         "login": "Connexion",
@@ -2369,7 +2370,7 @@
         "presets": {
             "categories": {
                 "category-barrier": {
-                    "name": "Types de barrières"
+                    "name": "Caractéristiques de la barrière"
                 },
                 "category-building": {
                     "name": "Types de bâtiments"
@@ -2452,6 +2453,7 @@
                         }
                     },
                     "placeholder": "Non spécifié",
+                    "terms": "Accès autorisé, accès alloué",
                     "types": {
                         "access": "Tous",
                         "bicycle": "Vélos",
@@ -2506,7 +2508,8 @@
                         "suburb": "Quartier (division urbaine)",
                         "suburb!jp": "Quartier, district électoral",
                         "unit": "Unité"
-                    }
+                    },
+                    "terms": "adresse"
                 },
                 "admin_level": {
                     "label": "Niveau administratif"
@@ -2555,7 +2558,8 @@
                     "label": "Produits"
                 },
                 "air_conditioning": {
-                    "label": "Climatisation"
+                    "label": "Climatisation",
+                    "terms": "Climatisation, climatiseur"
                 },
                 "amenity": {
                     "label": "Type"
@@ -2591,7 +2595,8 @@
                     "label": "Dossier de siège"
                 },
                 "bar": {
-                    "label": "Bar"
+                    "label": "Bar",
+                    "terms": "Bar, brasserie, café, pub"
                 },
                 "barrier": {
                     "label": "Type"
@@ -2617,7 +2622,8 @@
                     "label": "Spécialité du salon"
                 },
                 "bench": {
-                    "label": "Banc"
+                    "label": "Banc",
+                    "terms": "Banc"
                 },
                 "bicycle_parking": {
                     "label": "Type"
@@ -2708,6 +2714,14 @@
                 "castle_type": {
                     "label": "Type"
                 },
+                "charge_fee": {
+                    "label": "Montant",
+                    "terms": "Montant des frais, frais, charges"
+                },
+                "charge_toll": {
+                    "label": "Montant",
+                    "terms": "Tarif péage, frais d'autoroute"
+                },
                 "check_date": {
                     "label": "Dernière date de vérification"
                 },
@@ -2777,6 +2791,9 @@
                 },
                 "crossing": {
                     "label": "Type"
+                },
+                "crossing/island": {
+                    "label": "Île de refuge"
                 },
                 "cuisine": {
                     "label": "Cuisines"
@@ -2875,9 +2892,6 @@
                 "diameter": {
                     "label": "Diamètre",
                     "placeholder": "5 mm, 10 cm, 15 in…"
-                },
-                "diaper": {
-                    "label": "Table à langer"
                 },
                 "diet_multi": {
                     "label": "Types de régimes"
@@ -3183,6 +3197,12 @@
                         "undefined": "Non"
                     }
                 },
+                "iata": {
+                    "label": "Code aéroport AITA"
+                },
+                "icao": {
+                    "label": "Code aéroport OACI"
+                },
                 "incline": {
                     "label": "Pente"
                 },
@@ -3470,6 +3490,9 @@
                 "network_road": {
                     "label": "Réseau"
                 },
+                "not/name": {
+                    "label": "Noms incorrects"
+                },
                 "note": {
                     "label": "Note"
                 },
@@ -3677,6 +3700,9 @@
                 "population": {
                     "label": "Population"
                 },
+                "post": {
+                    "label": "Adresse de livraison"
+                },
                 "power": {
                     "label": "Type"
                 },
@@ -3691,6 +3717,9 @@
                 },
                 "product": {
                     "label": "Produits manufacturés"
+                },
+                "public_bookcase/type": {
+                    "label": "Type"
                 },
                 "railway": {
                     "label": "Type"
@@ -4010,6 +4039,9 @@
                 },
                 "source": {
                     "label": "Sources"
+                },
+                "species/wikidata": {
+                    "label": "Wikidata de l'espèce"
                 },
                 "sport": {
                     "label": "Sport"
@@ -4446,9 +4478,17 @@
                     "name": "Héliport",
                     "terms": "Hélipad, Héliport, helipad, heliport, hélicoptère, helicoptere"
                 },
+                "aeroway/holding_position": {
+                    "name": "Point d’attente avion",
+                    "terms": "arrêt,attente,arret,avion,parking"
+                },
                 "aeroway/jet_bridge": {
                     "name": "Passerelle aéroportuaire",
                     "terms": "passerelle aéroportuaire,passerelle d'embarquement,aéroport,embarquement,terminal"
+                },
+                "aeroway/parking_position": {
+                    "name": "Voie de garage pour avion",
+                    "terms": "Parking, Zone de Stationnement, Stationnement, avion"
                 },
                 "aeroway/runway": {
                     "name": "Piste d’atterrissage",
@@ -4768,6 +4808,10 @@
                     "name": "École de langues",
                     "terms": "école de langues,langues étrangères"
                 },
+                "amenity/letter_box": {
+                    "name": "Boîte aux lettres privée",
+                    "terms": "boîte aux lettres,livraison,courrier,facteur"
+                },
                 "amenity/library": {
                     "name": "Bibliothèque",
                     "terms": "Bibliothèque, Médiathèque"
@@ -4813,6 +4857,10 @@
                 },
                 "amenity/parking/multi-storey": {
                     "name": "Parking multi-niveau",
+                    "terms": "Parking, Zone de Stationnement, Stationnement"
+                },
+                "amenity/parking/park_ride": {
+                    "name": "Parking-relais",
                     "terms": "Parking, Zone de Stationnement, Stationnement"
                 },
                 "amenity/parking/underground": {
@@ -4944,6 +4992,12 @@
                 },
                 "amenity/recycling": {
                     "name": "Point de recyclage"
+                },
+                "amenity/recycling/container/electrical_items": {
+                    "name": "Benne pour déchets d'équipements électriques et électroniques (DEEE)"
+                },
+                "amenity/recycling/container/green_waste": {
+                    "name": "Benne pour déchets verts"
                 },
                 "amenity/recycling_centre": {
                     "name": "Déchèterie / Parc à conteneurs / Écocentre",
@@ -6712,7 +6766,7 @@
                 },
                 "leisure/fitness_centre": {
                     "name": "Centre de fitness / gym",
-                    "terms": "salle de sport"
+                    "terms": "salle de sport,salle de musculation"
                 },
                 "leisure/fitness_centre/yoga": {
                     "name": "Salle de Yoga",
@@ -7547,10 +7601,6 @@
                 },
                 "office/physician": {
                     "name": "Médecin"
-                },
-                "office/political_party": {
-                    "name": "Parti politique",
-                    "terms": "Parti politique"
                 },
                 "office/private_investigator": {
                     "name": "Enquêteur privé/détective",
@@ -8581,6 +8631,10 @@
                     "name": "Tirage de photos",
                     "terms": "Photographe, Tirage de photos"
                 },
+                "shop/printer_ink": {
+                    "name": "Vendeur d'encre pour imprimante",
+                    "terms": "imprimante,fax,encre,cartouche,impression"
+                },
                 "shop/pyrotechnics": {
                     "name": "Magasin de feux d'artifice",
                     "terms": "Magasin de feux d'artifice"
@@ -8719,10 +8773,6 @@
                 "shop/wine": {
                     "name": "Caviste",
                     "terms": "Caviste,  Bar à vins"
-                },
-                "tactile_paving": {
-                    "name": "Surface podotactile",
-                    "terms": "surface podotactile,podotactile,bosse,aveugle"
                 },
                 "telecom/data_center": {
                     "name": "Centre de données",
@@ -9834,6 +9884,10 @@
                 "name": "LionMappersTeam (LMT) Enugu",
                 "description": "Chapitre YouthMappers à l'Université du Nigéria, Campus Enugu",
                 "extendedDescription": "LionMappersTeam (LMT) Campus Enugu est affilié au réseau YouthMappers avec pour seul objectif de fournir à ses membres l'opportunité d'apprendre et d'améliorer leurs compétences dans les sciences de la cartographie et de créer des données et des analyses géographiques libres qui répondent aux besoins exprimés localement, à l'échelle mondiale. C'est une équipe de volontaires pour la cartographie collective et la mise à disposition d'informations géographiques à travers OpenStreetMap, la science citoyenne et d'autres technologie géospatiales pour la recherche, la formation et la réponse aux défis d'une communauté résiliente. Nous sommes impliqués dans le SIG et la télédétection, la cartographie de terrain, des ateliers de formation et la vulgarisation auprès des lycées ainsi que la réponse aux catastrophe."
+            },
+            "osm-africa-telegram": {
+                "name": "Telegram d'OpenStreetMap Afrique",
+                "description": "Telegram d'OpenStreetMap pour l'Afrique"
             },
             "ym-Insititue-d-Enseignement-Superieur-de-Ruhengeri": {
                 "name": "YouthMappers à l'INES Ruhengeri",

@@ -1489,9 +1489,6 @@
                     "label": "Aygıtlar",
                     "placeholder": "1, 2, 3..."
                 },
-                "diaper": {
-                    "label": "Bebek Bezi Değiştirmek Mümkün"
-                },
                 "direction": {
                     "label": "Yön (Saat Yönünde Derece)",
                     "placeholder": "45, 90, 180, 270"
@@ -4523,10 +4520,6 @@
                 },
                 "office/physician": {
                     "name": "Hekim"
-                },
-                "office/political_party": {
-                    "name": "Siyasi Parti",
-                    "terms": "Parti Şubesi"
                 },
                 "office/private_investigator": {
                     "name": "Dedektif",
