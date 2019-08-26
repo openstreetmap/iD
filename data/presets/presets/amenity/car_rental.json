@@ -1,7 +1,19 @@
 {
-    "icon": "car",
+    "icon": "maki-car-rental",
     "fields": [
-        "operator"
+        "name",
+        "operator",
+        "address",
+        "opening_hours",
+        "payment_multi"
+    ],
+    "moreFields": [
+        "brand",
+        "website",
+        "phone",
+        "email",
+        "fax",
+        "wheelchair"
     ],
     "geometry": [
         "point",

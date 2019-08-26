@@ -1,0 +1,49 @@
+{
+    "matches": {
+        "any": [
+            {
+                "allTags": {
+                    "ferry": "yes",
+                    "public_transport": {
+                        "platform": true,
+                        "station": true,
+                        "stop_area": true,
+                        "stop_position": true
+                    }
+                }
+            },
+            {
+                "anyTags": {
+                    "amenity": "ferry_terminal"
+                }
+            }
+        ]
+    },
+    "nearby": {
+        "any": [
+            {
+                "allTags": {
+                    "amenity": "parking",
+                    "park_ride": "yes"
+                }
+            },
+            {
+                "anyTags": {
+                    "man_made": "pier",
+                    "route": "ferry",
+                    "vending": "public_transport_tickets"
+                }
+            },
+            {
+                "allTags": {
+                    "ferry": "yes",
+                    "public_transport": {
+                        "platform": true,
+                        "station": true,
+                        "stop_position": true
+                    }
+                }
+            }
+        ]
+    }
+}

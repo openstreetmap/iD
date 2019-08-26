@@ -1,0 +1,20 @@
+{
+    "icon": "maki-pitch",
+    "fields": [
+        "{attraction}",
+        "height"
+    ],
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "terms": [
+        "theme park",
+        "bungy jumping",
+        "jumping platform"
+    ],
+    "tags": {
+        "attraction": "bungee_jumping"
+    },
+    "name": "Bungee Jumping"
+}

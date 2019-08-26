@@ -1,0 +1,21 @@
+{
+    "icon": "temaki-diamond",
+    "fields": [
+        "surface",
+        "direction_vertex"
+    ],
+    "geometry": [
+        "vertex",
+        "line",
+        "area"
+    ],
+    "terms": [
+        "driveway link",
+        "speed",
+        "slow"
+    ],
+    "tags": {
+        "traffic_calming": "chicane"
+    },
+    "name": "Traffic Chicane"
+}

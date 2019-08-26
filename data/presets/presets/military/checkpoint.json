@@ -1,0 +1,26 @@
+{
+    "icon": "maki-barrier",
+    "fields": [
+        "name"
+    ],
+    "geometry": [
+        "point",
+        "vertex",
+        "area"
+    ],
+    "tags": {
+        "military": "checkpoint"
+    },
+    "terms": [
+        "air force",
+        "army",
+        "base",
+        "force",
+        "guard",
+        "marine",
+        "navy",
+        "troop",
+        "war"
+    ],
+    "name": "Checkpoint"
+}

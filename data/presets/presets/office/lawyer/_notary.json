@@ -1,0 +1,17 @@
+{
+    "icon": "maki-suitcase",
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "tags": {
+        "office": "lawyer",
+        "lawyer": "notary"
+    },
+    "reference": {
+        "key": "office",
+        "value": "notary"
+    },
+    "searchable": false,
+    "name": "Notary Office"
+}

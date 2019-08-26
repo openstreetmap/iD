@@ -1,0 +1,11 @@
+{
+    "icon": "maki-pitch",
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "tags": {
+        "playground": "structure"
+    },
+    "name": "Play Structure"
+}

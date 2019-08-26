@@ -1,0 +1,38 @@
+{
+    "icon": "maki-water",
+    "fields": [
+        "name",
+        "bath/type",
+        "bath/open_air",
+        "bath/sand_bath",
+        "address",
+        "building_area",
+        "fee",
+        "charge_fee"
+    ],
+    "moreFields": [
+        "email",
+        "fax",
+        "internet_access",
+        "internet_access/fee",
+        "internet_access/ssid",
+        "opening_hours",
+        "payment_multi_fee",
+        "phone",
+        "website",
+        "wheelchair"
+    ],
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "tags": {
+        "amenity": "public_bath"
+    },
+    "terms": [
+        "onsen",
+        "foot bath",
+        "hot springs"
+    ],
+    "name": "Public Bath"
+}

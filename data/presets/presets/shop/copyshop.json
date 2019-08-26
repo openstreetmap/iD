@@ -1,11 +1,5 @@
 {
-    "icon": "shop",
-    "fields": [
-        "operator",
-        "address",
-        "building_area",
-        "opening_hours"
-    ],
+    "icon": "fas-print",
     "geometry": [
         "point",
         "area"
@@ -13,5 +7,9 @@
     "tags": {
         "shop": "copyshop"
     },
+    "terms": [
+        "print",
+        "scan"
+    ],
     "name": "Copy Store"
 }

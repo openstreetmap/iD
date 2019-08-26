@@ -1,8 +1,16 @@
 {
-    "icon": "waterway-river",
+    "icon": "iD-waterway-river",
     "fields": [
-        "tunnel",
-        "width"
+        "name",
+        "structure_waterway",
+        "width",
+        "intermittent",
+        "tidal"
+    ],
+    "moreFields": [
+        "covered",
+        "fishing",
+        "salt"
     ],
     "geometry": [
         "line"

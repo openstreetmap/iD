@@ -1,7 +1,26 @@
 {
+    "icon": "temaki-clock",
+    "fields": [
+        "name",
+        "support",
+        "display",
+        "visibility",
+        "date",
+        "faces"
+    ],
+    "moreFields": [
+        "covered",
+        "height",
+        "indoor",
+        "lit",
+        "manufacturer"
+    ],
     "geometry": [
         "point",
         "vertex"
+    ],
+    "terms":[
+        "time"
     ],
     "tags": {
         "amenity": "clock"

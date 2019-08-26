@@ -1,17 +1,29 @@
 {
-    "icon": "highway-path",
+    "icon": "iD-other-line",
     "fields": [
+        "name",
         "surface",
         "width",
         "structure",
         "access",
-        "incline",
-        "sac_scale",
-        "trail_visibility",
+        "incline"
+    ],
+    "moreFields": [
+        "covered",
+        "dog",
+        "horse_scale",
+        "lit",
+        "maxweight_bridge",
         "mtb/scale",
         "mtb/scale/uphill",
         "mtb/scale/imba",
-        "ref"
+        "not/name",
+        "ref",
+        "sac_scale",
+        "smoothness",
+        "stroller",
+        "trail_visibility",
+        "wheelchair"
     ],
     "geometry": [
         "line"

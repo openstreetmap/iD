@@ -1,18 +1,14 @@
 {
-    "icon": "music",
-    "fields": [
-        "operator",
-        "address",
-        "building_area",
-        "opening_hours"
-    ],
+    "icon": "fas-compact-disc",
     "geometry": [
         "point",
         "area"
     ],
     "terms": [
-        "CD",
-        "vinyl"
+        "tape casettes",
+        "CDs",
+        "compact discs",
+        "vinyl records"
     ],
     "tags": {
         "shop": "music"

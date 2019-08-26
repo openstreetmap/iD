@@ -1,0 +1,24 @@
+{
+    "icon": "temaki-light_rail",
+    "fields": [
+        "{railway/rail}"
+    ],
+    "moreFields": [
+        "covered",
+        "frequency_electrified",
+        "maxspeed",
+        "voltage_electrified"
+    ],
+    "geometry": [
+        "line"
+    ],
+    "tags": {
+        "railway": "light_rail"
+    },
+    "terms": [
+        "light rail",
+        "streetcar",
+        "trolley"
+    ],
+    "name": "Light Rail"
+}

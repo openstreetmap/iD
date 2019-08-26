@@ -1,12 +1,23 @@
 {
-    "icon": "school",
+    "icon": "maki-school",
     "fields": [
+        "name",
         "operator",
-        "address"
+        "address",
+        "phone",
+        "preschool"
+    ],
+    "moreFields": [
+        "email",
+        "fax",
+        "opening_hours",
+        "payment_multi",
+        "website",
+        "wheelchair"
     ],
     "geometry": [
-        "point",
-        "area"
+        "area",
+        "point"
     ],
     "terms": [
         "kindergarden",

@@ -1,18 +1,20 @@
 {
-    "icon": "beer",
+    "icon": "temaki-storage_tank",
     "fields": [
-        "operator",
-        "address",
-        "building_area",
-        "opening_hours"
+        "{craft}",
+        "product"
     ],
     "geometry": [
         "point",
         "area"
     ],
     "terms": [
+        "alcohol",
         "beer",
-        "bier"
+        "beverage",
+        "bier",
+        "booze",
+        "cider"
     ],
     "tags": {
         "craft": "brewery"

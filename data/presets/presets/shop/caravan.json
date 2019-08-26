@@ -1,0 +1,23 @@
+{
+    "icon": "temaki-rv_park",
+    "fields": [
+        "name",
+        "brand",
+        "{shop}",
+        "second_hand",
+        "service/vehicle"
+    ],
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "tags": {
+        "shop": "caravan"
+    },
+    "terms": [
+        "auto",
+        "camper",
+        "recreational vehicle"
+    ],
+    "name": "RV Dealership"
+}

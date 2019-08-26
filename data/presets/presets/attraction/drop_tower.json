@@ -1,0 +1,22 @@
+{
+    "icon": "temaki-tower",
+    "fields": [
+        "{attraction}",
+        "height"
+    ],
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "terms": [
+        "theme park",
+        "amusement ride",
+        "gondola",
+        "tower",
+        "big drop"
+    ],
+    "tags": {
+        "attraction": "drop_tower"
+    },
+    "name": "Drop Tower"
+}

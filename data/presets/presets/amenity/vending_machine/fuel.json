@@ -1,0 +1,26 @@
+{
+    "icon": "maki-fuel",
+    "geometry": [
+        "point"
+    ],
+    "terms": [
+        "petrol",
+        "fuel",
+        "gasoline",
+        "propane",
+        "diesel",
+        "lng",
+        "cng",
+        "biodiesel"
+    ],
+    "tags": {
+        "amenity": "vending_machine",
+        "vending": "fuel"
+    },
+    "reference": {
+        "key": "vending",
+        "value": "fuel"
+    },
+    "name": "Gas Pump",
+    "matchScore": 0.5
+}

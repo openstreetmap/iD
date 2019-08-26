@@ -1,0 +1,23 @@
+{
+    "icon": "fas-motorcycle",
+    "fields": [
+        "{shop}",
+        "service/vehicle"
+    ],
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "terms": [
+        "auto",
+        "bike",
+        "garage",
+        "motorcycle",
+        "repair",
+        "service"
+    ],
+    "tags": {
+        "shop": "motorcycle_repair"
+    },
+    "name": "Motorcycle Repair Shop"
+}

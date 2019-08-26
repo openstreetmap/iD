@@ -1,23 +1,34 @@
 {
-    "icon": "hospital",
+    "icon": "maki-hospital",
     "fields": [
+        "name",
         "operator",
+        "operator/type",
+        "healthcare/speciality",
         "address",
         "emergency"
     ],
+    "moreFields": [
+        "internet_access",
+        "internet_access/fee",
+        "internet_access/ssid",
+        "website",
+        "phone",
+        "email",
+        "fax",
+        "wheelchair"
+    ],
     "geometry": [
-        "point",
-        "area"
+        "area",
+        "point"
     ],
     "terms": [
         "clinic",
         "doctor",
         "emergency room",
-        "health service",
-        "hospice",
+        "health",
         "infirmary",
         "institution",
-        "nursing home",
         "sanatorium",
         "sanitarium",
         "sick",
@@ -26,6 +37,14 @@
     ],
     "tags": {
         "amenity": "hospital"
+    },
+    "addTags": {
+        "amenity": "hospital",
+        "healthcare": "hospital"
+    },
+    "reference": {
+        "key": "amenity",
+        "value": "hospital"
     },
     "name": "Hospital Grounds"
 }

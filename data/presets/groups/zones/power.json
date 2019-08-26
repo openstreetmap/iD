@@ -1,0 +1,21 @@
+{
+    "matches": {
+        "anyTags": {
+            "power": {
+                "plant": true,
+                "substation": true
+            }
+        }
+    },
+    "nearby": {
+        "anyTags": {
+            "power": {
+                "line": true,
+                "minor_line": true,
+                "pole": true,
+                "tower": true,
+                "transformer": true
+            }
+        }
+    }
+}

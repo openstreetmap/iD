@@ -1,0 +1,23 @@
+{
+    "icon": "fas-swimmer",
+    "fields": [
+        "{attraction}",
+        "height"
+    ],
+    "geometry": [
+        "line",
+        "area"
+    ],
+    "terms": [
+        "theme park",
+        "aquatic park",
+        "water park",
+        "flumes",
+        "water chutes",
+        "hydroslides"
+    ],
+    "tags": {
+        "attraction": "water_slide"
+    },
+    "name": "Water Slide"
+}

@@ -1,0 +1,19 @@
+{
+    "icon": "maki-amusement-park",
+    "fields": [
+        "{attraction}",
+        "height"
+    ],
+    "geometry": [
+        "point"
+    ],
+    "terms": [
+        "ferris wheel",
+        "theme park",
+        "amusement ride"
+    ],
+    "tags": {
+        "attraction": "big_wheel"
+    },
+    "name": "Big Wheel"
+}

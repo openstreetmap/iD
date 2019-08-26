@@ -1,0 +1,28 @@
+{
+    "icon": "maki-park",
+    "geometry": [
+        "area",
+        "point"
+    ],
+    "fields": [
+        "name",
+        "operator",
+        "address",
+        "opening_hours"
+    ],
+    "moreFields": [
+        "dog",
+        "website",
+        "phone",
+        "email",
+        "fax"
+    ],
+    "tags": {
+        "leisure": "nature_reserve"
+    },
+    "terms": [
+        "protected",
+        "wildlife"
+    ],
+    "name": "Nature Reserve"
+}

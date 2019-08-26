@@ -1,0 +1,28 @@
+{
+    "icon": "maki-garden",
+    "fields": [
+        "name",
+        "operator",
+        "plant"
+    ],
+    "moreFields": [
+        "address",
+        "website",
+        "phone",
+        "email",
+        "fax"
+    ],
+    "geometry": [
+        "area"
+    ],
+    "tags": {
+        "landuse": "plant_nursery"
+    },
+    "terms": [
+        "flower",
+        "garden",
+        "grow",
+        "vivero"
+    ],
+    "name": "Plant Nursery"
+}

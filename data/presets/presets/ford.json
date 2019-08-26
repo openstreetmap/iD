@@ -1,4 +1,10 @@
 {
+    "icon": "temaki-pedestrian",
+    "fields": [
+        "name",
+        "access",
+        "seasonal"
+    ],
     "geometry": [
         "vertex"
     ],

@@ -1,0 +1,23 @@
+{
+    "icon": "temaki-vending_machine",
+    "geometry": [
+        "point"
+    ],
+    "terms": [
+        "candy",
+        "gum",
+        "chip",
+        "pretzel",
+        "cookie",
+        "cracker"
+    ],
+    "tags": {
+        "amenity": "vending_machine",
+        "vending": "sweets"
+    },
+    "reference": {
+        "key": "vending",
+        "value": "sweets"
+    },
+    "name": "Snack Vending Machine"
+}

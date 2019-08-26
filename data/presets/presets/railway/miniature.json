@@ -1,0 +1,28 @@
+{
+    "icon": "iD-railway-rail",
+    "fields": [
+        "name",
+        "structure",
+        "gauge",
+        "electrified",
+        "service_rail"
+    ],
+    "moreFields": [
+        "covered",
+        "frequency_electrified",
+        "maxspeed",
+        "voltage_electrified"
+    ],
+    "geometry": [
+        "line"
+    ],
+    "tags": {
+        "railway": "miniature"
+    },
+    "terms": [
+        "rideable miniature railway",
+        "narrow gauge railway",
+        "minimum gauge railway"
+    ],
+    "name": "Miniature Railway"
+}

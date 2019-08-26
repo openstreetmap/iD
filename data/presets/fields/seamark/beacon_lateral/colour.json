@@ -1,0 +1,12 @@
+{
+    "key": "seamark:beacon_lateral:colour",
+    "type": "combo",
+    "label": "Color",
+    "strings": {
+        "options": {
+            "red": "Red",
+            "green": "Green",
+            "grey": "Grey"
+        }
+    }
+}

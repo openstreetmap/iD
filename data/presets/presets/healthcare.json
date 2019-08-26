@@ -1,0 +1,41 @@
+{
+    "icon": "maki-hospital",
+    "fields": [
+        "name",
+        "healthcare",
+        "operator",
+        "healthcare/speciality",
+        "address",
+        "building_area"
+    ],
+    "moreFields": [
+        "building/levels_building",
+        "height_building",
+        "opening_hours",
+        "payment_multi",
+        "brand",
+        "website",
+        "phone",
+        "email",
+        "fax",
+        "wheelchair"
+    ],
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "tags": {
+        "healthcare": "*"
+    },
+    "terms": [
+        "clinic",
+        "doctor",
+        "disease",
+        "health",
+        "institution",
+        "sick",
+        "surgery",
+        "wellness"
+    ],
+    "name": "Healthcare Facility"
+}

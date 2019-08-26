@@ -1,15 +1,15 @@
 {
-    "icon": "commercial",
+    "icon": "maki-suitcase",
     "fields": [
-        "address",
+        "{building}",
         "smoking"
     ],
     "geometry": [
-        "point",
         "area"
     ],
     "tags": {
         "building": "commercial"
     },
+    "matchScore": 0.5,
     "name": "Commercial Building"
 }

@@ -1,0 +1,19 @@
+{
+    "name": "Railway Features",
+    "description": "Rails, Train Signals, etc.",
+    "toggleable": true,
+    "matches": {
+        "anyTags": {
+            "railway": {
+                "*": true,
+                "no": false
+            },
+            "landuse": "railway"
+        },
+        "allGroups": {
+            "toggleable/traffic_roads": false,
+            "toggleable/service_roads": false,
+            "toggleable/paths": false
+        }
+    }
+}

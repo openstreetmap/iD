@@ -1,0 +1,7 @@
+{
+    "key": "devices",
+    "type": "number",
+    "minValue": 0,
+    "label": "Devices",
+    "placeholder": "1, 2, 3..."
+}

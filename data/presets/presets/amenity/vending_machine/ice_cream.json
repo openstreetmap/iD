@@ -1,0 +1,22 @@
+{
+    "icon": "temaki-vending_machine",
+    "geometry": [
+        "point"
+    ],
+    "terms": [
+        "chocolate",
+        "ice cream",
+        "frozen",
+        "popsicle",
+        "vanilla"
+    ],
+    "tags": {
+        "amenity": "vending_machine",
+        "vending": "ice_cream"
+    },
+    "reference": {
+        "key": "vending",
+        "value": "ice_cream"
+    },
+    "name": "Ice Cream Vending Machine"
+}

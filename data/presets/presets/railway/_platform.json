@@ -1,0 +1,20 @@
+{
+    "icon": "temaki-pedestrian",
+    "fields": [
+        "name",
+        "ref_platform",
+        "surface",
+        "lit",
+        "shelter"
+    ],
+    "geometry": [
+        "line",
+        "area"
+    ],
+    "tags": {
+        "railway": "platform"
+    },
+    "name": "Train Platform",
+    "searchable": false,
+    "replacement": "public_transport/platform/train"
+}

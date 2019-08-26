@@ -1,0 +1,18 @@
+{
+    "icon": "maki-building",
+    "fields": [
+        "{building}",
+        "smoking"
+    ],
+    "geometry": [
+        "area"
+    ],
+    "terms": [
+        "sports"
+    ],
+    "tags": {
+        "building": "pavilion"
+    },
+    "matchScore": 0.5,
+    "name": "Pavilion Building"
+}

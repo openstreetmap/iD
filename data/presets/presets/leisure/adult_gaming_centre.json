@@ -1,0 +1,21 @@
+{
+    "icon": "temaki-casino",
+    "fields": [
+        "{amenity/casino}"
+    ],
+    "moreFields": [
+        "{amenity/casino}"
+    ],
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "terms": [
+        "gambling",
+        "slot machine"
+    ],
+    "tags": {
+        "leisure": "adult_gaming_centre"
+    },
+    "name": "Adult Gaming Center"
+}

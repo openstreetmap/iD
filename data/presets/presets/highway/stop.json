@@ -1,4 +1,9 @@
 {
+    "icon": "temaki-stop",
+    "fields": [
+        "stop",
+        "direction_vertex"
+    ],
     "geometry": [
         "vertex"
     ],
@@ -6,7 +11,9 @@
         "highway": "stop"
     },
     "terms": [
-        "stop sign"
+        "stop",
+        "halt",
+        "sign"
     ],
     "name": "Stop Sign"
 }

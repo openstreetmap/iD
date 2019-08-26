@@ -1,15 +1,26 @@
 {
+    "icon": "maki-park",
     "fields": [
+        "name",
+        "operator",
         "trees"
     ],
+    "moreFields": [
+        "address",
+        "email",
+        "fax",
+        "phone",
+        "species/wikidata",
+        "website"
+    ],
     "geometry": [
-        "point",
         "area"
     ],
     "tags": {
         "landuse": "orchard"
     },
-    "terms": [],
-    "name": "Orchard",
-    "icon": "park2"
+    "terms": [
+        "fruit"
+    ],
+    "name": "Orchard"
 }

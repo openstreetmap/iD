@@ -1,15 +1,19 @@
 {
+    "icon": "maki-park-alt1",
     "fields": [
-        "wood"
+        "name",
+        "leaf_type",
+        "leaf_cycle"
     ],
-    "icon": "park2",
     "geometry": [
-        "point",
-        "area"
+        "area",
+        "point"
     ],
     "tags": {
         "natural": "wood"
     },
-    "terms": [],
+    "terms": [
+        "tree"
+    ],
     "name": "Wood"
 }

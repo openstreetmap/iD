@@ -1,0 +1,16 @@
+export { validationAlmostJunction } from './almost_junction';
+export { validationCloseNodes } from './close_nodes';
+export { validationCrossingWays } from './crossing_ways';
+export { validationDisconnectedWay } from './disconnected_way';
+export { validationFixmeTag } from './fixme_tag';
+export { validationGenericName } from './generic_name';
+export { validationImpossibleOneway } from './impossible_oneway';
+export { validationIncompatibleSource } from './incompatible_source';
+export { validationFormatting } from './invalid_format';
+export { validationMaprules } from './maprules';
+export { validationMissingRole } from './missing_role';
+export { validationMissingTag } from './missing_tag';
+export { validationOutdatedTags } from './outdated_tags';
+export { validationPrivateData } from './private_data';
+export { validationTagSuggestsArea } from './tag_suggests_area';
+export { validationUnsquareWay } from './unsquare_way';

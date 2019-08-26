@@ -1,10 +1,21 @@
 {
-    "icon": "toilets",
+    "icon": "maki-toilet",
     "fields": [
         "toilets/disposal",
+        "access_simple",
+        "gender",
+        "changing_table",
+        "wheelchair",
+        "building_area"
+    ],
+    "moreFields": [
+        "charge_fee",
+        "fee",
+        "opening_hours",
         "operator",
-        "building_area",
-        "access_toilets"
+        "payment_multi_fee",
+        "toilets/handwashing",
+        "toilets/position"
     ],
     "geometry": [
         "point",

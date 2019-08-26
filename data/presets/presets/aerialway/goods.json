@@ -1,0 +1,14 @@
+{
+    "geometry": [
+        "line"
+    ],
+    "fields": [
+        "name",
+        "aerialway/capacity",
+        "aerialway/duration"
+    ],
+    "tags": {
+        "aerialway": "goods"
+    },
+    "name": "Goods Aerialway"
+}

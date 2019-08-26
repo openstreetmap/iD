@@ -1,0 +1,19 @@
+{
+    "icon": "fas-wind",
+    "geometry": [
+        "point",
+        "vertex"
+    ],
+    "fields": [
+        "ref",
+        "lit",
+        "height"
+    ],
+    "moreFields": [
+        "manufacturer"
+    ],
+    "tags": {
+        "aeroway": "windsock"
+    },
+    "name": "Windsock"
+}

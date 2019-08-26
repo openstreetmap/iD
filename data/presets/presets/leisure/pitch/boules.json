@@ -1,0 +1,26 @@
+{
+    "icon": "maki-pitch",
+    "fields": [
+        "name",
+        "boules",
+        "{leisure/pitch}"
+    ],
+    "geometry": [
+        "area",
+        "point"
+    ],
+    "tags": {
+        "leisure": "pitch",
+        "sport": "boules"
+    },
+    "reference": {
+        "key": "sport",
+        "value": "boules"
+    },
+    "terms": [
+        "bocce",
+        "lyonnaise",
+        "pétanque"
+    ],
+    "name": "Boules/Bocce Court"
+}

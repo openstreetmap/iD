@@ -1,0 +1,6 @@
+{
+    "key": "maxweight",
+    "type": "combo",
+    "label": "Max Weight",
+    "snake_case": false
+}

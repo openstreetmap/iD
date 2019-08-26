@@ -1,0 +1,19 @@
+{
+    "fields": [
+        "level",
+        "name",
+        "ref_room_number",
+        "height"
+    ],
+    "geometry": [
+        "area"
+    ],
+    "tags": {
+        "indoor": "area"
+    },
+    "terms": [
+        "indoor space"
+    ],
+    "matchScore": 0.8,
+    "name": "Indoor Area"
+}

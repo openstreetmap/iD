@@ -1,0 +1,27 @@
+{
+    "icon": "maki-triangle",
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "fields": [
+        "name",
+        "elevation",
+        "access_simple",
+        "direction",
+        "fee",
+        "payment_multi_fee",
+        "charge_fee"
+    ],
+    "tags": {
+        "natural": "cave_entrance"
+    },
+    "terms": [
+        "cavern",
+        "hollow",
+        "grotto",
+        "shelter",
+        "cavity"
+    ],
+    "name": "Cave Entrance"
+}

@@ -1,0 +1,42 @@
+{
+    "icon": "maki-veterinary",
+    "fields": [
+        "name",
+        "operator",
+        "address",
+        "building_area",
+        "opening_hours",
+        "animal_boarding"
+    ],
+    "moreFields": [
+        "payment_multi",
+        "website",
+        "phone",
+        "email",
+        "fax",
+        "wheelchair"
+    ],
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "terms": [
+        "boarding",
+        "cat",
+        "cattery",
+        "dog",
+        "horse",
+        "kennel",
+        "kitten",
+        "pet",
+        "pet boarding",
+        "pet care",
+        "pet hotel",
+        "puppy",
+        "reptile"
+    ],
+    "tags": {
+        "amenity": "animal_boarding"
+    },
+    "name": "Animal Boarding Facility"
+}

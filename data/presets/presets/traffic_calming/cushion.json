@@ -1,0 +1,21 @@
+{
+    "icon": "temaki-diamond",
+    "fields": [
+        "surface",
+        "direction_vertex"
+    ],
+    "geometry": [
+        "vertex",
+        "line"
+    ],
+    "terms": [
+        "bump",
+        "hump",
+        "speed",
+        "slow"
+    ],
+    "tags": {
+        "traffic_calming": "cushion"
+    },
+    "name": "Speed Cushion"
+}

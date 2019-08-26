@@ -1,21 +1,43 @@
 {
-    "icon": "museum",
+    "icon": "temaki-museum",
     "fields": [
+        "name",
         "operator",
+        "operator/type",
         "address",
         "building_area",
         "opening_hours"
+    ],
+    "moreFields": [
+        "air_conditioning",
+        "building/levels_building",
+        "charge_fee",
+        "height_building",
+        "fee",
+        "internet_access",
+        "internet_access/fee",
+        "internet_access/ssid",
+        "payment_multi",
+        "website",
+        "phone",
+        "email",
+        "fax",
+        "wheelchair"
     ],
     "geometry": [
         "point",
         "area"
     ],
     "terms": [
-        "exhibition",
-        "foundation",
+        "art*",
+        "exhibit*",
         "gallery",
+        "foundation",
         "hall",
-        "institution"
+        "institution",
+        "paint*",
+        "photo*",
+        "sculpt*"
     ],
     "tags": {
         "tourism": "museum"

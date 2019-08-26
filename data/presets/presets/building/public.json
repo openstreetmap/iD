@@ -1,16 +1,19 @@
 {
-    "icon": "building",
+    "icon": "maki-building",
     "fields": [
-        "address",
-        "levels",
+        "{building}",
         "smoking"
     ],
+    "moreFields": [
+        "{building}",
+        "polling_station"
+    ],
     "geometry": [
-        "point",
         "area"
     ],
     "tags": {
         "building": "public"
     },
+    "matchScore": 0.5,
     "name": "Public Building"
 }

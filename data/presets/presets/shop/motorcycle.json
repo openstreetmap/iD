@@ -1,14 +1,16 @@
 {
-    "icon": "scooter",
+    "icon": "fas-motorcycle",
     "fields": [
-        "operator",
-        "address",
-        "building_area",
-        "opening_hours"
+        "name",
+        "brand",
+        "{shop}"
     ],
     "geometry": [
         "point",
         "area"
+    ],
+    "terms": [
+        "bike"
     ],
     "tags": {
         "shop": "motorcycle"

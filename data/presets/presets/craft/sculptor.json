@@ -1,0 +1,11 @@
+{
+    "icon": "maki-art-gallery",
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "tags": {
+        "craft": "sculptor"
+    },
+    "name": "Sculptor"
+}

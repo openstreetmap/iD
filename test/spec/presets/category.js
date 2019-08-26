@@ -1,16 +1,16 @@
-describe("iD.presets.Category", function() {
+describe('iD.presetCategory', function() {
     var category, residential;
 
     beforeEach(function() {
         category = {
-            "geometry": "line",
-            "icon": "highway",
-            "name": "roads",
-            "members": [
-                "highway/residential"
+            'geometry': 'line',
+            'icon': 'highway',
+            'name': 'roads',
+            'members': [
+                'highway/residential'
             ]
         };
-        residential = iD.presets.Preset('highway/residential', {
+        residential = iD.presetPreset('highway/residential', {
             tags: {
                 highway: 'residential'
             },
@@ -18,17 +18,14 @@ describe("iD.presets.Category", function() {
         });
     });
 
-    it("maps members names to preset instances", function() {
-        var c = iD.presets.Category('road', category, iD.presets.Collection([residential]));
+    it('maps members names to preset instances', function() {
+        var c = iD.presetCategory('road', category, iD.presetCollection([residential]));
         expect(c.members.collection[0]).to.eql(residential);
     });
 
-    describe("#matchGeometry", function() {
-        it("matches the type of an entity", function() {
-            var c = iD.presets.Category('road', category, iD.presets.Collection([residential])),
-                w = iD.Way(),
-                n = iD.Node(),
-                g = iD.Graph().replace(w);
+    describe('#matchGeometry', function() {
+        it('matches the type of an entity', function() {
+            var c = iD.presetCategory('road', category, iD.presetCollection([residential]));
             expect(c.matchGeometry('line')).to.eql(true);
             expect(c.matchGeometry('point')).to.eql(false);
         });

@@ -1,0 +1,24 @@
+{
+    "icon": "maki-hospital",
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "terms": [
+        "egg",
+        "fertility",
+        "reproductive",
+        "sperm",
+        "ovulation"
+    ],
+    "tags": {
+        "amenity": "clinic",
+        "healthcare": "clinic",
+        "healthcare:speciality": "fertility"
+    },
+    "reference": {
+        "key": "amenity",
+        "value": "clinic"
+    },
+    "name": "Fertility Clinic"
+}

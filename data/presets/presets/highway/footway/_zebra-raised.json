@@ -1,0 +1,34 @@
+{
+    "icon": "temaki-pedestrian",
+    "fields": [
+        "crossing",
+        "access",
+        "surface",
+        "tactile_paving",
+        "crossing/island"
+    ],
+    "geometry": [
+        "line"
+    ],
+    "tags": {
+        "highway": "footway",
+        "footway": "crossing",
+        "crossing": "zebra",
+        "traffic_calming": "table"
+    },
+    "reference": {
+        "key": "traffic_calming",
+        "value": "table"
+    },
+    "terms": [
+        "zebra crossing",
+        "marked crossing",
+        "crosswalk",
+        "flat top",
+        "hump",
+        "speed",
+        "slow"
+    ],
+    "name": "Marked Crosswalk (Raised)",
+    "searchable": false
+}

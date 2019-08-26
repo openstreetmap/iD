@@ -1,0 +1,41 @@
+{
+    "matches": {
+        "anyTags": {
+            "leisure": "marina"
+        }
+    },
+    "nearby": {
+        "anyTags": {
+            "amenity": {
+                "boat_rental": true,
+                "toilets": true
+            },
+            "highway": {
+                "service": true,
+                "street_lamp": true
+            },
+            "leisure": {
+                "fishing": true,
+                "slipway": true
+            },
+            "man_made": {
+                "breakwater": true,
+                "pier": true
+            },
+            "seamark:type": {
+                "mooring": true
+            },
+            "shop": {
+                "fishing": true
+            },
+            "waterway": {
+                "boatyard": true,
+                "dock": true,
+                "fuel": true,
+                "sanitary_dump_station": true,
+                "water_point": true
+            }
+        },
+        "allowOtherTags": false
+    }
+}

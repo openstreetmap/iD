@@ -1,14 +1,11 @@
 {
-    "icon": "music",
-    "fields": [
-        "operator",
-        "address",
-        "building_area",
-        "opening_hours"
-    ],
+    "icon": "fas-guitar",
     "geometry": [
         "point",
         "area"
+    ],
+    "terms": [
+        "guitar"
     ],
     "tags": {
         "shop": "musical_instrument"

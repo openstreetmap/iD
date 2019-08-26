@@ -1,0 +1,28 @@
+{
+    "icon": "temaki-kerb-rolled",
+    "fields": [
+        "kerb",
+        "{barrier/kerb}",
+        "kerb/height"
+    ],
+    "geometry": [
+        "vertex",
+        "line"
+    ],
+    "tags": {
+        "kerb": "rolled"
+    },
+    "addTags": {
+        "barrier": "kerb",
+        "kerb": "rolled"
+    },
+    "reference": {
+        "key": "kerb",
+        "value": "rolled"
+    },
+    "terms": [
+        "gutter"
+    ],
+    "matchScore": 0.55,
+    "name": "Rolled Curb"
+}

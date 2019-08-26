@@ -1,0 +1,13 @@
+{
+    "icon": "maki-suitcase",
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "tags": {
+        "office": "administrative"
+    },
+    "terms": [],
+    "searchable": false,
+    "name": "Administrative Office"
+}

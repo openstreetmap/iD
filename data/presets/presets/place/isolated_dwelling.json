@@ -1,7 +1,11 @@
 {
+    "icon": "maki-home",
     "geometry": [
         "point",
         "area"
+    ],
+    "fields": [
+        "name"
     ],
     "tags": {
         "place": "isolated_dwelling"

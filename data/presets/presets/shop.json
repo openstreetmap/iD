@@ -1,11 +1,31 @@
 {
-    "icon": "shop",
+    "icon": "maki-shop",
     "fields": [
+        "name",
         "shop",
         "operator",
         "address",
         "building_area",
-        "opening_hours"
+        "opening_hours",
+        "payment_multi"
+    ],
+    "moreFields": [
+        "air_conditioning",
+        "brand",
+        "building/levels_building",
+        "height_building",
+        "currency_multi",
+        "email",
+        "fax",
+        "internet_access",
+        "internet_access/fee",
+        "internet_access/ssid",
+        "not/name",
+        "phone",
+        "second_hand",
+        "stroller",
+        "website",
+        "wheelchair"
     ],
     "geometry": [
         "point",

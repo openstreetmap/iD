@@ -1,0 +1,31 @@
+{
+    "icon": "temaki-pedestrian",
+    "fields": [
+        "{public_transport/platform}"
+    ],
+    "moreFields": [
+        "{public_transport/platform}"
+    ],
+    "geometry": [
+        "line",
+        "area"
+    ],
+    "tags": {
+        "public_transport": "platform",
+        "aerialway": "yes"
+    },
+    "reference": {
+        "key": "public_transport",
+        "value": "platform"
+    },
+    "terms": [
+        "aerialway",
+        "cable car",
+        "platform",
+        "public transit",
+        "public transportation",
+        "transit",
+        "transportation"
+    ],
+    "name": "Aerialway Platform"
+}

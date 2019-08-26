@@ -1,0 +1,19 @@
+{
+    "icon": "maki-waterfall",
+    "fields": [
+        "name",
+        "height",
+        "width",
+        "intermittent"
+    ],
+    "geometry": [
+        "vertex"
+    ],
+    "terms": [
+        "fall"
+    ],
+    "tags": {
+        "waterway": "waterfall"
+    },
+    "name": "Waterfall"
+}

@@ -1,0 +1,35 @@
+{
+    "icon": "maki-rail",
+    "fields": [
+        "{public_transport/station}"
+    ],
+    "moreFields": [
+        "{public_transport/station}"
+    ],
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "tags": {
+        "public_transport": "station",
+        "train": "yes",
+        "railway": "halt"
+    },
+    "reference": {
+        "key": "railway",
+        "value": "halt"
+    },
+    "terms": [
+        "halt",
+        "public transit",
+        "public transportation",
+        "rail",
+        "station",
+        "track",
+        "train",
+        "transit",
+        "transportation",
+        "whistle stop"
+    ],
+    "name": "Train Station (Halt / Request)"
+}

@@ -1,7 +1,30 @@
 {
+    "icon": "temaki-pedestrian",
+    "fields": [
+        "name",
+        "surface",
+        "floating",
+        "width",
+        "access",
+        "lit"
+    ],
+    "moreFields": [
+        "access",
+        "fishing",
+        "incline",
+        "{highway/footway}"
+    ],
     "geometry": [
         "line",
         "area"
+    ],
+    "terms": [
+        "berth",
+        "dock",
+        "jetty",
+        "landing",
+        "promenade",
+        "wharf"
     ],
     "tags": {
         "man_made": "pier"

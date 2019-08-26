@@ -1,14 +1,11 @@
 {
-    "icon": "hairdresser",
-    "fields": [
-        "operator",
-        "address",
-        "building_area",
-        "opening_hours"
-    ],
+    "icon": "temaki-beauty_salon",
     "geometry": [
         "point",
         "area"
+    ],
+    "terms": [
+        "barber"
     ],
     "tags": {
         "shop": "hairdresser"

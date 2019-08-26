@@ -1,0 +1,19 @@
+{
+    "icon": "temaki-diamond",
+    "fields": [
+        "surface",
+        "direction_vertex"
+    ],
+    "geometry": [
+        "vertex",
+        "line"
+    ],
+    "terms": [
+        "speed",
+        "slow"
+    ],
+    "tags": {
+        "traffic_calming": "dip"
+    },
+    "name": "Dip"
+}

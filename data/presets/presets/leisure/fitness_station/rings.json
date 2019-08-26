@@ -1,0 +1,30 @@
+{
+    "icon": "maki-pitch",
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "tags": {
+        "leisure": "fitness_station",
+        "fitness_station": "rings"
+    },
+    "addTags": {
+        "leisure": "fitness_station",
+        "fitness_station": "rings",
+        "sport": "fitness"
+    },
+    "reference": {
+        "key": "leisure",
+        "value": "fitness_station"
+    },
+    "terms": [
+        "exercise",
+        "fitness",
+        "gym",
+        "muscle up",
+        "pullup",
+        "pull up",
+        "trim trail"
+    ],
+    "name": "Exercise Rings"
+}

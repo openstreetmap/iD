@@ -1,9 +1,10 @@
 {
+    "icon": "maki-barrier",
     "fields": [
-        "access"
+        "access",
+        "opening_hours"
     ],
     "geometry": [
-        "point",
         "vertex",
         "line"
     ],

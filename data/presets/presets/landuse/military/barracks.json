@@ -1,0 +1,31 @@
+{
+    "icon": "temaki-military",
+    "fields": [
+        "name",
+        "building_area"
+    ],
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "tags": {
+        "military": "barracks"
+    },
+    "addTags": {
+        "landuse": "military",
+        "military": "barracks"
+    },
+    "terms": [
+        "air force",
+        "army",
+        "base",
+        "fight",
+        "force",
+        "guard",
+        "marine",
+        "navy",
+        "troop",
+        "war"
+    ],
+    "name": "Barracks"
+}

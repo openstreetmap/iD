@@ -1,13 +1,13 @@
 {
     "key": "fire_hydrant:type",
     "type": "combo",
-    "label": "Type",
+    "label": "Shape",
     "strings": {
         "options": {
             "pillar": "Pillar/Aboveground",
             "underground": "Underground",
             "wall": "Wall",
-            "pond": "Pond"
+            "pipe": "Capped Pipe"
         }
     }
 }

@@ -1,0 +1,33 @@
+{
+    "icon": "fas-hiking",
+    "fields": [
+        "name",
+        "operator",
+        "elevation",
+        "address",
+        "access_simple",
+        "fee",
+        "payment_multi_fee",
+        "charge_fee"
+    ],
+    "moreFields": [
+        "opening_hours"
+    ],
+    "geometry": [
+        "vertex"
+    ],
+    "tags": {
+        "highway": "trailhead"
+    },
+    "terms": [
+        "hiking",
+        "mile zero",
+        "mountain biking",
+        "mountaineering",
+        "trail endpoint",
+        "trail start",
+        "staging area",
+        "trekking"
+    ],
+    "name": "Trailhead"
+}

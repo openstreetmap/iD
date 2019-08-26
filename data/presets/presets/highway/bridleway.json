@@ -1,11 +1,23 @@
 {
     "fields": [
+        "name",
         "surface",
         "width",
         "structure",
-        "access"
+        "access",
+        "incline",
+        "horse_scale"
     ],
-    "icon": "highway-bridleway",
+    "moreFields": [
+        "covered",
+        "dog",
+        "lit",
+        "maxweight_bridge",
+        "smoothness",
+        "stroller",
+        "wheelchair"
+    ],
+    "icon": "maki-horse-riding",
     "geometry": [
         "line"
     ],
@@ -15,7 +27,8 @@
     "terms": [
         "bridleway",
         "equestrian",
-        "horse"
+        "horse",
+        "trail"
     ],
     "name": "Bridle Path"
 }

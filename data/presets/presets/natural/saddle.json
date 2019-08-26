@@ -1,0 +1,19 @@
+{
+    "icon": "maki-triangle-stroked",
+    "fields": [
+        "elevation"
+    ],
+    "geometry": [
+        "point",
+        "vertex"
+    ],
+    "tags": {
+        "natural": "saddle"
+    },
+    "terms": [
+        "pass",
+        "mountain pass",
+        "top"
+    ],
+    "name": "Saddle"
+}

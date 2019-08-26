@@ -1,4 +1,13 @@
 {
+    "icon": "maki-bicycle",
+    "fields": [
+        "name",
+        "ref_route",
+        "network_bicycle",
+        "cycle_network",
+        "to",
+        "from"
+    ],
     "geometry": [
         "relation"
     ],
@@ -6,10 +15,5 @@
         "type": "route",
         "route": "bicycle"
     },
-    "name": "Cycle Route",
-    "icon": "route-bicycle",
-    "fields": [
-        "ref",
-        "network"
-    ]
+    "name": "Cycle Route"
 }

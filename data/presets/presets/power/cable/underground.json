@@ -1,0 +1,22 @@
+{
+    "fields": [
+        "name",
+        "operator",
+        "voltage",
+        "ref",
+        "layer"
+    ],
+    "geometry": [
+        "line"
+    ],
+    "tags": {
+        "power": "cable",
+        "location": "underground"
+    },
+    "addTags": {
+        "power": "cable",
+        "location": "underground",
+        "layer": "-1"
+    },
+    "name": "Underground Power Cable"
+}

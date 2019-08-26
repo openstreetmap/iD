@@ -1,0 +1,16 @@
+{
+    "icon": "fas-blender",
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "terms": [
+        "home",
+        "household",
+        "kitchenware"
+    ],
+    "tags": {
+        "shop": "houseware"
+    },
+    "name": "Houseware Store"
+}

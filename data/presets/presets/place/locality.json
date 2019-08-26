@@ -1,11 +1,14 @@
 {
-    "icon": "marker",
-    "fields": [
-        "population"
-    ],
+    "icon": "maki-triangle-stroked",
     "geometry": [
         "point",
         "area"
+    ],
+    "moreFields": [
+        "website"
+    ],
+    "fields": [
+        "name"
     ],
     "tags": {
         "place": "locality"

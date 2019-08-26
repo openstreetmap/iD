@@ -1,0 +1,12 @@
+{
+    "icon": "maki-harbor",
+    "geometry": [
+        "area"
+    ],
+    "tags": {
+        "building": "boathouse"
+    },
+    "matchScore": 0.5,
+    "terms": [],
+    "name": "Boathouse"
+}

@@ -1,0 +1,21 @@
+{
+    "icon": "maki-volcano",
+    "fields": [
+        "name",
+        "elevation",
+        "volcano/status",
+        "volcano/type"
+    ],
+    "geometry": [
+        "point",
+        "vertex"
+    ],
+    "tags": {
+        "natural": "volcano"
+    },
+    "terms": [
+        "mountain",
+        "crater"
+    ],
+    "name": "Volcano"
+}

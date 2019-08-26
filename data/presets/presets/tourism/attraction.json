@@ -1,16 +1,19 @@
 {
-    "icon": "monument",
+    "icon": "maki-star",
     "fields": [
+        "name",
         "operator",
         "address"
     ],
     "geometry": [
         "point",
         "vertex",
+        "line",
         "area"
     ],
     "tags": {
         "tourism": "attraction"
     },
+    "matchScore": 0.75,
     "name": "Tourist Attraction"
 }

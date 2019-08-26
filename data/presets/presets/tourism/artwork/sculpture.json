@@ -1,0 +1,28 @@
+{
+    "icon": "maki-art-gallery",
+    "fields": [
+        "name",
+        "artist",
+        "material"
+    ],
+    "geometry": [
+        "point",
+        "vertex",
+        "line",
+        "area"
+    ],
+    "tags": {
+        "tourism": "artwork",
+        "artwork_type": "sculpture"
+    },
+    "reference": {
+        "key": "artwork_type",
+        "value": "sculpture"
+    },
+    "terms": [
+        "statue",
+        "figure",
+        "carving"
+    ],
+    "name": "Sculpture"
+}

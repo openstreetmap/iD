@@ -1,0 +1,23 @@
+{
+    "icon": "maki-theatre",
+    "fields": [
+        "name",
+        "operator",
+        "address",
+        "lit"
+    ],
+    "geometry": [
+        "point", "area"
+    ],
+    "terms": [
+        "open air",
+        "outdoor",
+        "greek",
+        "ampi"
+    ],
+    "tags": {
+        "amenity": "theatre",
+        "theatre:type": "amphi"
+    },
+    "name": "Amphitheatre"
+}

@@ -1,0 +1,41 @@
+{
+    "icon": "maki-restaurant-seafood",
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "terms": [
+        "bar",
+        "breakfast",
+        "cafe",
+        "café",
+        "dine",
+        "dining",
+        "dinner",
+        "drive-in",
+        "eat",
+        "grill",
+        "lunch",
+        "table",
+        "fish",
+        "shellfish",
+        "molluscs",
+        "crustaceans",
+        "clams",
+        "oysters",
+        "lobsters",
+        "crab",
+        "shrimp",
+        "squid",
+        "octopus"
+    ],
+    "tags": {
+        "amenity": "restaurant",
+        "cuisine": "seafood"
+    },
+    "reference": {
+        "key": "cuisine",
+        "value": "seafood"
+    },
+    "name": "Seafood Restaurant"
+}

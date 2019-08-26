@@ -1,16 +1,13 @@
 {
-    "icon": "shop",
-    "fields": [
-        "operator",
-        "address",
-        "building_area",
-        "opening_hours"
-    ],
+    "icon": "temaki-speaker",
     "geometry": [
         "point",
         "area"
     ],
     "terms": [
+        "audio",
+        "hi-fi",
+        "high fidelity",
         "stereo",
         "video"
     ],

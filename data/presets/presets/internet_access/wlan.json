@@ -1,0 +1,21 @@
+{
+    "icon": "fas-wifi",
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "fields": [
+        "internet_access/fee",
+        "internet_access/ssid"
+    ],
+    "terms": [
+        "wi-fi",
+        "wifi",
+        "hotspot"
+    ],
+    "tags": {
+        "internet_access": "wlan"
+    },
+    "matchScore": 0.25,
+    "name": "Wi-Fi Hotspot"
+}

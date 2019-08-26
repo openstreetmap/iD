@@ -1,0 +1,27 @@
+{
+    "icon": "maki-horse-riding",
+    "fields": [
+        "{leisure/pitch}",
+        "building"
+    ],
+    "geometry": [
+        "area",
+        "point"
+    ],
+    "tags": {
+        "leisure": "pitch",
+        "sport": "equestrian"
+    },
+    "reference": {
+        "key": "sport",
+        "value": "equestrian"
+    },
+    "terms": [
+        "dressage",
+        "equestrian",
+        "horse",
+        "horseback",
+        "riding"
+    ],
+    "name": "Riding Arena"
+}

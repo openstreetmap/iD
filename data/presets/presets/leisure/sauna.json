@@ -1,0 +1,27 @@
+{
+    "icon": "fas-thermometer-three-quarters",
+    "fields": [
+        "name",
+        "operator",
+        "address",
+        "opening_hours",
+        "access_simple",
+        "fee",
+        "payment_multi_fee",
+        "charge_fee"
+    ],
+    "moreFields": [
+        "website",
+        "phone",
+        "email",
+        "fax"
+    ],
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "tags": {
+        "leisure": "sauna"
+    },
+    "name": "Sauna"
+}

@@ -1,0 +1,36 @@
+{
+    "icon": "temaki-military",
+    "fields": [
+        "name"
+    ],
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "tags": {
+        "military": "range"
+    },
+    "addTags": {
+        "landuse": "military",
+        "military": "range"
+    },
+    "terms": [
+        "air force",
+        "army",
+        "base",
+        "fight",
+        "fire",
+        "force",
+        "guard",
+        "gun",
+        "marine",
+        "navy",
+        "rifle",
+        "shoot*",
+        "snip*",
+        "train",
+        "troop",
+        "war"
+    ],
+    "name": "Military Range"
+}

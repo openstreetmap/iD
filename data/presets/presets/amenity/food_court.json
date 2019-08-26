@@ -1,0 +1,37 @@
+{
+    "icon": "maki-restaurant",
+    "fields": [
+        "name",
+        "operator",
+        "address",
+        "building_area",
+        "opening_hours"
+    ],
+    "moreFields": [
+        "smoking",
+        "outdoor_seating",
+        "capacity",
+        "internet_access",
+        "internet_access/fee",
+        "internet_access/ssid",
+        "diet_multi",
+        "website",
+        "phone",
+        "email",
+        "fax",
+        "wheelchair"
+    ],
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "terms": [
+        "fast food",
+        "restaurant",
+        "food"
+    ],
+    "tags": {
+        "amenity": "food_court"
+    },
+    "name": "Food Court"
+}

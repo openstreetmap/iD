@@ -1,15 +1,31 @@
 {
+    "icon": "maki-park-alt1",
     "fields": [
-        "wood"
+        "name",
+        "leaf_type",
+        "leaf_cycle",
+        "produce"
     ],
-    "icon": "park2",
+    "moreFields": [
+        "address",
+        "website",
+        "phone",
+        "email",
+        "fax"
+    ],
     "geometry": [
-        "point",
         "area"
     ],
     "tags": {
         "landuse": "forest"
     },
-    "terms": [],
-    "name": "Forest"
+    "terms": [
+        "cut",
+        "forest",
+        "forestry",
+        "lumber",
+        "silviculture",
+        "tree"
+    ],
+    "name": "Managed Forest"
 }

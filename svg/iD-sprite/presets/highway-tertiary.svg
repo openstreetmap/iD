@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0" y="0" width="50" height="50" viewBox="5 0 50 50">
+  <path d="M22,14 L18,36 L29,36 L29.031,34 L30.969,34 L31,36 L42,36 L37.5,14 L30.5,14 L30.562,17 L29.437,17 L29.5,14 L22,14 z M29.406,18 L30.594,18 L30.656,21 L29.344,21 L29.406,18 z M29.313,22 L30.688,22 L30.75,25 L29.25,25 L29.313,22 z M29.219,26 L30.781,26 L30.844,29 L29.156,29 L29.219,26 z M29.125,30 L30.875,30 L30.938,33 L29.063,33 L29.125,30 z" fill="#444444"/>
+  <path d="M35,33 L34.5,29 L37.5,29 L38,33 z M23.25,20 L23.562,16 L26.438,16 L26.125,20 z" fill="currentColor" id="highway-tertiary-stroke2"/>
+</svg>

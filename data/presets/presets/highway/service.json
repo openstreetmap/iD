@@ -1,12 +1,25 @@
 {
-    "icon": "highway-service",
+    "icon": "iD-highway-service",
     "fields": [
+        "name",
         "service",
         "oneway",
         "maxspeed",
+        "surface",
+        "covered",
         "structure",
-        "access",
-        "surface"
+        "access"
+    ],
+    "moreFields": [
+        "flood_prone",
+        "incline",
+        "lanes",
+        "lit",
+        "maxheight",
+        "maxspeed/advisory",
+        "maxweight_bridge",
+        "oneway/bicycle",
+        "trolley_wire"
     ],
     "geometry": [
         "line"
@@ -14,6 +27,10 @@
     "tags": {
         "highway": "service"
     },
-    "terms": [],
+    "terms": [
+        "road",
+        "street"
+    ],
+    "matchScore": 0.9,
     "name": "Service Road"
 }

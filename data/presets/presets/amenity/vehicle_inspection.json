@@ -1,0 +1,29 @@
+{
+    "icon": "maki-car",
+    "fields": [
+        "name",
+        "operator",
+        "address",
+        "building_area",
+        "opening_hours"
+    ],
+    "moreFields": [
+        "email",
+        "fax",
+        "payment_multi",
+        "phone",
+        "website",
+        "wheelchair"
+    ],
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "terms": [
+        "car inspection"
+    ],
+    "tags": {
+        "amenity": "vehicle_inspection"
+    },
+    "name": "Vehicle Inspection"
+}

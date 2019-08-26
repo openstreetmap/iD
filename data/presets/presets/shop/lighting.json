@@ -1,0 +1,18 @@
+{
+    "icon": "far-lightbulb",
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "terms": [
+        "fluorescent lighting",
+        "lamps",
+        "LEDs",
+        "light fixtures",
+        "lightbulbs"
+    ],
+    "tags": {
+        "shop": "lighting"
+    },
+    "name": "Lighting Store"
+}

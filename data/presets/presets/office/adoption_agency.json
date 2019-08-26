@@ -1,0 +1,12 @@
+{
+    "icon": "maki-suitcase",
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "tags": {
+        "office": "adoption_agency"
+    },
+    "terms": [],
+    "name": "Adoption Agency"
+}

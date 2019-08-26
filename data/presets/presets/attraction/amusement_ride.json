@@ -1,0 +1,15 @@
+{
+    "icon": "maki-amusement-park",
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "terms": [
+        "theme park",
+        "carnival ride"
+    ],
+    "tags": {
+        "attraction": "amusement_ride"
+    },
+    "name": "Amusement Ride"
+}

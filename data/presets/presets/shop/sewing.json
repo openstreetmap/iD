@@ -1,0 +1,14 @@
+{
+    "icon": "maki-shop",
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "terms": [
+        "haberdashery"
+    ],
+    "tags": {
+        "shop": "sewing"
+    },
+    "name": "Sewing Supply Shop"
+}

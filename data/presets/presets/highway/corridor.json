@@ -1,0 +1,35 @@
+{
+    "icon": "temaki-pedestrian",
+    "fields": [
+        "name",
+        "width",
+        "level",
+        "access_simple",
+        "wheelchair"
+    ],
+    "moreFields": [
+        "covered",
+        "indoor",
+        "maxheight",
+        "stroller"
+    ],
+    "geometry": [
+        "line"
+    ],
+    "tags": {
+        "highway": "corridor"
+    },
+    "addTags": {
+        "highway": "corridor",
+        "indoor": "yes"
+    },
+    "terms": [
+        "gallery",
+        "hall",
+        "hallway",
+        "indoor",
+        "passage",
+        "passageway"
+    ],
+    "name": "Indoor Corridor"
+}

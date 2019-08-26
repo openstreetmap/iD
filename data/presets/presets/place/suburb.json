@@ -1,7 +1,11 @@
 {
-    "icon": "triangle-stroked",
+    "icon": "maki-triangle-stroked",
     "fields": [
+        "name",
         "population"
+    ],
+    "moreFields": [
+        "website"
     ],
     "geometry": [
         "point",
@@ -11,8 +15,9 @@
         "place": "suburb"
     },
     "terms": [
-        "Boro",
-        "Quarter"
+        "boro",
+        "borough",
+        "quarter"
     ],
-    "name": "Borough"
+    "name": "Borough / Suburb"
 }

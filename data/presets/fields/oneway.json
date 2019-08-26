@@ -1,12 +1,14 @@
 {
     "key": "oneway",
-    "type": "check",
+    "type": "onewayCheck",
     "label": "One Way",
     "strings": {
         "options": {
             "undefined": "Assumed to be No",
             "yes": "Yes",
-            "no": "No"
+            "no": "No",
+            "reversible": "Reversible",
+            "alternating": "Alternating"
         }
     }
 }

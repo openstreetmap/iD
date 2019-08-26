@@ -1,0 +1,30 @@
+{
+    "icon": "maki-industry",
+    "fields": [
+        "name",
+        "operator",
+        "address",
+        "plant/output/electricity",
+        "start_date"
+    ],
+    "geometry": [
+        "area"
+    ],
+    "tags": {
+        "power": "plant"
+    },
+    "addTags": {
+        "power": "plant",
+        "landuse": "industrial"
+    },
+    "terms": [
+        "coal",
+        "gas",
+        "generat*",
+        "hydro",
+        "nuclear",
+        "power",
+        "station"
+    ],
+    "name": "Power Station Grounds"
+}

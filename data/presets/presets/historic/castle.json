@@ -1,4 +1,13 @@
 {
+    "icon": "maki-castle",
+    "fields": [
+        "name",
+        "castle_type",
+        "building_area",
+        "historic/civilization",
+        "access_simple",
+        "start_date"
+    ],
     "geometry": [
         "point",
         "area"

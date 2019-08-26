@@ -1,14 +1,26 @@
 {
+    "icon": "temaki-power",
     "fields": [
         "operator",
         "generator/source",
         "generator/method",
-        "generator/type"
+        "generator/type",
+        "generator/output/electricity",
+        "ref"
+    ],
+    "moreFields": [
+        "manufacturer"
     ],
     "geometry": [
         "point",
         "vertex",
         "area"
+    ],
+    "terms": [
+        "hydro",
+        "solar",
+        "turbine",
+        "wind"
     ],
     "tags": {
         "power": "generator"

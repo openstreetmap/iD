@@ -1,0 +1,38 @@
+{
+    "icon": "maki-music",
+    "fields": [
+        "name",
+        "operator",
+        "address",
+        "building_area",
+        "dance/style"
+    ],
+    "moreFields": [
+        "opening_hours",
+        "payment_multi",
+        "website",
+        "phone",
+        "email",
+        "fax"
+    ],
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "terms": [
+        "jive",
+        "swing",
+        "tango",
+        "waltz",
+        "dance teaching"
+    ],
+    "tags": {
+        "leisure": "dance",
+        "dance:teaching": "yes"
+    },
+    "reference": {
+        "key": "leisure",
+        "value": "dance"
+    },
+    "name": "Dance School"
+}

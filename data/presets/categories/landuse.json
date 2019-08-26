@@ -1,17 +1,18 @@
 {
-    "geometry": "area",
-    "name": "Land Use",
-    "icon": "land-use",
+    "icon": "maki-landuse",
+    "name": "Land Use Features",
     "members": [
         "landuse/residential",
         "landuse/industrial",
         "landuse/commercial",
         "landuse/retail",
-        "landuse/farm",
+        "landuse/farmland",
         "landuse/farmyard",
         "landuse/forest",
         "landuse/meadow",
+        "landuse/aquaculture",
         "landuse/cemetery",
-        "landuse/military"
+        "landuse/military",
+        "landuse/religious"
     ]
 }

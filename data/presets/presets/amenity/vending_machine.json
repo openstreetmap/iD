@@ -1,18 +1,26 @@
 {
+    "icon": "temaki-vending_machine",
     "fields": [
         "vending",
-        "operator"
+        "operator",
+        "payment_multi",
+        "currency_multi"
+    ],
+    "moreFields": [
+        "brand",
+        "covered",
+        "height",
+        "indoor",
+        "manufacturer"
     ],
     "geometry": [
         "point"
     ],
     "terms": [
-        "snack",
-        "soda",
-        "ticket"
     ],
     "tags": {
         "amenity": "vending_machine"
     },
+    "matchScore": 0.9,
     "name": "Vending Machine"
 }

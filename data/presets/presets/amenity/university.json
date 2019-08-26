@@ -1,15 +1,20 @@
 {
-    "icon": "college",
+    "icon": "maki-college",
     "fields": [
-        "operator",
-        "address"
+        "{amenity/college}"
+    ],
+    "moreFields": [
+        "{amenity/college}"
     ],
     "geometry": [
-        "point",
-        "area"
+        "area",
+        "point"
     ],
     "terms": [
-        "college"
+        "college",
+        "graduate school",
+        "PhD program",
+        "master's degree program"
     ],
     "tags": {
         "amenity": "university"

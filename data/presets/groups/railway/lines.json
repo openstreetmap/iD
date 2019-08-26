@@ -1,0 +1,13 @@
+{
+    "note": "Features that are present or future rail lines of some sort, even if there are no rails present",
+    "matches": {
+        "geometry": "line",
+        "anyTags": {
+            "railway": {
+                "rail": true, "light_rail": true, "tram": true, "subway": true,
+                "monorail": true, "funicular": true, "miniature": true, "narrow_gauge": true,
+                "disused": true, "preserved": true, "abandoned": true, "construction": true
+            }
+        }
+    }
+}

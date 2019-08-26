@@ -1,17 +1,12 @@
 {
-    "icon": "shop",
-    "fields": [
-        "operator",
-        "address",
-        "building_area",
-        "opening_hours"
-    ],
+    "icon": "fas-carrot",
     "geometry": [
         "point",
         "area"
     ],
     "terms": [
         "fruit",
+        "produce",
         "vegetable"
     ],
     "tags": {

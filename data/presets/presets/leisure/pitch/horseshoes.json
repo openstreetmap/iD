@@ -1,0 +1,19 @@
+{
+    "icon": "temaki-horseshoes",
+    "geometry": [
+        "area",
+        "point"
+    ],
+    "tags": {
+        "leisure": "pitch",
+        "sport": "horseshoes"
+    },
+    "reference": {
+        "key": "sport",
+        "value": "horseshoes"
+    },
+    "terms": [
+        "horse shoes"
+    ],
+    "name": "Horseshoes Pit"
+}

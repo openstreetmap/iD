@@ -1,0 +1,29 @@
+{
+    "icon": "maki-horse-riding",
+    "fields": [
+        "name",
+        "horse_stables",
+        "horse_riding",
+        "horse_dressage"
+    ],
+    "moreFields": [
+        "internet_access",
+        "internet_access/fee",
+        "internet_access/ssid",
+        "address",
+        "opening_hours",
+        "website",
+        "phone",
+        "email",
+        "fax"
+    ],
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "tags": {
+        "tourism": "trail_riding_station"
+    },
+    "name": "Trail Riding Station",
+    "matchScore": 2.0
+}

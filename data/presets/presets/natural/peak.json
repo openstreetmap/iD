@@ -1,6 +1,7 @@
 {
-    "icon": "triangle",
+    "icon": "maki-mountain",
     "fields": [
+        "name",
         "elevation"
     ],
     "geometry": [

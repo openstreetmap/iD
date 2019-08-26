@@ -1,18 +1,32 @@
 {
-    "icon": "highway-road",
+    "icon": "iD-other-line",
     "fields": [
         "surface",
-        "sport_racing",
+        "sport_racing_nonmotor",
         "lit",
         "width",
         "lanes"
     ],
+    "moreFields": [
+        "access",
+        "covered",
+        "indoor"
+    ],
     "geometry": [
+        "line",
         "point",
-        "line"
+        "area"
     ],
     "tags": {
         "leisure": "track"
     },
-    "name": "Racetrack (non-Motorsport)"
+    "terms": [
+        "cycle",
+        "dog",
+        "greyhound",
+        "horse",
+        "race*",
+        "track"
+    ],
+    "name": "Racetrack (Non-Motorsport)"
 }

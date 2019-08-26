@@ -1,0 +1,11 @@
+{
+    "icon": "maki-shop",
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "tags": {
+        "shop": "tiles"
+    },
+    "name": "Tile Shop"
+}

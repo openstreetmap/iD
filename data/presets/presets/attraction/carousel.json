@@ -1,0 +1,24 @@
+{
+    "icon": "temaki-amusement_park",
+    "fields": [
+        "{attraction}",
+        "building_area"
+    ],
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "terms": [
+        "theme park",
+        "roundabout",
+        "merry-go-round",
+        "galloper",
+        "jumper",
+        "horseabout",
+        "flying horses"
+    ],
+    "tags": {
+        "attraction": "carousel"
+    },
+    "name": "Carousel"
+}

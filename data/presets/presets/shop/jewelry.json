@@ -1,22 +1,25 @@
 {
-    "icon": "shop",
-    "fields": [
-        "operator",
-        "address",
-        "building_area",
-        "opening_hours"
-    ],
+    "icon": "maki-jewelry-store",
     "geometry": [
         "point",
         "area"
     ],
     "terms": [
+        "bracelet",
         "diamond",
+        "earrings",
         "gem",
-        "ring"
+        "gold",
+        "jeweler",
+        "jewellery",
+        "jeweller",
+        "necklace",
+        "pins",
+        "ring",
+        "silver"
     ],
     "tags": {
         "shop": "jewelry"
     },
-    "name": "Jeweler"
+    "name": "Jewelry Store"
 }

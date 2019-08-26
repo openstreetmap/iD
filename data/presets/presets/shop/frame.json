@@ -1,11 +1,5 @@
 {
-    "icon": "shop",
-    "fields": [
-        "operator",
-        "address",
-        "building_area",
-        "opening_hours"
-    ],
+    "icon": "fas-vector-square",
     "geometry": [
         "point",
         "area"
@@ -13,5 +7,11 @@
     "tags": {
         "shop": "frame"
     },
+    "terms": [
+        "art*",
+        "paint*",
+        "photo*",
+        "frame"
+    ],
     "name": "Framing Shop"
 }

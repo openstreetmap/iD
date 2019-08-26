@@ -1,15 +1,11 @@
 {
-    "icon": "industrial",
-    "fields": [
-        "address",
-        "levels"
-    ],
+    "icon": "maki-industry",
     "geometry": [
-        "point",
         "area"
     ],
     "tags": {
         "building": "industrial"
     },
+    "matchScore": 0.5,
     "name": "Industrial Building"
 }

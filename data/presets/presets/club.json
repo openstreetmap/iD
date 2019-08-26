@@ -1,0 +1,35 @@
+{
+    "icon": "fas-handshake",
+    "fields": [
+        "name",
+        "club",
+        "operator",
+        "address",
+        "building_area",
+        "opening_hours"
+    ],
+    "moreFields": [
+        "access_simple",
+        "building/levels_building",
+        "height_building",
+        "email",
+        "fax",
+        "internet_access",
+        "internet_access/fee",
+        "internet_access/ssid",
+        "phone",
+        "website",
+        "wheelchair"
+    ],
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "tags": {
+        "club": "*"
+    },
+    "terms": [
+        "social"
+    ],
+    "name": "Club"
+}

@@ -1,0 +1,11 @@
+{
+    "icon": "maki-shop",
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "tags": {
+        "shop": "frozen_food"
+    },
+    "name": "Frozen Food"
+}

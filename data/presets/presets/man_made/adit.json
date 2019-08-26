@@ -1,0 +1,23 @@
+{
+    "icon": "maki-triangle",
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "fields": [
+        "name",
+        "operator",
+        "resource",
+        "direction"
+    ],
+    "terms": [
+        "cave",
+        "horizontal mine entrance",
+        "tunnel",
+        "underground"
+    ],
+    "tags": {
+        "man_made": "adit"
+    },
+    "name": "Adit"
+}

@@ -2,5 +2,10 @@
     "key": "name",
     "type": "localized",
     "label": "Name",
-    "placeholder": "Common name (if any)"
+    "universal": true,
+    "placeholder": "Common name (if any)",
+    "terms": [
+        "label",
+        "title"
+    ]
 }

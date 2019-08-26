@@ -1,0 +1,21 @@
+{
+    "icon": "fas-snowboarding",
+    "geometry": [
+        "line",
+        "area"
+    ],
+    "terms": [
+        "ski",
+        "alpine",
+        "halfpipe",
+        "half pipe",
+        "snowboard",
+        "downhill",
+        "piste"
+    ],
+    "tags": {
+        "piste:type": "downhill",
+        "man_made": "piste:halfpipe"
+    },
+    "name": "Halfpipe"
+}

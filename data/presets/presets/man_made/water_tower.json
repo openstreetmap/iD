@@ -1,11 +1,12 @@
 {
-    "icon": "water",
+    "icon": "maki-water",
     "fields": [
-        "operator"
+        "operator",
+        "height"
     ],
     "geometry": [
-        "point",
-        "area"
+        "area",
+        "point"
     ],
     "tags": {
         "man_made": "water_tower"

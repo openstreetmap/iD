@@ -1,13 +1,30 @@
 {
-    "icon": "zoo",
+    "icon": "temaki-zoo",
     "fields": [
+        "name",
         "operator",
         "address",
-        "opening_hours"
+        "opening_hours",
+        "fee",
+        "charge_fee"
+    ],
+    "moreFields": [
+        "internet_access",
+        "internet_access/fee",
+        "internet_access/ssid",
+        "payment_multi",
+        "website",
+        "phone",
+        "email",
+        "fax",
+        "wheelchair"
     ],
     "geometry": [
         "point",
         "area"
+    ],
+    "terms": [
+        "animal"
     ],
     "tags": {
         "tourism": "zoo"

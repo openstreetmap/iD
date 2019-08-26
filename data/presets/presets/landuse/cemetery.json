@@ -1,12 +1,18 @@
 {
-    "icon": "cemetery",
+    "icon": "maki-cemetery",
     "fields": [
+        "name",
         "religion",
         "denomination"
     ],
+    "moreFields": [
+        "address",
+        "website",
+        "phone",
+        "email",
+        "fax"
+    ],
     "geometry": [
-        "point",
-        "vertex",
         "area"
     ],
     "tags": {

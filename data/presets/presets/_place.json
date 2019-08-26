@@ -1,0 +1,16 @@
+{
+    "fields": [
+        "name",
+        "place"
+    ],
+    "geometry": [
+        "point",
+        "vertex",
+        "area"
+    ],
+    "tags": {
+        "place": "*"
+    },
+    "searchable": false,
+    "name": "Place"
+}

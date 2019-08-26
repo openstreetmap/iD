@@ -1,5 +1,8 @@
 {
     "key": "building",
-    "type": "typeCombo",
-    "label": "Building"
+    "type": "combo",
+    "label": "Building",
+    "terms": [
+        "structure"
+    ]
 }

@@ -1,0 +1,34 @@
+{
+    "icon": "maki-danger",
+    "fields": [
+        "name"
+    ],
+    "geometry": [
+        "point",
+        "vertex",
+        "area"
+    ],
+    "tags": {
+        "military": "danger_area"
+    },
+    "addTags": {
+        "landuse": "military",
+        "military": "danger_area"
+    },
+    "terms": [
+        "air force",
+        "army",
+        "base",
+        "blast",
+        "bomb",
+        "explo*",
+        "force",
+        "guard",
+        "mine",
+        "marine",
+        "navy",
+        "troop",
+        "war"
+    ],
+    "name": "Danger Area"
+}

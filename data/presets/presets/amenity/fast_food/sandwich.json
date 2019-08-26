@@ -1,0 +1,29 @@
+{
+    "icon": "temaki-sandwich",
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "terms": [
+        "breakfast",
+        "cafe",
+        "café",
+        "dine",
+        "dining",
+        "dinner",
+        "drive-in",
+        "eat",
+        "grill",
+        "lunch",
+        "table"
+    ],
+    "tags": {
+        "amenity": "fast_food",
+        "cuisine": "sandwich"
+    },
+    "reference": {
+        "key": "cuisine",
+        "value": "sandwich"
+    },
+    "name": "Sandwich Fast Food"
+}

@@ -1,11 +1,16 @@
 {
+    "icon": "temaki-beach",
     "geometry": [
         "point",
+        "line",
         "area"
     ],
-    "terms": [],
+    "fields": [
+        "name"
+    ],
     "tags": {
         "natural": "bay"
     },
+    "terms": [],
     "name": "Bay"
 }

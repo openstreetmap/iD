@@ -1,0 +1,97 @@
+/* waterways */
+
+/* defaults */
+.preset-icon .icon.tag-waterway.other-line {
+    color: #7dd;
+    fill: #7dd;
+}
+.preset-icon .icon.tag-type-waterway:not(.tag-waterway-dam),
+.preset-icon .icon.tag-waterway:not(.tag-waterway-dam) {
+    color: #7dd;
+    fill: #fff;
+}
+
+
+/* areas */
+path.area.stroke.tag-waterway-dock,
+path.area.stroke.tag-waterway-boatyard,
+path.area.stroke.tag-waterway-fuel {
+    stroke: white;
+    stroke-width: 1;
+}
+path.area.casing.tag-waterway-dock,
+path.area.casing.tag-waterway-boatyard,
+path.area.casing.tag-waterway-fuel {
+    stroke: none;
+}
+path.area.fill.tag-waterway-dock,
+path.area.fill.tag-waterway-boatyard,
+path.area.fill.tag-waterway-fuel {
+    stroke: rgba(255, 255, 255, 0.3);
+    fill: rgba(255, 255, 255, 0.3);
+}
+
+/* lines */
+path.line.fill.tag-waterway:not(.tag-waterway-dam) {
+    stroke: rgba(119, 211, 222, 0.3);
+    fill: rgba(119, 211, 222, 0.3);
+}
+path.line.casing.tag-waterway:not(.tag-waterway-dam) {
+    stroke: #444;
+}
+path.line.stroke.tag-waterway:not(.tag-waterway-dam) {
+    stroke: #7dd;
+}
+
+
+/* narrow waterways (default) */
+path.line.shadow.tag-waterway {
+    stroke-width: 16;
+}
+path.line.casing.tag-waterway {
+    stroke-width: 7;
+}
+path.line.stroke.tag-waterway {
+    stroke-width: 5;
+}
+
+.low-zoom path.line.shadow.tag-waterway {
+    stroke-width: 12;
+}
+.low-zoom path.line.casing.tag-waterway {
+    stroke-width: 5;
+}
+.low-zoom path.line.stroke.tag-waterway {
+    stroke-width: 3;
+}
+
+
+/* wide waterways (river) */
+path.line.shadow.tag-waterway-river {
+    stroke-width: 20;
+}
+path.line.casing.tag-waterway-river {
+    stroke-width: 10;
+}
+path.line.stroke.tag-waterway-river {
+    stroke-width: 8;
+}
+
+.low-zoom path.line.shadow.tag-waterway-river {
+    stroke-width: 16;
+}
+.low-zoom path.line.casing.tag-waterway-river {
+    stroke-width: 7;
+}
+.low-zoom path.line.stroke.tag-waterway-river {
+    stroke-width: 5;
+}
+
+
+/* ditch */
+.preset-icon .icon.tag-waterway-ditch {
+    color: #39a;
+}
+path.line.stroke.tag-waterway-ditch {
+    stroke: #39a;
+}

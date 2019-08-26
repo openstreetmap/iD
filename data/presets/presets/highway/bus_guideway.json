@@ -1,0 +1,26 @@
+{
+    "icon": "maki-bus",
+    "fields": [
+        "name",
+        "operator",
+        "oneway",
+        "structure",
+        "covered"
+    ],
+    "moreFields": [
+        "trolley_wire"
+    ],
+    "geometry": [
+        "line"
+    ],
+    "tags": {
+        "highway": "bus_guideway"
+    },
+    "addTags": {
+        "highway": "bus_guideway",
+        "access": "no",
+        "bus": "designated"
+    },
+    "terms": [],
+    "name": "Bus Guideway"
+}

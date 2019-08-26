@@ -1,0 +1,5 @@
+{
+    "key": "site_type",
+    "type": "combo",
+    "label": "Site Type"
+}

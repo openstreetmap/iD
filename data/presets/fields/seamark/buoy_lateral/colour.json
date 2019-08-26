@@ -1,0 +1,17 @@
+{
+    "key": "seamark:buoy_lateral:colour",
+    "type": "combo",
+    "label": "Color",
+    "strings": {
+        "options": {
+            "red": "Red",
+            "green": "Green",
+            "red;white;red;white": "Red-White-Red-White",
+            "green;white;green;white":"Green-White-Green-White",
+            "red;green;red":"Red-Green-Red",
+            "green;red;green":"Green-Red-Green",
+            "white":"White",
+            "yellow":"Yellow"
+        }
+    }
+}

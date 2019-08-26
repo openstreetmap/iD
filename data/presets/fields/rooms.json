@@ -1,0 +1,6 @@
+{
+    "key": "rooms",
+    "type": "number",
+    "minValue": 0,
+    "label": "Rooms"
+}

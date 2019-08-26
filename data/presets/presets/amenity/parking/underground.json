@@ -1,0 +1,36 @@
+{
+    "icon": "maki-car",
+    "fields": [
+        "{amenity/parking}",
+        "layer"
+    ],
+    "geometry": [
+        "area",
+        "point",
+        "vertex"
+    ],
+    "tags": {
+        "amenity": "parking",
+        "parking": "underground"
+    },
+    "addTags": {
+        "amenity": "parking",
+        "parking": "underground",
+        "layer": "-1"
+    },
+    "reference": {
+        "key": "parking",
+        "value": "underground"
+    },
+    "terms": [
+        "automobile parking",
+        "car lot",
+        "car parking",
+        "rv parking",
+        "subsurface parking",
+        "truck parking",
+        "vehicle parking"
+    ],
+    "matchScore": 1.05,
+    "name": "Underground Parking"
+}

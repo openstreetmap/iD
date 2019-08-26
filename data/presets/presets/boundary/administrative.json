@@ -1,12 +1,14 @@
 {
-    "name": "Administrative Boundary",
+    "fields": [
+        "name",
+        "admin_level"
+    ],
     "geometry": [
         "line"
     ],
     "tags": {
         "boundary": "administrative"
     },
-    "fields": [
-        "admin_level"
-    ]
+    "name": "Administrative Boundary",
+    "matchScore": 0.5
 }

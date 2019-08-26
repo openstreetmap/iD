@@ -1,0 +1,346 @@
+/* base styles */
+.layer-osm path {
+    fill: none;
+}
+
+/* IE/Edge needs these overrides for markers to show up */
+.layer-osm path.oneway-marker-path          { fill: #000; }
+.layer-osm path.sided-marker-natural-path   { fill: rgb(140, 208, 95); }
+.layer-osm path.sided-marker-coastline-path { fill: #77dede; }
+.layer-osm path.sided-marker-barrier-path   { fill: #ddd; }
+.layer-osm path.sided-marker-man_made-path  { fill: #fff; }
+
+/* IE/Edge rule for <use> marker style */
+.layer-osm path.viewfield-marker-path {
+    fill: #333;
+    fill-opacity: 0.75;
+    stroke: #fff;
+    stroke-width: 0.5px;
+    stroke-opacity: 0.75;
+}
+.fill-wireframe .layer-osm path.viewfield-marker-path {   /* IE/Edge rule for <use> marker style */
+    fill: none;
+}
+
+/* the above fill: none rule affects paths in <use> shadow dom only in Firefox */
+.layer-osm use.icon path { fill: #333; }                       /* FF svg Maki icons */
+.layer-osm .turn use path { fill: #000; }                      /* FF turn restriction icons */
+#turn-only-shape2, #turn-only-u-shape2 { fill: #7092ff; }      /* FF turn-only, turn-only-u */
+#turn-no-shape2, #turn-no-u-shape2     { fill: #e06d5f; }      /* FF turn-no, turn-no-u */
+#turn-yes-shape2, #turn-yes-u-shape2   { fill: #8cd05f; }      /* FF turn-yes, turn-yes-u */
+
+
+/* No interactivity except what we specifically allow */
+.data-layer.osm *,
+.data-layer.notes *,
+.data-layer.keepRight *,
+.data-layer.improveOSM * {
+    pointer-events: none;
+}
+
+.lasso #map {
+    pointer-events: visibleStroke;
+}
+
+
+/* `.target` objects are interactive */
+/* They can be picked up, clicked, hovered, or things can connect to them */
+.qa_error.target,
+.note.target,
+.node.target,
+.turn .target {
+    pointer-events: fill;
+    fill-opacity: 0.8;
+    fill: currentColor;
+    stroke: none;
+}
+
+.way.target {
+    pointer-events: stroke;
+    fill: none;
+    stroke-width: 12;
+    stroke-opacity: 0.8;
+    stroke: currentColor;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+
+
+/* `.target-nope` objects are explicitly forbidden to join to */
+.surface:not(.nope-disabled) .node.target.target-nope,
+.surface:not(.nope-disabled) .way.target.target-nope {
+    cursor: not-allowed;
+}
+
+
+/* `.active` objects (currently being drawn or dragged) are not interactive */
+/* This is important to allow the events to drop through to whatever is */
+/* below them on the map, so you can still hover and connect to other things. */
+.layer-osm .active {
+    pointer-events: none !important;
+}
+
+/* points, notes & QA */
+
+/* points, notes, markers */
+g.qa_error .stroke,
+g.note .stroke {
+    stroke: #222;
+    stroke-width: 1;
+    fill: #222;
+    opacity: 0.6;
+}
+
+g.qa_error.active .stroke,
+g.note.active .stroke {
+    stroke: #222;
+    stroke-width: 1;
+    fill: #222;
+    opacity: 0.8;
+}
+
+g.point .stroke {
+    stroke: #444;
+    stroke-width: 1;
+    fill: #fff;
+}
+
+
+g.qa_error .shadow,
+g.point .shadow,
+g.note .shadow {
+    fill: none;
+    stroke: #f6634f;
+    stroke-width: 16;
+    stroke-opacity: 0;
+}
+
+g.qa_error.hover:not(.selected) .shadow,
+g.note.hover:not(.selected) .shadow,
+g.point.related:not(.selected) .shadow,
+g.point.hover:not(.selected) .shadow {
+    stroke-opacity: 0.5;
+}
+
+g.qa_error.selected .shadow,
+g.note.selected .shadow,
+g.point.selected .shadow {
+    stroke-opacity: 0.7;
+}
+
+/* g.note ellipse.stroke, */
+g.point ellipse.stroke {
+    display: none;
+}
+.mode-drag-note g.note.active ellipse.stroke,
+.mode-drag-node g.point.active ellipse.stroke {
+    display: block;
+}
+
+
+/* vertices and midpoints */
+g.vertex .fill {
+    fill: #000;
+}
+g.vertex .stroke {
+    stroke: #666;
+    stroke-width: 1;
+    fill: white;
+}
+g.vertex.shared .stroke {
+    fill: #bbb;
+}
+g.midpoint .fill {
+    fill: #eee;
+    stroke: #444;
+    stroke-opacity: .6;
+    opacity: .7;
+}
+
+g.vertex .shadow,
+g.midpoint .shadow {
+    stroke-width: 6;
+    fill: #f6634f;
+    fill-opacity: 0;
+}
+
+g.vertex.related:not(.selected) .shadow,
+g.vertex.hover:not(.selected) .shadow,
+g.midpoint.related:not(.selected) .shadow,
+g.midpoint.hover:not(.selected) .shadow {
+    fill-opacity: 0.5;
+}
+
+g.vertex.selected .shadow {
+    fill-opacity: 0.7;
+}
+
+
+/* lines */
+.preset-icon .icon.iD-other-line {
+    color: #989898;
+}
+.preset-icon-container path.line.casing {
+    stroke: #afafaf;
+}
+
+path.line {
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+
+path.stroke {
+    stroke: #000;
+    stroke-width: 4;
+}
+
+path.shadow {
+    stroke: #f6634f;
+    stroke-width: 16;
+    stroke-opacity: 0;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+
+path.shadow.related:not(.selected),
+path.shadow.hover:not(.selected) {
+    stroke-opacity: 0.4;
+}
+
+path.shadow.selected {
+    stroke-opacity: 0.7;
+}
+
+path.line.stroke {
+    stroke: #fff;
+    stroke-width: 2;
+}
+
+
+/* Labels / Markers */
+text {
+    font-size: 10px;
+    color: #222;
+    opacity: 1;
+}
+
+.oneway .textpath.tag-waterway {
+    fill: #002F35;
+}
+
+.onewaygroup path.oneway,
+.viewfieldgroup path.viewfield,
+.sidedgroup path.sided {
+    stroke-width: 6px;
+}
+
+text.arealabel-halo,
+text.linelabel-halo,
+text.pointlabel-halo,
+text.arealabel,
+text.linelabel,
+text.pointlabel {
+    dominant-baseline: middle;
+    text-anchor: middle;
+    font-size: 12px;
+    font-weight: bold;
+    fill: #333;
+    -webkit-transition: opacity 100ms linear;
+    transition: opacity 100ms linear;
+    -moz-transition: opacity 100ms linear;
+}
+
+/* Opera doesn't support dominant-baseline. See #715 */
+/* Safari 10 seems to have regressed too */
+.linelabel-halo .textpath,
+.linelabel .textpath {
+  baseline-shift: -33%;
+  dominant-baseline: auto;
+}
+
+.labels-group.halo text {
+    opacity: 0.7;
+    stroke: #fff;
+    stroke-width: 5px;
+    stroke-miterlimit: 1;
+}
+
+text.nolabel {
+    opacity: 0 !important;
+}
+text.point {
+    font-size: 10px;
+}
+
+.icon.areaicon-halo {
+    opacity: 0.6;
+    stroke: #999;
+    stroke-width: 2px;
+    stroke-miterlimit: 1;
+}
+.icon.areaicon {
+    fill: #222;
+    opacity: 0.8;
+}
+
+
+/* Wikidata-tagged */
+g.point.tag-wikidata path.stroke {
+    stroke-width: 3px;
+    stroke: #777;
+    fill: #ddd;
+}
+
+
+/* Selected Members */
+g.vertex.selected-member .shadow,
+g.point.selected-member .shadow,
+path.shadow.selected-member {
+    stroke-opacity: 0.95;
+    stroke: #FFDE70;
+}
+
+/* Highlighting */
+g.point.highlighted .shadow,
+path.shadow.highlighted {
+    stroke-opacity: 0.95;
+    stroke: #7092ff;
+}
+g.vertex.highlighted .shadow {
+    stroke-width: 7;
+    stroke-opacity: 0.95;
+    stroke: #7092ff;
+}
+
+/* Turn Restrictions */
+.points-group.turns g.turn rect,
+.points-group.turns g.turn circle {
+    fill: none;
+}
+
+/* Turn restriction paths and vertices */
+.surface.tr .way.target,
+.surface.tr path.shadow.selected,
+.surface.tr path.shadow.related {
+    stroke-width: 25px;
+}
+
+.surface.tr path.shadow.selected,
+.surface.tr path.shadow.related,
+.surface.tr g.vertex.selected .shadow,
+.surface.tr g.vertex.related .shadow {
+    stroke-opacity: 0.7;
+    stroke: #777;
+}
+.surface.tr path.shadow.related.allow,
+.surface.tr g.vertex.related.allow .shadow {
+    stroke: #5b3;
+}
+.surface.tr path.shadow.related.restrict,
+.surface.tr g.vertex.related.restrict .shadow {
+    stroke: #d53;
+}
+.surface.tr path.shadow.related.only,
+.surface.tr g.vertex.related.only .shadow {
+    stroke: #68f;
+}

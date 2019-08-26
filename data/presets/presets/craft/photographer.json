@@ -1,11 +1,5 @@
 {
-    "icon": "camera",
-    "fields": [
-        "operator",
-        "address",
-        "building_area",
-        "opening_hours"
-    ],
+    "icon": "maki-attraction",
     "geometry": [
         "point",
         "area"

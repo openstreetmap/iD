@@ -1,7 +1,19 @@
 {
     "key": "source",
-    "type": "text",
+    "type": "semiCombo",
     "icon": "source",
     "universal": true,
-    "label": "Source"
+    "label": "Sources",
+    "snake_case": false,
+    "caseSensitive": true,
+    "options": [
+        "survey",
+        "local knowledge",
+        "gps",
+        "aerial imagery",
+        "streetlevel imagery"
+    ],
+    "terms": [
+        "reference"
+    ]
 }

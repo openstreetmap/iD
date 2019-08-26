@@ -1,0 +1,18 @@
+{
+    "icon": "maki-square-stroked",
+    "fields": [
+        "traffic_sign",
+        "traffic_sign/direction"
+    ],
+    "geometry": [
+        "vertex"
+    ],
+    "tags": {
+        "traffic_sign": "*"
+    },
+    "terms": [
+        "road",
+        "highway"
+    ],
+    "name": "Traffic Sign"
+}

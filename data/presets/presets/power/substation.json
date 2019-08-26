@@ -1,11 +1,14 @@
 {
+    "icon": "temaki-power",
     "fields": [
+        "substation",
         "operator",
-        "building"
+        "building",
+        "ref"
     ],
     "geometry": [
-        "point",
-        "area"
+        "area",
+        "point"
     ],
     "tags": {
         "power": "substation"

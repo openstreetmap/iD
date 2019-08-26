@@ -1,0 +1,15 @@
+{
+    "icon": "maki-suitcase",
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "tags": {
+        "office": "forestry"
+    },
+    "terms": [
+        "forest",
+        "ranger"
+    ],
+    "name": "Forestry Office"
+}

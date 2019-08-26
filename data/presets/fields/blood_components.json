@@ -1,0 +1,13 @@
+{
+    "key": "blood:",
+    "type": "multiCombo",
+    "label": "Blood Components",
+    "strings": {
+        "options": {
+            "whole": "whole blood",
+            "plasma": "plasma",
+            "platelets": "platelets",
+            "stemcells": "stem cell samples"
+        }
+    }
+}

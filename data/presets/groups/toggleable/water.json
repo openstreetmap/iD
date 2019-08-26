@@ -1,0 +1,24 @@
+{
+    "name": "Water Features",
+    "description": "Rivers, Lakes, Ponds, Basins, etc.",
+    "toggleable": true,
+    "matches": {
+        "anyTags": {
+            "waterway": {
+                "*": true,
+                "no": false
+            },
+            "natural": {
+                "water": true,
+                "coastline": true,
+                "bay": true
+            },
+            "landuse": {
+                "pond": true,
+                "basin": true,
+                "reservoir": true,
+                "salt_pond": true
+            }
+        }
+    }
+}

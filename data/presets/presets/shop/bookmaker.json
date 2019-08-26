@@ -1,14 +1,12 @@
 {
-    "icon": "shop",
-    "fields": [
-        "operator",
-        "address",
-        "building_area",
-        "opening_hours"
-    ],
+    "icon": "maki-shop",
     "geometry": [
         "point",
         "area"
+    ],
+    "terms": [
+        "betting",
+        "bookie"
     ],
     "tags": {
         "shop": "bookmaker"

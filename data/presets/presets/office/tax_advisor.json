@@ -1,0 +1,15 @@
+{
+    "icon": "maki-suitcase",
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "tags": {
+        "office": "tax_advisor"
+    },
+    "terms": [
+        "tax",
+        "tax consultant"
+    ],
+    "name": "Tax Advisor Office"
+}

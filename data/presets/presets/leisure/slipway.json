@@ -1,14 +1,36 @@
 {
+    "icon": "maki-slipway",
+    "fields": [
+        "name",
+        "surface",
+        "access_simple",
+        "fee",
+        "payment_multi_fee",
+        "charge_fee",
+        "lanes"
+    ],
+    "moreFields": [
+        "lit",
+        "opening_hours",
+        "seamark/type",
+        "width"
+    ],
     "geometry": [
-        "point",
         "line"
     ],
     "terms": [
         "boat launch",
-        "boat ramp"
+        "boat ramp",
+        "boat landing"
     ],
     "tags": {
         "leisure": "slipway"
     },
+    "addTags": {
+        "leisure": "slipway",
+        "highway": "service",
+        "service": "slipway"
+    },
+    "matchScore": 1.1,
     "name": "Slipway"
 }

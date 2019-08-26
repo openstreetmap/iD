@@ -1,4 +1,12 @@
 {
+    "icon": "iD-power-line",
+    "fields": [
+        "name",
+        "ref_route",
+        "operator",
+        "to",
+        "from"
+    ],
     "geometry": [
         "relation"
     ],
@@ -6,10 +14,5 @@
         "type": "route",
         "route": "power"
     },
-    "name": "Power Route",
-    "icon": "route-power",
-    "fields": [
-        "ref",
-        "operator"
-    ]
+    "name": "Power Route"
 }

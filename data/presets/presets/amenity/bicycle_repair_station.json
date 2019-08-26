@@ -1,0 +1,35 @@
+{
+    "icon": "maki-bicycle",
+    "fields": [
+        "operator",
+        "brand",
+        "opening_hours",
+        "fee",
+        "payment_multi_fee",
+        "charge_fee",
+        "service/bicycle"
+    ],
+    "moreFields": [
+        "colour",
+        "covered",
+        "indoor",
+        "manufacturer"
+    ],
+    "geometry": [
+        "point",
+        "vertex"
+    ],
+    "terms": [
+        "bike",
+        "repair",
+        "chain",
+        "pump",
+        "tools",
+        "stand",
+        "multitool"
+    ],
+    "tags": {
+        "amenity": "bicycle_repair_station"
+    },
+    "name": "Bicycle Repair Tool Stand"
+}

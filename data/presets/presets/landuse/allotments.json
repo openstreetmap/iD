@@ -1,11 +1,24 @@
 {
+    "icon": "maki-garden-centre",
     "geometry": [
-        "point",
         "area"
+    ],
+    "fields": [
+        "name"
+    ],
+    "moreFields": [
+        "address",
+        "website",
+        "phone",
+        "email",
+        "fax"
     ],
     "tags": {
         "landuse": "allotments"
     },
-    "terms": [],
-    "name": "Allotments"
+    "terms": [
+        "allotment",
+        "garden"
+    ],
+    "name": "Community Garden"
 }

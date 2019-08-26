@@ -1,0 +1,36 @@
+{
+    "icon": "maki-lodging",
+    "fields": [
+        "name",
+        "operator",
+        "resort",
+        "address",
+        "opening_hours"
+    ],
+    "moreFields": [
+        "access_simple",
+        "email",
+        "fax",
+        "internet_access",
+        "internet_access/fee",
+        "internet_access/ssid",
+        "payment_multi",
+        "phone",
+        "website"
+    ],
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "tags": {
+        "leisure": "resort"
+    },
+    "terms": [
+        "recreation center",
+        "sanatorium",
+        "ski and snowboard resort",
+        "vacation resort",
+        "winter sports resort"
+    ],
+    "name": "Resort"
+}

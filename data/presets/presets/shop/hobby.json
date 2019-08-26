@@ -1,0 +1,16 @@
+{
+    "icon": "fas-dragon",
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "tags": {
+        "shop": "hobby"
+    },
+    "terms": [
+        "manga",
+        "figurine",
+        "model"
+    ],
+    "name": "Hobby Shop"
+}

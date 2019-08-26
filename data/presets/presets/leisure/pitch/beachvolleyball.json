@@ -1,0 +1,24 @@
+{
+    "icon": "maki-volleyball",
+    "geometry": [
+        "area",
+        "point"
+    ],
+    "tags": {
+        "leisure": "pitch",
+        "sport": "beachvolleyball"
+    },
+    "addTags": {
+        "leisure": "pitch",
+        "sport": "beachvolleyball",
+        "surface": "sand"
+    },
+    "reference": {
+        "key": "sport",
+        "value": "beachvolleyball"
+    },
+    "terms": [
+        "volleyball"
+    ],
+    "name": "Beach Volleyball Court"
+}

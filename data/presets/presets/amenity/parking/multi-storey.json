@@ -1,0 +1,42 @@
+{
+    "icon": "maki-car",
+    "fields": [
+        "name",
+        "{amenity/parking}",
+        "building"
+    ],
+    "moreFields": [
+        "{amenity/parking}",
+        "levels",
+        "height"
+    ],
+    "geometry": [
+        "area"
+    ],
+    "tags": {
+        "amenity": "parking",
+        "parking": "multi-storey"
+    },
+    "addTags": {
+        "building": "parking",
+        "amenity": "parking",
+        "parking": "multi-storey"
+    },
+    "reference": {
+        "key": "parking",
+        "value": "multi-storey"
+    },
+    "terms": [
+        "car",
+        "indoor parking",
+        "multistorey car park",
+        "parkade",
+        "parking building",
+        "parking deck",
+        "parking garage",
+        "parking ramp",
+        "parking structure"
+    ],
+    "matchScore": 1.05,
+    "name": "Multilevel Parking Garage"
+}

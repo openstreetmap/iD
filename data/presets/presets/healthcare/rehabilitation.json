@@ -1,0 +1,16 @@
+{
+    "icon": "maki-hospital",
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "terms": [
+        "rehab",
+        "therapist",
+        "therapy"
+    ],
+    "tags": {
+        "healthcare": "rehabilitation"
+    },
+    "name": "Rehabilitation Facility"
+}

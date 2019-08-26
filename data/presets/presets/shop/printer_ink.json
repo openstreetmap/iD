@@ -1,0 +1,17 @@
+{
+    "icon": "maki-shop",
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "terms": [
+        "copier ink",
+        "fax ink",
+        "ink cartridges",
+        "toner"
+    ],
+    "tags": {
+        "shop": "printer_ink"
+    },
+    "name": "Printer Ink Store"
+}

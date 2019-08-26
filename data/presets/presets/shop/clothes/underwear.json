@@ -1,0 +1,33 @@
+{
+    "icon": "maki-clothing-store",
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "tags": {
+        "shop": "clothes",
+        "clothes": "underwear"
+    },
+    "reference": {
+        "key": "clothes",
+        "value": "underwear"
+    },
+    "terms": [
+        "boutique",
+        "bras",
+        "brassieres",
+        "briefs",
+        "boxers",
+        "fashion",
+        "lingerie",
+        "panties",
+        "slips",
+        "socks",
+        "stockings",
+        "underclothes",
+        "undergarments",
+        "underpants",
+        "undies"
+    ],
+    "name": "Underwear Store"
+}

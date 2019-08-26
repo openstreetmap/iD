@@ -1,0 +1,33 @@
+{
+    "icon": "maki-lodging",
+    "fields": [
+        "name",
+        "operator",
+        "address",
+        "building_area",
+        "fee",
+        "payment_multi_fee",
+        "charge_fee",
+        "fireplace"
+    ],
+    "moreFields": [
+        "internet_access",
+        "internet_access/fee",
+        "internet_access/ssid",
+        "reservation",
+        "wheelchair"
+    ],
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "terms": [
+        "wilderness hut",
+        "backcountry hut",
+        "bothy"
+    ],
+    "tags": {
+        "tourism": "wilderness_hut"
+    },
+    "name": "Wilderness Hut"
+}

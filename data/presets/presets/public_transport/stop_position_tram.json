@@ -1,0 +1,39 @@
+{
+    "icon": "temaki-tram",
+    "fields": [
+        "{public_transport/stop_position}"
+    ],
+    "moreFields": [
+        "{public_transport/stop_position}"
+    ],
+    "geometry": [
+        "vertex"
+    ],
+    "tags": {
+        "public_transport": "stop_position",
+        "tram": "yes"
+    },
+    "addTags": {
+        "public_transport": "stop_position",
+        "tram": "yes",
+        "railway": "tram_stop"
+    },
+    "reference": {
+        "key": "public_transport",
+        "value": "stop_position"
+    },
+    "terms": [
+        "electric",
+        "light rail",
+        "public transit",
+        "public transportation",
+        "rail",
+        "streetcar",
+        "track",
+        "tram",
+        "trolley",
+        "transit",
+        "transportation"
+    ],
+    "name": "Tram Stopping Location"
+}

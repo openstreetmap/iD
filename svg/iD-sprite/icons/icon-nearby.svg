@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0" y="0" width="20" height="20" viewBox="0 0 20 20">
+  <defs>
+    <clipPath id="Clip_1">
+      <path d="M9.5,4 C12.543,4 15,6.457 15,9.5 C15,12.543 12.543,15 9.5,15 C6.457,15 4,12.543 4,9.5 C4,6.457 6.457,4 9.5,4 z"/>
+    </clipPath>
+    <clipPath id="Clip_2">
+      <path d="M9.5,4 C12.543,4 15,6.457 15,9.5 C15,12.543 12.543,15 9.5,15 C6.457,15 4,12.543 4,9.5 C4,6.457 6.457,4 9.5,4 z"/>
+    </clipPath>
+  </defs>
+    <g>
+      <image xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAsAAAALCAYAAACprHcmAAAAAXNSR0IArs4c6QAAAQhJREFUGBlNkUluhTAQRL8nxgUSZ4AVV8m1cpucjMAOMdrm97M+UZBacrurqouy6rrux3uvz/M01HEcZts2d13Xt5ztuq72mVnnXFRKvfhijC8BaelvEVAC1iGER0gDDlrrKGUgMNz33coRsOEsAobtNs/zIIpKQNEYEyEA+JCc2HDSGzC2KArPepSE6Muy9DTjOFbTNJWimIDcmb7vv7Isi9ip69o3TXMMw/ArM8VqLPzZEGU831jAUlVVV9u22zzPJWr0CDFPnvlBUsGS2Lggobosi4Mg9yqBYVlro1gJFKRPdBoCiUAQTEjRAXgKomxinmIkd2zSp0dhxb+6UZaPOJUkxcMk8BvNntGWzlp0zgAAAABJRU5ErkJggg==" preserveAspectRatio="none" x="4" y="4" width="11" height="11" clip-path="url(#Clip_2)"/>
+      <g clip-path="url(#Clip_1)">
+        <path d="M15,9.5 C15,12.538 12.538,15 9.5,15 L9.5,9.5 z M9.5,16 L9.5,9.5 L14,14 z M9.5,9.5 L9.5,15 C6.462,15 4,12.538 4,9.5 z M9.5,9.5 L9.5,4 C6.462,4 4,6.462 4,9.5 z M2.812,9.5 L5.5,14 L9.5,9.5 z M9.5,3 L9.5,9.5 L5,5 z" fill="#1A1A1A" opacity="0.2"/>
+      </g>
+    </g>
+    <path d="M9,4 L10,4 L10,10 L9,10 z M9.5,3 C5.916,3 3,5.916 3,9.5 C3,13.084 5.916,16 9.5,16 C13.084,16 16,13.084 16,9.5 C16,5.916 13.084,3 9.5,3 z M9.5,2 C13.642,2 17,5.358 17,9.5 C17,13.642 13.642,17 9.5,17 C5.358,17 2,13.642 2,9.5 C2,5.358 5.358,2 9.5,2 z" fill="#1A1A1A"/>
+</svg>

@@ -1,0 +1,14 @@
+{
+    "icon": "fas-warehouse",
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "tags": {
+        "shop": "storage_rental"
+    },
+    "terms": [
+        "garages"
+    ],
+    "name": "Storage Rental"
+}

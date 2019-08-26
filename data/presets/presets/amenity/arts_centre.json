@@ -1,9 +1,24 @@
 {
-    "icon": "theatre",
+    "icon": "maki-theatre",
     "fields": [
+        "name",
         "address",
         "building_area",
-        "opening_hours"
+        "opening_hours",
+        "website"
+    ],
+    "moreFields": [
+        "charge_fee",
+        "email",
+        "fax",
+        "fee",
+        "internet_access",
+        "internet_access/fee",
+        "internet_access/ssid",
+        "payment_multi",
+        "phone",
+        "website",
+        "wheelchair"
     ],
     "geometry": [
         "point",

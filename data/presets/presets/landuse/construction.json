@@ -1,10 +1,21 @@
 {
+    "icon": "temaki-tools",
     "fields": [
+        "name",
         "construction",
-        "operator"
+        "operator",
+        "opening_date",
+        "check_date",
+        "note"
+    ],
+    "moreFields": [
+        "address",
+        "website",
+        "phone",
+        "email",
+        "fax"
     ],
     "geometry": [
-        "point",
         "area"
     ],
     "tags": {

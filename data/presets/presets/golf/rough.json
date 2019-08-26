@@ -1,11 +1,18 @@
 {
-    "icon": "golf",
+    "icon": "maki-golf",
+    "fields": [
+        "name"
+    ],
     "geometry": [
         "area"
     ],
     "tags": {
         "golf": "rough",
         "landuse": "grass"
+    },
+    "reference": {
+        "key": "golf",
+        "value": "rough"
     },
     "name": "Rough"
 }

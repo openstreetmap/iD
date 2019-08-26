@@ -1,11 +1,5 @@
 {
-    "fields": [
-        "operator",
-        "address",
-        "building_area",
-        "opening_hours",
-        "social_facility_for"
-    ],
+    "icon": "temaki-social_facility",
     "geometry": [
         "point",
         "area"
@@ -15,6 +9,10 @@
     "tags": {
         "amenity": "social_facility",
         "social_facility": "food_bank"
+    },
+    "reference": {
+        "key": "social_facility",
+        "value": "food_bank"
     },
     "name": "Food Bank"
 }

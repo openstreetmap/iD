@@ -1,0 +1,17 @@
+{
+    "icon": "maki-marker-stroked",
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "tags": {
+        "craft": "optician"
+    },
+    "reference": {
+        "key": "shop",
+        "value": "optician"
+    },
+    "name": "Optician",
+    "searchable": false,
+    "replacement": "shop/optician"
+}

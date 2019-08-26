@@ -1,0 +1,14 @@
+{
+    "be": {
+        "operations": {
+            "merge": {
+                "title": "Аб'яднаць"
+            }
+        },
+        "imagery": {
+            "Bing": {
+                "name": "Bing аэрафотаздымкі"
+            }
+        }
+    }
+}

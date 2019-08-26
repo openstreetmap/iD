@@ -1,0 +1,27 @@
+{
+    "icon": "fas-biking",
+    "geometry": [
+        "line"
+    ],
+    "tags": {
+        "highway": "cycleway",
+        "foot": "designated"
+    },
+    "addTags": {
+        "highway": "cycleway",
+        "foot": "designated",
+        "bicycle": "designated"
+    },
+    "terms": [
+        "bicycle and foot path",
+        "bike and pedestrian path",
+        "green way",
+        "greenway",
+        "mixed-use trail",
+        "multi-use trail",
+        "segregated trail",
+        "rail trail"
+    ],
+    "matchScore": 0.95,
+    "name": "Cycle & Foot Path"
+}

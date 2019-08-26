@@ -1,0 +1,17 @@
+{
+    "icon": "maki-triangle-stroked",
+    "fields": [
+        "name"
+    ],
+    "moreFields": [
+        "website"
+    ],
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "tags": {
+        "place": "city_block"
+    },
+    "name": "City Block"
+}

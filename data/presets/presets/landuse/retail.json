@@ -1,11 +1,21 @@
 {
-    "icon": "shop",
+    "icon": "maki-commercial",
     "geometry": [
-        "point",
         "area"
+    ],
+    "fields": [
+        "name"
+    ],
+    "moreFields": [
+        "address",
+        "website",
+        "phone",
+        "email",
+        "fax"
     ],
     "tags": {
         "landuse": "retail"
     },
-    "name": "Retail"
+    "matchScore": 0.9,
+    "name": "Retail Area"
 }

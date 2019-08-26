@@ -1,13 +1,19 @@
 {
+    "icon": "maki-bbq",
     "fields": [
         "covered",
-        "fuel"
+        "fuel",
+        "access_simple"
+    ],
+    "moreFields": [
+        "lit"
     ],
     "geometry": [
         "point"
     ],
     "terms": [
-        "bbq"
+        "bbq",
+        "grill"
     ],
     "tags": {
         "amenity": "bbq"

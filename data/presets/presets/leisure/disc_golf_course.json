@@ -1,0 +1,41 @@
+{
+    "icon": "temaki-disc_golf_basket",
+    "fields": [
+        "name",
+        "operator",
+        "access_simple",
+        "fee",
+        "payment_multi_fee",
+        "charge_fee",
+        "opening_hours"
+    ],
+    "moreFields": [
+        "address",
+        "dog",
+        "email",
+        "fax",
+        "lit",
+        "phone",
+        "website",
+        "wheelchair"
+    ],
+    "geometry": [
+        "area",
+        "point"
+    ],
+    "tags": {
+        "leisure": "disc_golf_course"
+    },
+    "addTags": {
+        "leisure": "disc_golf_course",
+        "sport": "disc_golf"
+    },
+    "terms": [
+        "disk golf",
+        "frisbee golf",
+        "flying disc golf",
+        "frolf",
+        "ultimate"
+    ],
+    "name": "Disc Golf Course"
+}

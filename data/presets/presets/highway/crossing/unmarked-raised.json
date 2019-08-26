@@ -1,0 +1,27 @@
+{
+    "icon": "temaki-pedestrian",
+    "fields": [
+        "crossing",
+        "tactile_paving",
+        "crossing/island"
+    ],
+    "geometry": [
+        "vertex"
+    ],
+    "tags": {
+        "highway": "crossing",
+        "crossing": "unmarked",
+        "traffic_calming": "table"
+    },
+    "reference": {
+        "key": "traffic_calming",
+        "value": "table"
+    },
+    "terms": [
+        "flat top",
+        "hump",
+        "speed",
+        "slow"
+    ],
+    "name": "Unmarked Crossing (Raised)"
+}

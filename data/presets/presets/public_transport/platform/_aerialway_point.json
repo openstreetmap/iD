@@ -1,0 +1,31 @@
+{
+    "icon": "maki-aerialway",
+    "fields": [
+        "{public_transport/platform_point}"
+    ],
+    "moreFields": [
+        "{public_transport/platform_point}"
+    ],
+    "geometry": [
+        "point"
+    ],
+    "tags": {
+        "public_transport": "platform",
+        "aerialway": "yes"
+    },
+    "reference": {
+        "key": "public_transport",
+        "value": "platform"
+    },
+    "terms": [
+        "aerialway",
+        "cable car",
+        "platform",
+        "public transit",
+        "public transportation",
+        "transit",
+        "transportation"
+    ],
+    "searchable": false,
+    "name": "Aerialway Stop / Platform"
+}

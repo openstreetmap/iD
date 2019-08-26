@@ -1,9 +1,10 @@
 {
-    "icon": "religious-jewish",
+    "icon": "maki-religious-jewish",
     "fields": [
+        "name",
+        "religion",
         "denomination",
-        "building_area",
-        "address"
+        "{amenity/place_of_worship}"
     ],
     "geometry": [
         "point",
@@ -16,5 +17,9 @@
         "amenity": "place_of_worship",
         "religion": "jewish"
     },
-    "name": "Synagogue"
+    "reference": {
+        "key": "amenity",
+        "value": "place_of_worship"
+    },
+    "name": "Jewish Synagogue"
 }

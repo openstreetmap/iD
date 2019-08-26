@@ -1,0 +1,22 @@
+{
+    "icon": "maki-roadblock",
+    "fields": [
+        "access",
+        "building_area"
+    ],
+    "moreFields": [
+        "address",
+        "website",
+        "phone",
+        "email",
+        "fax"
+    ],
+    "geometry": [
+        "vertex",
+        "area"
+    ],
+    "tags": {
+        "barrier": "border_control"
+    },
+    "name": "Border Control"
+}

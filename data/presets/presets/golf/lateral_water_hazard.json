@@ -1,12 +1,18 @@
 {
-    "icon": "golf",
+    "icon": "maki-golf",
+    "fields": [
+        "name"
+    ],
     "geometry": [
-        "line",
         "area"
     ],
     "tags": {
         "golf": "lateral_water_hazard",
         "natural": "water"
+    },
+    "reference": {
+        "key": "golf",
+        "value": "lateral_water_hazard"
     },
     "name": "Lateral Water Hazard"
 }

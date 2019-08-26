@@ -1,19 +1,18 @@
 {
-    "icon": "commercial",
-    "fields": [
-        "address",
-        "building_area",
-        "opening_hours",
-        "smoking"
-    ],
+    "icon": "maki-suitcase",
     "geometry": [
         "point",
-        "vertex",
         "area"
     ],
     "tags": {
         "office": "ngo"
     },
-    "terms": [],
+    "terms": [
+        "ngo",
+        "non government",
+        "non-government",
+        "organization",
+        "organisation"
+    ],
     "name": "NGO Office"
 }

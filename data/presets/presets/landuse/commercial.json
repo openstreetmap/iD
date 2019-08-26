@@ -1,12 +1,22 @@
 {
-    "icon": "commercial",
+    "icon": "maki-suitcase",
+    "fields": [
+        "name"
+    ],
+    "moreFields": [
+        "address",
+        "website",
+        "phone",
+        "email",
+        "fax"
+    ],
     "geometry": [
-        "point",
         "area"
     ],
     "tags": {
         "landuse": "commercial"
     },
     "terms": [],
-    "name": "Commercial"
+    "matchScore": 0.9,
+    "name": "Commercial Area"
 }

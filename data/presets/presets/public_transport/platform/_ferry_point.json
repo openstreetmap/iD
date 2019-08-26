@@ -1,0 +1,33 @@
+{
+    "icon": "maki-ferry",
+    "fields": [
+        "{public_transport/platform_point}"
+    ],
+    "moreFields": [
+        "{public_transport/platform_point}"
+    ],
+    "geometry": [
+        "point"
+    ],
+    "tags": {
+        "public_transport": "platform",
+        "ferry": "yes"
+    },
+    "reference": {
+        "key": "public_transport",
+        "value": "platform"
+    },
+    "terms": [
+        "boat",
+        "dock",
+        "ferry",
+        "pier",
+        "platform",
+        "public transit",
+        "public transportation",
+        "transit",
+        "transportation"
+    ],
+    "searchable": false,
+    "name": "Ferry Stop / Platform"
+}

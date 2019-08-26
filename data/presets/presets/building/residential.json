@@ -1,15 +1,11 @@
 {
-    "icon": "building",
-    "fields": [
-        "address",
-        "levels"
-    ],
+    "icon": "maki-residential-community",
     "geometry": [
-        "point",
         "area"
     ],
     "tags": {
         "building": "residential"
     },
+    "matchScore": 0.5,
     "name": "Residential Building"
 }

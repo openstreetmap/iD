@@ -1,0 +1,14 @@
+{
+    "icon": "temaki-storage_tank",
+    "fields": [
+       "lit"
+    ],
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "tags": {
+        "advertising": "column"
+    },
+    "name": "Advertising Column"
+}

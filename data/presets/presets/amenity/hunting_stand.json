@@ -1,0 +1,24 @@
+{
+    "icon": "temaki-binoculars",
+    "fields": [
+        "access_simple"
+    ],
+    "geometry": [
+        "point",
+        "vertex",
+        "area"
+    ],
+    "terms": [
+        "game",
+        "gun",
+        "lookout",
+        "rifle",
+        "shoot*",
+        "wild",
+        "watch"
+    ],
+    "tags": {
+        "amenity": "hunting_stand"
+    },
+    "name": "Hunting Stand"
+}

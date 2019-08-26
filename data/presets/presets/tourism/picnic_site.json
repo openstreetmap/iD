@@ -1,9 +1,24 @@
 {
-    "icon": "park",
+    "icon": "maki-picnic-site",
     "fields": [
+        "name",
         "operator",
         "address",
-        "smoking"
+        "access_simple",
+        "capacity"
+    ],
+    "moreFields": [
+        "charge_fee",
+        "internet_access",
+        "internet_access/fee",
+        "internet_access/ssid",
+        "smoking",
+        "fee",
+        "payment_multi_fee",
+        "phone",
+        "reservation",
+        "website",
+        "wheelchair"
     ],
     "geometry": [
         "point",

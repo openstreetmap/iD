@@ -1,0 +1,37 @@
+{
+    "services": {
+        "improveOSM": {
+            "errorTypes": {
+                "ow": {
+                    "icon": "fas-long-arrow-alt-right",
+                    "category": "routing"
+                },
+                "mr-both": {
+                    "icon": "maki-car",
+                    "category": "geometry"
+                },
+                "mr-parking": {
+                    "icon": "maki-parking",
+                    "category": "geometry"
+                },
+                "mr-path": {
+                    "icon": "maki-shoe",
+                    "category": "geometry"
+                },
+                "mr-road": {
+                    "icon": "maki-car",
+                    "category": "geometry"
+                },
+                "tr": {
+                    "icon": "temaki-junction",
+                    "category": "routing"
+                }
+            }
+        },
+        "keepRight": {
+            "errorTypes": {
+
+            }
+        }
+    }
+}

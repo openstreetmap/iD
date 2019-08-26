@@ -1,0 +1,42 @@
+{
+    "icon": "temaki-antenna",
+    "fields": [
+        "name",
+        "operator",
+        "operator/type",
+        "address",
+        "building_area",
+        "internet_access",
+        "internet_access/fee",
+        "internet_access/ssid"
+    ],
+    "moreFields": [
+        "air_conditioning",
+        "email",
+        "fax",
+        "opening_hours",
+        "outdoor_seating",
+        "payment_multi",
+        "phone",
+        "smoking",
+        "website",
+        "wheelchair"
+    ],
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "terms": [
+        "cybercafe",
+        "taxiphone",
+        "teleboutique",
+        "coffee",
+        "cafe",
+        "net",
+        "lanhouse"
+     ],
+    "tags": {
+        "amenity": "internet_cafe"
+    },
+    "name": "Internet Cafe"
+}

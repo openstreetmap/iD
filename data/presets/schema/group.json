@@ -1,0 +1,191 @@
+{
+    "title": "Entity Group",
+    "description": "A grouping of features that have something in common",
+    "type": "object",
+    "properties": {
+        "note": {
+            "description": "Developer documentation for this group",
+            "type": "string"
+        },
+        "name": {
+            "description": "The name for the group, if needed for the UI. American English; translatable",
+            "type": "string"
+        },
+        "description": {
+            "description": "A short description for the group, if needed for the UI. American English; translatable",
+            "type": "string"
+        },
+        "matches": {
+            "description": "The root rule defining the features in this group",
+            "$ref": "#/definitions/rule",
+            "required": true
+        },
+        "nearby": {
+            "description": "Features that are often found within or around features in this group",
+            "$ref": "#/definitions/ruleOrGroupName"
+        },
+        "vertexOf": {
+            "description": "Way features that features in this group can be member nodes of",
+            "$ref": "#/definitions/ruleOrGroupName"
+        },
+        "toggleable": {
+            "anyOf": [
+                {
+                    "description": "Specify if the group's visiblity can be turned on and off in the Map Data pane",
+                    "type": "boolean"
+                },
+                {
+                    "description": "The group can be turned on and off in the Map Data pane with the following constraints",
+                    "type": "object",
+                    "properties": {
+                        "hiddenByDefault": {
+                            "type": "boolean"
+                        },
+                        "maxShown": {
+                            "type": "number"
+                        }
+                    }
+                }
+            ]
+        }
+    },
+    "additionalProperties": false,
+    "definitions": {
+        "geometry": {
+            "type": "string",
+            "enum": ["point", "vertex", "line", "area", "relation"]
+        },
+        "tags": {
+            "type": "object",
+            "additionalProperties": {
+                "anyOf": [
+                    {
+                        "type": "boolean"
+                    },
+                    {
+                        "type": "string"
+                    },
+                    {
+                        "type": "object",
+                        "additionalProperties": {
+                            "type": "boolean"
+                        }
+                    }
+                ]
+            }
+        },
+        "ruleArray": {
+            "type": "array",
+            "items": {
+                "$ref": "#/definitions/rule"
+            },
+            "minItems": 1
+        },
+        "rule": {
+            "anyOf": [
+                {
+                    "type": "object",
+                    "properties": {
+                        "any": {
+                            "description": "ANY rule must pass",
+                            "$ref": "#/definitions/ruleArray"
+                        }
+                    },
+                    "additionalProperties": false
+                },
+                {
+                    "type": "object",
+                    "properties": {
+                        "all": {
+                            "description": "ALL rules must pass",
+                            "$ref": "#/definitions/ruleArray"
+                        }
+                    },
+                    "additionalProperties": false
+                },
+                {
+                    "type": "object",
+                    "properties": {
+                        "none": {
+                            "description": "NOT ANY rule must pass",
+                            "$ref": "#/definitions/ruleArray"
+                        }
+                    },
+                    "additionalProperties": false
+                },
+                {
+                    "type": "object",
+                    "properties": {
+                        "notAll": {
+                            "description": "NOT ALL rules must pass",
+                            "$ref": "#/definitions/ruleArray"
+                        }
+                    },
+                    "additionalProperties": false
+                },
+                {
+                    "description": "ALL properties must pass",
+                    "type": "object",
+                    "properties": {
+                        "geometry": {
+                            "anyOf": [
+                                {
+                                    "$ref": "#/definitions/geometry"
+                                },
+                                {
+                                    "description": "ANY geometry must match",
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/definitions/geometry"
+                                    },
+                                    "minItems": 1
+                                }
+                            ]
+                        },
+                        "anyTags": {
+                            "description": "ANY tag/value combination must be present",
+                            "$ref": "#/definitions/tags"
+                        },
+                        "allTags": {
+                            "description": "ALL tag/value combinations must be present",
+                            "$ref": "#/definitions/tags"
+                        },
+                        "notAnyTags": {
+                            "description": "NOT ANY tag/value combinations must be present",
+                            "$ref": "#/definitions/tags"
+                        },
+                        "allowOtherTags": {
+                            "description": "If false, ALL tags must be specified by the tag object",
+                            "type": "boolean"
+                        },
+                        "anyGroups": {
+                            "description": "ANY external group must pass",
+                            "type": "object",
+                            "additionalProperties": {
+                                "type": "boolean"
+                            }
+                        },
+                        "allGroups": {
+                            "description": "ALL external groups must pass",
+                            "type": "object",
+                            "additionalProperties": {
+                                "type": "boolean"
+                            }
+                        }
+                    },
+                    "additionalProperties": false
+                }
+            ]
+        },
+        "ruleOrGroupName": {
+            "anyOf": [
+                {
+                    "type": "string"
+                },
+                {
+                    "$ref": "#/definitions/rule"
+                }
+            ]
+        }
+    }
+}

@@ -1,0 +1,27 @@
+{
+    "fields": [
+        "name",
+        "operator",
+        "address",
+        "access_simple",
+        "building_area"
+    ],
+    "moreFields": [
+        "website",
+        "phone",
+        "email",
+        "fax"
+    ],
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "terms": [
+        "astronomical",
+        "meteorological"
+    ],
+    "tags": {
+        "man_made": "observatory"
+    },
+    "name": "Observatory"
+}

@@ -1,0 +1,11 @@
+{
+    "icon": "maki-watch",
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "tags": {
+        "shop": "watches"
+    },
+    "name": "Watches Shop"
+}

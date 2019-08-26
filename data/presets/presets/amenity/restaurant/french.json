@@ -1,0 +1,31 @@
+{
+    "icon": "maki-restaurant",
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "terms": [
+        "bar",
+        "breakfast",
+        "cafe",
+        "café",
+        "canteen",
+        "dine",
+        "dining",
+        "dinner",
+        "drive-in",
+        "eat",
+        "grill",
+        "lunch",
+        "table"
+    ],
+    "tags": {
+        "amenity": "restaurant",
+        "cuisine": "french"
+    },
+    "reference": {
+        "key": "cuisine",
+        "value": "french"
+    },
+    "name": "French Restaurant"
+}

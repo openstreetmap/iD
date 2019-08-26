@@ -1,0 +1,15 @@
+{
+    "fields": [
+        "emergency_combo"
+    ],
+    "geometry": [
+        "line"
+    ],
+    "tags": {
+        "emergency": "no"
+    },
+    "terms": [],
+    "name": "Emergency Access No",
+    "searchable": false,
+    "matchScore": 0.01
+}

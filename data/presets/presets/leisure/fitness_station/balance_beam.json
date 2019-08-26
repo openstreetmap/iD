@@ -1,0 +1,28 @@
+{
+    "icon": "maki-pitch",
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "tags": {
+        "leisure": "fitness_station",
+        "fitness_station": "balance_beam"
+    },
+    "addTags": {
+        "leisure": "fitness_station",
+        "fitness_station": "balance_beam",
+        "sport": "fitness"
+    },
+    "reference": {
+        "key": "leisure",
+        "value": "fitness_station"
+    },
+    "terms": [
+        "balance",
+        "exercise",
+        "fitness",
+        "gym",
+        "trim trail"
+    ],
+    "name": "Exercise Balance Beam"
+}

@@ -1,0 +1,26 @@
+{
+    "icon": "temaki-kerb-raised",
+    "fields": [
+        "kerb",
+        "{barrier/kerb}",
+        "kerb/height"
+    ],
+    "geometry": [
+        "vertex",
+        "line"
+    ],
+    "tags": {
+        "kerb": "raised"
+    },
+    "addTags": {
+        "barrier": "kerb",
+        "kerb": "raised"
+    },
+    "reference": {
+        "key": "kerb",
+        "value": "raised"
+    },
+    "terms": [],
+    "matchScore": 0.55,
+    "name": "Raised Curb"
+}

@@ -1,5 +1,16 @@
 {
+    "icon": "temaki-utility_pole",
+    "fields": [
+        "ref",
+        "operator",
+        "material",
+        "line_attachment"
+    ],
+    "moreFields": [
+        "manufacturer"
+    ],
     "geometry": [
+        "point",
         "vertex"
     ],
     "tags": {

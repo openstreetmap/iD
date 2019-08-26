@@ -1,6 +1,7 @@
 {
-    "icon": "water",
+    "icon": "maki-water",
     "fields": [
+        "name",
         "operator",
         "address"
     ],

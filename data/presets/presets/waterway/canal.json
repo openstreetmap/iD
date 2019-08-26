@@ -1,7 +1,16 @@
 {
-    "icon": "waterway-canal",
+    "icon": "iD-waterway-canal",
     "fields": [
-        "width"
+        "name",
+        "structure_waterway",
+        "width",
+        "intermittent",
+        "lock"
+    ],
+    "moreFields": [
+        "fishing",
+        "salt",
+        "tidal"
     ],
     "geometry": [
         "line"

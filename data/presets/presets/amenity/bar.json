@@ -1,11 +1,26 @@
 {
-    "icon": "bar",
+    "icon": "maki-bar",
     "fields": [
-        "operator",
+        "name",
         "address",
         "building_area",
+        "outdoor_seating",
+        "brewery"
+    ],
+    "moreFields": [
+        "air_conditioning",
+        "email",
+        "fax",
+        "internet_access",
+        "internet_access/fee",
+        "internet_access/ssid",
+        "microbrewery",
         "opening_hours",
-        "smoking"
+        "payment_multi",
+        "phone",
+        "smoking",
+        "website",
+        "wheelchair"
     ],
     "geometry": [
         "point",

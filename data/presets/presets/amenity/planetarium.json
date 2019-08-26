@@ -1,0 +1,34 @@
+{
+    "icon": "maki-globe",
+    "fields": [
+        "name",
+        "operator",
+        "address",
+        "building_area",
+        "opening_hours"
+    ],
+    "moreFields": [
+        "air_conditioning",
+        "charge_fee",
+        "fee",
+        "payment_multi_fee",
+        "website",
+        "phone",
+        "email",
+        "fax",
+        "wheelchair"
+    ],
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "terms": [
+        "museum",
+        "astronomy",
+        "observatory"
+    ],
+    "tags": {
+        "amenity": "planetarium"
+    },
+    "name": "Planetarium"
+}

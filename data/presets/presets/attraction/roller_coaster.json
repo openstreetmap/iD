@@ -1,0 +1,15 @@
+{
+    "icon": "maki-amusement-park",
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "terms": [
+        "theme park",
+        "amusement ride"
+    ],
+    "tags": {
+        "attraction": "roller_coaster"
+    },
+    "name": "Roller Coaster"
+}

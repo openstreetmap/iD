@@ -1,11 +1,5 @@
 {
-    "icon": "shop",
-    "fields": [
-        "operator",
-        "address",
-        "building_area",
-        "opening_hours"
-    ],
+    "icon": "fas-plug",
     "geometry": [
         "point",
         "area"
@@ -13,8 +7,15 @@
     "terms": [
         "appliance",
         "audio",
+        "blueray",
+        "camera",
         "computer",
-        "tv"
+        "dvd",
+        "home theater",
+        "radio",
+        "speaker",
+        "tv",
+        "video"
     ],
     "tags": {
         "shop": "electronics"

@@ -1,9 +1,7 @@
 {
-    "icon": "cemetery",
+    "icon": "maki-cemetery",
     "fields": [
-        "operator",
-        "address",
-        "building_area",
+        "{shop}",
         "religion",
         "denomination"
     ],

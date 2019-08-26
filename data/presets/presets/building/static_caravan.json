@@ -1,15 +1,11 @@
 {
-    "icon": "building",
-    "fields": [
-        "address",
-        "levels"
-    ],
+    "icon": "maki-home",
     "geometry": [
-        "point",
         "area"
     ],
     "tags": {
         "building": "static_caravan"
     },
+    "matchScore": 0.5,
     "name": "Static Mobile Home"
 }

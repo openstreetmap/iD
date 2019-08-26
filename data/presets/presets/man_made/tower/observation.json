@@ -1,0 +1,24 @@
+{
+    "icon": "temaki-tower",
+    "moreFields": [
+        "{man_made/tower}",
+        "opening_hours"
+    ],
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "terms": [
+        "lookout tower",
+        "fire tower"
+    ],
+    "tags": {
+        "man_made": "tower",
+        "tower:type": "observation"
+    },
+    "reference": {
+        "key": "tower:type",
+        "value": "observation"
+    },
+    "name": "Observation Tower"
+}

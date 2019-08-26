@@ -1,0 +1,18 @@
+{
+    "icon": "temaki-vending_machine",
+    "geometry": [
+        "point"
+    ],
+    "terms": [
+        "coffee"
+    ],
+    "tags": {
+        "amenity": "vending_machine",
+        "vending": "coffee"
+    },
+    "reference": {
+        "key": "vending",
+        "value": "coffee"
+    },
+    "name": "Coffee Vending Machine"
+}

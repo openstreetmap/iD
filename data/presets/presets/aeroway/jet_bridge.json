@@ -1,0 +1,38 @@
+{
+    "icon": "temaki-pedestrian",
+    "geometry": [
+        "line"
+    ],
+    "fields": [
+        "ref_aeroway_gate",
+        "width",
+        "access_simple",
+        "wheelchair"
+    ],
+    "moreFields": [
+        "manufacturer"
+    ],
+    "terms": [
+        "aerobridge",
+        "air jetty",
+        "airbridge",
+        "finger",
+        "gangway",
+        "jet way",
+        "jetway",
+        "passenger boarding bridge",
+        "PBB",
+        "portal",
+        "skybridge",
+        "terminal gate connector"
+    ],
+    "tags": {
+        "aeroway": "jet_bridge"
+    },
+    "addTags": {
+        "aeroway": "jet_bridge",
+        "highway": "corridor"
+    },
+    "matchScore": 1.05,
+    "name": "Jet Bridge"
+}

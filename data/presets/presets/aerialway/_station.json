@@ -1,0 +1,21 @@
+{
+    "icon": "maki-aerialway",
+    "geometry": [
+        "point",
+        "vertex",
+        "area"
+    ],
+    "fields": [
+        "aerialway/access",
+        "aerialway/summer/access",
+        "elevation",
+        "building_area"
+    ],
+    "tags": {
+        "aerialway": "station"
+    },
+    "matchScore": 0.95,
+    "name": "Aerialway Station",
+    "searchable": false,
+    "replacement": "public_transport/station_aerialway"
+}

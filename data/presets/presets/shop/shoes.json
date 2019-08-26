@@ -1,11 +1,5 @@
 {
-    "icon": "shop",
-    "fields": [
-        "operator",
-        "address",
-        "building_area",
-        "opening_hours"
-    ],
+    "icon": "maki-shoe",
     "geometry": [
         "point",
         "area"
@@ -13,5 +7,14 @@
     "tags": {
         "shop": "shoes"
     },
+    "terms": [
+        "boots",
+        "cleats",
+        "clogs",
+        "heels",
+        "loafers",
+        "oxfords",
+        "sneakers"
+    ],
     "name": "Shoe Store"
 }

@@ -1,11 +1,5 @@
 {
-    "icon": "bakery",
-    "fields": [
-        "operator",
-        "address",
-        "building_area",
-        "opening_hours"
-    ],
+    "icon": "maki-bakery",
     "geometry": [
         "point",
         "area"
@@ -13,5 +7,10 @@
     "tags": {
         "shop": "bakery"
     },
+    "terms": [
+        "bread",
+        "cakes",
+        "rolls"
+    ],
     "name": "Bakery"
 }

@@ -1,0 +1,35 @@
+{
+    "icon": "maki-fuel",
+    "fields": [
+        "name",
+        "operator",
+        "address",
+        "opening_hours",
+        "fuel_multi"
+    ],
+    "moreFields": [
+        "payment_multi",
+        "brand",
+        "seamark/type",
+        "building",
+        "website",
+        "phone",
+        "email",
+        "fax",
+        "wheelchair"
+    ],
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "terms": [
+        "petrol",
+        "gas",
+        "diesel",
+        "boat"
+    ],
+    "tags": {
+        "waterway": "fuel"
+    },
+    "name": "Marine Fuel Station"
+}

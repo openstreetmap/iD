@@ -1,4 +1,20 @@
 {
+    "icon": "iD-railway-rail",
+    "fields": [
+        "name",
+        "ref_route",
+        "operator",
+        "network",
+        "to",
+        "from"
+    ],
+    "moreFields" : [
+        "colour",
+        "interval",
+        "opening_hours",
+        "duration",
+        "wheelchair"
+    ],
     "geometry": [
         "relation"
     ],
@@ -6,10 +22,5 @@
         "type": "route",
         "route": "train"
     },
-    "name": "Train Route",
-    "icon": "route-train",
-    "fields": [
-        "ref",
-        "operator"
-    ]
+    "name": "Train Route"
 }

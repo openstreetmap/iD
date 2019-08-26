@@ -1,16 +1,28 @@
 {
+    "icon": "fas-tractor",
     "fields": [
-        "crop"
+        "name",
+        "operator",
+        "crop",
+        "produce"
+    ],
+    "moreFields": [
+        "address",
+        "website",
+        "phone",
+        "email",
+        "fax"
     ],
     "geometry": [
-        "point",
         "area"
     ],
     "tags": {
         "landuse": "farmland"
     },
-    "terms": [],
-    "name": "Farmland",
-    "icon": "farm",
-    "searchable": false
+    "terms": [
+        "crop",
+        "grow",
+        "plant"
+    ],
+    "name": "Farmland"
 }

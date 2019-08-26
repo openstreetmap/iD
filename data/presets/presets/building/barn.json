@@ -1,15 +1,11 @@
 {
-    "icon": "building",
-    "fields": [
-        "address",
-        "levels"
-    ],
+    "icon": "maki-farm",
     "geometry": [
-        "point",
         "area"
     ],
     "tags": {
         "building": "barn"
     },
+    "matchScore": 0.5,
     "name": "Barn"
 }

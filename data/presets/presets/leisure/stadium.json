@@ -1,8 +1,15 @@
 {
-    "icon": "pitch",
+    "icon": "maki-pitch",
     "fields": [
+        "name",
         "sport",
         "address"
+    ],
+    "moreFields": [
+        "website",
+        "phone",
+        "email",
+        "fax"    
     ],
     "geometry": [
         "point",

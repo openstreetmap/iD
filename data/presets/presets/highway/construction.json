@@ -1,0 +1,25 @@
+{
+    "icon": "maki-barrier",
+    "fields": [
+        "name",
+        "opening_date",
+        "check_date",
+        "note",
+        "oneway",
+        "structure",
+        "access"
+    ],
+    "geometry": [
+        "line"
+    ],
+    "tags": {
+        "highway": "construction",
+        "access": "no"
+    },
+    "terms": [
+        "closed",
+        "closure",
+        "construction"
+    ],
+    "name": "Road Closed"
+}

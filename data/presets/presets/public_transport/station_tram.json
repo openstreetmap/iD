@@ -1,0 +1,37 @@
+{
+    "icon": "temaki-tram",
+    "fields": [
+        "{public_transport/station}"
+    ],
+    "moreFields": [
+        "{public_transport/station}"
+    ],
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "tags": {
+        "public_transport": "station",
+        "tram": "yes"
+    },
+    "reference": {
+        "key": "public_transport",
+        "value": "station"
+    },
+    "terms": [
+        "electric",
+        "light rail",
+        "public transit",
+        "public transportation",
+        "rail",
+        "station",
+        "streetcar",
+        "terminal",
+        "track",
+        "tram",
+        "trolley",
+        "transit",
+        "transportation"
+    ],
+    "name": "Tram Station"
+}

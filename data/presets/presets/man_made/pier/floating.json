@@ -1,0 +1,25 @@
+{
+    "icon": "temaki-pedestrian",
+    "geometry": [
+        "line",
+        "area"
+    ],
+    "terms": [
+        "berth",
+        "dock",
+        "jetty",
+        "landing",
+        "promenade",
+        "wharf"
+    ],
+    "tags": {
+        "man_made": "pier",
+        "floating": "yes"
+    },
+    "addTags": {
+        "highway": "footway",
+        "man_made": "pier",
+        "floating": "yes"
+    },
+    "name": "Floating Pier"
+}

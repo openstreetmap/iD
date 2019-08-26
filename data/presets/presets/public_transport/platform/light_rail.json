@@ -1,0 +1,40 @@
+{
+    "icon": "temaki-pedestrian",
+    "fields": [
+        "{public_transport/platform}"
+    ],
+    "moreFields": [
+        "{public_transport/platform}"
+    ],
+    "geometry": [
+        "line",
+        "area"
+    ],
+    "tags": {
+        "public_transport": "platform",
+        "light_rail": "yes"
+    },
+    "addTags": {
+        "public_transport": "platform",
+        "light_rail": "yes",
+        "railway": "platform"
+    },
+    "reference": {
+        "key": "railway",
+        "value": "platform"
+    },
+    "terms": [
+        "electric",
+        "light rail",
+        "platform",
+        "public transit",
+        "public transportation",
+        "rail",
+        "track",
+        "tram",
+        "trolley",
+        "transit",
+        "transportation"
+    ],
+    "name": "Light Rail Platform"
+}

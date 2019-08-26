@@ -1,15 +1,25 @@
 {
-    "icon": "railway-monorail",
+    "icon": "temaki-monorail",
+    "fields": [
+        "name",
+        "operator",
+        "structure",
+        "electrified",
+        "service_rail",
+        "usage_rail"
+    ],
+    "moreFields": [
+        "covered",
+        "frequency_electrified",
+        "maxspeed",
+        "voltage_electrified"
+    ],
     "geometry": [
         "line"
     ],
     "tags": {
         "railway": "monorail"
     },
-    "fields": [
-        "structure",
-        "electrified"
-    ],
     "terms": [],
     "name": "Monorail"
 }

@@ -1,7 +1,11 @@
 {
-    "icon": "emergency-telephone",
+    "icon": "maki-emergency-phone",
     "fields": [
-        "operator"
+        "ref",
+        "operator",
+        "covered",
+        "indoor",
+        "booth"
     ],
     "geometry": [
         "point",

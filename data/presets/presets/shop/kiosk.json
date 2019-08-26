@@ -1,10 +1,8 @@
 {
-    "icon": "shop",
+    "icon": "maki-shop",
     "fields": [
-        "operator",
-        "address",
-        "building_area",
-        "opening_hours"
+        "{shop}",
+        "levels"
     ],
     "geometry": [
         "point",
@@ -13,5 +11,5 @@
     "tags": {
         "shop": "kiosk"
     },
-    "name": "News Kiosk"
+    "name": "Kiosk"
 }

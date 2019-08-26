@@ -1,0 +1,39 @@
+{
+    "icon": "maki-doctor",
+    "fields": [
+        "name",
+        "operator",
+        "healthcare/speciality",
+        "address",
+        "building_area",
+        "opening_hours"
+    ],
+    "moreFields": [
+        "payment_multi",
+        "website",
+        "phone",
+        "email",
+        "fax",
+        "wheelchair"
+    ],
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "terms": [
+        "medic*",
+        "physician"
+    ],
+    "tags": {
+        "amenity": "doctors"
+    },
+    "addTags": {
+        "amenity": "doctors",
+        "healthcare": "doctor"
+    },
+    "reference": {
+        "key": "amenity",
+        "value": "doctors"
+    },
+    "name": "Doctor"
+}

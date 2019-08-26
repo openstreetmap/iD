@@ -1,14 +1,26 @@
 {
-    "icon": "swimming",
+    "icon": "fas-swimming-pool",
     "fields": [
+        "name",
         "access_simple",
-        "operator",
-        "address"
+        "lit",
+        "location_pool",
+        "length",
+        "swimming_pool"
+    ],
+    "moreFields": [
+        "address",
+        "opening_hours",
+        "operator"
     ],
     "geometry": [
-        "point",
-        "vertex",
-        "area"
+        "area",
+        "point"
+    ],
+    "terms": [
+        "dive",
+        "water",
+        "aquatics"
     ],
     "tags": {
         "leisure": "swimming_pool"

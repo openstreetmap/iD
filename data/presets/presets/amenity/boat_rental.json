@@ -1,6 +1,20 @@
 {
+    "icon": "temaki-boating",
     "fields": [
-        "operator"
+        "name",
+        "operator",
+        "operator/type",
+        "fee",
+        "payment_multi_fee",
+        "charge_fee"
+    ],
+    "moreFields": [
+        "address",
+        "website",
+        "phone",
+        "email",
+        "fax",
+        "wheelchair"
     ],
     "geometry": [
         "point",

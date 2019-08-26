@@ -1,19 +1,12 @@
 {
-    "icon": "commercial",
-    "fields": [
-        "address",
-        "building_area",
-        "opening_hours",
-        "smoking"
-    ],
+    "icon": "maki-suitcase",
     "geometry": [
         "point",
-        "vertex",
         "area"
     ],
     "tags": {
         "office": "company"
     },
     "terms": [],
-    "name": "Company Office"
+    "name": "Corporate Office"
 }

@@ -1,11 +1,34 @@
 {
+    "fields": [
+        "name",
+        "operator",
+        "grape_variety"
+    ],
+    "moreFields": [
+        "address",
+        "website",
+        "phone",
+        "email",
+        "fax"
+    ],
     "geometry": [
-        "point",
         "area"
     ],
     "tags": {
         "landuse": "vineyard"
     },
-    "terms": [],
+    "addTags": {
+        "landuse": "vineyard",
+        "crop": "grape"
+    },
+    "removeTags": {
+        "landuse": "vineyard",
+        "crop": "grape",
+        "grape_variety": "*"
+    },
+    "terms": [
+        "grape",
+        "wine"
+    ],
     "name": "Vineyard"
 }

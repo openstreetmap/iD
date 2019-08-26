@@ -1,0 +1,7 @@
+{
+    "key": "couplings",
+    "type": "number",
+    "minValue": 1,
+    "label": "Couplings",
+    "placeholder": "1, 2, 3..."
+}

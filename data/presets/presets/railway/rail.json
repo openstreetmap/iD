@@ -1,16 +1,31 @@
 {
-    "icon": "railway-rail",
+    "icon": "iD-railway-rail",
+    "fields": [
+        "name",
+        "operator",
+        "structure",
+        "gauge",
+        "electrified",
+        "service_rail",
+        "usage_rail"
+    ],
+    "moreFields": [
+        "covered",
+        "frequency_electrified",
+        "highspeed",
+        "maxspeed",
+        "voltage_electrified"
+    ],
     "geometry": [
         "line"
     ],
     "tags": {
         "railway": "rail"
     },
-    "fields": [
-        "structure",
-        "gauge",
-        "electrified"
+    "terms": [
+        "rail line",
+        "railroad track",
+        "train track"
     ],
-    "terms": [],
     "name": "Rail"
 }

@@ -1,0 +1,24 @@
+{
+    "icon": "maki-harbor",
+    "fields": [
+        "name",
+        "operator"
+    ],
+    "moreFields": [
+        "address",
+        "website",
+        "phone",
+        "email",
+        "fax"
+    ],
+    "geometry": [
+        "area"
+    ],
+    "terms": [
+        "boat"
+    ],
+    "tags": {
+        "landuse": "harbour"
+    },
+    "name": "Harbor"
+}

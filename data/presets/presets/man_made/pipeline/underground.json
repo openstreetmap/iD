@@ -1,0 +1,23 @@
+{
+    "icon": "iD-pipeline-line",
+    "geometry": [
+        "line"
+    ],
+    "terms": [
+        "oil",
+        "natural gas",
+        "water",
+        "sewer",
+        "sewage"
+    ],
+    "tags": {
+        "man_made": "pipeline",
+        "location": "underground"
+    },
+    "addTags": {
+        "man_made": "pipeline",
+        "location": "underground",
+        "layer": "-1"
+    },
+    "name": "Underground Pipeline"
+}

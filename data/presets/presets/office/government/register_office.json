@@ -1,0 +1,27 @@
+{
+    "icon": "maki-town-hall",
+    "fields": [
+        "{office}",
+        "operator"
+    ],
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "terms": [
+        "clerk",
+        "marriage",
+        "death",
+        "birth",
+        "certificate"
+    ],
+    "tags": {
+        "office": "government",
+        "government": "register_office"
+    },
+    "reference": {
+        "key": "government",
+        "value": "register_office"
+    },
+    "name": "Register Office"
+}

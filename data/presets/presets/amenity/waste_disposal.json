@@ -1,0 +1,30 @@
+{
+    "icon": "fas-dumpster",
+    "fields": [
+        "operator",
+        "collection_times",
+        "access_simple"
+    ],
+    "moreFields": [
+        "brand",
+        "colour",
+        "height",
+        "manufacturer",
+        "material"
+    ],
+    "geometry": [
+        "point",
+        "vertex",
+        "area"
+    ],
+    "tags": {
+        "amenity": "waste_disposal"
+    },
+    "terms": [
+        "garbage",
+        "rubbish",
+        "litter",
+        "trash"
+    ],
+    "name": "Garbage Dumpster"
+}

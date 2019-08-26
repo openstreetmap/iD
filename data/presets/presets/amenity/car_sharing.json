@@ -1,8 +1,21 @@
 {
-    "icon": "car",
+    "icon": "maki-car",
     "fields": [
+        "name",
         "operator",
-        "capacity"
+        "operator/type",
+        "capacity",
+        "address",
+        "payment_multi",
+        "supervised"
+    ],
+    "moreFields": [
+        "lit",
+        "website",
+        "phone",
+        "email",
+        "fax",
+        "wheelchair"
     ],
     "geometry": [
         "point",

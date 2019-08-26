@@ -1,23 +1,46 @@
 {
-    "icon": "parking",
+    "icon": "maki-car",
     "fields": [
         "operator",
+        "operator/type",
         "parking",
         "capacity",
-        "fee",
         "access_simple",
-        "supervised",
+        "fee",
+        "payment_multi_fee",
+        "charge_fee",
+        "surface"
+    ],
+    "moreFields": [
+        "address",
+        "covered",
+        "email",
+        "fax",
+        "maxstay",
+        "name",
+        "opening_hours",
         "park_ride",
-        "address"
+        "phone",
+        "ref",
+        "supervised",
+        "website",
+        "wheelchair"
     ],
     "geometry": [
+        "area",
         "point",
-        "vertex",
-        "area"
+        "vertex"
     ],
     "tags": {
         "amenity": "parking"
     },
-    "terms": [],
-    "name": "Car Parking"
+    "terms": [
+        "automobile parking",
+        "car lot",
+        "car parking",
+        "rv parking",
+        "truck parking",
+        "vehicle parking"
+    ],
+    "name": "Parking Lot"
 }

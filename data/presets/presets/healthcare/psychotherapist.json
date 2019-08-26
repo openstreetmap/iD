@@ -1,0 +1,21 @@
+{
+    "icon": "maki-hospital",
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "terms": [
+        "anxiety",
+        "counselor",
+        "depression",
+        "mental health",
+        "mind",
+        "suicide",
+        "therapist",
+        "therapy"
+    ],
+    "tags": {
+        "healthcare": "psychotherapist"
+    },
+    "name": "Psychotherapist"
+}

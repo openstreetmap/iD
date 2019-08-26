@@ -1,0 +1,11 @@
+{
+    "icon": "maki-water",
+    "geometry": [
+        "area"
+    ],
+    "tags": {
+        "waterway": "riverbank"
+    },
+    "name": "Riverbank",
+    "searchable": false
+}

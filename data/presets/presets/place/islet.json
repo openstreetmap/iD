@@ -1,0 +1,24 @@
+{
+    "icon": "maki-mountain",
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "fields": [
+        "name"
+    ],
+    "terms": [
+        "archipelago",
+        "atoll",
+        "bar",
+        "cay",
+        "isle",
+        "islet",
+        "key",
+        "reef"
+    ],
+    "tags": {
+        "place": "islet"
+    },
+    "name": "Islet"
+}

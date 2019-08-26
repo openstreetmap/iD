@@ -1,11 +1,5 @@
 {
-    "icon": "cafe",
-    "fields": [
-        "operator",
-        "address",
-        "building_area",
-        "opening_hours"
-    ],
+    "icon": "maki-teahouse",
     "geometry": [
         "point",
         "area"

@@ -1,15 +1,27 @@
 {
+    "icon": "maki-farm",
     "fields": [
+        "name",
+        "operator",
         "crop"
     ],
+    "moreFields": [
+        "address",
+        "website",
+        "phone",
+        "email",
+        "fax"
+    ],
     "geometry": [
-        "point",
         "area"
     ],
     "tags": {
         "landuse": "farmyard"
     },
-    "terms": [],
-    "name": "Farmyard",
-    "icon": "farm"
+    "terms": [
+        "crop",
+        "grow",
+        "plant"
+    ],
+    "name": "Farmyard"
 }

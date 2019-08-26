@@ -1,0 +1,36 @@
+{
+    "icon": "maki-car",
+    "fields": [
+        "name",
+        "operator",
+        "address",
+        "opening_hours"
+    ],
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "tags": {
+        "industrial": "scrap_yard"
+    },
+    "addTags": {
+        "landuse": "industrial",
+        "industrial": "scrap_yard"
+    },
+    "reference": {
+        "key": "industrial",
+        "value": "scrap_yard"
+    },
+    "terms": [
+        "car",
+        "junk",
+        "metal",
+        "salvage",
+        "scrap",
+        "u-pull-it",
+        "vehicle",
+        "wreck",
+        "yard"
+    ],
+    "name": "Scrap Yard"
+}

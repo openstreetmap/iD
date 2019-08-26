@@ -1,15 +1,11 @@
 {
-    "icon": "building",
-    "fields": [
-        "address",
-        "levels"
-    ],
+    "icon": "maki-building",
     "geometry": [
-        "point",
         "area"
     ],
     "tags": {
         "building": "hospital"
     },
+    "matchScore": 0.5,
     "name": "Hospital Building"
 }

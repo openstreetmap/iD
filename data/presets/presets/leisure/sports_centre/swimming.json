@@ -1,0 +1,20 @@
+{
+    "icon": "fas-swimmer",
+    "geometry": [
+        "area",
+        "point"
+    ],
+    "terms": [
+        "dive",
+        "water"
+    ],
+    "tags": {
+      "leisure": "sports_centre",
+      "sport": "swimming"
+    },
+    "reference": {
+        "key": "sport",
+        "value": "swimming"
+    },
+    "name": "Swimming Pool Facility"
+}

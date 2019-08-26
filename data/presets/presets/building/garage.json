@@ -1,14 +1,15 @@
 {
+    "icon": "fas-warehouse",
     "fields": [
+        "{building}",
         "capacity"
     ],
     "geometry": [
-        "point",
         "area"
     ],
     "tags": {
         "building": "garage"
     },
-    "name": "Garage",
-    "icon": "warehouse"
+    "matchScore": 0.5,
+    "name": "Garage"
 }

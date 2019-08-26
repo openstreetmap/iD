@@ -1,0 +1,20 @@
+{
+    "icon": "temaki-silo",
+    "fields": [
+        "crop",
+        "building_area"
+    ],
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "terms": [
+        "grain",
+        "corn",
+        "wheat"
+    ],
+    "tags": {
+        "man_made": "silo"
+    },
+    "name": "Silo"
+}

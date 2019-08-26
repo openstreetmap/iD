@@ -1,0 +1,123 @@
+{
+    "ml": {
+        "modes": {
+            "add_area": {
+                "title": "പ്രദേശം",
+                "description": "പാര്‍ക്കുകള്‍, കെട്ടിടങ്ങള്‍, തടാകങ്ങള്‍, ഇതുപോലുള്ള മറ്റ് സ്ഥലങ്ങള്‍ മാപ്പിലേക്ക് ചേര്‍ക്കുക",
+                "tail": "പാര്‍ക്കുകള്‍, കെട്ടിടങ്ങള്‍, തടാകങ്ങള്‍, ഇതുപോലുള്ള മറ്റ് സ്ഥലങ്ങള്‍ വരയ്ക്കാനായി മാപ്പില്‍ ക്ലിക്ക് ചെയ്യുക."
+            },
+            "add_line": {
+                "title": "രേഖ"
+            },
+            "add_point": {
+                "title": "ബിന്ദു",
+                "tail": "ഒരു പോയിന്റ് ചേർക്കുന്നതിന് മാപ്പിൽ ക്ലിക്കുചെയ്യുക"
+            },
+            "browse": {
+                "title": "ബ്രൗസ് ചെയ്യുക",
+                "description": "മാപ്പ് പാൻ ചെയ്ത് സൂം ചെയ്യുക"
+            }
+        },
+        "operations": {
+            "add": {
+                "annotation": {
+                    "point": "ഒരു ബിന്ദു ചേർത്തു"
+                }
+            },
+            "continue": {
+                "title": "തുടരുക"
+            },
+            "circularize": {
+                "title": "വൃത്താകൃതി"
+            },
+            "orthogonalize": {
+                "title": "ചതുരം"
+            },
+            "straighten": {
+                "title": "നേരായ",
+                "key": "S"
+            },
+            "delete": {
+                "title": "ഇല്ലാതാക്കുക",
+                "description": {
+                    "single": "ഈ സവിശേഷത ശാശ്വതമായി ഇല്ലാതാക്കുക"
+                }
+            },
+            "disconnect": {
+                "key": "D"
+            },
+            "rotate": {
+                "title": "തിരിക്കുക"
+            },
+            "split": {
+                "title": "രണ്ടായി പിരിയുക"
+            }
+        },
+        "geometry": {
+            "point": "ബിന്ദു",
+            "line": "രേഖ",
+            "area": "പ്രദേശം"
+        },
+        "intro": {
+            "graph": {
+                "block_number": "<value for addr:block_number>",
+                "county": "<value for addr:county>",
+                "district": "<value for addr:district>",
+                "hamlet": "<value for addr:hamlet>",
+                "neighbourhood": "<value for addr:neighbourhood>",
+                "province": "<value for addr:province>",
+                "quarter": "<value for addr:quarter>",
+                "state": "<value for addr:state>",
+                "subdistrict": "<value for addr:subdistrict>",
+                "suburb": "<value for addr:suburb>",
+                "countrycode": "in"
+            }
+        },
+        "shortcuts": {
+            "editing": {
+                "operations": {
+                    "delete": "തിരഞ്ഞെടുത്ത ഫീച്ചറുകൾ ഇല്ലാതാക്കുക"
+                },
+                "commands": {
+                    "save": "മാറ്റങ്ങൾ സൂക്ഷിക്കുക"
+                }
+            }
+        },
+        "presets": {
+            "fields": {
+                "access": {
+                    "types": {
+                        "access": "എല്ലാം",
+                        "bicycle": "സൈക്കിളുകള്‍",
+                        "horse": "കുതിരകള്‍"
+                    }
+                },
+                "address": {
+                    "label": "വിലാസം",
+                    "placeholders": {
+                        "city": "നഗരം",
+                        "city!vn": "നഗരം/പട്ടണം",
+                        "country": "രാജ്യം",
+                        "district": "ജില്ല",
+                        "housenumber": "123",
+                        "neighbourhood": "അയല്പക്കം",
+                        "place": "പ്രദേശം",
+                        "postcode": "പോസ്റ്റ്കോഡ്",
+                        "state": "സംസ്ഥാനം"
+                    }
+                },
+                "aerialway": {
+                    "label": "തരം"
+                },
+                "atm": {
+                    "label": "എടിഎം"
+                }
+            }
+        },
+        "imagery": {
+            "Bing": {
+                "description": "ഉപഗ്രഹവും ആകാശനിരീക്ഷണങ്ങളും"
+            }
+        }
+    }
+}

@@ -1,4 +1,5 @@
 {
+    "icon": "fas-tram",
     "geometry": [
         "line"
     ],
@@ -7,6 +8,7 @@
         "ropeway"
     ],
     "fields": [
+        "name",
         "aerialway/occupancy",
         "aerialway/capacity",
         "aerialway/duration",

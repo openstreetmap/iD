@@ -1,0 +1,23 @@
+{
+    "icon": "temaki-diamond",
+    "fields": [
+        "traffic_calming",
+        "surface",
+        "direction_vertex"
+    ],
+    "geometry": [
+        "vertex",
+        "line",
+        "area"
+    ],
+    "tags": {
+        "traffic_calming": "*"
+    },
+    "terms": [
+        "bump",
+        "hump",
+        "slow",
+        "speed"
+    ],
+    "name": "Traffic Calming"
+}

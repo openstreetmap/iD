@@ -1,11 +1,5 @@
 {
-    "icon": "mobilephone",
-    "fields": [
-        "operator",
-        "address",
-        "building_area",
-        "opening_hours"
-    ],
+    "icon": "fas-mobile-alt",
     "geometry": [
         "point",
         "area"

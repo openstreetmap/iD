@@ -1,0 +1,26 @@
+{
+    "icon": "maki-beer",
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "tags": {
+        "amenity": "pub",
+        "microbrewery": "yes"
+    },
+    "reference": {
+        "key": "microbrewery"
+    },
+    "terms": [
+        "alcohol",
+        "drink",
+        "dive",
+        "beer",
+        "bier",
+        "booze",
+        "craft brewery",
+        "microbrewery",
+        "small batch brewery"
+    ],
+    "name": "Brewpub"
+}

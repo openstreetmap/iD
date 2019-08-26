@@ -1,8 +1,24 @@
 {
-    "icon": "dog-park",
+    "icon": "maki-dog-park",
+    "fields": [
+        "name",
+        "operator",
+        "address",
+        "opening_hours",
+        "dog"
+    ],
+    "moreFields": [
+        "website",
+        "phone",
+        "email",
+        "fax"
+    ],
     "geometry": [
-        "point",
-        "area"
+        "area",
+        "point"
+    ],
+    "fields": [
+        "name"
     ],
     "terms": [
     ],

@@ -1,14 +1,17 @@
 {
+    "icon": "iD-route",
+    "fields": [
+        "name",
+        "route",
+        "ref_route",
+        "operator",
+        "network"
+    ],
     "geometry": [
         "relation"
     ],
     "tags": {
         "type": "route"
     },
-    "name": "Route",
-    "icon": "route",
-    "fields": [
-        "route",
-        "ref"
-    ]
+    "name": "Route"
 }

@@ -1,9 +1,16 @@
 {
+    "icon": "maki-fence",
+    "fields": [
+        "fence_type",
+        "height",
+        "material"
+    ],
     "geometry": [
         "line"
     ],
     "tags": {
         "barrier": "fence"
     },
-    "name": "Fence"
+    "name": "Fence",
+    "matchScore": 0.25
 }

@@ -1,16 +1,15 @@
 {
-    "icon": "building",
+    "icon": "maki-building",
     "fields": [
-        "address",
-        "levels",
+        "{building}",
         "smoking"
     ],
     "geometry": [
-        "point",
         "area"
     ],
     "tags": {
         "building": "dormitory"
     },
+    "matchScore": 0.5,
     "name": "Dormitory"
 }

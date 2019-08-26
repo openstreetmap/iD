@@ -1,0 +1,16 @@
+{
+    "icon": "maki-amusement-park",
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "terms": [
+        "theme park",
+        "amusement ride",
+        "labyrinth"
+    ],
+    "tags": {
+        "attraction": "maze"
+    },
+    "name": "Maze"
+}

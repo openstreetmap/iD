@@ -1,16 +1,25 @@
 {
-    "icon": "highway-track",
+    "icon": "fas-truck-monster",
     "fields": [
+        "name",
+        "tracktype",
         "surface",
         "width",
         "structure",
         "access",
         "incline",
-        "tracktype",
-        "smoothness",
+        "smoothness"
+    ],
+    "moreFields": [
+        "covered",
+        "flood_prone",
+        "horse_scale",
+        "maxweight_bridge",
         "mtb/scale",
         "mtb/scale/uphill",
-        "mtb/scale/imba"
+        "mtb/scale/imba",
+        "stroller",
+        "wheelchair"
     ],
     "geometry": [
         "line"
@@ -20,7 +29,25 @@
     },
     "terms": [
         "woods road",
-        "fire road"
+        "forest road",
+        "logging road",
+        "fire road",
+        "farm road",
+        "agricultural road",
+        "ranch road",
+        "carriage road",
+        "primitive",
+        "unmaintained",
+        "rut",
+        "offroad",
+        "4wd",
+        "4x4",
+        "four wheel drive",
+        "atv",
+        "quad",
+        "jeep",
+        "double track",
+        "two track"
     ],
-    "name": "Track"
+    "name": "Unmaintained Track Road"
 }

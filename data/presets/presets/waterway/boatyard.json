@@ -1,0 +1,24 @@
+{
+     "icon": "maki-harbor",
+     "fields":[
+        "name",
+        "operator"
+    ],
+    "moreFields": [
+        "address",
+        "website",
+        "phone",
+        "email",
+        "fax",
+        "wheelchair"
+    ],
+    "geometry": [
+        "area",
+        "vertex",
+        "point"
+    ],
+    "tags": {
+        "waterway": "boatyard"
+    },
+    "name": "Boatyard"
+}

@@ -2,7 +2,12 @@
     "key": "website",
     "type": "url",
     "icon": "website",
-    "placeholder": "http://example.com/",
-    "universal": true,
-    "label": "Website"
+    "placeholder": "https://example.com",
+    "label": "Website",
+    "terms": [
+        "internet presence",
+        "uri",
+        "url",
+        "webpage"
+    ]
 }

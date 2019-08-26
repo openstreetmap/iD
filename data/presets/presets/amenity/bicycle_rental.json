@@ -1,9 +1,22 @@
 {
-    "icon": "bicycle",
+    "icon": "maki-bicycle",
     "fields": [
         "capacity",
         "network",
-        "operator"
+        "operator",
+        "operator/type",
+        "fee",
+        "payment_multi_fee"
+    ],
+    "moreFields": [
+        "address",
+        "email",
+        "covered",
+        "fax",
+        "opening_hours",
+        "phone",
+        "website",
+        "wheelchair"
     ],
     "geometry": [
         "point",
@@ -11,7 +24,13 @@
         "area"
     ],
     "terms": [
-        "bike"
+        "bike",
+        "bicycle",
+        "bikeshare",
+        "bike share",
+        "bicycle share",
+        "hub",
+        "dock"
     ],
     "tags": {
         "amenity": "bicycle_rental"

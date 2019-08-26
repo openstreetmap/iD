@@ -1,0 +1,5 @@
+{
+    "key": "payment:",
+    "type": "multiCombo",
+    "label": "Payment Types"
+}

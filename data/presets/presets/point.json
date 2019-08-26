@@ -1,6 +1,18 @@
 {
-    "name": "Point",
+    "fields": [
+        "name"
+    ],
+    "geometry": [
+        "vertex",
+        "point"
+    ],
     "tags": {},
-    "geometry": ["point"],
+    "terms": [
+        "node",
+        "other",
+        "vertex",
+        "vertices"
+    ],
+    "name": "Point",
     "matchScore": 0.1
 }

@@ -1,0 +1,11 @@
+{
+    "icon": "maki-farm",
+    "geometry": [
+        "area"
+    ],
+    "tags": {
+        "building": "farm_auxiliary"
+    },
+    "matchScore": 0.5,
+    "name": "Farm Building"
+}

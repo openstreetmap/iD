@@ -1,15 +1,18 @@
 {
-    "icon": "building",
-    "fields": [
-        "address",
-        "levels"
-    ],
+    "icon": "maki-home",
     "geometry": [
-        "point",
         "area"
     ],
     "tags": {
         "building": "detached"
     },
-    "name": "Detached Home"
+    "terms": [
+        "home",
+        "single",
+        "family",
+        "residence",
+        "dwelling"
+    ],
+    "matchScore": 0.5,
+    "name": "Detached House"
 }

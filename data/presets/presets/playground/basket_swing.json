@@ -1,0 +1,10 @@
+{
+    "icon": "maki-playground",
+    "geometry": [
+        "point"
+    ],
+    "tags": {
+        "playground": "basketswing"
+    },
+    "name": "Basket Swing"
+}

@@ -1,0 +1,9 @@
+{
+    "key": "air_conditioning",
+    "type": "check",
+    "label": "Air Conditioning",
+    "terms": [
+        "cooling system",
+        "refrigeration"
+    ]
+}

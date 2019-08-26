@@ -1,11 +1,10 @@
 {
-    "icon": "building",
-    "fields": [
-        "address",
-        "levels"
+    "icon": "maki-building",
+    "moreFields": [
+        "{building}",
+        "polling_station"
     ],
     "geometry": [
-        "point",
         "area"
     ],
     "terms": [
@@ -17,5 +16,6 @@
     "tags": {
         "building": "school"
     },
+    "matchScore": 0.5,
     "name": "School Building"
 }

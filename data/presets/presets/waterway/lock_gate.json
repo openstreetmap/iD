@@ -1,0 +1,24 @@
+{
+    "icon": "maki-dam",
+    "geometry": [
+        "vertex",
+        "line"
+    ],
+    "fields": [
+        "name",
+        "ref",
+        "height",
+        "material"
+    ],
+    "tags": {
+        "waterway": "lock_gate"
+    },
+    "addTags": {
+        "waterway": "lock_gate",
+        "seamark:type": "gate"
+    },
+    "terms": [
+        "canal"
+    ],
+    "name": "Lock Gate"
+}

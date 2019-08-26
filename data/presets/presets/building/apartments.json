@@ -1,15 +1,11 @@
 {
-    "icon": "commercial",
-    "fields": [
-        "address",
-        "levels"
-    ],
+    "icon": "maki-building",
     "geometry": [
-        "point",
         "area"
     ],
     "tags": {
         "building": "apartments"
     },
-    "name": "Apartments"
+    "matchScore": 0.5,
+    "name": "Apartment Building"
 }

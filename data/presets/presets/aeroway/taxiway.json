@@ -1,9 +1,10 @@
 {
+    "icon": "fas-plane",
     "geometry": [
         "line"
     ],
     "fields": [
-        "ref",
+        "ref_taxiway",
         "surface"
     ],
     "tags": {

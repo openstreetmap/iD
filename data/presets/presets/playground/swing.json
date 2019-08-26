@@ -1,0 +1,15 @@
+{
+    "icon": "maki-playground",
+    "fields": [
+        "capacity",
+        "playground/baby",
+        "wheelchair"
+    ],
+    "geometry": [
+        "point"
+    ],
+    "tags": {
+        "playground": "swing"
+    },
+    "name": "Swing"
+}

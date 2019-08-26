@@ -1,9 +1,13 @@
 {
-    "icon": "railway-subway",
+    "icon": "temaki-subway",
     "fields": [
-        "structure",
-        "gauge",
-        "electrified"
+        "{railway/rail}"
+    ],
+    "moreFields": [
+        "covered",
+        "frequency_electrified",
+        "maxspeed",
+        "voltage_electrified"
     ],
     "geometry": [
         "line"
@@ -11,6 +15,9 @@
     "tags": {
         "railway": "subway"
     },
-    "terms": [],
+    "terms": [
+        "metro",
+        "transit"
+    ],
     "name": "Subway"
 }

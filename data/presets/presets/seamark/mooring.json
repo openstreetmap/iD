@@ -1,0 +1,22 @@
+{
+    "fields": [
+        "ref",
+        "operator",
+        "seamark/mooring/category",
+        "seamark/type"
+    ],
+    "geometry": [
+        "point"
+    ],
+    "terms": [
+    	"dolphin",
+    	"pile",
+    	"bollard",
+    	"buoy",
+    	"post"
+    ],
+    "tags": {
+        "seamark:type": "mooring"
+    },
+    "name": "Mooring"
+}

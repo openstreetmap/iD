@@ -1,0 +1,20 @@
+{
+    "icon": "temaki-storage_tank",
+    "geometry": [
+        "point"
+    ],
+    "terms": [
+        "drilling rig",
+        "oil derrick",
+        "oil drill",
+        "oil horse",
+        "oil rig",
+        "oil pump",
+        "petroleum well",
+        "pumpjack"
+    ],
+    "tags": {
+        "man_made": "petroleum_well"
+    },
+    "name": "Oil Well"
+}

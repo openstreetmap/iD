@@ -1,0 +1,26 @@
+{
+    "icon": "maki-beach",
+    "fields": [
+        "name",
+        "address",
+        "opening_hours",
+        "fee",
+        "payment_multi_fee",
+        "charge_fee"
+    ],
+    "moreFields": [
+        "smoking",
+        "website",
+        "phone",
+        "email",
+        "fax"
+    ],
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "tags": {
+        "leisure": "beach_resort"
+    },
+    "name": "Beach Resort"
+}

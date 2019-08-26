@@ -1,0 +1,19 @@
+{
+    "geometry": [
+        "point",
+        "vertex"
+    ],
+    "terms": [
+        "lateral buoy",
+    	"buoy lateral",
+	 	"cevni",
+     	"channel marker",
+        "iala",
+        "lateral mark"
+    ],
+    "tags": {
+        "seamark:type": "buoy_lateral",
+        "seamark:buoy_lateral:colour": "red"
+    },
+    "name": "Red Buoy"
+}

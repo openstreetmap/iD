@@ -1,0 +1,26 @@
+{
+    "icon": "fas-box",
+    "fields": [
+        "operator",
+        "access_simple",
+        "material",
+        "collection_times"
+    ],
+    "moreFields": [
+        "colour",
+        "height",
+        "lit"
+    ],
+    "geometry": [
+        "point",
+        "vertex"
+    ],
+    "tags": {
+        "amenity": "grit_bin"
+    },
+    "terms": [
+        "salt",
+        "sand"
+    ],
+    "name": "Grit Bin"
+}

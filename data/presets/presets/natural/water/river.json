@@ -1,0 +1,35 @@
+{
+    "icon": "iD-waterway-river",
+    "fields": [
+        "{natural/water}",
+        "tidal"
+    ],
+    "geometry": [
+        "area"
+    ],
+    "tags": {
+        "natural": "water",
+        "water": "river"
+    },
+    "reference": {
+        "key": "water",
+        "value": "river"
+    },
+    "terms": [
+        "beck",
+        "branch",
+        "brook",
+        "course",
+        "creek",
+        "estuary",
+        "rill",
+        "riverbank",
+        "rivulet",
+        "run",
+        "runnel",
+        "stream",
+        "tributary",
+        "watercourse"
+    ],
+    "name": "River"
+}

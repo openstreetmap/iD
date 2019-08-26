@@ -1,15 +1,11 @@
 {
-    "icon": "place-of-worship",
-    "fields": [
-        "address",
-        "levels"
-    ],
+    "icon": "maki-place-of-worship",
     "geometry": [
-        "point",
         "area"
     ],
     "tags": {
         "building": "chapel"
     },
-    "name": "Chapel"
+    "matchScore": 0.5,
+    "name": "Chapel Building"
 }

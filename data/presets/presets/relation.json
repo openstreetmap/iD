@@ -1,9 +1,12 @@
 {
-    "name": "Relation",
-    "icon": "relation",
-    "tags": {},
-    "geometry": ["relation"],
+    "icon": "iD-relation",
     "fields": [
+        "name",
         "relation"
-    ]
+    ],
+    "geometry": [
+        "relation"
+    ],
+    "tags": {},
+    "name": "Relation"
 }

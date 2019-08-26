@@ -1,0 +1,21 @@
+{
+    "icon": "maki-bus",
+    "fields": [
+        "name",
+        "building_area",
+        "operator",
+        "internet_access",
+        "internet_access/fee",
+        "internet_access/ssid"
+    ],
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "tags": {
+        "amenity": "bus_station"
+    },
+    "name": "Bus Station / Terminal",
+    "searchable": false,
+    "replacement": "public_transport/station_bus"
+}

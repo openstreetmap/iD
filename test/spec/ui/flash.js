@@ -1,25 +1,36 @@
-describe("iD.ui.flash", function () {
-    var clock;
-
-    var elem;
+describe('iD.uiFlash', function () {
 
     beforeEach(function() {
-        elem = d3.select('body').append('div');
+        d3.select('body')
+            .append('div')
+            .attr('id', 'flash-wrap')
+            .append('div')
+            .attr('id', 'footer-wrap');
     });
 
-    afterEach(function() { elem.remove(); });
-
-    beforeEach(function () {
-        clock = sinon.useFakeTimers();
+    afterEach(function() {
+        d3.select('#flash-wrap')
+            .remove();
     });
 
-    afterEach(function () {
-        clock.restore();
+    it('flash is shown', function() {
+        iD.uiFlash().duration(200)();
+        var flashWrap = d3.selectAll('#flash-wrap');
+        var footerWrap = d3.selectAll('#footer-wrap');
+        expect(flashWrap.classed('footer-show')).to.be.ok;
+        expect(footerWrap.classed('footer-hide')).to.be.ok;
     });
 
-    it('leaves after 1000 ms', function () {
-        var flash = iD.ui.flash(elem);
-        clock.tick(1610);
-        expect(flash.node().parentNode).to.be.null;
+    it('flash goes away', function(done) {
+        iD.uiFlash().duration(200)();
+        window.setTimeout(function() {
+            d3.timerFlush();
+            var flashWrap = d3.selectAll('#flash-wrap');
+            var footerWrap = d3.selectAll('#footer-wrap');
+            expect(flashWrap.classed('footer-hide')).to.be.ok;
+            expect(footerWrap.classed('footer-show')).to.be.ok;
+            done();
+        }, 225);
     });
+
 });

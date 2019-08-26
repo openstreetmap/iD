@@ -1,8 +1,11 @@
 {
+    "icon": "temaki-chairlift",
     "geometry": [
         "line"
     ],
     "fields": [
+        "name",
+        "oneway_yes",
         "aerialway/occupancy",
         "aerialway/capacity",
         "aerialway/duration",

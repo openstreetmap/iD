@@ -1,0 +1,19 @@
+{
+    "icon": "maki-suitcase",
+    "fields": [
+        "{office}",
+        "operator"
+    ],
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "tags": {
+        "office": "water_utility"
+    },
+    "terms": [
+        "water board",
+        "utility"
+    ],
+    "name": "Water Utility Office"
+}

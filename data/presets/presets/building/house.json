@@ -1,15 +1,17 @@
 {
-    "icon": "building",
-    "fields": [
-        "address",
-        "levels"
-    ],
+    "icon": "maki-home",
     "geometry": [
-        "point",
         "area"
     ],
     "tags": {
         "building": "house"
     },
+    "terms": [
+        "home",
+        "family",
+        "residence",
+        "dwelling"
+    ],
+    "matchScore": 0.5,
     "name": "House"
 }

@@ -1,11 +1,20 @@
 {
-    "icon": "bicycle",
+    "icon": "maki-bicycle",
     "fields": [
         "bicycle_parking",
         "capacity",
         "operator",
+        "operator/type",
         "covered",
-        "access_simple"
+        "access_simple",
+        "fee",
+        "payment_multi_fee",
+        "charge_fee"
+    ],
+    "moreFields": [
+        "colour",
+        "indoor",
+        "lit"
     ],
     "geometry": [
         "point",

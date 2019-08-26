@@ -1,0 +1,16 @@
+{
+    "icon": "temaki-physiotherapist",
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "terms": [
+        "physical",
+        "therapist",
+        "therapy"
+    ],
+    "tags": {
+        "healthcare": "physiotherapist"
+    },
+    "name": "Physiotherapist"
+}

@@ -1,10 +1,22 @@
 {
-    "icon": "fuel",
+    "icon": "maki-fuel",
     "fields": [
+        "name",
+        "brand",
         "operator",
         "address",
-        "building_area",
-        "opening_hours"
+        "fuel_multi",
+        "self_service"
+    ],
+    "moreFields": [
+        "opening_hours",
+        "payment_multi",
+        "building",
+        "website",
+        "phone",
+        "email",
+        "fax",
+        "wheelchair"
     ],
     "geometry": [
         "point",
@@ -13,6 +25,7 @@
     "terms": [
         "petrol",
         "fuel",
+        "gasoline",
         "propane",
         "diesel",
         "lng",

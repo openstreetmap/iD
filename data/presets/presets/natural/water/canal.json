@@ -1,0 +1,19 @@
+{
+    "icon": "iD-waterway-canal",
+    "fields": [
+        "{natural/water}",
+        "salt"
+    ],
+    "geometry": [
+        "area"
+    ],
+    "tags": {
+        "natural": "water",
+        "water": "canal"
+    },
+    "reference": {
+        "key": "water",
+        "value": "canal"
+    },
+    "name": "Canal"
+}

@@ -1,0 +1,21 @@
+{
+    "icon": "maki-horse-riding",
+    "fields": [
+        "name",
+        "ref_route",
+        "operator",
+        "network_horse",
+        "description",
+        "distance",
+        "to",
+        "from"
+    ],
+    "geometry": [
+        "relation"
+    ],
+    "tags": {
+        "type": "route",
+        "route": "horse"
+    },
+    "name": "Riding Route"
+}

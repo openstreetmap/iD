@@ -1,0 +1,34 @@
+{
+    "icon": "maki-restaurant",
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "terms": [
+        "bar",
+        "breakfast",
+        "cafe",
+        "café",
+        "canteen",
+        "dine",
+        "dining",
+        "dinner",
+        "drive-in",
+        "eat",
+        "grill",
+        "lunch",
+        "table",
+        "gyros",
+        "pitas",
+        "olives"
+    ],
+    "tags": {
+        "amenity": "restaurant",
+        "cuisine": "greek"
+    },
+    "reference": {
+        "key": "cuisine",
+        "value": "greek"
+    },
+    "name": "Greek Restaurant"
+}

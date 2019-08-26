@@ -1,7 +1,11 @@
 {
     "key": "access",
     "type": "combo",
-    "label": "Access",
-    "placeholder": "yes",
-    "options": ["permissive", "private", "customers", "no"]
+    "label": "Allowed Access",
+    "options": ["yes", "permissive", "private", "customers", "permit", "no"],
+    "terms": [
+        "permitted",
+        "private",
+        "public"
+    ]
 }

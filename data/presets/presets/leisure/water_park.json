@@ -1,0 +1,29 @@
+{
+    "icon": "fas-swimmer",
+    "fields": [
+        "name",
+        "operator",
+        "address"
+    ],
+    "moreFields": [
+        "payment_multi",
+        "brand",
+        "website",
+        "phone",
+        "email",
+        "fax"
+    ],
+    "geometry": [
+        "area",
+        "point"
+    ],
+    "terms": [
+        "swim",
+        "pool",
+        "dive"
+    ],
+    "tags": {
+        "leisure": "water_park"
+    },
+    "name": "Water Park"
+}

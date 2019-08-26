@@ -1,13 +1,14 @@
 {
-    "geometry": "area",
-    "name": "Building",
-    "icon": "building",
+    "icon": "maki-building",
+    "name": "Building Features",
     "members": [
+        "building",
         "building/house",
         "building/apartments",
+        "building/garage",
+        "building/retail",
         "building/commercial",
         "building/industrial",
-        "building/residential",
-        "building"
+        "building/residential"
     ]
 }

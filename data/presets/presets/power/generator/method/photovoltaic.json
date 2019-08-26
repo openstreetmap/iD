@@ -1,0 +1,37 @@
+{
+    "icon": "fas-solar-panel",
+    "fields": [
+        "operator",
+        "generator/output/electricity",
+        "ref"
+    ],
+    "moreFields": [
+        "manufacturer"
+    ],
+    "geometry": [
+        "area",
+        "point",
+        "vertex"
+    ],
+    "terms": [
+        "photovoltaic module",
+        "PV module",
+        "sunlight"
+    ],
+    "tags": {
+        "power": "generator",
+        "generator:method": "photovoltaic"
+    },
+    "addTags": {
+        "power": "generator",
+        "generator:source": "solar",
+        "generator:method": "photovoltaic",
+        "generator:type": "solar_photovoltaic_panel",
+        "generator:output:electricity": "yes"
+    },
+    "reference": {
+        "key": "generator:method",
+        "value": "photovoltaic"
+    },
+    "name": "Solar Panel"
+}

@@ -1,5 +1,6 @@
 {
     "key": "layer",
-    "type": "combo",
-    "label": "Layer"
+    "type": "number",
+    "label": "Layer",
+    "placeholder": "0"
 }

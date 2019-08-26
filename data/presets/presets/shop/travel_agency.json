@@ -1,11 +1,5 @@
 {
-    "icon": "suitcase",
-    "fields": [
-        "operator",
-        "address",
-        "building_area",
-        "opening_hours"
-    ],
+    "icon": "fas-suitcase",
     "geometry": [
         "point",
         "area"

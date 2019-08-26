@@ -1,0 +1,23 @@
+{
+    "icon": "maki-harbor",
+    "fields": [
+        "name",
+        "dock",
+        "operator"
+    ],
+    "geometry": [
+        "area",
+        "vertex",
+        "point"
+    ],
+    "terms": [
+        "boat",
+        "ship",
+        "vessel",
+        "marine"
+    ],
+    "tags": {
+        "waterway": "dock"
+    },
+    "name": "Wet Dock / Dry Dock"
+}

@@ -1,0 +1,16 @@
+{
+    "icon": "maki-park",
+    "fields": [
+        "leaf_type",
+        "leaf_cycle",
+        "denotation"
+    ],
+    "geometry": [
+        "line"
+    ],
+    "tags": {
+        "natural": "tree_row"
+    },
+    "terms": [],
+    "name": "Tree Row"
+}

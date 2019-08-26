@@ -1,0 +1,29 @@
+{
+    "icon": "maki-prison",
+    "fields": [
+        "name",
+        "operator",
+        "operator/type",
+        "address"
+    ],
+    "moreFields": [
+        "website",
+        "phone",
+        "email",
+        "fax",
+        "wheelchair"
+    ],
+    "geometry": [
+        "area",
+        "point"
+    ],
+    "terms": [
+        "cell",
+        "jail",
+        "correction"
+    ],
+    "tags": {
+        "amenity": "prison"
+    },
+    "name": "Prison Grounds"
+}

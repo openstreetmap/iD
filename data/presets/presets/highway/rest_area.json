@@ -1,4 +1,18 @@
 {
+    "icon": "maki-car",
+    "fields": [
+        "name",
+        "operator",
+        "opening_hours"
+    ],
+    "moreFields": [
+        "address",
+        "website",
+        "phone",
+        "email",
+        "fax",
+        "wheelchair"
+    ],
     "geometry": [
         "point",
         "vertex",

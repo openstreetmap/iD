@@ -1,0 +1,19 @@
+{
+    "icon": "maki-campsite",
+    "fields": [
+        "name",
+        "ref"
+    ],
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "terms": [
+        "tent",
+        "rv"
+    ],
+    "tags": {
+        "tourism": "camp_pitch"
+    },
+    "name": "Camp Pitch"
+}

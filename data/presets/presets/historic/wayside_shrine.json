@@ -1,4 +1,12 @@
 {
+    "icon": "maki-landmark",
+    "fields": [
+        "name",
+        "religion",
+        "denomination",
+        "inscription",
+        "access_simple"
+    ],
     "geometry": [
         "point",
         "vertex",

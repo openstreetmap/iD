@@ -1,0 +1,23 @@
+{
+    "icon": "temaki-elevator",
+    "fields": [
+        "access_simple",
+        "opening_hours",
+        "maxweight",
+        "ref",
+        "wheelchair"
+    ],
+    "moreFields": [
+        "maxheight"
+    ],
+    "geometry": [
+        "vertex"
+    ],
+    "tags": {
+        "highway": "elevator"
+    },
+    "terms": [
+        "lift"
+    ],
+    "name": "Elevator"
+}

@@ -1,14 +1,18 @@
 {
-    "icon": "bicycle",
+    "icon": "maki-bicycle",
     "fields": [
-        "operator",
-        "address",
-        "building_area",
-        "opening_hours"
+        "{shop}",
+        "service/bicycle"
     ],
     "geometry": [
         "point",
         "area"
+    ],
+    "terms": [
+        "bike",
+        "repair",
+        "tricycle",
+        "unicycle"
     ],
     "tags": {
         "shop": "bicycle"

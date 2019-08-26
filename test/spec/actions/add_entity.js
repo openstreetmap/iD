@@ -1,7 +1,7 @@
-describe("iD.actions.AddEntity", function () {
-    it("adds an entity to the graph", function () {
+describe('iD.actionAddEntity', function () {
+    it('adds an entity to the graph', function () {
         var entity = iD.Entity(),
-            graph = iD.actions.AddEntity(entity)(iD.Graph());
+            graph = iD.actionAddEntity(entity)(iD.coreGraph());
         expect(graph.entity(entity.id)).to.equal(entity);
     });
 });

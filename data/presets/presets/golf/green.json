@@ -1,5 +1,8 @@
 {
-    "icon": "golf",
+    "icon": "maki-golf",
+    "fields": [
+        "name"
+    ],
     "geometry": [
         "area"
     ],
@@ -8,6 +11,10 @@
         "landuse": "grass",
         "leisure": "pitch",
         "sport": "golf"
+    },
+    "reference": {
+        "key": "golf",
+        "value": "green"
     },
     "name": "Putting Green"
 }

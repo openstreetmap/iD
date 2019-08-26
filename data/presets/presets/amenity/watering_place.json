@@ -1,0 +1,19 @@
+{
+    "icon": "maki-drinking-water",
+    "fields": [
+        "operator",
+        "fee",
+        "payment_multi_fee",
+        "charge_fee",
+        "opening_hours"
+    ],
+    "geometry": [
+        "point",
+        "vertex",
+        "area"
+    ],
+    "tags": {
+        "amenity": "watering_place"
+    },
+    "name": "Animal Watering Place"
+}

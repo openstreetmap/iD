@@ -1,0 +1,11 @@
+{
+    "icon": "maki-shop",
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "tags": {
+        "shop": "country_store"
+    },
+    "name": "Country Store"
+}

@@ -1,5 +1,8 @@
 {
-    "icon": "golf",
+    "icon": "maki-golf",
+    "fields": [
+        "name"
+    ],
     "geometry": [
         "area"
     ],
@@ -11,5 +14,9 @@
         "hazard",
         "bunker"
     ],
+    "reference": {
+        "key": "golf",
+        "value": "bunker"
+    },
     "name": "Sand Trap"
 }

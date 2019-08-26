@@ -1,0 +1,6 @@
+{
+    "key": "faces",
+    "type": "number",
+    "minValue": 0,
+    "label": "Faces"
+}

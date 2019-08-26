@@ -1,17 +1,20 @@
 {
-    "icon": "america-football",
-    "fields": [
-        "surface",
-        "lit"
-    ],
+    "icon": "maki-american-football",
     "geometry": [
-        "point",
-        "area"
+        "area",
+        "point"
     ],
     "tags": {
         "leisure": "pitch",
         "sport": "american_football"
     },
-    "terms": [],
+    "reference": {
+        "key": "sport",
+        "value": "american_football"
+    },
+    "terms": [
+        "football",
+        "gridiron"
+    ],
     "name": "American Football Field"
 }

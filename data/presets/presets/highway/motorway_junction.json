@@ -1,12 +1,17 @@
 {
+    "icon": "temaki-junction",
+    "fields": [
+        "ref_highway_junction",
+        "name"
+    ],
     "geometry": [
         "vertex"
     ],
     "tags": {
         "highway": "motorway_junction"
     },
-    "fields": [
-        "ref"
+    "terms": [
+        "exit"
     ],
     "name": "Motorway Junction / Exit"
 }

@@ -1,0 +1,13 @@
+{
+    "key": "service",
+    "type": "combo",
+    "label": "Service Type",
+    "strings": {
+        "options": {
+            "spur": "Spur",
+            "yard": "Yard",
+            "siding": "Siding",
+            "crossover": "Crossover"
+        }
+    }
+}

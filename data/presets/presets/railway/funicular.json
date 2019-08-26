@@ -1,4 +1,15 @@
 {
+    "icon": "iD-railway-rail",
+    "fields": [
+        "name",
+        "operator",
+        "structure",
+        "gauge",
+        "service_rail"
+    ],
+    "moreFields": [
+        "covered"
+    ],
     "geometry": [
         "line"
     ],
@@ -9,13 +20,8 @@
         "cable railway",
         "funicular railway"
     ],
-    "fields": [
-        "structure",
-        "gauge"
-    ],
     "tags": {
         "railway": "funicular"
     },
-    "icon": "railway-rail",
     "name": "Funicular"
 }

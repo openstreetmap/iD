@@ -1,0 +1,30 @@
+{
+    "icon": "temaki-bowling",
+    "fields": [
+        "name",
+        "operator",
+        "address",
+        "building_area"
+    ],
+    "moreFields": [
+        "air_conditioning",
+        "opening_hours",
+        "payment_multi",
+        "smoking",
+        "website",
+        "phone",
+        "email",
+        "fax"
+    ],
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "terms": [
+        "bowling center"
+    ],
+    "tags": {
+        "leisure": "bowling_alley"
+    },
+    "name": "Bowling Alley"
+}

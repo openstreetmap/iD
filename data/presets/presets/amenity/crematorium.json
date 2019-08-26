@@ -1,0 +1,30 @@
+{
+    "icon": "maki-cemetery",
+    "fields": [
+        "name",
+        "website",
+        "phone",
+        "opening_hours",
+        "wheelchair"
+    ],
+    "moreFields": [
+        "address",
+        "website",
+        "phone",
+        "email",
+        "fax",
+        "wheelchair"
+    ],
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "tags": {
+        "amenity": "crematorium"
+    },
+    "terms": [
+        "cemetery",
+        "funeral"
+    ],
+    "name": "Crematorium"
+}

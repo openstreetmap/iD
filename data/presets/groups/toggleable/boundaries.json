@@ -1,0 +1,27 @@
+{
+    "name": "Boundaries",
+    "description": "Administrative Boundaries",
+    "toggleable": {
+        "hiddenByDefault": true
+    },
+    "matches": {
+        "geometry": ["line", "area", "relation"],
+        "allTags": {
+            "boundary": {
+                "*": true,
+                "no": false
+            }
+        },
+        "allGroups": {
+            "toggleable/traffic_roads": false,
+            "toggleable/service_roads": false,
+            "toggleable/paths": false,
+            "toggleable/water": false,
+            "toggleable/pistes": false,
+            "toggleable/railway": false,
+            "toggleable/landuse": false,
+            "toggleable/building": false,
+            "toggleable/power": false
+        }
+    }
+}

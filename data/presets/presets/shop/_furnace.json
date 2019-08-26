@@ -1,0 +1,16 @@
+{
+    "icon": "maki-shop",
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "terms": [
+        "oven",
+        "stove"
+    ],
+    "tags": {
+        "shop": "furnace"
+    },
+    "name": "Furnace Store",
+    "searchable": false
+}

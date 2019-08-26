@@ -1,0 +1,22 @@
+{
+    "icon": "maki-car",
+    "fields": [
+        "name",
+        "operator",
+        "address",
+        "opening_hours"
+    ],
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "tags": {
+        "amenity": "scrapyard"
+    },
+    "reference": {
+        "key": "industrial",
+        "value": "scrap_yard"
+    },
+    "name": "Scrap Yard",
+    "searchable": false
+}

@@ -1,0 +1,11 @@
+{
+    "icon": "maki-playground",
+    "geometry": [
+        "point",
+        "line"
+    ],
+    "tags": {
+        "playground": "balancebeam"
+    },
+    "name": "Play Balance Beam"
+}

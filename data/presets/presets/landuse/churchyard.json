@@ -1,7 +1,16 @@
 {
+    "icon": "maki-religious-christian",
     "fields": [
+        "name",
         "religion",
         "denomination"
+    ],
+    "moreFields": [
+        "address",
+        "website",
+        "phone",
+        "email",
+        "fax"
     ],
     "geometry": [
         "area"

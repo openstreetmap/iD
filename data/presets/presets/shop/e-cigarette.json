@@ -1,0 +1,17 @@
+{
+    "icon": "maki-shop",
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "tags": {
+        "shop": "e-cigarette"
+    },
+    "terms": [
+        "electronic",
+        "vape",
+        "vaping",
+        "vapor"
+    ],
+    "name": "E-Cigarette Shop"
+}

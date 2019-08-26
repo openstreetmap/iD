@@ -1,0 +1,21 @@
+{
+    "icon": "maki-bus",
+    "fields": [
+        "name",
+        "network",
+        "operator",
+        "bench",
+        "shelter"
+    ],
+    "geometry": [
+        "point",
+        "vertex"
+    ],
+    "tags": {
+        "highway": "bus_stop"
+    },
+    "matchScore": 0.95,
+    "name": "Bus Stop",
+    "searchable": false,
+    "replacement": "public_transport/platform/bus_point"
+}

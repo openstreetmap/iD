@@ -1,0 +1,36 @@
+{
+    "icon": "fas-pepper-hot",
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "terms": [
+        "breakfast",
+        "dine",
+        "dining",
+        "dinner",
+        "drive-in",
+        "eat",
+        "grill",
+        "lunch",
+        "table",
+        "tacos",
+        "burritos",
+        "enchiladas",
+        "fajitas",
+        "nachos",
+        "tortillas",
+        "salsa",
+        "tamales",
+        "quesadillas"
+    ],
+    "tags": {
+        "amenity": "fast_food",
+        "cuisine": "mexican"
+    },
+    "reference": {
+        "key": "cuisine",
+        "value": "mexican"
+    },
+    "name": "Mexican Fast Food"
+}

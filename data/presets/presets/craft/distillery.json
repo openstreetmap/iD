@@ -1,0 +1,35 @@
+{
+    "icon": "temaki-storage_tank",
+    "fields": [
+        "{craft}",
+        "product"
+    ],
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "terms": [
+        "alcohol",
+        "beverage",
+        "bourbon",
+        "booze",
+        "brandy",
+        "gin",
+        "hooch",
+        "liquor",
+        "mezcal",
+        "moonshine",
+        "rum",
+        "scotch",
+        "spirits",
+        "still",
+        "tequila",
+        "vodka",
+        "whiskey",
+        "whisky"
+    ],
+    "tags": {
+        "craft": "distillery"
+    },
+    "name": "Distillery"
+}

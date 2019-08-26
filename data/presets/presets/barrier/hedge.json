@@ -1,4 +1,7 @@
 {
+    "fields": [
+        "height"
+    ],
     "geometry": [
         "line",
         "area"
@@ -6,5 +9,6 @@
     "tags": {
         "barrier": "hedge"
     },
-    "name": "Hedge"
+    "name": "Hedge",
+    "matchScore": 0.25
 }

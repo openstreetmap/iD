@@ -1,0 +1,31 @@
+{
+    "icon": "maki-rail",
+    "fields": [
+        "name",
+        "network",
+        "operator",
+        "departures_board",
+        "shelter"
+    ],
+    "moreFields": [
+        "bench",
+        "bin",
+        "lit",
+        "wheelchair"
+    ],
+    "geometry": [
+        "point"
+    ],
+    "tags": {
+        "public_transport": "platform"
+    },
+    "terms": [
+        "platform",
+        "public transit",
+        "public transportation",
+        "transit",
+        "transportation"
+    ],
+    "name": "Transit Stop / Platform",
+    "matchScore": 0.6
+}

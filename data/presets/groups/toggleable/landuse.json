@@ -1,0 +1,16 @@
+{
+    "name": "Landuse Features",
+    "description": "Forests, Farmland, Parks, Residential, Commercial, etc.",
+    "toggleable": true,
+    "matches": {
+        "geometry": "area",
+        "allGroups": {
+            "toggleable/buildings": false,
+            "toggleable/building_parts": false,
+            "toggleable/paths": false,
+            "toggleable/indoor": false,
+            "toggleable/water": false,
+            "toggleable/pistes": false
+        }
+    }
+}

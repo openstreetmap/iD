@@ -1,9 +1,10 @@
 {
-    "icon": "religious-christian",
+    "icon": "maki-religious-christian",
     "fields": [
+        "name",
+        "religion",
         "denomination",
-        "building_area",
-        "address"
+        "{amenity/place_of_worship}"
     ],
     "geometry": [
         "point",
@@ -36,5 +37,9 @@
         "amenity": "place_of_worship",
         "religion": "christian"
     },
-    "name": "Church"
+    "reference": {
+        "key": "amenity",
+        "value": "place_of_worship"
+    },
+    "name": "Christian Church"
 }
