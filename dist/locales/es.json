@@ -504,7 +504,8 @@
             "translate": "Traducir",
             "localized_translation_label": "Nombre multilingüe",
             "localized_translation_language": "Elegir idioma",
-            "localized_translation_name": "Nombre"
+            "localized_translation_name": "Nombre",
+            "language_and_code": "{language} ({code})"
         },
         "zoom_in_edit": "Acercar para editar",
         "login": "Iniciar sesión",
@@ -1862,6 +1863,9 @@
                 "connect_features": {
                     "title": "Conectar los elementos"
                 },
+                "connect_using_ford": {
+                    "title": "Conectar usando un vado"
+                },
                 "continue_from_start": {
                     "title": "Continuar dibujando desde el inicio"
                 },
@@ -2452,6 +2456,7 @@
                         }
                     },
                     "placeholder": "No especificado",
+                    "terms": "permitido, privado, público",
                     "types": {
                         "access": "Todo",
                         "bicycle": "Bicicletas",
@@ -2461,7 +2466,8 @@
                     }
                 },
                 "access_simple": {
-                    "label": "Acceso permitido"
+                    "label": "Acceso permitido",
+                    "terms": "permitido, privado, público"
                 },
                 "addr/interpolation": {
                     "label": "Tipo",
@@ -2506,7 +2512,8 @@
                         "suburb": "Suburbio",
                         "suburb!jp": "Ward - Japón",
                         "unit": "Unidad"
-                    }
+                    },
+                    "terms": "dirección, ubicación, localización, posición"
                 },
                 "admin_level": {
                     "label": "Nivel administrativo"
@@ -2555,7 +2562,8 @@
                     "label": "Productos"
                 },
                 "air_conditioning": {
-                    "label": "Aire Acondicionado"
+                    "label": "Aire Acondicionado",
+                    "terms": "aire acondicionado, climatización, acondicionamiento del aire, sistema de enfriamiento, refrigeración"
                 },
                 "amenity": {
                     "label": "Tipo"
@@ -2570,7 +2578,8 @@
                     "label": "Para animales"
                 },
                 "architect": {
-                    "label": "Arquitecto, ta"
+                    "label": "Arquitecto, ta",
+                    "terms": "diseñador de edificios, Arquitecto, Arquitecta"
                 },
                 "area/highway": {
                     "label": "Tipo"
@@ -2591,7 +2600,8 @@
                     "label": "Respaldo"
                 },
                 "bar": {
-                    "label": "Bar"
+                    "label": "Bar",
+                    "terms": "bar, barra"
                 },
                 "barrier": {
                     "label": "Tipo"
@@ -2617,13 +2627,15 @@
                     "label": "Especialidad de belleza"
                 },
                 "bench": {
-                    "label": "Banco / Asiento"
+                    "label": "Banco / Asiento",
+                    "terms": "asientos, asiento, banco, escaño"
                 },
                 "bicycle_parking": {
                     "label": "Tipo"
                 },
                 "bin": {
-                    "label": "Papelera"
+                    "label": "Papelera",
+                    "terms": "tacho de basura, basurero"
                 },
                 "blood_components": {
                     "label": "Componentes de la sangre",
@@ -2647,10 +2659,12 @@
                     "label": "Tipo"
                 },
                 "brand": {
-                    "label": "Marca"
+                    "label": "Marca",
+                    "terms": "marca"
                 },
                 "brewery": {
-                    "label": "Cerveza de barril / tirada"
+                    "label": "Cerveza de barril / tirada",
+                    "terms": "Cerveza de barril, cerveza tirada"
                 },
                 "bridge": {
                     "label": "Tipo",
@@ -2660,18 +2674,22 @@
                     "label": "Tipo"
                 },
                 "building": {
-                    "label": "Edificio"
+                    "label": "Edificio",
+                    "terms": "edificio, construcción, casa, estructura"
                 },
                 "building/levels/underground": {
                     "label": "Niveles subterráneos",
-                    "placeholder": "2, 4, 6..."
+                    "placeholder": "2, 4, 6...",
+                    "terms": "Niveles, pisos, subterráneos, sótano, subsuelo"
                 },
                 "building/levels_building": {
                     "label": "Niveles del edificio",
-                    "placeholder": "2, 4, 6..."
+                    "placeholder": "2, 4, 6...",
+                    "terms": "pisos, niveles"
                 },
                 "building/material": {
-                    "label": "Material"
+                    "label": "Material",
+                    "terms": "material"
                 },
                 "building_area": {
                     "label": "Edificio"
@@ -2700,13 +2718,27 @@
                 },
                 "capacity": {
                     "label": "Capacidad",
-                    "placeholder": "50, 100, 200..."
+                    "placeholder": "50, 100, 200...",
+                    "terms": "capacidad"
                 },
                 "cash_in": {
                     "label": "Pagar en efectivo"
                 },
                 "castle_type": {
                     "label": "Tipo"
+                },
+                "changing_table": {
+                    "label": "Cambiador de pañales"
+                },
+                "charge_fee": {
+                    "label": "Importe de la tarifa",
+                    "placeholder": "1 EUR, 5 USD, 10 JPY…",
+                    "terms": "importe, precio, costo, tarifa"
+                },
+                "charge_toll": {
+                    "label": "Tarifa del peaje",
+                    "placeholder": "1 EUR, 5 USD, 10 JPY…",
+                    "terms": "importe, precio, costo, peaje"
                 },
                 "check_date": {
                     "label": "Fecha de última revisión"
@@ -2721,14 +2753,16 @@
                     "label": "Horario de recolección"
                 },
                 "colour": {
-                    "label": "Color"
+                    "label": "Color",
+                    "terms": "color, colorido"
                 },
                 "comment": {
                     "label": "Comentario del conjunto de cambios",
                     "placeholder": "Breve descripción de sus contribuciones (requerido)"
                 },
                 "communication_multi": {
-                    "label": "Tipos de comunicación"
+                    "label": "Tipos de comunicación",
+                    "terms": "Comunicación"
                 },
                 "construction": {
                     "label": "Tipo"
@@ -2759,7 +2793,8 @@
                     "placeholder": "1, 2, 3..."
                 },
                 "covered": {
-                    "label": "Cubierto"
+                    "label": "Cubierto",
+                    "terms": "cubierto, tapado"
                 },
                 "craft": {
                     "label": "Tipo"
@@ -2778,11 +2813,15 @@
                 "crossing": {
                     "label": "Tipo"
                 },
+                "crossing/island": {
+                    "label": "Isla para peatones"
+                },
                 "cuisine": {
                     "label": "Cocinas"
                 },
                 "currency_multi": {
-                    "label": "Tipos de moneda"
+                    "label": "Tipos de moneda",
+                    "terms": "moneda, circulación, moneda corriente, billetes, efectivo, monedas, dinero"
                 },
                 "cutting": {
                     "label": "Tipo",
@@ -2824,6 +2863,7 @@
                         }
                     },
                     "placeholder": "ninguno",
+                    "terms": "bici, bicicleta, carriles, senda, bicisenda, ciclovía",
                     "types": {
                         "cycleway:left": "Lado izquierdo",
                         "cycleway:right": "Lado derecho"
@@ -2836,10 +2876,12 @@
                     "label": "Fecha"
                 },
                 "delivery": {
-                    "label": "Entrega"
+                    "label": "Entrega",
+                    "terms": "delivery, entrega, reparto"
                 },
                 "denomination": {
-                    "label": "Denominación"
+                    "label": "Denominación",
+                    "terms": "denominación"
                 },
                 "denotation": {
                     "label": "Denotación"
@@ -2854,7 +2896,8 @@
                     }
                 },
                 "description": {
-                    "label": "Descripción"
+                    "label": "Descripción",
+                    "terms": "descripción, resumen"
                 },
                 "design": {
                     "label": "Diseño"
@@ -2863,7 +2906,8 @@
                     "label": "Números de vía de destino"
                 },
                 "destination/symbol_oneway": {
-                    "label": "Símbolos de destino"
+                    "label": "Símbolos de destino",
+                    "terms": "Símbolos de destino, destino, simbolos, señales"
                 },
                 "destination_oneway": {
                     "label": "Destinos"
@@ -2876,11 +2920,9 @@
                     "label": "Diámetro",
                     "placeholder": "5 mm, 10 cm, 15 in…"
                 },
-                "diaper": {
-                    "label": "Cambiador de pañales disponible"
-                },
                 "diet_multi": {
-                    "label": "Tipos de dieta"
+                    "label": "Tipos de dieta",
+                    "terms": "sin gluten, sin tacc, celiaco, fruitario, halal, kosher, sin lactosa, carne, pescado, crudo, vegano, vegetariano"
                 },
                 "diplomatic": {
                     "label": "Tipo"
@@ -2946,7 +2988,8 @@
                         "leashed": "Solo con correa",
                         "no": "No permitido",
                         "yes": "Permitido"
-                    }
+                    },
+                    "terms": "animales, mascotas"
                 },
                 "door": {
                     "label": "Puerta"
@@ -2955,11 +2998,13 @@
                     "label": "Tipo"
                 },
                 "drive_through": {
-                    "label": "Ventanilla de autoservicio"
+                    "label": "Ventanilla de autoservicio",
+                    "terms": "ventanilla, servicio, automac, autoburger, auto"
                 },
                 "duration": {
                     "label": "Duración",
-                    "placeholder": "00:00"
+                    "placeholder": "00:00",
+                    "terms": "duración, extensión"
                 },
                 "electrified": {
                     "label": "Electrificación",
@@ -2972,11 +3017,13 @@
                     "placeholder": "Catenaria, Riel electrificada..."
                 },
                 "elevation": {
-                    "label": "Elevación"
+                    "label": "Elevación",
+                    "terms": "elevación, altura, altitud"
                 },
                 "email": {
                     "label": "Correo electrónico",
-                    "placeholder": "ejemplo@ejemplo.com"
+                    "placeholder": "ejemplo@ejemplo.com",
+                    "terms": "email, mail, correo electrónico"
                 },
                 "embankment": {
                     "label": "Tipo",
@@ -3005,19 +3052,23 @@
                 },
                 "fax": {
                     "label": "Fax",
-                    "placeholder": "+31 42 123 4567"
+                    "placeholder": "+31 42 123 4567",
+                    "terms": "fax, máquina de faxear"
                 },
                 "fee": {
-                    "label": "Tarifado"
+                    "label": "Tarifado",
+                    "terms": "cuota, honorarios, pago, tarifa"
                 },
                 "fence_type": {
                     "label": "Tipo"
                 },
                 "fire_hydrant/diameter": {
-                    "label": "Diámetro (mm, in, o letras)"
+                    "label": "Diámetro (mm, in, o letras)",
+                    "terms": "Diámetro"
                 },
                 "fire_hydrant/pressure": {
-                    "label": "Presión (bar)"
+                    "label": "Presión (bar)",
+                    "terms": "presión, tensión, fuerza"
                 },
                 "fire_hydrant/type": {
                     "label": "Forma",
@@ -3032,13 +3083,15 @@
                     "label": "Chimenea"
                 },
                 "fishing": {
-                    "label": "Pesca"
+                    "label": "Pesca",
+                    "terms": "pesca, pescar"
                 },
                 "fitness_station": {
                     "label": "Tipo de equipo"
                 },
                 "fixme": {
-                    "label": "Arréglame"
+                    "label": "Arréglame",
+                    "terms": "Fixme, Arreglarme, arréglame, arreglar, corregir, corrígeme, corregirme "
                 },
                 "flag/type": {
                     "label": "Tipo de bandera"
@@ -3047,17 +3100,20 @@
                     "label": "Flotante"
                 },
                 "flood_prone": {
-                    "label": "Propenso a inundarse"
+                    "label": "Propenso a inundarse",
+                    "terms": "Propenso a inundarse, inundación, anegamiento"
                 },
                 "ford": {
                     "label": "Tipo",
                     "placeholder": "Predeterminado"
                 },
                 "frequency": {
-                    "label": "Frecuencia de operación"
+                    "label": "Frecuencia de operación",
+                    "terms": "Frecuencia de operación"
                 },
                 "frequency_electrified": {
-                    "label": "Frecuencia de operación"
+                    "label": "Frecuencia de operación",
+                    "terms": "Frecuencia de operación"
                 },
                 "from": {
                     "label": "Desde"
@@ -3078,7 +3134,8 @@
                         "male": "Masculino",
                         "unisex": "Unisex"
                     },
-                    "placeholder": "Desconocido"
+                    "placeholder": "Desconocido",
+                    "terms": "género, sexo, femenino, masculino, unisex"
                 },
                 "generator/method": {
                     "label": "Método"
@@ -3120,13 +3177,16 @@
                     "label": "Especialidades"
                 },
                 "height": {
-                    "label": "Altura (metros)"
+                    "label": "Altura (metros)",
+                    "terms": "altura"
                 },
                 "height_building": {
-                    "label": "Altura del edificio (metros)"
+                    "label": "Altura del edificio (metros)",
+                    "terms": "Altura del edificio"
                 },
                 "highspeed": {
-                    "label": "Alta velocidad"
+                    "label": "Alta velocidad",
+                    "terms": "Alta velocidad, rápido"
                 },
                 "highway": {
                     "label": "Tipo"
@@ -3174,7 +3234,8 @@
                         "difficult": "Difícil: Camino angosto y expuesto. Puede tener obstáculos para pasar y pasadizos estrechos.",
                         "impossible": "Imposible: camino o puente no transitable para caballos. Demasiado estrecho, soporte insuficiente, obstáculos como escaleras. Peligro de muerte."
                     },
-                    "placeholder": "Difícil, Peligroso..."
+                    "placeholder": "Difícil, Peligroso...",
+                    "terms": "Dificultad para montar a caballo, caballo, montar"
                 },
                 "horse_stables": {
                     "label": "Establo para montar a caballo",
@@ -3190,7 +3251,8 @@
                     "label": "Código de aeropuerto de la OACI - ICAO"
                 },
                 "incline": {
-                    "label": "Pendiente"
+                    "label": "Pendiente",
+                    "terms": "inclinación, pendiente, cuesta"
                 },
                 "incline_steps": {
                     "label": "Pendiente",
@@ -3200,7 +3262,8 @@
                     }
                 },
                 "indoor": {
-                    "label": "Interior"
+                    "label": "Interior",
+                    "terms": "interior"
                 },
                 "indoor_type": {
                     "label": "Tipo"
@@ -3212,10 +3275,12 @@
                     "label": "Tipo"
                 },
                 "inscription": {
-                    "label": "Inscripción"
+                    "label": "Inscripción",
+                    "terms": "inscripción, dedicatoria"
                 },
                 "intermittent": {
-                    "label": "Intermitente"
+                    "label": "Intermitente",
+                    "terms": "Intermitente"
                 },
                 "intermittent_yes": {
                     "label": "Intermitente"
@@ -3228,19 +3293,24 @@
                         "wired": "Por cable",
                         "wlan": "Wi-Fi",
                         "yes": "Sí"
-                    }
+                    },
+                    "terms": "acceso a Internet"
                 },
                 "internet_access/fee": {
-                    "label": "Pago por acceso a Internet"
+                    "label": "Pago por acceso a Internet",
+                    "terms": "tarifa de internet, precio de internet, precio de wifi, tarifa de wifi"
                 },
                 "internet_access/ssid": {
-                    "label": "Nombre de la red wifi"
+                    "label": "Nombre de la red wifi",
+                    "terms": "Nombre de red wifi, ssid"
                 },
                 "interval": {
-                    "label": "Intervalo"
+                    "label": "Intervalo",
+                    "terms": "intervalo"
                 },
                 "junction/ref_oneway": {
-                    "label": "Número de cruce"
+                    "label": "Número de cruce",
+                    "terms": "Número de cruce, cruce, intersección"
                 },
                 "junction_line": {
                     "label": "Cruce",
@@ -3248,7 +3318,8 @@
                         "circular": "Círculo de tráfico",
                         "jughandle": "Cambio de sentido a distinto nivel",
                         "roundabout": "Rotonda"
-                    }
+                    },
+                    "terms": "Cruce, unión, cruce, empalme"
                 },
                 "kerb": {
                     "label": "Bordillo/Cordón"
@@ -3267,14 +3338,16 @@
                 },
                 "lanes": {
                     "label": "Carriles",
-                    "placeholder": "1, 2, 3..."
+                    "placeholder": "1, 2, 3...",
+                    "terms": "carril"
                 },
                 "language_multi": {
                     "label": "Idiomas"
                 },
                 "layer": {
                     "label": "Capa",
-                    "placeholder": "0"
+                    "placeholder": "0",
+                    "terms": "capa"
                 },
                 "leaf_cycle": {
                     "label": "Ciclo de la hoja",
@@ -3319,20 +3392,27 @@
                     "label": "Longitud (metros)"
                 },
                 "level": {
-                    "label": "Nivel"
+                    "label": "Nivel",
+                    "terms": "nivel, piso del edificio, piso"
                 },
                 "levels": {
                     "label": "Niveles del edificio",
-                    "placeholder": "2, 4, 6..."
+                    "placeholder": "2, 4, 6...",
+                    "terms": "Niveles"
                 },
                 "liaison": {
                     "label": "Tipo"
                 },
+                "line_attachment": {
+                    "label": "Enganche de línea"
+                },
                 "lit": {
-                    "label": "Iluminado"
+                    "label": "Iluminado",
+                    "terms": "Iluminado, lámpara, iluminación"
                 },
                 "location": {
-                    "label": "Ubicación"
+                    "label": "Ubicación",
+                    "terms": "ubicación, localización, posición"
                 },
                 "location_pool": {
                     "label": "Ubicación",
@@ -3352,7 +3432,8 @@
                     "label": "Tipo"
                 },
                 "manufacturer": {
-                    "label": "Fabricante"
+                    "label": "Fabricante",
+                    "terms": "fabricante, manufacturero, industrial"
                 },
                 "map_size": {
                     "label": "Cobertura"
@@ -3361,38 +3442,47 @@
                     "label": "Tipo"
                 },
                 "material": {
-                    "label": "Material"
+                    "label": "Material",
+                    "terms": "material"
                 },
                 "maxheight": {
                     "label": "Altura máxima",
-                    "placeholder": "4, 4.5, 5, 14'0\", 14'6\", 15'0\""
+                    "placeholder": "4, 4.5, 5, 14'0\", 14'6\", 15'0\"",
+                    "terms": "Altura máxima, altura"
                 },
                 "maxspeed": {
                     "label": "Límite de velocidad",
-                    "placeholder": "40, 50, 60..."
+                    "placeholder": "40, 50, 60...",
+                    "terms": "límite de velocidad, velocidad máxima "
                 },
                 "maxspeed/advisory": {
                     "label": "Límite de velocidad recomendada",
-                    "placeholder": "40, 50, 60..."
+                    "placeholder": "40, 50, 60...",
+                    "terms": "Aviso, Límite de velocidad"
                 },
                 "maxstay": {
-                    "label": "Estadía máxima"
+                    "label": "Estadía máxima",
+                    "terms": "estadía, tiempo"
                 },
                 "maxweight": {
-                    "label": "Peso máximo"
+                    "label": "Peso máximo",
+                    "terms": "peso"
                 },
                 "maxweight_bridge": {
-                    "label": "Peso máximo"
+                    "label": "Peso máximo",
+                    "terms": "peso"
                 },
                 "memorial": {
                     "label": "Tipo"
                 },
                 "microbrewery": {
-                    "label": "Microcervecería"
+                    "label": "Microcervecería",
+                    "terms": "Microcervecería, cerveza artesanal"
                 },
                 "minspeed": {
                     "label": "Límite mínimo de velocidad",
-                    "placeholder": "20, 30, 40..."
+                    "placeholder": "20, 30, 40...",
+                    "terms": "velocidad, Límite mínimo de velocidad, mínima"
                 },
                 "monitoring_multi": {
                     "label": "Supervisando"
@@ -3408,7 +3498,8 @@
                         "5": "5: Dificultad máxima, campo rocoso, derrumbes",
                         "6": "6: No manejable, excepto por los mejores ciclistas de montaña"
                     },
-                    "placeholder": "0, 1, 2, 3..."
+                    "placeholder": "0, 1, 2, 3...",
+                    "terms": "Dificultad para ciclismo de montaña, ciclismo, montaña"
                 },
                 "mtb/scale/imba": {
                     "label": "Dificultad de pista IMBA",
@@ -3419,7 +3510,8 @@
                         "3": "Difícil (diamante negro)",
                         "4": "Extremadamente difícil (doble diamante negro)"
                     },
-                    "placeholder": "Fácil, medio, difícil..."
+                    "placeholder": "Fácil, medio, difícil...",
+                    "terms": "Dificultad de sendero IMBA, sendero, imba"
                 },
                 "mtb/scale/uphill": {
                     "label": "Dificultad de ciclismo de montaña cuesta arriba",
@@ -3431,17 +3523,20 @@
                         "4": "4: Pendiente Prom. <30%, mal estado, ramas/rocas grandes",
                         "5": "5: Muy empinado, la bicicleta generalmente necesita ser empujada o llevada"
                     },
-                    "placeholder": "0, 1, 2, 3..."
+                    "placeholder": "0, 1, 2, 3...",
+                    "terms": "Dificultad cuesta arriba en bicicleta de montaña, cuesta arriba, montaña"
                 },
                 "name": {
                     "label": "Nombre",
-                    "placeholder": "Nombre común (si existe)"
+                    "placeholder": "Nombre común (si existe)",
+                    "terms": "Nombre, etiqueta, título"
                 },
                 "natural": {
                     "label": "Natural"
                 },
                 "network": {
-                    "label": "Red"
+                    "label": "Red",
+                    "terms": "red"
                 },
                 "network_bicycle": {
                     "label": "Tipo de red",
@@ -3476,8 +3571,13 @@
                 "network_road": {
                     "label": "Red"
                 },
+                "not/name": {
+                    "label": "Nombres incorrectos",
+                    "terms": "Nombres incorrectos, errores comunes de nombres"
+                },
                 "note": {
-                    "label": "Nota"
+                    "label": "Nota",
+                    "terms": "comentario, observación, nota"
                 },
                 "office": {
                     "label": "Tipo"
@@ -3493,7 +3593,8 @@
                     }
                 },
                 "oneway/bicycle": {
-                    "label": "Un solo sentido (Bicicletas)"
+                    "label": "Un solo sentido (Bicicletas)",
+                    "terms": "mano única, bicicletas"
                 },
                 "oneway_yes": {
                     "label": "Sentido único",
@@ -3510,23 +3611,27 @@
                 },
                 "opening_hours": {
                     "label": "Horas de atención",
-                    "placeholder": "Desconocido"
+                    "placeholder": "Desconocido",
+                    "terms": "horas"
                 },
                 "operator": {
-                    "label": "Operador"
+                    "label": "Operador",
+                    "terms": "operador, operario, agente"
                 },
                 "operator/type": {
                     "label": "Tipo de operador"
                 },
                 "outdoor_seating": {
-                    "label": "Asientos al aire libre"
+                    "label": "Asientos al aire libre",
+                    "terms": "Asientos al aire libre, silla"
                 },
                 "par": {
                     "label": "Par",
                     "placeholder": "3, 4, 5..."
                 },
                 "park_ride": {
-                    "label": "Aparcamiento / Estacionamiento disuasorio"
+                    "label": "Aparcamiento / Estacionamiento disuasorio",
+                    "terms": "estacionar, estacionamiento, parking, transporte público"
                 },
                 "parking": {
                     "label": "Tipo",
@@ -3541,10 +3646,12 @@
                     }
                 },
                 "payment_multi": {
-                    "label": "Formas de pago"
+                    "label": "Formas de pago",
+                    "terms": "Formas de pago"
                 },
                 "payment_multi_fee": {
-                    "label": "Formas de pago"
+                    "label": "Formas de pago",
+                    "terms": "Formas de pago"
                 },
                 "phases": {
                     "label": "Fases",
@@ -3552,7 +3659,8 @@
                 },
                 "phone": {
                     "label": "Teléfono",
-                    "placeholder": "+31 42 123 4567"
+                    "placeholder": "+31 42 123 4567",
+                    "terms": "Teléfono, número de teléfono, número de línea"
                 },
                 "piste/difficulty": {
                     "label": "Dificultad",
@@ -3678,16 +3786,21 @@
                     "label": "Edad mínima"
                 },
                 "polling_station": {
-                    "label": "Lugar de votación"
+                    "label": "Lugar de votación",
+                    "terms": "centro electoral, lugar de votación, votación, elecciones"
                 },
                 "population": {
                     "label": "Cantidad de población"
+                },
+                "post": {
+                    "label": "Dirección de entrega"
                 },
                 "power": {
                     "label": "Tipo"
                 },
                 "power_supply": {
-                    "label": "Fuente de energía"
+                    "label": "Fuente de energía",
+                    "terms": "Fuente de alimentación, electricidad, potencia"
                 },
                 "preschool": {
                     "label": "Preescolar"
@@ -3696,7 +3809,8 @@
                     "label": "Produce"
                 },
                 "product": {
-                    "label": "Productos"
+                    "label": "Productos",
+                    "terms": "Productos"
                 },
                 "public_bookcase/type": {
                     "label": "Tipo"
@@ -3731,7 +3845,8 @@
                     "placeholder": "Contenedor, Centro"
                 },
                 "ref": {
-                    "label": "Código de referencia"
+                    "label": "Código de referencia",
+                    "terms": "Código de referencia, referencia"
                 },
                 "ref/isil": {
                     "label": "Código ISIL"
@@ -3750,13 +3865,15 @@
                     "label": "Número de plataforma"
                 },
                 "ref_road_number": {
-                    "label": "Número de la carretera"
+                    "label": "Número de la carretera",
+                    "terms": "Número de camino, número de ruta"
                 },
                 "ref_room_number": {
                     "label": "Número de habitación"
                 },
                 "ref_route": {
-                    "label": "Número de ruta"
+                    "label": "Número de ruta",
+                    "terms": "Número de camino, número de ruta"
                 },
                 "ref_runway": {
                     "label": "Número de pista de aterrizaje",
@@ -3773,7 +3890,8 @@
                     "label": "Tipo"
                 },
                 "religion": {
-                    "label": "Religión"
+                    "label": "Religión",
+                    "terms": "religión"
                 },
                 "reservation": {
                     "label": "Reservaciones",
@@ -3782,7 +3900,8 @@
                         "recommended": "Recomendado",
                         "required": "Requerido",
                         "yes": "Aceptado"
-                    }
+                    },
+                    "terms": "reserva, reservación"
                 },
                 "resort": {
                     "label": "Tipo"
@@ -3797,7 +3916,8 @@
                     "label": "Restricciones de giro"
                 },
                 "roof/colour": {
-                    "label": "Color del techo"
+                    "label": "Color del techo",
+                    "terms": "Color del techo, techo"
                 },
                 "room": {
                     "label": "Tipo"
@@ -3821,13 +3941,16 @@
                         "hiking": "T1: Senderismo",
                         "mountain_hiking": "T2: Senderismo de montaña"
                     },
-                    "placeholder": "Caminata de montaña, caminata alpina..."
+                    "placeholder": "Caminata de montaña, caminata alpina...",
+                    "terms": "Excursionismo, hiking, dificultad"
                 },
                 "salt": {
-                    "label": "Sal"
+                    "label": "Sal",
+                    "terms": "sal, salina, salinado"
                 },
                 "sanitary_dump_station": {
-                    "label": "Desecho del inodoro"
+                    "label": "Desecho del inodoro",
+                    "terms": "desecho, inodoro, taza, letrina, baño, aseo, lavabo, casa rodante, autocaravana, motorhome"
                 },
                 "screen": {
                     "label": "Pantallas",
@@ -3914,7 +4037,8 @@
                     "label": "Categoría"
                 },
                 "seamark/type": {
-                    "label": "Señal"
+                    "label": "Señal",
+                    "terms": "marina, marino, marítimo"
                 },
                 "seamark/wreck/category": {
                     "label": "Categoría"
@@ -3933,7 +4057,8 @@
                         "only": "Solamente",
                         "yes": "Sí"
                     },
-                    "placeholder": "Sí, no, solamente"
+                    "placeholder": "Sí, no, solamente",
+                    "terms": "venta de usados, usada, usados"
                 },
                 "self_service": {
                     "label": "Autoservicio"
@@ -3954,7 +4079,8 @@
                         "siding": "Ramal paralelo",
                         "spur": "Ramal corto",
                         "yard": "Patio de maniobra"
-                    }
+                    },
+                    "terms": "Tipo de servicio, servicio"
                 },
                 "service_times": {
                     "label": "Horarios de servicio"
@@ -3990,12 +4116,13 @@
                     "options": {
                         "dedicated": "Dedicado a los fumadores (ej.: club de fumadores)",
                         "isolated": "En áreas de fumadores, físicamente aislados",
-                        "no": "No fumar en todas partes",
+                        "no": "No fumar en ningún sitio",
                         "outside": "Permitido fuera",
                         "separated": "En áreas de fumadores, no físicamente aislado",
                         "yes": "Permitido en todas partes"
                     },
-                    "placeholder": "No, separado, sí..."
+                    "placeholder": "No, separado, sí...",
+                    "terms": "fumar, fumador"
                 },
                 "smoothness": {
                     "label": "Rugosidad",
@@ -4009,7 +4136,8 @@
                         "very_bad": "Gran despeje: vehículo todo terreno de trabajo liviano",
                         "very_horrible": "Todo terreno especializado: tractor, vehículo todo terreno"
                     },
-                    "placeholder": "Ruedas delgadas, ruedas, todo terreno..."
+                    "placeholder": "Ruedas delgadas, ruedas, todo terreno...",
+                    "terms": "suavidad, lisura"
                 },
                 "social_facility": {
                     "label": "Tipo"
@@ -4018,7 +4146,12 @@
                     "label": "Personas atendidas"
                 },
                 "source": {
-                    "label": "Fuentes"
+                    "label": "Fuentes",
+                    "terms": "fuentes, referencias"
+                },
+                "species/wikidata": {
+                    "label": "Especies Wikidata",
+                    "terms": "especies, wikidata"
                 },
                 "sport": {
                     "label": "Deportes"
@@ -4033,10 +4166,12 @@
                     "label": "Deportes"
                 },
                 "stars": {
-                    "label": "Estrellas"
+                    "label": "Estrellas",
+                    "terms": "estrellas, calificación"
                 },
                 "start_date": {
-                    "label": "Fecha inicio"
+                    "label": "Fecha inicio",
+                    "terms": "Fecha de inicio, comienzo, inaguración"
                 },
                 "step_count": {
                     "label": "Número de escalones"
@@ -4050,6 +4185,10 @@
                 },
                 "street_cabinet": {
                     "label": "Tipo"
+                },
+                "stroller": {
+                    "label": "Acceso para cochecitos",
+                    "terms": " cochecitos, carriola, carrito de bebé"
                 },
                 "structure": {
                     "label": "Estructura",
@@ -4079,7 +4218,8 @@
                     "label": "Tipo"
                 },
                 "supervised": {
-                    "label": "Vigilado"
+                    "label": "Vigilado",
+                    "terms": "Supervisado, cuidado, vigilado"
                 },
                 "support": {
                     "label": "Soporte"
@@ -4102,7 +4242,8 @@
                     "label": "Zona de vigilancia"
                 },
                 "survey/date": {
-                    "label": "Fecha de último reconocimiento"
+                    "label": "Fecha de último reconocimiento",
+                    "terms": "Fecha de la último relevamiento, estudio, reconocimiento, relevamiento"
                 },
                 "swimming_pool": {
                     "label": "Tipo"
@@ -4117,7 +4258,8 @@
                     }
                 },
                 "tactile_paving": {
-                    "label": "Pavimento táctil"
+                    "label": "Pavimento táctil",
+                    "terms": "Pavimento Táctil, textura, podotáctil, banda de vigilia, banda de vigilancia, suelo podotáctil, invidentes, ciegos, ceguera. baja visión, discapacidad visual"
                 },
                 "takeaway": {
                     "label": "Para llevar",
@@ -4126,13 +4268,15 @@
                         "only": "Sólo para llevar",
                         "yes": "Si"
                     },
-                    "placeholder": "Si, no, sólo para llevar..."
+                    "placeholder": "Si, no, sólo para llevar...",
+                    "terms": "Para llevar, llevarse"
                 },
                 "target": {
                     "label": "Objetivo"
                 },
                 "tidal": {
-                    "label": "De marea"
+                    "label": "De marea",
+                    "terms": "Marea"
                 },
                 "to": {
                     "label": "Hasta"
@@ -4147,13 +4291,16 @@
                     }
                 },
                 "toilets/handwashing": {
-                    "label": "Lavado de manos"
+                    "label": "Lavado de manos",
+                    "terms": "Lavado de manos"
                 },
                 "toilets/position": {
-                    "label": "Posiciones"
+                    "label": "Posiciones",
+                    "terms": "posición"
                 },
                 "toll": {
-                    "label": "Peaje"
+                    "label": "Peaje",
+                    "terms": "peaje"
                 },
                 "tomb": {
                     "label": "Tipo"
@@ -4217,7 +4364,8 @@
                         "intermediate": "Intermedio: pocos marcadores, sendero mayormente visible",
                         "no": "No: sin caminos, requiere excelentes habilidades de orientación"
                     },
-                    "placeholder": "Excelente, bueno, malo..."
+                    "placeholder": "Excelente, bueno, malo...",
+                    "terms": "Visibilidad del sendero"
                 },
                 "transformer": {
                     "label": "Tipo",
@@ -4239,7 +4387,8 @@
                     "label": "Tipo"
                 },
                 "trolley_wire": {
-                    "label": "Cables de trolebús superiores"
+                    "label": "Cables de trolebús superiores",
+                    "terms": "Cables elevados, línea aérea"
                 },
                 "tunnel": {
                     "label": "Tipo",
@@ -4254,7 +4403,8 @@
                         "military": "Militar",
                         "test": "Prueba",
                         "tourism": "Turismo"
-                    }
+                    },
+                    "terms": "Tipo de uso, uso"
                 },
                 "valve": {
                     "label": "Tipo"
@@ -4290,16 +4440,20 @@
                     "label": "Voltaje"
                 },
                 "voltage/primary": {
-                    "label": "Voltaje primario"
+                    "label": "Voltaje primario",
+                    "terms": "Voltaje primario, voltaje"
                 },
                 "voltage/secondary": {
-                    "label": "Voltaje secundario"
+                    "label": "Voltaje secundario",
+                    "terms": "voltaje secundario, voltaje"
                 },
                 "voltage/tertiary": {
-                    "label": "Voltaje terciario"
+                    "label": "Voltaje terciario",
+                    "terms": "voltaje terciario, voltaje"
                 },
                 "voltage_electrified": {
-                    "label": "Voltaje"
+                    "label": "Voltaje",
+                    "terms": "votaje"
                 },
                 "wall": {
                     "label": "Tipo"
@@ -4314,36 +4468,43 @@
                     "label": "Fuente de agua"
                 },
                 "water_volume": {
-                    "label": "Volumen de reserva de agua (m³)"
+                    "label": "Volumen de reserva de agua (m³)",
+                    "terms": "Volumen de reserva de agua, reservar, volumen, cantidad"
                 },
                 "waterway": {
                     "label": "Tipo"
                 },
                 "website": {
                     "label": "Sitio web",
-                    "placeholder": "https://ejemplo.com/"
+                    "placeholder": "https://ejemplo.com/",
+                    "terms": "sitio web, sitio, web, presencia en internet, uri, url, página web"
                 },
                 "wetland": {
                     "label": "Tipo"
                 },
                 "wheelchair": {
-                    "label": "Acceso en silla de ruedas"
+                    "label": "Acceso en silla de ruedas",
+                    "terms": "Acceso en silla de ruedas, silla de ruedas, acceso para discapacitados, discapacitados"
                 },
                 "wholesale": {
                     "label": "Venta al por mayor"
                 },
                 "width": {
-                    "label": "Ancho (metros)"
+                    "label": "Ancho (metros)",
+                    "terms": "anchura, ancho"
                 },
                 "wikidata": {
-                    "label": "Wikidata"
+                    "label": "Wikidata",
+                    "terms": "Wikidata"
                 },
                 "wikipedia": {
-                    "label": "Wikipedia"
+                    "label": "Wikipedia",
+                    "terms": "Wikipedia"
                 },
                 "windings": {
                     "label": "Bobinas",
-                    "placeholder": "1, 2, 3..."
+                    "placeholder": "1, 2, 3...",
+                    "terms": "bobinado"
                 },
                 "windings/configuration": {
                     "label": "Configuración de bobinas",
@@ -4355,7 +4516,8 @@
                         "scott": "Scott",
                         "star": "Estrella / Wye",
                         "zigzag": "Zig Zag"
-                    }
+                    },
+                    "terms": "configuración de bobinado, bobinado"
                 }
             },
             "presets": {
@@ -4785,6 +4947,10 @@
                     "name": "Escuela de idiomas",
                     "terms": "escuela, colegio, idiomas"
                 },
+                "amenity/letter_box": {
+                    "name": "Buzón",
+                    "terms": "buzon, buzón, receptáculo, casillero, casilla, compartimiento, caja, abertura, ranura, orificio, hendidura, correo"
+                },
                 "amenity/library": {
                     "name": "Biblioteca",
                     "terms": "biblioteca,archivo,filmoteca,hemeroteca"
@@ -4928,6 +5094,10 @@
                     "name": "Buzón de correos",
                     "terms": "buzón, casillero, apartado, correo, carta, encomienda"
                 },
+                "amenity/post_depot": {
+                    "name": "Oficina de clasificación de correos",
+                    "terms": "centro de procesamiento y distribución de correo, depósito de correo,"
+                },
                 "amenity/post_office": {
                     "name": "Oficina postal",
                     "terms": "correo, oficina de correos, casa de correos, estafeta de correos"
@@ -4966,6 +5136,14 @@
                 },
                 "amenity/recycling": {
                     "name": "Reciclaje"
+                },
+                "amenity/recycling/container/electrical_items": {
+                    "name": "Contenedor de desechos electrónicos",
+                    "terms": "computadoras, desechos electrónicos, reciclaje de productos electrónicos, electrónicos, teléfonos, tabletas, tablets, notebooks, ordenadores, desechos, basura"
+                },
+                "amenity/recycling/container/green_waste": {
+                    "name": "Contenedor de residuos orgánicos",
+                    "terms": "biodegradable, biológico, compost, descomponible, basurero, desperdicio de jardín, orgánico, basura, restos de comida, verde, residuo, basura"
                 },
                 "amenity/recycling_centre": {
                     "name": "Centro de reciclaje",
@@ -5175,6 +5353,10 @@
                 "amenity/vending_machine": {
                     "name": "Máquina expendedora",
                     "terms": "máquina, expendedora, vendedora, distribuidor automático, aperitivos, bebidas, golosinas, cigarrillos, periódicos, revistas, refrescos, café, comida, chucherías, libros, sellos correo, billetes, transporte público, bebidas alcohólicas, tabaco"
+                },
+                "amenity/vending_machine/bottle_return": {
+                    "name": "Máquina de devolución de botellas",
+                    "terms": "devolución de botella, retornable, botellas"
                 },
                 "amenity/vending_machine/cigarettes": {
                     "name": "Máquina expendedora de cigarrillos",
@@ -6542,6 +6724,10 @@
                     "name": "Terreno de edificios agrarios",
                     "terms": "corral, redil, edificio granja, graneros, cobertizos, edificio agrario, casco de estancia, estancia, hacienda, cultivos, cultivar"
                 },
+                "landuse/flowerbed": {
+                    "name": "Jardín de flores",
+                    "terms": "Jardín de flores, jardín floral, parterre, flores"
+                },
                 "landuse/forest": {
                     "name": "Bosque gestionado",
                     "terms": "tala, bosque, madera, arbol, árbol"
@@ -7114,6 +7300,10 @@
                     "name": "Estación de monitoreo",
                     "terms": "Estación de monitoreo, monitoreo, clima, terremoto, sismología, aire, gps"
                 },
+                "man_made/obelisk": {
+                    "name": "Obelisco",
+                    "terms": "Obelisco, monolito, pilar, columna"
+                },
                 "man_made/observatory": {
                     "name": "Observatorio",
                     "terms": "observatorio, mirador, observador, astronomía, telescopio"
@@ -7571,8 +7761,8 @@
                     "name": "Médico"
                 },
                 "office/political_party": {
-                    "name": "Partido político",
-                    "terms": "Partido político, formación política, grupo político"
+                    "name": "Oficina del partido político",
+                    "terms": "Oficina del partido político, partido político"
                 },
                 "office/private_investigator": {
                     "name": "Oficina de investigador privado",
@@ -8745,10 +8935,6 @@
                 "shop/wine": {
                     "name": "Tienda de vinos",
                     "terms": "vinatería, vinos, espirituosos, licorería, bebidas, establecimiento de vinos"
-                },
-                "tactile_paving": {
-                    "name": "Pavimento táctil",
-                    "terms": "discapacidad visual. ciegos, superficie detectables, superficie táctil"
                 },
                 "telecom/data_center": {
                     "name": "Centro de datos",

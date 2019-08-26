@@ -504,7 +504,8 @@
             "translate": "Traduzir",
             "localized_translation_label": "Nome multilíngue",
             "localized_translation_language": "Escolha o idioma",
-            "localized_translation_name": "Nome"
+            "localized_translation_name": "Nome",
+            "language_and_code": "{língua} ({código})"
         },
         "zoom_in_edit": "Aproxime o zoom para editar",
         "login": "Entrar",
@@ -1755,9 +1756,9 @@
                 }
             },
             "missing_role": {
-                "title": "Papéis ausentes",
+                "title": "Tag role ausente",
                 "message": "{member} não tem nenhum papel dentro {relation}",
-                "tip": "Encontre relações com papéis de membros ausentes ou incorretos",
+                "tip": "Encontre relações com tag role ausente ou incorreta",
                 "multipolygon": {
                     "reference": "Os membros do multipolígono devem ter uma função interna ou externa."
                 }
@@ -1813,7 +1814,7 @@
                 "reference": "Estradas sem um tipo específico podem não aparecer nos mapas ou no roteamento."
             },
             "impossible_oneway": {
-                "title": "Meios impossíveis",
+                "title": "Caminho de mão-única impossível",
                 "tip": "Encontrar problemas de rota com recursos unidirecionais",
                 "waterway": {
                     "connected": {
@@ -1861,6 +1862,9 @@
                 },
                 "connect_features": {
                     "title": "Conecte os elementos."
+                },
+                "connect_using_ford": {
+                    "title": "Conecte-se usando um ford"
                 },
                 "continue_from_start": {
                     "title": "Continue desenhando desde o início"
@@ -2452,6 +2456,7 @@
                         }
                     },
                     "placeholder": "Não Especificado",
+                    "terms": "[traduzir com sinônimos ou termos relacionados para \"Acesso permitido\", separados por vírgulas]",
                     "types": {
                         "access": "Todos",
                         "bicycle": "Bicicletas",
@@ -2461,7 +2466,8 @@
                     }
                 },
                 "access_simple": {
-                    "label": "Acesso permitido"
+                    "label": "Acesso permitido",
+                    "terms": "[traduzir com sinônimos ou termos relacionados para \"Acesso permitido\", separados por vírgulas]"
                 },
                 "addr/interpolation": {
                     "label": "Tipo",
@@ -2506,7 +2512,8 @@
                         "suburb": "Bairro",
                         "suburb!jp": "Ward",
                         "unit": "Unidade"
-                    }
+                    },
+                    "terms": "[traduzir com sinônimos ou termos relacionados para 'Endereço', separados por vírgulas]"
                 },
                 "admin_level": {
                     "label": "Nível Administrativo"
@@ -2555,7 +2562,8 @@
                     "label": "Produtos"
                 },
                 "air_conditioning": {
-                    "label": "Ar condicionado"
+                    "label": "Ar condicionado",
+                    "terms": "[traduzir com sinônimos ou termos relacionados para 'Ar Condicionado', separados por vírgulas]"
                 },
                 "amenity": {
                     "label": "Tipo"
@@ -2570,7 +2578,8 @@
                     "label": "Para Animais"
                 },
                 "architect": {
-                    "label": "Arquiteto"
+                    "label": "Arquiteto",
+                    "terms": "[traduzir com sinônimos ou termos relacionados para 'Architect', separados por vírgulas]"
                 },
                 "area/highway": {
                     "label": "Tipo"
@@ -2591,7 +2600,8 @@
                     "label": "Encosto"
                 },
                 "bar": {
-                    "label": "Bar"
+                    "label": "Bar",
+                    "terms": "[traduzir com sinônimos ou termos relacionados para 'Bar', separados por vírgulas]"
                 },
                 "barrier": {
                     "label": "Tipo"
@@ -2617,13 +2627,15 @@
                     "label": "Especialidade de beleza"
                 },
                 "bench": {
-                    "label": "Assento"
+                    "label": "Assento",
+                    "terms": "[traduzir com sinônimos ou afins para \"Banco\", separados por vírgulas]"
                 },
                 "bicycle_parking": {
                     "label": "Tipo"
                 },
                 "bin": {
-                    "label": "Lixeira"
+                    "label": "Lixeira",
+                    "terms": "[traduzir com sinônimos ou termos relacionados para 'Lixeira', separados por vírgulas]"
                 },
                 "blood_components": {
                     "label": "Componentes do Sangue",
@@ -2647,10 +2659,12 @@
                     "label": "Tipo"
                 },
                 "brand": {
-                    "label": "Marca"
+                    "label": "Marca",
+                    "terms": "[traduzir com sinônimos ou termos relacionados para 'Marca', separados por vírgulas]"
                 },
                 "brewery": {
-                    "label": "Chopes"
+                    "label": "Chopes",
+                    "terms": "[traduzir com sinônimos ou termos relacionados para 'Rascunhos', separados por vírgulas]"
                 },
                 "bridge": {
                     "label": "Tipo",
@@ -2660,18 +2674,22 @@
                     "label": "Tipo"
                 },
                 "building": {
-                    "label": "Edifício"
+                    "label": "Edifício",
+                    "terms": "[traduzir com sinônimos ou termos relacionados para 'Construção', separados por vírgulas]"
                 },
                 "building/levels/underground": {
                     "label": "Níveis subterrâneos",
-                    "placeholder": "2, 4, 6..."
+                    "placeholder": "2, 4, 6...",
+                    "terms": "[traduzir com sinônimos ou termos relacionados para 'níveis subterrâneos', separados por vírgulas]"
                 },
                 "building/levels_building": {
                     "label": "Níveis do edifício ",
-                    "placeholder": "2, 4, 6..."
+                    "placeholder": "2, 4, 6...",
+                    "terms": "[traduzir com sinônimos ou termos relacionados para 'Níveis de construção', separados por vírgulas]"
                 },
                 "building/material": {
-                    "label": "Material"
+                    "label": "Material",
+                    "terms": "[traduzir com sinônimos ou termos relacionados para 'Material', separados por vírgulas]"
                 },
                 "building_area": {
                     "label": "Edifício"
@@ -2700,13 +2718,27 @@
                 },
                 "capacity": {
                     "label": "Capacidade",
-                    "placeholder": "50, 100, 200..."
+                    "placeholder": "50, 100, 200...",
+                    "terms": "[traduzir com sinônimos ou termos relacionados para 'Capacidade', separados por vírgulas]"
                 },
                 "cash_in": {
                     "label": "Depósito"
                 },
                 "castle_type": {
                     "label": "Tipo"
+                },
+                "changing_table": {
+                    "label": "Fraldário"
+                },
+                "charge_fee": {
+                    "label": "Valor da taxa",
+                    "placeholder": "1 EUR, 5 USD, 10 JPY…",
+                    "terms": "[traduzir com sinônimos ou termos relacionados para 'Valor da taxa', separados por vírgulas]"
+                },
+                "charge_toll": {
+                    "label": "Valor de Pedágio",
+                    "placeholder": "1 EUR, 5 USD, 10 JPY…",
+                    "terms": "[traduzir com sinônimos ou termos relacionados para 'Valor do pedágio', separados por vírgulas]"
                 },
                 "check_date": {
                     "label": "Última data de verificação"
@@ -2721,14 +2753,16 @@
                     "label": "Horários de Coleta"
                 },
                 "colour": {
-                    "label": "Cor"
+                    "label": "Cor",
+                    "terms": "[traduzir com sinônimos ou termos relacionados para 'Cor', separados por vírgulas]"
                 },
                 "comment": {
                     "label": "Comentário do conjunto de alterações",
                     "placeholder": "Breve descrição das suas contribuições (obrigatório)"
                 },
                 "communication_multi": {
-                    "label": "Tipos de Comunicação"
+                    "label": "Tipos de Comunicação",
+                    "terms": "[traduzir com sinônimos ou termos relacionados para 'tipos de comunicação', separados por vírgulas]"
                 },
                 "construction": {
                     "label": "Tipo"
@@ -2759,7 +2793,8 @@
                     "placeholder": "1, 2, 3..."
                 },
                 "covered": {
-                    "label": "Coberto"
+                    "label": "Coberto",
+                    "terms": "[traduzir com sinônimos ou termos relacionados para 'Coberto', separados por vírgulas]"
                 },
                 "craft": {
                     "label": "Tipo"
@@ -2778,11 +2813,15 @@
                 "crossing": {
                     "label": "Tipo"
                 },
+                "crossing/island": {
+                    "label": "Ilha de refúgio"
+                },
                 "cuisine": {
                     "label": "Culinárias"
                 },
                 "currency_multi": {
-                    "label": "Tipos de Moeda"
+                    "label": "Tipos de Moeda",
+                    "terms": "[traduzir com sinônimos ou termos relacionados a 'Tipos de moeda', separados por vírgulas]"
                 },
                 "cutting": {
                     "label": "Tipo",
@@ -2875,9 +2914,6 @@
                 "diameter": {
                     "label": "Diâmetro",
                     "placeholder": "5 mm, 10 cm, 15 in…"
-                },
-                "diaper": {
-                    "label": "Troca de Fraldas Disponível"
                 },
                 "diet_multi": {
                     "label": "Tipos de dieta"
@@ -3476,6 +3512,9 @@
                 "network_road": {
                     "label": "Rede"
                 },
+                "not/name": {
+                    "label": "Nomes incorretos"
+                },
                 "note": {
                     "label": "Nota"
                 },
@@ -3682,6 +3721,9 @@
                 },
                 "population": {
                     "label": "População"
+                },
+                "post": {
+                    "label": "Endereço de entrega"
                 },
                 "power": {
                     "label": "Tipo"
@@ -4019,6 +4061,9 @@
                 },
                 "source": {
                     "label": "Fontes"
+                },
+                "species/wikidata": {
+                    "label": "Espécie no Wikidata"
                 },
                 "sport": {
                     "label": "Esportes"
@@ -4783,6 +4828,10 @@
                     "name": "Escola de idiomas",
                     "terms": "Escola de idiomas"
                 },
+                "amenity/letter_box": {
+                    "name": "Caixa de correio",
+                    "terms": "Caixa de correio"
+                },
                 "amenity/library": {
                     "name": "Biblioteca",
                     "terms": "Livros"
@@ -4963,6 +5012,14 @@
                 },
                 "amenity/recycling": {
                     "name": "Reciclagem"
+                },
+                "amenity/recycling/container/electrical_items": {
+                    "name": "Recipiente de lixo eletrônico",
+                    "terms": "Recipiente de lixo eletrônico"
+                },
+                "amenity/recycling/container/green_waste": {
+                    "name": "Recipiente de resíduos verdes",
+                    "terms": "Recipiente de resíduos verdes"
                 },
                 "amenity/recycling_centre": {
                     "name": "Centro de Reciclagem",
@@ -5171,6 +5228,10 @@
                 "amenity/vending_machine": {
                     "name": "Máquina de Venda",
                     "terms": "Totem de vendas, Máquina de Venda Automática, Dispenser, Máquina Automática de Vendas"
+                },
+                "amenity/vending_machine/bottle_return": {
+                    "name": "Máquina de retorno de garrafas",
+                    "terms": "Máquina de retorno de garrafa"
                 },
                 "amenity/vending_machine/cigarettes": {
                     "name": "Máquina de Venda de Cigarros",
@@ -6535,6 +6596,10 @@
                     "name": "Pátio de Fazenda",
                     "terms": "Pátio de Fazenda, Chácara, Sítio"
                 },
+                "landuse/flowerbed": {
+                    "name": "Canteiro de flores",
+                    "terms": "Canteiro de flores"
+                },
                 "landuse/forest": {
                     "name": "Floresta manejada",
                     "terms": "Floresta plantada, Silvicultura, Reflorestamento, Área reflorestada"
@@ -7564,8 +7629,8 @@
                     "name": "Médico"
                 },
                 "office/political_party": {
-                    "name": "Escritório de Partido Político",
-                    "terms": "política, político, partido, gabinete"
+                    "name": "Escritório de partido político",
+                    "terms": "Escritório de partido político"
                 },
                 "office/private_investigator": {
                     "name": "Escritório de Detetive Particular",
@@ -8738,10 +8803,6 @@
                     "name": "Loja de Vinhos",
                     "terms": "Vinícola, Adega"
                 },
-                "tactile_paving": {
-                    "name": "Piso táctil",
-                    "terms": "Piso táctil"
-                },
                 "telecom/data_center": {
                     "name": "Centro de dados",
                     "terms": "Centro de dados"
@@ -9682,6 +9743,12 @@
             },
             "ym-Kwame-Nkrumah-University-of-Science-and-Technology": {
                 "description": "YouthMappers na Universidade de Ciência e Tecnologia de Kwame Nkrumah"
+            },
+            "ym-University-of-Cape-Coast": {
+                "extendedDescription": "Somos uma sociedade que engloba todos os estudantes que estão lendo e lendo geografia no Departamento de Geografia e Planejamento Regional da Universidade de Cape Coast. Nosso principal objetivo é promover o interesse pela disciplina dentro e fora da sala de aula. Nosso lema é \"Nós compreendemos a Terra e seus habitantes\"."
+            },
+            "ym-University-of-Energy-and-Natural-Resources": {
+                "name": "Clube Ecológico"
             },
             "ym-Dedan-Kimathi-University-of-Technology": {
                 "name": "GDEV"

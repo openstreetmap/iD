@@ -1648,9 +1648,6 @@
                     "label": "Devices",
                     "placeholder": "1, 2, 3..."
                 },
-                "diaper": {
-                    "label": "Baby Changing Available"
-                },
                 "direction": {
                     "label": "Direction (Degrees Clockwise)",
                     "placeholder": "45, 90, 180, 270"
@@ -4443,9 +4440,6 @@
                 },
                 "office/physician": {
                     "name": "Physician"
-                },
-                "office/political_party": {
-                    "name": "Political Party"
                 },
                 "office/private_investigator": {
                     "name": "Private Investigator Office"

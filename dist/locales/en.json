@@ -9314,6 +9314,10 @@
                     "name": "Religious Store",
                     "terms": ""
                 },
+                "shop/rental": {
+                    "name": "Rental Shop",
+                    "terms": ""
+                },
                 "shop/scuba_diving": {
                     "name": "Scuba Diving Shop",
                     "terms": "diving,scuba"

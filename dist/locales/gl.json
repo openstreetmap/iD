@@ -2859,9 +2859,6 @@
                     "label": "Dispositivos",
                     "placeholder": "1, 2, 3..."
                 },
-                "diaper": {
-                    "label": "Cambiador de cueiros dispoñíbel"
-                },
                 "diet_multi": {
                     "label": "Tipos da dieta"
                 },
@@ -6744,9 +6741,6 @@
                 },
                 "office/physician": {
                     "name": "Médico"
-                },
-                "office/political_party": {
-                    "name": "Partido político"
                 },
                 "office/private_investigator": {
                     "name": "Oficina de investigador privado"

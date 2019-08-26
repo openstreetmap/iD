@@ -2475,9 +2475,6 @@
                     "label": "Диаметр",
                     "placeholder": "5 мм, 10 см, 15 дюймов..."
                 },
-                "diaper": {
-                    "label": "Доступно пеленание"
-                },
                 "diet_multi": {
                     "label": "Диеты"
                 },
@@ -6262,10 +6259,6 @@
                 "office/physician": {
                     "name": "Врач"
                 },
-                "office/political_party": {
-                    "name": "Политическая партия",
-                    "terms": "политическая партия"
-                },
                 "office/private_investigator": {
                     "name": "Частный сыщик",
                     "terms": "Частный сыщик"
@@ -7792,6 +7785,9 @@
             "byosm": {
                 "name": "OpenStreetMap Беларусь",
                 "description": "Telegram-чат OpenStreetMap Беларусь"
+            },
+            "be-facebook": {
+                "description": "Мапперы и сообщество OpenStreetMap Бельгии в Facebook"
             },
             "be-mailinglist": {
                 "name": "Список рассылки Talk-be"

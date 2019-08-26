@@ -2437,9 +2437,6 @@
                 "office/physician": {
                     "name": "Fizician"
                 },
-                "office/political_party": {
-                    "name": "Partid Politic"
-                },
                 "office/research": {
                     "name": "Birou de Cercetare"
                 },
