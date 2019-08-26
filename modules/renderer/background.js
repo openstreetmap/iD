@@ -194,6 +194,7 @@ export function rendererBackground(context) {
         var photoOverlayLayers = {
             streetside: 'Bing Streetside',
             mapillary: 'Mapillary Images',
+            'mapillary-map-features': 'Mapillary Map Features',
             'mapillary-signs': 'Mapillary Signs',
             openstreetcam: 'OpenStreetCam Images'
         };
