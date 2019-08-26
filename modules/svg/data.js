@@ -400,7 +400,7 @@ export function svgData(projection, context, dispatch) {
 
             // ensure at least one test was run.
             if (!tested) {
-                regex = new RegExp('.*\.google(apis)?\..*/(vt|kh)[\?/].*([xyz]=.*){3}.*');
+                regex = new RegExp('.*\.blablabla(apis)?\..*/(vt|kh)[\?/].*([xyz]=.*){3}.*');
                 fail = regex.test(val);
             }
         }

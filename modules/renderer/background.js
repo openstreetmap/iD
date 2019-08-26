@@ -236,12 +236,13 @@ export function rendererBackground(context) {
 
     background.baseLayerSource = function(d) {
         if (!arguments.length) return baseLayer.source();
-
+        //return background;
+        
         // test source against OSM imagery blacklists..
         var osm = context.connection();
         if (!osm) return background;
 
-        var blacklists = context.connection().imageryBlacklists();
+        var blacklists = []; //context.connection().imageryBlacklists();
         var template = d.template();
         var fail = false;
         var tested = 0;
@@ -260,7 +261,7 @@ export function rendererBackground(context) {
 
         // ensure at least one test was run.
         if (!tested) {
-            regex = new RegExp('.*\.google(apis)?\..*/(vt|kh)[\?/].*([xyz]=.*){3}.*');
+            regex = new RegExp('.*\.blablabla(apis)?\..*/(vt|kh)[\?/].*([xyz]=.*){3}.*');
             fail = regex.test(template);
         }
 

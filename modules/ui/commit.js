@@ -124,7 +124,7 @@ export function uiCommit(context) {
 
         // assign tags for imagery used
         var imageryUsed = context.history().imageryUsed().join(';').substr(0, 255);
-        tags.imagery_used = imageryUsed || 'None';
+        tags.imagery_used = 'None';
 
         // assign tags for closed issues and notes
         var osmClosed = osm.getClosedIDs();
