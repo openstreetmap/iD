@@ -1033,6 +1033,7 @@
     {"key": "shop", "value": "pyrotechnics", "description": "🄿 Fireworks Store", "object_types": ["node", "area"], "icon_url": "https://cdn.jsdelivr.net/gh/mapbox/maki/icons/shop-15.svg"},
     {"key": "shop", "value": "radiotechnics", "description": "🄿 Radio/Electronic Component Store", "object_types": ["node", "area"], "icon_url": "https://cdn.jsdelivr.net/gh/openstreetmap/iD/svg/fontawesome/fas-microchip.svg"},
     {"key": "shop", "value": "religion", "description": "🄿 Religious Store", "object_types": ["node", "area"], "icon_url": "https://cdn.jsdelivr.net/gh/mapbox/maki/icons/shop-15.svg"},
+    {"key": "shop", "value": "rental", "description": "🄿 Rental Shop", "object_types": ["node", "area"], "icon_url": "https://cdn.jsdelivr.net/gh/mapbox/maki/icons/shop-15.svg"},
     {"key": "shop", "value": "scuba_diving", "description": "🄿 Scuba Diving Shop", "object_types": ["node", "area"], "icon_url": "https://cdn.jsdelivr.net/gh/bhousel/temaki/icons/scuba_diving.svg"},
     {"key": "shop", "value": "seafood", "description": "🄿 Seafood Shop", "object_types": ["node", "area"], "icon_url": "https://cdn.jsdelivr.net/gh/mapbox/maki/icons/shop-15.svg"},
     {"key": "shop", "value": "second_hand", "description": "🄿 Consignment/Thrift Store", "object_types": ["node", "area"], "icon_url": "https://cdn.jsdelivr.net/gh/mapbox/maki/icons/shop-15.svg"},
