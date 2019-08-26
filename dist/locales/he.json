@@ -504,7 +504,8 @@
             "translate": "תרגום",
             "localized_translation_label": "שם רב־לשוני",
             "localized_translation_language": "בחירת שפה",
-            "localized_translation_name": "שם"
+            "localized_translation_name": "שם",
+            "language_and_code": "{language} ({code})"
         },
         "zoom_in_edit": "יש להתקרב כדי לערוך",
         "login": "כניסה",
@@ -1654,7 +1655,7 @@
             },
             "crossing_ways": {
                 "title": "דרכים חוצות",
-                "message": "{feature} חוצה את {feature2}",
+                "message": "{feature} חוצה {feature2}",
                 "tip": "איתור תכונות שחוצות זו את זו בצורה שגויה",
                 "building-building": {
                     "reference": "בניינים לא אמורים לחפוף למעט אם הם בשכבות שונות."
@@ -1861,6 +1862,9 @@
                 },
                 "connect_features": {
                     "title": "חיבור התכונות"
+                },
+                "connect_using_ford": {
+                    "title": "חיבור במעבר צליחה"
                 },
                 "continue_from_start": {
                     "title": "להמשיך את הציור מההתחלה"
@@ -2369,7 +2373,7 @@
         "presets": {
             "categories": {
                 "category-barrier": {
-                    "name": "מאפייני גבולות"
+                    "name": "מאפייני מחסומים"
                 },
                 "category-building": {
                     "name": "מאפייני בניינים"
@@ -2452,6 +2456,7 @@
                         }
                     },
                     "placeholder": "לא מוגדר",
+                    "terms": "היתר גישה,מותר לגשת,הכניסה מותרת,כניסה מאופשרת,כניסה חופשית,גישה חופשית",
                     "types": {
                         "access": "הכול",
                         "bicycle": "אופניים",
@@ -2708,6 +2713,17 @@
                 "castle_type": {
                     "label": "סוג"
                 },
+                "changing_table": {
+                    "label": "שולחן החתלה"
+                },
+                "charge_fee": {
+                    "label": "סכום עמלה",
+                    "placeholder": "‎1 EUR,‏ ‎5 USD,‏ ‎10 JPY…"
+                },
+                "charge_toll": {
+                    "label": "סכום אגרה",
+                    "placeholder": "‎1 EUR,‏ ‎5 USD,‏ ‎10 JPY…"
+                },
                 "check_date": {
                     "label": "תאריך הבדיקה האחרונה"
                 },
@@ -2778,11 +2794,15 @@
                 "crossing": {
                     "label": "סוג"
                 },
+                "crossing/island": {
+                    "label": "אי תנועה"
+                },
                 "cuisine": {
                     "label": "מטבחים"
                 },
                 "currency_multi": {
-                    "label": "סוגי מטבעות"
+                    "label": "סוגי מטבעות",
+                    "terms": "כסף,מטבעות,שטרות,מזומן"
                 },
                 "cutting": {
                     "label": "סוג",
@@ -2875,9 +2895,6 @@
                 "diameter": {
                     "label": "קוטר",
                     "placeholder": "5 מ״מ, 10 ס״מ, 15 אינטש…"
-                },
-                "diaper": {
-                    "label": "יש החלפת חיתולים"
                 },
                 "diet_multi": {
                     "label": "סוגי תזונה"
@@ -3323,10 +3340,14 @@
                 },
                 "levels": {
                     "label": "קומות",
-                    "placeholder": "2, 4, 6"
+                    "placeholder": "2, 4, 6",
+                    "terms": "קומות,דרגות,מפלסים"
                 },
                 "liaison": {
                     "label": "סוג"
+                },
+                "line_attachment": {
+                    "label": "חיבור כבל"
                 },
                 "lit": {
                     "label": "מואר"
@@ -3365,11 +3386,13 @@
                 },
                 "maxheight": {
                     "label": "גובה מרבי",
-                    "placeholder": "4, 4.5, 5, ‎14'0\"‎,‏ ‎14'6\"‎,‏ ‎15'0\"‎‎"
+                    "placeholder": "4, 4.5, 5, ‎14'0\"‎,‏ ‎14'6\"‎,‏ ‎15'0\"‎‎",
+                    "terms": "מחסום הגבלת גובה,מוט הגבלת גובה"
                 },
                 "maxspeed": {
                     "label": "מגבלת מהירות",
-                    "placeholder": "40, 50, 60…"
+                    "placeholder": "40, 50, 60…",
+                    "terms": "מהירות מקסימלית,מהירות מרבית,שלט מהירות,מהירות,דרך ראשית,דרך מהירה"
                 },
                 "maxspeed/advisory": {
                     "label": "הגבלת מהירות מומלצת",
@@ -3475,6 +3498,9 @@
                 },
                 "network_road": {
                     "label": "רשת"
+                },
+                "not/name": {
+                    "label": "שמות שגויים"
                 },
                 "note": {
                     "label": "הערה"
@@ -3682,6 +3708,9 @@
                 },
                 "population": {
                     "label": "אוכלוסיה"
+                },
+                "post": {
+                    "label": "כתובת משלוח"
                 },
                 "power": {
                     "label": "סוג"
@@ -4020,6 +4049,9 @@
                 "source": {
                     "label": "מקורות"
                 },
+                "species/wikidata": {
+                    "label": "מינים בוויקינתונים"
+                },
                 "sport": {
                     "label": "ספורט"
                 },
@@ -4050,6 +4082,10 @@
                 },
                 "street_cabinet": {
                     "label": "סוג"
+                },
+                "stroller": {
+                    "label": "גישה לעגלת תינוק",
+                    "terms": "גישה לעגלה,לאם ולתינוק,עגלת תינוקות"
                 },
                 "structure": {
                     "label": "מבנה",
@@ -4321,7 +4357,8 @@
                 },
                 "website": {
                     "label": "אתר",
-                    "placeholder": "https://example.com"
+                    "placeholder": "https://example.com",
+                    "terms": "אתר אינטרנט,כתובת,רשת,אינטרנט,נוכחות,מקוון"
                 },
                 "wetland": {
                     "label": "סוג"
@@ -4339,7 +4376,8 @@
                     "label": "ויקינתונים"
                 },
                 "wikipedia": {
-                    "label": "ויקיפדיה"
+                    "label": "ויקיפדיה",
+                    "terms": "אנציקלופדיה,ויקי,ויקיפדיה"
                 },
                 "windings": {
                     "label": "ליפופים",
@@ -4462,6 +4500,10 @@
                 "aeroway/jet_bridge": {
                     "name": "גשר עלייה למטוס",
                     "terms": "שרוול עליה למטוס,שרוול נוסעים"
+                },
+                "aeroway/parking_position": {
+                    "name": "מיקום חניית כלי טיס",
+                    "terms": "חניית מטוסים,אזור חניית מטוסים, אזור חניית כלי טיס"
                 },
                 "aeroway/runway": {
                     "name": "מסלול המראה",
@@ -4781,6 +4823,10 @@
                     "name": "בית ספר לשפות",
                     "terms": "בית ספר לשפות"
                 },
+                "amenity/letter_box": {
+                    "name": "תיבת מכתבים",
+                    "terms": "תיבת דואר,ת.ד.,ת.ד,ת״ד,ת\"ד"
+                },
                 "amenity/library": {
                     "name": "ספריה",
                     "terms": "ספריה"
@@ -4924,6 +4970,10 @@
                     "name": "תיבת דואר",
                     "terms": "תיבת חלוקת דואר"
                 },
+                "amenity/post_depot": {
+                    "name": "משרד מיון דואר",
+                    "terms": "משרד חלוקת דואר,מיון דואר,מתקן מיון דואר,חלוקת דואר"
+                },
                 "amenity/post_office": {
                     "name": "סניף דואר",
                     "terms": "משרד דואר, רשות הדואר"
@@ -4962,6 +5012,14 @@
                 },
                 "amenity/recycling": {
                     "name": "מיחזור"
+                },
+                "amenity/recycling/container/electrical_items": {
+                    "name": "מכל פסולת אלקטרונית",
+                    "terms": "מחשבים,אלקטרוניקה,רמקולים,טלפונים,סמארטפונים,טאבלטים,מחשבי לוח,סלולרים,סל אשפה אלקטרונית"
+                },
+                "amenity/recycling/container/green_waste": {
+                    "name": "מכל פסולת ירוקה",
+                    "terms": "קומפוסט,ריקבון,פסולת אורגנית"
                 },
                 "amenity/recycling_centre": {
                     "name": "מרכז מיחזור",
@@ -5136,7 +5194,8 @@
                     "terms": "בתי שימוש"
                 },
                 "amenity/toilets/disposal/flush": {
-                    "name": "בתי שימוש עם הדחה"
+                    "name": "בתי שימוש עם הדחה",
+                    "terms": "מקלחת,טוש,מים,שירותים,חדר הלבשה"
                 },
                 "amenity/toilets/disposal/pitlatrine": {
                     "name": "בור ספיגה",
@@ -5161,6 +5220,10 @@
                 "amenity/vending_machine": {
                     "name": "מכונת ממכר",
                     "terms": "אוטומט מכירות"
+                },
+                "amenity/vending_machine/bottle_return": {
+                    "name": "מכונה להחזרת בקבוקים",
+                    "terms": "מכונה להחזרת בקבוקי שתייה,מכונת בקבוקים,מיחזור,מחזור,איסוף, פלסטיק,זכוכית,החזרת בקבוקים"
                 },
                 "amenity/vending_machine/cigarettes": {
                     "name": "מכונת סיגריות",
@@ -5322,7 +5385,8 @@
                     "terms": "רכבת הרים"
                 },
                 "attraction/summer_toboggan": {
-                    "name": "מגלשת הרים"
+                    "name": "מגלשת הרים",
+                    "terms": "מגלשה אלפינית,רכבת הרים"
                 },
                 "attraction/train": {
                     "name": "רכבת תיירים",
@@ -6520,8 +6584,13 @@
                     "name": "חצר חקלאית",
                     "terms": "חצר חקלאית"
                 },
+                "landuse/flowerbed": {
+                    "name": "ערוגת פרחים",
+                    "terms": "פרחים,מקבץ פרחים,ערוגה"
+                },
                 "landuse/forest": {
-                    "name": "יער מנוהל"
+                    "name": "יער מנוהל",
+                    "terms": "שטח חיץ,אזור חיץ,שביל חוצץ,שביל חיץ"
                 },
                 "landuse/garages": {
                     "name": "אזור אחסון",
@@ -7007,6 +7076,10 @@
                     "name": "בור תחמיץ",
                     "terms": "מבנה תחמיץ מבטון, ממגורה, סילו, מתבן, אסם"
                 },
+                "man_made/cairn": {
+                    "name": "גלעד",
+                    "terms": "תל אבנים,ערימת אבנים,מערום אבנים"
+                },
                 "man_made/chimney": {
                     "name": "ארובה",
                     "terms": "ארובה"
@@ -7072,7 +7145,8 @@
                     "terms": "אנטנה,תורן תקשורת,מגדל תקשורת,מגדל,תורן טלוויזיה,מגדל טלוויזיה,תורן תמסורת,מגדל תמסורת,תורן טלביזיה,מגדל טלביזיה"
                 },
                 "man_made/mineshaft": {
-                    "name": "פתח מכרה"
+                    "name": "פתח מכרה",
+                    "terms": "פיר,מנהרה,מערה,מכרה,כניסה למכרה,כניסה אנכית למכרה"
                 },
                 "man_made/monitoring_station": {
                     "name": "תחנת ניטור",
@@ -7516,8 +7590,8 @@
                     "name": "רופא"
                 },
                 "office/political_party": {
-                    "name": "משרד מפלגה פוליטית",
-                    "terms": "משרד מפלגה פוליטית"
+                    "name": "משרד של מפלגה",
+                    "terms": "פוליטיקה,בחירות,ליכוד,עבודה,מרץ,זהות,כחול לבן,מפלגה פוליטית"
                 },
                 "office/private_investigator": {
                     "name": "משרד חוקר פרטי",
@@ -8534,6 +8608,10 @@
                     "name": "חנות צילום",
                     "terms": "חנות צילום"
                 },
+                "shop/printer_ink": {
+                    "name": "חנות דיו למדפסות",
+                    "terms": "דיו,פקס,מדפסת,הדפסה,לייזר"
+                },
                 "shop/pyrotechnics": {
                     "name": "חנות זיקוקים",
                     "terms": "חנות זיקוקים"
@@ -8673,10 +8751,6 @@
                     "name": "חנות יינות",
                     "terms": "חנות יינות"
                 },
-                "tactile_paving": {
-                    "name": "ריצוף תחושתי",
-                    "terms": "נתיב לנכים,משטחי אזהרה,מדרכה נגישה,מדרכה לעיוורים,טקטילי,מדרכה טקטילית"
-                },
                 "telecom/data_center": {
                     "name": "מרכז נתונים",
                     "terms": "אחסון מערכות מחשב,מערכות מידע,מערכות מחשוב,טכנולוגיות מידע,חוות שרתים,תקשורת נתונים"
@@ -8727,6 +8801,10 @@
                 "tourism/attraction": {
                     "name": "אתר תיירותי",
                     "terms": "אתר תיירותי"
+                },
+                "tourism/camp_pitch": {
+                    "name": "מאהל",
+                    "terms": "אוהל,משאית,טנדר,טריילר,קרוואן,קרואן"
                 },
                 "tourism/camp_site": {
                     "name": "אתר מחנאות",
@@ -8819,6 +8897,13 @@
                 "tourism/zoo/petting": {
                     "name": "פינת חי",
                     "terms": "פינת ליטוף,חיות מחמד,ליטוף,אטרקציה לילדים,חוות ליטוף,חוות ילדים,חיות משק,משק ליטוף"
+                },
+                "tourism/zoo/safari": {
+                    "name": "ספארי"
+                },
+                "tourism/zoo/wildlife": {
+                    "name": "חי פארק",
+                    "terms": "חי בר,חיות בר,ג׳ונגל,ספארי,גן חיות"
                 },
                 "traffic_calming": {
                     "name": "הקלת פקקי תנועה",
@@ -9053,6 +9138,10 @@
                 "waterway/fuel": {
                     "name": "תחנת תדלוק ימית",
                     "terms": "תחנת תדלוק ימית"
+                },
+                "waterway/lock_gate": {
+                    "name": "תא שיט",
+                    "terms": "תעלה,נהר,מפלס,שער הרמה,שער נעילה"
                 },
                 "waterway/milestone": {
                     "name": "אבן דרך נתיב מים",

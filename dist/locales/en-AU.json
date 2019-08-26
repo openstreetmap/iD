@@ -5,9 +5,6 @@
         },
         "presets": {
             "fields": {
-                "diaper": {
-                    "label": "Nappy Changing Available"
-                },
                 "height": {
                     "label": "Height (Metres)"
                 },

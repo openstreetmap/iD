@@ -541,6 +541,10 @@ export function modeSelect(context, selectedIDs) {
             .classed('selected', false);
 
         surface
+            .selectAll('.highlighted')
+            .classed('highlighted', false);
+
+        surface
             .selectAll('.related')
             .classed('related', false);
 

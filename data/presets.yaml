@@ -6651,6 +6651,8 @@ en:
       public_transport/platform/tram_point:
         # 'public_transport=platform, tram=yes'
         name: Tram Stop / Platform
+        # 'terms: electric,light rail,platform,public transit,public transportation,rail,streetcar,track,tram,trolley,transit,transportation'
+        terms: '<translate with synonyms or related terms for ''Tram Stop / Platform'', separated by commas>'
       public_transport/platform/trolleybus:
         # 'public_transport=platform, trolleybus=yes'
         name: Trolleybus Platform
@@ -7500,6 +7502,10 @@ en:
         # shop=religion
         name: Religious Store
         terms: '<translate with synonyms or related terms for ''Religious Store'', separated by commas>'
+      shop/rental:
+        # shop=rental
+        name: Rental Shop
+        terms: '<translate with synonyms or related terms for ''Rental Shop'', separated by commas>'
       shop/scuba_diving:
         # shop=scuba_diving
         name: Scuba Diving Shop

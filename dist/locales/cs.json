@@ -1470,6 +1470,7 @@
             },
             "close_nodes": {
                 "title": "Body sobě velmi blízko",
+                "message": "Dva body v {way} jsou velmi blízko u sebe",
                 "detached": {
                     "message": "{feature} je příliš blízko {feature2}"
                 }
@@ -1482,7 +1483,9 @@
                 "title": "Rozpojené linie"
             },
             "fixme_tag": {
-                "title": "Žádosti na opravu"
+                "title": "Žádosti na opravu",
+                "message": "{feature} má požadavek \"Opravit\"",
+                "tip": "Najít prvky s tagem \"fixme\""
             },
             "generic_name": {
                 "title": "Podezřelé názvy",
@@ -1494,9 +1497,13 @@
             "invalid_format": {
                 "title": "Neplatné formátování",
                 "email": {
+                    "message": "{feature} má neplatnou emailovou adresu.",
+                    "message_multi": "{feature} má více neplatných emailových adres.",
                     "reference": "Emailové adresy musí vypadat jako \"uzivatel@server.tld\"."
                 },
                 "website": {
+                    "message": "{feature} má neplatnou webovou adresu.",
+                    "message_multi": "{feature} má více neplatných webových adres.",
                     "reference": "Adresy webových stránek by měly začínat s \"http\" nebo \"https\"."
                 }
             },
@@ -2459,9 +2466,6 @@
                 "diameter": {
                     "label": "Průměr",
                     "placeholder": "5mm, 10cm, 15in…"
-                },
-                "diaper": {
-                    "label": "Přizpůsobeno výměně plenek"
                 },
                 "diet_multi": {
                     "label": "Typy diet"
@@ -6403,10 +6407,6 @@
                 "office/physician": {
                     "name": "Praktický lékař"
                 },
-                "office/political_party": {
-                    "name": "Politická strana",
-                    "terms": "politická strana,strana,politická organizace"
-                },
                 "office/private_investigator": {
                     "name": "Soukromá detektivní kancelář"
                 },
@@ -7310,9 +7310,6 @@
                 "shop/wine": {
                     "name": "Vinotéka",
                     "terms": "vinotéka,víno,vinárna,vinařství,vino"
-                },
-                "tactile_paving": {
-                    "name": "Taktilní dlažba"
                 },
                 "telecom/data_center": {
                     "name": "Datové centrum"

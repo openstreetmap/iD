@@ -2624,9 +2624,6 @@
                     "label": "Läpimitta",
                     "placeholder": "5 mm, 10 cm, 15 in, …"
                 },
-                "diaper": {
-                    "label": "Vaipanvaihtomahdollisuus"
-                },
                 "diet_multi": {
                     "label": "Erityisruokavaliot"
                 },
@@ -6460,10 +6457,6 @@
                 "office/physician": {
                     "name": "Lääkäri"
                 },
-                "office/political_party": {
-                    "name": "Puoluetoimisto",
-                    "terms": "politiikka, politiikko, poliittinen, puolue, hallinto, toimisto"
-                },
                 "office/private_investigator": {
                     "name": "Yksityisetsivä"
                 },
@@ -7380,9 +7373,6 @@
                 },
                 "shop/wine": {
                     "name": "Viinikauppa"
-                },
-                "tactile_paving": {
-                    "name": "Huomioreuna näkövammaisille"
                 },
                 "telecom/data_center": {
                     "name": "Tietoliikennekeskus"

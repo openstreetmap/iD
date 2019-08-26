@@ -504,7 +504,8 @@
             "translate": "ترجمه",
             "localized_translation_label": "نام چندزبانه",
             "localized_translation_language": "انتخاب زبان",
-            "localized_translation_name": "نام"
+            "localized_translation_name": "نام",
+            "language_and_code": "{language} ({code})"
         },
         "zoom_in_edit": "برای ویرایش زوم کنید",
         "login": "وارد شوید",
@@ -787,7 +788,8 @@
                 "tooltip": "سازه‌های سقف و ساختمان ۳بعدی"
             },
             "indoor": {
-                "description": "عارضه‌های داخلی"
+                "description": "عارضه‌های داخلی",
+                "tooltip": "اتاق‌ها، دالان‌ها، نردبان، غیره."
             },
             "landuse": {
                 "description": "کاربری زمین",
@@ -1782,7 +1784,12 @@
                 "tip": "یافتن عارضه‌های دارای تگ منسوخ که می‌توان به‌روزشان کرد",
                 "reference": "برخی تگ‌ها به‌مرور زمان تغییر می‌کنند و باید به‌روز شوند.",
                 "incomplete": {
-                    "message": "تگ‌های {feature} ناقص است"
+                    "message": "تگ‌های {feature} ناقص است",
+                    "reference": "تعدادی از عارضه‌ها باید تگ‌های بیشتری داشته باشند."
+                },
+                "noncanonical_brand": {
+                    "message": "{feature} شبیه یک برند است که تگ‌های غیراستاندارد خورده",
+                    "reference": "عارضه‌هایی که از یک نوع برند هستند، باید به یک شیوه تگ‌گذاری شوند."
                 }
             },
             "private_data": {
@@ -1942,6 +1949,9 @@
                 },
                 "use_different_layers": {
                     "title": "از لایه‌های مجزا استفاده کنید"
+                },
+                "use_different_layers_or_levels": {
+                    "title": "از لایه‌ها یا طبقه‌های مختلف استفاده کنید."
                 },
                 "use_different_levels": {
                     "title": "از طبقه‌های مجزا استفاده کنید"
@@ -2828,9 +2838,6 @@
                 "devices": {
                     "label": "دستگاه ها",
                     "placeholder": "1, 2, 3..."
-                },
-                "diaper": {
-                    "label": "امکان تعویض پوشک"
                 },
                 "diet_multi": {
                     "label": "انواع خوراک"
@@ -5883,9 +5890,6 @@
                 "office/physician": {
                     "name": "پزشک"
                 },
-                "office/political_party": {
-                    "name": "حزب سیاسی"
-                },
                 "office/private_investigator": {
                     "name": "دفتر تحقیقات خصوصی"
                 },
@@ -6502,10 +6506,6 @@
                 },
                 "shop/wine": {
                     "name": "فروشگاه شراب"
-                },
-                "tactile_paving": {
-                    "name": "کفپوش برجسته",
-                    "terms": "مسیر نابینایان، کفپوش لمسی، مسیر پیاده روی برجسته، سنگفرش برجسته، سنگفرش لمسی، سنگفرش نابینایان"
                 },
                 "tourism": {
                     "name": "گردشگری"
