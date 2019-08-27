@@ -303,7 +303,7 @@ export function presetIndex(context) {
                 all.build(data.presets, false);    // load the default presets as non-addable to start
 
                 _addablePresetIDs = externalPresets.presets && Object.keys(externalPresets.presets);
-                
+
                 all.build(externalPresets, true);  // then load the external presets as addable
             })
             .catch(function() {
@@ -503,17 +503,28 @@ export function presetIndex(context) {
         return items;
     };
 
-    all.moveFavorite = function(fromIndex, toIndex) {
-        var items = all.moveItem(all.getFavorites(), fromIndex, toIndex);
-        if (items) setFavorites(items);
+    all.addFavorite = function(preset, besidePreset, after) {
+        var favorites = all.getFavorites();
+
+        var beforeItem = all.favoriteMatching(besidePreset);
+        var toIndex = favorites.indexOf(beforeItem);
+        if (after) toIndex += 1;
+
+        var newItem = RibbonItem(preset, 'favorite');
+        favorites.splice(toIndex, 0, newItem);
+        setFavorites(favorites);
     };
 
-    all.moveRecent = function(item, beforeItem) {
+    all.addRecent = function(preset, besidePreset, after) {
         var recents = all.getRecents();
-        var fromIndex = recents.indexOf(item);
+
+        var beforeItem = all.recentMatching(besidePreset);
         var toIndex = recents.indexOf(beforeItem);
-        var items = all.moveItem(recents, fromIndex, toIndex);
-        if (items) setRecents(items);
+        if (after) toIndex += 1;
+
+        var newItem = RibbonItem(preset, 'recent');
+        recents.splice(toIndex, 0, newItem);
+        setRecents(recents);
     };
 
     all.setMostRecent = function(preset) {

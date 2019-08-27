@@ -2065,9 +2065,6 @@
                     "label": "Tæki",
                     "placeholder": "1, 2, 3..."
                 },
-                "diaper": {
-                    "label": "Bleyjuskipti í boði"
-                },
                 "diplomatic": {
                     "label": "Tegund"
                 },
@@ -5369,9 +5366,6 @@
                 },
                 "office/physician": {
                     "name": "Læknir"
-                },
-                "office/political_party": {
-                    "name": "Stjórnmálaflokkur"
                 },
                 "office/private_investigator": {
                     "name": "Einkaspæjaraskrifstofa"

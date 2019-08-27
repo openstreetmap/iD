@@ -2211,9 +2211,6 @@
                     "label": "Số Thiết bị",
                     "placeholder": "1, 2, 3…"
                 },
-                "diaper": {
-                    "label": "Có Bàn Thay Tã"
-                },
                 "diet_multi": {
                     "label": "Chế độ Ăn uống"
                 },
@@ -3627,7 +3624,7 @@
                 },
                 "aeroway/helipad": {
                     "name": "Sân bay Trực thăng",
-                    "terms": "máy bay trực thăng, máy bay lên thẳng, sân bay trực thăng, sân bay lên thẳng, phi trường trực thăng, sàn đỗ trực thăng, sàn đáp trực thăng, may bay truc thang, may bay len thang, san bay truc thang, san bay len thang, phi truong truc thang, san do truc thang, san dap truc thang"
+                    "terms": "máy bay trực thăng, máy bay lên thẳng, sân bay trực thăng, sân bay lên thẳng, phi trường trực thăng, sàn đỗ trực thăng, sàn đáp trực thăng, sân máy bay trực thăng, bãi đáp máy bay trực thăng, may bay truc thang, may bay len thang, san bay truc thang, san bay len thang, phi truong truc thang, san do truc thang, san dap truc thang, san may bay truc thang, bai dap may bay truc thang"
                 },
                 "aeroway/runway": {
                     "name": "Đường băng",
@@ -6227,10 +6224,6 @@
                 },
                 "office/physician": {
                     "name": "Văn phòng Bác sĩ"
-                },
-                "office/political_party": {
-                    "name": "Đảng Chính trị",
-                    "terms": "văn phòng đảng chính trị, văn phòng đảng chánh trị, van phong dang chinh tri, van phong dang chanh tri"
                 },
                 "office/private_investigator": {
                     "name": "Văn phòng Thám tử Tư",

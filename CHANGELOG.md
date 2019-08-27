@@ -29,6 +29,132 @@ _Breaking changes, which may affect downstream projects or sites that embed iD, 
 [@xxxx]: https://github.com/xxxx
 -->
 
+# 2.15.5
+##### 2019-Aug-26
+
+#### :boom: Breaking Changes
+* Remove support for Node 6 (Node 8 or higher is now required)
+  * :warning: If you are building the iD project, you will need to upgrade your node version.
+
+#### :sparkles: Usability
+* Make the UI more navigable by tabbing ([#6701], thanks [@Abbe98])
+* Render Sidewalks in a different color than Foot Paths ([#6522])
+* List the user's language and common nearby languages first in the Multilingual Name language list ([#6712])
+* Add more language options to the Multilingual Name list
+* Enable searching fields by tag and keyword ([#5763])
+* Accept relation IDs in the "Choose a parent relation" dropdown ([#3487])
+* Highlight relations in the map when hovering over them in the "Choose a parent relation" dropdown ([#2946])
+* Show addable presets specified by the `presets` URL parameter in the default preset list ([#6703])
+* Interpret the `º` and `˚` characters as degrees when searching coordinates
+* Make the post-upload changeset number clickable ([#6644])
+* Allow selecting and copying tags from Custom Map Data ([#6710])
+* Select points after dragging them ([#5747])
+
+[#2946]: https://github.com/openstreetmap/iD/issues/2946
+[#3487]: https://github.com/openstreetmap/iD/issues/3487
+[#5747]: https://github.com/openstreetmap/iD/issues/5747
+[#5763]: https://github.com/openstreetmap/iD/issues/5763
+[#6522]: https://github.com/openstreetmap/iD/issues/6522
+[#6644]: https://github.com/openstreetmap/iD/issues/6644
+[#6701]: https://github.com/openstreetmap/iD/issues/6701
+[#6703]: https://github.com/openstreetmap/iD/issues/6703
+[#6710]: https://github.com/openstreetmap/iD/issues/6710
+[#6712]: https://github.com/openstreetmap/iD/issues/6712
+
+[@Abbe98]: https://github.com/Abbe98
+
+#### :white_check_mark: Validation
+* Don't flag known brands for having generic names ([#6761], [#6754], thanks [@SilentSpike])
+* Clarify that connecting a waterway crossing a highway will add a ford ([#6734])
+* Lock the Name field of features with a `name:etymology:wikidata` tag ([#6683])
+* Don't offer to add `highway=service` to demolished roads with `service` tags ([#6775])
+* Upgrade `crossing=island` to `crossing:island=yes` ([#6748])
+* Upgrade `diaper` to `changing_table` ([#6529])
+* Upgrade `access=public` to `access=yes` ([#6716])
+* Deprecate `tower:type=anchor` and `tower:type=suspension` ([#6762])
+* Deprecate `landuse=garden` ([#6758])
+* Deprecate `roof:shape=half_hipped` ([#6704])
+
+[#6529]: https://github.com/openstreetmap/iD/issues/6529
+[#6683]: https://github.com/openstreetmap/iD/issues/6683
+[#6704]: https://github.com/openstreetmap/iD/issues/6704
+[#6716]: https://github.com/openstreetmap/iD/issues/6716
+[#6734]: https://github.com/openstreetmap/iD/issues/6734
+[#6748]: https://github.com/openstreetmap/iD/issues/6748
+[#6754]: https://github.com/openstreetmap/iD/issues/6754
+[#6758]: https://github.com/openstreetmap/iD/issues/6758
+[#6761]: https://github.com/openstreetmap/iD/issues/6761
+[#6762]: https://github.com/openstreetmap/iD/issues/6762
+[#6775]: https://github.com/openstreetmap/iD/issues/6775
+
+[@SilentSpike]: https://github.com/SilentSpike
+
+#### :bug: Bugfixes
+* Boost preset matching score if match occurs in addTags ([#6802])
+* Fix error upon changing the Unsquare Building threshold ([#6690])
+* Don't hide all multilingual names upon deleting one ([#6491])
+* Correctly populate the Bike Lanes field with existing values ([#6141])
+* Show the correct location for coordinates in the `N DD° MM.MMM' W DD° MM.MMM'` format without a commma separator ([#6582])
+* Don't treat platforms with a `kerb` tag as primarily curbs ([#6742])
+* Remove deleted features from the map immediately when undoing or redoing ([#6480])
+* Properly resize Mapillary and Bing Streetside photos when resizing the viewer ([#6286])
+* Fix issue where the Background Offset field could not be focused ([#6698])
+
+[#6141]: https://github.com/openstreetmap/iD/issues/6141
+[#6286]: https://github.com/openstreetmap/iD/issues/6286
+[#6480]: https://github.com/openstreetmap/iD/issues/6480
+[#6491]: https://github.com/openstreetmap/iD/issues/6491
+[#6582]: https://github.com/openstreetmap/iD/issues/6582
+[#6690]: https://github.com/openstreetmap/iD/issues/6690
+[#6698]: https://github.com/openstreetmap/iD/issues/6698
+[#6742]: https://github.com/openstreetmap/iD/issues/6742
+[#6802]: https://github.com/openstreetmap/iD/issues/6802
+
+#### :earth_asia: Localization
+* Display the languages for the Multilingual Name field in the user's language, if available ([#2457], [#6702])
+* Translate language names in the post-upload community list ([#4990])
+
+[#2457]: https://github.com/openstreetmap/iD/issues/2457
+[#4990]: https://github.com/openstreetmap/iD/issues/4990
+[#6702]: https://github.com/openstreetmap/iD/issues/6702
+
+#### :rocket: Presets
+* Add Rental Shop preset
+* Remove standalone Tactile Paving preset ([#6490], [#6791])
+* Add Bottle Return Machine preset ([#6725], thanks [@ENT8R])
+* Add Letter Box preset with Delivery Address field ([#6718])
+* Add Post Sorting Office preset ([#6773])
+* Add E-Waste Container preset ([#6777])
+* Add Obelisk preset ([#6790])
+* Add Flowerbed and Green Waste Container presets
+* Add Line Attachment field to Power Pole and Power Tower ([#6762])
+* Add Species Wikidata field to Animal Enclosure and Tree ([#6652])
+* Add Fee Amount an Toll Amount fields ([#6722])
+* Add Stroller Access field ([#6739])
+* Add Refuge Island field to crossings ([#6748])
+* Add Incorrect Names field for common naming mistakes ([#6411])
+* Update icons for Power Pole, Power Tower, and Power Line ([#6786])
+* Update icon for cycle paths, crossings, and tracks
+* Only allow `power=transformer` on nodes ([#6779])
+
+[#6411]: https://github.com/openstreetmap/iD/issues/6411
+[#6490]: https://github.com/openstreetmap/iD/issues/6490
+[#6652]: https://github.com/openstreetmap/iD/issues/6652
+[#6718]: https://github.com/openstreetmap/iD/issues/6718
+[#6722]: https://github.com/openstreetmap/iD/issues/6722
+[#6725]: https://github.com/openstreetmap/iD/issues/6725
+[#6739]: https://github.com/openstreetmap/iD/issues/6739
+[#6748]: https://github.com/openstreetmap/iD/issues/6748
+[#6762]: https://github.com/openstreetmap/iD/issues/6762
+[#6773]: https://github.com/openstreetmap/iD/issues/6773
+[#6777]: https://github.com/openstreetmap/iD/issues/6777
+[#6779]: https://github.com/openstreetmap/iD/issues/6779
+[#6786]: https://github.com/openstreetmap/iD/issues/6786
+[#6790]: https://github.com/openstreetmap/iD/issues/6790
+[#6791]: https://github.com/openstreetmap/iD/issues/6791
+
+[@ENT8R]: https://github.com/ENT8R
+
 # 2.15.4
 ##### 2019-Jul-26
 

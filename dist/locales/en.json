@@ -1359,6 +1359,11 @@
         "mapillary_images": {
             "tooltip": "Street-level photos from Mapillary"
         },
+        "mapillary_map_features": {
+            "title": "Map Features",
+            "tooltip": "Map features from Mapillary",
+            "request_data": "Request Data"
+        },
         "mapillary": {
             "title": "Mapillary",
             "signs": {
@@ -8558,10 +8563,6 @@
                     "name": "Train Stop / Platform",
                     "terms": "platform,public transit,public transportation,rail,track,train,transit,transportation"
                 },
-                "public_transport/platform/tram_point": {
-                    "name": "Tram Stop / Platform",
-                    "terms": "electric,light rail,platform,public transit,public transportation,rail,streetcar,track,tram,trolley,transit,transportation"
-                },
                 "public_transport/platform/aerialway": {
                     "name": "Aerialway Platform",
                     "terms": "aerialway,cable car,platform,public transit,public transportation,transit,transportation"
@@ -8593,6 +8594,10 @@
                 "public_transport/platform/train": {
                     "name": "Train Platform",
                     "terms": "platform,public transit,public transportation,rail,track,train,transit,transportation"
+                },
+                "public_transport/platform/tram_point": {
+                    "name": "Tram Stop / Platform",
+                    "terms": "electric,light rail,platform,public transit,public transportation,rail,streetcar,track,tram,trolley,transit,transportation"
                 },
                 "public_transport/platform/tram": {
                     "name": "Tram Platform",
@@ -9316,6 +9321,10 @@
                 },
                 "shop/religion": {
                     "name": "Religious Store",
+                    "terms": ""
+                },
+                "shop/rental": {
+                    "name": "Rental Shop",
                     "terms": ""
                 },
                 "shop/scuba_diving": {

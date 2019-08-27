@@ -504,7 +504,8 @@
             "translate": "Przetłumacz",
             "localized_translation_label": "Wielojęzyczna nazwa",
             "localized_translation_language": "Wybierz język",
-            "localized_translation_name": "Nazwa"
+            "localized_translation_name": "Nazwa",
+            "language_and_code": "{language} ({code})"
         },
         "zoom_in_edit": "Przybliż, aby edytować",
         "login": "Logowanie",
@@ -1862,6 +1863,9 @@
                 "connect_features": {
                     "title": "Połącz obiekty"
                 },
+                "connect_using_ford": {
+                    "title": "Utwórz bród"
+                },
                 "continue_from_start": {
                     "title": "Kontynuuj rysowanie od początku"
                 },
@@ -2452,6 +2456,7 @@
                         }
                     },
                     "placeholder": "Nieznane",
+                    "terms": "prawo wstępu/wjazdu mają, dozwolony wstęp, dostęp",
                     "types": {
                         "access": "Wszyscy",
                         "bicycle": "Rowery",
@@ -2461,7 +2466,8 @@
                     }
                 },
                 "access_simple": {
-                    "label": "Dozwolony wstęp"
+                    "label": "Dozwolony wstęp",
+                    "terms": "dozwolony wstęp, dostęp"
                 },
                 "addr/interpolation": {
                     "label": "Rodzaj",
@@ -2506,7 +2512,8 @@
                         "suburb": "Dzielnica",
                         "suburb!jp": "Osiedle",
                         "unit": "Blok/oddział"
-                    }
+                    },
+                    "terms": "adres"
                 },
                 "admin_level": {
                     "label": "Poziom administracyjny"
@@ -2555,7 +2562,8 @@
                     "label": "Asortyment"
                 },
                 "air_conditioning": {
-                    "label": "Klimatyzacja"
+                    "label": "Klimatyzacja",
+                    "terms": "klimatyzacja"
                 },
                 "amenity": {
                     "label": "Rodzaj"
@@ -2570,7 +2578,8 @@
                     "label": "Dla zwierząt"
                 },
                 "architect": {
-                    "label": "Architekt"
+                    "label": "Architekt",
+                    "terms": "architekt"
                 },
                 "area/highway": {
                     "label": "Rodzaj"
@@ -2591,7 +2600,8 @@
                     "label": "Oparcie"
                 },
                 "bar": {
-                    "label": "Bar (z alkoholem)"
+                    "label": "Bar (z alkoholem)",
+                    "terms": "bar"
                 },
                 "barrier": {
                     "label": "Rodzaj"
@@ -2600,30 +2610,32 @@
                     "label": "Rodzaj"
                 },
                 "bath/open_air": {
-                    "label": "Zewnątrz"
+                    "label": "Na zewnątrz"
                 },
                 "bath/sand_bath": {
                     "label": "Kąpiele piaskowe"
                 },
                 "bath/type": {
-                    "label": "Typ",
+                    "label": "Rodzaj",
                     "options": {
                         "foot_bath": "Mycie nóg",
                         "hot_spring": "Gorące źródła",
-                        "onsen": "Japoński Onsen"
+                        "onsen": "Japoński onsen"
                     }
                 },
                 "beauty": {
                     "label": "Specjalność"
                 },
                 "bench": {
-                    "label": "Ławka"
+                    "label": "Ławka",
+                    "terms": "ławka"
                 },
                 "bicycle_parking": {
                     "label": "Rodzaj"
                 },
                 "bin": {
-                    "label": "Kosz na śmieci"
+                    "label": "Kosz na śmieci",
+                    "terms": "kosz, śmietnik"
                 },
                 "blood_components": {
                     "label": "Składniki krwi",
@@ -2647,10 +2659,12 @@
                     "label": "Typ"
                 },
                 "brand": {
-                    "label": "Marka"
+                    "label": "Marka",
+                    "terms": "marka"
                 },
                 "brewery": {
-                    "label": "Piwo z beczki"
+                    "label": "Piwo z beczki",
+                    "terms": "piwo lane"
                 },
                 "bridge": {
                     "label": "Rodzaj",
@@ -2660,18 +2674,22 @@
                     "label": "Rodzaj"
                 },
                 "building": {
-                    "label": "Budynek"
+                    "label": "Budynek",
+                    "terms": "budynek"
                 },
                 "building/levels/underground": {
                     "label": "Kondygnacje podziemne",
-                    "placeholder": "2, 4, 6..."
+                    "placeholder": "2, 4, 6...",
+                    "terms": "kondygnacje podziemne"
                 },
                 "building/levels_building": {
                     "label": "Liczba kondygnacji",
-                    "placeholder": "2, 4, 6..."
+                    "placeholder": "2, 4, 6...",
+                    "terms": "liczba kondygnacji"
                 },
                 "building/material": {
-                    "label": "Materiał fasady"
+                    "label": "Materiał fasady",
+                    "terms": "materiał"
                 },
                 "building_area": {
                     "label": "Budynek"
@@ -2700,13 +2718,27 @@
                 },
                 "capacity": {
                     "label": "Liczba miejsc",
-                    "placeholder": "50, 100, 200..."
+                    "placeholder": "50, 100, 200...",
+                    "terms": "liczba miejsc, pojemność"
                 },
                 "cash_in": {
                     "label": "Wpłatomat"
                 },
                 "castle_type": {
                     "label": "Rodzaj"
+                },
+                "changing_table": {
+                    "label": "Przewijak"
+                },
+                "charge_fee": {
+                    "label": "Kwota",
+                    "placeholder": "np. 3.50€/h; 5€/person",
+                    "terms": "kwota, cena"
+                },
+                "charge_toll": {
+                    "label": "Kwota",
+                    "placeholder": "np. 3.50€/h; 5€/person",
+                    "terms": "kwota, cena"
                 },
                 "check_date": {
                     "label": "Data ostatniego sprawdzenia"
@@ -2721,14 +2753,16 @@
                     "label": "Godziny odbioru"
                 },
                 "colour": {
-                    "label": "Kolor"
+                    "label": "Kolor",
+                    "terms": "kolor, barwa"
                 },
                 "comment": {
                     "label": "Opis zmian",
                     "placeholder": "Krótki opis twoich zmian (wymagany)"
                 },
                 "communication_multi": {
-                    "label": "Rodzaj komunikacji"
+                    "label": "Rodzaj komunikacji",
+                    "terms": "rodzaj komunikacji"
                 },
                 "construction": {
                     "label": "Rodzaj"
@@ -2759,7 +2793,8 @@
                     "placeholder": "1, 2, 3..."
                 },
                 "covered": {
-                    "label": "Zadaszenie"
+                    "label": "Zadaszenie",
+                    "terms": "zadaszenie, dach"
                 },
                 "craft": {
                     "label": "Rodzaj"
@@ -2778,11 +2813,15 @@
                 "crossing": {
                     "label": "Rodzaj"
                 },
+                "crossing/island": {
+                    "label": "Wyspa azylu"
+                },
                 "cuisine": {
                     "label": "Kuchnia"
                 },
                 "currency_multi": {
-                    "label": "Rodzaje środków płatności"
+                    "label": "Rodzaje środków płatności",
+                    "terms": "rodzaje środków płatności, karta, gotówka"
                 },
                 "cutting": {
                     "label": "Rodzaj",
@@ -2824,6 +2863,7 @@
                         }
                     },
                     "placeholder": "brak",
+                    "terms": "pasy rowerowe",
                     "types": {
                         "cycleway:left": "Lewa strona",
                         "cycleway:right": "Prawa strona"
@@ -2836,10 +2876,12 @@
                     "label": "Data"
                 },
                 "delivery": {
-                    "label": "Dostawa"
+                    "label": "Dostawa",
+                    "terms": "dostawa, dowóz"
                 },
                 "denomination": {
-                    "label": "Wyznanie"
+                    "label": "Wyznanie",
+                    "terms": "wyznanie"
                 },
                 "denotation": {
                     "label": "Znaczenie"
@@ -2854,7 +2896,8 @@
                     }
                 },
                 "description": {
-                    "label": "Opis obiektu"
+                    "label": "Opis obiektu",
+                    "terms": "opis"
                 },
                 "design": {
                     "label": "Konstrukcja"
@@ -2863,7 +2906,8 @@
                     "label": "Miejsca docelowe (numery dróg)"
                 },
                 "destination/symbol_oneway": {
-                    "label": "Miejsca docelowe (symbole)"
+                    "label": "Miejsca docelowe (symbole)",
+                    "terms": "miejsca docelowe, symbole"
                 },
                 "destination_oneway": {
                     "label": "Miejsca docelowe"
@@ -2876,11 +2920,9 @@
                     "label": "Średnica",
                     "placeholder": "5 mm, 10 cm, 15 in…"
                 },
-                "diaper": {
-                    "label": "Przewijak dla dzieci"
-                },
                 "diet_multi": {
-                    "label": "Rodzaj diety"
+                    "label": "Rodzaj diety",
+                    "terms": "dieta"
                 },
                 "diplomatic": {
                     "label": "Rodzaj"
@@ -2946,7 +2988,8 @@
                         "leashed": "Tylko na smyczy",
                         "no": "Niedozwolone",
                         "yes": "Dozwolone"
-                    }
+                    },
+                    "terms": "psy"
                 },
                 "door": {
                     "label": "Drzwi"
@@ -2955,11 +2998,13 @@
                     "label": "Rodzaj"
                 },
                 "drive_through": {
-                    "label": "Drive-through (zakupy)"
+                    "label": "Drive-through (zakupy)",
+                    "terms": "drive-through"
                 },
                 "duration": {
                     "label": "Czas trwania",
-                    "placeholder": "00:00"
+                    "placeholder": "00:00",
+                    "terms": "czas trwania, trwanie"
                 },
                 "electrified": {
                     "label": "Elektryfikacja",
@@ -2972,11 +3017,13 @@
                     "placeholder": "Linia napowietrzna, Trzecia szyna"
                 },
                 "elevation": {
-                    "label": "Wysokość n.p.m. (WGS84)"
+                    "label": "Wysokość n.p.m. (WGS84)",
+                    "terms": "wysokość"
                 },
                 "email": {
                     "label": "E-mail",
-                    "placeholder": "przyklad@example.com"
+                    "placeholder": "przyklad@example.com",
+                    "terms": "e-mail"
                 },
                 "embankment": {
                     "label": "Rodzaj",
@@ -3005,19 +3052,23 @@
                 },
                 "fax": {
                     "label": "Faks",
-                    "placeholder": "+48 42 123 45 67"
+                    "placeholder": "+48 42 123 45 67",
+                    "terms": "faks, fax"
                 },
                 "fee": {
-                    "label": "Opłata"
+                    "label": "Opłata",
+                    "terms": "opłata"
                 },
                 "fence_type": {
                     "label": "Rodzaj"
                 },
                 "fire_hydrant/diameter": {
-                    "label": "Średnica (mm, in, lub litery)"
+                    "label": "Średnica (mm, in, lub litery)",
+                    "terms": "średnica"
                 },
                 "fire_hydrant/pressure": {
-                    "label": "Ciśnienie (bar)"
+                    "label": "Ciśnienie (bar)",
+                    "terms": "ciśnienie"
                 },
                 "fire_hydrant/type": {
                     "label": "Kształt",
@@ -3032,13 +3083,15 @@
                     "label": "Miejsce na ognisko"
                 },
                 "fishing": {
-                    "label": "Połów ryb"
+                    "label": "Połów ryb",
+                    "terms": "połów ryb, łowienie ryb, wędkarstwo"
                 },
                 "fitness_station": {
                     "label": "Rodzaj urządzeń"
                 },
                 "fixme": {
-                    "label": "Popraw mnie (fixme)"
+                    "label": "Popraw mnie (fixme)",
+                    "terms": "fixme, popraw mnie"
                 },
                 "flag/type": {
                     "label": "Rodzaj flagi"
@@ -3047,17 +3100,20 @@
                     "label": "Pływające"
                 },
                 "flood_prone": {
-                    "label": "Zagrożona zalaniem"
+                    "label": "Zagrożona zalaniem",
+                    "terms": "zagrożona zalaniem"
                 },
                 "ford": {
                     "label": "Rodzaj",
                     "placeholder": "Domyślny"
                 },
                 "frequency": {
-                    "label": "Częstotliwość pracy"
+                    "label": "Częstotliwość pracy",
+                    "terms": "częstotliwość pracy"
                 },
                 "frequency_electrified": {
-                    "label": "Częstotliwość pracy"
+                    "label": "Częstotliwość pracy",
+                    "terms": "częstotliwość pracy"
                 },
                 "from": {
                     "label": "Z"
@@ -3078,7 +3134,8 @@
                         "male": "Mężczyzna",
                         "unisex": "Dla obu płci"
                     },
-                    "placeholder": "Nieznana"
+                    "placeholder": "Nieznana",
+                    "terms": "płeć"
                 },
                 "generator/method": {
                     "label": "Metoda"
@@ -3120,13 +3177,16 @@
                     "label": "Specjalności"
                 },
                 "height": {
-                    "label": "Wysokość (metry)"
+                    "label": "Wysokość (metry)",
+                    "terms": "wysokość"
                 },
                 "height_building": {
-                    "label": "Wysokość budynku (metry)"
+                    "label": "Wysokość budynku (metry)",
+                    "terms": "wysokość budynku"
                 },
                 "highspeed": {
-                    "label": "Kolej dużych prędkości"
+                    "label": "Kolej dużych prędkości",
+                    "terms": "kolej dużych prędkości"
                 },
                 "highway": {
                     "label": "Rodzaj"
@@ -3174,7 +3234,8 @@
                         "difficult": "Trudny: Wąska i odsłonięta droga. Może zawierać przeszkody do przejścia i wąskie przesmyki.",
                         "impossible": "Nieprzejezdny: Droga lub most jest nieprzejezdny dla koni. Zbyt wąski, niewystarczająco mocny, przeszkody, np. drabiny. Niebezpieczne dla życia."
                     },
-                    "placeholder": "Trudne, Niebezpieczne..."
+                    "placeholder": "Trudne, Niebezpieczne...",
+                    "terms": "stopień trudności jazdy konnej"
                 },
                 "horse_stables": {
                     "label": "Stajnia",
@@ -3184,13 +3245,14 @@
                     }
                 },
                 "iata": {
-                    "label": "Kod lotniska - IATA"
+                    "label": "Kod lotniska – IATA"
                 },
                 "icao": {
-                    "label": "Kod lotniska - ICAO"
+                    "label": "Kod lotniska – ICAO"
                 },
                 "incline": {
-                    "label": "Nachylenie"
+                    "label": "Nachylenie",
+                    "terms": "nachylenie"
                 },
                 "incline_steps": {
                     "label": "Nachylenie",
@@ -3200,7 +3262,8 @@
                     }
                 },
                 "indoor": {
-                    "label": "Wnętrze"
+                    "label": "Wnętrze",
+                    "terms": "wnętrze"
                 },
                 "indoor_type": {
                     "label": "Rodzaj"
@@ -3212,10 +3275,12 @@
                     "label": "Rodzaj"
                 },
                 "inscription": {
-                    "label": "Inskrypcja"
+                    "label": "Inskrypcja",
+                    "terms": "inskrypcja, napis"
                 },
                 "intermittent": {
-                    "label": "Okresowość"
+                    "label": "Okresowość",
+                    "terms": "okresowość"
                 },
                 "intermittent_yes": {
                     "label": "okresowość"
@@ -3228,19 +3293,24 @@
                         "wired": "Przewodowy",
                         "wlan": "Bezprzewodowy",
                         "yes": "Tak"
-                    }
+                    },
+                    "terms": "dostęp do internetu, internet"
                 },
                 "internet_access/fee": {
-                    "label": "Płatny dostęp do Internetu"
+                    "label": "Płatny dostęp do Internetu",
+                    "terms": "płatny dostęp do Internetu"
                 },
                 "internet_access/ssid": {
-                    "label": "Wi-Fi (nazwa sieci)"
+                    "label": "Wi-Fi (nazwa sieci)",
+                    "terms": "wi-fi, wifi"
                 },
                 "interval": {
-                    "label": "Czas między odjazdami"
+                    "label": "Czas między odjazdami",
+                    "terms": "czas między odjazdami"
                 },
                 "junction/ref_oneway": {
-                    "label": "Numer węzła"
+                    "label": "Numer węzła",
+                    "terms": "numer węzła"
                 },
                 "junction_line": {
                     "label": "Rodzaj skrzyżowania",
@@ -3248,7 +3318,8 @@
                         "circular": "Skrzyżowanie o ruchu okrężnym",
                         "jughandle": "Jughandle",
                         "roundabout": "Rondo"
-                    }
+                    },
+                    "terms": "skrzyżowanie"
                 },
                 "kerb": {
                     "label": "Krawężnik"
@@ -3267,14 +3338,16 @@
                 },
                 "lanes": {
                     "label": "Pasy ruchu",
-                    "placeholder": "1, 2, 3..."
+                    "placeholder": "1, 2, 3...",
+                    "terms": "pasy ruchu"
                 },
                 "language_multi": {
                     "label": "Języki"
                 },
                 "layer": {
                     "label": "Warstwa",
-                    "placeholder": "0"
+                    "placeholder": "0",
+                    "terms": "warstwa"
                 },
                 "leaf_cycle": {
                     "label": "Cykl życiowy",
@@ -3319,20 +3392,27 @@
                     "label": "Długość (w metrach)"
                 },
                 "level": {
-                    "label": "Piętro"
+                    "label": "Piętro",
+                    "terms": "piętro, poziom"
                 },
                 "levels": {
                     "label": "Liczba kondygnacji",
-                    "placeholder": "2, 4, 6..."
+                    "placeholder": "2, 4, 6...",
+                    "terms": "kondygnacje, piętra, poziomy"
                 },
                 "liaison": {
                     "label": "Rodzaj"
                 },
+                "line_attachment": {
+                    "label": "Przymocowanie linii elektroenergetycznej"
+                },
                 "lit": {
-                    "label": "Oświetlenie"
+                    "label": "Oświetlenie",
+                    "terms": "oświetlenie, światło"
                 },
                 "location": {
-                    "label": "Lokalizacja"
+                    "label": "Lokalizacja",
+                    "terms": "lokalizacja, lokacja, miejsce"
                 },
                 "location_pool": {
                     "label": "Lokalizacja",
@@ -3352,7 +3432,8 @@
                     "label": "Rodzaj"
                 },
                 "manufacturer": {
-                    "label": "Producent"
+                    "label": "Producent",
+                    "terms": "producent"
                 },
                 "map_size": {
                     "label": "Zasięg mapy"
@@ -3361,38 +3442,47 @@
                     "label": "Rodzaj mapy"
                 },
                 "material": {
-                    "label": "Tworzywo"
+                    "label": "Tworzywo",
+                    "terms": "tworzywo, materiał"
                 },
                 "maxheight": {
                     "label": "Maksymalna wysokość",
-                    "placeholder": "4, 4.5, 5, 14'0\", 14'6\", 15'0\""
+                    "placeholder": "4, 4.5, 5, 14'0\", 14'6\", 15'0\"",
+                    "terms": "maksymalna wysokość"
                 },
                 "maxspeed": {
                     "label": "Ograniczenie prędkości",
-                    "placeholder": "40, 50, 60..."
+                    "placeholder": "40, 50, 60...",
+                    "terms": "ograniczenie prędkości"
                 },
                 "maxspeed/advisory": {
                     "label": "Zalecane ograniczenie prędkości",
-                    "placeholder": "40, 50, 60..."
+                    "placeholder": "40, 50, 60...",
+                    "terms": "zalecane ograniczenie prędkości"
                 },
                 "maxstay": {
-                    "label": "Maksymalny czas postoju"
+                    "label": "Maksymalny czas postoju",
+                    "terms": "maksymalny czas postoju"
                 },
                 "maxweight": {
-                    "label": "Maksymalna masa pojazdu"
+                    "label": "Maksymalna masa pojazdu",
+                    "terms": "maksymalna masa pojazdu"
                 },
                 "maxweight_bridge": {
-                    "label": "Maksymalna masa pojazdu"
+                    "label": "Maksymalna masa pojazdu",
+                    "terms": "maksymalna masa pojazdu"
                 },
                 "memorial": {
                     "label": "Rodzaj"
                 },
                 "microbrewery": {
-                    "label": "Browar restauracyjny"
+                    "label": "Browar restauracyjny",
+                    "terms": "browar restauracyjny"
                 },
                 "minspeed": {
                     "label": "Minimalna prędkość",
-                    "placeholder": "20, 30, 40..."
+                    "placeholder": "20, 30, 40...",
+                    "terms": "minimalna prędkość"
                 },
                 "monitoring_multi": {
                     "label": "Monitoring"
@@ -3408,7 +3498,8 @@
                         "5": "5: Maksymalnie trudny szlak, gołoborza, lawiniska",
                         "6": "6: Teren praktycznie nieprzejezdny dla rowerów górskich poza wyczynem – trial, ekstremalne dh itp."
                     },
-                    "placeholder": "0, 1, 2, 3..."
+                    "placeholder": "0, 1, 2, 3...",
+                    "terms": "skala trudności dla rowerów górskich"
                 },
                 "mtb/scale/imba": {
                     "label": "Skala trudności szlaków dla rowerów górskich IMBA",
@@ -3419,10 +3510,11 @@
                         "3": "Trudny (czarny romb)",
                         "4": "Ekstremalnie trudny (podwójny czarny romb)"
                     },
-                    "placeholder": "Łatwy, Wymagający, Trudny..."
+                    "placeholder": "Łatwy, Wymagający, Trudny...",
+                    "terms": "skala trudności szlaków dla rowerów górskich IMBA"
                 },
                 "mtb/scale/uphill": {
-                    "label": "Skala trudności podjazdów dla rowerów górskich ",
+                    "label": "Skala trudności podjazdów dla rowerów górskich",
                     "options": {
                         "0": "0: Śr. nachylenie <10%, żwir/ubita ziemia, brak przeszkód",
                         "1": "1: Śr. nachylenie <15%, żwir/ubita ziemia, kilka mniejszych obiektów",
@@ -3431,17 +3523,20 @@
                         "4": "4: Śr. nachylenie <30%, zły stan, duże kamienie/gałęzie",
                         "5": "5: Bardzo strome, rower zwykle musi być prowadzony"
                     },
-                    "placeholder": "0, 1, 2, 3..."
+                    "placeholder": "0, 1, 2, 3...",
+                    "terms": "skala trudności podjazdów dla rowerów górskich"
                 },
                 "name": {
                     "label": "Nazwa",
-                    "placeholder": "Powszechna nazwa własna (tylko jeśli istnieje)"
+                    "placeholder": "Powszechna nazwa własna (tylko jeśli istnieje)",
+                    "terms": "nazwa"
                 },
                 "natural": {
                     "label": "Natura"
                 },
                 "network": {
-                    "label": "Sieć"
+                    "label": "Sieć",
+                    "terms": "sieć"
                 },
                 "network_bicycle": {
                     "label": "Typ sieci",
@@ -3476,8 +3571,13 @@
                 "network_road": {
                     "label": "Sieć"
                 },
+                "not/name": {
+                    "label": "Niepoprawne nazwy",
+                    "terms": "niepoprawne nazwy"
+                },
                 "note": {
-                    "label": "Uwagi własne"
+                    "label": "Uwagi własne",
+                    "terms": "uwagi własne, komentarz, note"
                 },
                 "office": {
                     "label": "Rodzaj"
@@ -3493,7 +3593,8 @@
                     }
                 },
                 "oneway/bicycle": {
-                    "label": "Jednokierunkowa dla rowerów"
+                    "label": "Jednokierunkowa dla rowerów",
+                    "terms": "jednokierunkowa dla rowerów"
                 },
                 "oneway_yes": {
                     "label": "Jednokierunkowa",
@@ -3510,23 +3611,27 @@
                 },
                 "opening_hours": {
                     "label": "Godziny otwarcia w formacie podanym na Wiki",
-                    "placeholder": "24/7, sunrise-sunset, Mo-Sa 08:00-20:00"
+                    "placeholder": "24/7, sunrise-sunset, Mo-Sa 08:00-20:00",
+                    "terms": "godziny otwarcia"
                 },
                 "operator": {
-                    "label": "Zarządca"
+                    "label": "Zarządca",
+                    "terms": "zarządca, zarządzający"
                 },
                 "operator/type": {
                     "label": "Zarządca (rodzaj)"
                 },
                 "outdoor_seating": {
-                    "label": "Ogródek restauracyjny"
+                    "label": "Ogródek restauracyjny",
+                    "terms": "ogródek restauracyjny, stoliki na zewnątrz"
                 },
                 "par": {
                     "label": "Par",
                     "placeholder": "3, 4, 5..."
                 },
                 "park_ride": {
-                    "label": "Parkuj i jedź"
+                    "label": "Parkuj i jedź",
+                    "terms": "parkuj i jedź, park and ride, park & ride"
                 },
                 "parking": {
                     "label": "Rodzaj",
@@ -3541,10 +3646,12 @@
                     }
                 },
                 "payment_multi": {
-                    "label": "Rodzaje płatności"
+                    "label": "Rodzaje płatności",
+                    "terms": "rodzaje płatności"
                 },
                 "payment_multi_fee": {
-                    "label": "Rodzaje płatności"
+                    "label": "Rodzaje płatności",
+                    "terms": "rodzaje płatności"
                 },
                 "phases": {
                     "label": "Liczba faz",
@@ -3552,7 +3659,8 @@
                 },
                 "phone": {
                     "label": "Telefon",
-                    "placeholder": "+48 42 123 4567"
+                    "placeholder": "+48 42 123 4567",
+                    "terms": "telefon, numer telefonu"
                 },
                 "piste/difficulty": {
                     "label": "Stopień trudności",
@@ -3678,16 +3786,21 @@
                     "label": "Minimalny wiek dziecka"
                 },
                 "polling_station": {
-                    "label": "Lokal wyborczy"
+                    "label": "Lokal wyborczy",
+                    "terms": "lokal wyborczy"
                 },
                 "population": {
                     "label": "Liczba ludności"
+                },
+                "post": {
+                    "label": "Adres skrzynki"
                 },
                 "power": {
                     "label": "Rodzaj"
                 },
                 "power_supply": {
-                    "label": "Zasilacz"
+                    "label": "Zasilacz",
+                    "terms": "zasilacz"
                 },
                 "preschool": {
                     "label": "Przedszkole"
@@ -3696,10 +3809,11 @@
                     "label": "Produkt rolny"
                 },
                 "product": {
-                    "label": "Produkty"
+                    "label": "Produkty",
+                    "terms": "produkty"
                 },
                 "public_bookcase/type": {
-                    "label": "Typ"
+                    "label": "Rodzaj"
                 },
                 "railway": {
                     "label": "Rodzaj"
@@ -3731,7 +3845,8 @@
                     "placeholder": "Kontener, Centrum"
                 },
                 "ref": {
-                    "label": "Kod referencyjny"
+                    "label": "Kod referencyjny",
+                    "terms": "kod referencyjny"
                 },
                 "ref/isil": {
                     "label": "Kod ISIL"
@@ -3750,13 +3865,15 @@
                     "label": "Numer peronu"
                 },
                 "ref_road_number": {
-                    "label": "Numer drogi"
+                    "label": "Numer drogi",
+                    "terms": "numer drogi"
                 },
                 "ref_room_number": {
                     "label": "Numer pomieszczenia"
                 },
                 "ref_route": {
-                    "label": "Numer referencyjny trasy"
+                    "label": "Numer referencyjny trasy",
+                    "terms": "numer referencyjny trasy"
                 },
                 "ref_runway": {
                     "label": "Numer pasa startowego",
@@ -3773,7 +3890,8 @@
                     "label": "Rodzaj"
                 },
                 "religion": {
-                    "label": "Religia"
+                    "label": "Religia",
+                    "terms": "religia"
                 },
                 "reservation": {
                     "label": "Rezerwacje",
@@ -3782,7 +3900,8 @@
                         "recommended": "Zalecane",
                         "required": "Wymagane",
                         "yes": "Tak"
-                    }
+                    },
+                    "terms": "rezerwacje"
                 },
                 "resort": {
                     "label": "Rodzaj"
@@ -3797,7 +3916,8 @@
                     "label": "Zakazy/nakazy skrętu"
                 },
                 "roof/colour": {
-                    "label": "Kolor dachu"
+                    "label": "Kolor dachu",
+                    "terms": "kolor dachu"
                 },
                 "room": {
                     "label": "Rodzaj"
@@ -3821,13 +3941,16 @@
                         "hiking": "T1: Wędrówki",
                         "mountain_hiking": "T2: Wspinaczka Górska"
                     },
-                    "placeholder": "Wspinaczka górska, Wspinaczka alpejska..."
+                    "placeholder": "Wspinaczka górska, Wspinaczka alpejska...",
+                    "terms": "stopień trudności turystyki pieszej"
                 },
                 "salt": {
-                    "label": "Słone"
+                    "label": "Słone",
+                    "terms": "słone, słony"
                 },
                 "sanitary_dump_station": {
-                    "label": "Miejsce opróżniania toalety"
+                    "label": "Miejsce opróżniania toalety",
+                    "terms": "miejsce opróżniania toalety"
                 },
                 "screen": {
                     "label": "Liczba sal",
@@ -3914,7 +4037,8 @@
                     "label": "Kategoria"
                 },
                 "seamark/type": {
-                    "label": "Znak wodny"
+                    "label": "Znak wodny",
+                    "terms": "znak wodny"
                 },
                 "seamark/wreck/category": {
                     "label": "Kategoria"
@@ -3933,7 +4057,8 @@
                         "only": "Tylko",
                         "yes": "Tak"
                     },
-                    "placeholder": "Tak, Nie, Tylko"
+                    "placeholder": "Tak, Nie, Tylko",
+                    "terms": "sprzedaż używanych"
                 },
                 "self_service": {
                     "label": "Samoobsługowa"
@@ -3954,7 +4079,8 @@
                         "siding": "Bocznica",
                         "spur": "Bocznica",
                         "yard": "Tor na stacji rozrządowej"
-                    }
+                    },
+                    "terms": "typ usługi, rodzaj usługi"
                 },
                 "service_times": {
                     "label": "Czas prowadzenia usług lub nabożeństw"
@@ -3995,7 +4121,8 @@
                         "separated": "W miejscach dla palących, nieoddzielonych fizycznie",
                         "yes": "Dozwolone wszędzie"
                     },
-                    "placeholder": "Nie, Wydzielone, Tak..."
+                    "placeholder": "Nie, Wydzielone, Tak...",
+                    "terms": "dla palących"
                 },
                 "smoothness": {
                     "label": "Gładkość",
@@ -4009,7 +4136,8 @@
                         "very_bad": "Duży prześwit: lekki pojazd terenowy",
                         "very_horrible": "Wyspecjalizowany off-road: traktor, ATV (quad)"
                     },
-                    "placeholder": "Cienkie kółka, Koła, Off-road..."
+                    "placeholder": "Cienkie kółka, Koła, Off-road...",
+                    "terms": "gładkość"
                 },
                 "social_facility": {
                     "label": "Rodzaj"
@@ -4018,7 +4146,12 @@
                     "label": "Grupa docelowa"
                 },
                 "source": {
-                    "label": "Źródła"
+                    "label": "Źródła",
+                    "terms": "źródła"
+                },
+                "species/wikidata": {
+                    "label": "Species Wikidata",
+                    "terms": "species wikidata"
                 },
                 "sport": {
                     "label": "Sport"
@@ -4033,10 +4166,12 @@
                     "label": "Sport"
                 },
                 "stars": {
-                    "label": "Gwiazdki"
+                    "label": "Gwiazdki",
+                    "terms": "gwiazdki"
                 },
                 "start_date": {
-                    "label": "Data początku istnienia"
+                    "label": "Data początku istnienia",
+                    "terms": "data początku istnienia"
                 },
                 "step_count": {
                     "label": "Liczba stopni"
@@ -4050,6 +4185,10 @@
                 },
                 "street_cabinet": {
                     "label": "Rodzaj"
+                },
+                "stroller": {
+                    "label": "Dostęp dla wózków dziecięcych",
+                    "terms": "dostęp dla wózków dziecięcych"
                 },
                 "structure": {
                     "label": "Struktura",
@@ -4079,7 +4218,8 @@
                     "label": "Rodzaj"
                 },
                 "supervised": {
-                    "label": "Strzeżone/nadzorowane"
+                    "label": "Strzeżone/nadzorowane",
+                    "terms": "strzeżone, nadzorowane"
                 },
                 "support": {
                     "label": "Mocowanie obiektu"
@@ -4102,7 +4242,8 @@
                     "label": "Obszar dozoru"
                 },
                 "survey/date": {
-                    "label": "Data ostatniej kontroli"
+                    "label": "Data ostatniej kontroli",
+                    "terms": "data ostatniej kontroli"
                 },
                 "swimming_pool": {
                     "label": "Rodzaj"
@@ -4117,7 +4258,8 @@
                     }
                 },
                 "tactile_paving": {
-                    "label": "Wypustki dla niewidomych"
+                    "label": "Wypustki dla niewidomych",
+                    "terms": "niepełnosprawni, niewidomi, wypustki, z wypustkami, porowaty krawężnik"
                 },
                 "takeaway": {
                     "label": "Na wynos",
@@ -4126,13 +4268,15 @@
                         "only": "Tylko na wynos",
                         "yes": "Tak"
                     },
-                    "placeholder": "Tak, Nie, Tylko na wynos..."
+                    "placeholder": "Tak, Nie, Tylko na wynos...",
+                    "terms": "na wynos"
                 },
                 "target": {
                     "label": "Kraj przyjmujący"
                 },
                 "tidal": {
-                    "label": "W strefie pływów"
+                    "label": "W strefie pływów",
+                    "terms": "w strefie pływów"
                 },
                 "to": {
                     "label": "Do"
@@ -4147,13 +4291,16 @@
                     }
                 },
                 "toilets/handwashing": {
-                    "label": "Umywalki"
+                    "label": "Umywalki",
+                    "terms": "umywalki, mycie rąk"
                 },
                 "toilets/position": {
-                    "label": "Pozycje"
+                    "label": "Pozycje",
+                    "terms": "pozycje"
                 },
                 "toll": {
-                    "label": "Opłata drogowa"
+                    "label": "Opłata drogowa",
+                    "terms": "opłata drogowa"
                 },
                 "tomb": {
                     "label": "Rodzaj"
@@ -4217,7 +4364,8 @@
                         "intermediate": "Średnia: mało oznaczeń, ścieżka zasadniczo widoczna",
                         "no": "Żadna: brak ścieżki, wymagane świetne umiejętności orientacji w terenie"
                     },
-                    "placeholder": "Doskonała, Dobra, Zła..."
+                    "placeholder": "Doskonała, Dobra, Zła...",
+                    "terms": "widoczność szlaku"
                 },
                 "transformer": {
                     "label": "Rodzaj transformatora",
@@ -4239,7 +4387,8 @@
                     "label": "Rodzaj"
                 },
                 "trolley_wire": {
-                    "label": "Trakcja trolejbusowa"
+                    "label": "Trakcja trolejbusowa",
+                    "terms": "trakcja trolejbusowa"
                 },
                 "tunnel": {
                     "label": "Rodzaj",
@@ -4254,7 +4403,8 @@
                         "military": "Wojskowe",
                         "test": "Testowy",
                         "tourism": "Turystyka"
-                    }
+                    },
+                    "terms": "sposób użytkowania, sposób używania, sposób użycia"
                 },
                 "valve": {
                     "label": "Rodzaj"
@@ -4290,16 +4440,20 @@
                     "label": "Napięcie"
                 },
                 "voltage/primary": {
-                    "label": "Napięcie pierwotne"
+                    "label": "Napięcie pierwotne",
+                    "terms": "napięcie pierwotne"
                 },
                 "voltage/secondary": {
-                    "label": "Napięcie wtórne"
+                    "label": "Napięcie wtórne",
+                    "terms": "napięcie wtórne"
                 },
                 "voltage/tertiary": {
-                    "label": "Napięcie trzeciorzędne"
+                    "label": "Napięcie trzeciorzędne",
+                    "terms": "napięcie trzeciorzędne"
                 },
                 "voltage_electrified": {
-                    "label": "Napięcie"
+                    "label": "Napięcie",
+                    "terms": "napięcie"
                 },
                 "wall": {
                     "label": "Rodzaj"
@@ -4314,36 +4468,43 @@
                     "label": "Źródło wody"
                 },
                 "water_volume": {
-                    "label": "Objętość zapasu wody (m³)"
+                    "label": "Objętość zapasu wody (m³)",
+                    "terms": "objętość zapasu wody"
                 },
                 "waterway": {
                     "label": "Rodzaj"
                 },
                 "website": {
                     "label": "Strona WWW",
-                    "placeholder": "https://example.com"
+                    "placeholder": "https://example.com",
+                    "terms": "strona www, strona internetowa"
                 },
                 "wetland": {
                     "label": "Rodzaj"
                 },
                 "wheelchair": {
-                    "label": "Dostęp dla wózków inwalidzkich"
+                    "label": "Dostęp dla wózków inwalidzkich",
+                    "terms": "dostęp dla wózków inwalidzkich"
                 },
                 "wholesale": {
                     "label": "Rodzaj hurtowni"
                 },
                 "width": {
-                    "label": "Szerokość (w metrach)"
+                    "label": "Szerokość (w metrach)",
+                    "terms": "szerokość"
                 },
                 "wikidata": {
-                    "label": "Wikidata"
+                    "label": "Wikidata",
+                    "terms": "wikidata"
                 },
                 "wikipedia": {
-                    "label": "Wikipedia"
+                    "label": "Wikipedia",
+                    "terms": "wikipedia"
                 },
                 "windings": {
                     "label": "Liczba uzwojeń",
-                    "placeholder": "1, 2, 3..."
+                    "placeholder": "1, 2, 3...",
+                    "terms": "liczba uzwojeń"
                 },
                 "windings/configuration": {
                     "label": "Układ połączeń",
@@ -4355,7 +4516,8 @@
                         "scott": "Scott",
                         "star": "Gwiazdowy",
                         "zigzag": "Zygzak"
-                    }
+                    },
+                    "terms": "układ połączeń"
                 }
             },
             "presets": {
@@ -4785,6 +4947,10 @@
                     "name": "Szkoła językowa",
                     "terms": "esl,szkoła języków,języki"
                 },
+                "amenity/letter_box": {
+                    "name": "Prywatna skrzynka pocztowa",
+                    "terms": "prywatna skrzynka pocztowa, prywatna skrzynka na listy"
+                },
                 "amenity/library": {
                     "name": "Biblioteka",
                     "terms": "biblioteka,czytelnia"
@@ -4850,7 +5016,7 @@
                 },
                 "amenity/payment_centre": {
                     "name": "Centrum płatnicze",
-                    "terms": "czeki,podatki,rachunki,waluta,finanse,gotówka,pieniądze"
+                    "terms": "centrum płatnicze, agencja opłat, czeki, podatki, rachunki, waluta, finanse, gotówka, pieniądze"
                 },
                 "amenity/payment_terminal": {
                     "name": "Terminal płatniczy",
@@ -4928,6 +5094,10 @@
                     "name": "Skrzynka pocztowa",
                     "terms": "skrzynka,pocztowa,listy"
                 },
+                "amenity/post_depot": {
+                    "name": "Sortownia listów lub paczek",
+                    "terms": "sortownia listów, sortownia paczek, sortownia przesyłek, sortownia poczty, poczta, kurier, firma kurierska"
+                },
                 "amenity/post_office": {
                     "name": "Poczta/agencja pocztowa",
                     "terms": "poczta, urząd pocztowy, agencja pocztowa, listy, paczki, przesyłki, kurier, poczta polska, dpd, dhl, inpost"
@@ -4953,8 +5123,8 @@
                     "terms": "brewpub, pub, browar, piwo"
                 },
                 "amenity/public_bath": {
-                    "name": "Łaźnie publiczne",
-                    "terms": "Łazienki, mycie"
+                    "name": "Łaźnia publiczna",
+                    "terms": "łaźnia publiczna, łaźnie publiczne, kąpiel, onsen, gorące źródła, termy, wody termalne, cieplica, hammam"
                 },
                 "amenity/public_bookcase": {
                     "name": "Publiczna wymiana książek",
@@ -4966,6 +5136,14 @@
                 },
                 "amenity/recycling": {
                     "name": "Przetwarzanie odpadów"
+                },
+                "amenity/recycling/container/electrical_items": {
+                    "name": "Pojemnik na elektroodpady",
+                    "terms": "pojemnik na elektroodpady, kontener na elektroodpady, elektrośmieci, śmietnik"
+                },
+                "amenity/recycling/container/green_waste": {
+                    "name": "Pojemnik na odpady zielone",
+                    "terms": "pojemnik na odpady zielone, kontener na odpady zielone, odpady biodegradowalne, kompost, śmietnik"
                 },
                 "amenity/recycling_centre": {
                     "name": "Centrum przetwarzania odpadów (recycling)",
@@ -5175,6 +5353,10 @@
                 "amenity/vending_machine": {
                     "name": "Automat sprzedający",
                     "terms": "Automat do sprzedaży"
+                },
+                "amenity/vending_machine/bottle_return": {
+                    "name": "Automat na butelki",
+                    "terms": "automat na butelki, butelki zwrotne"
                 },
                 "amenity/vending_machine/cigarettes": {
                     "name": "Automat z papierosami",
@@ -5758,8 +5940,8 @@
                     "terms": "gorzelnia, destylarnia, wytwórnia napojów alkoholowych, rzemiosło, rzemieślnik, rzemieślnicy"
                 },
                 "craft/dressmaker": {
-                    "name": "Krawiec",
-                    "terms": "krawiec, krawcowa, rzemiosło, rzemieślnik, rzemieślnicy"
+                    "name": "Krawcowa",
+                    "terms": "krawcowa, krawiec, rzemiosło, rzemieślnik, rzemieślnicy"
                 },
                 "craft/electrician": {
                     "name": "Elektryk",
@@ -6543,6 +6725,10 @@
                     "name": "Teren z zabudowaniami rolniczymi",
                     "terms": "podwórze gospodarskie"
                 },
+                "landuse/flowerbed": {
+                    "name": "Kwietnik",
+                    "terms": "kwietnik, klomb, gazon, ogród kwiatowy, zieleń"
+                },
                 "landuse/forest": {
                     "name": "Las",
                     "terms": "las,puszcza"
@@ -6553,7 +6739,7 @@
                 },
                 "landuse/grass": {
                     "name": "Trawa/trawnik",
-                    "terms": "trawa, trawnik, skwer,klomb"
+                    "terms": "trawa, trawnik, skwer, klomb, zieleń"
                 },
                 "landuse/greenfield": {
                     "name": "Teren niezabudowany",
@@ -6826,7 +7012,7 @@
                 },
                 "leisure/park": {
                     "name": "Park rekreacyjno-wypoczynkowy",
-                    "terms": "park,wypoczynek,rekreacja,teren rekreacyjny"
+                    "terms": "park, wypoczynek, rekreacja, teren rekreacyjny, zieleń"
                 },
                 "leisure/picnic_table": {
                     "name": "Stół piknikowy",
@@ -7115,6 +7301,10 @@
                     "name": "Stacja monitoringu",
                     "terms": "stacja monitoringu, pomiary"
                 },
+                "man_made/obelisk": {
+                    "name": "Obelisk",
+                    "terms": "obelisk, kolumna"
+                },
                 "man_made/observatory": {
                     "name": "Obserwatorium",
                     "terms": "obserwatorium astronomiczne"
@@ -7308,7 +7498,7 @@
                 },
                 "natural/grassland": {
                     "name": "Łąka/sawanna/step/preria",
-                    "terms": "teren trawiasty,sawanna,step,preria"
+                    "terms": "teren trawiasty, sawanna, step, preria, zieleń"
                 },
                 "natural/heath": {
                     "name": "Wrzosowisko",
@@ -7572,8 +7762,8 @@
                     "name": "Lekarz"
                 },
                 "office/political_party": {
-                    "name": "Partia polityczna",
-                    "terms": "partia polityczna"
+                    "name": "Biuro partii politycznej",
+                    "terms": "biuro partii politycznej, partia polityczna"
                 },
                 "office/private_investigator": {
                     "name": "Prywatny detektyw",
@@ -8604,6 +8794,10 @@
                     "name": "Sklep fotograficzny",
                     "terms": "fotografia"
                 },
+                "shop/printer_ink": {
+                    "name": "Sklep z tuszami do drukarek",
+                    "terms": "sklep z tuszami do drukarek, tusze, tonery, drukarki"
+                },
                 "shop/pyrotechnics": {
                     "name": "Sklep z ogniami sztucznymi",
                     "terms": "fajerwerki"
@@ -8743,10 +8937,6 @@
                     "name": "Sklep z winami",
                     "terms": "Winiarnia"
                 },
-                "tactile_paving": {
-                    "name": "Wypustki dla niewidomych",
-                    "terms": "niepełnosprawni, niewidomi, wypustki, z wypustkami, porowaty krawężnik"
-                },
                 "telecom/data_center": {
                     "name": "Centrum danych",
                     "terms": "centrum danych, dane, serwery, systemy komputerowe"
@@ -8872,7 +9062,7 @@
                 },
                 "tourism/theme_park": {
                     "name": "Park rozrywki",
-                    "terms": "park rozrywki, disneyland"
+                    "terms": "park rozrywki, lunapark, wesołe miasteczko, disneyland, kolejka górska, karuzela"
                 },
                 "tourism/trail_riding_station": {
                     "name": "Konny ośrodek wypoczynkowy",
@@ -9658,6 +9848,9 @@
             "ym-Centre-Universitaire-de-Recherche-et-dApplication-en-Tldtection-CURAT-de-lUniversit-Felix-Houphouet-Boigny": {
                 "name": "YouthMappers CURAT"
             },
+            "ym-The-Gambia-YMCA-University-of-the-Gambia": {
+                "name": "Connected YouthMappers"
+            },
             "cape-coast-youthmappers": {
                 "name": "YouthMappers z Uniwersytetu w Cape Coast",
                 "description": "Obserwuj nas na Twitterze: {url}",
@@ -9677,10 +9870,12 @@
                 "description": "Talk-gh to oficjalna lista dyskusyjna ghańskiej społeczności OSM"
             },
             "ym-University-of-Cape-Coast": {
-                "name": "Towarzystwo Geograficzne UCC"
+                "name": "Towarzystwo Geograficzne UCC",
+                "description": "Oddział YouthMappers na Uniwersytecie w Cape Coast"
             },
             "ym-University-of-Energy-and-Natural-Resources": {
-                "name": "Eco-Club"
+                "name": "Eco-Club",
+                "description": "Oddział YouthMappers na Uniwersytecie Energii i Zasobów Naturalnych"
             },
             "ym-University-of-Ghana": {
                 "name": "YouthMappers z Uniwersytetu w Ghanie",
@@ -9693,10 +9888,24 @@
                 "name": "YouthMappers ISSMV Dalaba"
             },
             "ym-Universit-de-NZrkor": {
-                "name": "Youthmappers z N'Zérékoré"
+                "name": "Youthmappers z N'Zérékoré",
+                "description": "Oddział YouthMappers na Uniwersytecie w Nzérékoré"
             },
             "ym-Dedan-Kimathi-University-of-Technology": {
-                "name": "GDEV"
+                "name": "GDEV",
+                "description": "Oddział YouthMappers na Politechnice Dedan Kimathi"
+            },
+            "ym-Karatina-University": {
+                "description": "Oddział YouthMappers na Uniwersytecie w Karantinie"
+            },
+            "ym-Kenyatta-University": {
+                "description": "Oddział YouthMappers na Kenyatta University"
+            },
+            "ym-Moi-University": {
+                "description": "Oddział YouthMappers na Moi University"
+            },
+            "ym-Technical-University-of-Kenya": {
+                "description": "Oddział YouthMappers na Politechnice w Kenii"
             },
             "ym-University-of-Nairobi": {
                 "description": "Oddział YouthMappers na Uniwersytecie w Nairobi"
@@ -9704,8 +9913,15 @@
             "ym-African-Methodist-Episcopal-University": {
                 "name": "YouthMappers-AMEU"
             },
+            "ym-Cuttington-University": {
+                "description": "Oddział YouthMappers na Cuttington University"
+            },
             "ym-Stella-Maris-Polytechnic": {
-                "name": "YouthMappers-SMP"
+                "name": "YouthMappers-SMP",
+                "description": "Oddział YouthMappers na Politechnice Stella Maris"
+            },
+            "ym-University-of-Liberia-YouthMappers": {
+                "description": "Oddział YouthMappers na Uniwersytecie Liberyjskim"
             },
             "osm-mg-facebook": {
                 "name": "OpenStreetMap Madagaskar na Facebooku",
@@ -9718,17 +9934,34 @@
             "ym-University-of-Malawi": {
                 "description": "Oddział YouthMappers na Uniwersytecie w Malawi"
             },
+            "ym-Universidade-Eduardo-Mondlane": {
+                "description": "Oddział YouthMappers na Uniwersytecie Eduarda Mondlanego"
+            },
+            "ym-Abia-State-University": {
+                "name": "AbsuMappersTeam",
+                "description": "Oddział YouthMappers na Abia State University"
+            },
+            "ym-Ahmadu-Bello-University": {
+                "name": "ABU Geomappers",
+                "description": "Oddział YouthMappers na Ahmadu Bello University"
+            },
+            "ym-Federal-School-of-Surveys": {
+                "name": "OyoMappersTeam (OMT) Oyo"
+            },
             "ym-Ignatius-Ajuru-University-of-Education": {
                 "name": "IgnatiusMappersTeam (IMT)"
             },
             "ym-University-of-Nigeria-Nsukka": {
-                "name": "LionMappersTeam (LMT) Nsukka"
+                "name": "LionMappersTeam (LMT) Nsukka",
+                "description": "Oddział YouthMappers na Uniwersytecie Nigeryjskim w Nsukka"
             },
             "ym-University-of-Port-Harcourt": {
-                "name": "UniqueMappersTeam (UMT) Port Harcourt"
+                "name": "UniqueMappersTeam (UMT) Port Harcourt",
+                "description": "Oddział YouthMappers na Uniwersytecie w Port Harcourt"
             },
             "ym-University-of-Nigeria-Enugu-Campus": {
-                "name": "LionMappersTeam (LMT) Enugu"
+                "name": "LionMappersTeam (LMT) Enugu",
+                "description": "Oddział YouthMappers na Uniwersytecie Nigeryjskim w Enugu"
             },
             "osm-africa-telegram": {
                 "name": "OpenStreetMap Afryka na Telegramie",
@@ -9740,6 +9973,9 @@
             "ym-University-of-Rwanda-Huye-Campus": {
                 "name": "Rwanda YouthMappers"
             },
+            "ym-Universit-Gaston-Berger": {
+                "description": "Oddział YouthMappers na Uniwersytecie Gaston Berger"
+            },
             "ym-Njala-University-Freetown-Campus": {
                 "name": "Njala Freetown YouthMappers"
             },
@@ -9749,11 +9985,38 @@
             "ym-University-of-Pretoria": {
                 "description": "Oddział YouthMappers na Uniwersytecie w Pretorii"
             },
+            "ym-Ardhi-University": {
+                "name": "ARU Mapper"
+            },
+            "ym-Institute-of-Finance-Management": {
+                "name": "IFM mappers"
+            },
+            "ym-Open-University-of-Tanzania": {
+                "description": "Oddział YouthMappers na Open University w Dar es Salaam"
+            },
             "ym-Sokoine-University-of-Agriculture": {
-                "name": "SMCoSE YouthMappers"
+                "name": "SMCoSE YouthMappers",
+                "description": "Oddział YouthMappers na Uniwersytecie Rolniczym Sokoine"
             },
             "ym-University-of-Dar-es-Salaam": {
-                "name": "YouthMappers na Uniwersytecie Dar es Salaam"
+                "name": "YouthMappers na Uniwersytecie Dar es Salaam",
+                "description": "Oddział YouthMappers na Uniwersytecie w Dar es Salaam"
+            },
+            "ym-Busitema-University": {
+                "name": "Good Mappers",
+                "description": "Oddział YouthMappers na Busitema University"
+            },
+            "ym-Gulu-University": {
+                "description": "Oddział YouthMappers na Uniwersytecie w Gulu"
+            },
+            "ym-Kumi-University": {
+                "description": "Oddział YouthMappers na Kumi University"
+            },
+            "ym-Makerere-University": {
+                "description": "Oddział YouthMappers na Uniwersytecie Makerere"
+            },
+            "ym-Mbarara-University-of-Science-and-Technology": {
+                "description": "Oddział YouthMappers na Mbarara University of Science and Technology"
             },
             "ym-The-University-of-Zambia": {
                 "description": "Oddział YouthMappers na Uniwersytecie w Zambii"
@@ -9773,6 +10036,9 @@
             },
             "ym-Khulna-University": {
                 "name": "OpenStreetMap"
+            },
+            "ym-Sherubtse-College": {
+                "description": "Oddział YouthMappers na Sherubtse College"
             },
             "OSM-India-facebook": {
                 "name": "OpenStreetMap Indie – Uczestniczący w mapowaniu sąsiedztwa",
@@ -10346,6 +10612,26 @@
                 "name": "OSM Kuba na Telegramie",
                 "description": "Kanał OpenStreetMap Kuba na Telegramie"
             },
+            "ni-facebook": {
+                "name": "Społeczność OpenStreetMap NI",
+                "description": "Mapujący i OpenStreetMap Nikaragua na Facebooku"
+            },
+            "ni-mailinglist": {
+                "name": "Lista dyskusyjna Talk-ni",
+                "description": "Talk-ni to oficjalna lista dyskusyjna nikaraguańskiej społeczności OSM"
+            },
+            "ni-telegram": {
+                "name": "OSM Nikaragua na Telegramie",
+                "description": "Kanał OpenStreetMap Nikaragua na Telegramie"
+            },
+            "ni-twitter": {
+                "name": "OpenStreetMap Nikaragua na Twitterze",
+                "description": "OSM Nikaragua na Twitterze: @osm_ni"
+            },
+            "osm-ni": {
+                "name": "MapaNica.net",
+                "description": "Zapewniaj usługi OSM i informacje dla lokalnej społeczności w Nikaragui"
+            },
             "ym-Universidad-Nacional-de-Ingenieria": {
                 "name": "Yeka Street MGA"
             },
@@ -10500,6 +10786,9 @@
                 "description": "Mapujący i użytkownicy OpenStreetMap z okolic Grand Junction",
                 "extendedDescription": "Celem tej grupy jest przedstawienie OpenStreetMap społeczności, utworzenie wspólnoty mapujących, stworzenie najbardziej niesamowitych danych geograficznych używając wszystkich dostępnych metod, które znamy i ostatecznie zintegrowanie tego wszystkiego, aby przedstawić nasze osiągnięcia. Wyobraź sobie dokładne oznakowania szlaków! Wyobraź sobie dalszy rozwój ścieżek rowerowych! Wyobraź sobie cokolwiek chcesz! To jest właśnie radość z OpenStreetMap!"
             },
+            "ym-Central-Washington-University": {
+                "name": "Geography Club"
+            },
             "ym-George-Mason-University": {
                 "name": "Mason Mappers",
                 "description": "Oddział YouthMappers na George Mason University"
@@ -10516,6 +10805,9 @@
             "ym-New-York-University": {
                 "description": "Oddział YouthMappers na Uniwersytecie Nowojorskim"
             },
+            "ym-Oklahoma-State-University": {
+                "name": "Geography Club"
+            },
             "ym-State-University-of-New-York-Geneseo": {
                 "name": "Stowarzyszenie SUNY Geneseo GIS"
             },
@@ -10531,14 +10823,32 @@
             "ym-University-of-Chicago": {
                 "description": "Oddział YouthMappers na Uniwersytecie Chicagowskim"
             },
+            "ym-University-of-Maryland-College-Park": {
+                "name": "Geography Club"
+            },
+            "ym-University-of-Redlands": {
+                "name": "URSpatial Geo-Thinkers"
+            },
+            "ym-University-of-South-Carolina": {
+                "description": "Oddział YouthMappers na Uniwersytecie w Południowej Karolinie"
+            },
             "ym-University-of-Southern-California": {
                 "name": "SC Mappers"
+            },
+            "ym-University-of-Wyoming": {
+                "name": "Gamma Theta Upsilon/Geography Club"
             },
             "ym-UW-Madison": {
                 "name": "BadgerMaps"
             },
             "ym-Vassar-College": {
                 "name": "Hudson Valley Mappers"
+            },
+            "ym-Villanova-University": {
+                "name": "The Villanova Globeplotters"
+            },
+            "ym-West-Virginia-University": {
+                "name": "Maptime Morgantown"
             },
             "ym-Western-Michigan-University": {
                 "name": "Geography Club"
@@ -10549,6 +10859,10 @@
             "talk-au": {
                 "name": "Lista dyskusyjna Talk-au",
                 "description": "Miejsce rozmów mapujących z Aussie"
+            },
+            "Maptime-Oceania-Slack": {
+                "name": "Maptime Oceania Slack",
+                "description": "Zarejestruj się tutaj {signupUrl}"
             },
             "talk-nz": {
                 "name": "Lista dyskusyjna Talk-nz"
@@ -10669,8 +10983,20 @@
             "ym-Universidad-de-La-Guajira": {
                 "name": "Grupo Mesh"
             },
+            "ym-Universidad-de-Los-Andes": {
+                "name": "Cartografos Uniandes",
+                "description": "Oddział YouthMappers na Uniwersytecie Andyjskim"
+            },
+            "ym-Universidad-de-San-Buenaventura": {
+                "name": "YouthMappers San Buenaventura",
+                "description": "Oddział YouthMappers na Uniwersytecie San Buenaventura w Kolumbii"
+            },
+            "ym-Universidad-Distrital-Francisco-Jose-de-Caldas": {
+                "name": "YouthMappers w Bogocie"
+            },
             "ym-Universidad-Nacional-de-Colombia": {
-                "name": "Grupo UN"
+                "name": "Grupo UN",
+                "description": "Oddział YouthMappers na Narodowym Uniwersytecie Kolumbii"
             },
             "OSM-EC-telegram": {
                 "name": "OSM Ekwador na Telegramie",

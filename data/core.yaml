@@ -1080,6 +1080,10 @@ en:
     hires: "High resolution"
   mapillary_images:
     tooltip: "Street-level photos from Mapillary"
+  mapillary_map_features:
+    title: "Map Features"
+    tooltip: "Map features from Mapillary"
+    request_data: "Request Data"
   mapillary:
     title: Mapillary
     signs:

@@ -1167,9 +1167,6 @@
                 "devices": {
                     "placeholder": "1, 2, 3..."
                 },
-                "diaper": {
-                    "label": "Menukar Lampin Tersedia"
-                },
                 "display": {
                     "label": "Paparan"
                 },
@@ -2324,9 +2321,6 @@
                 },
                 "office/physician": {
                     "name": "Pakar Perubatan"
-                },
-                "office/political_party": {
-                    "name": "Parti Politik"
                 },
                 "office/private_investigator": {
                     "name": "Pejabat Penyiasat Peribadi"
