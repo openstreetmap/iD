@@ -4727,6 +4727,11 @@ en:
         name: Yield Sign
         # 'terms: give way,yield,sign'
         terms: '<translate with synonyms or related terms for ''Yield Sign'', separated by commas>'
+      highway/informal_path:
+        # 'highway=path, informal=yes, path=desire'
+        name: InformalPath
+        # 'terms: hike,hiking,trackway,trail,walk,desire,informal'
+        terms: '<translate with synonyms or related terms for ''InformalPath'', separated by commas>'
       highway/living_street:
         # highway=living_street
         name: Living Street

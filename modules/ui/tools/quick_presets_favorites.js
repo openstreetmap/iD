@@ -11,7 +11,7 @@ export function uiToolAddFavorite(context) {
     tool.itemsToDraw = function() {
         if (context.presets().getAddable().length) return [];
 
-        var items = context.presets().getFavorites().slice(0, 10);
+        var items = context.presets().getFavorites().slice(0, 20);
 
         items.forEach(function(item, index) {
             var keyCode;
@@ -21,8 +21,10 @@ export function uiToolAddFavorite(context) {
                 keyCode = 0;
             } else if (index < 10) {
                 keyCode = index + 1;
+            } else if (index > 10) {
+                keyCode = null;
             }
-            if (keyCode !== undefined) {
+            if (keyCode !== undefined && keyCode !== null) {
                 item.key = keyCode.toString();
             }
         });
@@ -31,7 +33,7 @@ export function uiToolAddFavorite(context) {
     };
 
     tool.willUpdate = function() {
-        for (var i = 0; i <= 9; i++) {
+        for (var i = 0; i <= 19; i++) {
             context.keybinding().off(i.toString());
         }
     };

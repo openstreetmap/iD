@@ -6902,6 +6902,10 @@
                     "name": "Yield Sign",
                     "terms": "give way,yield,sign"
                 },
+                "highway/informal_path": {
+                    "name": "InformalPath",
+                    "terms": "hike,hiking,trackway,trail,walk,desire,informal"
+                },
                 "highway/living_street": {
                     "name": "Living Street",
                     "terms": ""
