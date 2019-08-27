@@ -239,8 +239,8 @@ export function uiToolQuickPresets(context) {
                 d3_selectAll('#bar button.add-preset')
                     .style('transform', null);
 
-                var y = d3_event.y - dragOrigin.y;
-                if (y > 50) {
+                var deltaY = d3_event.y - dragOrigin.y;
+                if (deltaY > 50) {
                     // dragged out of the top bar, remove
 
                     if (d.isFavorite()) {
