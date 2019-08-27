@@ -11,19 +11,6 @@ import { utilRebind } from '../util/rebind';
 
 export function uiSuccess(context) {
     var MAXEVENTS = 2;
-
-    // All else being equal, rank more "social" communities higher
-    // (anything not in this list receives no adjustment)
-    var COMMUNITYRANK = {
-        'meetup': +5,
-        'slack': +4,
-        'facebook': +3,
-        'reddit': +2,
-        'forum': -2,
-        'mailinglist': -3,
-        'irc': -4
-    };
-
     var detected = utilDetect();
     var dispatch = d3_dispatch('cancel');
     var _changeset;
@@ -101,8 +88,8 @@ export function uiSuccess(context) {
             matchResources.sort(function(a, b) {
                 var aSize = Infinity;
                 var bSize = Infinity;
-                var aRank = COMMUNITYRANK[a.type] || 0;
-                var bRank = COMMUNITYRANK[b.type] || 0;
+                var aOrder = a.order || 0;
+                var bOrder = b.order || 0;
 
                 if (a.featureId) {
                     aSize = data.community.features[a.featureId].properties.area;
@@ -111,7 +98,7 @@ export function uiSuccess(context) {
                     bSize = data.community.features[b.featureId].properties.area;
                 }
 
-                return aSize < bSize ? -1 : aSize > bSize ? 1 : bRank - aRank;
+                return aSize < bSize ? -1 : aSize > bSize ? 1 : bOrder - aOrder;
             });
 
             body
