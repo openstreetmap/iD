@@ -788,7 +788,8 @@ export function uiAssistant(context) {
             var entityEditor = uiEntityEditor(context);
             entityEditor
                 .state('select')
-                .entityIDs(selectedIDs);
+                .entityIDs(selectedIDs)
+                .newFeature(context.mode().newFeature());
             selection.call(entityEditor);
         };
 

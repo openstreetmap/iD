@@ -816,6 +816,10 @@ button.add-note svg.icon {
 }
 .assistant .preset-browser.popover {
     top: 84px;
+    max-height: 300px
+}
+.assistant .preset-browser.popover .popover-content {
+    max-height: 30vh;
 }
 [dir='ltr'] .assistant .preset-browser.popover {
     left: 20px;

@@ -28,6 +28,7 @@ export function uiEntityEditor(context) {
     var _activePreset;
     var _tagReference;
     var _presetFavorite;
+    var _newFeature;
 
     var selectionList = uiSelectionList(context);
     var entityIssues = uiEntityIssues(context);
@@ -41,15 +42,6 @@ export function uiEntityEditor(context) {
         var entityID = singularEntityID();
         var entity = entityID && context.entity(entityID);
         var tags = entity && Object.assign({}, entity.tags);  // shallow copy
-
-        /*
-        var hasNonGeometryTags = entity.hasNonGeometryTags();
-        var isTaglessOrIntersectionVertex = entity.geometry(context.graph()) === 'vertex' &&
-            (!hasNonGeometryTags && !entity.isHighwayIntersection(context.graph()));
-        var issues = context.validator().getEntityIssues(entityID);
-        // start with the preset list if the feature is new and untagged or is an uninteresting vertex
-        var showPresetList = (newFeature && !hasNonGeometryTags) || (isTaglessOrIntersectionVertex && !issues.length);
-        */
 
         // Body
         var body = selection.selectAll('.inspector-body')
@@ -170,6 +162,11 @@ export function uiEntityEditor(context) {
             presetButtonWrap.append('div')
                 .attr('class', 'accessory-buttons');
 
+            // start with the preset browser open if the feature is new and untagged
+            if (_newFeature && !entity.hasNonGeometryTags()) {
+                presetBrowser.setAllowedGeometry([context.geometry(entityID)]);
+                presetBrowser.show();
+            }
         });
 
         manageSection('entity-issues', entityID, function(section) {
@@ -356,6 +353,13 @@ export function uiEntityEditor(context) {
 
         return entityEditor
             .modified(false);
+    };
+
+
+    entityEditor.newFeature = function(val) {
+        if (!arguments.length) return _newFeature;
+        _newFeature = val;
+        return entityEditor;
     };
 
 
