@@ -23,15 +23,14 @@ export function operationCircularize(selectedIDs, context) {
 
 
     operation.available = function(situation) {
-        if (situation === 'toolbar') {
-            var actionDisabled = action.disabled(context.graph());
-            if (actionDisabled) {
-                return false;
-            }
-        }
-        return selectedIDs.length === 1 &&
-            entity.type === 'way' &&
-            new Set(entity.nodes).size > 1;
+        if (selectedIDs.length !== 1 ||
+            entity.type !== 'way' ||
+            new Set(entity.nodes).size <= 1) return false;
+
+        if (situation === 'toolbar' &&
+            action.disabled(context.graph())) return false;
+
+        return true;
     };
 
 
