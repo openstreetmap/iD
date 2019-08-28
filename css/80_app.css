@@ -4421,10 +4421,10 @@ img.tile-debug {
     box-shadow: 0 0 2em black;
 }
 [dir='ltr'] .map-in-map {
-    left: 10px;
+    right: 50px;
 }
 [dir='rtl'] .map-in-map {
-    right: 10px;
+    left: 50px;
 }
 
 .map-in-map-tiles {
