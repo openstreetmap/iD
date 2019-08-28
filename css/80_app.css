@@ -1836,7 +1836,7 @@ button.preset-favorite-button.active .icon {
     padding: 10px;
     margin: 0 10px 10px 10px;
     border-radius: 8px;
-    background: #ececec;
+    background: rgba(0, 0, 0, 0.06);
 }
 .entity-issues .disclosure-wrap-entity_issues:empty,
 .preset-editor .form-fields-container:empty {
