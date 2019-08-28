@@ -133,6 +133,7 @@ export function uiTopToolbar(context) {
                 'spacer',
                 structure,
                 powerSupport,
+                'spacer',
                 waySegments,
                 'spacer',
                 repeatAdd,
