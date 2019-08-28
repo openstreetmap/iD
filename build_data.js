@@ -73,7 +73,6 @@ module.exports = function buildData() {
 
         // The Noun Project icons used
         var tnpIcons = {
-            'tnp-2009642': {} // car in tunnel
         };
 
         // all fields searchable under "add field"

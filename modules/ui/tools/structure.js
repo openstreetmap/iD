@@ -15,19 +15,19 @@ export function uiToolStructure(context) {
     tool.id = 'structure';
     tool.label = t('presets.fields.structure.label');
     tool.key = t('toolbar.structure.key');
-    tool.iconName = 'maki-bridge-15';
+    tool.iconName = 'iD-structure-bridge';
     tool.iconClass = 'icon-30';
 
     var structureNone = {
         id: 'none',
-        icon: 'iD-other-line',
+        icon: 'iD-structure-none',
         label: t('toolbar.structure.none.title'),
         iconClass: 'icon-30',
         tags: {}
     };
     var structureBridge = {
         id: 'bridge',
-        icon: 'maki-bridge-15',
+        icon: 'iD-structure-bridge',
         label: t('presets.fields.structure.options.bridge'),
         iconClass: 'icon-30',
         tags: {
@@ -40,7 +40,7 @@ export function uiToolStructure(context) {
     };
     var structureTunnel = {
         id: 'tunnel',
-        icon: 'tnp-2009642',
+        icon: 'iD-structure-tunnel',
         label: t('presets.fields.structure.options.tunnel'),
         iconClass: 'icon-30',
         tags: {
