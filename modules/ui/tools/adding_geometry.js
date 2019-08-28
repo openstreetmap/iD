@@ -12,6 +12,7 @@ export function uiToolAddingGeometry(context) {
     tool.label = t('info_panels.measurement.geometry');
     tool.iconName = 'iD-logo-features';
     tool.iconClass = 'icon-30';
+    tool.key = t('toolbar.geometry.key');
 
     var items = {
         point: {

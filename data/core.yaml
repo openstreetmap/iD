@@ -20,6 +20,8 @@ en:
     favorites: Favorites
     add_feature: Add Feature
     finish: Finish
+    geometry:
+      key: G
     repeat:
       title: Repeat
       tooltip:
