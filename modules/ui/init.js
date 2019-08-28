@@ -157,11 +157,6 @@ export function uiInit(context) {
             .attr('id', 'footer-wrap')
             .attr('class', 'footer-show');
 
-        footerWrap
-            .append('div')
-            .attr('id', 'scale-block')
-            .call(uiScale(context));
-
         var aboutList = footerWrap
             .append('div')
             .attr('id', 'info-block')
@@ -207,6 +202,10 @@ export function uiInit(context) {
             .attr('tabindex', -1)
             .call(uiContributors(context));
 
+        footerWrap
+            .append('div')
+            .attr('id', 'scale-block')
+            .call(uiScale(context));
 
         // Setup map dimensions and move map to initial center/zoom.
         // This should happen after #content and toolbars exist.
