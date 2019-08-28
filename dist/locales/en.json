@@ -77,7 +77,7 @@
             },
             "instructions": {
                 "add_point": "Click the center of the feature.",
-                "add_vertex": "Click where the feature occurs along a line or area.",
+                "add_vertex": "Click the point along a line or area where the feature occurs.",
                 "add_line": "Click the starting point of the feature.",
                 "draw_line": "Place points along the feature's centerline.",
                 "add_area": "Click any corner of the feature.",
