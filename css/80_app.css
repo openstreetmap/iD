@@ -148,6 +148,7 @@ kbd {
     line-height: 12px;
     min-width: 12px;
     vertical-align: baseline;
+    color: #333;
     background-color: #fcfcfc;
     border: solid 1px #ccc;
     margin: 0 2px;
