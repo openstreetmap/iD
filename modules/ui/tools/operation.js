@@ -55,9 +55,14 @@ export function uiToolOperation(context, operationClass, tool) {
         tool.iconName = 'iD-operation-' + operation.id;
     }
 
+    var parentAllowed = tool.allowed;
+
     tool.allowed = function() {
         var mode = context.mode();
         if (mode.id !== 'select') return false;
+
+        if (parentAllowed && !parentAllowed()) return false;
+
         var op = operationClass(mode.selectedIDs(), context);
         if (op.available()) {
             setOperation(op);
