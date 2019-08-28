@@ -726,7 +726,11 @@ export function uiAssistant(context) {
     function panelAddDrawGeometry(context, mode) {
 
         var message = t('assistant.instructions.' + mode.id.replace('-', '_'));
-        if (mode.id.indexOf('draw') !== -1) {
+        if (mode.id === 'add-point' && mode.preset &&
+            mode.preset.geometry.indexOf('point') === -1) {
+
+            message = t('assistant.instructions.add_vertex');
+        } else if (mode.id.indexOf('draw') !== -1) {
             var way = context.entity(mode.wayID);
             if (way.nodes.length >= 4) {
                 message += '<br/>' + t('assistant.instructions.finishing');
