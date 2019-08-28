@@ -33,14 +33,7 @@ export function uiTopToolbar(context) {
         }),
         merge = uiToolOperation(context, operationMerge),
         orthogonalize = uiToolOperation(context, operationOrthogonalize),
-        reverse = uiToolOperation(context, operationReverse, {
-            allowed: function() {
-                return context.mode().selectedIDs().some(function(id) {
-                    var entity = context.hasEntity(id);
-                    return entity && entity.type === 'way' && (entity.isOneWay() || entity.isSided());
-                });
-            }
-        }),
+        reverse = uiToolOperation(context, operationReverse),
         split = uiToolOperation(context, operationSplit),
         straighten = uiToolOperation(context, operationStraighten);
 

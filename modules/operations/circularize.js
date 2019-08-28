@@ -22,7 +22,13 @@ export function operationCircularize(selectedIDs, context) {
     };
 
 
-    operation.available = function() {
+    operation.available = function(situation) {
+        if (situation === 'toolbar') {
+            var actionDisabled = action.disabled(context.graph());
+            if (actionDisabled) {
+                return false;
+            }
+        }
         return selectedIDs.length === 1 &&
             entity.type === 'way' &&
             new Set(entity.nodes).size > 1;
