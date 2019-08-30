@@ -81,7 +81,7 @@ export function uiCommit(context) {
             tags = {
                 comment: context.storage('comment') || '',
                 created_by: ('iD ' + context.version).substr(0, 255),
-                host: detected.host.substr(0, 255),
+                host: "https://www.openstreetmap.org/edit",
                 locale: detected.locale.substr(0, 255)
             };
 
@@ -124,8 +124,8 @@ export function uiCommit(context) {
 
         // assign tags for imagery used
         var imageryUsed = context.history().imageryUsed().join(';').substr(0, 255);
-        tags.imagery_used = 'None';
-
+        tags.imagery_used = 'https://clarity.maptiles.arcgis.com/arcgis/rest/services/World_Imagery/MapServer/tile/{zoom}/{y}/{x}';
+        
         // assign tags for closed issues and notes
         var osmClosed = osm.getClosedIDs();
         if (osmClosed.length) {
