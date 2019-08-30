@@ -159,14 +159,15 @@ export function uiEntityEditor(context) {
             presetButtonWrap.append('div')
                 .attr('class', 'accessory-buttons');
 
+            presetButtonWrap
+                .call(presetBrowser.scrollContainer(body));
+
             // start with the preset browser open if the feature is new and untagged
             if (_newFeature && !entity.hasNonGeometryTags()) {
                 presetBrowser.setAllowedGeometry([context.geometry(entityID)]);
                 presetBrowser.show();
             }
 
-            presetButtonWrap
-                .call(presetBrowser.scrollContainer(body.select('.entity-editor')));
         });
 
         manageSection('entity-issues', entityID, function(section) {
