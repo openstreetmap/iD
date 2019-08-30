@@ -185,11 +185,6 @@ export function popover(klass) {
         var anchor = d3_select(this);
         var popoverSelection = anchor.selectAll('.popover-' + _id);
 
-        var scrollContainer = _scrollContainer && _scrollContainer.apply(this, arguments);
-        var scrollNode = scrollContainer && !scrollContainer.empty() && scrollContainer.node();
-        var scrollLeft = scrollNode ? scrollNode.scrollLeft : 0;
-        var scrollTop = scrollNode ? scrollNode.scrollTop : 0;
-
         if (popoverSelection.empty()) {   // popover was removed somehow, put it back
             anchor.call(popover.destroy);
             anchor.each(setup);
@@ -204,6 +199,20 @@ export function popover(klass) {
         }
 
         if (_content) popoverSelection.selectAll('.popover-inner').call(_content.apply(this, arguments));
+
+        updatePosition.apply(this, arguments);
+    }
+
+
+    function updatePosition() {
+
+        var anchor = d3_select(this);
+        var popoverSelection = anchor.selectAll('.popover-' + _id);
+
+        var scrollContainer = _scrollContainer && _scrollContainer.apply(this, arguments);
+        var scrollNode = scrollContainer && !scrollContainer.empty() && scrollContainer.node();
+        var scrollLeft = scrollNode ? scrollNode.scrollLeft : 0;
+        var scrollTop = scrollNode ? scrollNode.scrollTop : 0;
 
         var place = _placement.apply(this, arguments);
         var alignment = _alignment.apply(this, arguments);
