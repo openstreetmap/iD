@@ -45,7 +45,8 @@ export function uiToolUndoRedo(context) {
             return uiTooltipHtml(d.annotation() ?
                 t(d.id + '.tooltip', {action: d.annotation()}) :
                 t(d.id + '.nothing'), d.cmd);
-        });
+        })
+        .scrollContainer(d3_select('#bar'));
 
     var buttons;
 

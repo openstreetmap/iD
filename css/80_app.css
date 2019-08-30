@@ -483,33 +483,52 @@ button[disabled].action:hover {
 
 /* Toolbar / Persistent UI Elements
 ------------------------------------------------------- */
-#bar {
-    display: flex;
-    flex-flow: row nowrap;
-    justify-content: space-between;
+#bar-wrap {
     position: absolute;
-    padding: 10px 5px 0px 5px;
     left: 0;
     top: 0;
     right: 0;
     z-index: 101;
+}
+#bar {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-between;
+    padding: 10px 0 0 0;
+    overflow-x: auto;
+    overflow-y: hidden;
+    height: 100%;
+    width: 100%;
+
+    /* hide scrollbar but allow scrolling */
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none; /* IE, Edge */
+}
+#bar::-webkit-scrollbar {
+    display: none; /* Chrome, Safari, Opera */
 }
 #bar .toolbar-item {
     display: flex;
     flex: 0 1 auto;
     flex-flow: column wrap;
     justify-content: center;
-    position: relative;
 }
 #bar .toolbar-item .item-content {
     display: flex;
     flex: 0 1 auto;
     flex-flow: row nowrap;
     justify-content: center;
-    position: relative;
     height: 40px;
     width: auto;
     margin: 0 5px;
+}
+[dir='ltr'] #bar .toolbar-item:last-child .item-content,
+[dir='rtl'] #bar .toolbar-item:first-child .item-content {
+    margin-right: 10px;
+}
+[dir='ltr'] #bar .toolbar-item:first-child .item-content,
+[dir='rtl'] #bar .toolbar-item:last-child .item-content {
+    margin-left: 10px;
 }
 #bar .toolbar-item .item-label {
     text-align: center;
@@ -639,35 +658,25 @@ button.add-note svg.icon {
     margin-left: 1px;
 }
 
-/* Popover
+/* poplist
 ------------------------------------------------------- */
-.popover {
+.poplist {
     border: 0.5px solid #DCDCDC;
     border-radius: 6px;
-    position: absolute;
     max-height: 600px;
-    top: 44px;
-    width: 200%;
     min-width: 160px;
     max-width: 325px;
-    margin: auto;
-    left: auto;
-    right: auto;
     z-index: 300;
-    display: flex;
     flex-direction: column;
     -webkit-box-shadow: 0px 0px 3px 0px rgba(0,0,0,0.29);
     -moz-box-shadow: 0px 0px 3px 0px rgba(0,0,0,0.29);
     box-shadow: 0px 0px 3px 0px rgba(0,0,0,0.29);
 }
-[dir='ltr'] .popover {
-    left: 0;
-}
-[dir='rtl'] .popover {
-    right: 0;
+.poplist.in {
+    display: flex;
 }
 
-.popover input[type='search'] {
+.poplist input[type='search'] {
     position: relative;
     width: 100%;
     height: 100%;
@@ -678,11 +687,11 @@ button.add-note svg.icon {
     border-top-left-radius: 6px;
     border-top-right-radius: 6px;
 }
-.popover input[type='search'],
-.popover input[type='search']:focus {
+.poplist input[type='search'],
+.poplist input[type='search']:focus {
     background: #f6f6f6;
 }
-.popover .search-icon {
+.poplist .search-icon {
     color: #333;
     display: block;
     position: absolute;
@@ -690,54 +699,54 @@ button.add-note svg.icon {
     top: 10px;
     pointer-events: none;
 }
-[dir='rtl'] .popover .search-icon {
+[dir='rtl'] .poplist .search-icon {
     left: auto;
     right: 10px;
 }
-.popover .popover-content {
+.poplist .poplist-content {
     overflow-y: auto;
     max-height: 60vh;
 }
-.popover-content:first-child {
+.poplist-content:first-child {
     border-top-left-radius: inherit;
     border-top-right-radius: inherit;
 }
-.popover-content:last-child {
+.poplist-content:last-child {
     border-bottom-left-radius: inherit;
     border-bottom-right-radius: inherit;
 }
 /* ensure corners are rounded in Chrome
-.popover .popover-content {
+.poplist .poplist-content {
     -webkit-mask-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAIAAACQd1PeAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAA5JREFUeNpiYGBgAAgwAAAEAAGbA+oJAAAAAElFTkSuQmCC);
 }
  */
-.popover::-webkit-scrollbar {
+.poplist::-webkit-scrollbar {
     /* don't overlap rounded corners */
     background: transparent;
 }
-.popover .list {
+.poplist .list {
     height: 100%;
 }
-.popover .list-item > .row {
+.poplist .list-item > .row {
     display: flex;
     position: relative;
     padding: 2px;
     min-height: 40px;
     align-items: center;
 }
-.popover .list-item:not(:last-of-type) .row,
-.popover .subsection.subitems .list-item .row {
+.poplist .list-item:not(:last-of-type) .row,
+.poplist .subsection.subitems .list-item .row {
     border-bottom: 1px solid #DCDCDC;
 }
-.popover .list-item .item-icon {
+.poplist .list-item .item-icon {
     flex: 0 0 auto;
     position: relative;
     padding: 0 8px;
 }
-.popover .list-item .item-icon.icon-30 {
+.poplist .list-item .item-icon.icon-30 {
     padding: 0 3px;
 }
-.popover .list-item .label {
+.poplist .list-item .label {
     font-weight: bold;
     font-size: 12px;
     padding-left: 2px;
@@ -749,23 +758,23 @@ button.add-note svg.icon {
     line-height: 1.3em;
     width: 100%;
 }
-.popover .list-item .label .namepart:nth-child(2) {
+.poplist .list-item .label .namepart:nth-child(2) {
     font-weight: normal;
 }
-.popover .list-item.disabled .preset-icon-container,
-.popover .list-item.disabled .label {
+.poplist .list-item.disabled .preset-icon-container,
+.poplist .list-item.disabled .label {
     opacity: 0.55;
 }
-[dir='ltr'] .popover .list-item .label .icon.inline {
+[dir='ltr'] .poplist .list-item .label .icon.inline {
     margin-left: 0;
 }
-[dir='rtl'] .popover .list-item .label .icon.inline {
+[dir='rtl'] .poplist .list-item .label .icon.inline {
     margin-right: 0;
 }
-.popover .list-item .row > *:not(button) {
+.poplist .list-item .row > *:not(button) {
     pointer-events: none;
 }
-.popover .list-item button.choose {
+.poplist .list-item button.choose {
     position: absolute;
     border-radius: 0;
     height: 100%;
@@ -773,20 +782,20 @@ button.add-note svg.icon {
     top: 0;
     left: 0;
 }
-.popover .list-item button.choose:hover,
-.popover .list-item button.choose:focus {
+.poplist .list-item button.choose:hover,
+.poplist .list-item button.choose:focus {
     background: #fff;
 }
-.popover .list-item.focused:not(.disabled) button.choose {
+.poplist .list-item.focused:not(.disabled) button.choose {
     background: #e8ebff;
 }
-.popover .list-item button.choose.disabled {
+.poplist .list-item button.choose.disabled {
     background-color: #ececec;
 }
-.popover .subsection .list-item button.choose {
+.poplist .subsection .list-item button.choose {
     opacity: 0.85;
 }
-.popover .list-item .accessory {
+.poplist .list-item .accessory {
     position: relative;
     flex: 0 0 auto;
     color: #808080;
@@ -794,46 +803,46 @@ button.add-note svg.icon {
     padding-right: 3px;
     padding-left: 3px;
 }
-.popover .list-item button.accessory:hover {
+.poplist .list-item button.accessory:hover {
     color: #666;
 }
-.popover .list-item .checkmark {
+.poplist .list-item .checkmark {
     color: #7092ff;
     padding: 0 3px;
 }
-.popover .subsection {
+.poplist .subsection {
     background-color: #CBCBCB;
 }
-[dir='ltr'] .popover .subitems {
+[dir='ltr'] .poplist .subitems {
     padding-left: 6px;
 }
-[dir='rtl'] .popover .subitems {
+[dir='rtl'] .poplist .subitems {
     padding-right: 6px;
 }
 /* Preset browser
 ------------------------------------------------------- */
-.preset-browser.popover {
+.preset-browser.poplist {
     min-width: 300px;
 }
-.assistant .preset-browser.popover {
+.assistant .preset-browser.poplist {
     top: 84px;
     max-height: 300px
 }
-.assistant .preset-browser.popover .popover-content {
+.assistant .preset-browser.poplist .poplist-content {
     max-height: 30vh;
 }
-[dir='ltr'] .assistant .preset-browser.popover {
+[dir='ltr'] .assistant .preset-browser.poplist {
     left: 20px;
 }
-[dir='rtl'] .assistant .preset-browser.popover {
+[dir='rtl'] .assistant .preset-browser.poplist {
     right: 20px;
 }
-.preset-browser .popover-header {
+.preset-browser .poplist-header {
     height: 40px;
     border-bottom: 2px solid #DCDCDC;
     flex: 0 0 auto;
 }
-.preset-browser .popover-footer {
+.preset-browser .poplist-footer {
     padding: 5px 10px 5px 10px;
     background: #f6f6f6;
     border-top: 1px solid #DCDCDC;
@@ -842,22 +851,22 @@ button.add-note svg.icon {
     border-bottom-left-radius: 6px;
     border-bottom-right-radius: 6px;
 }
-.preset-browser .popover-footer .message {
+.preset-browser .poplist-footer .message {
     color: #666666;
     flex-grow: 1;
 }
-.preset-browser .popover-footer button.filter {
+.preset-browser .poplist-footer button.filter {
     height: 20px;
     background: transparent;
     color: #666;
 }
-.preset-browser .popover-footer button.filter.active {
+.preset-browser .poplist-footer button.filter.active {
     color: #7092ff;
 }
-.preset-browser .popover-footer button.filter:hover {
+.preset-browser .poplist-footer button.filter:hover {
     color: #333;
 }
-.preset-browser .popover-footer button.filter.active:hover {
+.preset-browser .poplist-footer button.filter.active:hover {
     color: #597be7;
 }
 .preset-browser .subsection .tag-reference-body {
@@ -1524,10 +1533,10 @@ a.hide-toggle {
 
 .preset-list-item {
     margin-bottom: 10px;
+    position: static;
 }
 
 .preset-list-button-wrap {
-    position: relative;
     height: 62px;
     display: flex;
     border: 1px solid #ccc;
@@ -3449,7 +3458,7 @@ div.full-screen > button:hover {
 
 /* make sure tooltip fits in map-control panel */
 /* if too wide, placement will be wrong the first time it displays */
-.layer-list li.best .tooltip-inner {
+.layer-list li.best .popover-inner {
     max-width: 160px;
 }
 
@@ -5366,9 +5375,11 @@ svg.mouseclick use.right {
 
 /* Tooltips
 ------------------------------------------------------- */
-.tooltip {
+.popover {
     position: absolute;
     display: none;
+}
+.tooltip {
     color: #333;
     font-size: 12px;
     white-space: initial;
@@ -5376,32 +5387,60 @@ svg.mouseclick use.right {
 .tooltip:not(.curtain-tooltip) {
     pointer-events: none;
 }
-.tooltip.in {
-    opacity: 0.95;
+.popover.in {
     z-index: 5000;
     height: auto;
     display: block;
 }
+.tooltip.in {
+    opacity: 0.95;
+}
+.popover.top {
+    margin-top: -4px;
+}
+.popover.right {
+    margin-left: 4px;
+}
+.popover.bottom {
+    margin-top: 4px;
+}
+.popover.left {
+    margin-left: -4px;
+}
+.popover.arrowed.top {
+    margin-top: -10px;
+}
+.popover.arrowed.right {
+    margin-left: 10px;
+}
+.popover.arrowed.bottom {
+    margin-top: 10px;
+}
+.popover.arrowed.left {
+    margin-left: -10px;
+}
+.bar-button .tooltip.arrowed.bottom {
+    margin-top: 20px;
+}
 .tooltip.top {
-    margin-top: -20px;
     text-align: center;
 }
 .tooltip.right {
-    margin-left: 20px;
     text-align: left;
 }
 .tooltip.bottom {
-    margin-top: 20px;
     text-align: center;
 }
 .tooltip.left {
-    margin-left: -20px;
     text-align: right;
 }
 
-.tooltip-inner {
-    display: inline-block;
-    border-radius: 3px;
+.popover-inner {
+    border-radius: inherit;
+}
+
+.tooltip .popover-inner {
+    border-radius: 4px;
     max-width: 200px;
     min-width: 80px;
     padding: 10px;
@@ -5457,41 +5496,43 @@ svg.mouseclick use.right {
     border-right-color: #fff;
     border-width: 5px 5px 5px 0;
 }
-
-.tooltip-arrow {
+.popover-arrow {
     position: absolute;
     width: 0;
     height: 0;
     border-color: transparent;
     border-style: solid;
 }
-.tooltip.top .tooltip-arrow {
+.popover.top .popover-arrow {
     bottom: -5px;
     left: 50%;
     margin-left: -5px;
     border-top-color: #fff;
     border-width: 5px 5px 0;
 }
-.tooltip.right .tooltip-arrow {
+.popover.right .popover-arrow {
     top: 50%;
     left: -5px;
     margin-top: -5px;
     border-right-color: #fff;
     border-width: 5px 5px 5px 0;
 }
-.tooltip.left .tooltip-arrow {
+.popover.left .popover-arrow {
     top: 50%;
     right: -5px;
     margin-top: -5px;
     border-left-color: #fff;
     border-width: 5px 0 5px 5px;
 }
-.tooltip.bottom .tooltip-arrow {
+.popover.bottom .popover-arrow {
     top: -5px;
     left: 50%;
     margin-left: -5px;
     border-bottom-color: #fff;
     border-width: 0 5px 5px;
+}
+.popover:not(.arrowed) .popover-arrow {
+    display: none;
 }
 
 .tooltip-heading {
@@ -5509,40 +5550,40 @@ svg.mouseclick use.right {
     margin: -10px -10px -10px -10px;
     border-radius: 0 0 3px 3px;
 }
-.tooltip-inner .tooltip-text {
+.popover-inner .tooltip-text {
     margin-bottom: 20px;
 }
-.tooltip-inner .shortcut {
+.popover-inner .shortcut {
     font-weight: bold;
     margin-left: 5px;
 }
 
-[dir='rtl'] .tooltip-inner .shortcut {
+[dir='rtl'] .popover-inner .shortcut {
     margin-left: 0;
     margin-right: 5px;
 }
 
 /* dark tooltips for sidebar / panels */
-.tooltip.dark.top .tooltip-arrow,
-.map-pane .tooltip.top .tooltip-arrow {
+.tooltip.dark.top .popover-arrow,
+.map-pane .tooltip.top .popover-arrow {
     border-top-color: #000;
 }
-.tooltip.dark.bottom .tooltip-arrow,
-.map-pane .tooltip.bottom .tooltip-arrow {
+.tooltip.dark.bottom .popover-arrow,
+.map-pane .tooltip.bottom .popover-arrow {
     border-bottom-color: #000;
 }
-.tooltip.dark.left .tooltip-arrow,
-.map-pane .tooltip.left .tooltip-arrow {
+.tooltip.dark.left .popover-arrow,
+.map-pane .tooltip.left .popover-arrow {
     border-left-color: #000;
 }
-.tooltip.dark.right .tooltip-arrow,
-.map-pane .tooltip.right .tooltip-arrow {
+.tooltip.dark.right .popover-arrow,
+.map-pane .tooltip.right .popover-arrow {
     border-right-color: #000;
 }
-.tooltip.dark .tooltip-inner,
+.tooltip.dark .popover-inner,
 .tooltip.dark .tooltip-heading,
 .tooltip.dark .keyhint-wrap,
-.map-pane .tooltip-inner,
+.map-pane .popover-inner,
 .map-pane .tooltip-heading,
 .map-pane .keyhint-wrap {
     background: #000;
@@ -5556,44 +5597,6 @@ svg.mouseclick use.right {
     margin-top: -5px;
 }
 
-/* Uncramp map-control tooltips */
-.map-control .tooltip {
-    min-width: 160px;
-}
-.map-control .shortcuts .tooltip {
-    max-width: 160px;
-}
-
-/* Move over tooltips that are near the edge of screen */
-[dir='ltr'] #bar .toolbar-item:first-child .bar-button .tooltip {
-    left: 0 !important;
-}
-[dir='rtl'] #bar .toolbar-item:first-child .bar-button .tooltip {
-    right: 0 !important;
-}
-[dir='ltr'] #bar .toolbar-item:first-child .bar-button .tooltip .tooltip-arrow {
-    left: 20px;
-}
-[dir='rtl'] #bar .toolbar-item:first-child .bar-button .tooltip .tooltip-arrow {
-    right: 20px;
-}
-[dir='ltr'] #bar .toolbar-item:last-child .bar-button .tooltip {
-    left: auto !important;
-    right: 0 !important;
-}
-[dir='rtl'] #bar .toolbar-item:last-child .bar-button .tooltip {
-    right: auto !important;
-    left: 0 !important;
-}
-[dir='ltr'] #bar .toolbar-item:last-child .bar-button .tooltip .tooltip-arrow {
-    left: auto;
-    right: 20px;
-}
-[dir='rtl'] #bar .toolbar-item:last-child .bar-button .tooltip .tooltip-arrow {
-    right: auto;
-    left: 20px;
-}
-
 li:first-of-type .badge .tooltip,
 li.hide + li.version .badge .tooltip {
     left: auto !important;
@@ -5604,13 +5607,13 @@ li.hide + li.version .badge .tooltip {
     left: 5px !important;
     right: auto !important;
 }
-li:first-of-type .badge .tooltip .tooltip-arrow,
-li.hide + li.version .badge .tooltip .tooltip-arrow {
+li:first-of-type .badge .tooltip .popover-arrow,
+li.hide + li.version .badge .tooltip .popover-arrow {
     right: 15px !important;
     left: auto !important;
 }
-[dir='rtl'] li:first-of-type .badge .tooltip .tooltip-arrow,
-[dir='rtl'] li.hide + li.version .badge .tooltip .tooltip-arrow {
+[dir='rtl'] li:first-of-type .badge .tooltip .popover-arrow,
+[dir='rtl'] li.hide + li.version .badge .tooltip .popover-arrow {
     left: 15px !important;
     right: auto !important;
 }
@@ -5770,14 +5773,14 @@ li.hide + li.version .badge .tooltip .tooltip-arrow {
     text-align: right;
 }
 
-.curtain-tooltip .tooltip-inner {
+.curtain-tooltip .popover-inner {
     font-size: 15px;
     position: relative;
     padding: 20px;
 }
 
-.curtain-tooltip .tooltip-inner .button-section,
-.curtain-tooltip .tooltip-inner .instruction {
+.curtain-tooltip .popover-inner .button-section,
+.curtain-tooltip .popover-inner .instruction {
     font-weight: bold;
     display: block;
     border-top: 1px solid #ccc;
@@ -5787,17 +5790,17 @@ li.hide + li.version .badge .tooltip .tooltip-arrow {
     padding: 10px 20px 0 20px;
 }
 
-.curtain-tooltip .tooltip-inner .button-section button {
+.curtain-tooltip .popover-inner .button-section button {
     width: 66.6666%;
 }
 
-.curtain-tooltip .tooltip-inner .instruction:only-child {
+.curtain-tooltip .popover-inner .instruction:only-child {
     border: 0;
     padding: 0;
     margin: 0;
 }
 
-.curtain-tooltip .tooltip-inner .icon.pre-text {
+.curtain-tooltip .popover-inner .icon.pre-text {
     vertical-align: text-top;
     margin-right: 0;
     margin-left: 0;

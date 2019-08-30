@@ -52,11 +52,6 @@ export function uiEntityEditor(context) {
             .append('div')
             .attr('class', 'entity-editor inspector-body sep-top');
 
-        if (!bodyEnter.empty()) {
-            bodyEnter
-                .call(presetBrowser.render);
-        }
-
         // Update
         body = body
             .merge(bodyEnter);
@@ -151,9 +146,11 @@ export function uiEntityEditor(context) {
                 .append('div')
                 .attr('class', 'preset-list-button-wrap');
 
-            presetButtonWrap.append('button')
+            var presetButton = presetButtonWrap.append('button')
                 .attr('class', 'preset-list-button preset-reset')
-                .call(tooltip().title(t('inspector.back_tooltip')).placement('bottom'))
+                .call(tooltip().title(t('inspector.back_tooltip')).placement('bottom'));
+
+            presetButton
                 .append('div')
                 .attr('class', 'label')
                 .append('div')
@@ -167,6 +164,9 @@ export function uiEntityEditor(context) {
                 presetBrowser.setAllowedGeometry([context.geometry(entityID)]);
                 presetBrowser.show();
             }
+
+            presetButtonWrap
+                .call(presetBrowser.scrollContainer(body.select('.entity-editor')));
         });
 
         manageSection('entity-issues', entityID, function(section) {
