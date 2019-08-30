@@ -666,7 +666,6 @@ button.add-note svg.icon {
     max-height: 600px;
     min-width: 160px;
     max-width: 325px;
-    z-index: 300;
     flex-direction: column;
     -webkit-box-shadow: 0px 0px 3px 0px rgba(0,0,0,0.29);
     -moz-box-shadow: 0px 0px 3px 0px rgba(0,0,0,0.29);
@@ -5622,8 +5621,6 @@ li.hide + li.version .badge .tooltip .popover-arrow {
 /* Contextual Edit Menu
 ------------------------------------------------------- */
 .edit-menu-tooltip {
-    display: none;
-    position: absolute;
     width: 200px;
 }
 
