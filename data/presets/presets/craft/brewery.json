@@ -4,6 +4,10 @@
         "{craft}",
         "product"
     ],
+    "moreFields": [
+        "{craft}",
+        "min_age"
+    ],
     "geometry": [
         "point",
         "area"

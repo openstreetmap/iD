@@ -1,6 +1,7 @@
 {
     "icon": "maki-stadium",
     "fields": [
+        "{playground}",
         "bench"
     ],
     "geometry": [

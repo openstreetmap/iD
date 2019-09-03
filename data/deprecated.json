@@ -548,8 +548,16 @@
       "replace": {"craft": "winery"}
     },
     {
+      "old": {"maxage": "*"},
+      "replace": {"max_age": "$1"}
+    },
+    {
       "old": {"memorial": "plate"},
       "replace": {"memorial": "plaque"}
+    },
+    {
+      "old": {"minage": "*"},
+      "replace": {"min_age": "$1"}
     },
     {
       "old": {"mining_resource": "*"},

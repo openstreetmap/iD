@@ -4,6 +4,7 @@
         "name",
         "operator",
         "operator/type",
+        "waste",
         "address",
         "opening_hours",
         "fee",
