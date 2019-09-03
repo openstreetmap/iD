@@ -68,7 +68,7 @@
     "concat-files": "^0.1.1",
     "d3": "~5.9.2",
     "editor-layer-index": "github:osmlab/editor-layer-index#gh-pages",
-    "eslint": "^6.2.0",
+    "eslint": "^6.3.0",
     "gaze": "^1.1.1",
     "glob": "^7.1.0",
     "happen": "^0.3.1",
