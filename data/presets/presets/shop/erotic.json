@@ -1,5 +1,9 @@
 {
     "icon": "maki-shop",
+    "fields": [
+        "{shop}",
+        "min_age"
+    ],
     "geometry": [
         "point",
         "area"

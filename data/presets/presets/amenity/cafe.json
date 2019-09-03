@@ -18,6 +18,7 @@
         "email",
         "fax",
         "internet_access/ssid",
+        "min_age",
         "not/name",
         "opening_hours",
         "payment_multi",

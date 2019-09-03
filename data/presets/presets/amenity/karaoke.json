@@ -12,6 +12,7 @@
         "air_conditioning",
         "email",
         "fax",
+        "min_age",
         "payment_multi",
         "phone",
         "smoking",

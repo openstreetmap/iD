@@ -2622,6 +2622,10 @@
                     "label": "Type",
                     "terms": ""
                 },
+                "baby_seat": {
+                    "label": "Baby Seat",
+                    "terms": ""
+                },
                 "backrest": {
                     "label": "Backrest",
                     "terms": ""
@@ -3605,6 +3609,10 @@
                     "label": "Material",
                     "terms": ""
                 },
+                "max_age": {
+                    "label": "Maximum Age",
+                    "terms": "upper age limit"
+                },
                 "maxheight": {
                     "label": "Max Height",
                     "terms": "",
@@ -3639,6 +3647,10 @@
                 "microbrewery": {
                     "label": "Microbrewery",
                     "terms": "brewpub,craft beer"
+                },
+                "min_age": {
+                    "label": "Minimum Age",
+                    "terms": "lower age limit"
                 },
                 "minspeed": {
                     "label": "Minimum Speed Limit",
@@ -3962,18 +3974,6 @@
                 },
                 "playground": {
                     "label": "Type",
-                    "terms": ""
-                },
-                "playground/baby": {
-                    "label": "Baby Seat",
-                    "terms": ""
-                },
-                "playground/max_age": {
-                    "label": "Maximum Age",
-                    "terms": ""
-                },
-                "playground/min_age": {
-                    "label": "Minimum Age",
                     "terms": ""
                 },
                 "polling_station": {

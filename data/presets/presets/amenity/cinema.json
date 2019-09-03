@@ -12,6 +12,7 @@
         "air_conditioning",
         "email",
         "fax",
+        "min_age",
         "phone",
         "website",
         "wheelchair"

@@ -229,6 +229,9 @@ en:
       attraction:
         # attraction=*
         label: Type
+      baby_seat:
+        # baby=*
+        label: Baby Seat
       backrest:
         # backrest=*
         label: Backrest
@@ -1195,6 +1198,11 @@ en:
         # material=*
         label: Material
         terms: '[translate with synonyms or related terms for ''Material'', separated by commas]'
+      max_age:
+        # max_age=*
+        label: Maximum Age
+        # 'terms: upper age limit'
+        terms: '[translate with synonyms or related terms for ''Maximum Age'', separated by commas]'
       maxheight:
         # maxheight=*
         label: Max Height
@@ -1233,6 +1241,11 @@ en:
         label: Microbrewery
         # 'terms: brewpub,craft beer'
         terms: '[translate with synonyms or related terms for ''Microbrewery'', separated by commas]'
+      min_age:
+        # min_age=*
+        label: Minimum Age
+        # 'terms: lower age limit'
+        terms: '[translate with synonyms or related terms for ''Minimum Age'', separated by commas]'
       minspeed:
         # minspeed=*
         label: Minimum Speed Limit
@@ -1632,15 +1645,6 @@ en:
       playground:
         # playground=*
         label: Type
-      playground/baby:
-        # baby=*
-        label: Baby Seat
-      playground/max_age:
-        # max_age=*
-        label: Maximum Age
-      playground/min_age:
-        # min_age=*
-        label: Minimum Age
       polling_station:
         # polling_station=*
         label: Polling Place

@@ -6,14 +6,15 @@
         "building_area",
         "address",
         "website",
-        "internet_access"
+        "internet_access",
+        "internet_access/fee",
+        "internet_access/ssid"
     ],
     "moreFields" : [
         "air_conditioning",
         "email",
         "fax",
-        "internet_access/fee",
-        "internet_access/ssid",
+        "min_age",
         "phone",
         "smoking",
         "wheelchair"

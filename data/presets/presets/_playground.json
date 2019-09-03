@@ -1,7 +1,11 @@
 {
     "icon": "maki-playground",
     "fields": [
-        "playground"
+        "playground",
+        "min_age",
+        "max_age",
+        "wheelchair",
+        "height"
     ],
     "geometry": [
         "point",
