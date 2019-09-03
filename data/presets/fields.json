@@ -413,6 +413,7 @@
     "voltage/secondary": {"key": "voltage:secondary", "type": "combo", "label": "Secondary Voltage"},
     "voltage/tertiary": {"key": "voltage:tertiary", "type": "combo", "label": "Tertiary Voltage"},
     "wall": {"key": "wall", "type": "combo", "label": "Type"},
+    "waste": {"key": "waste", "type": "semiCombo", "label": "Waste"},
     "water_point": {"key": "water_point", "type": "check", "label": "Water Point"},
     "water_source": {"key": "water_source", "default": "main", "type": "combo", "label": "Water Source"},
     "water_volume": {"key": "water_volume", "type": "number", "label": "Water Reserve Volume (m³)", "snake_case": false},

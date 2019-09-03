@@ -2445,6 +2445,9 @@ en:
       wall:
         # wall=*
         label: Type
+      waste:
+        # waste=*
+        label: Waste
       water:
         # water=*
         label: Type

@@ -4752,6 +4752,10 @@
                     "label": "Type",
                     "terms": ""
                 },
+                "waste": {
+                    "label": "Waste",
+                    "terms": ""
+                },
                 "water_point": {
                     "label": "Water Point",
                     "terms": ""
