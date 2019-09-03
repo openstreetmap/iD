@@ -1179,7 +1179,7 @@ a.hide-toggle {
     width: 40px;
 }
 .assistant .assistant-header .header-body {
-    margin-top: 10px;
+    margin-top: 8px;
 }
 .assistant .assistant-header .header-body:empty {
     display: none;
@@ -1240,7 +1240,7 @@ a.hide-toggle {
     min-width: 225px;
 }
 .assistant .main-footer {
-    margin-top: 12px;
+    margin-top: 15px;
 }
 .assistant button.geocode-item,
 .assistant .main-footer button {
@@ -1290,7 +1290,6 @@ a.hide-toggle {
 }
 .assistant.prominent .body-text {
     font-size: 14px;
-    line-height: 1.35em;
 }
 /* note icon */
 .assistant .note-header-icon,
@@ -4857,7 +4856,7 @@ img.tile-debug {
 }
 
 .source-switch a {
-    padding: 2px 4px 4px 4px;
+    padding: 2px 4px 2px 4px;
     border-radius: 2px;
 }
 .source-switch a.live {
