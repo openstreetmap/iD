@@ -258,8 +258,8 @@ var parsers = {
             id: uid,
             display_name: attrs.display_name && attrs.display_name.value,
             account_created: attrs.account_created && attrs.account_created.value,
-            changesets_count: 0,
-            active_blocks: 0
+            changesets_count: '0',
+            active_blocks: '0'
         };
 
         var img = obj.getElementsByTagName('img');

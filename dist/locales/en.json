@@ -111,7 +111,7 @@
                     }
                 },
                 "blocks": {
-                    "active": "You have an active block on your OpenStreetMap account, {displayName}, and cannot upload changes."
+                    "active": "Your OpenStreetMap account, {displayName}, has an active block and cannot upload changes."
                 },
                 "start_mapping": "Start Mapping"
             },
