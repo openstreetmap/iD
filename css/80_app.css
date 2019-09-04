@@ -1064,6 +1064,7 @@ li.hide + li.version .badge .tooltip .popover-arrow {
 .poplist .subsection {
     background-color: #CBCBCB;
     display: flex;
+    flex-direction: column;
 }
 [dir='ltr'] .poplist .subitems {
     padding-left: 6px;
