@@ -1508,6 +1508,7 @@ a.hide-toggle {
 
 .feature-list-pane {
     width: 100%;
+    min-height: 0;
     display: flex;
     flex-direction: column;
 }
