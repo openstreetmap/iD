@@ -1335,7 +1335,7 @@ a.hide-toggle {
     text-align: initial;
     display: flex;
 }
-.feature-list-item {
+.selection-list .feature-list-item {
     border-bottom: 1px solid rgba(127, 127, 127, 0.5);
 }
 .assistant .no-results-item,
