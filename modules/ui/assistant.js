@@ -404,6 +404,9 @@ export function uiAssistant(context) {
             bodyTextArea.selectAll('a')
                 .attr('href', '#')
                 .on('click', function() {
+                    d3_event.preventDefault();
+                    d3_event.stopPropagation();
+
                     context.isFirstSession = false;
                     updateDidEditStatus();
                     context.container().call(uiIntro(context));
@@ -416,6 +419,9 @@ export function uiAssistant(context) {
                 .append('button')
                 .attr('class', 'primary')
                 .on('click', function() {
+                    d3_event.preventDefault();
+                    d3_event.stopPropagation();
+
                     updateDidEditStatus();
                     redraw();
                 })
@@ -576,6 +582,9 @@ export function uiAssistant(context) {
             mainFooter.append('button')
                 .attr('class', 'primary')
                 .on('click', function() {
+                    d3_event.preventDefault();
+                    d3_event.stopPropagation();
+
                     updateDidEditStatus();
                     context.container().selectAll('#content')
                         .attr('class', 'active');
@@ -588,6 +597,9 @@ export function uiAssistant(context) {
             mainFooter.append('button')
                 .attr('class', 'destructive')
                 .on('click', function() {
+                    d3_event.preventDefault();
+                    d3_event.stopPropagation();
+
                     // don't show another welcome screen after discarding changes
                     updateDidEditStatus();
                     context.container().selectAll('#content')
