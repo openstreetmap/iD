@@ -658,7 +658,258 @@ button.add-note svg.icon {
     margin-left: 1px;
 }
 
-/* poplist
+
+/* Popovers
+------------------------------------------------------- */
+.popover {
+    position: absolute;
+    display: none;
+}
+.popover.in {
+    z-index: 5000;
+    height: auto;
+    display: block;
+}
+.popover.top {
+    margin-top: -4px;
+}
+.popover.right {
+    margin-left: 4px;
+}
+.popover.bottom {
+    margin-top: 4px;
+}
+.popover.left {
+    margin-left: -4px;
+}
+.popover.arrowed.top {
+    margin-top: -10px;
+}
+.popover.arrowed.right {
+    margin-left: 10px;
+}
+.popover.arrowed.bottom {
+    margin-top: 10px;
+}
+.popover.arrowed.left {
+    margin-left: -10px;
+}
+
+.popover-inner {
+    border-radius: inherit;
+    display: flex;
+    flex-direction: column;
+}
+
+.tail {
+    width: 200px;
+    height: 400px;
+    pointer-events: none;
+    opacity: .8;
+    margin-top: -200px;
+    position: absolute;
+    background: transparent;
+}
+.tail::after {
+    content: "";
+    position: absolute;
+    width: 0;
+    height: 0;
+    border-color: transparent;
+    border-style: solid;
+    top: 50%;
+    right: -5px;
+    margin-top: -5px;
+    border-left-color: #fff;
+    border-width: 5px 0 5px 5px;
+}
+
+.tail div {
+    border-radius: 3px;
+    padding: 10px;
+    background: #fff;
+    position: absolute;
+    top: 180px;
+    left: 0;
+    right: 0;
+    margin: auto;
+}
+
+.left.tail::after {
+    content: "";
+    position: absolute;
+    width: 0;
+    height: 0;
+    border-color: transparent;
+    border-style: solid;
+    top: 50%;
+    left: -5px;
+    margin-top: -5px;
+    border-right-color: #fff;
+    border-width: 5px 5px 5px 0;
+}
+.popover-arrow {
+    position: absolute;
+    width: 0;
+    height: 0;
+    border-color: transparent;
+    border-style: solid;
+}
+.popover.top .popover-arrow {
+    bottom: -5px;
+    left: 50%;
+    margin-left: -5px;
+    border-top-color: #fff;
+    border-width: 5px 5px 0;
+}
+.popover.right .popover-arrow {
+    top: 50%;
+    left: -5px;
+    margin-top: -5px;
+    border-right-color: #fff;
+    border-width: 5px 5px 5px 0;
+}
+.popover.left .popover-arrow {
+    top: 50%;
+    right: -5px;
+    margin-top: -5px;
+    border-left-color: #fff;
+    border-width: 5px 0 5px 5px;
+}
+.popover.bottom .popover-arrow {
+    top: -5px;
+    left: 50%;
+    margin-left: -5px;
+    border-bottom-color: #fff;
+    border-width: 0 5px 5px;
+}
+.popover:not(.arrowed) > .popover-arrow {
+    display: none;
+}
+
+
+/* Tooltips
+------------------------------------------------------- */
+.tooltip {
+    color: #333;
+    font-size: 12px;
+    white-space: initial;
+}
+.tooltip:not(.curtain-tooltip) {
+    pointer-events: none;
+}
+.tooltip.in {
+    opacity: 0.95;
+}
+.bar-button .tooltip.arrowed.bottom {
+    margin-top: 20px;
+}
+.tooltip.top {
+    text-align: center;
+}
+.tooltip.right {
+    text-align: left;
+}
+.tooltip.bottom {
+    text-align: center;
+}
+.tooltip.left {
+    text-align: right;
+}
+.tooltip .popover-inner {
+    border-radius: 4px;
+    max-width: 200px;
+    min-width: 80px;
+    padding: 10px;
+    font-weight: normal;
+    background-color: #fff;
+    overflow: hidden;
+}
+.tooltip-heading {
+    font-weight: bold;
+    background: #f6f6f6;
+    padding: 10px;
+    margin: -10px -10px 10px -10px;
+    border-radius: 3px 3px 0 0;
+    font-size: 14px;
+}
+
+.keyhint-wrap {
+    background: #f6f6f6;
+    padding: 10px;
+    margin: -10px -10px -10px -10px;
+    border-radius: 0 0 3px 3px;
+}
+.popover-inner .tooltip-text {
+    margin-bottom: 20px;
+}
+.popover-inner .shortcut {
+    font-weight: bold;
+    margin-left: 5px;
+}
+
+[dir='rtl'] .popover-inner .shortcut {
+    margin-left: 0;
+    margin-right: 5px;
+}
+
+/* dark tooltips for sidebar / panels */
+.tooltip.dark.top .popover-arrow,
+.map-pane .tooltip.top .popover-arrow {
+    border-top-color: #000;
+}
+.tooltip.dark.bottom .popover-arrow,
+.map-pane .tooltip.bottom .popover-arrow {
+    border-bottom-color: #000;
+}
+.tooltip.dark.left .popover-arrow,
+.map-pane .tooltip.left .popover-arrow {
+    border-left-color: #000;
+}
+.tooltip.dark.right .popover-arrow,
+.map-pane .tooltip.right .popover-arrow {
+    border-right-color: #000;
+}
+.tooltip.dark .popover-inner,
+.tooltip.dark .tooltip-heading,
+.tooltip.dark .keyhint-wrap,
+.map-pane .popover-inner,
+.map-pane .tooltip-heading,
+.map-pane .keyhint-wrap {
+    background: #000;
+    color: #ccc;
+}
+
+/* Exceptions for tooltip layouts */
+
+/* commit warning tooltips need to be closer */
+.warning-section .tooltip.top {
+    margin-top: -5px;
+}
+
+li:first-of-type .badge .tooltip,
+li.hide + li.version .badge .tooltip {
+    left: auto !important;
+    right: 5px !important;
+}
+[dir='rtl'] li:first-of-type .badge .tooltip,
+[dir='rtl'] li.hide + li.version .badge .tooltip {
+    left: 5px !important;
+    right: auto !important;
+}
+li:first-of-type .badge .tooltip .popover-arrow,
+li.hide + li.version .badge .tooltip .popover-arrow {
+    right: 15px !important;
+    left: auto !important;
+}
+[dir='rtl'] li:first-of-type .badge .tooltip .popover-arrow,
+[dir='rtl'] li.hide + li.version .badge .tooltip .popover-arrow {
+    left: 15px !important;
+    right: auto !important;
+}
+
+
+/* Poplist
 ------------------------------------------------------- */
 .poplist {
     border: 0.5px solid #DCDCDC;
@@ -819,6 +1070,8 @@ button.add-note svg.icon {
 [dir='rtl'] .poplist .subitems {
     padding-right: 6px;
 }
+
+
 /* Preset browser
 ------------------------------------------------------- */
 .preset-browser.poplist {
@@ -5370,252 +5623,6 @@ svg.mouseclick use.right {
 [dir='rtl'] .notice .zoom-to .icon {
     margin-left: 10px;
     margin-right: 0;
-}
-
-
-/* Tooltips
-------------------------------------------------------- */
-.popover {
-    position: absolute;
-    display: none;
-}
-.tooltip {
-    color: #333;
-    font-size: 12px;
-    white-space: initial;
-}
-.tooltip:not(.curtain-tooltip) {
-    pointer-events: none;
-}
-.popover.in {
-    z-index: 5000;
-    height: auto;
-    display: block;
-}
-.tooltip.in {
-    opacity: 0.95;
-}
-.popover.top {
-    margin-top: -4px;
-}
-.popover.right {
-    margin-left: 4px;
-}
-.popover.bottom {
-    margin-top: 4px;
-}
-.popover.left {
-    margin-left: -4px;
-}
-.popover.arrowed.top {
-    margin-top: -10px;
-}
-.popover.arrowed.right {
-    margin-left: 10px;
-}
-.popover.arrowed.bottom {
-    margin-top: 10px;
-}
-.popover.arrowed.left {
-    margin-left: -10px;
-}
-.bar-button .tooltip.arrowed.bottom {
-    margin-top: 20px;
-}
-.tooltip.top {
-    text-align: center;
-}
-.tooltip.right {
-    text-align: left;
-}
-.tooltip.bottom {
-    text-align: center;
-}
-.tooltip.left {
-    text-align: right;
-}
-
-.popover-inner {
-    border-radius: inherit;
-}
-
-.tooltip .popover-inner {
-    border-radius: 4px;
-    max-width: 200px;
-    min-width: 80px;
-    padding: 10px;
-    font-weight: normal;
-    background-color: #fff;
-    overflow: hidden;
-}
-
-.tail {
-    width: 200px;
-    height: 400px;
-    pointer-events: none;
-    opacity: .8;
-    margin-top: -200px;
-    position: absolute;
-    background: transparent;
-}
-.tail::after {
-    content: "";
-    position: absolute;
-    width: 0;
-    height: 0;
-    border-color: transparent;
-    border-style: solid;
-    top: 50%;
-    right: -5px;
-    margin-top: -5px;
-    border-left-color: #fff;
-    border-width: 5px 0 5px 5px;
-}
-
-.tail div {
-    border-radius: 3px;
-    padding: 10px;
-    background: #fff;
-    position: absolute;
-    top: 180px;
-    left: 0;
-    right: 0;
-    margin: auto;
-}
-
-.left.tail::after {
-    content: "";
-    position: absolute;
-    width: 0;
-    height: 0;
-    border-color: transparent;
-    border-style: solid;
-    top: 50%;
-    left: -5px;
-    margin-top: -5px;
-    border-right-color: #fff;
-    border-width: 5px 5px 5px 0;
-}
-.popover-arrow {
-    position: absolute;
-    width: 0;
-    height: 0;
-    border-color: transparent;
-    border-style: solid;
-}
-.popover.top .popover-arrow {
-    bottom: -5px;
-    left: 50%;
-    margin-left: -5px;
-    border-top-color: #fff;
-    border-width: 5px 5px 0;
-}
-.popover.right .popover-arrow {
-    top: 50%;
-    left: -5px;
-    margin-top: -5px;
-    border-right-color: #fff;
-    border-width: 5px 5px 5px 0;
-}
-.popover.left .popover-arrow {
-    top: 50%;
-    right: -5px;
-    margin-top: -5px;
-    border-left-color: #fff;
-    border-width: 5px 0 5px 5px;
-}
-.popover.bottom .popover-arrow {
-    top: -5px;
-    left: 50%;
-    margin-left: -5px;
-    border-bottom-color: #fff;
-    border-width: 0 5px 5px;
-}
-.popover:not(.arrowed) .popover-arrow {
-    display: none;
-}
-
-.tooltip-heading {
-    font-weight: bold;
-    background: #f6f6f6;
-    padding: 10px;
-    margin: -10px -10px 10px -10px;
-    border-radius: 3px 3px 0 0;
-    font-size: 14px;
-}
-
-.keyhint-wrap {
-    background: #f6f6f6;
-    padding: 10px;
-    margin: -10px -10px -10px -10px;
-    border-radius: 0 0 3px 3px;
-}
-.popover-inner .tooltip-text {
-    margin-bottom: 20px;
-}
-.popover-inner .shortcut {
-    font-weight: bold;
-    margin-left: 5px;
-}
-
-[dir='rtl'] .popover-inner .shortcut {
-    margin-left: 0;
-    margin-right: 5px;
-}
-
-/* dark tooltips for sidebar / panels */
-.tooltip.dark.top .popover-arrow,
-.map-pane .tooltip.top .popover-arrow {
-    border-top-color: #000;
-}
-.tooltip.dark.bottom .popover-arrow,
-.map-pane .tooltip.bottom .popover-arrow {
-    border-bottom-color: #000;
-}
-.tooltip.dark.left .popover-arrow,
-.map-pane .tooltip.left .popover-arrow {
-    border-left-color: #000;
-}
-.tooltip.dark.right .popover-arrow,
-.map-pane .tooltip.right .popover-arrow {
-    border-right-color: #000;
-}
-.tooltip.dark .popover-inner,
-.tooltip.dark .tooltip-heading,
-.tooltip.dark .keyhint-wrap,
-.map-pane .popover-inner,
-.map-pane .tooltip-heading,
-.map-pane .keyhint-wrap {
-    background: #000;
-    color: #ccc;
-}
-
-/* Exceptions for tooltip layouts */
-
-/* commit warning tooltips need to be closer */
-.warning-section .tooltip.top {
-    margin-top: -5px;
-}
-
-li:first-of-type .badge .tooltip,
-li.hide + li.version .badge .tooltip {
-    left: auto !important;
-    right: 5px !important;
-}
-[dir='rtl'] li:first-of-type .badge .tooltip,
-[dir='rtl'] li.hide + li.version .badge .tooltip {
-    left: 5px !important;
-    right: auto !important;
-}
-li:first-of-type .badge .tooltip .popover-arrow,
-li.hide + li.version .badge .tooltip .popover-arrow {
-    right: 15px !important;
-    left: auto !important;
-}
-[dir='rtl'] li:first-of-type .badge .tooltip .popover-arrow,
-[dir='rtl'] li.hide + li.version .badge .tooltip .popover-arrow {
-    left: 15px !important;
-    right: auto !important;
 }
 
 
