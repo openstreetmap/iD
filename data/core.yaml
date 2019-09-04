@@ -72,9 +72,24 @@ en:
       evening: Good Evening
       # "Good Night" isn't a greeting in English but it can be in some languages
       night: Good Evening
-    welcome:
-      first_time: "You’re editing <b>OpenStreetMap</b>: the free, collaborative world map.<br/>If this is your first time here, consider taking the <a>quick-start tutorial</a>.<br/>Thanks for contributing. Have fun!"
-      return: "Welcome back. Ready to make the map even better?"
+    notice: Notice
+    launch:
+      osm_info: "You’re editing <b>OpenStreetMap</b>: the free, collaborative world map."
+      first_time_tutorial: "If this is your first time here, consider taking the <a>quick-start tutorial</a>."
+      thanks_have_fun: Thanks for contributing. Have fun!
+      generic_welcome:
+        0: Ready to make the map even better?
+        1: What a great day for mapping.
+      welcome_back_user: "Welcome back, {displayName}."
+      changesets: "You've contributed {changesets} changesets to OpenStreetMap so far."
+      changesets_date: "You've contributed {changesets} changesets to OpenStreetMap since {joinDate}."
+      anniversary:
+        happy_anniversary: Happy Anniversary
+        years:
+          first: "Congratulations on your first year of mapping, {displayName}!"
+          subsequent: "Congratulations on {years} years of mapping, {displayName}!"
+      blocks:
+        active: You have an active block on your OpenStreetMap account, {displayName}, and cannot upload changes.
       start_mapping: Start Mapping
     restore:
       title: Restore

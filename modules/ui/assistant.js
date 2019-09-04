@@ -6,7 +6,7 @@ import {
     event as d3_event
 } from 'd3-selection';
 import { svgIcon } from '../svg/icon';
-import { t, textDirection } from '../util/locale';
+import { currentLocale, t, textDirection } from '../util/locale';
 import { services } from '../services';
 import { utilDisplayLabel } from '../util';
 import { uiIntro } from './intro';
@@ -396,16 +396,11 @@ export function uiAssistant(context) {
             }
         };
 
-        panel.renderHeaderBody = function(selection) {
-
-            var bodyTextArea = selection
-                .append('div')
-                .attr('class', 'body-text');
-
-            var mainFooter = selection.append('div')
-                .attr('class', 'main-footer');
-
-            bodyTextArea.html(t('assistant.welcome.' + (context.isFirstSession ? 'first_time' : 'return')));
+        function renderFirstSessionHeader(selection, bodyTextArea) {
+            var firstTimeInfo = t('assistant.launch.osm_info') + '<br/>' +
+                                t('assistant.launch.first_time_tutorial') + '<br/>' +
+                                t('assistant.launch.thanks_have_fun');
+            bodyTextArea.html(firstTimeInfo);
             bodyTextArea.selectAll('a')
                 .attr('href', '#')
                 .on('click', function() {
@@ -415,16 +410,104 @@ export function uiAssistant(context) {
                     redraw();
                 });
 
-            if (!context.isFirstSession) return;
-
-            mainFooter.append('button')
+            selection
+                .append('div')
+                .attr('class', 'main-footer')
+                .append('button')
                 .attr('class', 'primary')
                 .on('click', function() {
                     updateDidEditStatus();
                     redraw();
                 })
                 .append('span')
-                .text(t('assistant.welcome.start_mapping'));
+                .text(t('assistant.launch.start_mapping'));
+        }
+
+        function renderBlockedAccountHeader(selection, bodyTextArea, details) {
+
+            var link = bodyTextArea
+                .html(t('assistant.launch.blocks.active', { displayName: '<b>' + details.display_name + '</b>' }))
+                .append('a')
+                .attr('class', 'link-out')
+                .attr('target', '_blank')
+                .attr('tabindex', -1)
+                .attr('href', context.connection().userURL(details.display_name) + '/blocks');
+
+            link.append('span')
+                .text(' ' + t('success.help_link_text'));
+            link
+                .call(svgIcon('#iD-icon-out-link', 'inline'));
+
+            d3_select('.assistant-header .subject-title span')
+                .text(t('assistant.notice'));
+            d3_select('.assistant-header .icon-col .icon use')
+                .attr('href', '#iD-icon-alert');
+        }
+
+        function renderAccountAnniversaryHeader(selection, bodyTextArea, details, joinDate, now) {
+
+            var yearCount = now.getFullYear() - joinDate.getFullYear();
+            var anniversaryInfo = t('assistant.launch.anniversary.years.' + (yearCount === 1 ? 'first' : 'subsequent'), {
+                                      years: '<b>' + yearCount + '</b>',
+                                      displayName: '<b>' + details.display_name + '</b>'
+                                  }) + '<br/>' +
+                                  t('assistant.launch.changesets_date', {
+                                      changesets: '<b>' + details.changesets_count + '</b>',
+                                      joinDate: '<b>' + joinDate.toLocaleDateString(currentLocale, { day: 'numeric', month: 'long', year: 'numeric' }) + '</b>'
+                                  });
+            bodyTextArea.html(anniversaryInfo);
+
+            d3_select('.assistant-header .subject-title span')
+                .text(t('assistant.launch.anniversary.happy_anniversary'));
+            d3_select('.assistant-header .icon-col .icon use')
+                .attr('href', '#fas-birthday-cake');
+        }
+
+        panel.renderHeaderBody = function(selection) {
+
+            var bodyTextArea = selection
+                .append('div')
+                .attr('class', 'body-text');
+
+            var osm = context.connection();
+
+            if (context.isFirstSession) {
+                renderFirstSessionHeader(selection, bodyTextArea);
+                return;
+            }
+
+            var genericWelcomesCount = 2;
+            bodyTextArea.html(t('assistant.launch.generic_welcome.' + Math.floor(Math.random() * genericWelcomesCount)));
+
+            if (!osm.authenticated()) return;
+
+            osm.userDetails(function(err, details) {
+
+                if (err || !details) return;
+
+                var joinDate = new Date(details.account_created);
+                var now = new Date();
+
+                if (details.active_blocks > 0) {
+                    // user has been blocked
+                    renderBlockedAccountHeader(selection, bodyTextArea, details);
+
+                } else if (joinDate.getDate() === now.getDate() &&
+                    joinDate.getMonth() === now.getMonth() &&
+                    details.changesets_count > 1) {
+                    // OSM anniversary
+                    renderAccountAnniversaryHeader(selection, bodyTextArea, details, joinDate, now);
+
+                } else {
+                    var loggedInInfo = t('assistant.launch.welcome_back_user', {
+                                           displayName: '<b>' + details.display_name + '</b>'
+                                       }) + '<br/>' +
+                                       t('assistant.launch.changesets', {
+                                           changesets: '<b>' + details.changesets_count + '</b>'
+                                       });
+                    bodyTextArea.html(loggedInInfo);
+                }
+            });
         };
 
         return panel;

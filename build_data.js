@@ -68,7 +68,8 @@ module.exports = function buildData() {
             'fas-long-arrow-alt-right': {},
             'fas-th-list': {},
             'fas-toolbox': {},
-            'fas-clock': {}
+            'fas-clock': {},
+            'fas-birthday-cake': {}
         };
 
         // The Noun Project icons used
