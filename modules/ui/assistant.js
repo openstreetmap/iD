@@ -494,6 +494,7 @@ export function uiAssistant(context) {
 
                 } else if (joinDate.getDate() === now.getDate() &&
                     joinDate.getMonth() === now.getMonth() &&
+                    joinDate.getFullYear() < now.getFullYear() &&
                     details.changesets_count > 1) {
                     // OSM anniversary
                     renderAccountAnniversaryHeader(selection, bodyTextArea, details, joinDate, now);
