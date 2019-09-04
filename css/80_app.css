@@ -811,6 +811,7 @@ button.add-note svg.icon {
 }
 .poplist .subsection {
     background-color: #CBCBCB;
+    display: flex;
 }
 [dir='ltr'] .poplist .subitems {
     padding-left: 6px;
