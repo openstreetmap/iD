@@ -699,6 +699,7 @@ button.add-note svg.icon {
     border-radius: inherit;
     display: flex;
     flex-direction: column;
+    min-height: 0;
 }
 
 .tail {
