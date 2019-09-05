@@ -360,7 +360,7 @@
     "step_count": {"key": "step_count", "type": "number", "minValue": 0, "label": "Number of Steps"},
     "stop": {"key": "stop", "type": "combo", "label": "Stop Type", "strings": {"options": {"all": "All Ways", "minor": "Minor Road"}}},
     "street_cabinet": {"key": "street_cabinet", "type": "combo", "label": "Type"},
-    "stroller": {"key": "stroller", "type": "check", "options": ["yes", "limited", "no"], "label": "Stroller Access", "terms": ["baby carriage", "perambulator", "pram", "pushchair"]},
+    "stroller": {"key": "stroller", "type": "radio", "options": ["yes", "limited", "no"], "label": "Stroller Access", "terms": ["baby carriage", "perambulator", "pram", "pushchair"]},
     "structure_waterway": {"type": "structureRadio", "keys": ["tunnel"], "label": "Structure", "placeholder": "Unknown", "strings": {"options": {"tunnel": "Tunnel"}}},
     "structure": {"type": "structureRadio", "keys": ["bridge", "tunnel", "embankment", "cutting", "ford"], "label": "Structure", "placeholder": "Unknown", "strings": {"options": {"bridge": "Bridge", "tunnel": "Tunnel", "embankment": "Embankment", "cutting": "Cutting", "ford": "Ford"}}},
     "studio": {"key": "studio", "type": "combo", "label": "Type"},
