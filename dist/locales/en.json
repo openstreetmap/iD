@@ -6846,8 +6846,16 @@
                     "terms": "road,street"
                 },
                 "highway/raceway": {
-                    "name": "Racetrack (Motorsport)",
+                    "name": "Motorsport Racetrack",
                     "terms": "auto*,formula one,kart,motocross,nascar,race*,track"
+                },
+                "highway/raceway/karting": {
+                    "name": "Karting Racetrack",
+                    "terms": "carting,go carts,go karts,go-karts,gokarts,kart racing,karting track,motorsports,shifter karts,superkarts"
+                },
+                "highway/raceway/motocross": {
+                    "name": "Motocross Racetrack",
+                    "terms": "off-road racing,offroad moto racing,motocross circuit,motorcycle track,motorsports"
                 },
                 "highway/residential": {
                     "name": "Residential Road",

@@ -4749,9 +4749,19 @@ en:
         terms: '<translate with synonyms or related terms for ''Primary Link'', separated by commas>'
       highway/raceway:
         # highway=raceway
-        name: Racetrack (Motorsport)
+        name: Motorsport Racetrack
         # 'terms: auto*,formula one,kart,motocross,nascar,race*,track'
-        terms: '<translate with synonyms or related terms for ''Racetrack (Motorsport)'', separated by commas>'
+        terms: '<translate with synonyms or related terms for ''Motorsport Racetrack'', separated by commas>'
+      highway/raceway/karting:
+        # 'highway=raceway, sport=karting'
+        name: Karting Racetrack
+        # 'terms: carting,go carts,go karts,go-karts,gokarts,kart racing,karting track,motorsports,shifter karts,superkarts'
+        terms: '<translate with synonyms or related terms for ''Karting Racetrack'', separated by commas>'
+      highway/raceway/motocross:
+        # 'highway=raceway, sport=motocross'
+        name: Motocross Racetrack
+        # 'terms: off-road racing,offroad moto racing,motocross circuit,motorcycle track,motorsports'
+        terms: '<translate with synonyms or related terms for ''Motocross Racetrack'', separated by commas>'
       highway/residential:
         # highway=residential
         name: Residential Road
