@@ -1,6 +1,6 @@
 {
     "key": "stroller",
-    "type": "check",
+    "type": "radio",
     "options": [
         "yes",
         "limited",
