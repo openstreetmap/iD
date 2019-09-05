@@ -7,6 +7,9 @@
         "area"
     ],
     "tags": {
+        "golf": "bunker"
+    },
+    "addTags": {
         "golf": "bunker",
         "natural": "sand"
     },
@@ -14,9 +17,5 @@
         "hazard",
         "bunker"
     ],
-    "reference": {
-        "key": "golf",
-        "value": "bunker"
-    },
     "name": "Sand Trap"
 }

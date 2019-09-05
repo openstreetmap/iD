@@ -4424,7 +4424,7 @@ en:
         # ford=*
         name: Ford
       golf/bunker:
-        # 'golf=bunker, natural=sand'
+        # golf=bunker
         name: Sand Trap
         # 'terms: hazard,bunker'
         terms: '<translate with synonyms or related terms for ''Sand Trap'', separated by commas>'
@@ -4433,15 +4433,15 @@ en:
         name: Golf Cartpath
         terms: '<translate with synonyms or related terms for ''Golf Cartpath'', separated by commas>'
       golf/driving_range:
-        # 'golf=driving_range, landuse=grass'
+        # golf=driving_range
         name: Driving Range
         terms: '<translate with synonyms or related terms for ''Driving Range'', separated by commas>'
       golf/fairway:
-        # 'golf=fairway, landuse=grass'
+        # golf=fairway
         name: Fairway
         terms: '<translate with synonyms or related terms for ''Fairway'', separated by commas>'
       golf/green:
-        # 'golf=green, landuse=grass, leisure=pitch, sport=golf'
+        # golf=green
         name: Putting Green
         terms: '<translate with synonyms or related terms for ''Putting Green'', separated by commas>'
       golf/hole:
@@ -4449,7 +4449,7 @@ en:
         name: Golf Hole
         terms: '<translate with synonyms or related terms for ''Golf Hole'', separated by commas>'
       golf/lateral_water_hazard:
-        # 'golf=lateral_water_hazard, natural=water'
+        # golf=lateral_water_hazard
         name: Lateral Water Hazard
         terms: '<translate with synonyms or related terms for ''Lateral Water Hazard'', separated by commas>'
       golf/path:
@@ -4457,16 +4457,16 @@ en:
         name: Golf Walking Path
         terms: '<translate with synonyms or related terms for ''Golf Walking Path'', separated by commas>'
       golf/rough:
-        # 'golf=rough, landuse=grass'
+        # golf=rough
         name: Rough
         terms: '<translate with synonyms or related terms for ''Rough'', separated by commas>'
       golf/tee:
-        # 'golf=tee, landuse=grass'
+        # golf=tee
         name: Tee Box
         # 'terms: teeing ground'
         terms: '<translate with synonyms or related terms for ''Tee Box'', separated by commas>'
       golf/water_hazard:
-        # 'golf=water_hazard, natural=water'
+        # golf=water_hazard
         name: Water Hazard
         terms: '<translate with synonyms or related terms for ''Water Hazard'', separated by commas>'
       healthcare:

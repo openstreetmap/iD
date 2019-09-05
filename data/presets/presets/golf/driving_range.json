@@ -8,12 +8,11 @@
         "area"
     ],
     "tags": {
+        "golf": "driving_range"
+    },
+    "addTags": {
         "golf": "driving_range",
         "landuse": "grass"
-    },
-    "reference": {
-        "key": "golf",
-        "value": "driving_range"
     },
     "name": "Driving Range"
 }

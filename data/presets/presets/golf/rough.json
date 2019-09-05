@@ -7,12 +7,11 @@
         "area"
     ],
     "tags": {
+        "golf": "rough"
+    },
+    "addTags": {
         "golf": "rough",
         "landuse": "grass"
-    },
-    "reference": {
-        "key": "golf",
-        "value": "rough"
     },
     "name": "Rough"
 }
