@@ -198,15 +198,15 @@ export function uiBackground(context) {
 
 
         // add minimap toggle below list
-        var minimapEnter = selection.selectAll('.minimap-toggle-list')
+        var bgExtrasListEnter = selection.selectAll('.bg-extras-list')
             .data([0])
             .enter()
             .append('ul')
-            .attr('class', 'layer-list minimap-toggle-list')
-            .append('li')
-            .attr('class', 'minimap-toggle-item');
+            .attr('class', 'layer-list bg-extras-list');
 
-        var minimapLabelEnter = minimapEnter
+        var minimapLabelEnter = bgExtrasListEnter
+            .append('li')
+            .attr('class', 'minimap-toggle-item')
             .append('label')
             .call(tooltip()
                 .html(true)
@@ -227,6 +227,29 @@ export function uiBackground(context) {
             .text(t('background.minimap.description'));
 
 
+        var panelLabelEnter = bgExtrasListEnter
+            .append('li')
+            .attr('class', 'background-panel-toggle-item')
+            .append('label')
+            .call(tooltip()
+                .html(true)
+                .title(uiTooltipHtml(t('background.panel.tooltip'), uiCmd('⌘⇧' + t('info_panels.background.key'))))
+                .placement('top')
+            );
+
+        panelLabelEnter
+            .append('input')
+            .attr('type', 'checkbox')
+            .on('change', function() {
+                d3_event.preventDefault();
+                context.ui().info.toggle('background');
+            });
+
+        panelLabelEnter
+            .append('span')
+            .text(t('background.panel.description'));
+
+
         // "Info / Report a Problem" link
         selection.selectAll('.imagery-faq')
             .data([0])
@@ -238,7 +261,7 @@ export function uiBackground(context) {
             .call(svgIcon('#iD-icon-out-link', 'inline'))
             .attr('href', 'https://github.com/openstreetmap/iD/blob/master/FAQ.md#how-can-i-report-an-issue-with-background-imagery')
             .append('span')
-            .text(t('background.imagery_source_faq'));
+            .text(t('background.imagery_problem_faq'));
 
         updateBackgroundList();
     }
