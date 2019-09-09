@@ -19,7 +19,7 @@ export function uiToolOldDrawModes(context) {
 
     var tool = {
         id: 'old_modes_' + presetsID,
-        label: t('toolbar.add_feature'),
+        label: t('toolbar.add_feature')
     };
 
     var modes = [
