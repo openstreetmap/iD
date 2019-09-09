@@ -31,7 +31,12 @@ export function uiTopToolbar(context) {
 
         context.presets()
             .on('favoritePreset.topToolbar', update)
-            .on('recentsChange.topToolbar', update);
+            .on('recentsChange.topToolbar', update)
+            .on('newPresets.topToolbar', function() {
+                modes = uiToolOldDrawModes(context);
+                modes.newPresets();
+                update();
+            });
 
         update();
 

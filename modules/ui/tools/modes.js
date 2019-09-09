@@ -15,10 +15,11 @@ import { tooltip } from '../../util/tooltip';
 import { uiTooltipHtml } from '../tooltipHtml';
 
 export function uiToolOldDrawModes(context) {
+    var presetsID = 0;
 
     var tool = {
-        id: 'old_modes',
-        label: t('toolbar.add_feature')
+        id: 'old_modes_' + presetsID,
+        label: t('toolbar.add_feature'),
     };
 
     var modes = [
@@ -154,6 +155,11 @@ export function uiToolOldDrawModes(context) {
                 .merge(buttonsEnter)
                 .classed('disabled', function(d) { return !enabled(d); });
         }
+    };
+
+    tool.newPresets = function() {
+        presetsID++;
+        tool.id = 'old_modes_' + presetsID;
     };
 
     return tool;

@@ -19,7 +19,7 @@ export function presetIndex(context) {
     // a presetCollection with methods for
     // loading new data and returning defaults
 
-    var dispatch = d3_dispatch('recentsChange', 'favoritePreset');
+    var dispatch = d3_dispatch('recentsChange', 'favoritePreset', 'newPresets');
 
     var all = presetCollection([]);
     var _defaults = { area: all, line: all, point: all, vertex: all, relation: all };
@@ -522,5 +522,5 @@ export function presetIndex(context) {
         setRecents(items);
     };
 
-    return utilRebind(all, dispatch, 'on');
+    return utilRebind(all, dispatch, 'on', 'call');
 }
