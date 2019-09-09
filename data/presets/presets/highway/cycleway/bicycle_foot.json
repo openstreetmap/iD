@@ -1,4 +1,7 @@
 {
+    "countryCodes": [
+        "ca", "mx", "us"
+    ],
     "icon": "fas-biking",
     "geometry": [
         "line"
