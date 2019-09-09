@@ -7613,6 +7613,7 @@ en:
       shop/travel_agency:
         # shop=travel_agency
         name: Travel Agency
+        # 'terms: cruises,flights,hotels,tickets,travel packages'
         terms: '<translate with synonyms or related terms for ''Travel Agency'', separated by commas>'
       shop/tyres:
         # shop=tyres

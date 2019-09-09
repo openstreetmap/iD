@@ -9295,7 +9295,7 @@
                 },
                 "shop/travel_agency": {
                     "name": "Travel Agency",
-                    "terms": ""
+                    "terms": "cruises,flights,hotels,tickets,travel packages"
                 },
                 "shop/tyres": {
                     "name": "Tire Store",
