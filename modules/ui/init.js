@@ -242,11 +242,13 @@ export function uiInit(context) {
             .call(issues.renderPane)
             .call(help.renderPane);
 
+        ui.info = uiInfo(context);
+
         // Add absolutely-positioned elements that sit on top of the map
         // This should happen after the map is ready (center/zoom)
         overMap
             .call(uiMapInMap(context))
-            .call(uiInfo(context))
+            .call(ui.info)
             .call(uiNotice(context));
 
 
@@ -361,7 +363,6 @@ export function uiInit(context) {
             }
         });
     };
-
 
     ui.sidebar = uiSidebar(context);
 
