@@ -3,7 +3,8 @@ import { select as d3_select } from 'd3-selection';
 import { geoScaleToZoom } from '../geo';
 import { osmEntity } from '../osm';
 import { svgPassiveVertex, svgPointTransform } from './helpers';
-
+import _isEqual from 'lodash-es/isEqual';
+import _omit from 'lodash-es/omit'; 
 
 export function svgVertices(projection, context) {
     var radiuses = {
@@ -228,7 +229,13 @@ export function svgVertices(projection, context) {
 
         // Class for styling currently edited vertices
         var editClass = function(d) {
-            return (graph.entities[d.id] !== base.entities[d.id]) ? ' edited ' : '';
+            //If it doesn't exist in the base graph, it's new geometry. 
+            if (!base.entities[d.id] || !_isEqual(_omit(graph.entities[d.id], ['tags', 'v']), _omit(base.entities[d.id], ['tags', 'v']))) {
+                return ' graphedited ';
+            } else if (!_isEqual(graph.entities[d.id].tags, base.entities[d.id].tags)) {
+                return ' tagedited ';
+            }
+            return '';
         };
 
         // Targets allow hover and vertex snapping
@@ -240,15 +247,16 @@ export function svgVertices(projection, context) {
         targets.exit()
             .remove();
 
+        var threeFourths = function (num) {
+            return (Math.round(3 * num) / 4).toFixed(2); 
+        }; 
         // enter/update
         targets.enter()
             .append('circle')
             .attr('r', function(d) {
-                return ((graph.entities[d.id].isEndpoint(graph)
-                && !graph.entities[d.id].isConnected(graph)
-                && isEditedEnt(d, base, graph) && interestingNodeRadius)
-                  || (isEditedEnt(d, base, graph) && radius)
-                  || _radii[d.id] || radiuses.shadow[3]);
+                return isEditedEnt(d, base, graph) && threeFourths(_radii[d.id])
+                  || _radii[d.id] 
+                  || radiuses.shadow[3];
             })
             .merge(targets)
             .attr('class', function(d) {
@@ -289,7 +297,8 @@ export function svgVertices(projection, context) {
 
 
     function isEditedEnt(entity, base, head) {
-        return head.entities[entity.id] !== base.entities[entity.id];
+        return head.entities[entity.id] !== base.entities[entity.id] ||
+            !_isEqual(head.entities[entity.id].tags, base.entities[entity.id].tags);
     }
 
 

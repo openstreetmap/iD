@@ -337,18 +337,59 @@ g.vertex.highlighted .shadow {
     stroke: #68f;
 }
 
-.highlight-edited g.points > circle.vertex.edited {
+.highlight-edited g.points > circle.vertex.graphedited {
     color: rgb(87, 201, 44);
-    stroke: #fff;
+    stroke: #333;
     stroke-width: 1;
-    stroke-opacity: 1;
+    stroke-opacity: .5;
     fill-opacity: 1;
 }
-.highlight-edited g.lines > path.line.edited {
+.highlight-edited g.points > circle.vertex.tagedited {
+    color: rgb(160, 231, 134);
+    stroke: #fff;
+    stroke-width: 2;
+    stroke-opacity: .5;
+    fill-opacity: 1;
+}
+    
+/*Make the edited stroke line thin so that the original road color can show around it.*/
+.highlight-edited g.lines > path.line.graphedited {
     color: rgb(87, 201, 44);
-    stroke-width: 9;
+    stroke-width: 3 !important;
     stroke-opacity: 1;
- }
-.low-zoom.highlight-edited g.lines > path.line.edited {
-     stroke-width: 7;
+}
+
+/*Make the stroke in whole-road graph edits thin and less apparent. */
++.highlight-edited g.linegroup.line-stroke > path.way.line.stroke.graphedited {
+    stroke: rgb(87, 201, 44);
+    stroke-width: 3 !important;
+    stroke-opacity: 1;
+}
+
+/*Make the casing around tag edits wide enough to be a bit more visible. */
+.highlight-edited g.linegroup.line-casing > path.way.line.casing.tagedited {
+    stroke: rgb(87, 201, 44) !important;
+    stroke-width: 12 !important;
+    stroke-opacity: 1;
+}
+
+.low-zoom.highlight-edited g.linegroup.line-casing > path.way.line.casing.tagedited {
+    stroke-width: 10 !important;
+}
+
+.highlight-edited.fill-wireframe g.linegroup.line-stroke > path.way.line.stroke.tagedited {
+    stroke: rgb(160, 231, 134);
+    stroke-width: 10 !important;
+    stroke-dasharray: 25 !important; 
+    stroke-opacity: 1 !important;
+}
+
+/*for low zoom levels, make the wireframe view 'tag edit' dashed line finer.*/
+.low-zoom.highlight-edited.fill-wireframe g.linegroup.line-stroke > path.way.line.stroke.tagedited {
+    stroke-dasharray: 7 !important;
+} 
+
+/*In wireframe mode, restrain the stroke width to something barely wider than normal.*/
+.fill-wireframe.highlight-edited g.lines > path.line.graphedited, .fill-wireframe.highlight-edited g.linegroup.line-stroke > path.way.line.stroke.tagedited {
+    stroke-width: 2 !important;
 }
