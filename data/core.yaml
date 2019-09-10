@@ -604,7 +604,7 @@ en:
     fill_area: Fill Areas
     highlight_way_edits:
       description: Highlight edited nodes and segments attached to those nodes in ways
-      tooltip: Highlight way edits in the current session.
+      tooltip: Highlight unsaved edits.
       key: G
     map_features: Map Features
     autohidden: "These features have been automatically hidden because too many would be shown on the screen.  You can zoom in to edit them."
@@ -1865,7 +1865,7 @@ en:
         wireframe: "Toggle wireframe mode"
         osm_data: "Toggle OpenStreetMap data"
         minimap: "Toggle minimap"
-        highlight_way_edits: "Highlight way edits in current session"
+        highlight_way_edits: "Highlight unsaved edits"
       selecting:
         title: "Selecting features"
         select_one: "Select a single feature"
