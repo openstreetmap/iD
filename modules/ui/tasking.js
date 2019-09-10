@@ -526,6 +526,22 @@ export function uiTasking(context) {
             .append('li')
             .attr('class', 'list-item-tasking manager-custom');
 
+        var labelEnter = liEnter
+            .append('label')
+            .call(tooltip()
+                .title(t('tasking.manager.managers.custom.tooltip'))
+                .placement('top')
+            );
+
+        labelEnter
+            .append('input')
+            .attr('type', 'checkbox')
+            .on('change', function() { toggleLayer(); });
+
+        labelEnter
+            .append('span')
+            .text(t('tasking.manager.managers.custom.title'));
+    
         liEnter
             .append('button')
             .attr('class', 'tasking-custom-settings')
@@ -549,22 +565,6 @@ export function uiTasking(context) {
                 layer.fitZoom();
             })
             .call(svgIcon('#iD-icon-search'));
-
-        var labelEnter = liEnter
-            .append('label')
-            .call(tooltip()
-                .title(t('tasking.manager.managers.custom.tooltip'))
-                .placement('top')
-            );
-
-        labelEnter
-            .append('input')
-            .attr('type', 'checkbox')
-            .on('change', function() { toggleLayer(); });
-
-        labelEnter
-            .append('span')
-            .text(t('tasking.manager.managers.custom.title'));
 
         // Update
         items = items
