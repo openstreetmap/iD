@@ -1,18 +1,18 @@
-import { geoExtent } from '../geo';
+import { geoExtent } from '../../geo';
 
 
-export function project() {
-    if (!(this instanceof project)) {
-        return (new project()).initialize(arguments);
+export function taskingProject() {
+    if (!(this instanceof taskingProject)) {
+        return (new taskingProject()).initialize(arguments);
     } else if (arguments.length) {
         this.initialize(arguments);
     }
 }
 
 
-Object.assign(project.prototype, {
+Object.assign(taskingProject.prototype, {
 
-    type: 'project',
+    type: 'taskingProject',
 
     initialize: function(sources) {
         for (var i = 0; i < sources.length; ++i) {
@@ -97,7 +97,7 @@ Object.assign(project.prototype, {
     // },
 
     // // update: function(attrs) {
-    // //     return project(this, attrs); // {v: 1 + (this.v || 0)}
+    // //     return taskingProject(this, attrs); // {v: 1 + (this.v || 0)}
     // // },
 
 });

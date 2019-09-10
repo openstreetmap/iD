@@ -9,19 +9,19 @@
             "terms_text": "Terms & Feedback",
             "default": true,
             "description": "HOT tasking manager.",
-            "urlRoot": "https://https://tasks.hotosm.org/"
+            "apiBase": "https://tasks.hotosm.org"
         }
     ],
     "futureManagers": [
         {
-            "id": "Maproulette",
-            "name": "Maproulette",
+            "id": "MapRoulette",
+            "name": "MapRoulette",
             "template": "",
             "zoomExtent": [0, 22],
             "terms_url": "https://wiki.openstreetmap.org/wiki/MapRoulette",
             "terms_text": "Terms & Feedback",
             "default": true,
-            "description": "Maproulette tasking manager.",
+            "description": "MapRoulette tasking manager.",
             "urlRoot": "https://maproulette.org"
         }
     ]

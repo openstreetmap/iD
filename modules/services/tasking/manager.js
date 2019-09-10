@@ -1,15 +1,15 @@
-export function manager() {
-    if (!(this instanceof manager)) {
-        return (new manager()).initialize(arguments);
+export function taskingManager() {
+    if (!(this instanceof taskingManager)) {
+        return (new taskingManager()).initialize(arguments);
     } else if (arguments.length) {
         this.initialize(arguments);
     }
 }
 
 
-Object.assign(manager.prototype, {
+Object.assign(taskingManager.prototype, {
 
-    type: 'manager',
+    type: 'taskingManager',
 
     initialize: function(sources) {
         for (var i = 0; i < sources.length; ++i) {

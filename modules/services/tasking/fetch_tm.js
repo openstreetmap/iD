@@ -1,4 +1,4 @@
-var _token = 'SWpFMk5qUXdNVE1pLkVEVTA4Zy5OakdsdGRzUW9RVWdhNmRnZjVzLUxUM1BVaHc=';
+//var _token = 'SWpFMk5qUXdNVE1pLkVEVTA4Zy5OakdsdGRzUW9RVWdhNmRnZjVzLUxUM1BVaHc=';
 
 var getOptions = {
     // Default options are marked with *
@@ -10,7 +10,7 @@ var getOptions = {
         'Content-Type': 'application/json',
         'Accept': 'text/html',
         'Accept-Language': 'en',
-        'Authorization': 'Token ' + _token,
+        //'Authorization': 'Token ' + _token,
     },
     redirect: 'follow', // manual, *follow, error
     referrer: 'no-referrer', // no-referrer, *client
@@ -26,7 +26,7 @@ var postOptions = {
         'Content-Type': 'application/json',
         'Accept': 'text/html',
         'Accept-Language': 'en',
-        'Authorization': 'Token ' + _token,
+    //    'Authorization': 'Token ' + _token,
     },
     redirect: 'follow', // manual, *follow, error
     referrer: 'no-referrer', // no-referrer, *client

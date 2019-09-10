@@ -1,22 +1,22 @@
-import { geoExtent } from '../geo';
+import { geoExtent } from '../../geo';
 
 /* Constants */
-var EXTENT_CONSTRAINT = 250; // meter buffer around task for curtain
+var EXTENT_CONSTRAINT = 250; // meter buffer around taskingTask for curtain
 
 var MIN_ZOOM = 14;
 
-export function task() {
-    if (!(this instanceof task)) {
-        return (new task()).initialize(arguments);
+export function taskingTask() {
+    if (!(this instanceof taskingTask)) {
+        return (new taskingTask()).initialize(arguments);
     } else if (arguments.length) {
         this.initialize(arguments);
     }
 }
 
 
-Object.assign(task.prototype, {
+Object.assign(taskingTask.prototype, {
 
-    type: 'task',
+    type: 'taskingTask',
 
     initialize: function(sources) {
         for (var i = 0; i < sources.length; ++i) {
@@ -116,7 +116,7 @@ Object.assign(task.prototype, {
     },
 
     update: function(attrs) {
-        return task(this, attrs); // {v: 1 + (this.v || 0)}
+        return taskingTask(this, attrs); // {v: 1 + (this.v || 0)}
     },
 
 });

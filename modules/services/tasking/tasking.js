@@ -7,7 +7,9 @@ import _filter from 'lodash-es/filter';
 import { dispatch as d3_dispatch } from 'd3-dispatch';
 import { text as d3_text } from 'd3-fetch';
 
-import { task, project, manager } from '../../osm';
+import { taskingManager } from './manager';
+import { taskingProject } from './project';
+import { taskingTask } from './task';
 import { taskingManagers } from '../../../data';
 
 import { parseHOTTask, parseHOTProject } from './parseHOT';
@@ -16,10 +18,6 @@ import { _errors, handleError } from './errors_tm';
 
 
 
-var apibases = {
-    local:  'http://127.0.0.1:5000/api/v1/', // TODO: TAH - change to list of real manager urls when published
-    hot: 'https://tasks.hotosm.org/api/v1/',
-};
 var dispatch = d3_dispatch('change', 'loadedTask', 'loadedProject', 'loadedCustomSettings', 'setManager', 'setProject', 'setTask', 'lockForMapping', 'unlockTask', 'postTaskUpdate', 'cancelTasking');
 var _taskingCache = {};
 var _enabled = false;
@@ -27,13 +25,7 @@ var _enabled = false;
 
 function parseTask(that, json) {
 
-    switch (that.currentManager().id) {
-        case 'HOT':
-            json = parseHOTTask(that, json);
-            break;
-        default:
-            break;
-    }
+    json = parseHOTTask(that, json);
 
     return json;
 
@@ -43,13 +35,7 @@ function parseTask(that, json) {
 
 function parseProject(that, json) {
 
-    switch (that.currentManager().id) {
-        case 'HOT':
-            json = parseHOTProject(json);
-            break;
-        default:
-            break;
-    }
+    json = parseHOTProject(json);
 
     return json;
 }
@@ -58,7 +44,7 @@ function parseProject(that, json) {
 var parsers = {
 
     manager: function(values) {
-        var newManager = new manager(values);
+        var newManager = new taskingManager(values);
 
         return newManager;
     },
@@ -87,7 +73,7 @@ var parsers = {
             },
         };
 
-        var newProject = new project(_project);
+        var newProject = new taskingProject(_project);
 
         return newProject;
     },
@@ -110,7 +96,7 @@ var parsers = {
             __featurehash__: values.__featurehash__
         };
 
-        var newTask = new task(_task);
+        var newTask = new taskingTask(_task);
 
         return newTask;
     }
@@ -141,35 +127,25 @@ function parseUrl(url, defaultExtension) {
     var testUrl = url.split(/[?#]/)[0];
     var extension = getExtension(testUrl) || defaultExtension;
 
-    // TODO: TAH - get finish regex to get url type
-    var _project_re = new RegExp(/http:\/\/127.0.0.1:5000\/api\/v1\/project\/[0-9]/);
-    var _task_re = new RegExp(/http:\/\/127.0.0.1:5000\/api\/v1\/project\/[0-9]+\/task\/[0-9]+$/);
+    var regex = new RegExp(/(.+)\/api\/v1\/project\/(\d+)(?:\/task\/)?(\d+)?/);
 
-    var _containsProject = _project_re.test(path);
-    var _containsTask = _task_re.test(path);
+    var captureGroups = regex.exec(path);
 
-    var urlType = _containsTask ? 'task' : _containsProject ? 'project' : undefined;
-    var url_slugs = url.split('?')[0].split('/');
-
-    // TODO: TAH - make manager an object, pull away from this parser, make sure in loadProject, getManager works to set manager!
-
-    var managerSource = url_slugs[2];
-    managerSource = managerSource === '127.0.0.1:5000' ? 'HOT' : managerSource; // TODO: TAH - remove once not working locally
-
+    var apiBase;
     var projectId;
     var taskId;
 
-    if (_containsProject) {
-        if (_containsTask) {
-            projectId = parseInt(url_slugs[url_slugs.length - 3], 10);
-        } else {
-            projectId = parseInt(url_slugs[url_slugs.length - 1], 10);
+    if (captureGroups && captureGroups.length >= 3) {
+        apiBase = captureGroups[1];
+        projectId = parseInt(captureGroups[2], 10);
+
+        if (captureGroups.length >= 4) {
+            taskId = parseInt(captureGroups[3], 10);
         }
     }
 
-    if (_containsTask) {
-        taskId = url_slugs[url_slugs.length - 1];
-    }
+    var urlType = taskId ? 'task' : projectId ? 'project' : undefined;
+    var url_slugs = path.split('/');
 
     parsedUrl = {
         url: url,
@@ -178,9 +154,9 @@ function parseUrl(url, defaultExtension) {
         urlType: urlType,
         extension: extension,
         url_slugs: url_slugs,
-        managerSource: managerSource,
-        projectId: parseInt(projectId, 10),
-        taskId: parseInt(taskId, 10),
+        apiBase: apiBase,
+        projectId: projectId,
+        taskId: taskId
     };
 
     return parsedUrl;
@@ -191,17 +167,11 @@ function formulateUrl(that, parsedUrl, type) {
 
     var path;
 
-    switch (that.currentManager().id) {
-        case 'HOT':
-            path = apibases.local + 'project/' + parsedUrl.projectId; // TODO: TAH - remove apibase.local
-            if (type === 'task') {
-                path += parsedUrl.taskId ? '/task/' + parsedUrl.taskId : '';
-            }
-            path += '?as_file=false';
-            break;
-        default:
-            break;
+    path = that.currentManager().apiBase + '/api/v1/project/' + parsedUrl.projectId; // TODO: TAH - remove apibase.local
+    if (type === 'task' && parsedUrl.taskId) {
+        path += '/task/' + parsedUrl.taskId;
     }
+    path += '?as_file=false';
 
     return path;
 }
@@ -232,17 +202,9 @@ function ensureFeatureID(feature) {
 
 function initManagers() {
     // Add all the available tasking manager sources (TODO: TAH - add add managers for task searching)
-    var _managers = taskingManagers.map(function(manager) {
+    return taskingManagers.map(function(manager) {
         return parsers.manager(manager);
     });
-
-    // add a none manager as default
-    _managers.push(parsers.manager({
-        id: 'none',
-        name: t('tasking.manager.managers.none.name')
-    }));
-
-    return _managers;
 }
 
 
@@ -265,7 +227,7 @@ export default {
             managers: initManagers(),
             projects: {},
             tasks: {},
-            currentManagerId: 'HOT',
+            currentManager: null,
             currentProjectId: '',
             currentTaskId: '',
             customSettings: {},
@@ -274,7 +236,7 @@ export default {
         };
 
         // set starting manager
-        that.currentManager(that.getManager('none').id);
+        that.currentManager(null);
     },
 
 
@@ -285,7 +247,7 @@ export default {
             managers: initManagers(),
             projects: {},
             tasks: {},
-            currentManagerId: 'HOT',
+            currentManager: null,
             currentProjectId: '',
             currentTaskId: '',
             customSettings: {},
@@ -294,7 +256,7 @@ export default {
         };
 
         // set starting manager
-        that.currentManager(that.getManager('none').id);
+        that.currentManager(null);
     },
 
 
@@ -343,7 +305,7 @@ export default {
 
                 })
                 .catch(function(err) {
-                    var { errors, message } = handleError(task, err, that.errors());
+                    var { errors, message } = handleError(taskingTask, err, that.errors());
 
                     // update cache errors
                     that.errors(errors);
@@ -403,7 +365,7 @@ export default {
                         }
                     })
                     .catch(function(err) {
-                        var { errors, message } = handleError(task, err, that.errors());
+                        var { errors, message } = handleError(taskingTask, err, that.errors());
 
                         // update cache errors
                         that.errors(errors);
@@ -465,12 +427,14 @@ export default {
                             // add to tasks
                             that.addTask(newTask);
 
+                            that.currentTask(newTask.id());
+
                             dispatch.call('loadedTask', {}, newTask);
                             dispatch.call('change');
                         }
                     })
                     .catch(function(err) {
-                        var { errors, message } = handleError(task, err, that.errors());
+                        var { errors, message } = handleError(taskingTask, err, that.errors());
 
                         // update cache errors
                         that.errors(errors);
@@ -494,7 +458,7 @@ export default {
 
 
     replaceTask: function(t) {
-        if (!(t instanceof task) || !t.id()) return;
+        if (!(t instanceof taskingTask) || !t.id()) return;
 
         _taskingCache.tasks[t.id()] = t;
 
@@ -503,7 +467,7 @@ export default {
 
 
     removeTask: function(t) {
-        if (!(t instanceof task) || !t.taskId) return;
+        if (!(t instanceof taskingTask) || !t.taskId) return;
 
         delete _taskingCache.tasks[t.taskId];
     },
@@ -522,9 +486,18 @@ export default {
         if (d.url) {
             var parsedUrl = parseUrl(d.url); // parse url,
             _taskingCache.customSettings = parsedUrl; //save custom settings
-            if (parsedUrl.managerSource) {
+            if (parsedUrl && parsedUrl.apiBase) {
+                var manager = _taskingCache.managers.find(function(manager) {
+                    return manager.apiBase === parsedUrl.apiBase;
+                });
+                if (!manager) {
+                    manager = new taskingManager({
+                        apiBase: parsedUrl.apiBase
+                    });
+                    _taskingCache.managers.push(manager);
+                }
                 // set manager
-                that.currentManager(parsedUrl.managerSource);
+                that.currentManager(manager);
             }
         }
 
@@ -539,12 +512,12 @@ export default {
     },
 
 
-    currentManager: function(id) {
+    currentManager: function(manager) {
         var that = this;
 
-        if (!arguments.length) return that.getManager(_taskingCache.currentManagerId);
+        if (!arguments.length) return _taskingCache.currentManager;
 
-        _taskingCache.currentManagerId = id;
+        _taskingCache.currentManager = manager;
 
         dispatch.call('setManager');
 
@@ -591,7 +564,7 @@ export default {
     resetManager: function() {
         var that = this;
 
-        that.currentManager(that.getManager('none').id);
+        that.currentManager(null);
     },
 
 
@@ -648,20 +621,14 @@ export default {
     lockTaskForMapping: function(task) {
         var that = this;
 
+        var manager = that.currentManager();
+
+        if (!manager || !manager.apiBase) return;
+
         var _currProject = that.currentProject();
-        var baseUrl = apibases.local + 'project/' + _currProject.id() + '/task/' + task.id() + '/';
-        var action = '';
+        var baseUrl = manager.apiBase + '/project/' + _currProject.id() + '/task/' + task.id() + '/';
 
-        switch (that.currentManager().id) {
-
-            case 'HOT':
-                action = 'lock-for-mapping';
-                break;
-            default:
-                break;
-        }
-
-        return postData(baseUrl, action)
+        return postData(baseUrl, 'lock-for-mapping')
             .then(function(data) {
 
                 // reformulate result based on manager
@@ -694,25 +661,19 @@ export default {
     unlockTask: function(task) {
         var that = this;
 
+        var manager = that.currentManager();
+        if (!manager || !manager.apiBase) return;
+
         var _currProject = that.currentProject();
-        var baseUrl = apibases.local + 'project/' + _currProject.id() + '/task/' + task.id() + '/';
+        var baseUrl = manager.apiBase + '/project/' + _currProject.id() + '/task/' + task.id() + '/';
         var action = '';
-
-        switch (that.currentManager().id) {
-
-            case 'HOT':
-                action = 'stop-mapping';
-                break;
-            default:
-                break;
-        }
 
         // body comment
         var _data = {
             'comment': 'mapping stopped before editing'
         };
 
-        return postData(baseUrl, action, _data)
+        return postData(baseUrl, 'stop-mapping', _data)
             .then(function(data) {
 
                 // reformulate result based on manager
@@ -744,25 +705,19 @@ export default {
         var _currTask = that.currentTask();
         if (task.id() !== _currTask.id()) return;
 
+        var manager = that.currentManager();
+
+        if (!manager || !manager.apiBase) return;
+
         var _currProject = that.currentProject();
-        var baseUrl = apibases.local + 'project/' + _currProject.id() + '/task/' + task.id() + '/';
-        var action = '';
-
-        switch (that.currentManager().id) {
-
-            case 'HOT':
-                action = 'unlock-after-mapping';
-                break;
-            default:
-                break;
-        }
+        var baseUrl = manager.apiBase + '/project/' + _currProject.id() + '/task/' + task.id() + '/';
 
         var _data = {
             'comment': task.newComment,
             'status': task.newStatus.toUpperCase()
         };
 
-        return postData(baseUrl, action, _data)
+        return postData(baseUrl, 'unlock-after-mapping', _data)
             .then(function(data) {
 
                 // reformulate result based on manager

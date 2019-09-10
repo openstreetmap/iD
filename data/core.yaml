@@ -1134,10 +1134,6 @@ en:
               url:
                 placeholder: Enter a url template
             name: Custom
-        none:
-          tooltip: Turn of tasking
-          title: None
-          name: None
         errors:
           tooltip: Before setting a tasking manager, you must address errors
     project:
