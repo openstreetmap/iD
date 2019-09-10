@@ -668,7 +668,7 @@ en:
     switch: Switch back to this background
     custom: Custom
     overlays: Overlays
-    imagery_source_faq: Imagery Info / Report a Problem
+    imagery_problem_faq: Report an Imagery Problem
     reset: reset
     reset_all: Reset All
     display_options: Display Options
@@ -680,6 +680,9 @@ en:
       description: Show Minimap
       tooltip: Show a zoomed out map to help locate the area currently displayed.
       key: '/'
+    panel:
+      description: Show Detail Panel
+      tooltip: Show advanced background information.
     fix_misalignment: Adjust imagery offset
     offset: "Drag anywhere in the gray area below to adjust the imagery offset, or enter the offset values in meters."
   map_data:
