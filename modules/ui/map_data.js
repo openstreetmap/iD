@@ -24,7 +24,7 @@ export function uiMapData(context) {
     var settingsCustomData = uiSettingsCustomData(context)
         .on('change', customChanged);
 
-    var _pane = d3_select(null), _toggleButton = d3_select(null);
+    var _pane = d3_select(null);
 
     var _fillSelected = context.storage('area-fill') || 'partial';
     var _dataLayerContainer = d3_select(null);
@@ -149,7 +149,7 @@ export function uiMapData(context) {
             .append('li')
             .attr('class', function(d) {
                 var classes = 'list-item-photos list-item-' + d.id;
-                if (d.id === 'mapillary-signs') {
+                if (d.id === 'mapillary-signs' || d.id === 'mapillary-map-features') {
                     classes += ' indented';
                 }
                 return classes;
@@ -162,7 +162,7 @@ export function uiMapData(context) {
                 if (d.id === 'mapillary-signs') titleID = 'mapillary.signs.tooltip';
                 else if (d.id === 'mapillary') titleID = 'mapillary_images.tooltip';
                 else if (d.id === 'openstreetcam') titleID = 'openstreetcam_images.tooltip';
-                else titleID = d.id.replace('-', '_') + '.tooltip';
+                else titleID = d.id.replace(/-/g, '_') + '.tooltip';
                 d3_select(this)
                     .call(tooltip()
                         .title(t(titleID))
@@ -180,8 +180,19 @@ export function uiMapData(context) {
             .text(function(d) {
                 var id = d.id;
                 if (id === 'mapillary-signs') id = 'photo_overlays.traffic_signs';
-                return t(id.replace('-', '_') + '.title');
+                return t(id.replace(/-/g, '_') + '.title');
             });
+
+        labelEnter
+            .filter(function(d) { return d.id === 'mapillary-map-features'; })
+            .append('a')
+            .attr('class', 'request-data-link')
+            .attr('target', '_blank')
+            .attr('tabindex', -1)
+            .call(svgIcon('#iD-icon-out-link', 'inline'))
+            .attr('href', 'https://mapillary.github.io/mapillary_solutions/data-request')
+            .append('span')
+            .text(t('mapillary_map_features.request_data'));
 
 
         // Update
@@ -520,7 +531,7 @@ export function uiMapData(context) {
         labelEnter
             .append('span')
             .text(t('map_data.layers.custom.title'));
-    
+
         liEnter
             .append('button')
             .call(tooltip()
@@ -790,15 +801,14 @@ export function uiMapData(context) {
 
     uiMapData.togglePane = function() {
         if (d3_event) d3_event.preventDefault();
-        paneTooltip.hide(_toggleButton);
+        paneTooltip.hide();
         context.ui().togglePanes(!_pane.classed('shown') ? _pane : undefined);
     };
 
     uiMapData.renderToggleButton = function(selection) {
 
-        _toggleButton = selection
+        selection
             .append('button')
-            .attr('tabindex', -1)
             .on('click', uiMapData.togglePane)
             .call(svgIcon('#iD-icon-data', 'light'))
             .call(paneTooltip);

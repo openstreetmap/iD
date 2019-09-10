@@ -39,7 +39,6 @@ export function uiContributors(context) {
             .attr('class', 'user-link')
             .attr('href', function(d) { return osm.userURL(d); })
             .attr('target', '_blank')
-            .attr('tabindex', -1)
             .text(String);
 
         if (u.length > limit) {
@@ -47,7 +46,6 @@ export function uiContributors(context) {
 
             count.append('a')
                 .attr('target', '_blank')
-                .attr('tabindex', -1)
                 .attr('href', function() {
                     return osm.changesetsURL(context.map().center(), context.map().zoom());
                 })

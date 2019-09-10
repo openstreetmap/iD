@@ -3677,9 +3677,6 @@
                 "office/physician": {
                     "name": "Lege"
                 },
-                "office/political_party": {
-                    "name": "Politisk parti"
-                },
                 "office/travel_agent": {
                     "name": "Reisebyrå"
                 },

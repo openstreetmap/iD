@@ -2584,9 +2584,6 @@
                     "label": "الأجهزة",
                     "placeholder": "1, 2, 3..."
                 },
-                "diaper": {
-                    "label": "تغيير حفاظات الطفل متاح"
-                },
                 "diet_multi": {
                     "label": "أنواع الحمية"
                 },
@@ -5759,10 +5756,6 @@
                 },
                 "office/physician": {
                     "name": "طبيب"
-                },
-                "office/political_party": {
-                    "name": "الحزب السياسي ",
-                    "terms": "حزب سياسي، الحزب السياسي، المكتب السياسي، مكتب سياسي"
                 },
                 "office/private_investigator": {
                     "name": "مكتب محقق",

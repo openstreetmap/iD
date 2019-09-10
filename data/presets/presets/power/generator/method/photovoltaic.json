@@ -9,9 +9,9 @@
         "manufacturer"
     ],
     "geometry": [
+        "area",
         "point",
-        "vertex",
-        "area"
+        "vertex"
     ],
     "terms": [
         "photovoltaic module",

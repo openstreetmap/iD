@@ -1690,9 +1690,6 @@
                     "label": "Įrenginiai",
                     "placeholder": "1, 2, 3..."
                 },
-                "diaper": {
-                    "label": "Galimas vystyklų keitimas"
-                },
                 "direction": {
                     "label": "Kryptis (Laipsniai pagal laikrodžio rodyklę)",
                     "placeholder": "45, 90, 180, 270"
@@ -4040,10 +4037,6 @@
                 },
                 "office/physician": {
                     "name": "Gydytojas"
-                },
-                "office/political_party": {
-                    "name": "Politinė partija",
-                    "terms": "politinė partija"
                 },
                 "office/research": {
                     "name": "Tyrimų tarnyba",

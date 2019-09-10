@@ -42,7 +42,7 @@ of iD (e.g. `http://preview.ideditor.com/release/`), the following parameters ar
   _Example:_ `offset=-10,5`
 * __`photo_overlay`__ - The street-level photo overlay layers to enable.<br/>
   _Example:_ `photo_overlay=streetside,mapillary,openstreetcam`<br/>
-  _Available values:_ `streetside` (Microsoft Bing), `mapillary`, `mapillary-signs`, `openstreetcam`
+  _Available values:_ `streetside` (Microsoft Bing), `mapillary`, `mapillary-signs`, `mapillary-map-features`, `openstreetcam`
 * __`presets`__ - A path to an external presets file or a comma-separated list of preset IDs. These will be the only presets the user may select.<br/>
   _Example:_ `presets=https://path/to/presets.json`
   _Example 2:_ `presets=building,highway/residential,highway/unclassified`

@@ -8,6 +8,7 @@ import { t, textDirection } from '../util/locale';
 import { services } from '../services';
 import { svgIcon } from '../svg/index';
 import { tooltip } from '../util/tooltip';
+import { popover } from '../util/popover';
 import { uiTagReference } from './tag_reference';
 import { uiPresetFavoriteButton } from './preset_favorite_button';
 import { uiPresetIcon } from './preset_icon';
@@ -24,87 +25,83 @@ export function uiPresetBrowser(context, allowedGeometry, onChoose, onCancel) {
     var shownGeometry = [];
     updateShownGeometry(allowedGeometry);
 
-    var popover = d3_select(null),
-        search = d3_select(null),
-        popoverContent = d3_select(null);
+    var search = d3_select(null),
+        poplistContent = d3_select(null),
+        poplistFooter = d3_select(null);
 
     var _countryCode;
 
-    var browser = {};
+    var browser = popover('poplist preset-browser fillL')
+        .placement('bottom')
+        .alignment('leading')
+        .hasArrow(false);
 
-    browser.render = function(selection) {
+    browser.content(function() {
+        return function(selection) {
 
-        popover = selection.selectAll('.preset-browser')
-            .data([0]);
+            var header = selection.selectAll('.poplist-header')
+                .data([0])
+                .enter()
+                .append('div')
+                .attr('class', 'poplist-header');
 
-        var popoverEnter = popover
-            .enter()
-            .append('div')
-            .attr('class', 'preset-browser popover fillL hide');
+            header
+                .append('input')
+                .attr('class', 'search-input')
+                .attr('placeholder', t('modes.add_feature.search_placeholder'))
+                .attr('type', 'search')
+                .call(utilNoAuto)
+                .on('blur', function() {
+                    browser.hide();
+                })
+                .on('keypress', keypress)
+                .on('keydown', keydown)
+                .on('input', updateResultsList);
 
-        var header = popoverEnter
-            .append('div')
-            .attr('class', 'popover-header');
+            header
+                .call(svgIcon('#iD-icon-search', 'search-icon pre-text'));
 
-        header
-            .append('input')
-            .attr('class', 'search-input')
-            .attr('placeholder', t('modes.add_feature.search_placeholder'))
-            .attr('type', 'search')
-            .call(utilNoAuto)
-            .on('blur', function() {
-                context.features()
-                    .on('change.preset-browser.' + uid , null);
+            selection.selectAll('.poplist-content')
+                .data([0])
+                .enter()
+                .append('div')
+                .attr('class', 'poplist-content')
+                .on('mousedown', function() {
+                    // don't blur the search input (and thus close results)
+                    d3_event.preventDefault();
+                    d3_event.stopPropagation();
+                })
+                .append('div')
+                .attr('class', 'list');
 
-                popover.classed('hide', true);
-                if (onCancel) onCancel();
-            })
-            .on('keypress', keypress)
-            .on('keydown', keydown)
-            .on('input', updateResultsList);
+            var footer = selection.selectAll('.poplist-footer')
+                .data([0])
+                .enter()
+                .append('div')
+                .attr('class', 'poplist-footer')
+                .on('mousedown', function() {
+                    // don't blur the search input (and thus close results)
+                    d3_event.preventDefault();
+                    d3_event.stopPropagation();
+                });
 
-        header
-            .call(svgIcon('#iD-icon-search', 'search-icon pre-text'));
+            footer.append('div')
+                .attr('class', 'message');
 
-        popoverEnter
-            .append('div')
-            .attr('class', 'popover-content')
-            .on('mousedown', function() {
-                // don't blur the search input (and thus close results)
-                d3_event.preventDefault();
-                d3_event.stopPropagation();
-            })
-            .append('div')
-            .attr('class', 'list');
+            footer.append('div')
+                .attr('class', 'filter-wrap');
 
-        var footer = popoverEnter
-            .append('div')
-            .attr('class', 'popover-footer')
-            .on('mousedown', function() {
-                // don't blur the search input (and thus close results)
-                d3_event.preventDefault();
-                d3_event.stopPropagation();
-            });
+            search = selection.selectAll('.search-input');
+            poplistContent = selection.selectAll('.poplist-content');
+            poplistFooter = selection.selectAll('.poplist-footer');
 
-        footer.append('div')
-            .attr('class', 'message');
+            renderFilterButtons();
+        };
+    });
 
-        footer.append('div')
-            .attr('class', 'filter-wrap');
-
-        popover = popoverEnter.merge(popover);
-        search = popover.selectAll('.search-input');
-        popoverContent = popover.selectAll('.popover-content');
-
-        renderFilterButtons();
-    };
-
-    browser.isShown = function() {
-        return popover && !popover.empty() && !popover.classed('hide');
-    };
-
+    var parentShow = browser.show;
     browser.show = function() {
-        popover.classed('hide', false);
+        parentShow();
         search.node().focus();
         search.node().setSelectionRange(0, search.property('value').length);
 
@@ -117,12 +114,14 @@ export function uiPresetBrowser(context, allowedGeometry, onChoose, onCancel) {
         reloadCountryCode();
     };
 
+    var parentHide = browser.hide;
     browser.hide = function() {
-        search.node().blur();
+        parentHide();
+        if (onCancel) onCancel();
     };
 
     function renderFilterButtons() {
-        var selection = popover.select('.popover-footer .filter-wrap');
+        var selection = poplistFooter.select('.filter-wrap');
 
         var geomForButtons = allowedGeometry.slice();
         var vertexIndex = geomForButtons.indexOf('vertex');
@@ -191,7 +190,7 @@ export function uiPresetBrowser(context, allowedGeometry, onChoose, onCancel) {
     }
 
     function updateFilterButtonsStates() {
-        popover.selectAll('.popover-footer button.filter')
+        poplistFooter.selectAll('button.filter')
             .classed('active', function(d) {
                 return shownGeometry.indexOf(d) !== -1;
             });
@@ -199,7 +198,7 @@ export function uiPresetBrowser(context, allowedGeometry, onChoose, onCancel) {
 
     function keypress() {
         if (d3_event.keyCode === utilKeybinding.keyCodes.enter) {
-            popover.selectAll('.list .list-item.focused button.choose')
+            poplistContent.selectAll('.list .list-item.focused button.choose')
                 .each(function(d) { d.choose.call(this); });
             d3_event.preventDefault();
             d3_event.stopPropagation();
@@ -216,9 +215,9 @@ export function uiPresetBrowser(context, allowedGeometry, onChoose, onCancel) {
             d3_event.preventDefault();
             d3_event.stopPropagation();
 
-            priorFocus = popover.selectAll('.list .list-item.focused');
+            priorFocus = poplistContent.selectAll('.list .list-item.focused');
             if (priorFocus.empty()) {
-                nextFocus = popover.selectAll('.list > .list-item:first-child');
+                nextFocus = poplistContent.selectAll('.list > .list-item:first-child');
             } else {
                 nextFocus = d3_select(priorFocus.nodes()[0].nextElementSibling);
                 if (!nextFocus.empty() && !nextFocus.classed('list-item')) {
@@ -241,7 +240,7 @@ export function uiPresetBrowser(context, allowedGeometry, onChoose, onCancel) {
             d3_event.preventDefault();
             d3_event.stopPropagation();
 
-            priorFocus = popover.selectAll('.list .list-item.focused');
+            priorFocus = poplistContent.selectAll('.list .list-item.focused');
             if (!priorFocus.empty()) {
 
                 nextFocus = d3_select(priorFocus.nodes()[0].previousElementSibling);
@@ -402,7 +401,7 @@ export function uiPresetBrowser(context, allowedGeometry, onChoose, onCancel) {
 
         if (!browser.isShown()) return;
 
-        var list = popoverContent.selectAll('.list');
+        var list = poplistContent.selectAll('.list');
 
         if (search.empty() || list.empty()) return;
 
@@ -411,12 +410,12 @@ export function uiPresetBrowser(context, allowedGeometry, onChoose, onCancel) {
 
         list.selectAll('.list-item.focused')
             .classed('focused', false);
-        focusListItem(popover.selectAll('.list > .list-item:first-child'), false);
+        focusListItem(poplistContent.selectAll('.list > .list-item:first-child'), false);
 
-        popoverContent.node().scrollTop = 0;
+        poplistContent.node().scrollTop = 0;
 
         var resultCount = results.length;
-        popover.selectAll('.popover-footer .message')
+        poplistFooter.selectAll('.message')
             .text(t('modes.add_feature.' + (resultCount === 1 ? 'result' : 'results'), { count: resultCount }));
     }
 
@@ -425,16 +424,16 @@ export function uiPresetBrowser(context, allowedGeometry, onChoose, onCancel) {
             selection.classed('focused', true);
             if (scrollingToShow) {
                 // scroll to keep the focused item visible
-                scrollPopoverToShow(selection);
+                scrollPoplistToShow(selection);
             }
         }
     }
 
-    function scrollPopoverToShow(selection) {
+    function scrollPoplistToShow(selection) {
         if (selection.empty()) return;
 
         var node = selection.nodes()[0];
-        var scrollableNode = popoverContent.node();
+        var scrollableNode = poplistContent.node();
 
         if (node.offsetTop < scrollableNode.scrollTop) {
             scrollableNode.scrollTop = node.offsetTop;
@@ -488,7 +487,7 @@ export function uiPresetBrowser(context, allowedGeometry, onChoose, onCancel) {
                 return 'search-add-list-item-preset-' + d.id().replace(/[^a-zA-Z\d:]/g, '-');
             })
             .on('mouseover', function() {
-                popover.selectAll('.list .list-item.focused')
+                poplistContent.selectAll('.list .list-item.focused')
                     .classed('focused', false);
                 d3_select(this)
                     .classed('focused', true);
@@ -508,15 +507,15 @@ export function uiPresetBrowser(context, allowedGeometry, onChoose, onCancel) {
             });
 
         row.each(function(d) {
-            var geometry = d.preset.geometry[0];
-            if (d.preset.geometry.length !== 1 ||
+            var geometry = d.preset && d.preset.geometry[0];
+            if ((d.preset && d.preset.geometry.length !== 1) ||
                 (geometry !== 'area' && geometry !== 'line' && geometry !== 'vertex')) {
                 geometry = null;
             }
             d3_select(this).call(
                 uiPresetIcon(context)
                     .geometry(geometry)
-                    .preset(d.preset || d.presets[0])
+                    .preset(d.preset || d.category)
                     .sizeClass('small')
             );
         });
@@ -544,35 +543,36 @@ export function uiPresetBrowser(context, allowedGeometry, onChoose, onCancel) {
         });
 
         row.each(function(d) {
-            if (d.preset) {
-                var presetFavorite = uiPresetFavoriteButton(d.preset, null, context, 'accessory');
-                d3_select(this).call(presetFavorite.button);
-            }
+            if (!d.preset) return;
+
+            var presetFavorite = uiPresetFavoriteButton(d.preset, null, context, 'accessory');
+            d3_select(this).call(presetFavorite.button);
         });
         item.each(function(d) {
-            if ((d.preset && (!d.isSubitem || d.isInNameGroup)) || d.geometries) {
+            if (!d.preset) return;
 
-                var reference = uiTagReference(d.preset.reference(d.preset.defaultAddGeometry(context, shownGeometry)), context);
+            var reference = uiTagReference(d.preset.reference(d.preset.defaultAddGeometry(context, shownGeometry)), context);
 
-                var thisItem = d3_select(this);
-                thisItem.selectAll('.row').call(reference.button, 'accessory', 'info');
+            var thisItem = d3_select(this);
+            thisItem.selectAll('.row').call(reference.button, 'accessory', 'info');
 
-                var subsection = thisItem
-                    .append('div')
-                    .attr('class', 'subsection reference');
-                subsection.call(reference.body);
-            }
+            var subsection = thisItem
+                .append('div')
+                .attr('class', 'subsection reference');
+            subsection.call(reference.body);
         });
     }
 
     function updateForFeatureHiddenState() {
 
-        var listItem = d3_selectAll('.add-feature .popover .list-item');
+        var listItem = d3_selectAll('.add-feature .poplist .list-item');
 
         // remove existing tooltips
         listItem.selectAll('button.choose').call(tooltip().destroyAny);
 
         listItem.each(function(item, index) {
+
+            if (!item.preset) return;
 
             var hiddenPresetFeatures;
 
@@ -624,29 +624,29 @@ export function uiPresetBrowser(context, allowedGeometry, onChoose, onCancel) {
                 .enter();
             drawItems(subitemsEnter);
             updateForFeatureHiddenState();
-            scrollPopoverToShow(item.subsection);
+            scrollPoplistToShow(item.subsection);
         } else {
             item.subsection.remove();
         }
     }
 
-    function CategoryItem(preset) {
+    function CategoryItem(category) {
         var item = {};
         item.id = function() {
-            return preset.id;
+            return category.id;
         };
         item.name = function() {
-            return preset.name();
+            return category.name();
         };
         item.subsection = d3_select(null);
-        item.preset = preset;
+        item.category = category;
         item.choose = function() {
             var selection = d3_select(this);
             if (selection.classed('disabled')) return;
             chooseExpandable(item, d3_select(selection.node().closest('.list-item')));
         };
         item.subitems = function() {
-            return preset.members.matchAnyGeometry(shownGeometry).collection
+            return category.members.matchAnyGeometry(shownGeometry).collection
                 .filter(function(preset) {
                     return preset.addable();
                 })
@@ -657,7 +657,7 @@ export function uiPresetBrowser(context, allowedGeometry, onChoose, onCancel) {
         return item;
     }
 
-    function AddablePresetItem(preset, isSubitem, isInNameGroup) {
+    function AddablePresetItem(preset, isSubitem) {
         var item = {};
         item.id = function() {
             return preset.id + isSubitem;
@@ -665,7 +665,6 @@ export function uiPresetBrowser(context, allowedGeometry, onChoose, onCancel) {
         item.name = function() {
             return preset.name();
         };
-        item.isInNameGroup = isInNameGroup;
         item.isSubitem = isSubitem;
         item.preset = preset;
         item.choose = function() {

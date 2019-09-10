@@ -195,20 +195,24 @@
 }
 
 
-/* Mapillary Sign Layer */
-.layer-mapillary-signs {
+/* Mapillary Traffic Signs and Map Features Layers */
+.layer-mapillary-signs,
+.layer-mapillary-map-features {
     pointer-events: none;
 }
-.layer-mapillary-signs .icon-sign {
+.layer-mapillary-signs .icon-sign,
+.layer-mapillary-map-features .icon-map-feature {
     outline: 2px solid transparent;
     pointer-events: visible;
     cursor: pointer;
 }
-.layer-mapillary-signs .icon-sign:hover {
+.layer-mapillary-signs .icon-sign:hover,
+.layer-mapillary-map-features .icon-map-feature:hover {
     outline: 5px solid #eebb00;
     background-color: #eebb00;
 }
-.layer-mapillary-signs .icon-sign.currentView {
+.layer-mapillary-signs .icon-sign.currentView,
+.layer-mapillary-map-features .icon-map-feature.currentView {
     outline: 5px solid #ffee00;
     background-color: #ffee00;
 }

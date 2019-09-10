@@ -2310,9 +2310,6 @@
                     "label": "장치 수",
                     "placeholder": "1, 2, 3..."
                 },
-                "diaper": {
-                    "label": "기저귀 교환대 이용 가능"
-                },
                 "diet_multi": {
                     "label": "식성"
                 },
@@ -6146,10 +6143,6 @@
                 "office/physician": {
                     "name": "내과의원"
                 },
-                "office/political_party": {
-                    "name": "정당",
-                    "terms": "정당"
-                },
                 "office/private_investigator": {
                     "name": "사설탐정 사무소",
                     "terms": "민간조사원"
@@ -7100,9 +7093,6 @@
                 "shop/wine": {
                     "name": "와인 가게",
                     "terms": "포도주 가게"
-                },
-                "tactile_paving": {
-                    "name": "점자 블록"
                 },
                 "telecom/data_center": {
                     "name": "데이터 센터"

@@ -504,7 +504,8 @@
             "translate": "翻译",
             "localized_translation_label": "多语言名称",
             "localized_translation_language": "选择语言",
-            "localized_translation_name": "名称"
+            "localized_translation_name": "名称",
+            "language_and_code": "{language} ({code})"
         },
         "zoom_in_edit": "放大地图以编辑",
         "login": "登录",
@@ -1862,6 +1863,9 @@
                 "connect_features": {
                     "title": "连接这些要素"
                 },
+                "connect_using_ford": {
+                    "title": "使用过水路面连接"
+                },
                 "continue_from_start": {
                     "title": "从起始节点继续绘制"
                 },
@@ -2651,6 +2655,10 @@
                 "building": {
                     "label": "建筑物"
                 },
+                "building/levels/underground": {
+                    "label": "地下楼层数",
+                    "placeholder": "2, 4, 6..."
+                },
                 "building/levels_building": {
                     "label": "楼层数",
                     "placeholder": "2, 4, 6..."
@@ -2855,9 +2863,6 @@
                 "devices": {
                     "label": "设备数量",
                     "placeholder": "1, 2, 3..."
-                },
-                "diaper": {
-                    "label": "有尿布台"
                 },
                 "diet_multi": {
                     "label": "饮食种类"
@@ -3445,6 +3450,9 @@
                 "network_road": {
                     "label": "网络"
                 },
+                "not/name": {
+                    "label": "错误名称"
+                },
                 "note": {
                     "label": "备注"
                 },
@@ -4030,12 +4038,12 @@
                 "trail_visibility": {
                     "label": "路径可见度",
                     "options": {
-                        "bad": "差劲：没有标示，路径有时候消失",
-                        "excellent": "良好：路径明显或标示充分",
-                        "good": "尚可：有标示但可能不明显",
-                        "horrible": "可怕：路径常消失，需要部分定向能力",
-                        "intermediate": "略差：标示稀少，路径大致可见",
-                        "no": "无：没有路径，需具备完整的定向能力"
+                        "bad": "差劲：没有标示，路径有时候消失；需基本越野定向能力",
+                        "excellent": "极好：路径明显或有充分标示",
+                        "good": "良好：有标示但可能不明显",
+                        "horrible": "可怕：路径经常消失，需要较好的越野定向能力",
+                        "intermediate": "尚可：标示稀少，路径大致可见；需要较好方向感和地图",
+                        "no": "无：没有路径，需具备极高的越野定向能力"
                     },
                     "placeholder": "良好，尚可，稍差..."
                 },
@@ -6601,10 +6609,6 @@
                 },
                 "office/physician": {
                     "name": "医生"
-                },
-                "office/political_party": {
-                    "name": "政党",
-                    "terms": "政党"
                 },
                 "office/private_investigator": {
                     "name": "私家侦探事务所",

@@ -1431,9 +1431,6 @@
                     "label": "naprave",
                     "placeholder": "1, 2, 3 ..."
                 },
-                "diaper": {
-                    "label": "Previjalnica"
-                },
                 "direction": {
                     "label": "Smer (v stopinjah v smeri ur. kazalca)",
                     "placeholder": "45, 90, 180, 270"
@@ -4003,10 +4000,6 @@
                 },
                 "office/physician": {
                     "name": "Ambulanta"
-                },
-                "office/political_party": {
-                    "name": "Politična stranka",
-                    "terms": "stranka"
                 },
                 "office/research": {
                     "name": "Raziskave",

@@ -677,7 +677,6 @@ export function uiIssues(context) {
     uiIssues.renderToggleButton = function(selection) {
         _toggleButton = selection
             .append('button')
-            .attr('tabindex', -1)
             .on('click', uiIssues.togglePane)
             .call(svgIcon('#iD-icon-alert', 'light'))
             .call(addNotificationBadge)

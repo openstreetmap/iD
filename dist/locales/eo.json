@@ -504,7 +504,8 @@
             "translate": "Traduki",
             "localized_translation_label": "Plurlingva nomo",
             "localized_translation_language": "Elektu nomon",
-            "localized_translation_name": "Nomo"
+            "localized_translation_name": "Nomo",
+            "language_and_code": "{language} ({code})"
         },
         "zoom_in_edit": "Pligrandigu por redakti",
         "login": "Ensaluti",
@@ -1860,6 +1861,9 @@
                 "connect_features": {
                     "title": "Konekti objektojn"
                 },
+                "connect_using_ford": {
+                    "title": "Konekti per travadejo"
+                },
                 "continue_from_start": {
                     "title": "Pluigi desegni de komencpunkto"
                 },
@@ -2706,6 +2710,12 @@
                 "castle_type": {
                     "label": "Speco"
                 },
+                "charge_fee": {
+                    "label": "Kvanto da pago"
+                },
+                "charge_toll": {
+                    "label": "Kvanto da vojimposto"
+                },
                 "check_date": {
                     "label": "Antaŭe kontrolita je"
                 },
@@ -2873,9 +2883,6 @@
                 "diameter": {
                     "label": "Diametro",
                     "placeholder": "5 mm, 10 cm, 15 in…"
-                },
-                "diaper": {
-                    "label": "Tablo por travindotukado"
                 },
                 "diet_multi": {
                     "label": "Dietoj"
@@ -3180,6 +3187,12 @@
                         "stables": "Jes",
                         "undefined": "Ne"
                     }
+                },
+                "iata": {
+                    "label": "IATA kodo de flughaveno"
+                },
+                "icao": {
+                    "label": "ICAO kodo de flughaveno"
                 },
                 "incline": {
                     "label": "Klino"
@@ -3675,6 +3688,9 @@
                 "population": {
                     "label": "Loĝantaro"
                 },
+                "post": {
+                    "label": "Adreso de poŝt-livero"
+                },
                 "power": {
                     "label": "Tipo"
                 },
@@ -3689,6 +3705,9 @@
                 },
                 "product": {
                     "label": "Produktaĵoj"
+                },
+                "public_bookcase/type": {
+                    "label": "Speco"
                 },
                 "railway": {
                     "label": "Tipo"
@@ -4008,6 +4027,9 @@
                 },
                 "source": {
                     "label": "Fontoj"
+                },
+                "species/wikidata": {
+                    "label": "Specio (identigilo de Vikidatumoj)"
                 },
                 "sport": {
                     "label": "Sportoj"
@@ -4766,6 +4788,10 @@
                     "name": "Lingva lernejo",
                     "terms": "lingvolernejo"
                 },
+                "amenity/letter_box": {
+                    "name": "Leterkesto (riceva)",
+                    "terms": "leterskatolo,leterujo,letera kesto,poŝtkesto"
+                },
                 "amenity/library": {
                     "name": "Biblioteko",
                     "terms": "libropruntejo,librejo,librarejo"
@@ -4906,7 +4932,7 @@
                     "terms": "baloto,voĉdonejo,elektejo"
                 },
                 "amenity/post_box": {
-                    "name": "Poŝtkesto",
+                    "name": "Poŝtkesto (senda)",
                     "terms": "poshtkesto,posxtkesto,leterkesto,leterskatolo,leterujo"
                 },
                 "amenity/post_office": {
@@ -7544,10 +7570,6 @@
                 "office/physician": {
                     "name": "Kabineto de kuracisto"
                 },
-                "office/political_party": {
-                    "name": "Oficejo de politika partio",
-                    "terms": "politika partio,politikpartio,partio"
-                },
                 "office/private_investigator": {
                     "name": "Oficejo de detektivo",
                     "terms": "detektivo"
@@ -8569,6 +8591,10 @@
                     "name": "Fotografia vendejo",
                     "terms": "fotografio,fotografarto"
                 },
+                "shop/printer_ink": {
+                    "name": "Presil-inka vendejo",
+                    "terms": "presilinko,inko,kartoĉo,farbopulvoro"
+                },
                 "shop/pyrotechnics": {
                     "name": "Art-fajraĵa vendejo",
                     "terms": "artfajraĵoj,artfajrajhoj,artfajrajxoj,fajraĵoj,piroteknikaĵoj,piroteĥnikaĵoj"
@@ -8707,10 +8733,6 @@
                 "shop/wine": {
                     "name": "Vina vendejo",
                     "terms": "vinvendejo,vinovendejo,vindejo,alkoholaĵoj"
-                },
-                "tactile_paving": {
-                    "name": "Reliefo por blinduloj",
-                    "terms": "blinda,randaĵo"
                 },
                 "telecom/data_center": {
                     "name": "Datum-centro",

@@ -13,10 +13,35 @@ var apibase = 'https://a.mapillary.com/v3/';
 var viewercss = 'mapillary-js/mapillary.min.css';
 var viewerjs = 'mapillary-js/mapillary.min.js';
 var clientId = 'NzNRM2otQkR2SHJzaXJmNmdQWVQ0dzo1ZWYyMmYwNjdmNDdlNmVi';
+var mapFeatureConfig = {
+    organizationKey: 'FI3NAFfzQQgdF081TRdgTy',
+    values: [
+        'object--bench',
+        'object--bike-rack',
+        'object--billboard',
+        'object--fire-hydrant',
+        'object--mailbox',
+        'object--phone-booth',
+        'object--street-light',
+        'object--support--utility-pole',
+        'object--traffic-light--pedestrians',
+        'object--trash-can',
+        'construction--flat--crosswalk-plain',
+        'object--cctv-camera',
+        'object--banner',
+        'object--catch-basin',
+        'object--manhole',
+        'object--sign--advertisement',
+        'object--sign--information',
+        'object--sign--store',
+        'object--traffic-light--*',
+        'marking--discrete--crosswalk-zebra'
+    ].join(',')
+};
 var maxResults = 1000;
 var tileZoom = 14;
 var tiler = utilTiler().zoomExtent([tileZoom, tileZoom]).skipNullIsland(true);
-var dispatch = d3_dispatch('loadedImages', 'loadedSigns', 'bearingChanged');
+var dispatch = d3_dispatch('loadedImages', 'loadedSigns', 'loadedMapFeatures', 'bearingChanged');
 var _mlyFallback = false;
 var _mlyCache;
 var _mlyClicks;
@@ -160,7 +185,7 @@ function loadNextTilePage(which, currZoom, url, tile) {
                 // A map feature is a real world object that can be shown on a map. It could be any object
                 // recognized from images, manually added in images, or added on the map.
                 // Each map feature is a GeoJSON Point (located where the feature is)
-                } else if (which === 'map_features') {
+                } else if (which === 'map_features' || which === 'points') {
                     d = {
                         loc: loc,
                         key: feature.properties.key,
@@ -191,6 +216,8 @@ function loadNextTilePage(which, currZoom, url, tile) {
                 dispatch.call('loadedImages');
             } else if (which === 'map_features') {
                 dispatch.call('loadedSigns');
+            } else if (which === 'points') {
+                dispatch.call('loadedMapFeatures');
             }
         })
         .catch(function() {
@@ -260,6 +287,7 @@ export default {
             Object.values(_mlyCache.images.inflight).forEach(abortRequest);
             Object.values(_mlyCache.image_detections.inflight).forEach(abortRequest);
             Object.values(_mlyCache.map_features.inflight).forEach(abortRequest);
+            Object.values(_mlyCache.points.inflight).forEach(abortRequest);
             Object.values(_mlyCache.sequences.inflight).forEach(abortRequest);
         }
 
@@ -267,6 +295,7 @@ export default {
             images: { inflight: {}, loaded: {}, nextPage: {}, nextURL: {}, rtree: rbush(), forImageKey: {} },
             image_detections: { inflight: {}, loaded: {}, nextPage: {}, nextURL: {}, forImageKey: {} },
             map_features: { inflight: {}, loaded: {}, nextPage: {}, nextURL: {}, rtree: rbush() },
+            points: { inflight: {}, loaded: {}, nextPage: {}, nextURL: {}, rtree: rbush() },
             sequences: { inflight: {}, loaded: {}, nextPage: {}, nextURL: {}, rtree: rbush(), forImageKey: {}, lineString: {} }
         };
 
@@ -284,6 +313,12 @@ export default {
     signs: function(projection) {
         var limit = 5;
         return searchLimited(limit, projection, _mlyCache.map_features.rtree);
+    },
+
+
+    mapFeatures: function(projection) {
+        var limit = 5;
+        return searchLimited(limit, projection, _mlyCache.points.rtree);
     },
 
 
@@ -334,6 +369,14 @@ export default {
     },
 
 
+    loadMapFeatures: function(projection) {
+        // if we are looking at signs, we'll actually need to fetch images too
+        loadTiles('images', apibase + 'images?', projection);
+        loadTiles('points', apibase + 'map_features?layers=points&min_nbr_image_detections=1&&shapes_by_organization_keys=' + mapFeatureConfig.organizationKey + '&' + 'values=' + mapFeatureConfig.values + '&', projection);
+        loadTiles('image_detections', apibase + 'image_detections?layers=points&shapes_by_organization_keys=' + mapFeatureConfig.organizationKey + '&' + 'values=' + mapFeatureConfig.values + '&', projection);
+    },
+
+
     loadViewer: function(context) {
         // add mly-wrapper
         var wrap = d3_select('#photoviewer').selectAll('.mly-wrapper')
@@ -364,10 +407,10 @@ export default {
 
         // load mapillary signs sprite
         var defs = context.container().select('defs');
-        defs.call(svgDefs(context).addSprites, ['mapillary-sprite'], false /* don't override colors */ );
+        defs.call(svgDefs(context).addSprites, ['mapillary-sprite', 'mapillary-object-sprite'], false /* don't override colors */ );
 
         // Register viewer resize handler
-        context.ui().photoviewer.on('resize', function() {
+        context.ui().photoviewer.on('resize.mapillary', function() {
             if (_mlyViewer) {
                 _mlyViewer.resize();
             }

@@ -111,20 +111,33 @@ export function presetPreset(id, preset, fields, addable, rawPresets) {
 
     preset.matchScore = function(entityTags) {
         var tags = preset.tags;
+        var seen = {};
         var score = 0;
+        var k;
 
-        for (var t in tags) {
-            if (entityTags[t] === tags[t]) {
+        // match on tags
+        for (k in tags) {
+            seen[k] = true;
+            if (entityTags[k] === tags[k]) {
                 score += preset.originalScore;
-            } else if (tags[t] === '*' && t in entityTags) {
+            } else if (tags[k] === '*' && k in entityTags) {
                 score += preset.originalScore / 2;
             } else {
                 return -1;
             }
         }
 
+        // boost score for additional matches in addTags - #6802
+        var addTags = preset.addTags;
+        for (k in addTags) {
+            if (!seen[k] && entityTags[k] === addTags[k]) {
+                score += preset.originalScore;
+            }
+        }
+
         return score;
     };
+
 
     var _textCache = {};
 

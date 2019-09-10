@@ -504,7 +504,8 @@
             "translate": "Traduci",
             "localized_translation_label": "Nome multilingue",
             "localized_translation_language": "Scegli la lingua",
-            "localized_translation_name": "Nome"
+            "localized_translation_name": "Nome",
+            "language_and_code": "{language} ({code})"
         },
         "zoom_in_edit": "Ingrandisci per modificare",
         "login": "Accedi",
@@ -1862,6 +1863,9 @@
                 "connect_features": {
                     "title": "Collega gli elementi"
                 },
+                "connect_using_ford": {
+                    "title": "Collega con un guado"
+                },
                 "continue_from_start": {
                     "title": "Continua a disegnare dall’inizio"
                 },
@@ -2708,6 +2712,9 @@
                 "castle_type": {
                     "label": "Tipo"
                 },
+                "charge_fee": {
+                    "placeholder": "1 EUR, 5 USD, 10 JPY…"
+                },
                 "check_date": {
                     "label": "Data dell'ultimo controllo"
                 },
@@ -2875,9 +2882,6 @@
                 "diameter": {
                     "label": "Diametro",
                     "placeholder": "5 mm, 10 cm, 15 in..."
-                },
-                "diaper": {
-                    "label": "Fasciatoio"
                 },
                 "diet_multi": {
                     "label": "Tipi di dieta"
@@ -3476,6 +3480,9 @@
                 "network_road": {
                     "label": "Rete"
                 },
+                "not/name": {
+                    "label": "Nomi non corretti"
+                },
                 "note": {
                     "label": "Nota"
                 },
@@ -3685,6 +3692,9 @@
                 },
                 "power_supply": {
                     "label": "Alimentazione"
+                },
+                "preschool": {
+                    "label": "Scuola materna"
                 },
                 "produce": {
                     "label": "Produzione"
@@ -4353,6 +4363,9 @@
                 }
             },
             "presets": {
+                "addr/interpolation": {
+                    "name": "Interpolazione indirizzo"
+                },
                 "address": {
                     "name": "Indirizzo",
                     "terms": "numero civico,indirizzo,cap,città,località,luogo"
@@ -4442,9 +4455,15 @@
                     "name": "Elisuperficie",
                     "terms": "elicottero,elisuperficie,eliporto"
                 },
+                "aeroway/holding_position": {
+                    "name": "Circuito di attesa per aeromobili"
+                },
                 "aeroway/jet_bridge": {
                     "name": "Corridoio chiuso passeggeri",
                     "terms": "corridoio,passeggeri,connettore,boarding,portale,imbarco,sbarco,finger"
+                },
+                "aeroway/parking_position": {
+                    "name": "Posizione di parcheggio per aeromobili"
                 },
                 "aeroway/runway": {
                     "name": "Pista di decollo/atterraggio",
@@ -4645,6 +4664,9 @@
                     "name": "Dojo/Accademia di arti marziali",
                     "terms": "dojo,karate,judo,arti marziali"
                 },
+                "amenity/dressing_room": {
+                    "name": "Camerino"
+                },
                 "amenity/drinking_water": {
                     "name": "Fontanella",
                     "terms": "fontana,fontanella,acqua potabile,nasone"
@@ -4672,9 +4694,15 @@
                     "name": "Fast Food di pollo",
                     "terms": "colazione,cena,cibo,mangiare,grigliata,pranzo,tavolo,pollo,alette,bocconcini,fast food"
                 },
+                "amenity/fast_food/donut": {
+                    "name": "Fast Food di ciambelle"
+                },
                 "amenity/fast_food/fish_and_chips": {
                     "name": "Fast Food di Fish & Chips",
                     "terms": "colazione,caffè,cena,cenare,mangiare,grigliata,pranzo,tavolo,fritto,patatine,pesce,fast food"
+                },
+                "amenity/fast_food/ice_cream": {
+                    "name": "Fast Food di gelati"
                 },
                 "amenity/fast_food/kebab": {
                     "name": "Fast Food i kebab",
@@ -4866,6 +4894,9 @@
                     "name": "Buca delle lettere",
                     "terms": "cassetta postale,lettere,portalettere,buchetta,postino"
                 },
+                "amenity/post_depot": {
+                    "name": "Ufficio di smistamento postale"
+                },
                 "amenity/post_office": {
                     "name": "Ufficio Postale",
                     "terms": "ufficio postale,lettere,spedizione,pacco,poste"
@@ -4900,6 +4931,9 @@
                 },
                 "amenity/recycling": {
                     "name": "Riciclaggio"
+                },
+                "amenity/recycling/container/electrical_items": {
+                    "name": "Cassonetto per la raccolta di RAEE"
                 },
                 "amenity/recycling_centre": {
                     "name": "Centro di riciclaggio",
@@ -5706,6 +5740,9 @@
                 "craft/painter": {
                     "name": "Pittore",
                     "terms": "Pittore"
+                },
+                "craft/parquet_layer": {
+                    "name": "Posatori di parquet"
                 },
                 "craft/photographer": {
                     "name": "Fotografo",
@@ -6920,6 +6957,9 @@
                 "man_made/monitoring_station": {
                     "name": "Stazione di controllo"
                 },
+                "man_made/obelisk": {
+                    "name": "Obelisco"
+                },
                 "man_made/observatory": {
                     "name": "Osservatorio",
                     "terms": "osservatorio,astronomico,meteorologico,vulcanologico,osservatorio meteorologico,osservatorio astronomico,radiotelescopio,specola"
@@ -7030,6 +7070,18 @@
                 },
                 "manhole/telecom": {
                     "name": "Tombino per telecomunicazioni"
+                },
+                "military/bunker": {
+                    "name": "Bunker militare"
+                },
+                "military/checkpoint": {
+                    "name": "Posto di blocco"
+                },
+                "military/nuclear_explosion_site": {
+                    "name": "Sito esplosione nucleare"
+                },
+                "military/office": {
+                    "name": "Ufficio militare"
                 },
                 "military/trench": {
                     "name": "Trincea militare"
@@ -7297,8 +7349,7 @@
                     "name": "Medico"
                 },
                 "office/political_party": {
-                    "name": "Sede di partito",
-                    "terms": "circolo,partito,politica,sezione"
+                    "name": "Ufficio di un partito"
                 },
                 "office/private_investigator": {
                     "name": "Ufficio agenzia investigativa privata"
@@ -7585,6 +7636,9 @@
                 "public_transport/platform/tram_point": {
                     "name": "Fermata / banchina del tram"
                 },
+                "public_transport/platform/trolleybus_point": {
+                    "name": "Fermata del filobus"
+                },
                 "public_transport/station": {
                     "name": "Stazione del trasporto pubblico"
                 },
@@ -7848,6 +7902,9 @@
                     "name": "Negozio di biciclette",
                     "terms": "Negozio biciclette"
                 },
+                "shop/boat": {
+                    "name": "Negozio di barche"
+                },
                 "shop/bookmaker": {
                     "name": "Agenzia di scommesse",
                     "terms": "scommesse,puntate,allibratore"
@@ -7866,6 +7923,9 @@
                 "shop/candles": {
                     "name": "Negozio di candele",
                     "terms": "Negozio di candele"
+                },
+                "shop/cannabis": {
+                    "name": "Negozio di cannabis"
                 },
                 "shop/car": {
                     "name": "Concessionario",
@@ -8026,6 +8086,9 @@
                     "name": "Negozio di mobili",
                     "terms": "Negozio di mobili"
                 },
+                "shop/games": {
+                    "name": "Negozio di giochi da tavolo"
+                },
                 "shop/garden_centre": {
                     "name": "Vivaio",
                     "terms": "Centro per il giardinaggio"
@@ -8033,6 +8096,9 @@
                 "shop/gas": {
                     "name": "Bombolaio",
                     "terms": "gas,bombole,bombola,gpl,metano,lpg,cng,gas naturale,propano,ricarica bombole,ricarica"
+                },
+                "shop/general": {
+                    "name": "Emporio"
                 },
                 "shop/gift": {
                     "name": "Negozio souvenir",
@@ -8095,6 +8161,9 @@
                 "shop/laundry": {
                     "name": "Lavanderia",
                     "terms": "Lavanderia"
+                },
+                "shop/laundry/self_service": {
+                    "name": "Lavanderia self-service"
                 },
                 "shop/leather": {
                     "name": "Pelletteria",
@@ -8198,6 +8267,9 @@
                     "name": "Fotografo",
                     "terms": "fotografia,fotografico,fotografo,foto,diapositive,rullini,macchine fotografiche"
                 },
+                "shop/printer_ink": {
+                    "name": "Negozio di cartucce per stampanti"
+                },
                 "shop/pyrotechnics": {
                     "name": "Negozio di fuochi d'artificio",
                     "terms": "botti,petardi,scoppi,magnum,raudi,miniciccioli,fuochi d'artificio,razzi"
@@ -8244,6 +8316,9 @@
                 },
                 "shop/supermarket": {
                     "name": "Supermercato"
+                },
+                "shop/swimming_pool": {
+                    "name": "Negozio per rifornimenti per piscina"
                 },
                 "shop/tailor": {
                     "name": "Sartoria",
@@ -8332,10 +8407,6 @@
                     "name": "Enoteca",
                     "terms": "vino,negozio di vini"
                 },
-                "tactile_paving": {
-                    "name": "Pista tattile",
-                    "terms": "ipovedenti,non vedenti,ciechi,percorso,pavimento,superficie tattile,indicatori"
-                },
                 "telecom/data_center": {
                     "name": "Centro elaborazione dati",
                     "terms": "dati,computer,archivio,stoccaggio,database,informatica,server, server farm,sala server,cloud,telecomunicazioni"
@@ -8358,6 +8429,9 @@
                 "tourism/artwork": {
                     "name": "Opera d'arte",
                     "terms": "Opera d'arte"
+                },
+                "tourism/artwork/graffiti": {
+                    "name": "Graffiti"
                 },
                 "tourism/artwork/mural": {
                     "name": "Murale",
@@ -8424,6 +8498,9 @@
                 },
                 "tourism/information/route_marker": {
                     "name": "Segnavia"
+                },
+                "tourism/information/terminal": {
+                    "name": "Terminale informazioni\\"
                 },
                 "tourism/motel": {
                     "name": "Motel",

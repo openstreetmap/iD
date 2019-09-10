@@ -1556,9 +1556,6 @@
                     "label": "裝置",
                     "placeholder": "1, 2, 3..."
                 },
-                "diaper": {
-                    "label": "設有換片設備"
-                },
                 "direction": {
                     "label": "方向 (順時針度數)",
                     "placeholder": "45, 90, 180, 270"
@@ -4918,10 +4915,6 @@
                 },
                 "office/physician": {
                     "name": "醫生"
-                },
-                "office/political_party": {
-                    "name": "政黨",
-                    "terms": "Political Party,政黨,政治"
                 },
                 "office/research": {
                     "name": "研究所",

@@ -755,9 +755,6 @@
                     "label": "Tresnak",
                     "placeholder": "1, 2, 3..."
                 },
-                "diaper": {
-                    "label": "Pixoihal Aldatzailea Erabilgarri"
-                },
                 "direction": {
                     "label": "Norabidea ( Graduak erlojuaren orratzen norantzan)",
                     "placeholder": "45, 90, 180, 270"

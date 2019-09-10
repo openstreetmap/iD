@@ -2876,9 +2876,6 @@
                     "label": "Diâmetro",
                     "placeholder": "5 mm, 10 cm, 15 in…"
                 },
-                "diaper": {
-                    "label": "Fraldário "
-                },
                 "diet_multi": {
                     "label": "Tipos de dieta"
                 },
@@ -4019,6 +4016,9 @@
                 },
                 "source": {
                     "label": "Fontes"
+                },
+                "species/wikidata": {
+                    "label": "Wikidata Espécies"
                 },
                 "sport": {
                     "label": "Desportos"
@@ -7571,10 +7571,6 @@
                 "office/physician": {
                     "name": "Médico especialista"
                 },
-                "office/political_party": {
-                    "name": "Sede / filial de partido político",
-                    "terms": "Political Party, Partido, Partidos, sede partido, sede partidária, política, sede política,"
-                },
                 "office/private_investigator": {
                     "name": "Detetive privado",
                     "terms": "Detetive, Detetive Particular"
@@ -8604,6 +8600,10 @@
                     "name": "Loja de fotografia",
                     "terms": "Photography Store, Fotográfo, Máquina fotográfica, Material Fotográfico"
                 },
+                "shop/printer_ink": {
+                    "name": "Loja de tinteiros de impressora",
+                    "terms": "printer ink store, loja de tinteiros, tinteiro, tinteiro para impressora"
+                },
                 "shop/pyrotechnics": {
                     "name": "Loja de pirotecnia",
                     "terms": "Fireworks Store, Fogo de Artifício, pirotecnia"
@@ -8742,10 +8742,6 @@
                 "shop/wine": {
                     "name": "Loja de vinhos",
                     "terms": "wine shop, loja de licor, bebidas alcoolicas, bebidas, alcool, álcool, vinho, vinhos, garrafeira, branco, tinto, rosé, champanhe, xampanhe"
-                },
-                "tactile_paving": {
-                    "name": "Pavimento tátil",
-                    "terms": "pavimento tátil, pacimento táctil, piso tátil, piso táctil, superfície tátil, superfície táctil, podotátei"
                 },
                 "telecom/data_center": {
                     "name": "Centro de processamento de dados",

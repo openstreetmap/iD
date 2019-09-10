@@ -8,7 +8,7 @@ export function uiToolWaySegments(context) {
     tool.id = 'way_segments';
     tool.label = t('toolbar.segments.title');
     tool.key = t('toolbar.segments.key');
-    tool.iconName = 'iD-segment-straight';
+    tool.iconName = 'iD-segment-orthogonal';
     tool.iconClass = 'icon-30';
 
     tool.items = [

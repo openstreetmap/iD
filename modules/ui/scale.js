@@ -3,7 +3,7 @@ import { geoLonToMeters, geoMetersToLon } from '../geo';
 import { utilDetect } from '../util/detect';
 
 
-export function uiScale(context) {
+export function uiScale(context, originLeading) {
     var projection = context.projection,
         isImperial = (utilDetect().locale.toLowerCase() === 'en-us'),
         maxLength = 180,
@@ -50,11 +50,18 @@ export function uiScale(context) {
             loc2 = projection.invert([maxLength, dims[1]]),
             scale = scaleDefs(loc1, loc2);
 
+        var scaleGroupX = originLeading ? 10 : (250 - 10 - scale.px);
+
+        selection.select('#scale-group')
+            .attr('transform', 'translate(' + scaleGroupX + ',11)');
+
         selection.select('#scale-path')
             .attr('d', 'M0.5,0.5v' + tickHeight + 'h' + scale.px + 'v-' + tickHeight);
 
+        var textGroupX = originLeading ? (scale.px + 8) : -8;
+
         selection.select('#scale-textgroup')
-            .attr('transform', 'translate(' + (scale.px + 8) + ',' + tickHeight + ')');
+            .attr('transform', 'translate(' + textGroupX + ',' + tickHeight + ')');
 
         selection.select('#scale-text')
             .text(scale.text);
@@ -69,9 +76,10 @@ export function uiScale(context) {
 
         var scalegroup = selection.append('svg')
             .attr('id', 'scale')
+            .attr('class', originLeading ? 'origin-leading' : 'origin-trailing')
             .on('click', switchUnits)
             .append('g')
-            .attr('transform', 'translate(10,11)');
+            .attr('id', 'scale-group');
 
         scalegroup
             .append('path')

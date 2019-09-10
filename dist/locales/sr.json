@@ -1184,9 +1184,6 @@
                 "description": {
                     "label": "Опис"
                 },
-                "diaper": {
-                    "label": "Доступност измена пелена"
-                },
                 "display": {
                     "label": "Приказ"
                 },
@@ -3124,9 +3121,6 @@
                 },
                 "office/lawyer": {
                     "name": "Адвокатска канцеларија"
-                },
-                "office/political_party": {
-                    "name": "Политичка странка"
                 },
                 "office/travel_agent": {
                     "name": "Туристичка агенција"

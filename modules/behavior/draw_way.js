@@ -5,6 +5,7 @@ import {
 
 import { t } from '../util/locale';
 import { actionAddMidpoint } from '../actions/add_midpoint';
+import { actionChangeTags } from '../actions/change_tags';
 import { actionMoveNode } from '../actions/move_node';
 import { behaviorDraw } from './draw';
 import { geoChooseEdge, geoHasSelfIntersections } from '../geo';
@@ -318,6 +319,11 @@ export function behaviorDrawWay(context, wayID, index, mode, startGraph, baselin
         if ((d && d.properties && d.properties.nope) || context.surface().classed('nope')) {
             return;   // can't click here
         }
+
+        if (mode.defaultNodeTags && Object.keys(mode.defaultNodeTags).length) {
+            context.replace(actionChangeTags(end.id, mode.defaultNodeTags), annotation);
+        }
+
         shouldResetOnOff = false;
         checkGeometry(false);   // finishDraw = false
         context.enter(mode);
@@ -332,6 +338,10 @@ export function behaviorDrawWay(context, wayID, index, mode, startGraph, baselin
         shouldResetOnOff = false;
 
         context.pauseChangeDispatch();
+        
+        if (mode.defaultNodeTags && Object.keys(mode.defaultNodeTags).length) {
+            context.replace(actionChangeTags(end.id, mode.defaultNodeTags), annotation);
+        }
 
         context.replace(
             actionAddMidpoint({ loc: loc, edge: edge }, end),

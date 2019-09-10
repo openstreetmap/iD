@@ -1,7 +1,7 @@
 import _debounce from 'lodash-es/debounce';
 
 import { drag as d3_drag } from 'd3-drag';
-import { event as d3_event, select as d3_select } from 'd3-selection';
+import { event as d3_event, select as d3_select, selectAll as d3_selectAll } from 'd3-selection';
 
 import { modeAddArea, modeAddLine, modeAddPoint, modeBrowse } from '../../modes';
 import { t, textDirection } from '../../util/locale';
@@ -110,7 +110,8 @@ export function uiToolQuickPresets(context) {
         });
 
         var buttons = selection.selectAll('button.add-button')
-            .data(modes, function(d, index) { return d.button + index; });
+            .data(modes, function(d) { return d.button; })
+            .order();
 
         // exit
         buttons.exit()
@@ -133,6 +134,7 @@ export function uiToolQuickPresets(context) {
                 .title(function(d) {
                     return d.key ? uiTooltipHtml(d.description, d.key) : d.description;
                 })
+                .scrollContainer(d3_select('#bar'))
             );
 
         buttonsEnter
@@ -153,72 +155,80 @@ export function uiToolQuickPresets(context) {
                     );
             });
 
-        var dragOrigin, dragMoved, targetIndex, targetData;
+        var dragOrigin, dragMoved, targetData;
+        var ltr = textDirection === 'ltr',
+            rtl = !ltr;
 
         buttonsEnter
-            .filter('.add-favorite,.add-recent')
+            .filter('.add-favorite, .add-recent')
             .call(d3_drag()
             .on('start', function() {
                 dragOrigin = {
                     x: d3_event.x,
                     y: d3_event.y
                 };
-                targetIndex = null;
                 targetData = null;
                 dragMoved = false;
             })
-            .on('drag', function(d, index) {
+            .on('drag', function(d) {
                 dragMoved = true;
-                var x = d3_event.x - dragOrigin.x,
-                    y = d3_event.y - dragOrigin.y;
+
+                var deltaX = d3_event.x - dragOrigin.x,
+                    deltaY = d3_event.y - dragOrigin.y;
 
                 if (!d3_select(this).classed('dragging') &&
                     // don't display drag until dragging beyond a distance threshold
-                    Math.sqrt(Math.pow(x, 2) + Math.pow(y, 2)) <= 5) return;
+                    Math.sqrt(Math.pow(deltaX, 2) + Math.pow(deltaY, 2)) <= 5) return;
 
                 d3_select(this)
                     .classed('dragging', true)
-                    .classed('removing', y > 50);
+                    .classed('removing', deltaY > 50);
 
-                targetIndex = null;
                 targetData = null;
 
-                selection.selectAll('button.add-preset')
-                    .style('transform', function(d2, index2) {
-                        var node = d3_select(this).node();
-                        if (index === index2) {
-                            return 'translate(' + x + 'px, ' + y + 'px)';
-                        } else if (y > 50) {
-                            if (index2 > index) {
-                                return 'translateX(' + (textDirection === 'rtl' ? '' : '-') + '100%)';
-                            }
-                        } else if (d.source === d2.source) {
-                            if (index2 > index && (
-                                (d3_event.x > node.offsetLeft && textDirection === 'ltr') ||
-                                (d3_event.x < node.offsetLeft + node.offsetWidth && textDirection === 'rtl')
-                            )) {
-                                if (targetIndex === null || index2 > targetIndex) {
-                                    targetIndex = index2;
-                                    targetData = d2;
-                                }
-                                return 'translateX(' + (textDirection === 'rtl' ? '' : '-') + '100%)';
-                            } else if (index2 < index && (
-                                (d3_event.x < node.offsetLeft + node.offsetWidth && textDirection === 'ltr') ||
-                                (d3_event.x > node.offsetLeft && textDirection === 'rtl')
-                            )) {
-                                if (targetIndex === null || index2 < targetIndex) {
-                                    targetIndex = index2;
-                                    targetData = d2;
-                                }
-                                return 'translateX(' + (textDirection === 'rtl' ? '-' : '') + '100%)';
-                            }
+                var draggingNode = d3_select(this).node();
+                var eventX = d3_event.x + draggingNode.parentNode.offsetLeft;
+                var origLeft = draggingNode.offsetLeft;
+
+                d3_selectAll('#bar button.add-preset')
+                    .style('transform', function(d2) {
+
+                        if (d.button === d2.button) {
+                            return 'translate(' + deltaX + 'px, ' + deltaY + 'px)';
                         }
+
+                        if (deltaY > 50) return null;
+
+                        var node = d3_select(this).node(),
+                            nodeLeft = node.offsetLeft,
+                            nodeRight = nodeLeft + node.offsetWidth;
+
+                        if ((ltr && nodeLeft > origLeft && eventX > nodeLeft) ||
+                            (rtl && nodeLeft < origLeft && eventX < nodeRight)) {
+
+                            if ((ltr && eventX < nodeRight) ||
+                                (rtl && eventX > nodeLeft)) {
+                                targetData = d2;
+                            }
+                            return 'translateX(' + (ltr ? '-' : '') + '100%)';
+
+                        } else if ((ltr && nodeLeft < origLeft && eventX < nodeRight) ||
+                                   (rtl && nodeLeft > origLeft && eventX > nodeLeft)) {
+
+                            if ((ltr && eventX > nodeLeft) ||
+                                (rtl && eventX < nodeRight)) {
+                                targetData = d2;
+                            }
+                            return 'translateX(' + (ltr ? '' : '-') + '100%)';
+                        }
+
                         return null;
                     });
             })
-            .on('end', function(d, index) {
+            .on('end', function(d) {
 
                 if (dragMoved && !d3_select(this).classed('dragging')) {
+                    // didn't move, interpret as a click
                     toggleMode(d);
                     return;
                 }
@@ -227,12 +237,13 @@ export function uiToolQuickPresets(context) {
                     .classed('dragging', false)
                     .classed('removing', false);
 
-                selection.selectAll('button.add-preset')
+                d3_selectAll('#bar button.add-preset')
                     .style('transform', null);
 
-                var y = d3_event.y - dragOrigin.y;
-                if (y > 50) {
+                var deltaY = d3_event.y - dragOrigin.y;
+                if (deltaY > 50) {
                     // dragged out of the top bar, remove
+
                     if (d.isFavorite()) {
                         context.presets().removeFavorite(d.preset);
                         // also remove this as a recent so it doesn't still appear
@@ -240,14 +251,26 @@ export function uiToolQuickPresets(context) {
                     } else if (d.isRecent()) {
                         context.presets().removeRecent(d.preset);
                     }
-                } else if (targetIndex !== null) {
+                } else if (targetData !== null) {
                     // dragged to a new position, reorder
+
                     if (d.isFavorite()) {
-                        context.presets().moveFavorite(index, targetIndex);
+                        context.presets().removeFavorite(d.preset);
+                        if (targetData.isRecent()) {
+                            // also remove this as a recent so it doesn't appear twice
+                            context.presets().removeRecent(d.preset);
+                        }
                     } else if (d.isRecent()) {
-                        var item = context.presets().recentMatching(d.preset);
-                        var beforeItem = context.presets().recentMatching(targetData.preset);
-                        context.presets().moveRecent(item, beforeItem);
+                        context.presets().removeRecent(d.preset);
+                    }
+
+                    var draggingAfter = (ltr && d3_event.x > dragOrigin.x) ||
+                                        (rtl && d3_event.x < dragOrigin.x);
+
+                    if (targetData.isFavorite()) {
+                        context.presets().addFavorite(d.preset, targetData.preset, draggingAfter);
+                    } else if (targetData.isRecent()) {
+                        context.presets().addRecent(d.preset, targetData.preset, draggingAfter);
                     }
                 }
             })

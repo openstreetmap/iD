@@ -1,9 +1,13 @@
 {
+    "icon": "temaki-power_tower",
     "fields": [
-        "design",
         "ref",
-        "material",
         "operator",
+        "design",
+        "material",
+        "line_attachment"
+    ],
+    "moreFields": [
         "manufacturer"
     ],
     "geometry": [

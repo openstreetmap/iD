@@ -5,6 +5,7 @@
         "address",
         "building_area",
         "outdoor_seating",
+        "min_age",
         "brewery"
     ],
     "moreFields": [

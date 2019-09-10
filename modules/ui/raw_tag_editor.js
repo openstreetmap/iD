@@ -284,7 +284,7 @@ export function uiRawTagEditor(context) {
 
         items.selectAll('input.value')
             .attr('title', function(d) {
-                return typeof d.value === 'string' ? d.value : t('inspector.multiple_values');
+                return typeof d.value === 'string' ? d.value : Array.from(_keyValues[d.key]).sort().join('; ');
             })
             .attr('placeholder', function(d) {
                 return typeof d.value === 'string' ? null : t('inspector.multiple_values');

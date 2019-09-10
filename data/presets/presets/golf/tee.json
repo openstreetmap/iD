@@ -7,15 +7,14 @@
         "area"
     ],
     "tags": {
+        "golf": "tee"
+    },
+    "addTags": {
         "golf": "tee",
         "landuse": "grass"
     },
     "terms": [
         "teeing ground"
     ],
-    "reference": {
-        "key": "golf",
-        "value": "tee"
-    },
     "name": "Tee Box"
 }

@@ -2509,9 +2509,6 @@
                     "label": "Aantal apparaten",
                     "placeholder": "1, 2, 3 …"
                 },
-                "diaper": {
-                    "label": "Luierverschoning mogelijk"
-                },
                 "diet_multi": {
                     "label": "Soorten diëten"
                 },
@@ -6606,10 +6603,6 @@
                 "office/physician": {
                     "name": "Arts"
                 },
-                "office/political_party": {
-                    "name": "Politieke partij",
-                    "terms": "partijhoofdzetel,partijbureau"
-                },
                 "office/private_investigator": {
                     "name": "Kantoor van privédetective",
                     "terms": "privédetectivekantoor,rechercheurskantoor,onderzoekerskantoor"
@@ -7603,10 +7596,6 @@
                 "shop/wine": {
                     "name": "Wijnhandel",
                     "terms": "wijnwinkel,wijnproeverij,wijnzaak,wijnerij"
-                },
-                "tactile_paving": {
-                    "name": "Blindengeleidestrook",
-                    "terms": "geleidestrook,ribbelstrook"
                 },
                 "telecom/data_center": {
                     "name": "Datacenter"

@@ -125,7 +125,7 @@ function getResource(resource, callback) {
                         for (const key of Object.keys(fields)) {
                             var field = fields[key];
                             if (!field.terms) continue;
-                            field.terms = field.terms.replace(/[.*]/, '').trim();
+                            field.terms = field.terms.replace(/\[.*\]/, '').trim();
                             if (!field.terms) {
                                 delete field.terms;
                                 if (!Object.keys(preset).length) {

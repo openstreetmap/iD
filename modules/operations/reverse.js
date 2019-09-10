@@ -12,7 +12,15 @@ export function operationReverse(selectedIDs, context) {
     };
 
 
-    operation.available = function() {
+    operation.available = function(situation) {
+        if (situation === 'toolbar') {
+            if (!selectedIDs.some(function(id) {
+                var entity = context.hasEntity(id);
+                return entity && entity.type === 'way' && (entity.isOneWay() || entity.isSided());
+            })) {
+                return false;
+            }
+        }
         return selectedIDs.length === 1 && context.geometry(entityID) === 'line';
     };
 

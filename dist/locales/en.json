@@ -24,6 +24,9 @@
             "favorites": "Favorites",
             "add_feature": "Add Feature",
             "finish": "Finish",
+            "geometry": {
+                "key": "G"
+            },
             "repeat": {
                 "title": "Repeat",
                 "tooltip": {
@@ -48,6 +51,16 @@
                 },
                 "key": "S"
             },
+            "support": {
+                "title": "Support",
+                "pole": {
+                    "title": "Pole"
+                },
+                "tower": {
+                    "title": "Tower"
+                },
+                "key": "S"
+            },
             "toolbox": {
                 "title": "Tools",
                 "tooltip": "Customize the toolbar."
@@ -64,6 +77,7 @@
             },
             "instructions": {
                 "add_point": "Click the center of the feature.",
+                "add_vertex": "Click the point along a line or area where the feature occurs.",
                 "add_line": "Click the starting point of the feature.",
                 "draw_line": "Place points along the feature's centerline.",
                 "add_area": "Click any corner of the feature.",
@@ -77,9 +91,28 @@
                 "evening": "Good Evening",
                 "night": "Good Evening"
             },
-            "welcome": {
-                "first_time": "You’re editing <b>OpenStreetMap</b>: the free, collaborative world map.<br/>If this is your first time here, consider taking the <a>quick-start tutorial</a>.<br/>Thanks for contributing. Have fun!",
-                "return": "Welcome back. Ready to make the map even better?",
+            "notice": "Notice",
+            "launch": {
+                "osm_info": "You’re editing <b>OpenStreetMap</b>: the free, collaborative world map.",
+                "first_time_tutorial": "If this is your first time here, consider taking the <a>quick-start tutorial</a>.",
+                "thanks_have_fun": "Thanks for contributing. Have fun!",
+                "generic_welcome": {
+                    "0": "Ready to make the map even better?",
+                    "1": "What a great day for mapping."
+                },
+                "welcome_back_user": "Welcome back, {displayName}.",
+                "changesets": "You've contributed {changesets} changesets to OpenStreetMap so far.",
+                "changesets_date": "You've contributed {changesets} changesets to OpenStreetMap since {joinDate}.",
+                "anniversary": {
+                    "happy_anniversary": "Happy Anniversary",
+                    "years": {
+                        "first": "Congratulations on your first year of mapping, {displayName}!",
+                        "subsequent": "Congratulations on {years} years of mapping, {displayName}!"
+                    }
+                },
+                "blocks": {
+                    "active": "Your OpenStreetMap account, {displayName}, has an active block and cannot upload changes."
+                },
                 "start_mapping": "Start Mapping"
             },
             "restore": {
@@ -1350,6 +1383,11 @@
         },
         "mapillary_images": {
             "tooltip": "Street-level photos from Mapillary"
+        },
+        "mapillary_map_features": {
+            "title": "Map Features",
+            "tooltip": "Map features from Mapillary",
+            "request_data": "Request Data"
         },
         "mapillary": {
             "title": "Mapillary",
@@ -2876,6 +2914,10 @@
                     "label": "Type",
                     "terms": ""
                 },
+                "baby_seat": {
+                    "label": "Baby Seat",
+                    "terms": ""
+                },
                 "backrest": {
                     "label": "Backrest",
                     "terms": ""
@@ -3131,6 +3173,10 @@
                 },
                 "crossing": {
                     "label": "Type",
+                    "terms": ""
+                },
+                "crossing/island": {
+                    "label": "Refuge Island",
                     "terms": ""
                 },
                 "cuisine": {
@@ -3806,6 +3852,10 @@
                     "label": "Type",
                     "terms": ""
                 },
+                "line_attachment": {
+                    "label": "Line Attachment",
+                    "terms": ""
+                },
                 "lit": {
                     "label": "Lit",
                     "terms": "lamp,lighting"
@@ -3851,6 +3901,10 @@
                     "label": "Material",
                     "terms": ""
                 },
+                "max_age": {
+                    "label": "Maximum Age",
+                    "terms": "upper age limit"
+                },
                 "maxheight": {
                     "label": "Max Height",
                     "terms": "",
@@ -3885,6 +3939,10 @@
                 "microbrewery": {
                     "label": "Microbrewery",
                     "terms": "brewpub,craft beer"
+                },
+                "min_age": {
+                    "label": "Minimum Age",
+                    "terms": "lower age limit"
                 },
                 "minspeed": {
                     "label": "Minimum Speed Limit",
@@ -4208,18 +4266,6 @@
                 },
                 "playground": {
                     "label": "Type",
-                    "terms": ""
-                },
-                "playground/baby": {
-                    "label": "Baby Seat",
-                    "terms": ""
-                },
-                "playground/max_age": {
-                    "label": "Maximum Age",
-                    "terms": ""
-                },
-                "playground/min_age": {
-                    "label": "Minimum Age",
                     "terms": ""
                 },
                 "polling_station": {
@@ -4998,6 +5044,10 @@
                     "label": "Type",
                     "terms": ""
                 },
+                "waste": {
+                    "label": "Waste",
+                    "terms": ""
+                },
                 "water_point": {
                     "label": "Water Point",
                     "terms": ""
@@ -5743,6 +5793,10 @@
                     "name": "Mailbox",
                     "terms": "letter drop,mail box,package drop,post box,postal box"
                 },
+                "amenity/post_depot": {
+                    "name": "Post Sorting Office",
+                    "terms": "mail processing and distribution center,post depot"
+                },
                 "amenity/post_office": {
                     "name": "Post Office",
                     "terms": "letter,mail"
@@ -5786,6 +5840,14 @@
                 "amenity/recycling_container": {
                     "name": "Recycling Container",
                     "terms": "bin,can,bottle,glass,garbage,rubbish,scrap,trash"
+                },
+                "amenity/recycling/container/electrical_items": {
+                    "name": "E-Waste Container",
+                    "terms": "computers,electronic waste,electronics recycling,ewaste bin,phones,tablets"
+                },
+                "amenity/recycling/container/green_waste": {
+                    "name": "Green Waste Container",
+                    "terms": "biodegradable,biological,compost,decomposable,garbage bin,garden waste,organic,rubbish,food scrap"
                 },
                 "amenity/restaurant": {
                     "name": "Restaurant",
@@ -7076,8 +7138,16 @@
                     "terms": "road,street"
                 },
                 "highway/raceway": {
-                    "name": "Racetrack (Motorsport)",
+                    "name": "Motorsport Racetrack",
                     "terms": "auto*,formula one,kart,motocross,nascar,race*,track"
+                },
+                "highway/raceway/karting": {
+                    "name": "Karting Racetrack",
+                    "terms": "carting,go carts,go karts,go-karts,gokarts,kart racing,karting track,motorsports,shifter karts,superkarts"
+                },
+                "highway/raceway/motocross": {
+                    "name": "Motocross Racetrack",
+                    "terms": "off-road racing,offroad moto racing,motocross circuit,motorcycle track,motorsports"
                 },
                 "highway/residential": {
                     "name": "Residential Road",
@@ -7923,6 +7993,10 @@
                     "name": "Monitoring Station",
                     "terms": "weather,earthquake,seismology,air,gps"
                 },
+                "man_made/obelisk": {
+                    "name": "Obelisk",
+                    "terms": ""
+                },
                 "man_made/observatory": {
                     "name": "Observatory",
                     "terms": "astronomical,meteorological"
@@ -8675,10 +8749,6 @@
                     "name": "Train Stop / Platform",
                     "terms": "platform,public transit,public transportation,rail,track,train,transit,transportation"
                 },
-                "public_transport/platform/tram_point": {
-                    "name": "Tram Stop / Platform",
-                    "terms": "electric,light rail,platform,public transit,public transportation,rail,streetcar,track,tram,trolley,transit,transportation"
-                },
                 "public_transport/platform/aerialway": {
                     "name": "Aerialway Platform",
                     "terms": "aerialway,cable car,platform,public transit,public transportation,transit,transportation"
@@ -8710,6 +8780,10 @@
                 "public_transport/platform/train": {
                     "name": "Train Platform",
                     "terms": "platform,public transit,public transportation,rail,track,train,transit,transportation"
+                },
+                "public_transport/platform/tram_point": {
+                    "name": "Tram Stop / Platform",
+                    "terms": "electric,light rail,platform,public transit,public transportation,rail,streetcar,track,tram,trolley,transit,transportation"
                 },
                 "public_transport/platform/tram": {
                     "name": "Tram Platform",
@@ -9435,6 +9509,10 @@
                     "name": "Religious Store",
                     "terms": ""
                 },
+                "shop/rental": {
+                    "name": "Rental Shop",
+                    "terms": ""
+                },
                 "shop/scuba_diving": {
                     "name": "Scuba Diving Shop",
                     "terms": "diving,scuba"
@@ -9558,10 +9636,6 @@
                 "shop/wine": {
                     "name": "Wine Shop",
                     "terms": ""
-                },
-                "tactile_paving": {
-                    "name": "Tactile Paving",
-                    "terms": "blind path,detectable warning surfaces,tactile ground surface indicators,tactile walking surface indicators,truncated domes,visually impaired path"
                 },
                 "telecom/data_center": {
                     "name": "Data Center",

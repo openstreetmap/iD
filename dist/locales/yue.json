@@ -864,9 +864,6 @@
                 "devices": {
                     "placeholder": "1, 2, 3..."
                 },
-                "diaper": {
-                    "label": "換得尿片"
-                },
                 "direction": {
                     "placeholder": "45, 90, 180, 270"
                 },
@@ -2446,10 +2443,6 @@
                 },
                 "office/physician": {
                     "name": "醫生"
-                },
-                "office/political_party": {
-                    "name": "政黨",
-                    "terms": "Political Party,政黨"
                 },
                 "office/research": {
                     "name": "研究所",

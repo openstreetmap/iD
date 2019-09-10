@@ -1133,9 +1133,6 @@
                 "office/physician": {
                     "name": "চিকিত্সক"
                 },
-                "office/political_party": {
-                    "name": "রাজনৈতিক দল"
-                },
                 "office/telecommunication": {
                     "name": "টেলিকম অফিস"
                 },

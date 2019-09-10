@@ -1,5 +1,6 @@
 
 import {
+    event as d3_event,
     select as d3_select
 } from 'd3-selection';
 import { t } from '../util/locale';
@@ -19,6 +20,7 @@ import { uiToolCenterZoom } from './tools/center_zoom';
 import { uiToolStopDraw } from './tools/stop_draw';
 import { uiToolToolbox } from './tools/toolbox';
 import { uiToolAddingGeometry } from './tools/adding_geometry';
+import { uiToolPowerSupport } from './tools/power_support';
 
 export function uiTopToolbar(context) {
 
@@ -50,6 +52,7 @@ export function uiTopToolbar(context) {
         centerZoom = uiToolCenterZoom(context),
         stopDraw = uiToolStopDraw(context),
         addingGeometry = uiToolAddingGeometry(context),
+        powerSupport = uiToolPowerSupport(context),
         /*
         deselect = uiToolSimpleButton({
             id: 'deselect',
@@ -130,6 +133,8 @@ export function uiTopToolbar(context) {
                 addingGeometry,
                 'spacer',
                 structure,
+                powerSupport,
+                'spacer',
                 waySegments,
                 'spacer',
                 repeatAdd,
@@ -164,6 +169,14 @@ export function uiTopToolbar(context) {
     }
 
     function topToolbar(bar) {
+
+        bar.on('wheel.topToolbar', function() {
+            if (!d3_event.deltaX) {
+                // translate vertical scrolling into horizontal scrolling in case
+                // the user doesn't have an input device that can scroll horizontally
+                bar.node().scrollLeft += d3_event.deltaY;
+            }
+        });
 
         var debouncedUpdate = _debounce(update, 250, { leading: true, trailing: true });
         context.history()

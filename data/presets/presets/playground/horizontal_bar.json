@@ -1,8 +1,5 @@
 {
     "icon": "maki-pitch",
-    "fields": [
-        "height"
-    ],
     "geometry": [
         "point"
     ],

@@ -1,0 +1,19 @@
+{
+    "icon": "maki-monument",
+    "fields": [
+        "name",
+        "inscription",
+        "height",
+        "material",
+        "colour"
+    ],
+    "geometry": [
+        "point",
+        "vertex",
+        "area"
+    ],
+    "tags": {
+        "man_made": "obelisk"
+    },
+    "name": "Obelisk"
+}

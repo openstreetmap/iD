@@ -1,5 +1,27 @@
 {
     "be": {
+        "icons": {
+            "download": "спампаваць",
+            "information": "інфо",
+            "remove": "выдаліць",
+            "undo": "скасаваць",
+            "zoom_to": "наблізіць",
+            "copy": "капіяваць",
+            "open_wikidata": "адкрыць на wikidata.org",
+            "favorite": "любімае"
+        },
+        "toolbar": {
+            "inspect": "Агледзець",
+            "undo_redo": "Скасаваць / Паўтарыць",
+            "recent": "Нядаўнія",
+            "favorites": "Выбранае",
+            "add_feature": "Дадаць функцыю"
+        },
+        "modes": {
+            "add_feature": {
+                "title": "Дадаць функцыю"
+            }
+        },
         "operations": {
             "merge": {
                 "title": "Аб'яднаць"

@@ -14,8 +14,8 @@
         "fax"
     ],
     "geometry": [
-        "point",
-        "area"
+        "area",
+        "point"
     ],
     "fields": [
         "name"

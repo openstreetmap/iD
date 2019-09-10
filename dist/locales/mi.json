@@ -1,0 +1,35 @@
+{
+    "mi": {
+        "icons": {
+            "download": "tango iho",
+            "undo": "wetekina",
+            "copy": "tārua"
+        },
+        "modes": {
+            "add_area": {
+                "title": "Pae"
+            },
+            "add_line": {
+                "title": "Ara"
+            },
+            "add_point": {
+                "title": "Ira"
+            }
+        },
+        "save": {
+            "title": "Pupuri"
+        },
+        "help": {
+            "editing": {
+                "save_h": "Pupuri"
+            }
+        },
+        "shortcuts": {
+            "editing": {
+                "commands": {
+                    "save": "Pupuri"
+                }
+            }
+        }
+    }
+}

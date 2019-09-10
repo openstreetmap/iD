@@ -1,0 +1,31 @@
+{
+    "icon": "maki-recycling",
+    "fields": [
+        "{amenity/recycling_container}"
+    ],
+    "moreFields": [
+        "{amenity/recycling_container}"
+    ],
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "terms": [
+        "computers",
+        "electronic waste",
+        "electronics recycling",
+        "ewaste bin",
+        "phones",
+        "tablets"
+    ],
+    "tags": {
+        "amenity": "recycling",
+        "recycling_type": "container",
+        "recycling:electrical_items": "yes"
+    },
+    "reference": {
+        "key": "recycling:electrical_items",
+        "value": "yes"
+    },
+    "name": "E-Waste Container"
+}

@@ -69,8 +69,15 @@ export function operationOrthogonalize(selectedIDs, context) {
     };
 
 
-    operation.available = function() {
-        return actions.length && selectedIDs.length === actions.length;
+    operation.available = function(situation) {
+        if (!actions.length || selectedIDs.length !== actions.length) return false;
+
+        if (situation === 'toolbar' &&
+            actions.every(function(action) {
+                return action.disabled(context.graph()) === 'end_vertex';
+            })) return false;
+
+        return true;
     };
 
 

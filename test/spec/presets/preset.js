@@ -44,6 +44,34 @@ describe('iD.presetPreset', function() {
             var entity = iD.osmWay({tags: {building: 'yep'}});
             expect(preset.matchScore(entity.tags)).to.equal(0.5);
         });
+
+        it('boosts matchScore for additional matches in addTags', function() {
+            var presetSupercenter = iD.presetPreset('shop/supermarket/walmart_supercenter', {
+                tags: { 'brand:wikidata': 'Q483551', 'shop': 'supermarket' },
+                addTags: { 'name': 'Walmart Supercenter' }
+            });
+            var presetMarket = iD.presetPreset('shop/supermarket/walmart_market', {
+                tags: { 'brand:wikidata': 'Q483551', 'shop': 'supermarket' },
+                addTags: { 'name': 'Walmart Neighborhood Market' }
+            });
+
+            var supercenter = iD.osmWay({ tags: {
+                'brand:wikidata': 'Q483551',
+                'shop': 'supermarket',
+                'name': 'Walmart Supercenter'
+            }});
+            var market = iD.osmWay({ tags: {
+                'brand:wikidata': 'Q483551',
+                'shop': 'supermarket',
+                'name': 'Walmart Neighborhood Market'
+            }});
+
+            expect(presetSupercenter.matchScore(supercenter.tags))
+                .to.be.greaterThan(presetMarket.matchScore(supercenter.tags));
+
+            expect(presetMarket.matchScore(market.tags))
+                .to.be.greaterThan(presetSupercenter.matchScore(market.tags));
+        });
     });
 
     describe('isFallback', function() {

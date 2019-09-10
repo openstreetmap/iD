@@ -17,7 +17,7 @@ import { icon } from './intro/helper';
 export function uiHelp(context) {
     var key = t('help.key');
 
-    var _pane = d3_select(null), _toggleButton = d3_select(null);
+    var _pane = d3_select(null);
 
     var docKeys = [
         ['help', [
@@ -302,14 +302,13 @@ export function uiHelp(context) {
 
     uiHelp.togglePane = function() {
         if (d3_event) d3_event.preventDefault();
-        paneTooltip.hide(_toggleButton);
+        paneTooltip.hide();
         context.ui().togglePanes(!_pane.classed('shown') ? _pane : undefined);
     };
 
     uiHelp.renderToggleButton = function(selection) {
 
-        _toggleButton = selection.append('button')
-            .attr('tabindex', -1)
+        selection.append('button')
             .on('click', uiHelp.togglePane)
             .call(svgIcon('#iD-icon-help', 'light'))
             .call(paneTooltip);

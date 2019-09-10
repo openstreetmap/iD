@@ -1,0 +1,34 @@
+{
+    "icon": "maki-recycling",
+    "fields": [
+        "{amenity/recycling_container}"
+    ],
+    "moreFields": [
+        "{amenity/recycling_container}"
+    ],
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "terms": [
+        "biodegradable",
+        "biological",
+        "compost",
+        "decomposable",
+        "garbage bin",
+        "garden waste",
+        "organic",
+        "rubbish",
+        "food scrap"
+    ],
+    "tags": {
+        "amenity": "recycling",
+        "recycling_type": "container",
+        "recycling:green_waste": "yes"
+    },
+    "reference": {
+        "key": "recycling:green_waste",
+        "value": "yes"
+    },
+    "name": "Green Waste Container"
+}

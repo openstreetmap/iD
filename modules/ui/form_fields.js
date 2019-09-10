@@ -54,11 +54,16 @@ export function uiFormFields(context) {
         var moreFields = notShown.map(function(field) {
             var label = field.label();
             titles.push(label);
+            
+            var terms = field.terms();
+            if (field.key) terms.push(field.key);
+            if (field.keys) terms = terms.concat(field.keys);
+
             return {
                 title: label,
                 value: label,
                 field: field,
-                terms: field.terms().concat(field.key)
+                terms: terms
             };
         });
 

@@ -1,8 +1,12 @@
 {
+    "icon": "temaki-utility_pole",
     "fields": [
         "ref",
-        "material",
         "operator",
+        "material",
+        "line_attachment"
+    ],
+    "moreFields": [
         "manufacturer"
     ],
     "geometry": [

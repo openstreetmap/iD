@@ -175,7 +175,6 @@ export function uiRawMemberEditor(context) {
                         .append('button')
                         .attr('class', 'member-zoom')
                         .attr('title', t('icons.zoom_to'))
-                        .attr('tabindex', -1)
                         .call(svgIcon('#iD-icon-geolocate'))
                         .on('click', zoomToMember);
 

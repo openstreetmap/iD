@@ -504,7 +504,8 @@
             "translate": "翻訳",
             "localized_translation_label": "多言語名称",
             "localized_translation_language": "言語選択",
-            "localized_translation_name": "名称"
+            "localized_translation_name": "名称",
+            "language_and_code": "{language} ({code})"
         },
         "zoom_in_edit": "ズームして編集",
         "login": "ログイン",
@@ -1862,6 +1863,9 @@
                 "connect_features": {
                     "title": "地物を接続する"
                 },
+                "connect_using_ford": {
+                    "title": "浅瀬を介して接続する"
+                },
                 "continue_from_start": {
                     "title": "開始点から延長する"
                 },
@@ -2452,6 +2456,7 @@
                         }
                     },
                     "placeholder": "その他",
+                    "terms": "アクセス, 許可",
                     "types": {
                         "access": "すべて",
                         "bicycle": "自転車",
@@ -2461,7 +2466,8 @@
                     }
                 },
                 "access_simple": {
-                    "label": "アクセス制限"
+                    "label": "アクセス制限",
+                    "terms": "アクセス, 許可"
                 },
                 "addr/interpolation": {
                     "label": "補間の種類",
@@ -2506,7 +2512,8 @@
                         "suburb": "区",
                         "suburb!jp": "区",
                         "unit": "単位"
-                    }
+                    },
+                    "terms": "住所, アドレス"
                 },
                 "admin_level": {
                     "label": "Admin Level"
@@ -2555,7 +2562,8 @@
                     "label": "製品"
                 },
                 "air_conditioning": {
-                    "label": "空調有無"
+                    "label": "空調有無",
+                    "terms": "空調, エアコン, 冷暖房"
                 },
                 "amenity": {
                     "label": "種類"
@@ -2570,7 +2578,8 @@
                     "label": "対象となる動物"
                 },
                 "architect": {
-                    "label": "建築家"
+                    "label": "建築家",
+                    "terms": "建築家, 設計者, アーキテクト"
                 },
                 "area/highway": {
                     "label": "道路の種類"
@@ -2591,7 +2600,8 @@
                     "label": "背もたれ"
                 },
                 "bar": {
-                    "label": "バー"
+                    "label": "バー",
+                    "terms": "バー, 酒"
                 },
                 "barrier": {
                     "label": "種類"
@@ -2617,13 +2627,15 @@
                     "label": "美容の種類"
                 },
                 "bench": {
-                    "label": "ベンチ"
+                    "label": "ベンチ",
+                    "terms": "ベンチ, 椅子, いす, 腰掛け, 座席"
                 },
                 "bicycle_parking": {
                     "label": "種類"
                 },
                 "bin": {
-                    "label": "ゴミ箱有無"
+                    "label": "ゴミ箱有無",
+                    "terms": "ゴミ箱, ごみ箱, 廃棄物, 空き缶, 空き瓶, 空きビン, 空きカン"
                 },
                 "blood_components": {
                     "label": "献血種類",
@@ -2647,10 +2659,12 @@
                     "label": "種類"
                 },
                 "brand": {
-                    "label": "ブランド"
+                    "label": "ブランド",
+                    "terms": "ブランド, 系列"
                 },
                 "brewery": {
-                    "label": "ドラフトビール"
+                    "label": "ドラフトビール",
+                    "terms": "ドラフトビール, ビール"
                 },
                 "bridge": {
                     "label": "種類",
@@ -2660,18 +2674,22 @@
                     "label": "種類"
                 },
                 "building": {
-                    "label": "建物"
+                    "label": "建物",
+                    "terms": "建物, ビル"
                 },
                 "building/levels/underground": {
                     "label": "地下階数",
-                    "placeholder": "2, 4, 6..."
+                    "placeholder": "2, 4, 6...",
+                    "terms": "地下, 地下階数"
                 },
                 "building/levels_building": {
                     "label": "建物の地上階数",
-                    "placeholder": "2, 4, 6..."
+                    "placeholder": "2, 4, 6...",
+                    "terms": "階数, 総階数, 階建て"
                 },
                 "building/material": {
-                    "label": "建物の素材"
+                    "label": "建物の素材",
+                    "terms": "材料, 素材"
                 },
                 "building_area": {
                     "label": "建物"
@@ -2700,13 +2718,27 @@
                 },
                 "capacity": {
                     "label": "収容数",
-                    "placeholder": "50, 100, 200..."
+                    "placeholder": "50, 100, 200...",
+                    "terms": "キャパ, 容量, 収容数, 定員, 収容台数, 座席数"
                 },
                 "cash_in": {
                     "label": "入金"
                 },
                 "castle_type": {
                     "label": "種類"
+                },
+                "changing_table": {
+                    "label": "オムツ交換台有無"
+                },
+                "charge_fee": {
+                    "label": "料金",
+                    "placeholder": "1 EUR, 5 USD, 10 JPY…",
+                    "terms": "オムツ替え台, オムツ交換台"
+                },
+                "charge_toll": {
+                    "label": "通行料金",
+                    "placeholder": "1 EUR, 5 USD, 10 JPY…",
+                    "terms": "通行料金, 料金"
                 },
                 "check_date": {
                     "label": "最終確認日"
@@ -2721,14 +2753,16 @@
                     "label": "収集時刻"
                 },
                 "colour": {
-                    "label": "色"
+                    "label": "色",
+                    "terms": "色, カラー"
                 },
                 "comment": {
                     "label": "変更セットのコメント",
                     "placeholder": "投稿内容の簡潔な説明(アップロード前に記入必須)"
                 },
                 "communication_multi": {
-                    "label": "通信回線の種類"
+                    "label": "通信回線の種類",
+                    "terms": "通信塔の種類, 通信"
                 },
                 "construction": {
                     "label": "種類"
@@ -2759,7 +2793,8 @@
                     "placeholder": "1, 2, 3..."
                 },
                 "covered": {
-                    "label": "屋根"
+                    "label": "屋根",
+                    "terms": "覆い, 屋根, 被覆"
                 },
                 "craft": {
                     "label": "種類"
@@ -2778,11 +2813,15 @@
                 "crossing": {
                     "label": "種類"
                 },
+                "crossing/island": {
+                    "label": "横断島"
+                },
                 "cuisine": {
                     "label": "料理"
                 },
                 "currency_multi": {
-                    "label": "通貨の種類"
+                    "label": "通貨の種類",
+                    "terms": "貨幣の種類, 貨幣, コイン, 紙幣, キャッシュ, 支払"
                 },
                 "cutting": {
                     "label": "種類",
@@ -2824,6 +2863,7 @@
                         }
                     },
                     "placeholder": "なし",
+                    "terms": "自転車レーン, 自転車, 自転車専用",
                     "types": {
                         "cycleway:left": "左側",
                         "cycleway:right": "右側"
@@ -2836,10 +2876,12 @@
                     "label": "日付"
                 },
                 "delivery": {
-                    "label": "配達"
+                    "label": "配達",
+                    "terms": "配達, 出前, 配送"
                 },
                 "denomination": {
-                    "label": "宗派"
+                    "label": "宗派",
+                    "terms": "宗派"
                 },
                 "denotation": {
                     "label": "意味"
@@ -2854,7 +2896,8 @@
                     }
                 },
                 "description": {
-                    "label": "説明"
+                    "label": "説明",
+                    "terms": "説明, 概要, サマリー"
                 },
                 "design": {
                     "label": "デザイン"
@@ -2863,7 +2906,8 @@
                     "label": "行き先の道路番号"
                 },
                 "destination/symbol_oneway": {
-                    "label": "行き先のシンボル"
+                    "label": "行き先のシンボル",
+                    "terms": "説明のシンボル, シンボル, アイコン"
                 },
                 "destination_oneway": {
                     "label": "行き先"
@@ -2876,11 +2920,9 @@
                     "label": "直径",
                     "placeholder": "5 mm, 10 cm, 15 in…"
                 },
-                "diaper": {
-                    "label": "おむつ交換台の利用可否"
-                },
                 "diet_multi": {
-                    "label": "食事制限の種類"
+                    "label": "食事制限の種類",
+                    "terms": "食事制限の種類, 食事制限, ビーガン, ベジタビリアン, 菜食"
                 },
                 "diplomatic": {
                     "label": "外交組織の種類"
@@ -2946,7 +2988,8 @@
                         "leashed": "首紐がある場合に犬を同行可",
                         "no": "犬は同行不可",
                         "yes": "犬は同行可"
-                    }
+                    },
+                    "terms": "犬, ペット, 動物"
                 },
                 "door": {
                     "label": "ドア"
@@ -2955,11 +2998,13 @@
                     "label": "ドアの種類"
                 },
                 "drive_through": {
-                    "label": "ドライブスルー"
+                    "label": "ドライブスルー",
+                    "terms": "ドライブスルー"
                 },
                 "duration": {
                     "label": "所要時間",
-                    "placeholder": "00:00"
+                    "placeholder": "00:00",
+                    "terms": "期間"
                 },
                 "electrified": {
                     "label": "電化状態",
@@ -2972,11 +3017,13 @@
                     "placeholder": "架線、集電レール..."
                 },
                 "elevation": {
-                    "label": "標高"
+                    "label": "標高",
+                    "terms": "高度"
                 },
                 "email": {
                     "label": "メールアドレス",
-                    "placeholder": "example@example.com"
+                    "placeholder": "example@example.com",
+                    "terms": "メール, メールアドレス"
                 },
                 "embankment": {
                     "label": "種類",
@@ -3005,19 +3052,23 @@
                 },
                 "fax": {
                     "label": "FAX",
-                    "placeholder": "+31 42 123 4567"
+                    "placeholder": "+31 42 123 4567",
+                    "terms": "ファックス, ファクシミリ"
                 },
                 "fee": {
-                    "label": "利用料金"
+                    "label": "利用料金",
+                    "terms": "料金, 値段, 価格"
                 },
                 "fence_type": {
                     "label": "柵の種類"
                 },
                 "fire_hydrant/diameter": {
-                    "label": "口径 (mm, in, または文字)"
+                    "label": "口径 (mm, in, または文字)",
+                    "terms": "直径, 径"
                 },
                 "fire_hydrant/pressure": {
-                    "label": "水圧 (bar)"
+                    "label": "水圧 (bar)",
+                    "terms": "圧力, 水圧"
                 },
                 "fire_hydrant/type": {
                     "label": "形状",
@@ -3032,13 +3083,15 @@
                     "label": "暖炉"
                 },
                 "fishing": {
-                    "label": "釣り"
+                    "label": "釣り",
+                    "terms": "魚釣り, 釣り, フィッシング"
                 },
                 "fitness_station": {
                     "label": "設備の種類"
                 },
                 "fixme": {
-                    "label": "要修正"
+                    "label": "要修正",
+                    "terms": "修正依頼, 修正希望, 修正歓迎"
                 },
                 "flag/type": {
                     "label": "掲揚ポールの種類"
@@ -3047,17 +3100,20 @@
                     "label": "水に浮いているかどうか"
                 },
                 "flood_prone": {
-                    "label": "洪水浸水想定区域"
+                    "label": "洪水浸水想定区域",
+                    "terms": "洪水浸水想定区域, 洪水, 浸水"
                 },
                 "ford": {
                     "label": "種類",
                     "placeholder": "デフォルト"
                 },
                 "frequency": {
-                    "label": "動作周波数"
+                    "label": "動作周波数",
+                    "terms": "周波数"
                 },
                 "frequency_electrified": {
-                    "label": "動作周波数"
+                    "label": "動作周波数",
+                    "terms": "周波数"
                 },
                 "from": {
                     "label": "From"
@@ -3078,7 +3134,8 @@
                         "male": "男性",
                         "unisex": "性別区分なし"
                     },
-                    "placeholder": "不明"
+                    "placeholder": "不明",
+                    "terms": "性別, 男性, 女性, ユニセックス"
                 },
                 "generator/method": {
                     "label": "方式"
@@ -3120,13 +3177,16 @@
                     "label": "専門科"
                 },
                 "height": {
-                    "label": "高さ (メートル)"
+                    "label": "高さ (メートル)",
+                    "terms": "高さ"
                 },
                 "height_building": {
-                    "label": "高さ (メートル)"
+                    "label": "高さ (メートル)",
+                    "terms": "高さ, 建物の高さ, 全高"
                 },
                 "highspeed": {
-                    "label": "高速鉄道"
+                    "label": "高速鉄道",
+                    "terms": "高速, ハイスピード"
                 },
                 "highway": {
                     "label": "道路の種類"
@@ -3174,7 +3234,8 @@
                         "difficult": "困難: 狭くて荒れた道。乗り越えるべき障害物や狭い通路の可能性あり。",
                         "impossible": "通過不能: 馬では道または橋が通過できない。極端に狭い、サポート不足、はしごのような障害物。生命の危険あり。"
                     },
-                    "placeholder": "困難, 危険..."
+                    "placeholder": "困難, 危険...",
+                    "terms": "乗馬の難易度, 乗馬, 難易度"
                 },
                 "horse_stables": {
                     "label": "乗馬施設",
@@ -3190,7 +3251,8 @@
                     "label": "ICAO空港コード"
                 },
                 "incline": {
-                    "label": "傾斜"
+                    "label": "傾斜",
+                    "terms": "傾き, 傾斜, 斜度, 向き"
                 },
                 "incline_steps": {
                     "label": "傾斜",
@@ -3200,7 +3262,8 @@
                     }
                 },
                 "indoor": {
-                    "label": "室内"
+                    "label": "室内",
+                    "terms": "インドア, 屋内"
                 },
                 "indoor_type": {
                     "label": "屋内の種類"
@@ -3212,10 +3275,12 @@
                     "label": "種類"
                 },
                 "inscription": {
-                    "label": "碑文の文面"
+                    "label": "碑文の文面",
+                    "terms": "銘, 刻銘, 碑文, 記銘"
                 },
                 "intermittent": {
-                    "label": "間欠性"
+                    "label": "間欠性",
+                    "terms": "間欠, 季節, 季節涸川"
                 },
                 "intermittent_yes": {
                     "label": "間欠性"
@@ -3228,19 +3293,24 @@
                         "wired": "有線LAN",
                         "wlan": "Wi-Fi",
                         "yes": "有り"
-                    }
+                    },
+                    "terms": "インターネット, ネット, アクセスポイント"
                 },
                 "internet_access/fee": {
-                    "label": "インターネット接続利用料金"
+                    "label": "インターネット接続利用料金",
+                    "terms": "インターネットアクセス料金, アクセス料金, 使用料, 料金"
                 },
                 "internet_access/ssid": {
-                    "label": "SSID (Wifiネットワーク名)"
+                    "label": "SSID (Wifiネットワーク名)",
+                    "terms": "WIFIネットワーク名, アクセスポイント名"
                 },
                 "interval": {
-                    "label": "間隔"
+                    "label": "間隔",
+                    "terms": "運行間隔, 間隔, インターバル"
                 },
                 "junction/ref_oneway": {
-                    "label": "ジャンクション番号"
+                    "label": "ジャンクション番号",
+                    "terms": "交差点番号, ジャンクション番号"
                 },
                 "junction_line": {
                     "label": "ジャンクション",
@@ -3248,7 +3318,8 @@
                         "circular": "ロータリー交差点(優先権なし)",
                         "jughandle": "連絡用ランプ",
                         "roundabout": "ラウンドアバウト(優先権あり)"
-                    }
+                    },
+                    "terms": "交差点, ジャンクション"
                 },
                 "kerb": {
                     "label": "縁石の詳細"
@@ -3267,14 +3338,16 @@
                 },
                 "lanes": {
                     "label": "車線数",
-                    "placeholder": "1, 2, 3..."
+                    "placeholder": "1, 2, 3...",
+                    "terms": "レーン数, 車線数, 車線"
                 },
                 "language_multi": {
                     "label": "言語"
                 },
                 "layer": {
                     "label": "レイヤー",
-                    "placeholder": "0"
+                    "placeholder": "0",
+                    "terms": "レイヤ"
                 },
                 "leaf_cycle": {
                     "label": "葉の季節変化",
@@ -3319,20 +3392,27 @@
                     "label": "長さ (m)"
                 },
                 "level": {
-                    "label": "フロア番号（日本の1階は0）"
+                    "label": "フロア番号（日本の1階は0）",
+                    "terms": "階, フロア"
                 },
                 "levels": {
                     "label": "総階数",
-                    "placeholder": "2, 4, 6..."
+                    "placeholder": "2, 4, 6...",
+                    "terms": "階, フロア"
                 },
                 "liaison": {
                     "label": "交流組織の種類"
                 },
+                "line_attachment": {
+                    "label": "配線形態"
+                },
                 "lit": {
-                    "label": "照明"
+                    "label": "照明",
+                    "terms": "街灯, 灯り, ランプ, 照明"
                 },
                 "location": {
-                    "label": "位置"
+                    "label": "位置",
+                    "terms": "位置, 配置, 地下, 水面下, 地上"
                 },
                 "location_pool": {
                     "label": "位置",
@@ -3352,7 +3432,8 @@
                     "label": "種類"
                 },
                 "manufacturer": {
-                    "label": "メーカー"
+                    "label": "メーカー",
+                    "terms": "メーカー, 製造者, 製作者"
                 },
                 "map_size": {
                     "label": "地図の範囲"
@@ -3361,38 +3442,47 @@
                     "label": "種類"
                 },
                 "material": {
-                    "label": "素材"
+                    "label": "素材",
+                    "terms": "材料, 素材"
                 },
                 "maxheight": {
                     "label": "高さ制限",
-                    "placeholder": "4, 4.5, 5, 14'0\", 14'6\", 15'0\""
+                    "placeholder": "4, 4.5, 5, 14'0\", 14'6\", 15'0\"",
+                    "terms": "最大高"
                 },
                 "maxspeed": {
                     "label": "最高速度",
-                    "placeholder": "40, 50, 60..."
+                    "placeholder": "40, 50, 60...",
+                    "terms": "速度制限, 制限速度"
                 },
                 "maxspeed/advisory": {
                     "label": "安全速度",
-                    "placeholder": "40, 50, 60..."
+                    "placeholder": "40, 50, 60...",
+                    "terms": "安全速度, 提案速度"
                 },
                 "maxstay": {
-                    "label": "最大利用時間"
+                    "label": "最大利用時間",
+                    "terms": "最大滞在時間, 最大時間, 最長時間"
                 },
                 "maxweight": {
-                    "label": "最大重量"
+                    "label": "最大重量",
+                    "terms": "最大高"
                 },
                 "maxweight_bridge": {
-                    "label": "最大重量"
+                    "label": "最大重量",
+                    "terms": "最大高"
                 },
                 "memorial": {
                     "label": "種類"
                 },
                 "microbrewery": {
-                    "label": "地ビール醸造所"
+                    "label": "地ビール醸造所",
+                    "terms": "醸造所, クラフトビール, 蔵元"
                 },
                 "minspeed": {
                     "label": "最低速度制限",
-                    "placeholder": "20, 30, 40..."
+                    "placeholder": "20, 30, 40...",
+                    "terms": "最低速度, 最低速度制限, 速度制限"
                 },
                 "monitoring_multi": {
                     "label": "監視"
@@ -3408,7 +3498,8 @@
                         "5": "5: 最大の難しさ、漂礫地や地滑り",
                         "6": "6: 最上級のマウンテンバイクでなければ乗れない"
                     },
-                    "placeholder": "0, 1, 2, 3..."
+                    "placeholder": "0, 1, 2, 3...",
+                    "terms": "マウンテンバイクの難易度, マウンテンバイク, 難易度"
                 },
                 "mtb/scale/imba": {
                     "label": "IMBAトレイル難易度",
@@ -3419,7 +3510,8 @@
                         "3": "困難 (黒いひし形)",
                         "4": "非常に困難 (黒いひし形2つ)"
                     },
-                    "placeholder": "初級者、中級者、上級者..."
+                    "placeholder": "初級者、中級者、上級者...",
+                    "terms": "IBMAトレイル難易度, IMBAトレイル, 難易度"
                 },
                 "mtb/scale/uphill": {
                     "label": "マウンテンバイク登山難易度",
@@ -3431,17 +3523,20 @@
                         "4": "4: 平均30%未満の傾斜、地面状態は良くない、大きい岩や木の枝がある",
                         "5": "5: 非常に険しく、通常マウンテンバイクを押すか運ぶかする必要がある"
                     },
-                    "placeholder": "0, 1, 2, 3..."
+                    "placeholder": "0, 1, 2, 3...",
+                    "terms": "マウンテンバイク・アップヒルの難易度, マウンテンバイク, アップヒル, 難易度"
                 },
                 "name": {
                     "label": "名称",
-                    "placeholder": "固有の名称 (もしあれば)"
+                    "placeholder": "固有の名称 (もしあれば)",
+                    "terms": "名前, ネーム"
                 },
                 "natural": {
                     "label": "自然"
                 },
                 "network": {
-                    "label": "ネットワーク"
+                    "label": "ネットワーク",
+                    "terms": "ネットワーク"
                 },
                 "network_bicycle": {
                     "label": "ネットワークの種類",
@@ -3476,8 +3571,13 @@
                 "network_road": {
                     "label": "ネットワーク"
                 },
+                "not/name": {
+                    "label": "誤表記",
+                    "terms": "誤った名前, 誤り名, 誤表記, 誤表示"
+                },
                 "note": {
-                    "label": "メモ"
+                    "label": "メモ",
+                    "terms": "メモ, コメント"
                 },
                 "office": {
                     "label": "種類"
@@ -3493,7 +3593,8 @@
                     }
                 },
                 "oneway/bicycle": {
-                    "label": "一方通行 (自転車)"
+                    "label": "一方通行 (自転車)",
+                    "terms": "一方通行(自転車), 一方通行"
                 },
                 "oneway_yes": {
                     "label": "一方通行",
@@ -3510,23 +3611,27 @@
                 },
                 "opening_hours": {
                     "label": "営業時間",
-                    "placeholder": "不明"
+                    "placeholder": "不明",
+                    "terms": "時間, 時刻"
                 },
                 "operator": {
-                    "label": "管理主体"
+                    "label": "管理主体",
+                    "terms": "管理者, 運営者"
                 },
                 "operator/type": {
                     "label": "管理者の種類"
                 },
                 "outdoor_seating": {
-                    "label": "屋外の席"
+                    "label": "屋外の席",
+                    "terms": "屋外席, 屋外の座席, 座席, シート"
                 },
                 "par": {
                     "label": "パー",
                     "placeholder": "3, 4, 5..."
                 },
                 "park_ride": {
-                    "label": "パーク＆ライド"
+                    "label": "パーク＆ライド",
+                    "terms": "パークアンドライド, 駐車"
                 },
                 "parking": {
                     "label": "種類",
@@ -3541,10 +3646,12 @@
                     }
                 },
                 "payment_multi": {
-                    "label": "支払の種類"
+                    "label": "支払の種類",
+                    "terms": "貨幣の種類, 貨幣, コイン, 紙幣, キャッシュ, 支払"
                 },
                 "payment_multi_fee": {
-                    "label": "支払方法"
+                    "label": "支払方法",
+                    "terms": "貨幣の種類, 貨幣, コイン, 紙幣, キャッシュ, 支払"
                 },
                 "phases": {
                     "label": "相の数",
@@ -3552,7 +3659,8 @@
                 },
                 "phone": {
                     "label": "電話番号",
-                    "placeholder": "+31 42 123 4567"
+                    "placeholder": "+31 42 123 4567",
+                    "terms": "電話番号, 電話, 携帯番号"
                 },
                 "piste/difficulty": {
                     "label": "難易度",
@@ -3678,16 +3786,21 @@
                     "label": "最低年齢"
                 },
                 "polling_station": {
-                    "label": "投票所"
+                    "label": "投票所",
+                    "terms": "投票所, 選挙"
                 },
                 "population": {
                     "label": "人口"
+                },
+                "post": {
+                    "label": "郵便受の配達先住所"
                 },
                 "power": {
                     "label": "種類"
                 },
                 "power_supply": {
-                    "label": "電源"
+                    "label": "電源",
+                    "terms": "電源, 電源供給"
                 },
                 "preschool": {
                     "label": "幼児教育"
@@ -3696,7 +3809,8 @@
                     "label": "生産物"
                 },
                 "product": {
-                    "label": "製品"
+                    "label": "製品",
+                    "terms": "プロダクト, 製品, 産品"
                 },
                 "public_bookcase/type": {
                     "label": "種類"
@@ -3731,7 +3845,8 @@
                     "placeholder": "コンテナ, センター"
                 },
                 "ref": {
-                    "label": "参照コード"
+                    "label": "参照コード",
+                    "terms": "参照コード, リファレンス"
                 },
                 "ref/isil": {
                     "label": "ISILコード"
@@ -3750,13 +3865,15 @@
                     "label": "プラットホーム番号"
                 },
                 "ref_road_number": {
-                    "label": "道路番号"
+                    "label": "道路番号",
+                    "terms": "道路番号"
                 },
                 "ref_room_number": {
                     "label": "部屋番号"
                 },
                 "ref_route": {
-                    "label": "ルート番号"
+                    "label": "ルート番号",
+                    "terms": "ルート番号, ルート"
                 },
                 "ref_runway": {
                     "label": "滑走路番号",
@@ -3773,7 +3890,8 @@
                     "label": "種類"
                 },
                 "religion": {
-                    "label": "宗教"
+                    "label": "宗教",
+                    "terms": "リレーション, 関連"
                 },
                 "reservation": {
                     "label": "予約",
@@ -3782,7 +3900,8 @@
                         "recommended": "予約推奨",
                         "required": "予約必須",
                         "yes": "予約可能"
-                    }
+                    },
+                    "terms": "予約, 予約可否"
                 },
                 "resort": {
                     "label": "種類"
@@ -3797,7 +3916,8 @@
                     "label": "進行方向制限"
                 },
                 "roof/colour": {
-                    "label": "屋根の色"
+                    "label": "屋根の色",
+                    "terms": "屋根の色, 屋根のカラー, 色, カラー"
                 },
                 "room": {
                     "label": "部屋の種類"
@@ -3821,13 +3941,16 @@
                         "hiking": "T1: ハイキング",
                         "mountain_hiking": "T2: 山岳ハイキング"
                     },
-                    "placeholder": "山岳ハイキング, 高地登山…"
+                    "placeholder": "山岳ハイキング, 高地登山…",
+                    "terms": "ハイキングの難易度, ハキング, 難易度"
                 },
                 "salt": {
-                    "label": "塩分"
+                    "label": "塩分",
+                    "terms": "塩, 塩分, 塩湖, 塩水"
                 },
                 "sanitary_dump_station": {
-                    "label": "汚物廃棄所の場所"
+                    "label": "汚物廃棄所の場所",
+                    "terms": "汚物処理方法, 汚物処理"
                 },
                 "screen": {
                     "label": "スクリーン数",
@@ -3914,7 +4037,8 @@
                     "label": "カテゴリー"
                 },
                 "seamark/type": {
-                    "label": "航路標識"
+                    "label": "航路標識",
+                    "terms": "航路標識, 標識"
                 },
                 "seamark/wreck/category": {
                     "label": "カテゴリー"
@@ -3933,7 +4057,8 @@
                         "only": "中古品のみ",
                         "yes": "中古品の取り扱いあり"
                     },
-                    "placeholder": "中古品のみ、中古品あり、中古品なし"
+                    "placeholder": "中古品のみ、中古品あり、中古品なし",
+                    "terms": "中古, 古物"
                 },
                 "self_service": {
                     "label": "セルフサービス"
@@ -3954,7 +4079,8 @@
                         "siding": "側線",
                         "spur": "引き込み線",
                         "yard": "車両基地"
-                    }
+                    },
+                    "terms": "サービス, サービスの種類"
                 },
                 "service_times": {
                     "label": "サービス提供時間"
@@ -3995,7 +4121,8 @@
                         "separated": "同室内分煙",
                         "yes": "すべて喫煙可"
                     },
-                    "placeholder": "禁煙, 分煙, 喫煙可..."
+                    "placeholder": "禁煙, 分煙, 喫煙可...",
+                    "terms": "喫煙, タバコ, たばこ, スモーキング"
                 },
                 "smoothness": {
                     "label": "スムーズさ",
@@ -4009,7 +4136,8 @@
                         "very_bad": "最低地上高が高い：軽クロカン車",
                         "very_horrible": "特殊オフロード車：トラクター・ATV（全地形対応車）"
                     },
-                    "placeholder": "ローラースケートなど, 二輪車・四輪車, オフロード車…"
+                    "placeholder": "ローラースケートなど, 二輪車・四輪車, オフロード車…",
+                    "terms": "スムーズさ"
                 },
                 "social_facility": {
                     "label": "種類"
@@ -4018,7 +4146,12 @@
                     "label": "対象者"
                 },
                 "source": {
-                    "label": "情報源"
+                    "label": "情報源",
+                    "terms": "ソース, 出典"
+                },
+                "species/wikidata": {
+                    "label": "Wikidataの種",
+                    "terms": "ウィキデータの種, ウィキデータ"
                 },
                 "sport": {
                     "label": "スポーツ"
@@ -4033,10 +4166,12 @@
                     "label": "種目"
                 },
                 "stars": {
-                    "label": "星の数"
+                    "label": "星の数",
+                    "terms": "星, スター, 評価"
                 },
                 "start_date": {
-                    "label": "供用開始日"
+                    "label": "供用開始日",
+                    "terms": "開始日"
                 },
                 "step_count": {
                     "label": "段数"
@@ -4050,6 +4185,10 @@
                 },
                 "street_cabinet": {
                     "label": "ストリートキャビネットの種類"
+                },
+                "stroller": {
+                    "label": "ベビーカー利用可否",
+                    "terms": "ベビーカー利用可否, ベビーカー"
                 },
                 "structure": {
                     "label": "構造",
@@ -4079,7 +4218,8 @@
                     "label": "種類"
                 },
                 "supervised": {
-                    "label": "監視"
+                    "label": "監視",
+                    "terms": "監視, 見守り"
                 },
                 "support": {
                     "label": "設置場所･支持素材"
@@ -4102,7 +4242,8 @@
                     "label": "監視ゾーン"
                 },
                 "survey/date": {
-                    "label": "最新現地調査日付"
+                    "label": "最新現地調査日付",
+                    "terms": "最終測定日"
                 },
                 "swimming_pool": {
                     "label": "種類"
@@ -4117,7 +4258,8 @@
                     }
                 },
                 "tactile_paving": {
-                    "label": "点字ブロック"
+                    "label": "点字ブロック",
+                    "terms": "点字ブロック, 歩道, バリアフリー, 視覚障害, 点字"
                 },
                 "takeaway": {
                     "label": "持ち帰り",
@@ -4126,13 +4268,15 @@
                         "only": "持ち帰りのみ",
                         "yes": "可能"
                     },
-                    "placeholder": "可、不可、持ち帰りのみ"
+                    "placeholder": "可、不可、持ち帰りのみ",
+                    "terms": "持ち帰り, テイクアウト, お持ち帰り"
                 },
                 "target": {
                     "label": "目標国"
                 },
                 "tidal": {
-                    "label": "潮間帯"
+                    "label": "潮間帯",
+                    "terms": "潮間帯, 干潟"
                 },
                 "to": {
                     "label": "To"
@@ -4147,13 +4291,16 @@
                     }
                 },
                 "toilets/handwashing": {
-                    "label": "手洗い場"
+                    "label": "手洗い場",
+                    "terms": "手洗い場, 手洗い, 水道, 蛇口"
                 },
                 "toilets/position": {
-                    "label": "便器の位置"
+                    "label": "便器の位置",
+                    "terms": "位置, ポジション"
                 },
                 "toll": {
-                    "label": "料金"
+                    "label": "料金",
+                    "terms": "料金所, 料金"
                 },
                 "tomb": {
                     "label": "種類"
@@ -4217,7 +4364,8 @@
                         "intermediate": "中間: 道の大部分は分かるが目印は少ない",
                         "no": "不可: 道はなく，高度な定位技量が必要"
                     },
-                    "placeholder": "優・良・悪…"
+                    "placeholder": "優・良・悪…",
+                    "terms": "ハイキングコース, 見つけやすさ, 難易度"
                 },
                 "transformer": {
                     "label": "種類",
@@ -4239,7 +4387,8 @@
                     "label": "種類"
                 },
                 "trolley_wire": {
-                    "label": "トロリーバスの架線"
+                    "label": "トロリーバスの架線",
+                    "terms": "トロリーバスの架線, トロリーバス, 架線"
                 },
                 "tunnel": {
                     "label": "種類",
@@ -4254,7 +4403,8 @@
                         "military": "軍事用",
                         "test": "試験用",
                         "tourism": "観光用"
-                    }
+                    },
+                    "terms": "使用方法, 鉄道使用方法"
                 },
                 "valve": {
                     "label": "バルブの種類"
@@ -4290,16 +4440,20 @@
                     "label": "電圧"
                 },
                 "voltage/primary": {
-                    "label": "主電圧"
+                    "label": "主電圧",
+                    "terms": "主電圧"
                 },
                 "voltage/secondary": {
-                    "label": "第二電圧"
+                    "label": "第二電圧",
+                    "terms": "二次電圧"
                 },
                 "voltage/tertiary": {
-                    "label": "第三電圧"
+                    "label": "第三電圧",
+                    "terms": "三次電圧"
                 },
                 "voltage_electrified": {
-                    "label": "電圧"
+                    "label": "電圧",
+                    "terms": "電圧"
                 },
                 "wall": {
                     "label": "種類"
@@ -4314,36 +4468,43 @@
                     "label": "水源"
                 },
                 "water_volume": {
-                    "label": "備蓄水量(m³)"
+                    "label": "備蓄水量(m³)",
+                    "terms": "貯水量, 貯水"
                 },
                 "waterway": {
                     "label": "水路の種類"
                 },
                 "website": {
                     "label": "ウェブサイト",
-                    "placeholder": "https://example.com"
+                    "placeholder": "https://example.com",
+                    "terms": "ウェブサイト, ホームページ"
                 },
                 "wetland": {
                     "label": "種類"
                 },
                 "wheelchair": {
-                    "label": "車椅子の利用可否"
+                    "label": "車椅子の利用可否",
+                    "terms": "車椅子, 車椅子利用可否, 車椅子アクセス"
                 },
                 "wholesale": {
                     "label": "卸売商品"
                 },
                 "width": {
-                    "label": "幅 (m)"
+                    "label": "幅 (m)",
+                    "terms": "幅, 広さ"
                 },
                 "wikidata": {
-                    "label": "ウィキデータ"
+                    "label": "ウィキデータ",
+                    "terms": "ウィキデータ"
                 },
                 "wikipedia": {
-                    "label": "Wikipedia"
+                    "label": "Wikipedia",
+                    "terms": "ウィキペディア"
                 },
                 "windings": {
                     "label": "コイル数",
-                    "placeholder": "1, 2, 3..."
+                    "placeholder": "1, 2, 3...",
+                    "terms": "巻, 巻き, コイル"
                 },
                 "windings/configuration": {
                     "label": "コイルの構成",
@@ -4355,7 +4516,8 @@
                         "scott": "Scott",
                         "star": "Star / Wye",
                         "zigzag": "Zig Zag"
-                    }
+                    },
+                    "terms": "コイル形状"
                 }
             },
             "presets": {
@@ -4785,6 +4947,10 @@
                     "name": "外国語教室",
                     "terms": "外国語教室, 外国語学校, 英会話, 英会話教室, 英会話スクール, 外国語, 学習, 語学, 語学教室"
                 },
+                "amenity/letter_box": {
+                    "name": "郵便受け",
+                    "terms": "郵便受, 郵便受け, 郵便箱, 配達, メールボックス"
+                },
                 "amenity/library": {
                     "name": "図書館",
                     "terms": "図書館, ライブラリ, ライブラリー, 教育, 本"
@@ -4928,6 +5094,10 @@
                     "name": "郵便ポスト",
                     "terms": "郵便ポスト, 郵便箱, ポスト"
                 },
+                "amenity/post_depot": {
+                    "name": "郵便集配所",
+                    "terms": "郵便集配所"
+                },
                 "amenity/post_office": {
                     "name": "郵便局",
                     "terms": "郵便局"
@@ -4966,6 +5136,14 @@
                 },
                 "amenity/recycling": {
                     "name": "リサイクル施設"
+                },
+                "amenity/recycling/container/electrical_items": {
+                    "name": "リサイクルボックス（家電）",
+                    "terms": "リサイクルボックス（家電）, リサイクルボックス, 家電"
+                },
+                "amenity/recycling/container/green_waste": {
+                    "name": "リサイクルボックス（木くず類）",
+                    "terms": "リサイクルボックス（木くず類）, リサイクルボックス, 木くず, 草"
                 },
                 "amenity/recycling_centre": {
                     "name": "リサイクルセンター",
@@ -5175,6 +5353,10 @@
                 "amenity/vending_machine": {
                     "name": "自動販売機",
                     "terms": "自動販売機, 自販機"
+                },
+                "amenity/vending_machine/bottle_return": {
+                    "name": "空きビン回収機",
+                    "terms": "空きビン回収機, ボトル, 空き瓶"
                 },
                 "amenity/vending_machine/cigarettes": {
                     "name": "たばこ自動販売機",
@@ -6543,6 +6725,10 @@
                     "name": "農家（敷地）",
                     "terms": "農業施設用地, 農家, 農業"
                 },
+                "landuse/flowerbed": {
+                    "name": "公共の花壇",
+                    "terms": "花壇, 花, 公園, 庭, 公共の花壇"
+                },
                 "landuse/forest": {
                     "name": "人工林",
                     "terms": "人工林, 二次林, 営林, 保安林, 鉄道林, 防風林, 森林（人工）, 樹木, 植物, 林"
@@ -7115,6 +7301,10 @@
                     "name": "監視ステーション",
                     "terms": "監視ステーション"
                 },
+                "man_made/obelisk": {
+                    "name": "オベリスク",
+                    "terms": "オベリスク, 装飾的記念柱, 記念碑, 記念柱"
+                },
                 "man_made/observatory": {
                     "name": "観測ドーム",
                     "terms": "観測ドーム, 観測所"
@@ -7573,7 +7763,7 @@
                 },
                 "office/political_party": {
                     "name": "政党事務所",
-                    "terms": "政党事務所"
+                    "terms": "政党事務所, 政党, 政治, 自民党"
                 },
                 "office/private_investigator": {
                     "name": "私立探偵社",
@@ -8746,10 +8936,6 @@
                 "shop/wine": {
                     "name": "ワイン店",
                     "terms": "ワイン店, 酒屋, 食品, アルコール, 嗜好品, 飲み物"
-                },
-                "tactile_paving": {
-                    "name": "点字ブロック",
-                    "terms": "点字ブロック, 歩道, バリアフリー, 視覚障害, 点字"
                 },
                 "telecom/data_center": {
                     "name": "データセンター",
