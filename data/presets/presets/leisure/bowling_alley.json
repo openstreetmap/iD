@@ -8,13 +8,15 @@
     ],
     "moreFields": [
         "air_conditioning",
+        "email",
+        "fax",
+        "min_age",
         "opening_hours",
         "payment_multi",
+        "phone",
         "smoking",
         "website",
-        "phone",
-        "email",
-        "fax"
+        "wheelchair"
     ],
     "geometry": [
         "point",

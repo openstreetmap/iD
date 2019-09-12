@@ -24,6 +24,9 @@
             "favorites": "Favorites",
             "add_feature": "Add Feature",
             "finish": "Finish",
+            "geometry": {
+                "key": "G"
+            },
             "repeat": {
                 "title": "Repeat",
                 "tooltip": {
@@ -74,6 +77,7 @@
             },
             "instructions": {
                 "add_point": "Click the center of the feature.",
+                "add_vertex": "Click the point along a line or area where the feature occurs.",
                 "add_line": "Click the starting point of the feature.",
                 "draw_line": "Place points along the feature's centerline.",
                 "add_area": "Click any corner of the feature.",
@@ -87,9 +91,28 @@
                 "evening": "Good Evening",
                 "night": "Good Evening"
             },
-            "welcome": {
-                "first_time": "You’re editing <b>OpenStreetMap</b>: the free, collaborative world map.<br/>If this is your first time here, consider taking the <a>quick-start tutorial</a>.<br/>Thanks for contributing. Have fun!",
-                "return": "Welcome back. Ready to make the map even better?",
+            "notice": "Notice",
+            "launch": {
+                "osm_info": "You’re editing <b>OpenStreetMap</b>: the free, collaborative world map.",
+                "first_time_tutorial": "If this is your first time here, consider taking the <a>quick-start tutorial</a>.",
+                "thanks_have_fun": "Thanks for contributing. Have fun!",
+                "generic_welcome": {
+                    "0": "Ready to make the map even better?",
+                    "1": "What a great day for mapping."
+                },
+                "welcome_back_user": "Welcome back, {displayName}.",
+                "changesets": "You've contributed {changesets} changesets to OpenStreetMap so far.",
+                "changesets_date": "You've contributed {changesets} changesets to OpenStreetMap since {joinDate}.",
+                "anniversary": {
+                    "happy_anniversary": "Happy Anniversary",
+                    "years": {
+                        "first": "Congratulations on your first year of mapping, {displayName}!",
+                        "subsequent": "Congratulations on {years} years of mapping, {displayName}!"
+                    }
+                },
+                "blocks": {
+                    "active": "Your OpenStreetMap account, {displayName}, has an active block and cannot upload changes."
+                },
                 "start_mapping": "Start Mapping"
             },
             "restore": {
@@ -814,7 +837,7 @@
             "switch": "Switch back to this background",
             "custom": "Custom",
             "overlays": "Overlays",
-            "imagery_source_faq": "Imagery Info / Report a Problem",
+            "imagery_problem_faq": "Report an Imagery Problem",
             "reset": "reset",
             "reset_all": "Reset All",
             "display_options": "Display Options",
@@ -826,6 +849,10 @@
                 "description": "Show Minimap",
                 "tooltip": "Show a zoomed out map to help locate the area currently displayed.",
                 "key": "/"
+            },
+            "panel": {
+                "description": "Show Detail Panel",
+                "tooltip": "Show advanced background information."
             },
             "fix_misalignment": "Adjust imagery offset",
             "offset": "Drag anywhere in the gray area below to adjust the imagery offset, or enter the offset values in meters."
@@ -2736,6 +2763,10 @@
                     "label": "Type",
                     "terms": ""
                 },
+                "baby_seat": {
+                    "label": "Baby Seat",
+                    "terms": ""
+                },
                 "backrest": {
                     "label": "Backrest",
                     "terms": ""
@@ -3719,6 +3750,10 @@
                     "label": "Material",
                     "terms": ""
                 },
+                "max_age": {
+                    "label": "Maximum Age",
+                    "terms": "upper age limit"
+                },
                 "maxheight": {
                     "label": "Max Height",
                     "terms": "",
@@ -3753,6 +3788,10 @@
                 "microbrewery": {
                     "label": "Microbrewery",
                     "terms": "brewpub,craft beer"
+                },
+                "min_age": {
+                    "label": "Minimum Age",
+                    "terms": "lower age limit"
                 },
                 "minspeed": {
                     "label": "Minimum Speed Limit",
@@ -4076,18 +4115,6 @@
                 },
                 "playground": {
                     "label": "Type",
-                    "terms": ""
-                },
-                "playground/baby": {
-                    "label": "Baby Seat",
-                    "terms": ""
-                },
-                "playground/max_age": {
-                    "label": "Maximum Age",
-                    "terms": ""
-                },
-                "playground/min_age": {
-                    "label": "Minimum Age",
                     "terms": ""
                 },
                 "polling_station": {
@@ -4864,6 +4891,10 @@
                 },
                 "wall": {
                     "label": "Type",
+                    "terms": ""
+                },
+                "waste": {
+                    "label": "Waste",
                     "terms": ""
                 },
                 "water_point": {
@@ -6960,8 +6991,16 @@
                     "terms": "road,street"
                 },
                 "highway/raceway": {
-                    "name": "Racetrack (Motorsport)",
+                    "name": "Motorsport Racetrack",
                     "terms": "auto*,formula one,kart,motocross,nascar,race*,track"
+                },
+                "highway/raceway/karting": {
+                    "name": "Karting Racetrack",
+                    "terms": "carting,go carts,go karts,go-karts,gokarts,kart racing,karting track,motorsports,shifter karts,superkarts"
+                },
+                "highway/raceway/motocross": {
+                    "name": "Motocross Racetrack",
+                    "terms": "off-road racing,offroad moto racing,motocross circuit,motorcycle track,motorsports"
                 },
                 "highway/residential": {
                     "name": "Residential Road",
@@ -9401,7 +9440,7 @@
                 },
                 "shop/travel_agency": {
                     "name": "Travel Agency",
-                    "terms": ""
+                    "terms": "cruises,flights,hotels,tickets,travel packages"
                 },
                 "shop/tyres": {
                     "name": "Tire Store",

@@ -24,7 +24,7 @@ export function uiMapData(context) {
     var settingsCustomData = uiSettingsCustomData(context)
         .on('change', customChanged);
 
-    var _pane = d3_select(null), _toggleButton = d3_select(null);
+    var _pane = d3_select(null);
 
     var _fillSelected = context.storage('area-fill') || 'partial';
     var _dataLayerContainer = d3_select(null);
@@ -800,13 +800,13 @@ export function uiMapData(context) {
 
     uiMapData.togglePane = function() {
         if (d3_event) d3_event.preventDefault();
-        paneTooltip.hide(_toggleButton);
+        paneTooltip.hide();
         context.ui().togglePanes(!_pane.classed('shown') ? _pane : undefined);
     };
 
     uiMapData.renderToggleButton = function(selection) {
 
-        _toggleButton = selection
+        selection
             .append('button')
             .on('click', uiMapData.togglePane)
             .call(svgIcon('#iD-icon-data', 'light'))

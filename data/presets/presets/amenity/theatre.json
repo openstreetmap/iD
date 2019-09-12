@@ -4,18 +4,19 @@
 	    "name",
         "operator",
         "address",
-        "building_area"
+        "building_area",
+        "website"
     ],
     "moreFields": [
         "air_conditioning",
+        "email",
+        "fax",
         "internet_access",
         "internet_access/fee",
         "internet_access/ssid",
+        "min_age",
         "payment_multi",
-        "website",
         "phone",
-        "email",
-        "fax",
         "wheelchair"
     ],
     "geometry": [

@@ -18,9 +18,5 @@
         "highway": "path",
         "foot": "designated"
     },
-    "reference": {
-        "key": "golf",
-        "value": "path"
-    },
     "name": "Golf Walking Path"
 }

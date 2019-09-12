@@ -229,6 +229,9 @@ en:
       attraction:
         # attraction=*
         label: Type
+      baby_seat:
+        # baby=*
+        label: Baby Seat
       backrest:
         # backrest=*
         label: Backrest
@@ -1195,6 +1198,11 @@ en:
         # material=*
         label: Material
         terms: '[translate with synonyms or related terms for ''Material'', separated by commas]'
+      max_age:
+        # max_age=*
+        label: Maximum Age
+        # 'terms: upper age limit'
+        terms: '[translate with synonyms or related terms for ''Maximum Age'', separated by commas]'
       maxheight:
         # maxheight=*
         label: Max Height
@@ -1233,6 +1241,11 @@ en:
         label: Microbrewery
         # 'terms: brewpub,craft beer'
         terms: '[translate with synonyms or related terms for ''Microbrewery'', separated by commas]'
+      min_age:
+        # min_age=*
+        label: Minimum Age
+        # 'terms: lower age limit'
+        terms: '[translate with synonyms or related terms for ''Minimum Age'', separated by commas]'
       minspeed:
         # minspeed=*
         label: Minimum Speed Limit
@@ -1632,15 +1645,6 @@ en:
       playground:
         # playground=*
         label: Type
-      playground/baby:
-        # baby=*
-        label: Baby Seat
-      playground/max_age:
-        # max_age=*
-        label: Maximum Age
-      playground/min_age:
-        # min_age=*
-        label: Minimum Age
       polling_station:
         # polling_station=*
         label: Polling Place
@@ -2445,6 +2449,9 @@ en:
       wall:
         # wall=*
         label: Type
+      waste:
+        # waste=*
+        label: Waste
       water:
         # water=*
         label: Type
@@ -4463,7 +4470,7 @@ en:
         # ford=*
         name: Ford
       golf/bunker:
-        # 'golf=bunker, natural=sand'
+        # golf=bunker
         name: Sand Trap
         # 'terms: hazard,bunker'
         terms: '<translate with synonyms or related terms for ''Sand Trap'', separated by commas>'
@@ -4472,15 +4479,15 @@ en:
         name: Golf Cartpath
         terms: '<translate with synonyms or related terms for ''Golf Cartpath'', separated by commas>'
       golf/driving_range:
-        # 'golf=driving_range, landuse=grass'
+        # golf=driving_range
         name: Driving Range
         terms: '<translate with synonyms or related terms for ''Driving Range'', separated by commas>'
       golf/fairway:
-        # 'golf=fairway, landuse=grass'
+        # golf=fairway
         name: Fairway
         terms: '<translate with synonyms or related terms for ''Fairway'', separated by commas>'
       golf/green:
-        # 'golf=green, landuse=grass, leisure=pitch, sport=golf'
+        # golf=green
         name: Putting Green
         terms: '<translate with synonyms or related terms for ''Putting Green'', separated by commas>'
       golf/hole:
@@ -4488,7 +4495,7 @@ en:
         name: Golf Hole
         terms: '<translate with synonyms or related terms for ''Golf Hole'', separated by commas>'
       golf/lateral_water_hazard:
-        # 'golf=lateral_water_hazard, natural=water'
+        # golf=lateral_water_hazard
         name: Lateral Water Hazard
         terms: '<translate with synonyms or related terms for ''Lateral Water Hazard'', separated by commas>'
       golf/path:
@@ -4496,16 +4503,16 @@ en:
         name: Golf Walking Path
         terms: '<translate with synonyms or related terms for ''Golf Walking Path'', separated by commas>'
       golf/rough:
-        # 'golf=rough, landuse=grass'
+        # golf=rough
         name: Rough
         terms: '<translate with synonyms or related terms for ''Rough'', separated by commas>'
       golf/tee:
-        # 'golf=tee, landuse=grass'
+        # golf=tee
         name: Tee Box
         # 'terms: teeing ground'
         terms: '<translate with synonyms or related terms for ''Tee Box'', separated by commas>'
       golf/water_hazard:
-        # 'golf=water_hazard, natural=water'
+        # golf=water_hazard
         name: Water Hazard
         terms: '<translate with synonyms or related terms for ''Water Hazard'', separated by commas>'
       healthcare:
@@ -4793,9 +4800,19 @@ en:
         terms: '<translate with synonyms or related terms for ''Primary Link'', separated by commas>'
       highway/raceway:
         # highway=raceway
-        name: Racetrack (Motorsport)
+        name: Motorsport Racetrack
         # 'terms: auto*,formula one,kart,motocross,nascar,race*,track'
-        terms: '<translate with synonyms or related terms for ''Racetrack (Motorsport)'', separated by commas>'
+        terms: '<translate with synonyms or related terms for ''Motorsport Racetrack'', separated by commas>'
+      highway/raceway/karting:
+        # 'highway=raceway, sport=karting'
+        name: Karting Racetrack
+        # 'terms: carting,go carts,go karts,go-karts,gokarts,kart racing,karting track,motorsports,shifter karts,superkarts'
+        terms: '<translate with synonyms or related terms for ''Karting Racetrack'', separated by commas>'
+      highway/raceway/motocross:
+        # 'highway=raceway, sport=motocross'
+        name: Motocross Racetrack
+        # 'terms: off-road racing,offroad moto racing,motocross circuit,motorcycle track,motorsports'
+        terms: '<translate with synonyms or related terms for ''Motocross Racetrack'', separated by commas>'
       highway/residential:
         # highway=residential
         name: Residential Road
@@ -7647,6 +7664,7 @@ en:
       shop/travel_agency:
         # shop=travel_agency
         name: Travel Agency
+        # 'terms: cruises,flights,hotels,tickets,travel packages'
         terms: '<translate with synonyms or related terms for ''Travel Agency'', separated by commas>'
       shop/tyres:
         # shop=tyres

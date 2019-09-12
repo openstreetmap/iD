@@ -7,12 +7,11 @@
         "area"
     ],
     "tags": {
+        "golf": "lateral_water_hazard"
+    },
+    "addTags": {
         "golf": "lateral_water_hazard",
         "natural": "water"
-    },
-    "reference": {
-        "key": "golf",
-        "value": "lateral_water_hazard"
     },
     "name": "Lateral Water Hazard"
 }

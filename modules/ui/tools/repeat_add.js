@@ -1,4 +1,4 @@
-
+import { select as d3_select } from 'd3-selection';
 import { t } from '../../util/locale';
 import { svgIcon } from '../../svg/icon';
 import { uiTooltipHtml } from '../tooltipHtml';
@@ -18,7 +18,8 @@ export function uiToolRepeatAdd(context) {
 
     var tooltipBehavior = tooltip()
         .placement('bottom')
-        .html(true);
+        .html(true)
+        .scrollContainer(d3_select('#bar'));
 
     tool.render = function(selection) {
 

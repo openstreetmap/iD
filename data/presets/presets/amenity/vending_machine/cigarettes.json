@@ -1,5 +1,9 @@
 {
     "icon": "temaki-vending_machine",
+    "moreFields": [
+        "{amenity/vending_machine}",
+        "min_age"
+    ],
     "geometry": [
         "point"
     ],

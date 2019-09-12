@@ -39,7 +39,8 @@ module.exports = function buildSrc() {
                     }),
                     nodeResolve({
                         mainFields: ['module', 'main'],
-                        browser: false
+                        browser: false,
+                        dedupe: ['object-inspect']
                     }),
                     commonjs(),
                     json({ indent: '' }),

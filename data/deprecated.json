@@ -365,6 +365,30 @@
       "replace": {"generator:source": "solar", "generator:method": "photovoltaic"}
     },
     {
+      "old": {"golf": "faiway"},
+      "replace": {"golf": "fairway"}
+    },
+    {
+      "old": {"golf": "putting_green"},
+      "replace": {"golf": "green"}
+    },
+    {
+      "old": {"golf": "sand_trap"},
+      "replace": {"golf": "bunker"}
+    },
+    {
+      "old": {"golf": "tee_area"},
+      "replace": {"golf": "tee"}
+    },
+    {
+      "old": {"golf": "tee_box"},
+      "replace": {"golf": "tee"}
+    },
+    {
+      "old": {"golf": "teebox"},
+      "replace": {"golf": "tee"}
+    },
+    {
       "old": {"highway": "abandoned"},
       "replace": {"abandoned:highway": "*"}
     },
@@ -488,6 +512,10 @@
       "replace": {"club": "*"}
     },
     {
+      "old": {"leisure": "golf_pin"},
+      "replace": {"golf": "pin"}
+    },
+    {
       "old": {"leisure": "ice_rink", "sport": "hockey"},
       "replace": {"leisure": "ice_rink", "sport": "ice_hockey"}
     },
@@ -548,8 +576,16 @@
       "replace": {"craft": "winery"}
     },
     {
+      "old": {"maxage": "*"},
+      "replace": {"max_age": "$1"}
+    },
+    {
       "old": {"memorial": "plate"},
       "replace": {"memorial": "plaque"}
+    },
+    {
+      "old": {"minage": "*"},
+      "replace": {"min_age": "$1"}
     },
     {
       "old": {"mining_resource": "*"},

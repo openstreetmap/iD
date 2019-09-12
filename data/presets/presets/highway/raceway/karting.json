@@ -1,0 +1,24 @@
+{
+    "icon": "fas-flag-checkered",
+    "geometry": [
+        "line",
+        "area"
+    ],
+    "tags": {
+        "highway": "raceway",
+        "sport": "karting"
+    },
+    "terms": [
+        "carting",
+        "go carts",
+        "go karts",
+        "go-karts",
+        "gokarts",
+        "kart racing",
+        "karting track",
+        "motorsports",
+        "shifter karts",
+        "superkarts"
+    ],
+    "name": "Karting Racetrack"
+}

@@ -2,6 +2,7 @@
     "icon": "fas-dumpster",
     "fields": [
         "operator",
+        "waste",
         "collection_times",
         "access_simple"
     ],

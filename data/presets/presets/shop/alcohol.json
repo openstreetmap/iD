@@ -4,6 +4,10 @@
         "{shop}",
         "drive_through"
     ],
+    "moreFields": [
+        "{shop}",
+        "min_age"
+    ],
     "geometry": [
         "point",
         "area"
