@@ -50,14 +50,22 @@ Object.assign(tmTask.prototype, {
 
         // calculate extent
         var coords = this.geoJsonGeometry.coordinates[0][0];
-        this.extent = new geoExtent(coords[3], coords[1]);
+        var maxLon = -Number.MAX_VALUE, minLon = Number.MAX_VALUE,
+            maxLat = -Number.MAX_VALUE, minLat = Number.MAX_VALUE;
+        coords.forEach(function(coord) {
+            if (coord[0] < minLon) minLon = coord[0];
+            if (coord[0] > maxLon) maxLon = coord[0];
+            if (coord[1] < minLat) minLat = coord[1];
+            if (coord[1] > maxLat) maxLat = coord[1];
+        });
+
+        this.extent = new geoExtent([minLon, minLat], [maxLon, maxLat]);
 
         // calculate center
         this.center = this.extent.center();
 
-        // calculate extentPanConstraint
-        var extentPanConstraint = new geoExtent(this.extent);
-        this.extentPanConstraint = extentPanConstraint.padByMeters(EXTENT_CONSTRAINT);
+        // allow editing a small margin beyond the task bounds
+        this.editableExtent = (new geoExtent(this.extent)).padByMeters(EXTENT_CONSTRAINT);
 
         // set starting minimum zoom
         this._minZoom = MIN_ZOOM;
@@ -67,6 +75,15 @@ Object.assign(tmTask.prototype, {
 
     uid: function() {
         return this.tasker.apiBase + '/' + this.project.id + '/' + this.id;
+    },
+
+    geoJsonFeature: function() {
+        return {
+            id: this.uid(),
+            type: 'Feature',
+            geometry: this.geoJsonGeometry,
+            properties: {}
+        };
     },
 
     loadFromRemote: function(onCompletion) {

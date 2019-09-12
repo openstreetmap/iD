@@ -22,7 +22,14 @@ export function svgTasking(projection, context, dispatch) {
         _initialized = true;
     }
 
-    context.tasking().on('setTask.svg', throttledRedraw);
+    context.tasking().on('setTask.svg', function() {
+        if (context.tasking().activeTask()) {
+            drawTasking.enabled(true);
+            drawTasking.fitZoom();
+        } else {
+            drawTasking.enabled(false);
+        }
+    });
 
     function showLayer() {
         layerOn();
@@ -99,7 +106,7 @@ export function svgTasking(projection, context, dispatch) {
         var task = context.tasking().activeTask();
 
         if (task) {
-            geoData = [task.geoJsonGeometry].filter(getPath);
+            geoData = [task.geoJsonFeature()].filter(getPath);
             polygonData = geoData.filter(isPolygon);
         }
 
@@ -183,15 +190,17 @@ export function svgTasking(projection, context, dispatch) {
 
 
         function revealTask(extent, text, options) {
-            var left = context.projection(extent[0])[0];
-            var top = context.projection(extent[0])[1];
-            var right = context.projection(extent[1])[0];
-            var bottom = context.projection(extent[1])[1];
+            var bottomLeft = context.projection(extent[0]);
+            var topRight = context.projection(extent[1]);
+            var left = bottomLeft[0];
+            var bottom = bottomLeft[1];
+            var right = topRight[0];
+            var top = topRight[1];
             var box = {
                 left: left,
                 top: top,
-                width: right - left,
-                height: bottom - top
+                width: Math.abs(right - left),
+                height: Math.abs(bottom - top)
             };
 
             _curtain.reveal(box, text, options);
@@ -204,7 +213,7 @@ export function svgTasking(projection, context, dispatch) {
             // TODO: TAH - draw inner curtain
 
             // reveal opening
-            revealTask(task.extentPanConstraint());
+            revealTask(task.editableExtent);
         }
     }
 
@@ -271,9 +280,9 @@ export function svgTasking(projection, context, dispatch) {
         // set task min zoom
         var map = context.map();
         var task = context.tasking().activeTask();
-        task.minZoom(map.trimmedExtentZoom(task.extent()));
+        task.minZoom(map.trimmedExtentZoom(task.extent));
 
-        map.centerZoom(task.center(), task.minZoom()); // TODO: TAH - better way to zoom out a bit
+        map.centerZoom(task.center, task.minZoom()); // TODO: TAH - better way to zoom out a bit
 
         // if (!geoPolygonIntersectsPolygon(viewport, coords, true)) {
         //     map.centerZoom(_taskCentroid, map.trimmedExtentZoom(_taskExtent));

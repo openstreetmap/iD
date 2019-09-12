@@ -55,6 +55,7 @@ export function rendererMap(context) {
     var _getMouseCoords;
     var _mouseEvent;
     var _lastWithinEditableZoom;
+    var _previousCenter;
 
     var zoom = d3_zoom()
         .scaleExtent([kMin, kMax])
@@ -512,7 +513,7 @@ export function rendererMap(context) {
             dispatch.call('move', this, map);
             return;
         }
-
+/*
         if (context.layers().layer('tasking').enabled()) {
 
             var _currTask = context.tasking().activeTask();
@@ -528,10 +529,10 @@ export function rendererMap(context) {
             }
 
             // restrict if trying to pan outside task
-            if (!_currTask.extent().intersects(map.center())) {
+            if (!_currTask.extent.intersects(map.center())) {
                 surface.interrupt();
                 uiFlash().text(t('cannot_pan_task'))();
-                setCenterZoom(_previousCenter || _currTask.center(), map.zoom(), 0, true);
+                setCenterZoom(_previousCenter || _currTask.center, map.zoom(), 0, true);
                 scheduleRedraw();
                 // dispatch.call('move', this, map);
                 return;
@@ -539,7 +540,7 @@ export function rendererMap(context) {
 
             _previousCenter = map.center();
         }
-
+*/
 
         projection.transform(eventTransform);
 
