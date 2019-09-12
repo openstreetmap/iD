@@ -3410,7 +3410,7 @@ img.tag-reference-wiki-image {
 
 .task-history-container {
     max-height: 500px;
-    overflow: scroll;
+    overflow: auto;
     border-radius: 5px;
     border: 1px solid #ccc;
 }

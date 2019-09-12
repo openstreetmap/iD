@@ -1,6 +1,6 @@
 import { select as d3_select } from 'd3-selection';
 
-import { t } from '../util/locale';
+import { currentLocale, t } from '../util/locale';
 import { svgIcon } from '../svg/icon';
 import { services } from '../services';
 import { utilDetect } from '../util/detect';
@@ -29,7 +29,7 @@ export function uiTaskHistory() {
 
         historyEnter
             .append('div')
-            .attr('class', function(d) { return 'comment-avatar user-' + d.historyId; })
+            .attr('class', function(d) { return 'comment-avatar user-' + d.userId; })
             .call(svgIcon('#iD-icon-avatar', 'comment-avatar-icon'));
 
         var mainEnter = historyEnter
@@ -46,17 +46,23 @@ export function uiTaskHistory() {
             .each(function(d) {
                 var selection = d3_select(this);
                 var osm = services.osm;
-                if (osm && d.author) {
+                if (osm && d.userId) {
                     selection = selection
                         .append('a')
                         .attr('class', 'comment-author-link')
-                        .attr('href', osm.userURL(d.author))
+                        .attr('href', osm.userURL(d.userId))
                         .attr('tabindex', -1)
                         .attr('target', '_blank');
                 }
                 selection
-                    .text(function(d) { return d.author || t('tasking.task.author.anonymous'); });
+                    .text(function(d) {
+                        return d.userId || t('tasking.task.author.anonymous');
+                    });
             });
+
+        if (!metadataEnter.empty()) {
+            replaceAvatars();
+        }
 
         metadataEnter
             .append('div')
@@ -83,26 +89,23 @@ export function uiTaskHistory() {
             .attr('class', 'comment-text')
             .html(function(d) { if (d.action === 'comment') { return d.text; } });
 
-        // TODO: TAH - get uid from tasking manager to display avatars
-        // comments
-        //     .call(replaceAvatars);
     }
 
 
-    function replaceAvatars(selection) {
+    function replaceAvatars() {
         var osm = services.osm;
         if (!osm) return;
 
-        var uids = {};  // gather uids in the comment thread
+        var userIds = {};  // gather uids in the comment thread
         _task.historyStack.forEach(function(d) {
-            if (d.uid) uids[d.uid] = true;
+            if (d.userId) userIds[d.userId] = true;
         });
 
-        Object.keys(uids).forEach(function(uid) {
-            osm.loadUser(uid, function(err, user) {
+        Object.keys(userIds).forEach(function(userId) {
+            osm.loadUser(userId, function(err, user) {
                 if (!user || !user.image_url) return;
 
-                selection.selectAll('.comment-avatar.user-' + uid)
+                selection.selectAll('.comment-avatar.user-' + userId)
                     .html('')
                     .append('img')
                     .attr('class', 'icon comment-avatar-icon')
@@ -113,15 +116,9 @@ export function uiTaskHistory() {
     }
 
 
-    function localeDateString(s) {
-        if (!s) return null;
-        var detected = utilDetect();
-        var options = { day: 'numeric', month: 'short', year: 'numeric' };
-        // s = s.replace(/-/g, '/'); // fix browser-specific Date() issues
-        var d = new Date(Date.parse(s));
-
-        if (isNaN(d.getTime())) return null;
-        return d.toLocaleDateString(detected.locale, options);
+    function localeDateString(date) {
+        if (!date || isNaN(date.getTime())) return null;
+        return date.toLocaleString(currentLocale, { day: 'numeric', month: 'short', year: 'numeric' });
     }
 
 

@@ -122,7 +122,7 @@ Object.assign(tmTask.prototype, {
             history.action = historyActions[element.action];
             history.text = element.actionText;
             history.date = new Date(element.actionDate);
-            history.user = element.actionBy;
+            history.userId = element.actionBy;
             return history;
         });
     },
