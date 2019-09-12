@@ -8,6 +8,7 @@ import { t, currentLocale, addTranslation, setLocale } from '../util/locale';
 
 import { coreHistory } from './history';
 import { coreValidator } from './validator';
+import { coreTasking } from './tasking';
 import { dataLocales, dataEn } from '../../data';
 import { geoRawMercator } from '../geo/raw_mercator';
 import { modeSelect } from '../modes/select';
@@ -89,7 +90,7 @@ export function coreContext() {
 
 
     /* Straight accessors. Avoid using these if you can. */
-    var connection, history, validator;
+    var connection, history, validator, tasking;
     context.connection = function() { return connection; };
     context.history = function() { return history; };
     context.validator = function() { return validator; };
@@ -331,7 +332,6 @@ export function coreContext() {
 
 
     /* Tasking */
-    var tasking;
     context.tasking = function() { return tasking; };
 
 
@@ -537,6 +537,7 @@ export function coreContext() {
 
     history = coreHistory(context);
     validator = coreValidator(context);
+    tasking = coreTasking(context);
 
     context.graph = history.graph;
     context.changes = history.changes;
@@ -569,7 +570,6 @@ export function coreContext() {
     features = rendererFeatures(context);
     photos = rendererPhotos(context);
     presets = presetIndex(context);
-    tasking = services.tasking;
 
     if (services.maprules && utilStringQs(window.location.hash).maprules) {
         var maprules = utilStringQs(window.location.hash).maprules;

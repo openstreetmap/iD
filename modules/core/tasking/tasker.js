@@ -1,19 +1,20 @@
-export function taskingManager() {
-    if (!(this instanceof taskingManager)) {
-        return (new taskingManager()).initialize(arguments);
+
+export function taskingTasker() {
+    if (!(this instanceof taskingTasker)) {
+        var tasker = new taskingTasker();
+        return tasker.initialize.apply(tasker, arguments);
     } else if (arguments.length) {
-        this.initialize(arguments);
+        this.initialize.apply(this, arguments);
     }
 }
 
 
-Object.assign(taskingManager.prototype, {
+Object.assign(taskingTasker.prototype, {
 
-    type: 'taskingManager',
+    type: 'taskingTasker',
 
-    initialize: function(sources) {
-        for (var i = 0; i < sources.length; ++i) {
-            var source = sources[i];
+    initialize: function(source) {
+        if (source) {
             for (var prop in source) {
                 if (Object.prototype.hasOwnProperty.call(source, prop)) {
                     if (source[prop] === undefined) {
@@ -26,5 +27,6 @@ Object.assign(taskingManager.prototype, {
         }
 
         return this;
-    },
+    }
+
 });

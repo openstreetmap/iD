@@ -8,7 +8,7 @@ export function uiTaskingProjectEditor(context) {
 
     var projectHeader = uiTaskingProjectHeader();
     var projectDetails = uiTaskingProjectDetails();
-    var _project = {};
+    var _project;
 
 
     function projectEditor(selection) {

@@ -8,7 +8,7 @@ export function uiTaskingTaskEditor(context) {
 
     var taskHeader = uiTaskingTaskHeader();
     var taskDetails = uiTaskingTaskDetails(context);
-    var _task = {};
+    var _task;
 
 
     function taskEditor(selection) {
@@ -34,7 +34,7 @@ export function uiTaskingTaskEditor(context) {
         editor = editorEnter
             .merge(editor)
             .call(taskHeader.task(_task))
-            .call(taskDetails.task(_task, context));
+            .call(taskDetails.task(_task));
 
 
     }

@@ -515,7 +515,7 @@ export function rendererMap(context) {
 
         if (context.layers().layer('tasking').enabled()) {
 
-            var _currTask = context.tasking().currentTask();
+            var _currTask = context.tasking().activeTask();
 
             // restrict if trying to zoom too far out
             if (geoScaleToZoom(k, TILESIZE) < _currTask.minZoom()) {

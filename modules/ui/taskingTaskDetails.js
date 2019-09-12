@@ -97,23 +97,20 @@ export function uiTaskingTaskDetails(context) {
 
 
     function taskingTaskDetails(selection) {
-         // quick links
-         var choices = [{
+        // quick links
+        var choices = [{
             id: 'zoom_to',
             label: 'inspector.zoom_to.title',
             click: function zoomTo() {
-              d3_event.preventDefault();
-              d3_event.stopPropagation();
-              context.layers().layer('tasking').fitZoom();
+                d3_event.preventDefault();
+                d3_event.stopPropagation();
+                context.layers().layer('tasking').fitZoom();
             }
         }];
 
 
         var details = selection.selectAll('.task-details')
-            .data(
-                (_task && _task.properties ? [_task] : []),
-                function(d) { return d.__featurehash__; }
-            );
+            .data(_task ? [_task] : [], function(d) { return d.uid(); });
 
         // exit
         details.exit()
@@ -140,7 +137,7 @@ export function uiTaskingTaskDetails(context) {
             .text(function(d) {
                 return t('tasking.task.status', { status:
                     function() {
-                        var status = 'tasking.task.statuses.' + d.status();
+                        var status = 'tasking.task.statuses.' + d.status;
                         return t(status);
                     }()
                 });

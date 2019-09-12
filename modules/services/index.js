@@ -7,7 +7,6 @@ import serviceOpenstreetcam from './openstreetcam';
 import serviceOsm from './osm';
 import serviceOsmWikibase from './osm_wikibase';
 import serviceStreetside from './streetside';
-import serviceTasking from './tasking/tasking';
 import serviceTaginfo from './taginfo';
 import serviceVectorTile from './vector_tile';
 import serviceWikidata from './wikidata';
@@ -24,7 +23,6 @@ export var services = {
     osmWikibase: serviceOsmWikibase,
     maprules: serviceMapRules,
     streetside: serviceStreetside,
-    tasking: serviceTasking,
     taginfo: serviceTaginfo,
     vectorTile: serviceVectorTile,
     wikidata: serviceWikidata,
@@ -42,7 +40,6 @@ export {
     serviceOsmWikibase,
     serviceStreetside,
     serviceTaginfo,
-    serviceTasking,
     serviceVectorTile,
     serviceWikidata,
     serviceWikipedia

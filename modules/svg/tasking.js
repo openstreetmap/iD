@@ -3,46 +3,26 @@ import _throttle from 'lodash-es/throttle';
 
 import { select as d3_select, selectAll as d3_selectAll } from 'd3-selection';
 
-import { services } from '../services';
 import { uiCurtain } from '../ui';
 import { svgPath } from './helpers';
-
-
-var _initialized = false;
-var _enabled = false;
-var _task;
-
 
 export function svgTasking(projection, context, dispatch) {
     var throttledRedraw = _throttle(function () { dispatch.call('change'); }, 1000);
     var _showCurtain = false;
     var _curtain = uiCurtain();
     var layer = d3_select(null);
-    var _taskingService;
 
+    var _initialized = false;
+    var _enabled = false;
 
     function init() {
         if (_initialized) return;  // run once
 
-        _task = {};
         _enabled = false;
         _initialized = true;
     }
 
-
-    function getService() {
-        if (services.tasking && !_taskingService) {
-            _taskingService = services.tasking;
-
-            _taskingService.event.on('setTask', throttledRedraw);
-
-        } else if (!services.tasking && _taskingService) {
-            _taskingService = null;
-        }
-
-        return _taskingService;
-    }
-
+    context.tasking().on('setTask.svg', throttledRedraw);
 
     function showLayer() {
         layerOn();
@@ -116,10 +96,10 @@ export function svgTasking(projection, context, dispatch) {
         var geoData = [];
         var polygonData = [];
 
-        if (Object.keys(_task).length) {
-            // geoData = getFeatures(_task);
-            geoData = [_task];
-            geoData = geoData.filter(getPath);
+        var task = context.tasking().activeTask();
+
+        if (task) {
+            geoData = [task.geoJsonGeometry].filter(getPath);
             polygonData = geoData.filter(isPolygon);
         }
 
@@ -224,7 +204,7 @@ export function svgTasking(projection, context, dispatch) {
             // TODO: TAH - draw inner curtain
 
             // reveal opening
-            revealTask(_task.extentPanConstraint());
+            revealTask(task.extentPanConstraint());
         }
     }
 
@@ -276,21 +256,12 @@ export function svgTasking(projection, context, dispatch) {
 
 
     drawTasking.supported = function() {
-        return !!getService();
+        return !!context.tasking();
     };
 
 
     drawTasking.hasData = function() {
-
-        var _taskId = getService().customSettings().taskId; // TODO: TAH - don't just check customSettings
-
-        if (!_taskId) return false;
-
-        _task = getService().getTask(_taskId);
-
-        if (!_task) return false;
-
-        return !!(Object.keys(_task).length);
+        return !!context.tasking().activeTask();
     };
 
 
@@ -299,10 +270,10 @@ export function svgTasking(projection, context, dispatch) {
 
         // set task min zoom
         var map = context.map();
-        _task.minZoom(map.trimmedExtentZoom(_task.extent()));
-        _task = getService().replaceTask(_task); // update task in cache
+        var task = context.tasking().activeTask();
+        task.minZoom(map.trimmedExtentZoom(task.extent()));
 
-        map.centerZoom(_task.center(), _task.minZoom()); // TODO: TAH - better way to zoom out a bit
+        map.centerZoom(task.center(), task.minZoom()); // TODO: TAH - better way to zoom out a bit
 
         // if (!geoPolygonIntersectsPolygon(viewport, coords, true)) {
         //     map.centerZoom(_taskCentroid, map.trimmedExtentZoom(_taskExtent));

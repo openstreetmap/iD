@@ -32,7 +32,7 @@ export function uiTaskOverview(context) {
 
 
     function taskOverview(selection) {
-        if (!Object.keys(_task).length) return;
+        if (!_task) return;
 
         // add overview button
         var overview = selection.selectAll('.task-overview-container')
@@ -59,11 +59,11 @@ export function uiTaskOverview(context) {
             .append('h3')
             .attr('class', 'task-overview-header')
             .text(function(d) {
-                var status = d.status();
+                var status = d.status;
                 var statusText = status === 'lockedForMapping' ? 'mapping' : status === 'lockedForValidation' ? 'validating' : '';
 
                 return t('tasking.task.tabs.overview.header', { status: t('tasking.' + statusText) });
-                });
+            });
 
 
         taskSave.enter()
@@ -308,7 +308,7 @@ export function uiTaskOverview(context) {
         var hasAuth = osm && osm.authenticated();
 
         var buttonSection = selection.selectAll('.buttons')
-            .data([_task], function(d) { return d.taskId; });
+            .data([_task], function(d) { return d.id; });
 
         // exit
         buttonSection.exit()
@@ -340,7 +340,7 @@ export function uiTaskOverview(context) {
         buttonSection.select('.status-button')   // select and propagate data
             .attr('disabled', (hasAuth ? null : true))
             .text(function(d) {
-                var status = d.status();
+                var status = d.status;
                 var statusText = status === 'lockedForMapping' ? 'mapping' : status === 'lockedForValidation' ? 'validating' : '';
 
                 // TODO: TAH - create a HOTOSM TaskComment object when saving
@@ -353,7 +353,7 @@ export function uiTaskOverview(context) {
 
 
         function isSaveDisabled(d) {
-            var status = d.status();
+            var status = d.status;
 
             return (
                 hasAuth &&

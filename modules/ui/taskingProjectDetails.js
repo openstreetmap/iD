@@ -91,10 +91,7 @@ export function uiTaskingProjectDetails() {
 
     function taskingProjectDetails(selection) {
         var details = selection.selectAll('.project-details')
-            .data(
-                (_project && _project.properties ? [_project] : []),
-                function(d) { return d.__featurehash__; }
-            );
+            .data(_project ? [_project] : [], function(d) { return d.uid(); });
 
         // exit
         details.exit()
@@ -120,7 +117,7 @@ export function uiTaskingProjectDetails() {
             .text(function(d) {
                 return t('tasking.project.status', { status:
                     function() {
-                        var status = 'tasking.project.statuses.' + d.status();
+                        var status = 'tasking.project.statuses.' + d.status;
                         return t(status);
                     }()
                 });

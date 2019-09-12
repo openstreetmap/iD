@@ -10,7 +10,7 @@ import { geoExtent, geoPolygonIntersectsPolygon } from '../geo';
 import { services } from '../services';
 import { svgPath } from './helpers';
 import { utilDetect } from '../util/detect';
-import { utilArrayFlatten, utilArrayUnion, utilEnsureIDs, utilHashcode } from '../util';
+import { utilArrayFlatten, utilArrayUnion, utilEnsureIDs } from '../util';
 
 
 var _initialized = false;
@@ -404,7 +404,7 @@ export function svgData(projection, context, dispatch) {
 
         gj = gj || {};
         if (Object.keys(gj).length) {
-            _geojson = ensureIDs(gj);
+            _geojson = utilEnsureIDs(gj);
             _src = src || 'unknown.geojson';
         }
 

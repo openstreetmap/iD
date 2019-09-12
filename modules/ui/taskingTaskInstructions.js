@@ -6,7 +6,7 @@ export function uiTaskInstructions() {
 
 
     function taskInstructions(selection) {
-        if (!Object.keys(_task).length) return;
+        if (!_task) return;
 
         var instructions = selection.selectAll('.task-instructions-container')
             .data([0]);
@@ -19,13 +19,13 @@ export function uiTaskInstructions() {
         instructions
             .append('p')
             .attr('class', 'task-instructions')
-            .text(_task.instructions());
+            .text(_task.project.instructions);
 
         instructions
             .append('h3')
             .attr('class', 'perTaskInstructions-header')
             .text(function () {
-                return _task.perTaskInstructions().length ?
+                return _task.instructions.length ?
                 t('tasking.task.tabs.instructions.perTaskInstructions') :
                 '';
             });
@@ -33,7 +33,7 @@ export function uiTaskInstructions() {
         instructions
             .append('p')
             .attr('class', 'task-instructions')
-            .text(_task.perTaskInstructions());
+            .text(_task.instructions);
     }
 
 

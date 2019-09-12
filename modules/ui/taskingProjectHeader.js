@@ -5,12 +5,9 @@ import { svgIcon } from '../svg/icon';
 export function uiTaskingProjectHeader() {
     var _project;
 
-
     function taskingProjectHeader(selection) {
         var header = selection.selectAll('.project-header')
-            .data(
-                (_project && _project.properties ? [_project] : [0])
-            );
+            .data(_project ? [_project] : [0]);
 
         // exit
         header.exit()
@@ -40,9 +37,9 @@ export function uiTaskingProjectHeader() {
 
         header.select('.project-header-label')
             .text(function(d) {
-                return d && d.properties ?
+                return d ?
                     function() {
-                        return t('tasking.project.id', { projectId: d.id() });
+                        return t('tasking.project.id', { projectId: d.id });
                     }() :
                     t('tasking.project.no_project.message');
             });

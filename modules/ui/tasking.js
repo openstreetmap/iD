@@ -22,8 +22,6 @@ export function uiTasking(context) {
 
     var tasking = context.tasking();
 
-    var layer = context.layers().layer('tasking');
-
     var _pane = d3_select(null);
     var _toggleButton = d3_select(null);
 
@@ -36,10 +34,8 @@ export function uiTasking(context) {
     var _taskingTaskContainer = d3_select(null);
 
     var _errors = tasking.errors();
-    var _task = tasking.currentTask();
-    var _project = tasking.currentProject();
 
-    var _hot_tm_url = 'https://tasks.hotosm.org/';
+    var _hot_tm_url = 'https://tasks.hotosm.org';
 
     // listeners
     var settingsCustomTasking = uiSettingsCustomTasking(context)
@@ -49,23 +45,14 @@ export function uiTasking(context) {
         updateActiveErrors();
     });
 
-    tasking.event.on('setTask', function() {
-        layer.fitZoom();
+    tasking.on('setTask.taskingPane', function() {
         update();
     });
 
-    tasking.event.on('loadedCustomSettings', function() {
-        // load data once custom settings have been set
-        tasking.loadFromUrl(tasking.customSettings());
-    });
 
-
-    tasking.event.on('cancelTasking', function() {
+    tasking.on('cancelTasking', function() {
         // reset edits
         context.history().reset();
-
-        // disable tasking
-        layer.enabled(false);
 
         // set mode to browse
         context.enter(modeBrowse(context));
@@ -74,28 +61,22 @@ export function uiTasking(context) {
     });
 
 
-    tasking.event.on('loadedProject', function(project) {
+    tasking.on('loadedProject', function(project) {
         updateActiveErrors();
-
-        // check if layer is supported
-        if (!(layer && layer.supported())) return;
 
         if (!activeErrors(_errors).length) {
             // set project
-            tasking.currentProject(project.id());
+            tasking.activeProject(project.id());
         }
     });
 
-    tasking.event.on('loadedTask', function(task) {
+    tasking.on('loadedTask', function(task) {
         updateActiveErrors();
 
         setTask(task);
     });
 
     function setTask(task) {
-
-        // check if layer is supported
-        if (!(layer && layer.supported())) return;
 
         // enable layer if no active errors
         if (!activeErrors(_errors).length) {
@@ -107,16 +88,11 @@ export function uiTasking(context) {
 
                     if (lockResponse && Object.keys(lockResponse).length) {
 
-                        // enable layer
-                        toggleLayer(true);
-
                         update();
                     }
                 })
                 .catch(function(err) { console.log('locking task attempt error: ', err); });
 
-        } else {
-            toggleLayer(false);
         }
 
         update();
@@ -130,7 +106,7 @@ export function uiTasking(context) {
        _errors = tasking.errors();
 
         // unsaved edits
-        _errors.unsavedEdits.active = context.history().hasChanges() && layer.enabled() === false;
+        _errors.unsavedEdits.active = context.history().hasChanges();
 
         // push updates to errors
         _errors = tasking.errors(_errors);
@@ -171,112 +147,12 @@ export function uiTasking(context) {
 
     function save() {
         d3_event.preventDefault();
-        if (!context.inIntro() && !isSaving() && context.history().hasChanges() && !showsLayer() && !tasking.edits()) {
+        if (!context.inIntro() && !isSaving() && context.history().hasChanges() && !tasking.edits()) {
             context.enter(modeSave(context));
         }
     }
 
-
-    function showsLayer() {
-        if (layer) {
-            return layer.enabled();
-        }
-        return false;
-    }
-
-
-    function setLayer(enabled) {
-        // Don't allow layer changes while drawing - #6584
-        var mode = context.mode();
-        if (mode && /^draw/.test(mode.id)) return;
-
-        if (layer) {
-            // toggle layer enabled
-            layer.enabled(enabled);
-
-            if (enabled) {
-                layer.fitZoom(); // zoom to layer if enabled
-            } else {
-                // tasking.resetCurrentProjectAndTask(); // otherwise, remove current task & project
-            }
-        }
-    }
-
-
-    function toggleLayer(val) {
-        if (activeErrors(_errors).length) {
-            setLayer(false);
-            return;
-        }
-
-        if (val) setLayer(val);
-
-        else setLayer(!showsLayer());
-        update();
-    }
-
-
-    // function clickManager(d) {
-
-    //     function layerSupported() {
-    //         return layer && layer.supported();
-    //     }
-
-    //     function authorized (task) {
-    //         return true;
-    //         // var status = task.status();
-    //         // var user
-    //     }
-
-    //     tasking.currentManager(d); // set manager
-
-    //     if (d.id === 'none') {
-    //         tasking.resetProjectAndTask();
-    //         setLayer(false);
-
-    //     } else if (context.history().hasChanges()) {
-    //         tasking.resetProjectAndTask();
-    //         setLayer(false);
-
-    //     } else {
-
-    //         // check if layer is supported
-    //         if (!layerSupported() || d.id !== 'custom') return;
-
-    //         // handle custom manager
-    //         if (d.id === 'custom') {
-
-    //             // get project and task from custom settings
-    //             _project = tasking.getProject(tasking.customSettings().projectId);
-    //             _task = tasking.getTask(tasking.customSettings().taskId);
-
-    //             if (authorized(_task)) {
-    //                 // set project & task
-    //                 if (_project && _task) {
-    //                     tasking.currentProject(_project);
-    //                     tasking.currentTask(_task);
-    //                 }
-    //             }
-    //         }
-
-    //         // enable layer if no active errors
-    //         if (!activeErrors(_errors).length) {
-    //             toggleLayer(true);
-    //         }
-
-    //     }
-    // }
-
-    // function showsManager(d) {
-    //     var _currManager = tasking.currentManager();
-    //     return _currManager && _currManager.id === d.id;
-    // }
-
-
     function update() {
-
-        _task = tasking.currentTask(); // get current task
-        _project = tasking.currentProject(); // get current project
 
         updateTaskingErrors();
         updateTaskingWelcome();
@@ -300,7 +176,6 @@ export function uiTasking(context) {
             updateTaskingManagers();
         }
     }
-
 
     function renderTaskingErrors(selection) {
         _taskingErrorsContainer = selection
@@ -394,7 +269,7 @@ export function uiTasking(context) {
 
     function updateTaskingWelcome() {
         var welcome = _taskingWelcomeContainer.selectAll('.tasking-welcome')
-            .data(Object.keys(_task).length ? [] : [0]);
+            .data(tasking.activeTask() ? [] : [0]);
 
         welcome.exit()
             .remove();
@@ -450,7 +325,7 @@ export function uiTasking(context) {
     function updateTaskingTask() {
 
         _taskingTaskContainer
-            .call(taskingTaskEditor.task(!activeErrors(_errors).length ? _task : []));
+            .call(taskingTaskEditor.task(tasking.activeTask()));
     }
 
 
@@ -469,11 +344,12 @@ export function uiTasking(context) {
 
     function updateTaskingProject() {
         _taskingProjectContainer
-            .call(taskingProjectEditor.project(!activeErrors(_errors).length ? _project : []));
+            .call(taskingProjectEditor.project(tasking.activeProject()));
     }
 
 
     function renderTaskingManagers(selection) {
+
         var container = selection.selectAll('.tasking-managers-container')
             .data([0]);
 
@@ -484,7 +360,7 @@ export function uiTasking(context) {
 
         var ul = _taskingManagerContainer
             .selectAll('.layer-list-tasking')
-            .data(layer ? [0] : []);
+            .data([0]);
 
         // Exit
         ul.exit()
@@ -510,8 +386,8 @@ export function uiTasking(context) {
 
 
     function drawCustomManagerListItem(selection) {
-        var hasData = layer && layer.hasData();
-        var showsData = hasData && layer.enabled();
+        var hasData = false;
+        var showsData = false;
 
         var ul = selection.selectAll('.layer-list-tasking');
 
@@ -536,12 +412,14 @@ export function uiTasking(context) {
         labelEnter
             .append('input')
             .attr('type', 'checkbox')
-            .on('change', function() { toggleLayer(); });
+            .on('change', function() {
+                //toggleLayer();
+            });
 
         labelEnter
             .append('span')
             .text(t('tasking.manager.managers.custom.title'));
-    
+
         liEnter
             .append('button')
             .attr('class', 'tasking-custom-settings')
@@ -562,7 +440,7 @@ export function uiTasking(context) {
             .on('click', function() {
                 d3_event.preventDefault();
                 d3_event.stopPropagation();
-                layer.fitZoom();
+                //layer.fitZoom();
             })
             .call(svgIcon('#iD-icon-search'));
 

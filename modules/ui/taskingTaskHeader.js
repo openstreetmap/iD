@@ -8,10 +8,7 @@ export function uiTaskingTaskHeader() {
 
     function taskingTaskHeader(selection) {
         var header = selection.selectAll('.task-header')
-            .data(
-                (_task && _task.properties ? [_task] : [0]),
-                function(d) { return d.__featurehash__; }
-            );
+            .data(_task ? [_task] : [0], function(d) { return d.uid && d.uid(); });
 
         // exit
         header.exit()
@@ -41,9 +38,9 @@ export function uiTaskingTaskHeader() {
 
         header.select('.task-header-label')
             .text(function(d) {
-                return _task && _task.properties ?
+                return _task ?
                     function() {
-                        return t('tasking.task.id', { taskId: d.id() });
+                        return t('tasking.task.id', { taskId: d.id });
                     }() :
                     t('tasking.task.no_task.message');
             });

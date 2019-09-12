@@ -12,7 +12,7 @@ var _errors = {
     'invalidStateMapping': {
         severity: 'error',
         message: function(task) {
-            return t('tasking.errors.invalidStateMapping', {taskId: task.id(), status: t('tasking.task.statuses.' + task.status()) }); // TODO: TAH - change text to include user and status
+            return t('tasking.errors.invalidStateMapping', { taskId: task.id, status: t('tasking.task.statuses.' + task.status) }); // TODO: TAH - change text to include user and status
         },
         active: false,
         task: {}
@@ -20,7 +20,7 @@ var _errors = {
     'taskAlreadyLocked': {
         severity: 'error',
         message: function(task) {
-            return t('tasking.errors.taskAlreadyLocked', {taskId: task.id()});
+            return t('tasking.errors.taskAlreadyLocked', { taskId: task.id });
         },
         active: false,
         task: {}
@@ -28,7 +28,7 @@ var _errors = {
     'taskNotFound': {
         severity: 'error',
         message: function(task) {
-            return t('tasking.errors.taskNotFound', {taskId: task.id()});
+            return t('tasking.errors.taskNotFound', { taskId: task.id });
         },
         active: false,
         task: {}

@@ -5,7 +5,7 @@ export function uiProjectInformation() {
 
 
     function projectInformation(selection) {
-        if (!Object.keys(_project).length) return;
+        if (!_project) return;
 
         var description = selection.selectAll('.project-information-container')
             .data([0]);
@@ -23,7 +23,7 @@ export function uiProjectInformation() {
         description
             .append('p')
             .attr('class', 'project-priority')
-            .text(t('tasking.project.priorities.' + _project.priority() ));
+            .text(t('tasking.project.priorities.' + _project.priority ));
     }
 
 

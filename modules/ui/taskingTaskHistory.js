@@ -11,7 +11,7 @@ export function uiTaskHistory() {
 
 
     function taskHistory(selection) {
-        if (!Object.keys(_task).length) return;
+        if (!_task) return;
 
         var history = selection.selectAll('.task-history-container')
             .data([0]);
@@ -22,7 +22,7 @@ export function uiTaskHistory() {
             .merge(history);
 
         var historyEnter = history.selectAll('.comment')
-            .data(_task.history())
+            .data(_task.historyStack)
             .enter()
             .append('div')
             .attr('class', 'comment');
@@ -94,7 +94,7 @@ export function uiTaskHistory() {
         if (!osm) return;
 
         var uids = {};  // gather uids in the comment thread
-        _task.history.forEach(function(d) {
+        _task.historyStack.forEach(function(d) {
             if (d.uid) uids[d.uid] = true;
         });
 
