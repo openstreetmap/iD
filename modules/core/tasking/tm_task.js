@@ -109,7 +109,7 @@ Object.assign(tmTask.prototype, {
     },
 
     parseRemoteResult: function(result) {
-        this.status = status[result.taskStatus];
+        this.status = statuses[result.taskStatus];
         this.instructions = result.perTaskInstructions;
         this.annotation = result.taskAnnotation;
         this.isUndoable = result.isUndoable;
