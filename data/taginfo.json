@@ -816,7 +816,7 @@
     {"key": "office", "value": "private_investigator", "description": "🄿 Private Investigator Office", "object_types": ["node", "area"], "icon_url": "https://cdn.jsdelivr.net/gh/openstreetmap/iD/svg/fontawesome/fas-user-secret.svg"},
     {"key": "office", "value": "quango", "description": "🄿 Quasi-NGO Office", "object_types": ["node", "area"], "icon_url": "https://cdn.jsdelivr.net/gh/mapbox/maki/icons/suitcase-15.svg"},
     {"key": "office", "value": "religion", "description": "🄿 Religious Office", "object_types": ["node", "area"], "icon_url": "https://cdn.jsdelivr.net/gh/mapbox/maki/icons/suitcase-15.svg"},
-    {"key": "office", "value": "research", "description": "🄿 Research Office", "object_types": ["node", "area"], "icon_url": "https://cdn.jsdelivr.net/gh/mapbox/maki/icons/suitcase-15.svg"},
+    {"key": "office", "value": "research", "description": "🄿 Research Office", "object_types": ["node", "area"], "icon_url": "https://cdn.jsdelivr.net/gh/openstreetmap/iD/svg/fontawesome/fas-flask.svg"},
     {"key": "office", "value": "surveyor", "description": "🄿 Surveyor Office", "object_types": ["node", "area"], "icon_url": "https://cdn.jsdelivr.net/gh/mapbox/maki/icons/suitcase-15.svg"},
     {"key": "office", "value": "tax_advisor", "description": "🄿 Tax Advisor Office", "object_types": ["node", "area"], "icon_url": "https://cdn.jsdelivr.net/gh/mapbox/maki/icons/suitcase-15.svg"},
     {"key": "office", "value": "telecommunication", "description": "🄿 Telecom Office", "object_types": ["node", "area"], "icon_url": "https://cdn.jsdelivr.net/gh/mapbox/maki/icons/telephone-15.svg"},

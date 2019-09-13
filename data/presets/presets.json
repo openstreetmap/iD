@@ -839,7 +839,7 @@
     "office/private_investigator": {"icon": "fas-user-secret", "geometry": ["point", "area"], "tags": {"office": "private_investigator"}, "terms": ["PI", "private eye", "private detective"], "name": "Private Investigator Office"},
     "office/quango": {"icon": "maki-suitcase", "geometry": ["point", "area"], "tags": {"office": "quango"}, "terms": ["ngo", "non government", "non-government", "organization", "organisation", "quasi autonomous", "quasi-autonomous"], "name": "Quasi-NGO Office"},
     "office/religion": {"icon": "maki-suitcase", "fields": ["{office}", "religion", "denomination"], "geometry": ["point", "area"], "tags": {"office": "religion"}, "terms": [], "name": "Religious Office"},
-    "office/research": {"icon": "maki-suitcase", "geometry": ["point", "area"], "tags": {"office": "research"}, "terms": [], "name": "Research Office"},
+    "office/research": {"icon": "fas-flask", "geometry": ["point", "area"], "tags": {"office": "research"}, "terms": ["R and D", "research and development", "research lab"], "name": "Research Office"},
     "office/surveyor": {"icon": "maki-suitcase", "geometry": ["point", "area"], "tags": {"office": "surveyor"}, "terms": [], "name": "Surveyor Office"},
     "office/tax_advisor": {"icon": "maki-suitcase", "geometry": ["point", "area"], "tags": {"office": "tax_advisor"}, "terms": ["tax", "tax consultant"], "name": "Tax Advisor Office"},
     "office/telecommunication": {"icon": "maki-telephone", "geometry": ["point", "area"], "tags": {"office": "telecommunication"}, "terms": ["communication", "internet service provider", "isp", "network", "telephone", "voice"], "name": "Telecom Office"},
