@@ -5506,6 +5506,10 @@
                     "name": "Library",
                     "terms": "book"
                 },
+                "amenity/loading_dock": {
+                    "name": "Loading Dock",
+                    "terms": "door,loading bay,shipping,unloading,warehouse"
+                },
                 "amenity/love_hotel": {
                     "name": "Love Hotel",
                     "terms": ""
@@ -5994,6 +5998,10 @@
                     "name": "Animal Watering Place",
                     "terms": ""
                 },
+                "amenity/weighbridge": {
+                    "name": "Truck Scale",
+                    "terms": "weigh station,weighbridge"
+                },
                 "area": {
                     "name": "Area",
                     "terms": "polygon"
@@ -6015,7 +6023,7 @@
                     "terms": "ferris wheel,theme park,amusement ride"
                 },
                 "attraction/bumper_car": {
-                    "name": "Bumper Car",
+                    "name": "Bumper Cars",
                     "terms": "theme park,dodgem cars,autoscooter"
                 },
                 "attraction/bungee_jumping": {
@@ -7938,6 +7946,10 @@
                     "name": "Tunnel",
                     "terms": "bore,dig,shaft,underground passage,underpass"
                 },
+                "man_made/utility_pole": {
+                    "name": "Utility Pole",
+                    "terms": ""
+                },
                 "man_made/wastewater_plant": {
                     "name": "Wastewater Plant",
                     "terms": "sewage*,water treatment plant,reclamation plant"
@@ -8324,7 +8336,7 @@
                 },
                 "office/research": {
                     "name": "Research Office",
-                    "terms": ""
+                    "terms": "R and D,research and development,research lab"
                 },
                 "office/surveyor": {
                     "name": "Surveyor Office",

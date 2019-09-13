@@ -149,6 +149,10 @@
       "replace": {"amenity": "vending_machine", "vending": "newspapers"}
     },
     {
+      "old": {"amenity": "weigh_bridge"},
+      "replace": {"amenity": "weighbridge"}
+    },
+    {
       "old": {"amenity": "winery"},
       "replace": {"craft": "winery"}
     },
@@ -401,6 +405,10 @@
       "replace": {"highway": "path", "bicycle": "no"}
     },
     {
+      "old": {"highway": "cycleway", "cycleway": "track"},
+      "replace": {"highway": "cycleway"}
+    },
+    {
       "old": {"highway": "footway", "foot": "no"},
       "replace": {"highway": "path", "foot": "no"}
     },
@@ -566,6 +574,30 @@
     {
       "old": {"man_made": "water_tank"},
       "replace": {"man_made": "storage_tank", "content": "water"}
+    },
+    {
+      "old": {"man_made": "weigh_bridge"},
+      "replace": {"amenity": "weighbridge"}
+    },
+    {
+      "old": {"man_made": "weighbridge"},
+      "replace": {"amenity": "weighbridge"}
+    },
+    {
+      "old": {"man_made": "weighing_machine"},
+      "replace": {"amenity": "weighbridge"}
+    },
+    {
+      "old": {"man_made": "weighing_scale"},
+      "replace": {"amenity": "weighbridge"}
+    },
+    {
+      "old": {"man_made": "weighting machine"},
+      "replace": {"amenity": "weighbridge"}
+    },
+    {
+      "old": {"man_made": "weighting_machine"},
+      "replace": {"amenity": "weighbridge"}
     },
     {
       "old": {"man_made": "well"},

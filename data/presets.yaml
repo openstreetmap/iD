@@ -3075,6 +3075,11 @@ en:
         name: Library
         # 'terms: book'
         terms: '<translate with synonyms or related terms for ''Library'', separated by commas>'
+      amenity/loading_dock:
+        # amenity=loading_dock
+        name: Loading Dock
+        # 'terms: door,loading bay,shipping,unloading,warehouse'
+        terms: '<translate with synonyms or related terms for ''Loading Dock'', separated by commas>'
       amenity/love_hotel:
         # amenity=love_hotel
         name: Love Hotel
@@ -3686,6 +3691,11 @@ en:
         # amenity=watering_place
         name: Animal Watering Place
         terms: '<translate with synonyms or related terms for ''Animal Watering Place'', separated by commas>'
+      amenity/weighbridge:
+        # amenity=weighbridge
+        name: Truck Scale
+        # 'terms: weigh station,weighbridge'
+        terms: '<translate with synonyms or related terms for ''Truck Scale'', separated by commas>'
       area:
         # area=yes
         name: Area
@@ -3716,9 +3726,9 @@ en:
         terms: '<translate with synonyms or related terms for ''Big Wheel'', separated by commas>'
       attraction/bumper_car:
         # attraction=bumper_car
-        name: Bumper Car
+        name: Bumper Cars
         # 'terms: theme park,dodgem cars,autoscooter'
-        terms: '<translate with synonyms or related terms for ''Bumper Car'', separated by commas>'
+        terms: '<translate with synonyms or related terms for ''Bumper Cars'', separated by commas>'
       attraction/bungee_jumping:
         # attraction=bungee_jumping
         name: Bungee Jumping
@@ -5916,6 +5926,10 @@ en:
         name: Tunnel
         # 'terms: bore,dig,shaft,underground passage,underpass'
         terms: '<translate with synonyms or related terms for ''Tunnel'', separated by commas>'
+      man_made/utility_pole:
+        # man_made=utility_pole
+        name: Utility Pole
+        terms: '<translate with synonyms or related terms for ''Utility Pole'', separated by commas>'
       man_made/wastewater_plant:
         # man_made=wastewater_plant
         name: Wastewater Plant
@@ -6360,6 +6374,7 @@ en:
       office/research:
         # office=research
         name: Research Office
+        # 'terms: R and D,research and development,research lab'
         terms: '<translate with synonyms or related terms for ''Research Office'', separated by commas>'
       office/surveyor:
         # office=surveyor
