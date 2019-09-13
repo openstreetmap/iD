@@ -401,6 +401,10 @@
       "replace": {"highway": "path", "bicycle": "no"}
     },
     {
+      "old": {"highway": "cycleway", "cycleway": "track"},
+      "replace": {"highway": "cycleway"}
+    },
+    {
       "old": {"highway": "footway", "foot": "no"},
       "replace": {"highway": "path", "foot": "no"}
     },
