@@ -1,14 +1,18 @@
 {
     "icon": "maki-entrance",
     "fields": [
-        "name",
         "incline_steps",
         "conveying",
         "access_simple",
-        "lit",
-        "width",
+        "indoor",
+        "level_semi",
+        "width"
+    ],
+    "moreFields": [
+        "{highway/steps}",
         "handrail",
-        "step_count"
+        "step_count",
+        "surface"
     ],
     "geometry": [
         "line"

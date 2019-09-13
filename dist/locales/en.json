@@ -3551,6 +3551,10 @@
                     "label": "Length (Meters)",
                     "terms": ""
                 },
+                "level_semi": {
+                    "label": "Levels",
+                    "terms": "building floors,decks,stories,storeys,storys"
+                },
                 "level": {
                     "label": "Level",
                     "terms": "building floor,deck,storey,story"
