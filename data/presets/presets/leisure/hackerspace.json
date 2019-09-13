@@ -17,6 +17,7 @@
         "air_conditioning",
         "email",
         "fax",
+        "level",
         "phone",
         "smoking",
         "wheelchair"

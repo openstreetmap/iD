@@ -14,6 +14,7 @@
         "internet_access",
         "internet_access/fee",
         "internet_access/ssid",
+        "level",
         "min_age",
         "payment_multi",
         "phone",

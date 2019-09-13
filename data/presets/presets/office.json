@@ -16,6 +16,7 @@
         "internet_access",
         "internet_access/fee",
         "internet_access/ssid",
+        "level",
         "not/name",
         "operator",
         "phone",

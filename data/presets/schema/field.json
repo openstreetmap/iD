@@ -133,23 +133,38 @@
         "prerequisiteTag": {
             "description": "Tagging constraint for showing this field in the editor",
             "type": {
-                "type": "object",
-                "properties": {
-                    "key": {
-                        "description": "The key of the required tag",
-                        "type": "string",
-                        "required": true
+                "anyOf": [
+                    {
+                        "type": "object",
+                        "properties": {
+                            "key": {
+                                "description": "The key of the required tag",
+                                "type": "string",
+                                "required": true
+                            },
+                            "value": {
+                                "description": "The value that the tag must have. (alternative to 'valueNot')",
+                                "type": "string"
+                            },
+                            "valueNot": {
+                                "description": "The value that the tag cannot have. (alternative to 'value')",
+                                "type": "string"
+                            }
+                        },
+                        "additionalProperties": false
                     },
-                    "value": {
-                        "description": "The value that the tag must have. (alternative to 'valueNot')",
-                        "type": "string"
-                    },
-                    "valueNot": {
-                        "description": "The value that the tag cannot have. (alternative to 'value')",
-                        "type": "string"
+                    {
+                        "type": "object",
+                        "properties": {
+                            "keyNot": {
+                                "description": "A key that must not be present",
+                                "type": "string",
+                                "required": true
+                            }
+                        },
+                        "additionalProperties": false
                     }
-                },
-                "additionalProperties": false
+                ]
             }
         },
         "terms": {

@@ -13,6 +13,7 @@
         "email",
         "covered",
         "fax",
+        "level",
         "opening_hours",
         "phone",
         "website",

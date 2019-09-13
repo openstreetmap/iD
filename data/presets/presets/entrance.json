@@ -15,6 +15,7 @@
         "entrance",
         "door",
         "access_simple",
+        "level",
         "address"
     ],
     "matchScore": 0.8,

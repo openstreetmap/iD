@@ -11,6 +11,7 @@
     "moreFields": [
         "email",
         "fax",
+        "level",
         "min_age",
         "max_age",
         "payment_multi",

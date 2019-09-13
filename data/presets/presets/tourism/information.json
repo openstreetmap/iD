@@ -6,6 +6,9 @@
         "address",
         "building_area"
     ],
+    "moreFields": [
+        "level"
+    ],
     "geometry": [
         "point",
         "vertex",

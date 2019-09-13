@@ -11,6 +11,7 @@
         "charge_fee"
     ],
     "moreFields": [
+        "level",
         "website",
         "phone",
         "email",

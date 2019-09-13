@@ -10,6 +10,7 @@
         "access_simple",
         "height",
         "inscription",
+        "level",
         "lit",
         "manufacturer",
         "operator"

@@ -10,13 +10,15 @@
         "lit"
     ],
     "moreFields": [
-        "wheelchair",
-        "location",
+        "access_simple",
         "address",
-        "access_simple", 
         "brand",
         "email",
-        "phone"
+        "level",
+        "location",
+        "phone",
+        "website",
+        "wheelchair"
     ],
     "geometry": [
         "point",

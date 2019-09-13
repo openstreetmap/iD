@@ -8,6 +8,9 @@
         "name",
         "operator"
     ],
+    "moreFields": [
+        "level"
+    ],
     "terms": [
         "al fresco",
         "beer garden",

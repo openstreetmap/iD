@@ -16,6 +16,7 @@
         "phone",
         "email",
         "fax",
+        "level",
         "wheelchair"
     ],
     "geometry": [

@@ -5,6 +5,9 @@
         "lit",
         "bench"
     ],
+    "moreFields": [
+        "level"
+    ],
     "geometry": [
         "point"
     ],

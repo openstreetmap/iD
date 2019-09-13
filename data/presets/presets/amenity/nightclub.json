@@ -13,6 +13,7 @@
         "air_conditioning",
         "email",
         "fax",
+        "level",
         "payment_multi",
         "phone",
         "website",

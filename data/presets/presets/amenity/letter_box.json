@@ -9,6 +9,7 @@
     "moreFields": [
         "covered",
         "indoor",
+        "level",
         "lit",
         "manufacturer",
         "material",

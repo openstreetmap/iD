@@ -207,7 +207,7 @@
     "leisure": {"key": "leisure", "type": "typeCombo", "label": "Type"},
     "length": {"key": "length", "type": "number", "minValue": 0, "label": "Length (Meters)"},
     "level_semi": {"key": "level", "type": "semiCombo", "label": "Levels", "terms": ["building floors", "decks", "stories", "storeys", "storys"]},
-    "level": {"key": "level", "type": "combo", "label": "Level", "universal": true, "terms": ["building floor", "deck", "storey", "story"]},
+    "level": {"key": "level", "type": "combo", "label": "Level", "terms": ["building floor", "deck", "storey", "story"], "prerequisiteTag": {"keyNot": "building"}},
     "levels": {"key": "building:levels", "type": "number", "minValue": 0, "label": "Levels", "placeholder": "2, 4, 6..."},
     "liaison": {"key": "liaison", "type": "combo", "label": "Type"},
     "line_attachment": {"key": "line_attachment", "type": "combo", "label": "Line Attachment"},

@@ -10,6 +10,7 @@
     "moreFields": [
         "charge_fee",
         "fee",
+        "level",
         "opening_hours",
         "payment_multi_fee",
         "ref"

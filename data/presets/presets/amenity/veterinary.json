@@ -10,6 +10,7 @@
     "moreFields": [
         "charge_fee",
         "fee",
+        "level",
         "payment_multi_fee",
         "website",
         "phone",

@@ -14,6 +14,7 @@
         "fax",
         "internet_access",
         "internet_access/ssid",
+        "level",
         "opening_hours",
         "phone",
         "polling_station",

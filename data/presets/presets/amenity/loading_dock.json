@@ -11,6 +11,7 @@
     "moreFields": [
         "address",
         "colour",
+        "level",
         "lit",
         "wheelchair"
     ],

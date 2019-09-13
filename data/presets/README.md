@@ -203,7 +203,7 @@ When possible, use `deprecated.json` instead to specify upgrade paths for old ta
 
 A key and optionally a value to link to the wiki documentation for this preset. Only necessary if the preset consists of several tags.
 
-For example, 
+For example,
 ```javascript
 "reference": {
     "key": "tower:type",
@@ -384,14 +384,18 @@ For number fields, the greatest valid value. There is no default.
 
 ##### `prerequisiteTag`
 
-An object defining the tags the feature needs before this field will be displayed. It must have this property:
+An object defining the tags the feature needs before this field will be displayed. It may have this property:
 
 - `key`: The key for the required tag.
 
-And may optionally have one of these properties:
+And may optionally be combined with one of these properties:
 
 - `value`: The value that the key must have.
 - `valueNot`: The value that the key must not have.
+
+Alternatively, the object may contain a single property:
+
+- `keyNot`: The key that must not be present.
 
 For example, this is how we show the Internet Access Fee field only if the feature has an `internet_access` tag not equal to `no`.
 

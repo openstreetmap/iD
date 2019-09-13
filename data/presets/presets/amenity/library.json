@@ -18,6 +18,7 @@
         "fax",
         "opening_hours",
         "payment_multi",
+        "level",
         "phone",
         "polling_station",
         "website",
