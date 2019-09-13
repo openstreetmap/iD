@@ -596,7 +596,7 @@
     {"key": "leisure", "value": "adult_gaming_centre", "description": "🄿 Adult Gaming Center", "object_types": ["node", "area"], "icon_url": "https://cdn.jsdelivr.net/gh/bhousel/temaki/icons/casino.svg"},
     {"key": "leisure", "value": "amusement_arcade", "description": "🄿 Amusement Arcade", "object_types": ["node", "area"], "icon_url": "https://cdn.jsdelivr.net/gh/mapbox/maki/icons/gaming-15.svg"},
     {"key": "leisure", "value": "bandstand", "description": "🄿 Bandstand", "object_types": ["node", "area"], "icon_url": "https://cdn.jsdelivr.net/gh/mapbox/maki/icons/music-15.svg"},
-    {"key": "leisure", "value": "beach_resort", "description": "🄿 Beach Resort", "object_types": ["node", "area"], "icon_url": "https://cdn.jsdelivr.net/gh/mapbox/maki/icons/beach-15.svg"},
+    {"key": "leisure", "value": "beach_resort", "description": "🄿 Beach Resort", "object_types": ["node", "area"], "icon_url": "https://cdn.jsdelivr.net/gh/openstreetmap/iD/svg/fontawesome/fas-umbrella-beach.svg"},
     {"key": "leisure", "value": "bird_hide", "description": "🄿 Bird Hide", "object_types": ["node", "area"], "icon_url": "https://cdn.jsdelivr.net/gh/bhousel/temaki/icons/binoculars.svg"},
     {"key": "leisure", "value": "bleachers", "description": "🄿 Bleachers", "object_types": ["node", "area"]},
     {"key": "leisure", "value": "bowling_alley", "description": "🄿 Bowling Alley", "object_types": ["node", "area"], "icon_url": "https://cdn.jsdelivr.net/gh/bhousel/temaki/icons/bowling.svg"},
