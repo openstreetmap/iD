@@ -304,8 +304,7 @@ export function uiField(context, presetField, entity, options) {
                     return prerequisiteTag.value === value;
                 }
             } else if (prerequisiteTag.keyNot) {
-                var value = latest.tags[prerequisiteTag.keyNot];
-                if (value) return false;
+                if (latest.tags[prerequisiteTag.keyNot]) return false;
             }
         }
         return true;
