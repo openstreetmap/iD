@@ -260,7 +260,7 @@
     {"key": "attraction", "value": "amusement_ride", "description": "🄿 Amusement Ride", "object_types": ["node", "area"], "icon_url": "https://cdn.jsdelivr.net/gh/mapbox/maki/icons/amusement-park-15.svg"},
     {"key": "attraction", "value": "animal", "description": "🄿 Animal Enclosure", "object_types": ["node", "area"], "icon_url": "https://cdn.jsdelivr.net/gh/mapbox/maki/icons/zoo-15.svg"},
     {"key": "attraction", "value": "big_wheel", "description": "🄿 Big Wheel", "object_types": ["node"], "icon_url": "https://cdn.jsdelivr.net/gh/mapbox/maki/icons/amusement-park-15.svg"},
-    {"key": "attraction", "value": "bumper_car", "description": "🄿 Bumper Car", "object_types": ["node", "area"], "icon_url": "https://cdn.jsdelivr.net/gh/mapbox/maki/icons/car-15.svg"},
+    {"key": "attraction", "value": "bumper_car", "description": "🄿 Bumper Cars", "object_types": ["node", "area"], "icon_url": "https://cdn.jsdelivr.net/gh/openstreetmap/iD/svg/fontawesome/fas-car-crash.svg"},
     {"key": "attraction", "value": "bungee_jumping", "description": "🄿 Bungee Jumping", "object_types": ["node", "area"], "icon_url": "https://cdn.jsdelivr.net/gh/mapbox/maki/icons/pitch-15.svg"},
     {"key": "attraction", "value": "carousel", "description": "🄿 Carousel", "object_types": ["node", "area"], "icon_url": "https://cdn.jsdelivr.net/gh/bhousel/temaki/icons/amusement_park.svg"},
     {"key": "attraction", "value": "dark_ride", "description": "🄿 Dark Ride", "object_types": ["node", "way", "area"], "icon_url": "https://cdn.jsdelivr.net/gh/mapbox/maki/icons/rail-metro-15.svg"},

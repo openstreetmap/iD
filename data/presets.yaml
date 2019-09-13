@@ -3675,9 +3675,9 @@ en:
         terms: '<translate with synonyms or related terms for ''Big Wheel'', separated by commas>'
       attraction/bumper_car:
         # attraction=bumper_car
-        name: Bumper Car
+        name: Bumper Cars
         # 'terms: theme park,dodgem cars,autoscooter'
-        terms: '<translate with synonyms or related terms for ''Bumper Car'', separated by commas>'
+        terms: '<translate with synonyms or related terms for ''Bumper Cars'', separated by commas>'
       attraction/bungee_jumping:
         # attraction=bungee_jumping
         name: Bungee Jumping
