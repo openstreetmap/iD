@@ -5369,6 +5369,10 @@
                     "name": "Library",
                     "terms": "book"
                 },
+                "amenity/loading_dock": {
+                    "name": "Loading Dock",
+                    "terms": "door,loading bay,shipping,unloading,warehouse"
+                },
                 "amenity/love_hotel": {
                     "name": "Love Hotel",
                     "terms": ""

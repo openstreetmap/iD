@@ -137,6 +137,7 @@
     {"key": "amenity", "value": "language_school", "description": "🄿 Language School", "object_types": ["node", "area"], "icon_url": "https://cdn.jsdelivr.net/gh/mapbox/maki/icons/school-15.svg"},
     {"key": "amenity", "value": "letter_box", "description": "🄿 Letter Box", "object_types": ["node"], "icon_url": "https://cdn.jsdelivr.net/gh/bhousel/temaki/icons/letter_box.svg"},
     {"key": "amenity", "value": "library", "description": "🄿 Library", "object_types": ["node", "area"], "icon_url": "https://cdn.jsdelivr.net/gh/mapbox/maki/icons/library-15.svg"},
+    {"key": "amenity", "value": "loading_dock", "description": "🄿 Loading Dock", "object_types": ["node"], "icon_url": "https://cdn.jsdelivr.net/gh/openstreetmap/iD/svg/fontawesome/fas-dolly.svg"},
     {"key": "amenity", "value": "love_hotel", "description": "🄿 Love Hotel", "object_types": ["node", "area"], "icon_url": "https://cdn.jsdelivr.net/gh/mapbox/maki/icons/heart-15.svg"},
     {"key": "amenity", "value": "marketplace", "description": "🄿 Marketplace", "object_types": ["node", "area"], "icon_url": "https://cdn.jsdelivr.net/gh/mapbox/maki/icons/shop-15.svg"},
     {"key": "amenity", "value": "monastery", "description": "🄿 Monastery Grounds", "object_types": ["node", "area"], "icon_url": "https://cdn.jsdelivr.net/gh/mapbox/maki/icons/place-of-worship-15.svg"},

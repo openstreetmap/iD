@@ -1,0 +1,31 @@
+{
+    "icon": "fas-dolly",
+    "fields": [
+        "ref",
+        "operator",
+        "access_simple",
+        "door",
+        "width",
+        "height"
+    ],
+    "moreFields": [
+        "address",
+        "colour",
+        "lit",
+        "wheelchair"
+    ],
+    "geometry": [
+        "vertex"
+    ],
+    "terms": [
+        "door",
+        "loading bay",
+        "shipping",
+        "unloading",
+        "warehouse"
+    ],
+    "tags": {
+        "amenity": "loading_dock"
+    },
+    "name": "Loading Dock"
+}

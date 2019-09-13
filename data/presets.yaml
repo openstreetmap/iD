@@ -3029,6 +3029,11 @@ en:
         name: Library
         # 'terms: book'
         terms: '<translate with synonyms or related terms for ''Library'', separated by commas>'
+      amenity/loading_dock:
+        # amenity=loading_dock
+        name: Loading Dock
+        # 'terms: door,loading bay,shipping,unloading,warehouse'
+        terms: '<translate with synonyms or related terms for ''Loading Dock'', separated by commas>'
       amenity/love_hotel:
         # amenity=love_hotel
         name: Love Hotel
