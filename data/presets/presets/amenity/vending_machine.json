@@ -11,6 +11,7 @@
         "covered",
         "height",
         "indoor",
+        "level",
         "manufacturer"
     ],
     "geometry": [

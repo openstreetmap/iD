@@ -879,6 +879,7 @@ en:
       handrail:
         # handrail=*
         label: Handrail
+        terms: '[translate with synonyms or related terms for ''Handrail'', separated by commas]'
       hashtags:
         # hashtags=*
         label: Hashtags
@@ -1144,6 +1145,11 @@ en:
         label: Level
         # 'terms: building floor,deck,storey,story'
         terms: '[translate with synonyms or related terms for ''Level'', separated by commas]'
+      level_semi:
+        # level=*
+        label: Levels
+        # 'terms: building floors,decks,stories,storeys,storys'
+        terms: '[translate with synonyms or related terms for ''Levels'', separated by commas]'
       levels:
         # 'building:levels=*'
         label: Levels
@@ -2111,6 +2117,7 @@ en:
       step_count:
         # step_count=*
         label: Number of Steps
+        terms: '[translate with synonyms or related terms for ''Number of Steps'', separated by commas]'
       stop:
         # stop=*
         label: Stop Type
@@ -2171,6 +2178,7 @@ en:
       surface:
         # surface=*
         label: Surface
+        terms: '[translate with synonyms or related terms for ''Surface'', separated by commas]'
       surveillance:
         # surveillance=*
         label: Surveillance Kind

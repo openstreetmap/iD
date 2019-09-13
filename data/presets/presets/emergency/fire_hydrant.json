@@ -10,6 +10,7 @@
     "moreFields": [
         "fire_hydrant/pressure",
         "fire_hydrant/diameter",
+        "level",
         "water_volume",
         "survey/date"
     ],

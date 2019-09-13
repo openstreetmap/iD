@@ -9,6 +9,7 @@
         "colour",
         "covered",
         "indoor",
+        "level",
         "manufacturer",
         "material"
     ],

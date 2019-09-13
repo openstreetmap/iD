@@ -8,6 +8,7 @@
         "opening_hours"
     ],
     "moreFields": [
+        "level",
         "lit",
         "wheelchair",
         "covered"

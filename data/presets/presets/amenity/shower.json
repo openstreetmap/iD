@@ -12,6 +12,7 @@
     ],
     "moreFields": [
         "address",
+        "level",
         "operator",
         "gender"
     ],

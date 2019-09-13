@@ -1491,7 +1491,7 @@
     {"key": "leaf_type", "value": "leafless", "description": "🄵 Leaf Type"},
     {"key": "leaf_type", "value": "mixed", "description": "🄵 Leaf Type"},
     {"key": "length", "description": "🄵 Length (Meters)"},
-    {"key": "level", "description": "🄵 Level"},
+    {"key": "level", "description": "🄵 Levels, 🄵 Level"},
     {"key": "liaison", "description": "🄵 Type"},
     {"key": "line_attachment", "description": "🄵 Line Attachment"},
     {"key": "lit", "description": "🄵 Lit"},

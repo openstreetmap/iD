@@ -8,6 +8,7 @@
         "dance/style"
     ],
     "moreFields": [
+        "level",
         "opening_hours",
         "payment_multi",
         "website",

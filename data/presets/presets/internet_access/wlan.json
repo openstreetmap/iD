@@ -5,8 +5,11 @@
         "area"
     ],
     "fields": [
-        "internet_access/fee",
-        "internet_access/ssid"
+        "internet_access/ssid",
+        "internet_access/fee"
+    ],
+    "moreFields": [
+        "level"
     ],
     "terms": [
         "wi-fi",

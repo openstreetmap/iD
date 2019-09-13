@@ -5,6 +5,9 @@
         "ref",
         "operator"
     ],
+    "moreFields": [
+        "level"
+    ],
     "geometry": [
         "point",
         "vertex"

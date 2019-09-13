@@ -15,6 +15,7 @@
         "email",
         "fax",
         "internet_access/ssid",
+        "level",
         "payment_multi",
         "phone",
         "reservation",

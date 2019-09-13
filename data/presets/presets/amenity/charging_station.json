@@ -12,6 +12,7 @@
     "moreFields": [
         "brand",
         "covered",
+        "level",
         "manufacturer"
     ],
     "geometry": [

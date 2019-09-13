@@ -6,6 +6,9 @@
         "network",
         "operator"
     ],
+    "moreFields": [
+        "level"
+    ],
     "geometry": [
         "vertex"
     ],

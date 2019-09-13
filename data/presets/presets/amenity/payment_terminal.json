@@ -8,7 +8,10 @@
         "payment_multi"
     ],
     "moreFields": [
+        "covered",
         "currency_multi",
+        "indoor",
+        "level",
         "wheelchair"
     ],
     "geometry": [
