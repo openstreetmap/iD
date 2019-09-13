@@ -7809,6 +7809,10 @@
                     "name": "Tunnel",
                     "terms": "bore,dig,shaft,underground passage,underpass"
                 },
+                "man_made/utility_pole": {
+                    "name": "Utility Pole",
+                    "terms": ""
+                },
                 "man_made/wastewater_plant": {
                     "name": "Wastewater Plant",
                     "terms": "sewage*,water treatment plant,reclamation plant"

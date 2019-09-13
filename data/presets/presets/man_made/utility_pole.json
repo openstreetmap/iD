@@ -4,10 +4,10 @@
         "ref",
         "operator",
         "height",
-        "material",
-        "line_attachment"
+        "material"
     ],
     "moreFields": [
+        "colour",
         "manufacturer"
     ],
     "geometry": [
@@ -15,7 +15,7 @@
         "vertex"
     ],
     "tags": {
-        "power": "pole"
+        "man_made": "utility_pole"
     },
-    "name": "Power Pole"
+    "name": "Utility Pole"
 }

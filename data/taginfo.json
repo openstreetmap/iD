@@ -722,6 +722,7 @@
     {"key": "tower:type", "value": "minaret", "description": "🄿 Minaret", "object_types": ["node", "area"], "icon_url": "https://cdn.jsdelivr.net/gh/bhousel/temaki/icons/tower.svg"},
     {"key": "tower:type", "value": "observation", "description": "🄿 Observation Tower", "object_types": ["node", "area"], "icon_url": "https://cdn.jsdelivr.net/gh/bhousel/temaki/icons/tower.svg"},
     {"key": "man_made", "value": "tunnel", "description": "🄿 Tunnel", "object_types": ["area"], "icon_url": "https://cdn.jsdelivr.net/gh/openstreetmap/iD/svg/the-noun-project/2009642.svg"},
+    {"key": "man_made", "value": "utility_pole", "description": "🄿 Utility Pole", "object_types": ["node"], "icon_url": "https://cdn.jsdelivr.net/gh/bhousel/temaki/icons/utility_pole.svg"},
     {"key": "man_made", "value": "wastewater_plant", "description": "🄿 Wastewater Plant", "object_types": ["node", "area"], "icon_url": "https://cdn.jsdelivr.net/gh/mapbox/maki/icons/water-15.svg"},
     {"key": "man_made", "value": "water_tower", "description": "🄿 Water Tower", "object_types": ["node", "area"], "icon_url": "https://cdn.jsdelivr.net/gh/mapbox/maki/icons/water-15.svg"},
     {"key": "man_made", "value": "water_well", "description": "🄿 Water Well", "object_types": ["node", "area"], "icon_url": "https://cdn.jsdelivr.net/gh/mapbox/maki/icons/water-15.svg"},

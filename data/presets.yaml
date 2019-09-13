@@ -5880,6 +5880,10 @@ en:
         name: Tunnel
         # 'terms: bore,dig,shaft,underground passage,underpass'
         terms: '<translate with synonyms or related terms for ''Tunnel'', separated by commas>'
+      man_made/utility_pole:
+        # man_made=utility_pole
+        name: Utility Pole
+        terms: '<translate with synonyms or related terms for ''Utility Pole'', separated by commas>'
       man_made/wastewater_plant:
         # man_made=wastewater_plant
         name: Wastewater Plant
