@@ -1,0 +1,29 @@
+{
+    "icon": "fas-weight",
+    "fields": [
+        "ref",
+        "operator",
+        "access_simple",
+        "maxweight"
+    ],
+    "moreFields": [
+        "address",
+        "colour",
+        "lit",
+        "manufacturer",
+        "material",
+        "wheelchair"
+    ],
+    "geometry": [
+        "point",
+        "vertex"
+    ],
+    "terms": [
+        "weigh station",
+        "weighbridge"
+    ],
+    "tags": {
+        "amenity": "weighbridge"
+    },
+    "name": "Truck Scale"
+}

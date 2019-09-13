@@ -3645,6 +3645,11 @@ en:
         # amenity=watering_place
         name: Animal Watering Place
         terms: '<translate with synonyms or related terms for ''Animal Watering Place'', separated by commas>'
+      amenity/weighbridge:
+        # amenity=weighbridge
+        name: Truck Scale
+        # 'terms: weigh station,weighbridge'
+        terms: '<translate with synonyms or related terms for ''Truck Scale'', separated by commas>'
       area:
         # area=yes
         name: Area

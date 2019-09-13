@@ -5861,6 +5861,10 @@
                     "name": "Animal Watering Place",
                     "terms": ""
                 },
+                "amenity/weighbridge": {
+                    "name": "Truck Scale",
+                    "terms": "weigh station,weighbridge"
+                },
                 "area": {
                     "name": "Area",
                     "terms": "polygon"
