@@ -1,7 +1,9 @@
 {
     "icon": "maki-roadblock",
     "fields": [
-        "access"
+        "access",
+        "stile",
+        "material"
     ],
     "geometry": [
         "vertex"
