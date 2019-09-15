@@ -53,7 +53,7 @@ module.exports = function buildSrc() {
             })
             .then(function (bundle) {
                 return bundle.write({
-                    format: 'iife',
+                    format: 'cjs',
                     file: 'dist/iD.js',
                     sourcemap: true,
                     strict: false
