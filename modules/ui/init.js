@@ -190,16 +190,9 @@ export function uiInit(context) {
         issueLinks
             .append('a')
             .attr('target', '_blank')
-            .attr('href', 'https://github.com/openstreetmap/iD/issues')
+            .attr('href', 'https://github.com/digidem/id-mapeo/issues')
             .call(svgIcon('#iD-icon-bug', 'light'))
             .call(tooltip().title(t('report_a_bug')).placement('top'));
-
-        issueLinks
-            .append('a')
-            .attr('target', '_blank')
-            .attr('href', 'https://github.com/openstreetmap/iD/blob/master/CONTRIBUTING.md#translating')
-            .call(svgIcon('#iD-icon-translate', 'light'))
-            .call(tooltip().title(t('help_translate')).placement('top'));
 
         aboutList
             .append('li')

@@ -25,7 +25,7 @@ export function uiVersion(context) {
         selection
             .append('a')
             .attr('target', '_blank')
-            .attr('href', 'https://github.com/openstreetmap/iD')
+            .attr('href', 'https://github.com/digidem/id-mapeo')
             .text(currVersion);
 
         // only show new version indicator to users that have used iD before
@@ -35,7 +35,7 @@ export function uiVersion(context) {
                 .attr('class', 'badge')
                 .append('a')
                 .attr('target', '_blank')
-                .attr('href', 'https://github.com/openstreetmap/iD/blob/master/CHANGELOG.md#whats-new')
+                .attr('href', 'https://github.com/digidem/id-mapeo/blob/master/CHANGELOG.md#whats-new')
                 .call(svgIcon('#maki-gift-11'))
                 .call(tooltip()
                     .title(t('version.whats_new', { version: currVersion }))
