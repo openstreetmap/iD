@@ -117,7 +117,6 @@ export function uiKeepRightEditor(context) {
             .append('textarea')
             .attr('class', 'new-comment-input')
             .attr('placeholder', t('QA.keepRight.comment_placeholder'))
-            .attr('maxlength', 1000)
             .property('value', function(d) { return d.newComment || d.comment; })
             .call(utilNoAuto)
             .on('input', changeInput)

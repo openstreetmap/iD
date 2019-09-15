@@ -172,7 +172,6 @@ export function uiNoteEditor(context) {
             .append('textarea')
             .attr('class', 'new-comment-input')
             .attr('placeholder', t('note.inputPlaceholder'))
-            .attr('maxlength', 1000)
             .property('value', function(d) { return d.newComment; })
             .call(utilNoAuto)
             .on('keydown.note-input', keydown)

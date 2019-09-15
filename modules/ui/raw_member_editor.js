@@ -209,7 +209,6 @@ export function uiRawMemberEditor(context) {
             .append('input')
             .attr('class', 'member-role')
             .property('type', 'text')
-            .attr('maxlength', 255)
             .attr('placeholder', t('inspector.role'))
             .call(utilNoAuto);
 
