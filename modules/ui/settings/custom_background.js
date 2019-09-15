@@ -9,15 +9,14 @@ export function uiSettingsCustomBackground(context) {
     var dispatch = d3_dispatch('change');
 
     function render(selection) {
-        // keep separate copies of original and current settings
+        var example = 'http://localhost:5000/styles/default/tiles/{zoom}/{x}/{y}';
         var _origSettings = {
-            template: context.storage('background-custom-template')
+            template: context.storage('background-custom-template') || example
         };
         var _currSettings = {
             template: context.storage('background-custom-template')
         };
 
-        var example = 'https://{switch:a,b,c}.tile.openstreetmap.org/{zoom}/{x}/{y}.png';
         var modal = uiConfirm(selection).okButton();
 
         modal
