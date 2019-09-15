@@ -3,6 +3,8 @@
 [![Build Status](https://travis-ci.org/openstreetmap/iD.svg?branch=master)](https://travis-ci.org/openstreetmap/iD)
 [![Greenkeeper badge](https://badges.greenkeeper.io/openstreetmap/iD.svg)](https://greenkeeper.io/)
 
+**NOTE: CURRENTLY UP TO DATE WITH 2.15.5 of iD**
+
 ## Fork-specific Details
 
 - We don't use iD's translation mechanism: you can instead apply "monkey
