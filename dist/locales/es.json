@@ -529,10 +529,10 @@
         },
         "commit": {
             "title": "Subir a OpenStreetMap",
-            "upload_explanation": "Los cambios que sube serán visibles en todos los mapas que usen datos de OpenStreetMap.",
-            "upload_explanation_with_user": "Los cambios que sube como {user} serán visibles en todos los mapas que usen datos de OpenStreetMap.",
+            "upload_explanation": "Una vez guardado, puedes sincronizar tus cambios con otros.",
+            "upload_explanation_with_user": "Una vez guardado, puedes sincronizar tus cambios con otros.",
             "request_review": "Me gustaría que alguien revise mis ediciones.",
-            "save": "Subir",
+            "save": "Guardar",
             "cancel": "Cancelar",
             "changes": "{count} Cambios",
             "download_changes": "Descargar archivo osmChange",
@@ -636,7 +636,7 @@
                 "tooltip_issue": "Centrar y ampliar el mapa para enfocarse en este problema."
             },
             "show_more": "Ver más",
-            "view_on_osm": "Ver en openstreetmap.org",
+            "view_on_osm": "Ver fuente XML del elemento",
             "view_on_keepRight": "Ver en keepright.at",
             "all_fields": "Todos los campos",
             "all_tags": "Todas las etiquetas",
@@ -685,7 +685,8 @@
             "add_fields": "Añadir campo:",
             "lock": {
                 "suggestion": "El campo \"{label}\" está bloqueado porque hay una etiqueta de Wikidata. Puede eliminarla o editar las etiquetas en la sección \"Todas las etiquetas\"."
-            }
+            },
+            "search_features": "Editar el Mapa"
         },
         "background": {
             "title": "Fondo",
@@ -906,24 +907,25 @@
             }
         },
         "success": {
-            "just_edited": "¡Acaba de editar OpenStreetMap!",
+            "just_edited": "¡Acaba de editar Mapeo!",
             "thank_you": "Gracias por mejorar el mapa.",
             "thank_you_location": "Gracias por mejorar el mapa cerca de {where}.",
             "thank_you_where": {
                 "format": "{place}{separator}{region}",
                 "separator": ", "
             },
-            "help_html": "Los cambios deberían aparecer en OpenStreetMap en unos pocos minutos. Puede tomar más tiempo para que otros mapas reciban las actualizaciones.",
+            "help_html": "Felicidades, tus editos han sido guardado. Puedes sincronizar tus cambios con otros ahora con el botón Sincronizar.",
             "help_link_text": "Detalles",
             "help_link_url": "https://wiki.openstreetmap.org/wiki/ES:FAQ#Acabo_de_hacer_algunos_cambios_en_el_mapa._.C2.BFC.C3.B3mo_puedo_ver_mis_modificaciones.3F",
-            "view_on_osm": "Ver cambios en OSM",
+            "view_on_osm": "Ver fuente XML del elemento",
             "changeset_id": "Conjunto de cambios #: {changeset_id}",
             "like_osm": "¿Te gusta OpenStreetMap? Conéctate con otros:",
             "more": "Más",
             "events": "Eventos",
             "languages": "Idiomas: {languages}",
             "missing": "¿Falta algo en esta lista?",
-            "tell_us": "¡Cuéntenos!"
+            "tell_us": "¡Cuéntenos!",
+            "edited_osm": "¡Mapeo editado!"
         },
         "confirm": {
             "okay": "Aceptar",
@@ -11539,6 +11541,9 @@
                     }
                 }
             }
+        },
+        "editing": {
+            "upload_h": "Guardar"
         }
     }
 }

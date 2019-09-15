@@ -11,7 +11,7 @@
   "license": "ISC",
   "scripts": {
     "all": "npm-run-all -s clean build dist",
-    "build": "node development_server.js",
+    "build": "node development_server.js && node monkey_patches/patch-locales.js",
     "clean": "shx rm -f dist/*.js dist/*.map dist/*.css dist/img/*.svg",
     "dist": "npm-run-all -p dist:**",
     "dist:mapillary": "shx mkdir -p dist/mapillary-js && shx cp -R node_modules/mapillary-js/dist/* dist/mapillary-js/",

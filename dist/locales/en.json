@@ -27,19 +27,19 @@
             },
             "add_area": {
                 "title": "Area",
-                "description": "Add parks, buildings, lakes or other areas to the map.",
+                "description": "Add parks, lakes or other areas to the map.",
                 "tail": "Click on the map to start drawing an area, like a park, lake, or building.",
                 "filter_tooltip": "areas"
             },
             "add_line": {
                 "title": "Line",
-                "description": "Add highways, streets, pedestrian paths, canals or other lines to the map.",
+                "description": "Add paths, rivers, canals or other lines to the map.",
                 "tail": "Click on the map to start drawing a road, path, or route.",
                 "filter_tooltip": "lines"
             },
             "add_point": {
                 "title": "Point",
-                "description": "Add restaurants, monuments, postal boxes or other points to the map.",
+                "description": "Add waterfalls, villages, or other points to the map.",
                 "tail": "Click on the map to add a point.",
                 "filter_tooltip": "points"
             },
@@ -528,11 +528,11 @@
             "rateLimit": "The API is limiting anonymous connections.  You can fix this by logging in."
         },
         "commit": {
-            "title": "Upload to OpenStreetMap",
-            "upload_explanation": "The changes you upload will be visible on all maps that use OpenStreetMap data.",
-            "upload_explanation_with_user": "The changes you upload as {user} will be visible on all maps that use OpenStreetMap data.",
+            "title": "Save your Edits",
+            "upload_explanation": "The changes you save will only be visible on maps that you syncronize with.",
+            "upload_explanation_with_user": "The changes you save as {user} will be visible on all maps that you syncronize with.",
             "request_review": "I would like someone to review my edits.",
-            "save": "Upload",
+            "save": "Save",
             "cancel": "Cancel",
             "changes": "{count} Changes",
             "download_changes": "Download osmChange file",
@@ -636,7 +636,7 @@
                 "tooltip_issue": "Center and zoom the map to focus on this issue."
             },
             "show_more": "Show More",
-            "view_on_osm": "View on openstreetmap.org",
+            "view_on_osm": "View element source XML",
             "view_on_keepRight": "View on keepright.at",
             "all_fields": "All fields",
             "all_tags": "All tags",
@@ -685,7 +685,8 @@
             "add_fields": "Add field:",
             "lock": {
                 "suggestion": "The \"{label}\" field is locked because there is a Wikidata tag. You can delete it or edit the tags in the \"All tags\" section."
-            }
+            },
+            "search_features": "Select or create features"
         },
         "background": {
             "title": "Background",
@@ -874,12 +875,12 @@
         },
         "save": {
             "title": "Save",
-            "help": "Review your changes and upload them to OpenStreetMap, making them visible to other users.",
+            "help": "Review your changes and save them.",
             "no_changes": "No changes to save.",
             "error": "Errors occurred while trying to save",
             "status_code": "Server returned status code {code}",
             "unknown_error_details": "Please ensure you are connected to the internet.",
-            "uploading": "Uploading changes to OpenStreetMap...",
+            "uploading": "Saving changes...",
             "conflict_progress": "Checking for conflicts: {num} of {total}",
             "unsaved_changes": "You have unsaved changes",
             "conflict": {
@@ -906,32 +907,33 @@
             }
         },
         "success": {
-            "just_edited": "You just edited OpenStreetMap!",
+            "just_edited": "You just edited the map!",
             "thank_you": "Thank you for improving the map.",
             "thank_you_location": "Thank you for improving the map around {where}.",
             "thank_you_where": {
                 "format": "{place}{separator}{region}",
                 "separator": ", "
             },
-            "help_html": "Your changes should appear on OpenStreetMap within a few minutes. It may take longer for maps elsewhere to receive updates.",
+            "help_html": "Congratulations, your edits have been saved. Synchronize to a USB drive to share your edits with others.",
             "help_link_text": "Details",
             "help_link_url": "https://wiki.openstreetmap.org/wiki/FAQ#I_have_just_made_some_changes_to_the_map._How_do_I_get_to_see_my_changes.3F",
-            "view_on_osm": "View Changes on OSM",
+            "view_on_osm": "View XML source of the element",
             "changeset_id": "Your changeset #: {changeset_id}",
             "like_osm": "Like OpenStreetMap? Connect with others:",
             "more": "More",
             "events": "Events",
             "languages": "Languages: {languages}",
             "missing": "Is something missing from this list?",
-            "tell_us": "Tell us!"
+            "tell_us": "Tell us!",
+            "edited_osm": "Edited!"
         },
         "confirm": {
             "okay": "OK",
             "cancel": "Cancel"
         },
         "splash": {
-            "welcome": "Welcome to the iD OpenStreetMap editor",
-            "text": "iD is a friendly but powerful tool for contributing to the world's best free world map. This is version {version}. For more information see {website} and report bugs at {github}.",
+            "welcome": "Welcome to the Mapeo editor",
+            "text": "Mapeo is a friendly but powerful tool for creating your own private, offline-first maps. This is version {version}. For more information see {website} and report bugs at {github}.",
             "walkthrough": "Start the Walkthrough",
             "start": "Edit now"
         },
@@ -1360,8 +1362,8 @@
             "title": "Help",
             "key": "H",
             "help": {
-                "title": "Help",
-                "welcome": "Welcome to the iD editor for [OpenStreetMap](https://www.openstreetmap.org/). With this editor you can update OpenStreetMap right from your web browser.",
+                "title": "Mapeo",
+                "welcome": "This is an offline editor for [OpenStreetMap](http://www.openstreetmap.org/), the\nfree and editable map of the world. You can use it to add and update\ndata in your area, making an open-source and open-data map of the world\nbetter for everyone.\n\nEdits that you make on this map will be visible only to people you share with. \n\nThe [iD editor](http://ideditor.com/) is a collaborative project with [source\ncode available on GitHub](https://github.com/openstreetmap/iD). Mapeo is also open source and [available on GitHub](https://github.com/digidem/mapeo-desktop)\n",
                 "open_data_h": "Open Data",
                 "open_data": "Edits that you make on this map will be visible to everyone who uses OpenStreetMap. Your edits can be based on personal knowledge, on-the-ground surveying, or imagery collected from aerial or street level photos. Copying from commercial sources, like Google Maps, [is strictly forbidden](https://www.openstreetmap.org/copyright).",
                 "before_start_h": "Before you start",
@@ -1390,10 +1392,10 @@
                 "undo_redo_h": "Undo & Redo",
                 "undo_redo": "Your edits are stored locally in your browser until you choose to save them to the OpenStreetMap server. You can undo edits by clicking the {undo} **Undo** button, and redo them by clicking the {redo} **Redo** button.",
                 "save_h": "Save",
-                "save": "Click {save} **Save** to finish your edits and send them to OpenStreetMap. You should remember to save your work frequently!",
+                "save": "Click {save} **Save** to finish your edits and save them to your computer. You should remember to save your work frequently! No one else can see what you save until you syncronize with them.",
                 "save_validation": "On the save screen, you'll have a chance to review what you've done. iD will also perform some basic checks for missing data and may offer helpful suggestions and warnings if something doesn't seem right.",
-                "upload_h": "Upload",
-                "upload": "Before uploading your changes you must enter a [changeset comment](https://wiki.openstreetmap.org/wiki/Good_changeset_comments). Then click **Upload** to send your changes to OpenStreetMap, where they will be merged into the map and publicly visible to everyone.",
+                "upload_h": "Save",
+                "upload": "Before saving your changes you must enter a [changeset comment](https://wiki.openstreetmap.org/wiki/Good_changeset_comments). Then click **Save** so your changes will be merged into the map.",
                 "backups_h": "Automatic Backups",
                 "backups": "If you can't finish your edits in one sitting, for example if your computer crashes or you close the browser tab, your edits are still saved in your browser's storage. You can come back later (on the same browser and computer), and iD will offer to restore your work.",
                 "keyboard_h": "Keyboard Shortcuts",
@@ -1404,15 +1406,15 @@
                 "intro": "The *feature editor* appears alongside the map, and allows you to see and edit all of the information for the selected feature.",
                 "definitions": "The top section displays the feature's type. The middle section contains *fields* showing the feature's attributes, such as its name or address.",
                 "type_h": "Feature Type",
-                "type": "You can click on the feature type to change the feature to a different type. Everything that exists in the real world can be added to OpenStreetMap, so there are thousands of feature types to choose from.",
+                "type": "You can click on the feature type to change the feature to a different type. Everything that exists in the real world can be added, so there are thousands of feature types to choose from.",
                 "type_picker": "The type picker displays the most common feature types, such as parks, hospitals, restaurants, roads, and buildings. You can search for anything by typing what you're looking for in the search box. You can also click the {inspect} **Info** icon next to the feature type to learn more about it.",
                 "fields_h": "Fields",
-                "fields_all_fields": "The \"All fields\" section contains all of the feature's details that you may edit. In OpenStreetMap, all of the fields are optional, and it's OK to leave a field blank if you are unsure.",
+                "fields_all_fields": "The \"All fields\" section contains all of the feature's details that you may edit. All of the fields are optional, and it's OK to leave a field blank if you are unsure.",
                 "fields_example": "Each feature type will display different fields. For example, a road may display fields for its surface and speed limit, but a restaurant may display fields for the type of food it serves and the hours it is open.",
                 "fields_add_field": "You can also click the \"Add field\" dropdown to add more fields, such as a description, Wikipedia link, wheelchair access, and more.",
                 "tags_h": "Tags",
-                "tags_all_tags": "Below the fields section, you can expand the \"All tags\" section to edit any of the OpenStreetMap *tags* for the selected feature. Each tag consists of a *key* and *value*, data elements that define all of the features stored in OpenStreetMap.",
-                "tags_resources": "Editing a feature's tags requires intermediate knowledge about OpenStreetMap. You should consult resources like the [OpenStreetMap Wiki](https://wiki.openstreetmap.org/wiki/Main_Page) or [Taginfo](https://taginfo.openstreetmap.org/) to learn more about accepted OpenStreetMap tagging practices."
+                "tags_all_tags": "Below the fields section, you can expand the \"All tags\" section to edit any of the *tags* for the selected feature. Each tag consists of a *key* and *value*, data elements that define all of the features.",
+                "tags_resources": ""
             },
             "points": {
                 "title": "Points",
@@ -1423,7 +1425,7 @@
                 "move_point_h": "Moving Points",
                 "move_point": "To move a point, place the mouse cursor over the point, then press and hold the {leftclick} left mouse button while dragging the point to its new location.",
                 "delete_point_h": "Deleting Points",
-                "delete_point": "It's OK to delete features that don't exist in the real world. Deleting a feature from OpenStreetMap removes it from the map that everyone uses, so you should make sure a feature is really gone before you delete it.",
+                "delete_point": "It's OK to delete features that don't exist in the real world. Deleting a feature removes it from the map, so you should make sure a feature is really gone before you delete it.",
                 "delete_point_command": "To delete a point, {rightclick} right-click on the point to select it and show the edit menu, then use the {delete} **Delete** command."
             },
             "lines": {
@@ -1576,6 +1578,9 @@
                         "indirect_noedit": "You may not edit indirect restrictions. Instead, edit the nearby direct restriction."
                     }
                 }
+            },
+            "welcome": {
+                "welcome": "Welcome! This walkthrough will teach you the basics of editing on Mapeo."
             }
         },
         "issues": {
@@ -11927,6 +11932,9 @@
                     }
                 }
             }
+        },
+        "validations": {
+            "many_deletions": "You're deleting {n} features: {p} nodes, {l} lines, {a} areas, {r} relations. Are you sure you want to do this? This will delete them from the map."
         }
     }
 }

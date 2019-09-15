@@ -1,0 +1,22 @@
+{
+  "es": {
+		"inspector": {
+      "search_features": "Editar el Mapa",
+      "view_on_osm": "Ver fuente XML del elemento"
+		},
+    "commit": {
+      "upload_explanation": "Una vez guardado, puedes sincronizar tus cambios con otros.",
+      "upload_explanation_with_user": "Una vez guardado, puedes sincronizar tus cambios con otros.",
+    	"save": "Guardar"
+    },
+    "editing": {
+      "upload_h": "Guardar"
+    },
+    "success": {
+      "edited_osm": "¡Mapeo editado!",
+      "just_edited": "¡Acaba de editar Mapeo!",
+      "view_on_osm": "Ver fuente XML del elemento",
+      "help_html": "Felicidades, tus editos han sido guardado. Puedes sincronizar tus cambios con otros ahora con el botón Sincronizar."
+    }
+  }
+}

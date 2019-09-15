@@ -1,0 +1,65 @@
+{
+	"en":{
+		"inspector": {
+			"search_features": "Select or create features",
+			"view_on_osm": "View element source XML"
+		},
+		"save": {
+			"help": "Review your changes and save them.",
+			"uploading": "Saving changes..."
+		},
+		"modes": {
+			"add_line": {
+				"description": "Add paths, rivers, canals or other lines to the map."
+			},
+			"add_area": {
+				"description": "Add parks, lakes or other areas to the map."
+			},
+			"add_point": {
+				"description": "Add waterfalls, villages, or other points to the map."
+			}
+		},
+		"success": {
+			"edited_osm": "Edited!",
+			"just_edited": "You just edited the map!",
+      "view_on_osm": "View XML source of the element",
+      "help_html": "Congratulations, your edits have been saved. Synchronize to a USB drive to share your edits with others."
+		},
+		"splash": {
+			"welcome": "Welcome to the Mapeo editor",
+			"text": "Mapeo is a friendly but powerful tool for creating your own private, offline-first maps. This is version {version}. For more information see {website} and report bugs at {github}."
+		},
+		"help": {
+			"help": {
+				"title": "Mapeo",
+				"welcome": "This is an offline editor for [OpenStreetMap](http://www.openstreetmap.org/), the\nfree and editable map of the world. You can use it to add and update\ndata in your area, making an open-source and open-data map of the world\nbetter for everyone.\n\nEdits that you make on this map will be visible only to people you share with. \n\nThe [iD editor](http://ideditor.com/) is a collaborative project with [source\ncode available on GitHub](https://github.com/openstreetmap/iD). Mapeo is also open source and [available on GitHub](https://github.com/digidem/mapeo-desktop)\n"
+			},
+			"welcome": {
+				"welcome": "Welcome! This walkthrough will teach you the basics of editing on Mapeo."
+			},
+			"editing": {
+				"save": "Click {save} **Save** to finish your edits and save them to your computer. You should remember to save your work frequently! No one else can see what you save until you syncronize with them.",
+				"upload_h": "Save",
+				"upload": "Before saving your changes you must enter a [changeset comment](https://wiki.openstreetmap.org/wiki/Good_changeset_comments). Then click **Save** so your changes will be merged into the map."
+			},
+			"feature_editor": {
+				"type": "You can click on the feature type to change the feature to a different type. Everything that exists in the real world can be added, so there are thousands of feature types to choose from.",
+				"fields_all_fields": "The \"All fields\" section contains all of the feature's details that you may edit. All of the fields are optional, and it's OK to leave a field blank if you are unsure.",
+				"tags_all_tags": "Below the fields section, you can expand the \"All tags\" section to edit any of the *tags* for the selected feature. Each tag consists of a *key* and *value*, data elements that define all of the features.",
+				"tags_resources": ""
+			},
+			"points": {
+				"delete_point": "It's OK to delete features that don't exist in the real world. Deleting a feature removes it from the map, so you should make sure a feature is really gone before you delete it."
+			}
+		},
+		"commit": {
+			"save": "Save",
+			"title": "Save your Edits",
+			"upload_explanation": "The changes you save will only be visible on maps that you syncronize with.",
+			"upload_explanation_with_user": "The changes you save as {user} will be visible on all maps that you syncronize with."
+		},
+		"validations": {
+			"many_deletions": "You're deleting {n} features: {p} nodes, {l} lines, {a} areas, {r} relations. Are you sure you want to do this? This will delete them from the map."
+		}
+	}
+}
