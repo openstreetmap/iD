@@ -1,12 +1,17 @@
 {
-  "name": "iD",
-  "version": "2.15.5",
-  "description": "A friendly editor for OpenStreetMap",
-  "main": "iD.js",
-  "repository": "openstreetmap/iD",
+  "name": "id-mapeo",
+  "version": "3.0.0",
+  "description": "iD Editor for osm-p2p & mapeo-desktop",
+  "main": "dist/iD.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/digidem/iD-mapeo.git"
+  },
   "keywords": [
     "editor",
-    "openstreetmap"
+    "openstreetmap",
+    "mapeo",
+    "osm-p2p"
   ],
   "license": "ISC",
   "scripts": {
