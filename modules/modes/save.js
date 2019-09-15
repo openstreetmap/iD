@@ -321,7 +321,7 @@ export function modeSave(context) {
                 loading.close();
                 _isSaving = false;
                 context.flush();
-            }, 2500);
+            }, 50);
         }
     }
 

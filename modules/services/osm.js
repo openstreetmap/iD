@@ -615,7 +615,7 @@ export default {
 
             // Upload was successful, safe to call the callback.
             // Add delay to allow for postgres replication #1646 #2678
-            window.setTimeout(function() { callback(null, changeset); }, 2500);
+            window.setTimeout(function() { callback(null, changeset); }, 50);
             _changeset.open = null;
 
             // At this point, we don't really care if the connection was switched..
