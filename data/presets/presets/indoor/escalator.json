@@ -1,0 +1,21 @@
+{
+    "icon":"maki-entrance",
+    "fields": [
+        "level",
+        "name",
+        "conveying"
+    ],
+    "geometry": [
+        "area"
+    ],
+    "tags": {
+        "indoor": "room",
+        "stairs": "yes",
+        "conveying": "yes"
+    },
+    "terms": [
+        "escalator"
+    ],
+    "matchScore": 0.8,
+    "name": "Indoor escalator"
+}
