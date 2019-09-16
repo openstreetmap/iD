@@ -1728,6 +1728,7 @@
     {"key": "stars", "description": "🄵 Stars"},
     {"key": "start_date", "description": "🄵 Start Date"},
     {"key": "step_count", "description": "🄵 Number of Steps"},
+    {"key": "stile", "description": "🄵 Type"},
     {"key": "stop", "value": "all", "description": "🄵 Stop Type"},
     {"key": "stop", "value": "minor", "description": "🄵 Stop Type"},
     {"key": "street_cabinet", "description": "🄵 Type"},

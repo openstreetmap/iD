@@ -2118,6 +2118,9 @@ en:
         # step_count=*
         label: Number of Steps
         terms: '[translate with synonyms or related terms for ''Number of Steps'', separated by commas]'
+      stile:
+        # stile=*
+        label: Type
       stop:
         # stop=*
         label: Stop Type

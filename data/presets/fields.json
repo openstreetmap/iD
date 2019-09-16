@@ -359,6 +359,7 @@
     "stars": {"key": "stars", "type": "combo", "label": "Stars", "terms": ["rating"]},
     "start_date": {"key": "start_date", "type": "text", "universal": true, "label": "Start Date", "terms": ["inception"]},
     "step_count": {"key": "step_count", "type": "number", "minValue": 0, "label": "Number of Steps"},
+    "stile": {"key": "stile", "type": "combo", "label": "Type"},
     "stop": {"key": "stop", "type": "combo", "label": "Stop Type", "strings": {"options": {"all": "All Ways", "minor": "Minor Road"}}},
     "street_cabinet": {"key": "street_cabinet", "type": "combo", "label": "Type"},
     "stroller": {"key": "stroller", "type": "radio", "options": ["yes", "limited", "no"], "label": "Stroller Access", "terms": ["baby carriage", "perambulator", "pram", "pushchair"]},

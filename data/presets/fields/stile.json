@@ -1,5 +1,5 @@
 {
     "key": "stile",
-    "type": "typeCombo",
+    "type": "combo",
     "label": "Type"
 }
