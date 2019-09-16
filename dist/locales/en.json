@@ -4576,6 +4576,10 @@
                     "label": "Number of Steps",
                     "terms": ""
                 },
+                "stile": {
+                    "label": "Type",
+                    "terms": ""
+                },
                 "stop": {
                     "label": "Stop Type",
                     "terms": "",
