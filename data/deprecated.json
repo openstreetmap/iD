@@ -293,6 +293,14 @@
       "replace": {"direction": "both"}
     },
     {
+      "old": {"direction": "down", "highway": "*"},
+      "replace": {"incline": "down", "highway": "$1"}
+    },
+    {
+      "old": {"direction": "downhill"},
+      "replace": {"incline": "down"}
+    },
+    {
       "old": {"direction": "East"},
       "replace": {"direction": "E"}
     },
@@ -307,6 +315,14 @@
     {
       "old": {"direction": "South"},
       "replace": {"direction": "S"}
+    },
+    {
+      "old": {"direction": "up", "highway": "*"},
+      "replace": {"incline": "up", "highway": "$1"}
+    },
+    {
+      "old": {"direction": "uphill"},
+      "replace": {"incline": "up"}
     },
     {
       "old": {"direction": "West"},
