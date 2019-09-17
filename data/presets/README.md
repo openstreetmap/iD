@@ -191,9 +191,13 @@ The default is `1.0`.
 
 ##### `countryCodes`
 
-An array of two-letter, lowercase [ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) country codes. The preset will only be searchable when the user is editing over the specified countries. The locale and language of iD are not factors, just the position of the map.
+An array of two-letter, lowercase [ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) country codes. The preset will only be searchable when the user is editing over the specified, whitelisted countries. The locale and language of iD are not factors, just the position of the map.
 
 By default, presets are available everywhere.
+
+##### `notCountryCodes`
+
+An array of two-letter, lowercase [ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) country codes. Similar to `countryCodes` except a blacklist instead of a whitelist.
 
 ##### `replacement`
 

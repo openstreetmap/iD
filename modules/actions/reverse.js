@@ -53,6 +53,25 @@ export function actionReverse(entityID, options) {
         '-1': 'yes'
     };
 
+    var compassReplacements = {
+        N: 'S',
+        NNE: 'SSW',
+        NE: 'SW',
+        ENE: 'WSW',
+        E: 'W',
+        ESE: 'WNW',
+        SE: 'NW',
+        SSW: 'NNW',
+        S: 'N',
+        SSW: 'NNE',
+        SW: 'NE',
+        WSW: 'ENE',
+        W: 'E',
+        WNW: 'ESE',
+        NW: 'SE',
+        NNW: 'SSE'
+    };
+
 
     function reverseKey(key) {
         for (var i = 0; i < keyReplacements.length; ++i) {
@@ -65,19 +84,34 @@ export function actionReverse(entityID, options) {
     }
 
 
-    function reverseValue(key, value) {
+    function reverseValue(key, value, includeAbsolute) {
         if (ignoreKey.test(key)) return value;
 
         // Turn lanes are left/right to key (not way) direction - #5674
         if (turn_lanes.test(key)) {
             return value;
+
         } else if (key === 'incline' && numeric.test(value)) {
             return value.replace(numeric, function(_, sign) { return sign === '-' ? '' : '-'; });
+
         } else if (options && options.reverseOneway && key === 'oneway') {
             return onewayReplacements[value] || value;
-        } else {
-            return valueReplacements[value] || value;
+
+        } else if (includeAbsolute && key.endsWith('direction')) {
+            if (compassReplacements[value]) return compassReplacements[value];
+
+            var degrees = parseFloat(value);
+            if (degrees && !isNaN(degrees)) {
+                if (degrees < 180) {
+                    degrees += 180;
+                } else {
+                    degrees -= 180;
+                }
+                return degrees.toString();
+            }
         }
+
+        return valueReplacements[value] || value;
     }
 
 
@@ -89,7 +123,7 @@ export function actionReverse(entityID, options) {
 
             var tags = {};
             for (var key in node.tags) {
-                tags[reverseKey(key)] = reverseValue(key, node.tags[key]);
+                tags[reverseKey(key)] = reverseValue(key, node.tags[key], node.id === entityID);
             }
             graph = graph.replace(node.update({tags: tags}));
         }
@@ -136,7 +170,7 @@ export function actionReverse(entityID, options) {
 
         for (var key in entity.tags) {
             var value = entity.tags[key];
-            if (reverseKey(key) !== key || reverseValue(key, value) !== value) {
+            if (reverseKey(key) !== key || reverseValue(key, value, true) !== value) {
                 return false;
             }
         }

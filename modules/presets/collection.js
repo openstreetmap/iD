@@ -81,8 +81,13 @@ export function presetCollection(collection) {
             var pool = this.collection;
             if (countryCode) {
                 pool = pool.filter(function(a) {
-                    if (!a.countryCodes) return true;
-                    return a.countryCodes.indexOf(countryCode) !== -1;
+                    if (a.countryCodes && a.countryCodes.indexOf(countryCode) === -1) {
+                        return false;
+                    }
+                    if (a.notCountryCodes && a.notCountryCodes.indexOf(countryCode) !== -1) {
+                        return false;
+                    }
+                    return true;
                 });
             }
             var searchable = pool.filter(function(a) {
