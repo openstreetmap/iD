@@ -289,6 +289,30 @@
       "replace": {"changing_table": "yes"}
     },
     {
+      "old": {"direction": "all"},
+      "replace": {"direction": "both"}
+    },
+    {
+      "old": {"direction": "East"},
+      "replace": {"direction": "E"}
+    },
+    {
+      "old": {"direction": "forward;backward"},
+      "replace": {"direction": "both"}
+    },
+    {
+      "old": {"direction": "North"},
+      "replace": {"direction": "N"}
+    },
+    {
+      "old": {"direction": "South"},
+      "replace": {"direction": "S"}
+    },
+    {
+      "old": {"direction": "West"},
+      "replace": {"direction": "W"}
+    },
+    {
       "old": {"drinkable": "*"},
       "replace": {"drinking_water": "$1"}
     },
