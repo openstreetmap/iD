@@ -377,6 +377,12 @@ export function presetIndex(context) {
         dispatch.call('favoritePreset');
     }
 
+    all.getGenericRibbonItems = function() {
+        return ['point', 'line', 'area'].map(function(id) {
+            return RibbonItem(all.item(id), 'generic');
+        });
+    };
+
     all.getFavorites = function() {
         if (!_favorites) {
 
@@ -384,19 +390,7 @@ export function presetIndex(context) {
             var rawFavorites = JSON.parse(context.storage('preset_favorites'));
 
             if (!rawFavorites) {
-                // no saved favorites
-
-                if (!context.isFirstSession) {
-                    // assume existing user coming from iD 2, use the generic presets as defaults
-                    rawFavorites = [
-                        { pID: 'point'},
-                        { pID: 'line'},
-                        { pID: 'area'}
-                    ];
-                } else {
-                    // new user, no default favorites
-                    rawFavorites = [];
-                }
+                rawFavorites = [];
                 context.storage('preset_favorites', JSON.stringify(rawFavorites));
             }
 

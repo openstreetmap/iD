@@ -190,7 +190,7 @@ export function uiToolQuickPresets(context) {
                 var eventX = d3_event.x + draggingNode.parentNode.offsetLeft;
                 var origLeft = draggingNode.offsetLeft;
 
-                d3_selectAll('#bar button.add-preset')
+                d3_selectAll('#bar button.add-favorite, #bar button.add-recent')
                     .style('transform', function(d2) {
 
                         if (d.button === d2.button) {
@@ -237,7 +237,7 @@ export function uiToolQuickPresets(context) {
                     .classed('dragging', false)
                     .classed('removing', false);
 
-                d3_selectAll('#bar button.add-preset')
+                d3_selectAll('#bar button.add-favorite, #bar button.add-recent')
                     .style('transform', null);
 
                 var deltaY = d3_event.y - dragOrigin.y;

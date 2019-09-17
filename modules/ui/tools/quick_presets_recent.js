@@ -13,9 +13,10 @@ export function uiToolAddRecent(context) {
 
         var maxShown = 10;
         var maxRecents = 5;
+        var precedingCount = context.storage('tool.add_generic.toggledOn') === 'true' ? 3 : 0;
 
         var favorites = context.presets().getFavorites().slice(0, maxShown);
-        var favoritesCount = favorites.length;
+        precedingCount += favorites.length;
 
         function isAFavorite(recent) {
             return favorites.some(function(favorite) {
@@ -23,7 +24,7 @@ export function uiToolAddRecent(context) {
             });
         }
 
-        maxRecents = Math.min(maxRecents, maxShown - favoritesCount);
+        maxRecents = Math.min(maxRecents, maxShown - precedingCount);
         var items = [];
         if (maxRecents > 0) {
             var recents = context.presets().getRecents().filter(function(recent) {
@@ -41,7 +42,7 @@ export function uiToolAddRecent(context) {
         }
 
         items.forEach(function(item, index) {
-            var totalIndex = favoritesCount + index;
+            var totalIndex = precedingCount + index;
             var keyCode;
             // use number row order: 1 2 3 4 5 6 7 8 9 0
             // use the same for RTL even though the layout is backward: #6107

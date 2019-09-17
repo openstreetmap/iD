@@ -12,6 +12,7 @@ import { operationCircularize, operationContinue, operationDelete, operationDisc
     operationReverse, operationSplit, operationStraighten } from '../operations';
 import { uiToolAddFavorite, uiToolAddFeature, uiToolAddRecent, uiToolNotes, uiToolOperation, uiToolSave, uiToolUndoRedo } from './tools';
 import { uiToolAddAddablePresets } from './tools/quick_presets_addable';
+import { uiToolAddGeneric } from './tools/quick_presets_generic';
 import { uiToolSimpleButton } from './tools/simple_button';
 import { uiToolWaySegments } from './tools/way_segments';
 import { uiToolRepeatAdd } from './tools/repeat_add';
@@ -41,6 +42,7 @@ export function uiTopToolbar(context) {
     var toolbox = uiToolToolbox(context),
         addAddable = uiToolAddAddablePresets(context),
         addFeature = uiToolAddFeature(context),
+        addGeneric = uiToolAddGeneric(context),
         addFavorite = uiToolAddFavorite(context),
         addRecent = uiToolAddRecent(context),
         notes = uiToolNotes(context),
@@ -151,6 +153,7 @@ export function uiTopToolbar(context) {
                 'spacer',
                 addFeature,
                 addAddable,
+                addGeneric,
                 addFavorite,
                 addRecent,
                 'spacer',

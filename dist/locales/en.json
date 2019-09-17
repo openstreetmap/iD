@@ -24,6 +24,9 @@
             "favorites": "Favorites",
             "add_feature": "Add Feature",
             "finish": "Finish",
+            "generic": {
+                "title": "Base Types"
+            },
             "geometry": {
                 "key": "G"
             },
