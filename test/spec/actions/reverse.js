@@ -511,4 +511,10 @@ describe('iD.actionReverse', function () {
         });
     });
 
+    it('reverses directional values on nodes', function () {
+        var node1 = iD.osmNode({ tags: { 'direction': 'forward' } });
+        var graph = iD.actionReverse(node1.id)(iD.coreGraph([node1]));
+        expect(graph.entity(node1.id).tags).to.eql({ 'direction': 'backward' });
+    });
+
 });

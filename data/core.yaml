@@ -413,9 +413,19 @@ en:
         multiple: These features can't be rotated because parts of them have not yet been downloaded.
     reverse:
       title: Reverse
-      description: Make this line go in the opposite direction.
+      description:
+        point: Flip the direction of this point.
+        points: Flip the direction of these points.
+        line: Make this line go in the opposite direction.
+        lines: Make these lines go in the opposite direction.
+        features: Flip the directions of these features.
       key: V
-      annotation: Reversed a line.
+      annotation:
+        point: Reversed a point.
+        points: Reversed multiple points.
+        line: Reversed a line.
+        lines: Reversed multiple lines.
+        features: Reversed multiple features.
     split:
       title: Split
       description:
@@ -1947,7 +1957,7 @@ en:
         disconnect: "Disconnect features at the selected node"
         extract: "Extract a point from a feature"
         split: "Split a line into two at the selected node"
-        reverse: "Reverse a line"
+        reverse: "Reverse selected features"
         move: "Move selected features"
         rotate: "Rotate selected features"
         orthogonalize: "Square corners of a line or area"

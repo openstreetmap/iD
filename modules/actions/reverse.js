@@ -17,7 +17,7 @@ References:
     http://wiki.openstreetmap.org/wiki/Tag:highway%3Dstop
     http://wiki.openstreetmap.org/wiki/Key:traffic_sign#On_a_way_or_area
 */
-export function actionReverse(wayID, options) {
+export function actionReverse(entityID, options) {
     var ignoreKey = /^.*(_|:)?(description|name|note|website|ref|source|comment|watch|attribution)(_|:)?/;
     var numeric = /^([+\-]?)(?=[\d.])/;
     var turn_lanes = /^turn:lanes:?/;
@@ -97,8 +97,7 @@ export function actionReverse(wayID, options) {
     }
 
 
-    return function(graph) {
-        var way = graph.entity(wayID);
+    function reverseWay(graph, way) {
         var nodes = way.nodes.slice().reverse();
         var tags = {};
         var role;
@@ -120,5 +119,33 @@ export function actionReverse(wayID, options) {
         // the way itself with the reversed node ids and updated way tags
         return reverseNodeTags(graph, nodes)
             .replace(way.update({nodes: nodes, tags: tags}));
+    }
+
+
+    var action = function(graph) {
+        var entity = graph.entity(entityID);
+        if (entity.type === 'way') {
+            return reverseWay(graph, entity);
+        }
+        return reverseNodeTags(graph, [entityID]);
     };
+
+    action.disabled = function(graph) {
+        var entity = graph.hasEntity(entityID);
+        if (!entity || entity.type === 'way') return false;
+
+        for (var key in entity.tags) {
+            var value = entity.tags[key];
+            if (reverseKey(key) !== key || reverseValue(key, value) !== value) {
+                return false;
+            }
+        }
+        return 'nondirectional_node';
+    };
+
+    action.entityID = function() {
+        return entityID;
+    };
+
+    return action;
 }
