@@ -61,7 +61,7 @@ export function actionReverse(entityID, options) {
         E: 'W',
         ESE: 'WNW',
         SE: 'NW',
-        SSW: 'NNW',
+        SSE: 'NNW',
         S: 'N',
         SSW: 'NNE',
         SW: 'NE',
