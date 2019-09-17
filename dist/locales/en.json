@@ -398,7 +398,15 @@
                 "title": "Reverse",
                 "description": "Make this line go in the opposite direction.",
                 "key": "V",
-                "annotation": "Reversed a line."
+                "annotation": "Reversed a line.",
+                "node": {
+                    "description": {
+                        "single": "Flip the direction of this point."
+                    },
+                    "annotation": {
+                        "single": "Reversed a point."
+                    }
+                }
             },
             "split": {
                 "title": "Split",
@@ -2321,7 +2329,7 @@
                     "disconnect": "Disconnect features at the selected node",
                     "extract": "Extract a point from a feature",
                     "split": "Split a line into two at the selected node",
-                    "reverse": "Reverse a line",
+                    "reverse": "Reverse selected features",
                     "move": "Move selected features",
                     "rotate": "Rotate selected features",
                     "orthogonalize": "Square corners of a line or area",

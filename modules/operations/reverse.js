@@ -7,13 +7,36 @@ export function operationReverse(selectedIDs, context) {
     var entityID = selectedIDs[0];
 
     var operation = function() {
-        context.perform(actionReverse(entityID), operation.annotation());
+        context.perform(action(), operation.annotation());
         context.validator().validate();
     };
 
+    function action() {
+        return actionReverse(entityID);
+    }
 
-    operation.available = function() {
-        return selectedIDs.length === 1 && context.geometry(entityID) === 'line';
+    function isNode() {
+        var entity = context.hasEntity(entityID);
+        return entity && entity.type === 'node';
+    }
+
+
+    operation.available = function(situation) {
+        if (situation === 'toolbar') {
+            if (!selectedIDs.some(function(id) {
+                var entity = context.hasEntity(id);
+                return entity && entity.type === 'way' && (entity.isOneWay() || entity.isSided());
+            })) {
+                return false;
+            }
+        }
+        if (selectedIDs.length !== 1) return false;
+
+        var geometry = context.geometry(entityID);
+        if (geometry !== 'line' && geometry !== 'vertex' && geometry !== 'point') {
+            return false;
+        }
+        return action().disabled(context.graph()) === false;
     };
 
 
@@ -23,12 +46,14 @@ export function operationReverse(selectedIDs, context) {
 
 
     operation.tooltip = function() {
-        return t('operations.reverse.description');
+        var id = isNode() ? 'node.description.single' : 'description';
+        return t('operations.reverse.' + id);
     };
 
 
     operation.annotation = function() {
-        return t('operations.reverse.annotation');
+        var id = isNode() ? 'node.annotation.single' : 'annotation';
+        return t('operations.reverse.' + id);
     };
 
 
