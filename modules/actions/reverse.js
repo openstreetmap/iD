@@ -55,13 +55,21 @@ export function actionReverse(entityID, options) {
 
     var compassReplacements = {
         N: 'S',
+        NNE: 'SSW',
         NE: 'SW',
+        ENE: 'WSW',
         E: 'W',
+        ESE: 'WNW',
         SE: 'NW',
+        SSW: 'NNW',
         S: 'N',
+        SSW: 'NNE',
         SW: 'NE',
+        WSW: 'ENE',
         W: 'E',
-        NW: 'SE'
+        WNW: 'ESE',
+        NW: 'SE',
+        NNW: 'SSE'
     };
 
 
