@@ -143,5 +143,9 @@ export function actionReverse(entityID, options) {
         return 'nondirectional_node';
     };
 
+    action.entityID = function() {
+        return entityID;
+    };
+
     return action;
 }

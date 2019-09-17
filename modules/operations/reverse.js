@@ -4,39 +4,51 @@ import { behaviorOperation } from '../behavior/operation';
 
 
 export function operationReverse(selectedIDs, context) {
-    var entityID = selectedIDs[0];
 
     var operation = function() {
-        context.perform(action(), operation.annotation());
+        context.perform(function combinedReverseAction(graph) {
+            actions().forEach(function(action) {
+                graph = action(graph);
+            });
+            return graph;
+        }, operation.annotation());
         context.validator().validate();
     };
 
-    function action() {
-        return actionReverse(entityID);
+    function actions(situation) {
+        return selectedIDs.map(function(entityID) {
+            var entity = context.hasEntity(entityID);
+            if (!entity) return;
+
+            if (situation === 'toolbar') {
+                if (entity.type === 'way' &&
+                    (!entity.isOneWay() && !entity.isSided())) return;
+            }
+
+            var geometry = entity.geometry(context.graph());
+            if (entity.type !== 'node' && geometry !== 'line') return;
+
+            var action = actionReverse(entityID);
+            if (action.disabled(context.graph())) return;
+
+            return action;
+        }).filter(Boolean);
     }
 
-    function isNode() {
-        var entity = context.hasEntity(entityID);
-        return entity && entity.type === 'node';
+    function reverseTypeID() {
+        var acts = actions();
+        var nodeActionCount = acts.filter(function(act) {
+            var entity = context.hasEntity(act.entityID());
+            return entity && entity.type === 'node';
+        }).length;
+        var typeID = nodeActionCount === 0 ? 'line' : (nodeActionCount === acts.length ? 'point' : 'features');
+        if (typeID !== 'features' && acts.length > 1) typeID += 's';
+        return typeID;
     }
 
 
     operation.available = function(situation) {
-        if (situation === 'toolbar') {
-            if (!selectedIDs.some(function(id) {
-                var entity = context.hasEntity(id);
-                return entity && entity.type === 'way' && (entity.isOneWay() || entity.isSided());
-            })) {
-                return false;
-            }
-        }
-        if (selectedIDs.length !== 1) return false;
-
-        var geometry = context.geometry(entityID);
-        if (geometry !== 'line' && geometry !== 'vertex' && geometry !== 'point') {
-            return false;
-        }
-        return action().disabled(context.graph()) === false;
+        return actions(situation).length > 0;
     };
 
 
@@ -46,14 +58,12 @@ export function operationReverse(selectedIDs, context) {
 
 
     operation.tooltip = function() {
-        var id = isNode() ? 'node.description.single' : 'description';
-        return t('operations.reverse.' + id);
+        return t('operations.reverse.description.' + reverseTypeID());
     };
 
 
     operation.annotation = function() {
-        var id = isNode() ? 'node.annotation.single' : 'annotation';
-        return t('operations.reverse.' + id);
+        return t('operations.reverse.annotation.' + reverseTypeID());
     };
 
 
