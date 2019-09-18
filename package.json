@@ -57,7 +57,7 @@
   },
   "devDependencies": {
     "@fortawesome/fontawesome-svg-core": "^1.2.23",
-    "@fortawesome/free-brands-svg-icons": "^5.9.0",
+    "@fortawesome/free-brands-svg-icons": "^5.11.0",
     "@fortawesome/free-regular-svg-icons": "^5.11.0",
     "@fortawesome/free-solid-svg-icons": "^5.11.0",
     "@mapbox/maki": "^6.0.0",
