@@ -102,7 +102,7 @@ export function actionReverse(entityID, options) {
             if (compassReplacements[value]) return compassReplacements[value];
 
             var degrees = parseFloat(value);
-            if (degrees && !isNaN(degrees)) {
+            if (typeof degrees === 'number' && !isNaN(degrees)) {
                 if (degrees < 180) {
                     degrees += 180;
                 } else {
