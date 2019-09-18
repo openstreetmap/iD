@@ -33,11 +33,5 @@ export function uiToolAddFavorite(context) {
         return items;
     };
 
-    tool.willUpdate = function() {
-        for (var i = 0; i <= 9; i++) {
-            context.keybinding().off(i.toString());
-        }
-    };
-
     return tool;
 }
