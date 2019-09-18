@@ -5725,6 +5725,10 @@
                     "name": "Nursing Home",
                     "terms": "elderly,living,nursing,old,senior,assisted living"
                 },
+                "amenity/stripclub": {
+                    "name": "Strip Club",
+                    "terms": ""
+                },
                 "amenity/studio": {
                     "name": "Studio",
                     "terms": "recording,radio,television"

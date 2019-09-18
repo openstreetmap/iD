@@ -1,0 +1,30 @@
+{
+    "icon": "maki-commercial",
+    "fields": [
+        "name",
+        "operator",
+        "address",
+        "building_area",
+        "opening_hours",
+        "min_age",
+        "smoking"
+    ],
+    "moreFields": [
+        "air_conditioning",
+        "email",
+        "fax",
+        "level",
+        "payment_multi",
+        "phone",
+        "website",
+        "wheelchair"
+    ],
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "tags": {
+        "amenity": "stripclub"
+    },
+    "name": "Strip Club"
+}

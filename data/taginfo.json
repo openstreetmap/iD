@@ -216,6 +216,7 @@
     {"key": "social_facility", "value": "food_bank", "description": "🄿 Food Bank", "object_types": ["node", "area"], "icon_url": "https://cdn.jsdelivr.net/gh/bhousel/temaki/icons/social_facility.svg"},
     {"key": "social_facility:for", "value": "senior", "description": "🄿 Elderly Group Home, 🄿 Nursing Home", "object_types": ["node", "area"], "icon_url": "https://cdn.jsdelivr.net/gh/mapbox/maki/icons/wheelchair-15.svg"},
     {"key": "social_facility:for", "value": "homeless", "description": "🄿 Homeless Shelter", "object_types": ["node", "area"], "icon_url": "https://cdn.jsdelivr.net/gh/bhousel/temaki/icons/social_facility.svg"},
+    {"key": "amenity", "value": "stripclub", "description": "🄿 Strip Club", "object_types": ["node", "area"], "icon_url": "https://cdn.jsdelivr.net/gh/mapbox/maki/icons/commercial-15.svg"},
     {"key": "amenity", "value": "studio", "description": "🄿 Studio", "object_types": ["node", "area"], "icon_url": "https://cdn.jsdelivr.net/gh/openstreetmap/iD/svg/fontawesome/fas-microphone.svg"},
     {"key": "amenity", "value": "taxi", "description": "🄿 Taxi Stand", "object_types": ["node", "area"], "icon_url": "https://cdn.jsdelivr.net/gh/openstreetmap/iD/svg/fontawesome/fas-taxi.svg"},
     {"key": "amenity", "value": "telephone", "description": "🄿 Telephone", "object_types": ["node"], "icon_url": "https://cdn.jsdelivr.net/gh/mapbox/maki/icons/telephone-15.svg"},
