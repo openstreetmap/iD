@@ -20,6 +20,7 @@ References:
 export function actionReverse(entityID, options) {
     var ignoreKey = /^.*(_|:)?(description|name|note|website|ref|source|comment|watch|attribution)(_|:)?/;
     var numeric = /^([+\-]?)(?=[\d.])/;
+    var directionKey = /direction$/;
     var turn_lanes = /^turn:lanes:?/;
     var keyReplacements = [
         [/:right$/, ':left'],
@@ -97,11 +98,11 @@ export function actionReverse(entityID, options) {
         } else if (options && options.reverseOneway && key === 'oneway') {
             return onewayReplacements[value] || value;
 
-        } else if (includeAbsolute && key.endsWith('direction')) {
+        } else if (includeAbsolute && directionKey.test(key)) {
             if (compassReplacements[value]) return compassReplacements[value];
 
             var degrees = parseFloat(value);
-            if (degrees && !isNaN(degrees)) {
+            if (typeof degrees === 'number' && !isNaN(degrees)) {
                 if (degrees < 180) {
                     degrees += 180;
                 } else {
