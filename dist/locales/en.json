@@ -25,7 +25,7 @@
             "add_feature": "Add Feature",
             "finish": "Finish",
             "generic": {
-                "title": "Base Types"
+                "title": "Geometries"
             },
             "geometry": {
                 "key": "G"
