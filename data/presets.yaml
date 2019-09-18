@@ -3464,10 +3464,6 @@ en:
         name: Nursing Home
         # 'terms: elderly,living,nursing,old,senior,assisted living'
         terms: '<translate with synonyms or related terms for ''Nursing Home'', separated by commas>'
-      amenity/stripclub:
-        # amenity=stripclub
-        name: Strip Club
-        terms: '<translate with synonyms or related terms for ''Strip Club'', separated by commas>'
       amenity/studio:
         # amenity=studio
         name: Studio
