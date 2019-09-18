@@ -4,16 +4,14 @@
         "access",
         "bollard",
         "height",
-        "width",
         "material",
         "colour"
     ],
     "geometry": [
-        "point",
-        "vertex"
+        "line"
     ],
     "tags": {
         "barrier": "bollard"
     },
-    "name": "Bollard"
+    "name": "Bollard Row"
 }

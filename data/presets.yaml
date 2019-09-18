@@ -292,6 +292,9 @@ en:
       board_type:
         # board_type=*
         label: Type
+      bollard:
+        # bollard=*
+        label: Type
       booth:
         # booth=*
         label: Booth
@@ -3765,6 +3768,10 @@ en:
         # barrier=bollard
         name: Bollard
         terms: '<translate with synonyms or related terms for ''Bollard'', separated by commas>'
+      barrier/bollard_line:
+        # barrier=bollard
+        name: Bollard Row
+        terms: '<translate with synonyms or related terms for ''Bollard Row'', separated by commas>'
       barrier/border_control:
         # barrier=border_control
         name: Border Control

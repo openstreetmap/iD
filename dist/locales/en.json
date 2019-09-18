@@ -2705,6 +2705,10 @@
                     "label": "Type",
                     "terms": ""
                 },
+                "bollard": {
+                    "label": "Type",
+                    "terms": ""
+                },
                 "booth": {
                     "label": "Booth",
                     "terms": ""
@@ -5967,6 +5971,10 @@
                 },
                 "barrier/block": {
                     "name": "Block",
+                    "terms": ""
+                },
+                "barrier/bollard_line": {
+                    "name": "Bollard Row",
                     "terms": ""
                 },
                 "barrier/bollard": {
