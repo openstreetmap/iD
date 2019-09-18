@@ -79,5 +79,21 @@ export function uiZoom(context) {
             context.keybinding().on([key], zoomOut);
             context.keybinding().on([uiCmd('⌘' + key)], zoomOutFurther);
         });
+
+        function updateButtonStates() {
+            var canZoomIn = context.map().canZoomIn();
+            selection.select('button.zoom-in')
+                .classed('disabled', !canZoomIn)
+                .attr('disabled', canZoomIn ? null : true);
+
+            var canZoomOut = context.map().canZoomOut();
+            selection.select('button.zoom-out')
+                .classed('disabled', !canZoomOut)
+                .attr('disabled', canZoomOut ? null : true);
+        }
+
+        updateButtonStates();
+
+        context.map().on('move.uiZoom', updateButtonStates);
     };
 }
