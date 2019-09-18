@@ -2845,6 +2845,10 @@
                     "label": "Type",
                     "terms": ""
                 },
+                "bollard": {
+                    "label": "Type",
+                    "terms": ""
+                },
                 "booth": {
                     "label": "Booth",
                     "terms": ""
@@ -5865,6 +5869,10 @@
                     "name": "Nursing Home",
                     "terms": "elderly,living,nursing,old,senior,assisted living"
                 },
+                "amenity/stripclub": {
+                    "name": "Strip Club",
+                    "terms": ""
+                },
                 "amenity/studio": {
                     "name": "Studio",
                     "terms": "recording,radio,television"
@@ -6103,6 +6111,10 @@
                 },
                 "barrier/block": {
                     "name": "Block",
+                    "terms": ""
+                },
+                "barrier/bollard_line": {
+                    "name": "Bollard Row",
                     "terms": ""
                 },
                 "barrier/bollard": {
