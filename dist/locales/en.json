@@ -3573,6 +3573,10 @@
                     "label": "Type",
                     "terms": ""
                 },
+                "informal": {
+                    "label": "Informal",
+                    "terms": ""
+                },
                 "information": {
                     "label": "Type",
                     "terms": ""
@@ -7008,6 +7012,10 @@
                 "highway/path": {
                     "name": "Path",
                     "terms": "hike,hiking,trackway,trail,walk"
+                },
+                "highway/path/informal": {
+                    "name": "Informal Path",
+                    "terms": "bootleg trail,cow path,desire line,desire path,desireline,desirepath,elephant path,game trail,goat track,herd path,pig trail,shortcut,social trail,use trail"
                 },
                 "highway/pedestrian_area": {
                     "name": "Pedestrian Area",

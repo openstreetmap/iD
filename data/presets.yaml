@@ -1000,6 +1000,10 @@ en:
       industrial:
         # industrial=*
         label: Type
+      informal:
+        # informal=*
+        label: Informal
+        terms: '[translate with synonyms or related terms for ''Informal'', separated by commas]'
       information:
         # information=*
         label: Type
@@ -2156,6 +2160,7 @@ en:
           tunnel: Tunnel
         # structure field placeholder
         placeholder: Unknown
+        terms: '[translate with synonyms or related terms for ''Structure'', separated by commas]'
       structure_waterway:
         # tunnel=*
         label: Structure
@@ -4801,6 +4806,11 @@ en:
         name: Path
         # 'terms: hike,hiking,trackway,trail,walk'
         terms: '<translate with synonyms or related terms for ''Path'', separated by commas>'
+      highway/path/informal:
+        # 'highway=path, informal=yes'
+        name: Informal Path
+        # 'terms: bootleg trail,cow path,desire line,desire path,desireline,desirepath,elephant path,game trail,goat track,herd path,pig trail,shortcut,social trail,use trail'
+        terms: '<translate with synonyms or related terms for ''Informal Path'', separated by commas>'
       highway/pedestrian_area:
         # 'highway=pedestrian, area=yes'
         name: Pedestrian Area

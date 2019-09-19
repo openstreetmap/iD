@@ -436,6 +436,7 @@ export function rendererMap(context) {
                 p0 = _getMouseCoords(source);
                 p1 = t0.invert(p0);
                 k2 = t0.k * Math.pow(2, -dY / 500);
+                k2 = clamp(k2, kMin, kMax);
                 x2 = p0[0] - p1[0] * k2;
                 y2 = p0[1] - p1[1] * k2;
 
@@ -447,6 +448,7 @@ export function rendererMap(context) {
                 p0 = _getMouseCoords(source);
                 p1 = t0.invert(p0);
                 k2 = t0.k * source._scale;
+                k2 = clamp(k2, kMin, kMax);
                 x2 = p0[0] - p1[0] * k2;
                 y2 = p0[1] - p1[1] * k2;
 
@@ -462,6 +464,7 @@ export function rendererMap(context) {
                 p0 = _getMouseCoords(source);
                 p1 = t0.invert(p0);
                 k2 = t0.k * Math.pow(2, -dY / 500);
+                k2 = clamp(k2, kMin, kMax);
                 x2 = p0[0] - p1[0] * k2;
                 y2 = p0[1] - p1[1] * k2;
 
@@ -472,6 +475,7 @@ export function rendererMap(context) {
                 p0 = _getMouseCoords(source);
                 p1 = t0.invert(p0);
                 k2 = t0.k * Math.pow(2, -dY / 500);
+                k2 = clamp(k2, kMin, kMax);
                 x2 = p0[0] - p1[0] * k2;
                 y2 = p0[1] - p1[1] * k2;
 
@@ -484,6 +488,7 @@ export function rendererMap(context) {
                 x2 = p1[0] - dX;
                 y2 = p1[1] - dY;
                 k2 = projection.scale();
+                k2 = clamp(k2, kMin, kMax);
             }
 
             // something changed - replace the event transform
