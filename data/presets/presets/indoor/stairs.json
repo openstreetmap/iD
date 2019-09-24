@@ -12,8 +12,12 @@
         "stairs": "yes"
     },
     "terms": [
-        "stairs"
+        "stairs",
+        "stairwell",
+        "stair",
+        "staircase",
+        "steps"
     ],
     "matchScore": 0.8,
-    "name": "Indoor stairs"
+    "name": "Indoor Stairwell"
 }
