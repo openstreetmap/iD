@@ -1663,6 +1663,9 @@ en:
       playground:
         # playground=*
         label: Type
+      playground/theme:
+        # 'playground:theme=*'
+        label: Theme
       polling_station:
         # polling_station=*
         label: Polling Place

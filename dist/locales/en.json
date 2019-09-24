@@ -4009,6 +4009,10 @@
                     "label": "Type",
                     "terms": ""
                 },
+                "playground/theme": {
+                    "label": "Theme",
+                    "terms": ""
+                },
                 "polling_station": {
                     "label": "Polling Place",
                     "terms": "voting place"

@@ -1591,6 +1591,7 @@
     {"key": "piste:type", "value": "connection", "description": "🄵 Type"},
     {"key": "plant", "description": "🄵 Plant"},
     {"key": "plant:output:electricity", "description": "🄵 Power Output"},
+    {"key": "playground:theme", "description": "🄵 Theme"},
     {"key": "population", "description": "🄵 Population"},
     {"key": "post:block_number", "description": "🄵 Delivery Address"},
     {"key": "post:city", "description": "🄵 Delivery Address"},

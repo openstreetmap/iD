@@ -3,10 +3,16 @@
     "fields": [
         "name",
         "operator",
+        "playground/theme",
         "surface",
+        "access_simple",
         "min_age",
-        "max_age",
-        "access_simple"
+        "max_age"
+    ],
+    "moreFields": [
+        "blind",
+        "dog",
+        "wheelchair"
     ],
     "geometry": [
         "point",
