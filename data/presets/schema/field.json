@@ -109,8 +109,18 @@
             "type": "string"
         },
         "strings": {
-            "description": "Translatable strings options (combo fields)",
-            "type": "object"
+            "description": "Strings sent to transifex for translation",
+            "type": "object",
+            "properties": {
+                "options": {
+                    "description": "Translatable options (combo fields)",
+                    "type": "object"
+                }
+            },
+            "additionalProperties": {
+                "description": "Specialized fields can request translation of arbitrary strings",
+                "type": "object"
+            }
         },
         "snake_case": {
             "description": "If true, replace spaces with underscores in the tag value (combo fields only)",

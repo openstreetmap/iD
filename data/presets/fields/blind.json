@@ -1,11 +1,13 @@
 {
     "key": "blind",
     "type": "radio",
-    "options": [
-        "yes",
-        "limited",
-        "no"
-    ],
+    "strings": {
+        "options": {
+            "yes": "Yes",
+            "limited": "Limited",
+            "no": "No"
+        }
+    },
     "label": "Blind Person Access",
     "terms": [
         "sight impairment",

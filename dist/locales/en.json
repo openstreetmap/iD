@@ -2694,7 +2694,12 @@
                 },
                 "blind": {
                     "label": "Blind Person Access",
-                    "terms": "sight impairment,vision impairment"
+                    "terms": "sight impairment,vision impairment",
+                    "options": {
+                        "yes": "Yes",
+                        "limited": "Limited",
+                        "no": "No"
+                    }
                 },
                 "blood_components": {
                     "label": "Blood Components",
@@ -4486,7 +4491,12 @@
                 },
                 "stroller": {
                     "label": "Stroller Access",
-                    "terms": "baby carriage,perambulator,pram,pushchair"
+                    "terms": "baby carriage,perambulator,pram,pushchair",
+                    "options": {
+                        "yes": "Yes",
+                        "limited": "Limited",
+                        "no": "No"
+                    }
                 },
                 "structure_waterway": {
                     "label": "Structure",
@@ -4828,7 +4838,12 @@
                 },
                 "wheelchair": {
                     "label": "Wheelchair Access",
-                    "terms": "handicap access"
+                    "terms": "handicap access",
+                    "options": {
+                        "yes": "Yes",
+                        "limited": "Limited",
+                        "no": "No"
+                    }
                 },
                 "wholesale": {
                     "label": "Wholesale",

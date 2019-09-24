@@ -280,6 +280,13 @@ en:
       blind:
         # blind=*
         label: Blind Person Access
+        options:
+          # blind=limited
+          limited: Limited
+          # blind=no
+          'no': 'No'
+          # blind=yes
+          'yes': 'Yes'
         # 'terms: sight impairment,vision impairment'
         terms: '[translate with synonyms or related terms for ''Blind Person Access'', separated by commas]'
       blood_components:
@@ -2150,6 +2157,13 @@ en:
       stroller:
         # stroller=*
         label: Stroller Access
+        options:
+          # stroller=limited
+          limited: Limited
+          # stroller=no
+          'no': 'No'
+          # stroller=yes
+          'yes': 'Yes'
         # 'terms: baby carriage,perambulator,pram,pushchair'
         terms: '[translate with synonyms or related terms for ''Stroller Access'', separated by commas]'
       structure:
@@ -2508,6 +2522,13 @@ en:
       wheelchair:
         # wheelchair=*
         label: Wheelchair Access
+        options:
+          # wheelchair=limited
+          limited: Limited
+          # wheelchair=no
+          'no': 'No'
+          # wheelchair=yes
+          'yes': 'Yes'
         # 'terms: handicap access'
         terms: '[translate with synonyms or related terms for ''Wheelchair Access'', separated by commas]'
       wholesale:
