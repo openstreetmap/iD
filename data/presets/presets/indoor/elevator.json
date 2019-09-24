@@ -1,7 +1,7 @@
 {
     "icon":"temaki-elevator",
     "fields": [
-        "level",
+        "level_semi",
         "ref"
     ],
     "geometry": [
