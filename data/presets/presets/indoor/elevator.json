@@ -2,7 +2,7 @@
     "icon":"temaki-elevator",
     "fields": [
         "level",
-        "name"
+        "ref"
     ],
     "geometry": [
         "area"
@@ -16,5 +16,5 @@
         "lift"
     ],
     "matchScore": 0.8,
-    "name": "Indoor elevator"
+    "name": "Indoor Elevator Shaft"
 }
