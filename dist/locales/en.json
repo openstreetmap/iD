@@ -5147,27 +5147,27 @@
                 },
                 "amenity/bicycle_parking": {
                     "name": "Bicycle Parking",
-                    "terms": "bike"
+                    "terms": "bike,cycle parking,cycling"
                 },
                 "amenity/bicycle_parking/building": {
                     "name": "Bicycle Parking Garage",
-                    "terms": "Multi-Storey Bicycle Park,Multi-Storey Bike Park,Bike Parking Station"
+                    "terms": "Bike Parking Station,cycle parking,cycling,Multi-Storey Bicycle Park,Multi-Storey Bike Park"
                 },
                 "amenity/bicycle_parking/lockers": {
                     "name": "Bicycle Lockers",
-                    "terms": "Bike Lockers"
+                    "terms": "cycle locker,cycling,Bike Lockers"
                 },
                 "amenity/bicycle_parking/shed": {
                     "name": "Bicycle Shed",
-                    "terms": "Bike Shed"
+                    "terms": "cycle shed,cycling,Bike Shed"
                 },
                 "amenity/bicycle_rental": {
                     "name": "Bicycle Rental",
-                    "terms": "bike,bicycle,bikeshare,bike share,bicycle share,hub,dock"
+                    "terms": "bike,bicycle,bikeshare,bike share,bicycle share,cycle dock,cycle hub,cycleshare,cycling"
                 },
                 "amenity/bicycle_repair_station": {
                     "name": "Bicycle Repair Tool Stand",
-                    "terms": "bike,repair,chain,pump,tools,stand,multitool"
+                    "terms": "bike chain,bike multitool,bike repair,bike tools,cycle pump,cycle repair,cycling"
                 },
                 "amenity/biergarten": {
                     "name": "Biergarten",
@@ -6771,7 +6771,7 @@
                 },
                 "highway/cycleway": {
                     "name": "Cycle Path",
-                    "terms": "bike path,bicyle path"
+                    "terms": "bicyle path,bike path,cycling path"
                 },
                 "highway/cycleway/crossing": {
                     "name": "Cycle Crossing",

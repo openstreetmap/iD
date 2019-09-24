@@ -23,7 +23,9 @@
         "area"
     ],
     "terms": [
-        "bike"
+        "bike",
+        "cycle parking",
+        "cycling"
     ],
     "tags": {
         "amenity": "bicycle_parking"
