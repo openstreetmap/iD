@@ -1,0 +1,5 @@
+{
+    "key": "authentication:app",
+    "type": "check",
+    "label": "Authentication by app"
+}

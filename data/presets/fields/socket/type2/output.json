@@ -1,0 +1,7 @@
+{
+    "key": "socket:type2:output",
+    "type": "combo",
+    "label": "Type2 / Mennekes Power Output",
+    "placeholder": "11 kW, 22 kW...",
+    "options": ["11 kW", "22 kW", "43 kW", "50 kW"]
+}

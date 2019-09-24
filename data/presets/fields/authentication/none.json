@@ -1,0 +1,5 @@
+{
+    "key": "authentication:none",
+    "type": "check",
+    "label": "No authentication required"
+}

@@ -7,13 +7,24 @@
         "access_simple",
         "fee",
         "payment_multi_fee",
-        "charge_fee"
+        "charge_fee",
+        "car",
+        "socket/chademo",
+        "socket/type2",
+        "socket/type2_combo"
     ],
     "moreFields": [
         "brand",
         "covered",
         "level",
-        "manufacturer"
+        "manufacturer",
+        "ref",
+        "socket/chademo/output",
+        "socket/type2/output",
+        "socket/type2_combo/output",
+        "authentication/app",
+        "authentication/short_message",
+        "authentication/none"
     ],
     "geometry": [
         "point"

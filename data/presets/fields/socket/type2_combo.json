@@ -1,0 +1,7 @@
+{
+    "key": "socket:type2_combo",
+    "type": "number",
+    "minValue": 0,
+    "label": "Type2 combo sockets",
+    "placeholder": "1, 2..."
+}

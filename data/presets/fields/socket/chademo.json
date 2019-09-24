@@ -1,0 +1,7 @@
+{
+    "key": "socket:chademo",
+    "type": "number",
+    "minValue": 0,
+    "label": "Chademo sockets",
+    "placeholder": "1, 2..."
+}

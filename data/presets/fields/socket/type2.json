@@ -1,0 +1,7 @@
+{
+    "key": "socket:type2",
+    "type": "number",
+    "minValue": 0,
+    "label": "Type2 / Mennekes sockets",
+    "placeholder": "1, 2..."
+}

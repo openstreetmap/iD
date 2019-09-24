@@ -1,0 +1,7 @@
+{
+    "key": "socket:chademo:output",
+    "type": "combo",
+    "label": "Chademo Power Output",
+    "placeholder": "11 kW, 22 kW...",
+    "options": ["11 kW", "22 kW", "43 kW", "50 kW"]
+}
