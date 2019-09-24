@@ -5,6 +5,7 @@
         "min_age",
         "max_age",
         "wheelchair",
+        "blind",
         "height"
     ],
     "geometry": [

@@ -2692,6 +2692,10 @@
                     "label": "Waste Bin",
                     "terms": "garbage can,trash can"
                 },
+                "blind": {
+                    "label": "Blind Person Access",
+                    "terms": "sight impairment,vision impairment"
+                },
                 "blood_components": {
                     "label": "Blood Components",
                     "terms": "",

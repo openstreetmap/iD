@@ -1,0 +1,14 @@
+{
+    "key": "blind",
+    "type": "radio",
+    "options": [
+        "yes",
+        "limited",
+        "no"
+    ],
+    "label": "Blind Person Access",
+    "terms": [
+        "sight impairment",
+        "vision impairment"
+    ]
+}

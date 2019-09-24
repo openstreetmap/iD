@@ -1275,6 +1275,7 @@
     {"key": "bench", "description": "🄵 Bench"},
     {"key": "bicycle_parking", "description": "🄵 Type"},
     {"key": "bin", "description": "🄵 Waste Bin"},
+    {"key": "blind", "description": "🄵 Blind Person Access"},
     {"key": "blood:", "value": "whole", "description": "🄵 Blood Components"},
     {"key": "blood:", "value": "plasma", "description": "🄵 Blood Components"},
     {"key": "blood:", "value": "platelets", "description": "🄵 Blood Components"},

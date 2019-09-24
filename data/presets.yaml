@@ -277,6 +277,11 @@ en:
         label: Waste Bin
         # 'terms: garbage can,trash can'
         terms: '[translate with synonyms or related terms for ''Waste Bin'', separated by commas]'
+      blind:
+        # blind=*
+        label: Blind Person Access
+        # 'terms: sight impairment,vision impairment'
+        terms: '[translate with synonyms or related terms for ''Blind Person Access'', separated by commas]'
       blood_components:
         # 'blood:=*'
         label: Blood Components
