@@ -1,5 +1,5 @@
 {
-    "key": "stroller",
+    "key": "blind",
     "type": "radio",
     "strings": {
         "options": {
@@ -8,11 +8,9 @@
             "no": "No"
         }
     },
-    "label": "Stroller Access",
+    "label": "Blind Person Access",
     "terms": [
-        "baby carriage",
-        "perambulator",
-        "pram",
-        "pushchair"
+        "sight impairment",
+        "vision impairment"
     ]
 }

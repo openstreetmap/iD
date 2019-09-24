@@ -277,6 +277,18 @@ en:
         label: Waste Bin
         # 'terms: garbage can,trash can'
         terms: '[translate with synonyms or related terms for ''Waste Bin'', separated by commas]'
+      blind:
+        # blind=*
+        label: Blind Person Access
+        options:
+          # blind=limited
+          limited: Limited
+          # blind=no
+          'no': 'No'
+          # blind=yes
+          'yes': 'Yes'
+        # 'terms: sight impairment,vision impairment'
+        terms: '[translate with synonyms or related terms for ''Blind Person Access'', separated by commas]'
       blood_components:
         # 'blood:=*'
         label: Blood Components
@@ -1658,6 +1670,9 @@ en:
       playground:
         # playground=*
         label: Type
+      playground/theme:
+        # 'playground:theme=*'
+        label: Theme
       polling_station:
         # polling_station=*
         label: Polling Place
@@ -2142,6 +2157,13 @@ en:
       stroller:
         # stroller=*
         label: Stroller Access
+        options:
+          # stroller=limited
+          limited: Limited
+          # stroller=no
+          'no': 'No'
+          # stroller=yes
+          'yes': 'Yes'
         # 'terms: baby carriage,perambulator,pram,pushchair'
         terms: '[translate with synonyms or related terms for ''Stroller Access'', separated by commas]'
       structure:
@@ -2500,6 +2522,13 @@ en:
       wheelchair:
         # wheelchair=*
         label: Wheelchair Access
+        options:
+          # wheelchair=limited
+          limited: Limited
+          # wheelchair=no
+          'no': 'No'
+          # wheelchair=yes
+          'yes': 'Yes'
         # 'terms: handicap access'
         terms: '[translate with synonyms or related terms for ''Wheelchair Access'', separated by commas]'
       wholesale:
@@ -2784,32 +2813,32 @@ en:
       amenity/bicycle_parking:
         # amenity=bicycle_parking
         name: Bicycle Parking
-        # 'terms: bike'
+        # 'terms: bike,cycle parking,cycling'
         terms: '<translate with synonyms or related terms for ''Bicycle Parking'', separated by commas>'
       amenity/bicycle_parking/building:
         # 'amenity=bicycle_parking, bicycle_parking=building'
         name: Bicycle Parking Garage
-        # 'terms: Multi-Storey Bicycle Park,Multi-Storey Bike Park,Bike Parking Station'
+        # 'terms: Bike Parking Station,cycle parking,cycling,Multi-Storey Bicycle Park,Multi-Storey Bike Park'
         terms: '<translate with synonyms or related terms for ''Bicycle Parking Garage'', separated by commas>'
       amenity/bicycle_parking/lockers:
         # 'amenity=bicycle_parking, bicycle_parking=lockers'
         name: Bicycle Lockers
-        # 'terms: Bike Lockers'
+        # 'terms: cycle locker,cycling,Bike Lockers'
         terms: '<translate with synonyms or related terms for ''Bicycle Lockers'', separated by commas>'
       amenity/bicycle_parking/shed:
         # 'amenity=bicycle_parking, bicycle_parking=shed'
         name: Bicycle Shed
-        # 'terms: Bike Shed'
+        # 'terms: cycle shed,cycling,Bike Shed'
         terms: '<translate with synonyms or related terms for ''Bicycle Shed'', separated by commas>'
       amenity/bicycle_rental:
         # amenity=bicycle_rental
         name: Bicycle Rental
-        # 'terms: bike,bicycle,bikeshare,bike share,bicycle share,hub,dock'
+        # 'terms: bike,bicycle,bikeshare,bike share,bicycle share,cycle dock,cycle hub,cycleshare,cycling'
         terms: '<translate with synonyms or related terms for ''Bicycle Rental'', separated by commas>'
       amenity/bicycle_repair_station:
         # amenity=bicycle_repair_station
         name: Bicycle Repair Tool Stand
-        # 'terms: bike,repair,chain,pump,tools,stand,multitool'
+        # 'terms: bike chain,bike multitool,bike repair,bike tools,cycle pump,cycle repair,cycling'
         terms: '<translate with synonyms or related terms for ''Bicycle Repair Tool Stand'', separated by commas>'
       amenity/biergarten:
         # amenity=biergarten
@@ -4688,7 +4717,7 @@ en:
       highway/cycleway:
         # highway=cycleway
         name: Cycle Path
-        # 'terms: bike path,bicyle path'
+        # 'terms: bicyle path,bike path,cycling path'
         terms: '<translate with synonyms or related terms for ''Cycle Path'', separated by commas>'
       highway/cycleway/bicycle_foot:
         # 'highway=cycleway, foot=designated'

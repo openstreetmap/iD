@@ -1819,6 +1819,7 @@
             "generic_name": {
                 "title": "Suspicious Names",
                 "message": "{feature} has the suspicious name \"{name}\"",
+                "message_language": "{feature} has the suspicious name \"{name}\" in {language}",
                 "tip": "Find features with generic or suspicious names",
                 "reference": "Names should be the actual, on-the-ground names of features."
             },
@@ -2830,6 +2831,15 @@
                 "bin": {
                     "label": "Waste Bin",
                     "terms": "garbage can,trash can"
+                },
+                "blind": {
+                    "label": "Blind Person Access",
+                    "terms": "sight impairment,vision impairment",
+                    "options": {
+                        "yes": "Yes",
+                        "limited": "Limited",
+                        "no": "No"
+                    }
                 },
                 "blood_components": {
                     "label": "Blood Components",
@@ -4144,6 +4154,10 @@
                     "label": "Type",
                     "terms": ""
                 },
+                "playground/theme": {
+                    "label": "Theme",
+                    "terms": ""
+                },
                 "polling_station": {
                     "label": "Polling Place",
                     "terms": "voting place"
@@ -4617,7 +4631,12 @@
                 },
                 "stroller": {
                     "label": "Stroller Access",
-                    "terms": "baby carriage,perambulator,pram,pushchair"
+                    "terms": "baby carriage,perambulator,pram,pushchair",
+                    "options": {
+                        "yes": "Yes",
+                        "limited": "Limited",
+                        "no": "No"
+                    }
                 },
                 "structure_waterway": {
                     "label": "Structure",
@@ -4959,7 +4978,12 @@
                 },
                 "wheelchair": {
                     "label": "Wheelchair Access",
-                    "terms": "handicap access"
+                    "terms": "handicap access",
+                    "options": {
+                        "yes": "Yes",
+                        "limited": "Limited",
+                        "no": "No"
+                    }
                 },
                 "wholesale": {
                     "label": "Wholesale",
@@ -5287,27 +5311,27 @@
                 },
                 "amenity/bicycle_parking": {
                     "name": "Bicycle Parking",
-                    "terms": "bike"
+                    "terms": "bike,cycle parking,cycling"
                 },
                 "amenity/bicycle_parking/building": {
                     "name": "Bicycle Parking Garage",
-                    "terms": "Multi-Storey Bicycle Park,Multi-Storey Bike Park,Bike Parking Station"
+                    "terms": "Bike Parking Station,cycle parking,cycling,Multi-Storey Bicycle Park,Multi-Storey Bike Park"
                 },
                 "amenity/bicycle_parking/lockers": {
                     "name": "Bicycle Lockers",
-                    "terms": "Bike Lockers"
+                    "terms": "cycle locker,cycling,Bike Lockers"
                 },
                 "amenity/bicycle_parking/shed": {
                     "name": "Bicycle Shed",
-                    "terms": "Bike Shed"
+                    "terms": "cycle shed,cycling,Bike Shed"
                 },
                 "amenity/bicycle_rental": {
                     "name": "Bicycle Rental",
-                    "terms": "bike,bicycle,bikeshare,bike share,bicycle share,hub,dock"
+                    "terms": "bike,bicycle,bikeshare,bike share,bicycle share,cycle dock,cycle hub,cycleshare,cycling"
                 },
                 "amenity/bicycle_repair_station": {
                     "name": "Bicycle Repair Tool Stand",
-                    "terms": "bike,repair,chain,pump,tools,stand,multitool"
+                    "terms": "bike chain,bike multitool,bike repair,bike tools,cycle pump,cycle repair,cycling"
                 },
                 "amenity/biergarten": {
                     "name": "Biergarten",
@@ -6911,7 +6935,7 @@
                 },
                 "highway/cycleway": {
                     "name": "Cycle Path",
-                    "terms": "bike path,bicyle path"
+                    "terms": "bicyle path,bike path,cycling path"
                 },
                 "highway/cycleway/crossing": {
                     "name": "Cycle Crossing",

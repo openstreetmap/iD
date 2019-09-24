@@ -1,6 +1,6 @@
 import { filters } from 'name-suggestion-index';
 
-import { t } from '../util/locale';
+import { t, languageName } from '../util/locale';
 import { utilPreset } from '../util';
 import { validationIssue, validationIssueFix } from '../core/validation';
 import { actionChangeTags } from '../actions/change_tags';
@@ -16,57 +16,55 @@ export function validationGenericName() {
 
     var keysToTestForGenericValues = ['amenity', 'building', 'leisure', 'man_made', 'shop', 'tourism'];
 
-    function isGenericName(entity) {
-        var name = entity.tags.name;
-        if (!name) return false;
-        // a generic name is okay if it's a known brand or entity
-        if (entity.hasWikidata()) return false;
-        name = name.toLowerCase();
-
-        var i, key, val;
-
-        // test if the name is just the key or tag value (e.g. "park")
-        for (i = 0; i < keysToTestForGenericValues.length; i++) {
-            key = keysToTestForGenericValues[i];
-            val = entity.tags[key];
-            if (val) {
-                val = val.toLowerCase();
-                if (key === name ||
-                    val === name ||
-                    key.replace(/\_/g, ' ') === name ||
-                    val.replace(/\_/g, ' ') === name) {
-                    return entity.tags.name;
-                }
+    function isDiscardedSuggestionName(lowercaseName) {
+        for (var i = 0; i < discardNamesRegexes.length; i++) {
+            if (discardNamesRegexes[i].test(lowercaseName)) {
+                return true;
             }
         }
-
-        // test if the name is otherwise generic
-        for (i = 0; i < discardNamesRegexes.length; i++) {
-            if (discardNamesRegexes[i].test(name)) {
-                return entity.tags.name;
-            }
-        }
-
         return false;
     }
 
+    // test if the name is just the key or tag value (e.g. "park")
+    function nameMatchesRawTag(lowercaseName, tags) {
+        var i, key, val;
+        for (i = 0; i < keysToTestForGenericValues.length; i++) {
+            key = keysToTestForGenericValues[i];
+            val = tags[key];
+            if (val) {
+                val = val.toLowerCase();
+                if (key === lowercaseName ||
+                    val === lowercaseName ||
+                    key.replace(/\_/g, ' ') === lowercaseName ||
+                    val.replace(/\_/g, ' ') === lowercaseName) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
 
-    var validation = function checkGenericName(entity) {
-        var generic = isGenericName(entity);
-        if (!generic) return [];
+    function isGenericName(name, tags) {
+        name = name.toLowerCase();
+        return nameMatchesRawTag(name, tags) || isDiscardedSuggestionName(name);
+    }
 
-        return [new validationIssue({
+    function makeGenericNameIssue(entityId, nameKey, genericName, langCode) {
+        return new validationIssue({
             type: type,
             severity: 'warning',
             message: function(context) {
                 var entity = context.hasEntity(this.entityIds[0]);
                 if (!entity) return '';
                 var preset = utilPreset(entity, context);
-                return t('issues.generic_name.message', { feature: preset.name(), name: generic });
+                var langName = langCode && languageName(langCode);
+                return t('issues.generic_name.message' + (langName ? '_language' : ''),
+                    { feature: preset.name(), name: genericName, language: langName }
+                );
             },
             reference: showReference,
-            entityIds: [entity.id],
-            hash: generic,
+            entityIds: [entityId],
+            hash: nameKey + '=' + genericName,
             fixes: [
                 new validationIssueFix({
                     icon: 'iD-operation-delete',
@@ -75,7 +73,7 @@ export function validationGenericName() {
                         var entityId = this.issue.entityIds[0];
                         var entity = context.entity(entityId);
                         var tags = Object.assign({}, entity.tags);   // shallow copy
-                        delete tags.name;
+                        delete tags[nameKey];
                         context.perform(
                             actionChangeTags(entityId, tags),
                             t('issues.fix.remove_generic_name.annotation')
@@ -83,8 +81,7 @@ export function validationGenericName() {
                     }
                 })
             ]
-        })];
-
+        });
 
         function showReference(selection) {
             selection.selectAll('.issue-reference')
@@ -94,6 +91,29 @@ export function validationGenericName() {
                 .attr('class', 'issue-reference')
                 .text(t('issues.generic_name.reference'));
         }
+    }
+
+
+    var validation = function checkGenericName(entity) {
+        // a generic name is okay if it's a known brand or entity
+        if (entity.hasWikidata()) return [];
+
+        var issues = [];
+
+        for (var key in entity.tags) {
+            var m = key.match(/^name(?:(?::)([a-zA-Z_-]+))?$/);
+            if (!m) continue;
+
+            var value = entity.tags[key];
+            if (isGenericName(value, entity.tags)) {
+                var langCode = null;
+                if (m.length >=2) langCode = m[1];
+
+                issues.push(makeGenericNameIssue(entity.id, key, value, langCode));
+            }
+        }
+
+        return issues;
     };
 
     validation.type = type;

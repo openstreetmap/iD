@@ -1466,6 +1466,7 @@ en:
     generic_name:
       title: Suspicious Names
       message: '{feature} has the suspicious name "{name}"'
+      message_language: '{feature} has the suspicious name "{name}" in {language}'
       tip: "Find features with generic or suspicious names"
       reference: "Names should be the actual, on-the-ground names of features."
     incompatible_source:
