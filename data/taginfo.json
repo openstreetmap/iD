@@ -988,7 +988,7 @@
     {"key": "shop", "value": "electronics", "description": "🄿 Electronics Store", "object_types": ["node", "area"], "icon_url": "https://cdn.jsdelivr.net/gh/openstreetmap/iD/svg/fontawesome/fas-plug.svg"},
     {"key": "shop", "value": "erotic", "description": "🄿 Erotic Store", "object_types": ["node", "area"], "icon_url": "https://cdn.jsdelivr.net/gh/mapbox/maki/icons/shop-15.svg"},
     {"key": "shop", "value": "fabric", "description": "🄿 Fabric Store", "object_types": ["node", "area"], "icon_url": "https://cdn.jsdelivr.net/gh/openstreetmap/iD/svg/fontawesome/fas-tape.svg"},
-    {"key": "shop", "value": "farm", "description": "🄿 Produce Stand", "object_types": ["node", "area"], "icon_url": "https://cdn.jsdelivr.net/gh/mapbox/maki/icons/shop-15.svg"},
+    {"key": "shop", "value": "farm", "description": "🄿 Produce Stand", "object_types": ["node", "area"], "icon_url": "https://cdn.jsdelivr.net/gh/openstreetmap/iD/svg/fontawesome/fas-apple-alt.svg"},
     {"key": "shop", "value": "fashion_accessories", "description": "🄿 Fashion Accessories Store", "object_types": ["node", "area"], "icon_url": "https://cdn.jsdelivr.net/gh/mapbox/maki/icons/shop-15.svg"},
     {"key": "shop", "value": "fireplace", "description": "🄿 Fireplace Store", "object_types": ["node", "area"], "icon_url": "https://cdn.jsdelivr.net/gh/mapbox/maki/icons/shop-15.svg"},
     {"key": "shop", "value": "fishing", "description": "🄿 Fishing Shop", "object_types": ["node", "area"], "icon_url": "https://cdn.jsdelivr.net/gh/mapbox/maki/icons/shop-15.svg"},

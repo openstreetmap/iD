@@ -7317,7 +7317,7 @@ en:
       shop/farm:
         # shop=farm
         name: Produce Stand
-        # 'terms: farm shop,farm stand'
+        # 'terms: baked goods,farm shop,farm stand,fresh food,fruits,greengrocer,organics,vegetables'
         terms: '<translate with synonyms or related terms for ''Produce Stand'', separated by commas>'
       shop/fashion:
         # shop=fashion

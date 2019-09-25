@@ -9067,7 +9067,7 @@
                 },
                 "shop/farm": {
                     "name": "Produce Stand",
-                    "terms": "farm shop,farm stand"
+                    "terms": "baked goods,farm shop,farm stand,fresh food,fruits,greengrocer,organics,vegetables"
                 },
                 "shop/fashion_accessories": {
                     "name": "Fashion Accessories Store",

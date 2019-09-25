@@ -1045,7 +1045,7 @@
     "shop/erotic": {"icon": "maki-shop", "fields": ["{shop}", "min_age"], "geometry": ["point", "area"], "terms": ["sex", "porn"], "tags": {"shop": "erotic"}, "name": "Erotic Store"},
     "shop/erotic/lgbtq": {"icon": "maki-shop", "geometry": ["point", "area"], "terms": ["sex", "porn"], "tags": {"shop": "erotic", "lgbtq": "primary"}, "name": "LGBTQ+ Erotic Store"},
     "shop/fabric": {"icon": "fas-tape", "geometry": ["point", "area"], "terms": ["sew"], "tags": {"shop": "fabric"}, "name": "Fabric Store"},
-    "shop/farm": {"icon": "maki-shop", "geometry": ["point", "area"], "terms": ["farm shop", "farm stand"], "tags": {"shop": "farm"}, "name": "Produce Stand"},
+    "shop/farm": {"icon": "fas-apple-alt", "geometry": ["point", "area"], "terms": ["baked goods", "farm shop", "farm stand", "fresh food", "fruits", "greengrocer", "organics", "vegetables"], "tags": {"shop": "farm"}, "name": "Produce Stand"},
     "shop/fashion_accessories": {"icon": "maki-shop", "fields": ["name", "clothes", "{shop}"], "geometry": ["point", "area"], "tags": {"shop": "fashion_accessories"}, "terms": ["bag", "cologne", "fragrance", "hat", "jewellery", "purfume", "purse", "scarf", "sunglasses", "umbrella", "wallet", "watch"], "name": "Fashion Accessories Store"},
     "shop/fireplace": {"icon": "maki-shop", "geometry": ["point", "area"], "terms": ["fireplace", "stove", "masonry heater"], "tags": {"shop": "fireplace"}, "name": "Fireplace Store"},
     "shop/fishing": {"icon": "maki-shop", "geometry": ["point", "area"], "tags": {"shop": "fishing"}, "terms": ["bait", "fishing line", "flies", "fly", "lure", "reel", "rod", "tackle"], "name": "Fishing Shop"},
