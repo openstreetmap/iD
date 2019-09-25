@@ -22,8 +22,8 @@
         "amenity": "charging_station"
     },
     "terms": [
-        "EV",
         "Electric Vehicle",
+        "EV",
         "Supercharger"
     ],
     "name": "Charging Station"

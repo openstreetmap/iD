@@ -11,13 +11,13 @@
         "area"
     ],
     "terms": [
-        "stupa",
-        "vihara",
+        "dojo",
         "monastery",
-        "temple",
         "pagoda",
-        "zendo",
-        "dojo"
+        "stupa",
+        "temple",
+        "vihara",
+        "zendo"
     ],
     "tags": {
         "amenity": "place_of_worship",

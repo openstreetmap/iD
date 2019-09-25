@@ -18,12 +18,12 @@
     },
     "terms": [
         "bin",
+        "dog",
         "garbage",
-        "rubbish",
         "litter",
-        "trash",
         "poo",
-        "dog"
+        "rubbish",
+        "trash"
     ],
     "name": "Dog Excrement Bin"
 }

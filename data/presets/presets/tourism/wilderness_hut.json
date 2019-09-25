@@ -22,9 +22,9 @@
         "area"
     ],
     "terms": [
-        "wilderness hut",
         "backcountry hut",
-        "bothy"
+        "bothy",
+        "wilderness hut"
     ],
     "tags": {
         "tourism": "wilderness_hut"

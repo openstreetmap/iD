@@ -9,10 +9,10 @@
         "surveillance/type",
         "surveillance/zone",
         "direction"
-     ],
+    ],
     "terms": [
-        "anpr",
         "alpr",
+        "anpr",
         "camera",
         "car plate recognition",
         "cctv",

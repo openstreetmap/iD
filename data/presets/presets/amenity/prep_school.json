@@ -8,12 +8,12 @@
         "opening_hours"
     ],
     "moreFields": [
-        "payment_multi",
-        "website",
-        "phone",
         "email",
         "fax",
         "level",
+        "payment_multi",
+        "phone",
+        "website",
         "wheelchair"
     ],
     "geometry": [
@@ -23,10 +23,10 @@
     "terms": [
         "academic",
         "ACT",
-        "SAT",
         "homework",
         "math",
         "reading",
+        "SAT",
         "test prep",
         "tutoring",
         "writing"

@@ -29,14 +29,14 @@
         "area"
     ],
     "terms": [
-        "cybercafe",
-        "taxiphone",
-        "teleboutique",
-        "coffee",
         "cafe",
+        "coffee",
+        "cybercafe",
+        "lanhouse",
         "net",
-        "lanhouse"
-     ],
+        "taxiphone",
+        "teleboutique"
+    ],
     "tags": {
         "amenity": "internet_cafe"
     },

@@ -1510,6 +1510,7 @@
     {"key": "location", "value": "roof", "description": "🄵 Location"},
     {"key": "location", "description": "🄵 Location"},
     {"key": "lock", "description": "🄵 Lock"},
+    {"key": "lockable", "description": "🄵 Lockable"},
     {"key": "manufacturer", "description": "🄵 Manufacturer"},
     {"key": "map_size", "description": "🄵 Coverage"},
     {"key": "map_type", "description": "🄵 Type"},

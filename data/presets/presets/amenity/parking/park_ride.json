@@ -17,11 +17,11 @@
         "commuter parking lot",
         "incentive parking lot",
         "metro parking lot",
+        "P+R",
         "park and pool lot",
         "park and ride lot",
-        "P+R",
-        "public transport parking lot",
         "public transit parking lot",
+        "public transport parking lot",
         "train parking lot"
     ],
     "name": "Park & Ride Lot"

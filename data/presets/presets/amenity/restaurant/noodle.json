@@ -10,6 +10,7 @@
         "cafe",
         "café",
         "canteen",
+        "cellophane noodles",
         "dine",
         "dining",
         "dinner",
@@ -17,12 +18,11 @@
         "eat",
         "grill",
         "lunch",
-        "table",
         "ramen noodles",
-        "soup",
+        "rice noodles",
         "soba noodles",
-        "cellophane noodles",
-        "rice noodles"
+        "soup",
+        "table"
     ],
     "tags": {
         "amenity": "restaurant",

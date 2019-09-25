@@ -14,12 +14,12 @@
         "area"
     ],
     "terms": [
-        "theme park",
         "aquatic park",
-        "water park",
         "flumes",
+        "hydroslides",
+        "theme park",
         "water chutes",
-        "hydroslides"
+        "water park"
     ],
     "tags": {
         "attraction": "water_slide"

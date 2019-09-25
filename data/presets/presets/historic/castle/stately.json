@@ -19,11 +19,11 @@
         "castle_type": "stately"
     },
     "terms": [
-        "Historic Country House",
-        "Stately Home",
-        "nobility",
         "gentry",
-        "representative"
+        "Historic Country House",
+        "nobility",
+        "representative",
+        "Stately Home"
     ],
     "name": "Château"
 }

@@ -12,14 +12,14 @@
         "traffic_sign": "city_limit"
     },
     "terms": [
-        "town",
-        "village",
-        "hamlet",
+        "border",
         "boundary",
         "edge",
-        "border",
+        "hamlet",
+        "highway",
         "road",
-        "highway"
+        "town",
+        "village"
     ],
     "name": "City Limit Sign"
 }

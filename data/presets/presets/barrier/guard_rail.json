@@ -11,12 +11,12 @@
     },
     "name": "Guard Rail",
     "terms": [
-        "guardrail",
-        "traffic barrier",
+        "Armco barrier",
         "crash barrier",
+        "guardrail",
         "median barrier",
         "roadside barrier",
-        "Armco barrier"
+        "traffic barrier"
     ],
     "matchScore": 0.75
 }

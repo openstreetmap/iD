@@ -5,12 +5,12 @@
     ],
     "terms": [
         "condom",
-        "tampon",
-        "pad",
-        "woman",
-        "women",
         "menstrual hygiene products",
-        "personal care"
+        "pad",
+        "personal care",
+        "tampon",
+        "woman",
+        "women"
     ],
     "tags": {
         "amenity": "vending_machine",

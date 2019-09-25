@@ -10,9 +10,9 @@
         "vertex"
     ],
     "terms": [
-        "water tank",
         "cistern",
-        "reservoir"
+        "reservoir",
+        "water tank"
     ],
     "tags": {
         "emergency": "water_tank"

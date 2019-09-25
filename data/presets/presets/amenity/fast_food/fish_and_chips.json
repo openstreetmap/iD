@@ -13,10 +13,10 @@
         "dinner",
         "drive-in",
         "eat",
+        "french fries",
         "grill",
         "lunch",
-        "table",
-        "french fries"
+        "table"
     ],
     "tags": {
         "amenity": "fast_food",

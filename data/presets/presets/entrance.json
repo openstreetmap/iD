@@ -4,9 +4,9 @@
         "vertex"
     ],
     "terms": [
+        "door",
         "entrance",
-        "exit",
-        "door"
+        "exit"
     ],
     "tags": {
         "entrance": "*"

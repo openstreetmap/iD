@@ -17,9 +17,9 @@
         "value": "crossing"
     },
     "terms": [
-        "zebra crossing",
+        "crosswalk",
         "marked crossing",
-        "crosswalk"
+        "zebra crossing"
     ],
     "name": "Marked Crosswalk",
     "searchable": false

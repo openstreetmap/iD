@@ -7,10 +7,10 @@
     ],
     "moreFields": [
         "address",
-        "website",
-        "phone",
         "email",
-        "fax"
+        "fax",
+        "phone",
+        "website"
     ],
     "geometry": [
         "area"
@@ -19,14 +19,14 @@
         "landuse": "aquaculture"
     },
     "terms": [
-        "fish farm",
-        "crustacean",
+        "algaculture",
         "algae",
         "aquafarming",
-        "shrimp farm",
-        "oyster farm",
+        "crustacean",
+        "fish farm",
         "mariculture",
-        "algaculture"
+        "oyster farm",
+        "shrimp farm"
     ],
     "name": "Aquaculture"
 }

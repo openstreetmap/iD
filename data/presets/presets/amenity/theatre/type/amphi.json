@@ -7,13 +7,14 @@
         "lit"
     ],
     "geometry": [
-        "point", "area"
+        "point",
+        "area"
     ],
     "terms": [
-        "open air",
-        "outdoor",
+        "ampi",
         "greek",
-        "ampi"
+        "open air",
+        "outdoor"
     ],
     "tags": {
         "amenity": "theatre",

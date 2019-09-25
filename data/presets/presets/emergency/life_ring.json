@@ -9,12 +9,12 @@
         "vertex"
     ],
     "terms": [
-        "life buoy",
-        "kisby ring",
         "kisbie ring",
+        "kisby ring",
+        "life buoy",
         "perry buoy"
     ],
-   "tags": {
+    "tags": {
         "emergency": "life_ring"
     },
     "name": "Life Ring"

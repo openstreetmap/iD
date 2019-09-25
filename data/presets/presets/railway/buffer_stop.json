@@ -7,9 +7,9 @@
         "railway": "buffer_stop"
     },
     "terms": [
-        "stop",
+        "buffer",
         "halt",
-        "buffer"
+        "stop"
     ],
     "name": "Buffer Stop"
 }

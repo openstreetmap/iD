@@ -13,8 +13,8 @@
         "value": "defensive"
     },
     "terms": [
-        "Defensive Tower",
-        "Castle Tower"
+        "Castle Tower",
+        "Defensive Tower"
     ],
     "name": "Fortified Tower"
 }

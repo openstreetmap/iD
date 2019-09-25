@@ -13,11 +13,11 @@
         "area"
     ],
     "terms": [
-        "ski",
-        "skitour",
         "crosscountry",
+        "piste",
+        "ski",
         "ski touring",
-        "piste"
+        "skitour"
     ],
     "tags": {
         "piste:type": "skitour"

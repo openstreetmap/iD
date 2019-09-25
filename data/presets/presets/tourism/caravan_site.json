@@ -9,19 +9,19 @@
         "internet_access",
         "internet_access/fee"
     ],
-    "moreFields" : [
+    "moreFields": [
         "charge_fee",
-        "operator",
-        "fee",
-        "payment_multi_fee",
-        "internet_access/ssid",
-        "smoking",
-        "website",
-        "phone",
         "email",
         "fax",
-        "wheelchair",
-        "reservation"
+        "fee",
+        "internet_access/ssid",
+        "operator",
+        "payment_multi_fee",
+        "phone",
+        "reservation",
+        "smoking",
+        "website",
+        "wheelchair"
     ],
     "geometry": [
         "point",
@@ -29,8 +29,8 @@
         "area"
     ],
     "terms": [
-        "Motor Home",
-        "Camper"
+        "Camper",
+        "Motor Home"
     ],
     "tags": {
         "tourism": "caravan_site"

@@ -3767,6 +3767,10 @@
                     "label": "Lock",
                     "terms": ""
                 },
+                "lockable": {
+                    "label": "Lockable",
+                    "terms": ""
+                },
                 "man_made": {
                     "label": "Type",
                     "terms": ""
@@ -5135,7 +5139,7 @@
                 },
                 "aerialway/cable_car": {
                     "name": "Cable Car",
-                    "terms": "tramway,ropeway"
+                    "terms": "ropeway,tramway"
                 },
                 "aerialway/chair_lift": {
                     "name": "Chair Lift",
@@ -5175,7 +5179,7 @@
                 },
                 "aerialway/rope_tow": {
                     "name": "Rope Tow Lift",
-                    "terms": "handle tow,bugel lift"
+                    "terms": "bugel lift,handle tow"
                 },
                 "aerialway/t-bar": {
                     "name": "T-bar Lift",
@@ -5227,7 +5231,7 @@
                 },
                 "aeroway/terminal": {
                     "name": "Airport Terminal",
-                    "terms": "airport,aerodrome"
+                    "terms": "aerodrome,airport"
                 },
                 "aeroway/windsock": {
                     "name": "Windsock",
@@ -5259,7 +5263,7 @@
                 },
                 "amenity/recycling": {
                     "name": "Recycling",
-                    "terms": "bin,can,bottle,glass,garbage,rubbish,scrap,trash"
+                    "terms": "bin,bottle,can,garbage,glass,rubbish,scrap,trash"
                 },
                 "amenity/register_office": {
                     "name": "Register Office",
@@ -5283,7 +5287,7 @@
                 },
                 "amenity/animal_shelter": {
                     "name": "Animal Shelter",
-                    "terms": "adoption,aspca,cat,dog,horse,kitten,pet care,pet rescue,puppy,raptor,reptile,rescue,spca,pound"
+                    "terms": "adoption,aspca,cat,dog,horse,kitten,pet care,pet rescue,pound,puppy,raptor,reptile,rescue,spca"
                 },
                 "amenity/arts_centre": {
                     "name": "Arts Center",
@@ -5291,19 +5295,19 @@
                 },
                 "amenity/atm": {
                     "name": "ATM",
-                    "terms": "money,cash,machine"
+                    "terms": "cash,machine,money"
                 },
                 "amenity/bank": {
                     "name": "Bank",
-                    "terms": "credit union,check,deposit,fund,investment,repository,reserve,safe,savings,stock,treasury,trust,vault"
+                    "terms": "check,credit union,deposit,fund,investment,repository,reserve,safe,savings,stock,treasury,trust,vault"
                 },
                 "amenity/bar": {
                     "name": "Bar",
-                    "terms": "dive,beer,bier,booze"
+                    "terms": "beer,bier,booze,dive"
                 },
                 "amenity/bar/lgbtq": {
                     "name": "LGBTQ+ Bar",
-                    "terms": "gay bar,lesbian bar,lgbtq bar,lgbt bar,lgb bar"
+                    "terms": "gay bar,lesbian bar,lgb bar,lgbt bar,lgbtq bar"
                 },
                 "amenity/bbq": {
                     "name": "Barbecue/Grill",
@@ -5311,7 +5315,7 @@
                 },
                 "amenity/bench": {
                     "name": "Bench",
-                    "terms": "seat,chair"
+                    "terms": "chair,seat"
                 },
                 "amenity/bicycle_parking": {
                     "name": "Bicycle Parking",
@@ -5323,15 +5327,15 @@
                 },
                 "amenity/bicycle_parking/lockers": {
                     "name": "Bicycle Lockers",
-                    "terms": "cycle locker,cycling,Bike Lockers"
+                    "terms": "Bike Lockers,cycle locker,cycling"
                 },
                 "amenity/bicycle_parking/shed": {
                     "name": "Bicycle Shed",
-                    "terms": "cycle shed,cycling,Bike Shed"
+                    "terms": "Bike Shed,cycle shed,cycling"
                 },
                 "amenity/bicycle_rental": {
                     "name": "Bicycle Rental",
-                    "terms": "bike,bicycle,bikeshare,bike share,bicycle share,cycle dock,cycle hub,cycleshare,cycling"
+                    "terms": "bicycle,bicycle share,bike,bike share,bikeshare,cycle dock,cycle hub,cycleshare,cycling"
                 },
                 "amenity/bicycle_repair_station": {
                     "name": "Bicycle Repair Tool Stand",
@@ -5371,11 +5375,11 @@
                 },
                 "amenity/casino": {
                     "name": "Casino",
-                    "terms": "gambling,roulette,craps,poker,blackjack"
+                    "terms": "blackjack,craps,gambling,poker,roulette"
                 },
                 "amenity/charging_station": {
                     "name": "Charging Station",
-                    "terms": "EV,Electric Vehicle,Supercharger"
+                    "terms": "Electric Vehicle,EV,Supercharger"
                 },
                 "amenity/childcare": {
                     "name": "Nursery/Childcare",
@@ -5383,7 +5387,7 @@
                 },
                 "amenity/cinema": {
                     "name": "Cinema",
-                    "terms": "drive-in,film,flick,movie,theater,picture,show,screen"
+                    "terms": "drive-in,film,flick,movie,picture,screen,show,theater"
                 },
                 "amenity/clinic": {
                     "name": "Clinic",
@@ -5395,7 +5399,7 @@
                 },
                 "amenity/clinic/fertility": {
                     "name": "Fertility Clinic",
-                    "terms": "egg,fertility,reproductive,sperm,ovulation"
+                    "terms": "egg,fertility,ovulation,reproductive,sperm"
                 },
                 "amenity/clock": {
                     "name": "Clock",
@@ -5407,7 +5411,7 @@
                 },
                 "amenity/college": {
                     "name": "College Grounds",
-                    "terms": "university,undergraduate school"
+                    "terms": "undergraduate school,university"
                 },
                 "amenity/community_centre": {
                     "name": "Community Center",
@@ -5415,7 +5419,7 @@
                 },
                 "amenity/community_centre/lgbtq": {
                     "name": "LGBTQ+ Community Center",
-                    "terms": "lgbtq event,lgbtq hall,lgbt event,lgbt hall,lgb event,lgb hall"
+                    "terms": "lgb event,lgb hall,lgbt event,lgbt hall,lgbtq event,lgbtq hall"
                 },
                 "amenity/compressed_air": {
                     "name": "Compressed Air",
@@ -5435,7 +5439,7 @@
                 },
                 "amenity/dentist": {
                     "name": "Dentist",
-                    "terms": "tooth,teeth"
+                    "terms": "teeth,tooth"
                 },
                 "amenity/dive_centre": {
                     "name": "Dive Center",
@@ -5447,7 +5451,7 @@
                 },
                 "amenity/dojo": {
                     "name": "Dojo / Martial Arts Academy",
-                    "terms": "martial arts,dojang"
+                    "terms": "dojang,martial arts"
                 },
                 "amenity/dressing_room": {
                     "name": "Changing Room",
@@ -5455,7 +5459,7 @@
                 },
                 "amenity/drinking_water": {
                     "name": "Drinking Water",
-                    "terms": "potable water source,water fountain,drinking fountain,bubbler,water tap"
+                    "terms": "bubbler,drinking fountain,potable water source,water fountain,water tap"
                 },
                 "amenity/driving_school": {
                     "name": "Driving School",
@@ -5483,11 +5487,11 @@
                 },
                 "amenity/fast_food/donut": {
                     "name": "Donut Fast Food",
-                    "terms": "breakfast,brunch,cafe,canteen,coffee,dine,diner,donut,doughnut,dining,eat,lunch,table"
+                    "terms": "breakfast,brunch,cafe,canteen,coffee,dine,diner,dining,donut,doughnut,eat,lunch,table"
                 },
                 "amenity/fast_food/fish_and_chips": {
                     "name": "Fish & Chips Fast Food",
-                    "terms": "breakfast,cafe,café,dine,dining,dinner,drive-in,eat,grill,lunch,table,french fries"
+                    "terms": "breakfast,cafe,café,dine,dining,dinner,drive-in,eat,french fries,grill,lunch,table"
                 },
                 "amenity/fast_food/kebab": {
                     "name": "Kebab Fast Food",
@@ -5495,11 +5499,11 @@
                 },
                 "amenity/fast_food/mexican": {
                     "name": "Mexican Fast Food",
-                    "terms": "breakfast,dine,dining,dinner,drive-in,eat,grill,lunch,table,tacos,burritos,enchiladas,fajitas,nachos,tortillas,salsa,tamales,quesadillas"
+                    "terms": "breakfast,burritos,dine,dining,dinner,drive-in,eat,enchiladas,fajitas,grill,lunch,nachos,quesadillas,salsa,table,tacos,tamales,tortillas"
                 },
                 "amenity/fast_food/pizza": {
                     "name": "Pizza Fast Food",
-                    "terms": "dine,dining,dinner,drive-in,eat,lunch,table,deep dish,thin crust,slice"
+                    "terms": "deep dish,dine,dining,dinner,drive-in,eat,lunch,slice,table,thin crust"
                 },
                 "amenity/fast_food/sandwich": {
                     "name": "Sandwich Fast Food",
@@ -5511,7 +5515,7 @@
                 },
                 "amenity/food_court": {
                     "name": "Food Court",
-                    "terms": "fast food,restaurant,food"
+                    "terms": "fast food,food,restaurant"
                 },
                 "amenity/fountain": {
                     "name": "Fountain",
@@ -5519,7 +5523,7 @@
                 },
                 "amenity/fuel": {
                     "name": "Gas Station",
-                    "terms": "petrol,fuel,gasoline,propane,diesel,lng,cng,biodiesel"
+                    "terms": "biodiesel,cng,diesel,fuel,gasoline,lng,petrol,propane"
                 },
                 "amenity/grave_yard": {
                     "name": "Graveyard",
@@ -5535,15 +5539,15 @@
                 },
                 "amenity/hunting_stand": {
                     "name": "Hunting Stand",
-                    "terms": "game,gun,lookout,rifle,shoot*,wild,watch"
+                    "terms": "game,gun,lookout,rifle,shoot*,watch,wild"
                 },
                 "amenity/ice_cream": {
                     "name": "Ice Cream Shop",
-                    "terms": "gelato,sorbet,sherbet,frozen,yogurt"
+                    "terms": "frozen,gelato,sherbet,sorbet,yogurt"
                 },
                 "amenity/internet_cafe": {
                     "name": "Internet Cafe",
-                    "terms": "cybercafe,taxiphone,teleboutique,coffee,cafe,net,lanhouse"
+                    "terms": "cafe,coffee,cybercafe,lanhouse,net,taxiphone,teleboutique"
                 },
                 "amenity/karaoke": {
                     "name": "Karaoke Box",
@@ -5559,7 +5563,7 @@
                 },
                 "amenity/letter_box": {
                     "name": "Letter Box",
-                    "terms": "curbside delivery box,home delivery box,direct-to-door delivery box,letter hole,letter plate,letter slot,letterbox,letterhole,letterplate,letterslot,mail box,mail hole,mail slot,mailbox,mailhole,mailslot,through-door delivery box"
+                    "terms": "curbside delivery box,direct-to-door delivery box,home delivery box,letter hole,letter plate,letter slot,letterbox,letterhole,letterplate,letterslot,mail box,mail hole,mail slot,mailbox,mailhole,mailslot,through-door delivery box"
                 },
                 "amenity/library": {
                     "name": "Library",
@@ -5583,7 +5587,7 @@
                 },
                 "amenity/money_transfer": {
                     "name": "Money Transfer Station",
-                    "terms": "money order,check,bill,currency,finance,wire transfer,cable,person to person,cash to cash,exchange"
+                    "terms": "bill,cable,cash to cash,check,currency,exchange,finance,money order,person to person,wire transfer"
                 },
                 "amenity/motorcycle_parking": {
                     "name": "Motorcycle Parking",
@@ -5595,11 +5599,11 @@
                 },
                 "amenity/nightclub": {
                     "name": "Nightclub",
-                    "terms": "disco*,night club,dancing,dance club"
+                    "terms": "dance club,dancing,disco*,night club"
                 },
                 "amenity/nightclub/lgbtq": {
                     "name": "LGBTQ+ Nightclub",
-                    "terms": "gay nightclub,lesbian nightclub,lgbtq nightclub,lgbt nightclub,lgb nightclub"
+                    "terms": "gay nightclub,lesbian nightclub,lgb nightclub,lgbt nightclub,lgbtq nightclub"
                 },
                 "amenity/parking_entrance": {
                     "name": "Parking Garage Entrance/Exit",
@@ -5619,7 +5623,7 @@
                 },
                 "amenity/parking/park_ride": {
                     "name": "Park & Ride Lot",
-                    "terms": "commuter parking lot,incentive parking lot,metro parking lot,park and pool lot,park and ride lot,P+R,public transport parking lot,public transit parking lot,train parking lot"
+                    "terms": "commuter parking lot,incentive parking lot,metro parking lot,P+R,park and pool lot,park and ride lot,public transit parking lot,public transport parking lot,train parking lot"
                 },
                 "amenity/parking/underground": {
                     "name": "Underground Parking",
@@ -5627,11 +5631,11 @@
                 },
                 "amenity/payment_centre": {
                     "name": "Payment Center",
-                    "terms": "check,tax pay,bill pay,currency,finance,cash,money"
+                    "terms": "bill pay,cash,check,currency,finance,money,tax pay"
                 },
                 "amenity/payment_terminal": {
                     "name": "Payment Terminal",
-                    "terms": "interactive kiosk,ekiosk,atm,bill pay,tax pay,phone pay,finance,cash,money transfer,card"
+                    "terms": "atm,bill pay,card,cash,ekiosk,finance,interactive kiosk,money transfer,phone pay,tax pay"
                 },
                 "amenity/pharmacy": {
                     "name": "Pharmacy Counter",
@@ -5639,7 +5643,7 @@
                 },
                 "amenity/photo_booth": {
                     "name": "Photo Booth",
-                    "terms": "photobooth,photo,booth,kiosk,camera"
+                    "terms": "booth,camera,kiosk,photo,photobooth"
                 },
                 "amenity/place_of_worship": {
                     "name": "Place of Worship",
@@ -5647,11 +5651,11 @@
                 },
                 "amenity/place_of_worship/buddhist": {
                     "name": "Buddhist Temple",
-                    "terms": "stupa,vihara,monastery,temple,pagoda,zendo,dojo"
+                    "terms": "dojo,monastery,pagoda,stupa,temple,vihara,zendo"
                 },
                 "amenity/place_of_worship/christian": {
                     "name": "Christian Church",
-                    "terms": "christian,abbey,basilica,bethel,cathedral,chancel,chantry,chapel,fold,house of God,house of prayer,house of worship,minster,mission,oratory,parish,sacellum,sanctuary,shrine,tabernacle,temple"
+                    "terms": "abbey,basilica,bethel,cathedral,chancel,chantry,chapel,christian,fold,house of God,house of prayer,house of worship,minster,mission,oratory,parish,sacellum,sanctuary,shrine,tabernacle,temple"
                 },
                 "amenity/place_of_worship/christian/jehovahs_witness": {
                     "name": "Kingdom Hall of Jehovah's Witnesses",
@@ -5667,7 +5671,7 @@
                 },
                 "amenity/place_of_worship/hindu": {
                     "name": "Hindu Temple",
-                    "terms": "kovil,devasthana,mandir,kshetram,alayam,shrine,temple"
+                    "terms": "alayam,devasthana,kovil,kshetram,mandir,shrine,temple"
                 },
                 "amenity/place_of_worship/jewish": {
                     "name": "Jewish Synagogue",
@@ -5691,11 +5695,11 @@
                 },
                 "amenity/planetarium": {
                     "name": "Planetarium",
-                    "terms": "museum,astronomy,observatory"
+                    "terms": "astronomy,museum,observatory"
                 },
                 "amenity/police": {
                     "name": "Police",
-                    "terms": "badge,constable,constabulary,cop,detective,fed,law,enforcement,officer,patrol"
+                    "terms": "badge,constable,constabulary,cop,detective,enforcement,fed,law,officer,patrol"
                 },
                 "amenity/polling_station": {
                     "name": "Permanent Polling Place",
@@ -5715,43 +5719,43 @@
                 },
                 "amenity/prep_school": {
                     "name": "Test Prep / Tutoring School",
-                    "terms": "academic,ACT,SAT,homework,math,reading,test prep,tutoring,writing"
+                    "terms": "academic,ACT,homework,math,reading,SAT,test prep,tutoring,writing"
                 },
                 "amenity/prison": {
                     "name": "Prison Grounds",
-                    "terms": "cell,jail,correction"
+                    "terms": "cell,correction,jail"
                 },
                 "amenity/pub": {
                     "name": "Pub",
-                    "terms": "alcohol,drink,dive,beer,bier,booze"
+                    "terms": "alcohol,beer,bier,booze,dive,drink"
                 },
                 "amenity/pub/lgbtq": {
                     "name": "LGBTQ+ Pub",
-                    "terms": "gay pub,lesbian pub,lgbtq pub,lgbt pub,lgb pub"
+                    "terms": "gay pub,lesbian pub,lgb pub,lgbt pub,lgbtq pub"
                 },
                 "amenity/pub/microbrewery": {
                     "name": "Brewpub",
-                    "terms": "alcohol,drink,dive,beer,bier,booze,craft brewery,microbrewery,small batch brewery"
+                    "terms": "alcohol,beer,bier,booze,craft brewery,dive,drink,microbrewery,small batch brewery"
                 },
                 "amenity/public_bath": {
                     "name": "Public Bath",
-                    "terms": "onsen,foot bath,hot springs"
+                    "terms": "foot bath,hot springs,onsen"
                 },
                 "amenity/public_bookcase": {
                     "name": "Public Bookcase",
-                    "terms": "library,bookcrossing"
+                    "terms": "bookcrossing,library"
                 },
                 "amenity/ranger_station": {
                     "name": "Ranger Station",
-                    "terms": "visitor center,visitor centre,permit center,permit centre,backcountry office,warden office,warden center"
+                    "terms": "backcountry office,permit center,permit centre,visitor center,visitor centre,warden center,warden office"
                 },
                 "amenity/recycling_centre": {
                     "name": "Recycling Center",
-                    "terms": "bottle,can,dump,glass,garbage,rubbish,scrap,trash"
+                    "terms": "bottle,can,dump,garbage,glass,rubbish,scrap,trash"
                 },
                 "amenity/recycling_container": {
                     "name": "Recycling Container",
-                    "terms": "bin,can,bottle,glass,garbage,rubbish,scrap,trash"
+                    "terms": "bin,bottle,can,garbage,glass,rubbish,scrap,trash"
                 },
                 "amenity/recycling/container/electrical_items": {
                     "name": "E-Waste Container",
@@ -5759,7 +5763,7 @@
                 },
                 "amenity/recycling/container/green_waste": {
                     "name": "Green Waste Container",
-                    "terms": "biodegradable,biological,compost,decomposable,garbage bin,garden waste,organic,rubbish,food scrap"
+                    "terms": "biodegradable,biological,compost,decomposable,food scrap,garbage bin,garden waste,organic,rubbish"
                 },
                 "amenity/restaurant": {
                     "name": "Restaurant",
@@ -5787,15 +5791,15 @@
                 },
                 "amenity/restaurant/greek": {
                     "name": "Greek Restaurant",
-                    "terms": "bar,breakfast,cafe,café,canteen,dine,dining,dinner,drive-in,eat,grill,lunch,table,gyros,pitas,olives"
+                    "terms": "bar,breakfast,cafe,café,canteen,dine,dining,dinner,drive-in,eat,grill,gyros,lunch,olives,pitas,table"
                 },
                 "amenity/restaurant/indian": {
                     "name": "Indian Restaurant",
-                    "terms": "bar,breakfast,dine,dining,dinner,drive-in,eat,grill,lunch,table,curry"
+                    "terms": "bar,breakfast,curry,dine,dining,dinner,drive-in,eat,grill,lunch,table"
                 },
                 "amenity/restaurant/italian": {
                     "name": "Italian Restaurant",
-                    "terms": "bar,breakfast,cafe,café,canteen,dine,dining,dinner,drive-in,eat,grill,lunch,table,pasta,pizza"
+                    "terms": "bar,breakfast,cafe,café,canteen,dine,dining,dinner,drive-in,eat,grill,lunch,pasta,pizza,table"
                 },
                 "amenity/restaurant/japanese": {
                     "name": "Japanese Restaurant",
@@ -5803,23 +5807,23 @@
                 },
                 "amenity/restaurant/mexican": {
                     "name": "Mexican Restaurant",
-                    "terms": "bar,breakfast,dine,dining,dinner,drive-in,eat,grill,lunch,table,tacos,burritos,enchiladas,fajitas,nachos,tortillas,salsa,tamales,quesadillas"
+                    "terms": "bar,breakfast,burritos,dine,dining,dinner,drive-in,eat,enchiladas,fajitas,grill,lunch,nachos,quesadillas,salsa,table,tacos,tamales,tortillas"
                 },
                 "amenity/restaurant/noodle": {
                     "name": "Noodle Restaurant",
-                    "terms": "bar,breakfast,cafe,café,canteen,dine,dining,dinner,drive-in,eat,grill,lunch,table,ramen noodles,soup,soba noodles,cellophane noodles,rice noodles"
+                    "terms": "bar,breakfast,cafe,café,canteen,cellophane noodles,dine,dining,dinner,drive-in,eat,grill,lunch,ramen noodles,rice noodles,soba noodles,soup,table"
                 },
                 "amenity/restaurant/pizza": {
                     "name": "Pizza Restaurant",
-                    "terms": "bar,dine,dining,dinner,drive-in,eat,lunch,table,deep dish,thin crust,slice"
+                    "terms": "bar,deep dish,dine,dining,dinner,drive-in,eat,lunch,slice,table,thin crust"
                 },
                 "amenity/restaurant/seafood": {
                     "name": "Seafood Restaurant",
-                    "terms": "bar,breakfast,cafe,café,dine,dining,dinner,drive-in,eat,grill,lunch,table,fish,shellfish,molluscs,crustaceans,clams,oysters,lobsters,crab,shrimp,squid,octopus"
+                    "terms": "bar,breakfast,cafe,café,clams,crab,crustaceans,dine,dining,dinner,drive-in,eat,fish,grill,lobsters,lunch,molluscs,octopus,oysters,shellfish,shrimp,squid,table"
                 },
                 "amenity/restaurant/steakhouse": {
                     "name": "Steakhouse",
-                    "terms": "bar,breakfast,cafe,café,canteen,dine,dining,dinner,drive-in,eat,grill,lunch,table,steak house,chop house,beef"
+                    "terms": "bar,beef,breakfast,cafe,café,canteen,chop house,dine,dining,dinner,drive-in,eat,grill,lunch,steak house,table"
                 },
                 "amenity/restaurant/sushi": {
                     "name": "Sushi Restaurant",
@@ -5839,15 +5843,15 @@
                 },
                 "amenity/sanitary_dump_station": {
                     "name": "RV Toilet Disposal",
-                    "terms": "Motor Home,Camper,Sanitary,Dump Station,Elsan,CDP,CTDP,Chemical Toilet"
+                    "terms": "Camper,CDP,Chemical Toilet,CTDP,Dump Station,Elsan,Motor Home,Sanitary"
                 },
                 "amenity/school": {
                     "name": "School Grounds",
-                    "terms": "academy,elementary school,middle school,high school"
+                    "terms": "academy,elementary school,high school,middle school"
                 },
                 "amenity/shelter": {
                     "name": "Shelter",
-                    "terms": "lean-to,gazebo,picnic"
+                    "terms": "gazebo,lean-to,picnic"
                 },
                 "amenity/shelter/gazebo": {
                     "name": "Gazebo",
@@ -5891,19 +5895,19 @@
                 },
                 "amenity/social_facility/group_home": {
                     "name": "Elderly Group Home",
-                    "terms": "old,senior,living,care home,assisted living"
+                    "terms": "assisted living,care home,living,old,senior"
                 },
                 "amenity/social_facility/homeless_shelter": {
                     "name": "Homeless Shelter",
-                    "terms": "houseless,unhoused,displaced"
+                    "terms": "displaced,houseless,unhoused"
                 },
                 "amenity/social_facility/nursing_home": {
                     "name": "Nursing Home",
-                    "terms": "elderly,living,nursing,old,senior,assisted living"
+                    "terms": "assisted living,elderly,living,nursing,old,senior"
                 },
                 "amenity/studio": {
                     "name": "Studio",
-                    "terms": "recording,radio,television"
+                    "terms": "radio,recording,television"
                 },
                 "amenity/studio/audio": {
                     "name": "Recording Studio",
@@ -5931,19 +5935,19 @@
                 },
                 "amenity/theatre": {
                     "name": "Theater",
-                    "terms": "theatre,performance,play,musical"
+                    "terms": "musical,performance,play,theatre"
                 },
                 "amenity/theatre/type/amphi": {
                     "name": "Amphitheatre",
-                    "terms": "open air,outdoor,greek,ampi"
+                    "terms": "ampi,greek,open air,outdoor"
                 },
                 "amenity/toilets": {
                     "name": "Toilets",
-                    "terms": "bathroom,restroom,outhouse,privy,head,lavatory,latrine,water closet,WC,W.C."
+                    "terms": "bathroom,head,latrine,lavatory,outhouse,privy,restroom,W.C.,water closet,WC"
                 },
                 "amenity/toilets/disposal/flush": {
                     "name": "Flush Toilets",
-                    "terms": "bathroom,head,lavatory,privy,restroom,water closet,WC,W.C."
+                    "terms": "bathroom,head,lavatory,privy,restroom,W.C.,water closet,WC"
                 },
                 "amenity/toilets/disposal/pitlatrine": {
                     "name": "Pit Latrine",
@@ -5951,7 +5955,7 @@
                 },
                 "amenity/townhall": {
                     "name": "Town Hall",
-                    "terms": "village,city,government,courthouse,municipal"
+                    "terms": "city,courthouse,government,municipal,village"
                 },
                 "amenity/toy_library": {
                     "name": "Toy Library",
@@ -5959,7 +5963,7 @@
                 },
                 "amenity/university": {
                     "name": "University Grounds",
-                    "terms": "college,graduate school,PhD program,master's degree program"
+                    "terms": "college,graduate school,master's degree program,PhD program"
                 },
                 "amenity/vehicle_inspection": {
                     "name": "Vehicle Inspection",
@@ -5987,7 +5991,7 @@
                 },
                 "amenity/vending_machine/drinks": {
                     "name": "Drink Vending Machine",
-                    "terms": "drink,soda,beverage,juice,pop"
+                    "terms": "beverage,drink,juice,pop,soda"
                 },
                 "amenity/vending_machine/electronics": {
                     "name": "Electronics Vending Machine",
@@ -5999,11 +6003,11 @@
                 },
                 "amenity/vending_machine/excrement_bags": {
                     "name": "Excrement Bag Dispenser",
-                    "terms": "excrement bags,poop,waste,dog,animal"
+                    "terms": "animal,dog,excrement bags,poop,waste"
                 },
                 "amenity/vending_machine/feminine_hygiene": {
                     "name": "Feminine Hygiene Vending Machine",
-                    "terms": "condom,tampon,pad,woman,women,menstrual hygiene products,personal care"
+                    "terms": "condom,menstrual hygiene products,pad,personal care,tampon,woman,women"
                 },
                 "amenity/vending_machine/food": {
                     "name": "Food Vending Machine",
@@ -6011,11 +6015,11 @@
                 },
                 "amenity/vending_machine/fuel": {
                     "name": "Gas Pump",
-                    "terms": "petrol,fuel,gasoline,propane,diesel,lng,cng,biodiesel"
+                    "terms": "biodiesel,cng,diesel,fuel,gasoline,lng,petrol,propane"
                 },
                 "amenity/vending_machine/ice_cream": {
                     "name": "Ice Cream Vending Machine",
-                    "terms": "chocolate,ice cream,frozen,popsicle,vanilla"
+                    "terms": "chocolate,frozen,ice cream,popsicle,vanilla"
                 },
                 "amenity/vending_machine/newspapers": {
                     "name": "Newspaper Vending Machine",
@@ -6035,7 +6039,7 @@
                 },
                 "amenity/vending_machine/public_transport_tickets": {
                     "name": "Transit Ticket Vending Machine",
-                    "terms": "bus,train,ferry,rail,ticket,transportation"
+                    "terms": "bus,ferry,rail,ticket,train,transportation"
                 },
                 "amenity/vending_machine/stamps": {
                     "name": "Postage Vending Machine",
@@ -6043,19 +6047,19 @@
                 },
                 "amenity/vending_machine/sweets": {
                     "name": "Snack Vending Machine",
-                    "terms": "candy,gum,chip,pretzel,cookie,cracker"
+                    "terms": "candy,chip,cookie,cracker,gum,pretzel"
                 },
                 "amenity/veterinary": {
                     "name": "Veterinary",
-                    "terms": "pet clinic,veterinarian,animal hospital,pet doctor"
+                    "terms": "animal hospital,pet clinic,pet doctor,veterinarian"
                 },
                 "amenity/waste_basket": {
                     "name": "Waste Basket",
-                    "terms": "bin,garbage,rubbish,litter,trash"
+                    "terms": "bin,garbage,litter,rubbish,trash"
                 },
                 "amenity/waste_disposal": {
                     "name": "Garbage Dumpster",
-                    "terms": "garbage,rubbish,litter,trash"
+                    "terms": "garbage,litter,rubbish,trash"
                 },
                 "amenity/waste_transfer_station": {
                     "name": "Waste Transfer Station",
@@ -6063,7 +6067,7 @@
                 },
                 "amenity/waste/dog_excrement": {
                     "name": "Dog Excrement Bin",
-                    "terms": "bin,garbage,rubbish,litter,trash,poo,dog"
+                    "terms": "bin,dog,garbage,litter,poo,rubbish,trash"
                 },
                 "amenity/water_point": {
                     "name": "RV Drinking Water",
@@ -6087,7 +6091,7 @@
                 },
                 "attraction/amusement_ride": {
                     "name": "Amusement Ride",
-                    "terms": "theme park,carnival ride"
+                    "terms": "carnival ride,theme park"
                 },
                 "attraction/animal": {
                     "name": "Animal Enclosure",
@@ -6095,43 +6099,43 @@
                 },
                 "attraction/big_wheel": {
                     "name": "Big Wheel",
-                    "terms": "ferris wheel,theme park,amusement ride"
+                    "terms": "amusement ride,ferris wheel,theme park"
                 },
                 "attraction/bumper_car": {
                     "name": "Bumper Cars",
-                    "terms": "theme park,dodgem cars,autoscooter"
+                    "terms": "autoscooter,dodgem cars,theme park"
                 },
                 "attraction/bungee_jumping": {
                     "name": "Bungee Jumping",
-                    "terms": "theme park,bungy jumping,jumping platform"
+                    "terms": "bungy jumping,jumping platform,theme park"
                 },
                 "attraction/carousel": {
                     "name": "Carousel",
-                    "terms": "theme park,roundabout,merry-go-round,galloper,jumper,horseabout,flying horses"
+                    "terms": "flying horses,galloper,horseabout,jumper,merry-go-round,roundabout,theme park"
                 },
                 "attraction/dark_ride": {
                     "name": "Dark Ride",
-                    "terms": "theme park,ghost train"
+                    "terms": "ghost train,theme park"
                 },
                 "attraction/drop_tower": {
                     "name": "Drop Tower",
-                    "terms": "theme park,amusement ride,gondola,tower,big drop"
+                    "terms": "amusement ride,big drop,gondola,theme park,tower"
                 },
                 "attraction/maze": {
                     "name": "Maze",
-                    "terms": "theme park,amusement ride,labyrinth"
+                    "terms": "amusement ride,labyrinth,theme park"
                 },
                 "attraction/pirate_ship": {
                     "name": "Pirate Ship",
-                    "terms": "theme park,carnival ride,amusement ride"
+                    "terms": "amusement ride,carnival ride,theme park"
                 },
                 "attraction/river_rafting": {
                     "name": "River Rafting",
-                    "terms": "theme park,aquatic park,water park,rafting simulator,river rafting ride,river rapids ride"
+                    "terms": "aquatic park,rafting simulator,river rafting ride,river rapids ride,theme park,water park"
                 },
                 "attraction/roller_coaster": {
                     "name": "Roller Coaster",
-                    "terms": "theme park,amusement ride"
+                    "terms": "amusement ride,theme park"
                 },
                 "attraction/summer_toboggan": {
                     "name": "Summer Toboggan",
@@ -6139,11 +6143,11 @@
                 },
                 "attraction/train": {
                     "name": "Tourist Train",
-                    "terms": "theme park,rackless train,road train,Tschu-Tschu train,dotto train,park train"
+                    "terms": "dotto train,park train,rackless train,road train,theme park,Tschu-Tschu train"
                 },
                 "attraction/water_slide": {
                     "name": "Water Slide",
-                    "terms": "theme park,aquatic park,water park,flumes,water chutes,hydroslides"
+                    "terms": "aquatic park,flumes,hydroslides,theme park,water chutes,water park"
                 },
                 "barrier": {
                     "name": "Barrier",
@@ -6195,7 +6199,7 @@
                 },
                 "barrier/fence/railing": {
                     "name": "Railing",
-                    "terms": "railing,handrail,guard rail"
+                    "terms": "guard rail,handrail,railing"
                 },
                 "barrier/gate": {
                     "name": "Gate",
@@ -6203,7 +6207,7 @@
                 },
                 "barrier/guard_rail": {
                     "name": "Guard Rail",
-                    "terms": "guardrail,traffic barrier,crash barrier,median barrier,roadside barrier,Armco barrier"
+                    "terms": "Armco barrier,crash barrier,guardrail,median barrier,roadside barrier,traffic barrier"
                 },
                 "barrier/hedge": {
                     "name": "Hedge",
@@ -6223,7 +6227,7 @@
                 },
                 "barrier/kerb/lowered": {
                     "name": "Lowered Curb",
-                    "terms": "curb cut,curb ramp,kerb ramp,dropped kerb,pram ramp"
+                    "terms": "curb cut,curb ramp,dropped kerb,kerb ramp,pram ramp"
                 },
                 "barrier/kerb/raised": {
                     "name": "Raised Curb",
@@ -6247,7 +6251,7 @@
                 },
                 "barrier/sally_port": {
                     "name": "Sally Port",
-                    "terms": "Postern,castle side gate"
+                    "terms": "castle side gate,Postern"
                 },
                 "barrier/stile": {
                     "name": "Stile",
@@ -6311,7 +6315,7 @@
                 },
                 "building/bungalow": {
                     "name": "Bungalow",
-                    "terms": "home,detached"
+                    "terms": "detached,home"
                 },
                 "building/cabin": {
                     "name": "Cabin",
@@ -6319,7 +6323,7 @@
                 },
                 "building/carport": {
                     "name": "Carport",
-                    "terms": "covered parking space,garage,car,porch"
+                    "terms": "car,covered parking space,garage,porch"
                 },
                 "building/cathedral": {
                     "name": "Cathedral Building",
@@ -6351,7 +6355,7 @@
                 },
                 "building/detached": {
                     "name": "Detached House",
-                    "terms": "home,single,family,residence,dwelling"
+                    "terms": "dwelling,family,home,residence,single"
                 },
                 "building/dormitory": {
                     "name": "Dormitory",
@@ -6375,7 +6379,7 @@
                 },
                 "building/grandstand": {
                     "name": "Grandstand",
-                    "terms": "tribune,stand,stands,bleachers"
+                    "terms": "bleachers,stand,stands,tribune"
                 },
                 "building/greenhouse": {
                     "name": "Greenhouse",
@@ -6395,11 +6399,11 @@
                 },
                 "building/house": {
                     "name": "House",
-                    "terms": "home,family,residence,dwelling"
+                    "terms": "dwelling,family,home,residence"
                 },
                 "building/houseboat": {
                     "name": "Houseboat",
-                    "terms": "home,family,residence,dwelling"
+                    "terms": "dwelling,family,home,residence"
                 },
                 "building/hut": {
                     "name": "Hut",
@@ -6443,11 +6447,11 @@
                 },
                 "building/school": {
                     "name": "School Building",
-                    "terms": "academy,elementary school,middle school,high school"
+                    "terms": "academy,elementary school,high school,middle school"
                 },
                 "building/semidetached_house": {
                     "name": "Semi-Detached House",
-                    "terms": "home,double,duplex,twin,family,residence,dwelling"
+                    "terms": "double,duplex,dwelling,family,home,residence,twin"
                 },
                 "building/service": {
                     "name": "Service Building",
@@ -6475,7 +6479,7 @@
                 },
                 "building/terrace": {
                     "name": "Row Houses",
-                    "terms": "home,terrace,brownstone,family,residence,dwelling"
+                    "terms": "brownstone,dwelling,family,home,residence,terrace"
                 },
                 "building/transportation": {
                     "name": "Transportation Building",
@@ -6567,11 +6571,11 @@
                 },
                 "craft/confectionery": {
                     "name": "Candy Maker",
-                    "terms": "sweet,candy"
+                    "terms": "candy,sweet"
                 },
                 "craft/distillery": {
                     "name": "Distillery",
-                    "terms": "alcohol,beverage,bourbon,booze,brandy,gin,hooch,liquor,mezcal,moonshine,rum,scotch,spirits,still,tequila,vodka,whiskey,whisky"
+                    "terms": "alcohol,beverage,booze,bourbon,brandy,gin,hooch,liquor,mezcal,moonshine,rum,scotch,spirits,still,tequila,vodka,whiskey,whisky"
                 },
                 "craft/dressmaker": {
                     "name": "Dressmaker",
@@ -6591,7 +6595,7 @@
                 },
                 "craft/gardener": {
                     "name": "Gardener",
-                    "terms": "landscaper,grounds keeper"
+                    "terms": "grounds keeper,landscaper"
                 },
                 "craft/glaziery": {
                     "name": "Glaziery",
@@ -6603,7 +6607,7 @@
                 },
                 "craft/hvac": {
                     "name": "HVAC",
-                    "terms": "heat*,vent*,air conditioning"
+                    "terms": "air conditioning,heat*,vent*"
                 },
                 "craft/insulator": {
                     "name": "Insulator",
@@ -6767,7 +6771,7 @@
                 },
                 "emergency/life_ring": {
                     "name": "Life Ring",
-                    "terms": "life buoy,kisby ring,kisbie ring,perry buoy"
+                    "terms": "kisbie ring,kisby ring,life buoy,perry buoy"
                 },
                 "emergency/lifeguard": {
                     "name": "Lifeguard",
@@ -6783,11 +6787,11 @@
                 },
                 "emergency/water_tank": {
                     "name": "Emergency Water Tank",
-                    "terms": "water tank,cistern,reservoir"
+                    "terms": "cistern,reservoir,water tank"
                 },
                 "entrance": {
                     "name": "Entrance/Exit",
-                    "terms": "entrance,exit,door"
+                    "terms": "door,entrance,exit"
                 },
                 "ford": {
                     "name": "Ford",
@@ -6795,7 +6799,7 @@
                 },
                 "golf/bunker": {
                     "name": "Sand Trap",
-                    "terms": "hazard,bunker"
+                    "terms": "bunker,hazard"
                 },
                 "golf/cartpath": {
                     "name": "Golf Cartpath",
@@ -6839,7 +6843,7 @@
                 },
                 "healthcare": {
                     "name": "Healthcare Facility",
-                    "terms": "clinic,doctor,disease,health,institution,sick,surgery,wellness"
+                    "terms": "clinic,disease,doctor,health,institution,sick,surgery,wellness"
                 },
                 "healthcare/alternative": {
                     "name": "Alternative Medicine",
@@ -6855,11 +6859,11 @@
                 },
                 "healthcare/birthing_center": {
                     "name": "Birthing Center",
-                    "terms": "baby,childbirth,delivery,labour,labor,pregnancy"
+                    "terms": "baby,childbirth,delivery,labor,labour,pregnancy"
                 },
                 "healthcare/blood_donation": {
                     "name": "Blood Donor Center",
-                    "terms": "blood bank,blood donation,blood transfusion,apheresis,plasmapheresis,plateletpheresis,stem cell donation"
+                    "terms": "apheresis,blood bank,blood donation,blood transfusion,plasmapheresis,plateletpheresis,stem cell donation"
                 },
                 "healthcare/counselling": {
                     "name": "Counselling Center",
@@ -6867,15 +6871,15 @@
                 },
                 "healthcare/hospice": {
                     "name": "Hospice",
-                    "terms": "terminal,illness"
+                    "terms": "illness,terminal"
                 },
                 "healthcare/laboratory": {
                     "name": "Medical Laboratory",
-                    "terms": "medical_laboratory,medical_lab,blood_check"
+                    "terms": "blood_check,medical_lab,medical_laboratory"
                 },
                 "healthcare/midwife": {
                     "name": "Midwife",
-                    "terms": "baby,childbirth,delivery,labour,labor,pregnancy"
+                    "terms": "baby,childbirth,delivery,labor,labour,pregnancy"
                 },
                 "healthcare/occupational_therapist": {
                     "name": "Occupational Therapist",
@@ -6891,7 +6895,7 @@
                 },
                 "healthcare/podiatrist": {
                     "name": "Podiatrist",
-                    "terms": "foot,feet,nails"
+                    "terms": "feet,foot,nails"
                 },
                 "healthcare/psychotherapist": {
                     "name": "Psychotherapist",
@@ -6931,23 +6935,23 @@
                 },
                 "highway/crossing/zebra-raised": {
                     "name": "Marked Crosswalk (Raised)",
-                    "terms": "zebra crossing,marked crossing,crosswalk,flat top,hump,speed,slow"
+                    "terms": "crosswalk,flat top,hump,marked crossing,slow,speed,zebra crossing"
                 },
                 "highway/crossing/zebra": {
                     "name": "Marked Crosswalk",
-                    "terms": "zebra crossing,marked crossing,crosswalk"
+                    "terms": "crosswalk,marked crossing,zebra crossing"
                 },
                 "highway/crossing/marked-raised": {
                     "name": "Marked Crosswalk (Raised)",
-                    "terms": "zebra crossing,marked crossing,crosswalk,flat top,hump,speed,slow"
+                    "terms": "crosswalk,flat top,hump,marked crossing,slow,speed,zebra crossing"
                 },
                 "highway/crossing/marked": {
                     "name": "Marked Crosswalk",
-                    "terms": "zebra crossing,marked crossing,crosswalk"
+                    "terms": "crosswalk,marked crossing,zebra crossing"
                 },
                 "highway/crossing/unmarked-raised": {
                     "name": "Unmarked Crossing (Raised)",
-                    "terms": "flat top,hump,speed,slow"
+                    "terms": "flat top,hump,slow,speed"
                 },
                 "highway/crossing/unmarked": {
                     "name": "Unmarked Crossing",
@@ -6963,15 +6967,15 @@
                 },
                 "highway/cycleway/bicycle_foot": {
                     "name": "Cycle & Foot Path",
-                    "terms": "bicycle and foot path,bike and pedestrian path,green way,greenway,mixed-use trail,multi-use trail,segregated trail,rail trail"
+                    "terms": "bicycle and foot path,bike and pedestrian path,green way,greenway,mixed-use trail,multi-use trail,rail trail,segregated trail"
                 },
                 "highway/cycleway/crossing/marked": {
                     "name": "Marked Cycle Crossing",
-                    "terms": "cycle crosswalk,cycle path crossing,cycleway crossing,bicycle crossing,bike crossing"
+                    "terms": "bicycle crossing,bike crossing,cycle crosswalk,cycle path crossing,cycleway crossing"
                 },
                 "highway/cycleway/crossing/unmarked": {
                     "name": "Unmarked Cycle Crossing",
-                    "terms": "cycle path crossing,cycleway crossing,bicycle crossing,bike crossing"
+                    "terms": "bicycle crossing,bike crossing,cycle path crossing,cycleway crossing"
                 },
                 "highway/elevator": {
                     "name": "Elevator",
@@ -6991,23 +6995,23 @@
                 },
                 "highway/footway/zebra-raised": {
                     "name": "Marked Crosswalk (Raised)",
-                    "terms": "zebra crossing,marked crossing,crosswalk,flat top,hump,speed,slow"
+                    "terms": "crosswalk,flat top,hump,marked crossing,slow,speed,zebra crossing"
                 },
                 "highway/footway/zebra": {
                     "name": "Marked Crosswalk",
-                    "terms": "zebra crossing,marked crossing,crosswalk"
+                    "terms": "crosswalk,marked crossing,zebra crossing"
                 },
                 "highway/footway/conveying": {
                     "name": "Moving Walkway",
-                    "terms": "moving sidewalk,autwalk,skywalk,travolator,travelator,travellator,conveyor"
+                    "terms": "autwalk,conveyor,moving sidewalk,skywalk,travelator,travellator,travolator"
                 },
                 "highway/footway/marked-raised": {
                     "name": "Marked Crosswalk (Raised)",
-                    "terms": "zebra crossing,marked crossing,crosswalk,flat top,hump,speed,slow"
+                    "terms": "crosswalk,flat top,hump,marked crossing,slow,speed,zebra crossing"
                 },
                 "highway/footway/marked": {
                     "name": "Marked Crosswalk",
-                    "terms": "marked foot path crossing,marked crossing,marked pedestrian crosswalk,zebra crossing"
+                    "terms": "marked crossing,marked foot path crossing,marked pedestrian crosswalk,zebra crossing"
                 },
                 "highway/footway/sidewalk": {
                     "name": "Sidewalk",
@@ -7015,15 +7019,15 @@
                 },
                 "highway/footway/unmarked-raised": {
                     "name": "Unmarked Crossing (Raised)",
-                    "terms": "flat top,hump,speed,slow"
+                    "terms": "flat top,hump,slow,speed"
                 },
                 "highway/footway/unmarked": {
                     "name": "Unmarked Crossing",
-                    "terms": "unmarked foot path crossing,unmarked crosswalk,unmarked pedestrian crossing"
+                    "terms": "unmarked crosswalk,unmarked foot path crossing,unmarked pedestrian crossing"
                 },
                 "highway/give_way": {
                     "name": "Yield Sign",
-                    "terms": "give way,yield,sign"
+                    "terms": "give way,sign,yield"
                 },
                 "highway/living_street": {
                     "name": "Living Street",
@@ -7043,7 +7047,7 @@
                 },
                 "highway/motorway_link": {
                     "name": "Motorway Link",
-                    "terms": "exit,ramp,road,street,on ramp,off ramp"
+                    "terms": "exit,off ramp,on ramp,ramp,road,street"
                 },
                 "highway/motorway": {
                     "name": "Motorway",
@@ -7071,7 +7075,7 @@
                 },
                 "highway/primary_link": {
                     "name": "Primary Link",
-                    "terms": "on ramp,off ramp,ramp,road,street"
+                    "terms": "off ramp,on ramp,ramp,road,street"
                 },
                 "highway/primary": {
                     "name": "Primary Road",
@@ -7087,7 +7091,7 @@
                 },
                 "highway/raceway/motocross": {
                     "name": "Motocross Racetrack",
-                    "terms": "off-road racing,offroad moto racing,motocross circuit,motorcycle track,motorsports"
+                    "terms": "motocross circuit,motorcycle track,motorsports,off-road racing,offroad moto racing"
                 },
                 "highway/residential": {
                     "name": "Residential Road",
@@ -7103,7 +7107,7 @@
                 },
                 "highway/secondary_link": {
                     "name": "Secondary Link",
-                    "terms": "on ramp,off ramp,ramp,road,street"
+                    "terms": "off ramp,on ramp,ramp,road,street"
                 },
                 "highway/secondary": {
                     "name": "Secondary Road",
@@ -7135,7 +7139,7 @@
                 },
                 "highway/services": {
                     "name": "Service Area",
-                    "terms": "services,travel plaza,service station"
+                    "terms": "service station,services,travel plaza"
                 },
                 "highway/speed_camera": {
                     "name": "Speed Camera",
@@ -7143,7 +7147,7 @@
                 },
                 "highway/steps": {
                     "name": "Steps",
-                    "terms": "stairs,staircase,stairway"
+                    "terms": "staircase,stairs,stairway"
                 },
                 "highway/steps/conveying": {
                     "name": "Escalator",
@@ -7151,15 +7155,15 @@
                 },
                 "highway/stop": {
                     "name": "Stop Sign",
-                    "terms": "stop,halt,sign"
+                    "terms": "halt,sign,stop"
                 },
                 "highway/street_lamp": {
                     "name": "Street Lamp",
-                    "terms": "streetlight,street light,lamp,light,gaslight"
+                    "terms": "gaslight,lamp,light,street light,streetlight"
                 },
                 "highway/tertiary_link": {
                     "name": "Tertiary Link",
-                    "terms": "on ramp,off ramp,ramp,road,street"
+                    "terms": "off ramp,on ramp,ramp,road,street"
                 },
                 "highway/tertiary": {
                     "name": "Tertiary Road",
@@ -7167,7 +7171,7 @@
                 },
                 "highway/track": {
                     "name": "Unmaintained Track Road",
-                    "terms": "woods road,forest road,logging road,fire road,farm road,agricultural road,ranch road,carriage road,primitive,unmaintained,rut,offroad,4wd,4x4,four wheel drive,atv,quad,jeep,double track,two track"
+                    "terms": "4wd,4x4,agricultural road,atv,carriage road,double track,farm road,fire road,forest road,four wheel drive,jeep,logging road,offroad,primitive,quad,ranch road,rut,two track,unmaintained,woods road"
                 },
                 "highway/traffic_mirror": {
                     "name": "Traffic Mirror",
@@ -7179,11 +7183,11 @@
                 },
                 "highway/trailhead": {
                     "name": "Trailhead",
-                    "terms": "hiking,mile zero,mountain biking,mountaineering,trail endpoint,trail start,staging area,trekking"
+                    "terms": "hiking,mile zero,mountain biking,mountaineering,staging area,trail endpoint,trail start,trekking"
                 },
                 "highway/trunk_link": {
                     "name": "Trunk Link",
-                    "terms": "on ramp,off ramp,ramp,road,street"
+                    "terms": "off ramp,on ramp,ramp,road,street"
                 },
                 "highway/trunk": {
                     "name": "Trunk Road",
@@ -7223,11 +7227,11 @@
                 },
                 "historic/castle/palace": {
                     "name": "Palace",
-                    "terms": "Royal Residence,royal,king,queen"
+                    "terms": "king,queen,royal,Royal Residence"
                 },
                 "historic/castle/stately": {
                     "name": "Château",
-                    "terms": "Historic Country House,Stately Home,nobility,gentry,representative"
+                    "terms": "gentry,Historic Country House,nobility,representative,Stately Home"
                 },
                 "historic/city_gate": {
                     "name": "City Gate",
@@ -7239,15 +7243,15 @@
                 },
                 "historic/manor": {
                     "name": "Manor House",
-                    "terms": "Mansion,gentry,nobility,estate"
+                    "terms": "estate,gentry,Mansion,nobility"
                 },
                 "historic/memorial": {
                     "name": "Memorial",
-                    "terms": "dedicatory,epitaph,remember,remembrance,memory,monument,stolperstein"
+                    "terms": "dedicatory,epitaph,memory,monument,remember,remembrance,stolperstein"
                 },
                 "historic/memorial/plaque": {
                     "name": "Commemorative Plaque",
-                    "terms": "dedicatory,epitaph,historical marker,remember,remembrance,memory"
+                    "terms": "dedicatory,epitaph,historical marker,memory,remember,remembrance"
                 },
                 "historic/monument": {
                     "name": "Monument",
@@ -7271,7 +7275,7 @@
                 },
                 "historic/wreck": {
                     "name": "Shipwreck",
-                    "terms": "hull,mast,maritime,remains,ship,boat"
+                    "terms": "boat,hull,maritime,mast,remains,ship"
                 },
                 "indoor/corridor_line": {
                     "name": "Indoor Corridor",
@@ -7299,7 +7303,7 @@
                 },
                 "indoor/stairs": {
                     "name": "Indoor Stairwell",
-                    "terms": "stair,stairs,staircase,stairway,stairwell,steps"
+                    "terms": "stair,staircase,stairs,stairway,stairwell,steps"
                 },
                 "indoor/wall": {
                     "name": "Indoor Wall",
@@ -7307,7 +7311,7 @@
                 },
                 "internet_access/wlan": {
                     "name": "Wi-Fi Hotspot",
-                    "terms": "wi-fi,wifi,hotspot"
+                    "terms": "hotspot,wi-fi,wifi"
                 },
                 "junction": {
                     "name": "Junction",
@@ -7347,7 +7351,7 @@
                 },
                 "landuse/aquaculture": {
                     "name": "Aquaculture",
-                    "terms": "fish farm,crustacean,algae,aquafarming,shrimp farm,oyster farm,mariculture,algaculture"
+                    "terms": "algaculture,algae,aquafarming,crustacean,fish farm,mariculture,oyster farm,shrimp farm"
                 },
                 "landuse/brownfield": {
                     "name": "Brownfield",
@@ -7399,7 +7403,7 @@
                 },
                 "landuse/greenhouse_horticulture": {
                     "name": "Greenhouse Horticulture",
-                    "terms": "flower,greenhouse,horticulture,grow,vivero"
+                    "terms": "flower,greenhouse,grow,horticulture,vivero"
                 },
                 "landuse/harbour": {
                     "name": "Harbor",
@@ -7439,7 +7443,7 @@
                 },
                 "landuse/military/danger_area": {
                     "name": "Danger Area",
-                    "terms": "air force,army,base,blast,bomb,explo*,force,guard,mine,marine,navy,troop,war"
+                    "terms": "air force,army,base,blast,bomb,explo*,force,guard,marine,mine,navy,troop,war"
                 },
                 "landuse/military/naval_base": {
                     "name": "Naval Base",
@@ -7471,7 +7475,7 @@
                 },
                 "landuse/railway": {
                     "name": "Railway Corridor",
-                    "terms": "rail,train,track"
+                    "terms": "rail,track,train"
                 },
                 "landuse/recreation_ground": {
                     "name": "Recreation Ground",
@@ -7507,7 +7511,7 @@
                 },
                 "leisure/amusement_arcade": {
                     "name": "Amusement Arcade",
-                    "terms": "pay-to-play games,video games,driving simulators,pinball machines"
+                    "terms": "driving simulators,pay-to-play games,pinball machines,video games"
                 },
                 "leisure/bandstand": {
                     "name": "Bandstand",
@@ -7523,7 +7527,7 @@
                 },
                 "leisure/bleachers": {
                     "name": "Bleachers",
-                    "terms": "crowd,bench,sports,stand,stands,seat,seating"
+                    "terms": "bench,crowd,seat,seating,sports,stand,stands"
                 },
                 "leisure/bowling_alley": {
                     "name": "Bowling Alley",
@@ -7539,11 +7543,11 @@
                 },
                 "leisure/dancing_school": {
                     "name": "Dance School",
-                    "terms": "jive,swing,tango,waltz,dance teaching"
+                    "terms": "dance teaching,jive,swing,tango,waltz"
                 },
                 "leisure/disc_golf_course": {
                     "name": "Disc Golf Course",
-                    "terms": "disk golf,frisbee golf,flying disc golf,frolf,ultimate"
+                    "terms": "disk golf,flying disc golf,frisbee golf,frolf,ultimate"
                 },
                 "leisure/dog_park": {
                     "name": "Dog Park",
@@ -7555,7 +7559,7 @@
                 },
                 "leisure/firepit": {
                     "name": "Firepit",
-                    "terms": "fireplace,campfire"
+                    "terms": "campfire,fireplace"
                 },
                 "leisure/fishing": {
                     "name": "Fishing Spot",
@@ -7563,11 +7567,11 @@
                 },
                 "leisure/fitness_centre": {
                     "name": "Gym / Fitness Center",
-                    "terms": "health,gym,leisure,studio"
+                    "terms": "gym,health,leisure,studio"
                 },
                 "leisure/fitness_centre/yoga": {
                     "name": "Yoga Studio",
-                    "terms": "studio,asanas,modern yoga,meditation"
+                    "terms": "asanas,meditation,modern yoga,studio"
                 },
                 "leisure/fitness_station": {
                     "name": "Outdoor Fitness Station",
@@ -7583,11 +7587,11 @@
                 },
                 "leisure/fitness_station/horizontal_bar": {
                     "name": "Exercise Horizontal Bar",
-                    "terms": "bar,chinup,chin up,exercise,fitness,gym,pullup,pull up,trim trail"
+                    "terms": "bar,chin up,chinup,exercise,fitness,gym,pull up,pullup,trim trail"
                 },
                 "leisure/fitness_station/horizontal_ladder": {
                     "name": "Exercise Monkey Bars",
-                    "terms": "bar,chinup,chin up,exercise,fitness,gym,ladder,monkey bars,pullup,pull up,trim trail"
+                    "terms": "bar,chin up,chinup,exercise,fitness,gym,ladder,monkey bars,pull up,pullup,trim trail"
                 },
                 "leisure/fitness_station/hyperextension": {
                     "name": "Hyperextension Station",
@@ -7599,11 +7603,11 @@
                 },
                 "leisure/fitness_station/push-up": {
                     "name": "Push-Up Station",
-                    "terms": "bar,exercise,fitness,gym,pushup,push up,trim trail"
+                    "terms": "bar,exercise,fitness,gym,push up,pushup,trim trail"
                 },
                 "leisure/fitness_station/rings": {
                     "name": "Exercise Rings",
-                    "terms": "exercise,fitness,gym,muscle up,pullup,pull up,trim trail"
+                    "terms": "exercise,fitness,gym,muscle up,pull up,pullup,trim trail"
                 },
                 "leisure/fitness_station/sign": {
                     "name": "Exercise Instruction Sign",
@@ -7611,7 +7615,7 @@
                 },
                 "leisure/fitness_station/sit-up": {
                     "name": "Sit-Up Station",
-                    "terms": "crunch,exercise,fitness,gym,situp,sit up,trim trail"
+                    "terms": "crunch,exercise,fitness,gym,sit up,situp,trim trail"
                 },
                 "leisure/fitness_station/stairs": {
                     "name": "Exercise Stairs",
@@ -7627,7 +7631,7 @@
                 },
                 "leisure/hackerspace": {
                     "name": "Hackerspace",
-                    "terms": "makerspace,hackspace,hacklab"
+                    "terms": "hacklab,hackspace,makerspace"
                 },
                 "leisure/horse_riding": {
                     "name": "Horseback Riding Facility",
@@ -7635,7 +7639,7 @@
                 },
                 "leisure/ice_rink": {
                     "name": "Ice Rink",
-                    "terms": "hockey,skating,curling"
+                    "terms": "curling,hockey,skating"
                 },
                 "leisure/marina": {
                     "name": "Marina",
@@ -7651,7 +7655,7 @@
                 },
                 "leisure/outdoor_seating": {
                     "name": "Outdoor Seating Area",
-                    "terms": "al fresco,beer garden,dining,cafe,restaurant,pub,bar,patio"
+                    "terms": "al fresco,bar,beer garden,cafe,dining,patio,pub,restaurant"
                 },
                 "leisure/park": {
                     "name": "Park",
@@ -7663,7 +7667,7 @@
                 },
                 "leisure/picnic_table/chess": {
                     "name": "Chess Table",
-                    "terms": "bench,chess board,checkerboard,checkers,chequerboard,game table"
+                    "terms": "bench,checkerboard,checkers,chequerboard,chess board,game table"
                 },
                 "leisure/pitch": {
                     "name": "Sport Pitch",
@@ -7675,7 +7679,7 @@
                 },
                 "leisure/pitch/australian_football": {
                     "name": "Australian Football Field",
-                    "terms": "Aussie,AFL,football"
+                    "terms": "AFL,Aussie,football"
                 },
                 "leisure/pitch/badminton": {
                     "name": "Badminton Court",
@@ -7743,11 +7747,11 @@
                 },
                 "leisure/pitch/softball": {
                     "name": "Softball Field",
-                    "terms": "softball,diamond"
+                    "terms": "diamond,softball"
                 },
                 "leisure/pitch/table_tennis": {
                     "name": "Ping Pong Table",
-                    "terms": "table tennis,ping pong"
+                    "terms": "ping pong,table tennis"
                 },
                 "leisure/pitch/tennis": {
                     "name": "Tennis Court",
@@ -7771,11 +7775,11 @@
                 },
                 "leisure/slipway_point": {
                     "name": "Slipway",
-                    "terms": "boat launch,boat ramp,boat landing"
+                    "terms": "boat landing,boat launch,boat ramp"
                 },
                 "leisure/slipway": {
                     "name": "Slipway",
-                    "terms": "boat launch,boat ramp,boat landing"
+                    "terms": "boat landing,boat launch,boat ramp"
                 },
                 "leisure/sports_centre": {
                     "name": "Sports Center / Complex",
@@ -7783,7 +7787,7 @@
                 },
                 "leisure/sports_centre/climbing": {
                     "name": "Climbing Gym",
-                    "terms": "abseiling,artificial climbing wall,belaying,bouldering,rock climbing facility,indoor rock wall,rappeling,rock gym,ropes"
+                    "terms": "abseiling,artificial climbing wall,belaying,bouldering,indoor rock wall,rappeling,rock climbing facility,rock gym,ropes"
                 },
                 "leisure/sports_centre/swimming": {
                     "name": "Swimming Pool Facility",
@@ -7795,11 +7799,11 @@
                 },
                 "leisure/swimming_area": {
                     "name": "Natural Swimming Area",
-                    "terms": "dive,water,aquatics"
+                    "terms": "aquatics,dive,water"
                 },
                 "leisure/swimming_pool": {
                     "name": "Swimming Pool",
-                    "terms": "dive,water,aquatics"
+                    "terms": "aquatics,dive,water"
                 },
                 "leisure/track": {
                     "name": "Racetrack (Non-Motorsport)",
@@ -7815,11 +7819,11 @@
                 },
                 "leisure/track/horse_racing_point": {
                     "name": "Horse Racing Track",
-                    "terms": "equestrian race track,horse race betting,horseracing,horsetrack,horse racetrack"
+                    "terms": "equestrian race track,horse race betting,horse racetrack,horseracing,horsetrack"
                 },
                 "leisure/track/horse_racing": {
                     "name": "Horse Racing Track",
-                    "terms": "equestrian race track,horse race betting,horseracing,horsetrack,horse racetrack"
+                    "terms": "equestrian race track,horse race betting,horse racetrack,horseracing,horsetrack"
                 },
                 "leisure/track/running_point": {
                     "name": "Running Track",
@@ -7831,7 +7835,7 @@
                 },
                 "leisure/water_park": {
                     "name": "Water Park",
-                    "terms": "swim,pool,dive"
+                    "terms": "dive,pool,swim"
                 },
                 "line": {
                     "name": "Line",
@@ -7843,7 +7847,7 @@
                 },
                 "man_made/antenna": {
                     "name": "Antenna",
-                    "terms": "broadcast,cell phone,cell,communication,mobile phone,radio,television,transmission,tv"
+                    "terms": "broadcast,cell,cell phone,communication,mobile phone,radio,television,transmission,tv"
                 },
                 "man_made/beacon": {
                     "name": "Beacon",
@@ -7867,7 +7871,7 @@
                 },
                 "man_made/cairn": {
                     "name": "Cairn",
-                    "terms": "rock pile,stone stack,stone pile,càrn"
+                    "terms": "càrn,rock pile,stone pile,stone stack"
                 },
                 "man_made/chimney": {
                     "name": "Chimney",
@@ -7939,7 +7943,7 @@
                 },
                 "man_made/monitoring_station": {
                     "name": "Monitoring Station",
-                    "terms": "weather,earthquake,seismology,air,gps"
+                    "terms": "air,earthquake,gps,seismology,weather"
                 },
                 "man_made/obelisk": {
                     "name": "Obelisk",
@@ -7951,7 +7955,7 @@
                 },
                 "man_made/petroleum_well": {
                     "name": "Oil Well",
-                    "terms": "drilling rig,oil derrick,oil drill,oil horse,oil rig,oil pump,petroleum well,pumpjack"
+                    "terms": "drilling rig,oil derrick,oil drill,oil horse,oil pump,oil rig,petroleum well,pumpjack"
                 },
                 "man_made/pier": {
                     "name": "Pier",
@@ -7963,15 +7967,15 @@
                 },
                 "man_made/pipeline": {
                     "name": "Pipeline",
-                    "terms": "oil,natural gas,water,sewer,sewage"
+                    "terms": "natural gas,oil,sewage,sewer,water"
                 },
                 "man_made/pipeline/underground": {
                     "name": "Underground Pipeline",
-                    "terms": "oil,natural gas,water,sewer,sewage"
+                    "terms": "natural gas,oil,sewage,sewer,water"
                 },
                 "man_made/pipeline/valve": {
                     "name": "Pipeline Valve",
-                    "terms": "oil,natural gas,water,sewer,sewage"
+                    "terms": "natural gas,oil,sewage,sewer,water"
                 },
                 "man_made/pumping_station": {
                     "name": "Pumping Station",
@@ -7979,11 +7983,11 @@
                 },
                 "man_made/silo": {
                     "name": "Silo",
-                    "terms": "grain,corn,wheat"
+                    "terms": "corn,grain,wheat"
                 },
                 "man_made/storage_tank": {
                     "name": "Storage Tank",
-                    "terms": "water,oil,gas,petrol"
+                    "terms": "gas,oil,petrol,water"
                 },
                 "man_made/storage_tank/water": {
                     "name": "Water Tank",
@@ -7995,15 +7999,15 @@
                 },
                 "man_made/surveillance": {
                     "name": "Surveillance",
-                    "terms": "anpr,alpr,camera,car plate recognition,cctv,guard,license plate recognition,monitoring,number plate recognition,security,video,webcam"
+                    "terms": "alpr,anpr,camera,car plate recognition,cctv,guard,license plate recognition,monitoring,number plate recognition,security,video,webcam"
                 },
                 "man_made/surveillance/camera": {
                     "name": "Surveillance Camera",
-                    "terms": "anpr,alpr,camera,car plate recognition,cctv,guard,license plate recognition,monitoring,number plate recognition,security,video,webcam"
+                    "terms": "alpr,anpr,camera,car plate recognition,cctv,guard,license plate recognition,monitoring,number plate recognition,security,video,webcam"
                 },
                 "man_made/survey_point": {
                     "name": "Survey Point",
-                    "terms": "trig point,triangulation pillar,trigonometrical station"
+                    "terms": "triangulation pillar,trig point,trigonometrical station"
                 },
                 "man_made/torii": {
                     "name": "Torii",
@@ -8023,7 +8027,7 @@
                 },
                 "man_made/tower/defensive": {
                     "name": "Fortified Tower",
-                    "terms": "Defensive Tower,Castle Tower"
+                    "terms": "Castle Tower,Defensive Tower"
                 },
                 "man_made/tower/minaret": {
                     "name": "Minaret",
@@ -8031,7 +8035,7 @@
                 },
                 "man_made/tower/observation": {
                     "name": "Observation Tower",
-                    "terms": "lookout tower,fire tower"
+                    "terms": "fire tower,lookout tower"
                 },
                 "man_made/tunnel": {
                     "name": "Tunnel",
@@ -8043,7 +8047,7 @@
                 },
                 "man_made/wastewater_plant": {
                     "name": "Wastewater Plant",
-                    "terms": "sewage*,water treatment plant,reclamation plant"
+                    "terms": "reclamation plant,sewage*,water treatment plant"
                 },
                 "man_made/water_tower": {
                     "name": "Water Tower",
@@ -8059,27 +8063,27 @@
                 },
                 "man_made/watermill": {
                     "name": "Watermill",
-                    "terms": "water,wheel,mill"
+                    "terms": "mill,water,wheel"
                 },
                 "man_made/windmill": {
                     "name": "Windmill",
-                    "terms": "wind,wheel,mill"
+                    "terms": "mill,wheel,wind"
                 },
                 "man_made/works": {
                     "name": "Factory",
-                    "terms": "assembly,build,brewery,car,plant,plastic,processing,manufacture,refinery"
+                    "terms": "assembly,brewery,build,car,manufacture,plant,plastic,processing,refinery"
                 },
                 "manhole": {
                     "name": "Manhole",
-                    "terms": "cover,hole,sewer,sewage,telecom"
+                    "terms": "cover,hole,sewage,sewer,telecom"
                 },
                 "manhole/drain": {
                     "name": "Storm Drain",
-                    "terms": "cover,drain,hole,rain,sewer,sewage,storm"
+                    "terms": "cover,drain,hole,rain,sewage,sewer,storm"
                 },
                 "manhole/telecom": {
                     "name": "Telecom Manhole",
-                    "terms": "cover,phone,hole,telecom,telephone,bt"
+                    "terms": "bt,cover,hole,phone,telecom,telephone"
                 },
                 "military/bunker": {
                     "name": "Military Bunker",
@@ -8119,7 +8123,7 @@
                 },
                 "natural/cave_entrance": {
                     "name": "Cave Entrance",
-                    "terms": "cavern,hollow,grotto,shelter,cavity"
+                    "terms": "cavern,cavity,grotto,hollow,shelter"
                 },
                 "natural/cliff": {
                     "name": "Cliff",
@@ -8163,11 +8167,11 @@
                 },
                 "natural/rock": {
                     "name": "Attached Rock / Boulder",
-                    "terms": "boulder,stone,rock"
+                    "terms": "boulder,rock,stone"
                 },
                 "natural/saddle": {
                     "name": "Saddle",
-                    "terms": "pass,mountain pass,top"
+                    "terms": "mountain pass,pass,top"
                 },
                 "natural/sand": {
                     "name": "Sand",
@@ -8191,7 +8195,7 @@
                 },
                 "natural/stone": {
                     "name": "Unattached Stone / Boulder",
-                    "terms": "boulder,stone,rock"
+                    "terms": "boulder,rock,stone"
                 },
                 "natural/tree_row": {
                     "name": "Tree Row",
@@ -8203,11 +8207,11 @@
                 },
                 "natural/valley": {
                     "name": "Valley",
-                    "terms": "canyon,dale,dell,dene,depression,glen,gorge,gully,gulley,gultch,hollow,ravine,rift,vale"
+                    "terms": "canyon,dale,dell,dene,depression,glen,gorge,gulley,gully,gultch,hollow,ravine,rift,vale"
                 },
                 "natural/volcano": {
                     "name": "Volcano",
-                    "terms": "mountain,crater"
+                    "terms": "crater,mountain"
                 },
                 "natural/water": {
                     "name": "Water",
@@ -8231,7 +8235,7 @@
                 },
                 "natural/water/pond": {
                     "name": "Pond",
-                    "terms": "lakelet,millpond,tarn,pool,mere"
+                    "terms": "lakelet,mere,millpond,pool,tarn"
                 },
                 "natural/water/reservoir": {
                     "name": "Reservoir",
@@ -8247,7 +8251,7 @@
                 },
                 "natural/water/wastewater": {
                     "name": "Wastewater Basin",
-                    "terms": "excrement,shit,sewage,wastewater,Settling Basin,Clarifier Basin"
+                    "terms": "Clarifier Basin,excrement,Settling Basin,sewage,shit,wastewater"
                 },
                 "natural/wetland": {
                     "name": "Wetland",
@@ -8259,7 +8263,7 @@
                 },
                 "noexit/yes": {
                     "name": "No Exit",
-                    "terms": "no exit,road end,dead end"
+                    "terms": "dead end,no exit,road end"
                 },
                 "office": {
                     "name": "Office",
@@ -8347,7 +8351,7 @@
                 },
                 "office/financial_advisor": {
                     "name": "Financial Advisor",
-                    "terms": "401k,inheritance,savings,stocks,retirement,wealth management"
+                    "terms": "401k,inheritance,retirement,savings,stocks,wealth management"
                 },
                 "office/financial": {
                     "name": "Financial Office",
@@ -8367,7 +8371,7 @@
                 },
                 "office/government/register_office": {
                     "name": "Register Office",
-                    "terms": "clerk,marriage,death,birth,certificate"
+                    "terms": "birth,certificate,clerk,death,marriage"
                 },
                 "office/government/tax": {
                     "name": "Tax and Revenue Office",
@@ -8403,7 +8407,7 @@
                 },
                 "office/ngo": {
                     "name": "NGO Office",
-                    "terms": "ngo,non government,non-government,organization,organisation"
+                    "terms": "ngo,non government,non-government,organisation,organization"
                 },
                 "office/notary": {
                     "name": "Notary Office",
@@ -8415,11 +8419,11 @@
                 },
                 "office/private_investigator": {
                     "name": "Private Investigator Office",
-                    "terms": "PI,private eye,private detective"
+                    "terms": "PI,private detective,private eye"
                 },
                 "office/quango": {
                     "name": "Quasi-NGO Office",
-                    "terms": "ngo,non government,non-government,organization,organisation,quasi autonomous,quasi-autonomous"
+                    "terms": "ngo,non government,non-government,organisation,organization,quasi autonomous,quasi-autonomous"
                 },
                 "office/religion": {
                     "name": "Religious Office",
@@ -8447,43 +8451,43 @@
                 },
                 "office/water_utility": {
                     "name": "Water Utility Office",
-                    "terms": "water board,utility"
+                    "terms": "utility,water board"
                 },
                 "piste/downhill": {
                     "name": "Downhill Piste/Ski Run",
-                    "terms": "ski,alpine,snowboard,downhill,piste"
+                    "terms": "alpine,downhill,piste,ski,snowboard"
                 },
                 "piste/downhill/halfpipe": {
                     "name": "Halfpipe",
-                    "terms": "ski,alpine,halfpipe,half pipe,snowboard,downhill,piste"
+                    "terms": "alpine,downhill,half pipe,halfpipe,piste,ski,snowboard"
                 },
                 "piste/hike": {
                     "name": "Snowshoeing or Winter Hiking Trail",
-                    "terms": "hike,winter hiking,snowshoe,snowshoeing,piste,ski"
+                    "terms": "hike,piste,ski,snowshoe,snowshoeing,winter hiking"
                 },
                 "piste/ice_skate": {
                     "name": "Ice Skating Piste",
-                    "terms": "ice,skating,ski,piste"
+                    "terms": "ice,piste,skating,ski"
                 },
                 "piste/nordic": {
                     "name": "Nordic or Crosscountry Piste/Ski Trail",
-                    "terms": "ski,nordic,crosscountry,skating,piste"
+                    "terms": "crosscountry,nordic,piste,skating,ski"
                 },
                 "piste/piste": {
                     "name": "Winter Sport Trails",
-                    "terms": "ski,nordic,crosscountry,downhill,alpine,snowboard,skitour,ski touring,sled,luge,sleigh,sledge,ski-joring,husky,horse,winter hiking,snowshoe,snowshoeing,ice,skating"
+                    "terms": "alpine,crosscountry,downhill,horse,husky,ice,luge,nordic,skating,ski,ski touring,ski-joring,skitour,sled,sledge,sleigh,snowboard,snowshoe,snowshoeing,winter hiking"
                 },
                 "piste/skitour": {
                     "name": "Ski Touring Trail",
-                    "terms": "ski,skitour,crosscountry,ski touring,piste"
+                    "terms": "crosscountry,piste,ski,ski touring,skitour"
                 },
                 "piste/sled": {
                     "name": "Sled Piste",
-                    "terms": "ski,sled,luge,sleigh,sledge,piste"
+                    "terms": "luge,piste,ski,sled,sledge,sleigh"
                 },
                 "piste/sleigh": {
                     "name": "Sleigh Piste",
-                    "terms": "ski,piste,sled,luge,sleigh,sledge,ski-joring,husky,horse"
+                    "terms": "horse,husky,luge,piste,ski,ski-joring,sled,sledge,sleigh"
                 },
                 "place/farm": {
                     "name": "Farm",
@@ -8523,7 +8527,7 @@
                 },
                 "place/plot": {
                     "name": "Plot",
-                    "terms": "tract,land,lot,parcel"
+                    "terms": "land,lot,parcel,tract"
                 },
                 "place/quarter": {
                     "name": "Sub-Borough / Quarter",
@@ -8627,7 +8631,7 @@
                 },
                 "power/generator/source/hydro": {
                     "name": "Water Turbine",
-                    "terms": "dam,generator,francis turbine,hydroelectricity,kaplan turbine,pelton turbine"
+                    "terms": "dam,francis turbine,generator,hydroelectricity,kaplan turbine,pelton turbine"
                 },
                 "power/generator/source/nuclear": {
                     "name": "Nuclear Reactor",
@@ -8635,11 +8639,11 @@
                 },
                 "power/generator/source/wind": {
                     "name": "Wind Turbine",
-                    "terms": "generator,turbine,windmill,wind"
+                    "terms": "generator,turbine,wind,windmill"
                 },
                 "power/line": {
                     "name": "Power Line",
-                    "terms": "electric power transmission line,high voltage line,high tension line"
+                    "terms": "electric power transmission line,high tension line,high voltage line"
                 },
                 "power/minor_line": {
                     "name": "Minor Power Line",
@@ -8687,7 +8691,7 @@
                 },
                 "public_transport/platform/light_rail_point": {
                     "name": "Light Rail Stop / Platform",
-                    "terms": "electric,light rail,platform,public transit,public transportation,rail,track,tram,trolley,transit,transportation"
+                    "terms": "electric,light rail,platform,public transit,public transportation,rail,track,tram,transit,transportation,trolley"
                 },
                 "public_transport/platform/monorail_point": {
                     "name": "Monorail Stop / Platform",
@@ -8719,7 +8723,7 @@
                 },
                 "public_transport/platform/light_rail": {
                     "name": "Light Rail Platform",
-                    "terms": "electric,light rail,platform,public transit,public transportation,rail,track,tram,trolley,transit,transportation"
+                    "terms": "electric,light rail,platform,public transit,public transportation,rail,track,tram,transit,transportation,trolley"
                 },
                 "public_transport/platform/monorail": {
                     "name": "Monorail Platform",
@@ -8735,19 +8739,19 @@
                 },
                 "public_transport/platform/tram_point": {
                     "name": "Tram Stop / Platform",
-                    "terms": "electric,light rail,platform,public transit,public transportation,rail,streetcar,track,tram,trolley,transit,transportation"
+                    "terms": "electric,light rail,platform,public transit,public transportation,rail,streetcar,track,tram,transit,transportation,trolley"
                 },
                 "public_transport/platform/tram": {
                     "name": "Tram Platform",
-                    "terms": "electric,light rail,platform,public transit,public transportation,rail,streetcar,track,tram,trolley,transit,transportation"
+                    "terms": "electric,light rail,platform,public transit,public transportation,rail,streetcar,track,tram,transit,transportation,trolley"
                 },
                 "public_transport/platform/trolleybus_point": {
                     "name": "Trolleybus Stop",
-                    "terms": "bus,electric,platform,public transit,public transportation,streetcar,trackless,tram,trolley,transit,transportation"
+                    "terms": "bus,electric,platform,public transit,public transportation,streetcar,trackless,tram,transit,transportation,trolley"
                 },
                 "public_transport/platform/trolleybus": {
                     "name": "Trolleybus Platform",
-                    "terms": "bus,electric,platform,public transit,public transportation,streetcar,trackless,tram,trolley,transit,transportation"
+                    "terms": "bus,electric,platform,public transit,public transportation,streetcar,trackless,tram,transit,transportation,trolley"
                 },
                 "public_transport/station_aerialway": {
                     "name": "Aerialway Station",
@@ -8763,7 +8767,7 @@
                 },
                 "public_transport/station_light_rail": {
                     "name": "Light Rail Station",
-                    "terms": "electric,light rail,public transit,public transportation,rail,station,terminal,track,tram,trolley,transit,transportation"
+                    "terms": "electric,light rail,public transit,public transportation,rail,station,terminal,track,tram,transit,transportation,trolley"
                 },
                 "public_transport/station_monorail": {
                     "name": "Monorail Station",
@@ -8783,11 +8787,11 @@
                 },
                 "public_transport/station_tram": {
                     "name": "Tram Station",
-                    "terms": "electric,light rail,public transit,public transportation,rail,station,streetcar,terminal,track,tram,trolley,transit,transportation"
+                    "terms": "electric,light rail,public transit,public transportation,rail,station,streetcar,terminal,track,tram,transit,transportation,trolley"
                 },
                 "public_transport/station_trolleybus": {
                     "name": "Trolleybus Station / Terminal",
-                    "terms": "bus,electric,public transit,public transportation,station,streetcar,terminal,trackless,tram,trolley,transit,transportation"
+                    "terms": "bus,electric,public transit,public transportation,station,streetcar,terminal,trackless,tram,transit,transportation,trolley"
                 },
                 "public_transport/station": {
                     "name": "Transit Station",
@@ -8811,7 +8815,7 @@
                 },
                 "public_transport/stop_position_light_rail": {
                     "name": "Light Rail Stopping Location",
-                    "terms": "electric,light rail,public transit,public transportation,rail,track,tram,trolley,transit,transportation"
+                    "terms": "electric,light rail,public transit,public transportation,rail,track,tram,transit,transportation,trolley"
                 },
                 "public_transport/stop_position_monorail": {
                     "name": "Monorail Stopping Location",
@@ -8827,11 +8831,11 @@
                 },
                 "public_transport/stop_position_tram": {
                     "name": "Tram Stopping Location",
-                    "terms": "electric,light rail,public transit,public transportation,rail,streetcar,track,tram,trolley,transit,transportation"
+                    "terms": "electric,light rail,public transit,public transportation,rail,streetcar,track,tram,transit,transportation,trolley"
                 },
                 "public_transport/stop_position_trolleybus": {
                     "name": "Trolleybus Stopping Location",
-                    "terms": "bus,electric,public transit,public transportation,streetcar,trackless,tram,trolley,transit,transportation"
+                    "terms": "bus,electric,public transit,public transportation,streetcar,trackless,tram,transit,transportation,trolley"
                 },
                 "public_transport/stop_position": {
                     "name": "Transit Stopping Location",
@@ -8839,7 +8843,7 @@
                 },
                 "railway/halt": {
                     "name": "Train Station (Halt / Request)",
-                    "terms": "break,interrupt,rest,wait,interruption"
+                    "terms": "break,interrupt,interruption,rest,wait"
                 },
                 "railway/platform": {
                     "name": "Train Platform",
@@ -8847,7 +8851,7 @@
                 },
                 "railway/station": {
                     "name": "Train Station",
-                    "terms": "train station,station"
+                    "terms": "station,train station"
                 },
                 "railway/tram_stop": {
                     "name": "Tram Stopping Position",
@@ -8859,7 +8863,7 @@
                 },
                 "railway/buffer_stop": {
                     "name": "Buffer Stop",
-                    "terms": "stop,halt,buffer"
+                    "terms": "buffer,halt,stop"
                 },
                 "railway/construction": {
                     "name": "Railway Under Construction",
@@ -8867,7 +8871,7 @@
                 },
                 "railway/crossing": {
                     "name": "Railway Crossing (Path)",
-                    "terms": "crossing,pedestrian crossing,railroad crossing,level crossing,grade crossing,path through railroad,train crossing"
+                    "terms": "crossing,grade crossing,level crossing,path through railroad,pedestrian crossing,railroad crossing,train crossing"
                 },
                 "railway/derail": {
                     "name": "Railway Derailer",
@@ -8879,11 +8883,11 @@
                 },
                 "railway/funicular": {
                     "name": "Funicular",
-                    "terms": "venicular,cliff railway,cable car,cable railway,funicular railway"
+                    "terms": "cable car,cable railway,cliff railway,funicular railway,venicular"
                 },
                 "railway/level_crossing": {
                     "name": "Railway Crossing (Road)",
-                    "terms": "crossing,railroad crossing,level crossing,grade crossing,road through railroad,train crossing"
+                    "terms": "crossing,grade crossing,level crossing,railroad crossing,road through railroad,train crossing"
                 },
                 "railway/light_rail": {
                     "name": "Light Rail",
@@ -8891,11 +8895,11 @@
                 },
                 "railway/milestone": {
                     "name": "Railway Milestone",
-                    "terms": "milestone,marker"
+                    "terms": "marker,milestone"
                 },
                 "railway/miniature": {
                     "name": "Miniature Railway",
-                    "terms": "rideable miniature railway,narrow gauge railway,minimum gauge railway"
+                    "terms": "minimum gauge railway,narrow gauge railway,rideable miniature railway"
                 },
                 "railway/monorail": {
                     "name": "Monorail",
@@ -8903,7 +8907,7 @@
                 },
                 "railway/narrow_gauge": {
                     "name": "Narrow Gauge Rail",
-                    "terms": "narrow gauge railway,narrow gauge railroad"
+                    "terms": "narrow gauge railroad,narrow gauge railway"
                 },
                 "railway/rail": {
                     "name": "Rail",
@@ -8915,7 +8919,7 @@
                 },
                 "railway/signal": {
                     "name": "Railway Signal",
-                    "terms": "signal,lights"
+                    "terms": "lights,signal"
                 },
                 "railway/subway_entrance": {
                     "name": "Subway Entrance",
@@ -8927,11 +8931,11 @@
                 },
                 "railway/switch": {
                     "name": "Railway Switch",
-                    "terms": "switch,points"
+                    "terms": "points,switch"
                 },
                 "railway/train_wash": {
                     "name": "Train Wash",
-                    "terms": "wash,clean"
+                    "terms": "clean,wash"
                 },
                 "railway/tram": {
                     "name": "Tram",
@@ -8947,27 +8951,27 @@
                 },
                 "seamark/beacon_isolated_danger": {
                     "name": "Danger Beacon",
-                    "terms": "beacon isolated danger,isolated danger beacon,iala"
+                    "terms": "beacon isolated danger,iala,isolated danger beacon"
                 },
                 "seamark/beacon_lateral": {
                     "name": "Channel Beacon",
-                    "terms": "lateral beacon,beacon lateral,cevni,channel marker,iala,lateral mark"
+                    "terms": "beacon lateral,cevni,channel marker,iala,lateral beacon,lateral mark"
                 },
                 "seamark/buoy_lateral": {
                     "name": "Channel Buoy",
-                    "terms": "lateral buoy,buoy lateral,cevni,channel marker,iala,lateral mark"
+                    "terms": "buoy lateral,cevni,channel marker,iala,lateral buoy,lateral mark"
                 },
                 "seamark/buoy_lateral/green": {
                     "name": "Green Buoy",
-                    "terms": "lateral buoy,buoy lateral,cevni,channel marker,iala,lateral mark"
+                    "terms": "buoy lateral,cevni,channel marker,iala,lateral buoy,lateral mark"
                 },
                 "seamark/buoy_lateral/red": {
                     "name": "Red Buoy",
-                    "terms": "lateral buoy,buoy lateral,cevni,channel marker,iala,lateral mark"
+                    "terms": "buoy lateral,cevni,channel marker,iala,lateral buoy,lateral mark"
                 },
                 "seamark/mooring": {
                     "name": "Mooring",
-                    "terms": "dolphin,pile,bollard,buoy,post"
+                    "terms": "bollard,buoy,dolphin,pile,post"
                 },
                 "shop": {
                     "name": "Shop",
@@ -8995,7 +8999,7 @@
                 },
                 "shop/agrarian": {
                     "name": "Farm Supply Shop",
-                    "terms": "agricultural inputs,agricultural machines,seeds,pesticides,fertilizer,agricultural tools"
+                    "terms": "agricultural inputs,agricultural machines,agricultural tools,fertilizer,pesticides,seeds"
                 },
                 "shop/alcohol": {
                     "name": "Liquor Store",
@@ -9003,7 +9007,7 @@
                 },
                 "shop/anime": {
                     "name": "Anime Shop",
-                    "terms": "manga,japan,cosplay,figurine,dakimakura"
+                    "terms": "cosplay,dakimakura,figurine,japan,manga"
                 },
                 "shop/antiques": {
                     "name": "Antiques Shop",
@@ -9035,7 +9039,7 @@
                 },
                 "shop/beauty": {
                     "name": "Beauty Shop",
-                    "terms": "spa,salon,tanning"
+                    "terms": "salon,spa,tanning"
                 },
                 "shop/beauty/nails": {
                     "name": "Nail Salon",
@@ -9071,7 +9075,7 @@
                 },
                 "shop/butcher": {
                     "name": "Butcher",
-                    "terms": "chicken,beef,lamb,meat,pork"
+                    "terms": "beef,chicken,lamb,meat,pork"
                 },
                 "shop/candles": {
                     "name": "Candle Shop",
@@ -9107,7 +9111,7 @@
                 },
                 "shop/charity": {
                     "name": "Charity Store",
-                    "terms": "thrift,op shop,nonprofit"
+                    "terms": "nonprofit,op shop,thrift"
                 },
                 "shop/cheese": {
                     "name": "Cheese Store",
@@ -9127,7 +9131,7 @@
                 },
                 "shop/clothes/underwear": {
                     "name": "Underwear Store",
-                    "terms": "boutique,bras,brassieres,briefs,boxers,fashion,lingerie,panties,slips,socks,stockings,underclothes,undergarments,underpants,undies"
+                    "terms": "boutique,boxers,bras,brassieres,briefs,fashion,lingerie,panties,slips,socks,stockings,underclothes,undergarments,underpants,undies"
                 },
                 "shop/coffee": {
                     "name": "Coffee Store",
@@ -9135,7 +9139,7 @@
                 },
                 "shop/computer": {
                     "name": "Computer Store",
-                    "terms": "desktop,laptop,hardware,operating system,software"
+                    "terms": "desktop,hardware,laptop,operating system,software"
                 },
                 "shop/confectionery": {
                     "name": "Candy Store",
@@ -9159,7 +9163,7 @@
                 },
                 "shop/craft": {
                     "name": "Arts and Crafts Store",
-                    "terms": "art*,paint*,frame"
+                    "terms": "art*,frame,paint*"
                 },
                 "shop/curtain": {
                     "name": "Curtain Store",
@@ -9167,7 +9171,7 @@
                 },
                 "shop/dairy": {
                     "name": "Dairy Store",
-                    "terms": "milk,egg,cheese"
+                    "terms": "cheese,egg,milk"
                 },
                 "shop/deli": {
                     "name": "Deli",
@@ -9195,11 +9199,11 @@
                 },
                 "shop/erotic": {
                     "name": "Erotic Store",
-                    "terms": "sex,porn"
+                    "terms": "porn,sex"
                 },
                 "shop/erotic/lgbtq": {
                     "name": "LGBTQ+ Erotic Store",
-                    "terms": "sex,porn"
+                    "terms": "porn,sex"
                 },
                 "shop/fabric": {
                     "name": "Fabric Store",
@@ -9215,7 +9219,7 @@
                 },
                 "shop/fireplace": {
                     "name": "Fireplace Store",
-                    "terms": "fireplace,stove,masonry heater"
+                    "terms": "fireplace,masonry heater,stove"
                 },
                 "shop/fishing": {
                     "name": "Fishing Shop",
@@ -9227,7 +9231,7 @@
                 },
                 "shop/frame": {
                     "name": "Framing Shop",
-                    "terms": "art*,paint*,photo*,frame"
+                    "terms": "art*,frame,paint*,photo*"
                 },
                 "shop/frozen_food": {
                     "name": "Frozen Food",
@@ -9239,7 +9243,7 @@
                 },
                 "shop/funeral_directors": {
                     "name": "Funeral Home",
-                    "terms": "undertaker,memorial home"
+                    "terms": "memorial home,undertaker"
                 },
                 "shop/furniture": {
                     "name": "Furniture Store",
@@ -9271,7 +9275,7 @@
                 },
                 "shop/hairdresser_supply": {
                     "name": "Hairdresser Supply Store",
-                    "terms": "barber,shampoo,conditioner"
+                    "terms": "barber,conditioner,shampoo"
                 },
                 "shop/hairdresser": {
                     "name": "Hairdresser",
@@ -9283,7 +9287,7 @@
                 },
                 "shop/health_food": {
                     "name": "Health Food Shop",
-                    "terms": "wholefood,vitamins,vegetarian,vegan"
+                    "terms": "vegan,vegetarian,vitamins,wholefood"
                 },
                 "shop/hearing_aids": {
                     "name": "Hearing Aids Store",
@@ -9299,7 +9303,7 @@
                 },
                 "shop/hobby": {
                     "name": "Hobby Shop",
-                    "terms": "manga,figurine,model"
+                    "terms": "figurine,manga,model"
                 },
                 "shop/houseware": {
                     "name": "Houseware Store",
@@ -9315,7 +9319,7 @@
                 },
                 "shop/jewelry": {
                     "name": "Jewelry Store",
-                    "terms": "bracelet,diamond,earrings,gem,gold,jeweler,jewellery,jeweller,necklace,pins,ring,silver"
+                    "terms": "bracelet,diamond,earrings,gem,gold,jeweler,jeweller,jewellery,necklace,pins,ring,silver"
                 },
                 "shop/kiosk": {
                     "name": "Kiosk",
@@ -9331,7 +9335,7 @@
                 },
                 "shop/laundry/self_service": {
                     "name": "Self-Service Laundry",
-                    "terms": "Coin Laundry,Laundromat,Coin Wash,Launderette,Washateria"
+                    "terms": "Coin Laundry,Coin Wash,Launderette,Laundromat,Washateria"
                 },
                 "shop/leather": {
                     "name": "Leather Store",
@@ -9363,7 +9367,7 @@
                 },
                 "shop/military_surplus": {
                     "name": "Military Surplus Store",
-                    "terms": "armor,army-navy store,army surplus,navy surplus,tactical gear,war surplus shop,weapons"
+                    "terms": "armor,army surplus,army-navy store,navy surplus,tactical gear,war surplus shop,weapons"
                 },
                 "shop/mobile_phone": {
                     "name": "Mobile Phone Store",
@@ -9383,7 +9387,7 @@
                 },
                 "shop/music": {
                     "name": "Music Store",
-                    "terms": "tape casettes,CDs,compact discs,vinyl records"
+                    "terms": "CDs,compact discs,tape casettes,vinyl records"
                 },
                 "shop/musical_instrument": {
                     "name": "Musical Instrument Store",
@@ -9407,7 +9411,7 @@
                 },
                 "shop/outdoor": {
                     "name": "Outdoors Store",
-                    "terms": "camping,climbing,hiking,outfitter,outdoor equipment,outdoor supplies"
+                    "terms": "camping,climbing,hiking,outdoor equipment,outdoor supplies,outfitter"
                 },
                 "shop/outpost": {
                     "name": "Online Retailer Outpost",
@@ -9423,7 +9427,7 @@
                 },
                 "shop/pastry": {
                     "name": "Pastry Shop",
-                    "terms": "patisserie,cake shop,cakery"
+                    "terms": "cake shop,cakery,patisserie"
                 },
                 "shop/pawnbroker": {
                     "name": "Pawn Shop",
@@ -9475,7 +9479,7 @@
                 },
                 "shop/second_hand": {
                     "name": "Consignment/Thrift Store",
-                    "terms": "secondhand,second hand,resale,thrift,used"
+                    "terms": "resale,second hand,secondhand,thrift,used"
                 },
                 "shop/sewing": {
                     "name": "Sewing Supply Shop",
@@ -9499,7 +9503,7 @@
                 },
                 "shop/supermarket": {
                     "name": "Supermarket",
-                    "terms": "grocery,store,shop"
+                    "terms": "grocery,shop,store"
                 },
                 "shop/swimming_pool": {
                     "name": "Pool Supply Store",
@@ -9579,7 +9583,7 @@
                 },
                 "shop/wholesale": {
                     "name": "Wholesale Store",
-                    "terms": "warehouse club,cash and carry"
+                    "terms": "cash and carry,warehouse club"
                 },
                 "shop/window_blind": {
                     "name": "Window Blind Store",
@@ -9591,7 +9595,7 @@
                 },
                 "telecom/data_center": {
                     "name": "Data Center",
-                    "terms": "computer systems storage,information technology,server farm,the cloud,telecommunications"
+                    "terms": "computer systems storage,information technology,server farm,telecommunications,the cloud"
                 },
                 "tourism/alpine_hut": {
                     "name": "Alpine Hut",
@@ -9615,7 +9619,7 @@
                 },
                 "tourism/artwork/graffiti": {
                     "name": "Graffiti",
-                    "terms": "Street Artwork,Guerilla Artwork,Graffiti Artwork"
+                    "terms": "Graffiti Artwork,Guerilla Artwork,Street Artwork"
                 },
                 "tourism/artwork/installation": {
                     "name": "Art Installation",
@@ -9627,11 +9631,11 @@
                 },
                 "tourism/artwork/sculpture": {
                     "name": "Sculpture",
-                    "terms": "statue,figure,carving"
+                    "terms": "carving,figure,statue"
                 },
                 "tourism/artwork/statue": {
                     "name": "Statue",
-                    "terms": "sculpture,figure,carving"
+                    "terms": "carving,figure,sculpture"
                 },
                 "tourism/attraction": {
                     "name": "Tourist Attraction",
@@ -9639,15 +9643,15 @@
                 },
                 "tourism/camp_pitch": {
                     "name": "Camp Pitch",
-                    "terms": "tent,rv"
+                    "terms": "rv,tent"
                 },
                 "tourism/camp_site": {
                     "name": "Campground",
-                    "terms": "tent,rv"
+                    "terms": "rv,tent"
                 },
                 "tourism/caravan_site": {
                     "name": "RV Park",
-                    "terms": "Motor Home,Camper"
+                    "terms": "Camper,Motor Home"
                 },
                 "tourism/chalet": {
                     "name": "Holiday Cottage",
@@ -9703,7 +9707,7 @@
                 },
                 "tourism/museum": {
                     "name": "Museum",
-                    "terms": "art*,exhibit*,gallery,foundation,hall,institution,paint*,photo*,sculpt*"
+                    "terms": "art*,exhibit*,foundation,gallery,hall,institution,paint*,photo*,sculpt*"
                 },
                 "tourism/picnic_site": {
                     "name": "Picnic Site",
@@ -9723,7 +9727,7 @@
                 },
                 "tourism/wilderness_hut": {
                     "name": "Wilderness Hut",
-                    "terms": "wilderness hut,backcountry hut,bothy"
+                    "terms": "backcountry hut,bothy,wilderness hut"
                 },
                 "tourism/zoo": {
                     "name": "Zoo",
@@ -9731,11 +9735,11 @@
                 },
                 "tourism/zoo/petting": {
                     "name": "Petting Zoo",
-                    "terms": "Children's Zoo,Children's Farm,Petting Farm,farm animals"
+                    "terms": "Children's Farm,Children's Zoo,farm animals,Petting Farm"
                 },
                 "tourism/zoo/safari": {
                     "name": "Safari Park",
-                    "terms": "Drive-Through Zoo,Drive-In Zoo"
+                    "terms": "Drive-In Zoo,Drive-Through Zoo"
                 },
                 "tourism/zoo/wildlife": {
                     "name": "Wildlife Park",
@@ -9747,27 +9751,27 @@
                 },
                 "traffic_calming/bump": {
                     "name": "Speed Bump",
-                    "terms": "hump,speed,slow"
+                    "terms": "hump,slow,speed"
                 },
                 "traffic_calming/chicane": {
                     "name": "Traffic Chicane",
-                    "terms": "driveway link,speed,slow"
+                    "terms": "driveway link,slow,speed"
                 },
                 "traffic_calming/choker": {
                     "name": "Traffic Choker",
-                    "terms": "speed,slow"
+                    "terms": "slow,speed"
                 },
                 "traffic_calming/cushion": {
                     "name": "Speed Cushion",
-                    "terms": "bump,hump,speed,slow"
+                    "terms": "bump,hump,slow,speed"
                 },
                 "traffic_calming/dip": {
                     "name": "Dip",
-                    "terms": "speed,slow"
+                    "terms": "slow,speed"
                 },
                 "traffic_calming/hump": {
                     "name": "Speed Hump",
-                    "terms": "bump,speed,slow"
+                    "terms": "bump,slow,speed"
                 },
                 "traffic_calming/island": {
                     "name": "Traffic Island",
@@ -9775,35 +9779,35 @@
                 },
                 "traffic_calming/rumble_strip": {
                     "name": "Rumble Strip",
-                    "terms": "audible lines,sleeper lines,growlers"
+                    "terms": "audible lines,growlers,sleeper lines"
                 },
                 "traffic_calming/table": {
                     "name": "Speed Table",
-                    "terms": "flat top,hump,speed,slow"
+                    "terms": "flat top,hump,slow,speed"
                 },
                 "traffic_sign_vertex": {
                     "name": "Traffic Sign",
-                    "terms": "road,highway"
+                    "terms": "highway,road"
                 },
                 "traffic_sign": {
                     "name": "Traffic Sign",
-                    "terms": "road,highway"
+                    "terms": "highway,road"
                 },
                 "traffic_sign/city_limit_vertex": {
                     "name": "City Limit Sign",
-                    "terms": "town,village,hamlet,boundary,edge,border,road,highway"
+                    "terms": "border,boundary,edge,hamlet,highway,road,town,village"
                 },
                 "traffic_sign/city_limit": {
                     "name": "City Limit Sign",
-                    "terms": "town,village,hamlet,boundary,edge,border,road,highway"
+                    "terms": "border,boundary,edge,hamlet,highway,road,town,village"
                 },
                 "traffic_sign/maxspeed_vertex": {
                     "name": "Speed Limit Sign",
-                    "terms": "max speed,maximum speed,road,highway"
+                    "terms": "highway,max speed,maximum speed,road"
                 },
                 "traffic_sign/maxspeed": {
                     "name": "Speed Limit Sign",
-                    "terms": "max speed,maximum speed,road,highway"
+                    "terms": "highway,max speed,maximum speed,road"
                 },
                 "type/multipolygon": {
                     "name": "Multipolygon",
@@ -9967,7 +9971,7 @@
                 },
                 "waterway/dock": {
                     "name": "Wet Dock / Dry Dock",
-                    "terms": "boat,ship,vessel,marine"
+                    "terms": "boat,marine,ship,vessel"
                 },
                 "waterway/drain": {
                     "name": "Drain",
@@ -9975,7 +9979,7 @@
                 },
                 "waterway/fuel": {
                     "name": "Marine Fuel Station",
-                    "terms": "petrol,gas,diesel,boat"
+                    "terms": "boat,diesel,gas,petrol"
                 },
                 "waterway/lock_gate": {
                     "name": "Lock Gate",
@@ -9983,7 +9987,7 @@
                 },
                 "waterway/milestone": {
                     "name": "Waterway Milestone",
-                    "terms": "milestone,marker"
+                    "terms": "marker,milestone"
                 },
                 "waterway/river": {
                     "name": "River",
@@ -9991,7 +9995,7 @@
                 },
                 "waterway/sanitary_dump_station": {
                     "name": "Marine Toilet Disposal",
-                    "terms": "Boat,Watercraft,Sanitary,Dump Station,Pumpout,Pump out,Elsan,CDP,CTDP,Chemical Toilet"
+                    "terms": "Boat,CDP,Chemical Toilet,CTDP,Dump Station,Elsan,Pump out,Pumpout,Sanitary,Watercraft"
                 },
                 "waterway/stream_intermittent": {
                     "name": "Intermittent Stream",

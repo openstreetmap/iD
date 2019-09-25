@@ -11,14 +11,14 @@
         "internet_access/fee",
         "internet_access/ssid"
     ],
-    "moreFields" : [
+    "moreFields": [
         "access_simple",
         "air_conditioning",
         "email",
         "fax",
+        "level",
         "opening_hours",
         "payment_multi",
-        "level",
         "phone",
         "polling_station",
         "website",

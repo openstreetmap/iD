@@ -5,8 +5,8 @@
         "area"
     ],
     "terms": [
-        "airport",
-        "aerodrome"
+        "aerodrome",
+        "airport"
     ],
     "fields": [
         "name",
@@ -14,8 +14,8 @@
         "building_area"
     ],
     "moreFields": [
-        "wheelchair",
-        "smoking"
+        "smoking",
+        "wheelchair"
     ],
     "tags": {
         "aeroway": "terminal"

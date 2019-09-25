@@ -12,9 +12,9 @@
         "camping",
         "climbing",
         "hiking",
-        "outfitter",
         "outdoor equipment",
-        "outdoor supplies"
+        "outdoor supplies",
+        "outfitter"
     ],
     "tags": {
         "shop": "outdoor"

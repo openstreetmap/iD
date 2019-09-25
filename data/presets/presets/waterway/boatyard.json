@@ -1,15 +1,15 @@
 {
-     "icon": "maki-harbor",
-     "fields":[
+    "icon": "maki-harbor",
+    "fields": [
         "name",
         "operator"
     ],
     "moreFields": [
         "address",
-        "website",
-        "phone",
         "email",
         "fax",
+        "phone",
+        "website",
         "wheelchair"
     ],
     "geometry": [

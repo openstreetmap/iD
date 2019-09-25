@@ -26,8 +26,8 @@
         "highway": "steps"
     },
     "terms": [
-        "stairs",
         "staircase",
+        "stairs",
         "stairway"
     ],
     "name": "Steps"

@@ -8,21 +8,21 @@
         "opening_hours"
     ],
     "moreFields": [
-        "payment_multi",
-        "website",
-        "phone",
         "email",
         "fax",
         "level",
+        "payment_multi",
+        "phone",
+        "website",
         "wheelchair"
     ],
-    "geometry" : [
+    "geometry": [
         "point",
         "area"
     ],
     "terms": [
-        "martial arts",
-        "dojang"
+        "dojang",
+        "martial arts"
     ],
     "tags": {
         "amenity": "dojo"

@@ -17,8 +17,8 @@
         "destination/symbol_oneway",
         "flood_prone",
         "incline",
-        "junction/ref_oneway",
         "junction_line",
+        "junction/ref_oneway",
         "lit",
         "maxheight",
         "maxspeed/advisory",
@@ -37,8 +37,8 @@
         "highway": "primary_link"
     },
     "terms": [
-        "on ramp",
         "off ramp",
+        "on ramp",
         "ramp",
         "road",
         "street"

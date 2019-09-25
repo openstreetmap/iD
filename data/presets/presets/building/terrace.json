@@ -7,12 +7,12 @@
         "building": "terrace"
     },
     "terms": [
-        "home",
-        "terrace",
         "brownstone",
+        "dwelling",
         "family",
+        "home",
         "residence",
-        "dwelling"
+        "terrace"
     ],
     "matchScore": 0.5,
     "name": "Row Houses"

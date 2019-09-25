@@ -11,11 +11,11 @@
         "line"
     ],
     "terms": [
-        "oil",
         "natural gas",
-        "water",
+        "oil",
+        "sewage",
         "sewer",
-        "sewage"
+        "water"
     ],
     "tags": {
         "man_made": "pipeline"

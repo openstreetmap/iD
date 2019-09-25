@@ -12,9 +12,9 @@
     },
     "matchScore": 0.5,
     "terms": [
+        "car",
         "covered parking space",
         "garage",
-        "car",
         "porch"
     ],
     "name": "Carport"

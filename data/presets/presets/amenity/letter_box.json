@@ -11,6 +11,7 @@
         "indoor",
         "level",
         "lit",
+        "lockable",
         "manufacturer",
         "material",
         "operator",
@@ -25,8 +26,8 @@
     },
     "terms": [
         "curbside delivery box",
-        "home delivery box",
         "direct-to-door delivery box",
+        "home delivery box",
         "letter hole",
         "letter plate",
         "letter slot",

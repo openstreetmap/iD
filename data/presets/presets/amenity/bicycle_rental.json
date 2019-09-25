@@ -10,8 +10,8 @@
     ],
     "moreFields": [
         "address",
-        "email",
         "covered",
+        "email",
         "fax",
         "level",
         "opening_hours",
@@ -25,11 +25,11 @@
         "area"
     ],
     "terms": [
-        "bike",
         "bicycle",
-        "bikeshare",
-        "bike share",
         "bicycle share",
+        "bike",
+        "bike share",
+        "bikeshare",
         "cycle dock",
         "cycle hub",
         "cycleshare",
