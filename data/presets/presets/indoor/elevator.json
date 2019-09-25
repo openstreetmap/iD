@@ -1,15 +1,15 @@
 {
     "icon":"temaki-elevator",
     "fields": [
-        "level_semi",
-        "ref"
+        "ref",
+        "level_semi"
     ],
     "geometry": [
         "area"
     ],
     "tags": {
         "indoor": "room",
-        "highway": "elevator"
+        "elevator": "yes"
     },
     "terms": [
         "elevator",

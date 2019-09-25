@@ -460,6 +460,9 @@ en:
           forward: Forward
           # conveying=reversible
           reversible: Reversible
+      conveying_escalator:
+        # conveying=*
+        label: Escalator
       country:
         # country=*
         label: Country
@@ -5111,11 +5114,21 @@ en:
         name: Indoor Door
         # 'terms: doorframe,doorway,portal,room access,threshold'
         terms: '<translate with synonyms or related terms for ''Indoor Door'', separated by commas>'
+      indoor/elevator:
+        # 'indoor=room, elevator=yes'
+        name: Indoor Elevator Shaft
+        # 'terms: elevator,lift'
+        terms: '<translate with synonyms or related terms for ''Indoor Elevator Shaft'', separated by commas>'
       indoor/room:
         # indoor=room
         name: Room
         # 'terms: antechamber,anteroom,atrium,cell,chamber,concourse,foyer,indoor room,lobby,vestibule'
         terms: '<translate with synonyms or related terms for ''Room'', separated by commas>'
+      indoor/stairs:
+        # 'indoor=room, stairs=yes'
+        name: Indoor Stairwell
+        # 'terms: stair,stairs,staircase,stairway,stairwell,steps'
+        terms: '<translate with synonyms or related terms for ''Indoor Stairwell'', separated by commas>'
       indoor/wall:
         # indoor=wall
         name: Indoor Wall

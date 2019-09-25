@@ -3010,6 +3010,10 @@
                     "label": "Content",
                     "terms": ""
                 },
+                "conveying_escalator": {
+                    "label": "Escalator",
+                    "terms": ""
+                },
                 "conveying": {
                     "label": "Movement Direction",
                     "terms": "",
@@ -7269,9 +7273,17 @@
                     "name": "Indoor Door",
                     "terms": "doorframe,doorway,portal,room access,threshold"
                 },
+                "indoor/elevator": {
+                    "name": "Indoor Elevator Shaft",
+                    "terms": "elevator,lift"
+                },
                 "indoor/room": {
                     "name": "Room",
                     "terms": "antechamber,anteroom,atrium,cell,chamber,concourse,foyer,indoor room,lobby,vestibule"
+                },
+                "indoor/stairs": {
+                    "name": "Indoor Stairwell",
+                    "terms": "stair,stairs,staircase,stairway,stairwell,steps"
                 },
                 "indoor/wall": {
                     "name": "Indoor Wall",
