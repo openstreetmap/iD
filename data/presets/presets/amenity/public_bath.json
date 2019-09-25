@@ -30,9 +30,9 @@
         "amenity": "public_bath"
     },
     "terms": [
+        "onsen",
         "foot bath",
-        "hot springs",
-        "onsen"
+        "hot springs"
     ],
     "name": "Public Bath"
 }

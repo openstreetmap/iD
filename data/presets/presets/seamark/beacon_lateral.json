@@ -13,11 +13,11 @@
         "vertex"
     ],
     "terms": [
-        "beacon lateral",
-        "cevni",
-        "channel marker",
-        "iala",
         "lateral beacon",
+    	"beacon lateral",
+    	"cevni",
+     	"channel marker",
+        "iala",
         "lateral mark"
     ],
     "tags": {

@@ -9,15 +9,15 @@
         "artificial climbing wall",
         "belaying",
         "bouldering",
+        "rock climbing facility",
         "indoor rock wall",
         "rappeling",
-        "rock climbing facility",
         "rock gym",
         "ropes"
     ],
     "tags": {
-        "leisure": "sports_centre",
-        "sport": "climbing"
+      "leisure": "sports_centre",
+      "sport": "climbing"
     },
     "reference": {
         "key": "sport",

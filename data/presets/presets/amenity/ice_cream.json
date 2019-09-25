@@ -8,19 +8,19 @@
         "outdoor_seating"
     ],
     "moreFields": [
+        "takeaway",
         "delivery",
-        "diet_multi",
         "drive_through",
-        "email",
-        "fax",
         "internet_access",
         "internet_access/fee",
         "internet_access/ssid",
         "level",
+        "diet_multi",
         "payment_multi",
-        "phone",
-        "takeaway",
         "website",
+        "phone",
+        "email",
+        "fax",
         "wheelchair"
     ],
     "geometry": [
@@ -28,10 +28,10 @@
         "area"
     ],
     "terms": [
-        "frozen",
         "gelato",
-        "sherbet",
         "sorbet",
+        "sherbet",
+        "frozen",
         "yogurt"
     ],
     "tags": {

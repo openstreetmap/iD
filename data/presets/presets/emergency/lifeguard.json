@@ -5,7 +5,7 @@
         "operator",
         "building_area",
         "opening_hours"
-    ],
+     ],
     "geometry": [
         "point",
         "area"

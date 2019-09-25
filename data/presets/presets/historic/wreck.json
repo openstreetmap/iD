@@ -19,16 +19,16 @@
         "historic": "wreck"
     },
     "addTags": {
-        "historic": "wreck",
+    	"historic": "wreck",
         "seamark:type": "wreck"
     },
     "terms": [
-        "boat",
         "hull",
-        "maritime",
         "mast",
+        "maritime",
         "remains",
-        "ship"
+        "ship",
+        "boat"
     ],
     "name": "Shipwreck"
 }

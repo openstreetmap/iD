@@ -9,22 +9,22 @@
         "building"
     ],
     "moreFields": [
-        "email",
-        "fax",
-        "level",
         "opening_hours",
         "payment_multi",
+        "level",
+        "website",
         "phone",
-        "website"
+        "email",
+        "fax"
     ],
     "geometry": [
         "point",
         "area"
     ],
     "terms": [
-        "curling",
         "hockey",
-        "skating"
+        "skating",
+        "curling"
     ],
     "tags": {
         "leisure": "ice_rink"

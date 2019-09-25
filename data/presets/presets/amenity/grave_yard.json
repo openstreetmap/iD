@@ -5,10 +5,10 @@
         "address"
     ],
     "moreFields": [
-        "email",
-        "fax",
+        "website",
         "phone",
-        "website"
+        "email",
+        "fax"
     ],
     "geometry": [
         "point",

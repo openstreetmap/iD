@@ -8,10 +8,10 @@
         "building_area"
     ],
     "moreFields": [
+        "website",
+        "phone",
         "email",
         "fax",
-        "phone",
-        "website",
         "wheelchair"
     ],
     "geometry": [

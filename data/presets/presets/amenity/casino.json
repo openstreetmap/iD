@@ -27,11 +27,11 @@
         "area"
     ],
     "terms": [
-        "blackjack",
-        "craps",
         "gambling",
+        "roulette",
+        "craps",
         "poker",
-        "roulette"
+        "blackjack"
     ],
     "tags": {
         "amenity": "casino"

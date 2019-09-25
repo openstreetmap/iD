@@ -10,11 +10,11 @@
         "supervised"
     ],
     "moreFields": [
+        "lit",
+        "website",
+        "phone",
         "email",
         "fax",
-        "lit",
-        "phone",
-        "website",
         "wheelchair"
     ],
     "geometry": [

@@ -11,10 +11,10 @@
     "terms": [
         "agricultural inputs",
         "agricultural machines",
-        "agricultural tools",
-        "fertilizer",
+        "seeds",
         "pesticides",
-        "seeds"
+        "fertilizer",
+        "agricultural tools"
     ],
     "tags": {
         "shop": "agrarian"

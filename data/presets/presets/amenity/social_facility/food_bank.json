@@ -4,7 +4,8 @@
         "point",
         "area"
     ],
-    "terms": [],
+    "terms": [
+    ],
     "tags": {
         "amenity": "social_facility",
         "social_facility": "food_bank"

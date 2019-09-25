@@ -1,19 +1,27 @@
 {
     "icon": "maki-dog-park",
     "fields": [
-        "name"
+        "name",
+        "operator",
+        "address",
+        "opening_hours",
+        "dog"
     ],
     "moreFields": [
-        "email",
-        "fax",
+        "website",
         "phone",
-        "website"
+        "email",
+        "fax"
     ],
     "geometry": [
         "point",
         "area"
     ],
-    "terms": [],
+    "fields": [
+        "name"
+    ],
+    "terms": [
+    ],
     "tags": {
         "leisure": "dog_park"
     },

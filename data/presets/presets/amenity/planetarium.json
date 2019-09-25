@@ -10,12 +10,12 @@
     "moreFields": [
         "air_conditioning",
         "charge_fee",
-        "email",
-        "fax",
         "fee",
         "payment_multi_fee",
-        "phone",
         "website",
+        "phone",
+        "email",
+        "fax",
         "wheelchair"
     ],
     "geometry": [
@@ -23,8 +23,8 @@
         "area"
     ],
     "terms": [
-        "astronomy",
         "museum",
+        "astronomy",
         "observatory"
     ],
     "tags": {

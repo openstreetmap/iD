@@ -12,13 +12,13 @@
         "line"
     ],
     "terms": [
-        "autwalk",
-        "conveyor",
         "moving sidewalk",
+        "autwalk",
         "skywalk",
+        "travolator",
         "travelator",
         "travellator",
-        "travolator"
+        "conveyor"
     ],
     "tags": {
         "highway": "footway",

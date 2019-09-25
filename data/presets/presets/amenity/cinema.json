@@ -27,10 +27,10 @@
         "film",
         "flick",
         "movie",
+        "theater",
         "picture",
-        "screen",
         "show",
-        "theater"
+        "screen"
     ],
     "tags": {
         "amenity": "cinema"

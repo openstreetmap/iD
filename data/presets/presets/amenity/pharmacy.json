@@ -9,13 +9,13 @@
         "dispensing"
     ],
     "moreFields": [
-        "email",
-        "fax",
         "level",
         "opening_hours",
         "payment_multi",
-        "phone",
         "website",
+        "phone",
+        "email",
+        "fax",
         "wheelchair"
     ],
     "geometry": [

@@ -8,10 +8,11 @@
         "direction",
         "ref",
         "maxspeed"
-    ],
+     ],
     "tags": {
         "highway": "speed_camera"
     },
-    "terms": [],
+    "terms": [
+    ],
     "name": "Speed Camera"
 }

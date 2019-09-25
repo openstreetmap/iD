@@ -9,16 +9,16 @@
         "building_area"
     ],
     "moreFields": [
-        "brand",
         "building/levels_building",
-        "email",
-        "fax",
         "height_building",
-        "level",
         "opening_hours",
         "payment_multi",
-        "phone",
+        "brand",
         "website",
+        "phone",
+        "email",
+        "fax",
+        "level",
         "wheelchair"
     ],
     "geometry": [
@@ -30,8 +30,8 @@
     },
     "terms": [
         "clinic",
-        "disease",
         "doctor",
+        "disease",
         "health",
         "institution",
         "sick",

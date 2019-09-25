@@ -18,7 +18,8 @@
     "geometry": [
         "point"
     ],
-    "terms": [],
+    "terms": [
+    ],
     "tags": {
         "amenity": "vending_machine"
     },

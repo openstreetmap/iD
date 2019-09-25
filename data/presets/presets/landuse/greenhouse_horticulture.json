@@ -6,10 +6,10 @@
     ],
     "moreFields": [
         "address",
-        "email",
-        "fax",
+        "website",
         "phone",
-        "website"
+        "email",
+        "fax"
     ],
     "geometry": [
         "area"
@@ -17,8 +17,8 @@
     "terms": [
         "flower",
         "greenhouse",
-        "grow",
         "horticulture",
+        "grow",
         "vivero"
     ],
     "tags": {

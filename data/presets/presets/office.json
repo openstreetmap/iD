@@ -10,9 +10,9 @@
     "moreFields": [
         "air_conditioning",
         "building/levels_building",
+        "height_building",
         "email",
         "fax",
-        "height_building",
         "internet_access",
         "internet_access/fee",
         "internet_access/ssid",

@@ -24,9 +24,9 @@
         "vertex"
     ],
     "terms": [
+        "money",
         "cash",
-        "machine",
-        "money"
+        "machine"
     ],
     "tags": {
         "amenity": "atm"

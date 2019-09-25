@@ -22,13 +22,13 @@
         "area"
     ],
     "terms": [
-        "backcountry office",
-        "permit center",
-        "permit centre",
         "visitor center",
         "visitor centre",
-        "warden center",
-        "warden office"
+        "permit center",
+        "permit centre",
+        "backcountry office",
+        "warden office",
+        "warden center"
     ],
     "tags": {
         "amenity": "ranger_station"

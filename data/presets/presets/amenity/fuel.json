@@ -9,13 +9,13 @@
         "self_service"
     ],
     "moreFields": [
-        "building",
-        "email",
-        "fax",
         "opening_hours",
         "payment_multi",
-        "phone",
+        "building",
         "website",
+        "phone",
+        "email",
+        "fax",
         "wheelchair"
     ],
     "geometry": [
@@ -23,14 +23,14 @@
         "area"
     ],
     "terms": [
-        "biodiesel",
-        "cng",
-        "diesel",
+        "petrol",
         "fuel",
         "gasoline",
+        "propane",
+        "diesel",
         "lng",
-        "petrol",
-        "propane"
+        "cng",
+        "biodiesel"
     ],
     "tags": {
         "amenity": "fuel"

@@ -8,8 +8,8 @@
         "operator"
     ],
     "moreFields": [
-        "access_simple",
         "address",
+        "access_simple",
         "opening_hours"
     ],
     "tags": {

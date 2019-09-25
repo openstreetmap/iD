@@ -9,11 +9,11 @@
         "point"
     ],
     "terms": [
-        "bollard",
-        "buoy",
-        "dolphin",
-        "pile",
-        "post"
+    	"dolphin",
+    	"pile",
+    	"bollard",
+    	"buoy",
+    	"post"
     ],
     "tags": {
         "seamark:type": "mooring"

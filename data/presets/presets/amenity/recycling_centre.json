@@ -11,12 +11,12 @@
     ],
     "moreFields": [
         "charge_fee",
-        "email",
-        "fax",
         "fee",
         "payment_multi_fee",
-        "phone",
         "website",
+        "phone",
+        "email",
+        "fax",
         "wheelchair"
     ],
     "geometry": [
@@ -27,8 +27,8 @@
         "bottle",
         "can",
         "dump",
-        "garbage",
         "glass",
+        "garbage",
         "rubbish",
         "scrap",
         "trash"

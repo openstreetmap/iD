@@ -1,17 +1,17 @@
 {
     "icon": "maki-industry",
     "fields": [
-        "name",
+	    "name",
         "operator",
         "address",
         "building_area",
         "product"
     ],
     "moreFields": [
-        "email",
-        "fax",
+        "website",
         "phone",
-        "website"
+        "email",
+        "fax"
     ],
     "geometry": [
         "point",
@@ -19,13 +19,13 @@
     ],
     "terms": [
         "assembly",
-        "brewery",
         "build",
+        "brewery",
         "car",
-        "manufacture",
         "plant",
         "plastic",
         "processing",
+        "manufacture",
         "refinery"
     ],
     "tags": {

@@ -8,10 +8,10 @@
     ],
     "moreFields": [
         "address",
-        "email",
-        "fax",
+        "website",
         "phone",
-        "website"
+        "email",
+        "fax"
     ],
     "tags": {
         "landuse": "garages"

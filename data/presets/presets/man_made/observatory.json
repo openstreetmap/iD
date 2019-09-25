@@ -7,10 +7,10 @@
         "building_area"
     ],
     "moreFields": [
-        "email",
-        "fax",
+        "website",
         "phone",
-        "website"
+        "email",
+        "fax"
     ],
     "geometry": [
         "point",

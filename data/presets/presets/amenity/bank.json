@@ -1,7 +1,7 @@
 {
     "icon": "maki-bank",
     "fields": [
-        "name",
+	    "name",
         "operator",
         "address",
         "building_area",
@@ -27,8 +27,8 @@
         "area"
     ],
     "terms": [
-        "check",
         "credit union",
+        "check",
         "deposit",
         "fund",
         "investment",

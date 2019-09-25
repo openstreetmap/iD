@@ -8,13 +8,13 @@
     ],
     "moreFields": [
         "charge_fee",
-        "email",
-        "fax",
-        "fee",
         "opening_hours",
+        "fee",
         "payment_multi",
+        "website",
         "phone",
-        "website"
+        "email",
+        "fax"
     ],
     "geometry": [
         "point",
@@ -24,8 +24,8 @@
         "leisure": "fitness_centre"
     },
     "terms": [
-        "gym",
         "health",
+        "gym",
         "leisure",
         "studio"
     ],

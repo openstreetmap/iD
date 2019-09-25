@@ -7,7 +7,7 @@
         "operator",
         "network"
     ],
-    "moreFields": [
+    "moreFields" : [
         "colour",
         "interval",
         "opening_hours",

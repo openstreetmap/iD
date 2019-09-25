@@ -25,7 +25,8 @@
         "point",
         "area"
     ],
-    "terms": [],
+    "terms": [
+    ],
     "tags": {
         "amenity": "arts_centre"
     },

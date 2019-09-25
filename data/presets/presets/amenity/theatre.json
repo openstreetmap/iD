@@ -1,7 +1,7 @@
 {
     "icon": "maki-theatre",
     "fields": [
-        "name",
+	    "name",
         "operator",
         "address",
         "building_area",
@@ -25,10 +25,10 @@
         "area"
     ],
     "terms": [
-        "musical",
+        "theatre",
         "performance",
         "play",
-        "theatre"
+        "musical"
     ],
     "tags": {
         "amenity": "theatre"

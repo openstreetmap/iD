@@ -9,12 +9,12 @@
         "opening_hours"
     ],
     "moreFields": [
+        "payment_multi",
+        "website",
+        "phone",
         "email",
         "fax",
         "level",
-        "payment_multi",
-        "phone",
-        "website",
         "wheelchair"
     ],
     "geometry": [
@@ -22,8 +22,8 @@
         "area"
     ],
     "terms": [
-        "teeth",
-        "tooth"
+        "tooth",
+        "teeth"
     ],
     "tags": {
         "amenity": "dentist"

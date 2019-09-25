@@ -1,24 +1,24 @@
 {
     "icon": "maki-water",
     "fields": [
-        "name",
+	    "name",
         "operator",
         "address"
     ],
     "moreFields": [
-        "email",
-        "fax",
+        "website",
         "phone",
-        "website"
+        "email",
+        "fax"
     ],
     "geometry": [
         "point",
         "area"
     ],
     "terms": [
-        "reclamation plant",
         "sewage*",
-        "water treatment plant"
+        "water treatment plant",
+        "reclamation plant"
     ],
     "tags": {
         "man_made": "wastewater_plant"

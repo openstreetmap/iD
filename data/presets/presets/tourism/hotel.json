@@ -5,8 +5,8 @@
     ],
     "moreFields": [
         "{tourism/motel}",
-        "bar",
-        "stars"
+        "stars",
+        "bar"
     ],
     "geometry": [
         "point",

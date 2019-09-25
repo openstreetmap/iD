@@ -7,11 +7,11 @@
         "point"
     ],
     "terms": [
-        "animal",
-        "dog",
         "excrement bags",
         "poop",
-        "waste"
+        "waste",
+        "dog",
+        "animal"
     ],
     "tags": {
         "amenity": "vending_machine",

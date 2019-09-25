@@ -10,11 +10,11 @@
         "charge_fee"
     ],
     "moreFields": [
-        "email",
-        "fax",
         "opening_hours",
+        "website",
         "phone",
-        "website"
+        "email",
+        "fax"
     ],
     "geometry": [
         "point",
@@ -23,6 +23,7 @@
     "tags": {
         "leisure": "sports_centre"
     },
-    "terms": [],
+    "terms": [
+    ],
     "name": "Sports Center / Complex"
 }

@@ -17,9 +17,9 @@
         "key": "bicycle_parking"
     },
     "terms": [
-        "Bike Shed",
         "cycle shed",
-        "cycling"
+        "cycling",
+        "Bike Shed"
     ],
     "name": "Bicycle Shed"
 }

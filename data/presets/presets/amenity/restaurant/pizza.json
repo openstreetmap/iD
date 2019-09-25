@@ -6,16 +6,16 @@
     ],
     "terms": [
         "bar",
-        "deep dish",
         "dine",
         "dining",
         "dinner",
         "drive-in",
         "eat",
         "lunch",
-        "slice",
         "table",
-        "thin crust"
+        "deep dish",
+        "thin crust",
+        "slice"
     ],
     "tags": {
         "amenity": "restaurant",

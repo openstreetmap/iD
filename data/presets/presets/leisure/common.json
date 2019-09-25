@@ -1,7 +1,9 @@
 {
     "icon": "temaki-pedestrian",
     "fields": [
-        "name"
+        "name",
+        "address",
+        "opening_hours"
     ],
     "moreFields": [
         "website"
@@ -9,6 +11,9 @@
     "geometry": [
         "point",
         "area"
+    ],
+    "fields": [
+        "name"
     ],
     "terms": [
         "open space"

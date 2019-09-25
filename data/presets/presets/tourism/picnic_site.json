@@ -9,15 +9,15 @@
     ],
     "moreFields": [
         "charge_fee",
-        "fee",
         "internet_access",
         "internet_access/fee",
         "internet_access/ssid",
+        "smoking",
+        "fee",
         "level",
         "payment_multi_fee",
         "phone",
         "reservation",
-        "smoking",
         "website",
         "wheelchair"
     ],

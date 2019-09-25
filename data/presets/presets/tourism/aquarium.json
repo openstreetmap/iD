@@ -9,16 +9,16 @@
     ],
     "moreFields": [
         "charge_fee",
-        "email",
-        "fax",
         "fee",
         "internet_access",
         "internet_access/fee",
         "internet_access/ssid",
         "payment_multi_fee",
-        "phone",
         "smoking",
         "website",
+        "phone",
+        "email",
+        "fax",
         "wheelchair"
     ],
     "geometry": [

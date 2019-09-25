@@ -11,11 +11,11 @@
         "charge_fee"
     ],
     "moreFields": [
-        "email",
-        "fax",
         "level",
+        "website",
         "phone",
-        "website"
+        "email",
+        "fax"
     ],
     "geometry": [
         "point",

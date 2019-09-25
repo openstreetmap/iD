@@ -17,9 +17,9 @@
         "eat",
         "grill",
         "lunch",
+        "table",
         "pasta",
-        "pizza",
-        "table"
+        "pizza"
     ],
     "tags": {
         "amenity": "restaurant",

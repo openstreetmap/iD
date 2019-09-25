@@ -1,6 +1,6 @@
 {
-    "icon": "maki-drinking-water",
-    "geometry": [
+     "icon": "maki-drinking-water",
+     "geometry": [
         "area",
         "vertex",
         "point"

@@ -10,16 +10,16 @@
         "sanitary_dump_station",
         "power_supply"
     ],
-    "moreFields": [
+    "moreFields" : [
         "address",
-        "email",
-        "fax",
         "internet_access",
         "internet_access/fee",
         "internet_access/ssid",
-        "phone",
         "seamark/type",
-        "website"
+        "website",
+        "phone",
+        "email",
+        "fax"
     ],
     "geometry": [
         "point",

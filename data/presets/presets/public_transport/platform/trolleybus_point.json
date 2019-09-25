@@ -32,9 +32,9 @@
         "streetcar",
         "trackless",
         "tram",
+        "trolley",
         "transit",
-        "transportation",
-        "trolley"
+        "transportation"
     ],
     "name": "Trolleybus Stop"
 }

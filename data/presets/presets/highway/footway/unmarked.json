@@ -24,8 +24,8 @@
         "value": "crossing"
     },
     "terms": [
-        "unmarked crosswalk",
         "unmarked foot path crossing",
+        "unmarked crosswalk",
         "unmarked pedestrian crossing"
     ],
     "name": "Unmarked Crossing"

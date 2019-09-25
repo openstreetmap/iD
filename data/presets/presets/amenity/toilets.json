@@ -25,15 +25,15 @@
     ],
     "terms": [
         "bathroom",
-        "head",
-        "latrine",
-        "lavatory",
+        "restroom",
         "outhouse",
         "privy",
-        "restroom",
-        "W.C.",
+        "head",
+        "lavatory",
+        "latrine",
         "water closet",
-        "WC"
+        "WC",
+        "W.C."
     ],
     "tags": {
         "amenity": "toilets"

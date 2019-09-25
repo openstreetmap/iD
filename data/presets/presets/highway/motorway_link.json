@@ -38,11 +38,11 @@
     },
     "terms": [
         "exit",
-        "off ramp",
-        "on ramp",
         "ramp",
         "road",
-        "street"
+        "street",
+        "on ramp",
+        "off ramp"
     ],
     "name": "Motorway Link"
 }

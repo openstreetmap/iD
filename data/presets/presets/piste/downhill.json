@@ -13,11 +13,11 @@
         "area"
     ],
     "terms": [
-        "alpine",
-        "downhill",
-        "piste",
         "ski",
-        "snowboard"
+        "alpine",
+        "snowboard",
+        "downhill",
+        "piste"
     ],
     "tags": {
         "piste:type": "downhill"

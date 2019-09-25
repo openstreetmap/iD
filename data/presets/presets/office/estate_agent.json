@@ -7,8 +7,6 @@
     "tags": {
         "office": "estate_agent"
     },
-    "terms": [
-        "real estate"
-    ],
+    "terms": ["real estate"],
     "name": "Real Estate Office"
 }

@@ -11,9 +11,9 @@
         "highway": "stop"
     },
     "terms": [
+        "stop",
         "halt",
-        "sign",
-        "stop"
+        "sign"
     ],
     "name": "Stop Sign"
 }

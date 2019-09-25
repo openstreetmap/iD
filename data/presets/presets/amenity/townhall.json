@@ -20,11 +20,11 @@
         "area"
     ],
     "terms": [
+        "village",
         "city",
-        "courthouse",
         "government",
-        "municipal",
-        "village"
+        "courthouse",
+        "municipal"
     ],
     "tags": {
         "amenity": "townhall"

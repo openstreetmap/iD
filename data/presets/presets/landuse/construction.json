@@ -10,10 +10,10 @@
     ],
     "moreFields": [
         "address",
-        "email",
-        "fax",
+        "website",
         "phone",
-        "website"
+        "email",
+        "fax"
     ],
     "geometry": [
         "area"

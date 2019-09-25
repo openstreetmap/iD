@@ -10,10 +10,10 @@
         "self_service"
     ],
     "moreFields": [
+        "website",
+        "phone",
         "email",
         "fax",
-        "phone",
-        "website",
         "wheelchair"
     ],
     "geometry": [

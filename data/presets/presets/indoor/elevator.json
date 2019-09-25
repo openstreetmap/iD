@@ -1,5 +1,5 @@
 {
-    "icon": "temaki-elevator",
+    "icon":"temaki-elevator",
     "fields": [
         "ref",
         "level_semi"

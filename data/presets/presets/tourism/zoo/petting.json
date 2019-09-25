@@ -13,10 +13,10 @@
         "value": "petting_zoo"
     },
     "terms": [
-        "Children's Farm",
         "Children's Zoo",
-        "farm animals",
-        "Petting Farm"
+        "Children's Farm",
+        "Petting Farm",
+        "farm animals"
     ],
     "name": "Petting Zoo"
 }

@@ -10,12 +10,12 @@
         "internet_access/fee"
     ],
     "moreFields": [
+        "religion",
         "denomination",
-        "email",
-        "fax",
         "internet_access/ssid",
         "phone",
-        "religion",
+        "email",
+        "fax",
         "wheelchair"
     ],
     "geometry": [
@@ -23,8 +23,8 @@
         "area"
     ],
     "terms": [
-        "undergraduate school",
-        "university"
+        "university",
+        "undergraduate school"
     ],
     "tags": {
         "amenity": "college"

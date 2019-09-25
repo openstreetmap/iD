@@ -16,12 +16,12 @@
         "manhole": "telecom"
     },
     "terms": [
-        "bt",
         "cover",
-        "hole",
         "phone",
+        "hole",
         "telecom",
-        "telephone"
+        "telephone",
+        "bt"
     ],
     "name": "Telecom Manhole"
 }

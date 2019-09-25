@@ -4,7 +4,8 @@
         "point",
         "area"
     ],
-    "terms": [],
+    "terms": [
+    ],
     "tags": {
         "amenity": "clinic",
         "healthcare": "clinic",

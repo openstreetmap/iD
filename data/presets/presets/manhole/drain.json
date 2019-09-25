@@ -20,8 +20,8 @@
         "drain",
         "hole",
         "rain",
-        "sewage",
         "sewer",
+        "sewage",
         "storm"
     ],
     "name": "Storm Drain"

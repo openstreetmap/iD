@@ -6,9 +6,9 @@
         "height"
     ],
     "moreFields": [
-        "communication_multi",
         "manufacturer",
-        "material"
+        "material",
+        "communication_multi"
     ],
     "geometry": [
         "point"
