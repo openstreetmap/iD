@@ -7,10 +7,10 @@
         "building": "houseboat"
     },
     "terms": [
-        "home",
+        "dwelling",
         "family",
-        "residence",
-        "dwelling"
+        "home",
+        "residence"
     ],
     "matchScore": 0.5,
     "name": "Houseboat"

@@ -13,13 +13,13 @@
     ],
     "terms": [
         "al fresco",
-        "beer garden",
-        "dining",
-        "cafe",
-        "restaurant",
-        "pub",
         "bar",
-        "patio"
+        "beer garden",
+        "cafe",
+        "dining",
+        "patio",
+        "pub",
+        "restaurant"
     ],
     "tags": {
         "leisure": "outdoor_seating"

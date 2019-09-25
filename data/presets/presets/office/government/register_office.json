@@ -9,11 +9,11 @@
         "area"
     ],
     "terms": [
-        "clerk",
-        "marriage",
-        "death",
         "birth",
-        "certificate"
+        "certificate",
+        "clerk",
+        "death",
+        "marriage"
     ],
     "tags": {
         "office": "government",

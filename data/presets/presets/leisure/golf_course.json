@@ -7,11 +7,11 @@
         "opening_hours"
     ],
     "moreFields": [
-        "payment_multi",
-        "website",
-        "phone",
         "email",
-        "fax"
+        "fax",
+        "payment_multi",
+        "phone",
+        "website"
     ],
     "geometry": [
         "point",

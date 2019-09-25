@@ -19,8 +19,8 @@
         "railway": "station"
     },
     "terms": [
-        "train station",
-        "station"
+        "station",
+        "train station"
     ],
     "matchScore": 0.95,
     "name": "Train Station",

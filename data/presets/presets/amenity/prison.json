@@ -7,10 +7,10 @@
         "address"
     ],
     "moreFields": [
-        "website",
-        "phone",
         "email",
         "fax",
+        "phone",
+        "website",
         "wheelchair"
     ],
     "geometry": [
@@ -19,8 +19,8 @@
     ],
     "terms": [
         "cell",
-        "jail",
-        "correction"
+        "correction",
+        "jail"
     ],
     "tags": {
         "amenity": "prison"

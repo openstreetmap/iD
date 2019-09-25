@@ -18,9 +18,9 @@
         "key": "artwork_type"
     },
     "terms": [
-        "Street Artwork",
+        "Graffiti Artwork",
         "Guerilla Artwork",
-        "Graffiti Artwork"
+        "Street Artwork"
     ],
     "name": "Graffiti"
 }

@@ -34,11 +34,11 @@
     },
     "terms": [
         "alcohol",
-        "drink",
-        "dive",
         "beer",
         "bier",
-        "booze"
+        "booze",
+        "dive",
+        "drink"
     ],
     "name": "Pub"
 }

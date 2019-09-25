@@ -4,9 +4,9 @@
         "vertex"
     ],
     "terms": [
+        "dead end",
         "no exit",
-        "road end",
-        "dead end"
+        "road end"
     ],
     "tags": {
         "noexit": "yes"

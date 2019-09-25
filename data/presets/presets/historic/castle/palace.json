@@ -19,10 +19,10 @@
         "castle_type": "palace"
     },
     "terms": [
-        "Royal Residence",
-        "royal",
         "king",
-        "queen"
+        "queen",
+        "royal",
+        "Royal Residence"
     ],
     "name": "Palace"
 }

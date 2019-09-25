@@ -24,11 +24,11 @@
         "value": "crossing"
     },
     "terms": [
+        "bicycle crossing",
+        "bike crossing",
         "cycle crosswalk",
         "cycle path crossing",
-        "cycleway crossing",
-        "bicycle crossing",
-        "bike crossing"
+        "cycleway crossing"
     ],
     "name": "Marked Cycle Crossing"
 }

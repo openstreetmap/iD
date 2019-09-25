@@ -10,12 +10,12 @@
         "line"
     ],
     "terms": [
-        "theme park",
         "aquatic park",
-        "water park",
         "rafting simulator",
         "river rafting ride",
-        "river rapids ride"
+        "river rapids ride",
+        "theme park",
+        "water park"
     ],
     "tags": {
         "attraction": "river_rafting"

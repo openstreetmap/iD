@@ -26,9 +26,9 @@
         "rail",
         "track",
         "tram",
-        "trolley",
         "transit",
-        "transportation"
+        "transportation",
+        "trolley"
     ],
     "searchable": false,
     "name": "Light Rail Stop / Platform"

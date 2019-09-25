@@ -9,10 +9,10 @@
         "lit"
     ],
     "moreFields": [
+        "{highway/footway}",
         "access",
         "fishing",
-        "incline",
-        "{highway/footway}"
+        "incline"
     ],
     "geometry": [
         "line",

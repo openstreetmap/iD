@@ -18,10 +18,10 @@
         "area"
     ],
     "terms": [
-        "water",
-        "oil",
         "gas",
-        "petrol"
+        "oil",
+        "petrol",
+        "water"
     ],
     "tags": {
         "man_made": "storage_tank"

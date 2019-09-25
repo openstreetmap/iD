@@ -31,9 +31,9 @@
         "streetcar",
         "track",
         "tram",
-        "trolley",
         "transit",
-        "transportation"
+        "transportation",
+        "trolley"
     ],
     "name": "Tram Stopping Location"
 }

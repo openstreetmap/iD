@@ -13,8 +13,8 @@
         "highway": "trunk_link"
     },
     "terms": [
-        "on ramp",
         "off ramp",
+        "on ramp",
         "ramp",
         "road",
         "street"

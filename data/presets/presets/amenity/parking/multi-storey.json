@@ -7,8 +7,8 @@
     ],
     "moreFields": [
         "{amenity/parking}",
-        "levels",
-        "height"
+        "height",
+        "levels"
     ],
     "geometry": [
         "area"

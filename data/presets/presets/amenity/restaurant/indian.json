@@ -7,6 +7,7 @@
     "terms": [
         "bar",
         "breakfast",
+        "curry",
         "dine",
         "dining",
         "dinner",
@@ -14,8 +15,7 @@
         "eat",
         "grill",
         "lunch",
-        "table",
-        "curry"
+        "table"
     ],
     "tags": {
         "amenity": "restaurant",

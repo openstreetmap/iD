@@ -12,7 +12,7 @@
         "internet_access",
         "internet_access/fee"
     ],
-    "moreFields" : [
+    "moreFields": [
         "email",
         "fax",
         "internet_access/ssid",
@@ -29,8 +29,8 @@
         "area"
     ],
     "terms": [
-        "tent",
-        "rv"
+        "rv",
+        "tent"
     ],
     "tags": {
         "tourism": "camp_site"

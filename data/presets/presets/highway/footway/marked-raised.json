@@ -26,13 +26,13 @@
         "value": "table"
     },
     "terms": [
-        "zebra crossing",
-        "marked crossing",
         "crosswalk",
         "flat top",
         "hump",
+        "marked crossing",
+        "slow",
         "speed",
-        "slow"
+        "zebra crossing"
     ],
     "name": "Marked Crosswalk (Raised)"
 }

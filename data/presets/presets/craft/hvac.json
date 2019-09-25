@@ -5,9 +5,9 @@
         "area"
     ],
     "terms": [
+        "air conditioning",
         "heat*",
-        "vent*",
-        "air conditioning"
+        "vent*"
     ],
     "tags": {
         "craft": "hvac"

@@ -17,14 +17,14 @@
         "area"
     ],
     "terms": [
-        "Motor Home",
         "Camper",
-        "Sanitary",
+        "CDP",
+        "Chemical Toilet",
+        "CTDP",
         "Dump Station",
         "Elsan",
-        "CDP",
-        "CTDP",
-        "Chemical Toilet"
+        "Motor Home",
+        "Sanitary"
     ],
     "tags": {
         "amenity": "sanitary_dump_station"

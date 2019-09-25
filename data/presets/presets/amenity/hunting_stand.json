@@ -15,8 +15,8 @@
         "lookout",
         "rifle",
         "shoot*",
-        "wild",
-        "watch"
+        "watch",
+        "wild"
     ],
     "tags": {
         "amenity": "hunting_stand"

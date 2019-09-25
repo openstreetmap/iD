@@ -1,8 +1,8 @@
 {
     "icon": "maki-grocery",
     "moreFields": [
-        "diet_multi",
-        "{shop}"
+        "{shop}",
+        "diet_multi"
     ],
     "geometry": [
         "point",
@@ -10,8 +10,8 @@
     ],
     "terms": [
         "grocery",
-        "store",
-        "shop"
+        "shop",
+        "store"
     ],
     "tags": {
         "shop": "supermarket"

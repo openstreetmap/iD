@@ -6,21 +6,21 @@
         "address"
     ],
     "moreFields": [
-        "payment_multi",
         "brand",
-        "website",
-        "phone",
         "email",
-        "fax"
+        "fax",
+        "payment_multi",
+        "phone",
+        "website"
     ],
     "geometry": [
         "point",
         "area"
     ],
     "terms": [
-        "swim",
+        "dive",
         "pool",
-        "dive"
+        "swim"
     ],
     "tags": {
         "leisure": "water_park"

@@ -13,11 +13,11 @@
         "area"
     ],
     "terms": [
-        "ski",
-        "nordic",
         "crosscountry",
+        "nordic",
+        "piste",
         "skating",
-        "piste"
+        "ski"
     ],
     "tags": {
         "piste:type": "nordic"

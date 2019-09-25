@@ -8,24 +8,24 @@
         "dance/style"
     ],
     "moreFields": [
+        "email",
+        "fax",
         "level",
         "opening_hours",
         "payment_multi",
-        "website",
         "phone",
-        "email",
-        "fax"
+        "website"
     ],
     "geometry": [
         "point",
         "area"
     ],
     "terms": [
+        "dance teaching",
         "jive",
         "swing",
         "tango",
-        "waltz",
-        "dance teaching"
+        "waltz"
     ],
     "tags": {
         "leisure": "dance",

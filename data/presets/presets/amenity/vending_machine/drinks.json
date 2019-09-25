@@ -4,11 +4,11 @@
         "point"
     ],
     "terms": [
-        "drink",
-        "soda",
         "beverage",
+        "drink",
         "juice",
-        "pop"
+        "pop",
+        "soda"
     ],
     "tags": {
         "amenity": "vending_machine",

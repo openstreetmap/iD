@@ -5,11 +5,11 @@
     ],
     "terms": [
         "candy",
-        "gum",
         "chip",
-        "pretzel",
         "cookie",
-        "cracker"
+        "cracker",
+        "gum",
+        "pretzel"
     ],
     "tags": {
         "amenity": "vending_machine",

@@ -33,9 +33,9 @@
         "terminal",
         "trackless",
         "tram",
-        "trolley",
         "transit",
-        "transportation"
+        "transportation",
+        "trolley"
     ],
     "name": "Trolleybus Station / Terminal"
 }
