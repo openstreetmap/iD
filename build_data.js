@@ -648,22 +648,22 @@ function validatePresetFields(presets, fields) {
         var fieldKeys = ['fields', 'moreFields'];
         for (var fieldsKeyIndex in fieldKeys) {
             var fieldsKey = fieldKeys[fieldsKeyIndex];
-            if (preset[fieldsKey]) {
-                for (var fieldIndex in preset[fieldsKey]) {
-                    var field = preset[fieldsKey][fieldIndex];
-                    if (fields[field] === undefined) {
-                        var regexResult = betweenBracketsRegex.exec(field);
-                        if (regexResult) {
-                            var foreignPresetID = regexResult[0];
-                            if (presets[foreignPresetID] === undefined) {
-                                console.error('Unknown preset "' + foreignPresetID + '" referenced in "' + fieldsKey + '" array of preset ' + preset.name);
-                                process.exit(1);
-                            }
-                        } else {
-                            console.error('Unknown preset field "' + field + '" in "' + fieldsKey + '" array of preset ' + preset.name);
-                            process.exit(1);
-                        }
+            if (!preset[fieldsKey]) continue; // no fields are referenced, okay
+
+            for (var fieldIndex in preset[fieldsKey]) {
+                var field = preset[fieldsKey][fieldIndex];
+                if (fields[field] !== undefined) continue; // field found, okay
+
+                var regexResult = betweenBracketsRegex.exec(field);
+                if (regexResult) {
+                    var foreignPresetID = regexResult[0];
+                    if (presets[foreignPresetID] === undefined) {
+                        console.error('Unknown preset "' + foreignPresetID + '" referenced in "' + fieldsKey + '" array of preset ' + preset.name);
+                        process.exit(1);
                     }
+                } else {
+                    console.error('Unknown preset field "' + field + '" in "' + fieldsKey + '" array of preset ' + preset.name);
+                    process.exit(1);
                 }
             }
         }
