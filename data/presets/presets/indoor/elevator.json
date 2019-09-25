@@ -1,0 +1,20 @@
+{
+    "icon":"temaki-elevator",
+    "fields": [
+        "level_semi",
+        "ref"
+    ],
+    "geometry": [
+        "area"
+    ],
+    "tags": {
+        "indoor": "room",
+        "highway": "elevator"
+    },
+    "terms": [
+        "elevator",
+        "lift"
+    ],
+    "matchScore": 0.8,
+    "name": "Indoor Elevator Shaft"
+}

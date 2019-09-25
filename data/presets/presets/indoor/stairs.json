@@ -1,0 +1,23 @@
+{
+    "fields": [
+        "level",
+        "name",
+        "conveying"
+    ],
+    "geometry": [
+        "area"
+    ],
+    "tags": {
+        "indoor": "room",
+        "stairs": "yes"
+    },
+    "terms": [
+        "stairs",
+        "stairwell",
+        "stair",
+        "staircase",
+        "steps"
+    ],
+    "matchScore": 0.8,
+    "name": "Indoor Stairwell"
+}
