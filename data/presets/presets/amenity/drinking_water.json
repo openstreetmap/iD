@@ -21,10 +21,10 @@
         "amenity": "drinking_water"
     },
     "terms": [
-        "bubbler",
-        "drinking fountain",
         "potable water source",
         "water fountain",
+        "drinking fountain",
+        "bubbler",
         "water tap"
     ],
     "name": "Drinking Water"

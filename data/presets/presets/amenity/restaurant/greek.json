@@ -16,11 +16,11 @@
         "drive-in",
         "eat",
         "grill",
-        "gyros",
         "lunch",
-        "olives",
+        "table",
+        "gyros",
         "pitas",
-        "table"
+        "olives"
     ],
     "tags": {
         "amenity": "restaurant",

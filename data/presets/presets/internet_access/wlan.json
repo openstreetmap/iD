@@ -12,9 +12,9 @@
         "level"
     ],
     "terms": [
-        "hotspot",
         "wi-fi",
-        "wifi"
+        "wifi",
+        "hotspot"
     ],
     "tags": {
         "internet_access": "wlan"

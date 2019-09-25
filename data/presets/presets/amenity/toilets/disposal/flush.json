@@ -18,9 +18,9 @@
         "lavatory",
         "privy",
         "restroom",
-        "W.C.",
         "water closet",
-        "WC"
+        "WC",
+        "W.C."
     ],
     "tags": {
         "amenity": "toilets",

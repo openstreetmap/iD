@@ -5,13 +5,13 @@
         "area"
     ],
     "terms": [
-        "alpine",
-        "downhill",
-        "half pipe",
-        "halfpipe",
-        "piste",
         "ski",
-        "snowboard"
+        "alpine",
+        "halfpipe",
+        "half pipe",
+        "snowboard",
+        "downhill",
+        "piste"
     ],
     "tags": {
         "piste:type": "downhill",

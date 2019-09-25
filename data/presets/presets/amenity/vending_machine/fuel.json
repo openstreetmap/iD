@@ -4,14 +4,14 @@
         "point"
     ],
     "terms": [
-        "biodiesel",
-        "cng",
-        "diesel",
+        "petrol",
         "fuel",
         "gasoline",
+        "propane",
+        "diesel",
         "lng",
-        "petrol",
-        "propane"
+        "cng",
+        "biodiesel"
     ],
     "tags": {
         "amenity": "vending_machine",

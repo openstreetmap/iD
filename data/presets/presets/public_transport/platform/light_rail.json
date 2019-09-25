@@ -32,9 +32,9 @@
         "rail",
         "track",
         "tram",
+        "trolley",
         "transit",
-        "transportation",
-        "trolley"
+        "transportation"
     ],
     "name": "Light Rail Platform"
 }

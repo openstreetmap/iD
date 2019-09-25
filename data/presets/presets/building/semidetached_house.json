@@ -7,13 +7,13 @@
         "building": "semidetached_house"
     },
     "terms": [
+        "home",
         "double",
         "duplex",
-        "dwelling",
+        "twin",
         "family",
-        "home",
         "residence",
-        "twin"
+        "dwelling"
     ],
     "matchScore": 0.5,
     "name": "Semi-Detached House"

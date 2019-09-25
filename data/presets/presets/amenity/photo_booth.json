@@ -16,11 +16,11 @@
         "area"
     ],
     "terms": [
-        "booth",
-        "camera",
-        "kiosk",
+        "photobooth",
         "photo",
-        "photobooth"
+        "booth",
+        "kiosk",
+        "camera"
     ],
     "tags": {
         "amenity": "photo_booth"

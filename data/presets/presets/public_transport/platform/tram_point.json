@@ -27,9 +27,9 @@
         "streetcar",
         "track",
         "tram",
+        "trolley",
         "transit",
-        "transportation",
-        "trolley"
+        "transportation"
     ],
     "name": "Tram Stop / Platform"
 }

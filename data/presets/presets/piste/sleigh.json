@@ -13,15 +13,15 @@
         "area"
     ],
     "terms": [
-        "horse",
-        "husky",
-        "luge",
-        "piste",
         "ski",
-        "ski-joring",
+        "piste",
         "sled",
+        "luge",
+        "sleigh",
         "sledge",
-        "sleigh"
+        "ski-joring",
+        "husky",
+        "horse"
     ],
     "tags": {
         "piste:type": "sleigh"

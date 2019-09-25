@@ -9,9 +9,9 @@
     },
     "terms": [
         "art*",
-        "frame",
         "paint*",
-        "photo*"
+        "photo*",
+        "frame"
     ],
     "name": "Framing Shop"
 }

@@ -10,9 +10,9 @@
     "terms": [
         "break",
         "interrupt",
-        "interruption",
         "rest",
-        "wait"
+        "wait",
+        "interruption"
     ],
     "name": "Train Station (Halt / Request)",
     "searchable": false

@@ -23,12 +23,12 @@
         "seamark:type": "wreck"
     },
     "terms": [
-        "boat",
         "hull",
-        "maritime",
         "mast",
+        "maritime",
         "remains",
-        "ship"
+        "ship",
+        "boat"
     ],
     "name": "Shipwreck"
 }

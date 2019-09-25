@@ -11,11 +11,11 @@
         "manufacturer"
     ],
     "terms": [
-        "air",
+        "weather",
         "earthquake",
-        "gps",
         "seismology",
-        "weather"
+        "air",
+        "gps"
     ],
     "tags": {
         "man_made": "monitoring_station"

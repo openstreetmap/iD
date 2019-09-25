@@ -16,9 +16,9 @@
         "area"
     ],
     "terms": [
-        "reclamation plant",
         "sewage*",
-        "water treatment plant"
+        "water treatment plant",
+        "reclamation plant"
     ],
     "tags": {
         "man_made": "wastewater_plant"

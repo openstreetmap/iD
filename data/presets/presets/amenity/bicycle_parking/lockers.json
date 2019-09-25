@@ -13,9 +13,9 @@
         "key": "bicycle_parking"
     },
     "terms": [
-        "Bike Lockers",
         "cycle locker",
-        "cycling"
+        "cycling",
+        "Bike Lockers"
     ],
     "name": "Bicycle Lockers"
 }

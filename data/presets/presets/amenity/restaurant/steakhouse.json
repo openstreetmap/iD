@@ -6,12 +6,10 @@
     ],
     "terms": [
         "bar",
-        "beef",
         "breakfast",
         "cafe",
         "café",
         "canteen",
-        "chop house",
         "dine",
         "dining",
         "dinner",
@@ -19,8 +17,10 @@
         "eat",
         "grill",
         "lunch",
+        "table",
         "steak house",
-        "table"
+        "chop house",
+        "beef"
     ],
     "tags": {
         "amenity": "restaurant",

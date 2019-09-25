@@ -13,8 +13,8 @@
         "railway": "signal"
     },
     "terms": [
-        "lights",
-        "signal"
+        "signal",
+        "lights"
     ],
     "name": "Railway Signal"
 }

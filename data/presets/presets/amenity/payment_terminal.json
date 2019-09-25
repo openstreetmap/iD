@@ -18,16 +18,16 @@
         "point"
     ],
     "terms": [
+        "interactive kiosk",
+        "ekiosk",
         "atm",
         "bill pay",
-        "card",
-        "cash",
-        "ekiosk",
-        "finance",
-        "interactive kiosk",
-        "money transfer",
+        "tax pay",
         "phone pay",
-        "tax pay"
+        "finance",
+        "cash",
+        "money transfer",
+        "card"
     ],
     "tags": {
         "amenity": "payment_terminal"

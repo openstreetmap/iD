@@ -19,14 +19,14 @@
         "landuse": "aquaculture"
     },
     "terms": [
-        "algaculture",
+        "fish farm",
+        "crustacean",
         "algae",
         "aquafarming",
-        "crustacean",
-        "fish farm",
-        "mariculture",
+        "shrimp farm",
         "oyster farm",
-        "shrimp farm"
+        "mariculture",
+        "algaculture"
     ],
     "name": "Aquaculture"
 }

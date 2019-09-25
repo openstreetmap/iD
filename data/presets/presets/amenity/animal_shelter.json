@@ -29,12 +29,12 @@
         "kitten",
         "pet care",
         "pet rescue",
-        "pound",
         "puppy",
         "raptor",
         "reptile",
         "rescue",
-        "spca"
+        "spca",
+        "pound"
     ],
     "tags": {
         "amenity": "animal_shelter"

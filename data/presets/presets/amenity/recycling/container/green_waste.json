@@ -15,11 +15,11 @@
         "biological",
         "compost",
         "decomposable",
-        "food scrap",
         "garbage bin",
         "garden waste",
         "organic",
-        "rubbish"
+        "rubbish",
+        "food scrap"
     ],
     "tags": {
         "amenity": "recycling",

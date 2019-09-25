@@ -15,9 +15,9 @@
         "highway": "services"
     },
     "terms": [
-        "service station",
         "services",
-        "travel plaza"
+        "travel plaza",
+        "service station"
     ],
     "name": "Service Area"
 }

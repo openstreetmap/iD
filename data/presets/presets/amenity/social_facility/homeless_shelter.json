@@ -5,9 +5,9 @@
         "area"
     ],
     "terms": [
-        "displaced",
         "houseless",
-        "unhoused"
+        "unhoused",
+        "displaced"
     ],
     "tags": {
         "amenity": "social_facility",

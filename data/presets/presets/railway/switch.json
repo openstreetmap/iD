@@ -7,8 +7,8 @@
         "railway": "switch"
     },
     "terms": [
-        "points",
-        "switch"
+        "switch",
+        "points"
     ],
     "name": "Railway Switch"
 }

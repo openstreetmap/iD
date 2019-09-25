@@ -7,13 +7,13 @@
         "leisure": "bleachers"
     },
     "terms": [
-        "bench",
         "crowd",
-        "seat",
-        "seating",
+        "bench",
         "sports",
         "stand",
-        "stands"
+        "stands",
+        "seat",
+        "seating"
     ],
     "name": "Bleachers"
 }

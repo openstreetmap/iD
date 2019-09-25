@@ -22,16 +22,16 @@
         "area"
     ],
     "terms": [
-        "bill",
-        "cable",
-        "cash to cash",
-        "check",
-        "currency",
-        "exchange",
-        "finance",
         "money order",
+        "check",
+        "bill",
+        "currency",
+        "finance",
+        "wire transfer",
+        "cable",
         "person to person",
-        "wire transfer"
+        "cash to cash",
+        "exchange"
     ],
     "tags": {
         "amenity": "money_transfer"

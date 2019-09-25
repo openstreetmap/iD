@@ -12,9 +12,9 @@
     ],
     "terms": [
         "boat",
-        "marine",
         "ship",
-        "vessel"
+        "vessel",
+        "marine"
     ],
     "tags": {
         "waterway": "dock"

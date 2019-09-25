@@ -9,11 +9,11 @@
         "area"
     ],
     "terms": [
-        "assisted living",
-        "care home",
-        "living",
         "old",
-        "senior"
+        "senior",
+        "living",
+        "care home",
+        "assisted living"
     ],
     "tags": {
         "amenity": "social_facility",

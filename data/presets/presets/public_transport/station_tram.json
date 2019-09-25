@@ -29,9 +29,9 @@
         "terminal",
         "track",
         "tram",
+        "trolley",
         "transit",
-        "transportation",
-        "trolley"
+        "transportation"
     ],
     "name": "Tram Station"
 }

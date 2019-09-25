@@ -14,11 +14,11 @@
         "area"
     ],
     "terms": [
-        "amusement ride",
-        "big drop",
-        "gondola",
         "theme park",
-        "tower"
+        "amusement ride",
+        "gondola",
+        "tower",
+        "big drop"
     ],
     "tags": {
         "attraction": "drop_tower"

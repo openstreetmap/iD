@@ -11,10 +11,10 @@
         "place": "plot"
     },
     "terms": [
+        "tract",
         "land",
         "lot",
-        "parcel",
-        "tract"
+        "parcel"
     ],
     "name": "Plot"
 }

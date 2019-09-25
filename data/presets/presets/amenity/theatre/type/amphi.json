@@ -11,10 +11,10 @@
         "area"
     ],
     "terms": [
-        "ampi",
-        "greek",
         "open air",
-        "outdoor"
+        "outdoor",
+        "greek",
+        "ampi"
     ],
     "tags": {
         "amenity": "theatre",

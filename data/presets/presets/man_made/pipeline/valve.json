@@ -15,11 +15,11 @@
         "material"
     ],
     "terms": [
-        "natural gas",
         "oil",
-        "sewage",
+        "natural gas",
+        "water",
         "sewer",
-        "water"
+        "sewage"
     ],
     "tags": {
         "man_made": "pipeline",

@@ -20,15 +20,15 @@
     ],
     "terms": [
         "Boat",
-        "CDP",
-        "Chemical Toilet",
-        "CTDP",
-        "Dump Station",
-        "Elsan",
-        "Pump out",
-        "Pumpout",
+        "Watercraft",
         "Sanitary",
-        "Watercraft"
+        "Dump Station",
+        "Pumpout",
+        "Pump out",
+        "Elsan",
+        "CDP",
+        "CTDP",
+        "Chemical Toilet"
     ],
     "tags": {
         "waterway": "sanitary_dump_station"

@@ -7,10 +7,10 @@
         "building": "house"
     },
     "terms": [
-        "dwelling",
-        "family",
         "home",
-        "residence"
+        "family",
+        "residence",
+        "dwelling"
     ],
     "matchScore": 0.5,
     "name": "House"

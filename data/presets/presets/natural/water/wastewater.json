@@ -12,12 +12,12 @@
         "value": "wastewater"
     },
     "terms": [
-        "Clarifier Basin",
         "excrement",
-        "Settling Basin",
-        "sewage",
         "shit",
-        "wastewater"
+        "sewage",
+        "wastewater",
+        "Settling Basin",
+        "Clarifier Basin"
     ],
     "name": "Wastewater Basin"
 }

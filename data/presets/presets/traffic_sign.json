@@ -11,8 +11,8 @@
         "traffic_sign": "*"
     },
     "terms": [
-        "highway",
-        "road"
+        "road",
+        "highway"
     ],
     "name": "Traffic Sign"
 }

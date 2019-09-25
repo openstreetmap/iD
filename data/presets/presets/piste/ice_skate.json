@@ -13,9 +13,9 @@
     ],
     "terms": [
         "ice",
-        "piste",
         "skating",
-        "ski"
+        "ski",
+        "piste"
     ],
     "tags": {
         "piste:type": "ice_skate"

@@ -23,10 +23,10 @@
         "area"
     ],
     "terms": [
-        "boat",
-        "diesel",
+        "petrol",
         "gas",
-        "petrol"
+        "diesel",
+        "boat"
     ],
     "tags": {
         "waterway": "fuel"

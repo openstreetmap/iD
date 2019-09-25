@@ -14,10 +14,10 @@
         "historic": "manor"
     },
     "terms": [
-        "estate",
-        "gentry",
         "Mansion",
-        "nobility"
+        "gentry",
+        "nobility",
+        "estate"
     ],
     "name": "Manor House"
 }

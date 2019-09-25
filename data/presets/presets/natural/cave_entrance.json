@@ -18,10 +18,10 @@
     },
     "terms": [
         "cavern",
-        "cavity",
-        "grotto",
         "hollow",
-        "shelter"
+        "grotto",
+        "shelter",
+        "cavity"
     ],
     "name": "Cave Entrance"
 }
