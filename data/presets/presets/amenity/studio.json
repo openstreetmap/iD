@@ -4,7 +4,8 @@
         "name",
         "studio",
         "address",
-        "building_area"
+        "building_area",
+        "website"
     ],
     "moreFields": [
         "email",
@@ -14,7 +15,6 @@
         "internet_access/ssid",
         "level",
         "phone",
-        "website",
         "wheelchair"
     ],
     "geometry": [
