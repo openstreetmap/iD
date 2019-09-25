@@ -12,9 +12,9 @@
     ],
     "moreFields": [
         "address",
+        "gender",
         "level",
-        "operator",
-        "gender"
+        "operator"
     ],
     "geometry": [
         "point",

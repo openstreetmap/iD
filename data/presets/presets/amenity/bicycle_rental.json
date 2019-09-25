@@ -10,8 +10,8 @@
     ],
     "moreFields": [
         "address",
-        "email",
         "covered",
+        "email",
         "fax",
         "level",
         "opening_hours",

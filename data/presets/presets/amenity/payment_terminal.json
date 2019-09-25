@@ -1,7 +1,7 @@
 {
     "icon": "far-credit-card",
     "fields": [
-	    "name",
+        "name",
         "brand",
         "address",
         "opening_hours",

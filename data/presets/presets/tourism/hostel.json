@@ -3,7 +3,7 @@
     "fields": [
         "{tourism/guest_house}"
     ],
-    "moreFields" : [
+    "moreFields": [
         "{tourism/guest_house}"
     ],
     "geometry": [

@@ -9,16 +9,16 @@
         "building_area"
     ],
     "moreFields": [
-        "building/levels_building",
-        "height_building",
-        "opening_hours",
-        "payment_multi",
         "brand",
-        "website",
-        "phone",
+        "building/levels_building",
         "email",
         "fax",
+        "height_building",
         "level",
+        "opening_hours",
+        "payment_multi",
+        "phone",
+        "website",
         "wheelchair"
     ],
     "geometry": [

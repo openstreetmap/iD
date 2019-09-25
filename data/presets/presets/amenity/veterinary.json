@@ -9,13 +9,13 @@
     ],
     "moreFields": [
         "charge_fee",
+        "email",
+        "fax",
         "fee",
         "level",
         "payment_multi_fee",
-        "website",
         "phone",
-        "email",
-        "fax",
+        "website",
         "wheelchair"
     ],
     "geometry": [

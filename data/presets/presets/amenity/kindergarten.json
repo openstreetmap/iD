@@ -10,9 +10,9 @@
     "moreFields": [
         "email",
         "fax",
-        "min_age",
-        "max_age",
         "level",
+        "max_age",
+        "min_age",
         "opening_hours",
         "payment_multi",
         "website",

@@ -1,6 +1,8 @@
 {
     "icon": "maki-car",
-    "geometry": [ "vertex" ],
+    "geometry": [
+        "vertex"
+    ],
     "tags": {
         "highway": "emergency_bay"
     },

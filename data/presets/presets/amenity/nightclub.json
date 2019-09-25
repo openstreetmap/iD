@@ -27,10 +27,10 @@
         "amenity": "nightclub"
     },
     "terms": [
-       "disco*",
-       "night club",
-       "dancing",
-       "dance club"
+        "disco*",
+        "night club",
+        "dancing",
+        "dance club"
     ],
     "name": "Nightclub"
 }

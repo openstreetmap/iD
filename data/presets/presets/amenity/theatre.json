@@ -1,7 +1,7 @@
 {
     "icon": "maki-theatre",
     "fields": [
-	    "name",
+        "name",
         "operator",
         "address",
         "building_area",
