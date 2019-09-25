@@ -3627,6 +3627,10 @@
                     "label": "Lock",
                     "terms": ""
                 },
+                "lockable": {
+                    "label": "Lockable",
+                    "terms": ""
+                },
                 "man_made": {
                     "label": "Type",
                     "terms": ""
