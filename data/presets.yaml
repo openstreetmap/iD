@@ -3506,6 +3506,26 @@ en:
         name: Studio
         # 'terms: recording,radio,television'
         terms: '<translate with synonyms or related terms for ''Studio'', separated by commas>'
+      amenity/studio/audio:
+        # 'amenity=studio, studio=audio'
+        name: Recording Studio
+        # 'terms: audio mixing,audio production,audio recording,audio studio'
+        terms: '<translate with synonyms or related terms for ''Recording Studio'', separated by commas>'
+      amenity/studio/radio:
+        # 'amenity=studio, studio=radio'
+        name: Radio Station
+        # 'terms: am radio,fm radio,radio broadcast,radio studio'
+        terms: '<translate with synonyms or related terms for ''Radio Station'', separated by commas>'
+      amenity/studio/television:
+        # 'amenity=studio, studio=television'
+        name: Television Station
+        # 'terms: television broadcast,television studio,tv broadcast,tv station,tv studio'
+        terms: '<translate with synonyms or related terms for ''Television Station'', separated by commas>'
+      amenity/studio/video:
+        # 'amenity=studio, studio=video'
+        name: Film Studio
+        # 'terms: movie production,movie studio,video production,video recording,video studio'
+        terms: '<translate with synonyms or related terms for ''Film Studio'', separated by commas>'
       amenity/swimming_pool:
         # amenity=swimming_pool
         name: Swimming Pool

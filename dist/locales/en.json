@@ -5765,6 +5765,22 @@
                     "name": "Studio",
                     "terms": "recording,radio,television"
                 },
+                "amenity/studio/audio": {
+                    "name": "Recording Studio",
+                    "terms": "audio mixing,audio production,audio recording,audio studio"
+                },
+                "amenity/studio/radio": {
+                    "name": "Radio Station",
+                    "terms": "am radio,fm radio,radio broadcast,radio studio"
+                },
+                "amenity/studio/television": {
+                    "name": "Television Station",
+                    "terms": "television broadcast,television studio,tv broadcast,tv station,tv studio"
+                },
+                "amenity/studio/video": {
+                    "name": "Film Studio",
+                    "terms": "movie production,movie studio,video production,video recording,video studio"
+                },
                 "amenity/taxi": {
                     "name": "Taxi Stand",
                     "terms": "cab"
