@@ -1847,6 +1847,10 @@
                     "reference": "Websites should start with \"http\" or \"https\"."
                 }
             },
+            "mismatched_geometry": {
+                "title": "Mismatched Geometry",
+                "tip": "Find features with conflicting tags and geometry"
+            },
             "missing_role": {
                 "title": "Missing Roles",
                 "message": "{member} has no role within {relation}",
@@ -1887,6 +1891,10 @@
                     "reference": "All features of the same brand should be tagged the same way."
                 }
             },
+            "point_as_vertex": {
+                "message": "{feature} should be a standalone point based on its tags",
+                "reference": "Some features shouldn't be part of lines or areas."
+            },
             "private_data": {
                 "title": "Private Information",
                 "tip": "Find features that may contain private information",
@@ -1896,9 +1904,7 @@
                 }
             },
             "tag_suggests_area": {
-                "title": "Lines Tagged as Areas",
                 "message": "{feature} should be a closed area based on the tag \"{tag}\"",
-                "tip": "Find features that are tagged as lines and should possibly be tagged as areas",
                 "reference": "Areas must have connected endpoints."
             },
             "unknown_road": {
@@ -1937,6 +1943,10 @@
                 "buildings": {
                     "reference": "Buildings with unsquare corners can often be drawn more accurately."
                 }
+            },
+            "vertex_as_point": {
+                "message": "{feature} should be part of a line or area based on its tags",
+                "reference": "Some features shouldn't be standalone points."
             },
             "fix": {
                 "connect_almost_junction": {
