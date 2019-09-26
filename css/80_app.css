@@ -3972,6 +3972,7 @@ button.autofix.action.active {
 .issues-option label {
     display: table-cell;
     padding: 0 10px;
+    white-space: nowrap;
 }
 
 .layer-list.issues-list li.issue {
@@ -4291,16 +4292,18 @@ li.issue-fix-item:not(.actionable) .fix-icon {
 }
 .map-pane {
     position: relative;
-    top: 0;
-    width: 400px;
     height: 100%;
     padding-bottom: 60px;
     overflow: hidden;
     z-index: 10;
+    width: 100%;
+    min-width: 300px;
+    max-width: 500px;
 }
 
 .map-pane.help-wrap {
     width: 600px;
+    max-width: 100%;
 }
 
 .pane-heading {
