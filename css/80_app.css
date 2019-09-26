@@ -494,7 +494,7 @@ button[disabled].action:hover {
     display: flex;
     flex-flow: row nowrap;
     justify-content: space-between;
-    padding: 10px 0 0 0;
+    padding: 0;
     overflow-x: auto;
     overflow-y: hidden;
     height: 100%;
@@ -512,6 +512,7 @@ button[disabled].action:hover {
     flex: 0 1 auto;
     flex-flow: column wrap;
     justify-content: center;
+    padding-top: 10px;
 }
 #bar .toolbar-item .item-content {
     display: flex;
@@ -563,6 +564,11 @@ button.bar-button {
 }
 .toolbar-item button.bar-button.wide {
     padding: 0 15px;
+}
+#bar .drag-placeholder {
+    width: 41px;
+    height: 40px;
+    visibility: hidden;
 }
 button.bar-button .icon {
     flex: 0 0 auto;
