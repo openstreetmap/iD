@@ -5503,6 +5503,10 @@
                     "name": "Fish & Chips Fast Food",
                     "terms": "breakfast,cafe,café,dine,dining,dinner,drive-in,eat,grill,lunch,table,french fries"
                 },
+                "amenity/fast_food/hot_dog": {
+                    "name": "Hot Dog Fast Food",
+                    "terms": "ballpark,frankfurter,frank,hotdog stand,sandwich,sausage,wiener"
+                },
                 "amenity/fast_food/kebab": {
                     "name": "Kebab Fast Food",
                     "terms": "bar,breakfast,cafe,café,canteen,dine,dining,dinner,drive-in,eat,grill,lunch,table"

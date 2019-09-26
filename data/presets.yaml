@@ -3032,6 +3032,11 @@ en:
         name: Fish & Chips Fast Food
         # 'terms: breakfast,cafe,café,dine,dining,dinner,drive-in,eat,grill,lunch,table,french fries'
         terms: '<translate with synonyms or related terms for ''Fish & Chips Fast Food'', separated by commas>'
+      amenity/fast_food/hot_dog:
+        # 'amenity=fast_food, cuisine=hot_dog'
+        name: Hot Dog Fast Food
+        # 'terms: ballpark,frankfurter,frank,hotdog stand,sandwich,sausage,wiener'
+        terms: '<translate with synonyms or related terms for ''Hot Dog Fast Food'', separated by commas>'
       amenity/fast_food/ice_cream:
         # 'amenity=fast_food, cuisine=ice_cream'
         name: Ice Cream Fast Food

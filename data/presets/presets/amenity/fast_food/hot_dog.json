@@ -1,0 +1,25 @@
+{
+    "icon": "fas-hotdog",
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "terms": [
+        "ballpark",
+        "frankfurter",
+        "frank",
+        "hotdog stand",
+        "sandwich",
+        "sausage",
+        "wiener"
+    ],
+    "tags": {
+        "amenity": "fast_food",
+        "cuisine": "hot_dog"
+    },
+    "reference": {
+        "key": "cuisine",
+        "value": "hot_dog"
+    },
+    "name": "Hot Dog Fast Food"
+}
