@@ -1,6 +1,6 @@
 {
     "notCountryCodes": [
-        "fr"
+        "fr", "lt"
     ],
     "icon": "fas-biking",
     "geometry": [
