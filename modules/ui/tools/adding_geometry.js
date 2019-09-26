@@ -38,6 +38,12 @@ export function uiToolAddingGeometry(context) {
             icon: 'iD-icon-area',
             label: t('modes.add_area.title'),
             mode: modeAddArea
+        },
+        building: {
+            id: 'building',
+            icon: 'iD-icon-area',
+            label: t('presets.presets.building.name'),
+            mode: modeAddArea
         }
     };
 
@@ -72,6 +78,13 @@ export function uiToolAddingGeometry(context) {
             if (vertexIndex !== -1 && geometries.indexOf('point') !== -1) {
                 geometries.splice(vertexIndex, 1);
             }
+
+            var areaIndex = geometries.indexOf('area');
+            if (areaIndex !== -1 && mode.preset.setTags(mode.defaultTags, 'area').building) {
+                geometries.splice(areaIndex, 1);
+                geometries.push('building');
+            }
+
             tool.items = geometries.map(function(geom) {
                 return items[geom];
             }).filter(Boolean);
