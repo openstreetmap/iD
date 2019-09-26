@@ -349,7 +349,7 @@ export function coreValidator(context) {
             ran.impossible_oneway = true;
         }
 
-        runValidation('tag_suggests_area');
+        runValidation('mismatched_geometry');
 
         // run all rules not yet run
         Object.keys(_rules).forEach(runValidation);
