@@ -1,6 +1,5 @@
 
-import { utilRebind } from '../util';
-
+import { utilRebind, utilStringQs } from '../util';
 import { dispatch as d3_dispatch } from 'd3-dispatch';
 
 import { tmTasker } from './tasking/tm_tasker';
@@ -22,6 +21,11 @@ export function coreTasking(context) {
 
     tasking.init = function () {
         this.reset();
+
+        var taskingParameter = utilStringQs(window.location.hash).tasking;
+        if (taskingParameter) {
+            tasking.loadFromUrl(taskingParameter);
+        }
     };
 
     tasking.reset = function() {
@@ -108,18 +112,21 @@ export function coreTasking(context) {
 
     },
 */
+    tasking.loadFromUrl = function(url) {
+        var parsedUrl = parseUrl(url); // parse url,
+        _taskingCache.customSettings = parsedUrl; //save custom settings
+        this.loadFromCustomSettings(parsedUrl);
+        dispatch.call('loadedCustomSettings');
+    };
 
     tasking.customSettings = function(d) {
 
         if (!arguments.length) return _taskingCache.customSettings;
 
         if (d.url) {
-            var parsedUrl = parseUrl(d.url); // parse url,
-            _taskingCache.customSettings = parsedUrl; //save custom settings
-            this.loadFromCustomSettings(parsedUrl);
+            // sets _taskingCache.customSettings
+            tasking.loadFromUrl(d.url);
         }
-
-        dispatch.call('loadedCustomSettings');
 
         return this;
     };

@@ -50,6 +50,8 @@ of iD (e.g. `http://preview.ideditor.com/release/`), the following parameters ar
 * __`source`__ - Prefills the changeset source. Pass a url encoded string.<br/>
   _Example:_ `source=Bing%3BMapillary`
 * __`walkthrough=true`__ - Start the walkthrough automatically
+* __`tasking`__ - A path to a [Tasking Manager](https://github.com/hotosm/tasking-manager) API `/task` endpoint. Makes iD load with task-specific behavior and UI. Any instance of Tasking Manager is supported, not just `tasks.hotosm.org`.<br/>
+  _Example:_ `tasking=https://tasks.hotosm.org/api/v1/project/123/task/1`
 
 ##### iD on openstreetmap.org (Rails Port)
 
