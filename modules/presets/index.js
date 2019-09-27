@@ -135,15 +135,14 @@ export function presetIndex(context) {
 
         // blacklist
         presets.forEach(function(d) {
-            for (var key in d.tags) break;
-            if (!key) return;
-            if (ignore.indexOf(key) !== -1) return;
-
-            var value = d.tags[key];
-            if (key in areaKeys &&                      // probably an area...
-                d.geometry.indexOf('line') !== -1 &&    // but sometimes a line
-                value !== '*') {
-                areaKeys[key][value] = true;
+            for (var key in d.addTags) {
+                // examine all addTags to get a better sense of what can be tagged on lines - #6800
+                var value = d.addTags[key];
+                if (key in areaKeys &&                      // probably an area...
+                    d.geometry.indexOf('line') !== -1 &&    // but sometimes a line
+                    value !== '*') {
+                    areaKeys[key][value] = true;
+                }
             }
         });
 
@@ -377,6 +376,12 @@ export function presetIndex(context) {
         dispatch.call('favoritePreset');
     }
 
+    all.getGenericRibbonItems = function() {
+        return ['point', 'line', 'area'].map(function(id) {
+            return RibbonItem(all.item(id), 'generic');
+        });
+    };
+
     all.getFavorites = function() {
         if (!_favorites) {
 
@@ -384,19 +389,7 @@ export function presetIndex(context) {
             var rawFavorites = JSON.parse(context.storage('preset_favorites'));
 
             if (!rawFavorites) {
-                // no saved favorites
-
-                if (!context.isFirstSession) {
-                    // assume existing user coming from iD 2, use the generic presets as defaults
-                    rawFavorites = [
-                        { pID: 'point'},
-                        { pID: 'line'},
-                        { pID: 'area'}
-                    ];
-                } else {
-                    // new user, no default favorites
-                    rawFavorites = [];
-                }
+                rawFavorites = [];
                 context.storage('preset_favorites', JSON.stringify(rawFavorites));
             }
 

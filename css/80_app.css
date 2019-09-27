@@ -494,7 +494,7 @@ button[disabled].action:hover {
     display: flex;
     flex-flow: row nowrap;
     justify-content: space-between;
-    padding: 10px 0 0 0;
+    padding: 0;
     overflow-x: auto;
     overflow-y: hidden;
     height: 100%;
@@ -512,6 +512,7 @@ button[disabled].action:hover {
     flex: 0 1 auto;
     flex-flow: column wrap;
     justify-content: center;
+    padding-top: 10px;
 }
 #bar .toolbar-item .item-content {
     display: flex;
@@ -563,6 +564,11 @@ button.bar-button {
 }
 .toolbar-item button.bar-button.wide {
     padding: 0 15px;
+}
+#bar .drag-placeholder {
+    width: 41px;
+    height: 40px;
+    visibility: hidden;
 }
 button.bar-button .icon {
     flex: 0 0 auto;
@@ -3604,8 +3610,8 @@ img.tag-reference-wiki-image {
     border-radius: 0;
 }
 
-.map-control > button:hover,
-.map-control > button:focus {
+.map-control > button:not(.disabled):hover,
+.map-control > button:not(.disabled):focus {
     background: rgba(0, 0, 0, .8);
 }
 
@@ -3617,6 +3623,10 @@ img.tag-reference-wiki-image {
 .map-tasking-control > button.enabled,
 .map-tasking-control > button.enabled:hover {
     background: rgb(112, 255, 112, 1);
+}
+
+.map-control > button.disabled .icon {
+    color: rgba(255, 255, 255, 0.5);
 }
 
 
@@ -4016,6 +4026,7 @@ button.autofix.action.active {
 .issues-option label {
     display: table-cell;
     padding: 0 10px;
+    white-space: nowrap;
 }
 
 .layer-list.issues-list li.issue {
@@ -4335,16 +4346,18 @@ li.issue-fix-item:not(.actionable) .fix-icon {
 }
 .map-pane {
     position: relative;
-    top: 0;
-    width: 400px;
     height: 100%;
     padding-bottom: 60px;
     overflow: hidden;
     z-index: 10;
+    width: 100%;
+    min-width: 300px;
+    max-width: 500px;
 }
 
 .map-pane.help-wrap {
     width: 600px;
+    max-width: 100%;
 }
 
 .pane-heading {

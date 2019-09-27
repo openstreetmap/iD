@@ -29,7 +29,7 @@ export function uiToolAddFeature(context) {
     var button = d3_select(null);
 
     var key = t('modes.add_feature.key');
-    var keys = [key, '`', '²']; // #5663 - common QWERTY, AZERTY
+    var keys = [key, '`', '²', '@']; // #5663, #6864 - common QWERTY, AZERTY
 
     tool.render = function(selection) {
 

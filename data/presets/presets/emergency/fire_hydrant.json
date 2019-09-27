@@ -8,10 +8,11 @@
         "couplings"
     ],
     "moreFields": [
-        "fire_hydrant/pressure",
         "fire_hydrant/diameter",
-        "water_volume",
-        "survey/date"
+        "fire_hydrant/pressure",
+        "level",
+        "survey/date",
+        "water_volume"
     ],
     "geometry": [
         "point",

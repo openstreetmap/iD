@@ -7,17 +7,18 @@
         "currency_multi"
     ],
     "moreFields": [
+        "blind",
         "brand",
         "covered",
         "height",
         "indoor",
+        "level",
         "manufacturer"
     ],
     "geometry": [
         "point"
     ],
-    "terms": [
-    ],
+    "terms": [],
     "tags": {
         "amenity": "vending_machine"
     },

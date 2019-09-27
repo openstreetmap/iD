@@ -19,8 +19,10 @@ import { utilRebind } from '../util/rebind';
 
 // constants
 var TILESIZE = 256;
-var kMin = geoZoomToScale(2, TILESIZE);
-var kMax = geoZoomToScale(24, TILESIZE);
+var minZoom = 2;
+var maxZoom = 24;
+var kMin = geoZoomToScale(minZoom, TILESIZE);
+var kMax = geoZoomToScale(maxZoom, TILESIZE);
 
 function clamp(num, min, max) {
     return Math.max(min, Math.min(num, max));
@@ -435,6 +437,7 @@ export function rendererMap(context) {
                 p0 = _getMouseCoords(source);
                 p1 = t0.invert(p0);
                 k2 = t0.k * Math.pow(2, -dY / 500);
+                k2 = clamp(k2, kMin, kMax);
                 x2 = p0[0] - p1[0] * k2;
                 y2 = p0[1] - p1[1] * k2;
 
@@ -446,6 +449,7 @@ export function rendererMap(context) {
                 p0 = _getMouseCoords(source);
                 p1 = t0.invert(p0);
                 k2 = t0.k * source._scale;
+                k2 = clamp(k2, kMin, kMax);
                 x2 = p0[0] - p1[0] * k2;
                 y2 = p0[1] - p1[1] * k2;
 
@@ -461,6 +465,7 @@ export function rendererMap(context) {
                 p0 = _getMouseCoords(source);
                 p1 = t0.invert(p0);
                 k2 = t0.k * Math.pow(2, -dY / 500);
+                k2 = clamp(k2, kMin, kMax);
                 x2 = p0[0] - p1[0] * k2;
                 y2 = p0[1] - p1[1] * k2;
 
@@ -471,6 +476,7 @@ export function rendererMap(context) {
                 p0 = _getMouseCoords(source);
                 p1 = t0.invert(p0);
                 k2 = t0.k * Math.pow(2, -dY / 500);
+                k2 = clamp(k2, kMin, kMax);
                 x2 = p0[0] - p1[0] * k2;
                 y2 = p0[1] - p1[1] * k2;
 
@@ -483,6 +489,7 @@ export function rendererMap(context) {
                 x2 = p1[0] - dX;
                 y2 = p1[1] - dY;
                 k2 = projection.scale();
+                k2 = clamp(k2, kMin, kMax);
             }
 
             // something changed - replace the event transform
@@ -766,10 +773,11 @@ export function rendererMap(context) {
 
     map.zoomIn = function() { zoomIn(1); };
     map.zoomInFurther = function() { zoomIn(4); };
+    map.canZoomIn = function() { return map.zoom() < maxZoom; };
 
     map.zoomOut = function() { zoomOut(1); };
     map.zoomOutFurther = function() { zoomOut(4); };
-
+    map.canZoomOut = function() { return map.zoom() > minZoom; };
 
     map.center = function(loc2) {
         if (!arguments.length) {

@@ -1,8 +1,10 @@
 {
     "icon": "maki-entrance-alt1",
     "fields": [
+        "ref",
         "access_simple",
-        "ref"
+        "address",
+        "level"
     ],
     "geometry": [
         "vertex"

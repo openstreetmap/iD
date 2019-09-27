@@ -12,6 +12,9 @@
     "fields": [
         "barrier"
     ],
+    "moreFields": [
+        "level"
+    ],
     "name": "Barrier",
     "matchScore": 0.4
 }

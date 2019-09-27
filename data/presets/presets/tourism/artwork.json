@@ -6,6 +6,7 @@
         "artist"
     ],
     "moreFields": [
+        "level",
         "material",
         "website"
     ],

@@ -1,8 +1,8 @@
 {
     "icon": "maki-grocery",
     "moreFields": [
-        "diet_multi",
-        "{shop}"
+        "{shop}",
+        "diet_multi"
     ],
     "geometry": [
         "point",

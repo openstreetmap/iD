@@ -1,4 +1,4 @@
-describe('iD.validations.tag_suggests_area', function () {
+describe('iD.validations.mismatched_geometry', function () {
     var context;
 
     beforeEach(function() {
@@ -41,7 +41,7 @@ describe('iD.validations.tag_suggests_area', function () {
     }
 
     function validate() {
-        var validator = iD.validationTagSuggestsArea(context);
+        var validator = iD.validationMismatchedGeometry(context);
         var changes = context.history().changes();
         var entities = changes.modified.concat(changes.created);
         var issues = [];
@@ -86,7 +86,8 @@ describe('iD.validations.tag_suggests_area', function () {
         var issues = validate();
         expect(issues).to.have.lengthOf(1);
         var issue = issues[0];
-        expect(issue.type).to.eql('tag_suggests_area');
+        expect(issue.type).to.eql('mismatched_geometry');
+        expect(issue.subtype).to.eql('area_as_line');
         expect(issue.severity).to.eql('warning');
         expect(issue.entityIds).to.have.lengthOf(1);
         expect(issue.entityIds[0]).to.eql('w-1');
@@ -97,7 +98,8 @@ describe('iD.validations.tag_suggests_area', function () {
         var issues = validate();
         expect(issues).to.have.lengthOf(1);
         var issue = issues[0];
-        expect(issue.type).to.eql('tag_suggests_area');
+        expect(issue.type).to.eql('mismatched_geometry');
+        expect(issue.subtype).to.eql('area_as_line');
         expect(issue.severity).to.eql('warning');
         expect(issue.entityIds).to.have.lengthOf(1);
         expect(issue.entityIds[0]).to.eql('w-1');

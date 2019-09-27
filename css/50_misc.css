@@ -218,6 +218,20 @@ path.line.stroke.tag-man_made-breakwater {
 .preset-icon-container path.line.stroke.tag-man_made-breakwater {
     stroke-dasharray: 1, 4, 6, 4;
 }
+path.line.stroke.tag-barrier-wall,
+path.line.stroke.tag-barrier-retaining_wall,
+path.line.stroke.tag-barrier-city_wall {
+    stroke-linecap: butt;
+    stroke-dasharray: 16, 3, 9, 3;
+}
+.low-zoom path.line.stroke.tag-barrier-wall,
+.low-zoom path.line.stroke.tag-barrier-retaining_wall,
+.low-zoom path.line.stroke.tag-barrier-city_wall,
+.preset-icon-container path.line.stroke.tag-barrier-wall,
+.preset-icon-container path.line.stroke.tag-barrier-retaining_wall,
+.preset-icon-container path.line.stroke.tag-barrier-city_wall {
+    stroke-dasharray: 8, 1, 4, 1;
+}
 
 
 /* bridges */

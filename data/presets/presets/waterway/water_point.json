@@ -1,9 +1,9 @@
 {
-     "icon": "maki-drinking-water",
-     "geometry": [
-         "point",
-         "vertex",
-         "area"
+    "icon": "maki-drinking-water",
+    "geometry": [
+        "point",
+        "vertex",
+        "area"
     ],
     "tags": {
         "waterway": "water_point"

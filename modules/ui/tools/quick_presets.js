@@ -124,6 +124,9 @@ export function uiToolQuickPresets(context) {
             .attr('class', function(d) {
                 return d.button + ' add-button bar-button';
             })
+            .attr('id', function(d) {
+                return d.button.replace(/ /g, '-');
+            })
             .on('click.mode-buttons', function(d) {
                 if (d3_select(this).classed('disabled')) return;
                 toggleMode(d);
@@ -155,6 +158,7 @@ export function uiToolQuickPresets(context) {
                     );
             });
 
+        var scrollNode = d3_select('#bar').node();
         var dragOrigin, dragMoved, targetData;
         var ltr = textDirection === 'ltr',
             rtl = !ltr;
@@ -163,9 +167,12 @@ export function uiToolQuickPresets(context) {
             .filter('.add-favorite, .add-recent')
             .call(d3_drag()
             .on('start', function() {
+                var node = d3_select(this).node();
                 dragOrigin = {
                     x: d3_event.x,
-                    y: d3_event.y
+                    y: d3_event.y,
+                    nodeLeft: node.offsetLeft,
+                    nodeTop: node.offsetTop,
                 };
                 targetData = null;
                 dragMoved = false;
@@ -176,27 +183,43 @@ export function uiToolQuickPresets(context) {
                 var deltaX = d3_event.x - dragOrigin.x,
                     deltaY = d3_event.y - dragOrigin.y;
 
-                if (!d3_select(this).classed('dragging') &&
-                    // don't display drag until dragging beyond a distance threshold
-                    Math.sqrt(Math.pow(deltaX, 2) + Math.pow(deltaY, 2)) <= 5) return;
+                var button = d3_select(this);
 
-                d3_select(this)
-                    .classed('dragging', true)
-                    .classed('removing', deltaY > 50);
+                if (!button.classed('dragging')) {
+                    // haven't committed to dragging yet
+
+                    // don't display drag until dragging beyond a distance threshold
+                    if (Math.sqrt(Math.pow(deltaX, 2) + Math.pow(deltaY, 2)) <= 5) return;
+
+                    // setup dragging
+
+                    d3_select(this.parentNode)
+                        .insert('div', '#' + button.attr('id'))
+                        .attr('class', 'drag-placeholder');
+
+                    button
+                        .classed('dragging', true)
+                        // must use absolute position so button will display if dragged out of the toolbar
+                        .style('position', 'absolute');
+                }
+
+                var draggingNode = button.node();
+                var eventX = d3_event.x + draggingNode.parentNode.offsetLeft;
+                var origLeft = dragOrigin.nodeLeft;
+
+                button
+                    .classed('removing', deltaY > 50)
+                    .style('left', dragOrigin.nodeLeft + deltaX - scrollNode.scrollLeft + 'px')
+                    .style('top', dragOrigin.nodeTop + deltaY + 'px');
 
                 targetData = null;
 
-                var draggingNode = d3_select(this).node();
-                var eventX = d3_event.x + draggingNode.parentNode.offsetLeft;
-                var origLeft = draggingNode.offsetLeft;
-
-                d3_selectAll('#bar button.add-preset')
+                d3_selectAll('#bar button.add-favorite, #bar button.add-recent')
                     .style('transform', function(d2) {
 
-                        if (d.button === d2.button) {
-                            return 'translate(' + deltaX + 'px, ' + deltaY + 'px)';
-                        }
+                        if (d.button === d2.button) return null;
 
+                        // no need to reposition elements if dragging out of toolbar
                         if (deltaY > 50) return null;
 
                         var node = d3_select(this).node(),
@@ -233,11 +256,15 @@ export function uiToolQuickPresets(context) {
                     return;
                 }
 
+                d3_selectAll('#bar .drag-placeholder')
+                    .remove();
+
                 d3_select(this)
                     .classed('dragging', false)
-                    .classed('removing', false);
+                    .classed('removing', false)
+                    .style('position', null);
 
-                d3_selectAll('#bar button.add-preset')
+                d3_selectAll('#bar button.add-favorite, #bar button.add-recent')
                     .style('transform', null);
 
                 var deltaY = d3_event.y - dragOrigin.y;

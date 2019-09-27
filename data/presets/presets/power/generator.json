@@ -9,6 +9,7 @@
         "ref"
     ],
     "moreFields": [
+        "level",
         "manufacturer"
     ],
     "geometry": [

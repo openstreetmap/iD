@@ -1,13 +1,16 @@
 {
-    "icon": "maki-roadblock",
+    "icon": "temaki-silo",
     "fields": [
         "access",
-        "material"
+        "bollard",
+        "height",
+        "width",
+        "material",
+        "colour"
     ],
     "geometry": [
         "point",
-        "vertex",
-        "line"
+        "vertex"
     ],
     "tags": {
         "barrier": "bollard"

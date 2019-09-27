@@ -5,6 +5,9 @@
         "ref",
         "operator"
     ],
+    "moreFields": [
+        "level"
+    ],
     "geometry": [
         "point",
         "vertex"
@@ -17,7 +20,7 @@
         "medic*",
         "medkit"
     ],
-   "tags": {
+    "tags": {
         "emergency": "first_aid_kit"
     },
     "name": "First Aid Kit"

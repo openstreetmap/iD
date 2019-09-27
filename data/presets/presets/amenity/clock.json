@@ -12,6 +12,7 @@
         "covered",
         "height",
         "indoor",
+        "level",
         "lit",
         "manufacturer"
     ],
@@ -19,7 +20,7 @@
         "point",
         "vertex"
     ],
-    "terms":[
+    "terms": [
         "time"
     ],
     "tags": {

@@ -1,14 +1,15 @@
 {
     "icon": "temaki-elevator",
     "fields": [
-        "access_simple",
-        "opening_hours",
-        "maxweight",
         "ref",
-        "wheelchair"
+        "level_semi",
+        "access_simple",
+        "wheelchair",
+        "maxweight"
     ],
     "moreFields": [
-        "maxheight"
+        "maxheight",
+        "opening_hours"
     ],
     "geometry": [
         "vertex"

@@ -18,7 +18,7 @@
         "tornado",
         "warning"
     ],
-   "tags": {
+    "tags": {
         "emergency": "siren"
     },
     "name": "Siren"

@@ -3,7 +3,9 @@
     "fields": [
         "maxheight"
     ],
-    "geometry": [ "vertex" ],
+    "geometry": [
+        "vertex"
+    ],
     "tags": {
         "barrier": "height_restrictor"
     },

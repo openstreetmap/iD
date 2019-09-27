@@ -10,9 +10,10 @@
     ],
     "moreFields": [
         "address",
-        "email",
         "covered",
+        "email",
         "fax",
+        "level",
         "opening_hours",
         "phone",
         "website",
@@ -29,8 +30,10 @@
         "bikeshare",
         "bike share",
         "bicycle share",
-        "hub",
-        "dock"
+        "cycle dock",
+        "cycle hub",
+        "cycleshare",
+        "cycling"
     ],
     "tags": {
         "amenity": "bicycle_rental"

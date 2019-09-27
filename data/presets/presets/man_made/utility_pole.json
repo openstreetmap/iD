@@ -1,0 +1,21 @@
+{
+    "icon": "temaki-utility_pole",
+    "fields": [
+        "ref",
+        "operator",
+        "height",
+        "material"
+    ],
+    "moreFields": [
+        "colour",
+        "manufacturer"
+    ],
+    "geometry": [
+        "point",
+        "vertex"
+    ],
+    "tags": {
+        "man_made": "utility_pole"
+    },
+    "name": "Utility Pole"
+}

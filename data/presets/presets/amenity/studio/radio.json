@@ -1,0 +1,22 @@
+{
+    "icon": "fas-microphone",
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "terms": [
+        "am radio",
+        "fm radio",
+        "radio broadcast",
+        "radio studio"
+    ],
+    "tags": {
+        "amenity": "studio",
+        "studio": "radio"
+    },
+    "reference": {
+        "key": "studio",
+        "value": "radio"
+    },
+    "name": "Radio Station"
+}
