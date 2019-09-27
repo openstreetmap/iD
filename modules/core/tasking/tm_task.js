@@ -21,7 +21,7 @@ var statuses = {
 };
 
 /* Constants */
-var EXTENT_CONSTRAINT = 250; // meter buffer around tmTask for curtain
+var editableBufferFactor = 10; // percent buffer around tmTask for curtain
 var MIN_ZOOM = 14;
 
 export function tmTask() {
@@ -65,7 +65,7 @@ Object.assign(tmTask.prototype, {
         this.center = this.extent.center();
 
         // allow editing a small margin beyond the task bounds
-        this.editableExtent = (new geoExtent(this.extent)).padByMeters(EXTENT_CONSTRAINT);
+        this.editableExtent = (new geoExtent(this.extent)).padByPercent(editableBufferFactor);
 
         // set starting minimum zoom
         this._minZoom = MIN_ZOOM;
