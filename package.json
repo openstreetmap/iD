@@ -56,10 +56,10 @@
     "wmf-sitematrix": "0.1.4"
   },
   "devDependencies": {
-    "@fortawesome/fontawesome-svg-core": "^1.2.23",
-    "@fortawesome/free-brands-svg-icons": "^5.11.0",
-    "@fortawesome/free-regular-svg-icons": "^5.11.0",
-    "@fortawesome/free-solid-svg-icons": "^5.11.0",
+    "@fortawesome/fontawesome-svg-core": "^1.2.25",
+    "@fortawesome/free-brands-svg-icons": "^5.11.2",
+    "@fortawesome/free-regular-svg-icons": "^5.11.2",
+    "@fortawesome/free-solid-svg-icons": "^5.11.2",
     "@mapbox/maki": "^6.0.0",
     "chai": "^4.1.0",
     "cldr-core": "35.1.0",
@@ -99,7 +99,7 @@
     "smash": "0.0",
     "static-server": "^2.2.1",
     "svg-sprite": "1.5.0",
-    "temaki": "1.8.0",
+    "temaki": "1.9.0",
     "uglify-js": "~3.6.0"
   },
   "greenkeeper": {
