@@ -1,5 +1,5 @@
 {
-    "icon": "maki-bank",
+    "icon": "temaki-atm",
     "fields": [
         "operator",
         "network",
