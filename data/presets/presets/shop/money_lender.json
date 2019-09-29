@@ -1,5 +1,5 @@
 {
-    "icon": "maki-bank",
+    "icon": "temaki-money_hand",
     "fields": [
         "{shop}",
         "currency_multi"

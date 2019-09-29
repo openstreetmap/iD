@@ -1,0 +1,19 @@
+{
+    "icon": "temaki-psychic",
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "tags": {
+        "shop": "psychic"
+    },
+    "terms": [
+        "astrology",
+        "crystal ball",
+        "divination",
+        "fortune teller",
+        "seer",
+        "spirit"
+    ],
+    "name": "Psychic"
+}

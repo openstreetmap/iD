@@ -7398,7 +7398,7 @@ en:
       shop/general:
         # shop=general
         name: General Store
-        # 'terms: Village Shop'
+        # 'terms: village shop'
         terms: '<translate with synonyms or related terms for ''General Store'', separated by commas>'
       shop/gift:
         # shop=gift
@@ -7619,6 +7619,11 @@ en:
         name: Printer Ink Store
         # 'terms: copier ink,fax ink,ink cartridges,toner'
         terms: '<translate with synonyms or related terms for ''Printer Ink Store'', separated by commas>'
+      shop/psychic:
+        # shop=psychic
+        name: Psychic
+        # 'terms: astrology,crystal ball,divination,fortune teller,seer,spirit'
+        terms: '<translate with synonyms or related terms for ''Psychic'', separated by commas>'
       shop/pyrotechnics:
         # shop=pyrotechnics
         name: Fireworks Store
