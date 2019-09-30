@@ -58,6 +58,8 @@ export function uiAssistant(context) {
     var savedChangeCount = null;
     var didEditAnythingYet = false;
 
+    var shownPanel = null;
+
     context.storage('sawSplash', true);
 
     var assistant = function(selection) {
@@ -274,6 +276,8 @@ export function uiAssistant(context) {
 
             bodyTextArea.html(panel.message);
         }
+
+        shownPanel = panel;
     }
 
     function panelToDraw() {
@@ -297,6 +301,10 @@ export function uiAssistant(context) {
         } else if (mode.id === 'select') {
 
             return panelSelect(context, mode.selectedIDs());
+
+        } else if (mode.id === 'drag-node' && mode.restoreSelectedIDs().length) {
+
+            return panelSelect(context, mode.restoreSelectedIDs());
 
         } else if (mode.id === 'select-note') {
             var note = context.connection() && context.connection().getNote(mode.selectedNoteID());
@@ -336,7 +344,12 @@ export function uiAssistant(context) {
             updateDidEditStatus();
         }
 
-        drawPanel(panelToDraw());
+        var nextPanel = panelToDraw();
+        if (shownPanel && shownPanel.hash && nextPanel.hash &&
+            shownPanel.hash === nextPanel.hash) {
+            return; // panels are identical, so don't update anything
+        }
+        drawPanel(nextPanel);
     }
 
     function scheduleCurrentLocationUpdate() {
@@ -860,6 +873,7 @@ export function uiAssistant(context) {
     function panelSelect(context, selectedIDs) {
 
         var panel = {
+            hash: 'select ' + selectedIDs.toString(),
             theme: 'light',
             modeLabel: t('assistant.mode.inspecting'),
             title: selectedIDs.length === 1 ? utilDisplayLabel(context.entity(selectedIDs[0]), context) :
@@ -885,11 +899,11 @@ export function uiAssistant(context) {
         };
 
         panel.renderBody = function(selection) {
-            var entityEditor = uiEntityEditor(context);
-            entityEditor
+            var mode = context.mode();
+            var entityEditor = uiEntityEditor(context)
                 .state('select')
                 .entityIDs(selectedIDs)
-                .newFeature(context.mode().newFeature());
+                .newFeature(mode.newFeature && mode.newFeature());
             selection.call(entityEditor);
         };
 
