@@ -419,7 +419,6 @@ export function uiInit(context) {
     };
 
     ui.togglePanes = function(showPane) {
-        var panesWrap = d3_selectAll('.map-panes');
         var shownPanes = d3_selectAll('.map-pane.shown');
 
         var side = textDirection === 'ltr' ? 'right' : 'left';
@@ -448,7 +447,6 @@ export function uiInit(context) {
                     .transition()
                     .duration(200)
                     .style(side, '0px');
-                panesWrap.style('width', '100%');
             } else {
                 showPane
                     .style(side, '0px');
@@ -462,7 +460,6 @@ export function uiInit(context) {
                 .style(side, '-500px')
                 .on('end', function() {
                     d3_select(this).classed('hide', true);
-                    panesWrap.style('width', null);
                 });
         }
     };
