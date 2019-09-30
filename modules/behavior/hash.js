@@ -95,7 +95,8 @@ export function behaviorHash(context) {
 
             if (q.id) {
                 if (!context.history().hasRestorableChanges()) {
-                    context.zoomToEntity(q.id.split(',')[0], true /* ignore `map` parameter */);
+                    // targeting specific features: download, select, and zoom to them
+                    context.zoomToEntities(q.id.split(','));
                 }
             }
 

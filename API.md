@@ -29,8 +29,9 @@ of iD (e.g. `http://preview.ideditor.com/release/`), the following parameters ar
   optional and will be added automatically. (Note that hashtag-like strings are
   automatically detected in the `comment`).<br/>
   _Example:_ `hashtags=%23hotosm-task-592,%23MissingMaps`
-* __`id`__ - The character 'n', 'w', or 'r', followed by the OSM ID of a node, way or relation, respectively. Selects the specified entity and centers the map on it, ignoring the `map` paramter.<br/>
+* __`id`__ - The character 'n', 'w', or 'r', followed by the OSM ID of a node, way or relation, respectively. Selects the specified entity and centers the map on it, ignoring the `map` parameter. Multiple comma-separated values are supported.<br/>
   _Example:_ `id=n1207480649`
+  _Example 2:_ `id=n1207480649,n3334654948`
 * __`locale`__ - A code specifying the localization to use, affecting the language, layout, and keyboard shortcuts. The default locale is set by the browser.<br/>
   _Example:_ `locale=en-US`, `locale=de`<br/>
   _Available values:_ Any of the [supported locales](https://github.com/openstreetmap/iD/tree/master/dist/locales).

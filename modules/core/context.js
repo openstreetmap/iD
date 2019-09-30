@@ -235,6 +235,30 @@ export function coreContext() {
         });
     };
 
+    context.zoomToEntities = function(entityIDs) {
+        context.loadEntities(entityIDs);
+
+        map.on('drawn.zoomToEntities', function() {
+            if (entityIDs.some(function(entityID) {
+                return !context.hasEntity(entityID);
+            })) return;
+
+            map.on('drawn.zoomToEntities', null);
+            context.on('enter.zoomToEntities', null);
+
+            var mode = modeSelect(context, entityIDs);
+            context.enter(mode);
+            mode.zoomToSelected();
+        });
+
+        context.on('enter.zoomToEntities', function() {
+            if (mode.id !== 'browse') {
+                map.on('drawn.zoomToEntities', null);
+                context.on('enter.zoomToEntities', null);
+            }
+        });
+    };
+
     var minEditableZoom = 16;
     context.minEditableZoom = function(val) {
         if (!arguments.length) return minEditableZoom;
