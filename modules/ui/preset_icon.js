@@ -1,6 +1,8 @@
 import { select as d3_select } from 'd3-selection';
 
-import { svgIcon, svgTagClasses } from '../svg';
+import { svgTagClasses } from '../svg/tag_classes';
+import { svgIcon } from '../svg/icon';
+import { svgTagPattern } from '../svg/tag_pattern';
 import { utilFunctor } from '../util';
 
 export function uiPresetIcon(context) {
@@ -310,10 +312,15 @@ export function uiPresetIcon(context) {
         renderSquareFill(fillEnter);
         fill = fillEnter.merge(fill);
 
+        var patternID = svgTagPattern(tags);
+        var patternStyle = patternID ? 'url("#' + patternID + '")' : null;
+
         fill.selectAll('path.stroke')
             .attr('class', 'area stroke ' + tagClasses);
         fill.selectAll('path.fill')
-            .attr('class', 'area fill ' + tagClasses);
+            .attr('class', 'area fill ' + tagClasses)
+            .style('fill', patternStyle)
+            .style('stroke', patternStyle);
 
 
         var line = container.selectAll('.preset-icon-line')
