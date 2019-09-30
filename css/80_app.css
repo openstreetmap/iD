@@ -3731,6 +3731,7 @@ div.full-screen > button:hover {
     padding: 5px 10px;
     cursor: pointer;
     flex: 1 1 auto;
+    min-width: 0;
 }
 
 [dir='ltr'] .layer-list .indented label {
