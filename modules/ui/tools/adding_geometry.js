@@ -41,7 +41,7 @@ export function uiToolAddingGeometry(context) {
         },
         building: {
             id: 'building',
-            icon: 'iD-icon-area',
+            icon: 'maki-building-15',
             label: t('presets.presets.building.name'),
             mode: modeAddArea
         }
