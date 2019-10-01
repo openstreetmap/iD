@@ -1432,10 +1432,6 @@ en:
         message: '{feature} has an invalid email address'
         message_multi: '{feature} has multiple invalid email addresses'
         reference: 'Email addresses must look like "user@example.com".'
-      website:
-        message: '{feature} has an invalid website.'
-        message_multi: '{feature} has multiple invalid websites.'
-        reference: 'Websites should start with "http" or "https".'
     mismatched_geometry:
       title: Mismatched Geometry
       tip: "Find features with conflicting tags and geometry"
