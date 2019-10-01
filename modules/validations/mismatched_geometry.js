@@ -1,6 +1,8 @@
 import { actionAddVertex } from '../actions/add_vertex';
 import { actionChangeTags } from '../actions/change_tags';
 import { actionMergeNodes } from '../actions/merge_nodes';
+import { actionExtract } from '../actions/extract';
+import { modeSelect } from '../modes/select';
 import { osmNodeGeometriesForTags } from '../osm/tags';
 import { geoHasSelfIntersections, geoSphericalDistance } from '../geo';
 import { t } from '../util/locale';
@@ -169,6 +171,22 @@ export function validationMismatchedGeometry(context) {
 
         } else if (geometry === 'vertex' && !allowedGeometries.vertex && allowedGeometries.point) {
 
+            var extractOnClick = null;
+            if (!context.hasHiddenConnections(entity.id) &&
+                !actionExtract(entity.id, context.projection).disabled(context.graph())) {
+
+                extractOnClick = function(context) {
+                    var entityId = this.issue.entityIds[0];
+                    var action = actionExtract(entityId, context.projection);
+                    context.perform(
+                        action,
+                        t('operations.extract.annotation.single')
+                    );
+                    // re-enter mode to trigger updates
+                    context.enter(modeSelect(context, [action.getExtractedNodeID()]));
+                };
+            }
+
             return new validationIssue({
                 type: type,
                 subtype: 'point_as_vertex',
@@ -187,7 +205,15 @@ export function validationMismatchedGeometry(context) {
                         .attr('class', 'issue-reference')
                         .text(t('issues.point_as_vertex.reference'));
                 },
-                entityIds: [entity.id]
+                entityIds: [entity.id],
+                fixes: [
+                    new validationIssueFix({
+                        icon: 'iD-operation-extract',
+                        title: t('issues.fix.extract_point.title'),
+                        onClick: extractOnClick
+                    })
+                ],
+                hash: typeof extractOnClick, // avoid stale extraction fix
             });
         }
 

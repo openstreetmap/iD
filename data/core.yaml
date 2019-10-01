@@ -1530,6 +1530,8 @@ en:
         title: Continue drawing from end
       delete_feature:
         title: Delete this feature
+      extract_point:
+        title: Extract this point
       ignore_issue:
         title: Ignore this issue
       merge_close_vertices:
