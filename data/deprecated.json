@@ -410,27 +410,27 @@
     },
     {
       "old": {"golf": "faiway"},
-      "replace": {"golf": "fairway"}
+      "replace": {"golf": "fairway", "landuse": "grass"}
     },
     {
       "old": {"golf": "putting_green"},
-      "replace": {"golf": "green"}
+      "replace": {"golf": "green", "landuse": "grass"}
     },
     {
       "old": {"golf": "sand_trap"},
-      "replace": {"golf": "bunker"}
+      "replace": {"golf": "bunker", "natural": "sand"}
     },
     {
       "old": {"golf": "tee_area"},
-      "replace": {"golf": "tee"}
+      "replace": {"golf": "tee", "landuse": "grass"}
     },
     {
       "old": {"golf": "tee_box"},
-      "replace": {"golf": "tee"}
+      "replace": {"golf": "tee", "landuse": "grass"}
     },
     {
       "old": {"golf": "teebox"},
-      "replace": {"golf": "tee"}
+      "replace": {"golf": "tee", "landuse": "grass"}
     },
     {
       "old": {"highway": "abandoned"},
