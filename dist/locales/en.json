@@ -1837,14 +1837,9 @@
                 "title": "Invalid Formatting",
                 "tip": "Find tags with unexpected formats",
                 "email": {
-                    "message": "{feature} has an invalid email address.",
-                    "message_multi": "{feature} has multiple invalid email addresses.",
+                    "message": "{feature} has an invalid email address",
+                    "message_multi": "{feature} has multiple invalid email addresses",
                     "reference": "Email addresses must look like \"user@example.com\"."
-                },
-                "website": {
-                    "message": "{feature} has an invalid website.",
-                    "message_multi": "{feature} has multiple invalid websites.",
-                    "reference": "Websites should start with \"http\" or \"https\"."
                 }
             },
             "mismatched_geometry": {
@@ -1976,6 +1971,9 @@
                 },
                 "delete_feature": {
                     "title": "Delete this feature"
+                },
+                "extract_point": {
+                    "title": "Extract this point"
                 },
                 "ignore_issue": {
                     "title": "Ignore this issue"

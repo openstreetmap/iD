@@ -372,19 +372,20 @@ export function coreValidator(context) {
 
             var checkParentRels = [entity];
 
-            if (entity.type === 'node') {   // include parent ways
+            if (entity.type === 'node') {
                 graph.parentWays(entity).forEach(function(parentWay) {
-                    acc.add(parentWay.id);
+                    acc.add(parentWay.id); // include parent ways
                     checkParentRels.push(parentWay);
                 });
-            } else if (entity.type === 'relation') {   // include members
+            } else if (entity.type === 'relation') {
                 entity.members.forEach(function(member) {
-                    acc.add(member.id);
+                    acc.add(member.id); // include members
                 });
-            } else if (entity.type === 'way') {   // include connected ways
+            } else if (entity.type === 'way') {
                 entity.nodes.forEach(function(nodeID) {
+                    acc.add(nodeID); // include child nodes
                     graph._parentWays[nodeID].forEach(function(wayID) {
-                        acc.add(wayID);
+                        acc.add(wayID); // include connected ways
                     });
                 });
             }
@@ -460,13 +461,14 @@ export function coreValidator(context) {
         var createdAndModifiedEntityIDs = difference.extantIDs(true);   // created/modified (true = w/relation members)
         var entityIDsToCheck = entityIDsToValidate(createdAndModifiedEntityIDs, currGraph);
 
-        // "validate" deleted entities in order to update their related entities
+        // check modified and deleted entities against the old graph in order to update their related entities
         // (e.g. deleting the only highway connected to a road should create a disconnected highway issue)
-        var deletedEntityIDs = difference.deleted().map(function(entity) { return entity.id; });
-        var entityIDsToCheckForDeleted = entityIDsToValidate(deletedEntityIDs, oldGraph);
+        var modifiedAndDeletedEntityIDs = difference.deleted().concat(difference.modified())
+            .map(function(entity) { return entity.id; });
+        var entityIDsToCheckForOldGraph = entityIDsToValidate(modifiedAndDeletedEntityIDs, oldGraph);
 
         // concat the sets
-        entityIDsToCheckForDeleted.forEach(entityIDsToCheck.add, entityIDsToCheck);
+        entityIDsToCheckForOldGraph.forEach(entityIDsToCheck.add, entityIDsToCheck);
 
         validateEntities(entityIDsToCheck);   // dispatches 'validated'
     };
