@@ -16,11 +16,18 @@ export function uiToolAddRecent(context) {
         var precedingCount = context.storage('tool.add_generic.toggledOn') === 'true' ? 3 : 0;
 
         var favorites = context.presets().getFavorites().slice(0, maxShown);
+        var generics = context.presets().getGenericRibbonItems();
         precedingCount += favorites.length;
 
         function isAFavorite(recent) {
             return favorites.some(function(favorite) {
                 return favorite.matches(recent.preset);
+            });
+        }
+
+        function isGeneric(recent) {
+            return generics.some(function(generic) {
+                return generic.matches(recent.preset);
             });
         }
 
@@ -32,11 +39,15 @@ export function uiToolAddRecent(context) {
             });
             for (var i in recents) {
                 var recent = recents[i];
-                if (!isAFavorite(recent)) {
-                    items.push(recent);
-                    if (items.length === maxRecents) {
-                        break;
-                    }
+                if (isAFavorite(recent)) {
+                    continue;
+                }
+                if (isGeneric(recent) && context.storage('tool.add_generic.toggledOn') === 'true') {
+                    continue;
+                }
+                items.push(recent);
+                if (items.length === maxRecents) {
+                    break;
                 }
             }
         }
