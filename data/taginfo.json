@@ -1641,6 +1641,7 @@
     {"key": "reservation", "value": "no", "description": "🄵 Reservations"},
     {"key": "reservation", "value": "required", "description": "🄵 Reservations"},
     {"key": "reservation", "value": "recommended", "description": "🄵 Reservations"},
+    {"key": "residential", "description": "🄵 Type"},
     {"key": "resort", "description": "🄵 Type"},
     {"key": "resource", "description": "🄵 Resources"},
     {"key": "restriction", "description": "🄵 Type"},
