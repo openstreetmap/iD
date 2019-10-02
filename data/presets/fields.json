@@ -310,6 +310,7 @@
     "relation": {"key": "type", "type": "combo", "label": "Type"},
     "religion": {"key": "religion", "type": "combo", "label": "Religion"},
     "reservation": {"key": "reservation", "type": "combo", "label": "Reservations", "strings": {"options": {"yes": "Accepted", "no": "Not Accepted", "required": "Required", "recommended": "Recommended"}}},
+    "residential": {"key": "residential", "type": "combo", "label": "Type"},
     "resort": {"key": "resort", "type": "combo", "label": "Type"},
     "resource": {"key": "resource", "type": "semiCombo", "label": "Resources"},
     "restriction": {"key": "restriction", "type": "combo", "label": "Type"},

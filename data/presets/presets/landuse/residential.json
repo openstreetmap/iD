@@ -1,5 +1,9 @@
 {
     "icon": "maki-building",
+    "fields": [
+        "name",
+        "residential"
+    ],
     "geometry": [
         "area"
     ],

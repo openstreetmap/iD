@@ -484,10 +484,8 @@ function generateTaginfo(presets, fields) {
             'description': 'Online editor for OSM data.',
             'project_url': 'https://github.com/openstreetmap/iD',
             'doc_url': 'https://github.com/openstreetmap/iD/blob/master/data/presets/README.md',
-            'icon_url': 'https://cdn.jsdelivr.net/gh/openstreetmap/iD/dist/img/logo.png',
-            'keywords': [
-                'editor'
-            ]
+            'icon_url': 'https://cdn.jsdelivr.net/gh/openstreetmap/iD@release/dist/img/logo.png',
+            'keywords': ['editor']
         },
         'tags': []
     };
@@ -521,13 +519,13 @@ function generateTaginfo(presets, fields) {
             tag.icon_url = 'https://cdn.jsdelivr.net/gh/bhousel/temaki/icons/' +
                 preset.icon.replace(/^temaki-/, '') + '.svg';
         } else if (/^fa[srb]-/.test(preset.icon)) {
-            tag.icon_url = 'https://cdn.jsdelivr.net/gh/openstreetmap/iD/svg/fontawesome/' +
+            tag.icon_url = 'https://cdn.jsdelivr.net/gh/openstreetmap/iD@master/svg/fontawesome/' +
                 preset.icon + '.svg';
         } else if (/^iD-/.test(preset.icon)) {
-            tag.icon_url = 'https://cdn.jsdelivr.net/gh/openstreetmap/iD/svg/iD-sprite/presets/' +
+            tag.icon_url = 'https://cdn.jsdelivr.net/gh/openstreetmap/iD@master/svg/iD-sprite/presets/' +
                 preset.icon.replace(/^iD-/, '') + '.svg';
         } else if (/^tnp-/.test(preset.icon)) {
-            tag.icon_url = 'https://cdn.jsdelivr.net/gh/openstreetmap/iD/svg/the-noun-project/' +
+            tag.icon_url = 'https://cdn.jsdelivr.net/gh/openstreetmap/iD@master/svg/the-noun-project/' +
                 preset.icon.replace(/^tnp-/, '') + '.svg';
         }
 

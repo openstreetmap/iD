@@ -4314,6 +4314,10 @@
                         "recommended": "Recommended"
                     }
                 },
+                "residential": {
+                    "label": "Type",
+                    "terms": ""
+                },
                 "resort": {
                     "label": "Type",
                     "terms": ""
