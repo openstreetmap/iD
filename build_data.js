@@ -437,10 +437,8 @@ function generateTaginfo(presets, fields) {
             'description': 'Online editor for OSM data.',
             'project_url': 'https://github.com/openstreetmap/iD',
             'doc_url': 'https://github.com/openstreetmap/iD/blob/master/data/presets/README.md',
-            'icon_url': 'https://cdn.jsdelivr.net/gh/openstreetmap/iD/dist/img/logo.png',
-            'keywords': [
-                'editor'
-            ]
+            'icon_url': 'https://raw.githubusercontent.com/openstreetmap/iD/release/dist/img/logo.png',
+            'keywords': ['editor']
         },
         'tags': []
     };
@@ -474,14 +472,14 @@ function generateTaginfo(presets, fields) {
             tag.icon_url = 'https://cdn.jsdelivr.net/gh/bhousel/temaki/icons/' +
                 preset.icon.replace(/^temaki-/, '') + '.svg';
         } else if (/^fa[srb]-/.test(preset.icon)) {
-            tag.icon_url = 'https://cdn.jsdelivr.net/gh/openstreetmap/iD/svg/fontawesome/' +
-                preset.icon + '.svg';
+            tag.icon_url = 'https://raw.githubusercontent.com/openstreetmap/iD/master/svg/fontawesome/' +
+                preset.icon + '.svg?sanitize=true';
         } else if (/^iD-/.test(preset.icon)) {
-            tag.icon_url = 'https://cdn.jsdelivr.net/gh/openstreetmap/iD/svg/iD-sprite/presets/' +
-                preset.icon.replace(/^iD-/, '') + '.svg';
+            tag.icon_url = 'https://raw.githubusercontent.com/openstreetmap/iD/master/svg/iD-sprite/presets/' +
+                preset.icon.replace(/^iD-/, '') + '.svg?sanitize=true';
         } else if (/^tnp-/.test(preset.icon)) {
-            tag.icon_url = 'https://cdn.jsdelivr.net/gh/openstreetmap/iD/svg/the-noun-project/' +
-                preset.icon.replace(/^tnp-/, '') + '.svg';
+            tag.icon_url = 'https://raw.githubusercontent.com/openstreetmap/iD/master/svg/the-noun-project/' +
+                preset.icon.replace(/^tnp-/, '') + '.svg?sanitize=true';
         }
 
         coalesceTags(taginfo, tag);
