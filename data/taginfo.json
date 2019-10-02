@@ -428,7 +428,7 @@
     {"key": "emergency", "value": "defibrillator", "description": "🄿 Defibrillator", "object_types": ["node"], "icon_url": "https://cdn.jsdelivr.net/gh/mapbox/maki/icons/defibrillator-15.svg"},
     {"key": "emergency", "value": "fire_alarm_box", "description": "🄿 Fire Alarm Call Box", "object_types": ["node"], "icon_url": "https://cdn.jsdelivr.net/gh/openstreetmap/iD@master/svg/fontawesome/fas-bell.svg"},
     {"key": "emergency", "value": "fire_extinguisher", "description": "🄿 Fire Extinguisher", "object_types": ["node"], "icon_url": "https://cdn.jsdelivr.net/gh/openstreetmap/iD@master/svg/fontawesome/fas-fire-extinguisher.svg"},
-    {"key": "emergency", "value": "fire_hose", "description": "🄿 Fire Hose", "object_types": ["node"], "icon_url": "https://cdn.jsdelivr.net/gh/openstreetmap/iD@master/svg/fontawesome/fas-fire-extinguisher.svg"},
+    {"key": "emergency", "value": "fire_hose", "description": "🄿 Fire Hose", "object_types": ["node"], "icon_url": "https://cdn.jsdelivr.net/gh/openstreetmap/iD@master/svg/fontawesome/fas-tape.svg"},
     {"key": "emergency", "value": "fire_hydrant", "description": "🄿 Fire Hydrant", "object_types": ["node"], "icon_url": "https://cdn.jsdelivr.net/gh/bhousel/temaki/icons/fire_hydrant.svg"},
     {"key": "emergency", "value": "first_aid_kit", "description": "🄿 First Aid Kit", "object_types": ["node"], "icon_url": "https://cdn.jsdelivr.net/gh/openstreetmap/iD@master/svg/fontawesome/fas-medkit.svg"},
     {"key": "emergency", "value": "life_ring", "description": "🄿 Life Ring", "object_types": ["node"], "icon_url": "https://cdn.jsdelivr.net/gh/openstreetmap/iD@master/svg/fontawesome/fas-life-ring.svg"},
