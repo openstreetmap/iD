@@ -337,6 +337,22 @@
       "replace": {"kerb": "lowered"}
     },
     {
+      "old": {"embankment": "1"},
+      "replace": {"embankment": "yes"}
+    },
+    {
+      "old": {"embankment": "false"},
+      "replace": {"embankment": "no"}
+    },
+    {
+      "old": {"embankment": "right", "man_made": "embankment"},
+      "replace": {"man_made": "embankment"}
+    },
+    {
+      "old": {"embankment": "true"},
+      "replace": {"embankment": "yes"}
+    },
+    {
       "old": {"escalator": "*"},
       "replace": {"highway": "steps", "conveying": "$1"}
     },
