@@ -1,0 +1,34 @@
+{
+    "icon": "fas-space-shuttle",
+    "geometry": [
+        "area",
+        "point"
+    ],
+    "fields": [
+        "name",
+        "operator",
+        "access_simple",
+        "website",
+        "wikidata"
+    ],
+    "moreFields": [
+        "email",
+        "fax",
+        "internet_access",
+        "internet_access/fee",
+        "internet_access/ssid",
+        "phone"
+    ],
+    "terms": [
+        "cosmodrome",
+        "rocket launch center",
+        "rocket launch complex",
+        "rocket launch site",
+        "rocket range",
+        "space port"
+    ],
+    "tags": {
+        "aeroway": "spaceport"
+    },
+    "name": "Spaceport"
+}

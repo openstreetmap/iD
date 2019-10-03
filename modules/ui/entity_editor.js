@@ -1,4 +1,4 @@
-import {event as d3_event } from 'd3-selection';
+import { event as d3_event, selectAll as d3_selectAll } from 'd3-selection';
 import deepEqual from 'fast-deep-equal';
 
 import { t } from '../util/locale';
@@ -388,6 +388,15 @@ export function uiEntityEditor(context) {
         if ((weakPreset && match.isFallback()) ||
             // don't reload for same preset
             match === _activePreset) return;
+
+        if (_activePreset && match.id !== _activePreset.id) {
+            // flash the button to indicate the preset changed
+            d3_selectAll('.entity-editor button.preset-reset .label')
+                .style('background-color', '#fff')
+                .transition()
+                .duration(500)
+                .style('background-color', null);
+        }
 
         _activePreset = match;
         _tagReference = uiTagReference(_activePreset.reference(context.geometry(entityID)), context)

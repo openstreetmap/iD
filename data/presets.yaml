@@ -2751,6 +2751,11 @@ en:
         name: Runway
         # 'terms: landing strip'
         terms: '<translate with synonyms or related terms for ''Runway'', separated by commas>'
+      aeroway/spaceport:
+        # aeroway=spaceport
+        name: Spaceport
+        # 'terms: cosmodrome,rocket launch center,rocket launch complex,rocket launch site,rocket range,space port'
+        terms: '<translate with synonyms or related terms for ''Spaceport'', separated by commas>'
       aeroway/taxiway:
         # aeroway=taxiway
         name: Taxiway

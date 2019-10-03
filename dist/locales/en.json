@@ -5238,6 +5238,10 @@
                     "name": "Runway",
                     "terms": "landing strip"
                 },
+                "aeroway/spaceport": {
+                    "name": "Spaceport",
+                    "terms": "cosmodrome,rocket launch center,rocket launch complex,rocket launch site,rocket range,space port"
+                },
                 "aeroway/taxiway": {
                     "name": "Taxiway",
                     "terms": ""
