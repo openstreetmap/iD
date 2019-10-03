@@ -599,8 +599,12 @@ function generateTerritoryLanguages() {
         if (!territoryLangInfo) return;
         var langCodes = Object.keys(territoryLangInfo);
         territoryLanguages[territoryCode.toLowerCase()] = langCodes.sort(function(langCode1, langCode2) {
-            return parseFloat(territoryLangInfo[langCode2]._populationPercent) -
-                   parseFloat(territoryLangInfo[langCode1]._populationPercent);
+            var popPercent1 = parseFloat(territoryLangInfo[langCode1]._populationPercent);
+            var popPercent2 = parseFloat(territoryLangInfo[langCode2]._populationPercent);
+            if (popPercent1 === popPercent2) {
+                return langCode1.localeCompare(langCode2, 'en', { sensitivity: 'base' });
+            }
+            return popPercent2 - popPercent1;
         }).map(function(langCode) {
             return langCode.replace('_', '-');
         });
