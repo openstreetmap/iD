@@ -229,13 +229,17 @@ export function modeSelect(context, selectedIDs) {
         return mode;
     };
 
+    var operations = [];
 
-    mode.enter = function() {
-        if (!checkSelectedIDs()) return;
+    function loadOperations() {
 
-        context.features().forceVisible(selectedIDs);
+        operations.forEach(function(operation) {
+            if (operation.behavior) {
+                context.uninstall(operation.behavior);
+            }
+        });
 
-        var operations = Object.values(Operations)
+        operations = Object.values(Operations)
             .map(function(o) { return o(selectedIDs, context); })
             .filter(function(o) { return o.available() && o.id !== 'delete' && o.id !== 'downgrade'; });
 
@@ -254,9 +258,24 @@ export function modeSelect(context, selectedIDs) {
 
         operations.forEach(function(operation) {
             if (operation.behavior) {
-                behaviors.push(operation.behavior);
+                context.install(operation.behavior);
             }
         });
+
+        // deprecation warning - Radial Menu to be removed in iD v3
+        editMenu = isRadialMenu
+            ? uiRadialMenu(context, operations)
+            : uiEditMenu(context, operations);
+
+    }
+
+
+    mode.enter = function() {
+        if (!checkSelectedIDs()) return;
+
+        context.features().forceVisible(selectedIDs);
+
+        loadOperations();
 
         behaviors.forEach(context.install);
 
@@ -273,16 +292,11 @@ export function modeSelect(context, selectedIDs) {
         d3_select(document)
             .call(keybinding);
 
-
-        // deprecation warning - Radial Menu to be removed in iD v3
-        editMenu = isRadialMenu
-            ? uiRadialMenu(context, operations)
-            : uiEditMenu(context, operations);
-
         context.ui().sidebar
             .select(singular() ? singular().id : null, _newFeature);
 
         context.history()
+            .on('change.select', loadOperations)
             .on('undone.select', update)
             .on('redone.select', update);
 
@@ -519,6 +533,12 @@ export function modeSelect(context, selectedIDs) {
         if (_timeout) window.clearTimeout(_timeout);
         if (inspector) wrap.call(inspector.close);
 
+        operations.forEach(function(operation) {
+            if (operation.behavior) {
+                context.uninstall(operation.behavior);
+            }
+        });
+
         behaviors.forEach(context.uninstall);
 
         d3_select(document)
@@ -528,6 +548,7 @@ export function modeSelect(context, selectedIDs) {
         editMenu = undefined;
 
         context.history()
+            .on('change.select', null)
             .on('undone.select', null)
             .on('redone.select', null);
 
