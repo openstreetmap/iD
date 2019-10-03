@@ -262,6 +262,16 @@ export function uiEntityEditor(context) {
             // Don't replace a weak preset with a fallback preset (e.g. "Point")
             if (!(weakPreset && match.isFallback())) {
                 entityEditor.preset(match);
+
+                if (match.id !== activePreset.id) {
+                    // flash the button to indicate the preset changed
+                    selection
+                        .selectAll('button.preset-reset .label')
+                        .style('background-color', '#fff')
+                        .transition()
+                        .duration(500)
+                        .style('background-color', null);
+                }
             }
             entityEditor.modified(_base !== graph);
             entityEditor(selection);
