@@ -49,17 +49,11 @@ export function validationCrossingWays(context) {
         return hasTag(tags, 'level') || tags.highway === 'corridor';
     }
 
-    function allowsStructures(featureType) {
-        return allowsBridge(featureType) || allowsTunnel(featureType);
-    }
     function allowsBridge(featureType) {
         return featureType === 'highway' || featureType === 'railway' || featureType === 'waterway';
     }
     function allowsTunnel(featureType) {
         return featureType === 'highway' || featureType === 'railway' || featureType === 'waterway';
-    }
-    function canCover(featureType) {
-        return featureType === 'building';
     }
 
 
@@ -121,20 +115,12 @@ export function validationCrossingWays(context) {
         } else if (allowsTunnel(featureType1) && hasTag(tags1, 'tunnel')) return true;
         else if (allowsTunnel(featureType2) && hasTag(tags2, 'tunnel')) return true;
 
-        if (canCover(featureType1) && canCover(featureType2)) {
-            if (hasTag(tags1, 'covered') && !hasTag(tags2, 'covered')) return true;
-            if (!hasTag(tags1, 'covered') && hasTag(tags2, 'covered')) return true;
-            // crossing covered features that can themselves cover must use different layers
-            if (hasTag(tags1, 'covered') && hasTag(tags2, 'covered') && layer1 !== layer2) return true;
-        } else if (canCover(featureType1) && hasTag(tags2, 'covered')) return true;
-        else if (canCover(featureType2) && hasTag(tags1, 'covered')) return true;
-
         // don't flag crossing waterways and pier/highways
         if (featureType1 === 'waterway' && featureType2 === 'highway' && tags2.man_made === 'pier') return true;
         if (featureType2 === 'waterway' && featureType1 === 'highway' && tags1.man_made === 'pier') return true;
 
-        if (!allowsStructures(featureType1) && !allowsStructures(featureType2)) {
-            // if no structures are applicable, the layers must be different
+        if (featureType1 === 'building' || featureType2 === 'building') {
+            // for building crossings, different layers are enough
             if (layer1 !== layer2) return true;
         }
         return false;
@@ -423,10 +409,13 @@ export function validationCrossingWays(context) {
         } else {
             useFixID = 'use_different_layers';
         }
-        if (useFixID === 'use_different_layers') {
+        if (useFixID === 'use_different_layers' ||
+            featureType1 === 'building' ||
+            featureType2 === 'building') {
             fixes.push(makeChangeLayerFix('higher'));
             fixes.push(makeChangeLayerFix('lower'));
-        } else {
+        }
+        if (useFixID !== 'use_different_layers') {
             fixes.push(new validationIssueFix({
                 icon: useFixIcon,
                 title: t('issues.fix.' + useFixID + '.title')
