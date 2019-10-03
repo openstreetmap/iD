@@ -1883,6 +1883,7 @@
                 },
                 "noncanonical_brand": {
                     "message": "{feature} looks like a brand with nonstandard tags",
+                    "message_incomplete": "{feature} looks like a brand with incomplete tags",
                     "reference": "All features of the same brand should be tagged the same way."
                 }
             },

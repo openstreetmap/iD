@@ -187,26 +187,26 @@ path.line.casing.tag-boundary-national_park {
 
 
 /* barriers and similar */
-path.line.stroke.tag-barrier:not(.tag-barrier-hedge) {
+path.line.stroke.tag-barrier:not(.tag-barrier-hedge):not(.tag-waterway) {
     stroke: #ddd;
 }
 .preset-icon-container path.line.stroke.tag-barrier:not(.tag-barrier-hedge) {
     stroke: rgb(170, 170, 170);
 }
 path.line.casing.tag-natural,
-path.line.casing.tag-barrier,
+path.line.casing.tag-barrier:not(.tag-waterway),
 path.line.casing.tag-man_made-groyne,
 path.line.casing.tag-man_made-breakwater {
     stroke: none;
 }
-path.line.stroke.tag-barrier,
+path.line.stroke.tag-barrier:not(.tag-waterway),
 path.line.stroke.tag-man_made-groyne,
 path.line.stroke.tag-man_made-breakwater {
     stroke-width: 3px;
     stroke-linecap: round;
     stroke-dasharray: 15, 5, 1, 5;
 }
-.low-zoom path.line.stroke.tag-barrier,
+.low-zoom path.line.stroke.tag-barrier:not(.tag-waterway),
 .low-zoom path.line.stroke.tag-man_made-groyne,
 .low-zoom path.line.stroke.tag-man_made-breakwater {
     stroke-width: 2px;
@@ -218,18 +218,18 @@ path.line.stroke.tag-man_made-breakwater {
 .preset-icon-container path.line.stroke.tag-man_made-breakwater {
     stroke-dasharray: 1, 4, 6, 4;
 }
-path.line.stroke.tag-barrier-wall,
-path.line.stroke.tag-barrier-retaining_wall,
-path.line.stroke.tag-barrier-city_wall {
+path.line.stroke.tag-barrier.tag-barrier-wall,
+path.line.stroke.tag-barrier.tag-barrier-retaining_wall,
+path.line.stroke.tag-barrier.tag-barrier-city_wall {
     stroke-linecap: butt;
     stroke-dasharray: 16, 3, 9, 3;
 }
-.low-zoom path.line.stroke.tag-barrier-wall,
-.low-zoom path.line.stroke.tag-barrier-retaining_wall,
-.low-zoom path.line.stroke.tag-barrier-city_wall,
-.preset-icon-container path.line.stroke.tag-barrier-wall,
-.preset-icon-container path.line.stroke.tag-barrier-retaining_wall,
-.preset-icon-container path.line.stroke.tag-barrier-city_wall {
+.low-zoom path.line.stroke.tag-barrier.tag-barrier-wall,
+.low-zoom path.line.stroke.tag-barrier.tag-barrier-retaining_wall,
+.low-zoom path.line.stroke.tag-barrier.tag-barrier-city_wall,
+.preset-icon-container path.line.stroke.tag-barrier.tag-barrier-wall,
+.preset-icon-container path.line.stroke.tag-barrier.tag-barrier-retaining_wall,
+.preset-icon-container path.line.stroke.tag-barrier.tag-barrier-city_wall {
     stroke-dasharray: 8, 1, 4, 1;
 }
 
