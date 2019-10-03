@@ -173,7 +173,15 @@ export function validationOutdatedTags(context) {
             var currEntity = context.hasEntity(entity.id);
             if (!currEntity) return '';
 
-            return t('issues.outdated_tags.' + prefix + 'message',
+            var messageID = 'issues.outdated_tags.' + prefix + 'message';
+
+            if (subtype === 'noncanonical_brand' && tagDiff.every(function(d) {
+                return d.type === '+';
+            })) {
+                messageID += '_incomplete';
+            }
+
+            return t(messageID,
                 { feature: utilDisplayLabel(currEntity, context) }
             );
         }

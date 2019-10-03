@@ -1464,6 +1464,7 @@ en:
         reference: "Some features should have additional tags."
       noncanonical_brand:
         message: "{feature} looks like a brand with nonstandard tags"
+        message_incomplete: "{feature} looks like a brand with incomplete tags"
         reference: "All features of the same brand should be tagged the same way."
     point_as_vertex:
       message: '{feature} should be a standalone point based on its tags'
