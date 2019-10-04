@@ -6,7 +6,7 @@
     },
     {
       "old": {"aeroway": "aerobridge"},
-      "replace": {"aeroway": "jet_bridge"}
+      "replace": {"aeroway": "jet_bridge", "highway": "corridor"}
     },
     {
       "old": {"access": "public"},
