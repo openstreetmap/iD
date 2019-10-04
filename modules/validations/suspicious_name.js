@@ -6,8 +6,8 @@ import { validationIssue, validationIssueFix } from '../core/validation';
 import { actionChangeTags } from '../actions/change_tags';
 
 
-export function validationGenericName() {
-    var type = 'generic_name';
+export function validationSuspiciousName() {
+    var type = 'suspicious_name';
 
     // known list of generic names (e.g. "bar")
     var discardNamesRegexes = filters.discardNames.map(function(discardName) {
@@ -52,6 +52,7 @@ export function validationGenericName() {
     function makeGenericNameIssue(entityId, nameKey, genericName, langCode) {
         return new validationIssue({
             type: type,
+            subtype: 'generic_name',
             severity: 'warning',
             message: function(context) {
                 var entity = context.hasEntity(this.entityIds[0]);
@@ -68,7 +69,7 @@ export function validationGenericName() {
             fixes: [
                 new validationIssueFix({
                     icon: 'iD-operation-delete',
-                    title: t('issues.fix.remove_generic_name.title'),
+                    title: t('issues.fix.remove_the_name.title'),
                     onClick: function(context) {
                         var entityId = this.issue.entityIds[0];
                         var entity = context.entity(entityId);
@@ -93,6 +94,51 @@ export function validationGenericName() {
         }
     }
 
+    function makeIncorrectNameIssue(entityId, nameKey, incorrectName, langCode) {
+        return new validationIssue({
+            type: type,
+            subtype: 'not_name',
+            severity: 'warning',
+            message: function(context) {
+                var entity = context.hasEntity(this.entityIds[0]);
+                if (!entity) return '';
+                var preset = utilPreset(entity, context);
+                var langName = langCode && languageName(langCode);
+                return t('issues.incorrect_name.message' + (langName ? '_language' : ''),
+                    { feature: preset.name(), name: incorrectName, language: langName }
+                );
+            },
+            reference: showReference,
+            entityIds: [entityId],
+            hash: nameKey + '=' + incorrectName,
+            fixes: [
+                new validationIssueFix({
+                    icon: 'iD-operation-delete',
+                    title: t('issues.fix.remove_the_name.title'),
+                    onClick: function(context) {
+                        var entityId = this.issue.entityIds[0];
+                        var entity = context.entity(entityId);
+                        var tags = Object.assign({}, entity.tags);   // shallow copy
+                        delete tags[nameKey];
+                        context.perform(
+                            actionChangeTags(entityId, tags),
+                            t('issues.fix.remove_mistaken_name.annotation')
+                        );
+                    }
+                })
+            ]
+        });
+
+        function showReference(selection) {
+            selection.selectAll('.issue-reference')
+                .data([0])
+                .enter()
+                .append('div')
+                .attr('class', 'issue-reference')
+                .text(t('issues.generic_name.reference'));
+        }
+    }
+
 
     var validation = function checkGenericName(entity) {
         // a generic name is okay if it's a known brand or entity
@@ -100,15 +146,25 @@ export function validationGenericName() {
 
         var issues = [];
 
+        var notNames = (entity.tags['not:name'] || '').split(';');
+
         for (var key in entity.tags) {
             var m = key.match(/^name(?:(?::)([a-zA-Z_-]+))?$/);
             if (!m) continue;
 
-            var value = entity.tags[key];
-            if (isGenericName(value, entity.tags)) {
-                var langCode = null;
-                if (m.length >=2) langCode = m[1];
+            var langCode = m.length >= 2 ? m[1] : null;
 
+            var value = entity.tags[key];
+            if (notNames.length) {
+                for (var i in notNames) {
+                    var notName = notNames[i];
+                    if (value === notName) {
+                        issues.push(makeIncorrectNameIssue(entity.id, key, value, langCode));
+                        continue;
+                    }
+                }
+            }
+            if (isGenericName(value, entity.tags)) {
                 issues.push(makeGenericNameIssue(entity.id, key, value, langCode));
             }
         }

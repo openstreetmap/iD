@@ -1413,10 +1413,8 @@ en:
       tip: 'Find features with "fixme" tags'
       reference: 'A "fixme" tag indicates that a mapper has requested help with a feature.'
     generic_name:
-      title: Suspicious Names
       message: '{feature} has the suspicious name "{name}"'
       message_language: '{feature} has the suspicious name "{name}" in {language}'
-      tip: "Find features with generic or suspicious names"
       reference: "Names should be the actual, on-the-ground names of features."
     incompatible_source:
       title: Suspicious Sources
@@ -1425,6 +1423,9 @@ en:
         feature:
           message: '{feature} lists Google as a data source'
         reference: "Google products are proprietary and must not be used as references."
+    incorrect_name:
+      message: '{feature} has the mistaken name "{name}"'
+      message_language: '{feature} has the mistaken name "{name}" in {language}'
     invalid_format:
       title: Invalid Formatting
       tip: Find tags with unexpected formats
@@ -1475,6 +1476,9 @@ en:
       reference: "Sensitive data like personal phone numbers should not be tagged."
       contact:
         message: '{feature} might be tagged with private contact information'
+    suspicious_name:
+      title: Suspicious Names
+      tip: "Find features with generic or suspicious names"
     tag_suggests_area:
       message: '{feature} should be a closed area based on the tag "{tag}"'
       reference: "Areas must have connected endpoints."
@@ -1543,8 +1547,9 @@ en:
       remove_from_relation:
         title: Remove from relation
       remove_generic_name:
-        title: Remove the name
         annotation: Removed a generic name.
+      remove_mistaken_name:
+        annotation: Removed a mistaken name.
       remove_private_info:
         annotation: Removed private information.
       remove_proprietary_data:
@@ -1554,6 +1559,8 @@ en:
         annotation: Removed tag.
       remove_tags:
         title: Remove the tags
+      remove_the_name:
+        title: Remove the name
       reposition_features:
         title: Reposition the features
       reverse_feature:
