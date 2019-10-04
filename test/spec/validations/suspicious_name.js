@@ -1,4 +1,4 @@
-describe('iD.validations.generic_name', function () {
+describe('iD.validations.suspicious_name', function () {
     var context;
 
     beforeEach(function() {
@@ -20,7 +20,7 @@ describe('iD.validations.generic_name', function () {
     }
 
     function validate() {
-        var validator = iD.validationGenericName(context);
+        var validator = iD.validationSuspiciousName(context);
         var changes = context.history().changes();
         var entities = changes.modified.concat(changes.created);
         var issues = [];
@@ -64,7 +64,8 @@ describe('iD.validations.generic_name', function () {
         var issues = validate();
         expect(issues).to.have.lengthOf(1);
         var issue = issues[0];
-        expect(issue.type).to.eql('generic_name');
+        expect(issue.type).to.eql('suspicious_name');
+        expect(issue.subtype).to.eql('generic_name');
         expect(issue.entityIds).to.have.lengthOf(1);
         expect(issue.entityIds[0]).to.eql('w-1');
     });
@@ -74,7 +75,8 @@ describe('iD.validations.generic_name', function () {
         var issues = validate();
         expect(issues).to.have.lengthOf(1);
         var issue = issues[0];
-        expect(issue.type).to.eql('generic_name');
+        expect(issue.type).to.eql('suspicious_name');
+        expect(issue.subtype).to.eql('generic_name');
         expect(issue.entityIds).to.have.lengthOf(1);
         expect(issue.entityIds[0]).to.eql('w-1');
     });
@@ -84,7 +86,36 @@ describe('iD.validations.generic_name', function () {
         var issues = validate();
         expect(issues).to.have.lengthOf(1);
         var issue = issues[0];
-        expect(issue.type).to.eql('generic_name');
+        expect(issue.type).to.eql('suspicious_name');
+        expect(issue.subtype).to.eql('generic_name');
+        expect(issue.entityIds).to.have.lengthOf(1);
+        expect(issue.entityIds[0]).to.eql('w-1');
+    });
+
+    it('ignores feature with a non-matching `not:name` tag', function() {
+        createWay({ shop: 'supermarket', name: 'Lou\'s', 'not:name': 'Lous' });
+        var issues = validate();
+        expect(issues).to.have.lengthOf(0);
+    });
+
+    it('flags feature with a matching `not:name` tag', function() {
+        createWay({ shop: 'supermarket', name: 'Lous', 'not:name': 'Lous' });
+        var issues = validate();
+        expect(issues).to.have.lengthOf(1);
+        var issue = issues[0];
+        expect(issue.type).to.eql('suspicious_name');
+        expect(issue.subtype).to.eql('not_name');
+        expect(issue.entityIds).to.have.lengthOf(1);
+        expect(issue.entityIds[0]).to.eql('w-1');
+    });
+
+    it('flags feature with a matching a semicolon-separated `not:name` tag', function() {
+        createWay({ shop: 'supermarket', name: 'Lous', 'not:name': 'Louis\';Lous;Louis\'s' });
+        var issues = validate();
+        expect(issues).to.have.lengthOf(1);
+        var issue = issues[0];
+        expect(issue.type).to.eql('suspicious_name');
+        expect(issue.subtype).to.eql('not_name');
         expect(issue.entityIds).to.have.lengthOf(1);
         expect(issue.entityIds[0]).to.eql('w-1');
     });

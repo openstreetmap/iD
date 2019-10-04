@@ -1854,7 +1854,7 @@
     {"key": "windings:configuration", "value": "scott", "description": "🄵 Windings Configuration"},
     {"key": "windings:configuration", "value": "leblanc", "description": "🄵 Windings Configuration"},
     {"key": "aerialway", "value": "canopy", "description": "🄳 ➜ aerialway=zip_line"},
-    {"key": "aeroway", "value": "aerobridge", "description": "🄳 ➜ aeroway=jet_bridge"},
+    {"key": "aeroway", "value": "aerobridge", "description": "🄳 ➜ aeroway=jet_bridge + highway=corridor"},
     {"key": "access", "value": "public", "description": "🄳 ➜ access=yes"},
     {"key": "amenity", "value": "advertising", "description": "🄳 ➜ advertising=*"},
     {"key": "amenity", "value": "artwork", "description": "🄳 ➜ tourism=artwork"},
