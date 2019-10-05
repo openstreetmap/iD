@@ -36,6 +36,7 @@ export function rendererBackgroundSource(data) {
     var template = source.template;
 
     source.tileSize = data.tileSize || 256;
+    source.projection = data.projection || 'EPSG:3857';
     source.zoomExtent = data.zoomExtent || [0, 22];
     source.overzoom = data.overzoom !== false;
 
@@ -90,7 +91,8 @@ export function rendererBackgroundSource(data) {
 
 
     source.url = function(coord) {
-        if (this.type === 'wms') {
+        var url = template;
+        if (this.type === 'wms' || source.id === 'custom') {
             var tileToProjectedCoords = (function(x, y, z) {
                 //polyfill for IE11, PhantomJS
                 var sinh = Math.sinh || function(x) {
@@ -117,11 +119,11 @@ export function rendererBackgroundSource(data) {
                 }
             }).bind(this);
 
-            var tileSize = this.tileSize;
+            var tileSize = this.tileSize || 256;
             var projection = this.projection;
             var minXmaxY = tileToProjectedCoords(coord[0], coord[1], coord[2]);
             var maxXminY = tileToProjectedCoords(coord[0]+1, coord[1]+1, coord[2]);
-            return template.replace(/\{(\w+)\}/g, function (token, key) {
+            url = url.replace(/\{(\w+)\}/g, function (token, key) {
               switch (key) {
                 case 'width':
                 case 'height':
@@ -145,7 +147,7 @@ export function rendererBackgroundSource(data) {
               }
             });
         }
-        return template
+        return url
             .replace('{x}', coord[0])
             .replace('{y}', coord[1])
             // TMS-flipped y coordinate
