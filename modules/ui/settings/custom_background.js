@@ -1,9 +1,39 @@
 import { dispatch as d3_dispatch } from 'd3-dispatch';
+import { xml as d3_xml } from 'd3-fetch';
 
 import { t } from '../../util/locale';
 import { uiConfirm } from '../confirm';
 import { utilNoAuto, utilRebind } from '../../util';
 
+function wmsTemplateFromCapabilities(capabilitiesURL, capabilities) {
+    var formats = [];
+    capabilities.querySelectorAll("Format").forEach(function (format) {
+        formats.push(format.textContent);
+    });
+    var preferredFormats = [
+        'image/jpeg',
+        'image/png',
+        'image/svg',
+        'image/gif',
+        'image/bmp',
+        'image/tiff'
+    ];
+    var formatIndex = preferredFormats.findIndex(function (preferredFormat) {
+        return formats.indexOf(preferredFormat) !== -1;
+    });
+    var format = preferredFormats[formatIndex === -1 ? formatIndex : 0];
+
+    var layer = capabilities.querySelector("Layer > Name").textContent;
+
+    capabilitiesURL.search = '';
+    capabilitiesURL.searchParams.set('FORMAT', format);
+    capabilitiesURL.searchParams.set('VERSION', '1.1.1');
+    capabilitiesURL.searchParams.set('SERVICE', 'WMS');
+    capabilitiesURL.searchParams.set('REQUEST', 'GetMap');
+    capabilitiesURL.searchParams.set('LAYERS', layer);
+    capabilitiesURL.searchParams.set('SRS', 'EPSG:3857');
+    return capabilitiesURL.toString() + '&WIDTH={width}&HEIGHT={height}&BBOX={bbox}';
+}
 
 export function uiSettingsCustomBackground(context) {
     var dispatch = d3_dispatch('change');
@@ -43,6 +73,13 @@ export function uiSettingsCustomBackground(context) {
             .property('value', _currSettings.template);
 
 
+        textSection
+            .insert('button', '.ok-button')
+            .attr('class', 'button secondary-action')
+            .text(t('settings.custom_background.generate_from_wms'))
+            .on('click', clickWMS);
+
+
         // insert a cancel button
         var buttonSection = modal.select('.modal-section.buttons');
 
@@ -62,6 +99,20 @@ export function uiSettingsCustomBackground(context) {
 
         function isSaveDisabled() {
             return null;
+        }
+
+
+        function clickWMS() {
+            var capabilitiesURLString = prompt(t('settings.custom_background.wms.instructions'));
+            try {
+                var capabilitiesURL = new URL(capabilitiesURLString);
+                d3_xml(capabilitiesURLString)
+                    .then(function (capabilities) {
+                        var wmsTemplate = wmsTemplateFromCapabilities(capabilitiesURL, capabilities);
+                        textSection.select('.field-template').property('value', wmsTemplate);
+                    });
+            } catch (err) {
+            }
         }
 
 

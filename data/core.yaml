@@ -755,7 +755,10 @@ en:
       header: Custom Background Settings
       instructions: "Enter a tile URL template. Valid tokens are:\n   {zoom} or {z}, {x}, {y} for Z/X/Y tile scheme\n   {-y} or {ty} for flipped TMS-style Y coordinates\n   {u} for quadtile scheme\n   {switch:a,b,c} for DNS server multiplexing\n\nExample:\n{example}"
       template:
-        placeholder: Enter a url template
+        placeholder: Enter a URL template
+      generate_from_wms: WMS
+      wms:
+        instructions: "Enter a WMS server GetCapabilities URL, for example:\n\nhttps://www.example.org/geoserver/gwc/service/wms?SERVICE=WMS&VERSION=1.1.1&REQUEST=getcapabilities&TILED=true\n\nhttps://www.example.com/arcgis/services/Orthophotography/ImageServer/WMSServer?request=GetCapabilities&service=WMS"
     custom_data:
       tooltip: Edit custom data layer
       header: Custom Map Data Settings
