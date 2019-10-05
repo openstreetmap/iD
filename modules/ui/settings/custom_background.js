@@ -7,7 +7,7 @@ import { utilNoAuto, utilRebind } from '../../util';
 
 function wmsTemplateFromCapabilities(capabilitiesURL, capabilities) {
     var formats = [];
-    capabilities.querySelectorAll("Format").forEach(function (format) {
+    capabilities.querySelectorAll('Format').forEach(function (format) {
         formats.push(format.textContent);
     });
     var preferredFormats = [
@@ -23,7 +23,7 @@ function wmsTemplateFromCapabilities(capabilitiesURL, capabilities) {
     });
     var format = preferredFormats[formatIndex === -1 ? formatIndex : 0];
 
-    var layer = capabilities.querySelector("Layer > Name").textContent;
+    var layer = capabilities.querySelector('Layer > Name').textContent;
 
     capabilitiesURL.search = '';
     capabilitiesURL.searchParams.set('FORMAT', format);
@@ -110,8 +110,11 @@ export function uiSettingsCustomBackground(context) {
                     .then(function (capabilities) {
                         var wmsTemplate = wmsTemplateFromCapabilities(capabilitiesURL, capabilities);
                         textSection.select('.field-template').property('value', wmsTemplate);
+                    }).catch(function (err) {
+                        alert(err);
                     });
             } catch (err) {
+                alert(err);
             }
         }
 
