@@ -53,7 +53,7 @@ export function svgDefs(context) {
                 .attr('stroke', 'none')
                 .attr('fill', color);
         }
-        addSidedMarker('natural', 'rgb(140, 208, 95)', 0);
+        addSidedMarker('natural', 'rgb(170, 170, 170)', 0);
         // for a coastline, the arrows are (somewhat unintuitively) on
         // the water side, so let's color them blue (with a gap) to
         // give a stronger indication
