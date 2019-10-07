@@ -44,6 +44,7 @@ export function svgVertices(projection, context) {
         var zoom = geoScaleToZoom(projection.scale());
         var z = (zoom < 17 ? 0 : zoom < 18 ? 1 : 2);
         var activeID = context.activeID();
+        var base = context.history().base();
 
 
         function getIcon(d) {
@@ -129,8 +130,16 @@ export function svgVertices(projection, context) {
             .classed('sibling', function(d) { return d.id in sets.selected; })
             .classed('shared', function(d) { return graph.isShared(d); })
             .classed('endpoint', function(d) { return d.isEndpoint(graph); })
+            .classed('added', function(d) {
+                return !base.entities[d.id]; // if it doesn't exist in the base graph, it's new
+            })
+            .classed('moved', function(d) {
+                return base.entities[d.id] && graph.entities[d.id].loc !== base.entities[d.id].loc;
+            })
+            .classed('retagged', function(d) {
+                return base.entities[d.id] && !_isEqual(graph.entities[d.id].tags, base.entities[d.id].tags);
+            })
             .call(updateAttributes);
-
 
         // Vertices with icons get a `use`.
         var iconUse = groups
@@ -224,17 +233,6 @@ export function svgVertices(projection, context) {
             }
         });
 
-        // Class for styling currently edited vertices
-        var editClass = function(d) {
-            if (!base.entities[d.id] || // if it doesn't exist in the base graph, it's new geometry
-                graph.entities[d.id].loc !== base.entities[d.id].loc) {
-                return 'graphedited';
-            } else if (!_isEqual(graph.entities[d.id].tags, base.entities[d.id].tags)) {
-                return 'tagedited';
-            }
-            return '';
-        };
-
         // Targets allow hover and vertex snapping
         var targets = selection.selectAll('.vertex.target-allowed')
             .filter(function(d) { return filter(d.properties.entity); })
@@ -251,14 +249,14 @@ export function svgVertices(projection, context) {
         targets.enter()
             .append('circle')
             .attr('r', function(d) {
-                return isEditedEnt(d, base, graph) && threeFourths(_radii[d.id])
+                return isEditedEntity(d, base, graph) && threeFourths(_radii[d.id])
                   || _radii[d.id]
                   || radiuses.shadow[3];
             })
             .merge(targets)
             .attr('class', function(d) {
                 return 'node vertex target target-allowed '
-                + targetClass + d.id + ' ' + editClass(d);
+                + targetClass + d.id;
             })
             .attr('transform', getTransform);
 
@@ -293,7 +291,7 @@ export function svgVertices(projection, context) {
     }
 
 
-    function isEditedEnt(entity, base, head) {
+    function isEditedEntity(entity, base, head) {
         return head.entities[entity.id] !== base.entities[entity.id] ||
             !_isEqual(head.entities[entity.id].tags, base.entities[entity.id].tags);
     }
@@ -376,7 +374,7 @@ export function svgVertices(projection, context) {
             // a vertex of some importance..
             } else if (geometry === 'vertex' &&
                 (entity.hasInterestingTags() || entity.isEndpoint(graph) || entity.isConnected(graph)
-                || isEditedEnt(entity, base, graph))) {
+                || isEditedEntity(entity, base, graph))) {
                 _currPersistent[entity.id] = entity;
                 keep = true;
             }

@@ -339,111 +339,114 @@ g.vertex.highlighted .shadow {
 
 /* highlight-edited means 'visual diff activated'
  'graphedited' class means that a geometric (dark green) change has occurred.
- 'tagedited' means that a tagging change has occurred. 
- if both are true, the 'graphedited' class supersedes 'tagedited'. 
+ 'tagedited' means that a tagging change has occurred.
+ if both are true, the 'graphedited' class supersedes 'tagedited'.
 
- /*Vertex-related visual diffs*/ 
-.highlight-edited g.points > circle.vertex.graphedited {
-    color: rgb(87, 201, 44);
-    stroke: #333;
-    stroke-width: 1;
-    stroke-opacity: .5;
+/*Vertex-related visual diffs*/
+.highlight-edited g.points g.node.vertex.added > circle.shadow,
+.highlight-edited g.points g.node.vertex.retagged > circle.shadow,
+.highlight-edited g.points g.node.vertex.moved > circle.shadow {
     fill-opacity: 1;
 }
-.highlight-edited g.points > circle.vertex.tagedited {
-    color: rgb(160, 231, 134);
-    stroke: #fff;
-    stroke-width: 2;
-    stroke-opacity: .5;
-    fill-opacity: 1;
+.highlight-edited g.points g.node.vertex.added > circle.shadow {
+    fill: rgb(9, 157, 0);
+}
+.highlight-edited g.points g.node.vertex.retagged > circle.shadow,
+.highlight-edited g.points g.node.vertex.moved > circle.shadow {
+    fill: rgb(193, 84, 17);
 }
 
-/*Line-related visual diffs*/ 
+
+/*Line-related visual diffs*/
 /*Make the edited stroke line thin so that the original road color can show around it.*/
-.highlight-edited g.lines > path.line.graphedited,
-.highlight-edited g.areas > path.line.graphedited {
-    color: rgb(87, 201, 44);
-    stroke-width: 3 !important;
+.highlight-edited g.lines > path.line.segment-edited,
+.highlight-edited g.areas > path.line.segment-edited {
+    color: rgb(193, 84, 17);
+    stroke-width: 1.5 !important;
     stroke-opacity: 1;
 }
 
-/*Make the stroke in whole-road graph edits thin and less apparent. */
-.highlight-edited g.linegroup.line-stroke > path.way.line.stroke.graphedited {
-    stroke: rgb(87, 201, 44);
-    stroke-width: 3 !important;
-    stroke-opacity: 1;
+/* whole line edited styles */
+.highlight-edited g.linegroup.line-shadow > path.way.line.shadow.added,
+.highlight-edited g.linegroup.line-shadow > path.way.line.shadow.retagged,
+.highlight-edited g.linegroup.line-shadow > path.way.line.shadow.geometry-edited {
+    stroke-opacity: 0.8;
+}
+.highlight-edited.fill-wireframe g.linegroup.line-shadow > path.way.line.shadow.added,
+.highlight-edited.fill-wireframe g.linegroup.line-shadow > path.way.line.shadow.retagged,
+.highlight-edited.fill-wireframe g.linegroup.line-shadow > path.way.line.shadow.geometry-edited {
+    stroke-width: 3;
+}
+.highlight-edited g.linegroup.line-shadow > path.way.line.shadow.added {
+    stroke: rgb(133, 255, 103);
+}
+.highlight-edited g.linegroup.line-shadow > path.way.line.shadow.retagged,
+.highlight-edited g.linegroup.line-shadow > path.way.line.shadow.geometry-edited {
+    stroke: rgb(255, 126, 46);
+}
+.highlight-edited g.linegroup.line-shadow > path.way.line.shadow.retagged:not(.geometry-edited) {
+    stroke-opacity: 0.55;
 }
 
-/*Make the casing around tag edits wide enough to be a bit more visible. */
-.highlight-edited g.linegroup.line-casing > path.way.line.casing.tagedited {
-    stroke: rgb(87, 201, 44) !important;
-    stroke-width: 12 !important;
-    stroke-opacity: 1;
-}
-
-.low-zoom.highlight-edited g.linegroup.line-casing > path.way.line.casing.tagedited {
-    stroke-width: 10 !important;
-}
-
-/* Area-related visual diffs */ 
+/* Area-related visual diffs */
 .highlight-edited g.areagroup.area-fill > path.way.area.fill.graphedited {
-    stroke-width: 45px; 
-    stroke-opacity: .5; 
+    stroke-width: 45px;
+    stroke-opacity: .5;
 }
 
 .highlight-edited g.areagroup.area-stroke > path.way.area.stroke.graphedited {
     stroke: rgb(87, 201, 44) !important;
-    stroke-width: 5 !important; 
+    stroke-width: 5 !important;
 }
 
 .highlight-edited g.areagroup.area-stroke > path.way.area.stroke.tagedited {
     stroke: rgb(160, 231, 134) !important;
-    stroke-width: 3 !important; 
+    stroke-width: 3 !important;
 }
 
 .highlight-edited g.areagroup.area-shadow > path.way.area.shadow.graphedited {
     fill: rgb(87, 201, 44);
-    opacity: .2;  
+    opacity: .2;
 }
 
 .highlight-edited g.areagroup.area-shadow > path.way.area.shadow.tagedited {
     fill: rgb(87, 201, 44);
-    opacity: .1;  
+    opacity: .1;
 }
 
 .highlight-edited g.areagroup.area-fill > path.way.area.fill.tagedited {
-    stroke-width: 30;   
+    stroke-width: 30;
 }
 
 .low-zoom.highlight-edited.fill-wireframe g.areagroup.area-stroke > path.way.area.stroke.tagedited {
-    stroke-dasharray: 7; 
+    stroke-dasharray: 7;
     stroke: rgb(87, 201, 44) !important;
     stroke-width: 4px;
 }
 
 .low-zoom.highlight-edited g.areagroup.area-stroke > path.way.area.stroke.tagedited {
     stroke: rgb(160, 231, 134);
-    stroke-width: 40; 
-    stroke-dasharray: 25 !important; 
+    stroke-width: 40;
+    stroke-dasharray: 25 !important;
     stroke-opacity: 1 !important;
 }
 
 .highlight-edited.fill-wireframe g.linegroup.line-stroke > path.way.line.stroke.tagedited {
     stroke: rgb(160, 231, 134);
     stroke-width: 10 !important;
-    stroke-dasharray: 25 !important; 
+    stroke-dasharray: 25 !important;
     stroke-opacity: 1 !important;
 }
 
 .highlight-edited.fill-wireframe g.areagroup.area-shadow > path.way.area.shadow.graphedited,
 .highlight-edited.fill-wireframe g.areagroup.area-shadow > path.way.area.shadow.tagedited {
-    fill-opacity: .05; 
+    fill-opacity: .05;
 }
 
 /*for low zoom levels, make the wireframe view 'tag edit' dashed line finer.*/
 .low-zoom.highlight-edited.fill-wireframe g.linegroup.line-stroke > path.way.line.stroke.tagedited {
     stroke-dasharray: 7 !important;
-} 
+}
 
 /*In wireframe mode, restrain the stroke width to something barely wider than normal.*/
 .fill-wireframe.highlight-edited g.lines > path.line.graphedited, .fill-wireframe.highlight-edited g.linegroup.line-stroke > path.way.line.stroke.tagedited,

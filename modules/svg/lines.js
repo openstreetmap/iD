@@ -56,11 +56,17 @@ export function svgLines(projection, context) {
         targets.exit()
             .remove();
 
-        var graphEditClass = function(d) {
+        var segmentEditClass = function(d) {
+            var wayID = d.properties.entity.id;
+            // if the whole line was edited, don't draw segment changes
+            if (!base.entities[wayID] ||
+                !_isEqual(graph.entities[wayID].nodes, base.entities[wayID].nodes)) {
+                return '';
+            }
             return d.properties.nodes.some(function(n) {
                 return !base.entities[n.id] ||
                        graph.entities[n.id].loc !== base.entities[n.id].loc;
-            }) ? ' graphedited ': '';
+            }) ? ' segment-edited ': '';
         };
 
         // enter/update
@@ -69,7 +75,7 @@ export function svgLines(projection, context) {
             .merge(targets)
             .attr('d', getPath)
             .attr('class', function(d) {
-                return 'way line target target-allowed ' + targetClass + d.id + graphEditClass(d);
+                return 'way line target target-allowed ' + targetClass + d.id + segmentEditClass(d);
             });
 
         // NOPE
@@ -88,7 +94,7 @@ export function svgLines(projection, context) {
             .merge(nopes)
             .attr('d', getPath)
             .attr('class', function(d) {
-                return 'way line target target-nope ' + nopeClass + d.id + graphEditClass(d);
+                return 'way line target target-nope ' + nopeClass + d.id + segmentEditClass(d);
             });
     }
 
@@ -105,27 +111,6 @@ export function svgLines(projection, context) {
             if (b.tags.highway) { scoreB -= highway_stack[b.tags.highway]; }
             return scoreA - scoreB;
         }
-
-
-        // Class for styling currently tag-edited lines, not changes to geometry
-        var tagEditClass = function(d) {
-            if (graph.entities[d.id] && base.entities[d.id] &&
-                !_isEqual(graph.entities[d.id].tags, base.entities[d.id].tags)) {
-                return ' tagedited ';
-            }
-            return '';
-        };
-
-
-        // Class for styling currently geometry-edited lines
-        var graphEditClass = function(d) {
-            if (!base.entities[d.id] ||
-                (graph.entities[d.id] && base.entities[d.id] &&
-                graph.entities[d.id].nodes !== base.entities[d.id].nodes)) {
-                return ' graphedited ';
-            }
-            return '';
-        };
 
 
         function drawLineGroup(selection, klass, isSelected) {
@@ -155,7 +140,20 @@ export function svgLines(projection, context) {
                     }
 
                     var oldMPClass = oldMultiPolygonOuters[d.id] ? 'old-multipolygon ' : '';
-                    return prefix + ' ' + klass + ' ' + selectedClass + oldMPClass + graphEditClass(d) + tagEditClass(d) + d.id;
+                    return prefix + ' ' + klass + ' ' + selectedClass + oldMPClass + d.id;
+                })
+                .classed('added', function(d) {
+                    return !base.entities[d.id];
+                })
+                .classed('geometry-edited', function(d) {
+                    return graph.entities[d.id] &&
+                        base.entities[d.id] &&
+                        !_isEqual(graph.entities[d.id].nodes, base.entities[d.id].nodes);
+                })
+                .classed('retagged', function(d) {
+                    return graph.entities[d.id] &&
+                        base.entities[d.id] &&
+                        !_isEqual(graph.entities[d.id].tags, base.entities[d.id].tags);
                 })
                 .call(svgTagClasses())
                 .merge(lines)
