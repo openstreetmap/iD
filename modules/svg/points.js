@@ -2,7 +2,7 @@ import { geoScaleToZoom } from '../geo';
 import { osmEntity } from '../osm';
 import { svgPointTransform } from './helpers';
 import { svgTagClasses } from './tag_classes';
-
+import _isEqual from 'lodash-es/isEqual';
 
 export function svgPoints(projection, context) {
 
@@ -71,6 +71,7 @@ export function svgPoints(projection, context) {
     function drawPoints(selection, graph, entities, filter) {
         var wireframe = context.surface().classed('fill-wireframe');
         var zoom = geoScaleToZoom(projection.scale());
+        var base = context.history().base();
 
         // Points with a direction will render as vertices at higher zooms..
         function renderAsPoint(entity) {
@@ -125,6 +126,15 @@ export function svgPoints(projection, context) {
         groups = groups
             .merge(enter)
             .attr('transform', svgPointTransform(projection))
+            .classed('added', function(d) {
+                return !base.entities[d.id]; // if it doesn't exist in the base graph, it's new
+            })
+            .classed('moved', function(d) {
+                return base.entities[d.id] && graph.entities[d.id].loc !== base.entities[d.id].loc;
+            })
+            .classed('retagged', function(d) {
+                return base.entities[d.id] && !_isEqual(graph.entities[d.id].tags, base.entities[d.id].tags);
+            })
             .call(svgTagClasses());
 
         groups.select('.shadow');   // propagate bound data

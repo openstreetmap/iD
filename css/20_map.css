@@ -356,6 +356,22 @@ g.vertex.highlighted .shadow {
     fill: rgb(193, 84, 17);
 }
 
+.highlight-edited g.points g.node.point.added > path.shadow,
+.highlight-edited g.points g.node.point.retagged > path.shadow,
+.highlight-edited g.points g.node.point.moved > path.shadow {
+    stroke-opacity: 0.8;
+    stroke-width: 7;
+}
+.highlight-edited g.points g.node.point.added > path.shadow {
+    stroke: rgb(133, 255, 103);
+}
+.highlight-edited g.points g.node.point.retagged > path.shadow,
+.highlight-edited g.points g.node.point.moved > path.shadow {
+    stroke: rgb(255, 126, 46);
+}
+.highlight-edited g.points g.node.point.retagged:not(.moved) > path.shadow {
+    stroke-opacity: 0.55;
+}
 
 /*Line-related visual diffs*/
 /*Make the edited stroke line thin so that the original road color can show around it.*/
