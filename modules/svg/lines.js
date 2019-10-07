@@ -9,9 +9,6 @@ import { osmEntity, osmOldMultipolygonOuterMember } from '../osm';
 import { utilArrayFlatten, utilArrayGroupBy } from '../util';
 import { utilDetect } from '../util/detect';
 import _isEqual from 'lodash-es/isEqual';
-import _transform from 'lodash-es/transform';
-import _omit from 'lodash-es/omit'; 
-import _isObject from 'lodash-es/isObject'; 
 
 export function svgLines(projection, context) {
     var detected = utilDetect();
@@ -61,11 +58,8 @@ export function svgLines(projection, context) {
 
         var graphEditClass = function(d) {
             return d.properties.nodes.some(function(n) {
-                if (!base.entities[n.id]) {
-                    return true; 
-                }                
-                var result = !_isEqual(_omit(graph.entities[n.id], ['tags', 'v']), _omit(base.entities[n.id], ['tags', 'v'])); 
-                return result; 
+                return !base.entities[n.id] ||
+                       graph.entities[n.id].loc !== base.entities[n.id].loc;
             }) ? ' graphedited ': '';
         };
 
@@ -93,8 +87,8 @@ export function svgLines(projection, context) {
             .append('path')
             .merge(nopes)
             .attr('d', getPath)
-            .attr('class', function(d) { 
-                return 'way line target target-nope ' + nopeClass + d.id + graphEditClass(d); 
+            .attr('class', function(d) {
+                return 'way line target target-nope ' + nopeClass + d.id + graphEditClass(d);
             });
     }
 
@@ -115,22 +109,22 @@ export function svgLines(projection, context) {
 
         // Class for styling currently tag-edited lines, not changes to geometry
         var tagEditClass = function(d) {
-            var result = graph.entities[d.id] && base.entities[d.id] &&  !_isEqual(graph.entities[d.id].tags, base.entities[d.id].tags); 
-
-            return result ? 
-            ' tagedited ' :  ''; 
+            if (graph.entities[d.id] && base.entities[d.id] &&
+                !_isEqual(graph.entities[d.id].tags, base.entities[d.id].tags)) {
+                return ' tagedited ';
+            }
+            return '';
         };
 
 
         // Class for styling currently geometry-edited lines
         var graphEditClass = function(d) {
-            if (!base.entities[d.id]) {
-                return ' graphedited '; 
+            if (!base.entities[d.id] ||
+                (graph.entities[d.id] && base.entities[d.id] &&
+                graph.entities[d.id].nodes !== base.entities[d.id].nodes)) {
+                return ' graphedited ';
             }
-
-            var result = graph.entities[d.id] && base.entities[d.id] &&  !_isEqual(_omit(graph.entities[d.id], ['tags', 'v']), _omit(base.entities[d.id], ['tags', 'v'])); 
-
-            return result ? ' graphedited ' :  ''; 
+            return '';
         };
 
 

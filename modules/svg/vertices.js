@@ -4,7 +4,6 @@ import { geoScaleToZoom } from '../geo';
 import { osmEntity } from '../osm';
 import { svgPassiveVertex, svgPointTransform } from './helpers';
 import _isEqual from 'lodash-es/isEqual';
-import _omit from 'lodash-es/omit'; 
 
 export function svgVertices(projection, context) {
     var radiuses = {
@@ -196,8 +195,6 @@ export function svgVertices(projection, context) {
         var activeID = context.activeID();
         var data = { targets: [], nopes: [] };
         var base = context.history().base();
-        var radius = 3;
-        var interestingNodeRadius = 4.5;
 
         entities.forEach(function(node) {
             if (activeID === node.id) return;   // draw no target on the activeID
@@ -229,11 +226,11 @@ export function svgVertices(projection, context) {
 
         // Class for styling currently edited vertices
         var editClass = function(d) {
-            //If it doesn't exist in the base graph, it's new geometry. 
-            if (!base.entities[d.id] || !_isEqual(_omit(graph.entities[d.id], ['tags', 'v']), _omit(base.entities[d.id], ['tags', 'v']))) {
-                return ' graphedited ';
+            if (!base.entities[d.id] || // if it doesn't exist in the base graph, it's new geometry
+                graph.entities[d.id].loc !== base.entities[d.id].loc) {
+                return 'graphedited';
             } else if (!_isEqual(graph.entities[d.id].tags, base.entities[d.id].tags)) {
-                return ' tagedited ';
+                return 'tagedited';
             }
             return '';
         };
@@ -248,20 +245,20 @@ export function svgVertices(projection, context) {
             .remove();
 
         var threeFourths = function (num) {
-            return (Math.round(3 * num) / 4).toFixed(2); 
-        }; 
+            return (Math.round(3 * num) / 4).toFixed(2);
+        };
         // enter/update
         targets.enter()
             .append('circle')
             .attr('r', function(d) {
                 return isEditedEnt(d, base, graph) && threeFourths(_radii[d.id])
-                  || _radii[d.id] 
+                  || _radii[d.id]
                   || radiuses.shadow[3];
             })
             .merge(targets)
             .attr('class', function(d) {
                 return 'node vertex target target-allowed '
-                + targetClass + d.id + editClass(d);
+                + targetClass + d.id + ' ' + editClass(d);
             })
             .attr('transform', getTransform);
 
