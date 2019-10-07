@@ -758,6 +758,9 @@
                 }
             },
             "fill_area": "Fill Areas",
+            "highlight_edits": {
+                "key": "G"
+            },
             "map_features": "Map Features",
             "autohidden": "These features have been automatically hidden because too many would be shown on the screen.  You can zoom in to edit them.",
             "osmhidden": "These features have been automatically hidden because the OpenStreetMap layer is hidden."
@@ -2310,7 +2313,8 @@
                     "sidebar": "Toggle sidebar",
                     "wireframe": "Toggle wireframe mode",
                     "osm_data": "Toggle OpenStreetMap data",
-                    "minimap": "Toggle minimap"
+                    "minimap": "Toggle minimap",
+                    "highlight_edits": "Highlight unsaved edits"
                 },
                 "selecting": {
                     "title": "Selecting features",
