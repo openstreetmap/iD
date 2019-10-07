@@ -437,10 +437,8 @@ function generateTaginfo(presets, fields) {
             'description': 'Online editor for OSM data.',
             'project_url': 'https://github.com/openstreetmap/iD',
             'doc_url': 'https://github.com/openstreetmap/iD/blob/master/data/presets/README.md',
-            'icon_url': 'https://cdn.jsdelivr.net/gh/openstreetmap/iD/dist/img/logo.png',
-            'keywords': [
-                'editor'
-            ]
+            'icon_url': 'https://cdn.jsdelivr.net/gh/openstreetmap/iD@release/dist/img/logo.png',
+            'keywords': ['editor']
         },
         'tags': []
     };
@@ -474,13 +472,13 @@ function generateTaginfo(presets, fields) {
             tag.icon_url = 'https://cdn.jsdelivr.net/gh/bhousel/temaki/icons/' +
                 preset.icon.replace(/^temaki-/, '') + '.svg';
         } else if (/^fa[srb]-/.test(preset.icon)) {
-            tag.icon_url = 'https://cdn.jsdelivr.net/gh/openstreetmap/iD/svg/fontawesome/' +
+            tag.icon_url = 'https://cdn.jsdelivr.net/gh/openstreetmap/iD@master/svg/fontawesome/' +
                 preset.icon + '.svg';
         } else if (/^iD-/.test(preset.icon)) {
-            tag.icon_url = 'https://cdn.jsdelivr.net/gh/openstreetmap/iD/svg/iD-sprite/presets/' +
+            tag.icon_url = 'https://cdn.jsdelivr.net/gh/openstreetmap/iD@master/svg/iD-sprite/presets/' +
                 preset.icon.replace(/^iD-/, '') + '.svg';
         } else if (/^tnp-/.test(preset.icon)) {
-            tag.icon_url = 'https://cdn.jsdelivr.net/gh/openstreetmap/iD/svg/the-noun-project/' +
+            tag.icon_url = 'https://cdn.jsdelivr.net/gh/openstreetmap/iD@master/svg/the-noun-project/' +
                 preset.icon.replace(/^tnp-/, '') + '.svg';
         }
 
@@ -601,8 +599,12 @@ function generateTerritoryLanguages() {
         if (!territoryLangInfo) return;
         var langCodes = Object.keys(territoryLangInfo);
         territoryLanguages[territoryCode.toLowerCase()] = langCodes.sort(function(langCode1, langCode2) {
-            return parseFloat(territoryLangInfo[langCode2]._populationPercent) -
-                   parseFloat(territoryLangInfo[langCode1]._populationPercent);
+            var popPercent1 = parseFloat(territoryLangInfo[langCode1]._populationPercent);
+            var popPercent2 = parseFloat(territoryLangInfo[langCode2]._populationPercent);
+            if (popPercent1 === popPercent2) {
+                return langCode1.localeCompare(langCode2, 'en', { sensitivity: 'base' });
+            }
+            return popPercent2 - popPercent1;
         }).map(function(langCode) {
             return langCode.replace('_', '-');
         });
@@ -648,22 +650,22 @@ function validatePresetFields(presets, fields) {
         var fieldKeys = ['fields', 'moreFields'];
         for (var fieldsKeyIndex in fieldKeys) {
             var fieldsKey = fieldKeys[fieldsKeyIndex];
-            if (preset[fieldsKey]) {
-                for (var fieldIndex in preset[fieldsKey]) {
-                    var field = preset[fieldsKey][fieldIndex];
-                    if (fields[field] === undefined) {
-                        var regexResult = betweenBracketsRegex.exec(field);
-                        if (regexResult) {
-                            var foreignPresetID = regexResult[0];
-                            if (presets[foreignPresetID] === undefined) {
-                                console.error('Unknown preset "' + foreignPresetID + '" referenced in "' + fieldsKey + '" array of preset ' + preset.name);
-                                process.exit(1);
-                            }
-                        } else {
-                            console.error('Unknown preset field "' + field + '" in "' + fieldsKey + '" array of preset ' + preset.name);
-                            process.exit(1);
-                        }
+            if (!preset[fieldsKey]) continue; // no fields are referenced, okay
+
+            for (var fieldIndex in preset[fieldsKey]) {
+                var field = preset[fieldsKey][fieldIndex];
+                if (fields[field] !== undefined) continue; // field found, okay
+
+                var regexResult = betweenBracketsRegex.exec(field);
+                if (regexResult) {
+                    var foreignPresetID = regexResult[0];
+                    if (presets[foreignPresetID] === undefined) {
+                        console.error('Unknown preset "' + foreignPresetID + '" referenced in "' + fieldsKey + '" array of preset ' + preset.name);
+                        process.exit(1);
                     }
+                } else {
+                    console.error('Unknown preset field "' + field + '" in "' + fieldsKey + '" array of preset ' + preset.name);
+                    process.exit(1);
                 }
             }
         }

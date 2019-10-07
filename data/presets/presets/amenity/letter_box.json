@@ -9,7 +9,9 @@
     "moreFields": [
         "covered",
         "indoor",
+        "level",
         "lit",
+        "lockable",
         "manufacturer",
         "material",
         "operator",

@@ -11,11 +11,12 @@
     ],
     "moreFields": [
         "air_conditioning",
-        "payment_multi",
-        "website",
-        "phone",
         "email",
         "fax",
+        "level",
+        "payment_multi",
+        "phone",
+        "website",
         "wheelchair"
     ],
     "geometry": [

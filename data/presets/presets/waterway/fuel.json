@@ -8,14 +8,14 @@
         "fuel_multi"
     ],
     "moreFields": [
-        "payment_multi",
         "brand",
-        "seamark/type",
         "building",
-        "website",
-        "phone",
         "email",
         "fax",
+        "payment_multi",
+        "phone",
+        "seamark/type",
+        "website",
         "wheelchair"
     ],
     "geometry": [

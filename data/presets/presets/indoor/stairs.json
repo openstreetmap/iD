@@ -1,0 +1,25 @@
+{
+    "icon": "iD-highway-steps",
+    "fields": [
+        "ref",
+        "level_semi",
+        "conveying_escalator"
+    ],
+    "geometry": [
+        "area"
+    ],
+    "tags": {
+        "indoor": "room",
+        "stairs": "yes"
+    },
+    "terms": [
+        "stair",
+        "stairs",
+        "staircase",
+        "stairway",
+        "stairwell",
+        "steps"
+    ],
+    "matchScore": 0.8,
+    "name": "Indoor Stairwell"
+}

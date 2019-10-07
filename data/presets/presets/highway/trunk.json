@@ -17,8 +17,8 @@
         "junction_line",
         "lit",
         "maxheight",
-        "minspeed",
         "maxweight_bridge",
+        "minspeed",
         "not/name",
         "smoothness",
         "toll"

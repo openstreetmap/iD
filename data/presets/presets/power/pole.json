@@ -3,6 +3,7 @@
     "fields": [
         "ref",
         "operator",
+        "height",
         "material",
         "line_attachment"
     ],

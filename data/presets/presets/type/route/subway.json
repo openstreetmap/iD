@@ -3,7 +3,7 @@
     "fields": [
         "{type/route/train}"
     ],
-    "moreFields" : [
+    "moreFields": [
         "{type/route/train}"
     ],
     "geometry": [

@@ -10,6 +10,7 @@
         "air_conditioning",
         "email",
         "fax",
+        "level",
         "min_age",
         "opening_hours",
         "payment_multi",

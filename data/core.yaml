@@ -306,9 +306,19 @@ en:
         multiple: These features can't be rotated because parts of them have not yet been downloaded.
     reverse:
       title: Reverse
-      description: Make this line go in the opposite direction.
+      description:
+        point: Flip the direction of this point.
+        points: Flip the direction of these points.
+        line: Make this line go in the opposite direction.
+        lines: Make these lines go in the opposite direction.
+        features: Flip the directions of these features.
       key: V
-      annotation: Reversed a line.
+      annotation:
+        point: Reversed a point.
+        points: Reversed multiple points.
+        line: Reversed a line.
+        lines: Reversed multiple lines.
+        features: Reversed multiple features.
     split:
       title: Split
       description:
@@ -1407,9 +1417,8 @@ en:
       tip: 'Find features with "fixme" tags'
       reference: 'A "fixme" tag indicates that a mapper has requested help with a feature.'
     generic_name:
-      title: Suspicious Names
       message: '{feature} has the suspicious name "{name}"'
-      tip: "Find features with generic or suspicious names"
+      message_language: '{feature} has the suspicious name "{name}" in {language}'
       reference: "Names should be the actual, on-the-ground names of features."
     incompatible_source:
       title: Suspicious Sources
@@ -1418,17 +1427,19 @@ en:
         feature:
           message: '{feature} lists Google as a data source'
         reference: "Google products are proprietary and must not be used as references."
+    incorrect_name:
+      message: '{feature} has the mistaken name "{name}"'
+      message_language: '{feature} has the mistaken name "{name}" in {language}'
     invalid_format:
       title: Invalid Formatting
       tip: Find tags with unexpected formats
       email:
-        message: '{feature} has an invalid email address.'
-        message_multi: '{feature} has multiple invalid email addresses.'
+        message: '{feature} has an invalid email address'
+        message_multi: '{feature} has multiple invalid email addresses'
         reference: 'Email addresses must look like "user@example.com".'
-      website:
-        message: '{feature} has an invalid website.'
-        message_multi: '{feature} has multiple invalid websites.'
-        reference: 'Websites should start with "http" or "https".'
+    mismatched_geometry:
+      title: Mismatched Geometry
+      tip: "Find features with conflicting tags and geometry"
     missing_role:
       title: Missing Roles
       message: "{member} has no role within {relation}"
@@ -1458,17 +1469,22 @@ en:
         reference: "Some features should have additional tags."
       noncanonical_brand:
         message: "{feature} looks like a brand with nonstandard tags"
+        message_incomplete: "{feature} looks like a brand with incomplete tags"
         reference: "All features of the same brand should be tagged the same way."
+    point_as_vertex:
+      message: '{feature} should be a standalone point based on its tags'
+      reference: "Some features shouldn't be part of lines or areas."
     private_data:
       title: Private Information
       tip: "Find features that may contain private information"
       reference: "Sensitive data like personal phone numbers should not be tagged."
       contact:
         message: '{feature} might be tagged with private contact information'
+    suspicious_name:
+      title: Suspicious Names
+      tip: "Find features with generic or suspicious names"
     tag_suggests_area:
-      title: Lines Tagged as Areas
       message: '{feature} should be a closed area based on the tag "{tag}"'
-      tip: "Find features that are tagged as lines and should possibly be tagged as areas"
       reference: "Areas must have connected endpoints."
     unknown_road:
       message: "{feature} has no classification"
@@ -1496,6 +1512,9 @@ en:
       tip: "Find features with unsquare corners that can be drawn better"
       buildings:
         reference: "Buildings with unsquare corners can often be drawn more accurately."
+    vertex_as_point:
+      message: '{feature} should be part of a line or area based on its tags'
+      reference: "Some features shouldn't be standalone points."
     fix:
       connect_almost_junction:
         annotation: Connected very close features.
@@ -1516,6 +1535,8 @@ en:
         title: Continue drawing from end
       delete_feature:
         title: Delete this feature
+      extract_point:
+        title: Extract this point
       ignore_issue:
         title: Ignore this issue
       merge_close_vertices:
@@ -1530,8 +1551,9 @@ en:
       remove_from_relation:
         title: Remove from relation
       remove_generic_name:
-        title: Remove the name
         annotation: Removed a generic name.
+      remove_mistaken_name:
+        annotation: Removed a mistaken name.
       remove_private_info:
         annotation: Removed private information.
       remove_proprietary_data:
@@ -1541,6 +1563,8 @@ en:
         annotation: Removed tag.
       remove_tags:
         title: Remove the tags
+      remove_the_name:
+        title: Remove the name
       reposition_features:
         title: Reposition the features
       reverse_feature:
@@ -1903,7 +1927,7 @@ en:
         disconnect: "Disconnect features at the selected node"
         extract: "Extract a point from a feature"
         split: "Split a line into two at the selected node"
-        reverse: "Reverse a line"
+        reverse: "Reverse selected features"
         move: "Move selected features"
         rotate: "Rotate selected features"
         orthogonalize: "Square corners of a line or area"

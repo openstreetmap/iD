@@ -9,6 +9,7 @@
     ],
     "moreFields": [
         "lit",
+        "lockable",
         "wheelchair"
     ],
     "geometry": [

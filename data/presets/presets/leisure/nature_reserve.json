@@ -12,10 +12,10 @@
     ],
     "moreFields": [
         "dog",
-        "website",
-        "phone",
         "email",
-        "fax"
+        "fax",
+        "phone",
+        "website"
     ],
     "tags": {
         "leisure": "nature_reserve"

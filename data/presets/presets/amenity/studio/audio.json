@@ -1,0 +1,22 @@
+{
+    "icon": "fas-microphone",
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "terms": [
+        "audio mixing",
+        "audio production",
+        "audio recording",
+        "audio studio"
+    ],
+    "tags": {
+        "amenity": "studio",
+        "studio": "audio"
+    },
+    "reference": {
+        "key": "studio",
+        "value": "audio"
+    },
+    "name": "Recording Studio"
+}

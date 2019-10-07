@@ -11,7 +11,7 @@
         "payment_multi_fee",
         "charge_fee"
     ],
-    "moreFields" : [
+    "moreFields": [
         "email",
         "fax",
         "internet_access/ssid",

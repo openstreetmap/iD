@@ -1,4 +1,5 @@
 {
+    "icon": "temaki-bulldozer",
     "geometry": [
         "area"
     ],
@@ -7,10 +8,10 @@
     ],
     "moreFields": [
         "address",
-        "website",
-        "phone",
         "email",
-        "fax"
+        "fax",
+        "phone",
+        "website"
     ],
     "tags": {
         "landuse": "landfill"

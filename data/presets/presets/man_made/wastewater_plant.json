@@ -1,15 +1,15 @@
 {
     "icon": "maki-water",
     "fields": [
-	    "name",
+        "name",
         "operator",
         "address"
     ],
     "moreFields": [
-        "website",
-        "phone",
         "email",
-        "fax"
+        "fax",
+        "phone",
+        "website"
     ],
     "geometry": [
         "point",

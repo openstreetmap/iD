@@ -1,5 +1,5 @@
 {
-    "icon": "maki-school",
+    "icon": "temaki-school",
     "fields": [
         "name",
         "operator",
@@ -16,6 +16,7 @@
         "fee",
         "internet_access",
         "internet_access/ssid",
+        "level",
         "phone",
         "polling_station",
         "wheelchair"

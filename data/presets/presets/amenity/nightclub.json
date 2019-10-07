@@ -13,6 +13,7 @@
         "air_conditioning",
         "email",
         "fax",
+        "level",
         "payment_multi",
         "phone",
         "website",
@@ -26,10 +27,10 @@
         "amenity": "nightclub"
     },
     "terms": [
-       "disco*",
-       "night club",
-       "dancing",
-       "dance club"
+        "disco*",
+        "night club",
+        "dancing",
+        "dance club"
     ],
     "name": "Nightclub"
 }

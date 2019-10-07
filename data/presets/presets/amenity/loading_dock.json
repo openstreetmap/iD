@@ -1,0 +1,32 @@
+{
+    "icon": "fas-truck-loading",
+    "fields": [
+        "ref",
+        "operator",
+        "access_simple",
+        "door",
+        "width",
+        "height"
+    ],
+    "moreFields": [
+        "address",
+        "colour",
+        "level",
+        "lit",
+        "wheelchair"
+    ],
+    "geometry": [
+        "vertex"
+    ],
+    "terms": [
+        "door",
+        "loading bay",
+        "shipping",
+        "unloading",
+        "warehouse"
+    ],
+    "tags": {
+        "amenity": "loading_dock"
+    },
+    "name": "Loading Dock"
+}

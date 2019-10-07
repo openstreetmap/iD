@@ -12,19 +12,6 @@ import { validationIssue, validationIssueFix } from '../core/validation';
 export function validationCrossingWays(context) {
     var type = 'crossing_ways';
 
-    /*
-    Avoid duplicate work by cacheing issues. The same issues live under two paths.
-    {
-        w-123: {
-            w-456: [{issue1}, {issue2}…]
-        },
-        w-456: {
-            w-123: [{issue1}, {issue2}…]
-        }
-    }
-    */
-    var _issueCache = {};
-
     // returns the way or its parent relation, whichever has a useful feature type
     function getFeatureWithFeatureTypeTagsForWay(way, graph) {
         if (getFeatureTypeForTags(way.tags) === null) {
@@ -252,9 +239,6 @@ export function validationCrossingWays(context) {
                 // skip if this way was already checked and only one issue is needed
                 if (checkedSingleCrossingWays[way2.id]) continue;
 
-                // don't re-check previously checked features
-                if (_issueCache[way1.id] && _issueCache[way1.id][way2.id]) continue;
-
                 // mark this way as checked even if there are no crossings
                 comparedWays[way2.id] = true;
 
@@ -295,12 +279,6 @@ export function validationCrossingWays(context) {
                 }
             }
         }
-        for (var way2ID in comparedWays) {
-            if (!_issueCache[way1.id]) _issueCache[way1.id] = {};
-            if (!_issueCache[way1.id][way2ID]) _issueCache[way1.id][way2ID] = [];
-            if (!_issueCache[way2ID]) _issueCache[way2ID] = {};
-            if (!_issueCache[way2ID][way1.id]) _issueCache[way2ID][way1.id] = [];
-        }
         return edgeCrossInfos;
     }
 
@@ -337,20 +315,11 @@ export function validationCrossingWays(context) {
 
         var issues = [];
         // declare these here to reduce garbage collection
-        var wayIndex, crossingIndex, key, crossings, crossing, issue;
+        var wayIndex, crossingIndex, crossings;
         for (wayIndex in ways) {
-            var way = ways[wayIndex];
-            crossings = findCrossingsByWay(way, graph, tree);
+            crossings = findCrossingsByWay(ways[wayIndex], graph, tree);
             for (crossingIndex in crossings) {
-                crossing = crossings[crossingIndex];
-                var way2 = crossing.ways[1];
-                issue = createIssue(crossing, graph);
-                // cache the issues for each way
-                _issueCache[way.id][way2.id].push(issue);
-                _issueCache[way2.id][way.id].push(issue);
-            }
-            for (key in _issueCache[way.id]) {
-                issues = issues.concat(_issueCache[way.id][key]);
+                issues.push(createIssue(crossings[crossingIndex], graph));
             }
         }
         return issues;
@@ -457,9 +426,12 @@ export function validationCrossingWays(context) {
                 connectionTags: connectionTags
             },
             // differentiate based on the loc since two ways can cross multiple times
-            hash: JSON.stringify(crossing.crossPoint) +
+            hash: crossing.crossPoint.toString() +
                 // if the edges change then so does the fix
-                JSON.stringify(crossing.edges) +
+                crossing.edges.slice().sort(function(edge1, edge2) {
+                    // order to assure hash is deterministic
+                    return edge1[0] < edge2[0] ? -1 : 1;
+                }).toString() +
                 // ensure the correct connection tags are added in the fix
                 JSON.stringify(connectionTags),
             loc: crossing.crossPoint,
@@ -568,10 +540,6 @@ export function validationCrossingWays(context) {
             }
         });
     }
-
-    validation.reset = function() {
-        _issueCache = {};
-    };
 
     validation.type = type;
 

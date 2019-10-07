@@ -3,7 +3,7 @@
     "fields": [
         "{route/ferry}"
     ],
-    "moreFields" : [
+    "moreFields": [
         "{route/ferry}"
     ],
     "geometry": [

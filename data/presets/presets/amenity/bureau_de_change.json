@@ -1,5 +1,5 @@
 {
-    "icon": "maki-bank",
+    "icon": "temaki-money_hand",
     "fields": [
         "name",
         "operator",
@@ -9,11 +9,12 @@
         "building_area"
     ],
     "moreFields": [
-        "opening_hours",
-        "website",
-        "phone",
         "email",
         "fax",
+        "level",
+        "opening_hours",
+        "phone",
+        "website",
         "wheelchair"
     ],
     "geometry": [

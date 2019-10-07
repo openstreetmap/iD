@@ -396,9 +396,21 @@
             },
             "reverse": {
                 "title": "Reverse",
-                "description": "Make this line go in the opposite direction.",
+                "description": {
+                    "point": "Flip the direction of this point.",
+                    "points": "Flip the direction of these points.",
+                    "line": "Make this line go in the opposite direction.",
+                    "lines": "Make these lines go in the opposite direction.",
+                    "features": "Flip the directions of these features."
+                },
                 "key": "V",
-                "annotation": "Reversed a line."
+                "annotation": {
+                    "point": "Reversed a point.",
+                    "points": "Reversed multiple points.",
+                    "line": "Reversed a line.",
+                    "lines": "Reversed multiple lines.",
+                    "features": "Reversed multiple features."
+                }
             },
             "split": {
                 "title": "Split",
@@ -1735,9 +1747,8 @@
                 "reference": "A \"fixme\" tag indicates that a mapper has requested help with a feature."
             },
             "generic_name": {
-                "title": "Suspicious Names",
                 "message": "{feature} has the suspicious name \"{name}\"",
-                "tip": "Find features with generic or suspicious names",
+                "message_language": "{feature} has the suspicious name \"{name}\" in {language}",
                 "reference": "Names should be the actual, on-the-ground names of features."
             },
             "incompatible_source": {
@@ -1750,19 +1761,22 @@
                     "reference": "Google products are proprietary and must not be used as references."
                 }
             },
+            "incorrect_name": {
+                "message": "{feature} has the mistaken name \"{name}\"",
+                "message_language": "{feature} has the mistaken name \"{name}\" in {language}"
+            },
             "invalid_format": {
                 "title": "Invalid Formatting",
                 "tip": "Find tags with unexpected formats",
                 "email": {
-                    "message": "{feature} has an invalid email address.",
-                    "message_multi": "{feature} has multiple invalid email addresses.",
+                    "message": "{feature} has an invalid email address",
+                    "message_multi": "{feature} has multiple invalid email addresses",
                     "reference": "Email addresses must look like \"user@example.com\"."
-                },
-                "website": {
-                    "message": "{feature} has an invalid website.",
-                    "message_multi": "{feature} has multiple invalid websites.",
-                    "reference": "Websites should start with \"http\" or \"https\"."
                 }
+            },
+            "mismatched_geometry": {
+                "title": "Mismatched Geometry",
+                "tip": "Find features with conflicting tags and geometry"
             },
             "missing_role": {
                 "title": "Missing Roles",
@@ -1801,8 +1815,13 @@
                 },
                 "noncanonical_brand": {
                     "message": "{feature} looks like a brand with nonstandard tags",
+                    "message_incomplete": "{feature} looks like a brand with incomplete tags",
                     "reference": "All features of the same brand should be tagged the same way."
                 }
+            },
+            "point_as_vertex": {
+                "message": "{feature} should be a standalone point based on its tags",
+                "reference": "Some features shouldn't be part of lines or areas."
             },
             "private_data": {
                 "title": "Private Information",
@@ -1812,10 +1831,12 @@
                     "message": "{feature} might be tagged with private contact information"
                 }
             },
+            "suspicious_name": {
+                "title": "Suspicious Names",
+                "tip": "Find features with generic or suspicious names"
+            },
             "tag_suggests_area": {
-                "title": "Lines Tagged as Areas",
                 "message": "{feature} should be a closed area based on the tag \"{tag}\"",
-                "tip": "Find features that are tagged as lines and should possibly be tagged as areas",
                 "reference": "Areas must have connected endpoints."
             },
             "unknown_road": {
@@ -1855,6 +1876,10 @@
                     "reference": "Buildings with unsquare corners can often be drawn more accurately."
                 }
             },
+            "vertex_as_point": {
+                "message": "{feature} should be part of a line or area based on its tags",
+                "reference": "Some features shouldn't be standalone points."
+            },
             "fix": {
                 "connect_almost_junction": {
                     "annotation": "Connected very close features."
@@ -1884,6 +1909,9 @@
                 "delete_feature": {
                     "title": "Delete this feature"
                 },
+                "extract_point": {
+                    "title": "Extract this point"
+                },
                 "ignore_issue": {
                     "title": "Ignore this issue"
                 },
@@ -1904,8 +1932,10 @@
                     "title": "Remove from relation"
                 },
                 "remove_generic_name": {
-                    "title": "Remove the name",
                     "annotation": "Removed a generic name."
+                },
+                "remove_mistaken_name": {
+                    "annotation": "Removed a mistaken name."
                 },
                 "remove_private_info": {
                     "annotation": "Removed private information."
@@ -1919,6 +1949,9 @@
                 },
                 "remove_tags": {
                     "title": "Remove the tags"
+                },
+                "remove_the_name": {
+                    "title": "Remove the name"
                 },
                 "reposition_features": {
                     "title": "Reposition the features"
@@ -2321,7 +2354,7 @@
                     "disconnect": "Disconnect features at the selected node",
                     "extract": "Extract a point from a feature",
                     "split": "Split a line into two at the selected node",
-                    "reverse": "Reverse a line",
+                    "reverse": "Reverse selected features",
                     "move": "Move selected features",
                     "rotate": "Rotate selected features",
                     "orthogonalize": "Square corners of a line or area",
@@ -2679,6 +2712,15 @@
                     "label": "Waste Bin",
                     "terms": "garbage can,trash can"
                 },
+                "blind": {
+                    "label": "Blind Person Access",
+                    "terms": "sight impairment,vision impairment",
+                    "options": {
+                        "yes": "Yes",
+                        "limited": "Limited",
+                        "no": "No"
+                    }
+                },
                 "blood_components": {
                     "label": "Blood Components",
                     "terms": "",
@@ -2690,6 +2732,10 @@
                     }
                 },
                 "board_type": {
+                    "label": "Type",
+                    "terms": ""
+                },
+                "bollard": {
                     "label": "Type",
                     "terms": ""
                 },
@@ -2842,6 +2888,10 @@
                 },
                 "content": {
                     "label": "Content",
+                    "terms": ""
+                },
+                "conveying_escalator": {
+                    "label": "Escalator",
                     "terms": ""
                 },
                 "conveying": {
@@ -3417,6 +3467,10 @@
                     "label": "Type",
                     "terms": ""
                 },
+                "informal": {
+                    "label": "Informal",
+                    "terms": ""
+                },
                 "information": {
                     "label": "Type",
                     "terms": ""
@@ -3551,6 +3605,10 @@
                     "label": "Length (Meters)",
                     "terms": ""
                 },
+                "level_semi": {
+                    "label": "Levels",
+                    "terms": "building floors,decks,stories,storeys,storys"
+                },
                 "level": {
                     "label": "Level",
                     "terms": "building floor,deck,storey,story"
@@ -3587,6 +3645,10 @@
                 },
                 "lock": {
                     "label": "Lock",
+                    "terms": ""
+                },
+                "lockable": {
+                    "label": "Lockable",
                     "terms": ""
                 },
                 "man_made": {
@@ -3980,6 +4042,10 @@
                     "label": "Type",
                     "terms": ""
                 },
+                "playground/theme": {
+                    "label": "Theme",
+                    "terms": ""
+                },
                 "polling_station": {
                     "label": "Polling Place",
                     "terms": "voting place"
@@ -4119,6 +4185,10 @@
                         "required": "Required",
                         "recommended": "Recommended"
                     }
+                },
+                "residential": {
+                    "label": "Type",
+                    "terms": ""
                 },
                 "resort": {
                     "label": "Type",
@@ -4435,6 +4505,10 @@
                     "label": "Number of Steps",
                     "terms": ""
                 },
+                "stile": {
+                    "label": "Type",
+                    "terms": ""
+                },
                 "stop": {
                     "label": "Stop Type",
                     "terms": "",
@@ -4449,7 +4523,12 @@
                 },
                 "stroller": {
                     "label": "Stroller Access",
-                    "terms": "baby carriage,perambulator,pram,pushchair"
+                    "terms": "baby carriage,perambulator,pram,pushchair",
+                    "options": {
+                        "yes": "Yes",
+                        "limited": "Limited",
+                        "no": "No"
+                    }
                 },
                 "structure_waterway": {
                     "label": "Structure",
@@ -4791,7 +4870,12 @@
                 },
                 "wheelchair": {
                     "label": "Wheelchair Access",
-                    "terms": "handicap access"
+                    "terms": "handicap access",
+                    "options": {
+                        "yes": "Yes",
+                        "limited": "Limited",
+                        "no": "No"
+                    }
                 },
                 "wholesale": {
                     "label": "Wholesale",
@@ -5025,6 +5109,10 @@
                     "name": "Runway",
                     "terms": "landing strip"
                 },
+                "aeroway/spaceport": {
+                    "name": "Spaceport",
+                    "terms": "cosmodrome,rocket launch center,rocket launch complex,rocket launch site,rocket range,space port"
+                },
                 "aeroway/taxiway": {
                     "name": "Taxiway",
                     "terms": ""
@@ -5119,27 +5207,27 @@
                 },
                 "amenity/bicycle_parking": {
                     "name": "Bicycle Parking",
-                    "terms": "bike"
+                    "terms": "bike,cycle parking,cycling"
                 },
                 "amenity/bicycle_parking/building": {
                     "name": "Bicycle Parking Garage",
-                    "terms": "Multi-Storey Bicycle Park,Multi-Storey Bike Park,Bike Parking Station"
+                    "terms": "Bike Parking Station,cycle parking,cycling,Multi-Storey Bicycle Park,Multi-Storey Bike Park"
                 },
                 "amenity/bicycle_parking/lockers": {
                     "name": "Bicycle Lockers",
-                    "terms": "Bike Lockers"
+                    "terms": "cycle locker,cycling,Bike Lockers"
                 },
                 "amenity/bicycle_parking/shed": {
                     "name": "Bicycle Shed",
-                    "terms": "Bike Shed"
+                    "terms": "cycle shed,cycling,Bike Shed"
                 },
                 "amenity/bicycle_rental": {
                     "name": "Bicycle Rental",
-                    "terms": "bike,bicycle,bikeshare,bike share,bicycle share,hub,dock"
+                    "terms": "bike,bicycle,bikeshare,bike share,bicycle share,cycle dock,cycle hub,cycleshare,cycling"
                 },
                 "amenity/bicycle_repair_station": {
                     "name": "Bicycle Repair Tool Stand",
-                    "terms": "bike,repair,chain,pump,tools,stand,multitool"
+                    "terms": "bike chain,bike multitool,bike repair,bike tools,cycle pump,cycle repair,cycling"
                 },
                 "amenity/biergarten": {
                     "name": "Biergarten",
@@ -5293,6 +5381,10 @@
                     "name": "Fish & Chips Fast Food",
                     "terms": "breakfast,cafe,café,dine,dining,dinner,drive-in,eat,grill,lunch,table,french fries"
                 },
+                "amenity/fast_food/hot_dog": {
+                    "name": "Hot Dog Fast Food",
+                    "terms": "ballpark,frankfurter,frank,hotdog stand,sandwich,sausage,wiener"
+                },
                 "amenity/fast_food/kebab": {
                     "name": "Kebab Fast Food",
                     "terms": "bar,breakfast,cafe,café,canteen,dine,dining,dinner,drive-in,eat,grill,lunch,table"
@@ -5368,6 +5460,10 @@
                 "amenity/library": {
                     "name": "Library",
                     "terms": "book"
+                },
+                "amenity/loading_dock": {
+                    "name": "Loading Dock",
+                    "terms": "door,loading bay,shipping,unloading,warehouse"
                 },
                 "amenity/love_hotel": {
                     "name": "Love Hotel",
@@ -5705,6 +5801,22 @@
                     "name": "Studio",
                     "terms": "recording,radio,television"
                 },
+                "amenity/studio/audio": {
+                    "name": "Recording Studio",
+                    "terms": "audio mixing,audio production,audio recording,audio studio"
+                },
+                "amenity/studio/radio": {
+                    "name": "Radio Station",
+                    "terms": "am radio,fm radio,radio broadcast,radio studio"
+                },
+                "amenity/studio/television": {
+                    "name": "Television Station",
+                    "terms": "television broadcast,television studio,tv broadcast,tv station,tv studio"
+                },
+                "amenity/studio/video": {
+                    "name": "Film Studio",
+                    "terms": "movie production,movie studio,video production,video recording,video studio"
+                },
                 "amenity/taxi": {
                     "name": "Taxi Stand",
                     "terms": "cab"
@@ -5857,6 +5969,10 @@
                     "name": "Animal Watering Place",
                     "terms": ""
                 },
+                "amenity/weighbridge": {
+                    "name": "Truck Scale",
+                    "terms": "weigh station,weighbridge"
+                },
                 "area": {
                     "name": "Area",
                     "terms": "polygon"
@@ -5878,7 +5994,7 @@
                     "terms": "ferris wheel,theme park,amusement ride"
                 },
                 "attraction/bumper_car": {
-                    "name": "Bumper Car",
+                    "name": "Bumper Cars",
                     "terms": "theme park,dodgem cars,autoscooter"
                 },
                 "attraction/bungee_jumping": {
@@ -5935,6 +6051,10 @@
                 },
                 "barrier/block": {
                     "name": "Block",
+                    "terms": ""
+                },
+                "barrier/bollard_line": {
+                    "name": "Bollard Row",
                     "terms": ""
                 },
                 "barrier/bollard": {
@@ -6731,7 +6851,7 @@
                 },
                 "highway/cycleway": {
                     "name": "Cycle Path",
-                    "terms": "bike path,bicyle path"
+                    "terms": "bicyle path,bike path,cycling path"
                 },
                 "highway/cycleway/crossing": {
                     "name": "Cycle Crossing",
@@ -6832,6 +6952,10 @@
                 "highway/path": {
                     "name": "Path",
                     "terms": "hike,hiking,trackway,trail,walk"
+                },
+                "highway/path/informal": {
+                    "name": "Informal Path",
+                    "terms": "bootleg trail,cow path,desire line,desire path,desireline,desirepath,elephant path,game trail,goat track,herd path,pig trail,shortcut,social trail,use trail"
                 },
                 "highway/pedestrian_area": {
                     "name": "Pedestrian Area",
@@ -7061,9 +7185,17 @@
                     "name": "Indoor Door",
                     "terms": "doorframe,doorway,portal,room access,threshold"
                 },
+                "indoor/elevator": {
+                    "name": "Indoor Elevator Shaft",
+                    "terms": "elevator,lift"
+                },
                 "indoor/room": {
                     "name": "Room",
                     "terms": "antechamber,anteroom,atrium,cell,chamber,concourse,foyer,indoor room,lobby,vestibule"
+                },
+                "indoor/stairs": {
+                    "name": "Indoor Stairwell",
+                    "terms": "stair,stairs,staircase,stairway,stairwell,steps"
                 },
                 "indoor/wall": {
                     "name": "Indoor Wall",
@@ -7801,6 +7933,10 @@
                     "name": "Tunnel",
                     "terms": "bore,dig,shaft,underground passage,underpass"
                 },
+                "man_made/utility_pole": {
+                    "name": "Utility Pole",
+                    "terms": ""
+                },
                 "man_made/wastewater_plant": {
                     "name": "Wastewater Plant",
                     "terms": "sewage*,water treatment plant,reclamation plant"
@@ -8187,7 +8323,7 @@
                 },
                 "office/research": {
                     "name": "Research Office",
-                    "terms": ""
+                    "terms": "R and D,research and development,research lab"
                 },
                 "office/surveyor": {
                     "name": "Surveyor Office",
@@ -8967,7 +9103,7 @@
                 },
                 "shop/farm": {
                     "name": "Produce Stand",
-                    "terms": "farm shop,farm stand"
+                    "terms": "baked goods,farm shop,farm stand,fresh food,fruits,greengrocer,organics,vegetables"
                 },
                 "shop/fashion_accessories": {
                     "name": "Fashion Accessories Store",
@@ -9019,7 +9155,7 @@
                 },
                 "shop/general": {
                     "name": "General Store",
-                    "terms": "Village Shop"
+                    "terms": "village shop"
                 },
                 "shop/gift": {
                     "name": "Gift Shop",
@@ -9208,6 +9344,10 @@
                 "shop/printer_ink": {
                     "name": "Printer Ink Store",
                     "terms": "copier ink,fax ink,ink cartridges,toner"
+                },
+                "shop/psychic": {
+                    "name": "Psychic",
+                    "terms": "astrology,crystal ball,divination,fortune teller,seer,spirit"
                 },
                 "shop/pyrotechnics": {
                     "name": "Fireworks Store",

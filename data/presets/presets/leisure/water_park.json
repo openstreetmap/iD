@@ -6,12 +6,12 @@
         "address"
     ],
     "moreFields": [
-        "payment_multi",
         "brand",
-        "website",
-        "phone",
         "email",
-        "fax"
+        "fax",
+        "payment_multi",
+        "phone",
+        "website"
     ],
     "geometry": [
         "point",

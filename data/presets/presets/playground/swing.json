@@ -3,7 +3,8 @@
     "fields": [
         "capacity",
         "baby_seat",
-        "wheelchair"
+        "wheelchair",
+        "blind"
     ],
     "geometry": [
         "point"

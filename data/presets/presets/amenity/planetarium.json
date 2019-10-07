@@ -10,12 +10,12 @@
     "moreFields": [
         "air_conditioning",
         "charge_fee",
-        "fee",
-        "payment_multi_fee",
-        "website",
-        "phone",
         "email",
         "fax",
+        "fee",
+        "payment_multi_fee",
+        "phone",
+        "website",
         "wheelchair"
     ],
     "geometry": [

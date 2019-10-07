@@ -1,0 +1,12 @@
+{
+    "key": "level",
+    "type": "semiCombo",
+    "label": "Levels",
+    "terms": [
+        "building floors",
+        "decks",
+        "stories",
+        "storeys",
+        "storys"
+    ]
+}

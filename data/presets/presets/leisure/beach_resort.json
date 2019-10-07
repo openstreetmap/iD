@@ -1,5 +1,5 @@
 {
-    "icon": "maki-beach",
+    "icon": "fas-umbrella-beach",
     "fields": [
         "name",
         "address",
@@ -9,11 +9,11 @@
         "charge_fee"
     ],
     "moreFields": [
-        "smoking",
-        "website",
-        "phone",
         "email",
-        "fax"
+        "fax",
+        "phone",
+        "smoking",
+        "website"
     ],
     "geometry": [
         "point",

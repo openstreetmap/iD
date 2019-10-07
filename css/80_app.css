@@ -2977,14 +2977,18 @@ input.key-trap {
     border-radius: 0;
 }
 
-.map-control > button:hover,
-.map-control > button:focus {
+.map-control > button:not(.disabled):hover,
+.map-control > button:not(.disabled):focus {
     background: rgba(0, 0, 0, .8);
 }
 
 .map-control > button.active,
 .map-control > button.active:hover {
     background: #7092ff;
+}
+
+.map-control > button.disabled .icon {
+    color: rgba(255, 255, 255, 0.5);
 }
 
 
