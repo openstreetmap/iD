@@ -8,7 +8,10 @@ import { svgTagClasses } from './tag_classes';
 import { osmEntity, osmOldMultipolygonOuterMember } from '../osm';
 import { utilArrayFlatten, utilArrayGroupBy } from '../util';
 import { utilDetect } from '../util/detect';
-
+import _isEqual from 'lodash-es/isEqual';
+import _transform from 'lodash-es/transform';
+import _omit from 'lodash-es/omit'; 
+import _isObject from 'lodash-es/isObject'; 
 
 export function svgLines(projection, context) {
     var detected = utilDetect();
@@ -34,6 +37,7 @@ export function svgLines(projection, context) {
         var nopeClass = context.getDebug('target') ? 'red ' : 'nocolor ';
         var getPath = svgPath(projection).geojson;
         var activeID = context.activeID();
+        var base = context.history().base();
 
         // The targets and nopes will be MultiLineString sub-segments of the ways
         var data = { targets: [], nopes: [] };
@@ -55,13 +59,24 @@ export function svgLines(projection, context) {
         targets.exit()
             .remove();
 
+        var graphEditClass = function(d) {
+            return d.properties.nodes.some(function(n) {
+                if (!base.entities[n.id]) {
+                    return true; 
+                }                
+                var result = !_isEqual(_omit(graph.entities[n.id], ['tags', 'v']), _omit(base.entities[n.id], ['tags', 'v'])); 
+                return result; 
+            }) ? ' graphedited ': '';
+        };
+
         // enter/update
         targets.enter()
             .append('path')
             .merge(targets)
             .attr('d', getPath)
-            .attr('class', function(d) { return 'way line target target-allowed ' + targetClass + d.id; });
-
+            .attr('class', function(d) {
+                return 'way line target target-allowed ' + targetClass + d.id + graphEditClass(d);
+            });
 
         // NOPE
         var nopeData = data.nopes.filter(getPath);
@@ -78,11 +93,14 @@ export function svgLines(projection, context) {
             .append('path')
             .merge(nopes)
             .attr('d', getPath)
-            .attr('class', function(d) { return 'way line target target-nope ' + nopeClass + d.id; });
+            .attr('class', function(d) { 
+                return 'way line target target-nope ' + nopeClass + d.id + graphEditClass(d); 
+            });
     }
 
 
     function drawLines(selection, graph, entities, filter) {
+        var base = context.history().base();
 
         function waystack(a, b) {
             var selected = context.selectedIDs();
@@ -93,6 +111,27 @@ export function svgLines(projection, context) {
             if (b.tags.highway) { scoreB -= highway_stack[b.tags.highway]; }
             return scoreA - scoreB;
         }
+
+
+        // Class for styling currently tag-edited lines, not changes to geometry
+        var tagEditClass = function(d) {
+            var result = graph.entities[d.id] && base.entities[d.id] &&  !_isEqual(graph.entities[d.id].tags, base.entities[d.id].tags); 
+
+            return result ? 
+            ' tagedited ' :  ''; 
+        };
+
+
+        // Class for styling currently geometry-edited lines
+        var graphEditClass = function(d) {
+            if (!base.entities[d.id]) {
+                return ' graphedited '; 
+            }
+
+            var result = graph.entities[d.id] && base.entities[d.id] &&  !_isEqual(_omit(graph.entities[d.id], ['tags', 'v']), _omit(base.entities[d.id], ['tags', 'v'])); 
+
+            return result ? ' graphedited ' :  ''; 
+        };
 
 
         function drawLineGroup(selection, klass, isSelected) {
@@ -122,7 +161,7 @@ export function svgLines(projection, context) {
                     }
 
                     var oldMPClass = oldMultiPolygonOuters[d.id] ? 'old-multipolygon ' : '';
-                    return prefix + ' ' + klass + ' ' + selectedClass + oldMPClass + d.id;
+                    return prefix + ' ' + klass + ' ' + selectedClass + oldMPClass + graphEditClass(d) + tagEditClass(d) + d.id;
                 })
                 .call(svgTagClasses())
                 .merge(lines)

@@ -86,6 +86,13 @@ export function uiMapData(context) {
     }
 
 
+    function toggleHighlightEdited() {
+        d3_event.preventDefault();
+        var surface = context.surface();
+        surface.classed('highlight-edited', !surface.classed('highlight-edited'));
+    }
+
+
     function showsLayer(which) {
         var layer = layers.layer(which);
         if (layer) {
@@ -881,7 +888,8 @@ export function uiMapData(context) {
                 d3_event.preventDefault();
                 d3_event.stopPropagation();
                 toggleLayer('osm');
-            });
+            })
+            .on(t('map_data.highlight_way_edits.key'), toggleHighlightEdited);
     };
 
     return uiMapData;

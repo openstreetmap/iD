@@ -3,8 +3,9 @@ import { bisector as d3_bisector } from 'd3-array';
 import { osmEntity, osmIsOldMultipolygonOuterMember } from '../osm';
 import { svgPath, svgSegmentWay } from './helpers';
 import { svgTagClasses } from './tag_classes';
+import _isEqual from 'lodash-es/isEqual';
+import _omit from 'lodash-es/omit';
 import { svgTagPattern } from './tag_pattern';
-
 
 export function svgAreas(projection, context) {
 
@@ -75,6 +76,7 @@ export function svgAreas(projection, context) {
         var path = svgPath(projection, graph, true);
         var areas = {};
         var multipolygon;
+        var base = context.history().base();
 
         for (var i = 0; i < entities.length; i++) {
             var entity = entities[i];
@@ -158,12 +160,32 @@ export function svgAreas(projection, context) {
             }
         }
 
+
+        var graphEditClass = function(d) {
+            if (d.type !== 'way'){
+                return '';
+            }
+            var graphEdited = d.nodes.some(function(n) {
+                if (!base.entities[n]) {
+                    return true;
+                }
+                var result = !_isEqual(_omit(graph.entities[n], ['tags', 'v']), _omit(base.entities[n], ['tags', 'v']));
+                return result;
+            });
+
+            if (graphEdited){
+                return 'graphedited';
+            }
+
+            return (!_isEqual(graph.entities[d.id].tags, base.entities[d.id].tags)) ? 'tagedited' : '';
+        };
+
         paths = paths.enter()
             .insert('path', sortedByArea)
             .merge(paths)
             .each(function(entity) {
                 var layer = this.parentNode.__data__;
-                this.setAttribute('class', entity.type + ' area ' + layer + ' ' + entity.id);
+                this.setAttribute('class', entity.type + ' area ' + layer + ' ' + graphEditClass(entity) + ' ' + entity.id);
 
                 if (layer === 'fill') {
                     this.setAttribute('clip-path', 'url(#' + entity.id + '-clippath)');
