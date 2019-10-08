@@ -1,9 +1,9 @@
+import deepEqual from 'fast-deep-equal';
 import { select as d3_select } from 'd3-selection';
 
 import { geoScaleToZoom } from '../geo';
 import { osmEntity } from '../osm';
 import { svgPassiveVertex, svgPointTransform } from './helpers';
-import _isEqual from 'lodash-es/isEqual';
 
 export function svgVertices(projection, context) {
     var radiuses = {
@@ -134,10 +134,10 @@ export function svgVertices(projection, context) {
                 return !base.entities[d.id]; // if it doesn't exist in the base graph, it's new
             })
             .classed('moved', function(d) {
-                return base.entities[d.id] && !_isEqual(graph.entities[d.id].loc, base.entities[d.id].loc);
+                return base.entities[d.id] && !deepEqual(graph.entities[d.id].loc, base.entities[d.id].loc);
             })
             .classed('retagged', function(d) {
-                return base.entities[d.id] && !_isEqual(graph.entities[d.id].tags, base.entities[d.id].tags);
+                return base.entities[d.id] && !deepEqual(graph.entities[d.id].tags, base.entities[d.id].tags);
             })
             .call(updateAttributes);
 
@@ -293,7 +293,7 @@ export function svgVertices(projection, context) {
 
     function isEditedEntity(entity, base, head) {
         return head.entities[entity.id] !== base.entities[entity.id] ||
-            !_isEqual(head.entities[entity.id].tags, base.entities[entity.id].tags);
+            !deepEqual(head.entities[entity.id].tags, base.entities[entity.id].tags);
     }
 
 

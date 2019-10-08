@@ -1,3 +1,4 @@
+import deepEqual from 'fast-deep-equal';
 import { range as d3_range } from 'd3-array';
 
 import {
@@ -8,7 +9,6 @@ import { svgTagClasses } from './tag_classes';
 import { osmEntity, osmOldMultipolygonOuterMember } from '../osm';
 import { utilArrayFlatten, utilArrayGroupBy } from '../util';
 import { utilDetect } from '../util/detect';
-import _isEqual from 'lodash-es/isEqual';
 
 export function svgLines(projection, context) {
     var detected = utilDetect();
@@ -60,7 +60,7 @@ export function svgLines(projection, context) {
             var wayID = d.properties.entity.id;
             // if the whole line was edited, don't draw segment changes
             if (!base.entities[wayID] ||
-                !_isEqual(graph.entities[wayID].nodes, base.entities[wayID].nodes)) {
+                !deepEqual(graph.entities[wayID].nodes, base.entities[wayID].nodes)) {
                 return '';
             }
             return d.properties.nodes.some(function(n) {
@@ -148,12 +148,12 @@ export function svgLines(projection, context) {
                 .classed('geometry-edited', function(d) {
                     return graph.entities[d.id] &&
                         base.entities[d.id] &&
-                        !_isEqual(graph.entities[d.id].nodes, base.entities[d.id].nodes);
+                        !deepEqual(graph.entities[d.id].nodes, base.entities[d.id].nodes);
                 })
                 .classed('retagged', function(d) {
                     return graph.entities[d.id] &&
                         base.entities[d.id] &&
-                        !_isEqual(graph.entities[d.id].tags, base.entities[d.id].tags);
+                        !deepEqual(graph.entities[d.id].tags, base.entities[d.id].tags);
                 })
                 .call(svgTagClasses())
                 .merge(lines)
