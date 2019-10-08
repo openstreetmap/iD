@@ -23,6 +23,7 @@ export function svgAreas(projection, context) {
         var nopeClass = context.getDebug('target') ? 'red ' : 'nocolor ';
         var getPath = svgPath(projection).geojson;
         var activeID = context.activeID();
+        var base = context.history().base();
 
         // The targets and nopes will be MultiLineString sub-segments of the ways
         var data = { targets: [], nopes: [] };
@@ -44,12 +45,25 @@ export function svgAreas(projection, context) {
         targets.exit()
             .remove();
 
+        var segmentEditClass = function(d) {
+            var wayID = d.properties.entity.id;
+            // if the whole line was edited, don't draw segment changes
+            if (!base.entities[wayID] ||
+                !_isEqual(graph.entities[wayID].nodes, base.entities[wayID].nodes)) {
+                return '';
+            }
+            return d.properties.nodes.some(function(n) {
+                return !base.entities[n.id] ||
+                       graph.entities[n.id].loc !== base.entities[n.id].loc;
+            }) ? ' segment-edited ': '';
+        };
+
         // enter/update
         targets.enter()
             .append('path')
             .merge(targets)
             .attr('d', getPath)
-            .attr('class', function(d) { return 'way area target target-allowed ' + targetClass + d.id; });
+            .attr('class', function(d) { return 'way area target target-allowed ' + targetClass + d.id + segmentEditClass(d); });
 
 
         // NOPE
@@ -67,7 +81,7 @@ export function svgAreas(projection, context) {
             .append('path')
             .merge(nopes)
             .attr('d', getPath)
-            .attr('class', function(d) { return 'way area target target-nope ' + nopeClass + d.id; });
+            .attr('class', function(d) { return 'way area target target-nope ' + nopeClass + d.id + segmentEditClass(d); });
     }
 
 
@@ -159,34 +173,30 @@ export function svgAreas(projection, context) {
             }
         }
 
-
-        var editClass = function(d) {
-            if (d.type !== 'way') {
-                return '';
-            }
-            var graphEdited = d.nodes.some(function(n) {
-                return !base.entities[n] ||
-                       graph.entities[n].loc !== base.entities[n].loc;
-            });
-
-            if (graphEdited){
-                return 'graphedited';
-            }
-
-            return (!_isEqual(graph.entities[d.id].tags, base.entities[d.id].tags)) ? 'tagedited' : '';
-        };
-
         paths = paths.enter()
             .insert('path', sortedByArea)
             .merge(paths)
             .each(function(entity) {
                 var layer = this.parentNode.__data__;
-                this.setAttribute('class', entity.type + ' area ' + layer + ' ' + editClass(entity) + ' ' + entity.id);
+                this.setAttribute('class', entity.type + ' area ' + layer + ' ' + entity.id);
 
                 if (layer === 'fill') {
                     this.setAttribute('clip-path', 'url(#' + entity.id + '-clippath)');
                     this.style.fill = this.style.stroke = getPatternStyle(entity.tags);
                 }
+            })
+            .classed('added', function(d) {
+                return !base.entities[d.id];
+            })
+            .classed('geometry-edited', function(d) {
+                return graph.entities[d.id] &&
+                    base.entities[d.id] &&
+                    !_isEqual(graph.entities[d.id].nodes, base.entities[d.id].nodes);
+            })
+            .classed('retagged', function(d) {
+                return graph.entities[d.id] &&
+                    base.entities[d.id] &&
+                    !_isEqual(graph.entities[d.id].tags, base.entities[d.id].tags);
             })
             .call(svgTagClasses())
             .attr('d', path);
