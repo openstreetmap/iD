@@ -393,31 +393,31 @@ g.vertex.highlighted .shadow {
 }
 
 /* Entire line/area visual diffs */
-.highlight-edited g.linegroup.line-shadow > path.line.shadow.added,
-.highlight-edited g.linegroup.line-shadow > path.line.shadow.retagged,
-.highlight-edited g.linegroup.line-shadow > path.line.shadow.geometry-edited,
-.highlight-edited g.areagroup.area-shadow > path.area.shadow.added,
-.highlight-edited g.areagroup.area-shadow > path.area.shadow.retagged,
-.highlight-edited g.areagroup.area-shadow > path.area.shadow.geometry-edited {
+.highlight-edited path.line.shadow.added,
+.highlight-edited path.line.shadow.retagged,
+.highlight-edited path.line.shadow.geometry-edited,
+.highlight-edited path.area.shadow.added,
+.highlight-edited path.area.shadow.retagged,
+.highlight-edited path.area.shadow.geometry-edited {
     stroke-opacity: 0.6;
 }
-.highlight-edited.fill-wireframe g.linegroup.line-shadow > path.line.shadow.added,
-.highlight-edited.fill-wireframe g.linegroup.line-shadow > path.line.shadow.retagged,
-.highlight-edited.fill-wireframe g.linegroup.line-shadow > path.line.shadow.geometry-edited,
-.highlight-edited.fill-wireframe g.areagroup.area-shadow > path.area.shadow.added,
-.highlight-edited.fill-wireframe g.areagroup.area-shadow > path.area.shadow.retagged,
-.highlight-edited.fill-wireframe g.areagroup.area-shadow > path.area.shadow.geometry-edited {
+.highlight-edited.fill-wireframe path.line.shadow.added,
+.highlight-edited.fill-wireframe path.line.shadow.retagged,
+.highlight-edited.fill-wireframe path.line.shadow.geometry-edited,
+.highlight-edited.fill-wireframe path.area.shadow.added,
+.highlight-edited.fill-wireframe path.area.shadow.retagged,
+.highlight-edited.fill-wireframe path.area.shadow.geometry-edited {
     stroke-width: 3;
 }
-.highlight-edited g.linegroup.line-shadow > path.line.shadow.added,
-.highlight-edited g.areagroup.area-shadow > path.area.shadow.added {
+.highlight-edited path.line.shadow.added,
+.highlight-edited path.area.shadow.added {
     stroke: rgb(133, 255, 103);
 }
-.highlight-edited g.areagroup.area-shadow > path.area.shadow.retagged,
-.highlight-edited g.linegroup.line-shadow > path.line.shadow.retagged {
+.highlight-edited path.area.shadow.retagged,
+.highlight-edited path.line.shadow.retagged {
     stroke: #fcde5a;
 }
-.highlight-edited g.linegroup.line-shadow > path.line.shadow.geometry-edited,
-.highlight-edited g.areagroup.area-shadow > path.area.shadow.geometry-edited {
+.highlight-edited path.line.shadow.geometry-edited,
+.highlight-edited path.area.shadow.geometry-edited {
     stroke: rgb(255, 126, 46);
 }
