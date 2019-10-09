@@ -383,7 +383,7 @@ _Yellow._ Warnings are general issues that the user is free to ignore. They have
 
 #### Validation Rules
 
-A validation rule is an object that takes an entity and a graph and returns objects of type `validationIssue` representing problems found with that entity for that graph. Rules are listed under `modes/validations` and correspond directly to the toggleable Rules list under the Issues pane in iD's UI.
+A validation rule is an object that takes an entity and a graph and returns objects of type `validationIssue` representing problems found with that entity for that graph. Rules are listed under `modules/validations` and correspond directly to the toggleable Rules list under the Issues pane in iD's UI.
 
 Each `validationIssue` takes its rule's `type` and may include a `subtype` that further differentiates it.
 
@@ -508,6 +508,8 @@ These counts are tied to issues and not features, so edits to a single feature c
 These tags cannot be manually removed or altered by the user—for example, by disabling rules or ignoring issues. One exception to this is that the user can change the `unsquare_way` degree threshold.
 
 The format is: `{warnings|resolved}:{type}:{subtype}={count}`
+
+Note that specific `type` and `subtype` IDs could change or vary slightly in meaning between different versions of iD.
 
 ##### `warnings`
 
