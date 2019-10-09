@@ -62,7 +62,7 @@
     "@fortawesome/free-solid-svg-icons": "^5.11.2",
     "@mapbox/maki": "^6.0.0",
     "chai": "^4.1.0",
-    "cldr-core": "35.1.0",
+    "cldr-core": "36.0.0",
     "cldr-localenames-full": "35.1.0",
     "colors": "^1.1.2",
     "concat-files": "^0.1.1",
