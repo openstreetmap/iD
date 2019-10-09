@@ -499,3 +499,26 @@ A way has corners close to, but not quite 90°. The user can vary the "close to"
 
 * `building`: the feature has a `building` tag
 
+#### Issue Changeset Tags
+
+To assist data reviewers, tags indicating the number and type of issues created and resolved via the user's edits are included in the changeset tags.
+
+These counts are tied to issues and not features, so edits to a single feature could both create and resolve issues while leaving still others unchanged.
+
+These tags cannot be manually removed or altered by the user—for example, by disabling rules or ignoring issues. One exception to this is that the user can change the `unsquare_way` degree threshold.
+
+The format is: `{warnings|resolved}:{type}:{subtype}={count}`
+
+##### `warnings`
+
+The `warnings` namespace indicates issues that were created and ignored by the user. These must all be issues of severity `warning` and not `error` since errors block upload altogether and thus cannot be ignored.
+
+Prior to iD 2.16.0, these also included any warnings concerning features edited by the user, even if they weren't created via the user's edits.
+
+e.g. `warnings:disconnected_way:highway=4`
+
+##### `resolved`
+
+The `resolved` namespace indicates issues of any kind that were fixed by the user. A resolved issue did not necessarily appear under `warnings` in some previous OSM changeset.
+
+e.g. `resolved:crossing_ways:building-highway=2`
