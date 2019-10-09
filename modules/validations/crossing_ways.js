@@ -32,8 +32,10 @@ export function validationCrossingWays(context) {
         return tags[key] !== undefined && tags[key] !== 'no';
     }
 
-    function tagsImplyIndoors(tags) {
-        return hasTag(tags, 'level') || tags.highway === 'corridor';
+    function taggedAsIndoor(tags) {
+        return hasTag(tags, 'indoor') ||
+            hasTag(tags, 'level') ||
+            tags.highway === 'corridor';
     }
 
     function allowsStructures(featureType) {
@@ -83,7 +85,7 @@ export function validationCrossingWays(context) {
         var level1 = tags1.level || '0';
         var level2 = tags2.level || '0';
 
-        if (tagsImplyIndoors(tags1) && tagsImplyIndoors(tags2) && level1 !== level2) {
+        if (taggedAsIndoor(tags1) && taggedAsIndoor(tags2) && level1 !== level2) {
             // assume features don't interact if they're indoor on different levels
             return true;
         }
@@ -350,13 +352,15 @@ export function validationCrossingWays(context) {
         var featureType1 = crossing.featureTypes[0];
         var featureType2 = crossing.featureTypes[1];
 
-        var isCrossingIndoors = tagsImplyIndoors(entities[0].tags) && tagsImplyIndoors(entities[1].tags);
+        var isCrossingIndoors = taggedAsIndoor(entities[0].tags) && taggedAsIndoor(entities[1].tags);
         var isCrossingTunnels = allowsTunnel(featureType1) && hasTag(entities[0].tags, 'tunnel') &&
                                 allowsTunnel(featureType2) && hasTag(entities[1].tags, 'tunnel');
         var isCrossingBridges = allowsBridge(featureType1) && hasTag(entities[0].tags, 'bridge') &&
                                 allowsBridge(featureType2) && hasTag(entities[1].tags, 'bridge');
 
-        var crossingTypeID;
+        var subtype = crossing.featureTypes.sort().join('-');
+
+        var crossingTypeID = subtype;
 
         if (isCrossingIndoors) {
             crossingTypeID = 'indoor-indoor';
@@ -364,8 +368,6 @@ export function validationCrossingWays(context) {
             crossingTypeID = 'tunnel-tunnel';
         } else if (isCrossingBridges) {
             crossingTypeID = 'bridge-bridge';
-        } else {
-            crossingTypeID = crossing.featureTypes.sort().join('-');
         }
         if (connectionTags && (isCrossingIndoors || isCrossingTunnels || isCrossingBridges)) {
             crossingTypeID += '_connectable';
@@ -408,6 +410,7 @@ export function validationCrossingWays(context) {
 
         return new validationIssue({
             type: type,
+            subtype: subtype,
             severity: 'warning',
             message: function(context) {
                 var entity1 = context.hasEntity(this.entityIds[0]),

@@ -406,6 +406,19 @@ Two nodes have a very small distance between them. The threshold distance is sma
 
 Two ways cross without a junction node or enough information to clarify how they cross.
 
+Building crossings are flagged per-feature. Other subtypes are flagged per-crossing.
+
+* `building-building`
+* `building-highway`
+* `building-railway`
+* `building-waterway`
+* `highway-highway`
+* `highway-railway`
+* `highway-waterway`
+* `railway-railway`
+* `railway-waterway`
+* `waterway-waterway`
+
 ##### `disconnected_way`
 
 One or more interconnected, routable feature are not connected to the rest of the routable network (i.e. they form a routing island). A way is considered connected to the network if any of its nodes are on an unloaded tile, meaning large routing islands may not always be detected.
