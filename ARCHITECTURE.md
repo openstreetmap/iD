@@ -364,3 +364,90 @@ inspector(container); // render the inspector
 inspector.tags(); // retrieve the current tags
 inspector.on('change', callback); // get notified when a tag change is made
 ```
+
+### Validation Module
+
+Runtime data validation in iD is managed by `coreValidator`.
+
+#### Issue Severities
+
+"Issue" is the general term for anything noted by the validator. Issues are further categorized by severity.
+
+##### `error`
+
+_Red._ Errors are the most severe issues. The user must resolve all errors before uploading their changes. Thus, these should be straightforward to fix and there should be virtually no false positives.
+
+##### `warning`
+
+_Yellow._ Warnings are general issues that the user is free to ignore. They have varying degrees of importance, accuracy, and fixability. Still, only clear and relevant warnings should be shown to avoid overwhelming the user. Most issues are warnings.
+
+#### Validation Rules
+
+A validation rule is an object that takes an entity and a graph and returns objects of type `validationIssue` representing problems found with that entity for that graph. Rules are listed under `modes/validations` and correspond directly to the toggleable Rules list under the Issues pane in iD's UI.
+
+Each `validationIssue` takes its rule's `type` and may include a `subtype` that further differentiates it.
+
+##### `almost_junction`
+
+##### `close_nodes`
+
+Two nodes have a very small distance between them without z-axis differentiation. The threshold distance is smaller for features expected to be mapped at higher levels of detail (e.g. paths, rooms).
+
+* `detached`: the nodes are not part of any ways
+* `vertices`: the nodes are adjacent members of a way
+
+##### `crossing_ways`
+
+Two ways cross without a junction node or enough information to clarify how they cross.
+
+##### `disconnected_way`
+##### `fixme_tag`
+
+A feature has a `fixme` tag that existed before the user's current edits. Deleting the `fixme` tag marks the issue as resolved regardless of the user's other edits.
+
+##### `impossible_oneway`
+##### `incompatible_source`
+
+The `source` tag of a feature references a data source known to have a license incompatiable with OpenStreetMap. This is very much not exhaustive and currently only flags sources containing "google".
+
+##### `invalid_format`
+
+A tag of a feature has an unexpected syntax.
+
+* `email`: the `email` tag does not look like "user@example.com"
+
+##### `maprules`
+##### `mismatched_geometry`
+##### `missing_role`
+
+A relation membership does not have a set `role`.
+
+##### `missing_tag`
+
+A feature does not have enough tags to define what it is.
+
+* `any`: there are zero tags
+* `descriptive`: there are `area`, `name`, `type=multipolygon`, and/or meta tags (e.g. `source`), but no defining tags
+* `relation_type`: the OSM entity type is `relation` but there is no `type` tag
+* `highway_classification`: the OSM entity type is `way` and the feature is tagged as `highway=road`
+
+##### `outdated_tags`
+
+A feature has nonstandard tags.
+
+* `deprecated_tags`: the feature has tags listed in `deprecated.json` or matches a preset with a `replacement` property
+* `incomplete_tags`: the feature does not have all tags from the `addTags` property of its matching preset
+* `noncanonical_brand`: the feature indicates it should match a name-suggestion-index entry but does not have all of the given tags
+* `old_multipolygon`: the feature is a multipolygon relation with its defining tags set on its outer member way
+
+##### `private_data`
+
+An email address, phone number, or fax number is present on a residential feature that isn't also tagged as a POI.
+
+##### `suspicious_name`
+##### `unsquare_way`
+
+A way has corners close to, but not quite 90°. The user can vary the "close to" degree threshold between 0° and 20°. The default is 5°.
+
+* `building`: the feature has a `building` tag; other feature types are not currently flagged
+

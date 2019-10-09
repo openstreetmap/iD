@@ -149,6 +149,7 @@ export function validationCloseNodes(context) {
 
                     issues.push(new validationIssue({
                         type: type,
+                        subtype: 'detached',
                         severity: 'warning',
                         message: function(context) {
                             var entity = context.hasEntity(this.entityIds[0]),
@@ -216,6 +217,7 @@ export function validationCloseNodes(context) {
 
             return new validationIssue({
                 type: type,
+                subtype: 'vertices',
                 severity: 'warning',
                 message: function(context) {
                     var entity = context.hasEntity(this.entityIds[0]);
