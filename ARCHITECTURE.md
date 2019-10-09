@@ -387,13 +387,19 @@ A validation rule is an object that takes an entity and a graph and returns obje
 
 Each `validationIssue` takes its rule's `type` and may include a `subtype` that further differentiates it.
 
+#### Issue Types
+
 ##### `almost_junction`
+
+A way ends close to another way, indicating they should likely be connected. The current distance threshold is 5 meters.
+
+* `highway-highway`: both the ways are roads or paths; no issue is flagged if the endpoint is an entrance or is tagged `noexit=yes`
 
 ##### `close_nodes`
 
-Two nodes have a very small distance between them without z-axis differentiation. The threshold distance is smaller for features expected to be mapped at higher levels of detail (e.g. paths, rooms).
+Two nodes have a very small distance between them. The threshold distance is smaller for features expected to be mapped at higher levels of detail (e.g. paths, rooms).
 
-* `detached`: the nodes are not part of any ways
+* `detached`: the nodes are not part of any ways; close points with differing z-axis tags like `layer` and `level` are not flagged
 * `vertices`: the nodes are adjacent members of a way
 
 ##### `crossing_ways`
@@ -401,11 +407,24 @@ Two nodes have a very small distance between them without z-axis differentiation
 Two ways cross without a junction node or enough information to clarify how they cross.
 
 ##### `disconnected_way`
-##### `fixme_tag`
 
-A feature has a `fixme` tag that existed before the user's current edits. Deleting the `fixme` tag marks the issue as resolved regardless of the user's other edits.
+One or more interconnected, routable feature are not connected to the rest of the routable network (i.e. they form a routing island). A way is considered connected to the network if any of its nodes are on an unloaded tile, meaning large routing islands may not always be detected.
+
+* `highway`: the feature is a road, path, ferry route, or elevator; entrances are also considered network connections
+
+##### `help_request`
+
+Someone has indicated a feature needs further attention.
+
+* `fixme_tag`: a feature has a `fixme` tag that existed before the user's current edits; deleting the `fixme` tag marks the issue as resolved regardless of the user's other edits
 
 ##### `impossible_oneway`
+
+A one-way line does not have a valid connection at its first or last node.
+
+* `highway`: a one-way road or path does not start or end at another highway or an entrance
+* `waterway`: multiple streams, etc., start or end at the same node that's not a spring, drain, or water body
+
 ##### `incompatible_source`
 
 The `source` tag of a feature references a data source known to have a license incompatiable with OpenStreetMap. This is very much not exhaustive and currently only flags sources containing "google".
@@ -417,7 +436,17 @@ A tag of a feature has an unexpected syntax.
 * `email`: the `email` tag does not look like "user@example.com"
 
 ##### `maprules`
+
+An issue with the active [MapRules](https://github.com/radiant-maxar/maprules) validation rules.
+
 ##### `mismatched_geometry`
+
+A feature's tags indicate it should have a different geometry than it currently does.
+
+* `area_as_line`: an unclosed way has tags implying it should be a closed area (e.g. `area=yes` or `building=yes`)
+* `vertex_as_point`: a detached node has tags implying it should be part of a way (e.g. `highway=stop`)
+* `point_as_vertex`: a vertex node has tags implying it should be detached from ways (e.g. `amenity=cafe`)
+
 ##### `missing_role`
 
 A relation membership does not have a set `role`.
@@ -445,9 +474,15 @@ A feature has nonstandard tags.
 An email address, phone number, or fax number is present on a residential feature that isn't also tagged as a POI.
 
 ##### `suspicious_name`
+
+There's indication that a `name` tag doesn't contain the actual name of the feature. Multilingual names like `name:de` are also checked.
+
+* `generic_name`: a name matches the raw key or value of the feature's defining tags (e.g. `amenity`, `cafe`) or it matches something the name-suggestion-index discards as generic when checking the most common place names in OpenStreetMap
+* `not_name`: a name tag matches a value under the `not:name` tag
+
 ##### `unsquare_way`
 
-A way has corners close to, but not quite 90°. The user can vary the "close to" degree threshold between 0° and 20°. The default is 5°.
+A way has corners close to, but not quite 90°. The user can vary the "close to" degree threshold between 0° and 20°. The default is 5°. Only buildings are currently flagged.
 
-* `building`: the feature has a `building` tag; other feature types are not currently flagged
+* `building`: the feature has a `building` tag
 

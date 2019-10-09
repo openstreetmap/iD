@@ -1410,14 +1410,15 @@ en:
       highway:
         message: "{highway} is disconnected from other roads and paths"
     fixme_tag:
-      title: '"Fix Me" Requests'
       message: '{feature} has a "Fix Me" request'
-      tip: 'Find features with "fixme" tags'
       reference: 'A "fixme" tag indicates that a mapper has requested help with a feature.'
     generic_name:
       message: '{feature} has the suspicious name "{name}"'
       message_language: '{feature} has the suspicious name "{name}" in {language}'
       reference: "Names should be the actual, on-the-ground names of features."
+    help_request:
+      title: 'Help Requests'
+      tip: 'Find features where others requested assistance'
     incompatible_source:
       title: Suspicious Sources
       tip: "Find features with suspicious source tags"

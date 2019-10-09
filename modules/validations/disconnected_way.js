@@ -85,6 +85,7 @@ export function validationDisconnectedWay() {
 
         return [new validationIssue({
             type: type,
+            subtype: 'highway',
             severity: 'warning',
             message: function(context) {
                 if (this.entityIds.length === 1) {

@@ -3,9 +3,8 @@ import { utilDisplayLabel } from '../util';
 import { validationIssue } from '../core/validation';
 
 
-export function validationFixmeTag(context) {
-    var type = 'fixme_tag';
-
+export function validationHelpRequest(context) {
+    var type = 'help_request';
 
     var validation = function checkFixmeTag(entity) {
 
@@ -22,6 +21,7 @@ export function validationFixmeTag(context) {
 
         return [new validationIssue({
             type: type,
+            subtype: 'fixme_tag',
             severity: 'warning',
             message: function(context) {
                 var entity = context.hasEntity(this.entityIds[0]);
