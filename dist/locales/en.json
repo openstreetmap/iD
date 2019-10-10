@@ -757,13 +757,19 @@
                     "zoom": "Zoom to data"
                 }
             },
-            "fill_area": "Fill Areas",
+            "style_options": "Style Options",
             "highlight_edits": {
                 "key": "G"
             },
             "map_features": "Map Features",
             "autohidden": "These features have been automatically hidden because too many would be shown on the screen.  You can zoom in to edit them.",
             "osmhidden": "These features have been automatically hidden because the OpenStreetMap layer is hidden."
+        },
+        "visual_diff": {
+            "highlight_edits": {
+                "description": "Highlight Changes",
+                "tooltip": "Outline edited features"
+            }
         },
         "photo_overlays": {
             "title": "Photo Overlays",
