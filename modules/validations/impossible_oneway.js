@@ -195,7 +195,8 @@ export function validationImpossibleOneway() {
                 },
                 reference: getReference(referenceID),
                 entityIds: [way.id, node.id],
-                fixes: fixes
+                fixes: fixes,
+                loc: node.loc
             })];
 
             function getReference(referenceID) {
