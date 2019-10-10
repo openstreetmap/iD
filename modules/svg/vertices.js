@@ -242,15 +242,11 @@ export function svgVertices(projection, context) {
         targets.exit()
             .remove();
 
-        var threeFourths = function (num) {
-            return (Math.round(3 * num) / 4).toFixed(2);
-        };
         // enter/update
         targets.enter()
             .append('circle')
             .attr('r', function(d) {
-                return isEditedEntity(d, base, graph) && threeFourths(_radii[d.id])
-                  || _radii[d.id]
+                return _radii[d.id]
                   || radiuses.shadow[3];
             })
             .merge(targets)

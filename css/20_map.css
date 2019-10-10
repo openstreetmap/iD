@@ -351,7 +351,7 @@ g.vertex.highlighted .shadow {
 .highlight-edited g.points g.node.vertex.added > circle.shadow,
 .highlight-edited g.points g.node.vertex.retagged > circle.shadow,
 .highlight-edited g.points g.node.vertex.moved > circle.shadow {
-    fill-opacity: 1;
+    fill-opacity: 0.8;
 }
 .highlight-edited g.points g.node.vertex.added > circle.shadow {
     fill: rgb(133, 255, 103);
@@ -367,7 +367,7 @@ g.vertex.highlighted .shadow {
 .highlight-edited g.points g.node.point.added > path.shadow,
 .highlight-edited g.points g.node.point.retagged > path.shadow,
 .highlight-edited g.points g.node.point.moved > path.shadow {
-    stroke-opacity: 1;
+    stroke-opacity: 0.8;
     stroke-width: 10;
 }
 .highlight-edited g.points g.node.point.added > path.shadow {
