@@ -45,17 +45,17 @@ export function svgAreas(projection, context) {
         targets.exit()
             .remove();
 
-        var segmentEditClass = function(d) {
+        var segmentWasEdited = function(d) {
             var wayID = d.properties.entity.id;
             // if the whole line was edited, don't draw segment changes
             if (!base.entities[wayID] ||
                 !deepEqual(graph.entities[wayID].nodes, base.entities[wayID].nodes)) {
-                return '';
+                return false;
             }
             return d.properties.nodes.some(function(n) {
                 return !base.entities[n.id] ||
-                       graph.entities[n.id].loc !== base.entities[n.id].loc;
-            }) ? ' segment-edited ': '';
+                       !deepEqual(graph.entities[n.id].loc, base.entities[n.id].loc);
+            });
         };
 
         // enter/update
@@ -63,7 +63,8 @@ export function svgAreas(projection, context) {
             .append('path')
             .merge(targets)
             .attr('d', getPath)
-            .attr('class', function(d) { return 'way area target target-allowed ' + targetClass + d.id + segmentEditClass(d); });
+            .attr('class', function(d) { return 'way area target target-allowed ' + targetClass + d.id; })
+            .classed('segment-edited', segmentWasEdited);
 
 
         // NOPE
@@ -81,7 +82,8 @@ export function svgAreas(projection, context) {
             .append('path')
             .merge(nopes)
             .attr('d', getPath)
-            .attr('class', function(d) { return 'way area target target-nope ' + nopeClass + d.id + segmentEditClass(d); });
+            .attr('class', function(d) { return 'way area target target-nope ' + nopeClass + d.id; })
+            .classed('segment-edited', segmentWasEdited);
     }
 
 
