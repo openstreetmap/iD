@@ -34,7 +34,7 @@ _Breaking changes, which may affect downstream projects or sites that embed iD, 
 
 #### :tada: New Features
 * Add Map Features layer of objects detected in Mapillary images ([#5845], [#6792], thanks [@kratico])
-* Add a toggleable map style that highlights edited features ([#6843], thanks [@Bonkles])
+* Add the option to highlight edited features directly on the map ([#6843], thanks [@Bonkles])
 * Allow reversing directional nodes via the Reverse menu item and keyboard shortcut ([#6850])
 * Support reversing multiple selected features at the same time ([#6810])
 * Add link to the Achavi changeset viewer to the History panel ([#6855])
@@ -85,11 +85,12 @@ _Breaking changes, which may affect downstream projects or sites that embed iD, 
 * Flag points that should be attached or detached from ways ([#6319])
 * Flag features with names matching a value in their `not:name` tag ([#6411])
 * Flag generic multilingual feature names ([#6876])
-* Rename "Fix Me" Requests validation rule to Help Requests
+* Rename '"Fix Me" Requests' validation rule to 'Help Requests'
 * Issue clearer warning when brand tags are simply incomplete, not strictly "nonstandard" ([#6909])
 * Add changeset tags for the number and type of issues resolved by the user's edits ([#6459])
+* Always show the Reset Ignored button when there are ignored issues
 * Deprecate `cycleway=track` on `highway=cycleway` ([#6705])
-* Deprecate various `direction`, `embankment`, `golf`, and `weighbridge` tags 
+* Deprecate various `direction`, `embankment`, `golf`, and `weighbridge` tags
 * Upgrade outdated golf and jet bridge presets in one step rather than two ([#6901], [#6912], thanks [@guylamar2006])
 * Add documentation of all validation issue types, severities, and changeset tags ([#6100])
 
@@ -175,6 +176,7 @@ _Breaking changes, which may affect downstream projects or sites that embed iD, 
 [#6882]: https://github.com/openstreetmap/iD/issues/6882
 [#6825]: https://github.com/openstreetmap/iD/issues/6825
 
+[@danielsjf]: https://github.com/danielsjf
 [@ewnh]: https://github.com/ewnh
 
 # 2.15.5
@@ -5145,4 +5147,3 @@ _Map traffic signals, stop signs, benches, crossings, street lamps, fountains, t
 * Update `osm-auth` to 0.2.1
 * Fix the `note` functionality and textarea UI in presets
 * Fix walkthrough translation issues
-

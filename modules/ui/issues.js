@@ -302,7 +302,7 @@ export function uiIssues(context) {
     function renderIgnoredIssuesReset(selection) {
 
         var ignoredIssues = context.validator()
-            .getIssues(Object.assign({ includeIgnored: 'only' }, _options));
+            .getIssues({ what: 'all', where: 'all', includeDisabledRules: true, includeIgnored: 'only' });
 
         var resetIgnored = selection.selectAll('.reset-ignored')
             .data(ignoredIssues.length ? [0] : []);
@@ -328,8 +328,8 @@ export function uiIssues(context) {
             .text(t('issues.reset_ignored', { count: ignoredIssues.length.toString() }));
 
         resetIgnored.on('click', function() {
-                context.validator().resetIgnoredIssues();
-            });
+            context.validator().resetIgnoredIssues();
+        });
     }
 
 
@@ -510,6 +510,7 @@ export function uiIssues(context) {
             if (!_pane.select('.disclosure-wrap-issues_warnings').classed('hide')) {
                 _warningsSelection
                     .call(drawIssuesList, 'warnings', _warnings);
+                renderIgnoredIssuesReset(_warningsSelection);
             }
         }
 
