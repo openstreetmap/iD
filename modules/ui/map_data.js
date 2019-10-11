@@ -92,6 +92,8 @@ export function uiMapData(context) {
         var surface = context.surface();
         surface.classed('highlight-edited', !surface.classed('highlight-edited'));
         updateVisualDiffList();
+
+        context.map().pan([0,0]);  // trigger a redraw
     }
 
 

@@ -287,9 +287,13 @@ export function svgVertices(projection, context) {
     }
 
 
-    function isEditedEntity(entity, base, head) {
-        return head.entities[entity.id] !== base.entities[entity.id] ||
-            !deepEqual(head.entities[entity.id].tags, base.entities[entity.id].tags);
+    function isEditedNode(node, base, head) {
+        var baseNode = base.entities[node.id];
+        var headNode = head.entities[node.id];
+        return !headNode ||
+            !baseNode ||
+            !deepEqual(headNode.tags, baseNode.tags) ||
+            !deepEqual(headNode.loc, baseNode.loc);
     }
 
 
@@ -342,6 +346,7 @@ export function svgVertices(projection, context) {
 
     function drawVertices(selection, graph, entities, filter, extent, fullRedraw) {
         var wireframe = context.surface().classed('fill-wireframe');
+        var visualDiff = context.surface().classed('highlight-edited');
         var zoom = geoScaleToZoom(projection.scale());
         var mode = context.mode();
         var isMoving = mode && /^(add|draw|drag|move|rotate)/.test(mode.id);
@@ -370,7 +375,7 @@ export function svgVertices(projection, context) {
             // a vertex of some importance..
             } else if (geometry === 'vertex' &&
                 (entity.hasInterestingTags() || entity.isEndpoint(graph) || entity.isConnected(graph)
-                || isEditedEntity(entity, base, graph))) {
+                || (visualDiff && isEditedNode(entity, base, graph)))) {
                 _currPersistent[entity.id] = entity;
                 keep = true;
             }
