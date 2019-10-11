@@ -1626,13 +1626,14 @@
                     "everything": "Everything looks fine",
                     "everything_in_view": "Everything in view looks fine",
                     "edits": "Your edits look fine",
-                    "edits_in_view": "Your edits in view look fine"
+                    "edits_in_view": "Your edits in view look fine",
+                    "no_edits": "You have no edits yet"
                 },
                 "hidden_issues": {
                     "none": "Detected issues will appear here",
                     "elsewhere": "Issues elsewhere: {count}",
-                    "other_features": "Issues with other features: {count}",
-                    "other_features_elsewhere": "Issues elsewhere with other features: {count}",
+                    "everything_else": "Issues with everything else: {count}",
+                    "everything_else_elsewhere": "Issues elsewhere with everything else: {count}",
                     "disabled_rules": "Issues with disabled rules: {count}",
                     "disabled_rules_elsewhere": "Issues elsewhere with disabled rules: {count}",
                     "ignored_issues": "Ignored issues: {count}",

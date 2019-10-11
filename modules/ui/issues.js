@@ -422,9 +422,9 @@ export function uiIssues(context) {
 
             checkForHiddenIssues({
                 elsewhere: { what: 'edited', where: 'all' },
-                other_features: { what: 'all', where: 'visible' },
+                everything_else: { what: 'all', where: 'visible' },
                 disabled_rules: { what: 'edited', where: 'visible', includeDisabledRules: 'only' },
-                other_features_elsewhere: { what: 'all', where: 'all' },
+                everything_else_elsewhere: { what: 'all', where: 'all' },
                 disabled_rules_elsewhere: { what: 'edited', where: 'all', includeDisabledRules: 'only' },
                 ignored_issues: { what: 'edited', where: 'visible', includeIgnored: 'only' },
                 ignored_issues_elsewhere: { what: 'edited', where: 'all', includeIgnored: 'only' }
@@ -435,7 +435,7 @@ export function uiIssues(context) {
             messageType = 'edits';
 
             checkForHiddenIssues({
-                other_features: { what: 'all', where: 'all' },
+                everything_else: { what: 'all', where: 'all' },
                 disabled_rules: { what: 'edited', where: 'all', includeDisabledRules: 'only' },
                 ignored_issues: { what: 'edited', where: 'all', includeIgnored: 'only' }
             });
@@ -459,6 +459,10 @@ export function uiIssues(context) {
                 disabled_rules: { what: 'all', where: 'all', includeDisabledRules: 'only' },
                 ignored_issues: { what: 'all', where: 'all', includeIgnored: 'only' }
             });
+        }
+
+        if (_options.what === 'edited' && context.history().difference().summary().length === 0) {
+            messageType = 'no_edits';
         }
 
         _pane.select('.issues-none .message')
