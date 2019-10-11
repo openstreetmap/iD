@@ -1,4 +1,4 @@
-import { t } from '../util/locale';
+import { t, textDirection } from '../util/locale';
 import { modeDrawLine } from '../modes/draw_line';
 import { actionReverse } from '../actions/reverse';
 import { utilDisplayLabel } from '../util';
@@ -158,8 +158,10 @@ export function validationImpossibleOneway() {
                 }));
             }
             if (node.tags.noexit !== 'yes') {
+                var useLeftContinue = (isFirst && textDirection === 'ltr') ||
+                    (!isFirst && textDirection === 'rtl');
                 fixes.push(new validationIssueFix({
-                    icon: 'iD-operation-continue' + (isFirst ? '-left' : ''),
+                    icon: 'iD-operation-continue' + (useLeftContinue ? '-left' : ''),
                     title: t('issues.fix.continue_from_' + (isFirst ? 'start' : 'end') + '.title'),
                     onClick: function(context) {
                         var entityID = this.issue.entityIds[0];
