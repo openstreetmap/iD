@@ -56,7 +56,11 @@ export function uiZoom(context) {
             .enter()
             .append('button')
             .attr('class', function(d) { return d.id; })
-            .on('click.editor', function(d) { d.action(); })
+            .on('click.editor', function(d) {
+                if (!d3_select(this).classed('disabled')) {
+                    d.action();
+                }
+            })
             .call(tooltip()
                 .placement((textDirection === 'rtl') ? 'right' : 'left')
                 .html(true)
@@ -83,13 +87,11 @@ export function uiZoom(context) {
         function updateButtonStates() {
             var canZoomIn = context.map().canZoomIn();
             selection.select('button.zoom-in')
-                .classed('disabled', !canZoomIn)
-                .attr('disabled', canZoomIn ? null : true);
+                .classed('disabled', !canZoomIn);
 
             var canZoomOut = context.map().canZoomOut();
             selection.select('button.zoom-out')
-                .classed('disabled', !canZoomOut)
-                .attr('disabled', canZoomOut ? null : true);
+                .classed('disabled', !canZoomOut);
         }
 
         updateButtonStates();
