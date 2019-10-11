@@ -203,7 +203,6 @@ export function svgVertices(projection, context) {
         var getTransform = svgPointTransform(projection).geojson;
         var activeID = context.activeID();
         var data = { targets: [], nopes: [] };
-        var base = context.history().base();
 
         entities.forEach(function(node) {
             if (activeID === node.id) return;   // draw no target on the activeID
