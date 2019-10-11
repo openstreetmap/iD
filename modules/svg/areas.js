@@ -1,10 +1,10 @@
+import deepEqual from 'fast-deep-equal';
 import { bisector as d3_bisector } from 'd3-array';
 
 import { osmEntity, osmIsOldMultipolygonOuterMember } from '../osm';
 import { svgPath, svgSegmentWay } from './helpers';
 import { svgTagClasses } from './tag_classes';
 import { svgTagPattern } from './tag_pattern';
-
 
 export function svgAreas(projection, context) {
 
@@ -23,6 +23,7 @@ export function svgAreas(projection, context) {
         var nopeClass = context.getDebug('target') ? 'red ' : 'nocolor ';
         var getPath = svgPath(projection).geojson;
         var activeID = context.activeID();
+        var base = context.history().base();
 
         // The targets and nopes will be MultiLineString sub-segments of the ways
         var data = { targets: [], nopes: [] };
@@ -44,12 +45,26 @@ export function svgAreas(projection, context) {
         targets.exit()
             .remove();
 
+        var segmentWasEdited = function(d) {
+            var wayID = d.properties.entity.id;
+            // if the whole line was edited, don't draw segment changes
+            if (!base.entities[wayID] ||
+                !deepEqual(graph.entities[wayID].nodes, base.entities[wayID].nodes)) {
+                return false;
+            }
+            return d.properties.nodes.some(function(n) {
+                return !base.entities[n.id] ||
+                       !deepEqual(graph.entities[n.id].loc, base.entities[n.id].loc);
+            });
+        };
+
         // enter/update
         targets.enter()
             .append('path')
             .merge(targets)
             .attr('d', getPath)
-            .attr('class', function(d) { return 'way area target target-allowed ' + targetClass + d.id; });
+            .attr('class', function(d) { return 'way area target target-allowed ' + targetClass + d.id; })
+            .classed('segment-edited', segmentWasEdited);
 
 
         // NOPE
@@ -67,7 +82,8 @@ export function svgAreas(projection, context) {
             .append('path')
             .merge(nopes)
             .attr('d', getPath)
-            .attr('class', function(d) { return 'way area target target-nope ' + nopeClass + d.id; });
+            .attr('class', function(d) { return 'way area target target-nope ' + nopeClass + d.id; })
+            .classed('segment-edited', segmentWasEdited);
     }
 
 
@@ -75,6 +91,7 @@ export function svgAreas(projection, context) {
         var path = svgPath(projection, graph, true);
         var areas = {};
         var multipolygon;
+        var base = context.history().base();
 
         for (var i = 0; i < entities.length; i++) {
             var entity = entities[i];
@@ -169,6 +186,19 @@ export function svgAreas(projection, context) {
                     this.setAttribute('clip-path', 'url(#' + entity.id + '-clippath)');
                     this.style.fill = this.style.stroke = getPatternStyle(entity.tags);
                 }
+            })
+            .classed('added', function(d) {
+                return !base.entities[d.id];
+            })
+            .classed('geometry-edited', function(d) {
+                return graph.entities[d.id] &&
+                    base.entities[d.id] &&
+                    !deepEqual(graph.entities[d.id].nodes, base.entities[d.id].nodes);
+            })
+            .classed('retagged', function(d) {
+                return graph.entities[d.id] &&
+                    base.entities[d.id] &&
+                    !deepEqual(graph.entities[d.id].tags, base.entities[d.id].tags);
             })
             .call(svgTagClasses())
             .attr('d', path);

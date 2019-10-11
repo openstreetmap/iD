@@ -900,10 +900,19 @@
                     "zoom": "Zoom to data"
                 }
             },
-            "fill_area": "Fill Areas",
+            "style_options": "Style Options",
+            "highlight_edits": {
+                "key": "G"
+            },
             "map_features": "Map Features",
             "autohidden": "These features have been automatically hidden because too many would be shown on the screen.  You can zoom in to edit them.",
             "osmhidden": "These features have been automatically hidden because the OpenStreetMap layer is hidden."
+        },
+        "visual_diff": {
+            "highlight_edits": {
+                "description": "Highlight Changes",
+                "tooltip": "Outline edited features"
+            }
         },
         "photo_overlays": {
             "title": "Photo Overlays",
@@ -1687,13 +1696,14 @@
                     "everything": "Everything looks fine",
                     "everything_in_view": "Everything in view looks fine",
                     "edits": "Your edits look fine",
-                    "edits_in_view": "Your edits in view look fine"
+                    "edits_in_view": "Your edits in view look fine",
+                    "no_edits": "You have no edits yet"
                 },
                 "hidden_issues": {
                     "none": "Detected issues will appear here",
                     "elsewhere": "Issues elsewhere: {count}",
-                    "other_features": "Issues with other features: {count}",
-                    "other_features_elsewhere": "Issues elsewhere with other features: {count}",
+                    "everything_else": "Issues with everything else: {count}",
+                    "everything_else_elsewhere": "Issues elsewhere with everything else: {count}",
                     "disabled_rules": "Issues with disabled rules: {count}",
                     "disabled_rules_elsewhere": "Issues elsewhere with disabled rules: {count}",
                     "ignored_issues": "Ignored issues: {count}",
@@ -1811,15 +1821,17 @@
                 }
             },
             "fixme_tag": {
-                "title": "\"Fix Me\" Requests",
                 "message": "{feature} has a \"Fix Me\" request",
-                "tip": "Find features with \"fixme\" tags",
                 "reference": "A \"fixme\" tag indicates that a mapper has requested help with a feature."
             },
             "generic_name": {
                 "message": "{feature} has the suspicious name \"{name}\"",
                 "message_language": "{feature} has the suspicious name \"{name}\" in {language}",
                 "reference": "Names should be the actual, on-the-ground names of features."
+            },
+            "help_request": {
+                "title": "Help Requests",
+                "tip": "Find features where others requested assistance"
             },
             "incompatible_source": {
                 "title": "Suspicious Sources",
@@ -2380,7 +2392,8 @@
                     "sidebar": "Toggle sidebar",
                     "wireframe": "Toggle wireframe mode",
                     "osm_data": "Toggle OpenStreetMap data",
-                    "minimap": "Toggle minimap"
+                    "minimap": "Toggle minimap",
+                    "highlight_edits": "Highlight unsaved edits"
                 },
                 "selecting": {
                     "title": "Selecting features",

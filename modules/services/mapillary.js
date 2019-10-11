@@ -356,24 +356,24 @@ export default {
 
 
     loadImages: function(projection) {
-        loadTiles('images', apibase + 'images?', projection);
-        loadTiles('sequences', apibase + 'sequences?', projection);
+        loadTiles('images', apibase + 'images?sort_by=key&', projection);
+        loadTiles('sequences', apibase + 'sequences?sort_by=key&', projection);
     },
 
 
     loadSigns: function(projection) {
         // if we are looking at signs, we'll actually need to fetch images too
-        loadTiles('images', apibase + 'images?', projection);
-        loadTiles('map_features', apibase + 'map_features?layers=trafficsigns&min_nbr_image_detections=1&', projection);
-        loadTiles('image_detections', apibase + 'image_detections?layers=trafficsigns&', projection);
+        loadTiles('images', apibase + 'images?sort_by=key&', projection);
+        loadTiles('map_features', apibase + 'map_features?layers=trafficsigns&min_nbr_image_detections=2&sort_by=key&', projection);
+        loadTiles('image_detections', apibase + 'image_detections?layers=trafficsigns&sort_by=key&', projection);
     },
 
 
     loadMapFeatures: function(projection) {
         // if we are looking at signs, we'll actually need to fetch images too
-        loadTiles('images', apibase + 'images?', projection);
-        loadTiles('points', apibase + 'map_features?layers=points&min_nbr_image_detections=1&&shapes_by_organization_keys=' + mapFeatureConfig.organizationKey + '&' + 'values=' + mapFeatureConfig.values + '&', projection);
-        loadTiles('image_detections', apibase + 'image_detections?layers=points&shapes_by_organization_keys=' + mapFeatureConfig.organizationKey + '&' + 'values=' + mapFeatureConfig.values + '&', projection);
+        loadTiles('images', apibase + 'images?sort_by=key', projection);
+        loadTiles('points', apibase + 'map_features?layers=points&min_nbr_image_detections=2&sort_by=key&shapes_by_organization_keys=' + mapFeatureConfig.organizationKey + '&' + 'values=' + mapFeatureConfig.values + '&', projection);
+        loadTiles('image_detections', apibase + 'image_detections?layers=points&sort_by=key&shapes_by_organization_keys=' + mapFeatureConfig.organizationKey + '&' + 'values=' + mapFeatureConfig.values + '&', projection);
     },
 
 

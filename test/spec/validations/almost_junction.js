@@ -148,6 +148,7 @@ describe('iD.validations.almost_junction', function () {
         expect(issues).to.have.lengthOf(1);
         var issue = issues[0];
         expect(issue.type).to.eql('almost_junction');
+        expect(issue.subtype).to.eql('highway-highway');
         expect(issue.entityIds).to.have.lengthOf(3);
         expect(issue.entityIds[0]).to.eql('w-1');
         expect(issue.entityIds[1]).to.eql('n-1');
@@ -177,6 +178,7 @@ describe('iD.validations.almost_junction', function () {
         expect(issues).to.have.lengthOf(1);
         var issue = issues[0];
         expect(issue.type).to.eql('almost_junction');
+        expect(issue.subtype).to.eql('highway-highway');
         expect(issue.entityIds).to.have.lengthOf(3);
         expect(issue.entityIds[0]).to.eql('w-1');
         expect(issue.entityIds[1]).to.eql('n-1');

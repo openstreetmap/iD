@@ -29,6 +29,156 @@ _Breaking changes, which may affect downstream projects or sites that embed iD, 
 [@xxxx]: https://github.com/xxxx
 -->
 
+# 2.16.0
+##### 2019-Oct-11
+
+#### :tada: New Features
+* Add Map Features layer of objects detected in Mapillary images ([#5845], [#6792], thanks [@kratico])
+* Add the option to highlight edited features directly on the map ([#6843], thanks [@Bonkles])
+* Allow reversing directional nodes via the Reverse menu item and keyboard shortcut ([#6850])
+* Support reversing multiple selected features at the same time ([#6810])
+* Add link to the Achavi changeset viewer to the History panel ([#6855])
+
+[#5845]: https://github.com/openstreetmap/iD/issues/5845
+[#6792]: https://github.com/openstreetmap/iD/issues/6792
+[#6843]: https://github.com/openstreetmap/iD/issues/6843
+[#6850]: https://github.com/openstreetmap/iD/issues/6850
+[#6810]: https://github.com/openstreetmap/iD/issues/6810
+[#6855]: https://github.com/openstreetmap/iD/issues/6855
+
+[@kratico]: https://github.com/kratico
+[@Bonkles]: https://github.com/Bonkles
+
+#### :sparkles: Usability
+* Flash the feature type button when a feature's preset changes during editing ([#6764])
+* Add button to toggle the Background info panel ([#6839])
+* Match the cliff directional arrow color to the line color ([#6918], [#6919], thanks [@huonw])
+* Render walls as blockier than fences and other barriers ([#6865])
+* Don't render barriers tagged on waterways ([#6887])
+* Improve Mapillary traffic sign quality by only showing signs detected in two or more photos ([#6921], thanks [@cbeddow])
+* Prevent zooming past the allowed zoom level range via scrolling or trackpad gestures ([#6851])
+* Disable the zoom in/out buttons at the maximum/minimum zoom levels ([#6847])
+* Allow tabbing past the last row in the All Tags table ([#4233])
+* Replace hardcoded ranking of OpenStreetMap communities with granular upstream ordering ([#6752])
+* Make the "Report an Imagery Problem" text clearer ([#6820])
+
+[#6764]: https://github.com/openstreetmap/iD/issues/6764
+[#6839]: https://github.com/openstreetmap/iD/issues/6839
+[#6918]: https://github.com/openstreetmap/iD/issues/6918
+[#6919]: https://github.com/openstreetmap/iD/issues/6919
+[#6865]: https://github.com/openstreetmap/iD/issues/6865
+[#6887]: https://github.com/openstreetmap/iD/issues/6887
+[#6921]: https://github.com/openstreetmap/iD/issues/6921
+[#6851]: https://github.com/openstreetmap/iD/issues/6851
+[#6847]: https://github.com/openstreetmap/iD/issues/6847
+[#4233]: https://github.com/openstreetmap/iD/issues/4233
+[#6752]: https://github.com/openstreetmap/iD/issues/6752
+[#6820]: https://github.com/openstreetmap/iD/issues/6820
+
+[@huonw]: https://github.com/huonw
+[@cbeddow]: https://github.com/cbeddow
+
+#### :white_check_mark: Validation
+* Only show the user issues their edits created, not preexisting issues with features they modified ([#6459])
+* No longer flag websites missing `http://` or `https://` ([#6831])
+* Flag disconnected `highway=elevator` as routing islands ([#6812])
+* Flag points that should be attached or detached from ways ([#6319])
+* Flag features with names matching a value in their `not:name` tag ([#6411])
+* Flag generic multilingual feature names ([#6876])
+* Rename '"Fix Me" Requests' validation rule to 'Help Requests'
+* Issue clearer warning when brand tags are simply incomplete, not strictly "nonstandard" ([#6909])
+* Add changeset tags for the number and type of issues resolved by the user's edits ([#6459])
+* Always show the Reset Ignored button when there are ignored issues
+* Deprecate `cycleway=track` on `highway=cycleway` ([#6705])
+* Deprecate various `direction`, `embankment`, `golf`, and `weighbridge` tags
+* Upgrade outdated golf and jet bridge presets in one step rather than two ([#6901], [#6912], thanks [@guylamar2006])
+* Add documentation of all validation issue types, severities, and changeset tags ([#6100])
+
+[#6459]: https://github.com/openstreetmap/iD/issues/6459
+[#6831]: https://github.com/openstreetmap/iD/issues/6831
+[#6812]: https://github.com/openstreetmap/iD/issues/6812
+[#6319]: https://github.com/openstreetmap/iD/issues/6319
+[#6411]: https://github.com/openstreetmap/iD/issues/6411
+[#6876]: https://github.com/openstreetmap/iD/issues/6876
+[#6909]: https://github.com/openstreetmap/iD/issues/6909
+[#6705]: https://github.com/openstreetmap/iD/issues/6705
+[#6901]: https://github.com/openstreetmap/iD/issues/6901
+[#6912]: https://github.com/openstreetmap/iD/issues/6912
+[#6100]: https://github.com/openstreetmap/iD/issues/6100
+
+[@guylamar2006]: https://github.com/guylamar2006
+
+#### :bug: Bugfixes
+* Fix an issue where some Mapillary traffic signs would not appear ([#6510], [#6921], thanks [@cbeddow])
+* Don't treat closed `highway=corridor` ways as areas ([#6800])
+* Fix an issue where operations might not be correctly enabled or disabled while editing a feature
+* Properly show uppercase suggestions in the Country and Target country fields
+
+[#6510]: https://github.com/openstreetmap/iD/issues/6510
+[#6921]: https://github.com/openstreetmap/iD/issues/6921
+[#6800]: https://github.com/openstreetmap/iD/issues/6800
+
+[@cbeddow]: https://github.com/cbeddow
+
+#### :earth_asia: Localization
+* Add Seychelles and Pitcairn Islands to the list of places that drive on the left ([#6827], thanks [@leighghunt])
+* Show Traditional Chinese language names in the Taiwan localization instead of Simplified Chinese ([#6815])
+* Make the Wheelchair Access and Stroller Access field options translatable ([#6878])
+* Let the <kbd>@</kbd> key on French/AZERTY keyboards also toggle the sidebar ([#6864])
+* Update language data with Unicode CLDR 36
+
+[#6827]: https://github.com/openstreetmap/iD/issues/6827
+[#6815]: https://github.com/openstreetmap/iD/issues/6815
+[#6878]: https://github.com/openstreetmap/iD/issues/6878
+[#6864]: https://github.com/openstreetmap/iD/issues/6864
+
+[@leighghunt]: https://github.com/leighghunt
+
+#### :mortar_board: Walkthrough / Help
+* Update the link to the Mapbox Imagery Request site ([#6874], thanks [@1ec5])
+
+[#6874]: https://github.com/openstreetmap/iD/issues/6874
+
+#### :rocket: Presets
+* Add Indoor Stairwell and Indoor Elevator Shaft presets ([#6863], thanks [@danielsjf])
+* Add Loading Dock preset ([#6849])
+* Add Utility Pole preset ([#6848])
+* Add Karting Racetrack and Motocross Racetrack presets ([#6826])
+* Add presets: Spaceport, Hot Dog Fast Food, Recording Studio, Film Studio, Radio Station, Television Station, Truck Scale
+* Add Type and Material fields to the Stile preset ([#6857], thanks [@ewnh])
+* Add Waste field to relevant presets ([#6821])
+* Add Hours field to the Recycling Container preset ([#6861])
+* Add Blind Person Access and Lockable fields
+* Add Bollard Row preset and a bollard Type field
+* Add Informal field and Informal Path preset
+* No longer show Level field for every feature, just those that might be indoors
+* Add Levels field for features that might cross multiple building floors
+* Add Maximum Age field to features like schools and rides
+* Add Minimum Age field to features like kindergartens, bars, and clubs
+* Add Theme field for Playground and Playground Equipment presets
+* Add Type field to the Residential Area preset
+* Add Limited option to the Stroller Access field ([#6833])
+* Add `notCountryCodes` preset property for blacklisting presets from being addable in certain places
+* Don't show the Cycle & Foot Path preset in France or Lithuania ([#6836], [#6882])
+* Require only the primary tag for a feature to match a golf preset
+* Render Construction landuse preset with a yellow icon
+* Improve searchability of cycle presets in English ([#6825])
+
+[#6863]: https://github.com/openstreetmap/iD/issues/6863
+[#6849]: https://github.com/openstreetmap/iD/issues/6849
+[#6848]: https://github.com/openstreetmap/iD/issues/6848
+[#6826]: https://github.com/openstreetmap/iD/issues/6826
+[#6857]: https://github.com/openstreetmap/iD/issues/6857
+[#6821]: https://github.com/openstreetmap/iD/issues/6821
+[#6861]: https://github.com/openstreetmap/iD/issues/6861
+[#6833]: https://github.com/openstreetmap/iD/issues/6833
+[#6836]: https://github.com/openstreetmap/iD/issues/6836
+[#6882]: https://github.com/openstreetmap/iD/issues/6882
+[#6825]: https://github.com/openstreetmap/iD/issues/6825
+
+[@danielsjf]: https://github.com/danielsjf
+[@ewnh]: https://github.com/ewnh
+
 # 2.15.5
 ##### 2019-Aug-26
 
@@ -4997,4 +5147,3 @@ _Map traffic signals, stop signs, benches, crossings, street lamps, fountains, t
 * Update `osm-auth` to 0.2.1
 * Fix the `note` functionality and textarea UI in presets
 * Fix walkthrough translation issues
-

@@ -1,4 +1,4 @@
-import { t } from '../util/locale';
+import { t, textDirection } from '../util/locale';
 import { modeDrawLine } from '../modes/draw_line';
 import { operationDelete } from '../operations/delete';
 import { utilDisplayLabel } from '../util';
@@ -25,41 +25,14 @@ export function validationDisconnectedWay() {
         if (isSingle) {
 
             if (entity.type === 'way' && !entity.isClosed()) {
-                var firstID = entity.first();
-                var lastID = entity.last();
 
-                var first = graph.entity(firstID);
-                if (first.tags.noexit !== 'yes') {
-                    fixes.push(new validationIssueFix({
-                        icon: 'iD-operation-continue-left',
-                        title: t('issues.fix.continue_from_start.title'),
-                        entityIds: [firstID],
-                        onClick: function(context) {
-                            var wayId = this.issue.entityIds[0];
-                            var way = context.entity(wayId);
-                            var vertexId = this.entityIds[0];
-                            var vertex = context.entity(vertexId);
-                            continueDrawing(way, vertex, context);
-                        }
-                    }));
-                }
-                var last = graph.entity(lastID);
-                if (last.tags.noexit !== 'yes') {
-                    fixes.push(new validationIssueFix({
-                        icon: 'iD-operation-continue',
-                        title: t('issues.fix.continue_from_end.title'),
-                        entityIds: [lastID],
-                        onClick: function(context) {
-                            var wayId = this.issue.entityIds[0];
-                            var way = context.entity(wayId);
-                            var vertexId = this.entityIds[0];
-                            var vertex = context.entity(vertexId);
-                            continueDrawing(way, vertex, context);
-                        }
-                    }));
-                }
+                var startFix = makeContinueDrawingFixIfAllowed(entity.first(), 'start');
+                if (startFix) fixes.push(startFix);
 
-            } else {
+                var endFix = makeContinueDrawingFixIfAllowed(entity.last(), 'end');
+                if (endFix) fixes.push(endFix);
+            }
+            if (!fixes.length) {
                 fixes.push(new validationIssueFix({
                     title: t('issues.fix.connect_feature.title')
                 }));
@@ -85,6 +58,7 @@ export function validationDisconnectedWay() {
 
         return [new validationIssue({
             type: type,
+            subtype: 'highway',
             severity: 'warning',
             message: function(context) {
                 if (this.entityIds.length === 1) {
@@ -193,25 +167,43 @@ export function validationDisconnectedWay() {
             });
         }
 
-    };
+        function makeContinueDrawingFixIfAllowed(vertexID, whichEnd) {
+            var vertex = graph.entity(vertexID);
+            if (vertex.tags.noexit === 'yes') return null;
 
-    function continueDrawing(way, vertex, context) {
-        // make sure the vertex is actually visible and editable
-        var map = context.map();
-        if (!context.editable() || !map.trimmedExtent().contains(vertex.loc)) {
-            map.zoomToEase(vertex);
+            var useLeftContinue = (whichEnd === 'start' && textDirection === 'ltr') ||
+                (whichEnd === 'end' && textDirection === 'rtl');
+
+            return new validationIssueFix({
+                icon: 'iD-operation-continue' + (useLeftContinue ? '-left' : ''),
+                title: t('issues.fix.continue_from_' + whichEnd + '.title'),
+                entityIds: [vertexID],
+                onClick: function(context) {
+                    var wayId = this.issue.entityIds[0];
+                    var way = context.hasEntity(wayId);
+                    var vertexId = this.entityIds[0];
+                    var vertex = context.hasEntity(vertexId);
+                    if (!way || !vertex) return;
+
+                    // make sure the vertex is actually visible and editable
+                    var map = context.map();
+                    if (!context.editable() || !map.trimmedExtent().contains(vertex.loc)) {
+                        map.zoomToEase(vertex);
+                    }
+
+                    context.enter(
+                        modeDrawLine(context, {
+                            wayID: wayId,
+                            startGraph: context.graph(),
+                            baselineGraph: context.graph(),
+                            affix: way.affix(vertexId)
+                        })
+                    );
+                }
+            });
         }
 
-        context.enter(
-            modeDrawLine(context, {
-                wayID: way.id,
-                startGraph: context.graph(),
-                baselineGraph: context.graph(),
-                affix: way.affix(vertex.id)
-            })
-        );
-    }
-
+    };
 
     validation.type = type;
 
