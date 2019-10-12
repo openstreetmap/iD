@@ -477,7 +477,7 @@
     },
     {
       "old": {"highway": "platform"},
-      "replace": {"bus": "yes", "public_transport": "platform"}
+      "replace": {"highway": "platform", "public_transport": "platform"}
     },
     {
       "old": {"highway": "stile"},
