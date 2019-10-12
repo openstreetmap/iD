@@ -30,7 +30,7 @@ _Breaking changes, which may affect downstream projects or sites that embed iD, 
 -->
 
 # 2.16.0
-##### 2019-Oct-11
+##### Planned: 2019-Oct-14
 
 #### :tada: New Features
 * Add Map Features layer of objects detected in Mapillary images ([#5845], [#6792], thanks [@kratico])
@@ -123,11 +123,13 @@ _Breaking changes, which may affect downstream projects or sites that embed iD, 
 #### :earth_asia: Localization
 * Add Seychelles and Pitcairn Islands to the list of places that drive on the left ([#6827], thanks [@leighghunt])
 * Show Traditional Chinese language names in the Taiwan localization instead of Simplified Chinese ([#6815])
+* Sort the "Add field" options in a locale-aware order ([#6937])
 * Make the Wheelchair Access and Stroller Access field options translatable ([#6878])
 * Let the <kbd>@</kbd> key on French/AZERTY keyboards also toggle the sidebar ([#6864])
 * Update language data with Unicode CLDR 36
 
 [#6827]: https://github.com/openstreetmap/iD/issues/6827
+[#6937]: https://github.com/openstreetmap/iD/issues/6937
 [#6815]: https://github.com/openstreetmap/iD/issues/6815
 [#6878]: https://github.com/openstreetmap/iD/issues/6878
 [#6864]: https://github.com/openstreetmap/iD/issues/6864
