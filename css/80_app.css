@@ -3218,7 +3218,7 @@ div.full-screen > button:hover {
 }
 [dir='rtl'] .issue-label .issue-info-button {
     border-left: 0;
-    border-right: 1px solid;
+    border-right: 1px solid #ccc;
 }
 .issue-container .issue-label .issue-info-button .icon {
     opacity: 0.5;
@@ -3414,7 +3414,7 @@ button.autofix.action.active {
 }
 
 input.square-degrees-input {
-    padding: 2px;
+    padding: 2px !important; /* important needed for rtl */
     height: unset;
     text-align: center;
     background: rgba(0,0,0,0);
@@ -5700,4 +5700,7 @@ li.hide + li.version .badge .tooltip .tooltip-arrow {
 .list-item-photos.list-item-mapillary-map-features .request-data-link {
     float: right;
     margin-top: -20px;
+}
+[dir='rtl'] .list-item-photos.list-item-mapillary-map-features .request-data-link {
+    float: left;
 }
