@@ -1,6 +1,6 @@
 import { t } from '../util/locale';
 import { utilDisplayLabel } from '../util';
-import { validationIssue } from '../core/validation';
+import { validationIssue, validationIssueFix } from '../core/validation';
 
 
 export function validationHelpRequest(context) {
@@ -27,6 +27,11 @@ export function validationHelpRequest(context) {
                 var entity = context.hasEntity(this.entityIds[0]);
                 return entity ? t('issues.fixme_tag.message', { feature: utilDisplayLabel(entity, context) }) : '';
             },
+            fixes: [
+                new validationIssueFix({
+                    title: t('issues.fix.address_the_concern.title')
+                })
+            ],
             reference: showReference,
             entityIds: [entity.id]
         })];

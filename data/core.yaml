@@ -1520,6 +1520,8 @@ en:
       message: '{feature} should be part of a line or area based on its tags'
       reference: "Some features shouldn't be standalone points."
     fix:
+      address_the_concern:
+        title: Address the concern
       connect_almost_junction:
         annotation: Connected very close features.
       connect_crossing_features:

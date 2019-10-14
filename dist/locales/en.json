@@ -1893,6 +1893,9 @@
                 "reference": "Some features shouldn't be standalone points."
             },
             "fix": {
+                "address_the_concern": {
+                    "title": "Address the concern"
+                },
                 "connect_almost_junction": {
                     "annotation": "Connected very close features."
                 },
