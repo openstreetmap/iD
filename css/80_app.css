@@ -4528,6 +4528,9 @@ img.tile-debug {
     margin-right: 5px;
     padding: 5px 5px 5px 0;
 }
+#about-list li:empty {
+    display: none;
+}
 
 #about-list li:last-child {
     border-left: 0;
@@ -4538,20 +4541,45 @@ img.tile-debug {
     border-right: none;
 }
 
-.source-switch a {
+#about-list a.chip {
     padding: 2px 4px 4px 4px;
     border-radius: 2px;
+    color: #eee;
 }
-.source-switch a.live {
+#about-list a.chip .icon {
+    width: 14px;
+    height: 14px;
+    margin-top: 3px;
+}
+[dir='ltr'] #about-list a.chip .icon,
+[dir='ltr'] #about-list a.chip span {
+    margin-right: 3px;
+}
+[dir='rtl'] #about-list a.chip .icon,
+[dir='rtl'] #about-list a.chip span {
+    margin-left: 3px;
+}
+
+.source-switch a.chip.live {
     background: #d32232;
     color: #fff;
 }
 
-.feature-warning a {
+.feature-warning a.chip {
     background: #1e90ff;
-    padding: 2px 4px 4px 4px;
-    border-radius: 2px;
-    color: #eee;
+}
+
+.issues-info a.chip.resolved-count {
+    background: #15911E;
+}
+.issues-info a.chip.warnings-count {
+    background: #DF8500;
+}
+[dir='ltr'] .issues-info a.chip:not(:last-child) {
+    margin-right: 5px;
+}
+[dir='rtl'] .issues-info a.chip:not(:last-child) {
+    margin-left: 5px;
 }
 
 .user-list a:not(:last-child):after {

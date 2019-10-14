@@ -23,6 +23,7 @@ import { uiHelp } from './help';
 import { uiInfo } from './info';
 import { uiIntro } from './intro';
 import { uiIssues } from './issues';
+import { uiIssuesInfo } from './issues_info';
 import { uiLoading } from './loading';
 import { uiMapData } from './map_data';
 import { uiMapInMap } from './map_in_map';
@@ -206,6 +207,12 @@ export function uiInit(context) {
             .attr('class', 'feature-warning')
             .attr('tabindex', -1)
             .call(uiFeatureInfo(context));
+
+        aboutList
+            .append('li')
+            .attr('class', 'issues-info')
+            .attr('tabindex', -1)
+            .call(uiIssuesInfo(context));
 
         aboutList
             .append('li')

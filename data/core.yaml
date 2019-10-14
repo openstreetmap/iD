@@ -1319,6 +1319,8 @@ en:
       list_title: "Warnings ({count})"
     rules:
       title: Rules
+    user_resolved_issues: Issues resolved by your edits
+    warnings_and_errors: Warnings and errors
     no_issues:
       message:
         everything: Everything looks fine
