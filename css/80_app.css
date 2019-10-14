@@ -4542,7 +4542,7 @@ img.tile-debug {
 }
 
 #about-list a.chip {
-    padding: 2px 4px 4px 4px;
+    padding: 2px 4px 3px 4px;
     border-radius: 2px;
     color: #eee;
 }

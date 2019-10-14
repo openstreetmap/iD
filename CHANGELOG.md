@@ -33,17 +33,18 @@ _Breaking changes, which may affect downstream projects or sites that embed iD, 
 ##### Planned: 2019-Oct-14
 
 #### :tada: New Features
-* Add Map Features layer of objects detected in Mapillary images ([#5845], [#6792], thanks [@kratico])
+* Add Map Features layer showing objects detected in Mapillary images ([#5845], [#6792], thanks [@kratico])
 * Add the option to highlight edited features directly on the map ([#6843], thanks [@Bonkles])
+* Show the number of resolved and remaining issues in the bottom bar when validating everything ([#6935], [#6940])
 * Allow reversing directional nodes via the Reverse menu item and keyboard shortcut ([#6850])
-* Support reversing multiple selected features at the same time ([#6810])
 * Add link to the Achavi changeset viewer to the History panel ([#6855])
 
 [#5845]: https://github.com/openstreetmap/iD/issues/5845
 [#6792]: https://github.com/openstreetmap/iD/issues/6792
 [#6843]: https://github.com/openstreetmap/iD/issues/6843
+[#6935]: https://github.com/openstreetmap/iD/issues/6935
+[#6940]: https://github.com/openstreetmap/iD/issues/6940
 [#6850]: https://github.com/openstreetmap/iD/issues/6850
-[#6810]: https://github.com/openstreetmap/iD/issues/6810
 [#6855]: https://github.com/openstreetmap/iD/issues/6855
 
 [@kratico]: https://github.com/kratico
@@ -52,6 +53,7 @@ _Breaking changes, which may affect downstream projects or sites that embed iD, 
 #### :sparkles: Usability
 * Flash the feature type button when a feature's preset changes during editing ([#6764])
 * Add button to toggle the Background info panel ([#6839])
+* Support reversing multiple selected features at the same time ([#6810])
 * Match the cliff directional arrow color to the line color ([#6918], [#6919], thanks [@huonw])
 * Render walls as blockier than fences and other barriers ([#6865])
 * Don't render barriers tagged on waterways ([#6887])
@@ -64,6 +66,7 @@ _Breaking changes, which may affect downstream projects or sites that embed iD, 
 
 [#6764]: https://github.com/openstreetmap/iD/issues/6764
 [#6839]: https://github.com/openstreetmap/iD/issues/6839
+[#6810]: https://github.com/openstreetmap/iD/issues/6810
 [#6918]: https://github.com/openstreetmap/iD/issues/6918
 [#6919]: https://github.com/openstreetmap/iD/issues/6919
 [#6865]: https://github.com/openstreetmap/iD/issues/6865
