@@ -161,7 +161,7 @@ _Breaking changes, which may affect downstream projects or sites that embed iD, 
 * Add Type field to the Residential Area preset
 * Add Limited option to the Stroller Access field ([#6833])
 * Add `notCountryCodes` preset property for blacklisting presets from being addable in certain places
-* Don't show the Cycle & Foot Path preset in France or Lithuania ([#6836], [#6882])
+* Don't show the Cycle & Foot Path preset in France, Lithuania, or Poland ([#6836], [#6882])
 * Require only the primary tag for a feature to match a golf preset
 * Render Construction landuse preset with a yellow icon
 * Improve searchability of cycle presets in English ([#6825])
