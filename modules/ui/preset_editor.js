@@ -55,7 +55,7 @@ export function uiPresetEditor(context) {
 
             var additionalFields = utilArrayUnion(_preset.moreFields, presets.universal());
             additionalFields.sort(function(field1, field2) {
-                return field1.label().localeCompare(field2.label(), currentLocale, { sensitivity: 'base' });
+                return field1.label().localeCompare(field2.label(), currentLocale);
             });
 
             additionalFields.forEach(function(field) {

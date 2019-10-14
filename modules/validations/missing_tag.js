@@ -1,5 +1,6 @@
 import { operationDelete } from '../operations/delete';
 import { osmIsInterestingTag } from '../osm/tags';
+import { osmOldMultipolygonOuterMemberOfRelation } from '../osm/multipolygon';
 import { t } from '../util/locale';
 import { utilDisplayLabel } from '../util';
 import { validationIssue, validationIssueFix } from '../core/validation';
@@ -8,8 +9,7 @@ import { validationIssue, validationIssueFix } from '../core/validation';
 export function validationMissingTag() {
     var type = 'missing_tag';
 
-
-    function hasDescriptiveTags(entity) {
+    function hasDescriptiveTags(entity, graph) {
         var keys = Object.keys(entity.tags)
             .filter(function(k) {
                 if (k === 'area' || k === 'name') {
@@ -19,12 +19,19 @@ export function validationMissingTag() {
                 }
             });
 
-        if (entity.type === 'relation' && keys.length === 1) {
-            return entity.tags.type !== 'multipolygon';
+        if (entity.type === 'relation' &&
+            keys.length === 1 &&
+            entity.tags.type === 'multipolygon') {
+            // this relation's only interesting tag just says its a multipolygon,
+            // which is not descriptive enough
+
+            // It's okay for a simple multipolygon to have no descriptive tags
+            // if its outer way has them (old model, see `outdated_tags.js`)
+            return osmOldMultipolygonOuterMemberOfRelation(entity, graph);
         }
+
         return keys.length > 0;
     }
-
 
     function isUnknownRoad(entity) {
         return entity.type === 'way' && entity.tags.highway === 'road';
@@ -33,7 +40,6 @@ export function validationMissingTag() {
     function isUntypedRelation(entity) {
         return entity.type === 'relation' && !entity.tags.type;
     }
-
 
     var validation = function checkMissingTag(entity, graph) {
 
@@ -46,7 +52,7 @@ export function validationMissingTag() {
 
         if (Object.keys(entity.tags).length === 0) {
             subtype = 'any';
-        } else if (!hasDescriptiveTags(entity)) {
+        } else if (!hasDescriptiveTags(entity, graph)) {
             subtype = 'descriptive';
         } else if (isUntypedRelation(entity)) {
             subtype = 'relation_type';
@@ -114,7 +120,6 @@ export function validationMissingTag() {
                 .text(t('issues.' + referenceID + '.reference'));
         }
     };
-
 
     validation.type = type;
 

@@ -1957,7 +1957,7 @@
     {"key": "highway", "value": "abandoned", "description": "🄳 ➜ abandoned:highway=*"},
     {"key": "highway", "value": "ford", "description": "🄳 ➜ ford=*"},
     {"key": "highway", "value": "no", "description": "🄳"},
-    {"key": "highway", "value": "platform", "description": "🄳 ➜ bus=yes + public_transport=platform"},
+    {"key": "highway", "value": "platform", "description": "🄳 ➜ highway=platform + public_transport=platform"},
     {"key": "highway", "value": "stile", "description": "🄳 ➜ barrier=stile"},
     {"key": "highway", "value": "unsurfaced", "description": "🄳 ➜ highway=road + surface=unpaved"},
     {"key": "internet_access", "value": "public", "description": "🄳 ➜ internet_access=yes + internet_access:fee=no"},

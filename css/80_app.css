@@ -3818,7 +3818,7 @@ div.full-screen > button:hover {
 }
 [dir='rtl'] .issue-label .issue-info-button {
     border-left: 0;
-    border-right: 1px solid;
+    border-right: 1px solid #ccc;
 }
 .issue-container .issue-label .issue-info-button .icon {
     opacity: 0.5;
@@ -4015,7 +4015,7 @@ button.autofix.action.active {
 }
 
 input.square-degrees-input {
-    padding: 2px;
+    padding: 2px !important; /* important needed for rtl */
     height: unset;
     text-align: center;
     background: rgba(0,0,0,0);
@@ -5115,6 +5115,9 @@ img.tile-debug {
     margin-left: 5px;
     padding: 5px 0 5px 5px;
 }
+#about-list li:empty {
+    display: none;
+}
 
 #about-list li:last-child {
     border-right: 0;
@@ -5125,20 +5128,45 @@ img.tile-debug {
     border-left: none;
 }
 
-.source-switch a {
-    padding: 2px 4px 2px 4px;
+#about-list a.chip {
+    padding: 2px 4px 4px 4px;
     border-radius: 2px;
+    color: #eee;
 }
-.source-switch a.live {
+#about-list a.chip .icon {
+    width: 14px;
+    height: 14px;
+    margin-top: 3px;
+}
+[dir='ltr'] #about-list a.chip .icon,
+[dir='ltr'] #about-list a.chip span {
+    margin-right: 3px;
+}
+[dir='rtl'] #about-list a.chip .icon,
+[dir='rtl'] #about-list a.chip span {
+    margin-left: 3px;
+}
+
+.source-switch a.chip.live {
     background: #d32232;
     color: #fff;
 }
 
-.feature-warning a {
+.feature-warning a.chip {
     background: #1e90ff;
-    padding: 2px 4px 4px 4px;
-    border-radius: 2px;
-    color: #eee;
+}
+
+.issues-info a.chip.resolved-count {
+    background: #15911E;
+}
+.issues-info a.chip.warnings-count {
+    background: #DF8500;
+}
+[dir='ltr'] .issues-info a.chip:not(:last-child) {
+    margin-right: 5px;
+}
+[dir='rtl'] .issues-info a.chip:not(:last-child) {
+    margin-left: 5px;
 }
 
 .user-list a:not(:last-child):after {
@@ -5888,4 +5916,7 @@ svg.mouseclick use.right {
 .list-item-photos.list-item-mapillary-map-features .request-data-link {
     float: right;
     margin-top: -20px;
+}
+[dir='rtl'] .list-item-photos.list-item-mapillary-map-features .request-data-link {
+    float: left;
 }

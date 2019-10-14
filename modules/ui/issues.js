@@ -224,7 +224,7 @@ export function uiIssues(context) {
 
         _options[d] = val;
         context.storage('validate-' + d, val);
-        update();
+        context.validator().validate();
     }
 
 

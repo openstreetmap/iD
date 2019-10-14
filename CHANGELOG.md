@@ -30,7 +30,7 @@ _Breaking changes, which may affect downstream projects or sites that embed iD, 
 -->
 
 # 2.16.0
-##### 2019-Oct-11
+##### Planned: 2019-Oct-14
 
 #### :tada: New Features
 * Add Map Features layer of objects detected in Mapillary images ([#5845], [#6792], thanks [@kratico])
@@ -123,11 +123,13 @@ _Breaking changes, which may affect downstream projects or sites that embed iD, 
 #### :earth_asia: Localization
 * Add Seychelles and Pitcairn Islands to the list of places that drive on the left ([#6827], thanks [@leighghunt])
 * Show Traditional Chinese language names in the Taiwan localization instead of Simplified Chinese ([#6815])
+* Sort the "Add field" options in a locale-aware order ([#6937])
 * Make the Wheelchair Access and Stroller Access field options translatable ([#6878])
 * Let the <kbd>@</kbd> key on French/AZERTY keyboards also toggle the sidebar ([#6864])
 * Update language data with Unicode CLDR 36
 
 [#6827]: https://github.com/openstreetmap/iD/issues/6827
+[#6937]: https://github.com/openstreetmap/iD/issues/6937
 [#6815]: https://github.com/openstreetmap/iD/issues/6815
 [#6878]: https://github.com/openstreetmap/iD/issues/6878
 [#6864]: https://github.com/openstreetmap/iD/issues/6864
@@ -159,7 +161,7 @@ _Breaking changes, which may affect downstream projects or sites that embed iD, 
 * Add Type field to the Residential Area preset
 * Add Limited option to the Stroller Access field ([#6833])
 * Add `notCountryCodes` preset property for blacklisting presets from being addable in certain places
-* Don't show the Cycle & Foot Path preset in France or Lithuania ([#6836], [#6882])
+* Don't show the Cycle & Foot Path preset in France, Lithuania, or Poland ([#6836], [#6882])
 * Require only the primary tag for a feature to match a golf preset
 * Render Construction landuse preset with a yellow icon
 * Improve searchability of cycle presets in English ([#6825])

@@ -112,7 +112,6 @@ export function coreValidator(context) {
         });
     }
 
-
     // options = {
     //     what: 'all',     // 'all' or 'edited'
     //     where: 'all',   // 'all' or 'visible'
@@ -187,6 +186,17 @@ export function coreValidator(context) {
         return groups;
     };
 
+    // show some issue types in a particular order
+    var orderedIssueTypes = [
+        // flag missing data first
+        'missing_tag', 'missing_role',
+        // then flag identity issues
+        'outdated_tags', 'mismatched_geometry',
+        // flag geometry issues where fixing them might solve connectivity issues
+        'crossing_ways', 'almost_junction',
+        // then flag connectivity issues
+        'disconnected_way', 'impossible_oneway'
+    ];
 
     validator.getEntityIssues = function(entityID, options) {
         var cache = _headCache;
@@ -206,6 +216,23 @@ export function coreValidator(context) {
                 if (!opts.includeIgnored && _ignoredIssueIDs[issue.id]) return false;
 
                 return true;
+            }).sort(function(issue1, issue2) {
+                if (issue1.type === issue2.type) {
+                    // issues of the same type, sort deterministically
+                    return issue1.id < issue2.id ? -1 : 1;
+                }
+                var index1 = orderedIssueTypes.indexOf(issue1.type);
+                var index2 = orderedIssueTypes.indexOf(issue2.type);
+                if (index1 !== -1 && index2 !== -1) {
+                    // both issue types have explicit sort orders
+                    return index1 - index2;
+                } else if (index1 === -1 && index2 === -1) {
+                    // neither issue type has an explicit sort order, sort by type
+                    return issue1.type < issue2.type ? -1 : 1;
+                } else {
+                    // order explicit types before everything else
+                    return index1 !== -1 ? -1 : 1;
+                }
             });
     };
 
@@ -258,18 +285,14 @@ export function coreValidator(context) {
     //
     function validateEntity(entity, graph) {
         var entityIssues = [];
-        var ran = {};
 
-        // runs validation and appends resulting issues,
-        // returning true if validation passed without issue
+        // runs validation and appends resulting issues
         function runValidation(key) {
-            if (ran[key]) return true;
 
             var fn = _rules[key];
             if (typeof fn !== 'function') {
                 console.error('no such validation rule = ' + key);  // eslint-disable-line no-console
-                ran[key] = true;
-                return true;
+                return;
             }
 
             var detected = fn(entity, graph);
@@ -289,38 +312,9 @@ export function coreValidator(context) {
                 }
             });
             entityIssues = entityIssues.concat(detected);
-            ran[key] = true;
-            return !detected.length;
         }
 
-        // run some validations manually to control the order and to skip some
-
-        runValidation('missing_role');
-
-        if (entity.type === 'relation') {
-            if (!runValidation('outdated_tags')) {
-                // don't flag missing tags if they are on the outer way
-                ran.missing_tag = true;
-            }
-        }
-
-        runValidation('missing_tag');
-
-        runValidation('outdated_tags');
-
-        runValidation('crossing_ways');
-        runValidation('almost_junction');
-
-        // only check impossible_oneway if no disconnected_way issues
-        if (runValidation('disconnected_way')) {
-            runValidation('impossible_oneway');
-        } else {
-            ran.impossible_oneway = true;
-        }
-
-        runValidation('mismatched_geometry');
-
-        // run all rules not yet run
+        // run all rules
         Object.keys(_rules).forEach(runValidation);
 
         return entityIssues;
