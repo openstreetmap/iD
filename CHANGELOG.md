@@ -30,7 +30,7 @@ _Breaking changes, which may affect downstream projects or sites that embed iD, 
 -->
 
 # 2.16.0
-##### Planned: 2019-Oct-14
+##### Planned: 2019-Oct-15
 
 #### :tada: New Features
 * Add Map Features layer showing objects detected in Mapillary images ([#5845], [#6792], thanks [@kratico])
@@ -63,6 +63,7 @@ _Breaking changes, which may affect downstream projects or sites that embed iD, 
 * Allow tabbing past the last row in the All Tags table ([#4233])
 * Replace hardcoded ranking of OpenStreetMap communities with granular upstream ordering ([#6752])
 * Make the "Report an Imagery Problem" text clearer ([#6820])
+* Open the Map Data pane when clicking the "hidden features" badge
 
 [#6764]: https://github.com/openstreetmap/iD/issues/6764
 [#6839]: https://github.com/openstreetmap/iD/issues/6839
@@ -141,8 +142,12 @@ _Breaking changes, which may affect downstream projects or sites that embed iD, 
 
 #### :mortar_board: Walkthrough / Help
 * Update the link to the Mapbox Imagery Request site ([#6874], thanks [@1ec5])
+* Fix issue where walkthrough could not be completed if certain data layers were disabled ([#6634])
 
 [#6874]: https://github.com/openstreetmap/iD/issues/6874
+[#6634]: https://github.com/openstreetmap/iD/issues/6634
+
+[@1ec5]: https://github.com/1ec5
 
 #### :rocket: Presets
 * Add Indoor Stairwell and Indoor Elevator Shaft presets ([#6863], thanks [@danielsjf])

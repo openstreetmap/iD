@@ -444,7 +444,9 @@ export function uiPresetList(context) {
 
         button.each(function(item, index) {
             var hiddenPresetFeaturesId = context.features().isHiddenPreset(item.preset, geometry);
-            var isHiddenPreset = !!hiddenPresetFeaturesId && item.preset !== _currentPreset;
+            var isHiddenPreset = !context.inIntro() &&
+                !!hiddenPresetFeaturesId &&
+                item.preset !== _currentPreset;
 
             d3_select(this)
                 .classed('disabled', isHiddenPreset);
