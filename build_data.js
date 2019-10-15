@@ -284,8 +284,9 @@ function suggestionsToPresets(presets) {
 
         // Prefer a wiki commons logo sometimes.. #6361
         const preferCommons = {
-            Q524757: true,    // KFC
             Q177054: true,    // Burger King
+            Q524757: true,    // KFC
+            Q779845: true,    // CBA
             Q1205312: true    // In-N-Out
         };
 
