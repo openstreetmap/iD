@@ -172,7 +172,7 @@
     {"key": "amenity", "value": "planetarium", "description": "🄿 Planetarium", "object_types": ["node", "area"], "icon_url": "https://cdn.jsdelivr.net/gh/mapbox/maki/icons/globe-15.svg"},
     {"key": "amenity", "value": "police", "description": "🄿 Police", "object_types": ["node", "area"], "icon_url": "https://cdn.jsdelivr.net/gh/mapbox/maki/icons/police-15.svg"},
     {"key": "amenity", "value": "polling_station", "description": "🄿 Permanent Polling Place", "object_types": ["node", "area"], "icon_url": "https://cdn.jsdelivr.net/gh/openstreetmap/iD@master/svg/fontawesome/fas-vote-yea.svg"},
-    {"key": "amenity", "value": "post_box", "description": "🄿 Mailbox", "object_types": ["node"], "icon_url": "https://cdn.jsdelivr.net/gh/bhousel/temaki/icons/post_box.svg"},
+    {"key": "amenity", "value": "post_box", "description": "🄿 Mail Drop Box", "object_types": ["node"], "icon_url": "https://cdn.jsdelivr.net/gh/bhousel/temaki/icons/post_box.svg"},
     {"key": "amenity", "value": "post_depot", "description": "🄿 Post Sorting Office", "object_types": ["node", "area"], "icon_url": "https://cdn.jsdelivr.net/gh/openstreetmap/iD@master/svg/fontawesome/fas-mail-bulk.svg"},
     {"key": "amenity", "value": "post_office", "description": "🄿 Post Office", "object_types": ["node", "area"], "icon_url": "https://cdn.jsdelivr.net/gh/mapbox/maki/icons/post-15.svg"},
     {"key": "amenity", "value": "prep_school", "description": "🄿 Test Prep / Tutoring School", "object_types": ["node", "area"], "icon_url": "https://cdn.jsdelivr.net/gh/bhousel/temaki/icons/school.svg"},

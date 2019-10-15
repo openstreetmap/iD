@@ -3267,9 +3267,9 @@ en:
         terms: '<translate with synonyms or related terms for ''Permanent Polling Place'', separated by commas>'
       amenity/post_box:
         # amenity=post_box
-        name: Mailbox
-        # 'terms: letter drop,mail box,package drop,post box,postal box'
-        terms: '<translate with synonyms or related terms for ''Mailbox'', separated by commas>'
+        name: Mail Drop Box
+        # 'terms: drop box,dropbox,letter drop,mail box,mail collection box,mail drop,mail dropoff,mailbox,package drop,pillar box,pillarbox,post box,postal box,postbox'
+        terms: '<translate with synonyms or related terms for ''Mail Drop Box'', separated by commas>'
       amenity/post_depot:
         # amenity=post_depot
         name: Post Sorting Office
