@@ -5756,8 +5756,8 @@
                     "terms": "ballot box,ballot drop,democracy,elections,polling place,vote,voting booth,voting machine"
                 },
                 "amenity/post_box": {
-                    "name": "Mailbox",
-                    "terms": "letter drop,mail box,package drop,post box,postal box"
+                    "name": "Mail Drop Box",
+                    "terms": "drop box,dropbox,letter drop,mail box,mail collection box,mail drop,mail dropoff,mailbox,package drop,pillar box,pillarbox,post box,postal box,postbox"
                 },
                 "amenity/post_depot": {
                     "name": "Post Sorting Office",
