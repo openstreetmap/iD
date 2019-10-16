@@ -1030,6 +1030,10 @@
       "replace": {"line_attachment": "suspension"}
     },
     {
+      "old": {"townhall:village": "yes"},
+      "replace": {"amenity": "townhall", "townhall:type": "village"}
+    },
+    {
       "old": {"type": "broad_leaved"},
       "replace": {"leaf_type": "broadleaved"}
     },

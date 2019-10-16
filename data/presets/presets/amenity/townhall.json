@@ -3,6 +3,7 @@
     "fields": [
         "name",
         "operator",
+        "townhall/type",
         "address",
         "building_area"
     ],
