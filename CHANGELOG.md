@@ -154,7 +154,7 @@ _Breaking changes, which may affect downstream projects or sites that embed iD, 
 * Add Loading Dock preset ([#6849])
 * Add Utility Pole preset ([#6848])
 * Add Karting Racetrack and Motocross Racetrack presets ([#6826])
-* Add presets: Spaceport, Hot Dog Fast Food, Recording Studio, Film Studio, Radio Station, Television Station, Truck Scale
+* Add presets: Spaceport, Hot Dog Fast Food, Recording Studio, Film Studio, Radio Station, Television Station, Truck Scale, City Hall
 * Add Type and Material fields to the Stile preset ([#6857], thanks [@ewnh])
 * Add Waste field to relevant presets ([#6821])
 * Add Hours field to the Recycling Container preset ([#6861])

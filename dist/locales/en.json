@@ -4692,6 +4692,10 @@
                     "label": "Type",
                     "terms": ""
                 },
+                "townhall/type": {
+                    "label": "Type",
+                    "terms": ""
+                },
                 "tracktype": {
                     "label": "Track Type",
                     "terms": "",
@@ -5866,6 +5870,10 @@
                 "amenity/townhall": {
                     "name": "Town Hall",
                     "terms": "village,city,government,courthouse,municipal"
+                },
+                "amenity/townhall/city": {
+                    "name": "City Hall",
+                    "terms": "council,courthouse,government,mayor,municipality"
                 },
                 "amenity/toy_library": {
                     "name": "Toy Library",

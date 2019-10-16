@@ -397,6 +397,7 @@
     "tourism": {"key": "tourism", "type": "typeCombo", "label": "Type"},
     "tower/construction": {"key": "tower:construction", "type": "combo", "label": "Construction", "placeholder": "Guyed, Lattice, Concealed, ..."},
     "tower/type": {"key": "tower:type", "type": "combo", "label": "Type"},
+    "townhall/type": {"key": "townhall:type", "type": "combo", "label": "Type"},
     "tracktype": {"key": "tracktype", "type": "combo", "label": "Track Type", "placeholder": "Solid, Mostly Solid, Soft...", "strings": {"options": {"grade1": "Solid: paved or heavily compacted hardcore surface", "grade2": "Mostly Solid: gravel/rock with some soft material mixed in", "grade3": "Even mixture of hard and soft materials", "grade4": "Mostly Soft: soil/sand/grass with some hard material mixed in", "grade5": "Soft: soil/sand/grass"}}},
     "trade": {"key": "trade", "type": "typeCombo", "label": "Type"},
     "traffic_calming": {"key": "traffic_calming", "type": "typeCombo", "label": "Type"},

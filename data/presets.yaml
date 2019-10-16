@@ -2323,6 +2323,9 @@ en:
       tower/type:
         # 'tower:type=*'
         label: Type
+      townhall/type:
+        # 'townhall:type=*'
+        label: Type
       tracktype:
         # tracktype=*
         label: Track Type
@@ -3586,6 +3589,11 @@ en:
         name: Town Hall
         # 'terms: village,city,government,courthouse,municipal'
         terms: '<translate with synonyms or related terms for ''Town Hall'', separated by commas>'
+      amenity/townhall/city:
+        # 'amenity=townhall, townhall:type=city'
+        name: City Hall
+        # 'terms: council,courthouse,government,mayor,municipality'
+        terms: '<translate with synonyms or related terms for ''City Hall'', separated by commas>'
       amenity/toy_library:
         # amenity=toy_library
         name: Toy Library
