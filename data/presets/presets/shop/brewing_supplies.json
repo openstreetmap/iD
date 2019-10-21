@@ -1,9 +1,5 @@
 {
     "icon": "fas-beer",
-    "moreFields": [
-        "{shop}",
-        "craft"
-    ],
     "geometry": [
         "point",
         "area"

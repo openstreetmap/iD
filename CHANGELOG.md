@@ -116,7 +116,7 @@ _Breaking changes, which may affect downstream projects or sites that embed iD, 
 * Fix an issue where some Mapillary traffic signs would not appear ([#6510], [#6921], thanks [@cbeddow])
 * Don't treat closed `highway=corridor` ways as areas ([#6800])
 * Fix an issue where operations might not be correctly enabled or disabled while editing a feature
-* Properly show uppercase suggestions in the Country and Target country fields
+* Properly show uppercase suggestions in the Country, Target, and Draft Beers fields
 
 [#6510]: https://github.com/openstreetmap/iD/issues/6510
 [#6921]: https://github.com/openstreetmap/iD/issues/6921
@@ -155,6 +155,7 @@ _Breaking changes, which may affect downstream projects or sites that embed iD, 
 * Add Utility Pole preset ([#6848])
 * Add Karting Racetrack and Motocross Racetrack presets ([#6826])
 * Add Noise Barrier preset ([#6949])
+* Add Brewing Supply Store preset ([#6866], [#6955], thanks [@simonbilskyrollins])
 * Add presets: Spaceport, Hot Dog Fast Food, Recording Studio, Film Studio, Radio Station, Television Station, Truck Scale, City Hall
 * Add Type and Material fields to the Stile preset ([#6857], thanks [@ewnh])
 * Add Waste field to relevant presets ([#6821])
@@ -172,7 +173,7 @@ _Breaking changes, which may affect downstream projects or sites that embed iD, 
 * Add `notCountryCodes` preset property for blacklisting presets from being addable in certain places
 * Don't show the Cycle & Foot Path preset in France, Lithuania, or Poland ([#6836], [#6882])
 * Require only the primary tag for a feature to match a golf preset
-* Render Construction landuse preset with a yellow icon
+* Rename Construction to Construction Area and render it with a yellow icon
 * Improve searchability of cycle presets in English ([#6825])
 
 [#6949]: https://github.com/openstreetmap/iD/issues/6949
@@ -188,6 +189,7 @@ _Breaking changes, which may affect downstream projects or sites that embed iD, 
 [#6882]: https://github.com/openstreetmap/iD/issues/6882
 [#6825]: https://github.com/openstreetmap/iD/issues/6825
 
+[@simonbilskyrollins]: https://github.com/simonbilskyrollins
 [@danielsjf]: https://github.com/danielsjf
 [@ewnh]: https://github.com/ewnh
 
