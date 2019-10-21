@@ -154,6 +154,7 @@ _Breaking changes, which may affect downstream projects or sites that embed iD, 
 * Add Loading Dock preset ([#6849])
 * Add Utility Pole preset ([#6848])
 * Add Karting Racetrack and Motocross Racetrack presets ([#6826])
+* Add Noise Barrier preset ([#6949])
 * Add presets: Spaceport, Hot Dog Fast Food, Recording Studio, Film Studio, Radio Station, Television Station, Truck Scale, City Hall
 * Add Type and Material fields to the Stile preset ([#6857], thanks [@ewnh])
 * Add Waste field to relevant presets ([#6821])
@@ -174,6 +175,7 @@ _Breaking changes, which may affect downstream projects or sites that embed iD, 
 * Render Construction landuse preset with a yellow icon
 * Improve searchability of cycle presets in English ([#6825])
 
+[#6949]: https://github.com/openstreetmap/iD/issues/6949
 [#6863]: https://github.com/openstreetmap/iD/issues/6863
 [#6849]: https://github.com/openstreetmap/iD/issues/6849
 [#6848]: https://github.com/openstreetmap/iD/issues/6848

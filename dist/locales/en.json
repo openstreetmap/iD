@@ -6327,6 +6327,10 @@
                     "name": "Wall",
                     "terms": ""
                 },
+                "barrier/wall/noise_barrier": {
+                    "name": "Noise Barrier",
+                    "terms": "acoustical barrier,noise wall,noisewall,sound barrier,sound berm,sound wall,soundberm,soundwall"
+                },
                 "boundary/administrative": {
                     "name": "Administrative Boundary",
                     "terms": ""
@@ -7428,8 +7432,8 @@
                     "terms": ""
                 },
                 "landuse/construction": {
-                    "name": "Construction",
-                    "terms": ""
+                    "name": "Construction Area",
+                    "terms": "building,bulldozer,construction site,construction zone,crane,demolition,development,infrastructure"
                 },
                 "landuse/farmland": {
                     "name": "Farmland",

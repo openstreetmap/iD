@@ -185,6 +185,10 @@
       "replace": {"man_made": "embankment"}
     },
     {
+      "old": {"barrier": "wall", "type": "noise_barrier"},
+      "replace": {"barrier": "wall", "wall": "noise_barrier"}
+    },
+    {
       "old": {"barrier": "wire_fence"},
       "replace": {"barrier": "fence", "fence_type": "wire"}
     },
@@ -1048,6 +1052,10 @@
     {
       "old": {"unnamed": "*"},
       "replace": {"noname": "$1"}
+    },
+    {
+      "old": {"wall_type": "noise_barrier"},
+      "replace": {"wall": "noise_barrier"}
     },
     {
       "old": {"water": "intermittent"},
