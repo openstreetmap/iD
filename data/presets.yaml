@@ -5190,8 +5190,9 @@ en:
         terms: '<translate with synonyms or related terms for ''Commercial Area'', separated by commas>'
       landuse/construction:
         # landuse=construction
-        name: Construction
-        terms: '<translate with synonyms or related terms for ''Construction'', separated by commas>'
+        name: Construction Area
+        # 'terms: building,bulldozer,construction site,construction zone,crane,demolition,development,infrastructure'
+        terms: '<translate with synonyms or related terms for ''Construction Area'', separated by commas>'
       landuse/farm:
         # landuse=farm
         name: Farmland

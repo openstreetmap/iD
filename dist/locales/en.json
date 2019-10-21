@@ -7292,8 +7292,8 @@
                     "terms": ""
                 },
                 "landuse/construction": {
-                    "name": "Construction",
-                    "terms": ""
+                    "name": "Construction Area",
+                    "terms": "building,bulldozer,construction site,construction zone,crane,demolition,development,infrastructure"
                 },
                 "landuse/farmland": {
                     "name": "Farmland",

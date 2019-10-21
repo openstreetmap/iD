@@ -21,6 +21,15 @@
     "tags": {
         "landuse": "construction"
     },
-    "terms": [],
-    "name": "Construction"
+    "terms": [
+        "building",
+        "bulldozer",
+        "construction site",
+        "construction zone",
+        "crane",
+        "demolition",
+        "development",
+        "infrastructure"
+    ],
+    "name": "Construction Area"
 }
