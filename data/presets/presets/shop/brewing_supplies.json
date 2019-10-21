@@ -1,0 +1,19 @@
+{
+    "icon": "fas-beer",
+    "moreFields": [
+        "{shop}",
+        "craft"
+    ],
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "terms": [
+        "brew shop",
+        "homebrew supply store"
+    ],
+    "tags": {
+        "shop": "brewing_supplies"
+    },
+    "name": "Brewing Supply Store"
+}

@@ -1014,6 +1014,7 @@
     "shop/boat": {"icon": "temaki-boating", "geometry": ["point", "area"], "terms": ["fishing boat", "jetski", "motorboat", "rowboat", "sailboat", "vessel", "watercraft"], "tags": {"shop": "boat"}, "name": "Boat Store"},
     "shop/bookmaker": {"icon": "temaki-money_hand", "moreFields": ["{shop}", "min_age"], "geometry": ["point", "area"], "terms": ["betting", "bookie"], "tags": {"shop": "bookmaker"}, "name": "Bookmaker"},
     "shop/books": {"icon": "fas-book", "fields": ["{shop}", "internet_access"], "moreFields": ["{shop}", "internet_access/fee", "internet_access/ssid"], "geometry": ["point", "area"], "tags": {"shop": "books"}, "name": "Book Store"},
+    "shop/brewing_supplies": {"icon": "fas-beer", "moreFields": ["{shop}", "craft"], "geometry": ["point", "area"], "terms": ["brew shop", "homebrew supply store"], "tags": {"shop": "brewing_supplies"}, "name": "Brewing Supply Store"},
     "shop/butcher": {"icon": "fas-bacon", "geometry": ["point", "area"], "terms": ["chicken", "beef", "lamb", "meat", "pork"], "tags": {"shop": "butcher"}, "name": "Butcher"},
     "shop/candles": {"icon": "fas-burn", "geometry": ["point", "area"], "tags": {"shop": "candles"}, "terms": ["wax"], "name": "Candle Shop"},
     "shop/cannabis": {"icon": "fas-cannabis", "moreFields": ["{shop}", "min_age"], "geometry": ["point", "area"], "terms": ["420", "marijuana", "pot", "reefer", "weed"], "tags": {"shop": "cannabis"}, "name": "Cannabis Shop"},
