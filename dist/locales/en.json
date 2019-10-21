@@ -6187,6 +6187,10 @@
                     "name": "Wall",
                     "terms": ""
                 },
+                "barrier/wall/noise_barrier": {
+                    "name": "Noise Barrier",
+                    "terms": "acoustical barrier,noise wall,noisewall,sound barrier,sound berm,sound wall,soundberm,soundwall"
+                },
                 "boundary/administrative": {
                     "name": "Administrative Boundary",
                     "terms": ""

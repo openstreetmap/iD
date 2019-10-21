@@ -3960,6 +3960,11 @@ en:
         # barrier=wall
         name: Wall
         terms: '<translate with synonyms or related terms for ''Wall'', separated by commas>'
+      barrier/wall/noise_barrier:
+        # 'barrier=wall, wall=noise_barrier'
+        name: Noise Barrier
+        # 'terms: acoustical barrier,noise wall,noisewall,sound barrier,sound berm,sound wall,soundberm,soundwall'
+        terms: '<translate with synonyms or related terms for ''Noise Barrier'', separated by commas>'
       boundary:
         # boundary=*
         name: Boundary
