@@ -958,6 +958,7 @@
     {"key": "shop", "value": "boat", "description": "🄿 Boat Store", "object_types": ["node", "area"], "icon_url": "https://cdn.jsdelivr.net/gh/bhousel/temaki/icons/boating.svg"},
     {"key": "shop", "value": "bookmaker", "description": "🄿 Bookmaker", "object_types": ["node", "area"], "icon_url": "https://cdn.jsdelivr.net/gh/bhousel/temaki/icons/money_hand.svg"},
     {"key": "shop", "value": "books", "description": "🄿 Book Store", "object_types": ["node", "area"], "icon_url": "https://cdn.jsdelivr.net/gh/openstreetmap/iD@master/svg/fontawesome/fas-book.svg"},
+    {"key": "shop", "value": "brewing_supplies", "description": "🄿 Brewing Supply Store", "object_types": ["node", "area"], "icon_url": "https://cdn.jsdelivr.net/gh/openstreetmap/iD@master/svg/fontawesome/fas-beer.svg"},
     {"key": "shop", "value": "butcher", "description": "🄿 Butcher", "object_types": ["node", "area"], "icon_url": "https://cdn.jsdelivr.net/gh/openstreetmap/iD@master/svg/fontawesome/fas-bacon.svg"},
     {"key": "shop", "value": "candles", "description": "🄿 Candle Shop", "object_types": ["node", "area"], "icon_url": "https://cdn.jsdelivr.net/gh/openstreetmap/iD@master/svg/fontawesome/fas-burn.svg"},
     {"key": "shop", "value": "cannabis", "description": "🄿 Cannabis Shop", "object_types": ["node", "area"], "icon_url": "https://cdn.jsdelivr.net/gh/openstreetmap/iD@master/svg/fontawesome/fas-cannabis.svg"},
