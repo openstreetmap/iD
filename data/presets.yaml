@@ -478,7 +478,6 @@ en:
       craft:
         # craft=*
         label: Type
-        terms: '[translate with synonyms or related terms for ''Type'', separated by commas]'
       crane/type:
         # 'crane:type=*'
         label: Crane Type

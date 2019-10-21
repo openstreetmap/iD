@@ -155,6 +155,7 @@ _Breaking changes, which may affect downstream projects or sites that embed iD, 
 * Add Utility Pole preset ([#6848])
 * Add Karting Racetrack and Motocross Racetrack presets ([#6826])
 * Add Noise Barrier preset ([#6949])
+* Add Brewing Supply Store preset ([#6866], [#6955], thanks [@simonbilskyrollins])
 * Add presets: Spaceport, Hot Dog Fast Food, Recording Studio, Film Studio, Radio Station, Television Station, Truck Scale, City Hall
 * Add Type and Material fields to the Stile preset ([#6857], thanks [@ewnh])
 * Add Waste field to relevant presets ([#6821])
@@ -188,6 +189,7 @@ _Breaking changes, which may affect downstream projects or sites that embed iD, 
 [#6882]: https://github.com/openstreetmap/iD/issues/6882
 [#6825]: https://github.com/openstreetmap/iD/issues/6825
 
+[@simonbilskyrollins]: https://github.com/simonbilskyrollins
 [@danielsjf]: https://github.com/danielsjf
 [@ewnh]: https://github.com/ewnh
 
