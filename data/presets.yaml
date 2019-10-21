@@ -478,6 +478,7 @@ en:
       craft:
         # craft=*
         label: Type
+        terms: '[translate with synonyms or related terms for ''Type'', separated by commas]'
       crane/type:
         # 'crane:type=*'
         label: Crane Type
@@ -7183,6 +7184,11 @@ en:
       shop/boutique:
         # shop=boutique
         name: Boutique
+      shop/brewing_supplies:
+        # shop=brewing_supplies
+        name: Brewing Supply Store
+        # 'terms: brew shop,homebrew supply store'
+        terms: '<translate with synonyms or related terms for ''Brewing Supply Store'', separated by commas>'
       shop/butcher:
         # shop=butcher
         name: Butcher
