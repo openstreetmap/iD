@@ -17,19 +17,6 @@
         "key": "railway",
         "value": "platform"
     },
-    "terms": [
-        "electric",
-        "light rail",
-        "platform",
-        "public transit",
-        "public transportation",
-        "rail",
-        "track",
-        "tram",
-        "trolley",
-        "transit",
-        "transportation"
-    ],
     "searchable": false,
     "name": "Light Rail Stop / Platform"
 }

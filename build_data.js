@@ -402,6 +402,8 @@ function generateTranslations(fields, presets, tstrings, searchableFieldIDs) {
             }
             field.terms = '[translate with synonyms or related terms for \'' + field.label + '\', separated by commas]';
         } else {
+            delete tstrings.fields[id].terms;
+            delete f.terms;
             delete field.terms;
         }
     });
@@ -421,6 +423,8 @@ function generateTranslations(fields, presets, tstrings, searchableFieldIDs) {
             }
             preset.terms = '<translate with synonyms or related terms for \'' + preset.name + '\', separated by commas>';
         } else {
+            delete tstrings.presets[id].terms;
+            delete p.terms;
             delete preset.terms;
         }
     });

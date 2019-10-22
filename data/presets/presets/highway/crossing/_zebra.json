@@ -16,11 +16,6 @@
         "key": "highway",
         "value": "crossing"
     },
-    "terms": [
-        "zebra crossing",
-        "marked crossing",
-        "crosswalk"
-    ],
     "name": "Marked Crosswalk",
     "searchable": false
 }
