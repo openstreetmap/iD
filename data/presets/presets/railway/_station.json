@@ -1,14 +1,10 @@
 {
     "icon": "maki-rail",
     "fields": [
-        "name",
-        "network",
-        "operator",
-        "address",
-        "building_area",
-        "internet_access",
-        "internet_access/fee",
-        "internet_access/ssid"
+        "{public_transport/station}"
+    ],
+    "moreFields": [
+        "{public_transport/station}"
     ],
     "geometry": [
         "point",
@@ -24,6 +20,5 @@
     ],
     "matchScore": 0.95,
     "name": "Train Station",
-    "searchable": false,
-    "replacement": "public_transport/station_train"
+    "searchable": false
 }
