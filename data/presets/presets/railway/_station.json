@@ -14,10 +14,6 @@
     "tags": {
         "railway": "station"
     },
-    "terms": [
-        "train station",
-        "station"
-    ],
     "matchScore": 0.95,
     "name": "Train Station",
     "searchable": false

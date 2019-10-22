@@ -17,15 +17,6 @@
         "key": "public_transport",
         "value": "platform"
     },
-    "terms": [
-        "aerialway",
-        "cable car",
-        "platform",
-        "public transit",
-        "public transportation",
-        "transit",
-        "transportation"
-    ],
     "searchable": false,
     "name": "Aerialway Stop / Platform"
 }

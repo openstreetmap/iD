@@ -17,16 +17,6 @@
         "key": "railway",
         "value": "platform"
     },
-    "terms": [
-        "platform",
-        "public transit",
-        "public transportation",
-        "rail",
-        "track",
-        "train",
-        "transit",
-        "transportation"
-    ],
     "searchable": false,
     "name": "Train Stop / Platform"
 }
