@@ -17,17 +17,6 @@
         "key": "public_transport",
         "value": "platform"
     },
-    "terms": [
-        "boat",
-        "dock",
-        "ferry",
-        "pier",
-        "platform",
-        "public transit",
-        "public transportation",
-        "transit",
-        "transportation"
-    ],
     "searchable": false,
     "name": "Ferry Stop / Platform"
 }

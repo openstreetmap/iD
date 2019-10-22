@@ -7,13 +7,6 @@
     "tags": {
         "railway": "halt"
     },
-    "terms": [
-        "break",
-        "interrupt",
-        "rest",
-        "wait",
-        "interruption"
-    ],
     "name": "Train Station (Halt / Request)",
     "searchable": false
 }
