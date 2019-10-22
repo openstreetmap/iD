@@ -5895,6 +5895,10 @@
                     "name": "Bottle Return Machine",
                     "terms": "bottle return"
                 },
+                "amenity/vending_machine/bread": {
+                    "name": "Bread Vending Machine",
+                    "terms": "baguette,bread"
+                },
                 "amenity/vending_machine/cigarettes": {
                     "name": "Cigarette Vending Machine",
                     "terms": "cigarette"
@@ -5910,6 +5914,10 @@
                 "amenity/vending_machine/drinks": {
                     "name": "Drink Vending Machine",
                     "terms": "drink,soda,beverage,juice,pop"
+                },
+                "amenity/vending_machine/eggs": {
+                    "name": "Egg Vending Machine",
+                    "terms": "egg"
                 },
                 "amenity/vending_machine/electronics": {
                     "name": "Electronics Vending Machine",
@@ -5938,6 +5946,10 @@
                 "amenity/vending_machine/ice_cream": {
                     "name": "Ice Cream Vending Machine",
                     "terms": "chocolate,ice cream,frozen,popsicle,vanilla"
+                },
+                "amenity/vending_machine/ice_cubes": {
+                    "name": "Ice Vending Machine",
+                    "terms": "cubes,ice"
                 },
                 "amenity/vending_machine/newspapers": {
                     "name": "Newspaper Vending Machine",

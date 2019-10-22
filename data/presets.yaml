@@ -3618,6 +3618,11 @@ en:
         name: Bottle Return Machine
         # 'terms: bottle return'
         terms: '<translate with synonyms or related terms for ''Bottle Return Machine'', separated by commas>'
+      amenity/vending_machine/bread:
+        # 'amenity=vending_machine, vending=bread'
+        name: Bread Vending Machine
+        # 'terms: baguette,bread'
+        terms: '<translate with synonyms or related terms for ''Bread Vending Machine'', separated by commas>'
       amenity/vending_machine/cigarettes:
         # 'amenity=vending_machine, vending=cigarettes'
         name: Cigarette Vending Machine
@@ -3638,6 +3643,11 @@ en:
         name: Drink Vending Machine
         # 'terms: drink,soda,beverage,juice,pop'
         terms: '<translate with synonyms or related terms for ''Drink Vending Machine'', separated by commas>'
+      amenity/vending_machine/eggs:
+        # 'amenity=vending_machine, vending=eggs'
+        name: Egg Vending Machine
+        # 'terms: egg'
+        terms: '<translate with synonyms or related terms for ''Egg Vending Machine'', separated by commas>'
       amenity/vending_machine/electronics:
         # 'amenity=vending_machine, vending=electronics'
         name: Electronics Vending Machine
@@ -3673,6 +3683,11 @@ en:
         name: Ice Cream Vending Machine
         # 'terms: chocolate,ice cream,frozen,popsicle,vanilla'
         terms: '<translate with synonyms or related terms for ''Ice Cream Vending Machine'', separated by commas>'
+      amenity/vending_machine/ice_cubes:
+        # 'amenity=vending_machine, vending=ice_cubes'
+        name: Ice Vending Machine
+        # 'terms: cubes,ice'
+        terms: '<translate with synonyms or related terms for ''Ice Vending Machine'', separated by commas>'
       amenity/vending_machine/newspapers:
         # 'amenity=vending_machine, vending=newspapers'
         name: Newspaper Vending Machine

@@ -1,18 +1,18 @@
 {
-    "icon": "temaki-vending_love",
+    "icon": "temaki-vending_eggs",
     "geometry": [
         "point"
     ],
     "terms": [
-        "condom"
+        "egg"
     ],
     "tags": {
         "amenity": "vending_machine",
-        "vending": "condoms"
+        "vending": "eggs"
     },
     "reference": {
         "key": "vending",
-        "value": "condoms"
+        "value": "eggs"
     },
-    "name": "Condom Vending Machine"
+    "name": "Egg Vending Machine"
 }
