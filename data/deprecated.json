@@ -762,6 +762,26 @@
       "replace": {"generator:output": "$1"}
     },
     {
+      "old": {"railway": "station"},
+      "replace": {"railway": "station", "public_transport": "station"}
+    },
+    {
+      "old": {"railway": "station", "station": "light_rail"},
+      "replace": {"railway": "station", "station": "light_rail", "public_transport": "station", "light_rail": "yes"}
+    },
+    {
+      "old": {"railway": "station", "station": "monorail"},
+      "replace": {"railway": "station", "station": "monorail", "public_transport": "station", "monorail": "yes"}
+    },
+    {
+      "old": {"railway": "station", "station": "subway"},
+      "replace": {"railway": "station", "station": "subway", "public_transport": "station", "subway": "yes"}
+    },
+    {
+      "old": {"railway": "station", "station": "train"},
+      "replace": {"railway": "station", "station": "train", "public_transport": "station", "train": "yes"}
+    },
+    {
       "old": {"recommended_speed": "*"},
       "replace": {"maxspeed:advisory": "$1"}
     },
