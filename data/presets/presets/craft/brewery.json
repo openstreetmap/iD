@@ -1,5 +1,5 @@
 {
-    "icon": "temaki-storage_tank",
+    "icon": "temaki-storage_fermenter",
     "fields": [
         "{craft}",
         "product"
