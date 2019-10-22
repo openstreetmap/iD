@@ -9,20 +9,19 @@
         "vertex"
     ],
     "tags": {
-        "manhole": "drain"
+        "manhole": "sewer"
     },
     "addTags": {
         "man_made": "manhole",
-        "manhole": "drain"
+        "manhole": "sewer"
     },
     "terms": [
         "cover",
         "drain",
         "hole",
-        "rain",
         "sewer",
         "sewage",
-        "storm"
+        "utility"
     ],
-    "name": "Storm Drain"
+    "name": "Sewer Utility Manhole"
 }

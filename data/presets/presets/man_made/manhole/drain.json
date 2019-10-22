@@ -1,5 +1,5 @@
 {
-    "icon": "temaki-cable_manhole",
+    "icon": "temaki-manhole",
     "fields": [
         "operator",
         "ref"
@@ -9,19 +9,20 @@
         "vertex"
     ],
     "tags": {
-        "manhole": "telecom"
+        "manhole": "drain"
     },
     "addTags": {
         "man_made": "manhole",
-        "manhole": "telecom"
+        "manhole": "drain"
     },
     "terms": [
         "cover",
-        "phone",
+        "drain",
         "hole",
-        "telecom",
-        "telephone",
-        "bt"
+        "rain",
+        "sewer",
+        "sewage",
+        "storm"
     ],
-    "name": "Telecom Manhole"
+    "name": "Storm Drain"
 }

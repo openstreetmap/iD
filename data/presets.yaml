@@ -5864,6 +5864,41 @@ en:
         # man_made=lighthouse
         name: Lighthouse
         terms: '<translate with synonyms or related terms for ''Lighthouse'', separated by commas>'
+      man_made/manhole:
+        # manhole=*
+        name: Manhole
+        # 'terms: cover,hole,sewer,sewage,telecom'
+        terms: '<translate with synonyms or related terms for ''Manhole'', separated by commas>'
+      man_made/manhole/drain:
+        # manhole=drain
+        name: Storm Drain
+        # 'terms: cover,drain,hole,rain,sewer,sewage,storm'
+        terms: '<translate with synonyms or related terms for ''Storm Drain'', separated by commas>'
+      man_made/manhole/gas:
+        # manhole=gas
+        name: Gas Utility Manhole
+        # 'terms: cover,gas,heat,hole,utility'
+        terms: '<translate with synonyms or related terms for ''Gas Utility Manhole'', separated by commas>'
+      man_made/manhole/power:
+        # manhole=power
+        name: Power Utility Manhole
+        # 'terms: cover,hole,electric,hole,power,utility'
+        terms: '<translate with synonyms or related terms for ''Power Utility Manhole'', separated by commas>'
+      man_made/manhole/sewer:
+        # manhole=sewer
+        name: Sewer Utility Manhole
+        # 'terms: cover,drain,hole,sewer,sewage,utility'
+        terms: '<translate with synonyms or related terms for ''Sewer Utility Manhole'', separated by commas>'
+      man_made/manhole/telecom:
+        # manhole=telecom
+        name: Telecom Utility Manhole
+        # 'terms: bt,cable,cover,phone,hole,telecom,telephone,utility'
+        terms: '<translate with synonyms or related terms for ''Telecom Utility Manhole'', separated by commas>'
+      man_made/manhole/water:
+        # manhole=water
+        name: Water Utility Manhole
+        # 'terms: cover,drinking,hole,utility,water'
+        terms: '<translate with synonyms or related terms for ''Water Utility Manhole'', separated by commas>'
       man_made/mast:
         # man_made=mast
         name: Mast
@@ -6052,21 +6087,6 @@ en:
         name: Factory
         # 'terms: assembly,build,brewery,car,plant,plastic,processing,manufacture,refinery'
         terms: '<translate with synonyms or related terms for ''Factory'', separated by commas>'
-      manhole:
-        # manhole=*
-        name: Manhole
-        # 'terms: cover,hole,sewer,sewage,telecom'
-        terms: '<translate with synonyms or related terms for ''Manhole'', separated by commas>'
-      manhole/drain:
-        # manhole=drain
-        name: Storm Drain
-        # 'terms: cover,drain,hole,rain,sewer,sewage,storm'
-        terms: '<translate with synonyms or related terms for ''Storm Drain'', separated by commas>'
-      manhole/telecom:
-        # manhole=telecom
-        name: Telecom Manhole
-        # 'terms: cover,phone,hole,telecom,telephone,bt'
-        terms: '<translate with synonyms or related terms for ''Telecom Manhole'', separated by commas>'
       military/bunker:
         # military=bunker
         name: Military Bunker
