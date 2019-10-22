@@ -1,9 +1,7 @@
 {
-    "icon": "maki-circle-stroked",
+    "icon": "temaki-power_manhole",
     "fields": [
-        "manhole",
         "operator",
-        "label",
         "ref"
     ],
     "geometry": [
@@ -11,18 +9,19 @@
         "vertex"
     ],
     "tags": {
-        "manhole": "*"
+        "manhole": "power"
     },
     "addTags": {
         "man_made": "manhole",
-        "manhole": "*"
+        "manhole": "power"
     },
     "terms": [
         "cover",
         "hole",
-        "sewer",
-        "sewage",
-        "telecom"
+        "electric",
+        "hole",
+        "power",
+        "utility"
     ],
-    "name": "Manhole"
+    "name": "Power Utility Manhole"
 }

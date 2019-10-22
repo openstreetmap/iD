@@ -1,5 +1,5 @@
 {
-    "icon": "temaki-gas",
+    "icon": "temaki-propane_tank",
     "fields": [
         "{shop}",
         "fuel_multi"

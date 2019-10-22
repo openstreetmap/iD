@@ -6035,6 +6035,10 @@
                     "name": "Bottle Return Machine",
                     "terms": "bottle return"
                 },
+                "amenity/vending_machine/bread": {
+                    "name": "Bread Vending Machine",
+                    "terms": "baguette,bread"
+                },
                 "amenity/vending_machine/cigarettes": {
                     "name": "Cigarette Vending Machine",
                     "terms": "cigarette"
@@ -6050,6 +6054,10 @@
                 "amenity/vending_machine/drinks": {
                     "name": "Drink Vending Machine",
                     "terms": "drink,soda,beverage,juice,pop"
+                },
+                "amenity/vending_machine/eggs": {
+                    "name": "Egg Vending Machine",
+                    "terms": "egg"
                 },
                 "amenity/vending_machine/electronics": {
                     "name": "Electronics Vending Machine",
@@ -6078,6 +6086,10 @@
                 "amenity/vending_machine/ice_cream": {
                     "name": "Ice Cream Vending Machine",
                     "terms": "chocolate,ice cream,frozen,popsicle,vanilla"
+                },
+                "amenity/vending_machine/ice_cubes": {
+                    "name": "Ice Vending Machine",
+                    "terms": "cubes,ice"
                 },
                 "amenity/vending_machine/newspapers": {
                     "name": "Newspaper Vending Machine",
@@ -7979,6 +7991,34 @@
                     "name": "Lighthouse",
                     "terms": ""
                 },
+                "man_made/manhole": {
+                    "name": "Manhole",
+                    "terms": "cover,hole,sewer,sewage,telecom"
+                },
+                "man_made/manhole/drain": {
+                    "name": "Storm Drain",
+                    "terms": "cover,drain,hole,rain,sewer,sewage,storm"
+                },
+                "man_made/manhole/gas": {
+                    "name": "Gas Utility Manhole",
+                    "terms": "cover,gas,heat,hole,utility"
+                },
+                "man_made/manhole/power": {
+                    "name": "Power Utility Manhole",
+                    "terms": "cover,hole,electric,hole,power,utility"
+                },
+                "man_made/manhole/sewer": {
+                    "name": "Sewer Utility Manhole",
+                    "terms": "cover,drain,hole,sewer,sewage,utility"
+                },
+                "man_made/manhole/telecom": {
+                    "name": "Telecom Utility Manhole",
+                    "terms": "bt,cable,cover,phone,hole,telecom,telephone,utility"
+                },
+                "man_made/manhole/water": {
+                    "name": "Water Utility Manhole",
+                    "terms": "cover,drinking,hole,utility,water"
+                },
                 "man_made/mast": {
                     "name": "Mast",
                     "terms": "antenna,broadcast tower,cell phone tower,cell tower,communication mast,communication tower,guyed tower,mobile phone tower,radio mast,radio tower,television tower,transmission mast,transmission tower,tv tower"
@@ -8134,18 +8174,6 @@
                 "man_made/works": {
                     "name": "Factory",
                     "terms": "assembly,build,brewery,car,plant,plastic,processing,manufacture,refinery"
-                },
-                "manhole": {
-                    "name": "Manhole",
-                    "terms": "cover,hole,sewer,sewage,telecom"
-                },
-                "manhole/drain": {
-                    "name": "Storm Drain",
-                    "terms": "cover,drain,hole,rain,sewer,sewage,storm"
-                },
-                "manhole/telecom": {
-                    "name": "Telecom Manhole",
-                    "terms": "cover,phone,hole,telecom,telephone,bt"
                 },
                 "military/bunker": {
                     "name": "Military Bunker",
