@@ -2948,6 +2948,10 @@
                     "label": "Material",
                     "terms": ""
                 },
+                "building/prefabricated": {
+                    "label": "Prefabricated",
+                    "terms": ""
+                },
                 "bunker_type": {
                     "label": "Type",
                     "terms": ""
@@ -4033,6 +4037,10 @@
                     "label": "Outdoor Seating",
                     "terms": ""
                 },
+                "owner": {
+                    "label": "Owner",
+                    "terms": ""
+                },
                 "par": {
                     "label": "Par",
                     "terms": "",
@@ -4784,6 +4792,15 @@
                 "target": {
                     "label": "Target",
                     "terms": ""
+                },
+                "telecom/medium": {
+                    "label": "Medium",
+                    "terms": "",
+                    "options": {
+                        "copper": "Copper",
+                        "fibre": "Fibre",
+                        "coaxial": "Coaxial"
+                    }
                 },
                 "tidal": {
                     "label": "Tidal",
@@ -9666,6 +9683,10 @@
                 "telecom/data_center": {
                     "name": "Data Center",
                     "terms": "computer systems storage,information technology,server farm,the cloud,telecommunications"
+                },
+                "telecom/exchange": {
+                    "name": "Exchange",
+                    "terms": "telephone,internet,telecommunications,switch,main distribution frame,local loop,landline"
                 },
                 "tourism/alpine_hut": {
                     "name": "Alpine Hut",

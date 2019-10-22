@@ -1,0 +1,12 @@
+{
+    "key": "telecom:medium",
+    "type": "combo",
+    "label": "Medium",
+    "strings": {
+        "options": {
+            "copper": "Copper",
+            "fibre": "Fibre",
+            "coaxial": "Coaxial"
+        }
+    }
+}

@@ -1,0 +1,32 @@
+{
+    "icon": "fas-server",
+    "fields": [
+        "operator",
+        "ref",
+        "telecom/medium"
+    ],
+    "moreFields": [
+        "building",
+        "building/prefabricated",
+        "man_made",
+        "owner",
+        "street_cabinet"
+    ],
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "tags": {
+        "telecom": "exchange"
+    },
+    "terms": [
+        "telephone",
+        "internet",
+        "telecommunications",
+        "switch",
+        "main distribution frame",
+        "local loop",
+        "landline"
+    ],
+    "name": "Exchange"
+}

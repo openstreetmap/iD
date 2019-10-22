@@ -355,6 +355,10 @@ en:
         # 'building:material=*'
         label: Material
         terms: '[translate with synonyms or related terms for ''Material'', separated by commas]'
+      building/prefabricated:
+        # 'building:prefabricated=*'
+        label: Prefabricated
+        terms: '[translate with synonyms or related terms for ''Prefabricated'', separated by commas]'
       building_area:
         # building=*
         label: Building
@@ -1213,6 +1217,7 @@ en:
       man_made:
         # man_made=*
         label: Type
+        terms: '[translate with synonyms or related terms for ''Type'', separated by commas]'
       manhole:
         # manhole=*
         label: Type
@@ -1468,6 +1473,10 @@ en:
         # outdoor_seating=*
         label: Outdoor Seating
         terms: '[translate with synonyms or related terms for ''Outdoor Seating'', separated by commas]'
+      owner:
+        # owner=*
+        label: Owner
+        terms: '[translate with synonyms or related terms for ''Owner'', separated by commas]'
       par:
         # par=*
         label: Par
@@ -2164,6 +2173,7 @@ en:
       street_cabinet:
         # street_cabinet=*
         label: Type
+        terms: '[translate with synonyms or related terms for ''Type'', separated by commas]'
       stroller:
         # stroller=*
         label: Stroller Access
@@ -2278,6 +2288,16 @@ en:
       target:
         # target=*
         label: Target
+      telecom/medium:
+        # 'telecom:medium=*'
+        label: Medium
+        options:
+          # 'telecom:medium=coaxial'
+          coaxial: Coaxial
+          # 'telecom:medium=copper'
+          copper: Copper
+          # 'telecom:medium=fibre'
+          fibre: Fibre
       tidal:
         # tidal=*
         label: Tidal
@@ -7866,6 +7886,11 @@ en:
         name: Data Center
         # 'terms: computer systems storage,information technology,server farm,the cloud,telecommunications'
         terms: '<translate with synonyms or related terms for ''Data Center'', separated by commas>'
+      telecom/exchange:
+        # telecom=exchange
+        name: Exchange
+        # 'terms: telephone,internet,telecommunications,switch,main distribution frame,local loop,landline'
+        terms: '<translate with synonyms or related terms for ''Exchange'', separated by commas>'
       tourism:
         # tourism=*
         name: Tourism
