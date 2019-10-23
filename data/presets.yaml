@@ -2593,10 +2593,22 @@ en:
         # advertising=billboard
         name: Billboard
         terms: '<translate with synonyms or related terms for ''Billboard'', separated by commas>'
+      advertising/board:
+        # advertising=board
+        name: Notice Board
+        terms: '<translate with synonyms or related terms for ''Notice Board'', separated by commas>'
       advertising/column:
         # advertising=column
         name: Advertising Column
         terms: '<translate with synonyms or related terms for ''Advertising Column'', separated by commas>'
+      advertising/poster_box:
+        # advertising=poster_box
+        name: Poster Box
+        terms: '<translate with synonyms or related terms for ''Poster Box'', separated by commas>'
+      advertising/totem:
+        # advertising=totem
+        name: Advertising Totem
+        terms: '<translate with synonyms or related terms for ''Advertising Totem'', separated by commas>'
       aerialway:
         # aerialway=*
         name: Aerialway

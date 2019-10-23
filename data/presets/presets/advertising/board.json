@@ -1,0 +1,14 @@
+{
+    "fields": [
+        "lit",
+        "support",
+        "height"
+    ],
+    "geometry": [
+        "point"
+    ],
+    "tags": {
+        "advertising": "board"
+    },
+    "name": "Notice Board"
+}

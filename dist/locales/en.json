@@ -5019,8 +5019,20 @@
                     "name": "Billboard",
                     "terms": ""
                 },
+                "advertising/board": {
+                    "name": "Notice Board",
+                    "terms": ""
+                },
                 "advertising/column": {
                     "name": "Advertising Column",
+                    "terms": ""
+                },
+                "advertising/poster_box": {
+                    "name": "Poster Box",
+                    "terms": ""
+                },
+                "advertising/totem": {
+                    "name": "Advertising Totem",
                     "terms": ""
                 },
                 "aerialway/station": {
@@ -10065,6 +10077,10 @@
                 "description": "Yellow = Public domain map data from the US Census. Red = Data not found in OpenStreetMap",
                 "name": "TIGER Roads 2018"
             },
+            "US-TIGER-Roads-2019": {
+                "description": "Yellow = Public domain map data from the US Census. Red = Data not found in OpenStreetMap",
+                "name": "TIGER Roads 2019"
+            },
             "USDA-NAIP": {
                 "description": "The most recent year of DOQQs from the National Agriculture Imagery Program (NAIP) for each state in the contiguous United States.",
                 "name": "National Agriculture Imagery Program"
@@ -10090,6 +10106,12 @@
                     "text": "Realized by means of Brussels UrbIS®© - Distribution & Copyright CIRB"
                 },
                 "name": "UrbIS-Ortho 2018"
+            },
+            "UrbISOrtho2019": {
+                "attribution": {
+                    "text": "Realized by means of Brussels UrbIS®© - Distribution & Copyright CIRB"
+                },
+                "name": "UrbIS-Ortho 2019"
             },
             "UrbisAdmFR": {
                 "attribution": {
