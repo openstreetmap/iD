@@ -7365,6 +7365,11 @@ en:
         name: E-Cigarette Shop
         # 'terms: electronic,vape,vaping,vapor'
         terms: '<translate with synonyms or related terms for ''E-Cigarette Shop'', separated by commas>'
+      shop/electrical:
+        # shop=electrical
+        name: Electrical Equipment Store
+        # 'terms: cable,electric,fan,LED,lighting,power,wire'
+        terms: '<translate with synonyms or related terms for ''Electrical Equipment Store'', separated by commas>'
       shop/electronics:
         # shop=electronics
         name: Electronics Store
@@ -7768,6 +7773,11 @@ en:
         # shop=tea
         name: Tea Store
         terms: '<translate with synonyms or related terms for ''Tea Store'', separated by commas>'
+      shop/telecommunication:
+        # shop=telecommunication
+        name: Telecom Retail Store
+        # 'terms: communication,internet service provider,isp,network,telephone,voice'
+        terms: '<translate with synonyms or related terms for ''Telecom Retail Store'', separated by commas>'
       shop/ticket:
         # shop=ticket
         name: Ticket Seller

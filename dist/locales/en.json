@@ -8766,6 +8766,10 @@
                     "name": "E-Cigarette Shop",
                     "terms": "electronic,vape,vaping,vapor"
                 },
+                "shop/electrical": {
+                    "name": "Electrical Equipment Store",
+                    "terms": "cable,electric,fan,LED,lighting,power,wire"
+                },
                 "shop/electronics": {
                     "name": "Electronics Store",
                     "terms": "appliance,audio,blueray,camera,computer,dvd,home theater,radio,speaker,tv,video"
@@ -9097,6 +9101,10 @@
                 "shop/tea": {
                     "name": "Tea Store",
                     "terms": ""
+                },
+                "shop/telecommunication": {
+                    "name": "Telecom Retail Store",
+                    "terms": "communication,internet service provider,isp,network,telephone,voice"
                 },
                 "shop/ticket": {
                     "name": "Ticket Seller",
