@@ -99,7 +99,7 @@ describe('iD.validations.crossing_ways', function () {
     });
 
     it('legit crossing between highway and building', function() {
-        createWaysWithOneCrossingPoint({ highway: 'residential', covered: 'yes' }, { building: 'yes' });
+        createWaysWithOneCrossingPoint({ highway: 'residential', layer: '-1' }, { building: 'yes' });
         var issues = validate();
         expect(issues).to.have.lengthOf(0);
     });
@@ -123,7 +123,7 @@ describe('iD.validations.crossing_ways', function () {
     });
 
     it('legit crossing between railway and building', function() {
-        createWaysWithOneCrossingPoint({ railway: 'rail', covered: 'yes' }, { building: 'yes' });
+        createWaysWithOneCrossingPoint({ railway: 'rail', layer: '-1' }, { building: 'yes' });
         var issues = validate();
         expect(issues).to.have.lengthOf(0);
     });
@@ -135,13 +135,13 @@ describe('iD.validations.crossing_ways', function () {
     });
 
     it('legit crossing between waterway and building', function() {
-        createWaysWithOneCrossingPoint({ waterway: 'river', covered: 'yes' }, { building: 'yes' });
+        createWaysWithOneCrossingPoint({ waterway: 'river', layer: '-1' }, { building: 'yes' });
         var issues = validate();
         expect(issues).to.have.lengthOf(0);
     });
 
     it('legit crossing between building and building', function() {
-        createWaysWithOneCrossingPoint({ building: 'yes' }, { building: 'yes', covered: 'yes' });
+        createWaysWithOneCrossingPoint({ building: 'yes' }, { building: 'yes', layer: '1' });
         var issues = validate();
         expect(issues).to.have.lengthOf(0);
     });
