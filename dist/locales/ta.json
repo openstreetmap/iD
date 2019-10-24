@@ -1207,9 +1207,6 @@
                 "plant/output/electricity": {
                     "placeholder": "500 மெவா, 1000 மெவா, 2000 மெவா..."
                 },
-                "playground/min_age": {
-                    "label": "குறைந்தபட்ச வயது"
-                },
                 "population": {
                     "label": "மக்கள் தொகை"
                 },
@@ -1754,9 +1751,6 @@
                 "amenity/police": {
                     "name": "காவல்"
                 },
-                "amenity/post_box": {
-                    "name": "அஞ்சல்பெட்டி"
-                },
                 "amenity/post_office": {
                     "name": "அஞ்சலகம்"
                 },
@@ -1978,9 +1972,6 @@
                 },
                 "landuse/churchyard": {
                     "name": "கோயில் முற்றம்"
-                },
-                "landuse/construction": {
-                    "name": "கட்டுமானம்"
                 },
                 "landuse/farm": {
                     "name": "பண்ணை நிலம்"

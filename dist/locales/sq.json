@@ -213,9 +213,7 @@
             },
             "reverse": {
                 "title": "Kthej mbrapsht",
-                "description": "Bëj këte vijë të shkoj në drejtimin e kundërt.",
-                "key": "V",
-                "annotation": "Një vijë u këthu mbrapsht."
+                "key": "V"
             },
             "split": {
                 "title": "Nda",
@@ -436,8 +434,7 @@
                 "notes": {
                     "title": "shënimet e OpenStreetMap"
                 }
-            },
-            "fill_area": "Mbush Sipërfaqet"
+            }
         },
         "feature": {
             "points": {
@@ -1084,13 +1081,7 @@
                 "description": "Përmirësoni OpenStreetMap në Bangladesh"
             },
             "OSM-India-facebook": {
-                "description": "Përmirësoni OpenStreetMap në Indi",
-                "events": {
-                    "sotmasia2018": {
-                        "name": "State of the Map Asia 2018",
-                        "where": "Indian Institute of Management, Bangalore, India"
-                    }
-                }
+                "description": "Përmirësoni OpenStreetMap në Indi"
             },
             "OSM-india-twitter": {
                 "name": "OpenStreetMap India Twitter"
@@ -1135,12 +1126,7 @@
                 "description": "Na ndiqni në Twitter: {url}"
             },
             "OSMF": {
-                "name": "Fondacioni OpenStreetMap",
-                "events": {
-                    "sotm2018": {
-                        "where": "Milano, Itali"
-                    }
-                }
+                "name": "Fondacioni OpenStreetMap"
             }
         }
     }

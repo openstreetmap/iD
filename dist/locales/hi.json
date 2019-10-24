@@ -114,9 +114,6 @@
                 "drawing": {
                     "title": "चित्रांकन"
                 },
-                "operations": {
-                    "reverse": "रेखा को उल्टा करें"
-                },
                 "commands": {
                     "title": "आदेश"
                 }

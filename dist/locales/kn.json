@@ -250,9 +250,7 @@
             },
             "reverse": {
                 "title": "ಹಿಮ್ಮುಖ",
-                "description": "ಈ ಗೆರೆಯನ್ನು ಅಭಿಮುಖ ದಿಕ್ಕಿನಲ್ಲಿ ಚಲಿಸುವಂತೆ ಮಾಡಿ. ",
-                "key": "V",
-                "annotation": "ರೇಖೆಯನ್ನು ಹಿಮ್ಮುಖಗೊಳಿಸು"
+                "key": "V"
             },
             "split": {
                 "title": "ವಿಭಜಿಸು",
@@ -424,7 +422,6 @@
             "description": "ನಕ್ಷೆ ಮಾಹಿತಿ.",
             "key": "F",
             "data_layers": "ಡೇಟಾ ಪದರಗಳು",
-            "fill_area": "ಪ್ರದೇಶಗಳನ್ನು ತುಂಬು",
             "map_features": "‍ನಕ್ಷೆಯ ವೈಶಿಷ್ಟ್ಯತೆಗಳು"
         },
         "feature": {
@@ -1401,9 +1398,6 @@
                 },
                 "amenity/police": {
                     "name": "ಪೊಲೀಸು"
-                },
-                "amenity/post_box": {
-                    "name": "ಅಂಚೆಪೆಟ್ಟಿಗೆ"
                 },
                 "amenity/post_office": {
                     "name": "ಅಂಚೆ ಕಚೇರಿ"

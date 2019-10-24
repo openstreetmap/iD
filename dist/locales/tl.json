@@ -226,9 +226,7 @@
             },
             "reverse": {
                 "title": "Baliktarin",
-                "description": "Baliktarin ang direksyon ng linyang ito.",
-                "key": "V",
-                "annotation": "Binaliktad ang direksyon ng linya."
+                "key": "V"
             },
             "split": {
                 "title": "Hatiin",

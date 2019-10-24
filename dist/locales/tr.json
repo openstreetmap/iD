@@ -273,9 +273,7 @@
             },
             "reverse": {
                 "title": "Ters çevir",
-                "description": "Bu çizgiyi ters yöne çevir.",
-                "key": "V",
-                "annotation": "Çizgi ters çevrildi."
+                "key": "V"
             },
             "split": {
                 "title": "Böl",
@@ -483,7 +481,6 @@
             "switch": "Bu arka plana geçiş yap",
             "custom": "Özel",
             "overlays": "Katmanlar",
-            "imagery_source_faq": "İmge Bilgisi / Problem Bildir",
             "reset": "sıfırla",
             "display_options": "Görüntüleme Seçenekleri",
             "brightness": "Parlaklık",
@@ -513,7 +510,6 @@
                     "title": "OpenStreetMap'ın Notları"
                 }
             },
-            "fill_area": "Alanları Doldur",
             "map_features": "Nesneler",
             "autohidden": "Bu nesnelerin tamamını ekranda göstermek zor olacağı için nesneler otomatik olarak gizlendi. Düzenlemek için haritanın belli bir bölgesine yakınlaşabilirsin.",
             "osmhidden": "Bu nesneler OpenStreetMap katmanı gizli olduğu için otomatik olarak gizlenmiştir"
@@ -1054,7 +1050,6 @@
                     "merge": "Seçilmiş nesneleri birleştir",
                     "disconnect": "Nesneleri seçilmiş bağlantı noktasından ayır",
                     "split": "Çizgiyi seçilmiş bağlantı noktasından ikiye böl",
-                    "reverse": "Çizgiyi ters çevir",
                     "move": "Seçilmiş nesneleri taşı",
                     "rotate": "Seçilmiş nesneleri dönder",
                     "circularize": "Çizgiyi veya alanı daire haline getir",
@@ -2835,10 +2830,6 @@
                     "name": "Emniyet Müdürlüğü",
                     "terms": "Emniyet Müdürlüğü, Polis Noktası, Polis Merkezi"
                 },
-                "amenity/post_box": {
-                    "name": "Posta Kutusu",
-                    "terms": "Posta Kutusu"
-                },
                 "amenity/post_office": {
                     "name": "Postane",
                     "terms": "Postane"
@@ -3026,10 +3017,6 @@
                 "attraction/big_wheel": {
                     "name": "Dönme Dolap",
                     "terms": "Dönme Dolap"
-                },
-                "attraction/bumper_car": {
-                    "name": "Çarpışan Araba",
-                    "terms": "Çarpışan Araba"
                 },
                 "attraction/bungee_jumping": {
                     "name": "Bungee Jumping",
@@ -3708,10 +3695,6 @@
                     "name": "Anayol Bağlantı Yolu",
                     "terms": "Anayol Bağlantı Yolu, Anayola Bağlanan Yol"
                 },
-                "highway/raceway": {
-                    "name": "Araç Yarış Yolu",
-                    "terms": "Araç Yarış Yolu"
-                },
                 "highway/residential": {
                     "name": "Yerleşim Yeri Yolu",
                     "terms": "Yerleşim Yeri Yolu, Mahalle Arası Yol"
@@ -3885,10 +3868,6 @@
                 "landuse/commercial": {
                     "name": "Ticari Alan",
                     "terms": "Ticari Alan"
-                },
-                "landuse/construction": {
-                    "name": "İnşaat Alanı",
-                    "terms": "İnşaat Alanı"
                 },
                 "landuse/farm": {
                     "name": "Tarım Alanı"
@@ -4293,9 +4272,6 @@
                 "man_made/works": {
                     "name": "Fabrika",
                     "terms": "Fabrika, Sanayi"
-                },
-                "manhole": {
-                    "name": "Rogar"
                 },
                 "natural": {
                     "name": "Doğal"
@@ -5770,14 +5746,7 @@
             "OSM-India-facebook": {
                 "name": "OpenStreetMap Hindistan - Katılımcı mahalle haritalaması",
                 "description": "Hindistan'da OpenStreetMap'i geliştirin",
-                "extendedDescription": "Hindistan'da haritalama mı? Sorularınız var mı, buradan toplumla bağlantı kurmak mı istiyorsunuz? {Url} adresinden bize katılın. Hoşgeldiniz!",
-                "events": {
-                    "sotmasia2018": {
-                        "name": "Asya 2018 Haritanın Durumu ",
-                        "description": "Hindistan’daki Harita Asya 2018 OpenStreetMap bölge çapında etkinliğe katılın",
-                        "where": "Hint Enstitüsü Yönetimi, Bangalore, Hindistan"
-                    }
-                }
+                "extendedDescription": "Hindistan'da haritalama mı? Sorularınız var mı, buradan toplumla bağlantı kurmak mı istiyorsunuz? {Url} adresinden bize katılın. Hoşgeldiniz!"
             },
             "osm-india-forum": {
                 "name": "OpenStreetMap Hindistan forumu",

@@ -293,9 +293,7 @@
             },
             "reverse": {
                 "title": "Snúa við",
-                "description": "Láta þessa línu fara í öfuga átt.",
-                "key": "V",
-                "annotation": "Snéri við línu."
+                "key": "V"
             },
             "split": {
                 "title": "Aðskilja",
@@ -554,7 +552,6 @@
             "switch": "Skipta aftur í þennan bakgrunn",
             "custom": "Sérsniðið",
             "overlays": "Þekjur",
-            "imagery_source_faq": "Upplýsingar myndefnis / Tilkynna vandamál",
             "reset": "endurstilla",
             "display_options": "Valkostir birtingar",
             "brightness": "Birtustig",
@@ -597,7 +594,6 @@
                     "zoom": "Renna að gögnum"
                 }
             },
-            "fill_area": "Fylla svæði",
             "map_features": "Fitjur á korti",
             "autohidden": "Þessar fitjur hafa verið faldar sjálfvirkt því annars yrðu of margar sýndar á skjánum. Þú getur rennt að til að breyta þeim.",
             "osmhidden": "Þessar fitjur hafa verið faldar sjálfvirkt því að OpenStreetMap-lagið er falið."
@@ -1569,7 +1565,6 @@
                     "merge": "Sameina (setja saman) valdar fitjur",
                     "disconnect": "Aftengja fitjur við valinn hnút",
                     "split": "Aðskilja línu í tvennt við valinn hnút",
-                    "reverse": "Snúa við línu",
                     "move": "Færa valdar fitjur",
                     "rotate": "Snúa völdum fitjum",
                     "circularize": "Gera lokaða línu eða svæði hringlaga",
@@ -2778,15 +2773,6 @@
                 "playground": {
                     "label": "Tegund"
                 },
-                "playground/baby": {
-                    "label": "Barnastóll"
-                },
-                "playground/max_age": {
-                    "label": "Hámarksaldur"
-                },
-                "playground/min_age": {
-                    "label": "Lágmarksaldur"
-                },
                 "population": {
                     "label": "Íbúafjöldi"
                 },
@@ -3731,9 +3717,6 @@
                     "name": "Lögregla",
                     "terms": "löggan"
                 },
-                "amenity/post_box": {
-                    "name": "Póstkassi"
-                },
                 "amenity/post_office": {
                     "name": "Pósthús"
                 },
@@ -3967,9 +3950,6 @@
                 },
                 "attraction/big_wheel": {
                     "name": "Parísarhjól"
-                },
-                "attraction/bumper_car": {
-                    "name": "Ákeyrslubílar"
                 },
                 "attraction/bungee_jumping": {
                     "name": "Teygjustökk"
@@ -4585,9 +4565,6 @@
                 "highway/primary_link": {
                     "name": "Stofnrein"
                 },
-                "highway/raceway": {
-                    "name": "Keppnisbraut (mótorsport)"
-                },
                 "highway/residential": {
                     "name": "Íbúðagata"
                 },
@@ -4738,9 +4715,6 @@
                 },
                 "landuse/commercial": {
                     "name": "Atvinnusvæði"
-                },
-                "landuse/construction": {
-                    "name": "Byggingarframkvæmdir"
                 },
                 "landuse/farm": {
                     "name": "Akurlendi"
@@ -5167,15 +5141,6 @@
                 },
                 "man_made/works": {
                     "name": "Verksmiðja"
-                },
-                "manhole": {
-                    "name": "Mannop"
-                },
-                "manhole/drain": {
-                    "name": "Yfirfall"
-                },
-                "manhole/telecom": {
-                    "name": "Mannop fyrir fjarskipti"
                 },
                 "natural": {
                     "name": "Náttúrulegt"
@@ -7040,10 +7005,6 @@
                 "name": "OpenStreetMap Colorado",
                 "description": "Kortagerðarfólk og notendur OpenStreetMap í Colorado-fylki, BNA"
             },
-            "OSM-NYC": {
-                "name": "OpenStreetMap NYC",
-                "description": "Kortagerðarfólk og notendur OpenStreetMap, forritarar og áhugafólk á New York Metropolitan-svæðinu"
-            },
             "OSM-Portland": {
                 "name": "OpenStreetMap Portland",
                 "description": "Kortagerðarfólk og notendur OpenStreetMap á Portland-svæðinu",
@@ -7201,13 +7162,7 @@
                 "description": "Fylgstu með okkur á Twitter á {url}"
             },
             "OSMF": {
-                "name": "OpenStreetMap sjálfseignarstofnunin",
-                "events": {
-                    "sotm2018": {
-                        "name": "Ástand landakortsins 2018",
-                        "where": "Mílanó, Ítalíu"
-                    }
-                }
+                "name": "OpenStreetMap sjálfseignarstofnunin"
             }
         }
     }

@@ -396,9 +396,21 @@
             },
             "reverse": {
                 "title": "Invertir",
-                "description": "Hace que esta línea vaya en dirección opuesta.",
+                "description": {
+                    "point": "Dar vuelta la dirección de este punto.",
+                    "points": "Dar vuelta la dirección de estos puntos.",
+                    "line": "Hacer que esta línea vaya en la dirección opuesta.",
+                    "lines": "Hacer que estas líneas vayan en la dirección opuesta.",
+                    "features": "Dar vuelta la dirección de estos elementos."
+                },
                 "key": "I",
-                "annotation": "Línea invertida."
+                "annotation": {
+                    "point": "Un punto invertido.",
+                    "points": "Múltiples puntos invertidos.",
+                    "line": "Una línea invertida.",
+                    "lines": "Múltiples líneas invertidas.",
+                    "features": "Múltiples elementos invertidos."
+                }
             },
             "split": {
                 "title": "Dividir",
@@ -413,7 +425,7 @@
                     "area": "Límite de un área dividido.",
                     "multiple": "Límites de {n} líneas/áreas divididas."
                 },
-                "not_eligible": "Las líneas no se pueden dividir en su inicio o termino.",
+                "not_eligible": "Las líneas no se pueden dividir en su inicio o término.",
                 "multiple_ways": "Hay demasiadas líneas para dividir.",
                 "connected_to_hidden": "Esto no se puede dividir porque está conectado a un elemento oculto."
             },
@@ -697,7 +709,7 @@
             "switch": "Volver a este fondo",
             "custom": "Personalizado",
             "overlays": "Capas",
-            "imagery_source_faq": "Información de imágenes / Informar un problema",
+            "imagery_problem_faq": "Informar un problema de imágenes",
             "reset": "reiniciar",
             "reset_all": "Reiniciar todo",
             "display_options": "Opciones de pantalla",
@@ -709,6 +721,10 @@
                 "description": "Mostrar Minimapa",
                 "tooltip": "Muestra un mapa ampliado para ayudar a ubicar el área que se muestra actualmente.",
                 "key": "/"
+            },
+            "panel": {
+                "description": "Mostrar panel de detalles",
+                "tooltip": "Mostrar información de fondo avanzada."
             },
             "fix_misalignment": "Ajustar desplazamiento de imágenes",
             "offset": "Arrastre en cualquier lugar del área gris de abajo para ajustar el desplazamiento de imágenes, o introduzca los valores de desplazamiento en metros."
@@ -741,10 +757,19 @@
                     "zoom": "Acercar a datos"
                 }
             },
-            "fill_area": "Pintar las áreas",
+            "style_options": "Opciones de estilo",
+            "highlight_edits": {
+                "key": "G"
+            },
             "map_features": "Elementos del mapa",
             "autohidden": "Estos elementos se han ocultado automáticamente porque se mostrarían demasiados en pantalla. Puede acercarse para editarlos.",
             "osmhidden": "Estos elementos se han ocultado automáticamente porque la capa OpenStreetMap está oculta."
+        },
+        "visual_diff": {
+            "highlight_edits": {
+                "description": "Destacar cambios",
+                "tooltip": "Contornear elementos editados"
+            }
         },
         "photo_overlays": {
             "title": "Capas de fotos",
@@ -1315,6 +1340,11 @@
         "mapillary_images": {
             "tooltip": "Fotos a nivel calle de Mapillary"
         },
+        "mapillary_map_features": {
+            "title": "Elementos del mapa",
+            "tooltip": "Elementos del mapa de Mapillary",
+            "request_data": "Solicitar datos"
+        },
         "mapillary": {
             "title": "Mapillary",
             "signs": {
@@ -1382,7 +1412,7 @@
             "editing": {
                 "title": "Editar y guardar",
                 "select_h": "Seleccionar",
-                "select_left_click": "{leftclick} Haga clic con el botón izquierdo en un elemento para seleccionarlo. Esto lo resaltará con un brillo pulsante, y la barra lateral mostrará detalles sobre ese elemento, como su nombre o dirección.",
+                "select_left_click": "{leftclick} Haga clic con el botón izquierdo en un elemento para seleccionarlo. Esto lo destacará con un brillo pulsante, y la barra lateral mostrará detalles sobre ese elemento, como su nombre o dirección.",
                 "select_right_click": "{rightclick} Haga clic con el botón derecho en un elemento para mostrar el menú de edición que muestra las opciones disponibles; como rotar, mover y eliminar.",
                 "multiselect_h": "Multiselección",
                 "multiselect_shift_click": "`{shift}`+{leftclick} clic izquierdo para seleccionar varios elementos juntos. Esto hace que sea más fácil mover o eliminar varios elementos.",
@@ -1591,18 +1621,21 @@
             "rules": {
                 "title": "Reglas"
             },
+            "user_resolved_issues": "Problemas resueltos con sus ediciones",
+            "warnings_and_errors": "Advertencias y errores",
             "no_issues": {
                 "message": {
                     "everything": "Todo se ve bien",
                     "everything_in_view": "Todo lo que está a la vista se ve bien",
                     "edits": "Tus ediciones se ven bien",
-                    "edits_in_view": "Tus ediciones que están a la vista se ven bien"
+                    "edits_in_view": "Tus ediciones que están a la vista se ven bien",
+                    "no_edits": "Aún no tiene ediciones"
                 },
                 "hidden_issues": {
                     "none": "Los problemas detectados aparecerán aquí",
                     "elsewhere": "Problemas en otra parte: {count}",
-                    "other_features": "Problemas con otros elementos: {count}",
-                    "other_features_elsewhere": "Problemas en otros lugares con otros elementos: {count}",
+                    "everything_else": "Problemas con todo lo demás: {count}",
+                    "everything_else_elsewhere": "Problemas en otros lugares con todo lo demás: {count}",
                     "disabled_rules": "Problemas con reglas desactivadas: {count}",
                     "disabled_rules_elsewhere": "Problemas en otros lugares con reglas desactivadas: {count}",
                     "ignored_issues": "Problemas ignorados: {count}",
@@ -1720,16 +1753,17 @@
                 }
             },
             "fixme_tag": {
-                "title": "Solicitudes \"Fix me\" (Arregleme)",
                 "message": "{feature} tiene una solicitud \"Fix Me\" (Arregleme)",
-                "tip": "Encontrar elementos con etiquetas \"fixme\" (Arregleme)",
                 "reference": "Una etiqueta \"fixme\" (Arregleme) indica que un mapeador ha solicitado ayuda con un elemento."
             },
             "generic_name": {
-                "title": "Nombres sospechosos",
                 "message": "{feature} tiene el nombre sospechoso \"{name}\"",
-                "tip": "Encontrar elementos con nombres genéricos o sospechosos",
+                "message_language": "{feature} tiene el nombre sospechoso \"{name}\" en {language}",
                 "reference": "Los nombres deben ser los nombres reales y a la vista de los elementos."
+            },
+            "help_request": {
+                "title": "Solicitudes de ayuda",
+                "tip": "Encuentre elementos en los que otros solicitaron asistencia"
             },
             "incompatible_source": {
                 "title": "Fuentes sospechosas",
@@ -1741,19 +1775,22 @@
                     "reference": "Los productos de Google son propietarios y no deben utilizarse como referencias."
                 }
             },
+            "incorrect_name": {
+                "message": "{feature} tiene el nombre equivocado \"{name}\"",
+                "message_language": "{feature} tiene el nombre equivocado \"{name}\" en {language}"
+            },
             "invalid_format": {
                 "title": "Formato no válido",
                 "tip": "Encuentre etiquetas con formatos inesperados",
                 "email": {
-                    "message": "{feature} tiene un email no válido.",
-                    "message_multi": "{feature} tiene varias direcciones de email no válidas.",
+                    "message": "{feature} tiene una dirección de email no válida",
+                    "message_multi": "{feature} tiene varias direcciones de email no válidas",
                     "reference": "Las direcciones de email deben verse como \"usuario@ejemplo.com\"."
-                },
-                "website": {
-                    "message": "{feature} tiene un sitio web no válido",
-                    "message_multi": "{feature} tiene múltiples sitios web no válidos.",
-                    "reference": "Los sitios web deben comenzar con \"http\" o \"https\"."
                 }
+            },
+            "mismatched_geometry": {
+                "title": "Geometría no coincidente",
+                "tip": "Encuentra elementos con etiquetas y geometría en conflicto"
             },
             "missing_role": {
                 "title": "Roles faltantes",
@@ -1792,8 +1829,13 @@
                 },
                 "noncanonical_brand": {
                     "message": "{feature} se ve como una marca con etiquetas no estándar",
+                    "message_incomplete": "{feature} parece una marca con etiquetas incompletas",
                     "reference": "Todos los elementos de la misma marca deben etiquetarse de la misma manera."
                 }
+            },
+            "point_as_vertex": {
+                "message": "{feature} debe ser un punto independiente basado en sus etiquetas",
+                "reference": "Algunos elementos no deberían ser parte de líneas o áreas."
             },
             "private_data": {
                 "title": "Información privada",
@@ -1803,10 +1845,12 @@
                     "message": "{feature} podría estar etiquetado con información de contacto privada"
                 }
             },
+            "suspicious_name": {
+                "title": "Nombres sospechosos",
+                "tip": "Encontrar elementos con nombres genéricos o sospechosos"
+            },
             "tag_suggests_area": {
-                "title": "Líneas etiquetadas como áreas",
                 "message": "{feature} debe ser un área cerrada basada en la etiqueta \"{tag}\"",
-                "tip": "Buscar elementos que estén etiquetados como líneas y posiblemente deban etiquetarse como áreas",
                 "reference": "Las áreas deben tener los puntos finales conectados."
             },
             "unknown_road": {
@@ -1846,7 +1890,14 @@
                     "reference": "Los edificios con esquinas sin escuadrar a menudo se pueden dibujar con mayor precisión."
                 }
             },
+            "vertex_as_point": {
+                "message": "{feature} debe formar parte de una línea o área en función de sus etiquetas",
+                "reference": "Algunos elementos no deberían ser puntos independientes."
+            },
             "fix": {
+                "address_the_concern": {
+                    "title": "Abordar la inquietud"
+                },
                 "connect_almost_junction": {
                     "annotation": "Conectados los elementos muy cercanos."
                 },
@@ -1875,6 +1926,9 @@
                 "delete_feature": {
                     "title": "Eliminar este elemento"
                 },
+                "extract_point": {
+                    "title": "Extraer este punto"
+                },
                 "ignore_issue": {
                     "title": "Ignorar este problema"
                 },
@@ -1895,8 +1949,10 @@
                     "title": "Quitar de la relación"
                 },
                 "remove_generic_name": {
-                    "title": "Quitar el nombre",
                     "annotation": "Se quitó un nombre genérico."
+                },
+                "remove_mistaken_name": {
+                    "annotation": "Se eliminó un nombre equivocado."
                 },
                 "remove_private_info": {
                     "annotation": "Se quitó la información privada."
@@ -1910,6 +1966,9 @@
                 },
                 "remove_tags": {
                     "title": "Quitar las etiquetas"
+                },
+                "remove_the_name": {
+                    "title": "Eliminar el nombre"
                 },
                 "reposition_features": {
                     "title": "Reposicionar los elementos"
@@ -2268,7 +2327,8 @@
                     "sidebar": "Alternar barra lateral",
                     "wireframe": "Alterna el modo rejilla",
                     "osm_data": "Alternar datos de OpenStreetMap",
-                    "minimap": "Alterna el minimapa"
+                    "minimap": "Alterna el minimapa",
+                    "highlight_edits": "Destacar ediciones no guardadas"
                 },
                 "selecting": {
                     "title": "Seleccionar elementos",
@@ -2312,7 +2372,7 @@
                     "disconnect": "Desconecta los elementos en el nodo seleccionado",
                     "extract": "Extraer un punto de un elemento",
                     "split": "Divida una línea en dos en el nodo seleccionado",
-                    "reverse": "Invierte la dirección de una línea",
+                    "reverse": "Invertir elementos seleccionados.",
                     "move": "Mueve los elementos seleccionados",
                     "rotate": "Rota los elementos seleccionados",
                     "orthogonalize": "Escuadrar esquinas de una línea o área",
@@ -2596,6 +2656,9 @@
                 "attraction": {
                     "label": "Tipo"
                 },
+                "baby_seat": {
+                    "label": "Asiento de bebé"
+                },
                 "backrest": {
                     "label": "Respaldo"
                 },
@@ -2637,6 +2700,15 @@
                     "label": "Papelera",
                     "terms": "tacho de basura, basurero"
                 },
+                "blind": {
+                    "label": "Acceso para personas ciegas",
+                    "options": {
+                        "limited": "Limitado",
+                        "no": "No",
+                        "yes": "Sí"
+                    },
+                    "terms": "discapacidad visual, ciego"
+                },
                 "blood_components": {
                     "label": "Componentes de la sangre",
                     "options": {
@@ -2647,6 +2719,9 @@
                     }
                 },
                 "board_type": {
+                    "label": "Tipo"
+                },
+                "bollard": {
                     "label": "Tipo"
                 },
                 "booth": {
@@ -2784,6 +2859,9 @@
                         "forward": "Adelante",
                         "reversible": "Reversible"
                     }
+                },
+                "conveying_escalator": {
+                    "label": "Escalera mecánica"
                 },
                 "country": {
                     "label": "País"
@@ -3164,7 +3242,8 @@
                     "placeholder": "1-18"
                 },
                 "handrail": {
-                    "label": "Pasamanos"
+                    "label": "Pasamanos",
+                    "terms": "pasamanos, baranda"
                 },
                 "hashtags": {
                     "label": "Hashtags sugeridos",
@@ -3270,6 +3349,10 @@
                 },
                 "industrial": {
                     "label": "Tipo"
+                },
+                "informal": {
+                    "label": "Informal",
+                    "terms": "informal, no formal, no planificado, sin planificar, deseado"
                 },
                 "information": {
                     "label": "Tipo"
@@ -3395,6 +3478,10 @@
                     "label": "Nivel",
                     "terms": "nivel, piso del edificio, piso"
                 },
+                "level_semi": {
+                    "label": "Niveles",
+                    "terms": "pisos de edificio, cubiertas, pisos"
+                },
                 "levels": {
                     "label": "Niveles del edificio",
                     "placeholder": "2, 4, 6...",
@@ -3425,6 +3512,10 @@
                 "lock": {
                     "label": "Bloqueo"
                 },
+                "lockable": {
+                    "label": "Se puede cerrar con llave",
+                    "terms": "[traduce con sinónimos o términos relacionados el 'se puede cerrar con llave', separados por comas]"
+                },
                 "man_made": {
                     "label": "Tipo"
                 },
@@ -3444,6 +3535,10 @@
                 "material": {
                     "label": "Material",
                     "terms": "material"
+                },
+                "max_age": {
+                    "label": "Edad máxima",
+                    "terms": "límite de edad superior"
                 },
                 "maxheight": {
                     "label": "Altura máxima",
@@ -3478,6 +3573,10 @@
                 "microbrewery": {
                     "label": "Microcervecería",
                     "terms": "Microcervecería, cerveza artesanal"
+                },
+                "min_age": {
+                    "label": "Edad mínima",
+                    "terms": "límite de edad inferior"
                 },
                 "minspeed": {
                     "label": "Límite mínimo de velocidad",
@@ -3776,14 +3875,8 @@
                 "playground": {
                     "label": "Tipo"
                 },
-                "playground/baby": {
-                    "label": "Asiento de bebe"
-                },
-                "playground/max_age": {
-                    "label": "Edad máxima"
-                },
-                "playground/min_age": {
-                    "label": "Edad mínima"
+                "playground/theme": {
+                    "label": "Tema"
                 },
                 "polling_station": {
                     "label": "Lugar de votación",
@@ -3902,6 +3995,9 @@
                         "yes": "Aceptado"
                     },
                     "terms": "reserva, reservación"
+                },
+                "residential": {
+                    "label": "Tipo"
                 },
                 "resort": {
                     "label": "Tipo"
@@ -4174,7 +4270,11 @@
                     "terms": "Fecha de inicio, comienzo, inaguración"
                 },
                 "step_count": {
-                    "label": "Número de escalones"
+                    "label": "Número de escalones",
+                    "terms": "Número de escalones, Numero de escalones, escalones"
+                },
+                "stile": {
+                    "label": "Tipo"
                 },
                 "stop": {
                     "label": "Tipo de parada",
@@ -4188,6 +4288,11 @@
                 },
                 "stroller": {
                     "label": "Acceso para cochecitos",
+                    "options": {
+                        "limited": "Limitado",
+                        "no": "No",
+                        "yes": "Sí"
+                    },
                     "terms": " cochecitos, carriola, carrito de bebé"
                 },
                 "structure": {
@@ -4199,7 +4304,8 @@
                         "ford": "Vado",
                         "tunnel": "Túnel"
                     },
-                    "placeholder": "Desconocido"
+                    "placeholder": "Desconocido",
+                    "terms": "estructura, construcción"
                 },
                 "structure_waterway": {
                     "label": "Estructura",
@@ -4225,7 +4331,8 @@
                     "label": "Soporte"
                 },
                 "surface": {
-                    "label": "Superficie"
+                    "label": "Superficie",
+                    "terms": "superficie"
                 },
                 "surveillance": {
                     "label": "Tipo de vigilancia"
@@ -4313,6 +4420,9 @@
                     "placeholder": "Guía de alambre, enrejada, oculta/disfrazada, ..."
                 },
                 "tower/type": {
+                    "label": "Tipo"
+                },
+                "townhall/type": {
                     "label": "Tipo"
                 },
                 "tracktype": {
@@ -4458,6 +4568,9 @@
                 "wall": {
                     "label": "Tipo"
                 },
+                "waste": {
+                    "label": "Residuos"
+                },
                 "water": {
                     "label": "Tipo"
                 },
@@ -4484,6 +4597,11 @@
                 },
                 "wheelchair": {
                     "label": "Acceso en silla de ruedas",
+                    "options": {
+                        "limited": "Limitado",
+                        "no": "No",
+                        "yes": "Si"
+                    },
                     "terms": "Acceso en silla de ruedas, silla de ruedas, acceso para discapacitados, discapacitados"
                 },
                 "wholesale": {
@@ -4632,6 +4750,10 @@
                 "aeroway/runway": {
                     "name": "Pista de aterrizaje",
                     "terms": "pista, pista de aterrizaje, pista de despegue"
+                },
+                "aeroway/spaceport": {
+                    "name": "Puerto espacial",
+                    "terms": "cosmódromo, cosmodromo, centro de lanzamiento de cohetes, complejo de lanzamiento de cohetes, sitio de lanzamiento de cohetes, cohetes, puerto espacial"
                 },
                 "aeroway/taxiway": {
                     "name": "Pista de rodaje",
@@ -4873,6 +4995,10 @@
                     "name": "Comida rápida de Pescado y papas fritas",
                     "terms": "desayuno, cena, comedor, cena, comer, parrilla, almuerzo, mesa, café, cafe, papa fritas"
                 },
+                "amenity/fast_food/hot_dog": {
+                    "name": "Comida rápida perro caliente",
+                    "terms": "frankfurter, frank, puesto de perros calientes, sándwich, salchicha, wiener, perros calientes, perrito caliente, panchos"
+                },
                 "amenity/fast_food/ice_cream": {
                     "name": "Comida rápida de Helado"
                 },
@@ -4954,6 +5080,10 @@
                 "amenity/library": {
                     "name": "Biblioteca",
                     "terms": "biblioteca,archivo,filmoteca,hemeroteca"
+                },
+                "amenity/loading_dock": {
+                    "name": "Muelle de carga",
+                    "terms": "puerto, puerta, almacén, almacen, envío, envio, descarga, bahía de carga, bahia"
                 },
                 "amenity/love_hotel": {
                     "name": "Hotel para parejas",
@@ -5091,8 +5221,8 @@
                     "terms": "urna electoral, papeleta electoral, boleta electoral, democracia, elecciones, colegio electoral, votación, elecciones, cabina electoral, máquina de votación"
                 },
                 "amenity/post_box": {
-                    "name": "Buzón de correos",
-                    "terms": "buzón, casillero, apartado, correo, carta, encomienda"
+                    "name": "Buzón de correo",
+                    "terms": "correo, buzón, paquetes, honguito"
                 },
                 "amenity/post_depot": {
                     "name": "Oficina de clasificación de correos",
@@ -5303,6 +5433,22 @@
                     "name": "Estudio de grabación",
                     "terms": "estudio, estudio de grabación"
                 },
+                "amenity/studio/audio": {
+                    "name": "Estudio de grabación",
+                    "terms": "mezcla de audio, producción de audio, grabación de audio, estudio de audio, mezcla de sonido, producción de sonido, grabación de sonido, estudio de sonido"
+                },
+                "amenity/studio/radio": {
+                    "name": "Estación de radio",
+                    "terms": "radio am, radio fm, radiodifusión, estudio de radio,am, fm"
+                },
+                "amenity/studio/television": {
+                    "name": "Estación de televisión",
+                    "terms": "transmisión de televisión, estudio de televisión, canal de televisión, estación de televisión, tv"
+                },
+                "amenity/studio/video": {
+                    "name": "Estudio de cine",
+                    "terms": "producción de cine, estudio de cine, producción de video, grabación de video, estudio de video"
+                },
                 "amenity/swimming_pool": {
                     "name": "Piscina"
                 },
@@ -5338,6 +5484,10 @@
                     "name": "Ayuntamiento / Municipalidad",
                     "terms": "ayuntamiento, alcaldía, municipio, municipalidad, municipal, concejo, consistorio, cabildo, gobierno local, gobierno municipal, alcalde, intendente, concejales, ediles, comuna, casa consistorial"
                 },
+                "amenity/townhall/city": {
+                    "name": "Municipalidad / Ayuntamiento",
+                    "terms": "municipalidad, gobierno, alcalde, municipio, ayuntamiento, gobierno urbano, municipio"
+                },
                 "amenity/toy_library": {
                     "name": "Biblioteca de juguetes",
                     "terms": "juego, juguete"
@@ -5358,6 +5508,10 @@
                     "name": "Máquina de devolución de botellas",
                     "terms": "devolución de botella, retornable, botellas"
                 },
+                "amenity/vending_machine/bread": {
+                    "name": "Máquina expendedora de pan",
+                    "terms": "baguette, pan"
+                },
                 "amenity/vending_machine/cigarettes": {
                     "name": "Máquina expendedora de cigarrillos",
                     "terms": "tabaco, cigarro, cigarrillo, pucho, expendedor"
@@ -5373,6 +5527,10 @@
                 "amenity/vending_machine/drinks": {
                     "name": "Máquina expendedora de bebidas",
                     "terms": "bebida, gaseosa, refresco, expendedor"
+                },
+                "amenity/vending_machine/eggs": {
+                    "name": "Máquina expendedora de huevos",
+                    "terms": "huevos"
                 },
                 "amenity/vending_machine/electronics": {
                     "name": "Máquina expendedora de electrónica",
@@ -5401,6 +5559,10 @@
                 "amenity/vending_machine/ice_cream": {
                     "name": "Máquina expendedora de helados",
                     "terms": "Máquina expendedora de helados, chocolate, helado, helado, paleta, vainilla"
+                },
+                "amenity/vending_machine/ice_cubes": {
+                    "name": "Máquina expendedora de hielo",
+                    "terms": "hielo, Cubitos de hielo"
                 },
                 "amenity/vending_machine/newspapers": {
                     "name": "Máquina expendedora de periódico",
@@ -5458,6 +5620,10 @@
                     "name": "Abrevadero para animales",
                     "terms": "agua, animales, bebedero, estanque, posa, abrevadero, pilón, fuente, manantial, pozo"
                 },
+                "amenity/weighbridge": {
+                    "name": "Báscula de camiones",
+                    "terms": "estación de pesaje, báscula"
+                },
                 "area": {
                     "name": "Área",
                     "terms": "superficie, extensión, espacio, zona, sector, campo, dominio, territorio, tierra, parcela, terreno"
@@ -5482,8 +5648,8 @@
                     "terms": "rueda de la fortuna, vuelta al mundo, viaje a la luna, rueda moscovita, rueda de chicago, rueda chicagua, rueda gigante, rueda feria, juego mecánico, juego de feria"
                 },
                 "attraction/bumper_car": {
-                    "name": "Autos chocadores",
-                    "terms": "autos, carros, coches, chocadores, choque, locos, chocones, autos chocadores, autos chocones, autos locos, juego mecánico, juego de feria"
+                    "name": "Coches de choque",
+                    "terms": "atracción, atraccion, coche de choque, autos chocadores, autitos chocadores, carros chocones, parque de atracciones"
                 },
                 "attraction/bungee_jumping": {
                     "name": "Saldo de bungee",
@@ -5540,6 +5706,10 @@
                 "barrier/bollard": {
                     "name": "Bolardo",
                     "terms": "bolardo, baliza, noray, amarre, horquilla, poste, obstáculo"
+                },
+                "barrier/bollard_line": {
+                    "name": "Fila de bolardos",
+                    "terms": "bolardo, poste"
                 },
                 "barrier/border_control": {
                     "name": "Control fronterizo",
@@ -5643,6 +5813,10 @@
                 "barrier/wall": {
                     "name": "Muro",
                     "terms": "muro, murete, tapia, pared, paredón, tabique, muralla, piedra seca, pared en seco, pared seca, aparejo, barrera acústica, new jersey, gavión, erosión, muro de mar, dique marino, muro contra riadas, cortina, aparejo"
+                },
+                "barrier/wall/noise_barrier": {
+                    "name": "Barrera de ruido",
+                    "terms": "barrera acústica, muro de ruido, pared de ruido, barrera de sonido, berma de sonido, muro de sonido"
                 },
                 "boundary": {
                     "name": "Límite"
@@ -6432,6 +6606,10 @@
                     "name": "Sendero",
                     "terms": "vereda, sendero, senda, camino, vía, ramal, trocha, atajo, travesía, huella, rastro"
                 },
+                "highway/path/informal": {
+                    "name": "Camino informal",
+                    "terms": "rastro de contrabando, camino de vaca, línea de deseo, camino de deseo, línea deseada, camino deseado, camino de elefante, camino de juego, camino de cabra, camino de rebaño, camino de cerdos, acceso directo, atajo, camino social, rastro de uso, no planificado, deseado"
+                },
                 "highway/pedestrian_area": {
                     "name": "Área peatonal",
                     "terms": "área, area, centro, plaza, pasarela, peatón, peaton, peatonal"
@@ -6449,8 +6627,16 @@
                     "terms": "enlace carretera primaria, Enlace a carretera primaria, enlace a vía primaria"
                 },
                 "highway/raceway": {
-                    "name": "Pista de carreras (automovilismo)",
-                    "terms": "circuito, pista, carrera, competición, automovilismo, autódromo, formula uno, formula 1, karting, motocross, nascar, bicicross"
+                    "name": "Pista de carreras de automovilismo",
+                    "terms": "auto*, fórmula uno, f1, kart, motocross, nascar, carrera, pista"
+                },
+                "highway/raceway/karting": {
+                    "name": "Pista de carreras de karting",
+                    "terms": "karts, go karts, carreras de karts, pista de karting, automovilismo, superkarts, karting, kartódromos"
+                },
+                "highway/raceway/motocross": {
+                    "name": "Pista de carreras de motocross",
+                    "terms": "carreras off-road, motos offroad, circuito de motocross, circuito de motos, deportes de motor, motocross"
                 },
                 "highway/residential": {
                     "name": "Calle urbana",
@@ -6654,9 +6840,17 @@
                     "name": "Puerta interior",
                     "terms": "marco de la puerta, puerta de entrada, portal, sala de acceso, umbral"
                 },
+                "indoor/elevator": {
+                    "name": "Hueco del ascensor",
+                    "terms": "agujero del ascensor, ascensor"
+                },
                 "indoor/room": {
                     "name": "Habitación",
                     "terms": "antecámara, antesala, atrio, celda, cámara, vestíbulo, sala interior"
+                },
+                "indoor/stairs": {
+                    "name": "Escalera interior",
+                    "terms": "escalera, hueco de escalera, escalones"
                 },
                 "indoor/wall": {
                     "name": "Pared interior",
@@ -6710,8 +6904,8 @@
                     "terms": "área comercial, área de oficinas, área de negocios, parques empresariales, área de venta de productos, área de servicios"
                 },
                 "landuse/construction": {
-                    "name": "Área en construcción",
-                    "terms": "construcción, obras, excavaciones, edificaciones, instalaciones"
+                    "name": "Área de construcción",
+                    "terms": "edificio, excavadora, sitio de construcción, zona de construcción, grúa, demolición, desarrollo, infraestructura, construcción"
                 },
                 "landuse/farm": {
                     "name": "Tierra de labranza"
@@ -7272,6 +7466,34 @@
                     "name": "Faro",
                     "terms": "faro"
                 },
+                "man_made/manhole": {
+                    "name": "Pozo de inspección",
+                    "terms": "cubierta, agujero, alcantarillado, telecomunicaciones, boca de alcantarilla, registro"
+                },
+                "man_made/manhole/drain": {
+                    "name": "Desagüe pluvial",
+                    "terms": "cubierta, drenaje, agujero, lluvia, alcantarillado, alcantarilla, boca de tormenta, desagüe pluvial, desague, Colector de aguas pluviales"
+                },
+                "man_made/manhole/gas": {
+                    "name": "Pozo de servicio de gas",
+                    "terms": "cubierta, gas, calefacción, agujero, inspección, pozo"
+                },
+                "man_made/manhole/power": {
+                    "name": "Pozo de red eléctrica",
+                    "terms": "cubierta, agujero, eléctrico, electricidad, pozo, inspección"
+                },
+                "man_made/manhole/sewer": {
+                    "name": "Pozo de desagüe",
+                    "terms": "cubierta, desagüe, agujero, alcantarillado, pozo, inspección"
+                },
+                "man_made/manhole/telecom": {
+                    "name": "Pozo de telecomunicaciones",
+                    "terms": "cable, cubierta, teléfono, agujero, telecomunicaciones, pozo, inspección"
+                },
+                "man_made/manhole/water": {
+                    "name": "Pozo de servicio de agua",
+                    "terms": "cubierta, bebida, agujero, utilidad, agua, pozo, inspección"
+                },
                 "man_made/mast": {
                     "name": "Mástil",
                     "terms": "mástil, palo, poste, asta, antena, difusión, telefonía celular, mástil de comunicación, guyed, torre de teléfono móvil, mástil de radio, televisión, mástil de transmisión"
@@ -7396,6 +7618,10 @@
                     "name": "Túnel",
                     "terms": "agujero, excavación, pozo, paso subterráneo, paso subterraneo"
                 },
+                "man_made/utility_pole": {
+                    "name": "Poste de servicios públicos",
+                    "terms": "poste, servicios, electricidad, teléfono, cable"
+                },
                 "man_made/wastewater_plant": {
                     "name": "Planta depuradora de aguas residuales",
                     "terms": "depuradora, depuración, aguas residuales, EDAR, PTAR, planta depuradora, saneamiento, planta de tratamiento de aguas residuales"
@@ -7423,18 +7649,6 @@
                 "man_made/works": {
                     "name": "Fábrica",
                     "terms": "factoría, manofactura, industria, taller, ensamblaje, planta, materia prima, fabricado, producción, fabricación, ingenio, procesadora, refinería, cervecería, azucarera"
-                },
-                "manhole": {
-                    "name": "Pozo de inspección",
-                    "terms": "Cubierta, tapa, agujero, alcantarillado, telecomunicaciones, pozo, sumidero, boca de alcantarilla, boca de inspección, pozo de registro, abertura, boca de acceso"
-                },
-                "manhole/drain": {
-                    "name": "Desagüe pluvial",
-                    "terms": "Cubierta, tapa, desagüe, agujero, pozo, lluvia, alcantarillado, tormenta, boca de tormenta, alcantarillado pluvial"
-                },
-                "manhole/telecom": {
-                    "name": "Pozo de telecomunicaciones",
-                    "terms": "telecomunicaciones, teléfono, pozo, boca de inspección, pozo de registro, abertura, boca de acceso"
                 },
                 "military/bunker": {
                     "name": "Bunker militar",
@@ -8089,7 +8303,8 @@
                     "terms": "Eléctrico, tren ligero, plataforma, transporte público, ferrocarril, tranvía, trolley, trolebús, transporte"
                 },
                 "public_transport/platform/tram_point": {
-                    "name": "Parada / Plataforma de tranvía"
+                    "name": "Parada / Plataforma de tranvía",
+                    "terms": "Eléctrico, tren ligero, plataforma, transporte público, ferrocarril, tranvía, pista, tránsito, transporte"
                 },
                 "public_transport/platform/trolleybus": {
                     "name": "Parada / Plataforma de trolebús",
@@ -8407,6 +8622,10 @@
                 },
                 "shop/boutique": {
                     "name": "Boutique"
+                },
+                "shop/brewing_supplies": {
+                    "name": "Tienda de suministros de cerveza",
+                    "terms": "tienda de cerveza, tienda de suministros homebrew, homebrew"
                 },
                 "shop/butcher": {
                     "name": "Carnicería",
@@ -8797,6 +9016,10 @@
                     "name": "Tienda de tinta para impresora",
                     "terms": "tinta, cartuchos, toner, tóner, copiadora, fax, impresora, laser, chorro de tinta, insumos"
                 },
+                "shop/psychic": {
+                    "name": "Vidente",
+                    "terms": "astrología, bola de cristal, adivinación, adivina, vidente, espíritu, parapsicológico, parasicológico, parapsicológo, parasicológo, parapsicológa, parasicológa, vidente, medium, médium"
+                },
                 "shop/pyrotechnics": {
                     "name": "Tienda de fuegos artificiales",
                     "terms": "fuegos artificiales, pirotecnia"
@@ -8808,6 +9031,10 @@
                 "shop/religion": {
                     "name": "Tienda religiosa",
                     "terms": "religión, religioso, santerio, santos"
+                },
+                "shop/rental": {
+                    "name": "Tienda de alquiler",
+                    "terms": "alquilar, alquiler, vehículos, equipos"
                 },
                 "shop/scuba_diving": {
                     "name": "Tienda de buceo",
@@ -9510,6 +9737,10 @@
                 "description": "Amarillo = Datos del mapa de dominio público del Censo de los Estados Unidos. Rojo = Datos no encontrados en OpenStreetMap",
                 "name": "TIGER Roads 2018"
             },
+            "US-TIGER-Roads-2019": {
+                "description": "Amarillo = Datos del mapa de dominio público del censo de EE.UU. Rojo = Datos no encontrados en OpenStreetMap",
+                "name": "TIGER Carreteras 2019"
+            },
             "USDA-NAIP": {
                 "description": "El año más reciente de DOQQs del Programa Nacional de Imágenes de Agricultura (NAIP) para cada estado en Estados Unidos contiguos.",
                 "name": "Programa Nacional de Imágenes de Agricultura"
@@ -9535,6 +9766,12 @@
                     "text": "Realizado a través de Bruselas UrbIS® © - Distribución y Copyright CIRB"
                 },
                 "name": "UrbIS-Ortho 2018"
+            },
+            "UrbISOrtho2019": {
+                "attribution": {
+                    "text": "Realizado por medio de Brussels UrbIS® © - Distribución y Copyright CIRB"
+                },
+                "name": "UrbIS-Ortho 2019"
             },
             "UrbisAdmFR": {
                 "attribution": {
@@ -10032,6 +10269,11 @@
                 "description": "Capítulo de YouthMappers en la Universidad de Educación Ignatius Ajuru",
                 "extendedDescription": "Somos un Capítulo de Jóvenes de la Universidad de Educación de Ignatius Ajuru involucrado en la creación de mapas de nuestro entorno de participación colectiva y en el mapeo remoto de comunidades resilientes. Somos un equipo de voluntarios que utiliza openstreetmap y otra fuente geoespacial abierta para el mapeo."
             },
+            "ym-University-of-Nigeria-Enugu-Campus": {
+                "name": "LionMappersTeam (LMT) Enugu",
+                "description": "Capítulo de los YouthMappers en la Universidad de Nigeria, Campus Enugu",
+                "extendedDescription": "El LionMappersTeam (LMT) Enugu Campus es un afiliado de YouthMappers Network, con el único objetivo de brindar a los miembros la oportunidad de aprender y mejorar sus habilidades en el campo de la geoinformática y crear datos geográficos abiertos y análisis que aborden los desafíos definidos localmente a nivel mundial. Es un equipo de voluntarios para la provisión de información geográfica y de mapas de colaboración colectiva que utiliza Openstreetmap, Citizen Science y otras tecnologías geoespaciales para la investigación, la capacitación y la respuesta a los desafíos de la comunidad resistente. Participamos en aplicaciones de cartografía web, SIG y teledetección e investigación. Nos apasiona la información geográfica voluntaria. El SIG participativo y la ciencia ciudadana. Nuestras actividades principales incluyen cartografía en línea, cartografía de campo, talleres de capacitación y divulgación a la escuela secundaria, así como Mapeo de Respuesta Humanitaria / Desastres."
+            },
             "ym-University-of-Nigeria-Nsukka": {
                 "name": "LionMappersTeam (LMT) Nsukka",
                 "description": "El capítulo de YouthMappers en la Universidad de Nigeria, Nsukka",
@@ -10041,11 +10283,6 @@
                 "name": "UniqueMappersTeam (UMT) Port Harcourt",
                 "description": "Capítulo de los YouthMappers en la Universidad de Port Harcourt",
                 "extendedDescription": "UniqueMappersTeam (UMT) Port Harcourt es un grupo de acción y un equipo de voluntarios para mapeo colaborativo en línea dirigido a entrenar y capacitar a los miembros con habilidades de mapeo para crear datos geoespaciales abiertos y análisis que aborden los desafíos definidos localmente para la geoinformación y para brindar servicios de mapeo humanitario a las comunidades resilientes en el Delta del Níger, Nigeria y en otros lugares. Promovemos el voluntariado de mapeo colaborativo y la información Geográfica utilizando la plataforma OpenStreetMap (OSM) y otras plataformas accesibles para Mapeo de Respuesta Rápida, Mapeo de Desastres, Mapeo de Inteligencia Geográfica, actualizaciones de mapas y capacitación. Es un afiliado Capítulo de Campus del Equipo Humanitario OpenStreetMap (HOT). Es un equipo de proyecto-y-tarea de YouthMappers que brinda a los miembros la oportunidad de aprender y mejorar sus habilidades en Geoinformática para explorar oportunidades globales en el campo del Mapeo y la Geoinformación."
-            },
-            "ym-University-of-Nigeria-Enugu-Campus": {
-                "name": "LionMappersTeam (LMT) Enugu",
-                "description": "Capítulo de los YouthMappers en la Universidad de Nigeria, Campus Enugu",
-                "extendedDescription": "El LionMappersTeam (LMT) Enugu Campus es un afiliado de YouthMappers Network, con el único objetivo de brindar a los miembros la oportunidad de aprender y mejorar sus habilidades en el campo de la geoinformática y crear datos geográficos abiertos y análisis que aborden los desafíos definidos localmente a nivel mundial. Es un equipo de voluntarios para la provisión de información geográfica y de mapas de colaboración colectiva que utiliza Openstreetmap, Citizen Science y otras tecnologías geoespaciales para la investigación, la capacitación y la respuesta a los desafíos de la comunidad resistente. Participamos en aplicaciones de cartografía web, SIG y teledetección e investigación. Nos apasiona la información geográfica voluntaria. El SIG participativo y la ciencia ciudadana. Nuestras actividades principales incluyen cartografía en línea, cartografía de campo, talleres de capacitación y divulgación a la escuela secundaria, así como Mapeo de Respuesta Humanitaria / Desastres."
             },
             "osm-africa-telegram": {
                 "name": "Telegram de OpenStreetMap África",
@@ -10211,7 +10448,6 @@
                 "description": "El capítulo de YouthMappers en la Universidad de Jahangirnagar"
             },
             "ym-Khulna-University": {
-                "name": "OpenStreetMap",
                 "description": "El capítulo de YouthMappers en la Universidad de Khulna",
                 "extendedDescription": "Los estudiantes y profesores de KU de múltiples disciplinas tienen experiencia en la creación de datos abiertos para OSM para abordar los desafíos locales de desarrollo, incluida la seguridad alimentaria y otros temas."
             },
@@ -10228,14 +10464,7 @@
             "OSM-India-facebook": {
                 "name": "OpenStreetMap India - Mapeo participativo del barrio",
                 "description": "Mejore OpenStreetMap en India",
-                "extendedDescription": "¿Mapeando en India? ¿Tiene preguntas, quiere conectarse con la comunidad aquí? Únase a nosotros en {url}. ¡Todos son bienvenidos!",
-                "events": {
-                    "sotmasia2018": {
-                        "name": "State of the Map Asia 2018",
-                        "description": "Únase al evento regional OpenStreetMap 2018 en el State of the Map Asia en India",
-                        "where": "Instituto Indio de Administración, Bangalore, India"
-                    }
-                }
+                "extendedDescription": "¿Mapeando en India? ¿Tiene preguntas, quiere conectarse con la comunidad aquí? Únase a nosotros en {url}. ¡Todos son bienvenidos!"
             },
             "osm-india-forum": {
                 "name": "Foro de OpenStreetMap India",
@@ -10332,6 +10561,14 @@
                 "name": "OpenStreetMap Japón",
                 "description": "Mapeadores y usuarios de OpenStreetMap en Japón"
             },
+            "OSM-Korea-mailinglist": {
+                "name": "Lista de correo de OpenStreetMap Korea",
+                "description": "Talk-ko es la  lista de correo oficial para que las comunidades discutan asuntos sobre Corea"
+            },
+            "OSM-Korea-telegram": {
+                "name": "Telegram de OSM Korea",
+                "description": "Grupo no oficial para contribuyentes, comunidades y usuarios de OpenStreetMap en Corea para compartir y discutir."
+            },
             "OSM-MY-facebook": {
                 "name": "OpenStreetMap Malaysia en Facebook",
                 "description": "¡Para conversar sobre cualquier cosa relacionada con OpenStreetMap!"
@@ -10416,10 +10653,6 @@
                 "name": "Telegram de OpenStreetMap RU",
                 "description": "Chat de telegram de OpenStreetMap Rusia"
             },
-            "OSM-south-korea-telegram": {
-                "name": "Telegram de OSM Corea del Sur",
-                "description": "Canal no oficial para colaboradores de OpenStreetMap, comunidades y usuarios en Corea del Sur para compartir y discutir."
-            },
             "OSM-sri-lanka-facebook": {
                 "name": "OpenStreetMap Sri Lanka",
                 "description": "Mejorar OpenStreetMap en Sri Lanka",
@@ -10488,7 +10721,6 @@
                 "description": "Grupo de telegram de OpenStreetMap Belarús"
             },
             "be-facebook": {
-                "name": "Comunidad OpenStreetMap BE",
                 "description": "Mapeadores y OpenStreetMap en Facebook en Bélgica"
             },
             "be-forum": {
@@ -10535,8 +10767,7 @@
                 "description": "Portal de mapas, sitio web y contactos sobre miembros de OSM en Chequia"
             },
             "osmcz-facebook": {
-                "name": "OpenStreetMap CZ en Facebook",
-                "description": "¡Siga a la comunidad checa en Facebook, incluido el WeeklyOSM traducido!"
+                "name": "OpenStreetMap CZ en Facebook"
             },
             "osmcz-twitter": {
                 "name": "Twitter checo @osmcz",
@@ -10557,11 +10788,6 @@
             "dk-mailinglist": {
                 "name": "Lista de correo Talk-dk",
                 "description": "Una lista de correo para discutir OpenStreetMap en Dinamarca"
-            },
-            "ym-Queen-Mary-University-of-London": {
-                "name": "Queen Mary YouthMappers",
-                "description": "Capítulo de los YouthMappers en la Universidad Queen Mary de Londres",
-                "extendedDescription": "Este capítulo formará parte de las actividades de la Sociedad de Geografía Queen Mary"
             },
             "fi-forum": {
                 "name": "Foro de OpenStreetMap FI",
@@ -10707,11 +10933,6 @@
                 "description": "Capítulo de YouthMappers en el Politécnico de Milán",
                 "extendedDescription": "PoliMappers es una asociación de estudiantes voluntarios con sede en el Politecnico di Milano. La misión del grupo es capacitar y motivar a la próxima generación de mapeadores voluntarios y hacer mapeos utilizando software gratuito y de código abierto dentro de la universidad, así como en las escuelas primarias y secundarias."
             },
-            "ym-Yarmouk-University": {
-                "name": "YouthMappers en YU",
-                "description": "El capítulo de YouthMappers en la Universidad de Yarmuk",
-                "extendedDescription": "El capítulo de YouthMappers en YU es el primer grupo de mapeo en la región de Medio Oriente y África del Norte donde los refugiados, la sequía y la pobreza son crisis en aumento y en urgente necesidad de actividades de mapeo humanitarias para mitigar las consecuencias de tales crisis. Se alienta a YU Mappers a utilizar datos abiertos para abordar los desafíos en la región de MENA a fin de brindar alivio y desarrollo a áreas específicas dentro de la región."
-            },
             "kosovo-telegram": {
                 "name": "OpenStreetMap Kosovo en Telegram",
                 "description": "Grupo público de Telegram semi-oficial sobre Kosovo. Damos la bienvenida a todos los mapeadores de cualquier lugar en cualquier idioma."
@@ -10754,7 +10975,6 @@
                 "description": "Talk-pt es la lista de correo oficial de la comunidad OSM portuguesa"
             },
             "pt-telegram": {
-                "name": "Telegram de OpenStreetMap en Portugal",
                 "description": "Grupo de Telegram de la comunidad portuguesa de OpenStreetMap {url}"
             },
             "si-forum": {
@@ -10768,6 +10988,17 @@
             "si-twitter": {
                 "name": "Twitter de OpenStreetMap Eslovenia",
                 "description": "Sigue a OpenStreetMap Eslovenia en Twitter: {url}"
+            },
+            "Galicia-Telegram": {
+                "name": "Telegram de OpenStreetMap Galicia",
+                "description": "Telegram de OpenStreetMap para Galicia"
+            },
+            "Galicia-Twitter": {
+                "name": "Twitter de OpenStreetMap Galicia"
+            },
+            "galicia-wiki": {
+                "name": "Wikiproyecto de OpenStreetMap Galicia",
+                "description": "Todo lo que necesitas saber sobre el mapeo en Galicia: {url} (las herramientas del mundo OSM también están disponibles en gallego, ¡anímate!)"
             },
             "OSM-ES-mailinglist": {
                 "name": "Lista de correo Talk-es",
@@ -10820,19 +11051,37 @@
                 "description": "Reunión social de mapeadores y usuarios de East Midlands",
                 "extendedDescription": "Un grupo se ha estado reuniendo desde marzo de 2011, inicialmente en Nottingham, y más recientemente en Derby, y de vez en cuando en otras partes de East Midlands. Estas son reuniones sociales, pero son un excelente lugar para venir y hacer preguntas específicas sobre OSM, ya sea en el área o en general. En los meses de verano usualmente hacemos un mapeo ligero durante una hora en las cercanías de nuestro lugar de reunión. El grupo como un todo tiene un interés especial en el mapeo de los derechos de paso públicos y de vez en cuando tiene reuniones de mapeo para este propósito."
             },
+            "gb-irc": {
+                "name": "IRC de OpenStreetMap Reino Unido",
+                "description": "Únase a #osm-gb en irc.oftc.net (puerto 6667)",
+                "extendedDescription": "Únase a #osm-gb en irc.oftc.net (puerto 6667), sea paciente y espere unos minutos si hace una pregunta"
+            },
+            "uk-localchapter": {
+                "name": "OpenStreetMap Reino Unido",
+                "description": "El Capítulo local oficial para el Reino Unido (incluida Irlanda del Norte)",
+                "extendedDescription": "Apoyamos OpenStreetMap mediante la organización de eventos, el suministro de recursos a la comunidad, la creación de asociaciones y la difusión. Únase a OpenStreetMap Reino Unido aquí: {signupUrl}"
+            },
+            "uk-london-twitter": {
+                "name": "OpenStreetMap Londres en Twitter",
+                "description": "OpenStreetMap Londres en Twitter: {url}"
+            },
             "gb-mailinglist": {
                 "name": "Lista de correo de Talk-gb",
-                "description": "Talk-gb es la lista de comunicación principal para la comunidad OSM británica (incluida Irlanda del Norte)"
+                "description": "Talk-gb es la lista principal de foros de comunicación para la comunidad OSM del Reino Unido (incluida Irlanda del Norte)"
             },
             "mappa-mercia-group": {
                 "name": "Grupo local Mappa Mercia",
                 "description": "Un hogar para entusiastas de OpenStreetMap en las Midlands",
                 "extendedDescription": "Mappa Mercia es un proyecto para hacer crecer OpenStreetMap en West Midlands, Reino Unido. Organizamos eventos comunitarios, proporcionamos capacitación y apoyamos a las organizaciones locales que desean abrir sus datos."
             },
-            "gb-irc": {
-                "name": "IRC de OpenStreetMap Reino Unido",
-                "description": "Únase a #osm-gb en irc.oftc.net (puerto 6667)",
-                "extendedDescription": "Únase a #osm-gb en irc.oftc.net (puerto 6667), sea paciente y espere unos minutos si hace una pregunta"
+            "uk-twitter": {
+                "name": "OpenStreetMap Reino Unido en Twitter",
+                "description": "OpenStreetMap Reino Unido en Twitter: {url}"
+            },
+            "ym-Queen-Mary-University-of-London": {
+                "name": "Queen Mary YouthMappers",
+                "description": "Capítulo de los YouthMappers en la Universidad Queen Mary de Londres",
+                "extendedDescription": "Este capítulo formará parte de las actividades de la Sociedad de Geografía Queen Mary"
             },
             "ym-University-of-Exeter": {
                 "name": "University of Exeter British Red Cross Missing Maps",
@@ -10843,6 +11092,11 @@
                 "name": "Universidad de Warwick Resilience Mapping Society",
                 "description": "Capítulo de los YouthMappers de la Universidad de Warwick",
                 "extendedDescription": "Somos un grupo de cartógrafos entusiastas basados ​​en la Universidad de Warwick. Nuestro objetivo es hacer que la gente se entusiasme con el mapeo humanitario y ayudarles a comprender el impacto que esta actividad tiene en el campo. Estamos estrechamente alineados con Missing Maps y Doctors Without Borders UK y nos enfocamos en las tareas HOT en nuestras actividades y talleres de mapeo. Nuestros mapatones están listados en la página de Missing Maps cada vez que están programados."
+            },
+            "ym-Yarmouk-University": {
+                "name": "YouthMappers en YU",
+                "description": "El capítulo de YouthMappers en la Universidad de Yarmuk",
+                "extendedDescription": "El capítulo de YouthMappers en YU es el primer grupo de mapeo en la región de Medio Oriente y África del Norte donde los refugiados, la sequía y la pobreza son crisis en aumento y en urgente necesidad de actividades de mapeo humanitarias para mitigar las consecuencias de tales crisis. Se alienta a YU Mappers a utilizar datos abiertos para abordar los desafíos en la región de MENA a fin de brindar alivio y desarrollo a áreas específicas dentro de la región."
             },
             "ym-Sacred-Heart-Junior-College": {
                 "name": "YouthMappers en el  Sacred Heart Junior College",
@@ -10978,10 +11232,6 @@
                 "description": "Editores y usuarios de OpenStreetMap en el Estado de Colorado, EE.UU.",
                 "extendedDescription": "OpenStreetMap (OSM) Colorado es una colaboración local de personas interesadas en contribuir con sus esfuerzos para crear mapas gratuitos. Alentamos a todos nuestros cartógrafos a organizar o sugerir eventos de mapeo en todo el estado. Los encuentros pueden ser simples reuniones sociales, entrenamiento básico a avanzado de OSM o actividades de mapeo comunitario."
             },
-            "OSM-NYC": {
-                "name": "OpenStreetMap NYC",
-                "description": "Mapeadores y usuarios de OpenStreetMap, desarrolladores y entusiastas en el área Metropolitana de Nueva York"
-            },
             "OSM-Portland-forum": {
                 "name": "Grupo de Google de OpenStreetMap PDX",
                 "description": "Foro y lista de correo para usuarios de OpenStreetMap en el área de Portland",
@@ -11018,19 +11268,7 @@
             "OSM-US": {
                 "name": "OpenStreetMap EE.UU.",
                 "description": "Ayudamos a crecer y mejorar OpenStreetMap en los Estados Unidos.",
-                "extendedDescription": "Apoyamos OpenStreetMap celebrando conferencias anuales, proporcionando recursos comunitarios, creando alianzas y dando a conocer. Únase a OpenStreetMap EE.UU. aquí: {signupUrl}",
-                "events": {
-                    "sotmus2019-cfs": {
-                        "name": "Proponer una charla para SotM-US 2019",
-                        "description": "Hacemos un llamado a todos los miembros de la comunidad de OpenStreetMap para que compartan sus ideas y propuestas de sesión para State of the Map US 2019. Ya sea que sea nuevo en OSM o haya sido un colaborador principal desde el principio, ¡Queremos saber de usted!",
-                        "where": "Minneapolis, Minnesota"
-                    },
-                    "sotmus2019": {
-                        "name": "State of the Map US 2019",
-                        "description": "Únase a la comunidad OpenStreetMap en State of the Map US en Minneapolis, Minnesota. Conéctese con otros mapeadores, empresas, agencias gubernamentales y organizaciones sin fines de lucro, todos colaborando en torno al mapa gratuito y editable del mundo.",
-                        "where": "Minneapolis, Minnesota"
-                    }
-                }
+                "extendedDescription": "Apoyamos OpenStreetMap celebrando conferencias anuales, proporcionando recursos comunitarios, creando alianzas y dando a conocer. Únase a OpenStreetMap EE.UU. aquí: {signupUrl}"
             },
             "OSM-Utah": {
                 "name": "OpenStreetMap Utah",
@@ -11489,14 +11727,7 @@
             },
             "osm-latam": {
                 "name": "OpenStreetMap Latam",
-                "description": "Soporte de OpenStreetMap en América Latina",
-                "events": {
-                    "sotm-latam-2018": {
-                        "name": "State of the Map Latam 2018",
-                        "description": "State of the Map Latam es la conferencia anual para todos los creadores de mapas y usuarios de OpenStreetMap en América Latina. El programa incluye charlas, paneles, talleres y mapatones relacionados con OpenStreetMap.",
-                        "where": "Buenos Aires, Argentina"
-                    }
-                }
+                "description": "Soporte de OpenStreetMap en América Latina"
             },
             "OSM-Discord": {
                 "name": "Discord de OpenStreetMap",
@@ -11530,14 +11761,7 @@
             "OSMF": {
                 "name": "Fundación OpenStreetMap",
                 "description": "OSMF es una organización sin fines de lucro con sede en el Reino Unido que respalda el proyecto OpenStreetMap",
-                "extendedDescription": "OSMF apoya a OpenStreetMap mediante la recaudación de fondos, el mantenimiento de los servidores que impulsan OSM, la organización de la conferencia anual State of the Map y la coordinación de los voluntarios que mantienen OSM en funcionamiento. Puede mostrar su apoyo y tener una voz en la dirección de OpenStreetMap uniéndose como miembro de OSMF aquí: {signupUrl}",
-                "events": {
-                    "sotm2018": {
-                        "name": "State of the Map 2018",
-                        "description": "Únase a nosotros durante 3 días en Milán, Italia, para la conferencia anual mundial de OpenStreetMap, que reúne a todos en la comunidad para socializar, compartir y aprender.",
-                        "where": "Milán, Italia"
-                    }
-                }
+                "extendedDescription": "OSMF apoya a OpenStreetMap mediante la recaudación de fondos, el mantenimiento de los servidores que impulsan OSM, la organización de la conferencia anual State of the Map y la coordinación de los voluntarios que mantienen OSM en funcionamiento. Puede mostrar su apoyo y tener una voz en la dirección de OpenStreetMap uniéndose como miembro de OSMF aquí: {signupUrl}"
             }
         }
     }

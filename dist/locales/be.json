@@ -2,13 +2,13 @@
     "be": {
         "icons": {
             "download": "спампаваць",
-            "information": "інфо",
+            "information": "інфармацыя",
             "remove": "выдаліць",
             "undo": "скасаваць",
             "zoom_to": "наблізіць",
             "copy": "капіяваць",
             "open_wikidata": "адкрыць на wikidata.org",
-            "favorite": "любімае"
+            "favorite": "абранае"
         },
         "toolbar": {
             "inspect": "Агледзець",
@@ -19,17 +19,713 @@
         },
         "modes": {
             "add_feature": {
-                "title": "Дадаць функцыю"
+                "title": "Дадаць функцыю",
+                "description": "Пошук функцый, якія трэба дадаць на карту.",
+                "key": "Укладка",
+                "result": "{count} вынік",
+                "results": "{count} вынікаў"
+            },
+            "add_area": {
+                "title": "Палігон",
+                "description": "Дадайце на карту паркі, будынкі, азёры і іншыя палігоны.",
+                "tail": "Націсніце на карту, каб пачаць маляваць тэрыторыю. Напрыклад, парк, возера ці будынак.",
+                "filter_tooltip": "палігоны"
+            },
+            "add_line": {
+                "title": "Лінія",
+                "description": "Дадайце на карту аўтастрады, вуліцы, пешаходныя дарожкі, каналы ці іншыя лініі.",
+                "tail": "Націсніце на карту, каб пачаць маляваць дарогу, шлях ці маршрут.",
+                "filter_tooltip": "Лініі"
+            },
+            "add_point": {
+                "title": "Кропка",
+                "description": "Дадайце на карту рэстараны, помнікі, паштовыя скрыні ці іншыя кропкі.",
+                "tail": "Націсніце на карту, каб дадаць кропку.",
+                "filter_tooltip": "кропкі"
+            },
+            "add_note": {
+                "title": "Заўвага",
+                "label": "Дадаць заўвагу",
+                "description": "Выявілі праблему? Паведаміце іншым картаграфам.",
+                "tail": "Націсніце на карту, каб дадаць заўвагу.",
+                "key": "N"
+            },
+            "add_preset": {
+                "title": "Дадаць {feature}",
+                "point": {
+                    "title": "Дадайце {feature} у якасці кропкі"
+                },
+                "line": {
+                    "title": "Дадайце {feature} у якасці лініі"
+                },
+                "area": {
+                    "title": "Дадайце {feature} у якасці палігона"
+                },
+                "building": {
+                    "title": "Дадайце {feature} у якасці будынка"
+                }
+            },
+            "browse": {
+                "title": "Агляд",
+                "description": "Маштабаваць карту."
+            },
+            "draw_area": {
+                "tail": "Націсніце, каб дадаць вузлы да вашай тэрыторыі. Націсніце на першы вузел, каб скончыць рэдагаванне."
+            },
+            "draw_line": {
+                "tail": "Націсніце, каб дадаць больш вузлоў да лініі. Націсніце на іншыя лініі, каб злучыцца з імі, і двойчы пстрыкніце, каб скончыць рэдагаванне лініі."
+            },
+            "drag_node": {
+                "connected_to_hidden": "Аб'ект немагчыма адрэдагаваць, бо маецца злучэнне са схаваным аб'ектам."
             }
         },
         "operations": {
+            "add": {
+                "annotation": {
+                    "point": "Дададзена кропка.",
+                    "vertex": "На лініі дададзены вузел.",
+                    "relation": "Дададзена дачыненне.",
+                    "note": "Дададзена заўвага."
+                }
+            },
+            "start": {
+                "annotation": {
+                    "line": "Распачата маляванне лініі.",
+                    "area": "Распачата маляванне палігона."
+                }
+            },
+            "continue": {
+                "key": "А",
+                "title": "Працягнуць",
+                "description": "Працягнуць гэтую лінію.",
+                "not_eligible": "Тут няма ліній, якія можна працягнуць.",
+                "multiple": "Тут могуць быць працягнуты некалькі ліній. Каб выбраць патрэбную, зацісніце Shift і націсніце яе.",
+                "annotation": {
+                    "line": "Падоўжана лінія.",
+                    "area": "Дапоўнены палігон."
+                }
+            },
+            "cancel_draw": {
+                "annotation": "Скасаваць маляванне."
+            },
+            "change_role": {
+                "annotation": "Змененая роля ўдзельніка дачынення."
+            },
+            "change_tags": {
+                "annotation": "Зменены тэгі."
+            },
+            "circularize": {
+                "title": "Закругліць",
+                "description": {
+                    "line": "Ператварыць лінію ў акружнасць.",
+                    "area": "Ператварыць палігон у акружнасць."
+                },
+                "key": "О",
+                "annotation": {
+                    "line": "Лінія была пераўтворана ў акружнасць.",
+                    "area": "Палігон быў пераўтвораны ў акружнасць."
+                },
+                "not_closed": "Аб'ект нельга ператварыць у акружнасць - ён не замкнуты.",
+                "too_large": "Аб'ект нельга ператварыць у акружнасць, паколькі большая яго частка схаваная",
+                "connected_to_hidden": "Немагчыма пераўтварыць у акружнасць, бо маецца злучэнне са схаваным аб'ектам.",
+                "not_downloaded": "Аб'ект нельга ператварыць у акружнасць - яго часткі яшчэ не загружаныя."
+            },
+            "orthogonalize": {
+                "title": "Выраўнаваць вуглы",
+                "description": {
+                    "vertex": "Выраўнаваць гэты вугал.",
+                    "line": "Выраўнаваць вуглы ў лініі.",
+                    "area": "Выраўнаваць вуглы ў палігона."
+                },
+                "key": "Q",
+                "annotation": {
+                    "vertex": "Выраўнаваць адзiн вугал.",
+                    "line": "У лініі выраўнаваныя вуглы.",
+                    "area": "У палігона выраўнаваныя вуглы."
+                },
+                "end_vertex": "Аб'ект нельга ператварыць у квадрат - гэта канчатковы вузел.",
+                "square_enough": "Немагчыма выраўнаваць вуглы - ужо выканана.",
+                "not_squarish": "Выраўнаваць вуглы нельга - аб'ект не падобны на прамавугольнік.",
+                "too_large": "Вуглы аб'екта нельга выраўнаваць, паколькі большая яго частка схаваная.",
+                "connected_to_hidden": "Вуглы аб'екта нельга выраўнаваць, бо маецца злучэнне са схаваным аб'ектам.",
+                "not_downloaded": "Аб'ект нельга ператварыць у квадрат - яго часткі яшчэ не загружаныя."
+            },
+            "straighten": {
+                "title": "Выраўнаваць",
+                "description": {
+                    "points": "Выраўнаваць гэтыя кропкі.",
+                    "line": "Выраўнаваць гэтую лінію."
+                },
+                "key": "S",
+                "annotation": {
+                    "points": "Кропкі выпраўленыя.",
+                    "line": "Лінія выраўнавана."
+                },
+                "too_bendy": "Гэтую лінію нельга выраўнаваць - яна занадта выгнутая.",
+                "connected_to_hidden": "Гэтую лінію нельга выраўнаваць, бо маецца злучэнне са схаваным аб'ектам.",
+                "not_downloaded": "Нельга выраўнаваць - яго часткі яшчэ не загружаныя."
+            },
+            "delete": {
+                "title": "Выдаліць",
+                "description": {
+                    "single": "Выдаліць гэты аб'ект канчаткова.",
+                    "multiple": "Выдаліць гэтыя аб'екты канчаткова."
+                },
+                "annotation": {
+                    "point": "Кропка была выдалена.",
+                    "vertex": "Кропка была выдалена з лініі.",
+                    "line": "Лінія была выдалена.",
+                    "area": "Палігон быў выдалены.",
+                    "relation": "Дачыненне было выдалена.",
+                    "multiple": "Выдалена {n} аб'ектаў."
+                },
+                "too_large": {
+                    "single": "Гэты аб'ект нельга выдаліць, паколькі большая яго частка схаваная.",
+                    "multiple": "Гэтыя аб'екты нельга выдаліць, паколькі большая іх частка схаваная."
+                },
+                "incomplete_relation": {
+                    "single": "Гэты аб'ект нельга выдаліць, так як ён загружаны не цалкам.",
+                    "multiple": "Гэтыя аб'екты нельга выдаліць, так як яны загружаны не цалкам."
+                },
+                "part_of_relation": {
+                    "single": "Гэты аб'ект нельга выдаліць, так як ён - частка дачыненняў. Спачатку выдаліце аб'ект з дачыненняў.",
+                    "multiple": "Гэтыя аб'екты нельга выдаліць, так як яны - частка дачыненняў. Спачатку выдаліце аб'екты з дачыненняў."
+                },
+                "connected_to_hidden": {
+                    "single": "Гэты аб'ект нельга выдаліць, так як ён злучаны са схаваным аб'ектам.",
+                    "multiple": "Гэтыя аб'екты нельга выдаліць, так як яны злучаны са схаваным аб'ектам."
+                },
+                "not_downloaded": {
+                    "single": "Аб'ект нельга выдаліць - яго часткі яшчэ не былі загружаныя.",
+                    "multiple": "Аб'екты нельга выдаліць - іх часткі яшчэ не былі загружаныя."
+                },
+                "has_wikidata_tag": {
+                    "single": "Гэты аб'ект не можа быць выдалены праз наяўнасць тэгаў Wikidata",
+                    "multiple": "Гэтыя аб'екты не могуць быць выдалены праз наяўнасць тэгаў Wikidata"
+                }
+            },
+            "downgrade": {
+                "title": "Панізіць",
+                "description": {
+                    "building_address": "Выдаліць усе тэгі, акрамя адраса і будынка.",
+                    "building": "Выдаліць усе тэгі, акрамя будынка.",
+                    "address": "Выдаліць усе тэгі, акрамя адраса."
+                },
+                "annotation": {
+                    "building": {
+                        "single": "Панізіць аб'ект да звычайнага будынка.",
+                        "multiple": "Панізіць {n} аб'ектаў да звычайных будынкаў."
+                    },
+                    "address": {
+                        "single": "Панізіць аб'ект да адраса.",
+                        "multiple": "Панізіць {n} аб'ектаў да адрасоў."
+                    },
+                    "multiple": "Панізіць {n} аб'ектаў."
+                },
+                "has_wikidata_tag": {
+                    "single": "Аб'ект нельга панізіць, ён мае тэг Wikidata.",
+                    "multiple": "Аб'екты нельга панізіць, некаторыя маюць тэг Wikidata."
+                }
+            },
+            "add_member": {
+                "annotation": "У дачыненне дададзены ўдзельнік."
+            },
+            "delete_member": {
+                "annotation": "З дачынення выдалены ўдзельнік."
+            },
+            "reorder_members": {
+                "annotation": "У дачыненні зменены парадак ўдзельнікаў."
+            },
+            "connect": {
+                "annotation": {
+                    "from_vertex": {
+                        "to_point": "Лінія далучана да кропкі.",
+                        "to_vertex": "Лінія далучана да другой.",
+                        "to_line": "Лінія далучана да другой лініі.",
+                        "to_area": "Лінія далучана да палігона."
+                    }
+                }
+            },
             "merge": {
                 "title": "Аб'яднаць"
             }
         },
         "imagery": {
+            "AGIV": {
+                "attribution": {
+                    "text": "© agentschap Informatie Vlaanderen"
+                },
+                "name": "AIV Flanders найноўшыя аэрафотаздымкі"
+            },
+            "AGIV10cm": {
+                "attribution": {
+                    "text": "© agentschap Informatie Vlaanderen"
+                },
+                "name": "AIV Flanders 2013-2015 аэрафотаздымкі 10см"
+            },
+            "AGIVFlandersGRB": {
+                "attribution": {
+                    "text": "© agentschap Informatie Vlaanderen"
+                },
+                "name": "AIV Flanders GRB"
+            },
+            "AIV_DHMV_II_HILL_25cm": {
+                "attribution": {
+                    "text": "© agentschap Informatie Vlaanderen"
+                },
+                "name": "AIV Digitaal Hoogtemodel Vlaanderen II, разрозненне 0,25 м"
+            },
+            "AIV_DHMV_II_SVF_25cm": {
+                "attribution": {
+                    "text": "© agentschap Informatie Vlaanderen"
+                },
+                "name": "AIV Digitaal Hoogtemodel Vlaanderen II, разрозненне 0,25 м"
+            },
             "Bing": {
+                "description": "Спадарожнікавыя і аэрафотаздымкі.",
                 "name": "Bing аэрафотаздымкі"
+            },
+            "EOXAT2018CLOUDLESS": {
+                "attribution": {
+                    "text": "Sentinel-2 яснае надвор'е - https://s2maps.eu ад EOX IT Services GmbH (Утрымлівае змененыя даныя Copernicus Sentinel 2017 і 2018)"
+                },
+                "description": "Апрацаваныя здымкі Sentinel Satellite.",
+                "name": "eox.at 2018 яснае надвор'е"
+            },
+            "EsriWorldImagery": {
+                "attribution": {
+                    "text": "Умовы і зваротная сувязь"
+                },
+                "description": "Сусветныя здымкі Esri.",
+                "name": "Сусветныя здымкі Esri."
+            },
+            "EsriWorldImageryClarity": {
+                "attribution": {
+                    "text": "Умовы і зваротная сувязь"
+                },
+                "description": "Архіўная падкладка Esri, можа быць больш чыстай і акуратнай, чым актуальная.",
+                "name": "сусветныя здымкі Esri (Clarity)"
+            },
+            "MAPNIK": {
+                "attribution": {
+                    "text": "© OpenStreetMap contributors, CC-BY-SA"
+                },
+                "description": "Слой OpenStreetMap па змаўчанні.",
+                "name": "OpenStreetMap (Стандартны)"
+            },
+            "Mapbox": {
+                "attribution": {
+                    "text": "Умовы і зваротная сувязь"
+                },
+                "description": "Спадарожнікавыя і аэрафотаздымкі.",
+                "name": "Спадарожнікавыя здымкі Mapbox"
+            },
+            "Maxar-Premium": {
+                "attribution": {
+                    "text": "Умовы і зваротная сувязь"
+                },
+                "description": "Maxar Premium - мазаіка, зробленая з асноўнай падложкі Maxar і асобных раздзелаў, запоўненых +Vivid або карыстацкімі здымкамі, разрозненнем 50 см і вышэй, з актуальным абнаўленнем.",
+                "name": "Фотаздымкі Maxar Premium (бэта-версія)"
+            },
+            "Maxar-Standard": {
+                "attribution": {
+                    "text": "Умовы і зваротная сувязь"
+                },
+                "description": "Maxar Standard - гэта адборная зборка, якая займае 86% паверхні зямлі з дазволам 30-60 см, дзе магчыма, запоўненая Landsat. Сярэдні ўзрост складае 2,31 года, некаторыя регіёны абнаўляюцца 2 разы на год.",
+                "name": "Фотаздымкі Maxar Standard (бэта-версія)"
+            },
+            "OSM_Inspector-Addresses": {
+                "attribution": {
+                    "text": "© Geofabrik GmbH, OpenStreetMap contributors, CC-BY-SA"
+                },
+                "name": "OSM Інспектар: Адрасы"
+            },
+            "OSM_Inspector-Geometry": {
+                "attribution": {
+                    "text": "© Geofabrik GmbH, OpenStreetMap contributors, CC-BY-SA"
+                },
+                "name": "OSM Інспектар: Геаметрыя"
+            },
+            "OSM_Inspector-Highways": {
+                "attribution": {
+                    "text": "© Geofabrik GmbH, OpenStreetMap contributors, CC-BY-SA"
+                },
+                "name": "OSM Інспектар: Дарогі"
+            },
+            "OSM_Inspector-Multipolygon": {
+                "attribution": {
+                    "text": "© Geofabrik GmbH, OpenStreetMap contributors, CC-BY-SA"
+                },
+                "name": "OSM Інспектар: Палігоны"
+            },
+            "OSM_Inspector-Places": {
+                "attribution": {
+                    "text": "© Geofabrik GmbH, OpenStreetMap contributors, CC-BY-SA"
+                },
+                "name": "OSM Інспектар: Месцы"
+            },
+            "OSM_Inspector-Routing": {
+                "attribution": {
+                    "text": "© Geofabrik GmbH, OpenStreetMap contributors, CC-BY-SA"
+                },
+                "name": "OSM Інспектар: Маршруты"
+            },
+            "OSM_Inspector-Tagging": {
+                "attribution": {
+                    "text": "© Geofabrik GmbH, OpenStreetMap contributors, CC-BY-SA"
+                },
+                "name": "OSM Інспектар: Тэгі"
+            },
+            "SPW_ORTHO_LAST": {
+                "name": "SPW(allonie) апошнія аэрафотаздымкі"
+            },
+            "SPW_PICC": {
+                "name": "SPW(allonie) лічбавыя аэрафотаздымкі"
+            },
+            "US-TIGER-Roads-2014": {
+                "description": "На маштабах 16+, даныя, якія распаўсюджваюцца US Census з'яўляюцца агульнадаступнымі. На менш дакладных маштабах, толькі змены з 2006 за выключэннем даных, якія ўжо перанесены ў OpenStreetMap.",
+                "name": "TIGER Roads 2014"
+            },
+            "US-TIGER-Roads-2017": {
+                "description": "Жоўты = даныя, якія распаўсюджаныя US Census ў адкрытым доступе. Чырвоны = даныя недаступныя ў OpenStreetMap",
+                "name": "TIGER Roads 2017"
+            },
+            "US-TIGER-Roads-2018": {
+                "description": "Жоўты = даныя, якія распаўсюджаныя US Census ў адкрытым доступе. Чырвоны = даныя недаступныя ў OpenStreetMap",
+                "name": "TIGER Roads 2018"
+            },
+            "USDA-NAIP": {
+                "description": "Апошні год DOQQ ад Нацыянальнай праграмы земляробства (NAIP) для кожнага штата",
+                "name": "Здымкі Нацыянальнай праграмы земляробства"
+            },
+            "US_Forest_Service_roads_overlay": {
+                "description": "Дарогі: Зялёны контур = unclassified. Карычневы контур = track. Пакрыццё: gravel = светла-карычневыя запаўненні, asphalt = чорнае, paved = шэрае, ground = белае, concrete = сіняе, grass = зялёны. Seasonal = белыя палосы",
+                "name": "U.S. Forest Roads Overlay"
+            },
+            "UrbISOrtho2016": {
+                "attribution": {
+                    "text": "Выпушчана з дапамогай Brussels UrbIS®© - Distribution & Copyright CIRB"
+                },
+                "name": "UrbIS-Ortho 2016"
+            },
+            "UrbISOrtho2017": {
+                "attribution": {
+                    "text": "Выпушчана з дапамогай Brussels UrbIS®© - Distribution & Copyright CIRB"
+                },
+                "name": "UrbIS-Ortho 2017"
+            },
+            "UrbISOrtho2018": {
+                "attribution": {
+                    "text": "Выпушчана з дапамогай Brussels UrbIS®© - Distribution & Copyright CIRB"
+                },
+                "name": "UrbIS-Ortho 2018"
+            },
+            "UrbisAdmFR": {
+                "attribution": {
+                    "text": "Выпушчана з дапамогай Brussels UrbIS®© - Distribution & Copyright CIRB"
+                },
+                "name": "UrbisAdm FR"
+            },
+            "UrbisAdmNL": {
+                "attribution": {
+                    "text": "Выпушчана з дапамогай Brussels UrbIS®© - Distribution & Copyright CIRB"
+                },
+                "name": "UrbisAdm NL"
+            },
+            "Waymarked_Trails-Cycling": {
+                "attribution": {
+                    "text": "© waymarkedtrails.org, OpenStreetMap contributors, CC by-SA 3.0"
+                },
+                "name": "Пазначаныя маршруты: Турыстычныя"
+            },
+            "Waymarked_Trails-Hiking": {
+                "attribution": {
+                    "text": "© waymarkedtrails.org, OpenStreetMap contributors, CC by-SA 3.0"
+                },
+                "name": "Пазначаныя маршруты: Турыстычныя"
+            },
+            "Waymarked_Trails-MTB": {
+                "attribution": {
+                    "text": "© waymarkedtrails.org, OpenStreetMap contributors, CC by-SA 3.0"
+                },
+                "name": "Маркіраваныя маршруты: МТВ"
+            },
+            "Waymarked_Trails-Skating": {
+                "attribution": {
+                    "text": "© waymarkedtrails.org, OpenStreetMap contributors, CC by-SA 3.0"
+                },
+                "name": "Пазначаныя маршруты: Коўзанкі"
+            },
+            "Waymarked_Trails-Winter_Sports": {
+                "attribution": {
+                    "text": "© waymarkedtrails.org, OpenStreetMap contributors, CC by-SA 3.0"
+                },
+                "name": "Пазначаныя маршруты: Зімовыя віды спорту"
+            },
+            "basemap.at": {
+                "attribution": {
+                    "text": "basemap.at"
+                },
+                "description": "Базавая карта Аўстрыі, заснаваная на ўрадавых даных.",
+                "name": "basemap.at"
+            },
+            "basemap.at-orthofoto": {
+                "attribution": {
+                    "text": "basemap.at"
+                },
+                "description": "basemap.at з'яўляецца пераемнікам geoimage.at. Усе маёмасныя правы належаць basemap.at.",
+                "name": "basemap.at старыя аэрафотаздымкі"
+            },
+            "basemap.at-overlay": {
+                "attribution": {
+                    "text": "basemap.at"
+                },
+                "description": "Слой з подпісамі ад basemap.at.",
+                "name": "basemap.at - дапаможны слой"
+            },
+            "basemap.at-surface": {
+                "attribution": {
+                    "text": "basemap.at"
+                },
+                "description": "Паверхневы слой basemap.at.",
+                "name": "basemap.at Паверхня"
+            },
+            "basemap.at-terrain": {
+                "attribution": {
+                    "text": "basemap.at"
+                },
+                "description": "Ландшафтны слой ад basemap.at.",
+                "name": "basemap.at Ландшафт"
+            },
+            "eufar-balaton": {
+                "attribution": {
+                    "text": "EUFAR Balaton ortofotó 2010"
+                },
+                "description": "Аэрафотаздымкі 1940 года з прывязкай ад Балатонскага ліманалагічнага інстытута.",
+                "name": "EUFAR Балатонскія ортаздымкі"
+            },
+            "finds.jp_KBN_2500": {
+                "attribution": {
+                    "text": "GSI KIBAN 2500"
+                },
+                "description": "GSI Kiban 2500 ад find.jp. Падыходзіць для картаграфавання, але крыху састарэла.",
+                "name": "Japan GSI KIBAN 2500"
+            },
+            "gsi.go.jp": {
+                "attribution": {
+                    "text": "GSI Japan"
+                },
+                "description": "Japan GSI ортаздымкі. Падыходзіць для картаграфавання, але крыху састарэла.",
+                "name": "Japan GSI ортаздымкі"
+            },
+            "gsi.go.jp_airphoto": {
+                "attribution": {
+                    "text": "GSI Japan"
+                },
+                "description": "Japan GSI airphoto Imagery. Не цалкам ортарэктыфікаваныя але крыху больш новыя і/або з іншым пакццём, чым у GSI ortho Imagery.",
+                "name": "Japan GSI airphoto Imagery"
+            },
+            "gsi.go.jp_seamlessphoto": {
+                "attribution": {
+                    "text": "GSI Japan бясшвовыя фота"
+                },
+                "description": "Japan GSI seamlessphoto Imagery.  Калекцыя найноўшых фотаздымкаў GSO ortho, аэрафота, пост-катастрофы і інш.",
+                "name": "Japan GSI бясшвовыя здымкі"
+            },
+            "gsi.go.jp_std_map": {
+                "attribution": {
+                    "text": "GSI Japan"
+                },
+                "description": "Japan GSI Стандартная карта. Шырокае пакрыццё.",
+                "name": "Japan GSI Стандартная карта"
+            },
+            "helsingborg-orto": {
+                "attribution": {
+                    "text": "© Helsingborg municipality"
+                },
+                "description": "Ортафота муніцыпалітэта Хельсінгборг, 2016, агульнадаступныя",
+                "name": "Ортафота муніцыпалітэта Хельсінгбор"
+            },
+            "kalmar-orto-2014": {
+                "attribution": {
+                    "text": "© Kalmar municipality"
+                },
+                "description": "Ортафота муніцыпалітэта Кальмар, 2014, агульнадаступныя",
+                "name": "Ортафота муніцыпалітэта Кальмар"
+            },
+            "kalmar-orto-2016": {
+                "attribution": {
+                    "text": "© Kalmar municipality"
+                },
+                "description": "Ортафота паўднёвай часткі ўзбярэжжа муніцыпалітэта Кальмар, 2016, агульнадаступныя",
+                "name": "Ортафота паўднёвай часткі муніцыпалітэта Кальмар, 2016"
+            },
+            "kalmar-orto-2018": {
+                "attribution": {
+                    "text": "© Kalmar municipality"
+                },
+                "description": "Ортофота гарадскіх раёнаў муніцыпалітэта Кальмар, 2018",
+                "name": "Гарадскія ортафота муніцыпалітэта Кальмар, 2018"
+            },
+            "kelkkareitit": {
+                "attribution": {
+                    "text": "© Kelkkareitit.fi"
+                },
+                "description": "Kelkkareitit.fi траса снегаходаў ад OSM (Скандынавія)",
+                "name": "Скандынавія, траса снегаходаў"
+            },
+            "lantmateriet-orto1960": {
+                "attribution": {
+                    "text": "© Lantmäteriet, CC0"
+                },
+                "description": "Мазаіка шведскіх отафота за перыяд 1955-1965 гг. Могуць сустракацца як старыя, так і новыя выявы.",
+                "name": "Гістарычныя отафота Швецыі 1960"
+            },
+            "lantmateriet-orto1975": {
+                "attribution": {
+                    "text": "© Lantmäteriet, CC0"
+                },
+                "description": "Мазаіка шведскіх отафота за перыяд 1970-1980 гг. Могуць сустракацца як старыя, так і новыя выявы.",
+                "name": "Гістарычныя отафота Швецыі 1975"
+            },
+            "lantmateriet-topowebb": {
+                "attribution": {
+                    "text": "© Lantmäteriet, CC0"
+                },
+                "description": "Тапаграфічная карта Швецыі 1:50 000",
+                "name": "Тапаграфічная карта землеўпарадкавання"
+            },
+            "linkoping-orto": {
+                "attribution": {
+                    "text": "© Linköping municipality"
+                },
+                "description": "Ортафота муніцыпалітэта Лінчэпінг, 2010, агульнадаступныя",
+                "name": "Ортафота муніцыпалітэта Лінчэпінг"
+            },
+            "mapbox_locator_overlay": {
+                "attribution": {
+                    "text": "Умовы і зваротная сувязь"
+                },
+                "description": "Паказвае асноўныя функцыі, якія дапамогуць вам арыентавацца.",
+                "name": "Вызначэнне лакацыі"
+            },
+            "openpt_map": {
+                "attribution": {
+                    "text": "© OpenStreetMap contributors, CC-BY-SA"
+                },
+                "name": "OpenPT Map (падложка)"
+            },
+            "osm-gps": {
+                "attribution": {
+                    "text": "© OpenStreetMap contributors"
+                },
+                "description": "Публічныя трэкі GPS, загружаныя ў OpenStreetMap.",
+                "name": "OpenStreetMap GPS трэкі"
+            },
+            "osm-mapnik-black_and_white": {
+                "attribution": {
+                    "text": "© OpenStreetMap contributors, CC-BY-SA"
+                },
+                "name": "OpenStreetMap (Стандартны чорны і белы)"
+            },
+            "osm-mapnik-german_style": {
+                "attribution": {
+                    "text": "© OpenStreetMap contributors, CC-BY-SA"
+                },
+                "name": "OpenStreetMap (Нямецкі стыль)"
+            },
+            "osmse-ekonomiska": {
+                "attribution": {
+                    "text": "© Lantmäteriet"
+                },
+                "description": "Сканаванне \"Economic maps\" прыблізна. 1950–1980",
+                "name": "Lantmäteriet Economic Map 1950–1980"
+            },
+            "qa_no_address": {
+                "attribution": {
+                    "text": "Simon Poole, Data ©OpenStreetMap contributors"
+                },
+                "name": "QA Без адрасоў"
+            },
+            "skobbler": {
+                "attribution": {
+                    "text": "© Тайлы: skobbler Map data: OpenStreetMap contributors"
+                },
+                "name": "skobbler"
+            },
+            "skoterleder": {
+                "attribution": {
+                    "text": "© Trafikverket, CC0"
+                },
+                "description": "Снегаходныя маршруты",
+                "name": "Снегаходныя карты Швецыя"
+            },
+            "stamen-terrain-background": {
+                "attribution": {
+                    "text": "Тайлы карты ад Stamen Design, under CC BY 3.0. Data by OpenStreetMap, under ODbL"
+                },
+                "name": "Stamen Terrain"
+            },
+            "stockholm-orto": {
+                "attribution": {
+                    "text": "© Stockholm municipality, CC0"
+                },
+                "description": "Ортафота муніцыпалітэта Стакгольм, 2016, ліцэнзія CCO ",
+                "name": "Ортафота муніцыпалітэта Стакгольм"
+            },
+            "tf-cycle": {
+                "attribution": {
+                    "text": "Maps © Thunderforest, Data © OpenStreetMap contributors"
+                },
+                "name": "Thunderforest OpenCycleMap"
+            },
+            "tf-landscape": {
+                "attribution": {
+                    "text": "Карты © Thunderforest, Data © OpenStreetMap contributors"
+                },
+                "name": "Thunderforest Landscape"
+            },
+            "trafikverket-baninfo": {
+                "attribution": {
+                    "text": "© Trafikverket, CC0"
+                },
+                "description": "Шведская чыгуначная сетка, у тым ліку пераезды",
+                "name": "Чыгуначная сетка Trafikverket"
+            },
+            "trafikverket-baninfo-option": {
+                "attribution": {
+                    "text": "© Trafikverket, CC0"
+                },
+                "description": "Шведская чыгуначная сетка з некалькімі варыянтамі слаёў",
+                "name": "Чыгуначная сетка Trafikverket (з варыянтамі)"
+            },
+            "trafikverket-vagnat": {
+                "attribution": {
+                    "text": "© Trafikverket, CC0"
+                },
+                "description": "Дарожная сетка Швецыі NVDB",
+                "name": "Дарожная сетка Trafikverket "
+            },
+            "trafikverket-vagnat-extra": {
+                "attribution": {
+                    "text": "© Trafikverket, CC0"
+                },
+                "description": "Дадатковыя даныя дарожнай сеткі Швецыі NVDB: нумары аўтастрад, рэгуляванне хуткасці, зоны адпачынку, аўтобусныя прыпынкі, масты і тунэлі, камеры хуткасці",
+                "name": "Дарожная сетка Trafikverket, з дапаўненнямі"
+            },
+            "trafikverket-vagnat-navn": {
+                "attribution": {
+                    "text": "© Trafikverket, CC0"
+                },
+                "description": "Назвы вуліц Швецыі NVDB",
+                "name": "Trafikverket назвы вуліц"
+            },
+            "trafikverket-vagnat-option": {
+                "attribution": {
+                    "text": "© Trafikverket, CC0"
+                },
+                "description": "Дарожная сетка Швецыі NVDB з некалькімі варыянтамі пластоў карт",
+                "name": "Дарожная сетка Trafikverket (з варыянтамі)"
             }
         }
     }

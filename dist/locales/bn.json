@@ -175,9 +175,7 @@
             },
             "reverse": {
                 "title": "উল্টো করুন",
-                "description": "এই রেখাটিকে উল্টোদিকে পাঠান।",
-                "key": "V",
-                "annotation": "একটি রেখাকে উল্টো করা হয়েছে।"
+                "key": "V"
             },
             "split": {
                 "title": "ভাগ করুন",
@@ -866,9 +864,6 @@
                 "amenity/police": {
                     "name": "পুলিশ"
                 },
-                "amenity/post_box": {
-                    "name": "ডাকবাক্স"
-                },
                 "amenity/post_office": {
                     "name": "ডাকঘর"
                 },
@@ -997,9 +992,6 @@
                 },
                 "landuse/cemetery": {
                     "name": "কবরখানা"
-                },
-                "landuse/construction": {
-                    "name": "মেরামত"
                 },
                 "landuse/farmyard": {
                     "name": "খামার"

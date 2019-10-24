@@ -273,9 +273,7 @@
             },
             "reverse": {
                 "title": "Объръщане",
-                "description": "Сменете посоката на линията с противоположната.",
-                "key": "V",
-                "annotation": "Обърната е посоката на линия."
+                "key": "V"
             },
             "split": {
                 "title": "Разделяне",
@@ -505,7 +503,6 @@
             "switch": "Превключете обратно на тази базова карта",
             "custom": "Обичаен",
             "overlays": "Подложки",
-            "imagery_source_faq": "Информация за изображение / Докладвайте проблем",
             "reset": "презареждане",
             "display_options": "Опции за показване",
             "brightness": "Яркост",
@@ -531,7 +528,6 @@
                     "title": "OpenStreetMap данни"
                 }
             },
-            "fill_area": "Запълване на площи",
             "map_features": "Обекти от картата",
             "autohidden": "Тези обекти бяха скрити автоматично, защото щяха да са пказани твърде много на екрана. Можете да увеличите, за да ги редактирате.",
             "osmhidden": "Тези обекти бяха скрити автоматично, защото слоят в OpenStreetMap е скрит."
@@ -1669,15 +1665,6 @@
                     "label": "Изходна мощност",
                     "placeholder": "500 MW, 1000 MW, 2000 MW..."
                 },
-                "playground/baby": {
-                    "label": "Бебешка седалка"
-                },
-                "playground/max_age": {
-                    "label": "Максимална възраст"
-                },
-                "playground/min_age": {
-                    "label": "Минимална възраст"
-                },
                 "population": {
                     "label": "Население"
                 },
@@ -1932,9 +1919,6 @@
                 "amenity/police": {
                     "name": "Полиция"
                 },
-                "amenity/post_box": {
-                    "name": "Пощенска кутия"
-                },
                 "amenity/post_office": {
                     "name": "Поща"
                 },
@@ -2150,9 +2134,6 @@
                 },
                 "landuse/cemetery": {
                     "name": "Гробищен парк"
-                },
-                "landuse/construction": {
-                    "name": "Строеж"
                 },
                 "landuse/farmyard": {
                     "name": "Селскостопански двор"
@@ -2861,10 +2842,6 @@
             "OSM-Chattanooga": {
                 "name": "OSM Чатануга",
                 "description": "OpenStreetMap потребителската група за Чатануга"
-            },
-            "OSM-NYC": {
-                "name": "OpenStreetMap Ню Йорк",
-                "description": "Картографи и OpenStreetMap потребители, разработчици и ентусиасти в района на Ню Йорк Метрополитън"
             },
             "OSM-Portland": {
                 "name": "OpenStreetMap Портланд",

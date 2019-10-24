@@ -1304,15 +1304,6 @@
                 "plant/output/electricity": {
                     "placeholder": "500 MW, 1000 MW, 2000 MW..."
                 },
-                "playground/baby": {
-                    "label": "Ume aulkia"
-                },
-                "playground/max_age": {
-                    "label": "Gehienezko Adina"
-                },
-                "playground/min_age": {
-                    "label": "Gutxienezko Adina"
-                },
                 "population": {
                     "label": "Populazio"
                 },
@@ -1940,9 +1931,6 @@
                 "amenity/police": {
                     "name": "Polizia"
                 },
-                "amenity/post_box": {
-                    "name": "Postontzi"
-                },
                 "amenity/post_office": {
                     "name": "Postetxe"
                 },
@@ -2301,9 +2289,6 @@
                 "name": "Austriako OpenStreetMap",
                 "description": "Austriako OpenStreetMap-ari buruzko informazio plataforma"
             },
-            "be-facebook": {
-                "name": "OpenStreetMap-aren BE Komunitatea"
-            },
             "be-irc": {
                 "description": "Batu #osmbe  irc.oftc.net -en (6667 portua)"
             },
@@ -2330,8 +2315,7 @@
                 "description": "Txekiako OSM kideen mapa ataria, webgunea eta kontaktuak"
             },
             "osmcz-facebook": {
-                "name": "CZ-ko OpenStreetMap Facebook-en",
-                "description": "Jarraitu txekiar komunitatea Facebook-en -  AsterokoOSM itzulia barne!"
+                "name": "CZ-ko OpenStreetMap Facebook-en"
             },
             "osmcz-twitter": {
                 "name": "Txekiar twitter-a @osmcz ",
@@ -2400,26 +2384,12 @@
             "LATAM-Twitter": {
                 "description": "Jarrai gaitzazu Twitter-en hemen {url}"
             },
-            "osm-latam": {
-                "events": {
-                    "sotm-latam-2018": {
-                        "where": "Buenos Aires, Argentina"
-                    }
-                }
-            },
             "OSM-Telegram": {
                 "name": "OpenStreetMap-en Telegram-a"
             },
             "OSM-Twitter": {
                 "name": "OpenStreetMap-en Twitter-a",
                 "description": "Jarrai gaitzazu Twitter-en hemen {url} "
-            },
-            "OSMF": {
-                "events": {
-                    "sotm2018": {
-                        "where": "Milan, Italia"
-                    }
-                }
             }
         }
     }

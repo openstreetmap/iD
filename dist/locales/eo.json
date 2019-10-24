@@ -396,9 +396,21 @@
             },
             "reverse": {
                 "title": "Inversigi",
-                "description": "Igi ĉi tiun linion direkti al inversa direkto.",
+                "description": {
+                    "point": "Inversigi direkton de tiu ĉi punkto.",
+                    "points": "Inversigi direktojn de tiuj ĉi punktoj.",
+                    "line": "Inversigi direkton de tiu ĉi linio.",
+                    "lines": "Inversigi direktojn de tiuj ĉi linioj.",
+                    "features": "Inversigi direktojn de tiuj ĉi objektoj."
+                },
                 "key": "V",
-                "annotation": "Inversigis linion."
+                "annotation": {
+                    "point": "Inversigis punkton.",
+                    "points": "Inversigis kelkajn punktojn.",
+                    "line": "Inversigis linion.",
+                    "lines": "Inversigis kelkajn liniojn.",
+                    "features": "Inversigis kelkajn objektojn."
+                }
             },
             "split": {
                 "title": "Dividi",
@@ -696,10 +708,10 @@
             "switch": "Baskuli reen al ĉi tiu fono",
             "custom": "Propra",
             "overlays": "Surtavoloj",
-            "imagery_source_faq": "Pri fotaro / Raporti problemon",
+            "imagery_problem_faq": "Raporti problemon pri fotaro",
             "reset": "restarigi",
             "reset_all": "Reagordi",
-            "display_options": "Agordoj de vido",
+            "display_options": "Agordoj pri vido",
             "brightness": "Heleco",
             "contrast": "Kontrasto",
             "saturation": "Satureco",
@@ -708,6 +720,10 @@
                 "description": "Montri mapeton",
                 "tooltip": "Montri malgrandigitan mapon por helpi trovi nune montratan areon.",
                 "key": "/"
+            },
+            "panel": {
+                "description": "Montri panelon de detaloj",
+                "tooltip": "Montri pliajn informojn pri fotaro."
             },
             "fix_misalignment": "Ĝustigi fotaran deŝovon",
             "offset": "Trenu ie ajn ene griza kampo sube por korekti fotaran deŝovon aŭ entajpu valorojn de deŝovo en metroj."
@@ -740,10 +756,19 @@
                     "zoom": "Pligrandigu al datumoj"
                 }
             },
-            "fill_area": "Plenigi areojn",
+            "style_options": "Agordoj pri stiloj",
+            "highlight_edits": {
+                "key": "G"
+            },
             "map_features": "Map-objektoj",
             "autohidden": "Ĉi tiuj objektoj estis aŭtomate kaŝitaj, ĉar tro multe da ili montriĝus sur ekrano. Vi povas pligrandigi por redakti ilin.",
             "osmhidden": "Ĉi tiuj elementoj estas aŭtomate kaŝitaj ĉar la tavolo de OpenStreetMap estas kaŝita."
+        },
+        "visual_diff": {
+            "highlight_edits": {
+                "description": "Emfazi ŝanĝojn",
+                "tooltip": "Konturi redaktitajn objektojn"
+            }
         },
         "photo_overlays": {
             "title": "Fotaraj surtavoloj",
@@ -1313,6 +1338,11 @@
         "mapillary_images": {
             "tooltip": "Strat-nivelaj fotoj el Mapillary"
         },
+        "mapillary_map_features": {
+            "title": "Map‑objektoj",
+            "tooltip": "Map‑objektoj el Mapillary",
+            "request_data": "Peti datumojn"
+        },
         "mapillary": {
             "title": "Mapillary",
             "signs": {
@@ -1594,13 +1624,14 @@
                     "everything": "Ĉio ŝajnas ĝuste",
                     "everything_in_view": "Ĉio en la videbla areo ŝajnas ĝuste",
                     "edits": "Viaj redaktoj ŝajnas ĝuste",
-                    "edits_in_view": "Viaj redaktoj en la videbla areo ŝajnas ĝuste"
+                    "edits_in_view": "Viaj redaktoj en la videbla areo ŝajnas ĝuste",
+                    "no_edits": "Vi havas ankoraŭ neniujn redaktojn"
                 },
                 "hidden_issues": {
                     "none": "Trovitaj problemoj aperos tie ĉi",
                     "elsewhere": "Problemoj aliloke: {count}",
-                    "other_features": "Problemoj pri aliaj objektoj: {count}",
-                    "other_features_elsewhere": "Problemoj aliloke pri aliaj objektoj: {count}",
+                    "everything_else": "Problemoj pri aliaj objektoj: {count}",
+                    "everything_else_elsewhere": "Problemoj ĉie pri aliaj objektoj: {count}",
                     "disabled_rules": "Problemoj pri malŝaltitaj reguloj: {count}",
                     "disabled_rules_elsewhere": "Problemoj aliloke pri malŝaltitaj reguloj: {count}",
                     "ignored_issues": "Ignorataj problemoj: {count}",
@@ -1718,16 +1749,17 @@
                 }
             },
             "fixme_tag": {
-                "title": "Etikedo “riparu min!”",
                 "message": "{feature} havas la etikedon “riparu min!”",
-                "tip": "Trovi objektojn kun etikedoj “riparu min!” («fixme»)",
                 "reference": "La etikedo “riparu min!” («fixme») indikas, ke mapigisto petis pri helpo pri tiu objekto."
             },
             "generic_name": {
-                "title": "Ŝajne eraraj nomoj",
                 "message": "{feature} havas ŝajne eraran nomon “{name}”",
-                "tip": "Trovi objektojn kun priskribantaj (malveraj) kaj ŝajne eraraj nomoj",
+                "message_language": "{feature} havas ŝajne eraran nomon “{name}” en {language}",
                 "reference": "Nomoj estu aktualaj, videblaj de tero nomoj de objektoj."
+            },
+            "help_request": {
+                "title": "Petoj pri helpo",
+                "tip": "Trovi objektojn pri kiuj aliaj homoj petis helpon"
             },
             "incompatible_source": {
                 "title": "Ŝajne malpermesataj fontoj",
@@ -1739,19 +1771,22 @@
                     "reference": "Produktoj de Google estas komercaj kaj ne estu uzataj kiel referencoj."
                 }
             },
+            "incorrect_name": {
+                "message": "{feature} havas eraran nomon “{name}”",
+                "message_language": "{feature} havas eraran nomon “{name}” en {language}"
+            },
             "invalid_format": {
                 "title": "Erara tekstaranĝo",
                 "tip": "Trovi etikedojn kun eraro formo",
                 "email": {
                     "message": "{feature} havas malĝustan retpoŝtan adreson",
-                    "message_multi": "{feature} havas kelkajn malĝustajn retpoŝtajn adresojn.",
+                    "message_multi": "{feature} havas kelkajn malĝustajn retpoŝtajn adresojn",
                     "reference": "Retpoŝta adreso estu kiel “uzanto@example.com”."
-                },
-                "website": {
-                    "message": "{feature} havas malĝustan retejon.",
-                    "message_multi": "{feature} havas kelkajn malĝustajn retejojn.",
-                    "reference": "Adresoj de retejoj komencu per “http” aŭ “https”."
                 }
+            },
+            "mismatched_geometry": {
+                "title": "Nekongrua geometrio",
+                "tip": "Trovi objektojn kun konfliktajn etikedojn kaj geometrio"
             },
             "missing_role": {
                 "title": "Mankantaj roloj",
@@ -1790,8 +1825,13 @@
                 },
                 "noncanonical_brand": {
                     "message": "{feature} ŝajnas esti marko kun nenormaj etikedoj.",
+                    "message_incomplete": "{feature} ŝajnas esti marko kun nekompletaj etikedoj",
                     "reference": "Ĉiuj objektoj de la sama marko estu etikeditaj sammaniere."
                 }
+            },
+            "point_as_vertex": {
+                "message": "{feature} estu unuopa punkto surbaze de ĝiaj etikedoj",
+                "reference": "Iuj objektoj ne estu partoj de linioj aŭ de areoj."
             },
             "private_data": {
                 "title": "Privataj informoj",
@@ -1801,10 +1841,12 @@
                     "message": "{feature} povas esti etikedita per privataj kontaktaj informoj"
                 }
             },
+            "suspicious_name": {
+                "title": "Ŝajne eraraj nomoj",
+                "tip": "Trovi objektojn kun priskribantaj (malveraj) kaj ŝajne eraraj nomoj"
+            },
             "tag_suggests_area": {
-                "title": "Linioj etikeditaj kiel areoj",
                 "message": "{feature} estu fermita linio surbaze de la etikedo “{tag}”",
-                "tip": "Trovi etikedojn etikeditaj kiel linioj, kiuj probable estu etikeditaj kiel areoj",
                 "reference": "Areoj havu konektitajn finpunktojn."
             },
             "unknown_road": {
@@ -1844,6 +1886,10 @@
                     "reference": "Konstruaĵoj kun nekvadrataj anguloj kutime povas esti desegnitaj pli akurate."
                 }
             },
+            "vertex_as_point": {
+                "message": "{feature} estu parto de linio aŭ de areo surbaze de ĝiaj etikedoj",
+                "reference": "Iuj objektoj ne estu unuopaj punktoj."
+            },
             "fix": {
                 "connect_almost_junction": {
                     "annotation": "Konektis tre proksimajn objektojn."
@@ -1873,6 +1919,9 @@
                 "delete_feature": {
                     "title": "Forigi tiun ĉi objekton"
                 },
+                "extract_point": {
+                    "title": "Apartigi tiun ĉi punkton"
+                },
                 "ignore_issue": {
                     "title": "Ignori tiun ĉi problemon"
                 },
@@ -1893,8 +1942,10 @@
                     "title": "Forigi el rilato"
                 },
                 "remove_generic_name": {
-                    "title": "Forigi nomon",
                     "annotation": "Forigis misuzitan etikedon “nomo”."
+                },
+                "remove_mistaken_name": {
+                    "annotation": "Forigis eraran nomon."
                 },
                 "remove_private_info": {
                     "annotation": "Forigis privatajn informojn"
@@ -1908,6 +1959,9 @@
                 },
                 "remove_tags": {
                     "title": "Forigi etikedojn"
+                },
+                "remove_the_name": {
+                    "title": "Forigi nomon"
                 },
                 "reposition_features": {
                     "title": "Movi objektojn"
@@ -2258,7 +2312,7 @@
                     "keyboard": "Montri fulmoklavojn"
                 },
                 "display_options": {
-                    "title": "Agordoj de vido",
+                    "title": "Agordoj pri vido",
                     "background": "Montri agordojn pri fono",
                     "background_switch": "Baskuli reen al antaŭa fono",
                     "map_data": "Montri agordojn pri map-datumoj",
@@ -2266,7 +2320,8 @@
                     "sidebar": "Baskuli flankbreton",
                     "wireframe": "Baskuli map-plenigon",
                     "osm_data": "Baskuli map‑datumojn",
-                    "minimap": "Baskuli mapeton"
+                    "minimap": "Baskuli mapeton",
+                    "highlight_edits": "Emfazi nekonservitajn ŝanĝojn"
                 },
                 "selecting": {
                     "title": "Elekti objektojn",
@@ -2310,7 +2365,7 @@
                     "disconnect": "Malkunigi objektojn de elektita nodo",
                     "extract": "Apartigi punkton el objekto",
                     "split": "Disduigi linon de elektita nodo",
-                    "reverse": "Inversigi linion",
+                    "reverse": "Inversigi elektitajn objektojn",
                     "move": "Movi elektitajn objektojn",
                     "rotate": "Turni elektitajn objektojn",
                     "orthogonalize": "Kvadratigi angulojn de linio aŭ areo",
@@ -3673,15 +3728,6 @@
                 "playground": {
                     "label": "Speco"
                 },
-                "playground/baby": {
-                    "label": "Por beboj"
-                },
-                "playground/max_age": {
-                    "label": "Maksimuma aĝo"
-                },
-                "playground/min_age": {
-                    "label": "Minimuma aĝo"
-                },
                 "polling_station": {
                     "label": "Balotejo"
                 },
@@ -4931,10 +4977,6 @@
                     "name": "Balotejo (neŝanĝanta loko)",
                     "terms": "baloto,voĉdonejo,elektejo"
                 },
-                "amenity/post_box": {
-                    "name": "Poŝtkesto (senda)",
-                    "terms": "poshtkesto,posxtkesto,leterkesto,leterskatolo,leterujo"
-                },
                 "amenity/post_office": {
                     "name": "Poŝtoficejo",
                     "terms": "poshtoficejo,posxtoficejo,poŝtejo,poshtejo,posxtejo,poŝto"
@@ -5305,10 +5347,6 @@
                 "attraction/big_wheel": {
                     "name": "Spektoradego",
                     "terms": "giganta radego,radego de Ferris,granda radego"
-                },
-                "attraction/bumper_car": {
-                    "name": "Kolizi-aŭtetoj (allogaĵo)",
-                    "terms": "koliziaj aŭtetoj,aŭtetoj,dodgem"
                 },
                 "attraction/bungee_jumping": {
                     "name": "Saltado sur ŝnuro",
@@ -6274,10 +6312,6 @@
                     "name": "Unua-rang-voja ligilo",
                     "terms": "nodo,elveturejo,enveturejo,vojkruciĝo"
                 },
-                "highway/raceway": {
-                    "name": "Vojo aŭtokonkursada",
-                    "terms": "aŭtokonkursejo,aŭtodromo,kurejo,dromo,aŭtovego"
-                },
                 "highway/residential": {
                     "name": "Loka vojo",
                     "terms": "chedoma vojo,cxedoma vojo,loĝeja vojo,logheja vojo,logxeja vojo"
@@ -6534,10 +6568,6 @@
                 "landuse/commercial": {
                     "name": "Oficeja tereno",
                     "terms": "oficejo,komercejo,komercparko"
-                },
-                "landuse/construction": {
-                    "name": "Konstruejo",
-                    "terms": "konstruado"
                 },
                 "landuse/farm": {
                     "name": "Farmejo"
@@ -7241,18 +7271,6 @@
                 "man_made/works": {
                     "name": "Fabriko",
                     "terms": "produktejo,uzino,manufakturo"
-                },
-                "manhole": {
-                    "name": "Stratkanala kovrilo",
-                    "terms": "stratkanalo,kanalo,kloako,kablokanalo,pluvkanalo,kovrilo"
-                },
-                "manhole/drain": {
-                    "name": "Stratkanala (pluvakvo) kovrilo",
-                    "terms": "stratkanalo,kloako,kanalo,pluvakvo"
-                },
-                "manhole/telecom": {
-                    "name": "Stratkanala (telekomunikado) kovrilo",
-                    "terms": "stratkanalo,kabloj,subteraj kabloj,telefonaj kabloj"
                 },
                 "military/bunker": {
                     "name": "Ŝirmejo armea",
@@ -9685,14 +9703,7 @@
             "OSM-India-facebook": {
                 "name": "OpenStreetMap India - Participatory neighborhood mapping",
                 "description": "Plibonigi OpenStreetMap en Barato",
-                "extendedDescription": "Ĉu vi mapigas en Barato? Ĉu vi havas demandojn aŭ volas kuniĝi al tiu ĉi komunumo? Aliĝu al ni ĉe {url}. Bonvenon ĉiuj!",
-                "events": {
-                    "sotmasia2018": {
-                        "name": "State of the Map Asia 2018",
-                        "description": "Kunigu al regiona okazaĵo “State of the Map Asia 2018” en Barato",
-                        "where": "Indian Institute of Management, Bengaluro, Barato"
-                    }
-                }
+                "extendedDescription": "Ĉu vi mapigas en Barato? Ĉu vi havas demandojn aŭ volas kuniĝi al tiu ĉi komunumo? Aliĝu al ni ĉe {url}. Bonvenon ĉiuj!"
             },
             "OSM-india-mailinglist": {
                 "name": "Dissendolisto OpenStreetMap India",
@@ -9847,7 +9858,6 @@
                 "description": "Talegram-grupo OpenStreetMap Belorusujo"
             },
             "be-facebook": {
-                "name": "Facebook-grupo OpenStreetMap Belgujo",
                 "description": "OpenStreetMap Belgujo ĉe Facebook"
             },
             "be-forum": {
@@ -9894,8 +9904,7 @@
                 "description": "Mapo, retejo kaj kontakto al OSM-mapigistoj en Ĉeĥujo"
             },
             "osmcz-facebook": {
-                "name": "OpenStreetMap CZ ĉe Facebook",
-                "description": "Sekvu la Ĉeĥan komunumon ĉe Facebook – inkluzivante tradukitan WeeklyOSM!"
+                "name": "OpenStreetMap CZ ĉe Facebook"
             },
             "osmcz-twitter": {
                 "name": "Ĉeĥa Twitter-kanalo @osmcz",
@@ -10116,19 +10125,18 @@
                 "description": "Sociaj renkontiĝoj por uzantoj kaj mapigistoj en East Midlands",
                 "extendedDescription": "La grupo renkontiĝas de post marto 2011, komence en Nottingham kaj lastatempe en Derby kaj iam ie en East Midlands. Tiuj ĉi renkontiĝoj estas sociaj, sed ili estas bonegaj okazoj por demandi pri OpenStreetMap aŭ loke aŭ ĝenerale. Somere ni kutime iomete mapigas proksime de renkontejo. La grupo specife interesiĝas pri mapigi publikajn alirajn vojojn kaj renkontiĝoj de tempo al tempo temas pri tio."
             },
+            "gb-irc": {
+                "name": "OpenStreetMap United Kingdom IRC",
+                "description": "Aliĝu al #osm-gb ĉe irc.oftc.net (pordo 6667)",
+                "extendedDescription": "Aliĝu al #osm-gb ĉe irc.oftc.net (pordo 6667), bonvolu esti pacienca kaj atendi kelkajn minutojn post demandi"
+            },
             "gb-mailinglist": {
-                "name": "Dissendolisto talk-gb",
-                "description": "Talk-gb estas ĉefa komunika dissendolisto por OSM-komunumo en Britujo (inkluzive Nord-Irlandon)"
+                "name": "Dissendolisto talk-gb"
             },
             "mappa-mercia-group": {
                 "name": "Loka grupo Mappa Mercia",
                 "description": "Hejmo de OpenStreetMap-ŝatantoj en Midlands",
                 "extendedDescription": "Mappa Mercia estas projekto por disvastigi OpenStreetMap en West Midlands, Britujo. Ni organizas komunumajn eventojn, instruas kaj subtenas lokajn organizaĵojn, kiuj volas malfermi siajn datumojn."
-            },
-            "gb-irc": {
-                "name": "OpenStreetMap United Kingdom IRC",
-                "description": "Aliĝu al #osm-gb ĉe irc.oftc.net (pordo 6667)",
-                "extendedDescription": "Aliĝu al #osm-gb ĉe irc.oftc.net (pordo 6667), bonvolu esti pacienca kaj atendi kelkajn minutojn post demandi"
             },
             "OSM-CA-Slack": {
                 "name": "OSM-CA Slack",
@@ -10231,14 +10239,7 @@
             },
             "osm-latam": {
                 "name": "OpenStreetMap Latam",
-                "description": "Subteni OpenStreetMap en Latinameriko",
-                "events": {
-                    "sotm-latam-2018": {
-                        "name": "State of the Map Latam 2018",
-                        "description": "State of the Map Latam estas ĉiujara konferenco por ĉiuj uzantoj kaj mapigistoj de OpenStreetMap en Latinameriko, La programo enhavas parolojn, panelajn diskutojn, laboroj kaj kunajn mapigadojn rilatajn al OepnStreetMap.",
-                        "where": "Bonaero, Argentino"
-                    }
-                }
+                "description": "Subteni OpenStreetMap en Latinameriko"
             },
             "OSM-Discord": {
                 "name": "OpenStreetMap ĉe Discord",
@@ -10272,14 +10273,7 @@
             "OSMF": {
                 "name": "Fondaĵo OpenStreetMap",
                 "description": "OSMF estas ne-profit-cela organizaĵo en Britujo, kiu subtenas la projekton OpenStreetMap",
-                "extendedDescription": "OSMF subtenas OpenStreetMap per regali, prizorgi servilojn gastigatajn OSM, organizi la ĉiujaran konferencon “State of the Map” kaj kunordigi volontulojn, kiuj evoluigas la mapon. Vi povas oferi vian helpon kaj havi opinion pri direkto de la projekto OpenStreetMap per aniĝi OSMF tie ĉi: {signupUrl}",
-                "events": {
-                    "sotm2018": {
-                        "name": "State of the Map 2018",
-                        "description": "Kunigu nin por 3 tagoj en Milano, Italujo por la ĉiujara internacia konferenco pri OpenStreetMap por kunigi ĉiujn en la komunumo por sociumi, diskonigi kaj lerni.",
-                        "where": "Milano, Italujo"
-                    }
-                }
+                "extendedDescription": "OSMF subtenas OpenStreetMap per regali, prizorgi servilojn gastigatajn OSM, organizi la ĉiujaran konferencon “State of the Map” kaj kunordigi volontulojn, kiuj evoluigas la mapon. Vi povas oferi vian helpon kaj havi opinion pri direkto de la projekto OpenStreetMap per aniĝi OSMF tie ĉi: {signupUrl}"
             }
         }
     }

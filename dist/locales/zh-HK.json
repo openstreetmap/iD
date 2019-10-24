@@ -293,9 +293,7 @@
             },
             "reverse": {
                 "title": "反轉",
-                "description": "使這條綫的方向反轉。",
-                "key": "V",
-                "annotation": "已反轉一條綫。"
+                "key": "V"
             },
             "split": {
                 "title": "分割",
@@ -553,7 +551,6 @@
                     "title": "OpenStreetMap 備註"
                 }
             },
-            "fill_area": "填滿範圍",
             "map_features": "地圖特徵",
             "autohidden": "由於太多東西出現在螢幕上，這些特徵已被自動隱藏。你可以放大來編輯它們。"
         },
@@ -1123,7 +1120,6 @@
                     "merge": "結合(合併)已選擇特徵",
                     "disconnect": "在已選擇節點上斷開特徵",
                     "split": "在已選擇節點上將線一分為二",
-                    "reverse": "反轉一條線",
                     "move": "移動已選擇特徵",
                     "rotate": "旋轉已選擇特徵",
                     "circularize": "將已封閉的線或範圍圓形化",
@@ -2170,15 +2166,6 @@
                     "label": "電力輸出",
                     "placeholder": "500 MW, 1000 MW, 2000 MW..."
                 },
-                "playground/baby": {
-                    "label": "嬰兒座位"
-                },
-                "playground/max_age": {
-                    "label": "最大年齡"
-                },
-                "playground/min_age": {
-                    "label": "最小年齡"
-                },
                 "population": {
                     "label": "人口"
                 },
@@ -3190,10 +3177,6 @@
                     "name": "警署",
                     "terms": "Police,差館,派出所,警察局,警局,警署"
                 },
-                "amenity/post_box": {
-                    "name": "郵筒",
-                    "terms": "Mailbox,Post,Post Box,郵筒,郵箱"
-                },
                 "amenity/post_office": {
                     "name": "郵政局",
                     "terms": "Post Office,郵局,郵政局,香港郵政"
@@ -3461,10 +3444,6 @@
                 "attraction/big_wheel": {
                     "name": "摩天輪",
                     "terms": "Big Wheel,Ferris wheel"
-                },
-                "attraction/bumper_car": {
-                    "name": "碰碰車",
-                    "terms": "Bumper Car,碰碰車"
                 },
                 "attraction/bungee_jumping": {
                     "name": "笨豬跳",
@@ -4142,10 +4121,6 @@
                     "name": "市區幹道連接路",
                     "terms": "Primary Link,主要道路匝道,主要道路連接路,大路駁路"
                 },
-                "highway/raceway": {
-                    "name": "賽道(小型賽車)",
-                    "terms": "Racetrack (Motorsport), 賽道, 賽車車道"
-                },
                 "highway/residential": {
                     "name": "住宅區道路",
                     "terms": "Residential Road,住宅區道路,住宅路"
@@ -4323,10 +4298,6 @@
                 "landuse/commercial": {
                     "name": "商業區",
                     "terms": "商業區"
-                },
-                "landuse/construction": {
-                    "name": "地盤",
-                    "terms": "Construction,地盤,建築工程,建築物"
                 },
                 "landuse/farm": {
                     "name": "農地"
@@ -4743,18 +4714,6 @@
                 "man_made/works": {
                     "name": "工廠",
                     "terms": "Factory, 工場"
-                },
-                "manhole": {
-                    "name": "沙井",
-                    "terms": "Manhole,人孔,溝糟"
-                },
-                "manhole/drain": {
-                    "name": "雨水渠",
-                    "terms": "Storm Drain,排水道"
-                },
-                "manhole/telecom": {
-                    "name": "電訊沙井",
-                    "terms": "Telecom Manhole,電訊人孔,電信沙井"
                 },
                 "natural": {
                     "name": "自然景觀"
