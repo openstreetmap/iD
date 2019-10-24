@@ -30,7 +30,7 @@ _Breaking changes, which may affect downstream projects or sites that embed iD, 
 -->
 
 # 2.16.0
-##### 2019-Oct-24
+##### 2019-Oct-23
 
 #### :mega: Release Highlights
 * :vertical_traffic_light: We've added support for showing objects detected in Mapillary images. Detections include traffic signals, storm drains, trash cans, street lamps, crosswalks, fire hydrants, power poles, and more. Shout out to [@kratico] for adding this feature!<br/>
