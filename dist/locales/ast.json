@@ -250,9 +250,7 @@
             },
             "reverse": {
                 "title": "Invertir",
-                "description": "Facer qu'esta llinia vaiga en direición opuesta.",
-                "key": "V",
-                "annotation": "Invertída una llinia."
+                "key": "V"
             },
             "split": {
                 "title": "Dixebrar",
@@ -457,7 +455,6 @@
                     "title": "Datos d'OpenStreetMap"
                 }
             },
-            "fill_area": "Rellenar árees",
             "map_features": "Elementos del mapa",
             "autohidden": "Estos elementos tapeciéronse automáticamente porque s'amosaríen demasiaos en pantalla. Puedes averate pa editalos.",
             "osmhidden": "Estes carauterístiques tapeciéronse automáticamente porque la capa d'OpenStreetMap ta tapecida."
@@ -1528,12 +1525,6 @@
                     "label": "Potencia de salida",
                     "placeholder": "500 MW, 1000 MW, 2000 MW..."
                 },
-                "playground/max_age": {
-                    "label": "Edá máxima"
-                },
-                "playground/min_age": {
-                    "label": "Edá mínima"
-                },
                 "population": {
                     "label": "Población"
                 },
@@ -2242,10 +2233,6 @@
                     "name": "Policía",
                     "terms": "Policía, Comisaría, Cuartel, Guardia Civil"
                 },
-                "amenity/post_box": {
-                    "name": "Buzón",
-                    "terms": "Buzón, Correos, Carta"
-                },
                 "amenity/post_office": {
                     "name": "Oficina de correos",
                     "terms": "Oficina de correos, Carta, Paquete, Postal"
@@ -2405,10 +2392,6 @@
                 "attraction/big_wheel": {
                     "name": "Noria",
                     "terms": "rueda,atracciones"
-                },
-                "attraction/bumper_car": {
-                    "name": "Coches de choque",
-                    "terms": "coche,choque,atracciones,feria"
                 },
                 "attraction/carousel": {
                     "name": "Caballinos",
@@ -2903,9 +2886,6 @@
                     "name": "Enllaz de carretera autonómica I",
                     "terms": "Salida, accesu, enllaz, autonómica primaria, autonómica naranxa"
                 },
-                "highway/raceway": {
-                    "name": "Circuitu (Deportes de motor)"
-                },
                 "highway/residential": {
                     "name": "Rúa urbana"
                 },
@@ -3043,9 +3023,6 @@
                 },
                 "landuse/commercial": {
                     "name": "Área comercial"
-                },
-                "landuse/construction": {
-                    "name": "Construccion"
                 },
                 "landuse/farm": {
                     "name": "Tierra de llabor"
@@ -3351,12 +3328,6 @@
                 },
                 "man_made/works": {
                     "name": "Fábrica"
-                },
-                "manhole": {
-                    "name": "Tapa d'alcantariella"
-                },
-                "manhole/telecom": {
-                    "name": "Pozu de telecomunicaciones"
                 },
                 "natural": {
                     "name": "Natural"
@@ -4415,14 +4386,6 @@
             "talk-gh": {
                 "name": "Llista de corréu Talk-gh"
             },
-            "OSM-India-facebook": {
-                "events": {
-                    "sotmasia2018": {
-                        "name": "State of the Map Asia 2018",
-                        "description": "Xúnite al aconceyamientu rexonal d'OpenStreetMap de 2018 nel State of the Map Asia na India"
-                    }
-                }
-            },
             "OSM-india-mailinglist": {
                 "name": "Llista de corréu d'OpenStreetMap India"
             },
@@ -4514,9 +4477,6 @@
             "byosm": {
                 "name": "OpenStreetMap Bielorrusia",
                 "description": "Grupu de telegram d'OpenStreetMap Bielorrusia"
-            },
-            "be-facebook": {
-                "name": "Comunidá OpenStreetMap BE"
             },
             "be-forum": {
                 "name": "Foru d'OpenStreetMap BE",

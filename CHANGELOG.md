@@ -30,7 +30,13 @@ _Breaking changes, which may affect downstream projects or sites that embed iD, 
 -->
 
 # 2.16.0
-##### Planned: 2019-Oct-22
+##### 2019-Oct-23
+
+#### :mega: Release Highlights
+* :vertical_traffic_light: We've added support for showing objects detected in Mapillary images. Detections include traffic signals, storm drains, trash cans, street lamps, crosswalks, fire hydrants, power poles, and more. Shout out to [@kratico] for adding this feature!<br/>
+_Open the Map Data pane and enable the Map Features layer to see what has been detected. (shortcut <kbd>F</kbd>)_
+* :bookmark_tabs: You can now track changes that you've made while editing. Changed features will be highlighted green for additions, yellow for tag changes, and orange for geometry changes. Thanks [@Bonkles] for your work on this!<br/>
+_Press <kbd>G</kbd> to toggle change highlighting._
 
 #### :tada: New Features
 * Add Map Features layer showing objects detected in Mapillary images ([#5845], [#6792], thanks [@kratico])
@@ -150,6 +156,7 @@ _Breaking changes, which may affect downstream projects or sites that embed iD, 
 [@1ec5]: https://github.com/1ec5
 
 #### :rocket: Presets
+* Add Electrical Equipment Store and Telecom Retail Store presets
 * Add Indoor Stairwell and Indoor Elevator Shaft presets ([#6863], thanks [@danielsjf])
 * Add Loading Dock preset ([#6849])
 * Add Utility Pole preset ([#6848])

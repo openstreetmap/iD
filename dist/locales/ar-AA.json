@@ -100,9 +100,7 @@
                 }
             },
             "reverse": {
-                "title": "عكس",
-                "description": ".عكس إتجاه الخط",
-                "annotation": ".تم عكس إتجاه الخط"
+                "title": "عكس"
             },
             "split": {
                 "title": "تقسيم"

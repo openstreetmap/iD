@@ -396,9 +396,21 @@
             },
             "reverse": {
                 "title": "Byt riktning",
-                "description": "Byt riktning på linjen.",
+                "description": {
+                    "point": "Växla riktningen för denna punkt.",
+                    "points": "Växla riktningen för dessa punkter.",
+                    "line": "Gör att denna linje går i motsatt riktning.",
+                    "lines": "Gör att dessa linjer går i motsatt riktning.",
+                    "features": "Växla riktningen på dessa objekt."
+                },
                 "key": "V",
-                "annotation": "Bytte riktning på en linje."
+                "annotation": {
+                    "point": "Bytte riktning på en punkt.",
+                    "points": "Bytte riktning på flera punkter.",
+                    "line": "Bytte riktning på linje.",
+                    "lines": "Bytte riktning på flera linjer.",
+                    "features": "Bytte riktning på flera objekt."
+                }
             },
             "split": {
                 "title": "Dela upp",
@@ -697,7 +709,7 @@
             "switch": "Växla tillbaka till denna bakgrund",
             "custom": "Anpassa",
             "overlays": "Bildlager",
-            "imagery_source_faq": "Info om flygfotot / Rapportera ett problem",
+            "imagery_problem_faq": "Rapportera ett problem med flygfoto",
             "reset": "återställ",
             "reset_all": "Återställ allt",
             "display_options": "Visningsinställningar",
@@ -709,6 +721,10 @@
                 "description": "Visa minikarta",
                 "tooltip": "Visar en utzoomad karta för att hjälpa dig att hitta i området som visas för tillfället.",
                 "key": "/"
+            },
+            "panel": {
+                "description": "Visa detaljpanel",
+                "tooltip": "Visa avancerad bakgrundsinformation."
             },
             "fix_misalignment": "Justera bildplacering",
             "offset": "Dra i den grå ytan nedan för att justera bildplaceringen, eller ange hur mycket det ska justeras i meter."
@@ -741,10 +757,19 @@
                     "zoom": "Zooma till data"
                 }
             },
-            "fill_area": "Fyllda områden",
+            "style_options": "Stilinställningar",
+            "highlight_edits": {
+                "key": "G"
+            },
             "map_features": "Kartobjekt",
             "autohidden": "Dessa objekt har dolts automatiskt då för mycket annars skulle ha visats på skärmen. Du kan zooma in för att redigera dem. ",
             "osmhidden": "Dessa objekt har dolts automatiskt då OpenStreetMap-lagret är dolt."
+        },
+        "visual_diff": {
+            "highlight_edits": {
+                "description": "Markera ändringar",
+                "tooltip": "Rita en ram runt ändrade objekt"
+            }
         },
         "photo_overlays": {
             "title": "Bildlager",
@@ -1315,6 +1340,11 @@
         "mapillary_images": {
             "tooltip": "Gatubilder från Mapillary"
         },
+        "mapillary_map_features": {
+            "title": "Kartobjekt",
+            "tooltip": "Kartobjekt från Mapillary",
+            "request_data": "Begär data"
+        },
         "mapillary": {
             "title": "Mapillary",
             "signs": {
@@ -1591,18 +1621,21 @@
             "rules": {
                 "title": "Regler"
             },
+            "user_resolved_issues": "Problem lösta med dina ändringar",
+            "warnings_and_errors": "Varningar och fel",
             "no_issues": {
                 "message": {
                     "everything": "Allt ser bra ut",
                     "everything_in_view": "Allt i vyn ser bra ut",
                     "edits": "Dina ändringar ser bra ut",
-                    "edits_in_view": "Dina ändringar i vyn ser bra ut"
+                    "edits_in_view": "Dina ändringar i vyn ser bra ut",
+                    "no_edits": "Du har inga ändringar än"
                 },
                 "hidden_issues": {
                     "none": "Upptäckta problem kommer att visas här",
                     "elsewhere": "Problem i närheten: {count}",
-                    "other_features": "Problem med andras objekt: {count}",
-                    "other_features_elsewhere": "Problem i närheten med andras objekt: {count}",
+                    "everything_else": "Problem med allt annat: {count}",
+                    "everything_else_elsewhere": "Problem i närheten med allt annat: {count}",
                     "disabled_rules": "Problem med deaktiverade regler: {count}",
                     "disabled_rules_elsewhere": "Problem i närheten med deaktiverade regler: {count}",
                     "ignored_issues": "Ignorerade problem: {count}",
@@ -1720,16 +1753,17 @@
                 }
             },
             "fixme_tag": {
-                "title": "\"Fix Me\"-begäran",
                 "message": "{feature} har en \"Fix Me\"-begäran",
-                "tip": "Hitta objekt med \"fixme\"-taggar",
                 "reference": "En \"fixme\"-tagg indikerar att en kartläggare har begärt hjälp med ett objekt. "
             },
             "generic_name": {
-                "title": "Misstänkta namn",
                 "message": "{feature} har det misstänkta namnet \"{name}\"",
-                "tip": "Hitta objekt med generella eller misstänkta namn",
+                "message_language": "{feature} har det misstänkta namnet \"{name}\" på {language}",
                 "reference": "Namn bör vara de faktiska namnen som används i verkligheten för objekten."
+            },
+            "help_request": {
+                "title": "Hjälpförfrågningar",
+                "tip": "Hitta objekt där andra har bett om assistans"
             },
             "incompatible_source": {
                 "title": "Misstänkta källor",
@@ -1741,19 +1775,22 @@
                     "reference": "Google-produkter är proprietära och får inte användas som referenser."
                 }
             },
+            "incorrect_name": {
+                "message": "{feature} har det misstänka namnet \"{name}\"",
+                "message_language": "{feature} har det misstänkta namnet \"{name}\" på {language}"
+            },
             "invalid_format": {
                 "title": "Felaktig formatering",
                 "tip": "Hitta taggar med oväntat format",
                 "email": {
-                    "message": "{feature} har en felaktig e-postadress.",
-                    "message_multi": "{feature} har flera felaktiga e-postadresser.",
+                    "message": "{feature} har en felaktig e-postadress",
+                    "message_multi": "{feature} har flera felaktiga e-postadresser",
                     "reference": "E-postadresser måste vara på formen \"mottagare@exempel.se\"."
-                },
-                "website": {
-                    "message": "{feature} har en felaktig hemsideadress.",
-                    "message_multi": "{feature} har flera felaktiga hemsideadresser.",
-                    "reference": "Hemsideadresser bör inledas med \"http\" eller \"https\"."
                 }
+            },
+            "mismatched_geometry": {
+                "title": "Motstridig geometri",
+                "tip": "Hitta objekt med taggar och geometri som är i konflikt"
             },
             "missing_role": {
                 "title": "Saknar roller",
@@ -1792,8 +1829,13 @@
                 },
                 "noncanonical_brand": {
                     "message": "{feature} ser ut som ett varumärke med taggar som inte följer standard.",
+                    "message_incomplete": "{feature} ser ut som ett varumärke med ofullständiga taggar",
                     "reference": "Alla objekt för samma varumärke bör taggas på samma sätt."
                 }
+            },
+            "point_as_vertex": {
+                "message": "{feature} bör vara en fristående punkt baserad på dess taggar",
+                "reference": "Vissa objekt bör inte vara del av linjer eller områden. "
             },
             "private_data": {
                 "title": "Privat information",
@@ -1803,10 +1845,12 @@
                     "message": "{feature} har möjligtvis taggats med privat kontaktinformation"
                 }
             },
+            "suspicious_name": {
+                "title": "Suspekta namn",
+                "tip": "Hitta objekt med generiska eller suspekta namn"
+            },
             "tag_suggests_area": {
-                "title": "Linjer taggade som områden",
                 "message": "{feature} bör vara ett slutet område baserat på taggen \"{tag}\"",
-                "tip": "Hitta objekt som är taggade som linjer men som borde vara taggade som områden",
                 "reference": "Områden måste ha sammankopplade ändpunkter."
             },
             "unknown_road": {
@@ -1846,6 +1890,10 @@
                     "reference": "Byggnader med ej räta hörn kan ofta ritas mer exakt."
                 }
             },
+            "vertex_as_point": {
+                "message": "{feature} bör vara en del av en linje eller ett område baserat på dess taggar",
+                "reference": "Vissa objekt bör inte vara fristående punkter. "
+            },
             "fix": {
                 "connect_almost_junction": {
                     "annotation": "Kopplade samman närliggande objekt."
@@ -1875,6 +1923,9 @@
                 "delete_feature": {
                     "title": "Radera detta objekt"
                 },
+                "extract_point": {
+                    "title": "Extrahera denna punkt"
+                },
                 "ignore_issue": {
                     "title": "Ignorera detta problem"
                 },
@@ -1895,8 +1946,10 @@
                     "title": "Ta bort från relation"
                 },
                 "remove_generic_name": {
-                    "title": "Radera namnet",
                     "annotation": "Tog bort ett generellt namn."
+                },
+                "remove_mistaken_name": {
+                    "annotation": "Raderat ett misstänkt namn."
                 },
                 "remove_private_info": {
                     "annotation": "Ta bort privat information."
@@ -1910,6 +1963,9 @@
                 },
                 "remove_tags": {
                     "title": "Tog bort taggarna"
+                },
+                "remove_the_name": {
+                    "title": "Radera namnet"
                 },
                 "reposition_features": {
                     "title": "Flytta objekten"
@@ -2268,7 +2324,8 @@
                     "sidebar": "Visa/dölj sidopanel",
                     "wireframe": "Växla trådramsläge",
                     "osm_data": "Visa/dölj OpenStreetMap-data",
-                    "minimap": "Visa/dölj minikarta"
+                    "minimap": "Visa/dölj minikarta",
+                    "highlight_edits": "Markera osparade ändringar"
                 },
                 "selecting": {
                     "title": "Markera objekt",
@@ -2312,7 +2369,7 @@
                     "disconnect": "Koppla isär objekt vid markerad nod",
                     "extract": "Extrahera en punkt från ett objekt",
                     "split": "Dela en linje i två vid markerad nod",
-                    "reverse": "Byt riktning på en linje",
+                    "reverse": "Byt riktning på valt objekt",
                     "move": "Flytta markerade objekt",
                     "rotate": "Rotera markerade objekt",
                     "orthogonalize": "Räta upp hörn på en linje eller område",
@@ -2596,6 +2653,9 @@
                 "attraction": {
                     "label": "Typ"
                 },
+                "baby_seat": {
+                    "label": "Barnstol"
+                },
                 "backrest": {
                     "label": "Ryggstöd"
                 },
@@ -2637,6 +2697,15 @@
                     "label": "Soptunna",
                     "terms": "Soptunna, papperskorg, sopkärl, papperskärl, skräpkorg, avfallskorg, skräp, sopor"
                 },
+                "blind": {
+                    "label": "Åtkomst för blind person",
+                    "options": {
+                        "limited": "Begränsad",
+                        "no": "Nej",
+                        "yes": "Ja"
+                    },
+                    "terms": "Åtkomst för blind person, blind, nedsatt syn, synnedsatt, synnedsättning, synskadad"
+                },
                 "blood_components": {
                     "label": "Blodkomponenter ",
                     "options": {
@@ -2647,6 +2716,9 @@
                     }
                 },
                 "board_type": {
+                    "label": "Typ"
+                },
+                "bollard": {
                     "label": "Typ"
                 },
                 "booth": {
@@ -2784,6 +2856,9 @@
                         "forward": "Framåt",
                         "reversible": "Vändbar"
                     }
+                },
+                "conveying_escalator": {
+                    "label": "Rulltrappa"
                 },
                 "country": {
                     "label": "Land"
@@ -3164,7 +3239,8 @@
                     "placeholder": "1-18"
                 },
                 "handrail": {
-                    "label": "Ledstång"
+                    "label": "Ledstång",
+                    "terms": "Ledstång, räcke"
                 },
                 "hashtags": {
                     "label": "Föreslagna hashtag",
@@ -3270,6 +3346,10 @@
                 },
                 "industrial": {
                     "label": "Typ"
+                },
+                "informal": {
+                    "label": "Informell",
+                    "terms": "Informell, fri, inofficiell, vardaglig, formell, okonventionell, icke-officiell, ej officiell"
                 },
                 "information": {
                     "label": "Typ"
@@ -3395,6 +3475,10 @@
                     "label": "Våning",
                     "terms": "våning, byggnadsvåning, husvåning, plan, husplan, byggnadsplan, våningar"
                 },
+                "level_semi": {
+                    "label": "Våningar",
+                    "terms": "Våningar, våning, byggnadsvåning, plan"
+                },
                 "levels": {
                     "label": "Våningar",
                     "placeholder": "2, 4, 6...",
@@ -3425,6 +3509,10 @@
                 "lock": {
                     "label": "Sluss"
                 },
+                "lockable": {
+                    "label": "Låsbar",
+                    "terms": "Låsbar, lås, låsa, inlåsning, hänglås, nyckel"
+                },
                 "man_made": {
                     "label": "Typ"
                 },
@@ -3444,6 +3532,10 @@
                 "material": {
                     "label": "Material",
                     "terms": "material, tillverkad av"
+                },
+                "max_age": {
+                    "label": "Maxålder",
+                    "terms": "Maxålder, högsta ålder, ålder, åldersgräns, åldersbegränsning, övre åldersgräns"
                 },
                 "maxheight": {
                     "label": "Maxhöjd",
@@ -3478,6 +3570,10 @@
                 "microbrewery": {
                     "label": "Microbryggeri",
                     "terms": "Microbryggeri, bryggeri, hantverksbryggeri, öl"
+                },
+                "min_age": {
+                    "label": "Lägsta ålder",
+                    "terms": "Lägsta ålder, ålder, åldersgräns, åldersbegränsning, lägre åldersgräns"
                 },
                 "minspeed": {
                     "label": "Lägsta tillåtna hastighet",
@@ -3776,14 +3872,8 @@
                 "playground": {
                     "label": "Typ"
                 },
-                "playground/baby": {
-                    "label": "Babygunga"
-                },
-                "playground/max_age": {
-                    "label": "Högsta ålder"
-                },
-                "playground/min_age": {
-                    "label": "Lägsta ålder"
+                "playground/theme": {
+                    "label": "Tema"
                 },
                 "polling_station": {
                     "label": "Vallokal",
@@ -3902,6 +3992,9 @@
                         "yes": "Möjligt"
                     },
                     "terms": "Bokning, reservation"
+                },
+                "residential": {
+                    "label": "Typ"
                 },
                 "resort": {
                     "label": "Typ"
@@ -4174,7 +4267,11 @@
                     "terms": "Startdatum, öppnat, början, påbörjat, start"
                 },
                 "step_count": {
-                    "label": "Antal steg"
+                    "label": "Antal steg",
+                    "terms": "Antal steg, antal trappsteg, trappsteg, trappa, steg"
+                },
+                "stile": {
+                    "label": "Typ"
                 },
                 "stop": {
                     "label": "Stopptyp",
@@ -4188,6 +4285,11 @@
                 },
                 "stroller": {
                     "label": "Åtkomst för barnvagn",
+                    "options": {
+                        "limited": "Begränsad",
+                        "no": "Nej",
+                        "yes": "Ja"
+                    },
                     "terms": "Åtkomst för barnvagn, barnvagnsåtkomst, barnvagn, sulky"
                 },
                 "structure": {
@@ -4199,7 +4301,8 @@
                         "ford": "Vadställe",
                         "tunnel": "Tunnel"
                     },
-                    "placeholder": "Okänt"
+                    "placeholder": "Okänt",
+                    "terms": "Struktur, bro, tunnel,  vägbank, vägsnitt, vadställe"
                 },
                 "structure_waterway": {
                     "label": "Struktur",
@@ -4225,7 +4328,8 @@
                     "label": "Stöd"
                 },
                 "surface": {
-                    "label": "Beläggning"
+                    "label": "Beläggning",
+                    "terms": "Beläggning, underlag, yta, material, asfalt, grus, jord, gräs"
                 },
                 "surveillance": {
                     "label": "Övervakningsslag"
@@ -4313,6 +4417,9 @@
                     "placeholder": "Stagad, fackverk, betong, ..."
                 },
                 "tower/type": {
+                    "label": "Typ"
+                },
+                "townhall/type": {
                     "label": "Typ"
                 },
                 "tracktype": {
@@ -4457,6 +4564,9 @@
                 "wall": {
                     "label": "Typ"
                 },
+                "waste": {
+                    "label": "Skräp"
+                },
                 "water": {
                     "label": "Typ"
                 },
@@ -4483,6 +4593,11 @@
                 },
                 "wheelchair": {
                     "label": "Handikappanpassat",
+                    "options": {
+                        "limited": "Begränsad",
+                        "no": "Nej",
+                        "yes": "Ja"
+                    },
                     "terms": "Handikappanpassat, handikappsåtkomst, handikapad, handikapp, rullstol, rullstoldåtkomst, åtkomst för handikapad, åtkomst för rullstolsbunden, rullstolsbunden, handikappsanpassning"
                 },
                 "wholesale": {
@@ -4601,7 +4716,7 @@
                     "terms": "flyg, flygplan, flygplats, flygfält, flyghamn, aerodrom, landningsplats, lufthamn, flygplan"
                 },
                 "aeroway/apron": {
-                    "name": "Parkering av flygplan (Apron)",
+                    "name": "Parkering för flygplan (Apron)",
                     "terms": "Flygplansparkering, flygplansplatta, flygplatsplatta, flygparkering, parkering av flygplan, parkering av plan, apron"
                 },
                 "aeroway/gate": {
@@ -4616,17 +4731,33 @@
                     "name": "Helikopterplatta",
                     "terms": "Helipad, Helikopterplatta, helikopter"
                 },
+                "aeroway/holding_position": {
+                    "name": "Väntplats för flygplan",
+                    "terms": "Väntplats för flygplan, väntplats, holding, holding position, ILS, MLS"
+                },
+                "aeroway/jet_bridge": {
+                    "name": "Ombordstigningsbrygga",
+                    "terms": "Ombordstigningsbrygga, jet bridge, jetbridge, landgång, gate, PBB, skybridge, embarkeringsbrygga, landgång, brygga, passagerarbrygga"
+                },
+                "aeroway/parking_position": {
+                    "name": "Parkeringsplats för flygplan",
+                    "terms": "Parkeringsplats för flygplan, flyg, flygplan, parkering, flygparkering"
+                },
                 "aeroway/runway": {
                     "name": "Start- och landningsbana",
-                    "terms": "Startbana, landningsbana, rullbana, landa, landning"
+                    "terms": "Startbana, landningsbana, rullbana, landa, landning, RWY, landningsfällt, flygplats, flyg"
                 },
                 "aeroway/taxiway": {
                     "name": "Taxibana",
-                    "terms": "Taxibana, transportbana, flygplansväg, transportsträcka"
+                    "terms": "Taxibana, transportbana, flygplansväg, transportsträcka,Taxiway"
                 },
                 "aeroway/terminal": {
                     "name": "Flygterminal",
                     "terms": "Flygplatsterminal, terminal, avgångshall, ankomsthall, flygterminal, flygplats"
+                },
+                "aeroway/windsock": {
+                    "name": "Vindstrut",
+                    "terms": "vindstrut, vindmätning, strut, vind, vindriktning, vindstyrka"
                 },
                 "allotments/plot": {
                     "name": "Kolonilott",
@@ -4678,6 +4809,18 @@
                 "amenity/bicycle_parking": {
                     "name": "Cykelparkering",
                     "terms": "Cykelparkering, ställplats, cykelställ, Parkering, cykel"
+                },
+                "amenity/bicycle_parking/building": {
+                    "name": "Cykelparkeringsgarage",
+                    "terms": "Cykelparkeringsgarage, cykelparkering, cykel, parkering, garage, flervåningscykelparkering, flervåningscykelgarage"
+                },
+                "amenity/bicycle_parking/lockers": {
+                    "name": "Cykellås",
+                    "terms": "Cykellås, cykel, lås, fastlåsning, fastlåsning av cykel"
+                },
+                "amenity/bicycle_parking/shed": {
+                    "name": "Cykelskydd",
+                    "terms": "Cykelskydd, cykel, cykelparkering, cykelparkeringsskydd, cykeltak, tak, cykelparkeringstak"
                 },
                 "amenity/bicycle_rental": {
                     "name": "Cykeluthyrning",
@@ -4774,6 +4917,10 @@
                     "name": "Tryckluft",
                     "terms": "Tryckluft, pumpstation, komprimerad luft"
                 },
+                "amenity/conference_centre": {
+                    "name": "Kongresscenter",
+                    "terms": "Kongresscenter, Kongresshall, auditorium , konferens, utställning, föreläsning, mässa, mässhall, mässcenter"
+                },
                 "amenity/courthouse": {
                     "name": "Domstol",
                     "terms": "Domstol, rättskipare, rätt, ting, tribunal, instans, juridik, lag, lagbok"
@@ -4801,6 +4948,10 @@
                     "name": "Dojo / Akademi för kampsport",
                     "terms": "Dojo, kampsport, träningslokal, budo, japansk konst, japan, kampkonst, dojang"
                 },
+                "amenity/dressing_room": {
+                    "name": "Omklädningsrum",
+                    "terms": "Omklädningsrum, omklädning, ombyte, påklädning, påklädningsrum, loge, avklädning, avklädningsrum"
+                },
                 "amenity/drinking_water": {
                     "name": "Dricksvatten ",
                     "terms": "Dricksvatten, källa, vatten, fontän"
@@ -4811,6 +4962,10 @@
                 },
                 "amenity/embassy": {
                     "name": "Ambassad"
+                },
+                "amenity/events_venue": {
+                    "name": "Evenemangsplats/festlokal",
+                    "terms": "evenemangsplats, festlokal, evenemangslokal, festplats, bankettsal, dop, födelsedag, fest, konferens, konfirmation, möten, möteslokal, bröllop"
                 },
                 "amenity/fast_food": {
                     "name": "Snabbmat",
@@ -4824,9 +4979,20 @@
                     "name": "Snabbmat – Kyckling",
                     "terms": "Snabbmat, skräpmat, gatuköksmat, bukfylla, junk-food, gatukök, restaurang, takeaway, hämtmat, drive-in, mat, äta, grill, lunch,  kyckling"
                 },
+                "amenity/fast_food/donut": {
+                    "name": "Snabbmat – Munkar",
+                    "terms": "Snabbmat, skräpmat, gatuköksmat, bukfylla, junk-food, gatukök, restaurang, takeaway, hämtmat, drive-in, mat, äta, munk, munkar, donut, frukost, brunch, café, kaffe"
+                },
                 "amenity/fast_food/fish_and_chips": {
                     "name": "Snabbmat – Fish & Chips",
                     "terms": "Snabbmat, skräpmat, gatuköksmat, bukfylla, junk-food, gatukök, restaurang, takeaway, hämtmat, drive-in, mat, äta, grill, lunch, Fish & chips, Fish and chips, fisk och chips"
+                },
+                "amenity/fast_food/hot_dog": {
+                    "name": "Snabbmat – Korv med bröd",
+                    "terms": "Korv med bröd, snabbmat, korv, korvbröd, varmkorv"
+                },
+                "amenity/fast_food/ice_cream": {
+                    "name": "Snabbmat – Glass"
                 },
                 "amenity/fast_food/kebab": {
                     "name": "Snabbmat – Kebab",
@@ -4887,6 +5053,10 @@
                     "name": "Internetkafé",
                     "terms": "Internetcafé, internetcafe, internetcaffe, cybercafé, internetkafé"
                 },
+                "amenity/karaoke": {
+                    "name": "Kkaraoke box",
+                    "terms": "karaoke box,  karaoke,  karaokeklubb,  karaoke-klubb, karaokerum,  karaoke-rum,  karaoke-tv, KTV"
+                },
                 "amenity/kindergarten": {
                     "name": "Förskoleområde",
                     "terms": "Förskola, dagis, daghem, lekskola, kindergarten, lekis, lekplats,"
@@ -4895,9 +5065,17 @@
                     "name": "Språkskola",
                     "terms": "Språkskola, språkutbildning, språkkurs, esl, språk"
                 },
+                "amenity/letter_box": {
+                    "name": "Postlåda",
+                    "terms": "Postlåda, brevinkast, brevlåda, postlucka"
+                },
                 "amenity/library": {
                     "name": "Bibliotek",
                     "terms": "Bibliotek, boksamling, bokskatt, bokrum, läsesal, bibbla, bok, böcker"
+                },
+                "amenity/loading_dock": {
+                    "name": "Lastkaj",
+                    "terms": "lastkaj, lastbrygga, gods, lastning, utlastning, inlastning, dörr, frakt, fraktbrygga, lagerhus, lager"
                 },
                 "amenity/love_hotel": {
                     "name": "Kärlekshotell",
@@ -4942,6 +5120,14 @@
                     "name": "Flervånigt parkeringsgarage",
                     "terms": "Flervånig bilparkering, flervånig parkeringsgarage, parkeringshus, garage, parkering, bilparkering, parkeringsgarage, parkeringsramp, parkeringsdäck, parkeringsbyggnad, inomhusparkering, bil, flervånig, flervånig, garagebyggnad"
                 },
+                "amenity/parking/park_ride": {
+                    "name": "Pendelparkeringsplats",
+                    "terms": "Pendelparkeringsplats, Pendelparkering, pendlarparkering, Parkering, parkeringsplats, p-plats, parkeringsområde, bilparkering, bil, infartsparkering, pendling, pendlare"
+                },
+                "amenity/parking/underground": {
+                    "name": "Underjordisk parkering",
+                    "terms": "Underjordisk parkering, parkering, parkeringsplats, p-plats, parkeringsområde, bilparkering, Underjordisk, fordonsparkering, parkeringshus, parkeringsgarage"
+                },
                 "amenity/parking_entrance": {
                     "name": "In- och utfart parkeringsgarage",
                     "terms": "garage, parkeringshus, infart, utfart"
@@ -4977,6 +5163,18 @@
                 "amenity/place_of_worship/christian": {
                     "name": "Kristen kyrka",
                     "terms": "andaktslokal, andaktsrum, andaktssal, andligt område, annexkyrka, basilika, begravningskapell, betel, bönehus, böneplats, bönhus, dom, dopkapell, dyrkan, fristad, församling, gravkapell, gud, guds hus, gudshus, gudstjänst, gudstjänstlokal, gudstjänstslokal, helgedom, kapell, katedral, kloster, kor, korkapell, kranskapell, kristen, kristendom, kyrka, kyrkbyggnad, kyrkobyggnad, kyrkogård, kyrkorum, kyrksal, mission, missionshus, mässkapell, pastorat, predikan, religion, religiös, religiös anläggning, religiöst område, sanktuarium, sidokapell, slottskapell, socken, tabernakel, tempel, tempelområde, tillbedjan, tro, vallfärdsort, vallfärgsplats"
+                },
+                "amenity/place_of_worship/christian/jehovahs_witness": {
+                    "name": "Rikets sal för Jehovas vittne",
+                    "terms": "Rikets sal för Jehovas vittne, Rikets sal, jehovas vittne, kristen, kristendom, kyrka, guds hus, bönehus, hus för tillbedjan, bön, tillbedjan"
+                },
+                "amenity/place_of_worship/christian/la_luz_del_mundo": {
+                    "name": "La Luz del Mundo-tempel",
+                    "terms": "La Luz del Mundo-tempel, La Luz del Mundo, tempel, kristen, kristendom, kyrka, guds hus, bönehus, hus för bön, the light of the world-kyrka, världens ljuskyrka"
+                },
+                "amenity/place_of_worship/christian/quaker": {
+                    "name": "Kväkarevännernas möteshus",
+                    "terms": "Kväkare, Vännernas samfund, Kväkarevännernas möteshus, kristen, kristendom, guds hus, bönehus, hus för bön"
                 },
                 "amenity/place_of_worship/hindu": {
                     "name": "Hindutempel",
@@ -5014,13 +5212,17 @@
                     "name": "Permanent vallokal",
                     "terms": "vallokal, valurna, valsedel, val, rösta, röstning, folkomröstning, omröstning, röstmaskin, valmaskin, omröstningsapparat, valbås"
                 },
-                "amenity/post_box": {
-                    "name": "Postlåda",
-                    "terms": "Brevlåda, postlåda, brevinkast, brev, post"
+                "amenity/post_depot": {
+                    "name": "Postsorteringskontor",
+                    "terms": "Postsorteringskontor, post, postsortering, sortering, postdistribution, postterminal, brev, brevsortering, brevdistribution"
                 },
                 "amenity/post_office": {
                     "name": "Postkontor",
                     "terms": "Postkontor, post, posten, postverk, postväsende, brev, paket, försändelser, postgång, kort, frimärke,"
+                },
+                "amenity/prep_school": {
+                    "name": "Pluggskola",
+                    "terms": "Kvälsskola, pluggskola, läxhjälp, akademisk, läxa, matematik, läsning, testförberedelse, handledning, skrivning"
                 },
                 "amenity/prison": {
                     "name": "Fängelseområde",
@@ -5052,6 +5254,14 @@
                 },
                 "amenity/recycling": {
                     "name": "Återvinning"
+                },
+                "amenity/recycling/container/electrical_items": {
+                    "name": "Elektronikskrot",
+                    "terms": "Elektronikskrot, datorer, elektroniskt avfall, elektronikåtervinning, telefoner, surfplattor, elskrot, elektronik, återvinning, återbruk, återvinningsstation"
+                },
+                "amenity/recycling/container/green_waste": {
+                    "name": "Komposterbart",
+                    "terms": "Komposterbart, Trädgårdsavfall, biologiskt nedbrytbart, biologiskt, kompost, nedbrytbart, sopor, trädgårdsavfall, organiskt, skräp, matavfall, trädgård"
                 },
                 "amenity/recycling_centre": {
                     "name": "Återvinningscentral",
@@ -5179,6 +5389,10 @@
                     "name": "Rökområde",
                     "terms": "rökrum, rökområde, rökruta, rökning tillåten, rökning, röka, cigarett"
                 },
+                "amenity/social_centre": {
+                    "name": "Medborgarhus",
+                    "terms": "Medborgarhus, allaktivitetshus, lokal, kulturverksamhet, kultur, kulturskola, möteslokal, möte, nöje, utbildning, kurser, kurs, föreningslokal, föreningsgård, folkets park, evenemang, event, fest, förening, förbund, musikskola"
+                },
                 "amenity/social_facility": {
                     "name": "Social inrättning",
                     "terms": "Social inrättning, social hjälp, social, socialen, uteliggare, hjälparbete, välgörenhetsorganisationer, välgörenhet"
@@ -5203,6 +5417,18 @@
                     "name": "Studio",
                     "terms": "Studio, inspelningslokal, utsändningslokal, filmstudio, radiostudio, TV-studio, TV, radio, inspelning, radio, television, filminspelning"
                 },
+                "amenity/studio/radio": {
+                    "name": "Radiostation",
+                    "terms": "Radiostation, radio, am, fm, radiosändning, sändning, radiostudio, studio"
+                },
+                "amenity/studio/television": {
+                    "name": "TV-studio",
+                    "terms": "TV-studio, TV, television, TV-sändning, TV-station, studio"
+                },
+                "amenity/studio/video": {
+                    "name": "Filmstudio",
+                    "terms": "Filmstudio, film, filmproduktion, video, videoproduktion, videoinspelning, filminspelning"
+                },
                 "amenity/swimming_pool": {
                     "name": "Simbassäng"
                 },
@@ -5225,6 +5451,10 @@
                 "amenity/toilets": {
                     "name": "Toaletter",
                     "terms": "Toalett, klosett, vattenklosett, wc, avträde, toa, dass, utedass, bajamaja, torrklosett, hemlighus, klo, mugg, bekvämlighetsinrättning, skithus, Baja-Maja, badrum, latrin, vattentoalett"
+                },
+                "amenity/toilets/disposal/flush": {
+                    "name": "Vattentoalett",
+                    "terms": "Vattentoalett, toalett, spoltoalett, badrum, WC"
                 },
                 "amenity/townhall": {
                     "name": "Kommunhus",
@@ -5360,10 +5590,6 @@
                 "attraction/big_wheel": {
                     "name": "Pariserhjul",
                     "terms": "Pariserhjul, stort hjul, nöjespark, temapark, tivoli, åkattraktion, karusell, nöjeskarusell"
-                },
-                "attraction/bumper_car": {
-                    "name": "Radiobilar",
-                    "terms": "Radiobilar, radiobil, nöjespark, temapark, tivoli, åkattraktion"
                 },
                 "attraction/bungee_jumping": {
                     "name": "Bungyjump",
@@ -5629,6 +5855,10 @@
                     "name": "Enfamiljshus",
                     "terms": "Villa, hus, småhus, enfamiljshus, enbostadshus, kåk, egnahem, radhus, parhus, bostadshus"
                 },
+                "building/houseboat": {
+                    "name": "Husbåt",
+                    "terms": "Husbåt, båt, hem, bostad"
+                },
                 "building/hut": {
                     "name": "Koja",
                     "terms": "Koja, stuga, skydd, hydda, kyffe, barack"
@@ -5802,6 +6032,10 @@
                 "craft/electronics_repair": {
                     "name": "Elektronikreparatör",
                     "terms": "elektronik, elektronikreparation, reparation, reparatör, tv-service, tv-reparatör, datorservice, datorreparation, skärmbyte, telefonreparatör, vitvaror, tvättmaskinsreparatör"
+                },
+                "craft/floorer": {
+                    "name": "Golvläggare",
+                    "terms": "Golvläggare, golv, mattläggare, parkett, heltäckningsmatta, matta"
                 },
                 "craft/gardener": {
                     "name": "Trädgårdsmästare",
@@ -6006,6 +6240,9 @@
                 "ford": {
                     "name": "Vadställe",
                     "terms": "Vadställe, vad, övergångsställe"
+                },
+                "ford_line": {
+                    "name": "Vadställe"
                 },
                 "golf/bunker": {
                     "name": "Bunker",
@@ -6276,7 +6513,15 @@
                 },
                 "highway/raceway": {
                     "name": "Motorracerbana",
-                    "terms": "racerbana, motorracerbana, motorbana, tävlingsbana, motortävling, rally, rallybana, kappkörning, gokart, go-kart, tävlingsbana"
+                    "terms": "racerbana, motorracerbana, motorbana, tävlingsbana, motortävling, rally, rallybana, kappkörning, gokart, go-kart, tävlingsbana, bil*, formula one, F1, F-1, race*"
+                },
+                "highway/raceway/karting": {
+                    "name": "Kartingbana (Gokart)",
+                    "terms": "Kartingbana, karting, Gokart, go kart, kart, karting, motorsport"
+                },
+                "highway/raceway/motocross": {
+                    "name": "Motocrossbana",
+                    "terms": "Motocrossbana, motorcross, off road-bana, off-road, off road, motorcykelbana, motorsport"
                 },
                 "highway/residential": {
                     "name": "Bostadsgata",
@@ -6402,13 +6647,37 @@
                     "name": "Slott",
                     "terms": "Slott, borg, palats, resident, herrsäte, fästning"
                 },
+                "historic/castle/fortress": {
+                    "name": "Historisk fästning",
+                    "terms": "Historiskt fort, historisk fästning, slott, borg, militär, citadell, fästning, historisk fäste, fästning, befästning, försvar, skans, bunker, befästningsverk, fortifikation, ringmur"
+                },
+                "historic/castle/palace": {
+                    "name": "Palats",
+                    "terms": "palats, slott, borg, château, palä, residens, praktfull byggnad, kunglig bostad, kunglig, kung, drottning, borg"
+                },
+                "historic/castle/stately": {
+                    "name": "Château",
+                    "terms": "Château, slott, adel, palats, palä, slottsvin, vingård, vinslott, praktfull byggnad, residens, borg"
+                },
                 "historic/city_gate": {
                     "name": "Stadsport",
                     "terms": "Stadsport, ringmur, port"
                 },
+                "historic/fort": {
+                    "name": "Historiskt fort",
+                    "terms": "Historiskt fort, historisk fästning, slott, borg, militär, citadell, fästning, historisk fäste, fästning, befästning, försvar, skans, bunker, befästningsverk, fortifikation"
+                },
+                "historic/manor": {
+                    "name": "Herrgård",
+                    "terms": "herrgård, Mansion, herrskap, adel, egendom, gods, herresäte, slot"
+                },
                 "historic/memorial": {
                     "name": "Minnesmärke",
                     "terms": "Minnesmärke, minnessten, minnestavla, monument"
+                },
+                "historic/memorial/plaque": {
+                    "name": "Minnestavla",
+                    "terms": "Minnestavla, Jubileumsplatta, minne, inskription"
                 },
                 "historic/monument": {
                     "name": "Monument",
@@ -6455,6 +6724,10 @@
                 "indoor/room": {
                     "name": "Rum",
                     "terms": "Rum, inomhusrum, cell, kammare, foajé, lobby"
+                },
+                "indoor/stairs": {
+                    "name": "Inomhustrappa",
+                    "terms": "Inomhustrappa, trappa, trapp, trappor, trappuppgång, trappnedgång, trapphus, steg"
                 },
                 "indoor/wall": {
                     "name": "Vägg inomhus",
@@ -6506,10 +6779,6 @@
                 "landuse/commercial": {
                     "name": "Kommersiell område",
                     "terms": "Kommersiell, kommersiellt, affärsområde, handelsområde, shoppingområde, handel, butiksområde"
-                },
-                "landuse/construction": {
-                    "name": "Byggarbetsplats",
-                    "terms": "Byggarbetsplats, bygge, Byggnad under konstruktion, Byggnad under uppförande, byggarbete,  byggnation, byggnadsplats"
                 },
                 "landuse/farm": {
                     "name": "Åkermark"
@@ -6643,6 +6912,10 @@
                 "landuse/vineyard": {
                     "name": "Vingård",
                     "terms": "Vingård, château, vin, vinodling, vinframställning, vinfält, vineri, druvor, vindruvor"
+                },
+                "landuse/winter_sports": {
+                    "name": "Vintersportområde",
+                    "terms": "Vintersportområde, vintersport, pist, pistområde, skidområde, skidbacke, skidort, snöbrädesområde, snowboardområde, skidor, alpint, snowboard, skidåkning"
                 },
                 "leisure": {
                     "name": "Fritid"
@@ -6847,6 +7120,12 @@
                     "name": "Ridområde",
                     "terms": "ridning, rida, häst, Ridskola, hästridning, stall, ryttare, häst*, ridklubb, ridhus, dressyr, hästhoppning, trav, galopp"
                 },
+                "leisure/pitch/field_hockey": {
+                    "name": "Landhockeyplan"
+                },
+                "leisure/pitch/horseshoes": {
+                    "name": "Kasta hästsko"
+                },
                 "leisure/pitch/netball": {
                     "name": "Nätbollsplan",
                     "terms": "Nätbollsplan, Nätboll, netball, dambasket, basket"
@@ -6858,6 +7137,9 @@
                 "leisure/pitch/rugby_union": {
                     "name": "Rugby Union-plan",
                     "terms": "Rugby Union-plan, rugby union, rugby, rugger, rugby football, rugbyplan"
+                },
+                "leisure/pitch/shuffleboard": {
+                    "name": "Shuffleboardbana"
                 },
                 "leisure/pitch/skateboard": {
                     "name": "Skateboardpark",
@@ -6923,11 +7205,25 @@
                     "name": "Tävlingsbana (Icke motorsport)",
                     "terms": "Tävlingsbana, cykeltävling, cykellopp, hundkapplöpning, hästkapplöpning, galoppbana, travbana, löpbana, löpning, kapplöpningsbana, galoppbana"
                 },
+                "leisure/track/cycling": {
+                    "name": "Tävlingsbana (Cykel)"
+                },
+                "leisure/track/cycling_point": {
+                    "name": "Tävlingsbana (Cykel)"
+                },
                 "leisure/track/horse_racing": {
                     "name": "Tävlingsbana (Hästkapplöpning)",
                     "terms": "Hästkapplöpningsbana, Hästkapplöpning, kapplöpningsbana, häst, kapplöpning, trav, galopp"
                 },
+                "leisure/track/horse_racing_point": {
+                    "name": "Tävlingsbana (Hästkapplöpning)",
+                    "terms": "Hästkapplöpningsbana, Hästkapplöpning, kapplöpningsbana, häst, kapplöpning, trav, galopp"
+                },
                 "leisure/track/running": {
+                    "name": "Tävlingsbana (Löpning)",
+                    "terms": "Tävlingsbana, Löpning, kapplöpningsbana, löpbana, löparbana, sprint, språng, springa"
+                },
+                "leisure/track/running_point": {
                     "name": "Tävlingsbana (Löpning)",
                     "terms": "Tävlingsbana, Löpning, kapplöpningsbana, löpbana, löparbana, sprint, språng, springa"
                 },
@@ -7017,6 +7313,10 @@
                 "man_made/mast/communication/television": {
                     "name": "TV-mast",
                     "terms": "mast, antenn, mobilmast, mobilantenn, radioantenn, sändartorn, mobiltelefon, radiomast, TV-torn, TV-mast, television, TV, TV-sändning, kommunikationsmast, kommunikationstorn, transmissionsmast, överföringstorn, överföringsmast"
+                },
+                "man_made/mineshaft": {
+                    "name": "Gruvschakt",
+                    "terms": "Gruvschakt, gruva, grotta, tunnel, underjordisk, gruvgång"
                 },
                 "man_made/monitoring_station": {
                     "name": "Mätstation",
@@ -7118,21 +7418,21 @@
                     "name": "Fabrik",
                     "terms": "Fabrik, montering, bryggeri, bil, plast, bearbetning, tillverkning, raffinaderi, fabrikstillverkning, industri, verkstad, fabriksbyggnad, monteringsanläggning, bearbetningsanläggning, möbeltillverkning, oljeraffinaderi"
                 },
-                "manhole": {
-                    "name": "Gatubrunn",
-                    "terms": "Gatubrunn, brunn, dagvattenbrunn, dagvatten, avlopp, telekom, telefoni, manhålslucka, Brunnslock, manlucka, manhål, avloppsbrunn, a-brunn, Brandpost, Rensbrunn"
-                },
-                "manhole/drain": {
-                    "name": "Dagvattenbrunn",
-                    "terms": "Dagvatten, dagvattenbrunn, dränering, regn, regnvatten, dagbrunn, avlopp, avloppsvatten, avloppsbrunn, smältvatten, spillvatten, avrinning"
-                },
-                "manhole/telecom": {
-                    "name": "Manhålslucka för telekom",
-                    "terms": "Manhålslucka för telekom, gatubrunn, brunn, telekom, telefoni, manhålslucka, Brunnslock, manlucka, manhål, tele, tele-brunn"
-                },
                 "military/bunker": {
                     "name": "Militär bunker",
                     "terms": "militär bunker, bunker, flygförsvar, militär, arme, försvar, marin, flottan, krig"
+                },
+                "military/checkpoint": {
+                    "name": "Kontrollpunkt",
+                    "terms": "Kontrollpunkt, kontrollstation, militär kontroll, luftvapen, luftförsvar, militär, armé, bas, flotta, marin, soldat, krig, försvar, trupp, vakt"
+                },
+                "military/nuclear_explosion_site": {
+                    "name": "Område för kärnvapenprov",
+                    "terms": "Område för kärnvapenprov, kärnvapenprov, kärnvapen, vapentest"
+                },
+                "military/office": {
+                    "name": "Militärkontor",
+                    "terms": "militärkontor, flygvapen, armé, bas, värva, flotta, marin, rekrytera, rekrytering, soldat, krig, militär, försvar, befälskontor"
                 },
                 "natural": {
                     "name": "Naturlig"
@@ -7659,6 +7959,10 @@
                     "name": "Busshållplats",
                     "terms": "Busstopp, busshållplats, buss, hållplats, anhalt, station, busstation,"
                 },
+                "public_transport/platform/ferry": {
+                    "name": "Färjeplattform",
+                    "terms": "färjeplattform, plattform, stopp, båtstopp, färjestopp, båthållplats, Färjeterminal, terminal, färja, båtterminal, båthållplats, Färjehållplats, Färjestation, båt, brygga, pir, kollektivtrafik, linjetrafik, station, transit, transport"
+                },
                 "public_transport/platform/ferry_point": {
                     "name": "Stop / plattform för färja"
                 },
@@ -7695,7 +7999,8 @@
                     "terms": "Spårvägshållplats, spårvagnshållplats, hållplats, spårvagnsplattform, plattform, spårvagn, spårväg, spårvagnsterminal, terminal, järnväg, kollektivtrafik, kollektivtrafik, vagn, transit, transport"
                 },
                 "public_transport/platform/tram_point": {
-                    "name": "Spårvagnshållplats / -plattform"
+                    "name": "Spårvagnshållplats / -plattform",
+                    "terms": "Spårvägshållplats, spårvagnshållplats, hållplats, spårvagnsplattform, plattform, spårvagn, spårväg, spårvagnsterminal, terminal, järnväg, kollektivtrafik, kollektivtrafik, vagn, transit, transport"
                 },
                 "public_transport/platform/trolleybus": {
                     "name": "Bussplattform för trådbuss",
@@ -7971,6 +8276,10 @@
                     "name": "Cykelaffär",
                     "terms": "Cykelaffär, cykel, cykelreparatör, cykelförsäljning"
                 },
+                "shop/boat": {
+                    "name": "Båtaffär",
+                    "terms": "Båtaffär, fiskebåt, jetski, jet-ski, vattenskoter, motorboat, eka, roddbåt, segelbåt, segel, båt, båttillbehör"
+                },
                 "shop/bookmaker": {
                     "name": "Vadslagning",
                     "terms": "Vadslagning, vadhållning, dobbel, spel, trav, Stryktipset, måltipset"
@@ -7989,6 +8298,10 @@
                 "shop/candles": {
                     "name": "Ljusaffär",
                     "terms": "Ljusaffär, ljus, värmeljus, mysljus, stearinljus, ljusstakar"
+                },
+                "shop/cannabis": {
+                    "name": "Cannabisaffär",
+                    "terms": "Cannabisaffär, Cannabis, 420, marijuana,pot,reefer,weed"
                 },
                 "shop/car": {
                     "name": "Bilhandlare",
@@ -8033,6 +8346,10 @@
                 "shop/clothes": {
                     "name": "Klädaffär",
                     "terms": "Klädaffär, kläder, klädbutik, ekipering"
+                },
+                "shop/clothes/underwear": {
+                    "name": "Underklädersaffär",
+                    "terms": "Underklädersaffär, underkläder, bh, trosor, kalsonger, mode, underklänning, sockar, strumpor, lingeri, damunderkläder"
                 },
                 "shop/coffee": {
                     "name": "Kaffeaffär",
@@ -8163,6 +8480,10 @@
                     "name": "Försäljning av gas",
                     "terms": "gas, cng, lpg, naturgas, propan, återfyllning, gasbehållare, fordonsgas, metangas, gasol, gasflaskor, gasolflaskor"
                 },
+                "shop/general": {
+                    "name": "Generell affär",
+                    "terms": "Generell affär, byaffär"
+                },
                 "shop/gift": {
                     "name": "Presentbutik",
                     "terms": "Presentbutik, presenter, gratulationskort, grattiskort, gåvor, gåva, present, souvenirbutik, souvenir, souvenirer"
@@ -8199,6 +8520,10 @@
                     "name": "HiFi-butik",
                     "terms": "HIFI-butik, hifi, ljud, ljudåtergivning, förstärkare, högtalare, ljudanläggning, audio, stereo, stereoanläggning, video"
                 },
+                "shop/hobby": {
+                    "name": "Hobbyaffär",
+                    "terms": "Hobbyaffär, hobby, manga, model, modellbygge, modellflyg, modelljärnväg"
+                },
                 "shop/houseware": {
                     "name": "Husgeråd",
                     "terms": "husgeråd, köksredskap, bestick, porslin, prydnadsföremål, hem, hushåll"
@@ -8226,6 +8551,10 @@
                 "shop/leather": {
                     "name": "Läderaffär",
                     "terms": "Läderaffär, läder, läderjackor, läderkläder"
+                },
+                "shop/lighting": {
+                    "name": "Belysningsbutik",
+                    "terms": "Belysningsbutik, belysning, lampor, LED, glödlampor"
                 },
                 "shop/locksmith": {
                     "name": "Låssmed",
@@ -8323,6 +8652,10 @@
                     "name": "Fotoaffär ",
                     "terms": "fotoaffär, bild, foto, video, fotografi, fotoredigering, framkallning, ram, kameratillbehör, kamera, kameror, filmkamera, fotokamera, konvertering, film"
                 },
+                "shop/printer_ink": {
+                    "name": "Butik för skrivarbläck",
+                    "terms": "Butik för skrivarbläck, kopieringsbläck, skrivarbläck, faxbläck, bläck, skrivartoner, toner, skrivare, kopiator, fax"
+                },
                 "shop/pyrotechnics": {
                     "name": "Fyrverkerier",
                     "terms": "fyrverkerier, smällare, tomtebloss, raketer, nyårsraketer, pyroteknik"
@@ -8334,6 +8667,10 @@
                 "shop/religion": {
                     "name": "Religiös butik",
                     "terms": "Religiös, religion, biblar, psalmböcker, kyrkobutik"
+                },
+                "shop/rental": {
+                    "name": "Hyrbutik",
+                    "terms": "Hyrbutik, hyra, uthyrning, låna"
                 },
                 "shop/scuba_diving": {
                     "name": "Dykarbutik",
@@ -8370,6 +8707,10 @@
                 "shop/supermarket": {
                     "name": "Snabbköp",
                     "terms": "självbetjäningsbutik, självköp, supermarket, snabbköp, dagligvarubutik, affär, mataffär, livsmedel, livsmedelsbutik, mat"
+                },
+                "shop/swimming_pool": {
+                    "name": "Butik för pooltillbehör",
+                    "terms": "Pooltillbehörsbutik, badtunna, poolbutik, poolutrustningsbutik, poolinstallationsbutik, poolunderhållsbutik, poolbutikleveransbutik´, poolinstallation, poolunderhåll, poolservice, pool, basäng, jacussy"
                 },
                 "shop/tailor": {
                     "name": "Skräddare",
@@ -8477,6 +8818,18 @@
                     "name": "Publik konst",
                     "terms": "Konst, publik konst, gatukonst, offentlig konst, väggmålning, målning, skulptur, staty"
                 },
+                "tourism/artwork/bust": {
+                    "name": "Byst",
+                    "terms": "byst, figur, staty"
+                },
+                "tourism/artwork/graffiti": {
+                    "name": "Graffiti",
+                    "terms": "Graffiti, gatukonst, graffitikonst, kladd, klotter, spray, sprayfärg"
+                },
+                "tourism/artwork/installation": {
+                    "name": "Konstinstallation",
+                    "terms": "Konstinstallation, interaktiv konst, modern konst, konst, installation, kultur"
+                },
                 "tourism/artwork/mural": {
                     "name": "Väggmålning",
                     "terms": "väggmålning, mural, fresco, målning"
@@ -8492,6 +8845,10 @@
                 "tourism/attraction": {
                     "name": "Turistattraktion",
                     "terms": "Turistattraktion, sevärdhet, sevärdighet"
+                },
+                "tourism/camp_pitch": {
+                    "name": "Tältplats/husvagnsplats",
+                    "terms": "Tältplats, husvagnsplats, camping, Campingplats, camping, husvagn, tält"
                 },
                 "tourism/camp_site": {
                     "name": "Campingplats",
@@ -8541,6 +8898,14 @@
                     "name": "Turistbyrå",
                     "terms": "Turistbyrå, turistinformation,  resebyrå, turistkontor, turist, turism"
                 },
+                "tourism/information/route_marker": {
+                    "name": "Spårmarkör",
+                    "terms": "Spårmarkör, ledmarkör, stigmarkör, ruttmarkör, spår, led, stig, rutt, ruttflagga, stenhög, vägmarkör, vandringsled, vandring, skoterled, skidled, ridled"
+                },
+                "tourism/information/terminal": {
+                    "name": "Informationsterminal",
+                    "terms": "Informationsterminal, terminal, information, informationskälla, turistbyrå, turistkartor, karta, informationskarta, infokarta"
+                },
                 "tourism/motel": {
                     "name": "Motel",
                     "terms": "Motell, hotell, motorhotell, väghotell"
@@ -8572,6 +8937,18 @@
                 "tourism/zoo": {
                     "name": "Zoo",
                     "terms": "Zoo, zoologisk trädgård, djurpark"
+                },
+                "tourism/zoo/petting": {
+                    "name": "Barn-zoo",
+                    "terms": "barn-zoo, klapp-zoo, zoo, djurpark, lantgårdsdjur, klappa, barn, djur, mini-zoo, minidjurpark, barndjurpark"
+                },
+                "tourism/zoo/safari": {
+                    "name": "Safaridjurpark",
+                    "terms": "Safaripark, safari, genomkörningsdjurpark, djurpark, zoo, safaridjurpark"
+                },
+                "tourism/zoo/wildlife": {
+                    "name": "Vilddjurspark",
+                    "terms": "Vilddjurspark, vilddjur, djurpark, zoo, inhemska djur"
                 },
                 "traffic_calming": {
                     "name": "Farthinder",
@@ -8976,6 +9353,10 @@
                 "description": "Gul = Fritt tillgänglig kartdata (public domain) från US Census. Röd = Data ej hittad på OpenStreetMap",
                 "name": "TIGER Roads 2018"
             },
+            "US-TIGER-Roads-2019": {
+                "description": "Gul = Fritt tillgänglig kartdata (public domain) från US Census. Röd = Data ej hittad i OpenStreetMap",
+                "name": "TIGER Roads 2019"
+            },
             "USDA-NAIP": {
                 "description": "Det senaste året av DOQQs från National Agriculture Imagery Program (NAIP) för varje stat i USA.",
                 "name": "National Agriculture Imagery Program"
@@ -9001,6 +9382,12 @@
                     "text": "Realiserad med hjälp från Bryssel UrbIS®© – Distribution & Copyright CIRB"
                 },
                 "name": "UrbIS-Ortho 2018"
+            },
+            "UrbISOrtho2019": {
+                "attribution": {
+                    "text": "Realiserad med hjälp från Bryssel UrbIS®© – Distribution & Copyright CIRB"
+                },
+                "name": "UrbIS-Ortho 2019"
             },
             "UrbisAdmFR": {
                 "attribution": {
@@ -9320,7 +9707,14 @@
                 "description": "Twitter om OpenStreetMap i Botswana"
             },
             "ym-Centre-Universitaire-de-Recherche-et-dApplication-en-Tldtection-CURAT-de-lUniversit-Felix-Houphouet-Boigny": {
-                "name": "YouthMappers CURAT"
+                "name": "YouthMappers CURAT",
+                "description": "YouthMappers-filial på Centre Universitaire de Recherche et d'Application en Télédétection (CURAT) de l'Université Felix Houphouet Boigny",
+                "extendedDescription": "Vår filial syftar till att främja användningen av gemenskapsdriven fri kartläggning och användning av openstreetmap-data inom forskningsområdet och dess tillämpning vid implementering av verktyg för beslutsfattande. Hjälp eleverna att producera sin egen data för sin forskning."
+            },
+            "ym-The-Gambia-YMCA-University-of-the-Gambia": {
+                "name": "Connected YouthMappers",
+                "description": "YouthMappers-filial vid The Gambia YMCA / University of the Gambia",
+                "extendedDescription": "Connected YouthMappers består av hängivna unga gambier som strävar efter förändring och stöd till nationell utveckling."
             },
             "cape-coast-youthmappers": {
                 "name": "University of Cape Coast YouthMappers",
@@ -9340,6 +9734,117 @@
                 "name": "E-postlistan Talk-gh",
                 "description": "Talk-gh är den officiella e-postlistan för OSM-gemenskapen i Ghana"
             },
+            "ym-Kwame-Nkrumah-University-of-Science-and-Technology": {
+                "name": "Kwame Nkrumah University of Science and Technology YouthMappers",
+                "description": "YouthMappers-filial vid Kwame Nkrumah University of Science and Technology"
+            },
+            "ym-University-of-Cape-Coast": {
+                "name": "UCC Geographical Society",
+                "description": "YouthMappers-filial vid University of Cape Coast",
+                "extendedDescription": "Vi är en sammanslutning som omfattar alla studenter som läser eller har läst geografi vid Institutionen för geografi och regional planering vid University of Cape Coast. Vårt huvudmål är att främja intresse för disciplinen inom och utanför klassrummet. Vårt motto är \"Vi förstår jorden och dess invånare.\""
+            },
+            "ym-University-of-Energy-and-Natural-Resources": {
+                "name": "Eco-Club",
+                "description": "YouthMappers-filial vid University of Energy and Natural Resources",
+                "extendedDescription": "För att tillhandahålla en sund utbildning till alla medborgare om den försämrade miljön och ge största möjliga användning för återskrapning av miljön för människors överlevnad."
+            },
+            "ym-University-of-Ghana": {
+                "name": "University of Ghana YouthMappers",
+                "description": "YouthMappers-filial vid University of Ghana",
+                "extendedDescription": "UG YouthMappers består av både doktorander och studenter med kunskaper och färdigheter inom GIS och Remote Sensing. Klubben består av ett energiskt team som är redo att ta itu med sociala frågor och mildra miljöproblem genom kartläggning. Våra grundläggande principer är kapacitetsuppbyggnad, inflytande och teamwork."
+            },
+            "ym-University-of-Mines-and-Technology": {
+                "name": "UMaT YouthMappers",
+                "description": "YouthMappers-filial vid University of Mines and Technology",
+                "extendedDescription": "UMaT YouthMappers är en grupp volontärstudenter som försöker ge studenter möjlighet att förbättra färdigheterna inom kartläggning och skapa öppna geografiska data och analyser som adresserar lokalt definierade utvecklingsutmaningar världen över."
+            },
+            "ym-General-Lansana-Conte-University": {
+                "name": "YouthMappers General Lansana Conte University",
+                "description": "YouthMappers-filial vid General Lansana Conte University",
+                "extendedDescription": "YouthMappers of University General Lansana Conté är en ideell sammanslutning som är villigt att bidra till Map Guinea och andra delar av världen. Vi främjar användningen av GIS och Open data för att bygga verktyg för beslutsstöd. Vi arbetar också för att bygga upp kapacitet bland eleverna och lokala samhällen."
+            },
+            "ym-Institute-of-Science-and-Veterinary-Medicine": {
+                "name": "YouthMappers ISSMV Dalaba",
+                "description": "YouthMappers-filial vid Institute of Science and Veterinary Medicine",
+                "extendedDescription": "YouthMappers ISSMV Dabala är en ideell organisation som arbetar för att främja humanitär kartläggning och användning av öppna källor och öppen data för att bygga verktyg för beslutsfattande i Guinea."
+            },
+            "ym-Universit-de-NZrkor": {
+                "name": "Youthmappers à N'Zérékoré",
+                "description": "YouthMappers-filial vid Université de N'Zérékoré",
+                "extendedDescription": "YouthMappers är en grupp som gör det möjligt att kartlägga isolerade samhällen och fatta beslut i händelse av katastrofer eller epidemier. Det tillåter också produktion och användning av data i fri åtkomst."
+            },
+            "map-kibera": {
+                "name": "Map Kibera Trust",
+                "description": "Map Kibera är en registrerad organisation som verkar i Kenya",
+                "extendedDescription": "Map Kibera Trusts uppdrag är att öka inflytande och representation av marginaliserade samhällen genom kreativ användning av digitala verktyg för handling."
+            },
+            "osm-kenya": {
+                "name": "OSM Kenya",
+                "description": "OSM Kenya är en sammanslutning av OSM-bidragsgivare och -användare",
+                "extendedDescription": "OSM är en lokal gemenskap för personer intresserade av OpenStreetMap och inkluderar organisationer, utvecklare och YouthMappers-filialer i landet."
+            },
+            "ym-Dedan-Kimathi-University-of-Technology": {
+                "name": "GDEV",
+                "description": "YouthMappers-filial vid Dedan Kimathi University of Technology",
+                "extendedDescription": "GDEV är en grupp entusiastisk GIS-grupp på DeKUT som syftar till att hjälpa studenter att dela, engagera och lära av varandra i geospatiala frågor"
+            },
+            "ym-Jomo-Kenyatta-University-of-Agriculture-and-Technology": {
+                "name": "Association of Geomatics Engineering Students",
+                "description": "YouthMappers-filial vid Jomo Kenyatta University of Agriculture and Technology",
+                "extendedDescription": "The Association of Geomatics Engineering Students (AGES) syftar till att marknadsföra GIS-produkter och -tjänster samt utbilda studenter om användning av det samma. Det främjar inte bara socialisering mellan studenterna och yrkesutövare, utan ger också en plattform för att utbyta nya idéer för att hålla nya GIS- och kartläggningsevenemang och utbildning vid universitetet."
+            },
+            "ym-Karatina-University": {
+                "name": "Nature Club Karatina University",
+                "description": "YouthMappers-filial vid Karatina University",
+                "extendedDescription": "Denna filial syftar till att samla alla GIS-entusiaster. Den inkluderar miljöexperter, djurlivsexperter, vatten- och turismtjänstemän, för att bara nämna några. Huvudsyftet är att tillhandahålla en plattform där eleverna kan lära av varandra och i processen förstå hur man integrerar GIS-färdigheterna i sina olika karriärvägar samt erbjuder lösningar på olika miljörelaterade utmaningar."
+            },
+            "ym-Kenyatta-University": {
+                "name": "Kenyatta University GIS-klubb",
+                "description": "YouthMappers-filial vid Kenyatta University",
+                "extendedDescription": "Kenyatta University GIS Club (KUGISC) grundades den 28 oktober 2016, med mer än 200 studenter och personal från alla fakulteter inom campus som medlemmar. Vi strävar efter att ge medlemmar rumslig kunskap, färdigheter och expertis som krävs för att förstå jorden. Vi hjälper till med att kartlägga resurser inom universitetet genom att integrera geospatial data i deras projekt såväl som insamling av fältarbetsdata."
+            },
+            "ym-Moi-University": {
+                "name": "Geography Students Association",
+                "description": "YouthMappers-filial vid Moi University",
+                "extendedDescription": "The Geography Students Association at Moi University (GEOSAMU) utforskar, upptäcker och syftar till att utveckla hela världen genom de ungas Geo-Spatial analyser. GEOSAMU är en del av Institutionen för geografi."
+            },
+            "ym-Technical-University-of-Kenya": {
+                "name": "Geospatial Science Student Association",
+                "description": "YouthMappers-filial vid Technical University of Kenya",
+                "extendedDescription": "Det är en geografisk informationsbaserad grupp med mycket passionerade studenter inom relevanta studierektorer. Vi utbildar medlemmar om nya trender på marknaden och följer med tekniska framsteg"
+            },
+            "ym-University-of-Nairobi": {
+                "name": "Geospatial Engineering Students Association",
+                "description": "YouthMappers-filial vid University of Nairobi",
+                "extendedDescription": "UN-studenter arbetar med den lokala OSM-gruppen, Map Kibera och GrouthTruth för att lära sig om öppen kartläggning och bidra med data för behov i deras urbana miljö."
+            },
+            "ym-African-Methodist-Episcopal-University": {
+                "name": "YouthMappers-AMEU",
+                "description": "YouthMappers-filial vid African Methodist Episcopal University"
+            },
+            "ym-Cuttington-University": {
+                "name": "Cuttington University YouthMappers",
+                "description": "YouthMappers-filial vid Cuttington University",
+                "extendedDescription": "YouthMappers vid Cuttington University, Suakoko och Bong County består av studenter från tre olika avdelningar; nämligen avdelningen för naturresurshantering \"DONRM\", Institutionen för miljövetenskaper och avdelningen för naturvetenskap. Sedan filialen inrättades februari 2017 är det totala medlemskapet 20 studenter, där varje avdelning innehåller 5 studenter."
+            },
+            "ym-Grand-Gedeh-County-Community-College": {
+                "name": "YouthMappers vid Grand Gedeh County Community College",
+                "description": "YouthMappers-filial vid Grand Gedeh County Community College",
+                "extendedDescription": "Youth Mappers vid GGCCC enda avsikt är att lägga till platser i och runt Liberia som inte finns på kartan. Vi samlar ungdomar från högskolan inom Grand Gedeh Community College för att göra det till deras plikter att sammanföra och framföra dessa platser till offentlighetens ljus geografiskt."
+            },
+            "ym-Nimba-County-Community-College": {
+                "name": "Nimba County Community College Youth Mappers",
+                "description": "YouthMappers-filial vid Nimba County Community College"
+            },
+            "ym-Stella-Maris-Polytechnic": {
+                "name": "YouthMappers-SMP",
+                "description": "YouthMappers-filial vid Stella Maris Polytechnic"
+            },
+            "ym-University-of-Liberia-YouthMappers": {
+                "name": "University of Liberia YouthMappers",
+                "description": "YouthMappers-filial vid University of Liberia YouthMappers",
+                "extendedDescription": "University of Liberia YouthMappers är en filialorganisation för Global YouthMappers. Vi är en ideell studentorganisation för kartläggning som fokuserar på kartläggning för Liberias utveckling och världen i stort. Syftet med denna organisation ska vara att använda teknik och geospatial kunskap som medel för att skapa och utveckla kartor; samla in och analysera data som kommer att möta lokala och globala utmaningar. Vårt mål är att stödja och skapa möjligheter för studenter att utveckla intresse och färdigheter inom kartläggningsområdet. Vi ser för oss en förenat studentgemenskap som är samarbetsvillig, aktiv och är villiga att samarbeta med University of Liberia YouthMappers för att förbättra andras liv."
+            },
             "osm-mg-facebook": {
                 "name": "Facebook-grupp för OpenStreetMap Madagaskar",
                 "description": "Malagasy Facebook-grupp för personer intresserade av OpenStreetMap."
@@ -9348,22 +9853,214 @@
                 "name": "E-postlistan Talk-mg",
                 "description": "Plats för bidragsgivare till OpenStreetMap, sammanslutningar och användare i Madagaskar för att dela och diskutera."
             },
+            "ym-University-of-Malawi": {
+                "name": "Chanco Malawi YouthMappers",
+                "description": "YouthMappers-filial vid University of Malawi",
+                "extendedDescription": "Chanco Malawi YouthMappers är studentkartororganisationen för University of Malawis Chancellor College. Studenterna i denna filial fokuserar på kartläggning för Malawis utvecklings- och vetenskapsbehov."
+            },
+            "ym-Universit-des-Sciences-Sociale-et-de-Gestion-de-Bamako": {
+                "name": "Etudiant au Laboratoire HoPE",
+                "description": "YouthMappers-filial vid Université des Sciences Sociale et de Gestion de Bamako"
+            },
+            "ym-Universidade-Eduardo-Mondlane": {
+                "name": "Comunidade YouthMappers Moçambique",
+                "description": "YouthMappers-filial vid Universidade Eduardo Mondlane",
+                "extendedDescription": "Vi är en studentgrupp som avser att gå med i det mozambikanska samhället för att skapa en motståndskraftig gemenskap av humanitär kartläggning. Gemenskapen har för avsikt att kartlägga landets fysiska ockupation och skapa öppna geografiska data, tillgängliga för allmänheten och som kan användas i flera områden utan tillhörande kostnader."
+            },
+            "ym-Namibia-University-of-Science-and-Technology": {
+                "name": "Geoinformation Technology Student Society",
+                "description": "YouthMappers-filial vid Namibia University of Science and Technology"
+            },
+            "ym-Abia-State-University": {
+                "name": "AbsuMappersTeam",
+                "description": "YouthMappers-filial vid Abia State University",
+                "extendedDescription": "AbsuMappersTeam är ett frivilligt team av kartentusiaster som använder openstreetmap, GIS och annan open source geospatial teknik; ogy för att lösa problem. Det är en dedikerad katastrofrespons med OpenStreetMap. Det är en professionell plattform för mentorskap och empowerment för dem med passion för GIS och kartläggning. Det är ett samarbete med frivilliga för skapande av geospatial data, insamling och kartläggning av fältdata. Teamet grundades av Victor N.Sunday (Team mentor) och professor J.U.Ogbonna, teamkoordinator och fakultetsrådgivare. AbsuMapperTeam är ett dotterbolag till UniiqueMappersTeam-Port Harcourt. Teamet står för att stödja hållbar utveckling med geospatial teknologi"
+            },
+            "ym-Ahmadu-Bello-University": {
+                "name": "ABU Geomappers",
+                "description": "YouthMappers-filial vid Ahmadu Bello University",
+                "extendedDescription": "Vi är en grupp datadrivna humanitära kartläggare, som ägnar sig åt att tillhandahålla humanitär service som svar på katastrof och åtgärder vid dessa. Vi är glada att bidra med vår expertis och kunskap genom kartläggning och hjälpa till att sprida #OpenEvangelism genom utbildning och samarbete."
+            },
+            "ym-Federal-School-of-Surveys": {
+                "name": "OyoMappersTeam (OMT) Oyo",
+                "description": "YouthMappers-filial vid Federal School of Surveys"
+            },
+            "ym-Federal-University-of-Technology-Akure": {
+                "name": "YouthMappers Futa Space Club",
+                "description": "YouthMappers-filial vid Federal University of Technology, Akure",
+                "extendedDescription": "Vårt uppdrag är att höja nästa generation rymdledare. Bland aktiviteterna ingår forskning och kapacitetsuppbyggnad inom fjärravkänning, GIS, klimatförändring, astronomi, kosmologi, rymdteknik, global navigering, robotik och rymdutbildning."
+            },
+            "ym-Ignatius-Ajuru-University-of-Education": {
+                "name": "IgnatiusMappersTeam (IMT)",
+                "description": "YouthMappers-filial vid Ignatius Ajuru University of Education",
+                "extendedDescription": "Vi är en YouthMappers-filial från Ignatius Ajuru University of Education som är engagerade i samhällskartläggning av vår miljö och fjärrkartläggning av motståndskraftiga samhällen. Vi är en grupp av frivilliga som använder openstreetmap och annan öppen geospatial källa för kartläggning."
+            },
+            "ym-University-of-Nigeria-Enugu-Campus": {
+                "name": "LionMappersTeam (LMT) Enugu",
+                "description": "YouthMappers-filial vid University of Nigeria, Enugu Campus"
+            },
+            "ym-University-of-Nigeria-Nsukka": {
+                "name": "LionMappersTeam (LMT) Nsukka",
+                "description": "YouthMappers-filial vid University of Nigeria, Nsukka",
+                "extendedDescription": "LionMappersTeam är ett dotterbolag till YouthMappers Network, med det enda syftet att ge medlemmarna möjlighet att lära sig och förbättra sina färdigheter inom kartläggning av vetenskap och skapa öppen geografisk data och analyser som adresserar lokalt definierade utmaningar globalt. Det är ett team av frivilliga för samhällskartläggning och geografisk information som tillhandahåller Openstreetmap, medborgarvetenskap och annan geospatial teknik för forskning, utbildning och svar på motståndskraftiga samhällsutmaningar. Vi är involverade i GIS och fjärravkänningsapplikationer och forskning. Vi är involverade i GIS och medborgarvetenskap, fältkartläggning, utbildningsverkstäder och resurser till gymnasier."
+            },
+            "ym-University-of-Port-Harcourt": {
+                "name": "UniqueMappersTeam (UMT) Port Harcourt",
+                "description": "YouthMappers-filial vid University of Port Harcourt",
+                "extendedDescription": "UniqueMappersTeam (UMT) Port Harcourt är en åtgärdsgrupp och ett team av frivilliga för en samarbetsdriven online-kartläggning riktad mot utbildning och bemyndigande av medlemmar med trending kartläggningskompetens för att skapa öppen geospatial data och analys som adresserar lokalt definierade utmaningar för geoinformation och tillhandahålla humanitära kartläggningstjänster för att motståndskraftiga samhällen i Niger Delta, Nigeria och på andra håll. Vi främjar Crowdsoucred Mapping och geografisk information som volontär med hjälp av OpenStreetMap (OSM) -plattform och andra tillgängliga plattformar för snabbkartläggning, katastrofkartläggning, kartläggning av geo-intelligens, kartuppdateringar och utbildning. Det är dotterbolag till Campusfilialen Humanitarian OpenStreetMap Team (HOT). Det är ett projektuppgiftsteam av YouthMappers som ger medlemmarna möjlighet att lära sig och förbättra sina färdigheter inom geoinformatik för att utforska globala möjligheter inom kartläggning och geoinformation."
+            },
+            "osm-africa-telegram": {
+                "name": "OpenStreetMap Africa Telegram",
+                "description": "OpenStreetMap Telegram för Afrika"
+            },
+            "ym-Insititue-d-Enseignement-Superieur-de-Ruhengeri": {
+                "name": "YouthMappers vid INES Ruhengeri",
+                "description": "YouthMappers-filial vid Insititue d' Enseignement Superieur de Ruhengeri"
+            },
+            "ym-University-of-Rwanda-Huye-Campus": {
+                "name": "Rwanda YouthMappers",
+                "description": "YouthMappers-filial vid University of Rwanda - Huye Campus"
+            },
+            "ym-Institut-Suprieur-de-Management-Kolda": {
+                "name": "Les Femmes Leaders de ISM/Kolda",
+                "description": "YouthMappers-filial vid Institut Supérieur de Management Kolda"
+            },
+            "ym-Universit-Gaston-Berger": {
+                "name": "YouthMappers vid UGB",
+                "description": "YouthMappers-filial vid Université Gaston Berger"
+            },
+            "ym-Fourah-Bay-College": {
+                "name": "Student's Geographical Association",
+                "description": "YouthMappers-filial vid Fourah Bay College"
+            },
+            "ym-Njala-University-Freetown-Campus": {
+                "name": "Njala Freetown YouthMappers",
+                "description": "YouthMappers-filial vid Njala University, Freetown Campus"
+            },
+            "ym-Njala-University-Njala-Campus": {
+                "name": "YouthMappers Njala University, Njala Campus",
+                "description": "YouthMappers-filial vid Njala University, Njala Campus"
+            },
+            "ym-University-of-Pretoria": {
+                "name": "Centre for Geoinformation Science",
+                "description": "YouthMappers-filial vid University of Pretoria"
+            },
+            "ym-Ardhi-University": {
+                "name": "ARU Mapper",
+                "description": "YouthMappers-filial vid Ardhi University"
+            },
+            "ym-Institute-of-Finance-Management": {
+                "name": "IFM mappers",
+                "description": "YouthMappers-filial vid Institute of Finance Management"
+            },
+            "ym-Institute-of-Rural-Development-Planning-Mwanza": {
+                "name": "Youth Mappers-filial vid Institute of Rural Development Planning - Lake Zone Centre",
+                "description": "YouthMappers-filial vid Institute of Rural Development Planning Mwanza"
+            },
+            "ym-Institute-of-Rural-Development-Planning": {
+                "name": "Mipango YouthMappers-filial",
+                "description": "YouthMappers-filial vid Institute of Rural Development Planning"
+            },
+            "ym-Open-University-of-Tanzania": {
+                "name": "Youth Mappers vid Open University of Tanzania",
+                "description": "YouthMappers-filial vid Open University of Tanzania"
+            },
+            "ym-Sokoine-University-of-Agriculture": {
+                "name": "SMCoSE YouthMappers",
+                "description": "YouthMappers-filial vid Sokoine University of Agriculture"
+            },
+            "ym-University-of-Dar-es-Salaam": {
+                "name": "YouthMappers vid University of Dar es Salaam",
+                "description": "YouthMappers-filial vid University of Dar es Salaam"
+            },
+            "ym-Busitema-University": {
+                "name": "Good Mappers",
+                "description": "YouthMappers-filial vid Busitema University"
+            },
+            "ym-Gulu-University": {
+                "name": "CSGU Mappers",
+                "description": "YouthMappers-filial vid Gulu University"
+            },
+            "ym-Kumi-University": {
+                "name": "Ever Last YouthMappers",
+                "description": "YouthMappers-filial vid Kumi University"
+            },
+            "ym-Makerere-University": {
+                "name": "Geo YouthMappers",
+                "description": "YouthMappers-filial vid Makerere University"
+            },
+            "ym-Mbarara-University-of-Science-and-Technology": {
+                "name": "MUST Street Mappers",
+                "description": "YouthMappers-filial vid Mbarara University of Science and Technology"
+            },
+            "ym-St.-Augustine-International-University": {
+                "name": "YouthMappers vid St Augustine International University",
+                "description": "YouthMappers-filial vid St. Augustine International University"
+            },
+            "ym-Uganda-Christian-University-Mbale-Campus": {
+                "name": "Mappers for Life",
+                "description": "YouthMappers-filial vid Uganda Christian University Mbale Campus"
+            },
+            "ym-Uganda-Pentecostal-University": {
+                "name": "HiTech Youth Mappers",
+                "description": "YouthMappers-filial vid Uganda Pentecostal University"
+            },
+            "ym-St.-Mawaggali-Trades-Training-Institute": {
+                "name": "MawaggaliMappers",
+                "description": "YouthMappers-filial vid St. Mawaggali Trades Training Institute"
+            },
+            "ym-The-University-of-Zambia": {
+                "name": "YouthMappers Unza",
+                "description": "YouthMappers-filial vid The University of Zambia"
+            },
+            "ym-University-of-Zimbabwe": {
+                "name": "UZMappers",
+                "description": "YouthMappers-filial vidUniversity of Zimbabwe"
+            },
+            "osm-afghanistan-facebook": {
+                "name": "OpenStreetMap Afghanistan",
+                "description": "Förbättra OpenStreetMap i Afghanistan"
+            },
             "OSM-BGD-facebook": {
                 "name": "OpenStreetMap Bangladesh",
                 "description": "Förbättra OpenStreetMap i Bangladesh",
                 "extendedDescription": "Kartlägger i Bangladesh? Har du frågor, vill du ansluta till gemenskapen här? Anslut dig på {url}. Alla är välkomna!"
             },
+            "ym-Asian-University-for-Women": {
+                "name": "YouthMappers vid AUW",
+                "description": "YouthMappers-filial vid Asian University for Women"
+            },
+            "ym-Dhaka-College": {
+                "name": "YouthMappers Daka College",
+                "description": "YouthMappers-filial vid Dhaka College"
+            },
+            "ym-Dhaka-University": {
+                "name": "Openstreetmap YouthMappers",
+                "description": "YouthMappers-filial vid Dhaka University"
+            },
+            "ym-Eastern-University": {
+                "name": "YouthMappers vid Eastern University",
+                "description": "YouthMappers-filial vid Eastern University"
+            },
+            "ym-Jahangirnagar-University": {
+                "name": "YouthMappers vid IRS, Jahangirnagar University",
+                "description": "YouthMappers-filial vid Jahangirnagar University"
+            },
+            "ym-Khulna-University": {
+                "description": "YouthMappers-filial vid Khulna University"
+            },
+            "ym-Rajshahi-University-of-Engineering-Technology": {
+                "name": "YouthMappers vid RUET",
+                "description": "YouthMappers-filial vid Rajshahi University of Engineering & Technology"
+            },
+            "ym-Sherubtse-College": {
+                "name": "Geographical Society",
+                "description": "YouthMappers-filial vid Sherubtse College"
+            },
             "OSM-India-facebook": {
                 "name": "OpenStreetMap Indien – Användarstödd kartläggning av grannskapet",
                 "description": "Förbättra OpenStreetMap i Indien",
-                "extendedDescription": "Kartlägger i Indien? Har du frågor, vill komma i kontakt med gemenskapen här? Gå med på {url}. Alla är välkomna!",
-                "events": {
-                    "sotmasia2018": {
-                        "name": "State of the Map Asia 2018",
-                        "description": "Kom till 2018 års upplaga av OpenStreetMaps regiontäckande evenemang State of the Map Asia i Indien",
-                        "where": "Indiska institutet för förvaltning, Bangalore, Indien"
-                    }
-                }
+                "extendedDescription": "Kartlägger i Indien? Har du frågor, vill komma i kontakt med gemenskapen här? Gå med på {url}. Alla är välkomna!"
             },
             "osm-india-forum": {
                 "name": "Forum för OpenStreetMap Indien",
@@ -9412,10 +10109,22 @@
                 "description": "FSHM:s Riot-grupp för att diskutera, dela och uppdatera om kartläggningsaktiviteter och evenemang i och omkring Puducherry",
                 "extendedDescription": "FSHM:s medlemmar delar sina kartläggningsuppdateringar / -erfarenheter i OSM genom Riot.im-gruppen, denna grupp används även för att diskutera saker relaterade till fri mjukvara / hårdvara, teknologi och aktivism."
             },
+            "ym-Gujarat-University": {
+                "name": "CCIM vid Ahmedabad",
+                "description": "YouthMappers-filial vid Gujarat University"
+            },
             "OSM-IDN-facebook": {
                 "name": "OpenStreetMap Indonesien",
                 "description": "Förbättra OpenStreetMap i Indonesien",
                 "extendedDescription": "Kartlägger i Indonesien? Har du frågor, vill du ansluta till gemenskapen här? Anslut dig på {Url}. Alla är välkomna!"
+            },
+            "ym-Universitas-Negeri-Makassar": {
+                "name": "Kontur Geografi",
+                "description": "YouthMappers-filial vid Universitas Negeri Makassar"
+            },
+            "ym-University-Muhammadiyah-Surakarta": {
+                "name": "SpaceTime",
+                "description": "YouthMappers-filial vid University Muhammadiyah Surakarta"
             },
             "osm-iran-aparat": {
                 "name": "OpenStreetMap Iran Aparat",
@@ -9474,6 +10183,18 @@
                 "description": "Förbättra OpenStreetMap i Nepal",
                 "extendedDescription": "Kartlägger i Nepal? Har du frågor, vill du ansluta till gemenskapen här? Anslut dig på {Url}. Alla är välkomna!"
             },
+            "ym-Institute-of-Crisis-Management-Studies": {
+                "name": "Institute of Crisis Management Studies YouthMappers",
+                "description": "YouthMappers-filial vid Institute of Crisis Management Studies"
+            },
+            "ym-Kathmandu-University": {
+                "name": "Geomatics Engineering Society,GES",
+                "description": "YouthMappers-filial vid Kathmandu University"
+            },
+            "ym-Tribhuvan-University": {
+                "name": "Geomatics Engineering Students Association",
+                "description": "YouthMappers-filial vid Tribhuvan University"
+            },
             "OSM-Asia-mailinglist": {
                 "name": "E-postlista för OpenStreetMap Asien",
                 "description": "Talk-asia är den officiella e-postlistan för gemenskapen i Asien"
@@ -9498,6 +10219,14 @@
                 "name": "Telegram för OpenStreetMap PH",
                 "description": "Inofficiell, lokal gemenskap på Telegram för OpenStreetMaps bidragsgivare och vänner på Filippinerna"
             },
+            "ym-Far-Eastern-University-Institute-of-Technology": {
+                "name": "Junior Philippines Computer Society",
+                "description": "YouthMappers-filial vid Far Eastern University -Institute of Technology"
+            },
+            "ym-University-of-the-Philippines-Resilience-Institute": {
+                "name": "YouthMappers UP Resilience Institute",
+                "description": "YouthMappers-filial vid University of the Philippines Resilience Institute"
+            },
             "OSM-RU-forum": {
                 "name": "Forum för OpenStreetMap RU",
                 "description": "Webbforum för OpenStreetMap Ryssland"
@@ -9505,10 +10234,6 @@
             "OSM-RU-telegram": {
                 "name": "Telegram för OpenStreetMap RU",
                 "description": "Telegram-chatt för OpenStreetMap Rysland"
-            },
-            "OSM-south-korea-telegram": {
-                "name": "OSM Sydkorea på Telegram",
-                "description": "Inofficiell kanal för bidragsgivare till OpenStreetMap, sammanslutningar och användare i Sydkorea för att dela och diskutera."
             },
             "OSM-sri-lanka-facebook": {
                 "name": "OpenStreetMap Sri Lanka",
@@ -9578,7 +10303,6 @@
                 "description": "Telegram-chatt för OpenStreetMap Vitryssland"
             },
             "be-facebook": {
-                "name": "OpenStreetMap BE-gemenskap",
                 "description": "Kartläggare och OpenStreetMap på Facebook i Belgien"
             },
             "be-forum": {
@@ -9625,8 +10349,7 @@
                 "description": "Kartportal, webbplats och kontaktuppgifter för OSM-medlemmar i Tjeckien"
             },
             "osmcz-facebook": {
-                "name": "OpenStreetMap CZ på Facebook",
-                "description": "Följ tjeckiska gemenskapen på Facebook – inklusive översatt WeeklyOSM!"
+                "name": "OpenStreetMap CZ på Facebook"
             },
             "osmcz-twitter": {
                 "name": "Tjeckiska twitter @osmcz",
@@ -9720,6 +10443,10 @@
                 "name": "OpenStreetMap Tyskland",
                 "description": "Plattformen för information om OpenStreetMap i Tyskland"
             },
+            "ym-Heidelberg-University": {
+                "name": "disastermappers heidelberg",
+                "description": "YouthMappers-filial vid Heidelberg University"
+            },
             "hu-facebook": {
                 "name": "OpenStreetMap HU på Facebook",
                 "description": "Kartläggar- och OpenStreetMap-facebook i Ungern"
@@ -9782,9 +10509,21 @@
                 "name": "E-postlista för OpenStreetMap i Trento",
                 "description": "Regional e-postlista för OpenStreetMap Italien i Trentino"
             },
+            "ym-Politecnico-di-Milano": {
+                "name": "PoliMappers",
+                "description": "YouthMappers-filial vid Politecnico di Milano"
+            },
             "kosovo-telegram": {
                 "name": "Telegram Kosovo för OpenStreetMap",
                 "description": "Halvofficiell publik Telegram-grupp för hela Kosovo. Vi välkomnar alla kartläggare från var som helst på vilket språk som helst."
+            },
+            "lu-mailinglist": {
+                "name": "E-postlistan Talk-lu",
+                "description": "Officiell e-postlista för luxemburgska OSM-gemenskap"
+            },
+            "ym-Universit-Mohammed-V-Rabat": {
+                "name": "Brahmapoutre vid Rabat",
+                "description": "YouthMappers-filial vid Université Mohammed V Rabat"
             },
             "no-forum": {
                 "name": "Webbforum för OpenStreetMap Norge",
@@ -9810,6 +10549,13 @@
                 "name": "Forum för OpenStreetMap Polen",
                 "description": "Forum för den polska OpenStreetMap-gemenskapen"
             },
+            "pt-mailinglist": {
+                "name": "E-postlistan Talk-pt",
+                "description": "Talk-pt är den officiella e-postlistan för den portugisiska OSM-gemenskapen"
+            },
+            "pt-telegram": {
+                "description": "Telegram-grupp för den portugisiska OpenStreetMap-gemenskapen {url}"
+            },
             "si-forum": {
                 "name": "Forum för OpenStreetMap Slovenien",
                 "description": "Forum för den slovenska OpenStreetMap-gemenskapen"
@@ -9818,6 +10564,10 @@
                 "name": "E-postlista för OpenStreetMap i Slovenien",
                 "description": "E-postlista för den slovenska OpenStreetMap-gemenskapen"
             },
+            "si-twitter": {
+                "name": "OpenStreetMap Slovenien på Twitter",
+                "description": "Följ OpenStreetMap Slovenien på Twitter: {url}"
+            },
             "OSM-ES-mailinglist": {
                 "name": "E-postlistan Talk-es",
                 "description": "En e-postlista för att diskutera OpenStreetMap i Spanien"
@@ -9825,6 +10575,14 @@
             "OSM-ES-telegram": {
                 "name": "@OSMes på Telegram",
                 "description": "Telegram-chatt för OpenStreetMap Spanien"
+            },
+            "ym-Universidad-Autonoma-de-Madrid": {
+                "name": "YouthMappers vid UAM",
+                "description": "YouthMappers-filial vid Universidad Autonoma de Madrid"
+            },
+            "ym-Universidad-Politcnica-de-Madrid": {
+                "name": "Mapeo Humanitario",
+                "description": "YouthMappers-filial vid Universidad Politécnica de Madrid"
             },
             "osm-se": {
                 "name": "OpenStreetMap.se",
@@ -9850,24 +10608,90 @@
                 "name": "OpenStreetMap Sverige på Twitter",
                 "description": "Följ oss på Twitter: {url}"
             },
+            "ym-Istanbul-Technical-University": {
+                "name": "YouthMappers ITU",
+                "description": "YouthMappers-filial vid Istanbul Technical University"
+            },
+            "ua-facebook": {
+                "name": "OpenStreetMap Ukraina Facebook-grupp",
+                "description": "Anslut till gemenskapen i OpenStreetMap Ukraina via Facebook"
+            },
+            "ua-forum": {
+                "name": "Forum för OpenStreetMap Ukraina",
+                "description": "Forum för den ukrainska OpenStreetMap-gemenskapen"
+            },
+            "ua-github": {
+                "name": "OpenStreetMap Ukraina på GitHub",
+                "description": "OpenStreetMap Ukraina på GitHub"
+            },
+            "ua-slack": {
+                "name": "OpenStreetMap Ukraina på Slack",
+                "description": "Anslut till gemenskapen i OpenStreetMap Ukraina via Slack"
+            },
+            "ua-telegram": {
+                "name": "@osmUA på Telegram",
+                "description": "Telegram-chatt för OpenStreetMap Ukraina"
+            },
+            "ua-twitter": {
+                "name": "OpenStreetMap UA på Twitter",
+                "description": "OpenStreetMap Ukraina på Twitter: {url}"
+            },
+            "ua-osm": {
+                "name": "OpenStreetMap Ukrainas webbsida",
+                "description": "OpenStreetMap webbsida i Ukraine"
+            },
             "Nottingham-OSM-pub-meetup": {
                 "name": "Pub-möte en gång i månaden i East Midlands (Nottingham)",
                 "description": "Social sammankomst för kartläggare och användare i East Midlands",
                 "extendedDescription": "En grupp har träffats sedan mars 2011, ursprungligen i Nottingham, och senare i Derby och ibland någon annanstans i East Midlands. Det är sociala träffar, men det är en utmärkt plats att komma till för att ställa specifika frågor om OSM, antingen i närområdet eller i allmänhet. Under sommarmånaderna brukar vi göra lite lätt kartläggning i en timme i närheten av vår mötesplats. Gruppen som helhet har ett särskilt intresse för att kartlägga vägrestriktioner  och då och då har vi kartläggningsmöten för detta ändamål."
             },
+            "gb-irc": {
+                "name": "IRC för OpenStreetMap Storbritannien",
+                "description": "Anslut #osm-gb på irc.oftc.net (port 6667)",
+                "extendedDescription": "Anslut #osm-gb på irc.oftc.net (port 6667). Ha tålamod och vänta några minuter om du ställer en fråga"
+            },
+            "uk-localchapter": {
+                "name": "OpenStreetMap UK",
+                "description": "Den officiella lokala filialen för Storbritannien (inklusive Nordirland).",
+                "extendedDescription": "Vi stöder OpenStreetMap genom att hålla evenemang, tillhandahålla gemenskapsresurser, bygga partnerskap och genom att sprida ordet. Gå med i OpenStreetMap UK här: {signupUrl}"
+            },
+            "uk-london-twitter": {
+                "name": "OpenStreetMap London på Twitter",
+                "description": "OpenStreetMap London på Twitter: {url}"
+            },
             "gb-mailinglist": {
                 "name": "E-postlistan Talk-gb",
-                "description": "Talk-be är den officiella kommunikationslistan för den brittiska (inklusive nordirländska)  OSM-gemenskapen"
+                "description": "Talk-gb är den officiella kommunikationslistan för storbritanniska (inklusive nordirländska) OSM-gemenskapen"
             },
             "mappa-mercia-group": {
                 "name": "Lokalgrupp Mappa Mercia",
                 "description": "Ett hem för OpenStreetMap-entusiaster i Midlands",
                 "extendedDescription": "Mappa Mercia är ett projekt att förbättra OpenStreetMap i West Midlands, Storbritannien. Vi har gemenskapsevenemang, tillhandahåller upplärning och ger support till lokala organisationer som vill öppna upp sin data."
             },
-            "gb-irc": {
-                "name": "IRC för OpenStreetMap Storbritannien",
-                "description": "Anslut #osm-gb på irc.oftc.net (port 6667)",
-                "extendedDescription": "Anslut #osm-gb på irc.oftc.net (port 6667). Ha tålamod och vänta några minuter om du ställer en fråga"
+            "uk-twitter": {
+                "name": "OpenStreetMap UK på Twitter",
+                "description": "OpenStreetMap UK på Twitter: {url}"
+            },
+            "ym-Queen-Mary-University-of-London": {
+                "name": "Queen Mary YouthMappers",
+                "description": "YouthMappers-filial vid Queen Mary University of London",
+                "extendedDescription": "Denna filial kommer att vara en del av aktiviteterna i Queen Mary Geography Society."
+            },
+            "ym-University-of-Exeter": {
+                "name": "University of Exeter British Red Cross Missing Maps",
+                "description": "YouthMappers-filial vid University of Exeter"
+            },
+            "ym-University-of-Warwick": {
+                "name": "University of Warwick Resilience Mapping Society",
+                "description": "YouthMappers-filial vid University of Warwick"
+            },
+            "ym-Yarmouk-University": {
+                "name": "YouthMappers vid YU",
+                "description": "YouthMappers-filial vid Yarmouk University"
+            },
+            "ym-Sacred-Heart-Junior-College": {
+                "name": "Youth Mappers vid Sacred Heart Junior College",
+                "description": "YouthMappers-filial vid Sacred Heart Junior College"
             },
             "OSM-CA-Slack": {
                 "name": "OSM-CA på Slack",
@@ -9877,9 +10701,52 @@
                 "name": "OpenStreetMap Vancouver",
                 "description": "Kartläggare och OpenStreetMap-användare i Vancouver, BC-området"
             },
+            "ym-Universidad-de-Costa-Rica": {
+                "name": "YouthMappers vid Universidad de Costa Rica",
+                "description": "YouthMappers-filial vid Universidad de Costa Rica"
+            },
             "OSM-CU-telegram": {
                 "name": "OSM Kuba på Telegram",
                 "description": "Telegram-chatt för OpenStreetMap Kuba"
+            },
+            "ym-Universidad-Nacional-Autnoma-de-Honduras": {
+                "name": "PumaGis Hn",
+                "description": "YouthMappers-filial vid Universidad Nacional Autónoma de Honduras"
+            },
+            "ym-University-of-the-West-Indies-Mona-Campus": {
+                "name": "Libraries Outreach - ODL",
+                "description": "YouthMappers-filial vid University of the West Indies, Mona Campus"
+            },
+            "ni-facebook": {
+                "name": "OpenStreetMap NI-gemenskap",
+                "description": "Kartläggare och OpenStreetMap på Facebook i Nicaragua"
+            },
+            "ni-mailinglist": {
+                "name": "E-postlistan Talk-ni",
+                "description": "Talk-ni är den officiella e-postlistan för den nicaraguanska OSM-gemenskapen"
+            },
+            "ni-telegram": {
+                "name": "OSM Nicaragua på Telegram",
+                "description": "Telegram-chatt för OpenStreetMap Nicaragua"
+            },
+            "ni-twitter": {
+                "name": "OpenStreetMap Nicaragua på Twitter",
+                "description": "OSM Nicaragua på Twitter: @osm_ni"
+            },
+            "osm-ni": {
+                "name": "MapaNica.net"
+            },
+            "ym-Universidad-Nacional-de-Ingenieria": {
+                "name": "Yeka Street MGA",
+                "description": "YouthMappers-filial vid Universidad Nacional de Ingenieria"
+            },
+            "ym-University-of-Panama": {
+                "name": "YouthMappers UP",
+                "description": "YouthMappers-filial vid University of Panama"
+            },
+            "ym-Universidad-de-Puerto-Rico-Rio-Piedras": {
+                "name": "UPR YouthMappers",
+                "description": "YouthMappers-filial vid Universidad de Puerto Rico - Rio Piedras"
             },
             "Bay-Area-OpenStreetMappers": {
                 "name": "Bay Area OpenStreetMappers",
@@ -9951,10 +10818,6 @@
                 "description": "Kartläggare och OpenStreetMap-användare i staten Colorado, USA",
                 "extendedDescription": "OpenStreetMap (OSM) Colorado är en lokal gemenskap med personer som är intresserade av att bidra till att skapa gratiskartor. Vi uppmuntrar alla våra kartläggare att organisera eller föreslå kartläggningsevenemang i hela staten. Meetup-aktiviteter kan vara enkla sociala träffar, enkla eller avancerade utbildningar kring OSM eller gemensamma kartläggningsatsningar."
             },
-            "OSM-NYC": {
-                "name": "OpenStreetMap NYC",
-                "description": "Kartläggare och OpenStreetMap-användare, utvecklare och entusiaster runt storstadsregionen New Yorks."
-            },
             "OSM-Portland-forum": {
                 "name": "OpenStreetMap PDX på Google Group",
                 "description": "Forum och e-postlista för OpenStreetMap-användare runt Portland",
@@ -9991,12 +10854,7 @@
             "OSM-US": {
                 "name": "OpenStreetMap US",
                 "description": "Vi hjälper till att utöka och förbättra OpenStreetMap i USA.",
-                "extendedDescription": "Vi stöder OpenStreetMap genom att ha årliga konferencier, tillhandahåller resurser för gemenskapen, bygger nätverk och genom att sprida ordet. Gå med i OpenStreetMap USA här: {signupUrl}",
-                "events": {
-                    "sotmus2019": {
-                        "name": "State of the Map US 2019"
-                    }
-                }
+                "extendedDescription": "Vi stöder OpenStreetMap genom att ha årliga konferencier, tillhandahåller resurser för gemenskapen, bygger nätverk och genom att sprida ordet. Gå med i OpenStreetMap USA här: {signupUrl}"
             },
             "OSM-Utah": {
                 "name": "OpenStreetMap Utah",
@@ -10026,12 +10884,187 @@
                 "description": "Kartläggare och OpenStreetMap-användare kring Grand Junction, Colorado",
                 "extendedDescription": "Målet med denna grupp är att introducera OpenStreetMap för allmänheten, utveckla en gemenskap av kartläggare, skapa den bästa möjliga geodatan med alla till buds stående medel och därefter få ut denna data i samhället. Föreställ dig korrekta vägskyltar! Föreställ dig ytterligare förbättring av cykelvägar! Föreställ dig precis vad som helst, det är det som är glädjen med OpenStreetMap!"
             },
+            "ym-Ball-State-University": {
+                "name": "Gamma Theta Upsilon- Iota Omega-filial",
+                "description": "YouthMappers-filial vid Ball State University"
+            },
+            "ym-California-University-of-Pennsylvania": {
+                "name": "CalU PA GIS Club",
+                "description": "YouthMappers-filial vid California University of Pennsylvania"
+            },
+            "ym-Central-Washington-University": {
+                "name": "Geography Club",
+                "description": "YouthMappers-filial vid Central Washington University"
+            },
+            "ym-Clemson-University": {
+                "name": "Clemson Mappers",
+                "description": "YouthMappers-filial vid Clemson University"
+            },
+            "ym-College-of-William-and-Mary": {
+                "name": "All over the map!",
+                "description": "YouthMappers-filial vid College of William and Mary"
+            },
+            "ym-Cornell-University": {
+                "name": "Mapping Society",
+                "description": "YouthMappers-filial vid Cornell University"
+            },
+            "ym-George-Mason-University": {
+                "name": "Mason Mappers",
+                "description": "YouthMappers-filial vid George Mason University"
+            },
+            "ym-Indiana-University-of-Pennsylvania": {
+                "name": "Geospatial Science Club",
+                "description": "YouthMappers-filial vid Indiana University of Pennsylvania"
+            },
+            "ym-Jacksonville-State-University": {
+                "name": "JSU Disaster Mapping Team",
+                "description": "YouthMappers-filial vid Jacksonville State University"
+            },
+            "ym-Kansas-State-University": {
+                "name": "Gamma Theta Upsilon: Beta Psi-filial",
+                "description": "YouthMappers-filial vid Kansas State University"
+            },
+            "ym-McGill-University": {
+                "description": "YouthMappers-filial vid McGill University"
+            },
+            "ym-Miami-University": {
+                "name": "Geography and Planning Society",
+                "description": "YouthMappers-filial vid Miami University"
+            },
+            "ym-Monroe-Community-College": {
+                "name": "MCC Mapping Corps",
+                "description": "YouthMappers-filial vid Monroe Community College"
+            },
+            "ym-Montgomery-College": {
+                "name": "GeoMC",
+                "description": "YouthMappers-filial vid Montgomery College"
+            },
+            "ym-New-York-University": {
+                "name": "NYU mHealth Initiative Mapping Corps",
+                "description": "YouthMappers-filial vid New York University"
+            },
+            "ym-Ohio-Wesleyan-University": {
+                "name": "Environment and Wildlife Club",
+                "description": "YouthMappers-filial vid Ohio Wesleyan University"
+            },
+            "ym-Oklahoma-State-University": {
+                "name": "Geography Club",
+                "description": "YouthMappers-filial vid Oklahoma State University"
+            },
+            "ym-State-University-of-New-York-Geneseo": {
+                "name": "SUNY Geneseo GIS Association",
+                "description": "YouthMappers-filial vid State University of New York Geneseo"
+            },
+            "ym-SUNY-at-Fredonia": {
+                "name": "Geoventurers",
+                "description": "YouthMappers-filial vid SUNY at Fredonia"
+            },
+            "ym-Texas-Tech-University": {
+                "name": "YouthMappers vid TTU",
+                "description": "YouthMappers-filial vid Texas Tech University"
+            },
+            "ym-The-Citadel": {
+                "name": "YouthMappers vid The Citadel",
+                "description": "YouthMappers-filial vid The Citadel"
+            },
+            "ym-The-George-Washington-University": {
+                "name": "Humanitarian Mapping Society",
+                "description": "YouthMappers-filial vid The George Washington University"
+            },
+            "ym-The-Johns-Hopkins-University-SAIS": {
+                "name": "SAIS YouthMappers",
+                "description": "YouthMappers-filial vid The Johns Hopkins University, SAIS"
+            },
+            "ym-The-Pennsylvania-State-University": {
+                "name": "Penn State GIS Coalition",
+                "description": "YouthMappers-filial vid The Pennsylvania State University"
+            },
+            "ym-University-of-California-Davis": {
+                "name": "Mapping Club",
+                "description": "YouthMappers-filial vid University of California, Davis"
+            },
+            "ym-University-of-Central-Florida": {
+                "name": "Geospatial Information Society",
+                "description": "YouthMappers-filial vid University of Central Florida"
+            },
+            "ym-University-of-Chicago": {
+                "name": "Tobler Society",
+                "description": "YouthMappers-filial vid University of Chicago"
+            },
+            "ym-University-of-Maryland-College-Park": {
+                "name": "Geography Club",
+                "description": "YouthMappers-filial vid University of Maryland - College Park"
+            },
+            "ym-University-of-North-Texas": {
+                "name": "UNT Geography Club",
+                "description": "YouthMappers-filial vid University of North Texas"
+            },
+            "ym-University-of-Northern-Colorado": {
+                "name": "UNCO Geography and GIS Club",
+                "description": "YouthMappers-filial vid University of Northern Colorado"
+            },
+            "ym-University-of-Oregon": {
+                "name": "Map by Northwest",
+                "description": "YouthMappers-filial vid University of Oregon"
+            },
+            "ym-University-of-Redlands": {
+                "name": "URSpatial Geo-Thinkers",
+                "description": "YouthMappers-filial vid University of Redlands"
+            },
+            "ym-University-of-South-Carolina": {
+                "name": "Geography Graduate Student Association",
+                "description": "YouthMappers-filial vid University of South Carolina"
+            },
+            "ym-University-of-Southern-California": {
+                "name": "SC Mappers",
+                "description": "YouthMappers-filial vid University of Southern California"
+            },
+            "ym-University-of-Vermont": {
+                "name": "University of Vermont Humanitarian Mapping Club",
+                "description": "YouthMappers-filial vid University of Vermont"
+            },
+            "ym-University-of-Victoria": {
+                "name": "Society of Geography Students",
+                "description": "YouthMappers-filial vid University of Victoria"
+            },
+            "ym-University-of-Wyoming": {
+                "name": "Gamma Theta Upsilon/Geography Club",
+                "description": "YouthMappers-filial vid University of Wyoming"
+            },
+            "ym-UW-Madison": {
+                "name": "BadgerMaps",
+                "description": "YouthMappers-filial vid UW-Madison"
+            },
+            "ym-Vassar-College": {
+                "name": "Hudson Valley Mappers",
+                "description": "YouthMappers-filial vid Vassar College"
+            },
+            "ym-Villanova-University": {
+                "name": "The Villanova Globeplotters",
+                "description": "YouthMappers-filial vid Villanova University"
+            },
+            "ym-West-Virginia-University": {
+                "name": "Maptime Morgantown",
+                "description": "YouthMappers-filial vid West Virginia University"
+            },
             "ym-Western-Michigan-University": {
-                "name": "Geografiska klubben"
+                "name": "Geografiska klubben",
+                "description": "YouthMappers-filial vid Western Michigan University"
+            },
+            "geogeeks_perth_meetup": {
+                "name": "GeoGeeks Perth Meetup"
             },
             "talk-au": {
                 "name": "E-postlistan Talk-au",
                 "description": "Plats där australienska användare kan chatta"
+            },
+            "Maptime-Oceania-Slack": {
+                "name": "Maptime Oceania på Slack",
+                "description": "Registrera dig på {signupUrl}"
+            },
+            "talk-nz": {
+                "name": "E-postlistan Talk-nz",
+                "description": "Femenskapsdiskussion för Nya Zeelands OSM"
             },
             "OSM-AR-facebook": {
                 "name": "OpenStreetMap Argentina på Facebook",
@@ -10076,6 +11109,10 @@
                 "name": "Telegram för OpenStreetMap Brasília",
                 "description": "Anslut till gemenskapen på OpenStreetMap Brasília via Telegram",
                 "extendedDescription": "Anslut till gemenskapen för att lära dig mer om OpenStreetMap, ställa frågor eller delta på våra möten. Alla är välkomna!"
+            },
+            "OSM-br-discord": {
+                "name": "OpenStreetMap Brasil Discord",
+                "description": "Anslut till gemenskapen i OpenStreetMap Brasilien via Discord"
             },
             "OSM-br-mailinglist": {
                 "name": "E-postlistan Talk-br",
@@ -10139,6 +11176,30 @@
                 "name": "OpenStreetMap Colombia",
                 "description": "Nyheter om OpenStreetMap Colombia-gemenskapen och OSMCo Foundation"
             },
+            "ym-Universidad-de-Antioquia": {
+                "name": "Geomatica UDEA",
+                "description": "YouthMappers-filial vid Universidad de Antioquia"
+            },
+            "ym-Universidad-de-La-Guajira": {
+                "name": "Grupo Mesh",
+                "description": "YouthMappers-filial vid Universidad de La Guajira"
+            },
+            "ym-Universidad-de-Los-Andes": {
+                "name": "Cartografos Uniandes",
+                "description": "YouthMappers-filial vid Universidad de Los Andes"
+            },
+            "ym-Universidad-de-San-Buenaventura": {
+                "name": "YouthMappers San Buenaventura",
+                "description": "YouthMappers-filial vid Universidad de San Buenaventura"
+            },
+            "ym-Universidad-Distrital-Francisco-Jose-de-Caldas": {
+                "name": "YouthMappers på Bogota",
+                "description": "YouthMappers-filial vid Universidad Distrital Francisco Jose de Caldas"
+            },
+            "ym-Universidad-Nacional-de-Colombia": {
+                "name": "Grupo UN",
+                "description": "YouthMappers-filial vid Universidad Nacional de Colombia"
+            },
             "OSM-EC-telegram": {
                 "name": "OSM Ecuador på Telegram",
                 "description": "Telegram-chatt för OpenStreetMap Ecuador"
@@ -10171,6 +11232,31 @@
                 "name": "OpenStreetMap Peru",
                 "description": "Nyheter och resurser för OpenStreetMap Peru-gemenskapen"
             },
+            "uy-forum": {
+                "name": "Forum för OpenStreetMap UY",
+                "description": "Webbforum för OpenStreetMap Uruguay"
+            },
+            "uy-irc": {
+                "name": "IRC för OpenStreetMap Uruguay",
+                "description": "Anslut #osmuruguay på irc.freenode.org (port 6667)",
+                "extendedDescription": "Anslut #osmuruguay på irc.freenode.org"
+            },
+            "uy-mailinglist": {
+                "name": "E-postlistan Talk-uy",
+                "description": "Talk-uy är den officiella e-postlistan för den uruguayanska OSM-gemenskapen"
+            },
+            "ve-forum": {
+                "name": "Forum för OpenStreetMap VE",
+                "description": "Webbforum för OpenStreetMap Venezuela"
+            },
+            "ve-mailinglist": {
+                "name": "E-postlistan Talk-ve",
+                "description": "Talk-ve är den officiella e-postlistan för den venezolanska OSM-gemenskapen"
+            },
+            "ve-telegram": {
+                "name": "Telegram för OpenStreetMap Venezuela",
+                "description": "Anslut till gemenskapen i OpenStreetMap Venezuela via Telegram"
+            },
             "LATAM-Facebook": {
                 "name": "OpenStreetMap Latam på Facebook",
                 "description": "OpenStreetMap Latam på Facebook"
@@ -10185,14 +11271,7 @@
             },
             "osm-latam": {
                 "name": "OpenStreetMap Latam",
-                "description": "Stöder OpenStreetMap i Latinamerika",
-                "events": {
-                    "sotm-latam-2018": {
-                        "name": "State of the Map Latam 2018",
-                        "description": "State of the Map Latam är en årlig konferens för alla kartläggare och användare av OpenStreetMap i Latinamerika. Programmet innehåller föreläsningar, paneldebatter, workshops och mapathons relaterade till OpenStreetMap.",
-                        "where": "Buenos Aires, Argentina"
-                    }
-                }
+                "description": "Stöder OpenStreetMap i Latinamerika"
             },
             "OSM-Discord": {
                 "name": "OpenStreetMap Discord",
@@ -10226,14 +11305,7 @@
             "OSMF": {
                 "name": "OpenStreetMap Foundation",
                 "description": "OSMF är en ideell organisation baserat i Storbritannien som stöttar OpenStreetMap-projekt.",
-                "extendedDescription": "OSMF stöder OpenStreetMap genom insamling, underhåll av servrarna som driver OSM, organiserar den årliga State of the Map-konferensen och samordnar de volontärer som håller OSM igång. Du kan visa ditt stöd och göra din röst hörd för OpenStreetMap genom att bli medlem i OSMF här: {signupUrl}",
-                "events": {
-                    "sotm2018": {
-                        "name": "State of the Map 2018",
-                        "description": "Delta på den 3 dagar långa årliga världsomspännande OpenStreetMap-konferensen i Milano, Italien, vilken sammanför alla i gemenskapen för att umgås, dela med sig och lära.",
-                        "where": "Milan, Italien"
-                    }
-                }
+                "extendedDescription": "OSMF stöder OpenStreetMap genom insamling, underhåll av servrarna som driver OSM, organiserar den årliga State of the Map-konferensen och samordnar de volontärer som håller OSM igång. Du kan visa ditt stöd och göra din röst hörd för OpenStreetMap genom att bli medlem i OSMF här: {signupUrl}"
             }
         }
     }

@@ -83,7 +83,7 @@
             "add": {
                 "annotation": {
                     "point": "Adicionou um ponto.",
-                    "vertex": "Adicionou um ponto numa linha.",
+                    "vertex": "Adicionou um nó em uma linha.",
                     "relation": "Adicionou uma relação.",
                     "note": "Adicionou uma nota."
                 }
@@ -396,9 +396,21 @@
             },
             "reverse": {
                 "title": "Inverter",
-                "description": "Fazer esta via/linha ir na direção oposta.",
+                "description": {
+                    "point": "Vire a direção deste ponto.",
+                    "points": "Vire a direção desses pontos.",
+                    "line": "Faça esta linha seguir na direção oposta.",
+                    "lines": "Faça essas linhas seguirem na direção oposta.",
+                    "features": "Inverta as instruções desses recursos."
+                },
                 "key": "V",
-                "annotation": "Inverteu uma linha."
+                "annotation": {
+                    "point": "Pontos invertido",
+                    "points": "Vários pontos invertidos.",
+                    "line": "Inverteu uma linha.",
+                    "lines": "Inverter várias linhas.",
+                    "features": "Vários recursos invertidos."
+                }
             },
             "split": {
                 "title": "Dividir",
@@ -697,7 +709,7 @@
             "switch": "Voltar para este fundo de tela",
             "custom": "Customizado",
             "overlays": "Sobreposições",
-            "imagery_source_faq": "Informações sobre imagens / Relatar um problema",
+            "imagery_problem_faq": "Relatar um problema de imagens",
             "reset": "redefinir",
             "reset_all": "Reiniciar tudo",
             "display_options": "Opções de exibição",
@@ -709,6 +721,10 @@
                 "description": "Mostrar minimapa",
                 "tooltip": "Afastar a visualização do mapa para facilitar a localização da área atualmente mostrada.",
                 "key": "/"
+            },
+            "panel": {
+                "description": "Mostrar painel de detalhes",
+                "tooltip": "Mostrar informações avançadas de plano de fundo."
             },
             "fix_misalignment": "Ajustar o deslocamento da imagem de fundo",
             "offset": "Arraste em qualquer ponto da área cinza abaixo para ajustar o deslocamento da imagem, ou entre com o valor do deslocamento em metros."
@@ -741,10 +757,19 @@
                     "zoom": "Zoom para dados"
                 }
             },
-            "fill_area": "Areas de Preenchimento",
+            "style_options": "Opções de estilo",
+            "highlight_edits": {
+                "key": "G"
+            },
             "map_features": "Elementos do Mapa",
             "autohidden": "Estes elementos foram automaticamente ocultados porque muitos seriam exibidos na tela. Dê um zoom para editá-los.",
             "osmhidden": "Estes elementos foram automaticamente ocultados porque a camada do OpenStreetMap está ocultada."
+        },
+        "visual_diff": {
+            "highlight_edits": {
+                "description": "Realçar alterações",
+                "tooltip": "Estrutura de tópicos de recursos editados"
+            }
         },
         "photo_overlays": {
             "title": "Sobreposições de fotos",
@@ -1315,6 +1340,11 @@
         "mapillary_images": {
             "tooltip": "Fotos a nível de rua do Mapillary"
         },
+        "mapillary_map_features": {
+            "title": "Elementos do Mapa",
+            "tooltip": "Elementos do mapa do Mapillary",
+            "request_data": "Dados Solicitados"
+        },
         "mapillary": {
             "title": "Mapillary",
             "signs": {
@@ -1591,18 +1621,21 @@
             "rules": {
                 "title": "Regras"
             },
+            "user_resolved_issues": "Problemas resolvidos por suas edições",
+            "warnings_and_errors": "Avisos e erros",
             "no_issues": {
                 "message": {
                     "everything": "Tudo parece bem",
                     "everything_in_view": "Tudo em vista parece bem",
                     "edits": "Suas edições parecem bem",
-                    "edits_in_view": "Suas edições estão bem"
+                    "edits_in_view": "Suas edições estão bem",
+                    "no_edits": "Você ainda não tem edições"
                 },
                 "hidden_issues": {
                     "none": "Problemas detectados aparecerão aqui",
                     "elsewhere": "Problemas em outros lugares: {count}",
-                    "other_features": "Problemas com outros recursos: {count}",
-                    "other_features_elsewhere": "Problemas em outros lugares com outros recursos: {count}",
+                    "everything_else": "Problemas com todo o resto: {count}",
+                    "everything_else_elsewhere": "Problemas em outros lugares com todo o resto: {count}",
                     "disabled_rules": "Problemas com regras desativadas: {count}",
                     "disabled_rules_elsewhere": "Problemas em outros lugares com regras desativadas: {count}",
                     "ignored_issues": "Problemas ignorados: {count}",
@@ -1720,16 +1753,17 @@
                 }
             },
             "fixme_tag": {
-                "title": "Solicitações \"Consertar-me\"",
                 "message": "{feature} tem uma solicitação \"Consertar-me\"",
-                "tip": "Encontre recursos com etiquetas \"fixme\"",
                 "reference": "Uma etiqueta  \"fixme\" indica que um mapeador solicitou ajuda com um recurso."
             },
             "generic_name": {
-                "title": "Nomes suspeitos",
                 "message": "{feature} tem o nome suspeito \"{name}\"",
-                "tip": "Encontre recursos com nomes genéricos ou suspeitos",
+                "message_language": "{feature} tem o nome suspeito \"{name}\" em {language}",
                 "reference": "Os nomes devem ser os nomes reais dos elementos, como verificado no local."
+            },
+            "help_request": {
+                "title": "Pedidos de ajuda",
+                "tip": "Encontre recursos onde outras pessoas solicitaram assistência"
             },
             "incompatible_source": {
                 "title": "Fontes suspeitas",
@@ -1741,19 +1775,22 @@
                     "reference": "Os produtos do Google são proprietários e não devem ser usados como referências."
                 }
             },
+            "incorrect_name": {
+                "message": "{feature} tem o nome errado \"{name}\"",
+                "message_language": "{feature} tem o nome errado \"{name}\" em {language}"
+            },
             "invalid_format": {
                 "title": "Formatação Inválida",
                 "tip": "Encontre etiquetas com formatos inesperados",
                 "email": {
-                    "message": "{feature} tem um endereço de e-mail inválido.",
-                    "message_multi": "{feature} tem vários endereços de e-mail inválidos.",
+                    "message": "{feature} tem um endereço de e-mail inválido",
+                    "message_multi": "{feature} possui vários endereços de e-mail inválidos",
                     "reference": "Endereços de e-mail devem parecer \"usuário@exemplo.com\"."
-                },
-                "website": {
-                    "message": "{feature} tem um site inválido.",
-                    "message_multi": "{feature} tem vários sites inválidos.",
-                    "reference": "Os sites devem começar com \"http\" ou \"https\"."
                 }
+            },
+            "mismatched_geometry": {
+                "title": "Geometria incompatível",
+                "tip": "Encontre recursos com tags e geometria conflitantes"
             },
             "missing_role": {
                 "title": "Tag role ausente",
@@ -1792,8 +1829,13 @@
                 },
                 "noncanonical_brand": {
                     "message": "{feature} parece uma marca com etiquetas não padrão",
+                    "message_incomplete": "{feature} parece uma marca com etiquetas incompletas",
                     "reference": "Todos os recursos da mesma marca devem ser marcados da mesma maneira."
                 }
+            },
+            "point_as_vertex": {
+                "message": "{feature} deve ser um ponto independente com base em suas etiquetas ",
+                "reference": "Alguns recursos não devem fazer parte de linhas ou áreas."
             },
             "private_data": {
                 "title": "Informação privada",
@@ -1803,10 +1845,12 @@
                     "message": "{feature} pode ser marcado com informações de contato privadas"
                 }
             },
+            "suspicious_name": {
+                "title": "Nomes suspeitos",
+                "tip": "Encontre recursos com nomes genéricos ou suspeitos"
+            },
             "tag_suggests_area": {
-                "title": "Linhas marcadas como áreas",
                 "message": "{feature} deve ser uma área fechada com base na etiqueta \"{tag}\"",
-                "tip": "Encontrar recursos marcados como linhas e possivelmente marcados como áreas",
                 "reference": "As áreas devem ter terminais conectados."
             },
             "unknown_road": {
@@ -1846,7 +1890,14 @@
                     "reference": "Edifícios com cantos não quadrados podem ser desenhados com maior precisão."
                 }
             },
+            "vertex_as_point": {
+                "message": "{feature} deve fazer parte de uma linha ou área com base em suas etiquetas",
+                "reference": "Alguns recursos não devem ser pontos independentes."
+            },
             "fix": {
+                "address_the_concern": {
+                    "title": "Responder à preocupação"
+                },
                 "connect_almost_junction": {
                     "annotation": "Elemento muito próximos conectados."
                 },
@@ -1875,6 +1926,9 @@
                 "delete_feature": {
                     "title": "Excluir este elemento"
                 },
+                "extract_point": {
+                    "title": "Extrair este ponto"
+                },
                 "ignore_issue": {
                     "title": "Ignore esse problema"
                 },
@@ -1895,8 +1949,10 @@
                     "title": "Remover da relação"
                 },
                 "remove_generic_name": {
-                    "title": "Remova o nome",
                     "annotation": "Removido nome genérico"
+                },
+                "remove_mistaken_name": {
+                    "annotation": "Removido um nome errado."
                 },
                 "remove_private_info": {
                     "annotation": "Removida informação privada."
@@ -1910,6 +1966,9 @@
                 },
                 "remove_tags": {
                     "title": "Remova etiquetas"
+                },
+                "remove_the_name": {
+                    "title": "Remova o nome"
                 },
                 "reposition_features": {
                     "title": "Reposicione os elementos"
@@ -2268,7 +2327,8 @@
                     "sidebar": "Alternar barra lateral",
                     "wireframe": "Alternar modo wireframe",
                     "osm_data": "Alternar dados do OpenStreetMap",
-                    "minimap": "Alternar minimapa"
+                    "minimap": "Alternar minimapa",
+                    "highlight_edits": "Realçar edições não salvas"
                 },
                 "selecting": {
                     "title": "Seleção de elementos",
@@ -2312,7 +2372,7 @@
                     "disconnect": "Desconectar elementos no nó selecionado",
                     "extract": "Extrair um ponto de um recurso",
                     "split": "Dividir a linha em duas no nó selecionado",
-                    "reverse": "Reverter a linha",
+                    "reverse": "Inverter recursos selecionados",
                     "move": "Mover elementos selecionados",
                     "rotate": "Girar elementos selecionados",
                     "orthogonalize": "Cantos quadrados de uma linha ou área",
@@ -2596,6 +2656,9 @@
                 "attraction": {
                     "label": "Tipo"
                 },
+                "baby_seat": {
+                    "label": "Assento de bebê"
+                },
                 "backrest": {
                     "label": "Encosto"
                 },
@@ -2637,6 +2700,15 @@
                     "label": "Lixeira",
                     "terms": "[traduzir com sinônimos ou termos relacionados para 'Lixeira', separados por vírgulas]"
                 },
+                "blind": {
+                    "label": "Acesso para pessoas cegas",
+                    "options": {
+                        "limited": "Limitado",
+                        "no": "Não",
+                        "yes": "Sim"
+                    },
+                    "terms": "Acesso para deficientes visuais"
+                },
                 "blood_components": {
                     "label": "Componentes do Sangue",
                     "options": {
@@ -2647,6 +2719,9 @@
                     }
                 },
                 "board_type": {
+                    "label": "Tipo"
+                },
+                "bollard": {
                     "label": "Tipo"
                 },
                 "booth": {
@@ -2785,6 +2860,9 @@
                         "reversible": "Reversível"
                     }
                 },
+                "conveying_escalator": {
+                    "label": "Escada rolante"
+                },
                 "country": {
                     "label": "País"
                 },
@@ -2863,6 +2941,7 @@
                         }
                     },
                     "placeholder": "nenhum",
+                    "terms": "[traduza com sinônimos ou termos relacionados para 'Ciclovias', separados por vírgulas]",
                     "types": {
                         "cycleway:left": "Lado esquerdo",
                         "cycleway:right": "Lado direito"
@@ -2875,10 +2954,12 @@
                     "label": "Data"
                 },
                 "delivery": {
-                    "label": "Entrega em domicílio"
+                    "label": "Entrega em domicílio",
+                    "terms": "[traduza com sinônimos ou termos relacionados para 'Entrega', separados por vírgulas]"
                 },
                 "denomination": {
-                    "label": "Denominação"
+                    "label": "Denominação",
+                    "terms": "[traduza com sinônimos ou termos relacionados para 'Denominação', separados por vírgulas]"
                 },
                 "denotation": {
                     "label": "Denotação"
@@ -2893,7 +2974,8 @@
                     }
                 },
                 "description": {
-                    "label": "Descrição"
+                    "label": "Descrição",
+                    "terms": "[traduza com sinônimos ou termos relacionados para 'Descrição', separados por vírgulas]"
                 },
                 "design": {
                     "label": "Design"
@@ -2902,7 +2984,8 @@
                     "label": "Código da via de destino"
                 },
                 "destination/symbol_oneway": {
-                    "label": "Símbolos de destino"
+                    "label": "Símbolos de destino",
+                    "terms": "[traduza com sinônimos ou termos relacionados para 'Símbolos de destino', separados por vírgulas]"
                 },
                 "destination_oneway": {
                     "label": "Destinos"
@@ -2916,7 +2999,8 @@
                     "placeholder": "5 mm, 10 cm, 15 in…"
                 },
                 "diet_multi": {
-                    "label": "Tipos de dieta"
+                    "label": "Tipos de dieta",
+                    "terms": "Tipos de dietas"
                 },
                 "diplomatic": {
                     "label": "Tipo"
@@ -2982,7 +3066,8 @@
                         "leashed": "Apenas amarrado",
                         "no": "Não permitido",
                         "yes": "Permitido"
-                    }
+                    },
+                    "terms": "[traduza com sinônimos ou termos relacionados para 'Cães', separados por vírgulas]"
                 },
                 "door": {
                     "label": "Porta"
@@ -2991,11 +3076,13 @@
                     "label": "Tipo"
                 },
                 "drive_through": {
-                    "label": "Drive-Thru"
+                    "label": "Drive-Thru",
+                    "terms": "[traduza com sinônimos ou termos relacionados para 'Drive-Through', separados por vírgulas]"
                 },
                 "duration": {
                     "label": "Tempo de duração",
-                    "placeholder": "00:00"
+                    "placeholder": "00:00",
+                    "terms": "[traduza com sinônimos ou termos relacionados para 'Duração', separados por vírgulas]"
                 },
                 "electrified": {
                     "label": "Eletrificação",
@@ -3008,11 +3095,13 @@
                     "placeholder": "Linha de contato, trilho eletrificado..."
                 },
                 "elevation": {
-                    "label": "Altitude"
+                    "label": "Altitude",
+                    "terms": "[traduza com sinônimos ou termos relacionados para 'Elevação', separados por vírgulas]"
                 },
                 "email": {
                     "label": "Email",
-                    "placeholder": "example@example.com"
+                    "placeholder": "example@example.com",
+                    "terms": "E-mail"
                 },
                 "embankment": {
                     "label": "Tipo",
@@ -3041,10 +3130,12 @@
                 },
                 "fax": {
                     "label": "Fax",
-                    "placeholder": "+55 11 0982 1098"
+                    "placeholder": "+55 11 0982 1098",
+                    "terms": "Fax"
                 },
                 "fee": {
-                    "label": "Taxa"
+                    "label": "Taxa",
+                    "terms": "Custo, preço, tarifa"
                 },
                 "fence_type": {
                     "label": "Tipo"
@@ -3053,7 +3144,8 @@
                     "label": "Diâmetro (mm, in, ou letras)"
                 },
                 "fire_hydrant/pressure": {
-                    "label": "Pressão (bar)"
+                    "label": "Pressão (bar)",
+                    "terms": "Pressão (em bar)"
                 },
                 "fire_hydrant/type": {
                     "label": "Forma",
@@ -3068,13 +3160,15 @@
                     "label": "Lareira"
                 },
                 "fishing": {
-                    "label": "Pescaria"
+                    "label": "Pescaria",
+                    "terms": "pesca, pescaria"
                 },
                 "fitness_station": {
                     "label": "Tipo de Equipamento"
                 },
                 "fixme": {
-                    "label": "Corrija-me"
+                    "label": "Corrija-me",
+                    "terms": "Me corrija"
                 },
                 "flag/type": {
                     "label": "Tipo de Bandeira"
@@ -3090,10 +3184,12 @@
                     "placeholder": "Padrão"
                 },
                 "frequency": {
-                    "label": "Frequência Operacional"
+                    "label": "Frequência Operacional",
+                    "terms": "Frequência de Operação"
                 },
                 "frequency_electrified": {
-                    "label": "Frequência operacional"
+                    "label": "Frequência operacional",
+                    "terms": "Frequência de Operação"
                 },
                 "from": {
                     "label": "De"
@@ -3114,7 +3210,8 @@
                         "male": "Masculino",
                         "unisex": "Unissex"
                     },
-                    "placeholder": "Desconhecido"
+                    "placeholder": "Desconhecido",
+                    "terms": "Gênero"
                 },
                 "generator/method": {
                     "label": "Método"
@@ -3143,7 +3240,8 @@
                     "placeholder": "1-18"
                 },
                 "handrail": {
-                    "label": "Corrimão"
+                    "label": "Corrimão",
+                    "terms": "Corrimão"
                 },
                 "hashtags": {
                     "label": "Hashtags Sugeridas",
@@ -3156,13 +3254,16 @@
                     "label": "Especialidades"
                 },
                 "height": {
-                    "label": "Altura (Metros)"
+                    "label": "Altura (Metros)",
+                    "terms": "Altura (em metros)"
                 },
                 "height_building": {
-                    "label": "Altura do edifício (metros)"
+                    "label": "Altura do edifício (metros)",
+                    "terms": "Altura do edifício (em metros)"
                 },
                 "highspeed": {
-                    "label": "Alta velocidade"
+                    "label": "Alta velocidade",
+                    "terms": "Alta velocidade, Velocidade alta"
                 },
                 "highway": {
                     "label": "Tipo"
@@ -3236,7 +3337,8 @@
                     }
                 },
                 "indoor": {
-                    "label": "Interior"
+                    "label": "Interior",
+                    "terms": "dentro, interno"
                 },
                 "indoor_type": {
                     "label": "Tipo"
@@ -3244,14 +3346,20 @@
                 "industrial": {
                     "label": "Tipo"
                 },
+                "informal": {
+                    "label": "Informal",
+                    "terms": "informal, sem formalidade, não-formal"
+                },
                 "information": {
                     "label": "Tipo"
                 },
                 "inscription": {
-                    "label": "Inscrição"
+                    "label": "Inscrição",
+                    "terms": "Inscrição, cadastro"
                 },
                 "intermittent": {
-                    "label": "Intermitente"
+                    "label": "Intermitente",
+                    "terms": "intermitente, não contínuo"
                 },
                 "intermittent_yes": {
                     "label": "Intermitente"
@@ -3284,7 +3392,8 @@
                         "circular": "Junção Circular",
                         "jughandle": "Jughandle",
                         "roundabout": "Rotatória"
-                    }
+                    },
+                    "terms": "junção,"
                 },
                 "kerb": {
                     "label": "Meio-fio"
@@ -3303,7 +3412,8 @@
                 },
                 "lanes": {
                     "label": "Total de Faixas",
-                    "placeholder": "1, 2, 3..."
+                    "placeholder": "1, 2, 3...",
+                    "terms": "faixas, vias,"
                 },
                 "language_multi": {
                     "label": "Idiomas"
@@ -3357,12 +3467,18 @@
                 "level": {
                     "label": "Andar"
                 },
+                "level_semi": {
+                    "label": "Níveis"
+                },
                 "levels": {
                     "label": "Número de andares",
                     "placeholder": "2, 4, 6..."
                 },
                 "liaison": {
                     "label": "Tipo"
+                },
+                "line_attachment": {
+                    "label": "Acessório de linha"
                 },
                 "lit": {
                     "label": "Iluminado"
@@ -3380,6 +3496,9 @@
                 },
                 "lock": {
                     "label": "Portão "
+                },
+                "lockable": {
+                    "label": "Bloqueável"
                 },
                 "man_made": {
                     "label": "Tipo"
@@ -3399,13 +3518,18 @@
                 "material": {
                     "label": "Material"
                 },
+                "max_age": {
+                    "label": "Idade máxima",
+                    "terms": "Idade máxima"
+                },
                 "maxheight": {
                     "label": "Altura Máxima",
                     "placeholder": "4, 4.5, 5, 14'0\", 14'6\", 15'0\""
                 },
                 "maxspeed": {
                     "label": "Limite de Velocidade",
-                    "placeholder": "40, 50, 60..."
+                    "placeholder": "40, 50, 60...",
+                    "terms": "Velocidade máxima, limite de velocidade"
                 },
                 "maxspeed/advisory": {
                     "label": "Limite de Velocidade Recomendado",
@@ -3418,13 +3542,17 @@
                     "label": "Peso Máximo"
                 },
                 "maxweight_bridge": {
-                    "label": "Peso máximo"
+                    "label": "Peso máximo",
+                    "terms": "Peso máximo"
                 },
                 "memorial": {
                     "label": "Tipo"
                 },
                 "microbrewery": {
                     "label": "Microcervejaria"
+                },
+                "min_age": {
+                    "label": "Idade Mínima"
                 },
                 "minspeed": {
                     "label": "Limite de velocidade mínima",
@@ -3707,14 +3835,8 @@
                 "playground": {
                     "label": "Tipo"
                 },
-                "playground/baby": {
-                    "label": "Assento para Bebês"
-                },
-                "playground/max_age": {
-                    "label": "Idade Máxima"
-                },
-                "playground/min_age": {
-                    "label": "Idade Mínima"
+                "playground/theme": {
+                    "label": "Tema"
                 },
                 "polling_station": {
                     "label": "Local de votação"
@@ -3792,7 +3914,8 @@
                     "label": "Número da Plataforma"
                 },
                 "ref_road_number": {
-                    "label": "Código da Rodovia"
+                    "label": "Código da Rodovia",
+                    "terms": "Numero da Via"
                 },
                 "ref_room_number": {
                     "label": "Número do quarto"
@@ -3815,7 +3938,8 @@
                     "label": "Tipo"
                 },
                 "religion": {
-                    "label": "Religião"
+                    "label": "Religião",
+                    "terms": "Religião"
                 },
                 "reservation": {
                     "label": "Reservas",
@@ -3825,6 +3949,9 @@
                         "required": "Obrigatório",
                         "yes": "Aceito"
                     }
+                },
+                "residential": {
+                    "label": "Tipo"
                 },
                 "resort": {
                     "label": "Tipo"
@@ -4086,6 +4213,9 @@
                 "step_count": {
                     "label": "Número de Degraus"
                 },
+                "stile": {
+                    "label": "Tipo"
+                },
                 "stop": {
                     "label": "Tipo de parada obrigatória",
                     "options": {
@@ -4095,6 +4225,14 @@
                 },
                 "street_cabinet": {
                     "label": "Tipo"
+                },
+                "stroller": {
+                    "label": "Acesso ao carrinho",
+                    "options": {
+                        "limited": "Limitado",
+                        "no": "Não",
+                        "yes": "Sim"
+                    }
                 },
                 "structure": {
                     "label": "Estrutura",
@@ -4211,6 +4349,9 @@
                     "placeholder": "Içado, Malha, Camuflado, ..."
                 },
                 "tower/type": {
+                    "label": "Tipo"
+                },
+                "townhall/type": {
                     "label": "Tipo"
                 },
                 "tracktype": {
@@ -4335,19 +4476,26 @@
                     "label": "Voltagem"
                 },
                 "voltage/primary": {
-                    "label": "Voltagem Primária"
+                    "label": "Voltagem Primária",
+                    "terms": "[traduza com sinônimos ou termos relacionados para 'Tensão primária', separados por vírgulas]"
                 },
                 "voltage/secondary": {
-                    "label": "Voltagem Secundária"
+                    "label": "Voltagem Secundária",
+                    "terms": "[traduza com sinônimos ou termos relacionados para 'Tensão secundária', separados por vírgulas]"
                 },
                 "voltage/tertiary": {
-                    "label": "Voltagem Terciária"
+                    "label": "Voltagem Terciária",
+                    "terms": "[traduza com sinônimos ou termos relacionados para 'Terciária', separados por vírgulas]"
                 },
                 "voltage_electrified": {
-                    "label": "Voltagem"
+                    "label": "Voltagem",
+                    "terms": "[traduza com sinônimos ou termos relacionados para 'Voltagem', separados por vírgulas]"
                 },
                 "wall": {
                     "label": "Tipo"
+                },
+                "waste": {
+                    "label": "Resíduos"
                 },
                 "water": {
                     "label": "Tipo"
@@ -4359,36 +4507,48 @@
                     "label": "Fonte de água"
                 },
                 "water_volume": {
-                    "label": "Volume de reserva de água (m³)"
+                    "label": "Volume de reserva de água (m³)",
+                    "terms": "[traduzir com sinônimos ou termos relacionados para 'Volume de reserva de água (m³)', separados por vírgulas]"
                 },
                 "waterway": {
                     "label": "Tipo"
                 },
                 "website": {
                     "label": "Página da Internet",
-                    "placeholder": "https://exemplo.com"
+                    "placeholder": "https://exemplo.com",
+                    "terms": "[traduza com sinônimos ou termos relacionados para 'Website', separados por vírgulas]"
                 },
                 "wetland": {
                     "label": "Tipo"
                 },
                 "wheelchair": {
-                    "label": "Acesso a Cadeirantes"
+                    "label": "Acesso a Cadeirantes",
+                    "options": {
+                        "limited": "Limitado",
+                        "no": "Não",
+                        "yes": "Sim"
+                    },
+                    "terms": "[traduza com sinônimos ou termos relacionados para 'Acesso para cadeira de rodas', separados por vírgulas]"
                 },
                 "wholesale": {
                     "label": "Atacado"
                 },
                 "width": {
-                    "label": "Largura (Metros)"
+                    "label": "Largura (Metros)",
+                    "terms": "[traduza com sinônimos ou termos relacionados para 'Largura (metros)', separados por vírgulas]"
                 },
                 "wikidata": {
-                    "label": "Wikidata"
+                    "label": "Wikidata",
+                    "terms": "[traduza com sinônimos ou termos relacionados para 'Wikidata', separados por vírgulas]"
                 },
                 "wikipedia": {
-                    "label": "Artigo na Wikipédia"
+                    "label": "Artigo na Wikipédia",
+                    "terms": "[traduza com sinônimos ou termos relacionados para 'Wikipédia', separados por vírgulas]"
                 },
                 "windings": {
                     "label": "Número de Bombinas",
-                    "placeholder": "1, 2, 3..."
+                    "placeholder": "1, 2, 3...",
+                    "terms": "[traduza com sinônimos ou termos relacionados para 'Enrolamentos', separados por vírgulas]"
                 },
                 "windings/configuration": {
                     "label": "Configuração das Bombinas",
@@ -4400,7 +4560,8 @@
                         "scott": "Scott",
                         "star": "Estrela / Y",
                         "zigzag": "Zig Zag"
-                    }
+                    },
+                    "terms": "[traduzir com sinônimos ou termos relacionados para 'Configuração de enrolamentos', separados por vírgulas]"
                 }
             },
             "presets": {
@@ -4514,6 +4675,10 @@
                 "aeroway/runway": {
                     "name": "Pista de Pouso e Decolagem",
                     "terms": "Pista de pouso e decolagem"
+                },
+                "aeroway/spaceport": {
+                    "name": "Base de lançamento espacial",
+                    "terms": "Base de lançamento espacial"
                 },
                 "aeroway/taxiway": {
                     "name": "Pista de Taxiamento",
@@ -4754,6 +4919,10 @@
                     "name": "Peixe e Batatas Fritas",
                     "terms": "lanchonete, comida rápida, fast food, restaurante, alimentação, peixe, fritas,"
                 },
+                "amenity/fast_food/hot_dog": {
+                    "name": "Fast Food de Cachorro-quente",
+                    "terms": "Fast Food de Cachorro-quente"
+                },
                 "amenity/fast_food/ice_cream": {
                     "name": "Comida rápida de gelados"
                 },
@@ -4835,6 +5004,10 @@
                 "amenity/library": {
                     "name": "Biblioteca",
                     "terms": "Livros"
+                },
+                "amenity/loading_dock": {
+                    "name": "Doca de carregamento",
+                    "terms": "Doca de carregamento"
                 },
                 "amenity/love_hotel": {
                     "name": "Motel",
@@ -4971,8 +5144,12 @@
                     "terms": "Local de votação permanente"
                 },
                 "amenity/post_box": {
-                    "name": "Caixa de Correio",
-                    "terms": "Correios, Cartas"
+                    "name": "Caixa de correio",
+                    "terms": "Caixa de correio"
+                },
+                "amenity/post_depot": {
+                    "name": "Escritório de classificação de correspondência",
+                    "terms": "Escritório de classificação de correspondência"
                 },
                 "amenity/post_office": {
                     "name": "Agência de Correios",
@@ -5178,6 +5355,22 @@
                     "name": "Estúdio de rádio/TV ou de gravação",
                     "terms": "Estúdio, rádio, ensaio, música, banda, gravação, TV, televisão, filmes, cinema, produtora,"
                 },
+                "amenity/studio/audio": {
+                    "name": "Estúdio de gravação",
+                    "terms": "Estúdio de gravação"
+                },
+                "amenity/studio/radio": {
+                    "name": "Estação de rádio",
+                    "terms": "Estação de rádio"
+                },
+                "amenity/studio/television": {
+                    "name": "Estação de televisão",
+                    "terms": "Estação de televisão"
+                },
+                "amenity/studio/video": {
+                    "name": "Estúdio de filmagem",
+                    "terms": "Estúdio de filmagem"
+                },
                 "amenity/swimming_pool": {
                     "name": "Piscina"
                 },
@@ -5213,6 +5406,10 @@
                     "name": "Paço Municipal ou Prefeitura",
                     "terms": "Prefeitura"
                 },
+                "amenity/townhall/city": {
+                    "name": "Câmara Municipal",
+                    "terms": "Câmara Municipal"
+                },
                 "amenity/toy_library": {
                     "name": "Biblioteca de brinquedos",
                     "terms": "Biblioteca de brinquedos"
@@ -5233,6 +5430,10 @@
                     "name": "Máquina de retorno de garrafas",
                     "terms": "Máquina de retorno de garrafa"
                 },
+                "amenity/vending_machine/bread": {
+                    "name": "Máquina de venda automática de pão",
+                    "terms": "Máquina de venda automática de pão"
+                },
                 "amenity/vending_machine/cigarettes": {
                     "name": "Máquina de Venda de Cigarros",
                     "terms": "cigarro, venda de cigarro"
@@ -5247,6 +5448,10 @@
                 "amenity/vending_machine/drinks": {
                     "name": "Máquina de Venda de Bebidas",
                     "terms": "Máquina de Venda de Bebidas, máquina de refrigerante, refrigerante, lata, latinha"
+                },
+                "amenity/vending_machine/eggs": {
+                    "name": "Máquina de venda automática de ovos",
+                    "terms": "Máquina de venda automática de ovos"
                 },
                 "amenity/vending_machine/electronics": {
                     "name": "Máquina de Venda de Eletrônicos",
@@ -5275,6 +5480,10 @@
                 "amenity/vending_machine/ice_cream": {
                     "name": "Máquina de Venda de Sorvete",
                     "terms": "Máquina de venda automática de sorvetes"
+                },
+                "amenity/vending_machine/ice_cubes": {
+                    "name": "Máquina de venda automática de gelo",
+                    "terms": "Máquina de venda automática de gelo"
                 },
                 "amenity/vending_machine/newspapers": {
                     "name": "Máquina de Venda de Jornais",
@@ -5332,6 +5541,10 @@
                     "name": "Bebedouro para animais",
                     "terms": "água, bebedoiro, tanque"
                 },
+                "amenity/weighbridge": {
+                    "name": "Balança de caminhão",
+                    "terms": "Balança de caminhão"
+                },
                 "area": {
                     "name": "Área",
                     "terms": "área, região, espaço, limite"
@@ -5356,8 +5569,8 @@
                     "terms": "roda panorâmica, parque de diversões, brinquedo, parque temático"
                 },
                 "attraction/bumper_car": {
-                    "name": "Carrinhos de bate-bate",
-                    "terms": "carro choque, carrinho choque, carro de batida, carrinho de batida, bumper, parque de diversões"
+                    "name": "Adesivos para carros",
+                    "terms": "Adesivos para carros"
                 },
                 "attraction/bungee_jumping": {
                     "name": "Ponto de Bungee Jumping",
@@ -5414,6 +5627,10 @@
                 "barrier/bollard": {
                     "name": "Pilarete",
                     "terms": "Pilar, Poste, Cabeço, Pedestal, Estaca, frade"
+                },
+                "barrier/bollard_line": {
+                    "name": "Poste de amarração",
+                    "terms": "Poste de amarração"
                 },
                 "barrier/border_control": {
                     "name": "Controle de fronteira",
@@ -5517,6 +5734,10 @@
                 "barrier/wall": {
                     "name": "Muro",
                     "terms": "Parede"
+                },
+                "barrier/wall/noise_barrier": {
+                    "name": "Barreira sonora",
+                    "terms": "Barreira sonora"
                 },
                 "boundary": {
                     "name": "Limite"
@@ -6305,6 +6526,10 @@
                     "name": "Caminho Informal",
                     "terms": "trilha, caminho, caminhada"
                 },
+                "highway/path/informal": {
+                    "name": "Caminho Informal",
+                    "terms": "Caminho Informal"
+                },
                 "highway/pedestrian_area": {
                     "name": "Calçadão",
                     "terms": "área de pedestres, praça, passeio, calçada"
@@ -6322,8 +6547,16 @@
                     "terms": "Acesso Primário, Acesso a Via Primária"
                 },
                 "highway/raceway": {
-                    "name": "Pista de corrida motorizada",
-                    "terms": "fórmula 1, carro, kart, pista de kart, kartódromo, autódromo, corrida, autovelocidade, motovelocidade, velocidade"
+                    "name": "Pista de automobilismo",
+                    "terms": "Pista de automobilismo"
+                },
+                "highway/raceway/karting": {
+                    "name": "Pista de Kart",
+                    "terms": "Pista de Kart"
+                },
+                "highway/raceway/motocross": {
+                    "name": "Pista de Motocross",
+                    "terms": "Pista de Motocross"
                 },
                 "highway/residential": {
                     "name": "Via Residencial",
@@ -6526,9 +6759,17 @@
                     "name": "Porta interna",
                     "terms": "Porta interna"
                 },
+                "indoor/elevator": {
+                    "name": "Eixo de elevador interno",
+                    "terms": "Eixo de elevador interno"
+                },
                 "indoor/room": {
                     "name": "Quarto",
                     "terms": "Quarto"
+                },
+                "indoor/stairs": {
+                    "name": "Vão das escadas interior",
+                    "terms": "Vão das escadas interior"
                 },
                 "indoor/wall": {
                     "name": "Parede interior",
@@ -6582,8 +6823,8 @@
                     "terms": "Área de Negócios, Área Comercial, escritórios"
                 },
                 "landuse/construction": {
-                    "name": "Construção",
-                    "terms": "Construção"
+                    "name": "Área de construção",
+                    "terms": "Área de construção"
                 },
                 "landuse/farm": {
                     "name": "Área de Lavoura"
@@ -7144,6 +7385,34 @@
                     "name": "Farol",
                     "terms": "Farol"
                 },
+                "man_made/manhole": {
+                    "name": "Bueiro",
+                    "terms": "Bueiro"
+                },
+                "man_made/manhole/drain": {
+                    "name": "Dreno de tempestade",
+                    "terms": "Dreno de tempestade"
+                },
+                "man_made/manhole/gas": {
+                    "name": "Bueiro de serviço de gás",
+                    "terms": "Bueiro de serviço de gás"
+                },
+                "man_made/manhole/power": {
+                    "name": "Bueiro de serviço de energia ",
+                    "terms": "Bueiro de serviço de energia"
+                },
+                "man_made/manhole/sewer": {
+                    "name": "Bueiro de serviço de esgoto",
+                    "terms": "Bueiro de serviço de esgoto"
+                },
+                "man_made/manhole/telecom": {
+                    "name": "Bueiro de serviços de telecomunicações",
+                    "terms": "Bueiro de serviços de telecomunicações"
+                },
+                "man_made/manhole/water": {
+                    "name": "Bueiro de serviços de água ",
+                    "terms": "Bueiro de serviços de água"
+                },
                 "man_made/mast": {
                     "name": "Torre estaiada ou monopolo",
                     "terms": "Torre de comunicação estaiada, Torre de comunicação monopolo, Torre monopolo, torre, torre de comunicação, antena, torre, rádio, celular, comunicação,"
@@ -7171,6 +7440,10 @@
                 "man_made/monitoring_station": {
                     "name": "Estação de Monitoramento",
                     "terms": "Estação de Monitorização"
+                },
+                "man_made/obelisk": {
+                    "name": "Obelisco",
+                    "terms": "Obelisco"
                 },
                 "man_made/observatory": {
                     "name": "Observatório",
@@ -7264,6 +7537,10 @@
                     "name": "Túnel",
                     "terms": "Túnel"
                 },
+                "man_made/utility_pole": {
+                    "name": "Poste",
+                    "terms": "Poste"
+                },
                 "man_made/wastewater_plant": {
                     "name": "Estação de Tratamento de Esgoto",
                     "terms": "Estação de Tratamento de Dejetos Líquidos"
@@ -7291,18 +7568,6 @@
                 "man_made/works": {
                     "name": "Fábrica",
                     "terms": "Fábrica, Planta de produção, chão de fábrica,"
-                },
-                "manhole": {
-                    "name": "Poço de visita",
-                    "terms": "bueiro, poço de inspeção"
-                },
-                "manhole/drain": {
-                    "name": "Boca de lobo",
-                    "terms": "grelha de sarjeta, caixa de captação, drenagem"
-                },
-                "manhole/telecom": {
-                    "name": "Poço de visita de telefone",
-                    "terms": "poço de inspeção de telefone"
                 },
                 "military/bunker": {
                     "name": "Bunker Militar",
@@ -7957,7 +8222,8 @@
                     "terms": "Plataforma de bonde"
                 },
                 "public_transport/platform/tram_point": {
-                    "name": "Parada de Bonde / Plataforma"
+                    "name": "Parada de Bonde / Plataforma",
+                    "terms": "Parada / Plataforma de Bonde"
                 },
                 "public_transport/platform/trolleybus": {
                     "name": "Plataforma de trólebus",
@@ -8274,6 +8540,10 @@
                 },
                 "shop/boutique": {
                     "name": "Loja de Alta Costura"
+                },
+                "shop/brewing_supplies": {
+                    "name": "Loja de suprimentos para cerveja",
+                    "terms": "Loja de suprimentos para cerveja"
                 },
                 "shop/butcher": {
                     "name": "Açougue",
@@ -8664,6 +8934,10 @@
                     "name": "Loja de tinta de impressora",
                     "terms": "Loja de tinta de impressora"
                 },
+                "shop/psychic": {
+                    "name": "Psíquico",
+                    "terms": "Psíquico"
+                },
                 "shop/pyrotechnics": {
                     "name": "Loja de Fogos de Artifício",
                     "terms": "loja de fogos de artifício"
@@ -8675,6 +8949,10 @@
                 "shop/religion": {
                     "name": "Loja de Artigos Religiosos",
                     "terms": "loja de artigos religiosos"
+                },
+                "shop/rental": {
+                    "name": "Locadora",
+                    "terms": "Locadora"
                 },
                 "shop/scuba_diving": {
                     "name": "Loja de Equipamentos de Mergulho",
@@ -9374,6 +9652,10 @@
                 "description": "Amarelo = Dados de mapa de domínio público do Censo dos EUA. Vermelho = Dados não encontrados no OpenStreetMap",
                 "name": "Estradas do TIGRE 2018"
             },
+            "US-TIGER-Roads-2019": {
+                "description": "Amarelo = Dados de mapas de domínio público do Censo dos EUA. Vermelho = Dados não encontrados no OpenStreetMap",
+                "name": "Estradas TIGER 2019"
+            },
             "USDA-NAIP": {
                 "description": "O ano mais recente de DOQQs da National Agriculture Imagery Program (NAIP) para cada estado nos Estados Unidos contíguos.",
                 "name": "National Agriculture Imagery Program"
@@ -9399,6 +9681,12 @@
                     "text": "Realizado por meio da Brussels UrbIS®© - Distribuição & Copyright CIRB"
                 },
                 "name": "UrbIS-Ortho 2018"
+            },
+            "UrbISOrtho2019": {
+                "attribution": {
+                    "text": "Realizado por meio da Brussels UrbIS®© - Distribuição & Copyright CIRB"
+                },
+                "name": "UrbIS-Ortho 2019"
             },
             "UrbisAdmFR": {
                 "attribution": {
@@ -9718,7 +10006,8 @@
                 "description": "Twitter do OpenStreetMap no Botsuana"
             },
             "ym-Centre-Universitaire-de-Recherche-et-dApplication-en-Tldtection-CURAT-de-lUniversit-Felix-Houphouet-Boigny": {
-                "name": "YouthMappers CURAT"
+                "name": "YouthMappers CURAT",
+                "extendedDescription": "Nosso foco é promover o uso do livre mapeamento colaborativo e o uso de dados do openstreetmap no campo de pesquisa e suas aplicações na implementação de ferramentos para criador de decisão. Ajuda estudantes produzirem as próprias informações de sua pesquisa."
             },
             "ym-The-Gambia-YMCA-University-of-the-Gambia": {
                 "name": "YouthMappers conectado"
@@ -9745,10 +10034,14 @@
                 "description": "YouthMappers na Universidade de Ciência e Tecnologia de Kwame Nkrumah"
             },
             "ym-University-of-Cape-Coast": {
+                "name": "Sociedade Geográfica da UCC",
                 "extendedDescription": "Somos uma sociedade que engloba todos os estudantes que estão lendo e lendo geografia no Departamento de Geografia e Planejamento Regional da Universidade de Cape Coast. Nosso principal objetivo é promover o interesse pela disciplina dentro e fora da sala de aula. Nosso lema é \"Nós compreendemos a Terra e seus habitantes\"."
             },
             "ym-University-of-Energy-and-Natural-Resources": {
                 "name": "Clube Ecológico"
+            },
+            "ym-University-of-Ghana": {
+                "name": "Universidade de Ghana YouthMappers"
             },
             "ym-Dedan-Kimathi-University-of-Technology": {
                 "name": "GDEV"
@@ -9769,14 +10062,7 @@
             "OSM-India-facebook": {
                 "name": "OpenStreetMap Índia - Mapeamento de vizinhança participativa",
                 "description": "Melhore o OpenStreetMap na Índia",
-                "extendedDescription": "Mapeando na Índia? Tem dúvidas, quer conectar-se com a comunidade aqui?  Junte-se a nós em {url}.  Todos são bem-vindos!",
-                "events": {
-                    "sotmasia2018": {
-                        "name": "State of the Map Asia 2018",
-                        "description": "Junte-se ao evento regional do Estado do Mapa do OpenStreetMap 2018 na Índia",
-                        "where": "Instituto Indiano de Administração, Bangalore, Índia"
-                    }
-                }
+                "extendedDescription": "Mapeando na Índia? Tem dúvidas, quer conectar-se com a comunidade aqui?  Junte-se a nós em {url}.  Todos são bem-vindos!"
             },
             "osm-india-forum": {
                 "name": "Fórum do OpenStreetMap na Índia",
@@ -9900,9 +10186,6 @@
             "OSM-RU-telegram": {
                 "name": "Telegram do OpenStreetMap RU",
                 "description": "Bate-papo do OpenStreetMap Rússia no Telegram"
-            },
-            "OSM-south-korea-telegram": {
-                "name": "Telegram do OpenStreetMap Coréia do Sul"
             },
             "OSM-TW-mailinglist": {
                 "name": "Lista de Discussão Taiwan"
@@ -10109,7 +10392,8 @@
                 "name": "Lista de discussão do OpenStreetMap para o Trentino"
             },
             "kosovo-telegram": {
-                "name": "OpenStreetMap Kosovo no Telegram"
+                "name": "OpenStreetMap Kosovo no Telegram",
+                "description": "Grupo público semi-oficial do Telegram de Kosovo. Saudamos com todos os mapeadores de qualquer lugar e em qualquer idioma."
             },
             "no-forum": {
                 "name": "Web Forum do OpenStreetMap Noruega",
@@ -10156,13 +10440,13 @@
                 "name": "OpenStreetMap Suécia no Twitter",
                 "description": "Siga-nos no Twitter: {url}"
             },
-            "gb-mailinglist": {
-                "name": "Lista de Discussão Talk-gb"
-            },
             "gb-irc": {
                 "name": "IRC OpenStreetMap Reino Unido",
                 "description": "Junte-se à #osm-gb no irc.oftc.net (porta 6667)",
                 "extendedDescription": "Junte-se à #osm-gb no irc.oftc.net (porta 6667), por favor seja paciente e aguarde alguns minutos se fizer uma pergunta"
+            },
+            "gb-mailinglist": {
+                "name": "Lista de Discussão Talk-gb"
             },
             "OSM-CA-Slack": {
                 "name": "Slack do OSM-CA",
@@ -10221,11 +10505,8 @@
             },
             "OSM-Colorado": {
                 "name": "OpenStreetMap Colorado",
+                "description": "Mapeadores e usuários do OpenStreetMap no estado do Colorado, EUA",
                 "extendedDescription": "OpenStreetMap (OSM) Colorado é uma colaboração local de pessoas interessadas em contribuir com seus esforços para criar mapas gratuitos. Encorajamos todos os nossos mapeadores a organizar ou sugerir o mapeamento de eventos em todo o estado. As atividades do Meetup podem ser simples mixers sociais, treinamento básico e avançado do OSM ou partes de mapeamento da comunidade."
-            },
-            "OSM-NYC": {
-                "name": "OpenStreetMap NYC",
-                "description": "Usuários e Mapeadores do OpenStreetMap, desenvolvedores e entusiastas da área metropolitana de Nova York"
             },
             "OSM-Portland-forum": {
                 "description": "Fórum e lista de discussão para usuários do OpenStreetMap na área de Portland"
@@ -10246,6 +10527,9 @@
                 "name": "OSM South Bay",
                 "description": "Noites do Mapa hospedado por Code for San Jose"
             },
+            "OSM-Tampa-Bay": {
+                "description": "Mapeadores e usuários do OpenStreetMap em Tampa Bay"
+            },
             "OSM-US-Slack": {
                 "name": "Slack do OpenStreetMap US",
                 "description": "Todos são bem-vindos! Inscreva-se em {signupUrl}"
@@ -10262,6 +10546,12 @@
             },
             "PHXGeo-twitter": {
                 "description": "Siga-nos no Twitter em {url}"
+            },
+            "Western-Slope-facebook": {
+                "description": "Editores e usuários do OpenStreetMap em Grand Junction, CO"
+            },
+            "Western-Slope-meetup": {
+                "description": "Mapeadores e usuários do OpenStreetMap em Grand Junction, CO"
             },
             "ym-Western-Michigan-University": {
                 "name": "Clube de Geografia"
@@ -10421,14 +10711,7 @@
             },
             "osm-latam": {
                 "name": "OpenStreetMap Latam",
-                "description": "Suportando o OpenStreetMap na América Latina",
-                "events": {
-                    "sotm-latam-2018": {
-                        "name": "State of the Map Latam 2018",
-                        "description": "State of the Map Latam é a conferência anual para todos os mapeadores e usuários do OpenStreetMap na América Latina.  O programa inclui palestras, painéis, oficinas e mapatonas relacionadas ao OpenStreetMap.",
-                        "where": "Buenos Aires, Argentina"
-                    }
-                }
+                "description": "Suportando o OpenStreetMap na América Latina"
             },
             "OSM-Discord": {
                 "name": "OpenStreetMap no Discord",
@@ -10462,14 +10745,7 @@
             "OSMF": {
                 "name": "Fundação OpenStreetMap",
                 "description": "OSMF é uma fundação sem fins lucrativos baseada no Reino Unido que suporta o projeto OpenStreetMap",
-                "extendedDescription": "OSMF suporta o OpenStreetMap levantando fundos, mantendo os servidores onde reside o OSM, organizando a conferência anual State of the Map, e coordenando os voluntários que mantém o OSM no ar.  Você pode mostrar seu suporte e ter uma voz na direção do OpenStreetMap associando-se como um membro aqui: {signupUrl}",
-                "events": {
-                    "sotm2018": {
-                        "name": "State of the Map 2018",
-                        "description": "Participe da conferência global do OpenStreetMap em Milão (Itália), evento que irá reunir por três dias toda a comunidade OSM para socializar, compartilhar e aprender juntos.",
-                        "where": "Milão, Itália"
-                    }
-                }
+                "extendedDescription": "OSMF suporta o OpenStreetMap levantando fundos, mantendo os servidores onde reside o OSM, organizando a conferência anual State of the Map, e coordenando os voluntários que mantém o OSM no ar.  Você pode mostrar seu suporte e ter uma voz na direção do OpenStreetMap associando-se como um membro aqui: {signupUrl}"
             }
         }
     }

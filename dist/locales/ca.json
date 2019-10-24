@@ -282,9 +282,7 @@
             },
             "reverse": {
                 "title": "Revertir",
-                "description": "Feu que aquesta línia vagi en direcció contrària.",
-                "key": "V",
-                "annotation": "Heu revertit una línia."
+                "key": "V"
             },
             "split": {
                 "title": "Dividir",
@@ -527,7 +525,6 @@
             "switch": "Senyals de trànsit ",
             "custom": "Personalitzar",
             "overlays": "Capes",
-            "imagery_source_faq": "Informació d'imatge / Comunicar un problema",
             "reset": "reiniciar",
             "display_options": "Opcions de visualització",
             "brightness": "Brillantor",
@@ -553,7 +550,6 @@
                     "title": "Dades d'OpenStreetMap"
                 }
             },
-            "fill_area": "Emplenat d'àrees",
             "map_features": "Elements del mapa",
             "autohidden": "Aquests objectes s'han ocultat automàticament perquè n'haurien aparegut massa a la pantalla. Us podeu acostar per editar-los.",
             "osmhidden": "Aquestes característiques han sigut ocultades automàticament perquè la capa d'OpenStreetMap es troba ocultada."
@@ -1162,7 +1158,6 @@
                 },
                 "operations": {
                     "title": "Operaccions",
-                    "reverse": "Reverteix una línia.",
                     "move": "Mou característiques seleccionades",
                     "rotate": "Gira característiques seleccionades",
                     "delete": " Esborra característiques seleccionades"
@@ -2261,15 +2256,6 @@
                     "label": "Sortida de potència",
                     "placeholder": "500 MW, 1000 MW, 2000 MW..."
                 },
-                "playground/baby": {
-                    "label": "Seient de nadó"
-                },
-                "playground/max_age": {
-                    "label": "Edat màxima"
-                },
-                "playground/min_age": {
-                    "label": "Edat mínima"
-                },
                 "population": {
                     "label": "Població"
                 },
@@ -3150,10 +3136,6 @@
                     "name": "Comissaria de Policia",
                     "terms": "Comissaria de policia, dependències policials, edifici policial, base de la policia"
                 },
-                "amenity/post_box": {
-                    "name": "Bústia de correus",
-                    "terms": "Bústia, Bústia Pública, Correus, Carta, Servei de Correus, Enviament"
-                },
                 "amenity/post_office": {
                     "name": "Oficina de correus",
                     "terms": "Oficina de Correus, Correus, Edifici de Correus, Cartes, Carters"
@@ -4011,10 +3993,6 @@
                 },
                 "landuse/commercial": {
                     "name": "Zona Comercial"
-                },
-                "landuse/construction": {
-                    "name": "Zona en construcció",
-                    "terms": "En construcció"
                 },
                 "landuse/farm": {
                     "name": "Zona Agrícola"
@@ -5626,13 +5604,6 @@
             "LATAM-Twitter": {
                 "description": "Segueix-nos a Twitter a {url}"
             },
-            "osm-latam": {
-                "events": {
-                    "sotm-latam-2018": {
-                        "where": "Buenos Aires, Argentina"
-                    }
-                }
-            },
             "OSM-Discord": {
                 "name": "Discord d'OpenStreetMap"
             },
@@ -5647,12 +5618,7 @@
                 "description": "/r/openstreetmap/ és un bon lloc per aprendre més sobre OpenStreetMap. Pregunta'ns qualsevol cosa!"
             },
             "OSMF": {
-                "name": "Fundació OpenStreetMap",
-                "events": {
-                    "sotm2018": {
-                        "where": "Milà, Itàlia"
-                    }
-                }
+                "name": "Fundació OpenStreetMap"
             }
         }
     }

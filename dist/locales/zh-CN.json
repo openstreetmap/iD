@@ -27,19 +27,19 @@
             },
             "add_area": {
                 "title": "区域",
-                "description": "在地图上添加公园、建筑物、湖泊或其他区域。",
+                "description": "添加区域（公园、建筑物和湖泊等）到地图上。",
                 "tail": "在地图上单击，开始绘制一个区域，如公园、湖泊或建筑物。",
                 "filter_tooltip": "区域"
             },
             "add_line": {
                 "title": "线",
-                "description": "添加公路、街道、人行道、河渠或其他线到地图上。",
+                "description": "添加线（公路、人行道和河道等）到地图上。",
                 "tail": "在地图上单击，开始绘制一条道路，小道或路线。",
                 "filter_tooltip": "线"
             },
             "add_point": {
                 "title": "点",
-                "description": "添加餐馆、纪念碑、邮筒或其他点到地图上。",
+                "description": "添加点（餐馆、纪念碑和信箱等）到地图上。",
                 "tail": "在地图上单击，添加一个点。",
                 "filter_tooltip": "点"
             },
@@ -396,9 +396,21 @@
             },
             "reverse": {
                 "title": "反转",
-                "description": "使这条线的方向反转。",
+                "description": {
+                    "point": "翻转该点的方向。",
+                    "points": "翻转这些点的方向。",
+                    "line": "使这条线的方向反转。",
+                    "lines": "使这些线的方向反转。",
+                    "features": "翻转这些要素的方向。"
+                },
                 "key": "V",
-                "annotation": "反转了一条线。"
+                "annotation": {
+                    "point": "反转了一个点。",
+                    "points": "反转了多个点。",
+                    "line": "反转了一条线。",
+                    "lines": "反转了多条线。",
+                    "features": "反转了多个要素。"
+                }
             },
             "split": {
                 "title": "分割",
@@ -697,7 +709,7 @@
             "switch": "切换回该底图",
             "custom": "自定义",
             "overlays": "叠加图层",
-            "imagery_source_faq": "影像信息 / 报告问题",
+            "imagery_problem_faq": "报告影像问题",
             "reset": "重置",
             "reset_all": "重置全部",
             "display_options": "显示设定",
@@ -710,8 +722,12 @@
                 "tooltip": "显示一个大范围的地图来帮助定位当前显示的区域",
                 "key": "/"
             },
+            "panel": {
+                "description": "显示细节面板",
+                "tooltip": "显示高级背景信息"
+            },
             "fix_misalignment": "调整影像偏移",
-            "offset": "在下面的灰色区域拖动来调整影像偏移，或输入以米为单位的偏移量。"
+            "offset": "拖动下方的灰色区域来调整影像偏移，或以米为单位输入偏移值。"
         },
         "map_data": {
             "title": "地图数据",
@@ -741,7 +757,6 @@
                     "zoom": "缩放到数据"
                 }
             },
-            "fill_area": "填充区域",
             "map_features": "地图要素",
             "autohidden": "这些要素已被自动隐藏，因为屏幕中的要素过多。请放大再编辑。",
             "osmhidden": "由于 OpenStreetMap 数据图层已被禁用，这些要素已被自动隐藏。"
@@ -869,12 +884,12 @@
         "restore": {
             "heading": "您有未保存的更改",
             "description": "您在上一次编辑时有未保存的更改，您想恢复这些更改吗？",
-            "restore": "恢复我的修改",
-            "reset": "丢弃我的修改"
+            "restore": "恢复更改",
+            "reset": "放弃更改"
         },
         "save": {
             "title": "保存",
-            "help": "复审更改，然后上传至 OpenStreetMap 供其他用户查看。",
+            "help": "检查更改，并上传至 OpenStreetMap 对所有人公开。",
             "no_changes": "没有待保存变更。",
             "error": "尝试保存时发生错误。",
             "status_code": "服务器返回的状态代码{code}",
@@ -913,7 +928,7 @@
                 "format": "{region}{separator}{place}",
                 "separator": " "
             },
-            "help_html": "您的更改将会在几分钟内于 OpenStreetMap 上显示。其他地图可能需要更长的时间接收更新。 ",
+            "help_html": "您的更改将会在几分钟内显示于 OpenStreetMap。其他地图则需要更长的时间收到更新。",
             "help_link_text": "详情",
             "help_link_url": "https://wiki.openstreetmap.org/wiki/FAQ#I_have_just_made_some_changes_to_the_map._How_do_I_get_to_see_my_changes.3F",
             "view_on_osm": "在 OSM 上查看更改",
@@ -922,7 +937,7 @@
             "more": "更多",
             "events": "事件",
             "languages": "语言：{languages}",
-            "missing": "该列表有遗漏的信息？",
+            "missing": "列表里有遗漏的信息？",
             "tell_us": "告诉我们！"
         },
         "confirm": {
@@ -932,7 +947,7 @@
         "splash": {
             "welcome": "欢迎使用 OpenStreetMap iD 编辑器",
             "text": "iD 编辑器是一个既易用而又功能强大的工具，以助您编辑世界上最好的自由世界地图。这是 {version} 版本。欲知详情，请浏览 {website} 及在 {github} 报告程序错误。",
-            "walkthrough": "开始演练",
+            "walkthrough": "开始教程",
             "start": "立即编辑"
         },
         "source_switch": {
@@ -1315,6 +1330,11 @@
         "mapillary_images": {
             "tooltip": "来自Mapillary的街景照片"
         },
+        "mapillary_map_features": {
+            "title": "地图要素",
+            "tooltip": "来自 Mapillary 的地图要素",
+            "request_data": "数据请求"
+        },
         "mapillary": {
             "title": "Mapillary",
             "signs": {
@@ -1365,7 +1385,7 @@
                 "open_data_h": "开放数据",
                 "open_data": "您在这个地图上做出的编辑会对所有使用 OpenStreetMap 的用户可见。您的编辑可以基于个人知识、实地调查、航空拍摄图片或者街景照片。从商业来源，例如谷歌地图这样的来源复制信息是被 [严格禁止](https://www.openstreetmap.org/copyright) 的。",
                 "before_start_h": "在您开始之前",
-                "before_start": "您在开始编辑之前应当先了解熟悉 OpenStreetMap 和本编辑器。iD 包含了一个导览教程，可以帮助您了解编辑 OpenStreetMap 的基本知识。请点击屏幕上的“开始演练”按钮以开始教程——这只会占用您大概 15 分钟。",
+                "before_start": "您在开始编辑之前应当先了解熟悉 OpenStreetMap 和本编辑器。iD 包含了一个导览教程，可以帮助您了解编辑 OpenStreetMap 的基本知识。点击屏幕上的“开始教程”按钮即可进入，并且只需占用您大概 15 分钟。",
                 "open_source_h": "开放源代码",
                 "open_source": "iD 编辑器是一个合作开放源代码项目，您正在使用的版本是 {version}。其源代码 [在 GitHub](https://github.com/openstreetmap/iD) 上可找到。",
                 "open_source_help": "您可以帮助 iD [翻译文本](https://github.com/openstreetmap/iD/blob/master/CONTRIBUTING.md#translating) 或者 [报告问题](https://github.com/openstreetmap/iD/issues)。"
@@ -1601,8 +1621,6 @@
                 "hidden_issues": {
                     "none": "检测到的问题将会在此处显示",
                     "elsewhere": "别处的问题：{count}",
-                    "other_features": "其他要素的问题：{count}",
-                    "other_features_elsewhere": "其他或别处要素的问题：{count}",
                     "disabled_rules": "已禁用规则的问题：{count}",
                     "disabled_rules_elsewhere": "别处已禁用规则的问题：{count}",
                     "ignored_issues": "忽略的问题：{count}",
@@ -1720,15 +1738,12 @@
                 }
             },
             "fixme_tag": {
-                "title": "\"Fix Me\" 请求",
                 "message": "{feature} 存在一个 \"Fix Me\" 请求",
-                "tip": "查找含有 \"fixme\" 标签的要素",
                 "reference": "\"fixme\" 标签表明绘图者对某个要素需要帮助。"
             },
             "generic_name": {
-                "title": "可疑的名称",
                 "message": "{feature} 存在一个可疑的名称 \"{name}\"",
-                "tip": "查找含有笼统或可疑名称的要素",
+                "message_language": "{feature} 存在一个可疑的{language}名称 \"{name}\"",
                 "reference": "名称应为要素的实际名称。"
             },
             "incompatible_source": {
@@ -1741,6 +1756,10 @@
                     "reference": "谷歌的产品具有所有权，不得用于参考。"
                 }
             },
+            "incorrect_name": {
+                "message": "{feature} 存在一个错误的名称 \"{name}\"",
+                "message_language": "{feature} 存在一个错误的{language}名称 \"{name}\""
+            },
             "invalid_format": {
                 "title": "无效的格式",
                 "tip": "查找含有无效格式的标签",
@@ -1748,12 +1767,11 @@
                     "message": "{feature} 存在一个无效电子邮件地址。",
                     "message_multi": "{feature} 存在多个无效电子邮件地址。",
                     "reference": "电子邮件地址必须类似于 \"user@example.com\"。"
-                },
-                "website": {
-                    "message": "{feature} 存在一个无效网址。",
-                    "message_multi": "{feature} 存在多个无效网址。",
-                    "reference": "网址应该以 \"http\" 或 \"https\" 为开头。"
                 }
+            },
+            "mismatched_geometry": {
+                "title": "不符合的几何形状",
+                "tip": "查找含有冲突标签和几何形状的要素"
             },
             "missing_role": {
                 "title": "缺少成员",
@@ -1792,8 +1810,13 @@
                 },
                 "noncanonical_brand": {
                     "message": "{feature} 看起来像是个品牌名称但没有规范的标签",
+                    "message_incomplete": "{feature} 看起来像是个品牌名称但没有规范的标签",
                     "reference": "同一品牌的所有要素都应该以相同方式标记。"
                 }
+            },
+            "point_as_vertex": {
+                "message": "{feature} 根据其标签不应该作为单独的点",
+                "reference": "一些要素不应该作为线或区域的一部分"
             },
             "private_data": {
                 "title": "私人信息",
@@ -1803,10 +1826,12 @@
                     "message": "{feature} 的标签可能含有私人联系信息"
                 }
             },
+            "suspicious_name": {
+                "title": "可疑的名称",
+                "tip": "查找含有笼统或可疑名称的要素"
+            },
             "tag_suggests_area": {
-                "title": "标记为区域的线",
                 "message": "基于 {feature} 的标签 \"{tag}\"，其应为一个封闭的区域。",
-                "tip": "查找可标记为区域的线要素",
                 "reference": "区域必须具有相连的端点。"
             },
             "unknown_road": {
@@ -1846,6 +1871,10 @@
                     "reference": "含有不方正角落的建筑物通常可以更精确的绘制。"
                 }
             },
+            "vertex_as_point": {
+                "message": "{feature} 根据其标签不应该作为线或区域的一部分",
+                "reference": "一些要素不应该作为单独的点"
+            },
             "fix": {
                 "connect_almost_junction": {
                     "annotation": "连接极相近要素。"
@@ -1875,6 +1904,9 @@
                 "delete_feature": {
                     "title": "删除此要素"
                 },
+                "extract_point": {
+                    "title": "提取节点。"
+                },
                 "ignore_issue": {
                     "title": "忽略此问题"
                 },
@@ -1895,8 +1927,10 @@
                     "title": "从关系中删除"
                 },
                 "remove_generic_name": {
-                    "title": "删除名称",
                     "annotation": "删除笼统名称。"
+                },
+                "remove_mistaken_name": {
+                    "annotation": "删除了一个错误名称。"
                 },
                 "remove_private_info": {
                     "annotation": "删除私人信息。"
@@ -1910,6 +1944,9 @@
                 },
                 "remove_tags": {
                     "title": "删除标签"
+                },
+                "remove_the_name": {
+                    "title": "删除名称"
                 },
                 "reposition_features": {
                     "title": "更改要素位置"
@@ -2210,7 +2247,7 @@
             },
             "startediting": {
                 "title": "开始编辑",
-                "help": "您现在已经学会编辑 OpenStreetMap 了！{br}您可以在任何时候点击 {button} 帮助按钮或按下{key}键来重放该教程或查看更多参考文档。",
+                "help": "您已经学会编辑 OpenStreetMap 了！{br}点击 {button} 帮助按钮（或按 '{key}' 键），您可以随时重温该教程，也可以浏览更多参考文档。",
                 "shortcuts": "您可以通过按下{key}键来查看命令列表及相应快捷键。",
                 "save": "不要忘了定期保存您的修改！",
                 "start": "开始绘制地图！"
@@ -2268,7 +2305,8 @@
                     "sidebar": "切换侧边栏",
                     "wireframe": "切换线框模式",
                     "osm_data": "切换 OpenStreetMap 数据",
-                    "minimap": "切换小地图"
+                    "minimap": "切换小地图",
+                    "highlight_edits": "高亮未保存的编辑"
                 },
                 "selecting": {
                     "title": "选择要素",
@@ -2312,7 +2350,7 @@
                     "disconnect": "在选中节点上分离要素",
                     "extract": "从要素中提取节点",
                     "split": "在选中节点上分割线",
-                    "reverse": "反转线的方向",
+                    "reverse": "反转选中的要素",
                     "move": "移动选中的要素",
                     "rotate": "旋转选中的要素",
                     "orthogonalize": "将线或区域上的弯角换成直角",
@@ -2447,6 +2485,7 @@
                             "title": "许可证"
                         },
                         "private": {
+                            "description": "仅当在个人持有拥有者的允许时才许可通行",
                             "title": "私人"
                         },
                         "yes": {
@@ -2464,6 +2503,9 @@
                 },
                 "access_simple": {
                     "label": "允许进入"
+                },
+                "addr/interpolation": {
+                    "label": "类型"
                 },
                 "address": {
                     "label": "地址",
@@ -3166,6 +3208,12 @@
                         "undefined": "否"
                     }
                 },
+                "iata": {
+                    "label": "IATA 机场代码"
+                },
+                "icao": {
+                    "label": "ICAO 机场代码"
+                },
                 "incline": {
                     "label": "斜度"
                 },
@@ -3573,15 +3621,6 @@
                 "playground": {
                     "label": "类型"
                 },
-                "playground/baby": {
-                    "label": "婴儿车"
-                },
-                "playground/max_age": {
-                    "label": "最高年龄"
-                },
-                "playground/min_age": {
-                    "label": "最低年龄"
-                },
                 "population": {
                     "label": "人口"
                 },
@@ -3875,6 +3914,9 @@
                 },
                 "step_count": {
                     "label": "台阶数"
+                },
+                "stile": {
+                    "label": "类型"
                 },
                 "stop": {
                     "label": "停车指示类型",
@@ -4607,10 +4649,6 @@
                     "name": "警察局",
                     "terms": "警察局,警局,警署,派出所"
                 },
-                "amenity/post_box": {
-                    "name": "信箱",
-                    "terms": "邮箱,邮筒"
-                },
                 "amenity/post_office": {
                     "name": "邮局",
                     "terms": "邮局,邮政局"
@@ -4916,10 +4954,6 @@
                     "name": "摩天轮",
                     "terms": "摩天轮,大转轮,观览车,观景台,法利士,费里斯,巨轮,俯瞰,远眺,游乐设施,游乐,游艺,娱乐,乐园,游乐园,主题乐园,儿童乐园,景点"
                 },
-                "attraction/bumper_car": {
-                    "name": "碰碰车",
-                    "terms": "碰碰车,碰,撞,碰撞,游乐设施,游乐,游艺,娱乐,乐园,游乐园,主题乐园,儿童乐园,景点"
-                },
                 "attraction/bungee_jumping": {
                     "name": "蹦极",
                     "terms": "蹦极,蹦极跳,机索跳,笨猪跳,俯冲跳,自由落体,高空弹跳,弹跳,跳,跳跃,前扑,坠落,跌落,下坠,飞天,户外,塔顶,高楼,跳楼,跳水,橡皮绳,游乐设施,游乐,游艺,娱乐,乐园,游乐园,主题乐园,儿童乐园,景点"
@@ -5205,6 +5239,9 @@
                 "building_part": {
                     "name": "建筑部分",
                     "terms": "屋顶,楼顶,三维建筑,3D建筑"
+                },
+                "building_point": {
+                    "name": "建筑物"
                 },
                 "club": {
                     "name": "俱乐部",
@@ -5673,10 +5710,6 @@
                     "name": "主要道路连接路",
                     "terms": "主要道路连接路,连接路,匝道,道路,路,公路,大道,高架路,干道,快速路,马路"
                 },
-                "highway/raceway": {
-                    "name": "跑道(赛车)",
-                    "terms": "跑道,赛车,赛道"
-                },
                 "highway/residential": {
                     "name": "住宅区道路",
                     "terms": "住宅区道路,道路,路,街道,街,公路,马路,小型道路,城区道路"
@@ -5877,10 +5910,6 @@
                 "landuse/commercial": {
                     "name": "商业区",
                     "terms": "商业区,商业用地"
-                },
-                "landuse/construction": {
-                    "name": "建设用地",
-                    "terms": "建设,建造,施工,工地,在建,建筑,构筑,构建,承建,用地,建设用地"
                 },
                 "landuse/farm": {
                     "name": "农田"
@@ -6349,18 +6378,6 @@
                 "man_made/works": {
                     "name": "工厂",
                     "terms": "工厂,加工,制造"
-                },
-                "manhole": {
-                    "name": "人井",
-                    "terms": "人井,人孔,检修,探孔,入孔,盖,洞,孔,下水道,排水,污水,通信,电信,电缆,通讯,人孔井,手井,穿线,下水管"
-                },
-                "manhole/drain": {
-                    "name": "窨井口",
-                    "terms": "窨井盖,窨井口,窨井,下水道,盖,下水管,排水,排水道,污水,排水管,排水沟,洞,井,孔,雨,雷雨,台风,沙井,沙井盖"
-                },
-                "manhole/telecom": {
-                    "name": "电信检查井",
-                    "terms": "井盖,井,检查,人孔,手机,盖,通讯,通信,移动,联通,电信,电话,洞,孔,下水道,基站"
                 },
                 "natural": {
                     "name": "自然"
@@ -8087,6 +8104,18 @@
                 },
                 "name": "UrbIS-Ortho 2016"
             },
+            "UrbISOrtho2017": {
+                "name": "UrbIS-Ortho 2017"
+            },
+            "UrbISOrtho2018": {
+                "name": "UrbIS-Ortho 2018"
+            },
+            "UrbisAdmFR": {
+                "name": "UrbisAdm FR"
+            },
+            "UrbisAdmNL": {
+                "name": "UrbisAdm NL"
+            },
             "Waymarked_Trails-Cycling": {
                 "attribution": {
                     "text": "© waymarkedtrails.org, OpenStreetMap 贡献者, 署名-相同方式共享 3.0"
@@ -8130,6 +8159,40 @@
                 },
                 "description": "由 basemap.at 提供的正射影像图层，接替 geoimage.at 影像图层。",
                 "name": "basemap.at 正射影像"
+            },
+            "basemap.at-overlay": {
+                "attribution": {
+                    "text": "basemap.at"
+                },
+                "description": "由basemap.at 提供的注释叠加层",
+                "name": "basemap.at 叠加层"
+            },
+            "basemap.at-surface": {
+                "attribution": {
+                    "text": "basemap.at"
+                }
+            },
+            "basemap.at-terrain": {
+                "attribution": {
+                    "text": "basemap.at"
+                },
+                "description": "由basemap.at 提供的地形层",
+                "name": "basemap.at 地形"
+            },
+            "finds.jp_KBN_2500": {
+                "attribution": {
+                    "text": "GSI KIBAN 2500"
+                }
+            },
+            "gsi.go.jp": {
+                "attribution": {
+                    "text": "日本GSI"
+                }
+            },
+            "gsi.go.jp_airphoto": {
+                "attribution": {
+                    "text": "日本GSI"
+                }
             },
             "mapbox_locator_overlay": {
                 "attribution": {
@@ -8229,6 +8292,9 @@
                 "name": "Talk-gh 邮件列表",
                 "description": "Talk-gh 是为加纳 OSM 社区准备的官方邮件列表"
             },
+            "ym-University-of-Cape-Coast": {
+                "name": "UCC地理学协会"
+            },
             "osm-mg-facebook": {
                 "name": "OpenStreetMap 马达加斯加 Facebook 小组",
                 "description": "为对 OpenStreetMap 感兴趣的用户准备的马达加斯加 Facebook 小组。"
@@ -8245,14 +8311,7 @@
             "OSM-India-facebook": {
                 "name": "OpenStreetMap 印度 - 共同参与的街区绘图",
                 "description": "改进位于印度的 OpenStreetMap",
-                "extendedDescription": "在印度绘图？有任何疑问，想要与当地的社区交流？在 {Url} 加入我们。欢迎所有人！",
-                "events": {
-                    "sotmasia2018": {
-                        "name": "State of the Map 亚洲 2018",
-                        "description": "加入位于印度的 State of the Map 亚洲的2018年 OpenStreetMap 地区活动。",
-                        "where": "印度管理学院，印度班加罗尔"
-                    }
-                }
+                "extendedDescription": "在印度绘图？有任何疑问，想要与当地的社区交流？在 {Url} 加入我们。欢迎所有人！"
             },
             "OSM-india-mailinglist": {
                 "name": "OpenStreetMap 印度邮件列表",
@@ -8377,9 +8436,6 @@
             "byosm": {
                 "name": "OpenStreetMap 白俄罗斯",
                 "description": "OpenStreetMap 白俄罗斯 Telegram 交流"
-            },
-            "be-facebook": {
-                "name": "OpenStreetMap 比利时社区"
             },
             "be-forum": {
                 "name": "OpenStreetMap 比利时论坛",
@@ -8526,13 +8582,12 @@
                 "description": "东米德兰绘图者和用户的社交聚会",
                 "extendedDescription": "该小组自2011年3月开始举行会议，地点最初在诺丁汉，近几年在德比，或不时在东米德兰的其他地方举行。这些虽是社交聚会，但却是来询问涉及地区或只是普通的 OSM 特定问题的好地方。在夏季，我们通常会在会场附近进行一小时的小型测绘。整个团队都对关于公共优先权的测绘有着特殊的兴趣，并且不时为此而召开绘图会议。"
             },
-            "gb-mailinglist": {
-                "name": "Talk-gb 邮件列表",
-                "description": "Talk-gb 是英国(包括北爱尔兰) OSM 社区的主要交流论坛"
-            },
             "gb-irc": {
                 "name": "OpenStreetMap 英国 IRC",
                 "description": "在 irc.oftc.net (端口 6667) 加入 #osm-gb"
+            },
+            "gb-mailinglist": {
+                "name": "Talk-gb 邮件列表"
             },
             "OSM-CA-Slack": {
                 "name": "OSM-CA Slack",
@@ -8713,14 +8768,7 @@
             "OSMF": {
                 "name": "OpenStreetMap 基金会 (OSMF)",
                 "description": "OSMF 是总部位于英国的非营利组织，用于支持 OpenStreetMap 项目。",
-                "extendedDescription": "OSMF 通过筹款、维护为网站提供动力的服务器、组织年度 State of the Map 会议以及协调维护网站的志愿者来支持 OpenStreetMap。您可以通过点击该链接成为 OSMF 的一员以展示您的支持并为 OpenStreetMap 的未来发声：{signupUrl}",
-                "events": {
-                    "sotm2018": {
-                        "name": "State of the Map 2018",
-                        "description": "加入我们为期3天在意大利米兰举办的年度全球 OpenStreetMap 会议，与社区中的每个人相聚并进行交流、分享和学习。",
-                        "where": "意大利米兰"
-                    }
-                }
+                "extendedDescription": "OSMF 通过筹款、维护为网站提供动力的服务器、组织年度 State of the Map 会议以及协调维护网站的志愿者来支持 OpenStreetMap。您可以通过点击该链接成为 OSMF 的一员以展示您的支持并为 OpenStreetMap 的未来发声：{signupUrl}"
             }
         }
     }
