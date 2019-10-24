@@ -1,0 +1,13 @@
+{
+    "fields": [
+        "lit",
+        "height"
+    ],
+    "geometry": [
+        "point"
+    ],
+    "tags": {
+        "advertising": "poster_box"
+    },
+    "name": "Poster Box"
+}
