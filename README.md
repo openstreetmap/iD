@@ -3,10 +3,7 @@
 [![Build Status](https://travis-ci.org/openstreetmap/iD.svg?branch=master)](https://travis-ci.org/openstreetmap/iD)
 [![Greenkeeper badge](https://badges.greenkeeper.io/openstreetmap/iD.svg)](https://greenkeeper.io/)
 
-:warning: _The [`master`](https://github.com/openstreetmap/iD/tree/master) branch
-is undergoing significant breaking changes for v3 over the next few months.
-[`2.15`](https://github.com/openstreetmap/iD/tree/2.15) is considerably
-more stable and is currently the recommended branch for downstream development._
+:warning: _The [`master`](https://github.com/openstreetmap/iD/tree/master) branch is undergoing significant breaking changes for v3 over the next few months. [`2.x`](https://github.com/openstreetmap/iD/tree/2.x) is considerably more stable and is currently the recommended branch for downstream development._
 
 ## Basics
 
