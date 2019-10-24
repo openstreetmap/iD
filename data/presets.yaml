@@ -5969,7 +5969,7 @@ en:
         # 'terms: oil,natural gas,water,sewer,sewage'
         terms: '<translate with synonyms or related terms for ''Underground Pipeline'', separated by commas>'
       man_made/pipeline/valve:
-        # 'man_made=pipeline, pipeline=valve'
+        # pipeline=valve
         name: Pipeline Valve
         # 'terms: oil,natural gas,water,sewer,sewage'
         terms: '<translate with synonyms or related terms for ''Pipeline Valve'', separated by commas>'
