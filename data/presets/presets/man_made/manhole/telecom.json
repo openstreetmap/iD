@@ -1,0 +1,29 @@
+{
+    "icon": "temaki-cable_manhole",
+    "fields": [
+        "operator",
+        "ref"
+    ],
+    "geometry": [
+        "point",
+        "vertex"
+    ],
+    "tags": {
+        "manhole": "telecom"
+    },
+    "addTags": {
+        "man_made": "manhole",
+        "manhole": "telecom"
+    },
+    "terms": [
+        "bt",
+        "cable",
+        "cover",
+        "phone",
+        "hole",
+        "telecom",
+        "telephone",
+        "utility"
+    ],
+    "name": "Telecom Utility Manhole"
+}

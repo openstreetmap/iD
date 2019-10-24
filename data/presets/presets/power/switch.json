@@ -1,5 +1,5 @@
 {
-    "icon": "temaki-power",
+    "icon": "temaki-power_switch",
     "fields": [
         "switch",
         "operator",

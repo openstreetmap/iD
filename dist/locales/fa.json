@@ -396,9 +396,14 @@
             },
             "reverse": {
                 "title": "وارونه",
-                "description": "جهت حرکت روی این خط را برعکس کنید.",
-                "key": "V",
-                "annotation": "یک خط وارونه شد."
+                "description": {
+                    "point": "جهت این نقطه را برعکس کنید.",
+                    "points": "جهت این نقطه‌ها را برعکس کنید.",
+                    "line": "جهت رسم این خط را برعکس کنید.",
+                    "lines": "جهت رسم این خط‌ها را برعکس کنید.",
+                    "features": "جهت این عارضه‌ها را برعکس کنید."
+                },
+                "key": "V"
             },
             "split": {
                 "title": "برش",
@@ -697,7 +702,6 @@
             "switch": "بازگشت به این پس‌زمینه",
             "custom": "سفارشی",
             "overlays": "پوشش‌ها",
-            "imagery_source_faq": "اطلاعات تصویر / گزارش یک مشکل",
             "reset": "بازنشانی",
             "reset_all": "بازنشانی همه",
             "display_options": "گزینه‌های نمایش",
@@ -741,7 +745,6 @@
                     "zoom": "روی داده‌ها زوم کن"
                 }
             },
-            "fill_area": "پُری محدوده‌ها",
             "map_features": "عارضه‌های نقشه",
             "autohidden": "این عارضه‌ها به‌صورت خودکار مخفی شده‌اند چون تعداد زیادی از آن‌ها بر روی صفحه نمایش می‌یافت. برای ویرایش آن‌ها زوم کنید.",
             "osmhidden": "این عارضه‌ها به‌صورت خودکار مخفی شده‌اند زیرا لایهٔ «دادهٔ اوپن‌استریت‌مپ» مخفی است."
@@ -912,8 +915,8 @@
                 "separator": "،"
             },
             "help_html": "تغییرات شما معمولاً پس از دقایقی در وبسایت OpenStreetMap منعکس می‌شود. در سایر برنامه‌ها و سایت‌ها شاید لازم باشد زمان طولانی‌تری را تا دریافت به‌روزرسانی‌ها منتظر بمانید.",
-            "help_link_text": "جزئیات",
-            "help_link_url": "https://wiki.openstreetmap.org/wiki/Fa:FAQ#.D9.85.D9.86_.D8.AA.D8.BA.DB.8C.DB.8C.D8.B1.D8.A7.D8.AA.DB.8C_.D8.AF.D8.B1_.D9.86.D9.82.D8.B4.D9.87_.D8.A7.DB.8C.D8.AC.D8.A7.D8.AF_.DA.A9.D8.B1.D8.AF.D9.85.D8.8C_.DA.86.D8.B7.D9.88.D8.B1_.D9.85.DB.8C_.D8.AA.D9.88.D8.A7.D9.86.D9.85_.D9.88.DB.8C.D8.B1.D8.A7.DB.8C.D8.B4_.D9.87.D8.A7.DB.8C_.D8.AE.D9.88.D8.AF_.D8.B1.D8.A7_.D8.A8.D8.A8.DB.8C.D9.86.D9.85.D8.9F",
+            "help_link_text": "جزئیات بیشتر",
+            "help_link_url": "https://wiki.openstreetmap.org/wiki/Fa:FAQ#How_to_see_my_changes",
             "view_on_osm": "دیدن تغییرات روی وبسایت OSM",
             "changeset_id": "شمارهٔ بستهٔ تغییرات شما: {changeset_id}",
             "like_osm": "از اوپن‌استریت‌مپ خوشتان آمده؟ به دیگران بپیوندید:",
@@ -1313,6 +1316,11 @@
         "mapillary_images": {
             "tooltip": "عکس‌های خیابانی مپیلاری"
         },
+        "mapillary_map_features": {
+            "title": "عارضه‌های نقشه",
+            "tooltip": "عارضه‌های نقشه از مپیلاری",
+            "request_data": "درخواست داده"
+        },
         "mapillary": {
             "title": "مپیلاری",
             "signs": {
@@ -1599,8 +1607,6 @@
                 "hidden_issues": {
                     "none": "اگر مسئله‌ای تشخیص دهیم، اینجا نمایش می‌یابد",
                     "elsewhere": "مسئله‌های غیر از اینجا: {count}",
-                    "other_features": "مسئله‌های سایر عارضه‌ها: {count}",
-                    "other_features_elsewhere": "مسئله‌های سایر عارضه‌ها در غیر از اینجا: {count}",
                     "disabled_rules": "مسئله‌های قواعد غیرفعال: {count}",
                     "disabled_rules_elsewhere": "مسئله‌های قواعد غیرفعال در غیر از اینجا: {count}",
                     "ignored_issues": "مسئله‌های نادیده‌انگاشته: {count}",
@@ -1717,15 +1723,11 @@
                 }
             },
             "fixme_tag": {
-                "title": "درخواست‌های اصلاح (Fix Me)",
                 "message": "روی {feature} درخواست اصلاح ثبت شده.",
-                "tip": "یافتن عارضه‌های دارای تگ fixme",
                 "reference": "تگ fixme نشان می‌دهد که یک نقشه‌کش برای عارضه‌ای درخواست کمک کرده است."
             },
             "generic_name": {
-                "title": "نام‌های مشکوک",
                 "message": "{feature} دارای نام مشکوک «{name}» است",
-                "tip": "یافتن عارضه‌هایی که نام کلی یا مشکوک دارند",
                 "reference": "نام باید واقعی باشد و همانی باشد که در عمل به‌کار می‌رود."
             },
             "incompatible_source": {
@@ -1742,14 +1744,7 @@
                 "title": "قالب نامعتبر",
                 "tip": "یافتن تگ‌های با قالب غیرمنتظره",
                 "email": {
-                    "message": "{feature} یک نشانی ایمیل نامعتبر دارد.",
-                    "message_multi": "{feature} چندین نشانی ایمیل نامعتبر دارد.",
                     "reference": "نشانی‌های ایمل باید شبیه user@example.com باشند."
-                },
-                "website": {
-                    "message": "{feature} یک نشانی وبسایت نامعتبر دارد.",
-                    "message_multi": "{feature} چندین نشانی وبسایت نامعتبر دارد.",
-                    "reference": "نشانی وبسایت‌ها با http یا https آغاز می‌شود."
                 }
             },
             "missing_role": {
@@ -1801,9 +1796,7 @@
                 }
             },
             "tag_suggests_area": {
-                "title": "تگ‌گذاری خط‌ها به‌عنوان محدوده",
                 "message": "{feature} باید یک محدودهٔ بسته باشد زیرا دارای تگ {tag} است.",
-                "tip": "یافتن عارضه‌هایی که تگ مخصوص خط گرفته‌اند و احتمالاً باید تگ مخصوص محدوده بگیرند",
                 "reference": "نقاط ابتدا و انتهای محدوده‌ها باید به هم وصل باشد."
             },
             "unknown_road": {
@@ -1860,6 +1853,9 @@
                 "connect_features": {
                     "title": "عارضه‌ها را متصل کنید"
                 },
+                "connect_using_ford": {
+                    "title": "با گدار به هم متصل کنید"
+                },
                 "continue_from_start": {
                     "title": "رسم را از نقطهٔ ابتدایی ادامه دهید"
                 },
@@ -1889,7 +1885,6 @@
                     "title": "از رابطه حذفش کنید"
                 },
                 "remove_generic_name": {
-                    "title": "نام را حذف کنید",
                     "annotation": "یک نام عمومی حذف شد."
                 },
                 "remove_private_info": {
@@ -2306,7 +2301,6 @@
                     "disconnect": "غیرمتصل کردن عارضه‌ها از نقطهٔ انتخاب‌شده",
                     "extract": "استخراج یک نقطه از یک عارضه",
                     "split": "یک خط را از محل گره انتخاب‌شده دو تکه می‌کند",
-                    "reverse": "یک خط را برعکس می‌کند",
                     "move": "جابه‌جاکردن عارضه‌های انتخاب‌شده",
                     "rotate": "چرخاندن عارضه‌های انتخاب‌شده",
                     "orthogonalize": "قائمه‌کردن گوشه‌های یک خط یا محدوده",
@@ -3466,15 +3460,6 @@
                 "playground": {
                     "label": "نوع"
                 },
-                "playground/baby": {
-                    "label": "جایگاه کودک"
-                },
-                "playground/max_age": {
-                    "label": "حداکثر سن"
-                },
-                "playground/min_age": {
-                    "label": "حداقل سن"
-                },
                 "population": {
                     "label": "جمعیت"
                 },
@@ -4348,10 +4333,6 @@
                 "amenity/police": {
                     "name": "پليس",
                     "terms": "اداره پلیس, کلانتری, پاسگاه, ایست بازرسی, آگاهی, اداره آگاهی, نیروی انتظامی"
-                },
-                "amenity/post_box": {
-                    "name": "صندوق پستی",
-                    "terms": "نامه,پست,بسته,تمبر,گیرنده,فرستنده,پستچی,نامه رسان"
                 },
                 "amenity/post_office": {
                     "name": "اداره پست"
@@ -5344,9 +5325,6 @@
                 "landuse/commercial": {
                     "name": "منطقه تجاری"
                 },
-                "landuse/construction": {
-                    "name": "ساخت و ساز"
-                },
                 "landuse/farm": {
                     "name": "زمین‌های کشاورزی"
                 },
@@ -5686,10 +5664,6 @@
                 "man_made/works": {
                     "name": "کارخانه"
                 },
-                "manhole/drain": {
-                    "name": "دریچه فاضلاب",
-                    "terms": "منهول, آدم‌رو, چاهک, جوی, فاضلاب, آبهای سطحی"
-                },
                 "natural": {
                     "name": "طبیعی"
                 },
@@ -5774,7 +5748,7 @@
                     "name": "حوضه"
                 },
                 "natural/water/canal": {
-                    "name": "آبراهه",
+                    "name": "کانال",
                     "terms": "کانال"
                 },
                 "natural/water/lake": {
@@ -6733,7 +6707,7 @@
                     "name": "محوطه قایق"
                 },
                 "waterway/canal": {
-                    "name": "آبراهه",
+                    "name": "کانال",
                     "terms": "مجرا, کانال, آبراه, قنات, کاریز"
                 },
                 "waterway/dam": {
@@ -7034,9 +7008,6 @@
             "OSM-Chattanooga": {
                 "name": "OSM چاتانوگا",
                 "description": "گروه کاربران OpenStreetMap برای چاتانوگا"
-            },
-            "OSM-NYC": {
-                "name": "OpenStreetMap نیویورک"
             },
             "OSM-Portland": {
                 "name": "پورتلند OpenStreetMap"

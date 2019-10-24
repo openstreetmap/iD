@@ -15,9 +15,5 @@
         "golf_cart": "designated",
         "highway": "service"
     },
-    "reference": {
-        "key": "golf",
-        "value": "cartpath"
-    },
     "name": "Golf Cartpath"
 }

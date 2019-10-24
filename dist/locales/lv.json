@@ -253,9 +253,7 @@
             },
             "reverse": {
                 "title": "Mainīt virzienu",
-                "description": "Mainīt līnijas virzienu.",
-                "key": "V",
-                "annotation": "Līnijas virziens mainīts."
+                "key": "V"
             },
             "split": {
                 "title": "Sadalīt",
@@ -449,7 +447,6 @@
             "switch": "Pārslēgties atpakaļ uz šo fonu",
             "custom": "Pielāgots",
             "overlays": "Pārklāji",
-            "imagery_source_faq": "Attēlu Info / Ziņo par kļūdu",
             "reset": "Atiestatīt",
             "display_options": "Displeja iespējas",
             "brightness": "Spilgtums",
@@ -1739,15 +1736,6 @@
                     "label": "Izejas jauda",
                     "placeholder": "500 MW, 1000 MW, 2000 MW..."
                 },
-                "playground/baby": {
-                    "label": "Bērnu Krēsls"
-                },
-                "playground/max_age": {
-                    "label": "Maks. Vecums"
-                },
-                "playground/min_age": {
-                    "label": "Min. Vecums"
-                },
                 "population": {
                     "label": "Populācija"
                 },
@@ -2309,10 +2297,6 @@
                 "amenity/police": {
                     "name": "Policija",
                     "terms": "Iecirknis,Detektīvs,Likums,Kruķi,Poliči"
-                },
-                "amenity/post_box": {
-                    "name": "Pasta kastīte",
-                    "terms": "vēstule, pasts, kaste"
                 },
                 "amenity/post_office": {
                     "name": "Pasta nodaļa",
@@ -2898,9 +2882,6 @@
                     "name": "Komercplatība",
                     "terms": "Komerciāla platība, Komercapgabals"
                 },
-                "landuse/construction": {
-                    "name": "Būvlaukums"
-                },
                 "landuse/farmyard": {
                     "name": "Lauku sēta"
                 },
@@ -3105,12 +3086,6 @@
                 },
                 "man_made/works": {
                     "name": "Rūpnīca"
-                },
-                "manhole": {
-                    "name": "Kanalizācijas lūka"
-                },
-                "manhole/telecom": {
-                    "name": "Telekomunikāciju lūka"
                 },
                 "natural": {
                     "name": "Dabisks"
@@ -4163,14 +4138,7 @@
             "OSM-India-facebook": {
                 "name": "OpenStreetMap Indija - Apkārtnes kartēšana",
                 "description": "Uzlabo OpenStreetMap Indijā",
-                "extendedDescription": "Kartē indijā? Ir jautājumi, gribi sazināties ar mūsu kopienu? Pievienojies {url}. Visi ir gaidīti!",
-                "events": {
-                    "sotmasia2018": {
-                        "name": "State of the Map Āzija 2018",
-                        "description": "Pievienojies 2018. gada OpenStreetMap State of the Map Asia konferencei Indijā.",
-                        "where": "Indijas Vadības Institūts, Bengalūru, Indija"
-                    }
-                }
+                "extendedDescription": "Kartē indijā? Ir jautājumi, gribi sazināties ar mūsu kopienu? Pievienojies {url}. Visi ir gaidīti!"
             },
             "OSM-india-mailinglist": {
                 "name": "OpenStreetMap Indijas Adresātu Saraksts",
@@ -4325,7 +4293,6 @@
                 "description": "OpenStreetMap Baltkrievijas telegram čats"
             },
             "be-facebook": {
-                "name": "OpenStreetMap BE Kopiena",
                 "description": "Kartētāji un OpenStreetMap lietotāju Facebook Beļģijā"
             },
             "be-forum": {
@@ -4372,8 +4339,7 @@
                 "description": "Kartes portāls, mājaslapa un kontakinformācija OSM biedriem Čehijā"
             },
             "osmcz-facebook": {
-                "name": "OpenStreetMap CZ Facebookā",
-                "description": "Seko Čehu kopienai Facebook - ieskaitot tulkotu WeeklyOSM!"
+                "name": "OpenStreetMap CZ Facebookā"
             },
             "osmcz-twitter": {
                 "name": "Čehu twitteris @osmcz",
@@ -4592,17 +4558,17 @@
                 "name": "Austrummidlendas (Notingemas) Ikmēneša bāra saiets",
                 "description": "Sociālais saiets priekš Austrummidlendas  kartētājiem un lietotājiem"
             },
+            "gb-irc": {
+                "name": "OpenStreetMap Apvienotās Karalistes IRC",
+                "description": "Pievienojies #osm-gb kanālam irc.oftc.net serverī (6667 ports)",
+                "extendedDescription": "Pievienojies #osm-gb kanālam irc.oftc.net serverī (6667 ports), Lūdzu esi pacietīgs un pagaidi pāris minūtes pirms uzdod jautājumu"
+            },
             "gb-mailinglist": {
                 "name": "Talk-gb E-pasta saraksts"
             },
             "mappa-mercia-group": {
                 "name": "Mappa Mercia vietējā grupa",
                 "description": "Mājas OpenStreetMap entuziastiem Midlendā"
-            },
-            "gb-irc": {
-                "name": "OpenStreetMap Apvienotās Karalistes IRC",
-                "description": "Pievienojies #osm-gb kanālam irc.oftc.net serverī (6667 ports)",
-                "extendedDescription": "Pievienojies #osm-gb kanālam irc.oftc.net serverī (6667 ports), Lūdzu esi pacietīgs un pagaidi pāris minūtes pirms uzdod jautājumu"
             },
             "OSM-CA-Slack": {
                 "name": "OSM-CA Slack",
@@ -4647,10 +4613,6 @@
             "OSM-Colorado": {
                 "name": "OpenStreetMap Kolorādo",
                 "description": "Kartētāji un OpenStreetMap lietotāji ASV Kolorādo štatā"
-            },
-            "OSM-NYC": {
-                "name": "OpenStreetMap NYC",
-                "description": "Kartētāji, OpenStreetMap lietotāji, izstrādātāji un entuziasti Ņujorkas Metropolitēna apkārtnē"
             },
             "PHXGeo-meetup": {
                 "name": "PHXGeo Saiets"
@@ -4782,14 +4744,7 @@
             "OSMF": {
                 "name": "OpenStreetMap Fonds",
                 "description": "OSMF ir Lielbritānijā bāzēta bezpeļņas organizācija, kas atbalsta OpenStreetMap Projektu",
-                "extendedDescription": "OSMF atbalsta OpenStreetMap vācot līdzekļus, uzturot serverus kas nodrošina OSM, organizējot ikgadējo State of the Map konferenci, kā arī koordinējot brīvprātīgos, kas uztur un atjaunina OSM. Tu vari parādīt atbalstu un izpaust savu balsi OpenStreetMap virzienā paliekot par OSMF biedru šeit: {signupUrl}",
-                "events": {
-                    "sotm2018": {
-                        "name": "State of the Map 2018",
-                        "description": "Pievienojies mums 3 dienām Milānā, Itālijā Ikgadējai OpenStreetMap konferecei, kas apvieno kopienu, ļauj socializēties, dalīties un mācīties.",
-                        "where": "Milāna, Itālija"
-                    }
-                }
+                "extendedDescription": "OSMF atbalsta OpenStreetMap vācot līdzekļus, uzturot serverus kas nodrošina OSM, organizējot ikgadējo State of the Map konferenci, kā arī koordinējot brīvprātīgos, kas uztur un atjaunina OSM. Tu vari parādīt atbalstu un izpaust savu balsi OpenStreetMap virzienā paliekot par OSMF biedru šeit: {signupUrl}"
             }
         }
     }

@@ -12,19 +12,6 @@ import { validationIssue, validationIssueFix } from '../core/validation';
 export function validationCrossingWays(context) {
     var type = 'crossing_ways';
 
-    /*
-    Avoid duplicate work by cacheing issues. The same issues live under two paths.
-    {
-        w-123: {
-            w-456: [{issue1}, {issue2}…]
-        },
-        w-456: {
-            w-123: [{issue1}, {issue2}…]
-        }
-    }
-    */
-    var _issueCache = {};
-
     // returns the way or its parent relation, whichever has a useful feature type
     function getFeatureWithFeatureTypeTagsForWay(way, graph) {
         if (getFeatureTypeForTags(way.tags) === null) {
@@ -45,8 +32,10 @@ export function validationCrossingWays(context) {
         return tags[key] !== undefined && tags[key] !== 'no';
     }
 
-    function tagsImplyIndoors(tags) {
-        return hasTag(tags, 'level') || tags.highway === 'corridor';
+    function taggedAsIndoor(tags) {
+        return hasTag(tags, 'indoor') ||
+            hasTag(tags, 'level') ||
+            tags.highway === 'corridor';
     }
 
     function allowsStructures(featureType) {
@@ -96,7 +85,7 @@ export function validationCrossingWays(context) {
         var level1 = tags1.level || '0';
         var level2 = tags2.level || '0';
 
-        if (tagsImplyIndoors(tags1) && tagsImplyIndoors(tags2) && level1 !== level2) {
+        if (taggedAsIndoor(tags1) && taggedAsIndoor(tags2) && level1 !== level2) {
             // assume features don't interact if they're indoor on different levels
             return true;
         }
@@ -252,9 +241,6 @@ export function validationCrossingWays(context) {
                 // skip if this way was already checked and only one issue is needed
                 if (checkedSingleCrossingWays[way2.id]) continue;
 
-                // don't re-check previously checked features
-                if (_issueCache[way1.id] && _issueCache[way1.id][way2.id]) continue;
-
                 // mark this way as checked even if there are no crossings
                 comparedWays[way2.id] = true;
 
@@ -295,12 +281,6 @@ export function validationCrossingWays(context) {
                 }
             }
         }
-        for (var way2ID in comparedWays) {
-            if (!_issueCache[way1.id]) _issueCache[way1.id] = {};
-            if (!_issueCache[way1.id][way2ID]) _issueCache[way1.id][way2ID] = [];
-            if (!_issueCache[way2ID]) _issueCache[way2ID] = {};
-            if (!_issueCache[way2ID][way1.id]) _issueCache[way2ID][way1.id] = [];
-        }
         return edgeCrossInfos;
     }
 
@@ -337,20 +317,11 @@ export function validationCrossingWays(context) {
 
         var issues = [];
         // declare these here to reduce garbage collection
-        var wayIndex, crossingIndex, key, crossings, crossing, issue;
+        var wayIndex, crossingIndex, crossings;
         for (wayIndex in ways) {
-            var way = ways[wayIndex];
-            crossings = findCrossingsByWay(way, graph, tree);
+            crossings = findCrossingsByWay(ways[wayIndex], graph, tree);
             for (crossingIndex in crossings) {
-                crossing = crossings[crossingIndex];
-                var way2 = crossing.ways[1];
-                issue = createIssue(crossing, graph);
-                // cache the issues for each way
-                _issueCache[way.id][way2.id].push(issue);
-                _issueCache[way2.id][way.id].push(issue);
-            }
-            for (key in _issueCache[way.id]) {
-                issues = issues.concat(_issueCache[way.id][key]);
+                issues.push(createIssue(crossings[crossingIndex], graph));
             }
         }
         return issues;
@@ -381,13 +352,15 @@ export function validationCrossingWays(context) {
         var featureType1 = crossing.featureTypes[0];
         var featureType2 = crossing.featureTypes[1];
 
-        var isCrossingIndoors = tagsImplyIndoors(entities[0].tags) && tagsImplyIndoors(entities[1].tags);
+        var isCrossingIndoors = taggedAsIndoor(entities[0].tags) && taggedAsIndoor(entities[1].tags);
         var isCrossingTunnels = allowsTunnel(featureType1) && hasTag(entities[0].tags, 'tunnel') &&
                                 allowsTunnel(featureType2) && hasTag(entities[1].tags, 'tunnel');
         var isCrossingBridges = allowsBridge(featureType1) && hasTag(entities[0].tags, 'bridge') &&
                                 allowsBridge(featureType2) && hasTag(entities[1].tags, 'bridge');
 
-        var crossingTypeID;
+        var subtype = crossing.featureTypes.sort().join('-');
+
+        var crossingTypeID = subtype;
 
         if (isCrossingIndoors) {
             crossingTypeID = 'indoor-indoor';
@@ -395,8 +368,6 @@ export function validationCrossingWays(context) {
             crossingTypeID = 'tunnel-tunnel';
         } else if (isCrossingBridges) {
             crossingTypeID = 'bridge-bridge';
-        } else {
-            crossingTypeID = crossing.featureTypes.sort().join('-');
         }
         if (connectionTags && (isCrossingIndoors || isCrossingTunnels || isCrossingBridges)) {
             crossingTypeID += '_connectable';
@@ -439,6 +410,7 @@ export function validationCrossingWays(context) {
 
         return new validationIssue({
             type: type,
+            subtype: subtype,
             severity: 'warning',
             message: function(context) {
                 var entity1 = context.hasEntity(this.entityIds[0]),
@@ -457,9 +429,12 @@ export function validationCrossingWays(context) {
                 connectionTags: connectionTags
             },
             // differentiate based on the loc since two ways can cross multiple times
-            hash: JSON.stringify(crossing.crossPoint) +
+            hash: crossing.crossPoint.toString() +
                 // if the edges change then so does the fix
-                JSON.stringify(crossing.edges) +
+                crossing.edges.slice().sort(function(edge1, edge2) {
+                    // order to assure hash is deterministic
+                    return edge1[0] < edge2[0] ? -1 : 1;
+                }).toString() +
                 // ensure the correct connection tags are added in the fix
                 JSON.stringify(connectionTags),
             loc: crossing.crossPoint,
@@ -568,10 +543,6 @@ export function validationCrossingWays(context) {
             }
         });
     }
-
-    validation.reset = function() {
-        _issueCache = {};
-    };
 
     validation.type = type;
 

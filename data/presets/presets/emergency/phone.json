@@ -7,6 +7,9 @@
         "indoor",
         "booth"
     ],
+    "moreFields": [
+        "level"
+    ],
     "geometry": [
         "point",
         "vertex"

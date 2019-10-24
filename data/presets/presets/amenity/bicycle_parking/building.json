@@ -18,9 +18,11 @@
         "key": "bicycle_parking"
     },
     "terms": [
+        "Bike Parking Station",
+        "cycle parking",
+        "cycling",
         "Multi-Storey Bicycle Park",
-        "Multi-Storey Bike Park",
-        "Bike Parking Station"
+        "Multi-Storey Bike Park"
     ],
     "name": "Bicycle Parking Garage"
 }

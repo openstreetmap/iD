@@ -1,0 +1,9 @@
+{
+    "key": "max_age",
+    "type": "number",
+    "minValue": 0,
+    "label": "Maximum Age",
+    "terms": [
+        "upper age limit"
+    ]
+}

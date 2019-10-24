@@ -396,9 +396,21 @@
             },
             "reverse": {
                 "title": "方向反転",
-                "description": "ラインの向きを反転",
+                "description": {
+                    "point": "ポイントの方向を切り替え",
+                    "points": "ポイントの方向を切り替え",
+                    "line": "ラインの向きを反転",
+                    "lines": "ラインの向きを反転",
+                    "features": "地物の方向を切り替え"
+                },
                 "key": "V",
-                "annotation": "ラインの方向反転"
+                "annotation": {
+                    "point": "ポイントを反転しました。",
+                    "points": "複数ポイントを反転しました。",
+                    "line": "ラインを反転しました。",
+                    "lines": "複数ラインを反転しました。",
+                    "features": "複数の地物を反転しました。"
+                }
             },
             "split": {
                 "title": "分割",
@@ -595,7 +607,7 @@
                 "key": "M",
                 "title": "計測",
                 "selected": "{n} 個を選択中",
-                "geometry": "ジオメトリ",
+                "geometry": "描画する形状",
                 "closed_line": "クローズドライン",
                 "closed_area": "クローズドエリア",
                 "center": "中心",
@@ -697,7 +709,7 @@
             "switch": "背景に切り替え",
             "custom": "カスタム",
             "overlays": "オーバーレイの選択",
-            "imagery_source_faq": "画像の情報 / 問題を報告",
+            "imagery_problem_faq": "画像の問題を報告する",
             "reset": "設定リセット",
             "reset_all": "全てリセット",
             "display_options": "背景画質の調整",
@@ -709,6 +721,10 @@
                 "description": "ミニマップを表示",
                 "tooltip": "現在表示中の周辺をズームアウトして表示",
                 "key": "/"
+            },
+            "panel": {
+                "description": "詳細パネルを表示",
+                "tooltip": "高度な背景情報を表示"
             },
             "fix_misalignment": "背景位置の調整",
             "offset": "画像の位置を調整するには、灰色のエリアのどこかをドラッグするか、ずれ幅をメートル単位で入力するかしてください。"
@@ -728,11 +744,11 @@
                     "title": "OpenStreetMapのメモ"
                 },
                 "keepRight": {
-                    "tooltip": "マップの課題をkeepright.at から自動的に検知しました",
+                    "tooltip": "keepright.atが自動検知したマップの改善提案",
                     "title": "KeepRight の改善提案"
                 },
                 "improveOSM": {
-                    "tooltip": "improveosm.org が自動的に検知した設定漏れデータ",
+                    "tooltip": "improveosm.org が自動検知した設定漏れデータ",
                     "title": "ImproveOSM の改善提案(日本は未対応)"
                 },
                 "custom": {
@@ -741,10 +757,19 @@
                     "zoom": "データにズーム"
                 }
             },
-            "fill_area": "エリアの塗りつぶし有無",
+            "style_options": "スタイルの調整",
+            "highlight_edits": {
+                "key": "G"
+            },
             "map_features": "表示対象地物の選択",
             "autohidden": "表示対象となっている地物の数が多すぎます。ズームインしてから編集を行ってください。",
             "osmhidden": "OpenStreetMapレイヤが非表示のため、これらの地物は自動的に非表示となっています。"
+        },
+        "visual_diff": {
+            "highlight_edits": {
+                "description": "変更部分をハイライト",
+                "tooltip": "編集された地物を概観"
+            }
         },
         "photo_overlays": {
             "title": "写真の重ね合わせ",
@@ -1315,6 +1340,11 @@
         "mapillary_images": {
             "tooltip": "Mapillary から路上の写真を取得します"
         },
+        "mapillary_map_features": {
+            "title": "地物",
+            "tooltip": "Mapillaryの地物",
+            "request_data": "データをリクエスト"
+        },
         "mapillary": {
             "title": "Mapillary",
             "signs": {
@@ -1591,18 +1621,21 @@
             "rules": {
                 "title": "ルール"
             },
+            "user_resolved_issues": "自分の編集で解決した改善提案",
+            "warnings_and_errors": "警告とエラー",
             "no_issues": {
                 "message": {
                     "everything": "改善提案はありません",
                     "everything_in_view": "この画面内に改善提案はありません",
                     "edits": "あなたの編集への改善提案はありません",
-                    "edits_in_view": "この画面内のあなたの編集への改善提案はありません"
+                    "edits_in_view": "この画面内のあなたの編集への改善提案はありません",
+                    "no_edits": "まだ編集内容がありません"
                 },
                 "hidden_issues": {
                     "none": "検知した改善提案はここに表示されます",
                     "elsewhere": "別の場所の改善提案: {count}",
-                    "other_features": "あなたの編集以外の改善提案: {count}",
-                    "other_features_elsewhere": "別の場所のあなたの編集以外の改善提案: {count}",
+                    "everything_else": "その他すべての改善提案: {count}",
+                    "everything_else_elsewhere": "別の場所のその他すべての改善提案: {count}",
                     "disabled_rules": "無効化されたルールの改善提案: {count}",
                     "disabled_rules_elsewhere": "無効化されたルールの別の場所の改善提案: {count}",
                     "ignored_issues": "無視された改善提案: {count}",
@@ -1720,16 +1753,17 @@
                 }
             },
             "fixme_tag": {
-                "title": "\"Fix Me\" リクエスト",
                 "message": "{feature} には\"Fix Me\" リクエストがあります",
-                "tip": "\"fixme\" タグのある地物を探す",
                 "reference": "\"fixme\" タグはある地物についてのマッパーからの修正依頼です。"
             },
             "generic_name": {
-                "title": "問題のありそうな名前",
                 "message": "{feature} には問題のありそうな名前\"{name}\" が付けられています",
-                "tip": "一般名詞や問題のありそうな名前が付いた地物を探す",
+                "message_language": "{feature} には問題のありそうな名前\"{name}\" が言語{language} で付けられています",
                 "reference": "名前は実際の、現地にある地物の名前であるべきです。"
+            },
+            "help_request": {
+                "title": "ヘルプリクエスト",
+                "tip": "ヘルプリクエストがある地物を探す"
             },
             "incompatible_source": {
                 "title": "問題のありそうな情報源",
@@ -1741,19 +1775,22 @@
                     "reference": "Google製品はプロプライエタリであり出典として使用してはいけません。"
                 }
             },
+            "incorrect_name": {
+                "message": "{feature} には間違った名前\"{name}\" が付けられています",
+                "message_language": "{feature} には間違った名前\"{name}\" が言語{language} で付けられています"
+            },
             "invalid_format": {
                 "title": "不適切な形式",
                 "tip": "想定外の形式のタグを探す",
                 "email": {
-                    "message": "{feature} には不適切なメールアドレスがあります。",
-                    "message_multi": "{feature} には不適切なメールアドレスが複数あります。",
+                    "message": "{feature} には不適切なメールアドレスがあります",
+                    "message_multi": "{feature} には不適切なメールアドレスが複数あります",
                     "reference": "メールアドレスは \"user@example.com\" のような形式でなければなりません。"
-                },
-                "website": {
-                    "message": "{feature} には不適切なウェブサイトがあります。",
-                    "message_multi": "{feature} には不適切なウェブサイトが複数あります。",
-                    "reference": "ウェブサイトは \"http\" または \"https\" で始まらなければなりません。"
                 }
+            },
+            "mismatched_geometry": {
+                "title": "ジオメトリが不一致",
+                "tip": "タグとジオメトリが矛盾している地物を探す"
             },
             "missing_role": {
                 "title": "ロールが未設定",
@@ -1792,8 +1829,13 @@
                 },
                 "noncanonical_brand": {
                     "message": "{feature} はbrandの標準的なタグを使っていないようです",
+                    "message_incomplete": "{feature} はbrandの不完全なタグを使っているようです",
                     "reference": "同一brandの地物には同じタグ付けをしてください。"
                 }
+            },
+            "point_as_vertex": {
+                "message": "{feature} はそのタグに基づいて単独のポイントであるべきです",
+                "reference": "地物の中にはラインやエリアの一部であってはいけないものがあります"
             },
             "private_data": {
                 "title": "プライベート情報",
@@ -1803,10 +1845,12 @@
                     "message": "{feature} はプライベートな連絡先情報でタグ付けされている可能性があります"
                 }
             },
+            "suspicious_name": {
+                "title": "問題のありそうな名前",
+                "tip": "一般名詞や問題のありそうな名前が付いた地物を探す"
+            },
             "tag_suggests_area": {
-                "title": "エリアとしてタグ付けされたライン",
                 "message": "{feature} は\"{tag}\" タグに基づくクローズドエリアであるべきです",
-                "tip": "ラインでタグ付けされているがおそらくエリアでタグ付けすべきであろう地物を探す",
                 "reference": "エリアは終端を接続しなければなりません。"
             },
             "unknown_road": {
@@ -1846,7 +1890,14 @@
                     "reference": "直角ではない角がある建物は直角にすることでより正確に描けることがあります。"
                 }
             },
+            "vertex_as_point": {
+                "message": "{feature} はそのタグに基づいてラインやエリアの一部であるべきです",
+                "reference": "地物の中には単独のポイントであってはいけないものがあります"
+            },
             "fix": {
+                "address_the_concern": {
+                    "title": "関心を表明"
+                },
                 "connect_almost_junction": {
                     "annotation": "近接した地物を接続しました。"
                 },
@@ -1875,6 +1926,9 @@
                 "delete_feature": {
                     "title": "この地物を削除する(よく分からないものは安易に削除しないこと)"
                 },
+                "extract_point": {
+                    "title": "このポイントを抜き移しする"
+                },
                 "ignore_issue": {
                     "title": "この改善提案を無視する"
                 },
@@ -1895,8 +1949,10 @@
                     "title": "リレーションから削除する"
                 },
                 "remove_generic_name": {
-                    "title": "名前を削除する",
                     "annotation": "一般名詞を削除しました。"
+                },
+                "remove_mistaken_name": {
+                    "annotation": "間違った名前を削除しました。"
                 },
                 "remove_private_info": {
                     "annotation": "プライベートな情報を削除しました。"
@@ -1910,6 +1966,9 @@
                 },
                 "remove_tags": {
                     "title": "タグを削除する"
+                },
+                "remove_the_name": {
+                    "title": "名前を削除する"
                 },
                 "reposition_features": {
                     "title": "地物を配置し直す"
@@ -2268,7 +2327,8 @@
                     "sidebar": "サイドバーの表示/非表示",
                     "wireframe": "ワイヤーフレームモード切替",
                     "osm_data": "OpenStreetMapデータの表示切替",
-                    "minimap": "ミニマップの表示/非表示"
+                    "minimap": "ミニマップの表示/非表示",
+                    "highlight_edits": "未保存の編集をハイライト"
                 },
                 "selecting": {
                     "title": "地物の選択",
@@ -2312,7 +2372,7 @@
                     "disconnect": "選択したノードで地物を切り離し",
                     "extract": "ポイントを地物から抜き移します。",
                     "split": "選択したノードでラインを2つに分割",
-                    "reverse": "ラインを反転",
+                    "reverse": "選択した地物を反転しました。",
                     "move": "選択した地物を移動",
                     "rotate": "選択した地物を回転",
                     "orthogonalize": "ラインやエリアの角を直角にする",
@@ -2596,6 +2656,9 @@
                 "attraction": {
                     "label": "種類"
                 },
+                "baby_seat": {
+                    "label": "ベビーシート"
+                },
                 "backrest": {
                     "label": "背もたれ"
                 },
@@ -2637,6 +2700,15 @@
                     "label": "ゴミ箱有無",
                     "terms": "ゴミ箱, ごみ箱, 廃棄物, 空き缶, 空き瓶, 空きビン, 空きカン"
                 },
+                "blind": {
+                    "label": "視覚障害者向けアクセス",
+                    "options": {
+                        "limited": "一部可",
+                        "no": "不可",
+                        "yes": "可"
+                    },
+                    "terms": "視覚障害者向けアクセス, 視覚障害, 盲人, 弱視"
+                },
                 "blood_components": {
                     "label": "献血種類",
                     "options": {
@@ -2647,6 +2719,9 @@
                     }
                 },
                 "board_type": {
+                    "label": "種類"
+                },
+                "bollard": {
                     "label": "種類"
                 },
                 "booth": {
@@ -2784,6 +2859,9 @@
                         "forward": "順方向",
                         "reversible": "切替通行"
                     }
+                },
+                "conveying_escalator": {
+                    "label": "エスカレーター"
                 },
                 "country": {
                     "label": "国"
@@ -3164,7 +3242,8 @@
                     "placeholder": "1-18"
                 },
                 "handrail": {
-                    "label": "手すり"
+                    "label": "手すり",
+                    "terms": "手すり, 手摺"
                 },
                 "hashtags": {
                     "label": "提案されたハッシュタグ",
@@ -3270,6 +3349,10 @@
                 },
                 "industrial": {
                     "label": "種類"
+                },
+                "informal": {
+                    "label": "非公式な地物",
+                    "terms": "非公式な地物, 非公式"
                 },
                 "information": {
                     "label": "種類"
@@ -3395,6 +3478,10 @@
                     "label": "フロア番号（日本の1階は0）",
                     "terms": "階, フロア"
                 },
+                "level_semi": {
+                    "label": "階数",
+                    "terms": "階数"
+                },
                 "levels": {
                     "label": "総階数",
                     "placeholder": "2, 4, 6...",
@@ -3425,6 +3512,10 @@
                 "lock": {
                     "label": "水路上のドック"
                 },
+                "lockable": {
+                    "label": "施錠可否",
+                    "terms": "施錠可否, 施錠, ロック, 鍵"
+                },
                 "man_made": {
                     "label": "種類"
                 },
@@ -3444,6 +3535,10 @@
                 "material": {
                     "label": "素材",
                     "terms": "材料, 素材"
+                },
+                "max_age": {
+                    "label": "最高年齢",
+                    "terms": "最高年齢, 最高齢, 最大年齢"
                 },
                 "maxheight": {
                     "label": "高さ制限",
@@ -3478,6 +3573,10 @@
                 "microbrewery": {
                     "label": "地ビール醸造所",
                     "terms": "醸造所, クラフトビール, 蔵元"
+                },
+                "min_age": {
+                    "label": "最少年齢",
+                    "terms": "最小年齢, 最低年齢, 最年少"
                 },
                 "minspeed": {
                     "label": "最低速度制限",
@@ -3665,36 +3764,36 @@
                 "piste/difficulty": {
                     "label": "難易度",
                     "options": {
-                        "advanced": "Advanced",
-                        "easy": "Easy",
-                        "expert": "Expert",
+                        "advanced": "上級",
+                        "easy": "イージー",
+                        "expert": "エキスパート",
                         "extreme": "エクストリーム",
                         "freeride": "フリーライド",
-                        "intermediate": "普通",
+                        "intermediate": "中級",
                         "novice": "ノービス"
                     },
-                    "placeholder": "初心者向け、普通、上級者向け"
+                    "placeholder": "初級者、中級者、上級者向け"
                 },
                 "piste/difficulty_downhill": {
                     "label": "難易度",
                     "options": {
                         "advanced": "上級 (黒色のひし形)",
-                        "easy": "簡単 (緑色の円)",
+                        "easy": "初級 (緑色の円)",
                         "expert": "エキスパート (黒色のひし形2つ)",
                         "extreme": "エクストリーム (登山装備要)",
                         "freeride": "フリーライド (コース外)",
-                        "intermediate": "普通 (青色の四角)",
+                        "intermediate": "中級 (青色の四角)",
                         "novice": "初心者向け (教習用)"
                     },
-                    "placeholder": "初心者向け、普通、上級者向け"
+                    "placeholder": "初級者向け、普通、上級者向け"
                 },
                 "piste/difficulty_nordic": {
                     "label": "難易度",
                     "options": {
                         "advanced": "上級 - 狭い, 険しいか氷結あり, 急角度カーブ",
-                        "easy": "簡単 - ソフトな丘, 短区間のみ険しい",
+                        "easy": "初級 - ソフトな丘, 短区間のみ険しい",
                         "expert": "エキスパート - 一帯は危険な地形",
-                        "intermediate": "普通 - 険しい部分あり",
+                        "intermediate": "中級 - 険しい部分あり",
                         "novice": "ノービス - 平坦, 特別な努力は不要"
                     },
                     "placeholder": "初心者向け、普通、上級者向け"
@@ -3703,7 +3802,7 @@
                     "label": "難易度",
                     "options": {
                         "advanced": "上級 - S: 40-45° の斜度",
-                        "easy": "簡単 - WS: 30-35° の斜度",
+                        "easy": "初級 - WS: 30-35° の斜度",
                         "expert": "エキスパート - SS: 45–50° の斜度",
                         "extreme": "エクストリーム - EX: >55° の斜度",
                         "freeride": "フリーライド - AS: 50–55° の斜度",
@@ -3753,7 +3852,7 @@
                     "options": {
                         "connection": "接続路",
                         "downhill": "ダウンヒル",
-                        "hike": "ハイキング",
+                        "hike": "ハイク",
                         "ice_skate": "アイススケート",
                         "nordic": "ノルディック",
                         "playground": "児童公園",
@@ -3776,14 +3875,8 @@
                 "playground": {
                     "label": "種類"
                 },
-                "playground/baby": {
-                    "label": "ベビーシート"
-                },
-                "playground/max_age": {
-                    "label": "最高年齢"
-                },
-                "playground/min_age": {
-                    "label": "最低年齢"
+                "playground/theme": {
+                    "label": "テーマ"
                 },
                 "polling_station": {
                     "label": "投票所",
@@ -3902,6 +3995,9 @@
                         "yes": "予約可能"
                     },
                     "terms": "予約, 予約可否"
+                },
+                "residential": {
+                    "label": "種類"
                 },
                 "resort": {
                     "label": "種類"
@@ -4174,7 +4270,11 @@
                     "terms": "開始日"
                 },
                 "step_count": {
-                    "label": "段数"
+                    "label": "段数",
+                    "terms": "階段数, 段数"
+                },
+                "stile": {
+                    "label": "種類"
                 },
                 "stop": {
                     "label": "一時停止の種類",
@@ -4188,6 +4288,11 @@
                 },
                 "stroller": {
                     "label": "ベビーカー利用可否",
+                    "options": {
+                        "limited": "一部可",
+                        "no": "不可",
+                        "yes": "可"
+                    },
                     "terms": "ベビーカー利用可否, ベビーカー"
                 },
                 "structure": {
@@ -4199,7 +4304,8 @@
                         "ford": "洗い越し",
                         "tunnel": "トンネル"
                     },
-                    "placeholder": "不明"
+                    "placeholder": "不明",
+                    "terms": "構造"
                 },
                 "structure_waterway": {
                     "label": "トンネルの種類",
@@ -4225,7 +4331,8 @@
                     "label": "設置場所･支持素材"
                 },
                 "surface": {
-                    "label": "路面状態"
+                    "label": "路面状態",
+                    "terms": "表面, 路面, 壁面"
                 },
                 "surveillance": {
                     "label": "監視の種類"
@@ -4314,6 +4421,9 @@
                 },
                 "tower/type": {
                     "label": "塔の種類"
+                },
+                "townhall/type": {
+                    "label": "種類"
                 },
                 "tracktype": {
                     "label": "トラックの種類",
@@ -4458,6 +4568,9 @@
                 "wall": {
                     "label": "種類"
                 },
+                "waste": {
+                    "label": "ゴミ箱"
+                },
                 "water": {
                     "label": "種類"
                 },
@@ -4484,6 +4597,11 @@
                 },
                 "wheelchair": {
                     "label": "車椅子の利用可否",
+                    "options": {
+                        "limited": "一部可",
+                        "no": "不可",
+                        "yes": "可"
+                    },
                     "terms": "車椅子, 車椅子利用可否, 車椅子アクセス"
                 },
                 "wholesale": {
@@ -4498,7 +4616,7 @@
                     "terms": "ウィキデータ"
                 },
                 "wikipedia": {
-                    "label": "Wikipedia",
+                    "label": "ウィキペディア",
                     "terms": "ウィキペディア"
                 },
                 "windings": {
@@ -4509,13 +4627,13 @@
                 "windings/configuration": {
                     "label": "コイルの構成",
                     "options": {
-                        "delta": "Delta",
-                        "leblanc": "Leblanc",
-                        "open": "Open",
-                        "open-delta": "Open Delta",
-                        "scott": "Scott",
-                        "star": "Star / Wye",
-                        "zigzag": "Zig Zag"
+                        "delta": "Δ結線 / 三角結線 / デルタ結線",
+                        "leblanc": "ルブラン結線",
+                        "open": "開放巻線",
+                        "open-delta": "V結線",
+                        "scott": "スコット結線",
+                        "star": "Y結線 / 星形結線 / スター結線",
+                        "zigzag": "千鳥結線"
                     },
                     "terms": "コイル形状"
                 }
@@ -4632,6 +4750,10 @@
                 "aeroway/runway": {
                     "name": "滑走路",
                     "terms": "滑走路"
+                },
+                "aeroway/spaceport": {
+                    "name": "宇宙船基地",
+                    "terms": "宇宙船基地, 宇宙船, スペースポート, 宇宙船発射基地"
                 },
                 "aeroway/taxiway": {
                     "name": "航空機誘導路",
@@ -4873,6 +4995,10 @@
                     "name": "ファストフード・フィッシュ＆チップス",
                     "terms": "ファストフード, フィッシュ＆チップス, フィッシュアンドチップス, 飲食店, 食事, 食べる, 料理, ランチ"
                 },
+                "amenity/fast_food/hot_dog": {
+                    "name": "ファストフード・ホットドッグ",
+                    "terms": "ファストフード・ホットドッグ, ホットドッグ, ファストフード, 飲食, 食べる, 軽食, 飲食店, 食事, 料理"
+                },
                 "amenity/fast_food/ice_cream": {
                     "name": "ファストフード・アイスクリーム"
                 },
@@ -4954,6 +5080,10 @@
                 "amenity/library": {
                     "name": "図書館",
                     "terms": "図書館, ライブラリ, ライブラリー, 教育, 本"
+                },
+                "amenity/loading_dock": {
+                    "name": "貨物の搬出入口",
+                    "terms": "貨物の搬出入口, 貨物搬入口, 貨物積出口, 荷受, 荷出"
                 },
                 "amenity/love_hotel": {
                     "name": "ラブホテル",
@@ -5092,7 +5222,7 @@
                 },
                 "amenity/post_box": {
                     "name": "郵便ポスト",
-                    "terms": "郵便ポスト, 郵便箱, ポスト"
+                    "terms": "郵便ポスト, ポスト, 郵便差出口, 〒"
                 },
                 "amenity/post_depot": {
                     "name": "郵便集配所",
@@ -5303,6 +5433,22 @@
                     "name": "スタジオ",
                     "terms": "スタジオ, 番組製作, 音楽"
                 },
+                "amenity/studio/audio": {
+                    "name": "レコーディングスタジオ",
+                    "terms": "レコーディングスタジオ, 音楽スタジオ, 録音スタジオ, 録画スタジオ"
+                },
+                "amenity/studio/radio": {
+                    "name": "ラジオ局",
+                    "terms": "ラジオ局, ラジオ, ラジオステーション, 放送"
+                },
+                "amenity/studio/television": {
+                    "name": "テレビ局",
+                    "terms": "テレビ局, テレビ, テレビステーション, 放送"
+                },
+                "amenity/studio/video": {
+                    "name": "映画スタジオ",
+                    "terms": "映画スタジオ, フィルムスタジオ, スタジオ"
+                },
                 "amenity/swimming_pool": {
                     "name": "遊泳プール（旧）"
                 },
@@ -5338,6 +5484,10 @@
                     "name": "役場",
                     "terms": "市役所, 区役所, 町役場, 村役場, 市庁, 役所"
                 },
+                "amenity/townhall/city": {
+                    "name": "市区役所",
+                    "terms": "市区役所, 市役所, 区役所, 役場"
+                },
                 "amenity/toy_library": {
                     "name": "おもちゃ資料館",
                     "terms": "おもちゃ資料館, おもちゃの博物館, 玩具, おもちゃ, ゲーム, 博物館, 資料館"
@@ -5358,6 +5508,10 @@
                     "name": "空きビン回収機",
                     "terms": "空きビン回収機, ボトル, 空き瓶"
                 },
+                "amenity/vending_machine/bread": {
+                    "name": "自販機(パン)",
+                    "terms": "自販機(パン), パン, 自販機"
+                },
                 "amenity/vending_machine/cigarettes": {
                     "name": "たばこ自動販売機",
                     "terms": "たばこ, 自動販売機, 自販機, 嗜好品, タバコ, 煙草"
@@ -5373,6 +5527,10 @@
                 "amenity/vending_machine/drinks": {
                     "name": "飲料自動販売機",
                     "terms": "飲料, ジュース, 酒, 飲み物, 自動販売機, 自販機"
+                },
+                "amenity/vending_machine/eggs": {
+                    "name": "自販機(卵)",
+                    "terms": "自販機(卵), 卵, タマゴ, 自販機"
                 },
                 "amenity/vending_machine/electronics": {
                     "name": "電子機器自販機",
@@ -5401,6 +5559,10 @@
                 "amenity/vending_machine/ice_cream": {
                     "name": "アイスクリーム自販機",
                     "terms": "アイスクリーム, 自販機, 自動販売機"
+                },
+                "amenity/vending_machine/ice_cubes": {
+                    "name": "自販機(氷)",
+                    "terms": "自販機(氷), 氷, アイス, 自販機"
                 },
                 "amenity/vending_machine/newspapers": {
                     "name": "新聞販売機",
@@ -5458,6 +5620,10 @@
                     "name": "動物の水飲み場",
                     "terms": "動物の水飲み場, 水場, 動物, ペット"
                 },
+                "amenity/weighbridge": {
+                    "name": "トラックスケール",
+                    "terms": "トラックスケール, 車両計量台"
+                },
                 "area": {
                     "name": "エリア",
                     "terms": "エリア, 領域, 範囲, 面"
@@ -5483,7 +5649,7 @@
                 },
                 "attraction/bumper_car": {
                     "name": "バンパーカー",
-                    "terms": "バンパーカー, アトラクション"
+                    "terms": "バンパーカー, バンプカー"
                 },
                 "attraction/bungee_jumping": {
                     "name": "バンジー・ジャンプ",
@@ -5540,6 +5706,10 @@
                 "barrier/bollard": {
                     "name": "車止め杭",
                     "terms": "車止め杭, 障害物, バリア, ボラード, 杭"
+                },
+                "barrier/bollard_line": {
+                    "name": "侵入防止杭",
+                    "terms": "杭, ポスト, 侵入防止杭, ボラード"
                 },
                 "barrier/border_control": {
                     "name": "国境検問所",
@@ -5643,6 +5813,10 @@
                 "barrier/wall": {
                     "name": "壁",
                     "terms": "壁, 障害物, バリア"
+                },
+                "barrier/wall/noise_barrier": {
+                    "name": "防音壁",
+                    "terms": "障害物, バリア, 防音壁, 壁, 騒音"
                 },
                 "boundary": {
                     "name": "行政境界"
@@ -6112,8 +6286,8 @@
                     "name": "行き先に用事がある緊急車両, 救命"
                 },
                 "emergency/fire_alarm": {
-                    "name": "火災放置機",
-                    "terms": "火災通報ボックス, 火災通報装置, 火災放置機, 火事, 消防"
+                    "name": "火災報知機",
+                    "terms": "火災通報ボックス, 火災通報装置, 火災報知機, 火事, 消防, 火災報知器, 報知器, 報知機"
                 },
                 "emergency/fire_extinguisher": {
                     "name": "消火器",
@@ -6433,6 +6607,10 @@
                     "name": "小道（自動車通行不可）",
                     "terms": "小道, 歩道, 自転車道, バイク"
                 },
+                "highway/path/informal": {
+                    "name": "けもの道",
+                    "terms": "けもの道, 獣道, 小道"
+                },
                 "highway/pedestrian_area": {
                     "name": "ペデストリアンデッキ",
                     "terms": "ペデストリアンデッキ, 歩道"
@@ -6450,8 +6628,16 @@
                     "terms": "主要地方道, 接続路, 車道, 幹線, 公道"
                 },
                 "highway/raceway": {
-                    "name": "レーストラック（モータースポーツ）",
-                    "terms": "レーストラック, 車道, 私道"
+                    "name": "モーターレース場",
+                    "terms": "モーターレース場, 自動車レース場, バイクレース場, レース場, スポーツ, サーキット, 自動車, バイク, カーレース, バイクレース"
+                },
+                "highway/raceway/karting": {
+                    "name": "カートレース場",
+                    "terms": "カートレース場, レース場, スポーツ, サーキット"
+                },
+                "highway/raceway/motocross": {
+                    "name": "モトクロスレース場",
+                    "terms": "モトクロスレース場, レース場, スポーツ, サーキット, バイク"
                 },
                 "highway/residential": {
                     "name": "住宅地区の道路",
@@ -6655,9 +6841,17 @@
                     "name": "屋内のドア",
                     "terms": "屋内のドア, 屋内ドア, 扉, ドア, 入り口, インドア, 屋内"
                 },
+                "indoor/elevator": {
+                    "name": "エレベータ（インドア）",
+                    "terms": "エレベータ（インドア）, エレベータ, インドア"
+                },
                 "indoor/room": {
                     "name": "屋内の部屋",
                     "terms": "屋内の部屋, 部屋, 屋内, インドア, ルーム"
+                },
+                "indoor/stairs": {
+                    "name": "階段（インドア）",
+                    "terms": "階段（インドア）, 階段, インドア"
                 },
                 "indoor/wall": {
                     "name": "屋内の壁",
@@ -6711,8 +6905,8 @@
                     "terms": "オフィス街"
                 },
                 "landuse/construction": {
-                    "name": "建設用地",
-                    "terms": "工事中用地, 建設用地, 工事現場"
+                    "name": "建設予定地",
+                    "terms": "工事中用地, 建設用地, 工事現場, 建設予定地"
                 },
                 "landuse/farm": {
                     "name": "農地（非推奨）"
@@ -7273,6 +7467,34 @@
                     "name": "灯台",
                     "terms": "灯台, ライトハウス"
                 },
+                "man_made/manhole": {
+                    "name": "マンホール",
+                    "terms": "マンホール, 蓋, フタ"
+                },
+                "man_made/manhole/drain": {
+                    "name": "マンホール(排水)",
+                    "terms": "マンホール(排水), 排水, 雨水, 集水"
+                },
+                "man_made/manhole/gas": {
+                    "name": "マンホール(ガス)",
+                    "terms": "マンホール(ガス), ガス, 都市ガス"
+                },
+                "man_made/manhole/power": {
+                    "name": "マンホール(電力)",
+                    "terms": "マンホール(電力), 電力, 電気"
+                },
+                "man_made/manhole/sewer": {
+                    "name": "マンホール(溝渠)",
+                    "terms": "マンホール(溝渠), 溝, 溝渠"
+                },
+                "man_made/manhole/telecom": {
+                    "name": "マンホール(通信)",
+                    "terms": "マンホール(通信), 通信, 電話, テレコム"
+                },
+                "man_made/manhole/water": {
+                    "name": "マンホール(水道)",
+                    "terms": "マンホール(水道), 水道, 上下水道, 上水, 下水"
+                },
                 "man_made/mast": {
                     "name": "柱",
                     "terms": "柱"
@@ -7397,6 +7619,10 @@
                     "name": "トンネル（エリア）",
                     "terms": "トンネル, 地下道, トンネル（エリア）, 隧道"
                 },
+                "man_made/utility_pole": {
+                    "name": "柱",
+                    "terms": "電柱, 鉄柱, 柱"
+                },
                 "man_made/wastewater_plant": {
                     "name": "下水処理場",
                     "terms": "下水処理場"
@@ -7424,18 +7650,6 @@
                 "man_made/works": {
                     "name": "工場",
                     "terms": "工場"
-                },
-                "manhole": {
-                    "name": "マンホール",
-                    "terms": "マンホール, 潜孔, 人孔"
-                },
-                "manhole/drain": {
-                    "name": "雨水用マンホール",
-                    "terms": "雨水用マンホール"
-                },
-                "manhole/telecom": {
-                    "name": "電話線用マンホール",
-                    "terms": "電話線用マンホール"
                 },
                 "military/bunker": {
                     "name": "軍事用バンカー",
@@ -8090,7 +8304,8 @@
                     "terms": "トラム乗り場, トラム, 路面電車, LRT, ライトレール, 市電, ちんちん電車, チンチン電車, のりば, ホーム, プラットホーム, 駅, 電停, 停留場, 停車場, 乗降所, 路面電車プラットホーム"
                 },
                 "public_transport/platform/tram_point": {
-                    "name": "路面電車のりば/プラットホーム"
+                    "name": "路面電車のりば/プラットホーム",
+                    "terms": "トラム乗り場, トラム, 路面電車, LRT, ライトレール, 市電, ちんちん電車, チンチン電車, のりば, ホーム, プラットホーム, 駅, 電停, 停留場, 停車場, 乗降所"
                 },
                 "public_transport/platform/trolleybus": {
                     "name": "トロリーバスプラットホーム",
@@ -8408,6 +8623,10 @@
                 },
                 "shop/boutique": {
                     "name": "ブティック"
+                },
+                "shop/brewing_supplies": {
+                    "name": "醸造用品店",
+                    "terms": "醸造用品店, 醸造, 酒, 酒造, DIY, ホームブリュー"
                 },
                 "shop/butcher": {
                     "name": "精肉店",
@@ -8798,6 +9017,10 @@
                     "name": "プリンタ用インク店",
                     "terms": "プリンタ用インク店, プリンタ, インクカートリッジ, トナー"
                 },
+                "shop/psychic": {
+                    "name": "サイキック店",
+                    "terms": "サイキック店, 超能力"
+                },
                 "shop/pyrotechnics": {
                     "name": "花火店",
                     "terms": "花火店"
@@ -8809,6 +9032,10 @@
                 "shop/religion": {
                     "name": "宗教用品店",
                     "terms": "宗教用品店, 仏壇, 仏具, 祭祀用品, 信仰"
+                },
+                "shop/rental": {
+                    "name": "レンタルショップ",
+                    "terms": "レンタルショップ, レンタル店, お店, 店舗, レンタル用品店"
                 },
                 "shop/scuba_diving": {
                     "name": "スキューバダイビングショップ",
@@ -9511,6 +9738,10 @@
                 "description": "Yellow = Public domain map data from the US Census. Red = Data not found in OpenStreetMap",
                 "name": "TIGER Roads 2018"
             },
+            "US-TIGER-Roads-2019": {
+                "description": "黄 = US Censusからのパブリックドメインの地図データ。赤 = penStreetMapに無いデータ。",
+                "name": "TIGER Roads 2019"
+            },
             "USDA-NAIP": {
                 "description": "The most recent year of DOQQs from the National Agriculture Imagery Program (NAIP) for each state in the contiguous United States.",
                 "name": "National Agriculture Imagery Program"
@@ -9536,6 +9767,12 @@
                     "text": "Realized by means of Brussels UrbIS®© - Distribution & Copyright CIRB"
                 },
                 "name": "UrbIS-Ortho 2018"
+            },
+            "UrbISOrtho2019": {
+                "attribution": {
+                    "text": "Realized by means of Brussels UrbIS®© - Distribution & Copyright CIRB"
+                },
+                "name": "UrbIS-Ortho 2019"
             },
             "UrbisAdmFR": {
                 "attribution": {
@@ -9921,6 +10158,16 @@
                 "description": "YouthMappers chapter at Université de N'Zérékoré",
                 "extendedDescription": "YouthMappers est un groupe qui permet de faire la cartographie des communautés enclavées et à la prise des décisions en cas de catastrophes ou épidémies. Elle permet aussi la production et l'utilisation des données en accès gratuit."
             },
+            "map-kibera": {
+                "name": "Map Kibera Trust",
+                "description": "Map Kibera is a registered organization working in Kenya",
+                "extendedDescription": "Map Kibera Trust’s mission is to increase influence and representation of marginalized communities through the creative use of digital tools for action."
+            },
+            "osm-kenya": {
+                "name": "OSM Kenya",
+                "description": "OSM Kenya is a community of OSM contributors and users",
+                "extendedDescription": "OSM is a local community for individuals interested in OpenStreetMap including organizations, developers, and YouthMappers chapters in the country."
+            },
             "ym-Dedan-Kimathi-University-of-Technology": {
                 "name": "GDEV",
                 "description": "YouthMappers chapter at Dedan Kimathi University of Technology",
@@ -10033,6 +10280,11 @@
                 "description": "YouthMappers chapter at Ignatius Ajuru University of Education",
                 "extendedDescription": "We are a YouthMappers Chapter of Ignatius Ajuru University of Education involved in crowdsourced mapping of our environment and remote mapping of resilient communities.We are a team of volunteers using openstreetmap and other open Geospatial source for mapping."
             },
+            "ym-University-of-Nigeria-Enugu-Campus": {
+                "name": "LionMappersTeam (LMT) Enugu",
+                "description": "YouthMappers chapter at University of Nigeria, Enugu Campus",
+                "extendedDescription": "The LionMappersTeam(LMT)Enugu Campus is an affiliate of YouthMappers Network, with the sole aim of providing members the opportunity to learn and improve their skills in the field of Geoinformatics and to create open geographic data and analysis that addresses locally defined challenges globally. It is a team of volunteers for Crowdsourced Mapping and Geographic Information provision using Openstreetmap, Citizen Science and other Geospatial Technology for research, training and response to resilient community challenges. We are involved in Web-Cartography, GIS and Remote Sensing Applications and ResearchWe are passionate about Volunteered Geographic Information.Paticipatory GIS and Citizen Science.Our major activities include online crowdsourced-Cartography, Field Mapping ,Training workshops and outreaches to High School as well as Humanitarian/Disaster Response Mapping."
+            },
             "ym-University-of-Nigeria-Nsukka": {
                 "name": "LionMappersTeam (LMT) Nsukka",
                 "description": "YouthMappers chapter at University of Nigeria, Nsukka",
@@ -10042,11 +10294,6 @@
                 "name": "UniqueMappersTeam (UMT) Port Harcourt",
                 "description": "YouthMappers chapter at University of Port Harcourt",
                 "extendedDescription": "UniqueMappersTeam(UMT)Port Harcourt  is an action group and a team of volunteers for a collaborative online mapping targeted at training and empowering members with trending mapping skills  to create open geospatial data and analysis that addresses locally defined challenges for geoinformation and to provide humanitarian mapping  services to resilient communities in Niger Delta,Nigeria and elsewhere.We promote Crowdsoucred Mapping and Geographic information volunteering using OpenStreetMap(OSM) platform and other accessible platforms for Rapid Response Mapping,Disaster Mapping,Geo-intelligence Mapping,Map updates and training.Its an affiliate Campus chapter of Humanitarian OpenStreetMap Team(HOT).It is a project-task team of YouthMappers that provide opportunity for members to learn and improve their skills in Geoinformatics so as to explore global opportunities in the field of Mapping and Geoinformation."
-            },
-            "ym-University-of-Nigeria-Enugu-Campus": {
-                "name": "LionMappersTeam (LMT) Enugu",
-                "description": "YouthMappers chapter at University of Nigeria, Enugu Campus",
-                "extendedDescription": "The LionMappersTeam(LMT)Enugu Campus is an affiliate of YouthMappers Network, with the sole aim of providing members the opportunity to learn and improve their skills in the field of Geoinformatics and to create open geographic data and analysis that addresses locally defined challenges globally. It is a team of volunteers for Crowdsourced Mapping and Geographic Information provision using Openstreetmap, Citizen Science and other Geospatial Technology for research, training and response to resilient community challenges. We are involved in Web-Cartography, GIS and Remote Sensing Applications and ResearchWe are passionate about Volunteered Geographic Information.Paticipatory GIS and Citizen Science.Our major activities include online crowdsourced-Cartography, Field Mapping ,Training workshops and outreaches to High School as well as Humanitarian/Disaster Response Mapping."
             },
             "osm-africa-telegram": {
                 "name": "OpenStreetMap Africa Telegram",
@@ -10185,7 +10432,14 @@
             "OSM-BGD-facebook": {
                 "name": "OpenStreetMap Bangladesh",
                 "description": "Improve OpenStreetMap in Bangladesh",
-                "extendedDescription": "Mapping in Bangladesh? Have questions, want to connect with the community here? Join us at {url}. All are welcome!"
+                "extendedDescription": "Mapping in Bangladesh? Have questions, want to connect with the community here? Join us at {url}. All are welcome!",
+                "events": {
+                    "sotmasia2019": {
+                        "name": "State of the Map Asia 2019",
+                        "description": "Join the 2019 OpenStreetMap region-wide event at State of the Map Asia in Dhaka",
+                        "where": "Krishibid Institution Bangladesh (KIB), Dhaka, Bangladesh"
+                    }
+                }
             },
             "ym-Asian-University-for-Women": {
                 "name": "YouthMappers at AUW",
@@ -10212,7 +10466,7 @@
                 "description": "YouthMappers chapter at Jahangirnagar University"
             },
             "ym-Khulna-University": {
-                "name": "Openstreetmap",
+                "name": "Khulna University YouthMappers",
                 "description": "YouthMappers chapter at Khulna University",
                 "extendedDescription": "KU students and faculty from multiple disciplines are experienced at creating open data for OSM to address local challenges of development, including food security and other topics."
             },
@@ -10229,14 +10483,7 @@
             "OSM-India-facebook": {
                 "name": "OpenStreetMap India - Participatory neighborhood mapping",
                 "description": "Improve OpenStreetMap in India",
-                "extendedDescription": "Mapping in India? Have questions, want to connect with the community here? Join us at {url}. All are welcome!",
-                "events": {
-                    "sotmasia2018": {
-                        "name": "State of the Map Asia 2018",
-                        "description": "Join the 2018 OpenStreetMap region-wide event at State of the Map Asia in India",
-                        "where": "Indian Institute of Management, Bangalore, India"
-                    }
-                }
+                "extendedDescription": "Mapping in India? Have questions, want to connect with the community here? Join us at {url}. All are welcome!"
             },
             "osm-india-forum": {
                 "name": "OpenStreetMap India forum",
@@ -10325,6 +10572,10 @@
                 "name": "OpenStreetMap 日本メーリングリスト",
                 "description": "Talk-ja は日本コミュニティ向けの公式メーリングリストです"
             },
+            "OSM-Japan-telegram": {
+                "name": "OpenStreetMap 日本 Telegram",
+                "description": "OSM日本コミュニティ用のTelegramグループ: {url}"
+            },
             "OSM-japan-twitter": {
                 "name": "OpenStreetMap 日本のTwitter",
                 "description": "Twitterでのハッシュタグ: {url}"
@@ -10332,6 +10583,14 @@
             "OSM-japan-website": {
                 "name": "OpenStreetMap 日本",
                 "description": "日本のマッパーとOpenStreetMap ユーザー"
+            },
+            "OSM-Korea-mailinglist": {
+                "name": "OpenStreetMap Korea Mailinglist",
+                "description": "Talk-ko is an Official Mailinglist for the Communities to dicuss matters about Korea"
+            },
+            "OSM-Korea-telegram": {
+                "name": "OSM Korea Telegram",
+                "description": "Unofficial Group for OpenStreetMap contributors, communities, and users in Korea to share and discuss."
             },
             "OSM-MY-facebook": {
                 "name": "OpenStreetMap Malaysia on Facebook",
@@ -10417,10 +10676,6 @@
                 "name": "OpenStreetMap RU telegram",
                 "description": "OpenStreetMap Russia telegram chat"
             },
-            "OSM-south-korea-telegram": {
-                "name": "OSM South Korea Telegram",
-                "description": "Unofficial Channnel for OpenStreetMap contributors, communities, and users in South Korea to share and discuss."
-            },
             "OSM-sri-lanka-facebook": {
                 "name": "OpenStreetMap Sri Lanka",
                 "description": "Improve OpenStreetMap in Sri Lanka",
@@ -10433,6 +10688,10 @@
             "OSM-TW-mailinglist": {
                 "name": "OpenStreetMap Taiwan Mailinglist",
                 "description": "Talk-tw is an Official Mailinglist for the Communities to dicuss matters about Taiwan"
+            },
+            "OSM-TW-telegram": {
+                "name": "OpenStreetMap Taiwan Telegram",
+                "description": "A Telegram group for the OSM Taiwan community: {url}"
             },
             "OSM-TH-CNX-meetup": {
                 "name": "OSM Meetup Chiang Mai",
@@ -10488,8 +10747,13 @@
                 "name": "OpenStreetMap Belarus",
                 "description": "OpenStreetMap Belarus telegram chat"
             },
+            "be-chapter": {
+                "name": "OpenStreetMap Belgium Local Chapter",
+                "description": "We help grow and improve OpenStreetMap in Belgium.",
+                "extendedDescription": "If you want to help to improve and grow the mapping community in Belgium, to make even more people crazy about mapping, OpenStreetMap Belgium is the right place for you!"
+            },
             "be-facebook": {
-                "name": "OpenStreetMap BE Community",
+                "name": "OpenStreetMap BE Facebook Community",
                 "description": "Mappers and OpenStreetMap on Facebook in Belgium"
             },
             "be-forum": {
@@ -10519,6 +10783,10 @@
                 "name": "OpenStreetMap Belgium Twitter",
                 "description": "OSM Belgium on Twitter: @osm_be"
             },
+            "OSM-BiH-telegram": {
+                "name": "OpenStreetMap BiH Telegram",
+                "description": "A Telegram group for the OSM Bosnia and Herzegovina community: {url}"
+            },
             "hr-facebook": {
                 "name": "OpenStreetMap Croatia Facebook group",
                 "description": "OpenStreetMap Croatia Facebook group"
@@ -10537,7 +10805,11 @@
             },
             "osmcz-facebook": {
                 "name": "OpenStreetMap CZ on Facebook",
-                "description": "Follow czech community on Facebook - including translated WeeklyOSM!"
+                "description": "Follow Czech community on Facebook - including translated WeeklyOSM!"
+            },
+            "OSM-CZ-telegram": {
+                "name": "OpenStreetMap CZ Telegram",
+                "description": "A Telegram group for the OSM Czech community: {url}"
             },
             "osmcz-twitter": {
                 "name": "Czech twitter @osmcz",
@@ -10559,11 +10831,6 @@
                 "name": "Talk-dk Mailing List",
                 "description": "A mailing list to discuss OpenStreetMap in Denmark"
             },
-            "ym-Queen-Mary-University-of-London": {
-                "name": "Queen Mary YouthMappers",
-                "description": "YouthMappers chapter at Queen Mary University of London",
-                "extendedDescription": "This chapter will be part of the activities of the Queen Mary Geography Society."
-            },
             "fi-forum": {
                 "name": "OpenStreetMap FI forum",
                 "description": "OpenStreetMap Finland web forum"
@@ -10575,6 +10842,10 @@
             "fi-mailinglist": {
                 "name": "Talk-fi Mailing List",
                 "description": "Talk-fi is the official mailing list for the Finnish OSM community"
+            },
+            "fr-chapter": {
+                "name": "OpenStreetMap France Local Chapter",
+                "description": "We help grow and improve OpenStreetMap in France."
             },
             "fr-facebook": {
                 "name": "OpenStreetMap France Facebook page",
@@ -10591,6 +10862,10 @@
             "fr-mailinglist": {
                 "name": "Talk-fr Mailing List",
                 "description": "Talk-fr mailing list"
+            },
+            "fr-telegram": {
+                "name": "OpenStreetMap France on Telegram",
+                "description": "A Telegram group for the OSM France community: {url}"
             },
             "fr-twitter": {
                 "name": "OpenStreetMap France on Twitter",
@@ -10615,6 +10890,10 @@
             "de-forum": {
                 "name": "OpenStreetMap DE forum",
                 "description": "OpenStreetMap Germany web forum"
+            },
+            "de-hamburg-telegram": {
+                "name": "OSM Hamburg on Telegram",
+                "description": "OpenStreetMap Hamburg Telegram chat: {url}"
             },
             "de-irc": {
                 "name": "OpenStreetMap Germany IRC",
@@ -10653,6 +10932,10 @@
                 "name": "OpenStreetMap Hungary Meetup",
                 "description": "The platform for organizing meetups in Hungary"
             },
+            "is-chapter": {
+                "name": "OpenStreetMap Iceland Local Chapter",
+                "description": "We help grow and improve OpenStreetMap in Iceland."
+            },
             "is-facebook": {
                 "name": "OSM Iceland on Facebook",
                 "description": "Page of OpenStreetMap in Iceland"
@@ -10664,6 +10947,36 @@
             "is-twitter": {
                 "name": "OSM Iceland on Twitter",
                 "description": "Twitter of OpenStreetMap in Iceland"
+            },
+            "ireland-chapter": {
+                "name": "OpenStreetMap Ireland Local Chapter",
+                "description": "We help grow and improve OpenStreetMap in Ireland.",
+                "extendedDescription": "OpenStreetMap Ireland provides an advocate voice for the OpenStreetMap project on the island of Ireland, in addition to interacting with other open initiatives."
+            },
+            "ireland-facebook": {
+                "name": "OpenStreetMap Ireland Facebook group",
+                "description": "OpenStreetMap Ireland Facebook page"
+            },
+            "ireland-irc": {
+                "name": "OpenStreetMap Ireland IRC",
+                "description": "Join #osm-ie on irc.oftc.net (port 6667)",
+                "extendedDescription": "Join #osm-ie on irc.oftc.net (port 6667), please be patient and wait for a few minutes if you ask a question"
+            },
+            "ireland-mailinglist": {
+                "name": "Talk-ie Mailing List",
+                "description": "Talk-ie is the mailing list for the Irish OSM community"
+            },
+            "ireland-telegram": {
+                "name": "OSM Ireland on Telegram",
+                "description": "OpenStreetMap Ireland Telegram chat"
+            },
+            "ireland-twitter": {
+                "name": "OpenStreetMap IE on Twitter",
+                "description": "OpenStreetMap IE on Twitter: {url}"
+            },
+            "it-chapter": {
+                "name": "OpenStreetMap Italy Local Chapter",
+                "description": "We help grow and improve OpenStreetMap in Italy."
             },
             "it-facebook": {
                 "name": "OpenStreetMap Italy Facebook",
@@ -10708,11 +11021,6 @@
                 "description": "YouthMappers chapter at Politecnico di Milano",
                 "extendedDescription": "PoliMappers is a volunteer students’ association based at Politecnico di Milano. The mission of the group is to train and motivate the next generation of volunteer mappers and to do mapping using free and open source software within the university as well as primary and secondary schools."
             },
-            "ym-Yarmouk-University": {
-                "name": "YouthMappers at YU",
-                "description": "YouthMappers chapter at Yarmouk University",
-                "extendedDescription": "YouthMappers chapter at YU is the first mapping group in the Middle East and North Africa region where refugees, drought, and poverty are rising crises and in urgent need for humanitarian mapping  activities to mitigate the consequences of such crises. YU Mappers are encouraged to use open data to address challenges in MENA region to bring relief and development to target areas within the region."
-            },
             "kosovo-telegram": {
                 "name": "OpenStreetMap Kosovo on Telegram",
                 "description": "Semi-official all-Kosovo Telegram public group. We welcome all mappers from anywhere in any language."
@@ -10725,6 +11033,14 @@
                 "name": "Brahmapoutre at Rabat",
                 "description": "YouthMappers chapter at Université Mohammed V Rabat",
                 "extendedDescription": "This chapter sees participation in the YouthMappers program as an oppourtunity to share our knowlege create new working relationships with other chapters in different countries"
+            },
+            "nl-forum": {
+                "name": "Netherlands OpenStreetMap forum",
+                "description": "OpenStreetMap Netherlands web forum"
+            },
+            "nl-telegram": {
+                "name": "Netherlands OpenStreetMap Telegram",
+                "description": "A Telegram group for the OSM Netherlands community: {url}"
             },
             "no-forum": {
                 "name": "OpenStreetMap Norway Web Forum",
@@ -10755,7 +11071,7 @@
                 "description": "Talk-pt is the official mailing list for the Portuguese OSM community"
             },
             "pt-telegram": {
-                "name": "OpenStreetMap Portugal no Telegram",
+                "name": "OpenStreetMap Portugal on Telegram",
                 "description": "Telegram Group of the Portuguese OpenStreetMap community {url}"
             },
             "si-forum": {
@@ -10769,6 +11085,18 @@
             "si-twitter": {
                 "name": "OpenStreetMap Slovenia Twitter",
                 "description": "Follow OpenStreetMap Slovenia On Twitter: {url}"
+            },
+            "Galicia-Telegram": {
+                "name": "OpenStreetMap Galicia Telegram",
+                "description": "OpenStreetMap Telegram for Galicia"
+            },
+            "Galicia-Twitter": {
+                "name": "OpenStreetMap Galicia Twitter",
+                "description": "Follow us on Twitter at {url}"
+            },
+            "galicia-wiki": {
+                "name": "OpenStreetMap Wikiproject Galicia",
+                "description": "Everything you need to know about mapping in Galicia: {url}"
             },
             "OSM-ES-mailinglist": {
                 "name": "Talk-es mailing list",
@@ -10811,29 +11139,95 @@
                 "name": "OpenStreetMap Sweden on Twitter",
                 "description": "Follow us on Twitter: {url}"
             },
+            "ch-irc": {
+                "name": "OpenStreetMap Switzerland IRC",
+                "description": "Join #osm-ch on irc.oftc.net (port 6667)"
+            },
+            "ch-mailinglist": {
+                "name": "Openstreetmap Schweiz/Suisse/Svizzera/Svizra Mailing List",
+                "description": "Mailing list for Switzerland"
+            },
+            "ch-twitter": {
+                "name": "OpenStreetMap Switzerland Twitter",
+                "description": "Follow us on Twitter: {url}"
+            },
+            "osm-ch": {
+                "name": "OpenStreetMap Switzerland",
+                "description": "The platform for information on OpenStreetMap in Switzerland"
+            },
             "ym-Istanbul-Technical-University": {
                 "name": "YouthMappers ITU",
                 "description": "YouthMappers chapter at Istanbul Technical University",
                 "extendedDescription": "YouthMappers ITU is an interdisciplinary and collaborative student community to promote humanitarian mapping for vulnerable settlements and aims to develop and share strategic and innovative spatial information for the future cities by using geographical information systems and open data."
+            },
+            "ua-facebook": {
+                "name": "OpenStreetMap Ukraine Facebook group",
+                "description": "Join the OpenStreetMap Ukraine community on Facebook"
+            },
+            "ua-forum": {
+                "name": "OpenStreetMap Ukraine Forum",
+                "description": "Forum of OpenStreetMap community in Ukraine"
+            },
+            "ua-github": {
+                "name": "OpenStreetMap Ukraine on GitHub",
+                "description": "OpenStreetMap Ukraine GitHub"
+            },
+            "ua-slack": {
+                "name": "OpenStreetMap Ukraine Slack",
+                "description": "Join the OpenStreetMap Ukraine community on Slack"
+            },
+            "ua-telegram": {
+                "name": "@osmUA on Telegram",
+                "description": "OpenStreetMap Ukraine Telegram chat"
+            },
+            "ua-twitter": {
+                "name": "OpenStreetMap UA Twitter",
+                "description": "OpenStreetMap Ukraine on Twitter: {url}"
+            },
+            "ua-osm": {
+                "name": "OpenStreetMap Website Ukraine",
+                "description": "OpenStreetMap website in Ukraine"
+            },
+            "scotland-twitter": {
+                "name": "OpenStreetMap Alba on Twitter",
+                "description": "OpenStreetMap Alba on Twitter: {url}"
             },
             "Nottingham-OSM-pub-meetup": {
                 "name": "East Midlands (Nottingham) Monthly pub meet-up",
                 "description": "Social gathering for East Midlands mappers and users",
                 "extendedDescription": "A group have been meeting since March 2011, initially in Nottingham, and, more recently in Derby, and from time to time elsewhere in the East Midlands. These are social gatherings, but are an excellent place to come and ask specific questions about OSM either in the area or in general. In the summer months we usually do some light mapping for an hour in the vicinity of our meeting place. The group as a whole has a special interest in mapping public rights of way and from time to time has mapping meetings for this purpose."
             },
+            "gb-irc": {
+                "name": "OpenStreetMap United Kingdom IRC",
+                "description": "Join #osm-gb on irc.oftc.net (port 6667)",
+                "extendedDescription": "Join #osm-gb on irc.oftc.net (port 6667), please be patient and wait for a few minutes if you ask a question"
+            },
+            "uk-localchapter": {
+                "name": "OpenStreetMap UK",
+                "description": "The official Local Chapter for the UK (including Northern Ireland).",
+                "extendedDescription": "We support OpenStreetMap by holding events, providing community resources, building partnerships, and by spreading the word. Join OpenStreetMap UK here: {signupUrl}"
+            },
+            "uk-london-twitter": {
+                "name": "OpenStreetMap London on Twitter",
+                "description": "OpenStreetMap London on Twitter: {url}"
+            },
             "gb-mailinglist": {
                 "name": "Talk-gb Mailing List",
-                "description": "Talk-gb is the main communication forum list for the British (including Northern Ireland) OSM community"
+                "description": "Talk-gb is the main communication forum list for the UK (including Northern Ireland) OSM community"
             },
             "mappa-mercia-group": {
                 "name": "Mappa Mercia local group",
                 "description": "A home for OpenStreetMap enthusiasts in the Midlands",
                 "extendedDescription": "Mappa Mercia is a project to grow OpenStreetMap in the West Midlands, UK. We run community events, provide training and support local organisations wishing to open up their data."
             },
-            "gb-irc": {
-                "name": "OpenStreetMap United Kingdom IRC",
-                "description": "Join #osm-gb on irc.oftc.net (port 6667)",
-                "extendedDescription": "Join #osm-gb on irc.oftc.net (port 6667), please be patient and wait for a few minutes if you ask a question"
+            "uk-twitter": {
+                "name": "OpenStreetMap UK on Twitter",
+                "description": "OpenStreetMap UK on Twitter: {url}"
+            },
+            "ym-Queen-Mary-University-of-London": {
+                "name": "Queen Mary YouthMappers",
+                "description": "YouthMappers chapter at Queen Mary University of London",
+                "extendedDescription": "This chapter will be part of the activities of the Queen Mary Geography Society."
             },
             "ym-University-of-Exeter": {
                 "name": "University of Exeter British Red Cross Missing Maps",
@@ -10844,6 +11238,19 @@
                 "name": "University of Warwick Resilience Mapping Society",
                 "description": "YouthMappers chapter at University of Warwick",
                 "extendedDescription": "We are a group of enthusiastic mappers based at Warwick University. Our aim is to get people excited about humanitarian mapping and help them understand the impact this activity has on the field. We are closely aligned with Missing Maps and Doctors Without Borders UK and focus on HOT tasks in our mapping activities and workshops. Our mapathons are listed on the Missing Maps page whenever they are scheduled."
+            },
+            "il-telegram": {
+                "name": "OSM Israel on Telegram",
+                "description": "A Telegram group for the OpenStreetMap community in Israel: {url}"
+            },
+            "ym-Yarmouk-University": {
+                "name": "YouthMappers at YU",
+                "description": "YouthMappers chapter at Yarmouk University",
+                "extendedDescription": "YouthMappers chapter at YU is the first mapping group in the Middle East and North Africa region where refugees, drought, and poverty are rising crises and in urgent need for humanitarian mapping  activities to mitigate the consequences of such crises. YU Mappers are encouraged to use open data to address challenges in MENA region to bring relief and development to target areas within the region."
+            },
+            "sa-telegram": {
+                "name": "OSM Saudi Arabia on Telegram",
+                "description": "A Telegram group for the OpenStreetMap community in Saudi Arabia: {url}"
             },
             "ym-Sacred-Heart-Junior-College": {
                 "name": "Youth Mappers at Sacred Heart Junior College",
@@ -10979,10 +11386,6 @@
                 "description": "Mappers and OpenStreetMap users in the state of Colorado, USA",
                 "extendedDescription": "OpenStreetMap (OSM) Colorado is a local collaboration of people interested in contributing their efforts to create free maps. We encourage all of our mappers to organize or suggest mapping events throughout the state. Meetup activities can be simple social mixers, OSM basic to advanced training, or community mapping parties."
             },
-            "OSM-NYC": {
-                "name": "OpenStreetMap NYC",
-                "description": "Mappers and OpenStreetMap users, developers and enthusiasts in the New York Metropolitan area"
-            },
             "OSM-Portland-forum": {
                 "name": "OpenStreetMap PDX Google Group",
                 "description": "Forum and mailing list for OpenStreetMap users in the Portland area",
@@ -11019,19 +11422,7 @@
             "OSM-US": {
                 "name": "OpenStreetMap US",
                 "description": "We help grow and improve OpenStreetMap in the United States.",
-                "extendedDescription": "We support OpenStreetMap by holding annual conferences, providing community resources, building partnerships, and by spreading the word. Join OpenStreetMap US here: {signupUrl}",
-                "events": {
-                    "sotmus2019-cfs": {
-                        "name": "Propose a Talk for SotM-US 2019",
-                        "description": "We are calling on all members of the OpenStreetMap community to share your ideas and session proposals for State of the Map US 2019. Whether you are brand new to OSM or have been a core contributor since the beginning, we want to hear from you!",
-                        "where": "Minneapolis, Minnesota"
-                    },
-                    "sotmus2019": {
-                        "name": "State of the Map US 2019",
-                        "description": "Join the OpenStreetMap community at State of the Map US in Minneapolis, Minnesota. Connect with other mappers, businesses, government agencies, and non profits, all collaborating around the free and editable map of the world.",
-                        "where": "Minneapolis, Minnesota"
-                    }
-                }
+                "extendedDescription": "We support OpenStreetMap by holding annual conferences, providing community resources, building partnerships, and by spreading the word. Join OpenStreetMap US here: {signupUrl}"
             },
             "OSM-Utah": {
                 "name": "OpenStreetMap Utah",
@@ -11490,14 +11881,7 @@
             },
             "osm-latam": {
                 "name": "OpenStreetMap Latam",
-                "description": "Supporting OpenStreetMap in Latin America",
-                "events": {
-                    "sotm-latam-2018": {
-                        "name": "State of the Map Latam 2018",
-                        "description": "State of the Map Latam is the annual conference for all mappers and users of OpenStreetMap in Latin America. The program includes talks, panels, workshops, and mapathons related to OpenStreetMap.",
-                        "where": "Buenos Aires, Argentina"
-                    }
-                }
+                "description": "Supporting OpenStreetMap in Latin America"
             },
             "OSM-Discord": {
                 "name": "OpenStreetMap Discord",
@@ -11531,14 +11915,7 @@
             "OSMF": {
                 "name": "OpenStreetMap ファウンデーション",
                 "description": "OSMF は英国に拠点を置くOpenStreetMapプロジェクトをサポートする非営利組織です",
-                "extendedDescription": "OSMF supports the OpenStreetMap by fundraising, maintaining the servers which power OSM, organizing the annual State of the Map conference, and coordinating the volunteers who keep OSM running. You can show your support and have a voice in the direction of OpenStreetMap by joining as an OSMF member here: {signupUrl}",
-                "events": {
-                    "sotm2018": {
-                        "name": "State of the Map 2018",
-                        "description": "Join us for 3 days in Milan, Italy for the annual worldwide OpenStreetMap conference, bringing together everyone in the community to socialize, share, and learn.",
-                        "where": "Milan, Italy"
-                    }
-                }
+                "extendedDescription": "OSMF supports the OpenStreetMap by fundraising, maintaining the servers which power OSM, organizing the annual State of the Map conference, and coordinating the volunteers who keep OSM running. You can show your support and have a voice in the direction of OpenStreetMap by joining as an OSMF member here: {signupUrl}"
             }
         }
     }

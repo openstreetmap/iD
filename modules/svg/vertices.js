@@ -1,9 +1,9 @@
+import deepEqual from 'fast-deep-equal';
 import { select as d3_select } from 'd3-selection';
 
 import { geoScaleToZoom } from '../geo';
 import { osmEntity } from '../osm';
 import { svgPassiveVertex, svgPointTransform } from './helpers';
-
 
 export function svgVertices(projection, context) {
     var radiuses = {
@@ -44,6 +44,7 @@ export function svgVertices(projection, context) {
         var zoom = geoScaleToZoom(projection.scale());
         var z = (zoom < 17 ? 0 : zoom < 18 ? 1 : 2);
         var activeID = context.activeID();
+        var base = context.history().base();
 
 
         function getIcon(d) {
@@ -129,8 +130,16 @@ export function svgVertices(projection, context) {
             .classed('sibling', function(d) { return d.id in sets.selected; })
             .classed('shared', function(d) { return graph.isShared(d); })
             .classed('endpoint', function(d) { return d.isEndpoint(graph); })
+            .classed('added', function(d) {
+                return !base.entities[d.id]; // if it doesn't exist in the base graph, it's new
+            })
+            .classed('moved', function(d) {
+                return base.entities[d.id] && !deepEqual(graph.entities[d.id].loc, base.entities[d.id].loc);
+            })
+            .classed('retagged', function(d) {
+                return base.entities[d.id] && !deepEqual(graph.entities[d.id].tags, base.entities[d.id].tags);
+            })
             .call(updateAttributes);
-
 
         // Vertices with icons get a `use`.
         var iconUse = groups
@@ -223,7 +232,6 @@ export function svgVertices(projection, context) {
             }
         });
 
-
         // Targets allow hover and vertex snapping
         var targets = selection.selectAll('.vertex.target-allowed')
             .filter(function(d) { return filter(d.properties.entity); })
@@ -236,9 +244,15 @@ export function svgVertices(projection, context) {
         // enter/update
         targets.enter()
             .append('circle')
-            .attr('r', function(d) { return (_radii[d.id] || radiuses.shadow[3]); })
+            .attr('r', function(d) {
+                return _radii[d.id]
+                  || radiuses.shadow[3];
+            })
             .merge(targets)
-            .attr('class', function(d) { return 'node vertex target target-allowed ' + targetClass + d.id; })
+            .attr('class', function(d) {
+                return 'node vertex target target-allowed '
+                + targetClass + d.id;
+            })
             .attr('transform', getTransform);
 
 
@@ -269,6 +283,16 @@ export function svgVertices(projection, context) {
         return geometry === 'vertex' || (geometry === 'point' && (
             wireframe || (zoom >= 18 && entity.directions(graph, projection).length)
         ));
+    }
+
+
+    function isEditedNode(node, base, head) {
+        var baseNode = base.entities[node.id];
+        var headNode = head.entities[node.id];
+        return !headNode ||
+            !baseNode ||
+            !deepEqual(headNode.tags, baseNode.tags) ||
+            !deepEqual(headNode.loc, baseNode.loc);
     }
 
 
@@ -321,9 +345,11 @@ export function svgVertices(projection, context) {
 
     function drawVertices(selection, graph, entities, filter, extent, fullRedraw) {
         var wireframe = context.surface().classed('fill-wireframe');
+        var visualDiff = context.surface().classed('highlight-edited');
         var zoom = geoScaleToZoom(projection.scale());
         var mode = context.mode();
         var isMoving = mode && /^(add|draw|drag|move|rotate)/.test(mode.id);
+        var base = context.history().base();
 
         var drawLayer = selection.selectAll('.layer-osm.points .points-group.vertices');
         var touchLayer = selection.selectAll('.layer-touch.points');
@@ -347,7 +373,8 @@ export function svgVertices(projection, context) {
 
             // a vertex of some importance..
             } else if (geometry === 'vertex' &&
-                (entity.hasInterestingTags() || entity.isEndpoint(graph) || entity.isConnected(graph))) {
+                (entity.hasInterestingTags() || entity.isEndpoint(graph) || entity.isConnected(graph)
+                || (visualDiff && isEditedNode(entity, base, graph)))) {
                 _currPersistent[entity.id] = entity;
                 keep = true;
             }

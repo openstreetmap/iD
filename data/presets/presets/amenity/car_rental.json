@@ -9,10 +9,10 @@
     ],
     "moreFields": [
         "brand",
-        "website",
-        "phone",
         "email",
         "fax",
+        "phone",
+        "website",
         "wheelchair"
     ],
     "geometry": [

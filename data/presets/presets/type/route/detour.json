@@ -3,7 +3,7 @@
     "fields": [
         "name",
         "ref_route",
-        "to", 
+        "to",
         "from"
     ],
     "geometry": [

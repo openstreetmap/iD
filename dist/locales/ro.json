@@ -1,24 +1,69 @@
 {
     "ro": {
         "icons": {
+            "download": "descarcă",
             "information": "informaţii",
-            "remove": "Şterge"
+            "remove": "Şterge",
+            "undo": "anulează",
+            "zoom_to": "măriți la",
+            "copy": "copiază",
+            "open_wikidata": "deschide pe wikidata.org",
+            "favorite": "favorite"
+        },
+        "toolbar": {
+            "inspect": "examinează",
+            "undo_redo": "Anula / Reface",
+            "recent": "Recent",
+            "favorites": "Preferate",
+            "add_feature": "Adăugați Funcție"
         },
         "modes": {
+            "add_feature": {
+                "title": "Adăugați o funcție",
+                "description": "Căutați funcții pe care să le adăugați pe hartă.",
+                "key": "Filă",
+                "result": "rezultat",
+                "results": "rezultate"
+            },
             "add_area": {
                 "title": "Suprafață",
                 "description": "Adaugă hărți: parcuri, clădiri, lacuri sau alte suprafețe",
-                "tail": "Apasă pe hartă pentru a incepe trasarea unei suprafețe precum: parc, lac sau cladire"
+                "tail": "Apasă pe hartă pentru a incepe trasarea unei suprafețe precum: parc, lac sau cladire",
+                "filter_tooltip": "zone"
             },
             "add_line": {
                 "title": "Linie",
                 "description": "Adaugă hărți: autostrăzi, străzi, cai pietonale, canale sau alte linii.",
-                "tail": "Apasă pe hartă pentru a trasa o stradă, o cale sau o rută."
+                "tail": "Apasă pe hartă pentru a trasa o stradă, o cale sau o rută.",
+                "filter_tooltip": "linii"
             },
             "add_point": {
                 "title": "Punct",
                 "description": "Adauga restaurante, monumente, cutii poștale sau alte puncte pe hartă.",
-                "tail": "Apasă pe hartă pentru a adauga un punct."
+                "tail": "Apasă pe hartă pentru a adauga un punct.",
+                "filter_tooltip": "puncte"
+            },
+            "add_note": {
+                "title": "Notiță",
+                "label": "Adaugă o notiță",
+                "description": "Ați găsit o problemă? Anunțați alți cartografi.",
+                "tail": "Faceți clic pe hartă pentru a adăuga o notă.",
+                "key": "N"
+            },
+            "add_preset": {
+                "title": "Adăugați",
+                "point": {
+                    "title": "Adăugați '{feature}' ca punct"
+                },
+                "line": {
+                    "title": "Adăugați '{feature}' ca o linie"
+                },
+                "area": {
+                    "title": "Adăugați '{feature}' ca zonă"
+                },
+                "building": {
+                    "title": "Adăugați '{feature}' ca clădire"
+                }
             },
             "browse": {
                 "title": "Navighează",
@@ -29,6 +74,9 @@
             },
             "draw_line": {
                 "tail": "Apasă pentru a adăuga mai multe noduri la linie. Apasă pe alte linii pentru a te conecta la ele și apasă dublu pentru a finaliza linia."
+            },
+            "drag_node": {
+                "connected_to_hidden": "Aceasta nu poate fi modificată, deoarece este conectată la o caracteristică ascunsă."
             }
         },
         "operations": {
@@ -36,7 +84,8 @@
                 "annotation": {
                     "point": "Am adăugat un punct.",
                     "vertex": "Am adăugat un nod la o cale",
-                    "relation": "Am adăugat o relație."
+                    "relation": "Am adăugat o relație.",
+                    "note": "Ați adăugat o notă."
                 }
             },
             "start": {
@@ -78,7 +127,8 @@
                 },
                 "not_closed": "Această linie nu poate fi transformată într-un cerc din moment ce nu este circulară.",
                 "too_large": "Această linie nu poate fi transformată într-un cerc din moment ce momentan nu este destul din ea vizibil.",
-                "connected_to_hidden": "Această linie nu poate fi transformată într-un cerc din moment ce este conectată la un obiect ascuns."
+                "connected_to_hidden": "Această linie nu poate fi transformată într-un cerc din moment ce este conectată la un obiect ascuns.",
+                "not_downloaded": "Aceasta nu poate fi făcută circulară, deoarece părți din ea nu au fost încă descărcate."
             },
             "orthogonalize": {
                 "title": "Pătrat",
@@ -86,6 +136,7 @@
                     "line": "Dreptunghiulează unghiurile liniei.",
                     "area": "Dreptunghiulează unghiurile suprafaței."
                 },
+                "key": "Q",
                 "annotation": {
                     "line": "Dreptunghiulează unghiurile unei linii.",
                     "area": "Dreptunghiulează unghiurile unei suprafațe."
@@ -96,8 +147,18 @@
             },
             "straighten": {
                 "title": "Întărește ",
+                "description": {
+                    "points": "Corectează aceste puncte.",
+                    "line": "Corectează această linie."
+                },
                 "key": "S",
-                "too_bendy": "Aceasta nu poate fi îndreptată din moment ce este prea îndoită."
+                "annotation": {
+                    "points": "S-au corectat mai multe puncte.",
+                    "line": "Linia a fost corectată."
+                },
+                "too_bendy": "Aceasta nu poate fi îndreptată din moment ce este prea îndoită.",
+                "connected_to_hidden": "Acesta nu poate fi corectat, deoarece este conectat la o caracteristică ascunsă.",
+                "not_downloaded": "Acesta nu poate fi corectat deoarece unele părți nu au fost încă descărcate"
             },
             "delete": {
                 "title": "Șterge",
@@ -120,6 +181,30 @@
                 "incomplete_relation": {
                     "single": "Acest obiect nu poate fi șters din moment ce nu a fost descărcat în întregime.",
                     "multiple": "Aceste obiecte nu pot fi șterse din moment ce nu a fost descărcate în întregime."
+                },
+                "part_of_relation": {
+                    "single": "Această caracteristică nu poate fi ștersă, deoarece face parte dintr-o structură mai mare. Mai întâi trebuie să îl eliminați din structură.",
+                    "multiple": "Aceste caracteristici nu pot fi șterse, deoarece fac parte din structuri mai mari. Mai întâi trebuie să le eliminați din structuri."
+                },
+                "connected_to_hidden": {
+                    "single": "Această funcție poate fi ștersă, deoarece este conectată la o caracteristică ascunsă.",
+                    "multiple": "Aceste funcții nu pot fi șterse, deoarece unele sunt conectate la funcții ascunse."
+                },
+                "not_downloaded": {
+                    "single": "Această caracteristică nu poate fi ștersă, deoarece părți din ea nu au fost încă descărcate.",
+                    "multiple": "Aceste caracteristici nu pot fi șterse, deoarece unele dintre ele nu au fost încă descărcate."
+                },
+                "has_wikidata_tag": {
+                    "single": "Această caracteristică nu poate fi ștersă, deoarece are o etichetă Wikidata.",
+                    "multiple": "Aceste caracteristici nu pot fi șterse, deoarece unele au etichete Wikidata."
+                }
+            },
+            "downgrade": {
+                "title": "Revenire",
+                "description": {
+                    "building_address": "Eliminați toate etichetele clădirilor și adreselor inexistente.",
+                    "building": "Eliminați toate etichetele clădirilor inexistente.",
+                    "address": "Eliminați toate etichetele adreselor inexistente."
                 }
             },
             "add_member": {
@@ -132,23 +217,36 @@
                 "title": "Deconectează",
                 "description": "Deconectează aceste linii/suprafețe de ele insele.",
                 "key": "D",
-                "annotation": "Am deconectat liniile/suprafețele."
+                "annotation": "Am deconectat liniile/suprafețele.",
+                "not_downloaded": "Acesta nu poate fi deconectat deoarece unele părți nu au fost încă descărcate.",
+                "connected_to_hidden": "Acesta nu poate fi deconectat deoarece este conectat la o caracteristică ascunsă.",
+                "relation": "Acesta nu poate fi deconectat deoarece conectează membrii unei structuri."
             },
             "merge": {
                 "title": "Unește",
                 "description": "Unește aceste obiecte.",
                 "key": "C",
                 "annotation": "Unește {n} obiecte.",
-                "not_eligible": "Aceste obiecte nu pot fi unite."
+                "not_eligible": "Aceste obiecte nu pot fi unite.",
+                "not_adjacent": "Aceste caracteristici nu pot fi îmbinate deoarece punctele lor finale nu sunt conectate.",
+                "restriction": "Aceste caracteristici nu pot fi îmbinate, deoarece ar deteriora o \"{relation}\" structură."
             },
             "move": {
                 "title": "Mută",
+                "description": {
+                    "single": "Mută această caracteristică la o locație diferită.",
+                    "multiple": "Mută caracteristicile la o locație diferită."
+                },
                 "key": "M",
                 "annotation": {
                     "point": "Am mutat un punct.",
                     "vertex": "Am mutat un nod intr-o cale.",
                     "line": "Am mutat o linie.",
-                    "area": "Am mutat o suprafață."
+                    "area": "Am mutat o suprafață.",
+                    "multiple": "Multiple caracteristici au fost mutate."
+                },
+                "incomplete_relation": {
+                    "single": "Această caracteristică nu poate fi mutată deoarece nu a fost descărcată complet."
                 }
             },
             "reflect": {
@@ -172,9 +270,14 @@
             },
             "reverse": {
                 "title": "Întoarce",
-                "description": "Fă această linie să se indrepte in direcția opusă.",
-                "key": "V",
-                "annotation": "Am întors o linie."
+                "description": {
+                    "point": "Rotiți direcția acestui punct.",
+                    "points": "Rotiți direcția acestor puncte.",
+                    "line": "Orientați această linie în direcția opusă.",
+                    "lines": "Orientați aceste linii în direcția opusă.",
+                    "features": "Ajustați direcțiile acestor caracteristici."
+                },
+                "key": "V"
             },
             "split": {
                 "title": "Separă",
@@ -192,12 +295,34 @@
         "restriction": {
             "controls": {
                 "distance": "Distanţă",
-                "via": "Prin"
+                "distance_up_to": "Până la {distance}",
+                "via": "Prin",
+                "via_node_only": "doar nodul",
+                "via_up_to_one": "Sens unic",
+                "via_up_to_two": "Ambele sensuri"
             },
             "help": {
+                "indirect": "(indirect)",
+                "turn": {
+                    "no_left_turn": "Interzis virajul la stânga {indirect}",
+                    "no_right_turn": "Interzis virajul la dreapta {indirect}",
+                    "no_u_turn": "Interzisă întoarcerea la stânga {indirect}",
+                    "no_straight_on": "Interzis înainte {indirect}",
+                    "only_left_turn": "Obligatoriu la stânga {indirect}",
+                    "only_right_turn": "Obligatoriu la dreapta {indirect}",
+                    "only_u_turn": "Obligatoriu întoarcerea dintr-o mișcare {indirect}",
+                    "only_straight_on": "Obligatoriu înainte {indirect}",
+                    "allowed_left_turn": "Virajul la stânga permis {indirect}",
+                    "allowed_right_turn": "Virajul la dreapta permis {indirect}",
+                    "allowed_u_turn": "Întoarcerea dintr-o mișcare permisă {indirect}",
+                    "allowed_straight_on": "Permis înainte {indirect}"
+                },
                 "from": "DIN",
                 "via": "PRIN",
-                "to": "LA"
+                "to": "LA",
+                "select_from": "Faceți clic pentru a selecta un {from} segment",
+                "select_from_name": "Faceți clic pentru a selecta {from} {fromName}",
+                "toggle": "Apăsați pentru \"{turn}\""
             }
         },
         "undo": {
@@ -209,16 +334,28 @@
             "nothing": "Nu există nimic de refăcut."
         },
         "tooltip_keyhint": "Scurtătură:",
+        "browser_notice": "Acest editor este suportat de Firefox, Chrome, Safari, Opera, și Internet Explorer 11 sau versiuni mai noi. Actualizați browserul sau folosiți Potlatch 2 pentru a edita harta.",
         "translate": {
             "translate": "Traduce",
+            "localized_translation_label": "Nume multilingv",
             "localized_translation_language": "Alege limba",
             "localized_translation_name": "Nume"
         },
+        "zoom_in_edit": "Măriți pentru a edita",
+        "login": "Autentificare",
+        "logout": "Deconectați-vă",
         "loading_auth": "Conectare la OpenStreetMap..",
         "report_a_bug": "Raportează o greșeală",
         "help_translate": "Ajută la traducere",
+        "sidebar": {
+            "tooltip": "Comutați bara laterală."
+        },
         "feature_info": {
-            "hidden_warning": "{count} funcționalități ascunse"
+            "hidden_warning": "{count} funcționalități ascunse",
+            "hidden_details": "Această funcție este momentan ascunsă: {details}"
+        },
+        "status": {
+            "error": "Imposibil de conectat la API."
         },
         "commit": {
             "title": "Încarcă în OpenStreetMap",
@@ -349,7 +486,6 @@
             "description": "Date de Hartă",
             "key": "F",
             "data_layers": "Straturi de Date",
-            "fill_area": "Umple Suprafațe",
             "map_features": "Funcționalitățile Hărții"
         },
         "feature": {
@@ -655,8 +791,7 @@
                     "title": "Desenare"
                 },
                 "operations": {
-                    "title": "Operațiuni",
-                    "reverse": "Reversează o linie"
+                    "title": "Operațiuni"
                 },
                 "commands": {
                     "title": "Comenzi",
@@ -1723,9 +1858,6 @@
                 "amenity/police": {
                     "name": "Poliție"
                 },
-                "amenity/post_box": {
-                    "name": "Cutie Poștală"
-                },
                 "amenity/post_office": {
                     "name": "Oficiul Poștal"
                 },
@@ -2118,9 +2250,6 @@
                 },
                 "landuse/commercial": {
                     "name": "Zonă Comercială"
-                },
-                "landuse/construction": {
-                    "name": "Construcție"
                 },
                 "landuse/farm": {
                     "name": "Teren Agricol"

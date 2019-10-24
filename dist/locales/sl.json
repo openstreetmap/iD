@@ -261,9 +261,7 @@
             },
             "reverse": {
                 "title": "Obrni usmerjenost",
-                "description": "Obrne usmerjenost izbrane črte.",
-                "key": "V",
-                "annotation": "obračanje črte ×"
+                "key": "V"
             },
             "split": {
                 "title": "Razdeli",
@@ -484,7 +482,6 @@
                     "title": "Podatki OpenStreetMap"
                 }
             },
-            "fill_area": "Zapolnjevanje polj",
             "map_features": "Predmeti zemljevida",
             "autohidden": "Nekateri predmeti so samodejno skriti, da jih na zaslonu ni prikazanih preveč. Za urejanje je treba zemljevid približati.",
             "osmhidden": "Nekateri predmeti so samodejno skriti, ker je plast OpenStreetMap skrita."
@@ -1016,7 +1013,6 @@
                     "merge": "Združi izbrane predmete",
                     "disconnect": "Odklopi predmet na označenem vozlišču",
                     "split": "Razdeli črto na označenem vozlišču",
-                    "reverse": "Obrni smer črte",
                     "move": "Premakni označene predmete",
                     "rotate": "Zasukaj izbrane predmete",
                     "circularize": "Zaokroži zaključeno črto ali mnogokotnik",
@@ -1898,9 +1894,6 @@
                 "plant/output/electricity": {
                     "placeholder": "500 MW, 1000 MW, 2000 MW ..."
                 },
-                "playground/baby": {
-                    "label": "Otroški sedež"
-                },
                 "population": {
                     "label": "Število prebivalcev"
                 },
@@ -2588,10 +2581,6 @@
                 "amenity/police": {
                     "name": "Policija",
                     "terms": "policijska postaja"
-                },
-                "amenity/post_box": {
-                    "name": "Poštni nabiralnik",
-                    "terms": "poštni predal,pošta"
                 },
                 "amenity/post_office": {
                     "name": "Pošta",
@@ -3312,10 +3301,6 @@
                     "name": "Priključek na glavno cesto",
                     "terms": "priključek na glavno cesto"
                 },
-                "highway/raceway": {
-                    "name": "Dirkališče (motošport)",
-                    "terms": "moto-steza (motokros) ,kros steza,dirkališče,hipodrom,rally"
-                },
                 "highway/residential": {
                     "name": "Stanovanjska ulica",
                     "terms": "ulica,naselje,ulica v naselju"
@@ -3482,10 +3467,6 @@
                 "landuse/commercial": {
                     "name": "Poslovno področje",
                     "terms": "poslovno območje"
-                },
-                "landuse/construction": {
-                    "name": "Gradbišče",
-                    "terms": "gradnja"
                 },
                 "landuse/farm": {
                     "name": "Obdelovalna zemlja"
@@ -3841,13 +3822,6 @@
                 "man_made/works": {
                     "name": "Tovarna",
                     "terms": "tvornica,obrat,fabrika"
-                },
-                "manhole": {
-                    "name": "Jašek",
-                    "terms": "jašek, vhodna odprtina, kanalizacija, elektro, vodovod, telekom, cestni jašek"
-                },
-                "manhole/drain": {
-                    "name": "Odtočni kanal"
                 },
                 "natural": {
                     "name": "Naravna prvina"
@@ -5058,13 +5032,7 @@
                 "name": "OpenStreetMap Twitter"
             },
             "OSMF": {
-                "name": "Fundacija OpenStreetMap",
-                "events": {
-                    "sotm2018": {
-                        "name": "Stanje zemljevida 2018",
-                        "where": "Milano, Italija"
-                    }
-                }
+                "name": "Fundacija OpenStreetMap"
             }
         }
     }

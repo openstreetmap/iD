@@ -17,15 +17,6 @@
         "key": "railway",
         "value": "platform"
     },
-    "terms": [
-        "monorail",
-        "platform",
-        "public transit",
-        "public transportation",
-        "rail",
-        "transit",
-        "transportation"
-    ],
     "searchable": false,
     "name": "Monorail Stop / Platform"
 }

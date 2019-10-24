@@ -1,137 +1,20 @@
+import deepEqual from 'fast-deep-equal';
 import { bisector as d3_bisector } from 'd3-array';
 
 import { osmEntity, osmIsOldMultipolygonOuterMember } from '../osm';
 import { svgPath, svgSegmentWay } from './helpers';
 import { svgTagClasses } from './tag_classes';
-
+import { svgTagPattern } from './tag_pattern';
 
 export function svgAreas(projection, context) {
-    // Patterns only work in Firefox when set directly on element.
-    // (This is not a bug: https://bugzilla.mozilla.org/show_bug.cgi?id=750632)
-    var patterns = {
-        // tag - pattern name
-        // -or-
-        // tag - value - pattern name
-        // -or-
-        // tag - value - rules (optional tag-values, pattern name)
-        // (matches earlier rules first, so fallback should be last entry)
-        amenity: {
-            grave_yard: 'cemetery',
-            fountain: 'water_standing'
-        },
-        landuse: {
-            cemetery: [
-                { religion: 'christian', pattern: 'cemetery_christian' },
-                { religion: 'buddhist', pattern: 'cemetery_buddhist' },
-                { religion: 'muslim', pattern: 'cemetery_muslim' },
-                { religion: 'jewish', pattern: 'cemetery_jewish' },
-                { pattern: 'cemetery' }
-            ],
-            construction: 'construction',
-            farmland: 'farmland',
-            farmyard: 'farmyard',
-            forest: [
-                { leaf_type: 'broadleaved', pattern: 'forest_broadleaved' },
-                { leaf_type: 'needleleaved', pattern: 'forest_needleleaved' },
-                { leaf_type: 'leafless', pattern: 'forest_leafless' },
-                { pattern: 'forest' } // same as 'leaf_type:mixed'
-            ],
-            grave_yard: 'cemetery',
-            grass: 'grass',
-            landfill: 'landfill',
-            meadow: 'meadow',
-            military: 'construction',
-            orchard: 'orchard',
-            quarry: 'quarry',
-            vineyard: 'vineyard'
-        },
-        natural: {
-            beach: 'beach',
-            grassland: 'grass',
-            sand: 'beach',
-            scrub: 'scrub',
-            water: [
-                { water: 'pond', pattern: 'pond' },
-                { water: 'reservoir', pattern: 'water_standing' },
-                { pattern: 'waves' }
-            ],
-            wetland: [
-                { wetland: 'marsh', pattern: 'wetland_marsh' },
-                { wetland: 'swamp', pattern: 'wetland_swamp' },
-                { wetland: 'bog', pattern: 'wetland_bog' },
-                { wetland: 'reedbed', pattern: 'wetland_reedbed' },
-                { pattern: 'wetland' }
-            ],
-            wood: [
-                { leaf_type: 'broadleaved', pattern: 'forest_broadleaved' },
-                { leaf_type: 'needleleaved', pattern: 'forest_needleleaved' },
-                { leaf_type: 'leafless', pattern: 'forest_leafless' },
-                { pattern: 'forest' } // same as 'leaf_type:mixed'
-            ]
-        },
-        traffic_calming: {
-            island: [
-                { surface: 'grass', pattern: 'grass' },
-            ],
-            chicane: [
-                { surface: 'grass', pattern: 'grass' },
-            ],
-            choker: [
-                { surface: 'grass', pattern: 'grass' },
-            ]
+
+
+    function getPatternStyle(tags) {
+        var imageID = svgTagPattern(tags);
+        if (imageID) {
+            return 'url("#' + imageID + '")';
         }
-    };
-
-    function setPattern(entity) {
-        // Skip pattern filling if this is a building (buildings don't get patterns applied)
-        if (entity.tags.building && entity.tags.building !== 'no') {
-            this.style.fill = this.style.stroke = '';
-            return;
-        }
-
-        for (var tag in patterns) {
-            var entityValue = entity.tags[tag];
-            if (!entityValue) continue;
-
-            if (typeof patterns[tag] === 'string') { // extra short syntax (just tag) - pattern name
-                this.style.fill = this.style.stroke = 'url("#pattern-' + patterns[tag] + '")';
-                return;
-            } else {
-                var values = patterns[tag];
-                for (var value in values) {
-                    if (entityValue !== value) continue;
-
-                    var rules = values[value];
-                    if (typeof rules === 'string') { // short syntax - pattern name
-                        this.style.fill = this.style.stroke = 'url("#pattern-' + rules + '")';
-                        return;
-                    } else { // long syntax - rule array
-                        for (var ruleKey in rules) {
-                            var rule = rules[ruleKey];
-
-                            var pass = true;
-                            for (var criterion in rule) {
-                                if (criterion !== 'pattern') { // reserved for pattern name
-                                    // The only rule is a required tag-value pair
-                                    var v = entity.tags[criterion];
-                                    if (!v || v !== rule[criterion]) {
-                                        pass = false;
-                                        break;
-                                    }
-                                }
-                            }
-
-                            if (pass) {
-                                this.style.fill = this.style.stroke = 'url("#pattern-' + rule.pattern + '")';
-                                return;
-                            }
-                        }
-                    }
-                }
-            }
-        }
-
-        this.style.fill = this.style.stroke = '';
+        return '';
     }
 
 
@@ -140,6 +23,7 @@ export function svgAreas(projection, context) {
         var nopeClass = context.getDebug('target') ? 'red ' : 'nocolor ';
         var getPath = svgPath(projection).geojson;
         var activeID = context.activeID();
+        var base = context.history().base();
 
         // The targets and nopes will be MultiLineString sub-segments of the ways
         var data = { targets: [], nopes: [] };
@@ -161,12 +45,26 @@ export function svgAreas(projection, context) {
         targets.exit()
             .remove();
 
+        var segmentWasEdited = function(d) {
+            var wayID = d.properties.entity.id;
+            // if the whole line was edited, don't draw segment changes
+            if (!base.entities[wayID] ||
+                !deepEqual(graph.entities[wayID].nodes, base.entities[wayID].nodes)) {
+                return false;
+            }
+            return d.properties.nodes.some(function(n) {
+                return !base.entities[n.id] ||
+                       !deepEqual(graph.entities[n.id].loc, base.entities[n.id].loc);
+            });
+        };
+
         // enter/update
         targets.enter()
             .append('path')
             .merge(targets)
             .attr('d', getPath)
-            .attr('class', function(d) { return 'way area target target-allowed ' + targetClass + d.id; });
+            .attr('class', function(d) { return 'way area target target-allowed ' + targetClass + d.id; })
+            .classed('segment-edited', segmentWasEdited);
 
 
         // NOPE
@@ -184,7 +82,8 @@ export function svgAreas(projection, context) {
             .append('path')
             .merge(nopes)
             .attr('d', getPath)
-            .attr('class', function(d) { return 'way area target target-nope ' + nopeClass + d.id; });
+            .attr('class', function(d) { return 'way area target target-nope ' + nopeClass + d.id; })
+            .classed('segment-edited', segmentWasEdited);
     }
 
 
@@ -192,6 +91,7 @@ export function svgAreas(projection, context) {
         var path = svgPath(projection, graph, true);
         var areas = {};
         var multipolygon;
+        var base = context.history().base();
 
         for (var i = 0; i < entities.length; i++) {
             var entity = entities[i];
@@ -284,8 +184,21 @@ export function svgAreas(projection, context) {
 
                 if (layer === 'fill') {
                     this.setAttribute('clip-path', 'url(#' + entity.id + '-clippath)');
-                    setPattern.call(this, entity);
+                    this.style.fill = this.style.stroke = getPatternStyle(entity.tags);
                 }
+            })
+            .classed('added', function(d) {
+                return !base.entities[d.id];
+            })
+            .classed('geometry-edited', function(d) {
+                return graph.entities[d.id] &&
+                    base.entities[d.id] &&
+                    !deepEqual(graph.entities[d.id].nodes, base.entities[d.id].nodes);
+            })
+            .classed('retagged', function(d) {
+                return graph.entities[d.id] &&
+                    base.entities[d.id] &&
+                    !deepEqual(graph.entities[d.id].tags, base.entities[d.id].tags);
             })
             .call(svgTagClasses())
             .attr('d', path);

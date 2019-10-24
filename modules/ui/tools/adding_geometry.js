@@ -12,6 +12,7 @@ export function uiToolAddingGeometry(context) {
     tool.label = t('info_panels.measurement.geometry');
     tool.iconName = 'iD-logo-features';
     tool.iconClass = 'icon-30';
+    tool.key = t('toolbar.geometry.key');
 
     var items = {
         point: {
@@ -36,6 +37,12 @@ export function uiToolAddingGeometry(context) {
             id: 'area',
             icon: 'iD-icon-area',
             label: t('modes.add_area.title'),
+            mode: modeAddArea
+        },
+        building: {
+            id: 'building',
+            icon: 'maki-building-15',
+            label: t('presets.presets.building.name'),
             mode: modeAddArea
         }
     };
@@ -71,6 +78,13 @@ export function uiToolAddingGeometry(context) {
             if (vertexIndex !== -1 && geometries.indexOf('point') !== -1) {
                 geometries.splice(vertexIndex, 1);
             }
+
+            var areaIndex = geometries.indexOf('area');
+            if (areaIndex !== -1 && mode.preset.setTags(mode.defaultTags, 'area').building) {
+                geometries.splice(areaIndex, 1);
+                geometries.push('building');
+            }
+
             tool.items = geometries.map(function(geom) {
                 return items[geom];
             }).filter(Boolean);

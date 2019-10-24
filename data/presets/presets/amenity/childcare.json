@@ -9,11 +9,14 @@
         "opening_hours"
     ],
     "moreFields": [
-        "payment_multi",
-        "website",
-        "phone",
         "email",
         "fax",
+        "level",
+        "max_age",
+        "min_age",
+        "payment_multi",
+        "phone",
+        "website",
         "wheelchair"
     ],
     "geometry": [

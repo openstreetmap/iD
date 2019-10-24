@@ -396,9 +396,21 @@
             },
             "reverse": {
                 "title": "Преврти",
-                "description": "Превртете ја линијава за да оди во обратната насока.",
+                "description": {
+                    "point": "Преврти ја насоката на точкава.",
+                    "points": "Преврти ја насоката на точкиве.",
+                    "line": "Преврти насока на линијата.",
+                    "lines": "Преврти насока на линиите.",
+                    "features": "Преврти насока на елементиве."
+                },
                 "key": "V",
-                "annotation": "Превртена линија."
+                "annotation": {
+                    "point": "Превртена точка.",
+                    "points": "Превртени повеќе точки.",
+                    "line": "Превртена линија.",
+                    "lines": "Превртени повеќе линии.",
+                    "features": "Превртени повеќе елементи."
+                }
             },
             "split": {
                 "title": "Расцепи",
@@ -504,7 +516,8 @@
             "translate": "Преведи",
             "localized_translation_label": "Повеќејазично име",
             "localized_translation_language": "Изберете јазик",
-            "localized_translation_name": "Име"
+            "localized_translation_name": "Име",
+            "language_and_code": "{language} ({code})"
         },
         "zoom_in_edit": "Приближете за да уредувате",
         "login": "Најава",
@@ -696,7 +709,7 @@
             "switch": "Префрли назад на заднинава",
             "custom": "Прилагодено",
             "overlays": "Облоги",
-            "imagery_source_faq": "Инфо за снимките / Пријави проблем",
+            "imagery_problem_faq": "Пријави проблем со снимки",
             "reset": "одново",
             "reset_all": "Поништи сè",
             "display_options": "Приказни можности",
@@ -708,6 +721,10 @@
                 "description": "Прикажи Миникарта",
                 "tooltip": "Прикажи оддалечена карта за пронаоѓање на тековно прикажаното подрачје.",
                 "key": "/"
+            },
+            "panel": {
+                "description": "Оддел со подробности",
+                "tooltip": "Прикажи напредни позадински информации."
             },
             "fix_misalignment": "Прилагоди отстап на заднината",
             "offset": "Довлечете некаде во сивото подрачје подолу за да го прилагодите отстапот на заднината, или пак внесете ги отстапните вредности во метри."
@@ -740,10 +757,19 @@
                     "zoom": "Приближи кон податоците"
                 }
             },
-            "fill_area": "Исполнети подрачја",
+            "style_options": "Стилски можности",
+            "highlight_edits": {
+                "key": "G"
+            },
             "map_features": "Картографски елементи",
             "autohidden": "Овие елементи се автоматски скриени бидејќи на екранот би се прикажале премногу. Можете да приближите за да ги уредите.",
             "osmhidden": "Овие елементи се автоматски скриени бидејќи слојот на OpenStreetMap е скриен."
+        },
+        "visual_diff": {
+            "highlight_edits": {
+                "description": "Истакни промени",
+                "tooltip": "Заокружи уредени елементи"
+            }
         },
         "photo_overlays": {
             "title": "Фотооблоги",
@@ -1273,6 +1299,11 @@
         "mapillary_images": {
             "tooltip": "Улични слики од Mapillary"
         },
+        "mapillary_map_features": {
+            "title": "Картографски елементи",
+            "tooltip": "Картографски елементи од Mapillary",
+            "request_data": "Побарај податоци"
+        },
         "mapillary": {
             "title": "Mapillary",
             "signs": {
@@ -1411,18 +1442,21 @@
             "rules": {
                 "title": "Правила"
             },
+            "user_resolved_issues": "Проблеми решени со вашите уредувања",
+            "warnings_and_errors": "Предупредувања и грешки",
             "no_issues": {
                 "message": {
                     "everything": "Сè е во ред",
                     "everything_in_view": "Сè е во ред во погледот",
                     "edits": "Вашите уредувања се во ред",
-                    "edits_in_view": "Вашите уредувања во погледот се во ред"
+                    "edits_in_view": "Вашите уредувања во погледот се во ред",
+                    "no_edits": "Сè уште немате уредувања"
                 },
                 "hidden_issues": {
                     "none": "Утврдените проблеми ќе се прикажуваат овде",
                     "elsewhere": "Проблеми другаде: {count}",
-                    "other_features": "Проблеми со други елементи: {count}",
-                    "other_features_elsewhere": "Проблеми другаде со други елементи: {count}",
+                    "everything_else": "Проблеми со сето останато: {count}",
+                    "everything_else_elsewhere": "Проблеми другаде со сето останато: {count}",
                     "disabled_rules": "Проблеми со оневозможени правила: {count}",
                     "disabled_rules_elsewhere": "Проблеми другаде со оневозможени правила: {count}",
                     "ignored_issues": "Занемарени проблеми: {count}",
@@ -1485,22 +1519,31 @@
                 }
             },
             "fixme_tag": {
-                "message": "{feature} има барање „Поправи ме“",
-                "tip": "Најди елементи со ознаки „поправи ме“"
+                "message": "{feature} има барање „Поправи ме“"
+            },
+            "generic_name": {
+                "message_language": "{feature} го носи сомнителното име „{name}“ на {language}"
+            },
+            "help_request": {
+                "title": "Барања за помош",
+                "tip": "Најдете елементи каде други побарале помош"
+            },
+            "incorrect_name": {
+                "message": "{feature} го носи погрешното име „{name}“",
+                "message_language": "{feature} го носи погрешното име „{name}“ на {language}"
             },
             "invalid_format": {
                 "title": "Неважечко форматирање",
                 "tip": "Најди ознаки со неочекувани формати",
                 "email": {
-                    "message": "{feature} има неважечка е-пошта.",
-                    "message_multi": "{feature} има повеќе неважечки е-пошти.",
+                    "message": "{feature} има неважечка е-пошта",
+                    "message_multi": "{feature} има повеќе неважечки е-пошти",
                     "reference": "Е-поштенските адреси треба да бидат од обликот „user@example.com“."
-                },
-                "website": {
-                    "message": "{feature} има неважечко мрежно место.",
-                    "message_multi": "{feature} има повеќе неважечки мрежни места.",
-                    "reference": "Мрежните места мора да почнуваат со „http“ или „https“."
                 }
+            },
+            "mismatched_geometry": {
+                "title": "Погрешна геометрија",
+                "tip": "Најди елементи со спротиставени ознаки и геометрија"
             },
             "missing_tag": {
                 "title": "Отсутни ознаки",
@@ -1521,8 +1564,13 @@
                 },
                 "noncanonical_brand": {
                     "message": "{feature} делува како марка со нестандардни ознаки",
+                    "message_incomplete": "{feature} личи на марка со непотполни ознаки",
                     "reference": "Сите елементи со истата марка треба да се означат на истиот начин."
                 }
+            },
+            "point_as_vertex": {
+                "message": "{feature} треба да биде самостојна точка согласно неговите ознаки",
+                "reference": "Некои елементи не треба да бидат дел од линии или подрачја."
             },
             "private_data": {
                 "title": "Лични податоци",
@@ -1531,6 +1579,10 @@
                 "contact": {
                     "message": "{feature} може да се означи како личен контактен податок"
                 }
+            },
+            "suspicious_name": {
+                "title": "Сомнителни имиња",
+                "tip": "Најди елементи со општи или сомнителни имиња"
             },
             "unknown_road": {
                 "message": "{feature} нема класификација"
@@ -1543,7 +1595,14 @@
                     "reference": "Градбите со неправоаголни агли најчесто можат да се исцртаат поверно"
                 }
             },
+            "vertex_as_point": {
+                "message": "{feature} треба да е дел од линија или подрачје согласно неговите ознаки",
+                "reference": "Некои елементи не треба да бидат самостојни точки."
+            },
             "fix": {
+                "address_the_concern": {
+                    "title": "Осврни се на проблемот"
+                },
                 "connect_almost_junction": {
                     "annotation": "Поврзани мошне блиски елементи."
                 },
@@ -1560,6 +1619,9 @@
                 "connect_features": {
                     "title": "Поврзете ги елементите"
                 },
+                "connect_using_ford": {
+                    "title": "Поврзи со брод"
+                },
                 "continue_from_start": {
                     "title": "Продолжете со цртање од почетокот"
                 },
@@ -1569,11 +1631,17 @@
                 "delete_feature": {
                     "title": "Избриши го елементов"
                 },
+                "extract_point": {
+                    "title": "Извади ја точкава"
+                },
                 "ignore_issue": {
                     "title": "Занемари го проблемов"
                 },
                 "merge_close_vertices": {
                     "annotation": "Споени мошне блиски точки во пат."
+                },
+                "merge_points": {
+                    "title": "Спој ги точкиве"
                 },
                 "move_points_apart": {
                     "title": "Оддалечи ги точкиве"
@@ -1586,8 +1654,10 @@
                     "title": "Отстрани од однос"
                 },
                 "remove_generic_name": {
-                    "title": "Отстрането името",
                     "annotation": "Отстрането општовидовно име."
+                },
+                "remove_mistaken_name": {
+                    "annotation": "Отстрането погрешно име."
                 },
                 "remove_private_info": {
                     "annotation": "Отстранети лични податоци."
@@ -1602,8 +1672,14 @@
                 "remove_tags": {
                     "title": "Отстрани ги ознаките"
                 },
+                "remove_the_name": {
+                    "title": "Отстрани го името"
+                },
                 "reposition_features": {
                     "title": "Разместете ги елементите"
+                },
+                "reverse_feature": {
+                    "title": "Преврти го елементов"
                 },
                 "select_preset": {
                     "title": "Изберете вид на елемент"
@@ -1616,6 +1692,9 @@
                 },
                 "set_as_outer": {
                     "title": "Задај како надворешно"
+                },
+                "square_feature": {
+                    "title": "Исправи ги аглите на елементов"
                 },
                 "tag_as_disconnected": {
                     "title": "Ознаката е одделена",
@@ -1784,7 +1863,8 @@
                     "sidebar": "Дај/тргни страничник",
                     "wireframe": "Дај/тргни омрежување",
                     "osm_data": "Дај/тргни податоци од OpenStreetMap",
-                    "minimap": "Дај/тргни миникарта"
+                    "minimap": "Дај/тргни миникарта",
+                    "highlight_edits": "Истакни незачувани уредувања"
                 },
                 "selecting": {
                     "title": "Избор на елементи",
@@ -1828,7 +1908,7 @@
                     "disconnect": "Оддели елементи во избраниот јазол",
                     "extract": "Извади точка од елемент",
                     "split": "Расцепи линија во овој јазол на два дела",
-                    "reverse": "Превртете линијата во обратна насока",
+                    "reverse": "Преврти избрани елементи",
                     "move": "Преместете ги избраните елементи",
                     "rotate": "Свртете ги избраните елементи",
                     "orthogonalize": "Исправете ги аглите на линија или подрачје",
@@ -2112,6 +2192,9 @@
                 "attraction": {
                     "label": "Вид"
                 },
+                "baby_seat": {
+                    "label": "Бебешко седиште"
+                },
                 "backrest": {
                     "label": "Наслон"
                 },
@@ -2153,6 +2236,15 @@
                     "label": "Корпа за отпадоци",
                     "terms": "[преведете со истозначници и сродни поими на „Корпа за отпадоци“, одделени со запирки]"
                 },
+                "blind": {
+                    "label": "Пристап за слепи",
+                    "options": {
+                        "limited": "Ограничен",
+                        "no": "Не",
+                        "yes": "Да"
+                    },
+                    "terms": "[преведете со истозначници и сродни поими на „Пристап за слепи“, одделени со запирки]"
+                },
                 "blood_components": {
                     "label": "Крвни составници",
                     "options": {
@@ -2163,6 +2255,9 @@
                     }
                 },
                 "board_type": {
+                    "label": "Вид"
+                },
+                "bollard": {
                     "label": "Вид"
                 },
                 "booth": {
@@ -2300,6 +2395,9 @@
                         "forward": "Нанапред",
                         "reversible": "Променлива насока"
                     }
+                },
+                "conveying_escalator": {
+                    "label": "Подвижни скали"
                 },
                 "country": {
                     "label": "Земја"
@@ -2680,7 +2778,8 @@
                     "placeholder": "1-18"
                 },
                 "handrail": {
-                    "label": "Гелендер"
+                    "label": "Гелендер",
+                    "terms": "<преведете со истозначници или сродни поими на „Гелендер“, одделени со запирки>"
                 },
                 "hashtags": {
                     "label": "Предложени тарабни ознаки",
@@ -2786,6 +2885,10 @@
                 },
                 "industrial": {
                     "label": "Вид"
+                },
+                "informal": {
+                    "label": "Неформално",
+                    "terms": "<преведете со истозначници или сродни поими на „Неформално“, одделени со запирки>"
                 },
                 "information": {
                     "label": "Вид"
@@ -2911,6 +3014,10 @@
                     "label": "Кат",
                     "terms": "[преведете со истозначници и сродни поими на „Кат“, одделени со запирки]"
                 },
+                "level_semi": {
+                    "label": "Катови",
+                    "terms": "[преведете со истозначници и сродни поими на „Катови“, одделени со запирки]"
+                },
                 "levels": {
                     "label": "Катови",
                     "placeholder": "2, 4, 6...",
@@ -2941,6 +3048,10 @@
                 "lock": {
                     "label": "Преводница"
                 },
+                "lockable": {
+                    "label": "Заклучливо",
+                    "terms": "[translate with synonyms or related terms for 'Lockable', separated by commas]"
+                },
                 "man_made": {
                     "label": "Вид"
                 },
@@ -2960,6 +3071,10 @@
                 "material": {
                     "label": "Материјал",
                     "terms": "[преведете со истозначници и сродни поими на „Материјал“, одделени со запирки]"
+                },
+                "max_age": {
+                    "label": "Најголема возраст",
+                    "terms": "<преведете со истозначници или сродни поими на „Најголема возраст“, одделени со запирки>"
                 },
                 "maxheight": {
                     "label": "Најг. височина",
@@ -2994,6 +3109,10 @@
                 "microbrewery": {
                     "label": "Микропиварница",
                     "terms": "[преведете со истозначници и сродни поими на „Микропиварница“, одделени со запирки]"
+                },
+                "min_age": {
+                    "label": "Најмала возраст",
+                    "terms": "<преведете со истозначници или сродни поими на „Најмала возраст“, одделени со запирки>"
                 },
                 "minspeed": {
                     "label": "Најмала дозволена брзина",
@@ -3292,14 +3411,8 @@
                 "playground": {
                     "label": "Вид"
                 },
-                "playground/baby": {
-                    "label": "Бебешка седалка"
-                },
-                "playground/max_age": {
-                    "label": "Најм. возраст"
-                },
-                "playground/min_age": {
-                    "label": "Најг. возраст"
+                "playground/theme": {
+                    "label": "Тема"
                 },
                 "polling_station": {
                     "label": "Гласачко место",
@@ -3418,6 +3531,9 @@
                         "yes": "Се примаат"
                     },
                     "terms": "[преведете со истозначници и сродни поими на „Резервации“, одделени со запирки]"
+                },
+                "residential": {
+                    "label": "Вид"
                 },
                 "resort": {
                     "label": "Вид"
@@ -3690,7 +3806,11 @@
                     "terms": "[преведете со истозначници и сродни поими на „Почетен датум“, одделени со запирки]"
                 },
                 "step_count": {
-                    "label": "Бр. на чекори"
+                    "label": "Бр. на чекори",
+                    "terms": "[преведете со истозначници и сродни поими на „Број на скалила“, одделени со запирки]"
+                },
+                "stile": {
+                    "label": "Вид"
                 },
                 "stop": {
                     "label": "Вид постојка",
@@ -3704,6 +3824,11 @@
                 },
                 "stroller": {
                     "label": "Пристап за детска количка",
+                    "options": {
+                        "limited": "Ограничен",
+                        "no": "Не",
+                        "yes": "Да"
+                    },
                     "terms": "[преведете со истозначници и сродни поими на „Пристап за детска количка“, одделени со запирки]"
                 },
                 "structure": {
@@ -3715,7 +3840,8 @@
                         "ford": "Брод",
                         "tunnel": "Тунел"
                     },
-                    "placeholder": "Непознато"
+                    "placeholder": "Непознато",
+                    "terms": "<преведете со истозначници или сродни поими на „Градба“, одделени со запирки>"
                 },
                 "structure_waterway": {
                     "label": "Градба",
@@ -3741,7 +3867,8 @@
                     "label": "Поддршка"
                 },
                 "surface": {
-                    "label": "Површина"
+                    "label": "Површина",
+                    "terms": "<преведете со истозначници или сродни поими на „Површина“, одделени со запирки>"
                 },
                 "surveillance": {
                     "label": "Вид надзор"
@@ -3830,6 +3957,9 @@
                 },
                 "tower/type": {
                     "label": "Вид"
+                },
+                "townhall/type": {
+                    "label": " Вид"
                 },
                 "tracktype": {
                     "label": "Вид патека",
@@ -3974,6 +4104,9 @@
                 "wall": {
                     "label": "Вид"
                 },
+                "waste": {
+                    "label": "Отпадоци"
+                },
                 "water": {
                     "label": "Вид"
                 },
@@ -4000,6 +4133,11 @@
                 },
                 "wheelchair": {
                     "label": "Инвалидски пристап",
+                    "options": {
+                        "limited": "Ограничен",
+                        "no": "Не",
+                        "yes": "Да"
+                    },
                     "terms": "[преведете со истозначници и сродни поими на „Инвалидски пристап“, одделени со запирки]"
                 },
                 "wholesale": {
@@ -4123,6 +4261,9 @@
                 },
                 "aeroway/runway": {
                     "name": "Писта"
+                },
+                "aeroway/spaceport": {
+                    "name": "Космодром"
                 },
                 "aeroway/taxiway": {
                     "name": "Воздухопловен приод"
@@ -4307,6 +4448,9 @@
                 "amenity/fast_food/fish_and_chips": {
                     "name": "Риба и пржени компири"
                 },
+                "amenity/fast_food/hot_dog": {
+                    "name": "Тезга за хот-дог"
+                },
                 "amenity/fast_food/ice_cream": {
                     "name": "Сладоледарница"
                 },
@@ -4369,6 +4513,9 @@
                 },
                 "amenity/library": {
                     "name": "Библиотека"
+                },
+                "amenity/loading_dock": {
+                    "name": "Товарна рампа"
                 },
                 "amenity/love_hotel": {
                     "name": "Љубовен хотел"
@@ -4473,7 +4620,7 @@
                     "name": "Трајно гласачко место"
                 },
                 "amenity/post_box": {
-                    "name": "Поштенско сандаче"
+                    "name": "Поштенска преграда"
                 },
                 "amenity/post_depot": {
                     "name": "Служба за поштенска отпрема"
@@ -4634,6 +4781,18 @@
                 "amenity/studio": {
                     "name": "Студио"
                 },
+                "amenity/studio/audio": {
+                    "name": "Музичко студио"
+                },
+                "amenity/studio/radio": {
+                    "name": "Радиостаница"
+                },
+                "amenity/studio/television": {
+                    "name": "Телевизиска станица"
+                },
+                "amenity/studio/video": {
+                    "name": "Филмско студио"
+                },
                 "amenity/swimming_pool": {
                     "name": "Базен"
                 },
@@ -4659,6 +4818,9 @@
                     "name": "Полски нужник"
                 },
                 "amenity/townhall": {
+                    "name": "Градски дом"
+                },
+                "amenity/townhall/city": {
                     "name": "Градски дом"
                 },
                 "amenity/toy_library": {
@@ -4751,6 +4913,9 @@
                 "amenity/watering_place": {
                     "name": "Поило за миленици"
                 },
+                "amenity/weighbridge": {
+                    "name": "Мосна вага"
+                },
                 "area": {
                     "name": "Подрачје"
                 },
@@ -4770,7 +4935,7 @@
                     "name": "Големо тркало"
                 },
                 "attraction/bumper_car": {
-                    "name": "Автодром со судиралки"
+                    "name": "Автодром"
                 },
                 "attraction/bungee_jumping": {
                     "name": "Скокање со јаже — банџи"
@@ -4813,6 +4978,9 @@
                 },
                 "barrier/bollard": {
                     "name": "Дирек"
+                },
+                "barrier/bollard_line": {
+                    "name": "Ред столпчиња"
                 },
                 "barrier/border_control": {
                     "name": "Граничен премин"
@@ -4891,6 +5059,9 @@
                 },
                 "barrier/wall": {
                     "name": "Ѕид"
+                },
+                "barrier/wall/noise_barrier": {
+                    "name": "Букобран"
                 },
                 "boundary": {
                     "name": "Граница"
@@ -5505,6 +5676,9 @@
                 "highway/path": {
                     "name": "Патека"
                 },
+                "highway/path/informal": {
+                    "name": "Неформална патека"
+                },
                 "highway/pedestrian_area": {
                     "name": "Пешачко подрачје"
                 },
@@ -5518,7 +5692,13 @@
                     "name": "Главен приод"
                 },
                 "highway/raceway": {
-                    "name": "Тркалиште (автомобилизам)"
+                    "name": "Мототркалиште"
+                },
+                "highway/raceway/karting": {
+                    "name": "Тркалиште за картинг"
+                },
+                "highway/raceway/motocross": {
+                    "name": "Тркалиште за мотокрос"
                 },
                 "highway/residential": {
                     "name": "Станбена улица"
@@ -5673,8 +5853,14 @@
                 "indoor/door": {
                     "name": "Внатрешна врата"
                 },
+                "indoor/elevator": {
+                    "name": "Внатрешно окно на лифт"
+                },
                 "indoor/room": {
                     "name": "Просторија"
+                },
+                "indoor/stairs": {
+                    "name": "Внатрешно скалиште"
                 },
                 "indoor/wall": {
                     "name": "Внатрешен ѕид"
@@ -5719,7 +5905,7 @@
                     "name": "Стопанско подрачје"
                 },
                 "landuse/construction": {
-                    "name": "Изградба"
+                    "name": "Градилиште"
                 },
                 "landuse/farm": {
                     "name": "Земјоделска површина"
@@ -6237,6 +6423,9 @@
                 "man_made/tunnel": {
                     "name": "Тунел"
                 },
+                "man_made/utility_pole": {
+                    "name": "Бандера"
+                },
                 "man_made/wastewater_plant": {
                     "name": "Канализациска станица"
                 },
@@ -6257,15 +6446,6 @@
                 },
                 "man_made/works": {
                     "name": "Фабрика"
-                },
-                "manhole": {
-                    "name": "Шахта"
-                },
-                "manhole/drain": {
-                    "name": "Одводник"
-                },
-                "manhole/telecom": {
-                    "name": "Телекомска шахта"
                 },
                 "military/bunker": {
                     "name": "Воен бункер"
@@ -7014,6 +7194,9 @@
                 "shop/boutique": {
                     "name": "Бутик"
                 },
+                "shop/brewing_supplies": {
+                    "name": "Пивоварска продавница"
+                },
                 "shop/butcher": {
                     "name": "Месарница"
                 },
@@ -7309,6 +7492,9 @@
                 "shop/printer_ink": {
                     "name": "Продавница за печатарска боја"
                 },
+                "shop/psychic": {
+                    "name": "Јасновидец"
+                },
                 "shop/pyrotechnics": {
                     "name": "Продавница за огномет"
                 },
@@ -7317,6 +7503,9 @@
                 },
                 "shop/religion": {
                     "name": "Верска продавница"
+                },
+                "shop/rental": {
+                    "name": "Изнајмувачница"
                 },
                 "shop/scuba_diving": {
                     "name": "Продавница за нуркачка опрема"
@@ -7640,7 +7829,7 @@
                     "name": "Пешачки патен правец"
                 },
                 "type/route/hiking": {
-                    "name": "Планинарски патен равец"
+                    "name": "Планинарски равец"
                 },
                 "type/route/horse": {
                     "name": "Јавачки патен правец"
@@ -7884,6 +8073,10 @@
                 "description": "Жолто = Картографски податоци од пописот на САД во јавна сопственост. Црвено = Податоци кои не е присутни на OpenStreetMap",
                 "name": "TIGER Патишта 2018"
             },
+            "US-TIGER-Roads-2019": {
+                "description": "Жолто = Картографски податоци од пописот на САД во јавна сопственост. Црвено = Податоци кои не е присутни на OpenStreetMap",
+                "name": "TIGER Патишта 2019"
+            },
             "USDA-NAIP": {
                 "description": "Најновата година на DOQQ од Националната програма за земјоделски снимки (NAIP) за секоја континентална сојузна држава на САД.",
                 "name": "Национална програма за земјоделски снимки"
@@ -7909,6 +8102,12 @@
                     "text": "Остварено преку UrbIS®© на Брисел — Расподелба и авторски права CIRB"
                 },
                 "name": "UrbIS-орто 2018"
+            },
+            "UrbISOrtho2019": {
+                "attribution": {
+                    "text": "Остварено преку UrbIS®© на Брисел — Расподелба и авторски права CIRB"
+                },
+                "name": "UrbIS-Орто 2019"
             },
             "UrbisAdmFR": {
                 "attribution": {
@@ -8325,9 +8524,6 @@
                 "name": "OpenStreetMap Русија на Telegram",
                 "description": "Разговори на OpenStreetMap Русија на Telegram"
             },
-            "OSM-south-korea-telegram": {
-                "name": "OSM Јужна Кореја на Telegram"
-            },
             "OSM-TW-facebook": {
                 "description": "Група на Facebook за картографи и корисници на OpenStreetMap посветена на разговори поврзани со Тајван."
             },
@@ -8384,8 +8580,7 @@
                 "description": "Стапете во #osm-hr на irc.freenode.org (порта 6667)"
             },
             "osmcz-facebook": {
-                "name": "OpenStreetMap Чешка на Facebook",
-                "description": "Следете ја чешката заедница на Facebook. Имаме преведен неделник WeeklyOSM!"
+                "name": "OpenStreetMap Чешка на Facebook"
             },
             "osmcz-twitter": {
                 "name": "OSM Чешка на Twitter: @osmcz",

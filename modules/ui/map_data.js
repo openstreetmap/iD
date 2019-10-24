@@ -24,13 +24,14 @@ export function uiMapData(context) {
     var settingsCustomData = uiSettingsCustomData(context)
         .on('change', customChanged);
 
-    var _pane = d3_select(null), _toggleButton = d3_select(null);
+    var _pane = d3_select(null);
 
     var _fillSelected = context.storage('area-fill') || 'partial';
     var _dataLayerContainer = d3_select(null);
     var _photoOverlayContainer = d3_select(null);
     var _fillList = d3_select(null);
     var _featureList = d3_select(null);
+    var _visualDiffList = d3_select(null);
     var _QAList = d3_select(null);
 
 
@@ -83,6 +84,16 @@ export function uiMapData(context) {
             context.storage('area-fill-toggle', d);
         }
         update();
+    }
+
+
+    function toggleHighlightEdited() {
+        d3_event.preventDefault();
+        var surface = context.surface();
+        surface.classed('highlight-edited', !surface.classed('highlight-edited'));
+        updateVisualDiffList();
+
+        context.map().pan([0,0]);  // trigger a redraw
     }
 
 
@@ -607,6 +618,8 @@ export function uiMapData(context) {
                         tip = t(name + '.' + d + '.tooltip');
                     }
                     var key = (d === 'wireframe' ? t('area_fill.wireframe.key') : null);
+                    if (d === 'highlight_edits') key = t('map_data.highlight_edits.key');
+
                     if ((name === 'feature' || name === 'keepRight') && autoHiddenFeature(d)) {
                         var msg = showsLayer('osm') ? t('map_data.autohidden') : t('map_data.osmhidden');
                         tip += '<div>' + msg + '</div>';
@@ -673,7 +686,7 @@ export function uiMapData(context) {
     }
 
 
-    function renderFillList(selection) {
+    function renderStyleOptions(selection) {
         var container = selection.selectAll('.layer-fill-list')
             .data([0]);
 
@@ -683,6 +696,16 @@ export function uiMapData(context) {
             .merge(container);
 
         updateFillList();
+
+        var container2 = selection.selectAll('.layer-visual-diff-list')
+            .data([0]);
+
+        _visualDiffList = container2.enter()
+            .append('ul')
+            .attr('class', 'layer-list layer-visual-diff-list')
+            .merge(container2);
+
+        updateVisualDiffList();
     }
 
 
@@ -748,6 +771,13 @@ export function uiMapData(context) {
             .call(drawListItems, fills, 'radio', 'area_fill', setFill, showsFill);
     }
 
+    function updateVisualDiffList() {
+        _visualDiffList
+            .call(drawListItems, ['highlight_edits'], 'checkbox', 'visual_diff', toggleHighlightEdited, function() {
+                return context.surface().classed('highlight-edited');
+            });
+    }
+
     function updateFeatureList() {
         _featureList
             .call(drawListItems, features, 'checkbox', 'feature', clickFeature, showsFeature);
@@ -800,13 +830,13 @@ export function uiMapData(context) {
 
     uiMapData.togglePane = function() {
         if (d3_event) d3_event.preventDefault();
-        paneTooltip.hide(_toggleButton);
+        paneTooltip.hide();
         context.ui().togglePanes(!_pane.classed('shown') ? _pane : undefined);
     };
 
     uiMapData.renderToggleButton = function(selection) {
 
-        _toggleButton = selection
+        selection
             .append('button')
             .on('click', uiMapData.togglePane)
             .call(svgIcon('#iD-icon-data', 'light'))
@@ -863,8 +893,8 @@ export function uiMapData(context) {
             .append('div')
             .attr('class', 'map-data-area-fills')
             .call(uiDisclosure(context, 'fill_area', false)
-                .title(t('map_data.fill_area'))
-                .content(renderFillList)
+                .title(t('map_data.style_options'))
+                .content(renderStyleOptions)
             );
 
         // feature filters
@@ -891,7 +921,8 @@ export function uiMapData(context) {
                 d3_event.preventDefault();
                 d3_event.stopPropagation();
                 toggleLayer('osm');
-            });
+            })
+            .on(t('map_data.highlight_edits.key'), toggleHighlightEdited);
     };
 
     return uiMapData;

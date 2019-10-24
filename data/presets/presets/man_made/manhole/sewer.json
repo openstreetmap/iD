@@ -1,0 +1,27 @@
+{
+    "icon": "temaki-waste_manhole",
+    "fields": [
+        "operator",
+        "ref"
+    ],
+    "geometry": [
+        "point",
+        "vertex"
+    ],
+    "tags": {
+        "manhole": "sewer"
+    },
+    "addTags": {
+        "man_made": "manhole",
+        "manhole": "sewer"
+    },
+    "terms": [
+        "cover",
+        "drain",
+        "hole",
+        "sewer",
+        "sewage",
+        "utility"
+    ],
+    "name": "Sewer Utility Manhole"
+}

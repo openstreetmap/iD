@@ -11,6 +11,7 @@
     "moreFields": [
         "covered",
         "indoor",
+        "level",
         "lit"
     ],
     "geometry": [

@@ -381,8 +381,10 @@ export function uiRawTagEditor(context) {
 
 
         function pushMore() {
+            // if pressing Tab on the last value field with content, add a blank row
             if (d3_event.keyCode === 9 && !d3_event.shiftKey &&
-                list.selectAll('li:last-child input.value').node() === this) {
+                list.selectAll('li:last-child input.value').node() === this &&
+                utilGetSetValue(d3_select(this))) {
                 addTag();
             }
         }

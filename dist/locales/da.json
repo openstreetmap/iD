@@ -7,7 +7,8 @@
             "undo": "fortryd",
             "zoom_to": "zoom til",
             "copy": "kopier",
-            "open_wikidata": "åben på wikidata.org"
+            "open_wikidata": "åben på wikidata.org",
+            "favorite": "favorit"
         },
         "toolbar": {
             "inspect": "Inspicer",
@@ -18,6 +19,8 @@
         },
         "modes": {
             "add_feature": {
+                "title": "Tilføj et kortobjekt",
+                "description": "Søg efter kortobjekter at tilføje til kortet",
                 "result": "{count} resultat",
                 "results": "{count} resultater"
             },
@@ -156,6 +159,7 @@
                     "line": "Udrettede en linje."
                 },
                 "too_bendy": "Denne linje kan ikke rettes ud da den bøjer for meget.",
+                "connected_to_hidden": "Dette kan ikke rettes ud fordi det er forbundet til et skjult kortobjekt.",
                 "not_downloaded": "Dette kan ikke gøres udrettes, da dele af det ikke er indlæst endnu."
             },
             "delete": {
@@ -195,6 +199,29 @@
                 "has_wikidata_tag": {
                     "single": "Dette kortobjekt kan ikke slettes da det har et Wikidata-tag.",
                     "multiple": "Disse kortobjekter kan ikke slettes da nogle har et Wikidata-tag."
+                }
+            },
+            "downgrade": {
+                "title": "Nedgrader",
+                "description": {
+                    "building_address": "Fjern alle tags der ikke relaterer til adresser og bygninger.",
+                    "building": "Fjern alle tags der ikke relaterer til bygninger.",
+                    "address": "Fjern alle tags der ikke relaterer til adresser."
+                },
+                "annotation": {
+                    "building": {
+                        "single": "Nedgraderede et kortobjekt til en simpel bygning.",
+                        "multiple": "Nedgraderede {n} kortobjekter til simple bygninger."
+                    },
+                    "address": {
+                        "single": "Nedgraderede et kortobjekt til en adresse.",
+                        "multiple": "Nedgraderede {n} kortobjekter til adresser."
+                    },
+                    "multiple": "Nedgraderede {n} kortobjekter."
+                },
+                "has_wikidata_tag": {
+                    "single": "Dette kortobjekt kan ikke nedgraderes fordi det har et Wikidata-tag.",
+                    "multiple": "Disse kortobjekter kan ikke nedgraderes fordi nogle har Wikidata-tags."
                 }
             },
             "add_member": {
@@ -340,9 +367,7 @@
             },
             "reverse": {
                 "title": "Vend om",
-                "description": "Lad denne linje gå i den modsatte retning.",
-                "key": "V",
-                "annotation": "Vendte en linje om."
+                "key": "V"
             },
             "split": {
                 "title": "Opdel",
@@ -638,7 +663,6 @@
             "switch": "Skift tilbage til denne baggrund",
             "custom": "Brugerdefineret",
             "overlays": "Overlægninger",
-            "imagery_source_faq": "Luftfoto-information / anmeld problem",
             "reset": "nulstil",
             "reset_all": "Nulstil alt.",
             "display_options": "Visningsindstillinger",
@@ -682,7 +706,6 @@
                     "zoom": "Zoom til data"
                 }
             },
-            "fill_area": "Udfyldning af områder",
             "map_features": "Kortobjekter",
             "autohidden": "Disse objekter er automatisk blevet skjult, da for mange ellers ville blive vist på skærmen.\nDu kan zoome ind for at redigere dem.",
             "osmhidden": "Disse kortobjekter er blevet automatisk gemt fordi OpenStreetMap-laget er gemt."
@@ -1623,7 +1646,6 @@
                     "merge": "Kombiner (fusioner) markerede kortobjekter",
                     "disconnect": "Separér kortobjekter ved markerede node",
                     "split": "Opdel linje i to ved markerede node",
-                    "reverse": "Vend retning på linje",
                     "move": "Flyt markerede kortobjekter",
                     "rotate": "Rotér markerede kortobjekter",
                     "circularize": "Gør en lukket linje eller område rundt",
@@ -2677,15 +2699,6 @@
                     "label": "Udgangseffekt",
                     "placeholder": "500 MW, 1000 MW, 2000 MW..."
                 },
-                "playground/baby": {
-                    "label": "Baby-siddeplads"
-                },
-                "playground/max_age": {
-                    "label": "Maksimal alder"
-                },
-                "playground/min_age": {
-                    "label": "Minimal alder"
-                },
                 "population": {
                     "label": "Befolkning"
                 },
@@ -2827,6 +2840,11 @@
                 },
                 "shop": {
                     "label": "Type"
+                },
+                "siren/type": {
+                    "options": {
+                        "electronic": "Elektronisk"
+                    }
                 },
                 "site": {
                     "label": "Type"
@@ -3396,8 +3414,8 @@
                     "terms": "Tankstation, Benzinstation"
                 },
                 "amenity/grave_yard": {
-                    "name": "Kirkegård",
-                    "terms": "Kirkegård, Gravsted"
+                    "name": "Gravplads",
+                    "terms": "Kirkegård"
                 },
                 "amenity/grit_bin": {
                     "name": "Vejsaltkasse",
@@ -3508,10 +3526,6 @@
                 "amenity/police": {
                     "name": "Politi",
                     "terms": "Politistation, Politi"
-                },
-                "amenity/post_box": {
-                    "name": "Postkasse",
-                    "terms": "Postkasse"
                 },
                 "amenity/post_office": {
                     "name": "Postkontor",
@@ -3645,24 +3659,41 @@
                     "name": "Salgsautomat",
                     "terms": "Salgsautomat, automat, slikautomat"
                 },
+                "amenity/vending_machine/bottle_return": {
+                    "name": "Pantautomat",
+                    "terms": "pant,retur,flaske,tomra"
+                },
                 "amenity/vending_machine/cigarettes": {
                     "name": "Cigaretautomat",
-                    "terms": "Cigaretautomat, Tobaksautomat"
+                    "terms": "Cigaretautomat, Tobaksautomat,tobak,cigaret"
                 },
                 "amenity/vending_machine/coffee": {
-                    "name": "Kaffeautomat"
+                    "name": "Kaffeautomat",
+                    "terms": "kaffe,automat"
                 },
                 "amenity/vending_machine/condoms": {
                     "name": "Kondomautomat",
-                    "terms": "Kondomautomat"
+                    "terms": "Kondomautomat,automat,præservativ"
                 },
                 "amenity/vending_machine/drinks": {
                     "name": "Drikkeautomat",
-                    "terms": "Drikkeautomat, Sodavandsautomat"
+                    "terms": "Drikkeautomat, Sodavandsautomat,læskedrik,drik"
+                },
+                "amenity/vending_machine/electronics": {
+                    "name": "Salgsautomat, elektronik",
+                    "terms": "elektronik,automat,gadget"
                 },
                 "amenity/vending_machine/feminine_hygiene": {
                     "name": "Salgsautomat, feminin hygiejne",
                     "terms": "bind,tampon"
+                },
+                "amenity/vending_machine/food": {
+                    "name": "Madautomat",
+                    "terms": "mad,fødevare,automat"
+                },
+                "amenity/vending_machine/ice_cream": {
+                    "name": "Isautomat",
+                    "terms": "is,ispind"
                 },
                 "amenity/vending_machine/newspapers": {
                     "name": "Avis-salgsautomat",
@@ -3670,11 +3701,14 @@
                 },
                 "amenity/vending_machine/parking_tickets": {
                     "name": "Parkeringsbilletautomat",
-                    "terms": "P-autoautomat, automat"
+                    "terms": "P-automat, automat"
                 },
                 "amenity/vending_machine/public_transport_tickets": {
                     "name": "Billetautomat",
-                    "terms": "Billetautomat, Rejsebilletautomat"
+                    "terms": "Billetautomat, Rejsebilletautomat,rejse,billet,"
+                },
+                "amenity/vending_machine/stamps": {
+                    "name": "Frimærkeautomat"
                 },
                 "amenity/vending_machine/sweets": {
                     "name": "Snackautomat",
@@ -3722,9 +3756,6 @@
                 "attraction/big_wheel": {
                     "name": "Pariserhjul",
                     "terms": "ferris"
-                },
-                "attraction/bumper_car": {
-                    "name": "Radiobil"
                 },
                 "attraction/bungee_jumping": {
                     "name": "Elastikspring",
@@ -4390,10 +4421,6 @@
                     "name": "Link til primærvej",
                     "terms": "Link til primærvej"
                 },
-                "highway/raceway": {
-                    "name": "Racerbane (Motorsport)",
-                    "terms": "Racerbane (Motorsport)"
-                },
                 "highway/residential": {
                     "name": "Villavej",
                     "terms": "Villavej"
@@ -4568,20 +4595,16 @@
                     "name": "Bassin"
                 },
                 "landuse/cemetery": {
-                    "name": "Gravplads ",
+                    "name": "Kirkegård",
                     "terms": "Gravplads"
                 },
                 "landuse/churchyard": {
-                    "name": "Kirkegård",
-                    "terms": "Kirkegårde"
+                    "name": "Kirkeområde",
+                    "terms": "Kirkegård"
                 },
                 "landuse/commercial": {
                     "name": "Kommercielt område",
                     "terms": "Kommercielt område"
-                },
-                "landuse/construction": {
-                    "name": "Under konstruktion",
-                    "terms": "Under konstruktion, Byggeplads"
                 },
                 "landuse/farm": {
                     "name": "Landbrugsjord"
@@ -5016,14 +5039,6 @@
                 "man_made/works": {
                     "name": "Fabrik",
                     "terms": "Fabrik, Fremstillingsvirksomhed, Produktionsvirksomhed"
-                },
-                "manhole": {
-                    "name": "Brønd",
-                    "terms": "dæksel,kloak"
-                },
-                "manhole/drain": {
-                    "name": "Regnafløb",
-                    "terms": "storm,regn,afløb"
                 },
                 "natural": {
                     "name": "Naturlig"
@@ -6436,13 +6451,7 @@
             },
             "OSMF": {
                 "description": "OSMF er en UK-baseret non-profit organisation der støtter OpenStreetMap projektet",
-                "extendedDescription": "OSMF støtter OpenStreetMap ved at rejse penge, vedligeholde serverne der driver OSM, organisere den årlige State of the Map konference, og koordinere de frivillige der holder OSM kørende. Du kan vise din støtte og have en stemme i forhold til OpenStreetMaps retning ved at melde dig som OSMF medlem her: {signupUrl}",
-                "events": {
-                    "sotm2018": {
-                        "description": "Deltag 3 dage i Milano, Italien på den årlige internationale OpenStreetMap konference, der bringer alle i fællesskabet sammen for at socialisere, dele og lære.",
-                        "where": "Milano, Italien"
-                    }
-                }
+                "extendedDescription": "OSMF støtter OpenStreetMap ved at rejse penge, vedligeholde serverne der driver OSM, organisere den årlige State of the Map konference, og koordinere de frivillige der holder OSM kørende. Du kan vise din støtte og have en stemme i forhold til OpenStreetMaps retning ved at melde dig som OSMF medlem her: {signupUrl}"
             }
         }
     }

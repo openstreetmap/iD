@@ -177,9 +177,7 @@
             },
             "reverse": {
                 "title": "倒向。",
-                "description": "整到修綫方向相反。",
-                "key": "V",
-                "annotation": "條綫方向倒咗轉。"
+                "key": "V"
             },
             "split": {
                 "title": "斬開",
@@ -329,7 +327,6 @@
             "title": "地圖資料",
             "description": "地圖資料",
             "data_layers": "資料層",
-            "fill_area": "填範圍",
             "map_features": "地圖地貌",
             "autohidden": "依啲地貌，會自收埋，皆因螢幕太多嘢。放大啲先改。"
         },
@@ -1747,10 +1744,6 @@
                     "name": "差館",
                     "terms": "Police,差館,派出所,警察局,警局,警署"
                 },
-                "amenity/post_box": {
-                    "name": "郵筒",
-                    "terms": "Mailbox,Post,Post Box,郵筒,郵箱"
-                },
                 "amenity/post_office": {
                     "name": "郵政局",
                     "terms": "Post Office,書信館,郵局,郵政局"
@@ -2132,10 +2125,6 @@
                 },
                 "landuse/commercial": {
                     "name": "商地"
-                },
-                "landuse/construction": {
-                    "name": "地盤",
-                    "terms": "Construction,地盤,建築工程,建築物"
                 },
                 "landuse/farm": {
                     "name": "田地"

@@ -47,7 +47,7 @@
                 "annotation": {
                     "point": "Punkt lisatud.",
                     "vertex": "Joonele lisatud sõlm.",
-                    "relation": "Relatsioon lisatud.",
+                    "relation": "Seos lisatud.",
                     "note": "Märge lisatud."
                 }
             },
@@ -72,7 +72,7 @@
                 "annotation": "Joonistamine katkestatud."
             },
             "change_role": {
-                "annotation": "Relatsiooni liikme roll on muudetud."
+                "annotation": "Seose liikme roll on muudetud."
             },
             "change_tags": {
                 "annotation": "Sildid muudetud."
@@ -122,7 +122,7 @@
                     "vertex": "Sõlm kustutatud joonelt.",
                     "line": "Joon kustutatud.",
                     "area": "Ala kustutatud.",
-                    "relation": "Relatsioon kustutatud.",
+                    "relation": "Seos kustutatud.",
                     "multiple": "{n} objekti kustutatud."
                 },
                 "too_large": {
@@ -134,15 +134,22 @@
                     "multiple": "Neid objekte ei saa kustutada, kuna need ei ole veel täielikult alla laaditud."
                 },
                 "part_of_relation": {
-                    "single": "Objekti ei saa kustutada, sest see on osa suuremast relatsioonist. Pead kõigepealt selle relatsioonist eemaldama.",
-                    "multiple": "Objekte ei saa kustutada, sest need on osa suurematest relatsioonidest. Pead kõigepealt need relatsioonidest eemaldama."
+                    "single": "Objekti ei saa kustutada, sest see on osa seosest. Pead selle kõigepealt seosest eemaldama.",
+                    "multiple": "Objekte ei saa kustutada, sest need on osa seosetest. Pead kõigepealt need seosetest eemaldama."
                 }
             },
             "add_member": {
-                "annotation": "Lisatud relatsiooni liige."
+                "annotation": "Lisatud seose liige."
             },
             "delete_member": {
-                "annotation": "Relatsiooni liige kustutatud."
+                "annotation": "Seose liige kustutatud."
+            },
+            "reorder_members": {
+                "annotation": "Seose liikmed on ümberreastatud."
+            },
+            "connect": {
+                "relation": "Objekte ei saa ühendada kuna neil esineb konfliktseid seoserolle.",
+                "restriction": "Objekte ei saa ühendada kuna see lõhuks \"{relation}\" seost."
             },
             "disconnect": {
                 "title": "Ühenda lahti",
@@ -151,7 +158,7 @@
                 "annotation": "Lahtiühendatud jooned/alad.",
                 "not_connected": "Siin pole piisavalt jooni/alasid lahtiühendamiseks.",
                 "connected_to_hidden": "Seda ei saa lahti ühendada, kuna see on ühendatud peidetud objektiga.",
-                "relation": "Seda ei saa lahti ühendada, sest see ühendab relatsiooni liikmeid."
+                "relation": "Seda ei saa lahti ühendada, sest see ühendab seose liikmeid."
             },
             "merge": {
                 "title": "Ühenda",
@@ -159,6 +166,8 @@
                 "key": "C",
                 "annotation": "Ühendatud {n} objekti.",
                 "not_eligible": "Neid objekte ei saa ühendada.",
+                "restriction": "Objekte ei saa üheks liita, kuna see lõhuks \"{relation}\" seost.",
+                "relation": "Objekte ei saa üheks liita kuna neil esineb konfliktseid seoserolle.",
                 "incomplete_relation": "Neid objekte ei saa ühendada, kuna vähemalt üks neist ei ole täielikult alla laaditud.",
                 "conflicting_tags": "Neid objekte ei saa ühendada, kuna osa nende silte on konfliktsete väärtustega."
             },
@@ -246,9 +255,7 @@
             },
             "reverse": {
                 "title": "Pööra ümber",
-                "description": "Pööra joon vastassuunda.",
-                "key": "V",
-                "annotation": "Tee on pööratud."
+                "key": "V"
             },
             "split": {
                 "title": "Tükelda",
@@ -268,6 +275,13 @@
                 "annotation": {
                     "create": "Lisatud pöörde piirang",
                     "delete": "Kustutatud pöörde piirang"
+                }
+            },
+            "extract": {
+                "restriction": {
+                    "vertex": {
+                        "single": "Seda punkti ei saa eraldada, kuna see lõhuks \"{relation}\" seost."
+                    }
                 }
             }
         },
@@ -364,7 +378,7 @@
             "vertex": "tipp",
             "line": "joon",
             "area": "ala",
-            "relation": "relatsioon"
+            "relation": "seos"
         },
         "geocoder": {
             "search": "Otsi kogu maailmast...",
@@ -389,8 +403,9 @@
             "all_fields": "Kõik väljad",
             "all_tags": "Kõik sildid",
             "all_members": "Kõik liikmed",
-            "all_relations": "Kõik relatsioonid",
-            "new_relation": "Uus relatsioon...",
+            "all_relations": "Kõik seosed",
+            "new_relation": "Uus seos...",
+            "choose_relation": "Vali seosele vanem",
             "role": "Roll",
             "choose": "Vali objekti liik",
             "results": "{n} tulemust otsingule {search}",
@@ -418,7 +433,7 @@
             "none": "Puudub",
             "node": "Sõlm",
             "way": "Joon",
-            "relation": "Relatsioon",
+            "relation": "Seos",
             "location": "Asukoht",
             "add_fields": "Lisa väli:"
         },
@@ -430,7 +445,6 @@
             "switch": "Vaheta tagasi selle tausta vastu",
             "custom": "Kohandatud",
             "overlays": "Ülekatted",
-            "imagery_source_faq": "Pildimaterjali teave / teata probleemist",
             "reset": "lähtesta",
             "display_options": "Kuvasuvandid",
             "brightness": "Heledus",
@@ -469,7 +483,6 @@
                     "title": "Kohandatud kaardiandmed"
                 }
             },
-            "fill_area": "Täida alad",
             "map_features": "Kaardikuva",
             "autohidden": "Need objektid on automaatselt peidetud, sest neid oleks ekraanil liiga palju. Suumi sisse, et neid muuta.",
             "osmhidden": "Need objektid on automaatselt peidetud, sest OpenStreetMapi kiht on peidetud."
@@ -576,7 +589,7 @@
                 "deleted": "Kasutaja {user} on selle objekti kustutanud.",
                 "location": "Seda objekti olete liigutanud nii sina kui ka kasutaja {user}.",
                 "nodelist": "Sõlmi olete muutnud nii sina kui ka kasutaja {user}.",
-                "memberlist": "Relatsiooni liikmeid olete muutnud nii sina kui ka kasutaja {user}.",
+                "memberlist": "Seose liikmeid olete muutnud nii sina kui ka kasutaja {user}.",
                 "tags": "Määrasid sildi <b>{tag}</b> väärtuseks \"{local}\", {user} aga määras väärtuseks \"{remote}\"."
             }
         },
@@ -613,7 +626,18 @@
                 "ignore": "Ignoreeri (Ei Ole Viga)",
                 "save_comment": "Salvesta Kommentaar",
                 "close_comment": "Sulge ja Kommenteeri",
-                "ignore_comment": "Ignoreeri ja Kommenteeri"
+                "ignore_comment": "Ignoreeri ja Kommenteeri",
+                "error_parts": {
+                    "this_relation": "see seos"
+                },
+                "errorTypes": {
+                    "180": {
+                        "title": "Tüübita seos"
+                    },
+                    "285": {
+                        "description": "{var1} has \"admin_level={var2}\" but belongs to a relation with lower \"admin_level\" (e.g. higher priority); it should have the lowest \"admin_level\" of all relations."
+                    }
+                }
             }
         },
         "streetside": {
@@ -657,6 +681,9 @@
             "editing": {
                 "keyboard_h": "Kiirklahvid"
             },
+            "relations": {
+                "title": "Seosed"
+            },
             "notes": {
                 "title": "Märked"
             }
@@ -668,6 +695,20 @@
                 "hidden_issues": {
                     "none": "Avastatud vead ilmuvad siia",
                     "elsewhere": "Vead mujal: {count}"
+                }
+            },
+            "missing_role": {
+                "message": "{member} on puudu roll seoes \"{relation}\"",
+                "tip": "Otsi seoseid puuduvate või ebakorrektsete liikmerollidega."
+            },
+            "missing_tag": {
+                "relation_type": {
+                    "message": "{feature} on tüübita seos"
+                }
+            },
+            "fix": {
+                "remove_from_relation": {
+                    "title": "Eemalda seosest"
                 }
             }
         },
@@ -825,6 +866,10 @@
                 "attraction": {
                     "label": "Tüüp"
                 },
+                "bar": {
+                    "label": "Baar",
+                    "terms": "pubi"
+                },
                 "barrier": {
                     "label": "Tüüp"
                 },
@@ -832,13 +877,15 @@
                     "label": "Tüüp"
                 },
                 "bench": {
-                    "label": "Pink"
+                    "label": "Pink",
+                    "terms": "tool, iste,istekoht"
                 },
                 "bicycle_parking": {
                     "label": "Tüüp"
                 },
                 "bin": {
-                    "label": "Prügikast"
+                    "label": "Prügikast",
+                    "terms": "olmeprügi,jäätme"
                 },
                 "board_type": {
                     "label": "Tüüp"
@@ -862,13 +909,29 @@
                     "label": "Tüüp"
                 },
                 "building": {
-                    "label": "Hoone"
+                    "label": "Hoone",
+                    "terms": "ehitis,maja,rajatis"
+                },
+                "building/levels/underground": {
+                    "label": "Maaaluseid korruseid",
+                    "placeholder": "2, 4, 6..."
+                },
+                "building/levels_building": {
+                    "label": "Hoone korruseid",
+                    "placeholder": "2, 4, 6..."
+                },
+                "building/material": {
+                    "label": "Materjal"
                 },
                 "building_area": {
                     "label": "Hoone"
                 },
                 "bunker_type": {
                     "label": "Tüüp"
+                },
+                "cables": {
+                    "label": "Kaableid",
+                    "placeholder": "1, 2, 3..."
                 },
                 "capacity": {
                     "label": "Mahtutavus"
@@ -1860,9 +1923,6 @@
                 "amenity/police": {
                     "name": "Politsei"
                 },
-                "amenity/post_box": {
-                    "name": "Kirjakast"
-                },
                 "amenity/post_office": {
                     "name": "Postkontor"
                 },
@@ -2477,10 +2537,6 @@
                 "highway/primary_link": {
                     "name": "Põhimaantee ühenduslõik"
                 },
-                "highway/raceway": {
-                    "name": "Ringrada (motosport)",
-                    "terms": "autorada, motorada, motokross, rallirada, motospordirada,krossirada"
-                },
                 "highway/residential": {
                     "name": "Elamupiikonna tänav"
                 },
@@ -2663,9 +2719,6 @@
                 },
                 "landuse/commercial": {
                     "name": "Kommertsala"
-                },
-                "landuse/construction": {
-                    "name": "Ehitus"
                 },
                 "landuse/farm": {
                     "name": "Põllumaa"

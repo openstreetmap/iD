@@ -11,12 +11,6 @@
     "tags": {
         "railway": "tram_stop"
     },
-    "terms": [
-        "light rail",
-        "streetcar",
-        "tram",
-        "trolley"
-    ],
     "name": "Tram Stopping Position",
     "searchable": false
 }

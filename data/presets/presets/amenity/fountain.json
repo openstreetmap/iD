@@ -9,6 +9,7 @@
     "moreFields": [
         "covered",
         "indoor",
+        "level",
         "manufacturer"
     ],
     "geometry": [

@@ -109,8 +109,18 @@
             "type": "string"
         },
         "strings": {
-            "description": "Translatable strings options (combo fields)",
-            "type": "object"
+            "description": "Strings sent to transifex for translation",
+            "type": "object",
+            "properties": {
+                "options": {
+                    "description": "Translatable options (combo fields)",
+                    "type": "object"
+                }
+            },
+            "additionalProperties": {
+                "description": "Specialized fields can request translation of arbitrary strings",
+                "type": "object"
+            }
         },
         "snake_case": {
             "description": "If true, replace spaces with underscores in the tag value (combo fields only)",
@@ -133,23 +143,38 @@
         "prerequisiteTag": {
             "description": "Tagging constraint for showing this field in the editor",
             "type": {
-                "type": "object",
-                "properties": {
-                    "key": {
-                        "description": "The key of the required tag",
-                        "type": "string",
-                        "required": true
+                "anyOf": [
+                    {
+                        "type": "object",
+                        "properties": {
+                            "key": {
+                                "description": "The key of the required tag",
+                                "type": "string",
+                                "required": true
+                            },
+                            "value": {
+                                "description": "The value that the tag must have. (alternative to 'valueNot')",
+                                "type": "string"
+                            },
+                            "valueNot": {
+                                "description": "The value that the tag cannot have. (alternative to 'value')",
+                                "type": "string"
+                            }
+                        },
+                        "additionalProperties": false
                     },
-                    "value": {
-                        "description": "The value that the tag must have. (alternative to 'valueNot')",
-                        "type": "string"
-                    },
-                    "valueNot": {
-                        "description": "The value that the tag cannot have. (alternative to 'value')",
-                        "type": "string"
+                    {
+                        "type": "object",
+                        "properties": {
+                            "keyNot": {
+                                "description": "A key that must not be present",
+                                "type": "string",
+                                "required": true
+                            }
+                        },
+                        "additionalProperties": false
                     }
-                },
-                "additionalProperties": false
+                ]
             }
         },
         "terms": {

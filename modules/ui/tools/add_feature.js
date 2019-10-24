@@ -23,12 +23,13 @@ export function uiToolAddFeature(context) {
     };
 
     var allowedGeometry = ['point', 'vertex', 'line', 'area'];
-    var presetBrowser = uiPresetBrowser(context, allowedGeometry, browserDidSelectPreset, browserDidClose);
+    var presetBrowser = uiPresetBrowser(context, allowedGeometry, browserDidSelectPreset, browserDidClose)
+        .scrollContainer(d3_select('#bar'));
 
     var button = d3_select(null);
 
     var key = t('modes.add_feature.key');
-    var keys = [key, '`', '²']; // #5663 - common QWERTY, AZERTY
+    var keys = [key, '`', '²', '@']; // #5663, #6864 - common QWERTY, AZERTY
 
     tool.render = function(selection) {
 
@@ -60,7 +61,10 @@ export function uiToolAddFeature(context) {
             .call(tooltip()
                 .placement('bottom')
                 .html(true)
-                .title(function() { return uiTooltipHtml(t('modes.add_feature.description'), key); })
+                .title(function() {
+                    return uiTooltipHtml(t('modes.add_feature.description'), key);
+                })
+                .scrollContainer(d3_select('#bar'))
             )
             .call(svgIcon('#' + tool.iconName, tool.iconClass));
 
@@ -70,7 +74,7 @@ export function uiToolAddFeature(context) {
 
         button = selection.select('.bar-button');
 
-        presetBrowser.render(selection);
+        selection.call(presetBrowser);
 
         updateEnabledState();
     };

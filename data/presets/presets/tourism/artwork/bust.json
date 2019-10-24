@@ -6,7 +6,8 @@
         "material"
     ],
     "geometry": [
-        "point", "vertex"
+        "point",
+        "vertex"
     ],
     "tags": {
         "tourism": "artwork",

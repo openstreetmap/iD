@@ -106,9 +106,7 @@
             },
             "reverse": {
                 "title": "Draai om",
-                "description": "Maak die lyn ander kant toe gaan.",
-                "key": "V",
-                "annotation": "'n Lyn is omgedraai."
+                "key": "V"
             },
             "split": {
                 "title": "Split",
@@ -577,9 +575,6 @@
                 "amenity/police": {
                     "name": "Polisie"
                 },
-                "amenity/post_box": {
-                    "name": "Posbus"
-                },
                 "amenity/post_office": {
                     "name": "Poskantoor"
                 },
@@ -766,10 +761,6 @@
                 "landuse/cemetery": {
                     "name": "Begrafplaas",
                     "terms": "begrafplaas, kerkhof, dodeakker, godsakker"
-                },
-                "landuse/construction": {
-                    "name": "Konstruksie",
-                    "terms": "Konstruksie"
                 },
                 "landuse/farmyard": {
                     "name": "Plaaswerf",

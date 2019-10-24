@@ -313,9 +313,7 @@
             },
             "reverse": {
                 "title": "Atstatyti",
-                "description": "Pakeisti linijos kryptį.",
-                "key": "V",
-                "annotation": "Pakeista linijos kryptis."
+                "key": "V"
             },
             "split": {
                 "title": "Padalinti",
@@ -605,7 +603,6 @@
                     "zoom": "Priartinti duomenims"
                 }
             },
-            "fill_area": "Pildyti plotus",
             "map_features": "Žemėlapio savybės",
             "autohidden": "Šie objektai buvo automatiškai paslėpti, nes ekrane tektų rodyti per daug. Galite didinti, jei norite juos keisti."
         },
@@ -965,7 +962,6 @@
                 "title": "Atjungtos Linijos"
             },
             "generic_name": {
-                "title": "Įtartini Pavadinimai",
                 "message": "{feature} turi įtartiną pavadinimą \"{name}\""
             },
             "incompatible_source": {
@@ -979,14 +975,7 @@
             "invalid_format": {
                 "title": "Neteisingas Formatavimas",
                 "email": {
-                    "message": "{feature} turi neteisingą el. pašto adresą.",
-                    "message_multi": "{feature} turi ne vieną neteisingą el. pašto adresą.",
                     "reference": "El. Pašto adresai turėtų atrodyti kaip \"user@example.com\"."
-                },
-                "website": {
-                    "message": "{feature} turi neteisingą tinklalapio adresą.",
-                    "message_multi": "{feature} turi keletą neteisingų tinklalapio adresų.",
-                    "reference": "Tinklalapio adresas turėtų prasidėti su \"http\" arba \"https\"."
                 }
             },
             "missing_role": {
@@ -1016,7 +1005,6 @@
                 "title": "Privati Informacija"
             },
             "tag_suggests_area": {
-                "title": "Linijos Pažymėtos, kaip Plotai",
                 "reference": "Plotai turi būti su sujungtais galiniais taškais."
             },
             "unknown_road": {
@@ -1047,9 +1035,6 @@
                 },
                 "remove_from_relation": {
                     "title": "Pašalinti iš ryšio"
-                },
-                "remove_generic_name": {
-                    "title": "Pašalinti pavadinimą"
                 },
                 "set_as_inner": {
                     "title": "Nustatyti kaip vidinį"
@@ -1263,7 +1248,6 @@
                 },
                 "operations": {
                     "title": "Veiksmai",
-                    "reverse": "Pakeisti linijos kryptį",
                     "circularize": "Cirkuliarizuoti uždarą liniją arba plotą"
                 },
                 "commands": {
@@ -2245,15 +2229,6 @@
                 "plant/output/electricity": {
                     "label": "Energijos išvesties galia"
                 },
-                "playground/baby": {
-                    "label": "Vaiko sostas"
-                },
-                "playground/max_age": {
-                    "label": "Maksimalus amžius"
-                },
-                "playground/min_age": {
-                    "label": "Minimalus amžius"
-                },
                 "population": {
                     "label": "Gyventojų skaičius"
                 },
@@ -2950,10 +2925,6 @@
                 "amenity/police": {
                     "name": "Policija",
                     "terms": "policija"
-                },
-                "amenity/post_box": {
-                    "name": "Pašto dėžutė",
-                    "terms": "paštadėžė,pašto dėžė"
                 },
                 "amenity/post_office": {
                     "name": "Paštas",
@@ -3660,10 +3631,6 @@
                 "landuse/commercial": {
                     "name": "Komercinė zona",
                     "terms": "komercinė zona,komercinė,komercija"
-                },
-                "landuse/construction": {
-                    "name": "Statybos",
-                    "terms": "statybos"
                 },
                 "landuse/farm": {
                     "name": "Dirbama žemė"
@@ -4905,9 +4872,6 @@
             "OSM-Colorado": {
                 "name": "OpenStreetMap Koloradas"
             },
-            "OSM-NYC": {
-                "name": "OpenStreetMap Niujorkas"
-            },
             "OSM-Portland": {
                 "name": "OpenStreetMap Portlandas"
             },
@@ -4966,12 +4930,7 @@
                 "name": "OpenStreetMap Peru"
             },
             "osm-latam": {
-                "name": "OpenStreetMap Lotynų Amerika",
-                "events": {
-                    "sotm-latam-2018": {
-                        "where": "Buenos Airės, Argentina"
-                    }
-                }
+                "name": "OpenStreetMap Lotynų Amerika"
             },
             "OSM-Discord": {
                 "name": "OpenStreetMap Discord"
@@ -4989,12 +4948,7 @@
                 "name": "OpenStreetMap Twitter"
             },
             "OSMF": {
-                "name": "OpenStreetMap Fondas",
-                "events": {
-                    "sotm2018": {
-                        "where": "Milanas, Italija"
-                    }
-                }
+                "name": "OpenStreetMap Fondas"
             }
         }
     }

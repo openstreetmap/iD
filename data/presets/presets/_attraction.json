@@ -4,18 +4,18 @@
         "name",
         "attraction",
         "operator",
-        "opening_hours"
-    ],
-    "moreFields": [
-        "charge_fee",
         "opening_hours",
         "fee",
-        "payment_multi",
+        "charge_fee"
+    ],
+    "moreFields": [
         "address",
-        "website",
-        "phone",
         "email",
-        "fax"
+        "fax",
+        "opening_hours",
+        "payment_multi",
+        "phone",
+        "website"
     ],
     "geometry": [
         "point",

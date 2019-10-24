@@ -5,6 +5,7 @@
         "address",
         "building_area",
         "outdoor_seating",
+        "min_age",
         "brewery"
     ],
     "moreFields": [
@@ -14,6 +15,7 @@
         "internet_access",
         "internet_access/fee",
         "internet_access/ssid",
+        "level",
         "microbrewery",
         "opening_hours",
         "payment_multi",

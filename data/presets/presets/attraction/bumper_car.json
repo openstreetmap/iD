@@ -1,5 +1,10 @@
 {
-    "icon": "maki-car",
+    "icon": "fas-car-crash",
+    "moreFields": [
+        "{attraction}",
+        "max_age",
+        "min_age"
+    ],
     "geometry": [
         "point",
         "area"
@@ -12,5 +17,5 @@
     "tags": {
         "attraction": "bumper_car"
     },
-    "name": "Bumper Car"
+    "name": "Bumper Cars"
 }

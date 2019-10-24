@@ -1,7 +1,16 @@
 {
     "icon": "maki-shelter",
-    "fields": ["name", "shelter_type", "building_area", "lit", "bin"],
-    "geometry": ["point", "area"],
+    "fields": [
+        "name",
+        "shelter_type",
+        "building_area",
+        "lit",
+        "bin"
+    ],
+    "geometry": [
+        "point",
+        "area"
+    ],
     "tags": {
         "amenity": "shelter",
         "shelter_type": "picnic_shelter"
@@ -10,6 +19,8 @@
         "key": "shelter_type",
         "value": "picnic_shelter"
     },
-    "terms": ["pavilion"],
+    "terms": [
+        "pavilion"
+    ],
     "name": "Picnic Shelter"
 }

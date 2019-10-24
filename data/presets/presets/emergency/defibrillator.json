@@ -5,6 +5,9 @@
         "ref",
         "operator"
     ],
+    "moreFields": [
+        "level"
+    ],
     "geometry": [
         "point",
         "vertex"
@@ -12,7 +15,7 @@
     "terms": [
         "AED"
     ],
-   "tags": {
+    "tags": {
         "emergency": "defibrillator"
     },
     "name": "Defibrillator"

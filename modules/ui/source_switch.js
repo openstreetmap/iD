@@ -32,7 +32,8 @@ export function uiSourceSwitch(context) {
 
         d3_select(this)
             .text(isLive ? t('source_switch.live') : t('source_switch.dev'))
-            .classed('live', isLive);
+            .classed('live', isLive)
+            .classed('chip', isLive);
 
         osm.switch(isLive ? keys[0] : keys[1]);  // switch connection (warning: dispatches 'change' event)
     }
@@ -42,7 +43,7 @@ export function uiSourceSwitch(context) {
             .append('a')
             .attr('href', '#')
             .text(t('source_switch.live'))
-            .classed('live', true)
+            .attr('class', 'live chip')
             .on('click', click);
     };
 

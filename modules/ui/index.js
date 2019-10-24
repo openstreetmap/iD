@@ -31,6 +31,7 @@ export { uiImproveOsmComments } from './improveOSM_comments';
 export { uiImproveOsmDetails } from './improveOSM_details';
 export { uiImproveOsmEditor } from './improveOSM_editor';
 export { uiInfo } from './info';
+export { uiIssuesInfo } from './issues_info';
 export { uiKeepRightDetails } from './keepRight_details';
 export { uiKeepRightEditor } from './keepRight_editor';
 export { uiLasso } from './lasso';

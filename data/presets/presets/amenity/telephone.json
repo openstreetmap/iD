@@ -11,6 +11,7 @@
     "moreFields": [
         "covered",
         "indoor",
+        "level",
         "lit",
         "wheelchair"
     ],
@@ -21,7 +22,7 @@
     "tags": {
         "amenity": "telephone"
     },
-    "terms":  [
+    "terms": [
         "phone"
     ],
     "name": "Telephone"

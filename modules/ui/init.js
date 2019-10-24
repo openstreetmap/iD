@@ -24,6 +24,7 @@ import { uiHelp } from './help';
 import { uiInfo } from './info';
 import { uiIntro } from './intro';
 import { uiIssues } from './issues';
+import { uiIssuesInfo } from './issues_info';
 import { uiLoading } from './loading';
 import { uiMapData } from './map_data';
 import { uiMapInMap } from './map_in_map';
@@ -69,6 +70,8 @@ export function uiInit(context) {
 
         // Top toolbar
         content
+            .append('div')
+            .attr('id', 'bar-wrap')
             .append('div')
             .attr('id', 'bar')
             .attr('class', 'fillD')
@@ -157,11 +160,6 @@ export function uiInit(context) {
             .attr('id', 'footer-wrap')
             .attr('class', 'footer-show');
 
-        footerWrap
-            .append('div')
-            .attr('id', 'scale-block')
-            .call(uiScale(context));
-
         var aboutList = footerWrap
             .append('div')
             .attr('id', 'info-block')
@@ -203,10 +201,20 @@ export function uiInit(context) {
 
         aboutList
             .append('li')
+            .attr('class', 'issues-info')
+            .attr('tabindex', -1)
+            .call(uiIssuesInfo(context));
+
+        aboutList
+            .append('li')
             .attr('class', 'user-list')
             .attr('tabindex', -1)
             .call(uiContributors(context));
 
+        footerWrap
+            .append('div')
+            .attr('id', 'scale-block')
+            .call(uiScale(context));
 
         // Setup map dimensions and move map to initial center/zoom.
         // This should happen after #content and toolbars exist.
@@ -236,11 +244,13 @@ export function uiInit(context) {
             .call(issues.renderPane)
             .call(help.renderPane);
 
+        ui.info = uiInfo(context);
+
         // Add absolutely-positioned elements that sit on top of the map
         // This should happen after the map is ready (center/zoom)
         overMap
             .call(uiMapInMap(context))
-            .call(uiInfo(context))
+            .call(ui.info)
             .call(uiNotice(context));
 
 

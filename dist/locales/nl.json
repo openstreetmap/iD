@@ -19,6 +19,8 @@
         },
         "modes": {
             "add_feature": {
+                "title": "Voeg een object toe",
+                "description": "Zoek objecten om aan de kaart toe te voegen",
                 "key": "Tab",
                 "result": "{count} resultaat",
                 "results": "{count} resultaten"
@@ -200,6 +202,9 @@
                     "multiple": "De objecten kunnen niet worden verwijderd omdat er aan een aantal Wikidata attrributen gekoppeld zijn."
                 }
             },
+            "downgrade": {
+                "title": "Downgrade"
+            },
             "add_member": {
                 "annotation": "Een element is aan een relatie toegevoegd."
             },
@@ -347,9 +352,11 @@
             },
             "reverse": {
                 "title": "Keer om",
-                "description": "Draai de richting van deze lijn om.",
-                "key": "V",
-                "annotation": "Lijnrichting omgedraaid."
+                "description": {
+                    "line": "Laat deze lijn in tegenovergestelde richting lopen.",
+                    "lines": "Laat deze lijnen in tegenovergestelde richting lopen."
+                },
+                "key": "V"
             },
             "split": {
                 "title": "Splits",
@@ -375,7 +382,8 @@
                 }
             },
             "extract": {
-                "title": "Extraheer"
+                "title": "Extraheer",
+                "key": "E"
             }
         },
         "restriction": {
@@ -564,6 +572,7 @@
             "all_tags": "Alle tags",
             "all_members": "Alle leden",
             "all_relations": "Alle relaties",
+            "add_to_relation": "Voeg aan een relatie toe",
             "new_relation": "Nieuwe relatie …",
             "choose_relation": "Kies een ouderrelatie",
             "role": "Rol",
@@ -618,8 +627,8 @@
             "switch": "Selecteer terug deze achtergrond",
             "custom": "Aangepast",
             "overlays": "Lagen",
-            "imagery_source_faq": "Beeldopname-info / Meld een probleem",
             "reset": "Standaard herstellen",
+            "reset_all": "Reset alles",
             "display_options": "Weergaveopties",
             "brightness": "Helderheid",
             "contrast": "Contrast",
@@ -629,6 +638,9 @@
                 "description": "Toon minikaart",
                 "tooltip": "Toon een kleine, uitgezoomde kaart om je te helpen oriënteren.",
                 "key": "/"
+            },
+            "panel": {
+                "description": "Toon detailpaneel"
             },
             "fix_misalignment": "Verplaatsing van luchtfoto aanpassen",
             "offset": "Sleep ergens in de grijze zone hieronder om de verplaatsing van de luchtfoto aan te passen, of voer de waarden in in meter."
@@ -661,7 +673,6 @@
                     "zoom": "Zoom in op data"
                 }
             },
-            "fill_area": "Vlakken inkleuren",
             "map_features": "Objecttypes tonen/verbergen",
             "autohidden": "Deze objecten zijn automatisch verborgen omdat er anders te veel op het scherm zouden staan. Je kan inzoomen om ze te bewerken.",
             "osmhidden": "Deze objecten zijn automatisch verborgen omdat de OpenStreetMap-laag verborgen is."
@@ -719,6 +730,9 @@
                 "description": "Sporen",
                 "tooltip": "Spoorwegen"
             },
+            "pistes": {
+                "description": "Pistes"
+            },
             "power": {
                 "description": "Energie",
                 "tooltip": "Elektriciteitskabels, energiecentrales, transformatorstations …"
@@ -770,6 +784,9 @@
                 }
             }
         },
+        "restore": {
+            "restore": "Herstel mijn wijzigingen"
+        },
         "save": {
             "title": "Opslaan",
             "help": "Inspecteer je wijzigingen en upload ze naar OpenStreetMap, zodat ze zichtbaar worden voor andere gebruikers.",
@@ -818,6 +835,9 @@
         "confirm": {
             "okay": "Oké",
             "cancel": "Annuleren"
+        },
+        "splash": {
+            "start": "Bewerk nu"
         },
         "source_switch": {
             "live": "live",
@@ -1477,9 +1497,19 @@
             },
             "options": {
                 "what": {
-                    "title": "Controleer:"
+                    "title": "Controleer:",
+                    "edited": "Mijn bewerkingen",
+                    "all": "Alles"
+                },
+                "where": {
+                    "title": "Waar:",
+                    "visible": "In beeld",
+                    "all": "Overal"
                 }
             },
+            "suggested": "Voorgestelde updates:",
+            "enable_all": "Activeer alles",
+            "disable_all": "Deactiveer alles",
             "fix_one": {
                 "title": "fiks"
             },
@@ -1499,9 +1529,6 @@
                 "highway": {
                     "message": "{highway} is niet aangesloten op andere wegen of paden"
                 }
-            },
-            "generic_name": {
-                "title": "Verdachte namen"
             },
             "incompatible_source": {
                 "title": "Verdachte bronnen"
@@ -1530,7 +1557,6 @@
                 "title": "Private informatie"
             },
             "tag_suggests_area": {
-                "title": "Lijnen getagd als vlakken",
                 "message": "{feature} moet een gesloten vlak zijn gebaseerd op de tag \"{tag}\""
             },
             "unknown_road": {
@@ -1547,6 +1573,9 @@
                     "title": "Verbind de einden",
                     "annotation": "Eindpunten van een weg verbonden"
                 },
+                "connect_feature": {
+                    "title": "Verbind deze feature"
+                },
                 "connect_features": {
                     "title": "Verbind de objecten"
                 },
@@ -1559,6 +1588,9 @@
                 "delete_feature": {
                     "title": "Verwijder dit object"
                 },
+                "ignore_issue": {
+                    "title": "Negeer dit issue"
+                },
                 "merge_points": {
                     "title": "Voeg deze punten samen"
                 },
@@ -1570,7 +1602,6 @@
                     "title": "Verwijderd van relatie"
                 },
                 "remove_generic_name": {
-                    "title": "Verwijder de naam",
                     "annotation": "Generieke naam verwijderd"
                 },
                 "remove_tag": {
@@ -1594,6 +1625,9 @@
                 },
                 "set_as_outer": {
                     "title": "Zet als outer"
+                },
+                "square_feature": {
+                    "title": "Maak deze feature vierkant"
                 },
                 "tag_as_disconnected": {
                     "title": "Tag als niet-aangesloten",
@@ -1960,7 +1994,6 @@
                     "merge": "Geselecteerde objecten samenvoegen",
                     "disconnect": "Objecten bij geselecteerde knoop losmaken",
                     "split": "Lijn bij geselecteerde knoop in twee splitsen",
-                    "reverse": "Lijn omkeren",
                     "move": "Geselecteerde objecten verplaatsen",
                     "rotate": "Geselecteerde objecten draaien",
                     "orthogonalize": "Hoeken van lijn of vlak haaks maken",
@@ -3267,15 +3300,6 @@
                 "playground": {
                     "label": "Speelplaatstype"
                 },
-                "playground/baby": {
-                    "label": "Kinderstoeltje"
-                },
-                "playground/max_age": {
-                    "label": "Maximale leeftijd"
-                },
-                "playground/min_age": {
-                    "label": "Minimum leeftijd"
-                },
                 "population": {
                     "label": "Bevolkingsaantal"
                 },
@@ -4382,10 +4406,6 @@
                     "name": "Politiekantoor",
                     "terms": "politie,rijkswacht,gendarmerie"
                 },
-                "amenity/post_box": {
-                    "name": "Brievenbus",
-                    "terms": "postbus,bpost,posterijen,postnl"
-                },
                 "amenity/post_office": {
                     "name": "Postkantoor",
                     "terms": "postbus,brievenbus,bpost,posterijen,postnl"
@@ -4714,10 +4734,6 @@
                 "attraction/big_wheel": {
                     "name": "Reuzenrad",
                     "terms": "panoramisch rad,gondelrad"
-                },
-                "attraction/bumper_car": {
-                    "name": "Botsautootjes",
-                    "terms": "botsauto's"
                 },
                 "attraction/bungee_jumping": {
                     "name": "Bungeespringen",
@@ -5547,10 +5563,6 @@
                     "name": "Verbindingsweg van hoofdweg",
                     "terms": "invoegstrook,oprit,afrit,provinciale weg,primaire weg,gewestweg,provincieweg"
                 },
-                "highway/raceway": {
-                    "name": "Racepiste (motorsport)",
-                    "terms": "formule 1,auto,nascar,karting,motorsport,motorwedstrijd"
-                },
                 "highway/residential": {
                     "name": "Straat",
                     "terms": "woonstraat,residentiële weg,gemeenteweg,gemeentelijke weg,kleine openbare weg"
@@ -5749,10 +5761,6 @@
                 "landuse/commercial": {
                     "name": "Commercieel gebied",
                     "terms": "kantoren,bedrijven,bedrijvenpark"
-                },
-                "landuse/construction": {
-                    "name": "Bouwterrein",
-                    "terms": "constructie,werken,bouwput,bouwkuip"
                 },
                 "landuse/farm": {
                     "name": "Landbouwgrond"
@@ -6339,18 +6347,6 @@
                 "man_made/works": {
                     "name": "Fabriek",
                     "terms": "assemblage,brouwerij,autofabriek,productie,industrie,raffinaderij"
-                },
-                "manhole": {
-                    "name": "Putdeksel",
-                    "terms": "mangat,man-gat,straatpot"
-                },
-                "manhole/drain": {
-                    "name": "Kolk (rioolput)",
-                    "terms": "straatkolk,trottoirkolk,afvoerputje,putje,rioolputje"
-                },
-                "manhole/telecom": {
-                    "name": "Telefonieputdeksel",
-                    "terms": "man-gat,deksel,telecomdeksel,putdeksel,telecomputdeksel,mangat voor telefonie,telefoniestraatpot,telefoniestraatpot"
                 },
                 "natural": {
                     "name": "Natuurlijk"
@@ -8124,6 +8120,10 @@
                 "description": "Geel = Publiek domein kaartgegevens van de US Census. Rood = data niet gevonden in OpenStreetMap",
                 "name": "TIGER Roads 2018"
             },
+            "US-TIGER-Roads-2019": {
+                "description": "Geel = Openbare kaartgegevens van de US Census. Rood = Gegevens die niet in OpenStreetMap zijn gevonden",
+                "name": "TIGER Roads 2019"
+            },
             "USDA-NAIP": {
                 "description": "Het meest recente jaar van DOQQs van het National Agriculture Imagery Program (NAIP) voor de aaneengesloten staten van de Verenigde Staten.",
                 "name": "National Agriculture Imagery Program"
@@ -8149,6 +8149,12 @@
                     "text": "Gerealiseerd met middelen van Brussels UrbIS®© - Distribution & Copyright CIRB"
                 },
                 "name": "UrbIS-Ortho 2018"
+            },
+            "UrbISOrtho2019": {
+                "attribution": {
+                    "text": "Tot stand gekomen door middel van Brussel UrbIS®© - Distributie & Auteursrecht CIRB"
+                },
+                "name": "UrbIS-Ortho 2019"
             },
             "UrbisAdmFR": {
                 "attribution": {
@@ -8501,14 +8507,7 @@
             "OSM-India-facebook": {
                 "name": "OpenStreetMap India",
                 "description": "Verbeter OpenStreetMap in India",
-                "extendedDescription": "Map je in India? Heb je vragen, wil je in contact treden met de community hier? Kom erbij op {Url}. Iedereen is welkom!",
-                "events": {
-                    "sotmasia2018": {
-                        "name": "State of the Map Asia 2018",
-                        "description": "Kom naar het 2018 OpenStreetMap regionale evenement State of the Map Asia in India",
-                        "where": "Indian Institute of Management, Bangalore, India"
-                    }
-                }
+                "extendedDescription": "Map je in India? Heb je vragen, wil je in contact treden met de community hier? Kom erbij op {Url}. Iedereen is welkom!"
             },
             "osm-india-forum": {
                 "name": "OpenStreetMap India forum"
@@ -8677,7 +8676,6 @@
                 "description": "OpenStreetMap Wit-Rusland op Telegram"
             },
             "be-facebook": {
-                "name": "OpenStreetMap BE",
                 "description": "Mappers en OpenStreetMap op Facebook in België"
             },
             "be-forum": {
@@ -8723,8 +8721,7 @@
                 "description": "Kaartportaal, website en contactgegevens van OSM leden in Tsjechie"
             },
             "osmcz-facebook": {
-                "name": "OpenStreetMap CZ op Facebook",
-                "description": "Volg de Tsjechische gemeenschap op Facebook - inclusief vertaalde WeeklyOSM!"
+                "name": "OpenStreetMap CZ op Facebook"
             },
             "osmcz-twitter": {
                 "name": "Tsjechische twitter @osmcz",
@@ -8962,9 +8959,6 @@
             "OSM-Colorado": {
                 "name": "OpenStreetMap Colorado"
             },
-            "OSM-NYC": {
-                "name": "OpenStreetMap NYC"
-            },
             "OSM-Portland": {
                 "name": "OpenStreetMap Portland"
             },
@@ -9119,13 +9113,6 @@
             "OSM-Twitter": {
                 "name": "OpenStreetMap Twitter",
                 "description": "Volg ons op Twitter at {url}"
-            },
-            "OSMF": {
-                "events": {
-                    "sotm2018": {
-                        "where": "Milaan, Italië"
-                    }
-                }
             }
         }
     }

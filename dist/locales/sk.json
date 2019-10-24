@@ -247,9 +247,7 @@
             },
             "reverse": {
                 "title": "Obrátiť smer",
-                "description": "Obrátiť smer čiary na opačnú stranu.",
-                "key": "V",
-                "annotation": "Obrátenie smeru čiary."
+                "key": "V"
             },
             "split": {
                 "title": "Rozdeliť",
@@ -451,7 +449,6 @@
                     "title": "OpenStreetMap dáta"
                 }
             },
-            "fill_area": "Výplň plôch",
             "map_features": "Mapové objekty",
             "autohidden": "Tieto objekty boli automaticky skryté, pretože by ich bolo zobrazených príliš veľa. Pre ich editáciu, priblížte mapu.",
             "osmhidden": "Tieto objekty boli automaticky skryté, pretože vrstva OpenStreetMap nie je vidileľná."
@@ -919,7 +916,6 @@
                     "merge": "Spojiť (zlúčiť) vybrané objekty",
                     "disconnect": "Odpojiť objekty na vybranom uzle",
                     "split": "Rozdeliť čiaru na dve vo vybranom uzle",
-                    "reverse": "Obrátiť smer čiary",
                     "move": "Presunúť vybraný objet",
                     "rotate": "Otočiť vybrané objekty",
                     "circularize": "Usporiadať uzavretú čiaru alebo plochu do kruhu",
@@ -1808,15 +1804,6 @@
                     "label": "Elektrický výkon",
                     "placeholder": "500 MW, 1000 MW, 2000 MW..."
                 },
-                "playground/baby": {
-                    "label": "Detská sedačka"
-                },
-                "playground/max_age": {
-                    "label": "Najvyšší vek"
-                },
-                "playground/min_age": {
-                    "label": "Najnižší vek"
-                },
                 "population": {
                     "label": "Populácia"
                 },
@@ -2576,10 +2563,6 @@
                 "amenity/police": {
                     "name": "Polícia",
                     "terms": "polícia,mestská polícia,verejná bezpečnosť,fízli,poliši,zákon,policia,mestska policia,verejna bezpecnost,fizli,polisi,zakon"
-                },
-                "amenity/post_box": {
-                    "name": "Poštová schránka",
-                    "terms": "schránka,list,zásielka,výber zásielok,schranka,zasielka,vyber zasielok"
                 },
                 "amenity/post_office": {
                     "name": "Pošta",
@@ -3411,10 +3394,6 @@
                 "landuse/commercial": {
                     "name": "Komerčná zóna",
                     "terms": "komercna zona,business park,kancelárie,kancelarie,plocha"
-                },
-                "landuse/construction": {
-                    "name": "Stavenisko",
-                    "terms": "stavba,konstrukcia,konštrukcia,výstavba,vystavba"
                 },
                 "landuse/farm": {
                     "name": "Pestovateľská plocha"

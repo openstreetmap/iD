@@ -8,11 +8,11 @@
     ],
     "moreFields": [
         "dog",
-        "smoking",
-        "website",
-        "phone",
         "email",
-        "fax"
+        "fax",
+        "phone",
+        "smoking",
+        "website"
     ],
     "geometry": [
         "area",

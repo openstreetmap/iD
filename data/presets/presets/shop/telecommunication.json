@@ -1,0 +1,19 @@
+{
+    "icon": "maki-telephone",
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "terms": [
+        "communication",
+        "internet service provider",
+        "isp",
+        "network",
+        "telephone",
+        "voice"
+    ],
+    "tags": {
+        "shop": "telecommunication"
+    },
+    "name": "Telecom Retail Store"
+}

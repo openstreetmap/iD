@@ -2,8 +2,9 @@
     "icon": "maki-playground",
     "fields": [
         "capacity",
-        "playground/baby",
-        "wheelchair"
+        "baby_seat",
+        "wheelchair",
+        "blind"
     ],
     "geometry": [
         "point"

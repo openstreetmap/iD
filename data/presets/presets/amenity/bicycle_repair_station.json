@@ -13,6 +13,7 @@
         "colour",
         "covered",
         "indoor",
+        "level",
         "manufacturer"
     ],
     "geometry": [
@@ -20,13 +21,13 @@
         "vertex"
     ],
     "terms": [
-        "bike",
-        "repair",
-        "chain",
-        "pump",
-        "tools",
-        "stand",
-        "multitool"
+        "bike chain",
+        "bike multitool",
+        "bike repair",
+        "bike tools",
+        "cycle pump",
+        "cycle repair",
+        "cycling"
     ],
     "tags": {
         "amenity": "bicycle_repair_station"
