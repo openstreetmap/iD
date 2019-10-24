@@ -4716,8 +4716,20 @@
                     "name": "Billboard",
                     "terms": ""
                 },
+                "advertising/board": {
+                    "name": "Notice Board",
+                    "terms": ""
+                },
                 "advertising/column": {
                     "name": "Advertising Column",
+                    "terms": ""
+                },
+                "advertising/poster_box": {
+                    "name": "Poster Box",
+                    "terms": ""
+                },
+                "advertising/totem": {
+                    "name": "Advertising Totem",
                     "terms": ""
                 },
                 "aerialway/station": {
