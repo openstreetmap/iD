@@ -125,7 +125,7 @@ export function uiCommit(context) {
 
         // assign tags for imagery used
         var imageryUsed = context.history().imageryUsed().join(';').substr(0, 255);
-        tags.imagery_used = 'https://clarity.maptiles.arcgis.com/arcgis/rest/services/World_Imagery/MapServer/tile/{zoom}/{y}/{x}';
+        tags.imagery_used = 'CMM Aerial Photos April 2018 resolution: 10cm';
         
         // assign tags for closed issues and notes
         var osmClosed = osm.getClosedIDs();

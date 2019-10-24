@@ -23,7 +23,7 @@ var oauth = osmAuth({
     done: authDone
 });
 
-var _blacklists = ['.*\.blablabla(apis)?\..*/(vt|kh)[\?/].*([xyz]=.*){3}.*'];
+var _blacklists = ['.*\.google(apis)?\..*/(vt|kh)[\?/].*([xyz]=.*){3}.*'];
 var _tileCache = { toLoad: {}, loaded: {}, inflight: {}, seen: {}, rtree: rbush() };
 var _noteCache = { toLoad: {}, loaded: {}, inflight: {}, inflightPost: {}, note: {}, closed: {}, rtree: rbush() };
 var _userCache = { toLoad: {}, user: {} };
