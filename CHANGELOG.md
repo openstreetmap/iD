@@ -30,7 +30,7 @@ _Breaking changes, which may affect downstream projects or sites that embed iD, 
 -->
 
 # 2.16.0
-##### Planned: 2019-Oct-15
+##### Planned: 2019-Oct-22
 
 #### :tada: New Features
 * Add Map Features layer showing objects detected in Mapillary images ([#5845], [#6792], thanks [@kratico])
@@ -157,6 +157,7 @@ _Breaking changes, which may affect downstream projects or sites that embed iD, 
 * Add Noise Barrier preset ([#6949])
 * Add Brewing Supply Store preset ([#6866], [#6955], thanks [@simonbilskyrollins])
 * Add presets: Spaceport, Hot Dog Fast Food, Recording Studio, Film Studio, Radio Station, Television Station, Truck Scale, City Hall
+* Update icons for presets including money-related presets, construction presets, utility presets, schools, vending machines, parcel pickups and drop-offs, manholes, Sushi Restaurant, Compressed Air, Psychic, Shower, Bumper Cars, Roller Coaster, Bollard, Lift Gate, Street Lamp, Bleachers, Oil Well, and Wastewater Plant
 * Add Type and Material fields to the Stile preset ([#6857], thanks [@ewnh])
 * Add Waste field to relevant presets ([#6821])
 * Add Hours field to the Recycling Container preset ([#6861])

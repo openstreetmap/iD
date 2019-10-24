@@ -80,7 +80,7 @@
     "minimist": "^1.2.0",
     "mocha": "^6.1.3",
     "mocha-phantomjs-core": "^2.1.0",
-    "name-suggestion-index": "3.2.0",
+    "name-suggestion-index": "3.3.0",
     "npm-run-all": "^4.0.0",
     "object-inspect": "0.4.0",
     "osm-community-index": "0.12.0",
