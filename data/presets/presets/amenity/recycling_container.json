@@ -9,8 +9,10 @@
         "colour",
         "covered",
         "indoor",
+        "level",
         "manufacturer",
-        "material"
+        "material",
+        "opening_hours"
     ],
     "geometry": [
         "point",

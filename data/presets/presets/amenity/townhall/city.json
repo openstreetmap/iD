@@ -1,0 +1,19 @@
+{
+    "icon": "maki-town-hall",
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "terms": [
+        "council",
+        "courthouse",
+        "government",
+        "mayor",
+        "municipality"
+    ],
+    "tags": {
+        "amenity": "townhall",
+        "townhall:type": "city"
+    },
+    "name": "City Hall"
+}

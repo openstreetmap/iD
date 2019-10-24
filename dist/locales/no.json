@@ -1,29 +1,69 @@
 {
     "no": {
         "icons": {
+            "download": "last ned",
             "information": "info",
             "remove": "fjern",
-            "undo": "angre"
+            "undo": "angre",
+            "zoom_to": "zoom til",
+            "copy": "kopier",
+            "open_wikidata": "åpne på wikidata.org",
+            "favorite": "favoritt"
+        },
+        "toolbar": {
+            "inspect": "Inspiser",
+            "undo_redo": "Angre / Utfør likevel",
+            "recent": "Nylige",
+            "favorites": "Favoritter",
+            "add_feature": "Legg til objekt"
         },
         "modes": {
+            "add_feature": {
+                "title": "Legg til et objekt",
+                "description": "Søk etter egenskaper som skal legges til på kartet.",
+                "key": "Tab",
+                "result": "{count} resultat",
+                "results": "{count} resultater"
+            },
             "add_area": {
                 "title": "Område",
                 "description": "Legg til parker, bygninger, innsjøer eller andre områder på kartet.",
-                "tail": "Trykk på kartet for å starte å tegne et område, slik som en park, innsjø eller bygning."
+                "tail": "Trykk på kartet for å starte å tegne et område, slik som en park, innsjø eller bygning.",
+                "filter_tooltip": "områder"
             },
             "add_line": {
                 "title": "Linje",
                 "description": "Legg til hovedveier, gater, gangveier, kanaler eller andre linjer på kartet.",
-                "tail": "Trykk på kartet for å begynne å tegne en vei, sti eller rute."
+                "tail": "Trykk på kartet for å begynne å tegne en vei, sti eller rute.",
+                "filter_tooltip": "linjer"
             },
             "add_point": {
                 "title": "Punkt",
                 "description": "Legg til restauranter, monumenter, postbokser eller andre punkter på kartet.",
-                "tail": "Trykk på kartet for å legge til et punkt."
+                "tail": "Trykk på kartet for å legge til et punkt.",
+                "filter_tooltip": "punkter"
             },
             "add_note": {
                 "title": "Notat",
-                "tail": "Trykk på kartet for å legge til et notat."
+                "label": "Legg til notat",
+                "description": "Fant en feil? La andre kartleggere få vite det.",
+                "tail": "Trykk på kartet for å legge til et notat.",
+                "key": "N"
+            },
+            "add_preset": {
+                "title": "Legg til {feature}",
+                "point": {
+                    "title": "Legg til {feature} som et punkt"
+                },
+                "line": {
+                    "title": "Legg til {feature} som en linje"
+                },
+                "area": {
+                    "title": "Legg til {feature} som et område"
+                },
+                "building": {
+                    "title": "Legg til {feature} som en bygning"
+                }
             },
             "browse": {
                 "title": "Utforsk",
@@ -85,28 +125,45 @@
                     "line": "Gjorde en linje sirkulær.",
                     "area": "Gjorde et område sirkulært."
                 },
-                "not_closed": "Denne kan ikke bli gjort sirkulær, da endene ikke er sammenkoblet.",
-                "too_large": "Denne kan ikke bli gjort sirkulær, da for lite av den er synlig.",
-                "connected_to_hidden": "Denne kan ikke bli sirkulær, da den er koblet til en skjult egenskap."
+                "not_closed": "Denne kan ikke gjøres om til en sirkel, da endene ikke er sammenkoblet.",
+                "too_large": "Denne kan ikke gjøres om til en sirkel, da for lite av den er synlig.",
+                "connected_to_hidden": "Denne kan ikke gjøres om til en sirkel, da den er koblet til et skjult objekt.",
+                "not_downloaded": "Denne kan ikke gjøres om til en sirkel fordi deler av objektet ikke er lastet ned ennå."
             },
             "orthogonalize": {
                 "title": "Rett opp hjørner",
                 "description": {
+                    "vertex": "Rett opp dette hjørnet.",
                     "line": "Rett opp hjørnene på denne linja.",
                     "area": "Rett opp hjørnene i dette området."
                 },
+                "key": "Q",
                 "annotation": {
+                    "vertex": "Rettet opp hjørnet.",
                     "line": "Laget hjørnene på linjen vinkelrette.",
                     "area": "Laget hjørnene på arealet vinkelrette."
                 },
+                "end_vertex": "Denne kan ikke rettes opp fordi den er et endepunkt.",
+                "square_enough": "Denne kan ikke rettes mer opp enn den allerede er.",
                 "not_squarish": "Denne kan ikke rettes opp fordi det er vanskelig å finne hjørner.",
                 "too_large": "Denne kan ikke rettes opp fordi kun noen deler er synlige.",
-                "connected_to_hidden": "Denne kan ikke rettes opp fordi den er knyttet til en skjult kartegenskap."
+                "connected_to_hidden": "Denne kan ikke rettes opp fordi den er knyttet til en skjult kartegenskap.",
+                "not_downloaded": "Denne kan ikke rettes opp fordi deler av objektet ikke er lastet ned ennå."
             },
             "straighten": {
                 "title": "Gjør rett.",
+                "description": {
+                    "points": "Rett ut disse punktene.",
+                    "line": "Rett ut denne linjen."
+                },
                 "key": "S",
-                "too_bendy": "Denne kan ikke rettes ut fordi den er for bøyet."
+                "annotation": {
+                    "points": "Rettet ut flere punkter.",
+                    "line": "Rettet ut en linje."
+                },
+                "too_bendy": "Denne kan ikke rettes ut fordi den er for bøyet.",
+                "connected_to_hidden": "Denne kan ikke rettes ut fordi den er knyttet til et skjult objekt.",
+                "not_downloaded": "Denne kan ikke rettes ut fordi deler av objektet ikke er lastet ned ennå."
             },
             "delete": {
                 "title": "Slett",
@@ -120,23 +177,54 @@
                     "line": "Slettet en linje.",
                     "area": "Slettet et område.",
                     "relation": "Slettet en relasjon.",
-                    "multiple": "Slettet {n} kartegenskaper."
+                    "multiple": "Slettet {n} objekter."
                 },
                 "too_large": {
-                    "single": "Denne kartegenskapen kan ikke slettes fordi kun noen deler av den er synlig.",
-                    "multiple": "Disse kartegenskapene kan ikke slettes fordi kun noen deler av dem er synlige."
+                    "single": "Dette objektet kan ikke slettes, da kun noen deler av det er synlig.",
+                    "multiple": "Disse objektene kan ikke slettes, da kun noen deler av dem er synlige."
                 },
                 "incomplete_relation": {
-                    "single": "Denne kartegenskapen kan ikke slettes fordi den ikke er fullstendig lastet ned.",
-                    "multiple": "Disse kartegenskapene kan ikke slettes fordi de ikke er fullstendig lastet ned."
+                    "single": "Dette objektet kan ikke slettes fordi det ikke er fullstendig lastet ned.",
+                    "multiple": "Disse objektene kan ikke slettes fordi de ikke er fullstendig lastet ned."
                 },
                 "part_of_relation": {
-                    "single": "Denne kartegenskapen kan ikke slettes fordi den er en del av en større relasjon. Du må fjerne den fra relasjonen først.",
-                    "multiple": "Disse kartegenskapene kan ikke slettes fordi de er en del av en større relasjon. Du må fjerne de fra relasjonen først."
+                    "single": "Dette objektet kan ikke slettes fordi det er en del av en større relasjon. Du må fjerne det fra relasjonen først.",
+                    "multiple": "Disse objektene kan ikke slettes fordi de er en del av en større relasjon. Du må fjerne de fra relasjonen først."
                 },
                 "connected_to_hidden": {
-                    "single": "Denne kartegenskapen kan ikke slettes fordi den er koblet til en skjult kartegenskap.",
-                    "multiple": "Disse kartegenskapene kan ikke slettes fordi noen av dem er koblet til en skjult kartegenskap."
+                    "single": "Dette objektet kan ikke slettes fordi det er koblet til et skjult objekt.",
+                    "multiple": "Disse objektene kan ikke slettes fordi noen av dem er koblet til en skjult kartegenskap."
+                },
+                "not_downloaded": {
+                    "single": "Dette objektet kan ikke slettes, da deler av objektet ikke er lastet ned ennå.",
+                    "multiple": "Disse objektene kan ikke slettes, da deler av objektene ikke er lastet ned ennå."
+                },
+                "has_wikidata_tag": {
+                    "single": "Dette objektet kan ikke slettes, da den har en Wikidata-egenskap.",
+                    "multiple": "Disse objektene kan ikke slettes, da noen har Wikidata-egenskaper."
+                }
+            },
+            "downgrade": {
+                "title": "Nedgrader",
+                "description": {
+                    "building_address": "Fjern alle egenskaper som ikke er bygning- eller adresserelatert.",
+                    "building": "Fjern alle egenskaper som ikke er bygningsrelaterte.",
+                    "address": "Fjern alle egenskaper som ikke er adresserelaterte."
+                },
+                "annotation": {
+                    "building": {
+                        "single": "Nedgraderte et objekt til en generell bygning.",
+                        "multiple": "Nedgraderte {n} objekter til generelle bygninger."
+                    },
+                    "address": {
+                        "single": "Nedgraderte et objekt til en adresse.",
+                        "multiple": "Nedgraderte {n} objekter til adresser."
+                    },
+                    "multiple": "Nedgraderte {n} objekter."
+                },
+                "has_wikidata_tag": {
+                    "single": "Dette objektet kan ikke nedgraderes, da den har en Wikidata-egenskap.",
+                    "multiple": "Disse objektene kan ikke nedgraderes, da noen har Wikidata-egenskaper."
                 }
             },
             "add_member": {
@@ -145,12 +233,45 @@
             "delete_member": {
                 "annotation": "Fjernet et medlem fra en relasjon"
             },
+            "reorder_members": {
+                "annotation": "Omgjorde rekkefølgen på medlemmer i en relasjon."
+            },
+            "connect": {
+                "annotation": {
+                    "from_vertex": {
+                        "to_point": "Koblet en linje til et punkt.",
+                        "to_vertex": "Koblet en linje til en annen.",
+                        "to_line": "Koblet en linje til en linje.",
+                        "to_area": "Koblet en linje til et område.",
+                        "to_adjacent_vertex": "Slo sammen nærliggende punkter i en linje.",
+                        "to_sibling_vertex": "Koblet en linje til seg selv."
+                    },
+                    "from_point": {
+                        "to_point": "Slo sammen et punkt med et annet.",
+                        "to_vertex": "Slo sammen et punkt med et annet i en linje.",
+                        "to_line": "Flyttet et punkt til en linje.",
+                        "to_area": "Flyttet et punkt til et område."
+                    }
+                },
+                "relation": "Disse objektene kan ikke kobles sammen fordi de har relasjonsroller som er i konflikt med hverandre.",
+                "restriction": "Disse objektene kan ikke kobles sammen fordi det ville skadet en \"{relation}\" relasjon. "
+            },
             "disconnect": {
                 "title": "Koble fra",
                 "description": "Koble disse linjene/areane fra hverandre",
+                "line": {
+                    "description": "Frakoble denne linjen fra andre objekter."
+                },
+                "area": {
+                    "description": "Frakoble dette området fra andre objekter."
+                },
                 "key": "D",
                 "annotation": "Frakoblet linjer/områder.",
+                "too_large": {
+                    "single": "Denne kan ikke frakobles, da for lite av den er synlig."
+                },
                 "not_connected": "Det er ikke nok linjer/områder her for å kunne frakoble.",
+                "not_downloaded": "Denne kan ikke frakobles, da deler av objektet ikke er lastet den ennå.",
                 "connected_to_hidden": "Denne kan ikke frakobles fordi den er koblet til en skjult kartegenskap.",
                 "relation": "Denne kan ikke frakobles fordi den kobler sammen flere medlemmer av en relasjon."
             },
@@ -158,11 +279,14 @@
                 "title": "Slå sammen",
                 "description": "Slå sammen disse kartegenskapene.",
                 "key": "C",
-                "annotation": "{n} kartegenskaper er slått sammen.",
+                "annotation": "{n} objekter er slått sammen.",
                 "not_eligible": "Disse kartegenskapene kan ikke bli slått sammen.",
                 "not_adjacent": "Disse objektene kan ikke bli slått sammen da endepunktene ikke er sammenkoblet.",
+                "restriction": "Disse objektene kan ikke bli slått sammen fordi det ville skadet en \"{relation}\" relasjon.",
+                "relation": "Disse objektene kan ikke bli slått sammen fordi de har relasjonsroller som er i konflikt med hverandre.",
                 "incomplete_relation": "Disse kartegenskapene kan ikke bli slått sammen fordi minst én av dem er ikke ferdig nedlastet.",
-                "conflicting_tags": "Disse kartegenskapene kan ikke bli slått sammen fordi noen av deres merker har konfliktskapende verdier."
+                "conflicting_tags": "Disse kartegenskapene kan ikke bli slått sammen fordi noen av deres merker har konfliktskapende verdier.",
+                "paths_intersect": "Disse objektene kan ikke bli slått sammen fordi den resulterende stien ville ha krysset seg selv."
             },
             "move": {
                 "title": "Flytt",
@@ -176,7 +300,7 @@
                     "vertex": "Flyttet et punkt på en linje.",
                     "line": "Flyttet en linje.",
                     "area": "Flyttet et område.",
-                    "multiple": "Flyttet flere kartegenskaper."
+                    "multiple": "Flyttet flere objekter."
                 },
                 "incomplete_relation": {
                     "single": "Denne kartegenskapen kan ikke flyttes fordi den ikke er fullstendig lastet ned.",
@@ -189,6 +313,10 @@
                 "connected_to_hidden": {
                     "single": "Denne kartegenskapen kan ikke flyttes fordi den er koblet til en skjult kartegenskap.",
                     "multiple": "Disse kartegenskapene kan ikke flyttes fordi noen av dem er koblet til en skjult kartegenskap."
+                },
+                "not_downloaded": {
+                    "single": "Dette objektet kan ikke flyttes, da deler av objektet ikke er lastet ned ennå.",
+                    "multiple": "Disse objektene kan ikke flyttes, da noen deler av dem ikke er lastet ned ennå."
                 }
             },
             "reflect": {
@@ -213,11 +341,11 @@
                 "annotation": {
                     "long": {
                         "single": "Speilet en kartegenskap om sin lange akse.",
-                        "multiple": "Speilet flere kartegenskaper om sine lange akser."
+                        "multiple": "Speilet flere objekter om sine lange akser."
                     },
                     "short": {
                         "single": "Speilet en kartegenskap om sin korte akse.",
-                        "multiple": "Speilet flere kartegenskaper om sine korte akser."
+                        "multiple": "Speilet flere objekter om sine korte akser."
                     }
                 },
                 "incomplete_relation": {
@@ -230,7 +358,11 @@
                 },
                 "connected_to_hidden": {
                     "single": "Dette objektet kan ikke blir reflektert da det er sammenkoblet med et et skult objekt.",
-                    "multiple": "Disse kartegenskapene kan ikke speilvendes fordi noen av dem er koblet til skjulte kartegenskaper."
+                    "multiple": "Disse objektene kan ikke speilvendes fordi noen av dem er koblet til skjulte objekter."
+                },
+                "not_downloaded": {
+                    "single": "Dette objektet kan ikke speilvendes, da deler av objektet ikke er lastet ned ennå.",
+                    "multiple": "Disse objektene kan ikke speilvendes, da deler av objektene ikke er lastet ned ennå."
                 }
             },
             "rotate": {
@@ -256,13 +388,29 @@
                 "connected_to_hidden": {
                     "single": "Dette objektet kan ikke roteres da det er koblet til et skjult objekt.",
                     "multiple": "Disse objektene kan ikke roteres da de er koblet til skjulte objekter."
+                },
+                "not_downloaded": {
+                    "single": "Dette objektet kan ikke roteres, da deler av objektet ikke er lastet ned ennå.",
+                    "multiple": "Disse objektene kan ikke roteres, da deler av objektene ikke er lastet ned ennå."
                 }
             },
             "reverse": {
                 "title": "Reverser",
-                "description": "Få linjen til å gå motsatt vei.",
+                "description": {
+                    "point": "Snu retningen på dette punktet.",
+                    "points": "Snu retningen på disse punktene.",
+                    "line": "Gjør så denne linjen går motsatt vei.",
+                    "lines": "Gjør så disse linjene går motsatt vei.",
+                    "features": "Snu retningen på disse objektene."
+                },
                 "key": "V",
-                "annotation": "Reverserte en linje."
+                "annotation": {
+                    "point": "Reverserte et punkt.",
+                    "points": "Reverserte flere punkter.",
+                    "line": "Reverserte en linje.",
+                    "lines": "Reverserte flere linjer.",
+                    "features": "Reverserte flere objekter."
+                }
             },
             "split": {
                 "title": "Del",
@@ -286,20 +434,72 @@
                     "create": "La til en svingebegrensning.",
                     "delete": "Fjernet en svingebegrensning."
                 }
+            },
+            "extract": {
+                "title": "Ta ut",
+                "key": "E",
+                "description": {
+                    "vertex": {
+                        "single": "Ta ut dette punktet av moderobjektet."
+                    },
+                    "area": {
+                        "single": "Ta ut et punkt av dette området."
+                    }
+                },
+                "annotation": {
+                    "single": "Tok ut et punkt."
+                },
+                "too_large": {
+                    "area": {
+                        "single": "Et punkt kan ikke taes ut fra dette området, da for lite av den er synlig."
+                    }
+                },
+                "restriction": {
+                    "vertex": {
+                        "single": "Dette punktet kan ikke taes ut fordi det ville skadet en \"{relation}\" relasjon."
+                    }
+                },
+                "connected_to_hidden": {
+                    "vertex": {
+                        "single": "Dette punktet kan ikke taes ut fordi det er koblet til et skjult objekt."
+                    }
+                }
             }
         },
         "restriction": {
             "controls": {
                 "distance": "Distanse",
-                "via": "Via"
+                "distance_up_to": "Opp mot {distance}",
+                "via": "Via",
+                "via_node_only": "Bare punkt",
+                "via_up_to_one": "Opp mot 1 linje",
+                "via_up_to_two": "Opp mot 2 linjer"
             },
             "help": {
+                "indirect": "(indirekte)",
+                "turn": {
+                    "no_left_turn": "INGEN venstresving {indirect}",
+                    "no_right_turn": "INGEN høyresving {indirect}",
+                    "no_u_turn": "INGEN u-sving {indirect}",
+                    "no_straight_on": "INGEN rett frem {indirect}",
+                    "only_left_turn": "BARE venstresving {indirect}",
+                    "only_right_turn": "BARE høyresving {indirect}",
+                    "only_u_turn": "BARE u-sving {indirect}",
+                    "only_straight_on": "BARE rett frem {indirect}",
+                    "allowed_left_turn": "Venstresving tillatt {indirect}",
+                    "allowed_right_turn": "Høyresving tillatt {indirect}",
+                    "allowed_u_turn": "U-sving tillatt {indirect}",
+                    "allowed_straight_on": "Rett frem tillatt {indirect}"
+                },
                 "from": "FRA",
                 "via": "VIA",
                 "to": "TIL",
                 "from_name": "{from} {fromName}",
                 "from_name_to_name": "{from} {fromName} {to} {toName}",
-                "via_names": "{via} {viaNames}"
+                "via_names": "{via} {viaNames}",
+                "select_from": "Klikk for å velge en {from} strekning",
+                "select_from_name": "Klikk for å velge {from} {fromName}",
+                "toggle": "Klikk for \"{turn}\""
             }
         },
         "undo": {
@@ -307,22 +507,30 @@
             "nothing": "Ingen ting å gjøre."
         },
         "redo": {
-            "tooltip": "Omgjør: {action}",
-            "nothing": "Ingen ting å gjøre tilbake."
+            "tooltip": "Utfør likevel: {action}",
+            "nothing": "Ingen ting å utføre likevel."
         },
         "tooltip_keyhint": "Snarvei:",
         "browser_notice": "Denne editor er støttet i Firefox, Chrome, Safari, Opera og Internet Explorer 11 og høyere. Vennligst oppgrader din nettleser eller bruk Potlatch 2 for å redigere kartet.",
         "translate": {
             "translate": "Oversett",
+            "localized_translation_label": "Flerspråklig navn",
             "localized_translation_language": "Velg språk",
-            "localized_translation_name": "Navn"
+            "localized_translation_name": "Navn",
+            "language_and_code": "{language} ({code})"
         },
         "zoom_in_edit": "Zoom inn for å redigere",
+        "login": "Logg inn",
+        "logout": "Logg ut",
         "loading_auth": "Kobler til OpenStreetMap...",
         "report_a_bug": "Rapporter feil",
         "help_translate": "Hjelp til med oversettelse",
+        "sidebar": {
+            "key": "`",
+            "tooltip": "Vis eller skjul sidemenyen."
+        },
         "feature_info": {
-            "hidden_warning": "{count} skjulte kartegenskaper",
+            "hidden_warning": "{count} skjulte objekter",
             "hidden_details": "Disse kartegenskapene er skjult: {details}"
         },
         "status": {
@@ -340,13 +548,17 @@
             "cancel": "Avbryt",
             "changes": "{count} endringer",
             "download_changes": "Last ned osmChange-fil",
+            "errors": "Feil",
             "warnings": "Advarsler",
             "modified": "Endret",
             "deleted": "Slettet",
             "created": "Opprettet",
+            "outstanding_errors_message": "Vennligst løs alle feil først. {count} gjenstår.",
+            "comment_needed_message": "Vennligst angi en kommentar til endringssettet først.",
             "about_changeset_comments": "Angående kommentarer til endringssett",
             "about_changeset_comments_link": "//wiki.openstreetmap.org/wiki/Good_changeset_comments",
-            "google_warning": "Du nevnte Google i kommentaren: husk at det er strengt forbudt å kopiere fra Google Maps."
+            "google_warning": "Du nevnte Google i kommentaren: husk at det er strengt forbudt å kopiere fra Google Maps.",
+            "google_warning_link": "https://www.openstreetmap.org/copyright"
         },
         "contributors": {
             "list": "Redigeringer utført av {users}",
@@ -358,13 +570,16 @@
                 "key": "B",
                 "title": "Bakgrunn",
                 "zoom": "Zoom",
+                "vintage": "Datering",
                 "source": "Kilde",
                 "description": "Beskrivelse",
                 "resolution": "Oppløsning",
                 "accuracy": "Nøyaktighet",
                 "unknown": "Ukjent",
                 "show_tiles": "Vis fliser",
-                "hide_tiles": "Skjul fliser"
+                "hide_tiles": "Skjul fliser",
+                "show_vintage": "Vis datering",
+                "hide_vintage": "Skjul datering"
             },
             "history": {
                 "key": "H",
@@ -378,6 +593,9 @@
                 "unknown": "Ukjent",
                 "link_text": "Historikk på openstreetmap.org",
                 "note_no_history": "Ingen historikk (nytt notat)",
+                "note_comments": "Kommentarer",
+                "note_created_date": "Lager den",
+                "note_created_user": "Laget av",
                 "note_link_text": "Notat på openstreetmap.org"
             },
             "location": {
@@ -391,8 +609,12 @@
                 "selected": "{n} valgt",
                 "geometry": "Geometri",
                 "closed_line": "lukket linje",
+                "closed_area": "lukket område",
+                "center": "Midtpunkt",
+                "perimeter": "Omkrets",
                 "length": "Lengde",
                 "area": "Område",
+                "centroid": "Midtpunkt",
                 "location": "Sted",
                 "metric": "Metrisk",
                 "imperial": "Imperisk",
@@ -401,6 +623,7 @@
         },
         "geometry": {
             "point": "punkt",
+            "vertex": "hjørnepunkter",
             "line": "linje",
             "area": "område",
             "relation": "relasjon",
@@ -408,6 +631,7 @@
         },
         "geocoder": {
             "search": "Søk over hele verden...",
+            "no_results_visible": "Ingen resultater i det synlige området",
             "no_results_worldwide": "Ingen resultater funnet"
         },
         "geolocate": {
@@ -415,24 +639,43 @@
             "locating": "Finner sted, vennligst vent..."
         },
         "inspector": {
+            "zoom_to": {
+                "key": "Z",
+                "title": "Zoom til objektet",
+                "tooltip_feature": "Midtstill og zoom kartet for å sette fokus på dette objektet.",
+                "tooltip_note": "Midtstill og zoom kartet for å sette fokus på dette notatet.",
+                "tooltip_data": "Midtstill og zoom kartet for å sette fokus på disse dataene.",
+                "tooltip_issue": "Midtstill og zoom kartet for å sette fokus på dette problemet."
+            },
             "show_more": "Vis mer",
             "view_on_osm": "Se på openstreetmap.org",
+            "view_on_keepRight": "Se på keepright.at",
             "all_fields": "Alle felter",
-            "all_tags": "Alle tagger",
+            "all_tags": "Alle egenskaper",
             "all_members": "Alle medlemmer",
             "all_relations": "Alle relasjoner",
+            "add_to_relation": "Legg denne til en relasjon",
             "new_relation": "Ny relasjon...",
+            "choose_relation": "Velg en moderrelasjon",
             "role": "Rolle",
             "choose": "Velg egenskapstype",
             "results": "{n} resultater for {search}",
+            "no_documentation_key": "Det er ingen dokumentasjon tilgjengelig.",
+            "edit_reference": "rediger/oversett",
+            "wiki_reference": "Se dokumentasjon",
+            "wiki_en_reference": "Se dokumentasjon på engelsk",
+            "hidden_preset": {
+                "manual": "{features} er skjult. Aktiver dem i Kartdata-menyen.",
+                "zoom": "{features} er skjult. Zoom inn for å se dem."
+            },
             "back_tooltip": "Endre kartegenskap",
             "remove": "Fjern",
             "search": "Søk",
-            "multiselect": "Valgte kartegenskaper",
+            "multiselect": "Valgte objekter",
             "unknown": "Ukjent",
             "incomplete": "<not downloaded>",
-            "feature_list": "Søkeegenskaper",
-            "edit": "Endre funksjon",
+            "feature_list": "Søk etter objekter",
+            "edit": "Endre objekt",
             "check": {
                 "yes": "Ja",
                 "no": "Nei",
@@ -451,7 +694,10 @@
             "way": "Linje",
             "relation": "Relasjon",
             "location": "Sted",
-            "add_fields": "Legg til felt:"
+            "add_fields": "Legg til felt:",
+            "lock": {
+                "suggestion": "\"{label}\"-feltet er låst fordi det er en Wikidata-egenskap. Du kan slette den eller endre egenskapene i Alle egenskaper-delen."
+            }
         },
         "background": {
             "title": "Bakgrunn",
@@ -463,12 +709,22 @@
             "switch": "Bytt tilbake til denne bakgrunnen",
             "custom": "Egendefinert",
             "overlays": "Overlegg",
+            "imagery_problem_faq": "Rapporter et problem med bakgrunnen",
             "reset": "tilbakestill",
+            "reset_all": "Tilbakestill alle",
+            "display_options": "Vis alternativer",
             "brightness": "Lysstyrke",
             "contrast": "Kontrast",
+            "saturation": "Metning",
+            "sharpness": "Skarphet",
             "minimap": {
+                "description": "Vis mini-kart",
                 "tooltip": "Vis et kart som er zoomet ut for å hjelpe med å lokalisere området som vises.",
                 "key": "/"
+            },
+            "panel": {
+                "description": "Vis detaljepanel",
+                "tooltip": "Vis avanserte detaljer om bakgrunnen."
             },
             "fix_misalignment": "Finjuster ortofotoet",
             "offset": "Dra hvor som helst i det grå feltet under for justere ortofotoet. Du kan også angi justeringsverdiene i meter."
@@ -486,11 +742,50 @@
                 "notes": {
                     "tooltip": "Notatdata fra OpenStreetMap",
                     "title": "OpenStreetMap notater"
+                },
+                "keepRight": {
+                    "tooltip": "Oppdaget automatisk kart-problemer fra keepright.at",
+                    "title": "KeepRight Problemer"
+                },
+                "improveOSM": {
+                    "tooltip": "Manglende data ble oppdaget automatisk av improveosm.org",
+                    "title": "ImproveOSM problemer"
+                },
+                "custom": {
+                    "tooltip": "Dra og slipp en datafil på siden, eller klikk knappen for å sette opp",
+                    "title": "Tilpasset kartdata",
+                    "zoom": "Zoom til data"
                 }
             },
-            "fill_area": "Fyll områder",
-            "map_features": "Kartegenskaper",
-            "autohidden": "Disse kartegenskapene har blitt automatisk skjult fordi for mange ville blitt vist på skjermen. Du kan zoome inn for å redigere dem."
+            "style_options": "Stil alternativer",
+            "highlight_edits": {
+                "key": "G"
+            },
+            "map_features": "Objekter",
+            "autohidden": "Disse objektene har blitt automatisk skjult fordi for mange ville blitt vist på skjermen. Du kan zoome inn for å redigere dem.",
+            "osmhidden": "Disse objektene har blitt skjult automatisk, da OpenStreetMap-laget er skjult."
+        },
+        "visual_diff": {
+            "highlight_edits": {
+                "description": "Fremheve endringer",
+                "tooltip": "Uthev endrede objekter"
+            }
+        },
+        "photo_overlays": {
+            "title": "Bilde-overlegg",
+            "traffic_signs": {
+                "title": "Trafikkskilt"
+            },
+            "photo_type": {
+                "flat": {
+                    "title": "Flate bilder",
+                    "tooltip": "Vanlige bilder"
+                },
+                "panoramic": {
+                    "title": "Panoramabilder",
+                    "tooltip": "360°-bilder"
+                }
+            }
         },
         "feature": {
             "points": {
@@ -498,10 +793,12 @@
                 "tooltip": "Interessepunkter"
             },
             "traffic_roads": {
+                "description": "Trafikkveier",
                 "tooltip": "Hovedveier, gater e.l."
             },
             "service_roads": {
-                "description": "Tjenesteveier"
+                "description": "Tjenesteveier",
+                "tooltip": "Stikkveier, parkeringsveier, traktorveier, etc."
             },
             "paths": {
                 "description": "Stier",
@@ -511,8 +808,16 @@
                 "description": "Bygninger",
                 "tooltip": "Bygninger, skur, garasjer osv."
             },
+            "building_parts": {
+                "description": "Bygningsdeler",
+                "tooltip": "3D-bygning- og tak-komponenter"
+            },
+            "indoor": {
+                "description": "Innendørsobjekter",
+                "tooltip": "Rom, korridorer, trappoppganger, etc."
+            },
             "landuse": {
-                "description": "Kartegenskaper for arealbruk",
+                "description": "Objekter for arealbruk",
                 "tooltip": "Skoger, dyrket mark, parker, boligområder, kommersielle områder osv."
             },
             "boundaries": {
@@ -520,18 +825,31 @@
                 "tooltip": "Administrative grenser"
             },
             "water": {
-                "description": "Vannrelaterte egenskaper",
+                "description": "Vannrelaterte objekter",
                 "tooltip": "Elver, innsjøer, bekker, badedammer osv."
             },
             "rail": {
-                "description": "Jernbanerelaterte egenskaper",
+                "description": "Jernbanerelaterte objekter",
                 "tooltip": "Jernbane"
             },
+            "pistes": {
+                "description": "Løyper",
+                "tooltip": "Skiløyper, sledebakker, skøytebane, etc"
+            },
+            "aerialways": {
+                "description": "Luftrelaterte objekter",
+                "tooltip": "Stolheiser, gondoler, zip-lines, etc."
+            },
             "power": {
-                "description": "Kartegenskaper for kraftanlegg",
+                "description": "Objekter for kraftanlegg",
                 "tooltip": "Kraftlinjer, kraftverk osv."
             },
+            "past_future": {
+                "description": "Tidligere/Fremtidige Objekter",
+                "tooltip": "Planlagt, under konstruksjon, forlatt, revet, etc."
+            },
             "others": {
+                "description": "Andre objekter",
                 "tooltip": "Alt annet"
             }
         },
@@ -542,11 +860,42 @@
                 "key": "W"
             },
             "partial": {
-                "description": "Delvis fylt"
+                "description": "Delvis fylt",
+                "tooltip": "Områder tegnes opp med fyll bare rundt kantene. (Anbefalt for nye kartleggere)"
             },
             "full": {
-                "description": "Helfylt"
+                "description": "Helfylt",
+                "tooltip": "Områder tegnes opp med fyll i hele området."
             }
+        },
+        "settings": {
+            "custom_background": {
+                "tooltip": "Endre egendefinert bakgrunn",
+                "header": "Innstillinger for egendefinert bakgrunn",
+                "instructions": "Angi en flis-URL mal. Gyldige parametere er:\n   {zoom} eller {z}, {x}, {y} for Z/X/Y flisskjema\n   {-y} eller {ty} for speilvendte TMS-stil Y koordinater\n   {u} for fjerdedels-flisskjema\n   {switch:a,b,c} for DNS server multipleksing\n\nEksempel:\n{example}",
+                "template": {
+                    "placeholder": "Angi en URL-mal"
+                }
+            },
+            "custom_data": {
+                "tooltip": "Endre det egendefinerte datalaget",
+                "header": "Innstillinger for egendefinerte kartdata",
+                "file": {
+                    "instructions": "Velg en lokal datafil. Støttede filtyper er:\n   .gpx, .kml, .geojson, .json",
+                    "label": "Bla gjennom filer"
+                },
+                "or": "Eller",
+                "url": {
+                    "instructions": "Angi en datafil-URL eller vektorflis-URL mal. Gyldige parametere er:\n   {zoom} eller {z}, {x}, {y} for Z/X/Y flisskjema",
+                    "placeholder": "Angi en URL"
+                }
+            }
+        },
+        "restore": {
+            "heading": "Du har ulagrede endringer",
+            "description": "Ønsker du å gjenopprette ulagrede endringer fra en tidligere redigeringsøkt?",
+            "restore": "Gjenopprett endringene mine",
+            "reset": "Forkast endringene mine"
         },
         "save": {
             "title": "Lagre",
@@ -556,6 +905,7 @@
             "status_code": "Serveren returnerte statuskode {code}",
             "unknown_error_details": "Sørg for at du er koblet til internett",
             "uploading": "Laster opp endringer til OpenStreetMap...",
+            "conflict_progress": "Sjekker etter konflikter: {num} av {total}",
             "unsaved_changes": "Du har ulagrede endringer",
             "conflict": {
                 "header": "Løs opp i endringer i konflikt med dine",
@@ -566,6 +916,7 @@
                 "keep_remote": "Bruk de andre sin",
                 "restore": "Gjenopprett",
                 "delete": "Behold som slettet",
+                "download_changes": "Eller last ned en osmChange-fil",
                 "done": "Alle konflikter er løst!",
                 "help": "En annen bruker endret noen av de samme kartegenskapene som du har endret.\nKlikk på hver kartegenskap nedenfor for å få mer informasjon om konflikten, og velge om du vil beholde\ndine endringer eller den andre brukerens endringer.\n"
             }
@@ -580,11 +931,34 @@
             }
         },
         "success": {
-            "help_link_text": "Detaljer"
+            "just_edited": "Du endret nettopp OpenStreetMap!",
+            "thank_you": "Takk for å ha forbedret kartet.",
+            "thank_you_location": "Takk for å ha forbedret kartet rundt {where}.",
+            "thank_you_where": {
+                "format": "{place}{separator}{region}",
+                "separator": ", "
+            },
+            "help_html": "Endringene dine burde dukke opp på OpenStreetMap i løpet av et par minutter. Det kan ta lengre tid for andre kart å motta oppdateringer.",
+            "help_link_text": "Detaljer",
+            "help_link_url": "https://wiki.openstreetmap.org/wiki/FAQ#I_have_just_made_some_changes_to_the_map._How_do_I_get_to_see_my_changes.3F",
+            "view_on_osm": "Se endringer på OSM",
+            "changeset_id": "Endringssettet ditt #: {changeset_id}",
+            "like_osm": "Liker OpenStreetMap? Snakk med andre:",
+            "more": "Mer",
+            "events": "Hendelser",
+            "languages": "Språk: {languages}",
+            "missing": "Er det noe som mangler fra listen?",
+            "tell_us": "Fortell oss!"
         },
         "confirm": {
             "okay": "OK",
             "cancel": "Avbryt"
+        },
+        "splash": {
+            "welcome": "Velkommen til iD-redigeringsverktøyet for OpenStreetMap",
+            "text": "iD er et brukervennlig, men kraftig verktøy for å bidra til verdens beste frie kart. Dette er versjon {version}. For mer informasjon, se {website} og meld om feil på {github}.",
+            "walkthrough": "Start gjennomgangen",
+            "start": "Rediger nå"
         },
         "source_switch": {
             "live": "direkte",
@@ -605,84 +979,1050 @@
         },
         "cannot_zoom": "Kan ikke zoome ut lenger i gjeldende modus.",
         "full_screen": "Skru av/på fullskjerm.",
+        "QA": {
+            "improveOSM": {
+                "title": "ImproveOSM-oppdagelser",
+                "geometry_types": {
+                    "path": "stier",
+                    "parking": "parkering",
+                    "road": "veier",
+                    "both": "veier og parkering"
+                },
+                "directions": {
+                    "east": "øst",
+                    "north": "nord",
+                    "northeast": "nordøst",
+                    "northwest": "nordvest",
+                    "south": "sør",
+                    "southeast": "sørøst",
+                    "southwest": "sørvest",
+                    "west": "vest"
+                },
+                "error_types": {
+                    "ow": {
+                        "title": "Manglende enveis",
+                        "description": "Langs denne strekningen av {highway}, {percentage}% av {num_trips} spor peker fra {from_node} to {to_node}. Det kan mangle en enveis-egenskap her."
+                    },
+                    "mr": {
+                        "title": "Manglende geometri",
+                        "description": "{num_trips} spor i dette området viser at det kan være utegnede {geometry_type} her.",
+                        "description_alt": "Data fra en tredjepart viser at det kan være utegnede {geometry_type} her."
+                    },
+                    "tr": {
+                        "title": "Manglende svingebegrensning",
+                        "description": "{num_passed} av {num_trips} GPS-spor (i retningen {travel_direction}) svinger fra {from_way} til {to_way} i krysset {junction}. Det kan mangle en \"{turn_restriction}\"-restriksjon her."
+                    }
+                }
+            },
+            "keepRight": {
+                "title": "KeepRight Feil",
+                "detail_title": "Feil",
+                "detail_description": "Beskrivelse",
+                "comment": "Kommentar",
+                "comment_placeholder": "Skriv en kommentar som skal deles med andre brukere.",
+                "close": "Lukk (Feil fikset)",
+                "ignore": "Ignorer (Ikke en feil)",
+                "save_comment": "Lagre kommentar",
+                "close_comment": "Lukk og kommenter",
+                "ignore_comment": "Ignorer og kommenter",
+                "error_parts": {
+                    "this_node": "dette punktet",
+                    "this_way": "denne linja",
+                    "this_relation": "denne relasjonen",
+                    "this_oneway": "denne enveis-veien",
+                    "this_highway": "denne veien",
+                    "this_railway": "denne jernbanen",
+                    "this_waterway": "denne vannveien",
+                    "this_cycleway": "denne sykkelveien",
+                    "this_cycleway_footpath": "denne sykkelveien/fotgjengerveien",
+                    "this_riverbank": "denne elvebredden",
+                    "this_crossing": "denne fotgjengerovergangen",
+                    "this_railway_crossing": "denne jernbaneovergangen",
+                    "this_bridge": "denne brua",
+                    "this_tunnel": "denne tunnelen",
+                    "this_boundary": "denne grensa",
+                    "this_turn_restriction": "denne svingebegrensningen",
+                    "this_roundabout": "denne rundkjøringen",
+                    "this_mini_roundabout": "denne mini-rundkjøringen",
+                    "this_track": "denne traktorveien",
+                    "this_feature": "dette objektet",
+                    "highway": "vei",
+                    "railway": "jernbane",
+                    "waterway": "vannvei",
+                    "cycleway": "sykkelvei",
+                    "cycleway_footpath": "sykkelvei/fotgjengervei",
+                    "riverbank": "elvebredde",
+                    "place_of_worship": "bedested ",
+                    "pub": "pub",
+                    "restaurant": "restaurant",
+                    "school": "skole",
+                    "university": "universitet",
+                    "hospital": "sykehus",
+                    "library": "bibliotek",
+                    "theatre": "teater",
+                    "courthouse": "tinghus",
+                    "bank": "bank",
+                    "cinema": "kino",
+                    "pharmacy": "apotek",
+                    "cafe": "café",
+                    "fast_food": "hurtigmat",
+                    "fuel": "drivstoff",
+                    "from": "fra",
+                    "to": "til",
+                    "left_hand": "venstrekjøring",
+                    "right_hand": "høyrekjøring"
+                },
+                "errorTypes": {
+                    "20": {
+                        "title": "Flere punkter er på samme plass",
+                        "description": "Det er flere enn et punkt på dette stedet. Punkt-IDer: {var1}."
+                    },
+                    "30": {
+                        "title": "Ikke lukket område",
+                        "description": "{var1} har egenskapen \"{var2}\" og burde være en lukket løkke."
+                    },
+                    "40": {
+                        "title": "Umulig enveis-vei",
+                        "description": "Det første punktet {var1} av {var2} er ikke koblet sammen med noen andre veier."
+                    },
+                    "41": {
+                        "description": "Det siste punktet {var1} av {var2} er ikke koblet sammen med noen andre veier."
+                    },
+                    "42": {
+                        "description": "Du kan ikke nå {var1} fordi alle veier som leder fra den er enveis-veier."
+                    },
+                    "43": {
+                        "description": "Du kan ikke nå {var1} fordi alle veier som leder til den er enveis-veier."
+                    },
+                    "50": {
+                        "title": "Nesten veikryss",
+                        "description": "{var1} er veldig nære men ikke koblet til linjen {var2}."
+                    },
+                    "60": {
+                        "title": "Frarådet egenskap",
+                        "description": "{var1} bruker den frarådede egenskapen \"{var2}\". Vennligst bruk \"{var3}\" istedet."
+                    },
+                    "70": {
+                        "title": "Manglende egenskap",
+                        "description": "{var1} har en tom egenskap: \"{var2}\"."
+                    },
+                    "71": {
+                        "description": "{var1} har ingen egenskaper."
+                    },
+                    "72": {
+                        "description": "{var1} er ikke en del av noen linjer og har ingen egenskaper."
+                    },
+                    "73": {
+                        "description": "{var1} har en \"{var2}\"-egenskap men ingen \"highway\"-egenskap."
+                    },
+                    "74": {
+                        "description": "{var1} har en tom egenskap: \"{var2}\"."
+                    },
+                    "75": {
+                        "description": "{var1} har navnet \"{var2}\" men ingen andre egenskaper."
+                    },
+                    "90": {
+                        "title": "Motorvei uten \"ref\"-egenskap",
+                        "description": "{var1} er merket som en motorvei, og trenger derfor en \"ref\", \"nat_ref\" eller \"int_ref\"-egenskap."
+                    },
+                    "100": {
+                        "title": "Bedested uten religion",
+                        "description": "{var1} er markert som et bedested og trenger derfor en religion-egenskap."
+                    },
+                    "110": {
+                        "title": "Interessepunkt uten navn",
+                        "description": "{var1} er markert som et \"{var2}\" og trenger derfor en navn-egenskap."
+                    },
+                    "120": {
+                        "title": "Linje uten punkter",
+                        "description": "{var1} har bare ett eneste punkt."
+                    },
+                    "130": {
+                        "title": "Frakoblet linje",
+                        "description": "{var1} er ikke koblet til resten av kartet."
+                    },
+                    "150": {
+                        "title": "Jernbaneovergang uten egenskaper",
+                        "description": "{var1} av en vei og en jernbane trenger å bli markert som \"railway=crossing\" eller \"railway=level_crossing\"."
+                    },
+                    "160": {
+                        "title": "Lag-konflikt i jernbaner",
+                        "description": "Det er linjer i forskjellige lag (e.g. tunnel eller bro) som møter på {var1}."
+                    },
+                    "170": {
+                        "title": "Objekter merket med FIXME",
+                        "description": "{var1} har en FIXME-egenskap: {var2}"
+                    },
+                    "180": {
+                        "title": "Relasjon uten type",
+                        "description": "{var1} mangler en \"type\"-egenskap."
+                    },
+                    "190": {
+                        "title": "Veier krysser uten felles krysningspunkt",
+                        "description": "{var1} krysser {var2} {var3}, men det er ingen krysningspunkt, bro eller tunnel."
+                    },
+                    "200": {
+                        "title": "Overlappende linjer",
+                        "description": "{var1} overlapper {var2} {var3}."
+                    },
+                    "210": {
+                        "title": "Selvkryssende linje",
+                        "description": "Det er et uspesifisert problem med selvkryssende linjer."
+                    },
+                    "211": {
+                        "description": "{var1} inneholder mer enn ett punkt flere ganger. Punkter er {var2}. Dette kan, men må ikke være en feil."
+                    },
+                    "212": {
+                        "description": "{var1} har bare to forskjellige punkter og inneholder en av dem flere ganger."
+                    },
+                    "220": {
+                        "title": "Feilstavede egenskaper",
+                        "description": "{var1} er markert \"{var2}\" der \"{var3}\" ser ut som \"{var4}\"."
+                    },
+                    "221": {
+                        "description": "{var1} har en mistenkelig egenskap \"{var2}\"."
+                    },
+                    "230": {
+                        "title": "Lag-konflikt",
+                        "description": "{var1} er et kryss med linjer fra forskjellige lag."
+                    },
+                    "231": {
+                        "description": "{var1} er et kryss med linjer fra forskjellige lag: {var2}.",
+                        "layer": "(lag: {layer})"
+                    },
+                    "232": {
+                        "description": "{var1} er markert med \"layer={var2}\". Dette trenger ikke å være et problem, men ser mistenkelig ut."
+                    },
+                    "270": {
+                        "title": "Uvanlig motorveikryss",
+                        "description": "{var1} er et veikryss mellom en motorvei og en annen type vei enn \"motorway\", \"motorway_link\", \"trunk\", \"rest_area\" eller \"construction\". Sammenkobling til \"service\" eller \"unclassified\" er bare gyldig hvis den har \"access=no/private\", eller at den leder til et tjenesteområde langs motorveien, eller hvis det er en \"service=parking_aisle\"."
+                    },
+                    "280": {
+                        "title": "Grense-problem",
+                        "description": "Det er et uspesifisert problem med denne grensa."
+                    },
+                    "281": {
+                        "title": "Grense mangler navn",
+                        "description": "{var1} har ingen navn."
+                    },
+                    "282": {
+                        "title": "Grense mangler administrasjonsnivå ",
+                        "description": "Grensa til {var1} har ingen gyldig \"admin_level\". Vennligst ikke bland administrasjonsnivåer (f.eks. \"6;7\"). Alltid marker med den laveste administrasjonsnivået på alle grenser."
+                    },
+                    "283": {
+                        "title": "Grense er ikke en lukket løkke",
+                        "description": "Grensa til {var1} er ikke en lukket løkke."
+                    },
+                    "284": {
+                        "title": "Grensa er delt",
+                        "description": "Grensa til {var1} er delt her."
+                    },
+                    "285": {
+                        "title": "Grensens \"admin_level\" er for høyt",
+                        "description": "{var1} har \"admin_level={var2}\" men hører til en relasjon med lavere \"admin_level\" (e.g. høyere prioritet); den burde ha den laveste \"admin_level\" av alle relasjoner."
+                    },
+                    "290": {
+                        "title": "Restriksjon-problem",
+                        "description": "Det er et uspesifisert problem med denne restriksjonen."
+                    },
+                    "291": {
+                        "title": "Restriksjon mangler type",
+                        "description": "{var1} har ikke en gjenkjent type."
+                    },
+                    "292": {
+                        "title": "Restriksjon mangler \"from\"-linje",
+                        "description": "{var1} har {var2} \"fra\" medlemmer, mens den bare burde ha en."
+                    },
+                    "293": {
+                        "title": "Restriksjon mangler \"to\"-linje",
+                        "description": "{var1} har {var2} \"to\"-medlemmer, mens den bare burde ha en."
+                    },
+                    "294": {
+                        "title": "Restriksjonens \"from\" eller \"to\" er ikke en linje",
+                        "description": "{var1} har \"from\" eller \"to\"-medlemmer som burde være linjer. {var2}."
+                    },
+                    "295": {
+                        "title": "Restriksjonens \"via\" er ikke et endepunkt",
+                        "description": "{var1} har et \"via\"-medlem (punkt {var2}) som ikke er den siste eller første medlem av \"{var3}\" (linje {var4})."
+                    },
+                    "296": {
+                        "title": "Uvanlig vinkel på restriksjon",
+                        "description": "{var1} har restriksjonstypen \"{var2}\", men vinkelen er {var3} grader. Kanskje restriksjonstypen ikke er riktig?"
+                    },
+                    "297": {
+                        "title": "Feil retning på \"to\"-linjen",
+                        "description": "{var1} samsvarer ikke retningen av \"to\"-linjen {var2}."
+                    },
+                    "298": {
+                        "title": "Overfladisk restriksjon - enveis-vei",
+                        "description": "{var1} kan være overfladisk. Kjøring er allerede forbudt av \"oneway\"-egenskap på {var2}."
+                    },
+                    "300": {
+                        "title": "Manglende fartsgrense",
+                        "description": "{var1} mangler en \"maxspeed\"-egenskap og er markert som en \"motorway\", \"trunk\", \"primary\" eller \"secondary\"."
+                    },
+                    "310": {
+                        "title": "Rundkjøring-problem",
+                        "description": "Det er et uspesifisert problem med denne rundkjøringen."
+                    },
+                    "311": {
+                        "title": "Rundkjøring er ikke en lukket løkke",
+                        "description": "{var1} er en del av en rundkjøring, men er ikke en lukket løkke. (Delte veier mot rundkjøringen burde ikke merkes som rundkjøring)."
+                    },
+                    "312": {
+                        "title": "Rundkjøring har feil retning",
+                        "description": "Hvis {var1} er i et land med {var2}, går ikke rundkjøringen riktig vei."
+                    },
+                    "313": {
+                        "title": "Rundkjøring har få tilkoblede veier",
+                        "description": "{var1} har bare {var2} andre tilkoblede veier. Rundkjøringer har vanligvis 3 eller flere."
+                    },
+                    "320": {
+                        "title": "Feilaktig link-sammenkobling",
+                        "description": "{var1} er markert som \"{var2}\", men har ikke en tilkobling til noen andre \"{var3}\" eller \"{var4}\"."
+                    },
+                    "350": {
+                        "title": "Feilaktig bro-egenskaper",
+                        "description": "{var1} har ingen egenskaper til felles med veiene rundt den som viser denne broens hensikt. Den burde ha en av disse egenskapene: {var2}."
+                    },
+                    "360": {
+                        "title": "Manglende lokalt navn",
+                        "description": "Det ville vært fint om {var1} hadde en egenskap med lokalt navn \"name:XX={var2}\" der XX viser språket på sitt alminnelige navn \"{var2}\"."
+                    },
+                    "370": {
+                        "title": "Dupliserte steder",
+                        "description": "{var1} har egenskaper til felles med veiene rundt linje {var2} {var3} og ser ut til å være overfladisk.",
+                        "including_the_name": "(inkluder navnet {name})"
+                    },
+                    "380": {
+                        "title": "Ikke-fysisk bruk av sport-egenskapen",
+                        "description": "{var1} er markert med \"{var2}\" men har ingen fysiske egenskaper (e.g. \"leisure\", \"bygning\", \"amenity\" eller \"highway\")."
+                    },
+                    "390": {
+                        "title": "Manglende traktorvei-type",
+                        "description": "{var1} har ingen \"tracktype\"-egenskap."
+                    },
+                    "400": {
+                        "title": "Geometri-problem",
+                        "description": "Det er et uspesifisert problem med geometrien her."
+                    },
+                    "401": {
+                        "title": "Manglende svingebegrensning",
+                        "description": "Linjer {var1} og {var2} henger sammen i en veldig skarp vinkel her og det er ingen enveis-egenskap eller svingebergensning her som forbyr svinging."
+                    },
+                    "402": {
+                        "title": "Umulig vinkel",
+                        "description": "{var1} svinger i en veldig skarp vinkel her."
+                    },
+                    "410": {
+                        "title": "Nettside-problem",
+                        "description": "Det er et uspesifisert problem med en kontaktnettside eller URL."
+                    },
+                    "411": {
+                        "description": "{var1} kan ha en utdatert URL: {var2} returnerte HTTP statuskode {var3}."
+                    },
+                    "412": {
+                        "description": "{var1} kan ha en utdatert URL: {var2} inneholdt mistenkelig tekst \"{var3}\"."
+                    },
+                    "413": {
+                        "description": "{var1} kan ha en utdatert URL: {var2} inneholdt ikke nøkkelordene \"{var3}\"."
+                    }
+                }
+            }
+        },
+        "streetside": {
+            "tooltip": "Gatebilder fra Microsoft",
+            "title": "Bing Gatebilder",
+            "report": "Rapporter et problem i forhold til personvern med dette bildet",
+            "view_on_bing": "Vis på Bing Maps",
+            "hires": "Høy oppløsning"
+        },
         "mapillary_images": {
             "tooltip": "Bilder på gate-nivå fra Mapillary"
         },
+        "mapillary_map_features": {
+            "title": "Kartobjekter",
+            "tooltip": "Kartobjekter fra Mapillary",
+            "request_data": "Etterspør data"
+        },
         "mapillary": {
+            "title": "Mapillary",
+            "signs": {
+                "tooltip": "Trafikkskilt fra Mapillary"
+            },
             "view_on_mapillary": "Vis dette bildet på Mapillary"
+        },
+        "openstreetcam_images": {
+            "tooltip": "Bilder på gate-nivå fra OpenStreetCam"
+        },
+        "openstreetcam": {
+            "title": "OpenStreetCam",
+            "view_on_openstreetcam": "Vis dette bildet på OpenStreetCam"
         },
         "note": {
             "note": "Notat",
             "title": "Rediger notat",
+            "anonymous": "anonym",
+            "closed": "(Lukket)",
+            "commentTitle": "Kommentarer",
+            "status": {
+                "opened": "åpnet {when}",
+                "reopened": "gjenåpnet {when}",
+                "commented": "kommentert {when}",
+                "closed": "lukket {when}"
+            },
+            "newComment": "Ny kommentar",
+            "inputPlaceholder": "Skriv en kommentar som skal deles med andre brukere.",
             "close": "Lukk notat",
             "open": "Gjenåpne notat",
+            "comment": "Kommenter",
+            "close_comment": "Lukk og kommenter",
+            "open_comment": "Gjenåpne og kommenter",
+            "report": "Rapporter",
             "new": "Nytt notat",
+            "newDescription": "Beskriv problemet.",
             "save": "Lagre notat",
-            "login": "Du må logge inn for å endre eller kommentere dette notatet."
+            "login": "Du må logge inn for å endre eller kommentere dette notatet.",
+            "upload_explanation": "Kommentarene dine vil bli synlige for alle OpenStreetMap-brukere.",
+            "upload_explanation_with_user": "Kommentarene dine som {user} vil bli synlige for alle OpenStreetMap-brukere."
         },
         "help": {
             "title": "Hjelp",
             "key": "H",
             "help": {
-                "title": "Hjelp"
+                "title": "Hjelp",
+                "welcome": "Velkommen til iD, redigeringsverktøyet for [OpenStreetMap](https://www.openstreetmap.org/). Med dette verktøyet kan du oppdatere OpenStreetMap rett fra nettleseren din.",
+                "open_data_h": "Åpne data",
+                "open_data": "Endringer som du gjør på dette kartet vil være synlige for alle som bruker OpenStreetMap. Endringene dine kan være basert på personlig kunnskap, på-stedet oppdagelser, eller ortofoto samlet ovenfra eller fra bilder på gate-nivå. Å kopiere fra kommersielle kilder, som Google Maps, [er strengt forbudt](https://www.openstreetmap.org/copyright).",
+                "before_start_h": "Før du starter",
+                "before_start": "Du burde gjøre deg kjent med OpenStreetMap og dette verktøyet for du starter å bruke det. iD inneholder en gjennomgang for å lære deg det grunnleggende om redigering av OpenStreetMap. Klikk \"Start gjennomgangen\" på denne skjermen for å ta opplæringen - det tar bare rundt 15 minutter.",
+                "open_source_h": "Åpen kilde",
+                "open_source": "iD redigereren er et åpen-kildekode-prosjekt basert på samarbeid, og du bruker versjon {version} nå. Kildekoden er tilgjengelig [på GitHub](https://github.com/openstreetmap/iD).",
+                "open_source_help": "Du kan hjelpe iD ved å [oversette](https://github.com/openstreetmap/iD/blob/master/CONTRIBUTING.md#translating) eller ved å [rapportere feil](https://github.com/openstreetmap/iD/issues)."
             },
             "overview": {
                 "title": "Oversikt",
-                "navigation_h": "Navigasjon"
+                "navigation_h": "Navigasjon",
+                "navigation_drag": "Du kan dra kartet rundt ved å trykke og holde {leftclick} venstre musetast og flytte musa rundt. Du kan også bruke `↓`, `↑`, `←`, `→`-pilene på tastaturet ditt.",
+                "navigation_zoom": "Du kan zoome ut eller inn ved å scrolle med hjulet på musa eller med touchpadden, eller ved å klikke {plus} / {minus}-knappene langs siden av kartet. Du kan også bruke `+`, `-`-tastene på tastaturet ditt.",
+                "features_h": "Kartobjekter",
+                "features": "Vi bruker ordet *objekt* til å beskrive ting som er på kartet, som veier, bygninger, eller interessepunkter. Alt som eksisterer i den virkelige verden, kan kartlegges som objekter på OpenStreetMap. Kartobjekter er representert på kartet som *punkter*, *linjer* eller *områder*.",
+                "nodes_ways": "På OpenStreetMap, kalles punkter noen ganger *noder*, og linjer og områder kalles noen ganger *veier*."
             },
             "editing": {
+                "title": "Redigere & Lagre",
+                "select_h": "Velg",
+                "select_left_click": "{leftclick} Venstreklikk på et objekt for å velge det. Dette vil utheve det men en pulserende glød, og sidemenyen viser detaljer om det objektet, som navn eller adresse.",
+                "select_right_click": "{rightclick} Høyreklikk på et objekt for å vise redigeringsmenyen, som viser kommandoer som er tilgjengelige, som rotere, flytte eller slette.",
+                "multiselect_h": "Flervalg",
+                "multiselect_shift_click": "`{shift}`+{leftclick} venstreklikk for å velge flere forskjellige objekter samtidig. Dette gjør det enklere å flytte eller slette flere elementer.",
+                "multiselect_lasso": "Andre måter å velge forskjellige objekter er å holde ned `{shift}`-tasten, så hold nede {leftclick} venstre musetast og dra musa rundt for å lage en lasso. Alle punktene inne i lassoen vil bli valgt.",
+                "undo_redo_h": "Angre & utfør likevel",
+                "undo_redo": "Endringene dine er lagret lokalt i nettleseren din helt til du velger å lagre dem til OpenStreetMap-tjeneren. Du kan angre endringer ved å klikke {undo} **Angre**-knappen, og utfør dem likevel ved å klikke {redo} **Redo**-knappen.",
                 "save_h": "Lagre",
+                "save": "Klikk {save} **Lagre** for å fullføre endringene og sende dem til OpenStreetMap. Du burde huske å lagre arbeidet ditt ofte!",
+                "save_validation": "I Lagre-menyen, kan du se over det du har gjort. iD vil også gjøre noen grunnleggende tester for å sjekke etter manglende data og kan gi deg noen hjelpsomme forslag og advarsler hvis noe virker galt.",
                 "upload_h": "Last opp",
-                "keyboard_h": "Tastatursnarveier"
+                "upload": "Før du laster opp endringene dine må du angi en [endringssett](https://wiki.openstreetmap.org/wiki/Good_changeset_comments). Så klikk **Last opp** for å sende endringene dine til OpenStreetMap, der de vil bli slått sammen med det store kartet og være offentlig for alle.",
+                "backups_h": "Automatisk Sikkerhetskopiering",
+                "backups": "Hvis du ikke gjør deg ferdig i løpet av en økt, for eksempel hvis datamaskinen stopper eller du lukker nettleserfanen, er endringene dine fortsatt lagret i nettleserens mellomlager. Du kan komme tilbake senere (i samme nettleser og PC), og iD vil tilby deg å gjenopprette arbeidet ditt.",
+                "keyboard_h": "Tastatursnarveier",
+                "keyboard": "Du kan se en liste med tastatursnarveier ved å trykke `?`-tasten."
+            },
+            "feature_editor": {
+                "title": "Objektredigerer",
+                "intro": "*Objektredigereren* viser seg til siden av kartet, og lar deg se og endre all informasjonen til det valgte objektet.",
+                "definitions": "Den øverste delen viser objektets type. Den midterste delen inneholder *felt* som viser objektets egenskaper, slik som navnet eller adressen.",
+                "type_h": "Objekttypen",
+                "type": "Du kan klikke på objekttypen for å endre objektet til en annen type. Alt som eksisterer i den virkelige verden kan legges til på OpenStreetMap, så det er tusener av objekttyper å velge mellom.",
+                "type_picker": "Type-velgeren viser de vanligste objekttypene, slik som parker, sykehus, restauranter, veier og bygninger. Du kan søke etter hva som helst i søkefeltet. Du kan også klikke {inspect} **Info**-ikonet ved siden av objekttypen for å lære mer om det.",
+                "fields_h": "Felt",
+                "fields_all_fields": "\"Alle felt\"-delen inneholder alle objektets detaljer som du kan endre på. På OpenStreetMap er alle feltene er valgfrie, og det går helt fint å la et felt stå blankt hvis du er usikker.",
+                "fields_example": "Hver objekttype vil vise forskjellige felter. For eksempel, en vei kan vise felter for overflaten eller fartsgrensa, mens en restaurant kan vise felt for typen mat de serverer og når den åpner.",
+                "fields_add_field": "Du kan også klikke rullegardinmenyen \"Legg til felt\" for å legge til flere felt, slik som beskrivelse, Wikipedia-link, rullestoltilgang, og mer.",
+                "tags_h": "Egenskaper",
+                "tags_all_tags": "Under feltenes del, du kan utvide \"Alle egenskaper\" delen for å endre alle OpenStreetMap *tags* for det valgte objektet. Hver egenskap består av en *nøkkel* og en *verdi*, som er dataelementer som definerer alle de forskjellige objektene lagret på OpenStreetMap.",
+                "tags_resources": "Å redigere et objekts egenskaper behøver passe med kunnskap om OpenStreetMap. Du burde se i ressursene som [OpenStreetMap Wikien](https://wiki.openstreetmap.org/wiki/Main_Page) eller [Taginfo](https://taginfo.openstreetmap.org/) for å lære mer om akseptert OpenStreetMap-egenskaper og bruken av de."
             },
             "points": {
                 "title": "Punkter",
+                "intro": "*Punkter* kan brukes til å representere objekter slik som butikker, restauranter og monumenter. De markerer en spesifik posisjon og beskriver hva som er der.",
                 "add_point_h": "Legge til Punkter",
+                "add_point": "For å legge til et punkt, klikk {punkt} **Punkt**-knappen på verktøylinjen over kartet, eller trykk snarveistasten `1`. Dette vil endre musepekeren til et kryss-symbol.",
+                "add_point_finish": "For å plassere et nytt punkt på kartet, flytt musa der du vil ha punktet, så {leftclick} venstreklikk eller trykk `Space`.",
                 "move_point_h": "Flytte Punkter",
-                "delete_point_h": "Slette Punkter"
+                "move_point": "For å flytte et punkt, plasser musepekeren over punktet, så trykk og hold {leftclick} venstre museknapp mens du drar punktet til den nye plasseringen.",
+                "delete_point_h": "Slette Punkter",
+                "delete_point": "Det er greit å slette objekter som ikke finnes i den virkelige verden. Ved å slette en kartegenskap fra OpenStreetMap, fjernes den fra kartet som alle bruker, så du bør forsikre deg om at objektet virkelig ikke finnes lengre før du sletter den.",
+                "delete_point_command": "For å slette et punkt, {rightclick} høyreklikk punktet for å velge det og vise redigeringsmenyen, så velg {delete} **Slett**-kommandoen."
             },
             "lines": {
                 "title": "Linjer",
+                "intro": "*Linjer* brukes til å representere objekter slik som veier, jernbaner og elver. Linjer burde tegnes langs midten av objektet de representerer.",
                 "add_line_h": "Legge til Linjer",
+                "add_line": "For å legge en linje til kartet, klikk {line} **Linje**-knappen på verktøylinjen over kartet, eller trykk snarveitasten `2`. Dette vil endre musepekeren til et kryss-symbol.",
+                "add_line_draw": "Så, plasser musepekeren der linjen skal starte og {leftclick} venstreklikk eller trykk `Space` for å starte med å plassere noder langs linjen. Fortsett med å plassere noder ved å klikke eller ved å trykke `Space`. Mens du tegner, kan du zoome inn eller panorere kartet for å legge til flere detaljer.",
+                "add_line_finish": "For å fullføre en linje, trykk `{return}` eller klikk igjen på den siste noden.",
                 "modify_line_h": "Endre Linjer",
+                "modify_line_dragnode": "Ofte vil du se linjer som ikke er riktig formet, for eksempel en vei som ikke samsvarer med ortofotoet i bakgrunnen. For å endre formen på linja, først {leftclick} venstreklikk for å velge den. Alle dens noder vil dukke opp som små sirkler. Du kan så dra nodene til bedre plasseringer.",
+                "modify_line_addnode": "Du kan også lage nye noder langs en linje enten ved å {leftclick}**x2** dobbeltklikke på linjen eller ved å dra i de små trekantene imellom linjens noder.",
                 "connect_line_h": "Koble sammen Linjer",
+                "connect_line": "At veier er koblet sammen ordentlig er viktig for kartet, slik at den kan gi nøyaktige kjøreruter.",
+                "connect_line_display": "Koblingene mellom veier er tegnet med grå sirkler. Endepunktene på en linje er tegnet med større hvite sirkler hvis de ikke er koblet til noe.",
+                "connect_line_drag": "For å koble en linje til et annet objekt, dra en av linjens noder til det andre objektet slik at begge objekter smetter sammen. Tips: Du kan holde nede `{alt}`-tasten for å forhindre noder fra å koble sammen med andre objekter.",
+                "connect_line_tag": "Hvis du vet at krysset har trafikklys eller overganger, kan du legge dem til ved å velge krysspunktet og bruke objektredigereren til å velge den riktige typen egenskaper til objektet.",
                 "disconnect_line_h": "Koble Linjer fra Hverandre",
+                "disconnect_line_command": "For å koble en vei fra et annet objekt, {rightclick} høyreklikk den delte noden og velg {disconnect} **Koble fra**-kommandoen fra redigeringsmenyen.",
                 "move_line_h": "Flytte Linjer",
-                "delete_line_h": "Slette Linjer"
+                "move_line_command": "For å flytte en hel linje, {rightclick} høyreklikk linjen og velg {mode} **Flytt**-kommandoen fra redigeringsmenyen. Så flytt musa og {leftclick} venstreklikk for å plassere linjen på det nye stedet.",
+                "move_line_connected": "Linjer som er koblet sammen med andre objekter vil fortsatt være tilkoblet mens du flytter linjen til et nytt sted. iD kan forhindre deg i å flytte en linje over en annen tilkoblet linje.",
+                "delete_line_h": "Slette Linjer",
+                "delete_line": "Hvis en linje ligger helt feil, for eksempel en vei som ikke eksisterer i den virkelige verden, er det OK å slette den. Vær forsiktig med å slette objekter: ortofototet i bakgrunnen du bruker kan være utdatert og en vei som ser feil ut kan bare være nylig bygget.",
+                "delete_line_command": "For å slette en linje, {rightclick} høyreklikk på linjen for å velge den og vise redigeringsmenyen, så bruk {delete} **Slett**-kommandoen."
             },
             "areas": {
                 "title": "Områder",
+                "intro": "*Områder* brukes for å vise grensen på objekter som innsjøer, bygninger og boligfelt. Områder skal tegnes rundt kanten på objektet den representerer, for eksempel rundt bunnen av en bygning.",
                 "point_or_area_h": "Punkter eller Områder?",
+                "point_or_area": "Mange objekter kan representeres som punkter eller områder. Du burde kartlegge bygninger og objekter med tydelige omkretser som områder når mulig. Plasser punkter innenfor bygningens område for å representere bedrifter, tjenester og andre objekter som finnes inne i bygningen.",
                 "add_area_h": "Legge til Områder",
+                "add_area_command": "For å legge et område til kartet, klikk {area} **Area**-knappen på verktøylinjen over kartet, eller trykk snarveitasten `2`. Dette vil endre musepekeren til et kryss-symbol.",
+                "add_area_draw": "Så, plasser musepekeren på en av hjørnene som området skal ha og {leftclick} venstreklikk eller trykk `Space` for å starte med å plassere noder langs kanten på området. Fortsett med å plassere noder ved å klikke eller ved å trykke `Space`. Mens du tegner, kan du zoome inn eller panorere kartet for å legge til flere detaljer.",
+                "add_area_finish": "For å fullføre et område, trykk `{return}` eller klikk igjen på den første eller siste noden.",
                 "square_area_h": "Rette ut Vinkler",
+                "square_area_command": "Mange områder som bygninger har kvadratiske hjørner. For å rette opp hjørnene til et område, {rightclick} høyreklikk kanten på et område og velg {orthogonalize} **Rett opp**-kommandoen fra redigeringsmenyen.",
                 "modify_area_h": "Endre Områder",
-                "delete_area_h": "Slette Områder"
+                "modify_area_dragnode": "Ofte vil du se områder som ikke er riktig formet, for eksempel en bygning som ikke samsvarer med ortofotoet i bakgrunnen. For å endre formen på området, først {leftclick} venstreklikk for å velge den. Alle dens noder vil dukke opp som små sirkler. Du kan så dra nodene til bedre plasseringer.",
+                "modify_area_addnode": "Du kan også lage nye noder langs et område enten ved å {leftclick}**x2** dobbeltklikke på kanten til området eller ved å dra i de små trekantene imellom områdets noder.",
+                "delete_area_h": "Slette Områder",
+                "delete_area": "Hvis et område ligger helt feil, for eksempel en bygning som ikke eksisterer i den virkelige verden, er det OK å slette den. Vær forsiktig med å slette objekter: ortofototet i bakgrunnen du bruker kan være utdatert og en bygning som ser feil ut kan bare være nylig bygget.",
+                "delete_area_command": "For å slette et område, {rightclick} høyreklikk på området for å velge den og vise redigeringsmenyen, så bruk {delete} **Slett**-kommandoen."
             },
             "relations": {
                 "title": "Relasjoner",
+                "intro": "En *relation* er et spesielt type objekt på OpenStreetMap som grupperer sammen andre objekter. Objektene som tilhører relasjonen kalles *medlemmer*, og hvert medlem kan ha en *rolle* i en relasjon.",
                 "edit_relation_h": "Endre Relasjoner",
+                "edit_relation": "På bunnen av objektsredigereren, kan du utvide \"Alle relasjoner\"-delen for å se om objektet er en del av noen relasjoner. Så kan du klikke på relasjonen for å velge den og endre den.",
+                "edit_relation_add": "For å legge et objekt til en relasjon, velg objektet, så klikk {plus} Legg til-knappen i \"Alle relasjoner\"-delen i objektredigereren. Du kan velge blant en liste med relasjoner i nærheten, eller velg \"Ny relasjon...\"-valget.",
+                "edit_relation_delete": "Du kan også klikke {delete} **Slett**-knappen for å slette det valgte objektet fra relasjonen. Hvis du fjerner alle medlemmene fra relasjonen, vil relasjonen automatisk bli slettet.",
+                "maintain_relation_h": "Opprettholde Relasjoner",
+                "maintain_relation": "For det meste vil iD opprettholde relasjonene automatisk mens du redigerer. Du burde passe på når du bytter ut relasjoner som kan være medlem av en relasjon. For eksempel, hvis du sletter en del av en vei og tegner en ny strekning for å erstatte den, burde du legge den nye strekningen til den samme relasjonen (ruter, svingebegrensninger, etc.) som originalen var medlem i.",
                 "relation_types_h": "Typer Relasjoner",
                 "multipolygon_h": "Multipolygoner",
+                "multipolygon": "En *multipolygon*-relasjon er en gruppe av en eller flere *ytre*-objekter og en eller flere *indre*-objekter. De ytre objektene definerer de ytre kantene til multipolygonet, og de indre objektene definerer indre grenser inne i multipolygoner som hull i området.",
+                "multipolygon_create": "For å lage et multipolygon, for eksempel en bygning med et hull i midten, tegn den ytre delen som et område og det indre hullet som en linje eller et annen type område. Så `{shift}`+{leftclick} venstreklikk for å velge begge objektene, {rightclick} for å vise redigeringsmenyen og velg {merge} **Slå sammen**-kommandoen.",
+                "multipolygon_merge": "Å slå sammen flere linjer eller områder vil lage et nytt multipolygon med alle de valgte objektene som medlemmer. iD vil automatisk gi indre og ytre roller, basert på hvilke egenskaper som er på innsiden av andre objekter.",
                 "turn_restriction_h": "Sving-begrensing",
+                "turn_restriction": "En *svingebegrensning*-relasjon er en gruppe med flere veistrekninger i et veikryss. Svingebegrensninger består av en *fra*-vei, *via*-node eller veier, og en *til*-vei.",
+                "turn_restriction_field": "For å endre en svingebegrensning, velg en veikryss-node der to eller flere veier møtes. Objektredigereren vil vise et spesielt \"Svingebegrensning\"-felt som inneholder en modell av veikrysset.",
+                "turn_restriction_editing": "I \"Svingebegrensning\"-feltet, klikk for å velge en \"fra\"-vei, og se om svingen er tillatt eller forbudt mot en av \"til\"-veiene. Du kan klikke på sving-ikonene for å gjøre svingen forbudt eller tillatt. iD vil lage relasjoner automatisk og angi fra, via og til-rollene basert på valgene dine.",
                 "route_h": "Ruter",
-                "boundary_h": "Grenser"
+                "route": "En *rute*-relasjon er en gruppe med en eller flere linjer som danner et rutenettverk, som en bussrute, togrute, eller veirute.",
+                "route_add": "For å legge et objekt til en rute-relasjon, velg objektet og scroll ned til \"Alle relasjoner\"-delen i objektredigereren, så klikk {plus} Legg til-knappen for å legge dette objektet til en eksisterende relasjon eller en ny relasjon.",
+                "boundary_h": "Grenser",
+                "boundary": "En *grense*-relasjon er en gruppe med en eller flere linjer som sammen danner en administrativ grense.",
+                "boundary_add": "For å legge et objekt til en grense-relasjon, velg objektet og scroll ned til \"Alle relasjoner\"-delen i objektredigereren, så klikk {plus} Legg til-knappen for å legge dette objektet til en eksisterende relasjon eller en ny relasjon."
             },
             "notes": {
                 "title": "Notater",
-                "save_note_h": "Lagrer notater"
+                "intro": "*Notater* brukes for å varsle andre om at et objekt trenger oppmerksomhet. Notater markerer et spesifikt område på kartet. For å se eksisterende notater eller for å legge til en ny, klikk {data} **Kartdata**-panelet for å aktivere OpenStreetMap-notater laget.",
+                "add_note_h": "Å legge til notater",
+                "add_note": "For å legge et notat til kartet, klikk {note} **Notat**-knappen på verktøylinjen over kartet, eller trykk snarveitasten `4`. Dette vil endre musepekeren til et kryss-symbol. For å plassere et nytt notat på kartet, plasser musepekeren hvor notatet skal være, og {leftclick} venstreklikk eller trykk `Space`.",
+                "move_note": "Bare nye notater kan flyttes. For å flytte et notat, plasser musepekeren over det nye notatet, så trykk og hold {leftclick} venstre museknapp mens du drar notatet til den nye plasseringen.",
+                "update_note_h": "Lukke, gjenåpne og kommentere",
+                "update_note": "Et eksisterende notat kan oppdateres ved å lukke den, gjenåpne den eller ved å legge til en kommentar. Det å lukke et notat indikerer at problemet er blitt fikset. Det å gjenåpne et notat indikerer at det opprinnelige problemet ikke er blitt løst.",
+                "save_note_h": "Lagrer notater",
+                "save_note": "Du må lagre endringer på notater individuelt ved å klikke knappene under notatens kommentarer. Endringer på notater er **ikke** inkludert i endringssett du laster opp til OpenStreetMap."
+            },
+            "imagery": {
+                "title": "Bakgrunnsfoto",
+                "intro": "Bakgrunnsbildene som vises under kartdataene et en viktig kilde for kartlegging. Disse bildene kan være luftfoto fra satellitter, fly eller droner. Det kan også være historiske kart eller andre åpne kildedata.",
+                "sources_h": "Bildekilder",
+                "choosing": "For å se hvilke bildekilder som er tilgjengelige for redigering, klikk {layers} **Bakgrunnsinnstillinger**-knappen på kanten av kartvisningen.",
+                "sources": "Til vanlig, vil et [Bing Maps](https://www.bing.com/maps/) satellitt-lag være valgt som bakgrunnsbilde. Avhengig av hvor du redigerer kan andre bildekilder være tilgjengelig. Noen kan være nyere eller ha høyere oppløsning, så det er alltid lurt å sjekke og se hvilket lag som er best å kartlegge oppå.",
+                "offsets_h": "Finjustere bakgrunnsbilder",
+                "offset": "Bildene du bruker kan være litt skjev i forhold til nøyaktig kartdata. Hvis du ser mange veier og bygninger som er skjeve i forhold til bakgrunnen. Det kan være bakgrunnens feil, så ikke flytt alle objektene for å samsvare bakgrunnen. I stedet kan du justere bakgrunnen slik at den samsvarer med eksisterende data ved å åpne \"Finjuster bakgrunnsbilder\"-delen på bunnen av Bakgrunnsinnstillinger-menyen.",
+                "offset_change": "Klikk på de små trianglene for å justere skjevheten på bildene i små knepp, eller hold {leftclick} venstre musetast og dra på innsiden av den gråe boksen for å panorere kartet til det samsvarer."
+            },
+            "streetlevel": {
+                "title": "Bilder på gatenivå",
+                "intro": "Bilder på gatenivå er veldig kjekt for å kartlegge trafikkskilt, bedrifter og andre detaljer som man ikke kan se på luftfotoene. iD-redigereren støtter bilder på gatenivå fra [Bing Streetside](https://www.microsoft.com/en-us/maps/streetside), [Mapillary](https://www.mapillary.com), og [OpenStreetCam](https://www.openstreetcam.org).",
+                "using_h": "Bruk av bilder på gatenivå",
+                "using": "For å bruke bilder på gatenivå til kartlegging, klikk {data} **Kartdata**-panelet på kanten av kartvisningen for å slå av/på de tilgjengelige bildelagene.",
+                "photos": "Når aktiverte, vil bildelagene vise linjer langs bildesekvenser. På høyere zoom-nivåer, vil individuelle bilder markeres som sirkler, og på enda høyere zoom-nivåer, vil vinklene som bildene er tatt vises som kjegler som synsvinkelen.",
+                "viewer": "Når du klikker på en av bildene, vil bildet vises nederst i hjørnet på kartvisningen. Bildeviseren inneholder styringsmekanismer for å gå fremover eller bakover i forhold til bildet. Den viser også brukernavnet på personen som har tatt bildet, når det ble tatt, og en link til bildet på den originale siden."
             },
             "gps": {
                 "title": "GPS-spor",
-                "using_h": "Bruke GPS-spor"
+                "intro": "Samlede GPS-spor er en verdifull kilde til data på OpenStreetMap. Denne redigereren støtter *.gpx*, *.geojson* og *.kml*-filer lokalt på datamaskinen din. Du kan samle GPS-spor med en smartmobil, smartklokke eller andre GPS-enheter.",
+                "survey": "For informasjon på hvordan man samler GPS-data, les [Kartlegging med smartmobil, GPS eller papir](http://learnosm.org/en/mobile-mapping/).",
+                "using_h": "Bruke GPS-spor",
+                "using": "For å bruke et GPS-spor for kartlegging, dra og slipp datafilen på kartredigereren. Hvis den blir gjenkjent, vil den bli tegnet på kartet som en lyselilla linje. Se {data} **Kartdata**-panelet på kanten av kartvisningen for å slå av/på eller zoome inn på GPS-data.",
+                "tracing": "GPS-sporene blir ikke sendt til OpenStreetMap - den beste måten å bruke dataene på er å tegne over det, og bruke det som en hjelpelinje på nye objekter du legger til.",
+                "upload": "Du kan også [laste opp GPS-sporene dine til OpenStreetMap](https://www.openstreetmap.org/trace/create) slik at andre brukere kan ta nytte av dem."
+            },
+            "qa": {
+                "title": "Kvalitetssikring",
+                "intro": "*Kvalitetssikring* (KS) verktøy kan finne feilaktige egenskaper, frakoblede veier og andre feil på OpenStreetMap, som kartleggere da kan fikse. For å se eksisterende KS-problemer, klikk {data} **Kartdata**-panelet for å aktivere spesifikke KS-lag.",
+                "tools_h": "Verktøy",
+                "tools": "Følgende verktøy er støttet per idag: [KeepRight](https://www.keepright.at/) og [ImproveOSM](https://improveosm.org/en/). Du kan forvente at [Osmose](https://osmose.openstreetmap.fr/) og andre KS-verktøy vil bli støttet i fremtiden.",
+                "issues_h": "Håndtere problemer",
+                "issues": "Å håndtere problemer er likt som å håndtere notater. Klikk på en markør for å se detaljer på problemet i sidemenyen. Hvert verktøy har sine egne funksjoner, men generelt vil du kunne kommentere og/eller lukke et problem."
             },
             "field": {
                 "restrictions": {
+                    "title": "Svingebegrensning-hjelp",
                     "about": {
-                        "title": "Om"
+                        "title": "Om",
+                        "about": "Dette feltet lar deg inspisere og endre svingebegrensninger. Den viser en modell av det valgte veikrysset inkludert andre nærliggende veier.",
+                        "from_via_to": "En svingebegrensning inneholder alltid; en **FRA-linje**, en **TIL-linje** og enten en **VIA-node** eller en eller flere **VIA-linjer**.",
+                        "maxdist": "\"{distField}\"-spaken kontrollerer hvor langt å søke etter flere tilkoblede veier.",
+                        "maxvia": "\"{viaField}\"-spaken justerer hvor mange Via-linjer som skal inkluderes i søket. (Tips: det enkle er ofte det beste)"
+                    },
+                    "inspecting": {
+                        "title": "Inspisering",
+                        "about": "Hold musepekeren over hvilken som helst **FRA**-strekning for å se om den har noen svingebegrensninger. Hver mulige rute **TIL** destinasjonen vil tegnes med en farget skygge dersom en restriksjon eksisterer.",
+                        "from_shadow": "{fromShadow} **FRA strekning**",
+                        "allow_shadow": "{allowShadow} **TIL lovlig**",
+                        "restrict_shadow": "{restrictShadow} **TIL begrenset**",
+                        "only_shadow": "{onlyShadow} **TIL bare**",
+                        "restricted": "\"Begrenset\" betyr at det er en svingebegrensning, for eksempel \"Ingen venstresving\".",
+                        "only": "\"Bare\" betyr at et kjøretøy som tar denne veien bare kan svinge denne retningen, for eksempel \"Bare rett frem\"."
+                    },
+                    "modifying": {
+                        "title": "Endring",
+                        "about": "For å endre svingebegrensninger, klikk først på hvilken som helst startende **FRA**-strekning for å velge den. Det valgte elementet vil pulsere, og alle mulige **TIL**-destinasjoner vil vises som svinge-symboler.",
+                        "indicators": "Så, klikk på svinge-symbolene for å bytte mellom \"Tillatt\", \"Forbudt\" og \"Bare\".",
+                        "allow_turn": "{allowTurn} **TIL tillatt**",
+                        "restrict_turn": "{restrictTurn} **TIL begrenset**",
+                        "only_turn": "{onlyTurn} **TIL bare**"
                     },
                     "tips": {
-                        "title": "Tips"
+                        "title": "Tips",
+                        "simple": "**Foretrekk enkle restriksjoner over komplekse.**",
+                        "simple_example": "For eksempel, unngå å lage en via-linje restriksjon hvis en enklere via-node svingebegrensninger gjør jobben.",
+                        "indirect": "**Noen restriksjoner viser teksten \"(indirekte)\" og tegnes lysere.**",
+                        "indirect_example": "Disse restriksjonene eksisterer på grunn av andre restriksjoner i nærheten. For eksempel, en \"Bare rett frem\"-restriksjon vil indirekte lage \"Ingen sving\"-restriksjoner for alle andre stier gjennom veikrysset.",
+                        "indirect_noedit": "Du kan ikke redigere indirekte restriksjoner. Rediger heller direkte restriksjoner i nærheten."
                     }
+                }
+            }
+        },
+        "issues": {
+            "title": "Problemer",
+            "key": "I",
+            "list_title": "Problemer ({count})",
+            "errors": {
+                "list_title": "Feil ({count})"
+            },
+            "warnings": {
+                "list_title": "Advarsler ({count})"
+            },
+            "rules": {
+                "title": "Regler"
+            },
+            "user_resolved_issues": "Problemer løst av redigeringene dine",
+            "warnings_and_errors": "Advarsler og feil",
+            "no_issues": {
+                "message": {
+                    "everything": "Alt ser greit ut",
+                    "everything_in_view": "Alt i visningen ser greit ut",
+                    "edits": "Endringen din ser grei ut",
+                    "edits_in_view": "Endringene dine i visningen ser greie ut",
+                    "no_edits": "Du har ingen endringer ennå"
+                },
+                "hidden_issues": {
+                    "none": "Oppdagede problemer dukker opp her",
+                    "elsewhere": "Problemer andre steder: {count}",
+                    "everything_else": "Problemer med alt annet: {count}",
+                    "everything_else_elsewhere": "Problemer andre steder med alt annet: {count}",
+                    "disabled_rules": "Problemer med deaktiverte regler: {count}",
+                    "disabled_rules_elsewhere": "Problemer andre steder med deaktiverte regler: {count}",
+                    "ignored_issues": "Ignorerte problemer: {count}",
+                    "ignored_issues_elsewhere": "Ignorerte problemer andre steder: {count}"
+                }
+            },
+            "options": {
+                "what": {
+                    "title": "Sjekk:",
+                    "edited": "Mine endringer",
+                    "all": "Alt"
+                },
+                "where": {
+                    "title": "Hvor:",
+                    "visible": "I visningen",
+                    "all": "Overalt"
+                }
+            },
+            "suggested": "Foreslåtte oppdateringer:",
+            "enable_all": "Aktiver alle",
+            "disable_all": "Deaktiver alle",
+            "reset_ignored": "Tilbakestill ignorerte ({count})",
+            "fix_one": {
+                "title": "fiks"
+            },
+            "fix_all": {
+                "title": "Fiks alle",
+                "annotation": "Fikset flere problemer med validering."
+            },
+            "almost_junction": {
+                "title": "Nesten et kryss",
+                "message": "{feature} er veldig nære, men ikke koblet til {feature2}",
+                "tip": "Finn objekter som kanskje burde kobles til andre objekter i nærheten",
+                "self": {
+                    "message": "{feature} slutter veldig nære seg selv og er ikke tilkoblet"
+                },
+                "highway-highway": {
+                    "reference": "Kryssende veier burde dele et felles krysspunkt."
+                }
+            },
+            "close_nodes": {
+                "title": "Veldig nære punkter",
+                "tip": "Finn overflødige og tette samlinger med punkter",
+                "message": "To punkter på {way} er veldig nære hverandre",
+                "reference": "Overflødige punkter i en linje burde slåes sammen eller flyttes lengre unna hverandre.",
+                "detached": {
+                    "message": "{feature} er for nære {feature2}",
+                    "reference": "Separate punkter burde ikke dele samme posisjon."
+                }
+            },
+            "crossing_ways": {
+                "title": "Kryssende linjer",
+                "message": "{feature} krysser {feature2}",
+                "tip": "Finn objekter som feilaktig krysser hverandre",
+                "building-building": {
+                    "reference": "Bygninger burde ikke krysse hverandre med mindre de er på forskjellige lag."
+                },
+                "building-highway": {
+                    "reference": "Veier som krysser bygninger burde bruke bro, tunnel, tildekkelse, eller innganger."
+                },
+                "building-railway": {
+                    "reference": "Jernbaner som krysser bygninger burde bruke broer eller tunneller."
+                },
+                "building-waterway": {
+                    "reference": "Vannveier som krysser bygninger burde bruke tunneller eller forskjellige lag."
+                },
+                "highway-highway": {
+                    "reference": "Kryssende veier burde bruke broer, tunneller eller veikryss."
+                },
+                "highway-railway": {
+                    "reference": "Veier som krysser jernbaner burde bruke broer, tunneller eller jernbaneoverganger."
+                },
+                "highway-waterway": {
+                    "reference": "Veier som krysser vannveier burde bruke broer, tunneller eller vadested."
+                },
+                "railway-railway": {
+                    "reference": "Kryssende jernbaner burde kobles sammen eller bruke broer eller tunneller."
+                },
+                "railway-waterway": {
+                    "reference": "Jernbaner som krysser vannveier burde bruke broer eller tunneller."
+                },
+                "waterway-waterway": {
+                    "reference": "Kryssende vannveier burde kobles sammen eller bruke tunneller."
+                },
+                "tunnel-tunnel": {
+                    "reference": "Kryssende tunneller burde bruke forskjellige lag."
+                },
+                "tunnel-tunnel_connectable": {
+                    "reference": "Kryssende tunneller burde kobles sammen eller bruke forskjellige lag."
+                },
+                "bridge-bridge": {
+                    "reference": "Kryssende broer burde bruke forskjellige lag."
+                },
+                "bridge-bridge_connectable": {
+                    "reference": "Kryssende broer burde kobles sammen eller bruke forskjellige lag."
+                },
+                "indoor-indoor": {
+                    "reference": "Kryssende innendørsobjekter burde bruke forskjellige etasjer."
+                },
+                "indoor-indoor_connectable": {
+                    "reference": "Kryssende innendørsobjekter burde kobles sammen eller bruke forskjellige etasjer."
+                }
+            },
+            "disconnected_way": {
+                "title": "Frakoblede linjer",
+                "tip": "Finn unavigerbare veier, stier og ferjeruter",
+                "routable": {
+                    "message": {
+                        "multiple": "{count} navigerbare objekter er bare koblet til hverandre."
+                    },
+                    "reference": "Alle veier, stier og ferjeruter burde kobles sammen for å danne et stort transportnettverk."
+                },
+                "highway": {
+                    "message": "{highway} er ikke koblet til andre veier og stier"
+                }
+            },
+            "fixme_tag": {
+                "message": "{feature} har en \"Fiks meg\" etterspørsel",
+                "reference": "En \"fixme\"-egenskap indikerer at en kartlegger lurer på hjelp med et objekt."
+            },
+            "generic_name": {
+                "message": "{feature} har det mistenkelige navnet \"{name}\"",
+                "message_language": "{feature} har det mistenkelige navnet \"{name}\" på {language}",
+                "reference": "Navn på objekter burde være aktuelle og eksistere på bakken."
+            },
+            "help_request": {
+                "title": "Hjelp forespørsler",
+                "tip": "Finn objekter der andre etterspurte assistanse"
+            },
+            "incompatible_source": {
+                "title": "Mistenkelige kilder",
+                "tip": "Finn objekter med mistenkelige kilde-egenskaper",
+                "google": {
+                    "feature": {
+                        "message": "{feature} har Google oppført som en datakilde"
+                    },
+                    "reference": "Google-produkter er proprietære og skal ikke brukes som referanser."
+                }
+            },
+            "incorrect_name": {
+                "message": "{feature} har det feilaktige navnet \"{name}\"",
+                "message_language": "{feature} har det feilaktige navnet \"{name}\" på {language}"
+            },
+            "invalid_format": {
+                "title": "Ugyldig formatering",
+                "tip": "Finn egenskaper med uvanlige formater",
+                "email": {
+                    "message": "{feature} har en ugyldig e-postadresse",
+                    "message_multi": "{feature} har flere ugyldige e-postadresser",
+                    "reference": "E-postadresser må se ut som \"bruker@eksempel.no\"."
+                }
+            },
+            "mismatched_geometry": {
+                "title": "Konfliktmessig geometri",
+                "tip": "Finn objekter med konfliktmessige egenskaper og geometri"
+            },
+            "missing_role": {
+                "title": "Manglende roller",
+                "message": "{member} har ingen rolle i relasjonen {relation}",
+                "tip": "Finn relasjoner med manglende eller feilaktige medlemsroller",
+                "multipolygon": {
+                    "reference": "Medlemmer av multipolygoner må ha enten rollen \"inner\" eller \"outer\"."
+                }
+            },
+            "missing_tag": {
+                "title": "Manglende egenskaper",
+                "tip": "Finn objekter som mangler beskrivende egenskaper",
+                "reference": "Objekter må ha egenskaper som definerer hva de er.",
+                "any": {
+                    "message": "{feature} har ingen egenskaper"
+                },
+                "descriptive": {
+                    "message": "{feature} har ingen beskrivende egenskaper"
+                },
+                "relation_type": {
+                    "message": "{feature} er en relasjon uten type"
+                }
+            },
+            "old_multipolygon": {
+                "message": "{multipolygon} har feilplasserte egenskaper",
+                "reference": "Multipolygoner skal ha egenskapene sine i relasjonen, og ikke på medlemmer med rollen \"outer\"."
+            },
+            "outdated_tags": {
+                "title": "Utdaterte egenskaper",
+                "message": "{feature} har utdaterte egenskaper",
+                "tip": "Finn objekter med frarådede egenskaper som kan oppdateres",
+                "reference": "Noen egenskaper endres med tiden og burde oppdateres.",
+                "incomplete": {
+                    "message": "{feature} har ufullstendige egenskaper",
+                    "reference": "Noen objekter burde ha ytterlige egenskaper."
+                },
+                "noncanonical_brand": {
+                    "message": "{feature} er en del av en kjede, men følger ikke standarden",
+                    "message_incomplete": "{feature} likner på et merke med ufullstendige egenskaper",
+                    "reference": "Alle objekter i samme kjede burde ha like type egenskaper."
+                }
+            },
+            "point_as_vertex": {
+                "message": "{feature} burde være et selvstendig punkt med tanke på dens egenskaper",
+                "reference": "Noen objekter burde ikke være en del av linjer eller områder."
+            },
+            "private_data": {
+                "title": "Privat informasjon",
+                "tip": "Finn objekter som kanskje inneholder privat informasjon",
+                "reference": "Sensitive data som personlige mobilnummer burde ikke være en del av egenskapene.",
+                "contact": {
+                    "message": "{feature} inneholder kanskje privat kontaktinformasjon"
+                }
+            },
+            "suspicious_name": {
+                "title": "Mistenkelige navn",
+                "tip": "Finn objekter med generiske eller mistenkelige navn"
+            },
+            "tag_suggests_area": {
+                "message": "{feature} burde være et lukket område basert på egenskapen \"{tag}\"",
+                "reference": "Områder må ha sammenkoblede endepunkter."
+            },
+            "unknown_road": {
+                "message": "{feature} har ingen klassifisering",
+                "reference": "Veier uten en spesifikk type vil kanskje ikke vises i kart eller under navigasjon."
+            },
+            "impossible_oneway": {
+                "title": "Umulige enveis-veier",
+                "tip": "Finn problemer med navigasjon rundt enveis-objekter",
+                "waterway": {
+                    "connected": {
+                        "start": {
+                            "message": "{feature} renner bort fra en tilkoblet vannvei"
+                        },
+                        "end": {
+                            "message": "{feature} renner mot en tilkoblet vannvei"
+                        },
+                        "reference": "Vannvei-strekninger burde renne samme vei."
+                    }
+                },
+                "highway": {
+                    "start": {
+                        "message": "{feature} kan ikke nås",
+                        "reference": "Enveis-veier må kunne nås via andre veier."
+                    },
+                    "end": {
+                        "message": "{feature} har ingen utvei",
+                        "reference": "Enveisveier må lede til andre veier."
+                    }
+                }
+            },
+            "unsquare_way": {
+                "title": "Urette hjørner (opp til {val}°)",
+                "message": "{feature} har urette hjørner",
+                "tip": "Finn objekter med urette hjørner som kan tegnes bedre",
+                "buildings": {
+                    "reference": "Bygninger med urette hjørner kan ofte tegnes mer nøyaktig."
+                }
+            },
+            "vertex_as_point": {
+                "message": "{feature} burde være en del av en linje eller et område med tanke på dens egenskaper",
+                "reference": "Noen objekter burde ikke være selvstendige punkter."
+            },
+            "fix": {
+                "address_the_concern": {
+                    "title": "Adressér problemet"
+                },
+                "connect_almost_junction": {
+                    "annotation": "Koblet sammen objekter veldig nære hverandre."
+                },
+                "connect_crossing_features": {
+                    "annotation": "Koblet sammen kryssene objekter."
+                },
+                "connect_endpoints": {
+                    "title": "Koblet sammen endene",
+                    "annotation": "Koblet sammen endepunkter av en linje."
+                },
+                "connect_feature": {
+                    "title": "Koble til dette objektet"
+                },
+                "connect_features": {
+                    "title": "Koble til disse objektene"
+                },
+                "connect_using_ford": {
+                    "title": "Koble sammen med et vadested"
+                },
+                "continue_from_start": {
+                    "title": "Forsett og tegne fra starten"
+                },
+                "continue_from_end": {
+                    "title": "Fortsett og tegne fra slutten"
+                },
+                "delete_feature": {
+                    "title": "Slett dette objektet"
+                },
+                "extract_point": {
+                    "title": "Ta ut punktet"
+                },
+                "ignore_issue": {
+                    "title": "Ignorer dette problemet"
+                },
+                "merge_close_vertices": {
+                    "annotation": "Slo sammen veldig nære punkter i en linje."
+                },
+                "merge_points": {
+                    "title": "Slå sammen disse punktene"
+                },
+                "move_points_apart": {
+                    "title": "Flytt disse punktene fra hverandre"
+                },
+                "move_tags": {
+                    "title": "Flytt egenskapene.",
+                    "annotation": "Flyttet egenskaper."
+                },
+                "remove_from_relation": {
+                    "title": "Fjernet fra relasjon"
+                },
+                "remove_generic_name": {
+                    "annotation": "Fjernet et generisk navn."
+                },
+                "remove_mistaken_name": {
+                    "annotation": "Fjern et feilaktig navn."
+                },
+                "remove_private_info": {
+                    "annotation": "Fjernet privatinformasjon."
+                },
+                "remove_proprietary_data": {
+                    "title": "Fjern all proprietær data"
+                },
+                "remove_tag": {
+                    "title": "Fjern egenskapen",
+                    "annotation": "Fjernet egenskapen."
+                },
+                "remove_tags": {
+                    "title": "Fjern egenskapene"
+                },
+                "remove_the_name": {
+                    "title": "Fjern navnet"
+                },
+                "reposition_features": {
+                    "title": "Flytt objektene"
+                },
+                "reverse_feature": {
+                    "title": "Snu dette objektet"
+                },
+                "select_preset": {
+                    "title": "Velg en objekttype"
+                },
+                "select_road_type": {
+                    "title": "Velg en veitype"
+                },
+                "set_as_inner": {
+                    "title": "Angi som indre"
+                },
+                "set_as_outer": {
+                    "title": "Angi som ytre"
+                },
+                "square_feature": {
+                    "title": "Rett opp dette objektet"
+                },
+                "tag_as_disconnected": {
+                    "title": "Marker som frakoblet",
+                    "annotation": "Markerte veldig nære objekter som frakoblede."
+                },
+                "tag_as_unsquare": {
+                    "title": "Marker som fysisk skjev",
+                    "annotation": "Markerte på linje at den har urette hjørner."
+                },
+                "tag_this_as_higher": {
+                    "title": "Marker denne som høyere"
+                },
+                "tag_this_as_lower": {
+                    "title": "Marker denne som lavere"
+                },
+                "upgrade_tags": {
+                    "title": "Oppgrader egenskapene",
+                    "annotation": "Oppgraderte gamle egenskaper."
+                },
+                "use_bridge_or_tunnel": {
+                    "title": "Bruk en bro eller tunnel"
+                },
+                "use_different_layers": {
+                    "title": "Bruk forskjellige lag"
+                },
+                "use_different_layers_or_levels": {
+                    "title": "Bruk forskjellige lag eller etasjer"
+                },
+                "use_different_levels": {
+                    "title": "Bruk forskjellige etasjer"
+                },
+                "use_tunnel": {
+                    "title": "Bruk en tunnel"
                 }
             }
         },
@@ -691,10 +2031,12 @@
             "ok": "OK",
             "graph": {
                 "block_number": "<value for addr:block_number>",
+                "city": "Nordhaug",
                 "county": "<value for addr:county>",
                 "district": "<value for addr:district>",
                 "hamlet": "<value for addr:hamlet>",
                 "neighbourhood": "<value for addr:neighbourhood>",
+                "postcode": "4265",
                 "province": "<value for addr:province>",
                 "quarter": "<value for addr:quarter>",
                 "state": "<value for addr:state>",
@@ -713,7 +2055,103 @@
                     "9th-avenue": "9. Allé",
                     "10th-avenue": "10. Allé",
                     "11th-avenue": "11. Allé",
-                    "12th-avenue": "12. Allé"
+                    "12th-avenue": "12. Allé",
+                    "access-point-employment": "Fjellet Arbeidskontor",
+                    "adams-street": "Adamsgate",
+                    "andrews-elementary-school": "Andersen Barneskole",
+                    "andrews-street": "Andersensgate",
+                    "armitage-street": "Mariesgate",
+                    "barrows-school": "Børresgate",
+                    "battle-street": "Baldersgate",
+                    "bennett-street": "Brakersgate",
+                    "bowman-park": "Bømannsgate",
+                    "collins-drive": "Carlsveien",
+                    "conrail-railroad": "Gullestad Jernbane",
+                    "conservation-park": "Kolleparken",
+                    "constantine-street": "Fredriksgate",
+                    "cushman-street": "Martinsgate",
+                    "dollar-tree": "Rimelige saker",
+                    "douglas-avenue": "Dennisgate",
+                    "east-street": "Østergaten",
+                    "elm-street": "Elmasgate",
+                    "flower-street": "Blomstergaten",
+                    "foster-street": "Fostergaten",
+                    "french-street": "Franksgate",
+                    "garden-street": "Hagegaten",
+                    "gem-pawnbroker": "Juvelen Banklån",
+                    "golden-finch-framing": "Lasses Gårdsbruk",
+                    "grant-avenue": "Store Allé",
+                    "hoffman-pond": "Hoffmannsdammen",
+                    "hoffman-street": "Hoffmannsgate",
+                    "hook-avenue": "Kroken Allé",
+                    "jefferson-street": "Jegersgate",
+                    "kelsey-street": "Kurtsgate",
+                    "lafayette-park": "Lauritsgate",
+                    "las-coffee-cafe": "Slack'en Kafé",
+                    "lincoln-avenue": "Haralds Allé",
+                    "lowrys-books": "Larsens Bøker",
+                    "lynns-garage": "Noras Garasje",
+                    "main-street-barbell": "Vekter Hovedgata",
+                    "main-street-cafe": "Sitt Café Hovedgata",
+                    "main-street-fitness": "Helse Treningsstudio Hovedgata",
+                    "main-street": "Hovedgata",
+                    "maple-street": "Lønnegata",
+                    "marina-park": "Marginparken",
+                    "market-street": "Handelsgata",
+                    "memory-isle-park": "Minnesparken",
+                    "memory-isle": "Minnesøya",
+                    "michigan-avenue": "Markus Allé",
+                    "middle-street": "Midtgata",
+                    "millard-street": "Millesgate",
+                    "moore-street": "Mortensgate",
+                    "morris-avenue": "Millesgate",
+                    "mural-mall": "Sørbyen kjøpesenter",
+                    "paisanos-bar-and-grill": "Brygga Bar og Grill",
+                    "paisley-emporium": "Kroner Storbutikk",
+                    "paparazzi-tattoo": "Paparazzi Tatoveringer",
+                    "pealer-street": "Blekesgate",
+                    "pine-street": "Furugata",
+                    "pizza-hut": "Pizzaplassen",
+                    "portage-avenue": "Porten Allé",
+                    "portage-river": "Portelven",
+                    "preferred-insurance-services": "Førevar Forsikringsselskap",
+                    "railroad-drive": "Jernbaneveien",
+                    "river-city-appliance": "Elvebyen Innretninger",
+                    "river-drive": "Elveveien",
+                    "river-road": "Elvestien",
+                    "river-street": "Elvegata",
+                    "riverside-cemetery": "Elvebredda Gravplass",
+                    "riverwalk-trail": "Elvebredda stien",
+                    "riviera-theatre": "Elva Teateret",
+                    "rocky-river": "Steinelva",
+                    "saint-joseph-river": "St. Olav Elv",
+                    "scidmore-park-petting-zoo": "Berget Dyrepark",
+                    "scidmore-park": "Bergparken",
+                    "scouter-park": "Speiderparken",
+                    "sherwin-williams": "Solli-Olufsen",
+                    "south-street": "Sørgata",
+                    "southern-michigan-bank": "Sør-Norge Bank",
+                    "spring-street": "Vårgata",
+                    "sturgeon-river-road": "Kirurgveien",
+                    "three-rivers-city-hall": "Elvebakken Rådhus",
+                    "three-rivers-elementary-school": "Elvebakken Barneskole",
+                    "three-rivers-fire-department": "Elvebakken Brannvesen",
+                    "three-rivers-high-school": "Elvebakken Videregående",
+                    "three-rivers-middle-school": "Elvebakken Ungdomsskole",
+                    "three-rivers-municipal-airport": "Elvebakken Flyplass",
+                    "three-rivers-post-office": "Elvebakken Posthus",
+                    "three-rivers-public-library": "Elvebakken Bibliotek",
+                    "three-rivers": "Elvebakken",
+                    "unique-jewelry": "Unik Gullsmed",
+                    "walnut-street": "Hasselnøttgata",
+                    "washington-street": "Asketgata",
+                    "water-street": "Vanngata",
+                    "west-street": "Vestgata",
+                    "wheeler-street": "Julegata",
+                    "william-towing": "Olavs Tauing",
+                    "willow-drive": "Williamsveien",
+                    "wood-street": "Tregata",
+                    "world-fare": "Verdensreiser"
                 }
             },
             "welcome": {
@@ -730,26 +2168,26 @@
                 "title": "Navigasjon",
                 "drag": "Hovedområdet viser OpenStreetMap-data over en bakgrunn.{br}Du kan dra kartet rundt ved å trykke og holde inn venstre museknapp mens du flytter musen rundt. Du kan også bruke piltastene på tastaturet. **Dra kartet i hvilken som helst retning!**",
                 "zoom": "Du kan forstørre/forminske (zoome) inn eller ut ved å scrolle med musehjulet eller med museflaten, eller ved å klikke {plus} / {minus}-knappene. **Zoom i kartet!**",
-                "features": "Vi bruker ordet *kartegenskaper* for å beskrive ting som finnes i kartet. Alt i den virkelige verdenen kan kartlegges som en kartegenskap på OpenStreetMap.",
-                "points_lines_areas": "Kartegenskaper er representert som *punkter, linjer eller områder.*",
+                "features": "Vi bruker ordet *objekter* for å beskrive ting som finnes i kartet. Alt i den virkelige verdenen kan kartlegges som et objekt på OpenStreetMap.",
+                "points_lines_areas": "Objekter er representert som *punkter, linjer eller områder.*",
                 "nodes_ways": "I OpenStreetMap kaller vi av og til punkter for *noder*, og linjer og områder for *veier*.",
-                "click_townhall": "Alle kartegenskaper kan velges ved å klikke på dem. **Klikk på punktet for å velge det.**",
+                "click_townhall": "Alle objekter kan velges ved å klikke på dem. **Klikk på punktet for å velge det.**",
                 "selected_townhall": "Bra! Punktet har nå blitt valgt. Valgte punkter vises med en pulserende glød.",
                 "editor_townhall": "Når en kartegenskap er valgt, vises *kartegenskapeditoren* ved siden av kartet.",
                 "preset_townhall": "På toppen av kartegenskapeditoren ser du kartegenskapens type. Dette punktet er en {preset}.",
                 "fields_townhall": "Den midtre delen av editoren inneholder *felter* som viser attributtene til en kartegenskap, som f.eks. navnet eller adressen til kartegenskapen.",
                 "close_townhall": "**Lukk kartegenskapeditoren ved å trykke escape, eller ved å klikke {button}-knappen i øvre hjørne.**",
-                "search_street": "Du kan også søke etter kartegenskaper i den gjeldende visningen, eller i hele verden. **Søk etter '{name}'.**",
+                "search_street": "Du kan også søke etter objekter i den gjeldende visningen, eller i hele verden. **Søk etter '{name}'.**",
                 "choose_street": "**Velg {name} fra listen for å velge den.**",
                 "selected_street": "Flott! {name} er nå valgt.",
                 "editor_street": "Feltene som vises for en gate er ulike feltene som vises for rådhuset.{br}For denne valgte gaten, viser kartegenskapeditoren felter som '{field1}' og '{field2}'. **Lukk kartegenskapeditoren ved å trykke escape, eller ved å klikke {button}-knappen.**",
-                "play": "Prøv å bevege på kartet og klikke på noen andre kartegenskaper for å se hva slags ting som kan legges til OpenStreetMap. **Når du er klar for å fortsette til neste kapittel, trykker du '{next}'.**"
+                "play": "Prøv å bevege på kartet og klikke på noen andre objekter for å se hva slags ting som kan legges til OpenStreetMap. **Når du er klar for å fortsette til neste kapittel, trykker du '{next}'.**"
             },
             "points": {
                 "title": "Punkter",
-                "add_point": "*Punkt* kan brukes for å representere kartegenskaper som butikker, restauranter og monumenter.{br}De markerer et bestemt sted, og beskriver hva som finnes der. **Klikk {button} punkt-knappen for å legge til nytt punkt.**",
+                "add_point": "*Punkt* kan brukes for å representere objekter som butikker, restauranter og monumenter.{br}De markerer et bestemt sted, og beskriver hva som finnes der. **Klikk {button} punkt-knappen for å legge til nytt punkt.**",
                 "place_point": "For å plassere et nytt punkt på kartet, plasser musepekeren der punktet bør legges, og venstreklikk eller trykk mellomromtasten. **Flytt musepekeren over denne bygningen, og venstreklikk eller trykk mellomrom.**",
-                "search_cafe": "Det er mange forskjellige kartegenskaper som kan representeres med punkter. Punktet du nettopp la til er en kafé. **Søk etter '{preset}'.**",
+                "search_cafe": "Det er mange forskjellige objekter som kan representeres med punkter. Punktet du nettopp la til er en kafé. **Søk etter '{preset}'.**",
                 "choose_cafe": "**Velg {preset} fra listen.**",
                 "feature_editor": "Punktet er nå merket som en kafé. Ved å bruke kartegenskapeditoren, kan vi legge til mer informasjon om kaféen.",
                 "add_name": "I OpenStreetMap er alle felter valgfrie, og det er greit å la et felt stå tomt om du er usikker.{br}La oss late som om du har lokal kunnskap om denne kaféen, og at du kan navnet. **Legg til et navn for kaféen.**",
@@ -758,14 +2196,15 @@
                 "update": "La oss fylle inn noen flere detaljer for denne kaféen. Du kan endre navnet, legge til kjøkkentype, eller legge til en adresse. **Endre detaljer om kaféen.**",
                 "update_close": "**Når du er ferdig med å oppdatere kaféen, trykk escape, enter, eller klikk {button}-knappen for å lukke kartegenskapeditoren.**",
                 "rightclick": "Du kan høyreklikke på hvilken som helst kartegenskap for å se *redigeringsmenyen*, som viser en liste over redigeringshandlinger som kan utføres. **Høyreklikk for å velge punktet du opprettet for å vise redigeringsmenyen.**",
-                "delete": "Det er greit å slette kartegenskaper som ikke finnes i den virkelige verden.{br}Ved å slette en kartegenskap fra OpenStreetMap, fjernes den fra kartet som alle bruker, så du bør forsikre deg om at kartegenskapen virkelig ikke finnes lengre før du sletter den. **Klikk på {button}-knappen for slette punktet.**",
+                "delete": "Det er greit å slette objekter som ikke finnes i den virkelige verden.{br}Ved å slette en kartegenskap fra OpenStreetMap, fjernes den fra kartet som alle bruker, så du bør forsikre deg om at kartegenskapen virkelig ikke finnes lengre før du sletter den. **Klikk på {button}-knappen for slette punktet.**",
                 "undo": "Du kan alltid angre endringer helt fram til du lagrer endringene dine i OpenStreetMap. **Trykk på {button}-knappen for å angre slettingen og få punktet tilbake.**",
                 "play": "Nå som du kan legge til og slette punkter, prøv å legge til noen flere punkt for øvingens skyld! **Når du er klar til å gå til neste kapittel, trykk '{next}'.**"
             },
             "areas": {
                 "title": "Områder",
+                "add_playground": "*Områder* brukes for å vise grensen på objekter som innsjøer, bygninger og boligfelt.{br}De kan også brukes til mer detaljert kartlegging av objekter du normalt ville tegnet som punkter. **Klikk {button} Område-knappen for å legge til et nytt område.**",
                 "start_playground": "La oss legge til denne lekeplassen i kartet ved å tegne et område. Områder tegnes ved å plassere *noder* langs ytterkanten av kartegenskapen. **Klikk eller trykk mellomromtasten for å plassere en startnode på et av hjørnene til lekeplassen.**",
-                "continue_playground": "Fortsett å tegne område ved å plassere flere noder langs lekeplassens ytterkant. Det er greit å koble området til eksisterende gangveier.{br}Tips: Du kan holde inne '{alt}'-tasten for å forhindre noder fra å kobles sammen med andre kartegenskaper. **Fortsett med å tegne et område for lekeplassen.**",
+                "continue_playground": "Fortsett å tegne område ved å plassere flere noder langs lekeplassens ytterkant. Det er greit å koble området til eksisterende gangveier.{br}Tips: Du kan holde inne '{alt}'-tasten for å forhindre noder fra å kobles sammen med andre objekter. **Fortsett med å tegne et område for lekeplassen.**",
                 "finish_playground": "Avslutt området ved å trykke enter, eller å klikke igjen på den første eller siste noden. **Fullfør tegningen av området for lekeplassen.**",
                 "search_playground": "**Søk etter '{preset}'.**",
                 "choose_playground": "**Velg {preset} fra listen.**",
@@ -885,44 +2324,68 @@
                     "background_switch": "Bytt til siste bakgrunn",
                     "map_data": "Vis alternativer for kartdata",
                     "fullscreen": "Gå inn i fullskjermmodus",
-                    "wireframe": "Skru av/på wireframe-modus",
-                    "minimap": "Vis mini-kart"
+                    "sidebar": "Vis/skjul sidemenyen",
+                    "wireframe": "Slå av/på wireframe-modus",
+                    "osm_data": "Slå av/på OpenStreetMap-data",
+                    "minimap": "Vis mini-kart",
+                    "highlight_edits": "Uthev ulagrede endringer"
                 },
                 "selecting": {
-                    "title": "Velger kartegenskaper",
+                    "title": "Velger objekter",
                     "select_one": "Velg en enkelt kartegenskap",
-                    "select_multi": "Velg flere kartegenskaper",
-                    "lasso": "Dra en seleksjonslasso rundt kartegenskaper"
+                    "select_multi": "Velg flere objekter",
+                    "lasso": "Dra en seleksjonslasso rundt objekter",
+                    "search": "Finn objekter som samsvarer med søketeksten"
                 },
                 "with_selected": {
-                    "title": "Med valgte kartegenskaper",
-                    "edit_menu": "Vis/skjul redigeringsmeny"
+                    "title": "Med valgte objekter",
+                    "edit_menu": "Vis/skjul redigeringsmeny",
+                    "zoom_to": "Zoom til valgt objekt"
                 },
                 "vertex_selected": {
                     "title": "Med valgt node",
                     "previous": "Hopp til siste node",
                     "next": "Hopp til neste node",
                     "first": "Hopp til første node",
-                    "last": "Hopp til siste node"
+                    "last": "Hopp til siste node",
+                    "change_parent": "Bytt linje som skal følges"
                 }
             },
             "editing": {
                 "title": "Redigerer",
+                "drawing": {
+                    "title": "Tegning",
+                    "focus_add_feature": "Endre fokus til objektsøkefelt",
+                    "add_point": "\"Legg til punkt\"-modus",
+                    "add_line": "\"Legg til linje\"-modus",
+                    "add_area": "\"Legg til område\"-modus",
+                    "add_note": "\"Legg til notat\"-modus",
+                    "add_favorite": "Legg til et favorittobjekt",
+                    "place_point": "Plasser et punkt eller notat",
+                    "disable_snap": "Hold nede for å deaktivere punkt-snapping",
+                    "stop_line": "Avslutt tegning av linje eller område"
+                },
                 "operations": {
                     "title": "Operasjoner",
                     "continue_line": "Fortsett en linje på det valgte punktet",
-                    "reverse": "Reverser en linje",
-                    "move": "Flytt valgte kartegenskaper",
-                    "rotate": "Rotér valgte kartegenskaper",
+                    "merge": "Kombiner (slå sammen) valgte objekter",
+                    "disconnect": "Koble fra objekter koblet til det valgte punktet",
+                    "extract": "Ta ut et punkt fra et objekt",
+                    "split": "Del en linje på det valgte punktet",
+                    "reverse": "Reverser valgte objekter",
+                    "move": "Flytt valgte objekter",
+                    "rotate": "Rotér valgte objekter",
+                    "orthogonalize": "Rett ut hjørner til en linje eller et område",
+                    "straighten": "Rett ut en linjer eller noen punkter",
                     "circularize": "Gjør en lukket linje eller område rundt",
-                    "reflect_long": "Speilvend kartegenskaper om sine lange akser",
-                    "reflect_short": "Speilvend kartegenskaper om sinde korte akser",
-                    "delete": "Slett valge kartegenskaper"
+                    "reflect_long": "Speilvend objekter om sine lange akser",
+                    "reflect_short": "Speilvend objekter om sinde korte akser",
+                    "delete": "Slett valgte objekter"
                 },
                 "commands": {
                     "title": "Kommandoer",
-                    "copy": "Kopier valgte kartegenskaper",
-                    "paste": "Lim inn kopierte kartegenskaper",
+                    "copy": "Kopier valgte objekter",
+                    "paste": "Lim inn kopierte objekter",
                     "undo": "Angre siste handling",
                     "redo": "Gjør om siste handling",
                     "save": "Lagre endringer"
@@ -931,23 +2394,58 @@
             "tools": {
                 "title": "Verktøy",
                 "info": {
-                    "title": "Informasjon"
+                    "title": "Informasjon",
+                    "all": "Slå av/på informasjonspaneler",
+                    "background": "Slå av/på bakgrunnspaneler",
+                    "history": "Slå av/på historikkpanelet",
+                    "location": "Slå av/på stedspanel",
+                    "measurement": "Slå av/på målingspanel"
                 }
             }
+        },
+        "units": {
+            "feet": "{quantity} ft",
+            "miles": "{quantity} mi",
+            "square_feet": "{quantity} sq ft",
+            "square_miles": "{quantity} sq mi",
+            "acres": "{quantity} ac",
+            "meters": "{quantity} m",
+            "kilometers": "{quantity} km",
+            "square_meters": "{quantity} m²",
+            "square_kilometers": "{quantity} km²",
+            "hectares": "{quantity} ha",
+            "area_pair": "{area1} ({area2})",
+            "arcdegrees": "{quantity}°",
+            "arcminutes": "{quantity}′",
+            "arcseconds": "{quantity}″",
+            "north": "N",
+            "south": "S",
+            "east": "Ø",
+            "west": "V",
+            "coordinate": "{coordinate}{direction}",
+            "coordinate_pair": "{latitude}, {longitude}"
+        },
+        "wikidata": {
+            "identifier": "Identifikator",
+            "label": "Overskrift",
+            "description": "Beskrivelse"
         },
         "presets": {
             "categories": {
                 "category-barrier": {
-                    "name": "Hinderrelaterte egenskaper"
+                    "name": "Barriereobjekter"
                 },
                 "category-building": {
-                    "name": "Bygingsrelatert"
+                    "name": "Bygningsrelaterte egenskaper"
                 },
                 "category-golf": {
                     "name": "Golfrelaterte egenskaper"
                 },
                 "category-landuse": {
                     "name": "Arealbrukrelaterte egenskaper"
+                },
+                "category-natural": {
+                    "name": "Naturrelaterte egenskaper"
                 },
                 "category-path": {
                     "name": "Stier"
@@ -969,6 +2467,15 @@
                 },
                 "category-route": {
                     "name": "Ruterelaterte egenskaper"
+                },
+                "category-utility": {
+                    "name": "Infrastrukturrelaterte egenskaper"
+                },
+                "category-water": {
+                    "name": "Vannflater"
+                },
+                "category-waterway": {
+                    "name": "Vannveier"
                 }
             },
             "fields": {
@@ -1009,6 +2516,7 @@
                         }
                     },
                     "placeholder": "Ikke spesifisert",
+                    "terms": "[oversett til synonymer eller relaterte uttrykk til 'Tilgang tillat', separert med komma]",
                     "types": {
                         "access": "Alle",
                         "bicycle": "Sykler",
@@ -1018,12 +2526,25 @@
                     }
                 },
                 "access_simple": {
-                    "label": "Tillatt for"
+                    "label": "Tillatt for",
+                    "terms": "[oversett til synonymer eller relaterte uttrykk til 'Tilgang tillat', separert med komma]"
+                },
+                "addr/interpolation": {
+                    "label": "Type",
+                    "options": {
+                        "all": "Alle",
+                        "alphabetic": "Alfabetisk",
+                        "even": "Partall",
+                        "odd": "Oddetall"
+                    }
                 },
                 "address": {
                     "label": "Adresse",
                     "placeholders": {
+                        "block_number": "Kvartalnummer",
+                        "block_number!jp": "Kvartalno.",
                         "city": "By",
+                        "city!jp": "Storby/By/Landsby/Spesielle distrikter i Tokyo",
                         "city!vn": "By/Tettsted",
                         "conscriptionnumber": "123",
                         "country": "Land",
@@ -1153,6 +2674,12 @@
                 },
                 "bin": {
                     "label": "Søppelkasse"
+                },
+                "blind": {
+                    "options": {
+                        "no": "Nei",
+                        "yes": "Ja"
+                    }
                 },
                 "board_type": {
                     "label": "Type"
@@ -1295,8 +2822,17 @@
                         "cycleway:right": "Høyresidig"
                     }
                 },
+                "date": {
+                    "label": "Dato"
+                },
                 "delivery": {
                     "label": "Levering"
+                },
+                "departures_board": {
+                    "options": {
+                        "no": "Ingen",
+                        "yes": "Ja"
+                    }
                 },
                 "description": {
                     "label": "Beskrivelse"
@@ -1753,7 +3289,7 @@
                     }
                 },
                 "opening_hours": {
-                    "label": "Timer"
+                    "label": "Åpningstider"
                 },
                 "operator": {
                     "label": "Betjener"
@@ -2102,8 +3638,14 @@
                 "wall": {
                     "label": "Type"
                 },
+                "waste": {
+                    "label": "Avfall"
+                },
                 "water": {
                     "label": "Type"
+                },
+                "water_source": {
+                    "label": "Vannkilde"
                 },
                 "waterway": {
                     "label": "Type"
@@ -2115,7 +3657,12 @@
                     "label": "Type"
                 },
                 "wheelchair": {
-                    "label": "Rullestoltilgang"
+                    "label": "Rullestoltilgang",
+                    "options": {
+                        "limited": "Begrenset",
+                        "no": "Nei",
+                        "yes": "Ja"
+                    }
                 },
                 "width": {
                     "label": "Bredde (meter)"
@@ -2125,6 +3672,9 @@
                 },
                 "wikipedia": {
                     "label": "Wikipedia"
+                },
+                "windings": {
+                    "placeholder": "1, 2, 3..."
                 }
             },
             "presets": {
@@ -2360,9 +3910,6 @@
                 "amenity/police": {
                     "name": "Politi"
                 },
-                "amenity/post_box": {
-                    "name": "Postkasse"
-                },
                 "amenity/post_office": {
                     "name": "Postkontor"
                 },
@@ -2548,9 +4095,6 @@
                 },
                 "attraction/big_wheel": {
                     "name": "Pariserhjul"
-                },
-                "attraction/bumper_car": {
-                    "name": "Radiobiler"
                 },
                 "attraction/bungee_jumping": {
                     "name": "Strikkhopp"
@@ -2912,6 +4456,9 @@
                 "embankment": {
                     "name": "Dike"
                 },
+                "emergency": {
+                    "name": "Nødssituasjon-egenskap"
+                },
                 "emergency/ambulance_station": {
                     "name": "Ambulansebase"
                 },
@@ -3083,9 +4630,6 @@
                 "highway/primary": {
                     "name": "Primær hovedvei"
                 },
-                "highway/raceway": {
-                    "name": "Bilbane"
-                },
                 "highway/residential": {
                     "name": "Boligvei"
                 },
@@ -3167,6 +4711,9 @@
                 "historic/wreck": {
                     "name": "Skipsvrak"
                 },
+                "indoor": {
+                    "name": "Innendørsegenskap"
+                },
                 "indoor/room": {
                     "name": "Rom"
                 },
@@ -3196,9 +4743,6 @@
                 },
                 "landuse/commercial": {
                     "name": "Kommersielt område"
-                },
-                "landuse/construction": {
-                    "name": "Konstruksjon"
                 },
                 "landuse/farm": {
                     "name": "Jordbruksland"
@@ -3538,9 +5082,6 @@
                 },
                 "man_made/works": {
                     "name": "Fabrikk"
-                },
-                "manhole": {
-                    "name": "Kumlokk"
                 },
                 "natural": {
                     "name": "Naturlig"
@@ -4408,6 +5949,17 @@
             }
         },
         "community": {
+            "bw-facebook": {
+                "name": "Mapping Botswana på Facebook",
+                "description": "OpenStreetMap siden i Botswana"
+            },
+            "bw-twitter": {
+                "name": "Mapping Botswana på Twitter",
+                "description": "OpenStreetMap Twitter-kontoen i Botswana"
+            },
+            "ym-Centre-Universitaire-de-Recherche-et-dApplication-en-Tldtection-CURAT-de-lUniversit-Felix-Houphouet-Boigny": {
+                "name": "YouthMappers CURAT"
+            },
             "cape-coast-youthmappers": {
                 "description": "Følg oss på Twitter: {url}"
             },
@@ -4480,6 +6032,9 @@
             "no-mailinglist": {
                 "name": "OpenStreetMap Norge e-postliste",
                 "description": "E-postliste for kartleggere og OpenStreetMap-brukere, utviklere og entusiaster i Norge"
+            },
+            "no-telegram": {
+                "name": "@OSM_no på Telegram"
             },
             "se-twitter": {
                 "name": "OpenStreetMap Sverige på Twitter",

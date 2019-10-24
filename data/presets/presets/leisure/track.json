@@ -10,7 +10,8 @@
     "moreFields": [
         "access",
         "covered",
-        "indoor"
+        "indoor",
+        "level"
     ],
     "geometry": [
         "line",

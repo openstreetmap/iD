@@ -1,4 +1,4 @@
-import { t } from '../util/locale';
+import { t, textDirection } from '../util/locale';
 import { modeDrawLine } from '../modes/draw_line';
 import { operationDelete } from '../operations/delete';
 import { utilDisplayLabel } from '../util';
@@ -25,41 +25,14 @@ export function validationDisconnectedWay() {
         if (isSingle) {
 
             if (entity.type === 'way' && !entity.isClosed()) {
-                var firstID = entity.first();
-                var lastID = entity.last();
 
-                var first = graph.entity(firstID);
-                if (first.tags.noexit !== 'yes') {
-                    fixes.push(new validationIssueFix({
-                        icon: 'iD-operation-continue-left',
-                        title: t('issues.fix.continue_from_start.title'),
-                        entityIds: [firstID],
-                        onClick: function(context) {
-                            var wayId = this.issue.entityIds[0];
-                            var way = context.entity(wayId);
-                            var vertexId = this.entityIds[0];
-                            var vertex = context.entity(vertexId);
-                            continueDrawing(way, vertex, context);
-                        }
-                    }));
-                }
-                var last = graph.entity(lastID);
-                if (last.tags.noexit !== 'yes') {
-                    fixes.push(new validationIssueFix({
-                        icon: 'iD-operation-continue',
-                        title: t('issues.fix.continue_from_end.title'),
-                        entityIds: [lastID],
-                        onClick: function(context) {
-                            var wayId = this.issue.entityIds[0];
-                            var way = context.entity(wayId);
-                            var vertexId = this.entityIds[0];
-                            var vertex = context.entity(vertexId);
-                            continueDrawing(way, vertex, context);
-                        }
-                    }));
-                }
+                var startFix = makeContinueDrawingFixIfAllowed(entity.first(), 'start');
+                if (startFix) fixes.push(startFix);
 
-            } else {
+                var endFix = makeContinueDrawingFixIfAllowed(entity.last(), 'end');
+                if (endFix) fixes.push(endFix);
+            }
+            if (!fixes.length) {
                 fixes.push(new validationIssueFix({
                     title: t('issues.fix.connect_feature.title')
                 }));
@@ -85,6 +58,7 @@ export function validationDisconnectedWay() {
 
         return [new validationIssue({
             type: type,
+            subtype: 'highway',
             severity: 'warning',
             message: function(context) {
                 if (this.entityIds.length === 1) {
@@ -110,37 +84,58 @@ export function validationDisconnectedWay() {
 
         function routingIslandForEntity(entity) {
 
-            if (entity.type !== 'way') return null;
+            var routingIsland = new Set();  // the interconnected routable features
+            var waysToCheck = [];           // the queue of remaining routable ways to traverse
 
-            if (!isRoutableWay(entity, true)) return null;
+            function queueParentWays(node) {
+                graph.parentWays(node).forEach(function(parentWay) {
+                    if (!routingIsland.has(parentWay) &&    // only check each feature once
+                        isRoutableWay(parentWay, false)) {  // only check routable features
+                        routingIsland.add(parentWay);
+                        waysToCheck.push(parentWay);
+                    }
+                });
+            }
 
-            var waysToCheck = [entity];
-            var routingIsland = new Set([entity]);
+            if (entity.type === 'way' && isRoutableWay(entity, true)) {
+
+                routingIsland.add(entity);
+                waysToCheck.push(entity);
+
+            } else if (entity.type === 'node' && isRoutableNode(entity)) {
+
+                routingIsland.add(entity);
+                queueParentWays(entity);
+
+            } else {
+                // this feature isn't routable, cannot be a routing island
+                return null;
+            }
 
             while (waysToCheck.length) {
                 var wayToCheck = waysToCheck.pop();
                 var childNodes = graph.childNodes(wayToCheck);
                 for (var i in childNodes) {
                     var vertex = childNodes[i];
-                    var result = isConnectedVertex(vertex, routingIsland);
-                    if (result === true) {
+
+                    if (isConnectedVertex(vertex)) {
+                        // found a link to the wider network, not a routing island
                         return null;
-                    } else if (result === false) {
-                        continue;
                     }
-                    result.forEach(function(connectedWay) {
-                        if (!routingIsland.has(connectedWay)) {
-                            routingIsland.add(connectedWay);
-                            waysToCheck.push(connectedWay);
-                        }
-                    });
+
+                    if (isRoutableNode(vertex)) {
+                        routingIsland.add(vertex);
+                    }
+
+                    queueParentWays(vertex);
                 }
             }
 
+            // no network link found, this is a routing island, return its members
             return routingIsland;
         }
 
-        function isConnectedVertex(vertex, routingIslandWays) {
+        function isConnectedVertex(vertex) {
             // assume ways overlapping unloaded tiles are connected to the wider road network  - #5938
             var osm = services.osm;
             if (osm && !osm.isDataLoaded(vertex.loc)) return true;
@@ -150,24 +145,12 @@ export function validationDisconnectedWay() {
                 vertex.tags.entrance !== 'no') return true;
             if (vertex.tags.amenity === 'parking_entrance') return true;
 
-            var parentsWays = graph.parentWays(vertex);
+            return false;
+        }
 
-            // standalone vertex
-            if (parentsWays.length === 1) return false;
-
-            var connectedWays = new Set();
-
-            for (var i in parentsWays) {
-                var parentWay = parentsWays[i];
-
-                // ignore any way we've already accounted for
-                if (routingIslandWays.has(parentWay)) continue;
-
-                if (isRoutableWay(parentWay, false)) connectedWays.add(parentWay);
-            }
-
-            if (connectedWays.size) return connectedWays;
-
+        function isRoutableNode(node) {
+            // treat elevators as distinct features in the highway network
+            if (node.tags.highway === 'elevator') return true;
             return false;
         }
 
@@ -184,25 +167,43 @@ export function validationDisconnectedWay() {
             });
         }
 
-    };
+        function makeContinueDrawingFixIfAllowed(vertexID, whichEnd) {
+            var vertex = graph.entity(vertexID);
+            if (vertex.tags.noexit === 'yes') return null;
 
-    function continueDrawing(way, vertex, context) {
-        // make sure the vertex is actually visible and editable
-        var map = context.map();
-        if (!context.editable() || !map.trimmedExtent().contains(vertex.loc)) {
-            map.zoomToEase(vertex);
+            var useLeftContinue = (whichEnd === 'start' && textDirection === 'ltr') ||
+                (whichEnd === 'end' && textDirection === 'rtl');
+
+            return new validationIssueFix({
+                icon: 'iD-operation-continue' + (useLeftContinue ? '-left' : ''),
+                title: t('issues.fix.continue_from_' + whichEnd + '.title'),
+                entityIds: [vertexID],
+                onClick: function(context) {
+                    var wayId = this.issue.entityIds[0];
+                    var way = context.hasEntity(wayId);
+                    var vertexId = this.entityIds[0];
+                    var vertex = context.hasEntity(vertexId);
+                    if (!way || !vertex) return;
+
+                    // make sure the vertex is actually visible and editable
+                    var map = context.map();
+                    if (!context.editable() || !map.trimmedExtent().contains(vertex.loc)) {
+                        map.zoomToEase(vertex);
+                    }
+
+                    context.enter(
+                        modeDrawLine(context, {
+                            wayID: wayId,
+                            startGraph: context.graph(),
+                            baselineGraph: context.graph(),
+                            affix: way.affix(vertexId)
+                        })
+                    );
+                }
+            });
         }
 
-        context.enter(
-            modeDrawLine(context, {
-                wayID: way.id,
-                startGraph: context.graph(),
-                baselineGraph: context.graph(),
-                affix: way.affix(vertex.id)
-            })
-        );
-    }
-
+    };
 
     validation.type = type;
 

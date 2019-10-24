@@ -261,9 +261,7 @@
             },
             "reverse": {
                 "title": "Reverse",
-                "description": "Make this line go in the opposite direction.",
-                "key": "V",
-                "annotation": "Reversed a line."
+                "key": "V"
             },
             "split": {
                 "title": "Split",
@@ -492,7 +490,6 @@
             "switch": "Switch back to this background",
             "custom": "Custom",
             "overlays": "Overlays",
-            "imagery_source_faq": "Imagery Info / Report a Problem",
             "reset": "reset",
             "display_options": "Display Options",
             "brightness": "Brightness",
@@ -518,7 +515,6 @@
                     "title": "OpenStreetMap data"
                 }
             },
-            "fill_area": "Fill Areas",
             "map_features": "Map Features",
             "autohidden": "These features have been automatically hidden because too many would be shown on the screen.  You can zoom in to edit them.",
             "osmhidden": "These features have been automatically hidden because the OpenStreetMap layer is hidden."
@@ -1206,7 +1202,6 @@
                     "merge": "Combine (merge) selected features",
                     "disconnect": "Disconnect features at the selected node",
                     "split": "Split a line into two at the selected node",
-                    "reverse": "Reverse a line",
                     "move": "Move selected features",
                     "rotate": "Rotate selected features",
                     "circularize": "Circularise a closed line or area",
@@ -2201,15 +2196,6 @@
                     "label": "Power Output",
                     "placeholder": "500 MW, 1000 MW, 2000 MW..."
                 },
-                "playground/baby": {
-                    "label": "Baby Seat"
-                },
-                "playground/max_age": {
-                    "label": "Maximum Age"
-                },
-                "playground/min_age": {
-                    "label": "Minimum Age"
-                },
                 "population": {
                     "label": "Population"
                 },
@@ -2997,10 +2983,6 @@
                 "amenity/police": {
                     "name": "Police"
                 },
-                "amenity/post_box": {
-                    "name": "Post Box",
-                    "terms": "Mailbox"
-                },
                 "amenity/post_office": {
                     "name": "Post Office"
                 },
@@ -3165,9 +3147,6 @@
                 },
                 "attraction/big_wheel": {
                     "name": "Big Wheel"
-                },
-                "attraction/bumper_car": {
-                    "name": "Bumper Car"
                 },
                 "attraction/bungee_jumping": {
                     "name": "Bungee Jumping"
@@ -3745,9 +3724,6 @@
                 "highway/primary_link": {
                     "name": "Primary Link"
                 },
-                "highway/raceway": {
-                    "name": "Racetrack (Motorsport)"
-                },
                 "highway/residential": {
                     "name": "Residential Road"
                 },
@@ -3882,9 +3858,6 @@
                 },
                 "landuse/commercial": {
                     "name": "Commercial Area"
-                },
-                "landuse/construction": {
-                    "name": "Construction"
                 },
                 "landuse/farm": {
                     "name": "Farmland"
@@ -4254,15 +4227,6 @@
                 },
                 "man_made/works": {
                     "name": "Factory"
-                },
-                "manhole": {
-                    "name": "Manhole"
-                },
-                "manhole/drain": {
-                    "name": "Storm Drain"
-                },
-                "manhole/telecom": {
-                    "name": "Telecom Manhole"
                 },
                 "natural": {
                     "name": "Natural"
@@ -5581,10 +5545,6 @@
             "OSM-Chattanooga": {
                 "name": "OSM Chattanooga",
                 "description": "The OpenStreetMap user group for Chattanooga"
-            },
-            "OSM-NYC": {
-                "name": "OpenStreetMap NYC",
-                "description": "Mappers and OpenStreetMap users, developers and enthusiasts in the New York Metropolitan area"
             },
             "OSM-Portland": {
                 "name": "OpenStreetMap Portland",

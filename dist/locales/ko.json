@@ -383,9 +383,7 @@
             },
             "reverse": {
                 "title": "뒤집기",
-                "description": "이 선을 반대 방향으로 가게 합니다.",
-                "key": "V",
-                "annotation": "길을 뒤집었습니다."
+                "key": "V"
             },
             "split": {
                 "title": "분할",
@@ -618,6 +616,7 @@
             "all_tags": "모든 태그",
             "all_members": "모든 구성원",
             "all_relations": "모든 관계",
+            "add_to_relation": "관계에 추가",
             "new_relation": "새로운 관계...",
             "role": "역할",
             "choose": "지물 유형 선택",
@@ -665,7 +664,6 @@
             "switch": "이 배경으로 복귀합니다",
             "custom": "사용자 지정",
             "overlays": "오버레이",
-            "imagery_source_faq": "이미지 정보 / 버그 신고",
             "reset": "재설정",
             "reset_all": "모두 초기화",
             "display_options": "디스플레이 옵션",
@@ -709,7 +707,6 @@
                     "zoom": "확대하여 데이터 보기"
                 }
             },
-            "fill_area": "공간 채우기",
             "map_features": "지도 지물",
             "autohidden": "이 지물은 화면에 너무 많이 보여질 수 있기 때문에 자동으로 숨겨집니다. 편집하려면 확대할 수 있습니다.",
             "osmhidden": "이 기능은 OpenStreetMap 레이어를 숨겨서 자동으로 숨겨졌습니다."
@@ -750,6 +747,10 @@
             "buildings": {
                 "description": "건물",
                 "tooltip": "건물, 대피소, 차고 등"
+            },
+            "indoor": {
+                "description": "실내 지물",
+                "tooltip": "방, 복도, 계단 등"
             },
             "landuse": {
                 "description": "토지 이용 지물",
@@ -1456,14 +1457,7 @@
             "invalid_format": {
                 "title": "유효하지 않은 서식",
                 "email": {
-                    "message": "{feature}에 유효하지 않은 이메일 주소가 있습니다.",
-                    "message_multi": "{feature}에 유효하지 않은 여러 이메일 주소가 있습니다.",
                     "reference": "이메일 주소는 \"user@example.com\"와 같은 형태여야 합니다."
-                },
-                "website": {
-                    "message": "{feature}에 유효하지 않은 웹사이트가 있습니다.",
-                    "message_multi": "{feature}에 유효하지 않은 여러 웹사이트가 있습니다.",
-                    "reference": "웹사이트는 \"http\"나 \"https\"로 시작해야 합니다"
                 }
             },
             "fix": {
@@ -1487,9 +1481,6 @@
                 },
                 "merge_points": {
                     "title": "여러 점을 병합하기"
-                },
-                "remove_generic_name": {
-                    "title": "이름 삭제하기"
                 },
                 "remove_tag": {
                     "title": "태그 삭제하기"
@@ -1784,7 +1775,6 @@
                     "merge": "선택된 지물 병합",
                     "disconnect": "선택한 노드에서 지물 연결 해제",
                     "split": "선택한 노드에서 선을 두개로 분할하기",
-                    "reverse": "길을 반대로 하기",
                     "move": "선택된 지물 이동하기",
                     "rotate": "선택된 지물 회전하기",
                     "circularize": "닫힌 선이나 공간을 둥글게 하기",
@@ -2111,6 +2101,10 @@
                 "building": {
                     "label": "건물"
                 },
+                "building/levels/underground": {
+                    "label": "지하 층수",
+                    "placeholder": "2, 4, 6..."
+                },
                 "building/levels_building": {
                     "label": "층수",
                     "placeholder": "2, 4, 6..."
@@ -2152,6 +2146,9 @@
                 },
                 "castle_type": {
                     "label": "유형"
+                },
+                "charge_fee": {
+                    "label": "금액"
                 },
                 "check_date": {
                     "label": "마지막으로 확인한 날짜"
@@ -2309,6 +2306,10 @@
                 "devices": {
                     "label": "장치 수",
                     "placeholder": "1, 2, 3..."
+                },
+                "diameter": {
+                    "label": "지름",
+                    "placeholder": "5 mm, 10 cm, 15 in…"
                 },
                 "diet_multi": {
                     "label": "식성"
@@ -2734,6 +2735,9 @@
                 "maxweight": {
                     "label": "최대 중량"
                 },
+                "maxweight_bridge": {
+                    "label": "최대 중량"
+                },
                 "memorial": {
                     "label": "유형"
                 },
@@ -2859,7 +2863,10 @@
                     "label": "영업시간"
                 },
                 "operator": {
-                    "label": "운영"
+                    "label": "운영 주체"
+                },
+                "operator/type": {
+                    "label": "운영 주체 유형"
                 },
                 "outdoor_seating": {
                     "label": "야외 좌석"
@@ -2941,15 +2948,6 @@
                 "plant/output/electricity": {
                     "label": "전력 출력",
                     "placeholder": "500 MW, 1000 MW, 2000 MW..."
-                },
-                "playground/baby": {
-                    "label": "유아석"
-                },
-                "playground/max_age": {
-                    "label": "최대 나이 제한"
-                },
-                "playground/min_age": {
-                    "label": "최소 나이 제한"
                 },
                 "population": {
                     "label": "인구"
@@ -3036,6 +3034,15 @@
                 "religion": {
                     "label": "종교"
                 },
+                "reservation": {
+                    "label": "예약",
+                    "options": {
+                        "no": "불가",
+                        "recommended": "권장",
+                        "required": "필수",
+                        "yes": "가능"
+                    }
+                },
                 "restriction": {
                     "label": "유형"
                 },
@@ -3071,6 +3078,10 @@
                 },
                 "sanitary_dump_station": {
                     "label": "화장실 처리장"
+                },
+                "screen": {
+                    "label": "스크린 수",
+                    "placeholder": "1, 4, 8…"
                 },
                 "seamark/beacon_isolated_danger/shape": {
                     "label": "모양"
@@ -3763,7 +3774,7 @@
                     "terms": "불임 클리닉"
                 },
                 "amenity/clock": {
-                    "name": "시계방",
+                    "name": "시계",
                     "terms": "시계방"
                 },
                 "amenity/clock/sundial": {
@@ -3811,6 +3822,9 @@
                 "amenity/dojo": {
                     "name": "도장 / 무술 학원",
                     "terms": "도장 / 무술 학원"
+                },
+                "amenity/dressing_room": {
+                    "name": "탈의실"
                 },
                 "amenity/drinking_water": {
                     "name": "식수대",
@@ -3900,6 +3914,9 @@
                     "name": "PC방",
                     "terms": "PC방"
                 },
+                "amenity/karaoke": {
+                    "name": "노래방"
+                },
                 "amenity/kindergarten": {
                     "name": "유치원 부지",
                     "terms": "유치원 부지, 어린이집 부지"
@@ -3907,6 +3924,9 @@
                 "amenity/language_school": {
                     "name": "언어 학원",
                     "terms": "언어 학원,국어 학원,영어 학원"
+                },
+                "amenity/letter_box": {
+                    "name": "우편함"
                 },
                 "amenity/library": {
                     "name": "도서관",
@@ -4007,13 +4027,15 @@
                     "name": "경찰서",
                     "terms": "경찰서, 파출소"
                 },
-                "amenity/post_box": {
-                    "name": "우체통",
-                    "terms": "우체통"
+                "amenity/polling_station": {
+                    "name": "상설 투표소"
                 },
                 "amenity/post_office": {
                     "name": "우체국",
                     "terms": "우체국, 우편취급국"
+                },
+                "amenity/prep_school": {
+                    "name": "학원"
                 },
                 "amenity/prison": {
                     "name": "교도소 부지",
@@ -4300,10 +4322,6 @@
                 "attraction/big_wheel": {
                     "name": "대관람차",
                     "terms": "대관람차"
-                },
-                "attraction/bumper_car": {
-                    "name": "범퍼카",
-                    "terms": "범퍼카"
                 },
                 "attraction/bungee_jumping": {
                     "name": "번지점프",
@@ -4953,6 +4971,9 @@
                     "name": "헌혈의 집",
                     "terms": "헌혈의 집, 헌혈 센터"
                 },
+                "healthcare/counselling": {
+                    "name": "상담소"
+                },
                 "healthcare/hospice": {
                     "name": "호스피스"
                 },
@@ -5116,10 +5137,6 @@
                 "highway/primary_link": {
                     "name": "1차 도로 연결로",
                     "terms": "1차 도로 연결로"
-                },
-                "highway/raceway": {
-                    "name": "경주로(모터스포츠)",
-                    "terms": "경주로 (모터 스포즈)"
                 },
                 "highway/residential": {
                     "name": "주거 도로",
@@ -5337,10 +5354,6 @@
                     "name": "상업 지역",
                     "terms": "상업 지역"
                 },
-                "landuse/construction": {
-                    "name": "공사 중",
-                    "terms": "공사 중"
-                },
                 "landuse/farm": {
                     "name": "농토"
                 },
@@ -5351,6 +5364,10 @@
                 "landuse/farmyard": {
                     "name": "농지",
                     "terms": "농지"
+                },
+                "landuse/flowerbed": {
+                    "name": "꽃밭",
+                    "terms": "화단"
                 },
                 "landuse/garages": {
                     "name": "차고 부지"
@@ -5508,6 +5525,9 @@
                 "leisure/dog_park": {
                     "name": "개 공원",
                     "terms": "개 공원"
+                },
+                "leisure/escape_game": {
+                    "name": "방탈출"
                 },
                 "leisure/firepit": {
                     "name": "불구덩이",
@@ -5790,6 +5810,9 @@
                     "name": "관측소",
                     "terms": "날씨,기상,지진,대기,미세먼지,GPS"
                 },
+                "man_made/obelisk": {
+                    "name": "오벨리스크"
+                },
                 "man_made/observatory": {
                     "name": "관측소",
                     "terms": "천문대,기상대"
@@ -5881,18 +5904,6 @@
                 "man_made/works": {
                     "name": "공장",
                     "terms": "공장"
-                },
-                "manhole": {
-                    "name": "맨홀",
-                    "terms": "맨홀"
-                },
-                "manhole/drain": {
-                    "name": "우수관",
-                    "terms": "빗물 배수관"
-                },
-                "manhole/telecom": {
-                    "name": "전기 통신 맨홀",
-                    "terms": "뚜껑,전화,구멍,텔레콤"
                 },
                 "natural": {
                     "name": "자연"
@@ -6142,6 +6153,9 @@
                 },
                 "office/physician": {
                     "name": "내과의원"
+                },
+                "office/political_party": {
+                    "name": "정당 사무소"
                 },
                 "office/private_investigator": {
                     "name": "사설탐정 사무소",
@@ -6678,6 +6692,9 @@
                     "name": "양초 가게",
                     "terms": "양초 가게"
                 },
+                "shop/cannabis": {
+                    "name": "대마초 가게"
+                },
                 "shop/car": {
                     "name": "자동차 대리점",
                     "terms": "자동차 대리점"
@@ -6982,6 +6999,9 @@
                     "name": "사진 가게",
                     "terms": "카메라,사진기,필름"
                 },
+                "shop/printer_ink": {
+                    "name": "프린터 잉크 가게"
+                },
                 "shop/pyrotechnics": {
                     "name": "불꽃놀이 상점"
                 },
@@ -7114,6 +7134,15 @@
                 "tourism/artwork": {
                     "name": "예술품",
                     "terms": "예술 작품, 아트워크"
+                },
+                "tourism/artwork/bust": {
+                    "name": "흉상"
+                },
+                "tourism/artwork/graffiti": {
+                    "name": "그라피티"
+                },
+                "tourism/artwork/installation": {
+                    "name": "설치 미술"
                 },
                 "tourism/artwork/mural": {
                     "name": "벽화"
@@ -7646,13 +7675,7 @@
                 "description": "방글라데시 내 오픈스트리트맵 개선하기"
             },
             "OSM-India-facebook": {
-                "description": "인도 내 오픈스트리트맵 개선하기",
-                "events": {
-                    "sotmasia2018": {
-                        "name": "스테이트오브더맵 2018",
-                        "description": "인도 내 스테이트오브맵 아시아에서 2018년 오픈스트리트맵 전 지방 행사에 참여하세요"
-                    }
-                }
+                "description": "인도 내 오픈스트리트맵 개선하기"
             },
             "osm-india-github": {
                 "name": "오픈스트리트맵 인도 깃허브"
@@ -7754,9 +7777,6 @@
             },
             "byosm": {
                 "description": "오픈스트리트맵 벨라루스 텔레그램 대화방"
-            },
-            "be-facebook": {
-                "name": "오픈스트리트맵 벨기에 공동체"
             },
             "be-irc": {
                 "name": "오픈스트리트맵 벨기에 IRC",
@@ -7906,11 +7926,11 @@
                 "name": "오픈스트리트맵 스웨덴 트위터",
                 "description": "{url}에서 트위터 팔로우하기"
             },
-            "gb-mailinglist": {
-                "name": "Talk-gb 메일링리스트"
-            },
             "gb-irc": {
                 "description": "irc.oftc.net(6667 포트)의 #osm-gb 대화방에 참여하세요"
+            },
+            "gb-mailinglist": {
+                "name": "Talk-gb 메일링리스트"
             },
             "OSM-CU-telegram": {
                 "name": "오픈스트리트맵 쿠바 텔레그램",
@@ -8067,13 +8087,6 @@
             "LATAM-Twitter": {
                 "description": "{url}에서 트위터 팔로우하기"
             },
-            "osm-latam": {
-                "events": {
-                    "sotm-latam-2018": {
-                        "where": "아르헨티나 부에노스아이레스"
-                    }
-                }
-            },
             "OSM-Discord": {
                 "name": "오픈스트리트맵 디스코드"
             },
@@ -8101,13 +8114,7 @@
             },
             "OSMF": {
                 "name": "오픈스트리트맵 재단",
-                "description": "OSMF는 오픈스트리트맵 프로젝트를 지원하는 영국에 기반을 둔 비영리 재단입니다.",
-                "events": {
-                    "sotm2018": {
-                        "name": "스테이트오브더맵 2018",
-                        "where": "이탈리아 밀라노"
-                    }
-                }
+                "description": "OSMF는 오픈스트리트맵 프로젝트를 지원하는 영국에 기반을 둔 비영리 재단입니다."
             }
         }
     }

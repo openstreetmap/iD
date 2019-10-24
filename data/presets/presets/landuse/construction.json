@@ -1,5 +1,5 @@
 {
-    "icon": "temaki-tools",
+    "icon": "temaki-bulldozer",
     "fields": [
         "name",
         "construction",
@@ -10,10 +10,10 @@
     ],
     "moreFields": [
         "address",
-        "website",
-        "phone",
         "email",
-        "fax"
+        "fax",
+        "phone",
+        "website"
     ],
     "geometry": [
         "area"
@@ -21,6 +21,15 @@
     "tags": {
         "landuse": "construction"
     },
-    "terms": [],
-    "name": "Construction"
+    "terms": [
+        "building",
+        "bulldozer",
+        "construction site",
+        "construction zone",
+        "crane",
+        "demolition",
+        "development",
+        "infrastructure"
+    ],
+    "name": "Construction Area"
 }

@@ -13,16 +13,17 @@ export function uiToolAddFavorite(context) {
 
         var items = context.presets().getFavorites().slice(0, 20);
 
+        var precedingCount = context.storage('tool.add_generic.toggledOn') === 'true' ? 3 : 0;
+
         items.forEach(function(item, index) {
+            var totalIndex = precedingCount + index;
             var keyCode;
             // use number row order: 1 2 3 4 5 6 7 8 9 0
             // use the same for RTL even though the layout is backward: #6107
-            if (index === 9) {
-                keyCode = 0;
-            } else if (index < 10) {
-                keyCode = index + 1;
-            } else if (index > 10) {
+            if (totalIndex > 10) {
                 keyCode = null;
+            } else if (totalIndex < 10) {
+                keyCode = totalIndex + 1;
             }
             if (keyCode !== undefined && keyCode !== null) {
                 item.key = keyCode.toString();

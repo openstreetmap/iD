@@ -152,9 +152,7 @@
             },
             "reverse": {
                 "title": "Balik",
-                "description": "Buat garis ini menjadi berlawanan arah.",
-                "key": "V",
-                "annotation": "Sebuah garis dibalik."
+                "key": "V"
             },
             "split": {
                 "title": "Pisah",
@@ -292,7 +290,6 @@
             "title": "Data Peta",
             "description": "Data Peta",
             "data_layers": "Lapisan Data",
-            "fill_area": "Isi Area",
             "map_features": "Fitur Peta",
             "autohidden": "Fitur-fitur berikut telah disembunyikan secara otomatis karena akan terlalu banyak yang tampil pada layar. Anda dapat perbesar untuk menyuntingnya."
         },
@@ -1165,10 +1162,6 @@
                     "name": "Polisi",
                     "terms": "Polisi"
                 },
-                "amenity/post_box": {
-                    "name": "Kotak Surat",
-                    "terms": "Kotak Pos"
-                },
                 "amenity/post_office": {
                     "name": "Kantor Pos",
                     "terms": "Surat"
@@ -1652,10 +1645,6 @@
                 "landuse/commercial": {
                     "name": "Daerah Komersial",
                     "terms": "Area Komersial, Daerah Komersial, Perkantoran"
-                },
-                "landuse/construction": {
-                    "name": "Konstruksi",
-                    "terms": "Sedang Dibangun"
                 },
                 "landuse/farm": {
                     "name": "Pertanian"

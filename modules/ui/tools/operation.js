@@ -1,5 +1,6 @@
 import {
     event as d3_event,
+    select as d3_select
 } from 'd3-selection';
 
 import { svgIcon } from '../../svg/icon';
@@ -18,7 +19,8 @@ export function uiToolOperation(context, operationClass, tool) {
     var button,
         tooltipBehavior = tooltip()
         .placement('bottom')
-        .html(true);
+        .html(true)
+        .scrollContainer(d3_select('#bar'));
 
     tool.render = function(selection) {
 
@@ -58,8 +60,9 @@ export function uiToolOperation(context, operationClass, tool) {
     tool.allowed = function() {
         var mode = context.mode();
         if (mode.id !== 'select') return false;
+
         var op = operationClass(mode.selectedIDs(), context);
-        if (op.available()) {
+        if (op.available('toolbar')) {
             setOperation(op);
             return true;
         }

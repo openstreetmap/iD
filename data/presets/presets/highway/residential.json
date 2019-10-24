@@ -16,11 +16,11 @@
         "incline",
         "junction_line",
         "lit",
-        "oneway/bicycle",
         "maxheight",
         "maxspeed/advisory",
         "maxweight_bridge",
         "not/name",
+        "oneway/bicycle",
         "smoothness",
         "trolley_wire"
     ],

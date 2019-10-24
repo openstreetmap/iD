@@ -1,0 +1,27 @@
+{
+    "icon": "temaki-power_manhole",
+    "fields": [
+        "operator",
+        "ref"
+    ],
+    "geometry": [
+        "point",
+        "vertex"
+    ],
+    "tags": {
+        "manhole": "power"
+    },
+    "addTags": {
+        "man_made": "manhole",
+        "manhole": "power"
+    },
+    "terms": [
+        "cover",
+        "hole",
+        "electric",
+        "hole",
+        "power",
+        "utility"
+    ],
+    "name": "Power Utility Manhole"
+}

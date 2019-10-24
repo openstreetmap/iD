@@ -396,9 +396,21 @@
             },
             "reverse": {
                 "title": "Inverti direzione",
-                "description": "Inverti il senso di direzione di questa linea.",
+                "description": {
+                    "point": "Ribalta la direzione di questo punto.",
+                    "points": "Ribalta la direzione di questi punti.",
+                    "line": "Fai andare questa linea nella direzione opposta.",
+                    "lines": "Fai andare queste linee nella direzione opposta.",
+                    "features": "Ribalta le direzioni di questi elementi."
+                },
                 "key": "V",
-                "annotation": "Cambiato verso ad una linea."
+                "annotation": {
+                    "point": "Invertito un punto.",
+                    "points": "Invertito punti multipli.",
+                    "line": "Invertito una linea.",
+                    "lines": "Invertito linee multiple.",
+                    "features": "Invertito caratteristiche multiple."
+                }
             },
             "split": {
                 "title": "Dividi",
@@ -697,7 +709,7 @@
             "switch": "Ritorna a questo sfondo",
             "custom": "Personalizzato",
             "overlays": "Livelli sovrapposti",
-            "imagery_source_faq": "Informazioni sulle immagini satellitari / Segnala un problema",
+            "imagery_problem_faq": "Segnala un problema nelle immagini",
             "reset": "reset",
             "reset_all": "Ripristina tutto",
             "display_options": "Mostra opzioni",
@@ -709,6 +721,10 @@
                 "description": "Mostra miniatura",
                 "tooltip": "Mostra una mappa più vasta per localizzare meglio l'area corrente.",
                 "key": "/"
+            },
+            "panel": {
+                "description": "Mostra pannello dettagli",
+                "tooltip": "Mostra informazioni avanzate sullo sfondo."
             },
             "fix_misalignment": "Correggi spostamento immagini",
             "offset": "Per correggere lo spostamento delle immagini trascina dove preferisci all'interno dell'area grigia sottostante o inserisci i valori correttivi in metri."
@@ -741,10 +757,19 @@
                     "zoom": "Ingrandisci sui dati"
                 }
             },
-            "fill_area": "Riempimento aree",
+            "style_options": "Opzioni di Stile",
+            "highlight_edits": {
+                "key": "G"
+            },
             "map_features": "Elementi della mappa",
             "autohidden": "Questi elementi sono stati automaticamente nascosti perché sarebbero stati troppi da visualizzare. Per modificarli è necessario ingrandire.",
             "osmhidden": "Questi elementi sono stati nascosti automaticamente perché il livello OpenStreetMap è nascosto."
+        },
+        "visual_diff": {
+            "highlight_edits": {
+                "description": "Evidenzia Modifiche",
+                "tooltip": "Descrivi gli elementi modificati"
+            }
         },
         "photo_overlays": {
             "title": "Livelli foto",
@@ -1315,6 +1340,11 @@
         "mapillary_images": {
             "tooltip": "Fotografie stradali da Mapillary"
         },
+        "mapillary_map_features": {
+            "title": "Elementi della mappa",
+            "tooltip": "Elementi della mappa da Mapillary",
+            "request_data": "Richiedi dati"
+        },
         "mapillary": {
             "title": "Mapillary",
             "signs": {
@@ -1591,18 +1621,21 @@
             "rules": {
                 "title": "Regole"
             },
+            "user_resolved_issues": "Problemi risolti dalle tue modifiche",
+            "warnings_and_errors": "Avvertimenti ed errori",
             "no_issues": {
                 "message": {
                     "everything": "Tutto sembra a posto",
                     "everything_in_view": "Tutto quello in vista sembra a posto",
                     "edits": "Le tue modifiche sembrano andare bene",
-                    "edits_in_view": "Le tue modifiche in vista sembrano andare bene"
+                    "edits_in_view": "Le tue modifiche in vista sembrano andare bene",
+                    "no_edits": "Non hai ancora modifiche"
                 },
                 "hidden_issues": {
                     "none": "I problemi rilevati appariranno qua",
                     "elsewhere": "Problemi altrove: {count}",
-                    "other_features": "Problemi in altri oggetti: {count}",
-                    "other_features_elsewhere": "Problemi altrove in altri oggetti: {count}",
+                    "everything_else": "Problemi con tutto il resto: {count}",
+                    "everything_else_elsewhere": "Problemi altrove con tutto il resto: {count}",
                     "disabled_rules": "Problemi da regole disabilitate: {count}",
                     "disabled_rules_elsewhere": "Problemi altrove da regole disabilitate: {count}",
                     "ignored_issues": "Problemi ignorati: {count}",
@@ -1720,16 +1753,17 @@
                 }
             },
             "fixme_tag": {
-                "title": "Richieste “fix me”",
                 "message": "{feature} contiene una richiesta “fix me”",
-                "tip": "Trova oggetti con etichetta “fixme”",
                 "reference": "L’etichetta “fixme” indica che un mappatore ha richiesto l’aiuto per un oggetto."
             },
             "generic_name": {
-                "title": "Nomi sospetti",
                 "message": "{feature} ha il nome “{name}” sospetto",
-                "tip": "Trova oggetti con nome generico o sospetto",
+                "message_language": "{feature} ha il nome sospetto \"{name}\" in {language}",
                 "reference": "Il nome di un oggetto dovrebbe essere quello reale, che si può vedere sul campo."
+            },
+            "help_request": {
+                "title": "Richieste di Aiuto",
+                "tip": "Trova elementi di cui altri hanno richiesto assistenza"
             },
             "incompatible_source": {
                 "title": "Fonti sospette",
@@ -1741,19 +1775,22 @@
                     "reference": "I prodotti di Google sono proprietari e non devono essere usati come riferimento."
                 }
             },
+            "incorrect_name": {
+                "message": "{feature} ha il nome sbagliato \"{name}\"",
+                "message_language": "{feature} ha il nome sbagliato \"{name}\" in {language}"
+            },
             "invalid_format": {
                 "title": "Formattazione non valida",
                 "tip": "Trova etichette con formato inatteso",
                 "email": {
-                    "message": "{feature} ha un indirizzo email non valido.",
-                    "message_multi": "{feature} ha molteplici indirizzi email non validi.",
+                    "message": "{feature} ha un indirizzo email non valido",
+                    "message_multi": "{feature} ha più indirizzi e-mail non validi",
                     "reference": "Un indirizzo email dovrebbe essere del tipo “utente@esempio.it”."
-                },
-                "website": {
-                    "message": "{feature} ha un sito web non valido.",
-                    "message_multi": "{feature} ha molteplici siti web non validi.",
-                    "reference": "Un sito web dovrebbe cominciare con “http” o “https”."
                 }
+            },
+            "mismatched_geometry": {
+                "title": "Geometria non corrispondente",
+                "tip": "Trova funzioni con tag e geometria contrastanti"
             },
             "missing_role": {
                 "title": "Ruoli mancanti",
@@ -1792,8 +1829,13 @@
                 },
                 "noncanonical_brand": {
                     "message": "{feature} sembra un brand con etichette inconsuete.",
+                    "message_incomplete": "{feature} sembra un marchio con tag incompleti",
                     "reference": "Tutti gli oggetti dello stesso brand dovrebbero essere etichettati ugualmente."
                 }
+            },
+            "point_as_vertex": {
+                "message": "{feature} dovrebbe essere un punto autonomo basato sui suoi tag",
+                "reference": "Alcune funzioni non dovrebbero far parte di linee o aree."
             },
             "private_data": {
                 "title": "Informazioni private",
@@ -1803,10 +1845,12 @@
                     "message": "{feature} potrebbe contenere informazioni di contatto private"
                 }
             },
+            "suspicious_name": {
+                "title": "Nomi Sospetti",
+                "tip": "Trova elementi con nomi generici o sospetti"
+            },
             "tag_suggests_area": {
-                "title": "Linee mappate come aree",
                 "message": "{feature} in base all’etichetta “{tag}” dovrebbe essere un’area chiusa",
-                "tip": "Trova oggetti mappati come percorsi che dovrebbero probabilmente essere mappati come aree",
                 "reference": "Le aree devono avere gli estremi collegati tra loro."
             },
             "unknown_road": {
@@ -1846,7 +1890,14 @@
                     "reference": "Spesso gli edifici con angoli non retti possono essere tracciati con più precisione."
                 }
             },
+            "vertex_as_point": {
+                "message": "{feature} dovrebbe far parte di una linea o area in base ai suoi tag",
+                "reference": "Alcuni elementi non dovrebbero essere punti indipendenti."
+            },
             "fix": {
+                "address_the_concern": {
+                    "title": "Affronta il problema"
+                },
                 "connect_almost_junction": {
                     "annotation": "Collegati degli elementi molto vicini."
                 },
@@ -1875,6 +1926,9 @@
                 "delete_feature": {
                     "title": "Cancella questo elemento"
                 },
+                "extract_point": {
+                    "title": "Estrai questo punto"
+                },
                 "ignore_issue": {
                     "title": "Ignora questo problema"
                 },
@@ -1895,8 +1949,10 @@
                     "title": "Rimuovi dalla relazione"
                 },
                 "remove_generic_name": {
-                    "title": "Rimuovi il nome",
                     "annotation": "Rimosso un nome generico."
+                },
+                "remove_mistaken_name": {
+                    "annotation": "Rimosso un nome errato."
                 },
                 "remove_private_info": {
                     "annotation": "Informazione privata rimossa."
@@ -1910,6 +1966,9 @@
                 },
                 "remove_tags": {
                     "title": "Rimuovi le etichette"
+                },
+                "remove_the_name": {
+                    "title": "Rimosso il nome"
                 },
                 "reposition_features": {
                     "title": "Riposiziona gli elementi"
@@ -2268,7 +2327,8 @@
                     "sidebar": "Commuta barra laterale",
                     "wireframe": "Commuta modalità \"fil di ferro\"",
                     "osm_data": "Commuta dati OpenStreetMap",
-                    "minimap": "Commuta minimappa"
+                    "minimap": "Commuta minimappa",
+                    "highlight_edits": "Evidenzia le modifiche non salvate"
                 },
                 "selecting": {
                     "title": "Selezione elementi",
@@ -2312,7 +2372,7 @@
                     "disconnect": "Disconnetti gli elementi dal nodo selezionato",
                     "extract": "Estrai un nodo da un oggetto",
                     "split": "Spezza una linea in due sul nodo selezionato",
-                    "reverse": "Inverti la direzione di una linea",
+                    "reverse": "Invertire gli elementi selezionati",
                     "move": "Sposta gli elementi selezionati",
                     "rotate": "Ruota gli elementi selezionati",
                     "orthogonalize": "Rendi retti gli angoli di un percorso o un’area",
@@ -2456,6 +2516,7 @@
                         }
                     },
                     "placeholder": "Non specificato",
+                    "terms": "Accesso Consentito, Accesso Permesso, Accesso Pubblico",
                     "types": {
                         "access": "Chiunque",
                         "bicycle": "Biciclette",
@@ -2465,7 +2526,8 @@
                     }
                 },
                 "access_simple": {
-                    "label": "Accesso consentito"
+                    "label": "Accesso consentito",
+                    "terms": "Accesso Consentito, Accesso Permesso, Accesso Pubblico"
                 },
                 "addr/interpolation": {
                     "label": "Tipo",
@@ -2510,7 +2572,8 @@
                         "suburb": "Circoscrizione",
                         "suburb!jp": "Rione",
                         "unit": "Unità"
-                    }
+                    },
+                    "terms": "Posizione, Luogo, Ubicazione, Indirizzo"
                 },
                 "admin_level": {
                     "label": "Livello amministrativo"
@@ -2559,7 +2622,8 @@
                     "label": "Prodotti"
                 },
                 "air_conditioning": {
-                    "label": "Aria condizionata"
+                    "label": "Aria condizionata",
+                    "terms": "Aria condizionata, Aria climatizzata"
                 },
                 "amenity": {
                     "label": "Tipo"
@@ -2574,7 +2638,8 @@
                     "label": "Animali"
                 },
                 "architect": {
-                    "label": "Architetto"
+                    "label": "Architetto",
+                    "terms": "Architetto"
                 },
                 "area/highway": {
                     "label": "Tipo"
@@ -2591,11 +2656,15 @@
                 "attraction": {
                     "label": "Tipo"
                 },
+                "baby_seat": {
+                    "label": "Seggiolino"
+                },
                 "backrest": {
                     "label": "Schienale"
                 },
                 "bar": {
-                    "label": "Bar"
+                    "label": "Bar",
+                    "terms": "Bar"
                 },
                 "barrier": {
                     "label": "Tipo"
@@ -2621,13 +2690,24 @@
                     "label": "Specialità"
                 },
                 "bench": {
-                    "label": "Panchina"
+                    "label": "Panchina",
+                    "terms": "Panca, Panchina"
                 },
                 "bicycle_parking": {
                     "label": "Tipo"
                 },
                 "bin": {
-                    "label": "Cestino della spazzatura"
+                    "label": "Cestino della spazzatura",
+                    "terms": "Cestino dei rifiuti, Bidone della spazzatura, Contenitore rifiuti"
+                },
+                "blind": {
+                    "label": "Accesso per non vedenti",
+                    "options": {
+                        "limited": "Limitato",
+                        "no": "No",
+                        "yes": "Si"
+                    },
+                    "terms": "Accesso per non vedenti"
                 },
                 "blood_components": {
                     "label": "Componenti sanguigni",
@@ -2641,6 +2721,9 @@
                 "board_type": {
                     "label": "Tipo"
                 },
+                "bollard": {
+                    "label": "Tipo"
+                },
                 "booth": {
                     "label": "Cabina"
                 },
@@ -2651,10 +2734,12 @@
                     "label": "Tipo"
                 },
                 "brand": {
-                    "label": "Brand"
+                    "label": "Brand",
+                    "terms": "Marca, marchio"
                 },
                 "brewery": {
-                    "label": "Birre alla spina"
+                    "label": "Birre alla spina",
+                    "terms": "Birre alla spina"
                 },
                 "bridge": {
                     "label": "Tipo",
@@ -2664,18 +2749,22 @@
                     "label": "Tipo"
                 },
                 "building": {
-                    "label": "Edificio"
+                    "label": "Edificio",
+                    "terms": "Edificio, Palazzo, Stabile, Costruzione"
                 },
                 "building/levels/underground": {
                     "label": "Piani sotterranei",
-                    "placeholder": "2, 4, 6..."
+                    "placeholder": "2, 4, 6...",
+                    "terms": "Livelli Sotterranei"
                 },
                 "building/levels_building": {
                     "label": "Piani dell’edificio",
-                    "placeholder": "2, 4, 6..."
+                    "placeholder": "2, 4, 6...",
+                    "terms": "Livelli di Costruzione"
                 },
                 "building/material": {
-                    "label": "Materiale"
+                    "label": "Materiale",
+                    "terms": "Materiale"
                 },
                 "building_area": {
                     "label": "Edificio"
@@ -2704,7 +2793,8 @@
                 },
                 "capacity": {
                     "label": "Capienza",
-                    "placeholder": "50, 100, 200..."
+                    "placeholder": "50, 100, 200...",
+                    "terms": "Capacità, Capienza"
                 },
                 "cash_in": {
                     "label": "Versamenti"
@@ -2712,7 +2802,16 @@
                 "castle_type": {
                     "label": "Tipo"
                 },
+                "changing_table": {
+                    "label": "Fasciatoio"
+                },
                 "charge_fee": {
+                    "label": "Importo Tassa",
+                    "placeholder": "1 EUR, 5 USD, 10 JPY…",
+                    "terms": "Importo Tassa, Ammontare Commissione, Importo Provvigione, Importo Dovuto"
+                },
+                "charge_toll": {
+                    "label": "Importo Pedaggio",
                     "placeholder": "1 EUR, 5 USD, 10 JPY…"
                 },
                 "check_date": {
@@ -3082,7 +3181,8 @@
                         "male": "Maschile",
                         "unisex": "Unisex"
                     },
-                    "placeholder": "Sconosciuto"
+                    "placeholder": "Sconosciuto",
+                    "terms": "[traduci con sinonimi o termini legati a 'Genere', separati da virgole]"
                 },
                 "generator/method": {
                     "label": "Metodo"
@@ -3124,13 +3224,16 @@
                     "label": "Specialità"
                 },
                 "height": {
-                    "label": "Altezza (Metri)"
+                    "label": "Altezza (Metri)",
+                    "terms": "[traduci con sinonimi o termini legati a 'Altezza (Metri)', separati da virgole]"
                 },
                 "height_building": {
-                    "label": "Altezza edificio (metri)"
+                    "label": "Altezza edificio (metri)",
+                    "terms": "[traduci con sinonimi o termini legati a 'Altezza Edifici (Metri)', separati da virgole]"
                 },
                 "highspeed": {
-                    "label": "Alta velocità"
+                    "label": "Alta velocità",
+                    "terms": "[traduci con sinonimi o termini legati a 'Alta velocità', separati da virgole]"
                 },
                 "highway": {
                     "label": "Tipo"
@@ -3204,13 +3307,18 @@
                     }
                 },
                 "indoor": {
-                    "label": "Al chiuso"
+                    "label": "Al chiuso",
+                    "terms": "[traduci con sinonimi o termini legati a 'Interno', separati da virgole]"
                 },
                 "indoor_type": {
                     "label": "Tipo"
                 },
                 "industrial": {
                     "label": "Tipo"
+                },
+                "informal": {
+                    "label": "Informale",
+                    "terms": "[traduci con sinonimi o termini legati a 'Informale', separati da virgole]"
                 },
                 "information": {
                     "label": "Tipo"
@@ -3271,7 +3379,8 @@
                 },
                 "lanes": {
                     "label": "Corsie",
-                    "placeholder": "1, 2, 3..."
+                    "placeholder": "1, 2, 3...",
+                    "terms": "[traduci con sinonimi o termini legati a 'Corsie', separati da virgole]"
                 },
                 "language_multi": {
                     "label": "Lingue"
@@ -3323,7 +3432,12 @@
                     "label": "Lunghezza (Metri)"
                 },
                 "level": {
-                    "label": "Livello"
+                    "label": "Livello",
+                    "terms": "[traduci con sinonimi o termini legati a 'Piani', separati da virgole]"
+                },
+                "level_semi": {
+                    "label": "Piani",
+                    "terms": "[traduci con sinonimi o termini legati a 'Piani', separati da virgole]"
                 },
                 "levels": {
                     "label": "Piani",
@@ -3336,7 +3450,8 @@
                     "label": "Illuminazione"
                 },
                 "location": {
-                    "label": "Posizione"
+                    "label": "Posizione",
+                    "terms": "[traduci con sinonimi o termini legati a 'Posizione', separati da virgole]"
                 },
                 "location_pool": {
                     "label": "Posizione",
@@ -3365,7 +3480,11 @@
                     "label": "Tipo"
                 },
                 "material": {
-                    "label": "Materiale"
+                    "label": "Materiale",
+                    "terms": "[traduci con sinonimi o termini legati a 'Materiale', separati da virgole]"
+                },
+                "max_age": {
+                    "label": "Età massima"
                 },
                 "maxheight": {
                     "label": "Altezza massima",
@@ -3373,7 +3492,8 @@
                 },
                 "maxspeed": {
                     "label": "Limite di velocità",
-                    "placeholder": "40, 50, 60..."
+                    "placeholder": "40, 50, 60...",
+                    "terms": "[traduci con sinonimi o termini legati a 'Limite Velocità', separati da vrigole]"
                 },
                 "maxspeed/advisory": {
                     "label": "Limite di velocità consigliata",
@@ -3394,9 +3514,14 @@
                 "microbrewery": {
                     "label": "Microbirrificio"
                 },
+                "min_age": {
+                    "label": "Età minima",
+                    "terms": "[traduci con sinonimi o termini legati a 'Età Minima', separati da virgole]"
+                },
                 "minspeed": {
                     "label": "Limite minimo di velocità",
-                    "placeholder": "20, 30, 40..."
+                    "placeholder": "20, 30, 40...",
+                    "terms": "[traduci con sinonimi o termini legati a 'Limite Minimo di Velocità', separati da virgole]"
                 },
                 "monitoring_multi": {
                     "label": "Controllo"
@@ -3517,7 +3642,8 @@
                 },
                 "opening_hours": {
                     "label": "Orari",
-                    "placeholder": "Sconosciuto"
+                    "placeholder": "Sconosciuto",
+                    "terms": "[traduci con sinonimi o termini legati a 'Ore', separati da virgole]"
                 },
                 "operator": {
                     "label": "Operatore"
@@ -3675,17 +3801,11 @@
                 "playground": {
                     "label": "Tipo"
                 },
-                "playground/baby": {
-                    "label": "Seggiolino"
-                },
-                "playground/max_age": {
-                    "label": "Età massima"
-                },
-                "playground/min_age": {
-                    "label": "Età minima"
-                },
                 "population": {
                     "label": "Popolazione"
+                },
+                "post": {
+                    "label": "Indirizzo di Consegna"
                 },
                 "power": {
                     "label": "Tipo"
@@ -3700,7 +3820,8 @@
                     "label": "Produzione"
                 },
                 "product": {
-                    "label": "Prodotti"
+                    "label": "Prodotti",
+                    "terms": "[traduci con sinonimi o termini legati a 'Prodotti', separati da virgola]"
                 },
                 "public_bookcase/type": {
                     "label": "Tipo"
@@ -3777,7 +3898,8 @@
                     "label": "Tipo"
                 },
                 "religion": {
-                    "label": "Religione"
+                    "label": "Religione",
+                    "terms": "[traduci con sinonimi o termini legati a 'Religione', separati da virgole]"
                 },
                 "reservation": {
                     "label": "Prenotazione",
@@ -4037,13 +4159,19 @@
                     "label": "Sport"
                 },
                 "stars": {
-                    "label": "Stelle"
+                    "label": "Stelle",
+                    "terms": "[traduci con sinonimi o termini legati a 'Stelle', separati da virgole]"
                 },
                 "start_date": {
-                    "label": "Data d'inizio"
+                    "label": "Data d'inizio",
+                    "terms": "[traduci con sinonimi o termini legati a 'Data Inizio', separati da virgole]"
                 },
                 "step_count": {
-                    "label": "Numero di gradini"
+                    "label": "Numero di gradini",
+                    "terms": "[traduci con sinonimi o termini legati a 'Numero di Scalini', separati da virgole]"
+                },
+                "stile": {
+                    "label": "Tipo"
                 },
                 "stop": {
                     "label": "Tipo di Stop",
@@ -4064,7 +4192,8 @@
                         "ford": "Guado",
                         "tunnel": "Tunnel"
                     },
-                    "placeholder": "Sconosciuto"
+                    "placeholder": "Sconosciuto",
+                    "terms": "[traduci con sinonimi o termini legati a 'Struttura', separati da virgole]"
                 },
                 "structure_waterway": {
                     "label": "Struttura",
@@ -4089,7 +4218,8 @@
                     "label": "Supporto"
                 },
                 "surface": {
-                    "label": "Superficie"
+                    "label": "Superficie",
+                    "terms": "[traduci con sinonimi o termini legati a 'Superficie', separati da virgole]"
                 },
                 "surveillance": {
                     "label": "Ambiente di sorveglianza"
@@ -4121,7 +4251,8 @@
                     }
                 },
                 "tactile_paving": {
-                    "label": "Pavimento tattile"
+                    "label": "Pavimento tattile",
+                    "terms": "[traduci con sinonimi o termini legati a 'Pavimento Tattile', separati da virgole]"
                 },
                 "takeaway": {
                     "label": "Asporto",
@@ -4154,7 +4285,8 @@
                     "label": "Lavandino"
                 },
                 "toilets/position": {
-                    "label": "Tipo wc"
+                    "label": "Tipo wc",
+                    "terms": "[traduci con sinonimi o termini legati a 'Posizioni', separati da virgole]"
                 },
                 "toll": {
                     "label": "Pedaggio"
@@ -4303,10 +4435,14 @@
                     "label": "Voltaggio terziario"
                 },
                 "voltage_electrified": {
-                    "label": "Tensione"
+                    "label": "Tensione",
+                    "terms": "[traduci con sinonimi o termini legati a 'Voltaggio', separati da virgole]"
                 },
                 "wall": {
                     "label": "Tipo"
+                },
+                "waste": {
+                    "label": "Rifiuti"
                 },
                 "water": {
                     "label": "Tipo"
@@ -4325,7 +4461,8 @@
                 },
                 "website": {
                     "label": "Sito web",
-                    "placeholder": "https://example.com"
+                    "placeholder": "https://example.com",
+                    "terms": "[traduci con sinonimi o termini legati a 'Sito web', separati da virgole]"
                 },
                 "wetland": {
                     "label": "Tipo"
@@ -4705,7 +4842,7 @@
                     "name": "Fast Food di gelati"
                 },
                 "amenity/fast_food/kebab": {
-                    "name": "Fast Food i kebab",
+                    "name": "Fast Food di kebab",
                     "terms": "bar,colazione,caffè,mensa,cena,drivein,mangiare,grigliata,pranzo,tavolo,kebab,kebap,shawarma"
                 },
                 "amenity/fast_food/mexican": {
@@ -4770,6 +4907,9 @@
                 "amenity/language_school": {
                     "name": "Scuola di lingue straniere",
                     "terms": "scuola,lingue,lingua,inglese,tedesco,arabo,cinese,spagnolo"
+                },
+                "amenity/letter_box": {
+                    "name": "Cassetta delle lettere"
                 },
                 "amenity/library": {
                     "name": "Biblioteca",
@@ -4889,10 +5029,6 @@
                 "amenity/police": {
                     "name": "Forze di polizia",
                     "terms": "poliziotto,sbirro,investigatore privato,piedipiatti,divisa,ispettore,gendarme,agente di polizia"
-                },
-                "amenity/post_box": {
-                    "name": "Buca delle lettere",
-                    "terms": "cassetta postale,lettere,portalettere,buchetta,postino"
                 },
                 "amenity/post_depot": {
                     "name": "Ufficio di smistamento postale"
@@ -5250,10 +5386,6 @@
                     "name": "Ruota panoramica",
                     "terms": "grande ruota,ruota,panoramica,parco a tema,attrazioni,divertimento,divertimenti,giostra,luna park"
                 },
-                "attraction/bumper_car": {
-                    "name": "Autoscontro",
-                    "terms": "autoscontro,auto,macchine,macchinine,parco a tema,attrazioni,divertimento,divertimenti,giostra,luna park"
-                },
                 "attraction/bungee_jumping": {
                     "name": "Bungee Jumping",
                     "terms": "salto,elastico,molla,bungy,bungee,parco a tema,attrazioni,divertimento,divertimenti,giostra,luna park"
@@ -5422,7 +5554,7 @@
                 },
                 "building/apartments": {
                     "name": "Appartamenti",
-                    "terms": "appartamenti,condominio,palazzo,palazzone,casermone,case popolari,abitazioni,case,edilizia popolare,peep,iacp"
+                    "terms": "appartamenti,condomini,palazzi,palazzoni,casermoni,case popolari,abitazioni,case,edilizia popolare,peep,iacp,terreno,lotto,terreno condominiale, area condominiale"
                 },
                 "building/barn": {
                     "name": "Fienile",
@@ -6175,10 +6307,6 @@
                     "name": "Svincolo primario",
                     "terms": "svincolo,rampa,ingresso,uscita"
                 },
-                "highway/raceway": {
-                    "name": "Circuito (Motoristico)",
-                    "terms": "pista,autodromo,pista automobilistica,pista motoristica,auto,moto,motori,nascar,corsa,formula uno"
-                },
                 "highway/residential": {
                     "name": "Strada residenziale",
                     "terms": "strada urbana,strada di città,strada di paese"
@@ -6404,7 +6532,7 @@
                 },
                 "landuse/allotments": {
                     "name": "Orti in concessione",
-                    "terms": "orti,orto,pubblico,concessione,comune,giardino,lotto"
+                    "terms": "orti,orto,pubblico,concessione,lotto,orti urbani"
                 },
                 "landuse/aquaculture": {
                     "name": "Acquacoltura",
@@ -6429,10 +6557,6 @@
                     "name": "Area commerciale",
                     "terms": "centro commerciale,area commerciale,commerciale,commercio,laboratori,amministrazione,servizi,magazzini"
                 },
-                "landuse/construction": {
-                    "name": "Costruzione",
-                    "terms": "In costruzione,cantiere"
-                },
                 "landuse/farm": {
                     "name": "Terreno agricolo"
                 },
@@ -6452,7 +6576,7 @@
                 },
                 "landuse/grass": {
                     "name": "Erba",
-                    "terms": "Erba"
+                    "terms": "erba,prato,area verde"
                 },
                 "landuse/greenfield": {
                     "name": "Terreno edificabile",
@@ -6551,7 +6675,7 @@
                     "name": "Area residenziale"
                 },
                 "landuse/residential/apartments": {
-                    "name": "Condominio",
+                    "name": "Area condominiale",
                     "terms": "appartamento,locale,unità immobiliare,immobile,residenza"
                 },
                 "landuse/retail": {
@@ -7061,15 +7185,6 @@
                 "man_made/works": {
                     "name": "Fabbrica",
                     "terms": "industria,manifattura,officina,opificio,stabilimento,laboratorio"
-                },
-                "manhole": {
-                    "name": "Tombino"
-                },
-                "manhole/drain": {
-                    "name": "Tombino"
-                },
-                "manhole/telecom": {
-                    "name": "Tombino per telecomunicazioni"
                 },
                 "military/bunker": {
                     "name": "Bunker militare"
@@ -8940,6 +9055,10 @@
                 "description": "Giallo = dati della mappa di pubblico dominio del censimento US. Rosso = dati non presenti in OpenStreetMap",
                 "name": "TIGER Roads 2018"
             },
+            "US-TIGER-Roads-2019": {
+                "description": "Giallo = Dati delle mappe di dominio pubblico dal US Census. Rosso = Dati non trovati in OpenStreetMap",
+                "name": "TIGER Roads 2019"
+            },
             "USDA-NAIP": {
                 "description": "L’anno più recente di DOQQs dal programma nazionale delle immagini per l’agricoltura (NAIP) per ciascuno stato degli Stati Uniti contigui.",
                 "name": "National Agriculture Imagery Program"
@@ -8965,6 +9084,12 @@
                     "text": "Realizzato tramite Bussels UrbIS®© - Distribuzione & copyright CIRB"
                 },
                 "name": "UrbIS-Ortho 2018"
+            },
+            "UrbISOrtho2019": {
+                "attribution": {
+                    "text": "Realizzato per mezzo di Brussels UrbIS®© - Distribuzione & Diritti d'autore CIRB"
+                },
+                "name": "UrbIS-Ortho 2019"
             },
             "UrbisAdmFR": {
                 "attribution": {
@@ -9301,6 +9426,9 @@
                 "name": "Mailinglist talk-gh",
                 "description": "Talk-gh è la mailinglist ufficiale della comunità OSM del Ghana."
             },
+            "ym-University-of-Ghana": {
+                "name": "Giovani mappatori dell'Università del Ghana"
+            },
             "osm-mg-facebook": {
                 "name": "Gruppo Facebook di OpenStreetMap del Madagascar",
                 "description": "Gruppo Facebook malgascio per persone interessate a OpenStreetMap."
@@ -9317,14 +9445,7 @@
             "OSM-India-facebook": {
                 "name": "OpenStreetMap India - mappatura di quartiere partecipativa",
                 "description": "Miglioriamo OpenStreetMap in India",
-                "extendedDescription": "Mappi in India? Hai domande o vuoi connetterti alla comunità locale? Unisciti a noi su {url}. Tutti sono i benvenuti!",
-                "events": {
-                    "sotmasia2018": {
-                        "name": "State of the Map Asia 2018",
-                        "description": "Unisciti a State of the Map Asia di OpenStreetMap, un evento che si terrà in India nel 2018",
-                        "where": "Indian Institute of Management, Bangalore, India"
-                    }
-                }
+                "extendedDescription": "Mappi in India? Hai domande o vuoi connetterti alla comunità locale? Unisciti a noi su {url}. Tutti sono i benvenuti!"
             },
             "osm-india-forum": {
                 "name": "Forum di OpenStreetMap dell’India",
@@ -9467,10 +9588,6 @@
                 "name": "Telegram di OpenStreetMap della Russia",
                 "description": "Chat Telegram di OpenStreetMap della Russia"
             },
-            "OSM-south-korea-telegram": {
-                "name": "Telegram di OSM della Corea del Sud",
-                "description": "Canale non ufficiale dei contributori di OpenStreetMap, le comunità e gli utenti della Corea del Sud per condividere e discutere."
-            },
             "OSM-sri-lanka-facebook": {
                 "name": "OpenStreetMap dello Sri Lanka",
                 "description": "Migliora OpenStreetMap nello Sri Lanka",
@@ -9539,7 +9656,6 @@
                 "description": "Chat Telegram di OpenStreetMap della Bielorussia"
             },
             "be-facebook": {
-                "name": "Comunità belga di OpenStreetMap",
                 "description": "Facebook dei mappatori e OpenStreetMap in Belgio"
             },
             "be-forum": {
@@ -9586,8 +9702,7 @@
                 "description": "Portale delle mappe, sito web e contatti fra i membri di OSM nella Repubblica Ceca"
             },
             "osmcz-facebook": {
-                "name": "OpenStreetMap della Repubblica Ceca su Facebook",
-                "description": "Segui la comunità ceca su Facebook - include la versione tradotta del settimanale WeeklyOSM!"
+                "name": "OpenStreetMap della Repubblica Ceca su Facebook"
             },
             "osmcz-twitter": {
                 "name": "Twitter della Repubblica Ceca @osmcz",
@@ -9816,19 +9931,18 @@
                 "description": "Incontri sociali per i mappatori e utenti delle East Midlands",
                 "extendedDescription": "Un gruppo che da marzo 2011 si riunisce, inizialmente a Nottingham, più recentemente a Derby e di tanto in tanto da qualche altra parte nelle East Midlands. Si tratta di incontri sociali, ma sono anche dei momenti eccellenti per venire a fare delle domande specifiche su OSM nella nostra zona o in generale. Nei mesi estivi facciamo solitamente delle sessioni leggere di mappatura nei dintorni del punto d’incontro. Il gruppo ha come interesse speciale quello di mappare le precedenze nelle strade pubbliche e di tanto in tanto ci incontriamo proprio per questo scopo."
             },
+            "gb-irc": {
+                "name": "Canale IRC di OpenStreetMap del Regno Unito",
+                "description": "Entra in #osm-gb su irc.oftc.net (porta 6667)",
+                "extendedDescription": "Entra in #osm-gb su irc.oftc.net (porta 6667), cerca di essere paziente e aspetta almeno qualche minuto se chiedi qualcosa"
+            },
             "gb-mailinglist": {
-                "name": "Mailinglist talk-gb",
-                "description": "Talk-gb è la principale piattaforma di comunicazione della comunità OSM britannica (Irlanda del Nord inclusa)"
+                "name": "Mailinglist talk-gb"
             },
             "mappa-mercia-group": {
                 "name": "Gruppo locale Mappa Mercia",
                 "description": "Un posto per gli appassionati di OpenStreetMap nelle Midlands",
                 "extendedDescription": "Mappa Mercia è un progetto per sviluppare OpenStreetMap nelle West Midlands nel Regno Unito. Organizziamo eventi per la comunità,  lezioni e supportiamo gli enti locali che vogliano rendere aperti i dati in loro possesso."
-            },
-            "gb-irc": {
-                "name": "Canale IRC di OpenStreetMap del Regno Unito",
-                "description": "Entra in #osm-gb su irc.oftc.net (porta 6667)",
-                "extendedDescription": "Entra in #osm-gb su irc.oftc.net (porta 6667), cerca di essere paziente e aspetta almeno qualche minuto se chiedi qualcosa"
             },
             "OSM-CA-Slack": {
                 "name": "Slack di OSM-CA",
@@ -9911,10 +10025,6 @@
                 "name": "OpenStreetMap del Colorado",
                 "description": "Mappatori e utenti OpenStreetMap dello stato del Colorado, USA",
                 "extendedDescription": "OpenStreetMap (OSM) del Colorado è una collaborazione locale di persone interessate a usare le proprie forze per creare mappe libere. Noi incoraggiamo i nostri mappatori ad organizzare e suggerire eventi di mappatura ovunque nel nostro stato. Attività di incontro come per esempio semplici riunioni, lezioni di OSM dal principiante all’intermedio oppure feste di mappatura in compagnia."
-            },
-            "OSM-NYC": {
-                "name": "OpenStreetMap NYC",
-                "description": "Mappatori e utenti OpenStreetMap, sviluppatori e appassionati nell'area Metropolitana di New York"
             },
             "OSM-Portland-forum": {
                 "name": "Gruppo Google di OpenStreetMap PDX",
@@ -10138,14 +10248,7 @@
             },
             "osm-latam": {
                 "name": "OpenStreetMap dell’America Latina",
-                "description": "Sosteniamo OpenStreetMap in America Latina",
-                "events": {
-                    "sotm-latam-2018": {
-                        "name": "State of the Map America Latina 2018",
-                        "description": "State of the Map America Latina è la conferenza annuale per tutti i mappatori e gli utenti di OpenStreetMap in America Latina. Il programma include discussioni, gruppi, lezioni e mapathon riguardanti OpenStreetMap.",
-                        "where": "Buenos Aires, Argentina"
-                    }
-                }
+                "description": "Sosteniamo OpenStreetMap in America Latina"
             },
             "OSM-Discord": {
                 "name": "Discord OpenStreetMap",
@@ -10179,14 +10282,7 @@
             "OSMF": {
                 "name": "OpenStreetMap Foundation",
                 "description": "OSMF è una organizzazione non a scopo di lucro che ha sede nel Regno Unito e che supporta il progetto OpenStreetMap",
-                "extendedDescription": "OSMF supporta OpenStreetMap con la raccolta fondi, la manutenzione dei server che danno energia a OSM, l’organizzazione dell’annuale conferenza State of the Map e la coordinazione dei volontari che tengono in vita OSM. Puoi dare il tuo contributo e avere una voce in capitolo nella direzione di OpenStreetMap unendoti alla OSMF come membro andando a questo indirizzo: {signupUrl}",
-                "events": {
-                    "sotm2018": {
-                        "name": "State of the Map 2018",
-                        "description": "Unisciti a noi per 3 giorni a Milano (Italia), alla conferenza mondiale annuale di OpenStreetMap, in cui tutti i membri della comunità potranno incontrarsi per socializzare, condividere ed imparare.",
-                        "where": "Milano, Italia"
-                    }
-                }
+                "extendedDescription": "OSMF supporta OpenStreetMap con la raccolta fondi, la manutenzione dei server che danno energia a OSM, l’organizzazione dell’annuale conferenza State of the Map e la coordinazione dei volontari che tengono in vita OSM. Puoi dare il tuo contributo e avere una voce in capitolo nella direzione di OpenStreetMap unendoti alla OSMF come membro andando a questo indirizzo: {signupUrl}"
             }
         }
     }

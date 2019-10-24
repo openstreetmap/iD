@@ -258,7 +258,8 @@ var parsers = {
             id: uid,
             display_name: attrs.display_name && attrs.display_name.value,
             account_created: attrs.account_created && attrs.account_created.value,
-            changesets_count: 0
+            changesets_count: '0',
+            active_blocks: '0'
         };
 
         var img = obj.getElementsByTagName('img');
@@ -269,6 +270,14 @@ var parsers = {
         var changesets = obj.getElementsByTagName('changesets');
         if (changesets && changesets[0] && changesets[0].getAttribute('count')) {
             user.changesets_count = changesets[0].getAttribute('count');
+        }
+
+        var blocks = obj.getElementsByTagName('blocks');
+        if (blocks && blocks[0]) {
+            var received = blocks[0].getElementsByTagName('received');
+            if (received && received[0] && received[0].getAttribute('active')) {
+                user.active_blocks = received[0].getAttribute('active');
+            }
         }
 
         _userCache.user[uid] = user;

@@ -1,7 +1,8 @@
 {
     "icon": "temaki-binoculars",
     "fields": [
-        "access_simple"
+        "access_simple",
+        "lockable"
     ],
     "geometry": [
         "point",

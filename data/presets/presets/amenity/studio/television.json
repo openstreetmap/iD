@@ -1,0 +1,23 @@
+{
+    "icon": "fas-video",
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "terms": [
+        "television broadcast",
+        "television studio",
+        "tv broadcast",
+        "tv station",
+        "tv studio"
+    ],
+    "tags": {
+        "amenity": "studio",
+        "studio": "television"
+    },
+    "reference": {
+        "key": "studio",
+        "value": "television"
+    },
+    "name": "Television Station"
+}

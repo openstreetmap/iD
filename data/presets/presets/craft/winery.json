@@ -1,5 +1,9 @@
 {
     "icon": "maki-alcohol-shop",
+    "moreFields": [
+        "{craft}",
+        "min_age"
+    ],
     "geometry": [
         "point",
         "area"

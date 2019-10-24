@@ -6,7 +6,7 @@ import {
     event as d3_event
 } from 'd3-selection';
 import { svgIcon } from '../svg/icon';
-import { t, textDirection } from '../util/locale';
+import { currentLocale, t, textDirection } from '../util/locale';
 import { services } from '../services';
 import { utilDisplayLabel } from '../util';
 import { uiIntro } from './intro';
@@ -57,6 +57,8 @@ export function uiAssistant(context) {
     var savedChangeset = null;
     var savedChangeCount = null;
     var didEditAnythingYet = false;
+
+    var shownPanel = null;
 
     context.storage('sawSplash', true);
 
@@ -274,6 +276,8 @@ export function uiAssistant(context) {
 
             bodyTextArea.html(panel.message);
         }
+
+        shownPanel = panel;
     }
 
     function panelToDraw() {
@@ -297,6 +301,10 @@ export function uiAssistant(context) {
         } else if (mode.id === 'select') {
 
             return panelSelect(context, mode.selectedIDs());
+
+        } else if (mode.id === 'drag-node' && mode.restoreSelectedIDs().length) {
+
+            return panelSelect(context, mode.restoreSelectedIDs());
 
         } else if (mode.id === 'select-note') {
             var note = context.connection() && context.connection().getNote(mode.selectedNoteID());
@@ -336,7 +344,12 @@ export function uiAssistant(context) {
             updateDidEditStatus();
         }
 
-        drawPanel(panelToDraw());
+        var nextPanel = panelToDraw();
+        if (shownPanel && shownPanel.hash && nextPanel.hash &&
+            shownPanel.hash === nextPanel.hash) {
+            return; // panels are identical, so don't update anything
+        }
+        drawPanel(nextPanel);
     }
 
     function scheduleCurrentLocationUpdate() {
@@ -396,35 +409,125 @@ export function uiAssistant(context) {
             }
         };
 
-        panel.renderHeaderBody = function(selection) {
-
-            var bodyTextArea = selection
-                .append('div')
-                .attr('class', 'body-text');
-
-            var mainFooter = selection.append('div')
-                .attr('class', 'main-footer');
-
-            bodyTextArea.html(t('assistant.welcome.' + (context.isFirstSession ? 'first_time' : 'return')));
+        function renderFirstSessionHeader(selection, bodyTextArea) {
+            var firstTimeInfo = t('assistant.launch.osm_info') + '<br/>' +
+                                t('assistant.launch.first_time_tutorial') + '<br/>' +
+                                t('assistant.launch.thanks_have_fun');
+            bodyTextArea.html(firstTimeInfo);
             bodyTextArea.selectAll('a')
                 .attr('href', '#')
                 .on('click', function() {
+                    d3_event.preventDefault();
+                    d3_event.stopPropagation();
+
                     context.isFirstSession = false;
                     updateDidEditStatus();
                     context.container().call(uiIntro(context));
                     redraw();
                 });
 
-            if (!context.isFirstSession) return;
-
-            mainFooter.append('button')
+            selection
+                .append('div')
+                .attr('class', 'main-footer')
+                .append('button')
                 .attr('class', 'primary')
                 .on('click', function() {
+                    d3_event.preventDefault();
+                    d3_event.stopPropagation();
+
                     updateDidEditStatus();
                     redraw();
                 })
                 .append('span')
-                .text(t('assistant.welcome.start_mapping'));
+                .text(t('assistant.launch.start_mapping'));
+        }
+
+        function renderBlockedAccountHeader(selection, bodyTextArea, details) {
+
+            var link = bodyTextArea
+                .html(t('assistant.launch.blocks.active', { displayName: '<b>' + details.display_name + '</b>' }))
+                .append('a')
+                .attr('class', 'link-out')
+                .attr('target', '_blank')
+                .attr('tabindex', -1)
+                .attr('href', context.connection().userURL(details.display_name) + '/blocks');
+
+            link.append('span')
+                .text(' ' + t('success.help_link_text'));
+            link
+                .call(svgIcon('#iD-icon-out-link', 'inline'));
+
+            d3_select('.assistant-header .subject-title span')
+                .text(t('assistant.notice'));
+            d3_select('.assistant-header .icon-col .icon use')
+                .attr('href', '#iD-icon-alert');
+        }
+
+        function renderAccountAnniversaryHeader(selection, bodyTextArea, details, joinDate, now) {
+
+            var yearCount = now.getFullYear() - joinDate.getFullYear();
+            var anniversaryInfo = t('assistant.launch.anniversary.years.' + (yearCount === 1 ? 'first' : 'subsequent'), {
+                                      years: '<b>' + yearCount + '</b>',
+                                      displayName: '<b>' + details.display_name + '</b>'
+                                  }) + '<br/>' +
+                                  t('assistant.launch.changesets_date', {
+                                      changesets: '<b>' + parseFloat(details.changesets_count).toLocaleString(currentLocale) + '</b>',
+                                      joinDate: '<b>' + joinDate.toLocaleDateString(currentLocale, { day: 'numeric', month: 'long', year: 'numeric' }) + '</b>'
+                                  });
+            bodyTextArea.html(anniversaryInfo);
+
+            d3_select('.assistant-header .subject-title span')
+                .text(t('assistant.launch.anniversary.happy_anniversary'));
+            d3_select('.assistant-header .icon-col .icon use')
+                .attr('href', '#fas-birthday-cake');
+        }
+
+        panel.renderHeaderBody = function(selection) {
+
+            var bodyTextArea = selection
+                .append('div')
+                .attr('class', 'body-text');
+
+            var osm = context.connection();
+
+            if (context.isFirstSession) {
+                renderFirstSessionHeader(selection, bodyTextArea);
+                return;
+            }
+
+            var genericWelcomesCount = 2;
+            bodyTextArea.html(t('assistant.launch.generic_welcome.' + Math.floor(Math.random() * genericWelcomesCount)));
+
+            if (!osm.authenticated()) return;
+
+            osm.userDetails(function(err, details) {
+
+                if (err || !details) return;
+
+                var joinDate = new Date(details.account_created);
+                var now = new Date();
+
+                if (parseFloat(details.active_blocks) > 0) {
+                    // user has been blocked
+                    renderBlockedAccountHeader(selection, bodyTextArea, details);
+
+                } else if (joinDate.getDate() === now.getDate() &&
+                    joinDate.getMonth() === now.getMonth() &&
+                    joinDate.getFullYear() < now.getFullYear() &&
+                    parseFloat(details.changesets_count) > 1) {
+                    // OSM anniversary
+                    renderAccountAnniversaryHeader(selection, bodyTextArea, details, joinDate, now);
+
+                } else {
+                    var loggedInInfo = t('assistant.launch.welcome_back_user', {
+                                           displayName: '<b>' + details.display_name + '</b>'
+                                       }) + '<br/>' +
+                                       t('assistant.launch.changesets', {
+                                           changesets: '<b>' + parseFloat(details.changesets_count).toLocaleString(currentLocale) + '</b>'
+                                       });
+                    bodyTextArea.html(loggedInInfo);
+                }
+            });
         };
 
         return panel;
@@ -492,6 +595,9 @@ export function uiAssistant(context) {
             mainFooter.append('button')
                 .attr('class', 'primary')
                 .on('click', function() {
+                    d3_event.preventDefault();
+                    d3_event.stopPropagation();
+
                     updateDidEditStatus();
                     context.container().selectAll('#content')
                         .attr('class', 'active');
@@ -504,6 +610,9 @@ export function uiAssistant(context) {
             mainFooter.append('button')
                 .attr('class', 'destructive')
                 .on('click', function() {
+                    d3_event.preventDefault();
+                    d3_event.stopPropagation();
+
                     // don't show another welcome screen after discarding changes
                     updateDidEditStatus();
                     context.container().selectAll('#content')
@@ -726,7 +835,11 @@ export function uiAssistant(context) {
     function panelAddDrawGeometry(context, mode) {
 
         var message = t('assistant.instructions.' + mode.id.replace('-', '_'));
-        if (mode.id.indexOf('draw') !== -1) {
+        if (mode.id === 'add-point' && mode.preset &&
+            mode.preset.geometry.indexOf('point') === -1) {
+
+            message = t('assistant.instructions.add_vertex');
+        } else if (mode.id.indexOf('draw') !== -1) {
             var way = context.entity(mode.wayID);
             if (way.nodes.length >= 4) {
                 message += '<br/>' + t('assistant.instructions.finishing');
@@ -760,6 +873,7 @@ export function uiAssistant(context) {
     function panelSelect(context, selectedIDs) {
 
         var panel = {
+            hash: 'select ' + selectedIDs.toString(),
             theme: 'light',
             modeLabel: t('assistant.mode.inspecting'),
             title: selectedIDs.length === 1 ? utilDisplayLabel(context.entity(selectedIDs[0]), context) :
@@ -785,10 +899,11 @@ export function uiAssistant(context) {
         };
 
         panel.renderBody = function(selection) {
-            var entityEditor = uiEntityEditor(context);
-            entityEditor
+            var mode = context.mode();
+            var entityEditor = uiEntityEditor(context)
                 .state('select')
-                .entityIDs(selectedIDs);
+                .entityIDs(selectedIDs)
+                .newFeature(mode.newFeature && mode.newFeature());
             selection.call(entityEditor);
         };
 

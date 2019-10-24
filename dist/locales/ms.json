@@ -256,9 +256,7 @@
             },
             "reverse": {
                 "title": "Songsang",
-                "description": "Songsangkan haluan garis dalam arah yang bertentangan.",
-                "key": "V",
-                "annotation": "Suatu garis telah disongsangkan arahnya."
+                "key": "V"
             },
             "split": {
                 "title": "Belah",
@@ -473,7 +471,6 @@
                     "title": "Data OpenStreetMap"
                 }
             },
-            "fill_area": "Kawasan Pengisian",
             "map_features": "Ciri-ciri Peta",
             "autohidden": "Ciri-ciri ini telah disembunyikan secara automatik kerana terlalu banyak akan dipaparkan di skrin. Anda boleh mengezum masuk untuk mengedit mereka."
         },
@@ -1587,12 +1584,6 @@
                     "label": "Output Kuasa",
                     "placeholder": "500, MW, 1000 MW, 2000 MW..."
                 },
-                "playground/max_age": {
-                    "label": "Had Umur Maksimum"
-                },
-                "playground/min_age": {
-                    "label": "Had Umur Minimum"
-                },
                 "population": {
                     "label": "Penduduk"
                 },
@@ -2043,9 +2034,6 @@
                 },
                 "amenity/police": {
                     "name": "Polis"
-                },
-                "amenity/post_box": {
-                    "name": "Peti Surat"
                 },
                 "amenity/post_office": {
                     "name": "Pejabat Pos"
@@ -2765,10 +2753,6 @@
             "OSM-Chattanooga": {
                 "name": "OSM Chattanooga",
                 "description": "Kumpulan pengguna OpenStreetMap bagi Chattanooga"
-            },
-            "OSM-NYC": {
-                "name": "OpenStreetMap NYC",
-                "description": "Pemeta dan pengguna OpenStreetMap, pemaju dan peminat di kawasan Metropolitan New York"
             },
             "OSM-Portland": {
                 "name": "OpenStreetMap Portland",

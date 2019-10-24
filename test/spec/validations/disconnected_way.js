@@ -55,6 +55,7 @@ describe('iD.validations.disconnected_way', function () {
         expect(issues).to.have.lengthOf(1);
         var issue = issues[0];
         expect(issue.type).to.eql('disconnected_way');
+        expect(issue.subtype).to.eql('highway');
         expect(issue.severity).to.eql('warning');
         expect(issue.entityIds).to.have.lengthOf(1);
         expect(issue.entityIds[0]).to.eql('w-1');
@@ -66,6 +67,7 @@ describe('iD.validations.disconnected_way', function () {
         expect(issues).to.have.lengthOf(1);
         var issue = issues[0];
         expect(issue.type).to.eql('disconnected_way');
+        expect(issue.subtype).to.eql('highway');
         expect(issue.severity).to.eql('warning');
         expect(issue.entityIds).to.have.lengthOf(1);
         expect(issue.entityIds[0]).to.eql('w-1');

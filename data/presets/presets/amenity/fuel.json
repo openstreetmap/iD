@@ -9,13 +9,13 @@
         "self_service"
     ],
     "moreFields": [
-        "opening_hours",
-        "payment_multi",
         "building",
-        "website",
-        "phone",
         "email",
         "fax",
+        "opening_hours",
+        "payment_multi",
+        "phone",
+        "website",
         "wheelchair"
     ],
     "geometry": [

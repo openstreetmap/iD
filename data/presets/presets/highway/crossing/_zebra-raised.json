@@ -17,15 +17,6 @@
         "key": "traffic_calming",
         "value": "table"
     },
-    "terms": [
-        "zebra crossing",
-        "marked crossing",
-        "crosswalk",
-        "flat top",
-        "hump",
-        "speed",
-        "slow"
-    ],
     "name": "Marked Crosswalk (Raised)",
     "searchable": false
 }

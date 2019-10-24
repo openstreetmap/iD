@@ -1,5 +1,5 @@
 {
-    "icon": "fas-shower",
+    "icon": "temaki-shower",
     "fields": [
         "opening_hours",
         "access_simple",
@@ -12,8 +12,9 @@
     ],
     "moreFields": [
         "address",
-        "operator",
-        "gender"
+        "gender",
+        "level",
+        "operator"
     ],
     "geometry": [
         "point",

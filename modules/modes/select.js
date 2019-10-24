@@ -249,14 +249,13 @@ export function modeSelect(context, selectedIDs) {
         }
     }
 
-    mode.enter = function() {
-        if (!checkSelectedIDs()) return;
+    function loadOperations() {
 
-        // if this selection includes relations, fetch their members
-        scheduleMissingMemberDownload();
-
-        // ensure that selected features are rendered even if they would otherwise be hidden
-        context.features().forceVisible(selectedIDs);
+        operations.forEach(function(operation) {
+            if (operation.behavior) {
+                context.uninstall(operation.behavior);
+            }
+        });
 
         operations = Object.values(Operations)
             .map(function(o) { return o(selectedIDs, context); })
@@ -270,9 +269,25 @@ export function modeSelect(context, selectedIDs) {
 
         operations.forEach(function(operation) {
             if (operation.behavior) {
-                behaviors.push(operation.behavior);
+                context.install(operation.behavior);
             }
         });
+
+        editMenu = uiEditMenu(context, operations);
+
+    }
+
+
+    mode.enter = function() {
+        if (!checkSelectedIDs()) return;
+
+        // if this selection includes relations, fetch their members
+        scheduleMissingMemberDownload();
+
+        // ensure that selected features are rendered even if they would otherwise be hidden
+        context.features().forceVisible(selectedIDs);
+
+        loadOperations();
 
         behaviors.forEach(context.install);
 
@@ -289,10 +304,8 @@ export function modeSelect(context, selectedIDs) {
         d3_select(document)
             .call(keybinding);
 
-
-        editMenu = uiEditMenu(context, operations);
-
         context.history()
+            .on('change.select', loadOperations)
             .on('undone.select', update)
             .on('redone.select', update);
 
@@ -536,6 +549,12 @@ export function modeSelect(context, selectedIDs) {
         if (_timeout) window.clearTimeout(_timeout);
         if (inspector) wrap.call(inspector.close);
 
+        operations.forEach(function(operation) {
+            if (operation.behavior) {
+                context.uninstall(operation.behavior);
+            }
+        });
+
         behaviors.forEach(context.uninstall);
 
         d3_select(document)
@@ -545,6 +564,7 @@ export function modeSelect(context, selectedIDs) {
         editMenu = undefined;
 
         context.history()
+            .on('change.select', null)
             .on('undone.select', null)
             .on('redone.select', null);
 

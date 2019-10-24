@@ -247,9 +247,7 @@
             },
             "reverse": {
                 "title": "Hamototra",
-                "description": "Hamototra ny fizotran'ito tsipika ito.",
-                "key": "V",
-                "annotation": "Namototra an'ilay tsipika."
+                "key": "V"
             },
             "split": {
                 "title": "Hizara",
@@ -456,7 +454,6 @@
             "switch": "Hiverina amin'ity lafika ity",
             "custom": "Manokana",
             "overlays": "Rakotra",
-            "imagery_source_faq": "Fanazavana Momba ny Sary / Hampita Olana",
             "reset": "Hamerina amin'ny voalohany",
             "display_options": "Safidy Momba ny Fisehoana",
             "brightness": "Hazava",
@@ -485,7 +482,6 @@
                     "title": "Fanamarihana OpenStreetMap"
                 }
             },
-            "fill_area": "Hameno ireo Faritra",
             "map_features": "Singa ao amin'ny Sarintany",
             "autohidden": "Fanahy iniana nafenina ireo singa ireo satria maro loatra no ho niseho teo amin'ny efijery. Hakaikezo raha hanova azy ireo.",
             "osmhidden": "Fanahy iniana nafenina ireo singa ireo satria miafina ny sosona OpenStreetMap."
@@ -738,13 +734,6 @@
             },
             "OSM-help": {
                 "name": "Fanampiana OpenStreetMap"
-            },
-            "OSMF": {
-                "events": {
-                    "sotm2018": {
-                        "where": "Milan, Italie"
-                    }
-                }
             }
         }
     }

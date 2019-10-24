@@ -1,0 +1,26 @@
+{
+    "icon": "temaki-gas_manhole",
+    "fields": [
+        "operator",
+        "ref"
+    ],
+    "geometry": [
+        "point",
+        "vertex"
+    ],
+    "tags": {
+        "manhole": "gas"
+    },
+    "addTags": {
+        "man_made": "manhole",
+        "manhole": "gas"
+    },
+    "terms": [
+        "cover",
+        "gas",
+        "heat",
+        "hole",
+        "utility"
+    ],
+    "name": "Gas Utility Manhole"
+}

@@ -90,6 +90,7 @@ export function validationAlmostJunction(context) {
 
             issues.push(new validationIssue({
                 type: type,
+                subtype: 'highway-highway',
                 severity: 'warning',
                 message: function(context) {
                     var entity1 = context.hasEntity(this.entityIds[0]);

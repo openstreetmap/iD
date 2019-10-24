@@ -1,14 +1,17 @@
 {
     "icon": "far-credit-card",
     "fields": [
-	    "name",
+        "name",
         "brand",
         "address",
         "opening_hours",
         "payment_multi"
     ],
     "moreFields": [
+        "covered",
         "currency_multi",
+        "indoor",
+        "level",
         "wheelchair"
     ],
     "geometry": [

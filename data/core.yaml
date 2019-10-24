@@ -20,6 +20,10 @@ en:
     favorites: Favorites
     add_feature: Add Feature
     finish: Finish
+    generic:
+      title: Geometries
+    geometry:
+      key: T
     repeat:
       title: Repeat
       tooltip:
@@ -57,6 +61,7 @@ en:
       saving: Saving
     instructions:
       add_point: Click the center of the feature.
+      add_vertex: Click the point along a line or area where the feature occurs.
       add_line: Click the starting point of the feature.
       draw_line: Place points along the feature's centerline.
       add_area: Click any corner of the feature.
@@ -69,9 +74,24 @@ en:
       evening: Good Evening
       # "Good Night" isn't a greeting in English but it can be in some languages
       night: Good Evening
-    welcome:
-      first_time: "You’re editing <b>OpenStreetMap</b>: the free, collaborative world map.<br/>If this is your first time here, consider taking the <a>quick-start tutorial</a>.<br/>Thanks for contributing. Have fun!"
-      return: "Welcome back. Ready to make the map even better?"
+    notice: Notice
+    launch:
+      osm_info: "You’re editing <b>OpenStreetMap</b>: the free, collaborative world map."
+      first_time_tutorial: "If this is your first time here, consider taking the <a>quick-start tutorial</a>."
+      thanks_have_fun: Thanks for contributing. Have fun!
+      generic_welcome:
+        0: Ready to make the map even better?
+        1: What a great day for mapping.
+      welcome_back_user: "Welcome back, {displayName}."
+      changesets: "You've contributed {changesets} changesets to OpenStreetMap so far."
+      changesets_date: "You've contributed {changesets} changesets to OpenStreetMap since {joinDate}."
+      anniversary:
+        happy_anniversary: Happy Anniversary
+        years:
+          first: "Congratulations on your first year of mapping, {displayName}!"
+          subsequent: "Congratulations on {years} years of mapping, {displayName}!"
+      blocks:
+        active: Your OpenStreetMap account, {displayName}, has an active block and cannot upload changes.
       start_mapping: Start Mapping
     restore:
       title: Restore
@@ -395,9 +415,19 @@ en:
         multiple: These features can't be rotated because parts of them have not yet been downloaded.
     reverse:
       title: Reverse
-      description: Make this line go in the opposite direction.
+      description:
+        point: Flip the direction of this point.
+        points: Flip the direction of these points.
+        line: Make this line go in the opposite direction.
+        lines: Make these lines go in the opposite direction.
+        features: Flip the directions of these features.
       key: V
-      annotation: Reversed a line.
+      annotation:
+        point: Reversed a point.
+        points: Reversed multiple points.
+        line: Reversed a line.
+        lines: Reversed multiple lines.
+        features: Reversed multiple features.
     split:
       title: Split
       description:
@@ -650,7 +680,7 @@ en:
     switch: Switch back to this background
     custom: Custom
     overlays: Overlays
-    imagery_source_faq: Imagery Info / Report a Problem
+    imagery_problem_faq: Report an Imagery Problem
     reset: reset
     reset_all: Reset All
     display_options: Display Options
@@ -662,6 +692,9 @@ en:
       description: Show Minimap
       tooltip: Show a zoomed out map to help locate the area currently displayed.
       key: '/'
+    panel:
+      description: Show Detail Panel
+      tooltip: Show advanced background information.
     fix_misalignment: Adjust imagery offset
     offset: "Drag anywhere in the gray area below to adjust the imagery offset, or enter the offset values in meters."
   map_data:
@@ -686,10 +719,16 @@ en:
         tooltip: "Drag and drop a data file onto the page, or click the button to setup"
         title: Custom Map Data
         zoom: Zoom to data
-    fill_area: Fill Areas
+    style_options: Style Options
+    highlight_edits:
+      key: G
     map_features: Map Features
     autohidden: "These features have been automatically hidden because too many would be shown on the screen.  You can zoom in to edit them."
     osmhidden: "These features have been automatically hidden because the OpenStreetMap layer is hidden."
+  visual_diff:
+    highlight_edits:
+      description: Highlight Changes
+      tooltip: Outline edited features
   photo_overlays:
     title: Photo Overlays
     traffic_signs:
@@ -1331,17 +1370,20 @@ en:
       list_title: "Warnings ({count})"
     rules:
       title: Rules
+    user_resolved_issues: Issues resolved by your edits
+    warnings_and_errors: Warnings and errors
     no_issues:
       message:
         everything: Everything looks fine
         everything_in_view: Everything in view looks fine
         edits: Your edits look fine
         edits_in_view: Your edits in view look fine
+        no_edits: You have no edits yet
       hidden_issues:
         none: Detected issues will appear here
         elsewhere: "Issues elsewhere: {count}"
-        other_features: "Issues with other features: {count}"
-        other_features_elsewhere: "Issues elsewhere with other features: {count}"
+        everything_else: "Issues with everything else: {count}"
+        everything_else_elsewhere: "Issues elsewhere with everything else: {count}"
         disabled_rules: "Issues with disabled rules: {count}"
         disabled_rules_elsewhere: "Issues elsewhere with disabled rules: {count}"
         ignored_issues: "Ignored issues: {count}"
@@ -1426,15 +1468,15 @@ en:
       highway:
         message: "{highway} is disconnected from other roads and paths"
     fixme_tag:
-      title: '"Fix Me" Requests'
       message: '{feature} has a "Fix Me" request'
-      tip: 'Find features with "fixme" tags'
       reference: 'A "fixme" tag indicates that a mapper has requested help with a feature.'
     generic_name:
-      title: Suspicious Names
       message: '{feature} has the suspicious name "{name}"'
-      tip: "Find features with generic or suspicious names"
+      message_language: '{feature} has the suspicious name "{name}" in {language}'
       reference: "Names should be the actual, on-the-ground names of features."
+    help_request:
+      title: 'Help Requests'
+      tip: 'Find features where others requested assistance'
     incompatible_source:
       title: Suspicious Sources
       tip: "Find features with suspicious source tags"
@@ -1442,17 +1484,19 @@ en:
         feature:
           message: '{feature} lists Google as a data source'
         reference: "Google products are proprietary and must not be used as references."
+    incorrect_name:
+      message: '{feature} has the mistaken name "{name}"'
+      message_language: '{feature} has the mistaken name "{name}" in {language}'
     invalid_format:
       title: Invalid Formatting
       tip: Find tags with unexpected formats
       email:
-        message: '{feature} has an invalid email address.'
-        message_multi: '{feature} has multiple invalid email addresses.'
+        message: '{feature} has an invalid email address'
+        message_multi: '{feature} has multiple invalid email addresses'
         reference: 'Email addresses must look like "user@example.com".'
-      website:
-        message: '{feature} has an invalid website.'
-        message_multi: '{feature} has multiple invalid websites.'
-        reference: 'Websites should start with "http" or "https".'
+    mismatched_geometry:
+      title: Mismatched Geometry
+      tip: "Find features with conflicting tags and geometry"
     missing_role:
       title: Missing Roles
       message: "{member} has no role within {relation}"
@@ -1482,17 +1526,22 @@ en:
         reference: "Some features should have additional tags."
       noncanonical_brand:
         message: "{feature} looks like a brand with nonstandard tags"
+        message_incomplete: "{feature} looks like a brand with incomplete tags"
         reference: "All features of the same brand should be tagged the same way."
+    point_as_vertex:
+      message: '{feature} should be a standalone point based on its tags'
+      reference: "Some features shouldn't be part of lines or areas."
     private_data:
       title: Private Information
       tip: "Find features that may contain private information"
       reference: "Sensitive data like personal phone numbers should not be tagged."
       contact:
         message: '{feature} might be tagged with private contact information'
+    suspicious_name:
+      title: Suspicious Names
+      tip: "Find features with generic or suspicious names"
     tag_suggests_area:
-      title: Lines Tagged as Areas
       message: '{feature} should be a closed area based on the tag "{tag}"'
-      tip: "Find features that are tagged as lines and should possibly be tagged as areas"
       reference: "Areas must have connected endpoints."
     unknown_road:
       message: "{feature} has no classification"
@@ -1520,7 +1569,12 @@ en:
       tip: "Find features with unsquare corners that can be drawn better"
       buildings:
         reference: "Buildings with unsquare corners can often be drawn more accurately."
+    vertex_as_point:
+      message: '{feature} should be part of a line or area based on its tags'
+      reference: "Some features shouldn't be standalone points."
     fix:
+      address_the_concern:
+        title: Address the concern
       connect_almost_junction:
         annotation: Connected very close features.
       connect_crossing_features:
@@ -1540,6 +1594,8 @@ en:
         title: Continue drawing from end
       delete_feature:
         title: Delete this feature
+      extract_point:
+        title: Extract this point
       ignore_issue:
         title: Ignore this issue
       merge_close_vertices:
@@ -1554,8 +1610,9 @@ en:
       remove_from_relation:
         title: Remove from relation
       remove_generic_name:
-        title: Remove the name
         annotation: Removed a generic name.
+      remove_mistaken_name:
+        annotation: Removed a mistaken name.
       remove_private_info:
         annotation: Removed private information.
       remove_proprietary_data:
@@ -1565,6 +1622,8 @@ en:
         annotation: Removed tag.
       remove_tags:
         title: Remove the tags
+      remove_the_name:
+        title: Remove the name
       reposition_features:
         title: Reposition the features
       reverse_feature:
@@ -1889,6 +1948,7 @@ en:
         wireframe: "Toggle wireframe mode"
         osm_data: "Toggle OpenStreetMap data"
         minimap: "Toggle minimap"
+        highlight_edits: "Highlight unsaved edits"
       selecting:
         title: "Selecting features"
         select_one: "Select a single feature"
@@ -1926,7 +1986,7 @@ en:
         disconnect: "Disconnect features at the selected node"
         extract: "Extract a point from a feature"
         split: "Split a line into two at the selected node"
-        reverse: "Reverse a line"
+        reverse: "Reverse selected features"
         move: "Move selected features"
         rotate: "Rotate selected features"
         orthogonalize: "Square corners of a line or area"

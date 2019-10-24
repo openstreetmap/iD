@@ -139,9 +139,7 @@
             },
             "reverse": {
                 "title": "Obrnuto",
-                "description": "Promijeniti smjer ove linije.",
-                "key": "V",
-                "annotation": "Obrnuta linija."
+                "key": "V"
             },
             "split": {
                 "title": "Razdvojite",
@@ -765,10 +763,6 @@
                     "name": "Policija",
                     "terms": "policija,milicija,organi reda"
                 },
-                "amenity/post_box": {
-                    "name": "Poštansko_sanduče",
-                    "terms": "poštansko sanduče,poštanski sandučić"
-                },
                 "amenity/post_office": {
                     "name": "Pošta",
                     "terms": "pošta,poštanski ured,ispostava pošte"
@@ -1192,10 +1186,6 @@
                 "landuse/cemetery": {
                     "name": "Groblje",
                     "terms": "groblje,greblje,mezarje"
-                },
-                "landuse/construction": {
-                    "name": "Građevinsko područje",
-                    "terms": "građevinsko područje,područje gradnje"
                 },
                 "landuse/farmyard": {
                     "name": "Seosko dvorište",

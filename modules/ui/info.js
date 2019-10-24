@@ -64,7 +64,7 @@ export function uiInfo(context) {
             title
                 .append('button')
                 .attr('class', 'close')
-                .on('click', function (d) { toggle(d); })
+                .on('click', function (d) { info.toggle(d); })
                 .call(svgIcon('#iD-icon-close'));
 
             enter
@@ -80,7 +80,7 @@ export function uiInfo(context) {
         }
 
 
-        function toggle(which) {
+        info.toggle = function(which) {
             if (d3_event) {
                 d3_event.stopImmediatePropagation();
                 d3_event.preventDefault();
@@ -93,6 +93,12 @@ export function uiInfo(context) {
                 if (activeids.length === 1 && activeids[0] === which) {  // none active anymore
                     wasActive = [which];
                 }
+
+                d3_select('.' + which + '-panel-toggle-item')
+                    .classed('active', active[which])
+                    .select('input')
+                    .property('checked', active[which]);
+
             } else {      // toggle all
                 if (activeids.length) {
                     wasActive = activeids;
@@ -103,7 +109,7 @@ export function uiInfo(context) {
             }
 
             redraw();
-        }
+        };
 
 
         var infoPanels = selection.selectAll('.info-panels')
@@ -117,13 +123,13 @@ export function uiInfo(context) {
         redraw();
 
         context.keybinding()
-            .on(uiCmd('⌘' + t('info_panels.key')), toggle);
+            .on(uiCmd('⌘' + t('info_panels.key')), info.toggle);
 
         ids.forEach(function(k) {
             var key = t('info_panels.' + k + '.key', { default: null });
             if (!key) return;
             context.keybinding()
-                .on(uiCmd('⌘⇧' + key), function() { toggle(k); });
+                .on(uiCmd('⌘⇧' + key), function() { info.toggle(k); });
         });
     }
 

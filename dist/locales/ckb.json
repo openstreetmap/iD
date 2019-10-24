@@ -319,9 +319,6 @@
             }
         },
         "issues": {
-            "fixme_tag": {
-                "title": "داواکاری \"چاکم بکەوە\""
-            },
             "invalid_format": {
                 "email": {
                     "reference": "پێویستە پۆستی ئەلیکترۆنییەکەت لەوە بچێت\n\"user@example.com\"."
@@ -404,9 +401,6 @@
                 "title": "دەستکاریکردن",
                 "drawing": {
                     "title": "کێشان"
-                },
-                "operations": {
-                    "reverse": "پێچەوانەکردنەوەی هێڵێک"
                 },
                 "commands": {
                     "save": "پاشەکەوتکردنی دەستاکرییەکان"
@@ -747,15 +741,6 @@
                 },
                 "phone": {
                     "label": "تەلەفۆن"
-                },
-                "playground/baby": {
-                    "label": "شوێنی دانیشتنی منداڵ"
-                },
-                "playground/max_age": {
-                    "label": "بەرزترین تەمەن"
-                },
-                "playground/min_age": {
-                    "label": "کەمترین تەمەن"
                 },
                 "population": {
                     "label": "دانیشتوان"
@@ -1189,22 +1174,8 @@
             "it-twitter": {
                 "description": "لەسەر تویتەر شوێنمان بکەوە {url}"
             },
-            "osm-latam": {
-                "events": {
-                    "sotm-latam-2018": {
-                        "where": "بۆینس ئایرس، ئەرجەنتین"
-                    }
-                }
-            },
             "OSM-Facebook": {
                 "name": "OpenStreetMap لە فەیسبووک"
-            },
-            "OSMF": {
-                "events": {
-                    "sotm2018": {
-                        "where": "میلان، ئیتاڵیا"
-                    }
-                }
             }
         }
     }

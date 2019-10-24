@@ -1,5 +1,6 @@
 
 import {
+    event as d3_event,
     select as d3_select
 } from 'd3-selection';
 import { t } from '../util/locale';
@@ -11,6 +12,7 @@ import { operationCircularize, operationContinue, operationDelete, operationDisc
     operationReverse, operationSplit, operationStraighten } from '../operations';
 import { uiToolAddFavorite, uiToolAddFeature, uiToolAddRecent, uiToolNotes, uiToolOperation, uiToolSave, uiToolUndoRedo } from './tools';
 import { uiToolAddAddablePresets } from './tools/quick_presets_addable';
+import { uiToolAddGeneric } from './tools/quick_presets_generic';
 import { uiToolSimpleButton } from './tools/simple_button';
 import { uiToolWaySegments } from './tools/way_segments';
 import { uiToolRepeatAdd } from './tools/repeat_add';
@@ -40,6 +42,7 @@ export function uiTopToolbar(context) {
     var toolbox = uiToolToolbox(context),
         addAddable = uiToolAddAddablePresets(context),
         addFeature = uiToolAddFeature(context),
+        addGeneric = uiToolAddGeneric(context),
         addFavorite = uiToolAddFavorite(context),
         addRecent = uiToolAddRecent(context),
         notes = uiToolNotes(context),
@@ -133,6 +136,7 @@ export function uiTopToolbar(context) {
                 'spacer',
                 structure,
                 powerSupport,
+                'spacer',
                 waySegments,
                 'spacer',
                 repeatAdd,
@@ -149,6 +153,7 @@ export function uiTopToolbar(context) {
                 'spacer',
                 addFeature,
                 addAddable,
+                addGeneric,
                 addFavorite,
                 addRecent,
                 'spacer',
@@ -167,6 +172,14 @@ export function uiTopToolbar(context) {
     }
 
     function topToolbar(bar) {
+
+        bar.on('wheel.topToolbar', function() {
+            if (!d3_event.deltaX) {
+                // translate vertical scrolling into horizontal scrolling in case
+                // the user doesn't have an input device that can scroll horizontally
+                bar.node().scrollLeft += d3_event.deltaY;
+            }
+        });
 
         var debouncedUpdate = _debounce(update, 250, { leading: true, trailing: true });
         context.history()

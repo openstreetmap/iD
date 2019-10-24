@@ -267,9 +267,7 @@
             },
             "reverse": {
                 "title": "Obrni smjer",
-                "description": "Obrni smjer ove linije.",
-                "key": "V",
-                "annotation": "Liniji je promijenjen smjer."
+                "key": "V"
             },
             "split": {
                 "title": "Razdvoji",
@@ -498,7 +496,6 @@
             "switch": "Vrati nazad na ovu podlogu",
             "custom": "Podesivo",
             "overlays": "Preklopi",
-            "imagery_source_faq": "Info o snimcima / Prijavi problem",
             "reset": "resetiraj",
             "display_options": "Postavke prikaza",
             "brightness": "Svjetlina",
@@ -527,7 +524,6 @@
                     "title": "OpenStreetMap bilješke"
                 }
             },
-            "fill_area": "Ispuni područja",
             "map_features": "Elementi karte",
             "autohidden": "Ovi elementi su automatski skriveni jer ih je previše za prikaz na zaslonu. Možeš približiti prikaz za njihovo uređivanje."
         },
@@ -1154,7 +1150,6 @@
                     "merge": "Kombiniraj (spoji) odabrane elemente",
                     "disconnect": "Razdvoji elemente na odabranoj točki",
                     "split": "Razdijeli liniju na dvije u odabranoj točki",
-                    "reverse": "Obrni smjer linije",
                     "move": "Premjesti odabrane elemente",
                     "rotate": "Rotiraj odabrane elemente",
                     "circularize": "Zaokruži zatvorenu liniju ili područje",
@@ -2670,10 +2665,6 @@
                     "name": "Policija",
                     "terms": "policija,milicija,gradska policija,državna policija,vojna policija"
                 },
-                "amenity/post_box": {
-                    "name": "Poštanski sandučić",
-                    "terms": "poštanski sandučić,sandučić,poštanski ormarić,ormarić za poštu"
-                },
                 "amenity/post_office": {
                     "name": "Pošta",
                     "terms": "pošta,poštanski ured"
@@ -2879,9 +2870,6 @@
                 "attraction/animal": {
                     "name": "Životinjska nastamba",
                     "terms": "životinja,kavez,akvarij,terarij,dupinarij,safari,lav,majmun,slon,riba,insekt,zmija,zoološki,zoo"
-                },
-                "attraction/bumper_car": {
-                    "name": "Električni autići za sudaranje"
                 },
                 "attraction/bungee_jumping": {
                     "name": "Bungee skokovi"
@@ -3365,9 +3353,6 @@
                 "highway/primary_link": {
                     "name": "Pristupna cesta državne ceste"
                 },
-                "highway/raceway": {
-                    "name": "Staza za utrkivanje motornih vozila"
-                },
                 "highway/residential": {
                     "name": "Ulica"
                 },
@@ -3534,9 +3519,6 @@
                 },
                 "landuse/commercial": {
                     "name": "Poslovna zona"
-                },
-                "landuse/construction": {
-                    "name": "Građevinsko"
                 },
                 "landuse/farm": {
                     "name": "Oranica"
@@ -3824,12 +3806,6 @@
                 },
                 "man_made/works": {
                     "name": "Tvornica"
-                },
-                "manhole": {
-                    "name": "Šaht"
-                },
-                "manhole/telecom": {
-                    "name": "Šaht za telekomunikacije"
                 },
                 "military/bunker": {
                     "name": "Vojni bunker"

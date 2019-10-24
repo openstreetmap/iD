@@ -122,9 +122,7 @@
             },
             "reverse": {
                 "title": "反转",
-                "description": "这条线走在相反的方向。",
-                "key": "V",
-                "annotation": "反转一条线。"
+                "key": "V"
             },
             "split": {
                 "title": "分割",
@@ -602,9 +600,6 @@
                 "amenity/police": {
                     "name": "警察局"
                 },
-                "amenity/post_box": {
-                    "name": "邮箱"
-                },
                 "amenity/post_office": {
                     "name": "邮局"
                 },
@@ -811,9 +806,6 @@
                 },
                 "landuse/cemetery": {
                     "name": "墓地"
-                },
-                "landuse/construction": {
-                    "name": "建筑物"
                 },
                 "landuse/farmyard": {
                     "name": "农庄"

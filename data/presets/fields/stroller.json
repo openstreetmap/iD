@@ -1,11 +1,13 @@
 {
     "key": "stroller",
-    "type": "check",
-    "options": [
-        "yes",
-        "limited",
-        "no"
-    ],
+    "type": "radio",
+    "strings": {
+        "options": {
+            "yes": "Yes",
+            "limited": "Limited",
+            "no": "No"
+        }
+    },
     "label": "Stroller Access",
     "terms": [
         "baby carriage",

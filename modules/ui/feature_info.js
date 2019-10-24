@@ -1,4 +1,4 @@
-import { event as d3_event } from 'd3-selection';
+import { event as d3_event, select as d3_select } from 'd3-selection';
 
 import { t } from '../util/locale';
 import { uiTooltipHtml } from './tooltipHtml';
@@ -27,15 +27,19 @@ export function uiFeatureInfo(context) {
                     return uiTooltipHtml(hiddenList.join('<br/>'));
                 });
 
-            var warning = selection.append('a')
+            selection.append('a')
+                .attr('class', 'chip')
                 .attr('href', '#')
                 .attr('tabindex', -1)
                 .html(t('feature_info.hidden_warning', { count: count }))
                 .call(tooltipBehavior)
                 .on('click', function() {
-                    tooltipBehavior.hide(warning);
-                    // open map data panel?
+                    tooltipBehavior.hide();
+
                     d3_event.preventDefault();
+
+                    // open the Map Data pane
+                    context.ui().togglePanes(d3_select('.map-panes .map-data-pane'));
                 });
         }
 

@@ -24,7 +24,7 @@ export function uiAccount(context) {
             userLink.html('');
             logoutLink.html('');
 
-            if (err) return;
+            if (err || !details) return;
 
             selection.selectAll('#userLink, #logoutLink')
                 .classed('hide', false);

@@ -1,0 +1,53 @@
+{
+    "icon": "iD-other-line",
+    "fields": [
+        "surface",
+        "width",
+        "access",
+        "trail_visibility",
+        "smoothness",
+        "incline"
+    ],
+    "moreFields": [
+        "covered",
+        "dog",
+        "horse_scale",
+        "informal",
+        "lit",
+        "maxweight_bridge",
+        "mtb/scale",
+        "mtb/scale/imba",
+        "mtb/scale/uphill",
+        "sac_scale",
+        "stroller",
+        "structure",
+        "wheelchair"
+    ],
+    "geometry": [
+        "line"
+    ],
+    "terms": [
+        "bootleg trail",
+        "cow path",
+        "desire line",
+        "desire path",
+        "desireline",
+        "desirepath",
+        "elephant path",
+        "game trail",
+        "goat track",
+        "herd path",
+        "pig trail",
+        "shortcut",
+        "social trail",
+        "use trail"
+    ],
+    "tags": {
+        "highway": "path",
+        "informal": "yes"
+    },
+    "reference": {
+        "key": "informal"
+    },
+    "name": "Informal Path"
+}

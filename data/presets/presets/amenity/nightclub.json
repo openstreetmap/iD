@@ -6,15 +6,17 @@
         "address",
         "building_area",
         "opening_hours",
+        "min_age",
         "smoking"
     ],
     "moreFields": [
         "air_conditioning",
-        "payment_multi",
-        "website",
-        "phone",
         "email",
         "fax",
+        "level",
+        "payment_multi",
+        "phone",
+        "website",
         "wheelchair"
     ],
     "geometry": [
@@ -25,10 +27,10 @@
         "amenity": "nightclub"
     },
     "terms": [
-       "disco*",
-       "night club",
-       "dancing",
-       "dance club"
+        "disco*",
+        "night club",
+        "dancing",
+        "dance club"
     ],
     "name": "Nightclub"
 }

@@ -22,10 +22,15 @@ export function operationCircularize(selectedIDs, context) {
     };
 
 
-    operation.available = function() {
-        return selectedIDs.length === 1 &&
-            entity.type === 'way' &&
-            new Set(entity.nodes).size > 1;
+    operation.available = function(situation) {
+        if (selectedIDs.length !== 1 ||
+            entity.type !== 'way' ||
+            new Set(entity.nodes).size <= 1) return false;
+
+        if (situation === 'toolbar' &&
+            action.disabled(context.graph())) return false;
+
+        return true;
     };
 
 

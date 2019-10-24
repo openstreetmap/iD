@@ -8,12 +8,12 @@
         "building"
     ],
     "moreFields": [
+        "email",
+        "fax",
         "opening_hours",
         "payment_multi",
-        "website",
         "phone",
-        "email",
-        "fax"
+        "website"
     ],
     "geometry": [
         "point",

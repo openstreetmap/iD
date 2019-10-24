@@ -1,8 +1,12 @@
 {
-    "icon": "temaki-storage_tank",
+    "icon": "temaki-storage_fermenter",
     "fields": [
         "{craft}",
         "product"
+    ],
+    "moreFields": [
+        "{craft}",
+        "min_age"
     ],
     "geometry": [
         "point",

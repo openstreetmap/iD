@@ -291,18 +291,21 @@ export function uiField(context, presetField, entity, options) {
         var latest = context.hasEntity(entity.id);   // check the most current copy of the entity
         if (!latest) return true;
 
-        var require = field.prerequisiteTag;
-        if (require && require.key) {
-            var value = latest.tags[require.key];
-            if (!value) return false;
+        var prerequisiteTag = field.prerequisiteTag;
+        if (prerequisiteTag) {
+            if (prerequisiteTag.key) {
+                var value = latest.tags[prerequisiteTag.key];
+                if (!value) return false;
 
-            if (require.valueNot) {
-                return require.valueNot !== value;
+                if (prerequisiteTag.valueNot) {
+                    return prerequisiteTag.valueNot !== value;
+                }
+                if (prerequisiteTag.value) {
+                    return prerequisiteTag.value === value;
+                }
+            } else if (prerequisiteTag.keyNot) {
+                if (latest.tags[prerequisiteTag.keyNot]) return false;
             }
-            if (require.value) {
-                return require.value === value;
-            }
-            return true;
         }
         return true;
     };

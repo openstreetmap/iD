@@ -16,9 +16,9 @@ export function coreValidator(context) {
     var _rules = {};
     var _disabledRules = {};
 
-    var _ignoredIssueIDs = {};       // issue.id -> true
-    var _issuesByIssueID = {};       // issue.id -> issue
-    var _issuesByEntityID = {};      // entity.id -> set(issue.id)
+    var _ignoredIssueIDs = {};          // issue.id -> true
+    var _baseCache = validationCache(); // issues before any user edits
+    var _headCache = validationCache(); // issues after all user edits
     var _validatedGraph = null;
     var _deferred = new Set();
 
@@ -53,15 +53,9 @@ export function coreValidator(context) {
 
         // clear caches
         _ignoredIssueIDs = {};
-        _issuesByIssueID = {};
-        _issuesByEntityID = {};
+        _baseCache = validationCache();
+        _headCache = validationCache();
         _validatedGraph = null;
-
-        for (var key in _rules) {
-            if (typeof _rules[key].reset === 'function') {
-                _rules[key].reset();   // 'crossing_ways' is the only one like this
-            }
-        }
     };
 
     validator.resetIgnoredIssues = function() {
@@ -73,28 +67,29 @@ export function coreValidator(context) {
 
     // when the user changes the squaring thereshold, rerun this on all buildings
     validator.changeSquareThreshold = function() {
+
+        reloadUnsquareIssues(_headCache, context.graph());
+        reloadUnsquareIssues(_baseCache, context.history().base());
+
+        dispatch.call('validated');
+    };
+
+    function reloadUnsquareIssues(cache, graph) {
+
         var checkUnsquareWay = _rules.unsquare_way;
         if (typeof checkUnsquareWay !== 'function') return;
 
         // uncache existing
-        Object.values(_issuesByIssueID)
-            .filter(function(issue) { return issue.type === 'unsquare_way'; })
-            .forEach(function(issue) {
-                var entityId = issue.entityIds[0];   // always 1 entity for unsquare way
-                if (_issuesByEntityID[entityId]) {
-                    _issuesByEntityID[entityId].delete(issue.id);
-                }
-                delete _issuesByIssueID[issue.id];
-            });
+        cache.uncacheIssuesOfType('unsquare_way');
 
-        var buildings = context.intersects(geoExtent([-180,-90],[180, 90]))  // everywhere
+        var buildings = context.history().tree().intersects(geoExtent([-180,-90],[180, 90]), graph)  // everywhere
             .filter(function(entity) {
                 return entity.type === 'way' && entity.tags.building && entity.tags.building !== 'no';
             });
 
         // rerun for all buildings
         buildings.forEach(function(entity) {
-            var detected = checkUnsquareWay(entity, context.graph());
+            var detected = checkUnsquareWay(entity, graph);
             if (detected.length !== 1) return;
 
             var issue = detected[0];
@@ -109,16 +104,13 @@ export function coreValidator(context) {
             ignoreFix.issue = issue;
             issue.fixes.push(ignoreFix);
 
-            if (!_issuesByEntityID[entity.id]) {
-                _issuesByEntityID[entity.id] = new Set();
+            if (!cache.issuesByEntityID[entity.id]) {
+                cache.issuesByEntityID[entity.id] = new Set();
             }
-            _issuesByEntityID[entity.id].add(issue.id);
-            _issuesByIssueID[issue.id] = issue;
+            cache.issuesByEntityID[entity.id].add(issue.id);
+            cache.issuesByIssueID[issue.id] = issue;
         });
-
-        dispatch.call('validated');
-    };
-
+    }
 
     // options = {
     //     what: 'all',     // 'all' or 'edited'
@@ -128,8 +120,7 @@ export function coreValidator(context) {
     // };
     validator.getIssues = function(options) {
         var opts = Object.assign({ what: 'all', where: 'all', includeIgnored: false, includeDisabledRules: false }, options);
-        var issues = Object.values(_issuesByIssueID);
-        var changes = context.history().difference().changes();
+        var issues = Object.values(_headCache.issuesByIssueID);
         var view = context.map().extent();
 
         return issues.filter(function(issue) {
@@ -145,16 +136,13 @@ export function coreValidator(context) {
             for (var i = 0; i < entityIds.length; i++) {
                 var entityId = entityIds[i];
                 if (!context.hasEntity(entityId)) {
-                    delete _issuesByEntityID[entityId];
-                    delete _issuesByIssueID[issue.id];
+                    delete _headCache.issuesByEntityID[entityId];
+                    delete _headCache.issuesByIssueID[issue.id];
                     return false;
                 }
             }
 
-            if (opts.what === 'edited') {
-                var isEdited = entityIds.some(function(entityId) { return changes[entityId]; });
-                if (entityIds.length && !isEdited) return false;
-            }
+            if (opts.what === 'edited' && _baseCache.issuesByIssueID[issue.id]) return false;
 
             if (opts.where === 'visible') {
                 var extent = issue.extent(context.graph());
@@ -162,6 +150,13 @@ export function coreValidator(context) {
             }
 
             return true;
+        });
+    };
+
+    validator.getResolvedIssues = function() {
+        var baseIssues = Object.values(_baseCache.issuesByIssueID);
+        return baseIssues.filter(function(issue) {
+            return !_headCache.issuesByIssueID[issue.id];
         });
     };
 
@@ -191,15 +186,28 @@ export function coreValidator(context) {
         return groups;
     };
 
+    // show some issue types in a particular order
+    var orderedIssueTypes = [
+        // flag missing data first
+        'missing_tag', 'missing_role',
+        // then flag identity issues
+        'outdated_tags', 'mismatched_geometry',
+        // flag geometry issues where fixing them might solve connectivity issues
+        'crossing_ways', 'almost_junction',
+        // then flag connectivity issues
+        'disconnected_way', 'impossible_oneway'
+    ];
 
     validator.getEntityIssues = function(entityID, options) {
-        var issueIDs = _issuesByEntityID[entityID];
+        var cache = _headCache;
+
+        var issueIDs = cache.issuesByEntityID[entityID];
         if (!issueIDs) return [];
 
         var opts = options || {};
 
         return Array.from(issueIDs)
-            .map(function(id) { return _issuesByIssueID[id]; })
+            .map(function(id) { return cache.issuesByIssueID[id]; })
             .filter(function(issue) {
                 if (opts.includeDisabledRules === 'only' && !_disabledRules[issue.type]) return false;
                 if (!opts.includeDisabledRules && _disabledRules[issue.type]) return false;
@@ -208,6 +216,23 @@ export function coreValidator(context) {
                 if (!opts.includeIgnored && _ignoredIssueIDs[issue.id]) return false;
 
                 return true;
+            }).sort(function(issue1, issue2) {
+                if (issue1.type === issue2.type) {
+                    // issues of the same type, sort deterministically
+                    return issue1.id < issue2.id ? -1 : 1;
+                }
+                var index1 = orderedIssueTypes.indexOf(issue1.type);
+                var index2 = orderedIssueTypes.indexOf(issue2.type);
+                if (index1 !== -1 && index2 !== -1) {
+                    // both issue types have explicit sort orders
+                    return index1 - index2;
+                } else if (index1 === -1 && index2 === -1) {
+                    // neither issue type has an explicit sort order, sort by type
+                    return issue1.type < issue2.type ? -1 : 1;
+                } else {
+                    // order explicit types before everything else
+                    return index1 !== -1 ? -1 : 1;
+                }
             });
     };
 
@@ -250,35 +275,6 @@ export function coreValidator(context) {
     };
 
 
-    //
-    // Remove a single entity and all its related issues from the caches
-    //
-    function uncacheEntityID(entityID) {
-        var issueIDs = _issuesByEntityID[entityID];
-        if (!issueIDs) return;
-
-        issueIDs.forEach(function(issueID) {
-            var issue = _issuesByIssueID[issueID];
-            if (issue) {
-                // When multiple entities are involved (e.g. crossing_ways),
-                // remove this issue from the other entity caches too..
-                var entityIds = issue.entityIds || [];
-                entityIds.forEach(function(other) {
-                    if (other !== entityID) {
-                        if (_issuesByEntityID[other]) {
-                            _issuesByEntityID[other].delete(issueID);
-                        }
-                    }
-                });
-            }
-
-            delete _issuesByIssueID[issueID];
-        });
-
-        delete _issuesByEntityID[entityID];
-    }
-
-
     function ignoreIssue(id) {
         _ignoredIssueIDs[id] = true;
     }
@@ -289,18 +285,14 @@ export function coreValidator(context) {
     //
     function validateEntity(entity, graph) {
         var entityIssues = [];
-        var ran = {};
 
-        // runs validation and appends resulting issues,
-        // returning true if validation passed without issue
+        // runs validation and appends resulting issues
         function runValidation(key) {
-            if (ran[key]) return true;
 
             var fn = _rules[key];
             if (typeof fn !== 'function') {
                 console.error('no such validation rule = ' + key);  // eslint-disable-line no-console
-                ran[key] = true;
-                return true;
+                return;
             }
 
             var detected = fn(entity, graph);
@@ -320,38 +312,9 @@ export function coreValidator(context) {
                 }
             });
             entityIssues = entityIssues.concat(detected);
-            ran[key] = true;
-            return !detected.length;
         }
 
-        // run some validations manually to control the order and to skip some
-
-        runValidation('missing_role');
-
-        if (entity.type === 'relation') {
-            if (!runValidation('outdated_tags')) {
-                // don't flag missing tags if they are on the outer way
-                ran.missing_tag = true;
-            }
-        }
-
-        runValidation('missing_tag');
-
-        runValidation('outdated_tags');
-
-        runValidation('crossing_ways');
-        runValidation('almost_junction');
-
-        // only check impossible_oneway if no disconnected_way issues
-        if (runValidation('disconnected_way')) {
-            runValidation('impossible_oneway');
-        } else {
-            ran.impossible_oneway = true;
-        }
-
-        runValidation('tag_suggests_area');
-
-        // run all rules not yet run
+        // run all rules
         Object.keys(_rules).forEach(runValidation);
 
         return entityIssues;
@@ -372,19 +335,20 @@ export function coreValidator(context) {
 
             var checkParentRels = [entity];
 
-            if (entity.type === 'node') {   // include parent ways
+            if (entity.type === 'node') {
                 graph.parentWays(entity).forEach(function(parentWay) {
-                    acc.add(parentWay.id);
+                    acc.add(parentWay.id); // include parent ways
                     checkParentRels.push(parentWay);
                 });
-            } else if (entity.type === 'relation') {   // include members
+            } else if (entity.type === 'relation') {
                 entity.members.forEach(function(member) {
-                    acc.add(member.id);
+                    acc.add(member.id); // include members
                 });
-            } else if (entity.type === 'way') {   // include connected ways
+            } else if (entity.type === 'way') {
                 entity.nodes.forEach(function(nodeID) {
+                    acc.add(nodeID); // include child nodes
                     graph._parentWays[nodeID].forEach(function(wayID) {
-                        acc.add(wayID);
+                        acc.add(wayID); // include connected ways
                     });
                 });
             }
@@ -403,14 +367,13 @@ export function coreValidator(context) {
     }
 
     //
-    // Run validation for several entities, supplied `entityIDs`
+    // Run validation for several entities, supplied `entityIDs`,
+    // against `graph` for the given `cache`
     //
-    function validateEntities(entityIDs) {
-
-        var graph = context.graph();
+    function validateEntities(entityIDs, graph, cache) {
 
         // clear caches for existing issues related to these entities
-        entityIDs.forEach(uncacheEntityID);
+        entityIDs.forEach(cache.uncacheEntityID);
 
         // detect new issues and update caches
         entityIDs.forEach(function(entityID) {
@@ -419,19 +382,8 @@ export function coreValidator(context) {
             if (!entity) return;
 
             var issues = validateEntity(entity, graph);
-            issues.forEach(function(issue) {
-                var entityIds = issue.entityIds || [];
-                entityIds.forEach(function(entityId) {
-                    if (!_issuesByEntityID[entityId]) {
-                        _issuesByEntityID[entityId] = new Set();
-                    }
-                    _issuesByEntityID[entityId].add(issue.id);
-                });
-                _issuesByIssueID[issue.id] = issue;
-            });
+            cache.cacheIssues(issues);
         });
-
-        dispatch.call('validated');
     }
 
 
@@ -441,6 +393,7 @@ export function coreValidator(context) {
     // and dispatches a `validated` event when finished.
     //
     validator.validate = function() {
+
         var currGraph = context.graph();
         _validatedGraph = _validatedGraph || context.history().base();
         if (currGraph === _validatedGraph) {
@@ -451,24 +404,21 @@ export function coreValidator(context) {
         var difference = coreDifference(oldGraph, currGraph);
         _validatedGraph = currGraph;
 
-        for (var key in _rules) {
-            if (typeof _rules[key].reset === 'function') {
-                _rules[key].reset();   // 'crossing_ways' is the only one like this
-            }
-        }
-
         var createdAndModifiedEntityIDs = difference.extantIDs(true);   // created/modified (true = w/relation members)
         var entityIDsToCheck = entityIDsToValidate(createdAndModifiedEntityIDs, currGraph);
 
-        // "validate" deleted entities in order to update their related entities
+        // check modified and deleted entities against the old graph in order to update their related entities
         // (e.g. deleting the only highway connected to a road should create a disconnected highway issue)
-        var deletedEntityIDs = difference.deleted().map(function(entity) { return entity.id; });
-        var entityIDsToCheckForDeleted = entityIDsToValidate(deletedEntityIDs, oldGraph);
+        var modifiedAndDeletedEntityIDs = difference.deleted().concat(difference.modified())
+            .map(function(entity) { return entity.id; });
+        var entityIDsToCheckForOldGraph = entityIDsToValidate(modifiedAndDeletedEntityIDs, oldGraph);
 
         // concat the sets
-        entityIDsToCheckForDeleted.forEach(entityIDsToCheck.add, entityIDsToCheck);
+        entityIDsToCheckForOldGraph.forEach(entityIDsToCheck.add, entityIDsToCheck);
 
-        validateEntities(entityIDsToCheck);   // dispatches 'validated'
+        validateEntities(entityIDsToCheck, context.graph(), _headCache);
+
+        dispatch.call('validated');
     };
 
 
@@ -489,12 +439,83 @@ export function coreValidator(context) {
         .on('merge.validator', function(entities) {
             if (!entities) return;
             var handle = window.requestIdleCallback(function() {
-                var ids = entities.map(function(entity) { return entity.id; });
-                validateEntities(entityIDsToValidate(ids, context.graph()));
+                var entityIDs = entities.map(function(entity) { return entity.id; });
+                var headGraph = context.graph();
+                validateEntities(entityIDsToValidate(entityIDs, headGraph), headGraph, _headCache);
+
+                var baseGraph = context.history().base();
+                validateEntities(entityIDsToValidate(entityIDs, baseGraph), baseGraph, _baseCache);
+
+                dispatch.call('validated');
             });
             _deferred.add(handle);
         });
 
 
     return validator;
+}
+
+
+function validationCache() {
+
+    var cache = {
+        issuesByIssueID: {},  // issue.id -> issue
+        issuesByEntityID: {} // entity.id -> set(issue.id)
+    };
+
+    cache.cacheIssues = function(issues) {
+        issues.forEach(function(issue) {
+            var entityIds = issue.entityIds || [];
+            entityIds.forEach(function(entityId) {
+                if (!cache.issuesByEntityID[entityId]) {
+                    cache.issuesByEntityID[entityId] = new Set();
+                }
+                cache.issuesByEntityID[entityId].add(issue.id);
+            });
+            cache.issuesByIssueID[issue.id] = issue;
+        });
+    };
+
+    cache.uncacheIssue = function(issue) {
+        // When multiple entities are involved (e.g. crossing_ways),
+        // remove this issue from the other entity caches too..
+        var entityIds = issue.entityIds || [];
+        entityIds.forEach(function(entityId) {
+            if (cache.issuesByEntityID[entityId]) {
+                cache.issuesByEntityID[entityId].delete(issue.id);
+            }
+        });
+        delete cache.issuesByIssueID[issue.id];
+    };
+
+    cache.uncacheIssues = function(issues) {
+        issues.forEach(cache.uncacheIssue);
+    };
+
+    cache.uncacheIssuesOfType = function(type) {
+        var issuesOfType = Object.values(cache.issuesByIssueID)
+            .filter(function(issue) { return issue.type === type; });
+        cache.uncacheIssues(issuesOfType);
+    };
+
+    //
+    // Remove a single entity and all its related issues from the caches
+    //
+    cache.uncacheEntityID = function(entityID) {
+        var issueIDs = cache.issuesByEntityID[entityID];
+        if (!issueIDs) return;
+
+        issueIDs.forEach(function(issueID) {
+            var issue = cache.issuesByIssueID[issueID];
+            if (issue) {
+                cache.uncacheIssue(issue);
+            } else {
+                delete cache.issuesByIssueID[issueID];
+            }
+        });
+
+        delete cache.issuesByEntityID[entityID];
+    };
+
+    return cache;
 }

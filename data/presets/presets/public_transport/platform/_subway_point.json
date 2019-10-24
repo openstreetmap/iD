@@ -17,18 +17,6 @@
         "key": "railway",
         "value": "platform"
     },
-    "terms": [
-        "metro",
-        "platform",
-        "public transit",
-        "public transportation",
-        "rail",
-        "subway",
-        "track",
-        "transit",
-        "transportation",
-        "underground"
-    ],
     "searchable": false,
     "name": "Subway Stop / Platform"
 }

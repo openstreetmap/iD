@@ -4,6 +4,9 @@
         "name",
         "building_area"
     ],
+    "moreFields": [
+        "level"
+    ],
     "geometry": [
         "point",
         "area"

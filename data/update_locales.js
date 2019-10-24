@@ -269,7 +269,7 @@ function getLangNamesInNativeLang() {
     return ordered;
 }
 
-var rematchCodes = { 'ar-AA': 'ar', 'zh-CN': 'zh', 'zh-HK': 'zh-Hant-HK', 'zh-TW': 'zh', 'pt-BR': 'pt', 'pt': 'pt-PT' };
+var rematchCodes = { 'ar-AA': 'ar', 'zh-CN': 'zh', 'zh-HK': 'zh-Hant-HK', 'zh-TW': 'zh-Hant', 'pt-BR': 'pt', 'pt': 'pt-PT' };
 
 function languageNamesInLanguageOf(code) {
 

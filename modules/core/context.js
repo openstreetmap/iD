@@ -25,7 +25,7 @@ export function coreContext() {
     var context = utilRebind({}, dispatch, 'on');
     var _deferred = new Set();
 
-    context.version = '2.15.5';
+    context.version = '2.16.0';
 
     // create a special translation that contains the keys in place of the strings
     var tkeys = JSON.parse(JSON.stringify(dataEn));  // clone deep
@@ -231,6 +231,30 @@ export function coreContext() {
             if (mode.id !== 'browse') {
                 map.on('drawn.zoomToEntity', null);
                 context.on('enter.zoomToEntity', null);
+            }
+        });
+    };
+
+    context.zoomToEntities = function(entityIDs) {
+        context.loadEntities(entityIDs);
+
+        map.on('drawn.zoomToEntities', function() {
+            if (entityIDs.some(function(entityID) {
+                return !context.hasEntity(entityID);
+            })) return;
+
+            map.on('drawn.zoomToEntities', null);
+            context.on('enter.zoomToEntities', null);
+
+            var mode = modeSelect(context, entityIDs);
+            context.enter(mode);
+            mode.zoomToSelected();
+        });
+
+        context.on('enter.zoomToEntities', function() {
+            if (mode.id !== 'browse') {
+                map.on('drawn.zoomToEntities', null);
+                context.on('enter.zoomToEntities', null);
             }
         });
     };

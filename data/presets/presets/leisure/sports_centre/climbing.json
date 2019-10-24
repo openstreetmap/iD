@@ -16,8 +16,8 @@
         "ropes"
     ],
     "tags": {
-      "leisure": "sports_centre",
-      "sport": "climbing"
+        "leisure": "sports_centre",
+        "sport": "climbing"
     },
     "reference": {
         "key": "sport",

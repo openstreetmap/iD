@@ -396,9 +396,7 @@
             },
             "reverse": {
                 "title": "Inverser",
-                "description": "Inverse le sens d'une ligne.",
-                "key": "V",
-                "annotation": "sens d'une ligne inversé."
+                "key": "V"
             },
             "split": {
                 "title": "Couper",
@@ -697,7 +695,7 @@
             "switch": "Revenir à cet arrière-plan",
             "custom": "Personnalisé",
             "overlays": "Calques",
-            "imagery_source_faq": "Info imagerie / Signaler un problème",
+            "imagery_problem_faq": "Signaler un problème d'imagerie",
             "reset": "réinitialiser",
             "reset_all": "Tout réinitialiser",
             "display_options": "Options d'affichage",
@@ -741,7 +739,6 @@
                     "zoom": "Zoomer sur les données"
                 }
             },
-            "fill_area": "Remplissage des zones",
             "map_features": "Éléments de la carte",
             "autohidden": "Ces éléments ont été automatiquement cachés parce qu'un trop grand nombre d'entre eux seraient affichés à l'écran. Vous pouvez zoomer pour les modifier.",
             "osmhidden": "Ces éléments ont été automatiquement cachés parce que le calque OpenStreetMap est caché."
@@ -1315,6 +1312,11 @@
         "mapillary_images": {
             "tooltip": "Photos de rue depuis Mapillary"
         },
+        "mapillary_map_features": {
+            "title": "Éléments de la carte",
+            "tooltip": "Éléments de la carte de Mapillary",
+            "request_data": "Demander les données"
+        },
         "mapillary": {
             "title": "Mapillary",
             "signs": {
@@ -1601,8 +1603,6 @@
                 "hidden_issues": {
                     "none": "Les problèmes détectés apparaîtront ici",
                     "elsewhere": "Problèmes ailleurs : {count}",
-                    "other_features": "Problèmes avec d'autres éléments : {count}",
-                    "other_features_elsewhere": "Problèmes ailleurs avec d'autres éléments : {count}",
                     "disabled_rules": "Problèmes pour des règles désactivées : {count}",
                     "disabled_rules_elsewhere": "Problèmes ailleurs pour des règles désactivées : {count}",
                     "ignored_issues": "Problèmes ignorés : {count}",
@@ -1720,15 +1720,11 @@
                 }
             },
             "fixme_tag": {
-                "title": "Demandes de correction",
                 "message": "{feature} a une demande de correction",
-                "tip": "Trouver des éléments avec un attribut « fixme »",
                 "reference": "L'attribut « fixme » indique que le cartographe demande de l'aide pour cet élément."
             },
             "generic_name": {
-                "title": "Noms suspects",
                 "message": "{feature} possède le nom suspect « {name} »",
-                "tip": "Trouver des éléments avec des noms génériques ou suspects",
                 "reference": "Les noms devraient être le nom réel de l'élément sur le terrain."
             },
             "incompatible_source": {
@@ -1745,14 +1741,7 @@
                 "title": "Format invalide",
                 "tip": "Trouver des attributs avec des formats inattendus",
                 "email": {
-                    "message": "{feature} a une adresse de courriel invalide.",
-                    "message_multi": "{feature} a plusieurs adresses de courriel invalides.",
                     "reference": "Les adresses de courriel doivent ressembler à « utilisateur@exemple.com »."
-                },
-                "website": {
-                    "message": "{feature} a un site web invalide.",
-                    "message_multi": "{feature} a plusieurs sites web invalides.",
-                    "reference": "Les sites web doivent commencer par « http » ou « https »."
                 }
             },
             "missing_role": {
@@ -1804,9 +1793,7 @@
                 }
             },
             "tag_suggests_area": {
-                "title": "Lignes en tant que surface",
                 "message": "{feature} devrait être un polygone fermé d'après l'attribut « {tag} »",
-                "tip": "Trouver des éléments qui sont indiqués comme des lignes mais qui devrait sans doute être indiqués comme des surfaces",
                 "reference": "Les polygones doivent avoir deux points connectés."
             },
             "unknown_road": {
@@ -1863,6 +1850,9 @@
                 "connect_features": {
                     "title": "Connecter les éléments"
                 },
+                "connect_using_ford": {
+                    "title": "Connecter avec un gué"
+                },
                 "continue_from_start": {
                     "title": "Continuer le dessin du début"
                 },
@@ -1871,6 +1861,9 @@
                 },
                 "delete_feature": {
                     "title": "Supprimer cet élément"
+                },
+                "extract_point": {
+                    "title": "Extraire ce point"
                 },
                 "ignore_issue": {
                     "title": "Ignorer ce problème"
@@ -1892,7 +1885,6 @@
                     "title": "Supprimer de la relation"
                 },
                 "remove_generic_name": {
-                    "title": "Supprimer le nom",
                     "annotation": "Nom générique supprimé."
                 },
                 "remove_private_info": {
@@ -2309,7 +2301,6 @@
                     "disconnect": "Déconnecter les éléments au nœud sélectionné",
                     "extract": "Extraire un point d'un élément",
                     "split": "Couper une ligne en deux au nœud sélectionné",
-                    "reverse": "Inverser une ligne",
                     "move": "Déplacer les éléments sélectionnés",
                     "rotate": "Tourner les éléments sélectionnés",
                     "orthogonalize": "Rendre les coins d'une ligne ou d'une surface orthogonaux",
@@ -2463,7 +2454,8 @@
                     }
                 },
                 "access_simple": {
-                    "label": "Accès autorisé"
+                    "label": "Accès autorisé",
+                    "terms": "permis,autorisé,privé,public,publique"
                 },
                 "addr/interpolation": {
                     "label": "Adresses interpolées",
@@ -2574,7 +2566,8 @@
                     "label": "Pour animaux"
                 },
                 "architect": {
-                    "label": "Architecte"
+                    "label": "Architecte",
+                    "terms": "architecte,architecture,conception de bâtiment,bâtiment,concepteur"
                 },
                 "area/highway": {
                     "label": "Type"
@@ -2590,6 +2583,9 @@
                 },
                 "attraction": {
                     "label": "Type"
+                },
+                "baby_seat": {
+                    "label": "Siège bébé"
                 },
                 "backrest": {
                     "label": "Dossier de siège"
@@ -2629,7 +2625,17 @@
                     "label": "Type"
                 },
                 "bin": {
-                    "label": "Poubelle"
+                    "label": "Poubelle",
+                    "terms": "poubelle, poubelle publique, poubelle urbaine, poubelle de ville, poubelle de rue, petite poubelle, ordures, déchets, corbeille, bac à ordures, bac à déchets, bac à marée, conteneur à ordures, conteneur à déchets, tri sélectif, recyclage, waste basket, amenity waste basket, wastebasket, rubbish bin, litter bin, trash can, garbage can"
+                },
+                "blind": {
+                    "label": "Accessibilité aux non-voyants",
+                    "options": {
+                        "limited": "Limitée",
+                        "no": "Non",
+                        "yes": "Oui"
+                    },
+                    "terms": "déficient visuel,déficience visuelle,aveugle,non voyant,non-voyant,malvoyant"
                 },
                 "blood_components": {
                     "label": "Composants du sang",
@@ -2643,6 +2649,9 @@
                 "board_type": {
                     "label": "Type"
                 },
+                "bollard": {
+                    "label": "Type"
+                },
                 "booth": {
                     "label": "Type de cabine"
                 },
@@ -2653,10 +2662,12 @@
                     "label": "Type"
                 },
                 "brand": {
-                    "label": "Marque"
+                    "label": "Marque",
+                    "terms": "marque"
                 },
                 "brewery": {
-                    "label": "Bières à la pression"
+                    "label": "Bières à la pression",
+                    "terms": "bière pression,à la pression,pression"
                 },
                 "bridge": {
                     "label": "Type",
@@ -2666,18 +2677,22 @@
                     "label": "Type"
                 },
                 "building": {
-                    "label": "Bâtiment "
+                    "label": "Bâtiment ",
+                    "terms": "bâtiment,construction,bâtiment,batiment"
                 },
                 "building/levels/underground": {
                     "label": "Niveaux souterrains",
-                    "placeholder": "2, 4, 6…"
+                    "placeholder": "2, 4, 6…",
+                    "terms": "niveaux sous-sol,sous-sol,cave,souterrain"
                 },
                 "building/levels_building": {
                     "label": "Nombre de niveaux",
-                    "placeholder": "2, 4, 6..."
+                    "placeholder": "2, 4, 6...",
+                    "terms": "niveaux, étages, paliers"
                 },
                 "building/material": {
-                    "label": "Matériau"
+                    "label": "Matériau",
+                    "terms": "matériaux, matière, substance"
                 },
                 "building_area": {
                     "label": "Bâtiment"
@@ -2706,7 +2721,8 @@
                 },
                 "capacity": {
                     "label": "Capacité",
-                    "placeholder": "50, 100, 200..."
+                    "placeholder": "50, 100, 200...",
+                    "terms": "capacité, quantité, nombre"
                 },
                 "cash_in": {
                     "label": "Dépôt"
@@ -2714,12 +2730,17 @@
                 "castle_type": {
                     "label": "Type"
                 },
+                "changing_table": {
+                    "label": "Table à langer"
+                },
                 "charge_fee": {
                     "label": "Montant",
+                    "placeholder": "1 EUR, 5 USD, 10 JPY…",
                     "terms": "Montant des frais, frais, charges"
                 },
                 "charge_toll": {
                     "label": "Montant",
+                    "placeholder": "1 EUR, 5 USD, 10 JPY…",
                     "terms": "Tarif péage, frais d'autoroute"
                 },
                 "check_date": {
@@ -2735,14 +2756,16 @@
                     "label": "Horaires de collecte"
                 },
                 "colour": {
-                    "label": "Couleur"
+                    "label": "Couleur",
+                    "terms": "couleur"
                 },
                 "comment": {
                     "label": "Commentaires du groupe de modifications",
                     "placeholder": "Brève description de vos contributions (requis)"
                 },
                 "communication_multi": {
-                    "label": "Type de communication"
+                    "label": "Type de communication",
+                    "terms": "type,type de télécommunication,tour de télécommunication,diffusion,antenne,téléphone portable,téléphone cellulaire,gsm,tour,radio,mât de transmission,pylône de transmission"
                 },
                 "construction": {
                     "label": "Type"
@@ -2765,6 +2788,9 @@
                         "reversible": "Réversible"
                     }
                 },
+                "conveying_escalator": {
+                    "label": "Escalator"
+                },
                 "country": {
                     "label": "Pays"
                 },
@@ -2773,7 +2799,8 @@
                     "placeholder": "1, 2, 3..."
                 },
                 "covered": {
-                    "label": "Couvert"
+                    "label": "Couvert",
+                    "terms": "couvert,recouvert"
                 },
                 "craft": {
                     "label": "Type"
@@ -2799,7 +2826,8 @@
                     "label": "Cuisines"
                 },
                 "currency_multi": {
-                    "label": "Types de devises"
+                    "label": "Types de devises",
+                    "terms": "billets,liquide,pièces,argent,monnaie,type"
                 },
                 "cutting": {
                     "label": "Type",
@@ -2841,6 +2869,7 @@
                         }
                     },
                     "placeholder": "Aucun",
+                    "terms": "voies de vélo,vélo,cycliste,bande cyclable,voie cyclable,cyclable",
                     "types": {
                         "cycleway:left": "Côté gauche",
                         "cycleway:right": "Côté droit"
@@ -2853,10 +2882,12 @@
                     "label": "Date"
                 },
                 "delivery": {
-                    "label": "Livraison"
+                    "label": "Livraison",
+                    "terms": "livraison"
                 },
                 "denomination": {
-                    "label": "Dénomination "
+                    "label": "Dénomination ",
+                    "terms": "dénomination,église,religion"
                 },
                 "denotation": {
                     "label": "Signification"
@@ -2871,7 +2902,8 @@
                     }
                 },
                 "description": {
-                    "label": "Description"
+                    "label": "Description",
+                    "terms": "description,résumé"
                 },
                 "design": {
                     "label": "Type"
@@ -2880,7 +2912,8 @@
                     "label": "Identifiant de la destination"
                 },
                 "destination/symbol_oneway": {
-                    "label": "Symbole de la destination"
+                    "label": "Symbole de la destination",
+                    "terms": "symboles,marques,dessin"
                 },
                 "destination_oneway": {
                     "label": "Destinations"
@@ -2894,7 +2927,8 @@
                     "placeholder": "5 mm, 10 cm, 15 in…"
                 },
                 "diet_multi": {
-                    "label": "Types de régimes"
+                    "label": "Types de régimes",
+                    "terms": "types de régimes,sans gluten,fruit,halal,kasher,sans lactose,gluten,lactose,viande,vegan,végétarien,cru"
                 },
                 "diplomatic": {
                     "label": "Type"
@@ -2960,7 +2994,8 @@
                         "leashed": "Tenus en laisse",
                         "no": "Interdits",
                         "yes": "Autorisés"
-                    }
+                    },
+                    "terms": "chiens,animaux,canin"
                 },
                 "door": {
                     "label": "Porte"
@@ -2969,11 +3004,13 @@
                     "label": "Type"
                 },
                 "drive_through": {
-                    "label": "Service Drive"
+                    "label": "Service Drive",
+                    "terms": "service au comptoir,service au volant,point retrait"
                 },
                 "duration": {
                     "label": "Durée",
-                    "placeholder": "00:00"
+                    "placeholder": "00:00",
+                    "terms": "durée"
                 },
                 "electrified": {
                     "label": "Électrification",
@@ -2986,11 +3023,13 @@
                     "placeholder": "Caténaire, troisième rail…"
                 },
                 "elevation": {
-                    "label": "Altitude"
+                    "label": "Altitude",
+                    "terms": "altitude"
                 },
                 "email": {
                     "label": "Courrier électronique",
-                    "placeholder": "example@example.com"
+                    "placeholder": "example@example.com",
+                    "terms": "courriel,email,e-mail,mail"
                 },
                 "embankment": {
                     "label": "Type",
@@ -3019,19 +3058,23 @@
                 },
                 "fax": {
                     "label": "Fax",
-                    "placeholder": "+33 1 23 45 67 89"
+                    "placeholder": "+33 1 23 45 67 89",
+                    "terms": "fax"
                 },
                 "fee": {
-                    "label": "Prix"
+                    "label": "Prix",
+                    "terms": "frais,charges,montant,coût"
                 },
                 "fence_type": {
                     "label": "Type"
                 },
                 "fire_hydrant/diameter": {
-                    "label": "Diamètre (mm, pouces, ou lettres)"
+                    "label": "Diamètre (mm, pouces, ou lettres)",
+                    "terms": "diamètre"
                 },
                 "fire_hydrant/pressure": {
-                    "label": "Pression (bar)"
+                    "label": "Pression (bar)",
+                    "terms": "pression"
                 },
                 "fire_hydrant/type": {
                     "label": "Forme",
@@ -3046,13 +3089,15 @@
                     "label": "Cheminée"
                 },
                 "fishing": {
-                    "label": "Pêche"
+                    "label": "Pêche",
+                    "terms": "pêche"
                 },
                 "fitness_station": {
                     "label": "Type d'équipement "
                 },
                 "fixme": {
-                    "label": "À corriger"
+                    "label": "À corriger",
+                    "terms": "demande d'aide,aide,correction,corrigez-moi"
                 },
                 "flag/type": {
                     "label": "Type de drapeau"
@@ -3061,17 +3106,20 @@
                     "label": "Flottant"
                 },
                 "flood_prone": {
-                    "label": "Risque de crue"
+                    "label": "Risque de crue",
+                    "terms": "débordement,crue,montée des eaux"
                 },
                 "ford": {
                     "label": "Type",
                     "placeholder": "Défaut"
                 },
                 "frequency": {
-                    "label": "Fréquence "
+                    "label": "Fréquence ",
+                    "terms": "fréquence,régulier,régulièrement"
                 },
                 "frequency_electrified": {
-                    "label": "Fréquence"
+                    "label": "Fréquence",
+                    "terms": "fréquence,régulier,régulièrement"
                 },
                 "from": {
                     "label": "De"
@@ -3092,7 +3140,8 @@
                         "male": "Homme",
                         "unisex": "Unisexe"
                     },
-                    "placeholder": "Inconnu"
+                    "placeholder": "Inconnu",
+                    "terms": "genre,accès,femmes,hommes,unisexe,filles,garçons"
                 },
                 "generator/method": {
                     "label": "Méthode"
@@ -3134,13 +3183,16 @@
                     "label": "Spécialités"
                 },
                 "height": {
-                    "label": " Hauteur (Mètres)"
+                    "label": " Hauteur (Mètres)",
+                    "terms": "hauteur"
                 },
                 "height_building": {
-                    "label": "Hauteur du bâtiment (mètres)"
+                    "label": "Hauteur du bâtiment (mètres)",
+                    "terms": "hauteur"
                 },
                 "highspeed": {
-                    "label": "Ligne à grande vitesse"
+                    "label": "Ligne à grande vitesse",
+                    "terms": "grande vitesse,TGV,LGV,train rapide,rapide,vitesse"
                 },
                 "highway": {
                     "label": "Type"
@@ -3188,7 +3240,8 @@
                         "difficult": "Difficile : voie étroite et exposée. Peut contenir des obstacles par dessus lesquels passer et des passages étroits.",
                         "impossible": "Impossible : Voie ou pont impossible à franchir pour les chevaux. Trop étroit, support insuffisant, obstacles comme des échelles. Danger de mort."
                     },
-                    "placeholder": "Difficile, Dangereux..."
+                    "placeholder": "Difficile, Dangereux...",
+                    "terms": "équitation,équestre,cheval,difficulté"
                 },
                 "horse_stables": {
                     "label": "Étable pour cavaliers",
@@ -3204,7 +3257,8 @@
                     "label": "Code aéroport OACI"
                 },
                 "incline": {
-                    "label": "Pente"
+                    "label": "Pente",
+                    "terms": "inclinaison,direction"
                 },
                 "incline_steps": {
                     "label": "Pente",
@@ -3214,7 +3268,8 @@
                     }
                 },
                 "indoor": {
-                    "label": "Intérieur"
+                    "label": "Intérieur",
+                    "terms": "intérieur"
                 },
                 "indoor_type": {
                     "label": "Type"
@@ -3226,10 +3281,12 @@
                     "label": "Type"
                 },
                 "inscription": {
-                    "label": "Inscription"
+                    "label": "Inscription",
+                    "terms": "inscription,panneau,information,plaque"
                 },
                 "intermittent": {
-                    "label": "Intermittent"
+                    "label": "Intermittent",
+                    "terms": "intermittent,saisonnier"
                 },
                 "intermittent_yes": {
                     "label": "Intermittent"
@@ -3242,19 +3299,24 @@
                         "wired": "Par câble",
                         "wlan": "Wifi",
                         "yes": "Oui"
-                    }
+                    },
+                    "terms": "accès internet,wifi,wlan"
                 },
                 "internet_access/fee": {
-                    "label": "Frais d'accès à Internet"
+                    "label": "Frais d'accès à Internet",
+                    "terms": "frais d'accès internet,internet,wifi,wlan,gratuit,payant"
                 },
                 "internet_access/ssid": {
-                    "label": "Nom du réseau WiFi"
+                    "label": "Nom du réseau WiFi",
+                    "terms": "ssid,nom du réseau"
                 },
                 "interval": {
-                    "label": "Intervalle"
+                    "label": "Intervalle",
+                    "terms": "interval"
                 },
                 "junction/ref_oneway": {
-                    "label": "Identifiant de l'embranchement"
+                    "label": "Identifiant de l'embranchement",
+                    "terms": "numéro de jonction,carrefour,jonction,intersection,référence"
                 },
                 "junction_line": {
                     "label": "Jonction routière",
@@ -3262,7 +3324,8 @@
                         "circular": "Rond-point",
                         "jughandle": "Tourne-à-droite",
                         "roundabout": "Rond-point"
-                    }
+                    },
+                    "terms": "Jonction routière, Jonction, Carrefour, Intersection routière,  Intersection"
                 },
                 "kerb": {
                     "label": "Aménagement de trottoir, Abaissement (bateau)"
@@ -3281,14 +3344,16 @@
                 },
                 "lanes": {
                     "label": "Voies",
-                    "placeholder": "1, 2, 3..."
+                    "placeholder": "1, 2, 3...",
+                    "terms": "voies,bandes"
                 },
                 "language_multi": {
                     "label": "Langues"
                 },
                 "layer": {
                     "label": "Couche",
-                    "placeholder": "0"
+                    "placeholder": "0",
+                    "terms": "couche"
                 },
                 "leaf_cycle": {
                     "label": "Phénologie du feuillage",
@@ -3333,20 +3398,30 @@
                     "label": "Longueur (mètres)"
                 },
                 "level": {
-                    "label": "Niveau (étage)"
+                    "label": "Niveau (étage)",
+                    "terms": "niveau,étage,palier"
+                },
+                "level_semi": {
+                    "label": "Niveaux"
                 },
                 "levels": {
                     "label": "Nombre de niveaux",
-                    "placeholder": "2, 4, 6..."
+                    "placeholder": "2, 4, 6...",
+                    "terms": "niveaux, étages, paliers"
                 },
                 "liaison": {
                     "label": "Type"
                 },
+                "line_attachment": {
+                    "label": "Armement aérien"
+                },
                 "lit": {
-                    "label": "Éclairé"
+                    "label": "Éclairé",
+                    "terms": "éclairé,lampe,lampadaire"
                 },
                 "location": {
-                    "label": "Lieu"
+                    "label": "Lieu",
+                    "terms": "emplacement"
                 },
                 "location_pool": {
                     "label": "Emplacement",
@@ -3366,7 +3441,8 @@
                     "label": "Type"
                 },
                 "manufacturer": {
-                    "label": "Fabricant"
+                    "label": "Fabricant",
+                    "terms": "manufacture,artisan,artisanat"
                 },
                 "map_size": {
                     "label": "Emprise, Couverture"
@@ -3375,38 +3451,55 @@
                     "label": "Type"
                 },
                 "material": {
-                    "label": "Matériau"
+                    "label": "Matériau",
+                    "terms": "matériau,matière,substance"
+                },
+                "max_age": {
+                    "label": "Âge maximum",
+                    "terms": "Age maxi,Âge maximum,Âge maxi,Limite d'âge,Limite d'age"
                 },
                 "maxheight": {
                     "label": "Hauteur maximum",
-                    "placeholder": "4, 4.5, 5, 14'0\", 14'6\", 15'0\""
+                    "placeholder": "4, 4.5, 5, 14'0\", 14'6\", 15'0\"",
+                    "terms": "hauteur"
                 },
                 "maxspeed": {
                     "label": "Vitesse maximale autorisée",
-                    "placeholder": "30, 50, 70, 90, etc."
+                    "placeholder": "30, 50, 70, 90, etc.",
+                    "terms": "limitation de vitesse,limite de vitesse,vitesse max,vitesse limite"
                 },
                 "maxspeed/advisory": {
                     "label": "Vitesse conseillée",
-                    "placeholder": "40, 50, 60..."
+                    "placeholder": "40, 50, 60...",
+                    "terms": "conseil de vitesse,limite de vitesse,vitesse conseillée"
                 },
                 "maxstay": {
-                    "label": "Durée maximale"
+                    "label": "Durée maximale",
+                    "terms": "durée maximale,séjour"
                 },
                 "maxweight": {
-                    "label": "Charge maximale [kg]"
+                    "label": "Charge maximale",
+                    "terms": "poids,limite,maximum,poids max,poids limite,limite de poids"
                 },
                 "maxweight_bridge": {
-                    "label": "Charge maximale [kg]"
+                    "label": "Charge maximale",
+                    "terms": "poids,limite,maximum,poids max,poids limite,limite de poids"
                 },
                 "memorial": {
                     "label": "Type"
                 },
                 "microbrewery": {
-                    "label": "Micro-brasserie"
+                    "label": "Micro-brasserie",
+                    "terms": "bière artisanale,brasserie"
+                },
+                "min_age": {
+                    "label": "Âge minimum",
+                    "terms": "Age mini,Âge minimum,Âge mini,Limite d'âge,Limite d'age"
                 },
                 "minspeed": {
                     "label": "Vitesse minimale autorisée",
-                    "placeholder": "20, 30, 40..."
+                    "placeholder": "20, 30, 40...",
+                    "terms": "limitation de vitesse,limite de vitesse,vitesse minimale,vitesse limite"
                 },
                 "monitoring_multi": {
                     "label": "Surveillance"
@@ -3422,7 +3515,8 @@
                         "5": "5 : Difficulté maximale, champs de blocs, glissements de terrain",
                         "6": "6 : Non praticable, ou seulement par les meilleurs vététistes"
                     },
-                    "placeholder": "0, 1, 2, 3..."
+                    "placeholder": "0, 1, 2, 3...",
+                    "terms": "VTT,cyclisme,difficulté"
                 },
                 "mtb/scale/imba": {
                     "label": "Difficulté sur échelle IMBA ",
@@ -3433,7 +3527,8 @@
                         "3": "Difficile (losanges noirs)",
                         "4": "Extrêmement difficile (doubles losanges noirs)"
                     },
-                    "placeholder": "Facile, Intermédiaire, Difficile..."
+                    "placeholder": "Facile, Intermédiaire, Difficile...",
+                    "terms": "IMBA"
                 },
                 "mtb/scale/uphill": {
                     "label": "Difficulté VTT en montée",
@@ -3445,17 +3540,20 @@
                         "4": "4 : Inclinaison < 30 %, conditions difficiles, rochers/branches",
                         "5": "5 : Abrupt, le vélo doit généralement être porté ou poussé"
                     },
-                    "placeholder": "0, 1, 2, 3..."
+                    "placeholder": "0, 1, 2, 3...",
+                    "terms": "VTT,cyclisme,difficulté"
                 },
                 "name": {
                     "label": "Nom",
-                    "placeholder": "Nom courant (si existant)"
+                    "placeholder": "Nom courant (si existant)",
+                    "terms": "nom,étiquette,label,titre"
                 },
                 "natural": {
                     "label": "Nature"
                 },
                 "network": {
-                    "label": "Réseau"
+                    "label": "Réseau",
+                    "terms": "réseau"
                 },
                 "network_bicycle": {
                     "label": "Type de réseau",
@@ -3491,10 +3589,12 @@
                     "label": "Réseau"
                 },
                 "not/name": {
-                    "label": "Noms incorrects"
+                    "label": "Noms incorrects",
+                    "terms": "noms incorrects"
                 },
                 "note": {
-                    "label": "Note"
+                    "label": "Note",
+                    "terms": "note,commentaire"
                 },
                 "office": {
                     "label": "Type"
@@ -3510,7 +3610,8 @@
                     }
                 },
                 "oneway/bicycle": {
-                    "label": "Sens unique cyclable"
+                    "label": "Sens unique cyclable",
+                    "terms": "sens unique cyclable,cycliste,vélo"
                 },
                 "oneway_yes": {
                     "label": "Sens unique",
@@ -3527,23 +3628,27 @@
                 },
                 "opening_hours": {
                     "label": "Horaires d'ouverture",
-                    "placeholder": "Inconnues"
+                    "placeholder": "Inconnues",
+                    "terms": "horaires,heures,horraires"
                 },
                 "operator": {
-                    "label": "Exploitant"
+                    "label": "Exploitant",
+                    "terms": "exploitant,opérateur"
                 },
                 "operator/type": {
                     "label": "Type d'exploitant"
                 },
                 "outdoor_seating": {
-                    "label": "Places en terrasse"
+                    "label": "Places en terrasse",
+                    "terms": "places en terrase,terrasse,beer garden,biergarten,restaurant,bar"
                 },
                 "par": {
                     "label": "Par",
                     "placeholder": "3, 4, 5..."
                 },
                 "park_ride": {
-                    "label": "Parking-relais"
+                    "label": "Parking-relais",
+                    "terms": "Parking, Zone de Stationnement, Stationnement"
                 },
                 "parking": {
                     "label": "Type",
@@ -3558,10 +3663,12 @@
                     }
                 },
                 "payment_multi": {
-                    "label": "Types de paiement"
+                    "label": "Types de paiement",
+                    "terms": "billets,liquide,pièces,argent,monnaie,type de paiement,carte bancaire,carte bleue,carte de crédit,carte de débit,chèque,chéquier,bitcoin,visa,mastercard"
                 },
                 "payment_multi_fee": {
-                    "label": "Types de paiement"
+                    "label": "Types de paiement",
+                    "terms": "billets,liquide,pièces,argent,monnaie,type de paiement,carte bancaire,carte bleue,carte de crédit,carte de débit,chèque,chéquier,bitcoin,visa,mastercard"
                 },
                 "phases": {
                     "label": "Phases",
@@ -3569,7 +3676,8 @@
                 },
                 "phone": {
                     "label": "Téléphone",
-                    "placeholder": "+33 1 23 45 67 89"
+                    "placeholder": "+33 1 23 45 67 89",
+                    "terms": "téléphone,numéro de téléphone"
                 },
                 "piste/difficulty": {
                     "label": "Difficulté",
@@ -3685,17 +3793,9 @@
                 "playground": {
                     "label": "Type"
                 },
-                "playground/baby": {
-                    "label": "Siège enfant"
-                },
-                "playground/max_age": {
-                    "label": "Age maximum"
-                },
-                "playground/min_age": {
-                    "label": "Age minimum"
-                },
                 "polling_station": {
-                    "label": "Bureau de vote"
+                    "label": "Bureau de vote",
+                    "terms": "bureau de vote"
                 },
                 "population": {
                     "label": "Population"
@@ -3707,7 +3807,8 @@
                     "label": "Type"
                 },
                 "power_supply": {
-                    "label": "Source de courant"
+                    "label": "Source de courant",
+                    "terms": "électricité,electricité,énergie"
                 },
                 "preschool": {
                     "label": "École maternelle"
@@ -3716,7 +3817,8 @@
                     "label": "Produits agricoles"
                 },
                 "product": {
-                    "label": "Produits manufacturés"
+                    "label": "Produits manufacturés",
+                    "terms": "produits"
                 },
                 "public_bookcase/type": {
                     "label": "Type"
@@ -3751,7 +3853,8 @@
                     "placeholder": "Conteneur, Centre"
                 },
                 "ref": {
-                    "label": "Code d'identification"
+                    "label": "Code d'identification",
+                    "terms": "référence,numéro de série,numéro de référence"
                 },
                 "ref/isil": {
                     "label": "Code ISIL"
@@ -3770,13 +3873,15 @@
                     "label": "Identifiant du quai"
                 },
                 "ref_road_number": {
-                    "label": "Identifiant de la route"
+                    "label": "Identifiant de la route",
+                    "terms": "numéro de route,route,référence"
                 },
                 "ref_room_number": {
                     "label": "Numéro de la pièce"
                 },
                 "ref_route": {
-                    "label": "Identifiant de l'itinéraire"
+                    "label": "Identifiant de l'itinéraire",
+                    "terms": "numéro du circuit,circuit,référence,itinéraire"
                 },
                 "ref_runway": {
                     "label": "Numéro de la piste",
@@ -3793,7 +3898,8 @@
                     "label": "Type"
                 },
                 "religion": {
-                    "label": "Religion"
+                    "label": "Religion",
+                    "terms": "religion,église,temple"
                 },
                 "reservation": {
                     "label": "Réservations",
@@ -3802,7 +3908,8 @@
                         "recommended": "recommandées",
                         "required": "requises",
                         "yes": "acceptées"
-                    }
+                    },
+                    "terms": "réservations,à l'avance"
                 },
                 "resort": {
                     "label": "Type"
@@ -3817,7 +3924,8 @@
                     "label": "Interdictions de tourner"
                 },
                 "roof/colour": {
-                    "label": "Couleur du toit"
+                    "label": "Couleur du toit",
+                    "terms": "couleur du toit"
                 },
                 "room": {
                     "label": "Type"
@@ -3841,13 +3949,16 @@
                         "hiking": "T1 : randonnée",
                         "mountain_hiking": "T2 : randonnée de montagne"
                     },
-                    "placeholder": "Randonnée de montagne, randonnée alpine…"
+                    "placeholder": "Randonnée de montagne, randonnée alpine…",
+                    "terms": "difficulté,randonnée"
                 },
                 "salt": {
-                    "label": "Salé"
+                    "label": "Salé",
+                    "terms": "sel,salin,salé"
                 },
                 "sanitary_dump_station": {
-                    "label": "Station de vidange sanitaire"
+                    "label": "Station de vidange sanitaire",
+                    "terms": "chasse d'eau,toilettes chimiques,toilettes sèches"
                 },
                 "screen": {
                     "label": "Écrans",
@@ -3934,7 +4045,8 @@
                     "label": "Catégorie"
                 },
                 "seamark/type": {
-                    "label": "Balise maritime"
+                    "label": "Balise maritime",
+                    "terms": "maritime,marin,balisage,balise de mer,marine,bâteau,bateau"
                 },
                 "seamark/wreck/category": {
                     "label": "Catégorie"
@@ -3953,7 +4065,8 @@
                         "only": "Uniquement",
                         "yes": "Oui"
                     },
-                    "placeholder": "Oui, non, uniquement"
+                    "placeholder": "Oui, non, uniquement",
+                    "terms": "seconde-main,seconde main,occasion,deuxième-main"
                 },
                 "self_service": {
                     "label": "Libre service"
@@ -3974,7 +4087,8 @@
                         "siding": "Voie courte, parallèle et connectée à une voie principale",
                         "spur": "Voie courte, embranchement connectant à une voie principale (fret)",
                         "yard": "Voie interne pour le triage ou la maintenance"
-                    }
+                    },
+                    "terms": "type de service,voie de garage,parking,allée"
                 },
                 "service_times": {
                     "label": "Horaires des services"
@@ -4015,7 +4129,8 @@
                         "separated": "Zones non-fumeur et fumeur, non isolées",
                         "yes": "Autorisé partout"
                     },
-                    "placeholder": "Non, zones, oui…"
+                    "placeholder": "Non, zones, oui…",
+                    "terms": "fumeur,zone fumeur,cigarette,fumer"
                 },
                 "smoothness": {
                     "label": "Régularité du sol, aptitude à rouler sur la surface",
@@ -4029,7 +4144,8 @@
                         "very_bad": "Véhicule à garde au sol élevée, véhicule tout-terrain léger",
                         "very_horrible": "Véhicule spécifique tout-terrain : tracteur, 4x4"
                     },
-                    "placeholder": "Roulettes, roues, tout-terrain, …"
+                    "placeholder": "Roulettes, roues, tout-terrain, …",
+                    "terms": "rugosité,lisse"
                 },
                 "social_facility": {
                     "label": "Type"
@@ -4038,10 +4154,12 @@
                     "label": "Personnes aidées"
                 },
                 "source": {
-                    "label": "Sources"
+                    "label": "Sources",
+                    "terms": "sources,références"
                 },
                 "species/wikidata": {
-                    "label": "Wikidata de l'espèce"
+                    "label": "Wikidata de l'espèce",
+                    "terms": "wikidata,espèce"
                 },
                 "sport": {
                     "label": "Sport"
@@ -4056,10 +4174,12 @@
                     "label": "Sports"
                 },
                 "stars": {
-                    "label": "Étoiles"
+                    "label": "Étoiles",
+                    "terms": "étoiles,niveau,notation,côte,évaluation"
                 },
                 "start_date": {
-                    "label": "Date de début"
+                    "label": "Date de début",
+                    "terms": "date de début,début"
                 },
                 "step_count": {
                     "label": "Nombre de marches"
@@ -4073,6 +4193,14 @@
                 },
                 "street_cabinet": {
                     "label": "Type"
+                },
+                "stroller": {
+                    "label": "Accès en poussette",
+                    "options": {
+                        "no": "Non",
+                        "yes": "Oui"
+                    },
+                    "terms": "poussette"
                 },
                 "structure": {
                     "label": "Structure",
@@ -4102,7 +4230,8 @@
                     "label": "Type"
                 },
                 "supervised": {
-                    "label": "Supervisé par un agent"
+                    "label": "Supervisé par un agent",
+                    "terms": "supervisé,gardé,surveillé"
                 },
                 "support": {
                     "label": "Support"
@@ -4125,7 +4254,8 @@
                     "label": "Zone de surveillance"
                 },
                 "survey/date": {
-                    "label": "Dernière date de relevé"
+                    "label": "Dernière date de relevé",
+                    "terms": "dernière vérification terrain,terrain"
                 },
                 "swimming_pool": {
                     "label": "Type de piscine"
@@ -4140,7 +4270,8 @@
                     }
                 },
                 "tactile_paving": {
-                    "label": "Surface podotactile"
+                    "label": "Surface podotactile",
+                    "terms": "surface podotactile,podotactile,bosse,aveugle"
                 },
                 "takeaway": {
                     "label": "À emporter",
@@ -4149,13 +4280,15 @@
                         "only": "À emporter seulement",
                         "yes": "Oui"
                     },
-                    "placeholder": "Oui, non, à emporter seulement…"
+                    "placeholder": "Oui, non, à emporter seulement…",
+                    "terms": "à emporter"
                 },
                 "target": {
                     "label": "Cible"
                 },
                 "tidal": {
-                    "label": "Sous l'influence de la marée"
+                    "label": "Sous l'influence de la marée",
+                    "terms": "marée,influence maritime"
                 },
                 "to": {
                     "label": "Vers"
@@ -4170,13 +4303,16 @@
                     }
                 },
                 "toilets/handwashing": {
-                    "label": "Lavabo"
+                    "label": "Lavabo",
+                    "terms": "lavage de main,savon,lavabo,laver les mains"
                 },
                 "toilets/position": {
-                    "label": "Positions"
+                    "label": "Positions",
+                    "terms": "emplacements,positions"
                 },
                 "toll": {
-                    "label": "Droit de péage"
+                    "label": "Droit de péage",
+                    "terms": "tarif,péage,autoroute"
                 },
                 "tomb": {
                     "label": "Type"
@@ -4240,7 +4376,8 @@
                         "intermediate": "Intermédiaire : peu de balisage, sentier identifiable",
                         "no": "Non : pas de sentier visible, nécessite de bonnes compétences d'orientation"
                     },
-                    "placeholder": "Excellent, bon, mauvais…"
+                    "placeholder": "Excellent, bon, mauvais…",
+                    "terms": "visibilité"
                 },
                 "transformer": {
                     "label": "Type",
@@ -4262,7 +4399,8 @@
                     "label": "Type"
                 },
                 "trolley_wire": {
-                    "label": "Câble pour trolley"
+                    "label": "Câble pour trolley",
+                    "terms": "Tyrolienne"
                 },
                 "tunnel": {
                     "label": "Type",
@@ -4277,7 +4415,8 @@
                         "military": "Militaire",
                         "test": " Voie de test pour les nouveaux trains",
                         "tourism": "Touristique"
-                    }
+                    },
+                    "terms": "utilisation,type"
                 },
                 "valve": {
                     "label": "Type"
@@ -4313,16 +4452,20 @@
                     "label": "Tension électrique"
                 },
                 "voltage/primary": {
-                    "label": "Tension primaire"
+                    "label": "Tension primaire",
+                    "terms": "voltage,primaire,tension"
                 },
                 "voltage/secondary": {
-                    "label": "Tension secondaire"
+                    "label": "Tension secondaire",
+                    "terms": "voltage,secondaire,tension"
                 },
                 "voltage/tertiary": {
-                    "label": "Tension tertiaire"
+                    "label": "Tension tertiaire",
+                    "terms": "voltage,tertiaire,tension"
                 },
                 "voltage_electrified": {
-                    "label": "Tension électrique"
+                    "label": "Tension électrique",
+                    "terms": "voltage,tension"
                 },
                 "wall": {
                     "label": "Type"
@@ -4337,36 +4480,47 @@
                     "label": "Source d'eau"
                 },
                 "water_volume": {
-                    "label": "Volume du réservoir d'eau (m³)"
+                    "label": "Volume du réservoir d'eau (m³)",
+                    "terms": "volume,réserve"
                 },
                 "waterway": {
                     "label": "Type"
                 },
                 "website": {
                     "label": "Site Web",
-                    "placeholder": "https://exemple.com"
+                    "placeholder": "https://exemple.com",
+                    "terms": "site web,site internet,web,internet,site,page web,page internet,url,uri"
                 },
                 "wetland": {
                     "label": "Type"
                 },
                 "wheelchair": {
-                    "label": "Accès en fauteuil roulant"
+                    "label": "Accès en fauteuil roulant",
+                    "options": {
+                        "no": "Non",
+                        "yes": "Oui"
+                    },
+                    "terms": "accès en fauteuil roulant,fauteuil roulant,handicapé"
                 },
                 "wholesale": {
                     "label": "Type de commerce de gros"
                 },
                 "width": {
-                    "label": "Largeur (mètres)"
+                    "label": "Largeur (mètres)",
+                    "terms": "largeur"
                 },
                 "wikidata": {
-                    "label": "Wikidata"
+                    "label": "Wikidata",
+                    "terms": "wikidata"
                 },
                 "wikipedia": {
-                    "label": "Wikipédia"
+                    "label": "Wikipédia",
+                    "terms": "wikipédia,wikipedia"
                 },
                 "windings": {
                     "label": "Enroulements",
-                    "placeholder": "1, 2, 3..."
+                    "placeholder": "1, 2, 3...",
+                    "terms": "enroulement,bobinage,enroulage,bobine"
                 },
                 "windings/configuration": {
                     "label": "Configuration des enroulements",
@@ -4378,7 +4532,8 @@
                         "scott": "Scott",
                         "star": "Étoile",
                         "zigzag": "Zig-zag "
-                    }
+                    },
+                    "terms": "configuration enroulement,enroulement,bobinage,enroulage,bobine"
                 }
             },
             "presets": {
@@ -4531,7 +4686,7 @@
                 },
                 "amenity/atm": {
                     "name": "Distributeur de billets",
-                    "terms": "distributeur de billets, distributeur automatique, distributeur automatique de billets, guichet automatique, DAB, GAB, billets de banque, retrait d'argent, retrait de liquide, guichet de retrait, retrait automatique, ATM, amenity atm"
+                    "terms": "distributeur de billets, distributeur automatique, distributeur automatique de billets, guichet automatique, DAB, GAB, billets de banque, retrait d'argent, retrait de liquide, guichet de retrait, retrait automatique, ATM, amenity atm,mister cash,bancontact"
                 },
                 "amenity/bank": {
                     "name": "Banque",
@@ -4950,9 +5105,9 @@
                     "name": "Bureau de vote permanent",
                     "terms": "bureau de vote,vote,élections,démocratie,démocratique"
                 },
-                "amenity/post_box": {
-                    "name": "Boîte aux lettres",
-                    "terms": "Boîte aux lettres"
+                "amenity/post_depot": {
+                    "name": "Bureau de tri de courrier",
+                    "terms": "dépôt,poste,tri,courrier,colis,distribution,traitement du courrier"
                 },
                 "amenity/post_office": {
                     "name": "Bureau de poste",
@@ -4994,10 +5149,12 @@
                     "name": "Point de recyclage"
                 },
                 "amenity/recycling/container/electrical_items": {
-                    "name": "Benne pour déchets d'équipements électriques et électroniques (DEEE)"
+                    "name": "Benne pour déchets d'équipements électriques et électroniques (DEEE)",
+                    "terms": "ordinateurs,électronique,déchets électroniques,recyclage électronique,téléphones,tablettes"
                 },
                 "amenity/recycling/container/green_waste": {
-                    "name": "Benne pour déchets verts"
+                    "name": "Benne pour déchets verts",
+                    "terms": "compost,biodégradable,biologique,décomposable,recyclage,jardinage,déchets organiques,organiques,nourriture,restes de nourriture"
                 },
                 "amenity/recycling_centre": {
                     "name": "Déchèterie / Parc à conteneurs / Écocentre",
@@ -5157,6 +5314,18 @@
                     "name": "Studio",
                     "terms": "Studio,Studio de télévision,Plateau de télévision,Studio de radio,Studio d'enregistrement"
                 },
+                "amenity/studio/audio": {
+                    "name": "Studio d'enregistrement",
+                    "terms": "mixage,enregistrement audio,studio audio"
+                },
+                "amenity/studio/radio": {
+                    "name": "Station de radio",
+                    "terms": "studio de radio,radio fm,studio d'enregistrement,radio am,radio po,radio go,studios de radio"
+                },
+                "amenity/studio/television": {
+                    "name": "Station de télévision",
+                    "terms": "studio de télévision,studio de television,chaine de television,chaîne de télévision,chaine de télévision,studio tv,chaine tv,chaîne tv,diffuseur,studio d'enregistrement"
+                },
                 "amenity/swimming_pool": {
                     "name": "Piscine"
                 },
@@ -5207,6 +5376,10 @@
                 "amenity/vending_machine": {
                     "name": "Distributeur automatique",
                     "terms": "distributeur automatique, machine, vente automatique, distributeur, guichet automatique, vending machine"
+                },
+                "amenity/vending_machine/bottle_return": {
+                    "name": "Machine de retour de bouteilles",
+                    "terms": "retour de bouteille,bouteille"
                 },
                 "amenity/vending_machine/cigarettes": {
                     "name": "Distributeur de cigarettes",
@@ -5330,10 +5503,6 @@
                 "attraction/big_wheel": {
                     "name": "Grande Roue",
                     "terms": "grande roue,roue,attraction,parc d'attraction"
-                },
-                "attraction/bumper_car": {
-                    "name": "Auto tamponeuse",
-                    "terms": "auto tamponneuse,attraction,parc d'attraction"
                 },
                 "attraction/bungee_jumping": {
                     "name": "Saut à l'élastique",
@@ -6299,9 +6468,13 @@
                     "name": "Voie d'accès à une route primaire",
                     "terms": "Bretelle d'accès à une route principale"
                 },
-                "highway/raceway": {
-                    "name": "Piste de course (moto/automobile)",
-                    "terms": "piste,anneau,moto,cross"
+                "highway/raceway/karting": {
+                    "name": "Circuit de karting",
+                    "terms": "karting,kart,circuit,piste,sport automobile"
+                },
+                "highway/raceway/motocross": {
+                    "name": "Piste de moto-cross",
+                    "terms": "piste,motocross,circuit,tout-terrain,moto-cross"
                 },
                 "highway/residential": {
                     "name": "Route résidentielle",
@@ -6560,10 +6733,6 @@
                     "name": "Zone de bureaux",
                     "terms": "Zone de bureaux, Cité administrative, Zone d'activités"
                 },
-                "landuse/construction": {
-                    "name": "Construction",
-                    "terms": "Construction, Chantier"
-                },
                 "landuse/farm": {
                     "name": "Zone agricole"
                 },
@@ -6574,6 +6743,10 @@
                 "landuse/farmyard": {
                     "name": "Cour de ferme",
                     "terms": "exploitation agricole,cour de ferme,ensemble des bâtiments d'une ferme"
+                },
+                "landuse/flowerbed": {
+                    "name": "Parterre de fleur",
+                    "terms": "parterre,fleurs,jardin public"
                 },
                 "landuse/forest": {
                     "name": "Forêt exploitée",
@@ -7146,6 +7319,10 @@
                     "name": "Station de surveillance",
                     "terms": "Station de surveillance, météorologie, sismologie, séisme, climat, pression, atmosphère."
                 },
+                "man_made/obelisk": {
+                    "name": "Obélisque",
+                    "terms": "obélisque,égyptien"
+                },
                 "man_made/observatory": {
                     "name": "Observatoire",
                     "terms": "Observatoire"
@@ -7265,18 +7442,6 @@
                 "man_made/works": {
                     "name": "Usine",
                     "terms": "Usine"
-                },
-                "manhole": {
-                    "name": "Bouche d'égout",
-                    "terms": "bouche d'égout,égout,télécommunication,plaque"
-                },
-                "manhole/drain": {
-                    "name": "Collecteur d'eaux pluviales",
-                    "terms": "collecteur d'eaux pluviales,pluies,égouts,tempête,débordement"
-                },
-                "manhole/telecom": {
-                    "name": "Puits de télécommunication",
-                    "terms": "couvert,puits,trou,télécom,téléphone"
                 },
                 "military/bunker": {
                     "name": "Bunker",
@@ -7601,6 +7766,10 @@
                 },
                 "office/physician": {
                     "name": "Médecin"
+                },
+                "office/political_party": {
+                    "name": "Bureau de parti politique",
+                    "terms": "parti politique"
                 },
                 "office/private_investigator": {
                     "name": "Enquêteur privé/détective",
@@ -7927,7 +8096,8 @@
                     "terms": "gare de tramway,station de tramway,quai de tramway,arrêt de tramway,gare,stop,arrêt,station,attente voyageur,tramway"
                 },
                 "public_transport/platform/tram_point": {
-                    "name": "Arrêt de tramway"
+                    "name": "Arrêt de tramway",
+                    "terms": "gare de tramway,station de tramway,quai de tramway,gare,stop,arrêt,station,attente voyageur,tramway"
                 },
                 "public_transport/platform/trolleybus": {
                     "name": "Quai pour trolleys",
@@ -8260,7 +8430,7 @@
                 },
                 "shop/car": {
                     "name": "Concessionnaire automobile",
-                    "terms": "Concessionnaire"
+                    "terms": "Concessionnaire,garage,garagiste"
                 },
                 "shop/car_parts": {
                     "name": "Magasin de pièces automobiles",
@@ -8646,6 +8816,10 @@
                 "shop/religion": {
                     "name": "Magasin d'articles religieux",
                     "terms": "Boutique d'une église, d'un monastère"
+                },
+                "shop/rental": {
+                    "name": "Magasin de location",
+                    "terms": "magasin,boutique,location,temporaire"
                 },
                 "shop/scuba_diving": {
                     "name": "Magasin de matériel de plongée sous-marine",
@@ -9348,6 +9522,10 @@
                 "description": "Jaune = Données de cartes dans le domaine public du recensement américain. Rouge = Données introuvables sur OpenStreetMap",
                 "name": "TIGER Roads 2018"
             },
+            "US-TIGER-Roads-2019": {
+                "description": "Jaune = données cartographiques du domaine public issues du recensement américain. Rouge = données non présentes dans OpenStreetMap",
+                "name": "TIGER Roads 2019"
+            },
             "USDA-NAIP": {
                 "description": "L'année la plus récente de DOQQ du programme d'imagerie nationale pour l'agriculture (NAIP) pour chaque état des États-Unis contigus.",
                 "name": "Programme d'imagerie national pour l'agriculture"
@@ -9373,6 +9551,12 @@
                     "text": "Réalisé avec les moyens de Brussels UrbIS®© - Distribution & droits CIRB"
                 },
                 "name": "UrbIS-Ortho 2018"
+            },
+            "UrbISOrtho2019": {
+                "attribution": {
+                    "text": "Réalisé avec les moyens d'UrbIS®© Bruxelles - Distribution & Droits CIRB"
+                },
+                "name": "UrbIS-Ortho 2019"
             },
             "UrbisAdmFR": {
                 "attribution": {
@@ -9720,7 +9904,7 @@
                 "description": "Talk-gh est la liste de diffusion officielle de la communauté d'OSM au Ghana."
             },
             "ym-Kwame-Nkrumah-University-of-Science-and-Technology": {
-                "name": "Kwame Nkrumah University of Science and Technology YouthMappers",
+                "name": "YouthMappers de l'Université des Sciences et Technologies Kwame Nkrumah",
                 "description": "Chapitre YouthMappers à l'Université des Sciences et des Technologies Kwame Nkrumah"
             },
             "ym-University-of-Cape-Coast": {
@@ -9757,6 +9941,11 @@
                 "name": "Youthmappers à N'Zérékoré",
                 "description": "Chapitre YouthMappers de l'Université de N'Zérékoré",
                 "extendedDescription": "YouthMappers est un groupe qui permet de faire la cartographie des communautés enclavées et à la prise des décisions en cas de catastrophes ou épidémies. Elle permet aussi la production et l'utilisation des données en accès gratuit."
+            },
+            "osm-kenya": {
+                "name": "OSM Kenya",
+                "description": "OSM Kenya est une communauté de contributeurs et d'utilisateurs d'OSM",
+                "extendedDescription": "OSM est une communauté locale pour les personnes intéressées par OpenStreetMap, parmi lesquelles les organisations, les développeurs, et les chapitres YouthMappers dans le pays."
             },
             "ym-Dedan-Kimathi-University-of-Technology": {
                 "name": "GDEV",
@@ -9870,6 +10059,11 @@
                 "description": "Chapitre YouthMappers à l'Ignatius Ajuru University of Education",
                 "extendedDescription": "Nous sommes un chapitre YouthMappers de l'Ignatius Ajuru University of Education impliqué dans la cartographie collective de notre environnement et la cartographie à distance des communautés résilientes. Nous sommes une équipe de volontaires qui utilisent openstreetmap et d'autres sources géospatiales ouvertes pour cartographier."
             },
+            "ym-University-of-Nigeria-Enugu-Campus": {
+                "name": "LionMappersTeam (LMT) Enugu",
+                "description": "Chapitre YouthMappers à l'Université du Nigéria, Campus Enugu",
+                "extendedDescription": "LionMappersTeam (LMT) Campus Enugu est affilié au réseau YouthMappers avec pour seul objectif de fournir à ses membres l'opportunité d'apprendre et d'améliorer leurs compétences dans les sciences de la cartographie et de créer des données et des analyses géographiques libres qui répondent aux besoins exprimés localement, à l'échelle mondiale. C'est une équipe de volontaires pour la cartographie collective et la mise à disposition d'informations géographiques à travers OpenStreetMap, la science citoyenne et d'autres technologie géospatiales pour la recherche, la formation et la réponse aux défis d'une communauté résiliente. Nous sommes impliqués dans le SIG et la télédétection, la cartographie de terrain, des ateliers de formation et la vulgarisation auprès des lycées ainsi que la réponse aux catastrophe."
+            },
             "ym-University-of-Nigeria-Nsukka": {
                 "name": "LionMappersTeam (LMT) Nsukka",
                 "description": "Chapitre YouthMappers à l'Université du Nigéria à Nsukka",
@@ -9879,11 +10073,6 @@
                 "name": "UniqueMappersTeam (UMT) Port Harcourt",
                 "description": "Chapitre YouthMappers à l'Université de Port Harcourt",
                 "extendedDescription": "UniqueMappersTeam (UMT) Port Harcourt est un groupe d'action et une équipe de volontaires pour une cartographie en ligne collaborative pour la formation et l'autonomisation de ses membres en ce qui concerne les compétences cartographiques récentes pour créer des données et des analyses géospatiales libres qui répondent aux défis définis localement pour l'information géographique et pour fournir des services de cartographie humanitaire pour créer des communautés résilientes dans le delta du Niger, au Nigéria et ailleurs. Nous promouvons la cartographie collective et les informations géographiques volontaires avec la plateforme OpenStreetMap et d'autres plateformes accessible pour la cartographie rapide de réponse, la cartographie de catastrophe, de géo-intelligence, de mise à jour et pour la formation. C'est un chapitre Campus affilié à HOT. C'est une équipe-projet de YouthMappers qui fournit l'opportunité à ses membres d'apprendre et d'améliorer leurs compétences en information géographique pour explorer les opportunités mondiales dans la cartographie et l'information géographique."
-            },
-            "ym-University-of-Nigeria-Enugu-Campus": {
-                "name": "LionMappersTeam (LMT) Enugu",
-                "description": "Chapitre YouthMappers à l'Université du Nigéria, Campus Enugu",
-                "extendedDescription": "LionMappersTeam (LMT) Campus Enugu est affilié au réseau YouthMappers avec pour seul objectif de fournir à ses membres l'opportunité d'apprendre et d'améliorer leurs compétences dans les sciences de la cartographie et de créer des données et des analyses géographiques libres qui répondent aux besoins exprimés localement, à l'échelle mondiale. C'est une équipe de volontaires pour la cartographie collective et la mise à disposition d'informations géographiques à travers OpenStreetMap, la science citoyenne et d'autres technologie géospatiales pour la recherche, la formation et la réponse aux défis d'une communauté résiliente. Nous sommes impliqués dans le SIG et la télédétection, la cartographie de terrain, des ateliers de formation et la vulgarisation auprès des lycées ainsi que la réponse aux catastrophe."
             },
             "osm-africa-telegram": {
                 "name": "Telegram d'OpenStreetMap Afrique",
@@ -9978,25 +10167,42 @@
                 "name": "YouthMappers à l'Université Internationale de St Augustine",
                 "description": "Chapitre YouthMappers à l'Université Internationale de St. Augustine"
             },
+            "ym-The-University-of-Zambia": {
+                "name": "YouthMappers Unza",
+                "description": "Chapitre YouthMappers à l'Université de Zambie"
+            },
+            "ym-University-of-Zimbabwe": {
+                "name": "UZMappers",
+                "description": "Chapitre YouthMappers à l'Université du Zimbabwe"
+            },
+            "osm-afghanistan-facebook": {
+                "name": "OpenStreetMap Afghanistan",
+                "description": "Améliorez OpenStreetMap en Afghanistan"
+            },
             "OSM-BGD-facebook": {
                 "name": "OpenStreetMap Bangladesh",
                 "description": "Améliorez OpenStreetMap au Bangladesh",
                 "extendedDescription": "Vous cartographiez au Bangladesh ? Vous avez des questions, souhaitez entrer en contact avec la communauté ici ? Rejoignez-nous sur {url}. Vous êtes tous les bienvenus !"
             },
+            "ym-Asian-University-for-Women": {
+                "name": "YouthMappers à l'AUW",
+                "description": "Chapitre YouthMappers à l'Asian University for Women"
+            },
+            "ym-Jahangirnagar-University": {
+                "description": "Chapitre YouthMappers à l'Université Jahangirnagar"
+            },
             "ym-Khulna-University": {
-                "name": "OpenStreetMap"
+                "description": "Chapitre YouthMappers à l'Université de Khulna"
+            },
+            "ym-Rajshahi-University-of-Engineering-Technology": {
+                "name": "YouthMappers à la RUET",
+                "description": "Chapitre YouthMappers à l'Université d'Ingénierie et de Technologie de Rajshahi",
+                "extendedDescription": "Les \"YouthMappers à la RUET\" est un groupe de cartographie humanitaire d'étudiants de l'Université d'Ingénierie et de Technologie de Rajshahi (RUET) qui a pour objectif de partager et développer la connaissance et l'utilisation des SIG. Ce groupe encourage l'utilisation de données géospatiales open source et d'une plate-forme pour aider les groupes les plus vulnérables dans le monde."
             },
             "OSM-India-facebook": {
                 "name": "OpenStreetMap Inde - cartographie participative du voisinage",
                 "description": "Améliorez OpenStreetMap en Inde",
-                "extendedDescription": "Vous cartographiez en Inde ? Vous avez des questions, vous souhaitez rencontrer la communauté ? Rejoignez-nous sur {url}. Vous êtes tous les bienvenus !",
-                "events": {
-                    "sotmasia2018": {
-                        "name": "State of the Map Asia 2018",
-                        "description": "Rejoignez l'événement régional OpenStreetMap 2018 au State of the Map Asion en Inde",
-                        "where": "Indian Institute of Management, Bangalore, India"
-                    }
-                }
+                "extendedDescription": "Vous cartographiez en Inde ? Vous avez des questions, vous souhaitez rencontrer la communauté ? Rejoignez-nous sur {url}. Vous êtes tous les bienvenus !"
             },
             "osm-india-forum": {
                 "name": "Forum OpenStreetMap Inde",
@@ -10045,10 +10251,23 @@
                 "description": "Group riot FSHM pour discutter, partager et mettre à jour les activités de cartographie, les événements à et autour de Puducherry",
                 "extendedDescription": "Les membres de la communauté FSHM partagent leur mises à jour et expériences sur OSM à travers le groupe riot.im. Ce groupe est aussi utilisé pour discutter de choses liées au logiciel et matériel libre, les technologies et l'activisme."
             },
+            "ym-Gujarat-University": {
+                "name": "CCIM à Ahmedabad",
+                "description": "Chapitre YouthMappers à l'Université du Gujarat"
+            },
             "OSM-IDN-facebook": {
                 "name": "OpenStreetMap Indonésie",
                 "description": "Améliorez OpenStreetMap en Indonésie",
                 "extendedDescription": "Vous cartographiez en Indonésie ? Vous avez des questions, vous souhaitez rencontrer la communauté ? Rejoignez-nous sur {Url}. Vous êtes tous les bienvenus !"
+            },
+            "ym-Universitas-Negeri-Makassar": {
+                "name": "Kontur Geografi",
+                "description": "Chapitre YouthMappers à l'Université Negeri Makassar"
+            },
+            "ym-University-Muhammadiyah-Surakarta": {
+                "name": "SpaceTime",
+                "description": "Chapitre YouthMappers à l'Université Muhammadiyah Surakarta",
+                "extendedDescription": "SpaceTime est une communauté de cartographie de la Faculté de Géographie de l'Université Muhammadiyah de Surakarta. SpaceTime a été fondée par Bruce Maldy Pratama, Mukhlis Akbar et Irfandi Fauzi. Ce sont des étudiants actifs de la Faculté de Géographie de l'Université Muhammadiyah Surakarta."
             },
             "osm-iran-aparat": {
                 "name": "Chaîne Aparat d'OpenStreetMap Iran",
@@ -10080,6 +10299,14 @@
                 "name": "OpenStreetMap Japon",
                 "description": "Cartographes et utilisateurs d'OpenStreetMap au Japon"
             },
+            "OSM-Korea-mailinglist": {
+                "name": "Liste de diffusion OpenStreetMap Corée",
+                "description": "Talk-ko est une liste de diffusion officielle pour discuter de sujets relatifs à la Corée"
+            },
+            "OSM-Korea-telegram": {
+                "name": "Telegram d'OSM Corée",
+                "description": "Groupe non officiel de contributeurs, communautés, et utilisateurs d'OpenStreetMap en Corée, pour échanger et discuter."
+            },
             "OSM-MY-facebook": {
                 "name": "OpenStreetMap Malaisie sur Facebook",
                 "description": "Pour discuter de tout ce qui concerne OpenStreetMap!"
@@ -10107,8 +10334,20 @@
                 "description": "Améliorez OpenStreetMap au Népal",
                 "extendedDescription": "Vous cartographiez au Népal ? Vous avez des questions, vous souhaitez rencontrer la communauté ? Rejoignez-nous sur {Url}. Vous êtes tous les bienvenus !"
             },
+            "ym-Institute-of-Crisis-Management-Studies": {
+                "name": "YouthMappers Institut d’Études de Gestion des Crises",
+                "description": "Chapitre YouthMappers à l'Institut d’Études de Gestion des Crises",
+                "extendedDescription": "Développer la cartographie de crise afin d'apporter une assistance lors des catastrophes."
+            },
             "ym-Kathmandu-University": {
-                "description": "Chapitre YouthMappers à l'Université de Katmandou"
+                "name": "Société d'Ingénierie Géomatique, GES",
+                "description": "Chapitre YouthMappers à l'Université de Katmandou",
+                "extendedDescription": "La Société d'Ingénierie Géomatique (GES), fondée  en 2008, est un club du Département d'Ingénierie Civile et Géomatique (DCGE) de l'Université de Katmandou. Elle agit en tant que plate-forme afin de développer les compétences des étudiants au-delà de leurs activités éducatives, en se concentrant sur des activités telles que des formations techniques, des séminaires, des conversations et une interaction avec des experts de domaines connexes, des activités sportives, etc..."
+            },
+            "ym-Tribhuvan-University": {
+                "name": "Association des Étudiants en Ingénierie Géomatique",
+                "description": "Chapitre YouthMappers à l'Université Tribhuvan",
+                "extendedDescription": "Cette organisation est le forum des étudiants en Ingénierie Géomatique de l'Université Tribhuvan, campus de l'Institut d'Ingénierie de Pashchimanchal. Elle a été fondée dès la mise en place du programme d'études. Les étudiants font preuve d'implication en cartographie et de proactivité, et sont heureux d'appartenir au réseau YouthMappers."
             },
             "OSM-Asia-mailinglist": {
                 "name": "Liste de diffusion OpenStreetMap Asie",
@@ -10134,6 +10373,15 @@
                 "name": "Groupe telegram OpenStreetMap PH",
                 "description": "Communauté telegram locale non officielle des contributeurs d'OpenStreetMap et amis aux Philippines"
             },
+            "ym-Far-Eastern-University-Institute-of-Technology": {
+                "description": "Chapitre YouthMappers à la Far Eastern University - Institut de Technologie",
+                "extendedDescription": "FEU a été reconnue comme l'une des universités majeures aux Philippines. Sa mission est centrée sur la formation de diplômés contribuant au développement du pays. L'université vise continuellement l'excellence pour être un établissement de premier plan non seulement aux Philippines, mais aussi dans tout le Sud-Est Asiatique."
+            },
+            "ym-University-of-the-Philippines-Resilience-Institute": {
+                "name": "YouthMappers à l'UP Resilience Institute",
+                "description": "Chapitre YouthMappers à l'Université des Philippines - Resilience Institute",
+                "extendedDescription": "L'UP Resilience Institute a été fondé en 2016 afin de renforcer les communautés locales par la recherche multidisciplinaire et les actions de résilience. Avec le Centre NOAH de l'UP, et l'aide de différentes organisations, nous avons fourni des cartes de bâtiments pour 17 provinces sur 82 et chargé plus de 4 millions d'empreintes dans Openstreetmap."
+            },
             "OSM-RU-forum": {
                 "name": "Forum OpenStreetMap RU",
                 "description": "Forum web OpenStreetMap Russie"
@@ -10141,10 +10389,6 @@
             "OSM-RU-telegram": {
                 "name": "Groupe telegram OpenStreetMap RU",
                 "description": "Chat telegram d'OpenStreetMap Russie"
-            },
-            "OSM-south-korea-telegram": {
-                "name": "Telegram d'OSM Corée du Sud",
-                "description": "Canal non officiel pour les contributeurs, les communautés et les utilisateurs d'OpenStreetMap en Corée du Sud, afin de discuter et d'échanger."
             },
             "OSM-sri-lanka-facebook": {
                 "name": "OpenStreetMap Sri Lanka",
@@ -10214,7 +10458,6 @@
                 "description": "Chat telegram OpenStreetMap Biélorussie"
             },
             "be-facebook": {
-                "name": "OpenStreetMap Belgique",
                 "description": "Cartographes et OpenStreetMap sur Facebook en Belgique"
             },
             "be-forum": {
@@ -10261,8 +10504,7 @@
                 "description": "Portail cartographique, site web et contacts des membres OSM en République Tchèque"
             },
             "osmcz-facebook": {
-                "name": "OpenStreetMap CZ sur Facebook",
-                "description": "Suivez la communauté tchèque sur Facebook - dont la traduction des HebdoOSM !"
+                "name": "OpenStreetMap CZ sur Facebook"
             },
             "osmcz-twitter": {
                 "name": "Twitter tchèque @osmcz",
@@ -10356,6 +10598,11 @@
                 "name": "OpenStreetMap Allemagne",
                 "description": "La plate-forme pour l'information sur OpenStreetMap en Allemagne"
             },
+            "ym-Heidelberg-University": {
+                "name": "Disastermappers Heidelberg",
+                "description": "Chapitre YouthMappers à l'Université d'Heidelberg",
+                "extendedDescription": "Disastermappers Heidelberg a été fondée en 2014 en tant qu'initiative étudiante pour construire une plateforme d'échanges entre les étudiants, les chercheurs, et les acteurs de l'humanitaire. Disastermappers est membre de Missing Maps et organise des mapathons, des ateliers et des webinaires à Heidelberg et au-delà. Elle soutient HOT et Missing Maps par la recherche et les applications."
+            },
             "hu-facebook": {
                 "name": "OpenStreetMap HU sur Facebook",
                 "description": "Page Facebook des cartographes et d'OpenStreetMap en Hongrie"
@@ -10418,9 +10665,10 @@
                 "name": "Liste de diffusion OpenStreetMap pour le Trentin",
                 "description": "Liste de discussion OpenStreetMap Italie régionale pour Trentino."
             },
-            "ym-Yarmouk-University": {
-                "name": "YouthMappers à YU",
-                "description": "Chapitre YouthMappers à l'Université de Yarmouk"
+            "ym-Politecnico-di-Milano": {
+                "name": "PoliMappers",
+                "description": "Chapitre YouthMappers à l’École Polytechnique de Milan",
+                "extendedDescription": "PoliMappers est une association étudiante basée à l’École Polytechnique de Milan. La mission de ce groupe est de former et motiver la prochaine génération de cartographes bénévoles, et de cartographier en utilisant des outils libres et open source, aussi bien à l'université que dans les écoles primaires ou secondaires."
             },
             "kosovo-telegram": {
                 "name": "OpenStreetMap Kosovo sur Telegram",
@@ -10432,7 +10680,8 @@
             },
             "ym-Universit-Mohammed-V-Rabat": {
                 "name": "Brahmapoutre à Rabat",
-                "description": "Chapitre YouthMappers à l'Université Mohammed V de Rabat"
+                "description": "Chapitre YouthMappers à l'Université Mohammed V de Rabat",
+                "extendedDescription": "Ce chapitre voit sa participation au programme YouthMappers comme une opportunité de partager la connaissance et de créer de nouvelles relations avec les autres chapitres de différents pays."
             },
             "no-forum": {
                 "name": "Forum web d'OpenStreetMap Norvège",
@@ -10490,6 +10739,7 @@
                 "description": "Chapitre YouthMappers à l'Université Autonome de Madrid"
             },
             "ym-Universidad-Politcnica-de-Madrid": {
+                "name": "Mapeo Humanitario",
                 "description": "Chapitre YouthMappers à l'Université Polytechnique de Madrid"
             },
             "osm-se": {
@@ -10518,32 +10768,56 @@
             },
             "ym-Istanbul-Technical-University": {
                 "name": "YouthMappers ITU",
-                "description": "Chapitre YouthMappers à l'Université Technique d'Istanbul"
+                "description": "Chapitre YouthMappers à l'Université Technique d'Istanbul",
+                "extendedDescription": "YouthMappers ITU est une communauté étudiante interdisciplinaire et collaborative, dont le but est de promouvoir une cartographie humanitaire des zones vulnérables, et de développer et partager des informations spatiales stratégiques et innovantes pour les futures villes, en utilisant les systèmes d'information géographique et l'open data."
             },
             "Nottingham-OSM-pub-meetup": {
                 "name": "Rencontres mensuelles dans un pub de East Midlands (Nottingham)",
                 "description": "Rassemblement social pour les cartographes et les utilisateur d'East Midlands",
                 "extendedDescription": "Un groupe se rencontre depuis Mars 2011, au début à Nottingham et plus récemment à Derby et de temps en temps autre part dans les East Midlands. Ce sont des rencontres sociales mais sont des moments privilégiés pour poser des questions spécifiques sur OSM dans la région et en général. Pendant les mois d'été nous cartographions rapidement pendant une heure autour du lieu de réunion. Le groupe est particulièrement intéressé par la cartographie des droits de passage et organise parfois des cartoparties dans ce but."
             },
+            "gb-irc": {
+                "name": "IRC d'OpenStreetMap Royaume-Uni",
+                "description": "Rejoignez #osm-gb sur irc.oftc.net (port 6667)",
+                "extendedDescription": "Rejoignez #osm-gb sur irc.oftc.net (port 6667), soyez patient SVP et attendez quelques minutes si vous posez une question"
+            },
+            "uk-localchapter": {
+                "name": "OpenStreetMap UK",
+                "description": "Le chapitre local officiel pour le Royaume-Uni (incluant l'Irlande du Nord).",
+                "extendedDescription": "Nous soutenons OpenStreetMap en organisant des évènements, en fournissant des ressources communautaires, en établissant des partenariats, et en diffusant la bonne parole. Rejoignez OpenStreetMap UK ici: {signupUrl}"
+            },
+            "uk-london-twitter": {
+                "name": "OpenStreetMap Londres sur Twitter",
+                "description": "OpenStreetMap Londres sur Twitter: {url}"
+            },
             "gb-mailinglist": {
                 "name": "Liste de diffusion Talk-gb",
-                "description": "Talk-gb est la liste principale pour la communauté OSM anglaise (dont fait partie l'Irlande du Nord)"
+                "description": "Talk-gb est la liste de diffusion principale pour la communauté OSM du Royaume-Uni (incluant l'Irlande du Nord)"
             },
             "mappa-mercia-group": {
                 "name": "Groupe local Mappa Mercia",
                 "description": "Un endroit pour les amateurs d'OpenStreetMap dans les Midlands",
                 "extendedDescription": "Mappa Mercia est un projet pour faire grandir OpenStreetMap dans les West Midlands au Royaume-Uni. Nous organisons des événements communautaires, fournissons de l'aide et du support aux organisations locales qui veulent libérer leurs données."
             },
-            "gb-irc": {
-                "name": "IRC d'OpenStreetMap Royaume-Uni",
-                "description": "Rejoignez #osm-gb sur irc.oftc.net (port 6667)",
-                "extendedDescription": "Rejoignez #osm-gb sur irc.oftc.net (port 6667), soyez patient SVP et attendez quelques minutes si vous posez une question"
+            "uk-twitter": {
+                "name": "OpenStreetMap UK sur Twitter",
+                "description": "OpenStreetMap UK sur Twitter: {url}"
+            },
+            "ym-Queen-Mary-University-of-London": {
+                "name": "YouthMappers à l'Université Queen Mary",
+                "description": "Chapitre YouthMappers à l'Université Queen Mary de Londres",
+                "extendedDescription": "Ce chapitre est intégré aux activités de la Société de Géographie de l'Université Queen Mary."
             },
             "ym-University-of-Exeter": {
                 "description": "Chapitre YouthMappers à l'Université d'Exeter"
             },
             "ym-University-of-Warwick": {
-                "description": "Chapitre YouthMappers à l'Université de Warwick"
+                "description": "Chapitre YouthMappers à l'Université de Warwick",
+                "extendedDescription": "Nous sommes un groupe de cartographes enthousiastes basé à l'Université de Warwick. Notre but est d'impliquer les gens dans la cartographie humanitaire et de les aider à comprendre l'impact que cette activité a sur le terrain. Nous sommes étroitement liés à Missing Maps et Doctors Without Borders UK, et nous nous concentrons sur la cartographie et les ateliers liés à HOT. Nos mapathons sont indiqués sur la page Missing Maps dès lors qu'ils sont planifiés."
+            },
+            "ym-Yarmouk-University": {
+                "name": "YouthMappers à YU",
+                "description": "Chapitre YouthMappers à l'Université de Yarmouk"
             },
             "ym-Sacred-Heart-Junior-College": {
                 "name": "YouthMappers au Sacred Heart Junior College",
@@ -10558,6 +10832,7 @@
                 "description": "Cartographes et utilisateurs d'OpenStreetMap à Vancouver"
             },
             "ym-Universidad-de-Costa-Rica": {
+                "name": "YouthMappers à l'Université du Costa Rica",
                 "description": "Chapitre YouthMappers à l'Université du Costa Rica"
             },
             "OSM-CU-telegram": {
@@ -10565,7 +10840,33 @@
                 "description": "Chat Telegram d'OpenStreetMap Cuba"
             },
             "ym-Universidad-Nacional-Autnoma-de-Honduras": {
+                "name": "PumaGis Hn",
                 "description": "Chapitre YouthMappers à l'Université Nationale Autonome du Honduras"
+            },
+            "ni-facebook": {
+                "name": "Communauté OpenStreetMap NI",
+                "description": "Cartographes et OpenStreetMap sur Facebook au Nicaragua"
+            },
+            "ni-mailinglist": {
+                "name": "Liste de diffusion Talk-ni",
+                "description": "Talk-ni est la liste de diffusion officielle de la communauté nicaraguayenne d'OSM"
+            },
+            "ni-telegram": {
+                "name": "OSM Nicaragua sur Telegram",
+                "description": "Chat Telegram d'OpenStreetMap Nicaragua"
+            },
+            "ni-twitter": {
+                "name": "Twitter d'OpenStreetMap Nicaragua",
+                "description": "OSM Nicaragua sur Twitter: @osm_ni"
+            },
+            "osm-ni": {
+                "name": "MapaNica.net",
+                "description": "Fournit des services OSM et des informations pour la communauté locale au Nicaragua"
+            },
+            "ym-Universidad-Nacional-de-Ingenieria": {
+                "name": "Yeka Street MGA",
+                "description": "Chapitre YouthMappers à l'Université Nationale d'Ingénierie de Managua",
+                "extendedDescription": "YEKA STREET est un groupe de travail constitué par des étudiants de l'Université Nationale d'Ingénierie de Managua, Nicaragua. Notre principal objectif est d'appliquer nos connaissances et compétences en utilisant de nombreux outils et applications pour cartographier nos villes, contribuer au développement des projets de la communauté, et aux plans de lutte contre les catastrophes. Nous voulons montrer la voie en invitant à nous rejoindre davantage d'étudiants de toutes filières et universités de notre pays, afin de contribuer à l'amélioration du niveau de vie et à la réduction de la vulnérabilité des populations."
             },
             "ym-University-of-Panama": {
                 "name": "YouthMappers UP",
@@ -10645,10 +10946,6 @@
                 "description": "Cartographes et utilisateurs d'OpenStreetMap dans l'état du Colorado aux USA",
                 "extendedDescription": "OpenStreetMap (OSM) Colorado est une collaboration locale de personnes intéressées par la contribution de leurs efforts pour créer des cartes libres. Nous encourageons tous les cartographes à organiser ou suggérer des événements cartographiques dans tout l'état. Des rencontres peuvent simplement tisser des liens sociaux, consister en des cours de base ou avancés sur OSM ou des cartoparties communautaires."
             },
-            "OSM-NYC": {
-                "name": "OpenStreetMap NYC",
-                "description": "Cartographes et utilisateurs d'OpenStreetMap, développeurs et passionnés dans la région métropolitaine de New York"
-            },
             "OSM-Portland-forum": {
                 "name": "Groupe Google OpenStreetMap PDX",
                 "description": "Forum et liste de diffusion pour les utilisateurs d'OpenStreetMap dans la région de Portland",
@@ -10685,19 +10982,7 @@
             "OSM-US": {
                 "name": "OpenStreetMap États-Unis",
                 "description": "Nous aidons OpenStreetMap à grandir et à s'améliorer aux États-Unis.",
-                "extendedDescription": "Nous soutenons OpenStreetMap en organisant des conférences annuelles, en fournissant des moyens à la communauté, en établissant des partenariats, et en relayant les informations. Rejoignez OpenStreetMap États-Unis ici: {signupUrl}",
-                "events": {
-                    "sotmus2019-cfs": {
-                        "name": "Proposez un sujet pour le SotM-US 2019",
-                        "description": "Nous invitons tous les membres de la communauté OpenStreetMap à partager leurs idées et leurs propositions d'intervention pour la rencontre State of the Map US 2019. Que vous soyez nouveau ou expérimenté, n'hésitez pas à vous manifester!",
-                        "where": "Minneapolis, Minnesota"
-                    },
-                    "sotmus2019": {
-                        "name": "State of the Map USA 2019",
-                        "description": "Rejoignez la communauté OpenStreetMap au State of the Map US à Minneapolis, Minnesota. Établissez des contacts avec d'autres cartographes, entrepreneurs, agences gouvernementales et à but non lucratif, collaborant tous à la carte libre du monde.",
-                        "where": "Minneapolis, Minnesota"
-                    }
-                }
+                "extendedDescription": "Nous soutenons OpenStreetMap en organisant des conférences annuelles, en fournissant des moyens à la communauté, en établissant des partenariats, et en relayant les informations. Rejoignez OpenStreetMap États-Unis ici: {signupUrl}"
             },
             "OSM-Utah": {
                 "name": "OpenStreetMap Utah",
@@ -10730,6 +11015,13 @@
             "ym-Central-Washington-University": {
                 "description": "Chapitre YouthMappers à la Central Washington University"
             },
+            "ym-Clemson-University": {
+                "name": "Clemson Mappers"
+            },
+            "ym-George-Mason-University": {
+                "name": "Mason Mappers",
+                "description": "Chapitre YouthMappers à l'Université George Mason"
+            },
             "ym-Jacksonville-State-University": {
                 "description": "Chapitre YouthMappers à l'Université d’État de Jacksonville"
             },
@@ -10742,14 +11034,57 @@
             "ym-Miami-University": {
                 "description": "Chapitre YouthMappers à l'Université de Miami"
             },
+            "ym-New-York-University": {
+                "description": "Chapitre YouthMappers à l'Université de New York"
+            },
+            "ym-Texas-Tech-University": {
+                "name": "YouthMappers à la TTU",
+                "description": "Chapitre YouthMappers à l'Université de Technologie du Texas"
+            },
+            "ym-The-George-Washington-University": {
+                "description": "Chapitre YouthMappers à l'Université George Washington"
+            },
+            "ym-The-Pennsylvania-State-University": {
+                "description": "Chapitre YouthMappers à l'Université d’État de Pennsylvanie"
+            },
+            "ym-University-of-California-Davis": {
+                "description": "Chapitre YouthMappers à l'Université de Californie, Davis"
+            },
+            "ym-University-of-Chicago": {
+                "description": "Chapitre YouthMappers à l'Université de Chicago"
+            },
+            "ym-University-of-Maryland-College-Park": {
+                "description": "Chapitre YouthMappers à l'Université du Maryland - College Park"
+            },
+            "ym-University-of-North-Texas": {
+                "name": "Club de Géographie de l'UNT",
+                "description": "Chapitre YouthMappers à l'Université du Nord du Texas",
+                "extendedDescription": "Le Club de Géographie est une organisation étudiante de l'Université du Nord du Texas qui accueille tous les étudiants intéressés par la géographie.Son objectif est de promouvoir l'intérêt pour la géographie à travers le développement des liens entre les étudiants et la faculté. Le club cherche également à faire connaître les besoins des étudiants en géographie et organise un forum pour présenter des idées innovantes au service de la communauté de l'université."
+            },
+            "ym-University-of-Oregon": {
+                "description": "Chapitre YouthMappers à l'Université de l'Oregon"
+            },
+            "ym-University-of-Redlands": {
+                "description": "Chapitre YouthMappers à l'Université de Redlands"
+            },
             "ym-University-of-South-Carolina": {
                 "description": "Chapitre YouthMappers à l'Université de Caroline du Sud"
             },
             "ym-University-of-Vermont": {
+                "name": "Club de Cartographie Humanitaire de l'Université du Vermont",
                 "description": "Chapitre YouthMappers à l'Université du Vermont"
             },
             "ym-University-of-Wyoming": {
+                "name": "Gamma Thêta Upsilon/Club de Géographie",
                 "description": "Chapitre YouthMappers à l'Université du Wyoming"
+            },
+            "ym-UW-Madison": {
+                "name": "BadgerMaps",
+                "description": "Chapitre YouthMappers à l'UW-Madison",
+                "extendedDescription": "BadgerMaps est le chapitre Youthmappers du campus de l'UW. Cette organisation se consacre aux services de cartographie humanitaires et communautaires. Nous permettons à nos bénévoles de participer à des projets nécessitant la création de données SIG. "
+            },
+            "ym-Western-Michigan-University": {
+                "description": "Chapitre YouthMappers à l'Université de l'Ouest du Michigan"
             },
             "talk-au": {
                 "name": "Liste de diffusion talk-au",
@@ -10804,6 +11139,10 @@
                 "name": "Groupe Telegram d'OpenStreetMap Brésil",
                 "description": "Rejoignez la communauté d'OpenStreetMap Brasilia sur Telegram",
                 "extendedDescription": "Rejoignez la communauté pour en apprendre plus sur OpenStreetMap, pour poser des questions ou participer à nos rencontres. Tout le monde est le bienvenu!"
+            },
+            "OSM-br-discord": {
+                "name": "Discord d'OpenStreetMap Brésil",
+                "description": "Rejoignez la communauté d'OpenStreetMap Brésil sur Discord"
             },
             "OSM-br-mailinglist": {
                 "name": "Liste de diffusion talk-br",
@@ -10868,10 +11207,24 @@
                 "description": "Des nouvelles de la communauté d'OpenStreetMap Colombie et de la fondation OSMCo"
             },
             "ym-Universidad-de-La-Guajira": {
-                "description": "Chapitre YouthMappers à l'Université de La Guajira"
+                "name": "Grupo Mesh",
+                "description": "Chapitre YouthMappers à l'Université de La Guajira",
+                "extendedDescription": "Grupo Mesh est une organisation étudiante de l'Université de La Guajira en Colombie, avec des étudiants du programme d'Ingénierie Environnementale qui apprennent la cartographie (notamment ouverte)."
+            },
+            "ym-Universidad-de-Los-Andes": {
+                "name": "Cartografos Uniandes",
+                "description": "Chapitre YouthMappers à l'Université des Andes"
+            },
+            "ym-Universidad-de-San-Buenaventura": {
+                "name": "YouthMappers San Buenaventura",
+                "description": "Chapitre YouthMappers à l'Université de San Buenaventura",
+                "extendedDescription": "Nous sommes heureux de cartographier au sein de YouthMappers pour faire progresser le monde et la communauté."
             },
             "ym-Universidad-Distrital-Francisco-Jose-de-Caldas": {
                 "name": "YouthMappers à Bogota"
+            },
+            "ym-Universidad-Nacional-de-Colombia": {
+                "description": "Chapitre YouthMappers à l'Université Nationale de Colombie"
             },
             "OSM-EC-telegram": {
                 "name": "OSM Équateur sur Telegram",
@@ -10918,6 +11271,18 @@
                 "name": "Liste de diffusion talk-uy",
                 "description": "Talk-uy est la liste de diffusion officielle pour la communauté uruguayenne d'OSM"
             },
+            "ve-forum": {
+                "name": "Forum OpenStreetMap VE",
+                "description": "Forum web d'OpenStreetMap Venezuela"
+            },
+            "ve-mailinglist": {
+                "name": "Liste de diffusion Talk-ve",
+                "description": "Talk-ve est la liste de diffusion officielle de la communauté vénézuélienne d'OSM"
+            },
+            "ve-telegram": {
+                "name": "Telegram d'OpenStreetMap Venezuela",
+                "description": "Rejoignez la communauté d'OpenStreetMap Venezuela sur Telegram"
+            },
             "LATAM-Facebook": {
                 "name": "Facebook d'OpenStreetMap Amérique Latine",
                 "description": "OpenStreetMap Amérique Latine sur Facebook"
@@ -10932,14 +11297,7 @@
             },
             "osm-latam": {
                 "name": "OpenStreetMap Amérique Latine",
-                "description": "Supporte OpenStreetMap en Amérique Latine",
-                "events": {
-                    "sotm-latam-2018": {
-                        "name": "State of the Map Latam 2018",
-                        "description": "Le State of the Map Latam est la conférence annuelle pour tous les cartographes et les utilisateurs d'OpenStreetMap en Amérique Latine. Le programme comprend des présentations, des tables rondes, des ateliers et des mapathons sur le thème d'OpenStreetMap.",
-                        "where": "Buenos Aires, Argentine"
-                    }
-                }
+                "description": "Supporte OpenStreetMap en Amérique Latine"
             },
             "OSM-Discord": {
                 "name": "Discord d'OpenStreetMap",
@@ -10973,14 +11331,7 @@
             "OSMF": {
                 "name": "Fondation OpenStreetMap",
                 "description": "OSMF est une organisation à but non lucratif de droit britannique qui soutient le projet OpenStreetMap",
-                "extendedDescription": "OSMF supporte le projet OpenStreetMap en levant des fonds, en maintenant les serveurs d'OSM, en organisant la conférence annuelle State of the Map, et en coordonnant les volontaires qui permettent à OSM de fonctionner. Vous pouvez apporter votre aide et faire entendre votre voix dans OpenStreetMap en devenant membre d'OSMF ici: {signupUrl}",
-                "events": {
-                    "sotm2018": {
-                        "name": "State of the Map 2018",
-                        "description": "Rejoignez-nous pendant 3 jours à Milan, Italie, pour la conférence mondiale annuelle d'OpenStreetMap, rassemblant toute la communauté pour discuter, partager et apprendre.",
-                        "where": "Milan, Italie"
-                    }
-                }
+                "extendedDescription": "OSMF supporte le projet OpenStreetMap en levant des fonds, en maintenant les serveurs d'OSM, en organisant la conférence annuelle State of the Map, et en coordonnant les volontaires qui permettent à OSM de fonctionner. Vous pouvez apporter votre aide et faire entendre votre voix dans OpenStreetMap en devenant membre d'OSMF ici: {signupUrl}"
             }
         }
     }

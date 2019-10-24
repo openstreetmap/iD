@@ -6,7 +6,7 @@
     },
     {
       "old": {"aeroway": "aerobridge"},
-      "replace": {"aeroway": "jet_bridge"}
+      "replace": {"aeroway": "jet_bridge", "highway": "corridor"}
     },
     {
       "old": {"access": "public"},
@@ -149,6 +149,10 @@
       "replace": {"amenity": "vending_machine", "vending": "newspapers"}
     },
     {
+      "old": {"amenity": "weigh_bridge"},
+      "replace": {"amenity": "weighbridge"}
+    },
+    {
       "old": {"amenity": "winery"},
       "replace": {"craft": "winery"}
     },
@@ -179,6 +183,10 @@
     {
       "old": {"barrier": "embankment"},
       "replace": {"man_made": "embankment"}
+    },
+    {
+      "old": {"barrier": "wall", "type": "noise_barrier"},
+      "replace": {"barrier": "wall", "wall": "noise_barrier"}
     },
     {
       "old": {"barrier": "wire_fence"},
@@ -285,12 +293,68 @@
       "replace": {"changing_table": "yes"}
     },
     {
+      "old": {"direction": "all"},
+      "replace": {"direction": "both"}
+    },
+    {
+      "old": {"direction": "down", "highway": "*"},
+      "replace": {"incline": "down", "highway": "$1"}
+    },
+    {
+      "old": {"direction": "downhill"},
+      "replace": {"incline": "down"}
+    },
+    {
+      "old": {"direction": "East"},
+      "replace": {"direction": "E"}
+    },
+    {
+      "old": {"direction": "forward;backward"},
+      "replace": {"direction": "both"}
+    },
+    {
+      "old": {"direction": "North"},
+      "replace": {"direction": "N"}
+    },
+    {
+      "old": {"direction": "South"},
+      "replace": {"direction": "S"}
+    },
+    {
+      "old": {"direction": "up", "highway": "*"},
+      "replace": {"incline": "up", "highway": "$1"}
+    },
+    {
+      "old": {"direction": "uphill"},
+      "replace": {"incline": "up"}
+    },
+    {
+      "old": {"direction": "West"},
+      "replace": {"direction": "W"}
+    },
+    {
       "old": {"drinkable": "*"},
       "replace": {"drinking_water": "$1"}
     },
     {
       "old": {"dropped_kerb": "*"},
       "replace": {"kerb": "lowered"}
+    },
+    {
+      "old": {"embankment": "1"},
+      "replace": {"embankment": "yes"}
+    },
+    {
+      "old": {"embankment": "false"},
+      "replace": {"embankment": "no"}
+    },
+    {
+      "old": {"embankment": "right", "man_made": "embankment"},
+      "replace": {"man_made": "embankment"}
+    },
+    {
+      "old": {"embankment": "true"},
+      "replace": {"embankment": "yes"}
     },
     {
       "old": {"escalator": "*"},
@@ -365,6 +429,30 @@
       "replace": {"generator:source": "solar", "generator:method": "photovoltaic"}
     },
     {
+      "old": {"golf": "faiway"},
+      "replace": {"golf": "fairway", "landuse": "grass"}
+    },
+    {
+      "old": {"golf": "putting_green"},
+      "replace": {"golf": "green", "landuse": "grass"}
+    },
+    {
+      "old": {"golf": "sand_trap"},
+      "replace": {"golf": "bunker", "natural": "sand"}
+    },
+    {
+      "old": {"golf": "tee_area"},
+      "replace": {"golf": "tee", "landuse": "grass"}
+    },
+    {
+      "old": {"golf": "tee_box"},
+      "replace": {"golf": "tee", "landuse": "grass"}
+    },
+    {
+      "old": {"golf": "teebox"},
+      "replace": {"golf": "tee", "landuse": "grass"}
+    },
+    {
       "old": {"highway": "abandoned"},
       "replace": {"abandoned:highway": "*"}
     },
@@ -375,6 +463,10 @@
     {
       "old": {"highway": "cycleway", "bicycle": "no"},
       "replace": {"highway": "path", "bicycle": "no"}
+    },
+    {
+      "old": {"highway": "cycleway", "cycleway": "track"},
+      "replace": {"highway": "cycleway"}
     },
     {
       "old": {"highway": "footway", "foot": "no"},
@@ -389,7 +481,7 @@
     },
     {
       "old": {"highway": "platform"},
-      "replace": {"bus": "yes", "public_transport": "platform"}
+      "replace": {"highway": "platform", "public_transport": "platform"}
     },
     {
       "old": {"highway": "stile"},
@@ -488,6 +580,10 @@
       "replace": {"club": "*"}
     },
     {
+      "old": {"leisure": "golf_pin"},
+      "replace": {"golf": "pin"}
+    },
+    {
       "old": {"leisure": "ice_rink", "sport": "hockey"},
       "replace": {"leisure": "ice_rink", "sport": "ice_hockey"}
     },
@@ -540,6 +636,30 @@
       "replace": {"man_made": "storage_tank", "content": "water"}
     },
     {
+      "old": {"man_made": "weigh_bridge"},
+      "replace": {"amenity": "weighbridge"}
+    },
+    {
+      "old": {"man_made": "weighbridge"},
+      "replace": {"amenity": "weighbridge"}
+    },
+    {
+      "old": {"man_made": "weighing_machine"},
+      "replace": {"amenity": "weighbridge"}
+    },
+    {
+      "old": {"man_made": "weighing_scale"},
+      "replace": {"amenity": "weighbridge"}
+    },
+    {
+      "old": {"man_made": "weighting machine"},
+      "replace": {"amenity": "weighbridge"}
+    },
+    {
+      "old": {"man_made": "weighting_machine"},
+      "replace": {"amenity": "weighbridge"}
+    },
+    {
       "old": {"man_made": "well"},
       "replace": {"man_made": "water_well"}
     },
@@ -548,8 +668,16 @@
       "replace": {"craft": "winery"}
     },
     {
+      "old": {"maxage": "*"},
+      "replace": {"max_age": "$1"}
+    },
+    {
       "old": {"memorial": "plate"},
       "replace": {"memorial": "plaque"}
+    },
+    {
+      "old": {"minage": "*"},
+      "replace": {"min_age": "$1"}
     },
     {
       "old": {"mining_resource": "*"},
@@ -632,6 +760,10 @@
     {
       "old": {"power_rating": "*"},
       "replace": {"generator:output": "$1"}
+    },
+    {
+      "old": {"railway": "station"},
+      "replace": {"railway": "station", "public_transport": "station"}
     },
     {
       "old": {"recommended_speed": "*"},
@@ -854,6 +986,22 @@
       "replace": {"sport": "shuffleboard"}
     },
     {
+      "old": {"station": "light_rail"},
+      "replace": {"station": "light_rail", "light_rail": "yes"}
+    },
+    {
+      "old": {"station": "monorail"},
+      "replace": {"station": "monorail", "monorail": "yes"}
+    },
+    {
+      "old": {"station": "subway"},
+      "replace": {"station": "subway", "subway": "yes"}
+    },
+    {
+      "old": {"station": "train"},
+      "replace": {"station": "train", "train": "yes"}
+    },
+    {
       "old": {"sustenance": "bar"},
       "replace": {"amenity": "bar"}
     },
@@ -906,6 +1054,10 @@
       "replace": {"line_attachment": "suspension"}
     },
     {
+      "old": {"townhall:village": "yes"},
+      "replace": {"amenity": "townhall", "townhall:type": "village"}
+    },
+    {
       "old": {"type": "broad_leaved"},
       "replace": {"leaf_type": "broadleaved"}
     },
@@ -920,6 +1072,10 @@
     {
       "old": {"unnamed": "*"},
       "replace": {"noname": "$1"}
+    },
+    {
+      "old": {"wall_type": "noise_barrier"},
+      "replace": {"wall": "noise_barrier"}
     },
     {
       "old": {"water": "intermittent"},

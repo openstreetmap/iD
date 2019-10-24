@@ -1,0 +1,28 @@
+{
+    "icon": "temaki-manhole",
+    "fields": [
+        "manhole",
+        "operator",
+        "label",
+        "ref"
+    ],
+    "geometry": [
+        "point",
+        "vertex"
+    ],
+    "tags": {
+        "manhole": "*"
+    },
+    "addTags": {
+        "man_made": "manhole",
+        "manhole": "*"
+    },
+    "terms": [
+        "cover",
+        "hole",
+        "sewer",
+        "sewage",
+        "telecom"
+    ],
+    "name": "Manhole"
+}

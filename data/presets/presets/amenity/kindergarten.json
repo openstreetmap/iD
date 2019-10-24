@@ -1,5 +1,5 @@
 {
-    "icon": "maki-school",
+    "icon": "temaki-school",
     "fields": [
         "name",
         "operator",
@@ -10,6 +10,9 @@
     "moreFields": [
         "email",
         "fax",
+        "level",
+        "max_age",
+        "min_age",
         "opening_hours",
         "payment_multi",
         "website",

@@ -1,5 +1,10 @@
 {
-    "icon": "maki-amusement-park",
+    "icon": "temaki-roller_coaster",
+    "moreFields": [
+        "{attraction}",
+        "max_age",
+        "min_age"
+    ],
     "geometry": [
         "point",
         "area"

@@ -26,8 +26,13 @@ export function operationSplit(selectedIDs, context) {
     };
 
 
-    operation.available = function() {
-        return vertices.length === 1;
+    operation.available = function(situation) {
+        if (vertices.length !== 1) return false;
+
+        if (situation === 'toolbar' &&
+            action.disabled(context.graph())) return false;
+
+        return true;
     };
 
 

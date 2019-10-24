@@ -1,7 +1,7 @@
 {
-    "icon": "maki-bank",
+    "icon": "temaki-money_hand",
     "fields": [
-	    "name",
+        "name",
         "brand",
         "address",
         "building_area",
@@ -10,10 +10,11 @@
     ],
     "moreFields": [
         "currency_multi",
-        "website",
-        "phone",
         "email",
         "fax",
+        "level",
+        "phone",
+        "website",
         "wheelchair"
     ],
     "geometry": [

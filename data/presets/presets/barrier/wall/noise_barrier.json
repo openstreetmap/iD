@@ -1,0 +1,23 @@
+{
+    "icon": "temaki-wall",
+    "geometry": [
+        "line",
+        "area"
+    ],
+    "tags": {
+        "barrier": "wall",
+        "wall": "noise_barrier"
+    },
+    "terms": [
+        "acoustical barrier",
+        "noise wall",
+        "noisewall",
+        "sound barrier",
+        "sound berm",
+        "sound wall",
+        "soundberm",
+        "soundwall"
+    ],
+    "name": "Noise Barrier",
+    "matchScore": 0.27
+}

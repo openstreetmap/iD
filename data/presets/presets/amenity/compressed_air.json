@@ -1,5 +1,5 @@
 {
-    "icon": "maki-car",
+    "icon": "fas-tachometer-alt",
     "fields": [
         "operator",
         "access_simple",
