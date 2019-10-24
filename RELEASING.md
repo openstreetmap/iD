@@ -13,9 +13,9 @@ on the iD project, and then create this file with contents like<br><pre>
 
 ### Update `iD`
 
-#### Update `2.15` branch
+#### Update `2.x` branch
 ```bash
-$  git checkout 2.15
+$  git checkout 2.x
 $  rm -rf node_modules/editor-layer-index/
 $  npm install
 $  npm run imagery
@@ -30,13 +30,13 @@ $  git add . && git commit -m 'npm run translations'
 
 ```bash
 $  git add . && git commit -m 'vA.B.C'
-$  git push origin 2.15
+$  git push origin 2.x
 ```
 
 #### Update and tag `release` branch
 ```bash
 $  git checkout release
-$  git reset --hard 2.15
+$  git reset --hard 2.x
 $  npm run all
 $  git add -f dist/*.css dist/*.js dist/img/*.svg dist/mapillary-js/ dist/pannellum-streetside/
 $  git commit -m 'Check in build'
