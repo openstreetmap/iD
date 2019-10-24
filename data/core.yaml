@@ -1429,9 +1429,9 @@ en:
       building-building:
         reference: "Buildings should not intersect except on different layers."
       building-highway:
-        reference: "Highways crossing buildings should use bridges, tunnels, coverings, or entrances."
+        reference: "Highways crossing buildings should use bridges, tunnels, or different layers."
       building-railway:
-        reference: "Railways crossing buildings should use bridges or tunnels."
+        reference: "Railways crossing buildings should use bridges, tunnels, or different layers."
       building-waterway:
         reference: "Waterways crossing buildings should use tunnels or different layers."
       highway-highway:
