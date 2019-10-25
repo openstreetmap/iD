@@ -441,7 +441,7 @@ export function presetIndex(context) {
             favs.splice(favs.indexOf(favorite), 1);
         } else {
             // only allow 10 favorites
-            if (favs.length === 20) {
+            if (favs.length === 30) {
                 // remove the last favorite (last in, first out)
                 favs.pop();
             }
