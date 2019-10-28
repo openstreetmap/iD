@@ -5,6 +5,9 @@
 
 :warning: _The [`master`](https://github.com/openstreetmap/iD/tree/master) branch is undergoing significant breaking changes for v3 over the next few months. [`2.x`](https://github.com/openstreetmap/iD/tree/2.x) is considerably more stable and is currently the recommended branch for downstream development._
 
+[Watch the video](https://2019.stateofthemap.us/program/sat/id-v3.html) from our talk at State of the Map US 2019 to learn more about the current status of iD and our goals for v3.
+
+
 ## Basics
 
 * iD is a JavaScript [OpenStreetMap](https://www.openstreetmap.org/) editor.
