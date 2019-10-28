@@ -95,7 +95,7 @@ export function modeRotate(context, entityIDs) {
             _pivot = geoVecInterp(points[0], points[1], 0.5);
         } else {
             var polygonHull = d3_polygonHull(points);
-            if(polygonHull.length === 2) {
+            if (polygonHull.length === 2) {
                 _pivot = geoVecInterp(points[0], points[1], 0.5);
             } else {
                 _pivot = d3_polygonCentroid(d3_polygonHull(points));
