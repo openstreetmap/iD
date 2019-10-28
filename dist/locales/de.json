@@ -857,7 +857,7 @@
             "wireframe": {
                 "description": "Keine Füllung (Gittermodus)",
                 "tooltip": "Der Gittermodus verbessert die Sichtbarkeit des Hintergrund-Bildmaterials",
-                "key": "G"
+                "key": "W"
             },
             "partial": {
                 "description": "Teilweise Füllung",
