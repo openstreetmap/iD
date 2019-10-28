@@ -69,14 +69,7 @@ export function modeRotate(context, entityIDs) {
 
             var nodes = utilGetAllNodes(entityIDs, context.graph());
             var points = nodes.map(function(n) { return projection(n.loc); });
-
-            if (points.length === 1) {  // degenerate case
-                _pivot = points[0];
-            } else if (points.length === 2) {
-                _pivot = geoVecInterp(points[0], points[1], 0.5);
-            } else {
-                _pivot = d3_polygonCentroid(d3_polygonHull(points));
-            }
+            _pivot = getPivot(points);
             _prevAngle = undefined;
         }
 
@@ -92,6 +85,23 @@ export function modeRotate(context, entityIDs) {
         _prevTransform = currTransform;
         _prevAngle = currAngle;
         _prevGraph = context.graph();
+    }
+
+    function getPivot(points) {
+        var _pivot;
+        if (points.length === 1) {
+            _pivot = points[0];
+        } else if (points.length === 2) {
+            _pivot = geoVecInterp(points[0], points[1], 0.5);
+        } else {
+            var polygonHull = d3_polygonHull(points);
+            if (polygonHull.length === 2) {
+                _pivot = geoVecInterp(points[0], points[1], 0.5);
+            } else {
+                _pivot = d3_polygonCentroid(d3_polygonHull(points));
+            }
+        }
+        return _pivot;
     }
 
 
