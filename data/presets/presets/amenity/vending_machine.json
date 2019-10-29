@@ -16,7 +16,8 @@
         "manufacturer"
     ],
     "geometry": [
-        "point"
+        "point",
+        "vertex"
     ],
     "terms": [],
     "tags": {

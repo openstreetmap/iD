@@ -1,7 +1,8 @@
 {
     "icon": "temaki-vending_cold_drink",
     "geometry": [
-        "point"
+        "point",
+        "vertex"
     ],
     "terms": [
         "drink",

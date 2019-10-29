@@ -1,7 +1,8 @@
 {
     "icon": "maki-fuel",
     "geometry": [
-        "point"
+        "point",
+        "vertex"
     ],
     "terms": [
         "petrol",

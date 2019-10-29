@@ -1,7 +1,8 @@
 {
     "icon": "temaki-vending_love",
     "geometry": [
-        "point"
+        "point",
+        "vertex"
     ],
     "terms": [
         "condom"
