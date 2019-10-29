@@ -6,7 +6,7 @@ import {
     polygonCentroid as d3_polygonCentroid
 } from 'd3-polygon';
 
-import { geoVecInterp, geoVecLength } from '../geo';
+import { geoVecInterp, geoVecLength} from '../geo';
 import { osmNode } from '../osm/node';
 import { utilArrayUniq } from '../util';
 
@@ -228,6 +228,46 @@ export function actionCircularize(wayId, projection, maxAngle) {
         if (!graph.entity(wayId).isClosed()) {
             return 'not_closed';
         }
+
+        var way = graph.entity(wayId);
+        var nodes = utilArrayUniq(graph.childNodes(way));
+        var points = nodes.map(function(n) { return projection(n.loc); });
+        var sign = d3_polygonArea(points) > 0 ? 1 : -1;
+        var hull = d3_polygonHull(points);
+        if (hull.length !== points.length || hull.length < 3){
+            return false;
+        }
+        var centroid = d3_polygonCentroid(points);
+        var radius = d3_median(points, function(p) { return geoVecLength(centroid, p); });
+
+        // compare distances between centroid and points
+        for (var i = 0; i<hull.length; i++){
+            var actualPoint = hull[i];
+            var actualDist = geoVecLength(actualPoint, centroid);
+            if (Math.abs(actualDist - radius > 1)) {
+                return false;
+            }
+        }
+
+        var startAngle = Math.atan2(hull[0][1] - centroid[1], hull[0][0] - centroid[0]);
+        var endAngle = Math.atan2(hull[1][1] - centroid[1], hull[1][0] - centroid[0]);
+        var eachAngle = (endAngle - startAngle);
+        
+        //compare central angles
+        for (i = 0; i<hull.length; i++){
+            actualPoint = hull[i];
+            var nextPoint = hull[(i+1)%hull.length];
+            startAngle = Math.atan2(actualPoint[1] - centroid[1], actualPoint[0] - centroid[0]);
+            endAngle = Math.atan2(nextPoint[1] - centroid[1], nextPoint[0] - centroid[0]);
+            var angle = endAngle - startAngle;
+            if (angle * sign > 0) {
+                angle = -sign * (2 * Math.PI - Math.abs(angle));
+            }
+            if (Math.abs((angle) - eachAngle) > 0.05) {
+                return false;
+            }
+        }
+        return 'already_circular';
     };
 
 
