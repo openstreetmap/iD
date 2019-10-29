@@ -6,7 +6,8 @@
         "description"
     ],
     "geometry": [
-        "point"
+        "point",
+        "vertex"
     ],
     "tags": {
         "natural": "cape"

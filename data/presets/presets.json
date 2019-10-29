@@ -786,7 +786,7 @@
     "natural/bare_rock": {"geometry": ["area"], "tags": {"natural": "bare_rock"}, "terms": ["rock"], "name": "Bare Rock"},
     "natural/bay": {"icon": "temaki-beach", "geometry": ["point", "line", "area"], "fields": ["name"], "tags": {"natural": "bay"}, "terms": [], "name": "Bay"},
     "natural/beach": {"icon": "temaki-beach", "fields": ["surface"], "geometry": ["point", "area"], "tags": {"natural": "beach"}, "terms": ["shore"], "name": "Beach"},
-    "natural/cape": {"icon": "temaki-beach", "fields": ["name", "elevation", "description"], "geometry": ["point"], "tags": {"natural": "cape"}, "terms": ["bay", "coastline", "erosion", "headland", "promontory"], "name": "Cape"},
+    "natural/cape": {"icon": "temaki-beach", "fields": ["name", "elevation", "description"], "geometry": ["point", "vertex"], "tags": {"natural": "cape"}, "terms": ["bay", "coastline", "erosion", "headland", "promontory"], "name": "Cape"},
     "natural/cave_entrance": {"icon": "maki-triangle", "geometry": ["point", "area"], "fields": ["name", "elevation", "access_simple", "direction", "fee", "payment_multi_fee", "charge_fee"], "tags": {"natural": "cave_entrance"}, "terms": ["cavern", "hollow", "grotto", "shelter", "cavity"], "name": "Cave Entrance"},
     "natural/cliff": {"icon": "maki-triangle", "fields": ["name", "height"], "geometry": ["point", "vertex", "line", "area"], "tags": {"natural": "cliff"}, "terms": ["crag", "escarpment", "rock face", "scarp"], "name": "Cliff"},
     "natural/coastline": {"geometry": ["line"], "tags": {"natural": "coastline"}, "terms": ["shore"], "name": "Coastline"},
