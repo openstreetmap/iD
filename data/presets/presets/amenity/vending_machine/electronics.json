@@ -1,7 +1,8 @@
 {
     "icon": "temaki-vending_machine",
     "geometry": [
-        "point"
+        "point",
+        "vertex"
     ],
     "terms": [
         "cable",

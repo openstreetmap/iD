@@ -1,7 +1,8 @@
 {
     "icon": "temaki-vending_flat_coin",
     "geometry": [
-        "point"
+        "point",
+        "vertex"
     ],
     "terms": [
         "coin",

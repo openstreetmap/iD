@@ -1,7 +1,8 @@
 {
     "icon": "temaki-vending_bread",
     "geometry": [
-        "point"
+        "point",
+        "vertex"
     ],
     "terms": [
         "baguette",

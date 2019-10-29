@@ -1,7 +1,8 @@
 {
     "icon": "temaki-vending_ice_cream",
     "geometry": [
-        "point"
+        "point",
+        "vertex"
     ],
     "terms": [
         "chocolate",

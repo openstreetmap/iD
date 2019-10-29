@@ -1,7 +1,8 @@
 {
     "icon": "temaki-vending_eggs",
     "geometry": [
-        "point"
+        "point",
+        "vertex"
     ],
     "terms": [
         "egg"
