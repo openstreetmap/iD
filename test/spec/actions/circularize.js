@@ -288,6 +288,33 @@ describe('iD.actionCircularize', function () {
         expect(isCircular('-', graph)).to.be.ok;
     });
 
+    it('not disable circularize when its not circular', function(){
+        var graph = iD.coreGraph([
+            iD.osmNode({id: 'a', loc: [0, 0]}),
+            iD.osmNode({id: 'b', loc: [2, 0]}),
+            iD.osmNode({id: 'c', loc: [2, 2]}),
+            iD.osmNode({id: 'd', loc: [0, 2]}),
+            iD.osmWay({id: '-', nodes: ['a', 'b', 'c', 'd', 'a']})
+        ]);
+        var result = iD.actionCircularize('-', projection).disabled(graph);
+        expect(result).to.be.false;
+
+    });
+
+    it('disable circularize twice', function(){
+        var graph = iD.coreGraph([
+            iD.osmNode({id: 'a', loc: [0, 0]}),
+            iD.osmNode({id: 'b', loc: [2, 0]}),
+            iD.osmNode({id: 'c', loc: [2, 2]}),
+            iD.osmNode({id: 'd', loc: [0, 2]}),
+            iD.osmWay({id: '-', nodes: ['a', 'b', 'c', 'd', 'a']})
+        ]);
+        graph = iD.actionCircularize('-', projection)(graph);
+        var result = iD.actionCircularize('-', projection).disabled(graph);
+        expect(result).to.eql('already_circular');
+
+    });
+
 
     describe('transitions', function () {
         it('is transitionable', function() {

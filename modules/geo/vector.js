@@ -37,10 +37,15 @@ export function geoVecInterp(a, b, t) {
 
 // http://jsperf.com/id-dist-optimization
 export function geoVecLength(a, b) {
+    return Math.sqrt(geoVecLengthSquare(a,b));
+}
+
+// length of vector raised to the power two
+export function geoVecLengthSquare(a, b) {
     b = b || [0, 0];
     var x = a[0] - b[0];
     var y = a[1] - b[1];
-    return Math.sqrt((x * x) + (y * y));
+    return (x * x) + (y * y);
 }
 
 // get a unit vector
