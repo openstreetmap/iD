@@ -55845,12 +55845,12 @@
       "icon": "https://www.launceston.tas.gov.au/files/assets/public/templateimages/favicons/favicon-196x196.png"
     },
     {
-      "id": "Lausanne-2012",
-      "name": "Lausanne - Orthophoto technique 2012",
+      "id": "Lausanne-2016",
+      "name": "Lausanne - Orthophoto 2016",
       "type": "tms",
-      "template": "https://osmdata.asitvd.ch/tiles/lausanne2012/{zoom}/{x}/{y}.png",
-      "endDate": "2012-01-01T00:00:00.000Z",
-      "startDate": "2012-01-01T00:00:00.000Z",
+      "template": "https://osmdata.asitvd.ch/tiles/lausanne2016/{zoom}/{x}/{y}.png",
+      "endDate": "2016-01-01T00:00:00.000Z",
+      "startDate": "2016-01-01T00:00:00.000Z",
       "zoomExtent": [14, 20],
       "polygon": [
         [
