@@ -7069,7 +7069,7 @@
       "id": "Bonvillars-2013",
       "name": "Bonvillars Orthophoto 2013",
       "type": "tms",
-      "template": "http://osmdata.asitvd.ch/tiles/bonvillars2013/{zoom}/{x}/{y}.png",
+      "template": "https://osmdata.asitvd.ch/tiles/bonvillars2013/{zoom}/{x}/{y}.png",
       "endDate": "2013-01-01T00:00:00.000Z",
       "startDate": "2013-01-01T00:00:00.000Z",
       "zoomExtent": [14, 20],
@@ -7083,7 +7083,7 @@
           [6.66713, 46.83358]
         ]
       ],
-      "terms_url": "http://osmdata.asitvd.ch/",
+      "terms_url": "https://osmdata.asitvd.ch/",
       "terms_text": "Bonvillars - Orthophoto technique 2013"
     },
     {
@@ -11258,7 +11258,7 @@
       "id": "Cartoriviera-2012",
       "name": "Cartoriviera - Orthophoto 2012",
       "type": "tms",
-      "template": "http://osmdata.asitvd.ch/tiles/cartoriviera2012/{zoom}/{x}/{y}.png",
+      "template": "https://osmdata.asitvd.ch/tiles/cartoriviera2012/{zoom}/{x}/{y}.png",
       "endDate": "2012-01-01T00:00:00.000Z",
       "startDate": "2012-01-01T00:00:00.000Z",
       "zoomExtent": [14, 20],
@@ -30298,7 +30298,7 @@
       "id": "Fiez-2013",
       "name": "Fiez Orthophoto 2013",
       "type": "tms",
-      "template": "http://osmdata.asitvd.ch/tiles/fiez2013/{zoom}/{x}/{y}.png",
+      "template": "https://osmdata.asitvd.ch/tiles/fiez2013/{zoom}/{x}/{y}.png",
       "endDate": "2013-01-01T00:00:00.000Z",
       "startDate": "2013-01-01T00:00:00.000Z",
       "zoomExtent": [14, 20],
@@ -30313,7 +30313,7 @@
           [6.62313, 46.82339]
         ]
       ],
-      "terms_url": "http://osmdata.asitvd.ch/",
+      "terms_url": "https://osmdata.asitvd.ch/",
       "terms_text": "Fiez - Orthophoto technique 2013"
     },
     {
@@ -55848,7 +55848,7 @@
       "id": "Lausanne-2012",
       "name": "Lausanne - Orthophoto technique 2012",
       "type": "tms",
-      "template": "http://osmdata.asitvd.ch/tiles/lausanne2012/{zoom}/{x}/{y}.png",
+      "template": "https://osmdata.asitvd.ch/tiles/lausanne2012/{zoom}/{x}/{y}.png",
       "endDate": "2012-01-01T00:00:00.000Z",
       "startDate": "2012-01-01T00:00:00.000Z",
       "zoomExtent": [14, 20],
@@ -73841,7 +73841,7 @@
       "id": "SIGIP-2012",
       "name": "SIGIP - Orthophoto 2012",
       "type": "tms",
-      "template": "http://osmdata.asitvd.ch/tiles/sigip2012/{zoom}/{x}/{y}.png",
+      "template": "https://osmdata.asitvd.ch/tiles/sigip2012/{zoom}/{x}/{y}.png",
       "endDate": "2012-01-01T00:00:00.000Z",
       "startDate": "2012-01-01T00:00:00.000Z",
       "zoomExtent": [14, 20],
@@ -85356,7 +85356,7 @@
       "id": "Ville_de_Nyon-HD-2010",
       "name": "Ville de Nyon - Orthophoto 2010 HD 5cm/pi",
       "type": "tms",
-      "template": "http://osmdata.asitvd.ch/tiles/nyon2010/{zoom}/{x}/{y}.png",
+      "template": "https://osmdata.asitvd.ch/tiles/nyon2010/{zoom}/{x}/{y}.png",
       "endDate": "2010-01-01T00:00:00.000Z",
       "startDate": "2010-01-01T00:00:00.000Z",
       "zoomExtent": [14, 20],
