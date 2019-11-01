@@ -70,7 +70,7 @@ export function uiIntro(context) {
         var opacity = d3_selectAll('#map .layer-background').style('opacity');
         var caches = osm && osm.caches();
         var baseEntities = context.history().graph().base().entities;
-        var countryCode = services.geocoder.countryCode;
+        var countryCode = services.countryCoder.iso1A2Code;
 
         // Block saving
         context.inIntro(true);
@@ -102,8 +102,8 @@ export function uiIntro(context) {
         });
 
         // Mock geocoder
-        services.geocoder.countryCode = function(location, callback) {
-            callback(null, t('intro.graph.countrycode'));
+        services.countryCoder.iso1A2Code = function() {
+            return t('intro.graph.countrycode');
         };
 
 
@@ -162,7 +162,7 @@ export function uiIntro(context) {
             if (history) { context.history().fromJSON(history, false); }
             context.map().centerZoom(center, zoom);
             window.location.replace(hash);
-            services.geocoder.countryCode = countryCode;
+            services.countryCoder.iso1A2Code = countryCode;
             context.inIntro(false);
         });
 

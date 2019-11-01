@@ -574,11 +574,8 @@ export function uiFieldLocalized(field, context) {
 
     function loadCountryCode() {
         var center = _entity.extent(context.graph()).center();
-        services.geocoder.countryCode(center, function(err, result) {
-            if (!err && result) {
-                _countryCode = result;
-            }
-        });
+        var countryCode = services.countryCoder.iso1A2Code(center);
+        _countryCode = countryCode && countryCode.toLowerCase();
     }
 
     return utilRebind(localized, dispatch, 'on');

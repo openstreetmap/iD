@@ -1,3 +1,5 @@
+import CountryCoder from 'country-coder';
+
 import serviceKeepRight from './keepRight';
 import serviceImproveOSM from './improveOSM';
 import serviceMapillary from './mapillary';
@@ -14,6 +16,7 @@ import serviceWikipedia from './wikipedia';
 
 
 export var services = {
+    countryCoder: new CountryCoder(),
     geocoder: serviceNominatim,
     keepRight: serviceKeepRight,
     improveOSM: serviceImproveOSM,

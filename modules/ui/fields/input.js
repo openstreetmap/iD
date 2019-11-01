@@ -17,7 +17,6 @@ export {
 
 export function uiFieldText(field, context) {
     var dispatch = d3_dispatch('change');
-    var nominatim = services.geocoder;
     var input = d3_select(null);
     var _entity;
 
@@ -56,13 +55,14 @@ export function uiFieldText(field, context) {
             .on('change', change());
 
 
-        if (field.type === 'tel' && nominatim && _entity) {
+        if (field.type === 'tel' && services.countryCoder && _entity) {
             var center = _entity.extent(context.graph()).center();
-            nominatim.countryCode(center, function (err, countryCode) {
-                if (err || !dataPhoneFormats[countryCode]) return;
+            var countryCode = services.countryCoder.iso1A2Code(center);
+            var format = countryCode && dataPhoneFormats[countryCode.toLowerCase()];
+            if (format) {
                 wrap.selectAll('#' + fieldID)
-                    .attr('placeholder', dataPhoneFormats[countryCode]);
-            });
+                    .attr('placeholder', format);
+            }
 
         } else if (field.type === 'number') {
             var rtl = (textDirection === 'rtl');

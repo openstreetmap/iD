@@ -9,6 +9,7 @@ import {
 import { geoVecInterp, geoVecLength } from '../geo';
 import { osmNode } from '../osm/node';
 import { utilArrayUniq } from '../util';
+import { geoVecLengthSquare } from '../geo/vector';
 
 
 export function actionCircularize(wayId, projection, maxAngle) {
@@ -228,6 +229,49 @@ export function actionCircularize(wayId, projection, maxAngle) {
         if (!graph.entity(wayId).isClosed()) {
             return 'not_closed';
         }
+
+        //disable when already circular
+        var way = graph.entity(wayId);
+        var nodes = utilArrayUniq(graph.childNodes(way));
+        var points = nodes.map(function(n) { return projection(n.loc); });
+        var hull = d3_polygonHull(points);
+        var epsilonAngle =  Math.PI / 180;
+        if (hull.length !== points.length || hull.length < 3){
+            return false;
+        }
+        var centroid = d3_polygonCentroid(points);
+        var radius = geoVecLengthSquare(centroid, points[0]);
+
+        // compare distances between centroid and points
+        for (var i = 0; i<hull.length; i++){
+            var actualPoint = hull[i];
+            var actualDist = geoVecLengthSquare(actualPoint, centroid);
+            var diff = Math.abs(actualDist - radius);
+            //compare distances with epsilon-error (5%)
+            if (diff > 0.05*radius) {
+                return false;
+            }
+        }
+        
+        //check if central angles are smaller than maxAngle
+        for (i = 0; i<hull.length; i++){
+            actualPoint = hull[i];
+            var nextPoint = hull[(i+1)%hull.length];
+            var startAngle = Math.atan2(actualPoint[1] - centroid[1], actualPoint[0] - centroid[0]);
+            var endAngle = Math.atan2(nextPoint[1] - centroid[1], nextPoint[0] - centroid[0]);
+            var angle = endAngle - startAngle;
+            if (angle < 0) {
+                angle = -angle;
+            }
+            if (angle > Math.PI){
+                angle = (2*Math.PI - angle);
+            }
+ 
+            if (angle > maxAngle + epsilonAngle) {
+                return false;
+            }
+        }
+        return 'already_circular';
     };
 
 
