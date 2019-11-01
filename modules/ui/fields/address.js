@@ -10,7 +10,6 @@ import { utilArrayUniqBy, utilGetSetValue, utilNoAuto, utilRebind } from '../../
 
 export function uiFieldAddress(field, context) {
     var dispatch = d3_dispatch('init', 'change');
-    var countryCoder = services.countryCoder;
     var wrap = d3_select(null);
     var _isInitialized = false;
     var _entity;
@@ -110,7 +109,6 @@ export function uiFieldAddress(field, context) {
 
 
     function updateForCountryCode(countryCode) {
-        if (!countryCode) return;
         countryCode = countryCode.toLowerCase();
 
         var addressFormat;
@@ -210,10 +208,10 @@ export function uiFieldAddress(field, context) {
             .attr('class', 'form-field-input-wrap form-field-input-' + field.type)
             .merge(wrap);
 
-        if (countryCoder && _entity) {
+        if (services.countryCoder && _entity) {
             var center = _entity.extent(context.graph()).center();
-            var countryCode = countryCoder.iso1A2Code(center);
-            updateForCountryCode(countryCode);
+            var countryCode = services.countryCoder.iso1A2Code(center);
+            if (countryCode) updateForCountryCode(countryCode);
         }
     }
 
