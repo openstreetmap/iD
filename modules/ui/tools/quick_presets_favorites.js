@@ -16,26 +16,36 @@ export function uiToolAddFavorite(context) {
         //var precedingCount = context.storage('tool.add_generic.toggledOn') === 'true' ? 3 : 0;
         var precedingCount = 0;
 
+        var indexModified = precedingCount;
         items.forEach(function(item, index) {
-            var totalIndex = precedingCount + index;
+            //var totalIndex = indexModified;
             var keyCode;
+            if (indexModified <= 9) {
+                keyCode = indexModified;// + 1;
+            } else if (indexModified > 9) {
+                keyCode = indexModified + 55;
+            }
+            var keyStr = String.fromCharCode(keyCode);
+            while (keyStr === 'M' || keyStr === 'Q' || keyStr === 'R')
+            {
+                indexModified++;
+                keyCode = indexModified + 55;
+                keyStr  = String.fromCharCode(keyCode);
+            }
             // use number row order: 1 2 3 4 5 6 7 8 9 0
             // use the same for RTL even though the layout is backward: #6107
-            if (totalIndex <= 9) {
-                keyCode = totalIndex;// + 1;
-            } else if (totalIndex > 9) {
-                keyCode = totalIndex + 55;
-            }
+            
             if (keyCode !== undefined && keyCode !== null) {
                 if (keyCode >= 65)
                 {
-                    item.key = String.fromCharCode(keyCode);
+                    item.key = keyStr;
                 }
                 else
                 {
                     item.key = keyCode.toString();
                 }
             }
+            indexModified++;
         });
 
         return items;

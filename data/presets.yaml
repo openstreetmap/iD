@@ -3196,6 +3196,16 @@ en:
         name: Parking Lot
         # 'terms: automobile parking,car lot,car parking,rv parking,truck parking,vehicle parking'
         terms: '<translate with synonyms or related terms for ''Parking Lot'', separated by commas>'
+      amenity/parking-customers:
+        # 'amenity=parking, access=customers'
+        name: Customers Parking Lot
+        # 'terms: automobile parking,car lot,car parking,rv parking,truck parking,vehicle parking'
+        terms: '<translate with synonyms or related terms for ''Customers Parking Lot'', separated by commas>'
+      amenity/parking-private:
+        # 'amenity=parking, access=private'
+        name: Private Parking Lot
+        # 'terms: automobile parking,car lot,car parking,rv parking,truck parking,vehicle parking'
+        terms: '<translate with synonyms or related terms for ''Private Parking Lot'', separated by commas>'
       amenity/parking/multi-storey:
         # 'amenity=parking, parking=multi-storey'
         name: Multilevel Parking Garage
@@ -4978,10 +4988,24 @@ en:
         name: Service Road
         # 'terms: road,street'
         terms: '<translate with synonyms or related terms for ''Service Road'', separated by commas>'
+      highway/service-customers:
+        # 'highway=service, access=customers'
+        name: Customers Service Road
+        # 'terms: road,street'
+        terms: '<translate with synonyms or related terms for ''Customers Service Road'', separated by commas>'
+      highway/service-private:
+        # 'highway=service, access=private'
+        name: Private Service Road
+        # 'terms: road,street'
+        terms: '<translate with synonyms or related terms for ''Private Service Road'', separated by commas>'
       highway/service/alley:
         # 'highway=service, service=alley'
         name: Alley
         terms: '<translate with synonyms or related terms for ''Alley'', separated by commas>'
+      highway/service/customers-parking-aisle:
+        # 'highway=service, service=parking_aisle, access=customers'
+        name: Customers Parking Aisle
+        terms: '<translate with synonyms or related terms for ''Customers Parking Aisle'', separated by commas>'
       highway/service/drive-through:
         # 'highway=service, service=drive-through'
         name: Drive-Through
@@ -4998,6 +5022,18 @@ en:
         # 'highway=service, service=parking_aisle'
         name: Parking Aisle
         terms: '<translate with synonyms or related terms for ''Parking Aisle'', separated by commas>'
+      highway/service/private-driveway:
+        # 'highway=service, service=driveway, access=private'
+        name: Private Driveway
+        terms: '<translate with synonyms or related terms for ''Private Driveway'', separated by commas>'
+      highway/service/private-parking_aisle:
+        # 'highway=service, service=parking_aisle, access=private'
+        name: Private Parking Aisle
+        terms: '<translate with synonyms or related terms for ''Private Parking Aisle'', separated by commas>'
+      highway/service/private-unpaved-driveway:
+        # 'highway=service, service=driveway, access=private, surface=unpaved'
+        name: Private Unpaved Driveway
+        terms: '<translate with synonyms or related terms for ''Private Unpaved Driveway'', separated by commas>'
       highway/services:
         # highway=services
         name: Service Area

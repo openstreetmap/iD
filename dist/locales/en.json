@@ -5337,6 +5337,14 @@
                     "name": "Parking Space",
                     "terms": ""
                 },
+                "amenity/parking-customers": {
+                    "name": "Customers Parking Lot",
+                    "terms": "automobile parking,car lot,car parking,rv parking,truck parking,vehicle parking"
+                },
+                "amenity/parking-private": {
+                    "name": "Private Parking Lot",
+                    "terms": "automobile parking,car lot,car parking,rv parking,truck parking,vehicle parking"
+                },
                 "amenity/parking": {
                     "name": "Parking Lot",
                     "terms": "automobile parking,car lot,car parking,rv parking,truck parking,vehicle parking"
@@ -6839,12 +6847,24 @@
                     "name": "Secondary Road",
                     "terms": "road,street"
                 },
+                "highway/service-customers": {
+                    "name": "Customers Service Road",
+                    "terms": "road,street"
+                },
+                "highway/service-private": {
+                    "name": "Private Service Road",
+                    "terms": "road,street"
+                },
                 "highway/service": {
                     "name": "Service Road",
                     "terms": "road,street"
                 },
                 "highway/service/alley": {
                     "name": "Alley",
+                    "terms": ""
+                },
+                "highway/service/customers-parking-aisle": {
+                    "name": "Customers Parking Aisle",
                     "terms": ""
                 },
                 "highway/service/drive-through": {
@@ -6861,6 +6881,18 @@
                 },
                 "highway/service/parking_aisle": {
                     "name": "Parking Aisle",
+                    "terms": ""
+                },
+                "highway/service/private-driveway": {
+                    "name": "Private Driveway",
+                    "terms": ""
+                },
+                "highway/service/private-parking_aisle": {
+                    "name": "Private Parking Aisle",
+                    "terms": ""
+                },
+                "highway/service/private-unpaved-driveway": {
+                    "name": "Private Unpaved Driveway",
                     "terms": ""
                 },
                 "highway/services": {

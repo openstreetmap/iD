@@ -1,0 +1,16 @@
+{
+  "icon": "iD-highway-service",
+  "geometry": [
+      "line"
+  ],
+  "tags": {
+      "highway": "service",
+      "service": "parking_aisle",
+      "access": "private"
+  },
+  "reference": {
+      "key": "service",
+      "value": "parking_aisle"
+  },
+  "name": "Private Parking Aisle"
+}
