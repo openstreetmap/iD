@@ -3826,9 +3826,9 @@ en:
         terms: '<translate with synonyms or related terms for ''Area'', separated by commas>'
       area/highway:
         # 'area:highway=*'
-        name: Road Surface
+        name: Road Area
         # 'terms: area:highway,edge of pavement,highway area,highway shape,pavement,road shape,street area'
-        terms: '<translate with synonyms or related terms for ''Road Surface'', separated by commas>'
+        terms: '<translate with synonyms or related terms for ''Road Area'', separated by commas>'
       attraction:
         # attraction=*
         name: Attraction
@@ -5863,8 +5863,8 @@ en:
         terms: '<translate with synonyms or related terms for ''Breakwater'', separated by commas>'
       man_made/bridge:
         # man_made=bridge
-        name: Bridge
-        terms: '<translate with synonyms or related terms for ''Bridge'', separated by commas>'
+        name: Bridge Area
+        terms: '<translate with synonyms or related terms for ''Bridge Area'', separated by commas>'
       man_made/bunker_silo:
         # man_made=bunker_silo
         name: Bunker Silo
@@ -6106,9 +6106,9 @@ en:
         terms: '<translate with synonyms or related terms for ''Observation Tower'', separated by commas>'
       man_made/tunnel:
         # man_made=tunnel
-        name: Tunnel
+        name: Tunnel Area
         # 'terms: bore,dig,shaft,underground passage,underpass'
-        terms: '<translate with synonyms or related terms for ''Tunnel'', separated by commas>'
+        terms: '<translate with synonyms or related terms for ''Tunnel Area'', separated by commas>'
       man_made/utility_pole:
         # man_made=utility_pole
         name: Utility Pole

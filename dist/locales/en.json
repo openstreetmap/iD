@@ -2391,9 +2391,10 @@
                 },
                 "display_options": {
                     "title": "Display options",
-                    "background": "Show background options",
+                    "background": "Toggle background imagery pane",
                     "background_switch": "Switch back to last background",
-                    "map_data": "Show map data options",
+                    "map_data": "Toggle map data pane",
+                    "issues": "Toggle validation issues pane",
                     "fullscreen": "Enter full screen mode",
                     "sidebar": "Toggle sidebar",
                     "wireframe": "Toggle wireframe mode",
@@ -5839,7 +5840,7 @@
                     "terms": "polygon"
                 },
                 "area/highway": {
-                    "name": "Road Surface",
+                    "name": "Road Area",
                     "terms": "area:highway,edge of pavement,highway area,highway shape,pavement,road shape,street area"
                 },
                 "attraction/amusement_ride": {
@@ -7589,7 +7590,7 @@
                     "terms": ""
                 },
                 "man_made/bridge": {
-                    "name": "Bridge",
+                    "name": "Bridge Area",
                     "terms": ""
                 },
                 "man_made/bunker_silo": {
@@ -7793,7 +7794,7 @@
                     "terms": "lookout tower,fire tower"
                 },
                 "man_made/tunnel": {
-                    "name": "Tunnel",
+                    "name": "Tunnel Area",
                     "terms": "bore,dig,shaft,underground passage,underpass"
                 },
                 "man_made/utility_pole": {
