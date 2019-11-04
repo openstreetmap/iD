@@ -6912,15 +6912,6 @@
                     "name": "Junction",
                     "terms": ""
                 },
-                "junction/circular": {
-                    "name": "Traffic Circle"
-                },
-                "junction/jughandle": {
-                    "name": "Jughandle"
-                },
-                "junction/roundabout": {
-                    "name": "Roundabout"
-                },
                 "landuse/basin": {
                     "name": "Basin"
                 },

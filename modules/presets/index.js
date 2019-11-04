@@ -114,7 +114,7 @@ export function presetIndex(context) {
     // and the subkeys form the blacklist.
     all.areaKeys = function() {
         var areaKeys = {};
-        var ignore = ['barrier', 'highway', 'footway', 'railway', 'type'];  // probably a line..
+        var ignore = ['barrier', 'highway', 'footway', 'railway', 'junction', 'type'];  // probably a line..
 
         // ignore name-suggestion-index and deprecated presets
         var presets = all.collection.filter(function(p) {
