@@ -1,5 +1,5 @@
 {
-    "icon": "temaki-tower",
+    "icon": "temaki-tower_communication",
     "fields": [
         "{man_made/tower}",
         "communication_multi"
