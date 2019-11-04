@@ -2,6 +2,7 @@
     "icon": "temaki-vending_machine",
     "fields": [
         "vending",
+        "ref",
         "operator",
         "payment_multi",
         "currency_multi"
