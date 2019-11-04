@@ -4923,7 +4923,7 @@ img.tile-debug {
 .modal-shortcuts .shortcut-tab {
     display: flex;
     flex-flow: row wrap;
-    justify-content: center;
+    justify-content: space-around;
 }
 
 .modal-shortcuts .shortcut-column {

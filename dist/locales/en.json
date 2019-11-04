@@ -2321,9 +2321,10 @@
                 },
                 "display_options": {
                     "title": "Display options",
-                    "background": "Show background options",
+                    "background": "Toggle background imagery pane",
                     "background_switch": "Switch back to last background",
-                    "map_data": "Show map data options",
+                    "map_data": "Toggle map data pane",
+                    "issues": "Toggle validation issues pane",
                     "fullscreen": "Enter full screen mode",
                     "sidebar": "Toggle sidebar",
                     "wireframe": "Toggle wireframe mode",
