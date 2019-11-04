@@ -5220,15 +5220,6 @@ en:
         # junction=yes
         name: Junction
         terms: '<translate with synonyms or related terms for ''Junction'', separated by commas>'
-      junction/circular:
-        # junction=circular
-        name: Traffic Circle
-      junction/jughandle:
-        # junction=jughandle
-        name: Jughandle
-      junction/roundabout:
-        # junction=roundabout
-        name: Roundabout
       landuse:
         # landuse=*
         name: Land Use
