@@ -17,7 +17,7 @@ export {
 
 export function uiFieldCombo(field, context) {
     var dispatch = d3_dispatch('change');
-    var nominatim = services.geocoder;
+    var countryCoder = services.countryCoder;
     var taginfo = services.taginfo;
     var isMulti = (field.type === 'multiCombo');
     var isNetwork = (field.type === 'networkCombo');
@@ -35,7 +35,7 @@ export function uiFieldCombo(field, context) {
     var _comboData = [];
     var _multiData = [];
     var _entity;
-    var _country;
+    var _countryCode;
 
     // ensure multiCombo field.key ends with a ':'
     if (isMulti && /[^:]$/.test(field.key)) {
@@ -163,9 +163,9 @@ export function uiFieldCombo(field, context) {
     function setTaginfoValues(q, callback) {
         var fn = isMulti ? 'multikeys' : 'values';
         var query = (isMulti ? field.key : '') + q;
-        var hasCountryPrefix = isNetwork && _country && _country.indexOf(q.toLowerCase()) === 0;
+        var hasCountryPrefix = isNetwork && _countryCode && _countryCode.indexOf(q.toLowerCase()) === 0;
         if (hasCountryPrefix) {
-            query = _country + ':';
+            query = _countryCode + ':';
         }
 
         var params = {
@@ -191,7 +191,7 @@ export function uiFieldCombo(field, context) {
 
             if (hasCountryPrefix) {
                 data = data.filter(function(d) {
-                    return d.value.toLowerCase().indexOf(_country + ':') === 0;
+                    return d.value.toLowerCase().indexOf(_countryCode + ':') === 0;
                 });
             }
 
@@ -351,11 +351,10 @@ export function uiFieldCombo(field, context) {
             .call(initCombo, selection)
             .merge(input);
 
-        if (isNetwork && nominatim && _entity) {
+        if (isNetwork && countryCoder && _entity) {
             var center = _entity.extent(context.graph()).center();
-            nominatim.countryCode(center, function (err, code) {
-                _country = code;
-            });
+            var countryCode = countryCoder.iso1A2Code(center);
+            _countryCode = countryCode && countryCode.toLowerCase();
         }
 
         input

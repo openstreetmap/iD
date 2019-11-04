@@ -1,7 +1,8 @@
 {
     "icon": "temaki-vending_stamps",
     "geometry": [
-        "point"
+        "point",
+        "vertex"
     ],
     "terms": [
         "mail",

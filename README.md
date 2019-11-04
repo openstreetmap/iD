@@ -3,10 +3,10 @@
 [![Build Status](https://travis-ci.org/openstreetmap/iD.svg?branch=master)](https://travis-ci.org/openstreetmap/iD)
 [![Greenkeeper badge](https://badges.greenkeeper.io/openstreetmap/iD.svg)](https://greenkeeper.io/)
 
-:warning: _The [`master`](https://github.com/openstreetmap/iD/tree/master) branch
-is undergoing significant breaking changes for v3 over the next few months.
-[`2.15`](https://github.com/openstreetmap/iD/tree/2.15) is considerably
-more stable and is currently the recommended branch for downstream development._
+:warning: _The [`master`](https://github.com/openstreetmap/iD/tree/master) branch is undergoing significant breaking changes for v3 over the next few months. [`2.x`](https://github.com/openstreetmap/iD/tree/2.x) is considerably more stable and is currently the recommended branch for downstream development._
+
+[Watch the video](https://2019.stateofthemap.us/program/sat/id-v3.html) from our talk at State of the Map US 2019 to learn more about the current status of iD and our goals for v3.
+
 
 ## Basics
 
@@ -26,8 +26,8 @@ more stable and is currently the recommended branch for downstream development._
 if you're looking for something to do.
 * [Translate!](https://github.com/openstreetmap/iD/blob/master/CONTRIBUTING.md#translating)
 * Test a prerelease version of iD:
-  * Stable mirror of `release` branch:  http://preview.ideditor.com/release
-  * Development mirror of `master` branch + latest translations:  http://preview.ideditor.com/master
+  * Stable mirror of `release` branch:  https://preview.ideditor.com/release
+  * Development mirror of `master` branch + latest translations:  https://preview.ideditor.com/master
 
 Come on in, the water's lovely. More help? Ping `bhousel` or `quincylvania` on:
 * [OpenStreetMap US Slack](https://slack.openstreetmap.us/)

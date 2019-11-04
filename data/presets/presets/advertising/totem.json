@@ -1,0 +1,16 @@
+{
+    "fields": [
+        "operator",
+        "lit",
+        "visibility",
+        "direction",
+        "height"
+    ],
+    "geometry": [
+        "point"
+    ],
+    "tags": {
+        "advertising": "totem"
+    },
+    "name": "Advertising Totem"
+}

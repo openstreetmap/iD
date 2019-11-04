@@ -32,10 +32,6 @@
     "tags": {
         "highway": "motorway_link"
     },
-    "addTags": {
-        "highway": "motorway_link",
-        "oneway": "yes"
-    },
     "terms": [
         "exit",
         "ramp",

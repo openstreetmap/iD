@@ -1,7 +1,8 @@
 {
     "icon": "temaki-vending_tickets",
     "geometry": [
-        "point"
+        "point",
+        "vertex"
     ],
     "terms": [
         "bus",

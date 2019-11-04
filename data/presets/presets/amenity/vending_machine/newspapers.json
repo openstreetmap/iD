@@ -9,7 +9,8 @@
         "currency_multi"
     ],
     "geometry": [
-        "point"
+        "point",
+        "vertex"
     ],
     "terms": [
         "newspaper"

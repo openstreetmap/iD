@@ -5,7 +5,8 @@
         "operator"
     ],
     "geometry": [
-        "point"
+        "point",
+        "vertex"
     ],
     "terms": [
         "bottle return"

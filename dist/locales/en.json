@@ -241,7 +241,8 @@
                 "not_closed": "This can't be made circular because it's not a loop.",
                 "too_large": "This can't be made circular because not enough of it is currently visible.",
                 "connected_to_hidden": "This can't be made circular because it is connected to a hidden feature.",
-                "not_downloaded": "This can't be made circular because parts of it have not yet been downloaded."
+                "not_downloaded": "This can't be made circular because parts of it have not yet been downloaded.",
+                "already_circular": "This can't be made circular because it's already circular."
             },
             "orthogonalize": {
                 "title": "Square",
@@ -1764,10 +1765,10 @@
                     "reference": "Buildings should not intersect except on different layers."
                 },
                 "building-highway": {
-                    "reference": "Highways crossing buildings should use bridges, tunnels, coverings, or entrances."
+                    "reference": "Highways crossing buildings should use bridges, tunnels, or different layers."
                 },
                 "building-railway": {
-                    "reference": "Railways crossing buildings should use bridges or tunnels."
+                    "reference": "Railways crossing buildings should use bridges, tunnels, or different layers."
                 },
                 "building-waterway": {
                     "reference": "Waterways crossing buildings should use tunnels or different layers."
@@ -2390,9 +2391,10 @@
                 },
                 "display_options": {
                     "title": "Display options",
-                    "background": "Show background options",
+                    "background": "Toggle background imagery pane",
                     "background_switch": "Switch back to last background",
-                    "map_data": "Show map data options",
+                    "map_data": "Toggle map data pane",
+                    "issues": "Toggle validation issues pane",
                     "fullscreen": "Enter full screen mode",
                     "sidebar": "Toggle sidebar",
                     "wireframe": "Toggle wireframe mode",
@@ -4856,8 +4858,20 @@
                     "name": "Billboard",
                     "terms": ""
                 },
+                "advertising/board": {
+                    "name": "Notice Board",
+                    "terms": ""
+                },
                 "advertising/column": {
                     "name": "Advertising Column",
+                    "terms": ""
+                },
+                "advertising/poster_box": {
+                    "name": "Poster Box",
+                    "terms": ""
+                },
+                "advertising/totem": {
+                    "name": "Advertising Totem",
                     "terms": ""
                 },
                 "aerialway/station": {
@@ -5834,7 +5848,7 @@
                     "terms": "polygon"
                 },
                 "area/highway": {
-                    "name": "Road Surface",
+                    "name": "Road Area",
                     "terms": "area:highway,edge of pavement,highway area,highway shape,pavement,road shape,street area"
                 },
                 "attraction/amusement_ride": {
@@ -7074,15 +7088,6 @@
                     "name": "Junction",
                     "terms": ""
                 },
-                "junction/circular": {
-                    "name": "Traffic Circle"
-                },
-                "junction/jughandle": {
-                    "name": "Jughandle"
-                },
-                "junction/roundabout": {
-                    "name": "Roundabout"
-                },
                 "landuse/basin": {
                     "name": "Basin"
                 },
@@ -7612,7 +7617,7 @@
                     "terms": ""
                 },
                 "man_made/bridge": {
-                    "name": "Bridge",
+                    "name": "Bridge Area",
                     "terms": ""
                 },
                 "man_made/bunker_silo": {
@@ -7816,7 +7821,7 @@
                     "terms": "lookout tower,fire tower"
                 },
                 "man_made/tunnel": {
-                    "name": "Tunnel",
+                    "name": "Tunnel Area",
                     "terms": "bore,dig,shaft,underground passage,underpass"
                 },
                 "man_made/utility_pole": {

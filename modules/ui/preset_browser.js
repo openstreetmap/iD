@@ -365,15 +365,15 @@ export function uiPresetBrowser(context, allowedGeometry, onChoose, onCancel) {
 
 
     function reloadCountryCode() {
-        if (!services.geocoder) return;
+        if (!services.countryCoder) return;
 
         var center = context.map().center();
-        services.geocoder.countryCode(center, function countryCallback(err, countryCode) {
-            if (_countryCode !== countryCode) {
-                _countryCode = countryCode;
-                updateResultsList();
-            }
-        });
+        var countryCode = services.countryCoder.iso1A2Code(center);
+        if (countryCode) countryCode = countryCode.toLowerCase();
+        if (_countryCode !== countryCode) {
+            _countryCode = countryCode;
+            updateResultsList();
+        }
     }
 
     function getRawResults() {

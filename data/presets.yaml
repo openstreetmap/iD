@@ -2642,10 +2642,22 @@ en:
         # advertising=billboard
         name: Billboard
         terms: '<translate with synonyms or related terms for ''Billboard'', separated by commas>'
+      advertising/board:
+        # advertising=board
+        name: Notice Board
+        terms: '<translate with synonyms or related terms for ''Notice Board'', separated by commas>'
       advertising/column:
         # advertising=column
         name: Advertising Column
         terms: '<translate with synonyms or related terms for ''Advertising Column'', separated by commas>'
+      advertising/poster_box:
+        # advertising=poster_box
+        name: Poster Box
+        terms: '<translate with synonyms or related terms for ''Poster Box'', separated by commas>'
+      advertising/totem:
+        # advertising=totem
+        name: Advertising Totem
+        terms: '<translate with synonyms or related terms for ''Advertising Totem'', separated by commas>'
       aerialway:
         # aerialway=*
         name: Aerialway
@@ -3824,9 +3836,9 @@ en:
         terms: '<translate with synonyms or related terms for ''Area'', separated by commas>'
       area/highway:
         # 'area:highway=*'
-        name: Road Surface
+        name: Road Area
         # 'terms: area:highway,edge of pavement,highway area,highway shape,pavement,road shape,street area'
-        terms: '<translate with synonyms or related terms for ''Road Surface'', separated by commas>'
+        terms: '<translate with synonyms or related terms for ''Road Area'', separated by commas>'
       attraction:
         # attraction=*
         name: Attraction
@@ -5249,15 +5261,6 @@ en:
         # junction=yes
         name: Junction
         terms: '<translate with synonyms or related terms for ''Junction'', separated by commas>'
-      junction/circular:
-        # junction=circular
-        name: Traffic Circle
-      junction/jughandle:
-        # junction=jughandle
-        name: Jughandle
-      junction/roundabout:
-        # junction=roundabout
-        name: Roundabout
       landuse:
         # landuse=*
         name: Land Use
@@ -5892,8 +5895,8 @@ en:
         terms: '<translate with synonyms or related terms for ''Breakwater'', separated by commas>'
       man_made/bridge:
         # man_made=bridge
-        name: Bridge
-        terms: '<translate with synonyms or related terms for ''Bridge'', separated by commas>'
+        name: Bridge Area
+        terms: '<translate with synonyms or related terms for ''Bridge Area'', separated by commas>'
       man_made/bunker_silo:
         # man_made=bunker_silo
         name: Bunker Silo
@@ -6056,7 +6059,7 @@ en:
         # 'terms: oil,natural gas,water,sewer,sewage'
         terms: '<translate with synonyms or related terms for ''Underground Pipeline'', separated by commas>'
       man_made/pipeline/valve:
-        # 'man_made=pipeline, pipeline=valve'
+        # pipeline=valve
         name: Pipeline Valve
         # 'terms: oil,natural gas,water,sewer,sewage'
         terms: '<translate with synonyms or related terms for ''Pipeline Valve'', separated by commas>'
@@ -6135,9 +6138,9 @@ en:
         terms: '<translate with synonyms or related terms for ''Observation Tower'', separated by commas>'
       man_made/tunnel:
         # man_made=tunnel
-        name: Tunnel
+        name: Tunnel Area
         # 'terms: bore,dig,shaft,underground passage,underpass'
-        terms: '<translate with synonyms or related terms for ''Tunnel'', separated by commas>'
+        terms: '<translate with synonyms or related terms for ''Tunnel Area'', separated by commas>'
       man_made/utility_pole:
         # man_made=utility_pole
         name: Utility Pole
