@@ -3,36 +3,50 @@ const colors = require('colors/safe');
 const concat = require('concat-files');
 const glob = require('glob');
 
+let _currBuild = null;
 
-module.exports = function buildCSS() {
-    var isBuilding = false;
-    return function () {
-        if (isBuilding) return;
+// if called directly, do the thing.
+buildCSS();
 
-        console.log('building css');
-        console.time(colors.green('css built'));
-        isBuilding = true;
 
-        return concatFilesProm('css/**/*.css', 'dist/iD.css')
-            .then(function () {
-                console.timeEnd(colors.green('css built'));
-                isBuilding = false;
-            })
-            .catch(function (err) {
-                console.error(err);
-                process.exit(1);
-            });
-    };
+function buildCSS() {
+  if (_currBuild) return _currBuild;
+
+  console.log('building css');
+  console.time(colors.green('css built'));
+
+  return _currBuild =
+    doGlob('css/**/*.css')
+    .then((files) => doConcat(files, 'dist/iD.css'))
+    .then(() => {
+      console.timeEnd(colors.green('css built'));
+      _currBuild = null;
+    })
+    .catch((err) => {
+      console.error(err);
+      _currBuild = null;
+      process.exit(1);
+    });
 };
 
-function concatFilesProm(globPath, output) {
-    return new Promise(function (res, rej) {
-        glob(globPath, function (er, files) {
-            if (er) return rej(er);
-            concat(files, output, function (err) {
-                if (err) return rej(err);
-                res();
-            });
-        });
+
+function doGlob(pattern) {
+  return new Promise((resolve, reject) => {
+    glob(pattern, (err, files) => {
+      if (err) return reject(err);
+      resolve(files);
     });
-}
+  });
+};
+
+function doConcat(files, output) {
+  return new Promise((resolve, reject) => {
+    concat(files, output, (err) => {
+      if (err) return reject(err);
+      resolve();
+    });
+  });
+};
+
+
+module.exports = buildCSS;
