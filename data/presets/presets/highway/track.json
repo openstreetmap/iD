@@ -25,7 +25,8 @@
         "line"
     ],
     "tags": {
-        "highway": "track"
+        "highway": "track",
+        "access": "private"
     },
     "terms": [
         "woods road",
@@ -49,5 +50,5 @@
         "double track",
         "two track"
     ],
-    "name": "Unmaintained Track Road"
+    "name": "Private Unmaintained Track Road"
 }

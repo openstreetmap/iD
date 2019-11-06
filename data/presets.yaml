@@ -5086,10 +5086,10 @@ en:
         # 'terms: on ramp,off ramp,ramp,road,street'
         terms: '<translate with synonyms or related terms for ''Tertiary Link'', separated by commas>'
       highway/track:
-        # highway=track
-        name: Unmaintained Track Road
+        # 'highway=track, access=private'
+        name: Private Unmaintained Track Road
         # 'terms: woods road,forest road,logging road,fire road,farm road,agricultural road,ranch road,carriage road,primitive,unmaintained,rut,offroad,4wd,4x4,four wheel drive,atv,quad,jeep,double track,two track'
-        terms: '<translate with synonyms or related terms for ''Unmaintained Track Road'', separated by commas>'
+        terms: '<translate with synonyms or related terms for ''Private Unmaintained Track Road'', separated by commas>'
       highway/traffic_mirror:
         # highway=traffic_mirror
         name: Traffic Mirror
