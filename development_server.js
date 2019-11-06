@@ -4,6 +4,7 @@ const gaze = require('gaze');
 const StaticServer = require('static-server');
 
 const isDevelopment = process.argv[2] === 'develop';
+const port          = process.argv[3] || 8080;
 
 const buildData = require('./build_data')(isDevelopment);
 const buildSrc = require('./build_src')(isDevelopment);
@@ -54,7 +55,7 @@ if (isDevelopment) {
         });
     });
 
-    const server = new StaticServer({ rootPath: __dirname, port: 8080, followSymlink: true });
+    const server = new StaticServer({ rootPath: __dirname, port: port, followSymlink: true });
     server.start(function () {
         console.log(colors.yellow('Listening on ' + server.port));
     });

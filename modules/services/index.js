@@ -1,4 +1,4 @@
-import CountryCoder from 'country-coder';
+//import CountryCoder from 'country-coder';
 
 import serviceKeepRight from './keepRight';
 import serviceImproveOSM from './improveOSM';
@@ -16,7 +16,7 @@ import serviceWikipedia from './wikipedia';
 
 
 export var services = {
-    countryCoder: new CountryCoder(),
+    countryCoder: null,//new CountryCoder(),
     geocoder: serviceNominatim,
     keepRight: serviceKeepRight,
     improveOSM: serviceImproveOSM,
