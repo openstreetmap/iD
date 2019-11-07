@@ -12,21 +12,16 @@ function buildAll() {
   if (_currBuild) return _currBuild;
 
   return _currBuild =
-    Promise.all([buildCSS(), buildBundle()])
-    .then(() => {
-      _currBuild = null;
-    })
+    Promise.resolve()
+    .then(() => buildCSS())
+    .then(() => buildData())
+    .then(() => buildSrc())
+    .then(() => _currBuild = null)
     .catch((err) => {
       console.error(err);
       _currBuild = null;
       process.exit(1);
     });
 };
-
-
-function buildBundle() {
-  return buildData()
-    .then(() => buildSrc());
-}
 
 module.exports = buildAll;

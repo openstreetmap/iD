@@ -22,11 +22,7 @@ fontawesome.library.add(fas, far, fab);
 
 const request = require('request').defaults({ maxSockets: 1 });
 
-
 let _currBuild = null;
-
-// if called directly, do the thing.
-buildData();
 
 
 function buildData() {
