@@ -22,6 +22,6 @@ function buildAll() {
       _currBuild = null;
       process.exit(1);
     });
-};
+}
 
 module.exports = buildAll;

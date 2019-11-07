@@ -120,7 +120,7 @@ function buildData() {
       _currBuild = null;
       process.exit(1);
     });
-};
+}
 
 
 function read(f) {
