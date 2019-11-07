@@ -36,7 +36,7 @@ function buildSrc() {
       _currBuild = null;
       process.exit(1);
     });
-};
+}
 
 
 function buildBundle() {
@@ -85,7 +85,7 @@ function buildBundle() {
     });
 
   return prom;
-};
+}
 
 
 function onWarn(warning, warn) {

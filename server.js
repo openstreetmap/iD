@@ -48,4 +48,4 @@ function startServer() {
   server.start(() => {
     console.log(colors.yellow('Listening on ' + server.port));
   });
-};
+}

@@ -31,7 +31,7 @@ function buildCSS() {
       _currBuild = null;
       process.exit(1);
     });
-};
+}
 
 
 function doGlob(pattern) {
@@ -41,7 +41,7 @@ function doGlob(pattern) {
       resolve(files);
     });
   });
-};
+}
 
 function doConcat(files, output) {
   return new Promise((resolve, reject) => {
@@ -50,7 +50,7 @@ function doConcat(files, output) {
       resolve();
     });
   });
-};
+}
 
 
 module.exports = buildCSS;
