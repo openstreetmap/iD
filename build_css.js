@@ -12,18 +12,24 @@ buildCSS();
 function buildCSS() {
   if (_currBuild) return _currBuild;
 
-  console.log('building css');
-  console.time(colors.green('css built'));
+  const START = '🏗   ' + colors.yellow('Building css...');
+  const END = '👍  ' + colors.green('css built');
+
+  console.log('');
+  console.log(START);
+  console.time(END);
 
   return _currBuild =
     doGlob('css/**/*.css')
     .then((files) => doConcat(files, 'dist/iD.css'))
     .then(() => {
-      console.timeEnd(colors.green('css built'));
+      console.timeEnd(END);
+      console.log('');
       _currBuild = null;
     })
     .catch((err) => {
       console.error(err);
+      console.log('');
       _currBuild = null;
       process.exit(1);
     });

@@ -32,8 +32,12 @@ buildData();
 function buildData() {
   if (_currBuild) return _currBuild;
 
-  console.log('building data');
-  console.time(colors.green('data built'));
+  const START = '🏗   ' + colors.yellow('Building data...');
+  const END = '👍  ' + colors.green('data built');
+
+  console.log('');
+  console.log(START);
+  console.time(END);
 
   // Create symlinks if necessary..  { 'target': 'source' }
   const symlinks = {
@@ -110,11 +114,13 @@ function buildData() {
   return _currBuild =
     Promise.all(tasks)
     .then(() => {
-      console.timeEnd(colors.green('data built'));
+      console.timeEnd(END);
+      console.log('');
       _currBuild = null;
     })
     .catch((err) => {
       console.error(err);
+      console.log('');
       _currBuild = null;
       process.exit(1);
     });
@@ -138,6 +144,7 @@ function validate(file, instance, schema) {
         console.error(error);
       }
     });
+    console.log('');
     process.exit(1);
   }
 }
@@ -616,6 +623,7 @@ function validateCategoryPresets(categories, presets) {
     category.members.forEach(preset => {
       if (presets[preset] === undefined) {
         console.error('Unknown preset: ' + preset + ' in category ' + category.name);
+        console.log('');
         process.exit(1);
       }
     });
@@ -636,9 +644,11 @@ function validatePresetFields(presets, fields) {
       let p2geometry = replacementPreset.geometry.slice().sort.toString();
       if (replacementPreset === undefined) {
         console.error('Unknown preset "' + preset.replacement + '" referenced as replacement of preset ' + preset.name);
+        console.log('');
         process.exit(1);
       } else if (p1geometry !== p2geometry) {
         console.error('The preset "' + presetID + '" has different geometry than its replacement preset, "' + preset.replacement + '". They must match for tag upgrades to work.');
+        console.log('');
         process.exit(1);
       }
     }
@@ -658,10 +668,12 @@ function validatePresetFields(presets, fields) {
           let foreignPresetID = regexResult[0];
           if (presets[foreignPresetID] === undefined) {
             console.error('Unknown preset "' + foreignPresetID + '" referenced in "' + fieldsKey + '" array of preset ' + preset.name);
+            console.log('');
             process.exit(1);
           }
         } else {
           console.error('Unknown preset field "' + field + '" in "' + fieldsKey + '" array of preset ' + preset.name);
+          console.log('');
           process.exit(1);
         }
       }
@@ -682,6 +694,7 @@ function validatePresetFields(presets, fields) {
       }
       if (fieldCount > maxFieldsBeforeError) {
         console.error(fieldCount + ' values in "fields" of "' + preset.name + '" (' + presetID + '). Limit: ' + maxFieldsBeforeError + '. Please move lower-priority fields to "moreFields".');
+        console.log('');
         process.exit(1);
       }
       else if (fieldCount > maxFieldsBeforeWarning) {
@@ -697,6 +710,7 @@ function validateDefaults(defaults, categories, presets) {
     members.forEach(id => {
       if (!presets[id] && !categories[id]) {
         console.error('Unknown category or preset: ' + id + ' in default ' + name);
+        console.log('');
         process.exit(1);
       }
     });
@@ -852,5 +866,6 @@ function readFileProm(path, options) {
     });
   });
 }
+
 
 module.exports = buildData;
