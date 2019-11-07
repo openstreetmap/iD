@@ -11,7 +11,7 @@
   "license": "ISC",
   "scripts": {
     "all": "npm-run-all -s clean build dist",
-    "build": "node development_server.js",
+    "build": "node --max-old-space-size=4096 build.js",
     "clean": "shx rm -f dist/*.js dist/*.map dist/*.css dist/img/*.svg",
     "dist": "npm-run-all -p dist:**",
     "dist:mapillary": "shx mkdir -p dist/mapillary-js && shx cp -R node_modules/mapillary-js/dist/* dist/mapillary-js/",
@@ -27,7 +27,7 @@
     "dist:svg:temaki": "svg-sprite --symbol --symbol-dest . --shape-id-generator \"temaki-%s\" --symbol-sprite dist/img/temaki-sprite.svg node_modules/temaki/icons/*.svg",
     "imagery": "node data/update_imagery",
     "lint": "eslint *.js test/spec modules",
-    "start": "node development_server.js develop",
+    "start": "node --max-old-space-size=4096 server.js",
     "phantom": "phantomjs --web-security=no node_modules/mocha-phantomjs-core/mocha-phantomjs-core.js test/phantom.html spec",
     "test": "npm-run-all -s lint build test:**",
     "test:phantom": "phantomjs --web-security=no node_modules/mocha-phantomjs-core/mocha-phantomjs-core.js test/index.html spec",
@@ -53,6 +53,7 @@
     "pannellum": "2.4.1",
     "q": "1.5.1",
     "rbush": "2.0.2",
+    "string.fromcodepoint": "0.2.1",
     "which-polygon": "2.2.0",
     "wmf-sitematrix": "0.1.4"
   },
@@ -62,6 +63,7 @@
     "@fortawesome/free-regular-svg-icons": "^5.11.2",
     "@fortawesome/free-solid-svg-icons": "^5.11.2",
     "@mapbox/maki": "^6.0.0",
+    "@rollup/plugin-buble": "^0.20.0",
     "chai": "^4.1.0",
     "cldr-core": "36.0.0",
     "cldr-localenames-full": "36.0.0",
