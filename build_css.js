@@ -5,9 +5,6 @@ const glob = require('glob');
 
 let _currBuild = null;
 
-// if called directly, do the thing.
-buildCSS();
-
 
 function buildCSS() {
   if (_currBuild) return _currBuild;
@@ -20,7 +17,8 @@ function buildCSS() {
   console.time(END);
 
   return _currBuild =
-    doGlob('css/**/*.css')
+    Promise.resolve()
+    .then(() => doGlob('css/**/*.css'))
     .then((files) => doConcat(files, 'dist/iD.css'))
     .then(() => {
       console.timeEnd(END);

@@ -11,7 +11,7 @@
   "license": "ISC",
   "scripts": {
     "all": "npm-run-all -s clean build dist",
-    "build": "node build.js",
+    "build": "node --max-old-space-size=4096 build.js",
     "clean": "shx rm -f dist/*.js dist/*.map dist/*.css dist/img/*.svg",
     "dist": "npm-run-all -p dist:**",
     "dist:mapillary": "shx mkdir -p dist/mapillary-js && shx cp -R node_modules/mapillary-js/dist/* dist/mapillary-js/",
@@ -27,7 +27,7 @@
     "dist:svg:temaki": "svg-sprite --symbol --symbol-dest . --shape-id-generator \"temaki-%s\" --symbol-sprite dist/img/temaki-sprite.svg node_modules/temaki/icons/*.svg",
     "imagery": "node data/update_imagery",
     "lint": "eslint *.js test/spec modules",
-    "start": "node server.js",
+    "start": "node --max-old-space-size=4096 server.js",
     "phantom": "phantomjs --web-security=no node_modules/mocha-phantomjs-core/mocha-phantomjs-core.js test/phantom.html spec",
     "test": "npm-run-all -s lint build test:**",
     "test:phantom": "phantomjs --web-security=no node_modules/mocha-phantomjs-core/mocha-phantomjs-core.js test/index.html spec",
