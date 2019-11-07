@@ -301,6 +301,11 @@ export function uiFieldLocalized(field, context) {
                 if (value && value.length > 2) {
                     for (var i = 0; i < suggestions.length; i++) {
                         var s = suggestions[i];
+
+                        // don't suggest brands from incompatible countries
+                        if (_countryCode && s.countryCodes &&
+                            s.countryCodes.indexOf(_countryCode) === -1) continue;
+
                         var sTag = s.id.split('/', 2);
                         var sKey = sTag[0];
                         var sValue = sTag[1];
