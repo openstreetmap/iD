@@ -10,7 +10,6 @@ import {
 import { t, textDirection } from '../util/locale';
 import { actionChangePreset } from '../actions/change_preset';
 import { operationDelete } from '../operations/delete';
-import { services } from '../services';
 import { svgIcon } from '../svg/index';
 import { tooltip } from '../util/tooltip';
 import { uiPresetIcon } from './preset_icon';

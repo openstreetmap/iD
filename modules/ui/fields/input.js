@@ -4,7 +4,6 @@ import * as countryCoder from 'country-coder';
 
 import { t, textDirection } from '../../util/locale';
 import { dataPhoneFormats } from '../../../data';
-import { services } from '../../services';
 import { utilGetSetValue, utilNoAuto, utilRebind } from '../../util';
 
 

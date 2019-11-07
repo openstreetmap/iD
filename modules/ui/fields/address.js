@@ -6,6 +6,7 @@ import { dataAddressFormats } from '../../../data';
 import { geoExtent, geoChooseEdge, geoSphericalDistance } from '../../geo';
 import { uiCombobox } from '../combobox';
 import { utilArrayUniqBy, utilGetSetValue, utilNoAuto, utilRebind } from '../../util';
+import { t } from '../../util/locale';
 
 
 export function uiFieldAddress(field, context) {
