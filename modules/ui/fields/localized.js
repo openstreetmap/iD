@@ -1,5 +1,6 @@
 import { dispatch as d3_dispatch } from 'd3-dispatch';
 import { select as d3_select, event as d3_event } from 'd3-selection';
+import * as countryCoder from 'country-coder';
 
 import { currentLocale, t, languageName } from '../../util/locale';
 import { dataLanguages } from '../../../data';
@@ -574,7 +575,7 @@ export function uiFieldLocalized(field, context) {
 
     function loadCountryCode() {
         var center = _entity.extent(context.graph()).center();
-        var countryCode = services.countryCoder.iso1A2Code(center);
+        var countryCode = countryCoder.iso1A2Code(center);
         _countryCode = countryCode && countryCode.toLowerCase();
     }
 
