@@ -573,6 +573,7 @@ export function uiFieldLocalized(field, context) {
     };
 
     function loadCountryCode() {
+        if (!services.countryCoder) return;
         var center = _entity.extent(context.graph()).center();
         var countryCode = services.countryCoder.iso1A2Code(center);
         _countryCode = countryCode && countryCode.toLowerCase();
