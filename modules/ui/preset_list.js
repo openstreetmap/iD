@@ -1,4 +1,5 @@
 import { dispatch as d3_dispatch } from 'd3-dispatch';
+import * as countryCoder from 'country-coder';
 
 import {
     event as d3_event,
@@ -101,9 +102,9 @@ export function uiPresetList(context) {
             list.classed('filtered', value.length);
             var entity = context.entity(_entityID);
             var results, messageText;
-            if (value.length && entity && services.countryCoder) {
+            if (value.length && entity) {
                 var center = entity.extent(context.graph()).center();
-                var countryCode = services.countryCoder.iso1A2Code(center);
+                var countryCode = countryCoder.iso1A2Code(center);
 
                 results = presets.search(value, geometry, countryCode && countryCode.toLowerCase());
                 messageText = t('inspector.results', {
