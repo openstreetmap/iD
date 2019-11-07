@@ -219,7 +219,7 @@ export function uiPresetIcon(context) {
             geom = 'route';
         }
         var imageURL = p.imageURL;
-        var picon = imageURL ? null : getIcon(p, geom);
+        var picon = getIcon(p, geom);
         var isMaki = picon && /^maki-/.test(picon);
         var isTemaki = picon && /^temaki-/.test(picon);
         var isFa = picon && /^fa[srb]-/.test(picon);
@@ -227,7 +227,7 @@ export function uiPresetIcon(context) {
         var isiDIcon = picon && !(isMaki || isTemaki || isFa || isTnp);
         var isCategory = !p.setTags;
         var drawCategoryBorder = isCategory;
-        var drawPoint = geom === 'point' && !imageURL && (pointMarker || !picon) && !isFallback;
+        var drawPoint = geom === 'point' && (pointMarker || !picon) && !isFallback;
         var drawVertex = picon !== null && geom === 'vertex' && (!isSmall() || !isFallback);
         var drawLine = picon && geom === 'line' && !isFallback && !isCategory;
         var drawArea = picon && geom === 'area' && !isFallback;
@@ -253,20 +253,6 @@ export function uiPresetIcon(context) {
             .merge(container);
 
         container.classed('fallback', isFallback);
-
-        var imageIcon = container.selectAll('img.image-icon')
-            .data(imageURL ? [0] : []);
-
-        imageIcon.exit()
-            .remove();
-
-        imageIcon = imageIcon.enter()
-            .append('img')
-            .attr('class', 'image-icon')
-            .merge(imageIcon);
-
-        imageIcon
-            .attr('src', imageURL);
 
         var categoryBorder = container.selectAll('.preset-icon-category-border')
             .data(drawCategoryBorder ? [0] : []);
@@ -357,7 +343,6 @@ export function uiPresetIcon(context) {
 
         }
 
-
         var icon = container.selectAll('.preset-icon')
             .data(picon ? [0] : []);
 
@@ -382,6 +367,26 @@ export function uiPresetIcon(context) {
 
         icon.selectAll('use')
             .attr('href', '#' + picon + (isMaki ? (isSmall() && geom === 'point' ? '-11' : '-15') : ''));
+
+        var imageIcon = container.selectAll('img.image-icon')
+            .data(imageURL ? [0] : []);
+
+        imageIcon.exit()
+            .remove();
+
+        imageIcon = imageIcon.enter()
+            .append('img')
+            .attr('class', 'image-icon')
+            .on('load', function() {
+                container.classed('showing-img', true);
+            })
+            .on('error', function() {
+                container.classed('showing-img', false);
+            })
+            .merge(imageIcon);
+
+        imageIcon
+            .attr('src', imageURL);
 
     }
 
