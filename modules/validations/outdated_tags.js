@@ -1,5 +1,6 @@
 import { t } from '../util/locale';
 import { matcher, brands } from 'name-suggestion-index';
+import * as countryCoder from 'country-coder';
 
 import { actionChangePreset } from '../actions/change_preset';
 import { actionChangeTags } from '../actions/change_tags';
@@ -93,7 +94,9 @@ export function validationOutdatedTags(context) {
                 var k = nsiKeys[i];
                 if (!newTags[k]) continue;
 
-                var match = nsiMatcher.matchKVN(k, newTags[k], newTags.name);
+                var center = entity.extent(graph).center();
+                var countryCode = countryCoder.iso1A2Code(center);
+                var match = nsiMatcher.matchKVN(k, newTags[k], newTags.name, countryCode && countryCode.toLowerCase());
                 if (!match) continue;
 
                 // for now skip ambiguous matches (like Target~(USA) vs Target~(Australia))
