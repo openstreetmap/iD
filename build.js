@@ -25,8 +25,8 @@ function buildAll() {
 
 
 function buildBundle() {
-  return buildData();
-  //   .then(() => buildSrc());
+  return buildData()
+    .then(() => buildSrc());
 }
 
 module.exports = buildAll;
