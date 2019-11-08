@@ -1,6 +1,6 @@
 import { select as d3_select } from 'd3-selection';
 
-import { data, dataImperial, dataDriveLeft } from '../../data';
+import { data } from '../../data';
 import { svgPath } from './helpers';
 
 
@@ -11,8 +11,6 @@ export function svgDebug(projection, context) {
         var showsCollision = context.getDebug('collision');
         var showsImagery = context.getDebug('imagery');
         var showsCommunity = context.getDebug('community');
-        var showsImperial = context.getDebug('imperial');
-        var showsDriveLeft = context.getDebug('driveLeft');
         var showsTouchTargets = context.getDebug('target');
         var showsDownloaded = context.getDebug('downloaded');
 
@@ -28,12 +26,6 @@ export function svgDebug(projection, context) {
         }
         if (showsCommunity) {
             debugData.push({ class: 'blue', label: 'community' });
-        }
-        if (showsImperial) {
-            debugData.push({ class: 'cyan', label: 'imperial' });
-        }
-        if (showsDriveLeft) {
-            debugData.push({ class: 'green', label: 'driveLeft' });
         }
         if (showsTouchTargets) {
             debugData.push({ class: 'pink', label: 'touchTargets' });
@@ -69,7 +61,7 @@ export function svgDebug(projection, context) {
 
 
         var layer = selection.selectAll('.layer-debug')
-            .data(showsImagery || showsCommunity || showsImperial || showsDriveLeft || showsDownloaded ? [0] : []);
+            .data(showsImagery || showsCommunity || showsDownloaded ? [0] : []);
 
         layer.exit()
             .remove();
@@ -106,32 +98,6 @@ export function svgDebug(projection, context) {
         community.enter()
             .append('path')
             .attr('class', 'debug-community debug blue');
-
-
-        // imperial
-        var imperial = layer
-            .selectAll('path.debug-imperial')
-            .data(showsImperial ? [dataImperial] : []);
-
-        imperial.exit()
-            .remove();
-
-        imperial.enter()
-            .append('path')
-            .attr('class', 'debug-imperial debug cyan');
-
-
-        // driveleft
-        var driveLeft = layer
-            .selectAll('path.debug-drive-left')
-            .data(showsDriveLeft ? [dataDriveLeft] : []);
-
-        driveLeft.exit()
-            .remove();
-
-        driveLeft.enter()
-            .append('path')
-            .attr('class', 'debug-drive-left debug green');
 
 
         // downloaded
@@ -184,8 +150,6 @@ export function svgDebug(projection, context) {
             return context.getDebug('tile') ||
                 context.getDebug('collision') ||
                 context.getDebug('imagery') ||
-                context.getDebug('imperial') ||
-                context.getDebug('driveLeft') ||
                 context.getDebug('target') ||
                 context.getDebug('downloaded');
         } else {

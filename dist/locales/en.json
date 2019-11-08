@@ -2987,6 +2987,9 @@
                 "consulate": {
                     "label": "Type"
                 },
+                "consulting": {
+                    "label": "Expertise"
+                },
                 "contact/webcam": {
                     "label": "Webcam URL",
                     "placeholder": "http://example.com/"
@@ -8044,6 +8047,10 @@
                 "office/company": {
                     "name": "Corporate Office",
                     "terms": ""
+                },
+                "office/consulting": {
+                    "name": "Consultancy Office",
+                    "terms": "consulting firm office"
                 },
                 "office/coworking": {
                     "name": "Coworking Space",

@@ -3,7 +3,7 @@ import { json as d3_json } from 'd3-fetch';
 import { event as d3_event, select as d3_select, selectAll as d3_selectAll } from 'd3-selection';
 import { zoom as d3_zoom, zoomIdentity as d3_zoomIdentity } from 'd3-zoom';
 
-import rbush from 'rbush';
+import RBush from 'rbush';
 
 import { geoExtent, geoScaleToZoom } from '../geo';
 import { utilDetect } from '../util/detect';
@@ -194,7 +194,7 @@ export default {
         }
 
         _oscCache = {
-            images: { inflight: {}, loaded: {}, nextPage: {}, rtree: rbush() },
+            images: { inflight: {}, loaded: {}, nextPage: {}, rtree: new RBush() },
             sequences: {}
         };
 
