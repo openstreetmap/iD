@@ -442,6 +442,9 @@ en:
       consulate:
         # consulate=*
         label: Type
+      consulting:
+        # consulting=*
+        label: Expertise
       contact/webcam:
         # 'contact:webcam=*'
         label: Webcam URL
@@ -6351,6 +6354,11 @@ en:
         # office=company
         name: Corporate Office
         terms: '<translate with synonyms or related terms for ''Corporate Office'', separated by commas>'
+      office/consulting:
+        # office=consulting
+        name: Consultancy Office
+        # 'terms: consulting firm office'
+        terms: '<translate with synonyms or related terms for ''Consultancy Office'', separated by commas>'
       office/coworking:
         # office=coworking
         name: Coworking Space

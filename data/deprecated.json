@@ -233,6 +233,10 @@
       "replace": {"colour": "$1"}
     },
     {
+      "old": {"company": "consulting"},
+      "replace": {"office": "consulting"}
+    },
+    {
       "old": {"craft": "glass"},
       "replace": {"craft": "glaziery"}
     },
@@ -704,6 +708,14 @@
       "replace": {"office": "government"}
     },
     {
+      "old": {"office": "consultancy"},
+      "replace": {"office": "consulting"}
+    },
+    {
+      "old": {"office": "consultant"},
+      "replace": {"office": "consulting"}
+    },
+    {
       "old": {"office": "real_estate"},
       "replace": {"office": "estate_agent"}
     },
@@ -844,6 +856,10 @@
     {
       "old": {"shop": "cafe"},
       "replace": {"amenity": "cafe"}
+    },
+    {
+      "old": {"shop": "consulting"},
+      "replace": {"office": "consulting"}
     },
     {
       "old": {"shop": "dive"},

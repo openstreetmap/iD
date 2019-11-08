@@ -74,6 +74,7 @@
     "communication_multi": {"key": "communication:", "type": "multiCombo", "label": "Communication Types"},
     "construction": {"key": "construction", "type": "combo", "label": "Type"},
     "consulate": {"key": "consulate", "type": "combo", "label": "Type"},
+    "consulting": {"key": "consulting", "type": "semiCombo", "label": "Expertise"},
     "contact/webcam": {"key": "contact:webcam", "type": "url", "icon": "website", "label": "Webcam URL", "placeholder": "http://example.com/"},
     "content": {"key": "content", "type": "combo", "label": "Content", "options": ["silage", "water", "oil", "fuel", "slurry", "gas", "manure", "sewage"]},
     "conveying_escalator": {"key": "conveying", "type": "check", "label": "Escalator"},
