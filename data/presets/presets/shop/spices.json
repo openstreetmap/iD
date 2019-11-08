@@ -1,0 +1,23 @@
+{
+    "icon": "maki-shop",
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "terms": [
+        "chili",
+        "cinnamon",
+        "curry",
+        "ginger",
+        "herbs",
+        "pepper",
+        "saffron",
+        "salt",
+        "turmeric",
+        "wasabi"
+    ],
+    "tags": {
+        "shop": "spices"
+    },
+    "name": "Spice Store"
+}
