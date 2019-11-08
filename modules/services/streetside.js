@@ -7,7 +7,7 @@ import {
     selectAll as d3_selectAll
 } from 'd3-selection';
 
-import rbush from 'rbush';
+import RBush from 'rbush';
 import { t } from '../util/locale';
 import { jsonpRequest } from '../util/jsonp_request';
 
@@ -449,7 +449,7 @@ export default {
         }
 
         _ssCache = {
-            bubbles: { inflight: {}, loaded: {}, nextPage: {}, rtree: rbush(), points: {}, leaders: [] },
+            bubbles: { inflight: {}, loaded: {}, nextPage: {}, rtree: new RBush(), points: {}, leaders: [] },
             sequences: {}
         };
     },

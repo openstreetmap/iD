@@ -52,7 +52,7 @@
     "osm-auth": "1.0.2",
     "pannellum": "2.4.1",
     "q": "1.5.1",
-    "rbush": "2.0.2",
+    "rbush": "3.0.1",
     "string.fromcodepoint": "0.2.1",
     "which-polygon": "2.2.0",
     "wmf-sitematrix": "0.1.4"

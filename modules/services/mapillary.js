@@ -2,7 +2,7 @@
 import { dispatch as d3_dispatch } from 'd3-dispatch';
 import { select as d3_select, selectAll as d3_selectAll } from 'd3-selection';
 
-import rbush from 'rbush';
+import RBush from 'rbush';
 
 import { geoExtent, geoScaleToZoom } from '../geo';
 import { svgDefs } from '../svg/defs';
@@ -292,11 +292,11 @@ export default {
         }
 
         _mlyCache = {
-            images: { inflight: {}, loaded: {}, nextPage: {}, nextURL: {}, rtree: rbush(), forImageKey: {} },
+            images: { inflight: {}, loaded: {}, nextPage: {}, nextURL: {}, rtree: new RBush(), forImageKey: {} },
             image_detections: { inflight: {}, loaded: {}, nextPage: {}, nextURL: {}, forImageKey: {} },
-            map_features: { inflight: {}, loaded: {}, nextPage: {}, nextURL: {}, rtree: rbush() },
-            points: { inflight: {}, loaded: {}, nextPage: {}, nextURL: {}, rtree: rbush() },
-            sequences: { inflight: {}, loaded: {}, nextPage: {}, nextURL: {}, rtree: rbush(), forImageKey: {}, lineString: {} }
+            map_features: { inflight: {}, loaded: {}, nextPage: {}, nextURL: {}, rtree: new RBush() },
+            points: { inflight: {}, loaded: {}, nextPage: {}, nextURL: {}, rtree: new RBush() },
+            sequences: { inflight: {}, loaded: {}, nextPage: {}, nextURL: {}, rtree: new RBush(), forImageKey: {}, lineString: {} }
         };
 
         _mlySelectedImage = null;
