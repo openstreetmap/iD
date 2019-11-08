@@ -1835,6 +1835,7 @@
     {"key": "usage", "value": "military", "description": "🄵 Usage Type"},
     {"key": "usage", "value": "test", "description": "🄵 Usage Type"},
     {"key": "usage", "value": "tourism", "description": "🄵 Usage Type"},
+    {"key": "utility", "description": "🄵 Utilities"},
     {"key": "valve", "description": "🄵 Type"},
     {"key": "vending", "description": "🄵 Types of Goods"},
     {"key": "visibility", "value": "house", "description": "🄵 Visibility"},

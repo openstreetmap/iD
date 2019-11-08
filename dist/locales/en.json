@@ -4521,6 +4521,9 @@
                         "tourism": "Tourism"
                     }
                 },
+                "utility_semi": {
+                    "label": "Utilities"
+                },
                 "valve": {
                     "label": "Type"
                 },

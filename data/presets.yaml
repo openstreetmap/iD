@@ -2448,6 +2448,9 @@ en:
           # usage=tourism
           tourism: Tourism
         terms: '[translate with synonyms or related terms for ''Usage Type'', separated by commas]'
+      utility_semi:
+        # utility=*
+        label: Utilities
       valve:
         # valve=*
         label: Type

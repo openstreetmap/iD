@@ -413,6 +413,7 @@
     "trolley_wire": {"key": "trolley_wire", "type": "check", "label": "Overhead Trolley Wires"},
     "tunnel": {"key": "tunnel", "type": "typeCombo", "label": "Type", "placeholder": "Default"},
     "usage_rail": {"key": "usage", "type": "combo", "label": "Usage Type", "strings": {"options": {"main": "Main", "branch": "Branch", "industrial": "Industrial", "military": "Military", "test": "Test", "tourism": "Tourism"}}},
+    "utility_semi": {"key": "utility", "type": "semiCombo", "label": "Utilities"},
     "valve": {"key": "valve", "type": "combo", "label": "Type"},
     "vending": {"key": "vending", "type": "semiCombo", "label": "Types of Goods"},
     "visibility": {"key": "visibility", "type": "combo", "label": "Visibility", "strings": {"options": {"house": "Up to 5m (16ft)", "street": "5 to 20m (16 to 65ft)", "area": "Over 20m (65ft)"}}},
