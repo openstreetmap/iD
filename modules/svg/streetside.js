@@ -99,8 +99,8 @@ export function svgStreetside(projection, context, dispatch) {
 
         service
             .selectImage(d)
-            .then(function(r) {
-                if (r.status === 'ok'){
+            .then(response => {
+                if (response.status === 'ok'){
                     service.showViewer(_viewerYaw);
                 }
             });
