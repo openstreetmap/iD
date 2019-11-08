@@ -2112,6 +2112,10 @@ en:
         # smoothness field placeholder
         placeholder: 'Thin Rollers, Wheels, Off-Road...'
         terms: '[translate with synonyms or related terms for ''Smoothness'', separated by commas]'
+      sms:
+        # sms=*
+        label: SMS
+        terms: '[translate with synonyms or related terms for ''SMS'', separated by commas]'
       social_facility:
         # social_facility=*
         label: Type
@@ -2448,12 +2452,19 @@ en:
           # usage=tourism
           tourism: Tourism
         terms: '[translate with synonyms or related terms for ''Usage Type'', separated by commas]'
+      utility_semi:
+        # utility=*
+        label: Utilities
       valve:
         # valve=*
         label: Type
       vending:
         # vending=*
         label: Types of Goods
+      video_calls:
+        # video=*
+        label: Video Calls
+        terms: '[translate with synonyms or related terms for ''Video Calls'', separated by commas]'
       visibility:
         # visibility=*
         label: Visibility

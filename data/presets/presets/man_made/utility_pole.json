@@ -3,6 +3,7 @@
     "fields": [
         "ref",
         "operator",
+        "utility_semi",
         "height",
         "material"
     ],

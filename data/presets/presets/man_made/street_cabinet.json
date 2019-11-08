@@ -8,6 +8,7 @@
         "ref",
         "operator",
         "street_cabinet",
+        "utility_semi",
         "height",
         "colour"
     ],

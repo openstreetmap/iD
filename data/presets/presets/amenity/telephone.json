@@ -11,8 +11,14 @@
     "moreFields": [
         "covered",
         "indoor",
+        "internet_access",
+        "internet_access/fee",
+        "internet_access/ssid",
         "level",
         "lit",
+        "ref",
+        "sms",
+        "video_calls",
         "wheelchair"
     ],
     "geometry": [
