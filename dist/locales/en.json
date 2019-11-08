@@ -4240,6 +4240,10 @@
                         "impassable": "Impassable / No wheeled vehicle"
                     }
                 },
+                "sms": {
+                    "label": "SMS",
+                    "terms": ""
+                },
                 "social_facility_for": {
                     "label": "People Served"
                 },
@@ -4529,6 +4533,10 @@
                 },
                 "vending": {
                     "label": "Types of Goods"
+                },
+                "video_calls": {
+                    "label": "Video Calls",
+                    "terms": ""
                 },
                 "visibility": {
                     "label": "Visibility",
