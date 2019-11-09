@@ -6006,6 +6006,10 @@
                     "name": "Lift Gate",
                     "terms": ""
                 },
+                "barrier/private-gate": {
+                    "name": "Private Gate",
+                    "terms": ""
+                },
                 "barrier/retaining_wall": {
                     "name": "Retaining Wall",
                     "terms": ""
@@ -6757,6 +6761,14 @@
                     "name": "Marked Crosswalk",
                     "terms": "marked foot path crossing,marked crossing,marked pedestrian crosswalk,zebra crossing"
                 },
+                "highway/footway/private-informal": {
+                    "name": "Private InformalPath",
+                    "terms": "hike,hiking,trackway,trail,walk,desire,informal"
+                },
+                "highway/footway/private": {
+                    "name": "Private Foot Path",
+                    "terms": "hike,hiking,promenade,trackway,trail,walk"
+                },
                 "highway/footway/sidewalk": {
                     "name": "Sidewalk",
                     "terms": "pavement,sidepath"
@@ -6861,6 +6873,10 @@
                     "name": "Secondary Road",
                     "terms": "road,street"
                 },
+                "highway/service-customers-unpaved": {
+                    "name": "Customers Unpaved Service Road",
+                    "terms": "road,street"
+                },
                 "highway/service-customers": {
                     "name": "Customers Service Road",
                     "terms": "road,street"
@@ -6875,6 +6891,10 @@
                 },
                 "highway/service/alley": {
                     "name": "Alley",
+                    "terms": ""
+                },
+                "highway/service/customers-driveway": {
+                    "name": "Customers Driveway",
                     "terms": ""
                 },
                 "highway/service/customers-parking-aisle": {
@@ -6907,6 +6927,10 @@
                 },
                 "highway/service/private-unpaved-driveway": {
                     "name": "Private Unpaved Driveway",
+                    "terms": ""
+                },
+                "highway/service/private-unpaved-parking-aisle": {
+                    "name": "Private Unpaved Parking Aisle",
                     "terms": ""
                 },
                 "highway/services": {

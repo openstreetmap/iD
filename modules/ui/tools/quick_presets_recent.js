@@ -52,7 +52,8 @@ export function uiToolAddRecent(context) {
             }
         }
 
-        items.forEach(function(item, index) {
+        // disable recent keys to enable more favorites:
+        /*items.forEach(function(item, index) {
             var totalIndex = precedingCount + index;
             var keyCode;
             // use number row order: 1 2 3 4 5 6 7 8 9 0
@@ -65,7 +66,7 @@ export function uiToolAddRecent(context) {
             if (keyCode !== undefined) {
                 item.key = keyCode.toString();
             }
-        });
+        });*/
 
         return items;
     };

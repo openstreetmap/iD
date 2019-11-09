@@ -4017,6 +4017,10 @@ en:
         # barrier=lift_gate
         name: Lift Gate
         terms: '<translate with synonyms or related terms for ''Lift Gate'', separated by commas>'
+      barrier/private-gate:
+        # 'barrier=gate, access=private'
+        name: Private Gate
+        terms: '<translate with synonyms or related terms for ''Private Gate'', separated by commas>'
       barrier/retaining_wall:
         # barrier=retaining_wall
         name: Retaining Wall
@@ -4860,6 +4864,16 @@ en:
         name: Marked Crosswalk (Raised)
         # 'terms: zebra crossing,marked crossing,crosswalk,flat top,hump,speed,slow'
         terms: '<translate with synonyms or related terms for ''Marked Crosswalk (Raised)'', separated by commas>'
+      highway/footway/private:
+        # 'highway=footway, access=private'
+        name: Private Foot Path
+        # 'terms: hike,hiking,promenade,trackway,trail,walk'
+        terms: '<translate with synonyms or related terms for ''Private Foot Path'', separated by commas>'
+      highway/footway/private-informal:
+        # 'highway=path, informal=yes, path=desire, access=private'
+        name: Private InformalPath
+        # 'terms: hike,hiking,trackway,trail,walk,desire,informal'
+        terms: '<translate with synonyms or related terms for ''Private InformalPath'', separated by commas>'
       highway/footway/sidewalk:
         # footway=sidewalk
         name: Sidewalk
@@ -5005,6 +5019,11 @@ en:
         name: Customers Service Road
         # 'terms: road,street'
         terms: '<translate with synonyms or related terms for ''Customers Service Road'', separated by commas>'
+      highway/service-customers-unpaved:
+        # 'highway=service, access=customers, surface=unpaved'
+        name: Customers Unpaved Service Road
+        # 'terms: road,street'
+        terms: '<translate with synonyms or related terms for ''Customers Unpaved Service Road'', separated by commas>'
       highway/service-private:
         # 'highway=service, access=private'
         name: Private Service Road
@@ -5014,6 +5033,10 @@ en:
         # 'highway=service, service=alley'
         name: Alley
         terms: '<translate with synonyms or related terms for ''Alley'', separated by commas>'
+      highway/service/customers-driveway:
+        # 'highway=service, service=driveway, access=customers'
+        name: Customers Driveway
+        terms: '<translate with synonyms or related terms for ''Customers Driveway'', separated by commas>'
       highway/service/customers-parking-aisle:
         # 'highway=service, service=parking_aisle, access=customers'
         name: Customers Parking Aisle
@@ -5046,6 +5069,10 @@ en:
         # 'highway=service, service=driveway, access=private, surface=unpaved'
         name: Private Unpaved Driveway
         terms: '<translate with synonyms or related terms for ''Private Unpaved Driveway'', separated by commas>'
+      highway/service/private-unpaved-parking-aisle:
+        # 'highway=service, service=parking_aisle, access=private, surface=unpaved'
+        name: Private Unpaved Parking Aisle
+        terms: '<translate with synonyms or related terms for ''Private Unpaved Parking Aisle'', separated by commas>'
       highway/services:
         # highway=services
         name: Service Area

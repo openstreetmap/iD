@@ -1,0 +1,38 @@
+{
+  "icon": "iD-highway-service",
+  "fields": [
+      "name",
+      "service",
+      "oneway",
+      "maxspeed",
+      "surface",
+      "covered",
+      "structure",
+      "access"
+  ],
+  "moreFields": [
+      "flood_prone",
+      "incline",
+      "lanes",
+      "lit",
+      "maxheight",
+      "maxspeed/advisory",
+      "maxweight_bridge",
+      "oneway/bicycle",
+      "trolley_wire"
+  ],
+  "geometry": [
+      "line"
+  ],
+  "tags": {
+      "highway": "service",
+      "access": "customers",
+      "surface": "unpaved"
+  },
+  "terms": [
+      "road",
+      "street"
+  ],
+  "matchScore": 0.9,
+  "name": "Customers Unpaved Service Road"
+}
