@@ -482,7 +482,7 @@
     {"key": "access", "value": "no", "description": "🄿 Road Closed, 🄵 Allowed Access", "object_types": ["way"], "icon_url": "https://cdn.jsdelivr.net/gh/mapbox/maki/icons/barrier-15.svg"},
     {"key": "highway", "value": "corridor", "description": "🄿 Indoor Corridor", "object_types": ["way"], "icon_url": "https://cdn.jsdelivr.net/gh/bhousel/temaki/icons/pedestrian.svg"},
     {"key": "traffic_calming", "value": "table", "description": "🄿 Marked Crosswalk (Raised) (unsearchable), 🄿 Marked Crosswalk (Raised), 🄿 Unmarked Crossing (Raised), 🄿 Speed Table", "object_types": ["node"], "icon_url": "https://cdn.jsdelivr.net/gh/bhousel/temaki/icons/pedestrian.svg"},
-    {"key": "crossing", "value": "zebra", "description": "🄿 Marked Crosswalk (unsearchable), 🄳 ➜ crossing=marked", "object_types": ["node"], "icon_url": "https://cdn.jsdelivr.net/gh/bhousel/temaki/icons/pedestrian.svg"},
+    {"key": "crossing", "value": "zebra", "description": "🄿 Marked Crosswalk (unsearchable)", "object_types": ["node"], "icon_url": "https://cdn.jsdelivr.net/gh/bhousel/temaki/icons/pedestrian.svg"},
     {"key": "crossing", "value": "marked", "description": "🄿 Marked Crosswalk, 🄿 Marked Cycle Crossing", "object_types": ["node"], "icon_url": "https://cdn.jsdelivr.net/gh/bhousel/temaki/icons/pedestrian.svg"},
     {"key": "crossing", "value": "unmarked", "description": "🄿 Unmarked Crossing, 🄿 Unmarked Cycle Crossing", "object_types": ["node"], "icon_url": "https://cdn.jsdelivr.net/gh/bhousel/temaki/icons/pedestrian.svg"},
     {"key": "highway", "value": "cycleway", "description": "🄿 Cycle Path", "object_types": ["way"], "icon_url": "https://cdn.jsdelivr.net/gh/openstreetmap/iD@master/svg/fontawesome/fas-biking.svg"},
