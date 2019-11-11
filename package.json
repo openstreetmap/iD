@@ -107,6 +107,7 @@
   "greenkeeper": {
     "label": "chore-greenkeeper",
     "ignore": [
+      "object-inspect",
       "pannellum",
       "sinon"
     ]
