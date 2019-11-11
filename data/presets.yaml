@@ -7802,6 +7802,11 @@ en:
         name: Shoe Store
         # 'terms: boots,cleats,clogs,heels,loafers,oxfords,sneakers'
         terms: '<translate with synonyms or related terms for ''Shoe Store'', separated by commas>'
+      shop/spices:
+        # shop=spices
+        name: Spice Shop
+        # 'terms: chili,cinnamon,curry,ginger,herbs,pepper,saffron,salt,spice store,spices,turmeric,wasabi'
+        terms: '<translate with synonyms or related terms for ''Spice Shop'', separated by commas>'
       shop/sports:
         # shop=sports
         name: Sporting Goods Store
