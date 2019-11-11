@@ -1078,6 +1078,10 @@
       "replace": {"amenity": "townhall", "townhall:type": "village"}
     },
     {
+      "old": {"type": "audio", "amenity": "studio"},
+      "replace": {"studio": "audio"}
+    },
+    {
       "old": {"type": "broad_leaved"},
       "replace": {"leaf_type": "broadleaved"}
     },
@@ -1108,6 +1112,10 @@
     {
       "old": {"type": "strato"},
       "replace": {"volcano:type": "stratovolcano"}
+    },
+    {
+      "old": {"type": "video", "amenity": "studio"},
+      "replace": {"studio": "video"}
     },
     {
       "old": {"unnamed": "*"},
