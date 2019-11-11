@@ -5,6 +5,7 @@
         "ref_route",
         "network_bicycle",
         "cycle_network",
+        "network/type",
         "to",
         "from"
     ],

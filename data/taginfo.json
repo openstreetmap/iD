@@ -1577,6 +1577,7 @@
     {"key": "network", "value": "nhn", "description": "🄵 Network Type"},
     {"key": "network", "value": "ihn", "description": "🄵 Network Type"},
     {"key": "network", "description": "🄵 Network"},
+    {"key": "network:type", "description": "🄵 Network Type"},
     {"key": "not:name", "description": "🄵 Incorrect Names"},
     {"key": "note", "description": "🄵 Note"},
     {"key": "oneway", "value": "yes", "description": "🄵 One Way"},

@@ -3675,6 +3675,10 @@
                     "label": "Network",
                     "terms": ""
                 },
+                "network/type": {
+                    "label": "Network Type",
+                    "terms": ""
+                },
                 "not/name": {
                     "label": "Incorrect Names",
                     "terms": "common mistake names,wrong names"
