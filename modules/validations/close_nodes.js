@@ -134,8 +134,8 @@ export function validationCloseNodes(context) {
                 if (nearby.loc === node.loc ||
                     geoSphericalDistance(node.loc, nearby.loc) < pointThresholdMeters) {
 
-                    // allow very close points if the z-axis varies
-                    var zAxisKeys = { layer: true, level: true };
+                    // allow very close points if tags indicate the z-axis might vary
+                    var zAxisKeys = { layer: true, level: true, 'addr:housenumber': true, 'addr:unit': true };
                     var zAxisDifferentiates = false;
                     for (var key in zAxisKeys) {
                         var nodeValue = node.tags[key] || '0';
