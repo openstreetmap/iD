@@ -62,8 +62,7 @@ function buildBundle() {
         }),
         nodeResolve({
           mainFields: ['module', 'main'],
-          browser: false,
-          dedupe: ['object-inspect']
+          browser: false
         }),
         commonjs(),
         json({ indent: '' }),

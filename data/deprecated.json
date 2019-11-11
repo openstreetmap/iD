@@ -1078,8 +1078,16 @@
       "replace": {"amenity": "townhall", "townhall:type": "village"}
     },
     {
+      "old": {"type": "audio", "amenity": "studio"},
+      "replace": {"studio": "audio"}
+    },
+    {
       "old": {"type": "broad_leaved"},
       "replace": {"leaf_type": "broadleaved"}
+    },
+    {
+      "old": {"type": "caldera"},
+      "replace": {"volcano:type": "caldera"}
     },
     {
       "old": {"type": "conifer"},
@@ -1090,8 +1098,32 @@
       "replace": {"leaf_cycle": "deciduous"}
     },
     {
+      "old": {"type": "extinct"},
+      "replace": {"volcano:status": "extinct"}
+    },
+    {
+      "old": {"type": "scoria"},
+      "replace": {"volcano:type": "scoria"}
+    },
+    {
+      "old": {"type": "shield"},
+      "replace": {"volcano:type": "shield"}
+    },
+    {
+      "old": {"type": "strato"},
+      "replace": {"volcano:type": "stratovolcano"}
+    },
+    {
+      "old": {"type": "video", "amenity": "studio"},
+      "replace": {"studio": "video"}
+    },
+    {
       "old": {"unnamed": "*"},
       "replace": {"noname": "$1"}
+    },
+    {
+      "old": {"volcano": "extinct"},
+      "replace": {"volcano:status": "extinct"}
     },
     {
       "old": {"wall_type": "noise_barrier"},
