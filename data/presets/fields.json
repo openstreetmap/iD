@@ -249,6 +249,7 @@
     "network_horse": {"key": "network", "type": "combo", "label": "Network Type", "placeholder": "Local, Regional, National, International", "strings": {"options": {"lhn": "Local", "rhn": "Regional", "nhn": "National", "ihn": "International"}}},
     "network_road": {"key": "network", "type": "networkCombo", "label": "Network"},
     "network": {"key": "network", "type": "text", "label": "Network"},
+    "network/type": {"key": "network:type", "type": "combo", "label": "Network Type", "prerequisiteTag": {"key": "network"}},
     "not/name": {"key": "not:name", "type": "semiCombo", "label": "Incorrect Names", "terms": ["common mistake names", "wrong names"]},
     "note": {"key": "note", "type": "textarea", "universal": true, "icon": "note", "label": "Note", "terms": ["comment"]},
     "office": {"key": "office", "type": "typeCombo", "label": "Type"},

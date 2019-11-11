@@ -56,6 +56,7 @@ export function validationCloseNodes(context) {
                 (way.isClosed() && way.nodes.length <= 4)) return false;
 
             var featureType = featureTypeForWay(way);
+            // don't flag boundaries since they might be highly detailed and can't be easily verified
             if (featureType === 'boundary') return false;
 
             var bbox = way.extent(graph).bbox();
@@ -134,8 +135,8 @@ export function validationCloseNodes(context) {
                 if (nearby.loc === node.loc ||
                     geoSphericalDistance(node.loc, nearby.loc) < pointThresholdMeters) {
 
-                    // allow very close points if the z-axis varies
-                    var zAxisKeys = { layer: true, level: true };
+                    // allow very close points if tags indicate the z-axis might vary
+                    var zAxisKeys = { layer: true, level: true, 'addr:housenumber': true, 'addr:unit': true };
                     var zAxisDifferentiates = false;
                     for (var key in zAxisKeys) {
                         var nodeValue = node.tags[key] || '0';

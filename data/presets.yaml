@@ -1361,6 +1361,10 @@ en:
         # network=*
         label: Network
         terms: '[translate with synonyms or related terms for ''Network'', separated by commas]'
+      network/type:
+        # 'network:type=*'
+        label: Network Type
+        terms: '[translate with synonyms or related terms for ''Network Type'', separated by commas]'
       network_bicycle:
         # network=*
         label: Network Type
@@ -4409,9 +4413,6 @@ en:
         # craft=insulation
         name: Insulator
         terms: '<translate with synonyms or related terms for ''Insulator'', separated by commas>'
-      craft/jeweler:
-        # craft=jeweler
-        name: Jeweler
       craft/joiner:
         # craft=joiner
         name: Joiner
@@ -4428,9 +4429,6 @@ en:
         # craft=metal_construction
         name: Metal Construction
         terms: '<translate with synonyms or related terms for ''Metal Construction'', separated by commas>'
-      craft/optician:
-        # craft=optician
-        name: Optician
       craft/painter:
         # craft=painter
         name: Painter

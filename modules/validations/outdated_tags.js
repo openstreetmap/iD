@@ -38,7 +38,7 @@ export function validationOutdatedTags(context) {
         // upgrade preset..
         if (preset.replacement) {
             var newPreset = context.presets().item(preset.replacement);
-            graph = actionChangePreset(entity.id, preset, newPreset, true)(graph);  // true = skip field defaults
+            graph = actionChangePreset(entity.id, preset, newPreset)(graph);
             entity = graph.entity(entity.id);
             preset = newPreset;
         }
@@ -103,7 +103,8 @@ export function validationOutdatedTags(context) {
                 if (match.d) continue;
 
                 var brand = brands.brands[match.kvnd];
-                if (brand && brand.tags['brand:wikidata']) {
+                if (brand && brand.tags['brand:wikidata'] &&
+                    brand.tags['brand:wikidata'] !== entity.tags['not:brand:wikidata']) {
                     subtype = 'noncanonical_brand';
 
                     var keepTags = ['takeaway'].reduce(function(acc, k) {
