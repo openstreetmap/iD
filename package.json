@@ -84,7 +84,7 @@
     "mocha-phantomjs-core": "^2.1.0",
     "name-suggestion-index": "3.4.0",
     "npm-run-all": "^4.0.0",
-    "object-inspect": "0.4.0",
+    "object-inspect": "1.7.0",
     "osm-community-index": "1.0.0",
     "phantomjs-prebuilt": "~2.1.11",
     "request": "^2.88.0",
