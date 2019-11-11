@@ -56,6 +56,7 @@ export function validationCloseNodes(context) {
                 (way.isClosed() && way.nodes.length <= 4)) return false;
 
             var featureType = featureTypeForWay(way);
+            // don't flag boundaries since they might be highly detailed and can't be easily verified
             if (featureType === 'boundary') return false;
 
             var bbox = way.extent(graph).bbox();
