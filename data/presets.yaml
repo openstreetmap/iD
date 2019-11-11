@@ -3845,6 +3845,15 @@ en:
         name: Drop Tower
         # 'terms: theme park,amusement ride,gondola,tower,big drop'
         terms: '<translate with synonyms or related terms for ''Drop Tower'', separated by commas>'
+      attraction/kiddie_ride:
+        # attraction=kiddie_ride
+        name: Kiddie Ride
+        terms: '<translate with synonyms or related terms for ''Kiddie Ride'', separated by commas>'
+      attraction/log_flume:
+        # attraction=log_flume
+        name: Log Flume
+        # 'terms: theme park,amusement ride,flume'
+        terms: '<translate with synonyms or related terms for ''Log Flume'', separated by commas>'
       attraction/maze:
         # attraction=maze
         name: Maze
@@ -3870,6 +3879,11 @@ en:
         name: Summer Toboggan
         # 'terms: alpine slide,mountain coaster'
         terms: '<translate with synonyms or related terms for ''Summer Toboggan'', separated by commas>'
+      attraction/swing_carousel:
+        # attraction=swing_carousel
+        name: Swing Carousel
+        # 'terms: theme park,amusement ride,carousel,tower,carousel tower'
+        terms: '<translate with synonyms or related terms for ''Swing Carousel'', separated by commas>'
       attraction/train:
         # attraction=train
         name: Tourist Train
