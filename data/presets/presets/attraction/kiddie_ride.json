@@ -1,0 +1,21 @@
+{
+    "icon": "temaki-amusement_park",
+    "fields": [
+        "{attraction}",
+        "fee",
+        "payment_multi_fee",
+        "charge_fee"
+    ],
+    "moreFields": [
+        "{attraction}",
+        "max_age",
+        "min_age"
+    ],
+    "geometry": [
+        "point"
+    ],
+    "tags": {
+        "attraction": "kiddie_ride"
+    },
+    "name": "Kiddie Ride"
+}

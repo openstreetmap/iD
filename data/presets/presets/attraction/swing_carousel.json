@@ -1,0 +1,27 @@
+{
+    "icon": "temaki-tower",
+    "fields": [
+        "{attraction}",
+        "height"
+    ],
+    "moreFields": [
+        "{attraction}",
+        "max_age",
+        "min_age"
+    ],
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "terms": [
+        "theme park",
+        "amusement ride",
+        "carousel",
+        "tower",
+        "carousel tower"
+    ],
+    "tags": {
+        "attraction": "swing_carousel"
+    },
+    "name": "Swing Carousel"
+}

@@ -5893,6 +5893,14 @@
                     "name": "Drop Tower",
                     "terms": "theme park,amusement ride,gondola,tower,big drop"
                 },
+                "attraction/kiddie_ride": {
+                    "name": "Kiddie Ride",
+                    "terms": ""
+                },
+                "attraction/log_flume": {
+                    "name": "Log Flume",
+                    "terms": "theme park,amusement ride,flume"
+                },
                 "attraction/maze": {
                     "name": "Maze",
                     "terms": "theme park,amusement ride,labyrinth"
@@ -5912,6 +5920,10 @@
                 "attraction/summer_toboggan": {
                     "name": "Summer Toboggan",
                     "terms": "alpine slide,mountain coaster"
+                },
+                "attraction/swing_carousel": {
+                    "name": "Swing Carousel",
+                    "terms": "theme park,amusement ride,carousel,tower,carousel tower"
                 },
                 "attraction/train": {
                     "name": "Tourist Train",
