@@ -1073,6 +1073,7 @@
     {"key": "shop", "value": "second_hand", "description": "🄿 Consignment/Thrift Store", "object_types": ["node", "area"], "icon_url": "https://cdn.jsdelivr.net/gh/mapbox/maki/icons/shop-15.svg"},
     {"key": "shop", "value": "sewing", "description": "🄿 Sewing Supply Shop", "object_types": ["node", "area"], "icon_url": "https://cdn.jsdelivr.net/gh/mapbox/maki/icons/shop-15.svg"},
     {"key": "shop", "value": "shoes", "description": "🄿 Shoe Store", "object_types": ["node", "area"], "icon_url": "https://cdn.jsdelivr.net/gh/mapbox/maki/icons/shoe-15.svg"},
+    {"key": "shop", "value": "spices", "description": "🄿 Spice Shop", "object_types": ["node", "area"], "icon_url": "https://cdn.jsdelivr.net/gh/mapbox/maki/icons/shop-15.svg"},
     {"key": "shop", "value": "sports", "description": "🄿 Sporting Goods Store", "object_types": ["node", "area"], "icon_url": "https://cdn.jsdelivr.net/gh/openstreetmap/iD@master/svg/fontawesome/fas-futbol.svg"},
     {"key": "shop", "value": "stationery", "description": "🄿 Stationery Store", "object_types": ["node", "area"], "icon_url": "https://cdn.jsdelivr.net/gh/openstreetmap/iD@master/svg/fontawesome/fas-paperclip.svg"},
     {"key": "shop", "value": "storage_rental", "description": "🄿 Storage Rental", "object_types": ["node", "area"], "icon_url": "https://cdn.jsdelivr.net/gh/openstreetmap/iD@master/svg/fontawesome/fas-warehouse.svg"},

@@ -9093,6 +9093,10 @@
                     "name": "Shoe Store",
                     "terms": "boots,cleats,clogs,heels,loafers,oxfords,sneakers"
                 },
+                "shop/spices": {
+                    "name": "Spice Shop",
+                    "terms": "chili,cinnamon,curry,ginger,herbs,pepper,saffron,salt,spice store,spices,turmeric,wasabi"
+                },
                 "shop/sports": {
                     "name": "Sporting Goods Store",
                     "terms": "athletics"

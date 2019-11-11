@@ -1130,6 +1130,7 @@
     "shop/second_hand": {"icon": "maki-shop", "fields": ["{shop}", "second_hand"], "geometry": ["point", "area"], "terms": ["secondhand", "second hand", "resale", "thrift", "used"], "tags": {"shop": "second_hand"}, "name": "Consignment/Thrift Store"},
     "shop/sewing": {"icon": "maki-shop", "geometry": ["point", "area"], "terms": ["haberdashery"], "tags": {"shop": "sewing"}, "name": "Sewing Supply Shop"},
     "shop/shoes": {"icon": "maki-shoe", "geometry": ["point", "area"], "tags": {"shop": "shoes"}, "terms": ["boots", "cleats", "clogs", "heels", "loafers", "oxfords", "sneakers"], "name": "Shoe Store"},
+    "shop/spices": {"icon": "maki-shop", "geometry": ["point", "area"], "terms": ["chili", "cinnamon", "curry", "ginger", "herbs", "pepper", "saffron", "salt", "spice store", "spices", "turmeric", "wasabi"], "tags": {"shop": "spices"}, "name": "Spice Shop"},
     "shop/sports": {"icon": "fas-futbol", "fields": ["name", "operator", "sport", "{shop}"], "geometry": ["point", "area"], "tags": {"shop": "sports"}, "terms": ["athletics"], "name": "Sporting Goods Store"},
     "shop/stationery": {"icon": "fas-paperclip", "geometry": ["point", "area"], "terms": ["card", "paper"], "tags": {"shop": "stationery"}, "name": "Stationery Store"},
     "shop/storage_rental": {"icon": "fas-warehouse", "geometry": ["point", "area"], "tags": {"shop": "storage_rental"}, "terms": ["garages"], "name": "Storage Rental"},

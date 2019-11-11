@@ -13,11 +13,13 @@
         "pepper",
         "saffron",
         "salt",
+        "spice store",
+        "spices",
         "turmeric",
         "wasabi"
     ],
     "tags": {
         "shop": "spices"
     },
-    "name": "Spice Store"
+    "name": "Spice Shop"
 }
