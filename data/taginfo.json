@@ -280,7 +280,7 @@
     {"key": "attraction", "value": "dark_ride", "description": "🄿 Dark Ride", "object_types": ["node", "way", "area"], "icon_url": "https://cdn.jsdelivr.net/gh/mapbox/maki/icons/rail-metro-15.svg"},
     {"key": "attraction", "value": "drop_tower", "description": "🄿 Drop Tower", "object_types": ["node", "area"], "icon_url": "https://cdn.jsdelivr.net/gh/bhousel/temaki/icons/tower.svg"},
     {"key": "attraction", "value": "kiddie_ride", "description": "🄿 Kiddie Ride", "object_types": ["node"], "icon_url": "https://cdn.jsdelivr.net/gh/bhousel/temaki/icons/amusement_park.svg"},
-    {"key": "attraction", "value": "log_flume", "description": "🄿 Log Flume", "object_types": ["node", "area"], "icon_url": "https://cdn.jsdelivr.net/gh/bhousel/temaki/icons/tower.svg"},
+    {"key": "attraction", "value": "log_flume", "description": "🄿 Log Flume", "object_types": ["node", "area"], "icon_url": "https://cdn.jsdelivr.net/gh/mapbox/maki/icons/ferry-15.svg"},
     {"key": "attraction", "value": "maze", "description": "🄿 Maze", "object_types": ["node", "area"], "icon_url": "https://cdn.jsdelivr.net/gh/mapbox/maki/icons/amusement-park-15.svg"},
     {"key": "attraction", "value": "pirate_ship", "description": "🄿 Pirate Ship", "object_types": ["node"], "icon_url": "https://cdn.jsdelivr.net/gh/mapbox/maki/icons/danger-15.svg"},
     {"key": "attraction", "value": "river_rafting", "description": "🄿 River Rafting", "object_types": ["node", "way"], "icon_url": "https://cdn.jsdelivr.net/gh/mapbox/maki/icons/ferry-15.svg"},
