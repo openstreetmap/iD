@@ -6133,14 +6133,8 @@
                     "name": "Craft",
                     "terms": ""
                 },
-                "craft/jeweler": {
-                    "name": "Jeweler"
-                },
                 "craft/locksmith": {
                     "name": "Locksmith"
-                },
-                "craft/optician": {
-                    "name": "Optician"
                 },
                 "craft/tailor": {
                     "name": "Tailor"

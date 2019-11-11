@@ -237,12 +237,20 @@
       "replace": {"office": "consulting"}
     },
     {
+      "old": {"craft": "catering"},
+      "replace": {"craft": "caterer"}
+    },
+    {
       "old": {"craft": "glass"},
       "replace": {"craft": "glaziery"}
     },
     {
-      "old": {"craft": "catering"},
-      "replace": {"craft": "caterer"}
+      "old": {"craft": "jeweler"},
+      "replace": {"shop": "jewelry"}
+    },
+    {
+      "old": {"craft": "optician"},
+      "replace": {"shop": "optician"}
     },
     {
       "old": {"craft": "sculpter"},
