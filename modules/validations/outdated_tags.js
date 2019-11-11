@@ -38,7 +38,7 @@ export function validationOutdatedTags(context) {
         // upgrade preset..
         if (preset.replacement) {
             var newPreset = context.presets().item(preset.replacement);
-            graph = actionChangePreset(entity.id, preset, newPreset, true)(graph);  // true = skip field defaults
+            graph = actionChangePreset(entity.id, preset, newPreset)(graph);
             entity = graph.entity(entity.id);
             preset = newPreset;
         }
