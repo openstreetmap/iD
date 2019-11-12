@@ -1367,7 +1367,7 @@ en:
         terms: '[translate with synonyms or related terms for ''Network Type'', separated by commas]'
       network_bicycle:
         # network=*
-        label: Network Type
+        label: Network Class
         options:
           # network=icn
           icn: International
@@ -1381,7 +1381,7 @@ en:
         placeholder: 'Local, Regional, National, International'
       network_foot:
         # network=*
-        label: Network Type
+        label: Network Class
         options:
           # network=iwn
           iwn: International
@@ -1395,7 +1395,7 @@ en:
         placeholder: 'Local, Regional, National, International'
       network_horse:
         # network=*
-        label: Network Type
+        label: Network Class
         options:
           # network=ihn
           ihn: International

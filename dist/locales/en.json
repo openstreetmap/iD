@@ -3639,7 +3639,7 @@
                     "label": "Natural"
                 },
                 "network_bicycle": {
-                    "label": "Network Type",
+                    "label": "Network Class",
                     "placeholder": "Local, Regional, National, International",
                     "options": {
                         "lcn": "Local",
@@ -3649,7 +3649,7 @@
                     }
                 },
                 "network_foot": {
-                    "label": "Network Type",
+                    "label": "Network Class",
                     "placeholder": "Local, Regional, National, International",
                     "options": {
                         "lwn": "Local",
@@ -3659,7 +3659,7 @@
                     }
                 },
                 "network_horse": {
-                    "label": "Network Type",
+                    "label": "Network Class",
                     "placeholder": "Local, Regional, National, International",
                     "options": {
                         "lhn": "Local",
