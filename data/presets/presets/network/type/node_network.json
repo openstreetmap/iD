@@ -1,0 +1,22 @@
+{
+    "fields": [
+        "name",
+        "rwn_ref",
+        "rcn_ref"
+    ],
+    "geometry": [
+        "vertex"
+    ],
+    "tags": {
+        "network:type": "node_network"
+    },
+    "terms": [
+        "node network",
+        "rcn",
+        "rwn"
+    ],
+    "countryCodes": [
+        "be", "de", "lu", "nl"
+    ],
+    "name": "Recreational Network Node"
+}

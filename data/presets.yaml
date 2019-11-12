@@ -1739,6 +1739,9 @@ en:
       rating:
         # rating=*
         label: Power Rating
+      rcn_ref:
+        # rcn_ref=*
+        label: Cycling Code
       recycling_accepts:
         # 'recycling:=*'
         label: Accepts
@@ -1847,6 +1850,9 @@ en:
       route_master:
         # route_master=*
         label: Type
+      rwn_ref:
+        # rwn_ref=*
+        label: Walking Code
       sac_scale:
         # sac_scale=*
         label: Hiking Difficulty
@@ -6329,6 +6335,11 @@ en:
         name: Wood
         # 'terms: tree'
         terms: '<translate with synonyms or related terms for ''Wood'', separated by commas>'
+      network/type/node_network:
+        # 'network:type=node_network'
+        name: Recreational Network Node
+        # 'terms: node network,rcn,rwn'
+        terms: '<translate with synonyms or related terms for ''Recreational Network Node'', separated by commas>'
       noexit/yes:
         # noexit=yes
         name: No Exit

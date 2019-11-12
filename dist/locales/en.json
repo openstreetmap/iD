@@ -3935,6 +3935,9 @@
                 "rating": {
                     "label": "Power Rating"
                 },
+                "rcn_ref": {
+                    "label": "Cycling Code"
+                },
                 "recycling_accepts": {
                     "label": "Accepts"
                 },
@@ -4035,6 +4038,9 @@
                 },
                 "route": {
                     "label": "Type"
+                },
+                "rwn_ref": {
+                    "label": "Walking Code"
                 },
                 "sac_scale": {
                     "label": "Hiking Difficulty",
@@ -7879,6 +7885,10 @@
                 "natural/wood": {
                     "name": "Wood",
                     "terms": "tree"
+                },
+                "network/type/node_network": {
+                    "name": "Recreational Network Node",
+                    "terms": "node network,rcn,rwn"
                 },
                 "noexit/yes": {
                     "name": "No Exit",
