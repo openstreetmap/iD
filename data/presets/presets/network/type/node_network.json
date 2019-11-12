@@ -18,5 +18,6 @@
     "countryCodes": [
         "be", "de", "lu", "nl"
     ],
+    "matchScore": 0.2,
     "name": "Recreational Network Node"
 }
