@@ -162,16 +162,18 @@ export function validationCloseNodes(context) {
                         },
                         reference: showReference,
                         entityIds: [node.id, nearby.id],
-                        fixes: [
-                            new validationIssueFix({
-                                icon: 'iD-operation-disconnect',
-                                title: t('issues.fix.move_points_apart.title')
-                            }),
-                            new validationIssueFix({
-                                icon: 'iD-icon-layers',
-                                title: t('issues.fix.use_different_layers_or_levels.title')
-                            })
-                        ]
+                        dynamicFixes: function() {
+                            return [
+                                new validationIssueFix({
+                                    icon: 'iD-operation-disconnect',
+                                    title: t('issues.fix.move_points_apart.title')
+                                }),
+                                new validationIssueFix({
+                                    icon: 'iD-icon-layers',
+                                    title: t('issues.fix.use_different_layers_or_levels.title')
+                                })
+                            ];
+                        }
                     }));
                 }
             }

@@ -18,44 +18,6 @@ export function validationDisconnectedWay() {
         var routingIslandWays = routingIslandForEntity(entity);
         if (!routingIslandWays) return [];
 
-        var fixes = [];
-
-        var isSingle = routingIslandWays.size === 1;
-
-        if (isSingle) {
-
-            if (entity.type === 'way' && !entity.isClosed()) {
-
-                var startFix = makeContinueDrawingFixIfAllowed(entity.first(), 'start');
-                if (startFix) fixes.push(startFix);
-
-                var endFix = makeContinueDrawingFixIfAllowed(entity.last(), 'end');
-                if (endFix) fixes.push(endFix);
-            }
-            if (!fixes.length) {
-                fixes.push(new validationIssueFix({
-                    title: t('issues.fix.connect_feature.title')
-                }));
-            }
-
-            fixes.push(new validationIssueFix({
-                icon: 'iD-operation-delete',
-                title: t('issues.fix.delete_feature.title'),
-                entityIds: [entity.id],
-                onClick: function(context) {
-                    var id = this.issue.entityIds[0];
-                    var operation = operationDelete([id], context);
-                    if (!operation.disabled()) {
-                        operation();
-                    }
-                }
-            }));
-        } else {
-            fixes.push(new validationIssueFix({
-                title: t('issues.fix.connect_features.title')
-            }));
-        }
-
         return [new validationIssue({
             type: type,
             subtype: 'highway',
@@ -69,8 +31,52 @@ export function validationDisconnectedWay() {
             },
             reference: showReference,
             entityIds: Array.from(routingIslandWays).map(function(way) { return way.id; }),
-            fixes: fixes
+            dynamicFixes: makeFixes
         })];
+
+
+        function makeFixes(context) {
+
+            var fixes = [];
+
+            var singleEntity = this.entityIds.length === 1 && context.hasEntity(this.entityIds[0]);
+
+            if (singleEntity) {
+
+                if (singleEntity.type === 'way' && !singleEntity.isClosed()) {
+
+                    var startFix = makeContinueDrawingFixIfAllowed(singleEntity.first(), 'start');
+                    if (startFix) fixes.push(startFix);
+
+                    var endFix = makeContinueDrawingFixIfAllowed(singleEntity.last(), 'end');
+                    if (endFix) fixes.push(endFix);
+                }
+                if (!fixes.length) {
+                    fixes.push(new validationIssueFix({
+                        title: t('issues.fix.connect_feature.title')
+                    }));
+                }
+
+                fixes.push(new validationIssueFix({
+                    icon: 'iD-operation-delete',
+                    title: t('issues.fix.delete_feature.title'),
+                    entityIds: [singleEntity.id],
+                    onClick: function(context) {
+                        var id = this.issue.entityIds[0];
+                        var operation = operationDelete([id], context);
+                        if (!operation.disabled()) {
+                            operation();
+                        }
+                    }
+                }));
+            } else {
+                fixes.push(new validationIssueFix({
+                    title: t('issues.fix.connect_features.title')
+                }));
+            }
+
+            return fixes;
+        }
 
 
         function showReference(selection) {

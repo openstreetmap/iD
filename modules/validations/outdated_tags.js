@@ -144,15 +144,17 @@ export function validationOutdatedTags(context) {
             reference: showReference,
             entityIds: [entity.id],
             hash: JSON.stringify(tagDiff),
-            fixes: [
-                new validationIssueFix({
-                    autoArgs: autoArgs,
-                    title: t('issues.fix.upgrade_tags.title'),
-                    onClick: function(context) {
-                        context.perform(doUpgrade, t('issues.fix.upgrade_tags.annotation'));
-                    }
-                })
-            ]
+            dynamicFixes: function() {
+                return [
+                    new validationIssueFix({
+                        autoArgs: autoArgs,
+                        title: t('issues.fix.upgrade_tags.title'),
+                        onClick: function(context) {
+                            context.perform(doUpgrade, t('issues.fix.upgrade_tags.annotation'));
+                        }
+                    })
+                ];
+            }
         })];
 
 
@@ -245,15 +247,17 @@ export function validationOutdatedTags(context) {
             message: showMessage,
             reference: showReference,
             entityIds: [outerWay.id, multipolygon.id],
-            fixes: [
-                new validationIssueFix({
-                    autoArgs: [doUpgrade, t('issues.fix.move_tags.annotation')],
-                    title: t('issues.fix.move_tags.title'),
-                    onClick: function(context) {
-                        context.perform(doUpgrade, t('issues.fix.move_tags.annotation'));
-                    }
-                })
-            ]
+            dynamicFixes: function() {
+                return [
+                    new validationIssueFix({
+                        autoArgs: [doUpgrade, t('issues.fix.move_tags.annotation')],
+                        title: t('issues.fix.move_tags.title'),
+                        onClick: function(context) {
+                            context.perform(doUpgrade, t('issues.fix.move_tags.annotation'));
+                        }
+                    })
+                ];
+            }
         })];
 
 

@@ -1,4 +1,5 @@
 import { geoExtent } from '../../geo';
+import { t } from '../../util/locale';
 
 export function validationIssue(attrs) {
     this.type = attrs.type;                // required - name of rule that created the issue (e.g. 'missing_tag')
@@ -9,7 +10,7 @@ export function validationIssue(attrs) {
     this.entityIds = attrs.entityIds;      // optional - array of IDs of entities involved in the issue
     this.loc = attrs.loc;                  // optional - [lon, lat] to zoom in on to see the issue
     this.data = attrs.data;                // optional - object containing extra data for the fixes
-    this.fixes = attrs.fixes || [];              // optional - array of validationIssueFix objects
+    this.dynamicFixes = attrs.dynamicFixes;// optional - function(context) returning fixes
     this.hash = attrs.hash;                // optional - string to further differentiate the issue
 
     this.id = generateID.apply(this);      // generated - see below
@@ -50,25 +51,42 @@ export function validationIssue(attrs) {
         return null;
     };
 
+    this.fixes = function(context) {
+        var fixes = this.dynamicFixes ? this.dynamicFixes(context) : [];
+        var issue = this;
 
-    if (this.fixes) {   // add a reference in the fixes to the issue for use in fix actions
-        for (var i = 0; i < this.fixes.length; i++) {
-            var fix = this.fixes[i];
-            fix.issue = this;
-            if (fix.autoArgs) {
-                this.autoFix = fix;
-            }
+        if (issue.severity === 'warning') {
+            // allow ignoring any issue that's not an error
+            fixes.push(new validationIssueFix({
+                title: t('issues.fix.ignore_issue.title'),
+                icon: 'iD-icon-close',
+                onClick: function() {
+                    context.validator().ignoreIssue(this.issue.id);
+                }
+            }));
         }
-    }
+
+        fixes.forEach(function(fix) {
+            fix.id = fix.title;
+            // add a reference to the issue for use in actions
+            fix.issue = issue;
+            if (fix.autoArgs) {
+                issue.autoFix = fix;
+            }
+        });
+        return fixes;
+    };
+
 }
 
 
 export function validationIssueFix(attrs) {
-    this.title = attrs.title;                 // Required
-    this.onClick = attrs.onClick;             // Required
-    this.icon = attrs.icon;                   // Optional - shows 'iD-icon-wrench' if not set
-    this.entityIds = attrs.entityIds || [];   // Optional - Used for hover-higlighting.
-    this.autoArgs = attrs.autoArgs;           // Optional - pass [actions, annotation] arglist if this fix can automatically run
+    this.title = attrs.title;                   // Required
+    this.onClick = attrs.onClick;               // Optional - the function to run to apply the fix
+    this.disabledReason = attrs.disabledReason; // Optional - a string explaining why the fix is unavailable, if any
+    this.icon = attrs.icon;                     // Optional - shows 'iD-icon-wrench' if not set
+    this.entityIds = attrs.entityIds || [];     // Optional - used for hover-higlighting.
+    this.autoArgs = attrs.autoArgs;             // Optional - pass [actions, annotation] arglist if this fix can automatically run
 
-    this.issue = null;    // Generated link - added by ValidationIssue constructor
+    this.issue = null;    // Generated link - added by validationIssue
 }

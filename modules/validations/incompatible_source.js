@@ -40,11 +40,13 @@ export function validationIncompatibleSource() {
                 },
                 reference: getReference(invalidSource.id),
                 entityIds: [entity.id],
-                fixes: [
-                    new validationIssueFix({
-                        title: t('issues.fix.remove_proprietary_data.title')
-                    })
-                ]
+                dynamicFixes: function() {
+                    return [
+                        new validationIssueFix({
+                            title: t('issues.fix.remove_proprietary_data.title')
+                        })
+                    ];
+                }
             }));
         });
 

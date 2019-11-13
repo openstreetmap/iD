@@ -62,37 +62,11 @@ export function validationMissingTag() {
 
         if (!subtype) return [];
 
-        var selectFixType = subtype === 'highway_classification' ? 'select_road_type' : 'select_preset';
-
-        var fixes = [
-            new validationIssueFix({
-                icon: 'iD-icon-search',
-                title: t('issues.fix.' + selectFixType + '.title')/*,
-                onClick: function(context) {
-
-                }*/
-            })
-        ];
-
-        // can always delete if the user created it in the first place..
-        var canDelete = (entity.version === undefined || entity.v !== undefined);
-        fixes.push(
-            new validationIssueFix({
-                icon: 'iD-operation-delete',
-                title: t('issues.fix.delete_feature.title'),
-                onClick: function(context) {
-                    var id = this.issue.entityIds[0];
-                    var operation = operationDelete([id], context);
-                    if (!operation.disabled()) {
-                        operation();
-                    }
-                }
-            })
-        );
-
         var messageID = subtype === 'highway_classification' ? 'unknown_road' : 'missing_tag.' + subtype;
         var referenceID = subtype === 'highway_classification' ? 'unknown_road' : 'missing_tag';
 
+        // can always delete if the user created it in the first place..
+        var canDelete = (entity.version === undefined || entity.v !== undefined);
         var severity = (canDelete && subtype !== 'highway_classification') ? 'error' : 'warning';
 
         return [new validationIssue({
@@ -107,7 +81,43 @@ export function validationMissingTag() {
             },
             reference: showReference,
             entityIds: [entity.id],
-            fixes: fixes
+            dynamicFixes: function(context) {
+
+                var fixes = [];
+
+                var selectFixType = subtype === 'highway_classification' ? 'select_road_type' : 'select_preset';
+
+                fixes.push(new validationIssueFix({
+                    icon: 'iD-icon-search',
+                    title: t('issues.fix.' + selectFixType + '.title')
+                }));
+
+                var deleteOnClick;
+
+                var id = this.entityIds[0];
+                var operation = operationDelete([id], context);
+                var disabledReasonID = operation.disabled();
+                if (!disabledReasonID) {
+                    deleteOnClick = function(context) {
+                        var id = this.issue.entityIds[0];
+                        var operation = operationDelete([id], context);
+                        if (!operation.disabled()) {
+                            operation();
+                        }
+                    };
+                }
+
+                fixes.push(
+                    new validationIssueFix({
+                        icon: 'iD-operation-delete',
+                        title: t('issues.fix.delete_feature.title'),
+                        disabledReason: disabledReasonID ? t('operations.delete.' + disabledReasonID + '.single') : undefined,
+                        onClick: deleteOnClick
+                    })
+                );
+
+                return fixes;
+            }
         })];
 
 

@@ -27,11 +27,13 @@ export function validationHelpRequest(context) {
                 var entity = context.hasEntity(this.entityIds[0]);
                 return entity ? t('issues.fixme_tag.message', { feature: utilDisplayLabel(entity, context) }) : '';
             },
-            fixes: [
-                new validationIssueFix({
-                    title: t('issues.fix.address_the_concern.title')
-                })
-            ],
+            dynamicFixes: function() {
+                return [
+                    new validationIssueFix({
+                        title: t('issues.fix.address_the_concern.title')
+                    })
+                ];
+            },
             reference: showReference,
             entityIds: [entity.id]
         })];
