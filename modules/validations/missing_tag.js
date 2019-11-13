@@ -99,7 +99,8 @@ export function validationMissingTag() {
 
                 var id = this.entityIds[0];
                 var operation = operationDelete([id], context);
-                if (!operation.disabled()) {
+                var disabledReasonID = operation.disabled();
+                if (!disabledReasonID) {
                     deleteOnClick = function(context) {
                         var id = this.issue.entityIds[0];
                         var operation = operationDelete([id], context);
@@ -113,6 +114,7 @@ export function validationMissingTag() {
                     new validationIssueFix({
                         icon: 'iD-operation-delete',
                         title: t('issues.fix.delete_feature.title'),
+                        disabledReason: disabledReasonID ? t('operations.delete.' + disabledReasonID + '.single') : undefined,
                         onClick: deleteOnClick
                     })
                 );

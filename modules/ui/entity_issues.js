@@ -255,6 +255,12 @@ export function uiEntityIssues(context) {
         fixesEnter.merge(fixes)
             .classed('actionable', function(d) {
                 return d.onClick;
+            })
+            .attr('title', function(d) {
+                if (d.disabledReason) {
+                    return d.disabledReason;
+                }
+                return null;
             });
     }
 
