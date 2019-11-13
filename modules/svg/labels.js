@@ -18,7 +18,9 @@ import { utilDisplayName, utilDisplayNameForPath, utilEntitySelector } from '../
 export function svgLabels(projection, context) {
     var path = d3_geoPath(projection);
     var detected = utilDetect();
-    var baselineHack = (detected.ie || detected.browser.toLowerCase() === 'edge');
+    var baselineHack = (detected.ie ||
+        detected.browser.toLowerCase() === 'edge' ||
+        (detected.browser.toLowerCase() === 'firefox' && detected.version >= 70));
     var _rdrawn = new RBush();
     var _rskipped = new RBush();
     var _textWidthCache = {};
