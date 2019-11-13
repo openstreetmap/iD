@@ -359,44 +359,6 @@ export function validationCrossingWays(context) {
             crossingTypeID += '_connectable';
         }
 
-        var fixes = [];
-        if (connectionTags) {
-            fixes.push(makeConnectWaysFix(connectionTags));
-        }
-
-        var useFixIcon = 'iD-icon-layers';
-        var useFixID;
-        if (isCrossingIndoors) {
-            useFixID = 'use_different_levels';
-        } else if (isCrossingTunnels || isCrossingBridges) {
-            useFixID = 'use_different_layers';
-        // don't recommend bridges for waterways even though they're okay
-        } else if ((allowsBridge(featureType1) && featureType1 !== 'waterway') ||
-                (allowsBridge(featureType2) && featureType2 !== 'waterway')) {
-            useFixID = 'use_bridge_or_tunnel';
-            useFixIcon = 'maki-bridge';
-        } else if (allowsTunnel(featureType1) || allowsTunnel(featureType2)) {
-            useFixID = 'use_tunnel';
-        } else {
-            useFixID = 'use_different_layers';
-        }
-        if (useFixID === 'use_different_layers' ||
-            featureType1 === 'building' ||
-            featureType2 === 'building') {
-            fixes.push(makeChangeLayerFix('higher'));
-            fixes.push(makeChangeLayerFix('lower'));
-        }
-        if (useFixID !== 'use_different_layers') {
-            fixes.push(new validationIssueFix({
-                icon: useFixIcon,
-                title: t('issues.fix.' + useFixID + '.title')
-            }));
-        }
-        fixes.push(new validationIssueFix({
-            icon: 'iD-operation-move',
-            title: t('issues.fix.reposition_features.title')
-        }));
-
         return new validationIssue({
             type: type,
             subtype: subtype,
@@ -427,7 +389,48 @@ export function validationCrossingWays(context) {
                 // ensure the correct connection tags are added in the fix
                 JSON.stringify(connectionTags),
             loc: crossing.crossPoint,
-            fixes: fixes
+            dynamicFixes: function() {
+                var fixes = [];
+
+                if (connectionTags) {
+                    fixes.push(makeConnectWaysFix(connectionTags));
+                }
+
+                var useFixIcon = 'iD-icon-layers';
+                var useFixID;
+                if (isCrossingIndoors) {
+                    useFixID = 'use_different_levels';
+                } else if (isCrossingTunnels || isCrossingBridges) {
+                    useFixID = 'use_different_layers';
+                // don't recommend bridges for waterways even though they're okay
+                } else if ((allowsBridge(featureType1) && featureType1 !== 'waterway') ||
+                        (allowsBridge(featureType2) && featureType2 !== 'waterway')) {
+                    useFixID = 'use_bridge_or_tunnel';
+                    useFixIcon = 'maki-bridge';
+                } else if (allowsTunnel(featureType1) || allowsTunnel(featureType2)) {
+                    useFixID = 'use_tunnel';
+                } else {
+                    useFixID = 'use_different_layers';
+                }
+                if (useFixID === 'use_different_layers' ||
+                    featureType1 === 'building' ||
+                    featureType2 === 'building') {
+                    fixes.push(makeChangeLayerFix('higher'));
+                    fixes.push(makeChangeLayerFix('lower'));
+                }
+                if (useFixID !== 'use_different_layers') {
+                    fixes.push(new validationIssueFix({
+                        icon: useFixIcon,
+                        title: t('issues.fix.' + useFixID + '.title')
+                    }));
+                }
+                fixes.push(new validationIssueFix({
+                    icon: 'iD-operation-move',
+                    title: t('issues.fix.reposition_features.title')
+                }));
+
+                return fixes;
+            }
         });
 
         function showReference(selection) {

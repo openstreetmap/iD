@@ -144,35 +144,6 @@ export function validationImpossibleOneway() {
                 if (connectedEndpointsOkay) return [];
             }
 
-            var fixes = [];
-
-            if (attachedOneways.length) {
-                fixes.push(new validationIssueFix({
-                    icon: 'iD-operation-reverse',
-                    title: t('issues.fix.reverse_feature.title'),
-                    entityIds: [way.id],
-                    onClick: function(context) {
-                        var id = this.issue.entityIds[0];
-                        context.perform(actionReverse(id), t('operations.reverse.annotation'));
-                    }
-                }));
-            }
-            if (node.tags.noexit !== 'yes') {
-                var useLeftContinue = (isFirst && textDirection === 'ltr') ||
-                    (!isFirst && textDirection === 'rtl');
-                fixes.push(new validationIssueFix({
-                    icon: 'iD-operation-continue' + (useLeftContinue ? '-left' : ''),
-                    title: t('issues.fix.continue_from_' + (isFirst ? 'start' : 'end') + '.title'),
-                    onClick: function(context) {
-                        var entityID = this.issue.entityIds[0];
-                        var vertexID = this.issue.entityIds[1];
-                        var way = context.entity(entityID);
-                        var vertex = context.entity(vertexID);
-                        continueDrawing(way, vertex, context);
-                    }
-                }));
-            }
-
             var placement = isFirst ? 'start' : 'end',
                 messageID = wayType + '.',
                 referenceID = wayType + '.';
@@ -197,7 +168,39 @@ export function validationImpossibleOneway() {
                 },
                 reference: getReference(referenceID),
                 entityIds: [way.id, node.id],
-                fixes: fixes,
+                dynamicFixes: function() {
+
+                    var fixes = [];
+
+                    if (attachedOneways.length) {
+                        fixes.push(new validationIssueFix({
+                            icon: 'iD-operation-reverse',
+                            title: t('issues.fix.reverse_feature.title'),
+                            entityIds: [way.id],
+                            onClick: function(context) {
+                                var id = this.issue.entityIds[0];
+                                context.perform(actionReverse(id), t('operations.reverse.annotation'));
+                            }
+                        }));
+                    }
+                    if (node.tags.noexit !== 'yes') {
+                        var useLeftContinue = (isFirst && textDirection === 'ltr') ||
+                            (!isFirst && textDirection === 'rtl');
+                        fixes.push(new validationIssueFix({
+                            icon: 'iD-operation-continue' + (useLeftContinue ? '-left' : ''),
+                            title: t('issues.fix.continue_from_' + (isFirst ? 'start' : 'end') + '.title'),
+                            onClick: function(context) {
+                                var entityID = this.issue.entityIds[0];
+                                var vertexID = this.issue.entityIds[1];
+                                var way = context.entity(entityID);
+                                var vertex = context.entity(vertexID);
+                                continueDrawing(way, vertex, context);
+                            }
+                        }));
+                    }
+
+                    return fixes;
+                },
                 loc: node.loc
             })];
 

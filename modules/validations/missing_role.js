@@ -55,20 +55,22 @@ export function validationMissingRole() {
                 member: member
             },
             hash: member.index.toString(),
-            fixes: [
-                makeAddRoleFix('inner'),
-                makeAddRoleFix('outer'),
-                new validationIssueFix({
-                    icon: 'iD-operation-delete',
-                    title: t('issues.fix.remove_from_relation.title'),
-                    onClick: function(context) {
-                        context.perform(
-                            actionDeleteMember(this.issue.entityIds[0], this.issue.data.member.index),
-                            t('operations.delete_member.annotation')
-                        );
-                    }
-                })
-            ]
+            dynamicFixes: function() {
+                return [
+                    makeAddRoleFix('inner'),
+                    makeAddRoleFix('outer'),
+                    new validationIssueFix({
+                        icon: 'iD-operation-delete',
+                        title: t('issues.fix.remove_from_relation.title'),
+                        onClick: function(context) {
+                            context.perform(
+                                actionDeleteMember(this.issue.entityIds[0], this.issue.data.member.index),
+                                t('operations.delete_member.annotation')
+                            );
+                        }
+                    })
+                ];
+            }
         });
 
 

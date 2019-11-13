@@ -72,36 +72,10 @@ export function validationMismatchedGeometry(context) {
         }
     }
 
-    function lineTaggedAsAreaIssue(entity, graph) {
+    function lineTaggedAsAreaIssue(entity) {
 
         var tagSuggestingArea = tagSuggestingLineIsArea(entity);
         if (!tagSuggestingArea) return null;
-
-        var fixes = [];
-
-        var connectEndsOnClick = makeConnectEndpointsFixOnClick(entity, graph);
-
-        fixes.push(new validationIssueFix({
-            title: t('issues.fix.connect_endpoints.title'),
-            onClick: connectEndsOnClick
-        }));
-
-        fixes.push(new validationIssueFix({
-            icon: 'iD-operation-delete',
-            title: t('issues.fix.remove_tag.title'),
-            onClick: function(context) {
-                var entityId = this.issue.entityIds[0];
-                var entity = context.entity(entityId);
-                var tags = Object.assign({}, entity.tags);  // shallow copy
-                for (var key in tagSuggestingArea) {
-                    delete tags[key];
-                }
-                context.perform(
-                    actionChangeTags(entityId, tags),
-                    t('issues.fix.remove_tag.annotation')
-                );
-            }
-        }));
 
         return new validationIssue({
             type: type,
@@ -116,10 +90,38 @@ export function validationMismatchedGeometry(context) {
             },
             reference: showReference,
             entityIds: [entity.id],
-            hash: JSON.stringify(tagSuggestingArea) +
-                // avoid stale "connect endpoints" fix
-                (typeof connectEndsOnClick),
-            fixes: fixes
+            hash: JSON.stringify(tagSuggestingArea),
+            dynamicFixes: function(context) {
+
+                var fixes = [];
+
+                var entity = context.entity(this.entityIds[0]);
+                var connectEndsOnClick = makeConnectEndpointsFixOnClick(entity, context.graph());
+
+                fixes.push(new validationIssueFix({
+                    title: t('issues.fix.connect_endpoints.title'),
+                    onClick: connectEndsOnClick
+                }));
+
+                fixes.push(new validationIssueFix({
+                    icon: 'iD-operation-delete',
+                    title: t('issues.fix.remove_tag.title'),
+                    onClick: function(context) {
+                        var entityId = this.issue.entityIds[0];
+                        var entity = context.entity(entityId);
+                        var tags = Object.assign({}, entity.tags);  // shallow copy
+                        for (var key in tagSuggestingArea) {
+                            delete tags[key];
+                        }
+                        context.perform(
+                            actionChangeTags(entityId, tags),
+                            t('issues.fix.remove_tag.annotation')
+                        );
+                    }
+                }));
+
+                return fixes;
+            }
         });
 
 
@@ -206,13 +208,15 @@ export function validationMismatchedGeometry(context) {
                         .text(t('issues.point_as_vertex.reference'));
                 },
                 entityIds: [entity.id],
-                fixes: [
-                    new validationIssueFix({
-                        icon: 'iD-operation-extract',
-                        title: t('issues.fix.extract_point.title'),
-                        onClick: extractOnClick
-                    })
-                ],
+                dynamicFixes: function() {
+                    return [
+                        new validationIssueFix({
+                            icon: 'iD-operation-extract',
+                            title: t('issues.fix.extract_point.title'),
+                            onClick: extractOnClick
+                        })
+                    ];
+                },
                 hash: typeof extractOnClick, // avoid stale extraction fix
             });
         }
@@ -223,7 +227,7 @@ export function validationMismatchedGeometry(context) {
     var validation = function checkMismatchedGeometry(entity, graph) {
         var issues = [
             vertexTaggedAsPointIssue(entity, graph),
-            lineTaggedAsAreaIssue(entity, graph)
+            lineTaggedAsAreaIssue(entity)
         ];
         return issues.filter(Boolean);
     };
