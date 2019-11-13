@@ -6290,8 +6290,8 @@ en:
         terms: '<translate with synonyms or related terms for ''Basin'', separated by commas>'
       natural/water/canal:
         # 'natural=water, water=canal'
-        name: Canal
-        terms: '<translate with synonyms or related terms for ''Canal'', separated by commas>'
+        name: Canal Area
+        terms: '<translate with synonyms or related terms for ''Canal Area'', separated by commas>'
       natural/water/lake:
         # 'natural=water, water=lake'
         name: Lake
@@ -6312,14 +6312,14 @@ en:
         terms: '<translate with synonyms or related terms for ''Reservoir'', separated by commas>'
       natural/water/river:
         # 'natural=water, water=river'
-        name: River
+        name: River Area
         # 'terms: beck,branch,brook,course,creek,estuary,rill,riverbank,rivulet,run,runnel,stream,tributary,watercourse'
-        terms: '<translate with synonyms or related terms for ''River'', separated by commas>'
+        terms: '<translate with synonyms or related terms for ''River Area'', separated by commas>'
       natural/water/stream:
         # 'natural=water, water=stream'
-        name: Stream
+        name: Stream Area
         # 'terms: beck,branch,brook,burn,course,creek,current,drift,flood,flow,freshet,race,rill,rindle,rivulet,run,runnel,rush,spate,spritz,surge,tide,torrent,tributary,watercourse'
-        terms: '<translate with synonyms or related terms for ''Stream'', separated by commas>'
+        terms: '<translate with synonyms or related terms for ''Stream Area'', separated by commas>'
       natural/water/wastewater:
         # 'natural=water, water=wastewater'
         name: Wastewater Basin

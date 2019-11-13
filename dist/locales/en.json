@@ -7847,7 +7847,7 @@
                     "terms": "detention,drain,overflow,rain,retention"
                 },
                 "natural/water/canal": {
-                    "name": "Canal",
+                    "name": "Canal Area",
                     "terms": ""
                 },
                 "natural/water/lake": {
@@ -7867,11 +7867,11 @@
                     "terms": ""
                 },
                 "natural/water/river": {
-                    "name": "River",
+                    "name": "River Area",
                     "terms": "beck,branch,brook,course,creek,estuary,rill,riverbank,rivulet,run,runnel,stream,tributary,watercourse"
                 },
                 "natural/water/stream": {
-                    "name": "Stream",
+                    "name": "Stream Area",
                     "terms": "beck,branch,brook,burn,course,creek,current,drift,flood,flow,freshet,race,rill,rindle,rivulet,run,runnel,rush,spate,spritz,surge,tide,torrent,tributary,watercourse"
                 },
                 "natural/water/wastewater": {
