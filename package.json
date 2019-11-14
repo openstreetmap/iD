@@ -93,7 +93,7 @@
     "rollup-plugin-includepaths": "~0.2.3",
     "rollup-plugin-json": "~4.0.0",
     "rollup-plugin-node-resolve": "~5.2.0",
-    "rollup-plugin-visualizer": "~2.7.2",
+    "rollup-plugin-visualizer": "~3.0.0",
     "shelljs": "^0.8.0",
     "shx": "^0.3.0",
     "sinon": "7.5.0",
