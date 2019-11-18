@@ -2,9 +2,9 @@ export function osmIsInterestingTag(key) {
     return key !== 'attribution' &&
         key !== 'created_by' &&
         key !== 'source' &&
-        key !== 'source_ref' &&
         key !== 'odbl' &&
         key.indexOf('source:') !== 0 &&
+        key.indexOf('source_ref') !== 0 && // purposely exclude colon
         key.indexOf('tiger:') !== 0;
 }
 
