@@ -778,6 +778,10 @@
       "replace": {"generator:output": "$1"}
     },
     {
+      "old": {"public_transport": "station", "aerialway": "yes"},
+      "replace": {"public_transport": "station", "aerialway": "station"}
+    },
+    {
       "old": {"railway": "station"},
       "replace": {"railway": "station", "public_transport": "station"}
     },
