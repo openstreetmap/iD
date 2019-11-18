@@ -229,21 +229,23 @@ export function validationCloseNodes(context) {
                 reference: showReference,
                 entityIds: [way.id, node1.id, node2.id],
                 loc: node1.loc,
-                fixes: [
-                    new validationIssueFix({
-                        icon: 'iD-icon-plus',
-                        title: t('issues.fix.merge_points.title'),
-                        onClick: function(context) {
-                            var entityIds = this.issue.entityIds;
-                            var action = actionMergeNodes([entityIds[1], entityIds[2]]);
-                            context.perform(action, t('issues.fix.merge_close_vertices.annotation'));
-                        }
-                    }),
-                    new validationIssueFix({
-                        icon: 'iD-operation-disconnect',
-                        title: t('issues.fix.move_points_apart.title')
-                    })
-                ]
+                dynamicFixes: function() {
+                    return [
+                        new validationIssueFix({
+                            icon: 'iD-icon-plus',
+                            title: t('issues.fix.merge_points.title'),
+                            onClick: function(context) {
+                                var entityIds = this.issue.entityIds;
+                                var action = actionMergeNodes([entityIds[1], entityIds[2]]);
+                                context.perform(action, t('issues.fix.merge_close_vertices.annotation'));
+                            }
+                        }),
+                        new validationIssueFix({
+                            icon: 'iD-operation-disconnect',
+                            title: t('issues.fix.move_points_apart.title')
+                        })
+                    ];
+                }
             });
 
             function showReference(selection) {
