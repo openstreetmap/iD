@@ -1,3 +1,4 @@
+import { actionDeleteRelation } from './delete_relation';
 import { actionDeleteWay } from './delete_way';
 import { osmIsInterestingTag } from '../osm/tags';
 import { osmJoinWays } from '../osm/multipolygon';
@@ -69,6 +70,42 @@ export function actionJoin(ids) {
             graph = graph.replace(survivor);
             graph = actionDeleteWay(way.id)(graph);
         });
+
+        // Finds if the join created a single-member multipolygon,
+        // and if so turns it into a basic area instead
+        function checkForSimpleMultipolygon() {
+            if (!survivor.isClosed()) return;
+
+            var multipolygons = graph.parentMultipolygons(survivor).filter(function(multipolygon) {
+                // find multipolygons where the survivor is the only member
+                return multipolygon.members.length === 1;
+            });
+
+            // skip if this is the single member of multiple multipolygons
+            if (multipolygons.length !== 1) return;
+
+            var multipolygon = multipolygons[0];
+
+            for (var key in survivor.tags) {
+                if (multipolygon.tags[key] &&
+                    // don't collapse if tags cannot be cleanly merged
+                    multipolygon.tags[key] !== survivor.tags[key]) return;
+            }
+
+            survivor = survivor.mergeTags(multipolygon.tags);
+            graph = graph.replace(survivor);
+            graph = actionDeleteRelation(multipolygon.id, true /* allow untagged members */)(graph);
+
+            var tags = Object.assign({}, survivor.tags);
+            if (survivor.geometry(graph) !== 'area') {
+                // ensure the feature persists as an area
+                tags.area = 'yes';
+            }
+            delete tags.type; // remove type=multipolygon
+            survivor = survivor.update({ tags: tags });
+            graph = graph.replace(survivor);
+        }
+        checkForSimpleMultipolygon();
 
         return graph;
     };
