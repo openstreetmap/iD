@@ -1601,8 +1601,9 @@ en:
       upgrade_tags:
         title: Upgrade the tags
         annotation: Upgraded old tags.
-      use_bridge_or_tunnel:
-        title: Use a bridge or tunnel
+      use_bridge:
+        title: Use a bridge
+        annotation: Created bridge
       use_different_layers:
         title: Use different layers
       use_different_layers_or_levels:
@@ -1611,6 +1612,7 @@ en:
         title: Use different levels
       use_tunnel:
         title: Use a tunnel
+        annotation: Created tunnel
   intro:
     done: done
     ok: OK
