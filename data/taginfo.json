@@ -1883,6 +1883,7 @@
     {"key": "aerialway", "value": "canopy", "description": "🄳 ➜ aerialway=zip_line"},
     {"key": "aeroway", "value": "aerobridge", "description": "🄳 ➜ aeroway=jet_bridge + highway=corridor"},
     {"key": "access", "value": "public", "description": "🄳 ➜ access=yes"},
+    {"key": "agrarian", "value": "agrcultural_machinry", "description": "🄳 ➜ agrarian=agricultural_machinery"},
     {"key": "amenity", "value": "advertising", "description": "🄳 ➜ advertising=*"},
     {"key": "amenity", "value": "artwork", "description": "🄳 ➜ tourism=artwork"},
     {"key": "amenity", "value": "bail_bonds", "description": "🄳 ➜ office=bail_bond_agent"},

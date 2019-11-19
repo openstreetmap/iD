@@ -13,6 +13,10 @@
       "replace": {"access": "yes"}
     },
     {
+      "old": {"agrarian": "agrcultural_machinry"},
+      "replace": {"agrarian": "agricultural_machinery"}
+    },
+    {
       "old": {"amenity": "advertising"},
       "replace": {"advertising": "*"}
     },
