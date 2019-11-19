@@ -2733,9 +2733,6 @@ en:
         name: Rope Tow Lift
         # 'terms: handle tow,bugel lift'
         terms: '<translate with synonyms or related terms for ''Rope Tow Lift'', separated by commas>'
-      aerialway/station:
-        # aerialway=station
-        name: Aerialway Station
       aerialway/t-bar:
         # aerialway=t-bar
         name: T-bar Lift
@@ -6953,7 +6950,7 @@ en:
         # 'terms: public transit,public transportation,station,terminal,transit,transportation'
         terms: '<translate with synonyms or related terms for ''Transit Station'', separated by commas>'
       public_transport/station_aerialway:
-        # 'public_transport=station, aerialway=yes'
+        # aerialway=station
         name: Aerialway Station
         # 'terms: aerialway,cable car,public transit,public transportation,station,terminal,transit,transportation'
         terms: '<translate with synonyms or related terms for ''Aerialway Station'', separated by commas>'

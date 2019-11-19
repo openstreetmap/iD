@@ -4898,9 +4898,6 @@
                     "name": "Advertising Totem",
                     "terms": ""
                 },
-                "aerialway/station": {
-                    "name": "Aerialway Station"
-                },
                 "aerialway/cable_car": {
                     "name": "Cable Car",
                     "terms": "tramway,ropeway"
