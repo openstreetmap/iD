@@ -982,7 +982,7 @@
     {"key": "shop", "value": "charity", "description": "🄿 Charity Store", "object_types": ["node", "area"], "icon_url": "https://cdn.jsdelivr.net/gh/mapbox/maki/icons/shop-15.svg"},
     {"key": "shop", "value": "cheese", "description": "🄿 Cheese Store", "object_types": ["node", "area"], "icon_url": "https://cdn.jsdelivr.net/gh/openstreetmap/iD@master/svg/fontawesome/fas-cheese.svg"},
     {"key": "shop", "value": "chemist", "description": "🄿 Drugstore", "object_types": ["node", "area"], "icon_url": "https://cdn.jsdelivr.net/gh/openstreetmap/iD@master/svg/fontawesome/fas-shopping-basket.svg"},
-    {"key": "shop", "value": "chocolate", "description": "🄿 Chocolate Store", "object_types": ["node", "area"], "icon_url": "https://cdn.jsdelivr.net/gh/bhousel/temaki/icons/chocolate.svg"},
+    {"key": "shop", "value": "chocolate", "description": "🄿 Chocolate Store", "object_types": ["node", "area"], "icon_url": "https://cdn.jsdelivr.net/gh/mapbox/maki/icons/confectionery-15.svg"},
     {"key": "shop", "value": "clothes", "description": "🄿 Clothing Store", "object_types": ["node", "area"], "icon_url": "https://cdn.jsdelivr.net/gh/mapbox/maki/icons/clothing-store-15.svg"},
     {"key": "clothes", "value": "underwear", "description": "🄿 Underwear Store", "object_types": ["node", "area"], "icon_url": "https://cdn.jsdelivr.net/gh/mapbox/maki/icons/clothing-store-15.svg"},
     {"key": "shop", "value": "coffee", "description": "🄿 Coffee Store", "object_types": ["node", "area"], "icon_url": "https://cdn.jsdelivr.net/gh/bhousel/temaki/icons/coffee.svg"},
