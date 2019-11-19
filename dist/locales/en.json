@@ -5662,11 +5662,11 @@
                 },
                 "amenity/vending_machine/parcel_pickup_dropoff": {
                     "name": "Parcel Pickup/Dropoff Locker",
-                    "terms": "mail,parcel,pickup"
+                    "terms": "mail,packstation,parcel,pickup"
                 },
                 "amenity/vending_machine/parcel_pickup": {
                     "name": "Parcel Pickup Locker",
-                    "terms": "amazon,locker,mail,parcel,pickup"
+                    "terms": "amazon,locker,mail,packstation,parcel,pickup"
                 },
                 "amenity/vending_machine/parking_tickets": {
                     "name": "Parking Ticket Vending Machine",
