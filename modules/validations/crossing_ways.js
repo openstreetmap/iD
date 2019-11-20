@@ -2,6 +2,7 @@ import { actionAddMidpoint } from '../actions/add_midpoint';
 import { actionChangeTags } from '../actions/change_tags';
 import { actionMergeNodes } from '../actions/merge_nodes';
 import { actionSplit } from '../actions/split';
+import { modeSelect } from '../modes/select';
 import { geoExtent, geoLineIntersection, geoSphericalClosestNode, geoVecAngle, geoMetersToLat, geoVecLengthSquare } from '../geo';
 import { osmNode } from '../osm/node';
 import { osmFlowingWaterwayTagValues, osmPathHighwayTagValues, osmRailwayTrackTagValues, osmRoutableHighwayTagValues } from '../osm/tags';
@@ -255,9 +256,18 @@ export function validationCrossingWays(context) {
                     var point = geoLineIntersection(segment1, segment2);
                     if (point) {
                         edgeCrossInfos.push({
-                            ways: [way1, way2],
-                            featureTypes: [way1FeatureType, way2FeatureType],
-                            edges: [[n1.id, n2.id], [nA.id, nB.id]],
+                            wayInfos: [
+                                {
+                                    way: way1,
+                                    featureType: way1FeatureType,
+                                    edge: [n1.id, n2.id]
+                                },
+                                {
+                                    way: way2,
+                                    featureType: way2FeatureType,
+                                    edge: [nA.id, nB.id]
+                                }
+                            ],
                             crossPoint: point
                         });
                         if (oneOnly) {
@@ -318,11 +328,11 @@ export function validationCrossingWays(context) {
     function createIssue(crossing, graph) {
 
         // use the entities with the tags that define the feature type
-        var entities = crossing.ways.sort(function(entity1, entity2) {
-            var type1 = getFeatureTypeForCrossingCheck(entity1, graph);
-            var type2 = getFeatureTypeForCrossingCheck(entity2, graph);
+        crossing.wayInfos.sort(function(way1Info, way2Info) {
+            var type1 = way1Info.featureType;
+            var type2 = way2Info.featureType;
             if (type1 === type2) {
-                return utilDisplayLabel(entity1, context) > utilDisplayLabel(entity2, context);
+                return utilDisplayLabel(way1Info.way, context) > utilDisplayLabel(way2Info.way, context);
             } else if (type1 === 'waterway') {
                 return true;
             } else if (type2 === 'waterway') {
@@ -330,14 +340,16 @@ export function validationCrossingWays(context) {
             }
             return type1 < type2;
         });
-        entities = entities.map(function(way) {
-            return getFeatureWithFeatureTypeTagsForWay(way, graph);
+        var entities = crossing.wayInfos.map(function(wayInfo) {
+            return getFeatureWithFeatureTypeTagsForWay(wayInfo.way, graph);
         });
+        var edges = [crossing.wayInfos[0].edge, crossing.wayInfos[1].edge];
+        var featureTypes = [crossing.wayInfos[0].featureType, crossing.wayInfos[1].featureType];
 
         var connectionTags = tagsForConnectionNodeIfAllowed(entities[0], entities[1]);
 
-        var featureType1 = crossing.featureTypes[0];
-        var featureType2 = crossing.featureTypes[1];
+        var featureType1 = crossing.wayInfos[0].featureType;
+        var featureType2 = crossing.wayInfos[1].featureType;
 
         var isCrossingIndoors = taggedAsIndoor(entities[0].tags) && taggedAsIndoor(entities[1].tags);
         var isCrossingTunnels = allowsTunnel(featureType1) && hasTag(entities[0].tags, 'tunnel') &&
@@ -345,7 +357,7 @@ export function validationCrossingWays(context) {
         var isCrossingBridges = allowsBridge(featureType1) && hasTag(entities[0].tags, 'bridge') &&
                                 allowsBridge(featureType2) && hasTag(entities[1].tags, 'bridge');
 
-        var subtype = crossing.featureTypes.sort().join('-');
+        var subtype = [featureType1, featureType2].sort().join('-');
 
         var crossingTypeID = subtype;
 
@@ -377,13 +389,14 @@ export function validationCrossingWays(context) {
                 return entity.id;
             }),
             data: {
-                edges: crossing.edges,
+                edges: edges,
+                featureTypes: featureTypes,
                 connectionTags: connectionTags
             },
             // differentiate based on the loc since two ways can cross multiple times
             hash: crossing.crossPoint.toString() +
                 // if the edges change then so does the fix
-                crossing.edges.slice().sort(function(edge1, edge2) {
+                edges.slice().sort(function(edge1, edge2) {
                     // order to assure hash is deterministic
                     return edge1[0] < edge2[0] ? -1 : 1;
                 }).toString() +
@@ -391,42 +404,42 @@ export function validationCrossingWays(context) {
                 JSON.stringify(connectionTags),
             loc: crossing.crossPoint,
             dynamicFixes: function() {
+                var mode = context.mode();
+                if (!mode || mode.id !== 'select' || mode.selectedIDs().length !== 1) return [];
+
+                var selectedIndex = this.entityIds[0] === mode.selectedIDs()[0] ? 0 : 1;
+                var selectedFeatureType = this.data.featureTypes[selectedIndex];
+
                 var fixes = [];
 
                 if (connectionTags) {
-                    fixes.push(makeConnectWaysFix(connectionTags));
-                }
-
-                if ((allowsBridge(featureType1) && featureType1 !== 'waterway') ||
-                        (allowsBridge(featureType2) && featureType2 !== 'waterway')) {
-                    fixes.push(makeBridgeOrTunnelFix('use_bridge', 'maki-bridge', 'bridge'));
-                }
-                var useFixIcon = 'iD-icon-layers';
-                var useFixID;
-                if (allowsTunnel(featureType1) || allowsTunnel(featureType2)) {
-                    fixes.push(makeBridgeOrTunnelFix('use_tunnel', 'tnp-2009642', 'tunnel'));
+                    fixes.push(makeConnectWaysFix(this.data.connectionTags));
                 }
 
                 if (isCrossingIndoors) {
-                    useFixID = 'use_different_levels';
-                } else if (isCrossingTunnels || isCrossingBridges) {
-                    useFixID = 'use_different_layers';
-                // don't recommend bridges for waterways even though they're okay
-                } else {
-                    useFixID = 'use_different_layers';
-                }
-                if (useFixID === 'use_different_layers' ||
+                    fixes.push(new validationIssueFix({
+                        icon: 'iD-icon-layers',
+                        title: t('issues.fix.use_different_levels.title')
+                    }));
+                } else if (isCrossingTunnels ||
+                    isCrossingBridges ||
                     featureType1 === 'building' ||
-                    featureType2 === 'building') {
+                    featureType2 === 'building')  {
+
                     fixes.push(makeChangeLayerFix('higher'));
                     fixes.push(makeChangeLayerFix('lower'));
+                } else {
+                    // don't recommend adding bridges to waterways since they're uncommmon
+                    if (allowsBridge(selectedFeatureType) && selectedFeatureType !== 'waterway') {
+                        fixes.push(makeAddBridgeOrTunnelFix('add_a_bridge', 'maki-bridge', 'bridge'));
+                    }
+
+                    if (allowsTunnel(selectedFeatureType)) {
+                        fixes.push(makeAddBridgeOrTunnelFix('add_a_tunnel', 'tnp-2009642', 'tunnel'));
+                    }
                 }
-                if (useFixID !== 'use_different_layers') {
-                    fixes.push(new validationIssueFix({
-                        icon: useFixIcon,
-                        title: t('issues.fix.' + useFixID + '.title')
-                    }));
-                }
+
+                // repositioning the features is always an option
                 fixes.push(new validationIssueFix({
                     icon: 'iD-operation-move',
                     title: t('issues.fix.reposition_features.title')
@@ -446,11 +459,9 @@ export function validationCrossingWays(context) {
         }
     }
 
-    function makeBridgeOrTunnelFix(titleiD, Icon, bridgeOrTunnel){
-        var fixTitleID = titleiD;
-        var fixIcon = Icon;
+    function makeAddBridgeOrTunnelFix(fixTitleID, iconName, bridgeOrTunnel){
         return new validationIssueFix({
-            icon: fixIcon,
+            icon: iconName,
             title: t('issues.fix.' + fixTitleID + '.title'),
             onClick: function(context) {
                 var mode = context.mode();
@@ -464,76 +475,75 @@ export function validationCrossingWays(context) {
                 var way = context.hasEntity(wayId);
 
                 if (!way) return;
-                
+
+                var resultWayIDs = [wayId];
+
                 var secondWayId = this.issue.entityIds[0];
-                if (this.issue.entityIds[0] === wayId){
+                var edge = this.issue.data.edges[1];
+                if (this.issue.entityIds[0] === wayId) {
                     secondWayId = this.issue.entityIds[1];
+                    edge = this.issue.data.edges[0];
                 }
                 var secondWay = context.hasEntity(secondWayId);
-                var edges = this.issue.data.edges;
 
-                context.perform(
-                    function actionBridgeCrossingWays(graph) {
-                        var newNode_1 = osmNode();
-                        var newNode_2 = osmNode();
-                        edges.forEach(function(edge) {
-                            var edgeNodes = [graph.entity(edge[0]), graph.entity(edge[1])];
+                var action = function actionAddStructure(graph) {
+                    var newNode_1 = osmNode();
+                    var newNode_2 = osmNode();
 
-                            //edge to split and make bridge/tunnel
-                            if (way.nodes.includes(edgeNodes[0].id) && way.nodes.includes(edgeNodes[1].id)){
-                                var halfLenBridgeOrTunnel = (geoMetersToLat(secondWay.tags.width) || 0.00004); 
-                                var angle = geoVecAngle(edgeNodes[0].loc, edgeNodes[1].loc);
+                    var edgeNodes = [graph.entity(edge[0]), graph.entity(edge[1])];
 
-                                var locNewNode_1 = [loc[0] + Math.cos(angle) * halfLenBridgeOrTunnel,
-                                                    loc[1] + Math.sin(angle) * halfLenBridgeOrTunnel];
-                                var locNewNode_2 = [loc[0] + Math.cos(angle + Math.PI) * halfLenBridgeOrTunnel,
-                                                    loc[1] + Math.sin(angle + Math.PI)* halfLenBridgeOrTunnel];
-                               
-                                //split only if edge is long
-                                if (geoVecLengthSquare(loc, edgeNodes[1].loc) > geoVecLengthSquare(loc, locNewNode_1)){
-                                    graph = actionAddMidpoint({loc: locNewNode_1, edge: edge}, newNode_1)(graph);
-                                    graph = actionSplit(newNode_1.id)(graph);                             
-                                }
-                                else {
-                                    newNode_1 = edgeNodes[1];
-                                }
-                                if (geoVecLengthSquare(loc, edgeNodes[0].loc) > geoVecLengthSquare(loc, locNewNode_2)){
-                                    graph = actionAddMidpoint({loc: locNewNode_2, edge: [edgeNodes[0].id, newNode_1.id]}, newNode_2)(graph); 
-                                    graph = actionSplit(newNode_2.id)(graph);
-                                }
-                                else {
-                                    newNode_2 = edgeNodes[0];
-                                }
-                                
-                                var waysNode_1 = graph.parentWays(graph.hasEntity(newNode_1.id));
-                                var waysNode_2 = graph.parentWays(graph.hasEntity(newNode_2.id));
-                                var commonWay;
+                    var halfLenBridgeOrTunnel = (geoMetersToLat(secondWay.tags.width) || 0.00004);
+                    var angle = geoVecAngle(edgeNodes[0].loc, edgeNodes[1].loc);
 
-                                //find way which contains both new nodes
-                                for (var i_1 in waysNode_1){
-                                    for (var i_2 in waysNode_2){
-                                        if (waysNode_1[i_1] === waysNode_2[i_2]){
-                                            commonWay = waysNode_1[i_1];
-                                        }
-                                    }
-                                }
+                    var locNewNode_1 = [loc[0] + Math.cos(angle) * halfLenBridgeOrTunnel,
+                                        loc[1] + Math.sin(angle) * halfLenBridgeOrTunnel];
+                    var locNewNode_2 = [loc[0] + Math.cos(angle + Math.PI) * halfLenBridgeOrTunnel,
+                                        loc[1] + Math.sin(angle + Math.PI)* halfLenBridgeOrTunnel];
 
-                                var tags = Object.assign({}, commonWay.tags);  //tags copy
-                                if (bridgeOrTunnel === 'bridge'){
-                                    tags.bridge = 'yes';
-                                }
-                                else {
-                                    tags.tunnel = 'yes';
-                                }
-                                graph = actionChangeTags(commonWay.id, tags)(graph);
-                                selectedIDs = [commonWay.id];
-                                mode.reselect();
-                            }
-                        });
-                        return graph;
-                    },
-                    t('issues.fix.' + fixTitleID + '.annotation')
-                );
+                    // split only if edge is long
+                    if (geoVecLengthSquare(loc, edgeNodes[1].loc) > geoVecLengthSquare(loc, locNewNode_1)){
+                        graph = actionAddMidpoint({loc: locNewNode_1, edge: edge}, newNode_1)(graph);
+                        var splitAction1 = actionSplit(newNode_1.id).limitWays(resultWayIDs);
+                        graph = splitAction1(graph);
+                        if (splitAction1.getCreatedWayIDs().length) {
+                            resultWayIDs.push(splitAction1.getCreatedWayIDs()[0]);
+                        }
+                    } else {
+                        newNode_1 = edgeNodes[1];
+                    }
+                    if (geoVecLengthSquare(loc, edgeNodes[0].loc) > geoVecLengthSquare(loc, locNewNode_2)){
+                        graph = actionAddMidpoint({loc: locNewNode_2, edge: [edgeNodes[0].id, newNode_1.id]}, newNode_2)(graph);
+                        var splitAction2 = actionSplit(newNode_2.id).limitWays(resultWayIDs);
+                        graph = splitAction2(graph);
+                        if (splitAction2.getCreatedWayIDs().length) {
+                            resultWayIDs.push(splitAction2.getCreatedWayIDs()[0]);
+                        }
+                    } else {
+                        newNode_2 = edgeNodes[0];
+                    }
+
+                    var commonWay = resultWayIDs.map(function(id) {
+                        return graph.entity(id);
+                    }).find(function(way) {
+                        return way.nodes.indexOf(newNode_1.id) !== -1 &&
+                            way.nodes.indexOf(newNode_2.id) !== -1;
+                    });
+
+                    var tags = Object.assign({}, commonWay.tags); // copy tags
+                    if (bridgeOrTunnel === 'bridge'){
+                        tags.bridge = 'yes';
+                        tags.layer = '1';
+                    }
+                    else {
+                        tags.tunnel = 'yes';
+                        tags.layer = '-1';
+                    }
+                    graph = actionChangeTags(commonWay.id, tags)(graph);
+                    return graph;
+                };
+
+                context.perform(action, t('issues.fix.' + fixTitleID + '.annotation'));
+                context.enter(modeSelect(context, resultWayIDs));
             }
         });
     }

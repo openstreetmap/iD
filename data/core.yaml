@@ -1523,6 +1523,12 @@ en:
       message: '{feature} should be part of a line or area based on its tags'
       reference: "Some features shouldn't be standalone points."
     fix:
+      add_a_bridge:
+        title: Add a bridge
+        annotation: Added a bridge.
+      add_a_tunnel:
+        title: Add a tunnel
+        annotation: Added a tunnel.
       address_the_concern:
         title: Address the concern
       connect_almost_junction:
@@ -1601,18 +1607,12 @@ en:
       upgrade_tags:
         title: Upgrade the tags
         annotation: Upgraded old tags.
-      use_bridge:
-        title: Use a bridge
-        annotation: Created bridge
       use_different_layers:
         title: Use different layers
       use_different_layers_or_levels:
         title: Use different layers or levels
       use_different_levels:
         title: Use different levels
-      use_tunnel:
-        title: Use a tunnel
-        annotation: Created tunnel
   intro:
     done: done
     ok: OK
