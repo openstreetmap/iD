@@ -431,11 +431,11 @@ export function validationCrossingWays(context) {
                 } else {
                     // don't recommend adding bridges to waterways since they're uncommmon
                     if (allowsBridge(selectedFeatureType) && selectedFeatureType !== 'waterway') {
-                        fixes.push(makeAddBridgeOrTunnelFix('add_a_bridge', 'maki-bridge', 'bridge'));
+                        fixes.push(makeAddBridgeOrTunnelFix('add_a_bridge', 'iD-structure-bridge', 'bridge'));
                     }
 
                     if (allowsTunnel(selectedFeatureType)) {
-                        fixes.push(makeAddBridgeOrTunnelFix('add_a_tunnel', 'tnp-2009642', 'tunnel'));
+                        fixes.push(makeAddBridgeOrTunnelFix('add_a_tunnel', 'iD-structure-tunnel', 'tunnel'));
                     }
                 }
 
