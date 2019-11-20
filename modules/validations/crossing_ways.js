@@ -470,40 +470,40 @@ export function validationCrossingWays(context) {
                 var selectedIDs = mode.selectedIDs();
                 if (selectedIDs.length !== 1) return;
 
-                var loc = this.issue.loc;
-                var wayId = selectedIDs[0];
-                var way = context.hasEntity(wayId);
+                var selectedWayID = selectedIDs[0];
+                if (!context.hasEntity(selectedWayID)) return;
 
-                if (!way) return;
+                var resultWayIDs = [selectedWayID];
 
-                var resultWayIDs = [wayId];
-
-                var secondWayId = this.issue.entityIds[0];
+                var crossingWayID = this.issue.entityIds[0];
                 var edge = this.issue.data.edges[1];
-                if (this.issue.entityIds[0] === wayId) {
-                    secondWayId = this.issue.entityIds[1];
+                if (this.issue.entityIds[0] === selectedWayID) {
+                    crossingWayID = this.issue.entityIds[1];
                     edge = this.issue.data.edges[0];
                 }
-                var secondWay = context.hasEntity(secondWayId);
+
+                var crossingLoc = this.issue.loc;
 
                 var action = function actionAddStructure(graph) {
 
                     var edgeNodes = [graph.entity(edge[0]), graph.entity(edge[1])];
 
+                    var crossingWay = graph.hasEntity(crossingWayID);
                     // use the width of the crossing feature as the structure length, if available
-                    var widthMeters = secondWay.tags.width && parseFloat(secondWay.tags.width);
-                    if (widthMeters) widthMeters = Math.min(widthMeters, 50);
+                    var widthMeters = crossingWay && crossingWay.tags.width && parseFloat(crossingWay.tags.width);
+                    // clamp the width to a reasonable range
+                    if (widthMeters) widthMeters = Math.min(Math.max(widthMeters, 0.5), 50);
 
                     // the proposed length of the structure, in decimal degrees
-                    var structLength = (widthMeters && geoMetersToLon(widthMeters, loc[1])) || 0.00008;
+                    var structLength = (widthMeters && geoMetersToLon(widthMeters, crossingLoc[1])) || 0.00008;
                     var halfStructLength = structLength / 2;
 
                     var angle = geoVecAngle(edgeNodes[0].loc, edgeNodes[1].loc);
 
-                    var locNewNode1 = [loc[0] + Math.cos(angle) * halfStructLength,
-                                        loc[1] + Math.sin(angle) * halfStructLength];
-                    var locNewNode2 = [loc[0] + Math.cos(angle + Math.PI) * halfStructLength,
-                                        loc[1] + Math.sin(angle + Math.PI)* halfStructLength];
+                    var locNewNode1 = [crossingLoc[0] + Math.cos(angle) * halfStructLength,
+                                        crossingLoc[1] + Math.sin(angle) * halfStructLength];
+                    var locNewNode2 = [crossingLoc[0] + Math.cos(angle + Math.PI) * halfStructLength,
+                                        crossingLoc[1] + Math.sin(angle + Math.PI)* halfStructLength];
 
                     // decide where to bound the structure along the way, splitting as necessary
                     function determineEndpoint(edge, endNode, proposedNodeLoc) {
@@ -513,10 +513,10 @@ export function validationCrossingWays(context) {
                         var minEdgeLength = 0.000005;
 
                         // split only if edge is long
-                        if (geoVecLength(loc, endNode.loc) - geoVecLength(loc, proposedNodeLoc) > minEdgeLength) {
+                        if (geoVecLength(crossingLoc, endNode.loc) - geoVecLength(crossingLoc, proposedNodeLoc) > minEdgeLength) {
                             // if the edge is long, insert a new node
                             newNode = osmNode();
-                            graph = actionAddMidpoint({loc: proposedNodeLoc, edge: edge}, newNode)(graph);
+                            graph = actionAddMidpoint({ loc: proposedNodeLoc, edge: edge }, newNode)(graph);
 
                         } else {
                             // otherwise use the edge endpoint
