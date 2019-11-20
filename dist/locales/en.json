@@ -1966,6 +1966,14 @@
                 "reference": "Some features shouldn't be standalone points."
             },
             "fix": {
+                "add_a_bridge": {
+                    "title": "Add a bridge",
+                    "annotation": "Added a bridge."
+                },
+                "add_a_tunnel": {
+                    "title": "Add a tunnel",
+                    "annotation": "Added a tunnel."
+                },
                 "address_the_concern": {
                     "title": "Address the concern"
                 },
@@ -2080,9 +2088,6 @@
                     "title": "Upgrade the tags",
                     "annotation": "Upgraded old tags."
                 },
-                "use_bridge_or_tunnel": {
-                    "title": "Use a bridge or tunnel"
-                },
                 "use_different_layers": {
                     "title": "Use different layers"
                 },
@@ -2091,9 +2096,6 @@
                 },
                 "use_different_levels": {
                     "title": "Use different levels"
-                },
-                "use_tunnel": {
-                    "title": "Use a tunnel"
                 }
             }
         },
@@ -3219,6 +3221,9 @@
                 },
                 "door": {
                     "label": "Door"
+                },
+                "drink_multi": {
+                    "label": "Drinks"
                 },
                 "drive_through": {
                     "label": "Drive-Through",

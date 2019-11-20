@@ -133,10 +133,6 @@
       "replace": {"kerb": "lowered"}
     },
     {
-      "old": {"amenity": "social_club"},
-      "replace": {"club": "*"}
-    },
-    {
       "old": {"amenity": "swimming_pool"},
       "replace": {"leisure": "swimming_pool"}
     },
