@@ -1910,7 +1910,6 @@
     {"key": "amenity", "value": "sauna", "description": "🄳 ➜ leisure=sauna"},
     {"key": "amenity", "value": "shop", "description": "🄳 ➜ shop=*"},
     {"key": "amenity", "value": "sloped_curb", "description": "🄳 ➜ kerb=lowered"},
-    {"key": "amenity", "value": "social_club", "description": "🄳 ➜ club=*"},
     {"key": "amenity", "value": "ticket_booth", "description": "🄳 ➜ shop=ticket"},
     {"key": "amenity", "value": "toilet", "description": "🄳 ➜ amenity=toilets"},
     {"key": "amenity", "value": "weigh_bridge", "description": "🄳 ➜ amenity=weighbridge"},
