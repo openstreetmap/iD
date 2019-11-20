@@ -25,7 +25,8 @@
         "oneway/bicycle",
         "smoothness",
         "toll",
-        "trolley_wire"
+        "trolley_wire",
+        "width"
     ],
     "geometry": [
         "line"
