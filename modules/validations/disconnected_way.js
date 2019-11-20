@@ -174,8 +174,8 @@ export function validationDisconnectedWay() {
         }
 
         function makeContinueDrawingFixIfAllowed(vertexID, whichEnd) {
-            var vertex = graph.entity(vertexID);
-            if (vertex.tags.noexit === 'yes') return null;
+            var vertex = graph.hasEntity(vertexID);
+            if (!vertex || vertex.tags.noexit === 'yes') return null;
 
             var useLeftContinue = (whichEnd === 'start' && textDirection === 'ltr') ||
                 (whichEnd === 'end' && textDirection === 'rtl');

@@ -3,7 +3,7 @@ import { actionChangeTags } from '../actions/change_tags';
 import { actionMergeNodes } from '../actions/merge_nodes';
 import { actionSplit } from '../actions/split';
 import { modeSelect } from '../modes/select';
-import { geoExtent, geoLineIntersection, geoSphericalClosestNode, geoVecAngle, geoMetersToLat, geoVecLengthSquare } from '../geo';
+import { geoExtent, geoLineIntersection, geoSphericalClosestNode, geoVecAngle, geoMetersToLon, geoVecLength } from '../geo';
 import { osmNode } from '../osm/node';
 import { osmFlowingWaterwayTagValues, osmPathHighwayTagValues, osmRailwayTrackTagValues, osmRoutableHighwayTagValues } from '../osm/tags';
 import { t } from '../util/locale';
@@ -487,58 +487,74 @@ export function validationCrossingWays(context) {
                 var secondWay = context.hasEntity(secondWayId);
 
                 var action = function actionAddStructure(graph) {
-                    var newNode_1 = osmNode();
-                    var newNode_2 = osmNode();
 
                     var edgeNodes = [graph.entity(edge[0]), graph.entity(edge[1])];
 
-                    var halfLenBridgeOrTunnel = (geoMetersToLat(secondWay.tags.width) || 0.00004);
+                    // use the width of the crossing feature as the structure length, if available
+                    var widthMeters = secondWay.tags.width && parseFloat(secondWay.tags.width);
+                    if (widthMeters) widthMeters = Math.min(widthMeters, 50);
+
+                    // the proposed length of the structure, in decimal degrees
+                    var structLength = (widthMeters && geoMetersToLon(widthMeters, loc[1])) || 0.00008;
+                    var halfStructLength = structLength / 2;
+
                     var angle = geoVecAngle(edgeNodes[0].loc, edgeNodes[1].loc);
 
-                    var locNewNode_1 = [loc[0] + Math.cos(angle) * halfLenBridgeOrTunnel,
-                                        loc[1] + Math.sin(angle) * halfLenBridgeOrTunnel];
-                    var locNewNode_2 = [loc[0] + Math.cos(angle + Math.PI) * halfLenBridgeOrTunnel,
-                                        loc[1] + Math.sin(angle + Math.PI)* halfLenBridgeOrTunnel];
+                    var locNewNode1 = [loc[0] + Math.cos(angle) * halfStructLength,
+                                        loc[1] + Math.sin(angle) * halfStructLength];
+                    var locNewNode2 = [loc[0] + Math.cos(angle + Math.PI) * halfStructLength,
+                                        loc[1] + Math.sin(angle + Math.PI)* halfStructLength];
 
-                    // split only if edge is long
-                    if (geoVecLengthSquare(loc, edgeNodes[1].loc) > geoVecLengthSquare(loc, locNewNode_1)){
-                        graph = actionAddMidpoint({loc: locNewNode_1, edge: edge}, newNode_1)(graph);
-                        var splitAction1 = actionSplit(newNode_1.id).limitWays(resultWayIDs);
-                        graph = splitAction1(graph);
-                        if (splitAction1.getCreatedWayIDs().length) {
-                            resultWayIDs.push(splitAction1.getCreatedWayIDs()[0]);
+                    // decide where to bound the structure along the way, splitting as necessary
+                    function determineEndpoint(edge, endNode, proposedNodeLoc) {
+                        var newNode;
+
+                        // avoid creating very short edges from splitting too close to another node
+                        var minEdgeLength = 0.000005;
+
+                        // split only if edge is long
+                        if (geoVecLength(loc, endNode.loc) - geoVecLength(loc, proposedNodeLoc) > minEdgeLength) {
+                            // if the edge is long, insert a new node
+                            newNode = osmNode();
+                            graph = actionAddMidpoint({loc: proposedNodeLoc, edge: edge}, newNode)(graph);
+
+                        } else {
+                            // otherwise use the edge endpoint
+                            newNode = endNode;
                         }
-                    } else {
-                        newNode_1 = edgeNodes[1];
-                    }
-                    if (geoVecLengthSquare(loc, edgeNodes[0].loc) > geoVecLengthSquare(loc, locNewNode_2)){
-                        graph = actionAddMidpoint({loc: locNewNode_2, edge: [edgeNodes[0].id, newNode_1.id]}, newNode_2)(graph);
-                        var splitAction2 = actionSplit(newNode_2.id).limitWays(resultWayIDs);
-                        graph = splitAction2(graph);
-                        if (splitAction2.getCreatedWayIDs().length) {
-                            resultWayIDs.push(splitAction2.getCreatedWayIDs()[0]);
+
+                        var splitAction = actionSplit(newNode.id)
+                            .limitWays(resultWayIDs); // only split selected or created ways
+
+                        // do the split
+                        graph = splitAction(graph);
+                        if (splitAction.getCreatedWayIDs().length) {
+                            resultWayIDs.push(splitAction.getCreatedWayIDs()[0]);
                         }
-                    } else {
-                        newNode_2 = edgeNodes[0];
+
+                        return newNode;
                     }
 
-                    var commonWay = resultWayIDs.map(function(id) {
+                    var structEndNode1 = determineEndpoint(edge, edgeNodes[1], locNewNode1);
+                    var structEndNode2 = determineEndpoint([edgeNodes[0].id, structEndNode1.id], edgeNodes[0], locNewNode2);
+
+                    var structureWay = resultWayIDs.map(function(id) {
                         return graph.entity(id);
                     }).find(function(way) {
-                        return way.nodes.indexOf(newNode_1.id) !== -1 &&
-                            way.nodes.indexOf(newNode_2.id) !== -1;
+                        return way.nodes.indexOf(structEndNode1.id) !== -1 &&
+                            way.nodes.indexOf(structEndNode2.id) !== -1;
                     });
 
-                    var tags = Object.assign({}, commonWay.tags); // copy tags
+                    var tags = Object.assign({}, structureWay.tags); // copy tags
                     if (bridgeOrTunnel === 'bridge'){
                         tags.bridge = 'yes';
                         tags.layer = '1';
-                    }
-                    else {
+                    } else {
                         tags.tunnel = 'yes';
                         tags.layer = '-1';
                     }
-                    graph = actionChangeTags(commonWay.id, tags)(graph);
+                    // apply the structure tags to the way
+                    graph = actionChangeTags(structureWay.id, tags)(graph);
                     return graph;
                 };
 
