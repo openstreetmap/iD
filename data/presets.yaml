@@ -711,6 +711,9 @@ en:
       door_type:
         # door=*
         label: Type
+      drink_multi:
+        # 'drink:=*'
+        label: Drinks
       drive_through:
         # drive_through=*
         label: Drive-Through

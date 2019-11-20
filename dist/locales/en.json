@@ -3080,6 +3080,9 @@
                 "door": {
                     "label": "Door"
                 },
+                "drink_multi": {
+                    "label": "Drinks"
+                },
                 "drive_through": {
                     "label": "Drive-Through",
                     "terms": ""

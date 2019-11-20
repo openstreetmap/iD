@@ -1424,6 +1424,7 @@
     {"key": "dog", "value": "leashed", "description": "🄵 Dogs"},
     {"key": "dog", "value": "no", "description": "🄵 Dogs"},
     {"key": "door", "description": "🄵 Type, 🄵 Door"},
+    {"key": "drink:", "description": "🄵 Drinks"},
     {"key": "drive_through", "description": "🄵 Drive-Through"},
     {"key": "duration", "description": "🄵 Duration"},
     {"key": "electrified", "value": "contact_line", "description": "🄵 Electrification"},
