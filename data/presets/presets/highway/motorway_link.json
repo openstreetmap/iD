@@ -24,7 +24,8 @@
         "name",
         "ref_road_number",
         "smoothness",
-        "toll"
+        "toll",
+        "width"
     ],
     "geometry": [
         "line"

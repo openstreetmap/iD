@@ -28,7 +28,8 @@
         "ref_road_number",
         "smoothness",
         "toll",
-        "trolley_wire"
+        "trolley_wire",
+        "width"
     ],
     "geometry": [
         "line"

@@ -21,7 +21,8 @@
         "minspeed",
         "not/name",
         "smoothness",
-        "toll"
+        "toll",
+        "width"
     ],
     "geometry": [
         "line"
