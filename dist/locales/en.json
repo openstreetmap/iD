@@ -7320,6 +7320,10 @@
                     "name": "Bowling Green",
                     "terms": ""
                 },
+                "leisure/pitch/chess": {
+                    "name": "Big open air chess board",
+                    "terms": "chess board"
+                },
                 "leisure/pitch/cricket": {
                     "name": "Cricket Field",
                     "terms": ""
