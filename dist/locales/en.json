@@ -6499,6 +6499,10 @@
                     "name": "Winery",
                     "terms": ""
                 },
+                "cycleway/asl": {
+                    "name": "Advanced Stop Line",
+                    "terms": "advanced stop box,asl,bicycle box,bike box,bikebox,cycle box,cycle stop marking"
+                },
                 "emergency/designated": {
                     "name": "Emergency Access Designated"
                 },

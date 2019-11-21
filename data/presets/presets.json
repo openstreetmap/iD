@@ -432,6 +432,7 @@
     "craft/watchmaker": {"icon": "maki-watch", "geometry": ["point", "area"], "tags": {"craft": "watchmaker"}, "name": "Watchmaker"},
     "craft/window_construction": {"icon": "temaki-window", "geometry": ["point", "area"], "terms": ["glass"], "tags": {"craft": "window_construction"}, "name": "Window Construction"},
     "craft/winery": {"icon": "maki-alcohol-shop", "moreFields": ["{craft}", "min_age"], "geometry": ["point", "area"], "tags": {"craft": "winery"}, "name": "Winery"},
+    "cycleway/asl": {"icon": "maki-bicycle", "fields": ["ref", "direction_vertex", "width"], "geometry": ["vertex"], "tags": {"cycleway": "asl"}, "terms": ["advanced stop box", "asl", "bicycle box", "bike box", "bikebox", "cycle box", "cycle stop marking"], "name": "Advanced Stop Line"},
     "emergency/designated": {"fields": ["emergency_combo"], "geometry": ["line"], "tags": {"emergency": "designated"}, "name": "Emergency Access Designated", "searchable": false, "matchScore": 0.01},
     "emergency/destination": {"fields": ["emergency_combo"], "geometry": ["line"], "tags": {"emergency": "destination"}, "name": "Emergency Access Destination", "searchable": false, "matchScore": 0.01},
     "emergency/no": {"fields": ["emergency_combo"], "geometry": ["line"], "tags": {"emergency": "no"}, "name": "Emergency Access No", "searchable": false, "matchScore": 0.01},

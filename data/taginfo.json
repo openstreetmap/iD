@@ -427,6 +427,7 @@
     {"key": "craft", "value": "watchmaker", "description": "🄿 Watchmaker", "object_types": ["node", "area"], "icon_url": "https://cdn.jsdelivr.net/gh/mapbox/maki/icons/watch-15.svg"},
     {"key": "craft", "value": "window_construction", "description": "🄿 Window Construction", "object_types": ["node", "area"], "icon_url": "https://cdn.jsdelivr.net/gh/bhousel/temaki/icons/window.svg"},
     {"key": "craft", "value": "winery", "description": "🄿 Winery", "object_types": ["node", "area"], "icon_url": "https://cdn.jsdelivr.net/gh/mapbox/maki/icons/alcohol-shop-15.svg"},
+    {"key": "cycleway", "value": "asl", "description": "🄿 Advanced Stop Line", "object_types": ["node"], "icon_url": "https://cdn.jsdelivr.net/gh/mapbox/maki/icons/bicycle-15.svg"},
     {"key": "emergency", "value": "designated", "description": "🄿 Emergency Access Designated (unsearchable)", "object_types": ["way"]},
     {"key": "emergency", "value": "destination", "description": "🄿 Emergency Access Destination (unsearchable)", "object_types": ["way"]},
     {"key": "emergency", "value": "no", "description": "🄿 Emergency Access No (unsearchable)", "object_types": ["way"]},

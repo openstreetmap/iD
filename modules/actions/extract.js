@@ -40,7 +40,7 @@ export function actionExtract(entityID, projection) {
     function extractFromArea(entity, graph) {
 
         var keysToCopyAndRetain = ['source', 'wheelchair'];
-        var keysToRetain = ['type'];
+        var keysToRetain = ['area', 'type'];
         var buildingKeysToRetain = ['architect', 'building', 'height', 'layer'];
 
         var centroid = d3_geoPath(projection).centroid(entity.asGeoJSON(graph, true));
