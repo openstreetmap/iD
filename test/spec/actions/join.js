@@ -541,4 +541,42 @@ describe('iD.actionJoin', function () {
         ]);
     });
 
+    it('collapses resultant single-member multipolygon into basic area', function () {
+        // Situation:
+        // b --> c
+        // |#####|
+        // |# m #|
+        // |#####|
+        // a <== d
+        //
+        //  Expected result:
+        // a --> b
+        // |#####|
+        // |#####|
+        // |#####|
+        // d <-- c
+        var graph = iD.coreGraph([
+            iD.osmNode({id: 'a', loc: [0,0]}),
+            iD.osmNode({id: 'b', loc: [0,2]}),
+            iD.osmNode({id: 'c', loc: [2,2]}),
+            iD.osmNode({id: 'd', loc: [2,0]}),
+            iD.osmWay({id: '-', nodes: ['a', 'b', 'c', 'd']}),
+            iD.osmWay({id: '=', nodes: ['d', 'a']}),
+            iD.osmRelation({id: 'm', tags: {
+                type: 'multipolygon',
+                building: 'yes'
+            }, members: [
+                {id: '-', role: 'outer', type: 'way'},
+                {id: '=', role: 'outer', type: 'way'}
+            ]})
+        ]);
+
+        graph = iD.actionJoin(['-', '='])(graph);
+
+        expect(graph.entity('-').nodes).to.eql(['a', 'b', 'c', 'd', 'a']);
+        expect(graph.entity('-').tags.building).to.eql('yes');
+        expect(graph.hasEntity('=')).to.be.undefined;
+        expect(graph.hasEntity('m')).to.be.undefined;
+    });
+
 });
