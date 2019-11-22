@@ -1,5 +1,5 @@
 {
-    "icon": "fas-chess-pawn",
+    "icon": "fas-chess-bishop",
     "geometry": [
         "area",
         "point"
@@ -13,7 +13,13 @@
         "value": "chess"
     },
     "terms": [
-        "chess board"
+        "chessboard",
+        "checkerboard",
+        "checkers",
+        "chequerboard",
+        "garden chess",
+        "large chess",
+        "oversize chess"
     ],
-    "name": "Big open air chess board"
+    "name": "Giant Chess Board"
 }

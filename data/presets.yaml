@@ -5705,10 +5705,10 @@ en:
         name: Bowling Green
         terms: '<translate with synonyms or related terms for ''Bowling Green'', separated by commas>'
       leisure/pitch/chess:
-        # 'leisure=picnic_table, sport=chess'
-        name: Big open air chess board
-        # 'terms: chess board'
-        terms: '<translate with synonyms or related terms for ''Big open air chess board'', separated by commas>'
+        # 'leisure=pitch, sport=chess'
+        name: Giant Chess Board
+        # 'terms: chessboard,checkerboard,checkers,chequerboard,garden chess,large chess,oversize chess'
+        terms: '<translate with synonyms or related terms for ''Giant Chess Board'', separated by commas>'
       leisure/pitch/cricket:
         # 'leisure=pitch, sport=cricket'
         name: Cricket Field

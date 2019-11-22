@@ -66,22 +66,24 @@ export function validationSuspiciousName() {
             reference: showReference,
             entityIds: [entityId],
             hash: nameKey + '=' + genericName,
-            fixes: [
-                new validationIssueFix({
-                    icon: 'iD-operation-delete',
-                    title: t('issues.fix.remove_the_name.title'),
-                    onClick: function(context) {
-                        var entityId = this.issue.entityIds[0];
-                        var entity = context.entity(entityId);
-                        var tags = Object.assign({}, entity.tags);   // shallow copy
-                        delete tags[nameKey];
-                        context.perform(
-                            actionChangeTags(entityId, tags),
-                            t('issues.fix.remove_generic_name.annotation')
-                        );
-                    }
-                })
-            ]
+            dynamicFixes: function() {
+                return [
+                    new validationIssueFix({
+                        icon: 'iD-operation-delete',
+                        title: t('issues.fix.remove_the_name.title'),
+                        onClick: function(context) {
+                            var entityId = this.issue.entityIds[0];
+                            var entity = context.entity(entityId);
+                            var tags = Object.assign({}, entity.tags);   // shallow copy
+                            delete tags[nameKey];
+                            context.perform(
+                                actionChangeTags(entityId, tags),
+                                t('issues.fix.remove_generic_name.annotation')
+                            );
+                        }
+                    })
+                ];
+            }
         });
 
         function showReference(selection) {

@@ -649,7 +649,7 @@
     {"key": "leisure", "value": "outdoor_seating", "description": "🄿 Outdoor Seating Area", "object_types": ["node", "area"], "icon_url": "https://cdn.jsdelivr.net/gh/mapbox/maki/icons/picnic-site-15.svg"},
     {"key": "leisure", "value": "park", "description": "🄿 Park", "object_types": ["area", "node"], "icon_url": "https://cdn.jsdelivr.net/gh/mapbox/maki/icons/park-15.svg"},
     {"key": "leisure", "value": "picnic_table", "description": "🄿 Picnic Table", "object_types": ["node"], "icon_url": "https://cdn.jsdelivr.net/gh/mapbox/maki/icons/picnic-site-15.svg"},
-    {"key": "sport", "value": "chess", "description": "🄿 Chess Table", "object_types": ["node"], "icon_url": "https://cdn.jsdelivr.net/gh/openstreetmap/iD@master/svg/fontawesome/fas-chess-pawn.svg"},
+    {"key": "sport", "value": "chess", "description": "🄿 Chess Table, 🄿 Giant Chess Board", "object_types": ["node"], "icon_url": "https://cdn.jsdelivr.net/gh/openstreetmap/iD@master/svg/fontawesome/fas-chess-pawn.svg"},
     {"key": "leisure", "value": "pitch", "description": "🄿 Sport Pitch", "object_types": ["area", "node"], "icon_url": "https://cdn.jsdelivr.net/gh/mapbox/maki/icons/pitch-15.svg"},
     {"key": "sport", "value": "american_football", "description": "🄿 American Football Field", "object_types": ["area", "node"], "icon_url": "https://cdn.jsdelivr.net/gh/mapbox/maki/icons/american-football-15.svg"},
     {"key": "sport", "value": "australian_football", "description": "🄿 Australian Football Field", "object_types": ["area", "node"], "icon_url": "https://cdn.jsdelivr.net/gh/mapbox/maki/icons/american-football-15.svg"},
