@@ -308,8 +308,9 @@ Object.assign(osmRelation.prototype, {
         inners = osmJoinWays(inners, resolver);
 
         var sequenceToLineString = function(sequence) {
-            if (sequence.nodes[0] !== sequence.nodes[sequence.nodes.length - 1]) {
-                // treat all parts as closed even if they aren't
+            if (sequence.nodes.length > 2 &&
+                sequence.nodes[0] !== sequence.nodes[sequence.nodes.length - 1]) {
+                // close unclosed parts to ensure correct area rendering - #2945
                 sequence.nodes.push(sequence.nodes[0]);
             }
             return sequence.nodes.map(function(node) { return node.loc; });
