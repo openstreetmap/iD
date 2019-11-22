@@ -227,7 +227,11 @@ export function validationMismatchedGeometry(context) {
 
     function unclosedMultipolygonPartIssues(entity, graph) {
 
-        if (entity.type !== 'relation' || !entity.isMultipolygon() || entity.isDegenerate()) return null;
+        if (entity.type !== 'relation' ||
+            !entity.isMultipolygon() ||
+            entity.isDegenerate() ||
+            // cannot determine issues for incompletely-downloaded relations
+            !entity.isComplete(graph)) return null;
 
         var sequences = osmJoinWays(entity.members, graph);
 
