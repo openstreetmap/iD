@@ -43,8 +43,10 @@ export function validationMissingTag(context) {
 
     var validation = function checkMissingTag(entity, graph) {
 
+        var osm = context.connection();
+
         // we can't know if the node is a vertex if the tile is undownloaded
-        if ((entity.type === 'node' && !context.connection().isDataLoaded(entity.loc)) ||
+        if ((entity.type === 'node' && osm && !osm.isDataLoaded(entity.loc)) ||
             // allow untagged nodes that are part of ways
             entity.geometry(graph) === 'vertex' ||
             // allow untagged entities that are part of relations
