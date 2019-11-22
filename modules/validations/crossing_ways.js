@@ -650,7 +650,7 @@ export function validationCrossingWays(context) {
                         layer = -1;
                     }
                 }
-                tags.layer = layer;
+                tags.layer = layer.toString();
                 context.perform(
                     actionChangeTags(entity.id, tags),
                     t('operations.change_tags.annotation')
