@@ -459,6 +459,7 @@ A feature's tags indicate it should have a different geometry than it currently 
 * `area_as_line`: an unclosed way has tags implying it should be a closed area (e.g. `area=yes` or `building=yes`)
 * `vertex_as_point`: a detached node has tags implying it should be part of a way (e.g. `highway=stop`)
 * `point_as_vertex`: a vertex node has tags implying it should be detached from ways (e.g. `amenity=cafe`)
+* `unclosed_multipolygon_part`: a relation is tagged as a multipolygon but not all of its member ways form closed rings
 
 ##### `missing_role`
 

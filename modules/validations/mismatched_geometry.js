@@ -3,6 +3,7 @@ import { actionChangeTags } from '../actions/change_tags';
 import { actionMergeNodes } from '../actions/merge_nodes';
 import { actionExtract } from '../actions/extract';
 import { modeSelect } from '../modes/select';
+import { osmJoinWays } from '../osm/multipolygon';
 import { osmNodeGeometriesForTags } from '../osm/tags';
 import { geoHasSelfIntersections, geoSphericalDistance } from '../geo';
 import { t } from '../util/locale';
@@ -224,11 +225,63 @@ export function validationMismatchedGeometry(context) {
         return null;
     }
 
+    function unclosedMultipolygonPartIssues(entity, graph) {
+
+        if (entity.type !== 'relation' || !entity.isMultipolygon() || entity.isDegenerate()) return null;
+
+        var sequences = osmJoinWays(entity.members, graph);
+
+        var issues = [];
+
+        for (var i in sequences) {
+            var sequence = sequences[i];
+
+            if (!sequence.nodes) continue;
+
+            var firstNode = sequence.nodes[0];
+            var lastNode = sequence.nodes[sequence.nodes.length - 1];
+
+            // part is closed if the first and last nodes are the same
+            if (firstNode === lastNode) continue;
+
+            var issue = new validationIssue({
+                type: type,
+                subtype: 'unclosed_multipolygon_part',
+                severity: 'warning',
+                message: function(context) {
+                    var entity = context.hasEntity(this.entityIds[0]);
+                    return entity ? t('issues.unclosed_multipolygon_part.message', {
+                        feature: utilDisplayLabel(entity, context)
+                    }) : '';
+                },
+                reference: showReference,
+                loc: sequence.nodes[0].loc,
+                entityIds: [entity.id],
+                hash: sequence.map(function(way) {
+                    return way.id;
+                }).join()
+            });
+            issues.push(issue);
+        }
+
+        return issues;
+
+        function showReference(selection) {
+            selection.selectAll('.issue-reference')
+                .data([0])
+                .enter()
+                .append('div')
+                .attr('class', 'issue-reference')
+                .text(t('issues.unclosed_multipolygon_part.reference'));
+        }
+    }
+
     var validation = function checkMismatchedGeometry(entity, graph) {
         var issues = [
             vertexTaggedAsPointIssue(entity, graph),
             lineTaggedAsAreaIssue(entity)
         ];
+        issues = issues.concat(unclosedMultipolygonPartIssues(entity, graph));
         return issues.filter(Boolean);
     };
 
