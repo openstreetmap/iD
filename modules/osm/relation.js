@@ -307,16 +307,16 @@ Object.assign(osmRelation.prototype, {
         outers = osmJoinWays(outers, resolver);
         inners = osmJoinWays(inners, resolver);
 
-        var wayToLineString = function(way) {
-            if (way.nodes[0] !== way.nodes[way.nodes.length - 1]) {
+        var sequenceToLineString = function(sequence) {
+            if (sequence.nodes[0] !== sequence.nodes[sequence.nodes.length - 1]) {
                 // treat all parts as closed even if they aren't
-                way.nodes.push(way.nodes[0]);
+                sequence.nodes.push(sequence.nodes[0]);
             }
-            return way.nodes.map(function(node) { return node.loc; });
+            return sequence.nodes.map(function(node) { return node.loc; });
         };
 
-        outers = outers.map(wayToLineString);
-        inners = inners.map(wayToLineString);
+        outers = outers.map(sequenceToLineString);
+        inners = inners.map(sequenceToLineString);
 
         var result = outers.map(function(o) {
             // Heuristic for detecting counterclockwise winding order. Assumes
