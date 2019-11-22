@@ -6,7 +6,7 @@ import { utilDisplayLabel } from '../util';
 import { validationIssue, validationIssueFix } from '../core/validation';
 
 
-export function validationMissingTag() {
+export function validationMissingTag(context) {
     var type = 'missing_tag';
 
     function hasDescriptiveTags(entity, graph) {
@@ -43,8 +43,12 @@ export function validationMissingTag() {
 
     var validation = function checkMissingTag(entity, graph) {
 
-        // ignore vertex features and relation members
-        if (entity.geometry(graph) === 'vertex' || entity.hasParentRelations(graph)) {
+        // we can't know if the node is a vertex if the tile is undownloaded
+        if ((entity.type === 'node' && !context.connection().isDataLoaded(entity.loc)) ||
+            // allow untagged nodes that are part of ways
+            entity.geometry(graph) === 'vertex' ||
+            // allow untagged entities that are part of relations
+            entity.hasParentRelations(graph)) {
             return [];
         }
 
@@ -122,7 +126,6 @@ export function validationMissingTag() {
                 return fixes;
             }
         })];
-
 
         function showReference(selection) {
             selection.selectAll('.issue-reference')
