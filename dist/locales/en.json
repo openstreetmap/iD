@@ -1953,6 +1953,10 @@
                     }
                 }
             },
+            "unclosed_multipolygon_part": {
+                "message": "{feature} has an unclosed part",
+                "reference": "All inner and outer parts of multipolygons should have connected endpoints."
+            },
             "unsquare_way": {
                 "title": "Unsquare Corners (up to {val}°)",
                 "message": "{feature} has unsquare corners",

@@ -105,15 +105,17 @@ export function validationAlmostJunction(context) {
             })];
 
             var node = context.hasEntity(this.entityIds[1]);
-            if (node && Object.keys(node.tags).length === 0) {
-                // node has no tags, suggest noexit fix
+            if (node && !node.hasInterestingTags()) {
+                // node has no descriptive tags, suggest noexit fix
                 fixes.push(new validationIssueFix({
                     icon: 'maki-barrier',
                     title: t('issues.fix.tag_as_disconnected.title'),
                     onClick: function(context) {
                         var nodeID = this.issue.entityIds[1];
+                        var tags = Object.assign({}, context.entity(nodeID).tags);
+                        tags.noexit = 'yes';
                         context.perform(
-                            actionChangeTags(nodeID, { noexit: 'yes' }),
+                            actionChangeTags(nodeID, tags),
                             t('issues.fix.tag_as_disconnected.annotation')
                         );
                     }

@@ -121,7 +121,7 @@ export function uiBackground(context) {
 
     function drawListItems(layerList, type, change, filter) {
         var sources = context.background()
-            .sources(context.map().extent())
+            .sources(context.map().extent(), context.map().zoom(), true)
             .filter(filter);
 
         var layerLinks = layerList.selectAll('li')
