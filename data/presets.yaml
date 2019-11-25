@@ -3935,6 +3935,7 @@ en:
       barrier/cattle_grid:
         # barrier=cattle_grid
         name: Cattle Grid
+        # 'terms: cattle guard,cattle stop,livestock grid,stock gate,stock grid,stock stop,Texas gate,vehicle pass'
         terms: '<translate with synonyms or related terms for ''Cattle Grid'', separated by commas>'
       barrier/chain:
         # barrier=chain

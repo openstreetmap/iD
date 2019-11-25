@@ -297,7 +297,7 @@
     "barrier/bollard_line": {"icon": "temaki-silo", "fields": ["access", "bollard", "height", "material", "colour"], "geometry": ["line"], "tags": {"barrier": "bollard"}, "name": "Bollard Row"},
     "barrier/bollard": {"icon": "temaki-silo", "fields": ["access", "bollard", "height", "width", "material", "colour"], "geometry": ["point", "vertex"], "tags": {"barrier": "bollard"}, "name": "Bollard"},
     "barrier/border_control": {"icon": "maki-roadblock", "fields": ["access", "building_area"], "moreFields": ["address", "email", "fax", "phone", "website"], "geometry": ["vertex", "area"], "tags": {"barrier": "border_control"}, "name": "Border Control"},
-    "barrier/cattle_grid": {"icon": "maki-barrier", "geometry": ["vertex"], "tags": {"barrier": "cattle_grid"}, "name": "Cattle Grid"},
+    "barrier/cattle_grid": {"icon": "maki-barrier", "geometry": ["vertex"], "tags": {"barrier": "cattle_grid"}, "terms": ["cattle guard", "cattle stop", "livestock grid", "stock gate", "stock grid", "stock stop", "Texas gate", "vehicle pass"], "name": "Cattle Grid"},
     "barrier/chain": {"icon": "maki-barrier", "fields": ["access"], "geometry": ["vertex", "line"], "tags": {"barrier": "chain"}, "name": "Chain"},
     "barrier/city_wall": {"icon": "temaki-wall", "fields": ["height", "material"], "geometry": ["line", "area"], "tags": {"barrier": "city_wall"}, "name": "City Wall"},
     "barrier/cycle_barrier": {"icon": "maki-roadblock", "fields": ["access"], "geometry": ["vertex"], "tags": {"barrier": "cycle_barrier"}, "name": "Cycle Barrier"},

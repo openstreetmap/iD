@@ -5840,7 +5840,7 @@
                 },
                 "barrier/cattle_grid": {
                     "name": "Cattle Grid",
-                    "terms": ""
+                    "terms": "cattle guard,cattle stop,livestock grid,stock gate,stock grid,stock stop,Texas gate,vehicle pass"
                 },
                 "barrier/chain": {
                     "name": "Chain",
