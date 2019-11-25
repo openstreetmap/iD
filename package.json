@@ -102,7 +102,7 @@
     "static-server": "^2.2.1",
     "svg-sprite": "1.5.0",
     "temaki": "~2.1.0",
-    "uglify-js": "~3.6.6"
+    "uglify-js": "~3.7.0"
   },
   "greenkeeper": {
     "label": "chore-greenkeeper",
