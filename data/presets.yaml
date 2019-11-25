@@ -3879,14 +3879,14 @@ en:
         terms: '<translate with synonyms or related terms for ''Maze'', separated by commas>'
       attraction/pirate_ship:
         # attraction=pirate_ship
-        name: Pirate Ship
+        name: Pirate Ship Ride
         # 'terms: theme park,carnival ride,amusement ride'
-        terms: '<translate with synonyms or related terms for ''Pirate Ship'', separated by commas>'
+        terms: '<translate with synonyms or related terms for ''Pirate Ship Ride'', separated by commas>'
       attraction/river_rafting:
         # attraction=river_rafting
-        name: River Rafting
+        name: River Rapids Ride
         # 'terms: theme park,aquatic park,water park,rafting simulator,river rafting ride,river rapids ride'
-        terms: '<translate with synonyms or related terms for ''River Rafting'', separated by commas>'
+        terms: '<translate with synonyms or related terms for ''River Rapids Ride'', separated by commas>'
       attraction/roller_coaster:
         # attraction=roller_coaster
         name: Roller Coaster

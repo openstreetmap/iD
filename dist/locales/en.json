@@ -5788,11 +5788,11 @@
                     "terms": "theme park,amusement ride,labyrinth"
                 },
                 "attraction/pirate_ship": {
-                    "name": "Pirate Ship",
+                    "name": "Pirate Ship Ride",
                     "terms": "theme park,carnival ride,amusement ride"
                 },
                 "attraction/river_rafting": {
-                    "name": "River Rafting",
+                    "name": "River Rapids Ride",
                     "terms": "theme park,aquatic park,water park,rafting simulator,river rafting ride,river rapids ride"
                 },
                 "attraction/roller_coaster": {
