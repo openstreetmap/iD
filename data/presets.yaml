@@ -714,6 +714,11 @@ en:
       drink_multi:
         # 'drink:=*'
         label: Drinks
+      drinking_water:
+        # drinking_water=*
+        label: Drinkable
+        # 'terms: drinkworthy,potable'
+        terms: '[translate with synonyms or related terms for ''Drinkable'', separated by commas]'
       drive_through:
         # drive_through=*
         label: Drive-Through
@@ -838,6 +843,9 @@ en:
         label: Type
         # ford field placeholder
         placeholder: Default
+      fountain:
+        # fountain=*
+        label: Type
       frequency:
         # frequency=*
         label: Operating Frequency
@@ -1721,6 +1729,9 @@ en:
       public_bookcase/type:
         # 'public_bookcase:type=*'
         label: Type
+      pump:
+        # pump=*
+        label: Pump
       railway:
         # railway=*
         label: Type
@@ -3076,6 +3087,7 @@ en:
       amenity/fountain:
         # amenity=fountain
         name: Fountain
+        # 'terms: basin,water'
         terms: '<translate with synonyms or related terms for ''Fountain'', separated by commas>'
       amenity/fuel:
         # amenity=fuel
@@ -3787,6 +3799,7 @@ en:
       amenity/water_point:
         # amenity=water_point
         name: RV Drinking Water
+        # 'terms: water faucet,water point,water tap,water source,water spigot'
         terms: '<translate with synonyms or related terms for ''RV Drinking Water'', separated by commas>'
       amenity/watering_place:
         # amenity=watering_place
@@ -6105,6 +6118,11 @@ en:
         name: Wastewater Plant
         # 'terms: sewage*,water treatment plant,reclamation plant'
         terms: '<translate with synonyms or related terms for ''Wastewater Plant'', separated by commas>'
+      man_made/water_tap:
+        # man_made=water_tap
+        name: Water Tap
+        # 'terms: drinking water,water faucet,water point,water source,water spigot'
+        terms: '<translate with synonyms or related terms for ''Water Tap'', separated by commas>'
       man_made/water_tower:
         # man_made=water_tower
         name: Water Tower
@@ -6112,6 +6130,7 @@ en:
       man_made/water_well:
         # man_made=water_well
         name: Water Well
+        # 'terms: aquifer,drinking water,water point,water source'
         terms: '<translate with synonyms or related terms for ''Water Well'', separated by commas>'
       man_made/water_works:
         # man_made=water_works
@@ -6265,6 +6284,7 @@ en:
       natural/spring:
         # natural=spring
         name: Spring
+        # 'terms: aquifer,hydro,seep,water source'
         terms: '<translate with synonyms or related terms for ''Spring'', separated by commas>'
       natural/stone:
         # natural=stone
@@ -8388,6 +8408,7 @@ en:
       waterway/water_point:
         # waterway=water_point
         name: Marine Drinking Water
+        # 'terms: water faucet,water point,water tap,water source,water spigot'
         terms: '<translate with synonyms or related terms for ''Marine Drinking Water'', separated by commas>'
       waterway/waterfall:
         # waterway=waterfall

@@ -1,24 +1,24 @@
 {
-    "icon": "maki-water",
+    "icon": "maki-drinking-water",
     "fields": [
         "ref",
         "operator",
         "drinking_water",
-        "pump",
         "access_simple"
     ],
     "geometry": [
         "point",
-        "area"
+        "vertex"
     ],
     "tags": {
-        "man_made": "water_well"
+        "man_made": "water_tap"
     },
     "terms": [
-        "aquifer",
         "drinking water",
+        "water faucet",
         "water point",
-        "water source"
+        "water source",
+        "water spigot"
     ],
-    "name": "Water Well"
+    "name": "Water Tap"
 }
