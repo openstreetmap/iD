@@ -185,6 +185,10 @@
       "replace": {"man_made": "embankment"}
     },
     {
+      "old": {"barrier": "railing"},
+      "replace": {"barrier": "fence", "fence_type": "railing"}
+    },
+    {
       "old": {"barrier": "wall", "type": "noise_barrier"},
       "replace": {"barrier": "wall", "wall": "noise_barrier"}
     },

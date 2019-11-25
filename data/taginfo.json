@@ -1927,6 +1927,7 @@
     {"key": "attraction", "value": "ferris_wheel", "description": "🄳 ➜ attraction=big_wheel"},
     {"key": "barrier", "value": "curb", "description": "🄳 ➜ barrier=kerb"},
     {"key": "barrier", "value": "embankment", "description": "🄳 ➜ man_made=embankment"},
+    {"key": "barrier", "value": "railing", "description": "🄳 ➜ barrier=fence + fence_type=railing"},
     {"key": "barrier", "value": "wire_fence", "description": "🄳 ➜ barrier=fence + fence_type=wire"},
     {"key": "barrier", "value": "wood_fence", "description": "🄳 ➜ barrier=fence + fence_type=wood"},
     {"key": "building", "value": "family_house", "description": "🄳 ➜ building=house"},
