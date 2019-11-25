@@ -290,7 +290,7 @@
     {"key": "attraction", "value": "water_slide", "description": "🄿 Water Slide", "object_types": ["way", "area"], "icon_url": "https://cdn.jsdelivr.net/gh/openstreetmap/iD@master/svg/fontawesome/fas-swimmer.svg"},
     {"key": "barrier", "description": "🄿 Barrier, 🄵 Type", "object_types": ["node", "way", "area"], "icon_url": "https://cdn.jsdelivr.net/gh/mapbox/maki/icons/roadblock-15.svg"},
     {"key": "barrier", "value": "entrance", "description": "🄿 Entrance (unsearchable)", "object_types": ["node"], "icon_url": "https://cdn.jsdelivr.net/gh/mapbox/maki/icons/entrance-alt1-15.svg"},
-    {"key": "barrier", "value": "block", "description": "🄿 Block", "object_types": ["node"], "icon_url": "https://cdn.jsdelivr.net/gh/mapbox/maki/icons/roadblock-15.svg"},
+    {"key": "barrier", "value": "block", "description": "🄿 Block", "object_types": ["node"], "icon_url": "https://cdn.jsdelivr.net/gh/openstreetmap/iD@master/svg/fontawesome/fas-cube.svg"},
     {"key": "barrier", "value": "bollard", "description": "🄿 Bollard Row, 🄿 Bollard", "object_types": ["way"], "icon_url": "https://cdn.jsdelivr.net/gh/bhousel/temaki/icons/silo.svg"},
     {"key": "barrier", "value": "border_control", "description": "🄿 Border Control", "object_types": ["node", "area"], "icon_url": "https://cdn.jsdelivr.net/gh/mapbox/maki/icons/roadblock-15.svg"},
     {"key": "barrier", "value": "cattle_grid", "description": "🄿 Cattle Grid", "object_types": ["node"], "icon_url": "https://cdn.jsdelivr.net/gh/mapbox/maki/icons/barrier-15.svg"},

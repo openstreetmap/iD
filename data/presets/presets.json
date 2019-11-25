@@ -293,7 +293,7 @@
     "attraction/water_slide": {"icon": "fas-swimmer", "fields": ["{attraction}", "height"], "moreFields": ["{attraction}", "max_age", "min_age"], "geometry": ["line", "area"], "terms": ["theme park", "aquatic park", "water park", "flumes", "water chutes", "hydroslides"], "tags": {"attraction": "water_slide"}, "name": "Water Slide"},
     "barrier": {"icon": "maki-roadblock", "geometry": ["point", "vertex", "line", "area"], "tags": {"barrier": "*"}, "fields": ["barrier"], "moreFields": ["level"], "name": "Barrier", "matchScore": 0.4},
     "barrier/entrance": {"icon": "maki-entrance-alt1", "geometry": ["vertex"], "tags": {"barrier": "entrance"}, "name": "Entrance", "searchable": false},
-    "barrier/block": {"icon": "maki-roadblock", "fields": ["access", "material"], "geometry": ["point", "vertex"], "tags": {"barrier": "block"}, "name": "Block"},
+    "barrier/block": {"icon": "fas-cube", "fields": ["access", "material"], "geometry": ["point", "vertex"], "tags": {"barrier": "block"}, "name": "Block"},
     "barrier/bollard_line": {"icon": "temaki-silo", "fields": ["access", "bollard", "height", "material", "colour"], "geometry": ["line"], "tags": {"barrier": "bollard"}, "name": "Bollard Row"},
     "barrier/bollard": {"icon": "temaki-silo", "fields": ["access", "bollard", "height", "width", "material", "colour"], "geometry": ["point", "vertex"], "tags": {"barrier": "bollard"}, "name": "Bollard"},
     "barrier/border_control": {"icon": "maki-roadblock", "fields": ["access", "building_area"], "moreFields": ["address", "email", "fax", "phone", "website"], "geometry": ["vertex", "area"], "tags": {"barrier": "border_control"}, "name": "Border Control"},
