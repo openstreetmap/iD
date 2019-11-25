@@ -32,7 +32,6 @@ export function validationOutdatedTags(context) {
     function oldTagIssues(entity, graph) {
         var oldTags = Object.assign({}, entity.tags);  // shallow copy
         var preset = context.presets().match(entity, graph);
-        var explicitPresetUpgrade = preset.replacement;
         var subtype = 'deprecated_tags';
 
         // upgrade preset..
@@ -58,9 +57,6 @@ export function validationOutdatedTags(context) {
             Object.keys(preset.addTags).forEach(function(k) {
                 if (!newTags[k]) {
                     newTags[k] = preset.addTags[k];
-                    if (!explicitPresetUpgrade) {
-                        subtype = 'incomplete_tags';
-                    }
                 }
             });
         }
@@ -121,15 +117,19 @@ export function validationOutdatedTags(context) {
             }
         }
 
-
         // determine diff
         var tagDiff = utilTagDiff(oldTags, newTags);
         if (!tagDiff.length) return [];
 
+        var isOnlyAddingTags = tagDiff.every(function(d) {
+            return d.type === '+';
+        });
+
         var prefix = '';
         if (subtype === 'noncanonical_brand') {
             prefix = 'noncanonical_brand.';
-        } else if (subtype === 'incomplete_tags') {
+        } else if (subtype === 'deprecated_tags' && isOnlyAddingTags) {
+            subtype = 'incomplete_tags';
             prefix = 'incomplete.';
         }
 
@@ -181,9 +181,7 @@ export function validationOutdatedTags(context) {
 
             var messageID = 'issues.outdated_tags.' + prefix + 'message';
 
-            if (subtype === 'noncanonical_brand' && tagDiff.every(function(d) {
-                return d.type === '+';
-            })) {
+            if (subtype === 'noncanonical_brand' && isOnlyAddingTags) {
                 messageID += '_incomplete';
             }
 
