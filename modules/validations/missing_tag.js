@@ -43,26 +43,29 @@ export function validationMissingTag(context) {
 
     var validation = function checkMissingTag(entity, graph) {
 
-        var osm = context.connection();
-
-        // we can't know if the node is a vertex if the tile is undownloaded
-        if ((entity.type === 'node' && osm && !osm.isDataLoaded(entity.loc)) ||
-            // allow untagged nodes that are part of ways
-            entity.geometry(graph) === 'vertex' ||
-            // allow untagged entities that are part of relations
-            entity.hasParentRelations(graph)) {
-            return [];
-        }
-
         var subtype;
 
-        if (Object.keys(entity.tags).length === 0) {
-            subtype = 'any';
-        } else if (!hasDescriptiveTags(entity, graph)) {
-            subtype = 'descriptive';
-        } else if (isUntypedRelation(entity)) {
-            subtype = 'relation_type';
-        } else if (isUnknownRoad(entity)) {
+        var osm = context.connection();
+        var isUnloadedNode = entity.type === 'node' && osm && !osm.isDataLoaded(entity.loc);
+
+        // we can't know if the node is a vertex if the tile is undownloaded
+        if (!isUnloadedNode &&
+            // allow untagged nodes that are part of ways
+            entity.geometry(graph) !== 'vertex' &&
+            // allow untagged entities that are part of relations
+            !entity.hasParentRelations(graph)) {
+
+            if (Object.keys(entity.tags).length === 0) {
+                subtype = 'any';
+            } else if (!hasDescriptiveTags(entity, graph)) {
+                subtype = 'descriptive';
+            } else if (isUntypedRelation(entity)) {
+                subtype = 'relation_type';
+            }
+        }
+
+        // flag an unknown road even if it's a member of a relation
+        if (!subtype && isUnknownRoad(entity)) {
             subtype = 'highway_classification';
         }
 

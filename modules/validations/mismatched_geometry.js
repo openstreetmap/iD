@@ -174,22 +174,6 @@ export function validationMismatchedGeometry(context) {
 
         } else if (geometry === 'vertex' && !allowedGeometries.vertex && allowedGeometries.point) {
 
-            var extractOnClick = null;
-            if (!context.hasHiddenConnections(entity.id) &&
-                !actionExtract(entity.id, context.projection).disabled(context.graph())) {
-
-                extractOnClick = function(context) {
-                    var entityId = this.issue.entityIds[0];
-                    var action = actionExtract(entityId, context.projection);
-                    context.perform(
-                        action,
-                        t('operations.extract.annotation.single')
-                    );
-                    // re-enter mode to trigger updates
-                    context.enter(modeSelect(context, [action.getExtractedNodeID()]));
-                };
-            }
-
             return new validationIssue({
                 type: type,
                 subtype: 'point_as_vertex',
@@ -209,7 +193,26 @@ export function validationMismatchedGeometry(context) {
                         .text(t('issues.point_as_vertex.reference'));
                 },
                 entityIds: [entity.id],
-                dynamicFixes: function() {
+                dynamicFixes: function(context) {
+
+                    var entityId = this.entityIds[0];
+
+                    var extractOnClick = null;
+                    if (!context.hasHiddenConnections(entityId) &&
+                        !actionExtract(entityId, context.projection).disabled(context.graph())) {
+
+                        extractOnClick = function(context) {
+                            var entityId = this.issue.entityIds[0];
+                            var action = actionExtract(entityId, context.projection);
+                            context.perform(
+                                action,
+                                t('operations.extract.annotation.single')
+                            );
+                            // re-enter mode to trigger updates
+                            context.enter(modeSelect(context, [action.getExtractedNodeID()]));
+                        };
+                    }
+
                     return [
                         new validationIssueFix({
                             icon: 'iD-operation-extract',
@@ -217,8 +220,7 @@ export function validationMismatchedGeometry(context) {
                             onClick: extractOnClick
                         })
                     ];
-                },
-                hash: typeof extractOnClick, // avoid stale extraction fix
+                }
             });
         }
 

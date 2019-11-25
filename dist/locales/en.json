@@ -3229,6 +3229,10 @@
                 "drink_multi": {
                     "label": "Drinks"
                 },
+                "drinking_water": {
+                    "label": "Drinkable",
+                    "terms": "drinkworthy,potable"
+                },
                 "drive_through": {
                     "label": "Drive-Through",
                     "terms": ""
@@ -3338,6 +3342,9 @@
                 "ford": {
                     "label": "Type",
                     "placeholder": "Default"
+                },
+                "fountain": {
+                    "label": "Type"
                 },
                 "frequency_electrified": {
                     "label": "Operating Frequency",
@@ -4065,6 +4072,9 @@
                 },
                 "public_bookcase/type": {
                     "label": "Type"
+                },
+                "pump": {
+                    "label": "Pump"
                 },
                 "railway": {
                     "label": "Type"
@@ -5287,7 +5297,7 @@
                 },
                 "amenity/fountain": {
                     "name": "Fountain",
-                    "terms": ""
+                    "terms": "basin,water"
                 },
                 "amenity/fuel": {
                     "name": "Gas Station",
@@ -5855,7 +5865,7 @@
                 },
                 "amenity/water_point": {
                     "name": "RV Drinking Water",
-                    "terms": ""
+                    "terms": "water faucet,water point,water tap,water source,water spigot"
                 },
                 "amenity/watering_place": {
                     "name": "Animal Watering Place",
@@ -5918,11 +5928,11 @@
                     "terms": "theme park,amusement ride,labyrinth"
                 },
                 "attraction/pirate_ship": {
-                    "name": "Pirate Ship",
+                    "name": "Pirate Ship Ride",
                     "terms": "theme park,carnival ride,amusement ride"
                 },
                 "attraction/river_rafting": {
-                    "name": "River Rafting",
+                    "name": "River Rapids Ride",
                     "terms": "theme park,aquatic park,water park,rafting simulator,river rafting ride,river rapids ride"
                 },
                 "attraction/roller_coaster": {
@@ -7840,13 +7850,17 @@
                     "name": "Wastewater Plant",
                     "terms": "sewage*,water treatment plant,reclamation plant"
                 },
+                "man_made/water_tap": {
+                    "name": "Water Tap",
+                    "terms": "drinking water,water faucet,water point,water source,water spigot"
+                },
                 "man_made/water_tower": {
                     "name": "Water Tower",
                     "terms": ""
                 },
                 "man_made/water_well": {
                     "name": "Water Well",
-                    "terms": ""
+                    "terms": "aquifer,drinking water,water point,water source"
                 },
                 "man_made/water_works": {
                     "name": "Water Works",
@@ -7970,7 +7984,7 @@
                 },
                 "natural/spring": {
                     "name": "Spring",
-                    "terms": ""
+                    "terms": "aquifer,hydro,seep,water source"
                 },
                 "natural/stone": {
                     "name": "Unattached Stone / Boulder",
@@ -9791,7 +9805,7 @@
                 },
                 "waterway/water_point": {
                     "name": "Marine Drinking Water",
-                    "terms": ""
+                    "terms": "water faucet,water point,water tap,water source,water spigot"
                 },
                 "waterway/waterfall": {
                     "name": "Waterfall",

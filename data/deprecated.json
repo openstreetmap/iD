@@ -636,6 +636,10 @@
       "replace": {"man_made": "storage_tank", "content": "oil"}
     },
     {
+      "old": {"man_made": "village_pump"},
+      "replace": {"man_made": "water_well"}
+    },
+    {
       "old": {"man_made": "wastewater_tank"},
       "replace": {"man_made": "storage_tank", "content": "wastewater"}
     },
