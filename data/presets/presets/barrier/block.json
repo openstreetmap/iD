@@ -1,5 +1,5 @@
 {
-    "icon": "maki-roadblock",
+    "icon": "fas-cube",
     "fields": [
         "access",
         "material"

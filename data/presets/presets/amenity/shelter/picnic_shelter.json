@@ -1,5 +1,5 @@
 {
-    "icon": "maki-shelter",
+    "icon": "temaki-picnic_shelter",
     "fields": [
         "name",
         "shelter_type",
