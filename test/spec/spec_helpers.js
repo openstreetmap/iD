@@ -52,6 +52,11 @@ Array.from = function(what) {
     }
 };
 
+// Workaround for `ArrayBuffer.isView` in PhantomJS
+// https://github.com/openstreetmap/iD/issues/7072
+if (typeof ArrayBuffer.isView === 'undefined') {
+    ArrayBuffer.isView = function() { return false; };
+}
 
 // Add support for sinon-stubbing `fetch` API
 // (sinon fakeServer works only on `XMLHttpRequest`)
