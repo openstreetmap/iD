@@ -28,9 +28,9 @@
     "imagery": "node data/update_imagery",
     "lint": "eslint *.js test/spec modules",
     "start": "node --max-old-space-size=4096 server.js",
-    "phantom": "phantomjs --web-security=no node_modules/mocha-phantomjs-core/mocha-phantomjs-core.js test/phantom.html spec",
     "test": "npm-run-all -s lint build test:**",
-    "test:phantom": "phantomjs --web-security=no node_modules/mocha-phantomjs-core/mocha-phantomjs-core.js test/index.html spec",
+    "test:phantom": "phantomjs --web-security=no node_modules/mocha-phantomjs-core/mocha-phantomjs-core.js test/phantom.html spec",
+    "test:iD": "phantomjs --web-security=no node_modules/mocha-phantomjs-core/mocha-phantomjs-core.js test/index.html spec",
     "translations": "node data/update_locales"
   },
   "dependencies": {
