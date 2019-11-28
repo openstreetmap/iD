@@ -139,7 +139,15 @@
         ["postcode", "province"],
         ["city", "district"],
         ["street", "housenumber"]
-      ]
+      ],
+      "widths": {
+        "postcode": 0.3,
+        "province": 0.7,
+        "city": 0.5,
+        "district": 0.5,
+        "street": 0.7,
+        "housenumber": 0.3
+      }
     }
   ]
 }

@@ -109,6 +109,7 @@ en:
           block_number: Block Number
           block_number!jp: Block No.
           city: City
+          city!cn: City/Prefecture/League
           city!jp: City/Town/Village/Tokyo Special Ward
           city!vn: City/Town
           conscriptionnumber: '123'
@@ -116,6 +117,7 @@ en:
           county: County
           county!jp: District
           district: District
+          district!cn: District/County/Banner
           district!vn: Arrondissement/Town/District
           floor: Floor
           hamlet: Hamlet
@@ -127,6 +129,7 @@ en:
           place: Place
           postcode: Postcode
           province: Province
+          province!cn: Province/Municipality/AR/SAR
           province!jp: Prefecture
           quarter: Quarter
           quarter!jp: Ōaza/Machi
