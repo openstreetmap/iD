@@ -4243,6 +4243,7 @@ en:
       building/stable:
         # building=stable
         name: Stable
+        # 'terms: horse shelter'
         terms: '<translate with synonyms or related terms for ''Stable'', separated by commas>'
       building/stadium:
         # building=stadium

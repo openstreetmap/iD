@@ -1,5 +1,5 @@
 {
-    "icon": "maki-bicycle",
+    "icon": "temaki-bicycle_structure",
     "fields": [
         "{amenity/bicycle_parking}",
         "opening_hours",

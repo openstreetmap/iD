@@ -2,7 +2,7 @@
     "notCountryCodes": [
         "fr", "lt", "pl"
     ],
-    "icon": "fas-biking",
+    "icon": "temaki-pedestrian_and_cyclist",
     "geometry": [
         "line"
     ],

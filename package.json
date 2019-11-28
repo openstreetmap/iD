@@ -101,7 +101,7 @@
     "smash": "0.0",
     "static-server": "^2.2.1",
     "svg-sprite": "1.5.0",
-    "temaki": "~2.2.0",
+    "temaki": "~2.3.0",
     "uglify-js": "~3.6.6"
   },
   "greenkeeper": {
