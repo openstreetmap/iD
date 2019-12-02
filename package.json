@@ -24,7 +24,7 @@
     "dist:svg:maki": "svg-sprite --symbol --symbol-dest . --shape-id-generator \"maki-%s\" --symbol-sprite dist/img/maki-sprite.svg node_modules/@mapbox/maki/icons/*.svg",
     "dist:svg:mapillary:signs": "svg-sprite --symbol --symbol-dest . --symbol-sprite dist/img/mapillary-sprite.svg node_modules/mapillary_sprite_source/package_signs/*.svg",
     "dist:svg:mapillary:objects": "svg-sprite --symbol --symbol-dest . --symbol-sprite dist/img/mapillary-object-sprite.svg node_modules/mapillary_sprite_source/package_objects/*.svg",
-    "dist:svg:temaki": "svg-sprite --symbol --symbol-dest . --shape-id-generator \"temaki-%s\" --symbol-sprite dist/img/temaki-sprite.svg node_modules/temaki/icons/*.svg",
+    "dist:svg:temaki": "svg-sprite --symbol --symbol-dest . --shape-id-generator \"temaki-%s\" --symbol-sprite dist/img/temaki-sprite.svg node_modules/@ideditor/temaki/icons/*.svg",
     "imagery": "node data/update_imagery",
     "lint": "eslint *.js test/spec modules",
     "start": "node --max-old-space-size=4096 server.js",
@@ -61,6 +61,7 @@
     "@fortawesome/free-brands-svg-icons": "^5.11.2",
     "@fortawesome/free-regular-svg-icons": "^5.11.2",
     "@fortawesome/free-solid-svg-icons": "^5.11.2",
+    "@ideditor/temaki": "~3.0.0",
     "@mapbox/maki": "^6.0.0",
     "@rollup/plugin-buble": "^0.20.0",
     "chai": "^4.1.0",
@@ -101,7 +102,6 @@
     "smash": "0.0",
     "static-server": "^2.2.1",
     "svg-sprite": "1.5.0",
-    "temaki": "~2.3.0",
     "uglify-js": "~3.6.6"
   },
   "greenkeeper": {
