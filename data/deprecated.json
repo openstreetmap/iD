@@ -117,6 +117,10 @@
       "replace": {"office": "government", "government": "register_office"}
     },
     {
+      "old": {"amenity": "research_institution"},
+      "replace": {"amenity": "research_institute"}
+    },
+    {
       "old": {"amenity": "sauna"},
       "replace": {"leisure": "sauna"}
     },

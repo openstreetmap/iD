@@ -99,7 +99,8 @@ path.stroke.tag-amenity-childcare,
 path.stroke.tag-amenity-kindergarten,
 path.stroke.tag-amenity-school,
 path.stroke.tag-amenity-college,
-path.stroke.tag-amenity-university {
+path.stroke.tag-amenity-university,
+path.stroke.tag-amenity-research_institute {
     stroke: rgba(255, 255, 148, 0.75);
 }
 path.fill.tag-leisure-pitch.tag-sport-beachvolleyball,
@@ -113,7 +114,8 @@ path.fill.tag-amenity-childcare,
 path.fill.tag-amenity-kindergarten,
 path.fill.tag-amenity-school,
 path.fill.tag-amenity-college,
-path.fill.tag-amenity-university {
+path.fill.tag-amenity-university,
+path.fill.tag-amenity-research_institute {
     stroke: rgba(255, 255, 148, 0.25);
     fill: rgba(255, 255, 148, 0.25);
 }
@@ -128,7 +130,8 @@ path.fill.tag-amenity-university {
 .preset-icon-fill path.area.stroke.tag-amenity-kindergarten,
 .preset-icon-fill path.area.stroke.tag-amenity-school,
 .preset-icon-fill path.area.stroke.tag-amenity-college,
-.preset-icon-fill path.area.stroke.tag-amenity-university {
+.preset-icon-fill path.area.stroke.tag-amenity-university,
+.preset-icon-fill path.area.stroke.tag-amenity-research_institute {
     stroke: rgb(232, 232, 0);
 }
 .pattern-color-beach,

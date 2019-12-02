@@ -8,6 +8,7 @@
         "opening_hours"
     ],
     "moreFields": [
+        "brand",
         "email",
         "fax",
         "internet_access",
