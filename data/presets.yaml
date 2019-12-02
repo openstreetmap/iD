@@ -3397,6 +3397,11 @@ en:
       amenity/register_office:
         # amenity=register_office
         name: Register Office
+      amenity/research_institute:
+        # amenity=research_institute
+        name: Research Institute Grounds
+        # 'terms: applied research,experimentation,r&d,r & d,r and d,research and development,research institution,research laboratory,research labs'
+        terms: '<translate with synonyms or related terms for ''Research Institute Grounds'', separated by commas>'
       amenity/restaurant:
         # amenity=restaurant
         name: Restaurant
