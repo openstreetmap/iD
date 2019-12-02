@@ -1,6 +1,6 @@
 import { dispatch as d3_dispatch } from 'd3-dispatch';
 import { event as d3_event, select as d3_select } from 'd3-selection';
-import * as countryCoder from 'country-coder';
+import * as countryCoder from '@ideditor/country-coder';
 
 import { osmEntity } from '../../osm/entity';
 import { t } from '../../util/locale';

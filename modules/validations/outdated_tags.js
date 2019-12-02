@@ -1,6 +1,6 @@
 import { t } from '../util/locale';
 import { matcher, brands } from 'name-suggestion-index';
-import * as countryCoder from 'country-coder';
+import * as countryCoder from '@ideditor/country-coder';
 
 import { actionChangePreset } from '../actions/change_preset';
 import { actionChangeTags } from '../actions/change_tags';

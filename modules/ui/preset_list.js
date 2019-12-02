@@ -1,5 +1,5 @@
 import { dispatch as d3_dispatch } from 'd3-dispatch';
-import * as countryCoder from 'country-coder';
+import * as countryCoder from '@ideditor/country-coder';
 
 import {
     event as d3_event,
