@@ -1,6 +1,6 @@
 import { dispatch as d3_dispatch } from 'd3-dispatch';
 import { select as d3_select, event as d3_event } from 'd3-selection';
-import * as countryCoder from 'country-coder';
+import * as countryCoder from '@ideditor/country-coder';
 
 import { currentLocale, t, languageName } from '../../util/locale';
 import { dataLanguages } from '../../../data';
