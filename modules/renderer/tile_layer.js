@@ -198,6 +198,8 @@ export function rendererTileLayer(context) {
         image.enter()
           .append('img')
             .attr('class', 'tile')
+            .style('width', _tileSize + 'px')
+            .style('height', _tileSize + 'px')
             .attr('src', function(d) { return d[3]; })
             .on('error', error)
             .on('load', load)
