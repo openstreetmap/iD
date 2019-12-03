@@ -770,6 +770,10 @@
       "replace": {"power": "cable", "location": "underground"}
     },
     {
+      "old": {"power": "marker"},
+      "replace": {"marker": "*", "utility": "power"}
+    },
+    {
       "old": {"power": "sub_station"},
       "replace": {"power": "substation"}
     },
