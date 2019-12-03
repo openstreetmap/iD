@@ -85,6 +85,9 @@ en:
           foot: Foot
           horse: Horses
           motor_vehicle: Motor Vehicles
+      access_aisle:
+        # access_aisle=*
+        label: Type
       access_simple:
         # access=*
         label: Allowed Access
@@ -4843,6 +4846,11 @@ en:
         name: Foot Path
         # 'terms: hike,hiking,promenade,trackway,trail,walk'
         terms: '<translate with synonyms or related terms for ''Foot Path'', separated by commas>'
+      highway/footway/access_aisle:
+        # 'highway=footway, footway=access_aisle'
+        name: Access Aisle
+        # 'terms: accessible van loading zone,disabled parking access zone,handicap parking access zone,parking lot aisle,striped zone,tow zone,tow-away zone,towaway zone,wheelchair aisle'
+        terms: '<translate with synonyms or related terms for ''Access Aisle'', separated by commas>'
       highway/footway/conveying:
         # 'highway=footway, conveying=*'
         name: Moving Walkway
