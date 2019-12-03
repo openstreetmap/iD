@@ -66,7 +66,7 @@ export function uiField(context, presetField, entity, options) {
     }
 
 
-    function isPresent() {
+    function tagsContainFieldKey() {
         return field.keys.some(function(key) {
             if (field.type === 'multiCombo') {
                 for (var tagKey in _tags) {
@@ -223,7 +223,7 @@ export function uiField(context, presetField, entity, options) {
             container
                 .classed('locked', _locked)
                 .classed('modified', isModified())
-                .classed('present', isPresent());
+                .classed('present', tagsContainFieldKey());
 
 
             // show a tip and lock icon if the field is locked
@@ -254,6 +254,15 @@ export function uiField(context, presetField, entity, options) {
     field.tags = function(val) {
         if (!arguments.length) return _tags;
         _tags = val;
+
+        if (tagsContainFieldKey() && !_show) {
+            // always show a field if it has a value to display
+            _show = true;
+            if (!field.impl) {
+                createField();
+            }
+        }
+
         return field;
     };
 
@@ -279,14 +288,14 @@ export function uiField(context, presetField, entity, options) {
 
     // A shown field has a visible UI, a non-shown field is in the 'Add field' dropdown
     field.isShown = function() {
-        return _show || isPresent();
+        return _show;
     };
 
 
     // An allowed field can appear in the UI or in the 'Add field' dropdown.
     // A non-allowed field is hidden from the user altogether
     field.isAllowed = function() {
-        if (!entity || isPresent()) return true;   // a field with a value should always display
+        if (!entity || tagsContainFieldKey()) return true;   // a field with a value should always display
 
         var latest = context.hasEntity(entity.id);   // check the most current copy of the entity
         if (!latest) return true;
