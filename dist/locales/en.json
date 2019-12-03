@@ -3696,6 +3696,9 @@
                 "map_type": {
                     "label": "Type"
                 },
+                "marker": {
+                    "label": "Type"
+                },
                 "material": {
                     "label": "Material",
                     "terms": ""
@@ -7888,6 +7891,18 @@
                 "man_made/works": {
                     "name": "Factory",
                     "terms": "assembly,build,brewery,car,plant,plastic,processing,manufacture,refinery"
+                },
+                "marker": {
+                    "name": "Marker",
+                    "terms": "identifier,marking,plate,pole,post,sign"
+                },
+                "marker/utility": {
+                    "name": "Utility Marker",
+                    "terms": "gas line marker,identifier,marking,oil marker,pipline marker,plate,pole,post,sign"
+                },
+                "marker/utility/power": {
+                    "name": "Power Marker",
+                    "terms": "electric line,identifier,marking,plate,pole,post,power cable,power line,sign"
                 },
                 "military/bunker": {
                     "name": "Military Bunker",

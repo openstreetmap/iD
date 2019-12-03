@@ -1243,6 +1243,9 @@ en:
       map_type:
         # map_type=*
         label: Type
+      marker:
+        # marker=*
+        label: Type
       material:
         # material=*
         label: Material
@@ -6212,6 +6215,21 @@ en:
         name: Factory
         # 'terms: assembly,build,brewery,car,plant,plastic,processing,manufacture,refinery'
         terms: '<translate with synonyms or related terms for ''Factory'', separated by commas>'
+      marker:
+        # marker=*
+        name: Marker
+        # 'terms: identifier,marking,plate,pole,post,sign'
+        terms: '<translate with synonyms or related terms for ''Marker'', separated by commas>'
+      marker/utility:
+        # 'marker=*, utility=*'
+        name: Utility Marker
+        # 'terms: gas line marker,identifier,marking,oil marker,pipline marker,plate,pole,post,sign'
+        terms: '<translate with synonyms or related terms for ''Utility Marker'', separated by commas>'
+      marker/utility/power:
+        # 'marker=*, utility=power'
+        name: Power Marker
+        # 'terms: electric line,identifier,marking,plate,pole,post,power cable,power line,sign'
+        terms: '<translate with synonyms or related terms for ''Power Marker'', separated by commas>'
       military/bunker:
         # military=bunker
         name: Military Bunker
