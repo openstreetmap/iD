@@ -2627,6 +2627,9 @@
                 }
             },
             "fields": {
+                "access_aisle": {
+                    "label": "Type"
+                },
                 "access_simple": {
                     "label": "Allowed Access",
                     "terms": "permitted,private,public"
@@ -6790,6 +6793,10 @@
                 },
                 "highway/footway/zebra": {
                     "name": "Marked Crosswalk"
+                },
+                "highway/footway/access_aisle": {
+                    "name": "Access Aisle",
+                    "terms": "accessible van loading zone,disabled parking access zone,handicap parking access zone,parking lot aisle,striped zone,tow zone,tow-away zone,towaway zone,wheelchair aisle"
                 },
                 "highway/footway/conveying": {
                     "name": "Moving Walkway",
