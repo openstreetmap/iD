@@ -541,4 +541,85 @@ describe('iD.actionJoin', function () {
         ]);
     });
 
+    it('collapses resultant single-member multipolygon into basic area', function () {
+        // Situation:
+        // b --> c
+        // |#####|
+        // |# m #|
+        // |#####|
+        // a <== d
+        //
+        //  Expected result:
+        // a --> b
+        // |#####|
+        // |#####|
+        // |#####|
+        // d <-- c
+        var graph = iD.coreGraph([
+            iD.osmNode({id: 'a', loc: [0,0]}),
+            iD.osmNode({id: 'b', loc: [0,2]}),
+            iD.osmNode({id: 'c', loc: [2,2]}),
+            iD.osmNode({id: 'd', loc: [2,0]}),
+            iD.osmWay({id: '-', nodes: ['a', 'b', 'c', 'd']}),
+            iD.osmWay({id: '=', nodes: ['d', 'a']}),
+            iD.osmRelation({id: 'm', members: [
+                {id: '-', role: 'outer', type: 'way'},
+                {id: '=', role: 'outer', type: 'way'}
+            ], tags: {
+                type: 'multipolygon',
+                man_made: 'pier'
+            }})
+        ]);
+
+        graph = iD.actionJoin(['-', '='])(graph);
+
+        expect(graph.entity('-').nodes).to.eql(['a', 'b', 'c', 'd', 'a']);
+        expect(graph.entity('-').tags).to.eql({ man_made: 'pier', area: 'yes' });
+        expect(graph.hasEntity('=')).to.be.undefined;
+        expect(graph.hasEntity('m')).to.be.undefined;
+    });
+
+    it('does not collapse resultant single-member multipolygon into basic area when tags conflict', function () {
+        // Situation:
+        // b --> c
+        // |#####|
+        // |# m #|
+        // |#####|
+        // a <== d
+        //
+        //  Expected result:
+        // a --> b
+        // |#####|
+        // |# m #|
+        // |#####|
+        // d <-- c
+        var graph = iD.coreGraph([
+            iD.osmNode({id: 'a', loc: [0,0]}),
+            iD.osmNode({id: 'b', loc: [0,2]}),
+            iD.osmNode({id: 'c', loc: [2,2]}),
+            iD.osmNode({id: 'd', loc: [2,0]}),
+            iD.osmWay({id: '-', nodes: ['a', 'b', 'c', 'd'], tags: { surface: 'paved' }}),
+            iD.osmWay({id: '=', nodes: ['d', 'a']}),
+            iD.osmRelation({id: 'm', members: [
+                {id: '-', role: 'outer', type: 'way'},
+                {id: '=', role: 'outer', type: 'way'}
+            ], tags: {
+                type: 'multipolygon',
+                man_made: 'pier',
+                surface: 'wood'
+            }})
+        ]);
+
+        graph = iD.actionJoin(['-', '='])(graph);
+
+        expect(graph.entity('-').nodes).to.eql(['a', 'b', 'c', 'd', 'a']);
+        expect(graph.entity('-').tags).to.eql({ surface: 'paved' });
+        expect(graph.hasEntity('=')).to.be.undefined;
+        expect(graph.hasEntity('m').tags).to.eql({
+            type: 'multipolygon',
+            man_made: 'pier',
+            surface: 'wood'
+        });
+    });
+
 });

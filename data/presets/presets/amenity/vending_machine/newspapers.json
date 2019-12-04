@@ -2,6 +2,7 @@
     "icon": "temaki-vending_newspaper",
     "fields": [
         "vending",
+        "ref",
         "operator",
         "fee",
         "payment_multi_fee",

@@ -1,5 +1,6 @@
 import { t } from '../util/locale';
 import { matcher, brands } from 'name-suggestion-index';
+import * as countryCoder from '@ideditor/country-coder';
 
 import { actionChangePreset } from '../actions/change_preset';
 import { actionChangeTags } from '../actions/change_tags';
@@ -31,13 +32,12 @@ export function validationOutdatedTags(context) {
     function oldTagIssues(entity, graph) {
         var oldTags = Object.assign({}, entity.tags);  // shallow copy
         var preset = context.presets().match(entity, graph);
-        var explicitPresetUpgrade = preset.replacement;
         var subtype = 'deprecated_tags';
 
         // upgrade preset..
         if (preset.replacement) {
             var newPreset = context.presets().item(preset.replacement);
-            graph = actionChangePreset(entity.id, preset, newPreset, true)(graph);  // true = skip field defaults
+            graph = actionChangePreset(entity.id, preset, newPreset)(graph);
             entity = graph.entity(entity.id);
             preset = newPreset;
         }
@@ -57,9 +57,6 @@ export function validationOutdatedTags(context) {
             Object.keys(preset.addTags).forEach(function(k) {
                 if (!newTags[k]) {
                     newTags[k] = preset.addTags[k];
-                    if (!explicitPresetUpgrade) {
-                        subtype = 'incomplete_tags';
-                    }
                 }
             });
         }
@@ -93,14 +90,17 @@ export function validationOutdatedTags(context) {
                 var k = nsiKeys[i];
                 if (!newTags[k]) continue;
 
-                var match = nsiMatcher.matchKVN(k, newTags[k], newTags.name);
+                var center = entity.extent(graph).center();
+                var countryCode = countryCoder.iso1A2Code(center);
+                var match = nsiMatcher.matchKVN(k, newTags[k], newTags.name, countryCode && countryCode.toLowerCase());
                 if (!match) continue;
 
                 // for now skip ambiguous matches (like Target~(USA) vs Target~(Australia))
                 if (match.d) continue;
 
                 var brand = brands.brands[match.kvnd];
-                if (brand && brand.tags['brand:wikidata']) {
+                if (brand && brand.tags['brand:wikidata'] &&
+                    brand.tags['brand:wikidata'] !== entity.tags['not:brand:wikidata']) {
                     subtype = 'noncanonical_brand';
 
                     var keepTags = ['takeaway'].reduce(function(acc, k) {
@@ -117,15 +117,19 @@ export function validationOutdatedTags(context) {
             }
         }
 
-
         // determine diff
         var tagDiff = utilTagDiff(oldTags, newTags);
         if (!tagDiff.length) return [];
 
+        var isOnlyAddingTags = tagDiff.every(function(d) {
+            return d.type === '+';
+        });
+
         var prefix = '';
         if (subtype === 'noncanonical_brand') {
             prefix = 'noncanonical_brand.';
-        } else if (subtype === 'incomplete_tags') {
+        } else if (subtype === 'deprecated_tags' && isOnlyAddingTags) {
+            subtype = 'incomplete_tags';
             prefix = 'incomplete.';
         }
 
@@ -140,15 +144,17 @@ export function validationOutdatedTags(context) {
             reference: showReference,
             entityIds: [entity.id],
             hash: JSON.stringify(tagDiff),
-            fixes: [
-                new validationIssueFix({
-                    autoArgs: autoArgs,
-                    title: t('issues.fix.upgrade_tags.title'),
-                    onClick: function(context) {
-                        context.perform(doUpgrade, t('issues.fix.upgrade_tags.annotation'));
-                    }
-                })
-            ]
+            dynamicFixes: function() {
+                return [
+                    new validationIssueFix({
+                        autoArgs: autoArgs,
+                        title: t('issues.fix.upgrade_tags.title'),
+                        onClick: function(context) {
+                            context.perform(doUpgrade, t('issues.fix.upgrade_tags.annotation'));
+                        }
+                    })
+                ];
+            }
         })];
 
 
@@ -175,9 +181,7 @@ export function validationOutdatedTags(context) {
 
             var messageID = 'issues.outdated_tags.' + prefix + 'message';
 
-            if (subtype === 'noncanonical_brand' && tagDiff.every(function(d) {
-                return d.type === '+';
-            })) {
+            if (subtype === 'noncanonical_brand' && isOnlyAddingTags) {
                 messageID += '_incomplete';
             }
 
@@ -241,15 +245,17 @@ export function validationOutdatedTags(context) {
             message: showMessage,
             reference: showReference,
             entityIds: [outerWay.id, multipolygon.id],
-            fixes: [
-                new validationIssueFix({
-                    autoArgs: [doUpgrade, t('issues.fix.move_tags.annotation')],
-                    title: t('issues.fix.move_tags.title'),
-                    onClick: function(context) {
-                        context.perform(doUpgrade, t('issues.fix.move_tags.annotation'));
-                    }
-                })
-            ]
+            dynamicFixes: function() {
+                return [
+                    new validationIssueFix({
+                        autoArgs: [doUpgrade, t('issues.fix.move_tags.annotation')],
+                        title: t('issues.fix.move_tags.title'),
+                        onClick: function(context) {
+                            context.perform(doUpgrade, t('issues.fix.move_tags.annotation'));
+                        }
+                    })
+                ];
+            }
         })];
 
 

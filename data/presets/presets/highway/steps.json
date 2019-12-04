@@ -5,6 +5,7 @@
         "access_simple",
         "handrail",
         "step_count",
+        "tactile_paving",
         "surface",
         "width"
     ],

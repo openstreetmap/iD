@@ -4,7 +4,7 @@ import { dispatch as d3_dispatch } from 'd3-dispatch';
 import { xml as d3_xml } from 'd3-fetch';
 
 import osmAuth from 'osm-auth';
-import rbush from 'rbush';
+import RBush from 'rbush';
 
 import { JXON } from '../util/jxon';
 import { geoExtent, geoRawMercator, geoVecAdd, geoZoomToScale } from '../geo';
@@ -24,8 +24,8 @@ var oauth = osmAuth({
 });
 
 var _blacklists = ['.*\.google(apis)?\..*/(vt|kh)[\?/].*([xyz]=.*){3}.*'];
-var _tileCache = { toLoad: {}, loaded: {}, inflight: {}, seen: {}, rtree: rbush() };
-var _noteCache = { toLoad: {}, loaded: {}, inflight: {}, inflightPost: {}, note: {}, closed: {}, rtree: rbush() };
+var _tileCache = { toLoad: {}, loaded: {}, inflight: {}, seen: {}, rtree: new RBush() };
+var _noteCache = { toLoad: {}, loaded: {}, inflight: {}, inflightPost: {}, note: {}, closed: {}, rtree: new RBush() };
 var _userCache = { toLoad: {}, user: {} };
 var _changeset = {};
 
@@ -389,8 +389,8 @@ export default {
         Object.values(_noteCache.inflightPost).forEach(abortRequest);
         if (_changeset.inflight) abortRequest(_changeset.inflight);
 
-        _tileCache = { toLoad: {}, loaded: {}, inflight: {}, seen: {}, rtree: rbush() };
-        _noteCache = { toLoad: {}, loaded: {}, inflight: {}, inflightPost: {}, note: {}, closed: {}, rtree: rbush() };
+        _tileCache = { toLoad: {}, loaded: {}, inflight: {}, seen: {}, rtree: new RBush() };
+        _noteCache = { toLoad: {}, loaded: {}, inflight: {}, inflightPost: {}, note: {}, closed: {}, rtree: new RBush() };
         _userCache = { toLoad: {}, user: {} };
         _changeset = {};
 
@@ -1079,7 +1079,7 @@ export default {
             var target = {};
             Object.keys(source).forEach(function(k) {
                 if (k === 'rtree') {
-                    target.rtree = rbush().fromJSON(source.rtree.toJSON());  // clone rbush
+                    target.rtree = new RBush().fromJSON(source.rtree.toJSON());  // clone rbush
                 } else if (k === 'note') {
                     target.note = {};
                     Object.keys(source.note).forEach(function(id) {

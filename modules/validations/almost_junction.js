@@ -42,9 +42,40 @@ export function validationAlmostJunction(context) {
 
         var extendableNodeInfos = findConnectableEndNodesByExtension(entity);
         extendableNodeInfos.forEach(function(extendableNodeInfo) {
-            var node = extendableNodeInfo.node;
-            var edgeHighway = graph.entity(extendableNodeInfo.wid);
+            issues.push(new validationIssue({
+                type: type,
+                subtype: 'highway-highway',
+                severity: 'warning',
+                message: function(context) {
+                    var entity1 = context.hasEntity(this.entityIds[0]);
+                    if (this.entityIds[0] === this.entityIds[2]) {
+                        return entity1 ? t('issues.almost_junction.self.message', {
+                            feature: utilDisplayLabel(entity1, context)
+                        }) : '';
+                    } else {
+                        var entity2 = context.hasEntity(this.entityIds[2]);
+                        return (entity1 && entity2) ? t('issues.almost_junction.message', {
+                            feature: utilDisplayLabel(entity1, context),
+                            feature2: utilDisplayLabel(entity2, context)
+                        }) : '';
+                    }
+                },
+                reference: showReference,
+                entityIds: [entity.id, extendableNodeInfo.node.id, extendableNodeInfo.wid],
+                loc: extendableNodeInfo.node.loc,
+                hash: JSON.stringify(extendableNodeInfo.node.loc),
+                data: {
+                    edge: extendableNodeInfo.edge,
+                    cross_loc: extendableNodeInfo.cross_loc
+                },
+                dynamicFixes: makeFixes
+            }));
+        });
 
+        return issues;
+
+
+        function makeFixes(context) {
             var fixes = [new validationIssueFix({
                 icon: 'iD-icon-abutment',
                 title: t('issues.fix.connect_features.title'),
@@ -73,52 +104,26 @@ export function validationAlmostJunction(context) {
                 }
             })];
 
-            if (Object.keys(node.tags).length === 0) {
-                // node has no tags, suggest noexit fix
+            var node = context.hasEntity(this.entityIds[1]);
+            if (node && !node.hasInterestingTags()) {
+                // node has no descriptive tags, suggest noexit fix
                 fixes.push(new validationIssueFix({
                     icon: 'maki-barrier',
                     title: t('issues.fix.tag_as_disconnected.title'),
                     onClick: function(context) {
                         var nodeID = this.issue.entityIds[1];
+                        var tags = Object.assign({}, context.entity(nodeID).tags);
+                        tags.noexit = 'yes';
                         context.perform(
-                            actionChangeTags(nodeID, { noexit: 'yes' }),
+                            actionChangeTags(nodeID, tags),
                             t('issues.fix.tag_as_disconnected.annotation')
                         );
                     }
                 }));
             }
 
-            issues.push(new validationIssue({
-                type: type,
-                subtype: 'highway-highway',
-                severity: 'warning',
-                message: function(context) {
-                    var entity1 = context.hasEntity(this.entityIds[0]);
-                    if (this.entityIds[0] === this.entityIds[2]) {
-                        return entity1 ? t('issues.almost_junction.self.message', {
-                            feature: utilDisplayLabel(entity1, context)
-                        }) : '';
-                    } else {
-                        var entity2 = context.hasEntity(this.entityIds[2]);
-                        return (entity1 && entity2) ? t('issues.almost_junction.message', {
-                            feature: utilDisplayLabel(entity1, context),
-                            feature2: utilDisplayLabel(entity2, context)
-                        }) : '';
-                    }
-                },
-                reference: showReference,
-                entityIds: [entity.id, node.id, edgeHighway.id],
-                loc: extendableNodeInfo.node.loc,
-                hash: JSON.stringify(extendableNodeInfo.node.loc),
-                data: {
-                    edge: extendableNodeInfo.edge,
-                    cross_loc: extendableNodeInfo.cross_loc
-                },
-                fixes: fixes
-            }));
-        });
-
-        return issues;
+            return fixes;
+        }
 
 
         function showReference(selection) {

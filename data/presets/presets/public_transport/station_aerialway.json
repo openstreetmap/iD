@@ -14,8 +14,11 @@
         "area"
     ],
     "tags": {
+        "aerialway": "station"
+    },
+    "addTags": {
         "public_transport": "station",
-        "aerialway": "yes"
+        "aerialway": "station"
     },
     "reference": {
         "key": "aerialway",

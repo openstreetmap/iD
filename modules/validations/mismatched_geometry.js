@@ -3,6 +3,7 @@ import { actionChangeTags } from '../actions/change_tags';
 import { actionMergeNodes } from '../actions/merge_nodes';
 import { actionExtract } from '../actions/extract';
 import { modeSelect } from '../modes/select';
+import { osmJoinWays } from '../osm/multipolygon';
 import { osmNodeGeometriesForTags } from '../osm/tags';
 import { geoHasSelfIntersections, geoSphericalDistance } from '../geo';
 import { t } from '../util/locale';
@@ -72,36 +73,10 @@ export function validationMismatchedGeometry(context) {
         }
     }
 
-    function lineTaggedAsAreaIssue(entity, graph) {
+    function lineTaggedAsAreaIssue(entity) {
 
         var tagSuggestingArea = tagSuggestingLineIsArea(entity);
         if (!tagSuggestingArea) return null;
-
-        var fixes = [];
-
-        var connectEndsOnClick = makeConnectEndpointsFixOnClick(entity, graph);
-
-        fixes.push(new validationIssueFix({
-            title: t('issues.fix.connect_endpoints.title'),
-            onClick: connectEndsOnClick
-        }));
-
-        fixes.push(new validationIssueFix({
-            icon: 'iD-operation-delete',
-            title: t('issues.fix.remove_tag.title'),
-            onClick: function(context) {
-                var entityId = this.issue.entityIds[0];
-                var entity = context.entity(entityId);
-                var tags = Object.assign({}, entity.tags);  // shallow copy
-                for (var key in tagSuggestingArea) {
-                    delete tags[key];
-                }
-                context.perform(
-                    actionChangeTags(entityId, tags),
-                    t('issues.fix.remove_tag.annotation')
-                );
-            }
-        }));
 
         return new validationIssue({
             type: type,
@@ -116,10 +91,38 @@ export function validationMismatchedGeometry(context) {
             },
             reference: showReference,
             entityIds: [entity.id],
-            hash: JSON.stringify(tagSuggestingArea) +
-                // avoid stale "connect endpoints" fix
-                (typeof connectEndsOnClick),
-            fixes: fixes
+            hash: JSON.stringify(tagSuggestingArea),
+            dynamicFixes: function(context) {
+
+                var fixes = [];
+
+                var entity = context.entity(this.entityIds[0]);
+                var connectEndsOnClick = makeConnectEndpointsFixOnClick(entity, context.graph());
+
+                fixes.push(new validationIssueFix({
+                    title: t('issues.fix.connect_endpoints.title'),
+                    onClick: connectEndsOnClick
+                }));
+
+                fixes.push(new validationIssueFix({
+                    icon: 'iD-operation-delete',
+                    title: t('issues.fix.remove_tag.title'),
+                    onClick: function(context) {
+                        var entityId = this.issue.entityIds[0];
+                        var entity = context.entity(entityId);
+                        var tags = Object.assign({}, entity.tags);  // shallow copy
+                        for (var key in tagSuggestingArea) {
+                            delete tags[key];
+                        }
+                        context.perform(
+                            actionChangeTags(entityId, tags),
+                            t('issues.fix.remove_tag.annotation')
+                        );
+                    }
+                }));
+
+                return fixes;
+            }
         });
 
 
@@ -171,22 +174,6 @@ export function validationMismatchedGeometry(context) {
 
         } else if (geometry === 'vertex' && !allowedGeometries.vertex && allowedGeometries.point) {
 
-            var extractOnClick = null;
-            if (!context.hasHiddenConnections(entity.id) &&
-                !actionExtract(entity.id, context.projection).disabled(context.graph())) {
-
-                extractOnClick = function(context) {
-                    var entityId = this.issue.entityIds[0];
-                    var action = actionExtract(entityId, context.projection);
-                    context.perform(
-                        action,
-                        t('operations.extract.annotation.single')
-                    );
-                    // re-enter mode to trigger updates
-                    context.enter(modeSelect(context, [action.getExtractedNodeID()]));
-                };
-            }
-
             return new validationIssue({
                 type: type,
                 subtype: 'point_as_vertex',
@@ -206,25 +193,101 @@ export function validationMismatchedGeometry(context) {
                         .text(t('issues.point_as_vertex.reference'));
                 },
                 entityIds: [entity.id],
-                fixes: [
-                    new validationIssueFix({
-                        icon: 'iD-operation-extract',
-                        title: t('issues.fix.extract_point.title'),
-                        onClick: extractOnClick
-                    })
-                ],
-                hash: typeof extractOnClick, // avoid stale extraction fix
+                dynamicFixes: function(context) {
+
+                    var entityId = this.entityIds[0];
+
+                    var extractOnClick = null;
+                    if (!context.hasHiddenConnections(entityId) &&
+                        !actionExtract(entityId, context.projection).disabled(context.graph())) {
+
+                        extractOnClick = function(context) {
+                            var entityId = this.issue.entityIds[0];
+                            var action = actionExtract(entityId, context.projection);
+                            context.perform(
+                                action,
+                                t('operations.extract.annotation.single')
+                            );
+                            // re-enter mode to trigger updates
+                            context.enter(modeSelect(context, [action.getExtractedNodeID()]));
+                        };
+                    }
+
+                    return [
+                        new validationIssueFix({
+                            icon: 'iD-operation-extract',
+                            title: t('issues.fix.extract_point.title'),
+                            onClick: extractOnClick
+                        })
+                    ];
+                }
             });
         }
 
         return null;
     }
 
+    function unclosedMultipolygonPartIssues(entity, graph) {
+
+        if (entity.type !== 'relation' ||
+            !entity.isMultipolygon() ||
+            entity.isDegenerate() ||
+            // cannot determine issues for incompletely-downloaded relations
+            !entity.isComplete(graph)) return null;
+
+        var sequences = osmJoinWays(entity.members, graph);
+
+        var issues = [];
+
+        for (var i in sequences) {
+            var sequence = sequences[i];
+
+            if (!sequence.nodes) continue;
+
+            var firstNode = sequence.nodes[0];
+            var lastNode = sequence.nodes[sequence.nodes.length - 1];
+
+            // part is closed if the first and last nodes are the same
+            if (firstNode === lastNode) continue;
+
+            var issue = new validationIssue({
+                type: type,
+                subtype: 'unclosed_multipolygon_part',
+                severity: 'warning',
+                message: function(context) {
+                    var entity = context.hasEntity(this.entityIds[0]);
+                    return entity ? t('issues.unclosed_multipolygon_part.message', {
+                        feature: utilDisplayLabel(entity, context)
+                    }) : '';
+                },
+                reference: showReference,
+                loc: sequence.nodes[0].loc,
+                entityIds: [entity.id],
+                hash: sequence.map(function(way) {
+                    return way.id;
+                }).join()
+            });
+            issues.push(issue);
+        }
+
+        return issues;
+
+        function showReference(selection) {
+            selection.selectAll('.issue-reference')
+                .data([0])
+                .enter()
+                .append('div')
+                .attr('class', 'issue-reference')
+                .text(t('issues.unclosed_multipolygon_part.reference'));
+        }
+    }
+
     var validation = function checkMismatchedGeometry(entity, graph) {
         var issues = [
             vertexTaggedAsPointIssue(entity, graph),
-            lineTaggedAsAreaIssue(entity, graph)
+            lineTaggedAsAreaIssue(entity)
         ];
+        issues = issues.concat(unclosedMultipolygonPartIssues(entity, graph));
         return issues.filter(Boolean);
     };
 

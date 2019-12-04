@@ -13,6 +13,10 @@
       "replace": {"access": "yes"}
     },
     {
+      "old": {"agrarian": "agrcultural_machinry"},
+      "replace": {"agrarian": "agricultural_machinery"}
+    },
+    {
       "old": {"amenity": "advertising"},
       "replace": {"advertising": "*"}
     },
@@ -113,6 +117,10 @@
       "replace": {"office": "government", "government": "register_office"}
     },
     {
+      "old": {"amenity": "research_institution"},
+      "replace": {"amenity": "research_institute"}
+    },
+    {
       "old": {"amenity": "sauna"},
       "replace": {"leisure": "sauna"}
     },
@@ -127,10 +135,6 @@
     {
       "old": {"amenity": "sloped_curb"},
       "replace": {"kerb": "lowered"}
-    },
-    {
-      "old": {"amenity": "social_club"},
-      "replace": {"club": "*"}
     },
     {
       "old": {"amenity": "swimming_pool"},
@@ -185,6 +189,10 @@
       "replace": {"man_made": "embankment"}
     },
     {
+      "old": {"barrier": "railing"},
+      "replace": {"barrier": "fence", "fence_type": "railing"}
+    },
+    {
       "old": {"barrier": "wall", "type": "noise_barrier"},
       "replace": {"barrier": "wall", "wall": "noise_barrier"}
     },
@@ -233,12 +241,24 @@
       "replace": {"colour": "$1"}
     },
     {
-      "old": {"craft": "glass"},
-      "replace": {"craft": "glaziery"}
+      "old": {"company": "consulting"},
+      "replace": {"office": "consulting"}
     },
     {
       "old": {"craft": "catering"},
       "replace": {"craft": "caterer"}
+    },
+    {
+      "old": {"craft": "glass"},
+      "replace": {"craft": "glaziery"}
+    },
+    {
+      "old": {"craft": "jeweler"},
+      "replace": {"shop": "jewelry"}
+    },
+    {
+      "old": {"craft": "optician"},
+      "replace": {"shop": "optician"}
     },
     {
       "old": {"craft": "sculpter"},
@@ -247,10 +267,6 @@
     {
       "old": {"crossing": "island"},
       "replace": {"crossing:island": "yes"}
-    },
-    {
-      "old": {"crossing": "zebra"},
-      "replace": {"crossing": "marked"}
     },
     {
       "old": {"cuisine": "gluten-free"},
@@ -628,6 +644,10 @@
       "replace": {"man_made": "storage_tank", "content": "oil"}
     },
     {
+      "old": {"man_made": "village_pump"},
+      "replace": {"man_made": "water_well"}
+    },
+    {
       "old": {"man_made": "wastewater_tank"},
       "replace": {"man_made": "storage_tank", "content": "wastewater"}
     },
@@ -704,6 +724,14 @@
       "replace": {"office": "government"}
     },
     {
+      "old": {"office": "consultancy"},
+      "replace": {"office": "consulting"}
+    },
+    {
+      "old": {"office": "consultant"},
+      "replace": {"office": "consulting"}
+    },
+    {
       "old": {"office": "real_estate"},
       "replace": {"office": "estate_agent"}
     },
@@ -742,6 +770,10 @@
       "replace": {"power": "cable", "location": "underground"}
     },
     {
+      "old": {"power": "marker"},
+      "replace": {"marker": "*", "utility": "power"}
+    },
+    {
       "old": {"power": "sub_station"},
       "replace": {"power": "substation"}
     },
@@ -760,6 +792,10 @@
     {
       "old": {"power_rating": "*"},
       "replace": {"generator:output": "$1"}
+    },
+    {
+      "old": {"public_transport": "station", "aerialway": "yes"},
+      "replace": {"public_transport": "station", "aerialway": "station"}
     },
     {
       "old": {"railway": "station"},
@@ -844,6 +880,10 @@
     {
       "old": {"shop": "cafe"},
       "replace": {"amenity": "cafe"}
+    },
+    {
+      "old": {"shop": "consulting"},
+      "replace": {"office": "consulting"}
     },
     {
       "old": {"shop": "dive"},
@@ -1058,8 +1098,16 @@
       "replace": {"amenity": "townhall", "townhall:type": "village"}
     },
     {
+      "old": {"type": "audio", "amenity": "studio"},
+      "replace": {"studio": "audio"}
+    },
+    {
       "old": {"type": "broad_leaved"},
       "replace": {"leaf_type": "broadleaved"}
+    },
+    {
+      "old": {"type": "caldera"},
+      "replace": {"volcano:type": "caldera"}
     },
     {
       "old": {"type": "conifer"},
@@ -1070,8 +1118,32 @@
       "replace": {"leaf_cycle": "deciduous"}
     },
     {
+      "old": {"type": "extinct"},
+      "replace": {"volcano:status": "extinct"}
+    },
+    {
+      "old": {"type": "scoria"},
+      "replace": {"volcano:type": "scoria"}
+    },
+    {
+      "old": {"type": "shield"},
+      "replace": {"volcano:type": "shield"}
+    },
+    {
+      "old": {"type": "strato"},
+      "replace": {"volcano:type": "stratovolcano"}
+    },
+    {
+      "old": {"type": "video", "amenity": "studio"},
+      "replace": {"studio": "video"}
+    },
+    {
       "old": {"unnamed": "*"},
       "replace": {"noname": "$1"}
+    },
+    {
+      "old": {"volcano": "extinct"},
+      "replace": {"volcano:status": "extinct"}
     },
     {
       "old": {"wall_type": "noise_barrier"},

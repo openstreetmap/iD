@@ -7251,6 +7251,10 @@
                     "name": "Bowlingrasen",
                     "terms": "Bowling-Rasenfläche, Bowlingrasen"
                 },
+                "leisure/pitch/chess": {
+                    "name": "Grosses Freiluft-Schachspiel",
+                    "terms": "Grosses Freiluft-Schachspiel"
+                },
                 "leisure/pitch/cricket": {
                     "name": "Cricket-Spielfeld",
                     "terms": "Cricketfeld"

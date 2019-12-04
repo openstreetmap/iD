@@ -1,5 +1,5 @@
 {
-    "icon": "maki-car",
+    "icon": "temaki-car_structure",
     "fields": [
         "name",
         "{amenity/parking}",

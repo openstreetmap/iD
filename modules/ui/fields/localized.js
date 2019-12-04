@@ -1,5 +1,6 @@
 import { dispatch as d3_dispatch } from 'd3-dispatch';
 import { select as d3_select, event as d3_event } from 'd3-selection';
+import * as countryCoder from '@ideditor/country-coder';
 
 import { currentLocale, t, languageName } from '../../util/locale';
 import { dataLanguages } from '../../../data';
@@ -300,6 +301,11 @@ export function uiFieldLocalized(field, context) {
                 if (value && value.length > 2) {
                     for (var i = 0; i < suggestions.length; i++) {
                         var s = suggestions[i];
+
+                        // don't suggest brands from incompatible countries
+                        if (_countryCode && s.countryCodes &&
+                            s.countryCodes.indexOf(_countryCode) === -1) continue;
+
                         var sTag = s.id.split('/', 2);
                         var sKey = sTag[0];
                         var sValue = sTag[1];
@@ -575,7 +581,7 @@ export function uiFieldLocalized(field, context) {
     function loadCountryCode() {
         if (!services.countryCoder) return;
         var center = _entity.extent(context.graph()).center();
-        var countryCode = services.countryCoder.iso1A2Code(center);
+        var countryCode = countryCoder.iso1A2Code(center);
         _countryCode = countryCode && countryCode.toLowerCase();
     }
 

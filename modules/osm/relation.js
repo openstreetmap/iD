@@ -307,12 +307,17 @@ Object.assign(osmRelation.prototype, {
         outers = osmJoinWays(outers, resolver);
         inners = osmJoinWays(inners, resolver);
 
-        outers = outers.map(function(outer) {
-            return outer.nodes.map(function(node) { return node.loc; });
-        });
-        inners = inners.map(function(inner) {
-            return inner.nodes.map(function(node) { return node.loc; });
-        });
+        var sequenceToLineString = function(sequence) {
+            if (sequence.nodes.length > 2 &&
+                sequence.nodes[0] !== sequence.nodes[sequence.nodes.length - 1]) {
+                // close unclosed parts to ensure correct area rendering - #2945
+                sequence.nodes.push(sequence.nodes[0]);
+            }
+            return sequence.nodes.map(function(node) { return node.loc; });
+        };
+
+        outers = outers.map(sequenceToLineString);
+        inners = inners.map(sequenceToLineString);
 
         var result = outers.map(function(o) {
             // Heuristic for detecting counterclockwise winding order. Assumes

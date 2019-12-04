@@ -1,9 +1,9 @@
 import { dispatch as d3_dispatch } from 'd3-dispatch';
 import { select as d3_select, event as d3_event } from 'd3-selection';
+import * as countryCoder from '@ideditor/country-coder';
 
 import { t, textDirection } from '../../util/locale';
 import { dataPhoneFormats } from '../../../data';
-import { services } from '../../services';
 import { utilGetSetValue, utilNoAuto, utilRebind } from '../../util';
 
 
@@ -55,9 +55,9 @@ export function uiFieldText(field, context) {
             .on('change', change());
 
 
-        if (field.type === 'tel' && services.countryCoder && _entity) {
+        if (field.type === 'tel' && _entity) {
             var center = _entity.extent(context.graph()).center();
-            var countryCode = services.countryCoder.iso1A2Code(center);
+            var countryCode = countryCoder.iso1A2Code(center);
             var format = countryCode && dataPhoneFormats[countryCode.toLowerCase()];
             if (format) {
                 wrap.selectAll('#' + fieldID)

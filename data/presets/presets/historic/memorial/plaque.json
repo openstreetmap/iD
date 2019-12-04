@@ -1,5 +1,5 @@
 {
-    "icon": "maki-monument",
+    "icon": "temaki-plaque",
     "fields": [
         "{historic/memorial}",
         "direction"

@@ -459,6 +459,7 @@ A feature's tags indicate it should have a different geometry than it currently 
 * `area_as_line`: an unclosed way has tags implying it should be a closed area (e.g. `area=yes` or `building=yes`)
 * `vertex_as_point`: a detached node has tags implying it should be part of a way (e.g. `highway=stop`)
 * `point_as_vertex`: a vertex node has tags implying it should be detached from ways (e.g. `amenity=cafe`)
+* `unclosed_multipolygon_part`: a relation is tagged as a multipolygon but not all of its member ways form closed rings
 
 ##### `missing_role`
 
@@ -477,8 +478,8 @@ A feature does not have enough tags to define what it is.
 
 A feature has nonstandard tags.
 
-* `deprecated_tags`: the feature has tags listed in `deprecated.json` or matches a preset with a `replacement` property
-* `incomplete_tags`: the feature does not have all tags from the `addTags` property of its matching preset
+* `deprecated_tags`: the feature has tags that should be replaced or removed, as specified in `deprecated.json` or the `replacement` property of a preset
+* `incomplete_tags`: the feature has tags that indicate it should also have some other tags
 * `noncanonical_brand`: the feature indicates it should match a name-suggestion-index entry but does not have all of the given tags
 * `old_multipolygon`: the feature is a multipolygon relation with its defining tags set on its outer member way
 

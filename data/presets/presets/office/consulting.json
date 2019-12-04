@@ -1,0 +1,19 @@
+{
+    "icon": "maki-suitcase",
+    "fields": [
+        "name",
+        "consulting",
+        "{office}"
+    ],
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "tags": {
+        "office": "consulting"
+    },
+    "terms": [
+        "consulting firm office"
+    ],
+    "name": "Consultancy Office"
+}

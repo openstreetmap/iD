@@ -11,7 +11,7 @@ export function uiToolAddFavorite(context) {
     tool.itemsToDraw = function() {
         if (context.presets().getAddable().length) return [];
 
-        var items = context.presets().getFavorites().slice(0, 33);
+        var items = context.presets().getFavorites().slice(0, 32);
 
         //var precedingCount = context.storage('tool.add_generic.toggledOn') === 'true' ? 3 : 0;
         var precedingCount = 0;
@@ -52,7 +52,7 @@ export function uiToolAddFavorite(context) {
     };
 
     tool.willUpdate = function() {
-        for (var i = 0; i <= 32; i++) {
+        for (var i = 0; i <= 31; i++) {
             context.keybinding().off(i.toString());
         }
     };

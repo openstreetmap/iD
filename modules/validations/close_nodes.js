@@ -56,6 +56,7 @@ export function validationCloseNodes(context) {
                 (way.isClosed() && way.nodes.length <= 4)) return false;
 
             var featureType = featureTypeForWay(way);
+            // don't flag boundaries since they might be highly detailed and can't be easily verified
             if (featureType === 'boundary') return false;
 
             var bbox = way.extent(graph).bbox();
@@ -134,8 +135,8 @@ export function validationCloseNodes(context) {
                 if (nearby.loc === node.loc ||
                     geoSphericalDistance(node.loc, nearby.loc) < pointThresholdMeters) {
 
-                    // allow very close points if the z-axis varies
-                    var zAxisKeys = { layer: true, level: true };
+                    // allow very close points if tags indicate the z-axis might vary
+                    var zAxisKeys = { layer: true, level: true, 'addr:housenumber': true, 'addr:unit': true };
                     var zAxisDifferentiates = false;
                     for (var key in zAxisKeys) {
                         var nodeValue = node.tags[key] || '0';
@@ -161,16 +162,18 @@ export function validationCloseNodes(context) {
                         },
                         reference: showReference,
                         entityIds: [node.id, nearby.id],
-                        fixes: [
-                            new validationIssueFix({
-                                icon: 'iD-operation-disconnect',
-                                title: t('issues.fix.move_points_apart.title')
-                            }),
-                            new validationIssueFix({
-                                icon: 'iD-icon-layers',
-                                title: t('issues.fix.use_different_layers_or_levels.title')
-                            })
-                        ]
+                        dynamicFixes: function() {
+                            return [
+                                new validationIssueFix({
+                                    icon: 'iD-operation-disconnect',
+                                    title: t('issues.fix.move_points_apart.title')
+                                }),
+                                new validationIssueFix({
+                                    icon: 'iD-icon-layers',
+                                    title: t('issues.fix.use_different_layers_or_levels.title')
+                                })
+                            ];
+                        }
                     }));
                 }
             }
@@ -226,21 +229,23 @@ export function validationCloseNodes(context) {
                 reference: showReference,
                 entityIds: [way.id, node1.id, node2.id],
                 loc: node1.loc,
-                fixes: [
-                    new validationIssueFix({
-                        icon: 'iD-icon-plus',
-                        title: t('issues.fix.merge_points.title'),
-                        onClick: function(context) {
-                            var entityIds = this.issue.entityIds;
-                            var action = actionMergeNodes([entityIds[1], entityIds[2]]);
-                            context.perform(action, t('issues.fix.merge_close_vertices.annotation'));
-                        }
-                    }),
-                    new validationIssueFix({
-                        icon: 'iD-operation-disconnect',
-                        title: t('issues.fix.move_points_apart.title')
-                    })
-                ]
+                dynamicFixes: function() {
+                    return [
+                        new validationIssueFix({
+                            icon: 'iD-icon-plus',
+                            title: t('issues.fix.merge_points.title'),
+                            onClick: function(context) {
+                                var entityIds = this.issue.entityIds;
+                                var action = actionMergeNodes([entityIds[1], entityIds[2]]);
+                                context.perform(action, t('issues.fix.merge_close_vertices.annotation'));
+                            }
+                        }),
+                        new validationIssueFix({
+                            icon: 'iD-operation-disconnect',
+                            title: t('issues.fix.move_points_apart.title')
+                        })
+                    ];
+                }
             });
 
             function showReference(selection) {

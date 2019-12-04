@@ -212,15 +212,27 @@ export function rendererBackground(context) {
     };
 
 
-    background.sources = function(extent) {
+    background.sources = function(extent, zoom, alwaysIncludeSelected) {
         if (!data.imagery || !data.imagery.query) return [];   // called before init()?
 
         var matchIDs = {};
         var matchImagery = data.imagery.query.bbox(extent.rectangle(), true) || [];
         matchImagery.forEach(function(d) { matchIDs[d.id] = true; });
 
+        var currentSource = baseLayer.source();
+
         return _backgroundSources.filter(function(source) {
-            return matchIDs[source.id] || !source.polygon;   // no polygon = worldwide
+            // optionally always include the selected source
+            if (alwaysIncludeSelected && currentSource === source) return true;
+
+            // always show sources with worldwide coverage
+            if (!source.polygon) return true;
+
+            // optionally don't include non-worldwide sources at low zooms
+            if (zoom && zoom < 6) return false;
+
+            // don't include sources outside the extent
+            return matchIDs[source.id];
         });
     };
 

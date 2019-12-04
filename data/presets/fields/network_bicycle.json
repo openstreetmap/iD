@@ -1,7 +1,7 @@
 {
     "key": "network",
     "type": "combo",
-    "label": "Network Type",
+    "label": "Network Class",
     "placeholder": "Local, Regional, National, International",
     "strings": {
         "options": {

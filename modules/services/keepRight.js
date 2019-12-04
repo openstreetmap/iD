@@ -1,4 +1,4 @@
-import rbush from 'rbush';
+import RBush from 'rbush';
 
 import { dispatch as d3_dispatch } from 'd3-dispatch';
 import { json as d3_json } from 'd3-fetch';
@@ -281,7 +281,7 @@ export default {
             inflightTile: {},
             inflightPost: {},
             closed: {},
-            rtree: rbush()
+            rtree: new RBush()
         };
     },
 

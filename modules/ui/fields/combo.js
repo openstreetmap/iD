@@ -1,5 +1,6 @@
 import { dispatch as d3_dispatch } from 'd3-dispatch';
 import { event as d3_event, select as d3_select } from 'd3-selection';
+import * as countryCoder from '@ideditor/country-coder';
 
 import { osmEntity } from '../../osm/entity';
 import { t } from '../../util/locale';
@@ -17,7 +18,6 @@ export {
 
 export function uiFieldCombo(field, context) {
     var dispatch = d3_dispatch('change');
-    var countryCoder = services.countryCoder;
     var taginfo = services.taginfo;
     var isMulti = (field.type === 'multiCombo');
     var isNetwork = (field.type === 'networkCombo');
@@ -351,7 +351,7 @@ export function uiFieldCombo(field, context) {
             .call(initCombo, selection)
             .merge(input);
 
-        if (isNetwork && countryCoder && _entity) {
+        if (isNetwork && _entity) {
             var center = _entity.extent(context.graph()).center();
             var countryCode = countryCoder.iso1A2Code(center);
             _countryCode = countryCode && countryCode.toLowerCase();

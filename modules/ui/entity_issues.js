@@ -197,16 +197,17 @@ export function uiEntityIssues(context) {
         var fixLists = containers.selectAll('.issue-fix-list');
 
         var fixes = fixLists.selectAll('.issue-fix-item')
-            .data(function(d) { return d.fixes ? d.fixes : []; });
+            .data(function(d) { return d.fixes ? d.fixes(context) : []; }, function(fix) { return fix.id; });
+
+        fixes.exit()
+            .remove();
 
         var fixesEnter = fixes.enter()
             .append('li')
-            .attr('class', function(d) {
-                return 'issue-fix-item ' + (d.onClick ? 'actionable' : '');
-            })
+            .attr('class', 'issue-fix-item')
             .on('click', function(d) {
                 // not all fixes are actionable
-                if (!d.onClick) return;
+                if (!d3_select(this).classed('actionable') || !d.onClick) return;
 
                 // Don't run another fix for this issue within a second of running one
                 // (Necessary for "Select a feature type" fix. Most fixes should only ever run once)
@@ -250,6 +251,17 @@ export function uiEntityIssues(context) {
             .append('span')
             .attr('class', 'fix-message')
             .text(function(d) { return d.title; });
+
+        fixesEnter.merge(fixes)
+            .classed('actionable', function(d) {
+                return d.onClick;
+            })
+            .attr('title', function(d) {
+                if (d.disabledReason) {
+                    return d.disabledReason;
+                }
+                return null;
+            });
     }
 
 

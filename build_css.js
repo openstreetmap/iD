@@ -3,36 +3,54 @@ const colors = require('colors/safe');
 const concat = require('concat-files');
 const glob = require('glob');
 
+let _currBuild = null;
 
-module.exports = function buildCSS() {
-    var isBuilding = false;
-    return function () {
-        if (isBuilding) return;
 
-        console.log('building css');
-        console.time(colors.green('css built'));
-        isBuilding = true;
+function buildCSS() {
+  if (_currBuild) return _currBuild;
 
-        return concatFilesProm('css/**/*.css', 'dist/iD.css')
-            .then(function () {
-                console.timeEnd(colors.green('css built'));
-                isBuilding = false;
-            })
-            .catch(function (err) {
-                console.error(err);
-                process.exit(1);
-            });
-    };
-};
+  const START = '🏗   ' + colors.yellow('Building css...');
+  const END = '👍  ' + colors.green('css built');
 
-function concatFilesProm(globPath, output) {
-    return new Promise(function (res, rej) {
-        glob(globPath, function (er, files) {
-            if (er) return rej(er);
-            concat(files, output, function (err) {
-                if (err) return rej(err);
-                res();
-            });
-        });
+  console.log('');
+  console.log(START);
+  console.time(END);
+
+  return _currBuild =
+    Promise.resolve()
+    .then(() => doGlob('css/**/*.css'))
+    .then((files) => doConcat(files, 'dist/iD.css'))
+    .then(() => {
+      console.timeEnd(END);
+      console.log('');
+      _currBuild = null;
+    })
+    .catch((err) => {
+      console.error(err);
+      console.log('');
+      _currBuild = null;
+      process.exit(1);
     });
 }
+
+
+function doGlob(pattern) {
+  return new Promise((resolve, reject) => {
+    glob(pattern, (err, files) => {
+      if (err) return reject(err);
+      resolve(files);
+    });
+  });
+}
+
+function doConcat(files, output) {
+  return new Promise((resolve, reject) => {
+    concat(files, output, (err) => {
+      if (err) return reject(err);
+      resolve();
+    });
+  });
+}
+
+
+module.exports = buildCSS;

@@ -19,7 +19,8 @@
         "maxweight_bridge",
         "oneway/bicycle",
         "smoothness",
-        "trolley_wire"
+        "trolley_wire",
+        "width"
     ],
     "geometry": [
         "line"

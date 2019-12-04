@@ -4,4 +4,7 @@ describe('test some capabilities of PhantomJS', function () {
         var result = Array.from(s);
         expect(result).to.eql([1]);
     });
+    it('has ArrayBuffer.isView', function () {
+        expect(typeof ArrayBuffer.isView).to.eql('function');
+    });
 });

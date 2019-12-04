@@ -647,7 +647,7 @@ describe('iD.osmRelation', function () {
             var r = iD.osmRelation({members: [{id: w.id, type: 'way'}]});
             var g = iD.coreGraph([a, b, c, w, r]);
 
-            expect(r.multipolygon(g)).to.eql([[[a.loc, b.loc, c.loc]]]);
+            expect(r.multipolygon(g)).to.eql([[[a.loc, b.loc, c.loc, a.loc]]]);
         });
 
         specify('invalid geometry: unclosed ring consisting of multiple ways', function () {
@@ -659,7 +659,7 @@ describe('iD.osmRelation', function () {
             var r  = iD.osmRelation({members: [{id: w1.id, type: 'way'}, {id: w2.id, type: 'way'}]});
             var g  = iD.coreGraph([a, b, c, w1, w2, r]);
 
-            expect(r.multipolygon(g)).to.eql([[[a.loc, b.loc, c.loc]]]);
+            expect(r.multipolygon(g)).to.eql([[[a.loc, b.loc, c.loc, a.loc]]]);
         });
 
         specify('invalid geometry: unclosed ring consisting of multiple ways, alternate order', function () {
@@ -672,7 +672,7 @@ describe('iD.osmRelation', function () {
             var r  = iD.osmRelation({members: [{id: w1.id, type: 'way'}, {id: w2.id, type: 'way'}]});
             var g  = iD.coreGraph([a, b, c, d, w1, w2, r]);
 
-            expect(r.multipolygon(g)).to.eql([[[d.loc, c.loc, b.loc, a.loc]]]);
+            expect(r.multipolygon(g)).to.eql([[[d.loc, c.loc, b.loc, a.loc, d.loc]]]);
         });
 
         specify('invalid geometry: unclosed ring consisting of multiple ways, one needing reversal', function () {
@@ -685,7 +685,7 @@ describe('iD.osmRelation', function () {
             var r  = iD.osmRelation({members: [{id: w1.id, type: 'way'}, {id: w2.id, type: 'way'}]});
             var g  = iD.coreGraph([a, b, c, d, w1, w2, r]);
 
-            expect(r.multipolygon(g)).to.eql([[[d.loc, c.loc, b.loc, a.loc]]]);
+            expect(r.multipolygon(g)).to.eql([[[a.loc, d.loc, c.loc, b.loc, a.loc]]]);
         });
 
         specify('invalid geometry: unclosed ring consisting of multiple ways, one needing reversal, alternate order', function () {
@@ -698,7 +698,7 @@ describe('iD.osmRelation', function () {
             var r  = iD.osmRelation({members: [{id: w1.id, type: 'way'}, {id: w2.id, type: 'way'}]});
             var g  = iD.coreGraph([a, b, c, d, w1, w2, r]);
 
-            expect(r.multipolygon(g)).to.eql([[[d.loc, c.loc, b.loc, a.loc]]]);
+            expect(r.multipolygon(g)).to.eql([[[d.loc, c.loc, b.loc, a.loc, d.loc]]]);
         });
 
         specify('single polygon with single single-way inner', function () {
@@ -805,7 +805,7 @@ describe('iD.osmRelation', function () {
             var r  = iD.osmRelation({members: [{id: w2.id, type: 'way'}, {id: w1.id, type: 'way'}]});
             var g  = iD.coreGraph([a, b, c, w1, r]);
 
-            expect(r.multipolygon(g)).to.eql([[[a.loc, b.loc, c.loc]]]);
+            expect(r.multipolygon(g)).to.eql([[[a.loc, c.loc, b.loc, a.loc]]]);
         });
     });
 

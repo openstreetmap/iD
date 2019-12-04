@@ -5,7 +5,6 @@ import { geoExtent } from '../geo/extent';
 import { modeSelect } from '../modes/select';
 import { utilArrayGroupBy, utilRebind } from '../util';
 import { t } from '../util/locale';
-import { validationIssueFix } from './validation/models';
 import * as Validations from '../validations/index';
 
 
@@ -91,19 +90,7 @@ export function coreValidator(context) {
         buildings.forEach(function(entity) {
             var detected = checkUnsquareWay(entity, graph);
             if (detected.length !== 1) return;
-
             var issue = detected[0];
-            var ignoreFix = new validationIssueFix({
-                title: t('issues.fix.ignore_issue.title'),
-                icon: 'iD-icon-close',
-                onClick: function() {
-                    ignoreIssue(this.issue.id);
-                }
-            });
-            ignoreFix.type = 'ignore';
-            ignoreFix.issue = issue;
-            issue.fixes.push(ignoreFix);
-
             if (!cache.issuesByEntityID[entity.id]) {
                 cache.issuesByEntityID[entity.id] = new Set();
             }
@@ -275,9 +262,9 @@ export function coreValidator(context) {
     };
 
 
-    function ignoreIssue(id) {
+    validator.ignoreIssue = function(id) {
         _ignoredIssueIDs[id] = true;
-    }
+    };
 
 
     //
@@ -296,21 +283,6 @@ export function coreValidator(context) {
             }
 
             var detected = fn(entity, graph);
-            detected.forEach(function(issue) {
-                var hasIgnoreFix = issue.fixes && issue.fixes.length && issue.fixes[issue.fixes.length - 1].type === 'ignore';
-                if (issue.severity === 'warning' && !hasIgnoreFix) {
-                    var ignoreFix = new validationIssueFix({
-                        title: t('issues.fix.ignore_issue.title'),
-                        icon: 'iD-icon-close',
-                        onClick: function() {
-                            ignoreIssue(this.issue.id);
-                        }
-                    });
-                    ignoreFix.type = 'ignore';
-                    ignoreFix.issue = issue;
-                    issue.fixes.push(ignoreFix);
-                }
-            });
             entityIssues = entityIssues.concat(detected);
         }
 

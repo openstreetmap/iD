@@ -1953,6 +1953,10 @@
                     }
                 }
             },
+            "unclosed_multipolygon_part": {
+                "message": "{feature} has an unclosed part",
+                "reference": "All inner and outer parts of multipolygons should have connected endpoints."
+            },
             "unsquare_way": {
                 "title": "Unsquare Corners (up to {val}°)",
                 "message": "{feature} has unsquare corners",
@@ -1966,6 +1970,14 @@
                 "reference": "Some features shouldn't be standalone points."
             },
             "fix": {
+                "add_a_bridge": {
+                    "title": "Add a bridge",
+                    "annotation": "Added a bridge."
+                },
+                "add_a_tunnel": {
+                    "title": "Add a tunnel",
+                    "annotation": "Added a tunnel."
+                },
                 "address_the_concern": {
                     "title": "Address the concern"
                 },
@@ -2080,9 +2092,6 @@
                     "title": "Upgrade the tags",
                     "annotation": "Upgraded old tags."
                 },
-                "use_bridge_or_tunnel": {
-                    "title": "Use a bridge or tunnel"
-                },
                 "use_different_layers": {
                     "title": "Use different layers"
                 },
@@ -2091,9 +2100,6 @@
                 },
                 "use_different_levels": {
                     "title": "Use different levels"
-                },
-                "use_tunnel": {
-                    "title": "Use a tunnel"
                 }
             }
         },
@@ -2621,6 +2627,9 @@
                 }
             },
             "fields": {
+                "access_aisle": {
+                    "label": "Type"
+                },
                 "access_simple": {
                     "label": "Allowed Access",
                     "terms": "permitted,private,public"
@@ -2987,6 +2996,9 @@
                 "consulate": {
                     "label": "Type"
                 },
+                "consulting": {
+                    "label": "Expertise"
+                },
                 "contact/webcam": {
                     "label": "Webcam URL",
                     "placeholder": "http://example.com/"
@@ -3217,6 +3229,13 @@
                 "door": {
                     "label": "Door"
                 },
+                "drink_multi": {
+                    "label": "Drinks"
+                },
+                "drinking_water": {
+                    "label": "Drinkable",
+                    "terms": "drinkworthy,potable"
+                },
                 "drive_through": {
                     "label": "Drive-Through",
                     "terms": ""
@@ -3326,6 +3345,9 @@
                 "ford": {
                     "label": "Type",
                     "placeholder": "Default"
+                },
+                "fountain": {
+                    "label": "Type"
                 },
                 "frequency_electrified": {
                     "label": "Operating Frequency",
@@ -3674,6 +3696,9 @@
                 "map_type": {
                     "label": "Type"
                 },
+                "marker": {
+                    "label": "Type"
+                },
                 "material": {
                     "label": "Material",
                     "terms": ""
@@ -3776,7 +3801,7 @@
                     "label": "Natural"
                 },
                 "network_bicycle": {
-                    "label": "Network Type",
+                    "label": "Network Class",
                     "placeholder": "Local, Regional, National, International",
                     "options": {
                         "lcn": "Local",
@@ -3786,7 +3811,7 @@
                     }
                 },
                 "network_foot": {
-                    "label": "Network Type",
+                    "label": "Network Class",
                     "placeholder": "Local, Regional, National, International",
                     "options": {
                         "lwn": "Local",
@@ -3796,7 +3821,7 @@
                     }
                 },
                 "network_horse": {
-                    "label": "Network Type",
+                    "label": "Network Class",
                     "placeholder": "Local, Regional, National, International",
                     "options": {
                         "lhn": "Local",
@@ -3810,6 +3835,10 @@
                 },
                 "network": {
                     "label": "Network",
+                    "terms": ""
+                },
+                "network/type": {
+                    "label": "Network Type",
                     "terms": ""
                 },
                 "not/name": {
@@ -4050,6 +4079,9 @@
                 "public_bookcase/type": {
                     "label": "Type"
                 },
+                "pump": {
+                    "label": "Pump"
+                },
                 "railway": {
                     "label": "Type"
                 },
@@ -4067,6 +4099,9 @@
                 },
                 "rating": {
                     "label": "Power Rating"
+                },
+                "rcn_ref": {
+                    "label": "Cycling Code"
                 },
                 "recycling_accepts": {
                     "label": "Accepts"
@@ -4168,6 +4203,9 @@
                 },
                 "route": {
                     "label": "Type"
+                },
+                "rwn_ref": {
+                    "label": "Walking Code"
                 },
                 "sac_scale": {
                     "label": "Hiking Difficulty",
@@ -4376,6 +4414,10 @@
                         "very_horrible": "Specialized off-road: tractor, ATV",
                         "impassable": "Impassable / No wheeled vehicle"
                     }
+                },
+                "sms": {
+                    "label": "SMS",
+                    "terms": ""
                 },
                 "social_facility_for": {
                     "label": "People Served"
@@ -4658,11 +4700,18 @@
                         "tourism": "Tourism"
                     }
                 },
+                "utility_semi": {
+                    "label": "Utilities"
+                },
                 "valve": {
                     "label": "Type"
                 },
                 "vending": {
                     "label": "Types of Goods"
+                },
+                "video_calls": {
+                    "label": "Video Calls",
+                    "terms": ""
                 },
                 "visibility": {
                     "label": "Visibility",
@@ -4873,9 +4922,6 @@
                 "advertising/totem": {
                     "name": "Advertising Totem",
                     "terms": ""
-                },
-                "aerialway/station": {
-                    "name": "Aerialway Station"
                 },
                 "aerialway/cable_car": {
                     "name": "Cable Car",
@@ -5257,7 +5303,7 @@
                 },
                 "amenity/fountain": {
                     "name": "Fountain",
-                    "terms": ""
+                    "terms": "basin,water"
                 },
                 "amenity/fuel": {
                     "name": "Gas Station",
@@ -5510,6 +5556,10 @@
                 "amenity/recycling/container/green_waste": {
                     "name": "Green Waste Container",
                     "terms": "biodegradable,biological,compost,decomposable,garbage bin,garden waste,organic,rubbish,food scrap"
+                },
+                "amenity/research_institute": {
+                    "name": "Research Institute Grounds",
+                    "terms": "applied research,experimentation,r&d,r & d,r and d,research and development,research institution,research laboratory,research labs"
                 },
                 "amenity/restaurant": {
                     "name": "Restaurant",
@@ -5789,11 +5839,11 @@
                 },
                 "amenity/vending_machine/parcel_pickup_dropoff": {
                     "name": "Parcel Pickup/Dropoff Locker",
-                    "terms": "mail,parcel,pickup"
+                    "terms": "mail,packstation,parcel,pickup"
                 },
                 "amenity/vending_machine/parcel_pickup": {
                     "name": "Parcel Pickup Locker",
-                    "terms": "amazon,locker,mail,parcel,pickup"
+                    "terms": "amazon,locker,mail,packstation,parcel,pickup"
                 },
                 "amenity/vending_machine/parking_tickets": {
                     "name": "Parking Ticket Vending Machine",
@@ -5833,7 +5883,7 @@
                 },
                 "amenity/water_point": {
                     "name": "RV Drinking Water",
-                    "terms": ""
+                    "terms": "water faucet,water point,water tap,water source,water spigot"
                 },
                 "amenity/watering_place": {
                     "name": "Animal Watering Place",
@@ -5883,16 +5933,24 @@
                     "name": "Drop Tower",
                     "terms": "theme park,amusement ride,gondola,tower,big drop"
                 },
+                "attraction/kiddie_ride": {
+                    "name": "Kiddie Ride",
+                    "terms": ""
+                },
+                "attraction/log_flume": {
+                    "name": "Log Flume",
+                    "terms": "theme park,amusement ride,flume"
+                },
                 "attraction/maze": {
                     "name": "Maze",
                     "terms": "theme park,amusement ride,labyrinth"
                 },
                 "attraction/pirate_ship": {
-                    "name": "Pirate Ship",
+                    "name": "Pirate Ship Ride",
                     "terms": "theme park,carnival ride,amusement ride"
                 },
                 "attraction/river_rafting": {
-                    "name": "River Rafting",
+                    "name": "River Rapids Ride",
                     "terms": "theme park,aquatic park,water park,rafting simulator,river rafting ride,river rapids ride"
                 },
                 "attraction/roller_coaster": {
@@ -5902,6 +5960,10 @@
                 "attraction/summer_toboggan": {
                     "name": "Summer Toboggan",
                     "terms": "alpine slide,mountain coaster"
+                },
+                "attraction/swing_carousel": {
+                    "name": "Swing Carousel",
+                    "terms": "theme park,amusement ride,carousel,tower,carousel tower"
                 },
                 "attraction/train": {
                     "name": "Tourist Train",
@@ -5936,7 +5998,7 @@
                 },
                 "barrier/cattle_grid": {
                     "name": "Cattle Grid",
-                    "terms": ""
+                    "terms": "cattle guard,cattle stop,livestock grid,stock gate,stock grid,stock stop,Texas gate,vehicle pass"
                 },
                 "barrier/chain": {
                     "name": "Chain",
@@ -6229,7 +6291,7 @@
                 },
                 "building/stable": {
                     "name": "Stable",
-                    "terms": ""
+                    "terms": "horse shelter"
                 },
                 "building/stadium": {
                     "name": "Stadium Building",
@@ -6271,14 +6333,8 @@
                     "name": "Craft",
                     "terms": ""
                 },
-                "craft/jeweler": {
-                    "name": "Jeweler"
-                },
                 "craft/locksmith": {
                     "name": "Locksmith"
-                },
-                "craft/optician": {
-                    "name": "Optician"
                 },
                 "craft/tailor": {
                     "name": "Tailor"
@@ -6478,6 +6534,10 @@
                 "craft/winery": {
                     "name": "Winery",
                     "terms": ""
+                },
+                "cycleway/asl": {
+                    "name": "Advanced Stop Line",
+                    "terms": "advanced stop box,asl,bicycle box,bike box,bikebox,cycle box,cycle stop marking"
                 },
                 "emergency/designated": {
                     "name": "Emergency Access Designated"
@@ -6748,6 +6808,10 @@
                 },
                 "highway/footway/zebra": {
                     "name": "Marked Crosswalk"
+                },
+                "highway/footway/access_aisle": {
+                    "name": "Access Aisle",
+                    "terms": "accessible van loading zone,disabled parking access zone,handicap parking access zone,parking lot aisle,striped zone,tow zone,tow-away zone,towaway zone,wheelchair aisle"
                 },
                 "highway/footway/conveying": {
                     "name": "Moving Walkway",
@@ -7484,6 +7548,10 @@
                     "name": "Bowling Green",
                     "terms": ""
                 },
+                "leisure/pitch/chess": {
+                    "name": "Giant Chess Board",
+                    "terms": "chessboard,checkerboard,checkers,chequerboard,garden chess,large chess,oversize chess"
+                },
                 "leisure/pitch/cricket": {
                     "name": "Cricket Field",
                     "terms": ""
@@ -7856,13 +7924,17 @@
                     "name": "Wastewater Plant",
                     "terms": "sewage*,water treatment plant,reclamation plant"
                 },
+                "man_made/water_tap": {
+                    "name": "Water Tap",
+                    "terms": "drinking water,water faucet,water point,water source,water spigot"
+                },
                 "man_made/water_tower": {
                     "name": "Water Tower",
                     "terms": ""
                 },
                 "man_made/water_well": {
                     "name": "Water Well",
-                    "terms": ""
+                    "terms": "aquifer,drinking water,water point,water source"
                 },
                 "man_made/water_works": {
                     "name": "Water Works",
@@ -7879,6 +7951,18 @@
                 "man_made/works": {
                     "name": "Factory",
                     "terms": "assembly,build,brewery,car,plant,plastic,processing,manufacture,refinery"
+                },
+                "marker": {
+                    "name": "Marker",
+                    "terms": "identifier,marking,plate,pole,post,sign"
+                },
+                "marker/utility": {
+                    "name": "Utility Marker",
+                    "terms": "gas line marker,identifier,marking,oil marker,pipline marker,plate,pole,post,sign"
+                },
+                "marker/utility/power": {
+                    "name": "Power Marker",
+                    "terms": "electric line,identifier,marking,plate,pole,post,power cable,power line,sign"
                 },
                 "military/bunker": {
                     "name": "Military Bunker",
@@ -7986,7 +8070,7 @@
                 },
                 "natural/spring": {
                     "name": "Spring",
-                    "terms": ""
+                    "terms": "aquifer,hydro,seep,water source"
                 },
                 "natural/stone": {
                     "name": "Unattached Stone / Boulder",
@@ -8017,7 +8101,7 @@
                     "terms": "detention,drain,overflow,rain,retention"
                 },
                 "natural/water/canal": {
-                    "name": "Canal",
+                    "name": "Canal Area",
                     "terms": ""
                 },
                 "natural/water/lake": {
@@ -8037,11 +8121,11 @@
                     "terms": ""
                 },
                 "natural/water/river": {
-                    "name": "River",
+                    "name": "River Area",
                     "terms": "beck,branch,brook,course,creek,estuary,rill,riverbank,rivulet,run,runnel,stream,tributary,watercourse"
                 },
                 "natural/water/stream": {
-                    "name": "Stream",
+                    "name": "Stream Area",
                     "terms": "beck,branch,brook,burn,course,creek,current,drift,flood,flow,freshet,race,rill,rindle,rivulet,run,runnel,rush,spate,spritz,surge,tide,torrent,tributary,watercourse"
                 },
                 "natural/water/wastewater": {
@@ -8055,6 +8139,10 @@
                 "natural/wood": {
                     "name": "Wood",
                     "terms": "tree"
+                },
+                "network/type/node_network": {
+                    "name": "Recreational Network Node",
+                    "terms": "node network,rcn,rwn"
                 },
                 "noexit/yes": {
                     "name": "No Exit",
@@ -8104,6 +8192,10 @@
                 "office/company": {
                     "name": "Corporate Office",
                     "terms": ""
+                },
+                "office/consulting": {
+                    "name": "Consultancy Office",
+                    "terms": "consulting firm office"
                 },
                 "office/coworking": {
                     "name": "Coworking Space",
@@ -9275,6 +9367,10 @@
                     "name": "Shoe Store",
                     "terms": "boots,cleats,clogs,heels,loafers,oxfords,sneakers"
                 },
+                "shop/spices": {
+                    "name": "Spice Shop",
+                    "terms": "chili,cinnamon,curry,ginger,herbs,pepper,saffron,salt,spice store,spices,turmeric,wasabi"
+                },
                 "shop/sports": {
                     "name": "Sporting Goods Store",
                     "terms": "athletics"
@@ -9795,7 +9891,7 @@
                 },
                 "waterway/water_point": {
                     "name": "Marine Drinking Water",
-                    "terms": ""
+                    "terms": "water faucet,water point,water tap,water source,water spigot"
                 },
                 "waterway/waterfall": {
                     "name": "Waterfall",

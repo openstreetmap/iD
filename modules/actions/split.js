@@ -23,6 +23,9 @@ import { utilArrayIntersection, utilWrap } from '../util';
 export function actionSplit(nodeId, newWayIds) {
     var _wayIDs;
 
+    // The IDs of the ways actually created by running this action
+    var createdWayIDs = [];
+
     // If the way is closed, we need to search for a partner node
     // to split the way at.
     //
@@ -201,18 +204,23 @@ export function actionSplit(nodeId, newWayIds) {
             graph = graph.replace(wayB.update({ tags: {} }));
         }
 
+        createdWayIDs.push(wayB.id);
+
         return graph;
     }
 
-
     var action = function(graph) {
         var candidates = action.ways(graph);
+        createdWayIDs = [];
         for (var i = 0; i < candidates.length; i++) {
             graph = split(graph, candidates[i], newWayIds && newWayIds[i]);
         }
         return graph;
     };
 
+    action.getCreatedWayIDs = function() {
+        return createdWayIDs;
+    };
 
     action.ways = function(graph) {
         var node = graph.entity(nodeId);

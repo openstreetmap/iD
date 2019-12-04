@@ -1,8 +1,5 @@
 {
     "icon": "temaki-vending_pet_waste",
-    "fields": [
-        "{amenity/vending_machine}"
-    ],
     "geometry": [
         "point",
         "vertex"

@@ -1,5 +1,5 @@
 {
-    "icon": "fas-motorcycle",
+    "icon": "temaki-motorcycle_repair",
     "fields": [
         "{shop}",
         "service/vehicle"

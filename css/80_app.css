@@ -1834,10 +1834,18 @@ a.hide-toggle {
     height: 50px;
     object-fit: contain;
     border-radius: 2px;
+    z-index: 2;
+    visibility: hidden;
 }
 .preset-icon-container.small img.image-icon {
     width: 34px;
     height: 34px;
+}
+.preset-icon-container.showing-img img.image-icon {
+    visibility: visible;
+}
+.preset-icon-container.showing-img *:not(.image-icon) {
+    visibility: hidden;
 }
 
 .preset-icon-point-border path,
