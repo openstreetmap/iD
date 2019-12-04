@@ -624,6 +624,10 @@
       "replace": {"man_made": "cutline"}
     },
     {
+      "old": {"man_made": "gas_well"},
+      "replace": {"man_made": "petroleum_well", "substance": "gas"}
+    },
+    {
       "old": {"man_made": "jetty"},
       "replace": {"highway": "footway", "man_made": "pier"}
     },
@@ -642,6 +646,10 @@
     {
       "old": {"man_made": "oil_tank"},
       "replace": {"man_made": "storage_tank", "content": "oil"}
+    },
+    {
+      "old": {"man_made": "oil_well"},
+      "replace": {"man_made": "petroleum_well", "substance": "oil"}
     },
     {
       "old": {"man_made": "village_pump"},
