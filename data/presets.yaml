@@ -6830,7 +6830,7 @@ en:
       playground/horizontal_bar:
         # playground=horizontal_bar
         name: Play Horizontal Bar
-        # 'terms: high bar'
+        # 'terms: chin-up bar,high bar,pull-up bar'
         terms: '<translate with synonyms or related terms for ''Play Horizontal Bar'', separated by commas>'
       playground/rocker:
         # playground=springy
@@ -6845,6 +6845,7 @@ en:
       playground/sandpit:
         # playground=sandpit
         name: Sandpit
+        # 'terms: sandbox'
         terms: '<translate with synonyms or related terms for ''Sandpit'', separated by commas>'
       playground/seesaw:
         # playground=seesaw
@@ -6857,6 +6858,7 @@ en:
       playground/structure:
         # playground=structure
         name: Play Structure
+        # 'terms: jungle gym'
         terms: '<translate with synonyms or related terms for ''Play Structure'', separated by commas>'
       playground/swing:
         # playground=swing

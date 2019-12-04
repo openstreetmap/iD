@@ -8413,7 +8413,7 @@
                 },
                 "playground/horizontal_bar": {
                     "name": "Play Horizontal Bar",
-                    "terms": "high bar"
+                    "terms": "chin-up bar,high bar,pull-up bar"
                 },
                 "playground/rocker": {
                     "name": "Spring Rider",
@@ -8425,7 +8425,7 @@
                 },
                 "playground/sandpit": {
                     "name": "Sandpit",
-                    "terms": ""
+                    "terms": "sandbox"
                 },
                 "playground/seesaw": {
                     "name": "Seesaw",
@@ -8437,7 +8437,7 @@
                 },
                 "playground/structure": {
                     "name": "Play Structure",
-                    "terms": ""
+                    "terms": "jungle gym"
                 },
                 "playground/swing": {
                     "name": "Swing",
