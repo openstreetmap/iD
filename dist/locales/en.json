@@ -3703,6 +3703,10 @@
                 "map_type": {
                     "label": "Type"
                 },
+                "mapillary": {
+                    "label": "Mapillary Image ID",
+                    "terms": ""
+                },
                 "marker": {
                     "label": "Type"
                 },
@@ -4816,6 +4820,11 @@
                 "wikidata": {
                     "label": "Wikidata",
                     "terms": ""
+                },
+                "wikimedia_commons": {
+                    "label": "Wikimedia Commons Page",
+                    "terms": "",
+                    "placeholder": "File:Example.jpg"
                 },
                 "wikipedia": {
                     "label": "Wikipedia",

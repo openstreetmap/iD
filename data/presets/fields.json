@@ -231,6 +231,7 @@
     "manufacturer": {"key": "manufacturer", "type": "combo", "snake_case": false, "caseSensitive": true, "label": "Manufacturer"},
     "map_size": {"key": "map_size", "type": "typeCombo", "label": "Coverage"},
     "map_type": {"key": "map_type", "type": "typeCombo", "label": "Type"},
+    "mapillary": {"key": "mapillary", "type": "identifier", "label": "Mapillary Image ID", "urlFormat": "https://mapillary.com/app/?focus=photo&pKey={value}", "pattern": "^[a-zA-Z0-9-_]{1,}$", "universal": true},
     "marker": {"key": "marker", "type": "typeCombo", "label": "Type"},
     "material": {"key": "material", "type": "combo", "label": "Material"},
     "max_age": {"key": "max_age", "type": "number", "minValue": 0, "label": "Maximum Age", "terms": ["upper age limit"]},
@@ -450,6 +451,7 @@
     "wholesale": {"key": "wholesale", "type": "typeCombo", "label": "Wholesale"},
     "width": {"key": "width", "type": "number", "minValue": 0, "label": "Width (Meters)"},
     "wikidata": {"key": "wikidata", "keys": ["wikidata", "wikipedia"], "type": "wikidata", "icon": "wikipedia", "universal": true, "label": "Wikidata"},
+    "wikimedia_commons": {"key": "wikimedia_commons", "type": "identifier", "label": "Wikimedia Commons Page", "placeholder": "File:Example.jpg", "urlFormat": "https://commons.wikimedia.org/wiki/{value}", "pattern": "^(?:File|Category):.{1,}", "universal": true},
     "wikipedia": {"key": "wikipedia", "keys": ["wikipedia", "wikidata"], "type": "wikipedia", "icon": "wikipedia", "universal": true, "label": "Wikipedia"},
     "windings": {"key": "windings", "type": "number", "minValue": 1, "label": "Windings", "placeholder": "1, 2, 3..."},
     "windings/configuration": {"key": "windings:configuration", "type": "combo", "label": "Windings Configuration", "strings": {"options": {"star": "Star / Wye", "delta": "Delta", "open-delta": "Open Delta", "zigzag": "Zig Zag", "open": "Open", "scott": "Scott", "leblanc": "Leblanc"}}}

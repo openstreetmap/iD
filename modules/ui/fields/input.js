@@ -104,7 +104,7 @@ export function uiFieldText(field, context) {
                 .append('button')
                 .attr('tabindex', -1)
                 .call(svgIcon('#iD-icon-out-link'))
-                .attr('class', 'form-field-button foreign-id-permalink')
+                .attr('class', 'disabled form-field-button foreign-id-permalink')
                 .attr('title', function() {
                     var domainResults = /^https?:\/\/(.{1,}?)\//.exec(field.urlFormat);
                     if (domainResults.length >= 2 && domainResults[1]) {
@@ -118,7 +118,7 @@ export function uiFieldText(field, context) {
 
                     var value = validIdentifierValueForLink();
                     if (value) {
-                        var url = field.urlFormat.replace(/{value}/, value);
+                        var url = field.urlFormat.replace(/{value}/, encodeURIComponent(value));
                         window.open(url, '_blank');
                     }
                 })

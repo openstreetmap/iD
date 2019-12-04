@@ -1251,6 +1251,10 @@ en:
       map_type:
         # map_type=*
         label: Type
+      mapillary:
+        # mapillary=*
+        label: Mapillary Image ID
+        terms: '[translate with synonyms or related terms for ''Mapillary Image ID'', separated by commas]'
       marker:
         # marker=*
         label: Type
@@ -2612,6 +2616,12 @@ en:
         # 'wikidata=*, wikipedia=*'
         label: Wikidata
         terms: '[translate with synonyms or related terms for ''Wikidata'', separated by commas]'
+      wikimedia_commons:
+        # wikimedia_commons=*
+        label: Wikimedia Commons Page
+        # wikimedia_commons field placeholder
+        placeholder: 'File:Example.jpg'
+        terms: '[translate with synonyms or related terms for ''Wikimedia Commons Page'', separated by commas]'
       wikipedia:
         # 'wikipedia=*, wikidata=*'
         label: Wikipedia
