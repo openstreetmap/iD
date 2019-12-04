@@ -1,5 +1,5 @@
 import { select as d3_select } from 'd3-selection';
-import { osmPavedTags } from '../osm/tags';
+import { osmPavedTags, osmPrivateTags, osmCustomersTags, osmDestinationTags } from '../osm/tags';
 
 
 export function svgTagClasses() {
@@ -69,13 +69,13 @@ export function svgTagClasses() {
             k = primaries[i];
             v = t[k];
             if (!v || v === 'no') continue;
-
+    
             if (k === 'piste:type') {  // avoid a ':' in the class name
                 k = 'piste';
             } else if (k === 'building:part') {  // avoid a ':' in the class name
                 k = 'building_part';
             }
-
+    
             primary = k;
             if (statuses.indexOf(v) !== -1) {   // e.g. `railway=abandoned`
                 status = v;
@@ -84,7 +84,7 @@ export function svgTagClasses() {
                 classes.push('tag-' + k);
                 classes.push('tag-' + k + '-' + v);
             }
-
+    
             break;
         }
 
@@ -124,18 +124,58 @@ export function svgTagClasses() {
             classes.push('tag-' + k + '-' + v);
         }
 
+        // check for number of flats in building or landuse residential:
+        if (primary === 'building' || (primary === 'landuse' && t.landuse === 'residential'))
+        {
+            var numberOfFlats = 0;
+            for (k in t) {
+                v = t[k];
+                if (k === 'building:flats' || k === 'flats' || k === 'houses')
+                {
+                    numberOfFlats = v;
+                    break;
+                }
+            }
+            if (numberOfFlats > 0)
+            {
+                classes.push('tag-has-flats');
+                classes.push('tag-flats-'+numberOfFlats);
+            }
+        }
+
         // For highways, look for surface tagging..
         if (primary === 'highway' || primary === 'aeroway') {
             var paved = (t.highway !== 'track');
+            var _private = false;
+            var customers = false;
+            var destination = false;
             for (k in t) {
                 v = t[k];
                 if (k in osmPavedTags) {
                     paved = !!osmPavedTags[k][v];
-                    break;
+                    //break;
+                }
+                if (k in osmPrivateTags) {
+                    _private = !!osmPrivateTags[k][v];
+                }
+                if (k in osmCustomersTags) {
+                    customers = !!osmCustomersTags[k][v];
+                }
+                if (k in osmDestinationTags) {
+                    destination = !!osmDestinationTags[k][v];
                 }
             }
             if (!paved) {
                 classes.push('tag-unpaved');
+            }
+            if (_private) {
+                classes.push('tag-private');
+            }
+            if (customers) {
+                classes.push('tag-customers');
+            }
+            if (destination) {
+                classes.push('tag-destination');
             }
         }
 

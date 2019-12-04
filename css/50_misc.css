@@ -428,3 +428,30 @@ path.fill.tag-building {
     stroke: rgba(224, 110, 95, 0.3);
     fill: rgba(224, 110, 95, 0.3);
 }
+
+
+path.stroke.tag-building.tag-has-flats {
+    stroke: rgb(226, 0, 0);
+    stroke-width: 2;
+}
+path.stroke.tag-building.tag-flats-2 {
+    stroke: rgb(0, 255, 234);
+}
+path.stroke.tag-building.tag-flats-3 {
+    stroke: rgb(0, 255, 157);
+}
+path.stroke.tag-building.tag-flats-4 {
+    stroke: rgb(0, 255, 21);
+}
+path.stroke.tag-building.tag-flats-5 {
+    stroke: rgb(179, 255, 0);
+}
+path.stroke.tag-building.tag-flats-6 {
+    stroke: rgb(255, 217, 0);
+}
+path.stroke.tag-building.tag-flats-8 {
+    stroke: rgb(255, 166, 0);
+}
+path.stroke.tag-building.tag-flats-8 {
+    stroke: rgb(255, 60, 0);
+}

@@ -1,6 +1,15 @@
 {
   "dataImagery": [
     {
+      "id": "CMM2018",
+      "name": "CMM 2018 aerial imagery",
+      "type": "tms",
+      "template": "http://132.207.95.135/cmm2018tiles/{zoom}/{x}/{y}",
+      "zoomExtent": [8, 22],
+      "default": true,
+      "description": "CMM 2018 Aerial imagery."
+    },
+    {
       "id": "sjcgis.org-Aerials_2013_WM",
       "name": "2013 aerial imagery for San Juan County WA",
       "type": "tms",
@@ -6986,7 +6995,7 @@
       "type": "bing",
       "template": "https://www.bing.com/maps",
       "zoomExtent": [1, 22],
-      "default": true,
+      "default": false,
       "description": "Satellite and aerial imagery.",
       "icon": "https://osmlab.github.io/editor-layer-index/sources/world/Bing.png"
     },

@@ -204,7 +204,10 @@ path.line.casing.tag-highway-residential,
 path.line.casing.tag-residential {
     stroke: #444;
 }
-
+path.line.casing.tag-highway-residential.tag-destination,
+path.line.casing.tag-residential.tag-destination {
+    stroke: rgb(129, 23, 103);
+}
 .preset-icon .icon.tag-highway-unclassified {
     color: #dca;
     fill: #444;
@@ -410,6 +413,18 @@ path.line.casing.tag-highway-service.tag-service,
 path.line.casing.tag-service.tag-service {
     stroke: #666;
 }
+path.line.casing.tag-highway-service.tag-service.tag-private,
+path.line.casing.tag-service.tag-service.tag-private {
+    stroke: rgb(143, 32, 32);
+}
+path.line.casing.tag-highway-service.tag-service.tag-customers,
+path.line.casing.tag-service.tag-service.tag-customers {
+    stroke: rgb(168, 94, 32);
+}
+path.line.casing.tag-highway-service.tag-service.tag-destination,
+path.line.casing.tag-service.tag-service.tag-destination {
+    stroke: rgb(168, 32, 127);
+}
 
 /* unmaintained track roads */
 path.line.stroke.tag-highway-track,
@@ -474,8 +489,18 @@ path.line.casing.tag-highway-bridleway.tag-unpaved {
     color: #988;
     fill: #dca;
 }
+
 path.line.stroke.tag-highway-path {
     stroke: #988;
+}
+path.line.stroke.tag-highway-path.tag-private {
+    stroke: #aa3030;
+}
+path.line.stroke.tag-highway-path.tag-customers {
+    stroke: #cc7830;
+}
+path.line.stroke.tag-highway-path.tag-destination {
+    stroke: #972c85;
 }
 
 /* footways */
@@ -489,6 +514,18 @@ path.line.stroke.tag-highway-footway,
 path.line.stroke.tag-highway_bus_stop,
 .preset-icon-container path.casing.tag-highway-footway {
     stroke: #988;
+}
+path.line.stroke.tag-highway-footway.tag-private,
+.preset-icon-container path.casing.tag-highway-footway.tag-private {
+    stroke: #aa3030;
+}
+path.line.stroke.tag-highway-footway.tag-customers,
+.preset-icon-container path.casing.tag-highway-footway.tag-customers {
+    stroke: #cc7830;
+}
+path.line.stroke.tag-highway-footway.tag-destination,
+.preset-icon-container path.casing.tag-highway-footway.tag-destination {
+    stroke: #972c85;
 }
 .preset-icon .icon.tag-highway-footway.tag-footway-sidewalk {
     color: #d4b4b4;

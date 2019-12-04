@@ -1,8 +1,3 @@
-<<<<<<< HEAD
-//import CountryCoder from 'country-coder';
-
-=======
->>>>>>> 247f20bf2a0cf483f232ebf7e29cafd63566e507
 import serviceKeepRight from './keepRight';
 import serviceImproveOSM from './improveOSM';
 import serviceMapillary from './mapillary';
@@ -19,10 +14,7 @@ import serviceWikipedia from './wikipedia';
 
 
 export var services = {
-<<<<<<< HEAD
     countryCoder: null,//new CountryCoder(),
-=======
->>>>>>> 247f20bf2a0cf483f232ebf7e29cafd63566e507
     geocoder: serviceNominatim,
     keepRight: serviceKeepRight,
     improveOSM: serviceImproveOSM,

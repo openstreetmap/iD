@@ -40,6 +40,9 @@
     stroke-width: 60px;
     pointer-events: none;
 }
+.fill-partial path.area.fill.tag-has-flats {
+    stroke-width: 2000px;
+}
 .fill-partial path.area.fill.tag-building_part {
     stroke-width: 40px;
 }

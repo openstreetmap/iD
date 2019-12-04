@@ -441,7 +441,7 @@ export function presetIndex(context) {
             favs.splice(favs.indexOf(favorite), 1);
         } else {
             // only allow 10 favorites
-            if (favs.length === 30) {
+            if (favs.length === 41) {
                 // remove the last favorite (last in, first out)
                 favs.pop();
             }
@@ -532,7 +532,7 @@ export function presetIndex(context) {
             item = RibbonItem(preset, 'recent');
         }
         // allow 30 recents
-        if (items.length === 30) {
+        if (items.length === 41) {
             // remove the last favorite (first in, first out)
             items.pop();
         }

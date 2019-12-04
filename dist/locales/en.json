@@ -6817,6 +6817,14 @@
                     "name": "Moving Walkway",
                     "terms": "moving sidewalk,autwalk,skywalk,travolator,travelator,travellator,conveyor"
                 },
+                "highway/footway/customers-informal": {
+                    "name": "Customers InformalPath",
+                    "terms": "hike,hiking,trackway,trail,walk,desire,informal"
+                },
+                "highway/footway/customers": {
+                    "name": "Customers Foot Path",
+                    "terms": "hike,hiking,promenade,trackway,trail,walk"
+                },
                 "highway/footway/marked-raised": {
                     "name": "Marked Crosswalk (Raised)",
                     "terms": "zebra crossing,marked crossing,crosswalk,flat top,hump,speed,slow"

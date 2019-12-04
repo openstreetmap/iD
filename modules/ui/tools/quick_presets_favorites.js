@@ -11,7 +11,7 @@ export function uiToolAddFavorite(context) {
     tool.itemsToDraw = function() {
         if (context.presets().getAddable().length) return [];
 
-        var items = context.presets().getFavorites().slice(0, 32);
+        var items = context.presets().getFavorites().slice(0, 41);
 
         //var precedingCount = context.storage('tool.add_generic.toggledOn') === 'true' ? 3 : 0;
         var precedingCount = 0;
@@ -24,14 +24,20 @@ export function uiToolAddFavorite(context) {
                 keyCode = indexModified;// + 1;
             } else if (indexModified > 9) {
                 keyCode = indexModified + 55;
+            } else if (indexModified > 30) {
+                keyCode = null;
             }
-            var keyStr = String.fromCharCode(keyCode);
-            while (keyStr === 'M' || keyStr === 'Q' || keyStr === 'R')
+            var keyStr = keyCode !==  null ? String.fromCharCode(keyCode) : null;
+            if (keyCode !== null)
             {
-                indexModified++;
-                keyCode = indexModified + 55;
-                keyStr  = String.fromCharCode(keyCode);
+                while (keyStr === 'M' || keyStr === 'Q' || keyStr === 'R')
+                {
+                    indexModified++;
+                    keyCode = indexModified + 55;
+                    keyStr  = String.fromCharCode(keyCode);
+                }
             }
+           
             // use number row order: 1 2 3 4 5 6 7 8 9 0
             // use the same for RTL even though the layout is backward: #6107
             
@@ -52,7 +58,7 @@ export function uiToolAddFavorite(context) {
     };
 
     tool.willUpdate = function() {
-        for (var i = 0; i <= 31; i++) {
+        for (var i = 0; i <= 40; i++) {
             context.keybinding().off(i.toString());
         }
     };

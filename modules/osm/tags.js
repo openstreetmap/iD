@@ -93,6 +93,24 @@ export var osmPavedTags = {
     }
 };
 
+export var osmPrivateTags = {
+    'access': {
+        'private': true
+    }
+};
+
+export var osmCustomersTags = {
+    'access': {
+        'customers': true
+    }
+};
+
+export var osmDestinationTags = {
+    'access': {
+        'destination': true
+    }
+};
+
 export var osmRightSideIsInsideTags = {
     'natural': {
         'cliff': true,

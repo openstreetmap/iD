@@ -4882,7 +4882,7 @@ en:
         # 'terms: bicycle and foot path,bike and pedestrian path,green way,greenway,mixed-use trail,multi-use trail,segregated trail,rail trail'
         terms: '<translate with synonyms or related terms for ''Cycle & Foot Path'', separated by commas>'
       highway/cycleway/crossing:
-        # cycleway=crossing
+        # 'cycleway=crossing, foot=designated, bicycle=designated'
         name: Cycle Crossing
       highway/cycleway/crossing/marked:
         # 'cycleway=crossing, crossing=marked'
@@ -4922,6 +4922,16 @@ en:
       highway/footway/crossing:
         # footway=crossing
         name: Pedestrian Crossing
+      highway/footway/customers:
+        # 'highway=footway, access=customers'
+        name: Customers Foot Path
+        # 'terms: hike,hiking,promenade,trackway,trail,walk'
+        terms: '<translate with synonyms or related terms for ''Customers Foot Path'', separated by commas>'
+      highway/footway/customers-informal:
+        # 'highway=path, informal=yes, path=desire, access=customers'
+        name: Customers InformalPath
+        # 'terms: hike,hiking,trackway,trail,walk,desire,informal'
+        terms: '<translate with synonyms or related terms for ''Customers InformalPath'', separated by commas>'
       highway/footway/marked:
         # 'footway=crossing, crossing=marked'
         name: Marked Crosswalk
