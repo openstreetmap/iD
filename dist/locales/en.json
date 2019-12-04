@@ -3564,7 +3564,7 @@
                     "label": "Type"
                 },
                 "mapillary": {
-                    "label": "Mapillary Photo ID",
+                    "label": "Mapillary Image ID",
                     "terms": ""
                 },
                 "marker": {

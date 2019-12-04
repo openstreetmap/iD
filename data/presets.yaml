@@ -1253,8 +1253,8 @@ en:
         label: Type
       mapillary:
         # mapillary=*
-        label: Mapillary Photo ID
-        terms: '[translate with synonyms or related terms for ''Mapillary Photo ID'', separated by commas]'
+        label: Mapillary Image ID
+        terms: '[translate with synonyms or related terms for ''Mapillary Image ID'', separated by commas]'
       marker:
         # marker=*
         label: Type
