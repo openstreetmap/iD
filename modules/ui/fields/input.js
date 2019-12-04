@@ -42,7 +42,7 @@ export function uiFieldText(field, context) {
 
         input = input.enter()
             .append('input')
-            .attr('type', field.type)
+            .attr('type', field.type === 'identifier' ? 'text' : field.type)
             .attr('id', fieldID)
             .attr('placeholder', field.placeholder() || t('inspector.unknown'))
             .classed(field.type, true)

@@ -1671,6 +1671,7 @@
     {"key": "recycling:", "description": "🄵 Accepts"},
     {"key": "ref", "description": "🄵 Gate Number, 🄵 Hole Number, 🄵 Junction Number, 🄵 Platform Number, 🄵 Road Number, 🄵 Room Number, 🄵 Route Number, 🄵 Runway Number, 🄵 Stop Number, 🄵 Taxiway Name, 🄵 Reference Code"},
     {"key": "ref:isil", "description": "🄵 ISIL Code"},
+    {"key": "ref:vatin", "description": "🄵 VAT ID Number"},
     {"key": "type", "description": "🄵 Type"},
     {"key": "religion", "description": "🄵 Religion"},
     {"key": "reservation", "value": "yes", "description": "🄵 Reservations"},

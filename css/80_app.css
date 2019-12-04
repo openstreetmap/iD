@@ -1813,21 +1813,28 @@ button.preset-favorite-button.active .icon {
 .form-field-input-url > input:only-of-type {
     border-radius: 0 0 4px 4px;
 }
-.form-field-input-number > input:only-of-type,
-.form-field-input-identifier > input:only-of-type {
+.form-field-input-number > input:only-of-type {
     border-radius: 0 0 0 4px;
 }
-[dir='rtl'] .form-field-input-number > input:only-of-type,
-[dir='rtl'] .form-field-input-identifier > input:only-of-type {
+[dir='rtl'] .form-field-input-number > input:only-of-type {
     border-radius: 0 0 4px 0;
 }
-.form-field-input-number > button:last-of-type,
-.form-field-input-identifier > button:last-of-type {
+.form-field-input-number > button:last-of-type {
     border-radius: 0 0 4px 0;
 }
-[dir='rtl'] .form-field-input-number > button:last-of-type,
-[dir='rtl'] .form-field-input-identifier > button:last-of-type {
+[dir='rtl'] .form-field-input-number > button:last-of-type {
     border-radius: 0 0 0 4px;
+}
+
+[dir='ltr'] .form-field-input-identifier > input:last-child,
+[dir='rtl'] .form-field-input-identifier > input:first-child,
+[dir='ltr'] .form-field-input-identifier > button {
+    border-bottom-right-radius: 4px;
+}
+[dir='ltr'] .form-field-input-identifier > input:first-child,
+[dir='rtl'] .form-field-input-identifier > input:last-child,
+[dir='rtl'] .form-field-input-identifier > button {
+    border-bottom-left-radius: 4px;
 }
 
 /* draw the up/down on the buttons */

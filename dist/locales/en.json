@@ -4023,6 +4023,10 @@
                 "ref/isil": {
                     "label": "ISIL Code"
                 },
+                "ref/vatin": {
+                    "label": "VAT ID Number",
+                    "terms": "value added tax identification number,vatin"
+                },
                 "relation": {
                     "label": "Type"
                 },

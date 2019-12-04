@@ -19,6 +19,7 @@
         "internet_access/ssid",
         "phone",
         "power_supply",
+        "ref/vatin",
         "reservation",
         "sanitary_dump_station",
         "website",

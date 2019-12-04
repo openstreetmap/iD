@@ -1,0 +1,12 @@
+{
+    "key": "ref:vatin",
+    "type": "identifier",
+    "label": "VAT ID Number",
+    "notCountryCodes": [
+        "ao", "ai", "bm", "bt", "io", "vg", "bn", "ky", "km", "cu", "dj", "er", "fk", "gi", "gg", "hk", "iq", "ki", "xk", "kw", "lr", "ly", "mo", "mv", "mh", "fm", "ms", "mm", "nr", "kp", "om", "pw", "pn", "qa", "sh", "sm", "st", "sb", "so", "gs", "ss", "sr", "sz", "sy", "tl", "tc", "tv", "us", "va", "ye"
+    ],
+    "terms": [
+        "value added tax identification number",
+        "vatin"
+    ]
+}

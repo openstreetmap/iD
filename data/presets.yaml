@@ -1790,6 +1790,11 @@ en:
       ref/isil:
         # 'ref:isil=*'
         label: ISIL Code
+      ref/vatin:
+        # 'ref:vatin=*'
+        label: VAT ID Number
+        # 'terms: value added tax identification number,vatin'
+        terms: '[translate with synonyms or related terms for ''VAT ID Number'', separated by commas]'
       ref_aeroway_gate:
         # ref=*
         label: Gate Number
