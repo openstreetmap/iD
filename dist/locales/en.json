@@ -4681,6 +4681,11 @@
                     "label": "Wikidata",
                     "terms": ""
                 },
+                "wikimedia_commons": {
+                    "label": "Wikimedia Commons Page",
+                    "terms": "",
+                    "placeholder": "File:Example.jpg"
+                },
                 "wikipedia": {
                     "label": "Wikipedia",
                     "terms": ""

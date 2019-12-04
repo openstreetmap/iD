@@ -1886,6 +1886,7 @@
     {"key": "width", "description": "🄵 Width (Meters)"},
     {"key": "wikidata", "description": "🄵 Wikidata, 🄵 Wikipedia"},
     {"key": "wikipedia", "description": "🄵 Wikidata, 🄵 Wikipedia"},
+    {"key": "wikimedia_commons", "description": "🄵 Wikimedia Commons Page"},
     {"key": "windings", "description": "🄵 Windings"},
     {"key": "windings:configuration", "value": "star", "description": "🄵 Windings Configuration"},
     {"key": "windings:configuration", "value": "delta", "description": "🄵 Windings Configuration"},
