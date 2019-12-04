@@ -1549,6 +1549,7 @@
     {"key": "manufacturer", "description": "🄵 Manufacturer"},
     {"key": "map_size", "description": "🄵 Coverage"},
     {"key": "map_type", "description": "🄵 Type"},
+    {"key": "mapillary", "description": "🄵 Mapillary Photo ID"},
     {"key": "material", "description": "🄵 Material"},
     {"key": "max_age", "description": "🄵 Maximum Age"},
     {"key": "maxheight", "description": "🄵 Max Height"},

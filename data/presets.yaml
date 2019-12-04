@@ -1251,6 +1251,10 @@ en:
       map_type:
         # map_type=*
         label: Type
+      mapillary:
+        # mapillary=*
+        label: Mapillary Photo ID
+        terms: '[translate with synonyms or related terms for ''Mapillary Photo ID'', separated by commas]'
       marker:
         # marker=*
         label: Type

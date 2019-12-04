@@ -231,6 +231,7 @@
     "manufacturer": {"key": "manufacturer", "type": "combo", "snake_case": false, "caseSensitive": true, "label": "Manufacturer"},
     "map_size": {"key": "map_size", "type": "typeCombo", "label": "Coverage"},
     "map_type": {"key": "map_type", "type": "typeCombo", "label": "Type"},
+    "mapillary": {"key": "mapillary", "type": "identifier", "label": "Mapillary Photo ID", "urlFormat": "https://mapillary.com/app/?focus=photo&pKey={value}", "pattern": "^[a-zA-Z0-9-_]{1,}$", "universal": true},
     "marker": {"key": "marker", "type": "typeCombo", "label": "Type"},
     "material": {"key": "material", "type": "combo", "label": "Material"},
     "max_age": {"key": "max_age", "type": "number", "minValue": 0, "label": "Maximum Age", "terms": ["upper age limit"]},
