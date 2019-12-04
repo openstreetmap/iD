@@ -467,7 +467,7 @@ function generateTaginfo(presets, fields) {
       tag.icon_url = 'https://cdn.jsdelivr.net/gh/mapbox/maki/icons/' +
         preset.icon.replace(/^maki-/, '') + '-15.svg';
     } else if (/^temaki-/.test(preset.icon)) {
-      tag.icon_url = 'https://cdn.jsdelivr.net/gh/bhousel/temaki/icons/' +
+      tag.icon_url = 'https://cdn.jsdelivr.net/gh/ideditor/temaki/icons/' +
         preset.icon.replace(/^temaki-/, '') + '.svg';
     } else if (/^fa[srb]-/.test(preset.icon)) {
       tag.icon_url = 'https://cdn.jsdelivr.net/gh/openstreetmap/iD@master/svg/fontawesome/' +
