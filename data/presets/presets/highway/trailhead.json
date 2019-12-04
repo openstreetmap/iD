@@ -11,6 +11,7 @@
         "charge_fee"
     ],
     "moreFields": [
+        "gnis/feature_id",
         "opening_hours"
     ],
     "geometry": [

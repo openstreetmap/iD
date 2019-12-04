@@ -8,6 +8,7 @@
         "bin"
     ],
     "moreFields": [
+        "gnis/feature_id",
         "lit",
         "lockable",
         "wheelchair"

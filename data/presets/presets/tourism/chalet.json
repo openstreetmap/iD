@@ -13,6 +13,7 @@
         "building/levels_building",
         "email",
         "fax",
+        "gnis/feature_id",
         "height_building",
         "internet_access/ssid",
         "payment_multi",

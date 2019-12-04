@@ -4,6 +4,9 @@
         "name",
         "natural"
     ],
+    "moreFields": [
+        "gnis/feature_id"
+    ],
     "geometry": [
         "point",
         "vertex",

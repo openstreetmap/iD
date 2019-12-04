@@ -4,6 +4,9 @@
         "name",
         "admin_level"
     ],
+    "moreFields": [
+        "gnis/feature_id"
+    ],
     "geometry": [
         "relation"
     ],

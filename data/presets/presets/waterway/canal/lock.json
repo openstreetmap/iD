@@ -6,6 +6,7 @@
         "lock"
     ],
     "moreFields": [
+        "gnis/feature_id",
         "intermittent",
         "salt",
         "tidal"

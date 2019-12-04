@@ -897,6 +897,11 @@ en:
       generator/type:
         # 'generator:type=*'
         label: Type
+      gnis/feature_id:
+        # 'gnis:feature_id=*'
+        label: GNIS Feature ID
+        # 'terms: Federal Geographic Names Information Service,United States Board on Geographic Names,USA'
+        terms: '[translate with synonyms or related terms for ''GNIS Feature ID'', separated by commas]'
       government:
         # government=*
         label: Type

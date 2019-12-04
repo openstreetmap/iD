@@ -1476,6 +1476,7 @@
     {"key": "generator:output:electricity", "description": "🄵 Power Output"},
     {"key": "generator:source", "description": "🄵 Source"},
     {"key": "generator:type", "description": "🄵 Type"},
+    {"key": "gnis:feature_id", "description": "🄵 GNIS Feature ID"},
     {"key": "government", "description": "🄵 Type"},
     {"key": "grape_variety", "description": "🄵 Grape Varieties"},
     {"key": "guest_house", "description": "🄵 Type"},

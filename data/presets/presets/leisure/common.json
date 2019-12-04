@@ -1,9 +1,11 @@
 {
     "icon": "temaki-pedestrian",
     "fields": [
-        "name"
+        "name",
+        "access_simple"
     ],
     "moreFields": [
+        "gnis/feature_id",
         "website"
     ],
     "geometry": [

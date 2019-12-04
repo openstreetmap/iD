@@ -1,5 +1,8 @@
 {
     "icon": "temaki-oil_well",
+    "moreFields": [
+        "gnis/feature_id"
+    ],
     "geometry": [
         "point"
     ],

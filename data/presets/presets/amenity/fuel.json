@@ -12,6 +12,7 @@
         "building",
         "email",
         "fax",
+        "gnis/feature_id",
         "opening_hours",
         "payment_multi",
         "phone",

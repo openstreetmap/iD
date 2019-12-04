@@ -7,7 +7,7 @@
             "undo": "undo",
             "zoom_to": "zoom to",
             "copy": "copy",
-            "open_wikidata": "open on wikidata.org",
+            "view_on": "view on {domain}",
             "favorite": "favorite"
         },
         "toolbar": {
@@ -3391,6 +3391,10 @@
                 },
                 "generator/type": {
                     "label": "Type"
+                },
+                "gnis/feature_id": {
+                    "label": "GNIS Feature ID",
+                    "terms": "Federal Geographic Names Information Service,United States Board on Geographic Names,USA"
                 },
                 "government": {
                     "label": "Type"

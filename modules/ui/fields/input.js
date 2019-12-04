@@ -5,10 +5,11 @@ import * as countryCoder from '@ideditor/country-coder';
 import { t, textDirection } from '../../util/locale';
 import { dataPhoneFormats } from '../../../data';
 import { utilGetSetValue, utilNoAuto, utilRebind } from '../../util';
-
+import { svgIcon } from '../../svg/icon';
 
 export {
     uiFieldText as uiFieldUrl,
+    uiFieldText as uiFieldIdentifier,
     uiFieldText as uiFieldNumber,
     uiFieldText as uiFieldTel,
     uiFieldText as uiFieldEmail
@@ -18,6 +19,7 @@ export {
 export function uiFieldText(field, context) {
     var dispatch = d3_dispatch('change');
     var input = d3_select(null);
+    var outlinkButton = d3_select(null);
     var _entity;
 
     function i(selection) {
@@ -91,7 +93,46 @@ export function uiFieldText(field, context) {
                     input.node().value = vals.join(';');
                     change()();
                 });
+        } else if (field.type === 'identifier' && field.urlFormat && field.pattern) {
+
+            input.attr('type', 'text');
+
+            outlinkButton = wrap.selectAll('.foreign-id-permalink')
+                .data([0]);
+
+            outlinkButton.enter()
+                .append('button')
+                .attr('tabindex', -1)
+                .call(svgIcon('#iD-icon-out-link'))
+                .attr('class', 'form-field-button foreign-id-permalink')
+                .attr('title', function() {
+                    var domainResults = /^https?:\/\/(.{1,}?)\//.exec(field.urlFormat);
+                    if (domainResults.length >= 2 && domainResults[1]) {
+                        var domain = domainResults[1];
+                        return t('icons.view_on', { domain: domain });
+                    }
+                    return '';
+                })
+                .on('click', function() {
+                    d3_event.preventDefault();
+
+                    var value = validIdentifierValueForLink();
+                    if (value) {
+                        var url = field.urlFormat.replace(/{value}/, value);
+                        window.open(url, '_blank');
+                    }
+                })
+                .merge(outlinkButton);
         }
+    }
+
+
+    function validIdentifierValueForLink() {
+        if (field.type === 'identifier' && field.pattern) {
+            var value = utilGetSetValue(input).trim().split(';')[0];
+            return value && value.match(new RegExp(field.pattern));
+        }
+        return null;
     }
 
 
@@ -138,6 +179,11 @@ export function uiFieldText(field, context) {
 
     i.tags = function(tags) {
         utilGetSetValue(input, tags[field.key] || '');
+
+        if (outlinkButton && !outlinkButton.empty()) {
+            var disabled = !validIdentifierValueForLink();
+            outlinkButton.classed('disabled', disabled);
+        }
     };
 
 

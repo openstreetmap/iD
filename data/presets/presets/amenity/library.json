@@ -16,6 +16,7 @@
         "air_conditioning",
         "email",
         "fax",
+        "gnis/feature_id",
         "level",
         "opening_hours",
         "payment_multi",

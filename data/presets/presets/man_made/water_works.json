@@ -5,6 +5,9 @@
         "operator",
         "address"
     ],
+    "moreFields": [
+        "gnis/feature_id"
+    ],
     "geometry": [
         "point",
         "area"

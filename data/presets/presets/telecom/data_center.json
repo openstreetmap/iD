@@ -8,6 +8,7 @@
     ],
     "moreFields": [
         "address",
+        "gnis/feature_id",
         "phone",
         "website"
     ],

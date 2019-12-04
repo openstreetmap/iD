@@ -6,6 +6,7 @@
     "moreFields": [
         "email",
         "fax",
+        "gnis/feature_id",
         "phone",
         "website"
     ],

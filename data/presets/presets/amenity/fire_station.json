@@ -9,6 +9,7 @@
     "moreFields": [
         "email",
         "fax",
+        "gnis/feature_id",
         "phone",
         "polling_station",
         "smoking",
