@@ -10,6 +10,7 @@
     "moreFields": [
         "bench",
         "bin",
+        "gnis/feature_id",
         "level",
         "lit",
         "wheelchair"

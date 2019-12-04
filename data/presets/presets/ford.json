@@ -5,6 +5,9 @@
         "access",
         "seasonal"
     ],
+    "moreFields": [
+        "gnis/feature_id"
+    ],
     "geometry": [
         "vertex"
     ],

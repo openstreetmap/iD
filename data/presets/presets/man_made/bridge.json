@@ -7,6 +7,7 @@
         "maxweight"
     ],
     "moreFields": [
+        "gnis/feature_id",
         "manufacturer",
         "material",
         "seamark/type"

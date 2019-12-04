@@ -13,6 +13,7 @@
         "email",
         "fax",
         "fee",
+        "gnis/feature_id",
         "payment_multi_fee",
         "phone",
         "website",

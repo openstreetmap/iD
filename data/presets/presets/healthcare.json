@@ -13,6 +13,7 @@
         "building/levels_building",
         "email",
         "fax",
+        "gnis/feature_id",
         "height_building",
         "level",
         "opening_hours",

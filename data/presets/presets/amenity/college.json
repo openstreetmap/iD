@@ -13,6 +13,7 @@
         "denomination",
         "email",
         "fax",
+        "gnis/feature_id",
         "internet_access/ssid",
         "phone",
         "religion",

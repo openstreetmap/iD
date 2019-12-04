@@ -10,6 +10,7 @@
     "moreFields": [
         "access",
         "covered",
+        "gnis/feature_id",
         "indoor",
         "level"
     ],

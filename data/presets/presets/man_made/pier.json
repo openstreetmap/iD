@@ -12,6 +12,7 @@
         "{highway/footway}",
         "access",
         "fishing",
+        "gnis/feature_id",
         "incline"
     ],
     "geometry": [

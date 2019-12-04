@@ -3,6 +3,9 @@
         "name",
         "place"
     ],
+    "moreFields": [
+        "gnis/feature_id"
+    ],
     "geometry": [
         "point",
         "vertex",

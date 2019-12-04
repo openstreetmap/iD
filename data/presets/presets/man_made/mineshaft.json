@@ -9,6 +9,9 @@
         "operator",
         "resource"
     ],
+    "moreFields": [
+        "gnis/feature_id"
+    ],
     "terms": [
         "cave",
         "mine shaft",

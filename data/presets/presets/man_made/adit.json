@@ -10,6 +10,9 @@
         "resource",
         "direction"
     ],
+    "moreFields": [
+        "gnis/feature_id"
+    ],
     "terms": [
         "cave",
         "horizontal mine entrance",

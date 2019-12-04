@@ -56,6 +56,7 @@
                 "defaultCheck",
                 "email",
                 "lanes",
+                "identifier",
                 "localized",
                 "maxspeed",
                 "multiCombo",
@@ -201,6 +202,14 @@
                 "type": "string",
                 "pattern": "^[a-z]{2}$"
             }
+        },
+        "urlFormat":  {
+            "description": "Permalink URL for `identifier` fields. Must contain a {value} placeholder",
+            "type": "string"
+        },
+        "pattern":  {
+            "description": "Regular expression that a valid `identifier` value is expected to match",
+            "type": "string"
         }
     },
     "additionalProperties": false

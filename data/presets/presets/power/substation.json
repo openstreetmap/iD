@@ -6,6 +6,9 @@
         "building",
         "ref"
     ],
+    "moreFields": [
+        "gnis/feature_id"
+    ],
     "geometry": [
         "point",
         "area"

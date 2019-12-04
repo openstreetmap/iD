@@ -4,9 +4,6 @@
         "point",
         "area"
     ],
-    "fields": [
-        "name"
-    ],
     "tags": {
         "place": "farm"
     },

@@ -6,6 +6,9 @@
         "width",
         "intermittent"
     ],
+    "moreFields": [
+        "gnis/feature_id"
+    ],
     "geometry": [
         "vertex"
     ],

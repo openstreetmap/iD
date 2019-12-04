@@ -11,6 +11,7 @@
     "moreFields": [
         "email",
         "fax",
+        "gnis/feature_id",
         "level",
         "phone",
         "website",

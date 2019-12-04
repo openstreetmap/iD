@@ -11,6 +11,7 @@
         "architect",
         "building/levels/underground",
         "building/material",
+        "gnis/feature_id",
         "layer",
         "not/name",
         "operator",

@@ -13,6 +13,7 @@
     "moreFields": [
         "email",
         "fax",
+        "gnis/feature_id",
         "min_age",
         "payment_multi",
         "phone",

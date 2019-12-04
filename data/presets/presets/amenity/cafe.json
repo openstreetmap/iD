@@ -17,6 +17,7 @@
         "diet_multi",
         "email",
         "fax",
+        "gnis/feature_id",
         "internet_access/ssid",
         "level",
         "min_age",

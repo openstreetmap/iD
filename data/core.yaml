@@ -6,7 +6,7 @@ en:
     undo: undo
     zoom_to: zoom to
     copy: copy
-    open_wikidata: open on wikidata.org
+    view_on: view on {domain}
     favorite: favorite
   toolbar:
     inspect: Inspect

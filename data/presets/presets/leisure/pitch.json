@@ -11,6 +11,7 @@
         "charge_fee",
         "covered",
         "fee",
+        "gnis/feature_id",
         "indoor",
         "payment_multi_fee"
     ],

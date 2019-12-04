@@ -8,6 +8,9 @@
         "length",
         "height"
     ],
+    "moreFields": [
+        "gnis/feature_id"
+    ],
     "geometry": [
         "area"
     ],

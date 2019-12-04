@@ -12,6 +12,7 @@
     "moreFields": [
         "blind",
         "dog",
+        "gnis/feature_id",
         "wheelchair"
     ],
     "geometry": [

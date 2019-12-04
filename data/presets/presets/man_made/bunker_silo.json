@@ -3,6 +3,9 @@
     "fields": [
         "content"
     ],
+    "moreFields": [
+        "gnis/feature_id"
+    ],
     "geometry": [
         "point",
         "area"

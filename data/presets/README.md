@@ -260,6 +260,7 @@ A string specifying the UI and behavior of the field. Must be one of the followi
 * `tel` - Text field for entering phone numbers (localized for editing location)
 * `email` - Text field for entering email addresses
 * `url` - Text field for entering URLs
+* `identifier` - Text field for foreign IDs (e.g. `gnis:feature_id`)
 * `textarea` - Multi-line text area (e.g. `description=*`)
 
 ###### Combo/Dropdown fields
@@ -421,6 +422,18 @@ By default, fields are available everywhere.
 ##### `notCountryCodes`
 
 An array of two-letter, lowercase [ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) country codes. Similar to `countryCodes` except a blacklist instead of a whitelist.
+
+##### `urlFormat`
+
+For `identifier` fields, the permalink URL of the external record. It must contain a `{value}` placeholder where the tag value will be inserted. For example:
+
+```js
+"urlFormat": "https://geonames.usgs.gov/apex/f?p=gnispq:3:::NO::P3_FID:{value}"
+```
+
+##### `pattern`
+
+For `identifier` fields, the regular expression that valid values are expected to match to be linkable.
 
 
 ## Building
