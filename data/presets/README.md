@@ -410,6 +410,18 @@ For example, this is how we show the Internet Access Fee field only if the featu
 }
 ```
 
+If a feature has a value for this field's `key` or `keys`, it will display regardless of the `prerequisiteTag` property.
+
+##### `countryCodes`
+
+An array of two-letter, lowercase [ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) country codes. The field will only be available for features in the specified, whitelisted countries.
+
+By default, fields are available everywhere.
+
+##### `notCountryCodes`
+
+An array of two-letter, lowercase [ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) country codes. Similar to `countryCodes` except a blacklist instead of a whitelist.
+
 
 ## Building
 

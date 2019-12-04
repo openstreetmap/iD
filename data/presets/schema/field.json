@@ -183,6 +183,24 @@
             "items": {
                 "type": "string"
             }
+        },
+        "countryCodes":  {
+            "description": "Countries where to allow the field, as lowercase ISO 3166-1 alpha-2 codes (https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2)",
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+                "type": "string",
+                "pattern": "^[a-z]{2}$"
+            }
+        },
+        "notCountryCodes":  {
+            "description": "Countries where NOT to allow the field, as lowercase ISO 3166-1 alpha-2 codes (https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2)",
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+                "type": "string",
+                "pattern": "^[a-z]{2}$"
+            }
         }
     },
     "additionalProperties": false

@@ -1,3 +1,4 @@
+import * as countryCoder from '@ideditor/country-coder';
 import { dispatch as d3_dispatch } from 'd3-dispatch';
 import { event as d3_event, select as d3_select } from 'd3-selection';
 
@@ -295,13 +296,30 @@ export function uiField(context, presetField, entity, options) {
     // An allowed field can appear in the UI or in the 'Add field' dropdown.
     // A non-allowed field is hidden from the user altogether
     field.isAllowed = function() {
-        if (!entity || tagsContainFieldKey()) return true;   // a field with a value should always display
 
-        var latest = context.hasEntity(entity.id);   // check the most current copy of the entity
+        var latest = entity && context.hasEntity(entity.id);   // check the most current copy of the entity
         if (!latest) return true;
 
+        if (field.countryCodes || field.notCountryCodes) {
+            var center = latest.extent(context.graph()).center();
+            var countryCode = countryCoder.iso1A2Code(center);
+
+            if (!countryCode) return false;
+
+            countryCode = countryCode.toLowerCase();
+
+            if (field.countryCodes && field.countryCodes.indexOf(countryCode) === -1) {
+                return false;
+            }
+            if (field.notCountryCodes && field.notCountryCodes.indexOf(countryCode) !== -1) {
+                return false;
+            }
+        }
+
         var prerequisiteTag = field.prerequisiteTag;
-        if (prerequisiteTag) {
+
+        if (!tagsContainFieldKey() && // ignore tagging prerequisites if a value is already present
+            prerequisiteTag) {
             if (prerequisiteTag.key) {
                 var value = latest.tags[prerequisiteTag.key];
                 if (!value) return false;
@@ -316,6 +334,7 @@ export function uiField(context, presetField, entity, options) {
                 if (latest.tags[prerequisiteTag.keyNot]) return false;
             }
         }
+
         return true;
     };
 
