@@ -104,7 +104,8 @@ export function uiFieldText(field, context) {
                 .append('button')
                 .attr('tabindex', -1)
                 .call(svgIcon('#iD-icon-out-link'))
-                .attr('class', 'disabled form-field-button foreign-id-permalink')
+                .attr('class', 'form-field-button foreign-id-permalink')
+                .classed('disabled', !validIdentifierValueForLink())
                 .attr('title', function() {
                     var domainResults = /^https?:\/\/(.{1,}?)\//.exec(field.urlFormat);
                     if (domainResults.length >= 2 && domainResults[1]) {
