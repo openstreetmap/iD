@@ -1124,6 +1124,38 @@ en:
     title: "Map Features"
     tooltip: "Map features from Mapillary"
     request_data: "Request Data"
+    construction:
+      flat:
+        crosswalk_plain: plain crosswalk
+    marking:
+      discrete:
+        crosswalk_zebra: zebra crosswalk
+    object:
+      banner: banner
+      bench: bench
+      bike_rack: bike rack
+      catch_basin: catch basin
+      cctv_camera: CCTV camera
+      fire_hydrant: fire hydrant
+      mailbox: mailbox
+      manhole: manhole
+      phone_booth: phone booth
+      sign:
+        advertisement: advertisement
+        information: information sign
+        store: shop sign
+      street_light: street light
+      support:
+        utility_pole: utility pole
+      traffic_cone: traffic cone
+      traffic_light:
+        cyclists: cyclist traffic light
+        general_horizontal: horizontal traffic light
+        general_single: single traffic light
+        general_upright: vertical traffic light
+        other: traffic light
+        pedestrians: pedestrian traffic light
+      trash_can: trash can
   mapillary:
     title: Mapillary
     signs:

@@ -2,7 +2,7 @@ import _throttle from 'lodash-es/throttle';
 import { select as d3_select } from 'd3-selection';
 import { svgPointTransform } from './helpers';
 import { services } from '../services';
-
+import { t } from '../util/locale';
 
 export function svgMapillaryMapFeatures(projection, context, dispatch) {
     var throttledRedraw = _throttle(function () { dispatch.call('change'); }, 1000);
@@ -103,6 +103,10 @@ export function svgMapillaryMapFeatures(projection, context, dispatch) {
             .attr('x', '-12px')
             .attr('y', '-12px')
             .attr('xlink:href', function(d) { return '#' + d.value; })
+            .attr('title', function(d) {
+                var id = d.value.replace(/--/g, '.').replace(/-/g, '_');
+                return t('mapillary_map_features.' + id);
+            })
             .classed('currentView', function(d) {
                 return d.detections.some(function(detection) {
                     return detection.image_key === selectedImageKey;
