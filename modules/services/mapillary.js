@@ -16,26 +16,26 @@ var clientId = 'NzNRM2otQkR2SHJzaXJmNmdQWVQ0dzo1ZWYyMmYwNjdmNDdlNmVi';
 var mapFeatureConfig = {
     organizationKey: 'FI3NAFfzQQgdF081TRdgTy',
     values: [
+        'construction--flat--crosswalk-plain',
+        'marking--discrete--crosswalk-zebra',
+        'object--banner',
         'object--bench',
         'object--bike-rack',
         'object--billboard',
+        'object--catch-basin',
+        'object--cctv-camera',
         'object--fire-hydrant',
         'object--mailbox',
-        'object--phone-booth',
-        'object--street-light',
-        'object--support--utility-pole',
-        'object--traffic-light--pedestrians',
-        'object--trash-can',
-        'construction--flat--crosswalk-plain',
-        'object--cctv-camera',
-        'object--banner',
-        'object--catch-basin',
         'object--manhole',
+        'object--phone-booth',
         'object--sign--advertisement',
         'object--sign--information',
         'object--sign--store',
+        'object--street-light',
+        'object--support--utility-pole',
         'object--traffic-light--*',
-        'marking--discrete--crosswalk-zebra'
+        'object--traffic-light--pedestrians',
+        'object--trash-can'
     ].join(',')
 };
 var maxResults = 1000;
