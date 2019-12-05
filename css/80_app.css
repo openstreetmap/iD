@@ -5194,7 +5194,7 @@ img.tile-debug {
 
 .api-status {
     text-align: right;
-    padding: 0px 10px;
+    padding: 1px 10px;
     color: #eee;
     flex: 1 1 auto;
 }
@@ -5208,11 +5208,13 @@ img.tile-debug {
     background: #a22;
 }
 
-.api-status-login {
-    color: #aaf;
+.api-status a {
+    text-decoration: underline;
+    color: #ccc;
+    pointer-events: all;
 }
-.api-status-login:hover {
-    color: #ccf;
+.api-status a:hover {
+    color: inherit;
 }
 
 /* Notification Badges

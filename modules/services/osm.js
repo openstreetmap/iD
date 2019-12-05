@@ -13,7 +13,7 @@ import { utilArrayChunk, utilArrayGroupBy, utilArrayUniq, utilRebind, utilTiler,
 
 
 var tiler = utilTiler();
-var dispatch = d3_dispatch('authLoading', 'authDone', 'change', 'loading', 'loaded', 'loadedNotes');
+var dispatch = d3_dispatch('apiStatusChange', 'authLoading', 'authDone', 'change', 'loading', 'loaded', 'loadedNotes');
 var urlroot = 'https://www.openstreetmap.org';
 var oauth = osmAuth({
     url: urlroot,
@@ -27,6 +27,7 @@ var _blacklists = ['.*\.google(apis)?\..*/(vt|kh)[\?/].*([xyz]=.*){3}.*'];
 var _tileCache = { toLoad: {}, loaded: {}, inflight: {}, seen: {}, rtree: new RBush() };
 var _noteCache = { toLoad: {}, loaded: {}, inflight: {}, inflightPost: {}, note: {}, closed: {}, rtree: new RBush() };
 var _userCache = { toLoad: {}, user: {} };
+var _cachedApiStatus;
 var _changeset = {};
 
 var _deferred = new Set();
@@ -392,6 +393,7 @@ export default {
         _tileCache = { toLoad: {}, loaded: {}, inflight: {}, seen: {}, rtree: new RBush() };
         _noteCache = { toLoad: {}, loaded: {}, inflight: {}, inflightPost: {}, note: {}, closed: {}, rtree: new RBush() };
         _userCache = { toLoad: {}, user: {} };
+        _cachedApiStatus = undefined;
         _changeset = {};
 
         return this;
@@ -472,6 +474,13 @@ export default {
                         (err.status === 509 || err.status === 429)) {
                     _rateLimitError = err;
                     dispatch.call('change');
+                    that.reloadApiStatus();
+
+                } else if ((err && _cachedApiStatus === 'online') ||
+                    (!err && _cachedApiStatus !== 'online')) {
+                    // If the response's error state doesn't match the status,
+                    // it's likely we lost or gained the connection so reload the status
+                    that.reloadApiStatus();
                 }
 
                 if (callback) {
@@ -789,7 +798,10 @@ export default {
             .catch(function(err) { errback(err.message); });
 
         function done(err, xml) {
-            if (err) { return callback(err); }
+            if (err) {
+                // the status is null if no response could be retrieved
+                return callback(err, null);
+            }
 
             // update blacklists
             var elements = xml.getElementsByTagName('blacklist');
@@ -812,6 +824,24 @@ export default {
                 return callback(undefined, val);
             }
         }
+    },
+
+    // Calls `status` and dispatches an `apiStatusChange` event if the returned
+    // status differs from the cached status.
+    reloadApiStatus: function() {
+        // throttle to avoid unncessary API calls
+        if (!this.throttledReloadApiStatus) {
+            var that = this;
+            this.throttledReloadApiStatus = _throttle(function() {
+                that.status(function(err, status) {
+                    if (status !== _cachedApiStatus) {
+                        _cachedApiStatus = status;
+                        dispatch.call('apiStatusChange', that, err, status);
+                    }
+                });
+            }, 500);
+        }
+        this.throttledReloadApiStatus();
     },
 
 
