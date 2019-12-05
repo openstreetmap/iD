@@ -534,11 +534,14 @@
             "hidden_warning": "{count} hidden features",
             "hidden_details": "These features are currently hidden: {details}"
         },
-        "status": {
-            "error": "Unable to connect to API.",
-            "offline": "The API is offline. Please try editing later.",
-            "readonly": "The API is read-only. You will need to wait to save your changes.",
-            "rateLimit": "The API is limiting anonymous connections.  You can fix this by logging in."
+        "osm_api_status": {
+            "message": {
+                "error": "Unable to reach the OpenStreetMap API. Your edits are safe locally. Check your network connection.",
+                "offline": "The OpenStreetMap API is offline. Your edits are safe locally. Please come back later.",
+                "readonly": "The OpenStreetMap API is currently read-only. You can continue editing, but must wait to save your changes.",
+                "rateLimit": "The OpenStreetMap API is limiting anonymous connections. You can fix this by logging in."
+            },
+            "retry": "Retry"
         },
         "commit": {
             "title": "Upload to OpenStreetMap",
