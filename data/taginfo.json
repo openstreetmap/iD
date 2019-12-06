@@ -2025,7 +2025,6 @@
     {"key": "leisure", "value": "beach", "description": "🄳 ➜ natural=beach"},
     {"key": "leisure", "value": "club", "description": "🄳 ➜ club=*"},
     {"key": "leisure", "value": "golf_pin", "description": "🄳 ➜ golf=pin"},
-    {"key": "leisure", "value": "social_club", "description": "🄳 ➜ club=*"},
     {"key": "leisure", "value": "video_arcade", "description": "🄳 ➜ leisure=amusement_arcade"},
     {"key": "leisure", "value": "recreation_ground", "description": "🄳 ➜ landuse=recreation_ground"},
     {"key": "man_made", "value": "cut_line", "description": "🄳 ➜ man_made=cutline"},
