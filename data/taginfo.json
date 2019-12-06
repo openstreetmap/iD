@@ -824,7 +824,7 @@
     {"key": "diplomatic", "value": "liaison", "description": "🄿 Liaison Office", "object_types": ["node", "area"], "icon_url": "https://cdn.jsdelivr.net/gh/mapbox/maki/icons/embassy-15.svg"},
     {"key": "office", "value": "educational_institution", "description": "🄿 Educational Institution", "object_types": ["node", "area"], "icon_url": "https://cdn.jsdelivr.net/gh/mapbox/maki/icons/school-15.svg"},
     {"key": "office", "value": "employment_agency", "description": "🄿 Employment Agency", "object_types": ["node", "area"], "icon_url": "https://cdn.jsdelivr.net/gh/mapbox/maki/icons/suitcase-15.svg"},
-    {"key": "office", "value": "energy_supplier", "description": "🄿 Energy Supplier Office", "object_types": ["node", "area"], "icon_url": "https://cdn.jsdelivr.net/gh/mapbox/maki/icons/suitcase-15.svg"},
+    {"key": "office", "value": "energy_supplier", "description": "🄿 Energy Supplier Office", "object_types": ["node", "area"], "icon_url": "https://cdn.jsdelivr.net/gh/ideditor/temaki/icons/briefcase_bolt.svg"},
     {"key": "office", "value": "estate_agent", "description": "🄿 Real Estate Office", "object_types": ["node", "area"], "icon_url": "https://cdn.jsdelivr.net/gh/ideditor/temaki/icons/real_estate_agency.svg"},
     {"key": "office", "value": "financial_advisor", "description": "🄿 Financial Advisor", "object_types": ["node", "area"], "icon_url": "https://cdn.jsdelivr.net/gh/mapbox/maki/icons/suitcase-15.svg"},
     {"key": "office", "value": "financial", "description": "🄿 Financial Office", "object_types": ["node", "area"], "icon_url": "https://cdn.jsdelivr.net/gh/mapbox/maki/icons/suitcase-15.svg"},
