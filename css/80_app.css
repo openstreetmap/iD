@@ -1862,7 +1862,7 @@ button.preset-favorite-button.active .icon {
 ------------------------------------------------------- */
 .form-field-input-check {
     display: flex;
-    align-items: end;
+    align-items: center;
     background: #fff;
     padding: 5px 10px;
     color: #7092ff;
@@ -1874,6 +1874,7 @@ button.preset-favorite-button.active .icon {
     flex: 0 1 auto;
     min-height: 20px;
     width: 20px;
+    margin-top: 0;
 }
 .form-field-input-check > span {
     flex: 1 1 auto;
@@ -1884,6 +1885,12 @@ button.preset-favorite-button.active .icon {
     border: 1px solid #ccd5e3;
     border-radius: 2px;
     padding: 0px 8px;
+}
+[dir='ltr'] .form-field-input-check > .reverser.button {
+    padding-right: 2px;
+}
+[dir='rtl'] .form-field-input-check > .reverser.button {
+    padding-left: 2px;
 }
 .form-field-input-check > .reverser.button.hide {
     display: none;
