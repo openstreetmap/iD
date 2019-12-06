@@ -608,10 +608,6 @@
       "replace": {"leisure": "ice_rink", "sport": "ice_skating"}
     },
     {
-      "old": {"leisure": "social_club"},
-      "replace": {"club": "*"}
-    },
-    {
       "old": {"leisure": "video_arcade"},
       "replace": {"leisure": "amusement_arcade"}
     },
