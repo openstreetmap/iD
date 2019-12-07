@@ -149,6 +149,12 @@ export function uiCommit(context) {
                 tags['closed:improveosm'] = iOsmClosed.join(';').substr(0, tagCharLimit);
             }
         }
+        if (services.osmose) {
+            var osmoseClosed = services.osmose.getClosedIDs();
+            if (osmoseClosed.length) {
+                tags['closed:osmose'] = osmoseClosed.join(';').substr(0, 255);
+            }
+        }
 
         // remove existing issue counts
         for (var key in tags) {

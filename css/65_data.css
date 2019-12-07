@@ -3,7 +3,8 @@
 
 .error-header-icon .qa_error-fill,
 .layer-keepRight .qa_error .qa_error-fill,
-.layer-improveOSM .qa_error .qa_error-fill {
+.layer-improveOSM .qa_error .qa_error-fill,
+.layer-osmose .qa_error .qa_error-fill {
     stroke: #333;
     stroke-width: 1.3px;  /* NOTE: likely a better way to scale the icon stroke */
 }
@@ -152,6 +153,11 @@
     color: #EC1C24;
 }
 
+/* Osmose Errors
+------------------------------------------------------- */
+.osmose {
+    color: #FFFFFF;
+}
 
 /* Custom Map Data (geojson, gpx, kml, vector tile) */
 .layer-mapdata {

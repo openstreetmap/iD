@@ -341,7 +341,7 @@ export function uiMapData(context) {
 
 
     function drawQAItems(selection) {
-        var qaKeys = ['keepRight', 'improveOSM'];
+        var qaKeys = ['keepRight', 'improveOSM', 'osmose'];
         var qaLayers = layers.all().filter(function(obj) { return qaKeys.indexOf(obj.id) !== -1; });
 
         var ul = selection
