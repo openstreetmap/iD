@@ -178,15 +178,13 @@ export default {
 
         var that = this;
 
-        if (err) { return callback(err, d); }
-
         // UI sets the status to either '/done' or '/false'
         var url = _osmoseUrlRoot + 'issue/' + d.identifier + d.newStatus;
 
         var controller = new AbortController();
         _erCache.inflightPost[d.id] = controller;
 
-        fetch(url, { method: 'POST', signal: controller.signal })
+        fetch(url, { signal: controller.signal })
             .then(function() {
                 delete _erCache.inflightPost[d.id];
 
