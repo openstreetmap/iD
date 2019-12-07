@@ -7,7 +7,7 @@ import { geoExtent, geoVecAdd, geoVecScale } from '../geo';
 import { qaError } from '../osm';
 import { t } from '../util/locale';
 import { utilRebind, utilTiler, utilQsString } from '../util';
-
+import { services } from '../../data/qa_errors.json';
 
 var tiler = utilTiler();
 var dispatch = d3_dispatch('loaded');
@@ -130,29 +130,37 @@ export default {
                     if (data.issues) {
                         data.issues.forEach(function(issue) {
                             // Elements provided as string, separated by _ character
-                            var elems = issue.elems.split('_');
+                            var elems = issue.elems.split('_').map(function(i) {
+                                    return i.substring(0,1) + i.replace(/node|way|relation/, '')
+                                });
                             var loc = [issue.lon, issue.lat];
+                            // Item is the type of error, w/ class tells us the sub-type
+                            var type = [issue.item, issue.classs].join('-');
 
-                            loc = preventCoincident(loc, true);
+                            // Filter out unsupported error types (some are too specific or advanced)
+                            if (services.osmose.errorTypes[type]) {
+                                loc = preventCoincident(loc, true);
 
-                            var d = new qaError({
-                                // Info required for every error
-                                loc: loc,
-                                service: 'osmose',
-                                error_type: [issue.item, issue.classs].join('-'),
-                                // Extra details needed for this service
-                                identifier: issue.id, // this is used to post changes to the error
-                                elems: elems
-                                //object_id: elems[0],
-                                //object_type: elems[0].substring(0,1)
-                            });
+                                var d = new qaError({
+                                    // Info required for every error
+                                    loc: loc,
+                                    service: 'osmose',
+                                    error_type: type,
+                                    // Extra details needed for this service
+                                    identifier: issue.id, // this is used to post changes to the error
+                                    elems: elems,
+                                    object_id: elems.length ? elems[0].substring(1) : '',
+                                    object_type: elems.length ? elems[0].substring(0,1) : ''
+                                });
 
-                            // Variables used in the description
-                            d.replacements = {
-                            };
+                                // Variables used in the description
+                                d.replacements = elems.map(function(i) {
+                                    return linkEntity(i)
+                                });
 
-                            _erCache.data[d.id] = d;
-                            _erCache.rtree.insert(encodeErrorRtree(d));
+                                _erCache.data[d.id] = d;
+                                _erCache.rtree.insert(encodeErrorRtree(d));
+                            }
                         });
                     }
                 })

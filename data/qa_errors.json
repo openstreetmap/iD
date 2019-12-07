@@ -32,6 +32,14 @@
             "errorTypes": {
 
             }
+        },
+        "osmose": {
+            "errorTypes": {
+                "1070-1": {
+                    "icon": "maki-home",
+                    "category": "structure"
+                }
+            }
         }
     }
 }

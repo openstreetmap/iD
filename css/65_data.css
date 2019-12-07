@@ -159,6 +159,10 @@
     color: #FFFFFF;
 }
 
+.osmose.category-structure {
+    color: #F9C700;
+}
+
 /* Custom Map Data (geojson, gpx, kml, vector tile) */
 .layer-mapdata {
     pointer-events: none;

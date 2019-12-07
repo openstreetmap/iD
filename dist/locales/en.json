@@ -1031,6 +1031,15 @@
         "cannot_zoom": "Cannot zoom out further in current mode.",
         "full_screen": "Toggle Full Screen",
         "QA": {
+            "osmose": {
+                "title": "Osmose",
+                "error_types": {
+                    "1070-1": {
+                        "title": "Highway intersecting building",
+                        "description": "{1} intersects with {0}."
+                    }
+                }
+            },
             "improveOSM": {
                 "title": "ImproveOSM Detection",
                 "geometry_types": {
