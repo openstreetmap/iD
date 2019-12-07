@@ -3,9 +3,8 @@ import RBush from 'rbush';
 import { dispatch as d3_dispatch } from 'd3-dispatch';
 import { json as d3_json } from 'd3-fetch';
 
-import { geoExtent, geoVecAdd, geoVecScale } from '../geo';
+import { geoExtent, geoVecAdd } from '../geo';
 import { qaError } from '../osm';
-import { t } from '../util/locale';
 import { utilRebind, utilTiler, utilQsString } from '../util';
 import { services } from '../../data/qa_errors.json';
 
@@ -48,10 +47,6 @@ function updateRtree(item, replace) {
     if (replace) {
         _erCache.rtree.insert(item);
     }
-}
-
-function linkErrorObject(d) {
-    return '<a class="error_object_link">' + d + '</a>';
 }
 
 function linkEntity(d) {
@@ -131,7 +126,7 @@ export default {
                         data.issues.forEach(function(issue) {
                             // Elements provided as string, separated by _ character
                             var elems = issue.elems.split('_').map(function(i) {
-                                    return i.substring(0,1) + i.replace(/node|way|relation/, '')
+                                    return i.substring(0,1) + i.replace(/node|way|relation/, '');
                                 });
                             var loc = [issue.lon, issue.lat];
                             // Item is the type of error, w/ class tells us the sub-type
@@ -155,7 +150,7 @@ export default {
 
                                 // Variables used in the description
                                 d.replacements = elems.map(function(i) {
-                                    return linkEntity(i)
+                                    return linkEntity(i);
                                 });
 
                                 _erCache.data[d.id] = d;
@@ -192,7 +187,7 @@ export default {
                 if (d.newStatus === '/done') {
                     // No pretty identifier, so we just use coordinates
                     var closedID = d.loc[1].toFixed(5) + '/' + d.loc[0].toFixed(5);
-                    _erCache.closed[key + ':' + closedID] = true;
+                    _erCache.closed[d.error_type + ':' + closedID] = true;
                 }
                 if (callback) callback(null, d);
             })

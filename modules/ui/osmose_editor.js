@@ -129,7 +129,7 @@ export function uiOsmoseEditor(context) {
             .merge(buttonEnter);
 
         buttonSection.select('.close-button')
-            .text(function(d) {
+            .text(function() {
                 return t('QA.keepRight.close');
             })
             .on('click.close', function(d) {
@@ -144,7 +144,7 @@ export function uiOsmoseEditor(context) {
             });
 
         buttonSection.select('.ignore-button')
-            .text(function(d) {
+            .text(function() {
                 return t('QA.keepRight.ignore');
             })
             .on('click.ignore', function(d) {

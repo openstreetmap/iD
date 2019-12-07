@@ -6,7 +6,7 @@ import {
 import { dataEn } from '../../data';
 import { modeSelect } from '../modes/select';
 import { t } from '../util/locale';
-import { utilDisplayName, utilEntityOrMemberSelector, utilEntityRoot } from '../util';
+import { utilDisplayName, utilEntityOrMemberSelector } from '../util';
 
 
 export function uiOsmoseDetails(context) {
