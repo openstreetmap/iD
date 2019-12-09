@@ -475,6 +475,9 @@ en:
       country:
         # country=*
         label: Country
+      country_flag:
+        # country=*
+        label: Flag Country
       couplings:
         # couplings=*
         label: Couplings
@@ -4605,6 +4608,9 @@ en:
         name: Advanced Stop Line
         # 'terms: advanced stop box,asl,bicycle box,bike box,bikebox,cycle box,cycle stop marking'
         terms: '<translate with synonyms or related terms for ''Advanced Stop Line'', separated by commas>'
+      demolished/building:
+        # 'demolished:building=*'
+        name: Recently Demolished Building
       embankment:
         # embankment=yes
         name: Embankment

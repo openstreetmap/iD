@@ -3063,6 +3063,9 @@
                         "reversible": "Reversible"
                     }
                 },
+                "country_flag": {
+                    "label": "Flag Country"
+                },
                 "country": {
                     "label": "Country"
                 },
@@ -6589,6 +6592,9 @@
                 "cycleway/asl": {
                     "name": "Advanced Stop Line",
                     "terms": "advanced stop box,asl,bicycle box,bike box,bikebox,cycle box,cycle stop marking"
+                },
+                "demolished/building": {
+                    "name": "Recently Demolished Building"
                 },
                 "emergency/designated": {
                     "name": "Emergency Access Designated"
