@@ -2923,6 +2923,9 @@
                         "reversible": "Reversible"
                     }
                 },
+                "country_flag": {
+                    "label": "Flag Country"
+                },
                 "country": {
                     "label": "Country"
                 },

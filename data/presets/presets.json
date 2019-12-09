@@ -729,7 +729,7 @@
     "man_made/cutline": {"icon": "maki-logging", "geometry": ["line"], "tags": {"man_made": "cutline"}, "name": "Cut line"},
     "man_made/dyke": {"geometry": ["line"], "tags": {"man_made": "dyke"}, "terms": ["Dike", "Dyke", "Floodbank", "Stopbank"], "name": "Levee"},
     "man_made/embankment": {"geometry": ["line"], "tags": {"man_made": "embankment"}, "name": "Embankment"},
-    "man_made/flagpole": {"icon": "maki-embassy", "fields": ["operator", "flag/type", "country", "lit", "height"], "moreFields": ["manufacturer", "material"], "geometry": ["point", "vertex"], "tags": {"man_made": "flagpole"}, "name": "Flagpole"},
+    "man_made/flagpole": {"icon": "maki-embassy", "fields": ["operator", "flag/type", "country_flag", "lit", "height"], "moreFields": ["manufacturer", "material"], "geometry": ["point", "vertex"], "tags": {"man_made": "flagpole"}, "name": "Flagpole"},
     "man_made/gasometer": {"icon": "temaki-storage_tank", "fields": ["content", "building_area"], "geometry": ["point", "area"], "terms": ["gas holder"], "tags": {"man_made": "gasometer"}, "name": "Gasometer"},
     "man_made/groyne": {"fields": ["material", "seamark/type"], "geometry": ["line", "area"], "tags": {"man_made": "groyne"}, "name": "Groyne"},
     "man_made/lighthouse": {"icon": "maki-lighthouse", "fields": ["name", "operator", "building_area", "height"], "moreFields": ["address", "email", "fax", "gnis/feature_id", "phone", "seamark/type", "website"], "geometry": ["point", "area"], "tags": {"man_made": "lighthouse"}, "addTags": {"man_made": "lighthouse", "seamark:type": "light_major"}, "removeTags": {"man_made": "lighthouse", "seamark:type": "*"}, "name": "Lighthouse"},

@@ -1349,7 +1349,7 @@
     {"key": "conveying", "value": "forward", "description": "🄵 Movement Direction"},
     {"key": "conveying", "value": "backward", "description": "🄵 Movement Direction"},
     {"key": "conveying", "value": "reversible", "description": "🄵 Movement Direction"},
-    {"key": "country", "description": "🄵 Country"},
+    {"key": "country", "description": "🄵 Flag Country, 🄵 Country"},
     {"key": "couplings", "description": "🄵 Couplings"},
     {"key": "covered", "description": "🄵 Covered"},
     {"key": "crane:type", "value": "portal_crane", "description": "🄵 Crane Type"},

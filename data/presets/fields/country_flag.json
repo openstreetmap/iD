@@ -1,0 +1,9 @@
+{
+    "key": "country",
+    "type": "combo",
+    "label": "Flag Country",
+    "prerequisiteTag": {
+        "key": "flag:type",
+        "value": "national"
+    }
+}

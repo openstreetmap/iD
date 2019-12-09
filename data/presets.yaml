@@ -475,6 +475,9 @@ en:
       country:
         # country=*
         label: Country
+      country_flag:
+        # country=*
+        label: Flag Country
       couplings:
         # couplings=*
         label: Couplings
