@@ -7093,7 +7093,7 @@
                 },
                 "landuse/forest": {
                     "name": "Managed Forest",
-                    "terms": "cut,forest,forestry,lumber,silviculture,tree"
+                    "terms": "cut,forest,forestry,lumber,silviculture,tree,trees"
                 },
                 "landuse/garages": {
                     "name": "Garage Landuse",
@@ -8000,8 +8000,8 @@
                     "terms": "bog,fen,marsh,mire,moor,muskeg,peatland,quagmire,reedbed,saltmarsh,swamp,tidalflat,wet meadow"
                 },
                 "natural/wood": {
-                    "name": "Wood",
-                    "terms": "tree"
+                    "name": "Natural Wood",
+                    "terms": "tree,trees"
                 },
                 "network/type/node_network": {
                     "name": "Recreational Network Node",

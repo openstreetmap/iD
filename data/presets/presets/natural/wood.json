@@ -13,7 +13,8 @@
         "natural": "wood"
     },
     "terms": [
-        "tree"
+        "tree",
+        "trees"
     ],
-    "name": "Wood"
+    "name": "Natural Wood"
 }

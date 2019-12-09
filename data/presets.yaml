@@ -5323,7 +5323,7 @@ en:
       landuse/forest:
         # landuse=forest
         name: Managed Forest
-        # 'terms: cut,forest,forestry,lumber,silviculture,tree'
+        # 'terms: cut,forest,forestry,lumber,silviculture,tree,trees'
         terms: '<translate with synonyms or related terms for ''Managed Forest'', separated by commas>'
       landuse/garages:
         # landuse=garages
@@ -6418,9 +6418,9 @@ en:
         terms: '<translate with synonyms or related terms for ''Wetland'', separated by commas>'
       natural/wood:
         # natural=wood
-        name: Wood
-        # 'terms: tree'
-        terms: '<translate with synonyms or related terms for ''Wood'', separated by commas>'
+        name: Natural Wood
+        # 'terms: tree,trees'
+        terms: '<translate with synonyms or related terms for ''Natural Wood'', separated by commas>'
       network/type/node_network:
         # 'network:type=node_network'
         name: Recreational Network Node

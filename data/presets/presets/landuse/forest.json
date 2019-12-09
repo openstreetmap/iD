@@ -25,7 +25,8 @@
         "forestry",
         "lumber",
         "silviculture",
-        "tree"
+        "tree",
+        "trees"
     ],
     "name": "Managed Forest"
 }
