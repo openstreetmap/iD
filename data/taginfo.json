@@ -801,7 +801,7 @@
     {"key": "water", "value": "stream", "description": "🄿 Stream Area", "object_types": ["area"], "icon_url": "https://cdn.jsdelivr.net/gh/openstreetmap/iD@master/svg/iD-sprite/presets/waterway-stream.svg"},
     {"key": "water", "value": "wastewater", "description": "🄿 Wastewater Basin", "object_types": ["area"], "icon_url": "https://cdn.jsdelivr.net/gh/ideditor/temaki/icons/waste.svg"},
     {"key": "natural", "value": "wetland", "description": "🄿 Wetland", "object_types": ["node", "area"], "icon_url": "https://cdn.jsdelivr.net/gh/mapbox/maki/icons/wetland-15.svg"},
-    {"key": "natural", "value": "wood", "description": "🄿 Wood", "object_types": ["area", "node"], "icon_url": "https://cdn.jsdelivr.net/gh/mapbox/maki/icons/park-alt1-15.svg"},
+    {"key": "natural", "value": "wood", "description": "🄿 Natural Wood", "object_types": ["area", "node"], "icon_url": "https://cdn.jsdelivr.net/gh/mapbox/maki/icons/park-alt1-15.svg"},
     {"key": "network:type", "value": "node_network", "description": "🄿 Recreational Network Node", "object_types": ["node"]},
     {"key": "noexit", "value": "yes", "description": "🄿 No Exit", "object_types": ["node"], "icon_url": "https://cdn.jsdelivr.net/gh/mapbox/maki/icons/barrier-15.svg"},
     {"key": "office", "description": "🄿 Office, 🄵 Type", "object_types": ["node", "area"], "icon_url": "https://cdn.jsdelivr.net/gh/mapbox/maki/icons/suitcase-15.svg"},
