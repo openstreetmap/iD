@@ -43,7 +43,7 @@ export function svgTagClasses() {
 
     tagClasses.getClassesString = function(t, value, entity) {
         var primary, status;
-        var i, k, v;
+        var i, j, k, v;
 
         // in some situations we want to render perimeter strokes a certain way
         var overrideGeometry;
@@ -86,6 +86,19 @@ export function svgTagClasses() {
             }
 
             break;
+        }
+
+        if (!primary) {
+            for (i = 0; i < statuses.length; i++) {
+                for (j = 0; j < primaries.length; j++) {
+                    k = statuses[i] + ':' + primaries[j];  // e.g. `demolished:building=yes`
+                    v = t[k];
+                    if (!v || v === 'no') continue;
+
+                    status = statuses[i];
+                    break;
+                }
+            }
         }
 
         // add at most one status tag, only if relates to primary tag..
