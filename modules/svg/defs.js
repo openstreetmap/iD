@@ -118,6 +118,7 @@ export function svgDefs(context) {
                 ['forest_broadleaved', 'forest_broadleaved'],
                 ['forest_needleleaved', 'forest_needleleaved'],
                 ['forest_leafless', 'forest_leafless'],
+                ['golf_green', 'grass'],
                 ['grass', 'grass'],
                 ['landfill', 'landfill'],
                 ['meadow', 'grass'],
