@@ -79,10 +79,14 @@ export function modeSelect(context, selectedIDs) {
             });
         }
 
-        if (ids.length) {
-            selectedIDs = ids;
-        } else {
+        if (!ids.length) {
             context.enter(modeBrowse(context));
+        } else if ((selectedIDs.length > 1 && ids.length === 1) ||
+            (selectedIDs.length === 1 && ids.length > 1)) {
+            // switch between single- and multi-select UI
+            context.enter(modeSelect(context, ids));
+        } else {
+            selectedIDs = ids;
         }
         return !!ids.length;
     }
