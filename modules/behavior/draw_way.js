@@ -359,6 +359,12 @@ export function behaviorDrawWay(context, wayID, index, mode, startGraph, baselin
         if ((d && d.properties && d.properties.nope) || context.surface().classed('nope')) {
             return;   // can't click here
         }
+
+        if (context.entity(wayID).first() === node.id){
+            drawWay.finish(0);
+            return;
+        }
+
         shouldResetOnOff = false;
 
         context.pauseChangeDispatch();
@@ -369,6 +375,7 @@ export function behaviorDrawWay(context, wayID, index, mode, startGraph, baselin
         );
 
         context.resumeChangeDispatch();
+
         checkGeometry(false);   // finishDraw = false
         context.enter(mode);
     };
@@ -377,7 +384,7 @@ export function behaviorDrawWay(context, wayID, index, mode, startGraph, baselin
     // Finish the draw operation, removing the temporary edits.
     // If the way has enough nodes to be valid, it's selected.
     // Otherwise, delete everything and return to browse mode.
-    drawWay.finish = function() {
+    drawWay.finish = function(nodesToPop = 1) {
         shouldResetOnOff = false;
         checkGeometry(true);   // finishDraw = true
         if (context.surface().classed('nope')) {
@@ -385,7 +392,7 @@ export function behaviorDrawWay(context, wayID, index, mode, startGraph, baselin
         }
 
         context.pauseChangeDispatch();
-        context.pop(1);
+        context.pop(nodesToPop);
         var way = context.hasEntity(wayID);
         if (!way || way.isDegenerate()) {
             drawWay.cancel();
@@ -399,7 +406,6 @@ export function behaviorDrawWay(context, wayID, index, mode, startGraph, baselin
         }, 1000);
 
         mode.didFinishAdding();
-
         return true;
     };
 
