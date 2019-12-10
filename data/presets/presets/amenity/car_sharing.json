@@ -10,6 +10,7 @@
         "supervised"
     ],
     "moreFields": [
+        "brand",
         "email",
         "fax",
         "lit",

@@ -10,6 +10,7 @@
     ],
     "moreFields": [
         "air_conditioning",
+        "brand",
         "currency_multi",
         "email",
         "fax",
