@@ -9,8 +9,8 @@ export function svgPoints(projection, context) {
     function markerPath(selection, klass) {
         selection
             .attr('class', klass)
-            .attr('transform', 'translate(-9, -24)')
-            .attr('d', 'M9.5,24 L9.256,23.476 C8.1125,21.017 6.524,18.791 4.572,16.91 C1.857,14.295 0.5,11.825 0.5,9.5 C0.5,4.53 4.53,0.5 9.5,0.5 C14.471,0.5 18.5,4.529 18.5,9.5 C18.5,11.825 17.143,14.295 14.428,16.91 L14.43,16.91 C12.476,18.79 10.89,21 9.74,23.48 L9.5,24 Z');
+            .attr('transform', 'translate(-8, -23)')
+            .attr('d', 'M 17,8 C 17,13 11,21 8.5,23.5 C 6,21 0,13 0,8 C 0,4 4,-0.5 8.5,-0.5 C 13,-0.5 17,4 17,8 z');
     }
 
     function sortY(a, b) {
@@ -118,10 +118,10 @@ export function svgPoints(projection, context) {
 
         enter
             .append('use')
-            .attr('transform', 'translate(-5.5, -20.5)')
+            .attr('transform', 'translate(-5, -19)')
             .attr('class', 'icon')
-            .attr('width', '12px')
-            .attr('height', '12px');
+            .attr('width', '11px')
+            .attr('height', '11px');
 
         groups = groups
             .merge(enter)
