@@ -112,7 +112,13 @@ export function svgMapillaryMapFeatures(projection, context, dispatch) {
             .attr('height', '24px')
             .attr('x', '-12px')
             .attr('y', '-12px')
-            .attr('xlink:href', function(d) { return '#' + d.value; });
+            .attr('xlink:href', function(d) {
+                if (d.value === 'object--billboard') {
+                    // no billboard icon right now, so use the advertisement icon
+                    return '#object--sign--advertisement';
+                }
+                return '#' + d.value;
+            });
 
         enter
             .append('rect')
