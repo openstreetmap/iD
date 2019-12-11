@@ -2896,6 +2896,9 @@
                     "label": "Communication Types",
                     "terms": ""
                 },
+                "connectivity": {
+                    "label": "Connectivity"
+                },
                 "construction": {
                     "label": "Type"
                 },
@@ -9573,6 +9576,10 @@
                 },
                 "type/boundary/administrative": {
                     "name": "Administrative Boundary",
+                    "terms": ""
+                },
+                "type/connectivity": {
+                    "name": "Lane Connectivity",
                     "terms": ""
                 },
                 "type/enforcement": {

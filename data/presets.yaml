@@ -442,6 +442,9 @@ en:
         # 'communication:=*'
         label: Communication Types
         terms: '[translate with synonyms or related terms for ''Communication Types'', separated by commas]'
+      connectivity:
+        # connectivity=*
+        label: Connectivity
       construction:
         # construction=*
         label: Type
@@ -8272,6 +8275,10 @@ en:
         # 'type=boundary, boundary=administrative'
         name: Administrative Boundary
         terms: '<translate with synonyms or related terms for ''Administrative Boundary'', separated by commas>'
+      type/connectivity:
+        # type=connectivity
+        name: Lane Connectivity
+        terms: '<translate with synonyms or related terms for ''Lane Connectivity'', separated by commas>'
       type/enforcement:
         # type=enforcement
         name: Enforcement

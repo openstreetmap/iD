@@ -1225,6 +1225,7 @@
     "type/multipolygon": {"icon": "iD-multipolygon", "geometry": ["area", "relation"], "tags": {"type": "multipolygon"}, "removeTags": {}, "name": "Multipolygon", "searchable": false, "matchScore": 0.1},
     "type/boundary": {"icon": "iD-boundary", "fields": ["name", "boundary"], "geometry": ["relation"], "tags": {"type": "boundary"}, "name": "Boundary"},
     "type/boundary/administrative": {"icon": "iD-boundary", "fields": ["name", "admin_level"], "moreFields": ["gnis/feature_id"], "geometry": ["relation"], "tags": {"type": "boundary", "boundary": "administrative"}, "reference": {"key": "boundary", "value": "administrative"}, "name": "Administrative Boundary"},
+    "type/connectivity": {"icon": "iD-relation", "fields": ["connectivity"], "geometry": ["relation"], "tags": {"type": "connectivity"}, "name": "Lane Connectivity"},
     "type/enforcement": {"icon": "iD-relation", "fields": ["name", "enforcement"], "geometry": ["relation"], "tags": {"type": "enforcement"}, "name": "Enforcement"},
     "type/public_transport/stop_area_group": {"icon": "iD-relation", "fields": ["name", "ref", "network", "operator"], "geometry": ["relation"], "tags": {"type": "public_transport", "public_transport": "stop_area_group"}, "reference": {"key": "public_transport", "value": "stop_area_group"}, "name": "Transit Stop Area Group"},
     "type/restriction": {"icon": "iD-restriction", "fields": ["restriction", "except"], "geometry": ["relation"], "tags": {"type": "restriction"}, "name": "Restriction"},
