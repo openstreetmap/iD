@@ -89,7 +89,7 @@ export function svgMapillaryImages(projection, context, dispatch) {
         if (!service) return;
 
         service
-            .selectImage(d)
+            .selectImage(d.key)
             .updateViewer(d.key, context)
             .showViewer();
 

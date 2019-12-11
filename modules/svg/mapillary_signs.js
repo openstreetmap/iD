@@ -60,8 +60,7 @@ export function svgMapillarySigns(projection, context, dispatch) {
 
         context.map().centerEase(d.loc);
 
-        var selected = service.getSelectedImage();
-        var selectedImageKey = selected && selected.key;
+        var selectedImageKey = service.getSelectedImageKey();
         var imageKey;
 
         // Pick one of the images the sign was detected in,
@@ -73,7 +72,7 @@ export function svgMapillarySigns(projection, context, dispatch) {
         });
 
         service
-            .selectImage(null, imageKey)
+            .selectImage(imageKey)
             .updateViewer(imageKey, context)
             .showViewer();
     }
@@ -82,8 +81,7 @@ export function svgMapillarySigns(projection, context, dispatch) {
     function update() {
         var service = getService();
         var data = (service ? service.signs(projection) : []);
-        var selected = service && service.getSelectedImage();
-        var selectedImageKey = selected && selected.key;
+        var selectedImageKey = service.getSelectedImageKey();
         var transform = svgPointTransform(projection);
 
         var signs = layer.selectAll('.icon-sign')
@@ -117,16 +115,25 @@ export function svgMapillarySigns(projection, context, dispatch) {
         // update
         signs
             .merge(enter)
-            .sort(function(a, b) {
-                return (a === selected) ? 1
-                    : (b === selected) ? -1
-                    : b.loc[1] - a.loc[1];  // sort Y
-            })
             .attr('transform', transform)
             .classed('currentView', function(d) {
                 return d.detections.some(function(detection) {
                     return detection.image_key === selectedImageKey;
                 });
+            })
+            .sort(function(a, b) {
+                var aSelected = a.detections.some(function(detection) {
+                    return detection.image_key === selectedImageKey;
+                });
+                var bSelected = b.detections.some(function(detection) {
+                    return detection.image_key === selectedImageKey;
+                });
+                if (aSelected === bSelected) {
+                    return b.loc[1] - a.loc[1]; // sort Y
+                } else if (aSelected) {
+                    return 1;
+                }
+                return -1;
             });
     }
 
