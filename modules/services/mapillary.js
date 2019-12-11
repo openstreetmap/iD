@@ -455,7 +455,7 @@ export default {
             .selectAll('.photo-wrapper')
             .classed('hide', true);
 
-        d3_selectAll('.viewfield-group, .sequence, .icon-sign')
+        d3_selectAll('.viewfield-group, .sequence, .icon-detected')
             .classed('currentView', false);
 
         return this.setStyles(null, true);
@@ -573,7 +573,7 @@ export default {
         this.setStyles(null, true);
 
         // if signs signs are shown, highlight the ones that appear in this image
-        d3_selectAll('.layer-mapillary-signs .icon-sign')
+        d3_selectAll('.layer-mapillary-signs .icon-detected')
             .classed('currentView', function(d) {
                 return d.detections.some(function(detection) {
                     return detection.image_key === imageKey;
@@ -593,9 +593,8 @@ export default {
     },
 
 
-    getSequenceKeyForImage: function(d) {
-        var imageKey = d && d.key;
-        return imageKey && _mlyCache.sequences.forImageKey[imageKey];
+    getSequenceKeyForImageKey: function(imageKey) {
+        return _mlyCache.sequences.forImageKey[imageKey];
     },
 
 
@@ -615,14 +614,12 @@ export default {
         }
 
         var hoveredImageKey = hovered && hovered.key;
-        var hoveredSequenceKey = this.getSequenceKeyForImage(hovered);
+        var hoveredSequenceKey = hoveredImageKey && this.getSequenceKeyForImageKey(hoveredImageKey);
         var hoveredLineString = hoveredSequenceKey && _mlyCache.sequences.lineString[hoveredSequenceKey];
         var hoveredImageKeys = (hoveredLineString && hoveredLineString.properties.coordinateProperties.image_keys) || [];
 
-        var viewer = d3_select('#photoviewer');
-        var selected = viewer.empty() ? undefined : viewer.datum();
-        var selectedImageKey = selected && selected.key;
-        var selectedSequenceKey = this.getSequenceKeyForImage(selected);
+        var selectedImageKey = _mlySelectedImageKey;
+        var selectedSequenceKey = selectedImageKey && this.getSequenceKeyForImageKey(selectedImageKey);
         var selectedLineString = selectedSequenceKey && _mlyCache.sequences.lineString[selectedSequenceKey];
         var selectedImageKeys = (selectedLineString && selectedLineString.properties.coordinateProperties.image_keys) || [];
 
