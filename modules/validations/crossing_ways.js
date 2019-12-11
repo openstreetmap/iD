@@ -550,7 +550,12 @@ export function validationCrossingWays(context) {
                         tags.bridge = 'yes';
                         tags.layer = '1';
                     } else {
-                        tags.tunnel = 'yes';
+                        var tunnelValue = 'yes';
+                        if (getFeatureTypeForTags(tags) === 'waterway') {
+                            // use `tunnel=culvert` for waterways by default
+                            tunnelValue = 'culvert';
+                        }
+                        tags.tunnel = tunnelValue;
                         tags.layer = '-1';
                     }
                     // apply the structure tags to the way
