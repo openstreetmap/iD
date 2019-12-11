@@ -82,8 +82,7 @@ export function svgMapillarySigns(projection, context, dispatch) {
     function update() {
         var service = getService();
         var data = (service ? service.signs(projection) : []);
-        var viewer = d3_select('#photoviewer');
-        var selected = viewer.empty() ? undefined : viewer.datum();
+        var selected = service && service.getSelectedImage();
         var selectedImageKey = selected && selected.key;
         var transform = svgPointTransform(projection);
 
@@ -96,19 +95,24 @@ export function svgMapillarySigns(projection, context, dispatch) {
 
         // enter
         var enter = signs.enter()
+            .append('g')
+            .attr('class', 'icon-sign icon-detected')
+            .on('click', click);
+
+        enter
             .append('use')
-            .attr('class', 'icon-sign')
             .attr('width', '24px')
             .attr('height', '24px')
             .attr('x', '-12px')
             .attr('y', '-12px')
-            .attr('xlink:href', function(d) { return '#' + d.value; })
-            .classed('currentView', function(d) {
-                return d.detections.some(function(detection) {
-                    return detection.image_key === selectedImageKey;
-                });
-            })
-            .on('click', click);
+            .attr('xlink:href', function(d) { return '#' + d.value; });
+
+        enter
+            .append('rect')
+            .attr('width', '24px')
+            .attr('height', '24px')
+            .attr('x', '-12px')
+            .attr('y', '-12px');
 
         // update
         signs
@@ -118,7 +122,12 @@ export function svgMapillarySigns(projection, context, dispatch) {
                     : (b === selected) ? -1
                     : b.loc[1] - a.loc[1];  // sort Y
             })
-            .attr('transform', transform);
+            .attr('transform', transform)
+            .classed('currentView', function(d) {
+                return d.detections.some(function(detection) {
+                    return detection.image_key === selectedImageKey;
+                });
+            });
     }
 
 
@@ -134,7 +143,7 @@ export function svgMapillarySigns(projection, context, dispatch) {
 
         layer = layer.enter()
             .append('g')
-            .attr('class', 'layer-mapillary-signs')
+            .attr('class', 'layer-mapillary-signs layer-mapillary-detections')
             .style('display', enabled ? 'block' : 'none')
             .merge(layer);
 

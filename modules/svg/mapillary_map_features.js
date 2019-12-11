@@ -82,8 +82,7 @@ export function svgMapillaryMapFeatures(projection, context, dispatch) {
     function update() {
         var service = getService();
         var data = (service ? service.mapFeatures(projection) : []);
-        var viewer = d3_select('#photoviewer');
-        var selected = viewer.empty() ? undefined : viewer.datum();
+        var selected = service && service.getSelectedImage();
         var selectedImageKey = selected && selected.key;
         var transform = svgPointTransform(projection);
 
@@ -96,23 +95,31 @@ export function svgMapillaryMapFeatures(projection, context, dispatch) {
 
         // enter
         var enter = mapFeatures.enter()
+            .append('g')
+            .attr('class', 'icon-map-feature icon-detected')
+            .on('click', click);
+
+        enter
+            .append('title')
+            .text(function(d) {
+                var id = d.value.replace(/--/g, '.').replace(/-/g, '_');
+                return t('mapillary_map_features.' + id);
+            });
+
+        enter
             .append('use')
-            .attr('class', 'icon-map-feature')
             .attr('width', '24px')
             .attr('height', '24px')
             .attr('x', '-12px')
             .attr('y', '-12px')
-            .attr('xlink:href', function(d) { return '#' + d.value; })
-            .attr('title', function(d) {
-                var id = d.value.replace(/--/g, '.').replace(/-/g, '_');
-                return t('mapillary_map_features.' + id);
-            })
-            .classed('currentView', function(d) {
-                return d.detections.some(function(detection) {
-                    return detection.image_key === selectedImageKey;
-                });
-            })
-            .on('click', click);
+            .attr('xlink:href', function(d) { return '#' + d.value; });
+
+        enter
+            .append('rect')
+            .attr('width', '24px')
+            .attr('height', '24px')
+            .attr('x', '-12px')
+            .attr('y', '-12px');
 
         // update
         mapFeatures
@@ -122,7 +129,12 @@ export function svgMapillaryMapFeatures(projection, context, dispatch) {
                     : (b === selected) ? -1
                     : b.loc[1] - a.loc[1];  // sort Y
             })
-            .attr('transform', transform);
+            .attr('transform', transform)
+            .classed('currentView', function(d) {
+                return d.detections.some(function(detection) {
+                    return detection.image_key === selectedImageKey;
+                });
+            });
     }
 
 
@@ -138,7 +150,7 @@ export function svgMapillaryMapFeatures(projection, context, dispatch) {
 
         layer = layer.enter()
             .append('g')
-            .attr('class', 'layer-mapillary-map-features')
+            .attr('class', 'layer-mapillary-map-features layer-mapillary-detections')
             .style('display', enabled ? 'block' : 'none')
             .merge(layer);
 
