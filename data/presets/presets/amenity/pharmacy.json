@@ -9,6 +9,7 @@
         "dispensing"
     ],
     "moreFields": [
+        "brand",
         "email",
         "fax",
         "gnis/feature_id",

@@ -1432,6 +1432,7 @@
                 "banner": "banner",
                 "bench": "bench",
                 "bike_rack": "bike rack",
+                "billboard": "billboard",
                 "catch_basin": "catch basin",
                 "cctv_camera": "CCTV camera",
                 "fire_hydrant": "fire hydrant",
@@ -3035,6 +3036,9 @@
                 "communication_multi": {
                     "label": "Communication Types",
                     "terms": ""
+                },
+                "connectivity": {
+                    "label": "Connectivity"
                 },
                 "construction": {
                     "label": "Type"
@@ -9713,6 +9717,10 @@
                 },
                 "type/boundary/administrative": {
                     "name": "Administrative Boundary",
+                    "terms": ""
+                },
+                "type/connectivity": {
+                    "name": "Lane Connectivity",
                     "terms": ""
                 },
                 "type/enforcement": {

@@ -11,6 +11,7 @@
     "moreFields": [
         "air_conditioning",
         "bar",
+        "brand",
         "brewery",
         "capacity",
         "delivery",

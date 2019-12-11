@@ -12,6 +12,7 @@
     "moreFields": [
         "air_conditioning",
         "bar",
+        "brand",
         "capacity",
         "delivery",
         "diet_multi",

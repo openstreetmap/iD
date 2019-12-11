@@ -73,6 +73,7 @@
     "colour": {"key": "colour", "type": "text", "label": "Color"},
     "comment": {"key": "comment", "type": "textarea", "label": "Changeset Comment", "placeholder": "Brief description of your contributions (required)"},
     "communication_multi": {"key": "communication:", "type": "multiCombo", "label": "Communication Types"},
+    "connectivity": {"key": "connectivity", "type": "text", "label": "Connectivity"},
     "construction": {"key": "construction", "type": "combo", "label": "Type"},
     "consulate": {"key": "consulate", "type": "combo", "label": "Type"},
     "consulting": {"key": "consulting", "type": "semiCombo", "label": "Expertise"},

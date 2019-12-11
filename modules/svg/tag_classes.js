@@ -50,8 +50,6 @@ export function svgTagClasses() {
         if (/\bstroke\b/.test(value)) {
             if (!!t.barrier && t.barrier !== 'no') {
                 overrideGeometry = 'line';
-            } else if (t.type === 'multipolygon' && !entity.hasInterestingTags()) {
-                overrideGeometry = 'area';
             }
         }
 

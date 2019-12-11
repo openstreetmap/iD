@@ -126,12 +126,19 @@ export function behaviorBreathe() {
             _selected = currSelected.call(calcAnimationParams);
         }
 
+        var didCallNextRun = false;
+
         _selected
             .transition()
             .duration(duration)
             .call(setAnimationParams, fromTo)
             .on('end', function() {
-                surface.call(run, toFrom);
+                // `end` event is called for each selected element, but we want
+                // it to run only once
+                if (!didCallNextRun) {
+                    surface.call(run, toFrom);
+                    didCallNextRun = true;
+                }
             });
     }
 
