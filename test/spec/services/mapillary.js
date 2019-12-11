@@ -49,7 +49,7 @@ describe('iD.serviceMapillary', function() {
 
             mapillary.reset();
             expect(mapillary.cache()).to.not.have.property('foo');
-            expect(mapillary.getSelectedImage()).to.be.null;
+            expect(mapillary.getSelectedImageKey()).to.be.null;
         });
     });
 
@@ -354,8 +354,8 @@ describe('iD.serviceMapillary', function() {
     describe('#selectImage', function() {
         it('gets and sets the selected image', function() {
             var d = { key: 'baz', loc: [10,0] };
-            mapillary.selectImage(d);
-            expect(mapillary.getSelectedImage()).to.eql(d);
+            mapillary.selectImage(d.key);
+            expect(mapillary.getSelectedImageKey()).to.eql(d.key);
         });
     });
 

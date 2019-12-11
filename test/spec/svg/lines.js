@@ -29,6 +29,19 @@ describe('iD.svgLines', function () {
         expect(surface.select('path.line').classed('line')).to.be.true;
     });
 
+    it('adds relation and area classes for untagged line member of multipolygon', function () {
+        var a = iD.osmNode({loc: [0, 0]});
+        var b = iD.osmNode({loc: [1, 1]});
+        var line = iD.osmWay({nodes: [a.id, b.id]});
+        var relation = iD.osmRelation({members: [{id: line.id}], tags: {type: 'multipolygon', natural: 'wood'}});
+        var graph = iD.coreGraph([a, b, line, relation]);
+
+        surface.call(iD.svgLines(projection, context), graph, [line], all);
+
+        expect(surface.select('.stroke').classed('relation')).to.be.true;
+        expect(surface.select('.stroke').classed('area')).to.be.true;
+    });
+
     it('adds tag classes', function () {
         var a = iD.osmNode({loc: [0, 0]});
         var b = iD.osmNode({loc: [1, 1]});
