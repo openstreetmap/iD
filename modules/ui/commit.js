@@ -195,6 +195,13 @@ export function uiCommit(context) {
             .attr('class', 'inspector-footer save-footer fillL')
             .merge(footer);
 
+        changesetEditor
+            .on('submit',function (            ) {
+                if (buttonSection.selectAll('.save-button').classed('disabled')) {
+                    saveChangesetFromContext();
+                }
+            });
+
         // footer buttons section
         var saveSection = footer.selectAll('.save-section')
             .data([0]);
@@ -262,10 +269,7 @@ export function uiCommit(context) {
             .on('click.save', function() {
                 if (!d3_select(this).classed('disabled')) {
                     this.blur();    // avoid keeping focus on the button - #4641
-                    var mode = context.mode();
-                    if (mode.id === 'save' && mode.save) {
-                        mode.save(_changeset);
-                    }
+                    saveChangesetFromContext();
                 }
             });
 
@@ -405,6 +409,13 @@ export function uiCommit(context) {
         }
     }
 
+
+    function saveChangesetFromContext(){
+        var mode = context.mode();
+        if (mode.id === 'save' && mode.save) {
+            mode.save(_changeset);
+        }
+    }
 
     function getUploadBlockerMessage() {
         var errors = context.validator()

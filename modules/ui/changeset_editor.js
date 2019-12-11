@@ -1,4 +1,5 @@
-import { dispatch as d3_dispatch } from 'd3-dispatch';
+import {dispatch as d3_dispatch} from 'd3-dispatch';
+import {event as d3_event} from 'd3-selection';
 
 import { t } from '../util/locale';
 import { svgIcon } from '../svg/icon';
@@ -9,7 +10,7 @@ import { utilArrayUniqBy, utilRebind, utilTriggerEvent } from '../util';
 
 
 export function uiChangesetEditor(context) {
-    var dispatch = d3_dispatch('change');
+    var dispatch = d3_dispatch('change', 'submit');
     var formFields = uiFormFields(context);
     var commentCombo = uiCombobox(context, 'comment').caseSensitive(true);
     var _fieldsArr;
@@ -82,6 +83,13 @@ export function uiChangesetEditor(context) {
                         );
                 });
             }
+
+            commentField
+                .on('keyup', function () {
+                    if (d3_event.code === 'Enter' && d3_event.ctrlKey) {
+                        dispatch.call('submit');
+                    }
+                });
         }
 
         // Add warning if comment mentions Google
