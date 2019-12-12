@@ -33,8 +33,7 @@ export function uiToolUndoRedo(context) {
 
 
     function editable() {
-        var mode = context.mode();
-        return context.editable() && mode && mode.id !== 'save';
+        return context.editable();
     }
 
 

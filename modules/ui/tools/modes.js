@@ -51,8 +51,7 @@ export function uiToolOldDrawModes(context) {
     }
 
     function osmEditable() {
-        var mode = context.mode();
-        return context.editable() && mode && mode.id !== 'save';
+        return context.editable();
     }
 
     modes.forEach(function(mode) {

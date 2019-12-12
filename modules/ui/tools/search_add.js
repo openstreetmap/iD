@@ -194,8 +194,7 @@ export function uiToolSearchAdd(context) {
     };
 
     function osmEditable() {
-        var mode = context.mode();
-        return context.editable() && mode && mode.id !== 'save';
+        return context.editable();
     }
 
     function updateEnabledState() {
