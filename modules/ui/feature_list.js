@@ -205,6 +205,28 @@ export function uiFeatureList(context) {
             }
         });
 
+        if (q.match(/^[0-9]+$/)) {
+            // if query is just a number, possibly an OSM ID without a prefix
+            result.push({
+                id: 'n' + q,
+                geometry: 'point',
+                type: t('inspector.node'),
+                name: q
+            });
+            result.push({
+                id: 'w' + q,
+                geometry: 'line',
+                type: t('inspector.way'),
+                name: q
+            });
+            result.push({
+                id: 'r' + q,
+                geometry: 'relation',
+                type: t('inspector.relation'),
+                name: q
+            });
+        }
+
         return result;
     }
 
