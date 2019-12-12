@@ -95,7 +95,7 @@ sources.concat(whitelist).forEach(function(source) {
 
     // supports 512px tiles
     if (source.id === 'Mapbox') {
-        im.template = im.template.replace('tiles/256/', 'tiles/512/');
+        im.template = im.template.replace('.jpg', '@2x.jpg');
         im.tileSize = 512;
     } else if (source.id === 'mtbmap-no') {
         im.tileSize = 512;
