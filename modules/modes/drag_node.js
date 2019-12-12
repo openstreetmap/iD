@@ -131,7 +131,7 @@ export function modeDragNode(context) {
     function start(entity) {
         _wasMidpoint = entity.type === 'midpoint';
         var hasHidden = context.features().hasHiddenConnections(entity, context.graph());
-        _isCancelled = d3_event.sourceEvent.shiftKey || hasHidden;
+        _isCancelled = !context.editable() || d3_event.sourceEvent.shiftKey || hasHidden;
 
 
         if (_isCancelled) {

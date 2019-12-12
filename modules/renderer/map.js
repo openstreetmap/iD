@@ -11,11 +11,11 @@ import { geoExtent, geoRawMercator, geoScaleToZoom, geoZoomToScale } from '../ge
 import { modeBrowse } from '../modes/browse';
 import { svgAreas, svgLabels, svgLayers, svgLines, svgMidpoints, svgPoints, svgVertices } from '../svg';
 import { uiFlash } from '../ui/flash';
-import { utilFastMouse, utilFunctor, utilRebind, utilSetTransform } from '../util';
+import { utilFastMouse, utilFunctor, utilSetTransform, utilEntityAndDeepMemberIDs } from '../util/util';
 import { utilBindOnce } from '../util/bind_once';
 import { utilDetect } from '../util/detect';
 import { utilGetDimensions } from '../util/dimensions';
-
+import { utilRebind } from '../util/rebind';
 
 // constants
 var TILESIZE = 256;
@@ -30,7 +30,7 @@ function clamp(num, min, max) {
 
 
 export function rendererMap(context) {
-    var dispatch = d3_dispatch('move', 'drawn');
+    var dispatch = d3_dispatch('move', 'drawn', 'crossEditableZoom');
     var projection = context.projection;
     var curtainProjection = context.curtainProjection;
     var drawLayers = svgLayers(projection, context);
@@ -56,6 +56,7 @@ export function rendererMap(context) {
     var _minzoom = 0;
     var _getMouseCoords;
     var _mouseEvent;
+    var _lastWithinEditableZoom;
 
     var zoom = d3_zoom()
         .scaleExtent([kMin, kMax])
@@ -182,7 +183,7 @@ export function rendererMap(context) {
             });
 
         context.on('enter.map',  function() {
-            if (map.editableDataEnabled() && !_isTransformed) {
+            if (map.editableDataEnabled(true /* skip zoom check */) && !_isTransformed) {
                 // redraw immediately any objects affected by a change in selectedIDs.
                 var graph = context.graph();
                 var selectedAndParents = {};
@@ -268,7 +269,16 @@ export function rendererMap(context) {
         var set;
         var filter;
 
-        if (difference) {
+        if (map.isInWideSelection()) {
+            data = [];
+            utilEntityAndDeepMemberIDs(mode.selectedIDs(), context.graph()).forEach(function(id) {
+                var entity = context.hasEntity(id);
+                if (entity) data.push(entity);
+            });
+            fullRedraw = true;
+            filter = utilFunctor(true);
+
+        } else if (difference) {
             var complete = difference.complete(map.extent());
             data = Object.values(complete).filter(Boolean);
             set = new Set(Object.keys(complete));
@@ -492,6 +502,15 @@ export function rendererMap(context) {
 
         }
 
+        var withinEditableZoom = map.withinEditableZoom();
+        if (_lastWithinEditableZoom !== withinEditableZoom) {
+            if (_lastWithinEditableZoom !== undefined) {
+                // notify that the map zoomed in or out over the editable zoom threshold
+                dispatch.call('crossEditableZoom', this, map);
+            }
+            _lastWithinEditableZoom = withinEditableZoom;
+        }
+
         if (geoScaleToZoom(k, TILESIZE) < _minzoom) {
             surface.interrupt();
             uiFlash().text(t('cannot_zoom'))();
@@ -580,7 +599,7 @@ export function rendererMap(context) {
         }
 
         // OSM
-        if (map.editableDataEnabled()) {
+        if (map.editableDataEnabled() || map.isInWideSelection()) {
             context.loadTiles(projection);
             drawEditable(difference, extent);
         } else {
@@ -802,7 +821,7 @@ export function rendererMap(context) {
         var extent = entity.extent(context.graph());
         if (!isFinite(extent.area())) return map;
 
-        var z2 = clamp(map.trimmedExtentZoom(extent), context.minEditableZoom(), 20);
+        var z2 = clamp(map.trimmedExtentZoom(extent), 0, 20);
         return map.centerZoom(extent.center(), z2);
     };
 
@@ -839,7 +858,7 @@ export function rendererMap(context) {
         var extent = entity.extent(context.graph());
         if (!isFinite(extent.area())) return map;
 
-        var z2 = clamp(map.trimmedExtentZoom(extent), context.minEditableZoom(), 20);
+        var z2 = clamp(map.trimmedExtentZoom(extent), 0, 20);
         return map.centerZoomEase(extent.center(), z2, duration);
     };
 
@@ -915,12 +934,22 @@ export function rendererMap(context) {
     };
 
 
-    map.editableDataEnabled = function() {
+    map.withinEditableZoom = function() {
+        return map.zoom() >= context.minEditableZoom();
+    };
+
+
+    map.isInWideSelection = function() {
+        return !map.withinEditableZoom() && context.mode() && context.mode().id === 'select';
+    };
+
+
+    map.editableDataEnabled = function(skipZoomCheck) {
 
         var layer = context.layers().layer('osm');
         if (!layer || !layer.enabled()) return false;
 
-        return map.zoom() >= context.minEditableZoom();
+        return skipZoomCheck || map.withinEditableZoom();
     };
 
 
@@ -928,7 +957,7 @@ export function rendererMap(context) {
         var layer = context.layers().layer('notes');
         if (!layer || !layer.enabled()) return false;
 
-        return map.zoom() >= context.minEditableZoom();
+        return map.withinEditableZoom();
     };
 
 

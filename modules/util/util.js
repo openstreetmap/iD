@@ -72,9 +72,17 @@ export function utilEntityOrMemberSelector(ids, graph) {
 //  - entityIDs passed in
 //  - deep descendant entityIDs for any of those entities that are relations
 export function utilEntityOrDeepMemberSelector(ids, graph) {
+    return utilEntitySelector(utilEntityAndDeepMemberIDs(ids, graph));
+}
+
+
+// returns an selector to select entity ids for:
+//  - entityIDs passed in
+//  - deep descendant entityIDs for any of those entities that are relations
+export function utilEntityAndDeepMemberIDs(ids, graph) {
     var seen = new Set();
     ids.forEach(collectDeepDescendants);
-    return utilEntitySelector(Array.from(seen));
+    return Array.from(seen);
 
     function collectDeepDescendants(id) {
         if (seen.has(id)) return;

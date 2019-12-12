@@ -306,7 +306,8 @@ export function modeSelect(context, selectedIDs) {
 
         context.map()
             .on('move.select', closeMenu)
-            .on('drawn.select', selectElements);
+            .on('drawn.select', selectElements)
+            .on('crossEditableZoom.select', selectElements);
 
         context.surface()
             .on('dblclick.select', dblclick);
@@ -348,6 +349,8 @@ export function modeSelect(context, selectedIDs) {
 
 
         function dblclick() {
+            if (!context.map().withinEditableZoom()) return;
+            
             var target = d3_select(d3_event.target);
 
             var datum = target.datum();
@@ -396,6 +399,13 @@ export function modeSelect(context, selectedIDs) {
             if (_relatedParent) {
                 surface.selectAll(utilEntitySelector([_relatedParent]))
                     .classed('related', true);
+            }
+
+            // Don't highlight selected features past the editable zoom
+            if (!context.map().withinEditableZoom()) {
+                surface.selectAll('.selected').classed('selected', false);
+                surface.selectAll('.selected-member').classed('selected-member', false);
+                return;
             }
 
             var selection = context.surface()

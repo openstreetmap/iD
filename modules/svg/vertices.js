@@ -426,7 +426,22 @@ export function svgVertices(projection, context) {
         var zoom = geoScaleToZoom(projection.scale());
 
         _prevSelected = _currSelected || {};
-        _currSelected = getSiblingAndChildVertices(context.selectedIDs(), graph, wireframe, zoom);
+        if (context.map().isInWideSelection()) {
+            _currSelected = {};
+            context.selectedIDs().forEach(function(id) {
+                var entity = graph.hasEntity(id);
+                if (!entity) return;
+
+                if (entity.type === 'node') {
+                    if (renderAsVertex(entity, graph, wireframe, zoom)) {
+                        _currSelected[entity.id] = entity;
+                    }
+                }
+            });
+
+        } else {
+            _currSelected = getSiblingAndChildVertices(context.selectedIDs(), graph, wireframe, zoom);
+        }
 
         // note that drawVertices will add `_currSelected` automatically if needed..
         var filter = function(d) { return d.id in _prevSelected; };
