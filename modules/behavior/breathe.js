@@ -142,6 +142,7 @@ export function behaviorBreathe() {
             });
     }
 
+    var _isInstalled = false;
 
     function behavior(surface) {
         _done = false;
@@ -155,8 +156,12 @@ export function behaviorBreathe() {
             _timer.stop();
             return true;
         }, 20);
+        _isInstalled = true;
     }
 
+    behavior.isInstalled = function() {
+        return _isInstalled;
+    };
 
     behavior.off = function() {
         _done = true;
@@ -166,6 +171,7 @@ export function behaviorBreathe() {
         _selected
             .interrupt()
             .call(reset);
+        _isInstalled = false;
     };
 
 
