@@ -506,7 +506,6 @@ en:
     note: note
   geocoder:
     search: Search worldwide...
-    no_results_visible: No results in visible map area
     no_results_worldwide: No results found
   geolocate:
     title: Show My Location
