@@ -1,4 +1,5 @@
 {
+    "icon": "temaki-cable",
     "fields": [
         "name",
         "operator",
