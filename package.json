@@ -46,7 +46,7 @@
     "fast-deep-equal": "~3.1.1",
     "fast-json-stable-stringify": "2.0.0",
     "lodash-es": "~4.17.15",
-    "marked": "0.7.0",
+    "marked": "0.8.0",
     "martinez-polygon-clipping": "0.5.0",
     "node-diff3": "1.0.0",
     "osm-auth": "1.0.2",
