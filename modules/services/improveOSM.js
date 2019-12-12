@@ -17,9 +17,9 @@ var _erCache;
 var _erZoom = 14;
 
 var _impOsmUrls = {
-    ow: 'https://directionofflow.skobbler.net/directionOfFlowService',
-    mr: 'https://missingroads.skobbler.net/missingGeoService',
-    tr: 'https://turnrestrictionservice.skobbler.net/turnRestrictionService'
+    ow: 'https://grab.community.improve-osm.org/directionOfFlowService',
+    mr: 'https://grab.community.improve-osm.org/missingGeoService',
+    tr: 'https://grab.community.improve-osm.org/turnRestrictionService'
 };
 
 function abortRequest(i) {
