@@ -40,10 +40,11 @@ export function modeSelect(context, selectedIDs) {
     };
 
     var keybinding = utilKeybinding('select');
+    var breatheBehavior = behaviorBreathe(context);
     var behaviors = [
         behaviorCopy(context),
         behaviorPaste(context),
-        behaviorBreathe(context),
+        breatheBehavior,
         behaviorHover(context),
         behaviorSelect(context),
         behaviorLasso(context),
@@ -403,25 +404,37 @@ export function modeSelect(context, selectedIDs) {
 
             // Don't highlight selected features past the editable zoom
             if (!context.map().withinEditableZoom()) {
+
+                if (breatheBehavior.isInstalled()) {
+                    context.uninstall(breatheBehavior);
+                }
+
                 surface.selectAll('.selected').classed('selected', false);
                 surface.selectAll('.selected-member').classed('selected-member', false);
-                return;
-            }
 
-            var selection = context.surface()
-                .selectAll(utilEntityOrMemberSelector(selectedIDs, context.graph()));
+            } else if (context.map().withinEditableZoom()) {
 
-            if (selection.empty()) {
-                // Return to browse mode if selected DOM elements have
-                // disappeared because the user moved them out of view..
-                var source = d3_event && d3_event.type === 'zoom' && d3_event.sourceEvent;
-                if (drawn && source && (source.type === 'mousemove' || source.type === 'touchmove')) {
-                    context.enter(modeBrowse(context));
+                var selection = context.surface()
+                    .selectAll(utilEntityOrMemberSelector(selectedIDs, context.graph()));
+
+                if (selection.empty()) {
+                    // Return to browse mode if selected DOM elements have
+                    // disappeared because the user moved them out of view..
+                    var source = d3_event && d3_event.type === 'zoom' && d3_event.sourceEvent;
+                    if (drawn && source && (source.type === 'mousemove' || source.type === 'touchmove')) {
+                        context.enter(modeBrowse(context));
+                    }
+                } else {
+                    selection
+                        .classed('selected', true);
                 }
-            } else {
-                selection
-                    .classed('selected', true);
+
+                if (!breatheBehavior.isInstalled()) {
+                    context.install(breatheBehavior);
+                }
+
             }
+
         }
 
 
