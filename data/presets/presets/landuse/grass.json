@@ -5,6 +5,13 @@
     "tags": {
         "landuse": "grass"
     },
-    "terms": [],
+    "terms": [
+        "field",
+        "green",
+        "lawn",
+        "managed grass",
+        "mown grass",
+        "turf"
+    ],
     "name": "Grass"
 }

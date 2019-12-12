@@ -13,8 +13,14 @@
         "natural": "wood"
     },
     "terms": [
+        "boreal",
+        "forest",
+        "forrest",
+        "taiga",
         "tree",
-        "trees"
+        "trees",
+        "woodlands",
+        "woods"
     ],
     "name": "Natural Wood"
 }

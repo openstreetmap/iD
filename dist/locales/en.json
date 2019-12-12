@@ -5852,7 +5852,7 @@
                     "terms": "theme park,ghost train"
                 },
                 "attraction/drop_tower": {
-                    "name": "Drop Tower",
+                    "name": "Drop Tower Ride",
                     "terms": "theme park,amusement ride,gondola,tower,big drop"
                 },
                 "attraction/kiddie_ride": {
@@ -7103,7 +7103,7 @@
                 },
                 "landuse/forest": {
                     "name": "Managed Forest",
-                    "terms": "cut,forest,forestry,lumber,silviculture,tree,trees"
+                    "terms": "boreal,cut,forest,forestry,forrest,lumber,silviculture,taiga,tree,trees,woodlands,woods"
                 },
                 "landuse/garages": {
                     "name": "Garage Landuse",
@@ -7111,7 +7111,7 @@
                 },
                 "landuse/grass": {
                     "name": "Grass",
-                    "terms": ""
+                    "terms": "field,green,lawn,managed grass,mown grass,turf"
                 },
                 "landuse/greenfield": {
                     "name": "Greenfield",
@@ -7895,7 +7895,7 @@
                 },
                 "natural/grassland": {
                     "name": "Grassland",
-                    "terms": "prairie,savanna"
+                    "terms": "field,prairie,savanna"
                 },
                 "natural/heath": {
                     "name": "Heath",
@@ -8011,7 +8011,7 @@
                 },
                 "natural/wood": {
                     "name": "Natural Wood",
-                    "terms": "tree,trees"
+                    "terms": "boreal,forest,forrest,taiga,tree,trees,woodlands,woods"
                 },
                 "network/type/node_network": {
                     "name": "Recreational Network Node",

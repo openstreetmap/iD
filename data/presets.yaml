@@ -3900,9 +3900,9 @@ en:
         terms: '<translate with synonyms or related terms for ''Dark Ride'', separated by commas>'
       attraction/drop_tower:
         # attraction=drop_tower
-        name: Drop Tower
+        name: Drop Tower Ride
         # 'terms: theme park,amusement ride,gondola,tower,big drop'
-        terms: '<translate with synonyms or related terms for ''Drop Tower'', separated by commas>'
+        terms: '<translate with synonyms or related terms for ''Drop Tower Ride'', separated by commas>'
       attraction/kiddie_ride:
         # attraction=kiddie_ride
         name: Kiddie Ride
@@ -5332,7 +5332,7 @@ en:
       landuse/forest:
         # landuse=forest
         name: Managed Forest
-        # 'terms: cut,forest,forestry,lumber,silviculture,tree,trees'
+        # 'terms: boreal,cut,forest,forestry,forrest,lumber,silviculture,taiga,tree,trees,woodlands,woods'
         terms: '<translate with synonyms or related terms for ''Managed Forest'', separated by commas>'
       landuse/garages:
         # landuse=garages
@@ -5341,6 +5341,7 @@ en:
       landuse/grass:
         # landuse=grass
         name: Grass
+        # 'terms: field,green,lawn,managed grass,mown grass,turf'
         terms: '<translate with synonyms or related terms for ''Grass'', separated by commas>'
       landuse/greenfield:
         # landuse=greenfield
@@ -6290,7 +6291,7 @@ en:
       natural/grassland:
         # natural=grassland
         name: Grassland
-        # 'terms: prairie,savanna'
+        # 'terms: field,prairie,savanna'
         terms: '<translate with synonyms or related terms for ''Grassland'', separated by commas>'
       natural/heath:
         # natural=heath
@@ -6428,7 +6429,7 @@ en:
       natural/wood:
         # natural=wood
         name: Natural Wood
-        # 'terms: tree,trees'
+        # 'terms: boreal,forest,forrest,taiga,tree,trees,woodlands,woods'
         terms: '<translate with synonyms or related terms for ''Natural Wood'', separated by commas>'
       network/type/node_network:
         # 'network:type=node_network'
