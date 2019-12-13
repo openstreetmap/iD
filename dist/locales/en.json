@@ -2420,9 +2420,9 @@
                     "search": "Find features matching search text"
                 },
                 "with_selected": {
-                    "title": "With feature selected",
+                    "title": "With features selected",
                     "edit_menu": "Toggle edit menu",
-                    "zoom_to": "Zoom to selected feature"
+                    "zoom_to": "Zoom to selected features"
                 },
                 "vertex_selected": {
                     "title": "With node selected",
