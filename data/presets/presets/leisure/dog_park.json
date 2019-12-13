@@ -11,8 +11,8 @@
         "website"
     ],
     "geometry": [
-        "point",
-        "area"
+        "area",
+        "point"
     ],
     "terms": [],
     "tags": {
