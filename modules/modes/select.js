@@ -428,7 +428,7 @@ export function modeSelect(context, selectedIDs) {
                 // Apply selection styling if not in wide selection
 
                 surface
-                    .selectAll(utilDeepMemberSelector(selectedIDs, context.graph()))
+                    .selectAll(utilDeepMemberSelector(selectedIDs, context.graph(), true /* skipMultipolgonMembers */))
                     .classed('selected-member', true);
                 surface
                     .selectAll(utilEntityOrDeepMemberSelector(selectedIDs, context.graph()))
