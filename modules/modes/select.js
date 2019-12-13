@@ -177,7 +177,7 @@ export function modeSelect(context, selectedIDs) {
         closeMenu();
         if (editMenu) {
 
-            // disabled menu if in wide selection, for example
+            // disable menu if in wide selection, for example
             if (!context.map().editableDataEnabled()) return;
 
             context.surface().call(editMenu);
