@@ -176,6 +176,10 @@ export function modeSelect(context, selectedIDs) {
     function showMenu() {
         closeMenu();
         if (editMenu) {
+
+            // disabled menu if in wide selection, for example
+            if (!context.map().editableDataEnabled()) return;
+
             context.surface().call(editMenu);
         }
     }
@@ -354,7 +358,7 @@ export function modeSelect(context, selectedIDs) {
 
         function dblclick() {
             if (!context.map().withinEditableZoom()) return;
-            
+
             var target = d3_select(d3_event.target);
 
             var datum = target.datum();
