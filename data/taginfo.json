@@ -1485,7 +1485,7 @@
     {"key": "guest_house", "description": "🄵 Type"},
     {"key": "handicap", "description": "🄵 Handicap"},
     {"key": "handrail", "description": "🄵 Handrail"},
-    {"key": "hashtags", "description": "🄵 Suggested Hashtags"},
+    {"key": "hashtags", "description": "🄵 Hashtags"},
     {"key": "healthcare:speciality", "description": "🄵 Specialties"},
     {"key": "height", "description": "🄵 Building Height (Meters), 🄵 Height (Meters)"},
     {"key": "highspeed", "description": "🄵 High-Speed"},

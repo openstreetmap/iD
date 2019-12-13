@@ -169,7 +169,7 @@
     "guest_house": {"key": "guest_house", "type": "combo", "label": "Type"},
     "handicap": {"key": "handicap", "type": "number", "label": "Handicap", "placeholder": "1-18"},
     "handrail": {"key": "handrail", "type": "check", "label": "Handrail"},
-    "hashtags": {"key": "hashtags", "type": "semiCombo", "label": "Suggested Hashtags", "placeholder": "#example"},
+    "hashtags": {"key": "hashtags", "type": "semiCombo", "label": "Hashtags", "placeholder": "#example"},
     "healthcare": {"key": "healthcare", "type": "typeCombo", "label": "Type"},
     "healthcare/speciality": {"key": "healthcare:speciality", "type": "semiCombo", "reference": {"key": "healthcare"}, "label": "Specialties"},
     "height_building": {"key": "height", "minValue": 0, "type": "number", "label": "Building Height (Meters)", "prerequisiteTag": {"key": "building", "valueNot": "no"}},

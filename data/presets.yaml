@@ -931,7 +931,7 @@ en:
         terms: '[translate with synonyms or related terms for ''Handrail'', separated by commas]'
       hashtags:
         # hashtags=*
-        label: Suggested Hashtags
+        label: Hashtags
         # hashtags field placeholder
         placeholder: '#example'
       healthcare:
