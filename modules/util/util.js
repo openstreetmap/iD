@@ -99,33 +99,6 @@ export function utilEntityAndDeepMemberIDs(ids, graph) {
 
 // returns an selector to select entity ids for:
 //  - deep descendant entityIDs for any of those entities that are relations
-export function utilDeepMemberSelector(ids, graph) {
-    var idsSet = new Set(ids);
-    var seen = new Set();
-    var returners = new Set();
-    ids.forEach(collectDeepDescendants);
-    return utilEntitySelector(Array.from(returners));
-
-    function collectDeepDescendants(id) {
-        if (seen.has(id)) return;
-        seen.add(id);
-
-        if (!idsSet.has(id)) {
-            returners.add(id);
-        }
-
-        var entity = graph.hasEntity(id);
-        if (!entity || entity.type !== 'relation') return;
-
-        entity.members
-            .map(function(member) { return member.id; })
-            .forEach(collectDeepDescendants);   // recurse
-    }
-}
-
-
-// returns an selector to select entity ids for:
-//  - deep descendant entityIDs for any of those entities that are relations
 export function utilDeepMemberSelector(ids, graph, skipMultipolgonMembers) {
     var idsSet = new Set(ids);
     var seen = new Set();
