@@ -4,7 +4,7 @@
     "aeroway": {"icon": "maki-airport", "fields": ["aeroway"], "geometry": ["point", "vertex", "line", "area"], "tags": {"aeroway": "*"}, "searchable": false, "name": "Aeroway"},
     "amenity": {"fields": ["amenity"], "geometry": ["point", "vertex", "line", "area"], "tags": {"amenity": "*"}, "searchable": false, "name": "Amenity"},
     "attraction": {"icon": "maki-star", "fields": ["name", "attraction", "operator", "opening_hours", "fee", "charge_fee"], "moreFields": ["address", "email", "fax", "opening_hours", "payment_multi", "phone", "website"], "geometry": ["point", "vertex", "line", "area"], "tags": {"attraction": "*"}, "searchable": false, "name": "Attraction"},
-    "boundary": {"fields": ["boundary"], "geometry": ["line"], "tags": {"boundary": "*"}, "searchable": false, "name": "Boundary"},
+    "boundary": {"fields": ["boundary"], "geometry": ["line"], "tags": {"boundary": "*"}, "searchable": false, "name": "Boundary", "matchScore": 0.45},
     "building_point": {"icon": "maki-home", "fields": ["{building}"], "moreFields": ["{building}"], "geometry": ["point"], "tags": {"building": "*"}, "matchScore": 0.6, "searchable": false, "name": "Building"},
     "embankment": {"geometry": ["line"], "tags": {"embankment": "yes"}, "name": "Embankment", "matchScore": 0.2, "searchable": false},
     "emergency": {"fields": ["emergency_combo"], "geometry": ["point", "vertex", "area"], "tags": {"emergency": "*"}, "searchable": false, "name": "Emergency Feature"},
