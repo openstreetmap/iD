@@ -117,6 +117,7 @@ export function behaviorBreathe() {
 
         if (_done || currSelected.empty()) {
             _selected.call(reset);
+            _selected = d3_select(null);
             return;
         }
 
@@ -139,10 +140,13 @@ export function behaviorBreathe() {
                     surface.call(run, toFrom);
                     didCallNextRun = true;
                 }
+
+                // if entity was deselected, remove breathe styling
+                if (!d3_select(this).classed('selected')) {
+                    reset(d3_select(this));
+                }
             });
     }
-
-    var _isInstalled = false;
 
     function behavior(surface) {
         _done = false;
@@ -156,11 +160,15 @@ export function behaviorBreathe() {
             _timer.stop();
             return true;
         }, 20);
-        _isInstalled = true;
     }
 
-    behavior.isInstalled = function() {
-        return _isInstalled;
+    behavior.restartIfNeeded = function(surface) {
+        if (_selected.empty()) {
+            surface.call(run, 'from');
+            if (_timer) {
+                _timer.stop();
+            }
+        }
     };
 
     behavior.off = function() {
@@ -171,7 +179,6 @@ export function behaviorBreathe() {
         _selected
             .interrupt()
             .call(reset);
-        _isInstalled = false;
     };
 
 

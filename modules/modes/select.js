@@ -21,8 +21,8 @@ import * as Operations from '../operations/index';
 import { uiEditMenu } from '../ui/edit_menu';
 import { uiCmd } from '../ui/cmd';
 import {
-    utilArrayIntersection, utilEntityOrDeepMemberSelector,
-    utilEntitySelector, utilDeepMemberSelector, utilKeybinding
+    utilArrayIntersection, utilDeepMemberSelector, utilEntityOrDeepMemberSelector,
+    utilEntitySelector, utilKeybinding
 } from '../util';
 
 
@@ -82,14 +82,16 @@ export function modeSelect(context, selectedIDs) {
 
         if (!ids.length) {
             context.enter(modeBrowse(context));
+            return false;
         } else if ((selectedIDs.length > 1 && ids.length === 1) ||
             (selectedIDs.length === 1 && ids.length > 1)) {
             // switch between single- and multi-select UI
             context.enter(modeSelect(context, ids));
-        } else {
-            selectedIDs = ids;
+            return false;
         }
-        return !!ids.length;
+
+        selectedIDs = ids;
+        return true;
     }
 
 
@@ -172,6 +174,10 @@ export function modeSelect(context, selectedIDs) {
     function showMenu() {
         closeMenu();
         if (editMenu) {
+
+            // disable menu if in wide selection, for example
+            if (!context.map().editableDataEnabled()) return;
+
             context.surface().call(editMenu);
         }
     }
@@ -310,14 +316,21 @@ export function modeSelect(context, selectedIDs) {
             .call(keybinding);
 
         context.history()
-            .on('change.select', loadOperations)
+            .on('change.select', function() {
+                loadOperations();
+                // reselect after change in case relation members were removed or added
+                selectElements();
+            })
             .on('undone.select', update)
             .on('redone.select', update);
 
         context.map()
             .on('move.select', closeMenu)
             .on('drawn.select', selectElements)
-            .on('crossEditableZoom.select', selectElements);
+            .on('crossEditableZoom.select', function() {
+                selectElements();
+                breatheBehavior.restartIfNeeded(context.surface());
+            });
 
         context.surface()
             .on('dblclick.select', dblclick);
@@ -386,7 +399,7 @@ export function modeSelect(context, selectedIDs) {
         }
 
 
-        function selectElements(drawn) {
+        function selectElements() {
             if (!checkSelectedIDs()) return;
 
             var surface = context.surface();
@@ -395,6 +408,12 @@ export function modeSelect(context, selectedIDs) {
             if (entity && context.geometry(entity.id) === 'relation') {
                 _suppressMenu = true;
             }
+
+            surface.selectAll('.selected-member')
+                .classed('selected-member', false);
+
+            surface.selectAll('.selected')
+                .classed('selected', false);
 
             surface.selectAll('.related')
                 .classed('related', false);
@@ -405,39 +424,15 @@ export function modeSelect(context, selectedIDs) {
                     .classed('related', true);
             }
 
-            // Don't highlight selected features past the editable zoom
-            if (!context.map().withinEditableZoom()) {
+            if (context.map().withinEditableZoom()) {
+                // Apply selection styling if not in wide selection
 
-                if (breatheBehavior.isInstalled()) {
-                    context.uninstall(breatheBehavior);
-                }
-
-                surface.selectAll('.selected').classed('selected', false);
-                surface.selectAll('.selected-member').classed('selected-member', false);
-
-            } else if (context.map().withinEditableZoom()) {
-
-                var selection = context.surface()
-                    .selectAll(utilEntityOrDeepMemberSelector(selectedIDs, context.graph()));
-
-                if (selection.empty()) {
-                    // Return to browse mode if selected DOM elements have
-                    // disappeared because the user moved them out of view..
-                    var source = d3_event && d3_event.type === 'zoom' && d3_event.sourceEvent;
-                    if (drawn && source && (source.type === 'mousemove' || source.type === 'touchmove')) {
-                        context.enter(modeBrowse(context));
-                    }
-                } else {
-                    context.surface()
-                        .selectAll(utilDeepMemberSelector(selectedIDs, context.graph(), true /* skipMultipolgonMembers */))
-                        .classed('selected-member', true);
-                    selection
-                        .classed('selected', true);
-                }
-
-                if (!breatheBehavior.isInstalled()) {
-                    context.install(breatheBehavior);
-                }
+                surface
+                    .selectAll(utilDeepMemberSelector(selectedIDs, context.graph()))
+                    .classed('selected-member', true);
+                surface
+                    .selectAll(utilEntityOrDeepMemberSelector(selectedIDs, context.graph()))
+                    .classed('selected', true);
             }
 
         }

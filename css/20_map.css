@@ -294,6 +294,13 @@ g.point.tag-wikidata .icon {
     color: #666;
 }
 
+/* Selected Members */
+g.vertex.selected-member .shadow,
+g.point.selected-member .shadow,
+path.shadow.selected-member {
+    stroke-opacity: 0.95;
+    stroke: #FFDE70;
+}
 
 /* Selected Members */
 g.vertex.selected-member .shadow,
