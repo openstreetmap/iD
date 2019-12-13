@@ -886,6 +886,14 @@ button.add-note svg.icon {
     background: #000;
     color: #ccc;
 }
+.tooltip.dark kbd,
+.map-pane .tooltip kbd {
+    background-color: #666;
+    border: solid 1px #444;
+    border-bottom-color: #333;
+    box-shadow: inset 0 -1px 0 #333;
+    color: #eee;
+}
 
 /* Exceptions for tooltip layouts */
 
