@@ -321,7 +321,10 @@ export function modeSelect(context, selectedIDs) {
         context.map()
             .on('move.select', closeMenu)
             .on('drawn.select', selectElements)
-            .on('crossEditableZoom.select', selectElements);
+            .on('crossEditableZoom.select', function() {
+                selectElements();
+                breatheBehavior.restartIfNeeded(context.surface());
+            });
 
         context.surface()
             .on('dblclick.select', dblclick);
@@ -421,7 +424,7 @@ export function modeSelect(context, selectedIDs) {
             }
 
             if (context.map().withinEditableZoom()) {
-                // Only apply selection styling if not in wide selection
+                // Apply selection styling if not in wide selection
 
                 surface
                     .selectAll(utilDeepMemberSelector(selectedIDs, context.graph()))
@@ -429,15 +432,6 @@ export function modeSelect(context, selectedIDs) {
                 surface
                     .selectAll(utilEntityOrDeepMemberSelector(selectedIDs, context.graph()))
                     .classed('selected', true);
-
-                if (!breatheBehavior.isInstalled()) {
-                    context.install(breatheBehavior);
-                }
-
-            } else {
-                if (breatheBehavior.isInstalled()) {
-                    context.uninstall(breatheBehavior);
-                }
             }
 
         }
