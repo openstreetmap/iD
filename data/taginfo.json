@@ -945,6 +945,7 @@
     {"key": "railway", "value": "switch", "description": "🄿 Railway Switch", "object_types": ["node"], "icon_url": "https://cdn.jsdelivr.net/gh/ideditor/temaki/icons/junction.svg"},
     {"key": "railway", "value": "wash", "description": "🄿 Train Wash", "object_types": ["node", "area"], "icon_url": "https://cdn.jsdelivr.net/gh/mapbox/maki/icons/rail-15.svg"},
     {"key": "railway", "value": "tram", "description": "🄿 Tram", "object_types": ["way"], "icon_url": "https://cdn.jsdelivr.net/gh/ideditor/temaki/icons/tram.svg"},
+    {"key": "railway", "value": "yard", "description": "🄿 Rail Yard", "object_types": ["node"], "icon_url": "https://cdn.jsdelivr.net/gh/mapbox/maki/icons/rail-15.svg"},
     {"key": "route", "value": "ferry", "description": "🄿 Ferry Route", "object_types": ["way"], "icon_url": "https://cdn.jsdelivr.net/gh/mapbox/maki/icons/ferry-15.svg"},
     {"key": "seamark:type", "value": "beacon_isolated_danger", "description": "🄿 Danger Beacon", "object_types": ["node"]},
     {"key": "seamark:type", "value": "beacon_lateral", "description": "🄿 Channel Beacon", "object_types": ["node"]},

@@ -8825,6 +8825,10 @@
                     "name": "Tram",
                     "terms": "light rail,streetcar,tram,trolley"
                 },
+                "railway/yard": {
+                    "name": "Rail Yard",
+                    "terms": "freight car stop,freight train station,rail freight station,railroad yard,railway yard"
+                },
                 "relation": {
                     "name": "Relation",
                     "terms": ""
