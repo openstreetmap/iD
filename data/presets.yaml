@@ -7224,6 +7224,11 @@ en:
       railway/tram_stop:
         # railway=tram_stop
         name: Tram Stopping Position
+      railway/yard:
+        # railway=yard
+        name: Rail Yard
+        # 'terms: freight car stop,freight train station,rail freight station,railroad yard,railway yard'
+        terms: '<translate with synonyms or related terms for ''Rail Yard'', separated by commas>'
       relation:
         name: Relation
         terms: '<translate with synonyms or related terms for ''Relation'', separated by commas>'
