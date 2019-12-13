@@ -18,8 +18,8 @@
         "wheelchair"
     ],
     "geometry": [
-        "area",
-        "point"
+        "point",
+        "area"
     ],
     "tags": {
         "amenity": "crematorium"

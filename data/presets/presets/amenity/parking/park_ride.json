@@ -1,9 +1,9 @@
 {
     "icon": "temaki-sign_and_car",
     "geometry": [
+        "area",
         "point",
-        "vertex",
-        "area"
+        "vertex"
     ],
     "tags": {
         "amenity": "parking",

@@ -3,9 +3,9 @@
         "capacity"
     ],
     "geometry": [
+        "area",
         "point",
-        "vertex",
-        "area"
+        "vertex"
     ],
     "terms": [],
     "tags": {

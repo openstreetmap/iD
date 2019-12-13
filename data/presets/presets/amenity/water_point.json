@@ -15,9 +15,9 @@
         "ref"
     ],
     "geometry": [
-        "area",
+        "point",
         "vertex",
-        "point"
+        "area"
     ],
     "tags": {
         "amenity": "water_point"

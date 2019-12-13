@@ -7,8 +7,8 @@
         "{amenity/college}"
     ],
     "geometry": [
-        "point",
-        "area"
+        "area",
+        "point"
     ],
     "terms": [
         "college",

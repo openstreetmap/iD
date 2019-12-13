@@ -27,9 +27,9 @@
         "wheelchair"
     ],
     "geometry": [
+        "area",
         "point",
-        "vertex",
-        "area"
+        "vertex"
     ],
     "tags": {
         "amenity": "parking"

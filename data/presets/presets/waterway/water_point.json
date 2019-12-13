@@ -7,9 +7,9 @@
         "{amenity/water_point}"
     ],
     "geometry": [
-        "area",
+        "point",
         "vertex",
-        "point"
+        "area"
     ],
     "tags": {
         "waterway": "water_point"

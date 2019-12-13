@@ -16,8 +16,8 @@
         "operator"
     ],
     "geometry": [
-        "point",
-        "area"
+        "area",
+        "point"
     ],
     "terms": [
         "dive",

@@ -8,9 +8,9 @@
         "opening_hours"
     ],
     "geometry": [
-        "area",
+        "point",
         "vertex",
-        "point"
+        "area"
     ],
     "tags": {
         "amenity": "watering_place"
