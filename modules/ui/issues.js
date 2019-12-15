@@ -614,7 +614,7 @@ export function uiIssues(context) {
             .attr('class', 'square-degrees-input')
             .call(utilNoAuto)
             .on('input', function() {
-                this.style.width = (this.value.length + 2.5) + 'ch';   // resize
+                this.style.width = (this.value.length + 4.5) + 'ch';   // resize
             })
             .on('click', function () {
                 d3_event.preventDefault();
