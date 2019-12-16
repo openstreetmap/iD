@@ -75,6 +75,7 @@ export function uiToolSearchAdd(context) {
                 .placement('bottom')
                 .html(true)
                 .title(function() { return uiTooltipHtml(t('modes.add_feature.description'), key); })
+                .scrollContainer(d3_select('#bar'))
             );
 
         search = searchWrap

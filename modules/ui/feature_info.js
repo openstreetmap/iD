@@ -27,16 +27,15 @@ export function uiFeatureInfo(context) {
                     return uiTooltipHtml(hiddenList.join('<br/>'));
                 });
 
-            var warning = selection.append('a')
+            selection.append('a')
                 .attr('class', 'chip')
                 .attr('href', '#')
                 .attr('tabindex', -1)
                 .html(t('feature_info.hidden_warning', { count: count }))
                 .call(tooltipBehavior)
                 .on('click', function() {
+                    tooltipBehavior.hide();
                     d3_event.preventDefault();
-
-                    tooltipBehavior.hide(warning);
                     // open the Map Data pane
                     context.ui().togglePanes(d3_select('.map-panes .map-data-pane'));
                 });

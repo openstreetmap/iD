@@ -62,7 +62,7 @@ export function uiIntroArea(context, reveal) {
             var tooltip = reveal('button.add-area',
                 t('intro.areas.add_playground', { button: icon('#iD-icon-area', 'pre-text') }));
 
-            tooltip.selectAll('.tooltip-inner')
+            tooltip.selectAll('.popover-inner')
                 .insert('svg', 'span')
                 .attr('class', 'tooltip-illustration')
                 .append('use')

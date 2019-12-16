@@ -1,5 +1,6 @@
 
 import {
+    event as d3_event,
     select as d3_select
 } from 'd3-selection';
 
@@ -24,6 +25,14 @@ export function uiTopToolbar(context) {
     }
 
     function topToolbar(bar) {
+
+        bar.on('wheel.topToolbar', function() {
+            if (!d3_event.deltaX) {
+                // translate vertical scrolling into horizontal scrolling in case
+                // the user doesn't have an input device that can scroll horizontally
+                bar.node().scrollLeft += d3_event.deltaY;
+            }
+        });
 
         var debouncedUpdate = _debounce(update, 500, { leading: true, trailing: true });
         context.layers()

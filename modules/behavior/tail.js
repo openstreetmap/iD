@@ -24,7 +24,7 @@ export function behaviorTail() {
         container = d3_select(document.body)
             .append('div')
             .style('display', 'none')
-            .attr('class', 'tail tooltip-inner');
+            .attr('class', 'tail popover-inner');
 
         container.append('div')
             .text(_text);

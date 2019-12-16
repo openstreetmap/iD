@@ -107,7 +107,11 @@ export function uiEditMenu(context, operations) {
 
         tooltip = d3_select('#id-container')
             .append('div')
-            .attr('class', 'tooltip-inner edit-menu-tooltip');
+            .attr('class', 'popover tooltip edit-menu-tooltip');
+
+        tooltip
+            .append('div')
+            .attr('class', 'popover-inner');
 
 
         function click(operation) {
@@ -148,6 +152,7 @@ export function uiEditMenu(context, operations) {
                 .style('left', tipX + 'px')
                 .style('top', tipY + 'px')
                 .style('display', 'block')
+                .selectAll('.popover-inner')
                 .html(uiTooltipHtml(d.tooltip(), d.keys[0], d.title));
 
             // update disabled again, just in case tooltip and disabled state disagree

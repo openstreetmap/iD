@@ -80,7 +80,7 @@ export function uiRadialMenu(context, operations) {
 
         tooltip = d3_select(document.body)
             .append('div')
-            .attr('class', 'tooltip-inner radial-menu-tooltip');
+            .attr('class', 'popover-inner radial-menu-tooltip');
 
         function mousedown() {
             d3_event.stopPropagation(); // https://github.com/openstreetmap/iD/issues/1869

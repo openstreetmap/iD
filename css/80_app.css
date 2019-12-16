@@ -447,33 +447,52 @@ button[disabled].action:hover {
 
 /* Toolbar / Persistent UI Elements
 ------------------------------------------------------- */
-#bar {
-    display: flex;
-    flex-flow: row nowrap;
-    justify-content: space-between;
+#bar-wrap {
     position: absolute;
-    padding: 10px 5px 0px 5px;
     left: 0;
     top: 0;
     right: 0;
     z-index: 101;
+}
+#bar {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-between;
+    padding: 10px 0 0 0;
+    overflow-x: auto;
+    overflow-y: hidden;
+    height: 100%;
+    width: 100%;
+
+    /* hide scrollbar but allow scrolling */
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none; /* IE, Edge */
+}
+#bar::-webkit-scrollbar {
+    display: none; /* Chrome, Safari, Opera */
 }
 #bar .toolbar-item {
     display: flex;
     flex: 0 1 auto;
     flex-flow: column wrap;
     justify-content: center;
-    position: relative;
 }
 #bar .toolbar-item .item-content {
     display: flex;
     flex: 0 1 auto;
     flex-flow: row nowrap;
     justify-content: center;
-    position: relative;
     height: 40px;
     width: auto;
     margin: 0 5px;
+}
+[dir='ltr'] #bar .toolbar-item:last-child .item-content,
+[dir='rtl'] #bar .toolbar-item:first-child .item-content {
+    margin-right: 10px;
+}
+[dir='ltr'] #bar .toolbar-item:first-child .item-content,
+[dir='rtl'] #bar .toolbar-item:last-child .item-content {
+    margin-left: 10px;
 }
 #bar .toolbar-item .item-label {
     text-align: center;
@@ -1168,10 +1187,10 @@ a.hide-toggle {
 
 .preset-list-item {
     margin-bottom: 10px;
+    position: static;
 }
 
 .preset-list-button-wrap {
-    position: relative;
     height: 62px;
     display: flex;
     border: 1px solid #ccc;
@@ -3164,7 +3183,7 @@ div.full-screen > button:hover {
 
 /* make sure tooltip fits in map-control panel */
 /* if too wide, placement will be wrong the first time it displays */
-.layer-list li.best .tooltip-inner {
+.layer-list li.best .popover-inner {
     max-width: 160px;
 }
 
@@ -5215,9 +5234,11 @@ svg.mouseclick use.right {
 
 /* Tooltips
 ------------------------------------------------------- */
-.tooltip {
+.popover {
     position: absolute;
     display: none;
+}
+.tooltip {
     color: #333;
     font-size: 12px;
     white-space: initial;
@@ -5225,32 +5246,60 @@ svg.mouseclick use.right {
 .tooltip:not(.curtain-tooltip) {
     pointer-events: none;
 }
-.tooltip.in {
-    opacity: 0.95;
+.popover.in {
     z-index: 5000;
     height: auto;
     display: block;
 }
+.tooltip.in {
+    opacity: 0.95;
+}
+.popover.top {
+    margin-top: -4px;
+}
+.popover.right {
+    margin-left: 4px;
+}
+.popover.bottom {
+    margin-top: 4px;
+}
+.popover.left {
+    margin-left: -4px;
+}
+.popover.arrowed.top {
+    margin-top: -10px;
+}
+.popover.arrowed.right {
+    margin-left: 10px;
+}
+.popover.arrowed.bottom {
+    margin-top: 10px;
+}
+.popover.arrowed.left {
+    margin-left: -10px;
+}
+.bar-button .tooltip.arrowed.bottom {
+    margin-top: 20px;
+}
 .tooltip.top {
-    margin-top: -20px;
     text-align: center;
 }
 .tooltip.right {
-    margin-left: 20px;
     text-align: left;
 }
 .tooltip.bottom {
-    margin-top: 20px;
     text-align: center;
 }
 .tooltip.left {
-    margin-left: -20px;
     text-align: right;
 }
 
-.tooltip-inner {
-    display: inline-block;
-    border-radius: 3px;
+.popover-inner {
+    border-radius: inherit;
+}
+
+.tooltip .popover-inner {
+    border-radius: 4px;
     max-width: 200px;
     min-width: 80px;
     padding: 10px;
@@ -5305,41 +5354,43 @@ svg.mouseclick use.right {
     border-right-color: #fff;
     border-width: 5px 5px 5px 0;
 }
-
-.tooltip-arrow {
+.popover-arrow {
     position: absolute;
     width: 0;
     height: 0;
     border-color: transparent;
     border-style: solid;
 }
-.tooltip.top .tooltip-arrow {
+.popover.top .popover-arrow {
     bottom: -5px;
     left: 50%;
     margin-left: -5px;
     border-top-color: #fff;
     border-width: 5px 5px 0;
 }
-.tooltip.right .tooltip-arrow {
+.popover.right .popover-arrow {
     top: 50%;
     left: -5px;
     margin-top: -5px;
     border-right-color: #fff;
     border-width: 5px 5px 5px 0;
 }
-.tooltip.left .tooltip-arrow {
+.popover.left .popover-arrow {
     top: 50%;
     right: -5px;
     margin-top: -5px;
     border-left-color: #fff;
     border-width: 5px 0 5px 5px;
 }
-.tooltip.bottom .tooltip-arrow {
+.popover.bottom .popover-arrow {
     top: -5px;
     left: 50%;
     margin-left: -5px;
     border-bottom-color: #fff;
     border-width: 0 5px 5px;
+}
+.popover:not(.arrowed) .popover-arrow {
+    display: none;
 }
 
 .tooltip-heading {
@@ -5357,44 +5408,44 @@ svg.mouseclick use.right {
     margin: 10px -10px -10px -10px;
     border-radius: 0 0 3px 3px;
 }
-.tooltip-inner .shortcut {
+.popover-inner .shortcut {
     font-weight: bold;
     margin-left: 5px;
 }
 
-[dir='rtl'] .tooltip-inner .shortcut {
+[dir='rtl'] .popover-inner .shortcut {
     margin-left: 0;
     margin-right: 5px;
 }
 
 /* dark tooltips for sidebar / panels */
-.tooltip.dark.top .tooltip-arrow,
-.map-pane .tooltip.top .tooltip-arrow,
-#sidebar .tooltip.top .tooltip-arrow {
+.tooltip.dark.top .popover-arrow,
+.map-pane .tooltip.top .popover-arrow,
+#sidebar .tooltip.top .popover-arrow {
     border-top-color: #000;
 }
-.tooltip.dark.bottom .tooltip-arrow,
-.map-pane .tooltip.bottom .tooltip-arrow,
-#sidebar .tooltip.bottom .tooltip-arrow {
+.tooltip.dark.bottom .popover-arrow,
+.map-pane .tooltip.bottom .popover-arrow,
+#sidebar .tooltip.bottom .popover-arrow {
     border-bottom-color: #000;
 }
-.tooltip.dark.left .tooltip-arrow,
-.map-pane .tooltip.left .tooltip-arrow,
-#sidebar .tooltip.left .tooltip-arrow {
+.tooltip.dark.left .popover-arrow,
+.map-pane .tooltip.left .popover-arrow,
+#sidebar .tooltip.left .popover-arrow {
     border-left-color: #000;
 }
-.tooltip.dark.right .tooltip-arrow,
-.map-pane .tooltip.right .tooltip-arrow,
-#sidebar .tooltip.right .tooltip-arrow {
+.tooltip.dark.right .popover-arrow,
+.map-pane .tooltip.right .popover-arrow,
+#sidebar .tooltip.right .popover-arrow {
     border-right-color: #000;
 }
-.tooltip.dark .tooltip-inner,
+.tooltip.dark .popover-inner,
 .tooltip.dark .tooltip-heading,
 .tooltip.dark .keyhint-wrap,
-.map-pane .tooltip-inner,
+.map-pane .popover-inner,
 .map-pane .tooltip-heading,
 .map-pane .keyhint-wrap,
-#sidebar .tooltip-inner,
+#sidebar .popover-inner,
 #sidebar .tooltip-heading,
 #sidebar .keyhint-wrap {
     background: #000;
@@ -5417,44 +5468,6 @@ svg.mouseclick use.right {
     margin-top: -5px;
 }
 
-/* Uncramp map-control tooltips */
-.map-control .tooltip {
-    min-width: 160px;
-}
-.map-control .shortcuts .tooltip {
-    max-width: 160px;
-}
-
-/* Move over tooltips that are near the edge of screen */
-[dir='ltr'] .sidebar-toggle .tooltip {
-    left: 0 !important;
-}
-[dir='rtl'] .sidebar-toggle .tooltip {
-    right: 0 !important;
-}
-[dir='ltr'] .sidebar-toggle .tooltip .tooltip-arrow {
-    left: 20px;
-}
-[dir='rtl'] .sidebar-toggle .tooltip .tooltip-arrow {
-    right: 20px;
-}
-[dir='ltr'] .save .tooltip {
-    left: auto !important;
-    right: 0 !important;
-}
-[dir='rtl'] .save .tooltip {
-    right: auto !important;
-    left: 0 !important;
-}
-[dir='ltr'] .save .tooltip .tooltip-arrow {
-    left: auto;
-    right: 36px;
-}
-[dir='rtl'] .save .tooltip .tooltip-arrow {
-    right: auto;
-    left: 36px;
-}
-
 li:first-of-type .badge .tooltip,
 li.hide + li.version .badge .tooltip {
     left: auto !important;
@@ -5465,13 +5478,13 @@ li.hide + li.version .badge .tooltip {
     left: 5px !important;
     right: auto !important;
 }
-li:first-of-type .badge .tooltip .tooltip-arrow,
-li.hide + li.version .badge .tooltip .tooltip-arrow {
+li:first-of-type .badge .tooltip .popover-arrow,
+li.hide + li.version .badge .tooltip .popover-arrow {
     right: 15px !important;
     left: auto !important;
 }
-[dir='rtl'] li:first-of-type .badge .tooltip .tooltip-arrow,
-[dir='rtl'] li.hide + li.version .badge .tooltip .tooltip-arrow {
+[dir='rtl'] li:first-of-type .badge .tooltip .popover-arrow,
+[dir='rtl'] li.hide + li.version .badge .tooltip .popover-arrow {
     left: 15px !important;
     right: auto !important;
 }
@@ -5520,8 +5533,6 @@ li.hide + li.version .badge .tooltip .tooltip-arrow {
 /* Contextual Edit Menu
 ------------------------------------------------------- */
 .edit-menu-tooltip {
-    display: none;
-    position: absolute;
     width: 200px;
 }
 
@@ -5671,14 +5682,14 @@ li.hide + li.version .badge .tooltip .tooltip-arrow {
     text-align: right;
 }
 
-.curtain-tooltip .tooltip-inner {
+.curtain-tooltip .popover-inner {
     font-size: 15px;
     position: relative;
     padding: 20px;
 }
 
-.curtain-tooltip .tooltip-inner .button-section,
-.curtain-tooltip .tooltip-inner .instruction {
+.curtain-tooltip .popover-inner .button-section,
+.curtain-tooltip .popover-inner .instruction {
     font-weight: bold;
     display: block;
     border-top: 1px solid #ccc;
@@ -5688,17 +5699,17 @@ li.hide + li.version .badge .tooltip .tooltip-arrow {
     padding: 10px 20px 0 20px;
 }
 
-.curtain-tooltip .tooltip-inner .button-section button {
+.curtain-tooltip .popover-inner .button-section button {
     width: 66.6666%;
 }
 
-.curtain-tooltip .tooltip-inner .instruction:only-child {
+.curtain-tooltip .popover-inner .instruction:only-child {
     border: 0;
     padding: 0;
     margin: 0;
 }
 
-.curtain-tooltip .tooltip-inner .icon.pre-text {
+.curtain-tooltip .popover-inner .icon.pre-text {
     vertical-align: text-top;
     margin-right: 0;
     margin-left: 0;

@@ -18,7 +18,7 @@ import { tooltip } from '../util/tooltip';
 export function uiBackground(context) {
     var key = t('background.key');
 
-    var _pane = d3_select(null), _toggleButton = d3_select(null);
+    var _pane = d3_select(null);
 
     var _customSource = context.background().findSource('custom');
     var _previousBackground = context.background().findSource(context.storage('background-last-used-toggle'));
@@ -325,7 +325,7 @@ export function uiBackground(context) {
 
     uiBackground.togglePane = function() {
         if (d3_event) d3_event.preventDefault();
-        paneTooltip.hide(_toggleButton);
+        paneTooltip.hide();
         context.ui().togglePanes(!_pane.classed('shown') ? _pane : undefined);
     };
 
@@ -335,7 +335,7 @@ export function uiBackground(context) {
 
     uiBackground.renderToggleButton = function(selection) {
 
-        _toggleButton = selection
+        selection
             .append('button')
             .on('click', uiBackground.togglePane)
             .call(svgIcon('#iD-icon-layers', 'light'))

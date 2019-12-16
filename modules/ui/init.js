@@ -77,6 +77,8 @@ export function uiInit(context) {
         // Top toolbar
         content
             .append('div')
+            .attr('id', 'bar-wrap')
+            .append('div')
             .attr('id', 'bar')
             .attr('class', 'fillD')
             .call(uiTopToolbar(context));

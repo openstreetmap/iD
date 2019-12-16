@@ -204,6 +204,7 @@ export function uiToolAddRecent(context) {
                     .placement('bottom')
                     .html(true)
                     .title(function(d) { return uiTooltipHtml(d.description, d.key); })
+                    .scrollContainer(d3_select('#bar'))
                 );
 
             buttonsEnter

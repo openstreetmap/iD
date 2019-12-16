@@ -1,4 +1,4 @@
-
+import { select as d3_select } from 'd3-selection';
 import { t, textDirection } from '../../util/locale';
 import { svgIcon } from '../../svg';
 import { uiTooltipHtml } from '../tooltipHtml';
@@ -22,6 +22,7 @@ export function uiToolSidebarToggle(context) {
                 .placement('bottom')
                 .html(true)
                 .title(uiTooltipHtml(t('sidebar.tooltip'), t('sidebar.key')))
+                .scrollContainer(d3_select('#bar'))
             )
             .call(svgIcon('#iD-icon-sidebar-' + (textDirection === 'rtl' ? 'right' : 'left')));
     };
