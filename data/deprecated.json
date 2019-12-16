@@ -802,6 +802,14 @@
       "replace": {"public_transport": "station", "aerialway": "station"}
     },
     {
+      "old": {"railway": "*", "abandoned": "yes"},
+      "replace": {"abandoned:railway": "yes"}
+    },
+    {
+      "old": {"railway": "*", "disused": "yes"},
+      "replace": {"disused:railway": "yes"}
+    },
+    {
       "old": {"railway": "station"},
       "replace": {"railway": "station", "public_transport": "station"}
     },
