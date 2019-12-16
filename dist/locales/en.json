@@ -284,7 +284,7 @@
                 },
                 "too_large": {
                     "single": "This can't be made square because not enough of it is currently visible.",
-                    "multiple": "These can't be made square because not enought of them are currently visible."
+                    "multiple": "These can't be made square because not enough of them are currently visible."
                 },
                 "connected_to_hidden": {
                     "single": "This can't be made square because it is connected to a hidden feature.",
@@ -3264,6 +3264,9 @@
                 "distance": {
                     "label": "Distance"
                 },
+                "disused/railway": {
+                    "label": "Type"
+                },
                 "dock": {
                     "label": "Type"
                 },
@@ -4928,22 +4931,22 @@
                     "name": "Ford"
                 },
                 "highway": {
-                    "name": "Highway"
+                    "name": "Highway Feature"
                 },
                 "indoor": {
                     "name": "Indoor Feature"
                 },
                 "landuse": {
-                    "name": "Land Use"
+                    "name": "Land Use Feature"
                 },
                 "leisure": {
-                    "name": "Leisure"
+                    "name": "Leisure Feature"
                 },
                 "man_made": {
-                    "name": "Man Made"
+                    "name": "Man Made Feature"
                 },
                 "natural": {
-                    "name": "Natural"
+                    "name": "Natural Feature"
                 },
                 "place": {
                     "name": "Place"
@@ -4952,19 +4955,19 @@
                     "name": "Playground Equipment"
                 },
                 "power": {
-                    "name": "Power"
+                    "name": "Power Feature"
                 },
                 "railway": {
-                    "name": "Railway"
+                    "name": "Railway Feature"
                 },
                 "seamark": {
                     "name": "Seamark"
                 },
                 "tourism": {
-                    "name": "Tourism"
+                    "name": "Tourism Feature"
                 },
                 "waterway": {
-                    "name": "Waterway"
+                    "name": "Waterway Feature"
                 },
                 "addr/interpolation": {
                     "name": "Address Interpolation"
@@ -5403,7 +5406,7 @@
                     "name": "Internet Cafe",
                     "terms": "cybercafe,taxiphone,teleboutique,coffee,cafe,net,lanhouse"
                 },
-                "amenity/karaoke": {
+                "amenity/karaoke_box": {
                     "name": "Karaoke Box",
                     "terms": "karaoke club,karaoke room,karaoke television,KTV"
                 },
@@ -6599,6 +6602,9 @@
                 },
                 "demolished/building": {
                     "name": "Recently Demolished Building"
+                },
+                "disused/railway": {
+                    "name": "Disused Railway Feature"
                 },
                 "emergency/designated": {
                     "name": "Emergency Access Designated"

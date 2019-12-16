@@ -1,8 +1,6 @@
 {
-    "icon": "maki-pitch",
     "fields": [
-        "name",
-        "leisure"
+        "disused/railway"
     ],
     "geometry": [
         "point",
@@ -11,8 +9,9 @@
         "area"
     ],
     "tags": {
-        "leisure": "*"
+        "disused:railway": "*"
     },
+    "matchScore": 0.05,
     "searchable": false,
-    "name": "Leisure Feature"
+    "name": "Disused Railway Feature"
 }
