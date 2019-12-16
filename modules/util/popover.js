@@ -201,6 +201,9 @@ export function popover(klass) {
         if (_content) popoverSelection.selectAll('.popover-inner').call(_content.apply(this, arguments));
 
         updatePosition.apply(this, arguments);
+        // hack: update twice to fix instances where the absolute offset is
+        // set before the dynamic popover size is calculated by the browser
+        updatePosition.apply(this, arguments);
     }
 
 
