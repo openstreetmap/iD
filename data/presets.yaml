@@ -3161,7 +3161,7 @@ en:
         name: Internet Cafe
         # 'terms: cybercafe,taxiphone,teleboutique,coffee,cafe,net,lanhouse'
         terms: '<translate with synonyms or related terms for ''Internet Cafe'', separated by commas>'
-      amenity/karaoke:
+      amenity/karaoke_box:
         # amenity=karaoke_box
         name: Karaoke Box
         # 'terms: karaoke club,karaoke room,karaoke television,KTV'

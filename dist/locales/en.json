@@ -5296,7 +5296,7 @@
                     "name": "Internet Cafe",
                     "terms": "cybercafe,taxiphone,teleboutique,coffee,cafe,net,lanhouse"
                 },
-                "amenity/karaoke": {
+                "amenity/karaoke_box": {
                     "name": "Karaoke Box",
                     "terms": "karaoke club,karaoke room,karaoke television,KTV"
                 },
