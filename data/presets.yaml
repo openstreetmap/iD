@@ -702,6 +702,9 @@ en:
       distance:
         # distance=*
         label: Distance
+      disused/railway:
+        # 'disused:railway=*'
+        label: Type
       dock:
         # dock=*
         label: Type
@@ -4568,6 +4571,9 @@ en:
       demolished/building:
         # 'demolished:building=*'
         name: Recently Demolished Building
+      disused/railway:
+        # 'disused:railway=*'
+        name: Disused Railway Feature
       embankment:
         # embankment=yes
         name: Embankment

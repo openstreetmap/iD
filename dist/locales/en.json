@@ -3154,6 +3154,9 @@
                 "distance": {
                     "label": "Distance"
                 },
+                "disused/railway": {
+                    "label": "Type"
+                },
                 "dock": {
                     "label": "Type"
                 },
@@ -6489,6 +6492,9 @@
                 },
                 "demolished/building": {
                     "name": "Recently Demolished Building"
+                },
+                "disused/railway": {
+                    "name": "Disused Railway Feature"
                 },
                 "emergency/designated": {
                     "name": "Emergency Access Designated"
