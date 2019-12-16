@@ -85,7 +85,7 @@ export function uiIntroBuilding(context, reveal) {
             var tooltip = reveal('button.add-area',
                 t('intro.buildings.add_building', { button: icon('#iD-icon-area', 'pre-text') }));
 
-            tooltip.selectAll('.tooltip-inner')
+            tooltip.selectAll('.popover-inner')
                 .insert('svg', 'span')
                 .attr('class', 'tooltip-illustration')
                 .append('use')

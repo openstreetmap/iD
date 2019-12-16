@@ -69,7 +69,7 @@ export function uiIntroPoint(context, reveal) {
 
             _pointID = null;
 
-            tooltip.selectAll('.tooltip-inner')
+            tooltip.selectAll('.popover-inner')
                 .insert('svg', 'span')
                 .attr('class', 'tooltip-illustration')
                 .append('use')
