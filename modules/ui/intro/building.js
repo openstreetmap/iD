@@ -402,7 +402,7 @@ export function uiIntroBuilding(context, reveal) {
 
             // Something changed.  Wait for transition to complete and check undo annotation.
             timeout(function() {
-                if (context.history().undoAnnotation() === t('operations.orthogonalize.annotation.area')) {
+                if (context.history().undoAnnotation() === t('operations.orthogonalize.annotation.feature.single')) {
                     continueTo(doneSquare);
                 } else {
                     continueTo(retryClickSquare);
