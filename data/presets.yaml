@@ -4792,7 +4792,7 @@ en:
         terms: '<translate with synonyms or related terms for ''Speech Therapist'', separated by commas>'
       highway:
         # highway=*
-        name: Highway
+        name: Highway Feature
       highway/bridleway:
         # highway=bridleway
         name: Bridle Path
@@ -5276,7 +5276,7 @@ en:
         terms: '<translate with synonyms or related terms for ''Junction'', separated by commas>'
       landuse:
         # landuse=*
-        name: Land Use
+        name: Land Use Feature
       landuse/allotments:
         # landuse=allotments
         name: Community Garden
@@ -5479,7 +5479,7 @@ en:
         terms: '<translate with synonyms or related terms for ''Winter Sports Area'', separated by commas>'
       leisure:
         # leisure=*
-        name: Leisure
+        name: Leisure Feature
       leisure/adult_gaming_centre:
         # leisure=adult_gaming_centre
         name: Adult Gaming Center
@@ -5888,7 +5888,7 @@ en:
         terms: '<translate with synonyms or related terms for ''Line'', separated by commas>'
       man_made:
         # man_made=*
-        name: Man Made
+        name: Man Made Feature
       man_made/adit:
         # man_made=adit
         name: Adit
@@ -6244,7 +6244,7 @@ en:
         terms: '<translate with synonyms or related terms for ''Military Trench'', separated by commas>'
       natural:
         # natural=*
-        name: Natural
+        name: Natural Feature
       natural/bare_rock:
         # natural=bare_rock
         name: Bare Rock
@@ -6843,7 +6843,7 @@ en:
         terms: '<translate with synonyms or related terms for ''Temporary Polling Place'', separated by commas>'
       power:
         # power=*
-        name: Power
+        name: Power Feature
       power/cable/underground:
         # 'power=cable, location=underground'
         name: Underground Power Cable
@@ -7110,7 +7110,7 @@ en:
         terms: '<translate with synonyms or related terms for ''Trolleybus Stopping Location'', separated by commas>'
       railway:
         # railway=*
-        name: Railway
+        name: Railway Feature
       railway/abandoned:
         # railway=abandoned
         name: Abandoned Railway
@@ -8020,7 +8020,7 @@ en:
         terms: '<translate with synonyms or related terms for ''Data Center'', separated by commas>'
       tourism:
         # tourism=*
-        name: Tourism
+        name: Tourism Feature
       tourism/alpine_hut:
         # tourism=alpine_hut
         name: Alpine Hut
@@ -8414,7 +8414,7 @@ en:
         terms: '<translate with synonyms or related terms for ''Waterway'', separated by commas>'
       waterway:
         # waterway=*
-        name: Waterway
+        name: Waterway Feature
       waterway/boatyard:
         # waterway=boatyard
         name: Boatyard

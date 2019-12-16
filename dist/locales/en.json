@@ -4818,22 +4818,22 @@
                     "name": "Ford"
                 },
                 "highway": {
-                    "name": "Highway"
+                    "name": "Highway Feature"
                 },
                 "indoor": {
                     "name": "Indoor Feature"
                 },
                 "landuse": {
-                    "name": "Land Use"
+                    "name": "Land Use Feature"
                 },
                 "leisure": {
-                    "name": "Leisure"
+                    "name": "Leisure Feature"
                 },
                 "man_made": {
-                    "name": "Man Made"
+                    "name": "Man Made Feature"
                 },
                 "natural": {
-                    "name": "Natural"
+                    "name": "Natural Feature"
                 },
                 "place": {
                     "name": "Place"
@@ -4842,19 +4842,19 @@
                     "name": "Playground Equipment"
                 },
                 "power": {
-                    "name": "Power"
+                    "name": "Power Feature"
                 },
                 "railway": {
-                    "name": "Railway"
+                    "name": "Railway Feature"
                 },
                 "seamark": {
                     "name": "Seamark"
                 },
                 "tourism": {
-                    "name": "Tourism"
+                    "name": "Tourism Feature"
                 },
                 "waterway": {
-                    "name": "Waterway"
+                    "name": "Waterway Feature"
                 },
                 "addr/interpolation": {
                     "name": "Address Interpolation"
