@@ -141,8 +141,8 @@ export function popover(klass) {
             popoverSelection.classed('fade', true);
         }
 
-        var place = _placement.apply(this, arguments);
-        popoverSelection.classed(place, true);
+        var placement = _placement.apply(this, arguments);
+        popoverSelection.classed(placement, true);
 
         var display = _displayType.apply(this, arguments);
 
@@ -214,7 +214,7 @@ export function popover(klass) {
         var scrollLeft = scrollNode ? scrollNode.scrollLeft : 0;
         var scrollTop = scrollNode ? scrollNode.scrollTop : 0;
 
-        var place = _placement.apply(this, arguments);
+        var placement = _placement.apply(this, arguments);
         var alignment = _alignment.apply(this, arguments);
         var alignFactor = 0.5;
         if (alignment === 'leading') {
@@ -222,61 +222,61 @@ export function popover(klass) {
         } else if (alignment === 'trailing') {
             alignFactor = 1;
         }
-        var outer = getPosition(anchor.node());
-        var inner = getPosition(popoverSelection.node());
-        var pos;
+        var anchorFrame = getFrame(anchor.node());
+        var popoverFrame = getFrame(popoverSelection.node());
+        var position;
 
-        switch (place) {
+        switch (placement) {
             case 'top':
-            pos = {
-                x: outer.x + (outer.w - inner.w) * alignFactor,
-                y: outer.y - inner.h
+            position = {
+                x: anchorFrame.x + (anchorFrame.w - popoverFrame.w) * alignFactor,
+                y: anchorFrame.y - popoverFrame.h
             };
             break;
             case 'bottom':
-            pos = {
-                x: outer.x + (outer.w - inner.w) * alignFactor,
-                y: outer.y + outer.h
+            position = {
+                x: anchorFrame.x + (anchorFrame.w - popoverFrame.w) * alignFactor,
+                y: anchorFrame.y + anchorFrame.h
             };
             break;
             case 'left':
-            pos = {
-                x: outer.x - inner.w,
-                y: outer.y + (outer.h - inner.h) * alignFactor
+            position = {
+                x: anchorFrame.x - popoverFrame.w,
+                y: anchorFrame.y + (anchorFrame.h - popoverFrame.h) * alignFactor
             };
             break;
             case 'right':
-            pos = {
-                x: outer.x + outer.w,
-                y: outer.y + (outer.h - inner.h) * alignFactor
+            position = {
+                x: anchorFrame.x + anchorFrame.w,
+                y: anchorFrame.y + (anchorFrame.h - popoverFrame.h) * alignFactor
             };
             break;
         }
 
-        if (pos) {
+        if (position) {
 
-            if (scrollNode && (place === 'top' || place === 'bottom')) {
+            if (scrollNode && (placement === 'top' || placement === 'bottom')) {
 
-                var initialPosX = pos.x;
+                var initialPosX = position.x;
 
-                if (pos.x + inner.w > scrollNode.offsetWidth - 10) {
-                    pos.x = scrollNode.offsetWidth - 10 - inner.w;
-                } else if (pos.x < 10) {
-                    pos.x = 10;
+                if (position.x + popoverFrame.w > scrollNode.offsetWidth - 10) {
+                    position.x = scrollNode.offsetWidth - 10 - popoverFrame.w;
+                } else if (position.x < 10) {
+                    position.x = 10;
                 }
 
                 var arrow = popoverSelection.selectAll('.popover-arrow');
                 // keep the arrow centered on the button, or as close as possible
-                var arrowPosX = Math.min(Math.max(inner.w / 2 - (pos.x - initialPosX), 10), inner.w - 10);
+                var arrowPosX = Math.min(Math.max(popoverFrame.w / 2 - (position.x - initialPosX), 10), popoverFrame.w - 10);
                 arrow.style('left', ~~arrowPosX + 'px');
             }
 
-            popoverSelection.style('left', ~~pos.x + 'px').style('top', ~~pos.y + 'px');
+            popoverSelection.style('left', ~~position.x + 'px').style('top', ~~position.y + 'px');
         } else {
             popoverSelection.style('left', null).style('top', null);
         }
 
-        function getPosition(node) {
+        function getFrame(node) {
             var positionStyle = d3_select(node).style('position');
             if (positionStyle === 'absolute' || positionStyle === 'static') {
                 return {
