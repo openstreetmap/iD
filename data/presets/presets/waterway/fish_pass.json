@@ -1,0 +1,35 @@
+{
+    "icon": "temaki-fish_ladder",
+    "fields": [
+        "name",
+        "structure_waterway",
+        "width",
+        "seasonal"
+    ],
+    "moreFields": [
+        "covered",
+        "gnis/feature_id",
+        "salt"
+    ],
+    "geometry": [
+        "line"
+    ],
+    "terms": [
+        "eel ladder",
+        "eel pass",
+        "fish ladder",
+        "fish migration",
+        "fish passage",
+        "fish siphon",
+        "fish steps",
+        "fish way",
+        "fishladder",
+        "fishpass",
+        "fishsteps",
+        "fishway"
+    ],
+    "tags": {
+        "waterway": "fish_pass"
+    },
+    "name": "Fish Pass"
+}

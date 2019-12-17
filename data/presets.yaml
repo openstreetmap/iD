@@ -8450,6 +8450,11 @@ en:
         # waterway=drain
         name: Drain
         terms: '<translate with synonyms or related terms for ''Drain'', separated by commas>'
+      waterway/fish_pass:
+        # waterway=fish_pass
+        name: Fish Pass
+        # 'terms: eel ladder,eel pass,fish ladder,fish migration,fish passage,fish siphon,fish steps,fish way,fishladder,fishpass,fishsteps,fishway'
+        terms: '<translate with synonyms or related terms for ''Fish Pass'', separated by commas>'
       waterway/fuel:
         # waterway=fuel
         name: Marine Fuel Station

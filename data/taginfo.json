@@ -1204,6 +1204,7 @@
     {"key": "waterway", "value": "ditch", "description": "🄿 Ditch", "object_types": ["way"], "icon_url": "https://cdn.jsdelivr.net/gh/openstreetmap/iD@master/svg/iD-sprite/presets/waterway-ditch.svg"},
     {"key": "waterway", "value": "dock", "description": "🄿 Wet Dock / Dry Dock", "object_types": ["area", "node"], "icon_url": "https://cdn.jsdelivr.net/gh/mapbox/maki/icons/harbor-15.svg"},
     {"key": "waterway", "value": "drain", "description": "🄿 Drain", "object_types": ["way"], "icon_url": "https://cdn.jsdelivr.net/gh/openstreetmap/iD@master/svg/iD-sprite/presets/waterway-ditch.svg"},
+    {"key": "waterway", "value": "fish_pass", "description": "🄿 Fish Pass", "object_types": ["way"], "icon_url": "https://cdn.jsdelivr.net/gh/ideditor/temaki/icons/fish_ladder.svg"},
     {"key": "waterway", "value": "fuel", "description": "🄿 Marine Fuel Station", "object_types": ["node", "area"], "icon_url": "https://cdn.jsdelivr.net/gh/mapbox/maki/icons/fuel-15.svg"},
     {"key": "waterway", "value": "lock_gate", "description": "🄿 Lock Gate", "object_types": ["node", "way"], "icon_url": "https://cdn.jsdelivr.net/gh/mapbox/maki/icons/dam-15.svg"},
     {"key": "waterway", "value": "milestone", "description": "🄿 Waterway Milestone", "object_types": ["node"], "icon_url": "https://cdn.jsdelivr.net/gh/ideditor/temaki/icons/milestone.svg"},
