@@ -23,5 +23,11 @@
     "tags": {
         "amenity": "car_pooling"
     },
-    "name": "Car Pooling"
+    "terms": [
+        "car sharing",
+        "carpooling",
+        "lift sharing",
+        "ride sharing"
+    ],
+    "name": "Car Pooling Station"
 }

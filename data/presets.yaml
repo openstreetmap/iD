@@ -2921,16 +2921,17 @@ en:
         terms: '<translate with synonyms or related terms for ''Cafe'', separated by commas>'
       amenity/car_pooling:
         # amenity=car_pooling
-        name: Car Pooling
-        terms: '<translate with synonyms or related terms for ''Car Pooling'', separated by commas>'
+        name: Car Pooling Station
+        # 'terms: car sharing,carpooling,lift sharing,ride sharing'
+        terms: '<translate with synonyms or related terms for ''Car Pooling Station'', separated by commas>'
       amenity/car_rental:
         # amenity=car_rental
         name: Car Rental
         terms: '<translate with synonyms or related terms for ''Car Rental'', separated by commas>'
       amenity/car_sharing:
         # amenity=car_sharing
-        name: Car Sharing
-        terms: '<translate with synonyms or related terms for ''Car Sharing'', separated by commas>'
+        name: Car Sharing Station
+        terms: '<translate with synonyms or related terms for ''Car Sharing Station'', separated by commas>'
       amenity/car_wash:
         # amenity=car_wash
         name: Car Wash
