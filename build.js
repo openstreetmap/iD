@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 const buildData = require('./build_data');
 const buildSrc = require('./build_src');
 const buildCSS = require('./build_css');
