@@ -9902,6 +9902,10 @@
                     "name": "Drain",
                     "terms": ""
                 },
+                "waterway/fish_pass": {
+                    "name": "Fish Pass",
+                    "terms": "eel ladder,eel pass,fish ladder,fish migration,fish passage,fish siphon,fish steps,fish way,fishladder,fishpass,fishsteps,fishway"
+                },
                 "waterway/fuel": {
                     "name": "Marine Fuel Station",
                     "terms": "petrol,gas,diesel,boat"
