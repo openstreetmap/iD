@@ -5226,15 +5226,15 @@
                     "terms": "bistro,coffee,tea"
                 },
                 "amenity/car_pooling": {
-                    "name": "Car Pooling",
-                    "terms": ""
+                    "name": "Car Pooling Station",
+                    "terms": "car sharing,carpooling,lift sharing,ride sharing"
                 },
                 "amenity/car_rental": {
                     "name": "Car Rental",
                     "terms": ""
                 },
                 "amenity/car_sharing": {
-                    "name": "Car Sharing",
+                    "name": "Car Sharing Station",
                     "terms": ""
                 },
                 "amenity/car_wash": {
