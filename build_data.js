@@ -60,7 +60,8 @@ function buildData() {
     'fas-i-cursor': {},
     'fas-lock': {},
     'fas-long-arrow-alt-right': {},
-    'fas-th-list': {}
+    'fas-th-list': {},
+    'fas-user-cog': {}
   };
 
   // The Noun Project icons used

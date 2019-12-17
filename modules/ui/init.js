@@ -29,6 +29,7 @@ import { uiMapData } from './map_data';
 import { uiMapInMap } from './map_in_map';
 import { uiNotice } from './notice';
 import { uiPhotoviewer } from './photoviewer';
+import { uiPreferences } from './preferences';
 import { uiRestore } from './restore';
 import { uiScale } from './scale';
 import { uiShortcuts } from './shortcuts';
@@ -122,6 +123,12 @@ export function uiInit(context) {
             .append('div')
             .attr('class', 'map-control map-issues-control')
             .call(issues.renderToggleButton);
+
+        var preferences = uiPreferences(context);
+        controls
+            .append('div')
+            .attr('class', 'map-control preferences-control')
+            .call(preferences.renderToggleButton);
 
         var help = uiHelp(context);
         controls
@@ -249,6 +256,7 @@ export function uiInit(context) {
             .call(background.renderPane)
             .call(mapData.renderPane)
             .call(issues.renderPane)
+            .call(preferences.renderPane)
             .call(help.renderPane);
 
         ui.info = uiInfo(context);

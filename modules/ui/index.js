@@ -48,6 +48,7 @@ export { uiNoteComments } from './note_comments';
 export { uiNoteEditor } from './note_editor';
 export { uiNoteHeader } from './note_header';
 export { uiNoteReport } from './note_report';
+export { uiPreferences } from './preferences';
 export { uiPresetEditor } from './preset_editor';
 export { uiPresetIcon } from './preset_icon';
 export { uiPresetList } from './preset_list';
