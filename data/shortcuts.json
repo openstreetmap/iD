@@ -54,6 +54,10 @@
               "text": "shortcuts.browsing.display_options.issues"
             },
             {
+              "shortcuts": ["preferences.key"],
+              "text": "shortcuts.browsing.display_options.preferences"
+            },
+            {
               "modifiers": ["⌃", "⌘"],
               "shortcuts": ["F", "F11"],
               "text": "shortcuts.browsing.display_options.fullscreen"

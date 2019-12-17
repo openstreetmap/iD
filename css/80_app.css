@@ -3673,22 +3673,18 @@ div.full-screen > button:hover {
 
 /* Background / Map Data / Help Pane buttons
 ------------------------------------------------------- */
-.help-control > button {
-    border-radius: 0 0 0 4px;
-}
-[dir='rtl'] .help-control > button {
-    border-radius: 0 0 4px 0;
-}
-
-.map-data-control button {
-    border-radius: 0;
-}
-
 .background-control > button {
     border-radius: 4px 0 0 0;
 }
 [dir='rtl'] .background-control > button {
     border-radius: 0 4px 0 0;
+}
+
+.help-control > button {
+    border-radius: 0 0 0 4px;
+}
+[dir='rtl'] .help-control > button {
+    border-radius: 0 0 4px 0;
 }
 
 

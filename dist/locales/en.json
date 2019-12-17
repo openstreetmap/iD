@@ -978,6 +978,19 @@
                 }
             }
         },
+        "preferences": {
+            "title": "Preferences",
+            "description": "Preferences",
+            "key": "P",
+            "privacy": {
+                "title": "Privacy",
+                "privacy_link": "View the iD privacy policy",
+                "third_party_icons": {
+                    "description": "Show Third Party Preset Icons",
+                    "tooltip": "Uncheck this box to avoid loading preset icons from third party sites such as Wikimedia Commons, Facebook, or Twitter."
+                }
+            }
+        },
         "save": {
             "title": "Save",
             "help": "Review your changes and upload them to OpenStreetMap, making them visible to other users.",
@@ -2445,6 +2458,7 @@
                     "background_switch": "Switch back to last background",
                     "map_data": "Toggle map data pane",
                     "issues": "Toggle validation issues pane",
+                    "preferences": "Toggle user preferences pane",
                     "fullscreen": "Enter full screen mode",
                     "sidebar": "Toggle sidebar",
                     "wireframe": "Toggle wireframe mode",
