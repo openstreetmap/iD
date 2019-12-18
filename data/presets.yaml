@@ -2714,9 +2714,9 @@ en:
         terms: '<translate with synonyms or related terms for ''Goods Aerialway'', separated by commas>'
       aerialway/j-bar:
         # aerialway=j-bar
-        name: J-bar Lift
+        name: J-Bar Lift
         # 'terms: jbar'
-        terms: '<translate with synonyms or related terms for ''J-bar Lift'', separated by commas>'
+        terms: '<translate with synonyms or related terms for ''J-Bar Lift'', separated by commas>'
       aerialway/magic_carpet:
         # aerialway=magic_carpet
         name: Magic Carpet Lift

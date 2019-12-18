@@ -34,7 +34,7 @@
     "aerialway/drag_lift": {"geometry": ["line"], "fields": ["name", "aerialway/capacity", "aerialway/duration"], "tags": {"aerialway": "drag_lift"}, "name": "Drag Lift"},
     "aerialway/gondola": {"icon": "maki-aerialway", "geometry": ["line"], "fields": ["name", "oneway", "aerialway/occupancy", "aerialway/capacity", "aerialway/duration", "aerialway/bubble", "aerialway/heating"], "tags": {"aerialway": "gondola"}, "name": "Gondola"},
     "aerialway/goods": {"geometry": ["line"], "fields": ["name", "aerialway/capacity", "aerialway/duration"], "tags": {"aerialway": "goods"}, "name": "Goods Aerialway"},
-    "aerialway/j-bar": {"geometry": ["line"], "fields": ["name", "aerialway/capacity", "aerialway/duration"], "terms": ["jbar"], "tags": {"aerialway": "j-bar"}, "name": "J-bar Lift"},
+    "aerialway/j-bar": {"geometry": ["line"], "fields": ["name", "aerialway/capacity", "aerialway/duration"], "terms": ["jbar"], "tags": {"aerialway": "j-bar"}, "name": "J-Bar Lift"},
     "aerialway/magic_carpet": {"geometry": ["line"], "fields": ["name", "aerialway/capacity", "aerialway/duration", "aerialway/heating"], "tags": {"aerialway": "magic_carpet"}, "name": "Magic Carpet Lift"},
     "aerialway/mixed_lift": {"geometry": ["line"], "fields": ["name", "oneway_yes", "aerialway/occupancy", "aerialway/capacity", "aerialway/duration", "aerialway/bubble", "aerialway/heating"], "tags": {"aerialway": "mixed_lift"}, "name": "Mixed Lift"},
     "aerialway/platter": {"geometry": ["line"], "terms": ["button lift", "poma lift"], "fields": ["name", "aerialway/capacity", "aerialway/duration"], "tags": {"aerialway": "platter"}, "name": "Platter Lift"},
