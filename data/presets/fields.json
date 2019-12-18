@@ -98,7 +98,7 @@
     "dance/style": {"key": "dance:style", "type": "semiCombo", "label": "Dance Styles"},
     "date": {"key": "date", "type": "check", "label": "Date"},
     "delivery": {"key": "delivery", "type": "check", "label": "Delivery"},
-    "denomination": {"key": "denomination", "type": "combo", "label": "Denomination", "prerequisiteTag": {"key": "religion"}},
+    "denomination": {"key": "denomination", "type": "combo", "label": "Denomination", "prerequisiteTag": {"key": "religion", "valueNot": "none"}},
     "denotation": {"key": "denotation", "type": "combo", "label": "Denotation"},
     "departures_board": {"key": "departures_board", "type": "combo", "label": "Departures Board", "strings": {"options": {"yes": "Yes", "timetable": "Timetable", "realtime": "Realtime", "no": "None"}}},
     "description": {"key": "description", "type": "textarea", "label": "Description", "universal": true, "terms": ["summary"]},
