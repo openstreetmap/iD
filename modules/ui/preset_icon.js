@@ -247,8 +247,10 @@ export function uiPresetIcon(context) {
     if (geom === 'relation' && p.tags && ((p.tags.type === 'route' && p.tags.route && routeSegments[p.tags.route]) || p.tags.type === 'waterway')) {
       geom = 'route';
     }
+
+    const showThirdPartyIcons = context.storage('preferences.privacy.thirdpartyicons') || 'true';
     const isFallback = isSmall() && p.isFallback && p.isFallback();
-    const imageURL = p.imageURL;
+    const imageURL = (showThirdPartyIcons === 'true') && p.imageURL;
     const picon = getIcon(p, geom);
     const isMaki = picon && /^maki-/.test(picon);
     const isTemaki = picon && /^temaki-/.test(picon);
