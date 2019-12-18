@@ -3253,6 +3253,7 @@ button.autofix.action.active {
 
 input.square-degrees-input {
     padding: 2px !important; /* important needed for rtl */
+    width: 40px;
     height: unset;
     text-align: center;
     background: rgba(0,0,0,0);

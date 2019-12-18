@@ -613,9 +613,6 @@ export function uiIssues(context) {
             .attr('step', '0.5')
             .attr('class', 'square-degrees-input')
             .call(utilNoAuto)
-            .on('input', function() {
-                this.style.width = (this.value.length + 4.5) + 'ch';   // resize
-            })
             .on('click', function () {
                 d3_event.preventDefault();
                 d3_event.stopPropagation();
@@ -629,8 +626,7 @@ export function uiIssues(context) {
             })
             .on('blur', changeSquare)
             .merge(input)
-            .property('value', degStr)
-            .style('width', (degStr.length + 2.5) + 'ch');   // resize
+            .property('value', degStr);
     }
 
 
@@ -651,8 +647,7 @@ export function uiIssues(context) {
         degStr = '' + degNum;
 
         input
-            .property('value', degStr)
-            .style('width', (degStr.length + 2.5) + 'ch');   // resize
+            .property('value', degStr);
 
         context.storage('validate-square-degrees', degStr);
         context.validator().changeSquareThreshold(degNum);
