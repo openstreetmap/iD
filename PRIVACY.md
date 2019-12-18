@@ -34,3 +34,7 @@ The Name Suggestion Index is a feature in iD to aid users in consistently and ac
 
 If you believe that we hold information that would allow us to correct, amend, or delete inaccurate information about you or if you believe that information about you has been processed in violation of this privacy policy or applicable law, please email us at privacy@ideditor.org.
 
+
+### Changelog
+
+* _2019-Dec-17_ - Initial version.

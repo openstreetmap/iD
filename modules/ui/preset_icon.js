@@ -109,30 +109,25 @@ export function uiPresetIcon(context) {
     });
 
     const rVertex = 2.5;
-    const coordinates = [c1, c2];
-    for (let xIndex in coordinates) {
-      for (let yIndex in coordinates) {
-        fillEnter
-          .append('circle')
-          .attr('class', 'vertex')
-          .attr('cx', coordinates[xIndex])
-          .attr('cy', coordinates[yIndex])
-          .attr('r', rVertex);
-      }
-    }
+    [[c1, c1], [c1, c2], [c2, c2], [c2, c1]].forEach(point => {
+      fillEnter
+        .append('circle')
+        .attr('class', 'vertex')
+        .attr('cx', point[0])
+        .attr('cy', point[1])
+        .attr('r', rVertex);
+    });
 
     if (!isSmall()) {
       const rMidpoint = 1.25;
-      const midCoordinates = [[c1, w/2], [c2, w/2], [h/2, c1], [h/2, c2]];
-      for (let index in midCoordinates) {
-        const loc = midCoordinates[index];
+      [[c1, w/2], [c2, w/2], [h/2, c1], [h/2, c2]].forEach(point => {
         fillEnter
           .append('circle')
           .attr('class', 'midpoint')
-          .attr('cx', loc[0])
-          .attr('cy', loc[1])
+          .attr('cx', point[0])
+          .attr('cy', point[1])
           .attr('r', rMidpoint);
-      }
+      });
     }
   }
 
@@ -162,12 +157,12 @@ export function uiPresetIcon(context) {
         .attr('class', `line ${klass}`);
     });
 
-    [[x1-1, y], [x2+1, y]].forEach(loc => {
+    [[x1-1, y], [x2+1, y]].forEach(point => {
       lineEnter
         .append('circle')
         .attr('class', 'vertex')
-        .attr('cx', loc[0])
-        .attr('cy', loc[1])
+        .attr('cx', point[0])
+        .attr('cy', point[1])
         .attr('r', r);
     });
   }
@@ -209,17 +204,22 @@ export function uiPresetIcon(context) {
         .attr('class', `segment2 line ${klass}`);
     });
 
-    [[x1, y1], [x2, y2], [x3, y1], [x4, y2]].forEach(loc => {
+    [[x1, y1], [x2, y2], [x3, y1], [x4, y2]].forEach(point => {
       routeEnter
         .append('circle')
         .attr('class', 'vertex')
-        .attr('cx', loc[0])
-        .attr('cy', loc[1])
+        .attr('cx', point[0])
+        .attr('cy', point[1])
         .attr('r', r);
     });
   }
 
 
+  // Route icons are drawn with a zigzag annotation underneath:
+  //     o   o
+  //    / \ /
+  //   o   o
+  // This dataset defines the styles that are used to draw the zigzag segments.
   const routeSegments = {
     bicycle: ['highway/cycleway', 'highway/cycleway', 'highway/cycleway'],
     bus: ['highway/unclassified', 'highway/secondary', 'highway/primary'],
@@ -281,7 +281,9 @@ export function uiPresetIcon(context) {
       .attr('class', `preset-icon-container ${_sizeClass}`)
       .merge(container);
 
-    container.classed('fallback', isFallback);
+    container
+      .classed('showing-img', !!imageURL)
+      .classed('fallback', isFallback);
 
 
     let categoryBorder = container.selectAll('.preset-icon-category-border')
