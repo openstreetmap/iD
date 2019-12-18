@@ -43,7 +43,7 @@
     {"key": "aerialway", "value": "platter", "description": "🄿 Platter Lift", "object_types": ["way"]},
     {"key": "aerialway", "value": "pylon", "description": "🄿 Aerialway Pylon", "object_types": ["node"]},
     {"key": "aerialway", "value": "rope_tow", "description": "🄿 Rope Tow Lift", "object_types": ["way"]},
-    {"key": "aerialway", "value": "t-bar", "description": "🄿 T-bar Lift", "object_types": ["way"]},
+    {"key": "aerialway", "value": "t-bar", "description": "🄿 T-Bar Lift", "object_types": ["way"]},
     {"key": "aerialway", "value": "zip_line", "description": "🄿 Zip Line", "object_types": ["way"]},
     {"key": "aeroway", "value": "aerodrome", "description": "🄿 Airport", "object_types": ["area", "node"], "icon_url": "https://cdn.jsdelivr.net/gh/mapbox/maki/icons/airport-15.svg"},
     {"key": "aeroway", "value": "apron", "description": "🄿 Apron", "object_types": ["area"], "icon_url": "https://cdn.jsdelivr.net/gh/mapbox/maki/icons/airport-15.svg"},

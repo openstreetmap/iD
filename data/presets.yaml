@@ -2741,9 +2741,9 @@ en:
         terms: '<translate with synonyms or related terms for ''Rope Tow Lift'', separated by commas>'
       aerialway/t-bar:
         # aerialway=t-bar
-        name: T-bar Lift
+        name: T-Bar Lift
         # 'terms: tbar'
-        terms: '<translate with synonyms or related terms for ''T-bar Lift'', separated by commas>'
+        terms: '<translate with synonyms or related terms for ''T-Bar Lift'', separated by commas>'
       aerialway/zip_line:
         # aerialway=zip_line
         name: Zip Line
