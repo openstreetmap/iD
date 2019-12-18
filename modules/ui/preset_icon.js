@@ -40,7 +40,7 @@ export function uiPresetIcon(context) {
     const w = 40;
     const h = 40;
 
-    enter = enter
+    enter
       .append('svg')
       .attr('class', 'preset-icon-fill preset-icon-category-border')
       .attr('width', w)
@@ -68,9 +68,10 @@ export function uiPresetIcon(context) {
 
 
   function renderCircleFill(fillEnter) {
-    const w = 60;
-    const h = 60;
-    const d = 40;
+    const d = isSmall() ? 40 : 60;
+    const w = d;
+    const h = d;
+    const r = d / 2;
 
     fillEnter
       .append('svg')
@@ -81,7 +82,7 @@ export function uiPresetIcon(context) {
       .append('circle')
       .attr('cx', w / 2)
       .attr('cy', h / 2)
-      .attr('r', d / 2);
+      .attr('r', r);
   }
 
 
@@ -255,13 +256,12 @@ export function uiPresetIcon(context) {
     const isTnp = picon && /^tnp-/.test(picon);
     const isiDIcon = picon && !(isMaki || isTemaki || isFa || isTnp);
     const isCategory = !p.setTags;
-    const drawCategoryBorder = isCategory;
     const drawPoint = geom === 'point' && (_pointMarker || !picon) && !isFallback;
     const drawVertex = picon !== null && geom === 'vertex' && (!isSmall() || !isFallback);
     const drawLine = picon && geom === 'line' && !isFallback && !isCategory;
     const drawArea = picon && geom === 'area' && !isFallback;
     const drawRoute = picon && geom === 'route';
-    const isFramed = (drawCategoryBorder || drawVertex || drawArea || drawLine || drawRoute);
+    const isFramed = (isCategory || drawVertex || drawArea || drawLine || drawRoute);
 
     let tags = !isCategory ? p.setTags({}, geom) : {};
     for (let k in tags) {
@@ -283,13 +283,14 @@ export function uiPresetIcon(context) {
 
     container.classed('fallback', isFallback);
 
-    var categoryBorder = container.selectAll('.preset-icon-category-border')
-      .data(drawCategoryBorder ? [0] : []);
+
+    let categoryBorder = container.selectAll('.preset-icon-category-border')
+      .data(isCategory ? [0] : []);
 
     categoryBorder.exit()
       .remove();
 
-    var categoryBorderEnter = categoryBorder.enter();
+    let categoryBorderEnter = categoryBorder.enter();
     renderCategoryBorder(categoryBorderEnter);
     categoryBorder = categoryBorderEnter.merge(categoryBorder);
 
@@ -385,7 +386,7 @@ export function uiPresetIcon(context) {
       .merge(icon);
 
     icon
-      .attr('class', 'preset-icon ' + (geom ? geom + '-geom' : ''))
+      .attr('class', 'preset-icon ' + (geom ? geom + '-geom ' : '') + (isCategory ? 'category ' : ''))
       .classed('framed', isFramed)
       .classed('preset-icon-iD', isiDIcon);
 
@@ -395,10 +396,6 @@ export function uiPresetIcon(context) {
     icon.selectAll('use')
       .attr('href', '#' + picon + (isMaki ? (isSmall() && geom === 'point' ? '-11' : '-15') : ''));
 
-    icon
-      .attr('class', 'preset-icon ' + (geom ? geom + '-geom ' : '') + (isCategory ? 'category' : ''))
-      .classed('framed', isFramed)
-      .classed('preset-icon-iD', isiDIcon);
 
     let imageIcon = container.selectAll('img.image-icon')
       .data(imageURL ? [0] : []);
