@@ -10,7 +10,7 @@ import { uiTooltipHtml } from './tooltipHtml';
 export function uiPreferences(context) {
   const key = t('preferences.key');
   let _pane = d3_select(null);
-  let _showThirdPartyIcons = context.storage('preferences.privacy.thirdpartyicons') || true;
+  let _showThirdPartyIcons = context.storage('preferences.privacy.thirdpartyicons') || 'true';
 
   const paneTooltip = tooltip()
     .placement((textDirection === 'rtl') ? 'right' : 'left')
@@ -40,7 +40,7 @@ export function uiPreferences(context) {
       .attr('type', 'checkbox')
       .on('change', () => {
         d3_event.preventDefault();
-        _showThirdPartyIcons = !_showThirdPartyIcons;
+        _showThirdPartyIcons = (_showThirdPartyIcons === 'true') ? 'false' : 'true';
         context.storage('preferences.privacy.thirdpartyicons', _showThirdPartyIcons);
         update();
       });
@@ -68,9 +68,9 @@ export function uiPreferences(context) {
 
     function update() {
       selection.selectAll('.privacy-third-party-icons-item')
-        .classed('active', _showThirdPartyIcons)
+        .classed('active', (_showThirdPartyIcons === 'true'))
         .select('input')
-        .property('checked', _showThirdPartyIcons);
+        .property('checked', (_showThirdPartyIcons === 'true'));
     }
   }
 
