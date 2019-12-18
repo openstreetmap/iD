@@ -265,7 +265,9 @@ export function uiPresetIcon(context) {
       .attr('class', `preset-icon-container ${_sizeClass}`)
       .merge(container);
 
-    container.classed('fallback', isFallback);
+    container
+      .classed('showing-img', !!imageURL)
+      .classed('fallback', isFallback);
 
 
     let pointBorder = container.selectAll('.preset-icon-point-border')
