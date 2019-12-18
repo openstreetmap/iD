@@ -199,6 +199,11 @@ export function uiPresetIcon(context) {
   }
 
 
+  // Route icons are drawn with a zigzag annotation underneath:
+  //     o   o
+  //    / \ /
+  //   o   o
+  // This dataset defines the styles that are used to draw the zigzag segments.
   const routeSegments = {
     bicycle: ['highway/cycleway', 'highway/cycleway', 'highway/cycleway'],
     bus: ['highway/unclassified', 'highway/secondary', 'highway/primary'],
