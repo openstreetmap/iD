@@ -29,6 +29,111 @@ _Breaking changes, which may affect downstream projects or sites that embed iD, 
 [@xxxx]: https://github.com/xxxx
 -->
 
+# 2.17.0
+##### Planned: 2019-Dec-20
+
+#### :newspaper: News
+* We've launched the [iD Blog](https://ideditor.blog): discover news and insights into iD from the project's maintainers and contributors ([#7045])
+
+#### :mega: Release Highlights
+#### :boom: Breaking Changes
+#### :tada: New Features
+* Support inspecting selected features at any zoom level ([#2962], [#5001])
+
+#### :sparkles: Usability
+* Support squaring multiple selected features at the same time ([#6565])
+* Support zooming to multiple selected features together with the <kbd>Z</kbd> shortcut ([#6696])
+* Highlight the members of selected relations in yellow ([#5766])
+* Return feature search results from all downloaded data, not just the visible area ([#6515])
+* Show results for all three OpenStreetMap entity types when searching an ID without a prefix ([#7112])
+* Style hotkeys in tooltips as keyboard keys ([#6574])
+* Make the top toolbar horizontally-scrollable at narrow sizes ([#6755])
+* Show the Layer subfield for ways without structures if a `layer` value is present ([#6911])
+* Disable the Circularize operation if the selected way is already circular ([#6816], [#6993], thanks [@CarycaKatarzyna])
+* Fallback to a preset's vector icon if its image fails to load, e.g. due to content blockers ([#7028])
+* Convert single-member multipolygons to basic areas when merging member lines ([#5085])
+* Always show the currently selected background in the sources list ([#7061])
+* Only show background sources with global coverage at low zooms ([#7062])
+* Add tooltips to Mapillary Map Features overlay icons ([#7079])
+* Add button to manually retry connecting to the OpenStreetMap API upon a failure ([#6650])
+* Clarify what API cannot be reached and that edits are safe upon an OpenStreetMap API connection failure ([#7021])
+
+#### :white_check_mark: Validation
+* Flag unclosed multipolgon parts ([#2223])
+* Offer "Add a bridge" and "Add a tunnel" fixes for crossing ways that create the structure in one click ([#6617], [#7055], thanks [@CarycaKatarzyna])
+* Add fixes for ways crossing buildings that update the feature's `layer` tag ([#5924], [#6911])
+* Don't suggest upgrading to brands that don't exist in the feature's country ([#6513])
+* When typing a name, don't suggest brand names that don't exist in the feature's country ([#6479])
+* Don't flag very close points with differing house or unit numbers ([#6998])
+* Allow the `not:brand:wikidata` tag to silence nonstandard brand warnings ([#6577])
+* Include default field values when upgrading to a preset with a specific replacement ([#7033])
+* Don't flag `natural=cape` or `amenity=vending_machine` on vertices as mismatched geometry ([#6982], [#6515])
+* Don't add `oneway=yes` to `highway=motorway_link` by default ([#7013])
+* Don't expect an arbitrary `junction` tag to imply a feature should be an area ([#6933])
+* Use `aerialway=station` instead of `aerialway=yes` for aerialway stations ([#6994])
+
+#### :bug: Bugfixes
+* Fix issue with rotating multiple points together ([#6977], [#6979], thanks [@hackily])
+* Fix various instances where issue fixes might not get properly updated ([#6588], [#7037])
+* Fix unexpected label offsets in Firefox 70 ([#7044])
+* Don't move `area=yes` to nodes when using the Extract operation on areas ([#7057])
+* Fix issue where the fills of unclosed multipolygon parts would not render entirely ([#2945])
+* Prevent background tiles from appearing larger than expected ([#7070])
+* Fix issue where additional fields would disappear immediately upon clearing their value ([#6580])
+* Fix issue where adding a raw tag after deleting several would insert the blank row at the wrong index ([#7087])
+* Fix issue where OpenStreetMap API error message would persist despite the download of new data ([#6650])
+* Replace use of unsupported CSS property flagged by the OpenStreetMap website ([#7091])
+* Fix issue where the selected Mapillary detection outline would not render in some browsers ([#6804])
+* Fix issue where boundary relation member lines would not render as boundaries if they were also members of multipolygons ([#6787])
+* Fix issue where the Administrative Boundary preset was not properly overriding the Boundary preset ([#7118])
+* Fix regression where the relation suggestion list could overflow the inspector ([#7115])
+* Fix issue where the Unsquare Corners degree input could be too narrow in some browsers ([#7126], thanks [@iriman])
+
+#### :earth_asia: Localization
+* Differentiate the "wireframe mode" and "highlight changes" hotkeys in the German localization ([#6972], thanks [@manfredbrandl])
+
+#### :hourglass: Performance
+* Determine locations' country codes without calling out to a geocoding server ([#6941])
+* Reduce rendering lag considerably when many features are selected at once ([#3571])
+
+#### :mortar_board: Walkthrough / Help
+* Add the <kbd>I</kbd> hotkey to the Keyboard Shortcuts list ([#6997])
+* Update links in the README to avoid http to https redirects ([#6984], thanks [@mbrickn])
+
+#### :rocket: Presets
+* Add Notice Board, Poster Box, and Advertising Totem presets ([#6965], thanks [@hikemaniac])
+* Add Kiddie Ride, Log Flume, and Swing Carousel presets ([#7039], thanks [@hikemaniac])
+* Add Spice Shop preset ([#7031], thanks [@scaidermern])
+* Add Giant Chess Board preset ([#7059], thanks [@ToastHawaii])
+* Add Marker, Utility Marker, and Power Marker presets ([#6978])
+* Add Access Aisle preset ([#7083])
+* Add Advanced Stop Line preset ([#7014])
+* Add Water Tap preset ([#7066])
+* Add Research Institute preset ([#7078])
+* Add Lane Connectivity relation preset ([#7105])
+* Add Rail Yard preset ([#7119])
+* Add Recently Demolished Building preset and render them as areas ([#7098])
+* Add unsearchable Disused Railway Feature preset ([#7119])
+* Add Recreational Network Node preset for Belgium, Germany, Luxembourg, and The Netherlands ([#6992])
+* Enable limiting fields to specific countries ([#7085])
+* Add GNIS Feature ID field to various preset for the United States ([#7086])
+* Add VAT ID Number field to business presets for countries where VAT numbers are issued ([#6880])
+* Add Mapillary ID field with link to view the image on the Mapillary website ([#7064])
+* Add Internet Access, SMS, and Video Calls fields to the Telephone preset ([#7010])
+* Add Tactile Paving field to the Steps preset ([#7082], thanks [@stragu])
+* Add the Reference Code field to Vending Machine presets ([#7002])
+* Render `landuse=village_green` areas in green ([#7011])
+* Render Putting Greens and similar features in light green ([#7101])
+* Append "Area" to the names of linear area presets: Bridge, Tunnel, Road, River, Stream, Canal ([#7015])
+* Rename "Wood" preset to "Natural Wood"
+* Update icon for Mast, Communication Mast, and Communication Tower ([#6985])
+* Update icon for Gate and Cattle Grid ([#6814], [#6489])
+* Update icon for Park to be different from Tree ([#6633])
+* Add "tree" as a search term for Natural Wood and Managed Forest ([#7097])
+* Add "packstation" as a search term for package pickup and dropoff lockers ([#7052])
+* Only show the Country field on Flagpole features with `flag:type=national` ([#7099])
+* Don't show the Denomination field on features with `religion=none` ([#7135])
+
 # 2.16.0
 ##### 2019-Oct-23
 
