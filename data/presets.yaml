@@ -2760,9 +2760,9 @@ en:
         terms: '<translate with synonyms or related terms for ''Goods Aerialway'', separated by commas>'
       aerialway/j-bar:
         # aerialway=j-bar
-        name: J-bar Lift
+        name: J-Bar Lift
         # 'terms: jbar'
-        terms: '<translate with synonyms or related terms for ''J-bar Lift'', separated by commas>'
+        terms: '<translate with synonyms or related terms for ''J-Bar Lift'', separated by commas>'
       aerialway/magic_carpet:
         # aerialway=magic_carpet
         name: Magic Carpet Lift
@@ -2787,9 +2787,9 @@ en:
         terms: '<translate with synonyms or related terms for ''Rope Tow Lift'', separated by commas>'
       aerialway/t-bar:
         # aerialway=t-bar
-        name: T-bar Lift
+        name: T-Bar Lift
         # 'terms: tbar'
-        terms: '<translate with synonyms or related terms for ''T-bar Lift'', separated by commas>'
+        terms: '<translate with synonyms or related terms for ''T-Bar Lift'', separated by commas>'
       aerialway/zip_line:
         # aerialway=zip_line
         name: Zip Line

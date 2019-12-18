@@ -5031,7 +5031,7 @@
                     "terms": ""
                 },
                 "aerialway/j-bar": {
-                    "name": "J-bar Lift",
+                    "name": "J-Bar Lift",
                     "terms": "jbar"
                 },
                 "aerialway/magic_carpet": {
@@ -5055,7 +5055,7 @@
                     "terms": "handle tow,bugel lift"
                 },
                 "aerialway/t-bar": {
-                    "name": "T-bar Lift",
+                    "name": "T-Bar Lift",
                     "terms": "tbar"
                 },
                 "aerialway/zip_line": {
