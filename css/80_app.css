@@ -4542,6 +4542,9 @@ img.tile-debug {
     padding: 20px;
     border-bottom: 1px solid #ccc;
 }
+.modal-section p:not(:last-of-type) {
+    padding-bottom: 20px;
+}
 .modal-section.header h3 {
     padding: 0;
 }
