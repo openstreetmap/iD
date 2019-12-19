@@ -301,7 +301,7 @@
     "barrier/cattle_grid": {"icon": "temaki-cattle_grid", "geometry": ["vertex"], "tags": {"barrier": "cattle_grid"}, "terms": ["cattle guard", "cattle stop", "livestock grid", "stock gate", "stock grid", "stock stop", "Texas gate", "vehicle pass"], "name": "Cattle Grid"},
     "barrier/chain": {"icon": "temaki-rope_fence", "fields": ["access"], "geometry": ["vertex", "line"], "tags": {"barrier": "chain"}, "name": "Chain"},
     "barrier/city_wall": {"icon": "temaki-wall", "fields": ["height", "material"], "geometry": ["line", "area"], "tags": {"barrier": "city_wall"}, "name": "City Wall"},
-    "barrier/cycle_barrier": {"icon": "maki-roadblock", "fields": ["access"], "geometry": ["vertex"], "tags": {"barrier": "cycle_barrier"}, "name": "Cycle Barrier"},
+    "barrier/cycle_barrier": {"icon": "maki-roadblock", "fields": ["access"], "geometry": ["vertex"], "tags": {"barrier": "cycle_barrier"}, "terms": ["bicycle barrier", "bicycling barrier", "bike gates", "cycling barrier"], "name": "Cycle Barrier"},
     "barrier/ditch": {"icon": "maki-roadblock", "geometry": ["line", "area"], "tags": {"barrier": "ditch"}, "name": "Trench", "matchScore": 0.25},
     "barrier/fence": {"icon": "maki-fence", "fields": ["fence_type", "height", "material"], "geometry": ["line"], "tags": {"barrier": "fence"}, "name": "Fence", "matchScore": 0.25},
     "barrier/fence/railing": {"icon": "temaki-railing", "geometry": ["line"], "tags": {"barrier": "fence", "fence_type": "railing"}, "terms": ["railing", "handrail", "guard rail"], "name": "Railing", "matchScore": 0.5},

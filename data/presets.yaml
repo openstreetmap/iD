@@ -3992,6 +3992,7 @@ en:
       barrier/cycle_barrier:
         # barrier=cycle_barrier
         name: Cycle Barrier
+        # 'terms: bicycle barrier,bicycling barrier,bike gates,cycling barrier'
         terms: '<translate with synonyms or related terms for ''Cycle Barrier'', separated by commas>'
       barrier/ditch:
         # barrier=ditch
