@@ -626,7 +626,7 @@
     {"key": "leisure", "value": "disc_golf_course", "description": "🄿 Disc Golf Course", "object_types": ["area", "node"], "icon_url": "https://cdn.jsdelivr.net/gh/ideditor/temaki/icons/disc_golf_basket.svg"},
     {"key": "leisure", "value": "dog_park", "description": "🄿 Dog Park", "object_types": ["area", "node"], "icon_url": "https://cdn.jsdelivr.net/gh/mapbox/maki/icons/dog-park-15.svg"},
     {"key": "leisure", "value": "escape_game", "description": "🄿 Escape Room", "object_types": ["node", "area"], "icon_url": "https://cdn.jsdelivr.net/gh/openstreetmap/iD@master/svg/fontawesome/fas-puzzle-piece.svg"},
-    {"key": "leisure", "value": "firepit", "description": "🄿 Firepit", "object_types": ["node", "area"], "icon_url": "https://cdn.jsdelivr.net/gh/ideditor/temaki/icons/campfire.svg"},
+    {"key": "leisure", "value": "firepit", "description": "🄿 Fire Pit", "object_types": ["node", "area"], "icon_url": "https://cdn.jsdelivr.net/gh/ideditor/temaki/icons/campfire.svg"},
     {"key": "leisure", "value": "fishing", "description": "🄿 Fishing Spot", "object_types": ["node", "area"], "icon_url": "https://cdn.jsdelivr.net/gh/openstreetmap/iD@master/svg/fontawesome/fas-fish.svg"},
     {"key": "leisure", "value": "fitness_centre", "description": "🄿 Gym / Fitness Center", "object_types": ["node", "area"], "icon_url": "https://cdn.jsdelivr.net/gh/openstreetmap/iD@master/svg/fontawesome/fas-dumbbell.svg"},
     {"key": "sport", "value": "yoga", "description": "🄿 Yoga Studio", "object_types": ["node", "area"], "icon_url": "https://cdn.jsdelivr.net/gh/mapbox/maki/icons/pitch-15.svg"},

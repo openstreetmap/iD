@@ -7326,8 +7326,8 @@
                     "terms": "escape game,escape the room,puzzle room,quest room"
                 },
                 "leisure/firepit": {
-                    "name": "Firepit",
-                    "terms": "fireplace,campfire"
+                    "name": "Fire Pit",
+                    "terms": "bonfire,campfire,fire circle,fire hole,fire place,fire ring,firepit,fireplace,firering"
                 },
                 "leisure/fishing": {
                     "name": "Fishing Spot",

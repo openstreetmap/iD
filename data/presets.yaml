@@ -5551,9 +5551,9 @@ en:
         terms: '<translate with synonyms or related terms for ''Escape Room'', separated by commas>'
       leisure/firepit:
         # leisure=firepit
-        name: Firepit
-        # 'terms: fireplace,campfire'
-        terms: '<translate with synonyms or related terms for ''Firepit'', separated by commas>'
+        name: Fire Pit
+        # 'terms: bonfire,campfire,fire circle,fire hole,fire place,fire ring,firepit,fireplace,firering'
+        terms: '<translate with synonyms or related terms for ''Fire Pit'', separated by commas>'
       leisure/fishing:
         # leisure=fishing
         name: Fishing Spot
