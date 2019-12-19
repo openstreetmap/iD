@@ -39,6 +39,7 @@ _Breaking changes, which may affect downstream projects or sites that embed iD, 
 #### :boom: Breaking Changes
 #### :tada: New Features
 * Support inspecting selected features at any zoom level ([#2962], [#5001])
+* Add Privacy Policy and ability to opt-out of icons loaded from third-party sites ([#7040])
 
 #### :sparkles: Usability
 * Support squaring multiple selected features at the same time ([#6565])
@@ -57,6 +58,7 @@ _Breaking changes, which may affect downstream projects or sites that embed iD, 
 * Add tooltips to Mapillary Map Features overlay icons ([#7079])
 * Add button to manually retry connecting to the OpenStreetMap API upon a failure ([#6650])
 * Clarify what API cannot be reached and that edits are safe upon an OpenStreetMap API connection failure ([#7021])
+* Improve styling of points linked to Wikidata
 
 #### :white_check_mark: Validation
 * Flag unclosed multipolgon parts ([#2223])
@@ -70,7 +72,13 @@ _Breaking changes, which may affect downstream projects or sites that embed iD, 
 * Don't flag `natural=cape` or `amenity=vending_machine` on vertices as mismatched geometry ([#6982], [#6515])
 * Don't add `oneway=yes` to `highway=motorway_link` by default ([#7013])
 * Don't expect an arbitrary `junction` tag to imply a feature should be an area ([#6933])
-* Use `aerialway=station` instead of `aerialway=yes` for aerialway stations ([#6994])
+* Prefer `aerialway=station` instead of `aerialway=yes` for aerialway stations ([#6994])
+* Remove deprecation of `crossing=zebra` ([#6962])
+* Remove deprecation of `amenity=social_club` and `leisure=social_club` ([#6252])
+* Deprecate `agrarian=agrcultural_machinry` misspelling ([#7053])
+* Deprecate `company=consulting`, `office=consultancy`, `office=consultant`, `shop=consulting`
+* Deprecate `type=audio`, `type=video`, `type=caldera`, `type=extinct`, `type=scoria`, `type=shield`, `type=strato`, `type=extinct`
+* Deprecate `amenity=research_institution`, `barrier=railing`, `craft=glass`, `man_made=gas_well`, `man_made=oil_well`, `man_made=village_pump`, `power=marker`
 
 #### :bug: Bugfixes
 * Fix issue with rotating multiple points together ([#6977], [#6979], thanks [@hackily])
@@ -88,9 +96,11 @@ _Breaking changes, which may affect downstream projects or sites that embed iD, 
 * Fix issue where the Administrative Boundary preset was not properly overriding the Boundary preset ([#7118])
 * Fix regression where the relation suggestion list could overflow the inspector ([#7115])
 * Fix issue where the Unsquare Corners degree input could be too narrow in some browsers ([#7126], thanks [@iriman])
+* Correct vertical centering of checkmark fields
 
 #### :earth_asia: Localization
 * Differentiate the "wireframe mode" and "highlight changes" hotkeys in the German localization ([#6972], thanks [@manfredbrandl])
+* Improve Chinese address field ([#7075], thanks [@koaber])
 
 #### :hourglass: Performance
 * Determine locations' country codes without calling out to a geocoding server ([#6941])
@@ -106,31 +116,50 @@ _Breaking changes, which may affect downstream projects or sites that embed iD, 
 * Add Spice Shop preset ([#7031], thanks [@scaidermern])
 * Add Giant Chess Board preset ([#7059], thanks [@ToastHawaii])
 * Add Marker, Utility Marker, and Power Marker presets ([#6978])
-* Add Access Aisle preset ([#7083])
+* Add Access Aisle preset and style ([#7083])
+* Add Research Institute preset and style ([#7078])
 * Add Advanced Stop Line preset ([#7014])
-* Add Water Tap preset ([#7066])
-* Add Research Institute preset ([#7078])
 * Add Lane Connectivity relation preset ([#7105])
+* Add Water Tap preset ([#7066])
 * Add Rail Yard preset ([#7119])
-* Add Recently Demolished Building preset and render them as areas ([#7098])
 * Add unsearchable Disused Railway Feature preset ([#7119])
+* Add Recently Demolished Building preset and render them as areas ([#7098])
 * Add Recreational Network Node preset for Belgium, Germany, Luxembourg, and The Netherlands ([#6992])
-* Enable limiting fields to specific countries ([#7085])
+* Add Consultancy Office preset for new brands
+* Add Fish Pass preset
+* Append "Area" to the names of linear area presets: Bridge, Tunnel, Road, River, Stream, Canal ([#7015])
+* Append "Feature" to the names of various generic presets, e.g. "Tourism Feature"
+* Append "Ride" to the names of some attraction presets, e.g "Pirate Ship Ride"
+* Rename "Wood" preset to "Natural Wood"
+* Rename "Car Pooling" and "Car Sharing" to "Car Pooling Station" and "Car Sharing Station"
+* Correct "Firepit" preset name to "Fire Pit"
+* Correct capitalization of "J-Bar Lift" and "T-Bar Lift" preset names
+* Render `landuse=village_green` areas in green ([#7011])
+* Render Putting Greens and similar features in light green ([#7101])
+* Update icon for Mast, Communication Mast, and Communication Tower ([#6985])
+* Update icon for Gate, Kissing Gate, and Cattle Grid ([#6814], [#6489])
+* Update icon for Park to be different from Tree ([#6633])
+* Update icons for presets: diplomatic offices, marked crossings, transit platforms, buoys, Billboard, Jet Bridge, Scrap Yard, Bicycle Parking Garage, Bicycle Lockers, Bicycle Rental, Bicycle Repair Tool Stand, Boat Rental, Car Pooling Station, Car Sharing Station, Multilevel Parking Garage, Underground Parking, Park & Ride Lot, Lean-To, Picnic Shelter, Transit Shelter, Block, Chain, Height Restrictor, Turnstile, Barn, Stable, Basket Maker, Boar Builder, Handicraft, Pottery, Indoor Corridor, Cycle & Foot Path, Street Lamp, Commemorative Plaque, Fire Pit, Pier, Floating Pier, Minaret, Tunnel Area, Water Tower, Grassland, Grass, Tree Row, Energy Supplier Office, Insurance Office, Slide, Play Structure, Underground Power Cable, Chocolate Store, Lighting Store, Motorcycle Repair Shop, Storage Rental, Art Installation, Sculpture, Statue
+* Add "tree" as a search term for Natural Wood and Managed Forest ([#7097])
+* Add "packstation" as a search term for package pickup and dropoff lockers ([#7052])
+* Add "pilates" as a search term for Gym / Fitness Center ([#7137])
+* Support limiting fields to specific countries ([#7085])
 * Add GNIS Feature ID field to various preset for the United States ([#7086])
 * Add VAT ID Number field to business presets for countries where VAT numbers are issued ([#6880])
+* Add Wikimedia Commons Page field with link to view the page
 * Add Mapillary ID field with link to view the image on the Mapillary website ([#7064])
 * Add Internet Access, SMS, and Video Calls fields to the Telephone preset ([#7010])
 * Add Tactile Paving field to the Steps preset ([#7082], thanks [@stragu])
 * Add the Reference Code field to Vending Machine presets ([#7002])
-* Render `landuse=village_green` areas in green ([#7011])
-* Render Putting Greens and similar features in light green ([#7101])
-* Append "Area" to the names of linear area presets: Bridge, Tunnel, Road, River, Stream, Canal ([#7015])
-* Rename "Wood" preset to "Natural Wood"
-* Update icon for Mast, Communication Mast, and Communication Tower ([#6985])
-* Update icon for Gate and Cattle Grid ([#6814], [#6489])
-* Update icon for Park to be different from Tree ([#6633])
-* Add "tree" as a search term for Natural Wood and Managed Forest ([#7097])
-* Add "packstation" as a search term for package pickup and dropoff lockers ([#7052])
+* Add Drinks field to the Drink Vending Machine preset
+* Add Drinkable field to various water source presets
+* Add Type field to Fountain preset
+* Add Pump field to Water Well preset
+* Add Utilities field to Utility Pole and Street Cabinet presets
+* Add Brand field to more presets that could have brand tags
+* Rename "Network Type" field for `network` to "Network Class"
+* Add Network Type field for `network:type` to Route presets with a `network` value
+* Rename "Suggested Hashtags" changeset field to just "Hashtags"
 * Only show the Country field on Flagpole features with `flag:type=national` ([#7099])
 * Don't show the Denomination field on features with `religion=none` ([#7135])
 
