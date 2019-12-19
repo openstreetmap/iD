@@ -33,13 +33,21 @@ _Breaking changes, which may affect downstream projects or sites that embed iD, 
 ##### Planned: 2019-Dec-20
 
 #### :newspaper: News
-* We've launched the [iD Blog](https://ideditor.blog): discover news and insights into iD from the project's maintainers and contributors ([#7045])
+* We've launched the [iD Blog](https://ideditor.blog) providing news and insights into the project from its maintainers and contributors ([#7045])
+
+[#7045]: https://github.com/openstreetmap/iD/issues/7045
 
 #### :mega: Release Highlights
+
 #### :boom: Breaking Changes
+
 #### :tada: New Features
-* Support inspecting selected features at any zoom level ([#2962], [#5001])
+* Display selected features at any zoom level ([#2962], [#5001])
 * Add Privacy Policy and ability to opt-out of icons loaded from third-party sites ([#7040])
+
+[#2962]: https://github.com/openstreetmap/iD/issues/2962
+[#5001]: https://github.com/openstreetmap/iD/issues/5001
+[#7040]: https://github.com/openstreetmap/iD/issues/7040
 
 #### :sparkles: Usability
 * Support squaring multiple selected features at the same time ([#6565])
@@ -49,26 +57,48 @@ _Breaking changes, which may affect downstream projects or sites that embed iD, 
 * Show results for all three OpenStreetMap entity types when searching an ID without a prefix ([#7112])
 * Style hotkeys in tooltips as keyboard keys ([#6574])
 * Make the top toolbar horizontally-scrollable at narrow sizes ([#6755])
-* Show the Layer subfield for ways without structures if a `layer` value is present ([#6911])
+* Always show the Layer subfield of the Structure field when a value is present ([#6911])
 * Disable the Circularize operation if the selected way is already circular ([#6816], [#6993], thanks [@CarycaKatarzyna])
 * Fallback to a preset's vector icon if its image fails to load, e.g. due to content blockers ([#7028])
 * Convert single-member multipolygons to basic areas when merging member lines ([#5085])
 * Always show the currently selected background in the sources list ([#7061])
 * Only show background sources with global coverage at low zooms ([#7062])
+* Render features with a status-prefix tags with a dashed style, e.g. `demolished:building=yes`
 * Add tooltips to Mapillary Map Features overlay icons ([#7079])
 * Add button to manually retry connecting to the OpenStreetMap API upon a failure ([#6650])
-* Clarify what API cannot be reached and that edits are safe upon an OpenStreetMap API connection failure ([#7021])
+* Clarify the OpenStreetMap API connection failure message ([#7021])
 * Improve styling of points linked to Wikidata
 
+[#6565]: https://github.com/openstreetmap/iD/issues/6565
+[#6696]: https://github.com/openstreetmap/iD/issues/6696
+[#5766]: https://github.com/openstreetmap/iD/issues/5766
+[#6515]: https://github.com/openstreetmap/iD/issues/6515
+[#7112]: https://github.com/openstreetmap/iD/issues/7112
+[#6574]: https://github.com/openstreetmap/iD/issues/6574
+[#6755]: https://github.com/openstreetmap/iD/issues/6755
+[#6911]: https://github.com/openstreetmap/iD/issues/6911
+[#6816]: https://github.com/openstreetmap/iD/issues/6816
+[#6993]: https://github.com/openstreetmap/iD/issues/6993
+[#7028]: https://github.com/openstreetmap/iD/issues/7028
+[#5085]: https://github.com/openstreetmap/iD/issues/5085
+[#7061]: https://github.com/openstreetmap/iD/issues/7061
+[#7062]: https://github.com/openstreetmap/iD/issues/7062
+[#7079]: https://github.com/openstreetmap/iD/issues/7079
+[#6650]: https://github.com/openstreetmap/iD/issues/6650
+[#7021]: https://github.com/openstreetmap/iD/issues/7021
+
+[@CarycaKatarzyna]: https://github.com/CarycaKatarzyna
+
 #### :white_check_mark: Validation
+* For crossing ways issues, offer one-click "Add a bridge" and "Add a tunnel" fixes ([#6617], [#7055], thanks [@CarycaKatarzyna])
+* For crossing way-building issues, offer one-click fixes that set higher or lower layers ([#5924], [#6911])
 * Flag unclosed multipolgon parts ([#2223])
-* Offer "Add a bridge" and "Add a tunnel" fixes for crossing ways that create the structure in one click ([#6617], [#7055], thanks [@CarycaKatarzyna])
-* Add fixes for ways crossing buildings that update the feature's `layer` tag ([#5924], [#6911])
-* Don't suggest upgrading to brands that don't exist in the feature's country ([#6513])
-* When typing a name, don't suggest brand names that don't exist in the feature's country ([#6479])
+* Flag crossing and one-way issues for features with `waterway=fish_pass`
+* Don't suggest upgrading to brands that don't exist in the feature's country ([#6513], [#6479])
 * Don't flag very close points with differing house or unit numbers ([#6998])
 * Allow the `not:brand:wikidata` tag to silence nonstandard brand warnings ([#6577])
 * Include default field values when upgrading to a preset with a specific replacement ([#7033])
+* Add tooltips to some disabled fix buttons
 * Don't flag `natural=cape` or `amenity=vending_machine` on vertices as mismatched geometry ([#6982], [#6515])
 * Don't add `oneway=yes` to `highway=motorway_link` by default ([#7013])
 * Don't expect an arbitrary `junction` tag to imply a feature should be an area ([#6933])
@@ -79,6 +109,27 @@ _Breaking changes, which may affect downstream projects or sites that embed iD, 
 * Deprecate `company=consulting`, `office=consultancy`, `office=consultant`, `shop=consulting`
 * Deprecate `type=audio`, `type=video`, `type=caldera`, `type=extinct`, `type=scoria`, `type=shield`, `type=strato`, `type=extinct`
 * Deprecate `amenity=research_institution`, `barrier=railing`, `craft=glass`, `man_made=gas_well`, `man_made=oil_well`, `man_made=village_pump`, `power=marker`
+
+[#6617]: https://github.com/openstreetmap/iD/issues/6617
+[#7055]: https://github.com/openstreetmap/iD/issues/7055
+[#5924]: https://github.com/openstreetmap/iD/issues/5924
+[#6911]: https://github.com/openstreetmap/iD/issues/6911
+[#2223]: https://github.com/openstreetmap/iD/issues/2223
+[#6513]: https://github.com/openstreetmap/iD/issues/6513
+[#6479]: https://github.com/openstreetmap/iD/issues/6479
+[#6998]: https://github.com/openstreetmap/iD/issues/6998
+[#6577]: https://github.com/openstreetmap/iD/issues/6577
+[#7033]: https://github.com/openstreetmap/iD/issues/7033
+[#6982]: https://github.com/openstreetmap/iD/issues/6982
+[#6515]: https://github.com/openstreetmap/iD/issues/6515
+[#7013]: https://github.com/openstreetmap/iD/issues/7013
+[#6933]: https://github.com/openstreetmap/iD/issues/6933
+[#6994]: https://github.com/openstreetmap/iD/issues/6994
+[#6962]: https://github.com/openstreetmap/iD/issues/6962
+[#6252]: https://github.com/openstreetmap/iD/issues/6252
+[#7053]: https://github.com/openstreetmap/iD/issues/7053
+
+[@CarycaKatarzyna]: https://github.com/CarycaKatarzyna
 
 #### :bug: Bugfixes
 * Fix issue with rotating multiple points together ([#6977], [#6979], thanks [@hackily])
@@ -92,23 +143,58 @@ _Breaking changes, which may affect downstream projects or sites that embed iD, 
 * Fix issue where OpenStreetMap API error message would persist despite the download of new data ([#6650])
 * Replace use of unsupported CSS property flagged by the OpenStreetMap website ([#7091])
 * Fix issue where the selected Mapillary detection outline would not render in some browsers ([#6804])
-* Fix issue where boundary relation member lines would not render as boundaries if they were also members of multipolygons ([#6787])
+* Fix issue where boundary relation members would not render correctly if they were also multipolygons members ([#6787])
 * Fix issue where the Administrative Boundary preset was not properly overriding the Boundary preset ([#7118])
 * Fix regression where the relation suggestion list could overflow the inspector ([#7115])
 * Fix issue where the Unsquare Corners degree input could be too narrow in some browsers ([#7126], thanks [@iriman])
 * Correct vertical centering of checkmark fields
 
+[#6977]: https://github.com/openstreetmap/iD/issues/6977
+[#6979]: https://github.com/openstreetmap/iD/issues/6979
+[#6588]: https://github.com/openstreetmap/iD/issues/6588
+[#7037]: https://github.com/openstreetmap/iD/issues/7037
+[#7044]: https://github.com/openstreetmap/iD/issues/7044
+[#7057]: https://github.com/openstreetmap/iD/issues/7057
+[#2945]: https://github.com/openstreetmap/iD/issues/2945
+[#7070]: https://github.com/openstreetmap/iD/issues/7070
+[#6580]: https://github.com/openstreetmap/iD/issues/6580
+[#7087]: https://github.com/openstreetmap/iD/issues/7087
+[#6650]: https://github.com/openstreetmap/iD/issues/6650
+[#7091]: https://github.com/openstreetmap/iD/issues/7091
+[#6804]: https://github.com/openstreetmap/iD/issues/6804
+[#6787]: https://github.com/openstreetmap/iD/issues/6787
+[#7118]: https://github.com/openstreetmap/iD/issues/7118
+[#7115]: https://github.com/openstreetmap/iD/issues/7115
+[#7126]: https://github.com/openstreetmap/iD/issues/7126
+
+[@hackily]: https://github.com/hackily
+[@iriman]: https://github.com/iriman
+
 #### :earth_asia: Localization
 * Differentiate the "wireframe mode" and "highlight changes" hotkeys in the German localization ([#6972], thanks [@manfredbrandl])
 * Improve Chinese address field ([#7075], thanks [@koaber])
+
+[#6972]: https://github.com/openstreetmap/iD/issues/6972
+[#7075]: https://github.com/openstreetmap/iD/issues/7075
+
+[@manfredbrandl]: https://github.com/manfredbrandl
+[@koaber]: https://github.com/koaber
 
 #### :hourglass: Performance
 * Determine locations' country codes without calling out to a geocoding server ([#6941])
 * Reduce rendering lag considerably when many features are selected at once ([#3571])
 
+[#6941]: https://github.com/openstreetmap/iD/issues/6941
+[#3571]: https://github.com/openstreetmap/iD/issues/3571
+
 #### :mortar_board: Walkthrough / Help
+* Update links in the README to avoid http-to-https redirects ([#6984], thanks [@mbrickn])
 * Add the <kbd>I</kbd> hotkey to the Keyboard Shortcuts list ([#6997])
-* Update links in the README to avoid http to https redirects ([#6984], thanks [@mbrickn])
+
+[#6984]: https://github.com/openstreetmap/iD/issues/6984
+[#6997]: https://github.com/openstreetmap/iD/issues/6997
+
+[@mbrickn]: https://github.com/mbrickn
 
 #### :rocket: Presets
 * Add Notice Board, Poster Box, and Advertising Totem presets ([#6965], thanks [@hikemaniac])
@@ -162,6 +248,44 @@ _Breaking changes, which may affect downstream projects or sites that embed iD, 
 * Rename "Suggested Hashtags" changeset field to just "Hashtags"
 * Only show the Country field on Flagpole features with `flag:type=national` ([#7099])
 * Don't show the Denomination field on features with `religion=none` ([#7135])
+
+[#6965]: https://github.com/openstreetmap/iD/issues/6965
+[#7039]: https://github.com/openstreetmap/iD/issues/7039
+[#7031]: https://github.com/openstreetmap/iD/issues/7031
+[#7059]: https://github.com/openstreetmap/iD/issues/7059
+[#6978]: https://github.com/openstreetmap/iD/issues/6978
+[#7083]: https://github.com/openstreetmap/iD/issues/7083
+[#7078]: https://github.com/openstreetmap/iD/issues/7078
+[#7014]: https://github.com/openstreetmap/iD/issues/7014
+[#7105]: https://github.com/openstreetmap/iD/issues/7105
+[#7066]: https://github.com/openstreetmap/iD/issues/7066
+[#7119]: https://github.com/openstreetmap/iD/issues/7119
+[#7098]: https://github.com/openstreetmap/iD/issues/7098
+[#6992]: https://github.com/openstreetmap/iD/issues/6992
+[#7015]: https://github.com/openstreetmap/iD/issues/7015
+[#7011]: https://github.com/openstreetmap/iD/issues/7011
+[#7101]: https://github.com/openstreetmap/iD/issues/7101
+[#6985]: https://github.com/openstreetmap/iD/issues/6985
+[#6814]: https://github.com/openstreetmap/iD/issues/6814
+[#6489]: https://github.com/openstreetmap/iD/issues/6489
+[#6633]: https://github.com/openstreetmap/iD/issues/6633
+[#7097]: https://github.com/openstreetmap/iD/issues/7097
+[#7052]: https://github.com/openstreetmap/iD/issues/7052
+[#7137]: https://github.com/openstreetmap/iD/issues/7137
+[#7085]: https://github.com/openstreetmap/iD/issues/7085
+[#7086]: https://github.com/openstreetmap/iD/issues/7086
+[#6880]: https://github.com/openstreetmap/iD/issues/6880
+[#7064]: https://github.com/openstreetmap/iD/issues/7064
+[#7010]: https://github.com/openstreetmap/iD/issues/7010
+[#7082]: https://github.com/openstreetmap/iD/issues/7082
+[#7002]: https://github.com/openstreetmap/iD/issues/7002
+[#7099]: https://github.com/openstreetmap/iD/issues/7099
+[#7135]: https://github.com/openstreetmap/iD/issues/7135
+
+[@hikemaniac]: https://github.com/hikemaniac
+[@scaidermern]: https://github.com/scaidermern
+[@ToastHawaii]: https://github.com/ToastHawaii
+[@stragu]: https://github.com/stragu
 
 # 2.16.0
 ##### 2019-Oct-23
