@@ -771,7 +771,7 @@
     {"key": "natural", "value": "cape", "description": "🄿 Cape", "object_types": ["node"], "icon_url": "https://cdn.jsdelivr.net/gh/ideditor/temaki/icons/beach.svg"},
     {"key": "natural", "value": "cave_entrance", "description": "🄿 Cave Entrance", "object_types": ["node", "area"], "icon_url": "https://cdn.jsdelivr.net/gh/mapbox/maki/icons/triangle-15.svg"},
     {"key": "natural", "value": "cliff", "description": "🄿 Cliff", "object_types": ["node", "way", "area"], "icon_url": "https://cdn.jsdelivr.net/gh/mapbox/maki/icons/triangle-15.svg"},
-    {"key": "natural", "value": "coastline", "description": "🄿 Coastline", "object_types": ["way"]},
+    {"key": "natural", "value": "coastline", "description": "🄿 Coastline", "object_types": ["way"], "icon_url": "https://cdn.jsdelivr.net/gh/ideditor/temaki/icons/beach.svg"},
     {"key": "natural", "value": "fell", "description": "🄿 Fell", "object_types": ["area"]},
     {"key": "natural", "value": "glacier", "description": "🄿 Glacier", "object_types": ["area"], "icon_url": "https://cdn.jsdelivr.net/gh/ideditor/temaki/icons/snow.svg"},
     {"key": "natural", "value": "grassland", "description": "🄿 Grassland", "object_types": ["area"], "icon_url": "https://cdn.jsdelivr.net/gh/ideditor/temaki/icons/grass.svg"},
