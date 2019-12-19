@@ -222,10 +222,11 @@ _Breaking changes, which may affect downstream projects or sites that embed iD, 
 * Correct capitalization of "J-Bar Lift" and "T-Bar Lift" preset names
 * Render `landuse=village_green` areas in green ([#7011])
 * Render Putting Greens and similar features in light green ([#7101])
-* Update icon for Mast, Communication Mast, and Communication Tower ([#6985])
-* Update icon for Gate, Kissing Gate, and Cattle Grid ([#6814], [#6489])
+* Update icons for Mast, Communication Mast, and Communication Tower ([#6985])
+* Update icons for Gate, Kissing Gate, and Cattle Grid ([#6814], [#6489])
 * Update icon for Park to be different from Tree ([#6633])
-* Update icons for presets: diplomatic offices, marked crossings, transit platforms, buoys, Billboard, Jet Bridge, Scrap Yard, Bicycle Parking Garage, Bicycle Lockers, Bicycle Rental, Bicycle Repair Tool Stand, Boat Rental, Car Pooling Station, Car Sharing Station, Multilevel Parking Garage, Underground Parking, Park & Ride Lot, Lean-To, Picnic Shelter, Transit Shelter, Block, Chain, Height Restrictor, Turnstile, Barn, Stable, Basket Maker, Boar Builder, Handicraft, Pottery, Indoor Corridor, Cycle & Foot Path, Street Lamp, Commemorative Plaque, Fire Pit, Pier, Floating Pier, Minaret, Tunnel Area, Water Tower, Grassland, Grass, Tree Row, Energy Supplier Office, Insurance Office, Slide, Play Structure, Underground Power Cable, Chocolate Store, Lighting Store, Motorcycle Repair Shop, Storage Rental, Art Installation, Sculpture, Statue
+* Update icons for Bunker and Military Bunker ([#7139])
+* Update icons for presets: diplomatic offices, marked crossings, transit platforms, buoys, Billboard, Jet Bridge, Scrap Yard, Bicycle Parking Garage, Bicycle Lockers, Bicycle Rental, Bicycle Repair Tool Stand, Boat Rental, Car Pooling Station, Car Sharing Station, Multilevel Parking Garage, Underground Parking, Park & Ride Lot, Lean-To, Picnic Shelter, Transit Shelter, Block, Chain, Height Restrictor, Turnstile, Barn, Stable, Basket Maker, Boar Builder, Handicraft, Pottery, Indoor Corridor, Cycle & Foot Path, Street Lamp, Commemorative Plaque, Fire Pit, Pier, Floating Pier, Minaret, Tunnel Area, Water Tower, Grassland, Grass, Tree Row, Energy Supplier Office, Insurance Office, Slide, Play Structure, Underground Power Cable, Chocolate Store, Lighting Store, Motorcycle Repair Shop, Storage Rental, Art Installation, Sculpture, Statue, Coastline, Boat Store, Boatyard
 * Add "tree" as a search term for Natural Wood and Managed Forest ([#7097])
 * Add "packstation" as a search term for package pickup and dropoff lockers ([#7052])
 * Add "pilates" as a search term for Gym / Fitness Center ([#7137])
@@ -249,6 +250,7 @@ _Breaking changes, which may affect downstream projects or sites that embed iD, 
 * Only show the Country field on Flagpole features with `flag:type=national` ([#7099])
 * Don't show the Denomination field on features with `religion=none` ([#7135])
 
+[#7139]: https://github.com/openstreetmap/iD/issues/7139
 [#6965]: https://github.com/openstreetmap/iD/issues/6965
 [#7039]: https://github.com/openstreetmap/iD/issues/7039
 [#7031]: https://github.com/openstreetmap/iD/issues/7031
