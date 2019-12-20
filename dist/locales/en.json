@@ -4675,6 +4675,9 @@
                 "utility_semi": {
                     "label": "Utilities"
                 },
+                "utility": {
+                    "label": "Utility"
+                },
                 "valve": {
                     "label": "Type"
                 },

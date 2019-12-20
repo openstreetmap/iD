@@ -758,7 +758,7 @@
     {"key": "man_made", "value": "windmill", "description": "🄿 Windmill", "object_types": ["node", "area"], "icon_url": "https://cdn.jsdelivr.net/gh/mapbox/maki/icons/windmill-15.svg"},
     {"key": "man_made", "value": "works", "description": "🄿 Factory", "object_types": ["node", "area"], "icon_url": "https://cdn.jsdelivr.net/gh/mapbox/maki/icons/industry-15.svg"},
     {"key": "marker", "description": "🄿 Marker, 🄵 Type", "object_types": ["node"], "icon_url": "https://cdn.jsdelivr.net/gh/ideditor/temaki/icons/silo.svg"},
-    {"key": "utility", "description": "🄿 Utility Marker, 🄵 Utilities", "object_types": ["node"], "icon_url": "https://cdn.jsdelivr.net/gh/ideditor/temaki/icons/silo.svg"},
+    {"key": "utility", "description": "🄿 Utility Marker, 🄵 Utilities, 🄵 Utility", "object_types": ["node"], "icon_url": "https://cdn.jsdelivr.net/gh/ideditor/temaki/icons/silo.svg"},
     {"key": "utility", "value": "power", "description": "🄿 Power Marker", "object_types": ["node"], "icon_url": "https://cdn.jsdelivr.net/gh/ideditor/temaki/icons/silo.svg"},
     {"key": "military", "value": "bunker", "description": "🄿 Military Bunker", "object_types": ["node", "area"], "icon_url": "https://cdn.jsdelivr.net/gh/ideditor/temaki/icons/bunker.svg"},
     {"key": "military", "value": "checkpoint", "description": "🄿 Checkpoint", "object_types": ["node", "area"], "icon_url": "https://cdn.jsdelivr.net/gh/mapbox/maki/icons/barrier-15.svg"},
