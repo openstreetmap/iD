@@ -325,7 +325,8 @@ function suggestionsToPresets(presets) {
       Q177054: true,    // Burger King
       Q524757: true,    // KFC
       Q779845: true,    // CBA
-      Q1205312: true    // In-N-Out
+      Q1205312: true,   // In-N-Out
+      Q10443115: true   // Carlings
     };
 
     let logoURL;
