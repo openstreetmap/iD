@@ -430,6 +430,7 @@
     "tunnel": {"key": "tunnel", "type": "typeCombo", "label": "Type", "placeholder": "Default"},
     "usage_rail": {"key": "usage", "type": "combo", "label": "Usage Type", "strings": {"options": {"main": "Main", "branch": "Branch", "industrial": "Industrial", "military": "Military", "test": "Test", "tourism": "Tourism"}}},
     "utility_semi": {"key": "utility", "type": "semiCombo", "label": "Utilities"},
+    "utility": {"key": "utility", "type": "typeCombo", "label": "Utility"},
     "valve": {"key": "valve", "type": "combo", "label": "Type"},
     "vending": {"key": "vending", "type": "semiCombo", "label": "Types of Goods"},
     "video_calls": {"key": "video", "type": "check", "label": "Video Calls"},
