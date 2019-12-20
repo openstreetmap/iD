@@ -1,5 +1,5 @@
 import { t } from '../util/locale';
-
+import { utilSafeClassName } from '../util/util';
 
 export function presetField(id, field) {
     field = Object.assign({}, field);   // shallow copy
@@ -7,7 +7,7 @@ export function presetField(id, field) {
     field.id = id;
 
     // for use in classes, element ids, css selectors
-    field.safeid = id.replace(/[^_a-zA-Z0-9\-]/g, '_');
+    field.safeid = utilSafeClassName(id);
 
     field.matchGeometry = function(geometry) {
         return !field.geometry || field.geometry === geometry;

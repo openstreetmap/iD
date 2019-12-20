@@ -417,3 +417,9 @@ export function utilHashcode(str) {
     }
     return hash;
 }
+
+// returns version of `str` with all runs of special characters replaced by `_`;
+// suitable for HTML ids, classes, selectors, etc.
+export function utilSafeClassName(str) {
+    return str.toLowerCase().replace(/[^a-z0-9]+/g, '_');
+}
