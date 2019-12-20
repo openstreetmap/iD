@@ -1165,18 +1165,15 @@ a.hide-toggle {
     background-color: #ececec;
 }
 
-.preset-list-item button.preset-favorite-button,
 .preset-list-item button.tag-reference-button {
     height: 100%;
     width: 32px;
     flex: 0 0 auto;
     background: #f6f6f6;
 }
-[dir='ltr'] .preset-list-item button.preset-favorite-button,
 [dir='ltr'] .preset-list-item button.tag-reference-button {
     border-left: 1px solid #ccc;
 }
-[dir='rtl'] .preset-list-item button.preset-favorite-button,
 [dir='rtl'] .preset-list-item button.tag-reference-button {
     border-right: 1px solid #ccc;
 }
@@ -1187,21 +1184,11 @@ a.hide-toggle {
     border-radius: 4px 0 0 4px;
 }
 
-.preset-list-item button.preset-favorite-button:hover,
 .preset-list-item button.tag-reference-button:hover {
     background: #f1f1f1;
 }
-.preset-list-item button.preset-favorite-button .icon,
 .preset-list-item button.tag-reference-button .icon {
     opacity: .5;
-}
-
-button.preset-favorite-button .icon {
-    fill-opacity: 0;
-    stroke-width: 1;
-}
-button.preset-favorite-button.active .icon {
-    fill-opacity: inherit;
 }
 
 
@@ -3724,7 +3711,6 @@ li.issue-fix-item:not(.actionable) .fix-icon {
 
 /* hide and remove from layout */
 .inspector-hidden,
-.inspector-hover .preset-list-button-wrap .preset-favorite-button,
 .inspector-hover .preset-list-button-wrap .tag-reference-button,
 .inspector-hover label input[type="checkbox"],
 .inspector-hover label input[type="radio"],

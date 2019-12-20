@@ -35,10 +35,6 @@ export function uiTopToolbar(context) {
         context.layers()
             .on('change.topToolbar', debouncedUpdate);
 
-        context.presets()
-            .on('favoritePreset.topToolbar', update)
-            .on('recentsChange.topToolbar', update);
-
         update();
 
         function update() {

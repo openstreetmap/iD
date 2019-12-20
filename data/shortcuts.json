@@ -174,14 +174,16 @@
               "text": "shortcuts.editing.drawing.title"
             },
             {
-              "shortcuts": ["modes.add_feature.key"],
-              "text": "shortcuts.editing.drawing.focus_add_feature"
+              "shortcuts": ["1"],
+              "text": "shortcuts.editing.drawing.add_point"
             },
             {
-              "shortcuts": ["1", "2", "3"],
-              "text": "shortcuts.editing.drawing.add_favorite",
-              "separator": ",",
-              "suffix": "…"
+              "shortcuts": ["2"],
+              "text": "shortcuts.editing.drawing.add_line"
+            },
+            {
+              "shortcuts": ["3"],
+              "text": "shortcuts.editing.drawing.add_area"
             },
             {
               "shortcuts": ["modes.add_note.key"],

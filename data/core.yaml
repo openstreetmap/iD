@@ -1993,12 +1993,10 @@ en:
       title: "Editing"
       drawing:
         title: "Drawing"
-        focus_add_feature: "Focus the feature search field"
         add_point: "'Add point' mode"
         add_line: "'Add line' mode"
         add_area: "'Add area' mode"
         add_note: "'Add note' mode"
-        add_favorite: "Add a favorite feature"
         place_point: "Place a point or note"
         disable_snap: "Hold to disable point snapping"
         stop_line: "Finish drawing a line or area"
