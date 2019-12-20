@@ -28,7 +28,7 @@ import {
 export function uiNoteEditor(context) {
     var dispatch = d3_dispatch('change');
     var quickLinks = uiQuickLinks();
-    var noteComments = uiNoteComments();
+    var noteComments = uiNoteComments(context);
     var noteHeader = uiNoteHeader();
 
     // var formFields = uiFormFields(context);

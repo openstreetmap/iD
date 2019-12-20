@@ -6,7 +6,7 @@ import { services } from '../services';
 import { utilDetect } from '../util/detect';
 
 
-export function uiNoteComments() {
+export function uiNoteComments(context) {
     var _note;
 
 
@@ -76,8 +76,9 @@ export function uiNoteComments() {
 
 
     function replaceAvatars(selection) {
+        var showThirdPartyIcons = context.storage('preferences.privacy.thirdpartyicons') || 'true';
         var osm = services.osm;
-        if (!osm) return;
+        if (showThirdPartyIcons !== 'true' || !osm) return;
 
         var uids = {};  // gather uids in the comment thread
         _note.comments.forEach(function(d) {
