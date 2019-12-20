@@ -783,8 +783,8 @@ en:
       title: Privacy
       privacy_link: View the iD privacy policy
       third_party_icons:
-        description: Show Third Party Preset Icons
-        tooltip: Uncheck this box to avoid loading preset icons from third party sites such as Wikimedia Commons, Facebook, or Twitter.
+        description: Show Third Party Icons
+        tooltip: Uncheck this box to avoid loading icons from third party sites such as Wikimedia Commons, Facebook, or Twitter.
   save:
     title: Save
     help: "Review your changes and upload them to OpenStreetMap, making them visible to other users."
@@ -835,6 +835,8 @@ en:
     okay: "OK"
     cancel: "Cancel"
   splash:
+    privacy_update: "Our privacy policy has recently been updated."
+    privacy: "{updateMessage} By using this software, you agree to do so in accordance with the iD privacy policy, which can be found {here}."
     walkthrough: "Start the Walkthrough"
   source_switch:
     live: live

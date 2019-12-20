@@ -4038,6 +4038,7 @@ en:
       barrier/cycle_barrier:
         # barrier=cycle_barrier
         name: Cycle Barrier
+        # 'terms: bicycle barrier,bicycling barrier,bike gates,cycling barrier'
         terms: '<translate with synonyms or related terms for ''Cycle Barrier'', separated by commas>'
       barrier/ditch:
         # barrier=ditch
@@ -5597,9 +5598,9 @@ en:
         terms: '<translate with synonyms or related terms for ''Escape Room'', separated by commas>'
       leisure/firepit:
         # leisure=firepit
-        name: Firepit
-        # 'terms: fireplace,campfire'
-        terms: '<translate with synonyms or related terms for ''Firepit'', separated by commas>'
+        name: Fire Pit
+        # 'terms: bonfire,campfire,fire circle,fire hole,fire place,fire ring,firepit,fireplace,firering'
+        terms: '<translate with synonyms or related terms for ''Fire Pit'', separated by commas>'
       leisure/fishing:
         # leisure=fishing
         name: Fishing Spot
@@ -5608,12 +5609,12 @@ en:
       leisure/fitness_centre:
         # leisure=fitness_centre
         name: Gym / Fitness Center
-        # 'terms: health,gym,leisure,studio'
+        # 'terms: health,gym,leisure,pilates,studio'
         terms: '<translate with synonyms or related terms for ''Gym / Fitness Center'', separated by commas>'
       leisure/fitness_centre/yoga:
         # 'leisure=fitness_centre, sport=yoga'
         name: Yoga Studio
-        # 'terms: studio,asanas,modern yoga,meditation'
+        # 'terms: asanas,meditation,modern yoga,studio'
         terms: '<translate with synonyms or related terms for ''Yoga Studio'', separated by commas>'
       leisure/fitness_station:
         # leisure=fitness_station

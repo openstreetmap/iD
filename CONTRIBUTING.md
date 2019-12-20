@@ -290,33 +290,17 @@ you're going to update the presets, [review the Presets README](/data/presets/RE
 
 ## JavaScript
 
-iD uses ES5 syntax throughout the code, with the following exceptions:
-- [ES6 modules](http://exploringjs.com/es6/ch_modules.html) using `import` and
-`export` constructs. These are processed by [Rollup.js](https://rollupjs.org/guide/en)
-and not present in the distributed iD bundle.
-- Polyfills provided by [browser-polyfills](https://github.com/tiagomapmarques/browser-polyfills#what-does-it-have)
-  - `Promise`
-  - `fetch`
-  - `Map`
-  - `Set`
-  - `Array.find`
-  - `Array.findIndex`
-  - `Array.from`
-  - `Object.values`
-  - `Object.assign`
-  - `requestAnimationFrame (rAF)`
+Legacy iD code was written with ES5 syntax, however we now support most ES6 syntax via [Rollup.js](https://rollupjs.org/guide/en) and the [Rollup Bublé plugin](https://github.com/rollup/plugins/tree/master/packages/buble). You can find details about Bublé [here](https://buble.surge.sh/guide/).
 
-ES5 syntax is required for:
-* IE11, which about 15-20% of our users still use
-* PhantomJS which runs our tests (it would be great to replace this!)
+In order to continue to support older browsers like IE11 and our PhantomJS-based test runner, we also include the [browser-polyfills](https://github.com/tiagomapmarques/browser-polyfills#what-does-it-have) package.
 
-We will introduce ES6 syntax eventually when it makes sense to do so.
+We mostly follow the Airbnb style guide for JavaScript:
+- [Modern ES6](https://github.com/airbnb/javascript)
+- [Legacy ES5](https://github.com/airbnb/javascript/tree/es5-deprecated/es5)
 
-We use the [ES5 Airbnb style guide for JavaScript](https://github.com/airbnb/javascript/tree/es5-deprecated/es5) with
-only one difference:  **4 space soft tabs always for JavaScript, not 2.**
+We ask that you follow the convention of using 4 space indent in ES5 files and 2 space indent in ES6 files. While the indenting doesn't matter to the compiler, it does make it easier for us humans to see at a glance whether a file has been "upgraded" to ES6.
 
-No aligned `=`, no aligned arguments, spaces are either indents or the 1
-space between expressions. No hard tabs, ever.
+Always spaces, never tabs.
 
 JavaScript code should pass through [ESLint](http://eslint.org/) with no warnings.
 
