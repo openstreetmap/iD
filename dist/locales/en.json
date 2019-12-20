@@ -986,8 +986,8 @@
                 "title": "Privacy",
                 "privacy_link": "View the iD privacy policy",
                 "third_party_icons": {
-                    "description": "Show Third Party Preset Icons",
-                    "tooltip": "Uncheck this box to avoid loading preset icons from third party sites such as Wikimedia Commons, Facebook, or Twitter."
+                    "description": "Show Third Party Icons",
+                    "tooltip": "Uncheck this box to avoid loading icons from third party sites such as Wikimedia Commons, Facebook, or Twitter."
                 }
             }
         },
@@ -1045,6 +1045,8 @@
             "cancel": "Cancel"
         },
         "splash": {
+            "privacy_update": "Our privacy policy has recently been updated.",
+            "privacy": "{updateMessage} By using this software, you agree to do so in accordance with the iD privacy policy, which can be found {here}.",
             "walkthrough": "Start the Walkthrough"
         },
         "source_switch": {
@@ -6089,7 +6091,7 @@
                 },
                 "barrier/cycle_barrier": {
                     "name": "Cycle Barrier",
-                    "terms": ""
+                    "terms": "bicycle barrier,bicycling barrier,bike gates,cycling barrier"
                 },
                 "barrier/ditch": {
                     "name": "Trench",
@@ -7434,8 +7436,8 @@
                     "terms": "escape game,escape the room,puzzle room,quest room"
                 },
                 "leisure/firepit": {
-                    "name": "Firepit",
-                    "terms": "fireplace,campfire"
+                    "name": "Fire Pit",
+                    "terms": "bonfire,campfire,fire circle,fire hole,fire place,fire ring,firepit,fireplace,firering"
                 },
                 "leisure/fishing": {
                     "name": "Fishing Spot",
@@ -7443,11 +7445,11 @@
                 },
                 "leisure/fitness_centre": {
                     "name": "Gym / Fitness Center",
-                    "terms": "health,gym,leisure,studio"
+                    "terms": "health,gym,leisure,pilates,studio"
                 },
                 "leisure/fitness_centre/yoga": {
                     "name": "Yoga Studio",
-                    "terms": "studio,asanas,modern yoga,meditation"
+                    "terms": "asanas,meditation,modern yoga,studio"
                 },
                 "leisure/fitness_station": {
                     "name": "Outdoor Fitness Station",
