@@ -23,9 +23,15 @@
         "area"
     ],
     "terms": [
-        "wilderness hut",
+        "alpine hut",
+        "cabin",
         "backcountry hut",
-        "bothy"
+        "bothy",
+        "lodge",
+        "lodging",
+        "overnight accommodations",
+        "sleeping shelter",
+        "wilderness hut"
     ],
     "tags": {
         "tourism": "wilderness_hut"

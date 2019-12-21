@@ -5627,7 +5627,7 @@
                 },
                 "amenity/shelter/lean_to": {
                     "name": "Lean-To",
-                    "terms": ""
+                    "terms": "alpine hut,cabin,leanto,lodging,overnight accommodations,sleeping shelter,wilderness hut"
                 },
                 "amenity/shelter/picnic_shelter": {
                     "name": "Picnic Shelter",
@@ -9415,11 +9415,11 @@
                 },
                 "tourism/alpine_hut": {
                     "name": "Alpine Hut",
-                    "terms": "climbing hut"
+                    "terms": "cabin,climbing hut,lodge,lodging,overnight accommodations,wilderness hut"
                 },
                 "tourism/apartment": {
                     "name": "Guest Apartment / Condo",
-                    "terms": ""
+                    "terms": "bnb,holiday rental,lodging,overnight accommodations,vacation rental"
                 },
                 "tourism/aquarium": {
                     "name": "Aquarium",
@@ -9471,7 +9471,7 @@
                 },
                 "tourism/chalet": {
                     "name": "Holiday Cottage",
-                    "terms": "holiday,holiday cottage,holiday home,vacation,vacation home"
+                    "terms": "chalet,holiday cabin,holiday cottage,holiday home,lodge,lodging,overnight accommodations,vacation cabin,vacation home"
                 },
                 "tourism/gallery": {
                     "name": "Art Gallery",
@@ -9479,15 +9479,15 @@
                 },
                 "tourism/guest_house": {
                     "name": "Guest House",
-                    "terms": "B&B,Bed and Breakfast"
+                    "terms": "b & b,b and b,B&B,Bed and Breakfast,bnb,lodging,overnight accommodations"
                 },
                 "tourism/hostel": {
                     "name": "Hostel",
-                    "terms": ""
+                    "terms": "bunk beds,dormitories,dorms,lodging,overnight accommodations"
                 },
                 "tourism/hotel": {
                     "name": "Hotel",
-                    "terms": ""
+                    "terms": "concierge,lodge,lodging,overnight accommodations"
                 },
                 "tourism/information": {
                     "name": "Information",
@@ -9519,7 +9519,7 @@
                 },
                 "tourism/motel": {
                     "name": "Motel",
-                    "terms": ""
+                    "terms": "lodging,motor hotel,overnight accommodations"
                 },
                 "tourism/museum": {
                     "name": "Museum",
@@ -9543,7 +9543,7 @@
                 },
                 "tourism/wilderness_hut": {
                     "name": "Wilderness Hut",
-                    "terms": "wilderness hut,backcountry hut,bothy"
+                    "terms": "alpine hut,cabin,backcountry hut,bothy,lodge,lodging,overnight accommodations,sleeping shelter,wilderness hut"
                 },
                 "tourism/zoo": {
                     "name": "Zoo",
