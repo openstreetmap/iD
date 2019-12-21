@@ -148,6 +148,19 @@
         "street": 0.7,
         "housenumber": 0.3
       }
+    },
+    {
+      "countryCodes": ["bo"],
+      "format": [
+        ["street", "housenumber"],
+        ["neighbourhood", "city"]
+      ],
+      "widths": {
+        "street": 0.7,
+        "housenumber": 0.3,
+        "neighbourhood": 0.5,
+        "city": 0.5
+      }
     }
   ]
 }
