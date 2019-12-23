@@ -10,14 +10,19 @@ export function uiOsmoseHeader() {
         var unknown = t('inspector.unknown');
 
         if (!d) return unknown;
-        var errorType = d.error_type;
-        var et = dataEn.QA.osmose.error_types[errorType];
 
-        if (et && et.title) {
-            return t('QA.osmose.error_types.' + errorType + '.title');
-        } else {
-            return unknown;
+        // Some errors fall back to their category for strings
+        var i, et;
+        var keys = [d.error_type, d.item];
+        for (i = 0; i < 2; i++) {
+            et = dataEn.QA.osmose.error_types[keys[i]];
+
+            if (et && et.title) {
+                return t('QA.osmose.error_types.' + keys[i] + '.title');
+            }
         }
+
+        return unknown;
     }
 
 
@@ -52,7 +57,7 @@ export function uiOsmoseHeader() {
                     d.service,
                     'error_id-' + d.id,
                     'error_type-' + d.error_type,
-                    'category-' + d.category
+                    'category-' + d.item
                 ].join(' ');
             });
 

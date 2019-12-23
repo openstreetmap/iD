@@ -18,19 +18,18 @@ export function uiOsmoseDetails(context) {
 
         if (!d) return unknown;
 
-        if (d.desc) return d.desc;
+        // Some errors fall back to their category for strings
+        var i, et;
+        var keys = [d.error_type, d.item];
+        for (i = 0; i < 2; i++) {
+            et = dataEn.QA.osmose.error_types[keys[i]];
 
-        var errorType = d.error_type;
-        var et = dataEn.QA.osmose.error_types[errorType];
-
-        var detail;
-        if (et && et.description) {
-            detail = t('QA.osmose.error_types.' + errorType + '.description', d.replacements);
-        } else {
-            detail = unknown;
+            if (et && et.description) {
+                return t('QA.osmose.error_types.' + keys[i] + '.description', d.replacements);
+            }
         }
 
-        return detail;
+        return unknown;
     }
 
 
@@ -64,14 +63,10 @@ export function uiOsmoseDetails(context) {
             .html(errorDetail);
 
         // If there are entity links in the error message..
-        var relatedEntities = _error.elems;
         descriptionEnter.selectAll('.error_entity_link, .error_object_link')
             .each(function() {
                 var link = d3_select(this);
-                var isObjectLink = link.classed('error_object_link');
-                var entityID = isObjectLink ?
-                    (_error.object_type + _error.object_id)
-                    : this.textContent;
+                var entityID = this.textContent;
                 var entity = context.hasEntity(entityID);
 
                 // Add click handler
@@ -107,7 +102,7 @@ export function uiOsmoseDetails(context) {
                 if (entity) {
                     var name = utilDisplayName(entity);  // try to use common name
 
-                    if (!name && !isObjectLink) {
+                    if (!name) {
                         var preset = context.presets().match(entity, context.graph());
                         name = preset && !preset.isFallback() && preset.name();  // fallback to preset name
                     }
@@ -119,7 +114,7 @@ export function uiOsmoseDetails(context) {
             });
 
         // Don't hide entities related to this error - #5880
-        context.features().forceVisible(relatedEntities);
+        context.features().forceVisible(_error.elems);
         context.map().pan([0,0]);  // trigger a redraw
     }
 

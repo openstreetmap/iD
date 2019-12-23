@@ -155,12 +155,18 @@
 
 /* Osmose Errors
 ------------------------------------------------------- */
-.osmose {
-    color: #FFFFFF;
+
+.osmose.category-0 {
+    color: #BDBDBD;
 }
 
-.osmose.category-structure {
-    color: #F9C700;
+.osmose.category-1040,
+.osmose.category-1050,
+.osmose.category-1070,
+.osmose.category-1080,
+.osmose.category-1150,
+.osmose.category-1280 {
+    color: #DCB000;
 }
 
 /* Custom Map Data (geojson, gpx, kml, vector tile) */

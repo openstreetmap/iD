@@ -94,7 +94,8 @@ export default {
         var options = {
             full: 'true', // Returns element IDs
             level: '1,2,3',
-            zoom: '19'
+            zoom: '19',
+            item: services.osmose.items.join() // only interested in certain errors
         };
 
         // determine the needed tiles to cover the view
@@ -110,7 +111,7 @@ export default {
             if (_erCache.loadedTile[tile.id] || _erCache.inflightTile[tile.id]) return;
 
             var rect = tile.extent.rectangle(); // E, N, W, S
-            var params = Object.assign({}, options, { bbox: [rect[0], rect[1], rect[2], rect[3]].join() });
+            var params = Object.assign({}, options, { bbox: rect.join() });
 
             var url = _osmoseUrlRoot + 'issues?' + utilQsString(params);
 
@@ -133,7 +134,7 @@ export default {
                             var type = [issue.item, issue.classs].join('-');
 
                             // Filter out unsupported error types (some are too specific or advanced)
-                            if (services.osmose.errorTypes[type]) {
+                            if (type in services.osmose.errorTypes) {
                                 loc = preventCoincident(loc, true);
 
                                 var d = new qaError({
@@ -144,8 +145,7 @@ export default {
                                     // Extra details needed for this service
                                     identifier: issue.id, // this is used to post changes to the error
                                     elems: elems,
-                                    object_id: elems.length ? elems[0].substring(1) : '',
-                                    object_type: elems.length ? elems[0].substring(0,1) : ''
+                                    item: issue.item // category of the issue for styling
                                 });
 
                                 // Variables used in the description

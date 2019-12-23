@@ -1034,9 +1034,54 @@
             "osmose": {
                 "title": "Osmose",
                 "error_types": {
+                    "0": {
+                        "title": "Building Intersection",
+                        "description": "{0} and {1} intersect."
+                    },
+                    "1070": {
+                        "title": "Highway intersecting water",
+                        "description": "{1} intersects with {0}, but there is no junction node, bridge, or tunnel."
+                    },
+                    "1150": {
+                        "title": "Overlapping Similar Areas",
+                        "description": "{0} and {1} overlap."
+                    },
+                    "0-3": {
+                        "title": "Suspiciously Small Building",
+                        "description": "{0} is a suspisciously small building."
+                    },
+                    "0-4": {
+                        "title": "Gap Between Buildings",
+                        "description": "A gap exists between {0} and {1} which looks suspiciously small."
+                    },
+                    "1040-1": {
+                        "title": "Invalid Polygon",
+                        "description": "{0} intersects itself."
+                    },
+                    "1050-1": {
+                        "title": "Reversed Roundabout",
+                        "description": "{0} looks like a roundabout mapped in the wrong direction for this location."
+                    },
+                    "1050-1050": {
+                        "title": "Reversed Mini-Roundabout",
+                        "description": "{0} looks like a mini-roundabout with the incorrect \"direction\" tag for this location."
+                    },
                     "1070-1": {
-                        "title": "Highway intersecting building",
-                        "description": "{1} intersects with {0}."
+                        "title": "Highway intersecting building"
+                    },
+                    "1070-8": {
+                        "title": "Highway intersecting highway"
+                    },
+                    "1070-10": {
+                        "title": "Waterway intersecting waterway"
+                    },
+                    "1080-1": {
+                        "title": "Orphan Nodes Cluster",
+                        "description": "A culster of nodes with no tags is present."
+                    },
+                    "1280-1": {
+                        "title": "Incorrect Speed Camera",
+                        "description": "Speed camera should be on the highway or part of an \"enforcement\" relation."
                     }
                 }
             },

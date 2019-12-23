@@ -34,10 +34,49 @@
             }
         },
         "osmose": {
+            "items": ["0", "1040", "1050", "1070", "1080", "1150", "1280"],
             "errorTypes": {
+                "0-1": {
+                    "icon": "maki-home"
+                },
+                "0-2": {
+                    "icon": "maki-home"
+                },
+                "1040-1": {
+                    "icon": "maki-square-stroked"
+                },
+                "1050-1": {
+                    "icon": "maki-circle-stroked"
+                },
+                "1050-1050": {
+                    "icon": "maki-circle-stroked"
+                },
+                "1150-1": {
+                    "icon": "far-clone"
+                },
+                "1150-2": {
+                    "icon": "far-clone"
+                },
+                "1150-3": {
+                    "icon": "far-clone"
+                },
                 "1070-1": {
-                    "icon": "maki-home",
-                    "category": "structure"
+                    "icon": "maki-home"
+                },
+                "1070-4": {
+                    "icon": "maki-dam"
+                },
+                "1070-5": {
+                    "icon": "maki-dam"
+                },
+                "1070-8": {
+                    "icon": "maki-cross"
+                },
+                "1070-10": {
+                    "icon": "maki-cross"
+                },
+                "1280-1": {
+                    "icon": "maki-attraction"
                 }
             }
         }
