@@ -6351,6 +6351,10 @@
                     "name": "Chimney Sweeper",
                     "terms": ""
                 },
+                "craft/cleaning": {
+                    "name": "Cleaning Service",
+                    "terms": ""
+                },
                 "craft/clockmaker": {
                     "name": "Clockmaker",
                     "terms": ""
@@ -6436,8 +6440,8 @@
                     "terms": "pipe"
                 },
                 "craft/pottery": {
-                    "name": "Pottery",
-                    "terms": "ceramic"
+                    "name": "Pottery Maker",
+                    "terms": "ceramic,kiln,pot,vase"
                 },
                 "craft/rigger": {
                     "name": "Rigger",
@@ -8877,6 +8881,10 @@
                     "name": "Butcher",
                     "terms": "chicken,beef,lamb,meat,pork"
                 },
+                "shop/camera": {
+                    "name": "Camera Equipment Store",
+                    "terms": "camera,film,lens,photo"
+                },
                 "shop/candles": {
                     "name": "Candle Shop",
                     "terms": "wax"
@@ -9028,6 +9036,10 @@
                 "shop/fishing": {
                     "name": "Fishing Shop",
                     "terms": "bait,fishing line,flies,fly,lure,reel,rod,tackle"
+                },
+                "shop/flooring": {
+                    "name": "Flooring Supply Shop",
+                    "terms": "tile"
                 },
                 "shop/florist": {
                     "name": "Florist",
@@ -9251,7 +9263,11 @@
                 },
                 "shop/photo": {
                     "name": "Photography Store",
-                    "terms": "camera,film"
+                    "terms": "camera,film,lens,photo"
+                },
+                "shop/pottery": {
+                    "name": "Pottery Store",
+                    "terms": "ceramic,pot,vase"
                 },
                 "shop/printer_ink": {
                     "name": "Printer Ink Store",
@@ -9348,6 +9364,10 @@
                 "shop/tobacco": {
                     "name": "Tobacco Shop",
                     "terms": "cigarettes,cigars"
+                },
+                "shop/tool_hire": {
+                    "name": "Tool Rental",
+                    "terms": ""
                 },
                 "shop/toys": {
                     "name": "Toy Store",

@@ -4396,6 +4396,10 @@ en:
         # craft=chimney_sweeper
         name: Chimney Sweeper
         terms: '<translate with synonyms or related terms for ''Chimney Sweeper'', separated by commas>'
+      craft/cleaning:
+        # craft=cleaning
+        name: Cleaning Service
+        terms: '<translate with synonyms or related terms for ''Cleaning Service'', separated by commas>'
       craft/clockmaker:
         # craft=clockmaker
         name: Clockmaker
@@ -4495,9 +4499,9 @@ en:
         terms: '<translate with synonyms or related terms for ''Plumber'', separated by commas>'
       craft/pottery:
         # craft=pottery
-        name: Pottery
-        # 'terms: ceramic'
-        terms: '<translate with synonyms or related terms for ''Pottery'', separated by commas>'
+        name: Pottery Maker
+        # 'terms: ceramic,kiln,pot,vase'
+        terms: '<translate with synonyms or related terms for ''Pottery Maker'', separated by commas>'
       craft/rigger:
         # craft=rigger
         name: Rigger
@@ -7388,6 +7392,11 @@ en:
         name: Butcher
         # 'terms: chicken,beef,lamb,meat,pork'
         terms: '<translate with synonyms or related terms for ''Butcher'', separated by commas>'
+      shop/camera:
+        # shop=camera
+        name: Camera Equipment Store
+        # 'terms: camera,film,lens,photo'
+        terms: '<translate with synonyms or related terms for ''Camera Equipment Store'', separated by commas>'
       shop/candles:
         # shop=candles
         name: Candle Shop
@@ -7576,6 +7585,11 @@ en:
       shop/fishmonger:
         # shop=fishmonger
         name: Fishmonger
+      shop/flooring:
+        # shop=flooring
+        name: Flooring Supply Shop
+        # 'terms: tile'
+        terms: '<translate with synonyms or related terms for ''Flooring Supply Shop'', separated by commas>'
       shop/florist:
         # shop=florist
         name: Florist
@@ -7839,8 +7853,13 @@ en:
       shop/photo:
         # shop=photo
         name: Photography Store
-        # 'terms: camera,film'
+        # 'terms: camera,film,lens,photo'
         terms: '<translate with synonyms or related terms for ''Photography Store'', separated by commas>'
+      shop/pottery:
+        # shop=pottery
+        name: Pottery Store
+        # 'terms: ceramic,pot,vase'
+        terms: '<translate with synonyms or related terms for ''Pottery Store'', separated by commas>'
       shop/printer_ink:
         # shop=printer_ink
         name: Printer Ink Store
@@ -7957,6 +7976,10 @@ en:
         name: Tobacco Shop
         # 'terms: cigarettes,cigars'
         terms: '<translate with synonyms or related terms for ''Tobacco Shop'', separated by commas>'
+      shop/tool_hire:
+        # shop=tool_hire
+        name: Tool Rental
+        terms: '<translate with synonyms or related terms for ''Tool Rental'', separated by commas>'
       shop/toys:
         # shop=toys
         name: Toy Store

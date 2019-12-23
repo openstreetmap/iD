@@ -30,7 +30,7 @@ _Breaking changes, which may affect downstream projects or sites that embed iD, 
 -->
 
 # 2.17.0
-##### Planned: 2019-Dec-20
+##### 2019-Dec-23
 
 #### :newspaper: News
 * We've launched the [iD Blog](https://ideditor.blog) providing news and insights into the project from its maintainers and contributors ([#7045])
@@ -197,6 +197,7 @@ _Breaking changes, which may affect downstream projects or sites that embed iD, 
 [@mbrickn]: https://github.com/mbrickn
 
 #### :rocket: Presets
+* Add Cleaning Service, Camera Equipment, Flooring Supply, Pottery Store, Tool Rental presets
 * Add Notice Board, Poster Box, and Advertising Totem presets ([#6965], thanks [@hikemaniac])
 * Add Kiddie Ride, Log Flume, and Swing Carousel presets ([#7039], thanks [@hikemaniac])
 * Add Spice Shop preset ([#7031], thanks [@scaidermern])
