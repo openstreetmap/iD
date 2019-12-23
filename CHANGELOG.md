@@ -185,12 +185,10 @@ _Press <kbd>P</kbd> to view privacy preferences._
 * Differentiate the "wireframe mode" and "highlight changes" hotkeys in the German localization ([#6972], thanks [@manfredbrandl])
 * Improve Chinese address field ([#7075], thanks [@koaber])
 * Add Bolivia-specific address and phone number formats ([#7147], thanks [@51114u9])
-* Add the Occitan language to the Multilingual Name field ([#7156])
 
 [#6972]: https://github.com/openstreetmap/iD/issues/6972
 [#7075]: https://github.com/openstreetmap/iD/issues/7075
 [#7147]: https://github.com/openstreetmap/iD/issues/7147
-[#7156]: https://github.com/openstreetmap/iD/issues/7156
 
 [@manfredbrandl]: https://github.com/manfredbrandl
 [@koaber]: https://github.com/koaber
