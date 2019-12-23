@@ -97,8 +97,8 @@ export function uiToolUndoRedo(context) {
                 })
                 .each(function() {
                     var selection = d3_select(this);
-                    if (selection.property('tooltipVisible')) {
-                        selection.call(tooltipBehavior.show);
+                    if (!selection.select('.tooltip.in').empty()) {
+                        selection.call(tooltipBehavior.updateContent);
                     }
                 });
         }
