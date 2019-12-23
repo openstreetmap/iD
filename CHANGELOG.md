@@ -38,8 +38,15 @@ _Breaking changes, which may affect downstream projects or sites that embed iD, 
 [#7045]: https://github.com/openstreetmap/iD/issues/7045
 
 #### :mega: Release Highlights
+* :metro: You can now add bridges and tunnels with a single click to fix crossing roads, rails, and waterways. Thanks to [@CarycaKatarzyna] for working on this!<br/>
+_Find the "Add a bridge" and "Add a tunnel" fixes for each crossing in the Issues inspector._
+* :earth_africa: Selected features now stay visible while zoomed out, plus you can zoom to multiple selected features together.<br/>
+_Select a few large features and press <kbd>Z</kbd> to view their full extent, no matter how vast._
+* :handshake: iD now has its own [Privacy Policy](https://github.com/openstreetmap/iD/blob/master/PRIVACY.md).<br/>
+_Press <kbd>P</kbd> to view privacy preferences._
 
 #### :boom: Breaking Changes
+* Remove Maxar imagery layers due to [announced suspension of service](https://www.openstreetmap.org/user/@kevin_bullock/diary/3916520)
 
 #### :tada: New Features
 * Display selected features at any zoom level ([#2962], [#5001])
@@ -204,7 +211,6 @@ _Breaking changes, which may affect downstream projects or sites that embed iD, 
 [@mbrickn]: https://github.com/mbrickn
 
 #### :rocket: Presets
-* Add Cleaning Service, Camera Equipment, Flooring Supply, Pottery Store, Tool Rental presets
 * Add Notice Board, Poster Box, and Advertising Totem presets ([#6965], thanks [@hikemaniac])
 * Add Kiddie Ride, Log Flume, and Swing Carousel presets ([#7039], thanks [@hikemaniac])
 * Add Spice Shop preset ([#7031], thanks [@scaidermern])
