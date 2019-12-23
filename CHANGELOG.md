@@ -68,6 +68,8 @@ _Breaking changes, which may affect downstream projects or sites that embed iD, 
 * Add button to manually retry connecting to the OpenStreetMap API upon a failure ([#6650])
 * Clarify the OpenStreetMap API connection failure message ([#7021])
 * Improve styling of points linked to Wikidata
+* Render `landuse=village_green` areas in green ([#7011])
+* Render Putting Greens and similar features in light green ([#7101])
 
 [#6565]: https://github.com/openstreetmap/iD/issues/6565
 [#6696]: https://github.com/openstreetmap/iD/issues/6696
@@ -86,6 +88,8 @@ _Breaking changes, which may affect downstream projects or sites that embed iD, 
 [#7079]: https://github.com/openstreetmap/iD/issues/7079
 [#6650]: https://github.com/openstreetmap/iD/issues/6650
 [#7021]: https://github.com/openstreetmap/iD/issues/7021
+[#7011]: https://github.com/openstreetmap/iD/issues/7011
+[#7101]: https://github.com/openstreetmap/iD/issues/7101
 
 [@CarycaKatarzyna]: https://github.com/CarycaKatarzyna
 
@@ -173,12 +177,15 @@ _Breaking changes, which may affect downstream projects or sites that embed iD, 
 #### :earth_asia: Localization
 * Differentiate the "wireframe mode" and "highlight changes" hotkeys in the German localization ([#6972], thanks [@manfredbrandl])
 * Improve Chinese address field ([#7075], thanks [@koaber])
+* Add Bolivia-specific address and phone number formats ([#7147], thanks [@51114u9])
 
 [#6972]: https://github.com/openstreetmap/iD/issues/6972
 [#7075]: https://github.com/openstreetmap/iD/issues/7075
+[#7147]: https://github.com/openstreetmap/iD/issues/7147
 
 [@manfredbrandl]: https://github.com/manfredbrandl
 [@koaber]: https://github.com/koaber
+[@51114u9]: https://github.com/51114u9
 
 #### :hourglass: Performance
 * Determine locations' country codes without calling out to a geocoding server ([#6941])
@@ -212,17 +219,16 @@ _Breaking changes, which may affect downstream projects or sites that embed iD, 
 * Add unsearchable Disused Railway Feature preset ([#7119])
 * Add Recently Demolished Building preset and render them as areas ([#7098])
 * Add Recreational Network Node preset for Belgium, Germany, Luxembourg, and The Netherlands ([#6992])
-* Add Consultancy Office preset for new brands
+* Add presets for new brands: Consultancy Office, Cleaning Service, Camera Equipment Store, Flooring Supply Shop, Pottery Store, Tool Rental
 * Add Fish Pass preset
 * Append "Area" to the names of linear area presets: Bridge, Tunnel, Road, River, Stream, Canal ([#7015])
 * Append "Feature" to the names of various generic presets, e.g. "Tourism Feature"
 * Append "Ride" to the names of some attraction presets, e.g "Pirate Ship Ride"
 * Rename "Wood" preset to "Natural Wood"
-* Rename "Car Pooling" and "Car Sharing" to "Car Pooling Station" and "Car Sharing Station"
+* Rename "Car Pooling" and "Car Sharing" presets to "Car Pooling Station" and "Car Sharing Station"
+* Rename "Pottery" craft preset to "Pottery Maker"
 * Correct "Firepit" preset name to "Fire Pit"
 * Correct capitalization of "J-Bar Lift" and "T-Bar Lift" preset names
-* Render `landuse=village_green` areas in green ([#7011])
-* Render Putting Greens and similar features in light green ([#7101])
 * Update icons for Mast, Communication Mast, and Communication Tower ([#6985])
 * Update icons for Gate, Kissing Gate, and Cattle Grid ([#6814], [#6489])
 * Update icon for Park to be different from Tree ([#6633])
@@ -238,7 +244,7 @@ _Breaking changes, which may affect downstream projects or sites that embed iD, 
 * Add Mapillary ID field with link to view the image on the Mapillary website ([#7064])
 * Add Internet Access, SMS, and Video Calls fields to the Telephone preset ([#7010])
 * Add Tactile Paving field to the Steps preset ([#7082], thanks [@stragu])
-* Add the Reference Code field to Vending Machine presets ([#7002])
+* Add Reference Code field to Vending Machine presets ([#7002])
 * Add Drinks field to the Drink Vending Machine preset
 * Add Drinkable field to various water source presets
 * Add Type field to Fountain preset
@@ -266,8 +272,6 @@ _Breaking changes, which may affect downstream projects or sites that embed iD, 
 [#7098]: https://github.com/openstreetmap/iD/issues/7098
 [#6992]: https://github.com/openstreetmap/iD/issues/6992
 [#7015]: https://github.com/openstreetmap/iD/issues/7015
-[#7011]: https://github.com/openstreetmap/iD/issues/7011
-[#7101]: https://github.com/openstreetmap/iD/issues/7101
 [#6985]: https://github.com/openstreetmap/iD/issues/6985
 [#6814]: https://github.com/openstreetmap/iD/issues/6814
 [#6489]: https://github.com/openstreetmap/iD/issues/6489
