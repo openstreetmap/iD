@@ -34,8 +34,13 @@
         "tourism": "guest_house"
     },
     "terms": [
+        "b & b",
+        "b and b",
         "B&B",
-        "Bed and Breakfast"
+        "Bed and Breakfast",
+        "bnb",
+        "lodging",
+        "overnight accommodations"
     ],
     "name": "Guest House"
 }

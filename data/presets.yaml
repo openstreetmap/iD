@@ -3610,6 +3610,7 @@ en:
       amenity/shelter/lean_to:
         # 'amenity=shelter, shelter_type=lean_to'
         name: Lean-To
+        # 'terms: alpine hut,cabin,leanto,lodging,overnight accommodations,sleeping shelter,wilderness hut'
         terms: '<translate with synonyms or related terms for ''Lean-To'', separated by commas>'
       amenity/shelter/picnic_shelter:
         # 'amenity=shelter, shelter_type=picnic_shelter'
@@ -4441,6 +4442,10 @@ en:
         # craft=chimney_sweeper
         name: Chimney Sweeper
         terms: '<translate with synonyms or related terms for ''Chimney Sweeper'', separated by commas>'
+      craft/cleaning:
+        # craft=cleaning
+        name: Cleaning Service
+        terms: '<translate with synonyms or related terms for ''Cleaning Service'', separated by commas>'
       craft/clockmaker:
         # craft=clockmaker
         name: Clockmaker
@@ -4540,9 +4545,9 @@ en:
         terms: '<translate with synonyms or related terms for ''Plumber'', separated by commas>'
       craft/pottery:
         # craft=pottery
-        name: Pottery
-        # 'terms: ceramic'
-        terms: '<translate with synonyms or related terms for ''Pottery'', separated by commas>'
+        name: Pottery Maker
+        # 'terms: ceramic,kiln,pot,vase'
+        terms: '<translate with synonyms or related terms for ''Pottery Maker'', separated by commas>'
       craft/rigger:
         # craft=rigger
         name: Rigger
@@ -7433,6 +7438,11 @@ en:
         name: Butcher
         # 'terms: chicken,beef,lamb,meat,pork'
         terms: '<translate with synonyms or related terms for ''Butcher'', separated by commas>'
+      shop/camera:
+        # shop=camera
+        name: Camera Equipment Store
+        # 'terms: camera,film,lens,photo'
+        terms: '<translate with synonyms or related terms for ''Camera Equipment Store'', separated by commas>'
       shop/candles:
         # shop=candles
         name: Candle Shop
@@ -7621,6 +7631,11 @@ en:
       shop/fishmonger:
         # shop=fishmonger
         name: Fishmonger
+      shop/flooring:
+        # shop=flooring
+        name: Flooring Supply Shop
+        # 'terms: tile'
+        terms: '<translate with synonyms or related terms for ''Flooring Supply Shop'', separated by commas>'
       shop/florist:
         # shop=florist
         name: Florist
@@ -7884,8 +7899,13 @@ en:
       shop/photo:
         # shop=photo
         name: Photography Store
-        # 'terms: camera,film'
+        # 'terms: camera,film,lens,photo'
         terms: '<translate with synonyms or related terms for ''Photography Store'', separated by commas>'
+      shop/pottery:
+        # shop=pottery
+        name: Pottery Store
+        # 'terms: ceramic,pot,vase'
+        terms: '<translate with synonyms or related terms for ''Pottery Store'', separated by commas>'
       shop/printer_ink:
         # shop=printer_ink
         name: Printer Ink Store
@@ -8002,6 +8022,10 @@ en:
         name: Tobacco Shop
         # 'terms: cigarettes,cigars'
         terms: '<translate with synonyms or related terms for ''Tobacco Shop'', separated by commas>'
+      shop/tool_hire:
+        # shop=tool_hire
+        name: Tool Rental
+        terms: '<translate with synonyms or related terms for ''Tool Rental'', separated by commas>'
       shop/toys:
         # shop=toys
         name: Toy Store
@@ -8081,11 +8105,12 @@ en:
       tourism/alpine_hut:
         # tourism=alpine_hut
         name: Alpine Hut
-        # 'terms: climbing hut'
+        # 'terms: cabin,climbing hut,lodge,lodging,overnight accommodations,wilderness hut'
         terms: '<translate with synonyms or related terms for ''Alpine Hut'', separated by commas>'
       tourism/apartment:
         # tourism=apartment
         name: Guest Apartment / Condo
+        # 'terms: bnb,holiday rental,lodging,overnight accommodations,vacation rental'
         terms: '<translate with synonyms or related terms for ''Guest Apartment / Condo'', separated by commas>'
       tourism/aquarium:
         # tourism=aquarium
@@ -8149,7 +8174,7 @@ en:
       tourism/chalet:
         # tourism=chalet
         name: Holiday Cottage
-        # 'terms: holiday,holiday cottage,holiday home,vacation,vacation home'
+        # 'terms: chalet,holiday cabin,holiday cottage,holiday home,lodge,lodging,overnight accommodations,vacation cabin,vacation home'
         terms: '<translate with synonyms or related terms for ''Holiday Cottage'', separated by commas>'
       tourism/gallery:
         # tourism=gallery
@@ -8159,15 +8184,17 @@ en:
       tourism/guest_house:
         # tourism=guest_house
         name: Guest House
-        # 'terms: B&B,Bed and Breakfast'
+        # 'terms: b & b,b and b,B&B,Bed and Breakfast,bnb,lodging,overnight accommodations'
         terms: '<translate with synonyms or related terms for ''Guest House'', separated by commas>'
       tourism/hostel:
         # tourism=hostel
         name: Hostel
+        # 'terms: bunk beds,dormitories,dorms,lodging,overnight accommodations'
         terms: '<translate with synonyms or related terms for ''Hostel'', separated by commas>'
       tourism/hotel:
         # tourism=hotel
         name: Hotel
+        # 'terms: concierge,lodge,lodging,overnight accommodations'
         terms: '<translate with synonyms or related terms for ''Hotel'', separated by commas>'
       tourism/information:
         # tourism=information
@@ -8202,6 +8229,7 @@ en:
       tourism/motel:
         # tourism=motel
         name: Motel
+        # 'terms: lodging,motor hotel,overnight accommodations'
         terms: '<translate with synonyms or related terms for ''Motel'', separated by commas>'
       tourism/museum:
         # tourism=museum
@@ -8228,7 +8256,7 @@ en:
       tourism/wilderness_hut:
         # tourism=wilderness_hut
         name: Wilderness Hut
-        # 'terms: wilderness hut,backcountry hut,bothy'
+        # 'terms: alpine hut,cabin,backcountry hut,bothy,lodge,lodging,overnight accommodations,sleeping shelter,wilderness hut'
         terms: '<translate with synonyms or related terms for ''Wilderness Hut'', separated by commas>'
       tourism/zoo:
         # tourism=zoo

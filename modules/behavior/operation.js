@@ -7,6 +7,9 @@ export function behaviorOperation(context) {
     var _operation;
 
     function keypress() {
+        // prevent operations during low zoom selection
+        if (!context.map().withinEditableZoom()) return;
+
         d3_event.preventDefault();
         var disabled = _operation.disabled();
         var flash;

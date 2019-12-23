@@ -7,7 +7,6 @@
             "undo": "visszavonás",
             "zoom_to": "nagyítás ide:",
             "copy": "másolás",
-            "open_wikidata": "megnyitás a wikidata.org-on",
             "favorite": "kedvenc"
         },
         "toolbar": {
@@ -128,27 +127,59 @@
                 "not_closed": "Nem lehet kör alakúvá tenni, mert nem hurok.",
                 "too_large": "Nem lehet kör alakúvá tenni, mert túl kevés látszik belőle.",
                 "connected_to_hidden": "Nem lehet kör alakúvá tenni, mert egy rejtett elemhez csatlakozik.",
-                "not_downloaded": "Nem lehet kör alakúvá tenni, mert egyes részei nincsenek letöltve."
+                "not_downloaded": "Nem lehet kör alakúvá tenni, mert egyes részei nincsenek letöltve.",
+                "already_circular": "Nem lehet köralakúvá tenni, mert már köralakú."
             },
             "orthogonalize": {
                 "title": "Derékszögesítés",
                 "description": {
-                    "vertex": "Sarok derékszögesítése.",
-                    "line": "Vonal sarkainak derékszögesítése.",
-                    "area": "Terület sarkainak derékszögesítése."
+                    "corner": {
+                        "single": "Sarok derékszögesítése.",
+                        "multiple": "Sarkok derékszögesítése."
+                    },
+                    "feature": {
+                        "single": "Elem sarkainak szögletesítése.",
+                        "multiple": "Elemek sarkainak szögletesítése."
+                    }
                 },
                 "key": "Q",
                 "annotation": {
-                    "vertex": "Egy sarok derékszögesítése.",
-                    "line": "Vonal sarkai derékszögesítve.",
-                    "area": "Terület sarkai derékszögesítve."
+                    "corner": {
+                        "single": "Sarok derékszögesítve.",
+                        "multiple": "Több sarok derékszögesítve."
+                    },
+                    "feature": {
+                        "single": "Elem sarkai szögletesítve.",
+                        "multiple": "Több elem sarka derékszögesítve."
+                    }
                 },
-                "end_vertex": "Nem lehet derékszögesíteni, mert végpont.",
-                "square_enough": "Nem lehet a jelenleginél is derékszögesebbé tenni.",
-                "not_squarish": "Nem lehet derékszögesíteni, mert nem derékszögszerű.",
-                "too_large": "Nem lehet derékszögesíteni, mert túl kevés látszik belőle.",
-                "connected_to_hidden": "Nem lehet derékszögesíteni, mert csatlakozik egy rejtett elemhez.",
-                "not_downloaded": "Nem lehet derékszögesíteni, mert egyes részei nincsenek letöltve."
+                "multiple_blockers": {
+                    "multiple": "Több okból nem lehet derékszögesíteni."
+                },
+                "end_vertex": {
+                    "single": "Nem lehet derékszögesíteni, mert végpont.",
+                    "multiple": "Nem lehet derékszögesíteni, mert végpontok."
+                },
+                "square_enough": {
+                    "single": "Nem lehet a jelenleginél is derékszögesebbé tenni.",
+                    "multiple": "Nem lehet a jelenleginél is derékszögesebbé tenni őket."
+                },
+                "not_squarish": {
+                    "single": "Nem lehet derékszögesíteni, mert nem szögletes alakú.",
+                    "multiple": "Nem lehet derékszögesíteni, mert nem szögletes alakúak."
+                },
+                "too_large": {
+                    "single": "Nem lehet derékszögesíteni, mert nem látszik belőle elegendő rész.",
+                    "multiple": "Nem lehet derékszögesíteni, mert nem látszik belőlük elegendő rész."
+                },
+                "connected_to_hidden": {
+                    "single": "Nem lehet derékszögesíteni, mert csatlakozik egy rejtett elemhez.",
+                    "multiple": "Nem lehet derékszögesíteni, mert némelyikük rejtett elemekhez csatlakozik."
+                },
+                "not_downloaded": {
+                    "single": "Nem lehet derékszögesíteni, mert egyes részei nincsenek letöltve.",
+                    "multiple": "Nem lehet derékszögesíteni, mert egyes részeik nincsenek letöltve."
+                }
             },
             "straighten": {
                 "title": "Kiegyenesít",
@@ -311,7 +342,7 @@
             "reflect": {
                 "title": {
                     "long": "Hosszanti tükrözés",
-                    "short": "Oldalirányú tükrüzés"
+                    "short": "Oldalirányú tükrözés"
                 },
                 "description": {
                     "long": {
@@ -385,7 +416,14 @@
             },
             "reverse": {
                 "title": "Megfordítás",
-                "key": "V"
+                "key": "V",
+                "annotation": {
+                    "point": "Egy pont megfordítva.",
+                    "points": "Több pont megfordítva.",
+                    "line": "Vonal megfordítva.",
+                    "lines": "Több vonal megfordítva.",
+                    "features": "Több elem megfordítva."
+                }
             },
             "split": {
                 "title": "Kettévágás",
@@ -508,11 +546,8 @@
             "hidden_warning": "{count} rejtett elem",
             "hidden_details": "Ezek az elemek jelenleg rejtettek: {details}"
         },
-        "status": {
-            "error": "Nem sikerült csatlakozni az API-hoz.",
-            "offline": "Az API offline módban van. Kérlek próbálj kicsit később szerkeszteni.",
-            "readonly": "Az API csak olvasható módban van. Várnod kell a szerkesztéseid elmentésével.",
-            "rateLimit": "Az API korlátozza az anonim kapcsolatokat. Ezt megoldhatod azzal, hogy bejelentkezel."
+        "osm_api_status": {
+            "retry": "Újra"
         },
         "commit": {
             "title": "Feltöltés az OpenStreetMapre",
@@ -606,7 +641,6 @@
         },
         "geocoder": {
             "search": "Keresés a világban…",
-            "no_results_visible": "Nincs találat a térkép látható részén",
             "no_results_worldwide": "Nincs találat"
         },
         "geolocate": {
@@ -684,6 +718,7 @@
             "switch": "Visszaváltás erre a háttérre",
             "custom": "Egyéni",
             "overlays": "Előterek",
+            "imagery_problem_faq": "Háttérprobléma jelentése",
             "reset": "visszavonás",
             "reset_all": "Alaphelyzetbe mindent",
             "display_options": "Megjelenítési beállítások",
@@ -695,6 +730,10 @@
                 "description": "Minitérkép bekapcsolása",
                 "tooltip": "Áttekintő térkép mutatása a megjelenített terület meghatározásához.",
                 "key": "/"
+            },
+            "panel": {
+                "description": "Részletes infó",
+                "tooltip": "Háttérinformációk"
             },
             "fix_misalignment": "Légifelvétel elcsúszásának korrigálása",
             "offset": "Húzz bárhol a lenti szürke területen a légifelvétel elcsúszásának korrigálásához, vagy add meg az elcsúszást méterben."
@@ -727,9 +766,15 @@
                     "zoom": "Nagyítás az adatra"
                 }
             },
+            "style_options": "Stílus opciók",
             "map_features": "Térképelemek",
             "autohidden": "Ezek az elemek ebben a nagyításban rejtve vannak, mert túl sok jelenne meg a képernyőn. Nagyíts a szerkesztésükhöz.",
             "osmhidden": "Ezek az elemek automatikusan el lettek rejtve, mert az OpenStreetMap réteg rejtett."
+        },
+        "visual_diff": {
+            "highlight_edits": {
+                "description": "Változások kiemelése"
+            }
         },
         "photo_overlays": {
             "title": "Fotó rétegek",
@@ -1237,6 +1282,7 @@
                         "description": "{var1} csak {var2} másik úthoz kapcsolódik. A körforgalmak általában 3 vagy több úthoz kapcsolódnak."
                     },
                     "320": {
+                        "title": "Nem megfelelő csatlakozás",
                         "description": "{var1} \"{var2}\"-ként van felcímkézve, de nincs kapcsolata semelyik másik \"{var3}\" vagy \"{var4}\" elemmel."
                     },
                     "350": {
@@ -1297,6 +1343,38 @@
         },
         "mapillary_images": {
             "tooltip": "Utcafotók a Mapillary-ből"
+        },
+        "mapillary_map_features": {
+            "title": "Térképelemek",
+            "tooltip": "Elemek a Mapillary-ből",
+            "request_data": "Adatkérés",
+            "construction": {
+                "flat": {
+                    "crosswalk_plain": "gyalogátkelőhely"
+                }
+            },
+            "marking": {
+                "discrete": {
+                    "crosswalk_zebra": "Kijelölt gyalogátkelőhely"
+                }
+            },
+            "object": {
+                "cctv_camera": "Biztonsági kamera",
+                "fire_hydrant": "tűzcsap",
+                "mailbox": "postaláda",
+                "manhole": "lebúvónyílás",
+                "phone_booth": "telefonfülke",
+                "sign": {
+                    "advertisement": "hirdetés",
+                    "information": "tájékoztató jelzés"
+                },
+                "street_light": "közvilágítás",
+                "traffic_light": {
+                    "other": "közlekedési lámpa",
+                    "pedestrians": "gyalogos közlekedési lámpa"
+                },
+                "trash_can": "szeméttároló"
+            }
         },
         "mapillary": {
             "title": "Mapillary",
@@ -1563,12 +1641,15 @@
             "rules": {
                 "title": "Szabályok"
             },
+            "user_resolved_issues": "Problémák általad javítva",
+            "warnings_and_errors": "Figyelmeztetések és hibák",
             "no_issues": {
                 "message": {
                     "everything": "Minden rendben lévőnek látszik",
                     "everything_in_view": "Úgy tűnik, minden rendben a látható területen",
                     "edits": "A szerkesztéseid rendben vannak",
-                    "edits_in_view": "A szerkesztéseid rendben vannak a látható területen "
+                    "edits_in_view": "A szerkesztéseid rendben vannak a látható területen ",
+                    "no_edits": "Még nem módosított semmit"
                 },
                 "hidden_issues": {
                     "none": "Az észlelt problémák itt fognak megjelenni",
@@ -1626,12 +1707,6 @@
                 "building-building": {
                     "reference": "Az épületek csak különböző rétegeken metszhetik egymást."
                 },
-                "building-highway": {
-                    "reference": "Egy épületet keresztező országútnak hidat, alagutat vagy bejáratot kell használnia."
-                },
-                "building-railway": {
-                    "reference": "Épületet keresztező vasútnak hidat vagy alagutat kell használnia."
-                },
                 "building-waterway": {
                     "reference": "Épületet keresztező víziútnak alagutat vagy eltérő réteget kell használnia."
                 },
@@ -1686,6 +1761,10 @@
                 "message": "{feature} gyanús névvel: \"{name}\"",
                 "reference": "A névnek az aktuálisan használt névnek kell lennie."
             },
+            "help_request": {
+                "title": "\"Javíts ki\" kérés",
+                "tip": "Pontosításra, ellenőrzésre szoruló információ van megadva."
+            },
             "incompatible_source": {
                 "title": "Gyanús forrás",
                 "tip": "Elemek gyanús forrásjelölővel",
@@ -1702,6 +1781,10 @@
                 "email": {
                     "reference": "Egy email címnek valahogy így kell kinéznie: \"felhasznalo@pelda.com\""
                 }
+            },
+            "mismatched_geometry": {
+                "title": "Hibás geometria",
+                "tip": "Ellentmondásban lévő címkék és geometriai elemek."
             },
             "missing_role": {
                 "title": "Hiányzó szerep",
@@ -1738,8 +1821,13 @@
                     "reference": "Egyes elemeknek további címkékkel kell rendelkezniük."
                 },
                 "noncanonical_brand": {
-                    "message": "{feature} márkanév nem szabályos címkével"
+                    "message": "{feature} márkanév nem szabályos címkével",
+                    "message_incomplete": "{feature} márkanév hiányos címkével"
                 }
+            },
+            "point_as_vertex": {
+                "message": "{feature} : a címkék alapján ennek önálló pontnak kellene lennie.",
+                "reference": "Néhány elem nem lehet vonal vagy terület része."
             },
             "private_data": {
                 "title": "Magáninformáció",
@@ -1748,6 +1836,10 @@
                 "contact": {
                     "message": "{feature}  magánjellegű kapcsolati címkét tartalmazhat"
                 }
+            },
+            "suspicious_name": {
+                "title": "Gyanús név",
+                "tip": "Elemek túl általános vagy gyanús névvel."
             },
             "tag_suggests_area": {
                 "message": "{feature}: ennek zárt területnek kellene lennie \"{tag}\" címke miatt",
@@ -1790,7 +1882,19 @@
                     "reference": "Nem szögletes sarokkal rendelkező épület gyakran pontosabban is megrajzolható."
                 }
             },
+            "vertex_as_point": {
+                "message": "{feature}:  a címkéi alapján vonal vagy terület része kell legyen.",
+                "reference": "Néhány elem nem lehet önálló pont."
+            },
             "fix": {
+                "add_a_bridge": {
+                    "title": "Híd hozzáadása",
+                    "annotation": "Hozzáadott egy hidat."
+                },
+                "add_a_tunnel": {
+                    "title": "Alagút használata",
+                    "annotation": "Alagút hozzáadva"
+                },
                 "connect_almost_junction": {
                     "annotation": "Összekötött, nagyon közeli elemek."
                 },
@@ -1818,6 +1922,9 @@
                 },
                 "delete_feature": {
                     "title": "Elem törlése"
+                },
+                "extract_point": {
+                    "title": "Pont leválasztása"
                 },
                 "ignore_issue": {
                     "title": "Probléma hanyagolása"
@@ -1853,6 +1960,9 @@
                 },
                 "remove_tags": {
                     "title": "A címkék eltávolítása"
+                },
+                "remove_the_name": {
+                    "title": "A név eltávolítása"
                 },
                 "reposition_features": {
                     "title": "Elemek áthelyezése"
@@ -1892,9 +2002,6 @@
                     "title": "Címke frissítése",
                     "annotation": "Régi címkék frissítve."
                 },
-                "use_bridge_or_tunnel": {
-                    "title": "Híd vagy alagút használata"
-                },
                 "use_different_layers": {
                     "title": "Eltérő rétegek használata"
                 },
@@ -1903,9 +2010,6 @@
                 },
                 "use_different_levels": {
                     "title": "Eltérő szintek használata"
-                },
-                "use_tunnel": {
-                    "title": "Alagút használata"
                 }
             }
         },
@@ -2203,14 +2307,13 @@
                 },
                 "display_options": {
                     "title": "Megjelenítési beállítások",
-                    "background": "Háttérbeállítások megjelenítése",
                     "background_switch": "Visszaváltás a legutóbbi háttérre",
-                    "map_data": "Térkép adatbeállítások megjelenítése",
                     "fullscreen": "Teljes képernyős módba váltás",
                     "sidebar": "Oldalsáv be/ki",
                     "wireframe": "Drótváz mód átkapcsolása",
                     "osm_data": "OpenStreetMap adatok ki- vagy bekapcsolása",
-                    "minimap": "Minitérkép átkapcsolása"
+                    "minimap": "Minitérkép átkapcsolása",
+                    "highlight_edits": "Nem mentett változások kiemelése"
                 },
                 "selecting": {
                     "title": "Elemek kiválasztása",
@@ -2220,9 +2323,7 @@
                     "search": "Elemek keresése"
                 },
                 "with_selected": {
-                    "title": "A kiválasztott elemmel",
-                    "edit_menu": "Menüszerkesztés átkapcsolása",
-                    "zoom_to": "Nagyítás a kiválasztott elemre"
+                    "edit_menu": "Menüszerkesztés átkapcsolása"
                 },
                 "vertex_selected": {
                     "title": "A kiválasztott ponttal",
@@ -2241,7 +2342,6 @@
                     "add_line": "„Vonal hozzáadás” mód",
                     "add_area": "„Terület hozzáadás” mód",
                     "add_note": "„Jegyzet hozzáadás” mód",
-                    "add_favorite": "Egy kedvenc elem hozzáadása",
                     "place_point": "Helyezz el egy pontot vagy jegyzetet",
                     "disable_snap": "Tartsd a pont illesztés kikapcsolásához",
                     "stop_line": "Fejezd be a vonal vagy terület rajzolását"
@@ -2253,6 +2353,7 @@
                     "disconnect": "Elemek szétválasztása a kiválasztott pontnál",
                     "extract": "Pont leválasztása egy elemről.",
                     "split": "Vonal kettéválasztása a kiválasztott pontnál",
+                    "reverse": "Kiválasztott elemek megfordítása",
                     "move": "Kiválasztott elemek mozgatása",
                     "rotate": "Kiválasztott elemek forgatása",
                     "orthogonalize": "Vonal vagy terület sarkainak derékszögesítése",
@@ -2579,6 +2680,12 @@
                     "label": "Szemeteskosár",
                     "terms": "kuka, szemétkosár, szemetes, papírkosár, szemetes zsák, szemétgyűjtő"
                 },
+                "blind": {
+                    "options": {
+                        "no": "Nem",
+                        "yes": "Igen"
+                    }
+                },
                 "blood_components": {
                     "label": "Vérkomponensek",
                     "options": {
@@ -2727,6 +2834,9 @@
                         "forward": "Előre",
                         "reversible": "Megfordítható"
                     }
+                },
+                "conveying_escalator": {
+                    "label": "Mozgólépcső vagy -járda"
                 },
                 "country": {
                     "label": "Ország"
@@ -3080,7 +3190,6 @@
                     "terms": "korlát, kapaszkodó"
                 },
                 "hashtags": {
-                    "label": "Javasolt hashtagok",
                     "placeholder": "#példa"
                 },
                 "healthcare": {
@@ -3179,6 +3288,9 @@
                 },
                 "industrial": {
                     "label": "Típus"
+                },
+                "informal": {
+                    "label": "Nem hivatalos"
                 },
                 "information": {
                     "label": "Típus"
@@ -3318,6 +3430,9 @@
                         "roof": "Tető"
                     }
                 },
+                "lockable": {
+                    "label": "Zárható"
+                },
                 "man_made": {
                     "label": "Típus"
                 },
@@ -3430,8 +3545,10 @@
                 "network": {
                     "label": "Hálózat"
                 },
+                "network/type": {
+                    "label": "Hálózattípus"
+                },
                 "network_bicycle": {
-                    "label": "Hálózattípus",
                     "options": {
                         "icn": "Nemzetközi",
                         "lcn": "Helyi",
@@ -3441,7 +3558,6 @@
                     "placeholder": "Helyi, regionális, országos, nemzetközi"
                 },
                 "network_foot": {
-                    "label": "Hálózattípus",
                     "options": {
                         "iwn": "Nemzetközi",
                         "lwn": "Helyi",
@@ -3451,7 +3567,6 @@
                     "placeholder": "Helyi, regionális, országos, nemzetközi"
                 },
                 "network_horse": {
-                    "label": "Hálózattípus",
                     "options": {
                         "ihn": "Nemzetközi",
                         "lhn": "Helyi",
@@ -3658,6 +3773,9 @@
                 },
                 "playground": {
                     "label": "Típus"
+                },
+                "playground/theme": {
+                    "label": "Téma"
                 },
                 "polling_station": {
                     "label": "Szavazókör",
@@ -3994,6 +4112,9 @@
                     },
                     "placeholder": "Gördeszkás, kerekes, terepjárós…"
                 },
+                "sms": {
+                    "label": "SMS"
+                },
                 "social_facility": {
                     "label": "Típus"
                 },
@@ -4038,7 +4159,12 @@
                     "label": "Típus"
                 },
                 "stroller": {
-                    "label": "Babakocsi bejárat"
+                    "label": "Babakocsi bejárat",
+                    "options": {
+                        "limited": "Korlátozott",
+                        "no": "Nem",
+                        "yes": "Igen"
+                    }
                 },
                 "structure": {
                     "label": "Szerkezet",
@@ -4156,6 +4282,9 @@
                 "tower/type": {
                     "label": "Típus"
                 },
+                "townhall/type": {
+                    "label": "Típus"
+                },
                 "tracktype": {
                     "label": "Mezőgazdasági/erdészeti út típusa",
                     "options": {
@@ -4251,6 +4380,9 @@
                 "vending": {
                     "label": "Áruk típusa"
                 },
+                "video_calls": {
+                    "label": "Videóhívások"
+                },
                 "visibility": {
                     "label": "Láthatóság",
                     "options": {
@@ -4322,7 +4454,12 @@
                     "label": "Típus"
                 },
                 "wheelchair": {
-                    "label": "Akadálymentesség"
+                    "label": "Akadálymentesség",
+                    "options": {
+                        "limited": "Korlátozott",
+                        "no": "Nem",
+                        "yes": "Igen"
+                    }
                 },
                 "wholesale": {
                     "label": "Nagykereskedelem"
@@ -4368,6 +4505,9 @@
                 "advertising/column": {
                     "name": "Hirdetőoszlop"
                 },
+                "advertising/totem": {
+                    "name": "Reklámoszlop"
+                },
                 "aerialway": {
                     "name": "Drótkötélpálya"
                 },
@@ -4391,10 +4531,6 @@
                     "name": "Teherfelvonó",
                     "terms": "teherlift"
                 },
-                "aerialway/j-bar": {
-                    "name": "Egyszemélyes csákányos felvonó",
-                    "terms": "Egyszemélyes csákányos felvonó, sífelvonó"
-                },
                 "aerialway/magic_carpet": {
                     "name": "Szállítószalag-felvonó",
                     "terms": "varázsszőnyeg, repülőszőnyeg"
@@ -4414,13 +4550,6 @@
                 "aerialway/rope_tow": {
                     "name": "Kapaszkodólift",
                     "terms": "kötéllift, húzólift, vontatólift"
-                },
-                "aerialway/station": {
-                    "name": "Felvonóállomás"
-                },
-                "aerialway/t-bar": {
-                    "name": "Csákányos felvonó",
-                    "terms": "csákányos, húzólift"
                 },
                 "aerialway/zip_line": {
                     "name": "Kötélcsúszda"
@@ -4451,6 +4580,9 @@
                 "aeroway/runway": {
                     "name": "Kifutópálya",
                     "terms": "futópálya, leszállópálya"
+                },
+                "aeroway/spaceport": {
+                    "name": "Űrállomás"
                 },
                 "aeroway/taxiway": {
                     "name": "Gurulóút",
@@ -4549,10 +4681,6 @@
                 "amenity/car_rental": {
                     "name": "Autókölcsönző",
                     "terms": "gépkocsi, gépjármű, jármű, köcsönzés, bérlés"
-                },
-                "amenity/car_sharing": {
-                    "name": "Autómegosztó",
-                    "terms": "közösségi autó, közösségi gépjármű"
                 },
                 "amenity/car_wash": {
                     "name": "Autómosó",
@@ -4798,6 +4926,9 @@
                     "name": "Parkolóhely",
                     "terms": "parkoló, parkolópont, várakozó hely"
                 },
+                "amenity/payment_terminal": {
+                    "name": "Befizetőautomata"
+                },
                 "amenity/pharmacy": {
                     "name": "Gyógyszertár",
                     "terms": "Gyógyszertár, apotéka, patika"
@@ -4861,6 +4992,9 @@
                 },
                 "amenity/polling_station": {
                     "name": "Állandó szavazóhely"
+                },
+                "amenity/post_box": {
+                    "name": "Utcai postaláda"
                 },
                 "amenity/post_depot": {
                     "name": "Postacsomag üzem",
@@ -5044,6 +5178,15 @@
                     "name": "Stúdió",
                     "terms": "rádió, televízió, fotóstúdió, műterem, fényképész"
                 },
+                "amenity/studio/radio": {
+                    "name": "Rádióállomás"
+                },
+                "amenity/studio/television": {
+                    "name": "Televízióállomás"
+                },
+                "amenity/studio/video": {
+                    "name": "Filmstúdió"
+                },
                 "amenity/swimming_pool": {
                     "name": "Úszómedence"
                 },
@@ -5078,6 +5221,9 @@
                     "name": "Városháza",
                     "terms": "polgármesteri hivatal, községháza, önkormányzat, elöljáróság, jegyző, hatóság"
                 },
+                "amenity/townhall/city": {
+                    "name": "Városház"
+                },
                 "amenity/toy_library": {
                     "name": "Játékkölcsönző"
                 },
@@ -5096,6 +5242,9 @@
                     "name": "Palackvisszaváltó automata",
                     "terms": "üvegvisszaváltó"
                 },
+                "amenity/vending_machine/bread": {
+                    "name": "Kenyér árusító automata"
+                },
                 "amenity/vending_machine/cigarettes": {
                     "name": "Cigerettaárusító automata",
                     "terms": "cigerettaautomata, cigiautomata, dohányautomata"
@@ -5110,6 +5259,9 @@
                 "amenity/vending_machine/drinks": {
                     "name": "Italárusító automata",
                     "terms": "italautomata, italgép"
+                },
+                "amenity/vending_machine/eggs": {
+                    "name": "Tojás árusító automata"
                 },
                 "amenity/vending_machine/electronics": {
                     "name": "Elektronikai árusító automata"
@@ -5134,6 +5286,9 @@
                 },
                 "amenity/vending_machine/ice_cream": {
                     "name": "Jégkrém-árusító automata"
+                },
+                "amenity/vending_machine/ice_cubes": {
+                    "name": "Jég árusító automata"
                 },
                 "amenity/vending_machine/newspapers": {
                     "name": "Újságárusító automata",
@@ -5196,8 +5351,7 @@
                     "name": "Terület"
                 },
                 "area/highway": {
-                    "name": "Útfelület",
-                    "terms": "úttest"
+                    "name": "Út területe"
                 },
                 "attraction": {
                     "name": "Látványosság"
@@ -5227,21 +5381,9 @@
                 "attraction/dark_ride": {
                     "name": "Szellemvasút"
                 },
-                "attraction/drop_tower": {
-                    "name": "Ejtőtorony",
-                    "terms": "torony,ejtés,leejt"
-                },
                 "attraction/maze": {
                     "name": "Labirintus",
                     "terms": "útvesztő"
-                },
-                "attraction/pirate_ship": {
-                    "name": "Kalózhajó",
-                    "terms": "kalóz,hajó"
-                },
-                "attraction/river_rafting": {
-                    "name": "Vadvízi evezés",
-                    "terms": "evezés,csónak,folyó"
                 },
                 "attraction/roller_coaster": {
                     "name": "Hullámvasút",
@@ -5371,6 +5513,10 @@
                     "name": "Fal",
                     "terms": "erődítmény"
                 },
+                "barrier/wall/noise_barrier": {
+                    "name": "Zajvédő fal",
+                    "terms": "hangfal,fal,zajvédö fal"
+                },
                 "boundary": {
                     "name": "Határvonal"
                 },
@@ -5409,6 +5555,9 @@
                 "building/cabin": {
                     "name": "Kis faház",
                     "terms": "Faház, kabin, fülke"
+                },
+                "building/carport": {
+                    "name": "Fedett parkolóhely"
                 },
                 "building/cathedral": {
                     "name": "Székesegyház",
@@ -5662,6 +5811,9 @@
                     "name": "Elektronikai szerviz",
                     "terms": "elektronikai,szerviz,javító,bontó"
                 },
+                "craft/floorer": {
+                    "name": "Padlólerakó"
+                },
                 "craft/gardener": {
                     "name": "Kertész",
                     "terms": "Melegházi termelő, bolgárkertész"
@@ -5682,9 +5834,6 @@
                     "name": "Épület-hőszigetelő",
                     "terms": "Szigetelő"
                 },
-                "craft/jeweler": {
-                    "name": "Ékszerész"
-                },
                 "craft/joiner": {
                     "name": "Ács, asztalos"
                 },
@@ -5698,9 +5847,6 @@
                 "craft/metal_construction": {
                     "name": "Fémiparos",
                     "terms": "Huzaltermék gyártása,  kötőelem, csavar gyártása, acél tárolóeszköz gyártása,  szerszámgyártás, fémmegmunkálás"
-                },
-                "craft/optician": {
-                    "name": "Látszerész"
                 },
                 "craft/painter": {
                     "name": "Szobafestő",
@@ -5724,10 +5870,6 @@
                 "craft/plumber": {
                     "name": "Vízvezeték-szerelő",
                     "terms": "Vízvezeték szerelő"
-                },
-                "craft/pottery": {
-                    "name": "Fazekas",
-                    "terms": "kerámia,agyag,kőedény,cserép"
                 },
                 "craft/rigger": {
                     "name": "Vitorlásfelszerelés-készítő",
@@ -5971,9 +6113,6 @@
                     "name": "Beszédterapeuta",
                     "terms": "beszéd, terapeuta, terápia, hang"
                 },
-                "highway": {
-                    "name": "Közút"
-                },
                 "highway/bridleway": {
                     "name": "Lovaglóút",
                     "terms": "Lovas út"
@@ -6103,6 +6242,9 @@
                 "highway/path": {
                     "name": "Ösvény",
                     "terms": "Ösvény"
+                },
+                "highway/path/informal": {
+                    "name": "Nem hivatalos ösvény"
                 },
                 "highway/pedestrian_area": {
                     "name": "Sétálóövezet"
@@ -6323,6 +6465,9 @@
                     "name": "Szoba",
                     "terms": "terem, helyiség"
                 },
+                "indoor/stairs": {
+                    "name": "Beltéri lépcsőház"
+                },
                 "indoor/wall": {
                     "name": "Beltéri fal",
                     "terms": "közfal"
@@ -6334,15 +6479,6 @@
                 "junction": {
                     "name": "Elágazás",
                     "terms": "Elágazás, útkereszteződés, csomópont"
-                },
-                "junction/circular": {
-                    "name": "Körforgalom"
-                },
-                "junction/roundabout": {
-                    "name": "Körforgalom"
-                },
-                "landuse": {
-                    "name": "Területhasználat"
                 },
                 "landuse/allotments": {
                     "name": "Közpark",
@@ -6370,6 +6506,9 @@
                 "landuse/commercial": {
                     "name": "Üzleti terület",
                     "terms": "üzleti park, kereskedelmi terület"
+                },
+                "landuse/construction": {
+                    "name": "Építési terület"
                 },
                 "landuse/farm": {
                     "name": "Mezőgazdasági terület"
@@ -6504,12 +6643,12 @@
                 "landuse/winter_sports": {
                     "name": "Téli sportok"
                 },
-                "leisure": {
-                    "name": "Szabadidő"
-                },
                 "leisure/adult_gaming_centre": {
                     "name": "Felnőtt játékközpont",
                     "terms": "játékterem"
+                },
+                "leisure/amusement_arcade": {
+                    "name": "Játékterem (kiskorúaknak is)"
                 },
                 "leisure/bandstand": {
                     "name": "Zenepavilon"
@@ -6548,10 +6687,6 @@
                 "leisure/escape_game": {
                     "name": "Szabadulószoba",
                     "terms": "szabadulószoba, menekülőszoba"
-                },
-                "leisure/firepit": {
-                    "name": "Tűzrakóhely",
-                    "terms": "tűzrakó, tábortűz, szalonnasütés"
                 },
                 "leisure/fishing": {
                     "name": "Horgászhely",
@@ -6672,6 +6807,9 @@
                     "name": "Gyeptekepálya",
                     "terms": "bowling pálya"
                 },
+                "leisure/pitch/chess": {
+                    "name": "Óriás sakktábla"
+                },
                 "leisure/pitch/cricket": {
                     "name": "Krikettpálya",
                     "terms": "krikettpálya"
@@ -6790,9 +6928,6 @@
                     "name": "Vonal",
                     "terms": "Vonal"
                 },
-                "man_made": {
-                    "name": "Építmények"
-                },
                 "man_made/adit": {
                     "name": "Bányatárna (vízszintes)",
                     "terms": "bánya, akna, táró"
@@ -6811,8 +6946,7 @@
                     "terms": "Hullámtörő, gát"
                 },
                 "man_made/bridge": {
-                    "name": "Híd",
-                    "terms": "híd, bürü, átkelő"
+                    "name": "Hídterület"
                 },
                 "man_made/bunker_silo": {
                     "name": "Bunker"
@@ -6859,6 +6993,12 @@
                 "man_made/lighthouse": {
                     "name": "Világítótorony",
                     "terms": "Világítótorony, jelzőfény"
+                },
+                "man_made/manhole": {
+                    "name": "Búvónyílás"
+                },
+                "man_made/manhole/drain": {
+                    "name": "Viharcsatorna"
                 },
                 "man_made/mast": {
                     "name": "Pózna",
@@ -6966,7 +7106,7 @@
                     "name": "Kilátótorony"
                 },
                 "man_made/tunnel": {
-                    "name": "Alagút"
+                    "name": "Alagút területe"
                 },
                 "man_made/utility_pole": {
                     "name": "Telefonpózna",
@@ -7016,9 +7156,6 @@
                 },
                 "military/trench": {
                     "name": "Lövészárok"
-                },
-                "natural": {
-                    "name": "Természet"
                 },
                 "natural/bare_rock": {
                     "name": "Csupasz szikla",
@@ -7127,7 +7264,7 @@
                     "name": "Vízgyűjtő"
                 },
                 "natural/water/canal": {
-                    "name": "Csatorna"
+                    "name": "Csatorna területe"
                 },
                 "natural/water/lake": {
                     "name": "Tó",
@@ -7145,12 +7282,10 @@
                     "terms": "Víztározó"
                 },
                 "natural/water/river": {
-                    "name": "Folyó",
-                    "terms": "folyam"
+                    "name": "Folyó területe"
                 },
                 "natural/water/stream": {
-                    "name": "Patak",
-                    "terms": "csermely"
+                    "name": "Patak területe"
                 },
                 "natural/water/wastewater": {
                     "name": "Szennyvíztároló"
@@ -7158,10 +7293,6 @@
                 "natural/wetland": {
                     "name": "Mocsaras terület",
                     "terms": "Mocsaras, vizenyő, nádas, láp, ingovány"
-                },
-                "natural/wood": {
-                    "name": "Természetes erdő",
-                    "terms": "erdő, őserdő, liget, fás terület"
                 },
                 "noexit/yes": {
                     "name": "Zsákutca",
@@ -7438,9 +7569,6 @@
                 "polling_station": {
                     "name": "Ideiglenes szavazóhely"
                 },
-                "power": {
-                    "name": "Energia"
-                },
                 "power/cable/underground": {
                     "name": "Föld alatti elektromos kábel"
                 },
@@ -7501,6 +7629,9 @@
                 "public_transport/platform": {
                     "name": "Átszálló peron",
                     "terms": "peron"
+                },
+                "public_transport/platform/aerialway": {
+                    "name": "Libegő peron"
                 },
                 "public_transport/platform/bus": {
                     "name": "Buszmegálló"
@@ -7621,9 +7752,6 @@
                 },
                 "public_transport/stop_position_trolleybus": {
                     "name": "Trolibusz megállási hely"
-                },
-                "railway": {
-                    "name": "Vasút"
                 },
                 "railway/abandoned": {
                     "name": "Felszedett / megszűnt vasútvonal",
@@ -8212,6 +8340,9 @@
                     "name": "Cipőbolt",
                     "terms": "cipőbolt, cipő papucs csizma, lábbeli"
                 },
+                "shop/spices": {
+                    "name": "Fűszerbolt"
+                },
                 "shop/sports": {
                     "name": "Sportbolt",
                     "terms": "sportfelszerelés, sportszer, sportruházat"
@@ -8317,9 +8448,6 @@
                 "telecom/data_center": {
                     "name": "Adatközpont",
                     "terms": "szerverpark, szerverfarm"
-                },
-                "tourism": {
-                    "name": "Turizmus"
                 },
                 "tourism/alpine_hut": {
                     "name": "Menedékház",
@@ -8633,9 +8761,6 @@
                     "name": "Víziút",
                     "terms": "folyó, csatorna, víz, út, hajó, csónak"
                 },
-                "waterway": {
-                    "name": "Vízfolyás"
-                },
                 "waterway/boatyard": {
                     "name": "Hajótelep",
                     "terms": "csónak,kikötő, kishajó, vitorlás, csónakház"
@@ -8777,19 +8902,6 @@
                 "description": "Műholdképek és légi felvételek",
                 "name": "Mapbox műholdképek"
             },
-            "Maxar-Premium": {
-                "attribution": {
-                    "text": "Feltételek és visszajelzés"
-                },
-                "name": "Maxar prémium légifelvétel (Béta)"
-            },
-            "Maxar-Standard": {
-                "attribution": {
-                    "text": "Feltételek és visszajelzés"
-                },
-                "description": "A Maxar normál egy válogatott légifelvétel-készlet, amely a Föld szárazföldjének 86%-át lefedi, 30-60 cm-es felbontással ahol az elérhető, a többi helyen pedig a Landsat adataival van kitöltve. Az átlagéletkor 2,31 év, egyes területek pedig évente kétszer frissülnek.",
-                "name": "Maxar normál légifelvétel (Béta)"
-            },
             "OSM_Inspector-Addresses": {
                 "attribution": {
                     "text": "© Geofabrik GmbH, OpenStreetMap-közreműködők, CC-BY-SA"
@@ -8849,6 +8961,9 @@
             "US-TIGER-Roads-2018": {
                 "description": "Sárga = Közkincsű térképadatok az USA népszámlálási irodájától. Vörös = Az adatok nem találhatóak meg az OpenStreetMapben.",
                 "name": "TIGER Roads 2018"
+            },
+            "US-TIGER-Roads-2019": {
+                "name": "TIGER Roads 2019"
             },
             "US_Forest_Service_roads_overlay": {
                 "description": "Utak: Zöld keret = besorolatlan. Barna keret = földút. Felület: murva = halvány barna kitöltés, aszfalt = fekete, kikövezett = szürke, föld = fehér, beton = kék, fű = zöld. Évszakos = fehér sávok",
@@ -9166,272 +9281,236 @@
             }
         },
         "community": {
-            "bw-twitter": {
-                "name": "Botswana térképezése Twitter",
-                "description": "OpenStreetMap Botswana Twitter"
+            "Bay-Area-OpenStreetMappers": {
+                "name": "A San Francisco-öböl környéki (Bay Area) OpenStreetMap-szerkesztők",
+                "description": "Az OpenStreetMap tökéletesítése a San Francisco-öböl környékén",
+                "extendedDescription": "Ez a csoport az itteni, öbölkörnyéki OpenStreetMap-közösség gyarapításával foglalkozik. Rendezvényeink mindenki számára nyitottak a nyílt forráskódú szoftverek híveitől kezdve a kerékpárosokon, térinformatikusokon és geocaching-játékosokon át bárki másig. Örömmel látunk mindenkit, akit érdekelnek a térképek, a térképészet és a nyílt térképadatok, hogy csatlakozzék csoportunkhoz és részt vegyen a rendezvényeinken."
             },
-            "ym-Centre-Universitaire-de-Recherche-et-dApplication-en-Tldtection-CURAT-de-lUniversit-Felix-Houphouet-Boigny": {
-                "name": "YouthMappers CURAT"
+            "Central-Pennsylvania-OSM": {
+                "name": "Közép-Pennsylvania OSM",
+                "description": "A Pennsylvania State College főiskolából kinövő online térképészközösség"
             },
-            "cape-coast-youthmappers": {
-                "name": "University of Cape Coast YouthMappers",
+            "Dallas-Fort-Worth-OSM": {
+                "name": "Dallas-Fort Worth OSM",
+                "description": "A Dallas-Fort Worth-ban működő OpenStreetMap felhasználói csoport",
+                "extendedDescription": "Dallas, Fort Worth és a köztük lévő városok bővelkednek kreatív, műszakilag jártas emberekben. A felhasználói csoport jövőképe, hogy új utakat találjon az OSM lenyűgöző erőforrásainak kihasználásra."
+            },
+            "GeoPhilly": {
+                "name": "GeoPhilly",
+                "description": "Térképrajongók találkozója Philadelphia térségében"
+            },
+            "LATAM-Facebook": {
+                "name": "OpenStreetMap Latam Facebook",
+                "description": "OpenStreetMap Latam Facebook"
+            },
+            "LATAM-Telegram": {
+                "name": "OpenStreetMap Latam Telegram"
+            },
+            "LATAM-Twitter": {
+                "name": "OpenStreetMap Latam Twitter",
                 "description": "Kövess minket Twitteren: {url}"
             },
-            "osm-gh-facebook": {
-                "name": "OpenStreetMap Ghána Facebook"
+            "MapMinnesota": {
+                "name": "MapMinnesota"
             },
-            "osm-gh-twitter": {
-                "name": "OpenStreetMap Ghána Twitter",
+            "Mapping-DC-meetup": {
+                "name": "Mapping DC"
+            },
+            "Maptime-Bogota": {
+                "name": "Maptime Bogotá"
+            },
+            "Maptime-ME-meetup": {
+                "name": "MaptimeME"
+            },
+            "Maptime-Oceania-Slack": {
+                "name": "Maptime Oceania Slack"
+            },
+            "MaptimeHRVA-twitter": {
+                "name": "MaptimeHRVA Twitter",
                 "description": "Kövess minket Twitteren: {url}"
             },
-            "ym-Kwame-Nkrumah-University-of-Science-and-Technology": {
-                "name": "Kwame Nkrumah University of Science and Technology YouthMappers"
+            "OSM-AR-facebook": {
+                "name": "OpenStreetMap Argentína Facebook",
+                "extendedDescription": "Hírek a helyi közösségtől"
             },
-            "ym-University-of-Cape-Coast": {
-                "name": "UCC Geographical Society"
+            "OSM-AR-irc": {
+                "name": "OpenStreetMap Argentina IRC"
             },
-            "ym-University-of-Energy-and-Natural-Resources": {
-                "name": "Eco-Club"
+            "OSM-AR-telegram": {
+                "name": "OpenStreetMap Argentina Telegram"
             },
-            "ym-University-of-Ghana": {
-                "name": "University of Ghana YouthMappers"
+            "OSM-AR-twitter": {
+                "name": "OpenStreetMap Argentina Twitter",
+                "description": "Kövess minket Twitteren: {url}"
             },
-            "ym-University-of-Mines-and-Technology": {
-                "name": "UMaT YouthMappers"
-            },
-            "ym-General-Lansana-Conte-University": {
-                "name": "YouthMappers General Lansana Conte University"
-            },
-            "ym-Institute-of-Science-and-Veterinary-Medicine": {
-                "name": "YouthMappers ISSMV Dalaba"
-            },
-            "ym-Universit-de-NZrkor": {
-                "name": "Youthmappers à N'Zérékoré"
-            },
-            "ym-Dedan-Kimathi-University-of-Technology": {
-                "name": "GDEV"
-            },
-            "ym-Karatina-University": {
-                "name": "Nature Club Karatina University"
-            },
-            "ym-Kenyatta-University": {
-                "name": "Kenyatta University GIS Club"
-            },
-            "ym-Moi-University": {
-                "name": "Geography Students Association"
-            },
-            "ym-Technical-University-of-Kenya": {
-                "name": "Geospatial Science Student Association"
-            },
-            "ym-University-of-Nairobi": {
-                "name": "Geospatial Engineering Students Association"
-            },
-            "ym-African-Methodist-Episcopal-University": {
-                "name": "YouthMappers-AMEU"
-            },
-            "ym-Cuttington-University": {
-                "name": "Cuttington University YouthMappers"
-            },
-            "ym-Grand-Gedeh-County-Community-College": {
-                "name": "YouthMappers at Grand Gedeh County Community College"
-            },
-            "ym-Nimba-County-Community-College": {
-                "name": "Nimba County Community College Youth Mappers"
-            },
-            "ym-Stella-Maris-Polytechnic": {
-                "name": "YouthMappers-SMP"
-            },
-            "ym-University-of-Liberia-YouthMappers": {
-                "name": "University of Liberia YouthMappers"
-            },
-            "osm-mg-facebook": {
-                "name": "OpenStreetMap Madagaszkár Facebook csoport"
-            },
-            "ym-University-of-Malawi": {
-                "name": "Chanco Malawi YouthMappers"
-            },
-            "ym-Universit-des-Sciences-Sociale-et-de-Gestion-de-Bamako": {
-                "name": "Etudiant au Laboratoire HoPE"
-            },
-            "ym-Universidade-Eduardo-Mondlane": {
-                "name": "Comunidade YouthMappers Moçambique"
-            },
-            "ym-Namibia-University-of-Science-and-Technology": {
-                "name": "Geoinformation Technology Student Society"
-            },
-            "ym-Abia-State-University": {
-                "name": "AbsuMappersTeam"
-            },
-            "ym-Ahmadu-Bello-University": {
-                "name": "ABU Geomappers"
-            },
-            "ym-Federal-School-of-Surveys": {
-                "name": "OyoMappersTeam (OMT) Oyo"
-            },
-            "ym-Federal-University-of-Technology-Akure": {
-                "name": "YouthMappers Futa Space Club"
-            },
-            "ym-Ignatius-Ajuru-University-of-Education": {
-                "name": "IgnatiusMappersTeam (IMT)"
-            },
-            "ym-University-of-Nigeria-Enugu-Campus": {
-                "name": "LionMappersTeam (LMT) Enugu"
-            },
-            "ym-University-of-Nigeria-Nsukka": {
-                "name": "LionMappersTeam (LMT) Nsukka"
-            },
-            "ym-University-of-Port-Harcourt": {
-                "name": "UniqueMappersTeam (UMT) Port Harcourt"
-            },
-            "osm-africa-telegram": {
-                "name": "OpenStreetMap Africa Telegram",
-                "description": "OpenStreetMap Telegram for Africa"
-            },
-            "ym-Insititue-d-Enseignement-Superieur-de-Ruhengeri": {
-                "name": "YouthMappers at INES Ruhengeri"
-            },
-            "ym-University-of-Rwanda-Huye-Campus": {
-                "name": "Rwanda YouthMappers"
-            },
-            "ym-Institut-Suprieur-de-Management-Kolda": {
-                "name": "Les Femmes Leaders de ISM/Kolda"
-            },
-            "ym-Universit-Gaston-Berger": {
-                "name": "YouthMappers at UGB"
-            },
-            "ym-Fourah-Bay-College": {
-                "name": "Student's Geographical Association"
-            },
-            "ym-Njala-University-Freetown-Campus": {
-                "name": "Njala Freetown YouthMappers"
-            },
-            "ym-Njala-University-Njala-Campus": {
-                "name": "YouthMappers Njala University, Njala Campus"
-            },
-            "ym-University-of-Pretoria": {
-                "name": "Centre for Geoinformation Science"
-            },
-            "ym-Ardhi-University": {
-                "name": "ARU Mapper"
-            },
-            "ym-Institute-of-Finance-Management": {
-                "name": "IFM mappers"
-            },
-            "ym-Institute-of-Rural-Development-Planning": {
-                "name": "Mipango YouthMappers Chapter"
-            },
-            "ym-Open-University-of-Tanzania": {
-                "name": "Youth Mappers at Open University of Tanzania"
-            },
-            "ym-Sokoine-University-of-Agriculture": {
-                "name": "SMCoSE YouthMappers"
-            },
-            "ym-University-of-Dar-es-Salaam": {
-                "name": "YouthMappers at University of Dar es Salaam"
-            },
-            "ym-Busitema-University": {
-                "name": "Good Mappers"
-            },
-            "ym-Gulu-University": {
-                "name": "CSGU Mappers"
-            },
-            "ym-Kumi-University": {
-                "name": "Ever Last YouthMappers"
-            },
-            "ym-Makerere-University": {
-                "name": "Geo YouthMappers"
-            },
-            "ym-Mbarara-University-of-Science-and-Technology": {
-                "name": "MUST Street Mappers"
-            },
-            "ym-St.-Augustine-International-University": {
-                "name": "YouthMappers at St Augustine International University"
-            },
-            "ym-Uganda-Christian-University-Mbale-Campus": {
-                "name": "Mappers for Life"
-            },
-            "ym-Uganda-Pentecostal-University": {
-                "name": "HiTech Youth Mappers"
-            },
-            "ym-St.-Mawaggali-Trades-Training-Institute": {
-                "name": "MawaggaliMappers"
-            },
-            "ym-The-University-of-Zambia": {
-                "name": "YouthMappers Unza"
-            },
-            "ym-University-of-Zimbabwe": {
-                "name": "UZMappers"
-            },
-            "osm-afghanistan-facebook": {
-                "name": "OpenStreetMap Afganisztán"
+            "OSM-Asia-mailinglist": {
+                "name": "OpenStreetMap Ázsia levelezőlista"
             },
             "OSM-BGD-facebook": {
                 "name": "OpenStreetMap Banglades"
             },
-            "ym-Asian-University-for-Women": {
-                "name": "YouthMappers at AUW"
+            "OSM-Boston": {
+                "name": "OpenStreetMap Boston"
             },
-            "ym-Dhaka-College": {
-                "name": "YouthMappers Daka College"
+            "OSM-CA-Slack": {
+                "name": "OSM-CA Slack"
             },
-            "ym-Dhaka-University": {
-                "name": "Openstreetmap YouthMappers"
+            "OSM-CL-facebook": {
+                "name": "OpenStreetMap Chile Facebook",
+                "description": "Csatlakozz az OpenStreetMap Chile Facebook közösséghez"
             },
-            "ym-Eastern-University": {
-                "name": "YouthMappers at Eastern University"
+            "OSM-CL-telegram": {
+                "name": "OpenStreetMap Chile Telegram"
             },
-            "ym-Jahangirnagar-University": {
-                "name": "YouthMappers at IRS, Jahangirnagar University"
+            "OSM-CL-twitter": {
+                "name": "OpenStreetMap Chile Twitter",
+                "description": "Kövess minket Twitteren: {url}"
             },
-            "ym-Rajshahi-University-of-Engineering-Technology": {
-                "name": "YouthMappers at RUET"
+            "OSM-CO": {
+                "name": "OpenStreetMap Kolumbia"
             },
-            "ym-Sherubtse-College": {
-                "name": "Geographical Society"
+            "OSM-CO-facebook": {
+                "name": "OpenStreetMap Kolumbia Facebook"
             },
-            "OSM-India-facebook": {
-                "description": "Improve OpenStreetMap in India"
+            "OSM-CO-twitter": {
+                "name": "OpenStreetMap Kolumbia Twitter",
+                "description": "Kövess minket Twitteren: {url}"
             },
-            "osm-india-github": {
-                "name": "OpenStreetMap India GitHub",
-                "description": "Kódolj velünk: {url}"
+            "OSM-Central-Salish-Sea": {
+                "name": "OpenStreetMap Central Salish Sea"
             },
-            "OSM-india-mailinglist": {
-                "name": "OpenStreetMap India levelezőlista"
+            "OSM-Chattanooga": {
+                "name": "OSM Chattanooga"
             },
-            "osm-india-telegram": {
-                "name": "OpenStreetMap India Telegram",
-                "description": "Csatlakozz hozzánk: {url}"
+            "OSM-Colorado": {
+                "name": "OpenStreetMap Colorado"
             },
-            "OSM-india-twitter": {
-                "name": "OpenStreetMap India Twitter"
+            "OSM-Discord": {
+                "name": "OpenStreetMap Discord"
             },
-            "osm-india-website": {
-                "name": "OpenStreetMap India",
-                "description": "Térképészek és OpenStreetMap felhasználók Indiában"
-            },
-            "osm-india-wiki": {
-                "name": "OpenStreetMap Wikiprojekt India",
-                "description": "Minden, amit tudnod kell az indiai térképezésről: {url}"
-            },
-            "osm-india-youtube": {
-                "name": "OpenStreetMap India Youtube",
-                "description": "Iratkozz fel csatornánkra: {url}"
-            },
-            "ym-Gujarat-University": {
-                "name": "CCIM at Ahmedabad"
+            "OSM-Facebook": {
+                "name": "OpenStreetMap Facebookon",
+                "description": "A OpenStreetMappel kapcsolatos hírekért és frissítésekért kedvelj minket Facebookon."
             },
             "OSM-IDN-facebook": {
                 "name": "OpenStreetMap Indonézia"
             },
-            "ym-Universitas-Negeri-Makassar": {
-                "name": "Kontur Geografi"
+            "OSM-IRC": {
+                "name": "OpenStreetMap IRC"
             },
-            "ym-University-Muhammadiyah-Surakarta": {
-                "name": "SpaceTime"
+            "OSM-India-facebook": {
+                "description": "Improve OpenStreetMap in India"
             },
-            "osm-iran-telegram": {
-                "name": "OpenStreetMap Iran Telegram"
+            "OSM-MMR-facebook": {
+                "name": "OpenStreetMap Mianmar"
+            },
+            "OSM-MNG-facebook": {
+                "name": "OpenStreetMap Mongólia"
+            },
+            "OSM-MY-facebook": {
+                "name": "OpenStreetMap Malajzia a Facebookon"
+            },
+            "OSM-Nepal-facebook": {
+                "name": "OpenStreetMap Nepál"
+            },
+            "OSM-PE": {
+                "name": "OpenStreetMap Peru"
+            },
+            "OSM-PE-facebook": {
+                "name": "OpenStreetMap Peru Facebook"
+            },
+            "OSM-PE-telegram": {
+                "name": "OpenStreetMap Peru Telegram"
+            },
+            "OSM-PE-twitter": {
+                "name": "OpenStreetMap Peru Twitter",
+                "description": "Kövess minket Twitteren: {url}"
+            },
+            "OSM-PH-facebook": {
+                "name": "OpenStreetMap PH Facebook"
+            },
+            "OSM-PH-slack": {
+                "name": "OpenStreetMap PH Slack"
+            },
+            "OSM-PH-telegram": {
+                "name": "OpenStreetMap PH Telegram"
+            },
+            "OSM-PL-facebook-group": {
+                "name": "OpenStreetMap Lengyelország Facebook csoport"
+            },
+            "OSM-Portland": {
+                "name": "OpenStreetMap Portland"
+            },
+            "OSM-RU-telegram": {
+                "name": "OpenStreetMap RU telegram"
+            },
+            "OSM-Reddit": {
+                "name": "OpenStreetMap Redditen"
+            },
+            "OSM-Rome-meetup": {
+                "name": "Incontro Mappatori Romani"
+            },
+            "OSM-Seattle": {
+                "name": "OpenStreetMap Seattle"
+            },
+            "OSM-SoCal": {
+                "name": "OpenStreetMap Dél-Kalifornia"
+            },
+            "OSM-South-Bay": {
+                "name": "OSM South Bay"
+            },
+            "OSM-TH-CNX-meetup": {
+                "name": "OSM Meetup Chiang Mai"
+            },
+            "OSM-TH-facebook": {
+                "name": "OpenStreetMap TH Facebook csoport"
+            },
+            "OSM-TW-facebook": {
+                "name": "OpenStreetMap Tajvan közösség"
+            },
+            "OSM-Tampa-Bay": {
+                "name": "OpenStreetMap Tampa Bay"
+            },
+            "OSM-Telegram": {
+                "name": "OpenStreetMap Telegram",
+                "description": "Csatlakozz az OpenStreetMap Telegram globális szupercsoporthoz itt: {url}"
+            },
+            "OSM-Twitter": {
+                "name": "OpenStreetMap Twitter",
+                "description": "Kövess minket Twitteren: {url}"
+            },
+            "OSM-US": {
+                "name": "OpenStreetMap US"
+            },
+            "OSM-US-Slack": {
+                "name": "OpenStreetMap US Slack"
+            },
+            "OSM-Utah": {
+                "name": "OpenStreetMap Utah"
+            },
+            "OSM-Vancouver-meetup": {
+                "name": "OpenStreetMap Vancouver"
+            },
+            "OSM-Wyoming": {
+                "name": "OpenStreetMap Wyoming"
+            },
+            "OSM-br-discord": {
+                "name": "OpenStreetMap Brazília Discord"
+            },
+            "OSM-br-twitter": {
+                "name": "OpenStreetMap Brazília Twitter",
+                "description": "Kövess minket Twitteren: {url}"
+            },
+            "OSM-help": {
+                "name": "OpenStreetMap Súgó",
+                "description": "Tegyél fel kérdéseket az OSM közösségi kérdezz-felelek oldalán.",
+                "extendedDescription": "{url} elérhető bárkinek, aki OpenStreetMappel kapcsolatban szeretne segítséget. Ha kezdő szerkesztő vagy, vagy technikai kérdésed van, szívesen segítünk!"
+            },
+            "OSM-india-mailinglist": {
+                "name": "OpenStreetMap India levelezőlista"
+            },
+            "OSM-india-twitter": {
+                "name": "OpenStreetMap India Twitter"
             },
             "OSM-japan-facebook": {
                 "name": "OpenStreetMap Japán közösség",
@@ -9448,63 +9527,23 @@
                 "name": "OpenStreetMap Japán",
                 "description": "Térképészek és OpenStreetMap felhasználók Japánban"
             },
-            "OSM-MY-facebook": {
-                "name": "OpenStreetMap Malajzia a Facebookon"
-            },
-            "OSM-MNG-facebook": {
-                "name": "OpenStreetMap Mongólia"
-            },
-            "OSM-MMR-facebook": {
-                "name": "OpenStreetMap Mianmar"
-            },
-            "OSM-Nepal-facebook": {
-                "name": "OpenStreetMap Nepál"
-            },
-            "ym-Institute-of-Crisis-Management-Studies": {
-                "name": "Institute of Crisis Management Studies YouthMappers"
-            },
-            "ym-Kathmandu-University": {
-                "name": "Geomatics Engineering Society, GES"
-            },
-            "ym-Tribhuvan-University": {
-                "name": "Geomatics Engineering Students Association"
-            },
-            "OSM-Asia-mailinglist": {
-                "name": "OpenStreetMap Ázsia levelezőlista"
-            },
-            "osm-asia-telegram": {
-                "name": "OpenStreetMap Ázsia Telegram",
-                "description": "Csatlakozz hozzánk: {url}"
-            },
-            "OSM-PH-facebook": {
-                "name": "OpenStreetMap PH Facebook"
-            },
-            "OSM-PH-slack": {
-                "name": "OpenStreetMap PH Slack"
-            },
-            "OSM-PH-telegram": {
-                "name": "OpenStreetMap PH Telegram"
-            },
-            "ym-Far-Eastern-University-Institute-of-Technology": {
-                "name": "Junior Philippines Computer Society"
-            },
-            "ym-University-of-the-Philippines-Resilience-Institute": {
-                "name": "YouthMappers UP Resilience Institute"
-            },
-            "OSM-RU-telegram": {
-                "name": "OpenStreetMap RU telegram"
-            },
             "OSM-sri-lanka-facebook": {
                 "name": "OpenStreetMap Sri Lanka"
             },
-            "OSM-TW-facebook": {
-                "name": "OpenStreetMap Tajvan közösség"
+            "OSMF": {
+                "name": "OpenStreetMap Alapítvány",
+                "description": "Az OSMF az OpenStreetMap projektet segítő angol nonprofit szervezet",
+                "extendedDescription": "Az OSMF az OpenStreetMapet adománygyűjtéssel, az OSM szervereinek működtetésével, az éves State of the Map konferenciák szervezésével és az OSM-et működtető önkéntesek koordinálásával támogatja. Csatlakozz és legyél OSMF tag, hogy kifejezd a támogatásod, szavad legyen az OSM irányításában: {signupUrl}"
             },
-            "OSM-TH-CNX-meetup": {
-                "name": "OSM Meetup Chiang Mai"
+            "OpenCleveland-meetup": {
+                "name": "Open Cleveland"
             },
-            "OSM-TH-facebook": {
-                "name": "OpenStreetMap TH Facebook csoport"
+            "PHXGeo-twitter": {
+                "name": "PHXGeo Twitter",
+                "description": "Kövess minket Twitteren: {url}"
+            },
+            "RS-telegram": {
+                "name": "OpenStreetMap Rio Grande do Sul Telegram Group"
             },
             "al-maptime-tirana": {
                 "name": "Maptime Tirana"
@@ -9513,16 +9552,6 @@
                 "name": "OpenStreetMap Ausztria Twitter",
                 "description": "OpenStreetMap Ausztria Twitter: {url}"
             },
-            "osmgraz-twitter": {
-                "name": "OSM közösség, Graz twitter",
-                "description": "OpenStreetMap közösség, Graz twitter"
-            },
-            "osm-at": {
-                "name": "OpenStreetMap Ausztria"
-            },
-            "byosm": {
-                "name": "OpenStreetMap Fehéroroszország"
-            },
             "be-irc": {
                 "name": "OpenStreetMap Belgium IRC"
             },
@@ -9530,21 +9559,27 @@
                 "name": "OpenStreetMap Belgium Twitter",
                 "description": "OSM Belgium a Twitteren: @osm_be"
             },
-            "hr-facebook": {
-                "name": "OpenStreetMap Horvátország Facebook csoport",
-                "description": "OpenStreetMap Horvátország Facebook csoport"
+            "bw-twitter": {
+                "name": "Botswana térképezése Twitter",
+                "description": "OpenStreetMap Botswana Twitter"
             },
-            "hr-irc": {
-                "name": "OpenStreetMap Horvátország IRC-n"
+            "byosm": {
+                "name": "OpenStreetMap Fehéroroszország"
+            },
+            "cape-coast-youthmappers": {
+                "name": "University of Cape Coast YouthMappers",
+                "description": "Kövess minket Twitteren: {url}"
             },
             "czech-community": {
                 "name": "Cseh OSM közösség"
             },
-            "osmcz-facebook": {
-                "name": "OpenStreetMap CZ a Facebook-on"
+            "de-berlin-mailinglist": {
+                "name": "Berlin levelezőlista",
+                "description": "Ez a berlini OSM közösség levelezőlistája"
             },
-            "osmcz-twitter": {
-                "name": "Cseh twitter @osmcz"
+            "de-berlin-twitter": {
+                "name": "OpenStreetMap Berlin Twitter",
+                "description": "Kövess minket Twitteren: {url}"
             },
             "dk-irc": {
                 "name": "OpenStreetMap Dánia IRC"
@@ -9563,19 +9598,12 @@
                 "name": "OpenStreetMap Franciaország Twitteren",
                 "description": "OpenStreetMap Franciaország Twitteren: {url}"
             },
-            "de-berlin-mailinglist": {
-                "name": "Berlin levelezőlista",
-                "description": "Ez a berlini OSM közösség levelezőlistája"
+            "hr-facebook": {
+                "name": "OpenStreetMap Horvátország Facebook csoport",
+                "description": "OpenStreetMap Horvátország Facebook csoport"
             },
-            "de-berlin-twitter": {
-                "name": "OpenStreetMap Berlin Twitter",
-                "description": "Kövess minket Twitteren: {url}"
-            },
-            "osm-de": {
-                "name": "OpenStreetMap Németország"
-            },
-            "ym-Heidelberg-University": {
-                "name": "disastermappers heidelberg"
+            "hr-irc": {
+                "name": "OpenStreetMap Horvátország IRC-n"
             },
             "hu-facebook": {
                 "name": "OpenStreetMap HU a Facebookon",
@@ -9603,20 +9631,85 @@
                 "name": "OpenStreetMap Olaszország Twitter",
                 "description": "Kövess minket Twitteren: {url}"
             },
-            "OSM-Rome-meetup": {
-                "name": "Incontro Mappatori Romani"
+            "ni-twitter": {
+                "name": "OpenStreetMap Nicaragua Twitter",
+                "description": "OSM Nicaragua Twitter: @osm_ni"
             },
-            "talk-it-lazio": {
-                "name": "OpenStreetMap IT Lazio"
+            "osm-afghanistan-facebook": {
+                "name": "OpenStreetMap Afganisztán"
             },
-            "ym-Politecnico-di-Milano": {
-                "name": "PoliMappers"
+            "osm-africa-telegram": {
+                "name": "OpenStreetMap Africa Telegram",
+                "description": "OpenStreetMap Telegram for Africa"
             },
-            "ym-Universit-Mohammed-V-Rabat": {
-                "name": "Brahmapoutre, Rabat"
+            "osm-asia-telegram": {
+                "name": "OpenStreetMap Ázsia Telegram",
+                "description": "Csatlakozz hozzánk: {url}"
             },
-            "OSM-PL-facebook-group": {
-                "name": "OpenStreetMap Lengyelország Facebook csoport"
+            "osm-at": {
+                "name": "OpenStreetMap Ausztria"
+            },
+            "osm-de": {
+                "name": "OpenStreetMap Németország"
+            },
+            "osm-gh-facebook": {
+                "name": "OpenStreetMap Ghána Facebook"
+            },
+            "osm-gh-twitter": {
+                "name": "OpenStreetMap Ghána Twitter",
+                "description": "Kövess minket Twitteren: {url}"
+            },
+            "osm-india-github": {
+                "name": "OpenStreetMap India GitHub",
+                "description": "Kódolj velünk: {url}"
+            },
+            "osm-india-telegram": {
+                "name": "OpenStreetMap India Telegram",
+                "description": "Csatlakozz hozzánk: {url}"
+            },
+            "osm-india-website": {
+                "name": "OpenStreetMap India",
+                "description": "Térképészek és OpenStreetMap felhasználók Indiában"
+            },
+            "osm-india-wiki": {
+                "name": "OpenStreetMap Wikiprojekt India",
+                "description": "Minden, amit tudnod kell az indiai térképezésről: {url}"
+            },
+            "osm-india-youtube": {
+                "name": "OpenStreetMap India Youtube",
+                "description": "Iratkozz fel csatornánkra: {url}"
+            },
+            "osm-iran-telegram": {
+                "name": "OpenStreetMap Iran Telegram"
+            },
+            "osm-latam": {
+                "name": "OpenStreetMap Latam"
+            },
+            "osm-mg-facebook": {
+                "name": "OpenStreetMap Madagaszkár Facebook csoport"
+            },
+            "osm-ni": {
+                "name": "MapaNica.net"
+            },
+            "osm-se": {
+                "name": "OpenStreetMap.se"
+            },
+            "osmcz-facebook": {
+                "name": "OpenStreetMap CZ a Facebook-on"
+            },
+            "osmcz-twitter": {
+                "name": "Cseh twitter @osmcz"
+            },
+            "osmgraz-twitter": {
+                "name": "OSM közösség, Graz twitter",
+                "description": "OpenStreetMap közösség, Graz twitter"
+            },
+            "se-facebook": {
+                "name": "OpenStreetMap Svédország Facebook"
+            },
+            "se-twitter": {
+                "name": "OpenStreetMap Svédország Twitteren",
+                "description": "Kövess minket Twitteren: {url}"
             },
             "si-forum": {
                 "name": "OpenStreetMap Szlovénia fórum"
@@ -9628,135 +9721,29 @@
                 "name": "OpenStreetMap Szlovénia Twitter",
                 "description": "OpenStreetMap Szlovénia Twitter: {url}"
             },
-            "ym-Universidad-Autonoma-de-Madrid": {
-                "name": "YouthMappers at UAM"
+            "talk-it-lazio": {
+                "name": "OpenStreetMap IT Lazio"
             },
-            "ym-Universidad-Politcnica-de-Madrid": {
-                "name": "Mapeo Humanitario"
+            "ve-telegram": {
+                "name": "OpenStreetMap Venezuela Telegram"
             },
-            "osm-se": {
-                "name": "OpenStreetMap.se"
+            "ym-Abia-State-University": {
+                "name": "AbsuMappersTeam"
             },
-            "se-facebook": {
-                "name": "OpenStreetMap Svédország Facebook"
+            "ym-African-Methodist-Episcopal-University": {
+                "name": "YouthMappers-AMEU"
             },
-            "se-twitter": {
-                "name": "OpenStreetMap Svédország Twitteren",
-                "description": "Kövess minket Twitteren: {url}"
+            "ym-Ahmadu-Bello-University": {
+                "name": "ABU Geomappers"
             },
-            "ym-Istanbul-Technical-University": {
-                "name": "YouthMappers ITU"
+            "ym-Ardhi-University": {
+                "name": "ARU Mapper"
             },
-            "ym-Queen-Mary-University-of-London": {
-                "name": "Queen Mary YouthMappers"
+            "ym-Asian-University-for-Women": {
+                "name": "YouthMappers at AUW"
             },
-            "OSM-CA-Slack": {
-                "name": "OSM-CA Slack"
-            },
-            "OSM-Vancouver-meetup": {
-                "name": "OpenStreetMap Vancouver"
-            },
-            "ym-Universidad-de-Costa-Rica": {
-                "name": "YouthMappers de Universidad de Costa Rica"
-            },
-            "ym-Universidad-Nacional-Autnoma-de-Honduras": {
-                "name": "PumaGis Hn"
-            },
-            "ym-University-of-the-West-Indies-Mona-Campus": {
-                "name": "Libraries Outreach - ODL"
-            },
-            "ni-twitter": {
-                "name": "OpenStreetMap Nicaragua Twitter",
-                "description": "OSM Nicaragua Twitter: @osm_ni"
-            },
-            "osm-ni": {
-                "name": "MapaNica.net"
-            },
-            "ym-Universidad-Nacional-de-Ingenieria": {
-                "name": "Yeka Street MGA"
-            },
-            "ym-University-of-Panama": {
-                "name": "YouthMappers UP"
-            },
-            "ym-Universidad-de-Puerto-Rico-Rio-Piedras": {
-                "name": "UPR YouthMappers"
-            },
-            "Bay-Area-OpenStreetMappers": {
-                "name": "A San Francisco-öböl környéki (Bay Area) OpenStreetMap-szerkesztők",
-                "description": "Az OpenStreetMap tökéletesítése a San Francisco-öböl környékén",
-                "extendedDescription": "Ez a csoport az itteni, öbölkörnyéki OpenStreetMap-közösség gyarapításával foglalkozik. Rendezvényeink mindenki számára nyitottak a nyílt forráskódú szoftverek híveitől kezdve a kerékpárosokon, térinformatikusokon és geocaching-játékosokon át bárki másig. Örömmel látunk mindenkit, akit érdekelnek a térképek, a térképészet és a nyílt térképadatok, hogy csatlakozzék csoportunkhoz és részt vegyen a rendezvényeinken."
-            },
-            "Central-Pennsylvania-OSM": {
-                "name": "Közép-Pennsylvania OSM",
-                "description": "A Pennsylvania State College főiskolából kinövő online térképészközösség"
-            },
-            "Dallas-Fort-Worth-OSM": {
-                "name": "Dallas-Fort Worth OSM",
-                "description": "A Dallas-Fort Worth-ban működő OpenStreetMap felhasználói csoport",
-                "extendedDescription": "Dallas, Fort Worth és a köztük lévő városok bővelkednek kreatív, műszakilag jártas emberekben. A felhasználói csoport jövőképe, hogy új utakat találjon az OSM lenyűgöző erőforrásainak kihasználásra."
-            },
-            "GeoPhilly": {
-                "name": "GeoPhilly",
-                "description": "Térképrajongók találkozója Philadelphia térségében"
-            },
-            "MapMinnesota": {
-                "name": "MapMinnesota"
-            },
-            "Mapping-DC-meetup": {
-                "name": "Mapping DC"
-            },
-            "Maptime-ME-meetup": {
-                "name": "MaptimeME"
-            },
-            "MaptimeHRVA-twitter": {
-                "name": "MaptimeHRVA Twitter",
-                "description": "Kövess minket Twitteren: {url}"
-            },
-            "OpenCleveland-meetup": {
-                "name": "Open Cleveland"
-            },
-            "OSM-Boston": {
-                "name": "OpenStreetMap Boston"
-            },
-            "OSM-Central-Salish-Sea": {
-                "name": "OpenStreetMap Central Salish Sea"
-            },
-            "OSM-Chattanooga": {
-                "name": "OSM Chattanooga"
-            },
-            "OSM-Colorado": {
-                "name": "OpenStreetMap Colorado"
-            },
-            "OSM-Portland": {
-                "name": "OpenStreetMap Portland"
-            },
-            "OSM-Seattle": {
-                "name": "OpenStreetMap Seattle"
-            },
-            "OSM-SoCal": {
-                "name": "OpenStreetMap Dél-Kalifornia"
-            },
-            "OSM-South-Bay": {
-                "name": "OSM South Bay"
-            },
-            "OSM-Tampa-Bay": {
-                "name": "OpenStreetMap Tampa Bay"
-            },
-            "OSM-US-Slack": {
-                "name": "OpenStreetMap US Slack"
-            },
-            "OSM-US": {
-                "name": "OpenStreetMap US"
-            },
-            "OSM-Utah": {
-                "name": "OpenStreetMap Utah"
-            },
-            "OSM-Wyoming": {
-                "name": "OpenStreetMap Wyoming"
-            },
-            "PHXGeo-twitter": {
-                "name": "PHXGeo Twitter",
-                "description": "Kövess minket Twitteren: {url}"
+            "ym-Busitema-University": {
+                "name": "Good Mappers"
             },
             "ym-California-University-of-Pennsylvania": {
                 "name": "CalU PA GIS Club"
@@ -9764,26 +9751,122 @@
             "ym-Central-Washington-University": {
                 "name": "Geography Club"
             },
+            "ym-Centre-Universitaire-de-Recherche-et-dApplication-en-Tldtection-CURAT-de-lUniversit-Felix-Houphouet-Boigny": {
+                "name": "YouthMappers CURAT"
+            },
             "ym-Clemson-University": {
                 "name": "Clemson Mappers"
             },
             "ym-Cornell-University": {
                 "name": "Mapping Society"
             },
+            "ym-Cuttington-University": {
+                "name": "Cuttington University YouthMappers"
+            },
+            "ym-Dedan-Kimathi-University-of-Technology": {
+                "name": "GDEV"
+            },
+            "ym-Dhaka-College": {
+                "name": "YouthMappers Daka College"
+            },
+            "ym-Dhaka-University": {
+                "name": "Openstreetmap YouthMappers"
+            },
+            "ym-Eastern-University": {
+                "name": "YouthMappers at Eastern University"
+            },
+            "ym-Far-Eastern-University-Institute-of-Technology": {
+                "name": "Junior Philippines Computer Society"
+            },
+            "ym-Federal-School-of-Surveys": {
+                "name": "OyoMappersTeam (OMT) Oyo"
+            },
+            "ym-Federal-University-of-Technology-Akure": {
+                "name": "YouthMappers Futa Space Club"
+            },
+            "ym-Fourah-Bay-College": {
+                "name": "Student's Geographical Association"
+            },
+            "ym-General-Lansana-Conte-University": {
+                "name": "YouthMappers General Lansana Conte University"
+            },
             "ym-George-Mason-University": {
                 "name": "Mason Mappers"
+            },
+            "ym-Grand-Gedeh-County-Community-College": {
+                "name": "YouthMappers at Grand Gedeh County Community College"
+            },
+            "ym-Gujarat-University": {
+                "name": "CCIM at Ahmedabad"
+            },
+            "ym-Gulu-University": {
+                "name": "CSGU Mappers"
+            },
+            "ym-Heidelberg-University": {
+                "name": "disastermappers heidelberg"
+            },
+            "ym-Ignatius-Ajuru-University-of-Education": {
+                "name": "IgnatiusMappersTeam (IMT)"
             },
             "ym-Indiana-University-of-Pennsylvania": {
                 "name": "Geospatial Science Club"
             },
+            "ym-Insititue-d-Enseignement-Superieur-de-Ruhengeri": {
+                "name": "YouthMappers at INES Ruhengeri"
+            },
+            "ym-Institut-Suprieur-de-Management-Kolda": {
+                "name": "Les Femmes Leaders de ISM/Kolda"
+            },
+            "ym-Institute-of-Crisis-Management-Studies": {
+                "name": "Institute of Crisis Management Studies YouthMappers"
+            },
+            "ym-Institute-of-Finance-Management": {
+                "name": "IFM mappers"
+            },
+            "ym-Institute-of-Rural-Development-Planning": {
+                "name": "Mipango YouthMappers Chapter"
+            },
+            "ym-Institute-of-Science-and-Veterinary-Medicine": {
+                "name": "YouthMappers ISSMV Dalaba"
+            },
+            "ym-Istanbul-Technical-University": {
+                "name": "YouthMappers ITU"
+            },
             "ym-Jacksonville-State-University": {
                 "name": "JSU Disaster Mapping Team"
+            },
+            "ym-Jahangirnagar-University": {
+                "name": "YouthMappers at IRS, Jahangirnagar University"
             },
             "ym-Kansas-State-University": {
                 "name": "Gamma Theta Upsilon: Beta Psi Chapter"
             },
+            "ym-Karatina-University": {
+                "name": "Nature Club Karatina University"
+            },
+            "ym-Kathmandu-University": {
+                "name": "Geomatics Engineering Society, GES"
+            },
+            "ym-Kenyatta-University": {
+                "name": "Kenyatta University GIS Club"
+            },
+            "ym-Kumi-University": {
+                "name": "Ever Last YouthMappers"
+            },
+            "ym-Kwame-Nkrumah-University-of-Science-and-Technology": {
+                "name": "Kwame Nkrumah University of Science and Technology YouthMappers"
+            },
+            "ym-Makerere-University": {
+                "name": "Geo YouthMappers"
+            },
+            "ym-Mbarara-University-of-Science-and-Technology": {
+                "name": "MUST Street Mappers"
+            },
             "ym-Miami-University": {
                 "name": "Geography and Planning Society"
+            },
+            "ym-Moi-University": {
+                "name": "Geography Students Association"
             },
             "ym-Monroe-Community-College": {
                 "name": "MCC Mapping Corps"
@@ -9791,17 +9874,59 @@
             "ym-Montgomery-College": {
                 "name": "GeoMC"
             },
+            "ym-Namibia-University-of-Science-and-Technology": {
+                "name": "Geoinformation Technology Student Society"
+            },
+            "ym-Nimba-County-Community-College": {
+                "name": "Nimba County Community College Youth Mappers"
+            },
+            "ym-Njala-University-Freetown-Campus": {
+                "name": "Njala Freetown YouthMappers"
+            },
+            "ym-Njala-University-Njala-Campus": {
+                "name": "YouthMappers Njala University, Njala Campus"
+            },
             "ym-Ohio-Wesleyan-University": {
                 "name": "Environment and Wildlife Club"
             },
             "ym-Oklahoma-State-University": {
                 "name": "Geography Club"
             },
-            "ym-State-University-of-New-York-Geneseo": {
-                "name": "SUNY Geneseo GIS Association"
+            "ym-Open-University-of-Tanzania": {
+                "name": "Youth Mappers at Open University of Tanzania"
+            },
+            "ym-Politecnico-di-Milano": {
+                "name": "PoliMappers"
+            },
+            "ym-Queen-Mary-University-of-London": {
+                "name": "Queen Mary YouthMappers"
+            },
+            "ym-Rajshahi-University-of-Engineering-Technology": {
+                "name": "YouthMappers at RUET"
             },
             "ym-SUNY-at-Fredonia": {
                 "name": "Geoventurers"
+            },
+            "ym-Sherubtse-College": {
+                "name": "Geographical Society"
+            },
+            "ym-Sokoine-University-of-Agriculture": {
+                "name": "SMCoSE YouthMappers"
+            },
+            "ym-St.-Augustine-International-University": {
+                "name": "YouthMappers at St Augustine International University"
+            },
+            "ym-St.-Mawaggali-Trades-Training-Institute": {
+                "name": "MawaggaliMappers"
+            },
+            "ym-State-University-of-New-York-Geneseo": {
+                "name": "SUNY Geneseo GIS Association"
+            },
+            "ym-Stella-Maris-Polytechnic": {
+                "name": "YouthMappers-SMP"
+            },
+            "ym-Technical-University-of-Kenya": {
+                "name": "Geospatial Science Student Association"
             },
             "ym-Texas-Tech-University": {
                 "name": "YouthMappers at TTU"
@@ -9818,8 +9943,83 @@
             "ym-The-Pennsylvania-State-University": {
                 "name": "Penn State GIS Coalition"
             },
+            "ym-The-University-of-Zambia": {
+                "name": "YouthMappers Unza"
+            },
+            "ym-Tribhuvan-University": {
+                "name": "Geomatics Engineering Students Association"
+            },
+            "ym-UW-Madison": {
+                "name": "BadgerMaps"
+            },
+            "ym-Uganda-Christian-University-Mbale-Campus": {
+                "name": "Mappers for Life"
+            },
+            "ym-Uganda-Pentecostal-University": {
+                "name": "HiTech Youth Mappers"
+            },
+            "ym-Universidad-Autonoma-de-Madrid": {
+                "name": "YouthMappers at UAM"
+            },
+            "ym-Universidad-Distrital-Francisco-Jose-de-Caldas": {
+                "name": "YouthMappers at Bogota"
+            },
+            "ym-Universidad-Nacional-Autnoma-de-Honduras": {
+                "name": "PumaGis Hn"
+            },
+            "ym-Universidad-Nacional-de-Colombia": {
+                "name": "Grupo UN"
+            },
+            "ym-Universidad-Nacional-de-Ingenieria": {
+                "name": "Yeka Street MGA"
+            },
+            "ym-Universidad-Politcnica-de-Madrid": {
+                "name": "Mapeo Humanitario"
+            },
+            "ym-Universidad-de-Antioquia": {
+                "name": "Geomatica UDEA"
+            },
+            "ym-Universidad-de-Costa-Rica": {
+                "name": "YouthMappers de Universidad de Costa Rica"
+            },
+            "ym-Universidad-de-La-Guajira": {
+                "name": "Grupo Mesh"
+            },
+            "ym-Universidad-de-Los-Andes": {
+                "name": "Cartografos Uniandes"
+            },
+            "ym-Universidad-de-Puerto-Rico-Rio-Piedras": {
+                "name": "UPR YouthMappers"
+            },
+            "ym-Universidad-de-San-Buenaventura": {
+                "name": "YouthMappers San Buenaventura"
+            },
+            "ym-Universidade-Eduardo-Mondlane": {
+                "name": "Comunidade YouthMappers Moçambique"
+            },
+            "ym-Universit-Gaston-Berger": {
+                "name": "YouthMappers at UGB"
+            },
+            "ym-Universit-Mohammed-V-Rabat": {
+                "name": "Brahmapoutre, Rabat"
+            },
+            "ym-Universit-de-NZrkor": {
+                "name": "Youthmappers à N'Zérékoré"
+            },
+            "ym-Universit-des-Sciences-Sociale-et-de-Gestion-de-Bamako": {
+                "name": "Etudiant au Laboratoire HoPE"
+            },
+            "ym-Universitas-Negeri-Makassar": {
+                "name": "Kontur Geografi"
+            },
+            "ym-University-Muhammadiyah-Surakarta": {
+                "name": "SpaceTime"
+            },
             "ym-University-of-California-Davis": {
                 "name": "Mapping Club"
+            },
+            "ym-University-of-Cape-Coast": {
+                "name": "UCC Geographical Society"
             },
             "ym-University-of-Central-Florida": {
                 "name": "Geospatial Information Society"
@@ -9827,8 +10027,35 @@
             "ym-University-of-Chicago": {
                 "name": "Tobler Society"
             },
+            "ym-University-of-Dar-es-Salaam": {
+                "name": "YouthMappers at University of Dar es Salaam"
+            },
+            "ym-University-of-Energy-and-Natural-Resources": {
+                "name": "Eco-Club"
+            },
+            "ym-University-of-Ghana": {
+                "name": "University of Ghana YouthMappers"
+            },
+            "ym-University-of-Liberia-YouthMappers": {
+                "name": "University of Liberia YouthMappers"
+            },
+            "ym-University-of-Malawi": {
+                "name": "Chanco Malawi YouthMappers"
+            },
             "ym-University-of-Maryland-College-Park": {
                 "name": "Geography Club"
+            },
+            "ym-University-of-Mines-and-Technology": {
+                "name": "UMaT YouthMappers"
+            },
+            "ym-University-of-Nairobi": {
+                "name": "Geospatial Engineering Students Association"
+            },
+            "ym-University-of-Nigeria-Enugu-Campus": {
+                "name": "LionMappersTeam (LMT) Enugu"
+            },
+            "ym-University-of-Nigeria-Nsukka": {
+                "name": "LionMappersTeam (LMT) Nsukka"
             },
             "ym-University-of-North-Texas": {
                 "name": "UNT Geography Club"
@@ -9839,8 +10066,20 @@
             "ym-University-of-Oregon": {
                 "name": "Map by Northwest"
             },
+            "ym-University-of-Panama": {
+                "name": "YouthMappers UP"
+            },
+            "ym-University-of-Port-Harcourt": {
+                "name": "UniqueMappersTeam (UMT) Port Harcourt"
+            },
+            "ym-University-of-Pretoria": {
+                "name": "Centre for Geoinformation Science"
+            },
             "ym-University-of-Redlands": {
                 "name": "URSpatial Geo-Thinkers"
+            },
+            "ym-University-of-Rwanda-Huye-Campus": {
+                "name": "Rwanda YouthMappers"
             },
             "ym-University-of-South-Carolina": {
                 "name": "Geography Graduate Student Association"
@@ -9857,8 +10096,14 @@
             "ym-University-of-Wyoming": {
                 "name": "Gamma Theta Upsilon/Geography Club"
             },
-            "ym-UW-Madison": {
-                "name": "BadgerMaps"
+            "ym-University-of-Zimbabwe": {
+                "name": "UZMappers"
+            },
+            "ym-University-of-the-Philippines-Resilience-Institute": {
+                "name": "YouthMappers UP Resilience Institute"
+            },
+            "ym-University-of-the-West-Indies-Mona-Campus": {
+                "name": "Libraries Outreach - ODL"
             },
             "ym-Vassar-College": {
                 "name": "Hudson Valley Mappers"
@@ -9871,136 +10116,6 @@
             },
             "ym-Western-Michigan-University": {
                 "name": "Geography Club"
-            },
-            "Maptime-Oceania-Slack": {
-                "name": "Maptime Oceania Slack"
-            },
-            "OSM-AR-facebook": {
-                "name": "OpenStreetMap Argentína Facebook",
-                "extendedDescription": "Hírek a helyi közösségtől"
-            },
-            "OSM-AR-irc": {
-                "name": "OpenStreetMap Argentina IRC"
-            },
-            "OSM-AR-telegram": {
-                "name": "OpenStreetMap Argentina Telegram"
-            },
-            "OSM-AR-twitter": {
-                "name": "OpenStreetMap Argentina Twitter",
-                "description": "Kövess minket Twitteren: {url}"
-            },
-            "OSM-br-discord": {
-                "name": "OpenStreetMap Brazília Discord"
-            },
-            "OSM-br-twitter": {
-                "name": "OpenStreetMap Brazília Twitter",
-                "description": "Kövess minket Twitteren: {url}"
-            },
-            "RS-telegram": {
-                "name": "OpenStreetMap Rio Grande do Sul Telegram Group"
-            },
-            "OSM-CL-facebook": {
-                "name": "OpenStreetMap Chile Facebook",
-                "description": "Csatlakozz az OpenStreetMap Chile Facebook közösséghez"
-            },
-            "OSM-CL-telegram": {
-                "name": "OpenStreetMap Chile Telegram"
-            },
-            "OSM-CL-twitter": {
-                "name": "OpenStreetMap Chile Twitter",
-                "description": "Kövess minket Twitteren: {url}"
-            },
-            "Maptime-Bogota": {
-                "name": "Maptime Bogotá"
-            },
-            "OSM-CO-facebook": {
-                "name": "OpenStreetMap Kolumbia Facebook"
-            },
-            "OSM-CO-twitter": {
-                "name": "OpenStreetMap Kolumbia Twitter",
-                "description": "Kövess minket Twitteren: {url}"
-            },
-            "OSM-CO": {
-                "name": "OpenStreetMap Kolumbia"
-            },
-            "ym-Universidad-de-Antioquia": {
-                "name": "Geomatica UDEA"
-            },
-            "ym-Universidad-de-La-Guajira": {
-                "name": "Grupo Mesh"
-            },
-            "ym-Universidad-de-Los-Andes": {
-                "name": "Cartografos Uniandes"
-            },
-            "ym-Universidad-de-San-Buenaventura": {
-                "name": "YouthMappers San Buenaventura"
-            },
-            "ym-Universidad-Distrital-Francisco-Jose-de-Caldas": {
-                "name": "YouthMappers at Bogota"
-            },
-            "ym-Universidad-Nacional-de-Colombia": {
-                "name": "Grupo UN"
-            },
-            "OSM-PE-facebook": {
-                "name": "OpenStreetMap Peru Facebook"
-            },
-            "OSM-PE-telegram": {
-                "name": "OpenStreetMap Peru Telegram"
-            },
-            "OSM-PE-twitter": {
-                "name": "OpenStreetMap Peru Twitter",
-                "description": "Kövess minket Twitteren: {url}"
-            },
-            "OSM-PE": {
-                "name": "OpenStreetMap Peru"
-            },
-            "ve-telegram": {
-                "name": "OpenStreetMap Venezuela Telegram"
-            },
-            "LATAM-Facebook": {
-                "name": "OpenStreetMap Latam Facebook",
-                "description": "OpenStreetMap Latam Facebook"
-            },
-            "LATAM-Telegram": {
-                "name": "OpenStreetMap Latam Telegram"
-            },
-            "LATAM-Twitter": {
-                "name": "OpenStreetMap Latam Twitter",
-                "description": "Kövess minket Twitteren: {url}"
-            },
-            "osm-latam": {
-                "name": "OpenStreetMap Latam"
-            },
-            "OSM-Discord": {
-                "name": "OpenStreetMap Discord"
-            },
-            "OSM-Facebook": {
-                "name": "OpenStreetMap Facebookon",
-                "description": "A OpenStreetMappel kapcsolatos hírekért és frissítésekért kedvelj minket Facebookon."
-            },
-            "OSM-help": {
-                "name": "OpenStreetMap Súgó",
-                "description": "Tegyél fel kérdéseket az OSM közösségi kérdezz-felelek oldalán.",
-                "extendedDescription": "{url} elérhető bárkinek, aki OpenStreetMappel kapcsolatban szeretne segítséget. Ha kezdő szerkesztő vagy, vagy technikai kérdésed van, szívesen segítünk!"
-            },
-            "OSM-IRC": {
-                "name": "OpenStreetMap IRC"
-            },
-            "OSM-Reddit": {
-                "name": "OpenStreetMap Redditen"
-            },
-            "OSM-Telegram": {
-                "name": "OpenStreetMap Telegram",
-                "description": "Csatlakozz az OpenStreetMap Telegram globális szupercsoporthoz itt: {url}"
-            },
-            "OSM-Twitter": {
-                "name": "OpenStreetMap Twitter",
-                "description": "Kövess minket Twitteren: {url}"
-            },
-            "OSMF": {
-                "name": "OpenStreetMap Alapítvány",
-                "description": "Az OSMF az OpenStreetMap projektet segítő angol nonprofit szervezet",
-                "extendedDescription": "Az OSMF az OpenStreetMapet adománygyűjtéssel, az OSM szervereinek működtetésével, az éves State of the Map konferenciák szervezésével és az OSM-et működtető önkéntesek koordinálásával támogatja. Csatlakozz és legyél OSMF tag, hogy kifejezd a támogatásod, szavad legyen az OSM irányításában: {signupUrl}"
             }
         }
     }

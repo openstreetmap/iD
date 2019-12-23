@@ -1,5 +1,5 @@
 {
-    "icon": "maki-lodging",
+    "icon": "temaki-cabin",
     "fields": [
         "name",
         "operator",
@@ -28,10 +28,14 @@
         "area"
     ],
     "terms": [
-        "holiday",
+        "chalet",
+        "holiday cabin",
         "holiday cottage",
         "holiday home",
-        "vacation",
+        "lodge",
+        "lodging",
+        "overnight accommodations",
+        "vacation cabin",
         "vacation home"
     ],
     "tags": {

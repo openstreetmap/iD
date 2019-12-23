@@ -310,6 +310,87 @@
                     "name": "Rheadr"
                 }
             }
+        },
+        "imagery": {
+            "AGIV": {
+                "attribution": {
+                    "text": "(Hawlfraint) Asiantaeth Gwybodaeth Fflandrys"
+                },
+                "name": "Delweddau o'r awyr diweddaraf Asiantaeth Gwybodaeth Fflandrys"
+            },
+            "Bing": {
+                "description": "Lloeren ac delweddau o'r awyr.",
+                "name": "Delweddau o'r awyr Bing"
+            },
+            "EsriWorldImagery": {
+                "attribution": {
+                    "text": "Telerau ac Adborth"
+                },
+                "description": "Delweddaeth y byd ESRI.",
+                "name": "Delweddaeth y byd ESRI"
+            },
+            "EsriWorldImageryClarity": {
+                "attribution": {
+                    "text": "Telerau ac Adborth"
+                },
+                "name": "Delweddaeth y byd ESRI (Eglurder Beta)"
+            },
+            "MAPNIK": {
+                "attribution": {
+                    "text": "(Hawlfraint) Cyfranwyr OpenStreetMap, CC-BY-SA"
+                },
+                "description": "Yr haen OpenStreetMap diofyn",
+                "name": "OpenStreetMap (safonol)"
+            },
+            "Mapbox": {
+                "attribution": {
+                    "text": "Telerau ac Adborth"
+                },
+                "description": "Lloeren ac delweddau o'r awyr",
+                "name": "Lloeren Mapbox"
+            },
+            "OSM_Inspector-Addresses": {
+                "attribution": {
+                    "text": "(Hawlfraint) Geofabrik GmbH, Cyfranwyr OpenStreetMap, CC-BY-SA"
+                },
+                "name": "Arolygydd OSM: Cyfeiriadau"
+            },
+            "OSM_Inspector-Geometry": {
+                "attribution": {
+                    "text": "(Hawlfraint) Geofabrik GmbH, Cyfranwyr OpenStreetMap, CC-BY-SA"
+                },
+                "name": "Arolygydd OSM: Geometreg"
+            },
+            "OSM_Inspector-Highways": {
+                "attribution": {
+                    "text": "(Hawlfraint) Geofabrik GmbH, Cyfranwyr OpenStreetMap, CC-BY-SA"
+                },
+                "name": "Arolygydd OSM: Priffyrdd"
+            },
+            "OSM_Inspector-Multipolygon": {
+                "attribution": {
+                    "text": "(Hawlfraint) Geofabrik GmbH, Cyfranwyr OpenStreetMap, CC-BY-SA"
+                },
+                "name": "Arolygydd OSM: Ardal"
+            },
+            "OSM_Inspector-Places": {
+                "attribution": {
+                    "text": "(Hawlfraint) Geofabrik GmbH, Cyfranwyr OpenStreetMap, CC-BY-SA"
+                },
+                "name": "Arolygydd OSM: Ddiddordeb"
+            },
+            "OSM_Inspector-Routing": {
+                "attribution": {
+                    "text": "(Hawlfraint) Geofabrik GmbH, Cyfranwyr OpenStreetMap, CC-BY-SA"
+                },
+                "name": "Arolygydd OSM: Llwybro"
+            },
+            "OSM_Inspector-Tagging": {
+                "attribution": {
+                    "text": "(Hawlfraint) Geofabrik GmbH, Cyfranwyr OpenStreetMap, CC-BY-SA"
+                },
+                "name": "Arolygydd OSM: Tagio"
+            }
         }
     }
 }

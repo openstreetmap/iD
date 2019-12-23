@@ -1,5 +1,5 @@
 {
-    "icon": "maki-lodging",
+    "icon": "temaki-cabin",
     "fields": [
         "name",
         "operator",
@@ -26,7 +26,12 @@
         "area"
     ],
     "terms": [
-        "climbing hut"
+        "cabin",
+        "climbing hut",
+        "lodge",
+        "lodging",
+        "overnight accommodations",
+        "wilderness hut"
     ],
     "tags": {
         "tourism": "alpine_hut"

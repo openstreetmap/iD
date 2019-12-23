@@ -90,18 +90,7 @@
                 "connected_to_hidden": "Kjo nuk mund bëhet rrethore sepse është lidhur me një tipar të fshehur."
             },
             "orthogonalize": {
-                "title": "Katror",
-                "description": {
-                    "line": "Bëj qoshet e vijës katror.",
-                    "area": "Bëj qoshet e sipërfaqes katror."
-                },
-                "annotation": {
-                    "line": "Qoshet e vijës u bën katror.",
-                    "area": "Qoshet e sipërfaqes u bën katror."
-                },
-                "not_squarish": "Kjo nuk mund bëhet katror sepse nuk i ngjan një katror.",
-                "too_large": "Kjo nuk mund bëhet katror sepse nuk ështe mjaftueshmërisht e dukshme.",
-                "connected_to_hidden": "Kjo nuk mund bëhet katror sepse është lidhur me një tipar të fshehur."
+                "title": "Katror"
             },
             "straighten": {
                 "title": "Drejto",
@@ -275,12 +264,6 @@
         "feature_info": {
             "hidden_warning": "{count} tipare të fshehura",
             "hidden_details": "Këto tipare janë aktualisht të fshehura: {details}"
-        },
-        "status": {
-            "error": "Pa mundësi të lidhet me API-n.",
-            "offline": "API-ja është jashtë linje. Ju lutemi provoni të redaktoni më von.",
-            "readonly": "API-ja është vetëm për lexim. Duhet prisni për të kryer ndryshimet.",
-            "rateLimit": "API-ja po limiton lidhjet anonime. Ju mund ta rregulloni këtë duke u kyçur."
         },
         "commit": {
             "title": "Ngarkoni në OpenStreetMap",
@@ -686,17 +669,12 @@
                     "keyboard": "Shfaq shkurtimet e tastierës"
                 },
                 "display_options": {
-                    "background": "Shfaq opsionet e sfondit",
-                    "background_switch": "Rikthehuni tek sfondi i fundit",
-                    "map_data": "Shfaqe opsionet për të dhënat e hartës"
+                    "background_switch": "Rikthehuni tek sfondi i fundit"
                 },
                 "selecting": {
                     "title": "Duke përzgjedhur karakteristikat",
                     "select_one": "Përzgjidhni një karakterstikë të vetme",
                     "select_multi": "Përzgjidhni disa karakterstika"
-                },
-                "with_selected": {
-                    "title": "Me karakteristikën e përzgjedhur"
                 },
                 "vertex_selected": {
                     "title": "Me nyjen e përzgjedhur",
@@ -936,9 +914,6 @@
                 "building/college": {
                     "name": "Ndërtesa e Kollegjit"
                 },
-                "highway": {
-                    "name": "Hekurudhë"
-                },
                 "highway/cycleway": {
                     "name": "Rrugë biçikletash"
                 },
@@ -956,9 +931,6 @@
                 },
                 "power/transformer": {
                     "name": "Transformator"
-                },
-                "railway": {
-                    "name": "Hekurudhë"
                 },
                 "railway/abandoned": {
                     "name": "Hekurudhë E Braktisur"
@@ -992,9 +964,6 @@
                 },
                 "shop/supermarket": {
                     "name": "Supermarket"
-                },
-                "tourism": {
-                    "name": "Turizëm"
                 },
                 "tourism/hotel": {
                     "name": "Hotel"
@@ -1062,39 +1031,38 @@
             }
         },
         "community": {
-            "bw-facebook": {
-                "description": "Faqja e OpenStreetMap në Botswana"
-            },
-            "cape-coast-youthmappers": {
-                "description": "Na ndiqni në Twitter: {url}"
-            },
-            "osm-gh-facebook": {
-                "name": "OpenStreetMap Gana në Facebook",
-                "description": "Grupi në facebook për njerzit e interesuar në OpenStreetMap"
-            },
-            "osm-gh-twitter": {
-                "name": "OpenStreetMap Gana në Twitter",
-                "description": "Na ndiqni në Twitter: {url}"
-            },
             "OSM-BGD-facebook": {
                 "name": "OpenStreetMap Bangladesh",
                 "description": "Përmirësoni OpenStreetMap në Bangladesh"
             },
+            "OSM-CA-Slack": {
+                "description": "Të gjithë janë të mirëpritur! Regjistrohuni në {signupUrl}."
+            },
             "OSM-India-facebook": {
                 "description": "Përmirësoni OpenStreetMap në Indi"
-            },
-            "OSM-india-twitter": {
-                "name": "OpenStreetMap India Twitter"
-            },
-            "OSM-MNG-facebook": {
-                "name": "OpenStreetMap Mongolia"
             },
             "OSM-MMR-facebook": {
                 "name": "OpenStreetMap Myanmar"
             },
+            "OSM-MNG-facebook": {
+                "name": "OpenStreetMap Mongolia"
+            },
             "OSM-Nepal-facebook": {
                 "name": "OpenStreetMap Nepal",
                 "description": "Përmirësoni OpenStreetMap në Nepal"
+            },
+            "OSM-PE": {
+                "name": "OpenStreetMap Peru"
+            },
+            "OSM-Twitter": {
+                "name": "OpenStreetMap Twitter",
+                "description": "Na ndiqni në Twitter: {url}"
+            },
+            "OSM-india-twitter": {
+                "name": "OpenStreetMap India Twitter"
+            },
+            "OSMF": {
+                "name": "Fondacioni OpenStreetMap"
             },
             "al-forum": {
                 "description": "OpenStreetMap Albania Forum"
@@ -1106,8 +1074,11 @@
                 "name": "OSM Albania kanali në Telegram ",
                 "description": "OpenStreetMap Albania kanali në Telegram "
             },
-            "osm-at": {
-                "name": "OpenStreetMap Austria"
+            "bw-facebook": {
+                "description": "Faqja e OpenStreetMap në Botswana"
+            },
+            "cape-coast-youthmappers": {
+                "description": "Na ndiqni në Twitter: {url}"
             },
             "it-telegram": {
                 "name": "@OpenStreetMapItalia në Telegram"
@@ -1115,18 +1086,16 @@
             "it-twitter": {
                 "description": "Na ndiqni në Twitter: {url}"
             },
-            "OSM-CA-Slack": {
-                "description": "Të gjithë janë të mirëpritur! Regjistrohuni në {signupUrl}."
+            "osm-at": {
+                "name": "OpenStreetMap Austria"
             },
-            "OSM-PE": {
-                "name": "OpenStreetMap Peru"
+            "osm-gh-facebook": {
+                "name": "OpenStreetMap Gana në Facebook",
+                "description": "Grupi në facebook për njerzit e interesuar në OpenStreetMap"
             },
-            "OSM-Twitter": {
-                "name": "OpenStreetMap Twitter",
+            "osm-gh-twitter": {
+                "name": "OpenStreetMap Gana në Twitter",
                 "description": "Na ndiqni në Twitter: {url}"
-            },
-            "OSMF": {
-                "name": "Fondacioni OpenStreetMap"
             }
         }
     }

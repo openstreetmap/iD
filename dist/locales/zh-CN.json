@@ -7,7 +7,7 @@
             "undo": "复原",
             "zoom_to": "缩放至",
             "copy": "复制",
-            "open_wikidata": "在 wikidata.org 上打开",
+            "view_on": "在 {domain} 上查看",
             "favorite": "收藏"
         },
         "toolbar": {
@@ -128,27 +128,59 @@
                 "not_closed": "该要素不是一个闭合环，无法将其环状化。",
                 "too_large": "该要素的可见部分不足，无法将其环状化。",
                 "connected_to_hidden": "该要素与某一隐藏要素相连，无法将其环状化。",
-                "not_downloaded": "该要素的一部分未被下载，无法将其环状化。"
+                "not_downloaded": "该要素的一部分未被下载，无法将其环状化。",
+                "already_circular": "该要素已近似圆形，无法将其环状化。"
             },
             "orthogonalize": {
                 "title": "直角化",
                 "description": {
-                    "vertex": "直角化该角落。",
-                    "line": "将这条线上的弯角转化成直角。",
-                    "area": "将这个区域上的弯角转化成直角。"
+                    "corner": {
+                        "single": "直角化该角落。",
+                        "multiple": "直角化这些角落。"
+                    },
+                    "feature": {
+                        "single": "直角化该要素的角落。",
+                        "multiple": "直角化这些要素的角落。"
+                    }
                 },
                 "key": "Q",
                 "annotation": {
-                    "vertex": "直角化一个角落。",
-                    "line": "已将线段上的弯角换成直角。",
-                    "area": "已将区域的弯角换成直角。"
+                    "corner": {
+                        "single": "直角化一个角落。",
+                        "multiple": "直角化多个角落。"
+                    },
+                    "feature": {
+                        "single": "直角化一个要素的角落。",
+                        "multiple": "直角化多个要素的角落。"
+                    }
                 },
-                "end_vertex": "该点为端点，无法将其所在角化为直角。",
-                "square_enough": "无法使其更为直角化。",
-                "not_squarish": "该要素不是近似方形的，无法将其直角化。",
-                "too_large": "该要素的可见部分不足，无法将其直角化。",
-                "connected_to_hidden": "该要素与一隐藏要素相连，无法将其直角化。",
-                "not_downloaded": "该要素的一部分未被下载，无法将其直角化。"
+                "multiple_blockers": {
+                    "multiple": "由于多个原因，无法将其所在角化为直角。"
+                },
+                "end_vertex": {
+                    "single": "该点为端点，无法将其所在角化为直角。",
+                    "multiple": "这些点为端点，无法将其所在角化为直角。"
+                },
+                "square_enough": {
+                    "single": "无法使其更为直角化。",
+                    "multiple": "无法使其更为直角化。"
+                },
+                "not_squarish": {
+                    "single": "该要素不是近似方形的，无法将其直角化。",
+                    "multiple": "这些要素不是近似方形的，无法将其直角化。"
+                },
+                "too_large": {
+                    "single": "该要素的可见部分不足，无法将其直角化。",
+                    "multiple": "这些要素的可见部分不足，无法将其直角化。"
+                },
+                "connected_to_hidden": {
+                    "single": "该要素与一隐藏要素相连，无法将其直角化。",
+                    "multiple": "这些要素与某些隐藏要素相连，无法将其直角化。"
+                },
+                "not_downloaded": {
+                    "single": "该要素有一部分未被下载，无法将其直角化。",
+                    "multiple": "这些要素有一部分未被下载，无法将其直角化。"
+                }
             },
             "straighten": {
                 "title": "拉直",
@@ -533,11 +565,14 @@
             "hidden_warning": "{count}个隐藏要素",
             "hidden_details": "以下要素目前被隐藏：{details}"
         },
-        "status": {
-            "error": "无法连接到 API。",
-            "offline": "API 已下线，请稍后再尝试编辑。",
-            "readonly": "API 目前处于只读状态，您需要等候一段时间才能保存您的更改。",
-            "rateLimit": "该接口是限制匿名连接的。您可以通过登录来解决这个问题。"
+        "osm_api_status": {
+            "message": {
+                "error": "无法连接到 OpenStreetMap API。你的编辑在本地是安全的。请检查你的网络连接。",
+                "offline": "OpenStreetMap API 当前离线。你的编辑在本地是安全的。请稍后再来。",
+                "readonly": "OpenStreetMap API 当前为只读状态。你可以继续编辑，但需要等待一段时间才能保存。",
+                "rateLimit": "OpenStreetMap API 限制了匿名连接。你可以通过登录来解决此问题。"
+            },
+            "retry": "重试"
         },
         "commit": {
             "title": "上传至 OpenStreetMap",
@@ -631,7 +666,6 @@
         },
         "geocoder": {
             "search": "在全球搜索...",
-            "no_results_visible": "在可见地图区域没有结果",
             "no_results_worldwide": "没有找到结果"
         },
         "geolocate": {
@@ -757,9 +791,19 @@
                     "zoom": "缩放到数据"
                 }
             },
+            "style_options": "样式设定",
+            "highlight_edits": {
+                "key": "G"
+            },
             "map_features": "地图要素",
             "autohidden": "这些要素已被自动隐藏，因为屏幕中的要素过多。请放大再编辑。",
             "osmhidden": "由于 OpenStreetMap 数据图层已被禁用，这些要素已被自动隐藏。"
+        },
+        "visual_diff": {
+            "highlight_edits": {
+                "description": "高亮更改",
+                "tooltip": "高亮已编辑的要素"
+            }
         },
         "photo_overlays": {
             "title": "照片叠加层",
@@ -881,6 +925,19 @@
                 }
             }
         },
+        "preferences": {
+            "title": "偏好设置",
+            "description": "偏好设置",
+            "key": "P",
+            "privacy": {
+                "title": "隐私",
+                "privacy_link": "查看 iD 的隐私政策",
+                "third_party_icons": {
+                    "description": "显示第三方图标",
+                    "tooltip": "取消勾选此框以避免从第三方站点（如维基共享资源、Facebook 或 Twitter 等）加载图标。"
+                }
+            }
+        },
         "restore": {
             "heading": "您有未保存的更改",
             "description": "您在上一次编辑时有未保存的更改，您想恢复这些更改吗？",
@@ -947,6 +1004,7 @@
         "splash": {
             "welcome": "欢迎使用 OpenStreetMap iD 编辑器",
             "text": "iD 编辑器是一个既易用而又功能强大的工具，以助您编辑世界上最好的自由世界地图。这是 {version} 版本。欲知详情，请浏览 {website} 及在 {github} 报告程序错误。",
+            "privacy_update": "我们最近更新了隐私政策。",
             "walkthrough": "开始教程",
             "start": "立即编辑"
         },
@@ -1333,7 +1391,48 @@
         "mapillary_map_features": {
             "title": "地图要素",
             "tooltip": "来自 Mapillary 的地图要素",
-            "request_data": "数据请求"
+            "request_data": "数据请求",
+            "construction": {
+                "flat": {
+                    "crosswalk_plain": "普通人行横道"
+                }
+            },
+            "marking": {
+                "discrete": {
+                    "crosswalk_zebra": "斑马线"
+                }
+            },
+            "object": {
+                "banner": "横幅",
+                "bench": "长凳",
+                "bike_rack": "自行车架",
+                "billboard": "广告牌",
+                "catch_basin": "雨水渠",
+                "cctv_camera": "闭路电视摄像机",
+                "fire_hydrant": "消防栓",
+                "mailbox": "信箱",
+                "manhole": "人孔",
+                "phone_booth": "电话亭",
+                "sign": {
+                    "advertisement": "广告牌",
+                    "information": "信息栏",
+                    "store": "商店招牌"
+                },
+                "street_light": "路灯",
+                "support": {
+                    "utility_pole": "电线杆"
+                },
+                "traffic_cone": "交通锥",
+                "traffic_light": {
+                    "cyclists": "自行车交通信号灯",
+                    "general_horizontal": "水平交通信号灯",
+                    "general_single": "单头交通信号灯",
+                    "general_upright": "垂直交通信号灯",
+                    "other": "交通信号灯",
+                    "pedestrians": "行人交通信号灯"
+                },
+                "trash_can": "垃圾桶"
+            }
         },
         "mapillary": {
             "title": "Mapillary",
@@ -1611,16 +1710,21 @@
             "rules": {
                 "title": "规则"
             },
+            "user_resolved_issues": "您的更改所解决的问题",
+            "warnings_and_errors": "警告和错误",
             "no_issues": {
                 "message": {
                     "everything": "暂无问题",
                     "everything_in_view": "视野内暂无问题",
                     "edits": "您的编辑暂无问题",
-                    "edits_in_view": "您的编辑在视野内暂无问题"
+                    "edits_in_view": "您的编辑在视野内暂无问题",
+                    "no_edits": "您暂未作出任何编辑"
                 },
                 "hidden_issues": {
                     "none": "检测到的问题将会在此处显示",
                     "elsewhere": "别处的问题：{count}",
+                    "everything_else": "其他所有问题：{count}",
+                    "everything_else_elsewhere": "其他地方的所有问题：{count}",
                     "disabled_rules": "已禁用规则的问题：{count}",
                     "disabled_rules_elsewhere": "别处已禁用规则的问题：{count}",
                     "ignored_issues": "忽略的问题：{count}",
@@ -1679,10 +1783,10 @@
                     "reference": "除不同图层情况下，建筑物不应相交。"
                 },
                 "building-highway": {
-                    "reference": "穿越建筑物的道路应使用桥梁、隧道、有上盖或出入口。"
+                    "reference": "穿越建筑物的道路应使用桥梁、隧道或不同图层。"
                 },
                 "building-railway": {
-                    "reference": "穿越建筑物的铁路应使用桥梁或隧道。"
+                    "reference": "穿越建筑物的铁路应使用桥梁、隧道或不同图层。"
                 },
                 "building-waterway": {
                     "reference": "穿越建筑物的航道应使用隧道或不同图层。"
@@ -1745,6 +1849,10 @@
                 "message": "{feature} 存在一个可疑的名称 \"{name}\"",
                 "message_language": "{feature} 存在一个可疑的{language}名称 \"{name}\"",
                 "reference": "名称应为要素的实际名称。"
+            },
+            "help_request": {
+                "title": "协助请求",
+                "tip": "查找他人请求协助的要素"
             },
             "incompatible_source": {
                 "title": "可疑的来源",
@@ -1863,6 +1971,10 @@
                     }
                 }
             },
+            "unclosed_multipolygon_part": {
+                "message": "{feature} 存在一个未闭合的部分",
+                "reference": "复合多边形的所有内部及外部成员都应首尾相连。"
+            },
             "unsquare_way": {
                 "title": "不方正的角落 (上至 {val}°)",
                 "message": "{feature} 存在不方正的角落",
@@ -1876,6 +1988,17 @@
                 "reference": "一些要素不应该作为单独的点"
             },
             "fix": {
+                "add_a_bridge": {
+                    "title": "创建一座桥梁",
+                    "annotation": "创建一座桥梁。"
+                },
+                "add_a_tunnel": {
+                    "title": "创建一条隧道",
+                    "annotation": "创建一条隧道。"
+                },
+                "address_the_concern": {
+                    "title": "解决问题"
+                },
                 "connect_almost_junction": {
                     "annotation": "连接极相近要素。"
                 },
@@ -1987,9 +2110,6 @@
                     "title": "改进标签",
                     "annotation": "改进旧标签。"
                 },
-                "use_bridge_or_tunnel": {
-                    "title": "使用桥梁或隧道"
-                },
                 "use_different_layers": {
                     "title": "使用不同图层"
                 },
@@ -1998,9 +2118,6 @@
                 },
                 "use_different_levels": {
                     "title": "使用不同楼层数"
-                },
-                "use_tunnel": {
-                    "title": "使用隧道"
                 }
             }
         },
@@ -2298,9 +2415,11 @@
                 },
                 "display_options": {
                     "title": "显示设定",
-                    "background": "显示背景设置",
+                    "background": "切换背景影像面板",
                     "background_switch": "切换回上一背景",
-                    "map_data": "显示地图数据设置",
+                    "map_data": "切换地图数据面板",
+                    "issues": "切换验证问题面板",
+                    "preferences": "切换用户偏好设置面板",
                     "fullscreen": "进入全屏模式",
                     "sidebar": "切换侧边栏",
                     "wireframe": "切换线框模式",
@@ -2333,12 +2452,10 @@
                 "title": "编辑",
                 "drawing": {
                     "title": "绘制",
-                    "focus_add_feature": "在要素搜索框中键入",
                     "add_point": "'增加 点' 模式",
                     "add_line": "'增加 线' 模式",
                     "add_area": "'增加区域' 模式",
                     "add_note": "'增加笔记' 模式",
-                    "add_favorite": "添加一个收藏的要素",
                     "place_point": "放置一个节点或一条笔记",
                     "disable_snap": "按住以禁用节点吸附",
                     "stop_line": "完成绘制线段或区域"
@@ -2501,25 +2618,36 @@
                         "motor_vehicle": "汽车"
                     }
                 },
+                "access_aisle": {
+                    "label": "类型"
+                },
                 "access_simple": {
                     "label": "允许进入"
                 },
                 "addr/interpolation": {
-                    "label": "类型"
+                    "label": "类型",
+                    "options": {
+                        "all": "全部",
+                        "alphabetic": "按字母顺序",
+                        "even": "偶数",
+                        "odd": "奇数"
+                    }
                 },
                 "address": {
                     "label": "地址",
                     "placeholders": {
                         "block_number": "街区编号",
                         "block_number!jp": "街区号",
-                        "city": "地级市/地区/自治州/盟",
-                        "city!jp": "市/镇/村/东京都特别区",
+                        "city": "城市",
+                        "city!cn": "地级市/地区/自治州/盟",
+                        "city!jp": "市/町/村/东京都区部",
                         "city!vn": "市/镇",
                         "conscriptionnumber": "123号",
                         "country": "国家",
                         "county": "郡",
-                        "county!jp": "郡 (日本)",
-                        "district": "市辖区/县级市/县/自治县/自治旗/旗/特区/林区",
+                        "county!jp": "日本郡",
+                        "district": "行政区",
+                        "district!cn": "市辖区/县/县级市/旗",
                         "district!vn": "郡/镇/区",
                         "floor": "楼层",
                         "hamlet": "村庄",
@@ -2530,7 +2658,8 @@
                         "neighbourhood!jp": "丁目/字/小字",
                         "place": "地方",
                         "postcode": "邮政编码",
-                        "province": "省/自治区/特别行政区/直辖市",
+                        "province": "省",
+                        "province!cn": "省/自治区/直辖市/特别行政区",
                         "province!jp": "日本县",
                         "quarter": "地方",
                         "quarter!jp": "大字/町",
@@ -2541,7 +2670,8 @@
                         "suburb": "地区",
                         "suburb!jp": "行政区",
                         "unit": "单元"
-                    }
+                    },
+                    "terms": "地址,方位,住址,居所,地点,住处"
                 },
                 "admin_level": {
                     "label": "行政级别"
@@ -2622,6 +2752,9 @@
                 "attraction": {
                     "label": "类型"
                 },
+                "baby_seat": {
+                    "label": "婴儿座椅"
+                },
                 "backrest": {
                     "label": "长椅"
                 },
@@ -2660,6 +2793,15 @@
                 "bin": {
                     "label": "垃圾箱"
                 },
+                "blind": {
+                    "label": "助盲设施",
+                    "options": {
+                        "limited": "有限制",
+                        "no": "否",
+                        "yes": "是"
+                    },
+                    "terms": "盲人,盲,视障,视觉障碍,失明,瞎"
+                },
                 "blood_components": {
                     "label": "血液成分",
                     "options": {
@@ -2670,6 +2812,9 @@
                     }
                 },
                 "board_type": {
+                    "label": "类型"
+                },
+                "bollard": {
                     "label": "类型"
                 },
                 "booth": {
@@ -2743,6 +2888,19 @@
                 "castle_type": {
                     "label": "类型"
                 },
+                "changing_table": {
+                    "label": "尿布台"
+                },
+                "charge_fee": {
+                    "label": "服务费金额",
+                    "placeholder": "1 EUR, 5 USD, 10 JPY…",
+                    "terms": "服务费,收费,费用,费,金额,收款"
+                },
+                "charge_toll": {
+                    "label": "收费金额",
+                    "placeholder": "1 EUR, 5 USD, 10 JPY…",
+                    "terms": "收费,费用,费,服务费,金额,收款"
+                },
                 "check_date": {
                     "label": "最近检查时间"
                 },
@@ -2763,13 +2921,17 @@
                     "placeholder": "请简要说明您的贡献 (必填)"
                 },
                 "communication_multi": {
-                    "label": "通讯类型"
+                    "label": "通讯类型",
+                    "terms": "通讯类型"
                 },
                 "construction": {
                     "label": "类型"
                 },
                 "consulate": {
                     "label": "类型"
+                },
+                "consulting": {
+                    "label": "专长"
                 },
                 "contact/webcam": {
                     "label": "网络摄像机地址",
@@ -2786,8 +2948,14 @@
                         "reversible": "可反转"
                     }
                 },
+                "conveying_escalator": {
+                    "label": "自动扶梯"
+                },
                 "country": {
                     "label": "国家"
+                },
+                "country_flag": {
+                    "label": "旗帜国"
                 },
                 "couplings": {
                     "placeholder": "1, 2, 3..."
@@ -2812,11 +2980,15 @@
                 "crossing": {
                     "label": "类型"
                 },
+                "crossing/island": {
+                    "label": "安全岛"
+                },
                 "cuisine": {
                     "label": "菜系"
                 },
                 "currency_multi": {
-                    "label": "货币类型"
+                    "label": "货币类型",
+                    "terms": "货币类型,纸币,钞票,硬币,零钱,现金"
                 },
                 "cutting": {
                     "label": "类型",
@@ -2906,8 +3078,13 @@
                     "label": "设备数量",
                     "placeholder": "1, 2, 3..."
                 },
+                "diameter": {
+                    "label": "直径",
+                    "placeholder": "5 mm, 10 cm, 15 in…"
+                },
                 "diet_multi": {
-                    "label": "饮食种类"
+                    "label": "饮食种类",
+                    "terms": "饮食种类,食物偏好,饮食,素食,无麸质,无麸,果食,清真,洁食,无乳糖,肉食,鱼素,生食"
                 },
                 "diplomatic": {
                     "label": "类型"
@@ -2948,6 +3125,7 @@
                     }
                 },
                 "direction_vertex": {
+                    "label": "影响方位",
                     "options": {
                         "backward": "向后",
                         "both": "双向 / 全部",
@@ -2962,6 +3140,9 @@
                 },
                 "distance": {
                     "label": "距离"
+                },
+                "disused/railway": {
+                    "label": "类型"
                 },
                 "dock": {
                     "label": "类型"
@@ -2979,6 +3160,9 @@
                 },
                 "door_type": {
                     "label": "类型"
+                },
+                "drinking_water": {
+                    "label": "可饮用"
                 },
                 "drive_through": {
                     "label": "免下车"
@@ -3040,7 +3224,8 @@
                     "label": "类型"
                 },
                 "fire_hydrant/diameter": {
-                    "label": "直径 (mm, in 或字母)"
+                    "label": "直径 (mm, in 或字母)",
+                    "terms": "直径 (mm, in 或字母)"
                 },
                 "fire_hydrant/pressure": {
                     "label": "水压 (bar)"
@@ -3077,6 +3262,9 @@
                 "ford": {
                     "label": "类型",
                     "placeholder": "默认"
+                },
+                "fountain": {
+                    "label": "类型"
                 },
                 "frequency": {
                     "label": "工作频率"
@@ -3117,6 +3305,10 @@
                 },
                 "generator/type": {
                     "label": "类型"
+                },
+                "gnis/feature_id": {
+                    "label": "GNIS 要素 ID",
+                    "terms": "GNIS"
                 },
                 "government": {
                     "label": "类型"
@@ -3233,6 +3425,10 @@
                 "industrial": {
                     "label": "类型"
                 },
+                "informal": {
+                    "label": "非正式",
+                    "terms": "非正式,随便"
+                },
                 "information": {
                     "label": "类型"
                 },
@@ -3346,9 +3542,14 @@
                 "level": {
                     "label": "楼层"
                 },
+                "level_semi": {
+                    "label": "楼层",
+                    "terms": "楼层,层数"
+                },
                 "levels": {
                     "label": "楼层数",
-                    "placeholder": "2, 4, 6..."
+                    "placeholder": "2, 4, 6...",
+                    "terms": "楼层,层数"
                 },
                 "liaison": {
                     "label": "类型"
@@ -3370,6 +3571,10 @@
                 "lock": {
                     "label": "船闸"
                 },
+                "lockable": {
+                    "label": "可上锁",
+                    "terms": "上锁,锁"
+                },
                 "man_made": {
                     "label": "类型"
                 },
@@ -3385,8 +3590,19 @@
                 "map_type": {
                     "label": "类型"
                 },
+                "mapillary": {
+                    "label": "Mapillary 图像 ID",
+                    "terms": "Mapillary 图像 ID,Mapillary"
+                },
+                "marker": {
+                    "label": "类型"
+                },
                 "material": {
                     "label": "材质"
+                },
+                "max_age": {
+                    "label": "最高年龄",
+                    "terms": "最高年龄,最大年龄,年龄上限"
                 },
                 "maxheight": {
                     "label": "限制高度",
@@ -3414,6 +3630,10 @@
                 },
                 "microbrewery": {
                     "label": "手工啤酒"
+                },
+                "min_age": {
+                    "label": "最低年龄",
+                    "terms": "最低年龄,最小年龄,年龄下限"
                 },
                 "minspeed": {
                     "label": "最低限速",
@@ -3465,8 +3685,11 @@
                 "network": {
                     "label": "网络"
                 },
-                "network_bicycle": {
+                "network/type": {
                     "label": "网络类型",
+                    "terms": "网络类型"
+                },
+                "network_bicycle": {
                     "options": {
                         "icn": "国际的",
                         "lcn": "本地的",
@@ -3476,7 +3699,6 @@
                     "placeholder": "本地的，地区的，国家的，国际的"
                 },
                 "network_foot": {
-                    "label": "徒步网络类型",
                     "options": {
                         "iwn": "国际的",
                         "lwn": "本地的",
@@ -3486,7 +3708,6 @@
                     "placeholder": "本地的，地区的，国家的，国际的"
                 },
                 "network_horse": {
-                    "label": "网络类型",
                     "options": {
                         "ihn": "国际的",
                         "lhn": "本地的",
@@ -3538,6 +3759,9 @@
                 "operator": {
                     "label": "经营者"
                 },
+                "operator/type": {
+                    "label": "操作人员类型"
+                },
                 "outdoor_seating": {
                     "label": "室外座位"
                 },
@@ -3561,10 +3785,12 @@
                     }
                 },
                 "payment_multi": {
-                    "label": "支付类型"
+                    "label": "支付类型",
+                    "terms": "支付类型,付款类型,收款类型"
                 },
                 "payment_multi_fee": {
-                    "label": "支付类型"
+                    "label": "支付类型",
+                    "terms": "支付类型,付款类型,收款类型"
                 },
                 "phases": {
                     "label": "相数",
@@ -3582,6 +3808,12 @@
                         "expert": "专家"
                     },
                     "placeholder": "容易，中阶，进阶"
+                },
+                "piste/difficulty_nordic": {
+                    "label": "难度"
+                },
+                "piste/difficulty_skitour": {
+                    "label": "难度"
                 },
                 "piste/grooming": {
                     "label": "雪道类型",
@@ -3621,8 +3853,14 @@
                 "playground": {
                     "label": "类型"
                 },
+                "playground/theme": {
+                    "label": "主题"
+                },
                 "population": {
                     "label": "人口"
+                },
+                "post": {
+                    "label": "邮寄地址"
                 },
                 "power": {
                     "label": "类型"
@@ -3636,6 +3874,12 @@
                 "product": {
                     "label": "产品"
                 },
+                "public_bookcase/type": {
+                    "label": "类型"
+                },
+                "pump": {
+                    "label": "泵"
+                },
                 "railway": {
                     "label": "类型"
                 },
@@ -3644,6 +3888,7 @@
                     "placeholder": "距离，精确到一位小数 (123.4)"
                 },
                 "railway/signal/direction": {
+                    "label": "影响方位",
                     "options": {
                         "backward": "向后",
                         "both": "双向 / 全部",
@@ -3654,7 +3899,9 @@
                     "label": "接受"
                 },
                 "recycling_type": {
+                    "label": "类型",
                     "options": {
+                        "centre": "中心",
                         "container": "回收容器"
                     }
                 },
@@ -3711,6 +3958,12 @@
                         "required": "必需",
                         "yes": "接受"
                     }
+                },
+                "residential": {
+                    "label": "类型"
+                },
+                "resort": {
+                    "label": "类型"
                 },
                 "resource": {
                     "label": "资源"
@@ -3791,8 +4044,28 @@
                 "seamark/buoy_lateral/category": {
                     "label": "分类"
                 },
-                "seamark/buoy_lateral/system": {
+                "seamark/buoy_lateral/colour": {
+                    "label": "颜色",
                     "options": {
+                        "green": "绿",
+                        "green;red;green": "绿-红-绿",
+                        "green;white;green;white": "绿-白-绿-白",
+                        "red": "红",
+                        "red;green;red": "红-绿-红",
+                        "red;white;red;white": "红-白-红-白",
+                        "white": "白",
+                        "yellow": "黄"
+                    }
+                },
+                "seamark/buoy_lateral/shape": {
+                    "label": "形状"
+                },
+                "seamark/buoy_lateral/system": {
+                    "label": "系统",
+                    "options": {
+                        "cevni": "CEVNI",
+                        "iala-a": "IALA A",
+                        "iala-b": "IALA B",
                         "other": "其它"
                     }
                 },
@@ -3802,11 +4075,15 @@
                 "seamark/type": {
                     "label": "导航标志"
                 },
+                "seamark/wreck/category": {
+                    "label": "分类"
+                },
                 "seasonal": {
                     "label": "具备季节性"
                 },
                 "seats": {
-                    "label": "座位"
+                    "label": "座位",
+                    "placeholder": "2, 4, 6..."
                 },
                 "second_hand": {
                     "label": "出售二手商品",
@@ -3836,7 +4113,8 @@
                         "siding": "侧线",
                         "spur": "短途支线",
                         "yard": "站场线路"
-                    }
+                    },
+                    "terms": "服务类型"
                 },
                 "service_times": {
                     "label": "服务时间"
@@ -3851,7 +4129,10 @@
                     "label": "类型"
                 },
                 "siren/type": {
-                    "label": "类型"
+                    "label": "类型",
+                    "options": {
+                        "other": "其它"
+                    }
                 },
                 "site": {
                     "label": "类型"
@@ -3885,6 +4166,9 @@
                     },
                     "placeholder": "轴承, 轮胎, 越野..."
                 },
+                "sms": {
+                    "label": "SMS"
+                },
                 "social_facility": {
                     "label": "类型"
                 },
@@ -3893,6 +4177,10 @@
                 },
                 "source": {
                     "label": "来源"
+                },
+                "species/wikidata": {
+                    "label": "物种维基数据",
+                    "terms": "物种维基数据,维基数据"
                 },
                 "sport": {
                     "label": "运动"
@@ -3927,6 +4215,15 @@
                 },
                 "street_cabinet": {
                     "label": "类型"
+                },
+                "stroller": {
+                    "label": "婴儿车通行",
+                    "options": {
+                        "limited": "有限制",
+                        "no": "否",
+                        "yes": "是"
+                    },
+                    "terms": "婴儿车,婴儿推车,童车"
                 },
                 "structure": {
                     "label": "结构",
@@ -4040,6 +4337,9 @@
                 "tower/type": {
                     "label": "类型"
                 },
+                "townhall/type": {
+                    "label": "类型"
+                },
                 "tracktype": {
                     "label": "道路铺设种类",
                     "options": {
@@ -4061,6 +4361,7 @@
                     "label": "交通标志"
                 },
                 "traffic_sign/direction": {
+                    "label": "影响方位",
                     "options": {
                         "backward": "向后",
                         "both": "双向 / 全部",
@@ -4071,6 +4372,7 @@
                     "label": "类型"
                 },
                 "traffic_signals/direction": {
+                    "label": "影响方位",
                     "options": {
                         "backward": "向后",
                         "both": "双向 / 全部",
@@ -4109,7 +4411,8 @@
                     "label": "类型"
                 },
                 "trolley_wire": {
-                    "label": "架空电车线"
+                    "label": "架空电车线",
+                    "terms": "架空电车线,电车线,接触网,架空线,架空,高架电缆,无轨电车,电车"
                 },
                 "tunnel": {
                     "label": "类型",
@@ -4124,7 +4427,11 @@
                         "military": "军用",
                         "test": "测试线",
                         "tourism": "观光线"
-                    }
+                    },
+                    "terms": "使用类型,利用类型"
+                },
+                "valve": {
+                    "label": "类型"
                 },
                 "vending": {
                     "label": "商品类型"
@@ -4177,6 +4484,9 @@
                 "water_point": {
                     "label": "饮水点"
                 },
+                "water_source": {
+                    "label": "水源"
+                },
                 "water_volume": {
                     "label": "蓄水量 (m³)"
                 },
@@ -4191,7 +4501,12 @@
                     "label": "类型"
                 },
                 "wheelchair": {
-                    "label": "轮椅通道"
+                    "label": "轮椅通道",
+                    "options": {
+                        "limited": "有限制",
+                        "no": "否",
+                        "yes": "是"
+                    }
                 },
                 "wholesale": {
                     "label": "批发"
@@ -4200,10 +4515,17 @@
                     "label": "宽度 (米)"
                 },
                 "wikidata": {
-                    "label": "维基数据"
+                    "label": "维基数据",
+                    "terms": "维基数据,维基"
+                },
+                "wikimedia_commons": {
+                    "label": "维基共享资源页",
+                    "placeholder": "File:Example.jpg",
+                    "terms": "维基共享资源,维基"
                 },
                 "wikipedia": {
-                    "label": "维基百科"
+                    "label": "维基百科",
+                    "terms": "维基百科,维基"
                 },
                 "windings": {
                     "label": "绕组数",
@@ -4277,13 +4599,6 @@
                 "aerialway/rope_tow": {
                     "name": "牵绳",
                     "terms": "牵绳"
-                },
-                "aerialway/station": {
-                    "name": "缆车站"
-                },
-                "aerialway/t-bar": {
-                    "name": "滑雪缆车",
-                    "terms": "滑雪缆车,滑雪吊车"
                 },
                 "aeroway": {
                     "name": "机场路径"
@@ -4393,17 +4708,9 @@
                     "name": "咖啡馆",
                     "terms": "咖啡,茶,咖啡厅,咖啡馆,茶座,摩卡,拿铁,馥芮白,玛奇朵,卡布奇诺,红茶,黄茶,清茶,青茶,绿茶,花茶,黑茶,白茶,乌龙,咖啡豆,餐馆,餐厅"
                 },
-                "amenity/car_pooling": {
-                    "name": "拼车",
-                    "terms": "拼车"
-                },
                 "amenity/car_rental": {
                     "name": "汽车租赁",
                     "terms": "汽车租赁处,租车店,汽车租赁,租赁,出租,租"
-                },
-                "amenity/car_sharing": {
-                    "name": "汽车共享",
-                    "terms": "汽车共享"
                 },
                 "amenity/car_wash": {
                     "name": "洗车",
@@ -4508,7 +4815,14 @@
                 },
                 "amenity/fast_food/donut": {
                     "name": "甜甜圈快餐",
-                    "terms": "甜甜圈,快餐,快餐店,餐厅,咖啡厅,咖啡馆,咖啡,早饭,早饭,早午饭,午饭,中饭,食物,美食"
+                    "terms": "甜甜圈,快餐,快餐店,餐厅,咖啡厅,咖啡馆,咖啡,早饭,早午饭,午饭,中饭,食物,美食"
+                },
+                "amenity/fast_food/hot_dog": {
+                    "name": "热狗快餐",
+                    "terms": "热狗,火腿肠,肉肠,烤肠,香肠,辣狗,玉米狗,三明治,快餐,快餐店,餐厅,早饭,早午饭,午饭,中饭,食物,美食"
+                },
+                "amenity/fast_food/ice_cream": {
+                    "name": "冰淇淋快餐"
                 },
                 "amenity/fast_food/mexican": {
                     "name": "墨西哥快餐",
@@ -4605,6 +4919,9 @@
                 "amenity/parking/multi-storey": {
                     "name": "多层停车场"
                 },
+                "amenity/parking/underground": {
+                    "name": "地下停车处"
+                },
                 "amenity/parking_entrance": {
                     "name": "车库出入口",
                     "terms": "停车场出入口,地下车库出入口,多层车库出入口"
@@ -4612,6 +4929,10 @@
                 "amenity/parking_space": {
                     "name": "停车位",
                     "terms": "停车空间,停车场地,停车位"
+                },
+                "amenity/pharmacy": {
+                    "name": "药房",
+                    "terms": "药房,药店,药妆店,药剂师,药师,处方,处方药,药,中药,西药,药材"
                 },
                 "amenity/photo_booth": {
                     "name": "自助拍照机",
@@ -4625,9 +4946,17 @@
                     "name": "佛教寺庙",
                     "terms": "寺庙,佛堂,和尚寺,尼姑庵,佛教,宗教,庙宇,礼拜,寺观,寺院,佛寺,梵刹,禅林,净院"
                 },
+                "amenity/place_of_worship/christian": {
+                    "name": "基督教堂",
+                    "terms": "基督教堂,基督教,天主教,东正教,新教,基督,教堂,修道院,教会,祈祷,祷告,礼拜,拜堂,牧师,圣所,圣殿,神殿,神"
+                },
                 "amenity/place_of_worship/hindu": {
                     "name": "印度教寺庙",
                     "terms": "印度教,宗教,寺庙,庙宇,神社,神祇,祭祀,崇奉,礼拜,吠陀"
+                },
+                "amenity/place_of_worship/jewish": {
+                    "name": "犹太教堂",
+                    "terms": "犹太教堂,犹太寺,犹太"
                 },
                 "amenity/place_of_worship/shinto": {
                     "name": "神道教神社",
@@ -4824,6 +5153,10 @@
                     "name": "剧院",
                     "terms": "剧院,剧场,戏院"
                 },
+                "amenity/theatre/type/amphi": {
+                    "name": "圆形剧场",
+                    "terms": "圆形剧场,露天,竞技场,圆形露天剧场,阶梯教室"
+                },
                 "amenity/toilets": {
                     "name": "厕所",
                     "terms": "厕所,公厕,洗手间"
@@ -4839,6 +5172,10 @@
                 "amenity/townhall": {
                     "name": "市政府",
                     "terms": "市政府,市政厅,大会堂"
+                },
+                "amenity/townhall/city": {
+                    "name": "市政府",
+                    "terms": "市政府,市政厅,市政府大楼,市政,地方议会,县政府,政府,市长,市当局"
                 },
                 "amenity/university": {
                     "name": "大学",
@@ -4940,8 +5277,8 @@
                     "terms": "区域,面"
                 },
                 "area/highway": {
-                    "name": "道路表面",
-                    "terms": "道路表面"
+                    "name": "道路范围",
+                    "terms": "道路,道路区域,道路边缘,道路范围,街道范围,道路表面,路面,路表"
                 },
                 "attraction": {
                     "name": "景点"
@@ -4966,21 +5303,9 @@
                     "name": "黑暗骑乘",
                     "terms": "黑暗,室内,骑乘,鬼,轨道,电影,音效,游乐设施,游乐,游艺,娱乐,乐园,游乐园,主题乐园,儿童乐园,景点"
                 },
-                "attraction/drop_tower": {
-                    "name": "跳楼机",
-                    "terms": "跳楼机,跳楼,自由落体,蹦极,太空梭,垂直极限,天地双雄,穿越云霄,大怒神,下落,下坠,坠落,跌落,高塔,飞天,游乐设施,游乐,游艺,娱乐,乐园,游乐园,主题乐园,儿童乐园,景点"
-                },
                 "attraction/maze": {
                     "name": "迷宫",
                     "terms": "迷宫,景点,旅游,游乐设施,游乐"
-                },
-                "attraction/pirate_ship": {
-                    "name": "海盗船",
-                    "terms": "海盗船,海盗,鬼魂,摆动,谷底,游乐设施,游乐,游艺,娱乐,乐园,游乐园,主题乐园,儿童乐园,景点"
-                },
-                "attraction/river_rafting": {
-                    "name": "漂流",
-                    "terms": "漂流,峡谷漂流,激流勇进,激流,急流勇进,涉水,水,户外,竹筏,木筏,橡皮艇,皮艇,船,小舟,扁舟,顺流,落差,长漂,探险,游乐设施,游乐,游艺,娱乐,乐园,游乐园,主题乐园,儿童乐园,景点"
                 },
                 "attraction/roller_coaster": {
                     "name": "过山车",
@@ -5045,9 +5370,16 @@
                     "name": "路缘",
                     "terms": "路缘,路缘石,立缘石,路缘带,路肩,边缘,行车带,人行道,无障碍,公路,马路"
                 },
+                "barrier/kerb/flush": {
+                    "name": "平整路缘",
+                    "terms": "整齐路缘,水平路缘,无触碰路缘"
+                },
                 "barrier/kerb/lowered": {
                     "name": "下降式路缘",
                     "terms": "路缘,路缘石,平缘石,路缘带,路肩,边缘,行车带,人行道,无障碍,公路,马路"
+                },
+                "barrier/kerb/raised": {
+                    "name": "上升式路缘"
                 },
                 "barrier/kissing_gate": {
                     "name": "单人转门",
@@ -5072,6 +5404,12 @@
                 "barrier/wall": {
                     "name": "墙",
                     "terms": "墙,墙壁"
+                },
+                "barrier/wall/noise_barrier": {
+                    "name": "隔音屏障"
+                },
+                "boundary": {
+                    "name": "边界"
                 },
                 "boundary/administrative": {
                     "name": "行政区域界线",
@@ -5247,6 +5585,9 @@
                     "name": "俱乐部",
                     "terms": "俱乐部,社团,夜总会,会所,可乐部,社交,组织,娱乐,社区,会议,驿站,平台,会,汇,社会,文化,团体,会员"
                 },
+                "club/sport": {
+                    "name": "体育俱乐部"
+                },
                 "craft": {
                     "name": "工艺作坊",
                     "terms": "工艺作坊,工场"
@@ -5331,9 +5672,6 @@
                     "name": "楼层隔热间",
                     "terms": "楼层隔热间,绝缘,隔热"
                 },
-                "craft/jeweler": {
-                    "name": "珠宝店"
-                },
                 "craft/key_cutter": {
                     "name": "配匙工",
                     "terms": "配匙工,切割,钥匙,配匙,钥匙,锁,锁匠,门锁"
@@ -5344,9 +5682,6 @@
                 "craft/metal_construction": {
                     "name": "金属结构建筑",
                     "terms": "金属建筑,金属建筑物"
-                },
-                "craft/optician": {
-                    "name": "眼镜店"
                 },
                 "craft/painter": {
                     "name": "油漆匠",
@@ -5367,10 +5702,6 @@
                 "craft/plumber": {
                     "name": "管道工",
                     "terms": "管道工"
-                },
-                "craft/pottery": {
-                    "name": "陶器场",
-                    "terms": "陶器场"
                 },
                 "craft/rigger": {
                     "name": "装配工",
@@ -5435,6 +5766,12 @@
                     "name": "酿酒厂",
                     "terms": "酒庄,酒厂"
                 },
+                "demolished/building": {
+                    "name": "近期拆除的建筑物"
+                },
+                "disused/railway": {
+                    "name": "废弃铁路要素"
+                },
                 "embankment": {
                     "name": "堤岸"
                 },
@@ -5454,6 +5791,9 @@
                 },
                 "emergency/destination": {
                     "name": "紧急集合处"
+                },
+                "emergency/fire_extinguisher": {
+                    "name": "灭火器"
                 },
                 "emergency/fire_hydrant": {
                     "name": "消防栓",
@@ -5481,6 +5821,9 @@
                 },
                 "emergency/private": {
                     "name": "紧急设施：仅私人"
+                },
+                "emergency/water_tank": {
+                    "name": "应急水箱"
                 },
                 "emergency/yes": {
                     "name": "紧急设施：开放"
@@ -5581,9 +5924,6 @@
                     "name": "语言治疗师",
                     "terms": "语言,语音,口语,声音,说话,哑,喉咙,治疗,诊所,医院,医学,医疗,疗法,卫生"
                 },
-                "highway": {
-                    "name": "道路"
-                },
                 "highway/bridleway": {
                     "name": "马道",
                     "terms": "马道"
@@ -5602,6 +5942,9 @@
                 "highway/corridor": {
                     "name": "室内走廊",
                     "terms": "室内走廊,室内步行街"
+                },
+                "highway/crossing": {
+                    "name": "路口"
                 },
                 "highway/crossing/marked": {
                     "name": "人行横道 (有标线)",
@@ -5629,6 +5972,21 @@
                     "name": "自行车道",
                     "terms": "自行车,单车"
                 },
+                "highway/cycleway/bicycle_foot": {
+                    "name": "步行和自行车道",
+                    "terms": "步行和自行车道,绿道,多用道"
+                },
+                "highway/cycleway/crossing": {
+                    "name": "自行车横道"
+                },
+                "highway/cycleway/crossing/marked": {
+                    "name": "自行车横道 (有标线)",
+                    "terms": "自行车横道,自行车横道线,自行车路口,单车横道线,单车路口"
+                },
+                "highway/cycleway/crossing/unmarked": {
+                    "name": "自行车横道 (无标线)",
+                    "terms": "自行车横道,自行车横道线,自行车路口,单车横道线,单车路口"
+                },
                 "highway/elevator": {
                     "name": "电梯",
                     "terms": "电梯,直梯"
@@ -5636,6 +5994,9 @@
                 "highway/footway": {
                     "name": "步行道路",
                     "terms": "步行径"
+                },
+                "highway/footway/crossing": {
+                    "name": "人行横道"
                 },
                 "highway/footway/marked": {
                     "name": "人行横道 (有标线)",
@@ -5865,24 +6226,30 @@
                     "name": "路旁神龛",
                     "terms": "路边神社"
                 },
+                "indoor": {
+                    "name": "室内要素"
+                },
+                "indoor/area": {
+                    "name": "室内区域"
+                },
+                "indoor/corridor": {
+                    "name": "室内走廊"
+                },
+                "indoor/corridor_line": {
+                    "name": "室内走廊"
+                },
+                "indoor/door": {
+                    "name": "室内的门"
+                },
+                "indoor/wall": {
+                    "name": "室内的墙"
+                },
                 "internet_access/wlan": {
                     "name": "无线热点"
                 },
                 "junction": {
                     "name": "交叉口",
                     "terms": "交通枢纽,路口"
-                },
-                "junction/circular": {
-                    "name": "信号控制环岛"
-                },
-                "junction/jughandle": {
-                    "name": "壶柄式连接路"
-                },
-                "junction/roundabout": {
-                    "name": "环岛"
-                },
-                "landuse": {
-                    "name": "土地用途"
                 },
                 "landuse/allotments": {
                     "name": "公共花园",
@@ -5910,6 +6277,10 @@
                 "landuse/commercial": {
                     "name": "商业区",
                     "terms": "商业区,商业用地"
+                },
+                "landuse/construction": {
+                    "name": "建设区域",
+                    "terms": "建设区域,建设,建造,在建,施工,工地,承建"
                 },
                 "landuse/farm": {
                     "name": "农田"
@@ -6036,9 +6407,6 @@
                     "name": "葡萄园",
                     "terms": "葡萄园,酒庄"
                 },
-                "leisure": {
-                    "name": "休闲场所"
-                },
                 "leisure/adult_gaming_centre": {
                     "name": "成人街机厅",
                     "terms": "成人街机厅,成人街机店"
@@ -6070,10 +6438,6 @@
                 "leisure/dog_park": {
                     "name": "狗公园",
                     "terms": "狗公园,狗狗公园"
-                },
-                "leisure/firepit": {
-                    "name": "火塘",
-                    "terms": "火塘,火炉,火坑,火堆"
                 },
                 "leisure/fishing": {
                     "name": "钓鱼地点"
@@ -6250,9 +6614,6 @@
                     "name": "线",
                     "terms": "线"
                 },
-                "man_made": {
-                    "name": "人造物"
-                },
                 "man_made/adit": {
                     "name": "坑道入口",
                     "terms": "坑道入口,矿道入口"
@@ -6261,13 +6622,17 @@
                     "name": "天线杆塔",
                     "terms": "天线,天线杆,天线塔,电话,通讯,手机,无线电,电视,广播,频道,电台,信号塔"
                 },
+                "man_made/beehive": {
+                    "name": "蜂窝",
+                    "terms": "蜂窝,蜂巢,蜜蜂,蜂蜜,养蜂,养蜂人,蜂,蜂穴,授粉,花粉,农场"
+                },
                 "man_made/breakwater": {
                     "name": "防波堤",
                     "terms": "避风塘,避风港"
                 },
                 "man_made/bridge": {
-                    "name": "桥面轮廓",
-                    "terms": "桥面轮廓,桥体"
+                    "name": "桥梁范围",
+                    "terms": "桥梁范围,桥面轮廓,桥梁区域,桥梁边缘,桥面,桥体,桥梁,大桥,桥"
                 },
                 "man_made/chimney": {
                     "name": "烟囱",
@@ -6351,6 +6716,10 @@
                 "man_made/tower/communication": {
                     "name": "通信塔"
                 },
+                "man_made/tunnel": {
+                    "name": "隧道范围",
+                    "terms": "隧道范围,隧道区域,隧道,地道,下立交"
+                },
                 "man_made/wastewater_plant": {
                     "name": "污水处理厂",
                     "terms": "污水处理厂"
@@ -6378,9 +6747,6 @@
                 "man_made/works": {
                     "name": "工厂",
                     "terms": "工厂,加工,制造"
-                },
-                "natural": {
-                    "name": "自然"
                 },
                 "natural/bare_rock": {
                     "name": "岩石",
@@ -6474,10 +6840,6 @@
                     "name": "水池",
                     "terms": "水池,水库,蓄水池,人工水池,下水道,排水沟,溢流,雨水池"
                 },
-                "natural/water/canal": {
-                    "name": "运河",
-                    "terms": "运河,支流,水路,水道,河,河流,水,航运"
-                },
                 "natural/water/lake": {
                     "name": "湖泊",
                     "terms": "湖泊"
@@ -6491,20 +6853,16 @@
                     "terms": "水库"
                 },
                 "natural/water/river": {
-                    "name": "河",
+                    "name": "河流区域",
                     "terms": "河流,河,江,浜,水道,水路,支流,溪流,水流,水,泉流"
-                },
-                "natural/water/stream": {
-                    "name": "溪流",
-                    "terms": "溪流,溪,小溪,支流,涧流,细流,流,涧,水渠,渠,泉流,泉,水流,水"
                 },
                 "natural/wetland": {
                     "name": "湿地",
                     "terms": "湿地"
                 },
                 "natural/wood": {
-                    "name": "树林",
-                    "terms": "树林"
+                    "name": "自然树林",
+                    "terms": "树林,森林,自然树林,山林,林区,树,森,林,木"
                 },
                 "noexit/yes": {
                     "name": "路终点",
@@ -6548,6 +6906,10 @@
                 "office/coworking": {
                     "name": "共享办公空间",
                     "terms": "共享办公空间"
+                },
+                "office/diplomatic": {
+                    "name": "外交代表机构",
+                    "terms": "外交代表机构,外交,大使馆,领事馆,使馆,领事"
                 },
                 "office/educational_institution": {
                     "name": "教育机构",
@@ -6772,9 +7134,6 @@
                     "name": "点",
                     "terms": "点"
                 },
-                "power": {
-                    "name": "电力"
-                },
                 "power/cable/underground": {
                     "name": "地下电缆",
                     "terms": "电缆,缆线,线缆,地下电缆,地下线缆,输电,电线,电力,发电,导线,电,输电线"
@@ -6782,6 +7141,9 @@
                 "power/generator": {
                     "name": "发电机",
                     "terms": "发电机"
+                },
+                "power/generator/source/nuclear": {
+                    "name": "核反应堆"
                 },
                 "power/line": {
                     "name": "超高压输电线",
@@ -6975,9 +7337,6 @@
                     "name": "无轨电车停车点",
                     "terms": "电车,无轨电车,停车处,停车点"
                 },
-                "railway": {
-                    "name": "铁路"
-                },
                 "railway/abandoned": {
                     "name": "已拆除铁路遗迹",
                     "terms": "废弃的铁路"
@@ -7140,7 +7499,7 @@
                 },
                 "shop/beverages": {
                     "name": "饮料店",
-                    "terms": "饮品店"
+                    "terms": "饮品店,饮料店,奶茶,奶茶店"
                 },
                 "shop/bicycle": {
                     "name": "自行车店",
@@ -7306,6 +7665,9 @@
                     "name": "瓶装燃气站",
                     "terms": "燃气,站,瓶,气,燃料"
                 },
+                "shop/general": {
+                    "name": "杂货店"
+                },
                 "shop/gift": {
                     "name": "礼品店",
                     "terms": "礼品店"
@@ -7341,6 +7703,10 @@
                 "shop/interior_decoration": {
                     "name": "室内装饰店",
                     "terms": "室内装饰店"
+                },
+                "shop/jewelry": {
+                    "name": "珠宝店",
+                    "terms": "珠宝店,珠宝,首饰,手镯,戒指,钻戒,钻石,宝石,耳环,项链,黄金,金条,金银,银器,饰针,胸针,贵金属"
                 },
                 "shop/kiosk": {
                     "name": "售货亭",
@@ -7581,9 +7947,6 @@
                     "name": "数据中心",
                     "terms": "数据,电脑系统存储,计算机,计算机科学,电脑,服务器,云端,电信,通信"
                 },
-                "tourism": {
-                    "name": "旅游设施"
-                },
                 "tourism/alpine_hut": {
                     "name": "高山小屋",
                     "terms": "高山小屋"
@@ -7740,6 +8103,18 @@
                     "name": "减速台",
                     "terms": "减速,减速台,交通稳静化"
                 },
+                "traffic_sign": {
+                    "name": "交通标志"
+                },
+                "traffic_sign/maxspeed": {
+                    "name": "限速标志"
+                },
+                "traffic_sign/maxspeed_vertex": {
+                    "name": "限速标志"
+                },
+                "traffic_sign_vertex": {
+                    "name": "交通标志"
+                },
                 "type/boundary": {
                     "name": "边界",
                     "terms": "边界"
@@ -7875,9 +8250,6 @@
                     "name": "水路",
                     "terms": "水路,水系,水道,航道,水沟,河道,河流,流域,水体,水域"
                 },
-                "waterway": {
-                    "name": "航道"
-                },
                 "waterway/boatyard": {
                     "name": "船舶库",
                     "terms": "船舶库"
@@ -7969,7 +8341,8 @@
             "AIV_DHMV_II_HILL_25cm": {
                 "attribution": {
                     "text": "© agentschap Informatie Vlaanderen"
-                }
+                },
+                "name": "AIV 佛兰德地区数字高程模型 II, 0.25 米多向山体阴影"
             },
             "AIV_DHMV_II_SVF_25cm": {
                 "attribution": {
@@ -8015,20 +8388,6 @@
                 },
                 "description": "卫星和航空影像",
                 "name": "Mapbox 卫星"
-            },
-            "Maxar-Premium": {
-                "attribution": {
-                    "text": "条款与反馈"
-                },
-                "description": "Maxar Premium 是由 Maxar 底图所组成的拼接图，特定区域以 +Vivid 或自订照片填充，其解析度为 50 厘米或更高，且会不断更新。",
-                "name": "Maxar 优质影像 (Beta)"
-            },
-            "Maxar-Standard": {
-                "attribution": {
-                    "text": "条款与反馈"
-                },
-                "description": "Maxar Standard 是一套经过精心选取，覆盖地球上 86% 的陆地面积，其解析度为 30-60 厘米，不足的部份以 Landsat 填满。平均更新时间为 2.31 年，部份地区每年更新两次。",
-                "name": "Maxar 标准影像 (Beta)"
             },
             "OSM_Inspector-Addresses": {
                 "attribution": {
@@ -8090,6 +8449,10 @@
                 "description": "黄色 = 来自美国人口调查局的公共领域地图数据。红色 = 在 OpenStreetMap 中找不到数据。",
                 "name": "TIGER 道路 2018"
             },
+            "US-TIGER-Roads-2019": {
+                "description": "黄色 = 来自美国人口调查局的公共领域地图数据。红色 = 在 OpenStreetMap 中找不到数据。",
+                "name": "TIGER 道路 2019"
+            },
             "USDA-NAIP": {
                 "description": "近年来自美国各州的国家农业影像计划 (NAIP) 的 DOQQ。",
                 "name": "国家农业影像计划"
@@ -8100,20 +8463,38 @@
             },
             "UrbISOrtho2016": {
                 "attribution": {
-                    "text": "道路：绿色外框 = 非分类道路。棕色外框 = 土路。路面：碎石路 = 亮棕色实心填满，柏油 = 黑色，有铺面 = 灰色，地面 = 白色，水泥 = 蓝色，草地 = 绿色。季节性 = 白色条纹"
+                    "text": "由布鲁塞尔 UrbIS®© 驱动 - 发行与版权 CIRB"
                 },
                 "name": "UrbIS-Ortho 2016"
             },
             "UrbISOrtho2017": {
+                "attribution": {
+                    "text": "由布鲁塞尔 UrbIS®© 驱动 - 发行与版权 CIRB"
+                },
                 "name": "UrbIS-Ortho 2017"
             },
             "UrbISOrtho2018": {
+                "attribution": {
+                    "text": "由布鲁塞尔 UrbIS®© 驱动 - 发行与版权 CIRB"
+                },
                 "name": "UrbIS-Ortho 2018"
             },
+            "UrbISOrtho2019": {
+                "attribution": {
+                    "text": "由布鲁塞尔 UrbIS®© 驱动 - 发行与版权 CIRB"
+                },
+                "name": "UrbIS-Ortho 2019"
+            },
             "UrbisAdmFR": {
+                "attribution": {
+                    "text": "由布鲁塞尔 UrbIS®© 驱动 - 发行与版权 CIRB"
+                },
                 "name": "UrbisAdm FR"
             },
             "UrbisAdmNL": {
+                "attribution": {
+                    "text": "由布鲁塞尔 UrbIS®© 驱动 - 发行与版权 CIRB"
+                },
                 "name": "UrbisAdm NL"
             },
             "Waymarked_Trails-Cycling": {
@@ -8170,7 +8551,9 @@
             "basemap.at-surface": {
                 "attribution": {
                     "text": "basemap.at"
-                }
+                },
+                "description": "由 basemap.at 提供的地表层",
+                "name": "basemap.at 地表"
             },
             "basemap.at-terrain": {
                 "attribution": {
@@ -8179,20 +8562,110 @@
                 "description": "由basemap.at 提供的地形层",
                 "name": "basemap.at 地形"
             },
+            "eufar-balaton": {
+                "attribution": {
+                    "text": "欧洲空载研究舰队(EUFAR) 巴拉顿正射影像（2010）"
+                },
+                "description": "来自巴拉顿湖沼学研究所的1940年地理标记照片",
+                "name": "欧洲空载研究舰队(EUFAR) 巴拉顿正射影像"
+            },
             "finds.jp_KBN_2500": {
                 "attribution": {
-                    "text": "GSI KIBAN 2500"
-                }
+                    "text": "国土地理院基盘地图 2500"
+                },
+                "description": "由 finds.jp 提供的国土地理院基盘地图 2500。适合描绘，但较为陈旧。",
+                "name": "日本国土地理院基盘地图 2500"
             },
             "gsi.go.jp": {
                 "attribution": {
-                    "text": "日本GSI"
-                }
+                    "text": "日本国土地理院"
+                },
+                "description": "日本国土地理院正射影像(电子国土基本图)。通常比 Bing 更好，但较为陈旧。",
+                "name": "日本国土地理院正射影像"
             },
             "gsi.go.jp_airphoto": {
                 "attribution": {
-                    "text": "日本GSI"
-                }
+                    "text": "日本国土地理院"
+                },
+                "description": "日本国土地理院航空影像(空中写真)。未经过正射校正，但与国土地理院正射影像相比，其内容较新和/或覆盖范围有所不同。",
+                "name": "日本国土地理院航空影像"
+            },
+            "gsi.go.jp_seamlessphoto": {
+                "attribution": {
+                    "text": "日本国土地理院无缝照片"
+                },
+                "description": "日本国土地理院无缝影像。国土地理院最新正射、航空、灾后等影像的集合。",
+                "name": "日本国土地理院无缝影像"
+            },
+            "gsi.go.jp_std_map": {
+                "attribution": {
+                    "text": "日本国土地理院"
+                },
+                "description": "日本国土地理院标准地图。广泛覆盖。",
+                "name": "日本国土地理院地图"
+            },
+            "helsingborg-orto": {
+                "attribution": {
+                    "text": "© 赫尔辛堡市"
+                },
+                "description": "来自2016年赫尔辛堡市的正射影像，公有领域",
+                "name": "赫尔辛堡市正射影像"
+            },
+            "kalmar-orto-2014": {
+                "attribution": {
+                    "text": "© 卡尔马市"
+                },
+                "description": "来自2014年卡尔马市北部海岸的正射影像",
+                "name": "卡尔马市北部正射影像（2014）"
+            },
+            "kalmar-orto-2016": {
+                "attribution": {
+                    "text": "© 卡尔马市"
+                },
+                "description": "来自2016年卡尔马市南部海岸的正射影像",
+                "name": "卡尔马市南部正射影像（2016）"
+            },
+            "kalmar-orto-2018": {
+                "attribution": {
+                    "text": "© 卡尔马市"
+                },
+                "description": "来自2018年卡尔马市城区的正射影像",
+                "name": "卡尔马市城区正射影像（2018）"
+            },
+            "kelkkareitit": {
+                "attribution": {
+                    "text": "© Kelkkareitit.fi"
+                },
+                "description": "来自 OSM 的 Kelkkareitit.fi 机动雪橇车径（覆盖斯堪的纳维亚国家）",
+                "name": "斯堪的纳维亚国家机动雪橇叠加层"
+            },
+            "lantmateriet-orto1960": {
+                "attribution": {
+                    "text": "© 瑞典国家测绘局(Lantmäteriet), CC0"
+                },
+                "description": "1955-1965年瑞典正射镶嵌影像。新旧照片都可能会出现。",
+                "name": "瑞典国家测绘局历史正射影像（1960）"
+            },
+            "lantmateriet-orto1975": {
+                "attribution": {
+                    "text": "© 瑞典国家测绘局(Lantmäteriet), CC0"
+                },
+                "description": "1970-1980年瑞典正射镶嵌影像。正在建设中。",
+                "name": "瑞典国家测绘局历史正射影像（1975）"
+            },
+            "lantmateriet-topowebb": {
+                "attribution": {
+                    "text": "© 瑞典国家测绘局(Lantmäteriet), CC0"
+                },
+                "description": "瑞典地形图，1:50 000",
+                "name": "瑞典国家测绘局地形图"
+            },
+            "linkoping-orto": {
+                "attribution": {
+                    "text": "© 林雪平市"
+                },
+                "description": "来自2010年林雪平市的正射影像，公开数据",
+                "name": "林雪平市正射影像"
             },
             "mapbox_locator_overlay": {
                 "attribution": {
@@ -8226,6 +8699,13 @@
                 },
                 "name": "OpenStreetMap（德国样式）"
             },
+            "osmse-ekonomiska": {
+                "attribution": {
+                    "text": "© 瑞典国家测绘局(Lantmäteriet)"
+                },
+                "description": "“经济地理图”扫描版本，约1950-1980年",
+                "name": "瑞典国家测绘局经济地理图（1950-1980）"
+            },
             "qa_no_address": {
                 "attribution": {
                     "text": "© Simon Poole, 数据 © OpenStreetMap 贡献者"
@@ -8238,11 +8718,25 @@
                 },
                 "name": "skobbler"
             },
+            "skoterleder": {
+                "attribution": {
+                    "text": "© Skoterleder.org"
+                },
+                "description": "机动雪橇车径",
+                "name": "瑞典机动雪橇地图"
+            },
             "stamen-terrain-background": {
                 "attribution": {
                     "text": "地图瓦片由 Stamen 设计，并以 署名 3.0 协议授权。数据由 OpenStreetMap 提供并采用开放数据共享开放数据库许可协议 (ODbL) 授权。"
                 },
                 "name": "Stamen 地形"
+            },
+            "stockholm-orto": {
+                "attribution": {
+                    "text": "© 斯德哥尔摩市, CC0"
+                },
+                "description": "来自2016年斯德哥尔摩市的正射影像，CC0 许可",
+                "name": "斯德哥尔摩市正射影像"
             },
             "tf-cycle": {
                 "attribution": {
@@ -8255,375 +8749,121 @@
                     "text": "地图 © Thunderforest，数据 © OpenStreetMap 贡献者"
                 },
                 "name": "Thunderforest 地貌"
+            },
+            "trafikverket-baninfo": {
+                "attribution": {
+                    "text": "© 瑞典交通管理局(Trafikverket), CC0"
+                },
+                "description": "瑞典铁路网络，包括侧线",
+                "name": "瑞典交通管理局铁路网络"
+            },
+            "trafikverket-baninfo-option": {
+                "attribution": {
+                    "text": "© 瑞典交通管理局(Trafikverket), CC0"
+                },
+                "description": "瑞典铁路网络，并可选择多种地图图层",
+                "name": "瑞典交通管理局铁路网络选项"
+            },
+            "trafikverket-vagnat": {
+                "attribution": {
+                    "text": "© 瑞典交通管理局(Trafikverket), CC0"
+                },
+                "description": "瑞典国家道路数据库(NVDB)道路网络",
+                "name": "瑞典交通管理局道路网络"
+            },
+            "trafikverket-vagnat-extra": {
+                "attribution": {
+                    "text": "© 瑞典交通管理局(Trafikverket), CC0"
+                },
+                "description": "瑞典国家道路数据库(NVDB)新增细节：道路编号、交通稳静化、休息区、公交车站、桥梁、隧道和测速照相机",
+                "name": "瑞典交通管理局道路网络追加项"
+            },
+            "trafikverket-vagnat-navn": {
+                "attribution": {
+                    "text": "© 瑞典交通管理局(Trafikverket), CC0"
+                },
+                "description": "瑞典国家道路数据库(NVDB)道路名称",
+                "name": "瑞典交通管理局道路名称"
+            },
+            "trafikverket-vagnat-option": {
+                "attribution": {
+                    "text": "© 瑞典交通管理局(Trafikverket), CC0"
+                },
+                "description": "瑞典国家道路数据库(NVDB)道路网络，并可选择多种地图图层",
+                "name": "瑞典交通管理局道路网络选项"
             }
         },
         "community": {
-            "bw-facebook": {
-                "name": "在 Facebook 上的 Mapping Botswana",
-                "description": "OpenStreetMap in Botswana 的页面"
+            "Bahia-telegram": {
+                "name": "OpenStreetMap 巴伊亚 Telegram 小组",
+                "description": "在 Telegram 上加入 OpenStreetMap 巴伊亚社区",
+                "extendedDescription": "加入社区来了解更多 OpenStreetMap，在会议中提问或者参与。欢迎每个人的到来！"
             },
-            "bw-twitter": {
-                "name": "在 Twitter 上的 Mapping Botswana",
-                "description": "OpenStreetMap in Botswana 的 Twitter"
+            "Bay-Area-OpenStreetMappers": {
+                "name": "旧金山湾区 OpenStreetMap 贡献者",
+                "description": "改进位于旧金山湾区的 OpenStreetMap",
+                "extendedDescription": "该小组的目的是在旧金山湾区发展 OpenStreetMap 社区。 我们的活动向所有人开放，包括开源代码爱好者、自行车骑手、GIS 专业人员和其他所有人。 欢迎对地图、地图制作和免费地图数据感兴趣的任何人和其他所有人，加入我们的团队并参加我们的活动。"
             },
-            "ym-Centre-Universitaire-de-Recherche-et-dApplication-en-Tldtection-CURAT-de-lUniversit-Felix-Houphouet-Boigny": {
-                "name": "YouthMappers CURAT",
-                "extendedDescription": "我们分会目的是推广自由画地图的协同使用，以及在研究与决策应用时运用开放街图资料，帮助学生产生他们研究时自己的资料。"
+            "Central-Pennsylvania-OSM": {
+                "name": "宾夕法尼亚中部 OSM",
+                "description": "来自宾夕法尼亚州立大学的在线制图社区"
             },
-            "ym-The-Gambia-YMCA-University-of-the-Gambia": {
-                "name": "YouthMappers 接触",
-                "description": "Connected YouthMappers 由年轻甘比亚组成，希望能改变和协助国家发展"
+            "Code-for-San-Jose-Slack": {
+                "name": "San Jose Slack 的代码",
+                "description": "我们欢迎所有人加入！请在 {signupUrl}进行注册，然后加入 #osm 频道。"
             },
-            "cape-coast-youthmappers": {
-                "name": "海岸角大学 YouthMappers",
-                "description": "在 Twitter 上关注我们：{url}",
-                "extendedDescription": "此为加纳海岸角大学在 Youth Mappers 上的官方章节。我们热爱地图、开放数据以及帮助弱势群体。"
+            "DF-telegram": {
+                "name": "OpenStreetMap 巴西利亚 Telegram 群组",
+                "description": "在 Telegram 上加入 OpenStreetMap 巴西利亚社区",
+                "extendedDescription": "加入社区以了解有关 OpenStreetMap 的更多信息，在会议中提问或者参与。欢迎每个人的到来！"
             },
-            "osm-gh-facebook": {
-                "name": "OpenStreetMap 加纳 Facebook 主页",
-                "description": "为对 OpenStreetMap 感兴趣的用户准备的 Facebook 小组。",
-                "extendedDescription": "位于加纳的绘图者社区，在加纳宣传 OpenStreetMap 以及人道主义 OpenStreetMap 团队 (HOT) 项目。加入我们。"
+            "Dallas-Fort-Worth-OSM": {
+                "name": "达拉斯沃思堡 OSM",
+                "description": "达拉斯沃思堡的 OpenStreetMap 用户群组"
             },
-            "osm-gh-twitter": {
-                "name": "OpenStreetMap 加纳 Twitter 主页",
+            "Galicia-Telegram": {
+                "name": "OpenStreetMap 加利西亚 Telegram",
+                "description": "OpenStreetMap 加利西亚 Telegram"
+            },
+            "Galicia-Twitter": {
+                "name": "OpenStreetMap 加利西亚 Twitter",
+                "description": "关注我们的 Twitter：{url}"
+            },
+            "LATAM-Facebook": {
+                "name": "OpenStreetMap 拉丁美洲 Facebook 主页",
+                "description": "OpenStreetMap 拉丁美洲 Facebook 主页"
+            },
+            "LATAM-Telegram": {
+                "name": "OpenStreetMap 拉丁美洲 Telegram",
+                "description": "OpenStreetMap 拉丁美洲 Telegram"
+            },
+            "LATAM-Twitter": {
+                "name": "OpenStreetMap 拉丁美洲 Twitter",
                 "description": "在 Twitter 上关注我们：{url}"
             },
-            "talk-gh": {
-                "name": "Talk-gh 邮件列表",
-                "description": "Talk-gh 是为加纳 OSM 社区准备的官方邮件列表"
-            },
-            "ym-University-of-Cape-Coast": {
-                "name": "UCC地理学协会"
-            },
-            "osm-mg-facebook": {
-                "name": "OpenStreetMap 马达加斯加 Facebook 小组",
-                "description": "为对 OpenStreetMap 感兴趣的用户准备的马达加斯加 Facebook 小组。"
-            },
-            "talk-mg": {
-                "name": "Talk-mg 邮件列表",
-                "description": "位于马达加斯加的 OpenStreetMap 贡献者、社区和用户分享和讨论的地方。"
-            },
-            "OSM-BGD-facebook": {
-                "name": "OpenStreetMap 孟加拉国",
-                "description": "改进位于孟加拉国的 OpenStreetMap",
-                "extendedDescription": "在孟加拉国绘图？有任何疑问，想要与当地的社区交流？在 {url} 加入我们。欢迎所有人！"
-            },
-            "OSM-India-facebook": {
-                "name": "OpenStreetMap 印度 - 共同参与的街区绘图",
-                "description": "改进位于印度的 OpenStreetMap",
-                "extendedDescription": "在印度绘图？有任何疑问，想要与当地的社区交流？在 {Url} 加入我们。欢迎所有人！"
-            },
-            "OSM-india-mailinglist": {
-                "name": "OpenStreetMap 印度邮件列表",
-                "description": "Talk-in 是为印度社区准备的官方邮件列表"
-            },
-            "OSM-india-twitter": {
-                "name": "OpenStreetMap 印度 Twitter",
-                "description": "我们之间仅差一条推文：{url}"
-            },
-            "osm-india-website": {
-                "name": "OpenStreetMap 印度"
-            },
-            "OSM-India-Puducherry-Facebook": {
-                "name": "自由软硬件运动 (FSHM) - Facebook",
-                "description": "在 FSHM Facebook 主页上了解更多社区事件和活动"
-            },
-            "OSM-India-Puducherry-Matrix": {
-                "name": "自由软硬件运动 (FSHM) - Matrix"
-            },
-            "OSM-IDN-facebook": {
-                "name": "OpenStreetMap 印度尼西亚",
-                "description": "改进位于印度尼西亚的 OpenStreetMap",
-                "extendedDescription": "在印度尼西亚绘图？有任何疑问，想要与当地的社区交流？在 {Url} 加入我们。欢迎所有人！"
-            },
-            "OSM-japan-facebook": {
-                "name": "OpenStreetMap 日本社区",
-                "description": "在日本的绘图者和 OpenStreetMap 用户"
-            },
-            "OSM-japan-mailinglist": {
-                "name": "OpenStreetMap 日本邮件列表",
-                "description": "Talk-ja 是为日本社区准备的官方邮件列表"
-            },
-            "OSM-japan-twitter": {
-                "name": "OpenStreetMap 日本 Twitter",
-                "description": "Twitter 上的#标签：{url}"
-            },
-            "OSM-japan-website": {
-                "name": "OpenStreetMap 日本",
-                "description": "位于日本的绘图者和 OpenStreetMap 用户"
-            },
-            "OSM-MY-forum": {
-                "name": "OpenStreetMap 马来西亚论坛",
-                "description": "官方 OpenStreetMap 马来西亚论坛"
-            },
-            "OSM-MY-matrix": {
-                "name": "OpenStreetMap 马来西亚 Riot 频道",
-                "description": "欢迎所有的绘图者！在 {signupUrl} 上注册。"
-            },
-            "OSM-MNG-facebook": {
-                "name": "OpenStreetMap 蒙古",
-                "description": "改进位于蒙古的 OpenStreetMap",
-                "extendedDescription": "在蒙古绘图？有任何疑问，想要与当地的社区交流？在 {Url} 加入我们。欢迎所有人！"
-            },
-            "OSM-MMR-facebook": {
-                "name": "OpenStreetMap 缅甸",
-                "description": "改进位于缅甸的 OpenStreetMap",
-                "extendedDescription": "在缅甸绘图？有任何疑问，想要与当地的社区交流？在 {Url} 加入我们。欢迎所有人！"
-            },
-            "OSM-Nepal-facebook": {
-                "name": "OpenStreetMap 尼泊尔",
-                "description": "改进位于尼泊尔的 OpenStreetMap",
-                "extendedDescription": "在尼泊尔绘图？有任何疑问，想要与当地的社区交流？在 {Url} 加入我们。欢迎所有人！"
-            },
-            "OSM-Asia-mailinglist": {
-                "name": "OpenStreetMap 亚洲邮件列表",
-                "description": "Talk-asia 是亚洲社区的官方邮件列表"
-            },
-            "osm-asia-telegram": {
-                "name": "OpenStreetMap 亚洲 Telegram",
-                "description": "加入我们的大家庭：{url}"
-            },
-            "OSM-PH-facebook": {
-                "name": "OpenStreetMap 菲律宾 Facebook"
-            },
-            "OSM-PH-mailinglist": {
-                "name": "Talk-ph 邮件列表",
-                "description": "讨论在菲律宾 OpenStreetMap 的邮件列表"
-            },
-            "OSM-PH-slack": {
-                "name": "OpenStreetMap 菲律宾 Slack",
-                "description": "欢迎所有人加入！在 {signupUrl} 上注册。"
-            },
-            "OSM-PH-telegram": {
-                "name": "OpenStreetMap 菲律宾 Telegram",
-                "description": "为在菲律宾的 OpenStreetMap 贡献者和伙伴们准备的非官方 Telegram 本地社区"
-            },
-            "OSM-RU-forum": {
-                "name": "OpenStreetMap 俄罗斯论坛",
-                "description": "OpenStreetMap 俄罗斯网络论坛"
-            },
-            "OSM-RU-telegram": {
-                "name": "OpenStreetMap 俄罗斯 Telegram",
-                "description": "OpenStreetMap 俄罗斯 Telegram 交流"
-            },
-            "OSM-TW-facebook": {
-                "name": "OpenStreetMap 台湾社区",
-                "description": "绘图者和 OpenStreetMap 用户用以讨论中国台湾省事务的 Facebook 小组。"
-            },
-            "OSM-TW-mailinglist": {
-                "name": "OpenStreetMap 台湾邮件列表",
-                "description": "Talk-tw 是社区讨论关于中国台湾省事务的官方邮件列表"
-            },
-            "at-forum": {
-                "name": "OpenStreetMap 奥地利论坛"
-            },
-            "at-mailinglist": {
-                "name": "Talk-at 邮件列表",
-                "description": "Talk-at 是奥地利 OpenStreetMap 社区的官方邮件列表"
-            },
-            "at-twitter": {
-                "name": "OpenStreetMap 奥地利 Twitter",
-                "description": "OpenStreetMap 奥地利 Twitter 主页：{url}"
-            },
-            "osmgraz-twitter": {
-                "name": "OSM 格拉茨社区 Twitter 主页",
-                "description": "OpenStreetMap 格拉茨社区 Twitter 主页"
-            },
-            "osm-at": {
-                "name": "OpenStreetMap 奥地利",
-                "description": "位于奥地利的 OpenStreetMap 信息平台"
-            },
-            "byosm": {
-                "name": "OpenStreetMap 白俄罗斯",
-                "description": "OpenStreetMap 白俄罗斯 Telegram 交流"
-            },
-            "be-forum": {
-                "name": "OpenStreetMap 比利时论坛",
-                "description": "OpenStreetMap 比利时网络论坛"
-            },
-            "be-mailinglist": {
-                "name": "Talk-be 邮件列表"
-            },
-            "be-twitter": {
-                "name": "OpenStreetMap 比利时 Twitter"
-            },
-            "talk-cz-mailinglist": {
-                "description": "Talk-cz 是捷克 OpenStreetMap 社区的官方邮件列表"
-            },
-            "fr-facebook": {
-                "name": "OpenStreetMap 法国 Facebook 主页",
-                "description": "OpenStreetMap 法国 Facebook 主页"
-            },
-            "fr-forum": {
-                "name": "OpenStreetMap 法国网络论坛",
-                "description": "OpenStreetMap 法国网络论坛"
-            },
-            "fr-irc": {
-                "name": "OpenStreetMap 法国 IRC",
-                "description": "在 irc.oftc.net (端口 6667) 加入 #osm-fr"
-            },
-            "fr-mailinglist": {
-                "name": "Talk-fr 邮件列表",
-                "description": "Talk-fr 邮件列表"
-            },
-            "fr-twitter": {
-                "name": "OpenStreetMap 法国 Twitter 主页",
-                "description": "OpenStreetMap 法国 Twitter 主页：{url}"
-            },
-            "de-berlin-mailinglist": {
-                "name": "柏林邮件列表",
-                "description": "此为柏林 OSM 社区的邮件列表"
-            },
-            "de-berlin-meetup": {
-                "name": "OpenStreetMap 柏林-勃兰登堡见面会",
-                "description": "位于柏林区域的绘图者和 OpenStreetMap 用户"
-            },
-            "de-berlin-telegram": {
-                "name": "@osmberlin Telegram 主页",
-                "description": "OpenStreetMap 柏林 Telegram 交流"
-            },
-            "de-berlin-twitter": {
-                "name": "OpenStreetMap 柏林 Twitter",
-                "description": "在 Twitter 上关注我们：{url}"
-            },
-            "de-forum": {
-                "name": "OpenStreetMap 德国论坛",
-                "description": "OpenStreetMap 德国网络论坛"
-            },
-            "de-irc": {
-                "name": "OpenStreetMap 德国 IRC",
-                "description": "在 irc.oftc.net (端口 6667) 加入 #osm-de"
-            },
-            "de-mailinglist": {
-                "name": "Talk-de 邮件列表",
-                "description": "Talk-de 是德国 OpenStreetMap 社区的官方邮件列表"
-            },
-            "osm-de": {
-                "name": "OpenStreetMap 德国",
-                "description": "位于德国的 OpenStreetMap 信息平台"
-            },
-            "it-facebook": {
-                "name": "OpenStreetMap 意大利 Facebook",
-                "description": "在 Facebook 上加入 OpenStreetMap 意大利社区"
-            },
-            "it-irc": {
-                "name": "OpenStreetMap 意大利 IRC",
-                "description": "在 irc.oftc.net (端口 6667) 加入 #osm-it"
-            },
-            "it-mailinglist": {
-                "name": "Talk-it 邮件列表",
-                "description": "Talk-it 是意大利 OpenStreetMap 社区的官方邮件列表"
-            },
-            "it-twitter": {
-                "name": "OpenStreetMap 意大利 Twitter",
-                "description": "在 Twitter 上关注我们：{url}"
-            },
-            "OSM-Rome-meetup": {
-                "description": "在罗马地区改进 OpenStreetMap"
-            },
-            "South-Tyrol-Mailing-List": {
-                "name": "南蒂罗尔 OpenStreetMap 邮件列表"
-            },
-            "talk-it-lazio": {
-                "name": "OpenStreetMap 意大利拉齐奥",
-                "description": "欢迎所有人加入！在 {signupUrl} 上注册。",
-                "extendedDescription": "罗马和拉齐奥大区的邮件列表"
-            },
-            "Trentino-Mailing-List": {
-                "name": "特伦蒂诺 OpenStreetMap 邮件列表"
-            },
-            "no-forum": {
-                "name": "OpenStreetMap 挪威网络论坛",
-                "description": "OpenStreetMap 挪威网络论坛"
-            },
-            "no-irc": {
-                "name": "OpenStreetMap 挪威 IRC"
-            },
-            "no-mailinglist": {
-                "name": "OpenStreetMap 挪威邮件列表",
-                "description": "为位于挪威的绘图者和 OpenStreetMap 用户、开发者与爱好者准备的邮件列表"
-            },
-            "OSM-PL-facebook-group": {
-                "name": "OpenStreetMap 波兰 Facebook 小组"
-            },
-            "OSM-ES-mailinglist": {
-                "name": "Talk-es 邮件列表",
-                "description": "讨论在西班牙 OpenStreetMap 的邮件列表"
-            },
-            "OSM-ES-telegram": {
-                "name": "@OSMes Telegram 主页",
-                "description": "OpenStreetMap 西班牙 Telegram 交流"
-            },
-            "osm-se": {
-                "name": "OpenStreetMap.se"
-            },
-            "se-facebook": {
-                "name": "OpenStreetMap 瑞典 Facebook",
-                "description": "OpenStreetMap 瑞典 Facebook 主页"
-            },
-            "se-forum": {
-                "name": "OpenStreetMap 瑞典网络论坛",
-                "description": "OpenStreetMap 瑞典网络论坛"
-            },
-            "se-irc": {
-                "name": "OpenStreetMap 瑞典 IRC",
-                "description": "在 irc.oftc.net (端口 6667) 加入 #osm.se"
-            },
-            "se-mailinglist": {
-                "name": "Talk-se 邮件列表",
-                "description": "讨论在瑞典 OpenStreetMap 的邮件列表"
-            },
-            "se-twitter": {
-                "name": "OpenStreetMap 瑞典 Twitter 页面",
-                "description": "在 Twitter 上关注我们：{url}"
+            "MapMinnesota": {
+                "description": "位于双子城区域的绘图者和 OpenStreetMap 用户"
+            },
+            "Mapping-DC-meetup": {
+                "description": "在华盛顿特区改进 OpenStreetMap"
+            },
+            "Maptime-ME-meetup": {
+                "name": "Maptime 缅因州",
+                "description": "位于缅因州波特兰地区的绘图者和 OpenStreetMap 用户",
+                "extendedDescription": "实际上，Maptime 是指在地图制作花费的时间。 我们的使命是通过使用制图工具和技术创建协作学习，探索和地图创建的时间和空间，为感兴趣的任何人打开制图的可能性。"
+            },
+            "Maptime-Oceania-Slack": {
+                "name": "Maptime 大洋洲 Slack",
+                "description": "在 {signupUrl} 上注册"
+            },
+            "MaptimeHRVA-twitter": {
+                "name": "Maptime 克罗地亚 Twitter",
+                "description": "关注我们的 Twitter：{url}"
             },
             "Nottingham-OSM-pub-meetup": {
                 "name": "东米德兰（诺丁汉）月度酒吧见面会",
                 "description": "东米德兰绘图者和用户的社交聚会",
                 "extendedDescription": "该小组自2011年3月开始举行会议，地点最初在诺丁汉，近几年在德比，或不时在东米德兰的其他地方举行。这些虽是社交聚会，但却是来询问涉及地区或只是普通的 OSM 特定问题的好地方。在夏季，我们通常会在会场附近进行一小时的小型测绘。整个团队都对关于公共优先权的测绘有着特殊的兴趣，并且不时为此而召开绘图会议。"
-            },
-            "gb-irc": {
-                "name": "OpenStreetMap 英国 IRC",
-                "description": "在 irc.oftc.net (端口 6667) 加入 #osm-gb"
-            },
-            "gb-mailinglist": {
-                "name": "Talk-gb 邮件列表"
-            },
-            "OSM-CA-Slack": {
-                "name": "OSM-CA Slack",
-                "description": "欢迎所有人加入！在 {signupUrl} 上注册。"
-            },
-            "OSM-Vancouver-meetup": {
-                "name": "OpenStreetMap 温哥华",
-                "description": "位于不列颠哥伦比亚省温哥华的绘图者和 OpenStreetMap 用户"
-            },
-            "OSM-US-Slack": {
-                "name": "OpenStreetMap 美国 Slack",
-                "description": "欢迎所有人加入！在 {signupUrl} 上注册。"
-            },
-            "OSM-US": {
-                "name": "OpenStreetMap 美国",
-                "description": "我们助长并改善位于美国的 OpenStreetMap。",
-                "extendedDescription": "我们通过召开年度会议、提供社区资源、建立合伙关系以及推广来支持 OpenStreetMap。在此处加入 OpenStreetMap 美国：{signupUrl}"
-            },
-            "OSM-Utah": {
-                "name": "OpenStreetMap 犹他州",
-                "description": "位于盐湖城区域的绘图者和 OpenStreetMap 用户"
-            },
-            "OSM-Wyoming": {
-                "name": "OpenStreetMap 怀俄明州",
-                "description": "位于怀俄明州的绘图者和 OpenStreetMap 用户"
-            },
-            "PHXGeo-twitter": {
-                "name": "PHXGeo Twitter",
-                "description": "在 Twitter 上关注我们：{url}"
-            },
-            "Western-Slope-facebook": {
-                "name": "西坡 OSM Facebook"
-            },
-            "talk-au": {
-                "name": "Talk-au 邮件列表",
-                "description": "澳大利亚绘图者交流的地方"
             },
             "OSM-AR-facebook": {
                 "name": "OpenStreetMap 阿根廷 Facebook",
@@ -8654,28 +8894,41 @@
                 "description": "在 Twitter 上关注我们：{url}",
                 "extendedDescription": "当地社区和 OpenStreetMap 大体的新闻"
             },
+            "OSM-Asia-mailinglist": {
+                "name": "OpenStreetMap 亚洲邮件列表",
+                "description": "Talk-asia 是亚洲社区的官方邮件列表"
+            },
+            "OSM-BGD-facebook": {
+                "name": "OpenStreetMap 孟加拉国",
+                "description": "改进位于孟加拉国的 OpenStreetMap",
+                "extendedDescription": "在孟加拉国绘图？有任何疑问，想要与当地的社区交流？在 {url} 加入我们。欢迎所有人！",
+                "events": {
+                    "sotmasia2019": {
+                        "name": "State of the Map 亚洲 2019",
+                        "description": "加入位于达卡的 State of the Map 亚洲的 2019 年 OpenStreetMap 地区活动。"
+                    }
+                }
+            },
             "OSM-BO-mailinglist": {
                 "name": "Talk-bo 邮件列表",
                 "description": "Talk-bo 是玻利维亚 OpenStreetMap 社区的官方邮件列表",
                 "extendedDescription": "在玻利维亚绘图？有任何疑问，想要与当地的社区交流？在 {Url} 加入我们。欢迎所有人！"
             },
-            "Bahia-telegram": {
-                "name": "OpenStreetMap 巴伊亚 Telegram 小组",
-                "description": "在 Telegram 上加入 OpenStreetMap 巴伊亚社区",
-                "extendedDescription": "加入社区来了解更多 OpenStreetMap，在会议中提问或者参与。欢迎每个人的到来！"
+            "OSM-BiH-telegram": {
+                "name": "OpenStreetMap 波黑 Telegram",
+                "description": "OSM 波斯尼亚与黑塞哥维亚社区的 Telegram 群组： {url}"
             },
-            "OSM-br-mailinglist": {
-                "name": "Talk-br 邮件列表",
-                "description": "讨论在巴西 OpenStreetMap 的邮件列表"
+            "OSM-Boston": {
+                "name": "OpenStreetMap 波士顿",
+                "description": "位于波士顿地区的绘图者和 OpenStreetMap 用户"
             },
-            "OSM-br-telegram": {
-                "name": "OpenStreetMap 巴西 Telegram",
-                "description": "在 Telegram 上加入 OpenStreetMap 巴西社区",
-                "extendedDescription": "加入社区来了解更多 OpenStreetMap，在会议中提问或者参与。欢迎每个人的到来！"
+            "OSM-CA-Slack": {
+                "name": "OSM-CA Slack",
+                "description": "欢迎所有人加入！在 {signupUrl} 上注册。"
             },
-            "OSM-br-twitter": {
-                "name": "OpenStreetMap 巴西 Twitter",
-                "description": "在 Twitter 上关注我们：{url}"
+            "OSM-CA-mailinglist": {
+                "name": "OSM 加拿大 邮件列表",
+                "description": "讨论在加拿大 OpenStreetMap 的邮件列表"
             },
             "OSM-CL-facebook": {
                 "name": "OpenStreetMap 智利 Facebook",
@@ -8695,6 +8948,14 @@
                 "name": "OpenStreetMap 智利 Twitter",
                 "description": "在 Twitter 上关注我们：{url}"
             },
+            "OSM-CN-telegram": {
+                "name": "OpenStreetMap 中国 Telegram",
+                "description": "OSM 中国社区的 Telegram 群组：{url}"
+            },
+            "OSM-CO": {
+                "name": "OpenStreetMap 哥伦比亚",
+                "description": "关于 OpenStreetMap 哥伦比亚社区和 OSMCo 基金会的新闻"
+            },
             "OSM-CO-facebook": {
                 "name": "OpenStreetMap 哥伦比亚 Facebook",
                 "description": "在 Facebook 上加入 OpenStreetMap 哥伦比亚社区",
@@ -8704,13 +8965,125 @@
                 "name": "Talk-co 邮件列表",
                 "description": "讨论在哥伦比亚 OpenStreetMap 的邮件列表"
             },
+            "OSM-CO-telegram": {
+                "name": "OSM 哥伦比亚在 Telegram",
+                "description": "OpenStreetMap 哥伦比亚 Telegram 交流"
+            },
             "OSM-CO-twitter": {
                 "name": "OpenStreetMap 哥伦比亚 Twitter",
                 "description": "在 Twitter 上关注我们：{url}"
             },
-            "OSM-CO": {
-                "name": "OpenStreetMap 哥伦比亚",
-                "description": "关于 OpenStreetMap 哥伦比亚社区和 OSMCo 基金会的新闻"
+            "OSM-CU-telegram": {
+                "name": "OSM 古巴在 Telegram",
+                "description": "OpenStreetMap 古巴 Telegram 交流"
+            },
+            "OSM-CZ-telegram": {
+                "name": "OpenStreetMap 捷克 Telegram",
+                "description": "OSM 捷克社区的 Telegram 群组：{url}"
+            },
+            "OSM-Central-Salish-Sea": {
+                "name": "OpenStreetMap 中央盐海",
+                "description": "位于华盛顿州弗农山地区的绘图者和 OpenStreetMap 用户"
+            },
+            "OSM-Chattanooga": {
+                "name": "OSM 查塔努加",
+                "description": "查塔努加的 OpenStreetMap 用户群组"
+            },
+            "OSM-Colorado": {
+                "name": "OpenStreetMap 科罗拉多州",
+                "description": "位于美国科罗拉多州的绘图者和 OpenStreetMap 用户"
+            },
+            "OSM-Discord": {
+                "name": "OpenStreetMap Discord",
+                "description": "通过 Discord 与其他绘图者联系"
+            },
+            "OSM-EC-telegram": {
+                "name": "OSM 厄瓜多尔在 Telegram",
+                "description": "OpenStreetMap 厄瓜多尔 Telegram 交流"
+            },
+            "OSM-ES-mailinglist": {
+                "name": "Talk-es 邮件列表",
+                "description": "讨论在西班牙 OpenStreetMap 的邮件列表"
+            },
+            "OSM-ES-telegram": {
+                "name": "@OSMes Telegram 主页",
+                "description": "OpenStreetMap 西班牙 Telegram 交流"
+            },
+            "OSM-Facebook": {
+                "name": "OpenStreetMap Facebook 主页",
+                "description": "在 Facebook 上喜欢我们并接收关于 OpenStreetMap 新闻和更新。"
+            },
+            "OSM-IDN-facebook": {
+                "name": "OpenStreetMap 印度尼西亚",
+                "description": "改进位于印度尼西亚的 OpenStreetMap",
+                "extendedDescription": "在印度尼西亚绘图？有任何疑问，想要与当地的社区交流？在 {Url} 加入我们。欢迎所有人！"
+            },
+            "OSM-IRC": {
+                "name": "OpenStreetMap IRC",
+                "description": "在 irc.oftc.net (端口 6667) 加入 #osm"
+            },
+            "OSM-India-Puducherry-Facebook": {
+                "name": "自由软硬件运动 (FSHM) - Facebook",
+                "description": "在 FSHM Facebook 主页上了解更多社区事件和活动"
+            },
+            "OSM-India-Puducherry-Matrix": {
+                "name": "自由软硬件运动 (FSHM) - Matrix"
+            },
+            "OSM-India-facebook": {
+                "name": "OpenStreetMap 印度 - 共同参与的街区绘图",
+                "description": "改进位于印度的 OpenStreetMap",
+                "extendedDescription": "在印度绘图？有任何疑问，想要与当地的社区交流？在 {Url} 加入我们。欢迎所有人！"
+            },
+            "OSM-Japan-telegram": {
+                "name": "OpenStreetMap 日本 Telegram",
+                "description": "OSM 日本社区的 Telegram 群组：{url}"
+            },
+            "OSM-Kerala-facebook": {
+                "name": "OpenStreetMap 喀拉拉邦 - 共同参与的街区绘图",
+                "description": "改进位于喀拉拉邦的 OpenStreetMap"
+            },
+            "OSM-Korea-mailinglist": {
+                "name": "OpenStreetMap 韩国邮件列表",
+                "description": "Talk-ko 是社区讨论关于韩国事务的官方邮件列表"
+            },
+            "OSM-Korea-telegram": {
+                "name": "OSM 韩国 Telegram",
+                "description": "非官方的频道，用于韩国的 OpenStreetMap 贡献者、社区和用户的分享与讨论。"
+            },
+            "OSM-MMR-facebook": {
+                "name": "OpenStreetMap 缅甸",
+                "description": "改进位于缅甸的 OpenStreetMap",
+                "extendedDescription": "在缅甸绘图？有任何疑问，想要与当地的社区交流？在 {Url} 加入我们。欢迎所有人！"
+            },
+            "OSM-MNG-facebook": {
+                "name": "OpenStreetMap 蒙古",
+                "description": "改进位于蒙古的 OpenStreetMap",
+                "extendedDescription": "在蒙古绘图？有任何疑问，想要与当地的社区交流？在 {Url} 加入我们。欢迎所有人！"
+            },
+            "OSM-MY-facebook": {
+                "name": "OpenStreetMap 马来西亚 Facebook 主页",
+                "description": "讨论任何和 OpenStreetMap 有关的内容！"
+            },
+            "OSM-MY-forum": {
+                "name": "OpenStreetMap 马来西亚论坛",
+                "description": "官方 OpenStreetMap 马来西亚论坛"
+            },
+            "OSM-MY-matrix": {
+                "name": "OpenStreetMap 马来西亚 Riot 频道",
+                "description": "欢迎所有的绘图者！在 {signupUrl} 上注册。"
+            },
+            "OSM-Nepal-facebook": {
+                "name": "OpenStreetMap 尼泊尔",
+                "description": "改进位于尼泊尔的 OpenStreetMap",
+                "extendedDescription": "在尼泊尔绘图？有任何疑问，想要与当地的社区交流？在 {Url} 加入我们。欢迎所有人！"
+            },
+            "OSM-Ottawa-meetup": {
+                "name": "OpenStreetMap 渥太华",
+                "description": "位于渥太华地区的绘图者和 OpenStreetMap 用户"
+            },
+            "OSM-PE": {
+                "name": "OpenStreetMap 秘鲁",
+                "description": "关于 OpenStreetMap 秘鲁社区的新闻和资源"
             },
             "OSM-PE-facebook": {
                 "name": "OpenStreetMap 秘鲁 Facebook",
@@ -8732,30 +9105,89 @@
                 "name": "OpenStreetMap 秘鲁 Twitter",
                 "description": "在 Twitter 上关注我们：{url}"
             },
-            "OSM-PE": {
-                "name": "OpenStreetMap 秘鲁",
-                "description": "关于 OpenStreetMap 秘鲁社区的新闻和资源"
+            "OSM-PH-facebook": {
+                "name": "OpenStreetMap 菲律宾 Facebook",
+                "description": "欢迎来到 OpenStreetMap 菲律宾，我们在这里鼓励所有菲律宾同胞为 OpenStreetMap 项目做出贡献。"
             },
-            "OSM-Discord": {
-                "name": "OpenStreetMap Discord",
-                "description": "通过 Discord 与其他绘图者联系"
+            "OSM-PH-mailinglist": {
+                "name": "Talk-ph 邮件列表",
+                "description": "讨论在菲律宾 OpenStreetMap 的邮件列表"
             },
-            "OSM-Facebook": {
-                "name": "OpenStreetMap Facebook 主页",
-                "description": "在 Facebook 上喜欢我们并接收关于 OpenStreetMap 新闻和更新。"
+            "OSM-PH-slack": {
+                "name": "OpenStreetMap 菲律宾 Slack",
+                "description": "欢迎所有人加入！在 {signupUrl} 上注册。"
             },
-            "OSM-help": {
-                "name": "OpenStreetMap 帮助",
-                "description": "在 OSM 社区驱动的问答网站上提问并得到解答。",
-                "extendedDescription": "{url} 为所有人提供关于 OpenStreetMap 的帮助。无论您是新手绘图者或者有任何技术问题，都来找我们帮助吧！"
+            "OSM-PH-telegram": {
+                "name": "OpenStreetMap 菲律宾 Telegram",
+                "description": "为在菲律宾的 OpenStreetMap 贡献者和伙伴们准备的非官方 Telegram 本地社区"
             },
-            "OSM-IRC": {
-                "name": "OpenStreetMap IRC",
-                "description": "在 irc.oftc.net (端口 6667) 加入 #osm"
+            "OSM-PL-facebook-group": {
+                "name": "OpenStreetMap 波兰 Facebook 小组",
+                "description": "为位于波兰的绘图者和 OpenStreetMap 用户提供的群组"
+            },
+            "OSM-PL-forum": {
+                "name": "OpenStreetMap 波兰论坛",
+                "description": "波兰 OpenStreetMap 社区论坛"
+            },
+            "OSM-PY-telegram": {
+                "name": "OSM 巴拉圭在 Telegram",
+                "description": "OpenStreetMap 巴拉圭 Telegram 交流"
+            },
+            "OSM-Portland": {
+                "name": "OpenStreetMap 波特兰",
+                "description": "位于波特兰地区的绘图者和 OpenStreetMap 用户"
+            },
+            "OSM-Portland-forum": {
+                "name": "OpenStreetMap 波特兰 Google 小组",
+                "description": "波特兰地区 OpenStreetMap 用户的论坛和邮件列表"
+            },
+            "OSM-Puducherry-Mailing-List": {
+                "name": "自由软硬件运动 (FSHM) - 邮件列表"
+            },
+            "OSM-RU-forum": {
+                "name": "OpenStreetMap 俄罗斯论坛",
+                "description": "OpenStreetMap 俄罗斯网络论坛"
+            },
+            "OSM-RU-telegram": {
+                "name": "OpenStreetMap 俄罗斯 Telegram",
+                "description": "OpenStreetMap 俄罗斯 Telegram 交流"
             },
             "OSM-Reddit": {
                 "name": "OpenStreetMap Reddit 社区",
                 "description": "/r/openstreetmap/ 是了解更多关于 OpenStreetMap 的好地方。来尽管问我们吧！"
+            },
+            "OSM-Rome-meetup": {
+                "description": "在罗马地区改进 OpenStreetMap"
+            },
+            "OSM-South-Bay": {
+                "name": "OSM 南湾"
+            },
+            "OSM-TH-CNX-meetup": {
+                "name": "清迈的 OSM 聚会",
+                "extendedDescription": "OpenStreetMap 社区的成员每隔几个月在清迈举行一次会议。请访问 {url} 以和我们取得联系，并查看下一次会议的日程安排。"
+            },
+            "OSM-TH-facebook": {
+                "name": "OpenStreetMap 泰国 Facebook 小组",
+                "description": "为泰国 OpenStreetMap 绘图者准备的 Facebook 小组"
+            },
+            "OSM-TH-forum": {
+                "description": "OpenStreetMap 泰国在线论坛"
+            },
+            "OSM-TW-facebook": {
+                "name": "OpenStreetMap 台湾社区",
+                "description": "绘图者和 OpenStreetMap 用户用以讨论中国台湾省事务的 Facebook 小组。"
+            },
+            "OSM-TW-mailinglist": {
+                "name": "OpenStreetMap 台湾邮件列表",
+                "description": "Talk-tw 是社区讨论关于中国台湾省事务的官方邮件列表"
+            },
+            "OSM-TW-telegram": {
+                "name": "OpenStreetMap 台湾 Telegram",
+                "description": "OSM 台湾社区的 Telegram 群组: {url}"
+            },
+            "OSM-Tampa-Bay": {
+                "name": "OpenStreetMap 坦帕湾",
+                "description": "坦帕湾地区的 OpenStreetMap 贡献者和使用者"
             },
             "OSM-Telegram": {
                 "name": "OpenStreetMap Telegram 群组",
@@ -8765,10 +9197,527 @@
                 "name": "OpenStreetMap Twitter 主页",
                 "description": "在 Twitter 上关注我们：{url}"
             },
+            "OSM-US": {
+                "name": "OpenStreetMap 美国",
+                "description": "我们助长并改善位于美国的 OpenStreetMap。",
+                "extendedDescription": "我们通过召开年度会议、提供社区资源、建立合伙关系以及推广来支持 OpenStreetMap。在此处加入 OpenStreetMap 美国：{signupUrl}"
+            },
+            "OSM-US-Slack": {
+                "name": "OpenStreetMap 美国 Slack",
+                "description": "欢迎所有人加入！在 {signupUrl} 上注册。"
+            },
+            "OSM-Utah": {
+                "name": "OpenStreetMap 犹他州",
+                "description": "位于盐湖城区域的绘图者和 OpenStreetMap 用户"
+            },
+            "OSM-Vancouver-meetup": {
+                "name": "OpenStreetMap 温哥华",
+                "description": "位于不列颠哥伦比亚省温哥华的绘图者和 OpenStreetMap 用户"
+            },
+            "OSM-Wyoming": {
+                "name": "OpenStreetMap 怀俄明州",
+                "description": "位于怀俄明州的绘图者和 OpenStreetMap 用户"
+            },
+            "OSM-br-discord": {
+                "description": "在 Discord 上加入 OpenStreetMap 巴西社区"
+            },
+            "OSM-br-mailinglist": {
+                "name": "Talk-br 邮件列表",
+                "description": "讨论在巴西 OpenStreetMap 的邮件列表"
+            },
+            "OSM-br-telegram": {
+                "name": "OpenStreetMap 巴西 Telegram",
+                "description": "在 Telegram 上加入 OpenStreetMap 巴西社区",
+                "extendedDescription": "加入社区来了解更多 OpenStreetMap，在会议中提问或者参与。欢迎每个人的到来！"
+            },
+            "OSM-br-twitter": {
+                "name": "OpenStreetMap 巴西 Twitter",
+                "description": "在 Twitter 上关注我们：{url}"
+            },
+            "OSM-help": {
+                "name": "OpenStreetMap 帮助",
+                "description": "在 OSM 社区驱动的问答网站上提问并得到解答。",
+                "extendedDescription": "{url} 为所有人提供关于 OpenStreetMap 的帮助。无论您是新手绘图者或者有任何技术问题，都来找我们帮助吧！"
+            },
+            "OSM-india-mailinglist": {
+                "name": "OpenStreetMap 印度邮件列表",
+                "description": "Talk-in 是为印度社区准备的官方邮件列表"
+            },
+            "OSM-india-twitter": {
+                "name": "OpenStreetMap 印度 Twitter",
+                "description": "我们之间仅差一条推文：{url}"
+            },
+            "OSM-japan-facebook": {
+                "name": "OpenStreetMap 日本社区",
+                "description": "在日本的绘图者和 OpenStreetMap 用户"
+            },
+            "OSM-japan-mailinglist": {
+                "name": "OpenStreetMap 日本邮件列表",
+                "description": "Talk-ja 是为日本社区准备的官方邮件列表"
+            },
+            "OSM-japan-twitter": {
+                "name": "OpenStreetMap 日本 Twitter",
+                "description": "Twitter 上的#标签：{url}"
+            },
+            "OSM-japan-website": {
+                "name": "OpenStreetMap 日本",
+                "description": "位于日本的绘图者和 OpenStreetMap 用户"
+            },
+            "OSM-sri-lanka-facebook": {
+                "name": "OpenStreetMap 斯里兰卡",
+                "description": "改进位于斯里兰卡的 OpenStreetMap",
+                "extendedDescription": "在斯里兰卡绘制地图？有任何疑问、或想要与当地的社区交流？在 {Url} 加入我们。欢迎所有人！"
+            },
             "OSMF": {
                 "name": "OpenStreetMap 基金会 (OSMF)",
                 "description": "OSMF 是总部位于英国的非营利组织，用于支持 OpenStreetMap 项目。",
                 "extendedDescription": "OSMF 通过筹款、维护为网站提供动力的服务器、组织年度 State of the Map 会议以及协调维护网站的志愿者来支持 OpenStreetMap。您可以通过点击该链接成为 OSMF 的一员以展示您的支持并为 OpenStreetMap 的未来发声：{signupUrl}"
+            },
+            "OpenCleveland-meetup": {
+                "description": "在克利夫兰地区改进 OpenStreetMap"
+            },
+            "PHXGeo-meetup": {
+                "description": "位于亚利桑那州凤凰城地区的绘图者和 OpenStreetMap 用户"
+            },
+            "PHXGeo-twitter": {
+                "name": "PHXGeo Twitter",
+                "description": "在 Twitter 上关注我们：{url}"
+            },
+            "South-Tyrol-Mailing-List": {
+                "name": "南蒂罗尔 OpenStreetMap 邮件列表"
+            },
+            "Trentino-Mailing-List": {
+                "name": "特伦蒂诺 OpenStreetMap 邮件列表"
+            },
+            "Western-Slope-facebook": {
+                "name": "西坡 OSM Facebook"
+            },
+            "al-twitter": {
+                "description": "关注我们的 Twitter：{url}"
+            },
+            "at-forum": {
+                "name": "OpenStreetMap 奥地利论坛"
+            },
+            "at-mailinglist": {
+                "name": "Talk-at 邮件列表",
+                "description": "Talk-at 是奥地利 OpenStreetMap 社区的官方邮件列表"
+            },
+            "at-twitter": {
+                "name": "OpenStreetMap 奥地利 Twitter",
+                "description": "OpenStreetMap 奥地利 Twitter 主页：{url}"
+            },
+            "be-chapter": {
+                "description": "我们助长并改善位于比利时的 OpenStreetMap。"
+            },
+            "be-facebook": {
+                "name": "OpenStreetMap 比利时 Facebook 社区",
+                "description": "位于比利时的绘图者和 OpenStreetMap Facebook 主页"
+            },
+            "be-forum": {
+                "name": "OpenStreetMap 比利时论坛",
+                "description": "OpenStreetMap 比利时网络论坛"
+            },
+            "be-irc": {
+                "name": "OpenStreetMap 比利时 IRC"
+            },
+            "be-mailinglist": {
+                "name": "Talk-be 邮件列表",
+                "description": "Talk-be 是比利时 OSM 社区的官方邮件列表"
+            },
+            "be-matrix": {
+                "description": "欢迎所有的绘图者！"
+            },
+            "be-meetup": {
+                "name": "OpenStreetMap 比利时聚会"
+            },
+            "be-twitter": {
+                "name": "OpenStreetMap 比利时 Twitter",
+                "description": "OSM 比利时 Twitter: @osm_be"
+            },
+            "bw-facebook": {
+                "name": "Mapping Botswana 的 Facebook 页面",
+                "description": "OpenStreetMap in Botswana 的页面"
+            },
+            "bw-twitter": {
+                "name": "Mapping Botswana 的 Twitter 页面",
+                "description": "OpenStreetMap in Botswana 的 Twitter 页面"
+            },
+            "byosm": {
+                "name": "OpenStreetMap 白俄罗斯",
+                "description": "OpenStreetMap 白俄罗斯 Telegram 交流"
+            },
+            "cape-coast-youthmappers": {
+                "name": "海岸角大学 YouthMappers",
+                "description": "在 Twitter 上关注我们：{url}",
+                "extendedDescription": "此为加纳海岸角大学的 Youth Mappers 官方分会。我们热爱地图、开放数据以及帮助弱势群体。"
+            },
+            "ch-mailinglist": {
+                "description": "瑞士的邮件列表"
+            },
+            "ch-twitter": {
+                "name": "OpenStreetMap 瑞士 Twitter",
+                "description": "关注我们的 Twitter：{url}"
+            },
+            "czech-community": {
+                "name": "捷克 OSM 社区"
+            },
+            "de-berlin-mailinglist": {
+                "name": "柏林邮件列表",
+                "description": "此为柏林 OSM 社区的邮件列表"
+            },
+            "de-berlin-meetup": {
+                "name": "OpenStreetMap 柏林-勃兰登堡见面会",
+                "description": "位于柏林区域的绘图者和 OpenStreetMap 用户"
+            },
+            "de-berlin-telegram": {
+                "name": "@osmberlin Telegram 主页",
+                "description": "OpenStreetMap 柏林 Telegram 交流"
+            },
+            "de-berlin-twitter": {
+                "name": "OpenStreetMap 柏林 Twitter",
+                "description": "在 Twitter 上关注我们：{url}"
+            },
+            "de-forum": {
+                "name": "OpenStreetMap 德国论坛",
+                "description": "OpenStreetMap 德国网络论坛"
+            },
+            "de-hamburg-telegram": {
+                "name": "OSM 汉堡在 Telegram",
+                "description": "OpenStreetMap 汉堡 Telegram 交流: {url}"
+            },
+            "de-irc": {
+                "name": "OpenStreetMap 德国 IRC",
+                "description": "在 irc.oftc.net (端口 6667) 加入 #osm-de"
+            },
+            "de-mailinglist": {
+                "name": "Talk-de 邮件列表",
+                "description": "Talk-de 是德国 OpenStreetMap 社区的官方邮件列表"
+            },
+            "de-matrix": {
+                "name": "OpenStreetMap 德国 Matrix",
+                "description": "加入 #osm-de:matrix.org 于 https://riot.im/app/#/room/%23osm-de:matrix.org"
+            },
+            "de-ostwestfalen-lippe-mailinglist": {
+                "name": "东威斯特伐利亚州邮件列表",
+                "description": "此为东威斯特伐利亚州 OSM 社区的邮件列表"
+            },
+            "de-telegram": {
+                "name": "OpenStreetMap 德国 Telegram",
+                "description": "加入 OpenStreetMap Telegram 德国大群：{url}"
+            },
+            "dk-forum": {
+                "name": "OpenStreetMap 丹麦网络论坛",
+                "description": "OpenStreetMap 丹麦网络论坛"
+            },
+            "dk-irc": {
+                "name": "OpenStreetMap 丹麦 IRC",
+                "description": "在 irc.oftc.net (端口 6667) 加入 #osm-dk"
+            },
+            "dk-mailinglist": {
+                "name": "Talk-dk 邮件列表",
+                "description": "讨论在丹麦 OpenStreetMap 的邮件列表"
+            },
+            "es-twitter": {
+                "name": "OpenStreetMap 西班牙 Twitter",
+                "description": "关注我们的 Twitter：{url}"
+            },
+            "fi-forum": {
+                "name": "OpenStreetMap 芬兰论坛",
+                "description": "OpenStreetMap 芬兰在线论坛"
+            },
+            "fi-irc": {
+                "name": "OpenStreetMap 芬兰 IRC",
+                "description": "在 irc.oftc.net (端口 6667) 加入 #osm-fi"
+            },
+            "fi-mailinglist": {
+                "name": "Talk-fi 邮件列表",
+                "description": "Talk-fi 是芬兰 OSM 社区的官方邮件列表"
+            },
+            "fr-chapter": {
+                "description": "我们助长并改善位于法国的 OpenStreetMap。"
+            },
+            "fr-facebook": {
+                "name": "OpenStreetMap 法国 Facebook 主页",
+                "description": "OpenStreetMap 法国 Facebook 主页"
+            },
+            "fr-forum": {
+                "name": "OpenStreetMap 法国网络论坛",
+                "description": "OpenStreetMap 法国网络论坛"
+            },
+            "fr-irc": {
+                "name": "OpenStreetMap 法国 IRC",
+                "description": "在 irc.oftc.net (端口 6667) 加入 #osm-fr"
+            },
+            "fr-mailinglist": {
+                "name": "Talk-fr 邮件列表",
+                "description": "Talk-fr 邮件列表"
+            },
+            "fr-telegram": {
+                "name": "OpenStreetMap 法国的 Telegram 群组",
+                "description": "OSM 法国社区的 Telegram 群组: {url}"
+            },
+            "fr-twitter": {
+                "name": "OpenStreetMap 法国 Twitter 主页",
+                "description": "OpenStreetMap 法国 Twitter 主页：{url}"
+            },
+            "galicia-wiki": {
+                "name": "OpenStreetMap 维基计划 加利西亚",
+                "description": "在加利西亚绘图所需要知道的所有事情: {url}"
+            },
+            "gb-irc": {
+                "name": "OpenStreetMap 英国 IRC",
+                "description": "在 irc.oftc.net (端口 6667) 加入 #osm-gb"
+            },
+            "gb-mailinglist": {
+                "name": "Talk-gb 邮件列表",
+                "description": "Talk-gb 是英国(包括北爱尔兰) OSM 社区的主要交流论坛"
+            },
+            "hr-facebook": {
+                "name": "OpenStreetMap 克罗地亚 Facebook 小组",
+                "description": "OpenStreetMap 克罗地亚 Facebook 小组"
+            },
+            "hr-mailinglist": {
+                "name": "Talk-hr 邮件列表",
+                "description": "Talk-hr 邮件列表"
+            },
+            "hu-facebook": {
+                "name": "OpenStreetMap 匈牙利 Facebook 主页",
+                "description": "位于匈牙利的绘图者和 OpenStreetMap Facebook 主页"
+            },
+            "hu-forum": {
+                "name": "OpenStreetMap 匈牙利论坛",
+                "description": "OpenStreetMap 匈牙利网络论坛"
+            },
+            "ireland-facebook": {
+                "name": "OpenStreetMap 爱尔兰 Facebook 小组",
+                "description": "OpenStreetMap 爱尔兰 Facebook 主页"
+            },
+            "ireland-mailinglist": {
+                "name": "Talk-ie 邮件列表",
+                "description": "Talk-ie 是爱尔兰 OSM 社区的邮件列表"
+            },
+            "ireland-twitter": {
+                "name": "OpenStreetMap 爱尔兰 Twitter",
+                "description": "OpenStreetMap 爱尔兰 Twitter: {url}"
+            },
+            "is-facebook": {
+                "name": "OSM 冰岛 Facebook 主页"
+            },
+            "is-mailinglist": {
+                "name": "Talk-is 邮件列表",
+                "description": "Talk-is 是冰岛 OSM 社区的官方邮件列表"
+            },
+            "is-twitter": {
+                "name": "OSM 冰岛 Twitter",
+                "description": "位于冰岛 OpenStreetMap 的 Twitter"
+            },
+            "it-facebook": {
+                "name": "OpenStreetMap 意大利 Facebook",
+                "description": "在 Facebook 上加入 OpenStreetMap 意大利社区"
+            },
+            "it-irc": {
+                "name": "OpenStreetMap 意大利 IRC",
+                "description": "在 irc.oftc.net (端口 6667) 加入 #osm-it"
+            },
+            "it-mailinglist": {
+                "name": "Talk-it 邮件列表",
+                "description": "Talk-it 是意大利 OpenStreetMap 社区的官方邮件列表"
+            },
+            "it-twitter": {
+                "name": "OpenStreetMap 意大利 Twitter",
+                "description": "在 Twitter 上关注我们：{url}"
+            },
+            "lu-mailinglist": {
+                "name": "Talk-lu 邮件列表"
+            },
+            "map-kibera": {
+                "name": "Map Kibera Trust",
+                "description": "Map Kibera 是位于肯尼亚的注册组织",
+                "extendedDescription": "Map Kibera Trust的使命是通过创造性地使用数字化行动工具来增加边缘化社区的影响力和代表性。"
+            },
+            "ni-facebook": {
+                "description": "位于尼加拉瓜的绘图者和 OpenStreetMap Facebook 主页"
+            },
+            "ni-mailinglist": {
+                "name": "Talk-ni 邮件列表",
+                "description": "Talk-ni 是尼加拉瓜 OSM 社区的官方邮件列表"
+            },
+            "no-forum": {
+                "name": "OpenStreetMap 挪威网络论坛",
+                "description": "OpenStreetMap 挪威网络论坛"
+            },
+            "no-irc": {
+                "name": "OpenStreetMap 挪威 IRC"
+            },
+            "no-mailinglist": {
+                "name": "OpenStreetMap 挪威邮件列表",
+                "description": "为位于挪威的绘图者和 OpenStreetMap 用户、开发者与爱好者准备的邮件列表"
+            },
+            "osm-asia-telegram": {
+                "name": "OpenStreetMap 亚洲 Telegram",
+                "description": "加入我们的大家庭：{url}"
+            },
+            "osm-at": {
+                "name": "OpenStreetMap 奥地利",
+                "description": "位于奥地利的 OpenStreetMap 信息平台"
+            },
+            "osm-de": {
+                "name": "OpenStreetMap 德国",
+                "description": "位于德国的 OpenStreetMap 信息平台"
+            },
+            "osm-gh-facebook": {
+                "name": "OpenStreetMap 加纳 Facebook 主页",
+                "description": "为对 OpenStreetMap 感兴趣的用户准备的 Facebook 小组。",
+                "extendedDescription": "位于加纳的绘图者社区，在加纳宣传 OpenStreetMap 以及人道主义 OpenStreetMap 团队 (HOT) 项目。加入我们。"
+            },
+            "osm-gh-twitter": {
+                "name": "OpenStreetMap 加纳 Twitter 主页",
+                "description": "在 Twitter 上关注我们：{url}"
+            },
+            "osm-india-website": {
+                "name": "OpenStreetMap 印度"
+            },
+            "osm-kenya": {
+                "name": "OSM 肯尼亚",
+                "description": "OSM Kenya 是 OSM 贡献者及用户的社群"
+            },
+            "osm-latam": {
+                "description": "支持位于拉丁美洲的 OpenStreetMap"
+            },
+            "osm-mg-facebook": {
+                "name": "OpenStreetMap 马达加斯加 Facebook 小组",
+                "description": "为对 OpenStreetMap 感兴趣的用户准备的马达加斯加 Facebook 小组。"
+            },
+            "osm-se": {
+                "name": "OpenStreetMap.se"
+            },
+            "osmcz-facebook": {
+                "name": "OpenStreetMap 捷克 Facebook 主页",
+                "description": "关注捷克社区 Facebook - 包括已翻译的 WeeklyOSM！"
+            },
+            "osmcz-twitter": {
+                "name": "捷克 Twitter @osmcz",
+                "description": "关注捷克社区 Twitter - 包括已翻译的 WeeklyOSM！"
+            },
+            "osmgraz-twitter": {
+                "name": "OSM 格拉茨社区 Twitter 主页",
+                "description": "OpenStreetMap 格拉茨社区 Twitter 主页"
+            },
+            "pt-mailinglist": {
+                "name": "Talk-pt 邮件列表",
+                "description": "Talk-pt 是葡萄牙 OSM 社区的官方邮件列表"
+            },
+            "se-facebook": {
+                "name": "OpenStreetMap 瑞典 Facebook",
+                "description": "OpenStreetMap 瑞典 Facebook 主页"
+            },
+            "se-forum": {
+                "name": "OpenStreetMap 瑞典网络论坛",
+                "description": "OpenStreetMap 瑞典网络论坛"
+            },
+            "se-irc": {
+                "name": "OpenStreetMap 瑞典 IRC",
+                "description": "在 irc.oftc.net (端口 6667) 加入 #osm.se"
+            },
+            "se-mailinglist": {
+                "name": "Talk-se 邮件列表",
+                "description": "讨论在瑞典 OpenStreetMap 的邮件列表"
+            },
+            "se-twitter": {
+                "name": "OpenStreetMap 瑞典 Twitter 页面",
+                "description": "在 Twitter 上关注我们：{url}"
+            },
+            "si-twitter": {
+                "name": "OpenStreetMap 斯洛文尼亚 Twitter",
+                "description": "关注 OpenStreetMap 斯洛文尼亚 Twitter: {url}"
+            },
+            "talk-au": {
+                "name": "Talk-au 邮件列表",
+                "description": "澳大利亚绘图者交流的地方"
+            },
+            "talk-cz-mailinglist": {
+                "name": "捷克邮件列表 (talk-cz)",
+                "description": "Talk-cz 是捷克 OpenStreetMap 社区的官方邮件列表"
+            },
+            "talk-gh": {
+                "name": "Talk-gh 邮件列表",
+                "description": "Talk-gh 是为加纳 OSM 社区准备的官方邮件列表"
+            },
+            "talk-it-lazio": {
+                "name": "OpenStreetMap 意大利拉齐奥",
+                "description": "欢迎所有人加入！在 {signupUrl} 上注册。",
+                "extendedDescription": "罗马和拉齐奥大区的邮件列表"
+            },
+            "talk-mg": {
+                "name": "Talk-mg 邮件列表",
+                "description": "位于马达加斯加的 OpenStreetMap 贡献者、社区和用户分享和讨论的地方。"
+            },
+            "talk-nz": {
+                "name": "Talk-nz 邮件列表"
+            },
+            "ua-facebook": {
+                "name": "OpenStreetMap 乌克兰 Facebook 小组",
+                "description": "加入 OpenStreetMap 乌克兰社区的 Facebook"
+            },
+            "us-ma-mailinglist": {
+                "name": "Talk-us-massachusetts 邮件列表"
+            },
+            "uy-mailinglist": {
+                "name": "Talk-uy 邮件列表",
+                "description": "Talk-uy 是乌拉圭 OSM 社区的官方邮件列表"
+            },
+            "ve-mailinglist": {
+                "name": "Talk-ve 邮件列表",
+                "description": "Talk-ve 是委内瑞拉 OSM 社区的官方邮件列表"
+            },
+            "ym-Centre-Universitaire-de-Recherche-et-dApplication-en-Tldtection-CURAT-de-lUniversit-Felix-Houphouet-Boigny": {
+                "name": "遥感研究与应用中心 YouthMappers",
+                "description": "菲利克斯·乌弗埃·博瓦尼大学遥感研究与应用中心的 YouthMappers 分会",
+                "extendedDescription": "我们分会目的是推广合作绘制自由地图的使用，以及在研究与决策应用时运用 OpenStreetMap 资料，帮助学生在他们研究时能生成自己的资料。"
+            },
+            "ym-General-Lansana-Conte-University": {
+                "name": "兰萨纳·孔戴将军大学 YouthMappers",
+                "description": "兰萨纳·孔戴将军大学 YouthMappers 分会",
+                "extendedDescription": "兰萨纳·孔戴大学将军的 YouthMappers 是一个非营利性社区，愿意为几内亚地图和世界其他地区做出贡献。 我们正在促进使用GIS和开放数据来构建决策支持工具。 我们还致力于在学生和当地社区中建立能力。"
+            },
+            "ym-Institute-of-Science-and-Veterinary-Medicine": {
+                "name": "YouthMappers ISSMV Dalaba",
+                "description": "科学和兽医学院 YouthMappers 分会",
+                "extendedDescription": "YouthMappers ISSMV Dabala是一个非营利组织，致力于促进人道主义地图绘制以及使用开源和开放数据在几内亚建立决策工具。"
+            },
+            "ym-Kwame-Nkrumah-University-of-Science-and-Technology": {
+                "name": "恩克鲁玛科技大学的 YouthMappers",
+                "description": "恩克鲁玛科技大学的 YouthMappers 分会"
+            },
+            "ym-The-Gambia-YMCA-University-of-the-Gambia": {
+                "name": "Connected YouthMappers",
+                "description": "冈比亚基督教青年会/冈比亚大学的 YouthMappers 分会",
+                "extendedDescription": "Connected YouthMappers 由年轻甘比亚人组成，希望能改变和协助国家发展"
+            },
+            "ym-Universit-de-NZrkor": {
+                "name": "恩泽雷科雷 YouthMappers",
+                "description": "恩泽雷科雷大学 YouthMappers 分会",
+                "extendedDescription": "YouthMappers是一个小组，可以绘制内陆社区的地图，并在发生灾难或流行病时做出决策。 它还允许免费访问数据的生产和使用。"
+            },
+            "ym-University-of-Cape-Coast": {
+                "name": "UCC地理学协会",
+                "description": "海岸角大学的 YouthMappers 分会",
+                "extendedDescription": "我们协会涵盖了开普敦大学地理与区域规划系所有正在阅读和阅读地理的学生。 我们的主要目的是提高对教室内外学科的兴趣。 我们的座右铭是“我们了解地球及其居民”。"
+            },
+            "ym-University-of-Energy-and-Natural-Resources": {
+                "name": "Eco-Club",
+                "description": "加纳能源与自然资源大学的 YouthMappers 分会",
+                "extendedDescription": "为所有公民提供有关不断恶化的环境的良好教育，并最大程度地利用环境的重建来维持人类的生存。"
+            },
+            "ym-University-of-Ghana": {
+                "name": "加纳大学 YouthMappers",
+                "description": "加纳大学 YouthMappers 分会",
+                "extendedDescription": "加大 YouthMappers由拥有GIS和遥感知识和技能的研究生和本科生组成。 该俱乐部由一支充满活力的团队组成，该团队随时准备通过绘图解决社会问题并缓解环境问题。 我们的基本原则是能力建设、增强和团队合作。"
+            },
+            "ym-University-of-Mines-and-Technology": {
+                "name": "加纳矿业大学 YouthMappers",
+                "description": "加纳矿业大学 YouthMappers 分会",
+                "extendedDescription": "UMaT YouthMappers是一群学生志愿者，他们旨在为学生提供机会，以提高他们在制图领域的技能，并创建开放的地理数据和分析，以应对全球范围内本地定义的发展挑战。"
             }
         }
     }

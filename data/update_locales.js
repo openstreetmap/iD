@@ -215,6 +215,9 @@ function asyncMap(inputs, func, callback) {
 function getLangNamesInNativeLang() {
     // manually add languages we want that aren't in CLDR
     var unordered = {
+        'oc': {
+            nativeName: 'Occitan'
+        },
         'ja-Hira': {
             base: 'ja',
             script: 'Hira'

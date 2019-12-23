@@ -97,18 +97,7 @@
                 "connected_to_hidden": "Това не може да бъде кръгло, защото е свързано със скрит обект."
             },
             "orthogonalize": {
-                "title": "Квадрат",
-                "description": {
-                    "line": "Изправяне на ъглите на отсечката.",
-                    "area": "Изправете ъглите на полигона."
-                },
-                "annotation": {
-                    "line": "Изправени са ъгли на отсечка.",
-                    "area": "Изправихте ъглите на площен обект."
-                },
-                "not_squarish": "Това не може да бъде квадрат, защото не е квадратно.",
-                "too_large": "Това не може да бъде направено квадратно, защото не достатъчна част от него е видима в момента.",
-                "connected_to_hidden": "Това не може да бъде кръгло, защото е свързано със скрит обект."
+                "title": "Квадрат"
             },
             "straighten": {
                 "title": "Изправям",
@@ -358,12 +347,6 @@
         "feature_info": {
             "hidden_warning": "{count} скрити обекти",
             "hidden_details": "Следните обекти са скрити: {details}"
-        },
-        "status": {
-            "error": "Не може да се свърже с API-то.",
-            "offline": "API-то е офлайн. Моля опитайте да редактирате по-късно.",
-            "readonly": "API-то е в режим само за четене. Ще трябва да почакате, за да запазите вашите промени.",
-            "rateLimit": "API-то ограничава анонимните конекции. Може да поправите това, като влезете."
         },
         "commit": {
             "title": "Качете в OpenStreetMap",
@@ -1316,7 +1299,6 @@
                     "label": "Парапет"
                 },
                 "hashtags": {
-                    "label": "Препоръчани хаштагове",
                     "placeholder": "#пример"
                 },
                 "healthcare": {
@@ -1530,7 +1512,6 @@
                     "label": "Мрежа"
                 },
                 "network_bicycle": {
-                    "label": "Вид мрежа",
                     "options": {
                         "icn": "Международна",
                         "lcn": "Локална",
@@ -1540,7 +1521,6 @@
                     "placeholder": "Локална, Регионална, Национална, Международна"
                 },
                 "network_foot": {
-                    "label": "Вид мрежа",
                     "options": {
                         "iwn": "Международна",
                         "lwn": "Локална",
@@ -1550,7 +1530,6 @@
                     "placeholder": "Локална, Регионална, Национална, Международна"
                 },
                 "network_horse": {
-                    "label": "Вид мрежа",
                     "options": {
                         "ihn": "Международна",
                         "lhn": "Локална",
@@ -1871,9 +1850,6 @@
                 "amenity/car_rental": {
                     "name": "Коли под наем"
                 },
-                "amenity/car_sharing": {
-                    "name": "Споделяне на коли"
-                },
                 "amenity/car_wash": {
                     "name": "Автомивка"
                 },
@@ -2015,9 +1991,6 @@
                 "emergency/phone": {
                     "name": "Телефон за спешна помощ"
                 },
-                "highway": {
-                    "name": "Път"
-                },
                 "highway/bridleway": {
                     "name": "Конска пътека"
                 },
@@ -2153,9 +2126,6 @@
                 "landuse/vineyard": {
                     "name": "Лозе"
                 },
-                "leisure": {
-                    "name": "Отдих"
-                },
                 "leisure/garden": {
                     "name": "Градина"
                 },
@@ -2201,9 +2171,6 @@
                 "line": {
                     "name": "Линия"
                 },
-                "man_made": {
-                    "name": "Съоръжения"
-                },
                 "man_made/breakwater": {
                     "name": "Вълнолом"
                 },
@@ -2233,9 +2200,6 @@
                 },
                 "man_made/water_works": {
                     "name": "Помпена станция"
-                },
-                "natural": {
-                    "name": "Природа"
                 },
                 "natural/bay": {
                     "name": "Залив"
@@ -2285,9 +2249,6 @@
                 "natural/wetland": {
                     "name": "Блатиста зона"
                 },
-                "natural/wood": {
-                    "name": "Гора"
-                },
                 "office": {
                     "name": "Офис"
                 },
@@ -2318,9 +2279,6 @@
                 "point": {
                     "name": "Точка"
                 },
-                "power": {
-                    "name": "Енергетика"
-                },
                 "power/line": {
                     "name": "Електропровод"
                 },
@@ -2335,9 +2293,6 @@
                 },
                 "power/transformer": {
                     "name": "Трансформатор"
-                },
-                "railway": {
-                    "name": "ЖП транспорт"
                 },
                 "railway/abandoned": {
                     "name": "Изоставена железопътна линия"
@@ -2510,9 +2465,6 @@
                 "shop/video": {
                     "name": "Видеотека"
                 },
-                "tourism": {
-                    "name": "Туризъм"
-                },
                 "tourism/alpine_hut": {
                     "name": "Хижа"
                 },
@@ -2608,9 +2560,6 @@
                 },
                 "type/route_master": {
                     "name": "Маршрутна схема"
-                },
-                "waterway": {
-                    "name": "Води"
                 },
                 "waterway/canal": {
                     "name": "Канал"
@@ -2833,9 +2782,6 @@
             }
         },
         "community": {
-            "be-facebook": {
-                "description": "Картографи и OpenStreetMap във Фейсбук в Белгия"
-            },
             "Central-Pennsylvania-OSM": {
                 "name": "Централна Пенсилвания OSM"
             },
@@ -2849,6 +2795,9 @@
             },
             "OSM-US-Slack": {
                 "name": "OpenStreetMap US Slack"
+            },
+            "be-facebook": {
+                "description": "Картографи и OpenStreetMap във Фейсбук в Белгия"
             }
         }
     }

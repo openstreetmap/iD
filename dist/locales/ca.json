@@ -7,7 +7,6 @@
             "undo": "Desfés",
             "zoom_to": "escala a",
             "copy": "copia",
-            "open_wikidata": "obre a wikidata.org",
             "favorite": "preferit"
         },
         "modes": {
@@ -105,19 +104,7 @@
             },
             "orthogonalize": {
                 "title": "Quadra",
-                "description": {
-                    "vertex": "Quadra aquesta cantonada.",
-                    "line": "Quadra les cantonades d'aquesta línia",
-                    "area": "Quadra les cantonades d'aquesta àrea"
-                },
-                "key": "Q",
-                "annotation": {
-                    "line": "Heu quadrat les cantonades d'una línia.",
-                    "area": "Heu quadrat les cantonades d'una àrea."
-                },
-                "not_squarish": "Això no es pot quadrar perquè no té forma quadrada",
-                "too_large": "Això no es pot quadrar perquè no hi ha suficient superfície visible.",
-                "connected_to_hidden": "No es pot distribuir en quadrat perquè està connectat a un objecte ocult."
+                "key": "Q"
             },
             "straighten": {
                 "title": "Fes recte",
@@ -369,12 +356,6 @@
         "feature_info": {
             "hidden_warning": "{count} objectes ocults",
             "hidden_details": "Aquests objectes estan ocults: {details}"
-        },
-        "status": {
-            "error": "No es pot connectar amb l'API.",
-            "offline": "l'API està fora de línia. Si us plau proveu d'editar més tard.",
-            "readonly": "L'API es troba en mode només lectura. Us haureu d'esperar per desar els vostres canvis.",
-            "rateLimit": "L'API està limitant connexions anònimes. Pots arreglar això iniciant sessió."
         },
         "commit": {
             "title": "Puja a l'OpenStreetMap",
@@ -1834,7 +1815,6 @@
                     "label": "Barana"
                 },
                 "hashtags": {
-                    "label": "Hashtags suggerits",
                     "placeholder": "#exemple"
                 },
                 "healthcare": {
@@ -2093,7 +2073,6 @@
                     "label": "Xarxa"
                 },
                 "network_bicycle": {
-                    "label": "Tipus de xarxa",
                     "options": {
                         "icn": "Internacional",
                         "lcn": "Local",
@@ -2103,7 +2082,6 @@
                     "placeholder": "Local, Regional, Nacional, Internacional"
                 },
                 "network_foot": {
-                    "label": "Tipus de xarxa",
                     "options": {
                         "iwn": "Internacional",
                         "lwn": "Local",
@@ -2113,7 +2091,6 @@
                     "placeholder": "Local, Regional, Nacional, Internacional"
                 },
                 "network_horse": {
-                    "label": "Tipus de xarxa",
                     "options": {
                         "ihn": "Internacional",
                         "lhn": "Local",
@@ -2847,12 +2824,6 @@
                 "aerialway/rope_tow": {
                     "name": "Corda remuntadora"
                 },
-                "aerialway/station": {
-                    "name": "Estació de transport per cable"
-                },
-                "aerialway/t-bar": {
-                    "name": "Teleesquí doble"
-                },
                 "aeroway": {
                     "name": "Infraestructura aeroportuària"
                 },
@@ -2948,16 +2919,9 @@
                     "name": "Cafè",
                     "terms": "Cafè, bar, cafeteria"
                 },
-                "amenity/car_pooling": {
-                    "name": "Compartició de cotxes"
-                },
                 "amenity/car_rental": {
                     "name": "Lloguer de cotxes",
                     "terms": "Lloguer de cotxes, Servei de lloguer de turismes"
-                },
-                "amenity/car_sharing": {
-                    "name": "Servei de compartició de cotxe",
-                    "terms": "Servei de compartició de cotxe, compartició de cotxes"
                 },
                 "amenity/car_wash": {
                     "name": "Rentat de cotxes",
@@ -3343,14 +3307,8 @@
                     "name": "Àrea",
                     "terms": "Àrea"
                 },
-                "area/highway": {
-                    "name": "Superfície de la carretera"
-                },
                 "attraction/amusement_ride": {
                     "name": "Atracció de fira"
-                },
-                "attraction/pirate_ship": {
-                    "name": "Vaixell pirata"
                 },
                 "attraction/roller_coaster": {
                     "name": "Muntanya russa"
@@ -3644,9 +3602,6 @@
                 "craft/insulator": {
                     "name": "Aïllador"
                 },
-                "craft/jeweler": {
-                    "name": "Joieria"
-                },
                 "craft/key_cutter": {
                     "name": "Fabricant de claus"
                 },
@@ -3655,9 +3610,6 @@
                 },
                 "craft/metal_construction": {
                     "name": "Construccions metàliques"
-                },
-                "craft/optician": {
-                    "name": "Òptica"
                 },
                 "craft/painter": {
                     "name": "Pintor"
@@ -3673,9 +3625,6 @@
                 },
                 "craft/plumber": {
                     "name": "Llauner"
-                },
-                "craft/pottery": {
-                    "name": "Terrisseria"
                 },
                 "craft/rigger": {
                     "name": "Armador d'embarcacions"
@@ -3795,9 +3744,6 @@
                 "healthcare/blood_donation": {
                     "name": "Centre de donació de sang"
                 },
-                "highway": {
-                    "name": "Via"
-                },
                 "highway/bridleway": {
                     "name": "Camí de ferradura",
                     "terms": "Camí de ferradura, cavall, camí eqüestre, via eqüestre, ferradura, via de ferradura"
@@ -3812,6 +3758,10 @@
                 "highway/footway": {
                     "name": "Camí per a vianants",
                     "terms": "Camí per a vianants, carrer peatonal, camí per a peatons, a peu, camí per caminar, vianant, vianants, peató, peatons, transeünt, transeünts, peatonal"
+                },
+                "highway/footway/sidewalk": {
+                    "name": "Vorera",
+                    "terms": "Vorera, voravia"
                 },
                 "highway/give_way": {
                     "name": "Senyal de cediu el pas"
@@ -3975,9 +3925,6 @@
                 "junction": {
                     "name": "Encreuament"
                 },
-                "landuse": {
-                    "name": "Ús de la terra"
-                },
                 "landuse/allotments": {
                     "name": "Jardí comunitari"
                 },
@@ -4072,9 +4019,6 @@
                     "name": "Vinya",
                     "terms": "Vinyar, Vinyal, Vinyet, Vinya"
                 },
-                "leisure": {
-                    "name": "Esbarjo"
-                },
                 "leisure/adult_gaming_centre": {
                     "name": "Centre d'oci adult"
                 },
@@ -4094,9 +4038,6 @@
                 "leisure/dog_park": {
                     "name": "Parc Caní",
                     "terms": "Pipi-can,Parc per gossos"
-                },
-                "leisure/firepit": {
-                    "name": "Lloc per a fogueres"
                 },
                 "leisure/fitness_centre": {
                     "name": "Gimnàs / Centre de Fitness"
@@ -4206,18 +4147,12 @@
                     "name": "Línia",
                     "terms": "Línia"
                 },
-                "man_made": {
-                    "name": "Fet per l'home"
-                },
                 "man_made/adit": {
                     "name": "Entrada"
                 },
                 "man_made/breakwater": {
                     "name": "trencaonades",
                     "terms": "Escullera,Espigó,Espatller"
-                },
-                "man_made/bridge": {
-                    "name": "Pont"
                 },
                 "man_made/chimney": {
                     "name": "Xemeneia"
@@ -4291,9 +4226,6 @@
                     "name": "Fàbrica",
                     "terms": "Factoria"
                 },
-                "natural": {
-                    "name": "Natural"
-                },
                 "natural/bay": {
                     "name": "Badia"
                 },
@@ -4366,10 +4298,6 @@
                 },
                 "natural/wetland": {
                     "name": "Aiguamolls"
-                },
-                "natural/wood": {
-                    "name": "Bosc",
-                    "terms": "Bosc, Forest"
                 },
                 "noexit/yes": {
                     "name": "Sense sortida"
@@ -4492,9 +4420,6 @@
                     "name": "Punt",
                     "terms": "Punt"
                 },
-                "power": {
-                    "name": "Electricitat"
-                },
                 "power/generator": {
                     "name": "Generador elèctric"
                 },
@@ -4527,9 +4452,6 @@
                 },
                 "public_transport/station_train": {
                     "name": "Estació de ferrocarril"
-                },
-                "railway": {
-                    "name": "Ferrocarril"
                 },
                 "railway/abandoned": {
                     "name": "Via fèrria abandonada"
@@ -4964,9 +4886,6 @@
                     "name": "Botiga de vins",
                     "terms": "Celler, Licoreria"
                 },
-                "tourism": {
-                    "name": "Turisme"
-                },
                 "tourism/alpine_hut": {
                     "name": "Refugi de muntanya"
                 },
@@ -5145,9 +5064,6 @@
                 },
                 "type/waterway": {
                     "name": "Curs d'aigua"
-                },
-                "waterway": {
-                    "name": "Via aqüífera"
                 },
                 "waterway/boatyard": {
                     "name": "Dic sec"
@@ -5506,30 +5422,70 @@
             }
         },
         "community": {
-            "cape-coast-youthmappers": {
-                "name": "Universitat de Cape Coast YouthMappers",
-                "description": "Segueix-nos a Twitter: {url}",
-                "extendedDescription": "Aquest és l'identificacdor oficial dels Joves Cartografistes de la Universitat de Cape Coast, Ghana. Ens encanten els mapes, les dades obertes i ajudar a les persones vulnerables."
+            "LATAM-Twitter": {
+                "description": "Segueix-nos a Twitter a {url}"
             },
-            "osm-gh-facebook": {
-                "name": "OpenStreetMap Ghana a Facebook",
-                "description": "Grup de Facebook per a gent interessada en OpenStreetMap."
+            "OSM-AR-telegram": {
+                "name": "Telegram d'OpenStreetMap Argentina",
+                "description": "Uneix-te a la comunitat argentina d'OpenStreetMap a Telegram"
             },
-            "osm-gh-twitter": {
-                "name": "OpenStreetMap Ghana a Twitter",
-                "description": "Segueix-nos a Twitter: {url}"
-            },
-            "talk-gh": {
-                "name": "Llista de correu Talk-gh"
-            },
-            "osm-mg-facebook": {
-                "name": "Grup de Facebook de OpenStreetMap a Madagascar"
+            "OSM-AR-twitter": {
+                "name": "Twitter d'Argentina d'OpenStreetMap",
+                "description": "Segueix-nos a Twitter a {url}"
             },
             "OSM-BGD-facebook": {
                 "name": "OpenStreetMap Bangladesh"
             },
+            "OSM-CL-twitter": {
+                "description": "Segueix-nos a Twitter a {url}"
+            },
+            "OSM-CO": {
+                "name": "OpenStreetMap Colòmbia"
+            },
+            "OSM-CO-facebook": {
+                "name": "Facebook de Colòmbia d'OpenStreetMap"
+            },
+            "OSM-CO-mailinglist": {
+                "name": "Llista de correu Talk-co",
+                "description": "Una llista de correu per comentar OpenStreetMap de Colòmbia"
+            },
+            "OSM-CO-twitter": {
+                "name": "Twitter de Colòmbia d'OpenStreetMap",
+                "description": "Seguiu-nos a Twitter a [url]"
+            },
+            "OSM-Discord": {
+                "name": "Discord d'OpenStreetMap"
+            },
+            "OSM-ES-mailinglist": {
+                "name": "Llista de correu Talk-es",
+                "description": "Una llista de correu per comentar OpenStreetMap d'Espanya"
+            },
+            "OSM-Facebook": {
+                "name": "OpenStreetMap al Facebook"
+            },
             "OSM-India-facebook": {
                 "description": "Millora OpenStreetMap a l'Índia"
+            },
+            "OSM-PE": {
+                "name": "OpenStreetMap Perú"
+            },
+            "OSM-Reddit": {
+                "name": "OpenStreetMap a Reddit",
+                "description": "/r/openstreetmap/ és un bon lloc per aprendre més sobre OpenStreetMap. Pregunta'ns qualsevol cosa!"
+            },
+            "OSM-SoCal": {
+                "name": "OpenStreetMap Califòrnia del Sud",
+                "extendedDescription": "OpenStreetMap (OSM) Califòrnia del Sud és per a tothom interessat en el mapatge que s'uneixi a treballar amb OpenStreetMap. OpenStreetMap, la Viquipèdia dels mapes, és un mapa de codi obert gratuït del món sent creat per més de 1000000 de voluntaris al voltant del món. Tothom és benvingut. Si no coneixes OpenStreetMap, t'ensenyarem. Si tens una idea d'un projecte de mapatge o fins i tot una excursió de camp que el grup pot fer, genial!"
+            },
+            "OSM-TW-facebook": {
+                "name": "Comunitat de Taiwan d'OpenStreetMap",
+                "description": "Grup de Facebook per mapadors i usuaris d'OpenStreetMap per discutir assumptes sobre Taiwan."
+            },
+            "OSM-br-twitter": {
+                "description": "Segueix-nos a Twitter a {url}"
+            },
+            "OSM-help": {
+                "name": "Ajuda d'OpenStreetMap"
             },
             "OSM-india-twitter": {
                 "name": "Twitter de l'Índia d'OpenStreetMap"
@@ -5545,80 +5501,40 @@
             "OSM-japan-website": {
                 "name": "OpenStreetMap Japó"
             },
-            "OSM-TW-facebook": {
-                "name": "Comunitat de Taiwan d'OpenStreetMap",
-                "description": "Grup de Facebook per mapadors i usuaris d'OpenStreetMap per discutir assumptes sobre Taiwan."
+            "OSMF": {
+                "name": "Fundació OpenStreetMap"
+            },
+            "PHXGeo-twitter": {
+                "description": "Segueix-nos a Twitter a {url}"
             },
             "at-twitter": {
                 "name": "Twitter d'Àustria d'OpenStreetMap"
-            },
-            "osm-at": {
-                "name": "OpenStreetMap Àustria"
             },
             "be-twitter": {
                 "name": "Twitter de Bèlgica d'OpenStreetMap",
                 "description": "OSM Bèlgica a Twitter: @osm_be"
             },
-            "OSM-ES-mailinglist": {
-                "name": "Llista de correu Talk-es",
-                "description": "Una llista de correu per comentar OpenStreetMap d'Espanya"
+            "cape-coast-youthmappers": {
+                "name": "Universitat de Cape Coast YouthMappers",
+                "description": "Segueix-nos a Twitter: {url}",
+                "extendedDescription": "Aquest és l'identificacdor oficial dels Joves Cartografistes de la Universitat de Cape Coast, Ghana. Ens encanten els mapes, les dades obertes i ajudar a les persones vulnerables."
             },
-            "OSM-SoCal": {
-                "name": "OpenStreetMap Califòrnia del Sud",
-                "extendedDescription": "OpenStreetMap (OSM) Califòrnia del Sud és per a tothom interessat en el mapatge que s'uneixi a treballar amb OpenStreetMap. OpenStreetMap, la Viquipèdia dels mapes, és un mapa de codi obert gratuït del món sent creat per més de 1000000 de voluntaris al voltant del món. Tothom és benvingut. Si no coneixes OpenStreetMap, t'ensenyarem. Si tens una idea d'un projecte de mapatge o fins i tot una excursió de camp que el grup pot fer, genial!"
+            "osm-at": {
+                "name": "OpenStreetMap Àustria"
             },
-            "PHXGeo-twitter": {
-                "description": "Segueix-nos a Twitter a {url}"
+            "osm-gh-facebook": {
+                "name": "OpenStreetMap Ghana a Facebook",
+                "description": "Grup de Facebook per a gent interessada en OpenStreetMap."
             },
-            "OSM-AR-telegram": {
-                "name": "Telegram d'OpenStreetMap Argentina",
-                "description": "Uneix-te a la comunitat argentina d'OpenStreetMap a Telegram"
+            "osm-gh-twitter": {
+                "name": "OpenStreetMap Ghana a Twitter",
+                "description": "Segueix-nos a Twitter: {url}"
             },
-            "OSM-AR-twitter": {
-                "name": "Twitter d'Argentina d'OpenStreetMap",
-                "description": "Segueix-nos a Twitter a {url}"
+            "osm-mg-facebook": {
+                "name": "Grup de Facebook de OpenStreetMap a Madagascar"
             },
-            "OSM-br-twitter": {
-                "description": "Segueix-nos a Twitter a {url}"
-            },
-            "OSM-CL-twitter": {
-                "description": "Segueix-nos a Twitter a {url}"
-            },
-            "OSM-CO-facebook": {
-                "name": "Facebook de Colòmbia d'OpenStreetMap"
-            },
-            "OSM-CO-mailinglist": {
-                "name": "Llista de correu Talk-co",
-                "description": "Una llista de correu per comentar OpenStreetMap de Colòmbia"
-            },
-            "OSM-CO-twitter": {
-                "name": "Twitter de Colòmbia d'OpenStreetMap",
-                "description": "Seguiu-nos a Twitter a [url]"
-            },
-            "OSM-CO": {
-                "name": "OpenStreetMap Colòmbia"
-            },
-            "OSM-PE": {
-                "name": "OpenStreetMap Perú"
-            },
-            "LATAM-Twitter": {
-                "description": "Segueix-nos a Twitter a {url}"
-            },
-            "OSM-Discord": {
-                "name": "Discord d'OpenStreetMap"
-            },
-            "OSM-Facebook": {
-                "name": "OpenStreetMap al Facebook"
-            },
-            "OSM-help": {
-                "name": "Ajuda d'OpenStreetMap"
-            },
-            "OSM-Reddit": {
-                "name": "OpenStreetMap a Reddit",
-                "description": "/r/openstreetmap/ és un bon lloc per aprendre més sobre OpenStreetMap. Pregunta'ns qualsevol cosa!"
-            },
-            "OSMF": {
-                "name": "Fundació OpenStreetMap"
+            "talk-gh": {
+                "name": "Llista de correu Talk-gh"
             }
         }
     }

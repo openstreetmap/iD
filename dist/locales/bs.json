@@ -75,16 +75,7 @@
                 "not_closed": "Ovo se ne može napraviti kružnim jer to nije petlja."
             },
             "orthogonalize": {
-                "title": "Kvadrat",
-                "description": {
-                    "line": "Oblikovati uglove ove linije u kvadrat.",
-                    "area": "Oblikovati uglove ovo područje u kvadrat."
-                },
-                "annotation": {
-                    "line": "Ispravljeni uglovi linije.",
-                    "area": "Ispravljeni uglovi područja."
-                },
-                "not_squarish": "Ovo se ne može napraviti kvadratom jer nema kvadratnu formu."
+                "title": "Kvadrat"
             },
             "straighten": {
                 "title": "Ispraviti",
@@ -173,11 +164,6 @@
             "localized_translation_name": "Naziv"
         },
         "loading_auth": "Povezivanje na OpenStreetMap...",
-        "status": {
-            "error": "Nemoguće povezati na API.",
-            "offline": "API nije na mreži. Molimo pokušajte uređivati kasnije.",
-            "readonly": "API je samo za čitanje. Moraćete sačekati da sačuvate Vaše promjene."
-        },
         "commit": {
             "upload_explanation": "Promjene koje postavite će biti vidljive na svim kartama koje koriste OpenStreetMap podatke.",
             "upload_explanation_with_user": "Promjene koje postavite kao {user} će biti vidljive na svim kartama koje koriste OpenStreetMap podatke.",
@@ -693,10 +679,6 @@
                     "name": "Rent-a-car",
                     "terms": "Iznajmljivanje automobila,najam automobila,rent-a-car"
                 },
-                "amenity/car_sharing": {
-                    "name": "\"Car Sharing\"",
-                    "terms": "razmjena automobila,dijeljenje automobila"
-                },
                 "amenity/car_wash": {
                     "name": "Autopraonica",
                     "terms": "autopraonica,samouslužna autopraonica,praonica automobila"
@@ -951,9 +933,6 @@
                 "craft/insulator": {
                     "name": "Izolator"
                 },
-                "craft/jeweler": {
-                    "name": "Zlatar"
-                },
                 "craft/key_cutter": {
                     "name": "Izrada ključeva"
                 },
@@ -963,17 +942,11 @@
                 "craft/metal_construction": {
                     "name": "Metalne konstrukcije"
                 },
-                "craft/optician": {
-                    "name": "Optičar"
-                },
                 "craft/photographer": {
                     "name": "Fotograf"
                 },
                 "craft/plumber": {
                     "name": "Vodoinstalater"
-                },
-                "craft/pottery": {
-                    "name": "Grnčarija"
                 },
                 "craft/roofer": {
                     "name": "Krovopokrivač"
@@ -1028,9 +1001,6 @@
                 "golf/tee": {
                     "name": "Tee Box",
                     "terms": "\"Tee\" kutija,kutija područja na početku rupe"
-                },
-                "highway": {
-                    "name": "Put"
                 },
                 "highway/bridleway": {
                     "name": "Konjska staza",
@@ -1211,9 +1181,6 @@
                     "name": "Vinograd",
                     "terms": "vinograd,uzgoj grožđa"
                 },
-                "leisure": {
-                    "name": "Rekreacija"
-                },
                 "leisure/common": {
                     "name": "Uobičajeno",
                     "terms": "uobičajeno,uobičajeno ime,uobičajeni naziv"
@@ -1286,9 +1253,6 @@
                     "name": "Linija",
                     "terms": "linija"
                 },
-                "man_made": {
-                    "name": "Napravljeno ljudskom rukom"
-                },
                 "man_made/breakwater": {
                     "name": "Lukobran",
                     "terms": "lukobran,valolom,utvrda obale"
@@ -1335,9 +1299,6 @@
                 "man_made/water_works": {
                     "name": "Vodosnadbjevanje",
                     "terms": "vodosnadbjevanje,snadbjevanje vodom"
-                },
-                "natural": {
-                    "name": "Prirodno područje"
                 },
                 "natural/bay": {
                     "name": "Zaliv",
@@ -1410,10 +1371,6 @@
                 "natural/wetland": {
                     "name": "Močvara",
                     "terms": "močvara,tresetište,mrtvaja"
-                },
-                "natural/wood": {
-                    "name": "Šuma",
-                    "terms": "šuma,drvo"
                 },
                 "office": {
                     "name": "Ured",
@@ -1503,9 +1460,6 @@
                     "name": "Tačka",
                     "terms": "tačka"
                 },
-                "power": {
-                    "name": "Energija"
-                },
                 "power/generator": {
                     "name": "Generator električne energije",
                     "terms": "generator el. energije,generator"
@@ -1532,9 +1486,6 @@
                 "power/transformer": {
                     "name": "Transformator",
                     "terms": "transformator,transformator el. energije"
-                },
-                "railway": {
-                    "name": "Željeznička pruga"
                 },
                 "railway/abandoned": {
                     "name": "Napuštena željeznica",
@@ -1757,9 +1708,6 @@
                     "name": "Video klub",
                     "terms": "videoklub,videoteka"
                 },
-                "tourism": {
-                    "name": "Turizam"
-                },
                 "tourism/alpine_hut": {
                     "name": "Planinski dom",
                     "terms": "alpska koliba,planinarski dom,planinarska kuća"
@@ -1882,9 +1830,6 @@
                 "type/route_master": {
                     "name": "Informacije o rutama",
                     "terms": "informacije o rutama,informacije o trasama"
-                },
-                "waterway": {
-                    "name": "Vodotok"
                 },
                 "waterway/canal": {
                     "name": "Kanal",

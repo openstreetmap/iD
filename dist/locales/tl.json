@@ -80,18 +80,7 @@
                 "connected_to_hidden": "Hindi magawang pabilog dahil may nakatagong feature na konektado dito."
             },
             "orthogonalize": {
-                "title": "Iskawalado",
-                "description": {
-                    "line": "Gawing iskwalado ang mga kanto ng linyang ito.",
-                    "area": "Gawing iskwalado ang mga kanto ng area o poligong ito."
-                },
-                "annotation": {
-                    "line": "Ginawang iskawalado ang bawat kanto ng linya.",
-                    "area": "Ginawang iskawalado ang bawat kanto ng area o poligon."
-                },
-                "not_squarish": "Hindi maaring gawing iskwalado.",
-                "too_large": "Hindi ito maaaring gawing iskuwalado dahil hindi sapat ang kasalukuyang nakikita sa mapa.",
-                "connected_to_hidden": "Hindi magawang iskawaldo dahil may nakatagong feature na konektado dito."
+                "title": "Iskawalado"
             },
             "straighten": {
                 "title": "Ituwid",
@@ -281,11 +270,6 @@
         "feature_info": {
             "hidden_warning": "{count} na nakatagong features",
             "hidden_details": "Nakatago ang mga features na ito: {details}"
-        },
-        "status": {
-            "error": "Hindi maka-konekta sa API.",
-            "offline": "Kasalukuyang offline ang API. Subukang mag-edit muli sa ibang pagkakataon.",
-            "readonly": "Kasalukuyang nasa read-only ang API. Kailangan mong maghintay upang i-save ang iyong mga pagbabago."
         },
         "commit": {
             "title": "Nai-upload sa OpenStreetMap",

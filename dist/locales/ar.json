@@ -7,7 +7,6 @@
             "undo": "تراجع",
             "zoom_to": "تكبير إلى",
             "copy": "نسخ",
-            "open_wikidata": "فتح على wikidata.org",
             "favorite": "المفضلة"
         },
         "toolbar": {
@@ -131,23 +130,7 @@
             },
             "orthogonalize": {
                 "title": "مربع",
-                "description": {
-                    "vertex": "تربيع هذا الركن.",
-                    "line": "ربّع زوايا هذا الخط.",
-                    "area": "ربّع زوايا هذه المنطقة."
-                },
-                "key": "Q",
-                "annotation": {
-                    "vertex": "تم تربيع ركن واحد.",
-                    "line": "ربّع زوايا الخط.",
-                    "area": "ربّع زوايا المنطقة."
-                },
-                "end_vertex": "لا يمكن تربيع هذه لأنها عُقدة نهاية.",
-                "square_enough": "لا يمكن جعلها مربعة أكثر مما هي عليه.",
-                "not_squarish": "لا يمكن جعلها مربعة لأنها ليست رباعية.",
-                "too_large": "لا يمكن جعلها مربعة لأنه لا يظهر جزء كافٍ منها.",
-                "connected_to_hidden": "لا يمكن جعلها مربعة لأنها مرتبطة بعنصر مخفي.",
-                "not_downloaded": "لا يمكن جعلها مربعة لأن أجزاءً منها لم يتم تنزيله بعد."
+                "key": "Q"
             },
             "straighten": {
                 "title": "استقامة",
@@ -517,12 +500,6 @@
             "hidden_warning": "{count} عناصر مخفية",
             "hidden_details": "هذه العناصر مخفية حاليا: {details}"
         },
-        "status": {
-            "error": "تعذر اﻹتصال مع واجهة التطبيق البرمجية API.",
-            "offline": "حالة API غير متصلة. الرجاء محاولة التحرير لاحقا.",
-            "readonly": "حالة API هي للقراءة فقط. سوف تحتاج إلى الإنتظار لحفظ تغييراتك.",
-            "rateLimit": "واجهة التطبيقات البرمجية API تحد من الاتصالات المجهولة. يمكنك إصلاح ذلك عن طريق تسجيل الدخول."
-        },
         "commit": {
             "title": "رفع على OpenStreetMap",
             "upload_explanation": "التغييرات التي قمت برفعها سوف تظهر على كل الخرائط التي تستخدم بيانات OpenStreetMap.",
@@ -615,7 +592,6 @@
         },
         "geocoder": {
             "search": "ابحث في جميع أنحاء العالم...",
-            "no_results_visible": "لا يوجد نتائج في المنطقة الظاهرة من الخريطة",
             "no_results_worldwide": "لم يُعثر على نتائج"
         },
         "geolocate": {
@@ -1412,12 +1388,6 @@
                 "building-building": {
                     "reference": "ينبغي ألا تتقاطع المباني إلا إذا كانت على طبقات مختلفة."
                 },
-                "building-highway": {
-                    "reference": "الطُرق التي تقطع المباني ينبغي أن ستستخدم جسورًا، أو أنفاقًا،أو أغطية، أو مداخل."
-                },
-                "building-railway": {
-                    "reference": "السكك الحديدية التي تقطع المباني ينبغي أن تستخدم جسورًا أو أنفاقًا."
-                },
                 "building-waterway": {
                     "reference": "المجاري المائية التي تقطع المباني ينبغي أن تستخدم أنفاقًا أو طبقات مختلفة."
                 },
@@ -1659,9 +1629,6 @@
                     "title": "ترقية الوسوم",
                     "annotation": "وسوم قديمة تمت ترقيتها."
                 },
-                "use_bridge_or_tunnel": {
-                    "title": "استخدم جسرًا أو نفقًا"
-                },
                 "use_different_layers": {
                     "title": "استخدم طبقات مختلفة"
                 },
@@ -1670,9 +1637,6 @@
                 },
                 "use_different_levels": {
                     "title": "استخدم مستويات مختلفة"
-                },
-                "use_tunnel": {
-                    "title": "استخدم نفقًا"
                 }
             }
         },
@@ -1970,9 +1934,7 @@
                 },
                 "display_options": {
                     "title": "عرض الخيارات",
-                    "background": "عرض خيارات الخلفية",
                     "background_switch": "عودة إلى آخر خلفية",
-                    "map_data": "عرض خيارات بيانات الخريطة",
                     "fullscreen": "بدء وضع ملء الشاشة",
                     "sidebar": "إظهار/إخفاء الشريط الجانبي",
                     "wireframe": "نمط الخطوط الرفيعة",
@@ -1987,9 +1949,7 @@
                     "search": "اعثر على عناصر تطابق نص البحث"
                 },
                 "with_selected": {
-                    "title": "مع العنصر المُختار",
-                    "edit_menu": "فتح قائمة التحرير",
-                    "zoom_to": "تكبير إلى العنصر المختار"
+                    "edit_menu": "فتح قائمة التحرير"
                 },
                 "vertex_selected": {
                     "title": "مع العقدة المختارة",
@@ -2003,12 +1963,10 @@
                 "title": "تحرير",
                 "drawing": {
                     "title": "رسم",
-                    "focus_add_feature": "التركيز على حقل البحث عن العناصر",
                     "add_point": "نمط \"إضافة نقطة\"",
                     "add_line": "نمط \"إضافة خط\"",
                     "add_area": "نمط \"إضافة مساحة\"",
                     "add_note": "نمط \"إضافة ملاحظة\"",
-                    "add_favorite": "إضافة عنصر مُفضّل",
                     "place_point": "إضافة نقطة أو ملاحظة",
                     "disable_snap": "اضغط مع الاستمرار لتعطيل ميزة الانجذاب للنقاط",
                     "stop_line": "إنهاء رسم خط أو مساحة"
@@ -2777,7 +2735,6 @@
                     "label": "سياج سلم (درابزين)"
                 },
                 "hashtags": {
-                    "label": "الهاشتاجات المقترحة",
                     "placeholder": "#مثال"
                 },
                 "healthcare": {
@@ -3075,7 +3032,6 @@
                     "label": "الشبكة"
                 },
                 "network_bicycle": {
-                    "label": "نوع الشبكة",
                     "options": {
                         "icn": "دولية",
                         "lcn": "محلية",
@@ -3085,7 +3041,6 @@
                     "placeholder": "محلية، إقليمية، وطنية، عالمية"
                 },
                 "network_foot": {
-                    "label": "نوع الشبكة",
                     "options": {
                         "iwn": "دولية",
                         "lwn": "محلية",
@@ -3095,7 +3050,6 @@
                     "placeholder": "محلية، إقليمية، وطنية، دولية"
                 },
                 "network_horse": {
-                    "label": "نوع الشبكة",
                     "options": {
                         "ihn": "دولية",
                         "lhn": "محلية",
@@ -3814,9 +3768,6 @@
                     "name": "برج التلفريك / المصعد التزلج",
                     "terms": "برج التلفريك ; المصعد التزلج"
                 },
-                "aerialway/station": {
-                    "name": "محطة النقل بالكابلات"
-                },
                 "aeroway": {
                     "name": "جوي"
                 },
@@ -3918,16 +3869,9 @@
                     "name": "مقهى",
                     "terms": "مقهى, مطعم, ناد ليلي"
                 },
-                "amenity/car_pooling": {
-                    "name": "مشاركة السيارة"
-                },
                 "amenity/car_rental": {
                     "name": "محل إيجار سيارات",
                     "terms": "محل استئجار السيارات"
-                },
-                "amenity/car_sharing": {
-                    "name": "محل مشاركة سيارة",
-                    "terms": "محل مشاركة السيارات"
                 },
                 "amenity/car_wash": {
                     "name": "غسيل سيارات",
@@ -4410,9 +4354,6 @@
                     "name": "منطقة",
                     "terms": "المساحة; مساحة; منطقة; المنطقة"
                 },
-                "area/highway": {
-                    "name": "سطح الطريق"
-                },
                 "attraction/big_wheel": {
                     "name": "دولاب هواء",
                     "terms": "دولاب هواء; العجلة الكبيرة"
@@ -4424,10 +4365,6 @@
                 "attraction/maze": {
                     "name": "متاهة",
                     "terms": "متاهة"
-                },
-                "attraction/pirate_ship": {
-                    "name": "سفينة قراصنة",
-                    "terms": "سفينة قراصنة"
                 },
                 "attraction/roller_coaster": {
                     "name": "السفينة الدوارة",
@@ -4727,9 +4664,6 @@
                     "name": "حرفي",
                     "terms": "حرفي"
                 },
-                "craft/jeweler": {
-                    "name": "بائع مجوهرات"
-                },
                 "craft/locksmith": {
                     "name": "قفال - صانع أقفال"
                 },
@@ -4752,10 +4686,6 @@
                 "craft/plumber": {
                     "name": "سباك",
                     "terms": "سباك; سمكري"
-                },
-                "craft/pottery": {
-                    "name": "مصنع فخار وخزف",
-                    "terms": "فخار; خزف; بورسلين"
                 },
                 "craft/roofer": {
                     "name": "بنّاء السقف",
@@ -4875,9 +4805,6 @@
                 "healthcare/speech_therapist": {
                     "name": "معالج النطق",
                     "terms": "معالج النطق، نطق"
-                },
-                "highway": {
-                    "name": "طريق سريع"
                 },
                 "highway/bridleway": {
                     "name": "طريق الخيول",
@@ -5086,9 +5013,6 @@
                     "name": "مفترق طرق",
                     "terms": "مفترق طرق"
                 },
-                "landuse": {
-                    "name": "أرض"
-                },
                 "landuse/aquaculture": {
                     "name": "مزرعة سمكية",
                     "terms": "مزرعة سمكية"
@@ -5207,9 +5131,6 @@
                     "name": "مزرعة العنب",
                     "terms": "مزرعة عنب"
                 },
-                "leisure": {
-                    "name": "الترفيه"
-                },
                 "leisure/beach_resort": {
                     "name": "منتجع الشاطئ",
                     "terms": "منتجع الشاطئ"
@@ -5233,10 +5154,6 @@
                 "leisure/dog_park": {
                     "name": "حديقة كلاب",
                     "terms": "حديقة كلاب"
-                },
-                "leisure/firepit": {
-                    "name": "موقد نار",
-                    "terms": "موقد"
                 },
                 "leisure/fitness_centre": {
                     "name": "مركز اللياقة البدنية",
@@ -5382,9 +5299,6 @@
                     "name": "طريق",
                     "terms": "طريق"
                 },
-                "man_made": {
-                    "name": "مباني صناعية"
-                },
                 "man_made/adit": {
                     "name": "مدخل منجم",
                     "terms": "مدخل; منجم; كهف;"
@@ -5392,10 +5306,6 @@
                 "man_made/breakwater": {
                     "name": "كاسر الأمواج",
                     "terms": "كاسر الأمواج"
-                },
-                "man_made/bridge": {
-                    "name": "جسر",
-                    "terms": "جسر"
                 },
                 "man_made/chimney": {
                     "name": "مدخنة",
@@ -5488,9 +5398,6 @@
                 "man_made/works": {
                     "name": "مصنع",
                     "terms": "مصنع"
-                },
-                "natural": {
-                    "name": "طبيعي"
                 },
                 "natural/bare_rock": {
                     "name": "صخور عارية",
@@ -5595,10 +5502,6 @@
                 "natural/wetland": {
                     "name": "أرض رطبة",
                     "terms": "أرض رطبة; مستنقع; هور"
-                },
-                "natural/wood": {
-                    "name": "غابة أخشاب",
-                    "terms": "غابة أخشاب"
                 },
                 "noexit/yes": {
                     "name": "لا يوجد مخرج",
@@ -5809,9 +5712,6 @@
                     "name": "نقطة",
                     "terms": "نقطة"
                 },
-                "power": {
-                    "name": "الطاقة"
-                },
                 "power/cable/underground": {
                     "name": "كابل كهرباء تحت الأرض"
                 },
@@ -5932,9 +5832,6 @@
                 },
                 "public_transport/stop_position_trolleybus": {
                     "name": "موقع وقوف حافلات كهربائية"
-                },
-                "railway": {
-                    "name": "سكة حديد"
                 },
                 "railway/abandoned": {
                     "name": "سكة حديدية مهجورة",
@@ -6470,9 +6367,6 @@
                 "shop/wine": {
                     "name": "متجر نبيذ"
                 },
-                "tourism": {
-                    "name": "سياحي"
-                },
                 "tourism/alpine_hut": {
                     "name": "كوخ جبلي",
                     "terms": "دار استراحة"
@@ -6687,9 +6581,6 @@
                     "name": "مجرى مائي",
                     "terms": "مجرى مائي، ممر مائي"
                 },
-                "waterway": {
-                    "name": "مجرى مائي"
-                },
                 "waterway/boatyard": {
                     "name": "حوض بناء سفن",
                     "terms": "حوض بناء سفن; ورشة"
@@ -6866,6 +6757,14 @@
             }
         },
         "community": {
+            "Bahia-telegram": {
+                "name": "انضم لقروب تيلقرام الخاص بالبرازيل أوبن ستريت ماب",
+                "description": "انضم لمجتمع تيلقرام الخاص بالبرازيل أوبن ستريت ماب",
+                "extendedDescription": "انضم لمجتمعنا للمزيد حول أوبن ستريت ماب"
+            },
+            "OSM-India-Puducherry-Facebook": {
+                "name": "حركة العتاد والبرمجيات الحرة - فيسبوك"
+            },
             "cape-coast-youthmappers": {
                 "description": "تابعنا على تويتر: {url}"
             },
@@ -6880,9 +6779,6 @@
             },
             "osm-india-youtube": {
                 "description": "اشترك في قناتنا: {url}"
-            },
-            "OSM-India-Puducherry-Facebook": {
-                "name": "حركة العتاد والبرمجيات الحرة - فيسبوك"
             }
         }
     }

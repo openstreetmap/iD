@@ -81,6 +81,10 @@ export function popover(klass) {
         _anchorSelection.each(show);
     };
 
+    popover.updateContent = function() {
+        _anchorSelection.each(updateContent);
+    };
+
     popover.hide = function() {
         _anchorSelection.each(hide);
     };
@@ -197,6 +201,13 @@ export function popover(klass) {
             anchor.classed('active', true);
             popoverSelection.node().focus();
         }
+
+        anchor.each(updateContent);
+    }
+
+    function updateContent() {
+        var anchor = d3_select(this);
+        var popoverSelection = anchor.selectAll('.popover-' + _id);
 
         if (_content) popoverSelection.selectAll('.popover-inner').call(_content.apply(this, arguments));
 

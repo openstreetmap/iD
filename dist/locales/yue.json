@@ -82,18 +82,7 @@
                 "connected_to_hidden": "無得整圓，佢連咗去隱藏地貌。"
             },
             "orthogonalize": {
-                "title": "整方",
-                "description": {
-                    "line": "整方個綫角",
-                    "area": "整方範圍角"
-                },
-                "annotation": {
-                    "line": "整方咗綫角。",
-                    "area": "整方咗範圍角。"
-                },
-                "not_squarish": "無得整方，佢太唔似方。",
-                "too_large": "無得整方，睇到嘅部份唔夠做。",
-                "connected_to_hidden": "無得整方，佢連咗去隱藏地貌。"
+                "title": "整方"
             },
             "straighten": {
                 "title": "拉直",
@@ -225,11 +214,6 @@
         "feature_info": {
             "hidden_warning": "隱藏地貌 {count} 個",
             "hidden_details": "爾啲地貌，家陣隱藏之中。詳情： {details}"
-        },
-        "status": {
-            "error": "駁唔通程式接口。",
-            "offline": "程式接口收工。遲啲再改啦。",
-            "readonly": "程式接口，只讀不寫。你要等下先記到你修改。"
         },
         "commit": {
             "title": "傳上去公家街圖",
@@ -1175,7 +1159,6 @@
                     "label": "網絡"
                 },
                 "network_bicycle": {
-                    "label": "網類",
                     "options": {
                         "icn": "國際",
                         "lcn": "本地",
@@ -1185,7 +1168,6 @@
                     "placeholder": "本地、域內、國內、國際"
                 },
                 "network_foot": {
-                    "label": "網類",
                     "options": {
                         "iwn": "國際",
                         "lwn": "本地",
@@ -1195,7 +1177,6 @@
                     "placeholder": "本地、域內、國內、國際"
                 },
                 "network_horse": {
-                    "label": "網類",
                     "options": {
                         "ihn": "國際",
                         "lhn": "本地",
@@ -1670,10 +1651,6 @@
                     "name": "租車舖",
                     "terms": "Car Rental,汽車租賃,汽車租賃處,租車,租車店,租車舖"
                 },
-                "amenity/car_sharing": {
-                    "name": "共用車處",
-                    "terms": "Car Sharing,公用車處,共用車,共用車處,汽車共享站"
-                },
                 "amenity/car_wash": {
                     "name": "洗車舖",
                     "terms": "Car Wash,洗車,洗車店,洗車舖"
@@ -1794,9 +1771,6 @@
                 "area": {
                     "name": "範圍",
                     "terms": "Area,區域,範圍"
-                },
-                "area/highway": {
-                    "name": "道面"
                 },
                 "barrier": {
                     "name": "屏障",
@@ -1945,9 +1919,6 @@
                 "golf/tee": {
                     "name": "發球區",
                     "terms": "Tee Box,發球區,開球區"
-                },
-                "highway": {
-                    "name": "公路"
                 },
                 "highway/bridleway": {
                     "name": "馬徑",
@@ -2174,9 +2145,6 @@
                     "name": "葡萄園",
                     "terms": "Vineyard,葡萄園,酒莊"
                 },
-                "leisure": {
-                    "name": "消閒"
-                },
                 "leisure/common": {
                     "name": "公地",
                     "terms": "Common,公共用地,公地"
@@ -2249,9 +2217,6 @@
                     "name": "綫",
                     "terms": "Line,綫,線"
                 },
-                "man_made": {
-                    "name": "人造"
-                },
                 "man_made/breakwater": {
                     "name": "防波堤",
                     "terms": "Breakwater,防波堤"
@@ -2298,9 +2263,6 @@
                 "man_made/water_works": {
                     "name": "供水廠",
                     "terms": "Water Works,供水廠,水務設施"
-                },
-                "natural": {
-                    "name": "天然"
                 },
                 "natural/bare_rock": {
                     "name": "石地"
@@ -2386,10 +2348,6 @@
                 "natural/wetland": {
                     "name": "澤",
                     "terms": "Wetland,潮間帶,澤,濕地"
-                },
-                "natural/wood": {
-                    "name": "林",
-                    "terms": "Wood,林,樹林"
                 },
                 "office": {
                     "name": "寫字樓",
@@ -2494,9 +2452,6 @@
                     "name": "點",
                     "terms": "Point,點"
                 },
-                "power": {
-                    "name": "發電廠"
-                },
                 "power/generator": {
                     "name": "發電機",
                     "terms": "Power Generator,發電機"
@@ -2523,9 +2478,6 @@
                 "power/transformer": {
                     "name": "火牛房",
                     "terms": "Transformer,火牛房,變電所"
-                },
-                "railway": {
-                    "name": "鐵路"
                 },
                 "railway/abandoned": {
                     "name": "廢鐵路",
@@ -2773,9 +2725,6 @@
                     "name": "酒舖",
                     "terms": "Wine Shop,酒舖"
                 },
-                "tourism": {
-                    "name": "旅行"
-                },
                 "tourism/alpine_hut": {
                     "name": "高山屋仔",
                     "terms": "Alpine Hut,高山小屋,高山屋仔"
@@ -2922,9 +2871,6 @@
                 "type/route_master": {
                     "name": "路綫總管",
                     "terms": "Route Master,線路總管,路綫總管,路線總目"
-                },
-                "waterway": {
-                    "name": "水路"
                 },
                 "waterway/canal": {
                     "name": "水道",

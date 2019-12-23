@@ -6,12 +6,11 @@
     ],
     "terms": [
         "ceramic",
-        "kiln",
         "pot",
         "vase"
     ],
     "tags": {
-        "craft": "pottery"
+        "shop": "pottery"
     },
-    "name": "Pottery Maker"
+    "name": "Pottery Store"
 }

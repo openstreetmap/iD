@@ -7,7 +7,6 @@
             "undo": "angre",
             "zoom_to": "zoom til",
             "copy": "kopier",
-            "open_wikidata": "åpne på wikidata.org",
             "favorite": "favoritt"
         },
         "toolbar": {
@@ -128,27 +127,12 @@
                 "not_closed": "Denne kan ikke gjøres om til en sirkel, da endene ikke er sammenkoblet.",
                 "too_large": "Denne kan ikke gjøres om til en sirkel, da for lite av den er synlig.",
                 "connected_to_hidden": "Denne kan ikke gjøres om til en sirkel, da den er koblet til et skjult objekt.",
-                "not_downloaded": "Denne kan ikke gjøres om til en sirkel fordi deler av objektet ikke er lastet ned ennå."
+                "not_downloaded": "Denne kan ikke gjøres om til en sirkel fordi deler av objektet ikke er lastet ned ennå.",
+                "already_circular": "Denne kan ikke gjøres om til en sirkel, da den allerede er en sirkel."
             },
             "orthogonalize": {
                 "title": "Rett opp hjørner",
-                "description": {
-                    "vertex": "Rett opp dette hjørnet.",
-                    "line": "Rett opp hjørnene på denne linja.",
-                    "area": "Rett opp hjørnene i dette området."
-                },
-                "key": "Q",
-                "annotation": {
-                    "vertex": "Rettet opp hjørnet.",
-                    "line": "Laget hjørnene på linjen vinkelrette.",
-                    "area": "Laget hjørnene på arealet vinkelrette."
-                },
-                "end_vertex": "Denne kan ikke rettes opp fordi den er et endepunkt.",
-                "square_enough": "Denne kan ikke rettes mer opp enn den allerede er.",
-                "not_squarish": "Denne kan ikke rettes opp fordi det er vanskelig å finne hjørner.",
-                "too_large": "Denne kan ikke rettes opp fordi kun noen deler er synlige.",
-                "connected_to_hidden": "Denne kan ikke rettes opp fordi den er knyttet til en skjult kartegenskap.",
-                "not_downloaded": "Denne kan ikke rettes opp fordi deler av objektet ikke er lastet ned ennå."
+                "key": "Q"
             },
             "straighten": {
                 "title": "Gjør rett.",
@@ -533,12 +517,6 @@
             "hidden_warning": "{count} skjulte objekter",
             "hidden_details": "Disse kartegenskapene er skjult: {details}"
         },
-        "status": {
-            "error": "Kan ikke koble til API.",
-            "offline": "APIet er frakoblet. Vennligst forsøk å redigere senere.",
-            "readonly": "APIet er kun i lesemodus. Du må vente for å lagre dine endringer.",
-            "rateLimit": "Dette APIet begrenser anonyme tilkoblinger. Du løser dette ved å logge inn."
-        },
         "commit": {
             "title": "Last opp til OpenStreetMap",
             "upload_explanation": "Endringene du laster opp vil være synlige på alle kart som bruker dataene til OpenStreetMap.",
@@ -631,7 +609,6 @@
         },
         "geocoder": {
             "search": "Søk over hele verden...",
-            "no_results_visible": "Ingen resultater i det synlige området",
             "no_results_worldwide": "Ingen resultater funnet"
         },
         "geolocate": {
@@ -1694,10 +1671,10 @@
                     "reference": "Bygninger burde ikke krysse hverandre med mindre de er på forskjellige lag."
                 },
                 "building-highway": {
-                    "reference": "Veier som krysser bygninger burde bruke bro, tunnel, tildekkelse, eller innganger."
+                    "reference": "Veier som krysser bygninger burde bruke bruer, tunneller eller forskjellige lag."
                 },
                 "building-railway": {
-                    "reference": "Jernbaner som krysser bygninger burde bruke broer eller tunneller."
+                    "reference": "Jernbaner som krysser bygninger burde bruke bruer, tunneller eller forskjellige lag."
                 },
                 "building-waterway": {
                     "reference": "Vannveier som krysser bygninger burde bruke tunneller eller forskjellige lag."
@@ -2009,9 +1986,6 @@
                     "title": "Oppgrader egenskapene",
                     "annotation": "Oppgraderte gamle egenskaper."
                 },
-                "use_bridge_or_tunnel": {
-                    "title": "Bruk en bro eller tunnel"
-                },
                 "use_different_layers": {
                     "title": "Bruk forskjellige lag"
                 },
@@ -2020,9 +1994,6 @@
                 },
                 "use_different_levels": {
                     "title": "Bruk forskjellige etasjer"
-                },
-                "use_tunnel": {
-                    "title": "Bruk en tunnel"
                 }
             }
         },
@@ -2320,9 +2291,7 @@
                 },
                 "display_options": {
                     "title": "Vis alternativer",
-                    "background": "Vis bakgrunnsalternativer",
                     "background_switch": "Bytt til siste bakgrunn",
-                    "map_data": "Vis alternativer for kartdata",
                     "fullscreen": "Gå inn i fullskjermmodus",
                     "sidebar": "Vis/skjul sidemenyen",
                     "wireframe": "Slå av/på wireframe-modus",
@@ -2338,9 +2307,7 @@
                     "search": "Finn objekter som samsvarer med søketeksten"
                 },
                 "with_selected": {
-                    "title": "Med valgte objekter",
-                    "edit_menu": "Vis/skjul redigeringsmeny",
-                    "zoom_to": "Zoom til valgt objekt"
+                    "edit_menu": "Vis/skjul redigeringsmeny"
                 },
                 "vertex_selected": {
                     "title": "Med valgt node",
@@ -2355,12 +2322,10 @@
                 "title": "Redigerer",
                 "drawing": {
                     "title": "Tegning",
-                    "focus_add_feature": "Endre fokus til objektsøkefelt",
                     "add_point": "\"Legg til punkt\"-modus",
                     "add_line": "\"Legg til linje\"-modus",
                     "add_area": "\"Legg til område\"-modus",
                     "add_note": "\"Legg til notat\"-modus",
-                    "add_favorite": "Legg til et favorittobjekt",
                     "place_point": "Plasser et punkt eller notat",
                     "disable_snap": "Hold nede for å deaktivere punkt-snapping",
                     "stop_line": "Avslutt tegning av linje eller område"
@@ -3234,7 +3199,6 @@
                     "label": "Nettverk"
                 },
                 "network_bicycle": {
-                    "label": "Nettverkstype",
                     "options": {
                         "icn": "Internasjonal",
                         "lcn": "Lokal",
@@ -3244,7 +3208,6 @@
                     "placeholder": "Lokal, Regional, Nasjonal, Internasjonal"
                 },
                 "network_foot": {
-                    "label": "Nettverkstype",
                     "options": {
                         "iwn": "Internasjonal",
                         "lwn": "Lokal",
@@ -3254,7 +3217,6 @@
                     "placeholder": "Lokal, Regional, Nasjonal, Internasjonal"
                 },
                 "network_horse": {
-                    "label": "Nettverkstype",
                     "options": {
                         "ihn": "Internasjonal",
                         "lhn": "Lokal",
@@ -3315,6 +3277,7 @@
                     "placeholder": "1, 2, 3 …"
                 },
                 "phone": {
+                    "label": "Telefon",
                     "placeholder": "+47 22 12 34 56"
                 },
                 "piste/difficulty": {
@@ -3511,6 +3474,12 @@
                 "source": {
                     "label": "Kilder"
                 },
+                "sport": {
+                    "label": "Sport"
+                },
+                "sport_ice": {
+                    "label": "Sport"
+                },
                 "structure": {
                     "label": "Struktur",
                     "options": {
@@ -3691,9 +3660,6 @@
                 "aerialway/gondola": {
                     "name": "Gondol"
                 },
-                "aerialway/t-bar": {
-                    "name": "T-krok"
-                },
                 "aeroway": {
                     "name": "Taksebane"
                 },
@@ -3753,9 +3719,6 @@
                 },
                 "amenity/car_rental": {
                     "name": "Bilutleie"
-                },
-                "amenity/car_sharing": {
-                    "name": "Bildeling"
                 },
                 "amenity/car_wash": {
                     "name": "Bilvask"
@@ -4105,12 +4068,6 @@
                 "attraction/maze": {
                     "name": "Labyrint"
                 },
-                "attraction/pirate_ship": {
-                    "name": "Piratskip"
-                },
-                "attraction/river_rafting": {
-                    "name": "Rafting"
-                },
                 "attraction/roller_coaster": {
                     "name": "Berg-og-dal-bane"
                 },
@@ -4372,9 +4329,6 @@
                 "craft/insulator": {
                     "name": "Isolatør"
                 },
-                "craft/jeweler": {
-                    "name": "Gullsmed"
-                },
                 "craft/key_cutter": {
                     "name": "Nøkkelsliper"
                 },
@@ -4383,9 +4337,6 @@
                 },
                 "craft/metal_construction": {
                     "name": "Metallkonstruktør"
-                },
-                "craft/optician": {
-                    "name": "Optiker"
                 },
                 "craft/painter": {
                     "name": "Maler"
@@ -4401,9 +4352,6 @@
                 },
                 "craft/plumber": {
                     "name": "Rørlegger"
-                },
-                "craft/pottery": {
-                    "name": "Keramikk"
                 },
                 "craft/rigger": {
                     "name": "Scenerigger"
@@ -4540,9 +4488,6 @@
                 "healthcare/speech_therapist": {
                     "name": "Logoped"
                 },
-                "highway": {
-                    "name": "Vei"
-                },
                 "highway/bridleway": {
                     "name": "Ridevei"
                 },
@@ -4675,6 +4620,9 @@
                 "highway/tertiary": {
                     "name": "Tertiær hovedvei"
                 },
+                "highway/track": {
+                    "name": "Traktorvei"
+                },
                 "highway/traffic_mirror": {
                     "name": "Trafikkspeil"
                 },
@@ -4716,15 +4664,6 @@
                 },
                 "indoor/room": {
                     "name": "Rom"
-                },
-                "junction/circular": {
-                    "name": "Rundkjøring"
-                },
-                "junction/roundabout": {
-                    "name": "Rundkjøring"
-                },
-                "landuse": {
-                    "name": "Arealbruk"
                 },
                 "landuse/allotments": {
                     "name": "Felleshage"
@@ -4819,9 +4758,6 @@
                 "landuse/vineyard": {
                     "name": "Vingård"
                 },
-                "leisure": {
-                    "name": "Fritid"
-                },
                 "leisure/adult_gaming_centre": {
                     "name": "Spillekasino"
                 },
@@ -4839,9 +4775,6 @@
                 },
                 "leisure/dog_park": {
                     "name": "Hundepark"
-                },
-                "leisure/firepit": {
-                    "name": "Bålsted"
                 },
                 "leisure/fitness_centre": {
                     "name": "Treningssenter"
@@ -4960,9 +4893,6 @@
                 "line": {
                     "name": "Linje"
                 },
-                "man_made": {
-                    "name": "Menneskeskapt"
-                },
                 "man_made/adit": {
                     "name": "Stoll"
                 },
@@ -4971,9 +4901,6 @@
                 },
                 "man_made/breakwater": {
                     "name": "Molo"
-                },
-                "man_made/bridge": {
-                    "name": "Bru"
                 },
                 "man_made/chimney": {
                     "name": "Pipe"
@@ -5083,9 +5010,6 @@
                 "man_made/works": {
                     "name": "Fabrikk"
                 },
-                "natural": {
-                    "name": "Naturlig"
-                },
                 "natural/bay": {
                     "name": "Bukt"
                 },
@@ -5155,9 +5079,6 @@
                 "natural/water/basin": {
                     "name": "Basseng"
                 },
-                "natural/water/canal": {
-                    "name": "Kanal"
-                },
                 "natural/water/lake": {
                     "name": "Innsjø"
                 },
@@ -5167,14 +5088,8 @@
                 "natural/water/reservoir": {
                     "name": "Vannreservoir"
                 },
-                "natural/water/river": {
-                    "name": "Elv"
-                },
                 "natural/wetland": {
                     "name": "Myr"
-                },
-                "natural/wood": {
-                    "name": "Skog"
                 },
                 "noexit/yes": {
                     "name": "Ingen utgang"
@@ -5284,9 +5199,6 @@
                 "point": {
                     "name": "Punkt"
                 },
-                "power": {
-                    "name": "Strøm"
-                },
                 "power/generator": {
                     "name": "Strømgenerator"
                 },
@@ -5319,9 +5231,6 @@
                 },
                 "public_transport/station_train": {
                     "name": "Togstasjon"
-                },
-                "railway": {
-                    "name": "Jernbane"
                 },
                 "railway/abandoned": {
                     "name": "Nedlagt jernbane"
@@ -5728,9 +5637,6 @@
                 "shop/wine": {
                     "name": "Vinbutikk"
                 },
-                "tourism": {
-                    "name": "Turisme"
-                },
                 "tourism/alpine_hut": {
                     "name": "Fjellhytte"
                 },
@@ -5890,9 +5796,6 @@
                 "type/site": {
                     "name": "Sted"
                 },
-                "waterway": {
-                    "name": "Vannvei"
-                },
                 "waterway/boatyard": {
                     "name": "Skipsverft"
                 },
@@ -5923,24 +5826,119 @@
             }
         },
         "imagery": {
+            "AGIV": {
+                "attribution": {
+                    "text": "© agentschap Informatie Vlaanderen"
+                },
+                "name": "AIV Flanders nyligste ortofoto"
+            },
+            "AGIV10cm": {
+                "attribution": {
+                    "text": "© agentschap Informatie Vlaanderen"
+                },
+                "name": "AIV Flanders 2013-2015 ortofoto 10cm"
+            },
+            "AGIVFlandersGRB": {
+                "attribution": {
+                    "text": "© agentschap Informatie Vlaanderen"
+                },
+                "name": "AIV Flanders GRB"
+            },
+            "AIV_DHMV_II_HILL_25cm": {
+                "attribution": {
+                    "text": "© agentschap Informatie Vlaanderen"
+                },
+                "name": "AIV Digitaal Hoogtemodel Vlaanderen II, flersidede terrengskygger 0,25 m"
+            },
+            "AIV_DHMV_II_SVF_25cm": {
+                "attribution": {
+                    "text": "© agentschap Informatie Vlaanderen"
+                },
+                "name": "AIV Digitaal Hoogtemodel Vlaanderen II, Skyview faktor 0,25 m"
+            },
             "Bing": {
                 "description": "Flyfoto og satellitt-ortofoto.",
                 "name": "Bing ortofoto"
             },
+            "EOXAT2018CLOUDLESS": {
+                "attribution": {
+                    "text": "Sentinel-2 cloudless - https://s2maps.eu av EOX IT Services GmbH (Inneholder modifisert Copernicus Sentinel data 2017 & 2018)"
+                },
+                "description": "Etterbehandlet Sentinel Satellite ortofoto.",
+                "name": "eox.at 2018 skyfri"
+            },
             "EsriWorldImagery": {
                 "attribution": {
                     "text": "Vilkår og tilbakemelding"
-                }
+                },
+                "description": "Esri World ortofoto.",
+                "name": "Esri World ortofoto"
             },
             "EsriWorldImageryClarity": {
                 "attribution": {
                     "text": "Vilkår og tilbakemelding"
-                }
+                },
+                "description": "Esri arkivbilder som kan være klarere og mer nøyaktige enn det forhåndsvalgte laget.",
+                "name": "Esri World ortofoto (skarphet) beta"
+            },
+            "MAPNIK": {
+                "attribution": {
+                    "text": "© OpenStreetMap-bidragsytere, CC-BY-SA"
+                },
+                "description": "Standard OpenStreerMap-laget.",
+                "name": "OpenStreetMap (standard)"
             },
             "Mapbox": {
                 "attribution": {
                     "text": "Vilkår og tilbakemelding"
-                }
+                },
+                "description": "Flyfoto- og satellitt-ortofoto.",
+                "name": "Mapbox Satellitt"
+            },
+            "OSM_Inspector-Addresses": {
+                "attribution": {
+                    "text": "© Geofabrik GmbH, OpenStreetMap-bidragsytere, CC-BY-SA"
+                },
+                "name": "OSM Inspector: Adresser"
+            },
+            "OSM_Inspector-Geometry": {
+                "attribution": {
+                    "text": "© Geofabrik GmbH, OpenStreetMap-bidragsytere, CC-BY-SA"
+                },
+                "name": "OSM Inspector: Geometri"
+            },
+            "OSM_Inspector-Highways": {
+                "attribution": {
+                    "text": "© Geofabrik GmbH, OpenStreetMap-bidragsytere, CC-BY-SA"
+                },
+                "name": "OSM Inspector: Veier"
+            },
+            "OSM_Inspector-Multipolygon": {
+                "attribution": {
+                    "text": "© Geofabrik GmbH, OpenStreetMap-bidragsytere, CC-BY-SA"
+                },
+                "name": "OSM Inspector: Område"
+            },
+            "OSM_Inspector-Places": {
+                "attribution": {
+                    "text": "© Geofabrik GmbH, OpenStreetMap-bidragsytere, CC-BY-SA"
+                },
+                "name": "OSM Inspector: Steder"
+            },
+            "OSM_Inspector-Routing": {
+                "attribution": {
+                    "text": "© Geofabrik GmbH, OpenStreetMap-bidragsytere, CC-BY-SA"
+                },
+                "name": "OSM Inspector: Ruteregning"
+            },
+            "OSM_Inspector-Tagging": {
+                "attribution": {
+                    "text": "© Geofabrik GmbH, OpenStreetMap-bidragsytere, CC-BY-SA"
+                },
+                "name": "OSM Inspector: Egenskaper"
+            },
+            "SPW_ORTHO_LAST": {
+                "name": "SPW(allonie) nyligste ortofoto"
             },
             "osm-gps": {
                 "attribution": {
@@ -5949,6 +5947,71 @@
             }
         },
         "community": {
+            "OSM-AR-twitter": {
+                "name": "OpenStreetMap Argentina Twitter",
+                "description": "Følg oss på Twitter på {url}"
+            },
+            "OSM-BGD-facebook": {
+                "description": "Forbedre OpenStreetMap i Bangladesh"
+            },
+            "OSM-CA-Slack": {
+                "description": "Alle er velkomne! Registrer deg på {signupUrl}."
+            },
+            "OSM-CL-twitter": {
+                "name": "OpenStreetMap Chile Twitter",
+                "description": "Følg oss på Twitter på {url}"
+            },
+            "OSM-CO-twitter": {
+                "name": "OpenStreetMap Colombia Twitter",
+                "description": "Følg oss på Twitter på {url}"
+            },
+            "OSM-IDN-facebook": {
+                "description": "Forbedre OpenStreetMap i Indonesia"
+            },
+            "OSM-India-facebook": {
+                "description": "Forbedre OpenStreetMap i India"
+            },
+            "OSM-MMR-facebook": {
+                "description": "Forbedre OpenStreetMap i Myanmar"
+            },
+            "OSM-MNG-facebook": {
+                "description": "Forbedre OpenStreetMap i Mongolia"
+            },
+            "OSM-Nepal-facebook": {
+                "description": "Forbedre OpenStreetMap i Nepal"
+            },
+            "OSM-PE-twitter": {
+                "name": "OpenStreetMap Peru Twitter",
+                "description": "Følg oss på Twitter på {url}"
+            },
+            "OSM-Twitter": {
+                "name": "OpenStreetMap Twitter",
+                "description": "Følg oss på Twitter på {url}"
+            },
+            "OSM-US-Slack": {
+                "description": "Alle er velkomne! Registrer deg på {signupUrl}"
+            },
+            "OSM-br-twitter": {
+                "name": "OpenStreetMap Brasil Twitter",
+                "description": "Følg oss på Twitter på {url}"
+            },
+            "OSM-india-twitter": {
+                "name": "OpenStreetMap India Twitter"
+            },
+            "OSM-japan-twitter": {
+                "name": "OpenStreetMap Japan Twitter",
+                "description": "Hashtag på Twitter: {url}"
+            },
+            "PHXGeo-twitter": {
+                "description": "Følg oss på Twitter på {url}"
+            },
+            "at-twitter": {
+                "name": "OpenStreetMap Østerrike Twitter",
+                "description": "OpenStreetMap Østerrike på Twitter: {url}"
+            },
+            "be-twitter": {
+                "name": "OpenStreetMap Belgia Twitter"
+            },
             "bw-facebook": {
                 "name": "Mapping Botswana på Facebook",
                 "description": "OpenStreetMap siden i Botswana"
@@ -5957,69 +6020,20 @@
                 "name": "Mapping Botswana på Twitter",
                 "description": "OpenStreetMap Twitter-kontoen i Botswana"
             },
-            "ym-Centre-Universitaire-de-Recherche-et-dApplication-en-Tldtection-CURAT-de-lUniversit-Felix-Houphouet-Boigny": {
-                "name": "YouthMappers CURAT"
-            },
             "cape-coast-youthmappers": {
                 "description": "Følg oss på Twitter: {url}"
-            },
-            "osm-gh-twitter": {
-                "name": "OpenStreetMap Ghana på Twitter",
-                "description": "Følg oss på Twitter: {url}"
-            },
-            "OSM-BGD-facebook": {
-                "description": "Forbedre OpenStreetMap i Bangladesh"
-            },
-            "OSM-India-facebook": {
-                "description": "Forbedre OpenStreetMap i India"
-            },
-            "OSM-india-twitter": {
-                "name": "OpenStreetMap India Twitter"
-            },
-            "OSM-IDN-facebook": {
-                "description": "Forbedre OpenStreetMap i Indonesia"
-            },
-            "OSM-japan-twitter": {
-                "name": "OpenStreetMap Japan Twitter",
-                "description": "Hashtag på Twitter: {url}"
-            },
-            "OSM-MNG-facebook": {
-                "description": "Forbedre OpenStreetMap i Mongolia"
-            },
-            "OSM-MMR-facebook": {
-                "description": "Forbedre OpenStreetMap i Myanmar"
-            },
-            "OSM-Nepal-facebook": {
-                "description": "Forbedre OpenStreetMap i Nepal"
-            },
-            "at-twitter": {
-                "name": "OpenStreetMap Østerrike Twitter",
-                "description": "OpenStreetMap Østerrike på Twitter: {url}"
-            },
-            "osmgraz-twitter": {
-                "name": "OSM-samfunnet i Graz på Twitter",
-                "description": "OpenStreetMap-samfunnet i Graz på Twitter"
-            },
-            "osm-at": {
-                "name": "OpenStreetMap Østerrike"
-            },
-            "be-twitter": {
-                "name": "OpenStreetMap Belgia Twitter"
-            },
-            "fr-twitter": {
-                "name": "OpenStreetMap Frankrike på Twitter",
-                "description": "OpenStreetMap Frankrike på Twitter: {url}"
             },
             "de-berlin-twitter": {
                 "name": "OpenStreetMap Berlin Twitter",
                 "description": "Følg oss på Twitter: {url}"
             },
+            "fr-twitter": {
+                "name": "OpenStreetMap Frankrike på Twitter",
+                "description": "OpenStreetMap Frankrike på Twitter: {url}"
+            },
             "it-twitter": {
                 "name": "OpenStreetMap Italia Twitter",
                 "description": "Følg oss på Twitter på {url}"
-            },
-            "talk-it-lazio": {
-                "description": "Alle er velkomne! Registrer deg på {signupUrl}"
             },
             "no-forum": {
                 "name": "OpenStreetMap Norge Nettforum",
@@ -6036,42 +6050,26 @@
             "no-telegram": {
                 "name": "@OSM_no på Telegram"
             },
+            "osm-at": {
+                "name": "OpenStreetMap Østerrike"
+            },
+            "osm-gh-twitter": {
+                "name": "OpenStreetMap Ghana på Twitter",
+                "description": "Følg oss på Twitter: {url}"
+            },
+            "osmgraz-twitter": {
+                "name": "OSM-samfunnet i Graz på Twitter",
+                "description": "OpenStreetMap-samfunnet i Graz på Twitter"
+            },
             "se-twitter": {
                 "name": "OpenStreetMap Sverige på Twitter",
                 "description": "Følg oss på Twitter: {url}"
             },
-            "OSM-CA-Slack": {
-                "description": "Alle er velkomne! Registrer deg på {signupUrl}."
-            },
-            "OSM-US-Slack": {
+            "talk-it-lazio": {
                 "description": "Alle er velkomne! Registrer deg på {signupUrl}"
             },
-            "PHXGeo-twitter": {
-                "description": "Følg oss på Twitter på {url}"
-            },
-            "OSM-AR-twitter": {
-                "name": "OpenStreetMap Argentina Twitter",
-                "description": "Følg oss på Twitter på {url}"
-            },
-            "OSM-br-twitter": {
-                "name": "OpenStreetMap Brasil Twitter",
-                "description": "Følg oss på Twitter på {url}"
-            },
-            "OSM-CL-twitter": {
-                "name": "OpenStreetMap Chile Twitter",
-                "description": "Følg oss på Twitter på {url}"
-            },
-            "OSM-CO-twitter": {
-                "name": "OpenStreetMap Colombia Twitter",
-                "description": "Følg oss på Twitter på {url}"
-            },
-            "OSM-PE-twitter": {
-                "name": "OpenStreetMap Peru Twitter",
-                "description": "Følg oss på Twitter på {url}"
-            },
-            "OSM-Twitter": {
-                "name": "OpenStreetMap Twitter",
-                "description": "Følg oss på Twitter på {url}"
+            "ym-Centre-Universitaire-de-Recherche-et-dApplication-en-Tldtection-CURAT-de-lUniversit-Felix-Houphouet-Boigny": {
+                "name": "YouthMappers CURAT"
             }
         }
     }

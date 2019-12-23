@@ -46,6 +46,9 @@ export function behaviorCopy(context) {
 
 
     function doCopy() {
+        // prevent copy during low zoom selection
+        if (!context.map().withinEditableZoom()) return;
+
         if (!getSelectionText()) {
             d3_event.preventDefault();
         }

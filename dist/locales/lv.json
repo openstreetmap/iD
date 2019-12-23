@@ -6,8 +6,7 @@
             "remove": "noņemt ",
             "undo": "atsaukt",
             "zoom_to": "pietuvināt uz",
-            "copy": "kopēt",
-            "open_wikidata": "atvēŗt wikidata.org"
+            "copy": "kopēt"
         },
         "modes": {
             "add_area": {
@@ -95,18 +94,7 @@
                 "connected_to_hidden": "Šo nevar padarīt par apļveida, jo tas ir pievienots pie paslēpta objekta."
             },
             "orthogonalize": {
-                "title": "Kvadrāts",
-                "description": {
-                    "line": "Līnijas leņķi pārveidot par taisnleņķi.",
-                    "area": "Apgabala leņķi pārveidot par taisnleņķi."
-                },
-                "annotation": {
-                    "line": "Līnijas leņķi pārvedoti par taisnleņķiem.",
-                    "area": "Apgabala leņķi pārvedoti par taisnleņķiem."
-                },
-                "not_squarish": "Šo objektu nevar pārveidot par kvadrātu, jo tas nav kvadrātformas.",
-                "too_large": "Šo objektu nevar pārveidot par kvadrātu, jo tas nav pietiekami redzams.",
-                "connected_to_hidden": "Šo nevar padarīt par kvadrātveida, jo tas ir pievienots pie slēpta objekta."
+                "title": "Kvadrāts"
             },
             "straighten": {
                 "title": "Iztaisnot",
@@ -312,12 +300,6 @@
         "feature_info": {
             "hidden_warning": "{count} paslēpti objekti",
             "hidden_details": "Šie objekti pašlaik ir paslēpti: {details}"
-        },
-        "status": {
-            "error": "Nevarēja savienoties ar API.",
-            "offline": "API ir bezsaistē. Mēģini rediģēt vēlāk.",
-            "readonly": "API ir tikai lasīšanas režīmā. Tev būs jāuzgaida līdz varēsi saglabāt izmaiņas.",
-            "rateLimit": "API ierobežo anonīmos pieslēgumus. To var salabot ienākot savā kontā."
         },
         "commit": {
             "title": "Augšupielādē uz OpenStreetMap",
@@ -1358,7 +1340,6 @@
                     "label": "Margas"
                 },
                 "hashtags": {
-                    "label": "Ieteiktie haštagi",
                     "placeholder": "#piemērs"
                 },
                 "healthcare": {
@@ -1620,7 +1601,6 @@
                     "label": "Tīkls"
                 },
                 "network_bicycle": {
-                    "label": "Tīkla veids",
                     "options": {
                         "icn": "Starptautisks",
                         "lcn": "Vietējs",
@@ -1630,7 +1610,6 @@
                     "placeholder": "Vietējs, Reģionāls, Nacionāls, Starptautisks"
                 },
                 "network_foot": {
-                    "label": "Tīkla veids",
                     "options": {
                         "iwn": "Starptautisks",
                         "lwn": "Vietējs",
@@ -1640,7 +1619,6 @@
                     "placeholder": "Vietējs, Reģionāls, Nacionāls, Starptautisks"
                 },
                 "network_horse": {
-                    "label": "Tīkla veids",
                     "options": {
                         "ihn": "Starptautisks",
                         "lhn": "Vietējs",
@@ -2439,9 +2417,6 @@
                 "area": {
                     "name": "Apgabals"
                 },
-                "area/highway": {
-                    "name": "Ceļa segums"
-                },
                 "attraction/big_wheel": {
                     "name": "Panorāmas rats",
                     "terms": "rats,atrakcija,bruciens,lielais rats"
@@ -2456,9 +2431,6 @@
                 },
                 "attraction/maze": {
                     "name": "Labirints"
-                },
-                "attraction/pirate_ship": {
-                    "name": "Pirātu kuģis"
                 },
                 "attraction/roller_coaster": {
                     "name": "Amerikāņu Kalniņi",
@@ -2687,17 +2659,11 @@
                 "craft/gardener": {
                     "name": "Dārznieks"
                 },
-                "craft/jeweler": {
-                    "name": "Juvelieris"
-                },
                 "craft/key_cutter": {
                     "name": "Atslēdznieks"
                 },
                 "craft/locksmith": {
                     "name": "Atslēdznieks"
-                },
-                "craft/optician": {
-                    "name": "Optiķis"
                 },
                 "craft/painter": {
                     "name": "Krāsotājs"
@@ -2712,9 +2678,6 @@
                 },
                 "craft/plumber": {
                     "name": "Santehniķis"
-                },
-                "craft/pottery": {
-                    "name": "Podnieks"
                 },
                 "craft/roofer": {
                     "name": "Jumiķis"
@@ -2783,9 +2746,6 @@
                 },
                 "healthcare/speech_therapist": {
                     "name": "Runas Terapiets"
-                },
-                "highway": {
-                    "name": "Šoseja"
                 },
                 "highway/corridor": {
                     "name": "Iekštelpu koridors"
@@ -2869,9 +2829,6 @@
                 "historic/ruins": {
                     "name": "Pilsdrupas"
                 },
-                "landuse": {
-                    "name": "Zemes izmantojums"
-                },
                 "landuse/basin": {
                     "name": "Baseins"
                 },
@@ -2924,9 +2881,6 @@
                 "landuse/vineyard": {
                     "name": "Vīnogu lauks"
                 },
-                "leisure": {
-                    "name": "Brīvā laika"
-                },
                 "leisure/bowling_alley": {
                     "name": "Boulinga Zāle"
                 },
@@ -2939,9 +2893,6 @@
                 },
                 "leisure/dog_park": {
                     "name": "Suņu parks"
-                },
-                "leisure/firepit": {
-                    "name": "Ugunskura vieta"
                 },
                 "leisure/fitness_centre": {
                     "name": "Sportazāle / Fitnesa centrs"
@@ -3021,14 +2972,8 @@
                 "line": {
                     "name": "Līnija"
                 },
-                "man_made": {
-                    "name": "Cilvēka radīts"
-                },
                 "man_made/antenna": {
                     "name": "Antēna"
-                },
-                "man_made/bridge": {
-                    "name": "Tilts"
                 },
                 "man_made/chimney": {
                     "name": "Skurstenis"
@@ -3086,9 +3031,6 @@
                 },
                 "man_made/works": {
                     "name": "Rūpnīca"
-                },
-                "natural": {
-                    "name": "Dabisks"
                 },
                 "natural/bare_rock": {
                     "name": "Pliks Akmens"
@@ -3154,9 +3096,6 @@
                 },
                 "natural/wetland": {
                     "name": "Purvs"
-                },
-                "natural/wood": {
-                    "name": "Koks"
                 },
                 "noexit/yes": {
                     "name": "Bez izejas"
@@ -3233,9 +3172,6 @@
                 "playground/swing": {
                     "name": "Šūpoles"
                 },
-                "power": {
-                    "name": "Enerģija"
-                },
                 "power/generator": {
                     "name": "Elektroenerģijas ģenerātors",
                     "terms": "elektroģenrātors,turbīna,vējs"
@@ -3267,9 +3203,6 @@
                 },
                 "public_transport/station_trolleybus": {
                     "name": "Trolejbusu stacija / Terminālis"
-                },
-                "railway": {
-                    "name": "Vilciens"
                 },
                 "railway/abandoned": {
                     "name": "Pamests dzelzceļš"
@@ -3590,9 +3523,6 @@
                 "shop/wine": {
                     "name": "Vīna veikals"
                 },
-                "tourism": {
-                    "name": "Tūrisms"
-                },
                 "tourism/aquarium": {
                     "name": "Akvārijs"
                 },
@@ -3665,9 +3595,6 @@
                 },
                 "type/restriction": {
                     "name": "Aizliegums"
-                },
-                "waterway": {
-                    "name": "Ūdensceļš"
                 },
                 "waterway/canal": {
                     "name": "Kanāls"
@@ -4098,55 +4025,126 @@
             }
         },
         "community": {
-            "bw-facebook": {
-                "name": "Kartējam Botsvanu Facebookā",
-                "description": "OpenStreetMap Botsvana lapa"
+            "Bahia-telegram": {
+                "description": "Pievienojies OpenStreetMap Baijas kopienai Telegram",
+                "extendedDescription": "Pievienojies kopienai lai uzzinātu vairāk par OpenStreetMap, uzdod jautājumus vai piedalies saietos. Visi ir gaidīti!"
             },
-            "bw-twitter": {
-                "name": "Kartējam Botsvanu Twitteris",
-                "description": "Twitteris priekš OpenStreetMap Botswanā"
+            "Bay-Area-OpenStreetMappers": {
+                "name": "Līča rajona OpenStreetMappers",
+                "description": "Uzlabo OpenStreetMap Sanfrancisko līča rajonā."
             },
-            "cape-coast-youthmappers": {
-                "name": "Cape Coasta universitātes YouthMappers",
+            "Central-Pennsylvania-OSM": {
+                "name": "Centrālās Pensilvānijas OSM"
+            },
+            "Code-for-San-Jose-Slack": {
+                "name": "Kods priekš Sanhosē Slack",
+                "description": "Visi ir laipni aicināti! Piesakies {signupUrl}, tad pievienojies #osm kanālam."
+            },
+            "GeoPhilly": {
+                "name": "GeoPhilly",
+                "description": "Saiets karšu entuziastiem Filadelfijas apkārtnē",
+                "extendedDescription": "GeoPhilly apvieno izstrādātājus, ģeogrāfus, datu nūģus, atvērtā pirmkoda entuziastus, civilos hakerus un karšu atkarīgos kopējā karšu mīlestībā  un to izteiktajiem stāstiem. Ja tu izmanto kartes savā darbā, vai vienkārši gribi uzzināt vairāk, tad šis saiets ir priekš tevis! Mūsu pasākumu mērķis ir būt atvērtiem, draudzīgiem, izglītojošiem un sociāliem, un tie iet no laimīgām stundām līdz ātrām runām un pat darbnīcām. Nāc un izveido diversu, iedvesmojošu kopienu Filadelfijā kopā ar mums!"
+            },
+            "MapMinnesota": {
+                "name": "MapMinesota",
+                "description": "Kartētāji un OpenStreetMap lietotāji Mineapolisas—Sentpolas apkārtnē",
+                "extendedDescription": "Savieno OpenStreetMap entuziastus Minesotā un Mineapolisā—Sentpolā."
+            },
+            "Mapping-DC-meetup": {
+                "name": "Kartēšana DC",
+                "description": "Uzlabo OpenStreetMap Vašingtonas apkārtnē"
+            },
+            "Maptime-ME-meetup": {
+                "name": "MaptimeME"
+            },
+            "Nottingham-OSM-pub-meetup": {
+                "name": "Austrummidlendas (Notingemas) Ikmēneša bāra saiets",
+                "description": "Sociālais saiets priekš Austrummidlendas  kartētājiem un lietotājiem"
+            },
+            "OSM-AR-mailinglist": {
+                "name": "Talk-ar E-pasta saraksts",
+                "description": "Vēsturisks e-pasta saraksts. Gandrīz vai vispār netiek lietots."
+            },
+            "OSM-AR-twitter": {
                 "description": "Seko mums Twitterī: {url}"
-            },
-            "osm-gh-facebook": {
-                "name": "OpenStreetMap Gana Facebookā",
-                "description": "Facebook grupa cilvēkiem, kas ir ieinteresēti OpenStreetMap."
-            },
-            "osm-gh-twitter": {
-                "name": "OpenStreetMap Gana Twitterī",
-                "description": "Seko mums Twitterī: {url}"
-            },
-            "talk-gh": {
-                "name": "Talk-gh E-pasta saraksts",
-                "description": "Talk-gh ir Oficiāls E-Pasta saraksts Ganas OSM kopienai."
-            },
-            "osm-mg-facebook": {
-                "name": "OpenStreetMap Madagaskaras Facebook Grupa",
-                "description": "Malgašu Facebook grupa cilvēkiem, kas interesējas par OpenStreetMap."
-            },
-            "talk-mg": {
-                "name": "Talk-mg E-pasta liste",
-                "description": "Vieta, kur Madagaskaras OpenStreetMap lietotāji, kopienas un kartētāji var dalīties un diskutēt."
             },
             "OSM-BGD-facebook": {
                 "name": "OpenStreetMap Bangladeša",
                 "description": "Uzlabo OpenStreetMap Bangladešā",
                 "extendedDescription": "Kartē Bangladešā? Ir jautājumi, vai gribi sazināties ar mūsu kopienu? Pievienojies {url}. Visi ir gaidīti!"
             },
-            "OSM-India-facebook": {
-                "name": "OpenStreetMap Indija - Apkārtnes kartēšana",
-                "description": "Uzlabo OpenStreetMap Indijā",
-                "extendedDescription": "Kartē indijā? Ir jautājumi, gribi sazināties ar mūsu kopienu? Pievienojies {url}. Visi ir gaidīti!"
+            "OSM-BO-mailinglist": {
+                "name": "Talk-bo E-pasta saraksts",
+                "extendedDescription": "Kartē Bolīvijā? Ir jautājumi, gribi sazināties ar mūsu kopienu? Pievienojies {url}. Visi ir gaidīti!"
             },
-            "OSM-india-mailinglist": {
-                "name": "OpenStreetMap Indijas Adresātu Saraksts",
-                "description": "Talk-in ir Oficiāls E-Pasta saraksts Indiešu OSM kopienai."
+            "OSM-CA-Slack": {
+                "name": "OSM-CA Slack",
+                "description": "Visi ir laipni aicināti! Piesakies {signupUrl}"
             },
-            "OSM-india-twitter": {
-                "name": "OpenStreetMap Indija Twiteris",
-                "description": "Mēs esam viena tvīta attālumā: {url}"
+            "OSM-CL-facebook": {
+                "description": "Pievienojies OpenStreetMap Čīles kopienai Feisbookā",
+                "extendedDescription": "Pievienojies kopienai lai uzzinātu vairāk par OpenStreetMap, uzdod jautājumus vai piedalies saietos. Visi ir gaidīti!"
+            },
+            "OSM-CL-mailinglist": {
+                "name": "Talk-cl E-pasta saraksts"
+            },
+            "OSM-CL-telegram": {
+                "description": "Pievienojies OpenStreetMap Čīles kopienai Telegram",
+                "extendedDescription": "Pievienojies kopienai lai uzzinātu vairāk par OpenStreetMap, uzdod jautājumus vai piedalies saietos. Visi ir gaidīti!"
+            },
+            "OSM-CL-twitter": {
+                "description": "Seko mums Twitterī: {url}"
+            },
+            "OSM-CO": {
+                "name": "OpenStreetMap Kolumbija"
+            },
+            "OSM-CO-facebook": {
+                "description": "Pievienojies OpenStreetMap Kolumbijas kopienai Feisbookā",
+                "extendedDescription": "Pievienojies kopienai lai uzzinātu vairāk par OpenStreetMap. Visi ir gaidīti!"
+            },
+            "OSM-CO-mailinglist": {
+                "name": "Talk-co E-pasta liste"
+            },
+            "OSM-CO-telegram": {
+                "name": "OSM Kolumbija Telegram",
+                "description": "OpenStreetMap Kolumbijas Telegram čats"
+            },
+            "OSM-CO-twitter": {
+                "name": "OpenStreetMap Kolumbijas Twiteris",
+                "description": "Seko mums Twitterī: {url}"
+            },
+            "OSM-CU-telegram": {
+                "name": "OSM Kubas Telegram",
+                "description": "OpenStreetMap Kubas Telegram čats"
+            },
+            "OSM-Colorado": {
+                "name": "OpenStreetMap Kolorādo",
+                "description": "Kartētāji un OpenStreetMap lietotāji ASV Kolorādo štatā"
+            },
+            "OSM-Discord": {
+                "name": "OpenStreetMap Discords",
+                "description": "Sazinies ar citiem kartētājiem Discordā"
+            },
+            "OSM-EC-telegram": {
+                "name": "OSM Ekvadora Telegrammā",
+                "description": "OpenStreetMap Ekvadoras Telegram čats"
+            },
+            "OSM-ES-mailinglist": {
+                "name": "Talk-es e-pasta saraksts",
+                "description": "E-pasta saraksts, kur var diskutēt par OpenStreetMap Spānijā"
+            },
+            "OSM-ES-telegram": {
+                "name": "@OSMes Telegrammā",
+                "description": "OpenStreetMap Spānijas telegram čats"
+            },
+            "OSM-Facebook": {
+                "name": "OpenStreetMap Facebookā.",
+                "description": "Spied patīk facebookā, lai saņemtu ziņas un atjauninājumus par OpenStreetMap."
+            },
+            "OSM-IDN-facebook": {
+                "name": "OpenStreetMap Indonēzija",
+                "description": "Uzlabo OpenStreetMap Indonēzijā",
+                "extendedDescription": "Kartē Indonēzijā? Ir jautājumi, gribi sazināties ar mūsu kopienu? Pievienojies {url}. Visi ir gaidīti!"
             },
             "OSM-India-Puducherry-Facebook": {
                 "name": "Brīvas Programmatūras un Aparatūras Kustība - Facebook",
@@ -4158,26 +4156,20 @@
                 "description": "FSHM Riot grupa, lai diskutētu, dalītos un atjaunotu kartēšanas aktivitātes un notikumus ap Pudučerri.",
                 "extendedDescription": "FSHM kopienas biedri dalās ar saviem OSM labojumiem / pieredzi caur Riot.im grupu. Šo grupu arī izmanto lai diskutētu par brīvu aparatūru / programmatūru, tehnoloģiju un aktīvismu. "
             },
-            "OSM-IDN-facebook": {
-                "name": "OpenStreetMap Indonēzija",
-                "description": "Uzlabo OpenStreetMap Indonēzijā",
-                "extendedDescription": "Kartē Indonēzijā? Ir jautājumi, gribi sazināties ar mūsu kopienu? Pievienojies {url}. Visi ir gaidīti!"
+            "OSM-India-facebook": {
+                "name": "OpenStreetMap Indija - Apkārtnes kartēšana",
+                "description": "Uzlabo OpenStreetMap Indijā",
+                "extendedDescription": "Kartē indijā? Ir jautājumi, gribi sazināties ar mūsu kopienu? Pievienojies {url}. Visi ir gaidīti!"
             },
-            "OSM-japan-facebook": {
-                "name": "OpenStreetMap Japānas Kopiena",
-                "description": "Kartētāji un OpenStreetMap lietotāji Japānā"
+            "OSM-MMR-facebook": {
+                "name": "OpenStreetMap Mjanma",
+                "description": "Uzlabo OpenStreetMap Mjanmā",
+                "extendedDescription": "Kartē Mjanmā? Ir jautājumi, vai gribi sazināties ar mūsu kopienu? Pievienojies {Url}. Visi ir gaidīti!"
             },
-            "OSM-japan-mailinglist": {
-                "name": "OpenStreetMap Japānas Adresātu Saraksts",
-                "description": "Talk-ja ir Oficiālais adresātu saraksts japāniešu kopienai. "
-            },
-            "OSM-japan-twitter": {
-                "name": "OpenStreetMap Japānas Twiteris",
-                "description": "Heštago Twitterī: {url}"
-            },
-            "OSM-japan-website": {
-                "name": "OpenStreetMap Japāna",
-                "description": "Kartētāji un OpenStreetMap lietotāji Japānā"
+            "OSM-MNG-facebook": {
+                "name": "OpenStreetMap Mongolija",
+                "description": "Uzlabo OpenStreetMap Mongolijā",
+                "extendedDescription": "Kartē Mongolijā? Ir jautājumi, vai gribi sazināties ar mūsu kopienu? Pievienojies {Url}. Visi ir gaidīti!"
             },
             "OSM-MY-facebook": {
                 "name": "OpenStreetMap Malaizija Facebookā",
@@ -4191,20 +4183,34 @@
                 "name": "OpenStreetMap Malaizijas Riot kannāls",
                 "description": "Visi kartētāji ir laipni aicināti! Piesakies {signupUrl}"
             },
-            "OSM-MNG-facebook": {
-                "name": "OpenStreetMap Mongolija",
-                "description": "Uzlabo OpenStreetMap Mongolijā",
-                "extendedDescription": "Kartē Mongolijā? Ir jautājumi, vai gribi sazināties ar mūsu kopienu? Pievienojies {Url}. Visi ir gaidīti!"
-            },
-            "OSM-MMR-facebook": {
-                "name": "OpenStreetMap Mjanma",
-                "description": "Uzlabo OpenStreetMap Mjanmā",
-                "extendedDescription": "Kartē Mjanmā? Ir jautājumi, vai gribi sazināties ar mūsu kopienu? Pievienojies {Url}. Visi ir gaidīti!"
-            },
             "OSM-Nepal-facebook": {
                 "name": "OpenStreetMap Nepāla",
                 "description": "Uzlabo OpenStreetMap Nepālā",
                 "extendedDescription": "Kartē Nepālā? Ir jautājumi, vai gribi sazināties ar mūsu kopienu? Pievienojies {Url}. Visi ir gaidīti!"
+            },
+            "OSM-PE": {
+                "name": "OpenStreetMap Peru",
+                "description": "Jaunumi un resursi OpenStreetMap Peru kopienai"
+            },
+            "OSM-PE-facebook": {
+                "name": "OpenStreetMap Peru Facebookā.",
+                "description": "Pievinojies OpenStreetMap Peru kopienai Facebookā"
+            },
+            "OSM-PE-mailinglist": {
+                "name": "Talk-pe E-pasta saraksts",
+                "description": "Oficiāls E-Pasta saraksts OpenStreetMap Peru kopienai"
+            },
+            "OSM-PE-matrix": {
+                "name": "OpenStreetMap Peru Matrix čats",
+                "description": "Čato ar citiem OpenStreetMap Peru kopienas biedriem Matrixā."
+            },
+            "OSM-PE-telegram": {
+                "name": "OpenStreetMap Peru Telegram",
+                "description": "Pievienojies OpenStreetMap Peru kopienai Telegram"
+            },
+            "OSM-PE-twitter": {
+                "name": "OpenStreetMap Peru Twiteris",
+                "description": "Seko mums Twitterī: {url}"
             },
             "OSM-PH-facebook": {
                 "name": "OpenStreetMap PH Facebooks ",
@@ -4222,6 +4228,18 @@
                 "name": "OpenStreetMap PH Telegram",
                 "description": "Neoficiāls Telegram vietējai OpenStreetMap ieguldītāju kopienai un draugiem Filipīnās."
             },
+            "OSM-PL-facebook-group": {
+                "name": "OpenStreetMap Polijas Facebook grupa",
+                "description": "Grupas kartētājiem un OpenStreetMap lietotājiem Polijā"
+            },
+            "OSM-PL-forum": {
+                "name": "OpenStreetMap Polijas forums",
+                "description": "Forums OpenStreetMap Polijas kopienai"
+            },
+            "OSM-PY-telegram": {
+                "name": "OSM Paragvaja Telegrammā",
+                "description": "OpenStreetMap Paragvajas Telegram čats"
+            },
             "OSM-RU-forum": {
                 "name": "OpenStreetMap RU forums",
                 "description": "OpenStreetMap RU interneta forums"
@@ -4230,13 +4248,14 @@
                 "name": "OpenStreetMap RU telegram",
                 "description": "OpenStreetMap Krievijas telegram čats"
             },
-            "OSM-TW-facebook": {
-                "name": "OpenStreetMap Taivānas Kopiena",
-                "description": "Facebook grupa OpenStreetMap kartētājiem, lai diskutētu par notikumiem Taivānā."
+            "OSM-Reddit": {
+                "name": "OpenStreetMap Redditā.",
+                "description": "/r/openstreetmap ir laba vieta, kur var uzzināt vairāk par OpenStreetMap. Jautājiet mums jebko!"
             },
-            "OSM-TW-mailinglist": {
-                "name": "OpenStreetMap Taivānas Adresātu Saraksts",
-                "description": "Talk-tw ir Oficiāls E-Pasta saraksts, kur kopienas var diskutēt par notikumiem Taivānā."
+            "OSM-Rome-meetup": {
+                "name": "Incontro Mappatori Romani",
+                "description": "Uzlabo OpenStreetMap Romas apkārtnē",
+                "extendedDescription": "Mēs mērķējam būt resurss kur cilvēki var diskutēt un dalīties ar zināšanām par brīvu ģeogrāfisku datu izmantošanu, itsevišķi OpenStreetMap un Atvērtu ģeotelpisko programmatūru, kas uztur rediģējumus un parāda ģeogrāfiskos datus. Mēs stipri atbalstam to izmantošanu Lazio."
             },
             "OSM-TH-CNX-meetup": {
                 "name": "OSM saiets Chiang Mai",
@@ -4250,6 +4269,88 @@
             "OSM-TH-forum": {
                 "name": "OpenStreetMap TH forums",
                 "description": "OpenStreetMap Taizemes interneta forums"
+            },
+            "OSM-TW-facebook": {
+                "name": "OpenStreetMap Taivānas Kopiena",
+                "description": "Facebook grupa OpenStreetMap kartētājiem, lai diskutētu par notikumiem Taivānā."
+            },
+            "OSM-TW-mailinglist": {
+                "name": "OpenStreetMap Taivānas Adresātu Saraksts",
+                "description": "Talk-tw ir Oficiāls E-Pasta saraksts, kur kopienas var diskutēt par notikumiem Taivānā."
+            },
+            "OSM-Telegram": {
+                "name": "OpenStreetMap Telegram",
+                "description": "Pievienojies OpenStreetMap Telegram globālai supergrupai šeit: {url}"
+            },
+            "OSM-Twitter": {
+                "name": "OpenStreetMap Twiteris",
+                "description": "Seko mums Twitterī: {url}"
+            },
+            "OSM-Vancouver-meetup": {
+                "name": "OpenStreetMap Vankūvera",
+                "description": "Kartētāji un OpenStreetMap lietotāji Vankūveras, BC apkārtnē"
+            },
+            "OSM-br-mailinglist": {
+                "name": "Talk-br E-pasta saraksts"
+            },
+            "OSM-br-telegram": {
+                "description": "Pievienojies OpenStreetMap Brazīlijas kopienai Telegram",
+                "extendedDescription": "Pievienojies kopienai lai uzzinātu vairāk par OpenStreetMap, uzdod jautājumus vai piedalies saietos. Visi ir gaidīti!"
+            },
+            "OSM-br-twitter": {
+                "description": "Seko mums Twitterī: {url}"
+            },
+            "OSM-help": {
+                "name": "OpenStreetMap Palīdzība",
+                "description": "Uzdod jautājumu un saņem atbildes OpenStreetMap kopienas balstītajā jautājumu un atbilžu lapā.",
+                "extendedDescription": "{url} ir visiem kam vajadzīga palīdzība ar OpenStreetMap. Vai nu tu esi iesācējs, vai arī tev ir tehnisks jautājums, mēs esam šeit lai palīdzētu!"
+            },
+            "OSM-india-mailinglist": {
+                "name": "OpenStreetMap Indijas Adresātu Saraksts",
+                "description": "Talk-in ir Oficiāls E-Pasta saraksts Indiešu OSM kopienai."
+            },
+            "OSM-india-twitter": {
+                "name": "OpenStreetMap Indija Twiteris",
+                "description": "Mēs esam viena tvīta attālumā: {url}"
+            },
+            "OSM-japan-facebook": {
+                "name": "OpenStreetMap Japānas Kopiena",
+                "description": "Kartētāji un OpenStreetMap lietotāji Japānā"
+            },
+            "OSM-japan-mailinglist": {
+                "name": "OpenStreetMap Japānas Adresātu Saraksts",
+                "description": "Talk-ja ir Oficiālais adresātu saraksts japāniešu kopienai. "
+            },
+            "OSM-japan-twitter": {
+                "name": "OpenStreetMap Japānas Twiteris",
+                "description": "Heštago Twitterī: {url}"
+            },
+            "OSM-japan-website": {
+                "name": "OpenStreetMap Japāna",
+                "description": "Kartētāji un OpenStreetMap lietotāji Japānā"
+            },
+            "OSMF": {
+                "name": "OpenStreetMap Fonds",
+                "description": "OSMF ir Lielbritānijā bāzēta bezpeļņas organizācija, kas atbalsta OpenStreetMap Projektu",
+                "extendedDescription": "OSMF atbalsta OpenStreetMap vācot līdzekļus, uzturot serverus kas nodrošina OSM, organizējot ikgadējo State of the Map konferenci, kā arī koordinējot brīvprātīgos, kas uztur un atjaunina OSM. Tu vari parādīt atbalstu un izpaust savu balsi OpenStreetMap virzienā paliekot par OSMF biedru šeit: {signupUrl}"
+            },
+            "PHXGeo-meetup": {
+                "name": "PHXGeo Saiets"
+            },
+            "PHXGeo-twitter": {
+                "name": "PHXGeo Twitteris",
+                "description": "Seko mums Twitterī: {url}"
+            },
+            "RS-telegram": {
+                "description": "Pievienojies OpenStreetMap Rio Grande do Sul kopienai Telegram"
+            },
+            "South-Tyrol-Mailing-List": {
+                "name": "OpenStreetMap Dienvidtiroles e-pasta saraksts",
+                "description": "OpenStreetMap Itālijas reģionālais saziņas saraksts Dienvidtirolei"
+            },
+            "Trentino-Mailing-List": {
+                "name": "OpenStreetMap Trentino e-pasta saraksts",
+                "description": "OpenStreetMap Itālijas reģionālais saziņas saraksts Trentino"
             },
             "al-forum": {
                 "name": "OSM Albānijas Forums",
@@ -4275,22 +4376,6 @@
             "at-twitter": {
                 "name": "OpenStreetMap Austrija Twiteris",
                 "description": "OpenStreetMap Austrija Twitterī: {url}"
-            },
-            "osmgraz-meetup": {
-                "name": "OSM kopienas saiets Grācā",
-                "description": "Ikmēneša saiets OpenStreetMap kopienai Grācā"
-            },
-            "osmgraz-twitter": {
-                "name": "OSM Grācas kopienas twitteris",
-                "description": "OpenStreetMap Grācas kopienas twitteris"
-            },
-            "osm-at": {
-                "name": "OpenStreetMap Austrija",
-                "description": "Platforma informācijai par OpenStreetMap Austrijā"
-            },
-            "byosm": {
-                "name": "OpenStreetMap Baltkrievija",
-                "description": "OpenStreetMap Baltkrievijas telegram čats"
             },
             "be-facebook": {
                 "description": "Kartētāji un OpenStreetMap lietotāju Facebook Beļģijā"
@@ -4322,32 +4407,61 @@
                 "name": "OpenStreetMap Beļģijas Twiteris",
                 "description": "OSM Beļģija Twiterī: @osm_be"
             },
-            "hr-facebook": {
-                "name": "OpenStreetMap Horvātijas Facebook Grupa",
-                "description": "OpenStreetMap Horvātijas Facebook Grupa"
+            "bw-facebook": {
+                "name": "Kartējam Botsvanu Facebookā",
+                "description": "OpenStreetMap Botsvana lapa"
             },
-            "hr-irc": {
-                "name": "OpenStreetMap Horvātijas IRC",
-                "description": "Pievienojies kanālam #osm-hr, serverī irc.freenode.org (6667 ports)"
+            "bw-twitter": {
+                "name": "Kartējam Botsvanu Twitteris",
+                "description": "Twitteris priekš OpenStreetMap Botswanā"
             },
-            "hr-mailinglist": {
-                "name": "Talk-hr E-pasta saraksts",
-                "description": "Talk-mg e-pasta saraksts"
+            "byosm": {
+                "name": "OpenStreetMap Baltkrievija",
+                "description": "OpenStreetMap Baltkrievijas telegram čats"
+            },
+            "cape-coast-youthmappers": {
+                "name": "Cape Coasta universitātes YouthMappers",
+                "description": "Seko mums Twitterī: {url}"
             },
             "czech-community": {
                 "name": "Čehijas OSM Kopiena",
                 "description": "Kartes portāls, mājaslapa un kontakinformācija OSM biedriem Čehijā"
             },
-            "osmcz-facebook": {
-                "name": "OpenStreetMap CZ Facebookā"
+            "de-berlin-mailinglist": {
+                "name": "Berlīnes e-pasta saraksts",
+                "description": "Šis ir e-pasta saraksts Berlīnes OSM kopienai"
             },
-            "osmcz-twitter": {
-                "name": "Čehu twitteris @osmcz",
-                "description": "Seko Čehu kopienai Twitterī - ieskaitot tulkotu WeeklyOSM!"
+            "de-berlin-meetup": {
+                "name": "OpenStreetMap Berlīnes-Brandenburgas Saiets",
+                "description": "Kartētāji un OpenStreetMap lietotāji Berlīnes apkārtnē"
             },
-            "talk-cz-mailinglist": {
-                "name": "Čehu e-pasta saraksts (talk-cz)",
-                "description": "Talk-cz ir Oficiāls E-Pasta saraksts Čehu OSM kopienai"
+            "de-berlin-telegram": {
+                "name": "@osmberlin Telegrammā",
+                "description": "OpenStreetMap Berlīnes telegram čats"
+            },
+            "de-berlin-twitter": {
+                "name": "OpenStreetMap Berlīnes Twiteris",
+                "description": "Seko mums Twitterī: {url}"
+            },
+            "de-forum": {
+                "name": "OpenStreetMap DE forums",
+                "description": "OpenStreetMap Vācijas interneta forums"
+            },
+            "de-irc": {
+                "name": "OpenStreetMap Vācijas IRC",
+                "description": "Pievienojies #osm-de kanālam irc.oftc.net serverī (6667 ports)"
+            },
+            "de-mailinglist": {
+                "name": "Talk-de E-pasta saraksts",
+                "description": "Talk-de ir Oficiāls E-Pasta saraksts Vācijas OSM kopienai"
+            },
+            "de-ostwestfalen-lippe-mailinglist": {
+                "name": "OWL e-pasta saraksts",
+                "description": "Šis ir e-pasta saraksts Ostwestfalen-Lippe OSM kopienai"
+            },
+            "de-telegram": {
+                "name": "OpenStreetMap Vācijas Telegram",
+                "description": "Pievienojies OpenStreetMap Vācijas Telegram supergrupai šeit: {url}"
             },
             "dk-forum": {
                 "name": "OpenStreetMap Dānijas interneta forums",
@@ -4393,45 +4507,25 @@
                 "name": "OpenStreetMap Francija Twitterī",
                 "description": "OpenStreetMap Francija Twitterī: {url}"
             },
-            "de-berlin-mailinglist": {
-                "name": "Berlīnes e-pasta saraksts",
-                "description": "Šis ir e-pasta saraksts Berlīnes OSM kopienai"
+            "gb-irc": {
+                "name": "OpenStreetMap Apvienotās Karalistes IRC",
+                "description": "Pievienojies #osm-gb kanālam irc.oftc.net serverī (6667 ports)",
+                "extendedDescription": "Pievienojies #osm-gb kanālam irc.oftc.net serverī (6667 ports), Lūdzu esi pacietīgs un pagaidi pāris minūtes pirms uzdod jautājumu"
             },
-            "de-berlin-meetup": {
-                "name": "OpenStreetMap Berlīnes-Brandenburgas Saiets",
-                "description": "Kartētāji un OpenStreetMap lietotāji Berlīnes apkārtnē"
+            "gb-mailinglist": {
+                "name": "Talk-gb E-pasta saraksts"
             },
-            "de-berlin-telegram": {
-                "name": "@osmberlin Telegrammā",
-                "description": "OpenStreetMap Berlīnes telegram čats"
+            "hr-facebook": {
+                "name": "OpenStreetMap Horvātijas Facebook Grupa",
+                "description": "OpenStreetMap Horvātijas Facebook Grupa"
             },
-            "de-berlin-twitter": {
-                "name": "OpenStreetMap Berlīnes Twiteris",
-                "description": "Seko mums Twitterī: {url}"
+            "hr-irc": {
+                "name": "OpenStreetMap Horvātijas IRC",
+                "description": "Pievienojies kanālam #osm-hr, serverī irc.freenode.org (6667 ports)"
             },
-            "de-forum": {
-                "name": "OpenStreetMap DE forums",
-                "description": "OpenStreetMap Vācijas interneta forums"
-            },
-            "de-irc": {
-                "name": "OpenStreetMap Vācijas IRC",
-                "description": "Pievienojies #osm-de kanālam irc.oftc.net serverī (6667 ports)"
-            },
-            "de-mailinglist": {
-                "name": "Talk-de E-pasta saraksts",
-                "description": "Talk-de ir Oficiāls E-Pasta saraksts Vācijas OSM kopienai"
-            },
-            "de-ostwestfalen-lippe-mailinglist": {
-                "name": "OWL e-pasta saraksts",
-                "description": "Šis ir e-pasta saraksts Ostwestfalen-Lippe OSM kopienai"
-            },
-            "de-telegram": {
-                "name": "OpenStreetMap Vācijas Telegram",
-                "description": "Pievienojies OpenStreetMap Vācijas Telegram supergrupai šeit: {url}"
-            },
-            "osm-de": {
-                "name": "OpenStreetMap Vācija",
-                "description": "Platforma informācijai par OpenStreetMap Vācijā"
+            "hr-mailinglist": {
+                "name": "Talk-hr E-pasta saraksts",
+                "description": "Talk-mg e-pasta saraksts"
             },
             "hu-facebook": {
                 "name": "OpenStreetMap HU Facebookā.",
@@ -4476,23 +4570,9 @@
                 "name": "OpenStreetMap Itālijas Twiteris",
                 "description": "Seko mums Twitterī: {url}"
             },
-            "OSM-Rome-meetup": {
-                "name": "Incontro Mappatori Romani",
-                "description": "Uzlabo OpenStreetMap Romas apkārtnē",
-                "extendedDescription": "Mēs mērķējam būt resurss kur cilvēki var diskutēt un dalīties ar zināšanām par brīvu ģeogrāfisku datu izmantošanu, itsevišķi OpenStreetMap un Atvērtu ģeotelpisko programmatūru, kas uztur rediģējumus un parāda ģeogrāfiskos datus. Mēs stipri atbalstam to izmantošanu Lazio."
-            },
-            "South-Tyrol-Mailing-List": {
-                "name": "OpenStreetMap Dienvidtiroles e-pasta saraksts",
-                "description": "OpenStreetMap Itālijas reģionālais saziņas saraksts Dienvidtirolei"
-            },
-            "talk-it-lazio": {
-                "name": "OpenStreetMap IT Lazio",
-                "description": "Visi ir laipni aicināti! Piesakies {signupUrl}",
-                "extendedDescription": "E-pasta saraksts kartētājiem Romā un Lazio apkārtnē."
-            },
-            "Trentino-Mailing-List": {
-                "name": "OpenStreetMap Trentino e-pasta saraksts",
-                "description": "OpenStreetMap Itālijas reģionālais saziņas saraksts Trentino"
+            "mappa-mercia-group": {
+                "name": "Mappa Mercia vietējā grupa",
+                "description": "Mājas OpenStreetMap entuziastiem Midlendā"
             },
             "no-forum": {
                 "name": "OpenStreetMap Norvēģijas interneta forums",
@@ -4506,33 +4586,44 @@
                 "name": "OpenStreetMap Norvēģijas e-pasta saraksts",
                 "description": "E-pasta saraskts OpenStreetMap kartētājiem, lietotājiem, izstrādātājiem un entuziastiem Norvēģijā"
             },
-            "OSM-PL-facebook-group": {
-                "name": "OpenStreetMap Polijas Facebook grupa",
-                "description": "Grupas kartētājiem un OpenStreetMap lietotājiem Polijā"
+            "osm-at": {
+                "name": "OpenStreetMap Austrija",
+                "description": "Platforma informācijai par OpenStreetMap Austrijā"
             },
-            "OSM-PL-forum": {
-                "name": "OpenStreetMap Polijas forums",
-                "description": "Forums OpenStreetMap Polijas kopienai"
+            "osm-de": {
+                "name": "OpenStreetMap Vācija",
+                "description": "Platforma informācijai par OpenStreetMap Vācijā"
             },
-            "si-forum": {
-                "name": "OpenStreetMap Slovēnijas Forums",
-                "description": "Forums OpenStreetMap Slovēnijas kopienai"
+            "osm-gh-facebook": {
+                "name": "OpenStreetMap Gana Facebookā",
+                "description": "Facebook grupa cilvēkiem, kas ir ieinteresēti OpenStreetMap."
             },
-            "si-mailinglist": {
-                "name": "OpenStreetMap Slovēnijas e-pasta saraksts",
-                "description": "E-pasta saraksts Slovēnijas OpenStreetMap kopienai"
+            "osm-gh-twitter": {
+                "name": "OpenStreetMap Gana Twitterī",
+                "description": "Seko mums Twitterī: {url}"
             },
-            "OSM-ES-mailinglist": {
-                "name": "Talk-es e-pasta saraksts",
-                "description": "E-pasta saraksts, kur var diskutēt par OpenStreetMap Spānijā"
-            },
-            "OSM-ES-telegram": {
-                "name": "@OSMes Telegrammā",
-                "description": "OpenStreetMap Spānijas telegram čats"
+            "osm-mg-facebook": {
+                "name": "OpenStreetMap Madagaskaras Facebook Grupa",
+                "description": "Malgašu Facebook grupa cilvēkiem, kas interesējas par OpenStreetMap."
             },
             "osm-se": {
                 "name": "OpenStreetMap.se",
                 "description": "Nodrošina OSM servisus un informāciju vietējai Zviedrijas kopienai"
+            },
+            "osmcz-facebook": {
+                "name": "OpenStreetMap CZ Facebookā"
+            },
+            "osmcz-twitter": {
+                "name": "Čehu twitteris @osmcz",
+                "description": "Seko Čehu kopienai Twitterī - ieskaitot tulkotu WeeklyOSM!"
+            },
+            "osmgraz-meetup": {
+                "name": "OSM kopienas saiets Grācā",
+                "description": "Ikmēneša saiets OpenStreetMap kopienai Grācā"
+            },
+            "osmgraz-twitter": {
+                "name": "OSM Grācas kopienas twitteris",
+                "description": "OpenStreetMap Grācas kopienas twitteris"
             },
             "se-facebook": {
                 "name": "OpenStreetMap Zviedrijas Facebooks",
@@ -4554,197 +4645,33 @@
                 "name": "OpenStreetMap Zviedrija Twitterī",
                 "description": "Seko mums Twitterī: {url}"
             },
-            "Nottingham-OSM-pub-meetup": {
-                "name": "Austrummidlendas (Notingemas) Ikmēneša bāra saiets",
-                "description": "Sociālais saiets priekš Austrummidlendas  kartētājiem un lietotājiem"
+            "si-forum": {
+                "name": "OpenStreetMap Slovēnijas Forums",
+                "description": "Forums OpenStreetMap Slovēnijas kopienai"
             },
-            "gb-irc": {
-                "name": "OpenStreetMap Apvienotās Karalistes IRC",
-                "description": "Pievienojies #osm-gb kanālam irc.oftc.net serverī (6667 ports)",
-                "extendedDescription": "Pievienojies #osm-gb kanālam irc.oftc.net serverī (6667 ports), Lūdzu esi pacietīgs un pagaidi pāris minūtes pirms uzdod jautājumu"
-            },
-            "gb-mailinglist": {
-                "name": "Talk-gb E-pasta saraksts"
-            },
-            "mappa-mercia-group": {
-                "name": "Mappa Mercia vietējā grupa",
-                "description": "Mājas OpenStreetMap entuziastiem Midlendā"
-            },
-            "OSM-CA-Slack": {
-                "name": "OSM-CA Slack",
-                "description": "Visi ir laipni aicināti! Piesakies {signupUrl}"
-            },
-            "OSM-Vancouver-meetup": {
-                "name": "OpenStreetMap Vankūvera",
-                "description": "Kartētāji un OpenStreetMap lietotāji Vankūveras, BC apkārtnē"
-            },
-            "OSM-CU-telegram": {
-                "name": "OSM Kubas Telegram",
-                "description": "OpenStreetMap Kubas Telegram čats"
-            },
-            "Bay-Area-OpenStreetMappers": {
-                "name": "Līča rajona OpenStreetMappers",
-                "description": "Uzlabo OpenStreetMap Sanfrancisko līča rajonā."
-            },
-            "Central-Pennsylvania-OSM": {
-                "name": "Centrālās Pensilvānijas OSM"
-            },
-            "Code-for-San-Jose-Slack": {
-                "name": "Kods priekš Sanhosē Slack",
-                "description": "Visi ir laipni aicināti! Piesakies {signupUrl}, tad pievienojies #osm kanālam."
-            },
-            "GeoPhilly": {
-                "name": "GeoPhilly",
-                "description": "Saiets karšu entuziastiem Filadelfijas apkārtnē",
-                "extendedDescription": "GeoPhilly apvieno izstrādātājus, ģeogrāfus, datu nūģus, atvērtā pirmkoda entuziastus, civilos hakerus un karšu atkarīgos kopējā karšu mīlestībā  un to izteiktajiem stāstiem. Ja tu izmanto kartes savā darbā, vai vienkārši gribi uzzināt vairāk, tad šis saiets ir priekš tevis! Mūsu pasākumu mērķis ir būt atvērtiem, draudzīgiem, izglītojošiem un sociāliem, un tie iet no laimīgām stundām līdz ātrām runām un pat darbnīcām. Nāc un izveido diversu, iedvesmojošu kopienu Filadelfijā kopā ar mums!"
-            },
-            "MapMinnesota": {
-                "name": "MapMinesota",
-                "description": "Kartētāji un OpenStreetMap lietotāji Mineapolisas—Sentpolas apkārtnē",
-                "extendedDescription": "Savieno OpenStreetMap entuziastus Minesotā un Mineapolisā—Sentpolā."
-            },
-            "Mapping-DC-meetup": {
-                "name": "Kartēšana DC",
-                "description": "Uzlabo OpenStreetMap Vašingtonas apkārtnē"
-            },
-            "Maptime-ME-meetup": {
-                "name": "MaptimeME"
-            },
-            "OSM-Colorado": {
-                "name": "OpenStreetMap Kolorādo",
-                "description": "Kartētāji un OpenStreetMap lietotāji ASV Kolorādo štatā"
-            },
-            "PHXGeo-meetup": {
-                "name": "PHXGeo Saiets"
-            },
-            "PHXGeo-twitter": {
-                "name": "PHXGeo Twitteris",
-                "description": "Seko mums Twitterī: {url}"
+            "si-mailinglist": {
+                "name": "OpenStreetMap Slovēnijas e-pasta saraksts",
+                "description": "E-pasta saraksts Slovēnijas OpenStreetMap kopienai"
             },
             "talk-au": {
                 "name": "Talk-au E-pasta saraksts"
             },
-            "OSM-AR-mailinglist": {
-                "name": "Talk-ar E-pasta saraksts",
-                "description": "Vēsturisks e-pasta saraksts. Gandrīz vai vispār netiek lietots."
+            "talk-cz-mailinglist": {
+                "name": "Čehu e-pasta saraksts (talk-cz)",
+                "description": "Talk-cz ir Oficiāls E-Pasta saraksts Čehu OSM kopienai"
             },
-            "OSM-AR-twitter": {
-                "description": "Seko mums Twitterī: {url}"
+            "talk-gh": {
+                "name": "Talk-gh E-pasta saraksts",
+                "description": "Talk-gh ir Oficiāls E-Pasta saraksts Ganas OSM kopienai."
             },
-            "OSM-BO-mailinglist": {
-                "name": "Talk-bo E-pasta saraksts",
-                "extendedDescription": "Kartē Bolīvijā? Ir jautājumi, gribi sazināties ar mūsu kopienu? Pievienojies {url}. Visi ir gaidīti!"
+            "talk-it-lazio": {
+                "name": "OpenStreetMap IT Lazio",
+                "description": "Visi ir laipni aicināti! Piesakies {signupUrl}",
+                "extendedDescription": "E-pasta saraksts kartētājiem Romā un Lazio apkārtnē."
             },
-            "Bahia-telegram": {
-                "description": "Pievienojies OpenStreetMap Baijas kopienai Telegram",
-                "extendedDescription": "Pievienojies kopienai lai uzzinātu vairāk par OpenStreetMap, uzdod jautājumus vai piedalies saietos. Visi ir gaidīti!"
-            },
-            "OSM-br-mailinglist": {
-                "name": "Talk-br E-pasta saraksts"
-            },
-            "OSM-br-telegram": {
-                "description": "Pievienojies OpenStreetMap Brazīlijas kopienai Telegram",
-                "extendedDescription": "Pievienojies kopienai lai uzzinātu vairāk par OpenStreetMap, uzdod jautājumus vai piedalies saietos. Visi ir gaidīti!"
-            },
-            "OSM-br-twitter": {
-                "description": "Seko mums Twitterī: {url}"
-            },
-            "RS-telegram": {
-                "description": "Pievienojies OpenStreetMap Rio Grande do Sul kopienai Telegram"
-            },
-            "OSM-CL-facebook": {
-                "description": "Pievienojies OpenStreetMap Čīles kopienai Feisbookā",
-                "extendedDescription": "Pievienojies kopienai lai uzzinātu vairāk par OpenStreetMap, uzdod jautājumus vai piedalies saietos. Visi ir gaidīti!"
-            },
-            "OSM-CL-mailinglist": {
-                "name": "Talk-cl E-pasta saraksts"
-            },
-            "OSM-CL-telegram": {
-                "description": "Pievienojies OpenStreetMap Čīles kopienai Telegram",
-                "extendedDescription": "Pievienojies kopienai lai uzzinātu vairāk par OpenStreetMap, uzdod jautājumus vai piedalies saietos. Visi ir gaidīti!"
-            },
-            "OSM-CL-twitter": {
-                "description": "Seko mums Twitterī: {url}"
-            },
-            "OSM-CO-facebook": {
-                "description": "Pievienojies OpenStreetMap Kolumbijas kopienai Feisbookā",
-                "extendedDescription": "Pievienojies kopienai lai uzzinātu vairāk par OpenStreetMap. Visi ir gaidīti!"
-            },
-            "OSM-CO-mailinglist": {
-                "name": "Talk-co E-pasta liste"
-            },
-            "OSM-CO-telegram": {
-                "name": "OSM Kolumbija Telegram",
-                "description": "OpenStreetMap Kolumbijas Telegram čats"
-            },
-            "OSM-CO-twitter": {
-                "name": "OpenStreetMap Kolumbijas Twiteris",
-                "description": "Seko mums Twitterī: {url}"
-            },
-            "OSM-CO": {
-                "name": "OpenStreetMap Kolumbija"
-            },
-            "OSM-EC-telegram": {
-                "name": "OSM Ekvadora Telegrammā",
-                "description": "OpenStreetMap Ekvadoras Telegram čats"
-            },
-            "OSM-PY-telegram": {
-                "name": "OSM Paragvaja Telegrammā",
-                "description": "OpenStreetMap Paragvajas Telegram čats"
-            },
-            "OSM-PE-facebook": {
-                "name": "OpenStreetMap Peru Facebookā.",
-                "description": "Pievinojies OpenStreetMap Peru kopienai Facebookā"
-            },
-            "OSM-PE-mailinglist": {
-                "name": "Talk-pe E-pasta saraksts",
-                "description": "Oficiāls E-Pasta saraksts OpenStreetMap Peru kopienai"
-            },
-            "OSM-PE-matrix": {
-                "name": "OpenStreetMap Peru Matrix čats",
-                "description": "Čato ar citiem OpenStreetMap Peru kopienas biedriem Matrixā."
-            },
-            "OSM-PE-telegram": {
-                "name": "OpenStreetMap Peru Telegram",
-                "description": "Pievienojies OpenStreetMap Peru kopienai Telegram"
-            },
-            "OSM-PE-twitter": {
-                "name": "OpenStreetMap Peru Twiteris",
-                "description": "Seko mums Twitterī: {url}"
-            },
-            "OSM-PE": {
-                "name": "OpenStreetMap Peru",
-                "description": "Jaunumi un resursi OpenStreetMap Peru kopienai"
-            },
-            "OSM-Discord": {
-                "name": "OpenStreetMap Discords",
-                "description": "Sazinies ar citiem kartētājiem Discordā"
-            },
-            "OSM-Facebook": {
-                "name": "OpenStreetMap Facebookā.",
-                "description": "Spied patīk facebookā, lai saņemtu ziņas un atjauninājumus par OpenStreetMap."
-            },
-            "OSM-help": {
-                "name": "OpenStreetMap Palīdzība",
-                "description": "Uzdod jautājumu un saņem atbildes OpenStreetMap kopienas balstītajā jautājumu un atbilžu lapā.",
-                "extendedDescription": "{url} ir visiem kam vajadzīga palīdzība ar OpenStreetMap. Vai nu tu esi iesācējs, vai arī tev ir tehnisks jautājums, mēs esam šeit lai palīdzētu!"
-            },
-            "OSM-Reddit": {
-                "name": "OpenStreetMap Redditā.",
-                "description": "/r/openstreetmap ir laba vieta, kur var uzzināt vairāk par OpenStreetMap. Jautājiet mums jebko!"
-            },
-            "OSM-Telegram": {
-                "name": "OpenStreetMap Telegram",
-                "description": "Pievienojies OpenStreetMap Telegram globālai supergrupai šeit: {url}"
-            },
-            "OSM-Twitter": {
-                "name": "OpenStreetMap Twiteris",
-                "description": "Seko mums Twitterī: {url}"
-            },
-            "OSMF": {
-                "name": "OpenStreetMap Fonds",
-                "description": "OSMF ir Lielbritānijā bāzēta bezpeļņas organizācija, kas atbalsta OpenStreetMap Projektu",
-                "extendedDescription": "OSMF atbalsta OpenStreetMap vācot līdzekļus, uzturot serverus kas nodrošina OSM, organizējot ikgadējo State of the Map konferenci, kā arī koordinējot brīvprātīgos, kas uztur un atjaunina OSM. Tu vari parādīt atbalstu un izpaust savu balsi OpenStreetMap virzienā paliekot par OSMF biedru šeit: {signupUrl}"
+            "talk-mg": {
+                "name": "Talk-mg E-pasta liste",
+                "description": "Vieta, kur Madagaskaras OpenStreetMap lietotāji, kopienas un kartētāji var dalīties un diskutēt."
             }
         }
     }

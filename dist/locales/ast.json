@@ -80,18 +80,7 @@
                 "connected_to_hidden": "Nun pué facese circular porque ta coneutao a una carauterística tapecida."
             },
             "orthogonalize": {
-                "title": "Escuadrar",
-                "description": {
-                    "line": "Escuadrar les esquines d'esta llinia.",
-                    "area": "Escuadrar les esquines d'esti área."
-                },
-                "annotation": {
-                    "line": "Escuadraes les esquines d'una llinia.",
-                    "area": "Escuadraes les esquines d'un área."
-                },
-                "not_squarish": "Nun pue escuadrase porque nun ye cuadrada",
-                "too_large": "Esto nun pue escuadrase porque anguaño nun ye visible bastante.",
-                "connected_to_hidden": "Nun pué facese cuadrao porque ta coneutao a una carauterística tapecida."
+                "title": "Escuadrar"
             },
             "straighten": {
                 "title": "Enderechar",
@@ -298,12 +287,6 @@
         "feature_info": {
             "hidden_warning": "{count} carauterístiques tapecíes",
             "hidden_details": "Anguaño estes carauterístiques tán tapecíes: {details}"
-        },
-        "status": {
-            "error": "Nun se pue coneutar cola API.",
-            "offline": "La API ta desconeutada. Intente la edición más sero.",
-            "readonly": "La API ta en mou de sólo llectura. Tendrá d'esperar pa guardar los cambios.",
-            "rateLimit": "La API tien llendaes les conexones anónimes.  Puedes igualo aniciando sesión."
         },
         "commit": {
             "title": "Xubir a OpenStreetMap",
@@ -1183,7 +1166,6 @@
                     "label": "Pasamanes"
                 },
                 "hashtags": {
-                    "label": "Hashtags suxeríos",
                     "placeholder": "#exemplu"
                 },
                 "healthcare": {
@@ -1394,7 +1376,6 @@
                     "label": "Rede"
                 },
                 "network_bicycle": {
-                    "label": "Tipu de rede",
                     "options": {
                         "icn": "Internacional",
                         "lcn": "Llocal",
@@ -1404,7 +1385,6 @@
                     "placeholder": "Llocal, Rexonal, Nacional, Internacional"
                 },
                 "network_foot": {
-                    "label": "Tipu de rede",
                     "options": {
                         "iwn": "Internacional",
                         "lwn": "Llocal",
@@ -1414,7 +1394,6 @@
                     "placeholder": "Llocal, Rexonal, Nacional, Internacional"
                 },
                 "network_horse": {
-                    "label": "Tipu de rede",
                     "options": {
                         "ihn": "Internacional",
                         "lhn": "Llocal",
@@ -1976,12 +1955,6 @@
                 "aerialway/rope_tow": {
                     "name": "Cuerda de remolque"
                 },
-                "aerialway/station": {
-                    "name": "Estación de remonte"
-                },
-                "aerialway/t-bar": {
-                    "name": "Telesquí de T"
-                },
                 "aeroway": {
                     "name": "Via d'aviación"
                 },
@@ -2074,9 +2047,6 @@
                 },
                 "amenity/car_rental": {
                     "name": "Alquiler d'automóviles"
-                },
-                "amenity/car_sharing": {
-                    "name": "Compartir coche"
                 },
                 "amenity/car_wash": {
                     "name": "Llaváu de coches"
@@ -2385,10 +2355,6 @@
                 "area": {
                     "name": "Área"
                 },
-                "area/highway": {
-                    "name": "Superficie de la carretera",
-                    "terms": "firme,pisu,suelu"
-                },
                 "attraction/big_wheel": {
                     "name": "Noria",
                     "terms": "rueda,atracciones"
@@ -2639,9 +2605,6 @@
                 "craft/insulator": {
                     "name": "Aislamientos"
                 },
-                "craft/jeweler": {
-                    "name": "Xoyería"
-                },
                 "craft/key_cutter": {
                     "name": "Llaves",
                     "terms": "Duplicáu de llaves"
@@ -2652,9 +2615,6 @@
                 "craft/metal_construction": {
                     "name": "Construcciones metáliques",
                     "terms": "Forxa,ferreru"
-                },
-                "craft/optician": {
-                    "name": "Óptica"
                 },
                 "craft/painter": {
                     "name": "Pintor"
@@ -2672,9 +2632,6 @@
                 },
                 "craft/plumber": {
                     "name": "Fontaneru"
-                },
-                "craft/pottery": {
-                    "name": "Alfarería"
                 },
                 "craft/rigger": {
                     "name": "Montaxes"
@@ -2829,9 +2786,6 @@
                 },
                 "healthcare/psychotherapist": {
                     "name": "Sicoterapeuta"
-                },
-                "highway": {
-                    "name": "Estrada"
                 },
                 "highway/bridleway": {
                     "name": "Camín de caballeríes",
@@ -3000,9 +2954,6 @@
                 "junction": {
                     "name": "Crucie"
                 },
-                "landuse": {
-                    "name": "Usu del terrén"
-                },
                 "landuse/allotments": {
                     "name": "Xardín acomuñáu"
                 },
@@ -3100,9 +3051,6 @@
                 "landuse/vineyard": {
                     "name": "Viñéu"
                 },
-                "leisure": {
-                    "name": "Recréu"
-                },
                 "leisure/adult_gaming_centre": {
                     "name": "Centru de xuegos p'adultos"
                 },
@@ -3120,10 +3068,6 @@
                 },
                 "leisure/dog_park": {
                     "name": "Parque pa perros"
-                },
-                "leisure/firepit": {
-                    "name": "Llar",
-                    "terms": "Parrilla, asador, fueu"
                 },
                 "leisure/fitness_centre": {
                     "name": "Ximnasiu / Centru de fitness"
@@ -3236,18 +3180,12 @@
                 "line": {
                     "name": "Llinia"
                 },
-                "man_made": {
-                    "name": "Construcciones"
-                },
                 "man_made/adit": {
                     "name": "Bocamina",
                     "terms": "pozu"
                 },
                 "man_made/breakwater": {
                     "name": "Dique marín"
-                },
-                "man_made/bridge": {
-                    "name": "Ponte"
                 },
                 "man_made/chimney": {
                     "name": "Chimenea"
@@ -3329,9 +3267,6 @@
                 "man_made/works": {
                     "name": "Fábrica"
                 },
-                "natural": {
-                    "name": "Natural"
-                },
                 "natural/bare_rock": {
                     "name": "Roca"
                 },
@@ -3402,9 +3337,6 @@
                 },
                 "natural/wetland": {
                     "name": "Llamorgal"
-                },
-                "natural/wood": {
-                    "name": "Viesca"
                 },
                 "noexit/yes": {
                     "name": "Ensin salida"
@@ -3515,9 +3447,6 @@
                 "point": {
                     "name": "Puntu"
                 },
-                "power": {
-                    "name": "Enerxía"
-                },
                 "power/generator": {
                     "name": "Xenerador d'enerxía",
                     "terms": "Central eléctrica"
@@ -3564,9 +3493,6 @@
                 },
                 "public_transport/station_train": {
                     "name": "Estación de tren"
-                },
-                "railway": {
-                    "name": "Ferrocarril"
                 },
                 "railway/abandoned": {
                     "name": "Ferrocarril abandonáu"
@@ -3975,9 +3901,6 @@
                 "shop/wine": {
                     "name": "Bodega"
                 },
-                "tourism": {
-                    "name": "Turismu"
-                },
                 "tourism/alpine_hut": {
                     "name": "Refuxu d'alpinismu"
                 },
@@ -4155,9 +4078,6 @@
                     "terms": "Puntu, Allugamientu"
                 },
                 "type/waterway": {
-                    "name": "Vía acuática"
-                },
-                "waterway": {
                     "name": "Vía acuática"
                 },
                 "waterway/boatyard": {
@@ -4379,19 +4299,16 @@
             }
         },
         "community": {
-            "osm-gh-twitter": {
-                "name": "OpenStreetMap Ghana en Twitter",
-                "description": "Síguenos en Twitter en {url}"
+            "OSM-ES-mailinglist": {
+                "name": "Llista de corréu Talk-es",
+                "description": "Llista de corréu p'alderiques sobro OpenStreetMap n'España"
             },
-            "talk-gh": {
-                "name": "Llista de corréu Talk-gh"
+            "OSM-ES-telegram": {
+                "name": "@OSMes en Telegram",
+                "description": "Grupu de Telegram d'OpenStreetMap España"
             },
-            "OSM-india-mailinglist": {
-                "name": "Llista de corréu d'OpenStreetMap India"
-            },
-            "OSM-india-twitter": {
-                "name": "Twitter d'OpenStreetMap India",
-                "description": "Tamos a solo un tweet: {url}"
+            "OSM-IDN-facebook": {
+                "name": "OpenStreetMap Indonesia"
             },
             "OSM-India-Puducherry-Facebook": {
                 "name": "Free Software Hardware Movement - Facebook"
@@ -4399,24 +4316,11 @@
             "OSM-India-Puducherry-Matrix": {
                 "name": "Free Software Hardware Movement - Matrix"
             },
-            "OSM-IDN-facebook": {
-                "name": "OpenStreetMap Indonesia"
-            },
-            "OSM-japan-mailinglist": {
-                "name": "Llista de corréu d'OpenStreetMap Xapón"
-            },
-            "OSM-japan-twitter": {
-                "name": "Twitter d'OpenStreetMap Xapón",
-                "description": "Hashtag en Twitter: {url}"
-            },
-            "OSM-japan-website": {
-                "name": "OpenStreetMap Xapón"
+            "OSM-MMR-facebook": {
+                "name": "OpenStreetMap Myanmar"
             },
             "OSM-MNG-facebook": {
                 "name": "OpenStreetMap Mongolia"
-            },
-            "OSM-MMR-facebook": {
-                "name": "OpenStreetMap Myanmar"
             },
             "OSM-Nepal-facebook": {
                 "name": "OpenStreetMap Nepal"
@@ -4437,18 +4341,35 @@
             "OSM-RU-telegram": {
                 "name": "Telegram d'OpenStreetMap RU"
             },
-            "OSM-TW-facebook": {
-                "name": "Comunidá d'OpenStreetMap Taiwan"
-            },
-            "OSM-TW-mailinglist": {
-                "name": "Llista de corréu d'OpenStreetMap Taiwán"
-            },
             "OSM-TH-facebook": {
                 "name": "Grupu de Facebook d'OpenStreetMap TH"
             },
             "OSM-TH-forum": {
                 "name": "Foru OpenStreetMap TH",
                 "description": "Foru web d'OpenStreetMap Tailandia"
+            },
+            "OSM-TW-facebook": {
+                "name": "Comunidá d'OpenStreetMap Taiwan"
+            },
+            "OSM-TW-mailinglist": {
+                "name": "Llista de corréu d'OpenStreetMap Taiwán"
+            },
+            "OSM-india-mailinglist": {
+                "name": "Llista de corréu d'OpenStreetMap India"
+            },
+            "OSM-india-twitter": {
+                "name": "Twitter d'OpenStreetMap India",
+                "description": "Tamos a solo un tweet: {url}"
+            },
+            "OSM-japan-mailinglist": {
+                "name": "Llista de corréu d'OpenStreetMap Xapón"
+            },
+            "OSM-japan-twitter": {
+                "name": "Twitter d'OpenStreetMap Xapón",
+                "description": "Hashtag en Twitter: {url}"
+            },
+            "OSM-japan-website": {
+                "name": "OpenStreetMap Xapón"
             },
             "al-forum": {
                 "name": "Foru OSM d'Albania",
@@ -4471,13 +4392,6 @@
                 "name": "Twitter OpenStreetMap Austria",
                 "description": "OpenStreetMap Austria en Twitter: {url}"
             },
-            "osm-at": {
-                "name": "OpenStreetMap Austria"
-            },
-            "byosm": {
-                "name": "OpenStreetMap Bielorrusia",
-                "description": "Grupu de telegram d'OpenStreetMap Bielorrusia"
-            },
             "be-forum": {
                 "name": "Foru d'OpenStreetMap BE",
                 "description": "Foru web d'OpenStreetMap Bélxica"
@@ -4498,21 +4412,42 @@
                 "name": "Twitter OpenStreetMap Bélxica",
                 "description": "OSM Bélxica en Twitter: @osm_be"
             },
-            "hr-mailinglist": {
-                "name": "Llista de corréu Talk-hr",
-                "description": "Llista de corréu Talk-hr"
+            "byosm": {
+                "name": "OpenStreetMap Bielorrusia",
+                "description": "Grupu de telegram d'OpenStreetMap Bielorrusia"
             },
             "czech-community": {
                 "name": "Comunidá OSM de Chequia"
             },
-            "osmcz-facebook": {
-                "name": "OpenStreetMap CZ en Facebook"
+            "de-berlin-mailinglist": {
+                "name": "Llista de corréu de Berlín"
             },
-            "osmcz-twitter": {
-                "name": "Twitter checu @osmcz"
+            "de-berlin-meetup": {
+                "name": "Meetup d'OpenStreetMap Berlín-Brandenburgu"
             },
-            "talk-cz-mailinglist": {
-                "name": "Llista de corréu checa (talk-cz)"
+            "de-berlin-telegram": {
+                "name": "@osmberlin en Telegram",
+                "description": "Charra de Telegram d'OpenStreetMap Berlín"
+            },
+            "de-berlin-twitter": {
+                "name": "Twitter d'OpenStreetMap Berlín",
+                "description": "Síguenos en Twitter: {url}"
+            },
+            "de-forum": {
+                "name": "Foru d'OpenStreetMap DE",
+                "description": "Foru web d'OpenStreetMap Alemaña"
+            },
+            "de-irc": {
+                "name": "IRC d'OpenStreetMap Alemaña"
+            },
+            "de-mailinglist": {
+                "name": "Llista de corréu Talk-de"
+            },
+            "de-ostwestfalen-lippe-mailinglist": {
+                "name": "Llista de corréu OWL"
+            },
+            "de-telegram": {
+                "name": "Telegram d'OpenStreetMap Alemaña"
             },
             "dk-forum": {
                 "name": "Foru web d'OpenStreetMap Dinamarca",
@@ -4553,55 +4488,40 @@
                 "name": "OpenStreetMap Francia en Twitter",
                 "description": "OpenStreetMap Francia en Twitter: {url}"
             },
-            "de-berlin-mailinglist": {
-                "name": "Llista de corréu de Berlín"
-            },
-            "de-berlin-meetup": {
-                "name": "Meetup d'OpenStreetMap Berlín-Brandenburgu"
-            },
-            "de-berlin-telegram": {
-                "name": "@osmberlin en Telegram",
-                "description": "Charra de Telegram d'OpenStreetMap Berlín"
-            },
-            "de-berlin-twitter": {
-                "name": "Twitter d'OpenStreetMap Berlín",
-                "description": "Síguenos en Twitter: {url}"
-            },
-            "de-forum": {
-                "name": "Foru d'OpenStreetMap DE",
-                "description": "Foru web d'OpenStreetMap Alemaña"
-            },
-            "de-irc": {
-                "name": "IRC d'OpenStreetMap Alemaña"
-            },
-            "de-mailinglist": {
-                "name": "Llista de corréu Talk-de"
-            },
-            "de-ostwestfalen-lippe-mailinglist": {
-                "name": "Llista de corréu OWL"
-            },
-            "de-telegram": {
-                "name": "Telegram d'OpenStreetMap Alemaña"
-            },
-            "osm-de": {
-                "name": "OpenStreetMap Alemaña"
+            "hr-mailinglist": {
+                "name": "Llista de corréu Talk-hr",
+                "description": "Llista de corréu Talk-hr"
             },
             "hu-facebook": {
                 "name": "Facebook d'OpenStreetMap HU"
             },
-            "OSM-ES-mailinglist": {
-                "name": "Llista de corréu Talk-es",
-                "description": "Llista de corréu p'alderiques sobro OpenStreetMap n'España"
+            "osm-at": {
+                "name": "OpenStreetMap Austria"
             },
-            "OSM-ES-telegram": {
-                "name": "@OSMes en Telegram",
-                "description": "Grupu de Telegram d'OpenStreetMap España"
+            "osm-de": {
+                "name": "OpenStreetMap Alemaña"
+            },
+            "osm-gh-twitter": {
+                "name": "OpenStreetMap Ghana en Twitter",
+                "description": "Síguenos en Twitter en {url}"
             },
             "osm-se": {
                 "name": "OpenStreetMap.se"
             },
+            "osmcz-facebook": {
+                "name": "OpenStreetMap CZ en Facebook"
+            },
+            "osmcz-twitter": {
+                "name": "Twitter checu @osmcz"
+            },
             "se-facebook": {
                 "name": "Facebook d'OpenStreetMap Suecia"
+            },
+            "talk-cz-mailinglist": {
+                "name": "Llista de corréu checa (talk-cz)"
+            },
+            "talk-gh": {
+                "name": "Llista de corréu Talk-gh"
             }
         }
     }

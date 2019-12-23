@@ -1,0 +1,14 @@
+{
+    "icon": "temaki-tools",
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "tags": {
+        "shop": "flooring"
+    },
+    "terms": [
+        "tile"
+    ],
+    "name": "Flooring Supply Shop"
+}
