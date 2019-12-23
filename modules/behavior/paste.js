@@ -10,6 +10,9 @@ import { uiCmd } from '../ui/cmd';
 export function behaviorPaste(context) {
 
     function doPaste() {
+        // prevent paste during low zoom selection
+        if (!context.map().withinEditableZoom()) return;
+
         d3_event.preventDefault();
 
         var baseGraph = context.graph();
