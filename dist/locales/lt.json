@@ -7,7 +7,6 @@
             "undo": "sugrąžinti",
             "zoom_to": "padidinti iki",
             "copy": "kopijuoti",
-            "open_wikidata": "atverti wikidata.org",
             "favorite": "mėgstamas"
         },
         "toolbar": {
@@ -113,19 +112,7 @@
             },
             "orthogonalize": {
                 "title": "Statūs kampai",
-                "description": {
-                    "vertex": "Kvadratinti šį kampą.",
-                    "line": "Keisti šios linijos kampus stačiais.",
-                    "area": "Keisti šio ploto kampus stačiais."
-                },
-                "key": "Q",
-                "annotation": {
-                    "line": "Keisti linijos kampus stačiais.",
-                    "area": "Keisti ploto kampus stačiais."
-                },
-                "not_squarish": "Negalima pakeisti kampų stačiais, nes jie labai nestatūs.",
-                "too_large": "Negalima kvadratizuoti, nes nepilnai matoma",
-                "connected_to_hidden": "Negalima kampų paversti stačiais, nes yra prijungtas prie paslėpto objekto."
+                "key": "Q"
             },
             "straighten": {
                 "title": "Tiesinti",
@@ -408,12 +395,6 @@
             "hidden_warning": "{count} paslėptų objektų",
             "hidden_details": "Šie objektai šiuo metu paslėpti: {details}"
         },
-        "status": {
-            "error": "Nepavyksta prisijungti prie API.",
-            "offline": "API išjungtas. Bandykite redaguoti vėliau.",
-            "readonly": "API yra tik skaitymo režime. Prieš įrašydami savo pakeitimus turėsite palaukti.",
-            "rateLimit": "API riboja anoniminius prisijungimus. Galite tai išspręsti prisijungdami."
-        },
         "commit": {
             "title": "Įkelti į OpenStreetMap",
             "upload_explanation": "Jūsų įkeliami pakeitimai bus matomi visuose žemėlapiuose, naudojančiuose OpenStreetMap duomenis.",
@@ -500,7 +481,6 @@
         },
         "geocoder": {
             "search": "Ieškoti visam pasaulyje...",
-            "no_results_visible": "Jokių rezultatų matomame žemėlapio plote",
             "no_results_worldwide": "Nėra rezultatų"
         },
         "geolocate": {
@@ -1044,12 +1024,6 @@
                 },
                 "tag_as_disconnected": {
                     "title": "Žymėti kaip atjungtą"
-                },
-                "use_bridge_or_tunnel": {
-                    "title": "Naudoti tiltą arba tunelį"
-                },
-                "use_tunnel": {
-                    "title": "Naudoti tunelį"
                 }
             }
         },
@@ -1229,9 +1203,7 @@
                 },
                 "display_options": {
                     "title": "Rodyti pasirinkimus",
-                    "background": "Rodyti fono pasirinkimus",
                     "background_switch": "Sugražinti paskutinį foną",
-                    "map_data": "Rodyti žemėlapio duomenų pasirinkimus",
                     "fullscreen": "Įjungti viso ekrano režimą"
                 }
             },
@@ -1834,7 +1806,6 @@
                     "label": "Turėklai"
                 },
                 "hashtags": {
-                    "label": "Siūlomos grotelių žymos",
                     "placeholder": "#pavyzdys"
                 },
                 "healthcare": {
@@ -2079,7 +2050,6 @@
                     "label": "Tinklas"
                 },
                 "network_bicycle": {
-                    "label": "Tinklo tipas",
                     "options": {
                         "icn": "Tarptautinis",
                         "lcn": "Vietinis",
@@ -2089,7 +2059,6 @@
                     "placeholder": "Vietinis, Regioninis, Nacionalinis, Tarptautinis"
                 },
                 "network_foot": {
-                    "label": "Tinklo tipas",
                     "options": {
                         "iwn": "Tarptautinis",
                         "lwn": "Vietinis",
@@ -2099,7 +2068,6 @@
                     "placeholder": "Vietinis, Regioninis, Nacionalinis, Tarptautinis"
                 },
                 "network_horse": {
-                    "label": "Tinklo tipas",
                     "options": {
                         "ihn": "Tarptautinis",
                         "lhn": "Vietinis",
@@ -2770,9 +2738,6 @@
                     "name": "Automobilių nuoma",
                     "terms": "nuoma,mašinų nuoma,automobilių nuoma"
                 },
-                "amenity/car_sharing": {
-                    "name": "Automobilių dalinimasis"
-                },
                 "amenity/car_wash": {
                     "name": "Automobilių plovykla",
                     "terms": "plovykla,mašinų plovykla,automobilių plovykla"
@@ -3023,9 +2988,6 @@
                     "name": "Plotas",
                     "terms": "plotas"
                 },
-                "area/highway": {
-                    "name": "Kelio danga"
-                },
                 "attraction/big_wheel": {
                     "name": "Didelis ratas"
                 },
@@ -3034,9 +2996,6 @@
                 },
                 "attraction/maze": {
                     "name": "Labirintas"
-                },
-                "attraction/pirate_ship": {
-                    "name": "Piratų laivas"
                 },
                 "attraction/train": {
                     "name": "Turistų traukinys"
@@ -3326,17 +3285,11 @@
                     "name": "HVAC",
                     "terms": "hvac"
                 },
-                "craft/jeweler": {
-                    "name": "Juvelyrikas"
-                },
                 "craft/key_cutter": {
                     "name": "Raktininkas"
                 },
                 "craft/locksmith": {
                     "name": "Šaltkalvis"
-                },
-                "craft/optician": {
-                    "name": "Optikas"
                 },
                 "craft/painter": {
                     "name": "Tapytojas",
@@ -3353,10 +3306,6 @@
                 "craft/plumber": {
                     "name": "Santechnikas",
                     "terms": "santechnikas"
-                },
-                "craft/pottery": {
-                    "name": "Keramikos amatininkas",
-                    "terms": "Puodų amatininkas"
                 },
                 "craft/roofer": {
                     "name": "Stogdengys",
@@ -3446,9 +3395,6 @@
                 },
                 "healthcare/birthing_center": {
                     "name": "Gimdymo namai"
-                },
-                "highway": {
-                    "name": "Greitkelis"
                 },
                 "highway/bridleway": {
                     "name": "Žirgų kelias",
@@ -3609,9 +3555,6 @@
                     "name": "Jungtis",
                     "terms": "jungtis,sankryža"
                 },
-                "landuse": {
-                    "name": "Žemėnauda"
-                },
                 "landuse/allotments": {
                     "name": "Bendruomenės sodas"
                 },
@@ -3701,9 +3644,6 @@
                     "name": "Vynuogynas",
                     "terms": "vynuogynas"
                 },
-                "leisure": {
-                    "name": "Laisvalaikis"
-                },
                 "leisure/adult_gaming_centre": {
                     "name": "Suaugusiųjų lošimų vieta"
                 },
@@ -3719,9 +3659,6 @@
                 "leisure/dog_park": {
                     "name": "Šunų parkas",
                     "terms": "šunparkis,šunų parkas"
-                },
-                "leisure/firepit": {
-                    "name": "Ugniaduobė"
                 },
                 "leisure/garden": {
                     "name": "Sodas",
@@ -3800,14 +3737,8 @@
                 "line": {
                     "name": "Linija"
                 },
-                "man_made": {
-                    "name": "Žmogaus sukurtas"
-                },
                 "man_made/antenna": {
                     "name": "Antena"
-                },
-                "man_made/bridge": {
-                    "name": "Tiltas"
                 },
                 "man_made/chimney": {
                     "name": "Kaminas"
@@ -3868,9 +3799,6 @@
                 },
                 "man_made/works": {
                     "name": "Gamykla"
-                },
-                "natural": {
-                    "name": "Natūralus"
                 },
                 "natural/bare_rock": {
                     "name": "Plikas akmuo"
@@ -3947,10 +3875,6 @@
                 },
                 "natural/wetland": {
                     "name": "Drėgna žemė"
-                },
-                "natural/wood": {
-                    "name": "Miškas",
-                    "terms": "medžiai"
                 },
                 "noexit/yes": {
                     "name": "Nėra išėjimo"
@@ -4056,9 +3980,6 @@
                     "name": "Taškas",
                     "terms": "taškas"
                 },
-                "power": {
-                    "name": "Energija"
-                },
                 "power/generator": {
                     "name": "Jėgainė",
                     "terms": "generatorius,elektros generatorius"
@@ -4088,9 +4009,6 @@
                 "power/transformer": {
                     "name": "Transformatorius",
                     "terms": "transformatorius"
-                },
-                "railway": {
-                    "name": "Geležinkelis"
                 },
                 "railway/abandoned": {
                     "name": "Apleistas geležinkelis",
@@ -4485,9 +4403,6 @@
                     "name": "Vyno parduotuvė",
                     "terms": "Vyninė,Vyno parduotuvė"
                 },
-                "tourism": {
-                    "name": "Turizmas"
-                },
                 "tourism/alpine_hut": {
                     "name": "Kalnų namelis"
                 },
@@ -4643,9 +4558,6 @@
                 "type/waterway": {
                     "name": "Vandens kelias"
                 },
-                "waterway": {
-                    "name": "Vandens kelias"
-                },
                 "waterway/canal": {
                     "name": "Kanalas",
                     "terms": "Kanalas"
@@ -4756,35 +4668,71 @@
             }
         },
         "community": {
-            "bw-facebook": {
-                "name": "Botsvanos žymėjimas per Facebook"
+            "GeoPhilly": {
+                "name": "GeoPhilly"
             },
-            "cape-coast-youthmappers": {
-                "description": "Sek mus per Twitter: {url}"
+            "MapMinnesota": {
+                "name": "MapMinnesota"
             },
-            "talk-gh": {
-                "name": "Talk-gh Mailing List"
+            "Maptime-ME-meetup": {
+                "name": "MaptimeME"
             },
-            "talk-mg": {
-                "name": "Talk-mg Mailing List"
+            "OSM-AR-facebook": {
+                "name": "OpenStreetMap Argentina Facebook"
+            },
+            "OSM-AR-mailinglist": {
+                "name": "Talk-ar Mailing List"
             },
             "OSM-BGD-facebook": {
                 "name": "OpenStreetMap Bangladešas"
             },
+            "OSM-BO-mailinglist": {
+                "name": "Talk-bo Mailing List"
+            },
+            "OSM-Boston": {
+                "name": "OpenStreetMap Bostonas"
+            },
+            "OSM-CA-Slack": {
+                "name": "OSM-CA Slack"
+            },
+            "OSM-CL-mailinglist": {
+                "name": "Talk-cl Mailing List"
+            },
+            "OSM-CO": {
+                "name": "OpenStreetMap Kolumbija"
+            },
+            "OSM-CO-mailinglist": {
+                "name": "Talk-co Mailing List"
+            },
+            "OSM-Chattanooga": {
+                "name": "OSM Čatanuga"
+            },
+            "OSM-Colorado": {
+                "name": "OpenStreetMap Koloradas"
+            },
+            "OSM-Discord": {
+                "name": "OpenStreetMap Discord"
+            },
             "OSM-IDN-facebook": {
                 "name": "OpenStreetMap Indonezija"
             },
-            "OSM-japan-website": {
-                "name": "OpenStreetMap Japonija"
-            },
-            "OSM-MNG-facebook": {
-                "name": "OpenStreetMap Mongolija"
+            "OSM-IRC": {
+                "name": "OpenStreetMap IRC"
             },
             "OSM-MMR-facebook": {
                 "name": "OpenStreetMap Mianmaras"
             },
+            "OSM-MNG-facebook": {
+                "name": "OpenStreetMap Mongolija"
+            },
             "OSM-Nepal-facebook": {
                 "name": "OpenStreetMap Nepalas"
+            },
+            "OSM-PE": {
+                "name": "OpenStreetMap Peru"
+            },
+            "OSM-PE-mailinglist": {
+                "name": "Talk-pe Mailing List"
             },
             "OSM-PH-mailinglist": {
                 "name": "Talk-ph Mailing List"
@@ -4795,8 +4743,17 @@
             "OSM-PH-telegram": {
                 "name": "OpenStreetMap PH Telegram"
             },
+            "OSM-Portland": {
+                "name": "OpenStreetMap Portlandas"
+            },
             "OSM-RU-telegram": {
                 "name": "OpenStreetMap RU telegram"
+            },
+            "OSM-Seattle": {
+                "name": "OpenStreetMap Siatlas"
+            },
+            "OSM-SoCal": {
+                "name": "OpenStreetMap Pietinė Kalifornija"
             },
             "OSM-TW-facebook": {
                 "name": "OpenStreetMap Taivano bendruomenė"
@@ -4804,18 +4761,65 @@
             "OSM-TW-mailinglist": {
                 "name": "OpenStreetMap Taivanas Mailinglist"
             },
+            "OSM-Tampa-Bay": {
+                "name": "OpenStreetMap Tampos įlanka"
+            },
+            "OSM-Telegram": {
+                "name": "OpenStreetMap Telegram"
+            },
+            "OSM-Twitter": {
+                "name": "OpenStreetMap Twitter"
+            },
+            "OSM-US": {
+                "name": "OpenStreetMap JAV"
+            },
+            "OSM-US-Slack": {
+                "name": "OpenStreetMap JAV Slack"
+            },
+            "OSM-Utah": {
+                "name": "OpenStreetMap Juta"
+            },
+            "OSM-Vancouver-meetup": {
+                "name": "OpenStreetMap Vankuveris"
+            },
+            "OSM-Wyoming": {
+                "name": "OpenStreetMap Vajomingas"
+            },
+            "OSM-br-mailinglist": {
+                "name": "Talk-br Mailing List"
+            },
+            "OSM-help": {
+                "name": "OpenStreetMap Pagalba"
+            },
+            "OSM-japan-website": {
+                "name": "OpenStreetMap Japonija"
+            },
+            "OSMF": {
+                "name": "OpenStreetMap Fondas"
+            },
+            "PHXGeo-twitter": {
+                "name": "PHXGeo Twitter"
+            },
             "al-maptime-tirana": {
                 "name": "Maptime Tirana"
             },
-            "osm-at": {
-                "name": "OpenStreetMap Austrija"
+            "bw-facebook": {
+                "name": "Botsvanos žymėjimas per Facebook"
             },
             "byosm": {
                 "name": "OpenStreetMap Baltarusija"
             },
-            "hr-mailinglist": {
-                "name": "Talk-hr Mailing List",
-                "description": "Talk-hr mailing list"
+            "cape-coast-youthmappers": {
+                "description": "Sek mus per Twitter: {url}"
+            },
+            "de-berlin-mailinglist": {
+                "name": "Berlynas Mailing List"
+            },
+            "de-mailinglist": {
+                "name": "Talk-de Mailing List"
+            },
+            "de-ostwestfalen-lippe-mailinglist": {
+                "name": "OWL Mailing List"
             },
             "dk-mailinglist": {
                 "name": "Talk-dk Mailing List"
@@ -4827,128 +4831,36 @@
                 "name": "Talk-fr Mailing List",
                 "description": "Talk-fr mailing list"
             },
-            "de-berlin-mailinglist": {
-                "name": "Berlynas Mailing List"
+            "gb-mailinglist": {
+                "name": "Talk-gb Mailing List"
             },
-            "de-mailinglist": {
-                "name": "Talk-de Mailing List"
-            },
-            "de-ostwestfalen-lippe-mailinglist": {
-                "name": "OWL Mailing List"
-            },
-            "osm-de": {
-                "name": "OpenStreetMap Vokietija"
+            "hr-mailinglist": {
+                "name": "Talk-hr Mailing List",
+                "description": "Talk-hr mailing list"
             },
             "is-mailinglist": {
                 "name": "Talk-is Mailing List"
             },
-            "osm-se": {
-                "name": "OpenStreetMap.se"
+            "osm-at": {
+                "name": "OpenStreetMap Austrija"
             },
-            "gb-mailinglist": {
-                "name": "Talk-gb Mailing List"
-            },
-            "OSM-CA-Slack": {
-                "name": "OSM-CA Slack"
-            },
-            "OSM-Vancouver-meetup": {
-                "name": "OpenStreetMap Vankuveris"
-            },
-            "GeoPhilly": {
-                "name": "GeoPhilly"
-            },
-            "MapMinnesota": {
-                "name": "MapMinnesota"
-            },
-            "Maptime-ME-meetup": {
-                "name": "MaptimeME"
-            },
-            "OSM-Boston": {
-                "name": "OpenStreetMap Bostonas"
-            },
-            "OSM-Chattanooga": {
-                "name": "OSM Čatanuga"
-            },
-            "OSM-Colorado": {
-                "name": "OpenStreetMap Koloradas"
-            },
-            "OSM-Portland": {
-                "name": "OpenStreetMap Portlandas"
-            },
-            "OSM-Seattle": {
-                "name": "OpenStreetMap Siatlas"
-            },
-            "OSM-SoCal": {
-                "name": "OpenStreetMap Pietinė Kalifornija"
-            },
-            "OSM-Tampa-Bay": {
-                "name": "OpenStreetMap Tampos įlanka"
-            },
-            "OSM-US-Slack": {
-                "name": "OpenStreetMap JAV Slack"
-            },
-            "OSM-US": {
-                "name": "OpenStreetMap JAV"
-            },
-            "OSM-Utah": {
-                "name": "OpenStreetMap Juta"
-            },
-            "OSM-Wyoming": {
-                "name": "OpenStreetMap Vajomingas"
-            },
-            "PHXGeo-twitter": {
-                "name": "PHXGeo Twitter"
-            },
-            "talk-au": {
-                "name": "Talk-au Mailing List"
-            },
-            "OSM-AR-facebook": {
-                "name": "OpenStreetMap Argentina Facebook"
-            },
-            "OSM-AR-mailinglist": {
-                "name": "Talk-ar Mailing List"
-            },
-            "OSM-BO-mailinglist": {
-                "name": "Talk-bo Mailing List"
-            },
-            "OSM-br-mailinglist": {
-                "name": "Talk-br Mailing List"
-            },
-            "OSM-CL-mailinglist": {
-                "name": "Talk-cl Mailing List"
-            },
-            "OSM-CO-mailinglist": {
-                "name": "Talk-co Mailing List"
-            },
-            "OSM-CO": {
-                "name": "OpenStreetMap Kolumbija"
-            },
-            "OSM-PE-mailinglist": {
-                "name": "Talk-pe Mailing List"
-            },
-            "OSM-PE": {
-                "name": "OpenStreetMap Peru"
+            "osm-de": {
+                "name": "OpenStreetMap Vokietija"
             },
             "osm-latam": {
                 "name": "OpenStreetMap Lotynų Amerika"
             },
-            "OSM-Discord": {
-                "name": "OpenStreetMap Discord"
+            "osm-se": {
+                "name": "OpenStreetMap.se"
             },
-            "OSM-help": {
-                "name": "OpenStreetMap Pagalba"
+            "talk-au": {
+                "name": "Talk-au Mailing List"
             },
-            "OSM-IRC": {
-                "name": "OpenStreetMap IRC"
+            "talk-gh": {
+                "name": "Talk-gh Mailing List"
             },
-            "OSM-Telegram": {
-                "name": "OpenStreetMap Telegram"
-            },
-            "OSM-Twitter": {
-                "name": "OpenStreetMap Twitter"
-            },
-            "OSMF": {
-                "name": "OpenStreetMap Fondas"
+            "talk-mg": {
+                "name": "Talk-mg Mailing List"
             }
         }
     }

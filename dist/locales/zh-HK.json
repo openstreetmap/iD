@@ -6,8 +6,7 @@
             "remove": "移除",
             "undo": "復原",
             "zoom_to": "縮放至",
-            "copy": "複製",
-            "open_wikidata": "在 wikidata.org 開啟"
+            "copy": "複製"
         },
         "modes": {
             "add_area": {
@@ -101,18 +100,7 @@
             },
             "orthogonalize": {
                 "title": "方形化",
-                "description": {
-                    "line": "將這條綫的角方形化。",
-                    "area": "將這個範圍的角方形化。"
-                },
-                "key": "Q",
-                "annotation": {
-                    "line": "已將這條綫的角方形化。",
-                    "area": "已將這個範圍的角方形化。"
-                },
-                "not_squarish": "未能將這個方形化因為它不似方形。",
-                "too_large": "未能將這個方形化因為它不是被完全看得到。",
-                "connected_to_hidden": "未能將這個方形化因為它連接著一個隱藏的特徵。"
+                "key": "Q"
             },
             "straighten": {
                 "title": "拉直",
@@ -369,12 +357,6 @@
         "feature_info": {
             "hidden_warning": "{count} 項隱藏特徵",
             "hidden_details": "這些特徵正被隱藏: {details}"
-        },
-        "status": {
-            "error": "未能連接至應用程式介面。",
-            "offline": "應用程式介面現在離線。請稍後再編輯。",
-            "readonly": "應用程式介面處於唯讀模式。如要儲存變更需要稍等。",
-            "rateLimit": "這個應用程式介面限制匿名連接，你可登入來解決這個問題。"
         },
         "commit": {
             "title": "上傳到 OpenStreetMap",
@@ -1078,9 +1060,7 @@
                 },
                 "display_options": {
                     "title": "顯示選項",
-                    "background": "顯示背景選項",
                     "background_switch": "轉換至上一個背景",
-                    "map_data": "顯示地圖資料選項",
                     "fullscreen": "進入全螢幕模式",
                     "wireframe": "切換線框模式",
                     "minimap": "切換迷你地圖"
@@ -1092,7 +1072,6 @@
                     "lasso": "在特徵周圍畫一個選擇套索"
                 },
                 "with_selected": {
-                    "title": "選取了特徵",
                     "edit_menu": "切換編輯選單"
                 },
                 "vertex_selected": {
@@ -1715,7 +1694,6 @@
                     "label": "扶手"
                 },
                 "hashtags": {
-                    "label": "建議的主題標籤",
                     "placeholder": "#例子"
                 },
                 "healthcare": {
@@ -1983,7 +1961,6 @@
                     "label": "網絡"
                 },
                 "network_bicycle": {
-                    "label": "網絡種類",
                     "options": {
                         "icn": "國際",
                         "lcn": "本地",
@@ -1993,7 +1970,6 @@
                     "placeholder": "本地、地區、國家、國際"
                 },
                 "network_foot": {
-                    "label": "網絡種類",
                     "options": {
                         "iwn": "國際",
                         "lwn": "本地",
@@ -2003,7 +1979,6 @@
                     "placeholder": "本地、地區、國家、國際"
                 },
                 "network_horse": {
-                    "label": "網絡種類",
                     "options": {
                         "ihn": "國際",
                         "lhn": "本地",
@@ -2797,13 +2772,6 @@
                     "name": "牽繩",
                     "terms": "牽繩"
                 },
-                "aerialway/station": {
-                    "name": "纜車站"
-                },
-                "aerialway/t-bar": {
-                    "name": "T型吊桿",
-                    "terms": "T型吊桿"
-                },
                 "aeroway": {
                     "name": "航空設施"
                 },
@@ -2909,17 +2877,9 @@
                     "name": "茶座",
                     "terms": "Cafe,㗎啡室,㗎啡廳,咖啡,咖啡室,咖啡廳,茶座"
                 },
-                "amenity/car_pooling": {
-                    "name": "汽車共乘",
-                    "terms": "Car Pooling, 汽車共乘"
-                },
                 "amenity/car_rental": {
                     "name": "汽車租賃",
                     "terms": "Car Rental,汽車租賃處,租車,租車店,租車舖"
-                },
-                "amenity/car_sharing": {
-                    "name": "汽車共享站",
-                    "terms": "Car Sharing,共用車,共用車處,汽車共享站"
                 },
                 "amenity/car_wash": {
                     "name": "洗車店",
@@ -3433,10 +3393,6 @@
                     "name": "範圍",
                     "terms": "Area,區域,範圍"
                 },
-                "area/highway": {
-                    "name": "路面物質",
-                    "terms": "路面材質,路面"
-                },
                 "attraction/amusement_ride": {
                     "name": "機動遊戲機",
                     "terms": "Amusement Ride,機動遊戲"
@@ -3456,18 +3412,6 @@
                 "attraction/dark_ride": {
                     "name": "黑暗探險",
                     "terms": "Dark Ride"
-                },
-                "attraction/drop_tower": {
-                    "name": "跳樓機",
-                    "terms": "Drop Tower,自由落體"
-                },
-                "attraction/pirate_ship": {
-                    "name": "海盜船",
-                    "terms": "Pirate Ship,海盜船"
-                },
-                "attraction/river_rafting": {
-                    "name": "激流",
-                    "terms": "River Rafting,激流"
                 },
                 "attraction/roller_coaster": {
                     "name": "過山車",
@@ -3802,9 +3746,6 @@
                     "name": "隔熱工程",
                     "terms": "隔熱工程"
                 },
-                "craft/jeweler": {
-                    "name": "珠寶店"
-                },
                 "craft/key_cutter": {
                     "name": "配匙店",
                     "terms": "鑰匙店,鎖匙店"
@@ -3815,9 +3756,6 @@
                 "craft/metal_construction": {
                     "name": "金屬工程",
                     "terms": "金工"
-                },
-                "craft/optician": {
-                    "name": "眼鏡店"
                 },
                 "craft/painter": {
                     "name": "髹漆工",
@@ -3838,10 +3776,6 @@
                 "craft/plumber": {
                     "name": "水喉匠",
                     "terms": "水管工"
-                },
-                "craft/pottery": {
-                    "name": "陶器",
-                    "terms": "陶器,陶瓷,陶藝"
                 },
                 "craft/rigger": {
                     "name": "吊運工",
@@ -4050,9 +3984,6 @@
                 "healthcare/speech_therapist": {
                     "name": "言語治療師",
                     "terms": "Speech Therapist,語言治療師"
-                },
-                "highway": {
-                    "name": "公路"
                 },
                 "highway/bridleway": {
                     "name": "馬道",
@@ -4269,9 +4200,6 @@
                     "name": "路口",
                     "terms": "十字路口,交界處,交界"
                 },
-                "landuse": {
-                    "name": "土地利用"
-                },
                 "landuse/allotments": {
                     "name": "社區園圃",
                     "terms": "社區園圃"
@@ -4414,9 +4342,6 @@
                     "name": "葡萄園",
                     "terms": "Vineyard,葡萄園,酒莊"
                 },
-                "leisure": {
-                    "name": "消閒"
-                },
                 "leisure/adult_gaming_centre": {
                     "name": "成人遊戲中心",
                     "terms": "成人遊樂場"
@@ -4440,10 +4365,6 @@
                 "leisure/dog_park": {
                     "name": "狗公園",
                     "terms": "Dog Park,狗公園"
-                },
-                "leisure/firepit": {
-                    "name": "火坑",
-                    "terms": "營火坑"
                 },
                 "leisure/fitness_centre": {
                     "name": "體育館 / 健體中心",
@@ -4605,9 +4526,6 @@
                     "name": "綫",
                     "terms": "Line,綫,線"
                 },
-                "man_made": {
-                    "name": "人造"
-                },
                 "man_made/adit": {
                     "name": "礦坑口",
                     "terms": "礦坑口, 礦洞口"
@@ -4615,10 +4533,6 @@
                 "man_made/breakwater": {
                     "name": "防波堤",
                     "terms": "Breakwater,防波堤"
-                },
-                "man_made/bridge": {
-                    "name": "橋樑",
-                    "terms": "bridge,橋"
                 },
                 "man_made/chimney": {
                     "name": "煙囱",
@@ -4715,9 +4629,6 @@
                     "name": "工廠",
                     "terms": "Factory, 工場"
                 },
-                "natural": {
-                    "name": "自然景觀"
-                },
                 "natural/bare_rock": {
                     "name": "裸岩",
                     "terms": "Bare Rock,祼石"
@@ -4813,10 +4724,6 @@
                 "natural/wetland": {
                     "name": "濕地",
                     "terms": "Wetland,潮間帶,濕地"
-                },
-                "natural/wood": {
-                    "name": "樹林",
-                    "terms": "Wood,林,樹林"
                 },
                 "noexit/yes": {
                     "name": "倔頭路",
@@ -4948,9 +4855,6 @@
                     "name": "點",
                     "terms": "Point,點"
                 },
-                "power": {
-                    "name": "發電廠"
-                },
                 "power/generator": {
                     "name": "發電機",
                     "terms": "Power Generator,發電機"
@@ -5017,9 +4921,6 @@
                 "public_transport/stop_position_monorail": {
                     "name": "單軌電車停止位置",
                     "terms": "Monorail Stopping Location, 單軌電車停止位置"
-                },
-                "railway": {
-                    "name": "鐵路"
                 },
                 "railway/abandoned": {
                     "name": "廢置鐵路",
@@ -5568,9 +5469,6 @@
                     "name": "酒品店",
                     "terms": "紅酒店,白酒店"
                 },
-                "tourism": {
-                    "name": "旅遊設施"
-                },
                 "tourism/alpine_hut": {
                     "name": "高山小屋",
                     "terms": "Alpine Hut,高山小屋,高山屋仔"
@@ -5789,9 +5687,6 @@
                 "type/site": {
                     "name": "建築群",
                     "terms": "一群建築"
-                },
-                "waterway": {
-                    "name": "水道"
                 },
                 "waterway/boatyard": {
                     "name": "船廠",
@@ -6183,17 +6078,6 @@
             }
         },
         "community": {
-            "bw-facebook": {
-                "name": "Mapping Botswana Facebook 專頁"
-            },
-            "osm-gh-facebook": {
-                "name": "OpenStreetMap Ghana Facebook 專頁",
-                "description": "Facebook 社群給對 OpenStreetMap 有興趣的人。"
-            },
-            "osm-mg-facebook": {
-                "name": "OpenStreetMap Madagascar Facebook 群組",
-                "description": "馬達加斯加 Facebook 社群給對 OpenStreetMap 有興趣的人。"
-            },
             "OSM-India-Puducherry-Facebook": {
                 "name": "Free Software Hardware Movement - Facebook",
                 "description": "FSHM Facebook 專頁使你知道社群活動"
@@ -6206,6 +6090,17 @@
             },
             "OSM-TH-facebook": {
                 "name": "OpenStreetMap TH Facebook 社群"
+            },
+            "bw-facebook": {
+                "name": "Mapping Botswana Facebook 專頁"
+            },
+            "osm-gh-facebook": {
+                "name": "OpenStreetMap Ghana Facebook 專頁",
+                "description": "Facebook 社群給對 OpenStreetMap 有興趣的人。"
+            },
+            "osm-mg-facebook": {
+                "name": "OpenStreetMap Madagascar Facebook 群組",
+                "description": "馬達加斯加 Facebook 社群給對 OpenStreetMap 有興趣的人。"
             }
         }
     }

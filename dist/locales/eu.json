@@ -7,7 +7,6 @@
             "undo": "ezeztatu",
             "zoom_to": "zoom hona:",
             "copy": "kopiatu",
-            "open_wikidata": "Ireki wikidata.org-en",
             "favorite": "gogokoa"
         },
         "toolbar": {
@@ -114,8 +113,7 @@
                 "connected_to_hidden": "Hau ezin da zirkularra egin ezkutuko funtzio bati konektatuta dagoelako."
             },
             "orthogonalize": {
-                "title": "Laukia",
-                "not_squarish": "Hau ezin da karratu egin karratua ez delako."
+                "title": "Laukia"
             },
             "straighten": {
                 "title": "Zuzendu",
@@ -921,7 +919,6 @@
                     "label": "Baranda"
                 },
                 "hashtags": {
-                    "label": "Proposatutako Traolak",
                     "placeholder": "#adibide"
                 },
                 "healthcare": {
@@ -1159,7 +1156,6 @@
                     "label": "Sare"
                 },
                 "network_bicycle": {
-                    "label": "Sare Mota",
                     "options": {
                         "icn": "Internazionala",
                         "lcn": "Lokala",
@@ -1169,7 +1165,6 @@
                     "placeholder": "Lokala, Eskualdekoa, Nazionala, Internazionala"
                 },
                 "network_foot": {
-                    "label": "Sare Mota",
                     "options": {
                         "iwn": "internazionala",
                         "lwn": "Lokala",
@@ -1179,7 +1174,6 @@
                     "placeholder": "Lokala, Eskualdekoa, Nazionala, Internazionala"
                 },
                 "network_horse": {
-                    "label": "Sare Mota",
                     "options": {
                         "ihn": "Internazionala",
                         "lhn": "Lokala",
@@ -1769,14 +1763,8 @@
                 "amenity/cafe": {
                     "name": "Kafetegi"
                 },
-                "amenity/car_pooling": {
-                    "name": "Auto partekatzea"
-                },
                 "amenity/car_rental": {
                     "name": "Auto Alokairua"
-                },
-                "amenity/car_sharing": {
-                    "name": "Autoen partekatzea"
                 },
                 "amenity/car_wash": {
                     "name": "Auto garbiketa"
@@ -2078,9 +2066,6 @@
                 "attraction/carousel": {
                     "name": "Zaldiko-maldiko"
                 },
-                "attraction/pirate_ship": {
-                    "name": "Piraten itsasontzi"
-                },
                 "barrier/entrance": {
                     "name": "Sarrera"
                 },
@@ -2119,12 +2104,6 @@
                 },
                 "craft/gardener": {
                     "name": "Lorezain"
-                },
-                "craft/jeweler": {
-                    "name": "Bitxigile"
-                },
-                "craft/optician": {
-                    "name": "Optikari"
                 },
                 "craft/painter": {
                     "name": "Margolari"
@@ -2174,9 +2153,6 @@
                 "line": {
                     "name": "lerro"
                 },
-                "man_made": {
-                    "name": "Artifizial"
-                },
                 "man_made/adit": {
                     "name": "Igarobide"
                 },
@@ -2185,9 +2161,6 @@
                 },
                 "man_made/breakwater": {
                     "name": "Olatu-orma"
-                },
-                "man_made/bridge": {
-                    "name": "Zubi"
                 },
                 "man_made/bunker_silo": {
                     "name": "Bunker-siloa"
@@ -2198,34 +2171,33 @@
             }
         },
         "community": {
-            "bw-facebook": {
-                "description": "Bostwanako OpenStreetMap webgunea"
+            "Code-for-San-Jose-Slack": {
+                "description": "Pertsona oro ongi etorria da! Izena eman {signupUrl}-en, gero batu #osm katea."
             },
-            "bw-twitter": {
-                "description": "Bostwanako OpenStreetMap Twitter-a"
+            "LATAM-Twitter": {
+                "description": "Jarrai gaitzazu Twitter-en hemen {url}"
             },
-            "cape-coast-youthmappers": {
-                "description": "Jarraitu gaitzazu Twitterren: {url}"
+            "OSM-AR-facebook": {
+                "extendedDescription": "Lekuko komunitateko albisteak"
             },
-            "osm-gh-facebook": {
-                "name": "Ghana-ko OpenStreetMap Facebook-en",
-                "description": "OpenStreetMap-ean interesatutako jendearentzako Facebook taldea."
+            "OSM-AR-irc": {
+                "description": "Batu#osm-ar irc.oftc.net-en (6667 portua)"
             },
-            "osm-gh-twitter": {
-                "name": "Ghana-ko OpenStreetMap Twitter-en",
-                "description": "Jarraitu gaitzazu Twitterren: {url}"
+            "OSM-AR-twitter": {
+                "description": "Jarraitu gaitzazu Twitter-en {url} -ean"
             },
-            "osm-mg-facebook": {
-                "name": "OpenStreetMap-en Madagaskarreko Facebook Taldea"
+            "OSM-CA-Slack": {
+                "description": "Pertsona oro ongi etorria da! Izena eman {signupUrl}-en."
             },
-            "talk-mg": {
-                "description": "Madagaskarren OpenStreetMap-eko eragile, komunitate eta erabiltzailek elkarbanatzeko eta eztabaidatzeko gunea"
+            "OSM-CO-twitter": {
+                "description": "Jarraitu gaitzazu Twitter-en {url}-ean"
             },
-            "OSM-India-facebook": {
-                "description": " OpenStreetMap-a hobetu Indian"
+            "OSM-ES-telegram": {
+                "name": "@OSMes Telegram-en"
             },
-            "OSM-india-twitter": {
-                "name": "Indiako OpenStreetMap Twitter-a"
+            "OSM-IDN-facebook": {
+                "name": "Indonesiako OpenStreetMap",
+                "description": "OpenStreetMap hobetu Indonesian"
             },
             "OSM-India-Puducherry-Facebook": {
                 "name": "Software Hardware Libre Mugimenduak - Facebook"
@@ -2233,9 +2205,45 @@
             "OSM-India-Puducherry-Matrix": {
                 "name": "Software Hardware Libre Mugimenduak - Matrix"
             },
-            "OSM-IDN-facebook": {
-                "name": "Indonesiako OpenStreetMap",
-                "description": "OpenStreetMap hobetu Indonesian"
+            "OSM-India-facebook": {
+                "description": " OpenStreetMap-a hobetu Indian"
+            },
+            "OSM-MNG-facebook": {
+                "name": "Mongoliako OpenStreetMap",
+                "description": "OpenStreetMap hobetu Mongolian"
+            },
+            "OSM-MY-facebook": {
+                "name": "Malaysiako OpenStreetMap-a Facebook-en",
+                "description": "OpenStreetMap-i buruzko edozein gauzari buruz eztabaidatzeko! "
+            },
+            "OSM-MY-matrix": {
+                "description": "Kartografo guztiak ongi etorriak dira! Eman izena {signupUrl} -en"
+            },
+            "OSM-Nepal-facebook": {
+                "name": "Nepaleko OpenStreetMap",
+                "description": "OpenStreetMap hobetu Nepalen"
+            },
+            "OSM-PE-twitter": {
+                "description": "Jarraitu gaitzazu Twitter-en {url}-ean"
+            },
+            "OSM-PH-slack": {
+                "description": "Edonor da ongi etorria! Izen eman {signupUrl} -en"
+            },
+            "OSM-RU-telegram": {
+                "description": "Errusiako OpenStreetMap-aren telegram txat-a"
+            },
+            "OSM-Telegram": {
+                "name": "OpenStreetMap-en Telegram-a"
+            },
+            "OSM-Twitter": {
+                "name": "OpenStreetMap-en Twitter-a",
+                "description": "Jarrai gaitzazu Twitter-en hemen {url} "
+            },
+            "OSM-US-Slack": {
+                "description": "Pertsona oro da ongi etorria! Izena eman {signupUrl}-en."
+            },
+            "OSM-india-twitter": {
+                "name": "Indiako OpenStreetMap Twitter-a"
             },
             "OSM-japan-facebook": {
                 "name": "OpenStreetMap-aren Japoniako Komunitatea"
@@ -2248,26 +2256,8 @@
                 "name": "Japoniako OpenStreetMap",
                 "description": "Japoniako Kartografo eta OpenStreetMap erabiltzaileak"
             },
-            "OSM-MY-facebook": {
-                "name": "Malaysiako OpenStreetMap-a Facebook-en",
-                "description": "OpenStreetMap-i buruzko edozein gauzari buruz eztabaidatzeko! "
-            },
-            "OSM-MY-matrix": {
-                "description": "Kartografo guztiak ongi etorriak dira! Eman izena {signupUrl} -en"
-            },
-            "OSM-MNG-facebook": {
-                "name": "Mongoliako OpenStreetMap",
-                "description": "OpenStreetMap hobetu Mongolian"
-            },
-            "OSM-Nepal-facebook": {
-                "name": "Nepaleko OpenStreetMap",
-                "description": "OpenStreetMap hobetu Nepalen"
-            },
-            "OSM-PH-slack": {
-                "description": "Edonor da ongi etorria! Izen eman {signupUrl} -en"
-            },
-            "OSM-RU-telegram": {
-                "description": "Errusiako OpenStreetMap-aren telegram txat-a"
+            "PHXGeo-twitter": {
+                "description": "Jarraitu gaitzazu Twitter-en {url}-ean"
             },
             "al-telegram": {
                 "name": "Albaniako OSM-aren Telegram Katea",
@@ -2276,18 +2266,6 @@
             "at-twitter": {
                 "name": "Austriako OpenStreetMap Twitter-a",
                 "description": "Austriako OpenStreetMap Twitterren: {url}"
-            },
-            "osmgraz-meetup": {
-                "name": "OSM komunitatearen Graz-eko bilera",
-                "description": "OpenStreetMap komunitateren hileroko bilera Graz-en"
-            },
-            "osmgraz-twitter": {
-                "name": "Graz-eko OSM komunitatea Twitterren",
-                "description": "Graz-eko OpenStreetMap komunitatea twitterren"
-            },
-            "osm-at": {
-                "name": "Austriako OpenStreetMap",
-                "description": "Austriako OpenStreetMap-ari buruzko informazio plataforma"
             },
             "be-irc": {
                 "description": "Batu #osmbe  irc.oftc.net -en (6667 portua)"
@@ -2302,30 +2280,18 @@
                 "name": "Belgikako OpenStreetMap Twitter-a",
                 "description": "Belgikako OSM Twitter-en: @osm_be"
             },
-            "hr-facebook": {
-                "name": "Kroaziako OpenStreetMap Facebook taldea",
-                "description": "Kroaziako OpenStreetMap Facebook taldea"
+            "bw-facebook": {
+                "description": "Bostwanako OpenStreetMap webgunea"
             },
-            "hr-irc": {
-                "name": "Kroaziako OpenStreetMap-a IRC-en",
-                "description": "Batu #osm-hr  irc.freenode.org -en (6667 portua)"
+            "bw-twitter": {
+                "description": "Bostwanako OpenStreetMap Twitter-a"
+            },
+            "cape-coast-youthmappers": {
+                "description": "Jarraitu gaitzazu Twitterren: {url}"
             },
             "czech-community": {
                 "name": "Txekiar OSM komunitatea",
                 "description": "Txekiako OSM kideen mapa ataria, webgunea eta kontaktuak"
-            },
-            "osmcz-facebook": {
-                "name": "CZ-ko OpenStreetMap Facebook-en"
-            },
-            "osmcz-twitter": {
-                "name": "Txekiar twitter-a @osmcz ",
-                "description": "Jarraitu txekiar komunitatea Twitter-en - AsterokoOSM itzulia barne!"
-            },
-            "talk-cz-mailinglist": {
-                "name": "Txekiar posta zerrenda (talk-cz)"
-            },
-            "fr-irc": {
-                "description": "Batu #osm-fr  irc.oftc.net -en (6667 portua)"
             },
             "de-berlin-telegram": {
                 "name": "@osmberlin Telegram-en"
@@ -2336,6 +2302,20 @@
             "de-irc": {
                 "description": "Batu #osm-de  irc.oftc.net-en (6667 portua)"
             },
+            "fr-irc": {
+                "description": "Batu #osm-fr  irc.oftc.net -en (6667 portua)"
+            },
+            "gb-irc": {
+                "description": "Batu #osm-gb  irc.oftc.net-en (port 6667)"
+            },
+            "hr-facebook": {
+                "name": "Kroaziako OpenStreetMap Facebook taldea",
+                "description": "Kroaziako OpenStreetMap Facebook taldea"
+            },
+            "hr-irc": {
+                "name": "Kroaziako OpenStreetMap-a IRC-en",
+                "description": "Batu #osm-hr  irc.freenode.org -en (6667 portua)"
+            },
             "it-irc": {
                 "description": "Batu #osm-it irc.oftc.net-en (6667 portua)"
             },
@@ -2345,51 +2325,44 @@
             "it-twitter": {
                 "description": "Jarraitu gaitzazu Twitter-en  {url}-(e)an"
             },
-            "OSM-ES-telegram": {
-                "name": "@OSMes Telegram-en"
+            "osm-at": {
+                "name": "Austriako OpenStreetMap",
+                "description": "Austriako OpenStreetMap-ari buruzko informazio plataforma"
+            },
+            "osm-gh-facebook": {
+                "name": "Ghana-ko OpenStreetMap Facebook-en",
+                "description": "OpenStreetMap-ean interesatutako jendearentzako Facebook taldea."
+            },
+            "osm-gh-twitter": {
+                "name": "Ghana-ko OpenStreetMap Twitter-en",
+                "description": "Jarraitu gaitzazu Twitterren: {url}"
+            },
+            "osm-mg-facebook": {
+                "name": "OpenStreetMap-en Madagaskarreko Facebook Taldea"
+            },
+            "osmcz-facebook": {
+                "name": "CZ-ko OpenStreetMap Facebook-en"
+            },
+            "osmcz-twitter": {
+                "name": "Txekiar twitter-a @osmcz ",
+                "description": "Jarraitu txekiar komunitatea Twitter-en - AsterokoOSM itzulia barne!"
+            },
+            "osmgraz-meetup": {
+                "name": "OSM komunitatearen Graz-eko bilera",
+                "description": "OpenStreetMap komunitateren hileroko bilera Graz-en"
+            },
+            "osmgraz-twitter": {
+                "name": "Graz-eko OSM komunitatea Twitterren",
+                "description": "Graz-eko OpenStreetMap komunitatea twitterren"
             },
             "se-twitter": {
                 "description": "Jarraitu gaitzazu Twitter-en: {url}"
             },
-            "gb-irc": {
-                "description": "Batu #osm-gb  irc.oftc.net-en (port 6667)"
+            "talk-cz-mailinglist": {
+                "name": "Txekiar posta zerrenda (talk-cz)"
             },
-            "OSM-CA-Slack": {
-                "description": "Pertsona oro ongi etorria da! Izena eman {signupUrl}-en."
-            },
-            "Code-for-San-Jose-Slack": {
-                "description": "Pertsona oro ongi etorria da! Izena eman {signupUrl}-en, gero batu #osm katea."
-            },
-            "OSM-US-Slack": {
-                "description": "Pertsona oro da ongi etorria! Izena eman {signupUrl}-en."
-            },
-            "PHXGeo-twitter": {
-                "description": "Jarraitu gaitzazu Twitter-en {url}-ean"
-            },
-            "OSM-AR-facebook": {
-                "extendedDescription": "Lekuko komunitateko albisteak"
-            },
-            "OSM-AR-irc": {
-                "description": "Batu#osm-ar irc.oftc.net-en (6667 portua)"
-            },
-            "OSM-AR-twitter": {
-                "description": "Jarraitu gaitzazu Twitter-en {url} -ean"
-            },
-            "OSM-CO-twitter": {
-                "description": "Jarraitu gaitzazu Twitter-en {url}-ean"
-            },
-            "OSM-PE-twitter": {
-                "description": "Jarraitu gaitzazu Twitter-en {url}-ean"
-            },
-            "LATAM-Twitter": {
-                "description": "Jarrai gaitzazu Twitter-en hemen {url}"
-            },
-            "OSM-Telegram": {
-                "name": "OpenStreetMap-en Telegram-a"
-            },
-            "OSM-Twitter": {
-                "name": "OpenStreetMap-en Twitter-a",
-                "description": "Jarrai gaitzazu Twitter-en hemen {url} "
+            "talk-mg": {
+                "description": "Madagaskarren OpenStreetMap-eko eragile, komunitate eta erabiltzailek elkarbanatzeko eta eztabaidatzeko gunea"
             }
         }
     }

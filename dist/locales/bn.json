@@ -4,7 +4,6 @@
             "information": "তথ্য",
             "remove": "অপসারণ",
             "copy": "অনুলিপি",
-            "open_wikidata": "wikidata.org তে খুলুন",
             "favorite": "প্রিয়"
         },
         "toolbar": {
@@ -104,15 +103,7 @@
                 }
             },
             "orthogonalize": {
-                "title": "বর্গাকৃতি",
-                "description": {
-                    "line": "এই রেখার কোণাসমূহ বর্গাকৃতি করুন।",
-                    "area": "এই ক্ষেত্রটির কোণাসমূহ বর্গাকৃতি করুন।"
-                },
-                "annotation": {
-                    "line": "একটি রেখার কোনাগুলিকে চৌকো করা হয়েছে।",
-                    "area": "একটি এলাকার কোনাগুলিকে চৌকো করা হয়েছে।"
-                }
+                "title": "বর্গাকৃতি"
             },
             "straighten": {
                 "title": "সোজা করুন",
@@ -217,10 +208,6 @@
         "feature_info": {
             "hidden_warning": "{count}টি লুকানো বৈশিষ্ট্য"
         },
-        "status": {
-            "error": "API-এর সাথে যোগাযোগ করা যাচ্ছে না।",
-            "offline": "API-টি এই মুহুর্তে অফলাইন। একটু পরে চেষ্টা করুন।"
-        },
         "commit": {
             "title": "ওপেনস্ট্রীটম্যাপে আপলোড করুন",
             "save": "আপলোড করুন",
@@ -273,7 +260,6 @@
         },
         "geocoder": {
             "search": "বিশ্বব্যাপী খুঁজুন...",
-            "no_results_visible": "দৃশ্যমান মানচিত্রের এলাকায় কোন ফলাফল নেই",
             "no_results_worldwide": "কোন ফলাফল পাওয়া যায় নি"
         },
         "geolocate": {
@@ -446,11 +432,6 @@
             }
         },
         "shortcuts": {
-            "browsing": {
-                "with_selected": {
-                    "zoom_to": "নির্বাচিত বৈশিষ্ট্যে জুম করুন"
-                }
-            },
             "editing": {
                 "title": "সম্পাদনা করছেন",
                 "commands": {
@@ -930,9 +911,6 @@
                 "emergency/phone": {
                     "name": "জরুরি ফোন"
                 },
-                "highway": {
-                    "name": "রাজপথ"
-                },
                 "highway/cycleway": {
                     "name": "সাইকেলের রাস্তা"
                 },
@@ -1011,9 +989,6 @@
                 "landuse/vineyard": {
                     "name": "আঙুরখেত"
                 },
-                "leisure": {
-                    "name": "অবসর"
-                },
                 "leisure/garden": {
                     "name": "বাগান"
                 },
@@ -1050,9 +1025,6 @@
                 "line": {
                     "name": "রেখা"
                 },
-                "man_made": {
-                    "name": "মানুষ নির্মিত"
-                },
                 "man_made/lighthouse": {
                     "name": "বাতিঘর"
                 },
@@ -1067,9 +1039,6 @@
                 },
                 "man_made/water_tower": {
                     "name": "জল স্তম্ভ"
-                },
-                "natural": {
-                    "name": "প্রাকৃতিক"
                 },
                 "natural/bay": {
                     "name": "উপসাগর"
@@ -1113,9 +1082,6 @@
                 "natural/wetland": {
                     "name": "জলাজমি"
                 },
-                "natural/wood": {
-                    "name": "অরন্য"
-                },
                 "office": {
                     "name": "কার্যালয়"
                 },
@@ -1148,9 +1114,6 @@
                 },
                 "point": {
                     "name": "বিন্দু"
-                },
-                "railway": {
-                    "name": "রেলপথ"
                 },
                 "railway/abandoned": {
                     "name": "পরিত্যক্ত রেলপথ"
@@ -1251,9 +1214,6 @@
                 "shop/toys": {
                     "name": "খেলনার দোকান"
                 },
-                "tourism": {
-                    "name": "পর্যটন"
-                },
                 "tourism/attraction": {
                     "name": "পর্যটক আকর্ষণ"
                 },
@@ -1292,9 +1252,6 @@
                 },
                 "type/route/bicycle": {
                     "name": "সাইকেলের রাস্তা"
-                },
-                "waterway": {
-                    "name": "পানিপথ"
                 },
                 "waterway/canal": {
                     "name": "খাল"

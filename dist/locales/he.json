@@ -7,7 +7,7 @@
             "undo": "ביטול",
             "zoom_to": "התקרבות אל",
             "copy": "עותק",
-            "open_wikidata": "פתיחה ב־wikidata.org",
+            "view_on": "צפייה אצל {domain}",
             "favorite": "העדפה"
         },
         "toolbar": {
@@ -128,27 +128,59 @@
                 "not_closed": "אי אפשר להפוך את זה למעגלי כי זאת לא לולאה.",
                 "too_large": "אי אפשר להפוך את זה למעגלי כי התצוגה של הפריט היא חלקית.",
                 "connected_to_hidden": "אי אפשר להפוך את זה למעגלי כי הפריט מחובר לתכונה נסתרת.",
-                "not_downloaded": "אי אפשר להפוך את זה למעגלי כיוון שלא כל הפריט התקבל עדיין."
+                "not_downloaded": "אי אפשר להפוך את זה למעגלי כיוון שלא כל הפריט התקבל עדיין.",
+                "already_circular": "אי אפשר להפוך את זה למעגלי כי זה כבר מעגלי."
             },
             "orthogonalize": {
                 "title": "ריבוע",
                 "description": {
-                    "vertex": "ריבוע פינה זו.",
-                    "line": "ריבוע פינות בקו זה",
-                    "area": "ריבוע פינות באיזור זה"
+                    "corner": {
+                        "single": "לרבע את הפינה הזאת.",
+                        "multiple": "לרבע את הפינות האלו."
+                    },
+                    "feature": {
+                        "single": "לרבע את הפינות של התכונה הזאת.",
+                        "multiple": "לרבע את הפינות של התכונות האלו."
+                    }
                 },
                 "key": "ר",
                 "annotation": {
-                    "vertex": "פינה אחת הפכה מרובעת.",
-                    "line": "הפיכת הקצוות של קו לריבוע.",
-                    "area": "הפיכת הקצוות של שטח לריבוע."
+                    "corner": {
+                        "single": "פינה רובעה.",
+                        "multiple": "מספר פינות רובעו."
+                    },
+                    "feature": {
+                        "single": "רובעו פינות של תכונה.",
+                        "multiple": "רובעו פינות של מספר תכונות."
+                    }
                 },
-                "end_vertex": "לא ניתן להפוך לריבוע כי מדובר במפרק קצה.",
-                "square_enough": "אי אפשר להפוך את זה ליותר ריבוע ממה שזה כבר.",
-                "not_squarish": "אי אפשר להפוך את זה לריבוע כי הצורה לא ריבועית.",
-                "too_large": "אי אפשר להפוך את זה לריבוע כי התצוגה של הפריט היא חלקית.",
-                "connected_to_hidden": "אי אפשר להפוך את זה לריבוע כי הפריט מחובר לתכונה נסתרת.",
-                "not_downloaded": "אי אפשר להפוך את זה לריבוע כיוון שלא כל הפריט התקבל עדיין."
+                "multiple_blockers": {
+                    "multiple": "אי אפשר לרבע את זה ממגוון סיבות."
+                },
+                "end_vertex": {
+                    "single": "אי אפשר לרבע את זה כיוון שזו נקודת קצה.",
+                    "multiple": "לא ניתן לרבע אותן כי אלה נקודות קצה."
+                },
+                "square_enough": {
+                    "single": "לא ניתן לרבע את זה כי זה כבר מספיק מרובע.",
+                    "multiple": "לא ניתן לרבע אותם כי הם כבר מספיק מרובעים."
+                },
+                "not_squarish": {
+                    "single": "אי אפשר לרבע את זה כי זה לא מיועד להתרבע.",
+                    "multiple": "אי אפשר לרבע אותם כי הם לא מיועדים להתרבע."
+                },
+                "too_large": {
+                    "single": "אי אפשר לרבע את זה כיוון שלא מספיק מהתכונה גלוי.",
+                    "multiple": "אי אפשר לרבע אותן כיוון שלא מספיק מהתכונות גלוי כרגע."
+                },
+                "connected_to_hidden": {
+                    "single": "אי אפשר לרבע את זה עקב חיבור לתכונה נסתרת.",
+                    "multiple": "אי אפשר לרבע את אלה עקב חיבור לתכונות נסתרות."
+                },
+                "not_downloaded": {
+                    "single": "אי אפשר לרבע את זה כיוון שחלקים מהתכונה טרם התקבלו.",
+                    "multiple": "אי אפשר לרבע את התכונות כיוון שחלקים מהן טרם התקבלו."
+                }
             },
             "straighten": {
                 "title": "יישור",
@@ -533,11 +565,14 @@
             "hidden_warning": "{count} תכונות נסתרות",
             "hidden_details": "התכונות האלו מוסתרות כרגע: {details}"
         },
-        "status": {
-            "error": "לא ניתן להתחבר ל־API.",
-            "offline": "ה־API אינו זמין. נא לנסות לערוך מאוחר יותר.",
-            "readonly": "ה־API הוא לקריאה בלבד. יהיה עליך להמתין כדי לשמור את השינויים שלך.",
-            "rateLimit": "ה־API מגביל חיבורים אלמוניים. ניתן לתקן זאת על ידי כניסה למערכת."
+        "osm_api_status": {
+            "message": {
+                "error": "לא ניתן להגיע ל־API של OpenStreetMap. העריכות שלך נשמרות מקומית. נא לבדוק את החיבור שלך לאינטרנט.",
+                "offline": "ה־API של OpenStreetMap אינו זמין. העריכות שלך נשמרות באופן מקומי. נא לחזור בהמשך.",
+                "readonly": "ה־API של OpenStreetMap כרגע במצב קריאה בלבד. ניתן להמשיך לערוך אך עליך להמתין לשמירת השינויים שלך.",
+                "rateLimit": "ה־API של OpenStreetMap מגביל את החיבורים האלמוניים. ניתן לתקן זאת על ידי כניסה למערכת."
+            },
+            "retry": "לנסות שוב"
         },
         "commit": {
             "title": "העלאה ל־OpenStreetMap",
@@ -631,7 +666,6 @@
         },
         "geocoder": {
             "search": "חיפוש בכל העולם…",
-            "no_results_visible": "אין תוצאות בחלק הגלוי של המפה",
             "no_results_worldwide": "לא נמצאו תוצאות"
         },
         "geolocate": {
@@ -891,6 +925,19 @@
                 }
             }
         },
+        "preferences": {
+            "title": "העדפות",
+            "description": "העדפות",
+            "key": "ע",
+            "privacy": {
+                "title": "פרטיות",
+                "privacy_link": "הצגת מדיניות פרטיות של iD",
+                "third_party_icons": {
+                    "description": "הצגת סמלים מצד שלישי",
+                    "tooltip": "יש לבטל את סימון התיבה הזאת כדי להימנע מטעינת סמלים מאתרי צד שלישי כגון ויקישיתוף, פייסבוק או טוויטר."
+                }
+            }
+        },
         "restore": {
             "heading": "יש לך שינויים שלא נשמרו",
             "description": "לשחזר שינויים שלא נשמרו מהפעלות עריכה קודמות?",
@@ -957,6 +1004,8 @@
         "splash": {
             "welcome": "ברוך בואך לעורך המפות iD מבית OpenStreetMap",
             "text": "iD הוא כלי ידידותי אך רב עצמה לתרומה למפה החופשית הטובה בעולם. זוהי גרסה {version}. למידע נוסף יש לבקר באתר {website} ולדווח על תקלות תחת {github}.",
+            "privacy_update": "מדיניות הפרטיות שלנו התעדכנה לאחרונה",
+            "privacy": "{updateMessage} עצם השימוש בתכנית זו מהווה את הסכמתך למדיניות הפרטיות של iD אותה ניתן למצוא {here}.",
             "walkthrough": "להתחיל במדריך",
             "start": "לערוך כעת"
         },
@@ -1343,7 +1392,48 @@
         "mapillary_map_features": {
             "title": "תכונות המפה",
             "tooltip": "תכונות מפה מ־Mapillary",
-            "request_data": "בקשת נתונים"
+            "request_data": "בקשת נתונים",
+            "construction": {
+                "flat": {
+                    "crosswalk_plain": "מעבר חציה פשוט"
+                }
+            },
+            "marking": {
+                "discrete": {
+                    "crosswalk_zebra": "מעבר חציה רגיל"
+                }
+            },
+            "object": {
+                "banner": "כרזה",
+                "bench": "ספסל",
+                "bike_rack": "מתקן לאופניים",
+                "billboard": "שלט חוצות",
+                "catch_basin": "בור ניקוז",
+                "cctv_camera": "מצלמה במעגל סגור",
+                "fire_hydrant": "ברז כיבוי אש",
+                "mailbox": "תיבת דואר",
+                "manhole": "פתח תחזוקה",
+                "phone_booth": "תא טלפון",
+                "sign": {
+                    "advertisement": "פרסומת",
+                    "information": "שלט מידע",
+                    "store": "שלט של חנות"
+                },
+                "street_light": "תאורת רחוב",
+                "support": {
+                    "utility_pole": "עמוד תשתיות"
+                },
+                "traffic_cone": "קונוס",
+                "traffic_light": {
+                    "cyclists": "רמזור לרוכבי אופניים",
+                    "general_horizontal": "רמזור אופקי",
+                    "general_single": "רמזור בודד",
+                    "general_upright": "רמזור אנכי",
+                    "other": "רמזור",
+                    "pedestrians": "רמזור להולכי רגל"
+                },
+                "trash_can": "פח אשפה"
+            }
         },
         "mapillary": {
             "title": "Mapillary",
@@ -1882,6 +1972,10 @@
                     }
                 }
             },
+            "unclosed_multipolygon_part": {
+                "message": "לתכונה {feature} יש חלק לא סגור",
+                "reference": "קצותיהם של כל החלקים הפנימיים והחיצוניים של רבי מצולעים אמורים להיות מחוברים."
+            },
             "unsquare_way": {
                 "title": "פינות בלתי מרובעות (עד ‎{val}°‎)",
                 "message": "ל־{feature} יש פינות בלתי מרובעות",
@@ -1895,6 +1989,14 @@
                 "reference": "חלק מהתכונות לא אמורות להיות נקודות בודדות."
             },
             "fix": {
+                "add_a_bridge": {
+                    "title": "הוספת גשר",
+                    "annotation": "נוסף גשר."
+                },
+                "add_a_tunnel": {
+                    "title": "הוספת מנהרה",
+                    "annotation": "נוספה מנהרה."
+                },
                 "address_the_concern": {
                     "title": "התייחסות למטרד"
                 },
@@ -2009,9 +2111,6 @@
                     "title": "שדרוג התגיות",
                     "annotation": "התגיות הישנות שודרגו."
                 },
-                "use_bridge_or_tunnel": {
-                    "title": "שימוש בגשר או במנהרה"
-                },
                 "use_different_layers": {
                     "title": "שימוש בשכבות שונות"
                 },
@@ -2020,9 +2119,6 @@
                 },
                 "use_different_levels": {
                     "title": "שימוש ברמות שונות"
-                },
-                "use_tunnel": {
-                    "title": "שימוש במנהרה"
                 }
             }
         },
@@ -2320,9 +2416,11 @@
                 },
                 "display_options": {
                     "title": "אפשרויות תצוגה",
-                    "background": "הצגת אפשרויות רקע",
+                    "background": "החלפת הופעת חלונית תמונת רקע",
                     "background_switch": "חזרה לרקע האחרון",
-                    "map_data": "הצגת אפשרויות נתוני מפה",
+                    "map_data": "החלפת הופעת חלונית נתוני מפה",
+                    "issues": "החלפת הופעת חלונית אימות תקלות",
+                    "preferences": "החלפת מצב תצוגת חלונית העדפות משתמש",
                     "fullscreen": "כניסה למצב מסך מלא",
                     "sidebar": "פתיחה/סגירה של חלונית צד",
                     "wireframe": "החלפת מצב גבול דקיק",
@@ -2338,9 +2436,9 @@
                     "search": "חיפוש תכונות שתואמות את טקסט החיפוש"
                 },
                 "with_selected": {
-                    "title": "לאחר בחירת התכונה",
+                    "title": "עם התכונות שנבחרו",
                     "edit_menu": "החלפת תצוגה של תפריט עריכה",
-                    "zoom_to": "התמקדות בתכונה הנבחרת"
+                    "zoom_to": "התמקדות על התכונות הנבחרות"
                 },
                 "vertex_selected": {
                     "title": "עם מפרק שנבחר",
@@ -2355,12 +2453,10 @@
                 "title": "עריכה",
                 "drawing": {
                     "title": "ציור",
-                    "focus_add_feature": "התמקדות על שדה חיפוש התכונות",
                     "add_point": "מצב ‚הוספת נקודה’",
                     "add_line": "מצב ‚הוספת קו’",
                     "add_area": "מצב ’הוספת שטח’",
                     "add_note": "מצב ’הוספת הערה’",
-                    "add_favorite": "הוספת תכונה מועדפת",
                     "place_point": "הצבת נקודה או הערה",
                     "disable_snap": "יש להחזיק כדי להשבית הצמדת נקודות",
                     "stop_line": "סיום ציור קו או שטח"
@@ -2524,6 +2620,9 @@
                         "horse": "סוסים",
                         "motor_vehicle": "כלי רכב ממונעים"
                     }
+                },
+                "access_aisle": {
+                    "label": "סוג"
                 },
                 "access_simple": {
                     "label": "הכניסה מותרת",
@@ -2836,11 +2935,17 @@
                 "communication_multi": {
                     "label": "סוגי התקשורת"
                 },
+                "connectivity": {
+                    "label": "חיבור"
+                },
                 "construction": {
                     "label": "סוג"
                 },
                 "consulate": {
                     "label": "סוג"
+                },
+                "consulting": {
+                    "label": "מומחיות"
                 },
                 "contact/webcam": {
                     "label": "כתובת המצלמה",
@@ -2862,6 +2967,9 @@
                 },
                 "country": {
                     "label": "מדינה"
+                },
+                "country_flag": {
+                    "label": "מדינת הדגל"
                 },
                 "couplings": {
                     "label": "מחברים",
@@ -3048,6 +3156,9 @@
                 "distance": {
                     "label": "מרחק"
                 },
+                "disused/railway": {
+                    "label": "סוג"
+                },
                 "dock": {
                     "label": "סוג"
                 },
@@ -3065,6 +3176,12 @@
                 },
                 "door_type": {
                     "label": "סוג"
+                },
+                "drink_multi": {
+                    "label": "משקאות"
+                },
+                "drinking_water": {
+                    "label": "לשתייה"
                 },
                 "drive_through": {
                     "label": "הזמנה-דרך-אשנב"
@@ -3168,6 +3285,9 @@
                     "label": "סוג",
                     "placeholder": "בררת מחדל"
                 },
+                "fountain": {
+                    "label": "סוג"
+                },
                 "frequency": {
                     "label": "תדירות הפעלה"
                 },
@@ -3208,6 +3328,10 @@
                 "generator/type": {
                     "label": "סוג"
                 },
+                "gnis/feature_id": {
+                    "label": "מזהה תכונה במאגר GNIS",
+                    "terms": "GNIS,ID,מערכת מידע גאוגרפית לשמות"
+                },
                 "government": {
                     "label": "סוג"
                 },
@@ -3225,7 +3349,7 @@
                     "label": "מעקה"
                 },
                 "hashtags": {
-                    "label": "תגית מומלצת",
+                    "label": "תגיות הקבץ",
                     "placeholder": "#דוגמה"
                 },
                 "healthcare": {
@@ -3492,6 +3616,9 @@
                 "map_type": {
                     "label": "סוג"
                 },
+                "marker": {
+                    "label": "סוג"
+                },
                 "material": {
                     "label": "חומר"
                 },
@@ -3584,8 +3711,10 @@
                     "label": "רשת",
                     "terms": "רשת,רישות"
                 },
+                "network/type": {
+                    "label": "סוג רשת"
+                },
                 "network_bicycle": {
-                    "label": "סוג רשת",
                     "options": {
                         "icn": "בינלאומית",
                         "lcn": "מקומית",
@@ -3595,7 +3724,6 @@
                     "placeholder": "מקומית, אזורית, לאומית, בינלאומית"
                 },
                 "network_foot": {
-                    "label": "סוג רשת",
                     "options": {
                         "iwn": "בינלאומית",
                         "lwn": "מקומית",
@@ -3605,7 +3733,6 @@
                     "placeholder": "מקומית, אזורית, לאומית, בינלאומית"
                 },
                 "network_horse": {
-                    "label": "סוג רשת",
                     "options": {
                         "ihn": "בינלאומית",
                         "lhn": "מקומית",
@@ -3843,6 +3970,9 @@
                 },
                 "public_bookcase/type": {
                     "label": "סוג"
+                },
+                "pump": {
+                    "label": "משאבה"
                 },
                 "railway": {
                     "label": "סוג"
@@ -4159,6 +4289,10 @@
                     },
                     "placeholder": "גלגלים צרים, צמידים, שטח…"
                 },
+                "sms": {
+                    "label": "מסרון",
+                    "terms": "אסאמאס,מסרון,מסרור"
+                },
                 "social_facility": {
                     "label": "סוג"
                 },
@@ -4424,11 +4558,18 @@
                         "tourism": "תיירות"
                     }
                 },
+                "utility_semi": {
+                    "label": "עזרים"
+                },
                 "valve": {
                     "label": "סוג"
                 },
                 "vending": {
                     "label": "סוגי הטובין"
+                },
+                "video_calls": {
+                    "label": "שיחות וידאו",
+                    "terms": "שיחות ועידה,סרטונים,ועידה,דיון"
                 },
                 "visibility": {
                     "label": "ראות",
@@ -4516,6 +4657,10 @@
                     "label": "ויקינתונים",
                     "terms": "ויקינתונים,ויקידאטא,ויקידאטה,ויקידטה"
                 },
+                "wikimedia_commons": {
+                    "label": "עמוד של ויקישיתוף",
+                    "placeholder": "קובץ:דוגמה.jpg"
+                },
                 "wikipedia": {
                     "label": "ויקיפדיה",
                     "terms": "אנציקלופדיה,ויקי,ויקיפדיה"
@@ -4576,10 +4721,6 @@
                     "name": "רכבל סחורה",
                     "terms": "רכבל סחורה"
                 },
-                "aerialway/j-bar": {
-                    "name": "רכבל זרוע",
-                    "terms": "רכבל J"
-                },
                 "aerialway/magic_carpet": {
                     "name": "מסוע קרקעי",
                     "terms": "מסוע שלג,מסוע שטיח מעופף,מעלית שטיח מעופף"
@@ -4599,13 +4740,6 @@
                 "aerialway/rope_tow": {
                     "name": "רכבל חבלים",
                     "terms": "רכבל חבלים"
-                },
-                "aerialway/station": {
-                    "name": "תחנת רכבל"
-                },
-                "aerialway/t-bar": {
-                    "name": "רכבל שטחי",
-                    "terms": "רכבל שטחי"
                 },
                 "aerialway/zip_line": {
                     "name": "אומגה",
@@ -4757,16 +4891,16 @@
                     "terms": "בית קפה"
                 },
                 "amenity/car_pooling": {
-                    "name": "קארפול",
-                    "terms": "קארפול"
+                    "name": "תחנת שיתוף נסיעות",
+                    "terms": "קארפולינג,קארפול,שיתוף נסיעות,שיתוף מכוניות"
                 },
                 "amenity/car_rental": {
                     "name": "השכרת רכב",
                     "terms": "השכרת רכב"
                 },
                 "amenity/car_sharing": {
-                    "name": "קארפול",
-                    "terms": "קארפול"
+                    "name": "תחנת שיתוף מכוניות",
+                    "terms": "שיתוף נסיעות,שיתוף מכוניות"
                 },
                 "amenity/car_wash": {
                     "name": "שטיפת רכב",
@@ -4960,9 +5094,9 @@
                     "name": "קפה אינטרנט",
                     "terms": "קפה אינטרנט"
                 },
-                "amenity/karaoke": {
+                "amenity/karaoke_box": {
                     "name": "תיבת קריוקי",
-                    "terms": "מכונת קריוקי,מכשיר קריוקי,בידורית"
+                    "terms": "מועדון קריוקי, חדר קריוקי,קראוקי,טלוויזיית קריוקי,מסך קריוקי,טלוויזית קריוקי,פלאג אין"
                 },
                 "amenity/kindergarten": {
                     "name": "גן חובה",
@@ -5184,6 +5318,10 @@
                 },
                 "amenity/register_office": {
                     "name": "משרד רישום"
+                },
+                "amenity/research_institute": {
+                    "name": "מתחם מכון מחקר",
+                    "terms": "מכון מחקר,מופ,מו״פ,מו\"פ,מחקר ופיתוח,מחקר,מעבדות מחקר,ניסויים"
                 },
                 "amenity/restaurant": {
                     "name": "מסעדה",
@@ -5508,10 +5646,6 @@
                     "name": "שטח",
                     "terms": "שטח"
                 },
-                "area/highway": {
-                    "name": "משטח כביש",
-                    "terms": "משטח כביש"
-                },
                 "attraction": {
                     "name": "אטרקציה"
                 },
@@ -5543,21 +5677,13 @@
                     "name": "מתקן אפל",
                     "terms": "מתקן אפל"
                 },
-                "attraction/drop_tower": {
-                    "name": "מגדל נפילה",
-                    "terms": "מגדל שעשועים"
-                },
                 "attraction/maze": {
                     "name": "מבוך",
                     "terms": "מבוך"
                 },
                 "attraction/pirate_ship": {
-                    "name": "ספינת פיראטים",
-                    "terms": "ספינת פיראטים"
-                },
-                "attraction/river_rafting": {
-                    "name": "חתירה בנהר",
-                    "terms": "חתירה בנהר"
+                    "name": "מתקן ספינת פיראטים",
+                    "terms": "פירטים,ספינת פירטים,מתקן ספינת פירטים,מתקן שעשועים,לונה פארק"
                 },
                 "attraction/roller_coaster": {
                     "name": "רכבת הרים",
@@ -5566,6 +5692,10 @@
                 "attraction/summer_toboggan": {
                     "name": "מגלשת הרים",
                     "terms": "מגלשה אלפינית,רכבת הרים"
+                },
+                "attraction/swing_carousel": {
+                    "name": "קרוסלת נדנדות",
+                    "terms": "לונה פארק,מתקן שעשועים,פארק שעשועים,מגדל נדנדות"
                 },
                 "attraction/train": {
                     "name": "רכבת תיירים",
@@ -6029,9 +6159,6 @@
                     "name": "מבודד",
                     "terms": "מבודד"
                 },
-                "craft/jeweler": {
-                    "name": "תכשיטן"
-                },
                 "craft/key_cutter": {
                     "name": "שכפול מפתחות",
                     "terms": "שכפול מפתחות"
@@ -6042,9 +6169,6 @@
                 "craft/metal_construction": {
                     "name": "נפח",
                     "terms": "נפחית"
-                },
-                "craft/optician": {
-                    "name": "אופטיקאי"
                 },
                 "craft/painter": {
                     "name": "צבעי",
@@ -6069,10 +6193,6 @@
                 "craft/plumber": {
                     "name": "שרברב",
                     "terms": "שרברבית"
-                },
-                "craft/pottery": {
-                    "name": "קדרות",
-                    "terms": "כלי חרס"
                 },
                 "craft/rigger": {
                     "name": "חבלאות",
@@ -6140,6 +6260,9 @@
                 "craft/winery": {
                     "name": "יקב",
                     "terms": "יקב"
+                },
+                "demolished/building": {
+                    "name": "בניין שנהרס לאחרונה"
                 },
                 "embankment": {
                     "name": "סוללה"
@@ -6265,7 +6388,8 @@
                     "terms": "עמדת חביטה בגולף"
                 },
                 "golf/water_hazard": {
-                    "name": "מכשול מים"
+                    "name": "מכשול מים",
+                    "terms": "חורבות,חורבן,פירוק מבנה"
                 },
                 "healthcare": {
                     "name": "מוסד טיפול בריאותי",
@@ -6334,9 +6458,6 @@
                 "healthcare/speech_therapist": {
                     "name": "קלינאית תקשורת",
                     "terms": "קלינאי תקשורת,קלינאות תקשורת"
-                },
-                "highway": {
-                    "name": "כביש בין־עירוני"
                 },
                 "highway/bridleway": {
                     "name": "מסלול רכיבה על סוסים",
@@ -6726,18 +6847,6 @@
                     "name": "צומת",
                     "terms": "צומת"
                 },
-                "junction/circular": {
-                    "name": "מעגל תנועה"
-                },
-                "junction/jughandle": {
-                    "name": "ידית כד"
-                },
-                "junction/roundabout": {
-                    "name": "כיכר"
-                },
-                "landuse": {
-                    "name": "שימוש בקרקע"
-                },
                 "landuse/allotments": {
                     "name": "גינה קהילתית",
                     "terms": "גן קהילתי"
@@ -6910,9 +7019,6 @@
                     "name": "מתחם ספורט חורפי",
                     "terms": "ספורט חורף,מגרש ספורט חורפי"
                 },
-                "leisure": {
-                    "name": "אזור פנאי"
-                },
                 "leisure/adult_gaming_centre": {
                     "name": "מרכז בידור למבוגרים",
                     "terms": "מרכז הימורים,קזינו,בית הימורים"
@@ -6964,10 +7070,6 @@
                 "leisure/escape_game": {
                     "name": "חדר בריחה",
                     "terms": "אסקייפ רום,איסקייפ רום,משחק בריחה,חדר אתגרי"
-                },
-                "leisure/firepit": {
-                    "name": "שוחה למדורה",
-                    "terms": "מדורה,אש,להבה,קומזיץ"
                 },
                 "leisure/fishing": {
                     "name": "נקודת דיג",
@@ -7113,6 +7215,10 @@
                     "name": "משטח כדורת דשא",
                     "terms": "כר דשא לכדורת דשא,מתחם כדורת דשא"
                 },
+                "leisure/pitch/chess": {
+                    "name": "לוח שח ענק",
+                    "terms": "לוח שחמט,לוח דמקה,דמקה,שח גינה,שח ענק,שח גדול,שח מוגדל,דמקה ענקית,דמקה גדולה,דמקה לגינה,דמקה בגינה,דמקה גינה"
+                },
                 "leisure/pitch/cricket": {
                     "name": "מגרש קריקט",
                     "terms": "מגרש קריקט"
@@ -7241,9 +7347,6 @@
                     "name": "קו",
                     "terms": "קו"
                 },
-                "man_made": {
-                    "name": "מעשה ידי אדם"
-                },
                 "man_made/adit": {
                     "name": "פתח גישה",
                     "terms": "פתח גישה"
@@ -7263,10 +7366,6 @@
                 "man_made/breakwater": {
                     "name": "שובר גלים",
                     "terms": "שובר גלים"
-                },
-                "man_made/bridge": {
-                    "name": "גשר",
-                    "terms": "גשר"
                 },
                 "man_made/bunker_silo": {
                     "name": "בור תחמיץ",
@@ -7438,10 +7537,6 @@
                     "name": "מגדל תצפית",
                     "terms": "תצפית,מגדל תצפית,צפייה,מצפור,מגדל כיבוי אש"
                 },
-                "man_made/tunnel": {
-                    "name": "מנהרה",
-                    "terms": "מעבר תת־קרקעי,מעבר תחתי"
-                },
                 "man_made/utility_pole": {
                     "name": "עמוד תשתיות",
                     "terms": "עמוד חשמל,עמוד תאורה,עמוד תקשורת,עמוד מתכת,עמוד ברזל,עמוד תמיכה"
@@ -7449,6 +7544,10 @@
                 "man_made/wastewater_plant": {
                     "name": "מפעל טיפול בשפכים",
                     "terms": "מפעל טיפול במי ביוב"
+                },
+                "man_made/water_tap": {
+                    "name": "ברז מים",
+                    "terms": "מים לשתייה,מי ברז,נקודת מים,מקור מים,ברז,מי שתייה"
                 },
                 "man_made/water_tower": {
                     "name": "מגדל מים",
@@ -7495,7 +7594,7 @@
                     "terms": "סוללה,שוחה,חפיר"
                 },
                 "natural": {
-                    "name": "מאפייני טבע"
+                    "name": "תכונה טבעית"
                 },
                 "natural/bare_rock": {
                     "name": "סלע חשוף",
@@ -7599,9 +7698,6 @@
                 "natural/water/basin": {
                     "name": "אגן"
                 },
-                "natural/water/canal": {
-                    "name": "תעלת מים"
-                },
                 "natural/water/lake": {
                     "name": "אגם",
                     "terms": "אגם"
@@ -7618,13 +7714,6 @@
                     "name": "מאגר",
                     "terms": "מאגר"
                 },
-                "natural/water/river": {
-                    "name": "נהר",
-                    "terms": "יובל,פלג,נחל,נהר,זרם"
-                },
-                "natural/water/stream": {
-                    "name": "נחל"
-                },
                 "natural/water/wastewater": {
                     "name": "מתקן טיהור שפכים",
                     "terms": "מט״ש,שפד״ן,שפכים,שופכין,קולחין"
@@ -7635,7 +7724,7 @@
                 },
                 "natural/wood": {
                     "name": "חורש טבעי",
-                    "terms": "יער"
+                    "terms": "עצים,חורשה,יער,עץ"
                 },
                 "noexit/yes": {
                     "name": "אין יציאה",
@@ -7679,6 +7768,10 @@
                 "office/company": {
                     "name": "משרד תאגידי",
                     "terms": "משרד תאגידי"
+                },
+                "office/consulting": {
+                    "name": "משרד ייעוץ",
+                    "terms": "סוכנות ייעוץ,חברת ייעוץ,יועצים,יועצות,ייעוץ,יעוץ"
                 },
                 "office/coworking": {
                     "name": "משרדים משותפים",
@@ -7991,7 +8084,7 @@
                     "terms": "פתקי הצבעה,דמוקרטיה,תיבת קלפי,תיבת הצבעה,הגשת הצבעות,בחירות,עמדת הצבעה,מכונת הצבעה"
                 },
                 "power": {
-                    "name": "חשמל"
+                    "name": "תכונת חשמל"
                 },
                 "power/cable/underground": {
                     "name": "כבל חשמל תת־קרקעי",
@@ -8202,7 +8295,7 @@
                     "terms": "תחנת טרוליבוס"
                 },
                 "railway": {
-                    "name": "מסילת רכבת"
+                    "name": "תכונת מסילה"
                 },
                 "railway/abandoned": {
                     "name": "מסילת רכבת נטושה",
@@ -8542,6 +8635,10 @@
                     "name": "חנות מוצרי עישון",
                     "terms": "חנות דברי עישון"
                 },
+                "shop/electrical": {
+                    "name": "חנות מוצרי חשמל",
+                    "terms": "חנות חשמל,חנות תאורה,מאווררים,כבל,חשמל,תאורה"
+                },
                 "shop/electronics": {
                     "name": "חנות אלקטרוניקה",
                     "terms": "חנות אלקטרוניקה"
@@ -8851,6 +8948,10 @@
                     "name": "חנות נעליים",
                     "terms": "חנות נעליים"
                 },
+                "shop/spices": {
+                    "name": "חנות תבלינים",
+                    "terms": "צ׳ילי,צ'ילי,קינמון,קארי,זנגביל,ג׳ינג׳ר,ג'ינג'ר,תבלינים,תבלין,זעפרן,וסאבי,כורכום,כמון,פלפל,חריף,לימון פרסי,זעתר"
+                },
                 "shop/sports": {
                     "name": "חנות לאביזרי ספורט",
                     "terms": "חנות לדברי ספורט"
@@ -8963,7 +9064,7 @@
                     "terms": "אחסון מערכות מחשב,מערכות מידע,מערכות מחשוב,טכנולוגיות מידע,חוות שרתים,תקשורת נתונים"
                 },
                 "tourism": {
-                    "name": "תיירות"
+                    "name": "תכונת תיירות"
                 },
                 "tourism/alpine_hut": {
                     "name": "בקטה הררית",
@@ -9313,7 +9414,7 @@
                     "terms": "נתיב מים"
                 },
                 "waterway": {
-                    "name": "נתיב מים"
+                    "name": "תכונת הולכת מים"
                 },
                 "waterway/boatyard": {
                     "name": "מרינה",
@@ -9457,20 +9558,6 @@
                 },
                 "description": "צילומי אוויר ולוויין.",
                 "name": "Mapbox לווייני"
-            },
-            "Maxar-Premium": {
-                "attribution": {
-                    "text": "תנאים ומשוב"
-                },
-                "description": "Maxar פרימיום הוא פסיפס שמורכב ממפת הבסיס Maxar עם שטחים נבחרים במילוי ‎+Vivid או שטח צילום מותאם אישית, ברזולוציה של 50 ס״מ ומעלה, שמתרענן בתדירות גבוהה יותר ככל שמצטרפים עוד עדכונים.",
-                "name": "צילומי פרימיום של Maxar (בטא)"
-            },
-            "Maxar-Standard": {
-                "attribution": {
-                    "text": "תנאים ומשוב"
-                },
-                "description": "Maxar רגיל הוא סדרה אסופה של צילומים שמכסים 86% מהקרקע בכדור הארץ ברזולוציה של 30-60 ס״מ איפה שניתן, עם מילוי חוסרים מצד Landsat. הגיל הממוצע הוא 2.31 שנים, עם שטחים מסוימים שמתעדכנים פעמיים בשנה.",
-                "name": "צילומים רגילים של Maxar (בטא)"
             },
             "OSM_Inspector-Addresses": {
                 "attribution": {
@@ -9877,131 +9964,242 @@
             }
         },
         "community": {
-            "bw-facebook": {
-                "name": "מיפוי בוטסואנה בפייסבוק",
-                "description": "העמוד של OpenStreetMap בבוטסואנה"
+            "Bahia-telegram": {
+                "name": "קבוצת הטלגרם של OpenStreetMap באהיה",
+                "description": "ניתן להצטרף לקהילת OpenStreetMap באהיה בטלגרם",
+                "extendedDescription": "ניתן להצטרף לקהילה שלנו כדי ללמוד עוד על OpenStreetMap, לשאול שאלות או להשתתף במפגשים שלנו. כולם מוזמנים!"
             },
-            "bw-twitter": {
-                "name": "מיפוי בוטסואנה בטוויטר",
-                "description": "הטוויטר של OpenStreetMap בבוטסואנה"
+            "Bay-Area-OpenStreetMappers": {
+                "name": "ממפי OpenStreetMap באזור מפרץ סן פרנסיסקו",
+                "description": "שיפור OpenStreetMap באזור מפרץ סן פרנסיסקו",
+                "extendedDescription": "מטרת הקבוצה הזו היא להגדיל את קהילת OpenStreetMap כאן באזור מפרץ סן פרנסיסקו. האירועים שלנו פתוחים לכולם, החל מחובבי קוד פתוח, רוכבי אופניים, מומחי GIS, אוצרי נתונים גאוגרפיים והרבה מעבר לזה. כולם וכל מי שמעוניין במפות, יצירת מפות ונתוני מפות חופשיים מוזמנים להצטרף לקבוצה שלנו ולהשתתף באירועים שלנו."
             },
-            "cape-coast-youthmappers": {
-                "name": "הממפים הצעירים של אוניברסיטת קייפ קוסט",
-                "description": "ניתן לעקוב אחרינו בטוויטר: {url}",
-                "extendedDescription": "זה הכינוי הרשמי של אגף הממפים הצעירים באוניברסיטת קייפ קוסט, גאנה. אנו אוהבים מפות, נתונים פתוחים וגם לעזור לחלשים."
+            "Central-Pennsylvania-OSM": {
+                "name": "OSM מרכז פנסילבניה",
+                "description": "קהילת מיפוי מקוון שבסיסה הוא בסטייט קולג׳, פנסילבניה"
             },
-            "osm-gh-facebook": {
-                "name": "הפייסבוק של OpenStreetMap גאנה",
-                "description": "קבוצת פייסבוק לאנשים שמתעניינים ב־OpenStreetMap.",
-                "extendedDescription": "ממפים בקהילת גאנה, מקדמים את OpenStreetMap ואת מיזמי צוות OpenStreetMap ההומניטרי (HOT) בגאנה. אפשר להצטרף אלינו."
+            "Code-for-San-Jose-Slack": {
+                "name": "קוד ל־Slack של סן חוזה",
+                "description": "כולם מוזמנים! ניתן להירשם בכתובת {signupUrl} ואז להצטרף לערוץ ‎#osm."
             },
-            "osm-gh-twitter": {
-                "name": "הטוויטר של OpenStreetMap גאנה",
-                "description": "ניתן לעקוב אחרינו בטוויטר: {url}"
+            "DF-telegram": {
+                "name": "קבוצת הטלגרם של OpenStreetMap ברזיליה",
+                "description": "ניתן להצטרף לקהילת OpenStreetMap ברזיליה בטלגרם",
+                "extendedDescription": "ניתן להצטרף לקהילה וללמוד עוד על OpenStreetMap, לשאול שאלות או להשתתף במפגשים שלנו. כולם מוזמנים!"
             },
-            "talk-gh": {
-                "name": "קבוצת הדיוור Talk-gh",
-                "description": "Talk-gh היא קבוצת הדיוור הרשמית של קהילת OSM בגאנה"
+            "Dallas-Fort-Worth-OSM": {
+                "name": "OSM דלאס-פורט וורת׳",
+                "description": "קבוצת משתמשי OpenStreetMap בדלאס-פורט וורת׳",
+                "extendedDescription": "דלאס, פורט וורת׳ וכל הערים שביניהן שופעות באנשים יצירתיים ומוכשרים טכנולוגית. החזון של קבוצת המשתמשים הזאת היא למצוא דרכים חדשות להשתמש במשאב המדהים שנקרא OSM."
             },
-            "osm-mg-facebook": {
-                "name": "קבוצת הפייסבוק של OpenStreetMap במדגסקר ",
-                "description": "קבוצת פייסבוק במלגשי לאנשים שמתעניינים ב־OpenStreetMap."
+            "GeoPhilly": {
+                "name": "GeoPhilly",
+                "description": "קבוצת מפגשים לחובבי מפות באזור פילדלפיה",
+                "extendedDescription": "GeoPhilly היא קבוצה של מפתחים, מומחי גאוגרפיה, גיקים של מידע, חובבי קוד פתוח, האקרים אזרחיים ומכורי מפות שמתאגדים סביב אהבתם המשותפת למפות ולסיפורים שהן מספרות. אם מפות משמשות אותך כחלק מהעבודה שלך או שפשוט מעניין אותך לדעת יותר, המפגש הזה מיועד לך! האירועים שלנו מתוכננים להיות פתוחים, ידידותיים, חינוכיים וחברתיים, החל מהרמת כוסית דרך הרצאות בזק ואפילו סדנאות. מזמינים אותך ליצור קהילה גאו־‏מרחבית מגוונת ומעוררת השראה בפילדלפיה ביחד אתנו!"
             },
-            "talk-mg": {
-                "name": "קבוצת הדיוור Talk-mg",
-                "description": "מקום לתורמים, קהילות ומשתמשי OpenStreetMap במדגסקר לשתף ולדון זה עם זה."
+            "LATAM-Facebook": {
+                "name": " הפייסבוק של OpenStreetMap אמריקה הלטינית",
+                "description": "OpenStreetMap אמריקה הלטינית בפייסבוק"
+            },
+            "LATAM-Telegram": {
+                "name": "הטלגרם של OpenStreetMap אמריקה הלטינית",
+                "description": "טלגרם של OpenStreetMap עבור אמריקה הלטינית"
+            },
+            "LATAM-Twitter": {
+                "name": "הטוויטר של OpenStreetMap אמריקה הלטינית",
+                "description": "ניתן לעקוב אחרינו בטוויטר בכתובת {url}"
+            },
+            "MapMinnesota": {
+                "name": "MapMinnesota",
+                "description": "ממפי וחובבי OpenStreetMap באזור טווין סיטיז",
+                "extendedDescription": "חיבור חובבי OpenStreetMap באזורי מינסוטה וטווין סיטיז!"
+            },
+            "Mapping-DC-meetup": {
+                "name": "מיפוי וושינגטון הבירה",
+                "description": "שיפור OpenStreetMap באיזור וושינגטון הבירה",
+                "extendedDescription": "אנו קבוצה של ממפים מתנדבים שחותרים לשפר את OpenStreetMap באיזור וושינגטון הבירה. אנו גם חותרים ללמד אנשים נוספים על הסביבה המקיפה את OSM, ניתוח מידע, מיפוי ומערכות מידע גאוגרפיות. אנו נפגשים אחת לחודשיים כדי להתמקד על אזור מסוים בעיר שלנו."
+            },
+            "Maptime-Bogota": {
+                "name": "Maptime בוגוטה",
+                "description": "אנו קבוצה של ממפים שמעוניים למפות ב־OpenStreetMap סביב בוגוטה.",
+                "extendedDescription": "מידע על איסוף נתונים בשטח והמרתם לנתונים דיגיטליים ב־OpenStreetMap. אין צורך בידע קודם! נדרש רק רצון עז להשתתף, ללמוד וליהנות."
+            },
+            "Maptime-ME-meetup": {
+                "name": "MaptimeME",
+                "description": "ממפים ומשתמשי OpenStreetMap סביב פורטלנד, מיין",
+                "extendedDescription": "Maptime כשמו כן הוא, זמן ליצירת מפות. המטרה שלנו היא לפתוח את הדלת לאפשרויות מגוונות ליצירת מפות לכל מי שמעוניין על ידי יצירת מקום ללמידה שיתופית, חקירה ויצירת מפות באמצעות כלים וטכנולוגיות למיפוי."
+            },
+            "MaptimeHRVA-twitter": {
+                "name": "MaptimeHRVA טוייטר",
+                "description": "עקוב אחרינו בטוייטר {url}"
+            },
+            "Nottingham-OSM-pub-meetup": {
+                "name": "קבוצת המפגשים החודשיים של מזרח המידלנדס (נוטינגהם)",
+                "description": "מפגשים חברתיים לממפי ומשתמשי מזרח המידלנדס",
+                "extendedDescription": "הקבוצה עורכת מפגשים מאז מרץ 2011, בהתחלה בנוטינגהם ובהמשך בדרבי ומדי פעם בפעם במקומות אחרים במזרח המידלנדס. מדובר במפגשים חברתיים אך הם גם מקום נפלא לבוא ולשאול שאלות על OSM, או נקודתית על האזור או באופן כללי. בחודשי הקיץ אנחנו בדרך כלל עורכים פעילות מיפוי קליל למשך כשעה בקרבת מקום המפגש. לקבוצה ככלל יש עניין מיוחד בזכויות מיפוי ציבורי של דרכים ומדי פעם מתקיימות גם פגישות למטרה זו."
+            },
+            "OSM-AR-facebook": {
+                "name": "הפייסבוק של OpenStreetMap ארגנטינה",
+                "description": "ניתן להצטרף לקהילה של OpenStreetMap ארגנטינה בפייסבוק",
+                "extendedDescription": "חדשות מהקהילה המקומית"
+            },
+            "OSM-AR-forum": {
+                "name": "הפורום המקוון של OpenStreetMap ארגנטינה",
+                "description": "ניתן להצטרף לפורום המקוון של OpenStreetMap ארגנטינה",
+                "extendedDescription": "מצוין לדיונים ארוכים או חשובים. זמן תגובה ארוך."
+            },
+            "OSM-AR-irc": {
+                "name": "OpenStreetMap ארגנטינה ב־IRC",
+                "description": "ניתן להצטרף ל־‎#osm-ar תחת irc.oftc.net (פתחה 6667)",
+                "extendedDescription": "שם ניתן למצוא את המשתמש החנון ביותר בקהילה."
+            },
+            "OSM-AR-mailinglist": {
+                "name": "קבוצת הדיוור Talk-ar",
+                "description": "קבוצת דיוור היסטורית. כמעט לא בשימוש כיום."
+            },
+            "OSM-AR-telegram": {
+                "name": "הטלגרם של OpenStreetMap ארגנטינה",
+                "description": "ניתן להצטרף לקהילת OpenStreetMap ארגנטינה בטלגרם",
+                "extendedDescription": "הערוץ הפעיל ביותר בקהילה, מומלץ לשיחות ולקבלת תשובות לשאלות שלך במהרה. כולם מוזמנים!"
+            },
+            "OSM-AR-twitter": {
+                "name": "הטוויטר של OpenStreetMap ארגנטינה",
+                "description": "ניתן לעקוב אחרינו בטוויטר בכתובת {url}",
+                "extendedDescription": "חדשות מהקהילה המקומית ומ־OpenStreetMap באופן כללי."
+            },
+            "OSM-Asia-mailinglist": {
+                "name": "OpenStreetMap אסיה רשימת תפוצה",
+                "description": "Talk-asia היא קבוצת הדיוור הרשמית של הקהילה האסיאתית"
             },
             "OSM-BGD-facebook": {
                 "name": "OpenStreetMap בנגלדש",
                 "description": "שיפור OpenStreetMap בבנגלדש",
                 "extendedDescription": "מעניין אותך מיפוי בבנגלדש? יש לך שאלות? אולי ליצור קשר עם הקהילה המקומית? ניתן להצטרף אלינו ב־{url}. כולם מוזמנים!"
             },
-            "OSM-India-facebook": {
-                "name": "OpenStreetMap הודו - מיפוי שכונות התנדבותי",
-                "description": "שיפור OpenStreetMap בהודו",
-                "extendedDescription": "מעניין אותך מיפוי בהודו? יש לך שאלות? אולי ליצור קשר עם הקהילה המקומית? ניתן להצטרף אלינו ב־{url}. כולם מוזמנים!"
+            "OSM-BO-mailinglist": {
+                "name": "קבוצת הדיוור Talk-bo",
+                "description": "Talk-bo היא קבוצת הדיוור הרשמית של קהילת OpenStreetMap הבוליביאנית",
+                "extendedDescription": "מעניין אותך מיפוי בבוליביה? יש לך שאלות? אולי ליצור קשר עם הקהילה המקומית? ניתן להצטרף אלינו ב־{url}. כולם מוזמנים!"
             },
-            "osm-india-forum": {
-                "name": "OpenStreetMap פורום הודו",
-                "description": "OpenStreetMap פורום הודו"
+            "OSM-Boston": {
+                "name": "OpenStreetMap בוסטון",
+                "description": "ממפים ומשתמשים ב־OpenStreetMap באזור בוסטון",
+                "extendedDescription": "OpenStreetMap היא מפת העולם פתוחה בסגנון ויקי, מורכבת ממאות אלפי תרומות כל יום שנתרמות על ידי אנשים כמוך. עריכת המפה היא תהליך פשוט ומהנה! מזמינים אותך להצטרף אלינו בפעילויות הפנים והחוץ כחלק מהניסיון שלנו ליצור את המפה הטובה ביותר של אזור בוסטון ושאר העולם!"
             },
-            "osm-india-github": {
-                "name": "OpenStreetMap גיטהאב הודו",
-                "description": "תפתח קוד איתנו ב{url}"
+            "OSM-CA-Slack": {
+                "name": "ה־Slack של OSM קנדה",
+                "description": "כולם מוזמנים! ניתן להירשם בכתובת {signupUrl}."
             },
-            "OSM-india-mailinglist": {
-                "name": "קבוצת הדיוור של OpenStreetMap הודו",
-                "description": "Talk-in היא קבוצת הדיוור הרשמית של הקהילה ההודית"
+            "OSM-CL-facebook": {
+                "name": "הפייסבוק של OpenStreetMap צ׳ילה",
+                "description": "ניתן להצטרף לקהילה של OpenStreetMap צ׳ילה בפייסבוק",
+                "extendedDescription": "ניתן להצטרף לקהילה שלנו כדי ללמוד עוד על OpenStreetMap, לשאול שאלות או להשתתף במפגשים שלנו. כולם מוזמנים!"
             },
-            "osm-india-telegram": {
-                "name": "OpenStreetMap הודו טלגרם",
-                "description": "מוזמנים למשפחה: {url}"
+            "OSM-CL-mailinglist": {
+                "name": "קבוצת הדיוור Talk-cl",
+                "description": "קבוצת דיוור לדיונים על OpenStreetMap בצ׳ילה"
             },
-            "OSM-india-twitter": {
-                "name": "הטוויטר של OpenStreetMap הודו",
-                "description": "אנחנו במרחק ציוץ: {url}"
+            "OSM-CL-telegram": {
+                "name": "הטלגרם של OpenStreetMap צ׳ילה",
+                "description": "ניתן להצטרף לקהילת OpenStreetMap צ׳ילה בטלגרם",
+                "extendedDescription": "ניתן להצטרף לקהילה שלנו כדי ללמוד עוד על OpenStreetMap, לשאול שאלות או להשתתף במפגשים שלנו. כולם מוזמנים!"
             },
-            "osm-india-website": {
-                "name": "OpenStreetMap הודו",
-                "description": "ממפים ומשתמשים בOpenStreetMap"
+            "OSM-CL-twitter": {
+                "name": "הטוויטר של OpenStreetMap צ׳ילה",
+                "description": "ניתן לעקוב אחרינו בטוויטר בכתובת {url}"
             },
-            "osm-india-wiki": {
-                "name": "OpenStreetMap Wikiproject הודו",
-                "description": "כל מה שאתה צריך לדעת על מיפוי בהודו {url}"
+            "OSM-CO": {
+                "name": "OpenStreetMap קולומביה",
+                "description": "חדשות על קהילת OpenStreetMap קולומביה ועל קרן OSMCo"
             },
-            "osm-india-youtube": {
-                "name": "OpenStreetMap הודו יוטוב",
-                "description": "מוזמנים לערוץ שלנו: {url}"
+            "OSM-CO-facebook": {
+                "name": "הפייסבוק של OpenStreetMap קולומביה",
+                "description": "ניתן להצטרף לקהילה של OpenStreetMap קולומביה בפייסבוק",
+                "extendedDescription": "ניתן להצטרף לקהילה שלנו כדי ללמוד עוד על OpenStreetMap. כולם מוזמנים!"
             },
-            "OSM-India-Puducherry-Facebook": {
-                "name": "תנועת החומרה והתכנה החופשית - פייסבוק",
-                "description": "עמוד הפייסבוק של FSHM נועד לעדכון על אירועים ופעילויות של הקהילה",
-                "extendedDescription": "FSHM מארגנים אירועים שקשורים לתכנה/חומרה פתוחים, טכנולוגיה, מעורבות חברתית ו־OpenStreetMap. עמוד הפייסבוק הוא הדרך הטוב ביותר לשמור על קשר בנוגע לאירועים."
+            "OSM-CO-mailinglist": {
+                "name": "קבוצת הדיוור Talk-co",
+                "description": "קבוצת דיוור לדיונים על OpenStreetMap בקולומביה"
             },
-            "OSM-Puducherry-Mailing-List": {
-                "name": "Free Software Hardware Movement - רשימת תפוצה",
-                "description": "קבוצת הדיוור פודוצ׳רי של FSHM לדיונים על מיפוי בפודוצ׳רי ונושאים נוספים.",
-                "extendedDescription": "FSHM מארגנים אירועים שקשורים לתכנה/חומרה פתוחים, טכנולוגיה, מעורבות חברתית ו־OpenStreetMap."
+            "OSM-CO-telegram": {
+                "name": "ערוץ הטלגרם של OSM קולומביה",
+                "description": "הטלגרם של OpenStreetMap קולומביה"
             },
-            "OSM-India-Puducherry-Matrix": {
-                "name": "תנועת החומרה והתכנה החופשית - Matrix",
-                "description": "קבוצת ה־Riot של FSHM מיועדת לדיונים, שיתוף ועדכון פעילויות מיפוי ואירועים בתוך ומסביב לפודוצ׳רי.",
-                "extendedDescription": "חברי קהילת FSHM משתפים עדכונים / חוויות על המיפוי שלהם עם OSM דרך קבוצה ב־Riot.im, קבוצה זה גם משמשת לדיונים בנוגע תכנה / חומרה חופשיים, טכנולוגיה ומעורבות חברתית."
+            "OSM-CO-twitter": {
+                "name": "הטוויטר של OpenStreetMap קולומביה",
+                "description": "ניתן לעקוב אחרינו בטוויטר בכתובת {url}"
+            },
+            "OSM-CU-telegram": {
+                "name": "ערוץ הטלגרם של OSM קובה",
+                "description": "הטלגרם של OpenStreetMap קובה"
+            },
+            "OSM-Central-Salish-Sea": {
+                "name": "OpenStreetMap מרכז ים סאליש",
+                "description": "ממפים ומשתמשי OpenStreetMap סביב מאונט ורנון, וירג׳יניה",
+                "extendedDescription": "OpenStreetMap היא מפת העולם שנוצרת על ידי אנשים כמוך. זו מפה בהרכבתך, שמוגשת לציבור בחינם כמו ויקיפדיה. כדאי לבקר ב־osm.org למידע נוסף. אנו נפגשים כל הזמן ומדברים על מפות, ממפים ונהנים!"
+            },
+            "OSM-Chattanooga": {
+                "name": "OSM צ׳טנוגה",
+                "description": "קבוצת משתמשי OpenStreetMap בצ׳טנוגה"
+            },
+            "OSM-Colorado": {
+                "name": "OpenStreetMap קולורדו",
+                "description": "ממפים ומשתמשים ב־OpenStreetMap במדינת קולורדו, ארה״ב",
+                "extendedDescription": "OpenStreetMap (OSM) קולורדו היא שיתוף פעולה מקומי בין אנשים שמתעניינים ברתימת מאמציהם ליצירת מפות חופשיות. אנו מעודדים את כל הממפים לארגן או להציע אירועי מיפוי בכל רחבי המדינה. פעילויות במפגשים יכול להיות סתם מפגש חברתי, תרגול OSM ממתחילים ועד מתקדמים או מסיבות מיפוי קהילתיות."
+            },
+            "OSM-Discord": {
+                "name": "ה־Discord של OpenStreetMap",
+                "description": "יצירת קשר עם ממפים אחרים דרך Discord"
+            },
+            "OSM-EC-telegram": {
+                "name": "ערוץ הטלגרם של OSM אקוודור",
+                "description": "הטלגרם של OpenStreetMap אקוודור"
+            },
+            "OSM-ES-mailinglist": {
+                "name": "קבוצת הדיוור Talk-es",
+                "description": "קבוצת דיוור לדיונים על OpenStreetMap בספרד"
+            },
+            "OSM-ES-telegram": {
+                "name": "@OSMes ב־Telegram",
+                "description": "הטלגרם של OpenStreetMap ספרד"
+            },
+            "OSM-Facebook": {
+                "name": "OpenStreetMap בפייסבוק",
+                "description": "ניתן לעשות לנו ‚לייק’ בפייסבוק כדי לקבל חדשות ועדכונים על OpenStreetMap."
             },
             "OSM-IDN-facebook": {
                 "name": "OpenStreetMap אינדונזיה",
                 "description": "שיפור OpenStreetMap באינדונזיה",
                 "extendedDescription": "מעניין אותך מיפוי באינדונזיה? יש לך שאלות? אולי ליצור קשר עם הקהילה המקומית? ניתן להצטרף אלינו ב־{Url}. כולם מוזמנים!"
             },
-            "osm-iran-aparat": {
-                "name": "ה־Aparat של OpenStreetMap איראן",
-                "description": "מוזמנים לערוץ שלנו בכתובת {url}",
-                "extendedDescription": "משאב טוב של סרטונים על כל מה שקשור ב־OpenStreetMap. בעיקר בפרסית."
+            "OSM-IRC": {
+                "name": "ה־IRC של OpenStreetMap",
+                "description": "ניתן להצטרף ל־‎#osm תחת irc.oftc.net (פתחה 6667)"
             },
-            "osm-iran-forum": {
-                "name": "הפורום המקוון של OpenStreetMap איראן",
-                "description": "הפורום המקוון של OpenStreetMap איראן",
-                "extendedDescription": "פורום מקוון למשתמשי OpenStreetMap באיראן. אפשר לשאול שאלות ולדון עם אחרים באופן חופשי!"
+            "OSM-India-Puducherry-Facebook": {
+                "name": "תנועת החומרה והתכנה החופשית - פייסבוק",
+                "description": "עמוד הפייסבוק של FSHM נועד לעדכון על אירועים ופעילויות של הקהילה",
+                "extendedDescription": "FSHM מארגנים אירועים שקשורים לתכנה/חומרה פתוחים, טכנולוגיה, מעורבות חברתית ו־OpenStreetMap. עמוד הפייסבוק הוא הדרך הטוב ביותר לשמור על קשר בנוגע לאירועים."
             },
-            "osm-iran-telegram": {
-                "name": "הטלגרם של OpenStreetMap איראן",
-                "description": "מזמינים אותך להצטרף לערוץ הטלגרם שלנו בכתובת {url}. יש לנו גם קבוצת על של משתמשי OSM רבים שמתעניינים באיראן. ניתן למצוא את הקישור אליה בביוגרפיה של הערוץ."
+            "OSM-India-Puducherry-Matrix": {
+                "name": "תנועת החומרה והתכנה החופשית - Matrix",
+                "description": "קבוצת ה־Riot של FSHM מיועדת לדיונים, שיתוף ועדכון פעילויות מיפוי ואירועים בתוך ומסביב לפודוצ׳רי.",
+                "extendedDescription": "חברי קהילת FSHM משתפים עדכונים / חוויות על המיפוי שלהם עם OSM דרך קבוצה ב־Riot.im, קבוצה זה גם משמשת לדיונים בנוגע תכנה / חומרה חופשיים, טכנולוגיה ומעורבות חברתית."
             },
-            "OSM-japan-facebook": {
-                "name": "קהילת OpenStreetMap יפן",
-                "description": "ממפים ומשתמשים OpenStreetMap ביפן"
+            "OSM-India-facebook": {
+                "name": "OpenStreetMap הודו - מיפוי שכונות התנדבותי",
+                "description": "שיפור OpenStreetMap בהודו",
+                "extendedDescription": "מעניין אותך מיפוי בהודו? יש לך שאלות? אולי ליצור קשר עם הקהילה המקומית? ניתן להצטרף אלינו ב־{url}. כולם מוזמנים!"
             },
-            "OSM-japan-mailinglist": {
-                "name": "קבוצת הדיוור של OpenStreetMap יפן",
-                "description": "Talk-ja היא קבוצת הדיוור הרשמית של הקהילה היפנית"
+            "OSM-MMR-facebook": {
+                "name": "OpenStreetMap מיאנמר",
+                "description": "שיפור OpenStreetMap במיאנמר",
+                "extendedDescription": "מעניין אותך מיפוי במיאנמר? יש לך שאלות? אולי ליצור קשר עם הקהילה המקומית? ניתן להצטרף אלינו ב־{Url}. כולם מוזמנים!"
             },
-            "OSM-japan-twitter": {
-                "name": "הטוויטר של OpenStreetMap יפן",
-                "description": "תגית הקבץ בטוויטר: {url}"
-            },
-            "OSM-japan-website": {
-                "name": "OpenStreetMap יפן",
-                "description": "ממפים ומשתמשים OpenStreetMap ביפן"
+            "OSM-MNG-facebook": {
+                "name": "OpenStreetMap מונגוליה",
+                "description": "שיפור OpenStreetMap במונגוליה",
+                "extendedDescription": "מעניין אותך מיפוי במונגוליה? יש לך שאלות? אולי ליצור קשר עם הקהילה המקומית? ניתן להצטרף אלינו ב־{Url}. כולם מוזמנים!"
             },
             "OSM-MY-facebook": {
                 "name": "הפייסבוק של OpenStreetMap מלזיה",
@@ -10015,28 +10213,34 @@
                 "name": "ערוץ ה־Riot של OpenStreetMap מלזיה",
                 "description": "כל הממפים מוזמנים! ניתן להירשם בכתובת {signupUrl}"
             },
-            "OSM-MNG-facebook": {
-                "name": "OpenStreetMap מונגוליה",
-                "description": "שיפור OpenStreetMap במונגוליה",
-                "extendedDescription": "מעניין אותך מיפוי במונגוליה? יש לך שאלות? אולי ליצור קשר עם הקהילה המקומית? ניתן להצטרף אלינו ב־{Url}. כולם מוזמנים!"
-            },
-            "OSM-MMR-facebook": {
-                "name": "OpenStreetMap מיאנמר",
-                "description": "שיפור OpenStreetMap במיאנמר",
-                "extendedDescription": "מעניין אותך מיפוי במיאנמר? יש לך שאלות? אולי ליצור קשר עם הקהילה המקומית? ניתן להצטרף אלינו ב־{Url}. כולם מוזמנים!"
-            },
             "OSM-Nepal-facebook": {
                 "name": "OpenStreetMap נפאל",
                 "description": "שיפור OpenStreetMap בנפאל",
                 "extendedDescription": "מעניין אותך מיפוי בנפאל? יש לך שאלות? אולי ליצור קשר עם הקהילה המקומית? ניתן להצטרף אלינו ב־{Url}. כולם מוזמנים!"
             },
-            "OSM-Asia-mailinglist": {
-                "name": "OpenStreetMap אסיה רשימת תפוצה",
-                "description": "Talk-asia היא קבוצת הדיוור הרשמית של הקהילה האסיאתית"
+            "OSM-PE": {
+                "name": "OpenStreetMap פרו",
+                "description": "חדשות ומשאבים לקהילת OpenStreetMap פרו"
             },
-            "osm-asia-telegram": {
-                "name": "OSM אסיה טלגרם",
-                "description": "מוזמנים למשפחה: {url}"
+            "OSM-PE-facebook": {
+                "name": "הפייסבוק של OpenStreetMap פרו",
+                "description": "ניתן להצטרף לקהילה של OpenStreetMap פרו בפייסבוק"
+            },
+            "OSM-PE-mailinglist": {
+                "name": "קבוצת הדיוור Talk-pe",
+                "description": "קבוצת הדיוור הרשמית ל־OpenStreetMap פרו"
+            },
+            "OSM-PE-matrix": {
+                "name": "ערוץ ה־Matrix של OpenStreetMap פרו",
+                "description": "ניתן לשוחח עם חברים נוספים בקהילת OpenStreetMap פרו דרך Matrix."
+            },
+            "OSM-PE-telegram": {
+                "name": "הטלגרם של OpenStreetMap פרו",
+                "description": "ניתן להצטרף לקהילת OpenStreetMap פרו בטלגרם"
+            },
+            "OSM-PE-twitter": {
+                "name": "הטוויטר של OpenStreetMap פרו",
+                "description": "ניתן לעקוב אחרינו בטוויטר בכתובת {url}"
             },
             "OSM-PH-facebook": {
                 "name": "הפייסבוק של OpenStreetMap PH (הפיליפינים)",
@@ -10054,6 +10258,33 @@
                 "name": "הטלגרם של OpenStreetMap PH (הפיליפינים)",
                 "description": "קהילת טלגרם בלתי רשמית ומקומית של תורמים וחברים של OpenStreetMap בפיליפינים"
             },
+            "OSM-PL-facebook-group": {
+                "name": "קבוצת הפייסבוק של OpenStreetMap פולין",
+                "description": "קבוצה של ממפים ומשתמשים ב־OpenStreetMap בפולין"
+            },
+            "OSM-PL-forum": {
+                "name": "הפורום של OpenStreetMap פולין",
+                "description": "הפורום של קהילת OpenStreetMap הפולנית"
+            },
+            "OSM-PY-telegram": {
+                "name": "ערוץ הטלגרם של OSM פרגוואי",
+                "description": "הטלגרם של OpenStreetMap פרגוואי"
+            },
+            "OSM-Portland": {
+                "name": "OpenStreetMap פורטלנד",
+                "description": "ממפים ומשתמשים ב־OpenStreetMap באזור פורטלנד",
+                "extendedDescription": "OpenStreetMap (OSM) היא מפה של העולם שנוצרה על ידי אנשים כמוך. זו מפה שנבנית על ידיך ומוגשת לקהילה באופן חופשי כמו ויקיפדיה. כדאי לבקר ב־osm.org למידע נוסף, ניתן גם להצטרף אלינו למפגשים כדי לדבר על מפות, לתרום ל־OSM וליהנות!"
+            },
+            "OSM-Portland-forum": {
+                "name": "קבוצת ה־Google של OpenStreetMap בפורטלנד",
+                "description": "פורום ורשימת דיוור למשתמשים OpenStreetMap באזור פורטלנד",
+                "extendedDescription": "קבוצה זו מיועדת לקדם שיפורים ל־OpenStreetMap באזור של פורטלנד, אורגון כדי לתמוך ביישומים כגון Open Trip Planner."
+            },
+            "OSM-Puducherry-Mailing-List": {
+                "name": "Free Software Hardware Movement - רשימת תפוצה",
+                "description": "קבוצת הדיוור פודוצ׳רי של FSHM לדיונים על מיפוי בפודוצ׳רי ונושאים נוספים.",
+                "extendedDescription": "FSHM מארגנים אירועים שקשורים לתכנה/חומרה פתוחים, טכנולוגיה, מעורבות חברתית ו־OpenStreetMap."
+            },
             "OSM-RU-forum": {
                 "name": "הפורום של OpenStreetMap רוסיה",
                 "description": "הפורום המקוון של OpenStreetMap רוסיה"
@@ -10062,18 +10293,28 @@
                 "name": "הטלגרם של OpenStreetMap רוסיה",
                 "description": "קבוצת הטלגרם של OpenStreetMap רוסיה"
             },
-            "OSM-sri-lanka-facebook": {
-                "name": "OpenStreetMap סרי לנקה",
-                "description": "שיפור OpenStreetMap בסרי לנקה",
-                "extendedDescription": "מעניין אותך מיפוי בסרי לנקה? יש לך שאלות? אולי ליצור קשר עם הקהילה המקומית? ניתן להצטרף אלינו ב־{Url}. כולם מוזמנים!"
+            "OSM-Reddit": {
+                "name": "OpenStreetMap ב־Reddit",
+                "description": "/r/openstreetmap/ הוא מקום נהדר ללמוד עוד על OpenStreetMap.  מצפים לשאלות שלכם בכל נושא שהוא!"
             },
-            "OSM-TW-facebook": {
-                "name": "קהילת OpenStreetMap טאיוואן",
-                "description": "קבוצת פייסבוק לממפים ומשתמשים ב־OpenStreetMap לטובת דיונים בנוגע לטאיוואן."
+            "OSM-Rome-meetup": {
+                "name": "מפגש המיפוי של רומא - Incontro Mappatori Romani",
+                "description": "שיפור OpenStreetMap באזור רומא",
+                "extendedDescription": "אנו מכוונים להוות משאב לשיחות בין אנשים ולשתף מידע על שימוש בנתונים גאוגרפיים חופשיים ובמיוחד OpenStreetMap ותכניות לניהול גאו־מרחבי שמנהלות, עורכות ומציגות נתונים גאוגרפיים וקידום השימוש בהן לטובת לאציו."
             },
-            "OSM-TW-mailinglist": {
-                "name": "קבוצת הדיוור של OpenStreetMap טאיוואן",
-                "description": "Talk-tw היא קבוצת הדיוור הרשמית לקהילות לטובת דיונים בנושא טאיוואן"
+            "OSM-Seattle": {
+                "name": "OpenStreetMap סיאטל",
+                "description": "ממפים ומשתמשים ב־OpenStreetMap באזור סיאטל"
+            },
+            "OSM-SoCal": {
+                "name": "OpenStreetMap דרום קליפורניה",
+                "description": "בואו נהנה, נתרום משהו ללוס אנג׳לס ונלמד על מיפוי!",
+                "extendedDescription": "OpenStreetMap (OSM) דרום קליפורניה היא קבוצה שמיועדת לכל מי שמעניין אות להיפגש ולעבוד יחד על OpenStreetMap.‏  OpenStreetMap, הוויקיפדיה של המפות, מפה חופשית של העולם שנוצרת על ידי למעלה ממיליון משתתפים מכל רחבי העולם.  כולם מוזמנים.  אם עוד אין לך היכרות עם OpenStreetMap, אנו נלמד אותך. אם יש לך רעיון למיזם מיפוי או אפילו סיור שטח עם הקבוצה, מעולה!"
+            },
+            "OSM-South-Bay": {
+                "name": "OSM סאות׳ ביי",
+                "description": "Map Nights באירוח של Code for San Jose",
+                "extendedDescription": "Code for San Jose, הבריגדה המקומית של Code for America, מארחת Map Nights חודשיים בימי חמישי באזור המרכזי של סן חוזה. ניתן לפגוש ממפים עמיתים מסאות׳ ביי, לסייע עם מיזמי מיפוי מקומיים ולשמוע על מיזמים טכנולוגיים אזרחיים נוספים. לא נדרש ידע מקדים בתכנות או ב־GIS."
             },
             "OSM-TH-CNX-meetup": {
                 "name": "מפגשי OSM צ׳אנג מאי",
@@ -10087,6 +10328,138 @@
             "OSM-TH-forum": {
                 "name": "הפורום של OpenStreetMap תאילנד",
                 "description": "הפורום המקוון של OpenStreetMap תאילנד"
+            },
+            "OSM-TW-facebook": {
+                "name": "קהילת OpenStreetMap טאיוואן",
+                "description": "קבוצת פייסבוק לממפים ומשתמשים ב־OpenStreetMap לטובת דיונים בנוגע לטאיוואן."
+            },
+            "OSM-TW-mailinglist": {
+                "name": "קבוצת הדיוור של OpenStreetMap טאיוואן",
+                "description": "Talk-tw היא קבוצת הדיוור הרשמית לקהילות לטובת דיונים בנושא טאיוואן"
+            },
+            "OSM-Tampa-Bay": {
+                "name": "OpenStreetMap מפרץ טמפה",
+                "description": "ממפים ומשתמשים ב־OpenStreetMap באזור מפרץ טמפה",
+                "extendedDescription": "קבוצת OSM בטמפה ביי למפגשים ולבניית המפה המכריעה של טמפה ביי על ידי תושבים מקומיים עם OpenStreetMap, מפת העולם החופשית גם לעריכה. אם תחומי העניין הבאים מרתקים אותך: מפות, נתונים, קוד פתוח, GPS, טיולים בטבע, רכיבה על אופניים וכו׳, ירתק אותך לעבוד עם OpenStreetMap - אז למה שלא להצטרף אלינו? אנו נפגשים, ממפים ומדברים על נושאים חדשים בערך פעם בחודש."
+            },
+            "OSM-Telegram": {
+                "name": "הטלגרם של OpenStreetMap",
+                "description": "ניתן להצטרף לקבוצת העל הגלובלית של OpenStreetMap בטלגרם בכתובת {url}"
+            },
+            "OSM-Twitter": {
+                "name": "הטוויטר של OpenStreetMap",
+                "description": "ניתן לעקוב אחרינו בטוויטר בכתובת {url}"
+            },
+            "OSM-US": {
+                "name": "OpenStreetMap ארה״ב",
+                "description": "אנו מסייעים להצמיח ולשפר את OpenStreetMap בארצות הברית.",
+                "extendedDescription": "אנו תומכים ב־OpenStreetMap על ידי אירוח של כנסים שנתיים, אספקת משאבים קהילתיים, בניית שותפויות והפצה ברבים. ניתן להצטרף ל־OpenStreetMap ארה״ב כאן: {signupUrl}"
+            },
+            "OSM-US-Slack": {
+                "name": "ה־Slack של OpenStreetMap ארה״ב",
+                "description": "כולם מוזמנים! ניתן להירשם בכתובת {signupUrl}"
+            },
+            "OSM-Utah": {
+                "name": "OpenStreetMap יוטה",
+                "description": "ממפים ומשתמשים ב־OpenStreetMap באזור סולט לייק סיטי",
+                "extendedDescription": "פעילויות עשויות לכלול דברים כגון סדנאות הדרכה למיפוי, מסיבות מיפוי ואיסוף נתונים באוויר הפתוח. האירועים מתקיימים באזור סולט לייק סיטי, לפחות בתחילת הדרך. אנו מחפשים ממפים מנוסים לצד מתחילים ב־OSM. מזמינים אותך להצטרף אלינו ופשוט למפות!"
+            },
+            "OSM-Vancouver-meetup": {
+                "name": "OpenStreetMap ונקובר",
+                "description": "ממפים ומשתמשים ב־OpenStreetMap בוונקובר, קולומביה הבריטית"
+            },
+            "OSM-Wyoming": {
+                "name": "OpenStreetMap ויומינג",
+                "description": "ממפים ומשתמשים ב־OpenStreetMap במדינת ויומינג",
+                "extendedDescription": "OpenStreetMap (OSM) ויומינג היא שיתוף פעולה מקומי בין אנשים שמתעניינים ברתימת מאמציהם ליצירת מפות חופשיות. אנו מעודדים את כל הממפים לארגן או להציע אירועי מיפוי בכל רחבי המדינה. פעילויות במפגשים יכול להיות סתם מפגש חברתי, תרגול OSM ממתחילים ועד מתקדמים או מסיבות מיפוי קהילתיות."
+            },
+            "OSM-br-mailinglist": {
+                "name": "קבוצת הדיוור Talk-br",
+                "description": "קבוצת דיוור לדיונים על OpenStreetMap בברזיל"
+            },
+            "OSM-br-telegram": {
+                "name": "הטלגרם של OpenStreetMap ברזיל",
+                "description": "ניתן להצטרף לקהילת OpenStreetMap ברזיל בטלגרם",
+                "extendedDescription": "ניתן להצטרף לקהילה שלנו כדי ללמוד עוד על OpenStreetMap, לשאול שאלות או להשתתף במפגשים שלנו. כולם מוזמנים!"
+            },
+            "OSM-br-twitter": {
+                "name": "הטוויטר של OpenStreetMap ברזיל",
+                "description": "ניתן לעקוב אחרינו בטוויטר בכתובת {url}"
+            },
+            "OSM-help": {
+                "name": "העזרה של OpenStreetMap",
+                "description": "ניתן לשאול שאלות ולקבל תשובות באתר השאלות והתשובות בשיתוף קהילת OSM.",
+                "extendedDescription": "{url} מיועד לכל מי שצריך עזרה עם OpenStreetMap.  בין אם עזרה לממפים מתחילים או שאלה טכנית, אנחנו כאן כדי לעזור!"
+            },
+            "OSM-india-mailinglist": {
+                "name": "קבוצת הדיוור של OpenStreetMap הודו",
+                "description": "Talk-in היא קבוצת הדיוור הרשמית של הקהילה ההודית"
+            },
+            "OSM-india-twitter": {
+                "name": "הטוויטר של OpenStreetMap הודו",
+                "description": "אנחנו במרחק ציוץ: {url}"
+            },
+            "OSM-japan-facebook": {
+                "name": "קהילת OpenStreetMap יפן",
+                "description": "ממפים ומשתמשים OpenStreetMap ביפן"
+            },
+            "OSM-japan-mailinglist": {
+                "name": "קבוצת הדיוור של OpenStreetMap יפן",
+                "description": "Talk-ja היא קבוצת הדיוור הרשמית של הקהילה היפנית"
+            },
+            "OSM-japan-twitter": {
+                "name": "הטוויטר של OpenStreetMap יפן",
+                "description": "תגית הקבץ בטוויטר: {url}"
+            },
+            "OSM-japan-website": {
+                "name": "OpenStreetMap יפן",
+                "description": "ממפים ומשתמשים OpenStreetMap ביפן"
+            },
+            "OSM-sri-lanka-facebook": {
+                "name": "OpenStreetMap סרי לנקה",
+                "description": "שיפור OpenStreetMap בסרי לנקה",
+                "extendedDescription": "מעניין אותך מיפוי בסרי לנקה? יש לך שאלות? אולי ליצור קשר עם הקהילה המקומית? ניתן להצטרף אלינו ב־{Url}. כולם מוזמנים!"
+            },
+            "OSMF": {
+                "name": "קרן OpenStreetMap",
+                "description": "OSMF הוא ארגון בריטי ללא מטרות רווח שתומך במיזם OpenStreetMap",
+                "extendedDescription": "OSMF תומך ב־OpenStreetMap על ידי תרומה, תחזוקת השרתים שעליהם פועלת מערכת OSM, ארגון הכנס State of the Map ותיאום בין המתנדבים שדואגים ש־OSM ימשיך להכות גלים. ניתן להראות את תמיכתך ולתת את קולך ל־OpenStreetMap על ידי הצטרפות לחברות ב־OSMF דרך כאן: {signupUrl}"
+            },
+            "OpenCleveland-meetup": {
+                "name": "קליבלנד פתוחה",
+                "description": "שיפור OpenStreetMap באזור קליבלנד",
+                "extendedDescription": "Open Geo קליבנד מכוונים להוות משאב לשיחות בין אנשים ולשתף מידע על שימוש בנתונים גאוגרפיים חופשיים ובמיוחד OpenStreetMap ותכניות לניהול גאו־מרחבי שמנהלות, עורכות ומציגות נתונים גאוגרפיים וקידום השימוש בהן לטובת צפון מזרח אוהיו, אנו גם סניף של maptime =)."
+            },
+            "PHXGeo-meetup": {
+                "name": "קבוצת המפגשים של PHXGeo",
+                "description": "ממפי ומשתמשי OpenStreetMap באזור פיניקס, אריזונה",
+                "extendedDescription": "זו קבוצת מפגשים לאלו מאזור פיניקס שאוהבים מיפוי, נתונים גאוגרפיים, OpenStreetMap, חיבור מפות וכל מה שביניהם."
+            },
+            "PHXGeo-twitter": {
+                "name": "הטוויטר של PHXGeo",
+                "description": "ניתן לעקוב אחרינו בטוויטר בכתובת {url}"
+            },
+            "RS-telegram": {
+                "name": "קבוצת הטלגרם של OpenStreetMap ריו גראנדה דו סול",
+                "description": "ניתן להצטרף לקהילת OpenStreetMap ריו גראנדה דו סול בטלגרם",
+                "extendedDescription": "ניתן להצטרף לקהילה וללמוד עוד על OpenStreetMap, לשאול שאלות או להשתתף במפגשים שלנו. כולם מוזמנים!"
+            },
+            "South-Tyrol-Mailing-List": {
+                "name": "קבוצת הדיוור של OpenStreetMap לדרום טירול",
+                "description": "קבוצת הדיונים האזורית של OpenStreetMap איטליה לאזור דרום טירול"
+            },
+            "Trentino-Mailing-List": {
+                "name": "קבוצת הדיוור של OpenStreetMap טרנטינו",
+                "description": "קבוצת הדיונים האזורית של OpenStreetMap איטליה לאזור טרנטינו"
+            },
+            "Western-Slope-facebook": {
+                "name": "הפייסבוק של OSM וסטרן סלופ",
+                "description": "ממפי ומשתמשי OpenStreetMap סביב גרנד ג׳נקשן, קולורדו"
+            },
+            "Western-Slope-meetup": {
+                "name": "קבוצת המפגשים של OSM וסטרן סלופ",
+                "description": "ממפי ומשתמשי OpenStreetMap סביב גרנד ג׳נקשן, קולורדו",
+                "extendedDescription": "מטרת הקבוצה הזאת היא להפגיש את הקהילה עם OpenStreetMap, לפתח קהילת ממפים, ליצור את הנתונים הגאוגרפיים המרשימים ביותר שניתן באמצעות כל שיטה שאפשר למצוא כדי לבנות אסטרטגיה לקבל את המידע הזה לתוך הקהילה שלנו. איך נשמע לך תיחום שבילים מדויק? אולי פיתוח נוסף של שבילי אופניים? כל מה שרק מעניין אותך, זה היופי ב־OpenStreetMap!"
             },
             "al-forum": {
                 "name": "פורום OSM אלבניה",
@@ -10112,22 +10485,6 @@
             "at-twitter": {
                 "name": "הטוויטר של OpenStreetMap אוסטריה",
                 "description": "הטוויטר של OpenStreetMap אוסטריה: {url}"
-            },
-            "osmgraz-meetup": {
-                "name": "מפגש קהילת OSM גראץ",
-                "description": "מפגש חודשי של קהילת OpenStreetMap בגראץ"
-            },
-            "osmgraz-twitter": {
-                "name": "הטוויטר של קהילת OSM בגראץ",
-                "description": "הטוויטר של קהילת OpenStreetMap בגראץ"
-            },
-            "osm-at": {
-                "name": "OpenStreetMap אוסטריה",
-                "description": "מאגר למידע על OpenStreetMap באוסטריה"
-            },
-            "byosm": {
-                "name": "OpenStreetMap בלרוס",
-                "description": "קבוצת הטלגרם של OpenStreetMap בלארוס"
             },
             "be-facebook": {
                 "description": "ממפים ומשתמשים ב־OpenStreetMap בבלגיה בפייסבוק"
@@ -10159,32 +10516,62 @@
                 "name": "הטוויטר של OpenStreetMap בלגיה",
                 "description": "OSM בלגיה בטווויטר: ‎@osm_be"
             },
-            "hr-facebook": {
-                "name": "קבוצת הפייסבוק של OpenStreetMap קרואטיה",
-                "description": "קבוצת הפייסבוק של OpenStreetMap קרואטיה"
+            "bw-facebook": {
+                "name": "מיפוי בוטסואנה בפייסבוק",
+                "description": "העמוד של OpenStreetMap בבוטסואנה"
             },
-            "hr-irc": {
-                "name": "OpenStreetMap קרואטיה ב־IRC",
-                "description": "ניתן להצטרף ל־‎#osm-hr תחת irc.oftc.net (פתחה 6667)"
+            "bw-twitter": {
+                "name": "מיפוי בוטסואנה בטוויטר",
+                "description": "הטוויטר של OpenStreetMap בבוטסואנה"
             },
-            "hr-mailinglist": {
-                "name": "קבוצת הדיוור Talk-hr",
-                "description": "קבוצת הדיוור Talk-hr"
+            "byosm": {
+                "name": "OpenStreetMap בלרוס",
+                "description": "קבוצת הטלגרם של OpenStreetMap בלארוס"
+            },
+            "cape-coast-youthmappers": {
+                "name": "הממפים הצעירים של אוניברסיטת קייפ קוסט",
+                "description": "ניתן לעקוב אחרינו בטוויטר: {url}",
+                "extendedDescription": "זה הכינוי הרשמי של אגף הממפים הצעירים באוניברסיטת קייפ קוסט, גאנה. אנו אוהבים מפות, נתונים פתוחים וגם לעזור לחלשים."
             },
             "czech-community": {
                 "name": "קהילת OSM הצ׳כית",
                 "description": "פורטל המפה, האתר ופרטי הקשר של חברי OSM בצ׳כיה"
             },
-            "osmcz-facebook": {
-                "name": "הפייסבוק של OpenStreetMap צ׳כיה"
+            "de-berlin-mailinglist": {
+                "name": "קבוצת הדיוור של ברלין",
+                "description": "זאת רשימת הדיוור לקהילת OSM בברלין"
             },
-            "osmcz-twitter": {
-                "name": "הטוויטר של הקהילה הצ׳כית ‎@osmcz",
-                "description": "ניתן לעקוב אחר הקהילה הצ׳כית בטוויטר - כולל ה־WeeklyOSM המתורגם!"
+            "de-berlin-meetup": {
+                "name": "קבוצת המפגשים של OpenStreetMap ברלין-ברנדנבורג",
+                "description": "ממפי ומשתמשי OpenStreetMap באזור ברלין"
             },
-            "talk-cz-mailinglist": {
-                "name": "קבוצת הדיונים הצ׳כית (talk-cz)",
-                "description": "Talk-cz היא קבוצת הדיוור הרשמית של הקהילה הצ׳כית"
+            "de-berlin-telegram": {
+                "name": "‎@osmberlin בטלגרם",
+                "description": "הטלגרם של OpenStreetMap ברלין"
+            },
+            "de-berlin-twitter": {
+                "name": "הטוויטר של OpenStreetMap ברלין",
+                "description": "ניתן לעקוב אחרינו בטוויטר: {url}"
+            },
+            "de-forum": {
+                "name": "הפורום של OpenStreetMap גרמניה",
+                "description": "הפורום המקוון של OpenStreetMap גרמניה"
+            },
+            "de-irc": {
+                "name": "OpenStreetMap גרמניה ב־IRC",
+                "description": "ניתן להצטרף ל־‎#osm-de תחת irc.oftc.net (פתחה 6667)"
+            },
+            "de-mailinglist": {
+                "name": "קבוצת הדיוור Talk-de",
+                "description": "Talk-de היא קבוצת הדיוור הרשמית של קהילת OSM הגרמנית"
+            },
+            "de-ostwestfalen-lippe-mailinglist": {
+                "name": "קבוצת הדיוור OWL",
+                "description": "זאת רשימת הדיוור לקהילת OSM במזרח וסטפליה-ליפה"
+            },
+            "de-telegram": {
+                "name": "הטלגרם של OpenStreetMap גרמניה",
+                "description": "ניתן להצטרף לקבוצת העל של OpenStreetMap גרמניה בטלגרם בכתובת {url}"
             },
             "dk-forum": {
                 "name": "הפורום המקוון של OpenStreetMap דנמרק",
@@ -10230,45 +10617,25 @@
                 "name": "הטוויטר של OpenStreetMap צרפת",
                 "description": "הטוויטר של OpenStreetMap צרפת: {url}"
             },
-            "de-berlin-mailinglist": {
-                "name": "קבוצת הדיוור של ברלין",
-                "description": "זאת רשימת הדיוור לקהילת OSM בברלין"
+            "gb-irc": {
+                "name": "OpenStreetMap המלכה המאוחדת ב־IRC",
+                "description": "ניתן להצטרף ל־‎#osm-gb תחת irc.oftc.net (פתחה 6667)",
+                "extendedDescription": "ניתן להצטרף ל־‎#osm-gb תחת irc.oftc.net (פתחה 6667), נא להתאזר בסבלנות ולחכות מספר דקות לאחר פרסום שאלה"
             },
-            "de-berlin-meetup": {
-                "name": "קבוצת המפגשים של OpenStreetMap ברלין-ברנדנבורג",
-                "description": "ממפי ומשתמשי OpenStreetMap באזור ברלין"
+            "gb-mailinglist": {
+                "name": "קבוצת הדיוור Talk-gb"
             },
-            "de-berlin-telegram": {
-                "name": "‎@osmberlin בטלגרם",
-                "description": "הטלגרם של OpenStreetMap ברלין"
+            "hr-facebook": {
+                "name": "קבוצת הפייסבוק של OpenStreetMap קרואטיה",
+                "description": "קבוצת הפייסבוק של OpenStreetMap קרואטיה"
             },
-            "de-berlin-twitter": {
-                "name": "הטוויטר של OpenStreetMap ברלין",
-                "description": "ניתן לעקוב אחרינו בטוויטר: {url}"
+            "hr-irc": {
+                "name": "OpenStreetMap קרואטיה ב־IRC",
+                "description": "ניתן להצטרף ל־‎#osm-hr תחת irc.oftc.net (פתחה 6667)"
             },
-            "de-forum": {
-                "name": "הפורום של OpenStreetMap גרמניה",
-                "description": "הפורום המקוון של OpenStreetMap גרמניה"
-            },
-            "de-irc": {
-                "name": "OpenStreetMap גרמניה ב־IRC",
-                "description": "ניתן להצטרף ל־‎#osm-de תחת irc.oftc.net (פתחה 6667)"
-            },
-            "de-mailinglist": {
-                "name": "קבוצת הדיוור Talk-de",
-                "description": "Talk-de היא קבוצת הדיוור הרשמית של קהילת OSM הגרמנית"
-            },
-            "de-ostwestfalen-lippe-mailinglist": {
-                "name": "קבוצת הדיוור OWL",
-                "description": "זאת רשימת הדיוור לקהילת OSM במזרח וסטפליה-ליפה"
-            },
-            "de-telegram": {
-                "name": "הטלגרם של OpenStreetMap גרמניה",
-                "description": "ניתן להצטרף לקבוצת העל של OpenStreetMap גרמניה בטלגרם בכתובת {url}"
-            },
-            "osm-de": {
-                "name": "OpenStreetMap גרמניה",
-                "description": "הפלטפורמה למידע על OpenStreetMap בגרמניה"
+            "hr-mailinglist": {
+                "name": "קבוצת הדיוור Talk-hr",
+                "description": "קבוצת הדיוור Talk-hr"
             },
             "hu-facebook": {
                 "name": "הפייסבוק של OpenStreetMap הונגריה",
@@ -10314,27 +10681,14 @@
                 "name": "הטוויטר של OpenStreetMap איטליה",
                 "description": "ניתן לעקוב אחרינו בטוויטר בכתובת {url}"
             },
-            "OSM-Rome-meetup": {
-                "name": "מפגש המיפוי של רומא - Incontro Mappatori Romani",
-                "description": "שיפור OpenStreetMap באזור רומא",
-                "extendedDescription": "אנו מכוונים להוות משאב לשיחות בין אנשים ולשתף מידע על שימוש בנתונים גאוגרפיים חופשיים ובמיוחד OpenStreetMap ותכניות לניהול גאו־מרחבי שמנהלות, עורכות ומציגות נתונים גאוגרפיים וקידום השימוש בהן לטובת לאציו."
-            },
-            "South-Tyrol-Mailing-List": {
-                "name": "קבוצת הדיוור של OpenStreetMap לדרום טירול",
-                "description": "קבוצת הדיונים האזורית של OpenStreetMap איטליה לאזור דרום טירול"
-            },
-            "talk-it-lazio": {
-                "name": "OpenStreetMap לאציו, איטליה",
-                "description": "כולם מוזמנים! ניתן להירשם בכתובת {signupUrl}",
-                "extendedDescription": "קבוצת דיוור לאזורי רומא ולאציו."
-            },
-            "Trentino-Mailing-List": {
-                "name": "קבוצת הדיוור של OpenStreetMap טרנטינו",
-                "description": "קבוצת הדיונים האזורית של OpenStreetMap איטליה לאזור טרנטינו"
-            },
             "kosovo-telegram": {
                 "name": "OpenStreetMap קוסובו בטלגרם",
                 "description": "קבוצת טלגרם ציבורית חצי רשמית לכלל קוסובו. אנו מזמינים את כל הממפים מכל מקום ובכל שפה."
+            },
+            "mappa-mercia-group": {
+                "name": "הקבוצה המקומית Mappa Mercia",
+                "description": "בית לחובבי OpenStreetMap במידלנדס",
+                "extendedDescription": "מיזם Mappa Mercia מיועד לטפל את OpenStreetMap במערב המידלנדס, אנגליה. אנו מגבשים אירועים קהילתיים, מספקים הכשרה ותומכים בארגונים מקומיים שרוצים לפתוח את הנתונים שלהם."
             },
             "no-forum": {
                 "name": "הפורום המקוון של OpenStreetMap נורווגיה",
@@ -10352,33 +10706,91 @@
                 "name": "‎@OSM_no בטלגרם",
                 "description": "הטלגרם של OpenStreetMap נורבגיה"
             },
-            "OSM-PL-facebook-group": {
-                "name": "קבוצת הפייסבוק של OpenStreetMap פולין",
-                "description": "קבוצה של ממפים ומשתמשים ב־OpenStreetMap בפולין"
+            "osm-asia-telegram": {
+                "name": "OSM אסיה טלגרם",
+                "description": "מוזמנים למשפחה: {url}"
             },
-            "OSM-PL-forum": {
-                "name": "הפורום של OpenStreetMap פולין",
-                "description": "הפורום של קהילת OpenStreetMap הפולנית"
+            "osm-at": {
+                "name": "OpenStreetMap אוסטריה",
+                "description": "מאגר למידע על OpenStreetMap באוסטריה"
             },
-            "si-forum": {
-                "name": "הפורום של OpenStreetMap סלובניה",
-                "description": "הפורום של קהילת OpenStreetMap בסלובניה"
+            "osm-de": {
+                "name": "OpenStreetMap גרמניה",
+                "description": "הפלטפורמה למידע על OpenStreetMap בגרמניה"
             },
-            "si-mailinglist": {
-                "name": "קבוצת הדיוור של OpenStreetMap סלובניה",
-                "description": "קבוצת דיוור על OpenStreetMap בסלובניה"
+            "osm-gh-facebook": {
+                "name": "הפייסבוק של OpenStreetMap גאנה",
+                "description": "קבוצת פייסבוק לאנשים שמתעניינים ב־OpenStreetMap.",
+                "extendedDescription": "ממפים בקהילת גאנה, מקדמים את OpenStreetMap ואת מיזמי צוות OpenStreetMap ההומניטרי (HOT) בגאנה. אפשר להצטרף אלינו."
             },
-            "OSM-ES-mailinglist": {
-                "name": "קבוצת הדיוור Talk-es",
-                "description": "קבוצת דיוור לדיונים על OpenStreetMap בספרד"
+            "osm-gh-twitter": {
+                "name": "הטוויטר של OpenStreetMap גאנה",
+                "description": "ניתן לעקוב אחרינו בטוויטר: {url}"
             },
-            "OSM-ES-telegram": {
-                "name": "@OSMes ב־Telegram",
-                "description": "הטלגרם של OpenStreetMap ספרד"
+            "osm-india-forum": {
+                "name": "OpenStreetMap פורום הודו",
+                "description": "OpenStreetMap פורום הודו"
+            },
+            "osm-india-github": {
+                "name": "OpenStreetMap גיטהאב הודו",
+                "description": "תפתח קוד איתנו ב{url}"
+            },
+            "osm-india-telegram": {
+                "name": "OpenStreetMap הודו טלגרם",
+                "description": "מוזמנים למשפחה: {url}"
+            },
+            "osm-india-website": {
+                "name": "OpenStreetMap הודו",
+                "description": "ממפים ומשתמשים בOpenStreetMap"
+            },
+            "osm-india-wiki": {
+                "name": "OpenStreetMap Wikiproject הודו",
+                "description": "כל מה שאתה צריך לדעת על מיפוי בהודו {url}"
+            },
+            "osm-india-youtube": {
+                "name": "OpenStreetMap הודו יוטוב",
+                "description": "מוזמנים לערוץ שלנו: {url}"
+            },
+            "osm-iran-aparat": {
+                "name": "ה־Aparat של OpenStreetMap איראן",
+                "description": "מוזמנים לערוץ שלנו בכתובת {url}",
+                "extendedDescription": "משאב טוב של סרטונים על כל מה שקשור ב־OpenStreetMap. בעיקר בפרסית."
+            },
+            "osm-iran-forum": {
+                "name": "הפורום המקוון של OpenStreetMap איראן",
+                "description": "הפורום המקוון של OpenStreetMap איראן",
+                "extendedDescription": "פורום מקוון למשתמשי OpenStreetMap באיראן. אפשר לשאול שאלות ולדון עם אחרים באופן חופשי!"
+            },
+            "osm-iran-telegram": {
+                "name": "הטלגרם של OpenStreetMap איראן",
+                "description": "מזמינים אותך להצטרף לערוץ הטלגרם שלנו בכתובת {url}. יש לנו גם קבוצת על של משתמשי OSM רבים שמתעניינים באיראן. ניתן למצוא את הקישור אליה בביוגרפיה של הערוץ."
+            },
+            "osm-latam": {
+                "name": "OpenStreetMap אמריקה הלטינית",
+                "description": "תמיכה ב־OpenStreetMap באמריקה הלטינית"
+            },
+            "osm-mg-facebook": {
+                "name": "קבוצת הפייסבוק של OpenStreetMap במדגסקר ",
+                "description": "קבוצת פייסבוק במלגשי לאנשים שמתעניינים ב־OpenStreetMap."
             },
             "osm-se": {
                 "name": "OpenStreetMap.se",
                 "description": "אספקת שירותים ומידע על OSM עבור הקהילה המקומית בשוודיה"
+            },
+            "osmcz-facebook": {
+                "name": "הפייסבוק של OpenStreetMap צ׳כיה"
+            },
+            "osmcz-twitter": {
+                "name": "הטוויטר של הקהילה הצ׳כית ‎@osmcz",
+                "description": "ניתן לעקוב אחר הקהילה הצ׳כית בטוויטר - כולל ה־WeeklyOSM המתורגם!"
+            },
+            "osmgraz-meetup": {
+                "name": "מפגש קהילת OSM גראץ",
+                "description": "מפגש חודשי של קהילת OpenStreetMap בגראץ"
+            },
+            "osmgraz-twitter": {
+                "name": "הטוויטר של קהילת OSM בגראץ",
+                "description": "הטוויטר של קהילת OpenStreetMap בגראץ"
             },
             "se-facebook": {
                 "name": "הפייסבוק של OpenStreetMap שוודיה",
@@ -10400,366 +10812,41 @@
                 "name": "הטוויטר של OpenStreetMap שוודיה",
                 "description": "ניתן לעקוב אחרינו בטוויטר: {url}"
             },
-            "Nottingham-OSM-pub-meetup": {
-                "name": "קבוצת המפגשים החודשיים של מזרח המידלנדס (נוטינגהם)",
-                "description": "מפגשים חברתיים לממפי ומשתמשי מזרח המידלנדס",
-                "extendedDescription": "הקבוצה עורכת מפגשים מאז מרץ 2011, בהתחלה בנוטינגהם ובהמשך בדרבי ומדי פעם בפעם במקומות אחרים במזרח המידלנדס. מדובר במפגשים חברתיים אך הם גם מקום נפלא לבוא ולשאול שאלות על OSM, או נקודתית על האזור או באופן כללי. בחודשי הקיץ אנחנו בדרך כלל עורכים פעילות מיפוי קליל למשך כשעה בקרבת מקום המפגש. לקבוצה ככלל יש עניין מיוחד בזכויות מיפוי ציבורי של דרכים ומדי פעם מתקיימות גם פגישות למטרה זו."
+            "si-forum": {
+                "name": "הפורום של OpenStreetMap סלובניה",
+                "description": "הפורום של קהילת OpenStreetMap בסלובניה"
             },
-            "gb-irc": {
-                "name": "OpenStreetMap המלכה המאוחדת ב־IRC",
-                "description": "ניתן להצטרף ל־‎#osm-gb תחת irc.oftc.net (פתחה 6667)",
-                "extendedDescription": "ניתן להצטרף ל־‎#osm-gb תחת irc.oftc.net (פתחה 6667), נא להתאזר בסבלנות ולחכות מספר דקות לאחר פרסום שאלה"
-            },
-            "gb-mailinglist": {
-                "name": "קבוצת הדיוור Talk-gb"
-            },
-            "mappa-mercia-group": {
-                "name": "הקבוצה המקומית Mappa Mercia",
-                "description": "בית לחובבי OpenStreetMap במידלנדס",
-                "extendedDescription": "מיזם Mappa Mercia מיועד לטפל את OpenStreetMap במערב המידלנדס, אנגליה. אנו מגבשים אירועים קהילתיים, מספקים הכשרה ותומכים בארגונים מקומיים שרוצים לפתוח את הנתונים שלהם."
-            },
-            "OSM-CA-Slack": {
-                "name": "ה־Slack של OSM קנדה",
-                "description": "כולם מוזמנים! ניתן להירשם בכתובת {signupUrl}."
-            },
-            "OSM-Vancouver-meetup": {
-                "name": "OpenStreetMap ונקובר",
-                "description": "ממפים ומשתמשים ב־OpenStreetMap בוונקובר, קולומביה הבריטית"
-            },
-            "OSM-CU-telegram": {
-                "name": "ערוץ הטלגרם של OSM קובה",
-                "description": "הטלגרם של OpenStreetMap קובה"
-            },
-            "Bay-Area-OpenStreetMappers": {
-                "name": "ממפי OpenStreetMap באזור מפרץ סן פרנסיסקו",
-                "description": "שיפור OpenStreetMap באזור מפרץ סן פרנסיסקו",
-                "extendedDescription": "מטרת הקבוצה הזו היא להגדיל את קהילת OpenStreetMap כאן באזור מפרץ סן פרנסיסקו. האירועים שלנו פתוחים לכולם, החל מחובבי קוד פתוח, רוכבי אופניים, מומחי GIS, אוצרי נתונים גאוגרפיים והרבה מעבר לזה. כולם וכל מי שמעוניין במפות, יצירת מפות ונתוני מפות חופשיים מוזמנים להצטרף לקבוצה שלנו ולהשתתף באירועים שלנו."
-            },
-            "Central-Pennsylvania-OSM": {
-                "name": "OSM מרכז פנסילבניה",
-                "description": "קהילת מיפוי מקוון שבסיסה הוא בסטייט קולג׳, פנסילבניה"
-            },
-            "Code-for-San-Jose-Slack": {
-                "name": "קוד ל־Slack של סן חוזה",
-                "description": "כולם מוזמנים! ניתן להירשם בכתובת {signupUrl} ואז להצטרף לערוץ ‎#osm."
-            },
-            "Dallas-Fort-Worth-OSM": {
-                "name": "OSM דלאס-פורט וורת׳",
-                "description": "קבוצת משתמשי OpenStreetMap בדלאס-פורט וורת׳",
-                "extendedDescription": "דלאס, פורט וורת׳ וכל הערים שביניהן שופעות באנשים יצירתיים ומוכשרים טכנולוגית. החזון של קבוצת המשתמשים הזאת היא למצוא דרכים חדשות להשתמש במשאב המדהים שנקרא OSM."
-            },
-            "GeoPhilly": {
-                "name": "GeoPhilly",
-                "description": "קבוצת מפגשים לחובבי מפות באזור פילדלפיה",
-                "extendedDescription": "GeoPhilly היא קבוצה של מפתחים, מומחי גאוגרפיה, גיקים של מידע, חובבי קוד פתוח, האקרים אזרחיים ומכורי מפות שמתאגדים סביב אהבתם המשותפת למפות ולסיפורים שהן מספרות. אם מפות משמשות אותך כחלק מהעבודה שלך או שפשוט מעניין אותך לדעת יותר, המפגש הזה מיועד לך! האירועים שלנו מתוכננים להיות פתוחים, ידידותיים, חינוכיים וחברתיים, החל מהרמת כוסית דרך הרצאות בזק ואפילו סדנאות. מזמינים אותך ליצור קהילה גאו־‏מרחבית מגוונת ומעוררת השראה בפילדלפיה ביחד אתנו!"
-            },
-            "MapMinnesota": {
-                "name": "MapMinnesota",
-                "description": "ממפי וחובבי OpenStreetMap באזור טווין סיטיז",
-                "extendedDescription": "חיבור חובבי OpenStreetMap באזורי מינסוטה וטווין סיטיז!"
-            },
-            "Mapping-DC-meetup": {
-                "name": "מיפוי וושינגטון הבירה",
-                "description": "שיפור OpenStreetMap באיזור וושינגטון הבירה",
-                "extendedDescription": "אנו קבוצה של ממפים מתנדבים שחותרים לשפר את OpenStreetMap באיזור וושינגטון הבירה. אנו גם חותרים ללמד אנשים נוספים על הסביבה המקיפה את OSM, ניתוח מידע, מיפוי ומערכות מידע גאוגרפיות. אנו נפגשים אחת לחודשיים כדי להתמקד על אזור מסוים בעיר שלנו."
-            },
-            "Maptime-ME-meetup": {
-                "name": "MaptimeME",
-                "description": "ממפים ומשתמשי OpenStreetMap סביב פורטלנד, מיין",
-                "extendedDescription": "Maptime כשמו כן הוא, זמן ליצירת מפות. המטרה שלנו היא לפתוח את הדלת לאפשרויות מגוונות ליצירת מפות לכל מי שמעוניין על ידי יצירת מקום ללמידה שיתופית, חקירה ויצירת מפות באמצעות כלים וטכנולוגיות למיפוי."
-            },
-            "MaptimeHRVA-twitter": {
-                "name": "MaptimeHRVA טוייטר",
-                "description": "עקוב אחרינו בטוייטר {url}"
-            },
-            "us-ma-mailinglist": {
-                "name": "קבוצת הדיוור Talk-us-massachusetts",
-                "description": "רשימת דיוור בדוא״ל לקהילת OSM במסצ׳וסטס"
-            },
-            "OpenCleveland-meetup": {
-                "name": "קליבלנד פתוחה",
-                "description": "שיפור OpenStreetMap באזור קליבלנד",
-                "extendedDescription": "Open Geo קליבנד מכוונים להוות משאב לשיחות בין אנשים ולשתף מידע על שימוש בנתונים גאוגרפיים חופשיים ובמיוחד OpenStreetMap ותכניות לניהול גאו־מרחבי שמנהלות, עורכות ומציגות נתונים גאוגרפיים וקידום השימוש בהן לטובת צפון מזרח אוהיו, אנו גם סניף של maptime =)."
-            },
-            "OSM-Boston": {
-                "name": "OpenStreetMap בוסטון",
-                "description": "ממפים ומשתמשים ב־OpenStreetMap באזור בוסטון",
-                "extendedDescription": "OpenStreetMap היא מפת העולם פתוחה בסגנון ויקי, מורכבת ממאות אלפי תרומות כל יום שנתרמות על ידי אנשים כמוך. עריכת המפה היא תהליך פשוט ומהנה! מזמינים אותך להצטרף אלינו בפעילויות הפנים והחוץ כחלק מהניסיון שלנו ליצור את המפה הטובה ביותר של אזור בוסטון ושאר העולם!"
-            },
-            "OSM-Central-Salish-Sea": {
-                "name": "OpenStreetMap מרכז ים סאליש",
-                "description": "ממפים ומשתמשי OpenStreetMap סביב מאונט ורנון, וירג׳יניה",
-                "extendedDescription": "OpenStreetMap היא מפת העולם שנוצרת על ידי אנשים כמוך. זו מפה בהרכבתך, שמוגשת לציבור בחינם כמו ויקיפדיה. כדאי לבקר ב־osm.org למידע נוסף. אנו נפגשים כל הזמן ומדברים על מפות, ממפים ונהנים!"
-            },
-            "OSM-Chattanooga": {
-                "name": "OSM צ׳טנוגה",
-                "description": "קבוצת משתמשי OpenStreetMap בצ׳טנוגה"
-            },
-            "OSM-Colorado": {
-                "name": "OpenStreetMap קולורדו",
-                "description": "ממפים ומשתמשים ב־OpenStreetMap במדינת קולורדו, ארה״ב",
-                "extendedDescription": "OpenStreetMap (OSM) קולורדו היא שיתוף פעולה מקומי בין אנשים שמתעניינים ברתימת מאמציהם ליצירת מפות חופשיות. אנו מעודדים את כל הממפים לארגן או להציע אירועי מיפוי בכל רחבי המדינה. פעילויות במפגשים יכול להיות סתם מפגש חברתי, תרגול OSM ממתחילים ועד מתקדמים או מסיבות מיפוי קהילתיות."
-            },
-            "OSM-Portland-forum": {
-                "name": "קבוצת ה־Google של OpenStreetMap בפורטלנד",
-                "description": "פורום ורשימת דיוור למשתמשים OpenStreetMap באזור פורטלנד",
-                "extendedDescription": "קבוצה זו מיועדת לקדם שיפורים ל־OpenStreetMap באזור של פורטלנד, אורגון כדי לתמוך ביישומים כגון Open Trip Planner."
-            },
-            "OSM-Portland": {
-                "name": "OpenStreetMap פורטלנד",
-                "description": "ממפים ומשתמשים ב־OpenStreetMap באזור פורטלנד",
-                "extendedDescription": "OpenStreetMap (OSM) היא מפה של העולם שנוצרה על ידי אנשים כמוך. זו מפה שנבנית על ידיך ומוגשת לקהילה באופן חופשי כמו ויקיפדיה. כדאי לבקר ב־osm.org למידע נוסף, ניתן גם להצטרף אלינו למפגשים כדי לדבר על מפות, לתרום ל־OSM וליהנות!"
-            },
-            "OSM-Seattle": {
-                "name": "OpenStreetMap סיאטל",
-                "description": "ממפים ומשתמשים ב־OpenStreetMap באזור סיאטל"
-            },
-            "OSM-SoCal": {
-                "name": "OpenStreetMap דרום קליפורניה",
-                "description": "בואו נהנה, נתרום משהו ללוס אנג׳לס ונלמד על מיפוי!",
-                "extendedDescription": "OpenStreetMap (OSM) דרום קליפורניה היא קבוצה שמיועדת לכל מי שמעניין אות להיפגש ולעבוד יחד על OpenStreetMap.‏  OpenStreetMap, הוויקיפדיה של המפות, מפה חופשית של העולם שנוצרת על ידי למעלה ממיליון משתתפים מכל רחבי העולם.  כולם מוזמנים.  אם עוד אין לך היכרות עם OpenStreetMap, אנו נלמד אותך. אם יש לך רעיון למיזם מיפוי או אפילו סיור שטח עם הקבוצה, מעולה!"
-            },
-            "OSM-South-Bay": {
-                "name": "OSM סאות׳ ביי",
-                "description": "Map Nights באירוח של Code for San Jose",
-                "extendedDescription": "Code for San Jose, הבריגדה המקומית של Code for America, מארחת Map Nights חודשיים בימי חמישי באזור המרכזי של סן חוזה. ניתן לפגוש ממפים עמיתים מסאות׳ ביי, לסייע עם מיזמי מיפוי מקומיים ולשמוע על מיזמים טכנולוגיים אזרחיים נוספים. לא נדרש ידע מקדים בתכנות או ב־GIS."
-            },
-            "OSM-Tampa-Bay": {
-                "name": "OpenStreetMap מפרץ טמפה",
-                "description": "ממפים ומשתמשים ב־OpenStreetMap באזור מפרץ טמפה",
-                "extendedDescription": "קבוצת OSM בטמפה ביי למפגשים ולבניית המפה המכריעה של טמפה ביי על ידי תושבים מקומיים עם OpenStreetMap, מפת העולם החופשית גם לעריכה. אם תחומי העניין הבאים מרתקים אותך: מפות, נתונים, קוד פתוח, GPS, טיולים בטבע, רכיבה על אופניים וכו׳, ירתק אותך לעבוד עם OpenStreetMap - אז למה שלא להצטרף אלינו? אנו נפגשים, ממפים ומדברים על נושאים חדשים בערך פעם בחודש."
-            },
-            "OSM-US-Slack": {
-                "name": "ה־Slack של OpenStreetMap ארה״ב",
-                "description": "כולם מוזמנים! ניתן להירשם בכתובת {signupUrl}"
-            },
-            "OSM-US": {
-                "name": "OpenStreetMap ארה״ב",
-                "description": "אנו מסייעים להצמיח ולשפר את OpenStreetMap בארצות הברית.",
-                "extendedDescription": "אנו תומכים ב־OpenStreetMap על ידי אירוח של כנסים שנתיים, אספקת משאבים קהילתיים, בניית שותפויות והפצה ברבים. ניתן להצטרף ל־OpenStreetMap ארה״ב כאן: {signupUrl}"
-            },
-            "OSM-Utah": {
-                "name": "OpenStreetMap יוטה",
-                "description": "ממפים ומשתמשים ב־OpenStreetMap באזור סולט לייק סיטי",
-                "extendedDescription": "פעילויות עשויות לכלול דברים כגון סדנאות הדרכה למיפוי, מסיבות מיפוי ואיסוף נתונים באוויר הפתוח. האירועים מתקיימים באזור סולט לייק סיטי, לפחות בתחילת הדרך. אנו מחפשים ממפים מנוסים לצד מתחילים ב־OSM. מזמינים אותך להצטרף אלינו ופשוט למפות!"
-            },
-            "OSM-Wyoming": {
-                "name": "OpenStreetMap ויומינג",
-                "description": "ממפים ומשתמשים ב־OpenStreetMap במדינת ויומינג",
-                "extendedDescription": "OpenStreetMap (OSM) ויומינג היא שיתוף פעולה מקומי בין אנשים שמתעניינים ברתימת מאמציהם ליצירת מפות חופשיות. אנו מעודדים את כל הממפים לארגן או להציע אירועי מיפוי בכל רחבי המדינה. פעילויות במפגשים יכול להיות סתם מפגש חברתי, תרגול OSM ממתחילים ועד מתקדמים או מסיבות מיפוי קהילתיות."
-            },
-            "PHXGeo-meetup": {
-                "name": "קבוצת המפגשים של PHXGeo",
-                "description": "ממפי ומשתמשי OpenStreetMap באזור פיניקס, אריזונה",
-                "extendedDescription": "זו קבוצת מפגשים לאלו מאזור פיניקס שאוהבים מיפוי, נתונים גאוגרפיים, OpenStreetMap, חיבור מפות וכל מה שביניהם."
-            },
-            "PHXGeo-twitter": {
-                "name": "הטוויטר של PHXGeo",
-                "description": "ניתן לעקוב אחרינו בטוויטר בכתובת {url}"
-            },
-            "Western-Slope-facebook": {
-                "name": "הפייסבוק של OSM וסטרן סלופ",
-                "description": "ממפי ומשתמשי OpenStreetMap סביב גרנד ג׳נקשן, קולורדו"
-            },
-            "Western-Slope-meetup": {
-                "name": "קבוצת המפגשים של OSM וסטרן סלופ",
-                "description": "ממפי ומשתמשי OpenStreetMap סביב גרנד ג׳נקשן, קולורדו",
-                "extendedDescription": "מטרת הקבוצה הזאת היא להפגיש את הקהילה עם OpenStreetMap, לפתח קהילת ממפים, ליצור את הנתונים הגאוגרפיים המרשימים ביותר שניתן באמצעות כל שיטה שאפשר למצוא כדי לבנות אסטרטגיה לקבל את המידע הזה לתוך הקהילה שלנו. איך נשמע לך תיחום שבילים מדויק? אולי פיתוח נוסף של שבילי אופניים? כל מה שרק מעניין אותך, זה היופי ב־OpenStreetMap!"
-            },
-            "ym-University-of-California-Davis": {
-                "name": "מועדון המיפוי"
+            "si-mailinglist": {
+                "name": "קבוצת הדיוור של OpenStreetMap סלובניה",
+                "description": "קבוצת דיוור על OpenStreetMap בסלובניה"
             },
             "talk-au": {
                 "name": "קבוצת הדיוור Talk-au",
                 "description": "מקום לשיחות בין ממפים אוסטרליים"
             },
-            "OSM-AR-facebook": {
-                "name": "הפייסבוק של OpenStreetMap ארגנטינה",
-                "description": "ניתן להצטרף לקהילה של OpenStreetMap ארגנטינה בפייסבוק",
-                "extendedDescription": "חדשות מהקהילה המקומית"
+            "talk-cz-mailinglist": {
+                "name": "קבוצת הדיונים הצ׳כית (talk-cz)",
+                "description": "Talk-cz היא קבוצת הדיוור הרשמית של הקהילה הצ׳כית"
             },
-            "OSM-AR-forum": {
-                "name": "הפורום המקוון של OpenStreetMap ארגנטינה",
-                "description": "ניתן להצטרף לפורום המקוון של OpenStreetMap ארגנטינה",
-                "extendedDescription": "מצוין לדיונים ארוכים או חשובים. זמן תגובה ארוך."
+            "talk-gh": {
+                "name": "קבוצת הדיוור Talk-gh",
+                "description": "Talk-gh היא קבוצת הדיוור הרשמית של קהילת OSM בגאנה"
             },
-            "OSM-AR-irc": {
-                "name": "OpenStreetMap ארגנטינה ב־IRC",
-                "description": "ניתן להצטרף ל־‎#osm-ar תחת irc.oftc.net (פתחה 6667)",
-                "extendedDescription": "שם ניתן למצוא את המשתמש החנון ביותר בקהילה."
+            "talk-it-lazio": {
+                "name": "OpenStreetMap לאציו, איטליה",
+                "description": "כולם מוזמנים! ניתן להירשם בכתובת {signupUrl}",
+                "extendedDescription": "קבוצת דיוור לאזורי רומא ולאציו."
             },
-            "OSM-AR-mailinglist": {
-                "name": "קבוצת הדיוור Talk-ar",
-                "description": "קבוצת דיוור היסטורית. כמעט לא בשימוש כיום."
+            "talk-mg": {
+                "name": "קבוצת הדיוור Talk-mg",
+                "description": "מקום לתורמים, קהילות ומשתמשי OpenStreetMap במדגסקר לשתף ולדון זה עם זה."
             },
-            "OSM-AR-telegram": {
-                "name": "הטלגרם של OpenStreetMap ארגנטינה",
-                "description": "ניתן להצטרף לקהילת OpenStreetMap ארגנטינה בטלגרם",
-                "extendedDescription": "הערוץ הפעיל ביותר בקהילה, מומלץ לשיחות ולקבלת תשובות לשאלות שלך במהרה. כולם מוזמנים!"
+            "us-ma-mailinglist": {
+                "name": "קבוצת הדיוור Talk-us-massachusetts",
+                "description": "רשימת דיוור בדוא״ל לקהילת OSM במסצ׳וסטס"
             },
-            "OSM-AR-twitter": {
-                "name": "הטוויטר של OpenStreetMap ארגנטינה",
-                "description": "ניתן לעקוב אחרינו בטוויטר בכתובת {url}",
-                "extendedDescription": "חדשות מהקהילה המקומית ומ־OpenStreetMap באופן כללי."
-            },
-            "OSM-BO-mailinglist": {
-                "name": "קבוצת הדיוור Talk-bo",
-                "description": "Talk-bo היא קבוצת הדיוור הרשמית של קהילת OpenStreetMap הבוליביאנית",
-                "extendedDescription": "מעניין אותך מיפוי בבוליביה? יש לך שאלות? אולי ליצור קשר עם הקהילה המקומית? ניתן להצטרף אלינו ב־{url}. כולם מוזמנים!"
-            },
-            "Bahia-telegram": {
-                "name": "קבוצת הטלגרם של OpenStreetMap באהיה",
-                "description": "ניתן להצטרף לקהילת OpenStreetMap באהיה בטלגרם",
-                "extendedDescription": "ניתן להצטרף לקהילה שלנו כדי ללמוד עוד על OpenStreetMap, לשאול שאלות או להשתתף במפגשים שלנו. כולם מוזמנים!"
-            },
-            "DF-telegram": {
-                "name": "קבוצת הטלגרם של OpenStreetMap ברזיליה",
-                "description": "ניתן להצטרף לקהילת OpenStreetMap ברזיליה בטלגרם",
-                "extendedDescription": "ניתן להצטרף לקהילה וללמוד עוד על OpenStreetMap, לשאול שאלות או להשתתף במפגשים שלנו. כולם מוזמנים!"
-            },
-            "OSM-br-mailinglist": {
-                "name": "קבוצת הדיוור Talk-br",
-                "description": "קבוצת דיוור לדיונים על OpenStreetMap בברזיל"
-            },
-            "OSM-br-telegram": {
-                "name": "הטלגרם של OpenStreetMap ברזיל",
-                "description": "ניתן להצטרף לקהילת OpenStreetMap ברזיל בטלגרם",
-                "extendedDescription": "ניתן להצטרף לקהילה שלנו כדי ללמוד עוד על OpenStreetMap, לשאול שאלות או להשתתף במפגשים שלנו. כולם מוזמנים!"
-            },
-            "OSM-br-twitter": {
-                "name": "הטוויטר של OpenStreetMap ברזיל",
-                "description": "ניתן לעקוב אחרינו בטוויטר בכתובת {url}"
-            },
-            "RS-telegram": {
-                "name": "קבוצת הטלגרם של OpenStreetMap ריו גראנדה דו סול",
-                "description": "ניתן להצטרף לקהילת OpenStreetMap ריו גראנדה דו סול בטלגרם",
-                "extendedDescription": "ניתן להצטרף לקהילה וללמוד עוד על OpenStreetMap, לשאול שאלות או להשתתף במפגשים שלנו. כולם מוזמנים!"
-            },
-            "OSM-CL-facebook": {
-                "name": "הפייסבוק של OpenStreetMap צ׳ילה",
-                "description": "ניתן להצטרף לקהילה של OpenStreetMap צ׳ילה בפייסבוק",
-                "extendedDescription": "ניתן להצטרף לקהילה שלנו כדי ללמוד עוד על OpenStreetMap, לשאול שאלות או להשתתף במפגשים שלנו. כולם מוזמנים!"
-            },
-            "OSM-CL-mailinglist": {
-                "name": "קבוצת הדיוור Talk-cl",
-                "description": "קבוצת דיוור לדיונים על OpenStreetMap בצ׳ילה"
-            },
-            "OSM-CL-telegram": {
-                "name": "הטלגרם של OpenStreetMap צ׳ילה",
-                "description": "ניתן להצטרף לקהילת OpenStreetMap צ׳ילה בטלגרם",
-                "extendedDescription": "ניתן להצטרף לקהילה שלנו כדי ללמוד עוד על OpenStreetMap, לשאול שאלות או להשתתף במפגשים שלנו. כולם מוזמנים!"
-            },
-            "OSM-CL-twitter": {
-                "name": "הטוויטר של OpenStreetMap צ׳ילה",
-                "description": "ניתן לעקוב אחרינו בטוויטר בכתובת {url}"
-            },
-            "Maptime-Bogota": {
-                "name": "Maptime בוגוטה",
-                "description": "אנו קבוצה של ממפים שמעוניים למפות ב־OpenStreetMap סביב בוגוטה.",
-                "extendedDescription": "מידע על איסוף נתונים בשטח והמרתם לנתונים דיגיטליים ב־OpenStreetMap. אין צורך בידע קודם! נדרש רק רצון עז להשתתף, ללמוד וליהנות."
-            },
-            "OSM-CO-facebook": {
-                "name": "הפייסבוק של OpenStreetMap קולומביה",
-                "description": "ניתן להצטרף לקהילה של OpenStreetMap קולומביה בפייסבוק",
-                "extendedDescription": "ניתן להצטרף לקהילה שלנו כדי ללמוד עוד על OpenStreetMap. כולם מוזמנים!"
-            },
-            "OSM-CO-mailinglist": {
-                "name": "קבוצת הדיוור Talk-co",
-                "description": "קבוצת דיוור לדיונים על OpenStreetMap בקולומביה"
-            },
-            "OSM-CO-telegram": {
-                "name": "ערוץ הטלגרם של OSM קולומביה",
-                "description": "הטלגרם של OpenStreetMap קולומביה"
-            },
-            "OSM-CO-twitter": {
-                "name": "הטוויטר של OpenStreetMap קולומביה",
-                "description": "ניתן לעקוב אחרינו בטוויטר בכתובת {url}"
-            },
-            "OSM-CO": {
-                "name": "OpenStreetMap קולומביה",
-                "description": "חדשות על קהילת OpenStreetMap קולומביה ועל קרן OSMCo"
-            },
-            "OSM-EC-telegram": {
-                "name": "ערוץ הטלגרם של OSM אקוודור",
-                "description": "הטלגרם של OpenStreetMap אקוודור"
-            },
-            "OSM-PY-telegram": {
-                "name": "ערוץ הטלגרם של OSM פרגוואי",
-                "description": "הטלגרם של OpenStreetMap פרגוואי"
-            },
-            "OSM-PE-facebook": {
-                "name": "הפייסבוק של OpenStreetMap פרו",
-                "description": "ניתן להצטרף לקהילה של OpenStreetMap פרו בפייסבוק"
-            },
-            "OSM-PE-mailinglist": {
-                "name": "קבוצת הדיוור Talk-pe",
-                "description": "קבוצת הדיוור הרשמית ל־OpenStreetMap פרו"
-            },
-            "OSM-PE-matrix": {
-                "name": "ערוץ ה־Matrix של OpenStreetMap פרו",
-                "description": "ניתן לשוחח עם חברים נוספים בקהילת OpenStreetMap פרו דרך Matrix."
-            },
-            "OSM-PE-telegram": {
-                "name": "הטלגרם של OpenStreetMap פרו",
-                "description": "ניתן להצטרף לקהילת OpenStreetMap פרו בטלגרם"
-            },
-            "OSM-PE-twitter": {
-                "name": "הטוויטר של OpenStreetMap פרו",
-                "description": "ניתן לעקוב אחרינו בטוויטר בכתובת {url}"
-            },
-            "OSM-PE": {
-                "name": "OpenStreetMap פרו",
-                "description": "חדשות ומשאבים לקהילת OpenStreetMap פרו"
-            },
-            "LATAM-Facebook": {
-                "name": " הפייסבוק של OpenStreetMap אמריקה הלטינית",
-                "description": "OpenStreetMap אמריקה הלטינית בפייסבוק"
-            },
-            "LATAM-Telegram": {
-                "name": "הטלגרם של OpenStreetMap אמריקה הלטינית",
-                "description": "טלגרם של OpenStreetMap עבור אמריקה הלטינית"
-            },
-            "LATAM-Twitter": {
-                "name": "הטוויטר של OpenStreetMap אמריקה הלטינית",
-                "description": "ניתן לעקוב אחרינו בטוויטר בכתובת {url}"
-            },
-            "osm-latam": {
-                "name": "OpenStreetMap אמריקה הלטינית",
-                "description": "תמיכה ב־OpenStreetMap באמריקה הלטינית"
-            },
-            "OSM-Discord": {
-                "name": "ה־Discord של OpenStreetMap",
-                "description": "יצירת קשר עם ממפים אחרים דרך Discord"
-            },
-            "OSM-Facebook": {
-                "name": "OpenStreetMap בפייסבוק",
-                "description": "ניתן לעשות לנו ‚לייק’ בפייסבוק כדי לקבל חדשות ועדכונים על OpenStreetMap."
-            },
-            "OSM-help": {
-                "name": "העזרה של OpenStreetMap",
-                "description": "ניתן לשאול שאלות ולקבל תשובות באתר השאלות והתשובות בשיתוף קהילת OSM.",
-                "extendedDescription": "{url} מיועד לכל מי שצריך עזרה עם OpenStreetMap.  בין אם עזרה לממפים מתחילים או שאלה טכנית, אנחנו כאן כדי לעזור!"
-            },
-            "OSM-IRC": {
-                "name": "ה־IRC של OpenStreetMap",
-                "description": "ניתן להצטרף ל־‎#osm תחת irc.oftc.net (פתחה 6667)"
-            },
-            "OSM-Reddit": {
-                "name": "OpenStreetMap ב־Reddit",
-                "description": "/r/openstreetmap/ הוא מקום נהדר ללמוד עוד על OpenStreetMap.  מצפים לשאלות שלכם בכל נושא שהוא!"
-            },
-            "OSM-Telegram": {
-                "name": "הטלגרם של OpenStreetMap",
-                "description": "ניתן להצטרף לקבוצת העל הגלובלית של OpenStreetMap בטלגרם בכתובת {url}"
-            },
-            "OSM-Twitter": {
-                "name": "הטוויטר של OpenStreetMap",
-                "description": "ניתן לעקוב אחרינו בטוויטר בכתובת {url}"
-            },
-            "OSMF": {
-                "name": "קרן OpenStreetMap",
-                "description": "OSMF הוא ארגון בריטי ללא מטרות רווח שתומך במיזם OpenStreetMap",
-                "extendedDescription": "OSMF תומך ב־OpenStreetMap על ידי תרומה, תחזוקת השרתים שעליהם פועלת מערכת OSM, ארגון הכנס State of the Map ותיאום בין המתנדבים שדואגים ש־OSM ימשיך להכות גלים. ניתן להראות את תמיכתך ולתת את קולך ל־OpenStreetMap על ידי הצטרפות לחברות ב־OSMF דרך כאן: {signupUrl}"
+            "ym-University-of-California-Davis": {
+                "name": "מועדון המיפוי"
             }
         }
     }

@@ -59,11 +59,7 @@
                 }
             },
             "orthogonalize": {
-                "title": "مربع",
-                "annotation": {
-                    "line": ".جعل زوايا الخط مربعة",
-                    "area": ".جعل زوايا المساحة مربعة"
-                }
+                "title": "مربع"
             },
             "delete": {
                 "title": "حذف",

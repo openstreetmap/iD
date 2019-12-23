@@ -7,7 +7,6 @@
             "undo": "실행 취소",
             "zoom_to": "확대",
             "copy": "복사",
-            "open_wikidata": "wikidata.org에서 열기",
             "favorite": "즐겨찾기"
         },
         "toolbar": {
@@ -128,20 +127,7 @@
             },
             "orthogonalize": {
                 "title": "각지게 하기",
-                "description": {
-                    "vertex": "이 모서리를 각지게 합니다.",
-                    "line": "이 선의 모서리를 각지게 합니다.",
-                    "area": "이 공간의 모서리를 각지게 합니다."
-                },
-                "key": "Q",
-                "annotation": {
-                    "vertex": "모서리를 직각으로 만들었습니다.",
-                    "line": "선의 모서리를 각지게 했습니다.",
-                    "area": "공간의 모서리를 각지게 했습니다."
-                },
-                "not_squarish": "사각 형태가 아니기 때문에 각지게 만들 수 없습니다.",
-                "too_large": "공간이 현재 충분히 보이지 않기 때문에 각지게 만들 수 없습니다.",
-                "connected_to_hidden": "숨겨진 지물에 연결되어 있기 때문에 각지게 만들 수 없습니다."
+                "key": "Q"
             },
             "straighten": {
                 "title": "곧게 하기",
@@ -499,12 +485,6 @@
             "hidden_warning": "숨겨진 지물 {count}개",
             "hidden_details": "이 지물은 현재 숨겨져 있습니다: {details}"
         },
-        "status": {
-            "error": "API에 연결할 수 없습니다.",
-            "offline": "API가 오프라인입니다. 나중에 편집을 시도하세요.",
-            "readonly": "API가 읽기 전용입니다. 변경사항을 저장하려면 기다릴 필요가 있습니다.",
-            "rateLimit": "API는 익명 연결을 제한합니다. 로그인을 하면 편집 가능합니다."
-        },
         "commit": {
             "title": "오픈스트리트맵에 올리기",
             "upload_explanation": "올린 변경사항은 오픈스트리트맵 자료를 사용하는 모든 지도에 보여집니다.",
@@ -597,7 +577,6 @@
         },
         "geocoder": {
             "search": "전 세계 검색...",
-            "no_results_visible": "보이는 지도 공간 내 결과가 없습니다",
             "no_results_worldwide": "결과가 없습니다"
         },
         "geolocate": {
@@ -1386,12 +1365,15 @@
             "rules": {
                 "title": "규칙"
             },
+            "user_resolved_issues": "편집으로 해결된 문제점",
+            "warnings_and_errors": "경고 및 오류",
             "no_issues": {
                 "message": {
                     "everything": "모든 것이 괜찮아 보입니다",
                     "everything_in_view": "보이는 모든 것이 괜찮아 보입니다",
                     "edits": "당신의 편집이 괜찮아 보입니다",
-                    "edits_in_view": "보이는 당신의 편집이 괜찮아 보입니다"
+                    "edits_in_view": "보이는 당신의 편집이 괜찮아 보입니다",
+                    "no_edits": "아직 아무 편집이 없습니다"
                 }
             },
             "options": {
@@ -1406,6 +1388,8 @@
                     "all": "모든 곳"
                 }
             },
+            "enable_all": "모두 활성화",
+            "disable_all": "모두 비활성화",
             "almost_junction": {
                 "message": "{feature}은(는) {feature2}과(와) 매우 가깝지만 연결되어 있지 않습니다.",
                 "self": {
@@ -1413,6 +1397,7 @@
                 }
             },
             "close_nodes": {
+                "title": "매우 가까운 점들",
                 "detached": {
                     "message": "{feature}은(는) {feature2}과(와) 매우 가깝습니다."
                 }
@@ -1420,12 +1405,6 @@
             "crossing_ways": {
                 "title": "길 교차",
                 "message": "{feature}이(가) {feature2}과(와) 교차합니다.",
-                "building-highway": {
-                    "reference": "도로가 건물과 교차하는 경우 다리, 터널,  덮개, 또는 입구를 이용해야 합니다."
-                },
-                "building-railway": {
-                    "reference": "철도가 건물과 교차하는 경우 다리나 터널을 이용해야 합니다."
-                },
                 "building-waterway": {
                     "reference": "수로가 건물과 교차하는 경우 터널을 이용하거나 레이어를 다르게 해야 합니다."
                 },
@@ -1454,13 +1433,58 @@
                     "reference": "다리끼리 교차하는 경우 연결하거나 레이어를 다르게 해야 합니다."
                 }
             },
+            "disconnected_way": {
+                "title": "단절된 길"
+            },
+            "help_request": {
+                "title": "도움 요청"
+            },
+            "incompatible_source": {
+                "title": "의심스러운 출처"
+            },
             "invalid_format": {
                 "title": "유효하지 않은 서식",
                 "email": {
                     "reference": "이메일 주소는 \"user@example.com\"와 같은 형태여야 합니다."
                 }
             },
+            "missing_tag": {
+                "title": "태그 없음",
+                "any": {
+                    "message": "{feature}에 태그가 없습니다."
+                }
+            },
+            "outdated_tags": {
+                "title": "오래된 태그"
+            },
+            "private_data": {
+                "title": "개인 정보"
+            },
+            "suspicious_name": {
+                "title": "의심스러운 이름"
+            },
+            "impossible_oneway": {
+                "title": "불가능한 일방통행",
+                "highway": {
+                    "start": {
+                        "message": "{feature}에 도달할 수 없습니다."
+                    }
+                }
+            },
+            "unsquare_way": {
+                "title": "각지지 않은 모서리(최대 {val}°)",
+                "message": "{feature}에 각지지 않은 모서리가 있습니다."
+            },
             "fix": {
+                "add_a_bridge": {
+                    "title": "다리 추가하기"
+                },
+                "add_a_tunnel": {
+                    "title": "터널 추가하기"
+                },
+                "connect_endpoints": {
+                    "title": "끝끼리 연결하기"
+                },
                 "connect_feature": {
                     "title": "지물 연결하기"
                 },
@@ -1482,29 +1506,44 @@
                 "merge_points": {
                     "title": "여러 점을 병합하기"
                 },
+                "move_points_apart": {
+                    "title": "이 점들 떨어뜨리기"
+                },
+                "remove_from_relation": {
+                    "title": "관계에서 제거하기"
+                },
                 "remove_tag": {
                     "title": "태그 삭제하기"
                 },
                 "remove_tags": {
                     "title": "태그들 삭제하기"
                 },
+                "remove_the_name": {
+                    "title": "이름 삭제하기"
+                },
                 "reposition_features": {
                     "title": "지물 위치 조정하기"
+                },
+                "reverse_feature": {
+                    "title": "이 지물 거꾸로하기"
                 },
                 "select_preset": {
                     "title": "지물 유형 선택하기"
                 },
-                "use_bridge_or_tunnel": {
-                    "title": "다리 또는 터널 이용하기"
+                "square_feature": {
+                    "title": "이 지물 각지게 하기"
+                },
+                "upgrade_tags": {
+                    "title": "태그들 업그레이드하기"
                 },
                 "use_different_layers": {
                     "title": "다른 레이어 이용하기"
                 },
+                "use_different_layers_or_levels": {
+                    "title": "다른 레이어 또는 층 이용하기"
+                },
                 "use_different_levels": {
                     "title": "다른 층 이용하기"
-                },
-                "use_tunnel": {
-                    "title": "터널 이용하기"
                 }
             }
         },
@@ -1730,9 +1769,7 @@
                 },
                 "display_options": {
                     "title": "디스플레이 옵션",
-                    "background": "배경 설정 보기",
                     "background_switch": "이전 배경으로 복귀하기",
-                    "map_data": "지도 데이터 설정 보기",
                     "fullscreen": "전체 화면 모드 진입",
                     "sidebar": "사이드바 토글",
                     "wireframe": "테두리 모드 토글",
@@ -1745,7 +1782,6 @@
                     "lasso": "점 선택 올가미 그리기"
                 },
                 "with_selected": {
-                    "title": "요소가 선택된 경우",
                     "edit_menu": "편집 메뉴 토글"
                 },
                 "vertex_selected": {
@@ -2503,7 +2539,6 @@
                     "label": "난간"
                 },
                 "hashtags": {
-                    "label": "제안된 해시태그",
                     "placeholder": "#example"
                 },
                 "healthcare": {
@@ -2795,7 +2830,6 @@
                     "label": "네트워크"
                 },
                 "network_bicycle": {
-                    "label": "네트워크 종류",
                     "options": {
                         "icn": "국제적",
                         "lcn": "지역적",
@@ -2805,7 +2839,6 @@
                     "placeholder": "지방, 지역, 국가, 국제"
                 },
                 "network_foot": {
-                    "label": "네트워크 종류",
                     "options": {
                         "iwn": "국제적",
                         "lwn": "지방",
@@ -2815,7 +2848,6 @@
                     "placeholder": "현지, 지역, 국가, 국제"
                 },
                 "network_horse": {
-                    "label": "네트워크 종류",
                     "options": {
                         "ihn": "국제적",
                         "lhn": "지방",
@@ -3611,13 +3643,6 @@
                     "name": "로프 견인 리프트",
                     "terms": "로프 견인 리프트"
                 },
-                "aerialway/station": {
-                    "name": "공중 이동로 승강장"
-                },
-                "aerialway/t-bar": {
-                    "name": "T-바 리프트",
-                    "terms": "T-바 리프트"
-                },
                 "aeroway": {
                     "name": "항공 시설"
                 },
@@ -3729,17 +3754,9 @@
                     "name": "카페",
                     "terms": "비스트로,커피,차"
                 },
-                "amenity/car_pooling": {
-                    "name": "카풀",
-                    "terms": "카풀,차량 공유"
-                },
                 "amenity/car_rental": {
                     "name": "자동차 대여",
                     "terms": "자동차 대여소,자동차 렌탈"
-                },
-                "amenity/car_sharing": {
-                    "name": "카 셰어링",
-                    "terms": "자동차 셰어링,자동차 공유"
                 },
                 "amenity/car_wash": {
                     "name": "세차장",
@@ -3856,6 +3873,9 @@
                 "amenity/fast_food/fish_and_chips": {
                     "name": "피시앤칩스 패스트푸드"
                 },
+                "amenity/fast_food/hot_dog": {
+                    "name": "핫도그 패스트푸드"
+                },
                 "amenity/fast_food/ice_cream": {
                     "name": "아이스크림 패스트푸드"
                 },
@@ -3913,9 +3933,6 @@
                 "amenity/internet_cafe": {
                     "name": "PC방",
                     "terms": "PC방"
-                },
-                "amenity/karaoke": {
-                    "name": "노래방"
                 },
                 "amenity/kindergarten": {
                     "name": "유치원 부지",
@@ -4213,6 +4230,9 @@
                     "name": "읍사무소",
                     "terms": "마을회관,주민센터,동사무소"
                 },
+                "amenity/townhall/city": {
+                    "name": "시청"
+                },
                 "amenity/university": {
                     "name": "대학 부지",
                     "terms": "대학교 부지"
@@ -4224,6 +4244,9 @@
                 "amenity/vending_machine": {
                     "name": "자동판매기",
                     "terms": "자판기"
+                },
+                "amenity/vending_machine/bread": {
+                    "name": "빵 자판기"
                 },
                 "amenity/vending_machine/cigarettes": {
                     "name": "담배 자판기",
@@ -4240,6 +4263,9 @@
                     "name": "음료 자판기",
                     "terms": "음료 자판기, 음료 자동 판매기"
                 },
+                "amenity/vending_machine/eggs": {
+                    "name": "계란 자판기"
+                },
                 "amenity/vending_machine/electronics": {
                     "name": "전자 제품 자판기"
                 },
@@ -4254,6 +4280,9 @@
                 },
                 "amenity/vending_machine/ice_cream": {
                     "name": "아이스크림 자판기"
+                },
+                "amenity/vending_machine/ice_cubes": {
+                    "name": "얼음 자판기"
                 },
                 "amenity/vending_machine/newspapers": {
                     "name": "신문 자동판매기",
@@ -4308,10 +4337,6 @@
                     "name": "지역",
                     "terms": "장소, 공간"
                 },
-                "area/highway": {
-                    "name": "노면",
-                    "terms": "도로 표면"
-                },
                 "attraction/amusement_ride": {
                     "name": "놀이기구",
                     "terms": "놀이기구"
@@ -4322,6 +4347,9 @@
                 "attraction/big_wheel": {
                     "name": "대관람차",
                     "terms": "대관람차"
+                },
+                "attraction/bumper_car": {
+                    "name": "범퍼카"
                 },
                 "attraction/bungee_jumping": {
                     "name": "번지점프",
@@ -4335,16 +4363,8 @@
                     "name": "어두운 라이드",
                     "terms": "어두운 라이드"
                 },
-                "attraction/drop_tower": {
-                    "name": "자이로드롭",
-                    "terms": "자이로드롭"
-                },
                 "attraction/maze": {
                     "name": "미로"
-                },
-                "attraction/pirate_ship": {
-                    "name": "바이킹",
-                    "terms": "바이킹"
                 },
                 "attraction/roller_coaster": {
                     "name": "롤러코스터",
@@ -4446,6 +4466,9 @@
                 "barrier/wall": {
                     "name": "벽",
                     "terms": "벽"
+                },
+                "barrier/wall/noise_barrier": {
+                    "name": "방음벽"
                 },
                 "boundary": {
                     "name": "경계"
@@ -4737,9 +4760,6 @@
                     "name": "절연체",
                     "terms": "절연체"
                 },
-                "craft/jeweler": {
-                    "name": "보석 공예"
-                },
                 "craft/key_cutter": {
                     "name": "열쇠 따는 사람",
                     "terms": "키 커터"
@@ -4750,9 +4770,6 @@
                 "craft/metal_construction": {
                     "name": "금속 구조물",
                     "terms": "건축용 금속재"
-                },
-                "craft/optician": {
-                    "name": "안경점"
                 },
                 "craft/painter": {
                     "name": "화가",
@@ -4773,10 +4790,6 @@
                 "craft/plumber": {
                     "name": "배관공",
                     "terms": "배관공"
-                },
-                "craft/pottery": {
-                    "name": "도예가",
-                    "terms": "도자기공"
                 },
                 "craft/rigger": {
                     "name": "의장자",
@@ -5007,9 +5020,6 @@
                 },
                 "healthcare/speech_therapist": {
                     "name": "언어치료사"
-                },
-                "highway": {
-                    "name": "도로"
                 },
                 "highway/bridleway": {
                     "name": "승마 도로",
@@ -5312,8 +5322,14 @@
                 "indoor/door": {
                     "name": "실내 문"
                 },
+                "indoor/elevator": {
+                    "name": "실내 엘리베이터"
+                },
                 "indoor/room": {
                     "name": "방"
+                },
+                "indoor/stairs": {
+                    "name": "실내 계단"
                 },
                 "indoor/wall": {
                     "name": "실내 벽"
@@ -5324,9 +5340,6 @@
                 "junction": {
                     "name": "교차로",
                     "terms": "삼거리,사거리,오거리"
-                },
-                "landuse": {
-                    "name": "토지 이용"
                 },
                 "landuse/allotments": {
                     "name": "텃밭",
@@ -5353,6 +5366,9 @@
                 "landuse/commercial": {
                     "name": "상업 지역",
                     "terms": "상업 지역"
+                },
+                "landuse/construction": {
+                    "name": "공사 중인 지역"
                 },
                 "landuse/farm": {
                     "name": "농토"
@@ -5484,9 +5500,6 @@
                     "name": "포도밭",
                     "terms": "포도원,포도주,와인"
                 },
-                "leisure": {
-                    "name": "여가"
-                },
                 "leisure/adult_gaming_centre": {
                     "name": "성인용 게임방",
                     "terms": "도박,노름,슬롯머신"
@@ -5528,10 +5541,6 @@
                 },
                 "leisure/escape_game": {
                     "name": "방탈출"
-                },
-                "leisure/firepit": {
-                    "name": "불구덩이",
-                    "terms": "캠프파이어,모닥불"
                 },
                 "leisure/fishing": {
                     "name": "낚시터"
@@ -5737,9 +5746,6 @@
                     "name": "선",
                     "terms": "선"
                 },
-                "man_made": {
-                    "name": "인공물"
-                },
                 "man_made/adit": {
                     "name": "수평갱",
                     "terms": "횡갱"
@@ -5754,10 +5760,6 @@
                 "man_made/breakwater": {
                     "name": "방파제",
                     "terms": "방파제"
-                },
-                "man_made/bridge": {
-                    "name": "다리",
-                    "terms": "교량"
                 },
                 "man_made/chimney": {
                     "name": "굴뚝",
@@ -5874,9 +5876,6 @@
                 "man_made/tower/observation": {
                     "name": "관측 탑"
                 },
-                "man_made/tunnel": {
-                    "name": "터널"
-                },
                 "man_made/wastewater_plant": {
                     "name": "하수 처리장",
                     "terms": "하수처리 시설"
@@ -5904,9 +5903,6 @@
                 "man_made/works": {
                     "name": "공장",
                     "terms": "공장"
-                },
-                "natural": {
-                    "name": "자연"
                 },
                 "natural/bare_rock": {
                     "name": "노출된 암반",
@@ -6004,9 +6000,6 @@
                     "name": "물",
                     "terms": "물"
                 },
-                "natural/water/canal": {
-                    "name": "운하"
-                },
                 "natural/water/lake": {
                     "name": "호수",
                     "terms": "호수"
@@ -6019,19 +6012,9 @@
                     "name": "저수지",
                     "terms": "저수지"
                 },
-                "natural/water/river": {
-                    "name": "강"
-                },
-                "natural/water/stream": {
-                    "name": "개울"
-                },
                 "natural/wetland": {
                     "name": "습지",
                     "terms": "늪,갈대밭,갯벌,간석지"
-                },
-                "natural/wood": {
-                    "name": "삼림",
-                    "terms": "숲,산림,나무"
                 },
                 "noexit/yes": {
                     "name": "출구 없음",
@@ -6284,9 +6267,6 @@
                     "name": "점",
                     "terms": "점"
                 },
-                "power": {
-                    "name": "전력"
-                },
                 "power/cable/underground": {
                     "name": "지하 전력 케이블"
                 },
@@ -6484,9 +6464,6 @@
                 "public_transport/stop_position_trolleybus": {
                     "name": "트롤리버스 정차 위치",
                     "terms": "버스,전기,대중교통,무궤도,전차,트롤리"
-                },
-                "railway": {
-                    "name": "철도"
                 },
                 "railway/abandoned": {
                     "name": "버려진 철도",
@@ -6815,6 +6792,9 @@
                 "shop/fashion": {
                     "name": "패션 가게"
                 },
+                "shop/fashion_accessories": {
+                    "name": "패션 액세서리 가게"
+                },
                 "shop/fireplace": {
                     "name": "벽난로 가게"
                 },
@@ -6910,6 +6890,9 @@
                 },
                 "shop/laundry": {
                     "name": "세탁소"
+                },
+                "shop/laundry/self_service": {
+                    "name": "무인 빨래방"
                 },
                 "shop/leather": {
                     "name": "가죽 가게"
@@ -7027,6 +7010,9 @@
                 "shop/shoes": {
                     "name": "신발 가게"
                 },
+                "shop/spices": {
+                    "name": "향신료 가게"
+                },
                 "shop/sports": {
                     "name": "스포츠 용품 가게"
                 },
@@ -7116,9 +7102,6 @@
                 },
                 "telecom/data_center": {
                     "name": "데이터 센터"
-                },
-                "tourism": {
-                    "name": "관광"
                 },
                 "tourism/alpine_hut": {
                     "name": "고산장"
@@ -7388,9 +7371,6 @@
                     "name": "물길",
                     "terms": "수로"
                 },
-                "waterway": {
-                    "name": "수로"
-                },
                 "waterway/boatyard": {
                     "name": "보트 선착장",
                     "terms": "조선소"
@@ -7641,68 +7621,243 @@
             }
         },
         "community": {
-            "bw-facebook": {
-                "description": "보츠와나의 오픈스트리트맵 문서"
+            "Bahia-telegram": {
+                "description": "텔레그램의 오픈스트리트맵 바이아 공동체에 참여하세요"
             },
-            "bw-twitter": {
-                "description": "보츠와나의 오픈스트리트맵 트위터"
+            "Bay-Area-OpenStreetMappers": {
+                "description": "베이에어리어 내 오픈스트리트맵 개선하기"
             },
-            "cape-coast-youthmappers": {
-                "description": "트위터에서 팔로우하기: {url}"
+            "DF-telegram": {
+                "name": "오픈스트리트맵 브라질리아 텔레그램",
+                "description": "텔레그램의 오픈스트리트맵 브라질리아 공동체에 참여하세요"
             },
-            "osm-gh-facebook": {
-                "name": "오픈스트리트맵 가나 페이스북",
-                "description": "OpenStreetMap에 관심 있는 사람들을 위한 Facebook 그룹."
+            "LATAM-Telegram": {
+                "description": "라틴 아메리카의 오픈스트리트맵 텔레그램"
             },
-            "osm-gh-twitter": {
-                "name": "오픈스트리트맵 가나 트위터",
-                "description": "트위터에서 팔로우하기: {url}"
+            "LATAM-Twitter": {
+                "description": "{url}에서 트위터 팔로우하기"
             },
-            "talk-gh": {
-                "name": "Talk-gh 메일링리스트",
-                "description": "Talk-gh는 가나 오픈스트리트맵 공동체의 공식 메일링리스트입니다."
+            "Mapping-DC-meetup": {
+                "description": "워싱턴 지역 내 오픈스트리트맵 개선하기"
             },
-            "osm-mg-facebook": {
-                "name": "오픈스트리트맵 마다가스카르 페이스북 그룹",
-                "description": "오픈스트리트맵에 관심있는 사람들을 위한 마다가스카르 페이스북 그룹"
+            "MaptimeHRVA-twitter": {
+                "description": "{url}에서 트위터 팔로우하기"
             },
-            "talk-mg": {
-                "name": "Talk-mg 메일링리스트",
-                "description": "마다가스카르 내 오픈스트리트맵 기여자와 공동체, 사용자가 공유하고 논의하기 위한 장소."
+            "OSM-AR-facebook": {
+                "name": "오픈스트리트맵 아르헨티나 페이스북",
+                "description": "페이스북의 오픈스트리트맵 아르헨티나 공동체에 참여하세요"
+            },
+            "OSM-AR-irc": {
+                "name": "오픈스트리트맵 아르헨티나 IRC",
+                "description": "irc.oftc.net(6667 포트)의 #osm-ar 대화방에 참여하세요"
+            },
+            "OSM-AR-mailinglist": {
+                "name": "Talk-ar 메일링리스트"
+            },
+            "OSM-AR-telegram": {
+                "name": "오픈스트리트맵 아르헨티나 텔레그램",
+                "description": "텔레그램의 오픈스트리트맵 아르헨티나 공동체에 참여하세요"
+            },
+            "OSM-AR-twitter": {
+                "name": "오픈스트리트맵 아르헨티나 트위터",
+                "description": "{url}에서 트위터 팔로우하기"
             },
             "OSM-BGD-facebook": {
                 "name": "오픈스트리트맵 방글라데시",
                 "description": "방글라데시 내 오픈스트리트맵 개선하기"
             },
+            "OSM-BO-mailinglist": {
+                "name": "Talk-bo 메일링리스트",
+                "description": "Talk-bo는 볼리비아 오픈스트리트맵 공동체의 공식 메일링리스트입니다."
+            },
+            "OSM-Boston": {
+                "name": "오픈스트리트맵 보스턴"
+            },
+            "OSM-CL-facebook": {
+                "name": "오픈스트리트맵 칠레 페이스북",
+                "description": "페이스북의 오픈스트리트맵 칠레 공동체에 참여하세요"
+            },
+            "OSM-CL-mailinglist": {
+                "name": "Talk-cl 메일링리스트"
+            },
+            "OSM-CL-telegram": {
+                "name": "오픈스트리트맵 칠레 텔레그램",
+                "description": "텔레그램의 오픈스트리트맵 칠레 공동체에 참여하세요"
+            },
+            "OSM-CL-twitter": {
+                "name": "오픈스트리트맵 칠레 트위터",
+                "description": "{url}에서 트위터 팔로우하기"
+            },
+            "OSM-CO": {
+                "name": "오픈스트리트맵 콜롬비아"
+            },
+            "OSM-CO-facebook": {
+                "name": "오픈스트리트맵 콜롬비아 페이스북",
+                "description": "페이스북의 오픈스트리트맵 콜롬비아 공동체에 참여하세요"
+            },
+            "OSM-CO-mailinglist": {
+                "name": "Talk-co 메일링리스트"
+            },
+            "OSM-CO-telegram": {
+                "name": "오픈스트리트맵 콜롬비아 텔레그램",
+                "description": "오픈스트리트맵 콜롬비아 텔레그램 대화방"
+            },
+            "OSM-CO-twitter": {
+                "name": "오픈스트리트맵 콜롬비아 트위터",
+                "description": "{url}에서 트위터 팔로우하기"
+            },
+            "OSM-CU-telegram": {
+                "name": "오픈스트리트맵 쿠바 텔레그램",
+                "description": "오픈스트리트맵 쿠바 텔레그램 대화방"
+            },
+            "OSM-Discord": {
+                "name": "오픈스트리트맵 디스코드"
+            },
+            "OSM-EC-telegram": {
+                "name": "오픈스트리트맵 에콰도르 텔레그램",
+                "description": "오픈스트리트맵 에콰도르 텔레그램 대화방"
+            },
+            "OSM-ES-mailinglist": {
+                "name": "Talk-es 메일링리스트"
+            },
+            "OSM-ES-telegram": {
+                "name": "텔레그램 @OSMes",
+                "description": "오픈스트리트맵 에스파냐 텔레그램 대화방"
+            },
+            "OSM-Facebook": {
+                "name": "오픈스트리트맵 페이스북"
+            },
+            "OSM-IDN-facebook": {
+                "name": "오픈스트리트맵 인도네시아",
+                "description": "인도네시아 내 오픈스트리트맵 개선하기"
+            },
+            "OSM-IRC": {
+                "name": "오픈스트리트맵 IRC",
+                "description": "irc.oftc.net(6667 포트)의 #osm 대화방에 참여하세요"
+            },
             "OSM-India-facebook": {
                 "description": "인도 내 오픈스트리트맵 개선하기"
             },
-            "osm-india-github": {
-                "name": "오픈스트리트맵 인도 깃허브"
+            "OSM-MMR-facebook": {
+                "name": "오픈스트리트맵 미얀마",
+                "description": "미얀마 내 오픈스트리트맵 개선하기"
+            },
+            "OSM-MNG-facebook": {
+                "name": "오픈스트리트맵 몽골",
+                "description": "몽골  내 오픈스트리트맵 개선하기"
+            },
+            "OSM-MY-facebook": {
+                "name": "오픈스트리트맵 말레이시아 페이스북"
+            },
+            "OSM-Nepal-facebook": {
+                "name": "오픈스트리트맵 네팔",
+                "description": "네팔 내 오픈스트리트맵 개선하기"
+            },
+            "OSM-PE": {
+                "name": "오픈스트리트맵 페루"
+            },
+            "OSM-PE-facebook": {
+                "name": "오픈스트리트맵 페루 페이스북",
+                "description": "페이스북의 오픈스트리트맵 페루 공동체에 참여하세요"
+            },
+            "OSM-PE-mailinglist": {
+                "name": "Talk-pe 메일링리스트",
+                "description": "오픈스트리트맵 페루 공동체의 공식 메일링리스트"
+            },
+            "OSM-PE-telegram": {
+                "name": "오픈스트리트맵 페루 텔레그램",
+                "description": "텔레그램의 오픈스트리트맵 페루 공동체에 참여하세요"
+            },
+            "OSM-PE-twitter": {
+                "name": "오픈스트리트맵 페루 트위터",
+                "description": "{url}에서 트위터 팔로우하기"
+            },
+            "OSM-PH-mailinglist": {
+                "name": "Talk-ph 메일링리스트"
+            },
+            "OSM-PH-telegram": {
+                "name": "오픈스트리트맵 필리핀 텔레그램",
+                "description": "필리핀 내 오픈스트리트맵 기여자 및 후원자의 비공식 텔레그램 지역 공동체"
+            },
+            "OSM-PL-facebook-group": {
+                "name": "오픈스트리트맵 폴란드 페이스북 그룹"
+            },
+            "OSM-PY-telegram": {
+                "name": "오픈스트리트맵 파라과이 텔레그램",
+                "description": "오픈스트리트맵 파라과이 텔레그램 대화방"
+            },
+            "OSM-Puducherry-Mailing-List": {
+                "name": "자유 소프트웨어 하드웨어 운동 메일링리스트"
+            },
+            "OSM-RU-telegram": {
+                "name": "오픈스트리트맵 러시아 텔레그램",
+                "description": "오픈스트리트맵 러시아 텔레그램 대화방"
+            },
+            "OSM-Reddit": {
+                "name": "레딧 내 오픈스트리트맵",
+                "description": "/r/openstreetmap/은 오픈스트리트맵을 배워가기 가장 좋은 곳입니다. 무엇이든지 물어보세요!"
+            },
+            "OSM-Rome-meetup": {
+                "description": "로마 지역 내 오픈스트리트맵 개선하기"
+            },
+            "OSM-Seattle": {
+                "name": "오픈스트리트맵 시애틀"
+            },
+            "OSM-TH-CNX-meetup": {
+                "name": "오픈스트리트맵 치앙마이 모임"
+            },
+            "OSM-TH-facebook": {
+                "name": "오픈스트리트맵 타이 페이스북 그룹",
+                "description": "타이 내 오픈스트리트맵 페이스북 그룹"
+            },
+            "OSM-TW-facebook": {
+                "name": "오픈스트리트맵 타이완 공동체"
+            },
+            "OSM-TW-mailinglist": {
+                "name": "오픈스트리트맵 타이완 메일링리스트",
+                "description": "Talk-tw는 타이완 관련 문제를 논의할 수 있는 공동체의 공식 메일링리스트입니다."
+            },
+            "OSM-Telegram": {
+                "name": "오픈스트리트맵 텔레그램",
+                "description": "{url}에서 오픈스트리트맵 텔레그램 전세계 슈퍼그룹에 참여하세요"
+            },
+            "OSM-Twitter": {
+                "name": "오픈스트리트맵 트위터",
+                "description": "{url}에서 트위터 팔로우하기"
+            },
+            "OSM-US": {
+                "name": "오픈스트리트맵 미국",
+                "description": "우리는 미국 내 오픈스트리트맵을 성장 및 개선하도록 돕습니다."
+            },
+            "OSM-US-Slack": {
+                "name": "오픈스트리트맵 미국 슬랙"
+            },
+            "OSM-Utah": {
+                "name": "오픈스트리트맵 유타"
+            },
+            "OSM-Wyoming": {
+                "name": "오픈스트리트맵 와이오밍"
+            },
+            "OSM-br-mailinglist": {
+                "name": "Talk-br 메일링리스트"
+            },
+            "OSM-br-telegram": {
+                "name": "오픈스트리트맵 브라질 텔레그램",
+                "description": "텔레그램의 오픈스트리트맵 브라질 공동체에 참여하세요"
+            },
+            "OSM-br-twitter": {
+                "name": "오픈스트리트맵 브라질 트위터",
+                "description": "{url}에서 트위터 팔로우하기"
+            },
+            "OSM-help": {
+                "name": "오픈스트리트맵 도움말"
             },
             "OSM-india-mailinglist": {
                 "name": "오픈스트리트맵 인도 메일링리스트",
                 "description": "Talk-in은 인도 공동체의 공식 메일링리스트입니다."
             },
-            "osm-india-telegram": {
-                "name": "오픈스트리트맵 인도 텔레그램",
-                "description": "우리의 가족이 되세요: {url}"
-            },
             "OSM-india-twitter": {
                 "name": "오픈스트리트맵 인도 트위터"
-            },
-            "osm-india-website": {
-                "name": "오픈스트리트맵 인도"
-            },
-            "osm-india-wiki": {
-                "name": "오픈스트리트맵 위키프로젝트 인도"
-            },
-            "OSM-Puducherry-Mailing-List": {
-                "name": "자유 소프트웨어 하드웨어 운동 메일링리스트"
-            },
-            "OSM-IDN-facebook": {
-                "name": "오픈스트리트맵 인도네시아",
-                "description": "인도네시아 내 오픈스트리트맵 개선하기"
             },
             "OSM-japan-facebook": {
                 "name": "오픈스트리트맵 일본 공동체",
@@ -7720,45 +7875,22 @@
                 "name": "오픈스트리트맵 일본",
                 "description": "일본 거주 오픈스트리트맵 사용자 및 맵퍼"
             },
-            "OSM-MY-facebook": {
-                "name": "오픈스트리트맵 말레이시아 페이스북"
+            "OSMF": {
+                "name": "오픈스트리트맵 재단",
+                "description": "OSMF는 오픈스트리트맵 프로젝트를 지원하는 영국에 기반을 둔 비영리 재단입니다."
             },
-            "OSM-MNG-facebook": {
-                "name": "오픈스트리트맵 몽골",
-                "description": "몽골  내 오픈스트리트맵 개선하기"
+            "OpenCleveland-meetup": {
+                "description": "클리블랜드 지역 내 오픈스트리트맵 개선하기"
             },
-            "OSM-MMR-facebook": {
-                "name": "오픈스트리트맵 미얀마",
-                "description": "미얀마 내 오픈스트리트맵 개선하기"
+            "PHXGeo-twitter": {
+                "description": "{url}에서 트위터 팔로우하기"
             },
-            "OSM-Nepal-facebook": {
-                "name": "오픈스트리트맵 네팔",
-                "description": "네팔 내 오픈스트리트맵 개선하기"
+            "RS-telegram": {
+                "name": "오픈스트리트맵 히우그란지두술 텔레그램 그룹",
+                "description": "텔레그램의 오픈스트리트맵 히우그란지두술 공동체에 참여하세요"
             },
-            "OSM-PH-mailinglist": {
-                "name": "Talk-ph 메일링리스트"
-            },
-            "OSM-PH-telegram": {
-                "name": "오픈스트리트맵 필리핀 텔레그램",
-                "description": "필리핀 내 오픈스트리트맵 기여자 및 후원자의 비공식 텔레그램 지역 공동체"
-            },
-            "OSM-RU-telegram": {
-                "name": "오픈스트리트맵 러시아 텔레그램",
-                "description": "오픈스트리트맵 러시아 텔레그램 대화방"
-            },
-            "OSM-TW-facebook": {
-                "name": "오픈스트리트맵 타이완 공동체"
-            },
-            "OSM-TW-mailinglist": {
-                "name": "오픈스트리트맵 타이완 메일링리스트",
-                "description": "Talk-tw는 타이완 관련 문제를 논의할 수 있는 공동체의 공식 메일링리스트입니다."
-            },
-            "OSM-TH-CNX-meetup": {
-                "name": "오픈스트리트맵 치앙마이 모임"
-            },
-            "OSM-TH-facebook": {
-                "name": "오픈스트리트맵 타이 페이스북 그룹",
-                "description": "타이 내 오픈스트리트맵 페이스북 그룹"
+            "Trentino-Mailing-List": {
+                "name": "트렌토의 오픈스트리트맵 메일링리스트"
             },
             "al-telegram": {
                 "name": "오픈스트리트맵 알바니아 텔레그램 채널",
@@ -7772,12 +7904,6 @@
                 "name": "오픈스트리트맵 오스트리아 트위터",
                 "description": "오픈스트리트맵 오스트리아 트위터: {url}"
             },
-            "osm-at": {
-                "name": "오픈스트리트맵 오스트리아"
-            },
-            "byosm": {
-                "description": "오픈스트리트맵 벨라루스 텔레그램 대화방"
-            },
             "be-irc": {
                 "name": "오픈스트리트맵 벨기에 IRC",
                 "description": "irc.oftc.net(6667 포트)의 #osmbe 대화방에 참여하세요",
@@ -7790,47 +7916,17 @@
             "be-twitter": {
                 "description": "오픈스트리트맵 벨기에 트위터: @osm_be"
             },
-            "hr-facebook": {
-                "name": "오픈스트리트맵 크로아티아 페이스북 그룹",
-                "description": "오픈스트리트맵 크로아티아 페이스북 그룹"
+            "bw-facebook": {
+                "description": "보츠와나의 오픈스트리트맵 문서"
             },
-            "hr-irc": {
-                "description": "irc.oftc.net(6667 포트)의 #osm-hr 대화방에 참여하세요"
+            "bw-twitter": {
+                "description": "보츠와나의 오픈스트리트맵 트위터"
             },
-            "hr-mailinglist": {
-                "name": "Talk-hr 메일링리스트",
-                "description": "Talk-hr 메일링리스트"
+            "byosm": {
+                "description": "오픈스트리트맵 벨라루스 텔레그램 대화방"
             },
-            "osmcz-facebook": {
-                "name": "오픈스트리트맵 체코 페이스북"
-            },
-            "talk-cz-mailinglist": {
-                "name": "체코 메일링리스트(talk-cz)",
-                "description": "talk-cz는 체코 공동체의 공식 메일링리스트입니다."
-            },
-            "dk-irc": {
-                "description": "irc.oftc.net(6667 포트)의 #osm-dk 대화방에 참여하세요"
-            },
-            "dk-mailinglist": {
-                "name": "Talk-dk 메일링리스트"
-            },
-            "fi-irc": {
-                "description": "irc.oftc.net(6667 포트)의 #osm-fi 대화방에 참여하세요"
-            },
-            "fi-mailinglist": {
-                "name": "Talk-fi 메일링리스트",
-                "description": "Talk-fi는 핀란드 오픈스트리트맵 공동체의 공식 메일링리스트입니다."
-            },
-            "fr-irc": {
-                "description": "irc.oftc.net(6667 포트)의 #osm-fr 대화방에 참여하세요"
-            },
-            "fr-mailinglist": {
-                "name": "Talk-fr 메일링리스트",
-                "description": "Talk-fr 메일링리스트"
-            },
-            "fr-twitter": {
-                "name": "오픈스트리트맵 프랑스 트위터",
-                "description": "오픈스트리트맵 프랑스 트위터: {url}"
+            "cape-coast-youthmappers": {
+                "description": "트위터에서 팔로우하기: {url}"
             },
             "de-berlin-mailinglist": {
                 "name": "베를린 메일링리스트",
@@ -7856,6 +7952,47 @@
             "de-telegram": {
                 "name": "오픈스트리트맵 독일 텔레그램",
                 "description": "{url}에서 오픈스트리트맵 독일 텔레그램 슈퍼그룹에 참여하세요"
+            },
+            "dk-irc": {
+                "description": "irc.oftc.net(6667 포트)의 #osm-dk 대화방에 참여하세요"
+            },
+            "dk-mailinglist": {
+                "name": "Talk-dk 메일링리스트"
+            },
+            "fi-irc": {
+                "description": "irc.oftc.net(6667 포트)의 #osm-fi 대화방에 참여하세요"
+            },
+            "fi-mailinglist": {
+                "name": "Talk-fi 메일링리스트",
+                "description": "Talk-fi는 핀란드 오픈스트리트맵 공동체의 공식 메일링리스트입니다."
+            },
+            "fr-irc": {
+                "description": "irc.oftc.net(6667 포트)의 #osm-fr 대화방에 참여하세요"
+            },
+            "fr-mailinglist": {
+                "name": "Talk-fr 메일링리스트",
+                "description": "Talk-fr 메일링리스트"
+            },
+            "fr-twitter": {
+                "name": "오픈스트리트맵 프랑스 트위터",
+                "description": "오픈스트리트맵 프랑스 트위터: {url}"
+            },
+            "gb-irc": {
+                "description": "irc.oftc.net(6667 포트)의 #osm-gb 대화방에 참여하세요"
+            },
+            "gb-mailinglist": {
+                "name": "Talk-gb 메일링리스트"
+            },
+            "hr-facebook": {
+                "name": "오픈스트리트맵 크로아티아 페이스북 그룹",
+                "description": "오픈스트리트맵 크로아티아 페이스북 그룹"
+            },
+            "hr-irc": {
+                "description": "irc.oftc.net(6667 포트)의 #osm-hr 대화방에 참여하세요"
+            },
+            "hr-mailinglist": {
+                "name": "Talk-hr 메일링리스트",
+                "description": "Talk-hr 메일링리스트"
             },
             "hu-facebook": {
                 "name": "오픈스트리트맵 헝가리 페이스북"
@@ -7884,34 +8021,42 @@
             "it-twitter": {
                 "description": "{url}에서 트위터 팔로우하기"
             },
-            "OSM-Rome-meetup": {
-                "description": "로마 지역 내 오픈스트리트맵 개선하기"
-            },
-            "talk-it-lazio": {
-                "extendedDescription": "로마·라치오의 메일링리스트"
-            },
-            "Trentino-Mailing-List": {
-                "name": "트렌토의 오픈스트리트맵 메일링리스트"
-            },
             "kosovo-telegram": {
                 "name": "오픈스트리트맵 코소보 텔레그램"
             },
             "no-mailinglist": {
                 "name": "오픈스트리트맵 노르웨이 메일링리스트"
             },
-            "OSM-PL-facebook-group": {
-                "name": "오픈스트리트맵 폴란드 페이스북 그룹"
+            "osm-at": {
+                "name": "오픈스트리트맵 오스트리아"
             },
-            "si-mailinglist": {
-                "name": "오픈스트리트맵 슬로베니아 메일링리스트",
-                "description": "슬로베니아 내 오픈스트리트맵 공동체의 메일링리스트"
+            "osm-gh-facebook": {
+                "name": "오픈스트리트맵 가나 페이스북",
+                "description": "OpenStreetMap에 관심 있는 사람들을 위한 Facebook 그룹."
             },
-            "OSM-ES-mailinglist": {
-                "name": "Talk-es 메일링리스트"
+            "osm-gh-twitter": {
+                "name": "오픈스트리트맵 가나 트위터",
+                "description": "트위터에서 팔로우하기: {url}"
             },
-            "OSM-ES-telegram": {
-                "name": "텔레그램 @OSMes",
-                "description": "오픈스트리트맵 에스파냐 텔레그램 대화방"
+            "osm-india-github": {
+                "name": "오픈스트리트맵 인도 깃허브"
+            },
+            "osm-india-telegram": {
+                "name": "오픈스트리트맵 인도 텔레그램",
+                "description": "우리의 가족이 되세요: {url}"
+            },
+            "osm-india-website": {
+                "name": "오픈스트리트맵 인도"
+            },
+            "osm-india-wiki": {
+                "name": "오픈스트리트맵 위키프로젝트 인도"
+            },
+            "osm-mg-facebook": {
+                "name": "오픈스트리트맵 마다가스카르 페이스북 그룹",
+                "description": "오픈스트리트맵에 관심있는 사람들을 위한 마다가스카르 페이스북 그룹"
+            },
+            "osmcz-facebook": {
+                "name": "오픈스트리트맵 체코 페이스북"
             },
             "se-facebook": {
                 "description": "오픈스트리트맵 스웨덴 페이스북"
@@ -7926,195 +8071,30 @@
                 "name": "오픈스트리트맵 스웨덴 트위터",
                 "description": "{url}에서 트위터 팔로우하기"
             },
-            "gb-irc": {
-                "description": "irc.oftc.net(6667 포트)의 #osm-gb 대화방에 참여하세요"
-            },
-            "gb-mailinglist": {
-                "name": "Talk-gb 메일링리스트"
-            },
-            "OSM-CU-telegram": {
-                "name": "오픈스트리트맵 쿠바 텔레그램",
-                "description": "오픈스트리트맵 쿠바 텔레그램 대화방"
-            },
-            "Bay-Area-OpenStreetMappers": {
-                "description": "베이에어리어 내 오픈스트리트맵 개선하기"
-            },
-            "Mapping-DC-meetup": {
-                "description": "워싱턴 지역 내 오픈스트리트맵 개선하기"
-            },
-            "MaptimeHRVA-twitter": {
-                "description": "{url}에서 트위터 팔로우하기"
-            },
-            "us-ma-mailinglist": {
-                "name": "Talk-us-massachusetts 메일링리스트"
-            },
-            "OpenCleveland-meetup": {
-                "description": "클리블랜드 지역 내 오픈스트리트맵 개선하기"
-            },
-            "OSM-Boston": {
-                "name": "오픈스트리트맵 보스턴"
-            },
-            "OSM-Seattle": {
-                "name": "오픈스트리트맵 시애틀"
-            },
-            "OSM-US-Slack": {
-                "name": "오픈스트리트맵 미국 슬랙"
-            },
-            "OSM-US": {
-                "name": "오픈스트리트맵 미국",
-                "description": "우리는 미국 내 오픈스트리트맵을 성장 및 개선하도록 돕습니다."
-            },
-            "OSM-Utah": {
-                "name": "오픈스트리트맵 유타"
-            },
-            "OSM-Wyoming": {
-                "name": "오픈스트리트맵 와이오밍"
-            },
-            "PHXGeo-twitter": {
-                "description": "{url}에서 트위터 팔로우하기"
+            "si-mailinglist": {
+                "name": "오픈스트리트맵 슬로베니아 메일링리스트",
+                "description": "슬로베니아 내 오픈스트리트맵 공동체의 메일링리스트"
             },
             "talk-au": {
                 "name": "Talk-au 메일링리스트"
             },
-            "OSM-AR-facebook": {
-                "name": "오픈스트리트맵 아르헨티나 페이스북",
-                "description": "페이스북의 오픈스트리트맵 아르헨티나 공동체에 참여하세요"
+            "talk-cz-mailinglist": {
+                "name": "체코 메일링리스트(talk-cz)",
+                "description": "talk-cz는 체코 공동체의 공식 메일링리스트입니다."
             },
-            "OSM-AR-irc": {
-                "name": "오픈스트리트맵 아르헨티나 IRC",
-                "description": "irc.oftc.net(6667 포트)의 #osm-ar 대화방에 참여하세요"
+            "talk-gh": {
+                "name": "Talk-gh 메일링리스트",
+                "description": "Talk-gh는 가나 오픈스트리트맵 공동체의 공식 메일링리스트입니다."
             },
-            "OSM-AR-mailinglist": {
-                "name": "Talk-ar 메일링리스트"
+            "talk-it-lazio": {
+                "extendedDescription": "로마·라치오의 메일링리스트"
             },
-            "OSM-AR-telegram": {
-                "name": "오픈스트리트맵 아르헨티나 텔레그램",
-                "description": "텔레그램의 오픈스트리트맵 아르헨티나 공동체에 참여하세요"
+            "talk-mg": {
+                "name": "Talk-mg 메일링리스트",
+                "description": "마다가스카르 내 오픈스트리트맵 기여자와 공동체, 사용자가 공유하고 논의하기 위한 장소."
             },
-            "OSM-AR-twitter": {
-                "name": "오픈스트리트맵 아르헨티나 트위터",
-                "description": "{url}에서 트위터 팔로우하기"
-            },
-            "OSM-BO-mailinglist": {
-                "name": "Talk-bo 메일링리스트",
-                "description": "Talk-bo는 볼리비아 오픈스트리트맵 공동체의 공식 메일링리스트입니다."
-            },
-            "Bahia-telegram": {
-                "description": "텔레그램의 오픈스트리트맵 바이아 공동체에 참여하세요"
-            },
-            "DF-telegram": {
-                "name": "오픈스트리트맵 브라질리아 텔레그램",
-                "description": "텔레그램의 오픈스트리트맵 브라질리아 공동체에 참여하세요"
-            },
-            "OSM-br-mailinglist": {
-                "name": "Talk-br 메일링리스트"
-            },
-            "OSM-br-telegram": {
-                "name": "오픈스트리트맵 브라질 텔레그램",
-                "description": "텔레그램의 오픈스트리트맵 브라질 공동체에 참여하세요"
-            },
-            "OSM-br-twitter": {
-                "name": "오픈스트리트맵 브라질 트위터",
-                "description": "{url}에서 트위터 팔로우하기"
-            },
-            "RS-telegram": {
-                "name": "오픈스트리트맵 히우그란지두술 텔레그램 그룹",
-                "description": "텔레그램의 오픈스트리트맵 히우그란지두술 공동체에 참여하세요"
-            },
-            "OSM-CL-facebook": {
-                "name": "오픈스트리트맵 칠레 페이스북",
-                "description": "페이스북의 오픈스트리트맵 칠레 공동체에 참여하세요"
-            },
-            "OSM-CL-mailinglist": {
-                "name": "Talk-cl 메일링리스트"
-            },
-            "OSM-CL-telegram": {
-                "name": "오픈스트리트맵 칠레 텔레그램",
-                "description": "텔레그램의 오픈스트리트맵 칠레 공동체에 참여하세요"
-            },
-            "OSM-CL-twitter": {
-                "name": "오픈스트리트맵 칠레 트위터",
-                "description": "{url}에서 트위터 팔로우하기"
-            },
-            "OSM-CO-facebook": {
-                "name": "오픈스트리트맵 콜롬비아 페이스북",
-                "description": "페이스북의 오픈스트리트맵 콜롬비아 공동체에 참여하세요"
-            },
-            "OSM-CO-mailinglist": {
-                "name": "Talk-co 메일링리스트"
-            },
-            "OSM-CO-telegram": {
-                "name": "오픈스트리트맵 콜롬비아 텔레그램",
-                "description": "오픈스트리트맵 콜롬비아 텔레그램 대화방"
-            },
-            "OSM-CO-twitter": {
-                "name": "오픈스트리트맵 콜롬비아 트위터",
-                "description": "{url}에서 트위터 팔로우하기"
-            },
-            "OSM-CO": {
-                "name": "오픈스트리트맵 콜롬비아"
-            },
-            "OSM-EC-telegram": {
-                "name": "오픈스트리트맵 에콰도르 텔레그램",
-                "description": "오픈스트리트맵 에콰도르 텔레그램 대화방"
-            },
-            "OSM-PY-telegram": {
-                "name": "오픈스트리트맵 파라과이 텔레그램",
-                "description": "오픈스트리트맵 파라과이 텔레그램 대화방"
-            },
-            "OSM-PE-facebook": {
-                "name": "오픈스트리트맵 페루 페이스북",
-                "description": "페이스북의 오픈스트리트맵 페루 공동체에 참여하세요"
-            },
-            "OSM-PE-mailinglist": {
-                "name": "Talk-pe 메일링리스트",
-                "description": "오픈스트리트맵 페루 공동체의 공식 메일링리스트"
-            },
-            "OSM-PE-telegram": {
-                "name": "오픈스트리트맵 페루 텔레그램",
-                "description": "텔레그램의 오픈스트리트맵 페루 공동체에 참여하세요"
-            },
-            "OSM-PE-twitter": {
-                "name": "오픈스트리트맵 페루 트위터",
-                "description": "{url}에서 트위터 팔로우하기"
-            },
-            "OSM-PE": {
-                "name": "오픈스트리트맵 페루"
-            },
-            "LATAM-Telegram": {
-                "description": "라틴 아메리카의 오픈스트리트맵 텔레그램"
-            },
-            "LATAM-Twitter": {
-                "description": "{url}에서 트위터 팔로우하기"
-            },
-            "OSM-Discord": {
-                "name": "오픈스트리트맵 디스코드"
-            },
-            "OSM-Facebook": {
-                "name": "오픈스트리트맵 페이스북"
-            },
-            "OSM-help": {
-                "name": "오픈스트리트맵 도움말"
-            },
-            "OSM-IRC": {
-                "name": "오픈스트리트맵 IRC",
-                "description": "irc.oftc.net(6667 포트)의 #osm 대화방에 참여하세요"
-            },
-            "OSM-Reddit": {
-                "name": "레딧 내 오픈스트리트맵",
-                "description": "/r/openstreetmap/은 오픈스트리트맵을 배워가기 가장 좋은 곳입니다. 무엇이든지 물어보세요!"
-            },
-            "OSM-Telegram": {
-                "name": "오픈스트리트맵 텔레그램",
-                "description": "{url}에서 오픈스트리트맵 텔레그램 전세계 슈퍼그룹에 참여하세요"
-            },
-            "OSM-Twitter": {
-                "name": "오픈스트리트맵 트위터",
-                "description": "{url}에서 트위터 팔로우하기"
-            },
-            "OSMF": {
-                "name": "오픈스트리트맵 재단",
-                "description": "OSMF는 오픈스트리트맵 프로젝트를 지원하는 영국에 기반을 둔 비영리 재단입니다."
+            "us-ma-mailinglist": {
+                "name": "Talk-us-massachusetts 메일링리스트"
             }
         }
     }

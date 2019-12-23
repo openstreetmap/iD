@@ -88,18 +88,7 @@
                 "connected_to_hidden": "Tsy mety atao boribory ity satria mifampitohy amina zavatra tsy miseho."
             },
             "orthogonalize": {
-                "title": "Efajoro",
-                "description": {
-                    "line": "Hampahitsy ny zoron'ito tsipika ito.",
-                    "area": "Hampahitsy ireo zoron'ito faritra ito."
-                },
-                "annotation": {
-                    "line": "Nampahitsy ny zoron'ilay tsipika.",
-                    "area": "Nampahitsy ireo zoron'ilay faritra."
-                },
-                "not_squarish": "Tsy mety atao efajoro mahitsy ito satria tsy manakaiky ny endrika efajoro.",
-                "too_large": "Tsy mety atao efajoro mahitsy ito satria tsy ampy ny faritra miseho aminy.",
-                "connected_to_hidden": "Tsy mety atao efajoro mahitsy ito satria mifampitohy amina zavatra tsy miseho."
+                "title": "Efajoro"
             },
             "straighten": {
                 "title": "Hampahitsy",
@@ -325,12 +314,6 @@
         "feature_info": {
             "hidden_warning": "Singa miafina {count}",
             "hidden_details": "Miafina ireto singa ireto zao: {details}"
-        },
-        "status": {
-            "error": "Tsy afaka mifandray amin'ny API.",
-            "offline": "Tsy mandeha ny API amin'izao. Manandràmana indray mandeha rehefa afaka kelikely.",
-            "readonly": "Maody mamaky fotsiny ny API. Mila miandry ianao hihazonana ny fanovana nataonao.",
-            "rateLimit": "Mametra ny fifandraisana avy amin'olon-tsy fantatra ny API. Azonao andramana atao ny miditra amin'ny alalan'ny kaontinao."
         },
         "commit": {
             "title": "Handefa mankany amin'ny OpenStreetMap",
@@ -712,6 +695,12 @@
             }
         },
         "community": {
+            "OSM-Facebook": {
+                "name": "OpenStreetMap ao amin'ny Facebook"
+            },
+            "OSM-help": {
+                "name": "Fanampiana OpenStreetMap"
+            },
             "bw-facebook": {
                 "description": "Pejy OpenStreetMap Botswana"
             },
@@ -728,12 +717,6 @@
             "talk-mg": {
                 "name": "Mailaka fiseraserana Talk-mg",
                 "description": "Toerana ahafahan'ny mpandray anjara sy ny mpampiasa ny OpenStreetMap eto Madagasikara mifanakalo hevitra sy miresaka."
-            },
-            "OSM-Facebook": {
-                "name": "OpenStreetMap ao amin'ny Facebook"
-            },
-            "OSM-help": {
-                "name": "Fanampiana OpenStreetMap"
             }
         }
     }

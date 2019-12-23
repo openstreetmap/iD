@@ -7,7 +7,6 @@
             "undo": "angre",
             "zoom_to": "zoom til",
             "copy": "kopier",
-            "open_wikidata": "opne på wikidata.org",
             "favorite": "favoritt"
         },
         "toolbar": {
@@ -505,9 +504,6 @@
                 "handicap": {
                     "label": "Funksjonshemming"
                 },
-                "hashtags": {
-                    "label": "Føreslåtte emneknaggar"
-                },
                 "healthcare/speciality": {
                     "label": "Spesialitetar"
                 },
@@ -609,7 +605,6 @@
                     "label": "Nettverk"
                 },
                 "network_bicycle": {
-                    "label": "Nettverkstype",
                     "options": {
                         "icn": "Internasjonalt",
                         "lcn": "Lokalt",
@@ -619,7 +614,6 @@
                     "placeholder": "Lokalt, regionalt, nasjonalt, internasjonalt"
                 },
                 "network_foot": {
-                    "label": "Nettverkstype",
                     "options": {
                         "iwn": "Internasjonalt",
                         "lwn": "Lokalt",
@@ -629,7 +623,6 @@
                     "placeholder": "Lokalt, regionalt, nasjonalt, internasjonalt"
                 },
                 "network_horse": {
-                    "label": "Nettverkstype",
                     "options": {
                         "ihn": "Internasjonalt",
                         "lhn": "Lokalt",
@@ -825,12 +818,6 @@
                 },
                 "attraction/carousel": {
                     "name": "Karusell"
-                },
-                "natural/water/river": {
-                    "name": "Elv"
-                },
-                "natural/water/stream": {
-                    "name": "Straum"
                 },
                 "railway/tram": {
                     "name": "Trikk"

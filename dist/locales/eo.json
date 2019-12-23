@@ -7,7 +7,7 @@
             "undo": "malfari",
             "zoom_to": "fokusi",
             "copy": "kopii",
-            "open_wikidata": "malfermi ĉe wikidata.org",
+            "view_on": "montri ĉe {domain}",
             "favorite": "elstarigi"
         },
         "toolbar": {
@@ -128,27 +128,59 @@
                 "not_closed": "Ĉi tiu ne povas esti rondigita, ĉar ĝi ne estas cikla.",
                 "too_large": "Ĉi tiu ne povas esti rondigita,  ĉar malsufiĉa parto de ĝi estas nune videbla.",
                 "connected_to_hidden": "Ĉi tiu ne povas esti rondigita, ĉar ĝi estas kunigita al kaŝita objekto.",
-                "not_downloaded": "Tio ĉi ne povas esti rondigita, ĉar parto de ĝi ankoraŭ ne estas elŝutita."
+                "not_downloaded": "Tio ĉi ne povas esti rondigita, ĉar parto de ĝi ankoraŭ ne estas elŝutita.",
+                "already_circular": "Tio ĉi ne povas esti rondigita, ĉar ĝi jam estas cirkla."
             },
             "orthogonalize": {
                 "title": "Kvadratigi",
                 "description": {
-                    "vertex": "Kvadratigi tiun ĉi angulon.",
-                    "line": "Kvadratigi angulojn de ĉi tiu linio.",
-                    "area": "Kvadratigi angulojn de ĉi tiu areo."
+                    "corner": {
+                        "single": "Kvadratigi tiun ĉi angulon.",
+                        "multiple": "Kvadratigi tiujn ĉi angulojn."
+                    },
+                    "feature": {
+                        "single": "Kvadratigi angulojn de tiu ĉi objekto.",
+                        "multiple": "Kvadratigi angulojn de tiuj ĉi objektoj."
+                    }
                 },
                 "key": "Q",
                 "annotation": {
-                    "vertex": "Kvadratigis unuopan angulon.",
-                    "line": "Kvadratigis angulojn de linio.",
-                    "area": "Kvadratigis angulojn de areo."
+                    "corner": {
+                        "single": "Kvadratigis angulon.",
+                        "multiple": "Kvadratigis kelkajn angulojn."
+                    },
+                    "feature": {
+                        "single": "Kvadratigis angulojn de la objekto.",
+                        "multiple": "Kvadratigis angulojn de la kelkaj objektoj."
+                    }
                 },
-                "end_vertex": "Tio ĉi ne povas esti kvadratigita, ĉar ĝi estas fina nodo.",
-                "square_enough": "Tio ĉi ne povas esti kvadratigita pli.",
-                "not_squarish": "Ĉi tiu ne povas esti kvadratigita, ĉar ĝi ne estas kvadratema.",
-                "too_large": "Ĉi tiu ne povas esti kvadratigita,  ĉar malsufiĉa parto de ĝi estas nune videbla.",
-                "connected_to_hidden": "Ĉi tiu ne povas esti kvadratigita, ĉar ĝi estas kunigita al kaŝita objekto.",
-                "not_downloaded": "Tio ĉi ne povas esti kvadratigita, ĉar parto de ĝi ankoraŭ ne estas elŝutita."
+                "multiple_blockers": {
+                    "multiple": "Ĝi ne povas esti kvadratigita pro diversaj kialoj."
+                },
+                "end_vertex": {
+                    "single": "Ĝi ne povas esti kvadratigita, ĉar ĝi estas fina nodo.",
+                    "multiple": "Ili ne povas esti kvadratigitaj, ĉar ili estas finaj nodoj."
+                },
+                "square_enough": {
+                    "single": "Ĝi ne povas esti pli kvadrata.",
+                    "multiple": "Ili ne povas esti pli kvadrataj."
+                },
+                "not_squarish": {
+                    "single": "Ĝi ne povas esti kvadratigita, ĉar ĝi ne estas kvadratema.",
+                    "multiple": "Ilii ne povas esti kvadratigitaj, ĉar ili ne estas kvadratemaj."
+                },
+                "too_large": {
+                    "single": "Ĝi ne povas esti kvadratigita, ĉar nesufiĉa parto de ĝi estas nune videbla.",
+                    "multiple": "Ili ne povas esti kvadratigitaj, ĉar nesufiĉaj partoj de ili estas nune videblaj."
+                },
+                "connected_to_hidden": {
+                    "single": "Ĝi ne povas esti kvadratigita, ĉar ĝi estas kunigita al kaŝita objekto.",
+                    "multiple": "Ili ne povas esti kvadratigitaj, ĉar ili estas kunigitaj al kaŝitaj objektoj."
+                },
+                "not_downloaded": {
+                    "single": "Ĝi ne povas esti kvadratigita, ĉar parto de ĝi ankoraŭ ne estas elŝutita.",
+                    "multiple": "Ili ne povas esti kvadratigitaj, ĉar partoj de ili ankoraŭ ne estas elŝutitaj."
+                }
             },
             "straighten": {
                 "title": "Rektigi",
@@ -161,9 +193,9 @@
                     "points": "Rektigis kelkajn punktojn.",
                     "line": "Rektigis linion."
                 },
-                "too_bendy": "Ĉi tiu linio ne povas esti rektigita, ĉar ĝi tro multe kurbiĝas.",
-                "connected_to_hidden": "Tio ĉi ne povas esti rektigita, ĉar ĝi estas kunigita al kaŝita objekto.",
-                "not_downloaded": "Tio ĉi ne povas esti rektigita, ĉar parto de ĝi ankoraŭ ne estas elŝutita."
+                "too_bendy": "Tiu ĉi linio ne povas esti rektigita, ĉar ĝi tro multe kurbiĝas.",
+                "connected_to_hidden": "Tiu ĉi linio ne povas esti rektigita, ĉar ĝi estas kunigita al kaŝita objekto.",
+                "not_downloaded": "Tiu ĉi linio ne povas esti rektigita, ĉar parto de ĝi ankoraŭ ne estas elŝutita."
             },
             "delete": {
                 "title": "Forigi",
@@ -533,11 +565,14 @@
             "hidden_warning": "{count} kaŝitaj objektoj",
             "hidden_details": "Ĉi tiuj objektoj estas nune kaŝitaj: {details}"
         },
-        "status": {
-            "error": "Ne povas konekti al API.",
-            "offline": "API estas nekonektita. Bonvolu reprovi poste.",
-            "readonly": "API estas nurlega. Vi devos atendi por konservi ŝanĝojn.",
-            "rateLimit": "API limigas anonimajn konektojn. Vi povas preventi tion per ensaluti."
+        "osm_api_status": {
+            "message": {
+                "error": "Ne eblas konekti kun la API OpenStreetMap. Viaj redaktoj estas sekure konservitaj loke. Kontrolu vian interretan konekton.",
+                "offline": "La API OpenStreetMap estas eksterrete. Viaj redaktoj estas sekure konservitaj loke. Bonvolu reprovi poste.",
+                "readonly": "La API OpenStreetMap estas nuntempe nurlega. Vi povas pluigi redakti, sed devos atendi por konservi viajn ŝanĝojn.",
+                "rateLimit": "La API OpenStreetMap limigas anonimajn konektojn. Bonvolu ensaluti."
+            },
+            "retry": "Reprovi"
         },
         "commit": {
             "title": "Alŝuti al OpenStreetMap",
@@ -630,7 +665,6 @@
         },
         "geocoder": {
             "search": "Serĉi tutmonde…",
-            "no_results_visible": "Neniuj rezultoj en videbla map-areo",
             "no_results_worldwide": "Neniuj rezultoj trovitaj"
         },
         "geolocate": {
@@ -890,6 +924,19 @@
                 }
             }
         },
+        "preferences": {
+            "title": "Preferoj",
+            "description": "Elektebloj",
+            "key": "P",
+            "privacy": {
+                "title": "Privateco",
+                "privacy_link": "Privateca politiko de redaktilo iD",
+                "third_party_icons": {
+                    "description": "Vidigi elementojn de eksteraj firmaoj",
+                    "tooltip": "Malmarku tion ĉi por ne ŝargi emblemojn el eksteraj firmaoj, kiel Vikimedia Komunejo, Facebook aŭ Twitter."
+                }
+            }
+        },
         "restore": {
             "heading": "Vi havas nekonservitajn ŝanĝojn",
             "description": "Ĉu vi volas restarigi nekonservitajn ŝanĝojn de la antaŭa redakta seanco?",
@@ -955,6 +1002,8 @@
         "splash": {
             "welcome": "Bonvenon al la OpenStreetMap-redaktilo “iD”",
             "text": "La redaktilo “iD” estas afabla, sed potenca ilo por kontribui al la plej bona libera mondmapo. Tio ĉi estas versio {version}. Pliaj informoj estas disponeblaj ĉe {website} kaj eblaj raporti erarojn per {github}.",
+            "privacy_update": "Nia privateca politiko estis lastatempe aktualigita.",
+            "privacy": "{updateMessage} Per uzi tiun ĉi programon, vi konsentas fari tion laŭ ĝia privateca politiko, kiu troviĝas ĉe {here}.",
             "walkthrough": "Malfermi gvidilon",
             "start": "Redakti nun"
         },
@@ -1341,7 +1390,48 @@
         "mapillary_map_features": {
             "title": "Map‑objektoj",
             "tooltip": "Map‑objektoj el Mapillary",
-            "request_data": "Peti datumojn"
+            "request_data": "Peti datumojn",
+            "construction": {
+                "flat": {
+                    "crosswalk_plain": "stratpasejo"
+                }
+            },
+            "marking": {
+                "discrete": {
+                    "crosswalk_zebra": "stratpasejo zebrostria"
+                }
+            },
+            "object": {
+                "banner": "flago",
+                "bench": "benko",
+                "bike_rack": "parkumejo bicikla",
+                "billboard": "reklam‑tabulego",
+                "catch_basin": "kloako pluvakva",
+                "cctv_camera": "supergarda kamerao",
+                "fire_hydrant": "hidranto",
+                "mailbox": "poŝtkesto (senda)",
+                "manhole": "stratkanala kovrilo",
+                "phone_booth": "telefonbudo",
+                "sign": {
+                    "advertisement": "reklam‑tabulego",
+                    "information": "informa signo",
+                    "store": "komerca elpendaĵo"
+                },
+                "street_light": "stratlampo",
+                "support": {
+                    "utility_pole": "kolono"
+                },
+                "traffic_cone": "trafik‑konuso",
+                "traffic_light": {
+                    "cyclists": "trafiklumoj por bicikloj",
+                    "general_horizontal": "trafiklumoj horizontalaj",
+                    "general_single": "trafiklumo",
+                    "general_upright": "trafiklumoj vertikalaj",
+                    "other": "trafiklumoj",
+                    "pedestrians": "trafiklumoj por piedirantoj"
+                },
+                "trash_can": "rubujo"
+            }
         },
         "mapillary": {
             "title": "Mapillary",
@@ -1619,6 +1709,8 @@
             "rules": {
                 "title": "Reguloj"
             },
+            "user_resolved_issues": "Problemoj solvitaj per viaj redaktoj",
+            "warnings_and_errors": "Avertoj kaj eraroj",
             "no_issues": {
                 "message": {
                     "everything": "Ĉio ŝajnas ĝuste",
@@ -1690,10 +1782,10 @@
                     "reference": "Konturoj de konstruaĵoj ne intersekciĝu, escepte se sur malsamaj tavoloj."
                 },
                 "building-highway": {
-                    "reference": "Vojoj intersekcantaj kun konstruaĵoj estu pontoj, tuneloj, tegmentoj aŭ enirejoj."
+                    "reference": "Vojoj intersekcantaj kun konstruaĵoj estu pontoj, tuneloj aŭ sur malsamaj tavoloj."
                 },
                 "building-railway": {
-                    "reference": "Fervojoj intersekcantaj kun konstruaĵoj estu pontoj aŭ tuneloj."
+                    "reference": "Relvojoj intersekcantaj kun konstruaĵoj estu pontoj, tuneloj aŭ sur malsamaj tavoloj."
                 },
                 "building-waterway": {
                     "reference": "Akvofluoj intersekcantaj kun konstruaĵoj uzu tunelojn aŭ malsamajn tavolojn."
@@ -1878,6 +1970,10 @@
                     }
                 }
             },
+            "unclosed_multipolygon_part": {
+                "message": "{feature} havas nefermitan parton",
+                "reference": "Ĉiuj enaj kaj eksteraj partoj de plurangularoj havu konektitajn finpunktojn."
+            },
             "unsquare_way": {
                 "title": "Neortaj anguloj (maksimume {val}°)",
                 "message": "{feature} ne havas ortajn angulojn",
@@ -1891,6 +1987,17 @@
                 "reference": "Iuj objektoj ne estu unuopaj punktoj."
             },
             "fix": {
+                "add_a_bridge": {
+                    "title": "Aldoni ponton",
+                    "annotation": "Aldonis ponton."
+                },
+                "add_a_tunnel": {
+                    "title": "Aldoni tunelon",
+                    "annotation": "Aldonis tunelon."
+                },
+                "address_the_concern": {
+                    "title": "Solvi tiun ĉi problemon"
+                },
                 "connect_almost_junction": {
                     "annotation": "Konektis tre proksimajn objektojn."
                 },
@@ -2002,9 +2109,6 @@
                     "title": "Uzi konsilindajn etikedojn",
                     "annotation": "Uzis konsilindajn etikedojn."
                 },
-                "use_bridge_or_tunnel": {
-                    "title": "Uzi ponton aŭ tunelon"
-                },
                 "use_different_layers": {
                     "title": "Uzi malsamajn tavolojn"
                 },
@@ -2013,9 +2117,6 @@
                 },
                 "use_different_levels": {
                     "title": "Uzi malsamajn etaĝojn"
-                },
-                "use_tunnel": {
-                    "title": "Uzi tunelon"
                 }
             }
         },
@@ -2313,9 +2414,11 @@
                 },
                 "display_options": {
                     "title": "Agordoj pri vido",
-                    "background": "Montri agordojn pri fono",
+                    "background": "Baskuli panelon de fona fotaro",
                     "background_switch": "Baskuli reen al antaŭa fono",
-                    "map_data": "Montri agordojn pri map-datumoj",
+                    "map_data": "Baskuli panelon de map‑datumoj",
+                    "issues": "Baskuli panelon de problemoj",
+                    "preferences": "Baskuli panelon de preferoj",
                     "fullscreen": "Enigi plenekranan reĝimon",
                     "sidebar": "Baskuli flankbreton",
                     "wireframe": "Baskuli map-plenigon",
@@ -2331,9 +2434,9 @@
                     "search": "Trovi objektojn kun serĉata teksto"
                 },
                 "with_selected": {
-                    "title": "Kun elektita objekto",
+                    "title": "Kun elektitaj objektoj",
                     "edit_menu": "Baskuli redakt-menuon",
-                    "zoom_to": "Pligrandigi al elektita objekto"
+                    "zoom_to": "Pligrandigi al elektitaj objektoj"
                 },
                 "vertex_selected": {
                     "title": "Kun elektita nodo",
@@ -2348,12 +2451,10 @@
                 "title": "Redaktado",
                 "drawing": {
                     "title": "Desegni",
-                    "focus_add_feature": "Baskuli al la objekt-serĉilo",
                     "add_point": "‘Aldoni punkton’-reĝimo",
                     "add_line": "‘Aldoni linion’-reĝimo",
                     "add_area": "‘Aldoni areon’-reĝimo",
                     "add_note": "‘Aldoni rimarkon’-reĝimo",
-                    "add_favorite": "Aldoni elstarigitan objekton",
                     "place_point": "Enmeti punkton aŭ rimarkon",
                     "disable_snap": "Premteni por ne kapti punktojn",
                     "stop_line": "Fini desegni linion aŭ areon"
@@ -2509,6 +2610,7 @@
                         }
                     },
                     "placeholder": "Nedifinita",
+                    "terms": "aliro,eniro,enveturo,publika",
                     "types": {
                         "access": "Ĉiuj",
                         "bicycle": "Bicikloj",
@@ -2518,7 +2620,8 @@
                     }
                 },
                 "access_simple": {
-                    "label": "Aliro permesata"
+                    "label": "Aliro permesata",
+                    "terms": "aliro,eniro,enveturo,publika,privata"
                 },
                 "addr/interpolation": {
                     "label": "Maniero",
@@ -2563,7 +2666,8 @@
                         "suburb": "Suburbo",
                         "suburb!jp": "Kvartalo",
                         "unit": "Unueco"
-                    }
+                    },
+                    "terms": "adreso,domnumero,stratnomo"
                 },
                 "admin_level": {
                     "label": "Administra nivelo"
@@ -2612,7 +2716,8 @@
                     "label": "Produktaĵoj"
                 },
                 "air_conditioning": {
-                    "label": "Klimatizo"
+                    "label": "Klimatizo",
+                    "terms": "aerkondiĉigilo,klimatizilo,malvarmigilo"
                 },
                 "amenity": {
                     "label": "Speco"
@@ -2627,7 +2732,8 @@
                     "label": "Por bestoj"
                 },
                 "architect": {
-                    "label": "Arĥitekto"
+                    "label": "Arĥitekto",
+                    "terms": "arĥitekto,arhhitekto,arhxitekto,arkitekto,konstruisto"
                 },
                 "area/highway": {
                     "label": "Speco"
@@ -2644,11 +2750,15 @@
                 "attraction": {
                     "label": "Speco"
                 },
+                "baby_seat": {
+                    "label": "Por beboj"
+                },
                 "backrest": {
                     "label": "Seĝodorso"
                 },
                 "bar": {
-                    "label": "Drinkejo"
+                    "label": "Drinkejo",
+                    "terms": "trinkbufedo,koktelejo,alkoholejo,drinkĉambro,trinkejo,brandejo,bufedo,taverno"
                 },
                 "barrier": {
                     "label": "Speco"
@@ -2674,13 +2784,24 @@
                     "label": "Servo(j)"
                 },
                 "bench": {
-                    "label": "Benko"
+                    "label": "Benko",
+                    "terms": "seĝo,segho,segxo,sidilo"
                 },
                 "bicycle_parking": {
                     "label": "Speco"
                 },
                 "bin": {
-                    "label": "Rubujo"
+                    "label": "Rubujo",
+                    "terms": "balaaĵujo,balaaĵkesto,rubkesto,forĵetaĵujo"
+                },
+                "blind": {
+                    "label": "Aliro por blinduloj",
+                    "options": {
+                        "limited": "Limigita",
+                        "no": "Ne",
+                        "yes": "Jes"
+                    },
+                    "terms": "blinduloj,senviduloj,neviduloj,malviduloj,senokululoj"
                 },
                 "blood_components": {
                     "label": "Sang-konsistaĵoj",
@@ -2694,6 +2815,9 @@
                 "board_type": {
                     "label": "Speco"
                 },
+                "bollard": {
+                    "label": "Speco"
+                },
                 "booth": {
                     "label": "Budo"
                 },
@@ -2704,10 +2828,12 @@
                     "label": "Speco"
                 },
                 "brand": {
-                    "label": "Marko"
+                    "label": "Marko",
+                    "terms": "marko,firmao,reto"
                 },
                 "brewery": {
-                    "label": "Verŝataj bieroj"
+                    "label": "Verŝataj bieroj",
+                    "terms": "verŝata,krana,barela"
                 },
                 "bridge": {
                     "label": "Speco",
@@ -2717,18 +2843,22 @@
                     "label": "Speco"
                 },
                 "building": {
-                    "label": "Konstruaĵo"
+                    "label": "Konstruaĵo",
+                    "terms": "strukturo"
                 },
                 "building/levels/underground": {
                     "label": "Kiom da subteraj etaĝoj",
-                    "placeholder": "2, 4, 6…"
+                    "placeholder": "2, 4, 6…",
+                    "terms": "keloj,subteraj etaĝoj,subetaĝoj"
                 },
                 "building/levels_building": {
                     "label": "Etaĝoj de konstruaĵo",
-                    "placeholder": "2, 4, 6…"
+                    "placeholder": "2, 4, 6…",
+                    "terms": "etaĝoj,etaghoj,etagxoj,niveloj"
                 },
                 "building/material": {
-                    "label": "Materialo"
+                    "label": "Materialo de fasado",
+                    "terms": "materialo"
                 },
                 "building_area": {
                     "label": "Konstruaĵo"
@@ -2757,7 +2887,8 @@
                 },
                 "capacity": {
                     "label": "Enhaveco",
-                    "placeholder": "50, 100, 200…"
+                    "placeholder": "50, 100, 200…",
+                    "terms": "nombro da ejoj"
                 },
                 "cash_in": {
                     "label": "Enpagoj"
@@ -2765,8 +2896,13 @@
                 "castle_type": {
                     "label": "Speco"
                 },
+                "changing_table": {
+                    "label": "Tablo por ŝanĝi vindotukojn"
+                },
                 "charge_fee": {
-                    "label": "Kvanto da pago"
+                    "label": "Kvanto da pago",
+                    "placeholder": "1 EUR, 5 USD, 10 JPY…",
+                    "terms": "pago,kotizo"
                 },
                 "charge_toll": {
                     "label": "Kvanto da vojimposto"
@@ -3170,7 +3306,6 @@
                     "label": "Apogrelo"
                 },
                 "hashtags": {
-                    "label": "Sugestataj ŝlosilvortoj",
                     "placeholder": "#ekzemplo"
                 },
                 "healthcare": {
@@ -3504,7 +3639,6 @@
                     "label": "Reto"
                 },
                 "network_bicycle": {
-                    "label": "Speco de reto",
                     "options": {
                         "icn": "Interŝtata",
                         "lcn": "Loka",
@@ -3514,7 +3648,6 @@
                     "placeholder": "Loka, regiona, ŝtata, interŝtata"
                 },
                 "network_foot": {
-                    "label": "Speco de reto",
                     "options": {
                         "iwn": "Interŝtata",
                         "lwn": "Loka",
@@ -3524,7 +3657,6 @@
                     "placeholder": "Loka, regiona, ŝtata, interŝtata"
                 },
                 "network_horse": {
-                    "label": "Speco de reto",
                     "options": {
                         "ihn": "Interŝtata",
                         "lhn": "Loka",
@@ -4424,8 +4556,8 @@
                     "terms": "stratnomo,domnumero,numero"
                 },
                 "advertising/billboard": {
-                    "name": "Anonctabulego",
-                    "terms": "anonctabulo,reklamo,spamo,afiŝo,afisho,afisxo"
+                    "name": "Reklam‑tabulego",
+                    "terms": "anonctabulo,reklamo,spamo,afiŝo,afisho,afisxo,reklamtabulo,reklamtabulego,anonctabulego"
                 },
                 "advertising/column": {
                     "name": "Reklam-kolono",
@@ -4454,10 +4586,6 @@
                     "name": "Telfero vara",
                     "terms": "kablotransporto,ŝarĝolifto,shargholifto,sxargxolifto"
                 },
-                "aerialway/j-bar": {
-                    "name": "Skitelfero unu-persona (J-forma)",
-                    "terms": "aertelfero,seĝa telfero,segha telfero,segxa telfero"
-                },
                 "aerialway/magic_carpet": {
                     "name": "Ŝtuparlifto skiada",
                     "terms": "shtuparlifto skiada,sxtuparliftoskiada,skitelfero tapiŝa,magia tapiŝo,magia tapisxo,magia tapisho"
@@ -4477,13 +4605,6 @@
                 "aerialway/rope_tow": {
                     "name": "Skitelfero ŝnur-tira",
                     "terms": "shnurtira skitelfero,sxnurtira skitelfero,skilifto ŝnur-tira"
-                },
-                "aerialway/station": {
-                    "name": "Kablovoja stacio"
-                },
-                "aerialway/t-bar": {
-                    "name": "Skitelfero du-persona (T-forma)",
-                    "terms": "aertelfero,seĝa telfero,segha telfero,segxa telfero"
                 },
                 "aerialway/zip_line": {
                     "name": "Ŝnurega deglitejo",
@@ -4622,17 +4743,9 @@
                     "name": "Kafejo",
                     "terms": "kafo,teo,trinkejo,cafe"
                 },
-                "amenity/car_pooling": {
-                    "name": "Kunvetura haltejo (carpooling)",
-                    "terms": "carpooling,petveturado,kunveturado"
-                },
                 "amenity/car_rental": {
                     "name": "Aŭtomobil-pruntejo",
                     "terms": "automobilpruntejo,auxtomobilpruntejo,aŭtopruntejo,autopruntejo,auxtopruntejo,aŭtoluigadejo,autoluigadejo,auxtoluigadejo"
-                },
-                "amenity/car_sharing": {
-                    "name": "Aŭtomobil-pruntejo komunuma (organizita kunveturado)",
-                    "terms": "automobilpruntejo,auxtumobilpruntejo,carsharing,car-sharing,aŭtopruntejo"
                 },
                 "amenity/car_wash": {
                     "name": "Aŭtopurigejo",
@@ -4821,10 +4934,6 @@
                 "amenity/internet_cafe": {
                     "name": "Retkafejo",
                     "terms": "interreta kafejo,retumejo"
-                },
-                "amenity/karaoke": {
-                    "name": "Karaokeejo",
-                    "terms": "karaokeo,kantado"
                 },
                 "amenity/kindergarten": {
                     "name": "Infanvartejo (ISCED 0)",
@@ -5329,10 +5438,6 @@
                     "name": "Areo",
                     "terms": "areo"
                 },
-                "area/highway": {
-                    "name": "Vojpavimo",
-                    "terms": "pavimo,kovraĵo,surfaco"
-                },
                 "attraction": {
                     "name": "Amuzo"
                 },
@@ -5360,21 +5465,9 @@
                     "name": "Fantoma trajno (allogaĵo)",
                     "terms": "dark ride,timiga trajno,promenveturo"
                 },
-                "attraction/drop_tower": {
-                    "name": "Defala turo (allogaĵo)",
-                    "terms": "turo,drop tower"
-                },
                 "attraction/maze": {
                     "name": "Labirinto",
                     "terms": "vojenigmo,enigmo"
-                },
-                "attraction/pirate_ship": {
-                    "name": "Pirata ŝipo (allogaĵo)",
-                    "terms": "ŝipo,shipo,sxipo,piratŝipo"
-                },
-                "attraction/river_rafting": {
-                    "name": "Malsuprenflosado",
-                    "terms": "flosado,akva promenveturo"
                 },
                 "attraction/roller_coaster": {
                     "name": "Onda fervojo",
@@ -5838,9 +5931,6 @@
                     "name": "Varmizolaĵista oficejo",
                     "terms": "izolaĵo,izoli,varmizolajho,izolojho"
                 },
-                "craft/jeweler": {
-                    "name": "Juvelista laborejo"
-                },
                 "craft/joiner": {
                     "name": "Laborejo de lignaĵisto",
                     "terms": "lignaĵisto,lignisto"
@@ -5855,9 +5945,6 @@
                 "craft/metal_construction": {
                     "name": "Metal-konstruaĵista laborejo",
                     "terms": "metalkonstruaĵo,metalkonstruajxo,metalkonstruajho"
-                },
-                "craft/optician": {
-                    "name": "Okulvitristejo"
                 },
                 "craft/painter": {
                     "name": "Dom-kolorigista oficejo",
@@ -5882,10 +5969,6 @@
                 "craft/plumber": {
                     "name": "Tubista oficejo",
                     "terms": "tubisto,plumbisto,hidraŭlikisto"
-                },
-                "craft/pottery": {
-                    "name": "Potfarista laborejo",
-                    "terms": "potfaristo,portfarado,ceramikado"
                 },
                 "craft/rigger": {
                     "name": "Rigilarista laborejo",
@@ -6148,9 +6231,6 @@
                 "healthcare/speech_therapist": {
                     "name": "Logopediisto",
                     "terms": "ortofona kuracisto"
-                },
-                "highway": {
-                    "name": "Vojo"
                 },
                 "highway/bridleway": {
                     "name": "Ĉeval-vojo",
@@ -6530,18 +6610,6 @@
                     "name": "Vojkruciĝo",
                     "terms": "vojkrucigho,vojkrucigxo,vojnodo,kruciĝo,krucigo"
                 },
-                "junction/circular": {
-                    "name": "Trafikcirklo (pasrajto por alveturantaj)"
-                },
-                "junction/jughandle": {
-                    "name": "Vojnodo (jughandle)"
-                },
-                "junction/roundabout": {
-                    "name": "Trafikcirklo (pasrajto por enaj)"
-                },
-                "landuse": {
-                    "name": "Utilkampo"
-                },
                 "landuse/allotments": {
                     "name": "Familiaj ĝardenoj",
                     "terms": "ĝardenoj,ghardenoj,gxardenoj,laborista ĝardeno,etĝardeno,familia ĝardeno,parcelo"
@@ -6706,9 +6774,6 @@
                     "name": "Vintrosporta centro",
                     "terms": "vintrosportoj,skiado,neĝtabulado,turisma centro"
                 },
-                "leisure": {
-                    "name": "Ripozejo"
-                },
                 "leisure/adult_gaming_centre": {
                     "name": "Hazardludejo (enĵet-maŝinoj)",
                     "terms": "kazino,vetludejo,monludejo,vetaŭtomato"
@@ -6760,10 +6825,6 @@
                 "leisure/escape_game": {
                     "name": "Ĉambro de enigmoj",
                     "terms": "chambro de enigmoj,cxambro de enigmoj,enigma ĉambro,eskapa ĉambro"
-                },
-                "leisure/firepit": {
-                    "name": "Lignofajrejo",
-                    "terms": "fajrejo"
                 },
                 "leisure/fishing": {
                     "name": "Loko por fiŝhokado",
@@ -7045,9 +7106,6 @@
                     "name": "Linio",
                     "terms": "linio"
                 },
-                "man_made": {
-                    "name": "Artefarita objekto"
-                },
                 "man_made/adit": {
                     "name": "Mineja koridoro",
                     "terms": "minejkoridoro,minejo horizontala,minejgalerio,galerio"
@@ -7067,10 +7125,6 @@
                 "man_made/breakwater": {
                     "name": "Ond-rompilo",
                     "terms": "ondorompilo,ondrompilo,digo,ĝeto"
-                },
-                "man_made/bridge": {
-                    "name": "Ponto",
-                    "terms": "viadukto"
                 },
                 "man_made/bunker_silo": {
                     "name": "Stokejo senkovra",
@@ -7240,10 +7294,6 @@
                     "name": "Turo observada",
                     "terms": "observturo,vidturo"
                 },
-                "man_made/tunnel": {
-                    "name": "Tunelo",
-                    "terms": "tunelo,subtera vojo"
-                },
                 "man_made/wastewater_plant": {
                     "name": "Akvopurigejo",
                     "terms": "akvpurigejo,purigejo"
@@ -7291,9 +7341,6 @@
                 "military/trench": {
                     "name": "Tranĉeo armea",
                     "terms": "trancheo,trancxeo,foso"
-                },
-                "natural": {
-                    "name": "Natura objekto"
                 },
                 "natural/bare_rock": {
                     "name": "Roko (areo)",
@@ -7411,10 +7458,6 @@
                     "name": "Baseno (artefarita lageto)",
                     "terms": "akvo,akvejo,akvujo,lageto,lago,rezervujo"
                 },
-                "natural/water/canal": {
-                    "name": "Kanalo",
-                    "terms": "akvovojo"
-                },
                 "natural/water/lake": {
                     "name": "Lago",
                     "terms": "akvujo.akvejo,laguno,lageto"
@@ -7431,14 +7474,6 @@
                     "name": "Lago artefarita",
                     "terms": "akvorezervujo,akvujo,akvoenlasejo"
                 },
-                "natural/water/river": {
-                    "name": "Rivero",
-                    "terms": "rivereto,torento,akvofluo"
-                },
-                "natural/water/stream": {
-                    "name": "Rivereto",
-                    "terms": "rivero,akvofluo,torento"
-                },
                 "natural/water/wastewater": {
                     "name": "Baseno de akvopurigejo",
                     "terms": "akvopurigejo"
@@ -7446,10 +7481,6 @@
                 "natural/wetland": {
                     "name": "Malsekejo",
                     "terms": "marĉo,marcho,marcxo,torfejo,kotejo"
-                },
-                "natural/wood": {
-                    "name": "Arbaro (nekultivata)",
-                    "terms": "arbaro,forsto,ĝangalo,praarbaro"
                 },
                 "noexit/yes": {
                     "name": "Senelirejo",
@@ -7792,9 +7823,6 @@
                     "name": "Balotejo (portempa loko)",
                     "terms": "baloto,voĉdonejo,elektejo"
                 },
-                "power": {
-                    "name": "Elektr-energia objekto"
-                },
                 "power/cable/underground": {
                     "name": "Elektra kondukilo subtera",
                     "terms": "lineo,kablo,kondukilo"
@@ -8014,9 +8042,6 @@
                 "public_transport/stop_position_trolleybus": {
                     "name": "Haltejo trolebusa (haltloko - ŝoseo)",
                     "terms": "troleo"
-                },
-                "railway": {
-                    "name": "Fervojo"
                 },
                 "railway/abandoned": {
                     "name": "Eksa relvojo (neekzistanta)",
@@ -8756,9 +8781,6 @@
                     "name": "Datum-centro",
                     "terms": "datumcentro,datencentro"
                 },
-                "tourism": {
-                    "name": "Turismo"
-                },
                 "tourism/alpine_hut": {
                     "name": "Montara rifuĝejo",
                     "terms": "montara kabano,alpisma kabano,kabano,ŝirmejo,vintrostacio,rifuĝejo"
@@ -9106,9 +9128,6 @@
                     "name": "Akvovojo",
                     "terms": "akvovojo,kanalo"
                 },
-                "waterway": {
-                    "name": "Akvofluo"
-                },
                 "waterway/boatyard": {
                     "name": "Ŝipkonstruejo",
                     "terms": "shipkonstruejo,sxipkonstruejo,ŝipfarejo,ŝipriparejo,boatkonstruejo,boatfarejo,boatriparejo"
@@ -9252,20 +9271,6 @@
                 "description": "Satelita kaj aera fotaroj.",
                 "name": "Mapbox Satellite"
             },
-            "Maxar-Premium": {
-                "attribution": {
-                    "text": "Kondiĉoj kaj rimarkoj"
-                },
-                "description": "Maxar Premium estas kunmetaĵo de Maxar-bazmapo kun kelkaj regionoj plenigitaj per +Vivid fotaro je distingivo 50cm aŭ pli bona kaj aktualigata pli ofte.",
-                "name": "Maxar: detala fotaro (beta)"
-            },
-            "Maxar-Standard": {
-                "attribution": {
-                    "text": "Kondiĉoj kaj rimarkoj"
-                },
-                "description": "Maxar Standard estas prizorgata fotaro ampleksanta 86% da tero je distingivo 30–60cm (se disponebla), danke al programo Landsat. Mezuma aĝo de fotaro estas 2,31a, sed kelkaj areoj estas aktualigataj dufoje en jaro.",
-                "name": "Maxar: norma fotaro (beta)"
-            },
             "OSM_Inspector-Addresses": {
                 "attribution": {
                     "text": "© Geofabrik GmbH, kontribuintoj de OpenStreetMap, CC-BY-SA"
@@ -9326,6 +9331,9 @@
                 "description": "Flave = publikaj map-datumoj de Usona popolnombrado. Ruĝe = datumoj ne trovitaj en OpenStreetMap",
                 "name": "TIGER Roads 2018"
             },
+            "US-TIGER-Roads-2019": {
+                "name": "TIGER Roads 2019"
+            },
             "USDA-NAIP": {
                 "description": "Ĉi tiu jara ortfotmapo DOQQ de «National Agriculture Imagery Program» (NAIP) por ĉiu kontinenta subŝtato de Usono.",
                 "name": "National Agriculture Imagery Program"
@@ -9351,6 +9359,9 @@
                     "text": "Farita per rimedoj de Brussels UrbIS®© - distribuo kaj kopirajto al CIRB"
                 },
                 "name": "UrbIS-Ortho 2018"
+            },
+            "UrbISOrtho2019": {
+                "name": "UrbIS-Ortho 2019"
             },
             "UrbisAdmFR": {
                 "attribution": {
@@ -9661,57 +9672,117 @@
             }
         },
         "community": {
-            "bw-facebook": {
-                "name": "Mapping Botswana ĉe Facebook",
-                "description": "Facebook-paĝo pri OpenStreetMap en Bocvano"
+            "Bay-Area-OpenStreetMappers": {
+                "name": "Bay Area OpenStreetMappers",
+                "description": "Plibonigi OpenStreetMap en la regiono apud Golfo de San-Francisko",
+                "extendedDescription": "Celo de tiu ĉi grupo estas kunigi OpenStreetMap-komunumon en la regiono apud Golfo de San-Francisko. Niaj eventoj estas malfermitaj al ĉiuj: ŝatantoj de malfermkoda programaro, biciklistoj, GIS-profesiuloj, geokaŝ-ludantoj kaj aliuloj. Ĉiu, kiu interesiĝas pri mapoj, mapigado kaj liberaj map-datumoj povas aligi la grupon kaj alveni niajn eventojn."
             },
-            "bw-twitter": {
-                "name": "Mapping Botswana ĉe Twitter",
-                "description": "Twitter-paĝo pri OpenStreetMap en Bocvano"
+            "Central-Pennsylvania-OSM": {
+                "name": "Central Pennsylvania OSM",
+                "description": "Interreta mapiga komunumo en State College, Pensilvanio"
             },
-            "cape-coast-youthmappers": {
-                "name": "UCC YouthMappers",
-                "description": "Sekvu nin ĉe Twitter: {url}",
-                "extendedDescription": "Oficiala Twitter-paĝo pri sekcio de Junaj Mapigistoj de Universitato de Cape Coast, Ganao. Ni ŝatas mapojn, malfermajn datumojn kaj helpi al senfortuloj."
+            "Code-for-San-Jose-Slack": {
+                "name": "Code for San Jose ĉe Slack",
+                "description": "Bonvenon ĉiuj! Registriĝu ĉe {signupUrl} kaj sekve aliĝu al la kanalo #osm."
             },
-            "osm-gh-facebook": {
-                "name": "OpenStreetMap Ghana ĉe Facebook",
-                "description": "Facebook-grupo por homoj interesantaj pri OpenStreetMap.",
-                "extendedDescription": "Mapigistoj de Ganao, promociantaj OpenStreetMap kaj HOT-projektojn (Humanitarian OpenStreetMap Team) en Ganao. Aliĝu nin."
+            "Dallas-Fort-Worth-OSM": {
+                "name": "Dallas-Fort Worth OSM",
+                "description": "Grupo de uzantoj de OpenStreetMap en Dallas-Fort Worth",
+                "extendedDescription": "Dallas, Fort Worth kaj ĉiuj urboj inter estas plenaj da kreemaj kaj teĥnologi-lertaj homoj. La celo de tiu ĉi grupo estas trovi novajn manierojn por uzi mirindajn kapablojn de OSM."
             },
-            "osm-gh-twitter": {
-                "name": "OpenStreetMap Ghana ĉe Twitter",
-                "description": "Sekvu nin ĉe Twitter: {url}"
+            "GeoPhilly": {
+                "name": "GeoPhilly",
+                "description": "Renkontiĝo por map-ŝatantoj proksime de Filadelfio",
+                "extendedDescription": "GeoPhilly kunigas programistojn, geografiistoj, fanatikuloj de datumoj kaj malfermkoda programaro, lertuloj kaj map-ŝatantoj en la komuna amo al mapoj kaj historioj pri ili. Se vi uzas mapojn en laboro aŭ simple volas sciiĝi pli, tiu ĉi renkontiĝo estas por vi! Niaj renkontiĝoj estas malfermitaj, amikecaj, instruantaj kaj sociaj kaj temas pri klaĉado, teĥnika babilado kaj eĉ laboro. Alvenu por krei diversan kaj inspiran mapigan komunumon en Filadelfio kun ni!"
             },
-            "talk-gh": {
-                "name": "Dissendolisto talk-gh",
-                "description": "Talk-gh estas oficiala dissendolisto por la OSM-komunumo en Ganao."
+            "LATAM-Facebook": {
+                "name": "OpenStreetMap Latam Facebook",
+                "description": "OpenStreetMap Latam ĉe Facebook"
             },
-            "osm-mg-facebook": {
-                "name": "Facebook-grupo OpenStreetMap Madagascar",
-                "description": "Facebook-grupo por homoj interesantaj pri OpenStreetMap en Madagaskaro"
+            "LATAM-Telegram": {
+                "name": "OpenStreetMap Latam Telegram",
+                "description": "Telegram-grupo por OpenStreetMap en Latinameriko"
             },
-            "talk-mg": {
-                "name": "Dissendolisto talk-mg",
-                "description": "Loko por mapigistoj, komunumoj kaj uzantoj de OpenStreetMap en Madagaskaro por kunhavigi kaj diskuti."
+            "LATAM-Twitter": {
+                "name": "OpenStreetMap Latam Twitter",
+                "description": "Sekvu nin ĉe Twitter ĉe {url}"
+            },
+            "MapMinnesota": {
+                "name": "Map Minnesota",
+                "description": "Mapigistoj kaj ŝatantoj de OpenStreetMap en Mineapolo kaj Saint Paul",
+                "extendedDescription": "Konektante ŝatantoj de OpenStreetMap en Minesoto kaj Ĝemelaj Urboj!"
+            },
+            "Mapping-DC-meetup": {
+                "name": "Mapping DC",
+                "description": "Plibonigi OpenStreetMap en la Distrikto Kolumbio",
+                "extendedDescription": "Ni estas grupo da helpemaj mapigistoj, kiuj celas plibonigi OpenStreetMap en la regiono de la Distrikto Kolombio. Ni ankaŭ volas instrui aliajn pri la OSM-ĉirkaŭsistemo, analizo de datumoj, kartografio kaj GIS. Ni renkontas ĉiumonate por koncentriĝi al kelka are de nia urbo."
+            },
+            "Maptime-ME-meetup": {
+                "name": "MaptimeME",
+                "description": "Mapigistoj kaj uzantoj de OpenStreetMap proksime de Portlando (Majno)",
+                "extendedDescription": "«Maptime» estas tempo por mapigado. Nia celo estas ebligi al ĉiu lerni pri kartografio per liveri spacon por kunlabora lernado, esplorado kaj map-farado uzante mapigajn ilojn kaj teĥnologiojn."
+            },
+            "Nottingham-OSM-pub-meetup": {
+                "name": "Ĉiumonata taverna renkontiĝo en East Midlands (Nottingham)",
+                "description": "Sociaj renkontiĝoj por uzantoj kaj mapigistoj en East Midlands",
+                "extendedDescription": "La grupo renkontiĝas de post marto 2011, komence en Nottingham kaj lastatempe en Derby kaj iam ie en East Midlands. Tiuj ĉi renkontiĝoj estas sociaj, sed ili estas bonegaj okazoj por demandi pri OpenStreetMap aŭ loke aŭ ĝenerale. Somere ni kutime iomete mapigas proksime de renkontejo. La grupo specife interesiĝas pri mapigi publikajn alirajn vojojn kaj renkontiĝoj de tempo al tempo temas pri tio."
             },
             "OSM-BGD-facebook": {
                 "name": "OpenStreetMap Bangladesh",
                 "description": "Plibonigi OpenStreetMap en Bangladeŝo",
                 "extendedDescription": "Ĉu vi mapigas en Bangladeŝo? Ĉu vi havas demandojn aŭ volas kuniĝi al tiu ĉi komunumo? Aliĝu al ni ĉe {url}. Bonvenon ĉiuj!"
             },
-            "OSM-India-facebook": {
-                "name": "OpenStreetMap India - Participatory neighborhood mapping",
-                "description": "Plibonigi OpenStreetMap en Barato",
-                "extendedDescription": "Ĉu vi mapigas en Barato? Ĉu vi havas demandojn aŭ volas kuniĝi al tiu ĉi komunumo? Aliĝu al ni ĉe {url}. Bonvenon ĉiuj!"
+            "OSM-Boston": {
+                "name": "OpenStreetMap Boston",
+                "description": "Mapigistoj kaj uzantoj de OpenStreetMap proksime de Bostono",
+                "extendedDescription": "OpenStreetMap estas libera kaj malferma kiel vikio mapo de la mondo kun centoj da miloj da kontribuantoj ĉiutage de homoj kiel vi. Redakti mapon estas simpla kaj amuza! Kunigu nin aŭ eksterdome aŭ maleksterdome en nia peno por krei la plej bonan mapon de areo de Bestono kaj la resto de mondo!"
             },
-            "OSM-india-mailinglist": {
-                "name": "Dissendolisto OpenStreetMap India",
-                "description": "Talk-in estas oficiala dissendolisto por la OSM-komunumo en Barato"
+            "OSM-CA-Slack": {
+                "name": "OSM-CA Slack",
+                "description": "Bonvenon ĉiuj! Aliĝu al ni ĉe {signupUrl}."
             },
-            "OSM-india-twitter": {
-                "name": "OpenStreetMap India ĉe Twitter",
-                "description": "Apenaŭ unu pepaĵo de vi: {url}"
+            "OSM-CU-telegram": {
+                "name": "OSM Cuba ĉe Telegram",
+                "description": "Telegram-kanalo OpenStreetMap Kubo"
+            },
+            "OSM-Central-Salish-Sea": {
+                "name": "OpenStreetMap Central Salish Sea",
+                "description": "Mapigistoj kaj uzantoj de OpenStreetMap proksime de Mount Vernon (Vaŝingtonio)",
+                "extendedDescription": "OpenStreetMap estas mapo de la mondo farata de homoj kiel vi. Ĝi estas mapo, kiun vi kreas kaj kiu estas donata senpage kiel Vikipedio. Rigardu osm.org por pli da informo. Ni renkontas por pridiskuti mapojn, fari mapojn kaj ĝui!"
+            },
+            "OSM-Chattanooga": {
+                "name": "OSM Chattanooga",
+                "description": "Grupo de uzantoj de OpenStreetMap en Chattanooga"
+            },
+            "OSM-Colorado": {
+                "name": "OpenStreetMap Colorado",
+                "description": "Mapigistoj kaj uzantoj de OpenStreetMap en la subŝtato Koloradio",
+                "extendedDescription": "OpenStreetMap (OSM) Colorado estas loka kunlaboro de homoj, kiuj interesiĝas pri kontribui al krei liberajn mapojn. Ni instigas ĉiujn niajn mapigistojn al organizi aŭ sugesti mapigajn eventojn en Koloradio. Tiuj eventoj povas esti simplaj renkontiĝoj, komencanta aŭ sperta instruado pri OSM, aŭ komuna mapigado."
+            },
+            "OSM-Discord": {
+                "name": "OpenStreetMap ĉe Discord",
+                "description": "Kontaktu kun aliaj mapigistoj per Discord"
+            },
+            "OSM-ES-mailinglist": {
+                "name": "Dissendolisto talk-es",
+                "description": "Dissendolisto por diskuti pri OpenStreetMap en Hispanujo"
+            },
+            "OSM-ES-telegram": {
+                "name": "@OSMes ĉe Telegram",
+                "description": "Telegram-kanalo OpenStreetMap Hispanujo"
+            },
+            "OSM-Facebook": {
+                "name": "OpenStreetMap ĉe Facebook",
+                "description": "Ŝatu nin ĉe Facebook por akiri novaĵojn pri OpenStreetMap."
+            },
+            "OSM-IDN-facebook": {
+                "name": "OpenStreetMap Indonesia",
+                "description": "Plibonigi OpenStreetMap en Indonezio",
+                "extendedDescription": "Ĉu vi mapigas en Indonezio? Ĉu vi havas demandojn aŭ volas kuniĝi al tiu ĉi komunumo? Aliĝu al ni ĉe {Url}. Bonvenon ĉiuj!"
+            },
+            "OSM-IRC": {
+                "name": "OpenStreetMap ĉe IRC",
+                "description": "Aliĝu al #osm ĉe irc.oftc.net (pordo 6667)"
             },
             "OSM-India-Puducherry-Facebook": {
                 "name": "Free Software Hardware Movement - Facebook",
@@ -9723,26 +9794,20 @@
                 "description": "Riot-grupo de FSHM por diskuti, kunhavigi kaj samtempigi mapigan agadon kaj okazaĵojn proksime de Pondiĉero",
                 "extendedDescription": "Anoj de FSHM-komunumo diskonigas siajn agadojn kaj spertojn de OSM-mapado per la grupo de Riot.im, tiu ĉi grupo estas ankaŭ uzata por diskuti aferojn rilatajn al libera programaro/aparataro, teĥnologio kaj aktivismo."
             },
-            "OSM-IDN-facebook": {
-                "name": "OpenStreetMap Indonesia",
-                "description": "Plibonigi OpenStreetMap en Indonezio",
-                "extendedDescription": "Ĉu vi mapigas en Indonezio? Ĉu vi havas demandojn aŭ volas kuniĝi al tiu ĉi komunumo? Aliĝu al ni ĉe {Url}. Bonvenon ĉiuj!"
+            "OSM-India-facebook": {
+                "name": "OpenStreetMap India - Participatory neighborhood mapping",
+                "description": "Plibonigi OpenStreetMap en Barato",
+                "extendedDescription": "Ĉu vi mapigas en Barato? Ĉu vi havas demandojn aŭ volas kuniĝi al tiu ĉi komunumo? Aliĝu al ni ĉe {url}. Bonvenon ĉiuj!"
             },
-            "OSM-japan-facebook": {
-                "name": "OpenStreetMap Japan Community",
-                "description": "Mapigistoj kaj uzantoj de OpenStreetMap en Japanujo"
+            "OSM-MMR-facebook": {
+                "name": "OpenStreetMap Myanmar",
+                "description": "Plibonigi OpenStreetMap en Mjanmao/Birmo",
+                "extendedDescription": "Ĉu vi mapigas en Mjanmao/Birmo? Ĉu vi havas demandojn aŭ volas kuniĝi al tiu ĉi komunumo? Aliĝu al ni ĉe {Url}. Bonvenon ĉiuj!"
             },
-            "OSM-japan-mailinglist": {
-                "name": "Dissendolisto OpenStreetMap Japanujo",
-                "description": "Talk-ja estas oficiala dissendolisto por la OSM-komunumo en Japanujo"
-            },
-            "OSM-japan-twitter": {
-                "name": "OpenStreetMap Japanujo ĉe Twitter",
-                "description": "Kradvorto ĉe Twitter: {url}"
-            },
-            "OSM-japan-website": {
-                "name": "OpenStreetMap Japan",
-                "description": "Mapigistoj kaj uzantoj de OpenStreetMap en Japanujo"
+            "OSM-MNG-facebook": {
+                "name": "OpenStreetMap Mongolia",
+                "description": "Plibonigi OpenStreetMap en Mongolujo",
+                "extendedDescription": "Ĉu vi mapigas en Mongolujo? Ĉu vi havas demandojn aŭ volas kuniĝi al tiu ĉi komunumo? Aliĝu al ni ĉe {Url}. Bonvenon ĉiuj!"
             },
             "OSM-MY-facebook": {
                 "name": "OpenStreetMap Malaysia ĉe Facebook",
@@ -9755,16 +9820,6 @@
             "OSM-MY-matrix": {
                 "name": "Riot-kanalo OpenStreetMap Malaysia",
                 "description": "Ĉiuj mapigistoj estas akceptindaj! Aniĝu ĉe {signupUrl}"
-            },
-            "OSM-MNG-facebook": {
-                "name": "OpenStreetMap Mongolia",
-                "description": "Plibonigi OpenStreetMap en Mongolujo",
-                "extendedDescription": "Ĉu vi mapigas en Mongolujo? Ĉu vi havas demandojn aŭ volas kuniĝi al tiu ĉi komunumo? Aliĝu al ni ĉe {Url}. Bonvenon ĉiuj!"
-            },
-            "OSM-MMR-facebook": {
-                "name": "OpenStreetMap Myanmar",
-                "description": "Plibonigi OpenStreetMap en Mjanmao/Birmo",
-                "extendedDescription": "Ĉu vi mapigas en Mjanmao/Birmo? Ĉu vi havas demandojn aŭ volas kuniĝi al tiu ĉi komunumo? Aliĝu al ni ĉe {Url}. Bonvenon ĉiuj!"
             },
             "OSM-Nepal-facebook": {
                 "name": "OpenStreetMap Nepal",
@@ -9787,6 +9842,14 @@
                 "name": "OpenStreetMap PH ĉe Telegram",
                 "description": "Neoficiala loka komunumo ĉe Telegramo por kontribuantoj kaj ŝatantoj de OpenStreetMap en Filipinoj"
             },
+            "OSM-PL-facebook-group": {
+                "name": "Facebook-grupo OpenStreetMap Polska",
+                "description": "Grupo por mapigistoj kaj uzantoj de OpenStreetMap en Polujo."
+            },
+            "OSM-PL-forum": {
+                "name": "Forum-sekcio OpenStreetMap Polska",
+                "description": "Diskutejo por OpenStreetMap-komunumo en Polujo"
+            },
             "OSM-RU-forum": {
                 "name": "Forumo OpenStreetMap RU",
                 "description": "Forum-sekcio OpenStreetMap Rusujo"
@@ -9795,13 +9858,14 @@
                 "name": "OpenStreetMap RU ĉe Telegram",
                 "description": "Telegram-grupo OpenStreetMap Rusujo"
             },
-            "OSM-TW-facebook": {
-                "name": "OpenStreetMap Taiwan",
-                "description": "Facebook-grupo por mapigistoj kaj uzantoj de OpenStreetMap por diskuti aferojn pri Tajvano."
+            "OSM-Reddit": {
+                "name": "OpenStreetMap ĉe Reddit",
+                "description": "/r/openstreetmap/ estas bonega loko por sciiĝi pli pri OpenStreetMap. Demandu pri io ajn!"
             },
-            "OSM-TW-mailinglist": {
-                "name": "Dissendolisto OpenStreetMap Tajvano",
-                "description": "Talk-tw estas oficiala dissendolisto por diskuti OSM-rilatajn aferojn pri Tajvano"
+            "OSM-Rome-meetup": {
+                "name": "Incontro Mappatori Romani",
+                "description": "Plibonigi OpenStreetMap proksime de Romo",
+                "extendedDescription": "Ni celas esti rimedon por homoj por diskuti kaj kunhavigi scion pri uzi liberajn geografiajn datumojn (precipe OpenStreetMap) kaj liberan programaron por administri, redakti kaj vidigi geografiajn datumojn, kaj promoti ĝian uzon en Latio."
             },
             "OSM-TH-CNX-meetup": {
                 "name": "OSM-renkonto en Ĉiang Mai",
@@ -9815,6 +9879,82 @@
             "OSM-TH-forum": {
                 "name": "Forumo OpenStreetMap TH",
                 "description": "Forum-sekcio OpenStreetMap Tajlando"
+            },
+            "OSM-TW-facebook": {
+                "name": "OpenStreetMap Taiwan",
+                "description": "Facebook-grupo por mapigistoj kaj uzantoj de OpenStreetMap por diskuti aferojn pri Tajvano."
+            },
+            "OSM-TW-mailinglist": {
+                "name": "Dissendolisto OpenStreetMap Tajvano",
+                "description": "Talk-tw estas oficiala dissendolisto por diskuti OSM-rilatajn aferojn pri Tajvano"
+            },
+            "OSM-Telegram": {
+                "name": "OpenStreetMap ĉe Telegram",
+                "description": "Aniĝu al la tutmonda Telegram-grupo pri OpenStreetMap ĉe {url}"
+            },
+            "OSM-Twitter": {
+                "name": "OpenStreetMap ĉe Twitter",
+                "description": "Sekvu nin ĉe Twitter ĉe {url}"
+            },
+            "OSM-US": {
+                "name": "OpenStreetMap US",
+                "description": "Ni helpas disvastigi kaj plibonigi OpenStreetMap en Usono.",
+                "extendedDescription": "Nie subtenas OpenStreetMap per organizi ĉiujaran konferencon, liverante rimedojn por la komunumo, gajnante akompanantojn kaj diskonigante la ideon. Aliĝu al OpenStreetMap US tie ĉi: {signupUrl}"
+            },
+            "OSM-US-Slack": {
+                "name": "OpenStreetMap US ĉe Slack",
+                "description": "Bonvenon ĉiuj! Aliĝu al ni ĉe {signupUrl}"
+            },
+            "OSM-Vancouver-meetup": {
+                "name": "OpenStreetMap Vancouver",
+                "description": "Mapigistoj kaj uzantoj de OpenStreetMap en Vankuvero, Brita Kolumbio"
+            },
+            "OSM-help": {
+                "name": "Helpo pri OpenStreetMap",
+                "description": "Demandu kaj akiru respondojn ĉe kreata de komunumo retejo.",
+                "extendedDescription": "{url} taŭgas por ĉiu, kiu bezonas helpon pri OpenStreetMap. Ne gravas ĉu vi estas komencanta mapisto aŭ havas teĥnikan demandon, ni estas tie ĉi por vin helpi!"
+            },
+            "OSM-india-mailinglist": {
+                "name": "Dissendolisto OpenStreetMap India",
+                "description": "Talk-in estas oficiala dissendolisto por la OSM-komunumo en Barato"
+            },
+            "OSM-india-twitter": {
+                "name": "OpenStreetMap India ĉe Twitter",
+                "description": "Apenaŭ unu pepaĵo de vi: {url}"
+            },
+            "OSM-japan-facebook": {
+                "name": "OpenStreetMap Japan Community",
+                "description": "Mapigistoj kaj uzantoj de OpenStreetMap en Japanujo"
+            },
+            "OSM-japan-mailinglist": {
+                "name": "Dissendolisto OpenStreetMap Japanujo",
+                "description": "Talk-ja estas oficiala dissendolisto por la OSM-komunumo en Japanujo"
+            },
+            "OSM-japan-twitter": {
+                "name": "OpenStreetMap Japanujo ĉe Twitter",
+                "description": "Kradvorto ĉe Twitter: {url}"
+            },
+            "OSM-japan-website": {
+                "name": "OpenStreetMap Japan",
+                "description": "Mapigistoj kaj uzantoj de OpenStreetMap en Japanujo"
+            },
+            "OSMF": {
+                "name": "Fondaĵo OpenStreetMap",
+                "description": "OSMF estas ne-profit-cela organizaĵo en Britujo, kiu subtenas la projekton OpenStreetMap",
+                "extendedDescription": "OSMF subtenas OpenStreetMap per regali, prizorgi servilojn gastigatajn OSM, organizi la ĉiujaran konferencon “State of the Map” kaj kunordigi volontulojn, kiuj evoluigas la mapon. Vi povas oferi vian helpon kaj havi opinion pri direkto de la projekto OpenStreetMap per aniĝi OSMF tie ĉi: {signupUrl}"
+            },
+            "OpenCleveland-meetup": {
+                "name": "Open Cleveland",
+                "description": "Plibonigi OpenStreetMap proksime de Klevlando",
+                "extendedDescription": "Open Geo Cleveland celas esti rimedo por homoj por diskuti kaj kunhavigi scion pri uzi liberajn geografiajn datumojn (precipe OpenStreetMap) kaj liberan programaron por administri, redakti kaj vidigi geografiajn datumojn, kaj promoti ĝian uzon en nordorienta Ohio. Ni ankaŭ estas klubo de mapigistoj =)"
+            },
+            "South-Tyrol-Mailing-List": {
+                "name": "Dissendolisto talk-it-southtyrol",
+                "description": "Regiona dissendolisto pri OpenStreetMap en Sud-Tirolo"
+            },
+            "Trentino-Mailing-List": {
+                "name": "Dissendolisto talk-it-trentino",
+                "description": "Regiona dissendolisto pri OpenStreetMap en Trento"
             },
             "al-forum": {
                 "name": "Forumo OpenStreetMap Albanujo",
@@ -9840,22 +9980,6 @@
             "at-twitter": {
                 "name": "OpenStreetMap AT ĉe Twitter",
                 "description": "OpenStreetMap Aŭstrujo ĉe Twitter: {url}"
-            },
-            "osmgraz-meetup": {
-                "name": "Kunveno en Graz",
-                "description": "Ĉiumonata renkonto de OpenStreetMap-komunumo en Graz"
-            },
-            "osmgraz-twitter": {
-                "name": "Kunveno en Graz ĉe Twitter",
-                "description": "Renkonto de OpenStreetMap-komunumo en Graz ĉe Twitter"
-            },
-            "osm-at": {
-                "name": "OpenStreetMap Österreich",
-                "description": "Platformo de informoj pri OpenStreetMap en Aŭstrujo"
-            },
-            "byosm": {
-                "name": "OpenStreetMap Беларусь",
-                "description": "Talegram-grupo OpenStreetMap Belorusujo"
             },
             "be-facebook": {
                 "description": "OpenStreetMap Belgujo ĉe Facebook"
@@ -9887,32 +10011,62 @@
                 "name": "OpenStreetMap BE ĉe Twitter",
                 "description": "OSM Belgujo ĉe Twitter: @osm_be"
             },
-            "hr-facebook": {
-                "name": "OpenStreetMap Kroatujo ĉe Facebook",
-                "description": "Facebook-grupo OpenStreetMap Kroatujo"
+            "bw-facebook": {
+                "name": "Mapping Botswana ĉe Facebook",
+                "description": "Facebook-paĝo pri OpenStreetMap en Bocvano"
             },
-            "hr-irc": {
-                "name": "OpenStreetMap Kroatujo ĉe IRC",
-                "description": "Aliĝu al #osm-hr ĉe irc.freenode.org (pordo 6667)"
+            "bw-twitter": {
+                "name": "Mapping Botswana ĉe Twitter",
+                "description": "Twitter-paĝo pri OpenStreetMap en Bocvano"
             },
-            "hr-mailinglist": {
-                "name": "Dissendolisto talk-hr",
-                "description": "Dissendolisto talk-hr"
+            "byosm": {
+                "name": "OpenStreetMap Беларусь",
+                "description": "Talegram-grupo OpenStreetMap Belorusujo"
+            },
+            "cape-coast-youthmappers": {
+                "name": "UCC YouthMappers",
+                "description": "Sekvu nin ĉe Twitter: {url}",
+                "extendedDescription": "Oficiala Twitter-paĝo pri sekcio de Junaj Mapigistoj de Universitato de Cape Coast, Ganao. Ni ŝatas mapojn, malfermajn datumojn kaj helpi al senfortuloj."
             },
             "czech-community": {
                 "name": "Česká komunita OpenStreetMap",
                 "description": "Mapo, retejo kaj kontakto al OSM-mapigistoj en Ĉeĥujo"
             },
-            "osmcz-facebook": {
-                "name": "OpenStreetMap CZ ĉe Facebook"
+            "de-berlin-mailinglist": {
+                "name": "Dissendolisto Berlin",
+                "description": "Dissendolisto por la OSM-komunumo en Berlino"
             },
-            "osmcz-twitter": {
-                "name": "Ĉeĥa Twitter-kanalo @osmcz",
-                "description": "Sekvu la Ĉeĥan komunumon ĉe Facebook – inkluzivante tradukitan WeeklyOSM!"
+            "de-berlin-meetup": {
+                "name": "OpenStreetMap Berlin-Brandenburg ĉe Meetup",
+                "description": "Mapigistoj kaj uzantoj de OpenStreetMap proksime de Berlino"
             },
-            "talk-cz-mailinglist": {
-                "name": "Ĉeĥa dissendolisto talk-cz",
-                "description": "Talk-cz estas oficiala dissendolisto por la OSM-komunumo en Ĉeĥujo"
+            "de-berlin-telegram": {
+                "name": "@osmberlin ĉe Telegram",
+                "description": "Telegram-kanalo OpenStreetMap Berlino"
+            },
+            "de-berlin-twitter": {
+                "name": "OpenStreetMap Berlin ĉe Twitter",
+                "description": "Sekvu nin ĉe Twitter: {url}"
+            },
+            "de-forum": {
+                "name": "Forumo OpenStreetMap DE",
+                "description": "Forum-sekcio OpenStreetMap Germanujo"
+            },
+            "de-irc": {
+                "name": "OpenStreetMap Germanujo ĉe IRC",
+                "description": "Aliĝu al #osm-de ĉe irc.oftc.net (pordo 6667)"
+            },
+            "de-mailinglist": {
+                "name": "Dissendolisto talk-de",
+                "description": "Talk-de estas oficiala dissendolisto por OSM-komunumo en Germanujo"
+            },
+            "de-ostwestfalen-lippe-mailinglist": {
+                "name": "Dissendolisto OWL",
+                "description": "Dissendolisto por la OSM-komunumo Ostwestfalen-Lippe"
+            },
+            "de-telegram": {
+                "name": "OpenStreetMap Germanujo ĉe Telegram",
+                "description": "Aliĝu al la Telegram-supergrupo pri OpenStreetMap en Germanujo ĉe {url}"
             },
             "dk-forum": {
                 "name": "Forumo OpenStreetMap Danmark",
@@ -9958,45 +10112,25 @@
                 "name": "OpenStreetMap France ĉe Twitter",
                 "description": "OpenStreetMap Francujo ĉe Twitter: {url}"
             },
-            "de-berlin-mailinglist": {
-                "name": "Dissendolisto Berlin",
-                "description": "Dissendolisto por la OSM-komunumo en Berlino"
+            "gb-irc": {
+                "name": "OpenStreetMap United Kingdom IRC",
+                "description": "Aliĝu al #osm-gb ĉe irc.oftc.net (pordo 6667)",
+                "extendedDescription": "Aliĝu al #osm-gb ĉe irc.oftc.net (pordo 6667), bonvolu esti pacienca kaj atendi kelkajn minutojn post demandi"
             },
-            "de-berlin-meetup": {
-                "name": "OpenStreetMap Berlin-Brandenburg ĉe Meetup",
-                "description": "Mapigistoj kaj uzantoj de OpenStreetMap proksime de Berlino"
+            "gb-mailinglist": {
+                "name": "Dissendolisto talk-gb"
             },
-            "de-berlin-telegram": {
-                "name": "@osmberlin ĉe Telegram",
-                "description": "Telegram-kanalo OpenStreetMap Berlino"
+            "hr-facebook": {
+                "name": "OpenStreetMap Kroatujo ĉe Facebook",
+                "description": "Facebook-grupo OpenStreetMap Kroatujo"
             },
-            "de-berlin-twitter": {
-                "name": "OpenStreetMap Berlin ĉe Twitter",
-                "description": "Sekvu nin ĉe Twitter: {url}"
+            "hr-irc": {
+                "name": "OpenStreetMap Kroatujo ĉe IRC",
+                "description": "Aliĝu al #osm-hr ĉe irc.freenode.org (pordo 6667)"
             },
-            "de-forum": {
-                "name": "Forumo OpenStreetMap DE",
-                "description": "Forum-sekcio OpenStreetMap Germanujo"
-            },
-            "de-irc": {
-                "name": "OpenStreetMap Germanujo ĉe IRC",
-                "description": "Aliĝu al #osm-de ĉe irc.oftc.net (pordo 6667)"
-            },
-            "de-mailinglist": {
-                "name": "Dissendolisto talk-de",
-                "description": "Talk-de estas oficiala dissendolisto por OSM-komunumo en Germanujo"
-            },
-            "de-ostwestfalen-lippe-mailinglist": {
-                "name": "Dissendolisto OWL",
-                "description": "Dissendolisto por la OSM-komunumo Ostwestfalen-Lippe"
-            },
-            "de-telegram": {
-                "name": "OpenStreetMap Germanujo ĉe Telegram",
-                "description": "Aliĝu al la Telegram-supergrupo pri OpenStreetMap en Germanujo ĉe {url}"
-            },
-            "osm-de": {
-                "name": "OpenStreetMap Deutschland",
-                "description": "Platformo de informoj pri OpenStreetMap en Germanujo"
+            "hr-mailinglist": {
+                "name": "Dissendolisto talk-hr",
+                "description": "Dissendolisto talk-hr"
             },
             "hu-facebook": {
                 "name": "OpenStreetMap HU ĉe Facebook",
@@ -10042,23 +10176,10 @@
                 "name": "OpenStreetMap Italia ĉe Twitter",
                 "description": "Sekvu nin ĉe Twitter ĉe {url}"
             },
-            "OSM-Rome-meetup": {
-                "name": "Incontro Mappatori Romani",
-                "description": "Plibonigi OpenStreetMap proksime de Romo",
-                "extendedDescription": "Ni celas esti rimedon por homoj por diskuti kaj kunhavigi scion pri uzi liberajn geografiajn datumojn (precipe OpenStreetMap) kaj liberan programaron por administri, redakti kaj vidigi geografiajn datumojn, kaj promoti ĝian uzon en Latio."
-            },
-            "South-Tyrol-Mailing-List": {
-                "name": "Dissendolisto talk-it-southtyrol",
-                "description": "Regiona dissendolisto pri OpenStreetMap en Sud-Tirolo"
-            },
-            "talk-it-lazio": {
-                "name": "Dissendolisto talk-it-lazio",
-                "description": "Bonvenon ĉiuj! Aliĝu al ni ĉe {signupUrl}",
-                "extendedDescription": "Dissendolisto por mapigistoj proksime de Romo kaj Latio."
-            },
-            "Trentino-Mailing-List": {
-                "name": "Dissendolisto talk-it-trentino",
-                "description": "Regiona dissendolisto pri OpenStreetMap en Trento"
+            "mappa-mercia-group": {
+                "name": "Loka grupo Mappa Mercia",
+                "description": "Hejmo de OpenStreetMap-ŝatantoj en Midlands",
+                "extendedDescription": "Mappa Mercia estas projekto por disvastigi OpenStreetMap en West Midlands, Britujo. Ni organizas komunumajn eventojn, instruas kaj subtenas lokajn organizaĵojn, kiuj volas malfermi siajn datumojn."
             },
             "no-forum": {
                 "name": "Forumo OpenStreetMap Norge",
@@ -10072,33 +10193,49 @@
                 "name": "Dissendolisto OpensStreetMap Norge",
                 "description": "Dissendolisto por uzantoj, mapigistoj, programistoj kaj ŝatantoj de OpenStreetMap en Norvegujo"
             },
-            "OSM-PL-facebook-group": {
-                "name": "Facebook-grupo OpenStreetMap Polska",
-                "description": "Grupo por mapigistoj kaj uzantoj de OpenStreetMap en Polujo."
+            "osm-at": {
+                "name": "OpenStreetMap Österreich",
+                "description": "Platformo de informoj pri OpenStreetMap en Aŭstrujo"
             },
-            "OSM-PL-forum": {
-                "name": "Forum-sekcio OpenStreetMap Polska",
-                "description": "Diskutejo por OpenStreetMap-komunumo en Polujo"
+            "osm-de": {
+                "name": "OpenStreetMap Deutschland",
+                "description": "Platformo de informoj pri OpenStreetMap en Germanujo"
             },
-            "si-forum": {
-                "name": "Forumo OpenStreetMap Slovenija",
-                "description": "Diskutejo por OpenStreetMap-komunumo en Slovenujo"
+            "osm-gh-facebook": {
+                "name": "OpenStreetMap Ghana ĉe Facebook",
+                "description": "Facebook-grupo por homoj interesantaj pri OpenStreetMap.",
+                "extendedDescription": "Mapigistoj de Ganao, promociantaj OpenStreetMap kaj HOT-projektojn (Humanitarian OpenStreetMap Team) en Ganao. Aliĝu nin."
             },
-            "si-mailinglist": {
-                "name": "Dissendolisto talk-si",
-                "description": "Dissendolisto por OpenStreetMap-komunumo en Slovenujo"
+            "osm-gh-twitter": {
+                "name": "OpenStreetMap Ghana ĉe Twitter",
+                "description": "Sekvu nin ĉe Twitter: {url}"
             },
-            "OSM-ES-mailinglist": {
-                "name": "Dissendolisto talk-es",
-                "description": "Dissendolisto por diskuti pri OpenStreetMap en Hispanujo"
+            "osm-latam": {
+                "name": "OpenStreetMap Latam",
+                "description": "Subteni OpenStreetMap en Latinameriko"
             },
-            "OSM-ES-telegram": {
-                "name": "@OSMes ĉe Telegram",
-                "description": "Telegram-kanalo OpenStreetMap Hispanujo"
+            "osm-mg-facebook": {
+                "name": "Facebook-grupo OpenStreetMap Madagascar",
+                "description": "Facebook-grupo por homoj interesantaj pri OpenStreetMap en Madagaskaro"
             },
             "osm-se": {
                 "name": "OpenStreetMap.se",
                 "description": "Liveras OSM-servojn kaj informojn por la loka komunumo en Svedujo"
+            },
+            "osmcz-facebook": {
+                "name": "OpenStreetMap CZ ĉe Facebook"
+            },
+            "osmcz-twitter": {
+                "name": "Ĉeĥa Twitter-kanalo @osmcz",
+                "description": "Sekvu la Ĉeĥan komunumon ĉe Facebook – inkluzivante tradukitan WeeklyOSM!"
+            },
+            "osmgraz-meetup": {
+                "name": "Kunveno en Graz",
+                "description": "Ĉiumonata renkonto de OpenStreetMap-komunumo en Graz"
+            },
+            "osmgraz-twitter": {
+                "name": "Kunveno en Graz ĉe Twitter",
+                "description": "Renkonto de OpenStreetMap-komunumo en Graz ĉe Twitter"
             },
             "se-facebook": {
                 "name": "OpenStreetMap Sverige ĉe Facebook",
@@ -10120,160 +10257,34 @@
                 "name": "OpenStreetMap SE ĉe Twitter",
                 "description": "Sekvu nin ĉe Twitter: {url}"
             },
-            "Nottingham-OSM-pub-meetup": {
-                "name": "Ĉiumonata taverna renkontiĝo en East Midlands (Nottingham)",
-                "description": "Sociaj renkontiĝoj por uzantoj kaj mapigistoj en East Midlands",
-                "extendedDescription": "La grupo renkontiĝas de post marto 2011, komence en Nottingham kaj lastatempe en Derby kaj iam ie en East Midlands. Tiuj ĉi renkontiĝoj estas sociaj, sed ili estas bonegaj okazoj por demandi pri OpenStreetMap aŭ loke aŭ ĝenerale. Somere ni kutime iomete mapigas proksime de renkontejo. La grupo specife interesiĝas pri mapigi publikajn alirajn vojojn kaj renkontiĝoj de tempo al tempo temas pri tio."
+            "si-forum": {
+                "name": "Forumo OpenStreetMap Slovenija",
+                "description": "Diskutejo por OpenStreetMap-komunumo en Slovenujo"
             },
-            "gb-irc": {
-                "name": "OpenStreetMap United Kingdom IRC",
-                "description": "Aliĝu al #osm-gb ĉe irc.oftc.net (pordo 6667)",
-                "extendedDescription": "Aliĝu al #osm-gb ĉe irc.oftc.net (pordo 6667), bonvolu esti pacienca kaj atendi kelkajn minutojn post demandi"
+            "si-mailinglist": {
+                "name": "Dissendolisto talk-si",
+                "description": "Dissendolisto por OpenStreetMap-komunumo en Slovenujo"
             },
-            "gb-mailinglist": {
-                "name": "Dissendolisto talk-gb"
+            "talk-cz-mailinglist": {
+                "name": "Ĉeĥa dissendolisto talk-cz",
+                "description": "Talk-cz estas oficiala dissendolisto por la OSM-komunumo en Ĉeĥujo"
             },
-            "mappa-mercia-group": {
-                "name": "Loka grupo Mappa Mercia",
-                "description": "Hejmo de OpenStreetMap-ŝatantoj en Midlands",
-                "extendedDescription": "Mappa Mercia estas projekto por disvastigi OpenStreetMap en West Midlands, Britujo. Ni organizas komunumajn eventojn, instruas kaj subtenas lokajn organizaĵojn, kiuj volas malfermi siajn datumojn."
+            "talk-gh": {
+                "name": "Dissendolisto talk-gh",
+                "description": "Talk-gh estas oficiala dissendolisto por la OSM-komunumo en Ganao."
             },
-            "OSM-CA-Slack": {
-                "name": "OSM-CA Slack",
-                "description": "Bonvenon ĉiuj! Aliĝu al ni ĉe {signupUrl}."
+            "talk-it-lazio": {
+                "name": "Dissendolisto talk-it-lazio",
+                "description": "Bonvenon ĉiuj! Aliĝu al ni ĉe {signupUrl}",
+                "extendedDescription": "Dissendolisto por mapigistoj proksime de Romo kaj Latio."
             },
-            "OSM-Vancouver-meetup": {
-                "name": "OpenStreetMap Vancouver",
-                "description": "Mapigistoj kaj uzantoj de OpenStreetMap en Vankuvero, Brita Kolumbio"
-            },
-            "OSM-CU-telegram": {
-                "name": "OSM Cuba ĉe Telegram",
-                "description": "Telegram-kanalo OpenStreetMap Kubo"
-            },
-            "Bay-Area-OpenStreetMappers": {
-                "name": "Bay Area OpenStreetMappers",
-                "description": "Plibonigi OpenStreetMap en la regiono apud Golfo de San-Francisko",
-                "extendedDescription": "Celo de tiu ĉi grupo estas kunigi OpenStreetMap-komunumon en la regiono apud Golfo de San-Francisko. Niaj eventoj estas malfermitaj al ĉiuj: ŝatantoj de malfermkoda programaro, biciklistoj, GIS-profesiuloj, geokaŝ-ludantoj kaj aliuloj. Ĉiu, kiu interesiĝas pri mapoj, mapigado kaj liberaj map-datumoj povas aligi la grupon kaj alveni niajn eventojn."
-            },
-            "Central-Pennsylvania-OSM": {
-                "name": "Central Pennsylvania OSM",
-                "description": "Interreta mapiga komunumo en State College, Pensilvanio"
-            },
-            "Code-for-San-Jose-Slack": {
-                "name": "Code for San Jose ĉe Slack",
-                "description": "Bonvenon ĉiuj! Registriĝu ĉe {signupUrl} kaj sekve aliĝu al la kanalo #osm."
-            },
-            "Dallas-Fort-Worth-OSM": {
-                "name": "Dallas-Fort Worth OSM",
-                "description": "Grupo de uzantoj de OpenStreetMap en Dallas-Fort Worth",
-                "extendedDescription": "Dallas, Fort Worth kaj ĉiuj urboj inter estas plenaj da kreemaj kaj teĥnologi-lertaj homoj. La celo de tiu ĉi grupo estas trovi novajn manierojn por uzi mirindajn kapablojn de OSM."
-            },
-            "GeoPhilly": {
-                "name": "GeoPhilly",
-                "description": "Renkontiĝo por map-ŝatantoj proksime de Filadelfio",
-                "extendedDescription": "GeoPhilly kunigas programistojn, geografiistoj, fanatikuloj de datumoj kaj malfermkoda programaro, lertuloj kaj map-ŝatantoj en la komuna amo al mapoj kaj historioj pri ili. Se vi uzas mapojn en laboro aŭ simple volas sciiĝi pli, tiu ĉi renkontiĝo estas por vi! Niaj renkontiĝoj estas malfermitaj, amikecaj, instruantaj kaj sociaj kaj temas pri klaĉado, teĥnika babilado kaj eĉ laboro. Alvenu por krei diversan kaj inspiran mapigan komunumon en Filadelfio kun ni!"
-            },
-            "MapMinnesota": {
-                "name": "Map Minnesota",
-                "description": "Mapigistoj kaj ŝatantoj de OpenStreetMap en Mineapolo kaj Saint Paul",
-                "extendedDescription": "Konektante ŝatantoj de OpenStreetMap en Minesoto kaj Ĝemelaj Urboj!"
-            },
-            "Mapping-DC-meetup": {
-                "name": "Mapping DC",
-                "description": "Plibonigi OpenStreetMap en la Distrikto Kolumbio",
-                "extendedDescription": "Ni estas grupo da helpemaj mapigistoj, kiuj celas plibonigi OpenStreetMap en la regiono de la Distrikto Kolombio. Ni ankaŭ volas instrui aliajn pri la OSM-ĉirkaŭsistemo, analizo de datumoj, kartografio kaj GIS. Ni renkontas ĉiumonate por koncentriĝi al kelka are de nia urbo."
-            },
-            "Maptime-ME-meetup": {
-                "name": "MaptimeME",
-                "description": "Mapigistoj kaj uzantoj de OpenStreetMap proksime de Portlando (Majno)",
-                "extendedDescription": "«Maptime» estas tempo por mapigado. Nia celo estas ebligi al ĉiu lerni pri kartografio per liveri spacon por kunlabora lernado, esplorado kaj map-farado uzante mapigajn ilojn kaj teĥnologiojn."
+            "talk-mg": {
+                "name": "Dissendolisto talk-mg",
+                "description": "Loko por mapigistoj, komunumoj kaj uzantoj de OpenStreetMap en Madagaskaro por kunhavigi kaj diskuti."
             },
             "us-ma-mailinglist": {
                 "name": "Dissendolisto talk-us-massachusetts",
                 "description": "Dissendolisto por la OSM-komunumo en Masaĉuseco"
-            },
-            "OpenCleveland-meetup": {
-                "name": "Open Cleveland",
-                "description": "Plibonigi OpenStreetMap proksime de Klevlando",
-                "extendedDescription": "Open Geo Cleveland celas esti rimedo por homoj por diskuti kaj kunhavigi scion pri uzi liberajn geografiajn datumojn (precipe OpenStreetMap) kaj liberan programaron por administri, redakti kaj vidigi geografiajn datumojn, kaj promoti ĝian uzon en nordorienta Ohio. Ni ankaŭ estas klubo de mapigistoj =)"
-            },
-            "OSM-Boston": {
-                "name": "OpenStreetMap Boston",
-                "description": "Mapigistoj kaj uzantoj de OpenStreetMap proksime de Bostono",
-                "extendedDescription": "OpenStreetMap estas libera kaj malferma kiel vikio mapo de la mondo kun centoj da miloj da kontribuantoj ĉiutage de homoj kiel vi. Redakti mapon estas simpla kaj amuza! Kunigu nin aŭ eksterdome aŭ maleksterdome en nia peno por krei la plej bonan mapon de areo de Bestono kaj la resto de mondo!"
-            },
-            "OSM-Central-Salish-Sea": {
-                "name": "OpenStreetMap Central Salish Sea",
-                "description": "Mapigistoj kaj uzantoj de OpenStreetMap proksime de Mount Vernon (Vaŝingtonio)",
-                "extendedDescription": "OpenStreetMap estas mapo de la mondo farata de homoj kiel vi. Ĝi estas mapo, kiun vi kreas kaj kiu estas donata senpage kiel Vikipedio. Rigardu osm.org por pli da informo. Ni renkontas por pridiskuti mapojn, fari mapojn kaj ĝui!"
-            },
-            "OSM-Chattanooga": {
-                "name": "OSM Chattanooga",
-                "description": "Grupo de uzantoj de OpenStreetMap en Chattanooga"
-            },
-            "OSM-Colorado": {
-                "name": "OpenStreetMap Colorado",
-                "description": "Mapigistoj kaj uzantoj de OpenStreetMap en la subŝtato Koloradio",
-                "extendedDescription": "OpenStreetMap (OSM) Colorado estas loka kunlaboro de homoj, kiuj interesiĝas pri kontribui al krei liberajn mapojn. Ni instigas ĉiujn niajn mapigistojn al organizi aŭ sugesti mapigajn eventojn en Koloradio. Tiuj eventoj povas esti simplaj renkontiĝoj, komencanta aŭ sperta instruado pri OSM, aŭ komuna mapigado."
-            },
-            "OSM-US-Slack": {
-                "name": "OpenStreetMap US ĉe Slack",
-                "description": "Bonvenon ĉiuj! Aliĝu al ni ĉe {signupUrl}"
-            },
-            "OSM-US": {
-                "name": "OpenStreetMap US",
-                "description": "Ni helpas disvastigi kaj plibonigi OpenStreetMap en Usono.",
-                "extendedDescription": "Nie subtenas OpenStreetMap per organizi ĉiujaran konferencon, liverante rimedojn por la komunumo, gajnante akompanantojn kaj diskonigante la ideon. Aliĝu al OpenStreetMap US tie ĉi: {signupUrl}"
-            },
-            "LATAM-Facebook": {
-                "name": "OpenStreetMap Latam Facebook",
-                "description": "OpenStreetMap Latam ĉe Facebook"
-            },
-            "LATAM-Telegram": {
-                "name": "OpenStreetMap Latam Telegram",
-                "description": "Telegram-grupo por OpenStreetMap en Latinameriko"
-            },
-            "LATAM-Twitter": {
-                "name": "OpenStreetMap Latam Twitter",
-                "description": "Sekvu nin ĉe Twitter ĉe {url}"
-            },
-            "osm-latam": {
-                "name": "OpenStreetMap Latam",
-                "description": "Subteni OpenStreetMap en Latinameriko"
-            },
-            "OSM-Discord": {
-                "name": "OpenStreetMap ĉe Discord",
-                "description": "Kontaktu kun aliaj mapigistoj per Discord"
-            },
-            "OSM-Facebook": {
-                "name": "OpenStreetMap ĉe Facebook",
-                "description": "Ŝatu nin ĉe Facebook por akiri novaĵojn pri OpenStreetMap."
-            },
-            "OSM-help": {
-                "name": "Helpo pri OpenStreetMap",
-                "description": "Demandu kaj akiru respondojn ĉe kreata de komunumo retejo.",
-                "extendedDescription": "{url} taŭgas por ĉiu, kiu bezonas helpon pri OpenStreetMap. Ne gravas ĉu vi estas komencanta mapisto aŭ havas teĥnikan demandon, ni estas tie ĉi por vin helpi!"
-            },
-            "OSM-IRC": {
-                "name": "OpenStreetMap ĉe IRC",
-                "description": "Aliĝu al #osm ĉe irc.oftc.net (pordo 6667)"
-            },
-            "OSM-Reddit": {
-                "name": "OpenStreetMap ĉe Reddit",
-                "description": "/r/openstreetmap/ estas bonega loko por sciiĝi pli pri OpenStreetMap. Demandu pri io ajn!"
-            },
-            "OSM-Telegram": {
-                "name": "OpenStreetMap ĉe Telegram",
-                "description": "Aniĝu al la tutmonda Telegram-grupo pri OpenStreetMap ĉe {url}"
-            },
-            "OSM-Twitter": {
-                "name": "OpenStreetMap ĉe Twitter",
-                "description": "Sekvu nin ĉe Twitter ĉe {url}"
-            },
-            "OSMF": {
-                "name": "Fondaĵo OpenStreetMap",
-                "description": "OSMF estas ne-profit-cela organizaĵo en Britujo, kiu subtenas la projekton OpenStreetMap",
-                "extendedDescription": "OSMF subtenas OpenStreetMap per regali, prizorgi servilojn gastigatajn OSM, organizi la ĉiujaran konferencon “State of the Map” kaj kunordigi volontulojn, kiuj evoluigas la mapon. Vi povas oferi vian helpon kaj havi opinion pri direkto de la projekto OpenStreetMap per aniĝi OSMF tie ĉi: {signupUrl}"
             }
         }
     }

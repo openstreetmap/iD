@@ -45,15 +45,6 @@
                 },
                 "not_closed": "މިި ވަށްބުރަކަށް ނުހެދޭނެ "
             },
-            "orthogonalize": {
-                "description": {
-                    "area": "މިސަރަޙައްދުގެ ކަންތައް ހަތަރެސްކަން ކުރައްވާ"
-                },
-                "annotation": {
-                    "area": "މިސަރަޙައްދުގެ ކަންތައް ހަތަރެސްކަން ކުރައްވާ"
-                },
-                "not_squarish": "މި ހަތަރެސްކަނަކަށް ނުހެދޭނެ"
-            },
             "delete": {
                 "title": "ޑިލީޓްކުރުން",
                 "description": {
@@ -352,9 +343,6 @@
                 "area": {
                     "name": "އިމާރާތްތައް"
                 },
-                "area/highway": {
-                    "name": "މަގު"
-                },
                 "building": {
                     "name": "އިމާރާތް"
                 },
@@ -372,9 +360,6 @@
                 },
                 "building/residential": {
                     "name": "މީީހުން ދިރިއުޅޭ ޢިމާރާތްތައް"
-                },
-                "highway": {
-                    "name": "ހައިވޭ"
                 },
                 "highway/path": {
                     "name": "ދުވާރު"
@@ -445,9 +430,6 @@
                 "leisure/stadium": {
                     "name": "ސްޓޭޑިއަމް"
                 },
-                "man_made/bridge": {
-                    "name": "ފާލަން"
-                },
                 "man_made/pier": {
                     "name": "ބަނދަރު"
                 },
@@ -471,9 +453,6 @@
                 },
                 "natural/wetland": {
                     "name": "ޗަކަ ގަނޑު"
-                },
-                "natural/wood": {
-                    "name": "ޖަންގަލި"
                 },
                 "office/government": {
                     "name": "ސަރުކާރު އޮފީސްތައް"
@@ -528,9 +507,6 @@
                 },
                 "type/route/ferry": {
                     "name": "ފެރީއަށްދާ މަގުތައް"
-                },
-                "waterway": {
-                    "name": "ކަނޑުމަގު"
                 },
                 "waterway/canal": {
                     "name": "ކެނެލް"
