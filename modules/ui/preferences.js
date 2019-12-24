@@ -10,7 +10,7 @@ import { uiTooltipHtml } from './tooltipHtml';
 export function uiPreferences(context) {
   const key = t('preferences.key');
   let _pane = d3_select(null);
-  let _showThirdPartyIcons = context.storage('preferences.privacy.thirdpartyicons') || 'true';
+  let _showThirdPartyIcons = context.storage('preferences.privacy.thirdpartyicons') || 'false';
 
   const paneTooltip = tooltip()
     .placement((textDirection === 'rtl') ? 'right' : 'left')
