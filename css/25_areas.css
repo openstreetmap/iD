@@ -194,8 +194,8 @@ path.stroke.tag-natural-wetland {
     stroke: rgb(153, 225, 170);
 }
 path.fill.tag-natural-wetland {
-    stroke: rgb(153, 225, 170, 0.3);
-    fill: rgb(153, 225, 170, 0.3);
+    stroke: rgba(153, 225, 170, 0.3);
+    fill: rgba(153, 225, 170, 0.3);
 }
 .preset-icon-fill path.area.fill.tag-natural-wetland {
     fill: rgba(153, 225, 170, 0.2);
