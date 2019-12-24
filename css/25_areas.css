@@ -224,8 +224,8 @@ path.fill.tag-landuse-grass.tag-golf-green,
 path.fill.tag-landuse-meadow,
 path.fill.tag-landuse-orchard,
 path.fill.tag-landuse-vineyard {
-    stroke: rgb(191, 232, 63, 0.3);
-    fill: rgb(191, 232, 63, 0.3);
+    stroke: rgba(191, 232, 63, 0.3);
+    fill: rgba(191, 232, 63, 0.3);
 }
 .preset-icon-fill path.area.fill.tag-landuse-cemetery,
 .preset-icon-fill path.area.fill.tag-landuse-farmland,
