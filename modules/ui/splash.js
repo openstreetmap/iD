@@ -54,7 +54,8 @@ export function uiSplash(context) {
       .append('p')
       .html(t('splash.privacy', {
         updateMessage: updateMessage,
-        here: '<a target="_blank" href="https://github.com/openstreetmap/iD/blob/master/PRIVACY.md">here</a>'
+        privacyLink: '<a target="_blank" href="https://github.com/openstreetmap/iD/blob/master/PRIVACY.md">' +
+          t('splash.privacy_policy') + '</a>'
       }));
 
     let buttonWrap = introModal
