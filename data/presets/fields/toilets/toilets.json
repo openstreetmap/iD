@@ -1,0 +1,8 @@
+{
+    "key": "toilets",
+    "type": "check",
+    "label": "Toilets",
+    "terms": [
+        "bathroom"
+    ]
+}
