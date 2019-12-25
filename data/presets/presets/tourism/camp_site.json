@@ -7,6 +7,9 @@
         "access_simple",
         "capacity",
         "fee",
+        "drinking_water"
+        "hot_water"
+        "toilets/toilets"
         "payment_multi_fee",
         "charge_fee",
         "internet_access",
