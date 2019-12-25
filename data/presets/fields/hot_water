@@ -1,0 +1,9 @@
+{
+    "key": "hot_water",
+    "type": "check",
+    "label": "Hot Water",
+    "terms": [
+        "heated water",
+        "hot water"
+    ]
+}
