@@ -22,22 +22,28 @@ export function fixRTLTextForSvg(inputText) {
         var c = inputText[n];
         if (arabicMath.test(c)) {
             // Arabic numbers go LTR
-            ret += c + rtlBuffer.reverse().join('');
-            rtlBuffer = [];
-        } else if ((thaanaVowel.test(c) || hebrewSign.test(c) || arabicDiacritics.test(c)) && rtlBuffer.length) {
-            rtlBuffer[rtlBuffer.length - 1] += c;
-        } else if (rtlRegex.test(c)
-            // include Arabic presentation forms
-            || (c.charCodeAt(0) >= 64336 && c.charCodeAt(0) <= 65023)
-            || (c.charCodeAt(0) >= 65136 && c.charCodeAt(0) <= 65279)) {
-            rtlBuffer.push(c);
-        } else if (c === ' ' && rtlBuffer.length) {
-            // whitespace within RTL text
-            rtlBuffer = [rtlBuffer.reverse().join('') + ' '];
+            ret += rtlBuffer.reverse().join('');
+            rtlBuffer = [c];
         } else {
-            // non-RTL character
-            ret += rtlBuffer.reverse().join('') + c;
-            rtlBuffer = [];
+            if (rtlBuffer.length && arabicMath.test(rtlBuffer[rtlBuffer.length - 1])) {
+                ret += rtlBuffer.reverse().join('');
+                rtlBuffer = [];
+            }
+            if ((thaanaVowel.test(c) || hebrewSign.test(c) || arabicDiacritics.test(c)) && rtlBuffer.length) {
+                rtlBuffer[rtlBuffer.length - 1] += c;
+            } else if (rtlRegex.test(c)
+                // include Arabic presentation forms
+                || (c.charCodeAt(0) >= 64336 && c.charCodeAt(0) <= 65023)
+                || (c.charCodeAt(0) >= 65136 && c.charCodeAt(0) <= 65279)) {
+                rtlBuffer.push(c);
+            } else if (c === ' ' && rtlBuffer.length) {
+                // whitespace within RTL text
+                rtlBuffer = [rtlBuffer.reverse().join('') + ' '];
+            } else {
+                // non-RTL character
+                ret += rtlBuffer.reverse().join('') + c;
+                rtlBuffer = [];
+            }
         }
     }
     ret += rtlBuffer.reverse().join('');
