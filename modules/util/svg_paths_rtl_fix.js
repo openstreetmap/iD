@@ -3,7 +3,7 @@
 
 import { WordShaper } from 'alif-toolkit';
 
-export var rtlRegex = /[\u0590-\u05FF\u0600-\u06FF\u0750-\u07BF\u08A0–\u08FF]/;
+export var rtlRegex = /[\u0590-\u05FF\u0600-\u06FF\u0750-\u07BF\u08A0–\u08BF]/;
 
 export function fixRTLTextForSvg(inputText) {
     var ret = '', rtlBuffer = [];
