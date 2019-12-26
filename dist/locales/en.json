@@ -2762,6 +2762,10 @@
                 "baby_seat": {
                     "label": "Baby Seat"
                 },
+                "backcountry": {
+                    "label": "Backcountry",
+                    "terms": ""
+                },
                 "backrest": {
                     "label": "Backrest"
                 },
@@ -3366,6 +3370,10 @@
                 "grape_variety": {
                     "label": "Grape Varieties"
                 },
+                "group_only": {
+                    "label": "Groups Only",
+                    "terms": ""
+                },
                 "guest_house": {
                     "label": "Type"
                 },
@@ -3454,6 +3462,9 @@
                         "undefined": "No",
                         "stables": "Yes"
                     }
+                },
+                "hot_water": {
+                    "label": "Hot Water"
                 },
                 "iata": {
                     "label": "IATA Airport Code"
@@ -3846,6 +3857,10 @@
                 },
                 "oneway/bicycle": {
                     "label": "One Way (Bicycles)",
+                    "terms": ""
+                },
+                "openfire": {
+                    "label": "Open Fires Allowed",
                     "terms": ""
                 },
                 "opening_date": {
@@ -4346,6 +4361,10 @@
                 "shop": {
                     "label": "Type"
                 },
+                "shower": {
+                    "label": "Showers",
+                    "terms": ""
+                },
                 "siren/purpose": {
                     "label": "Purpose"
                 },
@@ -4547,6 +4566,10 @@
                 },
                 "to": {
                     "label": "To"
+                },
+                "toilets": {
+                    "label": "Toilets",
+                    "terms": ""
                 },
                 "toilets/disposal": {
                     "label": "Disposal",
@@ -9491,7 +9514,15 @@
                 },
                 "tourism/camp_site": {
                     "name": "Campground",
-                    "terms": "tent,rv"
+                    "terms": "caravans,camp ground,camp pitch,camp site,campers,campground,campsite,mobile homes,recreational vehicles,rv,tenting"
+                },
+                "tourism/camp_site/backcountry": {
+                    "name": "Backcountry Camping Area",
+                    "terms": "alpine camping,backpacking site,backwoods camping,camp ground,camp pitch,camp site,campground,campsite,informal camping,primitive camping"
+                },
+                "tourism/camp_site/group_only": {
+                    "name": "Group Camping Area",
+                    "terms": "camp ground,camp pitch,camp site,campground,campsite,scout camping,youth camping"
                 },
                 "tourism/caravan_site": {
                     "name": "RV Park",

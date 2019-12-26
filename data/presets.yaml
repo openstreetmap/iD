@@ -238,6 +238,10 @@ en:
       baby_seat:
         # baby=*
         label: Baby Seat
+      backcountry:
+        # backcountry=*
+        label: Backcountry
+        terms: '[translate with synonyms or related terms for ''Backcountry'', separated by commas]'
       backrest:
         # backrest=*
         label: Backrest
@@ -923,6 +927,10 @@ en:
       grape_variety:
         # grape_variety=*
         label: Grape Varieties
+      group_only:
+        # group_only=*
+        label: Groups Only
+        terms: '[translate with synonyms or related terms for ''Groups Only'', separated by commas]'
       guest_house:
         # guest_house=*
         label: Type
@@ -1024,6 +1032,9 @@ en:
           stables: 'Yes'
           # amenity=undefined
           undefined: 'No'
+      hot_water:
+        # hot_water=*
+        label: Hot Water
       iata:
         # iata=*
         label: IATA Airport Code
@@ -1496,6 +1507,10 @@ en:
           undefined: Assumed to be Yes
           # oneway=yes
           'yes': 'Yes'
+      openfire:
+        # openfire=*
+        label: Open Fires Allowed
+        terms: '[translate with synonyms or related terms for ''Open Fires Allowed'', separated by commas]'
       opening_date:
         # opening_date=*
         label: Expected Opening Date
@@ -2110,6 +2125,10 @@ en:
       shop:
         # shop=*
         label: Type
+      shower:
+        # shower=*
+        label: Showers
+        terms: '[translate with synonyms or related terms for ''Showers'', separated by commas]'
       siren/purpose:
         # 'siren:purpose=*'
         label: Purpose
@@ -2351,6 +2370,10 @@ en:
       to:
         # to=*
         label: To
+      toilets:
+        # toilets=*
+        label: Toilets
+        terms: '[translate with synonyms or related terms for ''Toilets'', separated by commas]'
       toilets/disposal:
         # 'toilets:disposal=*'
         label: Disposal
@@ -8126,8 +8149,18 @@ en:
       tourism/camp_site:
         # tourism=camp_site
         name: Campground
-        # 'terms: tent,rv'
+        # 'terms: caravans,camp ground,camp pitch,camp site,campers,campground,campsite,mobile homes,recreational vehicles,rv,tenting'
         terms: '<translate with synonyms or related terms for ''Campground'', separated by commas>'
+      tourism/camp_site/backcountry:
+        # 'tourism=camp_site, backcountry=yes'
+        name: Backcountry Camping Area
+        # 'terms: alpine camping,backpacking site,backwoods camping,camp ground,camp pitch,camp site,campground,campsite,informal camping,primitive camping'
+        terms: '<translate with synonyms or related terms for ''Backcountry Camping Area'', separated by commas>'
+      tourism/camp_site/group_only:
+        # 'tourism=camp_site, group_only=yes'
+        name: Group Camping Area
+        # 'terms: camp ground,camp pitch,camp site,campground,campsite,scout camping,youth camping'
+        terms: '<translate with synonyms or related terms for ''Group Camping Area'', separated by commas>'
       tourism/caravan_site:
         # tourism=caravan_site
         name: RV Park

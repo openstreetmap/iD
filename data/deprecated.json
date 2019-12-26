@@ -966,6 +966,10 @@
       "replace": {"craft": "winery"}
     },
     {
+      "old": {"showers": "*"},
+      "replace": {"shower": "$1"}
+    },
+    {
       "old": {"sloped_curb": "0"},
       "replace": {"kerb": "flush"}
     },
