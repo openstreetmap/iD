@@ -909,6 +909,9 @@ en:
       generator/type:
         # 'generator:type=*'
         label: Type
+      geyser/height:
+        # 'geyser:height=*'
+        label: Eruption Height
       gnis/feature_id:
         # 'gnis:feature_id=*'
         label: GNIS Feature ID
@@ -6299,6 +6302,11 @@ en:
         # natural=fell
         name: Fell
         terms: '<translate with synonyms or related terms for ''Fell'', separated by commas>'
+      natural/geyser:
+        # natural=geyser
+        name: Geyser
+        # 'terms: erupting spring,geiser,gieser,guyser,hot water,hydrogeology,hydrothermal explosion,steam'
+        terms: '<translate with synonyms or related terms for ''Geyser'', separated by commas>'
       natural/glacier:
         # natural=glacier
         name: Glacier

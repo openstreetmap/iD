@@ -799,6 +799,7 @@
     "natural/cliff": {"icon": "maki-triangle", "fields": ["name", "height"], "geometry": ["point", "vertex", "line", "area"], "tags": {"natural": "cliff"}, "terms": ["crag", "escarpment", "rock face", "scarp"], "name": "Cliff"},
     "natural/coastline": {"icon": "temaki-beach", "geometry": ["line"], "tags": {"natural": "coastline"}, "terms": ["shore"], "name": "Coastline"},
     "natural/fell": {"geometry": ["area"], "tags": {"natural": "fell"}, "terms": [], "name": "Fell"},
+    "natural/geyser": {"icon": "maki-water", "fields": ["name", "geyser/height", "elevation"], "geometry": ["point"], "tags": {"natural": "geyser"}, "terms": ["erupting spring", "geiser", "gieser", "guyser", "hot water", "hydrogeology", "hydrothermal explosion", "steam"], "name": "Geyser"},
     "natural/glacier": {"icon": "temaki-snow", "geometry": ["area"], "tags": {"natural": "glacier"}, "terms": ["ice", "snow"], "name": "Glacier"},
     "natural/grassland": {"icon": "temaki-grass", "geometry": ["area"], "tags": {"natural": "grassland"}, "terms": ["field", "prairie", "savanna"], "name": "Grassland"},
     "natural/heath": {"geometry": ["area"], "tags": {"natural": "heath"}, "terms": [], "name": "Heath"},

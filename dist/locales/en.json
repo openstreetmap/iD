@@ -3353,6 +3353,9 @@
                 "generator/type": {
                     "label": "Type"
                 },
+                "geyser/height": {
+                    "label": "Eruption Height"
+                },
                 "gnis/feature_id": {
                     "label": "GNIS Feature ID",
                     "terms": "Federal Geographic Names Information Service,United States Board on Geographic Names,USA"
@@ -7946,6 +7949,10 @@
                 "natural/fell": {
                     "name": "Fell",
                     "terms": ""
+                },
+                "natural/geyser": {
+                    "name": "Geyser",
+                    "terms": "erupting spring,geiser,gieser,guyser,hot water,hydrogeology,hydrothermal explosion,steam"
                 },
                 "natural/glacier": {
                     "name": "Glacier",

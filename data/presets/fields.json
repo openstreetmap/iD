@@ -164,6 +164,7 @@
     "generator/output/electricity": {"key": "generator:output:electricity", "type": "typeCombo", "label": "Power Output", "placeholder": "50 MW, 100 MW, 200 MW...", "snake_case": false},
     "generator/source": {"key": "generator:source", "type": "combo", "label": "Source"},
     "generator/type": {"key": "generator:type", "type": "combo", "label": "Type"},
+    "geyser/height": {"key": "geyser:height", "type": "text", "label": "Eruption Height"},
     "gnis/feature_id": {"key": "gnis:feature_id", "type": "identifier", "label": "GNIS Feature ID", "urlFormat": "https://geonames.usgs.gov/apex/f?p=gnispq:3:::NO::P3_FID:{value}", "pattern": "^[0-9]{1,}$", "countryCodes": ["us"], "terms": ["Federal Geographic Names Information Service", "United States Board on Geographic Names", "USA"]},
     "government": {"key": "government", "type": "typeCombo", "label": "Type"},
     "grape_variety": {"key": "grape_variety", "type": "semiCombo", "label": "Grape Varieties"},
