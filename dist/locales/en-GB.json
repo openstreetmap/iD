@@ -2788,7 +2788,10 @@
                     "name": "Charging Station"
                 },
                 "amenity/childcare": {
-                    "name": "Nursery/Childcare"
+                    "name": "Nursery/childcare"
+                },
+                "amenity/childcare": {
+                    "name": "Breastfeeding Area"
                 },
                 "amenity/cinema": {
                     "name": "Cinema"
