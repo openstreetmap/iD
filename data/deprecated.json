@@ -700,6 +700,10 @@
       "replace": {"memorial": "plaque"}
     },
     {
+      "old": {"men": "*"},
+      "replace": {"male": "$1"}
+    },
+    {
       "old": {"minage": "*"},
       "replace": {"min_age": "$1"}
     },
@@ -1200,6 +1204,10 @@
     {
       "old": {"wifi": "free"},
       "replace": {"internet_access": "wlan", "internet_access:fee": "no"}
+    },
+    {
+      "old": {"women": "*"},
+      "replace": {"female": "$1"}
     },
     {
       "old": {"wood": "coniferous"},
