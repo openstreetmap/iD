@@ -320,6 +320,9 @@ en:
       booth:
         # booth=*
         label: Booth
+      bottle:
+        # bottle=*
+        label: Bottle Filling
       boules:
         # boules=*
         label: Type

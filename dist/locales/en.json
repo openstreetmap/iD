@@ -2834,6 +2834,9 @@
                 "booth": {
                     "label": "Booth"
                 },
+                "bottle": {
+                    "label": "Bottle Filling"
+                },
                 "boules": {
                     "label": "Type"
                 },

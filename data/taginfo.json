@@ -1330,6 +1330,7 @@
     {"key": "board_type", "description": "🄵 Type"},
     {"key": "bollard", "description": "🄵 Type"},
     {"key": "booth", "description": "🄵 Booth"},
+    {"key": "bottle", "description": "🄵 Bottle Filling"},
     {"key": "boules", "description": "🄵 Type"},
     {"key": "brand", "description": "🄵 Brand"},
     {"key": "brewery", "description": "🄵 Draft Beers"},

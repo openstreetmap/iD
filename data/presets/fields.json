@@ -45,6 +45,7 @@
     "board_type": {"key": "board_type", "type": "typeCombo", "label": "Type"},
     "bollard": {"key": "bollard", "type": "combo", "label": "Type"},
     "booth": {"key": "booth", "type": "combo", "label": "Booth", "caseSensitive": true},
+    "bottle": {"key": "bottle", "type": "check", "label": "Bottle Filling"},
     "boules": {"key": "boules", "type": "typeCombo", "label": "Type"},
     "boundary": {"key": "boundary", "type": "combo", "label": "Type"},
     "brand": {"key": "brand", "type": "text", "label": "Brand"},
