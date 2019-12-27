@@ -2,6 +2,7 @@ import _throttle from 'lodash-es/throttle';
 
 import { dispatch as d3_dispatch } from 'd3-dispatch';
 import { xml as d3_xml } from 'd3-fetch';
+import { json as d3_json } from 'd3-fetch';
 
 import osmAuth from 'osm-auth';
 import RBush from 'rbush';
@@ -89,6 +90,14 @@ function getNodes(obj) {
     return nodes;
 }
 
+function getNodesJSON(obj) {
+    var elems = obj.nodes;
+    var nodes = new Array(elems.length);
+    for (var i = 0, l = elems.length; i < l; i++) {
+        nodes[i] = 'n' + elems[i];
+    }
+    return nodes;
+}
 
 function getTags(obj) {
     var elems = obj.getElementsByTagName('tag');
@@ -116,6 +125,19 @@ function getMembers(obj) {
     return members;
 }
 
+function getMembersJSON(obj) {
+    var elems = obj.members;
+    var members = new Array(elems.length);
+    for (var i = 0, l = elems.length; i < l; i++) {
+        var attrs = elems[i];
+        members[i] = {
+            id: attrs.type[0] + attrs.ref,
+            type: attrs.type,
+            role: attrs.role
+        };
+    }
+    return members;
+}
 
 function getVisible(attrs) {
     return (!attrs.visible || attrs.visible.value !== 'false');
@@ -165,6 +187,94 @@ function encodeNoteRtree(note) {
     };
 }
 
+
+var jsonparsers = {
+
+    node: function nodeData(obj, uid) {
+        return new osmNode({
+            id:  uid,
+            visible: true,
+            version: obj.version.toString(),
+            changeset: obj.changeset.toString(),
+            timestamp: obj.timestamp,
+            user: obj.user,
+            uid: obj.uid.toString(),
+            loc: [parseFloat(obj.lon), parseFloat(obj.lat)],
+            tags: obj.tags
+        });
+    },
+
+    way: function wayData(obj, uid) {
+        return new osmWay({
+            id:  uid,
+            visible: true,
+            version: obj.version.toString(),
+            changeset: obj.changeset.toString(),
+            timestamp: obj.timestamp,
+            user: obj.user,
+            uid: obj.uid.toString(),
+            tags: obj.tags,
+            nodes: getNodesJSON(obj)
+        });
+    },
+
+    relation: function relationData(obj, uid) {
+        return new osmRelation({
+            id:  uid,
+            visible: true,
+            version: obj.version.toString(),
+            changeset: obj.changeset.toString(),
+            timestamp: obj.timestamp,
+            user: obj.user,
+            uid: obj.uid.toString(),
+            tags: obj.tags,
+            members: getMembersJSON(obj)
+        });
+    }
+};
+
+function parseJSON(payload, callback, options) {
+    options = Object.assign({ skipSeen: true }, options);
+    if (!payload)  {
+        return callback({ message: 'No JSON', status: -1 });
+    }
+
+    var json = payload;
+    if (typeof json !== 'object')
+       json = JSON.parse(payload);
+
+    if (!json.elements)
+        return callback({ message: 'No JSON', status: -1 });
+
+    var children = json.elements;
+
+    var handle = window.requestIdleCallback(function() {
+        var results = [];
+        var result;
+        for (var i = 0; i < children.length; i++) {
+            result = parseChild(children[i]);
+            if (result) results.push(result);
+        }
+        callback(null, results);
+    });
+
+    _deferred.add(handle);
+
+    function parseChild(child) {
+        var parser = jsonparsers[child.type];
+        if (!parser) return null;
+
+        var uid;
+
+        uid = osmEntity.id.fromOSM(child.type, child.id);
+        if (options.skipSeen) {
+            if (_tileCache.seen[uid]) return null;  // avoid reparsing a "seen" entity
+            _tileCache.seen[uid] = true;
+        }
+
+        return parser(child, uid);
+    }
+}
 
 var parsers = {
     node: function nodeData(obj, uid) {
@@ -442,7 +552,7 @@ export default {
         var that = this;
         var cid = _connectionID;
 
-        function done(err, xml) {
+        function done(err, payload) {
             if (that.getConnectionId() !== cid) {
                 if (callback) callback({ message: 'Connection Switched', status: -1 });
                 return;
@@ -478,7 +588,7 @@ export default {
                     if (err) {
                         return callback(err);
                     } else {
-                        return parseXML(xml, callback, options);
+                        return parseXML(payload, callback, options);
                     }
                 }
             }
