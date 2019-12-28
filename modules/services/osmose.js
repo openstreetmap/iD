@@ -92,7 +92,8 @@ export default {
 
     loadErrors: function(projection) {
         var params = {
-            level: '1,2,3'
+            level: '1,2,3',
+            item: services.osmose.items.join() // only interested in certain errors
         };
 
         // determine the needed tiles to cover the view
@@ -140,11 +141,6 @@ export default {
                                     item: props.item // category of the issue for styling
                                 });
 
-                                // Variables used in the description
-                                // d.replacements = elems.map(function(i) {
-                                //     return linkEntity(i);
-                                // });
-
                                 _erCache.data[d.id] = d;
                                 _erCache.rtree.insert(encodeErrorRtree(d));
                             }
@@ -160,7 +156,36 @@ export default {
         });
     },
 
-    // todo: need to fetch specific error details upon UI loading for element IDs
+    loadErrorDetail: function(d, callback) {
+        // Error details only need to be fetched once
+        if (d.elems !== undefined) {
+            if (callback) callback(null, d);
+            return;
+        }
+
+        var url = _osmoseUrlRoot + 'en/api/0.3beta/issue/' + d.identifier;
+
+        var that = this;
+        d3_json(url)
+            .then(function(data) {
+                // Associated elements used for highlighting
+                // Assign directly for immediate use in the callback
+                d.elems = data.elems.map(function(e) {
+                    return e.type.substring(0,1) + e.id;
+                });
+
+                // Element links used in the error description
+                d.replacements = d.elems.map(function(i) {
+                    return linkEntity(i);
+                });
+
+                that.replaceError(d);
+                if (callback) callback(null, d);
+            })
+            .catch(function(err) {
+                if (callback) callback(err.message);
+            });
+    },
 
     postUpdate: function(d, callback) {
         if (_erCache.inflightPost[d.id]) {
@@ -170,7 +195,7 @@ export default {
         var that = this;
 
         // UI sets the status to either '/done' or '/false'
-        var url = _osmoseUrlRoot + 'issue/' + d.identifier + d.newStatus;
+        var url = _osmoseUrlRoot + 'en/api/0.3beta/issue/' + d.identifier + d.newStatus;
 
         var controller = new AbortController();
         _erCache.inflightPost[d.id] = controller;

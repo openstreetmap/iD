@@ -857,9 +857,6 @@ en:
           title: 'Highway intersecting highway'
         1070-10:
           title: 'Waterway intersecting waterway'
-        1080-1:
-          title: 'Orphan Nodes Cluster'
-          description: 'A culster of nodes with no tags is present.'
         1150:
           title: 'Overlapping Similar Areas'
           description: '{0} and {1} overlap.'

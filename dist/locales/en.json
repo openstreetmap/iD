@@ -1075,10 +1075,6 @@
                     "1070-10": {
                         "title": "Waterway intersecting waterway"
                     },
-                    "1080-1": {
-                        "title": "Orphan Nodes Cluster",
-                        "description": "A culster of nodes with no tags is present."
-                    },
                     "1280-1": {
                         "title": "Incorrect Speed Camera",
                         "description": "Speed camera should be on the highway or part of an \"enforcement\" relation."

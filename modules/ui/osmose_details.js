@@ -6,6 +6,7 @@ import {
 import { dataEn } from '../../data';
 import { modeSelect } from '../modes/select';
 import { t } from '../util/locale';
+import { services } from '../services';
 import { utilDisplayName, utilEntityOrMemberSelector } from '../util';
 
 
@@ -57,65 +58,69 @@ export function uiOsmoseDetails(context) {
             .append('h4')
             .text(function() { return t('QA.keepRight.detail_description'); });
 
-        descriptionEnter
-            .append('div')
-            .attr('class', 'error-details-description-text')
-            .html(errorDetail);
+        services.osmose.loadErrorDetail(_error, function(err, d) {
+            if (d.elems === undefined) { return; }
 
-        // If there are entity links in the error message..
-        descriptionEnter.selectAll('.error_entity_link, .error_object_link')
-            .each(function() {
-                var link = d3_select(this);
-                var entityID = this.textContent;
-                var entity = context.hasEntity(entityID);
+            descriptionEnter
+                .append('div')
+                .attr('class', 'error-details-description-text')
+                .html(errorDetail);
 
-                // Add click handler
-                link
-                    .on('mouseenter', function() {
-                        context.surface().selectAll(utilEntityOrMemberSelector([entityID], context.graph()))
-                            .classed('hover', true);
-                    })
-                    .on('mouseleave', function() {
-                        context.surface().selectAll('.hover')
-                            .classed('hover', false);
-                    })
-                    .on('click', function() {
-                        d3_event.preventDefault();
-                        var osmlayer = context.layers().layer('osm');
-                        if (!osmlayer.enabled()) {
-                            osmlayer.enabled(true);
-                        }
+            // If there are entity links in the error message..
+            descriptionEnter.selectAll('.error_entity_link, .error_object_link')
+                .each(function() {
+                    var link = d3_select(this);
+                    var entityID = this.textContent;
+                    var entity = context.hasEntity(entityID);
 
-                        context.map().centerZoom(_error.loc, 20);
+                    // Add click handler
+                    link
+                        .on('mouseenter', function() {
+                            context.surface().selectAll(utilEntityOrMemberSelector([entityID], context.graph()))
+                                .classed('hover', true);
+                        })
+                        .on('mouseleave', function() {
+                            context.surface().selectAll('.hover')
+                                .classed('hover', false);
+                        })
+                        .on('click', function() {
+                            d3_event.preventDefault();
+                            var osmlayer = context.layers().layer('osm');
+                            if (!osmlayer.enabled()) {
+                                osmlayer.enabled(true);
+                            }
 
-                        if (entity) {
-                            context.enter(modeSelect(context, [entityID]));
-                        } else {
-                            context.loadEntity(entityID, function() {
+                            context.map().centerZoom(d.loc, 20);
+
+                            if (entity) {
                                 context.enter(modeSelect(context, [entityID]));
-                            });
+                            } else {
+                                context.loadEntity(entityID, function() {
+                                    context.enter(modeSelect(context, [entityID]));
+                                });
+                            }
+                        });
+
+                    // Replace with friendly name if possible
+                    // (The entity may not yet be loaded into the graph)
+                    if (entity) {
+                        var name = utilDisplayName(entity);  // try to use common name
+
+                        if (!name) {
+                            var preset = context.presets().match(entity, context.graph());
+                            name = preset && !preset.isFallback() && preset.name();  // fallback to preset name
                         }
-                    });
 
-                // Replace with friendly name if possible
-                // (The entity may not yet be loaded into the graph)
-                if (entity) {
-                    var name = utilDisplayName(entity);  // try to use common name
-
-                    if (!name) {
-                        var preset = context.presets().match(entity, context.graph());
-                        name = preset && !preset.isFallback() && preset.name();  // fallback to preset name
+                        if (name) {
+                            this.innerText = name;
+                        }
                     }
+                });
 
-                    if (name) {
-                        this.innerText = name;
-                    }
-                }
-            });
-
-        // Don't hide entities related to this error - #5880
-        // context.features().forceVisible(_error.elems);
-        context.map().pan([0,0]);  // trigger a redraw
+            // Don't hide entities related to this error - #5880
+            context.features().forceVisible(d.elems);
+            context.map().pan([0,0]);  // trigger a redraw
+        });
     }
 
 
