@@ -14,7 +14,7 @@ var dispatch = d3_dispatch('loaded');
 var _erCache;
 var _erZoom = 14;
 
-var _osmoseUrlRoot = 'https://osmose.openstreetmap.fr/en/api/0.3beta/';
+var _osmoseUrlRoot = 'https://osmose.openstreetmap.fr/';
 
 function abortRequest(controller) {
     if (controller) {
@@ -91,11 +91,8 @@ export default {
     },
 
     loadErrors: function(projection) {
-        var options = {
-            full: 'true', // Returns element IDs
-            level: '1,2,3',
-            zoom: '19',
-            item: services.osmose.items.join() // only interested in certain errors
+        var params = {
+            level: '1,2,3'
         };
 
         // determine the needed tiles to cover the view
@@ -110,10 +107,9 @@ export default {
         tiles.forEach(function(tile) {
             if (_erCache.loadedTile[tile.id] || _erCache.inflightTile[tile.id]) return;
 
-            var rect = tile.extent.rectangle(); // E, N, W, S
-            var params = Object.assign({}, options, { bbox: rect.join() });
-
-            var url = _osmoseUrlRoot + 'issues?' + utilQsString(params);
+            var lang = 'en'; // todo: may want to use provided translations
+            var path = [tile.xyz[2], tile.xyz[0], tile.xyz[1]].join('/');
+            var url = _osmoseUrlRoot + lang + '/map/issues/' + path + '.json?' + utilQsString(params);
 
             var controller = new AbortController();
             _erCache.inflightTile[tile.id] = controller;
@@ -123,15 +119,12 @@ export default {
                     delete _erCache.inflightTile[tile.id];
                     _erCache.loadedTile[tile.id] = true;
 
-                    if (data.issues) {
-                        data.issues.forEach(function(issue) {
-                            // Elements provided as string, separated by _ character
-                            var elems = issue.elems.split('_').map(function(i) {
-                                    return i.substring(0,1) + i.replace(/node|way|relation/, '');
-                                });
-                            var loc = [issue.lon, issue.lat];
+                    if (data.features) {
+                        data.features.forEach(function(issue) {
+                            var loc = issue.geometry.coordinates; // lon, lat
+                            var props = issue.properties;
                             // Item is the type of error, w/ class tells us the sub-type
-                            var type = [issue.item, issue.classs].join('-');
+                            var type = [props.item, props.class].join('-');
 
                             // Filter out unsupported error types (some are too specific or advanced)
                             if (type in services.osmose.errorTypes) {
@@ -143,21 +136,22 @@ export default {
                                     service: 'osmose',
                                     error_type: type,
                                     // Extra details needed for this service
-                                    identifier: issue.id, // this is used to post changes to the error
-                                    elems: elems,
-                                    item: issue.item // category of the issue for styling
+                                    identifier: props.issue_id, // this is used to post changes to the error
+                                    item: props.item // category of the issue for styling
                                 });
 
                                 // Variables used in the description
-                                d.replacements = elems.map(function(i) {
-                                    return linkEntity(i);
-                                });
+                                // d.replacements = elems.map(function(i) {
+                                //     return linkEntity(i);
+                                // });
 
                                 _erCache.data[d.id] = d;
                                 _erCache.rtree.insert(encodeErrorRtree(d));
                             }
                         });
                     }
+
+                    dispatch.call('loaded');
                 })
                 .catch(function() {
                     delete _erCache.inflightTile[tile.id];
@@ -165,6 +159,8 @@ export default {
                 });
         });
     },
+
+    // todo: need to fetch specific error details upon UI loading for element IDs
 
     postUpdate: function(d, callback) {
         if (_erCache.inflightPost[d.id]) {
