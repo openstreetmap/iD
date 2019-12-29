@@ -1067,6 +1067,7 @@
     "shop/deli": {"icon": "maki-restaurant", "geometry": ["point", "area"], "terms": ["lunch", "meat", "sandwich"], "tags": {"shop": "deli"}, "name": "Deli"},
     "shop/department_store": {"icon": "maki-shop", "geometry": ["point", "area"], "tags": {"shop": "department_store"}, "name": "Department Store"},
     "shop/doityourself": {"icon": "temaki-tools", "geometry": ["point", "area"], "tags": {"shop": "doityourself"}, "name": "DIY Store"},
+    "shop/doors": {"icon": "fas-door-open", "geometry": ["point", "area"], "tags": {"shop": "doors"}, "name": "Door Shop"},
     "shop/dry_cleaning": {"icon": "temaki-clothes_hanger", "geometry": ["point", "area"], "tags": {"shop": "dry_cleaning"}, "name": "Dry Cleaner"},
     "shop/e-cigarette": {"icon": "maki-shop", "moreFields": ["{shop}", "min_age"], "geometry": ["point", "area"], "tags": {"shop": "e-cigarette"}, "terms": ["electronic", "vape", "vaping", "vapor"], "name": "E-Cigarette Shop"},
     "shop/electrical": {"icon": "temaki-power", "geometry": ["point", "area"], "terms": ["cable", "electric", "fan", "LED", "lighting", "power", "wire"], "tags": {"shop": "electrical"}, "name": "Electrical Equipment Store"},
