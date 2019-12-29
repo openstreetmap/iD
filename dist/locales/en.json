@@ -1046,6 +1046,31 @@
                         "title": "Overlapping Similar Areas",
                         "description": "{0} and {1} overlap."
                     },
+                    "3161": {
+                        "title": "Missing Parking Access",
+                        "description": "There is no highway leading to {0}."
+                    },
+                    "8300": {
+                        "title": "Traffic Sign Suggestion",
+                        "description": "Traffic signs detected by Mapillary suggest there may be an unmapped {0} nearby.",
+                        "parts": {
+                            "20": "max height limit",
+                            "21": "max weight limit",
+                            "32": "roundabout",
+                            "34": "set of speed bumps"
+                        }
+                    },
+                    "8360": {
+                        "title": "Missing Street Object",
+                        "description": "Object detection by Mapillary suggests there may be an unmapped {0} nearby.",
+                        "parts": {
+                            "1": "bench",
+                            "2": "type of bicycle parking",
+                            "3": "surveillance camera",
+                            "4": "fire hydrant",
+                            "5": "set of traffic signals"
+                        }
+                    },
                     "0-3": {
                         "title": "Suspiciously Small Building",
                         "description": "{0} is a suspisciously small building."
@@ -1077,7 +1102,11 @@
                     },
                     "1280-1": {
                         "title": "Incorrect Speed Camera",
-                        "description": "Speed camera should be on the highway or part of an \"enforcement\" relation."
+                        "description": "{0} should be on the highway or part of an \"enforcement\" relation."
+                    },
+                    "3250-32501": {
+                        "title": "Invalid Opening Hours",
+                        "description": "{0} has an invalid value for the \"opening_hours\" tag."
                     }
                 }
             },

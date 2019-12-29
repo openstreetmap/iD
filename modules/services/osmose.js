@@ -3,6 +3,7 @@ import RBush from 'rbush';
 import { dispatch as d3_dispatch } from 'd3-dispatch';
 import { json as d3_json } from 'd3-fetch';
 
+import { dataEn } from '../../data';
 import { geoExtent, geoVecAdd } from '../geo';
 import { qaError } from '../osm';
 import { utilRebind, utilTiler, utilQsString } from '../util';
@@ -92,7 +93,6 @@ export default {
 
     loadErrors: function(projection) {
         var params = {
-            level: '1,2,3',
             item: services.osmose.items.join() // only interested in certain errors
         };
 
@@ -137,9 +137,22 @@ export default {
                                     service: 'osmose',
                                     error_type: type,
                                     // Extra details needed for this service
-                                    identifier: props.issue_id, // this is used to post changes to the error
-                                    item: props.item // category of the issue for styling
+                                    identifier: props.issue_id, // needed to query and update the error
+                                    item: props.item, // category of the issue for styling
+                                    class: props.class
                                 });
+
+                                // Special handling for some error types
+                                // Setting elems here prevents UI error detail requests
+                                var parts = dataEn.QA.osmose.error_types[d.item].parts;
+                                switch (d.item) {
+                                    case 8300:
+                                    case 8360:
+                                        // todo: possible to add link to open mapillay photo overlay?
+                                        d.replacements = [parts[d.class]];
+                                        d.elems = [];
+                                        break;
+                                }
 
                                 _erCache.data[d.id] = d;
                                 _erCache.rtree.insert(encodeErrorRtree(d));

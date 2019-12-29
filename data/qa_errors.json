@@ -34,7 +34,7 @@
             }
         },
         "osmose": {
-            "items": ["0", "1040", "1050", "1070", "1150", "1280"],
+            "items": ["0", "1040", "1050", "1070", "1150", "1280", "3161", "3250", "8300", "8360"],
             "errorTypes": {
                 "0-1": {
                     "icon": "maki-home"
@@ -51,15 +51,6 @@
                 "1050-1050": {
                     "icon": "maki-circle-stroked"
                 },
-                "1150-1": {
-                    "icon": "far-clone"
-                },
-                "1150-2": {
-                    "icon": "far-clone"
-                },
-                "1150-3": {
-                    "icon": "far-clone"
-                },
                 "1070-1": {
                     "icon": "maki-home"
                 },
@@ -75,8 +66,53 @@
                 "1070-10": {
                     "icon": "maki-cross"
                 },
+                "1150-1": {
+                    "icon": "far-clone"
+                },
+                "1150-2": {
+                    "icon": "far-clone"
+                },
+                "1150-3": {
+                    "icon": "far-clone"
+                },
                 "1280-1": {
                     "icon": "maki-attraction"
+                },
+                "3161-1": {
+                    "icon": "maki-parking"
+                },
+                "3161-2": {
+                    "icon": "maki-parking"
+                },
+                "3250-32501": {
+                    "icon": "maki-watch"
+                },
+                "8300-20": {
+                    "icon": "temaki-height_restrictor"
+                },
+                "8300-21": {
+                    "icon": "fas-weight-hanging"
+                },
+                "8300-32": {
+                    "icon": "maki-circle-stroked"
+                },
+                "8300-34": {
+                    "icon": "temaki-diamond"
+                },
+                "8360-1": {
+                    "icon": "temaki-bench"
+                },
+                "8360-2": {
+                    "icon": "maki-bicycle"
+                },
+                "8360-3": {
+                    "icon": "temaki-security_camera"
+                },
+                "8360-4": {
+                    "icon": "temaki-fire_hydrant"
+                },
+                "8360-5": {
+                    "icon": "temaki-traffic_signals"
                 }
             }
         }

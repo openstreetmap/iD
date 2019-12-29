@@ -70,7 +70,8 @@ function buildData() {
     'fas-long-arrow-alt-right': {},
     'fas-th-list': {},
     'fas-user-cog': {},
-    'far-clone': {}
+    'far-clone': {},
+    'fas-weight-hanging': {}
   };
 
   // The Noun Project icons used
