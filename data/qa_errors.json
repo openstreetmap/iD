@@ -34,7 +34,7 @@
             }
         },
         "osmose": {
-            "items": ["0", "1040", "1050", "1070", "1150", "1280", "3161", "3250", "8300", "8360"],
+            "items": ["0", "1040", "1050", "1070", "1150", "1280", "3161", "3250", "4080", "7040", "8300", "8360"],
             "errorTypes": {
                 "0-1": {
                     "icon": "maki-home"
@@ -86,6 +86,27 @@
                 },
                 "3250-32501": {
                     "icon": "maki-watch"
+                },
+                "4080-1": {
+                    "icon": "far-dot-circle"
+                },
+                "4080-2": {
+                    "icon": "far-dot-circle"
+                },
+                "4080-3": {
+                    "icon": "far-dot-circle"
+                },
+                "7040-1": {
+                    "icon": "temaki-power_tower"
+                },
+                "7040-2": {
+                    "icon": "temaki-power"
+                },
+                "7040-4": {
+                    "icon": "maki-marker"
+                },
+                "7040-6": {
+                    "icon": "temaki-power"
                 },
                 "8300-20": {
                     "icon": "temaki-height_restrictor"

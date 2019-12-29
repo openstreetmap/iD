@@ -1050,6 +1050,14 @@
                         "title": "Missing Parking Access",
                         "description": "There is no highway leading to {0}."
                     },
+                    "4080": {
+                        "title": "Object Mapped Twice",
+                        "description": "{0} and {1} both appear to represent the same object."
+                    },
+                    "7040": {
+                        "title": "Unfinished Power Line",
+                        "description": "A power line appears to be unfinished at {0}."
+                    },
                     "8300": {
                         "title": "Traffic Sign Suggestion",
                         "description": "Traffic signs detected by Mapillary suggest there may be an unmapped {0} nearby.",
@@ -1107,6 +1115,14 @@
                     "3250-32501": {
                         "title": "Invalid Opening Hours",
                         "description": "{0} has an invalid value for the \"opening_hours\" tag."
+                    },
+                    "7040-1": {
+                        "title": "Lone Power Support",
+                        "description": "{0} is a power tower or pole with no connected power lines."
+                    },
+                    "7040-4": {
+                        "title": "Extra Power Line Node",
+                        "description": "Power lines only have nodes at connections and {0} is not tagged as a power line support."
                     }
                 }
             },
