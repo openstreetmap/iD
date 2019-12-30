@@ -888,10 +888,12 @@ en:
           title: 'Traffic Sign Suggestion'
           description: 'Traffic signs detected by Mapillary suggest there may be an unmapped {0} nearby.'
           parts:
+            1: 'speed limit'
             20: 'max height limit'
             21: 'max weight limit'
             32: 'roundabout'
             34: 'set of speed bumps'
+            39: 'living street'
         8360:
           title: 'Missing Street Object'
           description: 'Object detection by Mapillary suggests there may be an unmapped {0} nearby.'

@@ -140,13 +140,20 @@ export default {
                 });
 
                 // Special handling for some error types
-                // Setting elems here prevents UI error detail requests
                 switch (d.item) {
                   case 8300:
                   case 8360: {
                     // Parts only exists for these error types
                     let { parts } = dataEn.QA.osmose.error_types[d.item];
-                    d.replacements = [parts[error_class]];
+                    let k = error_class;
+
+                    // First 17 classes are all speed limits
+                    if (item === 8300 && error_class <= 17) {
+                      k = 1;
+                    }
+
+                    // Setting elems here prevents UI error detail requests
+                    d.replacements = [parts[k]];
                     d.elems = [];
                     break;
                   }

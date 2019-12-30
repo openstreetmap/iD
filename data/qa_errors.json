@@ -111,6 +111,57 @@
                 "7040-6": {
                     "icon": "temaki-power"
                 },
+                "8300-1": {
+                    "icon": "fas-tachometer-alt"
+                },
+                "8300-2": {
+                    "icon": "fas-tachometer-alt"
+                },
+                "8300-3": {
+                    "icon": "fas-tachometer-alt"
+                },
+                "8300-4": {
+                    "icon": "fas-tachometer-alt"
+                },
+                "8300-5": {
+                    "icon": "fas-tachometer-alt"
+                },
+                "8300-6": {
+                    "icon": "fas-tachometer-alt"
+                },
+                "8300-7": {
+                    "icon": "fas-tachometer-alt"
+                },
+                "8300-8": {
+                    "icon": "fas-tachometer-alt"
+                },
+                "8300-9": {
+                    "icon": "fas-tachometer-alt"
+                },
+                "8300-10": {
+                    "icon": "fas-tachometer-alt"
+                },
+                "8300-11": {
+                    "icon": "fas-tachometer-alt"
+                },
+                "8300-12": {
+                    "icon": "fas-tachometer-alt"
+                },
+                "8300-13": {
+                    "icon": "fas-tachometer-alt"
+                },
+                "8300-14": {
+                    "icon": "fas-tachometer-alt"
+                },
+                "8300-15": {
+                    "icon": "fas-tachometer-alt"
+                },
+                "8300-16": {
+                    "icon": "fas-tachometer-alt"
+                },
+                "8300-17": {
+                    "icon": "fas-tachometer-alt"
+                },
                 "8300-20": {
                     "icon": "temaki-height_restrictor"
                 },
@@ -122,6 +173,9 @@
                 },
                 "8300-34": {
                     "icon": "temaki-diamond"
+                },
+                "8300-39": {
+                    "icon": "temaki-pedestrian"
                 },
                 "8360-1": {
                     "icon": "temaki-bench"
