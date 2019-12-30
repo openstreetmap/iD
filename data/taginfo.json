@@ -2001,6 +2001,7 @@
     {"key": "embankment", "value": "1", "description": "🄳 ➜ embankment=yes"},
     {"key": "embankment", "value": "false", "description": "🄳 ➜ embankment=no"},
     {"key": "embankment", "value": "true", "description": "🄳 ➜ embankment=yes"},
+    {"key": "entrance", "value": "main_entrance", "description": "🄳 ➜ entrance=main"},
     {"key": "escalator", "description": "🄳 ➜ highway=steps + conveying=*"},
     {"key": "fee", "value": "0", "description": "🄳 ➜ fee=no"},
     {"key": "fee", "value": "free", "description": "🄳 ➜ fee=no"},

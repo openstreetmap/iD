@@ -373,6 +373,10 @@
       "replace": {"embankment": "yes"}
     },
     {
+      "old": {"entrance": "main_entrance"},
+      "replace": {"entrance": "main"}
+    },
+    {
       "old": {"escalator": "*"},
       "replace": {"highway": "steps", "conveying": "$1"}
     },
