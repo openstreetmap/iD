@@ -136,7 +136,7 @@ export function uiOsmoseEditor(context) {
                 this.blur();    // avoid keeping focus on the button - #4641
                 var errorService = services.osmose;
                 if (errorService) {
-                    d.newStatus = '/done';
+                    d.newStatus = 'done';
                     errorService.postUpdate(d, function(err, error) {
                         dispatch.call('change', error);
                     });
@@ -151,7 +151,7 @@ export function uiOsmoseEditor(context) {
                 this.blur();    // avoid keeping focus on the button - #4641
                 var errorService = services.osmose;
                 if (errorService) {
-                    d.newStatus = '/false';
+                    d.newStatus = 'false';
                     errorService.postUpdate(d, function(err, error) {
                         dispatch.call('change', error);
                     });
