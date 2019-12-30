@@ -219,9 +219,11 @@ export default {
 
                 that.removeError(d);
                 if (d.newStatus === '/done') {
-                    // No pretty identifier, so we just use coordinates
-                    var closedID = d.loc[1].toFixed(5) + '/' + d.loc[0].toFixed(5);
-                    _erCache.closed[d.error_type + ':' + closedID] = true;
+                    // No error identifier, so we give a count of each category
+                    if (!(d.item in _erCache.closed)) {
+                        _erCache.closed[d.item] = 0;
+                    }
+                    _erCache.closed[d.item] += 1;
                 }
                 if (callback) callback(null, d);
             })
@@ -266,8 +268,8 @@ export default {
         updateRtree(encodeErrorRtree(error), false); // false = remove
     },
 
-    // Used to populate `closed:osmose` changeset tag
-    getClosedIDs: function() {
-        return Object.keys(_erCache.closed).sort();
+    // Used to populate `closed:osmose:*` changeset tags
+    getClosedCounts: function() {
+        return _erCache.closed;
     }
 };

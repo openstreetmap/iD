@@ -150,9 +150,9 @@ export function uiCommit(context) {
             }
         }
         if (services.osmose) {
-            var osmoseClosed = services.osmose.getClosedIDs();
-            if (osmoseClosed.length) {
-                tags['closed:osmose'] = osmoseClosed.join(';').substr(0, 255);
+            var osmoseClosed = services.osmose.getClosedCounts();
+            for (var issueType in osmoseClosed) {
+                tags['closed:osmose:' + issueType] = osmoseClosed[issueType].toString().substr(0, 255);
             }
         }
 
