@@ -144,13 +144,10 @@ export default {
 
                                 // Special handling for some error types
                                 // Setting elems here prevents UI error detail requests
-                                var parts = dataEn.QA.osmose.error_types[d.item].parts;
                                 switch (d.item) {
                                     case 8300:
                                     case 8360:
-                                        // todo: possible to add link to open mapillay photo overlay?
-                                        d.replacements = [parts[d.class]];
-                                        d.elems = [];
+                                        mapillaryError(d);
                                         break;
                                 }
 
@@ -167,6 +164,13 @@ export default {
                     _erCache.loadedTile[tile.id] = true;
                 });
         });
+
+        function mapillaryError(d) {
+            // Parts only exists for these error types
+            var parts = dataEn.QA.osmose.error_types[d.item].parts;
+            d.replacements = [parts[d.class]];
+            d.elems = [];
+        }
     },
 
     loadErrorDetail: function(d, callback) {
@@ -191,6 +195,15 @@ export default {
                 d.replacements = d.elems.map(function(i) {
                     return linkEntity(i);
                 });
+
+                // Special handling for some error types
+                switch (d.item) {
+                    case 3040:
+                        d.replacements.push(/Bad value for (.+)/i
+                            .exec(data.subtitle)[1]
+                        );
+                        break;
+                }
 
                 that.replaceError(d);
                 if (callback) callback(null, d);

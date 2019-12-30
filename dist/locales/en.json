@@ -1032,7 +1032,7 @@
         "full_screen": "Toggle Full Screen",
         "QA": {
             "osmose": {
-                "title": "Osmose",
+                "title": "Osmose Issue",
                 "error_types": {
                     "0": {
                         "title": "Building Intersection",
@@ -1112,6 +1112,10 @@
                         "title": "Incorrect Speed Camera",
                         "description": "{0} should be on the highway or part of an \"enforcement\" relation."
                     },
+                    "3040-3040": {
+                        "title": "Unusual Tagging",
+                        "description": "{0} has a non-conventional tag value: {1}."
+                    },
                     "3250-32501": {
                         "title": "Invalid Opening Hours",
                         "description": "{0} has an invalid value for the \"opening_hours\" tag."
@@ -1122,7 +1126,7 @@
                     },
                     "7040-4": {
                         "title": "Extra Power Line Node",
-                        "description": "Power lines only have nodes at connections and {0} is not tagged as a power line support."
+                        "description": "Power lines should only have nodes at supports and {0} is not tagged as a pole or tower."
                     }
                 }
             },
