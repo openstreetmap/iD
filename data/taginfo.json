@@ -1048,7 +1048,7 @@
     {"key": "shop", "value": "hunting", "description": "🄿 Hunting Shop", "object_types": ["node", "area"], "icon_url": "https://cdn.jsdelivr.net/gh/ideditor/temaki/icons/binoculars.svg"},
     {"key": "shop", "value": "interior_decoration", "description": "🄿 Interior Decoration Store", "object_types": ["node", "area"], "icon_url": "https://cdn.jsdelivr.net/gh/mapbox/maki/icons/shop-15.svg"},
     {"key": "shop", "value": "jewelry", "description": "🄿 Jewelry Store", "object_types": ["node", "area"], "icon_url": "https://cdn.jsdelivr.net/gh/mapbox/maki/icons/jewelry-store-15.svg"},
-    {"key": "shop", "value": "kiosk", "description": "🄿 Kiosk", "object_types": ["node", "area"], "icon_url": "https://cdn.jsdelivr.net/gh/mapbox/maki/icons/shop-15.svg"},
+    {"key": "shop", "value": "kiosk", "description": "🄿 Kiosk", "object_types": ["node", "area"], "icon_url": "https://cdn.jsdelivr.net/gh/openstreetmap/iD@master/svg/fontawesome/fas-store.svg"},
     {"key": "shop", "value": "kitchen", "description": "🄿 Kitchen Design Store", "object_types": ["node", "area"], "icon_url": "https://cdn.jsdelivr.net/gh/ideditor/temaki/icons/kitchen_sink.svg"},
     {"key": "shop", "value": "laundry", "description": "🄿 Laundry", "object_types": ["node", "area"], "icon_url": "https://cdn.jsdelivr.net/gh/ideditor/temaki/icons/laundry.svg"},
     {"key": "self_service", "value": "yes", "description": "🄿 Self-Service Laundry", "object_types": ["node", "area"], "icon_url": "https://cdn.jsdelivr.net/gh/ideditor/temaki/icons/laundry.svg"},
