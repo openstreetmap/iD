@@ -451,6 +451,7 @@
     {"key": "emergency", "value": "siren", "description": "🄿 Siren", "object_types": ["node"], "icon_url": "https://cdn.jsdelivr.net/gh/openstreetmap/iD@master/svg/fontawesome/fas-volume-up.svg"},
     {"key": "emergency", "value": "water_tank", "description": "🄿 Emergency Water Tank", "object_types": ["node"], "icon_url": "https://cdn.jsdelivr.net/gh/mapbox/maki/icons/water-15.svg"},
     {"key": "entrance", "description": "🄿 Entrance/Exit, 🄵 Type", "object_types": ["node"], "icon_url": "https://cdn.jsdelivr.net/gh/mapbox/maki/icons/entrance-alt1-15.svg"},
+    {"key": "entrance", "value": "emergency", "description": "🄿 Emergency Exit", "object_types": ["node"], "icon_url": "https://cdn.jsdelivr.net/gh/mapbox/maki/icons/entrance-alt1-15.svg"},
     {"key": "ford", "value": "yes", "description": "🄿 Ford", "object_types": ["node"], "icon_url": "https://cdn.jsdelivr.net/gh/ideditor/temaki/icons/pedestrian.svg"},
     {"key": "golf", "value": "bunker", "description": "🄿 Sand Trap", "object_types": ["area"], "icon_url": "https://cdn.jsdelivr.net/gh/mapbox/maki/icons/golf-15.svg"},
     {"key": "golf", "value": "cartpath", "description": "🄿 Golf Cartpath", "object_types": ["way"], "icon_url": "https://cdn.jsdelivr.net/gh/ideditor/temaki/icons/golf_cart.svg"},

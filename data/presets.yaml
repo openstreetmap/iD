@@ -4698,6 +4698,11 @@ en:
         name: Entrance/Exit
         # 'terms: entrance,exit,door'
         terms: '<translate with synonyms or related terms for ''Entrance/Exit'', separated by commas>'
+      entrance/emergency:
+        # entrance=emergency
+        name: Emergency Exit
+        # 'terms: fire exit,door'
+        terms: '<translate with synonyms or related terms for ''Emergency Exit'', separated by commas>'
       ford:
         # ford=yes
         name: Ford

@@ -6617,6 +6617,10 @@
                     "name": "Entrance/Exit",
                     "terms": "entrance,exit,door"
                 },
+                "entrance/emergency": {
+                    "name": "Emergency Exit",
+                    "terms": "fire exit,door"
+                },
                 "ford": {
                     "name": "Ford",
                     "terms": ""
