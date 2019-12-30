@@ -7559,6 +7559,10 @@ en:
         # shop=doityourself
         name: DIY Store
         terms: '<translate with synonyms or related terms for ''DIY Store'', separated by commas>'
+      shop/doors:
+        # shop=doors
+        name: Door Shop
+        terms: '<translate with synonyms or related terms for ''Door Shop'', separated by commas>'
       shop/dry_cleaning:
         # shop=dry_cleaning
         name: Dry Cleaner

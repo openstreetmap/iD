@@ -1011,6 +1011,7 @@
     {"key": "shop", "value": "deli", "description": "🄿 Deli", "object_types": ["node", "area"], "icon_url": "https://cdn.jsdelivr.net/gh/mapbox/maki/icons/restaurant-15.svg"},
     {"key": "shop", "value": "department_store", "description": "🄿 Department Store", "object_types": ["node", "area"], "icon_url": "https://cdn.jsdelivr.net/gh/mapbox/maki/icons/shop-15.svg"},
     {"key": "shop", "value": "doityourself", "description": "🄿 DIY Store", "object_types": ["node", "area"], "icon_url": "https://cdn.jsdelivr.net/gh/ideditor/temaki/icons/tools.svg"},
+    {"key": "shop", "value": "doors", "description": "🄿 Door Shop", "object_types": ["node", "area"], "icon_url": "https://cdn.jsdelivr.net/gh/openstreetmap/iD@master/svg/fontawesome/fas-door-open.svg"},
     {"key": "shop", "value": "dry_cleaning", "description": "🄿 Dry Cleaner", "object_types": ["node", "area"], "icon_url": "https://cdn.jsdelivr.net/gh/ideditor/temaki/icons/clothes_hanger.svg"},
     {"key": "shop", "value": "e-cigarette", "description": "🄿 E-Cigarette Shop", "object_types": ["node", "area"], "icon_url": "https://cdn.jsdelivr.net/gh/mapbox/maki/icons/shop-15.svg"},
     {"key": "shop", "value": "electrical", "description": "🄿 Electrical Equipment Store", "object_types": ["node", "area"], "icon_url": "https://cdn.jsdelivr.net/gh/ideditor/temaki/icons/power.svg"},
