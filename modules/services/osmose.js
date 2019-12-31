@@ -174,7 +174,7 @@ export default {
     });
   },
 
-  // todo: &item=1090%2C1110%2C1120%2C3010%2C3020%2C3032%2C3050%2C3060%2C3091%2C3092%2C3150%2C3180%2C3190%2C3200%2C3210%2C4010%2C4030%2C5010%2C5020%2C5030%2C5040%2C5050%2C5080%2C6030%2C9000%2C9001%2C9004%2C9005%2C9010
+  // todo: &item=1090%2C1110%2C1120%2C3010%2C3020%2C3032%2C3050%2C3060%2C3091%2C3092%2C3150%2C3180%2C3190%2C3200%2C3210%2C4010%2C4030%2C5010%2C5020%2C5030%2C5040%2C5050%2C5080%2C6030%2C9000%2C9001
   loadErrorDetail(d, callback) {
     // Error details only need to be fetched once
     if (d.elems !== undefined) {
@@ -199,7 +199,8 @@ export default {
           '3090-3090': /Incorrect date "(.+)"/i,
           '5070-50703': /"(.+)"=".+" unexpected symbol char \(.+, (.+)\)/i,
           '5070-50704': /Umbalanced (.+)/i,
-          '5070-50705': /Unexpected char (.+)/i
+          '5070-50705': /Unexpected char (.+)/i,
+          '9010-9010003': /(.+)/
         };
         if (d.error_type in special) {
           let [, ...details] = special[d.error_type].exec(data.subtitle);
@@ -208,6 +209,13 @@ export default {
           if (d.error_type === '5070-50703') {
             d.replacements[2] = String.fromCharCode(details[1]);
           }
+        } else if (d.error_type === '9010-9010001') {
+          // This error has a rare subtitle variant
+          let details = /(.+) is unnecessary/i.exec(data.subtitle);
+          if (details == null) {
+            details = /\. Remove (.+)/i.exec(data.subtitle);
+          }
+          d.replacements.push(details[1]);
         }
 
         this.replaceError(d);

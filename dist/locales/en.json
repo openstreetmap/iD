@@ -1169,6 +1169,14 @@
                     "7090-3": {
                         "title": "Disconnected Highway Feature",
                         "description": "{0} is highway feature or barrier with no connected highway."
+                    },
+                    "9010-9010001": {
+                        "title": "Unnecessary Tag",
+                        "description": "{0} is redundantly tagged with \"{1}\"."
+                    },
+                    "9010-9010003": {
+                        "title": "Descriptive Name",
+                        "description": "{0} appears to have a descriptive name: \"{1}\"."
                     }
                 }
             },

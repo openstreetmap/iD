@@ -933,6 +933,12 @@ en:
             3: 'surveillance camera'
             4: 'fire hydrant'
             5: 'set of traffic signals'
+        9010-9010001:
+          title: 'Unnecessary Tag'
+          description: '{0} is redundantly tagged with "{1}".'
+        9010-9010003:
+          title: 'Descriptive Name'
+          description: '{0} appears to have a descriptive name: "{1}".'
     improveOSM:
       title: ImproveOSM Detection
       geometry_types:
