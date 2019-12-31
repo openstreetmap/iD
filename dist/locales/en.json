@@ -1054,13 +1054,23 @@
                         "title": "Missing Parking Access",
                         "description": "There is no highway leading to {0}."
                     },
+                    "3200": {
+                        "title": "Invalid Area Tagging"
+                    },
                     "3220": {
                         "title": "All Access Allowed",
                         "description": "{0} has an \"access=yes\" or \"access=permissive\" tag which permits use by all transport modes (ski, horse, hazmat, etc.)."
                     },
+                    "4010": {
+                        "title": "Deprecated Tagging",
+                        "description": "{0} uses tag \"{1}\" which is deprecated in favour of \"{2}\"."
+                    },
                     "4080": {
                         "title": "Object Mapped Twice",
                         "description": "{0} and {1} both appear to represent the same object."
+                    },
+                    "5010": {
+                        "title": "Orthographic Error"
                     },
                     "7040": {
                         "title": "Unfinished Power Line",
@@ -1124,7 +1134,7 @@
                     },
                     "2110-21101": {
                         "title": "Unknown Named Object",
-                        "description": "{0} has a name but no main tag."
+                        "description": "{0} has a name but no feature tag."
                     },
                     "2110-21102": {
                         "title": "Missing Relation Type",
@@ -1138,9 +1148,28 @@
                         "title": "Invalid Date",
                         "description": "{0} is tagged with an invalid date value: \"{1}\"."
                     },
+                    "3200-32001": {
+                        "description": "{0} is tagged \"area=yes\", but this feature is an area by default."
+                    },
+                    "3200-32002": {
+                        "description": "{0} has an \"area\" tag, but no feature tag."
+                    },
+                    "3200-32003": {
+                        "description": "{0} is tagged \"area=no\", but this feature already isn't an area."
+                    },
                     "3250-32501": {
                         "title": "Invalid Opening Hours",
                         "description": "{0} has an invalid value for the \"opening_hours\" tag."
+                    },
+                    "4030-900": {
+                        "title": "Conflicting Tags",
+                        "description": "{0} is tagged with both \"{1}\" and \"{2}\"."
+                    },
+                    "5010-803": {
+                        "description": "The \"name\" of {0} is written in all capitals."
+                    },
+                    "5010-903": {
+                        "description": "The \"name\" of {0} has excessive space characters."
                     },
                     "5070-50703": {
                         "title": "Unexpected Symbol",

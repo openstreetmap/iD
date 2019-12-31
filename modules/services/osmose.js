@@ -3,7 +3,7 @@ import RBush from 'rbush';
 import { dispatch as d3_dispatch } from 'd3-dispatch';
 import { json as d3_json } from 'd3-fetch';
 
-import { dataEn } from '../../data';
+import { t } from '../util/locale';
 import { geoExtent, geoVecAdd } from '../geo';
 import { qaError } from '../osm';
 import { utilRebind, utilTiler, utilQsString } from '../util';
@@ -143,8 +143,6 @@ export default {
                 switch (d.item) {
                   case 8300:
                   case 8360: {
-                    // Parts only exists for these error types
-                    let { parts } = dataEn.QA.osmose.error_types[d.item];
                     let k = error_class;
 
                     // First 17 classes are all speed limits
@@ -153,7 +151,7 @@ export default {
                     }
 
                     // Setting elems here prevents UI error detail requests
-                    d.replacements = [parts[k]];
+                    d.replacements = [t(`QA.osmose.error_types.${d.item}.parts.${k}`)];
                     d.elems = [];
                     break;
                   }
@@ -174,7 +172,6 @@ export default {
     });
   },
 
-  // todo: &item=1090%2C1110%2C1120%2C3010%2C3020%2C3032%2C3050%2C3060%2C3091%2C3092%2C3150%2C3180%2C3190%2C3200%2C3210%2C4010%2C4030%2C5010%2C5020%2C5030%2C5040%2C5050%2C5080%2C6030%2C9000%2C9001
   loadErrorDetail(d, callback) {
     // Error details only need to be fetched once
     if (d.elems !== undefined) {
@@ -197,6 +194,9 @@ export default {
         const special = {
           '3040-3040': /Bad value for (.+)/i,
           '3090-3090': /Incorrect date "(.+)"/i,
+          '4010-4010': /Tag (.+) is deprecated: (.+)/i,
+          '4010-40102': /Tag (.+) is deprecated: (.+)/i,
+          '4030-900': /Conflict between tags: (.+), (.+)/i,
           '5070-50703': /"(.+)"=".+" unexpected symbol char \(.+, (.+)\)/i,
           '5070-50704': /Umbalanced (.+)/i,
           '5070-50705': /Unexpected char (.+)/i,
