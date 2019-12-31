@@ -34,7 +34,27 @@
             }
         },
         "osmose": {
-            "items": ["0", "1040", "1050", "1070", "1150", "1280", "3040", "3161", "3250", "4080", "7040", "8300", "8360"],
+            "items": [
+                "0",
+                "1040",
+                "1050",
+                "1070",
+                "1150",
+                "1190",
+                "1280",
+                "2110",
+                "3040",
+                "3090",
+                "3161",
+                "3220",
+                "3250",
+                "4080",
+                "7040",
+                "7090",
+                "5070",
+                "8300",
+                "8360"
+            ],
             "errorTypes": {
                 "0-1": {
                     "icon": "maki-home"
@@ -75,17 +95,41 @@
                 "1150-3": {
                     "icon": "far-clone"
                 },
+                "1190-10": {
+                    "icon": "fas-share-alt"
+                },
+                "1190-20": {
+                    "icon": "fas-share-alt"
+                },
+                "1190-30": {
+                    "icon": "fas-share-alt"
+                },
                 "1280-1": {
                     "icon": "maki-attraction"
                 },
+                "2110-21101": {
+                    "icon": "temaki-plaque"
+                },
+                "2110-21102": {
+                    "icon": "fas-shapes"
+                },
                 "3040-3040": {
                     "icon": "far-times-circle"
+                },
+                "3090-3090": {
+                    "icon": "fas-calendar-alt"
                 },
                 "3161-1": {
                     "icon": "maki-parking"
                 },
                 "3161-2": {
                     "icon": "maki-parking"
+                },
+                "3220-32200": {
+                    "icon": "maki-roadblock"
+                },
+                "3220-32201": {
+                    "icon": "maki-roadblock"
                 },
                 "3250-32501": {
                     "icon": "maki-watch"
@@ -99,6 +143,15 @@
                 "4080-3": {
                     "icon": "far-dot-circle"
                 },
+                "5070-50703": {
+                    "icon": "fas-tint-slash"
+                },
+                "5070-50704": {
+                    "icon": "fas-code"
+                },
+                "5070-50705": {
+                    "icon": "fas-question"
+                },
                 "7040-1": {
                     "icon": "temaki-power_tower"
                 },
@@ -110,6 +163,12 @@
                 },
                 "7040-6": {
                     "icon": "temaki-power"
+                },
+                "7090-1": {
+                    "icon": "maki-rail"
+                },
+                "7090-3": {
+                    "icon": "maki-circle"
                 },
                 "8300-1": {
                     "icon": "fas-tachometer-alt"

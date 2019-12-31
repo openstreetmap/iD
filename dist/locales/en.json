@@ -1046,9 +1046,17 @@
                         "title": "Overlapping Similar Areas",
                         "description": "{0} and {1} overlap."
                     },
+                    "1190": {
+                        "title": "Approximate Way",
+                        "description": "{0} looks like it could be mapped more accurately."
+                    },
                     "3161": {
                         "title": "Missing Parking Access",
                         "description": "There is no highway leading to {0}."
+                    },
+                    "3220": {
+                        "title": "All Access Allowed",
+                        "description": "{0} has an \"access=yes\" or \"access=permissive\" tag which permits use by all transport modes (ski, horse, hazmat, etc.)."
                     },
                     "4080": {
                         "title": "Object Mapped Twice",
@@ -1114,13 +1122,37 @@
                         "title": "Incorrect Speed Camera",
                         "description": "{0} should be on the highway or part of an \"enforcement\" relation."
                     },
+                    "2110-21101": {
+                        "title": "Unknown Named Object",
+                        "description": "{0} has a name but no main tag."
+                    },
+                    "2110-21102": {
+                        "title": "Missing Relation Type",
+                        "description": "{0} is missing a \"type\" tag."
+                    },
                     "3040-3040": {
                         "title": "Unusual Tagging",
-                        "description": "{0} has a non-conventional tag value: {1}."
+                        "description": "{0} has a non-conventional tag value: \"{1}\"."
+                    },
+                    "3090-3090": {
+                        "title": "Invalid Date",
+                        "description": "{0} is tagged with an invalid date value: \"{1}\"."
                     },
                     "3250-32501": {
                         "title": "Invalid Opening Hours",
                         "description": "{0} has an invalid value for the \"opening_hours\" tag."
+                    },
+                    "5070-50703": {
+                        "title": "Unexpected Symbol",
+                        "description": "{0} has an unexpected symbol, {2}, in the \"{1}\" tag."
+                    },
+                    "5070-50704": {
+                        "title": "Unbalanced Punctuation",
+                        "description": "{0} has an unbalanced {1} character in its name."
+                    },
+                    "5070-50705": {
+                        "title": "Unexpected Punctuation",
+                        "description": "{0} has an unexpected {1} character in its name."
                     },
                     "7040-1": {
                         "title": "Lone Power Support",
@@ -1129,6 +1161,14 @@
                     "7040-4": {
                         "title": "Extra Power Line Node",
                         "description": "Power lines should only have nodes at supports and {0} is not tagged as a pole or tower."
+                    },
+                    "7090-1": {
+                        "title": "Disconnected Level Crossing",
+                        "description": "{0} is a level crossing at a non-junction node."
+                    },
+                    "7090-3": {
+                        "title": "Disconnected Highway Feature",
+                        "description": "{0} is highway feature or barrier with no connected highway."
                     }
                 }
             },

@@ -174,6 +174,7 @@ export default {
     });
   },
 
+  // todo: &item=1090%2C1110%2C1120%2C3010%2C3020%2C3032%2C3050%2C3060%2C3091%2C3092%2C3150%2C3180%2C3190%2C3200%2C3210%2C4010%2C4030%2C5010%2C5020%2C5030%2C5040%2C5050%2C5080%2C6030%2C9000%2C9001%2C9004%2C9005%2C9010
   loadErrorDetail(d, callback) {
     // Error details only need to be fetched once
     if (d.elems !== undefined) {
@@ -192,12 +193,20 @@ export default {
         // Element links used in the error description
         d.replacements = d.elems.map(linkEntity);
 
-        // Special handling for some error types
-        switch (d.item) {
-          case 3040: {
-            let [, key_value] = /Bad value for (.+)/i.exec(data.subtitle);
-            d.replacements.push(key_value);
-            break;
+        // Some error types have details in their subtitle
+        const special = {
+          '3040-3040': /Bad value for (.+)/i,
+          '3090-3090': /Incorrect date "(.+)"/i,
+          '5070-50703': /"(.+)"=".+" unexpected symbol char \(.+, (.+)\)/i,
+          '5070-50704': /Umbalanced (.+)/i,
+          '5070-50705': /Unexpected char (.+)/i
+        };
+        if (d.error_type in special) {
+          let [, ...details] = special[d.error_type].exec(data.subtitle);
+          d.replacements.push(...details);
+
+          if (d.error_type === '5070-50703') {
+            d.replacements[2] = String.fromCharCode(details[1]);
           }
         }
 
