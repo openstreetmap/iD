@@ -3168,6 +3168,7 @@ en:
       amenity/grave_yard:
         # amenity=grave_yard
         name: Graveyard
+        # 'terms: burial ground,cemetary,cemetery,churchyard,columbarium,grave yard,graveyard,mausoleum,tomb'
         terms: '<translate with synonyms or related terms for ''Graveyard'', separated by commas>'
       amenity/grit_bin:
         # amenity=grit_bin
@@ -5347,6 +5348,7 @@ en:
       landuse/cemetery:
         # landuse=cemetery
         name: Cemetery
+        # 'terms: burial ground,cemetary,cemetery,churchyard,columbarium,grave yard,graveyard,mausoleum,tomb'
         terms: '<translate with synonyms or related terms for ''Cemetery'', separated by commas>'
       landuse/churchyard:
         # landuse=churchyard
@@ -5499,6 +5501,7 @@ en:
       landuse/religious:
         # landuse=religious
         name: Religious Area
+        # 'terms: christian,churchyard,hindu,jewish,mosque,muslim,place of worship,shinto,sikh,taoist,temple,shrine,synagogue'
         terms: '<translate with synonyms or related terms for ''Religious Area'', separated by commas>'
       landuse/reservoir:
         # landuse=reservoir

@@ -5321,7 +5321,7 @@
                 },
                 "amenity/grave_yard": {
                     "name": "Graveyard",
-                    "terms": ""
+                    "terms": "burial ground,cemetary,cemetery,churchyard,columbarium,grave yard,graveyard,mausoleum,tomb"
                 },
                 "amenity/grit_bin": {
                     "name": "Grit Bin",
@@ -7169,7 +7169,7 @@
                 },
                 "landuse/cemetery": {
                     "name": "Cemetery",
-                    "terms": ""
+                    "terms": "burial ground,cemetary,cemetery,churchyard,columbarium,grave yard,graveyard,mausoleum,tomb"
                 },
                 "landuse/commercial": {
                     "name": "Commercial Area",
@@ -7289,7 +7289,7 @@
                 },
                 "landuse/religious": {
                     "name": "Religious Area",
-                    "terms": ""
+                    "terms": "christian,churchyard,hindu,jewish,mosque,muslim,place of worship,shinto,sikh,taoist,temple,shrine,synagogue"
                 },
                 "landuse/residential": {
                     "name": "Residential Area",
