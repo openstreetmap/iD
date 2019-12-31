@@ -5351,7 +5351,6 @@ en:
       landuse/churchyard:
         # landuse=churchyard
         name: Churchyard
-        terms: '<translate with synonyms or related terms for ''Churchyard'', separated by commas>'
       landuse/commercial:
         # landuse=commercial
         name: Commercial Area

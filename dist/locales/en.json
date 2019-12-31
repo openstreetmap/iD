@@ -7143,6 +7143,9 @@
                 "landuse/basin": {
                     "name": "Basin"
                 },
+                "landuse/churchyard": {
+                    "name": "Churchyard"
+                },
                 "landuse/farm": {
                     "name": "Farmland"
                 },
@@ -7166,10 +7169,6 @@
                 },
                 "landuse/cemetery": {
                     "name": "Cemetery",
-                    "terms": ""
-                },
-                "landuse/churchyard": {
-                    "name": "Churchyard",
                     "terms": ""
                 },
                 "landuse/commercial": {
