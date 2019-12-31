@@ -535,7 +535,7 @@
         "help_translate": "Hjælp med at oversætte",
         "sidebar": {
             "key": "`",
-            "tooltip": "Skift tilstand for sidebaren"
+            "tooltip": "Åbn/Luk sidebaren."
         },
         "feature_info": {
             "hidden_warning": "{count} skjulte objekter",
@@ -666,7 +666,7 @@
             "wiki_reference": "Vis dokumentation",
             "wiki_en_reference": "Vis dokumentation på engelsk",
             "hidden_preset": {
-                "manual": "{features} er skjulte. Aktiver dem i Kortdata-panelet.",
+                "manual": "{features} er skjulte. Indstil visning i Kortdata-fanen.",
                 "zoom": "{features} er skjulte. Zoom ind for at se dem."
             },
             "back_tooltip": "Ændr objekt",
@@ -721,6 +721,9 @@
                 "description": "Vis minikort",
                 "tooltip": "Vis et udzommet kort for at hjælpe med at lokalisere det viste område.",
                 "key": "/"
+            },
+            "panel": {
+                "description": "Vis detalje-panel på kortet"
             },
             "fix_misalignment": "Juster luftfoto-offset",
             "offset": "Træk et vilkårligt sted i det grå område nedenfor for at justere luftfotoets offset, eller indtast offset-værdien i meter."
@@ -880,6 +883,14 @@
                 }
             }
         },
+        "preferences": {
+            "title": "Præferencer",
+            "description": "Præferencer",
+            "privacy": {
+                "title": "Privatliv",
+                "privacy_link": "Se privatlivspolitik for iD"
+            }
+        },
         "restore": {
             "heading": "Du har ikke-gemte ændringer",
             "description": "Vil du gendanne ikke-gemte ændringer fra en tidligere redigeringssession?",
@@ -942,6 +953,9 @@
         "splash": {
             "welcome": "Velkommen til OpenStreetMap-redigeringsværktøjet iD.",
             "text": "iD er et brugervenligt men kraftfuldt værktøj til at bidrage til verdens bedste frie verdenskort.  Dette er version {version}. Mere information kan findes på {website}, og fejl kan rapporteres på {github}.",
+            "privacy_update": "Vores privatlivspolitik er for nylig blevet opdateret.",
+            "privacy_policy": "privatlivspolitik for iD",
+            "privacy": "{updateMessage} Ved brug af dette stykke software accepterer du at dette sker i overensstemmelse med {privacyLink}.",
             "walkthrough": "Start gennemgangen",
             "start": "Rediger nu"
         },
@@ -963,7 +977,7 @@
             "out": "Zoom ud"
         },
         "cannot_zoom": "Kan ikke zoome længere ud i nuværende tilstand.",
-        "full_screen": "Skift fuld skærmtilstand",
+        "full_screen": "Skift fuldskærmstilstand",
         "QA": {
             "improveOSM": {
                 "title": "ImproveOSM-detektering"
@@ -1122,6 +1136,18 @@
                     "210": {
                         "title": "Selvkrydsende vej",
                         "description": "Der er et ikke nærmere specificeret problem med selvkrydsende veje."
+                    },
+                    "280": {
+                        "title": "Afgrænsningsproblem",
+                        "description": "Der er et uspecificeret problem med denne afgrænsning."
+                    },
+                    "290": {
+                        "title": "Begrænsningsproblem",
+                        "description": "Der er et uspecificeret problem med denne begrænsning."
+                    },
+                    "310": {
+                        "title": "Rundkørselsproblem",
+                        "description": "Der er et uspecificeret problem med denne rundkørsel."
                     }
                 }
             }
@@ -1330,6 +1356,19 @@
             "rules": {
                 "title": "Regler"
             },
+            "user_resolved_issues": "Problemer løst af dine redigeringer",
+            "no_issues": {
+                "hidden_issues": {
+                    "none": "Detekterede problemer vil blive vist her",
+                    "elsewhere": "Andre problemer: {count}",
+                    "everything_else": "Problemer med alt andet: {count]",
+                    "everything_else_elsewhere": "Andre problemer med alt andet: {count]",
+                    "disabled_rules": "Problemer fra deaktiverede regler: {count]",
+                    "disabled_rules_elsewhere": "Andre problemer fra deaktiverede regler: {count]",
+                    "ignored_issues": "Ignorerede problemer: {count}",
+                    "ignored_issues_elsewhere": "Andre ignorerede problemer: {count}"
+                }
+            },
             "options": {
                 "what": {
                     "title": "Kontrollér:",
@@ -1366,6 +1405,14 @@
                 "tip": "Find kortobjekter der krydser hinanden på en forkert måde",
                 "building-building": {
                     "reference": "Bygninger bør ikke skære hinanden medmindre de er i forskellige lag."
+                }
+            },
+            "impossible_oneway": {
+                "tip": "Find rutningsproblemer med ensrettede kortobjekter"
+            },
+            "fix": {
+                "ignore_issue": {
+                    "title": "Ignorer dette problem"
                 }
             }
         },
@@ -1663,11 +1710,15 @@
                 },
                 "display_options": {
                     "title": "Visnings-muligheder",
+                    "background": "Åbn/luk baggrund-fane",
                     "background_switch": "Skift til forrige anvendte baggrund",
+                    "map_data": "Åbn/luk kortdata-fane",
+                    "issues": "Åbn/luk problemer-fane",
+                    "preferences": "Åbn/luk præferencer-fane",
                     "fullscreen": "Aktiver fuldskærms-tilstand",
-                    "sidebar": "Skift tilstand for sidebar",
+                    "sidebar": "Åbn/luk sidebar",
                     "wireframe": "Skift trådnet-tilstand",
-                    "osm_data": "Skift tilstand for OpenStreetMap-data",
+                    "osm_data": "Vis/skjul OpenStreetMap-data",
                     "minimap": "Åbn/luk minikort"
                 },
                 "selecting": {
@@ -1727,11 +1778,11 @@
                 "title": "Værktøjer",
                 "info": {
                     "title": "Information",
-                    "all": "Åbn/luk alle informationspaneler",
-                    "background": "Åbn/luk baggrundspanel",
-                    "history": "Åbn/luk historikpanel",
-                    "location": "Åbn/luk lokationspanel",
-                    "measurement": "Åbn/luk opmålingspanel"
+                    "all": "Vis/skjul alle informationspaneler",
+                    "background": "Vis/skjul baggrundspanel",
+                    "history": "Vis/skjul historikpanel",
+                    "location": "Vis/skjul lokationspanel",
+                    "measurement": "Vis/skjul opmålingspanel"
                 }
             }
         },

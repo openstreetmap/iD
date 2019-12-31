@@ -5458,8 +5458,8 @@
                     "terms": "学院,建筑,教学楼,实验室,校舍,宿舍,大学,院校,大专,校园,学校,学习"
                 },
                 "building/commercial": {
-                    "name": "商业建筑物",
-                    "terms": "商业建筑物"
+                    "name": "商务办公楼",
+                    "terms": "商业建筑物,写字楼,办公楼"
                 },
                 "building/construction": {
                     "name": "在建建筑",
@@ -5521,8 +5521,8 @@
                     "terms": "住宅建筑物,住宅建筑"
                 },
                 "building/retail": {
-                    "name": "零售业建筑",
-                    "terms": "零售业建筑,百货"
+                    "name": "商场建筑",
+                    "terms": "零售业建筑,百货,购物中心,商场"
                 },
                 "building/roof": {
                     "name": "开放式建筑",
@@ -6275,8 +6275,8 @@
                     "terms": "教堂庭院"
                 },
                 "landuse/commercial": {
-                    "name": "商业区",
-                    "terms": "商业区,商业用地"
+                    "name": "商务办公用地",
+                    "terms": "商业区,商业用地,办公用地,商务"
                 },
                 "landuse/construction": {
                     "name": "建设区域",
@@ -6400,8 +6400,8 @@
                     "terms": "公寓区,楼区,公寓楼,公寓,住宅,住宅区,住所,套间"
                 },
                 "landuse/retail": {
-                    "name": "零售场所",
-                    "terms": "零售场所"
+                    "name": "购物区",
+                    "terms": "零售场所,购物区,商业区,商业用地"
                 },
                 "landuse/vineyard": {
                     "name": "葡萄园",

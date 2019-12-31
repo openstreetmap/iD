@@ -3080,7 +3080,7 @@
                 },
                 "craft/winery": {
                     "name": "Kletarstvo",
-                    "terms": "vinarstvo,vinarna,klet,vinska klet,kletarstvo"
+                    "terms": "vinarstvo,vinarna,klet,vinska klet,kletarstvo,vinoteka"
                 },
                 "embankment": {
                     "name": "Nasip"
@@ -4440,7 +4440,7 @@
                     "name": "Trgovina z okenskimi senčili"
                 },
                 "shop/wine": {
-                    "name": "Kletarstvo",
+                    "name": "Vinoteka",
                     "terms": "kletarstvo,vinska klet,vinotoč"
                 },
                 "tourism/alpine_hut": {

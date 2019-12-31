@@ -1779,6 +1779,7 @@
                 "title": "Érvénytelen formázás",
                 "tip": "Formailag hibás címkék",
                 "email": {
+                    "message": "{feature}  hibás email címmel",
                     "reference": "Egy email címnek valahogy így kell kinéznie: \"felhasznalo@pelda.com\""
                 }
             },
@@ -1873,6 +1874,9 @@
                         "reference": "Az egyirányú útnak más úthoz kell kapcsolódnia."
                     }
                 }
+            },
+            "unclosed_multipolygon_part": {
+                "message": "{feature} nem lezárt résszel"
             },
             "unsquare_way": {
                 "title": "Nem szögletes sarok  ({val}-ig)",
@@ -2323,7 +2327,8 @@
                     "search": "Elemek keresése"
                 },
                 "with_selected": {
-                    "edit_menu": "Menüszerkesztés átkapcsolása"
+                    "edit_menu": "Menüszerkesztés átkapcsolása",
+                    "zoom_to": "Nagyítás a kiválasztott elemekre"
                 },
                 "vertex_selected": {
                     "title": "A kiválasztott ponttal",
@@ -3448,6 +3453,9 @@
                 "map_type": {
                     "label": "Típus"
                 },
+                "mapillary": {
+                    "label": "Mapillary Image ID"
+                },
                 "material": {
                     "label": "Anyag",
                     "terms": "anyag, építőanyag, alapanyag, összetevő, alkotóelem"
@@ -4469,6 +4477,9 @@
                 },
                 "wikidata": {
                     "label": "Wikidata"
+                },
+                "wikimedia_commons": {
+                    "label": "Wikimedia Commons"
                 },
                 "wikipedia": {
                     "label": "Wikipédia"

@@ -931,7 +931,11 @@
             "key": "P",
             "privacy": {
                 "title": "Privacidade",
-                "privacy_link": "Ollar a política de privacidade do iD"
+                "privacy_link": "Ollar a política de privacidade do iD",
+                "third_party_icons": {
+                    "description": "Amosar iconas de terceiros",
+                    "tooltip": "Desmarcar esta cela para evitar cargar iconas de sitios de terceiros coma Wikimedia Commons, Facebook ou Twitter."
+                }
             }
         },
         "restore": {
@@ -1000,6 +1004,7 @@
         "splash": {
             "welcome": "Benvido ó editor en liña iD do OpenStreetMap",
             "text": "O iD é unha ferramenta amigábel pero poderosa para contribuír ó mellor mapa libre do mundo. Esta é a versión {versión}. Para obter máis información olla {website} e informa dos erros en {github}.",
+            "privacy_update": "Recentemente foi actualizada a nosa política de privacidade.",
             "walkthrough": "Comezar o titorial",
             "start": "Editar agora"
         },
