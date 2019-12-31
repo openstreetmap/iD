@@ -57,7 +57,7 @@ export function uiOsmoseHeader() {
                     d.service,
                     'error_id-' + d.id,
                     'error_type-' + d.error_type,
-                    'category-' + d.item
+                    'item-' + d.item
                 ].join(' ');
             });
 

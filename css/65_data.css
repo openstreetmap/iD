@@ -156,51 +156,51 @@
 /* Osmose Errors
 ------------------------------------------------------- */
 
-.osmose.category-0 {
+.osmose.item-0 {
     color: #BDBDBD;
 }
 
-.osmose.category-1040,
-.osmose.category-1050,
-.osmose.category-1070,
-.osmose.category-1080,
-.osmose.category-1150,
-.osmose.category-1190,
-.osmose.category-1280 {
+.osmose.item-1040,
+.osmose.item-1050,
+.osmose.item-1070,
+.osmose.item-1080,
+.osmose.item-1150,
+.osmose.item-1190,
+.osmose.item-1280 {
     color: #DCB000;
 }
 
-.osmose.category-2110 {
+.osmose.item-2110 {
     color: #2CDCDC;
 }
 
-.osmose.category-3040,
-.osmose.category-3090,
-.osmose.category-3161,
-.osmose.category-3220,
-.osmose.category-3250 {
+.osmose.item-3040,
+.osmose.item-3090,
+.osmose.item-3161,
+.osmose.item-3220,
+.osmose.item-3250 {
     color: #2D9359;
 }
 
-.osmose.category-4080 {
+.osmose.item-4080 {
     color: #F2F230;
 }
 
-.osmose.category-5070 {
+.osmose.item-5070 {
     color: #EC0000;
 }
 
-.osmose.category-7040,
-.osmose.category-7090 {
+.osmose.item-7040,
+.osmose.item-7090 {
     color: #9F16B4;
 }
 
-.osmose.category-8300,
-.osmose.category-8360 {
+.osmose.item-8300,
+.osmose.item-8360 {
     color: #3DE736;
 }
 
-.osmose.category-9010 {
+.osmose.item-9010 {
     color: #976432;
 }
 

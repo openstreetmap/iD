@@ -51,8 +51,7 @@ export function uiImproveOsmHeader() {
                     'qa_error',
                     d.service,
                     'error_id-' + d.id,
-                    'error_type-' + d.error_type,
-                    'category-' + d.category
+                    'error_type-' + d.error_type
                 ].join(' ');
             });
 

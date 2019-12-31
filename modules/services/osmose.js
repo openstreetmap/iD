@@ -125,7 +125,7 @@ export default {
               const error_type = [item, error_class].join('-');
 
               // Filter out unsupported error types (some are too specific or advanced)
-              if (error_type in services.osmose.errorTypes) {
+              if (error_type in services.osmose.errorIcons) {
                 let loc = issue.geometry.coordinates; // lon, lat
                 loc = preventCoincident(loc);
 
