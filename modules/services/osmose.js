@@ -11,7 +11,7 @@ import { services } from '../../data/qa_errors.json';
 
 const tiler = utilTiler();
 const dispatch = d3_dispatch('loaded');
-const _osmoseUrlRoot = 'https://osmose.openstreetmap.fr/';
+const _osmoseUrlRoot = 'https://osmose.openstreetmap.fr/en/api/0.3beta/';
 const _erZoom = 14;
 
 // This gets reassigned if reset
@@ -106,9 +106,8 @@ export default {
     tiles.forEach(tile => {
       if (_erCache.loadedTile[tile.id] || _erCache.inflightTile[tile.id]) return;
 
-      let lang = 'en'; // todo: may want to use provided translations
       let [ x, y, z ] = tile.xyz;
-      let url = _osmoseUrlRoot + `${lang}/map/issues/${z}/${x}/${y}.json?` + utilQsString(params);
+      let url = _osmoseUrlRoot + `issues/${z}/${x}/${y}.json?` + utilQsString(params);
 
       let controller = new AbortController();
       _erCache.inflightTile[tile.id] = controller;
@@ -120,7 +119,7 @@ export default {
 
           if (data.features) {
             data.features.forEach(issue => {
-              const { item, class: error_class, issue_id: identifier } = issue.properties;
+              const { item, class: error_class, uuid: identifier } = issue.properties;
               // Item is the type of error, w/ class tells us the sub-type
               const error_type = [item, error_class].join('-');
 
@@ -179,7 +178,7 @@ export default {
       return;
     }
 
-    let url = _osmoseUrlRoot + `en/api/0.3beta/issue/${d.identifier}`;
+    let url = _osmoseUrlRoot + `issue/${d.identifier}`;
 
     d3_json(url)
       .then(data => {
@@ -232,7 +231,7 @@ export default {
     }
 
     // UI sets the status to either 'done' or 'false'
-    let url = _osmoseUrlRoot + `en/api/0.3beta/issue/${d.identifier}/${d.newStatus}`;
+    let url = _osmoseUrlRoot + `issue/${d.identifier}/${d.newStatus}`;
 
     let controller = new AbortController();
     _erCache.inflightPost[d.id] = controller;
