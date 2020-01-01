@@ -25,7 +25,11 @@ var readOnlyTags = [
     /^host$/,
     /^locale$/,
     /^warnings:/,
-    /^resolved:/
+    /^resolved:/,
+    /^closed:note$/,
+    /^closed:keepright$/,
+    /^closed:improveosm:/,
+    /^closed:osmose:/
 ];
 
 // treat most punctuation (except -, _, +, &) as hashtag delimiters - #4398
@@ -134,6 +138,7 @@ export function uiCommit(context) {
 
         // assign tags for closed issues and notes
         var osmClosed = osm.getClosedIDs();
+        var issueType;
         if (osmClosed.length) {
             tags['closed:note'] = osmClosed.join(';').substr(0, tagCharLimit);
         }
@@ -144,15 +149,15 @@ export function uiCommit(context) {
             }
         }
         if (services.improveOSM) {
-            var iOsmClosed = services.improveOSM.getClosedIDs();
-            if (iOsmClosed.length) {
-                tags['closed:improveosm'] = iOsmClosed.join(';').substr(0, tagCharLimit);
+            var iOsmClosed = services.improveOSM.getClosedCounts();
+            for (issueType in iOsmClosed) {
+                tags['closed:improveosm:' + issueType] = iOsmClosed[issueType].toString().substr(0, tagCharLimit);
             }
         }
         if (services.osmose) {
             var osmoseClosed = services.osmose.getClosedCounts();
-            for (var issueType in osmoseClosed) {
-                tags['closed:osmose:' + issueType] = osmoseClosed[issueType].toString().substr(0, 255);
+            for (issueType in osmoseClosed) {
+                tags['closed:osmose:' + issueType] = osmoseClosed[issueType].toString().substr(0, tagCharLimit);
             }
         }
 
