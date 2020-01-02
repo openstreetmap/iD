@@ -235,6 +235,18 @@ en:
       attraction:
         # attraction=*
         label: Type
+      baby_feeding:
+        # baby_feeding=*
+        label: Baby Nursing Area
+        options:
+          # baby_feeding=no
+          'no': None
+          # baby_feeding=room
+          room: Dedicated Room
+          # baby_feeding=yes
+          'yes': Marked Space
+        # 'terms: baby feeding,breastfeeding,lactation,mothers,nursing'
+        terms: '[translate with synonyms or related terms for ''Baby Nursing Area'', separated by commas]'
       baby_seat:
         # baby=*
         label: Baby Seat

@@ -14,6 +14,7 @@
     "moreFields": [
         "access_simple",
         "air_conditioning",
+        "baby_feeding",
         "email",
         "fax",
         "gnis/feature_id",

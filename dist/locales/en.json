@@ -2759,6 +2759,15 @@
                 "attraction": {
                     "label": "Type"
                 },
+                "baby_feeding": {
+                    "label": "Baby Nursing Area",
+                    "terms": "baby feeding,breastfeeding,lactation,mothers,nursing",
+                    "options": {
+                        "room": "Dedicated Room",
+                        "yes": "Marked Space",
+                        "no": "None"
+                    }
+                },
                 "baby_seat": {
                     "label": "Baby Seat"
                 },
