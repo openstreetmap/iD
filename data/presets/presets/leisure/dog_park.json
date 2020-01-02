@@ -1,22 +1,31 @@
 {
     "icon": "maki-dog-park",
     "fields": [
-        "name"
+        "name",
+        "operator",
+        "operator/type",
+        "address",
+        "access_simple",
+        "website"
     ],
     "moreFields": [
+        "dog",
         "email",
         "fax",
         "gnis/feature_id",
+        "internet_access",
+        "internet_access/fee",
+        "internet_access/ssid",
         "phone",
-        "website"
+        "ref"
     ],
     "geometry": [
         "area",
         "point"
     ],
-    "terms": [],
     "tags": {
         "leisure": "dog_park"
     },
+    "terms": [],
     "name": "Dog Park"
 }
