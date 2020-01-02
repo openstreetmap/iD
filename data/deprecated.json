@@ -373,8 +373,24 @@
       "replace": {"embankment": "yes"}
     },
     {
+      "old": {"entrance": "emergency_exit"},
+      "replace": {"entrance": "emergency"}
+    },
+    {
+      "old": {"entrance": "fire_exit"},
+      "replace": {"entrance": "emergency"}
+    },
+    {
+      "old": {"entrance": "loading_dock"},
+      "replace": {"amenity": "loading_dock"}
+    },
+    {
       "old": {"entrance": "main_entrance"},
       "replace": {"entrance": "main"}
+    },
+    {
+      "old": {"entrance": "private"},
+      "replace": {"entrance": "yes", "access": "private"}
     },
     {
       "old": {"escalator": "*"},
