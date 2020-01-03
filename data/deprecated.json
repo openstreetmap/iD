@@ -461,6 +461,18 @@
       "replace": {"sidewalk": "separate"}
     },
     {
+      "old": {"amenity": "gambling", "gambling": "casino"},
+      "replace": {"amenity": "casino"}
+    },
+    {
+      "old": {"leisure": "amusement_arcade", "gambling": "*"},
+      "replace": {"leisure": "adult_gaming_centre", "gambling": "$1"}
+    },
+    {
+      "old": {"gambling": "slot_machine"},
+      "replace": {"gambling": "slot_machines"}
+    },
+    {
       "old": {"generator:source": "photovoltaic"},
       "replace": {"generator:source": "solar", "generator:method": "photovoltaic"}
     },

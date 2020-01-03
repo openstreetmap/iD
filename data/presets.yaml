@@ -897,6 +897,9 @@ en:
       fuel_multi:
         # 'fuel:=*'
         label: Fuel Types
+      gambling:
+        # gambling=*
+        label: Games
       gauge:
         # gauge=*
         label: Gauge

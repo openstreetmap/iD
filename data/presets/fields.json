@@ -161,6 +161,7 @@
     "from": {"key": "from", "type": "text", "label": "From"},
     "fuel_multi": {"key": "fuel:", "type": "multiCombo", "label": "Fuel Types"},
     "fuel": {"key": "fuel", "type": "combo", "label": "Fuel"},
+    "gambling": {"key": "gambling", "type": "semiCombo", "label": "Games"},
     "gauge": {"key": "gauge", "type": "combo", "label": "Gauge"},
     "gender": {"type": "radio", "keys": ["male", "female", "unisex"], "label": "Gender", "placeholder": "Unknown", "strings": {"options": {"male": "Male", "female": "Female", "unisex": "Unisex"}}, "terms": ["access", "female", "male", "unisex"]},
     "generator/method": {"key": "generator:method", "type": "combo", "label": "Method"},
