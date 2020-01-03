@@ -18,5 +18,16 @@
     "tags": {
         "amenity": "grave_yard"
     },
+    "terms": [
+        "burial ground",
+        "cemetary",
+        "cemetery",
+        "churchyard",
+        "columbarium",
+        "grave yard",
+        "graveyard",
+        "mausoleum",
+        "tomb"
+    ],
     "name": "Graveyard"
 }

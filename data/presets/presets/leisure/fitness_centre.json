@@ -4,7 +4,10 @@
         "name",
         "sport",
         "address",
-        "building_area"
+        "building_area",
+        "opening_hours",
+        "phone",
+        "website"
     ],
     "moreFields": [
         "brand",
@@ -13,10 +16,10 @@
         "fax",
         "fee",
         "gnis/feature_id",
-        "opening_hours",
-        "payment_multi",
-        "phone",
-        "website"
+        "internet_access",
+        "internet_access/fee",
+        "internet_access/ssid",
+        "payment_multi"
     ],
     "geometry": [
         "point",

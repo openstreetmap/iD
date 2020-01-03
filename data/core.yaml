@@ -836,7 +836,8 @@ en:
     cancel: "Cancel"
   splash:
     privacy_update: "Our privacy policy has recently been updated."
-    privacy: "{updateMessage} By using this software, you agree to do so in accordance with the iD privacy policy, which can be found {here}."
+    privacy_policy: iD privacy policy
+    privacy: "{updateMessage} By using this software, you agree to do so in accordance with the {privacyLink}."
     walkthrough: "Start the Walkthrough"
   source_switch:
     live: live

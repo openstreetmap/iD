@@ -235,9 +235,25 @@ en:
       attraction:
         # attraction=*
         label: Type
+      baby_feeding:
+        # baby_feeding=*
+        label: Baby Nursing Area
+        options:
+          # baby_feeding=no
+          'no': None
+          # baby_feeding=room
+          room: Dedicated Room
+          # baby_feeding=yes
+          'yes': Marked Space
+        # 'terms: baby feeding,breastfeeding,lactation,mothers,nursing'
+        terms: '[translate with synonyms or related terms for ''Baby Nursing Area'', separated by commas]'
       baby_seat:
         # baby=*
         label: Baby Seat
+      backcountry:
+        # backcountry=*
+        label: Backcountry
+        terms: '[translate with synonyms or related terms for ''Backcountry'', separated by commas]'
       backrest:
         # backrest=*
         label: Backrest
@@ -316,6 +332,9 @@ en:
       booth:
         # booth=*
         label: Booth
+      bottle:
+        # bottle=*
+        label: Bottle Filling
       boules:
         # boules=*
         label: Type
@@ -878,6 +897,9 @@ en:
       fuel_multi:
         # 'fuel:=*'
         label: Fuel Types
+      gambling:
+        # gambling=*
+        label: Games
       gauge:
         # gauge=*
         label: Gauge
@@ -909,6 +931,9 @@ en:
       generator/type:
         # 'generator:type=*'
         label: Type
+      geyser/height:
+        # 'geyser:height=*'
+        label: Eruption Height
       gnis/feature_id:
         # 'gnis:feature_id=*'
         label: GNIS Feature ID
@@ -920,6 +945,10 @@ en:
       grape_variety:
         # grape_variety=*
         label: Grape Varieties
+      group_only:
+        # group_only=*
+        label: Groups Only
+        terms: '[translate with synonyms or related terms for ''Groups Only'', separated by commas]'
       guest_house:
         # guest_house=*
         label: Type
@@ -1021,6 +1050,9 @@ en:
           stables: 'Yes'
           # amenity=undefined
           undefined: 'No'
+      hot_water:
+        # hot_water=*
+        label: Hot Water
       iata:
         # iata=*
         label: IATA Airport Code
@@ -1493,6 +1525,10 @@ en:
           undefined: Assumed to be Yes
           # oneway=yes
           'yes': 'Yes'
+      openfire:
+        # openfire=*
+        label: Open Fires Allowed
+        terms: '[translate with synonyms or related terms for ''Open Fires Allowed'', separated by commas]'
       opening_date:
         # opening_date=*
         label: Expected Opening Date
@@ -2107,6 +2143,10 @@ en:
       shop:
         # shop=*
         label: Type
+      shower:
+        # shower=*
+        label: Showers
+        terms: '[translate with synonyms or related terms for ''Showers'', separated by commas]'
       siren/purpose:
         # 'siren:purpose=*'
         label: Purpose
@@ -2348,6 +2388,10 @@ en:
       to:
         # to=*
         label: To
+      toilets:
+        # toilets=*
+        label: Toilets
+        terms: '[translate with synonyms or related terms for ''Toilets'', separated by commas]'
       toilets/disposal:
         # 'toilets:disposal=*'
         label: Disposal
@@ -3185,6 +3229,7 @@ en:
       amenity/grave_yard:
         # amenity=grave_yard
         name: Graveyard
+        # 'terms: burial ground,cemetary,cemetery,churchyard,columbarium,grave yard,graveyard,mausoleum,tomb'
         terms: '<translate with synonyms or related terms for ''Graveyard'', separated by commas>'
       amenity/grit_bin:
         # amenity=grit_bin
@@ -4715,6 +4760,11 @@ en:
         name: Entrance/Exit
         # 'terms: entrance,exit,door'
         terms: '<translate with synonyms or related terms for ''Entrance/Exit'', separated by commas>'
+      entrance/emergency:
+        # entrance=emergency
+        name: Emergency Exit
+        # 'terms: fire exit,door'
+        terms: '<translate with synonyms or related terms for ''Emergency Exit'', separated by commas>'
       ford:
         # ford=yes
         name: Ford
@@ -5359,11 +5409,11 @@ en:
       landuse/cemetery:
         # landuse=cemetery
         name: Cemetery
+        # 'terms: burial ground,cemetary,cemetery,churchyard,columbarium,grave yard,graveyard,mausoleum,tomb'
         terms: '<translate with synonyms or related terms for ''Cemetery'', separated by commas>'
       landuse/churchyard:
         # landuse=churchyard
         name: Churchyard
-        terms: '<translate with synonyms or related terms for ''Churchyard'', separated by commas>'
       landuse/commercial:
         # landuse=commercial
         name: Commercial Area
@@ -5512,6 +5562,7 @@ en:
       landuse/religious:
         # landuse=religious
         name: Religious Area
+        # 'terms: christian,churchyard,hindu,jewish,mosque,muslim,place of worship,shinto,sikh,taoist,temple,shrine,synagogue'
         terms: '<translate with synonyms or related terms for ''Religious Area'', separated by commas>'
       landuse/reservoir:
         # landuse=reservoir
@@ -6345,6 +6396,11 @@ en:
         # natural=fell
         name: Fell
         terms: '<translate with synonyms or related terms for ''Fell'', separated by commas>'
+      natural/geyser:
+        # natural=geyser
+        name: Geyser
+        # 'terms: erupting spring,geiser,gieser,guyser,hot water,hydrogeology,hydrothermal explosion,steam'
+        terms: '<translate with synonyms or related terms for ''Geyser'', separated by commas>'
       natural/glacier:
         # natural=glacier
         name: Glacier
@@ -7571,6 +7627,10 @@ en:
         # shop=doityourself
         name: DIY Store
         terms: '<translate with synonyms or related terms for ''DIY Store'', separated by commas>'
+      shop/doors:
+        # shop=doors
+        name: Door Shop
+        terms: '<translate with synonyms or related terms for ''Door Shop'', separated by commas>'
       shop/dry_cleaning:
         # shop=dry_cleaning
         name: Dry Cleaner
@@ -8164,8 +8224,18 @@ en:
       tourism/camp_site:
         # tourism=camp_site
         name: Campground
-        # 'terms: tent,rv'
+        # 'terms: caravans,camp ground,camp pitch,camp site,campers,campground,campsite,mobile homes,recreational vehicles,rv,tenting'
         terms: '<translate with synonyms or related terms for ''Campground'', separated by commas>'
+      tourism/camp_site/backcountry:
+        # 'tourism=camp_site, backcountry=yes'
+        name: Backcountry Camping Area
+        # 'terms: alpine camping,backpacking site,backwoods camping,camp ground,camp pitch,camp site,campground,campsite,informal camping,primitive camping'
+        terms: '<translate with synonyms or related terms for ''Backcountry Camping Area'', separated by commas>'
+      tourism/camp_site/group_only:
+        # 'tourism=camp_site, group_only=yes'
+        name: Group Camping Area
+        # 'terms: camp ground,camp pitch,camp site,campground,campsite,scout camping,youth camping'
+        terms: '<translate with synonyms or related terms for ''Group Camping Area'', separated by commas>'
       tourism/caravan_site:
         # tourism=caravan_site
         name: RV Park

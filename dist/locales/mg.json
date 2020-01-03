@@ -1,9 +1,19 @@
 {
     "mg": {
         "icons": {
+            "download": "alaina",
             "information": "fanazavana",
             "remove": "hanala",
-            "undo": "hanafoana"
+            "undo": "hanafoana",
+            "zoom_to": "hanakely/hanalehibe ho",
+            "copy": "handika",
+            "view_on": "jereo ao amin'i (domain)",
+            "favorite": "ankafizina"
+        },
+        "toolbar": {
+            "inspect": "hadihadio",
+            "undo_redo": "Aoka ihany / Avereno",
+            "favorites": "Ankafizina"
         },
         "modes": {
             "add_area": {

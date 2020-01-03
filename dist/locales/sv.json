@@ -1005,7 +1005,8 @@
             "welcome": "Välkommen till iD OpenStreetMap-redigerare",
             "text": "iD är ett användarvänligt och kraftfullt verktyg för att bidra till världens bästa fria karta. Detta är version {version}. För mer information, besök {website} eller rapportera fel på {github}.",
             "privacy_update": "Vår integritetspolicy har nyligen uppdaterats.",
-            "privacy": "{updateMessage} Genom att använda den här programvaran accepterar du att göra det i enlighet med iDs sekretesspolicy, som kan hittas {här}.",
+            "privacy_policy": "iDs sekretesspolicy",
+            "privacy": "{updateMessage} Genom att använda den här programvaran accepterar du att göra det i enlighet {privacyLink}.",
             "walkthrough": "Starta genomgången",
             "start": "Redigera nu"
         },
@@ -9571,6 +9572,13 @@
                 },
                 "description": "GSI Kiban 2500 via finds.jp. Bra för kartläggning, men lite gammal.",
                 "name": "Japan GSI KIBAN 2500"
+            },
+            "gothenburg-citymap": {
+                "attribution": {
+                    "text": "© Göteborgs Stad, CC0"
+                },
+                "description": "Stadskartan är en översiktlig karta som beskriver Göteborg. Den innehåller generell information om mark, kommunikation, hydrografi, byggnader, adressnummer och gatunamn, administrativ indelning och övrig orienterande text.",
+                "name": "Göteborg Stadskarta"
             },
             "gsi.go.jp": {
                 "attribution": {

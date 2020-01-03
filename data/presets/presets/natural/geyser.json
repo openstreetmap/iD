@@ -1,0 +1,25 @@
+{
+    "icon": "maki-water",
+    "fields": [
+        "name",
+        "geyser/height",
+        "elevation"
+    ],
+    "geometry": [
+        "point"
+    ],
+    "tags": {
+        "natural": "geyser"
+    },
+    "terms": [
+        "erupting spring",
+        "geiser",
+        "gieser",
+        "guyser",
+        "hot water",
+        "hydrogeology",
+        "hydrothermal explosion",
+        "steam"
+    ],
+    "name": "Geyser"
+}

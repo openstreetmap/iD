@@ -1005,7 +1005,8 @@
             "welcome": "Bem-vind@ ao editor iD do OpenStreetMap",
             "text": "Com o editor iD, é fácil contribuir para o melhor mapa livre do mundo. Esta é a versão {version}. Para mais informações, consulta o site {website} e comunica problemas com o editor em {github}.",
             "privacy_update": "A nossa política de privacidade foi atualizada recentemente.",
-            "privacy": "{updateMessage} Ao utilizares este software, aceitas fazê-lo em acordo com a política de privacidade do iD, que pode ser consultada {here}.",
+            "privacy_policy": "Política de privacidade do iD",
+            "privacy": "{updateMessage} Ao utilizares este software, aceitas fazê-lo em acordo com a {privacyLink}.",
             "walkthrough": "Iniciar Tutorial",
             "start": "Editar agora"
         },
@@ -2020,10 +2021,10 @@
                     "title": "Ligar com vau"
                 },
                 "continue_from_start": {
-                    "title": "Continua a desenhar do início"
+                    "title": "Continuar a desenhar do início"
                 },
                 "continue_from_end": {
-                    "title": "Continua a desenhar do fim"
+                    "title": "Continuar a desenhar do fim"
                 },
                 "delete_feature": {
                     "title": "Eliminar este elemento"
@@ -2655,7 +2656,7 @@
                         "hamlet": "Aldeia",
                         "housename": "Nome da habitação",
                         "housenumber": "123",
-                        "housenumber!jp": "N.º edifício ou lote",
+                        "housenumber!jp": "N.º do edifício ou lote",
                         "neighbourhood": "Bairro",
                         "neighbourhood!jp": "Chōme/Aza/Koaza",
                         "place": "Localidade",
@@ -2737,7 +2738,8 @@
                     "label": "Para animais"
                 },
                 "architect": {
-                    "label": "Arquiteto"
+                    "label": "Arquiteto",
+                    "terms": "arquitetura,arquitecto,arquitectura,desenhador"
                 },
                 "area/highway": {
                     "label": "Tipo"
@@ -2757,11 +2759,16 @@
                 "baby_seat": {
                     "label": "Cadeiras para bebés"
                 },
+                "backcountry": {
+                    "label": "Campismo selvagem",
+                    "terms": "acampamento,tendas,trekking,montanhismo"
+                },
                 "backrest": {
                     "label": "Encosto"
                 },
                 "bar": {
-                    "label": "Bar"
+                    "label": "Bar",
+                    "terms": "estabelecimento,bebidas,música ao vivo,consumo,noturno,noite,nocturno"
                 },
                 "barrier": {
                     "label": "Tipo"
@@ -2787,7 +2794,8 @@
                     "label": "Especialidade"
                 },
                 "bench": {
-                    "label": "Banco de sentar"
+                    "label": "Banco de sentar",
+                    "terms": "assento,lugar para sentar,descanso,banco de jardim"
                 },
                 "bicycle_parking": {
                     "label": "Tipo"
@@ -2823,6 +2831,9 @@
                 "booth": {
                     "label": "Cabina"
                 },
+                "bottle": {
+                    "label": "Enchimento de garrafas"
+                },
                 "boules": {
                     "label": "Tipo"
                 },
@@ -2830,10 +2841,12 @@
                     "label": "Tipo"
                 },
                 "brand": {
-                    "label": "Marca"
+                    "label": "Marca",
+                    "terms": "marca,empresa"
                 },
                 "brewery": {
-                    "label": "Cerveja de pressão (imperial/fino)"
+                    "label": "Cerveja de pressão",
+                    "terms": "cerveja,chopp,chope,fino,imperial,pressão"
                 },
                 "bridge": {
                     "label": "Tipo",
@@ -2843,18 +2856,22 @@
                     "label": "Tipo"
                 },
                 "building": {
-                    "label": "Edifício"
+                    "label": "Edifício",
+                    "terms": "estrutura,casa,prédio,moradia,residência,habitação,edificação,edificado,arranha-céus,arranha céus"
                 },
                 "building/levels/underground": {
                     "label": "Pisos subterrâneos",
-                    "placeholder": "2, 4, 6..."
+                    "placeholder": "2, 4, 6...",
+                    "terms": "cave,subsolo,pisos inferiores,andares inferiores,andares"
                 },
                 "building/levels_building": {
                     "label": "Pisos do edifício",
-                    "placeholder": "2, 4, 6..."
+                    "placeholder": "2, 4, 6...",
+                    "terms": "andares,pisos"
                 },
                 "building/material": {
-                    "label": "Material"
+                    "label": "Material",
+                    "terms": "material,matéria-prima"
                 },
                 "building_area": {
                     "label": "Edifício"
@@ -2897,11 +2914,13 @@
                 },
                 "charge_fee": {
                     "label": "Taxa",
-                    "placeholder": "1 EUR, 5 USD, 10 JPY…"
+                    "placeholder": "1 EUR, 5 USD, 10 JPY…",
+                    "terms": "preço,custo,valor,taxa,tarifa,montante"
                 },
                 "charge_toll": {
                     "label": "Valor da portagem",
-                    "placeholder": "1 EUR, 5 USD, 10 JPY…"
+                    "placeholder": "1 EUR, 5 USD, 10 JPY…",
+                    "terms": "pedágio,portagem,tarifa,taxa,custo,valor,montante"
                 },
                 "check_date": {
                     "label": "Última data de verificação"
@@ -2916,20 +2935,28 @@
                     "label": "Horário de recolha"
                 },
                 "colour": {
-                    "label": "Cor"
+                    "label": "Cor",
+                    "terms": "cor,coloração"
                 },
                 "comment": {
                     "label": "Comentário ao conjunto de alterações",
                     "placeholder": "Breve descrição das tuas alterações (obrigatório)"
                 },
                 "communication_multi": {
-                    "label": "Tipos de comunicações"
+                    "label": "Tipos de comunicações",
+                    "terms": "comunicações,comunicação"
+                },
+                "connectivity": {
+                    "label": "Ligação"
                 },
                 "construction": {
                     "label": "Tipo"
                 },
                 "consulate": {
                     "label": "Tipo"
+                },
+                "consulting": {
+                    "label": "Especialidade"
                 },
                 "contact/webcam": {
                     "label": "URL da câmara web",
@@ -2960,7 +2987,8 @@
                     "placeholder": "1, 2, 3..."
                 },
                 "covered": {
-                    "label": "Coberto"
+                    "label": "Coberto",
+                    "terms": "Cobertura,com cobertura,proteção"
                 },
                 "craft": {
                     "label": "Tipo"
@@ -2986,7 +3014,8 @@
                     "label": "Tipos de culinária"
                 },
                 "currency_multi": {
-                    "label": "Tipos de moeda"
+                    "label": "Tipos de moeda",
+                    "terms": "moedas,euros,dólares,libras,reais,ienes,bitcoins"
                 },
                 "cutting": {
                     "label": "Tipo",
@@ -3028,6 +3057,7 @@
                         }
                     },
                     "placeholder": "nenhum",
+                    "terms": "bicicleta,ciclovias",
                     "types": {
                         "cycleway:left": "Lado esquerdo",
                         "cycleway:right": "Lado direito"
@@ -3310,11 +3340,22 @@
                 "generator/type": {
                     "label": "Tipo"
                 },
+                "geyser/height": {
+                    "label": "Altura da erupção"
+                },
+                "gnis/feature_id": {
+                    "label": "ID de Elemento GNIS",
+                    "terms": "USGS,Geographic Names Information System,Federal Geographic Names Information Service,United States Board on Geographic Names"
+                },
                 "government": {
                     "label": "Tipo"
                 },
                 "grape_variety": {
                     "label": "Castas de uvas"
+                },
+                "group_only": {
+                    "label": "Apenas para grupos",
+                    "terms": "grupos,conjuntos,equipas"
                 },
                 "guest_house": {
                     "label": "Tipo"
@@ -3399,6 +3440,9 @@
                         "stables": "Sim",
                         "undefined": "Não"
                     }
+                },
+                "hot_water": {
+                    "label": "Água quente"
                 },
                 "iata": {
                     "label": "Código aeroportuário IATA"
@@ -3692,6 +3736,7 @@
                     "label": "Tipo de rede"
                 },
                 "network_bicycle": {
+                    "label": "Rede",
                     "options": {
                         "icn": "Internacional",
                         "lcn": "Local",
@@ -3701,6 +3746,7 @@
                     "placeholder": "Local, regional, nacional, internacional"
                 },
                 "network_foot": {
+                    "label": "Rede",
                     "options": {
                         "iwn": "Internacional",
                         "lwn": "Local",
@@ -3710,6 +3756,7 @@
                     "placeholder": "Local, regional, nacional, internacional"
                 },
                 "network_horse": {
+                    "label": "Rede",
                     "options": {
                         "ihn": "Internacional",
                         "lhn": "Local",
@@ -3752,6 +3799,10 @@
                         "undefined": "Presumindo que sim",
                         "yes": "Sim"
                     }
+                },
+                "openfire": {
+                    "label": "Permitido fazer fogueira",
+                    "terms": "fogo,fogueira,labaredas,churrasco,brasas,chamas,fósforos,acendalhas"
                 },
                 "opening_date": {
                     "label": "Data de abertura esperada"
@@ -4232,6 +4283,10 @@
                 "shop": {
                     "label": "Tipo"
                 },
+                "shower": {
+                    "label": "Chuveiros",
+                    "terms": "banhos,água,chuveiro,duche"
+                },
                 "siren/purpose": {
                     "label": "Propósito"
                 },
@@ -4422,6 +4477,10 @@
                 "to": {
                     "label": "Para"
                 },
+                "toilets": {
+                    "label": "Casas de banho",
+                    "terms": "WC,lavabos,retretes,banheiros,latrina"
+                },
                 "toilets/disposal": {
                     "label": "Método de eliminação de dejetos",
                     "options": {
@@ -4547,6 +4606,9 @@
                 },
                 "utility": {
                     "label": "Utilitário"
+                },
+                "utility_semi": {
+                    "label": "Serviço"
                 },
                 "valve": {
                     "label": "Tipo"
@@ -4894,9 +4956,17 @@
                     "name": "Café",
                     "terms": "chá, café, cafetaria, cafeteria"
                 },
+                "amenity/car_pooling": {
+                    "name": "Posto de boleia partilhada",
+                    "terms": "boleia,carona,viagem partilhada,carpool,car pool,carpooling"
+                },
                 "amenity/car_rental": {
                     "name": "Aluguer de automóveis",
                     "terms": "Aluguer de Automóveis, Área de Aluguer de Automóveis, Zona de Aluguer de Automoveis,rent a car,rent-a-car"
+                },
+                "amenity/car_sharing": {
+                    "name": "Posto de partilha de automóvel",
+                    "terms": "Car sharing,partilha,carro,veículos,automóvel,partilhado"
                 },
                 "amenity/car_wash": {
                     "name": "Lavagem de veículos",
@@ -5314,6 +5384,10 @@
                 },
                 "amenity/register_office": {
                     "name": "Conservatória do registo civil"
+                },
+                "amenity/research_institute": {
+                    "name": "Instituto de pesquisa",
+                    "terms": "Instituição,investigação,desenvolvimento,pesquisar"
                 },
                 "amenity/restaurant": {
                     "name": "Restaurante",
@@ -6208,6 +6282,10 @@
                 "craft/plumber": {
                     "name": "Canalizador",
                     "terms": "Plumber, Picheleiro, Pichelaria, Canalização,canos"
+                },
+                "craft/pottery": {
+                    "name": "Olaria",
+                    "terms": "oleiro,barro,cerâmica,potes"
                 },
                 "craft/rigger": {
                     "name": "Armador",
@@ -7718,6 +7796,10 @@
                     "name": "Encosta desflorestada",
                     "terms": "Colina,montanha,prado de altitude,área,zona,montanhosos,montanhosas,fell"
                 },
+                "natural/geyser": {
+                    "name": "Géiser",
+                    "terms": "géiser,gêiser,geiser,erupção,água termal,hidrotermal,vapor,jato,jacto,água,jorro,jorrar,geyser,água quente"
+                },
                 "natural/glacier": {
                     "name": "Glaciar",
                     "terms": "gelo,neve,geleira,glacial"
@@ -7802,6 +7884,10 @@
                     "name": "Bacia artificial",
                     "terms": "bacia artificial, bacia, bacia de infiltração, bacia de detenção, bacia de retardamento, bacia de retenção, bacia de drenagem, reservatório, lagoa artificial, lago artificial, lago feito pelo homem, reservatório artificial"
                 },
+                "natural/water/canal": {
+                    "name": "Área de canal",
+                    "terms": "canalete,vala,levada,água,irrigação,irrigagem"
+                },
                 "natural/water/lake": {
                     "name": "Lago",
                     "terms": "Jardim de Água, Jardim d'Água, Lagoa, Lagoinha, Pateira,bacia,água"
@@ -7817,6 +7903,14 @@
                 "natural/water/reservoir": {
                     "name": "Reservatório de água",
                     "terms": "Reservatório, artificial,água,acumulação,depósito"
+                },
+                "natural/water/river": {
+                    "name": "Área de rio",
+                    "terms": "água,rio,corrente,fluxo,área alagada,margem de rio,estuário,curso de água,ria,afluente,foz,barra,river,delta"
+                },
+                "natural/water/stream": {
+                    "name": "Área de ribeiro",
+                    "terms": "água,ribeiro,corrente,fluxo,área alagada,riacho,arroio,regato,grota,riachinho"
                 },
                 "natural/water/wastewater": {
                     "name": "Águas residuais em ETAR",
@@ -7872,6 +7966,10 @@
                 "office/company": {
                     "name": "Empresa",
                     "terms": "escritório, empresa,funcionários,indústria,finanças"
+                },
+                "office/consulting": {
+                    "name": "Empresa de consultadoria",
+                    "terms": "consulting,consultor,firma,aconselhamento,peritagem"
                 },
                 "office/coworking": {
                     "name": "Coworking",
@@ -8632,6 +8730,10 @@
                     "name": "Talho",
                     "terms": "Butcher,carne,talhante,açougue,porco,vaca,galinha,borrego,ovelha,vitela,enchidos"
                 },
+                "shop/camera": {
+                    "name": "Loja de equipamento fotográfico",
+                    "terms": "câmara,lentes,fotografia,fotográfica,filme,revelação,fotos,foto"
+                },
                 "shop/candles": {
                     "name": "Loja de velas",
                     "terms": "Candle Shop,velas,vela,pavios,cera"
@@ -8789,6 +8891,10 @@
                 },
                 "shop/fishmonger": {
                     "name": "Peixaria"
+                },
+                "shop/flooring": {
+                    "name": "Loja de material de pavimentação",
+                    "terms": "revestimento,pavimento,ladrilho,soalho,piso,soalhar,madeira,ripas,verniz"
                 },
                 "shop/florist": {
                     "name": "Florista",
@@ -9017,6 +9123,10 @@
                     "name": "Loja de fotografia",
                     "terms": "photography,fotógrafo,máquina fotográfica,material fotográfico,câmara,vídeo,fotografias,vhs,acessórios,revelação"
                 },
+                "shop/pottery": {
+                    "name": "Loja de cerâmica",
+                    "terms": "vasos,potes,porcelana,cerâmica,louça"
+                },
                 "shop/printer_ink": {
                     "name": "Loja de tinteiros de impressora",
                     "terms": "printer,loja de tinteiros,tinteiro,tinteiro para impressora,impressão,impressora,toner,cartuchos,fotocopiadora,fax"
@@ -9097,6 +9207,10 @@
                     "name": "Loja de chás",
                     "terms": "Tea Store,chá,ervas,medicinal,medicinais"
                 },
+                "shop/telecommunication": {
+                    "name": "Loja de telecomunicações",
+                    "terms": "comunicações,internet,ISP,telefones,celulares"
+                },
                 "shop/ticket": {
                     "name": "Bilheteira",
                     "terms": "Ticket,Bilheteria,Bilhete,Ingresso"
@@ -9108,6 +9222,10 @@
                 "shop/tobacco": {
                     "name": "Tabacaria",
                     "terms": "Tobacco,Loja de Tabaco, Cachimbo, Cigarrilha, Tabaco,cigarros,charutos,tabaco de enrolar"
+                },
+                "shop/tool_hire": {
+                    "name": "Aluguer de ferramentas",
+                    "terms": "tools,construção,jardinagem,ferramentas,alugar,utensílios"
                 },
                 "shop/toys": {
                     "name": "Loja de brinquedos",
@@ -9230,6 +9348,14 @@
                 "tourism/camp_site": {
                     "name": "Parque de campismo",
                     "terms": "acampamento, parque, campismo, campistas, acampar,tendas,caravanas,autocaravanas"
+                },
+                "tourism/camp_site/backcountry": {
+                    "name": "Área de campismo selvagem",
+                    "terms": "campismo,tendas,acampamento,montanhismo,alpinismo,trekking,informal"
+                },
+                "tourism/camp_site/group_only": {
+                    "name": "Área de campismo para grupos",
+                    "terms": "campismo,tendas,acampamento,escuteiros,escoteiros,escutismo,escotismo"
                 },
                 "tourism/caravan_site": {
                     "name": "Parque de caravanas",
@@ -9399,6 +9525,10 @@
                     "name": "Fronteira administrativa",
                     "terms": "Fronteira legal, limite país, fronteira, concelho, freguesia, distrito, limite administrativo, fronteira administrativa,"
                 },
+                "type/connectivity": {
+                    "name": "Ligação de vias",
+                    "terms": "conectividade,faixas,rodovias,estradas,ligações"
+                },
                 "type/enforcement": {
                     "name": "Controlo",
                     "terms": "radar, velocidade, câmara, câmera"
@@ -9556,6 +9686,10 @@
                 "waterway/drain": {
                     "name": "Vala de drenagem",
                     "terms": "Drain,drenagem,escoamento,descargas industriais,águas pluviais,pluviais,pluvial,chuvas"
+                },
+                "waterway/fish_pass": {
+                    "name": "Escada para peixes",
+                    "terms": "escadaria,escada,peixes,piscícola,canal,enguias,salmão,açude,represa,barragem,rio,transposição,desovar"
                 },
                 "waterway/fuel": {
                     "name": "Posto de combustível marítimo",
@@ -9858,6 +9992,13 @@
                 },
                 "description": "GSI Kiban 2500 via finds.jp. Bom para rastrear, mas um pouco mais velho.",
                 "name": "Japão GSI KIBAN 2500"
+            },
+            "gothenburg-citymap": {
+                "attribution": {
+                    "text": "© Município de Gotemburgo, CC0"
+                },
+                "description": "O mapa da cidade é um mapa síntese que descreve Gotemburgo. Contém informação geral sobre o solo, as comunicações, a hidrografia, os edifícios, os números de polícia e os nomes das ruas, a divisão administrativa e outros textos de orientação.",
+                "name": "Mapa da Cidade de Gotemburgo"
             },
             "gsi.go.jp": {
                 "attribution": {

@@ -55,7 +55,7 @@ describe('iD.validations.outdated_tags', function () {
         expect(issues).to.have.lengthOf(0);
     });
 
-    it('flags deprecated tags', function() {
+    it('flags deprecated tag with replacement', function() {
         createWay({'highway': 'ford'});
         var issues = validate();
         expect(issues).to.have.lengthOf(1);
@@ -67,6 +67,17 @@ describe('iD.validations.outdated_tags', function () {
         expect(issue.entityIds[0]).to.eql('w-1');
     });
 
+    it('flags deprecated tag with no replacement', function() {
+        createWay({'highway': 'no'});
+        var issues = validate();
+        expect(issues).to.have.lengthOf(1);
+        var issue = issues[0];
+        expect(issue.type).to.eql('outdated_tags');
+        expect(issue.subtype).to.eql('deprecated_tags');
+        expect(issue.severity).to.eql('warning');
+        expect(issue.entityIds).to.have.lengthOf(1);
+        expect(issue.entityIds[0]).to.eql('w-1');
+    });
 
     it('ignores way with no relations', function() {
         createWay({});

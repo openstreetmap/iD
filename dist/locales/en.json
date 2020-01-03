@@ -1046,7 +1046,8 @@
         },
         "splash": {
             "privacy_update": "Our privacy policy has recently been updated.",
-            "privacy": "{updateMessage} By using this software, you agree to do so in accordance with the iD privacy policy, which can be found {here}.",
+            "privacy_policy": "iD privacy policy",
+            "privacy": "{updateMessage} By using this software, you agree to do so in accordance with the {privacyLink}.",
             "walkthrough": "Start the Walkthrough"
         },
         "source_switch": {
@@ -2870,8 +2871,21 @@
                 "attraction": {
                     "label": "Type"
                 },
+                "baby_feeding": {
+                    "label": "Baby Nursing Area",
+                    "terms": "baby feeding,breastfeeding,lactation,mothers,nursing",
+                    "options": {
+                        "room": "Dedicated Room",
+                        "yes": "Marked Space",
+                        "no": "None"
+                    }
+                },
                 "baby_seat": {
                     "label": "Baby Seat"
+                },
+                "backcountry": {
+                    "label": "Backcountry",
+                    "terms": ""
                 },
                 "backrest": {
                     "label": "Backrest"
@@ -2940,6 +2954,9 @@
                 },
                 "booth": {
                     "label": "Booth"
+                },
+                "bottle": {
+                    "label": "Bottle Filling"
                 },
                 "boules": {
                     "label": "Type"
@@ -3438,6 +3455,9 @@
                 "fuel": {
                     "label": "Fuel"
                 },
+                "gambling": {
+                    "label": "Games"
+                },
                 "gauge": {
                     "label": "Gauge"
                 },
@@ -3464,6 +3484,9 @@
                 "generator/type": {
                     "label": "Type"
                 },
+                "geyser/height": {
+                    "label": "Eruption Height"
+                },
                 "gnis/feature_id": {
                     "label": "GNIS Feature ID",
                     "terms": "Federal Geographic Names Information Service,United States Board on Geographic Names,USA"
@@ -3473,6 +3496,10 @@
                 },
                 "grape_variety": {
                     "label": "Grape Varieties"
+                },
+                "group_only": {
+                    "label": "Groups Only",
+                    "terms": ""
                 },
                 "guest_house": {
                     "label": "Type"
@@ -3562,6 +3589,9 @@
                         "undefined": "No",
                         "stables": "Yes"
                     }
+                },
+                "hot_water": {
+                    "label": "Hot Water"
                 },
                 "iata": {
                     "label": "IATA Airport Code"
@@ -3954,6 +3984,10 @@
                 },
                 "oneway/bicycle": {
                     "label": "One Way (Bicycles)",
+                    "terms": ""
+                },
+                "openfire": {
+                    "label": "Open Fires Allowed",
                     "terms": ""
                 },
                 "opening_date": {
@@ -4454,6 +4488,10 @@
                 "shop": {
                     "label": "Type"
                 },
+                "shower": {
+                    "label": "Showers",
+                    "terms": ""
+                },
                 "siren/purpose": {
                     "label": "Purpose"
                 },
@@ -4655,6 +4693,10 @@
                 },
                 "to": {
                     "label": "To"
+                },
+                "toilets": {
+                    "label": "Toilets",
+                    "terms": ""
                 },
                 "toilets/disposal": {
                     "label": "Disposal",
@@ -5403,7 +5445,7 @@
                 },
                 "amenity/grave_yard": {
                     "name": "Graveyard",
-                    "terms": ""
+                    "terms": "burial ground,cemetary,cemetery,churchyard,columbarium,grave yard,graveyard,mausoleum,tomb"
                 },
                 "amenity/grit_bin": {
                     "name": "Grit Bin",
@@ -6699,6 +6741,10 @@
                     "name": "Entrance/Exit",
                     "terms": "entrance,exit,door"
                 },
+                "entrance/emergency": {
+                    "name": "Emergency Exit",
+                    "terms": "fire exit,door"
+                },
                 "ford": {
                     "name": "Ford",
                     "terms": ""
@@ -7221,6 +7267,9 @@
                 "landuse/basin": {
                     "name": "Basin"
                 },
+                "landuse/churchyard": {
+                    "name": "Churchyard"
+                },
                 "landuse/farm": {
                     "name": "Farmland"
                 },
@@ -7244,11 +7293,7 @@
                 },
                 "landuse/cemetery": {
                     "name": "Cemetery",
-                    "terms": ""
-                },
-                "landuse/churchyard": {
-                    "name": "Churchyard",
-                    "terms": ""
+                    "terms": "burial ground,cemetary,cemetery,churchyard,columbarium,grave yard,graveyard,mausoleum,tomb"
                 },
                 "landuse/commercial": {
                     "name": "Commercial Area",
@@ -7368,7 +7413,7 @@
                 },
                 "landuse/religious": {
                     "name": "Religious Area",
-                    "terms": ""
+                    "terms": "christian,churchyard,hindu,jewish,mosque,muslim,place of worship,shinto,sikh,taoist,temple,shrine,synagogue"
                 },
                 "landuse/residential": {
                     "name": "Residential Area",
@@ -8057,6 +8102,10 @@
                 "natural/fell": {
                     "name": "Fell",
                     "terms": ""
+                },
+                "natural/geyser": {
+                    "name": "Geyser",
+                    "terms": "erupting spring,geiser,gieser,guyser,hot water,hydrogeology,hydrothermal explosion,steam"
                 },
                 "natural/glacier": {
                     "name": "Glacier",
@@ -9105,6 +9154,10 @@
                     "name": "DIY Store",
                     "terms": ""
                 },
+                "shop/doors": {
+                    "name": "Door Shop",
+                    "terms": ""
+                },
                 "shop/dry_cleaning": {
                     "name": "Dry Cleaner",
                     "terms": ""
@@ -9595,7 +9648,15 @@
                 },
                 "tourism/camp_site": {
                     "name": "Campground",
-                    "terms": "tent,rv"
+                    "terms": "caravans,camp ground,camp pitch,camp site,campers,campground,campsite,mobile homes,recreational vehicles,rv,tenting"
+                },
+                "tourism/camp_site/backcountry": {
+                    "name": "Backcountry Camping Area",
+                    "terms": "alpine camping,backpacking site,backwoods camping,camp ground,camp pitch,camp site,campground,campsite,informal camping,primitive camping"
+                },
+                "tourism/camp_site/group_only": {
+                    "name": "Group Camping Area",
+                    "terms": "camp ground,camp pitch,camp site,campground,campsite,scout camping,youth camping"
                 },
                 "tourism/caravan_site": {
                     "name": "RV Park",

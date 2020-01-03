@@ -161,6 +161,24 @@
         "neighbourhood": 0.5,
         "city": 0.5
       }
+    },
+    {
+      "countryCodes": ["pe"],
+      "format": [
+        ["street", "housenumber"],
+        ["neighbourhood"],
+        ["city", "state", "postcode"]
+      ],
+      "dropdowns": [
+        "street", "neighbourhood", "city", "state", "postcode"
+      ],
+      "widths": {
+        "street": 0.7,
+        "housenumber": 0.3,
+        "city": 0.4,
+        "state": 0.4,
+        "postcode": 0.2
+      }
     }
   ]
 }

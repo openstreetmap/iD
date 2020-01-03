@@ -16,7 +16,8 @@
         },
         "modes": {
             "add_feature": {
-                "title": "Legg til ein eigenskap"
+                "title": "Legg til ein eigenskap",
+                "key": "Fane"
             },
             "add_area": {
                 "title": "Område",
@@ -75,6 +76,7 @@
             "save": "Last opp",
             "cancel": "Avbryt",
             "changes": "{count} endringar",
+            "errors": "Feil",
             "warnings": "Åtvaringar",
             "modified": "Modifisert",
             "deleted": "Sletta",
@@ -104,7 +106,8 @@
                 "version": "Versjon",
                 "last_edit": "Siste redigering",
                 "edited_by": "Redigert av",
-                "unknown": "Ukjend"
+                "unknown": "Ukjend",
+                "note_comments": "Kommentarar"
             },
             "location": {
                 "key": "P",
@@ -116,13 +119,20 @@
                 "geometry": "Geometri",
                 "length": "Lengde",
                 "area": "Område",
-                "location": "Plassering"
+                "location": "Plassering",
+                "metric": "Metrisk"
             }
         },
         "geolocate": {
             "title": "Vis plasseringa mi"
         },
         "inspector": {
+            "search": "Søk",
+            "check": {
+                "yes": "Ja",
+                "no": "Nei",
+                "reverser": "Endre retning"
+            },
             "radio": {
                 "structure": {
                     "default": "Standard",
@@ -143,6 +153,33 @@
             "none": "Ingen",
             "custom": "Tilpassa",
             "contrast": "Kontrast"
+        },
+        "preferences": {
+            "title": "Innstillingar",
+            "description": "Innstillingar"
+        },
+        "save": {
+            "title": "Lagre",
+            "no_changes": "Ingen endringar å lagre."
+        },
+        "success": {
+            "more": "Meir",
+            "events": "Hendingar"
+        },
+        "confirm": {
+            "okay": "OK",
+            "cancel": "Avbryt"
+        },
+        "QA": {
+            "keepRight": {
+                "detail_title": "Feil",
+                "detail_description": "Skildring",
+                "comment": "Kommentar",
+                "error_parts": {
+                    "from": "frå",
+                    "to": "til"
+                }
+            }
         },
         "intro": {
             "graph": {
@@ -833,6 +870,31 @@
             }
         },
         "community": {
+            "Bahia-telegram": {
+                "name": "OpenStreetMap Bahia Telegram Group",
+                "description": "Bli med i OpenStreetMap Bahia-samfunnet på Telegram"
+            },
+            "Galicia-Twitter": {
+                "description": "Følg oss på Twitter på {url}"
+            },
+            "GeoPhilly": {
+                "name": "GeoPhilly"
+            },
+            "Maptime-Oceania-Slack": {
+                "description": "Registrer deg på {signupUrl}"
+            },
+            "MaptimeHRVA-twitter": {
+                "description": "Følg oss på Twitter at {url}"
+            },
+            "OSM-AR-facebook": {
+                "extendedDescription": "Nyheiter frå det lokale fellesskapet"
+            },
+            "OSM-AR-twitter": {
+                "description": "Følg oss på Twitter på {url}"
+            },
+            "OSM-CL-twitter": {
+                "description": "Følg oss på Twitter på {url}"
+            },
             "cape-coast-youthmappers": {
                 "description": "Følg oss på Twitter: {url}"
             },

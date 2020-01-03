@@ -10,6 +10,7 @@
         "social_facility_for"
     ],
     "moreFields": [
+        "baby_feeding",
         "email",
         "fax",
         "gnis/feature_id",
