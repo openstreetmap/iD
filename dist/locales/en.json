@@ -4330,6 +4330,9 @@
                         "only": "Only"
                     }
                 },
+                "segregated": {
+                    "label": "Bicycle-Pedestrian Segregation"
+                },
                 "self_service": {
                     "label": "Self-Service"
                 },

@@ -2091,6 +2091,9 @@ en:
         # second_hand field placeholder
         placeholder: 'Yes, No, Only'
         terms: '[translate with synonyms or related terms for ''Sells Used'', separated by commas]'
+      segregated:
+        # segregated=*
+        label: Bicycle-Pedestrian Segregation
       self_service:
         # self_service=*
         label: Self-Service

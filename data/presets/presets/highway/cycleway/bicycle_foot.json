@@ -25,6 +25,27 @@
         "segregated trail",
         "rail trail"
     ],
+    "fields": [
+        "name",
+        "segregated",
+        "oneway",
+        "surface",
+        "width",
+        "structure",
+        "access",
+        "incline"
+    ],
+    "moreFields": [
+        "covered",
+        "dog",
+        "lit",
+        "maxspeed",
+        "maxweight_bridge",
+        "not/name",
+        "smoothness",
+        "stroller",
+        "wheelchair"
+    ],
     "matchScore": 0.9,
     "name": "Cycle & Foot Path"
 }
