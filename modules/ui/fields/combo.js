@@ -181,6 +181,10 @@ export function uiFieldCombo(field, context) {
         taginfo[fn](params, function(err, data) {
             if (err) return;
 
+            data = data.filter(function(d) {
+                return !d.count || d.count > 10;
+            });
+
             var deprecatedValues = osmEntity.deprecatedTagValuesByKey()[field.key];
             if (deprecatedValues) {
                 // don't suggest deprecated tag values
