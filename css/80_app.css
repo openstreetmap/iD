@@ -1157,6 +1157,9 @@ a.hide-toggle {
     text-overflow: ellipsis;
     overflow: hidden;
 }
+.preset-list-button .label-inner .namepart:nth-child(2) {
+    font-weight: normal;
+}
 
 .preset-list-button:hover .label,
 .preset-list-button:focus .label,
