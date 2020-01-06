@@ -534,6 +534,8 @@ en:
       cuisine:
         # cuisine=*
         label: Cuisines
+        # 'terms: fare,food types'
+        terms: '[translate with synonyms or related terms for ''Cuisines'', separated by commas]'
       currency_multi:
         # 'currency:=*'
         label: Currency Types

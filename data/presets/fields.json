@@ -93,7 +93,7 @@
     "crop": {"key": "crop", "type": "semiCombo", "label": "Crops"},
     "crossing": {"key": "crossing", "type": "combo", "label": "Type"},
     "crossing/island": {"key": "crossing:island", "type": "check", "label": "Refuge Island"},
-    "cuisine": {"key": "cuisine", "type": "semiCombo", "label": "Cuisines"},
+    "cuisine": {"key": "cuisine", "type": "semiCombo", "label": "Cuisines", "terms": ["fare", "food types"]},
     "currency_multi": {"key": "currency:", "type": "multiCombo", "label": "Currency Types", "terms": ["bills", "cash", "coins", "money"]},
     "cutting": {"key": "cutting", "type": "typeCombo", "label": "Type", "placeholder": "Default"},
     "cycle_network": {"key": "cycle_network", "type": "networkCombo", "label": "Network"},
