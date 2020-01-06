@@ -6,7 +6,8 @@
         "address",
         "building_area",
         "opening_hours",
-        "phone"
+        "phone",
+        "website"
     ],
     "moreFields": [
         "air_conditioning",
@@ -32,7 +33,6 @@
         "smoking",
         "stars",
         "takeaway",
-        "website",
         "wheelchair"
     ],
     "geometry": [
