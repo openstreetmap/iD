@@ -7468,6 +7468,11 @@ en:
         name: Car Dealership
         # 'terms: automobile,automotive'
         terms: '<translate with synonyms or related terms for ''Car Dealership'', separated by commas>'
+      shop/car/second_hand:
+        # 'shop=car, second_hand=only'
+        name: Used Car Dealership
+        # 'terms: automobile,automotive'
+        terms: '<translate with synonyms or related terms for ''Used Car Dealership'', separated by commas>'
       shop/car_parts:
         # shop=car_parts
         name: Car Parts Store
@@ -7516,6 +7521,11 @@ en:
         name: Clothing Store
         # 'terms: blouses,boutique,bras,clothes,dresses,fashion,pants,shirts,shorts,skirts,slacks,socks,suits,underwear'
         terms: '<translate with synonyms or related terms for ''Clothing Store'', separated by commas>'
+      shop/clothes/second_hand:
+        # 'shop=clothes, second_hand=only'
+        name: Secondhand Clothing Store
+        # 'terms: blouses,clothes,consignment,dresses,pants,second hand,shirts,shorts,skirts,slacks,suits,used'
+        terms: '<translate with synonyms or related terms for ''Secondhand Clothing Store'', separated by commas>'
       shop/clothes/underwear:
         # 'shop=clothes, clothes=underwear'
         name: Underwear Store

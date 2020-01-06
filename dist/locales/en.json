@@ -8954,6 +8954,10 @@
                     "name": "Car Dealership",
                     "terms": "automobile,automotive"
                 },
+                "shop/car/second_hand": {
+                    "name": "Used Car Dealership",
+                    "terms": "automobile,automotive"
+                },
                 "shop/caravan": {
                     "name": "RV Dealership",
                     "terms": "auto,camper,recreational vehicle"
@@ -8985,6 +8989,10 @@
                 "shop/clothes": {
                     "name": "Clothing Store",
                     "terms": "blouses,boutique,bras,clothes,dresses,fashion,pants,shirts,shorts,skirts,slacks,socks,suits,underwear"
+                },
+                "shop/clothes/second_hand": {
+                    "name": "Secondhand Clothing Store",
+                    "terms": "blouses,clothes,consignment,dresses,pants,second hand,shirts,shorts,skirts,slacks,suits,used"
                 },
                 "shop/clothes/underwear": {
                     "name": "Underwear Store",
