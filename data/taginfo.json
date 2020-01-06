@@ -1010,7 +1010,7 @@
     {"key": "shop", "value": "copyshop", "description": "🄿 Copy Store", "object_types": ["node", "area"], "icon_url": "https://cdn.jsdelivr.net/gh/openstreetmap/iD@master/svg/fontawesome/fas-print.svg"},
     {"key": "shop", "value": "cosmetics", "description": "🄿 Cosmetics Store", "object_types": ["node", "area"], "icon_url": "https://cdn.jsdelivr.net/gh/ideditor/temaki/icons/lipstick.svg"},
     {"key": "shop", "value": "country_store", "description": "🄿 Country Store", "object_types": ["node", "area"], "icon_url": "https://cdn.jsdelivr.net/gh/openstreetmap/iD@master/svg/fontawesome/fas-hat-cowboy-side.svg"},
-    {"key": "shop", "value": "craft", "description": "🄿 Arts and Crafts Store", "object_types": ["node", "area"], "icon_url": "https://cdn.jsdelivr.net/gh/openstreetmap/iD@master/svg/fontawesome/fas-palette.svg"},
+    {"key": "shop", "value": "craft", "description": "🄿 Arts & Crafts Store", "object_types": ["node", "area"], "icon_url": "https://cdn.jsdelivr.net/gh/openstreetmap/iD@master/svg/fontawesome/fas-palette.svg"},
     {"key": "shop", "value": "curtain", "description": "🄿 Curtain Store", "object_types": ["node", "area"], "icon_url": "https://cdn.jsdelivr.net/gh/mapbox/maki/icons/shop-15.svg"},
     {"key": "shop", "value": "dairy", "description": "🄿 Dairy Store", "object_types": ["node", "area"], "icon_url": "https://cdn.jsdelivr.net/gh/openstreetmap/iD@master/svg/fontawesome/fas-cheese.svg"},
     {"key": "shop", "value": "deli", "description": "🄿 Deli", "object_types": ["node", "area"], "icon_url": "https://cdn.jsdelivr.net/gh/mapbox/maki/icons/restaurant-15.svg"},
