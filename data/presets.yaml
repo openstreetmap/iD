@@ -2093,7 +2093,7 @@ en:
         terms: '[translate with synonyms or related terms for ''Sells Used'', separated by commas]'
       segregated:
         # segregated=*
-        label: Bicycle-Pedestrian Segregation
+        label: Bicycle-Pedestrian Separation
       self_service:
         # self_service=*
         label: Self-Service

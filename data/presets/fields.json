@@ -362,7 +362,7 @@
     "seasonal": {"key": "seasonal", "type": "check", "label": "Seasonal"},
     "seats": {"key": "seats", "type": "number", "minValue": 0, "label": "Seats", "placeholder": "2, 4, 6..."},
     "second_hand": {"key": "second_hand", "type": "combo", "label": "Sells Used", "placeholder": "Yes, No, Only", "strings": {"options": {"yes": "Yes", "no": "No", "only": "Only"}}},
-    "segregated": {"key": "segregated", "type": "check", "label": "Bicycle-Pedestrian Segregation"},
+    "segregated": {"key": "segregated", "type": "check", "label": "Bicycle-Pedestrian Separation"},
     "self_service": {"key": "self_service", "type": "check", "label": "Self-Service"},
     "service_rail": {"key": "service", "type": "combo", "label": "Service Type", "strings": {"options": {"spur": "Spur", "yard": "Yard", "siding": "Siding", "crossover": "Crossover"}}},
     "service_times": {"key": "service_times", "type": "text", "label": "Service Times"},
