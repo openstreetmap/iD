@@ -768,10 +768,6 @@
       "replace": {"resource": "$1"}
     },
     {
-      "old": {"museum_type": "art"},
-      "replace": {"museum": "art"}
-    },
-    {
       "old": {"museum_type": "history"},
       "replace": {"museum": "history"}
     },

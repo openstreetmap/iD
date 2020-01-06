@@ -8293,11 +8293,6 @@ en:
         name: Museum
         # 'terms: art*,exhibit*,gallery,foundation,hall,institution,paint*,photo*,sculpt*'
         terms: '<translate with synonyms or related terms for ''Museum'', separated by commas>'
-      tourism/museum/art:
-        # 'tourism=museum, museum=art'
-        name: Art Museum
-        # 'terms: art*,exhibit*,gallery,foundation,hall,institution,paint*,photo*,sculpt*'
-        terms: '<translate with synonyms or related terms for ''Art Museum'', separated by commas>'
       tourism/museum/history:
         # 'tourism=museum, museum=history'
         name: History Museum

@@ -9634,10 +9634,6 @@
                     "name": "Museum",
                     "terms": "art*,exhibit*,gallery,foundation,hall,institution,paint*,photo*,sculpt*"
                 },
-                "tourism/museum/art": {
-                    "name": "Art Museum",
-                    "terms": "art*,exhibit*,gallery,foundation,hall,institution,paint*,photo*,sculpt*"
-                },
                 "tourism/museum/history": {
                     "name": "History Museum",
                     "terms": "artifacts,dioramas,exhibits,exhibitions,foundation,hall,institution"
