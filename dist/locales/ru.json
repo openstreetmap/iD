@@ -7,7 +7,7 @@
             "undo": "Отменить",
             "zoom_to": "Приблизить к",
             "copy": "Копировать",
-            "open_wikidata": "Открыть на wikidata.org",
+            "view_on": "смотреть на {domain}",
             "favorite": "избранное"
         },
         "toolbar": {
@@ -132,23 +132,7 @@
             },
             "orthogonalize": {
                 "title": "Спрямить углы",
-                "description": {
-                    "vertex": "Выпрямить этот угол",
-                    "line": "Спрямить углы у линии.",
-                    "area": "Спрямить углы у полигона."
-                },
-                "key": "Q",
-                "annotation": {
-                    "vertex": "Выпрямить один угол.",
-                    "line": "У линии спрямлены углы.",
-                    "area": "Углы полигона спрямлены."
-                },
-                "end_vertex": "Объект нельзя превратить в квадрат: это конечный узел.",
-                "square_enough": "Спрямить углы нельзя: уже выполнено.",
-                "not_squarish": "Спрямить углы нельзя: объект не похож на прямоугольник.",
-                "too_large": "Углы объекта нельзя спрямить, поскольку большая его часть скрыта.",
-                "connected_to_hidden": "Углы объекта нельзя спрямить, так как имеется соединение со скрытым объектом.",
-                "not_downloaded": "Объект нельзя превратить в квадрат: его части еще не были загружены."
+                "key": "Q"
             },
             "straighten": {
                 "title": "Выпрямить",
@@ -516,11 +500,8 @@
             "hidden_warning": "{count} скрытых объектов",
             "hidden_details": "Эти объекты сейчас скрыты: {details}"
         },
-        "status": {
-            "error": "Невозможно соединиться с API.",
-            "offline": "В настоящий момент API недоступен. Попробуйте позже.",
-            "readonly": "В настоящий момент API в режиме «только чтение». Для сохранения правок придётся подождать.",
-            "rateLimit": "API ограничивает анонимные подключения. Вы можете исправить это выполнив вход."
+        "osm_api_status": {
+            "retry": "Повторить"
         },
         "commit": {
             "title": "Загрузить в OpenStreetMap",
@@ -614,7 +595,6 @@
         },
         "geocoder": {
             "search": "Глобальный поиск…",
-            "no_results_visible": "Нет результатов в видимой области карты",
             "no_results_worldwide": "Ничего не найдено"
         },
         "geolocate": {
@@ -1030,6 +1010,7 @@
                     "cafe": "кафе",
                     "fast_food": "фаст-фуд",
                     "fuel": "топливо",
+                    "from": "из",
                     "left_hand": "левосторонний",
                     "right_hand": "правосторонний"
                 },
@@ -1481,6 +1462,7 @@
             "rules": {
                 "title": "Правила"
             },
+            "warnings_and_errors": "Предупреждения и ошибки",
             "no_issues": {
                 "message": {
                     "everything": "Всё выглядит хорошо",
@@ -1532,6 +1514,9 @@
             },
             "fixme_tag": {
                 "message": "Для {feature} имеется запрос \"Исправь меня\""
+            },
+            "help_request": {
+                "title": "Запросы помощи"
             },
             "missing_role": {
                 "title": "Пропущенные роли",
@@ -1595,6 +1580,9 @@
                 "remove_tags": {
                     "title": "Удалить теги"
                 },
+                "remove_the_name": {
+                    "title": "Удалить имя"
+                },
                 "reposition_features": {
                     "title": "Переместить объекты"
                 },
@@ -1604,9 +1592,6 @@
                 "upgrade_tags": {
                     "title": "Исправить теги",
                     "annotation": "Исправить старые теги"
-                },
-                "use_bridge_or_tunnel": {
-                    "title": "Используйте мост или туннель"
                 }
             }
         },
@@ -1904,9 +1889,7 @@
                 },
                 "display_options": {
                     "title": "Настройки отображения",
-                    "background": "Показать настройки фонового изображения",
                     "background_switch": "Вернуть предыдущее фоновое изображение",
-                    "map_data": "Показать настройки данных карты",
                     "fullscreen": "Перейти в полноэкранный режим",
                     "sidebar": "Переключить боковую панель",
                     "wireframe": "Переключить режим заливки полигонов",
@@ -1920,9 +1903,7 @@
                     "search": "Найти объекты, соответствующие поисковому запросу"
                 },
                 "with_selected": {
-                    "title": "Для выделенных объектов",
-                    "edit_menu": "Показать меню редактирования",
-                    "zoom_to": "Приблизить выделенный объект"
+                    "edit_menu": "Показать меню редактирования"
                 },
                 "vertex_selected": {
                     "title": "Для выделенной точки",
@@ -1941,7 +1922,6 @@
                     "add_line": "Режим “Нанести линию”",
                     "add_area": "Режим “Добавить полигон”",
                     "add_note": "Режим “Добавить заметку”",
-                    "add_favorite": "Добавить избранный объект",
                     "place_point": "Разместите точку или заметку",
                     "disable_snap": "При удержании отключает режим прилипания точек",
                     "stop_line": "Завершить линию или полигон"
@@ -2226,6 +2206,9 @@
                 "attraction": {
                     "label": "Тип"
                 },
+                "baby_seat": {
+                    "label": "Сидение для младенцев"
+                },
                 "backrest": {
                     "label": "Спинка"
                 },
@@ -2264,6 +2247,13 @@
                 "bin": {
                     "label": "Урна для мусора"
                 },
+                "blind": {
+                    "options": {
+                        "limited": "Ограничено",
+                        "no": "Нет",
+                        "yes": "Да"
+                    }
+                },
                 "blood_components": {
                     "label": "Компоненты крови",
                     "options": {
@@ -2274,6 +2264,9 @@
                     }
                 },
                 "board_type": {
+                    "label": "Тип"
+                },
+                "bollard": {
                     "label": "Тип"
                 },
                 "booth": {
@@ -2374,6 +2367,9 @@
                 "consulate": {
                     "label": "Тип консульства"
                 },
+                "consulting": {
+                    "label": "Экспертиза"
+                },
                 "contact/webcam": {
                     "label": "URL-адрес камеры",
                     "placeholder": "http://example.com/"
@@ -2388,6 +2384,9 @@
                         "forward": "Вперёд",
                         "reversible": "Со сменой направления"
                     }
+                },
+                "conveying_escalator": {
+                    "label": "Эскалатор"
                 },
                 "country": {
                     "label": "Страна"
@@ -2743,7 +2742,6 @@
                     "label": "Поручни"
                 },
                 "hashtags": {
-                    "label": "Предлагаемые хэштеги",
                     "placeholder": "#пример"
                 },
                 "healthcare": {
@@ -2945,6 +2943,9 @@
                 "level": {
                     "label": "Этаж (первый = 0)"
                 },
+                "level_semi": {
+                    "label": "Число этажей"
+                },
                 "levels": {
                     "label": "Число этажей",
                     "placeholder": "2, 4, 6…"
@@ -2987,6 +2988,9 @@
                 "material": {
                     "label": "Материал"
                 },
+                "max_age": {
+                    "label": "Максимальный возраст"
+                },
                 "maxheight": {
                     "label": "Максимальная высота",
                     "placeholder": "4, 4.5, 5, 14'0\", 14'6\", 15'0\""
@@ -3013,6 +3017,9 @@
                 },
                 "microbrewery": {
                     "label": "Пивоварение"
+                },
+                "min_age": {
+                    "label": "Минимальный возраст"
                 },
                 "minspeed": {
                     "label": "Ограничение минимальной скорости",
@@ -3067,8 +3074,10 @@
                 "network": {
                     "label": "Сеть"
                 },
+                "network/type": {
+                    "label": "Тип сети"
+                },
                 "network_bicycle": {
-                    "label": "Тип сети",
                     "options": {
                         "icn": "Международная",
                         "lcn": "Местная",
@@ -3078,7 +3087,6 @@
                     "placeholder": "Местная, Региональная, Национальная, Международная"
                 },
                 "network_foot": {
-                    "label": "Тип сети",
                     "options": {
                         "iwn": "Международная",
                         "lwn": "Местная",
@@ -3088,7 +3096,6 @@
                     "placeholder": "Местная, Региональная, Национальная, Международная"
                 },
                 "network_horse": {
-                    "label": "Тип сети",
                     "options": {
                         "ihn": "Международная",
                         "lhn": "Местная",
@@ -3099,6 +3106,9 @@
                 },
                 "network_road": {
                     "label": "Сеть"
+                },
+                "not/name": {
+                    "label": "Некорректные имена"
                 },
                 "note": {
                     "label": "Заметка для картографов"
@@ -3138,6 +3148,9 @@
                 },
                 "operator": {
                     "label": "Обслуживающая компания"
+                },
+                "operator/type": {
+                    "label": "Тип оператора"
                 },
                 "outdoor_seating": {
                     "label": "Места на открытом воздухе"
@@ -3278,6 +3291,9 @@
                 "population": {
                     "label": "Население"
                 },
+                "post": {
+                    "label": "Адрес доставки"
+                },
                 "power": {
                     "label": "Тип"
                 },
@@ -3289,6 +3305,9 @@
                 },
                 "product": {
                     "label": "Продукция"
+                },
+                "public_bookcase/type": {
+                    "label": "Тип"
                 },
                 "railway": {
                     "label": "Тип"
@@ -3340,6 +3359,9 @@
                 "ref_road_number": {
                     "label": "Номер дороги"
                 },
+                "ref_room_number": {
+                    "label": "Номер комнаты"
+                },
                 "ref_route": {
                     "label": "Номер маршрута"
                 },
@@ -3360,6 +3382,12 @@
                 "religion": {
                     "label": "Религия"
                 },
+                "residential": {
+                    "label": "Тип"
+                },
+                "resort": {
+                    "label": "Тип"
+                },
                 "restriction": {
                     "label": "Тип ограничения"
                 },
@@ -3368,6 +3396,9 @@
                 },
                 "roof/colour": {
                     "label": "Цвет крыши"
+                },
+                "room": {
+                    "label": "Тип"
                 },
                 "rooms": {
                     "label": "Номера"
@@ -3567,6 +3598,9 @@
                     },
                     "placeholder": "Ролики, колёса, внедорожники…"
                 },
+                "sms": {
+                    "label": "СМС"
+                },
                 "social_facility": {
                     "label": "Тип"
                 },
@@ -3597,11 +3631,24 @@
                 "step_count": {
                     "label": "Количество ступенек"
                 },
+                "stile": {
+                    "label": "Тип"
+                },
                 "stop": {
                     "label": "Действие знака Стоп",
                     "options": {
                         "all": "Все дороги",
                         "minor": "Втростепенная дорога"
+                    }
+                },
+                "street_cabinet": {
+                    "label": "Тип"
+                },
+                "stroller": {
+                    "options": {
+                        "limited": "Ограничено",
+                        "no": "Нет",
+                        "yes": "Да"
                     }
                 },
                 "structure": {
@@ -3706,6 +3753,9 @@
                 "tower/type": {
                     "label": "Тип"
                 },
+                "townhall/type": {
+                    "label": "Тип"
+                },
                 "tracktype": {
                     "label": "Тип просёлочных дорог",
                     "options": {
@@ -3771,6 +3821,9 @@
                 "trees": {
                     "label": "Деревья"
                 },
+                "trench": {
+                    "label": "Тип"
+                },
                 "tunnel": {
                     "label": "Тип тоннеля",
                     "placeholder": "По умолчанию"
@@ -3785,6 +3838,12 @@
                         "test": "Тестовое",
                         "tourism": "Туризм"
                     }
+                },
+                "utility_semi": {
+                    "label": "Инструменты"
+                },
+                "valve": {
+                    "label": "Тип"
                 },
                 "vending": {
                     "label": "Тип автомата"
@@ -3854,7 +3913,12 @@
                     "label": "Тип"
                 },
                 "wheelchair": {
-                    "label": "Доступность для инвалидных колясок"
+                    "label": "Доступность для инвалидных колясок",
+                    "options": {
+                        "limited": "Ограничено",
+                        "no": "Нет",
+                        "yes": "Да"
+                    }
                 },
                 "wholesale": {
                     "label": "Вид продукции"
@@ -3891,6 +3955,9 @@
                 "advertising/billboard": {
                     "name": "Рекламный щит",
                     "terms": "реклама,объявление,щит,билборд,информация,транспорант,постер,растяжка"
+                },
+                "advertising/board": {
+                    "name": "Доска объявлений"
                 },
                 "advertising/column": {
                     "name": "Афишная тумба Морриса",
@@ -3938,13 +4005,6 @@
                     "name": "бугельный подъёмник",
                     "terms": "бугельный подъёмник"
                 },
-                "aerialway/station": {
-                    "name": "Терминал канатной дороги"
-                },
-                "aerialway/t-bar": {
-                    "name": "Анкерный подъёмник",
-                    "terms": "Якорный подъёмник,Бугель"
-                },
                 "aeroway": {
                     "name": "Взлётная полоса"
                 },
@@ -3971,6 +4031,9 @@
                 "aeroway/runway": {
                     "name": "Взлётная полоса",
                     "terms": "ВПП, Взлётно-посадочная полоса"
+                },
+                "aeroway/spaceport": {
+                    "name": "Космодром"
                 },
                 "aeroway/taxiway": {
                     "name": "Рулёжная дорожка",
@@ -4057,16 +4120,9 @@
                     "name": "Кафе",
                     "terms": "Кафе"
                 },
-                "amenity/car_pooling": {
-                    "name": "Карпулинг"
-                },
                 "amenity/car_rental": {
                     "name": "Аренда автомобилей",
                     "terms": "Аренда автомобилей, автопрокат"
-                },
-                "amenity/car_sharing": {
-                    "name": "Каршеринг",
-                    "terms": "Краткосрочная аренда автомобиля"
                 },
                 "amenity/car_wash": {
                     "name": "Автомойка",
@@ -4414,6 +4470,12 @@
                     "name": "Студия",
                     "terms": "студия, киностудия, художественная студия, радиостудия"
                 },
+                "amenity/studio/audio": {
+                    "name": "Студия записи"
+                },
+                "amenity/studio/radio": {
+                    "name": "Радиостанция"
+                },
                 "amenity/swimming_pool": {
                     "name": "Бассейн (устаревший тег)"
                 },
@@ -4494,6 +4556,9 @@
                     "name": "Мороженое",
                     "terms": "автомат с мороженым, мороженое"
                 },
+                "amenity/vending_machine/ice_cubes": {
+                    "name": "Торговый автомат мороженого"
+                },
                 "amenity/vending_machine/newspapers": {
                     "name": "Автомат по продаже газет",
                     "terms": "Автомат по продаже газет,Автомат по продаже прессы,Автоматический газетный киоск"
@@ -4553,10 +4618,6 @@
                     "name": "Полигон",
                     "terms": "Полигон, область"
                 },
-                "area/highway": {
-                    "name": "Дорожное покрытие",
-                    "terms": "дорожное покрытие"
-                },
                 "attraction/amusement_ride": {
                     "name": "Аттракцион в парке развлечений"
                 },
@@ -4578,18 +4639,9 @@
                 "attraction/dark_ride": {
                     "name": "Комната страха"
                 },
-                "attraction/drop_tower": {
-                    "name": "Аттракцион \"Свободное падение\""
-                },
                 "attraction/maze": {
                     "name": "Лабиринт",
                     "terms": "аттракцион, головоломка, загадка, лабиринт"
-                },
-                "attraction/pirate_ship": {
-                    "name": "Пиратский корабль"
-                },
-                "attraction/river_rafting": {
-                    "name": "Сплав по реке"
                 },
                 "attraction/roller_coaster": {
                     "name": "Американские горки"
@@ -4886,6 +4938,9 @@
                     "name": "Склад",
                     "terms": "склад, складское помещение, товарный склад, пакгауз, хранилище"
                 },
+                "building_part": {
+                    "name": "Часть здания"
+                },
                 "club": {
                     "name": "Клуб",
                     "terms": "Клуб по интересам, фан-клуб, кружок"
@@ -4980,9 +5035,6 @@
                     "name": "Мастерская теплоизоляции",
                     "terms": "утеплитель, изоляция, здание, тепло"
                 },
-                "craft/jeweler": {
-                    "name": "Ювелир"
-                },
                 "craft/key_cutter": {
                     "name": "Изготовление дубликатов ключей",
                     "terms": "ключ, изготовление, дубликат"
@@ -4993,9 +5045,6 @@
                 "craft/metal_construction": {
                     "name": "Металлоработы",
                     "terms": "металл, строительство, конструкции"
-                },
-                "craft/optician": {
-                    "name": "Оптика"
                 },
                 "craft/painter": {
                     "name": "Маляр",
@@ -5016,10 +5065,6 @@
                 "craft/plumber": {
                     "name": "Офис слесаря-сантехника",
                     "terms": "Водопроводчик, сантехник"
-                },
-                "craft/pottery": {
-                    "name": "Гончарня",
-                    "terms": "керамика, гончарное дело, гончарные изделия, гончарня, гончар"
                 },
                 "craft/rigger": {
                     "name": "Такелажник",
@@ -5228,9 +5273,6 @@
                 },
                 "healthcare/speech_therapist": {
                     "name": "Логопед"
-                },
-                "highway": {
-                    "name": "Дорога"
                 },
                 "highway/bridleway": {
                     "name": "Конная тропа",
@@ -5473,6 +5515,9 @@
                     "name": "Замок",
                     "terms": "Замок, Форт, Укрепление"
                 },
+                "historic/castle/palace": {
+                    "name": "Дворец"
+                },
                 "historic/memorial": {
                     "name": "Памятник",
                     "terms": "памятник, мемориал"
@@ -5510,9 +5555,6 @@
                 "junction": {
                     "name": "Перекрёсток",
                     "terms": "перекресток, перекрёсток"
-                },
-                "landuse": {
-                    "name": "Землепользование"
                 },
                 "landuse/allotments": {
                     "name": "Садовые участки",
@@ -5652,9 +5694,6 @@
                     "name": "Виноградник",
                     "terms": "виноградник"
                 },
-                "leisure": {
-                    "name": "Место отдыха"
-                },
                 "leisure/adult_gaming_centre": {
                     "name": "Игровые автоматы (азартные, на деньги)"
                 },
@@ -5694,10 +5733,6 @@
                 "leisure/dog_park": {
                     "name": "Площадка для выгула собак",
                     "terms": "собачья площадка"
-                },
-                "leisure/firepit": {
-                    "name": "Место разведения огня",
-                    "terms": "огонь, яма, очаг"
                 },
                 "leisure/fishing": {
                     "name": "Место для рыбалки"
@@ -5891,6 +5926,12 @@
                     "name": "Гоночный трек (не автоспорт)",
                     "terms": "бег, велосипед, собачьи бега, лошадиные бега"
                 },
+                "leisure/track/cycling": {
+                    "name": "Велотрек"
+                },
+                "leisure/track/running": {
+                    "name": "Беговая дорожка"
+                },
                 "leisure/water_park": {
                     "name": "Аквапарк",
                     "terms": "аквапарк"
@@ -5898,9 +5939,6 @@
                 "line": {
                     "name": "Линия",
                     "terms": "Линия"
-                },
-                "man_made": {
-                    "name": "Рукотворное"
                 },
                 "man_made/adit": {
                     "name": "Штольня",
@@ -5912,10 +5950,6 @@
                 "man_made/breakwater": {
                     "name": "Волнорез",
                     "terms": "Мол, Оградительное гидросооружение"
-                },
-                "man_made/bridge": {
-                    "name": "Контур моста",
-                    "terms": "мост"
                 },
                 "man_made/bunker_silo": {
                     "name": "Силосная яма",
@@ -5962,6 +5996,9 @@
                 "man_made/mast/communication/mobile_phone": {
                     "name": "Мачта сотовой связи",
                     "terms": "Мачта, сота, сотовая мачта"
+                },
+                "man_made/mineshaft": {
+                    "name": "Вертикальный тоннель"
                 },
                 "man_made/monitoring_station": {
                     "name": "Станция наблюдения/контроля",
@@ -6037,9 +6074,6 @@
                 "man_made/works": {
                     "name": "Завод",
                     "terms": "Фабрика"
-                },
-                "natural": {
-                    "name": "Природа"
                 },
                 "natural/bare_rock": {
                     "name": "Голые скалы"
@@ -6145,10 +6179,6 @@
                     "name": "Болото",
                     "terms": "болото, заболоченная территория"
                 },
-                "natural/wood": {
-                    "name": "Лес / деревья — предпочитаемый",
-                    "terms": "Лес, Деревья, Роща, Чаща"
-                },
                 "noexit/yes": {
                     "name": "Тупик"
                 },
@@ -6185,6 +6215,9 @@
                 "office/company": {
                     "name": "Частная компания",
                     "terms": "компания, фирма, офис"
+                },
+                "office/consulting": {
+                    "name": "Консультационная компания"
                 },
                 "office/coworking": {
                     "name": "Коворкинг"
@@ -6410,9 +6443,6 @@
                     "name": "Точка",
                     "terms": "точка"
                 },
-                "power": {
-                    "name": "Объекты энергетики"
-                },
                 "power/generator": {
                     "name": "Энергетические агрегаты",
                     "terms": "энергетический агрегат, устройство преобразования, турбина, котёл, котел, ветряк, солнечная панель, гидротурбина, ветрогенератор"
@@ -6457,6 +6487,24 @@
                 },
                 "public_transport/platform": {
                     "name": "Платформа"
+                },
+                "public_transport/platform/aerialway_point": {
+                    "name": "Станция канатной дороги (платформа)"
+                },
+                "public_transport/platform/bus_point": {
+                    "name": "Автобусная остановка (платформа)"
+                },
+                "public_transport/platform/light_rail_point": {
+                    "name": "Остановка легкорельсового транспорта (платформа)"
+                },
+                "public_transport/platform/monorail_point": {
+                    "name": "Остановка монорельса (платформа)"
+                },
+                "public_transport/platform/tram_point": {
+                    "name": "Трамвайная остановка (платформа)"
+                },
+                "public_transport/platform/trolleybus_point": {
+                    "name": "Троллейбусная остановка (платформа)"
                 },
                 "public_transport/station": {
                     "name": "Транспортная станция"
@@ -6527,9 +6575,6 @@
                 },
                 "public_transport/stop_position_trolleybus": {
                     "name": "Место остановки троллейбуса"
-                },
-                "railway": {
-                    "name": "Железная дорога"
                 },
                 "railway/abandoned": {
                     "name": "Разобранная железная дорога",
@@ -7158,9 +7203,6 @@
                     "name": "Винный магазин",
                     "terms": "вино, вина"
                 },
-                "tourism": {
-                    "name": "Туризм"
-                },
                 "tourism/alpine_hut": {
                     "name": "Горный приют",
                     "terms": "убежище, горы, домик"
@@ -7449,9 +7491,6 @@
                 "type/waterway": {
                     "name": "Водный путь"
                 },
-                "waterway": {
-                    "name": "Водный путь"
-                },
                 "waterway/boatyard": {
                     "name": "Лодочная мастерская",
                     "terms": "Шлюпочная мастерская"
@@ -7547,16 +7586,6 @@
                 },
                 "description": "Спутниковые и аэрофотоснимки.",
                 "name": "Спутниковые снимки Mapbox"
-            },
-            "Maxar-Premium": {
-                "attribution": {
-                    "text": "Условия и обратная связь"
-                }
-            },
-            "Maxar-Standard": {
-                "attribution": {
-                    "text": "Условия и обратная связь"
-                }
             },
             "OSM_Inspector-Addresses": {
                 "attribution": {
@@ -7733,130 +7762,11 @@
             }
         },
         "community": {
-            "bw-facebook": {
-                "description": "Страница OpenStreetMap в Ботсване"
-            },
-            "bw-twitter": {
-                "description": "Твиттер OpenStreetMap в Ботсване"
-            },
-            "cape-coast-youthmappers": {
-                "description": "Подписывайтесь на нас в Twitter {url}"
-            },
-            "osm-gh-twitter": {
-                "description": "Подписывайтесь на нас в Twitter {url}"
-            },
-            "talk-gh": {
-                "name": "Список рассылки Talk-gh"
-            },
-            "talk-mg": {
-                "name": "Список рассылки Talk-mg"
-            },
-            "OSM-MY-facebook": {
-                "description": "Для общения по поводу всего, что связано с OpenStreetMap!"
-            },
-            "OSM-MY-matrix": {
-                "description": "Приглашаются все картографы! Регистрация на {signupUrl}"
-            },
-            "OSM-MNG-facebook": {
-                "name": "OpenStreetMap Монголия",
-                "description": "Улучшите OpenStreetMap в Монголии",
-                "extendedDescription": "Картографируете в Монголии? Есть вопросы, хотите пообщаться с сообществом? Присоединяйтесь к нам по ссылке {Url}. Рады всем!"
-            },
-            "OSM-MMR-facebook": {
-                "name": "OpenStreetMap Мьянма",
-                "description": "Улучшите OpenStreetMap в Мьянме",
-                "extendedDescription": "Картографируете в Мьянме? Есть вопросы, хотите пообщаться с сообществом? Присоединяйтесь к нам по ссылке {Url}. Рады всем!"
-            },
-            "OSM-Nepal-facebook": {
-                "name": "OpenStreetMap Непал",
-                "description": "Улучшите OpenStreetMap в Непале",
-                "extendedDescription": "Картографируете в Непале? Есть вопросы, хотите пообщаться с сообществом? Присоединяйтесь к нам по ссылке {Url}. Рады всем!"
-            },
-            "OSM-PH-mailinglist": {
-                "name": "Список рассылки Talk-ph"
-            },
-            "OSM-RU-forum": {
-                "name": "Форум русскоязычного сообщества OSM",
-                "description": "Дискуссии, вопросы, голосования, проблемы и их решения — вам сюда."
-            },
-            "OSM-RU-telegram": {
-                "name": "Telegram-чат русскоязычного сообщества OSM",
-                "description": "Участники рады ответить на любой вопрос, связанный с использованием или рисованием карт, и готовы обсудить любую важную новость. Да, мы любим аниме и умеем устанавливать KDE на FreeBSD."
-            },
-            "at-mailinglist": {
-                "name": "Список рассылки Talk-at"
-            },
-            "byosm": {
-                "name": "OpenStreetMap Беларусь",
-                "description": "Telegram-чат OpenStreetMap Беларусь"
-            },
-            "be-facebook": {
-                "description": "Мапперы и сообщество OpenStreetMap Бельгии в Facebook"
-            },
-            "be-mailinglist": {
-                "name": "Список рассылки Talk-be"
-            },
-            "hr-mailinglist": {
-                "name": "Список рассылки Talk-hr",
-                "description": "Список рассылки Talk-hr"
-            },
-            "dk-mailinglist": {
-                "name": "Список рассылки Talk-dk"
-            },
-            "fi-mailinglist": {
-                "name": "Список рассылки Talk-fi"
-            },
-            "fr-mailinglist": {
-                "name": "Список рассылки Talk-fr",
-                "description": "список рассылки Talk-gh"
-            },
-            "de-berlin-twitter": {
-                "description": "Подписывайтесь на нас в Twitter {url}"
-            },
-            "de-mailinglist": {
-                "name": "Список рассылки Talk-de"
-            },
-            "is-mailinglist": {
-                "name": "Список рассылки Talk-is"
-            },
-            "it-mailinglist": {
-                "name": "Список рассылки Talk-it"
-            },
-            "it-twitter": {
-                "description": "Подписывайтесь на нас в Twitter {url}"
-            },
-            "OSM-ES-mailinglist": {
-                "name": "Список рассылки Talk-es"
-            },
-            "se-mailinglist": {
-                "name": "Список рассылки Talk-se"
-            },
-            "se-twitter": {
-                "description": "Подписывайтесь на нас в Twitter {url}"
-            },
-            "gb-mailinglist": {
-                "name": "Список рассылки Talk-gb"
-            },
             "Bay-Area-OpenStreetMappers": {
                 "description": "Улучшить перевод OpenStreetMap в Bay Area"
             },
-            "OSM-Chattanooga": {
-                "name": "OSM Chattanooga",
-                "description": "Группа пользователей OpenStreetMap в Chattanooga"
-            },
-            "OSM-Portland": {
-                "name": "OpenStreetMap Portland",
-                "description": "Мапперы и пользователи OpenStreetMap в Portland area"
-            },
-            "OSM-US-Slack": {
-                "name": "Slack OpenStreetMap US",
-                "description": "Приглашаются все! Регистрация на {signupUrl}"
-            },
-            "PHXGeo-twitter": {
+            "Galicia-Twitter": {
                 "description": "Подписывайтесь на нас в Twitter {url}"
-            },
-            "talk-au": {
-                "name": "Список рассылки Talk-au"
             },
             "OSM-AR-mailinglist": {
                 "name": "Список рассылки Talk-ar"
@@ -7866,12 +7776,6 @@
             },
             "OSM-BO-mailinglist": {
                 "name": "Список рассылки Talk-bo"
-            },
-            "OSM-br-mailinglist": {
-                "name": "Список рассылки Talk-br"
-            },
-            "OSM-br-twitter": {
-                "description": "Подписывайтесь на нас в Twitter {url}"
             },
             "OSM-CL-mailinglist": {
                 "name": "Список рассылки Talk-cl"
@@ -7885,20 +7789,58 @@
             "OSM-CO-twitter": {
                 "description": "Подписывайтесь на нас в Twitter {url}"
             },
+            "OSM-Chattanooga": {
+                "name": "OSM Chattanooga",
+                "description": "Группа пользователей OpenStreetMap в Chattanooga"
+            },
+            "OSM-ES-mailinglist": {
+                "name": "Список рассылки Talk-es"
+            },
+            "OSM-Facebook": {
+                "name": "OpenStreetMap в Facebook",
+                "description": "Нажмите Like на нашей странице в Facebook, чтобы подписаться на новости и обновления про OpenStreetMap."
+            },
+            "OSM-MMR-facebook": {
+                "name": "OpenStreetMap Мьянма",
+                "description": "Улучшите OpenStreetMap в Мьянме",
+                "extendedDescription": "Картографируете в Мьянме? Есть вопросы, хотите пообщаться с сообществом? Присоединяйтесь к нам по ссылке {Url}. Рады всем!"
+            },
+            "OSM-MNG-facebook": {
+                "name": "OpenStreetMap Монголия",
+                "description": "Улучшите OpenStreetMap в Монголии",
+                "extendedDescription": "Картографируете в Монголии? Есть вопросы, хотите пообщаться с сообществом? Присоединяйтесь к нам по ссылке {Url}. Рады всем!"
+            },
+            "OSM-MY-facebook": {
+                "description": "Для общения по поводу всего, что связано с OpenStreetMap!"
+            },
+            "OSM-MY-matrix": {
+                "description": "Приглашаются все картографы! Регистрация на {signupUrl}"
+            },
+            "OSM-Nepal-facebook": {
+                "name": "OpenStreetMap Непал",
+                "description": "Улучшите OpenStreetMap в Непале",
+                "extendedDescription": "Картографируете в Непале? Есть вопросы, хотите пообщаться с сообществом? Присоединяйтесь к нам по ссылке {Url}. Рады всем!"
+            },
             "OSM-PE-mailinglist": {
                 "name": "Список рассылки Talk-pe"
             },
             "OSM-PE-twitter": {
                 "description": "Подписывайтесь на нас в Twitter {url}"
             },
-            "OSM-Facebook": {
-                "name": "OpenStreetMap в Facebook",
-                "description": "Нажмите Like на нашей странице в Facebook, чтобы подписаться на новости и обновления про OpenStreetMap."
+            "OSM-PH-mailinglist": {
+                "name": "Список рассылки Talk-ph"
             },
-            "OSM-help": {
-                "name": "Помощь OpenStreetMap",
-                "description": "Задайте вопрос и получите ответы на сайте вопросов и ответов, поддерживаемом OSM сообществом.",
-                "extendedDescription": "{url} для всех нуждающихся в помощи касательно OpenStreetMap. Начинающий ли вы участник или у вас возник технический вопрос — здесь вам помогут!"
+            "OSM-Portland": {
+                "name": "OpenStreetMap Portland",
+                "description": "Мапперы и пользователи OpenStreetMap в Portland area"
+            },
+            "OSM-RU-forum": {
+                "name": "Форум русскоязычного сообщества OSM",
+                "description": "Дискуссии, вопросы, голосования, проблемы и их решения — вам сюда."
+            },
+            "OSM-RU-telegram": {
+                "name": "Telegram-чат русскоязычного сообщества OSM",
+                "description": "Участники рады ответить на любой вопрос, связанный с использованием или рисованием карт, и готовы обсудить любую важную новость. Да, мы любим аниме и умеем устанавливать KDE на FreeBSD."
             },
             "OSM-Reddit": {
                 "name": "OpenStreetMap на Reddit",
@@ -7912,10 +7854,103 @@
                 "name": "OpenStreetMap Twitter",
                 "description": "Подписывайтесь на нас в Twitter {url}"
             },
+            "OSM-US-Slack": {
+                "name": "Slack OpenStreetMap US",
+                "description": "Приглашаются все! Регистрация на {signupUrl}"
+            },
+            "OSM-br-mailinglist": {
+                "name": "Список рассылки Talk-br"
+            },
+            "OSM-br-twitter": {
+                "description": "Подписывайтесь на нас в Twitter {url}"
+            },
+            "OSM-help": {
+                "name": "Помощь OpenStreetMap",
+                "description": "Задайте вопрос и получите ответы на сайте вопросов и ответов, поддерживаемом OSM сообществом.",
+                "extendedDescription": "{url} для всех нуждающихся в помощи касательно OpenStreetMap. Начинающий ли вы участник или у вас возник технический вопрос — здесь вам помогут!"
+            },
             "OSMF": {
                 "name": "Фонд OpenStreetMap",
                 "description": "OSMF — это зарегистрированная в Великобритании бесприбыльная организация, поддерживающая проект OpenStreetMap.",
                 "extendedDescription": "OSMF поддерживает OpenStreetMap, собирая деньги, поддерживая работоспособность серверов, на которых работает OSM, организуя ежегодную конференцию State of the Map, координируя волонтёров, что держат OSM на плаву. Вы можете выразить свою поддержку и принять участие в судьбе OpenStreetMap, приосединившись как участник OSMF по ссылке: {signupUrl}"
+            },
+            "PHXGeo-twitter": {
+                "description": "Подписывайтесь на нас в Twitter {url}"
+            },
+            "at-mailinglist": {
+                "name": "Список рассылки Talk-at"
+            },
+            "be-facebook": {
+                "description": "Мапперы и сообщество OpenStreetMap Бельгии в Facebook"
+            },
+            "be-mailinglist": {
+                "name": "Список рассылки Talk-be"
+            },
+            "bw-facebook": {
+                "description": "Страница OpenStreetMap в Ботсване"
+            },
+            "bw-twitter": {
+                "description": "Твиттер OpenStreetMap в Ботсване"
+            },
+            "byosm": {
+                "name": "OpenStreetMap Беларусь",
+                "description": "Telegram-чат OpenStreetMap Беларусь"
+            },
+            "cape-coast-youthmappers": {
+                "description": "Подписывайтесь на нас в Twitter {url}"
+            },
+            "ch-twitter": {
+                "description": "Подписывайтесь на нас в Twitter {url}"
+            },
+            "de-berlin-twitter": {
+                "description": "Подписывайтесь на нас в Twitter {url}"
+            },
+            "de-mailinglist": {
+                "name": "Список рассылки Talk-de"
+            },
+            "dk-mailinglist": {
+                "name": "Список рассылки Talk-dk"
+            },
+            "fi-mailinglist": {
+                "name": "Список рассылки Talk-fi"
+            },
+            "fr-mailinglist": {
+                "name": "Список рассылки Talk-fr",
+                "description": "список рассылки Talk-gh"
+            },
+            "gb-mailinglist": {
+                "name": "Список рассылки Talk-gb"
+            },
+            "hr-mailinglist": {
+                "name": "Список рассылки Talk-hr",
+                "description": "Список рассылки Talk-hr"
+            },
+            "is-mailinglist": {
+                "name": "Список рассылки Talk-is"
+            },
+            "it-mailinglist": {
+                "name": "Список рассылки Talk-it"
+            },
+            "it-twitter": {
+                "description": "Подписывайтесь на нас в Twitter {url}"
+            },
+            "osm-gh-twitter": {
+                "description": "Подписывайтесь на нас в Twitter {url}"
+            },
+            "se-mailinglist": {
+                "name": "Список рассылки Talk-se"
+            },
+            "se-twitter": {
+                "description": "Подписывайтесь на нас в Twitter {url}"
+            },
+            "talk-au": {
+                "name": "Список рассылки Talk-au"
+            },
+            "talk-gh": {
+                "name": "Список рассылки Talk-gh"
+            },
+            "talk-mg": {
+                "name": "Список рассылки Talk-mg"
             }
         }
     }

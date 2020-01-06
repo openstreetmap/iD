@@ -7,7 +7,7 @@
             "undo": "undo",
             "zoom_to": "zoom to",
             "copy": "copy",
-            "open_wikidata": "open on wikidata.org",
+            "view_on": "view on {domain}",
             "favorite": "favorite"
         },
         "toolbar": {
@@ -284,7 +284,7 @@
                 },
                 "too_large": {
                     "single": "This can't be made square because not enough of it is currently visible.",
-                    "multiple": "These can't be made square because not enought of them are currently visible."
+                    "multiple": "These can't be made square because not enough of them are currently visible."
                 },
                 "connected_to_hidden": {
                     "single": "This can't be made square because it is connected to a hidden feature.",
@@ -674,11 +674,14 @@
             "hidden_warning": "{count} hidden features",
             "hidden_details": "These features are currently hidden: {details}"
         },
-        "status": {
-            "error": "Unable to connect to API.",
-            "offline": "The API is offline. Please try editing later.",
-            "readonly": "The API is read-only. You will need to wait to save your changes.",
-            "rateLimit": "The API is limiting anonymous connections.  You can fix this by logging in."
+        "osm_api_status": {
+            "message": {
+                "error": "Unable to reach the OpenStreetMap API. Your edits are safe locally. Check your network connection.",
+                "offline": "The OpenStreetMap API is offline. Your edits are safe locally. Please come back later.",
+                "readonly": "The OpenStreetMap API is currently read-only. You can continue editing, but must wait to save your changes.",
+                "rateLimit": "The OpenStreetMap API is limiting anonymous connections. You can fix this by logging in."
+            },
+            "retry": "Retry"
         },
         "commit": {
             "title": "Upload to OpenStreetMap",
@@ -975,6 +978,19 @@
                 }
             }
         },
+        "preferences": {
+            "title": "Preferences",
+            "description": "Preferences",
+            "key": "P",
+            "privacy": {
+                "title": "Privacy",
+                "privacy_link": "View the iD privacy policy",
+                "third_party_icons": {
+                    "description": "Show Third Party Icons",
+                    "tooltip": "Uncheck this box to avoid loading icons from third party sites such as Wikimedia Commons, Facebook, or Twitter."
+                }
+            }
+        },
         "save": {
             "title": "Save",
             "help": "Review your changes and upload them to OpenStreetMap, making them visible to other users.",
@@ -1029,6 +1045,9 @@
             "cancel": "Cancel"
         },
         "splash": {
+            "privacy_update": "Our privacy policy has recently been updated.",
+            "privacy_policy": "iD privacy policy",
+            "privacy": "{updateMessage} By using this software, you agree to do so in accordance with the {privacyLink}.",
             "walkthrough": "Start the Walkthrough"
         },
         "source_switch": {
@@ -1414,7 +1433,48 @@
         "mapillary_map_features": {
             "title": "Map Features",
             "tooltip": "Map features from Mapillary",
-            "request_data": "Request Data"
+            "request_data": "Request Data",
+            "construction": {
+                "flat": {
+                    "crosswalk_plain": "plain crosswalk"
+                }
+            },
+            "marking": {
+                "discrete": {
+                    "crosswalk_zebra": "zebra crosswalk"
+                }
+            },
+            "object": {
+                "banner": "banner",
+                "bench": "bench",
+                "bike_rack": "bike rack",
+                "billboard": "billboard",
+                "catch_basin": "catch basin",
+                "cctv_camera": "CCTV camera",
+                "fire_hydrant": "fire hydrant",
+                "mailbox": "mailbox",
+                "manhole": "manhole",
+                "phone_booth": "phone booth",
+                "sign": {
+                    "advertisement": "advertisement",
+                    "information": "information sign",
+                    "store": "shop sign"
+                },
+                "street_light": "street light",
+                "support": {
+                    "utility_pole": "utility pole"
+                },
+                "traffic_cone": "traffic cone",
+                "traffic_light": {
+                    "cyclists": "cyclist traffic light",
+                    "general_horizontal": "horizontal traffic light",
+                    "general_single": "single traffic light",
+                    "general_upright": "vertical traffic light",
+                    "other": "traffic light",
+                    "pedestrians": "pedestrian traffic light"
+                },
+                "trash_can": "trash can"
+            }
         },
         "mapillary": {
             "title": "Mapillary",
@@ -2401,6 +2461,7 @@
                     "background_switch": "Switch back to last background",
                     "map_data": "Toggle map data pane",
                     "issues": "Toggle validation issues pane",
+                    "preferences": "Toggle user preferences pane",
                     "fullscreen": "Enter full screen mode",
                     "sidebar": "Toggle sidebar",
                     "wireframe": "Toggle wireframe mode",
@@ -2416,9 +2477,9 @@
                     "search": "Find features matching search text"
                 },
                 "with_selected": {
-                    "title": "With feature selected",
+                    "title": "With features selected",
                     "edit_menu": "Toggle edit menu",
-                    "zoom_to": "Zoom to selected feature"
+                    "zoom_to": "Zoom to selected features"
                 },
                 "vertex_selected": {
                     "title": "With node selected",
@@ -2696,6 +2757,7 @@
                         "block_number": "Block Number",
                         "block_number!jp": "Block No.",
                         "city": "City",
+                        "city!cn": "City/Prefecture/League",
                         "city!jp": "City/Town/Village/Tokyo Special Ward",
                         "city!vn": "City/Town",
                         "conscriptionnumber": "123",
@@ -2703,6 +2765,7 @@
                         "county": "County",
                         "county!jp": "District",
                         "district": "District",
+                        "district!cn": "District/County/Banner",
                         "district!vn": "Arrondissement/Town/District",
                         "floor": "Floor",
                         "hamlet": "Hamlet",
@@ -2714,6 +2777,7 @@
                         "place": "Place",
                         "postcode": "Postcode",
                         "province": "Province",
+                        "province!cn": "Province/Municipality/AR/SAR",
                         "province!jp": "Prefecture",
                         "quarter": "Quarter",
                         "quarter!jp": "Ōaza/Machi",
@@ -2807,8 +2871,21 @@
                 "attraction": {
                     "label": "Type"
                 },
+                "baby_feeding": {
+                    "label": "Baby Nursing Area",
+                    "terms": "baby feeding,breastfeeding,lactation,mothers,nursing",
+                    "options": {
+                        "room": "Dedicated Room",
+                        "yes": "Marked Space",
+                        "no": "None"
+                    }
+                },
                 "baby_seat": {
                     "label": "Baby Seat"
+                },
+                "backcountry": {
+                    "label": "Backcountry",
+                    "terms": ""
                 },
                 "backrest": {
                     "label": "Backrest"
@@ -2877,6 +2954,9 @@
                 },
                 "booth": {
                     "label": "Booth"
+                },
+                "bottle": {
+                    "label": "Bottle Filling"
                 },
                 "boules": {
                     "label": "Type"
@@ -2990,6 +3070,9 @@
                     "label": "Communication Types",
                     "terms": ""
                 },
+                "connectivity": {
+                    "label": "Connectivity"
+                },
                 "construction": {
                     "label": "Type"
                 },
@@ -3016,6 +3099,9 @@
                         "backward": "Backward",
                         "reversible": "Reversible"
                     }
+                },
+                "country_flag": {
+                    "label": "Flag Country"
                 },
                 "country": {
                     "label": "Country"
@@ -3211,6 +3297,9 @@
                 "distance": {
                     "label": "Distance"
                 },
+                "disused/railway": {
+                    "label": "Type"
+                },
                 "dock": {
                     "label": "Type"
                 },
@@ -3366,6 +3455,9 @@
                 "fuel": {
                     "label": "Fuel"
                 },
+                "gambling": {
+                    "label": "Games"
+                },
                 "gauge": {
                     "label": "Gauge"
                 },
@@ -3392,11 +3484,22 @@
                 "generator/type": {
                     "label": "Type"
                 },
+                "geyser/height": {
+                    "label": "Eruption Height"
+                },
+                "gnis/feature_id": {
+                    "label": "GNIS Feature ID",
+                    "terms": "Federal Geographic Names Information Service,United States Board on Geographic Names,USA"
+                },
                 "government": {
                     "label": "Type"
                 },
                 "grape_variety": {
                     "label": "Grape Varieties"
+                },
+                "group_only": {
+                    "label": "Groups Only",
+                    "terms": ""
                 },
                 "guest_house": {
                     "label": "Type"
@@ -3486,6 +3589,9 @@
                         "undefined": "No",
                         "stables": "Yes"
                     }
+                },
+                "hot_water": {
+                    "label": "Hot Water"
                 },
                 "iata": {
                     "label": "IATA Airport Code"
@@ -3696,6 +3802,10 @@
                 "map_type": {
                     "label": "Type"
                 },
+                "mapillary": {
+                    "label": "Mapillary Image ID",
+                    "terms": ""
+                },
                 "marker": {
                     "label": "Type"
                 },
@@ -3874,6 +3984,10 @@
                 },
                 "oneway/bicycle": {
                     "label": "One Way (Bicycles)",
+                    "terms": ""
+                },
+                "openfire": {
+                    "label": "Open Fires Allowed",
                     "terms": ""
                 },
                 "opening_date": {
@@ -4156,6 +4270,10 @@
                 "ref/isil": {
                     "label": "ISIL Code"
                 },
+                "ref/vatin": {
+                    "label": "VAT ID Number",
+                    "terms": "value added tax identification number,vatin"
+                },
                 "relation": {
                     "label": "Type"
                 },
@@ -4370,6 +4488,10 @@
                 "shop": {
                     "label": "Type"
                 },
+                "shower": {
+                    "label": "Showers",
+                    "terms": ""
+                },
                 "siren/purpose": {
                     "label": "Purpose"
                 },
@@ -4572,6 +4694,10 @@
                 "to": {
                     "label": "To"
                 },
+                "toilets": {
+                    "label": "Toilets",
+                    "terms": ""
+                },
                 "toilets/disposal": {
                     "label": "Disposal",
                     "options": {
@@ -4703,6 +4829,9 @@
                 "utility_semi": {
                     "label": "Utilities"
                 },
+                "utility": {
+                    "label": "Utility"
+                },
                 "valve": {
                     "label": "Type"
                 },
@@ -4806,6 +4935,11 @@
                     "label": "Wikidata",
                     "terms": ""
                 },
+                "wikimedia_commons": {
+                    "label": "Wikimedia Commons Page",
+                    "terms": "",
+                    "placeholder": "File:Example.jpg"
+                },
                 "wikipedia": {
                     "label": "Wikipedia",
                     "terms": ""
@@ -4858,22 +4992,22 @@
                     "name": "Ford"
                 },
                 "highway": {
-                    "name": "Highway"
+                    "name": "Highway Feature"
                 },
                 "indoor": {
                     "name": "Indoor Feature"
                 },
                 "landuse": {
-                    "name": "Land Use"
+                    "name": "Land Use Feature"
                 },
                 "leisure": {
-                    "name": "Leisure"
+                    "name": "Leisure Feature"
                 },
                 "man_made": {
-                    "name": "Man Made"
+                    "name": "Man Made Feature"
                 },
                 "natural": {
-                    "name": "Natural"
+                    "name": "Natural Feature"
                 },
                 "place": {
                     "name": "Place"
@@ -4882,19 +5016,19 @@
                     "name": "Playground Equipment"
                 },
                 "power": {
-                    "name": "Power"
+                    "name": "Power Feature"
                 },
                 "railway": {
-                    "name": "Railway"
+                    "name": "Railway Feature"
                 },
                 "seamark": {
                     "name": "Seamark"
                 },
                 "tourism": {
-                    "name": "Tourism"
+                    "name": "Tourism Feature"
                 },
                 "waterway": {
-                    "name": "Waterway"
+                    "name": "Waterway Feature"
                 },
                 "addr/interpolation": {
                     "name": "Address Interpolation"
@@ -4944,7 +5078,7 @@
                     "terms": ""
                 },
                 "aerialway/j-bar": {
-                    "name": "J-bar Lift",
+                    "name": "J-Bar Lift",
                     "terms": "jbar"
                 },
                 "aerialway/magic_carpet": {
@@ -4968,7 +5102,7 @@
                     "terms": "handle tow,bugel lift"
                 },
                 "aerialway/t-bar": {
-                    "name": "T-bar Lift",
+                    "name": "T-Bar Lift",
                     "terms": "tbar"
                 },
                 "aerialway/zip_line": {
@@ -5139,15 +5273,15 @@
                     "terms": "bistro,coffee,tea"
                 },
                 "amenity/car_pooling": {
-                    "name": "Car Pooling",
-                    "terms": ""
+                    "name": "Car Pooling Station",
+                    "terms": "car sharing,carpooling,lift sharing,ride sharing"
                 },
                 "amenity/car_rental": {
                     "name": "Car Rental",
                     "terms": ""
                 },
                 "amenity/car_sharing": {
-                    "name": "Car Sharing",
+                    "name": "Car Sharing Station",
                     "terms": ""
                 },
                 "amenity/car_wash": {
@@ -5311,7 +5445,7 @@
                 },
                 "amenity/grave_yard": {
                     "name": "Graveyard",
-                    "terms": ""
+                    "terms": "burial ground,cemetary,cemetery,churchyard,columbarium,grave yard,graveyard,mausoleum,tomb"
                 },
                 "amenity/grit_bin": {
                     "name": "Grit Bin",
@@ -5333,7 +5467,7 @@
                     "name": "Internet Cafe",
                     "terms": "cybercafe,taxiphone,teleboutique,coffee,cafe,net,lanhouse"
                 },
-                "amenity/karaoke": {
+                "amenity/karaoke_box": {
                     "name": "Karaoke Box",
                     "terms": "karaoke club,karaoke room,karaoke television,KTV"
                 },
@@ -5655,7 +5789,7 @@
                 },
                 "amenity/shelter/lean_to": {
                     "name": "Lean-To",
-                    "terms": ""
+                    "terms": "alpine hut,cabin,leanto,lodging,overnight accommodations,sleeping shelter,wilderness hut"
                 },
                 "amenity/shelter/picnic_shelter": {
                     "name": "Picnic Shelter",
@@ -5930,7 +6064,7 @@
                     "terms": "theme park,ghost train"
                 },
                 "attraction/drop_tower": {
-                    "name": "Drop Tower",
+                    "name": "Drop Tower Ride",
                     "terms": "theme park,amusement ride,gondola,tower,big drop"
                 },
                 "attraction/kiddie_ride": {
@@ -6010,7 +6144,7 @@
                 },
                 "barrier/cycle_barrier": {
                     "name": "Cycle Barrier",
-                    "terms": ""
+                    "terms": "bicycle barrier,bicycling barrier,bike gates,cycling barrier"
                 },
                 "barrier/ditch": {
                     "name": "Trench",
@@ -6383,6 +6517,10 @@
                     "name": "Chimney Sweeper",
                     "terms": ""
                 },
+                "craft/cleaning": {
+                    "name": "Cleaning Service",
+                    "terms": ""
+                },
                 "craft/clockmaker": {
                     "name": "Clockmaker",
                     "terms": ""
@@ -6468,8 +6606,8 @@
                     "terms": "pipe"
                 },
                 "craft/pottery": {
-                    "name": "Pottery",
-                    "terms": "ceramic"
+                    "name": "Pottery Maker",
+                    "terms": "ceramic,kiln,pot,vase"
                 },
                 "craft/rigger": {
                     "name": "Rigger",
@@ -6538,6 +6676,12 @@
                 "cycleway/asl": {
                     "name": "Advanced Stop Line",
                     "terms": "advanced stop box,asl,bicycle box,bike box,bikebox,cycle box,cycle stop marking"
+                },
+                "demolished/building": {
+                    "name": "Recently Demolished Building"
+                },
+                "disused/railway": {
+                    "name": "Disused Railway Feature"
                 },
                 "emergency/designated": {
                     "name": "Emergency Access Designated"
@@ -6608,6 +6752,10 @@
                 "entrance": {
                     "name": "Entrance/Exit",
                     "terms": "entrance,exit,door"
+                },
+                "entrance/emergency": {
+                    "name": "Emergency Exit",
+                    "terms": "fire exit,door"
                 },
                 "ford": {
                     "name": "Ford",
@@ -7187,6 +7335,9 @@
                 "landuse/basin": {
                     "name": "Basin"
                 },
+                "landuse/churchyard": {
+                    "name": "Churchyard"
+                },
                 "landuse/farm": {
                     "name": "Farmland"
                 },
@@ -7210,11 +7361,7 @@
                 },
                 "landuse/cemetery": {
                     "name": "Cemetery",
-                    "terms": ""
-                },
-                "landuse/churchyard": {
-                    "name": "Churchyard",
-                    "terms": ""
+                    "terms": "burial ground,cemetary,cemetery,churchyard,columbarium,grave yard,graveyard,mausoleum,tomb"
                 },
                 "landuse/commercial": {
                     "name": "Commercial Area",
@@ -7238,7 +7385,7 @@
                 },
                 "landuse/forest": {
                     "name": "Managed Forest",
-                    "terms": "cut,forest,forestry,lumber,silviculture,tree"
+                    "terms": "boreal,cut,forest,forestry,forrest,lumber,silviculture,taiga,tree,trees,woodlands,woods"
                 },
                 "landuse/garages": {
                     "name": "Garage Landuse",
@@ -7246,7 +7393,7 @@
                 },
                 "landuse/grass": {
                     "name": "Grass",
-                    "terms": ""
+                    "terms": "field,green,lawn,managed grass,mown grass,turf"
                 },
                 "landuse/greenfield": {
                     "name": "Greenfield",
@@ -7334,7 +7481,7 @@
                 },
                 "landuse/religious": {
                     "name": "Religious Area",
-                    "terms": ""
+                    "terms": "christian,churchyard,hindu,jewish,mosque,muslim,place of worship,shinto,sikh,taoist,temple,shrine,synagogue"
                 },
                 "landuse/residential": {
                     "name": "Residential Area",
@@ -7409,8 +7556,8 @@
                     "terms": "escape game,escape the room,puzzle room,quest room"
                 },
                 "leisure/firepit": {
-                    "name": "Firepit",
-                    "terms": "fireplace,campfire"
+                    "name": "Fire Pit",
+                    "terms": "bonfire,campfire,fire circle,fire hole,fire place,fire ring,firepit,fireplace,firering"
                 },
                 "leisure/fishing": {
                     "name": "Fishing Spot",
@@ -7418,11 +7565,11 @@
                 },
                 "leisure/fitness_centre": {
                     "name": "Gym / Fitness Center",
-                    "terms": "health,gym,leisure,studio"
+                    "terms": "health,gym,leisure,pilates,studio"
                 },
                 "leisure/fitness_centre/yoga": {
                     "name": "Yoga Studio",
-                    "terms": "studio,asanas,modern yoga,meditation"
+                    "terms": "asanas,meditation,modern yoga,studio"
                 },
                 "leisure/fitness_station": {
                     "name": "Outdoor Fitness Station",
@@ -8024,13 +8171,17 @@
                     "name": "Fell",
                     "terms": ""
                 },
+                "natural/geyser": {
+                    "name": "Geyser",
+                    "terms": "erupting spring,geiser,gieser,guyser,hot water,hydrogeology,hydrothermal explosion,steam"
+                },
                 "natural/glacier": {
                     "name": "Glacier",
                     "terms": "ice,snow"
                 },
                 "natural/grassland": {
                     "name": "Grassland",
-                    "terms": "prairie,savanna"
+                    "terms": "field,prairie,savanna"
                 },
                 "natural/heath": {
                     "name": "Heath",
@@ -8145,8 +8296,8 @@
                     "terms": "bog,fen,marsh,mire,moor,muskeg,peatland,quagmire,reedbed,saltmarsh,swamp,tidalflat,wet meadow"
                 },
                 "natural/wood": {
-                    "name": "Wood",
-                    "terms": "tree"
+                    "name": "Natural Wood",
+                    "terms": "boreal,forest,forrest,taiga,tree,trees,woodlands,woods"
                 },
                 "network/type/node_network": {
                     "name": "Recreational Network Node",
@@ -8461,7 +8612,7 @@
                 },
                 "playground/horizontal_bar": {
                     "name": "Play Horizontal Bar",
-                    "terms": "high bar"
+                    "terms": "chin-up bar,high bar,pull-up bar"
                 },
                 "playground/rocker": {
                     "name": "Spring Rider",
@@ -8473,7 +8624,7 @@
                 },
                 "playground/sandpit": {
                     "name": "Sandpit",
-                    "terms": ""
+                    "terms": "sandbox"
                 },
                 "playground/seesaw": {
                     "name": "Seesaw",
@@ -8485,7 +8636,7 @@
                 },
                 "playground/structure": {
                     "name": "Play Structure",
-                    "terms": ""
+                    "terms": "jungle gym"
                 },
                 "playground/swing": {
                     "name": "Swing",
@@ -8820,6 +8971,10 @@
                     "name": "Tram",
                     "terms": "light rail,streetcar,tram,trolley"
                 },
+                "railway/yard": {
+                    "name": "Rail Yard",
+                    "terms": "freight car stop,freight train station,rail freight station,railroad yard,railway yard"
+                },
                 "relation": {
                     "name": "Relation",
                     "terms": ""
@@ -8955,6 +9110,10 @@
                     "name": "Butcher",
                     "terms": "chicken,beef,lamb,meat,pork"
                 },
+                "shop/camera": {
+                    "name": "Camera Equipment Store",
+                    "terms": "camera,film,lens,photo"
+                },
                 "shop/candles": {
                     "name": "Candle Shop",
                     "terms": "wax"
@@ -9063,6 +9222,10 @@
                     "name": "DIY Store",
                     "terms": ""
                 },
+                "shop/doors": {
+                    "name": "Door Shop",
+                    "terms": ""
+                },
                 "shop/dry_cleaning": {
                     "name": "Dry Cleaner",
                     "terms": ""
@@ -9106,6 +9269,10 @@
                 "shop/fishing": {
                     "name": "Fishing Shop",
                     "terms": "bait,fishing line,flies,fly,lure,reel,rod,tackle"
+                },
+                "shop/flooring": {
+                    "name": "Flooring Supply Shop",
+                    "terms": "tile"
                 },
                 "shop/florist": {
                     "name": "Florist",
@@ -9329,7 +9496,11 @@
                 },
                 "shop/photo": {
                     "name": "Photography Store",
-                    "terms": "camera,film"
+                    "terms": "camera,film,lens,photo"
+                },
+                "shop/pottery": {
+                    "name": "Pottery Store",
+                    "terms": "ceramic,pot,vase"
                 },
                 "shop/printer_ink": {
                     "name": "Printer Ink Store",
@@ -9427,6 +9598,10 @@
                     "name": "Tobacco Shop",
                     "terms": "cigarettes,cigars"
                 },
+                "shop/tool_hire": {
+                    "name": "Tool Rental",
+                    "terms": ""
+                },
                 "shop/toys": {
                     "name": "Toy Store",
                     "terms": "games"
@@ -9493,11 +9668,11 @@
                 },
                 "tourism/alpine_hut": {
                     "name": "Alpine Hut",
-                    "terms": "climbing hut"
+                    "terms": "cabin,climbing hut,lodge,lodging,overnight accommodations,wilderness hut"
                 },
                 "tourism/apartment": {
                     "name": "Guest Apartment / Condo",
-                    "terms": ""
+                    "terms": "bnb,holiday rental,lodging,overnight accommodations,vacation rental"
                 },
                 "tourism/aquarium": {
                     "name": "Aquarium",
@@ -9541,7 +9716,15 @@
                 },
                 "tourism/camp_site": {
                     "name": "Campground",
-                    "terms": "tent,rv"
+                    "terms": "caravans,camp ground,camp pitch,camp site,campers,campground,campsite,mobile homes,recreational vehicles,rv,tenting"
+                },
+                "tourism/camp_site/backcountry": {
+                    "name": "Backcountry Camping Area",
+                    "terms": "alpine camping,backpacking site,backwoods camping,camp ground,camp pitch,camp site,campground,campsite,informal camping,primitive camping"
+                },
+                "tourism/camp_site/group_only": {
+                    "name": "Group Camping Area",
+                    "terms": "camp ground,camp pitch,camp site,campground,campsite,scout camping,youth camping"
                 },
                 "tourism/caravan_site": {
                     "name": "RV Park",
@@ -9549,7 +9732,7 @@
                 },
                 "tourism/chalet": {
                     "name": "Holiday Cottage",
-                    "terms": "holiday,holiday cottage,holiday home,vacation,vacation home"
+                    "terms": "chalet,holiday cabin,holiday cottage,holiday home,lodge,lodging,overnight accommodations,vacation cabin,vacation home"
                 },
                 "tourism/gallery": {
                     "name": "Art Gallery",
@@ -9557,15 +9740,15 @@
                 },
                 "tourism/guest_house": {
                     "name": "Guest House",
-                    "terms": "B&B,Bed and Breakfast"
+                    "terms": "b & b,b and b,B&B,Bed and Breakfast,bnb,lodging,overnight accommodations"
                 },
                 "tourism/hostel": {
                     "name": "Hostel",
-                    "terms": ""
+                    "terms": "bunk beds,dormitories,dorms,lodging,overnight accommodations"
                 },
                 "tourism/hotel": {
                     "name": "Hotel",
-                    "terms": ""
+                    "terms": "concierge,lodge,lodging,overnight accommodations"
                 },
                 "tourism/information": {
                     "name": "Information",
@@ -9597,7 +9780,7 @@
                 },
                 "tourism/motel": {
                     "name": "Motel",
-                    "terms": ""
+                    "terms": "lodging,motor hotel,overnight accommodations"
                 },
                 "tourism/museum": {
                     "name": "Museum",
@@ -9621,7 +9804,7 @@
                 },
                 "tourism/wilderness_hut": {
                     "name": "Wilderness Hut",
-                    "terms": "wilderness hut,backcountry hut,bothy"
+                    "terms": "alpine hut,cabin,backcountry hut,bothy,lodge,lodging,overnight accommodations,sleeping shelter,wilderness hut"
                 },
                 "tourism/zoo": {
                     "name": "Zoo",
@@ -9712,6 +9895,10 @@
                 },
                 "type/boundary/administrative": {
                     "name": "Administrative Boundary",
+                    "terms": ""
+                },
+                "type/connectivity": {
+                    "name": "Lane Connectivity",
                     "terms": ""
                 },
                 "type/enforcement": {
@@ -9869,6 +10056,10 @@
                     "name": "Drain",
                     "terms": ""
                 },
+                "waterway/fish_pass": {
+                    "name": "Fish Pass",
+                    "terms": "eel ladder,eel pass,fish ladder,fish migration,fish passage,fish siphon,fish steps,fish way,fishladder,fishpass,fishsteps,fishway"
+                },
                 "waterway/fuel": {
                     "name": "Marine Fuel Station",
                     "terms": "petrol,gas,diesel,boat"
@@ -9980,20 +10171,6 @@
                 },
                 "description": "Satellite and aerial imagery.",
                 "name": "Mapbox Satellite"
-            },
-            "Maxar-Premium": {
-                "attribution": {
-                    "text": "Terms & Feedback"
-                },
-                "description": "Maxar Premium is a mosaic composed of Maxar basemap with select regions filled with +Vivid or custom area of interest imagery, 50cm resolution or better, and refreshed more frequently with ongoing updates.",
-                "name": "Maxar Premium Imagery (Beta)"
-            },
-            "Maxar-Standard": {
-                "attribution": {
-                    "text": "Terms & Feedback"
-                },
-                "description": "Maxar Standard is a curated set of imagery covering 86% of the earth’s landmass, with 30-60cm resolution where available, backfilled by Landsat. Average age is 2.31 years, with some areas updated 2x per year.",
-                "name": "Maxar Standard Imagery (Beta)"
             },
             "OSM_Inspector-Addresses": {
                 "attribution": {

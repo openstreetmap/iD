@@ -5,6 +5,7 @@
         "population"
     ],
     "moreFields": [
+        "{place}",
         "website"
     ],
     "geometry": [

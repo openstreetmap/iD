@@ -12,6 +12,7 @@
         "email",
         "fax",
         "fee",
+        "gnis/feature_id",
         "level",
         "payment_multi_fee",
         "phone",

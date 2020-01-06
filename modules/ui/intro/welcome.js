@@ -57,7 +57,7 @@ export function uiIntroWelcome(context, reveal) {
             { tooltipClass: 'intro-mouse' }
         );
 
-        tooltip.selectAll('.tooltip-inner')
+        tooltip.selectAll('.popover-inner')
             .insert('svg', 'span')
             .attr('class', 'tooltip-illustration')
             .append('use')
@@ -98,7 +98,7 @@ export function uiIntroWelcome(context, reveal) {
             { tooltipClass: 'intro-mouse' }
         );
 
-        tooltip.selectAll('.tooltip-inner')
+        tooltip.selectAll('.popover-inner')
             .insert('svg', 'span')
             .attr('class', 'tooltip-illustration')
             .append('use')

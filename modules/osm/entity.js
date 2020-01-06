@@ -205,7 +205,7 @@ osmEntity.prototype = {
                     return vals.indexOf(d.old[key]) !== -1;
                 } else {
                     if (tags[key] === d.old[key]) {
-                        if (d.old[key] === d.replace[key]) {
+                        if (d.replace && d.old[key] === d.replace[key]) {
                             return !Object.keys(d.replace).every(function(key) {
                                 return tags[key] === d.replace[key];
                             });

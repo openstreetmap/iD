@@ -1,5 +1,5 @@
 {
-    "icon": "maki-park",
+    "icon": "temaki-tree_and_bench",
     "fields": [
         "name",
         "operator",
@@ -10,6 +10,7 @@
         "dog",
         "email",
         "fax",
+        "gnis/feature_id",
         "phone",
         "smoking",
         "website"

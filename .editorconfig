@@ -4,10 +4,16 @@ root = true
 trim_trailing_whitespace = true
 insert_final_newline = false
 
-# for ESLint
-[*.js]
-end_of_line = lf
 
 [*.{js,json,css,html}]
 indent_style = space
 indent_size = 4
+
+
+# EOL for ESLint
+# newline follows Airbnb style guide
+# mix of indent size between ES5 and ES6 syntax files
+[*.js]
+end_of_line = lf
+insert_final_newline = true
+indent_size = tab_width

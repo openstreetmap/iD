@@ -30,7 +30,10 @@ var patterns = {
             { pattern: 'forest' } // same as 'leaf_type:mixed'
         ],
         grave_yard: 'cemetery',
-        grass: 'grass',
+        grass: [
+            { golf: 'green', pattern: 'golf_green' },
+            { pattern: 'grass' },
+        ],
         landfill: 'landfill',
         meadow: 'meadow',
         military: 'construction',

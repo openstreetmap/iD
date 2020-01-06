@@ -7,7 +7,6 @@
             "undo": "anulează",
             "zoom_to": "măriți la",
             "copy": "copiază",
-            "open_wikidata": "deschide pe wikidata.org",
             "favorite": "favorite"
         },
         "toolbar": {
@@ -132,18 +131,7 @@
             },
             "orthogonalize": {
                 "title": "Pătrat",
-                "description": {
-                    "line": "Dreptunghiulează unghiurile liniei.",
-                    "area": "Dreptunghiulează unghiurile suprafaței."
-                },
-                "key": "Q",
-                "annotation": {
-                    "line": "Dreptunghiulează unghiurile unei linii.",
-                    "area": "Dreptunghiulează unghiurile unei suprafațe."
-                },
-                "not_squarish": "Aceasta nu poate fi făcută un dreptunghi deoarece nu are nici pe departe forma unui dreptunghi.",
-                "too_large": "Aceasta nu poate fi făcută un dreptunghi deoarece nu este vizibilă în întregime.",
-                "connected_to_hidden": "Aceasta nu poate fi făcută un dreptunghi deoarece este conectată la un obiect ascuns."
+                "key": "Q"
             },
             "straighten": {
                 "title": "Întărește ",
@@ -353,9 +341,6 @@
         "feature_info": {
             "hidden_warning": "{count} funcționalități ascunse",
             "hidden_details": "Această funcție este momentan ascunsă: {details}"
-        },
-        "status": {
-            "error": "Imposibil de conectat la API."
         },
         "commit": {
             "title": "Încarcă în OpenStreetMap",
@@ -769,7 +754,6 @@
                 },
                 "display_options": {
                     "title": "Afișează opțiuni",
-                    "background": "Afișează opțiuni fundal",
                     "background_switch": "Schimbă înapoi la ultimul fundal",
                     "fullscreen": "Intră în mod full screen"
                 },
@@ -1359,7 +1343,6 @@
                     "label": "Rețea"
                 },
                 "network_bicycle": {
-                    "label": "Tip Rețea",
                     "options": {
                         "icn": "Internațional",
                         "lcn": "Local",
@@ -1368,7 +1351,6 @@
                     }
                 },
                 "network_foot": {
-                    "label": "Tip Rețea",
                     "options": {
                         "iwn": "Internațional",
                         "lwn": "Local",
@@ -1377,7 +1359,6 @@
                     }
                 },
                 "network_horse": {
-                    "label": "Tip Rețea",
                     "options": {
                         "ihn": "Internațional",
                         "lhn": "Local",
@@ -1735,9 +1716,6 @@
                 "amenity/car_rental": {
                     "name": "Închiriere Mașini"
                 },
-                "amenity/car_sharing": {
-                    "name": "Car Sharing"
-                },
                 "amenity/car_wash": {
                     "name": "Spălătorie Auto"
                 },
@@ -2056,14 +2034,8 @@
                 "craft/insulator": {
                     "name": "Insulator"
                 },
-                "craft/jeweler": {
-                    "name": "Giuvaer"
-                },
                 "craft/metal_construction": {
                     "name": "Construcție de Metal"
-                },
-                "craft/optician": {
-                    "name": "Optician"
                 },
                 "craft/painter": {
                     "name": "Pictor"
@@ -2109,9 +2081,6 @@
                 },
                 "healthcare/blood_donation": {
                     "name": "Centru de Donație de Sânge"
-                },
-                "highway": {
-                    "name": "Autostradă"
                 },
                 "highway/corridor": {
                     "name": "Coridor Interior"
@@ -2229,9 +2198,6 @@
                 },
                 "junction": {
                     "name": "Juncție"
-                },
-                "landuse": {
-                    "name": "Utilizare Teren"
                 },
                 "landuse/allotments": {
                     "name": "Grădină Comunitară"
@@ -2407,9 +2373,6 @@
                 "line": {
                     "name": "Linie"
                 },
-                "man_made/bridge": {
-                    "name": "Pod"
-                },
                 "man_made/chimney": {
                     "name": "Șemineu"
                 },
@@ -2457,9 +2420,6 @@
                 },
                 "man_made/works": {
                     "name": "Fabrică"
-                },
-                "natural": {
-                    "name": "Natural"
                 },
                 "natural/bare_rock": {
                     "name": "Stâncă"
@@ -2520,9 +2480,6 @@
                 },
                 "natural/wetland": {
                     "name": "Zonă Umedă"
-                },
-                "natural/wood": {
-                    "name": "Pădure"
                 },
                 "noexit/yes": {
                     "name": "Fără Ieșire"
@@ -2614,9 +2571,6 @@
                 "point": {
                     "name": "Punct"
                 },
-                "power": {
-                    "name": "Energie"
-                },
                 "power/generator": {
                     "name": "Generator de Energie"
                 },
@@ -2640,9 +2594,6 @@
                 },
                 "power/transformer": {
                     "name": "Transformator"
-                },
-                "railway": {
-                    "name": "Cale Ferată"
                 },
                 "railway/abandoned": {
                     "name": "Cale Ferată Abandonată"
@@ -2969,9 +2920,6 @@
                 "shop/wine": {
                     "name": "Magazin de Vinuri"
                 },
-                "tourism": {
-                    "name": "Turism"
-                },
                 "tourism/alpine_hut": {
                     "name": "Cabană"
                 },
@@ -3106,9 +3054,6 @@
                 },
                 "type/site": {
                     "name": "Sit"
-                },
-                "waterway": {
-                    "name": "Drum Marin"
                 },
                 "waterway/boatyard": {
                     "name": "Curte de Bărci"
@@ -3287,11 +3232,11 @@
             }
         },
         "community": {
-            "cape-coast-youthmappers": {
-                "description": "Urmăriţi-ne pe Twitter : {url}"
-            },
             "Bay-Area-OpenStreetMappers": {
                 "description": "Îmbunătățește OpenStreetMap în Bay Area"
+            },
+            "cape-coast-youthmappers": {
+                "description": "Urmăriţi-ne pe Twitter : {url}"
             }
         }
     }

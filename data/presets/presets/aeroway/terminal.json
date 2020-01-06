@@ -11,11 +11,12 @@
     "fields": [
         "name",
         "operator",
-        "building_area"
+        "building_area",
+        "wheelchair",
+        "baby_feeding"
     ],
     "moreFields": [
-        "smoking",
-        "wheelchair"
+        "smoking"
     ],
     "tags": {
         "aeroway": "terminal"

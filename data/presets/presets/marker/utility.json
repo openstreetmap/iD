@@ -4,6 +4,7 @@
         "ref",
         "operator",
         "marker",
+        "utility",
         "{marker}"
     ],
     "geometry": [

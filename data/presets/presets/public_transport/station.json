@@ -10,8 +10,10 @@
     ],
     "moreFields": [
         "air_conditioning",
+        "baby_feeding",
         "email",
         "fax",
+        "gnis/feature_id",
         "internet_access/fee",
         "internet_access/ssid",
         "level",

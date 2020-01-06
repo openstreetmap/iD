@@ -9,6 +9,7 @@
     ],
     "moreFields": [
         "fishing",
+        "gnis/feature_id",
         "salt",
         "tidal"
     ],

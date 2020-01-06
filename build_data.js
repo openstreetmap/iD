@@ -72,7 +72,8 @@ function buildData() {
     'fas-i-cursor': {},
     'fas-lock': {},
     'fas-long-arrow-alt-right': {},
-    'fas-th-list': {}
+    'fas-th-list': {},
+    'fas-user-cog': {}
   };
 
   // The Noun Project icons used
@@ -324,7 +325,8 @@ function suggestionsToPresets(presets) {
       Q177054: true,    // Burger King
       Q524757: true,    // KFC
       Q779845: true,    // CBA
-      Q1205312: true    // In-N-Out
+      Q1205312: true,   // In-N-Out
+      Q10443115: true   // Carlings
     };
 
     let logoURL;
@@ -510,7 +512,7 @@ function generateTaginfo(presets, fields) {
       tag.icon_url = 'https://cdn.jsdelivr.net/gh/mapbox/maki/icons/' +
         preset.icon.replace(/^maki-/, '') + '-15.svg';
     } else if (/^temaki-/.test(preset.icon)) {
-      tag.icon_url = 'https://cdn.jsdelivr.net/gh/bhousel/temaki/icons/' +
+      tag.icon_url = 'https://cdn.jsdelivr.net/gh/ideditor/temaki/icons/' +
         preset.icon.replace(/^temaki-/, '') + '.svg';
     } else if (/^fa[srb]-/.test(preset.icon)) {
       tag.icon_url = 'https://cdn.jsdelivr.net/gh/openstreetmap/iD@master/svg/fontawesome/' +

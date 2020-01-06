@@ -6,7 +6,7 @@ en:
     undo: undo
     zoom_to: zoom to
     copy: copy
-    open_wikidata: open on wikidata.org
+    view_on: view on {domain}
     favorite: favorite
   toolbar:
     center_zoom:
@@ -220,7 +220,7 @@ en:
         multiple: These can't be made square because they are not squarish.
       too_large:
         single: This can't be made square because not enough of it is currently visible.
-        multiple: These can't be made square because not enought of them are currently visible.
+        multiple: These can't be made square because not enough of them are currently visible.
       connected_to_hidden:
         single: This can't be made square because it is connected to a hidden feature.
         multiple: These can't be made square because some are connected to hidden features.
@@ -521,11 +521,13 @@ en:
   feature_info:
     hidden_warning: "{count} hidden features"
     hidden_details: "These features are currently hidden: {details}"
-  status:
-    error: Unable to connect to API.
-    offline: The API is offline. Please try editing later.
-    readonly: The API is read-only. You will need to wait to save your changes.
-    rateLimit: The API is limiting anonymous connections.  You can fix this by logging in.
+  osm_api_status:
+    message:
+      error: Unable to reach the OpenStreetMap API. Your edits are safe locally. Check your network connection.
+      offline: The OpenStreetMap API is offline. Your edits are safe locally. Please come back later.
+      readonly: The OpenStreetMap API is currently read-only. You can continue editing, but must wait to save your changes.
+      rateLimit: The OpenStreetMap API is limiting anonymous connections. You can fix this by logging in.
+    retry: Retry
   commit:
     title: Upload to OpenStreetMap
     upload_explanation: "The changes you upload will be visible on all maps that use OpenStreetMap data."
@@ -773,6 +775,16 @@ en:
       url:
         instructions: "Enter a data file URL or vector tile URL template. Valid tokens are:\n   {zoom} or {z}, {x}, {y} for Z/X/Y tile scheme"
         placeholder: Enter a url
+  preferences:
+    title: Preferences
+    description: Preferences
+    key: P
+    privacy:
+      title: Privacy
+      privacy_link: View the iD privacy policy
+      third_party_icons:
+        description: Show Third Party Icons
+        tooltip: Uncheck this box to avoid loading icons from third party sites such as Wikimedia Commons, Facebook, or Twitter.
   save:
     title: Save
     help: "Review your changes and upload them to OpenStreetMap, making them visible to other users."
@@ -823,6 +835,9 @@ en:
     okay: "OK"
     cancel: "Cancel"
   splash:
+    privacy_update: "Our privacy policy has recently been updated."
+    privacy_policy: iD privacy policy
+    privacy: "{updateMessage} By using this software, you agree to do so in accordance with the {privacyLink}."
     walkthrough: "Start the Walkthrough"
   source_switch:
     live: live
@@ -1124,6 +1139,39 @@ en:
     title: "Map Features"
     tooltip: "Map features from Mapillary"
     request_data: "Request Data"
+    construction:
+      flat:
+        crosswalk_plain: plain crosswalk
+    marking:
+      discrete:
+        crosswalk_zebra: zebra crosswalk
+    object:
+      banner: banner
+      bench: bench
+      bike_rack: bike rack
+      billboard: billboard
+      catch_basin: catch basin
+      cctv_camera: CCTV camera
+      fire_hydrant: fire hydrant
+      mailbox: mailbox
+      manhole: manhole
+      phone_booth: phone booth
+      sign:
+        advertisement: advertisement
+        information: information sign
+        store: shop sign
+      street_light: street light
+      support:
+        utility_pole: utility pole
+      traffic_cone: traffic cone
+      traffic_light:
+        cyclists: cyclist traffic light
+        general_horizontal: horizontal traffic light
+        general_single: single traffic light
+        general_upright: vertical traffic light
+        other: traffic light
+        pedestrians: pedestrian traffic light
+      trash_can: trash can
   mapillary:
     title: Mapillary
     signs:
@@ -1950,6 +1998,7 @@ en:
         background_switch: "Switch back to last background"
         map_data: "Toggle map data pane"
         issues: "Toggle validation issues pane"
+        preferences: "Toggle user preferences pane"
         fullscreen: "Enter full screen mode"
         sidebar: "Toggle sidebar"
         wireframe: "Toggle wireframe mode"
@@ -1963,9 +2012,9 @@ en:
         lasso: "Draw a selection lasso around features"
         search: "Find features matching search text"
       with_selected:
-        title: "With feature selected"
+        title: "With features selected"
         edit_menu: "Toggle edit menu"
-        zoom_to: "Zoom to selected feature"
+        zoom_to: "Zoom to selected features"
       vertex_selected:
         title: "With node selected"
         previous: "Jump to previous node"

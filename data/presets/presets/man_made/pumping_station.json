@@ -4,6 +4,9 @@
         "point",
         "area"
     ],
+    "moreFields": [
+        "gnis/feature_id"
+    ],
     "tags": {
         "man_made": "pumping_station"
     },

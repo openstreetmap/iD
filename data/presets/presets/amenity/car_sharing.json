@@ -10,6 +10,7 @@
         "supervised"
     ],
     "moreFields": [
+        "brand",
         "email",
         "fax",
         "lit",
@@ -24,5 +25,5 @@
     "tags": {
         "amenity": "car_sharing"
     },
-    "name": "Car Sharing"
+    "name": "Car Sharing Station"
 }

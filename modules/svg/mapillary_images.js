@@ -89,7 +89,7 @@ export function svgMapillaryImages(projection, context, dispatch) {
         if (!service) return;
 
         service
-            .selectImage(d)
+            .selectImage(d.key)
             .updateViewer(d.key, context)
             .showViewer();
 
@@ -161,14 +161,13 @@ export function svgMapillaryImages(projection, context, dispatch) {
     }
 
     function update() {
-        var viewer = d3_select('#photoviewer');
-        var selected = viewer.empty() ? undefined : viewer.datum();
 
         var z = ~~context.map().zoom();
         var showMarkers = (z >= minMarkerZoom);
         var showViewfields = (z >= minViewfieldZoom);
 
         var service = getService();
+        var selectedKey = service && service.getSelectedImageKey();
         var sequences = (service ? service.sequences(projection) : []);
         var images = (service && showMarkers ? service.images(projection) : []);
 
@@ -213,8 +212,8 @@ export function svgMapillaryImages(projection, context, dispatch) {
         var markers = groups
             .merge(groupsEnter)
             .sort(function(a, b) {
-                return (a === selected) ? 1
-                    : (b === selected) ? -1
+                return (a.key === selectedKey) ? 1
+                    : (b.key === selectedKey) ? -1
                     : b.loc[1] - a.loc[1];  // sort Y
             })
             .attr('transform', transform)

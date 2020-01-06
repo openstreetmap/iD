@@ -9,5 +9,6 @@
         "boundary": "*"
     },
     "searchable": false,
-    "name": "Boundary"
+    "name": "Boundary",
+    "matchScore": 0.45
 }

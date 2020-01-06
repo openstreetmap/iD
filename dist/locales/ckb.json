@@ -4,8 +4,7 @@
             "download": "دابەزاندن",
             "information": "زانیاری",
             "remove": "لابردن",
-            "copy": "لەبەرگرتنەوە",
-            "open_wikidata": "کردنەوە لە ماڵپەڕی wikidata.org"
+            "copy": "لەبەرگرتنەوە"
         },
         "modes": {
             "add_feature": {
@@ -330,12 +329,6 @@
             "fix": {
                 "select_road_type": {
                     "title": "هەڵبژاردنی جۆری ڕێگا"
-                },
-                "use_bridge_or_tunnel": {
-                    "title": "پرد یان تونێل بەکاربهێنە"
-                },
-                "use_tunnel": {
-                    "title": "تونێل بەکاربهێنە"
                 }
             }
         },
@@ -392,9 +385,7 @@
                     "keyboard": "پیشاندانی کورتبڕەکانی تەختەکلیل"
                 },
                 "display_options": {
-                    "title": "پیشاندانی بژاردەکان",
-                    "background": "پیشاندانی بژاردەکانی پاشبنەما",
-                    "map_data": "پیشاندانی بژاردەکانی دراوەی نەخشە"
+                    "title": "پیشاندانی بژاردەکان"
                 }
             },
             "editing": {
@@ -1052,9 +1043,6 @@
                 "craft/plumber": {
                     "name": "بۆڕیچی"
                 },
-                "craft/pottery": {
-                    "name": " قوڕکاریی"
-                },
                 "craft/shoemaker": {
                     "name": "پینەدۆز"
                 },
@@ -1171,11 +1159,11 @@
             }
         },
         "community": {
-            "it-twitter": {
-                "description": "لەسەر تویتەر شوێنمان بکەوە {url}"
-            },
             "OSM-Facebook": {
                 "name": "OpenStreetMap لە فەیسبووک"
+            },
+            "it-twitter": {
+                "description": "لەسەر تویتەر شوێنمان بکەوە {url}"
             }
         }
     }

@@ -1,0 +1,19 @@
+{
+    "key": "baby_feeding",
+    "type": "combo",
+    "label": "Baby Nursing Area",
+    "strings": {
+        "options": {
+            "room": "Dedicated Room",
+            "yes": "Marked Space",
+            "no": "None"
+        }
+    },
+    "terms": [
+        "baby feeding",
+        "breastfeeding",
+        "lactation",
+        "mothers",
+        "nursing"
+    ]
+}

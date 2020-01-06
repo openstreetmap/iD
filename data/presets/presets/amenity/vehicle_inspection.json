@@ -10,6 +10,7 @@
     "moreFields": [
         "email",
         "fax",
+        "gnis/feature_id",
         "payment_multi",
         "phone",
         "website",

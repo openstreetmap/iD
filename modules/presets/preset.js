@@ -2,12 +2,16 @@ import { t } from '../util/locale';
 import { osmAreaKeys } from '../osm/tags';
 import { groupManager } from '../entities/group_manager';
 import { utilArrayUniq, utilObjectOmit } from '../util';
+import { utilSafeClassName } from '../util/util';
 
 
 export function presetPreset(id, preset, fields, addable, rawPresets) {
     preset = Object.assign({}, preset);   // shallow copy
 
     preset.id = id;
+
+    // for use in classes, element ids, css selectors
+    preset.safeid = utilSafeClassName(id);
 
     preset.parentPresetID = function() {
         var endIndex = preset.id.lastIndexOf('/');

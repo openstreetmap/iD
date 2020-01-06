@@ -4,17 +4,22 @@
         "name",
         "sport",
         "address",
-        "building_area"
+        "building_area",
+        "opening_hours",
+        "phone",
+        "website"
     ],
     "moreFields": [
+        "brand",
         "charge_fee",
         "email",
         "fax",
         "fee",
-        "opening_hours",
-        "payment_multi",
-        "phone",
-        "website"
+        "gnis/feature_id",
+        "internet_access",
+        "internet_access/fee",
+        "internet_access/ssid",
+        "payment_multi"
     ],
     "geometry": [
         "point",
@@ -27,6 +32,7 @@
         "health",
         "gym",
         "leisure",
+        "pilates",
         "studio"
     ],
     "name": "Gym / Fitness Center"

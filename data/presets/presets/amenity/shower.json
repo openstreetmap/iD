@@ -8,6 +8,7 @@
         "charge_fee",
         "supervised",
         "building_area",
+        "hot_water",
         "wheelchair"
     ],
     "moreFields": [

@@ -202,6 +202,10 @@ path.fill.tag-power-plant {
 path.stroke.tag-natural-wetland {
     stroke: rgb(153, 225, 170);
 }
+path.fill.tag-natural-wetland {
+    stroke: rgba(153, 225, 170, 0.3);
+    fill: rgba(153, 225, 170, 0.3);
+}
 .preset-icon-fill path.area.fill.tag-natural-wetland {
     fill: rgba(153, 225, 170, 0.2);
 }
@@ -216,29 +220,41 @@ path.stroke.tag-natural-wetland {
 
 /* Light Green things */
 path.stroke.tag-landuse-cemetery,
-path.stroke.tag-landuse-orchard,
-path.stroke.tag-landuse-vineyard,
+path.stroke.tag-landuse-farmland,
+path.stroke.tag-landuse-grass.tag-golf-green,
 path.stroke.tag-landuse-meadow,
-path.stroke.tag-landuse-farmland {
+path.stroke.tag-landuse-orchard,
+path.stroke.tag-landuse-vineyard {
     stroke: rgb(191, 232, 63);
 }
+path.fill.tag-landuse-cemetery,
+path.fill.tag-landuse-farmland,
+path.fill.tag-landuse-grass.tag-golf-green,
+path.fill.tag-landuse-meadow,
+path.fill.tag-landuse-orchard,
+path.fill.tag-landuse-vineyard {
+    stroke: rgba(191, 232, 63, 0.3);
+    fill: rgba(191, 232, 63, 0.3);
+}
 .preset-icon-fill path.area.fill.tag-landuse-cemetery,
-.preset-icon-fill path.area.fill.tag-landuse-orchard,
-.preset-icon-fill path.area.fill.tag-landuse-vineyard,
+.preset-icon-fill path.area.fill.tag-landuse-farmland,
+.preset-icon-fill path.area.fill.tag-landuse-grass.tag-golf-green,
 .preset-icon-fill path.area.fill.tag-landuse-meadow,
-.preset-icon-fill path.area.fill.tag-landuse-farmland {
-    fill: rgba(191, 232, 63, 0.2);
+.preset-icon-fill path.area.fill.tag-landuse-orchard,
+.preset-icon-fill path.area.fill.tag-landuse-vineyard {
+    fill: rgba(191, 232, 63, 0.4);
 }
 .pattern-color-cemetery,
-.pattern-color-cemetery_christian,
 .pattern-color-cemetery_buddhist,
-.pattern-color-cemetery_muslim,
+.pattern-color-cemetery_christian,
 .pattern-color-cemetery_jewish,
-.pattern-color-orchard,
-.pattern-color-vineyard,
+.pattern-color-cemetery_muslim,
+.pattern-color-farmland,
+.pattern-color-golf_green,
 .pattern-color-meadow,
-.pattern-color-farmland {
-    fill: rgba(191, 232, 63, 0.2);
+.pattern-color-orchard,
+.pattern-color-vineyard {
+    fill: rgba(191, 232, 63, 0.3);
 }
 
 

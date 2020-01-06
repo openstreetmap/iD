@@ -1,16 +1,10 @@
 {
     "icon": "maki-religious-christian",
     "fields": [
-        "name",
-        "religion",
-        "denomination"
+        "{landuse/religious}"
     ],
     "moreFields": [
-        "address",
-        "email",
-        "fax",
-        "phone",
-        "website"
+        "{landuse/religious}"
     ],
     "geometry": [
         "area"
@@ -19,5 +13,6 @@
         "landuse": "churchyard"
     },
     "terms": [],
+    "searchable": false,
     "name": "Churchyard"
 }

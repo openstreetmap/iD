@@ -3,6 +3,7 @@
     "type": "combo",
     "label": "Denomination",
     "prerequisiteTag": {
-        "key": "religion"
+        "key": "religion",
+        "valueNot": "none"
     }
 }

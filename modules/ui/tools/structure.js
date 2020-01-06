@@ -27,7 +27,7 @@ export function uiToolStructure(context) {
     };
     var structureBridge = {
         id: 'bridge',
-        icon: 'iD-structure-bridge',
+        icon: 'temaki-bridge',
         label: t('presets.fields.structure.options.bridge'),
         iconClass: 'icon-30',
         tags: {
@@ -40,7 +40,7 @@ export function uiToolStructure(context) {
     };
     var structureTunnel = {
         id: 'tunnel',
-        icon: 'iD-structure-tunnel',
+        icon: 'temaki-tunnel',
         label: t('presets.fields.structure.options.tunnel'),
         iconClass: 'icon-30',
         tags: {

@@ -1,5 +1,5 @@
 {
-    "icon": "maki-lodging",
+    "icon": "temaki-bunk_beds",
     "fields": [
         "{tourism/guest_house}"
     ],
@@ -13,5 +13,12 @@
     "tags": {
         "tourism": "hostel"
     },
+    "terms": [
+        "bunk beds",
+        "dormitories",
+        "dorms",
+        "lodging",
+        "overnight accommodations"
+    ],
     "name": "Hostel"
 }

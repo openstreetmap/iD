@@ -1,5 +1,5 @@
 {
-    "icon": "maki-pitch",
+    "icon": "temaki-play_structure",
     "geometry": [
         "point",
         "area"
@@ -7,5 +7,8 @@
     "tags": {
         "playground": "structure"
     },
+    "terms": [
+        "jungle gym"
+    ],
     "name": "Play Structure"
 }
