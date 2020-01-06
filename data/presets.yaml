@@ -3311,8 +3311,8 @@ en:
         terms: '<translate with synonyms or related terms for ''Underground Parking'', separated by commas>'
       amenity/parking_entrance:
         # amenity=parking_entrance
-        name: Parking Garage Entrance/Exit
-        terms: '<translate with synonyms or related terms for ''Parking Garage Entrance/Exit'', separated by commas>'
+        name: Parking Garage Entrance / Exit
+        terms: '<translate with synonyms or related terms for ''Parking Garage Entrance / Exit'', separated by commas>'
       amenity/parking_space:
         # amenity=parking_space
         name: Parking Space
@@ -4724,9 +4724,9 @@ en:
         name: Emergency Access Yes
       entrance:
         # entrance=*
-        name: Entrance/Exit
+        name: Entrance / Exit
         # 'terms: entrance,exit,door'
-        terms: '<translate with synonyms or related terms for ''Entrance/Exit'', separated by commas>'
+        terms: '<translate with synonyms or related terms for ''Entrance / Exit'', separated by commas>'
       entrance/emergency:
         # entrance=emergency
         name: Emergency Exit

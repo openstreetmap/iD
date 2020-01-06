@@ -5420,7 +5420,7 @@
                     "terms": "gay nightclub,lesbian nightclub,lgbtq nightclub,lgbt nightclub,lgb nightclub"
                 },
                 "amenity/parking_entrance": {
-                    "name": "Parking Garage Entrance/Exit",
+                    "name": "Parking Garage Entrance / Exit",
                     "terms": ""
                 },
                 "amenity/parking_space": {
@@ -6638,7 +6638,7 @@
                     "terms": "water tank,cistern,reservoir"
                 },
                 "entrance": {
-                    "name": "Entrance/Exit",
+                    "name": "Entrance / Exit",
                     "terms": "entrance,exit,door"
                 },
                 "entrance/emergency": {
