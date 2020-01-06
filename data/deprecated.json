@@ -237,6 +237,10 @@
       "replace": {"tourism": "camp_pitch"}
     },
     {
+      "old": {"shop": "clothes", "clothes": "second_hand"},
+      "replace": {"shop": "clothes", "second_hand": "yes"}
+    },
+    {
       "old": {"color": "*"},
       "replace": {"colour": "$1"}
     },

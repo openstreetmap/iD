@@ -1190,6 +1190,9 @@ button.add-preset.disabled .preset-icon-container {
     overflow: hidden;
     padding: 20px;
 }
+.preset-list-button .label-inner .namepart:nth-child(2) {
+    font-weight: normal;
+}
 
 .header button,
 .modal > button {

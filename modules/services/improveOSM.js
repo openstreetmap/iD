@@ -361,9 +361,10 @@ export default {
         var that = this;
         d3_json(url)
             .then(function(data) {
+                // Assign directly for immediate use in the callback
                 // comments are served newest to oldest
-                var comments = data.comments ? data.comments.reverse() : [];
-                that.replaceError(d.update({ comments: comments }));
+                d.comments = data.comments ? data.comments.reverse() : [];
+                that.replaceError(d);
                 if (callback) callback(null, d);
             })
             .catch(function(err) {
@@ -390,17 +391,9 @@ export default {
             var key = d.error_key;
             var url = _impOsmUrls[key] + '/comment';
             var payload = {
-                username: user.display_name
+                username: user.display_name,
+                targetIds: [ d.identifier ]
             };
-
-            // Each error type has different data for identification
-            if (key === 'ow') {
-                payload.roadSegments = [ d.identifier ];
-            } else if (key === 'mr') {
-                payload.tiles = [ d.identifier ];
-            } else if (key === 'tr') {
-                payload.targetIds = [ d.identifier ];
-            }
 
             if (d.newStatus !== undefined) {
                 payload.status = d.newStatus;
