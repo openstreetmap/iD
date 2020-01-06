@@ -1774,6 +1774,7 @@
     {"key": "seats", "description": "🄵 Seats"},
     {"key": "second_hand", "value": "yes", "description": "🄵 Sells Used"},
     {"key": "second_hand", "value": "no", "description": "🄵 Sells Used"},
+    {"key": "segregated", "description": "🄵 Bicycle-Pedestrian Separation"},
     {"key": "self_service", "description": "🄵 Self-Service"},
     {"key": "service", "value": "spur", "description": "🄵 Service Type"},
     {"key": "service", "value": "yard", "description": "🄵 Service Type"},
