@@ -3270,6 +3270,12 @@
                 "except": {
                     "label": "Exceptions"
                 },
+                "expected_rcn_route_relations": {
+                    "label": "Adjacent Cycling Nodes"
+                },
+                "expected_rwn_route_relations": {
+                    "label": "Adjacent Walking Nodes"
+                },
                 "faces": {
                     "label": "Faces"
                 },

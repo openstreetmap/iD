@@ -941,6 +941,10 @@
       "replace": {"route": "bicycle", "network": "ncn"}
     },
     {
+      "old": {"rwn_expected_route_relations": "*"},
+      "replace": {"expected_rwn_route_relations": "$1"}
+    },
+    {
       "old": {"shop": "adult"},
       "replace": {"shop": "erotic"}
     },

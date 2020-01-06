@@ -141,6 +141,8 @@
     "enforcement": {"key": "enforcement", "type": "combo", "label": "Type"},
     "entrance": {"key": "entrance", "type": "typeCombo", "label": "Type"},
     "except": {"key": "except", "type": "combo", "label": "Exceptions"},
+    "expected_rcn_route_relations": {"key": "expected_rcn_route_relations", "type": "number", "label": "Adjacent Cycling Nodes"},
+    "expected_rwn_route_relations": {"key": "expected_rwn_route_relations", "type": "number", "label": "Adjacent Walking Nodes"},
     "faces": {"key": "faces", "type": "number", "minValue": 0, "label": "Faces"},
     "fax": {"key": "fax", "type": "tel", "label": "Fax", "placeholder": "+31 42 123 4567"},
     "fee": {"key": "fee", "type": "check", "label": "Fee"},

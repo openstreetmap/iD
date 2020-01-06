@@ -820,6 +820,12 @@ en:
       except:
         # except=*
         label: Exceptions
+      expected_rcn_route_relations:
+        # expected_rcn_route_relations=*
+        label: Adjacent Cycling Nodes
+      expected_rwn_route_relations:
+        # expected_rwn_route_relations=*
+        label: Adjacent Walking Nodes
       faces:
         # faces=*
         label: Faces
