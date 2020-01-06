@@ -149,8 +149,11 @@ export function uiFeatureList(context) {
             var localResults = [];
             for (var id in allEntities) {
                 var entity = allEntities[id];
+                if (!entity) continue;
+
                 var name = utilDisplayName(entity) || '';
                 if (name.toLowerCase().indexOf(q) < 0) continue;
+                
                 var matched = context.presets().match(entity, graph);
                 var type = (matched && matched.name()) || utilDisplayType(entity.id);
                 var extent = entity.extent(graph);
