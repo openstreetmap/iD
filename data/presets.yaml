@@ -383,6 +383,7 @@ en:
       building_area:
         # building=*
         label: Building
+        terms: '[translate with synonyms or related terms for ''Building'', separated by commas]'
       bunker_type:
         # bunker_type=*
         label: Type

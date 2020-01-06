@@ -2868,7 +2868,8 @@
                     "label": "Type"
                 },
                 "building_area": {
-                    "label": "Building"
+                    "label": "Building",
+                    "terms": ""
                 },
                 "building": {
                     "label": "Building",
