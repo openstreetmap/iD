@@ -1,0 +1,25 @@
+{
+    "icon": "temaki-museum",
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "terms": [
+        "artifacts",
+        "dioramas",
+        "exhibits",
+        "exhibitions",
+        "foundation",
+        "hall",
+        "institution"
+    ],
+    "tags": {
+        "tourism": "museum",
+        "museum": "history"
+    },
+    "reference": {
+        "key": "museum",
+        "value": "history"
+    },
+    "name": "History Museum"
+}

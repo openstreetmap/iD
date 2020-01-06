@@ -1005,7 +1005,8 @@
             "welcome": "OpenStreetMap エディタの iD へようこそ",
             "text": "iD はみんなで作る世界地図に貢献するための使いやすくパワフルなツールです。現在のバージョンは {version} です。詳細情報は {website} で、バグレポートは {github} でお願いします。",
             "privacy_update": "プライバシーポリシーが更新されました。",
-            "privacy": "{updateMessage} このソフトウェアを使用することで、あなたは {here}にあるIDのプライバシーポリシーに同意したものとみなされます。",
+            "privacy_policy": "IDのプライバシーポリシー",
+            "privacy": "{updateMessage} このソフトウェアを使用することで、あなたは {privacyLink}に同意したものとみなされます。",
             "walkthrough": "ウォークスルーを始める",
             "start": "今すぐ編集を始める"
         },
@@ -2758,6 +2759,10 @@
                 "baby_seat": {
                     "label": "ベビーシート"
                 },
+                "backcountry": {
+                    "label": "バックカントリー",
+                    "terms": "バックカントリー"
+                },
                 "backrest": {
                     "label": "背もたれ"
                 },
@@ -2825,6 +2830,9 @@
                 },
                 "booth": {
                     "label": "ブース"
+                },
+                "bottle": {
+                    "label": "瓶詰め設備有無"
                 },
                 "boules": {
                     "label": "種類"
@@ -3349,6 +3357,9 @@
                 "generator/type": {
                     "label": "種類"
                 },
+                "geyser/height": {
+                    "label": "間欠泉の高さ"
+                },
                 "gnis/feature_id": {
                     "label": "GNIS地物ID",
                     "terms": "GNIS地物ID"
@@ -3358,6 +3369,10 @@
                 },
                 "grape_variety": {
                     "label": "ブドウの品種"
+                },
+                "group_only": {
+                    "label": "団体専用",
+                    "terms": "団体専用, グループ"
                 },
                 "guest_house": {
                     "label": "ゲストハウスの種類"
@@ -3447,6 +3462,9 @@
                         "stables": "Yes",
                         "undefined": "No"
                     }
+                },
+                "hot_water": {
+                    "label": "温水"
                 },
                 "iata": {
                     "label": "IATA空港コード"
@@ -3840,6 +3858,10 @@
                         "undefined": "おそらくはい",
                         "yes": "はい"
                     }
+                },
+                "openfire": {
+                    "label": "焚き火可否",
+                    "terms": "焚き火可否, 焚き火, キャンプファイア, キャンプ"
                 },
                 "opening_date": {
                     "label": "開始予定日"
@@ -4339,6 +4361,10 @@
                 "shop": {
                     "label": "店舗の種類"
                 },
+                "shower": {
+                    "label": "シャワー有無",
+                    "terms": "シャワー有無, シャワー"
+                },
                 "siren/purpose": {
                     "label": "利用目的"
                 },
@@ -4540,6 +4566,10 @@
                 },
                 "to": {
                     "label": "To"
+                },
+                "toilets": {
+                    "label": "トイレ有無",
+                    "terms": "トイレ有無, トイレ, 便所"
                 },
                 "toilets/disposal": {
                     "label": "汚物処理",
@@ -6381,6 +6411,10 @@
                     "name": "配管工",
                     "terms": "配管工, 職人"
                 },
+                "craft/pottery": {
+                    "name": "窯元",
+                    "terms": "窯元, 陶器製造業, 職人, 工房, 陶芸, 陶磁器, 焼き物"
+                },
                 "craft/rigger": {
                     "name": "艤装者",
                     "terms": "艤装者, 職人, 工房"
@@ -6533,6 +6567,10 @@
                 "entrance": {
                     "name": "出入口（全般）",
                     "terms": "出入口, 入口, 出口, 出入り口, エントランス, 玄関, 正面入口, 裏口"
+                },
+                "entrance/emergency": {
+                    "name": "非常口",
+                    "terms": "非常口, 出口, 緊急"
                 },
                 "ford": {
                     "name": "洗い越し",
@@ -7914,6 +7952,10 @@
                     "name": "高原",
                     "terms": "高原"
                 },
+                "natural/geyser": {
+                    "name": "間欠泉",
+                    "terms": "間欠泉, 温泉"
+                },
                 "natural/glacier": {
                     "name": "氷河",
                     "terms": "氷河"
@@ -8852,6 +8894,10 @@
                     "name": "精肉店",
                     "terms": "精肉店, 肉屋, 食品, 食べ物"
                 },
+                "shop/camera": {
+                    "name": "カメラ店",
+                    "terms": "カメラ店, カメラ用品, レンズ, 写真"
+                },
                 "shop/candles": {
                     "name": "キャンドル専門店",
                     "terms": "キャンドル, ロウソク, 蝋燭, 蠟燭, インテリア"
@@ -8960,6 +9006,10 @@
                     "name": "ホームセンター",
                     "terms": "日曜大工用品店, 工具店, DIY, ホームセンター, 雑貨, 買い物, ショッピング, 園芸, 工芸用品, 家庭菜園, 植木"
                 },
+                "shop/doors": {
+                    "name": "ドア販売店",
+                    "terms": "ドア販売店, ドア, 扉"
+                },
                 "shop/dry_cleaning": {
                     "name": "クリーニング店",
                     "terms": "クリーニング, ドライクリーニング店, 洗濯屋"
@@ -9009,6 +9059,10 @@
                 },
                 "shop/fishmonger": {
                     "name": "魚屋（非推奨）"
+                },
+                "shop/flooring": {
+                    "name": "床用品店",
+                    "terms": "床用品店, フロア, フローリング"
                 },
                 "shop/florist": {
                     "name": "生花店",
@@ -9237,6 +9291,10 @@
                     "name": "写真店",
                     "terms": "写真屋, 写真店, 現像, ビデオ, デジカメ"
                 },
+                "shop/pottery": {
+                    "name": "陶磁器店",
+                    "terms": "陶磁器店, 陶器店, 皿, 茶碗, 焼き物"
+                },
                 "shop/printer_ink": {
                     "name": "プリンタ用インク店",
                     "terms": "プリンタ用インク店, プリンタ, インクカートリッジ, トナー"
@@ -9332,6 +9390,10 @@
                 "shop/tobacco": {
                     "name": "たばこ店",
                     "terms": "たばこ店, たばこ屋, タバコ, たばこ, 嗜好品, タバコ店, タバコ屋, 煙草"
+                },
+                "shop/tool_hire": {
+                    "name": "工具レンタル店",
+                    "terms": "工具レンタル店, 工具, レンタル"
                 },
                 "shop/toys": {
                     "name": "玩具店",
@@ -9454,6 +9516,14 @@
                 "tourism/camp_site": {
                     "name": "キャンプ場",
                     "terms": "キャンプ場, アウトドア"
+                },
+                "tourism/camp_site/backcountry": {
+                    "name": "キャンプ場（未整備）",
+                    "terms": "キャンプ場（未整備）, バックカントリー"
+                },
+                "tourism/camp_site/group_only": {
+                    "name": "キャンプ場（団体専用）",
+                    "terms": "キャンプ場（団体専用）"
                 },
                 "tourism/caravan_site": {
                     "name": "オートキャンプ場",
@@ -10090,6 +10160,13 @@
                 },
                 "description": "独立行政法人 農研機構(NARO)より配信。ズームレベル15～20。輪郭が鮮明な地図画像なので最もトレースしやすく、概してBingより位置精度が高いが、Bingよりやや古いことが多い。",
                 "name": "国土地理院 基盤地図2500(NARO経由)"
+            },
+            "gothenburg-citymap": {
+                "attribution": {
+                    "text": "© Gothenburg municipality, CC0"
+                },
+                "description": "The city map is an overview map that describes Gothenburg. It contains general information about land, communications, hydrography, buildings, address numbers and street names, administrative division and other orientation text.",
+                "name": "Gothenburg City map"
             },
             "gsi.go.jp": {
                 "attribution": {

@@ -150,8 +150,8 @@ preset are generally not inherited. E.g. the `shop` field is not inherited by `s
 The name of a local SVG icon file. You can use icons from any of the following icon sets. When specifying an icon, use the prefixed version of the name, for example `"icon": "maki-park"` or `"icon": "tnp-2009223"`.
 
 * [iD's spritesheet](https://github.com/openstreetmap/iD/tree/master/svg/iD-sprite/presets) (`iD-`)
-* [Maki](http://www.mapbox.com/maki/) (`maki-`), map-specific icons from Mapbox
-* [Temaki](http://bhousel.github.io/temaki/docs/) (`temaki-`), an expansion pack for Maki
+* [Maki](https://labs.mapbox.com/maki-icons/) (`maki-`), map-specific icons from Mapbox
+* [Temaki](https://ideditor.github.io/temaki/docs/) (`temaki-`), an expansion pack for Maki
     * This is the best place to submit a PR if you want to create a preset icon!
 * [Font Awesome](https://fontawesome.com/icons?d=gallery&m=free), thousands of general-purpose icons
     * There is a free and pro tier. You can use any icon from the free tier in the following styles:

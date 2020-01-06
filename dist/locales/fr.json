@@ -883,6 +883,11 @@
                 }
             }
         },
+        "preferences": {
+            "title": "Préférences",
+            "description": "Préférences",
+            "key": "P"
+        },
         "restore": {
             "heading": "Vous avez des modifications non enregistrées",
             "description": "Vous avez des modifications non sauvegardées d'une session précédente. Souhaitez-vous restaurer ces changements ?",

@@ -1003,7 +1003,8 @@
             "welcome": "Bonvenon al la OpenStreetMap-redaktilo “iD”",
             "text": "La redaktilo “iD” estas afabla, sed potenca ilo por kontribui al la plej bona libera mondmapo. Tio ĉi estas versio {version}. Pliaj informoj estas disponeblaj ĉe {website} kaj eblaj raporti erarojn per {github}.",
             "privacy_update": "Nia privateca politiko estis lastatempe aktualigita.",
-            "privacy": "{updateMessage} Per uzi tiun ĉi programon, vi konsentas fari tion laŭ ĝia privateca politiko, kiu troviĝas ĉe {here}.",
+            "privacy_policy": "privateca politiko de redaktilo iD",
+            "privacy": "{updateMessage} Per uzi tiun ĉi programon, vi konsentas fari tion laŭ {privacyLink}.",
             "walkthrough": "Malfermi gvidilon",
             "start": "Redakti nun"
         },

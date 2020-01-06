@@ -2,6 +2,7 @@
     "icon": "maki-pitch",
     "fields": [
         "name",
+        "operator",
         "sport",
         "address"
     ],

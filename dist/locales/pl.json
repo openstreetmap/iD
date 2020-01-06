@@ -1005,7 +1005,8 @@
             "welcome": "Witaj w edytorze iD map OpenStreetMap",
             "text": "iD jest przyjaznym, ale i jednocześnie potężnym narzędziem, dzięki któremu możesz przyczynić się do rozwoju najlepszej wolnej mapy świata. To jest wersja {version}. Więcej informacji znajdziesz na {website}, a błędy zgłosisz na {github}.",
             "privacy_update": "Nasza polityka prywatności została niedawno zaktualizowana.",
-            "privacy": "{updateMessage} Korzystając z tego oprogramowania, zgadzasz się to robić zgodnie z polityką prywatności iD, którą można znaleźć {here}.",
+            "privacy_policy": "polityką prywatności iD",
+            "privacy": "{updateMessage} Korzystając z tego oprogramowania, zgadzasz się to robić zgodnie z {privacyLink}.",
             "walkthrough": "Rozpocznij samouczek",
             "start": "Edytuj"
         },
@@ -2761,6 +2762,10 @@
                 "baby_seat": {
                     "label": "Dla niemowląt"
                 },
+                "backcountry": {
+                    "label": "Dziki kemping bez udogodnień",
+                    "terms": "dziki kemping bez udogodnień"
+                },
                 "backrest": {
                     "label": "Oparcie"
                 },
@@ -2828,6 +2833,9 @@
                 },
                 "booth": {
                     "label": "Budka"
+                },
+                "bottle": {
+                    "label": "Napełnianie butelek"
                 },
                 "boules": {
                     "label": "Rodzaj"
@@ -3352,6 +3360,9 @@
                 "generator/type": {
                     "label": "Typ"
                 },
+                "geyser/height": {
+                    "label": "Wysokość erupcji"
+                },
                 "gnis/feature_id": {
                     "label": "GNIS",
                     "terms": "GNIS"
@@ -3361,6 +3372,10 @@
                 },
                 "grape_variety": {
                     "label": "Odmiany winorośli"
+                },
+                "group_only": {
+                    "label": "Tylko grupy",
+                    "terms": "tylko grupy"
                 },
                 "guest_house": {
                     "label": "Rodzaj"
@@ -3450,6 +3465,9 @@
                         "stables": "Tak",
                         "undefined": "Nie"
                     }
+                },
+                "hot_water": {
+                    "label": "Ciepła woda"
                 },
                 "iata": {
                     "label": "Kod lotniska – IATA"
@@ -3843,6 +3861,10 @@
                         "undefined": "Domyślnie tak",
                         "yes": "Tak"
                     }
+                },
+                "openfire": {
+                    "label": "Rozpalanie ognia dozwolone?",
+                    "terms": "rozpalanie ognia, ognisko, grill"
                 },
                 "opening_date": {
                     "label": "Oczekiwana data otwarcia"
@@ -4342,6 +4364,10 @@
                 "shop": {
                     "label": "Rodzaj"
                 },
+                "shower": {
+                    "label": "Prysznice",
+                    "terms": "prysznice"
+                },
                 "siren/purpose": {
                     "label": "Przeznaczenie"
                 },
@@ -4543,6 +4569,10 @@
                 },
                 "to": {
                     "label": "Do"
+                },
+                "toilets": {
+                    "label": "Toalety",
+                    "terms": "toalety"
                 },
                 "toilets/disposal": {
                     "label": "Opróżnianie",
@@ -5059,7 +5089,7 @@
                 },
                 "amenity/charging_station": {
                     "name": "Stacja ładowania pojazdów",
-                    "terms": "ładowanie samochodów"
+                    "terms": "stacja ładowania pojazdów, stacja ładowania samochodów elektrycznych, ładowanie samochodów, samochody elektryczne, pojazdy elektryczne"
                 },
                 "amenity/childcare": {
                     "name": "Żłobek",
@@ -5130,7 +5160,7 @@
                 },
                 "amenity/doctors": {
                     "name": "Gabinet lekarski lub przychodnia",
-                    "terms": "przychodnia, nzoz, lekarz, doktor, gabinet lekarski, centrum medyczne, poradnia, leczenie, medycyna, zdrowie, alergolog, dermatolog, ginekolog, internista, kardiolog, laryngolog, neurolog, okulista, ortopeda, pediatra, psychiatra"
+                    "terms": "przychodnia, nzoz, lekarz, doktor, gabinet lekarski, centrum medyczne, klinika, poradnia, leczenie, medycyna, zdrowie, alergolog, chirurg, dermatolog, endokrynolog, geriatra, ginekolog, hematolog, internista, kardiochirurg, kardiolog, laryngolog, nefrolog, neonatolog, neurolog, okulista, onkolog, ortopeda, otorynolaryngolog, pediatra, psychiatra, reumatolog, seksuolog, urolog"
                 },
                 "amenity/dojo": {
                     "name": "Dojo/szkoła sztuk walki",
@@ -5900,7 +5930,7 @@
                     "terms": "blok"
                 },
                 "barrier/bollard": {
-                    "name": "Słupek",
+                    "name": "Słupek drogowy",
                     "terms": "słupek, pachołek"
                 },
                 "barrier/bollard_line": {
@@ -6297,6 +6327,10 @@
                     "name": "Kominiarz",
                     "terms": "kominiarz, zakład kominiarski, rzemiosło, rzemieślnik, rzemieślnicy"
                 },
+                "craft/cleaning": {
+                    "name": "Usługi sprzątania",
+                    "terms": "usługi sprzątania, usługi sprzątające, usługi porządkowe, firma sprzątająca, rzemiosło, rzemieślnik, rzemieślnicy"
+                },
                 "craft/clockmaker": {
                     "name": "Zegarmistrz",
                     "terms": "zegarmistrz, rzemiosło, rzemieślnik, rzemieślnicy"
@@ -6383,6 +6417,10 @@
                 "craft/plumber": {
                     "name": "Hydraulik",
                     "terms": "hydraulik, rzemiosło, rzemieślnik, rzemieślnicy"
+                },
+                "craft/pottery": {
+                    "name": "Pracownia garncarska",
+                    "terms": "garncarstwo, garncarz, garnki, rzemiosło, rzemieślnik, rzemieślnicy"
                 },
                 "craft/rigger": {
                     "name": "Takielarz",
@@ -6536,6 +6574,10 @@
                 "entrance": {
                     "name": "Wejście/wyjście",
                     "terms": "Wejście, Wyjście"
+                },
+                "entrance/emergency": {
+                    "name": "Wyjście ewakuacyjne",
+                    "terms": "wyjście ewakuacyjne"
                 },
                 "ford": {
                     "name": "Bród",
@@ -6780,8 +6822,8 @@
                     "terms": "strefa zamieszkania"
                 },
                 "highway/milestone": {
-                    "name": "Słupek pikietażowy",
-                    "terms": "słupek kilometrowy,pikietaż"
+                    "name": "Słupek pikietażowy (drogowy)",
+                    "terms": "słupek kilometrowy, kilometraż, kilometracja, pikietaż, droga"
                 },
                 "highway/mini_roundabout": {
                     "name": "Minirondo",
@@ -7305,7 +7347,7 @@
                 },
                 "leisure/fitness_centre": {
                     "name": "Siłownia / klub fitness",
-                    "terms": "siłownia, fitness, centrum fitness, klub fitness"
+                    "terms": "siłownia, fitness, centrum fitness, klub fitness, pilates"
                 },
                 "leisure/fitness_centre/yoga": {
                     "name": "Szkoła jogi",
@@ -7852,15 +7894,15 @@
                 },
                 "marker": {
                     "name": "Znacznik",
-                    "terms": "znacznik, tabliczka, znak, oznakowanie"
+                    "terms": "znacznik, tabliczka, znak, oznakowanie, słupek"
                 },
                 "marker/utility": {
                     "name": "Znacznik usługi komunalnej",
-                    "terms": "znacznik usługi komunalnej, usługi komunalne, gospodarka komunalna, gaz, prąd, woda, odprowadzenie ścieków, wodociągi, tabliczka, oznaczenie"
+                    "terms": "znacznik usługi komunalnej, usługi komunalne, gospodarka komunalna, gaz, prąd, woda, odprowadzenie ścieków, wodociągi, tabliczka, oznaczenie, słupek"
                 },
                 "marker/utility/power": {
                     "name": "Znacznik (elektryczność)",
-                    "terms": "znacznik, elektryczność, tabliczka, oznaczenie"
+                    "terms": "znacznik, elektryczność, tabliczka, oznaczenie, słupek"
                 },
                 "military/bunker": {
                     "name": "Bunkier wojskowy",
@@ -7916,6 +7958,10 @@
                 "natural/fell": {
                     "name": "Wzgórza",
                     "terms": "pagórki"
+                },
+                "natural/geyser": {
+                    "name": "Gejzer",
+                    "terms": "gejzer, gorące źródło, gorące źródła, erupcja"
                 },
                 "natural/glacier": {
                     "name": "Lodowiec",
@@ -8669,8 +8715,8 @@
                     "terms": "kolej miejska,wagon,tramwaj"
                 },
                 "railway/milestone": {
-                    "name": "Słupek kilometrowy",
-                    "terms": "słupek kilometrowy, pikietaż"
+                    "name": "Słupek kilometrowy (kolej)",
+                    "terms": "słupek kilometrowy, kilometraż, kilometracja, pikietaż, kolej"
                 },
                 "railway/miniature": {
                     "name": "Minikolejka",
@@ -8809,8 +8855,8 @@
                     "terms": "łazienki"
                 },
                 "shop/beauty": {
-                    "name": "Salon piękności",
-                    "terms": "kosmetyczka, wizaż"
+                    "name": "Salon urody",
+                    "terms": "salon piękności, salon urody, salon kosmetyczny, gabinet kosmetyczny, zakład kosmetyczny, kosmetyka, kosmetyczka, makijażystka, wizażystka, depilacja, medycyna estetyczna, laseroterapia, spa"
                 },
                 "shop/beauty/nails": {
                     "name": "Manicure/pedicure",
@@ -8855,6 +8901,10 @@
                     "name": "Sklep mięsny",
                     "terms": "sklep mięsny, rzeźnik, mięso, wędliny"
                 },
+                "shop/camera": {
+                    "name": "Sklep z kamerami i aparatami",
+                    "terms": "sklep z kamerami i aparatami fotograficznymi, sprzęt fotograficzny, kamery, aparaty fotograficzne, obiektywy fotograficzne"
+                },
                 "shop/candles": {
                     "name": "Sklep ze świecami",
                     "terms": "świece"
@@ -8869,7 +8919,7 @@
                 },
                 "shop/car_parts": {
                     "name": "Sklep z częściami do samochodów",
-                    "terms": "sklep z częściami samochodowymi"
+                    "terms": "sklep z częściami samochodowymi, części samochodowe, samochody, akumulatory"
                 },
                 "shop/car_repair": {
                     "name": "Warsztat samochodowy",
@@ -8963,6 +9013,10 @@
                     "name": "Market budowlany/sklep dla majsterkowiczów",
                     "terms": "market budowlany, sklep dla majsterkowiczów, diy, obi, praktiker, leroy merlin"
                 },
+                "shop/doors": {
+                    "name": "Sklep z drzwiami",
+                    "terms": "sklep z drzwiami, drzwi"
+                },
                 "shop/dry_cleaning": {
                     "name": "Pralnia chemiczna",
                     "terms": "pralnia chemiczna"
@@ -9012,6 +9066,10 @@
                 },
                 "shop/fishmonger": {
                     "name": "Sklep rybny"
+                },
+                "shop/flooring": {
+                    "name": "Sklep z posadzkami",
+                    "terms": "sklep z posadzkami, posadzki"
                 },
                 "shop/florist": {
                     "name": "Kwiaciarnia",
@@ -9240,6 +9298,10 @@
                     "name": "Sklep fotograficzny",
                     "terms": "fotografia"
                 },
+                "shop/pottery": {
+                    "name": "Sklep garncarski",
+                    "terms": "sklep garncarski, garncarstwo, porcelana, ceramika"
+                },
                 "shop/printer_ink": {
                     "name": "Sklep z tuszami do drukarek",
                     "terms": "sklep z tuszami do drukarek, tusze, tonery, drukarki"
@@ -9335,6 +9397,10 @@
                 "shop/tobacco": {
                     "name": "Sklep z tytoniem",
                     "terms": "Sklep tytoniowy"
+                },
+                "shop/tool_hire": {
+                    "name": "Wypożyczalnia narzędzi",
+                    "terms": "wypożyczalnia narzędzi, wypożyczanie narzędzi, narzędzia"
                 },
                 "shop/toys": {
                     "name": "Sklep z zabawkami",
@@ -9458,6 +9524,14 @@
                     "name": "Kemping",
                     "terms": "kemping, pole kempingowe, pole namiotowe"
                 },
+                "tourism/camp_site/backcountry": {
+                    "name": "Dziki kemping",
+                    "terms": "dziki kemping bez udogodnień, kemping z dala od drogi, nieformalny kemping"
+                },
+                "tourism/camp_site/group_only": {
+                    "name": "Kemping tylko dla grup",
+                    "terms": "kemping dla grup, pole kempingowe dla grup"
+                },
                 "tourism/caravan_site": {
                     "name": "Kemping dla kamperów",
                     "terms": "kemping dla samochodów kempingowych"
@@ -9504,7 +9578,7 @@
                 },
                 "tourism/information/route_marker": {
                     "name": "Znacznik szlaku",
-                    "terms": "znacznik szlaku, znacznik trasy, znacznik ścieżki"
+                    "terms": "znacznik szlaku, znacznik trasy, znacznik ścieżki, słupek"
                 },
                 "tourism/information/terminal": {
                     "name": "Terminal informacyjny",
@@ -9801,8 +9875,8 @@
                     "terms": "wrota, śluza wodna"
                 },
                 "waterway/milestone": {
-                    "name": "Słupek pikietażowy",
-                    "terms": "słupek kilometrowy,pikietaż"
+                    "name": "Słupek pikietażowy (dla rzeki)",
+                    "terms": "słupek pikietażowy, słupek kilometrowy, kilometraż, kilometracja, pikietaż, ciek, rzeka, droga wodna"
                 },
                 "waterway/river": {
                     "name": "Rzeka",
@@ -10093,6 +10167,13 @@
                 },
                 "description": "GSI Kiban 2500 przez finds.jp. Dobra do odrysowywania, ale trochę starsza.",
                 "name": "Japońska GSI KIBAN 2500"
+            },
+            "gothenburg-citymap": {
+                "attribution": {
+                    "text": "© Gmina Göteborg, CC0"
+                },
+                "description": "Mapa miasta to mapa przeglądowa Göteborga. Zawiera ogólne informacje o gruntach, komunikacji, hydrografii, budynkach, adresach, nazwach ulic i podziale administracyjnym.",
+                "name": "Mapa Göteborga"
             },
             "gsi.go.jp": {
                 "attribution": {

@@ -237,6 +237,10 @@
       "replace": {"tourism": "camp_pitch"}
     },
     {
+      "old": {"shop": "clothes", "clothes": "second_hand"},
+      "replace": {"shop": "clothes", "second_hand": "yes"}
+    },
+    {
       "old": {"color": "*"},
       "replace": {"colour": "$1"}
     },
@@ -373,6 +377,26 @@
       "replace": {"embankment": "yes"}
     },
     {
+      "old": {"entrance": "emergency_exit"},
+      "replace": {"entrance": "emergency"}
+    },
+    {
+      "old": {"entrance": "fire_exit"},
+      "replace": {"entrance": "emergency"}
+    },
+    {
+      "old": {"entrance": "loading_dock"},
+      "replace": {"amenity": "loading_dock"}
+    },
+    {
+      "old": {"entrance": "main_entrance"},
+      "replace": {"entrance": "main"}
+    },
+    {
+      "old": {"entrance": "private"},
+      "replace": {"entrance": "yes", "access": "private"}
+    },
+    {
       "old": {"escalator": "*"},
       "replace": {"highway": "steps", "conveying": "$1"}
     },
@@ -439,6 +463,18 @@
     {
       "old": {"footway": "separate"},
       "replace": {"sidewalk": "separate"}
+    },
+    {
+      "old": {"amenity": "gambling", "gambling": "casino"},
+      "replace": {"amenity": "casino"}
+    },
+    {
+      "old": {"leisure": "amusement_arcade", "gambling": "*"},
+      "replace": {"leisure": "adult_gaming_centre", "gambling": "$1"}
+    },
+    {
+      "old": {"gambling": "slot_machine"},
+      "replace": {"gambling": "slot_machines"}
     },
     {
       "old": {"generator:source": "photovoltaic"},
@@ -712,6 +748,22 @@
       "replace": {"resource": "$1"}
     },
     {
+      "old": {"museum_type": "art"},
+      "replace": {"museum": "art"}
+    },
+    {
+      "old": {"museum_type": "history"},
+      "replace": {"museum": "history"}
+    },
+    {
+      "old": {"museum_type": "private"},
+      "replace": {"operator:type": "private"}
+    },
+    {
+      "old": {"museum_type": "public"},
+      "replace": {"operator:type": "public"}
+    },
+    {
       "old": {"natural": "marsh"},
       "replace": {"natural": "wetland", "wetland": "marsh"}
     },
@@ -756,6 +808,29 @@
     },
     {
       "old": {"oneway": "unknown"}
+    },
+    {
+      "old": {"operator:type": "goverment"},
+      "replace": {"operator:type": "government"}
+    },
+    {
+      "old": {"operator:type": "Privado"},
+      "replace": {"operator:type": "private"}
+    },
+    {
+      "old": {"operator:type": "Private"},
+      "replace": {"operator:type": "private"}
+    },
+    {
+      "old": {"operator:type": "Public"},
+      "replace": {"operator:type": "public"}
+    },
+    {
+      "old": {"operator:type": "Publico"},
+      "replace": {"operator:type": "public"}
+    },
+    {
+      "old": {"operator:type": "unknown"}
     },
     {
       "old": {"place_name": "*"},

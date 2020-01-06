@@ -567,8 +567,8 @@
         },
         "osm_api_status": {
             "message": {
-                "error": "Das OpenStreetMap API ist nicht erreichbar. Deine Bearbeitungen sind lokal gesicherte. Prüfe deine Netzwerkverbindung.",
-                "offline": "Das OpenStreetMap API ist offline. Deine Bearbeitungen sind lokal gesicherte.  Bitte probier es später noch einmal.",
+                "error": "Das OpenStreetMap API ist nicht erreichbar. Deine Bearbeitungen sind lokal gesichert. Prüfe deine Netzwerkverbindung.",
+                "offline": "Das OpenStreetMap API ist offline. Deine Bearbeitungen sind lokal gesichert.  Bitte probier es später noch einmal.",
                 "readonly": "Das OpenStreetMap API erlaubt aktuell kein Speichern. Du kannst deine Bearbeitungen fortsetzen, aber du kannst erst später speichern.",
                 "rateLimit": "Das OpenStreetMap API limitiert anonyme Verbindungen Du kannst das durch Einloggen ändern."
             },
@@ -931,7 +931,7 @@
             "key": "P",
             "privacy": {
                 "title": "Datenschutz",
-                "privacy_link": "Zeige die iD-Datenschutzerklärung an",
+                "privacy_link": "Zeige die iD Datenschutzerklärung an",
                 "third_party_icons": {
                     "description": "Symbole von Drittanbietern anzeigen",
                     "tooltip": "Deaktiviere diese Feld damit Symbole von Drittanbietern (Wikimedia Commons, Facebook oder Twitter) nicht angezeigt werden."
@@ -1004,8 +1004,9 @@
         "splash": {
             "welcome": "Willkommen beim iD OpenStreetMap Editor",
             "text": "iD ist ein freundliches aber mächtiges Werkzeug um die freie Karte der Welt zu verbessern. Das ist Version {version}. Mehr information findest du auf {website} und du kannst Probleme auf {github} melden.",
-            "privacy_update": "Unsere Datenschutzrichtlinie wurde kürzlich aktualisiert.",
-            "privacy": "{updateMessage} Durch die Verwendung dieser Software erklärest du dich damit einverstanden, dies in Übereinstimmung mit den Datenschutzbestimmungen von iD zu tun, die {here} zu finden sind.",
+            "privacy_update": "Unsere Datenschutzerklärung wurde kürzlich aktualisiert.",
+            "privacy_policy": "iD Datenschutzerklärung",
+            "privacy": "{updateMessage} Durch die Verwendung dieser Software erklärst du dich damit einverstanden, dies gemäß diesen {privacyLink} zu tun.",
             "walkthrough": "Starte den Rundgang",
             "start": "Jetzt bearbeiten"
         },
@@ -1421,7 +1422,7 @@
                 },
                 "street_light": "Straßenbeleuchtung",
                 "support": {
-                    "utility_pole": "Strommast"
+                    "utility_pole": "Mast (Versorgung allgemein)"
                 },
                 "traffic_cone": "Verkehrskegel",
                 "traffic_light": {
@@ -1700,7 +1701,7 @@
         },
         "issues": {
             "title": "Problem",
-            "key": "P",
+            "key": "I",
             "list_title": "Probleme ({count})",
             "errors": {
                 "list_title": "Fehler ({count})"
@@ -2761,6 +2762,10 @@
                 "baby_seat": {
                     "label": "Kindersitz"
                 },
+                "backcountry": {
+                    "label": "Wildnis Campingplatz",
+                    "terms": "Wildnis Campingplatz, Campingplatz ohne Straßenanschluss"
+                },
                 "backrest": {
                     "label": "Rückenlehne"
                 },
@@ -2828,6 +2833,9 @@
                 },
                 "booth": {
                     "label": "Kabine"
+                },
+                "bottle": {
+                    "label": "Flaschenfüllung"
                 },
                 "boules": {
                     "label": "Typ"
@@ -3352,6 +3360,9 @@
                 "generator/type": {
                     "label": "Typ"
                 },
+                "geyser/height": {
+                    "label": "Eruptionshöhe"
+                },
                 "gnis/feature_id": {
                     "label": "GNIS Feature ID",
                     "terms": "GNIS Feature ID"
@@ -3361,6 +3372,10 @@
                 },
                 "grape_variety": {
                     "label": "Traubensorten"
+                },
+                "group_only": {
+                    "label": "Nur für Gruppen",
+                    "terms": "Nur für Gruppen, Nicht für Einzelgäste"
                 },
                 "guest_house": {
                     "label": "Typ"
@@ -3450,6 +3465,9 @@
                         "stables": "Ja",
                         "undefined": "Nein"
                     }
+                },
+                "hot_water": {
+                    "label": "Heißwasser"
                 },
                 "iata": {
                     "label": "IATA Flughafen Code"
@@ -3843,6 +3861,10 @@
                         "undefined": "Standardwert Ja",
                         "yes": "Ja"
                     }
+                },
+                "openfire": {
+                    "label": "offenes Feuer erlaubt",
+                    "terms": "offenes Feuer erlaubt"
                 },
                 "opening_date": {
                     "label": "Erwartetes Öffnungsdatum"
@@ -4342,6 +4364,10 @@
                 "shop": {
                     "label": "Typ"
                 },
+                "shower": {
+                    "label": "Duschen",
+                    "terms": "Duschen"
+                },
                 "siren/purpose": {
                     "label": "Zweck"
                 },
@@ -4543,6 +4569,10 @@
                 },
                 "to": {
                     "label": "Nach"
+                },
+                "toilets": {
+                    "label": "Toiletten",
+                    "terms": "Toiletten, WCs"
                 },
                 "toilets/disposal": {
                     "label": "Toiletten-Bauart",
@@ -6297,6 +6327,10 @@
                     "name": "Kaminkehrer",
                     "terms": "Kaminkehrer,Schornsteinfeger,Rauchfangkehrer"
                 },
+                "craft/cleaning": {
+                    "name": "Putzerei",
+                    "terms": "Putzerei"
+                },
                 "craft/clockmaker": {
                     "name": "Uhrmacher (Standuhr)",
                     "terms": "Uhrmacher (Standuhr)"
@@ -6383,6 +6417,10 @@
                 "craft/plumber": {
                     "name": "Installateur",
                     "terms": "Installateur"
+                },
+                "craft/pottery": {
+                    "name": "Töpferei",
+                    "terms": "Keramik, Topf, Vase"
                 },
                 "craft/rigger": {
                     "name": "Bühnenarbeiter",
@@ -7814,7 +7852,7 @@
                     "terms": "Untergrund, Passage, Unterführung"
                 },
                 "man_made/utility_pole": {
-                    "name": "Strommast",
+                    "name": "Mast (Versorgung allgemein)",
                     "terms": "Strommast"
                 },
                 "man_made/wastewater_plant": {
@@ -7915,6 +7953,10 @@
                 "natural/fell": {
                     "name": "Alpine Tundra",
                     "terms": "Fjell, Fjäll, Fjall, Tunturi, Bergtundra"
+                },
+                "natural/geyser": {
+                    "name": "Geysir",
+                    "terms": "Geysir, Heißwasserquelle, Hydrothermale Explosion, Eruptionsquelle"
                 },
                 "natural/glacier": {
                     "name": "Gletscher",
@@ -8853,6 +8895,10 @@
                     "name": "Metzger",
                     "terms": "Fleischer, Metzger, Schlachter"
                 },
+                "shop/camera": {
+                    "name": "Fotofachgeschäft",
+                    "terms": "Kamera, Film, Linse, Foto"
+                },
                 "shop/candles": {
                     "name": "Kerzengeschäft",
                     "terms": "Kerzenhandlung"
@@ -9010,6 +9056,10 @@
                 },
                 "shop/fishmonger": {
                     "name": "Fischhändler"
+                },
+                "shop/flooring": {
+                    "name": "Fußbodengeschäft",
+                    "terms": "Fliese"
                 },
                 "shop/florist": {
                     "name": "Blumenhändler",
@@ -9238,6 +9288,10 @@
                     "name": "Fotofachgeschäft",
                     "terms": "Fotoladen, Fotograf, Fotogeschäft"
                 },
+                "shop/pottery": {
+                    "name": "Keramikladen",
+                    "terms": "Keramik, Topf, Vase"
+                },
                 "shop/printer_ink": {
                     "name": "Druckertintengeschäft",
                     "terms": "Kopierertinte, Faxtinte, Toner"
@@ -9333,6 +9387,10 @@
                 "shop/tobacco": {
                     "name": "Tabakwarengeschäft",
                     "terms": "Traffik,Tabakwarengeschäft,Tabakwarenladen"
+                },
+                "shop/tool_hire": {
+                    "name": "Werkzeugverleih",
+                    "terms": "Werkzeug, Verleih"
                 },
                 "shop/toys": {
                     "name": "Spielwarengeschäft",
@@ -9455,6 +9513,14 @@
                 "tourism/camp_site": {
                     "name": "Campingplatz",
                     "terms": "Camping Lager, Zeltplatz, Campingplatz"
+                },
+                "tourism/camp_site/backcountry": {
+                    "name": "Wildnis Campingplatz",
+                    "terms": "Alpines Camping, Backpacker Camping, Waldcamping, informelles Camping, primitives Camping"
+                },
+                "tourism/camp_site/group_only": {
+                    "name": "Gruppencampinglatz",
+                    "terms": "Jugencampingplatz, Scoutcampingplatz, Camping"
                 },
                 "tourism/caravan_site": {
                     "name": "Wohnwagen-Campingplatz",

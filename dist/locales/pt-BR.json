@@ -1005,7 +1005,8 @@
             "welcome": "Bem vindo ao editor iD do OpenStreetMap",
             "text": "O iD é uma ferramenta amigável, mas poderosa, que contribui para o melhor mapa mundial livre do mundo. Esta é a versão {version}. Para mais informações, consulte {website} e relatar erros no {github}.",
             "privacy_update": "Nossa política de privacidade foi atualizada recentemente.",
-            "privacy": "{updateMessage} Ao usar este software, você concorda em fazê-lo de acordo com a política de privacidade da iD, que pode ser encontrada {aqui}.",
+            "privacy_policy": "Política de privacidade  do ID",
+            "privacy": "{updateMessage} Ao usar este software, você concorda em fazê-lo de acordo com a {privacyLink}.",
             "walkthrough": "Comece o tutorial",
             "start": "Editar agora"
         },
@@ -2829,6 +2830,9 @@
                 "booth": {
                     "label": "Cabine"
                 },
+                "bottle": {
+                    "label": "Enchimento de garrafas"
+                },
                 "boules": {
                     "label": "Tipo"
                 },
@@ -3351,6 +3355,9 @@
                 "generator/type": {
                     "label": "Tipo"
                 },
+                "geyser/height": {
+                    "label": "Altura da erupção"
+                },
                 "gnis/feature_id": {
                     "label": "ID do Recurso GNIS"
                 },
@@ -3359,6 +3366,9 @@
                 },
                 "grape_variety": {
                     "label": "Variedades de Uva"
+                },
+                "group_only": {
+                    "label": "Somente grupos"
                 },
                 "guest_house": {
                     "label": "Tipo"
@@ -3447,6 +3457,9 @@
                         "stables": "Sim",
                         "undefined": "Não"
                     }
+                },
+                "hot_water": {
+                    "label": "Água quente"
                 },
                 "iata": {
                     "label": "Código do aeroporto IATA"
@@ -3809,6 +3822,9 @@
                         "undefined": "Presume-se que sim",
                         "yes": "Sim"
                     }
+                },
+                "openfire": {
+                    "label": "Lareiras Permitidas"
                 },
                 "opening_date": {
                     "label": "Data de abertura esperada"
@@ -4287,6 +4303,9 @@
                 "shop": {
                     "label": "Tipo"
                 },
+                "shower": {
+                    "label": "Chuveiros"
+                },
                 "siren/purpose": {
                     "label": "Propósito"
                 },
@@ -4472,6 +4491,9 @@
                 },
                 "to": {
                     "label": "Para"
+                },
+                "toilets": {
+                    "label": "Banheiros"
                 },
                 "toilets/disposal": {
                     "label": "Descarte",
@@ -6200,6 +6222,10 @@
                 "craft/chimney_sweeper": {
                     "name": "Limpador de Chaminé",
                     "terms": "limpador de chaminés, limpeza de chaminés, chaminés"
+                },
+                "craft/cleaning": {
+                    "name": "Serviço de limpeza",
+                    "terms": "Serviço de limpeza"
                 },
                 "craft/clockmaker": {
                     "name": "Relojoeiro",
@@ -9986,6 +10012,13 @@
                 },
                 "description": "GSI Kiban 2500 via finds.jp. Bom para rastrear, mas um pouco mais velho.",
                 "name": "Japão GSI KIBAN 2500"
+            },
+            "gothenburg-citymap": {
+                "attribution": {
+                    "text": "© Município de Gotemburgo, CC0"
+                },
+                "description": "O mapa da cidade é um mapa geral que descreve Gotemburgo. Ele contém informações gerais sobre terrenos, comunicações, hidrografia, edifícios, números de endereços e nomes de ruas, divisão administrativa e outro texto de orientação.",
+                "name": "Mapa da cidade de Gotemburgo "
             },
             "gsi.go.jp": {
                 "attribution": {

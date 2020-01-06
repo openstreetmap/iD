@@ -18,6 +18,20 @@
     "tags": {
         "landuse": "religious"
     },
-    "terms": [],
+    "terms": [
+        "christian",
+        "churchyard",
+        "hindu",
+        "jewish",
+        "mosque",
+        "muslim",
+        "place of worship",
+        "shinto",
+        "sikh",
+        "taoist",
+        "temple",
+        "shrine",
+        "synagogue"
+    ],
     "name": "Religious Area"
 }

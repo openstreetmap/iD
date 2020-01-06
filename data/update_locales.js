@@ -3,6 +3,7 @@ const fs = require('fs');
 const prettyStringify = require('json-stringify-pretty-compact');
 const request = require('request').defaults({ maxSockets: 1 });
 const YAML = require('js-yaml');
+const colors = require('colors/safe');
 
 const resources = ['core', 'presets', 'imagery', 'community'];
 const outdir = './dist/locales/';
@@ -27,6 +28,8 @@ const sourcePresets = YAML.load(fs.readFileSync('./data/presets.yaml', 'utf8'));
 const sourceImagery = YAML.load(fs.readFileSync('./node_modules/editor-layer-index/i18n/en.yaml', 'utf8'));
 const sourceCommunity = YAML.load(fs.readFileSync('./node_modules/osm-community-index/i18n/en.yaml', 'utf8'));
 
+const dataShortcuts = JSON.parse(fs.readFileSync('./data/shortcuts.json', 'utf8')).dataShortcuts;
+
 const cldrMainDir = './node_modules/cldr-localenames-full/main/';
 
 var referencedScripts = [];
@@ -35,6 +38,26 @@ const languageInfo = {
     dataLanguages: getLangNamesInNativeLang()
 };
 fs.writeFileSync('data/languages.json', JSON.stringify(languageInfo, null, 4));
+
+var shortcuts = [];
+dataShortcuts.forEach(function(tab) {
+    tab.columns.forEach(function(col) {
+        col.rows.forEach(function(row) {
+            if (!row.shortcuts) return;
+            row.shortcuts.forEach(function(shortcut) {
+                if (shortcut.includes('.')) {
+                    var info = {
+                        shortcut: shortcut
+                    };
+                    if (row.modifiers) {
+                        info.modifier = row.modifiers.join('');
+                    }
+                    shortcuts.push(info);
+                }
+            });
+        });
+    });
+});
 
 asyncMap(resources, getResource, function(err, results) {
     if (err) return console.log(err);
@@ -133,6 +156,8 @@ function getResource(resource, callback) {
                                 }
                             }
                         }
+                    } else if (resource === 'core') {
+                        checkForDuplicateShortcuts(codes[i], result);
                     }
 
                     locale[codes[i]] = result;
@@ -210,6 +235,36 @@ function asyncMap(inputs, func, callback) {
             if (!remaining) callback(error, results);
         });
     }
+}
+
+function checkForDuplicateShortcuts(code, coreStrings) {
+    var usedShortcuts = {};
+
+    shortcuts.forEach(function(shortcutInfo) {
+        var shortcutPathString = shortcutInfo.shortcut;
+        var modifier = shortcutInfo.modifier || '';
+
+        var path = shortcutPathString
+            .split('.')
+            .map(function (s) { return s.replace(/<TX_DOT>/g, '.'); })
+            .reverse();
+
+        var rep = coreStrings;
+
+        while (rep !== undefined && path.length) {
+            rep = rep[path.pop()];
+        }
+
+        if (rep !== undefined) {
+            var shortcut = modifier + rep;
+            if (usedShortcuts[shortcut] && usedShortcuts[shortcut] !== shortcutPathString) {
+                var message = code + ': duplicate shortcut "' + shortcut + '" for "' + usedShortcuts[shortcut] + '" and "' + shortcutPathString + '"';
+                console.warn(colors.yellow(message));
+            } else {
+                usedShortcuts[shortcut] = shortcutPathString;
+            }
+        }
+    });
 }
 
 function getLangNamesInNativeLang() {

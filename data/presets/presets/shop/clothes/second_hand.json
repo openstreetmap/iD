@@ -1,0 +1,26 @@
+{
+    "icon": "maki-clothing-store",
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "tags": {
+        "shop": "clothes",
+        "second_hand": "only"
+    },
+    "terms": [
+        "blouses",
+        "clothes",
+        "consignment",
+        "dresses",
+        "pants",
+        "second hand",
+        "shirts",
+        "shorts",
+        "skirts",
+        "slacks",
+        "suits",
+        "used"
+    ],
+    "name": "Secondhand Clothing Store"
+}

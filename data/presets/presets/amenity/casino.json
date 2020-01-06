@@ -6,6 +6,7 @@
         "address",
         "building_area",
         "opening_hours",
+        "gambling",
         "smoking"
     ],
     "moreFields": [

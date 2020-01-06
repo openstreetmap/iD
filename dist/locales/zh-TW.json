@@ -1005,7 +1005,8 @@
             "welcome": "歡迎使用 iD 開放街圖編輯器",
             "text": "iD 編輯器是一個易用且強大的工具，以助您編輯世界上最好的自由世界地圖。這是版本 {version}。欲知詳情，請瀏覽 {website} 及於 {github} 回報臭蟲。",
             "privacy_update": "我們的隱私權政策最近已更新。",
-            "privacy": "{updateMessage} 使用此軟體，即表示您同意 iD 隱私權政策，可以在 {here} 看到。",
+            "privacy_policy": "iD 隱私權政策",
+            "privacy": "{updateMessage} 使用此軟體，即表示您同意遵守 {privacyLink}。",
             "walkthrough": "開始教學",
             "start": "現在就編輯"
         },
@@ -2761,6 +2762,10 @@
                 "baby_seat": {
                     "label": "嬰兒座椅"
                 },
+                "backcountry": {
+                    "label": "偏遠地區",
+                    "terms": "偏遠地區"
+                },
                 "backrest": {
                     "label": "椅背"
                 },
@@ -2828,6 +2833,9 @@
                 },
                 "booth": {
                     "label": "亭子"
+                },
+                "bottle": {
+                    "label": "裝瓶"
                 },
                 "boules": {
                     "label": "類型"
@@ -3352,6 +3360,9 @@
                 "generator/type": {
                     "label": "種類"
                 },
+                "geyser/height": {
+                    "label": "噴發高度"
+                },
                 "gnis/feature_id": {
                     "label": "GNIS 特徵 ID",
                     "terms": "GNIS 特徵 ID"
@@ -3361,6 +3372,10 @@
                 },
                 "grape_variety": {
                     "label": "葡萄品種"
+                },
+                "group_only": {
+                    "label": "僅團體",
+                    "terms": "僅團體"
                 },
                 "guest_house": {
                     "label": "類型"
@@ -3450,6 +3465,9 @@
                         "stables": "是",
                         "undefined": "否"
                     }
+                },
+                "hot_water": {
+                    "label": "熱水"
                 },
                 "iata": {
                     "label": "IATA 機場代碼"
@@ -3843,6 +3861,10 @@
                         "undefined": "假設為是",
                         "yes": "是"
                     }
+                },
+                "openfire": {
+                    "label": "允許明火",
+                    "terms": "允許明火"
                 },
                 "opening_date": {
                     "label": "預計開放日期"
@@ -4342,6 +4364,10 @@
                 "shop": {
                     "label": "種類"
                 },
+                "shower": {
+                    "label": "淋浴",
+                    "terms": "淋浴"
+                },
                 "siren/purpose": {
                     "label": "目的"
                 },
@@ -4543,6 +4569,10 @@
                 },
                 "to": {
                     "label": "到"
+                },
+                "toilets": {
+                    "label": "廁所",
+                    "terms": "廁所"
                 },
                 "toilets/disposal": {
                     "label": "處置方式",
@@ -6289,6 +6319,10 @@
                     "name": "煙囪清掃工 ",
                     "terms": "掃煙囪"
                 },
+                "craft/cleaning": {
+                    "name": "清潔服務",
+                    "terms": "清潔服務"
+                },
                 "craft/clockmaker": {
                     "name": "製鐘匠",
                     "terms": "製鐘店"
@@ -6372,6 +6406,10 @@
                 "craft/plumber": {
                     "name": "水管工",
                     "terms": "水喉匠"
+                },
+                "craft/pottery": {
+                    "name": "製陶業",
+                    "terms": "製陶業"
                 },
                 "craft/rigger": {
                     "name": "吊運服務",
@@ -6523,6 +6561,10 @@
                 "entrance": {
                     "name": "入口/出口",
                     "terms": "入口/出口"
+                },
+                "entrance/emergency": {
+                    "name": "緊急出口",
+                    "terms": "緊急出口"
                 },
                 "ford": {
                     "name": "淺灘",
@@ -7901,6 +7943,10 @@
                     "name": "高原荒地",
                     "terms": "高原荒地"
                 },
+                "natural/geyser": {
+                    "name": "間歇泉",
+                    "terms": "間歇泉"
+                },
                 "natural/glacier": {
                     "name": "冰川",
                     "terms": "冰川,冰河"
@@ -8831,6 +8877,10 @@
                     "name": "肉販",
                     "terms": "肉販"
                 },
+                "shop/camera": {
+                    "name": "相機配件店",
+                    "terms": "相機配件店"
+                },
                 "shop/candles": {
                     "name": "燈具店",
                     "terms": "燈具行"
@@ -8939,6 +8989,10 @@
                     "name": "DIY商店",
                     "terms": "DIY商店"
                 },
+                "shop/doors": {
+                    "name": "門店",
+                    "terms": "門店"
+                },
                 "shop/dry_cleaning": {
                     "name": "乾洗店",
                     "terms": "乾洗商店"
@@ -8975,8 +9029,8 @@
                     "name": "時尚店"
                 },
                 "shop/fashion_accessories": {
-                    "name": "時尚配件商店",
-                    "terms": "時尚配件商店"
+                    "name": "服裝配飾商店",
+                    "terms": "服裝配飾商店"
                 },
                 "shop/fireplace": {
                     "name": "壁爐商店",
@@ -8988,6 +9042,10 @@
                 },
                 "shop/fishmonger": {
                     "name": "魚販"
+                },
+                "shop/flooring": {
+                    "name": "地板商店",
+                    "terms": "地板商店"
                 },
                 "shop/florist": {
                     "name": "花店",
@@ -9216,6 +9274,10 @@
                     "name": "攝影用品店",
                     "terms": "照相店"
                 },
+                "shop/pottery": {
+                    "name": "陶器店",
+                    "terms": "陶器店"
+                },
                 "shop/printer_ink": {
                     "name": "印表機墨水商店",
                     "terms": "印表機墨水商店"
@@ -9311,6 +9373,10 @@
                 "shop/tobacco": {
                     "name": "菸店",
                     "terms": "香菸店"
+                },
+                "shop/tool_hire": {
+                    "name": "工具租賃",
+                    "terms": "工具租賃"
                 },
                 "shop/toys": {
                     "name": "玩具店",
@@ -9433,6 +9499,14 @@
                 "tourism/camp_site": {
                     "name": "露營地",
                     "terms": "營地"
+                },
+                "tourism/camp_site/backcountry": {
+                    "name": "野外露營區",
+                    "terms": "野外露營區"
+                },
+                "tourism/camp_site/group_only": {
+                    "name": "團體露營區",
+                    "terms": "團體露營區"
                 },
                 "tourism/caravan_site": {
                     "name": "露營車停車場",
@@ -10064,6 +10138,13 @@
                 },
                 "description": "透過 finds.jp 而來的 GSI Kiban 2500。適合用於追蹤軌跡，但有點老舊。",
                 "name": "日本 GSI KIBAN 2500"
+            },
+            "gothenburg-citymap": {
+                "attribution": {
+                    "text": "© 哥特堡市, CC0"
+                },
+                "description": "城市地圖是描述哥特堡的概覽地圖。它包含了關於土地、通訊、水文、建築、地址號碼與街道名稱、行政區劃與其他方向文字等的一般性資訊。",
+                "name": "哥特堡城市地圖"
             },
             "gsi.go.jp": {
                 "attribution": {

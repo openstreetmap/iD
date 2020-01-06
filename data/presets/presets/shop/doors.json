@@ -1,0 +1,11 @@
+{
+    "icon": "fas-door-open",
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "tags": {
+        "shop": "doors"
+    },
+    "name": "Door Shop"
+}

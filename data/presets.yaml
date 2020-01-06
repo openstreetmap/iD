@@ -235,6 +235,18 @@ en:
       attraction:
         # attraction=*
         label: Type
+      baby_feeding:
+        # baby_feeding=*
+        label: Baby Nursing Area
+        options:
+          # baby_feeding=no
+          'no': None
+          # baby_feeding=room
+          room: Dedicated Room
+          # baby_feeding=yes
+          'yes': Marked Space
+        # 'terms: baby feeding,breastfeeding,lactation,mothers,nursing'
+        terms: '[translate with synonyms or related terms for ''Baby Nursing Area'', separated by commas]'
       baby_seat:
         # baby=*
         label: Baby Seat
@@ -371,6 +383,7 @@ en:
       building_area:
         # building=*
         label: Building
+        terms: '[translate with synonyms or related terms for ''Building'', separated by commas]'
       bunker_type:
         # bunker_type=*
         label: Type
@@ -522,6 +535,8 @@ en:
       cuisine:
         # cuisine=*
         label: Cuisines
+        # 'terms: fare,food types'
+        terms: '[translate with synonyms or related terms for ''Cuisines'', separated by commas]'
       currency_multi:
         # 'currency:=*'
         label: Currency Types
@@ -885,6 +900,9 @@ en:
       fuel_multi:
         # 'fuel:=*'
         label: Fuel Types
+      gambling:
+        # gambling=*
+        label: Games
       gauge:
         # gauge=*
         label: Gauge
@@ -1402,6 +1420,9 @@ en:
         # mtb/scale/uphill field placeholder
         placeholder: '0, 1, 2, 3...'
         terms: '[translate with synonyms or related terms for ''Mountain Biking Uphill Difficulty'', separated by commas]'
+      museum:
+        # museum=*
+        label: Type
       name:
         # name=*
         label: Name
@@ -3171,6 +3192,7 @@ en:
       amenity/grave_yard:
         # amenity=grave_yard
         name: Graveyard
+        # 'terms: burial ground,cemetary,cemetery,churchyard,columbarium,grave yard,graveyard,mausoleum,tomb'
         terms: '<translate with synonyms or related terms for ''Graveyard'', separated by commas>'
       amenity/grit_bin:
         # amenity=grit_bin
@@ -4107,6 +4129,10 @@ en:
         # barrier=stile
         name: Stile
         terms: '<translate with synonyms or related terms for ''Stile'', separated by commas>'
+      barrier/swing_gate:
+        # barrier=swing_gate
+        name: Swing Gate
+        terms: '<translate with synonyms or related terms for ''Swing Gate'', separated by commas>'
       barrier/toll_booth:
         # barrier=toll_booth
         name: Toll Booth
@@ -4701,6 +4727,11 @@ en:
         name: Entrance/Exit
         # 'terms: entrance,exit,door'
         terms: '<translate with synonyms or related terms for ''Entrance/Exit'', separated by commas>'
+      entrance/emergency:
+        # entrance=emergency
+        name: Emergency Exit
+        # 'terms: fire exit,door'
+        terms: '<translate with synonyms or related terms for ''Emergency Exit'', separated by commas>'
       ford:
         # ford=yes
         name: Ford
@@ -5203,6 +5234,10 @@ en:
         # historic=boundary_stone
         name: Boundary Stone
         terms: '<translate with synonyms or related terms for ''Boundary Stone'', separated by commas>'
+      historic/building:
+        # historic=building
+        name: Historic Building
+        terms: '<translate with synonyms or related terms for ''Historic Building'', separated by commas>'
       historic/castle:
         # historic=castle
         name: Castle
@@ -5345,11 +5380,11 @@ en:
       landuse/cemetery:
         # landuse=cemetery
         name: Cemetery
+        # 'terms: burial ground,cemetary,cemetery,churchyard,columbarium,grave yard,graveyard,mausoleum,tomb'
         terms: '<translate with synonyms or related terms for ''Cemetery'', separated by commas>'
       landuse/churchyard:
         # landuse=churchyard
         name: Churchyard
-        terms: '<translate with synonyms or related terms for ''Churchyard'', separated by commas>'
       landuse/commercial:
         # landuse=commercial
         name: Commercial Area
@@ -5498,6 +5533,7 @@ en:
       landuse/religious:
         # landuse=religious
         name: Religious Area
+        # 'terms: christian,churchyard,hindu,jewish,mosque,muslim,place of worship,shinto,sikh,taoist,temple,shrine,synagogue'
         terms: '<translate with synonyms or related terms for ''Religious Area'', separated by commas>'
       landuse/reservoir:
         # landuse=reservoir
@@ -6604,6 +6640,11 @@ en:
         # office=government
         name: Government Office
         terms: '<translate with synonyms or related terms for ''Government Office'', separated by commas>'
+      office/government/prosecutor:
+        # 'office=government, government=prosecutor'
+        name: Public Prosecutor's Office
+        # 'terms: attorney general,district attorney,prosecution'
+        terms: '<translate with synonyms or related terms for ''Public Prosecutor''s Office'', separated by commas>'
       office/government/register_office:
         # 'office=government, government=register_office'
         name: Register Office
@@ -6631,6 +6672,7 @@ en:
       office/lawyer:
         # office=lawyer
         name: Law Office
+        # 'terms: advocate,attorney,barrister,counsellor,counselor,defender,lawyer,legal,prosecutor'
         terms: '<translate with synonyms or related terms for ''Law Office'', separated by commas>'
       office/lawyer/notary:
         # 'office=lawyer, lawyer=notary'
@@ -7449,6 +7491,11 @@ en:
         name: Car Dealership
         # 'terms: automobile,automotive'
         terms: '<translate with synonyms or related terms for ''Car Dealership'', separated by commas>'
+      shop/car/second_hand:
+        # 'shop=car, second_hand=only'
+        name: Used Car Dealership
+        # 'terms: automobile,automotive'
+        terms: '<translate with synonyms or related terms for ''Used Car Dealership'', separated by commas>'
       shop/car_parts:
         # shop=car_parts
         name: Car Parts Store
@@ -7497,6 +7544,11 @@ en:
         name: Clothing Store
         # 'terms: blouses,boutique,bras,clothes,dresses,fashion,pants,shirts,shorts,skirts,slacks,socks,suits,underwear'
         terms: '<translate with synonyms or related terms for ''Clothing Store'', separated by commas>'
+      shop/clothes/second_hand:
+        # 'shop=clothes, second_hand=only'
+        name: Secondhand Clothing Store
+        # 'terms: blouses,clothes,consignment,dresses,pants,second hand,shirts,shorts,skirts,slacks,suits,used'
+        terms: '<translate with synonyms or related terms for ''Secondhand Clothing Store'', separated by commas>'
       shop/clothes/underwear:
         # 'shop=clothes, clothes=underwear'
         name: Underwear Store
@@ -7562,6 +7614,10 @@ en:
         # shop=doityourself
         name: DIY Store
         terms: '<translate with synonyms or related terms for ''DIY Store'', separated by commas>'
+      shop/doors:
+        # shop=doors
+        name: Door Shop
+        terms: '<translate with synonyms or related terms for ''Door Shop'', separated by commas>'
       shop/dry_cleaning:
         # shop=dry_cleaning
         name: Dry Cleaner
@@ -8237,6 +8293,16 @@ en:
         name: Museum
         # 'terms: art*,exhibit*,gallery,foundation,hall,institution,paint*,photo*,sculpt*'
         terms: '<translate with synonyms or related terms for ''Museum'', separated by commas>'
+      tourism/museum/art:
+        # 'tourism=museum, museum=art'
+        name: Art Museum
+        # 'terms: art*,exhibit*,gallery,foundation,hall,institution,paint*,photo*,sculpt*'
+        terms: '<translate with synonyms or related terms for ''Art Museum'', separated by commas>'
+      tourism/museum/history:
+        # 'tourism=museum, museum=history'
+        name: History Museum
+        # 'terms: artifacts,dioramas,exhibits,exhibitions,foundation,hall,institution'
+        terms: '<translate with synonyms or related terms for ''History Museum'', separated by commas>'
       tourism/picnic_site:
         # tourism=picnic_site
         name: Picnic Site

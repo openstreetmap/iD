@@ -510,8 +510,8 @@
                 "resolution": "Resoluutio",
                 "accuracy": "Täsmällisyys",
                 "unknown": "Ei tiedossa",
-                "show_tiles": "Näytä kuvausruutujen rajat",
-                "hide_tiles": "Piilota karttakuvat"
+                "show_tiles": "Näytä yksittäisotosten rajat",
+                "hide_tiles": "Piilota yksittäisotosten rajat"
             },
             "history": {
                 "key": "H",
@@ -640,6 +640,7 @@
             "switch": "Vaihda takaisin tähän taustaan",
             "custom": "Mukautettu",
             "overlays": "Lisänäkymät",
+            "imagery_problem_faq": "Ilmoita ilmakuvavirheestä",
             "reset": "Palauta",
             "reset_all": "Tyhjennä kaikki",
             "display_options": "Näyttöasetukset",
@@ -651,6 +652,10 @@
                 "description": "Näytä pienoiskartta",
                 "tooltip": "Näytä pienoiskartta laajemmalta alueelta nykyisen muokkausnäkymän sijainnin havainnollistamiseksi.",
                 "key": "/"
+            },
+            "panel": {
+                "description": "Näytä lisätietonäkymä",
+                "tooltip": "Näytä lisätietoja taustakuva-aineistosta"
             },
             "fix_misalignment": "Korjaa ilmakuvavirhe",
             "offset": "Korjaa ilmakuvan asemointivirhettä vetämällä hiiren osoitinta harmaan laatikon sisällä tai syöttämällä korjausluvut metreinä"
@@ -674,7 +679,7 @@
                     "title": "KeepRight-ilmoitukset"
                 },
                 "improveOSM": {
-                    "tooltip": "Improveosm.org-palvelun automaattisesti tunnistamat merkintävirheet",
+                    "tooltip": "Improveosm.org-palvelun automaattisesti tunnistamat muokkausvirheet",
                     "title": "ImproveOSM-ilmoitukset"
                 },
                 "custom": {
@@ -683,9 +688,16 @@
                     "zoom": "Lähennä aineistoon"
                 }
             },
+            "style_options": "Ulkoasu",
             "map_features": "Karttaominaisuudet",
             "autohidden": "Nämä kohteet on piilotettu automaattisesti, sillä ne sekoittaisivat karttanäkymää liikaa. Saat ne näkyviin suurentamalla karttaa.",
             "osmhidden": "Nämä kohteet ovat piilotettu automaattisesti, koska OpenStreetMap taso on piilotettu"
+        },
+        "visual_diff": {
+            "highlight_edits": {
+                "description": "Korosta muutokset",
+                "tooltip": "Korosta muokatut karttakohteet"
+            }
         },
         "photo_overlays": {
             "title": "Kuvakerrokset",
@@ -799,10 +811,22 @@
                     "instructions": "Valitse datatiedosto. Tuetut tiedostotyypit:\n   .gpx, .kml, .geojson, .json",
                     "label": "Selaa tiedostoja"
                 },
-                "or": "Tai",
+                "or": "tai",
                 "url": {
                     "instructions": "Anna datatiedoston osoite tai vektoritiilien URL-osoitemalli. Sallitut sääntömallit ovat:\n   {zoom} tai {z}, {x}, {y} Z/X/Y-asettelua varten",
                     "placeholder": "Syötä osoite"
+                }
+            }
+        },
+        "preferences": {
+            "title": "Asetukset",
+            "description": "Asetukset",
+            "privacy": {
+                "title": "Yksityisyys",
+                "privacy_link": "iD-ohjelmiston tietosuojakäytäntö",
+                "third_party_icons": {
+                    "description": "Näytä ulkopuolisten toimijoiden kuvakkeet",
+                    "tooltip": "Näytä muiden toimijoiden, kuten Wikimedian, Facebookin ja Twitterin, tekijänoikeuksien alaisia kuvakkeita"
                 }
             }
         },
@@ -872,6 +896,7 @@
         "splash": {
             "welcome": "Tervetuloa iD- OpenStreetMapin kartanmuokkausohjelmaan",
             "text": "iD on tehokas ja helppokäyttöinen kartanmuokkausohjelma maailman tasokkaimman kartan luomiseen. Tämä on versio {version}. Lisätietoja ohjelmasta on osoitteessa {website}, ja ohjelmistovirheistä voi ilmoittaa osoitteessa {github}.",
+            "privacy_update": "Tietosuojakäytäntömme on päivitetty.",
             "walkthrough": "Aloitusopas",
             "start": "Muokkaa heti"
         },
@@ -1367,11 +1392,11 @@
             },
             "qa": {
                 "title": "Laaduntarkkailu",
-                "intro": "*Laaduntarkkailutoiminto* tarkastaa automaattisesti muokkauksia yleisimpien merkintävirheiden, kuten virheellisten ominaisuustietojen ja risteysmerkintöjen varalta. Kartoittajan on kuitenkin itse korjattava havaitut puutteet. Tarkastele merkintävirhelistaa napsauttamalla {data} **Kartta-aineisto**.",
+                "intro": "*Laaduntarkkailutoiminto* pyrkii automaattisesti tunnistamaan muokkauksista yleisimpiä virheitä, kuten virheellisiä ominaisuustietoja ja risteysmerkintöjä. Kartoittajan on kuitenkin itse korjattava havaitut puutteet. Tarkastele muokkausvirhelistaa napsauttamalla {data} **Kartta-aineisto**.",
                 "tools_h": "Työkalut",
                 "tools": "iD tukee toistaiseksi ohjelmistoja [KeepRight](https://www.keepright.at/) ja [ImproveOSM](https://improveosm.org/en/) (englanniksi). Kehitteillä on yhteensopivuus [Osmose](https://osmose.openstreetmap.fr/)-ohjelmiston ja mahdollisesti myös muiden toimintojen kanssa.",
-                "issues_h": "Merkintävirheiden käsittely",
-                "issues": "Merkintävirheiden käsittely muistuttaa karttailmoitusten käsittelyä. Napsauta sivupalkin painiketta. Käytettävissä olevat toiminnot vaihtelevat, mutta yleensä virheitä voi kommentoida ja merkitä ratkaistuksi."
+                "issues_h": "Muokkausvirheiden käsittely",
+                "issues": "Muokkausvirheiden käsittely muistuttaa karttailmoitusten käsittelyä. Napsauta sivupalkin painiketta. Käytettävissä olevat toiminnot vaihtelevat, mutta yleensä virheitä voi kommentoida ja merkitä ratkaistuksi."
             },
             "field": {
                 "restrictions": {
@@ -1413,9 +1438,9 @@
             }
         },
         "issues": {
-            "title": "Merkintävirheet",
+            "title": "Muokkausvirheet",
             "key": "I",
-            "list_title": "Merkintävirheet ({count})",
+            "list_title": "Muokkausvirheet ({count})",
             "errors": {
                 "list_title": "Virheet ({count})"
             },
@@ -1423,14 +1448,26 @@
                 "list_title": "Varoitukset ({count})"
             },
             "rules": {
-                "title": "Automaattisesti havaittavat merkintävirheet"
+                "title": "Automaattisesti havaittavat virheet"
             },
+            "user_resolved_issues": "Ratkaisemasi virheet",
             "no_issues": {
                 "message": {
                     "everything": "Kaikki kunnossa",
                     "everything_in_view": "Tässä näkymässä kaikki on kunnossa",
                     "edits": "Kaikki kunnossa",
-                    "edits_in_view": "Tekemäsi muutokset eivät sisällä virheitä"
+                    "edits_in_view": "Tekemäsi muutokset eivät sisällä virheitä",
+                    "no_edits": "Et ole vielä muokannut mitään"
+                },
+                "hidden_issues": {
+                    "none": "Havaitut ongelmat näytetään tässä",
+                    "elsewhere": "Virheet muualla: {count}",
+                    "everything_else": "Kaikki muut virheet: {count}",
+                    "everything_else_elsewhere": "Kaikki muut virheet kaikkialla: {count}",
+                    "disabled_rules": "Virheet, jotka on piilotettu automaattisesti havaittavista: {count}",
+                    "disabled_rules_elsewhere": "Virheet kaikkialta, jotka on piilotettu automaattisesti havaittavista: {count}",
+                    "ignored_issues": "Ohitetut virheet: {count}",
+                    "ignored_issues_elsewhere": "Ohitetut virheet kaikkialta: {count}"
                 }
             },
             "options": {
@@ -1448,13 +1485,23 @@
             "suggested": "Korjausehdotus:",
             "enable_all": "Valitse kaikki",
             "disable_all": "Poista kaikki",
+            "fix_all": {
+                "annotation": "Korjattiin useita muokkausvirheitä."
+            },
             "almost_junction": {
                 "title": "Puuttuva risteysmerkintä",
-                "message": "{feature} on hyvin lähellä mutta ei yhdistetty kohteeseen {feature2}"
+                "message": "{feature} on hyvin lähellä mutta ei yhdistetty kohteeseen {feature2}",
+                "tip": "Korosta toisiin kohteisiin linkitettävät kohteet"
+            },
+            "close_nodes": {
+                "title": "Liian lähekkäiset pisteet",
+                "tip": "Korosta liian tiheässä olevat viivapisteet",
+                "reference": "Liian lähekkäiset pisteet tulisi yhdistää tai siirtää loitommaksi toisistaan."
             },
             "crossing_ways": {
                 "title": "Ylimääräinen risteysmerkintä",
                 "message": "{feature} risteää kohteen {feature2} kanssa",
+                "tip": "Korosta virheellisesti risteävät kohteet",
                 "indoor-indoor": {
                     "reference": "Risteävät sisäkohteet tulisi merkitä eri korkeustasoihin."
                 },
@@ -1464,6 +1511,7 @@
             },
             "disconnected_way": {
                 "title": "Yksinäiset tiet",
+                "tip": "Korosta reititysongelmia aiheuttavat muuhun väyläverkostoon kytkemättömät viivat",
                 "highway": {
                     "message": "{highway} ei ole yhdistetty tieverkostoon"
                 }
@@ -1476,6 +1524,10 @@
                 "message": "{feature} on merkitty epäilyttävällä nimellä {name}",
                 "reference": "Nimien tulisi olla kohteiden voimassaolevia, todellisuudessa käytettäviä nimiä."
             },
+            "help_request": {
+                "title": "Tarkistuspyynnöt",
+                "tip": "Korosta toisen käyttäjän tarkistuspyynnöllä merkitsemät kohteet"
+            },
             "incompatible_source": {
                 "title": "Epäilyttävät lähteet",
                 "tip": "Korosta epäilyttävillä lähteillä merkityt karttakohteet",
@@ -1486,8 +1538,16 @@
                     "reference": "Googlen kaupallisten tuotteiden käyttö lähteinä on kielletty."
                 }
             },
+            "invalid_format": {
+                "title": "Virheelliset ominaisuustiedot",
+                "tip": "Korosta virheellisesti merkityt ominaisuustiedot"
+            },
+            "mismatched_geometry": {
+                "title": "Epätyypillinen muoto",
+                "tip": "Korosta kohteet, joiden muoto ei vastaa karttakohdetyyppiä"
+            },
             "missing_role": {
-                "title": "Puuttuva relaation rooli-merkintä",
+                "title": "Puuttuva relaation roolimerkintä",
                 "message": "Jäsenellä {member} ei ole roolia relaatiossa {relation}",
                 "tip": "Korosta virheellisillä tai puuttuvilla relaation rooleilla merkityt kohteet",
                 "multipolygon": {
@@ -1529,6 +1589,9 @@
                 "contact": {
                     "message": "{feature} sisältää mahdollisesti yksityisiä tietoja"
                 }
+            },
+            "suspicious_name": {
+                "tip": "Korosta kohteet, joiden nimi on liian yleinen tai epäilyttävä"
             },
             "tag_suggests_area": {
                 "message": "{feature} tulisi merkittynä suljettuna alueena ominaisuustiedolla {tag}",
@@ -1968,17 +2031,22 @@
                 },
                 "help": {
                     "title": "Ohjeet",
-                    "help": "Näytä ohje/käyttöopas",
+                    "help": "Näytä käyttöohje",
                     "keyboard": "Näytä pikanäppäimet"
                 },
                 "display_options": {
                     "title": "Näyttöasetukset",
+                    "background": "Näytä/piilota taustan asetukset",
                     "background_switch": "Vaihda takaisin viimeisimpään taustaan",
+                    "map_data": "Näytä/piilota kartta-aineistoasetukset",
+                    "issues": "Näytä/piilota muokkausvirheiden asetukset",
+                    "preferences": "Näytä/piilota käyttäjäasetukset",
                     "fullscreen": "Siirry koko näytön tilaan",
                     "sidebar": "Näytä/piilota kohdemuokkain",
                     "wireframe": "Muuta alueen taustatäyttö -asetusta",
                     "osm_data": "Vaihda OpenStreetMap-aineistoa",
-                    "minimap": "Ota pienoiskartta käyttöön/pois käytöstä"
+                    "minimap": "Ota pienoiskartta käyttöön/pois käytöstä",
+                    "highlight_edits": "Korosta tallentamattomat muutokset"
                 },
                 "selecting": {
                     "title": "Kohteiden valitseminen",
@@ -1988,7 +2056,9 @@
                     "search": "Hae kohteen nimellä"
                 },
                 "with_selected": {
-                    "edit_menu": "Näytä/piilota toimintovalikko"
+                    "title": "Karttakohde valittuna",
+                    "edit_menu": "Näytä/piilota toimintovalikko",
+                    "zoom_to": "Lähennä valittuihin karttakohteisiin"
                 },
                 "vertex_selected": {
                     "title": "Piste valittuna",
@@ -4071,6 +4141,9 @@
                     "name": "Mainoslieriö",
                     "terms": "mainos, mainonta, tolppa, teline, kyltti, mainoskyltti, säiliö, pyörivä"
                 },
+                "advertising/totem": {
+                    "name": "Mainostaulu"
+                },
                 "aerialway": {
                     "name": "Ilmarata"
                 },
@@ -4251,7 +4324,7 @@
                 },
                 "amenity/charging_station": {
                     "name": "Latauspiste",
-                    "terms": "sähköauto, sähkönlataus, sähköpiste, latauspiste, lataaminen, lataus"
+                    "terms": "sähköauto, sähkönlataus, sähköpiste, latauspiste, lataaminen, lataus, sähkö"
                 },
                 "amenity/childcare": {
                     "name": "Päiväkoti",
@@ -4671,7 +4744,7 @@
                     "terms": "katos, katettu, kota, kotus, korsu, laavu, maja, koppi, suoja, tauko, taukopaikka, taukokatos, piknik, picnic, retki, lepo, lepääminen, pukukoppi, pukeutuminen, bussi, linja-auto, kalliolippa"
                 },
                 "amenity/shelter/gazebo": {
-                    "name": "huvimaja"
+                    "name": "Huvimaja"
                 },
                 "amenity/shelter/lean_to": {
                     "name": "Sääsuoja",
@@ -5689,7 +5762,8 @@
                     "name": "Autokaista"
                 },
                 "highway/service/driveway": {
-                    "name": "Pihatie"
+                    "name": "Ajoväylä",
+                    "terms": "Pihatie"
                 },
                 "highway/service/emergency_access": {
                     "name": "Tie hälytysajoneuvoille"
@@ -7380,6 +7454,10 @@
                 "shop/hifi": {
                     "name": "Hifimyymälä"
                 },
+                "shop/hobby": {
+                    "name": "Harrastuskauppa",
+                    "terms": "harrastus, harrastukset, harrastaa, kauppa, liike, myymälä, putiikki, puoti"
+                },
                 "shop/houseware": {
                     "name": "Kotitarvikekauppa"
                 },
@@ -7767,7 +7845,8 @@
                     "name": "Lievä hidastustöyssy"
                 },
                 "traffic_calming/island": {
-                    "name": "Keskisaareke"
+                    "name": "Liikenteenjakaja",
+                    "terms": "saareke,keskisaareke"
                 },
                 "traffic_calming/rumble_strip": {
                     "name": "Heräteraidat"

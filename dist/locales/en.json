@@ -2759,6 +2759,15 @@
                 "attraction": {
                     "label": "Type"
                 },
+                "baby_feeding": {
+                    "label": "Baby Nursing Area",
+                    "terms": "baby feeding,breastfeeding,lactation,mothers,nursing",
+                    "options": {
+                        "room": "Dedicated Room",
+                        "yes": "Marked Space",
+                        "no": "None"
+                    }
+                },
                 "baby_seat": {
                     "label": "Baby Seat"
                 },
@@ -2859,7 +2868,8 @@
                     "label": "Type"
                 },
                 "building_area": {
-                    "label": "Building"
+                    "label": "Building",
+                    "terms": ""
                 },
                 "building": {
                     "label": "Building",
@@ -3014,7 +3024,8 @@
                     "label": "Refuge Island"
                 },
                 "cuisine": {
-                    "label": "Cuisines"
+                    "label": "Cuisines",
+                    "terms": "fare,food types"
                 },
                 "currency_multi": {
                     "label": "Currency Types",
@@ -3333,6 +3344,9 @@
                 },
                 "fuel": {
                     "label": "Fuel"
+                },
+                "gambling": {
+                    "label": "Games"
                 },
                 "gauge": {
                     "label": "Gauge"
@@ -3777,6 +3791,9 @@
                         "4": "4: Avg. incline <30%, poor condition, big rocks/branches",
                         "5": "5: Very steep, bike generally needs to be pushed or carried"
                     }
+                },
+                "museum": {
+                    "label": "Type"
                 },
                 "name": {
                     "label": "Name",
@@ -5324,7 +5341,7 @@
                 },
                 "amenity/grave_yard": {
                     "name": "Graveyard",
-                    "terms": ""
+                    "terms": "burial ground,cemetary,cemetery,churchyard,columbarium,grave yard,graveyard,mausoleum,tomb"
                 },
                 "amenity/grit_bin": {
                     "name": "Grit Bin",
@@ -6085,6 +6102,10 @@
                     "name": "Stile",
                     "terms": ""
                 },
+                "barrier/swing_gate": {
+                    "name": "Swing Gate",
+                    "terms": ""
+                },
                 "barrier/toll_booth": {
                     "name": "Toll Booth",
                     "terms": ""
@@ -6620,6 +6641,10 @@
                     "name": "Entrance/Exit",
                     "terms": "entrance,exit,door"
                 },
+                "entrance/emergency": {
+                    "name": "Emergency Exit",
+                    "terms": "fire exit,door"
+                },
                 "ford": {
                     "name": "Ford",
                     "terms": ""
@@ -7040,6 +7065,10 @@
                     "name": "Boundary Stone",
                     "terms": ""
                 },
+                "historic/building": {
+                    "name": "Historic Building",
+                    "terms": ""
+                },
                 "historic/castle": {
                     "name": "Castle",
                     "terms": ""
@@ -7142,6 +7171,9 @@
                 "landuse/basin": {
                     "name": "Basin"
                 },
+                "landuse/churchyard": {
+                    "name": "Churchyard"
+                },
                 "landuse/farm": {
                     "name": "Farmland"
                 },
@@ -7165,11 +7197,7 @@
                 },
                 "landuse/cemetery": {
                     "name": "Cemetery",
-                    "terms": ""
-                },
-                "landuse/churchyard": {
-                    "name": "Churchyard",
-                    "terms": ""
+                    "terms": "burial ground,cemetary,cemetery,churchyard,columbarium,grave yard,graveyard,mausoleum,tomb"
                 },
                 "landuse/commercial": {
                     "name": "Commercial Area",
@@ -7289,7 +7317,7 @@
                 },
                 "landuse/religious": {
                     "name": "Religious Area",
-                    "terms": ""
+                    "terms": "christian,churchyard,hindu,jewish,mosque,muslim,place of worship,shinto,sikh,taoist,temple,shrine,synagogue"
                 },
                 "landuse/residential": {
                     "name": "Residential Area",
@@ -8220,6 +8248,10 @@
                     "name": "Government Office",
                     "terms": ""
                 },
+                "office/government/prosecutor": {
+                    "name": "Public Prosecutor's Office",
+                    "terms": "attorney general,district attorney,prosecution"
+                },
                 "office/government/register_office": {
                     "name": "Register Office",
                     "terms": "clerk,marriage,death,birth,certificate"
@@ -8242,7 +8274,7 @@
                 },
                 "office/lawyer": {
                     "name": "Law Office",
-                    "terms": ""
+                    "terms": "advocate,attorney,barrister,counsellor,counselor,defender,lawyer,legal,prosecutor"
                 },
                 "office/lawyer/notary": {
                     "name": "Notary Office"
@@ -8942,6 +8974,10 @@
                     "name": "Car Dealership",
                     "terms": "automobile,automotive"
                 },
+                "shop/car/second_hand": {
+                    "name": "Used Car Dealership",
+                    "terms": "automobile,automotive"
+                },
                 "shop/caravan": {
                     "name": "RV Dealership",
                     "terms": "auto,camper,recreational vehicle"
@@ -8973,6 +9009,10 @@
                 "shop/clothes": {
                     "name": "Clothing Store",
                     "terms": "blouses,boutique,bras,clothes,dresses,fashion,pants,shirts,shorts,skirts,slacks,socks,suits,underwear"
+                },
+                "shop/clothes/second_hand": {
+                    "name": "Secondhand Clothing Store",
+                    "terms": "blouses,clothes,consignment,dresses,pants,second hand,shirts,shorts,skirts,slacks,suits,used"
                 },
                 "shop/clothes/underwear": {
                     "name": "Underwear Store",
@@ -9028,6 +9068,10 @@
                 },
                 "shop/doityourself": {
                     "name": "DIY Store",
+                    "terms": ""
+                },
+                "shop/doors": {
+                    "name": "Door Shop",
                     "terms": ""
                 },
                 "shop/dry_cleaning": {
@@ -9589,6 +9633,14 @@
                 "tourism/museum": {
                     "name": "Museum",
                     "terms": "art*,exhibit*,gallery,foundation,hall,institution,paint*,photo*,sculpt*"
+                },
+                "tourism/museum/art": {
+                    "name": "Art Museum",
+                    "terms": "art*,exhibit*,gallery,foundation,hall,institution,paint*,photo*,sculpt*"
+                },
+                "tourism/museum/history": {
+                    "name": "History Museum",
+                    "terms": "artifacts,dioramas,exhibits,exhibitions,foundation,hall,institution"
                 },
                 "tourism/picnic_site": {
                     "name": "Picnic Site",
