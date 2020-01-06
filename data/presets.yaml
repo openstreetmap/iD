@@ -363,6 +363,12 @@ en:
         label: Building
         # 'terms: structure'
         terms: '[translate with synonyms or related terms for ''Building'', separated by commas]'
+      building/levels:
+        # 'building:levels=*'
+        label: Levels
+        # building/levels field placeholder
+        placeholder: '2, 4, 6...'
+        terms: '[translate with synonyms or related terms for ''Levels'', separated by commas]'
       building/levels/underground:
         # 'building:levels:underground=*'
         label: Underground Levels
@@ -1240,12 +1246,6 @@ en:
         # level=*
         label: Levels
         # 'terms: building floors,decks,stories,storeys,storys'
-        terms: '[translate with synonyms or related terms for ''Levels'', separated by commas]'
-      levels:
-        # 'building:levels=*'
-        label: Levels
-        # levels field placeholder
-        placeholder: '2, 4, 6...'
         terms: '[translate with synonyms or related terms for ''Levels'', separated by commas]'
       liaison:
         # liaison=*

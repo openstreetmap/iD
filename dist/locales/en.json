@@ -2880,6 +2880,11 @@
                     "terms": "",
                     "placeholder": "2, 4, 6..."
                 },
+                "building/levels": {
+                    "label": "Levels",
+                    "terms": "",
+                    "placeholder": "2, 4, 6..."
+                },
                 "building/levels/underground": {
                     "label": "Underground Levels",
                     "terms": "basement levels",
@@ -3641,11 +3646,6 @@
                 "level": {
                     "label": "Level",
                     "terms": "building floor,deck,storey,story"
-                },
-                "levels": {
-                    "label": "Levels",
-                    "terms": "",
-                    "placeholder": "2, 4, 6..."
                 },
                 "liaison": {
                     "label": "Type"

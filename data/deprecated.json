@@ -652,6 +652,26 @@
       "replace": {"landuse": "recreation_ground"}
     },
     {
+      "old": {"Level": "*"},
+      "replace": {"level": "$1"}
+    },
+    {
+      "old": {"LEVEL": "*"},
+      "replace": {"level": "$1"}
+    },
+    {
+      "old": {"levels": "*"},
+      "replace": {"building:levels": "$1"}
+    },
+    {
+      "old": {"LEVELS": "*"},
+      "replace": {"building:levels": "$1"}
+    },
+    {
+      "old": {"levels_count": "*"},
+      "replace": {"building:levels": "$1"}
+    },
+    {
       "old": {"man_made": "cut_line"},
       "replace": {"man_made": "cutline"}
     },
