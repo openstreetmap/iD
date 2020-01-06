@@ -6096,6 +6096,10 @@
                     "name": "Stile",
                     "terms": ""
                 },
+                "barrier/swing_gate": {
+                    "name": "Swing Gate",
+                    "terms": ""
+                },
                 "barrier/toll_booth": {
                     "name": "Toll Booth",
                     "terms": ""

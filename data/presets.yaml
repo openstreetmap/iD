@@ -4123,6 +4123,10 @@ en:
         # barrier=stile
         name: Stile
         terms: '<translate with synonyms or related terms for ''Stile'', separated by commas>'
+      barrier/swing_gate:
+        # barrier=swing_gate
+        name: Swing Gate
+        terms: '<translate with synonyms or related terms for ''Swing Gate'', separated by commas>'
       barrier/toll_booth:
         # barrier=toll_booth
         name: Toll Booth
