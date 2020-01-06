@@ -7381,9 +7381,9 @@ en:
         terms: '<translate with synonyms or related terms for ''Liquor Store'', separated by commas>'
       shop/anime:
         # shop=anime
-        name: Anime Shop
+        name: Anime / Manga Shop
         # 'terms: manga,japan,cosplay,figurine,dakimakura'
-        terms: '<translate with synonyms or related terms for ''Anime Shop'', separated by commas>'
+        terms: '<translate with synonyms or related terms for ''Anime / Manga Shop'', separated by commas>'
       shop/antiques:
         # shop=antiques
         name: Antiques Shop

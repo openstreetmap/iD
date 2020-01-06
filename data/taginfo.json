@@ -968,7 +968,7 @@
     {"key": "shop", "value": "vacant", "description": "🄿 Vacant Shop (unsearchable)", "object_types": ["node", "area"], "icon_url": "https://cdn.jsdelivr.net/gh/mapbox/maki/icons/shop-15.svg"},
     {"key": "shop", "value": "agrarian", "description": "🄿 Farm Supply Shop", "object_types": ["node", "area"], "icon_url": "https://cdn.jsdelivr.net/gh/openstreetmap/iD@master/svg/fontawesome/fas-tractor.svg"},
     {"key": "shop", "value": "alcohol", "description": "🄿 Liquor Store", "object_types": ["node", "area"], "icon_url": "https://cdn.jsdelivr.net/gh/openstreetmap/iD@master/svg/fontawesome/fas-wine-bottle.svg"},
-    {"key": "shop", "value": "anime", "description": "🄿 Anime Shop", "object_types": ["node", "area"], "icon_url": "https://cdn.jsdelivr.net/gh/openstreetmap/iD@master/svg/fontawesome/fas-dragon.svg"},
+    {"key": "shop", "value": "anime", "description": "🄿 Anime / Manga Shop", "object_types": ["node", "area"], "icon_url": "https://cdn.jsdelivr.net/gh/openstreetmap/iD@master/svg/fontawesome/fas-dragon.svg"},
     {"key": "shop", "value": "antiques", "description": "🄿 Antiques Shop", "object_types": ["node", "area"], "icon_url": "https://cdn.jsdelivr.net/gh/ideditor/temaki/icons/furniture.svg"},
     {"key": "shop", "value": "appliance", "description": "🄿 Appliance Store", "object_types": ["node", "area"], "icon_url": "https://cdn.jsdelivr.net/gh/ideditor/temaki/icons/laundry.svg"},
     {"key": "shop", "value": "art", "description": "🄿 Art Store", "object_types": ["node", "area"], "icon_url": "https://cdn.jsdelivr.net/gh/mapbox/maki/icons/shop-15.svg"},

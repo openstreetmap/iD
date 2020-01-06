@@ -1024,7 +1024,7 @@
     "shop/vacant": {"icon": "maki-shop", "fields": ["name", "address", "building_area"], "geometry": ["point", "area"], "tags": {"shop": "vacant"}, "name": "Vacant Shop", "searchable": false},
     "shop/agrarian": {"icon": "fas-tractor", "fields": ["{shop}", "agrarian"], "geometry": ["point", "area"], "terms": ["agricultural inputs", "agricultural machines", "seeds", "pesticides", "fertilizer", "agricultural tools"], "tags": {"shop": "agrarian"}, "name": "Farm Supply Shop"},
     "shop/alcohol": {"icon": "fas-wine-bottle", "fields": ["{shop}", "drive_through"], "moreFields": ["{shop}", "min_age"], "geometry": ["point", "area"], "terms": ["alcohol", "beer", "booze", "wine"], "tags": {"shop": "alcohol"}, "name": "Liquor Store"},
-    "shop/anime": {"icon": "fas-dragon", "geometry": ["point", "area"], "tags": {"shop": "anime"}, "terms": ["manga", "japan", "cosplay", "figurine", "dakimakura"], "name": "Anime Shop"},
+    "shop/anime": {"icon": "fas-dragon", "geometry": ["point", "area"], "tags": {"shop": "anime"}, "terms": ["manga", "japan", "cosplay", "figurine", "dakimakura"], "name": "Anime / Manga Shop"},
     "shop/antiques": {"icon": "temaki-furniture", "geometry": ["point", "area"], "tags": {"shop": "antiques"}, "name": "Antiques Shop"},
     "shop/appliance": {"icon": "temaki-laundry", "geometry": ["point", "area"], "terms": ["air conditioner", "appliance", "dishwasher", "dryer", "freezer", "fridge", "grill", "kitchen", "oven", "refrigerator", "stove", "washer", "washing machine"], "tags": {"shop": "appliance"}, "name": "Appliance Store"},
     "shop/art": {"icon": "maki-shop", "geometry": ["point", "area"], "terms": ["art*", "exhibit*", "gallery"], "tags": {"shop": "art"}, "name": "Art Store"},
