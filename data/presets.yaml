@@ -5223,6 +5223,10 @@ en:
         # historic=boundary_stone
         name: Boundary Stone
         terms: '<translate with synonyms or related terms for ''Boundary Stone'', separated by commas>'
+      historic/building:
+        # historic=building
+        name: Historic Building
+        terms: '<translate with synonyms or related terms for ''Historic Building'', separated by commas>'
       historic/castle:
         # historic=castle
         name: Castle

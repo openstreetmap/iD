@@ -547,6 +547,7 @@
     {"key": "historic", "description": "🄿 Historic Site, 🄵 Type", "object_types": ["node", "way", "area"], "icon_url": "https://cdn.jsdelivr.net/gh/ideditor/temaki/icons/ruins.svg"},
     {"key": "historic", "value": "archaeological_site", "description": "🄿 Archaeological Site", "object_types": ["node", "area"], "icon_url": "https://cdn.jsdelivr.net/gh/ideditor/temaki/icons/ruins.svg"},
     {"key": "historic", "value": "boundary_stone", "description": "🄿 Boundary Stone", "object_types": ["node"], "icon_url": "https://cdn.jsdelivr.net/gh/ideditor/temaki/icons/milestone.svg"},
+    {"key": "historic", "value": "building", "description": "🄿 Historic Building", "object_types": ["area"], "icon_url": "https://cdn.jsdelivr.net/gh/mapbox/maki/icons/home-15.svg"},
     {"key": "historic", "value": "castle", "description": "🄿 Castle", "object_types": ["node", "area"], "icon_url": "https://cdn.jsdelivr.net/gh/mapbox/maki/icons/castle-15.svg"},
     {"key": "castle_type", "value": "fortress", "description": "🄿 Historic Fortress", "object_types": ["node", "area"], "icon_url": "https://cdn.jsdelivr.net/gh/mapbox/maki/icons/castle-15.svg"},
     {"key": "castle_type", "value": "palace", "description": "🄿 Palace", "object_types": ["node", "area"], "icon_url": "https://cdn.jsdelivr.net/gh/openstreetmap/iD@master/svg/fontawesome/fas-crown.svg"},

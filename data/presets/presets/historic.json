@@ -16,5 +16,6 @@
     "tags": {
         "historic": "*"
     },
+    "matchScore": 0.5,
     "name": "Historic Site"
 }
