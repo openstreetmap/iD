@@ -1420,6 +1420,9 @@ en:
         # mtb/scale/uphill field placeholder
         placeholder: '0, 1, 2, 3...'
         terms: '[translate with synonyms or related terms for ''Mountain Biking Uphill Difficulty'', separated by commas]'
+      museum:
+        # museum=*
+        label: Type
       name:
         # name=*
         label: Name
@@ -8287,6 +8290,16 @@ en:
         name: Museum
         # 'terms: art*,exhibit*,gallery,foundation,hall,institution,paint*,photo*,sculpt*'
         terms: '<translate with synonyms or related terms for ''Museum'', separated by commas>'
+      tourism/museum/art:
+        # 'tourism=museum, museum=art'
+        name: Art Museum
+        # 'terms: art*,exhibit*,gallery,foundation,hall,institution,paint*,photo*,sculpt*'
+        terms: '<translate with synonyms or related terms for ''Art Museum'', separated by commas>'
+      tourism/museum/history:
+        # 'tourism=museum, museum=history'
+        name: History Museum
+        # 'terms: artifacts,dioramas,exhibits,exhibitions,foundation,hall,institution'
+        terms: '<translate with synonyms or related terms for ''History Museum'', separated by commas>'
       tourism/picnic_site:
         # tourism=picnic_site
         name: Picnic Site

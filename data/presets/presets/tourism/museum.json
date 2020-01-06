@@ -4,6 +4,7 @@
         "name",
         "operator",
         "operator/type",
+        "museum",
         "address",
         "building_area",
         "opening_hours"

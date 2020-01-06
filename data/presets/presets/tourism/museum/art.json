@@ -1,0 +1,27 @@
+{
+    "icon": "temaki-museum",
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "terms": [
+        "art*",
+        "exhibit*",
+        "gallery",
+        "foundation",
+        "hall",
+        "institution",
+        "paint*",
+        "photo*",
+        "sculpt*"
+    ],
+    "tags": {
+        "tourism": "museum",
+        "museum": "art"
+    },
+    "reference": {
+        "key": "museum",
+        "value": "art"
+    },
+    "name": "Art Museum"
+}
