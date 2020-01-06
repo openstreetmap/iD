@@ -8233,6 +8233,10 @@
                     "name": "Government Office",
                     "terms": ""
                 },
+                "office/government/prosecutor": {
+                    "name": "Public Prosecutor's Office",
+                    "terms": "attorney general,district attorney,prosecution"
+                },
                 "office/government/register_office": {
                     "name": "Register Office",
                     "terms": "clerk,marriage,death,birth,certificate"
@@ -8255,7 +8259,7 @@
                 },
                 "office/lawyer": {
                     "name": "Law Office",
-                    "terms": ""
+                    "terms": "advocate,attorney,barrister,counsellor,counselor,defender,lawyer,legal,prosecutor"
                 },
                 "office/lawyer/notary": {
                     "name": "Notary Office"

@@ -1,0 +1,25 @@
+{
+    "icon": "maki-suitcase",
+    "fields": [
+        "{office}",
+        "operator"
+    ],
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "terms": [
+        "attorney general",
+        "district attorney",
+        "prosecution"
+    ],
+    "tags": {
+        "office": "government",
+        "government": "prosecutor"
+    },
+    "reference": {
+        "key": "government",
+        "value": "prosecutor"
+    },
+    "name": "Public Prosecutor's Office"
+}

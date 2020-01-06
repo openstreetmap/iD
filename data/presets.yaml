@@ -6625,6 +6625,11 @@ en:
         # office=government
         name: Government Office
         terms: '<translate with synonyms or related terms for ''Government Office'', separated by commas>'
+      office/government/prosecutor:
+        # 'office=government, government=prosecutor'
+        name: Public Prosecutor's Office
+        # 'terms: attorney general,district attorney,prosecution'
+        terms: '<translate with synonyms or related terms for ''Public Prosecutor''s Office'', separated by commas>'
       office/government/register_office:
         # 'office=government, government=register_office'
         name: Register Office
@@ -6652,6 +6657,7 @@ en:
       office/lawyer:
         # office=lawyer
         name: Law Office
+        # 'terms: advocate,attorney,barrister,counsellor,counselor,defender,lawyer,legal,prosecutor'
         terms: '<translate with synonyms or related terms for ''Law Office'', separated by commas>'
       office/lawyer/notary:
         # 'office=lawyer, lawyer=notary'

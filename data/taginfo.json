@@ -836,6 +836,7 @@
     {"key": "office", "value": "forestry", "description": "🄿 Forestry Office", "object_types": ["node", "area"], "icon_url": "https://cdn.jsdelivr.net/gh/mapbox/maki/icons/suitcase-15.svg"},
     {"key": "office", "value": "foundation", "description": "🄿 Foundation Office", "object_types": ["node", "area"], "icon_url": "https://cdn.jsdelivr.net/gh/mapbox/maki/icons/suitcase-15.svg"},
     {"key": "office", "value": "government", "description": "🄿 Government Office", "object_types": ["node", "area"], "icon_url": "https://cdn.jsdelivr.net/gh/mapbox/maki/icons/town-hall-15.svg"},
+    {"key": "government", "value": "prosecutor", "description": "🄿 Public Prosecutor's Office", "object_types": ["node", "area"], "icon_url": "https://cdn.jsdelivr.net/gh/mapbox/maki/icons/suitcase-15.svg"},
     {"key": "government", "value": "register_office", "description": "🄿 Register Office", "object_types": ["node", "area"], "icon_url": "https://cdn.jsdelivr.net/gh/mapbox/maki/icons/town-hall-15.svg"},
     {"key": "government", "value": "tax", "description": "🄿 Tax and Revenue Office", "object_types": ["node", "area"], "icon_url": "https://cdn.jsdelivr.net/gh/mapbox/maki/icons/town-hall-15.svg"},
     {"key": "office", "value": "guide", "description": "🄿 Tour Guide Office", "object_types": ["node", "area"], "icon_url": "https://cdn.jsdelivr.net/gh/mapbox/maki/icons/suitcase-15.svg"},
