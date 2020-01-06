@@ -16,26 +16,26 @@ var clientId = 'NzNRM2otQkR2SHJzaXJmNmdQWVQ0dzo1ZWYyMmYwNjdmNDdlNmVi';
 var mapFeatureConfig = {
     organizationKey: 'FI3NAFfzQQgdF081TRdgTy',
     values: [
+        'construction--flat--crosswalk-plain',
+        'marking--discrete--crosswalk-zebra',
+        'object--banner',
         'object--bench',
         'object--bike-rack',
         'object--billboard',
+        'object--catch-basin',
+        'object--cctv-camera',
         'object--fire-hydrant',
         'object--mailbox',
-        'object--phone-booth',
-        'object--street-light',
-        'object--support--utility-pole',
-        'object--traffic-light--pedestrians',
-        'object--trash-can',
-        'construction--flat--crosswalk-plain',
-        'object--cctv-camera',
-        'object--banner',
-        'object--catch-basin',
         'object--manhole',
+        'object--phone-booth',
         'object--sign--advertisement',
         'object--sign--information',
         'object--sign--store',
+        'object--street-light',
+        'object--support--utility-pole',
         'object--traffic-light--*',
-        'marking--discrete--crosswalk-zebra'
+        'object--traffic-light--pedestrians',
+        'object--trash-can'
     ].join(',')
 };
 var maxResults = 1000;
@@ -45,7 +45,7 @@ var dispatch = d3_dispatch('loadedImages', 'loadedSigns', 'loadedMapFeatures', '
 var _mlyFallback = false;
 var _mlyCache;
 var _mlyClicks;
-var _mlySelectedImage;
+var _mlySelectedImageKey;
 var _mlyViewer;
 
 
@@ -299,7 +299,7 @@ export default {
             sequences: { inflight: {}, loaded: {}, nextPage: {}, nextURL: {}, rtree: new RBush(), forImageKey: {}, lineString: {} }
         };
 
-        _mlySelectedImage = null;
+        _mlySelectedImageKey = null;
         _mlyClicks = [];
     },
 
@@ -441,7 +441,7 @@ export default {
 
 
     hideViewer: function() {
-        _mlySelectedImage = null;
+        _mlySelectedImageKey = null;
 
         if (!_mlyFallback && _mlyViewer) {
             _mlyViewer.getComponent('sequence').stop();
@@ -455,7 +455,7 @@ export default {
             .selectAll('.photo-wrapper')
             .classed('hide', true);
 
-        d3_selectAll('.viewfield-group, .sequence, .icon-sign')
+        d3_selectAll('.viewfield-group, .sequence, .icon-detected')
             .classed('currentView', false);
 
         return this.setStyles(null, true);
@@ -529,19 +529,19 @@ export default {
 
             var clicks = _mlyClicks;
             var index = clicks.indexOf(node.key);
-            var selectedKey = _mlySelectedImage && _mlySelectedImage.key;
+            var selectedKey = _mlySelectedImageKey;
 
             if (index > -1) {              // `nodechanged` initiated from clicking on a marker..
                 clicks.splice(index, 1);   // remove the click
-                // If `node.key` matches the current _mlySelectedImage, call `selectImage()`
+                // If `node.key` matches the current _mlySelectedImageKey, call `selectImage()`
                 // one more time to update the detections and attribution..
                 if (node.key === selectedKey) {
-                    that.selectImage(_mlySelectedImage, node.key, true);
+                    that.selectImage(_mlySelectedImageKey, true);
                 }
             } else {             // `nodechanged` initiated from the Mapillary viewer controls..
                 var loc = node.computedLatLon ? [node.computedLatLon.lon, node.computedLatLon.lat] : [node.latLon.lon, node.latLon.lat];
                 context.map().centerEase(loc);
-                that.selectImage(undefined, node.key, true);
+                that.selectImage(node.key, true);
             }
         }
 
@@ -551,20 +551,17 @@ export default {
     },
 
 
-    // Pass the image datum itself in `d` or the `imageKey` string.
+    // Pass in the image key string as `imageKey`.
     // This allows images to be selected from places that dont have access
     // to the full image datum (like the street signs layer or the js viewer)
-    selectImage: function(d, imageKey, fromViewer) {
-        if (!d && imageKey) {
-            // If the user clicked on something that's not an image marker, we
-            // might get in here.. Cache lookup can fail, e.g. if the user
-            // clicked a streetsign, but images are loading slowly asynchronously.
-            // We'll try to carry on anyway if there is no datum.  There just
-            // might be a delay before user sees detections, captured_at, etc.
-            d = _mlyCache.images.forImageKey[imageKey];
-        }
+    selectImage: function(imageKey, fromViewer) {
 
-        _mlySelectedImage = d;
+        _mlySelectedImageKey = imageKey;
+
+        // Note the datum could be missing, but we'll try to carry on anyway.
+        // There just might be a delay before user sees detections, captured_at, etc.
+        var d = _mlyCache.images.forImageKey[imageKey];
+
         var viewer = d3_select('#photoviewer');
         if (!viewer.empty()) viewer.datum(d);
 
@@ -576,7 +573,7 @@ export default {
         this.setStyles(null, true);
 
         // if signs signs are shown, highlight the ones that appear in this image
-        d3_selectAll('.layer-mapillary-signs .icon-sign')
+        d3_selectAll('.layer-mapillary-signs .icon-detected')
             .classed('currentView', function(d) {
                 return d.detections.some(function(detection) {
                     return detection.image_key === imageKey;
@@ -591,14 +588,13 @@ export default {
     },
 
 
-    getSelectedImage: function() {
-        return _mlySelectedImage;
+    getSelectedImageKey: function() {
+        return _mlySelectedImageKey;
     },
 
 
-    getSequenceKeyForImage: function(d) {
-        var imageKey = d && d.key;
-        return imageKey && _mlyCache.sequences.forImageKey[imageKey];
+    getSequenceKeyForImageKey: function(imageKey) {
+        return _mlyCache.sequences.forImageKey[imageKey];
     },
 
 
@@ -618,14 +614,12 @@ export default {
         }
 
         var hoveredImageKey = hovered && hovered.key;
-        var hoveredSequenceKey = this.getSequenceKeyForImage(hovered);
+        var hoveredSequenceKey = hoveredImageKey && this.getSequenceKeyForImageKey(hoveredImageKey);
         var hoveredLineString = hoveredSequenceKey && _mlyCache.sequences.lineString[hoveredSequenceKey];
         var hoveredImageKeys = (hoveredLineString && hoveredLineString.properties.coordinateProperties.image_keys) || [];
 
-        var viewer = d3_select('#photoviewer');
-        var selected = viewer.empty() ? undefined : viewer.datum();
-        var selectedImageKey = selected && selected.key;
-        var selectedSequenceKey = this.getSequenceKeyForImage(selected);
+        var selectedImageKey = _mlySelectedImageKey;
+        var selectedSequenceKey = selectedImageKey && this.getSequenceKeyForImageKey(selectedImageKey);
         var selectedLineString = selectedSequenceKey && _mlyCache.sequences.lineString[selectedSequenceKey];
         var selectedImageKeys = (selectedLineString && selectedLineString.properties.coordinateProperties.image_keys) || [];
 

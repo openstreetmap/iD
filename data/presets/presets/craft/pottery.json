@@ -5,10 +5,13 @@
         "area"
     ],
     "terms": [
-        "ceramic"
+        "ceramic",
+        "kiln",
+        "pot",
+        "vase"
     ],
     "tags": {
         "craft": "pottery"
     },
-    "name": "Pottery"
+    "name": "Pottery Maker"
 }

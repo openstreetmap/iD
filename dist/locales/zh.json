@@ -1,5 +1,8 @@
 {
     "zh": {
+        "icons": {
+            "download": "下载"
+        },
         "modes": {
             "add_area": {
                 "title": "面",
@@ -67,12 +70,6 @@
                     "area": "把面制作成圆形。"
                 },
                 "not_closed": "该要素不可编辑为圆，因为它不是一个循环。"
-            },
-            "orthogonalize": {
-                "annotation": {
-                    "line": "线直角化。",
-                    "area": "面直角化。"
-                }
             },
             "delete": {
                 "title": "删除",
@@ -154,11 +151,6 @@
             "localized_translation_name": "名称"
         },
         "loading_auth": "连接OpenStreetMap...",
-        "status": {
-            "error": "无法连接到API。",
-            "offline": "API是离线的。请稍后尝试编辑。",
-            "readonly": "API是只读。您需要等待以便保存更改。"
-        },
         "commit": {
             "upload_explanation": "你上传的更新将会显示在所有使用 OpenStreetMap 数据的地图上。",
             "upload_explanation_with_user": "你 {user} 上传的更新将会显示在所有使用 OpenStreetMap 数据的地图上。",
@@ -690,9 +682,6 @@
                 "emergency/phone": {
                     "name": "紧急电话"
                 },
-                "highway": {
-                    "name": "公路"
-                },
                 "highway/bridleway": {
                     "name": "马道"
                 },
@@ -825,9 +814,6 @@
                 "landuse/vineyard": {
                     "name": "酒庄"
                 },
-                "leisure": {
-                    "name": "休闲场所"
-                },
                 "leisure/garden": {
                     "name": "花园"
                 },
@@ -873,9 +859,6 @@
                 "line": {
                     "name": "线"
                 },
-                "man_made": {
-                    "name": "人造物"
-                },
                 "man_made/breakwater": {
                     "name": "防波堤"
                 },
@@ -905,9 +888,6 @@
                 },
                 "man_made/water_works": {
                     "name": "水务设施"
-                },
-                "natural": {
-                    "name": "自然物件"
                 },
                 "natural/bay": {
                     "name": "海湾"
@@ -957,9 +937,6 @@
                 "natural/wetland": {
                     "name": "湿地"
                 },
-                "natural/wood": {
-                    "name": "树林"
-                },
                 "office": {
                     "name": "办公室"
                 },
@@ -990,9 +967,6 @@
                 "point": {
                     "name": "点"
                 },
-                "power": {
-                    "name": "电力设施"
-                },
                 "power/line": {
                     "name": "电路线"
                 },
@@ -1007,9 +981,6 @@
                 },
                 "power/transformer": {
                     "name": "变电所"
-                },
-                "railway": {
-                    "name": "铁路"
                 },
                 "railway/abandoned": {
                     "name": "废弃的铁路"
@@ -1170,9 +1141,6 @@
                 "shop/video": {
                     "name": "影像店"
                 },
-                "tourism": {
-                    "name": "旅游设施"
-                },
                 "tourism/alpine_hut": {
                     "name": "高山小屋"
                 },
@@ -1257,9 +1225,6 @@
                 "type/route/tram": {
                     "name": "电车路线"
                 },
-                "waterway": {
-                    "name": "航道"
-                },
                 "waterway/canal": {
                     "name": "运河"
                 },
@@ -1284,6 +1249,35 @@
                 "waterway/weir": {
                     "name": "堤坝"
                 }
+            }
+        },
+        "community": {
+            "bw-facebook": {
+                "name": "Mapping Botswana 的 Facebook 主页",
+                "description": "Botswana 的 OpenStreetMap 页面"
+            },
+            "bw-twitter": {
+                "name": "Mapping Botswana 的推特页面",
+                "description": "OpenStreetMap in Botswana 的推特页面"
+            },
+            "cape-coast-youthmappers": {
+                "name": "海岸角大学 YouthMappers",
+                "description": "在推特上关注我们：{url}",
+                "extendedDescription": "此为加纳海岸角大学的 Youth Mappers 官方分会。我们热爱地图、开放数据以及帮助弱势群体。"
+            },
+            "osm-gh-facebook": {
+                "name": "加纳 OpenStreetMap 的 Facebook 页面",
+                "description": "为对 OpenStreetMap 感兴趣的用户准备的 Facebook 小组。"
+            },
+            "ym-Centre-Universitaire-de-Recherche-et-dApplication-en-Tldtection-CURAT-de-lUniversit-Felix-Houphouet-Boigny": {
+                "name": "YouthMappers CURAT",
+                "description": "菲利克斯·乌弗埃·博瓦尼大学遥感研究与应用中心的 YouthMappers 分会",
+                "extendedDescription": "我们分会目的是推广合作绘制自由地图的使用，以及在研究与决策应用时运用 OpenStreetMap 资料，帮助学生在他们研究时能生成自己的资料。"
+            },
+            "ym-The-Gambia-YMCA-University-of-the-Gambia": {
+                "name": "Connected YouthMappers",
+                "description": "冈比亚基督教青年会/冈比亚大学的 YouthMappers 分会",
+                "extendedDescription": "Connected YouthMappers 由年轻甘比亚组成，希望能改变和协助国家发展。"
             }
         }
     }

@@ -2,7 +2,7 @@ import _throttle from 'lodash-es/throttle';
 import { select as d3_select } from 'd3-selection';
 import { svgPointTransform } from './helpers';
 import { services } from '../services';
-
+import { t } from '../util/locale';
 
 export function svgMapillaryMapFeatures(projection, context, dispatch) {
     var throttledRedraw = _throttle(function () { dispatch.call('change'); }, 1000);
@@ -60,8 +60,7 @@ export function svgMapillaryMapFeatures(projection, context, dispatch) {
 
         context.map().centerEase(d.loc);
 
-        var selected = service.getSelectedImage();
-        var selectedImageKey = selected && selected.key;
+        var selectedImageKey = service.getSelectedImageKey();
         var imageKey;
 
         // Pick one of the images the map feature was detected in,
@@ -73,7 +72,7 @@ export function svgMapillaryMapFeatures(projection, context, dispatch) {
         });
 
         service
-            .selectImage(null, imageKey)
+            .selectImage(imageKey)
             .updateViewer(imageKey, context)
             .showViewer();
     }
@@ -82,9 +81,7 @@ export function svgMapillaryMapFeatures(projection, context, dispatch) {
     function update() {
         var service = getService();
         var data = (service ? service.mapFeatures(projection) : []);
-        var viewer = d3_select('#photoviewer');
-        var selected = viewer.empty() ? undefined : viewer.datum();
-        var selectedImageKey = selected && selected.key;
+        var selectedImageKey = service && service.getSelectedImageKey();
         var transform = svgPointTransform(projection);
 
         var mapFeatures = layer.selectAll('.icon-map-feature')
@@ -96,29 +93,61 @@ export function svgMapillaryMapFeatures(projection, context, dispatch) {
 
         // enter
         var enter = mapFeatures.enter()
+            .append('g')
+            .attr('class', 'icon-map-feature icon-detected')
+            .on('click', click);
+
+        enter
+            .append('title')
+            .text(function(d) {
+                var id = d.value.replace(/--/g, '.').replace(/-/g, '_');
+                return t('mapillary_map_features.' + id);
+            });
+
+        enter
             .append('use')
-            .attr('class', 'icon-map-feature')
             .attr('width', '24px')
             .attr('height', '24px')
             .attr('x', '-12px')
             .attr('y', '-12px')
-            .attr('xlink:href', function(d) { return '#' + d.value; })
+            .attr('xlink:href', function(d) {
+                if (d.value === 'object--billboard') {
+                    // no billboard icon right now, so use the advertisement icon
+                    return '#object--sign--advertisement';
+                }
+                return '#' + d.value;
+            });
+
+        enter
+            .append('rect')
+            .attr('width', '24px')
+            .attr('height', '24px')
+            .attr('x', '-12px')
+            .attr('y', '-12px');
+
+        // update
+        mapFeatures
+            .merge(enter)
+            .attr('transform', transform)
             .classed('currentView', function(d) {
                 return d.detections.some(function(detection) {
                     return detection.image_key === selectedImageKey;
                 });
             })
-            .on('click', click);
-
-        // update
-        mapFeatures
-            .merge(enter)
             .sort(function(a, b) {
-                return (a === selected) ? 1
-                    : (b === selected) ? -1
-                    : b.loc[1] - a.loc[1];  // sort Y
-            })
-            .attr('transform', transform);
+                var aSelected = a.detections.some(function(detection) {
+                    return detection.image_key === selectedImageKey;
+                });
+                var bSelected = b.detections.some(function(detection) {
+                    return detection.image_key === selectedImageKey;
+                });
+                if (aSelected === bSelected) {
+                    return b.loc[1] - a.loc[1]; // sort Y
+                } else if (aSelected) {
+                    return 1;
+                }
+                return -1;
+            });
     }
 
 
@@ -134,7 +163,7 @@ export function svgMapillaryMapFeatures(projection, context, dispatch) {
 
         layer = layer.enter()
             .append('g')
-            .attr('class', 'layer-mapillary-map-features')
+            .attr('class', 'layer-mapillary-map-features layer-mapillary-detections')
             .style('display', enabled ? 'block' : 'none')
             .merge(layer);
 

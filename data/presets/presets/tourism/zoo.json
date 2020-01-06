@@ -11,11 +11,13 @@
     "moreFields": [
         "email",
         "fax",
+        "gnis/feature_id",
         "internet_access",
         "internet_access/fee",
         "internet_access/ssid",
         "payment_multi",
         "phone",
+        "ref/vatin",
         "website",
         "wheelchair"
     ],

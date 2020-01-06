@@ -1,4 +1,5 @@
 {
+    "icon": "temaki-buoy",
     "geometry": [
         "point",
         "vertex"

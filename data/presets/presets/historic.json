@@ -4,6 +4,9 @@
         "historic",
         "inscription"
     ],
+    "moreFields": [
+        "gnis/feature_id"
+    ],
     "geometry": [
         "point",
         "vertex",

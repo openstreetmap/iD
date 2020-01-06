@@ -11,6 +11,7 @@
     "moreFields": [
         "covered",
         "dog",
+        "gnis/feature_id",
         "horse_scale",
         "informal",
         "lit",

@@ -7,7 +7,6 @@
             "undo": "Zpět",
             "zoom_to": "přiblížit",
             "copy": "kopírovat",
-            "open_wikidata": "otevřít na wikidata.org",
             "favorite": "oblíbené"
         },
         "toolbar": {
@@ -127,27 +126,12 @@
                 "not_closed": "Nelze zakulatit, neboť nejde o smyčku.",
                 "too_large": "Nelze zakulatit, protože není vidět dostatečně velká část.",
                 "connected_to_hidden": "Nelze zakulatit, protože je napojen na skrytý prvek.",
-                "not_downloaded": "Nelze zakulatit, neboť části tohoto objektu nebyly dosud stažené."
+                "not_downloaded": "Nelze zakulatit, neboť části tohoto objektu nebyly dosud stažené.",
+                "already_circular": "To nelze udělat kruhové, protože to je již kruhové."
             },
             "orthogonalize": {
                 "title": "Zpravoúhlit",
-                "description": {
-                    "vertex": "Zpravoúhlit tento roh.",
-                    "line": "Udělat rohy této linie do hranata.",
-                    "area": "Udělat rohy této plochy do hranata."
-                },
-                "key": "Q",
-                "annotation": {
-                    "vertex": "Zpravoúhlen jeden roh.",
-                    "line": "Zpravoúhlit rohy linie.",
-                    "area": "Zpravoúhlit rohy plochy."
-                },
-                "end_vertex": "Nelze zpravoúhlit, jedná se o koncový bod.",
-                "square_enough": "Nelze zpravoúhlit více, než je.",
-                "not_squarish": "Nelze zpravoúhlit, protože se čtyřhranu vůbec nepodobá.",
-                "too_large": "Nelze zpravoúhlit, protože není vidět dostatečně velká část.",
-                "connected_to_hidden": "Nelze zpravoúhlit, protože je napojen na skrytý prvek.",
-                "not_downloaded": "Nelze zpravoúhlit, neboť části tohoto objektu nebyly dosud stažené."
+                "key": "Q"
             },
             "straighten": {
                 "title": "Narovnat",
@@ -197,10 +181,18 @@
                 "not_downloaded": {
                     "single": "Prvek nemůže být smazán, neboť některé jeho části nebyly dosud staženy.",
                     "multiple": "Tyto prvky nemohou být smazány, neboť některé jejich části nebyly dosud staženy."
+                },
+                "has_wikidata_tag": {
+                    "single": "Tento prvek nelze odstranit, protože obsahuje značku Wikidata.",
+                    "multiple": "Tyto prvky nelze odstranit, protože některé mají značky Wikidata."
                 }
             },
             "downgrade": {
                 "title": "Degradovat",
+                "description": {
+                    "building_address": "Odstraňte všechny značky které nemají souvislost s adresu a budovou.",
+                    "building": "Odstraňte všechny značky nesouvisející s budovami."
+                },
                 "annotation": {
                     "building": {
                         "single": "Prvek degradován na základní budovu.",
@@ -214,6 +206,9 @@
             },
             "delete_member": {
                 "annotation": "Odstraněn člen z relace."
+            },
+            "reorder_members": {
+                "annotation": "Změnil pořadí členů relací."
             },
             "connect": {
                 "annotation": {
@@ -457,12 +452,6 @@
             "hidden_warning": "{count} skrytých prvků",
             "hidden_details": "Tyto prvky jsou právě skryté: {details}"
         },
-        "status": {
-            "error": "Nepodařilo se připojit k API.",
-            "offline": "API je offline. Zkuste prosím editaci později.",
-            "readonly": "API je ve stavu \"pouze pro čtení\", takže vaše úpravy nelze uložit. Zkuste to znovu později.",
-            "rateLimit": "API omezuje anonymní připojení. Můžete to vyřešit tím, že se přihlásíte."
-        },
         "commit": {
             "title": "Odeslat na OpenStreetMap",
             "upload_explanation": "Vámi provedené změny budou viditelné na všech mapách postavených na datech z OpenStreetMap.",
@@ -554,7 +543,6 @@
         },
         "geocoder": {
             "search": "Hledat celosvětově…",
-            "no_results_visible": "Žádný výsledek v rámci viditelné části mapy",
             "no_results_worldwide": "Nic nenalezeno"
         },
         "geolocate": {
@@ -1327,11 +1315,13 @@
                 "type": "Klepnutím na typ funkce můžete změnit funkci na jiný typ. Všechno, co existuje v reálném světě, může být přidáno do OpenStreetMap, takže můžete zvolit tisíce typů funkcí.",
                 "type_picker": "Výběr typu zobrazuje nejběžnější typy prvků, jako třeba parky, nemocnice, restaurace, silnice a budovy. Můžete mezi nimi hledat napsáním toho, co hledáte do vyhledávacího pole. Můžete také kliknout na ikonku {inspect} **Informace** vedle typu prvku abyste o něm dozvěděli více.",
                 "fields_h": "Pole",
+                "fields_add_field": "Kliknutím na rozbalovací nabídku Přidat pole můžete přidat další pole, například popis, odkaz na Wikipedii, přístup pro vozíčkáře a další.",
                 "tags_h": "Štítky"
             },
             "points": {
                 "title": "Body",
                 "add_point_h": "Přidávání bodů",
+                "add_point_finish": "Chcete-li umístit nový bod na mapu, umístěte kurzor myši na místo, kam má bod směřovat, potom klikněte levým tlačítkem myši nebo stiskněte `mezerník '.",
                 "move_point_h": "Přesun bodů",
                 "move_point": "Chcete-li přesunout bod, umístěte kurzor myši nad bod a poté stiskněte a podržte levé tlačítko myši {levý klik} při přetahování bodu do nového umístění.",
                 "delete_point_h": "Odstraňování bodů",
@@ -1340,14 +1330,17 @@
             "lines": {
                 "title": "Linie",
                 "add_line_h": "Přidávání čar",
+                "add_line_draw": "Dále umístěte kurzor myši na začátek řádku a {leftclick} klikněte levým tlačítkem nebo stiskněte `mezerník 'a začněte umísťovat body podél linie. Pokračujte v umisťování dalších uzlů kliknutím nebo stisknutím klávesy `Mezera`. Během kreslení můžete mapu zvětšit nebo přetáhnout, abyste přidali další podrobnosti.",
                 "add_line_finish": "Pro dokončení čáry, zmáčkněte `{return}` nebo klikněte znovu na poslední bod.",
                 "modify_line_h": "Úprava čar",
                 "modify_line_dragnode": "Často uvidíte linie, které nejsou správně tvarované, například cesta, která neodpovídá snímkům pozadí. Chcete-li upravit tvar linie, vyberte ji nejdříve {leftclick} levým tlačítkem myši. Všechny uzly řádku budou vykresleny jako malá kolečka. Potom můžete body přetáhnout na lepší místa.",
                 "connect_line_h": "Spojování čar",
                 "connect_line": "Správné připojení silnic je důležité pro mapu a nezbytné pro poskytování jízdních pokynů.",
                 "connect_line_display": "Spojení mezi silnicemi jsou kresleny šedými kolečky. Koncové body linie jsou nakresleny s většími bílými kolečky, pokud zůstanou nepřipojeny.",
+                "connect_line_drag": "Chcete-li spojit čáru s jiným prvkem, přetáhněte jeden z uzlů řádku na druhý prvek, dokud oba prvky nezapadnou k sobě. Tip: Můžete podržet klávesu `{alt}`, abyste zabránili uzlům v připojení k jiným prvkům.",
                 "disconnect_line_h": "Odpojování čar",
                 "move_line_h": "Přesun čar",
+                "move_line_connected": "Linie, které jsou připojeny k jiným prvkům, zůstanou připojeny, jakmile přesunete linii na nové místo. iD vám může zabránit v přesunu linky přes jinou připojenou linku.",
                 "delete_line_h": "Odstraňování čar"
             },
             "areas": {
@@ -1356,8 +1349,10 @@
                 "point_or_area": "Mnohé funkce mohou být reprezentovány jako body nebo oblasti. Měli byste mapovat stavby a obrysy nemovitostí jako oblasti, kdykoli je to možné. Umístěte body uvnitř budovy, aby reprezentovaly podniky, vybavení a další funkce umístěné uvnitř budovy.",
                 "add_area_h": "Přidávání ploch",
                 "add_area_draw": "Poté umístěte kurzor myši v jednom z rohů funkce a {leftclick} levým tlačítkem myši nebo stisknutím tlačítka `Space` začněte umisťovat uzly kolem vnějšího okraje oblasti. Pokračujte v umístění dalších uzlů kliknutím nebo stisknutím tlačítka `Space`. Při kreslení můžete mapu přiblížit nebo přesunout, abyste získali další podrobnosti.",
+                "add_area_finish": "Pro dokončení plochy stiskněte `{return}` nebo klikněte znovu na první nebo poslední bod.",
                 "square_area_h": "Pravoúhlé rohy",
                 "modify_area_h": "Úprava ploch",
+                "modify_area_dragnode": "Často uvidíte oblasti, které nejsou správně tvarovány, například budova, která se neshoduje s obrázky na pozadí. Chcete-li upravit tvar plochy, nejprve ji kliknutím vyberte klepnutím levým tlačítkem myši. Všechny body plochy budou nakresleny jako malé kruhy. Potom můžete body přetáhnout na lepší umístění.",
                 "delete_area_h": "Odstraňování ploch"
             },
             "relations": {
@@ -1384,6 +1379,7 @@
             },
             "streetlevel": {
                 "title": "Pouliční fotky",
+                "intro": "Fotografie na úrovni ulic jsou užitečné pro mapování dopravních značek, podniků a dalších podrobností, které nevidíte ze satelitních a leteckých snímků. Editor iD podporuje fotografie na úrovni ulic z [Bing Streetside](https://www.microsoft.com/en-us/maps/streetside), [Mapillary](https://www.mapillary.com) a [OpenStreetCam](https://www.openstreetcam.org).",
                 "using_h": "Používání pouličních fotek"
             },
             "gps": {
@@ -1491,6 +1487,9 @@
                     "reference": "Emailové adresy musí vypadat jako \"uzivatel@server.tld\"."
                 }
             },
+            "mismatched_geometry": {
+                "title": "Neshoda geometrie"
+            },
             "missing_role": {
                 "title": "Chybějící role"
             },
@@ -1510,6 +1509,9 @@
             "private_data": {
                 "title": "Soukromá informace"
             },
+            "suspicious_name": {
+                "title": "Podezřelé názvy"
+            },
             "impossible_oneway": {
                 "title": "Nemožné jednosměrky"
             },
@@ -1528,8 +1530,17 @@
                 "continue_from_end": {
                     "title": "Pokračujte v kreslení od konce"
                 },
+                "extract_point": {
+                    "title": "Vyjmout tento bod"
+                },
                 "remove_generic_name": {
                     "annotation": "Odstraněno obecné jméno."
+                },
+                "remove_mistaken_name": {
+                    "annotation": "Odstraněn chybný název."
+                },
+                "remove_the_name": {
+                    "title": "Odstranit název"
                 },
                 "select_preset": {
                     "title": "Zvolte druh prvku"
@@ -1848,9 +1859,8 @@
                 },
                 "display_options": {
                     "title": "Vlastnosti zobrazení",
-                    "background": "Zobrazit volby pozadí",
                     "background_switch": "Zapnout předchozí použité pozadí",
-                    "map_data": "Zobrazit volby mapových dat",
+                    "map_data": "Přepnout panel dat mapy",
                     "fullscreen": "Vstoupit do režimu celé obrazovky",
                     "sidebar": "Zobrazit/skrýt boční panel.",
                     "wireframe": "Přepnout výplň budov",
@@ -1864,9 +1874,7 @@
                     "search": "Najít prvky obsahující hledaný text"
                 },
                 "with_selected": {
-                    "title": "S vybraným prvkem",
-                    "edit_menu": "Přepnout menu úprav",
-                    "zoom_to": "Přiblížit na vybraný prvek"
+                    "edit_menu": "Přepnout menu úprav"
                 },
                 "vertex_selected": {
                     "title": "S vybraným uzlem",
@@ -1895,6 +1903,7 @@
                     "split": "Rozdělit řádek na dva ve vybraném uzlu",
                     "move": "Přesunout vybrané funkce",
                     "rotate": "Otočit vybrané funkce",
+                    "orthogonalize": "Pravoúhlé rohy linie nebo plochy",
                     "circularize": "Zakulacení uzavřených čar, nebo ploch",
                     "reflect_long": "Kopírovat vlastnosti podle delší osy",
                     "reflect_short": "Odrážejí prvky na kratší ose",
@@ -2205,6 +2214,7 @@
                     "label": "Odpadkový koš"
                 },
                 "blind": {
+                    "label": "Přístup pro nevidomé",
                     "options": {
                         "limited": "Omezený",
                         "no": "Ne",
@@ -2697,7 +2707,6 @@
                     "label": "Zábradlí"
                 },
                 "hashtags": {
-                    "label": "Navržené hashtagy",
                     "placeholder": "#příklad"
                 },
                 "healthcare": {
@@ -2769,6 +2778,12 @@
                         "stables": "Ano",
                         "undefined": "Ne"
                     }
+                },
+                "iata": {
+                    "label": "IATA Kód letiště "
+                },
+                "icao": {
+                    "label": "ICAO Kód letiště"
                 },
                 "incline": {
                     "label": "Sklon"
@@ -2922,6 +2937,10 @@
                         "roof": "Střecha"
                     }
                 },
+                "lockable": {
+                    "label": "Uzamykatelné",
+                    "terms": "[překládat se synonymy nebo souvisejícími termíny pro „Uzamykatelné“, oddělené čárkami]"
+                },
                 "man_made": {
                     "label": "Typ"
                 },
@@ -3027,7 +3046,6 @@
                     "label": "Síť"
                 },
                 "network_bicycle": {
-                    "label": "Rozsah trasy",
                     "options": {
                         "icn": "Mezinárodní",
                         "lcn": "Místní",
@@ -3037,7 +3055,6 @@
                     "placeholder": "Mezinárodní, Dálková, Regionální, Místní"
                 },
                 "network_foot": {
-                    "label": "Rozsah trasy",
                     "options": {
                         "iwn": "Mezinárodní",
                         "lwn": "Místní",
@@ -3047,7 +3064,6 @@
                     "placeholder": "Mezinárodní, Dálková, Regionální, Místní"
                 },
                 "network_horse": {
-                    "label": "Rozsah trasy",
                     "options": {
                         "ihn": "Mezinárodní",
                         "lhn": "Místní",
@@ -3335,6 +3351,9 @@
                         "yes": "Přijímány"
                     }
                 },
+                "residential": {
+                    "label": "Typ"
+                },
                 "resort": {
                     "label": "Typ"
                 },
@@ -3596,6 +3615,13 @@
                 },
                 "street_cabinet": {
                     "label": "Typ"
+                },
+                "stroller": {
+                    "options": {
+                        "limited": "Omezeně",
+                        "no": "Ne",
+                        "yes": "Ano"
+                    }
                 },
                 "structure": {
                     "label": "Struktura",
@@ -3866,7 +3892,12 @@
                     "label": "Typ"
                 },
                 "wheelchair": {
-                    "label": "Pro vozíčkáře"
+                    "label": "Pro vozíčkáře",
+                    "options": {
+                        "limited": "Omezeně",
+                        "no": "Ne",
+                        "yes": "Ano"
+                    }
                 },
                 "wholesale": {
                     "label": "Velkoobchod"
@@ -3950,13 +3981,6 @@
                 "aerialway/rope_tow": {
                     "name": "Vlek - kotvičkový",
                     "terms": "lyžařský vlek,vlek,kotva,kotvička,lanový vlek"
-                },
-                "aerialway/station": {
-                    "name": "Stanice lanovky"
-                },
-                "aerialway/t-bar": {
-                    "name": "Vlek - dvojmístná kotva",
-                    "terms": "vlek,lyžařský vlek,kotva,dvojmístná kotva,dvoumístná kotva"
                 },
                 "aeroway": {
                     "name": "Přistávací dráha"
@@ -4062,16 +4086,9 @@
                     "name": "Kavárna",
                     "terms": "káva,kafe,kavárna,čaj,čajovna"
                 },
-                "amenity/car_pooling": {
-                    "name": "Autocamping"
-                },
                 "amenity/car_rental": {
                     "name": "Půjčovna aut",
                     "terms": "půjčovna aut,autopůjčovna"
-                },
-                "amenity/car_sharing": {
-                    "name": "Sdílení aut",
-                    "terms": "sdílení aut,car sharing"
                 },
                 "amenity/car_wash": {
                     "name": "Automyčka",
@@ -4171,6 +4188,9 @@
                 },
                 "amenity/fast_food/fish_and_chips": {
                     "name": "Fish & Chips Rychlé občerstvení"
+                },
+                "amenity/fast_food/hot_dog": {
+                    "name": "Párek v rohlíku rychlé občerstvení"
                 },
                 "amenity/fast_food/kebab": {
                     "name": "Kebab rychlé občerstvení"
@@ -4324,6 +4344,9 @@
                 "amenity/police": {
                     "name": "Policie",
                     "terms": "policie,strážníci,stráž,hlídka,městská policie,státní policie,vojenská policie,esenbé,esenbáci,SNB,veřejná bezpečnost,šerif,policista,interpol"
+                },
+                "amenity/post_box": {
+                    "name": "Poštovní schránka"
                 },
                 "amenity/post_office": {
                     "name": "Pošta",
@@ -4480,6 +4503,18 @@
                     "name": "Studio",
                     "terms": "studio,nahrávací studio,rozhlasové studio,rádiové studio,radiové studio,televizní studio,filmové studio,trikové studio,dabingové studio"
                 },
+                "amenity/studio/audio": {
+                    "name": "Nahrávací studio"
+                },
+                "amenity/studio/radio": {
+                    "name": "Radiostanice"
+                },
+                "amenity/studio/television": {
+                    "name": "Televizní stanice"
+                },
+                "amenity/studio/video": {
+                    "name": "Filmové studio"
+                },
                 "amenity/swimming_pool": {
                     "name": "Plavecký bazén"
                 },
@@ -4615,18 +4650,20 @@
                     "name": "Plocha",
                     "terms": "území,oblast,plocha,prostor"
                 },
-                "area/highway": {
-                    "name": "Plocha silnice",
-                    "terms": "plocha silnice,povrch silnice,plocha cesty,povrch cesty"
-                },
                 "attraction": {
                     "name": "Atrakce"
                 },
                 "attraction/amusement_ride": {
                     "name": "Zábavní jízda"
                 },
+                "attraction/animal": {
+                    "name": "ohrazení zvířat"
+                },
                 "attraction/big_wheel": {
                     "name": "Ruské kolo"
+                },
+                "attraction/bumper_car": {
+                    "name": "Autodrom"
                 },
                 "attraction/bungee_jumping": {
                     "name": "Bungee jumping"
@@ -4634,17 +4671,8 @@
                 "attraction/carousel": {
                     "name": "Kolotoč"
                 },
-                "attraction/drop_tower": {
-                    "name": "padací věž"
-                },
                 "attraction/maze": {
                     "name": "Bludiště"
-                },
-                "attraction/pirate_ship": {
-                    "name": "Pirátská loď"
-                },
-                "attraction/river_rafting": {
-                    "name": "Říční rafting"
                 },
                 "attraction/roller_coaster": {
                     "name": "Horská dráha"
@@ -5041,9 +5069,6 @@
                     "name": "Firma na izolace",
                     "terms": "zateplování,zateplení,izolace"
                 },
-                "craft/jeweler": {
-                    "name": "Klenotník"
-                },
                 "craft/joiner": {
                     "name": "Truhlář"
                 },
@@ -5057,9 +5082,6 @@
                 "craft/metal_construction": {
                     "name": "Kovovýroba",
                     "terms": "kovovýroba,výroba z kovu,práce s kovem"
-                },
-                "craft/optician": {
-                    "name": "Optika"
                 },
                 "craft/painter": {
                     "name": "Malíř",
@@ -5080,10 +5102,6 @@
                 "craft/plumber": {
                     "name": "Instalatér",
                     "terms": "instalatér,instalatérství,vodoinstalatér"
-                },
-                "craft/pottery": {
-                    "name": "Hrnčíř",
-                    "terms": "hrnčíř,hrnčířství,keramika"
                 },
                 "craft/rigger": {
                     "name": "Výroba takeláže",
@@ -5294,9 +5312,6 @@
                 },
                 "healthcare/speech_therapist": {
                     "name": "Logoped"
-                },
-                "highway": {
-                    "name": "Pozemní komunikace"
                 },
                 "highway/bridleway": {
                     "name": "Jezdecká stezka",
@@ -5607,8 +5622,14 @@
                 "historic/wreck": {
                     "name": "Vrak lodi"
                 },
+                "indoor/elevator": {
+                    "name": "Vnitřní šachta výtahu"
+                },
                 "indoor/room": {
                     "name": "Pokoj"
+                },
+                "indoor/stairs": {
+                    "name": "Vnitřní schodiště"
                 },
                 "indoor/wall": {
                     "name": "Vnitřní stěna"
@@ -5619,9 +5640,6 @@
                 "junction": {
                     "name": "Křižovatka",
                     "terms": "křižovatka,křížení,odbočka,kruhový objezd"
-                },
-                "landuse": {
-                    "name": "Využití krajiny"
                 },
                 "landuse/allotments": {
                     "name": "Zahrádky",
@@ -5649,6 +5667,9 @@
                     "name": "Oblast kanceláří, podniků",
                     "terms": "kancelář,kancelářský,kancelářská,podnikový,podnik,komerční"
                 },
+                "landuse/construction": {
+                    "name": "Stavební plocha"
+                },
                 "landuse/farm": {
                     "name": "Zemědělská půda (zastaralý tag)"
                 },
@@ -5659,6 +5680,9 @@
                 "landuse/farmyard": {
                     "name": "Statek",
                     "terms": "statek,farma,zemědělství,usedlost,JZD,družstvo"
+                },
+                "landuse/forest": {
+                    "name": "Lesní porost"
                 },
                 "landuse/garages": {
                     "name": "Garáže"
@@ -5769,9 +5793,6 @@
                     "name": "Vinice",
                     "terms": "vinice,vinohrad,hrozny,víno"
                 },
-                "leisure": {
-                    "name": "Volný čas"
-                },
                 "leisure/adult_gaming_centre": {
                     "name": "Herna (hrací automaty)",
                     "terms": "herna,automaty,hazard,hrací automaty,výherní hrací automaty,gambling"
@@ -5805,10 +5826,6 @@
                     "name": "Psí park",
                     "terms": "park pro psy,psí park"
                 },
-                "leisure/firepit": {
-                    "name": "Ohniště",
-                    "terms": "ohniště,oheň,táborák,krb,topeniště"
-                },
                 "leisure/fishing": {
                     "name": "Místo pro rybolov"
                 },
@@ -5823,6 +5840,9 @@
                 "leisure/fitness_station": {
                     "name": "Venkovní tělocvična",
                     "terms": "fitko,fitness,tělocvična"
+                },
+                "leisure/fitness_station/rings": {
+                    "name": "Cvičební kruhy"
                 },
                 "leisure/fitness_station/stairs": {
                     "name": "cvičební schodiště"
@@ -5994,9 +6014,6 @@
                     "name": "Linie",
                     "terms": "čára,cesta,trať,kanál,trasa"
                 },
-                "man_made": {
-                    "name": "Umělý objekt"
-                },
                 "man_made/adit": {
                     "name": "Štola",
                     "terms": "štola,důl,vstup do dolu,důlní,horní,tunel"
@@ -6010,10 +6027,6 @@
                 "man_made/breakwater": {
                     "name": "Vlnolam",
                     "terms": "pobřežní hráz,násep,kameny,molo,zábrana"
-                },
-                "man_made/bridge": {
-                    "name": "Most",
-                    "terms": "most,lávka,viadukt,akvadukt,ekodukt"
                 },
                 "man_made/chimney": {
                     "name": "Komín",
@@ -6124,9 +6137,6 @@
                 "man_made/tower/observation": {
                     "name": "Vyhlídková věž"
                 },
-                "man_made/tunnel": {
-                    "name": "Tunel"
-                },
                 "man_made/wastewater_plant": {
                     "name": "Čistírna odpadních vod",
                     "terms": "čistírna,čistička,čistírna odpadních vod,ČOV,čovka"
@@ -6159,9 +6169,6 @@
                 },
                 "military/trench": {
                     "name": "Vojenský zákop"
-                },
-                "natural": {
-                    "name": "Přírodní objekt"
                 },
                 "natural/bare_rock": {
                     "name": "Plochy jednolité skály",
@@ -6258,9 +6265,6 @@
                     "name": "Vodní plocha",
                     "terms": "voda,vodstvo,vodní"
                 },
-                "natural/water/canal": {
-                    "name": "Vodní kanál"
-                },
                 "natural/water/lake": {
                     "name": "Jezero",
                     "terms": "jezero,jezírko,pleso,oko,tůň"
@@ -6272,19 +6276,9 @@
                     "name": "Přehrada",
                     "terms": "nádrž,vodní nádrž,tank"
                 },
-                "natural/water/river": {
-                    "name": "Řeka"
-                },
-                "natural/water/stream": {
-                    "name": "Potok"
-                },
                 "natural/wetland": {
                     "name": "Mokřad",
                     "terms": "mokřad,mokřina,rašeliniště,slatiniště,slatina,bažina,slanisko,slať,slatě,mangrovy"
-                },
-                "natural/wood": {
-                    "name": "Les",
-                    "terms": "prales,přírodní les,neudržovaný les,nehospodářský les"
                 },
                 "noexit/yes": {
                     "name": "Konec cesty",
@@ -6394,6 +6388,9 @@
                 "office/physician": {
                     "name": "Praktický lékař"
                 },
+                "office/political_party": {
+                    "name": "Kancelář politické strany"
+                },
                 "office/private_investigator": {
                     "name": "Soukromá detektivní kancelář"
                 },
@@ -6403,6 +6400,9 @@
                 "office/research": {
                     "name": "Výzkumný ústav",
                     "terms": "výzkumný ústav,akademie věd,akademie,ústav,vědecký ústav,vědecká instituce,věda,výzkum,vývoj,vědecké pracoviště,výzkumné pracoviště"
+                },
+                "office/surveyor": {
+                    "name": "Zeměměřický úřad"
                 },
                 "office/tax_advisor": {
                     "name": "Kancelář daňového poradce"
@@ -6515,9 +6515,6 @@
                 "point": {
                     "name": "Uzel",
                     "terms": "uzel,bod,vrchol,tečka,puntík"
-                },
-                "power": {
-                    "name": "Energetika"
                 },
                 "power/cable/underground": {
                     "name": "Elektrický kabel pod zemí"
@@ -6668,9 +6665,6 @@
                 },
                 "public_transport/stop_position_trolleybus": {
                     "name": "Místo zastavení trolejbusu"
-                },
-                "railway": {
-                    "name": "Železnice"
                 },
                 "railway/abandoned": {
                     "name": "Opuštěná železnice",
@@ -7066,6 +7060,9 @@
                     "name": "Obchod s bytovými doplňky",
                     "terms": "bytový doplněk,bytové doplňky,bytové dekorace,bytová dekorace,dekorace,dekorativní doplněk,doplněk do bytu,dekorace do bytu"
                 },
+                "shop/jewelry": {
+                    "name": "Klenotnictví"
+                },
                 "shop/kiosk": {
                     "name": "Kiosek"
                 },
@@ -7300,9 +7297,6 @@
                 },
                 "telecom/data_center": {
                     "name": "Datové centrum"
-                },
-                "tourism": {
-                    "name": "Turismus"
                 },
                 "tourism/alpine_hut": {
                     "name": "Horská chata",
@@ -7592,9 +7586,6 @@
                 "type/waterway": {
                     "name": "Vodní tok"
                 },
-                "waterway": {
-                    "name": "Vodní tok"
-                },
                 "waterway/boatyard": {
                     "name": "Loděnice",
                     "terms": "loděnice,dok,suchý dok,doky,suché doky"
@@ -7717,18 +7708,6 @@
                 },
                 "description": "Satelitní a letecké snímky.",
                 "name": "Satelitní snímky Mapbox"
-            },
-            "Maxar-Premium": {
-                "attribution": {
-                    "text": "Terms & Feedback"
-                },
-                "name": "Prémiové snímky Maxar (beta)"
-            },
-            "Maxar-Standard": {
-                "attribution": {
-                    "text": "Podmínky použití & zpětná vazba"
-                },
-                "name": "Standardní snímky Maxar (beta)"
             },
             "OSM_Inspector-Addresses": {
                 "attribution": {
@@ -7871,9 +7850,15 @@
             "basemap.at-overlay": {
                 "attribution": {
                     "text": "basemap.at"
-                }
+                },
+                "description": "Překrytí anotací poskytuje basemap.at."
             },
             "basemap.at-surface": {
+                "attribution": {
+                    "text": "basemap.at"
+                }
+            },
+            "basemap.at-terrain": {
                 "attribution": {
                     "text": "basemap.at"
                 }
@@ -7896,6 +7881,11 @@
                     "text": "GSI Japonsko"
                 },
                 "description": "Ortofoto GSI Japonsko. většinou lepší než Bing, ale trochu starší."
+            },
+            "gsi.go.jp_airphoto": {
+                "attribution": {
+                    "text": "GSI Japan"
+                }
             },
             "gsi.go.jp_std_map": {
                 "attribution": {
@@ -8026,226 +8016,6 @@
             }
         },
         "community": {
-            "bw-facebook": {
-                "description": "Stránka OpenStreetMap v Botswaně"
-            },
-            "cape-coast-youthmappers": {
-                "name": "YouthMappers univerzity v Cape Coast",
-                "description": "Sledujte nás na Twitteru: {url}"
-            },
-            "osm-gh-facebook": {
-                "name": "OpenStreetMap Ghana na Facebooku",
-                "description": "Facebooková skupina pro lidi zajímající se o OpenStreetMap."
-            },
-            "osm-gh-twitter": {
-                "name": "OpenStreetMap Ghana na Twitteru",
-                "description": "Sledujte nás na Twitteru: {url}"
-            },
-            "ym-Dedan-Kimathi-University-of-Technology": {
-                "extendedDescription": "GDEV je skupina nadšené skupiny GIS na DeKUT, jejímž cílem je pomáhat studentům sdílet, zapojovat se a učit se jeden od druhého v geoprostorových věcech"
-            },
-            "ym-Karatina-University": {
-                "extendedDescription": "Tato kapitola si klade za cíl shromáždit všechny nadšence GIS. Patří mezi ně odborníci na životní prostředí, odborníci na zvěř a rostlinstvo, vodní a turističtí průvodci. Jejím hlavním cílem je poskytnout platformu, kde se studenti mohou učit jeden od druhého, a přitom porozumět tomu, jak integrovat dovednosti GIS do svých různých profesních cest, a poskytnout řešení různých environmentálních problémů."
-            },
-            "osm-mg-facebook": {
-                "name": "Facebooková skupina OpenStreetMap Madagaskar"
-            },
-            "ym-Universidade-Eduardo-Mondlane": {
-                "name": "Mládežnická komunita YouthMappers v Mozambiku"
-            },
-            "ym-Ahmadu-Bello-University": {
-                "extendedDescription": "Jsme skupina datových humanitárních mapovačů, kteří se věnují poskytování humanitárních služeb při reakci na katastrofy a při zmírňování následků. Jsme rádi, že můžeme přispět svými odbornostmi a znalostmi prostřednictvím mapování a pomoci šířit #OpenEvangelism prostřednictvím školení a spolupráce."
-            },
-            "ym-University-of-Nigeria-Enugu-Campus": {
-                "description": "Oddělení YouthMappers na University of Nigeria, Enugu Campus"
-            },
-            "ym-University-of-Pretoria": {
-                "description": "Oddělení YouthMappers na University of Pretoria"
-            },
-            "ym-Institute-of-Rural-Development-Planning": {
-                "description": "Oddělení YouthMappers v Institutu pro plánování rozvoje venkova"
-            },
-            "ym-University-of-Dar-es-Salaam": {
-                "description": "Sekce YouthMappers na University of Dar es Salaam"
-            },
-            "ym-Kumi-University": {
-                "description": "Sekce YouthMappers na Kumi University"
-            },
-            "ym-University-of-Zimbabwe": {
-                "name": "UZMappers"
-            },
-            "OSM-BGD-facebook": {
-                "name": "OpenStreetMap Bangladéš",
-                "description": "Vylepšete OpenStreetMap v Bangladéši",
-                "extendedDescription": "Mapujete v Bangladéši? Máte otázky, chcete se zde spojit s komunitou? Připojte se k nám na adrese {url}. Všichni jsou vítáni!"
-            },
-            "ym-Dhaka-University": {
-                "extendedDescription": "Je velkým privilegiem pro studenty University of Dhaka mapovat pro humanitární účely. Naše sekce dává studentům příležitost pomáhat lidem a používat mapování pro humanitární účely."
-            },
-            "OSM-India-facebook": {
-                "description": "Vylepšete OpenStreetMap v Indii",
-                "extendedDescription": "Mapujete v Indii? Máte otázky, chcete se zde spojit s komunitou? Připojte se k nám na adrese {url}. Všichni jsou vítáni!"
-            },
-            "osm-india-forum": {
-                "name": "OpenStreetMap India forum"
-            },
-            "osm-india-github": {
-                "name": "OpenStreetMap India GitHub"
-            },
-            "osm-india-telegram": {
-                "name": "OpenStreetMap India Telegram"
-            },
-            "OSM-india-twitter": {
-                "name": "Twitter OpenStreetMap Indie",
-                "description": "Zrovna jsme vytweetli: {url}"
-            },
-            "osm-india-website": {
-                "name": "OpenStreetMap India"
-            },
-            "osm-india-wiki": {
-                "name": "OpenStreetMap Wikiproject India",
-                "description": "Vše, co potřebujete vědět o mapování v Indii: {url}"
-            },
-            "osm-india-youtube": {
-                "name": "OpenStreetMap India Youtube"
-            },
-            "OSM-IDN-facebook": {
-                "name": "OpenStreetMap Indonésie",
-                "description": "Vylepšete OpenStreetMap v Indonésii",
-                "extendedDescription": "Mapujete v Indonésii? Máte otázky, chcete se zde spojit s komunitou? Připojte se k nám na adrese {Url}. Všichni jsou vítáni!"
-            },
-            "ym-University-Muhammadiyah-Surakarta": {
-                "extendedDescription": "SpaceTime je komunitní mapování na Geografické fakultě univerzity Muhammadiyah v Surakartě. SpaceTime založili Bruce Maldy Pratama, Mukhlis Akbar a Irfandi Fauzi. Jsou aktivními studenty na Geografické fakultě Muhammadijáhu Surakarty."
-            },
-            "osm-iran-forum": {
-                "description": "OpenStreetMap Iran web forum"
-            },
-            "osm-iran-telegram": {
-                "name": "OpenStreetMap Iran Telegram"
-            },
-            "OSM-japan-facebook": {
-                "name": "Japonská komunita OpenStreetMap",
-                "description": "Mapovači a uživatelé OpenStreetMap v Japonsku"
-            },
-            "OSM-japan-twitter": {
-                "name": "Twitter OpenStreetMap Japonsko",
-                "description": "Hashtag na Twitteru: {url}"
-            },
-            "OSM-japan-website": {
-                "name": "OpenStreetMap Japonsko",
-                "description": "Mapovači a uživatelé OpenStreetMap v Japonsku"
-            },
-            "OSM-MY-facebook": {
-                "name": "OpenStreetMap Malajsie na Facebooku",
-                "description": "Pro chatování o čemkoliv ohledně OpenStreetMap!"
-            },
-            "OSM-MY-forum": {
-                "name": "Malajské fórum OpenStreetMap",
-                "description": "Oficiální malajské fórum OpenStreetMap"
-            },
-            "OSM-MY-matrix": {
-                "description": "Všichni mapovači jsou vítáni! Zaregistrujte se na {signupUrl}"
-            },
-            "OSM-MNG-facebook": {
-                "name": "OpenStreetMap Mongolsko",
-                "description": "Vylepšete OpenStreetMap v Mongolsku",
-                "extendedDescription": "Mapujete v Mongolsku? Máte otázky, chcete se zde spojit s komunitou? Připojte se k nám na adrese {Url}. Všichni jsou vítáni!"
-            },
-            "OSM-MMR-facebook": {
-                "name": "OpenStreetMap Myanmar",
-                "description": "Vylepšete OpenStreetMap v Myanmaru",
-                "extendedDescription": "Mapujete v Myanmaru? Máte otázky, chcete se zde spojit s komunitou? Připojte se k nám na adrese {Url}. Všichni jsou vítáni!"
-            },
-            "OSM-Nepal-facebook": {
-                "name": "OpenStreetMap Nepál",
-                "description": "Vylepšete OpenStreetMap v Nepálu",
-                "extendedDescription": "Mapujete v Nepálu? Máte otázky, chcete se zde spojit s komunitou? Připojte se k nám na adrese {Url}. Všichni jsou vítáni!"
-            },
-            "OSM-Asia-mailinglist": {
-                "name": "OpenStreetMap Asia Mailinglist"
-            },
-            "OSM-sri-lanka-facebook": {
-                "name": "OpenStreetMap Sri Lanka"
-            },
-            "OSM-TW-facebook": {
-                "name": "Tchajwanská komunita OpenStreetMap"
-            },
-            "OSM-TH-facebook": {
-                "description": "Skupina Facebook pro OpenStreetMappers v Thajsku"
-            },
-            "al-forum": {
-                "name": "Albánské fórum OSM",
-                "description": "Albánské fórum OpenStreetMap"
-            },
-            "at-twitter": {
-                "name": "Twitter OpenStreetMap Rakousko",
-                "description": "OpenStreetMap Rakousko na Twitteru: {url}"
-            },
-            "osm-at": {
-                "name": "OpenStreetMap Rakousko"
-            },
-            "byosm": {
-                "name": "OpenStreetMap Bělorusko"
-            },
-            "be-facebook": {
-                "description": "Mapovači a uživatelé OpenStreetMap v Belgii"
-            },
-            "hr-facebook": {
-                "name": "OpenStreetMap Chorvatsko Facebook skupina",
-                "description": "OpenStreetMap Chorvatsko Facebook skupina"
-            },
-            "czech-community": {
-                "name": "Česká OSM komunita",
-                "description": "Mapový portál, webové stránky a kontakty na členy OSM v ČR"
-            },
-            "osmcz-facebook": {
-                "name": "OpenStreetMap CZ na Facebooku"
-            },
-            "osmcz-twitter": {
-                "name": "Český twitter @osmcz",
-                "description": "Sledujte českou komunitu na Twitteru - včetně přeloženého WeeklyOSM!"
-            },
-            "talk-cz-mailinglist": {
-                "name": "Český mailing list (talk-cz)",
-                "description": "Talk-cz je hlavní komunikační kanál české komunity"
-            },
-            "dk-forum": {
-                "name": "Webové fórum OpenStreetMap Dánsko"
-            },
-            "fr-twitter": {
-                "name": "OpenStreetMap Francie na Twitteru",
-                "description": "OpenStreetMap Francie na Twitteru: {url}"
-            },
-            "de-berlin-meetup": {
-                "description": "Mapovači a uživatelé OpenStreetMap v oblasti Berlína"
-            },
-            "de-berlin-twitter": {
-                "description": "Sledujte nás na Twitteru: {url}"
-            },
-            "hu-facebook": {
-                "description": "Mapovači a uživatelé OpenStreetMap v Maďarsku"
-            },
-            "it-facebook": {
-                "name": "Facebook OpenStreetMap Itálie"
-            },
-            "it-twitter": {
-                "description": "Sledujte nás na Twitteru na {url}"
-            },
-            "OSM-Rome-meetup": {
-                "description": "Vylepšete OpenStreetMap na území Říma"
-            },
-            "osm-se": {
-                "name": "OpenStreetMap.se"
-            },
-            "se-twitter": {
-                "description": "Sledujte nás na Twitteru: {url}"
-            },
-            "ym-University-of-Exeter": {
-                "extendedDescription": "Jsme tým nadšených geografů s komplexní znalostí GIS. Jsme nadšeni podporou britské společnosti Červeného kříže různými snahami o humanitární pomoc. Jsme také důležitými učiteli o významu mapování vzdáleně zaznamenaných dat ao tom, jak to pomáhá v terénu. Naše mapathony mají tematické akademické zaměření, které upozorňují na různý výzkum GIS v našem geografickém oddělení, a zároveň fungují jako události zvyšující povědomí o zaměstnatelnosti, které používáme k pozvání řečníků, aby hovořili o své kariéře v GIS / Britském Červeném kříži."
-            },
-            "OSM-Vancouver-meetup": {
-                "name": "OpenStreetMap Vancouver"
-            },
             "Bay-Area-OpenStreetMappers": {
                 "name": "Bay Area OpenStreetMappers",
                 "description": "Vylepšete OpenStreetMap v Bay Area"
@@ -8259,6 +8029,9 @@
             "GeoPhilly": {
                 "name": "GeoPhilly"
             },
+            "LATAM-Twitter": {
+                "description": "Sledujte nás na Twitteru na {url}"
+            },
             "Mapping-DC-meetup": {
                 "name": "Mapování DC",
                 "description": "Vylepšete OpenStreetMap na území DC"
@@ -8266,12 +8039,29 @@
             "MaptimeHRVA-twitter": {
                 "description": "Sledujte nás na Twitteru na {url}"
             },
-            "OpenCleveland-meetup": {
-                "description": "Vylepšete OpenStreetMap na území Clevelandu"
+            "OSM-AR-twitter": {
+                "description": "Sledujte nás na Twitteru na {url}"
+            },
+            "OSM-Asia-mailinglist": {
+                "name": "OpenStreetMap Asia Mailinglist"
+            },
+            "OSM-BGD-facebook": {
+                "name": "OpenStreetMap Bangladéš",
+                "description": "Vylepšete OpenStreetMap v Bangladéši",
+                "extendedDescription": "Mapujete v Bangladéši? Máte otázky, chcete se zde spojit s komunitou? Připojte se k nám na adrese {url}. Všichni jsou vítáni!"
             },
             "OSM-Boston": {
                 "name": "OpenStreetMap Boston",
                 "description": "Mapovači a uživatelé OpenStreetMap na území Bostonu"
+            },
+            "OSM-CL-twitter": {
+                "description": "Sledujte nás na Twitteru na {url}"
+            },
+            "OSM-CO": {
+                "name": "OpenStreetMap Kolumbie"
+            },
+            "OSM-CO-twitter": {
+                "description": "Sledujte nás na Twitteru na {url}"
             },
             "OSM-Chattanooga": {
                 "name": "OSM Chattanooga",
@@ -8281,15 +8071,78 @@
                 "name": "OpenStreetMap Colorado",
                 "description": "Mapovači a uživatelé OpenStreetMap ve státě Colorado, USA"
             },
+            "OSM-Facebook": {
+                "name": "OpenStreetMap na Facebooku"
+            },
+            "OSM-IDN-facebook": {
+                "name": "OpenStreetMap Indonésie",
+                "description": "Vylepšete OpenStreetMap v Indonésii",
+                "extendedDescription": "Mapujete v Indonésii? Máte otázky, chcete se zde spojit s komunitou? Připojte se k nám na adrese {Url}. Všichni jsou vítáni!"
+            },
+            "OSM-IRC": {
+                "name": "OpenStreetMap IRC"
+            },
+            "OSM-India-facebook": {
+                "description": "Vylepšete OpenStreetMap v Indii",
+                "extendedDescription": "Mapujete v Indii? Máte otázky, chcete se zde spojit s komunitou? Připojte se k nám na adrese {url}. Všichni jsou vítáni!"
+            },
+            "OSM-MMR-facebook": {
+                "name": "OpenStreetMap Myanmar",
+                "description": "Vylepšete OpenStreetMap v Myanmaru",
+                "extendedDescription": "Mapujete v Myanmaru? Máte otázky, chcete se zde spojit s komunitou? Připojte se k nám na adrese {Url}. Všichni jsou vítáni!"
+            },
+            "OSM-MNG-facebook": {
+                "name": "OpenStreetMap Mongolsko",
+                "description": "Vylepšete OpenStreetMap v Mongolsku",
+                "extendedDescription": "Mapujete v Mongolsku? Máte otázky, chcete se zde spojit s komunitou? Připojte se k nám na adrese {Url}. Všichni jsou vítáni!"
+            },
+            "OSM-MY-facebook": {
+                "name": "OpenStreetMap Malajsie na Facebooku",
+                "description": "Pro chatování o čemkoliv ohledně OpenStreetMap!"
+            },
+            "OSM-MY-forum": {
+                "name": "Malajské fórum OpenStreetMap",
+                "description": "Oficiální malajské fórum OpenStreetMap"
+            },
+            "OSM-MY-matrix": {
+                "description": "Všichni mapovači jsou vítáni! Zaregistrujte se na {signupUrl}"
+            },
+            "OSM-Nepal-facebook": {
+                "name": "OpenStreetMap Nepál",
+                "description": "Vylepšete OpenStreetMap v Nepálu",
+                "extendedDescription": "Mapujete v Nepálu? Máte otázky, chcete se zde spojit s komunitou? Připojte se k nám na adrese {Url}. Všichni jsou vítáni!"
+            },
+            "OSM-PE": {
+                "name": "OpenStreetMap Peru"
+            },
+            "OSM-PE-twitter": {
+                "description": "Sledujte nás na Twitteru na {url}"
+            },
             "OSM-Portland": {
                 "name": "OpenStreetMap Portland",
                 "description": "Mapovači a uživatelé OpenStreetMap na území Portlandu"
             },
+            "OSM-Reddit": {
+                "name": "OpenStreetMap na Redditu",
+                "description": "/r/openstreetmap/ je vynikající místo, kde lze zjistit více o OpenStreetMap. Zeptejte se nás na cokoliv!"
+            },
+            "OSM-Rome-meetup": {
+                "description": "Vylepšete OpenStreetMap na území Říma"
+            },
             "OSM-Seattle": {
                 "description": "Mapovači a uživatelé OpenStreetMap na území Seattlu"
             },
+            "OSM-TH-facebook": {
+                "description": "Skupina Facebook pro OpenStreetMappers v Thajsku"
+            },
+            "OSM-TW-facebook": {
+                "name": "Tchajwanská komunita OpenStreetMap"
+            },
             "OSM-Tampa-Bay": {
                 "description": "Mapovači a uživatelé OpenStreetMap na území Tampa Bay"
+            },
+            "OSM-Twitter": {
+                "description": "Sledujte nás na Twitteru na {url}"
             },
             "OSM-US-Slack": {
                 "name": "OpenStreetMap US Slack",
@@ -8299,15 +8152,177 @@
                 "name": "OpenStreetMap Utah",
                 "description": "Mapovači a uživatelé OpenStreetMap na území Salt Lake City"
             },
+            "OSM-Vancouver-meetup": {
+                "name": "OpenStreetMap Vancouver"
+            },
             "OSM-Wyoming": {
                 "name": "OpenStreetMap Wyoming",
                 "description": "Mapovači a uživatelé OpenStreetMap ve státě Wyoming"
             },
+            "OSM-br-twitter": {
+                "description": "Sledujte nás na Twitteru na {url}"
+            },
+            "OSM-india-twitter": {
+                "name": "Twitter OpenStreetMap Indie",
+                "description": "Zrovna jsme vytweetli: {url}"
+            },
+            "OSM-japan-facebook": {
+                "name": "Japonská komunita OpenStreetMap",
+                "description": "Mapovači a uživatelé OpenStreetMap v Japonsku"
+            },
+            "OSM-japan-twitter": {
+                "name": "Twitter OpenStreetMap Japonsko",
+                "description": "Hashtag na Twitteru: {url}"
+            },
+            "OSM-japan-website": {
+                "name": "OpenStreetMap Japonsko",
+                "description": "Mapovači a uživatelé OpenStreetMap v Japonsku"
+            },
+            "OSM-sri-lanka-facebook": {
+                "name": "OpenStreetMap Sri Lanka"
+            },
+            "OpenCleveland-meetup": {
+                "description": "Vylepšete OpenStreetMap na území Clevelandu"
+            },
             "PHXGeo-twitter": {
                 "description": "Sledujte nás na Twitteru na {url}"
             },
+            "RS-telegram": {
+                "extendedDescription": "Připojte se ke komunitě, abyste se dozvěděli více o OpenStreetMap, klást otázky nebo se účastnit našich setkání. Každý je vítán!"
+            },
+            "al-forum": {
+                "name": "Albánské fórum OSM",
+                "description": "Albánské fórum OpenStreetMap"
+            },
+            "at-twitter": {
+                "name": "Twitter OpenStreetMap Rakousko",
+                "description": "OpenStreetMap Rakousko na Twitteru: {url}"
+            },
+            "be-facebook": {
+                "description": "Mapovači a uživatelé OpenStreetMap v Belgii"
+            },
+            "bw-facebook": {
+                "description": "Stránka OpenStreetMap v Botswaně"
+            },
+            "byosm": {
+                "name": "OpenStreetMap Bělorusko"
+            },
+            "cape-coast-youthmappers": {
+                "name": "YouthMappers univerzity v Cape Coast",
+                "description": "Sledujte nás na Twitteru: {url}"
+            },
+            "czech-community": {
+                "name": "Česká OSM komunita",
+                "description": "Mapový portál, webové stránky a kontakty na členy OSM v ČR"
+            },
+            "de-berlin-meetup": {
+                "description": "Mapovači a uživatelé OpenStreetMap v oblasti Berlína"
+            },
+            "de-berlin-twitter": {
+                "description": "Sledujte nás na Twitteru: {url}"
+            },
+            "dk-forum": {
+                "name": "Webové fórum OpenStreetMap Dánsko"
+            },
+            "fr-twitter": {
+                "name": "OpenStreetMap Francie na Twitteru",
+                "description": "OpenStreetMap Francie na Twitteru: {url}"
+            },
+            "hr-facebook": {
+                "name": "OpenStreetMap Chorvatsko Facebook skupina",
+                "description": "OpenStreetMap Chorvatsko Facebook skupina"
+            },
+            "hu-facebook": {
+                "description": "Mapovači a uživatelé OpenStreetMap v Maďarsku"
+            },
+            "it-facebook": {
+                "name": "Facebook OpenStreetMap Itálie"
+            },
+            "it-twitter": {
+                "description": "Sledujte nás na Twitteru na {url}"
+            },
+            "osm-at": {
+                "name": "OpenStreetMap Rakousko"
+            },
+            "osm-gh-facebook": {
+                "name": "OpenStreetMap Ghana na Facebooku",
+                "description": "Facebooková skupina pro lidi zajímající se o OpenStreetMap."
+            },
+            "osm-gh-twitter": {
+                "name": "OpenStreetMap Ghana na Twitteru",
+                "description": "Sledujte nás na Twitteru: {url}"
+            },
+            "osm-india-forum": {
+                "name": "OpenStreetMap India forum"
+            },
+            "osm-india-github": {
+                "name": "OpenStreetMap India GitHub"
+            },
+            "osm-india-telegram": {
+                "name": "OpenStreetMap India Telegram"
+            },
+            "osm-india-website": {
+                "name": "OpenStreetMap India"
+            },
+            "osm-india-wiki": {
+                "name": "OpenStreetMap Wikiproject India",
+                "description": "Vše, co potřebujete vědět o mapování v Indii: {url}"
+            },
+            "osm-india-youtube": {
+                "name": "OpenStreetMap India Youtube"
+            },
+            "osm-iran-forum": {
+                "description": "OpenStreetMap Iran web forum"
+            },
+            "osm-iran-telegram": {
+                "name": "OpenStreetMap Iran Telegram"
+            },
+            "osm-latam": {
+                "name": "OpenStreetMap Latam"
+            },
+            "osm-mg-facebook": {
+                "name": "Facebooková skupina OpenStreetMap Madagaskar"
+            },
+            "osm-se": {
+                "name": "OpenStreetMap.se"
+            },
+            "osmcz-facebook": {
+                "name": "OpenStreetMap CZ na Facebooku"
+            },
+            "osmcz-twitter": {
+                "name": "Český twitter @osmcz",
+                "description": "Sledujte českou komunitu na Twitteru - včetně přeloženého WeeklyOSM!"
+            },
+            "se-twitter": {
+                "description": "Sledujte nás na Twitteru: {url}"
+            },
+            "talk-cz-mailinglist": {
+                "name": "Český mailing list (talk-cz)",
+                "description": "Talk-cz je hlavní komunikační kanál české komunity"
+            },
+            "uk-twitter": {
+                "description": "OpenStreetMap UK na Twitteru: {url}"
+            },
+            "ym-Ahmadu-Bello-University": {
+                "extendedDescription": "Jsme skupina datových humanitárních mapovačů, kteří se věnují poskytování humanitárních služeb při reakci na katastrofy a při zmírňování následků. Jsme rádi, že můžeme přispět svými odbornostmi a znalostmi prostřednictvím mapování a pomoci šířit #OpenEvangelism prostřednictvím školení a spolupráce."
+            },
             "ym-California-University-of-Pennsylvania": {
                 "name": "CalU PA GIS Club"
+            },
+            "ym-Dedan-Kimathi-University-of-Technology": {
+                "extendedDescription": "GDEV je skupina nadšené skupiny GIS na DeKUT, jejímž cílem je pomáhat studentům sdílet, zapojovat se a učit se jeden od druhého v geoprostorových věcech"
+            },
+            "ym-Dhaka-University": {
+                "extendedDescription": "Je velkým privilegiem pro studenty University of Dhaka mapovat pro humanitární účely. Naše sekce dává studentům příležitost pomáhat lidem a používat mapování pro humanitární účely."
+            },
+            "ym-Institute-of-Rural-Development-Planning": {
+                "description": "Oddělení YouthMappers v Institutu pro plánování rozvoje venkova"
+            },
+            "ym-Karatina-University": {
+                "extendedDescription": "Tato kapitola si klade za cíl shromáždit všechny nadšence GIS. Patří mezi ně odborníci na životní prostředí, odborníci na zvěř a rostlinstvo, vodní a turističtí průvodci. Jejím hlavním cílem je poskytnout platformu, kde se studenti mohou učit jeden od druhého, a přitom porozumět tomu, jak integrovat dovednosti GIS do svých různých profesních cest, a poskytnout řešení různých environmentálních problémů."
+            },
+            "ym-Kumi-University": {
+                "description": "Sekce YouthMappers na Kumi University"
             },
             "ym-Miami-University": {
                 "extendedDescription": "Cílem GPS na Miami University je vytvořit úzce propojenou komunitu plánovačů a geografů, kteří se chtějí bavit, dozvědět se více o kariéře a vysokoškolském vzdělávání ve svém oboru, síti a spolupracovat s profesionály se skutečnými  zkušenostmi."
@@ -8315,51 +8330,29 @@
             "ym-State-University-of-New-York-Geneseo": {
                 "description": "Oddělení YouthMappers na Státní univerzitě v New Yorku Geneseo"
             },
+            "ym-Universidade-Eduardo-Mondlane": {
+                "name": "Mládežnická komunita YouthMappers v Mozambiku"
+            },
+            "ym-University-Muhammadiyah-Surakarta": {
+                "extendedDescription": "SpaceTime je komunitní mapování na Geografické fakultě univerzity Muhammadiyah v Surakartě. SpaceTime založili Bruce Maldy Pratama, Mukhlis Akbar a Irfandi Fauzi. Jsou aktivními studenty na Geografické fakultě Muhammadijáhu Surakarty."
+            },
+            "ym-University-of-Dar-es-Salaam": {
+                "description": "Sekce YouthMappers na University of Dar es Salaam"
+            },
+            "ym-University-of-Exeter": {
+                "extendedDescription": "Jsme tým nadšených geografů s komplexní znalostí GIS. Jsme nadšeni podporou britské společnosti Červeného kříže různými snahami o humanitární pomoc. Jsme také důležitými učiteli o významu mapování vzdáleně zaznamenaných dat ao tom, jak to pomáhá v terénu. Naše mapathony mají tematické akademické zaměření, které upozorňují na různý výzkum GIS v našem geografickém oddělení, a zároveň fungují jako události zvyšující povědomí o zaměstnatelnosti, které používáme k pozvání řečníků, aby hovořili o své kariéře v GIS / Britském Červeném kříži."
+            },
+            "ym-University-of-Nigeria-Enugu-Campus": {
+                "description": "Oddělení YouthMappers na University of Nigeria, Enugu Campus"
+            },
             "ym-University-of-Northern-Colorado": {
                 "name": "UNCO Geography and GIS Club"
             },
-            "OSM-AR-twitter": {
-                "description": "Sledujte nás na Twitteru na {url}"
+            "ym-University-of-Pretoria": {
+                "description": "Oddělení YouthMappers na University of Pretoria"
             },
-            "OSM-br-twitter": {
-                "description": "Sledujte nás na Twitteru na {url}"
-            },
-            "RS-telegram": {
-                "extendedDescription": "Připojte se ke komunitě, abyste se dozvěděli více o OpenStreetMap, klást otázky nebo se účastnit našich setkání. Každý je vítán!"
-            },
-            "OSM-CL-twitter": {
-                "description": "Sledujte nás na Twitteru na {url}"
-            },
-            "OSM-CO-twitter": {
-                "description": "Sledujte nás na Twitteru na {url}"
-            },
-            "OSM-CO": {
-                "name": "OpenStreetMap Kolumbie"
-            },
-            "OSM-PE-twitter": {
-                "description": "Sledujte nás na Twitteru na {url}"
-            },
-            "OSM-PE": {
-                "name": "OpenStreetMap Peru"
-            },
-            "LATAM-Twitter": {
-                "description": "Sledujte nás na Twitteru na {url}"
-            },
-            "osm-latam": {
-                "name": "OpenStreetMap Latam"
-            },
-            "OSM-Facebook": {
-                "name": "OpenStreetMap na Facebooku"
-            },
-            "OSM-IRC": {
-                "name": "OpenStreetMap IRC"
-            },
-            "OSM-Reddit": {
-                "name": "OpenStreetMap na Redditu",
-                "description": "/r/openstreetmap/ je vynikající místo, kde lze zjistit více o OpenStreetMap. Zeptejte se nás na cokoliv!"
-            },
-            "OSM-Twitter": {
-                "description": "Sledujte nás na Twitteru na {url}"
+            "ym-University-of-Zimbabwe": {
+                "name": "UZMappers"
             }
         }
     }

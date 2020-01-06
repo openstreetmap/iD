@@ -5,6 +5,7 @@
         "inscription"
     ],
     "moreFields": [
+        "{historic}",
         "material"
     ],
     "geometry": [

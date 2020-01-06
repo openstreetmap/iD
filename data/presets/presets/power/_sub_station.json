@@ -7,8 +7,8 @@
         "ref"
     ],
     "geometry": [
-        "point",
-        "area"
+        "area",
+        "point"
     ],
     "tags": {
         "power": "sub_station"

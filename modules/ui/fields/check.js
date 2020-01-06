@@ -150,6 +150,10 @@ export function uiFieldCheck(field, context) {
                         actionReverse(_entityID),
                         t('operations.reverse.annotation')
                     );
+                    
+                    // must manually revalidate since no 'change' event was called
+                    context.validator().validate();
+
                     d3_select(this)
                         .call(reverserSetText);
                 });

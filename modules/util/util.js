@@ -97,7 +97,6 @@ export function utilEntityAndDeepMemberIDs(ids, graph) {
     }
 }
 
-
 // returns an selector to select entity ids for:
 //  - deep descendant entityIDs for any of those entities that are relations
 export function utilDeepMemberSelector(ids, graph, skipMultipolgonMembers) {
@@ -417,4 +416,10 @@ export function utilHashcode(str) {
         hash = hash & hash; // Convert to 32bit integer
     }
     return hash;
+}
+
+// returns version of `str` with all runs of special characters replaced by `_`;
+// suitable for HTML ids, classes, selectors, etc.
+export function utilSafeClassName(str) {
+    return str.toLowerCase().replace(/[^a-z0-9]+/g, '_');
 }

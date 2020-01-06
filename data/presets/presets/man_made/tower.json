@@ -7,7 +7,8 @@
         "building_area"
     ],
     "moreFields": [
-        "architect"
+        "architect",
+        "gnis/feature_id"
     ],
     "geometry": [
         "point",

@@ -7,6 +7,9 @@
         "pump",
         "access_simple"
     ],
+    "moreFields": [
+        "gnis/feature_id"
+    ],
     "geometry": [
         "point",
         "area"

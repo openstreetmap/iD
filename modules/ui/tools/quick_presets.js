@@ -6,6 +6,7 @@ import { event as d3_event, select as d3_select, selectAll as d3_selectAll } fro
 import { modeAddArea, modeAddLine, modeAddPoint, modeBrowse } from '../../modes';
 import { t, textDirection } from '../../util/locale';
 import { tooltip } from '../../util/tooltip';
+import { utilSafeClassName } from '../../util/util';
 import { uiPresetIcon } from '../preset_icon';
 import { uiTooltipHtml } from '../tooltipHtml';
 
@@ -63,7 +64,7 @@ export function uiToolQuickPresets(context) {
 
         var modes = items.map(function(d) {
             var presetName = d.preset.name().split(' – ')[0];
-            var markerClass = 'add-preset add-preset-' + presetName.replace(/\s+/g, '_')
+            var markerClass = 'add-preset add-preset-' + d.preset.safeid
                 + ' add-' + d.source; // replace spaces with underscores to avoid css interpretation
             if (d.preset.isFallback()) {
                 markerClass += ' add-generic-preset';
@@ -125,7 +126,7 @@ export function uiToolQuickPresets(context) {
                 return d.button + ' add-button bar-button';
             })
             .attr('id', function(d) {
-                return d.button.replace(/ /g, '-');
+                return utilSafeClassName(d.button);
             })
             .on('click.mode-buttons', function(d) {
                 if (d3_select(this).classed('disabled')) return;

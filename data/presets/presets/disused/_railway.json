@@ -1,0 +1,17 @@
+{
+    "fields": [
+        "disused/railway"
+    ],
+    "geometry": [
+        "point",
+        "vertex",
+        "line",
+        "area"
+    ],
+    "tags": {
+        "disused:railway": "*"
+    },
+    "matchScore": 0.05,
+    "searchable": false,
+    "name": "Disused Railway Feature"
+}

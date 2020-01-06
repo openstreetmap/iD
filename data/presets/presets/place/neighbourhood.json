@@ -5,6 +5,7 @@
         "population"
     ],
     "moreFields": [
+        "gnis/feature_id",
         "website"
     ],
     "geometry": [

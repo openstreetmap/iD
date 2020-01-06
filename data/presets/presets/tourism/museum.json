@@ -15,6 +15,7 @@
         "email",
         "fax",
         "fee",
+        "gnis/feature_id",
         "height_building",
         "internet_access",
         "internet_access/fee",

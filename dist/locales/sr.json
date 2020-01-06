@@ -88,18 +88,7 @@
                 "connected_to_hidden": "Ово не може бити кружно, јер је повезано са сакривеним обележјем."
             },
             "orthogonalize": {
-                "title": "Нормализуј",
-                "description": {
-                    "line": "Нормализуј углове на овој путањи.",
-                    "area": "Нормализуј углове на овој области."
-                },
-                "annotation": {
-                    "line": "Нормализовани углови путање.",
-                    "area": "Нормализовани углови области."
-                },
-                "not_squarish": "Ово не може бити нормализовано, јер није квадратасто.",
-                "too_large": "Ово не може бити нормализовано, јер није довољно видљиво.",
-                "connected_to_hidden": "Ово не може бити нормализовано, јер је повезано са сакривеним обележјем."
+                "title": "Нормализуј"
             },
             "straighten": {
                 "title": "Исправи",
@@ -305,12 +294,6 @@
         "feature_info": {
             "hidden_warning": "{count} сакривених обележја",
             "hidden_details": "Ова обележја су тренутно сакривена: {details}"
-        },
-        "status": {
-            "error": "Није могуће повезати се АПИ-јем.",
-            "offline": "АПИ је ван мреже. Молимо вас покушајте уређивање касније.",
-            "readonly": "АПИ је само за читање. Мораћете да сачекате да бисте сачували измене.",
-            "rateLimit": "АПИ ограничава анонимно повезивање. Можете то исправити тако што ћете се пријавити."
         },
         "commit": {
             "title": "Учитај на Опенстритмап",
@@ -757,9 +740,7 @@
                 },
                 "display_options": {
                     "title": "Опције приказа",
-                    "background": "Прикажи опције позадине",
                     "background_switch": "Пребаци се на претходну позадину",
-                    "map_data": "Прикажи опције података мапе",
                     "fullscreen": "Прикажи преко целог екрана",
                     "wireframe": "Укључи / искључи попуњавање области",
                     "minimap": "Укључи / искључи мини-мапу"
@@ -771,7 +752,6 @@
                     "lasso": "Исцртај подручје избора обележја"
                 },
                 "with_selected": {
-                    "title": "Са изабраним обележјем",
                     "edit_menu": "Укључи / искључи мени операција"
                 },
                 "vertex_selected": {
@@ -1747,7 +1727,6 @@
                     "label": "Мрежа"
                 },
                 "network_bicycle": {
-                    "label": "Врста стазе за бицикле",
                     "options": {
                         "icn": "Међународна",
                         "lcn": "Локална",
@@ -1757,7 +1736,6 @@
                     "placeholder": "Локална, регионална, национална, међународна"
                 },
                 "network_foot": {
-                    "label": "Врста пешачке стазе",
                     "options": {
                         "iwn": "Међународна",
                         "lwn": "Локална",
@@ -1767,7 +1745,6 @@
                     "placeholder": "Локална, регионална, национална, међународна"
                 },
                 "network_horse": {
-                    "label": "Врста коњичке стазе",
                     "options": {
                         "ihn": "Међународна",
                         "lhn": "Локална",
@@ -2264,9 +2241,6 @@
                 "amenity/car_rental": {
                     "name": "Изнајмљивање возила"
                 },
-                "amenity/car_sharing": {
-                    "name": "Дељење возила"
-                },
                 "amenity/car_wash": {
                     "name": "Ауто-перионица"
                 },
@@ -2591,9 +2565,6 @@
                 "area": {
                     "name": "Област"
                 },
-                "area/highway": {
-                    "name": "Површина пута"
-                },
                 "attraction/amusement_ride": {
                     "name": "Забавни парк",
                     "terms": "забавни парк,луна-парк,возић,тобоган,летњи тобоган,кућа страве,аути на сударање,чекић-торањ,вртешка,карусел,водени тобоган"
@@ -2608,18 +2579,6 @@
                 "attraction/dark_ride": {
                     "name": "Кућа страве",
                     "terms": "кућа страве,кућа страха"
-                },
-                "attraction/drop_tower": {
-                    "name": "Чекић-торањ",
-                    "terms": "чекић-торањ"
-                },
-                "attraction/pirate_ship": {
-                    "name": "Гусарски брод",
-                    "terms": "гусарски брод,пиратски брод,gusarski brod,piratski brod"
-                },
-                "attraction/river_rafting": {
-                    "name": "Сплаварење",
-                    "terms": "сплаварење,рафтинг,речни рафтинг,речно сплаварење"
                 },
                 "attraction/water_slide": {
                     "name": "Водени тобоган"
@@ -2878,9 +2837,6 @@
                 "craft/insulator": {
                     "name": "Изолатер"
                 },
-                "craft/jeweler": {
-                    "name": "Златар"
-                },
                 "craft/key_cutter": {
                     "name": "Нарезивање кључева"
                 },
@@ -2890,9 +2846,6 @@
                 "craft/metal_construction": {
                     "name": "Метална конструкција",
                     "terms": "метална конструкција"
-                },
-                "craft/optician": {
-                    "name": "Оптичар"
                 },
                 "craft/painter": {
                     "name": "Сликар"
@@ -2913,10 +2866,6 @@
                 "craft/plumber": {
                     "name": "Водоинсталатер",
                     "terms": "водоинсталатер"
-                },
-                "craft/pottery": {
-                    "name": "Грнчар",
-                    "terms": "грнчар, грнчарија"
                 },
                 "craft/rigger": {
                     "name": "Монтер",
@@ -3050,9 +2999,6 @@
                 },
                 "healthcare/speech_therapist": {
                     "name": "Логопед"
-                },
-                "highway": {
-                    "name": "Ауто-пут"
                 },
                 "highway/bridleway": {
                     "name": "Коњичка стаза",
@@ -3205,9 +3151,6 @@
                 "junction": {
                     "name": "Раскршће"
                 },
-                "landuse": {
-                    "name": "Намена земљишта"
-                },
                 "landuse/basin": {
                     "name": "Слив"
                 },
@@ -3297,9 +3240,6 @@
                 "landuse/vineyard": {
                     "name": "Виноград"
                 },
-                "leisure": {
-                    "name": "Рекреација"
-                },
                 "leisure/common": {
                     "name": "Јавно добро",
                     "terms": "јавно добро,заједничко добро"
@@ -3309,9 +3249,6 @@
                 },
                 "leisure/dog_park": {
                     "name": "Парк за псе"
-                },
-                "leisure/firepit": {
-                    "name": "Огњиште"
                 },
                 "leisure/fitness_centre": {
                     "name": "Теретана / Фитнес центар"
@@ -3424,9 +3361,6 @@
                 "line": {
                     "name": "Путања"
                 },
-                "man_made": {
-                    "name": "Људска творевина"
-                },
                 "man_made/adit": {
                     "name": "Јамски коп",
                     "terms": "јамски коп,подземни коп,окно,коп,ускоп,поткоп,нископ,прекоп"
@@ -3436,10 +3370,6 @@
                 },
                 "man_made/breakwater": {
                     "name": "Лукобран"
-                },
-                "man_made/bridge": {
-                    "name": "Мост",
-                    "terms": "мост,кобилица,мостић"
                 },
                 "man_made/bunker_silo": {
                     "name": "Подземни силос"
@@ -3544,9 +3474,6 @@
                 "man_made/tower/observation": {
                     "name": "Осматрачница"
                 },
-                "man_made/tunnel": {
-                    "name": "Тунел"
-                },
                 "man_made/wastewater_plant": {
                     "name": "Постројење за обраду отпадних вода"
                 },
@@ -3578,9 +3505,6 @@
                 },
                 "military/office": {
                     "name": "Војна канцеларија"
-                },
-                "natural": {
-                    "name": "Природно"
                 },
                 "natural/bay": {
                     "name": "Залив"
@@ -3647,9 +3571,6 @@
                 "natural/water": {
                     "name": "Извор"
                 },
-                "natural/water/canal": {
-                    "name": "Канал"
-                },
                 "natural/water/lake": {
                     "name": "Језеро"
                 },
@@ -3659,14 +3580,8 @@
                 "natural/water/reservoir": {
                     "name": "Резервоар"
                 },
-                "natural/water/river": {
-                    "name": "Река"
-                },
                 "natural/wetland": {
                     "name": "Мочвара"
-                },
-                "natural/wood": {
-                    "name": "Шума"
                 },
                 "noexit/yes": {
                     "name": "Без излаза"
@@ -3742,9 +3657,6 @@
                 "point": {
                     "name": "Чвор"
                 },
-                "power": {
-                    "name": "Енергија"
-                },
                 "power/generator": {
                     "name": "Електро-генератор"
                 },
@@ -3767,9 +3679,6 @@
                 },
                 "power/transformer": {
                     "name": "Трансформатор"
-                },
-                "railway": {
-                    "name": "Железничка пруга"
                 },
                 "railway/abandoned": {
                     "name": "Напуштена железница"
@@ -4060,9 +3969,6 @@
                     "name": "Винарница",
                     "terms": "винотека,продавница вина,винарница"
                 },
-                "tourism": {
-                    "name": "Туризам"
-                },
                 "tourism/alpine_hut": {
                     "name": "Планинарски дом"
                 },
@@ -4231,9 +4137,6 @@
                     "name": "Путања трамваја"
                 },
                 "type/waterway": {
-                    "name": "Водоток"
-                },
-                "waterway": {
                     "name": "Водоток"
                 },
                 "waterway/boatyard": {

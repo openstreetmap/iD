@@ -24,5 +24,6 @@
         "public transit parking lot",
         "train parking lot"
     ],
+    "matchScore": 0.95,
     "name": "Park & Ride Lot"
 }

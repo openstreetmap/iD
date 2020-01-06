@@ -1,5 +1,5 @@
 {
-    "icon": "maki-lodging",
+    "icon": "temaki-cabin",
     "fields": [
         "name",
         "operator",
@@ -11,6 +11,7 @@
         "fireplace"
     ],
     "moreFields": [
+        "gnis/feature_id",
         "internet_access",
         "internet_access/fee",
         "internet_access/ssid",
@@ -22,9 +23,15 @@
         "area"
     ],
     "terms": [
-        "wilderness hut",
+        "alpine hut",
+        "cabin",
         "backcountry hut",
-        "bothy"
+        "bothy",
+        "lodge",
+        "lodging",
+        "overnight accommodations",
+        "sleeping shelter",
+        "wilderness hut"
     ],
     "tags": {
         "tourism": "wilderness_hut"

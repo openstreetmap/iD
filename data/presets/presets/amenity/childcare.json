@@ -9,8 +9,10 @@
         "opening_hours"
     ],
     "moreFields": [
+        "baby_feeding",
         "email",
         "fax",
+        "gnis/feature_id",
         "level",
         "max_age",
         "min_age",

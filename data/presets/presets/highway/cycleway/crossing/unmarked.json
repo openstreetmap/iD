@@ -29,5 +29,6 @@
         "bicycle crossing",
         "bike crossing"
     ],
+    "matchScore": 0.95,
     "name": "Unmarked Cycle Crossing"
 }

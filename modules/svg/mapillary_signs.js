@@ -60,8 +60,7 @@ export function svgMapillarySigns(projection, context, dispatch) {
 
         context.map().centerEase(d.loc);
 
-        var selected = service.getSelectedImage();
-        var selectedImageKey = selected && selected.key;
+        var selectedImageKey = service.getSelectedImageKey();
         var imageKey;
 
         // Pick one of the images the sign was detected in,
@@ -73,7 +72,7 @@ export function svgMapillarySigns(projection, context, dispatch) {
         });
 
         service
-            .selectImage(null, imageKey)
+            .selectImage(imageKey)
             .updateViewer(imageKey, context)
             .showViewer();
     }
@@ -82,9 +81,7 @@ export function svgMapillarySigns(projection, context, dispatch) {
     function update() {
         var service = getService();
         var data = (service ? service.signs(projection) : []);
-        var viewer = d3_select('#photoviewer');
-        var selected = viewer.empty() ? undefined : viewer.datum();
-        var selectedImageKey = selected && selected.key;
+        var selectedImageKey = service.getSelectedImageKey();
         var transform = svgPointTransform(projection);
 
         var signs = layer.selectAll('.icon-sign')
@@ -96,29 +93,48 @@ export function svgMapillarySigns(projection, context, dispatch) {
 
         // enter
         var enter = signs.enter()
+            .append('g')
+            .attr('class', 'icon-sign icon-detected')
+            .on('click', click);
+
+        enter
             .append('use')
-            .attr('class', 'icon-sign')
             .attr('width', '24px')
             .attr('height', '24px')
             .attr('x', '-12px')
             .attr('y', '-12px')
-            .attr('xlink:href', function(d) { return '#' + d.value; })
+            .attr('xlink:href', function(d) { return '#' + d.value; });
+
+        enter
+            .append('rect')
+            .attr('width', '24px')
+            .attr('height', '24px')
+            .attr('x', '-12px')
+            .attr('y', '-12px');
+
+        // update
+        signs
+            .merge(enter)
+            .attr('transform', transform)
             .classed('currentView', function(d) {
                 return d.detections.some(function(detection) {
                     return detection.image_key === selectedImageKey;
                 });
             })
-            .on('click', click);
-
-        // update
-        signs
-            .merge(enter)
             .sort(function(a, b) {
-                return (a === selected) ? 1
-                    : (b === selected) ? -1
-                    : b.loc[1] - a.loc[1];  // sort Y
-            })
-            .attr('transform', transform);
+                var aSelected = a.detections.some(function(detection) {
+                    return detection.image_key === selectedImageKey;
+                });
+                var bSelected = b.detections.some(function(detection) {
+                    return detection.image_key === selectedImageKey;
+                });
+                if (aSelected === bSelected) {
+                    return b.loc[1] - a.loc[1]; // sort Y
+                } else if (aSelected) {
+                    return 1;
+                }
+                return -1;
+            });
     }
 
 
@@ -134,7 +150,7 @@ export function svgMapillarySigns(projection, context, dispatch) {
 
         layer = layer.enter()
             .append('g')
-            .attr('class', 'layer-mapillary-signs')
+            .attr('class', 'layer-mapillary-signs layer-mapillary-detections')
             .style('display', enabled ? 'block' : 'none')
             .merge(layer);
 

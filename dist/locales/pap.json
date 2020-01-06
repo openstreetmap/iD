@@ -2,7 +2,6 @@
     "pap": {
         "icons": {
             "copy": "kopia",
-            "open_wikidata": "habri den wikidata.org",
             "favorite": "favorí"
         },
         "toolbar": {

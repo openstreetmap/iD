@@ -9,6 +9,7 @@
     "fields": [
         "name",
         "operator",
+        "gnis/feature_id",
         "height",
         "material"
     ],

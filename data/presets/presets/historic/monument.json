@@ -6,6 +6,7 @@
         "access_simple"
     ],
     "moreFields": [
+        "{historic}",
         "material"
     ],
     "geometry": [

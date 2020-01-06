@@ -1,9 +1,12 @@
 {
-    "icon": "temaki-military",
+    "icon": "temaki-bunker",
     "fields": [
         "name",
         "bunker_type",
         "building_area"
+    ],
+    "moreFields": [
+        "gnis/feature_id"
     ],
     "geometry": [
         "point",

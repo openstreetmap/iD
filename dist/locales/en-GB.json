@@ -85,18 +85,7 @@
                 "connected_to_hidden": "This can't be made circular because it is connected to a hidden feature."
             },
             "orthogonalize": {
-                "title": "Square",
-                "description": {
-                    "line": "Square the corners of this line.",
-                    "area": "Square the corners of this area."
-                },
-                "annotation": {
-                    "line": "Squared the corners of a line.",
-                    "area": "Squared the corners of an area."
-                },
-                "not_squarish": "This can't be made square because it is not squarish.",
-                "too_large": "This can't be made square because not enough of it is currently visible.",
-                "connected_to_hidden": "This can't be made square because it is connected to a hidden feature."
+                "title": "Square"
             },
             "straighten": {
                 "title": "Straighten",
@@ -345,12 +334,6 @@
         "feature_info": {
             "hidden_warning": "{count} hidden features",
             "hidden_details": "These features are currently hidden: {details}"
-        },
-        "status": {
-            "error": "Unable to connect to API.",
-            "offline": "The API is offline. Please try editing later.",
-            "readonly": "The API is read-only. You will need to wait to save your changes.",
-            "rateLimit": "The API is limiting anonymous connections.  You can fix this by logging in."
         },
         "commit": {
             "title": "Upload to OpenStreetMap",
@@ -1159,9 +1142,7 @@
                 },
                 "display_options": {
                     "title": "Display options",
-                    "background": "Show background options",
                     "background_switch": "Switch back to last background",
-                    "map_data": "Show map data options",
                     "fullscreen": "Enter full screen mode",
                     "wireframe": "Toggle wireframe mode",
                     "minimap": "Toggle minimap"
@@ -1174,7 +1155,6 @@
                     "search": "Find features matching search text"
                 },
                 "with_selected": {
-                    "title": "With feature selected",
                     "edit_menu": "Toggle edit menu"
                 },
                 "vertex_selected": {
@@ -1806,7 +1786,6 @@
                     "label": "Handrail"
                 },
                 "hashtags": {
-                    "label": "Suggested Hashtags",
                     "placeholder": "#example"
                 },
                 "healthcare": {
@@ -2060,7 +2039,6 @@
                     "label": "Network"
                 },
                 "network_bicycle": {
-                    "label": "Network Type",
                     "options": {
                         "icn": "International",
                         "lcn": "Local",
@@ -2070,7 +2048,6 @@
                     "placeholder": "Local, Regional, National, International"
                 },
                 "network_foot": {
-                    "label": "Network Type",
                     "options": {
                         "iwn": "International",
                         "lwn": "Local",
@@ -2080,7 +2057,6 @@
                     "placeholder": "Local, Regional, National, International"
                 },
                 "network_horse": {
-                    "label": "Network Type",
                     "options": {
                         "ihn": "International",
                         "lhn": "Local",
@@ -2718,12 +2694,6 @@
                 "aerialway/rope_tow": {
                     "name": "Rope Tow Lift"
                 },
-                "aerialway/station": {
-                    "name": "Aerialway Station"
-                },
-                "aerialway/t-bar": {
-                    "name": "T-bar Lift"
-                },
                 "aeroway": {
                     "name": "Aeroway"
                 },
@@ -2805,14 +2775,8 @@
                 "amenity/cafe": {
                     "name": "Cafe"
                 },
-                "amenity/car_pooling": {
-                    "name": "Car Pooling"
-                },
                 "amenity/car_rental": {
                     "name": "Car Rental"
-                },
-                "amenity/car_sharing": {
-                    "name": "Car Sharing"
                 },
                 "amenity/car_wash": {
                     "name": "Car Wash"
@@ -3139,9 +3103,6 @@
                 "area": {
                     "name": "Area"
                 },
-                "area/highway": {
-                    "name": "Road Surface"
-                },
                 "attraction/amusement_ride": {
                     "name": "Amusement Ride"
                 },
@@ -3157,17 +3118,8 @@
                 "attraction/dark_ride": {
                     "name": "Ghost Train"
                 },
-                "attraction/drop_tower": {
-                    "name": "Drop Tower"
-                },
                 "attraction/maze": {
                     "name": "Maze"
-                },
-                "attraction/pirate_ship": {
-                    "name": "Pirate Ship"
-                },
-                "attraction/river_rafting": {
-                    "name": "River Rafting"
                 },
                 "attraction/roller_coaster": {
                     "name": "Roller Coaster"
@@ -3451,9 +3403,6 @@
                 "craft/insulator": {
                     "name": "Insulator"
                 },
-                "craft/jeweler": {
-                    "name": "Jeweler"
-                },
                 "craft/key_cutter": {
                     "name": "Key Cutter"
                 },
@@ -3462,9 +3411,6 @@
                 },
                 "craft/metal_construction": {
                     "name": "Metal Construction"
-                },
-                "craft/optician": {
-                    "name": "Optician"
                 },
                 "craft/painter": {
                     "name": "Painter"
@@ -3480,9 +3426,6 @@
                 },
                 "craft/plumber": {
                     "name": "Plumber"
-                },
-                "craft/pottery": {
-                    "name": "Pottery"
                 },
                 "craft/rigger": {
                     "name": "Rigger"
@@ -3578,7 +3521,7 @@
                     "name": "Ford"
                 },
                 "golf/bunker": {
-                    "name": "Bunker"
+                    "name": "Golf Bunker"
                 },
                 "golf/fairway": {
                     "name": "Fairway"
@@ -3642,9 +3585,6 @@
                 },
                 "healthcare/speech_therapist": {
                     "name": "Speech Therapist"
-                },
-                "highway": {
-                    "name": "Highway"
                 },
                 "highway/bridleway": {
                     "name": "Bridleway"
@@ -3835,9 +3775,6 @@
                 "junction": {
                     "name": "Junction"
                 },
-                "landuse": {
-                    "name": "Land Use"
-                },
                 "landuse/allotments": {
                     "name": "Allotments"
                 },
@@ -3949,9 +3886,6 @@
                 "landuse/vineyard": {
                     "name": "Vineyard"
                 },
-                "leisure": {
-                    "name": "Leisure"
-                },
                 "leisure/adult_gaming_centre": {
                     "name": "Adult Gaming Centre"
                 },
@@ -3978,9 +3912,6 @@
                 },
                 "leisure/dog_park": {
                     "name": "Dog Park"
-                },
-                "leisure/firepit": {
-                    "name": "Firepit"
                 },
                 "leisure/fitness_centre": {
                     "name": "Gym / Fitness Centre"
@@ -4135,9 +4066,6 @@
                 "line": {
                     "name": "Line"
                 },
-                "man_made": {
-                    "name": "Man Made"
-                },
                 "man_made/adit": {
                     "name": "Adit"
                 },
@@ -4146,9 +4074,6 @@
                 },
                 "man_made/breakwater": {
                     "name": "Breakwater"
-                },
-                "man_made/bridge": {
-                    "name": "Bridge"
                 },
                 "man_made/chimney": {
                     "name": "Chimney"
@@ -4228,9 +4153,6 @@
                 "man_made/works": {
                     "name": "Factory"
                 },
-                "natural": {
-                    "name": "Natural"
-                },
                 "natural/bare_rock": {
                     "name": "Bare Rock"
                 },
@@ -4308,9 +4230,6 @@
                 },
                 "natural/wetland": {
                     "name": "Wetland"
-                },
-                "natural/wood": {
-                    "name": "Wood"
                 },
                 "noexit/yes": {
                     "name": "No Exit"
@@ -4522,9 +4441,6 @@
                 "point": {
                     "name": "Point"
                 },
-                "power": {
-                    "name": "Power"
-                },
                 "power/generator": {
                     "name": "Power Generator"
                 },
@@ -4620,9 +4536,6 @@
                 },
                 "public_transport/stop_position_trolleybus": {
                     "name": "Trolleybus Stopping Location"
-                },
-                "railway": {
-                    "name": "Railway"
                 },
                 "railway/abandoned": {
                     "name": "Abandoned Railway"
@@ -5072,9 +4985,6 @@
                 "shop/wine": {
                     "name": "Wine Shop"
                 },
-                "tourism": {
-                    "name": "Tourism"
-                },
                 "tourism/alpine_hut": {
                     "name": "Alpine Hut"
                 },
@@ -5273,9 +5183,6 @@
                 "type/waterway": {
                     "name": "Waterway"
                 },
-                "waterway": {
-                    "name": "Waterway"
-                },
                 "waterway/boatyard": {
                     "name": "Boatyard"
                 },
@@ -5324,9 +5231,43 @@
             }
         },
         "imagery": {
+            "AGIV": {
+                "attribution": {
+                    "text": "© agentschap Informatie Vlaanderen"
+                },
+                "name": "AIV Flanders most recent aerial imagery"
+            },
+            "AGIV10cm": {
+                "attribution": {
+                    "text": "© agentschap Informatie Vlaanderen"
+                },
+                "name": "AIV Flanders 2013-2015 aerial imagery 10cm"
+            },
+            "AGIVFlandersGRB": {
+                "attribution": {
+                    "text": "© agentschap Informatie Vlaanderen"
+                },
+                "name": "AIV Flanders GRB"
+            },
+            "AIV_DHMV_II_HILL_25cm": {
+                "attribution": {
+                    "text": "© agentschap Informatie Vlaanderen"
+                },
+                "name": "AIV Digitaal Hoogtemodel Vlaanderen II, multidirectionale hillshade 0,25 m"
+            },
+            "AIV_DHMV_II_SVF_25cm": {
+                "name": "AIV Digitaal Hoogtemodel Vlaanderen II, Skyview factor 0,25 m"
+            },
             "Bing": {
                 "description": "Satellite and aerial imagery.",
                 "name": "Bing aerial imagery"
+            },
+            "EOXAT2018CLOUDLESS": {
+                "attribution": {
+                    "text": "Sentinel-2 cloudless - https://s2maps.eu by EOX IT Services GmbH (Contains modified Copernicus Sentinel data 2017 & 2018)"
+                },
+                "description": "Post-processed Sentinel Satellite imagery.",
+                "name": "eox.at 2018 cloudless"
             },
             "EsriWorldImagery": {
                 "attribution": {
@@ -5397,6 +5338,12 @@
                     "text": "© Geofabrik GmbH, OpenStreetMap contributors, CC-BY-SA"
                 },
                 "name": "OSM Inspector: Tagging"
+            },
+            "SPW_ORTHO_LAST": {
+                "name": "SPW(allonie) most recent aerial imagery"
+            },
+            "SPW_PICC": {
+                "name": "SPW(allonie) PICC numerical imagery"
             },
             "US-TIGER-Roads-2014": {
                 "description": "At zoom level 16+, public domain map data from the US Census. At lower zooms, only changes since 2006 minus changes already incorporated into OpenStreetMap",
@@ -5551,13 +5498,13 @@
                 "description": "Mappers and OpenStreetMap users in the Portland area",
                 "extendedDescription": "OpenStreetMap (OSM) is a map of the world made by people like you. It's a map that you build, that's given away for free like wikipedia. Check out osm.org for more, and come join us at a meetup to talk maps, contribute to OSM, and have fun!"
             },
-            "OSM-US-Slack": {
-                "name": "OpenStreetMap US Slack",
-                "description": "All are welcome! Sign up at {signupUrl}"
-            },
             "OSM-Reddit": {
                 "name": "OpenStreetMap on Reddit",
                 "description": "/r/openstreetmap/ is a great place to learn more about OpenStreetMap.  Ask us anything!"
+            },
+            "OSM-US-Slack": {
+                "name": "OpenStreetMap US Slack",
+                "description": "All are welcome! Sign up at {signupUrl}"
             }
         }
     }

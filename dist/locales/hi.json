@@ -45,12 +45,25 @@
             "delete": {
                 "title": "मिटायें"
             },
+            "disconnect": {
+                "key": "D"
+            },
             "merge": {
-                "title": "मिलायें"
+                "title": "मिलायें",
+                "key": "C"
+            },
+            "move": {
+                "key": "M"
             },
             "rotate": {
                 "title": "घुमायॆं",
                 "key": "र"
+            },
+            "reverse": {
+                "key": "V"
+            },
+            "split": {
+                "key": "X"
             }
         },
         "translate": {
@@ -77,6 +90,19 @@
             },
             "buildings": {
                 "description": "इमारतें"
+            }
+        },
+        "QA": {
+            "improveOSM": {
+                "geometry_types": {
+                    "road": "सड़कें",
+                    "both": "सड़क पार्किंग"
+                }
+            },
+            "keepRight": {
+                "error_parts": {
+                    "school": "स्कूल"
+                }
             }
         },
         "intro": {
@@ -343,6 +369,12 @@
                 },
                 "point": {
                     "name": "बिंदु"
+                },
+                "shop": {
+                    "name": "दुकान"
+                },
+                "shop/books": {
+                    "name": "किताबों की दुकान"
                 },
                 "tourism/zoo": {
                     "name": "चिड़िया घर"

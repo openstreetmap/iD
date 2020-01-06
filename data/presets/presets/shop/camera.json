@@ -1,0 +1,17 @@
+{
+    "icon": "fas-camera-retro",
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "terms": [
+        "camera",
+        "film",
+        "lens",
+        "photo"
+    ],
+    "tags": {
+        "shop": "camera"
+    },
+    "name": "Camera Equipment Store"
+}

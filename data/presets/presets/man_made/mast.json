@@ -7,6 +7,7 @@
     ],
     "moreFields": [
         "communication_multi",
+        "gnis/feature_id",
         "manufacturer",
         "material"
     ],

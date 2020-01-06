@@ -10,6 +10,7 @@
         "address",
         "email",
         "fax",
+        "gnis/feature_id",
         "phone",
         "seamark/type",
         "website"

@@ -22,7 +22,7 @@ import {
 
 
 export function uiNoteEditor(context) {
-    var noteComments = uiNoteComments();
+    var noteComments = uiNoteComments(context);
 
     // var formFields = uiFormFields(context);
 

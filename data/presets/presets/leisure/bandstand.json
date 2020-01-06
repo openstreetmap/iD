@@ -6,6 +6,7 @@
         "operator"
     ],
     "moreFields": [
+        "gnis/feature_id",
         "website"
     ],
     "geometry": [

@@ -150,8 +150,8 @@ preset are generally not inherited. E.g. the `shop` field is not inherited by `s
 The name of a local SVG icon file. You can use icons from any of the following icon sets. When specifying an icon, use the prefixed version of the name, for example `"icon": "maki-park"` or `"icon": "tnp-2009223"`.
 
 * [iD's spritesheet](https://github.com/openstreetmap/iD/tree/master/svg/iD-sprite/presets) (`iD-`)
-* [Maki](http://www.mapbox.com/maki/) (`maki-`), map-specific icons from Mapbox
-* [Temaki](http://bhousel.github.io/temaki/docs/) (`temaki-`), an expansion pack for Maki
+* [Maki](https://labs.mapbox.com/maki-icons/) (`maki-`), map-specific icons from Mapbox
+* [Temaki](https://ideditor.github.io/temaki/docs/) (`temaki-`), an expansion pack for Maki
     * This is the best place to submit a PR if you want to create a preset icon!
 * [Font Awesome](https://fontawesome.com/icons?d=gallery&m=free), thousands of general-purpose icons
     * There is a free and pro tier. You can use any icon from the free tier in the following styles:
@@ -262,6 +262,7 @@ A string specifying the UI and behavior of the field. Must be one of the followi
 * `tel` - Text field for entering phone numbers (localized for editing location)
 * `email` - Text field for entering email addresses
 * `url` - Text field for entering URLs
+* `identifier` - Text field for foreign IDs (e.g. `gnis:feature_id`)
 * `textarea` - Multi-line text area (e.g. `description=*`)
 
 ###### Combo/Dropdown fields
@@ -411,6 +412,30 @@ For example, this is how we show the Internet Access Fee field only if the featu
     "valueNot": "no"
 }
 ```
+
+If a feature has a value for this field's `key` or `keys`, it will display regardless of the `prerequisiteTag` property.
+
+##### `countryCodes`
+
+An array of two-letter, lowercase [ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) country codes. The field will only be available for features in the specified, whitelisted countries.
+
+By default, fields are available everywhere.
+
+##### `notCountryCodes`
+
+An array of two-letter, lowercase [ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) country codes. Similar to `countryCodes` except a blacklist instead of a whitelist.
+
+##### `urlFormat`
+
+For `identifier` fields, the permalink URL of the external record. It must contain a `{value}` placeholder where the tag value will be inserted. For example:
+
+```js
+"urlFormat": "https://geonames.usgs.gov/apex/f?p=gnispq:3:::NO::P3_FID:{value}"
+```
+
+##### `pattern`
+
+For `identifier` fields, the regular expression that valid values are expected to match to be linkable.
 
 
 ## Building

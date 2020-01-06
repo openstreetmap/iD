@@ -39,11 +39,11 @@ export function uiCurtain() {
 
         tooltip
             .append('div')
-            .attr('class', 'tooltip-arrow');
+            .attr('class', 'popover-arrow');
 
         tooltip
             .append('div')
-            .attr('class', 'tooltip-inner');
+            .attr('class', 'popover-inner');
 
         resize();
 
@@ -109,10 +109,10 @@ export function uiCurtain() {
                     '<button href="#" class="button action">' + options.buttonText + '</button></div>';
             }
 
-            var classes = 'curtain-tooltip tooltip in ' + (options.tooltipClass || '');
+            var classes = 'curtain-tooltip popover tooltip arrowed in ' + (options.tooltipClass || '');
             tooltip
                 .classed(classes, true)
-                .selectAll('.tooltip-inner')
+                .selectAll('.popover-inner')
                 .html(html);
 
             if (options.buttonText && options.buttonCallback) {
@@ -200,8 +200,8 @@ export function uiCurtain() {
                 .attr('class', classes + ' ' + side);
 
 
-            // shift tooltip-inner if it is very close to the top or bottom edge
-            // (doesn't affect the placement of the tooltip-arrow)
+            // shift popover-inner if it is very close to the top or bottom edge
+            // (doesn't affect the placement of the popover-arrow)
             var shiftY = 0;
             if (side === 'left' || side === 'right') {
                 if (pos[1] < 60) {
@@ -211,7 +211,7 @@ export function uiCurtain() {
                     shiftY = h - pos[1] - tip.height - 100;
                 }
             }
-            tooltip.selectAll('.tooltip-inner')
+            tooltip.selectAll('.popover-inner')
                 .style('top', shiftY + 'px');
 
         } else {

@@ -136,9 +136,22 @@ export function svgLines(projection, context) {
                 .attr('class', function(d) {
 
                     var prefix = 'way line';
-                    if (!d.hasInterestingTags() && graph.parentMultipolygons(d).length > 0) {
-                        // fudge the classes to style multipolygon member lines as area edges
-                        prefix = 'relation area';
+
+                    // if this line isn't styled by its own tags
+                    if (!d.hasInterestingTags()) {
+
+                        var parentRelations = graph.parentRelations(d);
+                        var parentMultipolygons = parentRelations.filter(function(relation) {
+                            return relation.isMultipolygon();
+                        });
+
+                        // and if it's a member of at least one multipolygon relation
+                        if (parentMultipolygons.length > 0 &&
+                            // and only multipolygon relations
+                            parentRelations.length === parentMultipolygons.length) {
+                            // then fudge the classes to style this as an area edge
+                            prefix = 'relation area';
+                        }
                     }
 
                     var oldMPClass = oldMultiPolygonOuters[d.id] ? 'old-multipolygon ' : '';

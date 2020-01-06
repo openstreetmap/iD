@@ -20,7 +20,6 @@
         "key": "footway",
         "value": "crossing"
     },
-    "matchScore": 0.95,
     "searchable": false,
     "name": "Pedestrian Crossing"
 }

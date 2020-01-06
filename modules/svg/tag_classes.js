@@ -32,7 +32,7 @@ export function svgTagClasses() {
 
             var t = _tags(entity);
 
-            var computed = tagClasses.getClassesString(t, value, entity);
+            var computed = tagClasses.getClassesString(t, value);
 
             if (computed !== value) {
                 d3_select(this).attr('class', computed);
@@ -41,17 +41,15 @@ export function svgTagClasses() {
     };
 
 
-    tagClasses.getClassesString = function(t, value, entity) {
+    tagClasses.getClassesString = function(t, value) {
         var primary, status;
-        var i, k, v;
+        var i, j, k, v;
 
         // in some situations we want to render perimeter strokes a certain way
         var overrideGeometry;
         if (/\bstroke\b/.test(value)) {
             if (!!t.barrier && t.barrier !== 'no') {
                 overrideGeometry = 'line';
-            } else if (t.type === 'multipolygon' && !entity.hasInterestingTags()) {
-                overrideGeometry = 'area';
             }
         }
 
@@ -86,6 +84,19 @@ export function svgTagClasses() {
             }
     
             break;
+        }
+
+        if (!primary) {
+            for (i = 0; i < statuses.length; i++) {
+                for (j = 0; j < primaries.length; j++) {
+                    k = statuses[i] + ':' + primaries[j];  // e.g. `demolished:building=yes`
+                    v = t[k];
+                    if (!v || v === 'no') continue;
+
+                    status = statuses[i];
+                    break;
+                }
+            }
         }
 
         // add at most one status tag, only if relates to primary tag..

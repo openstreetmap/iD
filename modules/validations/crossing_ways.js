@@ -431,11 +431,11 @@ export function validationCrossingWays(context) {
                 } else {
                     // don't recommend adding bridges to waterways since they're uncommmon
                     if (allowsBridge(selectedFeatureType) && selectedFeatureType !== 'waterway') {
-                        fixes.push(makeAddBridgeOrTunnelFix('add_a_bridge', 'iD-structure-bridge', 'bridge'));
+                        fixes.push(makeAddBridgeOrTunnelFix('add_a_bridge', 'temaki-bridge', 'bridge'));
                     }
 
                     if (allowsTunnel(selectedFeatureType)) {
-                        fixes.push(makeAddBridgeOrTunnelFix('add_a_tunnel', 'iD-structure-tunnel', 'tunnel'));
+                        fixes.push(makeAddBridgeOrTunnelFix('add_a_tunnel', 'temaki-tunnel', 'tunnel'));
                     }
                 }
 
@@ -550,7 +550,12 @@ export function validationCrossingWays(context) {
                         tags.bridge = 'yes';
                         tags.layer = '1';
                     } else {
-                        tags.tunnel = 'yes';
+                        var tunnelValue = 'yes';
+                        if (getFeatureTypeForTags(tags) === 'waterway') {
+                            // use `tunnel=culvert` for waterways by default
+                            tunnelValue = 'culvert';
+                        }
+                        tags.tunnel = tunnelValue;
                         tags.layer = '-1';
                     }
                     // apply the structure tags to the way

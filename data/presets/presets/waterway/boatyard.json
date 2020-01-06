@@ -1,5 +1,5 @@
 {
-    "icon": "maki-harbor",
+    "icon": "temaki-boat",
     "fields": [
         "name",
         "operator"
@@ -8,6 +8,7 @@
         "address",
         "email",
         "fax",
+        "gnis/feature_id",
         "phone",
         "website",
         "wheelchair"

@@ -2,8 +2,7 @@
     "ms": {
         "icons": {
             "download": "muat turun",
-            "information": "info",
-            "open_wikidata": "buka di wikidata.org"
+            "information": "info"
         },
         "modes": {
             "add_area": {
@@ -86,18 +85,7 @@
                 "connected_to_hidden": "Ini tidak dapat dijadikan membulat kerana bersambung dengan gambaran yang tersorok."
             },
             "orthogonalize": {
-                "title": "Bucu sudut tepat",
-                "description": {
-                    "line": "Jadikan bucu garis bersudut tepat.",
-                    "area": "Jadikan bucu kawasan ini bersudut tepat."
-                },
-                "annotation": {
-                    "line": "Bucu garis telah dijadikan sudut tepat.",
-                    "area": "Bucu kawasan telah dijadikan bersudut tepat."
-                },
-                "not_squarish": "Ini tidak dapat dijadikan sudut tepat kerana tidak berbentuk bucu.",
-                "too_large": "Ini tidak dapat dijadikan sudut tepat kerana bahagian penting tidak kelihatan secukupnya.",
-                "connected_to_hidden": "Ini tidak dapat dijadikan sudut tepat kerana bersambung dengan gambaran yang tersorok."
+                "title": "Bucu sudut tepat"
             },
             "straighten": {
                 "title": "Luruskan",
@@ -317,12 +305,6 @@
         "feature_info": {
             "hidden_warning": "{count} gambaran yang tersorok",
             "hidden_details": "Gambaran-gambaran ini ialah yang tersorok:  {details}"
-        },
-        "status": {
-            "error": "Tidak dapat bersambung pada API.",
-            "offline": "API adalah di luar talian. Sila cuba mengedit kemudian.",
-            "readonly": "API adalah hanya-baca. Anda perlu menunggu untuk menyimpan perubahan anda.",
-            "rateLimit": "API mengehadkan sambungan tanpa nama. Anda boleh membetulkannya dengan melog masuk."
         },
         "commit": {
             "title": "Muat naik ke OpenStreetMap",
@@ -809,9 +791,6 @@
                 "help": {
                     "title": "Bantuan",
                     "keyboard": "Tunjukkan kaedah jalan pintas papan kekunci"
-                },
-                "display_options": {
-                    "map_data": "Tunjukkan pilihan data peta"
                 }
             },
             "editing": {
@@ -1454,7 +1433,6 @@
                     "label": "Rangkaian"
                 },
                 "network_bicycle": {
-                    "label": "Jenis Rangkaian",
                     "options": {
                         "icn": "Antarabangsa",
                         "lcn": "Tempatan",
@@ -1464,7 +1442,6 @@
                     "placeholder": "Tempatan, Serantau, Senegara, Antarabangsa"
                 },
                 "network_foot": {
-                    "label": "Jenis Rangkaian",
                     "options": {
                         "iwn": "Antarabangsa",
                         "lwn": "Tempatan",
@@ -1474,7 +1451,6 @@
                     "placeholder": "Tempatan, Serantau, Senegara, Antarabangsa"
                 },
                 "network_horse": {
-                    "label": "Jenis Rangkaian",
                     "options": {
                         "ihn": "Antarabangsa",
                         "lhn": "Tempatan",
@@ -2093,9 +2069,6 @@
                 "area": {
                     "name": "Kawasan"
                 },
-                "area/highway": {
-                    "name": "Permukaaan Jalan"
-                },
                 "barrier/gate": {
                     "name": "Pintu"
                 },
@@ -2379,9 +2352,6 @@
                 "playground/slide": {
                     "name": "Gelongsor"
                 },
-                "power": {
-                    "name": "Tenaga Elektrik"
-                },
                 "power/generator": {
                     "name": "Penjana Tenaga Elektrik"
                 },
@@ -2405,9 +2375,6 @@
                 },
                 "public_transport/station": {
                     "name": "Stesen Transit"
-                },
-                "railway": {
-                    "name": "Jalan Kereta Api"
                 },
                 "railway/abandoned": {
                     "name": "Jalan Kereta Api Terbiar"
@@ -2513,9 +2480,6 @@
                 "shop/tyres": {
                     "name": "Kedai Tayar"
                 },
-                "tourism": {
-                    "name": "Pelancongan"
-                },
                 "tourism/aquarium": {
                     "name": "Akuarium"
                 },
@@ -2527,9 +2491,6 @@
                 },
                 "type/route/road": {
                     "name": "Laluan Jalan"
-                },
-                "waterway": {
-                    "name": "Jalan Air"
                 },
                 "waterway/canal": {
                     "name": "Terusan"
@@ -2715,17 +2676,6 @@
             }
         },
         "community": {
-            "OSM-MY-facebook": {
-                "name": "OpenStreetMap Malaysia di Facebook",
-                "description": "Segala borak-borak OpenStreetMap!"
-            },
-            "OSM-MY-forum": {
-                "name": "Forum OpenStreetMap Malaysia",
-                "description": "Forum rasmi OpenStreetMap Malaysia"
-            },
-            "OSM-MY-matrix": {
-                "name": "Saluran Riot OpenStreetMap Malaysia"
-            },
             "Bay-Area-OpenStreetMappers": {
                 "name": "OpenStreetMappers Kawasan Teluk",
                 "description": "Perbaiki OpenStreetMap di Kawasan Teluk",
@@ -2754,18 +2704,29 @@
                 "name": "OSM Chattanooga",
                 "description": "Kumpulan pengguna OpenStreetMap bagi Chattanooga"
             },
+            "OSM-MY-facebook": {
+                "name": "OpenStreetMap Malaysia di Facebook",
+                "description": "Segala borak-borak OpenStreetMap!"
+            },
+            "OSM-MY-forum": {
+                "name": "Forum OpenStreetMap Malaysia",
+                "description": "Forum rasmi OpenStreetMap Malaysia"
+            },
+            "OSM-MY-matrix": {
+                "name": "Saluran Riot OpenStreetMap Malaysia"
+            },
             "OSM-Portland": {
                 "name": "OpenStreetMap Portland",
                 "description": "Pemeta dan pengguna OpenStreetMap di kawasan Portland",
                 "extendedDescription": "OpenStreetMap (OSM) ialah sebuah peta dunia yang dibuat oleh orang-orang seperti anda. Ianya sebuah peta yang anda buat, diberi secara percuma seperti wikipedia. Lihat osm.org bagi yang lanjut, dan datang sertai kami pada pertemuan untuk berbincang tentang peta, menyumbang ke OSM, dan berseronok!"
             },
-            "OSM-US-Slack": {
-                "name": "OpenStreetMap US Slack",
-                "description": "Semua dialu-alukan hadir! Daftar di {signupUrl}"
-            },
             "OSM-Reddit": {
                 "name": "OpenStreetMap di Reddit",
                 "description": "/r/openstreetmap/ ialah sebuah tempat yang hebat untuk mempelajari lebih lanjut tentang OpenStreetMap. Tanya apa sahaja kepada kami!"
+            },
+            "OSM-US-Slack": {
+                "name": "OpenStreetMap US Slack",
+                "description": "Semua dialu-alukan hadir! Daftar di {signupUrl}"
             }
         }
     }

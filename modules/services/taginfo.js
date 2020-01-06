@@ -106,7 +106,8 @@ function filterRoles(geometry) {
 function valKey(d) {
     return {
         value: d.key,
-        title: d.key
+        title: d.key,
+        count: d.count
     };
 }
 
@@ -114,7 +115,8 @@ function valKey(d) {
 function valKeyDescription(d) {
     return {
         value: d.value,
-        title: d.description || d.value
+        title: d.description || d.value,
+        count: d.count
     };
 }
 
@@ -122,7 +124,8 @@ function valKeyDescription(d) {
 function roleKey(d) {
     return {
         value: d.role,
-        title: d.role
+        title: d.role,
+        count: d.count
     };
 }
 

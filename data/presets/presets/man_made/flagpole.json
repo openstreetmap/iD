@@ -3,7 +3,7 @@
     "fields": [
         "operator",
         "flag/type",
-        "country",
+        "country_flag",
         "lit",
         "height"
     ],

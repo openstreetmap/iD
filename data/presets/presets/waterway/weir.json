@@ -7,6 +7,7 @@
         "material"
     ],
     "moreFields": [
+        "gnis/feature_id",
         "seamark/type"
     ],
     "geometry": [

@@ -90,7 +90,7 @@ export function uiFieldWikidata(field, context) {
         searchRowEnter
             .append('button')
             .attr('class', 'form-field-button wiki-link')
-            .attr('title', t('icons.open_wikidata'))
+            .attr('title', t('icons.view_on', { domain: 'wikidata.org' }))
             .attr('tabindex', -1)
             .call(svgIcon('#iD-icon-out-link'))
             .on('click', function() {

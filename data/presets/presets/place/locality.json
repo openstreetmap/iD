@@ -1,14 +1,12 @@
 {
     "icon": "maki-triangle-stroked",
+    "moreFields": [
+        "{place}",
+        "website"
+    ],
     "geometry": [
         "point",
         "area"
-    ],
-    "moreFields": [
-        "website"
-    ],
-    "fields": [
-        "name"
     ],
     "tags": {
         "place": "locality"

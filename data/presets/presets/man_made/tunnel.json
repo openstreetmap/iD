@@ -1,5 +1,5 @@
 {
-    "icon": "tnp-2009642",
+    "icon": "temaki-tunnel",
     "fields": [
         "name",
         "tunnel",
@@ -7,6 +7,9 @@
         "width",
         "length",
         "height"
+    ],
+    "moreFields": [
+        "gnis/feature_id"
     ],
     "geometry": [
         "area"

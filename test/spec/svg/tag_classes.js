@@ -239,16 +239,6 @@ describe('iD.svgTagClasses', function () {
         expect(selection.classed('line')).to.be.true;
     });
 
-    it('stroke overrides: renders simple multipolygon lines as areas', function() {
-        var multipolygon = function () { return { type: 'multipolygon' }; };
-        selection
-            .attr('class', 'way line stroke')
-            .datum(iD.osmEntity({tags: {}}))
-            .call(iD.svgTagClasses().tags(multipolygon));
-        expect(selection.classed('area')).to.be.true;
-        expect(selection.classed('line')).to.be.false;
-    });
-
     it('works on SVG elements', function() {
         selection = d3.select(document.createElementNS('http://www.w3.org/2000/svg', 'g'));
         selection

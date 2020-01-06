@@ -1,14 +1,12 @@
 {
     "icon": "temaki-pedestrian",
+    "moreFields": [
+        "{place}",
+        "website"
+    ],
     "geometry": [
         "point",
         "area"
-    ],
-    "fields": [
-        "name"
-    ],
-    "moreFields": [
-        "website"
     ],
     "tags": {
         "place": "square"

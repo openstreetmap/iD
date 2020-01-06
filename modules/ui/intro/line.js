@@ -85,7 +85,7 @@ export function uiIntroLine(context, reveal) {
             var tooltip = reveal('button.add-line',
                 t('intro.lines.add_line', { button: icon('#iD-icon-line', 'pre-text') }));
 
-            tooltip.selectAll('.tooltip-inner')
+            tooltip.selectAll('.popover-inner')
                 .insert('svg', 'span')
                 .attr('class', 'tooltip-illustration')
                 .append('use')

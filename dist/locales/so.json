@@ -45,12 +45,6 @@
                 },
                 "not_closed": "Tani lagama dhigi karo wareeg maxaa yeelay ma aha duub"
             },
-            "orthogonalize": {
-                "description": {
-                    "area": "Afar geesood ka dhig qararka goobtan."
-                },
-                "not_squarish": "Tani lagama dhigi karo afar gees, sababtoo ah ma aha mid afar gees ah"
-            },
             "delete": {
                 "title": "Tirtir",
                 "description": {
@@ -666,9 +660,6 @@
                 "amenity/toilets": {
                     "name": "Musqulo"
                 },
-                "area/highway": {
-                    "name": "Sagxada"
-                },
                 "barrier": {
                     "name": "Xannibaadaha"
                 },
@@ -705,9 +696,6 @@
                 "ford": {
                     "name": "Tog"
                 },
-                "highway": {
-                    "name": "Wadada Halboowlaha"
-                },
                 "highway/path": {
                     "name": "Waddo"
                 },
@@ -728,9 +716,6 @@
                 },
                 "highway/unclassified": {
                     "name": "Waddo Yar/La cayimin"
-                },
-                "landuse": {
-                    "name": "Isticmaalka Dhulka"
                 },
                 "landuse/aquaculture": {
                     "name": "Xarumaha biyo-ku-noolka"
@@ -786,14 +771,8 @@
                 "line": {
                     "name": "Khad"
                 },
-                "man_made/bridge": {
-                    "name": "Buundo"
-                },
                 "man_made/pier": {
                     "name": "Dekedyaro"
-                },
-                "natural": {
-                    "name": "Dabiiciga"
                 },
                 "natural/bare_rock": {
                     "name": "Dhagax Weyn"
@@ -815,9 +794,6 @@
                 },
                 "natural/wetland": {
                     "name": "Dhul biyo-fadhiyaan"
-                },
-                "natural/wood": {
-                    "name": "Duur"
                 },
                 "office/government": {
                     "name": "Xafiis Dowladeed"
@@ -871,9 +847,6 @@
                     "name": "Wadada Doonta"
                 },
                 "type/waterway": {
-                    "name": "Biyo Mareen"
-                },
-                "waterway": {
                     "name": "Biyo Mareen"
                 },
                 "waterway/canal": {

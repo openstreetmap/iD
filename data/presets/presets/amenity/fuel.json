@@ -9,12 +9,15 @@
         "self_service"
     ],
     "moreFields": [
+        "brand",
         "building",
         "email",
         "fax",
+        "gnis/feature_id",
         "opening_hours",
         "payment_multi",
         "phone",
+        "ref/vatin",
         "website",
         "wheelchair"
     ],

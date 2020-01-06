@@ -1,9 +1,7 @@
 {
     "icon": "maki-triangle-stroked",
-    "fields": [
-        "name"
-    ],
     "moreFields": [
+        "{place}",
         "website"
     ],
     "geometry": [

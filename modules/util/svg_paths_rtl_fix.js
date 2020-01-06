@@ -3,22 +3,38 @@
 
 import { WordShaper } from 'alif-toolkit';
 
-export var rtlRegex = /[\u0590-\u05FF\u0600-\u06FF\u0780-\u07BF]/;
+export var rtlRegex = /[\u0590-\u05FF\u0600-\u06FF\u0750-\u07BF\u08A0–\u08BF]/;
 
 export function fixRTLTextForSvg(inputText) {
     var ret = '', rtlBuffer = [];
     var arabicRegex = /[\u0600-\u06FF]/g;
-    var arabicMath = /[\u0660-\u066C]+/g;
+    var arabicDiacritics = /[\u0610-\u061A\u064B-\u065F\u0670\u06D6-\u06ED]/g;
+    var arabicMath = /[\u0660-\u066C\u06F0-\u06F9]+/g;
     var thaanaVowel = /[\u07A6-\u07B0]/;
     var hebrewSign = /[\u0591-\u05bd\u05bf\u05c1-\u05c5\u05c7]/;
 
-    if (!arabicRegex.test(inputText)) {
-        // Hebrew or Thaana RTL script
-        for (var n = 0; n < inputText.length; n++) {
-            var c = inputText[n];
-            if ((thaanaVowel.test(c) || hebrewSign.test(c)) && rtlBuffer.length) {
+    // Arabic word shaping
+    if (arabicRegex.test(inputText)) {
+        inputText = WordShaper(inputText);
+    }
+
+    for (var n = 0; n < inputText.length; n++) {
+        var c = inputText[n];
+        if (arabicMath.test(c)) {
+            // Arabic numbers go LTR
+            ret += rtlBuffer.reverse().join('');
+            rtlBuffer = [c];
+        } else {
+            if (rtlBuffer.length && arabicMath.test(rtlBuffer[rtlBuffer.length - 1])) {
+                ret += rtlBuffer.reverse().join('');
+                rtlBuffer = [];
+            }
+            if ((thaanaVowel.test(c) || hebrewSign.test(c) || arabicDiacritics.test(c)) && rtlBuffer.length) {
                 rtlBuffer[rtlBuffer.length - 1] += c;
-            } else if (rtlRegex.test(c)) {
+            } else if (rtlRegex.test(c)
+                // include Arabic presentation forms
+                || (c.charCodeAt(0) >= 64336 && c.charCodeAt(0) <= 65023)
+                || (c.charCodeAt(0) >= 65136 && c.charCodeAt(0) <= 65279)) {
                 rtlBuffer.push(c);
             } else if (c === ' ' && rtlBuffer.length) {
                 // whitespace within RTL text
@@ -29,17 +45,7 @@ export function fixRTLTextForSvg(inputText) {
                 rtlBuffer = [];
             }
         }
-        ret += rtlBuffer.reverse().join('');
-        return ret;
-    } else {
-        var label = WordShaper(inputText).split('').reverse().join('');
-        // prevent Arabic numbers from being reversed
-        var numericSwaps = label.match(arabicMath) || [];
-        for (var i = 0; i < numericSwaps.length; i++) {
-            if (numericSwaps[i].length > 1) {
-                label = label.replace(numericSwaps[i], numericSwaps[i].split('').reverse().join(''));
-            }
-        }
-        return label;
     }
+    ret += rtlBuffer.reverse().join('');
+    return ret;
 }

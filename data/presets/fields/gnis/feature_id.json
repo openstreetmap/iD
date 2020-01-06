@@ -1,0 +1,13 @@
+{
+    "key": "gnis:feature_id",
+    "type": "identifier",
+    "label": "GNIS Feature ID",
+    "urlFormat": "https://geonames.usgs.gov/apex/f?p=gnispq:3:::NO::P3_FID:{value}",
+    "pattern": "^[0-9]{1,}$",
+    "countryCodes": ["us"],
+    "terms": [
+        "Federal Geographic Names Information Service",
+        "United States Board on Geographic Names",
+        "USA"
+    ]
+}

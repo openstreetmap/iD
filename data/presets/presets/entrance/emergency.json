@@ -1,0 +1,21 @@
+{
+    "icon": "maki-entrance-alt1",
+    "fields": [
+        "ref",
+        "door",
+        "access_simple",
+        "level"
+    ],
+    "geometry": [
+        "vertex"
+    ],
+    "tags": {
+        "entrance": "emergency"
+    },
+    "terms": [
+        "fire exit",
+        "door"
+    ],
+    "matchScore": 0.8,
+    "name": "Emergency Exit"
+}

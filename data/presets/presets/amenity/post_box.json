@@ -10,6 +10,7 @@
         "access_simple",
         "brand",
         "covered",
+        "gnis/feature_id",
         "height",
         "indoor",
         "level",

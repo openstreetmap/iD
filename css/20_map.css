@@ -286,11 +286,13 @@ text.point {
 
 /* Wikidata-tagged */
 g.point.tag-wikidata path.stroke {
-    stroke-width: 3px;
-    stroke: #777;
-    fill: #ddd;
+    stroke-width: 2px;
+    stroke: #666;
+    fill: #eee;
 }
-
+g.point.tag-wikidata .icon {
+    color: #666;
+}
 
 /* Selected Members */
 g.vertex.selected-member .shadow,

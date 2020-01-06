@@ -14,6 +14,7 @@
         "dog",
         "email",
         "fax",
+        "gnis/feature_id",
         "lit",
         "phone",
         "website",

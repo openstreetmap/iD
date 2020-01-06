@@ -1,4 +1,5 @@
 {
+    "icon": "temaki-billboard",
     "fields": [
         "direction",
         "lit"

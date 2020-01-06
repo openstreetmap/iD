@@ -4,6 +4,9 @@
         "crop",
         "building_area"
     ],
+    "moreFields": [
+        "gnis/feature_id"
+    ],
     "geometry": [
         "point",
         "area"

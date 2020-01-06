@@ -10,15 +10,18 @@
     ],
     "moreFields": [
         "air_conditioning",
+        "brand",
         "currency_multi",
         "email",
         "fax",
+        "gnis/feature_id",
         "internet_access",
         "internet_access/fee",
         "internet_access/ssid",
         "level",
         "opening_hours",
         "phone",
+        "ref/vatin",
         "website",
         "wheelchair"
     ],

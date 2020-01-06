@@ -886,6 +886,14 @@ button.add-note svg.icon {
     background: #000;
     color: #ccc;
 }
+.tooltip.dark kbd,
+.map-pane .tooltip kbd {
+    background-color: #666;
+    border: solid 1px #444;
+    border-bottom-color: #333;
+    box-shadow: inset 0 -1px 0 #333;
+    color: #eee;
+}
 
 /* Exceptions for tooltip layouts */
 
@@ -2471,6 +2479,17 @@ button.preset-favorite-button.active .icon {
     border-radius: 0 0 0 4px;
 }
 
+[dir='ltr'] .form-field-input-identifier > input:last-child,
+[dir='rtl'] .form-field-input-identifier > input:first-child,
+[dir='ltr'] .form-field-input-identifier > button {
+    border-bottom-right-radius: 4px;
+}
+[dir='ltr'] .form-field-input-identifier > input:first-child,
+[dir='rtl'] .form-field-input-identifier > input:last-child,
+[dir='rtl'] .form-field-input-identifier > button {
+    border-bottom-left-radius: 4px;
+}
+
 /* draw the up/down on the buttons */
 .form-field-input-number button.decrement::after,
 .form-field-input-number button.increment::after {
@@ -2496,7 +2515,7 @@ button.preset-favorite-button.active .icon {
 ------------------------------------------------------- */
 .form-field-input-check {
     display: flex;
-    align-items: end;
+    align-items: center;
     background: #fff;
     padding: 5px 10px;
     color: #7092ff;
@@ -2508,6 +2527,7 @@ button.preset-favorite-button.active .icon {
     flex: 0 1 auto;
     min-height: 20px;
     width: 20px;
+    margin-top: 0;
 }
 .form-field-input-check > span {
     flex: 1 1 auto;
@@ -2518,6 +2538,12 @@ button.preset-favorite-button.active .icon {
     border: 1px solid #ccd5e3;
     border-radius: 2px;
     padding: 0px 8px;
+}
+[dir='ltr'] .form-field-input-check > .reverser.button {
+    padding-right: 2px;
+}
+[dir='rtl'] .form-field-input-check > .reverser.button {
+    padding-left: 2px;
 }
 .form-field-input-check > .reverser.button.hide {
     display: none;
@@ -3342,7 +3368,6 @@ img.tag-reference-wiki-image {
     box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.3);
     */
 }
-.raw-member-editor .member-row.dragging
 
 /* preserve extra space at bottom of inspector to allow for dropdown options - #5280 */
 .raw-membership-editor.inspector-inner {
@@ -3648,22 +3673,18 @@ div.full-screen > button:hover {
 
 /* Background / Map Data / Help Pane buttons
 ------------------------------------------------------- */
-.help-control > button {
-    border-radius: 0 0 0 4px;
-}
-[dir='rtl'] .help-control > button {
-    border-radius: 0 0 4px 0;
-}
-
-.map-data-control button {
-    border-radius: 0;
-}
-
 .background-control > button {
     border-radius: 4px 0 0 0;
 }
 [dir='rtl'] .background-control > button {
     border-radius: 0 4px 0 0;
+}
+
+.help-control > button {
+    border-radius: 0 0 0 4px;
+}
+[dir='rtl'] .help-control > button {
+    border-radius: 0 0 4px 0;
 }
 
 
@@ -4024,6 +4045,7 @@ button.autofix.action.active {
 
 input.square-degrees-input {
     padding: 2px !important; /* important needed for rtl */
+    width: 40px;
     height: unset;
     text-align: center;
     background: rgba(0,0,0,0);
@@ -5183,7 +5205,7 @@ img.tile-debug {
 
 .api-status {
     text-align: right;
-    padding: 0px 10px;
+    padding: 1px 10px;
     color: #eee;
     flex: 1 1 auto;
 }
@@ -5197,11 +5219,13 @@ img.tile-debug {
     background: #a22;
 }
 
-.api-status-login {
-    color: #aaf;
+.api-status a {
+    text-decoration: underline;
+    color: #ccc;
+    pointer-events: all;
 }
-.api-status-login:hover {
-    color: #ccf;
+.api-status a:hover {
+    color: inherit;
 }
 
 /* Notification Badges
@@ -5293,9 +5317,11 @@ img.tile-debug {
 }
 
 .modal-section {
-    width: 100%;
     padding: 20px;
     border-bottom: 1px solid #ccc;
+}
+.modal-section p:not(:last-of-type) {
+    padding-bottom: 20px;
 }
 .modal-section.header h3 {
     padding: 0;

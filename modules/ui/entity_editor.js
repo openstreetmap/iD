@@ -252,7 +252,8 @@ export function uiEntityEditor(context) {
                     difference.didChange.deletion;
             if (!significant) return;
 
-            if (!_entityIDs.every(context.hasEntity)) return;
+            _entityIDs = _entityIDs.filter(context.hasEntity);
+            if (!_entityIDs.length) return;
 
             loadActivePreset();
 

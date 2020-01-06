@@ -1,0 +1,13 @@
+{
+    "icon": "iD-relation",
+    "fields": [
+        "connectivity"
+    ],
+    "geometry": [
+        "relation"
+    ],
+    "tags": {
+        "type": "connectivity"
+    },
+    "name": "Lane Connectivity"
+}

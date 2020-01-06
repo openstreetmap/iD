@@ -9,6 +9,7 @@
         "historic/wreck/visible_at_high_tide"
     ],
     "moreFields": [
+        "{historic}",
         "seamark/type"
     ],
     "geometry": [
