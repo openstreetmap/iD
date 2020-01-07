@@ -909,6 +909,10 @@
       "replace": {"railway": "station", "public_transport": "station"}
     },
     {
+      "old": {"railway": "platform"},
+      "replace": {"railway": "platform", "public_transport": "platform"}
+    },
+    {
       "old": {"recommended_speed": "*"},
       "replace": {"maxspeed:advisory": "$1"}
     },
