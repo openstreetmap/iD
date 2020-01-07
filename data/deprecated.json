@@ -905,6 +905,22 @@
       "replace": {"public_transport": "station", "aerialway": "station"}
     },
     {
+      "old": {"pump": "hand_pump"},
+      "replace": {"pump": "manual"}
+    },
+    {
+      "old": {"pump": "electrical_pump"},
+      "replace": {"pump": "powered"}
+    },
+    {
+      "old": {"pump": "no_pump"},
+      "replace": {"pump": "no"}
+    },
+    {
+      "old": {"pump": "power"},
+      "replace": {"pump": "powered"}
+    },
+    {
       "old": {"railway": "*", "abandoned": "yes"},
       "replace": {"abandoned:railway": "yes"}
     },

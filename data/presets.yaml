@@ -1807,6 +1807,15 @@ en:
       pump:
         # pump=*
         label: Pump
+        options:
+          # pump=manual
+          manual: Manual Hand Pump
+          # pump=no
+          'no': None
+          # pump=powered
+          powered: Machine-Powered Pump
+          # pump=yes
+          'yes': 'Yes'
       railway:
         # railway=*
         label: Type

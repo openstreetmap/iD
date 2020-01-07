@@ -4093,7 +4093,13 @@
                     "label": "Type"
                 },
                 "pump": {
-                    "label": "Pump"
+                    "label": "Pump",
+                    "options": {
+                        "yes": "Yes",
+                        "manual": "Manual Hand Pump",
+                        "powered": "Machine-Powered Pump",
+                        "no": "None"
+                    }
                 },
                 "railway": {
                     "label": "Type"

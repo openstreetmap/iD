@@ -312,7 +312,7 @@
     "produce": {"key": "produce", "type": "semiCombo", "label": "Produce"},
     "product": {"key": "product", "type": "semiCombo", "label": "Products"},
     "public_bookcase/type": {"key": "public_bookcase:type", "type": "combo", "label": "Type"},
-    "pump": {"key": "pump", "type": "combo", "label": "Pump"},
+    "pump": {"key": "pump", "type": "combo", "label": "Pump", "strings": {"options": {"yes": "Yes", "manual": "Manual Hand Pump", "powered": "Machine-Powered Pump", "no": "None"}}},
     "railway": {"key": "railway", "type": "typeCombo", "label": "Type"},
     "railway/position": {"key": "railway:position", "type": "text", "placeholder": "Distance to one decimal (123.4)", "label": "Milestone Position"},
     "railway/signal/direction": {"key": "railway:signal:direction", "type": "combo", "label": "Direction Affected", "strings": {"options": {"forward": "Forward", "backward": "Backward", "both": "Both / All"}}},
