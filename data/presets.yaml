@@ -3195,6 +3195,11 @@ en:
         name: Gas Station
         # 'terms: petrol,fuel,gasoline,propane,diesel,lng,cng,biodiesel'
         terms: '<translate with synonyms or related terms for ''Gas Station'', separated by commas>'
+      amenity/gambling:
+        # amenity=gambling
+        name: Gambling Hall
+        # 'terms: betting,bingo,blackjack,casino,craps,gamble,gambling,keno,lottery,pachinko,poker,roulette,slot machines,slots'
+        terms: '<translate with synonyms or related terms for ''Gambling Hall'', separated by commas>'
       amenity/grave_yard:
         # amenity=grave_yard
         name: Graveyard
@@ -7458,7 +7463,7 @@ en:
       shop/bookmaker:
         # shop=bookmaker
         name: Bookmaker
-        # 'terms: betting,bookie'
+        # 'terms: betting,bookie,gamble,gambling,turf accountant'
         terms: '<translate with synonyms or related terms for ''Bookmaker'', separated by commas>'
       shop/books:
         # shop=books
@@ -7841,6 +7846,7 @@ en:
       shop/lottery:
         # shop=lottery
         name: Lottery Shop
+        # 'terms: lotto tickets,gamble,gambling,scratch-offs'
         terms: '<translate with synonyms or related terms for ''Lottery Shop'', separated by commas>'
       shop/mall:
         # shop=mall

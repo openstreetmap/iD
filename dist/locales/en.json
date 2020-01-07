@@ -5345,6 +5345,10 @@
                     "name": "Gas Station",
                     "terms": "petrol,fuel,gasoline,propane,diesel,lng,cng,biodiesel"
                 },
+                "amenity/gambling": {
+                    "name": "Gambling Hall",
+                    "terms": "betting,bingo,blackjack,casino,craps,gamble,gambling,keno,lottery,pachinko,poker,roulette,slot machines,slots"
+                },
                 "amenity/grave_yard": {
                     "name": "Graveyard",
                     "terms": "burial ground,cemetary,cemetery,churchyard,columbarium,grave yard,graveyard,mausoleum,tomb"
@@ -8942,7 +8946,7 @@
                 },
                 "shop/bookmaker": {
                     "name": "Bookmaker",
-                    "terms": "betting,bookie"
+                    "terms": "betting,bookie,gamble,gambling,turf accountant"
                 },
                 "shop/books": {
                     "name": "Book Store",
@@ -9254,7 +9258,7 @@
                 },
                 "shop/lottery": {
                     "name": "Lottery Shop",
-                    "terms": ""
+                    "terms": "lotto tickets,gamble,gambling,scratch-offs"
                 },
                 "shop/mall": {
                     "name": "Mall",

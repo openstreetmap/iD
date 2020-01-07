@@ -628,8 +628,16 @@
       "replace": {"natural": "beach"}
     },
     {
+      "old": {"leisure": "bingo"},
+      "replace": {"amenity": "gambling", "gambling": "bingo"}
+    },
+    {
       "old": {"leisure": "club"},
       "replace": {"club": "*"}
+    },
+    {
+      "old": {"leisure": "gambling"},
+      "replace": {"amenity": "gambling"}
     },
     {
       "old": {"leisure": "golf_pin"},
@@ -644,12 +652,12 @@
       "replace": {"leisure": "ice_rink", "sport": "ice_skating"}
     },
     {
-      "old": {"leisure": "video_arcade"},
-      "replace": {"leisure": "amusement_arcade"}
-    },
-    {
       "old": {"leisure": "recreation_ground"},
       "replace": {"landuse": "recreation_ground"}
+    },
+    {
+      "old": {"leisure": "video_arcade"},
+      "replace": {"leisure": "amusement_arcade"}
     },
     {
       "old": {"Level": "*"},
