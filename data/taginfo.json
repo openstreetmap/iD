@@ -1004,6 +1004,7 @@
     {"key": "shop", "value": "chocolate", "description": "🄿 Chocolate Store", "object_types": ["node", "area"], "icon_url": "https://cdn.jsdelivr.net/gh/mapbox/maki/icons/confectionery-15.svg"},
     {"key": "shop", "value": "clothes", "description": "🄿 Clothing Store", "object_types": ["node", "area"], "icon_url": "https://cdn.jsdelivr.net/gh/mapbox/maki/icons/clothing-store-15.svg"},
     {"key": "clothes", "value": "underwear", "description": "🄿 Underwear Store", "object_types": ["node", "area"], "icon_url": "https://cdn.jsdelivr.net/gh/mapbox/maki/icons/clothing-store-15.svg"},
+    {"key": "clothes", "value": "wedding", "description": "🄿 Wedding Clothes Store", "object_types": ["node", "area"], "icon_url": "https://cdn.jsdelivr.net/gh/ideditor/temaki/icons/gown.svg"},
     {"key": "shop", "value": "coffee", "description": "🄿 Coffee Store", "object_types": ["node", "area"], "icon_url": "https://cdn.jsdelivr.net/gh/ideditor/temaki/icons/coffee.svg"},
     {"key": "shop", "value": "computer", "description": "🄿 Computer Store", "object_types": ["node", "area"], "icon_url": "https://cdn.jsdelivr.net/gh/openstreetmap/iD@master/svg/fontawesome/fas-laptop.svg"},
     {"key": "shop", "value": "confectionery", "description": "🄿 Candy Store", "object_types": ["node", "area"], "icon_url": "https://cdn.jsdelivr.net/gh/mapbox/maki/icons/confectionery-15.svg"},

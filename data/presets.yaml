@@ -7565,6 +7565,11 @@ en:
         name: Underwear Store
         # 'terms: boutique,bras,brassieres,briefs,boxers,fashion,lingerie,panties,slips,socks,stockings,underclothes,undergarments,underpants,undies'
         terms: '<translate with synonyms or related terms for ''Underwear Store'', separated by commas>'
+      shop/clothes/wedding:
+        # 'shop=clothes, clothes=wedding'
+        name: Wedding Clothes Store
+        # 'terms: boutique,bridal,bride,bridegroom,bridesmaid,groom,groomsman,tuxedo,wedding dress,wedding gown'
+        terms: '<translate with synonyms or related terms for ''Wedding Clothes Store'', separated by commas>'
       shop/coffee:
         # shop=coffee
         name: Coffee Store

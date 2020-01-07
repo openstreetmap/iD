@@ -9028,6 +9028,10 @@
                     "name": "Underwear Store",
                     "terms": "boutique,bras,brassieres,briefs,boxers,fashion,lingerie,panties,slips,socks,stockings,underclothes,undergarments,underpants,undies"
                 },
+                "shop/clothes/wedding": {
+                    "name": "Wedding Clothes Store",
+                    "terms": "boutique,bridal,bride,bridegroom,bridesmaid,groom,groomsman,tuxedo,wedding dress,wedding gown"
+                },
                 "shop/coffee": {
                     "name": "Coffee Store",
                     "terms": ""
