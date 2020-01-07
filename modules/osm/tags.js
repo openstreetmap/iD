@@ -76,7 +76,8 @@ export var osmOneWayTags = {
         'drain': true,
         'fish_pass': true,
         'river': true,
-        'stream': true
+        'stream': true,
+        'tidal_channel': true
     }
 };
 
@@ -135,5 +136,5 @@ export var osmRailwayTrackTagValues = {
 
 // "waterway" tag values for line features representing water flow
 export var osmFlowingWaterwayTagValues = {
-    canal: true, ditch: true, drain: true, fish_pass: true, river: true, stream: true
+    canal: true, ditch: true, drain: true, fish_pass: true, river: true, stream: true, tidal_channel: true
 };

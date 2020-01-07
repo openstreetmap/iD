@@ -9946,6 +9946,10 @@
                     "name": "Stream",
                     "terms": "beck,branch,brook,burn,course,creek,current,drift,flood,flow,freshet,race,rill,rindle,rivulet,run,runnel,rush,spate,spritz,surge,tide,torrent,tributary,watercourse"
                 },
+                "waterway/tidal_channel": {
+                    "name": "Tidal Channel",
+                    "terms": "coastal,pill,intertidal,mangroves,marine,salt marsh,tidal creek,tidal flat,tidal inlet,waterway"
+                },
                 "waterway/water_point": {
                     "name": "Marine Drinking Water",
                     "terms": "water faucet,water point,water tap,water source,water spigot"

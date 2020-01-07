@@ -8640,6 +8640,11 @@ en:
         name: Intermittent Stream
         # 'terms: arroyo,beck,branch,brook,burn,course,creek,drift,flood,flow,gully,run,runnel,rush,spate,spritz,tributary,wadi,wash,watercourse'
         terms: '<translate with synonyms or related terms for ''Intermittent Stream'', separated by commas>'
+      waterway/tidal_channel:
+        # waterway=tidal_channel
+        name: Tidal Channel
+        # 'terms: coastal,pill,intertidal,mangroves,marine,salt marsh,tidal creek,tidal flat,tidal inlet,waterway'
+        terms: '<translate with synonyms or related terms for ''Tidal Channel'', separated by commas>'
       waterway/water_point:
         # waterway=water_point
         name: Marine Drinking Water
