@@ -6285,7 +6285,7 @@ en:
       man_made/water_well:
         # man_made=water_well
         name: Water Well
-        # 'terms: aquifer,drinking water,water point,water source'
+        # 'terms: aquifer,drinking water,water pump,water point,water source'
         terms: '<translate with synonyms or related terms for ''Water Well'', separated by commas>'
       man_made/water_works:
         # man_made=water_works

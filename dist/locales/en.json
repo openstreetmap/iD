@@ -7941,7 +7941,7 @@
                 },
                 "man_made/water_well": {
                     "name": "Water Well",
-                    "terms": "aquifer,drinking water,water point,water source"
+                    "terms": "aquifer,drinking water,water pump,water point,water source"
                 },
                 "man_made/water_works": {
                     "name": "Water Works",
