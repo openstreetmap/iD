@@ -475,10 +475,10 @@ export function validationCrossingWays(context) {
 
                 var resultWayIDs = [selectedWayID];
 
-                var crossingWayID = this.issue.entityIds[0];
+                var crossedWayID = this.issue.entityIds[0];
                 var edge = this.issue.data.edges[1];
                 if (this.issue.entityIds[0] === selectedWayID) {
-                    crossingWayID = this.issue.entityIds[1];
+                    crossedWayID = this.issue.entityIds[1];
                     edge = this.issue.data.edges[0];
                 }
 
@@ -488,14 +488,30 @@ export function validationCrossingWays(context) {
 
                     var edgeNodes = [graph.entity(edge[0]), graph.entity(edge[1])];
 
-                    var crossingWay = graph.hasEntity(crossingWayID);
-                    // use the width of the crossing feature as the structure length, if available
-                    var widthMeters = crossingWay && crossingWay.tags.width && parseFloat(crossingWay.tags.width);
+                    var crossedWay = graph.hasEntity(crossedWayID);
+                    // use the explicit width of the crossed feature as the structure length, if available
+                    var widthMeters = crossedWay && crossedWay.tags.width && parseFloat(crossedWay.tags.width);
+                    if (!widthMeters) {
+                        widthMeters = crossedWay && crossedWay.impliedLineWidthMeters();
+                    }
+                    if (widthMeters) {
+                        if (getFeatureTypeForTags(crossedWay.tags) === 'railway') {
+                            // rail bridges are generally much wider than the rail bed itself, compensate
+                            widthMeters *= 2;
+                        }
+                    } else {
+                        // should ideally never land here since all rail/water/road tags should have implied width
+                        widthMeters = 8;
+                    }
+
+                    // add padding since the structure must extend past the edges of the crossed feature
+                    widthMeters += 4;
+
                     // clamp the width to a reasonable range
-                    if (widthMeters) widthMeters = Math.min(Math.max(widthMeters, 0.5), 50);
+                    widthMeters = Math.min(Math.max(widthMeters, 4), 50);
 
                     // the proposed length of the structure, in decimal degrees
-                    var structLength = (widthMeters && geoMetersToLon(widthMeters, crossingLoc[1])) || 0.00008;
+                    var structLength = geoMetersToLon(widthMeters, crossingLoc[1]);
                     var halfStructLength = structLength / 2;
 
                     var angle = geoVecAngle(edgeNodes[0].loc, edgeNodes[1].loc);
