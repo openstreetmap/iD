@@ -1,5 +1,6 @@
 import { dispatch as d3_dispatch } from 'd3-dispatch';
 import { event as d3_event, select as d3_select } from 'd3-selection';
+import { drag as d3_drag } from 'd3-drag';
 import * as countryCoder from '@ideditor/country-coder';
 
 import { osmEntity } from '../../osm/entity';
@@ -439,6 +440,124 @@ export function uiFieldCombo(field, context) {
             var enter = chips.enter()
                 .insert('li', '.input-wrap')
                 .attr('class', 'chips');
+            
+            enter.style('cursor', 'move');
+
+            // allow drag and drop re-ordering of chips
+            var dragOrigin, targetIndex;
+            enter.call(d3_drag()
+                .on('start', function() {
+                    dragOrigin = {
+                        x: d3_event.x,
+                        y: d3_event.y
+                    };
+                    targetIndex = null;
+                })
+                .on('drag', function(d, index) {
+                    var x = d3_event.x - dragOrigin.x,
+                        y = d3_event.y - dragOrigin.y;
+
+                    if (!d3_select(this).classed('dragging') &&
+                        // don't display drag until dragging beyond a distance threshold
+                        Math.sqrt(Math.pow(x, 2) + Math.pow(y, 2)) <= 5) return;
+
+                    d3_select(this)
+                        .classed('dragging', true);
+
+                    targetIndex = null;
+                    var targetIndexOffsetTop = null;
+                    var draggedTagWidth = d3_select(this).node().offsetWidth;
+
+                    if (field.id === 'destination_oneway') { // meaning tags are full width
+                        container.selectAll('.chips')
+                            .style('transform', function(d2, index2) {
+                                var node = d3_select(this).node();
+
+                                if (index === index2) {
+                                    return 'translate(' + x + 'px, ' + y + 'px)';
+                                // move the dragged tag up the order
+                                } else if (index2 > index && d3_event.y > node.offsetTop - node.offsetHeight) {
+                                    if (targetIndex === null || index2 > targetIndex) {
+                                        targetIndex = index2;
+                                    }
+                                    return 'translateY(-100%)';
+                                // move the dragged tag down the order
+                                } else if (index2 < index && d3_event.y < node.offsetTop) {
+                                    if (targetIndex === null || index2 < targetIndex) {
+                                        targetIndex = index2;
+                                    }
+                                    return 'translateY(100%)';
+                                }
+                                return null;
+                            });
+                    } else {
+                        container.selectAll('.chips')
+                            .each(function(d2, index2) {
+                                var node = d3_select(this).node();
+
+                                // check the cursor is in the bounding box
+                                if (
+                                    index !== index2 &&
+                                    d3_event.x < node.offsetLeft + (node.offsetWidth / 2) &&
+                                    d3_event.x > node.offsetLeft -  (node.offsetWidth / 2) &&
+                                    d3_event.y < node.offsetTop + node.offsetHeight &&
+                                    d3_event.y > node.offsetTop
+                                ) {
+                                    targetIndex = index2;
+                                    targetIndexOffsetTop = node.offsetTop;
+                                }
+                            });
+
+                        container.selectAll('.chips')
+                            .style('transform', function(d2, index2) {
+                                var node = d3_select(this).node();
+
+                                if (index === index2) {
+                                    return 'translate(' + x + 'px, ' + y + 'px)';
+                                }
+
+                                // only translate tags in the same row
+                                if (node.offsetTop === targetIndexOffsetTop) {
+                                    if (index2 < index && index2 >= targetIndex) {
+                                        return 'translateX(' + draggedTagWidth + 'px)';
+                                    } else if (index2 > index && index2 <= targetIndex) {
+                                        return 'translateX(-' + draggedTagWidth + 'px)';
+                                    }
+                                }
+                                return null;
+                            });
+                        }
+                })
+                .on('end', function(d, index) {
+                    if (!d3_select(this).classed('dragging')) {
+                        return;
+                    }
+
+                    d3_select(this)
+                        .classed('dragging', false);
+
+                    container.selectAll('.chips')
+                        .style('transform', null);
+
+                    if (targetIndex !== null) {
+                        var element = _multiData[index];
+                        _multiData.splice(index, 1);
+                        _multiData.splice(targetIndex, 0, element);
+
+                        var t = {};
+
+                        if (_multiData.length) {
+                            t[field.key] = _multiData.map(function(element) {
+                                return element.key;
+                            }).join(';');
+                        } else {
+                            t[field.key] = undefined;
+                        }
+
+                        dispatch.call('change', this, t);
+                    }
+                })
+            );
 
             enter.append('span');
             enter.append('a');
