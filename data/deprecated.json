@@ -922,11 +922,11 @@
     },
     {
       "old": {"railway": "*", "abandoned": "yes"},
-      "replace": {"abandoned:railway": "yes"}
+      "replace": {"abandoned:railway": "$1"}
     },
     {
       "old": {"railway": "*", "disused": "yes"},
-      "replace": {"disused:railway": "yes"}
+      "replace": {"disused:railway": "$1"}
     },
     {
       "old": {"railway": "station"},
