@@ -3703,13 +3703,13 @@ li.issue-fix-item:not(.actionable) .fix-icon {
 }
 
 .inspector-hover a,
-.inspector-hover .form-field-input-multicombo .chips,
+.inspector-hover .form-field-input-multicombo .chip,
 .inspector-hover .form-field-input-check span,
 .inspector-hover .entity-issues .issue .icon {
     color: #666;
 }
 
-.inspector-hover .form-field-input-multicombo .chips {
+.inspector-hover .form-field-input-multicombo .chip {
     background: #eee;
     border: 1px solid #ccc;
 }
@@ -3739,7 +3739,7 @@ li.issue-fix-item:not(.actionable) .fix-icon {
 .inspector-hover .combobox-caret,
 .inspector-hover .header button,
 .inspector-hover .quick-links,
-.inspector-hover .form-field-input-multicombo .chips .remove,
+.inspector-hover .form-field-input-multicombo .chip .remove,
 .inspector-hover .hide-toggle:before,
 .inspector-hover .more-fields,
 .inspector-hover .field-label button,
