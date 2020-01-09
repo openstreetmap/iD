@@ -3246,9 +3246,9 @@ en:
         terms: '<translate with synonyms or related terms for ''Karaoke Box'', separated by commas>'
       amenity/kindergarten:
         # amenity=kindergarten
-        name: Preschool/Kindergarten Grounds
+        name: Preschool / Kindergarten Grounds
         # 'terms: kindergarden,pre-school'
-        terms: '<translate with synonyms or related terms for ''Preschool/Kindergarten Grounds'', separated by commas>'
+        terms: '<translate with synonyms or related terms for ''Preschool / Kindergarten Grounds'', separated by commas>'
       amenity/language_school:
         # amenity=language_school
         name: Language School
@@ -4317,9 +4317,9 @@ en:
         terms: '<translate with synonyms or related terms for ''Industrial Building'', separated by commas>'
       building/kindergarten:
         # building=kindergarten
-        name: Preschool/Kindergarten Building
+        name: Preschool / Kindergarten Building
         # 'terms: kindergarden,pre-school'
-        terms: '<translate with synonyms or related terms for ''Preschool/Kindergarten Building'', separated by commas>'
+        terms: '<translate with synonyms or related terms for ''Preschool / Kindergarten Building'', separated by commas>'
       building/mosque:
         # building=mosque
         name: Mosque Building

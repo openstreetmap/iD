@@ -5384,7 +5384,7 @@
                     "terms": "karaoke club,karaoke room,karaoke television,KTV"
                 },
                 "amenity/kindergarten": {
-                    "name": "Preschool/Kindergarten Grounds",
+                    "name": "Preschool / Kindergarten Grounds",
                     "terms": "kindergarden,pre-school"
                 },
                 "amenity/language_school": {
@@ -6280,7 +6280,7 @@
                     "terms": ""
                 },
                 "building/kindergarten": {
-                    "name": "Preschool/Kindergarten Building",
+                    "name": "Preschool / Kindergarten Building",
                     "terms": "kindergarden,pre-school"
                 },
                 "building/mosque": {
