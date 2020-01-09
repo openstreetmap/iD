@@ -1557,20 +1557,28 @@ a.hide-toggle {
     margin-left: 6px;
 }
 
-.form-field-input-multicombo li.chips {
+.form-field-input-multicombo li.chip {
     background-color: #eff2f7;
     border: 1px solid #ccd5e3;
     line-height: 25px;
     max-width: 100%;
 }
-[dir='ltr'] .form-field-input-multicombo li.chips {
+[dir='ltr'] .form-field-input-multicombo li.chip {
     padding: 2px 0px 2px 5px;
 }
-[dir='rtl'] .form-field-input-multicombo li.chips {
+[dir='rtl'] .form-field-input-multicombo li.chip {
     padding: 2px 5px 2px 0px;
 }
+.form-field-input-multicombo li.chip.draggable {
+    cursor: grab;
+}
+.form-field-input-multicombo li.chip.dragging {
+    opacity: 0.75;
+    z-index: 3000;
+    cursor: grabbing;
+}
 
-.form-field-input-multicombo li.chips span {
+.form-field-input-multicombo li.chip span {
     display: block;
     flex: 1 1 auto;
     overflow: hidden;
@@ -1604,7 +1612,7 @@ a.hide-toggle {
     border-radius: 4px !important;
 }
 
-.form-field-input-multicombo .full-line-chips li.chips {
+.form-field-input-multicombo .full-line-chips li.chip {
     width: 100%;
 }
 .form-field-input-multicombo .full-line-chips .input-wrap {
