@@ -3,7 +3,7 @@ import { actionChangeTags } from '../actions/change_tags';
 import { actionMergeNodes } from '../actions/merge_nodes';
 import { actionSplit } from '../actions/split';
 import { modeSelect } from '../modes/select';
-import { geoAngle, geoExtent, geoLineIntersection, geoSphericalClosestNode, geoVecAngle, geoMetersToLon, geoVecLength } from '../geo';
+import { geoAngle, geoExtent, geoLineIntersection, geoSphericalClosestNode, geoSphericalDistance, geoVecAngle, geoMetersToLon } from '../geo';
 import { osmNode } from '../osm/node';
 import { osmFlowingWaterwayTagValues, osmPathHighwayTagValues, osmRailwayTrackTagValues, osmRoutableHighwayTagValues } from '../osm/tags';
 import { t } from '../util/locale';
@@ -524,34 +524,56 @@ export function validationCrossingWays(context) {
                     // clamp the length to a reasonable range
                     structLengthMeters = Math.min(Math.max(structLengthMeters, 4), 50);
 
-                    // the proposed length of the structure, in decimal degrees
-                    var structLengthDeg = geoMetersToLon(structLengthMeters, crossingLoc[1]);
-                    var halfStructLength = structLengthDeg / 2;
-
                     var angle = geoVecAngle(edgeNodes[0].loc, edgeNodes[1].loc);
 
-                    var locNewNode1 = [crossingLoc[0] + Math.cos(angle) * halfStructLength,
-                                        crossingLoc[1] + Math.sin(angle) * halfStructLength];
-                    var locNewNode2 = [crossingLoc[0] + Math.cos(angle + Math.PI) * halfStructLength,
-                                        crossingLoc[1] + Math.sin(angle + Math.PI)* halfStructLength];
+                    var endpointLocGetter1 = function(lengthMeters) {
+                        var length = geoMetersToLon(lengthMeters, crossingLoc[1]);
+                        return [crossingLoc[0] + Math.cos(angle) * length,
+                                crossingLoc[1] + Math.sin(angle) * length];
+                    };
+                    var endpointLocGetter2 = function(lengthMeters) {
+                        var length = geoMetersToLon(lengthMeters, crossingLoc[1]);
+                        return [crossingLoc[0] + Math.cos(angle + Math.PI) * length,
+                                crossingLoc[1] + Math.sin(angle + Math.PI) * length];
+                    };
+
+                    // avoid creating very short edges from splitting too close to another node
+                    var minEdgeLengthMeters = 0.55;
 
                     // decide where to bound the structure along the way, splitting as necessary
-                    function determineEndpoint(edge, endNode, proposedNodeLoc) {
+                    function determineEndpoint(edge, endNode, locGetter) {
                         var newNode;
 
-                        // avoid creating very short edges from splitting too close to another node
-                        var minEdgeLength = 0.000005;
+                        var idealLength = structLengthMeters / 2;
 
-                        // split only if edge is long
-                        if (geoVecLength(crossingLoc, endNode.loc) - geoVecLength(crossingLoc, proposedNodeLoc) > minEdgeLength) {
-                            // if the edge is long, insert a new node
+                        // distance between the crossing location and the end of the edge,
+                        // the maximum length of this side of the structure
+                        var crossingToEdgeEndDistance = geoSphericalDistance(crossingLoc, endNode.loc);
+
+                        if (crossingToEdgeEndDistance - idealLength > minEdgeLengthMeters) {
+                            // the edge is long enough to insert a new node
+
+                            // the loc that would result in the full expected length
+                            var idealNodeLoc = locGetter(idealLength);
+
                             newNode = osmNode();
-                            graph = actionAddMidpoint({ loc: proposedNodeLoc, edge: edge }, newNode)(graph);
+                            graph = actionAddMidpoint({ loc: idealNodeLoc, edge: edge }, newNode)(graph);
 
-                        } else {
-                            // otherwise use the edge endpoint
-                            newNode = endNode;
+                        } else if (endNode.isIntersection(graph)) {
+                            // the end node is an intersection, try to leave a segment
+                            // between it and the structure - #7202
+
+                            var insetLength = crossingToEdgeEndDistance - minEdgeLengthMeters;
+                            if (insetLength > minEdgeLengthMeters) {
+                                var insetNodeLoc = locGetter(insetLength);
+                                newNode = osmNode();
+                                graph = actionAddMidpoint({ loc: insetNodeLoc, edge: edge }, newNode)(graph);
+                            }
                         }
+
+                        // if the edge is too short to subdivide as desired, then
+                        // just bound the structure at the existing end node
+                        if (!newNode) newNode = endNode;
 
                         var splitAction = actionSplit(newNode.id)
                             .limitWays(resultWayIDs); // only split selected or created ways
@@ -565,8 +587,8 @@ export function validationCrossingWays(context) {
                         return newNode;
                     }
 
-                    var structEndNode1 = determineEndpoint(edge, edgeNodes[1], locNewNode1);
-                    var structEndNode2 = determineEndpoint([edgeNodes[0].id, structEndNode1.id], edgeNodes[0], locNewNode2);
+                    var structEndNode1 = determineEndpoint(edge, edgeNodes[1], endpointLocGetter1);
+                    var structEndNode2 = determineEndpoint([edgeNodes[0].id, structEndNode1.id], edgeNodes[0], endpointLocGetter2);
 
                     var structureWay = resultWayIDs.map(function(id) {
                         return graph.entity(id);
