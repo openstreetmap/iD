@@ -194,20 +194,22 @@ osmEntity.prototype = {
 
         var deprecated = [];
         dataDeprecated.forEach(function(d) {
-            var matchesDeprecatedTags = Object.keys(d.old).every(function(key) {
-                if (!tags[key]) return false;
-                if (d.old[key] === '*') return true;
+            var oldKeys = Object.keys(d.old);
+            var matchesDeprecatedTags = oldKeys.every(function(oldKey) {
+                if (!tags[oldKey]) return false;
+                if (d.old[oldKey] === '*') return true;
 
-                var vals = tags[key].split(';').filter(Boolean);
+                var vals = tags[oldKey].split(';').filter(Boolean);
                 if (vals.length === 0) {
                     return false;
                 } else if (vals.length > 1) {
-                    return vals.indexOf(d.old[key]) !== -1;
+                    return vals.indexOf(d.old[oldKey]) !== -1;
                 } else {
-                    if (tags[key] === d.old[key]) {
-                        if (d.replace && d.old[key] === d.replace[key]) {
-                            return !Object.keys(d.replace).every(function(key) {
-                                return tags[key] === d.replace[key];
+                    if (tags[oldKey] === d.old[oldKey]) {
+                        if (d.replace && d.old[oldKey] === d.replace[oldKey]) {
+                            var replaceKeys = Object.keys(d.replace);
+                            return !replaceKeys.every(function(replaceKey) {
+                                return tags[replaceKey] === d.replace[replaceKey];
                             });
                         } else {
                             return true;
