@@ -8462,6 +8462,11 @@ en:
         # type=enforcement
         name: Enforcement
         terms: '<translate with synonyms or related terms for ''Enforcement'', separated by commas>'
+      type/enforcement/maxspeed:
+        # 'type=enforcement, enforcement=maxspeed'
+        name: Speed Limit Enforcement
+        # 'terms: maxspeed,radar,speed camera'
+        terms: '<translate with synonyms or related terms for ''Speed Limit Enforcement'', separated by commas>'
       type/multipolygon:
         # type=multipolygon
         name: Multipolygon

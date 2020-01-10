@@ -1184,6 +1184,7 @@
     {"key": "type", "value": "boundary", "description": "🄿 Boundary", "object_types": ["relation"], "icon_url": "https://cdn.jsdelivr.net/gh/openstreetmap/iD@master/svg/iD-sprite/presets/boundary.svg"},
     {"key": "type", "value": "connectivity", "description": "🄿 Lane Connectivity", "object_types": ["relation"], "icon_url": "https://cdn.jsdelivr.net/gh/openstreetmap/iD@master/svg/iD-sprite/presets/relation.svg"},
     {"key": "type", "value": "enforcement", "description": "🄿 Enforcement", "object_types": ["relation"], "icon_url": "https://cdn.jsdelivr.net/gh/openstreetmap/iD@master/svg/iD-sprite/presets/relation.svg"},
+    {"key": "enforcement", "value": "maxspeed", "description": "🄿 Speed Limit Enforcement", "object_types": ["relation"], "icon_url": "https://cdn.jsdelivr.net/gh/openstreetmap/iD@master/svg/iD-sprite/presets/relation.svg"},
     {"key": "public_transport", "value": "stop_area_group", "description": "🄿 Transit Stop Area Group", "object_types": ["relation"], "icon_url": "https://cdn.jsdelivr.net/gh/openstreetmap/iD@master/svg/iD-sprite/presets/relation.svg"},
     {"key": "type", "value": "restriction", "description": "🄿 Restriction", "object_types": ["relation"], "icon_url": "https://cdn.jsdelivr.net/gh/openstreetmap/iD@master/svg/iD-sprite/presets/restriction.svg"},
     {"key": "restriction", "value": "no_left_turn", "description": "🄿 No Left Turn", "object_types": ["relation"], "icon_url": "https://cdn.jsdelivr.net/gh/openstreetmap/iD@master/svg/iD-sprite/presets/restriction-no-left-turn.svg"},

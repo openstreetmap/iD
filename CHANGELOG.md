@@ -95,6 +95,7 @@ _Breaking changes, which may affect downstream projects or sites that embed iD, 
 * Add Gambling Hall preset ([#7198])
 * Add Secondhand Clothing Store preset ([#7164])
 * Add Public Prosecutor's Office preset ([#7225])
+* Add Speed Limit Enforcement preset ([#7234])
 * Add presets: Emergency Exit, Geyser, Used Car Dealership, Wedding Clothes Store, Backcountry Camping Area, Group Camping Area, History Museum
 * Rename "Anime Shop" to "Anime / Manga Shop" ([#7223])
 * Update Arts & Crafts Store icon ([#7228])
@@ -115,6 +116,7 @@ _Breaking changes, which may affect downstream projects or sites that embed iD, 
 * Show the Website field by default on Restaurants ([#7226])
 * Show the Hours field by default on Pharmacy Counters ([#7220])
 
+[#7234]: https://github.com/openstreetmap/iD/issues/7234
 [#7192]: https://github.com/openstreetmap/iD/issues/7192
 [#7219]: https://github.com/openstreetmap/iD/issues/7219
 [#7208]: https://github.com/openstreetmap/iD/issues/7208

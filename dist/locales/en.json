@@ -9777,6 +9777,10 @@
                     "name": "Enforcement",
                     "terms": ""
                 },
+                "type/enforcement/maxspeed": {
+                    "name": "Speed Limit Enforcement",
+                    "terms": "maxspeed,radar,speed camera"
+                },
                 "type/public_transport/stop_area_group": {
                     "name": "Transit Stop Area Group",
                     "terms": ""
