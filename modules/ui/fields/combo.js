@@ -442,14 +442,15 @@ export function uiFieldCombo(field, context) {
                 .attr('class', 'chip')
                 .classed('draggable', isSemi);
 
-            if (isSemi) { // only semiCombo values are ordered
-                registerDragAndDrop(enter);
-            }
-
             enter.append('span');
             enter.append('a');
 
-            chips = chips.merge(enter);
+            chips = chips.merge(enter)
+                .order();
+
+            if (isSemi) { // only semiCombo values are ordered
+                registerDragAndDrop(chips);
+            }
 
             chips.select('span')
                 .text(function(d) { return d.value; });
@@ -521,8 +522,8 @@ export function uiFieldCombo(field, context) {
                             // check the cursor is in the bounding box
                             if (
                                 index !== index2 &&
-                                d3_event.x < node.offsetLeft + (node.offsetWidth / 2) &&
-                                d3_event.x > node.offsetLeft -  (node.offsetWidth / 2) &&
+                                d3_event.x < node.offsetLeft + node.offsetWidth + 5 &&
+                                d3_event.x > node.offsetLeft &&
                                 d3_event.y < node.offsetTop + node.offsetHeight &&
                                 d3_event.y > node.offsetTop
                             ) {
