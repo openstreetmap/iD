@@ -4706,6 +4706,11 @@ en:
         name: First Aid Kit
         # 'terms: bandage,first aid,med,med kit,medic*,medkit'
         terms: '<translate with synonyms or related terms for ''First Aid Kit'', separated by commas>'
+      emergency/landing_site:
+        # emergency=landing_site
+        name: Emergency Landing Site
+        # 'terms: helicopter,helipad,heliport'
+        terms: '<translate with synonyms or related terms for ''Emergency Landing Site'', separated by commas>'
       emergency/life_ring:
         # emergency=life_ring
         name: Life Ring

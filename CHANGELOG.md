@@ -89,6 +89,7 @@ _Breaking changes, which may affect downstream projects or sites that embed iD, 
 
 #### :rocket: Presets
 * Add Door Shop preset ([#7192], thanks [@hikemaniac])
+* Add Emergency Landing Site preset ([#7237], thanks [@andrewharvey])
 * Add Historic Building preset ([#7219])
 * Add Swing Gate preset ([#7208])
 * Add Tidal Channel preset ([#7232])
@@ -116,6 +117,7 @@ _Breaking changes, which may affect downstream projects or sites that embed iD, 
 * Show the Website field by default on Restaurants ([#7226])
 * Show the Hours field by default on Pharmacy Counters ([#7220])
 
+[#7237]: https://github.com/openstreetmap/iD/issues/7237
 [#7234]: https://github.com/openstreetmap/iD/issues/7234
 [#7192]: https://github.com/openstreetmap/iD/issues/7192
 [#7219]: https://github.com/openstreetmap/iD/issues/7219
@@ -138,6 +140,7 @@ _Breaking changes, which may affect downstream projects or sites that embed iD, 
 [#7220]: https://github.com/openstreetmap/iD/issues/7220
 
 [@hikemaniac]: https://github.com/hikemaniac
+[@andrewharvey]: https://github.com/andrewharvey
 
 # 2.17.0
 ##### 2019-Dec-23

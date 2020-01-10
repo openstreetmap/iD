@@ -6633,6 +6633,10 @@
                     "name": "First Aid Kit",
                     "terms": "bandage,first aid,med,med kit,medic*,medkit"
                 },
+                "emergency/landing_site": {
+                    "name": "Emergency Landing Site",
+                    "terms": "helicopter,helipad,heliport"
+                },
                 "emergency/life_ring": {
                     "name": "Life Ring",
                     "terms": "life buoy,kisby ring,kisbie ring,perry buoy"

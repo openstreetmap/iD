@@ -447,6 +447,7 @@
     {"key": "emergency", "value": "fire_hose", "description": "🄿 Fire Hose", "object_types": ["node"], "icon_url": "https://cdn.jsdelivr.net/gh/openstreetmap/iD@master/svg/fontawesome/fas-tape.svg"},
     {"key": "emergency", "value": "fire_hydrant", "description": "🄿 Fire Hydrant", "object_types": ["node"], "icon_url": "https://cdn.jsdelivr.net/gh/ideditor/temaki/icons/fire_hydrant.svg"},
     {"key": "emergency", "value": "first_aid_kit", "description": "🄿 First Aid Kit", "object_types": ["node"], "icon_url": "https://cdn.jsdelivr.net/gh/openstreetmap/iD@master/svg/fontawesome/fas-medkit.svg"},
+    {"key": "emergency", "value": "landing_site", "description": "🄿 Emergency Landing Site", "object_types": ["node", "area"], "icon_url": "https://cdn.jsdelivr.net/gh/mapbox/maki/icons/heliport-15.svg"},
     {"key": "emergency", "value": "life_ring", "description": "🄿 Life Ring", "object_types": ["node"], "icon_url": "https://cdn.jsdelivr.net/gh/openstreetmap/iD@master/svg/fontawesome/fas-life-ring.svg"},
     {"key": "emergency", "value": "lifeguard", "description": "🄿 Lifeguard", "object_types": ["node", "area"], "icon_url": "https://cdn.jsdelivr.net/gh/openstreetmap/iD@master/svg/fontawesome/fas-life-ring.svg"},
     {"key": "emergency", "value": "phone", "description": "🄿 Emergency Phone", "object_types": ["node"], "icon_url": "https://cdn.jsdelivr.net/gh/mapbox/maki/icons/emergency-phone-15.svg"},
