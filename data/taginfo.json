@@ -2086,7 +2086,7 @@
     {"key": "levels_count", "description": "🄳 ➜ building:levels=*"},
     {"key": "man_made", "value": "cut_line", "description": "🄳 ➜ man_made=cutline"},
     {"key": "man_made", "value": "gas_well", "description": "🄳 ➜ man_made=petroleum_well + substance=gas"},
-    {"key": "man_made", "value": "jetty", "description": "🄳 ➜ highway=footway + man_made=pier"},
+    {"key": "man_made", "value": "jetty", "description": "🄳 ➜ man_made=pier"},
     {"key": "man_made", "value": "mdf", "description": "🄳 ➜ telecom=exchange"},
     {"key": "man_made", "value": "MDF", "description": "🄳 ➜ telecom=exchange"},
     {"key": "man_made", "value": "fuel_storage_tank", "description": "🄳 ➜ man_made=storage_tank + content=fuel"},

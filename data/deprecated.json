@@ -689,7 +689,7 @@
     },
     {
       "old": {"man_made": "jetty"},
-      "replace": {"highway": "footway", "man_made": "pier"}
+      "replace": {"man_made": "pier"}
     },
     {
       "old": {"man_made": "mdf"},
