@@ -30,7 +30,7 @@ _Breaking changes, which may affect downstream projects or sites that embed iD, 
 -->
 
 # 2.17.1
-##### Planned: 2020-Jan-10
+##### Planned: 2020-Jan-13
 
 #### :tada: New Features
 * Enable drag-and-drop reordering in fields that allow multiple values ([#5728], [#7024], thanks [@TAQ2])
@@ -51,6 +51,7 @@ _Breaking changes, which may affect downstream projects or sites that embed iD, 
 #### :white_check_mark: Validation
 * Account for the type and angle of crossings when setting the length of bridge and tunnel fixes
 * Don't join intersection nodes to bridge and tunnel fixes, where possible ([#7202])
+* Don't flag blank names as mistaken ([#7153])
 * Flag crossing and one-way issues for features with `waterway=tidal_channel`
 * Deprecate various `building:levels` mistags ([#7212])
 * Deprecate `clothes=second_hand`
@@ -60,6 +61,7 @@ _Breaking changes, which may affect downstream projects or sites that embed iD, 
 * Offer to add `public_transport=stop_position` and `tram=yes` to `railway=tram_stop` features
 * Make Churchyard preset unsearchable
 
+[#7153]: https://github.com/openstreetmap/iD/issues/7153
 [#7202]: https://github.com/openstreetmap/iD/issues/7202
 [#7212]: https://github.com/openstreetmap/iD/issues/7212
 [#7236]: https://github.com/openstreetmap/iD/issues/7236
