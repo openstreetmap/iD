@@ -3,7 +3,7 @@
     "fields": [
         "name",
         "building",
-        "levels",
+        "building/levels",
         "height",
         "address"
     ],

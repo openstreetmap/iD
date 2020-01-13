@@ -3,7 +3,7 @@ import { actionChangeTags } from '../actions/change_tags';
 import { actionMergeNodes } from '../actions/merge_nodes';
 import { actionSplit } from '../actions/split';
 import { modeSelect } from '../modes/select';
-import { geoExtent, geoLineIntersection, geoSphericalClosestNode, geoVecAngle, geoMetersToLon, geoVecLength } from '../geo';
+import { geoAngle, geoExtent, geoLineIntersection, geoSphericalClosestNode, geoSphericalDistance, geoVecAngle, geoMetersToLon } from '../geo';
 import { osmNode } from '../osm/node';
 import { osmFlowingWaterwayTagValues, osmPathHighwayTagValues, osmRailwayTrackTagValues, osmRoutableHighwayTagValues } from '../osm/tags';
 import { t } from '../util/locale';
@@ -475,53 +475,105 @@ export function validationCrossingWays(context) {
 
                 var resultWayIDs = [selectedWayID];
 
-                var crossingWayID = this.issue.entityIds[0];
-                var edge = this.issue.data.edges[1];
+                var edge, crossedEdge, crossedWayID;
                 if (this.issue.entityIds[0] === selectedWayID) {
-                    crossingWayID = this.issue.entityIds[1];
                     edge = this.issue.data.edges[0];
+                    crossedEdge = this.issue.data.edges[1];
+                    crossedWayID = this.issue.entityIds[1];
+                } else {
+                    edge = this.issue.data.edges[1];
+                    crossedEdge = this.issue.data.edges[0];
+                    crossedWayID = this.issue.entityIds[0];
                 }
 
                 var crossingLoc = this.issue.loc;
+
+                var projection = context.projection;
 
                 var action = function actionAddStructure(graph) {
 
                     var edgeNodes = [graph.entity(edge[0]), graph.entity(edge[1])];
 
-                    var crossingWay = graph.hasEntity(crossingWayID);
-                    // use the width of the crossing feature as the structure length, if available
-                    var widthMeters = crossingWay && crossingWay.tags.width && parseFloat(crossingWay.tags.width);
-                    // clamp the width to a reasonable range
-                    if (widthMeters) widthMeters = Math.min(Math.max(widthMeters, 0.5), 50);
+                    var crossedWay = graph.hasEntity(crossedWayID);
+                    // use the explicit width of the crossed feature as the structure length, if available
+                    var structLengthMeters = crossedWay && crossedWay.tags.width && parseFloat(crossedWay.tags.width);
+                    if (!structLengthMeters) {
+                        // if no explicit width is set, approximate the width based on the tags
+                        structLengthMeters = crossedWay && crossedWay.impliedLineWidthMeters();
+                    }
+                    if (structLengthMeters) {
+                        if (getFeatureTypeForTags(crossedWay.tags) === 'railway') {
+                            // bridges over railways are generally much longer than the rail bed itself, compensate
+                            structLengthMeters *= 2;
+                        }
+                    } else {
+                        // should ideally never land here since all rail/water/road tags should have an implied width
+                        structLengthMeters = 8;
+                    }
 
-                    // the proposed length of the structure, in decimal degrees
-                    var structLength = (widthMeters && geoMetersToLon(widthMeters, crossingLoc[1])) || 0.00008;
-                    var halfStructLength = structLength / 2;
+                    var a1 = geoAngle(edgeNodes[0], edgeNodes[1], projection) + Math.PI;
+                    var a2 = geoAngle(graph.entity(crossedEdge[0]), graph.entity(crossedEdge[1]), projection) + Math.PI;
+                    var crossingAngle = Math.max(a1, a2) - Math.min(a1, a2);
+                    if (crossingAngle > Math.PI) crossingAngle -= Math.PI;
+                    // lengthen the structure to account for the angle of the crossing
+                    structLengthMeters = ((structLengthMeters / 2) / Math.sin(crossingAngle)) * 2;
+
+                    // add padding since the structure must extend past the edges of the crossed feature
+                    structLengthMeters += 4;
+
+                    // clamp the length to a reasonable range
+                    structLengthMeters = Math.min(Math.max(structLengthMeters, 4), 50);
 
                     var angle = geoVecAngle(edgeNodes[0].loc, edgeNodes[1].loc);
 
-                    var locNewNode1 = [crossingLoc[0] + Math.cos(angle) * halfStructLength,
-                                        crossingLoc[1] + Math.sin(angle) * halfStructLength];
-                    var locNewNode2 = [crossingLoc[0] + Math.cos(angle + Math.PI) * halfStructLength,
-                                        crossingLoc[1] + Math.sin(angle + Math.PI)* halfStructLength];
+                    var endpointLocGetter1 = function(lengthMeters) {
+                        var length = geoMetersToLon(lengthMeters, crossingLoc[1]);
+                        return [crossingLoc[0] + Math.cos(angle) * length,
+                                crossingLoc[1] + Math.sin(angle) * length];
+                    };
+                    var endpointLocGetter2 = function(lengthMeters) {
+                        var length = geoMetersToLon(lengthMeters, crossingLoc[1]);
+                        return [crossingLoc[0] + Math.cos(angle + Math.PI) * length,
+                                crossingLoc[1] + Math.sin(angle + Math.PI) * length];
+                    };
+
+                    // avoid creating very short edges from splitting too close to another node
+                    var minEdgeLengthMeters = 0.55;
 
                     // decide where to bound the structure along the way, splitting as necessary
-                    function determineEndpoint(edge, endNode, proposedNodeLoc) {
+                    function determineEndpoint(edge, endNode, locGetter) {
                         var newNode;
 
-                        // avoid creating very short edges from splitting too close to another node
-                        var minEdgeLength = 0.000005;
+                        var idealLength = structLengthMeters / 2;
 
-                        // split only if edge is long
-                        if (geoVecLength(crossingLoc, endNode.loc) - geoVecLength(crossingLoc, proposedNodeLoc) > minEdgeLength) {
-                            // if the edge is long, insert a new node
+                        // distance between the crossing location and the end of the edge,
+                        // the maximum length of this side of the structure
+                        var crossingToEdgeEndDistance = geoSphericalDistance(crossingLoc, endNode.loc);
+
+                        if (crossingToEdgeEndDistance - idealLength > minEdgeLengthMeters) {
+                            // the edge is long enough to insert a new node
+
+                            // the loc that would result in the full expected length
+                            var idealNodeLoc = locGetter(idealLength);
+
                             newNode = osmNode();
-                            graph = actionAddMidpoint({ loc: proposedNodeLoc, edge: edge }, newNode)(graph);
+                            graph = actionAddMidpoint({ loc: idealNodeLoc, edge: edge }, newNode)(graph);
 
-                        } else {
-                            // otherwise use the edge endpoint
-                            newNode = endNode;
+                        } else if (endNode.isIntersection(graph)) {
+                            // the end node is an intersection, try to leave a segment
+                            // between it and the structure - #7202
+
+                            var insetLength = crossingToEdgeEndDistance - minEdgeLengthMeters;
+                            if (insetLength > minEdgeLengthMeters) {
+                                var insetNodeLoc = locGetter(insetLength);
+                                newNode = osmNode();
+                                graph = actionAddMidpoint({ loc: insetNodeLoc, edge: edge }, newNode)(graph);
+                            }
                         }
+
+                        // if the edge is too short to subdivide as desired, then
+                        // just bound the structure at the existing end node
+                        if (!newNode) newNode = endNode;
 
                         var splitAction = actionSplit(newNode.id)
                             .limitWays(resultWayIDs); // only split selected or created ways
@@ -535,8 +587,8 @@ export function validationCrossingWays(context) {
                         return newNode;
                     }
 
-                    var structEndNode1 = determineEndpoint(edge, edgeNodes[1], locNewNode1);
-                    var structEndNode2 = determineEndpoint([edgeNodes[0].id, structEndNode1.id], edgeNodes[0], locNewNode2);
+                    var structEndNode1 = determineEndpoint(edge, edgeNodes[1], endpointLocGetter1);
+                    var structEndNode2 = determineEndpoint([edgeNodes[0].id, structEndNode1.id], edgeNodes[0], endpointLocGetter2);
 
                     var structureWay = resultWayIDs.map(function(id) {
                         return graph.entity(id);

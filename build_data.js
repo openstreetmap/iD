@@ -684,7 +684,7 @@ function validatePresetFields(presets, fields) {
       let p1geometry = preset.geometry.slice().sort.toString();
       let p2geometry = replacementPreset.geometry.slice().sort.toString();
       if (replacementPreset === undefined) {
-        console.error('Unknown preset "' + preset.replacement + '" referenced as replacement of preset ' + preset.name);
+        console.error('Unknown preset "' + preset.replacement + '" referenced as replacement of preset "' + presetID + '" (' + preset.name + ')');
         console.log('');
         process.exit(1);
       } else if (p1geometry !== p2geometry) {
@@ -708,12 +708,12 @@ function validatePresetFields(presets, fields) {
         if (regexResult) {
           let foreignPresetID = regexResult[0];
           if (presets[foreignPresetID] === undefined) {
-            console.error('Unknown preset "' + foreignPresetID + '" referenced in "' + fieldsKey + '" array of preset ' + preset.name);
+            console.error('Unknown preset "' + foreignPresetID + '" referenced in "' + fieldsKey + '" array of preset "' + presetID + '" (' + preset.name + ')');
             console.log('');
             process.exit(1);
           }
         } else {
-          console.error('Unknown preset field "' + field + '" in "' + fieldsKey + '" array of preset ' + preset.name);
+          console.error('Unknown preset field "' + field + '" in "' + fieldsKey + '" array of preset "' + presetID + '" (' + preset.name + ')');
           console.log('');
           process.exit(1);
         }

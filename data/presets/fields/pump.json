@@ -1,5 +1,13 @@
 {
     "key": "pump",
     "type": "combo",
-    "label": "Pump"
+    "label": "Pump",
+    "strings": {
+        "options": {
+            "yes": "Yes",
+            "manual": "Manual Hand Pump",
+            "powered": "Machine-Powered Pump",
+            "no": "None"
+        }
+    }
 }

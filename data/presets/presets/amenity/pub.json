@@ -10,6 +10,7 @@
     ],
     "moreFields": [
         "air_conditioning",
+        "cuisine",
         "diet_multi",
         "email",
         "fax",

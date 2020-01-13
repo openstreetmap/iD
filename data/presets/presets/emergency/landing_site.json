@@ -1,0 +1,21 @@
+{
+    "icon": "maki-heliport",
+    "fields": [
+        "name",
+        "operator",
+        "surface"
+    ],
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "terms": [
+        "helicopter",
+        "helipad",
+        "heliport"
+    ],
+    "tags": {
+        "emergency": "landing_site"
+    },
+    "name": "Emergency Landing Site"
+}

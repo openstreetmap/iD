@@ -29,6 +29,122 @@ _Breaking changes, which may affect downstream projects or sites that embed iD, 
 [@xxxx]: https://github.com/xxxx
 -->
 
+# 2.17.1
+##### Planned: 2020-Jan-13
+
+#### :tada: New Features
+* Enable drag-and-drop reordering in fields that allow multiple values ([#5728], [#7024], thanks [@TAQ2])
+
+[#5728]: https://github.com/openstreetmap/iD/issues/5728
+[#7024]: https://github.com/openstreetmap/iD/issues/7024
+
+[@TAQ2]: https://github.com/TAQ2
+
+#### :sparkles: Usability
+* Don't show very low-usage tag values as field suggestions ([#7203])
+* Use a lighter font weight for brand subtitles
+* Don't autofocus the tag text editor when selecting a feature with the "Add fields" section closed ([#6685])
+
+[#7203]: https://github.com/openstreetmap/iD/issues/7203
+[#6685]: https://github.com/openstreetmap/iD/issues/6685
+
+#### :white_check_mark: Validation
+* Account for the type and angle of crossings when setting the length of bridge and tunnel fixes
+* Don't join intersection nodes to bridge and tunnel fixes, where possible ([#7202])
+* Don't flag blank names as mistaken ([#7153])
+* Flag crossing and one-way issues for features with `waterway=tidal_channel`
+* Deprecate various `building:levels` mistags ([#7212])
+* Deprecate `clothes=second_hand`
+* Deprecate various entrance, gambling, museum type, gender, operator type, and pump mistags
+* Fix upgrade path of `railway=*` + `disused=yes` or `abandoned=yes` ([#7236])
+* Don't offer to add `train=yes` to generic `railway=platform` features ([#7231])
+* Offer to add `public_transport=stop_position` and `tram=yes` to `railway=tram_stop` features
+* Make Churchyard preset unsearchable
+
+[#7153]: https://github.com/openstreetmap/iD/issues/7153
+[#7202]: https://github.com/openstreetmap/iD/issues/7202
+[#7212]: https://github.com/openstreetmap/iD/issues/7212
+[#7236]: https://github.com/openstreetmap/iD/issues/7236
+[#7231]: https://github.com/openstreetmap/iD/issues/7231
+
+#### :bug: Bugfixes
+* Fix issue where validation warnings could appear unexpectedly ([#7166])
+
+[#7166]: https://github.com/openstreetmap/iD/issues/7166
+
+#### :earth_asia: Localization
+* Add Peruvian address and phone number formats ([#7159], thanks [@sguinetti])
+* Add Australian phone number format ([#7160], thanks [@tastrax])
+* Correctly display labels with mixed Arabic and Latin characters ([#7104], [#7182], thanks [@mapmeld])
+* Make privacy policy link text translatable ([#7171])
+* Differentiate the "toggle issues pane" and "toggle preferences pane" hotkeys in the German localization ([#7181])
+
+[#7159]: https://github.com/openstreetmap/iD/issues/7159
+[#7160]: https://github.com/openstreetmap/iD/issues/7160
+[#7104]: https://github.com/openstreetmap/iD/issues/7104
+[#7182]: https://github.com/openstreetmap/iD/issues/7182
+[#7171]: https://github.com/openstreetmap/iD/issues/7171
+[#7181]: https://github.com/openstreetmap/iD/issues/7181
+
+[@sguinetti]: https://github.com/sguinetti
+[@tastrax]: https://github.com/tastrax
+[@mapmeld]: https://github.com/mapmeld
+
+#### :rocket: Presets
+* Add Door Shop preset ([#7192], thanks [@hikemaniac])
+* Add Emergency Landing Site preset ([#7237], thanks [@andrewharvey])
+* Add Historic Building preset ([#7219])
+* Add Swing Gate preset ([#7208])
+* Add Tidal Channel preset ([#7232])
+* Add Gambling Hall preset ([#7198])
+* Add Secondhand Clothing Store preset ([#7164])
+* Add Public Prosecutor's Office preset ([#7225])
+* Add Speed Limit Enforcement preset ([#7234])
+* Add presets: Emergency Exit, Geyser, Used Car Dealership, Wedding Clothes Store, Backcountry Camping Area, Group Camping Area, History Museum
+* Rename "Anime Shop" to "Anime / Manga Shop" ([#7223])
+* Update Arts & Crafts Store icon ([#7228])
+* Update Dressmaker icon ([#7229])
+* Update Water Well icon ([#7170])
+* Update Butcher icon ([#7216])
+* Update preset icons: Cathedral Building, Church Building, College Building, Hospital Building, Hotel Building, Preschool / Kindergarten Building, Mosque Building, School Building, University Building, Recently Demolished Building, Residential Area, Apartment Complex, Water Tap, Island, Islet, Kiosk, Fireworks Store, Row Houses, Houseboat, Tailor, Sewing Supply Shop
+* Add Baby Nursing Area field ([#7152])
+* Add Bicycle-Pedestrian Separation field to Cycle & Foot Path ([#7204], thanks [@hikemaniac])
+* Add Wheelchair Access field to Entrance / Exit ([#7214])
+* Add Bottle Filling field to Drinking Water
+* Add Games field to gambling presets
+* Add Hot Water field to Shower
+* Add Type field to Museum
+* Add Backcountry, Dogs, Groups Only, Hours, Showers, Stars, and Toilets fields to Campground ([#7169])
+* Add Adjacent Walking Nodes and Adjacent Cycling Nodes fields to Recreational Network Node ([#7176])
+* Add descriptive options for the Pump field
+* Show the Website field by default on Restaurants ([#7226])
+* Show the Hours field by default on Pharmacy Counters ([#7220])
+
+[#7237]: https://github.com/openstreetmap/iD/issues/7237
+[#7234]: https://github.com/openstreetmap/iD/issues/7234
+[#7192]: https://github.com/openstreetmap/iD/issues/7192
+[#7219]: https://github.com/openstreetmap/iD/issues/7219
+[#7208]: https://github.com/openstreetmap/iD/issues/7208
+[#7232]: https://github.com/openstreetmap/iD/issues/7232
+[#7198]: https://github.com/openstreetmap/iD/issues/7198
+[#7164]: https://github.com/openstreetmap/iD/issues/7164
+[#7225]: https://github.com/openstreetmap/iD/issues/7225
+[#7223]: https://github.com/openstreetmap/iD/issues/7223
+[#7228]: https://github.com/openstreetmap/iD/issues/7228
+[#7229]: https://github.com/openstreetmap/iD/issues/7229
+[#7170]: https://github.com/openstreetmap/iD/issues/7170
+[#7216]: https://github.com/openstreetmap/iD/issues/7216
+[#7152]: https://github.com/openstreetmap/iD/issues/7152
+[#7204]: https://github.com/openstreetmap/iD/issues/7204
+[#7214]: https://github.com/openstreetmap/iD/issues/7214
+[#7169]: https://github.com/openstreetmap/iD/issues/7169
+[#7176]: https://github.com/openstreetmap/iD/issues/7176
+[#7226]: https://github.com/openstreetmap/iD/issues/7226
+[#7220]: https://github.com/openstreetmap/iD/issues/7220
+
+[@hikemaniac]: https://github.com/hikemaniac
+[@andrewharvey]: https://github.com/andrewharvey
+
 # 2.17.0
 ##### 2019-Dec-23
 

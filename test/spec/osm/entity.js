@@ -221,14 +221,48 @@ describe('iD.osmEntity', function () {
         });
     });
 
-    describe('#hasDeprecatedTags', function () {
-        it('returns false if entity has no tags', function () {
+    describe('#deprecatedTags', function () {
+        it('returns none if entity has no tags', function () {
             expect(iD.osmEntity().deprecatedTags()).to.eql([]);
         });
 
-        it('returns true if entity has deprecated tags', function () {
+        it('returns none when no tags are deprecated', function () {
+            expect(iD.osmEntity({ tags: { amenity: 'toilets' } }).deprecatedTags()).to.eql([]);
+        });
+
+        it('returns 1:0 replacement', function () {
+            expect(iD.osmEntity({ tags: { highway: 'no' } }).deprecatedTags()).to.eql(
+                [{ old: { highway: 'no' } }]
+            );
+        });
+
+        it('returns 1:1 replacement', function () {
             expect(iD.osmEntity({ tags: { amenity: 'toilet' } }).deprecatedTags()).to.eql(
                 [{ old: { amenity: 'toilet' }, replace: { amenity: 'toilets' } }]
+            );
+        });
+
+        it('returns 1:1 wildcard', function () {
+            expect(iD.osmEntity({ tags: { speedlimit: '50' } }).deprecatedTags()).to.eql(
+                [{ old: { speedlimit: '*' }, replace: { maxspeed: '$1' } }]
+            );
+        });
+
+        it('returns 1:2 total replacement', function () {
+            expect(iD.osmEntity({ tags: { man_made: 'water_tank' } }).deprecatedTags()).to.eql(
+                [{ old: { man_made: 'water_tank' }, replace: { man_made: 'storage_tank', content: 'water' } }]
+            );
+        });
+
+        it('returns 1:2 partial replacement', function () {
+            expect(iD.osmEntity({ tags: { man_made: 'water_tank', content: 'water' } }).deprecatedTags()).to.eql(
+                [{ old: { man_made: 'water_tank' }, replace: { man_made: 'storage_tank', content: 'water' } }]
+            );
+        });
+
+        it('returns 2:1 replacement', function () {
+            expect(iD.osmEntity({ tags: { amenity: 'gambling', gambling: 'casino' } }).deprecatedTags()).to.eql(
+                [{ old: { amenity: 'gambling', gambling: 'casino' }, replace: { amenity: 'casino' } }]
             );
         });
     });

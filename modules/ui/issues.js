@@ -650,7 +650,7 @@ export function uiIssues(context) {
             .property('value', degStr);
 
         context.storage('validate-square-degrees', degStr);
-        context.validator().changeSquareThreshold(degNum);
+        context.validator().reloadUnsquareIssues();
     }
 
 

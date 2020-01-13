@@ -5,8 +5,9 @@
         "operator",
         "address",
         "building_area",
-        "drive_through",
-        "dispensing"
+        "opening_hours",
+        "dispensing",
+        "drive_through"
     ],
     "moreFields": [
         "brand",
@@ -14,7 +15,6 @@
         "fax",
         "gnis/feature_id",
         "level",
-        "opening_hours",
         "payment_multi",
         "phone",
         "website",

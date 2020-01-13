@@ -1,7 +1,6 @@
 {
     "icon": "iD-relation",
     "fields": [
-        "name",
         "enforcement"
     ],
     "geometry": [

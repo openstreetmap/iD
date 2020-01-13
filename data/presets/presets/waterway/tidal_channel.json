@@ -1,0 +1,39 @@
+{
+    "icon": "iD-waterway-stream",
+    "fields": [
+        "name",
+        "structure_waterway",
+        "width",
+        "salt",
+        "tidal",
+        "intermittent"
+    ],
+    "moreFields": [
+        "covered",
+        "fishing",
+        "gnis/feature_id"
+    ],
+    "geometry": [
+        "line"
+    ],
+    "terms": [
+        "coastal",
+        "pill",
+        "intertidal",
+        "mangroves",
+        "marine",
+        "salt marsh",
+        "tidal creek",
+        "tidal flat",
+        "tidal inlet",
+        "waterway"
+    ],
+    "tags": {
+        "waterway": "tidal_channel"
+    },
+    "addTags": {
+        "waterway": "tidal_channel",
+        "tidal": "yes"
+    },
+    "name": "Tidal Channel"
+}

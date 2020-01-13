@@ -1,5 +1,9 @@
 {
     "icon": "fas-ticket-alt",
+    "moreFields": [
+        "{shop}",
+        "min_age"
+    ],
     "geometry": [
         "point",
         "area"
@@ -7,5 +11,11 @@
     "tags": {
         "shop": "lottery"
     },
+    "terms": [
+        "lotto tickets",
+        "gamble",
+        "gambling",
+        "scratch-offs"
+    ],
     "name": "Lottery Shop"
 }

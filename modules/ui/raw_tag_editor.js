@@ -148,14 +148,6 @@ export function uiRawTagEditor(context) {
             .on('blur', textChanged)
             .on('change', textChanged);
 
-        // If All Fields section is hidden, focus textarea and put cursor at end..
-        var fieldsExpanded = d3_select('.hide-toggle-preset_fields.expanded').size();
-        if (_state !== 'hover' && _tagView === 'text' && !fieldsExpanded) {
-            var element = textarea.node();
-            element.focus();
-            element.setSelectionRange(textData.length, textData.length);
-        }
-
 
         // View as List
         var list = wrap.selectAll('.tag-list')
@@ -347,7 +339,10 @@ export function uiRawTagEditor(context) {
         function rowsToText(rows) {
             var str = rows
                 .filter(function(row) { return row.key && row.key.trim() !== ''; })
-                .map(function(row) { return stringify(row.key) + '=' + stringify(row.value); })
+                .map(function(row) {
+                    var val = row.value ? stringify(row.value) : '';
+                    return stringify(row.key) + '=' + val;
+                })
                 .join('\n');
 
             return _state === 'hover' ? str : str + '\n';

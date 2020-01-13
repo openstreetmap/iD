@@ -2,7 +2,16 @@
     "icon": "temaki-gate",
     "fields": [
         "access",
-        "opening_hours"
+        "wheelchair",
+        "opening_hours",
+        "height",
+        "material"
+    ],
+    "moreFields": [
+        "colour",
+        "manufacturer",
+        "operator",
+        "ref"
     ],
     "geometry": [
         "vertex",
