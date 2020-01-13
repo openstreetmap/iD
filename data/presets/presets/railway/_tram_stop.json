@@ -1,9 +1,10 @@
 {
     "icon": "temaki-tram",
     "fields": [
-        "name",
-        "network",
-        "operator"
+        "{public_transport/stop_position}"
+    ],
+    "moreFields": [
+        "{public_transport/stop_position}"
     ],
     "geometry": [
         "vertex"

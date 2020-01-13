@@ -57,6 +57,7 @@ _Breaking changes, which may affect downstream projects or sites that embed iD, 
 * Deprecate various entrance, gambling, museum type, gender, operator type, and pump mistags
 * Fix upgrade path of `railway=*` + `disused=yes` or `abandoned=yes` ([#7236])
 * Don't offer to add `train=yes` to generic `railway=platform` features ([#7231])
+* Offer to add `public_transport=stop_position` and `tram=yes` to `railway=tram_stop` features
 * Make Churchyard preset unsearchable
 
 [#7202]: https://github.com/openstreetmap/iD/issues/7202

@@ -929,12 +929,16 @@
       "replace": {"disused:railway": "$1"}
     },
     {
+      "old": {"railway": "platform"},
+      "replace": {"railway": "platform", "public_transport": "platform"}
+    },
+    {
       "old": {"railway": "station"},
       "replace": {"railway": "station", "public_transport": "station"}
     },
     {
-      "old": {"railway": "platform"},
-      "replace": {"railway": "platform", "public_transport": "platform"}
+      "old": {"railway": "tram_stop"},
+      "replace": {"railway": "tram_stop", "public_transport": "stop_position", "tram": "yes"}
     },
     {
       "old": {"recommended_speed": "*"},
