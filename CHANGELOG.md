@@ -32,6 +32,10 @@ _Breaking changes, which may affect downstream projects or sites that embed iD, 
 # 2.17.1
 ##### Planned: 2020-Jan-13
 
+#### :boom: Breaking Changes
+* Remove support for Node 8 (Node 10 or higher is now required)
+  * :warning: If you are building the iD project, you may need to upgrade your node version.
+
 #### :tada: New Features
 * Enable drag-and-drop reordering in fields that allow multiple values ([#5728], [#7024], thanks [@TAQ2])
 
