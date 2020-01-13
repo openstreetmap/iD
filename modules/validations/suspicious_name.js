@@ -162,7 +162,7 @@ export function validationSuspiciousName() {
             if (notNames.length) {
                 for (var i in notNames) {
                     var notName = notNames[i];
-                    if (value === notName) {
+                    if (notName && value === notName) {
                         issues.push(makeIncorrectNameIssue(entity.id, key, value, langCode));
                         continue;
                     }
