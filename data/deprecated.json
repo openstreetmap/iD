@@ -353,6 +353,14 @@
       "replace": {"direction": "W"}
     },
     {
+      "old": {"destination:forward": "*", "oneway": "yes"},
+      "replace": {"destination": "$1", "oneway": "yes"}
+    },
+    {
+      "old": {"destination:ref:forward": "*", "oneway": "yes"},
+      "replace": {"destination:ref": "$1", "oneway": "yes"}
+    },
+    {
       "old": {"drinkable": "*"},
       "replace": {"drinking_water": "$1"}
     },
