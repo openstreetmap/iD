@@ -3,8 +3,11 @@
     "fields": [
         "name",
         "operator",
+        "operator/type",
         "address",
-        "building_area"
+        "building_area",
+        "opening_hours",
+        "website"
     ],
     "moreFields": [
         "air_conditioning",
@@ -14,7 +17,6 @@
         "gnis/feature_id",
         "phone",
         "polling_station",
-        "website",
         "wheelchair"
     ],
     "geometry": [
