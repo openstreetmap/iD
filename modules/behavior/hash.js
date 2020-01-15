@@ -62,11 +62,11 @@ export function behaviorHash(context) {
 
     function updateTitle(selected){
         var oldTitle = document.title;
-        var endIndex = oldTitle.indexOf("-");
+        var endIndex = oldTitle.indexOf('-');
         var oldIDStr = oldTitle.substring(endIndex+2);
         if (selected.length === 1) {
             if (endIndex === -1) {
-                oldTitle += " - " + utilDisplayLabel(context.entity(selected[0]), context);
+                oldTitle += ' - ' + utilDisplayLabel(context.entity(selected[0]), context);
             }
             else {
                 var newIDStr = utilDisplayLabel(context.entity(selected[0]), context);
@@ -74,13 +74,13 @@ export function behaviorHash(context) {
             }
         }
         else if (selected.length > 1 ) {
-            var newIDStr = utilDisplayLabel(context.entity(selected[0]), context) + " and " + (selected.length-1).toString() + " more";
+            newIDStr = utilDisplayLabel(context.entity(selected[0]), context) + ' and ' + (selected.length-1).toString() + ' more';
             oldTitle = oldTitle.replace(oldIDStr, newIDStr);
         }
-        else{
-            if(endIndex !== -1){
-                var oldIDStr = oldTitle.substring(endIndex);
-                oldTitle = oldTitle.replace(oldIDStr, "");
+        else {
+            if (endIndex !== -1){
+                oldIDStr = oldTitle.substring(endIndex);
+                oldTitle = oldTitle.replace(oldIDStr, '');
             }
         }
         document.title = oldTitle;
@@ -92,7 +92,8 @@ export function behaviorHash(context) {
         if (context.inIntro()) return;
         var s1 = formatter(context.map());
         if (s0 !== s1) {
-            window.location.replace(s0 = s1);  // don't recenter the map!
+            s0 = s1;
+            window.location.replace(s0);  // don't recenter the map!
         }
     }
 
