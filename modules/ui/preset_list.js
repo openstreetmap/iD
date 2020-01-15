@@ -156,11 +156,11 @@ export function uiPresetList(context) {
         var collection = presets.collection.reduce(function(collection, preset) {
             if (preset.members) {
                 if (preset.members.collection.filter(function(preset) {
-                    return preset.visible();
+                    return preset.addable();
                 }).length > 1) {
                     collection.push(CategoryItem(preset));
                 }
-            } else if (preset.visible()) {
+            } else if (preset.addable()) {
                 collection.push(PresetItem(preset));
             }
             return collection;

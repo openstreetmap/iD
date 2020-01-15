@@ -4,7 +4,7 @@ import { utilArrayUniq, utilObjectOmit } from '../util';
 import { utilSafeClassName } from '../util/util';
 
 
-export function presetPreset(id, preset, fields, visible, rawPresets) {
+export function presetPreset(id, preset, fields, addable, rawPresets) {
     preset = Object.assign({}, preset);   // shallow copy
 
     preset.id = id;
@@ -97,7 +97,7 @@ export function presetPreset(id, preset, fields, visible, rawPresets) {
     preset.moreFields = (preset.moreFields || []).map(getFields);
     preset.geometry = (preset.geometry || []);
 
-    visible = visible || false;
+    addable = addable || false;
 
     function getFields(f) {
         return fields[f];
@@ -182,10 +182,10 @@ export function presetPreset(id, preset, fields, visible, rawPresets) {
         return tagCount === 0 || (tagCount === 1 && preset.tags.hasOwnProperty('area'));
     };
 
-    preset.visible = function(val) {
-        if (!arguments.length) return visible;
-        visible = val;
-        return visible;
+    preset.addable = function(val) {
+        if (!arguments.length) return addable;
+        addable = val;
+        return addable;
     };
 
 
