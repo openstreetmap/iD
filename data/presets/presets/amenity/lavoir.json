@@ -1,0 +1,29 @@
+{
+    "icon": "tnp-4310",
+    "fields": [
+        "name",
+        "operator",
+        "operator/type",
+        "address",
+        "access_simple",
+        "building_area"
+    ],
+    "moreFields": [
+        "gnis/feature_id",
+        "smoking",
+        "wheelchair"
+    ],
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "tags": {
+        "amenity": "lavoir"
+    },
+    "terms": [
+        "clothing",
+        "laundry",
+        "washing"
+    ],
+    "name": "Lavoir"
+}

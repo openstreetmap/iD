@@ -3267,6 +3267,11 @@ en:
         name: Language School
         # 'terms: esl'
         terms: '<translate with synonyms or related terms for ''Language School'', separated by commas>'
+      amenity/lavoir:
+        # amenity=lavoir
+        name: Lavoir
+        # 'terms: clothing,laundry,washing'
+        terms: '<translate with synonyms or related terms for ''Lavoir'', separated by commas>'
       amenity/letter_box:
         # amenity=letter_box
         name: Letter Box
