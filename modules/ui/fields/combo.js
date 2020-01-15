@@ -183,6 +183,13 @@ export function uiFieldCombo(field, context) {
             if (err) return;
 
             data = data.filter(function(d) {
+
+                if (field.type === 'typeCombo' && d.value === 'yes') {
+                    // don't show the fallback value
+                    return false;
+                }
+
+                // don't show values with very low usage
                 return !d.count || d.count > 10;
             });
 
