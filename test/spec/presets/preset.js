@@ -195,7 +195,7 @@ describe('iD.presetPreset', function() {
     });
 
     describe('#addable', function() {
-        it('sets/gets visibility of preset', function() {
+        it('sets/gets addability of preset', function() {
             var preset = iD.presetPreset('test', {}, false);
             expect(preset.addable()).to.be.false;
             preset.addable(true);
