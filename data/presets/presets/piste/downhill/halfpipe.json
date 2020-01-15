@@ -4,6 +4,14 @@
         "line",
         "area"
     ],
+    "tags": {
+        "piste:type": "downhill",
+        "man_made": "piste:halfpipe"
+    },
+    "reference": {
+        "key": "man_made",
+        "value": "piste:halfpipe"
+    },
     "terms": [
         "ski",
         "alpine",
@@ -13,9 +21,5 @@
         "downhill",
         "piste"
     ],
-    "tags": {
-        "piste:type": "downhill",
-        "man_made": "piste:halfpipe"
-    },
-    "name": "Halfpipe"
+    "name": "Snowsports Half-Pipe"
 }

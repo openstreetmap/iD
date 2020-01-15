@@ -9,6 +9,9 @@
         "maxweight",
         "access_simple"
     ],
+    "tags": {
+        "aerialway": "zip_line"
+    },
     "terms": [
         "aerial runway",
         "canopy",
@@ -21,8 +24,5 @@
         "zipline",
         "zipwire"
     ],
-    "tags": {
-        "aerialway": "zip_line"
-    },
     "name": "Zip Line"
 }

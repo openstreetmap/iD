@@ -32,6 +32,10 @@ _Breaking changes, which may affect downstream projects or sites that embed iD, 
 # 2.17.1
 ##### Planned: 2020-Jan-13
 
+#### :boom: Breaking Changes
+* Remove support for Node 8 (Node 10 or higher is now required)
+  * :warning: If you are building the iD project, you may need to upgrade your node version.
+
 #### :tada: New Features
 * Enable drag-and-drop reordering in fields that allow multiple values ([#5728], [#7024], thanks [@TAQ2])
 
@@ -100,13 +104,14 @@ _Breaking changes, which may affect downstream projects or sites that embed iD, 
 * Add Secondhand Clothing Store preset ([#7164])
 * Add Public Prosecutor's Office preset ([#7225])
 * Add Speed Limit Enforcement preset ([#7234])
-* Add presets: Emergency Exit, Geyser, Used Car Dealership, Wedding Clothes Store, Backcountry Camping Area, Group Camping Area, History Museum
+* Add presets: Emergency Exit, Geyser, Used Car Dealership, Wedding Clothes Store, Backcountry Camping Area, Group Camping Area, History Museum, Wind Farm, Solar Farm, Nuclear Power Plant, Hydroelectric Power Station, Coal-Fired Power Plant, Gas-Fired Power Plant
 * Rename "Anime Shop" to "Anime / Manga Shop" ([#7223])
+* Simplify the names of various Piste presets
 * Update Arts & Crafts Store icon ([#7228])
 * Update Dressmaker icon ([#7229])
 * Update Water Well icon ([#7170])
 * Update Butcher icon ([#7216])
-* Update preset icons: Cathedral Building, Church Building, College Building, Hospital Building, Hotel Building, Preschool / Kindergarten Building, Mosque Building, School Building, University Building, Recently Demolished Building, Residential Area, Apartment Complex, Water Tap, Island, Islet, Kiosk, Fireworks Store, Row Houses, Houseboat, Tailor, Sewing Supply Shop
+* Update preset icons: Cathedral Building, Church Building, College Building, Hospital Building, Hotel Building, Preschool / Kindergarten Building, Mosque Building, School Building, University Building, Recently Demolished Building, Residential Area, Apartment Complex, Water Tap, Island, Islet, Kiosk, Fireworks Store, Row Houses, Houseboat, Tailor, Sewing Supply Shop, Aerialway Pylon, Mixed Lift, Drag Lift, Platter Lift, J-Bar Lift, T-Bar Lift
 * Add Baby Nursing Area field ([#7152])
 * Add Bicycle-Pedestrian Separation field to Cycle & Foot Path ([#7204], thanks [@hikemaniac])
 * Add Wheelchair Access field to Entrance / Exit ([#7214])

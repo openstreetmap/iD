@@ -1762,11 +1762,17 @@ en:
       plant:
         # plant=*
         label: Plant
+      plant/method:
+        # 'plant:method=*'
+        label: Generation Method
       plant/output/electricity:
         # 'plant:output:electricity=*'
         label: Power Output
         # plant/output/electricity field placeholder
         placeholder: '500 MW, 1000 MW, 2000 MW...'
+      plant/source:
+        # 'plant:source=*'
+        label: Energy Source
       playground:
         # playground=*
         label: Type
@@ -2811,55 +2817,62 @@ en:
       aerialway/cable_car:
         # aerialway=cable_car
         name: Cable Car
-        # 'terms: tramway,ropeway'
+        # 'terms: aerial cable,lift,ropeway,skiing,snowboarding,tramway'
         terms: '<translate with synonyms or related terms for ''Cable Car'', separated by commas>'
       aerialway/chair_lift:
         # aerialway=chair_lift
         name: Chair Lift
+        # 'terms: aerial cable,skiing,snowboarding'
         terms: '<translate with synonyms or related terms for ''Chair Lift'', separated by commas>'
       aerialway/drag_lift:
         # aerialway=drag_lift
         name: Drag Lift
+        # 'terms: skiing,snowboarding,surface cable'
         terms: '<translate with synonyms or related terms for ''Drag Lift'', separated by commas>'
       aerialway/gondola:
         # aerialway=gondola
         name: Gondola
+        # 'terms: aerial cable,lift,skiing,snowboarding'
         terms: '<translate with synonyms or related terms for ''Gondola'', separated by commas>'
       aerialway/goods:
         # aerialway=goods
         name: Goods Aerialway
+        # 'terms: aerial cable'
         terms: '<translate with synonyms or related terms for ''Goods Aerialway'', separated by commas>'
       aerialway/j-bar:
         # aerialway=j-bar
         name: J-Bar Lift
-        # 'terms: jbar'
+        # 'terms: drag lift,skiing,snowboarding,surface cable,jaybar,jbar'
         terms: '<translate with synonyms or related terms for ''J-Bar Lift'', separated by commas>'
       aerialway/magic_carpet:
         # aerialway=magic_carpet
         name: Magic Carpet Lift
+        # 'terms: conveyor belt,skiing,snowboarding,surface lift'
         terms: '<translate with synonyms or related terms for ''Magic Carpet Lift'', separated by commas>'
       aerialway/mixed_lift:
         # aerialway=mixed_lift
         name: Mixed Lift
+        # 'terms: aerial cable,skiing,snowboarding'
         terms: '<translate with synonyms or related terms for ''Mixed Lift'', separated by commas>'
       aerialway/platter:
         # aerialway=platter
         name: Platter Lift
-        # 'terms: button lift,poma lift'
+        # 'terms: button lift,disc lift,drag lift,poma lift,skiing,snowboarding,surface cable'
         terms: '<translate with synonyms or related terms for ''Platter Lift'', separated by commas>'
       aerialway/pylon:
         # aerialway=pylon
         name: Aerialway Pylon
+        # 'terms: chair lift pole,skiing,snowboarding,lift tower'
         terms: '<translate with synonyms or related terms for ''Aerialway Pylon'', separated by commas>'
       aerialway/rope_tow:
         # aerialway=rope_tow
         name: Rope Tow Lift
-        # 'terms: handle tow,bugel lift'
+        # 'terms: bugel lift,drag lift,handle tow,skiing,snowboarding,surface cable'
         terms: '<translate with synonyms or related terms for ''Rope Tow Lift'', separated by commas>'
       aerialway/t-bar:
         # aerialway=t-bar
         name: T-Bar Lift
-        # 'terms: tbar'
+        # 'terms: drag lift,skiing,surface cable,tbar'
         terms: '<translate with synonyms or related terms for ''T-Bar Lift'', separated by commas>'
       aerialway/zip_line:
         # aerialway=zip_line
@@ -3300,6 +3313,11 @@ en:
         name: Language School
         # 'terms: esl'
         terms: '<translate with synonyms or related terms for ''Language School'', separated by commas>'
+      amenity/lavoir:
+        # amenity=lavoir
+        name: Lavoir
+        # 'terms: clothing,laundry,washing'
+        terms: '<translate with synonyms or related terms for ''Lavoir'', separated by commas>'
       amenity/letter_box:
         # amenity=letter_box
         name: Letter Box
@@ -6822,34 +6840,34 @@ en:
         terms: '<translate with synonyms or related terms for ''Water Utility Office'', separated by commas>'
       piste/downhill:
         # 'piste:type=downhill'
-        name: Downhill Piste/Ski Run
-        # 'terms: ski,alpine,snowboard,downhill,piste'
-        terms: '<translate with synonyms or related terms for ''Downhill Piste/Ski Run'', separated by commas>'
+        name: Downhill Ski Run
+        # 'terms: alpine skiing,piste,ski hill,skiing,snowboarding'
+        terms: '<translate with synonyms or related terms for ''Downhill Ski Run'', separated by commas>'
       piste/downhill/halfpipe:
         # 'piste:type=downhill, man_made=piste:halfpipe'
-        name: Halfpipe
+        name: Snowsports Half-Pipe
         # 'terms: ski,alpine,halfpipe,half pipe,snowboard,downhill,piste'
-        terms: '<translate with synonyms or related terms for ''Halfpipe'', separated by commas>'
+        terms: '<translate with synonyms or related terms for ''Snowsports Half-Pipe'', separated by commas>'
       piste/hike:
         # 'piste:type=hike'
-        name: Snowshoeing or Winter Hiking Trail
-        # 'terms: hike,winter hiking,snowshoe,snowshoeing,piste,ski'
-        terms: '<translate with synonyms or related terms for ''Snowshoeing or Winter Hiking Trail'', separated by commas>'
+        name: Snowshoeing / Winter Hiking Trail
+        # 'terms: hike,nordic walking,piste,show shoeing,snowshoe,snowshoeing'
+        terms: '<translate with synonyms or related terms for ''Snowshoeing / Winter Hiking Trail'', separated by commas>'
       piste/ice_skate:
         # 'piste:type=ice_skate'
-        name: Ice Skating Piste
-        # 'terms: ice,skating,ski,piste'
-        terms: '<translate with synonyms or related terms for ''Ice Skating Piste'', separated by commas>'
+        name: Ice Skating Trail
+        # 'terms: ice rink,ice track,iceskating,piste,skates'
+        terms: '<translate with synonyms or related terms for ''Ice Skating Trail'', separated by commas>'
       piste/nordic:
         # 'piste:type=nordic'
-        name: Nordic or Crosscountry Piste/Ski Trail
-        # 'terms: ski,nordic,crosscountry,skating,piste'
-        terms: '<translate with synonyms or related terms for ''Nordic or Crosscountry Piste/Ski Trail'', separated by commas>'
+        name: Cross-Country Ski Trail
+        # 'terms: crosscountry,nordic skiing,piste,skate skiing,skiing,xc'
+        terms: '<translate with synonyms or related terms for ''Cross-Country Ski Trail'', separated by commas>'
       piste/piste:
         # 'piste:type=*'
-        name: Winter Sport Trails
+        name: Snowsports Trail / Piste
         # 'terms: ski,nordic,crosscountry,downhill,alpine,snowboard,skitour,ski touring,sled,luge,sleigh,sledge,ski-joring,husky,horse,winter hiking,snowshoe,snowshoeing,ice,skating'
-        terms: '<translate with synonyms or related terms for ''Winter Sport Trails'', separated by commas>'
+        terms: '<translate with synonyms or related terms for ''Snowsports Trail / Piste'', separated by commas>'
       piste/skitour:
         # 'piste:type=skitour'
         name: Ski Touring Trail
@@ -6857,14 +6875,14 @@ en:
         terms: '<translate with synonyms or related terms for ''Ski Touring Trail'', separated by commas>'
       piste/sled:
         # 'piste:type=sled'
-        name: Sled Piste
-        # 'terms: ski,sled,luge,sleigh,sledge,piste'
-        terms: '<translate with synonyms or related terms for ''Sled Piste'', separated by commas>'
+        name: Sled Run
+        # 'terms: bobsled,luge,piste,skeleton,sledge,sleigh,toboggan'
+        terms: '<translate with synonyms or related terms for ''Sled Run'', separated by commas>'
       piste/sleigh:
         # 'piste:type=sleigh'
-        name: Sleigh Piste
-        # 'terms: ski,piste,sled,luge,sleigh,sledge,ski-joring,husky,horse'
-        terms: '<translate with synonyms or related terms for ''Sleigh Piste'', separated by commas>'
+        name: Sleigh Trail
+        # 'terms: dogsledding,husky,horse,piste,sled,sledge,ski-joring,skijoring'
+        terms: '<translate with synonyms or related terms for ''Sleigh Trail'', separated by commas>'
       place:
         # place=*
         name: Place
@@ -7053,13 +7071,40 @@ en:
         name: Power Station Grounds
         # 'terms: coal,gas,generat*,hydro,nuclear,power,station'
         terms: '<translate with synonyms or related terms for ''Power Station Grounds'', separated by commas>'
+      power/plant/source/coal:
+        # 'power=plant, plant:source=coal'
+        name: Coal-Fired Power Plant
+        # 'terms: carbon,combustion,fossil fuel,coalfired,power station'
+        terms: '<translate with synonyms or related terms for ''Coal-Fired Power Plant'', separated by commas>'
+      power/plant/source/gas:
+        # 'power=plant, plant:source=gas'
+        name: Gas-Fired Power Plant
+        # 'terms: carbon,combustion,fossil fuel,gasfired,power station,natural gas'
+        terms: '<translate with synonyms or related terms for ''Gas-Fired Power Plant'', separated by commas>'
+      power/plant/source/hydro:
+        # 'power=plant, plant:source=hydro'
+        name: Hydroelectric Power Station
+        # 'terms: dam,power plant,run-of-the-river,tidal,water turbine'
+        terms: '<translate with synonyms or related terms for ''Hydroelectric Power Station'', separated by commas>'
+      power/plant/source/nuclear:
+        # 'power=plant, plant:source=nuclear'
+        name: Nuclear Power Plant
+        # 'terms: atomic,fission,power station,nuclear reactor'
+        terms: '<translate with synonyms or related terms for ''Nuclear Power Plant'', separated by commas>'
+      power/plant/source/solar:
+        # 'power=plant, plant:source=solar'
+        name: Solar Farm
+        # 'terms: photovoltaic power station,solar panels,solar park,utility-scale solar'
+        terms: '<translate with synonyms or related terms for ''Solar Farm'', separated by commas>'
+      power/plant/source/wind:
+        # 'power=plant, plant:source=wind'
+        name: Wind Farm
+        # 'terms: offshore wind,wind park,wind power plant,wind power station,wind turbines,windmills'
+        terms: '<translate with synonyms or related terms for ''Wind Farm'', separated by commas>'
       power/pole:
         # power=pole
         name: Power Pole
         terms: '<translate with synonyms or related terms for ''Power Pole'', separated by commas>'
-      power/sub_station:
-        # power=sub_station
-        name: Substation
       power/substation:
         # power=substation
         name: Substation

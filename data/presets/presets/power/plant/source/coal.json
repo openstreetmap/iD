@@ -1,0 +1,39 @@
+{
+    "icon": "maki-industry",
+    "fields": [
+        "name",
+        "operator",
+        "address",
+        "plant/output/electricity",
+        "start_date"
+    ],
+    "moreFields": [
+        "{power/plant}"
+    ],
+    "geometry": [
+        "area"
+    ],
+    "tags": {
+        "power": "plant",
+        "plant:source": "coal"
+    },
+    "addTags": {
+        "power": "plant",
+        "landuse": "industrial",
+        "plant:source": "coal",
+        "plant:method": "combustion",
+        "plant:output:electricity": "*"
+    },
+    "reference": {
+        "key": "plant:source",
+        "value": "coal"
+    },
+    "terms": [
+        "carbon",
+        "combustion",
+        "fossil fuel",
+        "coalfired",
+        "power station"
+    ],
+    "name": "Coal-Fired Power Plant"
+}

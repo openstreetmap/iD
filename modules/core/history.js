@@ -17,9 +17,8 @@ export function coreHistory(context) {
     var dispatch = d3_dispatch('change', 'merge', 'restore', 'undone', 'redone');
     var lock = utilSessionMutex('lock');
 
-    // is iD not open in another window and it detects that
-    // there's a history stored in localStorage that's recoverable?
-    var hasUnresolvedRestorableChanges = lock.lock() && context.storage(getKey('saved_history'));
+    // restorable if iD not open in another window/tab and a saved history exists in localStorage
+    var _hasUnresolvedRestorableChanges = lock.lock() && !!context.storage(getKey('saved_history'));
 
     var duration = 150;
     var _imageryUsed = [];
@@ -641,10 +640,20 @@ export function coreHistory(context) {
         },
 
 
+        lock: function() {
+            return lock.lock();
+        },
+
+
+        unlock: function() {
+            lock.unlock();
+        },
+
+
         save: function() {
             if (lock.locked() &&
                 // don't overwrite existing, unresolved changes
-                !hasUnresolvedRestorableChanges) {
+                !_hasUnresolvedRestorableChanges) {
 
                 context.storage(getKey('saved_history'), history.toJSON() || null);
             }
@@ -652,10 +661,11 @@ export function coreHistory(context) {
         },
 
 
+        // delete the history version saved in localStorage
         clearSaved: function() {
             context.debouncedSave.cancel();
-            if (lock.locked())  {
-                hasUnresolvedRestorableChanges = false;
+            if (lock.locked()) {
+                _hasUnresolvedRestorableChanges = false;
                 context.storage(getKey('saved_history'), null);
 
                 // clear the changeset metadata associated with the saved history
@@ -667,32 +677,23 @@ export function coreHistory(context) {
         },
 
 
-        lock: function() {
-            return lock.lock();
-        },
-
-
-        unlock: function() {
-            lock.unlock();
-        },
-
-
         savedHistoryJSON: function() {
             return context.storage(getKey('saved_history'));
         },
 
 
         hasRestorableChanges: function() {
-            return hasUnresolvedRestorableChanges;
+            return _hasUnresolvedRestorableChanges;
         },
 
 
         // load history from a version stored in localStorage
         restore: function() {
-            if (!lock.locked()) return;
-            hasUnresolvedRestorableChanges = false;
-            var json = this.savedHistoryJSON();
-            if (json) history.fromJSON(json, true);
+            if (lock.locked()) {
+                _hasUnresolvedRestorableChanges = false;
+                var json = this.savedHistoryJSON();
+                if (json) history.fromJSON(json, true);
+            }
         },
 
 

@@ -4,6 +4,8 @@
         "name",
         "operator",
         "address",
+        "plant/source",
+        "plant/method",
         "plant/output/electricity",
         "start_date"
     ],

@@ -2,10 +2,6 @@
     "geometry": [
         "line"
     ],
-    "terms": [
-        "handle tow",
-        "bugel lift"
-    ],
     "fields": [
         "name",
         "oneway_yes",
@@ -15,5 +11,13 @@
     "tags": {
         "aerialway": "rope_tow"
     },
+    "terms": [
+        "bugel lift",
+        "drag lift",
+        "handle tow",
+        "skiing",
+        "snowboarding",
+        "surface cable"
+    ],
     "name": "Rope Tow Lift"
 }

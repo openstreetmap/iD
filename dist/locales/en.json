@@ -4164,9 +4164,15 @@
                 "plant": {
                     "label": "Plant"
                 },
+                "plant/method": {
+                    "label": "Generation Method"
+                },
                 "plant/output/electricity": {
                     "label": "Power Output",
                     "placeholder": "500 MW, 1000 MW, 2000 MW..."
+                },
+                "plant/source": {
+                    "label": "Energy Source"
                 },
                 "playground": {
                     "label": "Type"
@@ -5079,51 +5085,51 @@
                 },
                 "aerialway/cable_car": {
                     "name": "Cable Car",
-                    "terms": "tramway,ropeway"
+                    "terms": "aerial cable,lift,ropeway,skiing,snowboarding,tramway"
                 },
                 "aerialway/chair_lift": {
                     "name": "Chair Lift",
-                    "terms": ""
+                    "terms": "aerial cable,skiing,snowboarding"
                 },
                 "aerialway/drag_lift": {
                     "name": "Drag Lift",
-                    "terms": ""
+                    "terms": "skiing,snowboarding,surface cable"
                 },
                 "aerialway/gondola": {
                     "name": "Gondola",
-                    "terms": ""
+                    "terms": "aerial cable,lift,skiing,snowboarding"
                 },
                 "aerialway/goods": {
                     "name": "Goods Aerialway",
-                    "terms": ""
+                    "terms": "aerial cable"
                 },
                 "aerialway/j-bar": {
                     "name": "J-Bar Lift",
-                    "terms": "jbar"
+                    "terms": "drag lift,skiing,snowboarding,surface cable,jaybar,jbar"
                 },
                 "aerialway/magic_carpet": {
                     "name": "Magic Carpet Lift",
-                    "terms": ""
+                    "terms": "conveyor belt,skiing,snowboarding,surface lift"
                 },
                 "aerialway/mixed_lift": {
                     "name": "Mixed Lift",
-                    "terms": ""
+                    "terms": "aerial cable,skiing,snowboarding"
                 },
                 "aerialway/platter": {
                     "name": "Platter Lift",
-                    "terms": "button lift,poma lift"
+                    "terms": "button lift,disc lift,drag lift,poma lift,skiing,snowboarding,surface cable"
                 },
                 "aerialway/pylon": {
                     "name": "Aerialway Pylon",
-                    "terms": ""
+                    "terms": "chair lift pole,skiing,snowboarding,lift tower"
                 },
                 "aerialway/rope_tow": {
                     "name": "Rope Tow Lift",
-                    "terms": "handle tow,bugel lift"
+                    "terms": "bugel lift,drag lift,handle tow,skiing,snowboarding,surface cable"
                 },
                 "aerialway/t-bar": {
                     "name": "T-Bar Lift",
-                    "terms": "tbar"
+                    "terms": "drag lift,skiing,surface cable,tbar"
                 },
                 "aerialway/zip_line": {
                     "name": "Zip Line",
@@ -5502,6 +5508,10 @@
                 "amenity/language_school": {
                     "name": "Language School",
                     "terms": "esl"
+                },
+                "amenity/lavoir": {
+                    "name": "Lavoir",
+                    "terms": "clothing,laundry,washing"
                 },
                 "amenity/letter_box": {
                     "name": "Letter Box",
@@ -8468,27 +8478,27 @@
                     "terms": "water board,utility"
                 },
                 "piste/downhill": {
-                    "name": "Downhill Piste/Ski Run",
-                    "terms": "ski,alpine,snowboard,downhill,piste"
+                    "name": "Downhill Ski Run",
+                    "terms": "alpine skiing,piste,ski hill,skiing,snowboarding"
                 },
                 "piste/downhill/halfpipe": {
-                    "name": "Halfpipe",
+                    "name": "Snowsports Half-Pipe",
                     "terms": "ski,alpine,halfpipe,half pipe,snowboard,downhill,piste"
                 },
                 "piste/hike": {
-                    "name": "Snowshoeing or Winter Hiking Trail",
-                    "terms": "hike,winter hiking,snowshoe,snowshoeing,piste,ski"
+                    "name": "Snowshoeing / Winter Hiking Trail",
+                    "terms": "hike,nordic walking,piste,show shoeing,snowshoe,snowshoeing"
                 },
                 "piste/ice_skate": {
-                    "name": "Ice Skating Piste",
-                    "terms": "ice,skating,ski,piste"
+                    "name": "Ice Skating Trail",
+                    "terms": "ice rink,ice track,iceskating,piste,skates"
                 },
                 "piste/nordic": {
-                    "name": "Nordic or Crosscountry Piste/Ski Trail",
-                    "terms": "ski,nordic,crosscountry,skating,piste"
+                    "name": "Cross-Country Ski Trail",
+                    "terms": "crosscountry,nordic skiing,piste,skate skiing,skiing,xc"
                 },
                 "piste/piste": {
-                    "name": "Winter Sport Trails",
+                    "name": "Snowsports Trail / Piste",
                     "terms": "ski,nordic,crosscountry,downhill,alpine,snowboard,skitour,ski touring,sled,luge,sleigh,sledge,ski-joring,husky,horse,winter hiking,snowshoe,snowshoeing,ice,skating"
                 },
                 "piste/skitour": {
@@ -8496,12 +8506,12 @@
                     "terms": "ski,skitour,crosscountry,ski touring,piste"
                 },
                 "piste/sled": {
-                    "name": "Sled Piste",
-                    "terms": "ski,sled,luge,sleigh,sledge,piste"
+                    "name": "Sled Run",
+                    "terms": "bobsled,luge,piste,skeleton,sledge,sleigh,toboggan"
                 },
                 "piste/sleigh": {
-                    "name": "Sleigh Piste",
-                    "terms": "ski,piste,sled,luge,sleigh,sledge,ski-joring,husky,horse"
+                    "name": "Sleigh Trail",
+                    "terms": "dogsledding,husky,horse,piste,sled,sledge,ski-joring,skijoring"
                 },
                 "place/farm": {
                     "name": "Farm"
@@ -8626,9 +8636,6 @@
                     "name": "Temporary Polling Place",
                     "terms": "ballot box,ballot drop,democracy,elections,polling place,vote,voting booth,voting machine"
                 },
-                "power/sub_station": {
-                    "name": "Substation"
-                },
                 "power/cable/underground": {
                     "name": "Underground Power Cable",
                     "terms": ""
@@ -8664,6 +8671,30 @@
                 "power/plant": {
                     "name": "Power Station Grounds",
                     "terms": "coal,gas,generat*,hydro,nuclear,power,station"
+                },
+                "power/plant/source/coal": {
+                    "name": "Coal-Fired Power Plant",
+                    "terms": "carbon,combustion,fossil fuel,coalfired,power station"
+                },
+                "power/plant/source/gas": {
+                    "name": "Gas-Fired Power Plant",
+                    "terms": "carbon,combustion,fossil fuel,gasfired,power station,natural gas"
+                },
+                "power/plant/source/hydro": {
+                    "name": "Hydroelectric Power Station",
+                    "terms": "dam,power plant,run-of-the-river,tidal,water turbine"
+                },
+                "power/plant/source/nuclear": {
+                    "name": "Nuclear Power Plant",
+                    "terms": "atomic,fission,power station,nuclear reactor"
+                },
+                "power/plant/source/solar": {
+                    "name": "Solar Farm",
+                    "terms": "photovoltaic power station,solar panels,solar park,utility-scale solar"
+                },
+                "power/plant/source/wind": {
+                    "name": "Wind Farm",
+                    "terms": "offshore wind,wind park,wind power plant,wind power station,wind turbines,windmills"
                 },
                 "power/pole": {
                     "name": "Power Pole",

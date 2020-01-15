@@ -6,6 +6,7 @@
         "operator",
         "address",
         "building_area",
+        "opening_hours",
         "drive_through"
     ],
     "moreFields": [

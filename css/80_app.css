@@ -3605,7 +3605,7 @@ img.tag-reference-wiki-image {
     right: 0;
     top: 141px;
     width: 40px;
-    position: fixed;
+    position: absolute;
     z-index: 100;
 }
 [dir='rtl'] .map-controls {
@@ -5324,7 +5324,7 @@ img.tile-debug {
 .shaded:before {
     content:'';
     background: rgba(0,0,0,0.5);
-    position: fixed;
+    position: absolute;
     left: 0px; right: 0px; top: 0px; bottom: 0px;
 }
 

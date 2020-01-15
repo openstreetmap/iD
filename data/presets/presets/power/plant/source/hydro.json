@@ -1,0 +1,34 @@
+{
+    "icon": "maki-dam",
+    "fields": [
+        "{power/plant}"
+    ],
+    "moreFields": [
+        "{power/plant}"
+    ],
+    "geometry": [
+        "area"
+    ],
+    "tags": {
+        "power": "plant",
+        "plant:source": "hydro"
+    },
+    "addTags": {
+        "power": "plant",
+        "landuse": "industrial",
+        "plant:source": "hydro",
+        "plant:output:electricity": "*"
+    },
+    "reference": {
+        "key": "plant:source",
+        "value": "hydro"
+    },
+    "terms": [
+        "dam",
+        "power plant",
+        "run-of-the-river",
+        "tidal",
+        "water turbine"
+    ],
+    "name": "Hydroelectric Power Station"
+}

@@ -12,19 +12,18 @@
         "line",
         "area"
     ],
-    "terms": [
-        "ski",
-        "piste",
-        "sled",
-        "luge",
-        "sleigh",
-        "sledge",
-        "ski-joring",
-        "husky",
-        "horse"
-    ],
     "tags": {
         "piste:type": "sleigh"
     },
-    "name": "Sleigh Piste"
+    "terms": [
+        "dogsledding",
+        "husky",
+        "horse",
+        "piste",
+        "sled",
+        "sledge",
+        "ski-joring",
+        "skijoring"
+    ],
+    "name": "Sleigh Trail"
 }

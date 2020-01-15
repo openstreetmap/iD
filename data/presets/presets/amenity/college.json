@@ -7,14 +7,15 @@
         "address",
         "website",
         "internet_access",
-        "internet_access/fee"
+        "internet_access/fee",
+        "internet_access/ssid"
     ],
     "moreFields": [
         "denomination",
         "email",
         "fax",
         "gnis/feature_id",
-        "internet_access/ssid",
+        "not/name",
         "phone",
         "religion",
         "wheelchair"

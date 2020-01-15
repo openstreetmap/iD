@@ -3,10 +3,6 @@
     "geometry": [
         "line"
     ],
-    "terms": [
-        "tramway",
-        "ropeway"
-    ],
     "fields": [
         "name",
         "aerialway/occupancy",
@@ -17,5 +13,13 @@
     "tags": {
         "aerialway": "cable_car"
     },
+    "terms": [
+        "aerial cable",
+        "lift",
+        "ropeway",
+        "skiing",
+        "snowboarding",
+        "tramway"
+    ],
     "name": "Cable Car"
 }
