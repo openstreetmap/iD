@@ -51,28 +51,10 @@ export function uiToolSave(context) {
         }
     }
 
-    function updateTitle(val) {
-        var oldTitle = document.title;
-        var endIndex = oldTitle.indexOf(')');
-        var oldIDStr = oldTitle.substring(0, endIndex+1);
-        var newIDStr = 'iD (' + val.toString() + ')';
-        if (val === 0) {
-            oldTitle = oldTitle.replace(oldIDStr, 'iD');
-        }
-        else if (_numChanges !== 0){
-            oldTitle = oldTitle.replace(oldIDStr, newIDStr);
-        }
-        else {
-            oldTitle = oldTitle.replace('iD', newIDStr);
-        }
-        document.title = oldTitle;
-    }
-
     function updateCount() {
         var val = history.difference().summary().length;
         if (val === _numChanges) return;
 
-        updateTitle(val);
 
         _numChanges = val;
 
