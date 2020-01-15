@@ -27,7 +27,7 @@
         "generator:source": "solar",
         "generator:method": "photovoltaic",
         "generator:type": "solar_photovoltaic_panel",
-        "generator:output:electricity": "yes"
+        "generator:output:electricity": "*"
     },
     "reference": {
         "key": "generator:method",

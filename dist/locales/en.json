@@ -8553,6 +8553,14 @@
                     "name": "Power Station Grounds",
                     "terms": "coal,gas,generat*,hydro,nuclear,power,station"
                 },
+                "power/plant/method/photovoltaic": {
+                    "name": "Solar Farm",
+                    "terms": "photovoltaic power station,solar panels,solar park,utility-scale solar"
+                },
+                "power/plant/source/wind": {
+                    "name": "Wind Farm",
+                    "terms": "photovoltaic power station,solar panels,solar park,utility-scale solar"
+                },
                 "power/pole": {
                     "name": "Power Pole",
                     "terms": ""

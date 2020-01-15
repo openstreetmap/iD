@@ -910,6 +910,8 @@
     {"key": "power", "value": "line", "description": "🄿 Power Line", "object_types": ["way"], "icon_url": "https://cdn.jsdelivr.net/gh/ideditor/temaki/icons/power_tower.svg"},
     {"key": "power", "value": "minor_line", "description": "🄿 Minor Power Line", "object_types": ["way"], "icon_url": "https://cdn.jsdelivr.net/gh/openstreetmap/iD@master/svg/iD-sprite/presets/power-line.svg"},
     {"key": "power", "value": "plant", "description": "🄿 Power Station Grounds", "object_types": ["area"], "icon_url": "https://cdn.jsdelivr.net/gh/mapbox/maki/icons/industry-15.svg"},
+    {"key": "plant:method", "value": "photovoltaic", "description": "🄿 Solar Farm", "object_types": ["area"], "icon_url": "https://cdn.jsdelivr.net/gh/openstreetmap/iD@master/svg/fontawesome/fas-solar-panel.svg"},
+    {"key": "plant:source", "value": "wind", "description": "🄿 Wind Farm", "object_types": ["area"], "icon_url": "https://cdn.jsdelivr.net/gh/ideditor/temaki/icons/wind_turbine.svg"},
     {"key": "power", "value": "pole", "description": "🄿 Power Pole", "object_types": ["node"], "icon_url": "https://cdn.jsdelivr.net/gh/ideditor/temaki/icons/utility_pole.svg"},
     {"key": "power", "value": "substation", "description": "🄿 Substation", "object_types": ["area", "node"], "icon_url": "https://cdn.jsdelivr.net/gh/ideditor/temaki/icons/power.svg"},
     {"key": "power", "value": "switch", "description": "🄿 Power Switch", "object_types": ["node"], "icon_url": "https://cdn.jsdelivr.net/gh/ideditor/temaki/icons/power_switch.svg"},

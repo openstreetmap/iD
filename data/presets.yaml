@@ -7014,6 +7014,16 @@ en:
         name: Power Station Grounds
         # 'terms: coal,gas,generat*,hydro,nuclear,power,station'
         terms: '<translate with synonyms or related terms for ''Power Station Grounds'', separated by commas>'
+      power/plant/method/photovoltaic:
+        # 'power=plant, plant:method=photovoltaic'
+        name: Solar Farm
+        # 'terms: photovoltaic power station,solar panels,solar park,utility-scale solar'
+        terms: '<translate with synonyms or related terms for ''Solar Farm'', separated by commas>'
+      power/plant/source/wind:
+        # 'power=plant, plant:source=wind'
+        name: Wind Farm
+        # 'terms: photovoltaic power station,solar panels,solar park,utility-scale solar'
+        terms: '<translate with synonyms or related terms for ''Wind Farm'', separated by commas>'
       power/pole:
         # power=pole
         name: Power Pole
