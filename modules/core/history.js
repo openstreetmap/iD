@@ -506,7 +506,9 @@ export function coreHistory(context) {
                 baseEntities: Object.values(baseEntities),
                 stack: s,
                 nextIDs: osmEntity.id.next,
-                index: _index
+                index: _index,
+                // note the time the changes were saved
+                timestamp: (new Date()).getTime()
             });
         },
 
