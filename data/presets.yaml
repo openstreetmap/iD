@@ -7059,9 +7059,6 @@ en:
         # power=pole
         name: Power Pole
         terms: '<translate with synonyms or related terms for ''Power Pole'', separated by commas>'
-      power/sub_station:
-        # power=sub_station
-        name: Substation
       power/substation:
         # power=substation
         name: Substation

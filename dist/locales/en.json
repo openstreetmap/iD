@@ -8524,9 +8524,6 @@
                     "name": "Temporary Polling Place",
                     "terms": "ballot box,ballot drop,democracy,elections,polling place,vote,voting booth,voting machine"
                 },
-                "power/sub_station": {
-                    "name": "Substation"
-                },
                 "power/cable/underground": {
                     "name": "Underground Power Cable",
                     "terms": ""
