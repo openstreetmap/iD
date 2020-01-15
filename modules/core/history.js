@@ -676,6 +676,11 @@ export function coreHistory(context) {
         },
 
 
+        savedHistoryJSON: function() {
+            return context.storage(getKey('saved_history'));
+        },
+
+
         hasRestorableChanges: function() {
             return _hasUnresolvedRestorableChanges;
         },
@@ -685,7 +690,7 @@ export function coreHistory(context) {
         restore: function() {
             if (lock.locked()) {
                 _hasUnresolvedRestorableChanges = false;
-                var json = context.storage(getKey('saved_history'));
+                var json = this.savedHistoryJSON();
                 if (json) history.fromJSON(json, true);
             }
         },
