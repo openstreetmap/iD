@@ -1,0 +1,34 @@
+{
+    "icon": "temaki-radiation",
+    "fields": [
+        "{power/plant}"
+    ],
+    "moreFields": [
+        "{power/plant}"
+    ],
+    "geometry": [
+        "area"
+    ],
+    "tags": {
+        "power": "plant",
+        "plant:source": "nuclear"
+    },
+    "addTags": {
+        "power": "plant",
+        "landuse": "industrial",
+        "plant:source": "nuclear",
+        "plant:method": "fission",
+        "plant:output:electricity": "*"
+    },
+    "reference": {
+        "key": "plant:source",
+        "value": "nuclear"
+    },
+    "terms": [
+        "atomic",
+        "fission",
+        "power station",
+        "nuclear reactor"
+    ],
+    "name": "Nuclear Power Plant"
+}

@@ -11,17 +11,17 @@
     ],
     "tags": {
         "power": "plant",
-        "plant:method": "photovoltaic"
+        "plant:source": "solar"
     },
     "addTags": {
         "power": "plant",
-        "plant:method": "photovoltaic",
         "plant:source": "solar",
+        "plant:method": "photovoltaic",
         "plant:output:electricity": "*"
     },
     "removeTags": {
         "power": "plant",
-        "plant:method": "photovoltaic",
+        "plant:method": "*",
         "plant:source": "solar",
         "plant:output:electricity": "*",
         "landuse": "industrial"

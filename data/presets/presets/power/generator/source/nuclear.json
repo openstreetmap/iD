@@ -1,27 +1,19 @@
 {
     "icon": "temaki-radiation",
     "fields": [
+        "ref",
         "operator",
-        "generator/source",
         "generator/method",
         "generator/type",
-        "generator/output/electricity",
-        "ref"
+        "generator/output/electricity"
     ],
     "moreFields": [
-        "manufacturer"
+        "{power/generator}"
     ],
     "geometry": [
         "point",
         "vertex",
         "area"
-    ],
-    "terms": [
-        "fission",
-        "generator",
-        "nuclear",
-        "nuke",
-        "reactor"
     ],
     "tags": {
         "power": "generator",
@@ -32,5 +24,12 @@
         "key": "generator:source",
         "value": "nuclear"
     },
+    "terms": [
+        "fission",
+        "generator",
+        "nuclear",
+        "nuke",
+        "reactor"
+    ],
     "name": "Nuclear Reactor"
 }

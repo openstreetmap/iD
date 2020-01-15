@@ -104,7 +104,7 @@ _Breaking changes, which may affect downstream projects or sites that embed iD, 
 * Add Secondhand Clothing Store preset ([#7164])
 * Add Public Prosecutor's Office preset ([#7225])
 * Add Speed Limit Enforcement preset ([#7234])
-* Add presets: Emergency Exit, Geyser, Used Car Dealership, Wedding Clothes Store, Backcountry Camping Area, Group Camping Area, History Museum, Wind Farm, Solar Farm
+* Add presets: Emergency Exit, Geyser, Used Car Dealership, Wedding Clothes Store, Backcountry Camping Area, Group Camping Area, History Museum, Wind Farm, Solar Farm, Nuclear Power Plant, Hydroelectric Power Station, Coal-Fired Power Plant, Gas-Fired Power Plant
 * Rename "Anime Shop" to "Anime / Manga Shop" ([#7223])
 * Simplify the names of various Piste presets
 * Update Arts & Crafts Store icon ([#7228])

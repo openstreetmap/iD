@@ -4052,9 +4052,15 @@
                 "plant": {
                     "label": "Plant"
                 },
+                "plant/method": {
+                    "label": "Generation Method"
+                },
                 "plant/output/electricity": {
                     "label": "Power Output",
                     "placeholder": "500 MW, 1000 MW, 2000 MW..."
+                },
+                "plant/source": {
+                    "label": "Energy Source"
                 },
                 "playground": {
                     "label": "Type"
@@ -8553,13 +8559,29 @@
                     "name": "Power Station Grounds",
                     "terms": "coal,gas,generat*,hydro,nuclear,power,station"
                 },
-                "power/plant/method/photovoltaic": {
+                "power/plant/source/coal": {
+                    "name": "Coal-Fired Power Plant",
+                    "terms": "carbon,combustion,fossil fuel,coalfired,power station"
+                },
+                "power/plant/source/gas": {
+                    "name": "Gas-Fired Power Plant",
+                    "terms": "carbon,combustion,fossil fuel,gasfired,power station,natural gas"
+                },
+                "power/plant/source/hydro": {
+                    "name": "Hydroelectric Power Station",
+                    "terms": "dam,power plant,run-of-the-river,tidal,water turbine"
+                },
+                "power/plant/source/nuclear": {
+                    "name": "Nuclear Power Plant",
+                    "terms": "atomic,fission,power station,nuclear reactor"
+                },
+                "power/plant/source/solar": {
                     "name": "Solar Farm",
                     "terms": "photovoltaic power station,solar panels,solar park,utility-scale solar"
                 },
                 "power/plant/source/wind": {
                     "name": "Wind Farm",
-                    "terms": "photovoltaic power station,solar panels,solar park,utility-scale solar"
+                    "terms": "offshore wind,wind park,wind power plant,wind power station,wind turbines,windmills"
                 },
                 "power/pole": {
                     "name": "Power Pole",

@@ -1,28 +1,19 @@
 {
     "icon": "temaki-power",
     "fields": [
+        "ref",
         "operator",
         "generator/method",
         "generator/type",
-        "generator/output/electricity",
-        "ref"
+        "generator/output/electricity"
     ],
     "moreFields": [
-        "height",
-        "manufacturer"
+        "{power/generator}"
     ],
     "geometry": [
         "point",
         "vertex",
         "area"
-    ],
-    "terms": [
-        "dam",
-        "generator",
-        "francis turbine",
-        "hydroelectricity",
-        "kaplan turbine",
-        "pelton turbine"
     ],
     "tags": {
         "power": "generator",
@@ -37,5 +28,13 @@
         "key": "generator:source",
         "value": "hydro"
     },
+    "terms": [
+        "dam",
+        "generator",
+        "francis turbine",
+        "hydroelectricity",
+        "kaplan turbine",
+        "pelton turbine"
+    ],
     "name": "Water Turbine"
 }

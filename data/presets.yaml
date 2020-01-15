@@ -1762,11 +1762,17 @@ en:
       plant:
         # plant=*
         label: Plant
+      plant/method:
+        # 'plant:method=*'
+        label: Generation Method
       plant/output/electricity:
         # 'plant:output:electricity=*'
         label: Power Output
         # plant/output/electricity field placeholder
         placeholder: '500 MW, 1000 MW, 2000 MW...'
+      plant/source:
+        # 'plant:source=*'
+        label: Energy Source
       playground:
         # playground=*
         label: Type
@@ -7014,15 +7020,35 @@ en:
         name: Power Station Grounds
         # 'terms: coal,gas,generat*,hydro,nuclear,power,station'
         terms: '<translate with synonyms or related terms for ''Power Station Grounds'', separated by commas>'
-      power/plant/method/photovoltaic:
-        # 'power=plant, plant:method=photovoltaic'
+      power/plant/source/coal:
+        # 'power=plant, plant:source=coal'
+        name: Coal-Fired Power Plant
+        # 'terms: carbon,combustion,fossil fuel,coalfired,power station'
+        terms: '<translate with synonyms or related terms for ''Coal-Fired Power Plant'', separated by commas>'
+      power/plant/source/gas:
+        # 'power=plant, plant:source=gas'
+        name: Gas-Fired Power Plant
+        # 'terms: carbon,combustion,fossil fuel,gasfired,power station,natural gas'
+        terms: '<translate with synonyms or related terms for ''Gas-Fired Power Plant'', separated by commas>'
+      power/plant/source/hydro:
+        # 'power=plant, plant:source=hydro'
+        name: Hydroelectric Power Station
+        # 'terms: dam,power plant,run-of-the-river,tidal,water turbine'
+        terms: '<translate with synonyms or related terms for ''Hydroelectric Power Station'', separated by commas>'
+      power/plant/source/nuclear:
+        # 'power=plant, plant:source=nuclear'
+        name: Nuclear Power Plant
+        # 'terms: atomic,fission,power station,nuclear reactor'
+        terms: '<translate with synonyms or related terms for ''Nuclear Power Plant'', separated by commas>'
+      power/plant/source/solar:
+        # 'power=plant, plant:source=solar'
         name: Solar Farm
         # 'terms: photovoltaic power station,solar panels,solar park,utility-scale solar'
         terms: '<translate with synonyms or related terms for ''Solar Farm'', separated by commas>'
       power/plant/source/wind:
         # 'power=plant, plant:source=wind'
         name: Wind Farm
-        # 'terms: photovoltaic power station,solar panels,solar park,utility-scale solar'
+        # 'terms: offshore wind,wind park,wind power plant,wind power station,wind turbines,windmills'
         terms: '<translate with synonyms or related terms for ''Wind Farm'', separated by commas>'
       power/pole:
         # power=pole

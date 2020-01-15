@@ -1,7 +1,11 @@
 {
     "icon": "temaki-wind_turbine",
     "fields": [
-        "{power/plant}"
+        "name",
+        "operator",
+        "address",
+        "plant/output/electricity",
+        "start_date"
     ],
     "moreFields": [
         "{power/plant}"
@@ -16,6 +20,7 @@
     "addTags": {
         "power": "plant",
         "plant:source": "wind",
+        "plant:method": "wind_turbine",
         "plant:output:electricity": "*"
     },
     "removeTags": {
@@ -30,10 +35,12 @@
         "value": "wind"
     },
     "terms": [
-        "photovoltaic power station",
-        "solar panels",
-        "solar park",
-        "utility-scale solar"
+        "offshore wind",
+        "wind park",
+        "wind power plant",
+        "wind power station",
+        "wind turbines",
+        "windmills"
     ],
     "name": "Wind Farm"
 }
