@@ -76,6 +76,9 @@
                 "healthcare/blood_donation": {
                     "name": "Blood Donor Centre"
                 },
+                "highway/cycleway/bicycle_foot": {
+                    "name": "Shared Path"
+                },
                 "highway/crossing/marked": {
                     "name": "Marked Crossing"
                 },
