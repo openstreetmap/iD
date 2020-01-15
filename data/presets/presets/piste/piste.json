@@ -12,6 +12,9 @@
         "line",
         "area"
     ],
+    "tags": {
+        "piste:type": "*"
+    },
     "terms": [
         "ski",
         "nordic",
@@ -34,8 +37,5 @@
         "ice",
         "skating"
     ],
-    "tags": {
-        "piste:type": "*"
-    },
-    "name": "Winter Sport Trails"
+    "name": "Snowsports Trail / Piste"
 }

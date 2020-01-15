@@ -12,15 +12,15 @@
         "line",
         "area"
     ],
-    "terms": [
-        "ski",
-        "alpine",
-        "snowboard",
-        "downhill",
-        "piste"
-    ],
     "tags": {
         "piste:type": "downhill"
     },
-    "name": "Downhill Piste/Ski Run"
+    "terms": [
+        "alpine skiing",
+        "piste",
+        "ski hill",
+        "skiing",
+        "snowboarding"
+    ],
+    "name": "Downhill Ski Run"
 }

@@ -106,6 +106,7 @@ _Breaking changes, which may affect downstream projects or sites that embed iD, 
 * Add Speed Limit Enforcement preset ([#7234])
 * Add presets: Emergency Exit, Geyser, Used Car Dealership, Wedding Clothes Store, Backcountry Camping Area, Group Camping Area, History Museum
 * Rename "Anime Shop" to "Anime / Manga Shop" ([#7223])
+* Simplify the names of various Piste presets
 * Update Arts & Crafts Store icon ([#7228])
 * Update Dressmaker icon ([#7229])
 * Update Water Well icon ([#7170])

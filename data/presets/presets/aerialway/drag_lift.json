@@ -11,5 +11,10 @@
     "tags": {
         "aerialway": "drag_lift"
     },
+    "terms": [
+        "skiing",
+        "snowboarding",
+        "surface cable"
+    ],
     "name": "Drag Lift"
 }
