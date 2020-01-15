@@ -4,7 +4,7 @@ import { uiModal } from './modal';
 
 export function uiRestore(context) {
   return function(selection) {
-    if (!context.history().lock() || !context.history().restorableChanges()) return;
+    if (!context.history().hasRestorableChanges()) return;
 
     let modalSelection = uiModal(selection, true);
 
