@@ -51,16 +51,18 @@ export function behaviorHash(context) {
         if (selected.length) {
             newParams.id = selected.join(',');
         }
-        updateTitle(selected);
-
+ 
         newParams.map = zoom.toFixed(2) +
             '/' + center[1].toFixed(precision) +
             '/' + center[0].toFixed(precision);
 
+        updateTitle(selected, center[1].toFixed(precision), center[0].toFixed(precision));
+
         return '#' + utilQsString(Object.assign(q, newParams), true);
     };
 
-    function updateTitle(selected){
+    function updateTitle(selected, center1, center0){
+        //selection
         var oldTitle = document.title;
         var endIndex = oldTitle.indexOf('-');
         var oldIDStr = oldTitle.substring(endIndex+2);
@@ -82,7 +84,10 @@ export function behaviorHash(context) {
                 oldIDStr = oldTitle.substring(endIndex);
                 oldTitle = oldTitle.replace(oldIDStr, '');
             }
+            //map location
+            oldTitle += ' - (' + center1 + ',' + center0 + ')';
         }
+
         document.title = oldTitle;
 
     }
