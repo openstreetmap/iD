@@ -68,9 +68,9 @@ export function uiPresetIcon(context) {
 
 
   function renderCircleFill(fillEnter) {
-    const d = isSmall() ? 40 : 60;
-    const w = d;
-    const h = d;
+    const w = isSmall() ? 40 : 60;
+    const h = w;
+    const d = w * 2 / 3;
     const r = d / 2;
 
     fillEnter
