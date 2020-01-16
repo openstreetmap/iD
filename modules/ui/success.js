@@ -349,7 +349,7 @@ export function uiSuccess(context) {
           }
           return description;
         });
-      }
+    }
 
 
     function linkify(url, text) {
