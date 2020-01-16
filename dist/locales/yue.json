@@ -1080,10 +1080,6 @@
                 "level": {
                     "label": "層"
                 },
-                "levels": {
-                    "label": "樓",
-                    "placeholder": "2, 4, 6..."
-                },
                 "lit": {
                     "label": "有燈"
                 },
@@ -2467,9 +2463,6 @@
                 "power/pole": {
                     "name": "電綫杆",
                     "terms": "Power Pole,電綫杆,電線桿"
-                },
-                "power/sub_station": {
-                    "name": "配電站"
                 },
                 "power/tower": {
                     "name": "高壓電塔",

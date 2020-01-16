@@ -338,10 +338,6 @@
                 "leisure": {
                     "label": "Tipe"
                 },
-                "levels": {
-                    "label": "Vlakke",
-                    "placeholder": "2, 4, 6..."
-                },
                 "location": {
                     "label": "Plek"
                 },
@@ -966,9 +962,6 @@
                 "power/pole": {
                     "name": "Kragpaal",
                     "terms": "Kragpaal"
-                },
-                "power/sub_station": {
-                    "name": "Substasie"
                 },
                 "power/tower": {
                     "name": "Hoogspanningstoring",

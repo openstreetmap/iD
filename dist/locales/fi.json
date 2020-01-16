@@ -473,6 +473,11 @@
             "hidden_warning": "{count} piilotettua karttakohdetta",
             "hidden_details": "Nämä ominaisuudet ovat nykyisin piilotettu: {details}"
         },
+        "osm_api_status": {
+            "message": {
+                "error": "Ei yhteyttä OpenStreetMapin palvelimeen. Muutokset on tallennettu tälle tietokoneelle. Tarkista verkkoyhteytesi."
+            }
+        },
         "commit": {
             "title": "Tallenna OpenStreetMapiin",
             "upload_explanation": "Palvelimelle tallennettavat muutokset tulevat pian näkyviin kaikkiin OpenStreetMap-kartta-aineistoa käyttäviin palveluihin.",
@@ -3136,10 +3141,6 @@
                 "level_semi": {
                     "label": "Kerrokset"
                 },
-                "levels": {
-                    "label": "Kerroslukumäärä",
-                    "placeholder": "2, 4, 6..."
-                },
                 "liaison": {
                     "label": "Tyyppi"
                 },
@@ -4485,10 +4486,6 @@
                     "name": "Internetkahvila",
                     "terms": "nettikahvila, wlan, wifi"
                 },
-                "amenity/kindergarten": {
-                    "name": "Esikoulu",
-                    "terms": "eskari, leikkikoulu, koulu, nollaluokka, 0. luokka, 0 luokka, 0-luokka"
-                },
                 "amenity/language_school": {
                     "name": "Kielikoulu"
                 },
@@ -4545,10 +4542,6 @@
                 },
                 "amenity/parking/underground": {
                     "name": "Pysäköintiluola"
-                },
-                "amenity/parking_entrance": {
-                    "name": "Pysäköintihallin ajoramppi",
-                    "terms": "pysäköinti, parkkipaikka, pysäköintipaikka, parkki, pysäköintitalo, parkkitalo, ulosajo, sisäänajo, ajo, ulos, sisään, ramppi"
                 },
                 "amenity/parking_space": {
                     "name": "Pysäköintiruutu",
@@ -5184,9 +5177,6 @@
                 "building/industrial": {
                     "name": "Teollisuusrakennus"
                 },
-                "building/kindergarten": {
-                    "name": "Esikoulurakennus"
-                },
                 "building/mosque": {
                     "name": "Moskeijarakennus",
                     "terms": "islamilainen, muslimi"
@@ -5499,10 +5489,6 @@
                 },
                 "emergency/yes": {
                     "name": "Pelastusajo sallittu"
-                },
-                "entrance": {
-                    "name": "Sisään- tai uloskäynti",
-                    "terms": "ovi, portti, sisään, ulos, sisäänkäynti, uloskäynti"
                 },
                 "ford": {
                     "name": "Kahlauspaikka"
@@ -5939,8 +5925,7 @@
                     "name": "Hautausmaa"
                 },
                 "landuse/churchyard": {
-                    "name": "Kirkkomaa",
-                    "terms": "hautaaminen, vainaja, kuollut, ruumis, hautuumaa, hautaus, hauta, haudat"
+                    "name": "Kirkkomaa"
                 },
                 "landuse/commercial": {
                     "name": "Liiketoiminta-alue"
@@ -5972,7 +5957,7 @@
                     "terms": "ruoho, ruohikko, nurmikko, kenttä, ruohoalue, alue, kenttä"
                 },
                 "landuse/greenfield": {
-                    "name": "Viheralue"
+                    "name": "Tyhjä tontti"
                 },
                 "landuse/greenhouse_horticulture": {
                     "name": "Kasvihuonealue"
@@ -6774,29 +6759,6 @@
                     "name": "Vesilaitostoimisto",
                     "terms": "vesipalvelu, vesihuoltolaitos, vesihuolto, vedenjakelu, vesiosuuskunta, vesikunta, viemäröintilaitos, vesi, toimisto"
                 },
-                "piste/downhill": {
-                    "name": "Laskettelurinne/hiihtolatu",
-                    "terms": "hiihto, laskettelu, latu, rinne, hiihtäminen, alppi, alppilajit, talvi, talviurheilu, lumetus, lumetettu, sukset, suksi, lauta, lumilauta"
-                },
-                "piste/hike": {
-                    "name": "Talvivaellusreitti"
-                },
-                "piste/ice_skate": {
-                    "name": "Luistelurata"
-                },
-                "piste/nordic": {
-                    "name": "Hiihtolatu"
-                },
-                "piste/piste": {
-                    "name": "Talviurheilulatu"
-                },
-                "piste/sled": {
-                    "name": "Pulkkamäki",
-                    "terms": "kelkkailu"
-                },
-                "piste/sleigh": {
-                    "name": "Rekipolku"
-                },
                 "place": {
                     "name": "Paikka"
                 },
@@ -6927,9 +6889,6 @@
                 },
                 "power/pole": {
                     "name": "Voimalinjapylväs"
-                },
-                "power/sub_station": {
-                    "name": "Sähköasema"
                 },
                 "power/substation": {
                     "name": "Sähköasema"
@@ -7194,10 +7153,6 @@
                     "name": "Alkoholimyymälä",
                     "terms": "viina, olut, viini, viinikellari, juoma"
                 },
-                "shop/anime": {
-                    "name": "Animemyymälä",
-                    "terms": "cosplay, anime, manga, pukeutuminen"
-                },
                 "shop/antiques": {
                     "name": "Antiikkiliike"
                 },
@@ -7321,9 +7276,6 @@
                 },
                 "shop/cosmetics": {
                     "name": "Kosmetiikkamyymälä"
-                },
-                "shop/craft": {
-                    "name": "Käsityöliike"
                 },
                 "shop/curtain": {
                     "name": "Verhomyymälä",

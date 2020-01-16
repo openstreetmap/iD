@@ -2757,6 +2757,12 @@
                 "attraction": {
                     "label": "Kiểu"
                 },
+                "baby_feeding": {
+                    "options": {
+                        "no": "Không có",
+                        "room": "Phòng Riêng"
+                    }
+                },
                 "baby_seat": {
                     "label": "Ghế Bé"
                 },
@@ -3594,11 +3600,6 @@
                     "label": "Lầu",
                     "terms": "lầu, tầng, trệt, tầng trệt, sàn, sàn nhà, tấm, tầng hầm, hầm, tầng lửng, gác lửng, gác xép, lửng, lau, tang, tret, tang tret, san, san nha, tam, tang ham, ham, tang lung, gac lung, gac xep, lung"
                 },
-                "levels": {
-                    "label": "Số Tầng",
-                    "placeholder": "2, 4, 6…",
-                    "terms": "lầu, tầng, trệt, tầng trệt, sàn, sàn nhà, tấm, tầng hầm, hầm, tầng lửng, gác lửng, gác xép, lửng, lau, tang, tret, tang tret, san, san nha, tam, tang ham, ham, tang lung, gac lung, gac xep, lung"
-                },
                 "liaison": {
                     "label": "Cấp"
                 },
@@ -3735,6 +3736,9 @@
                         "5": "5: Rất dốc, thường phải đẩy hoặc vác xe đạp"
                     },
                     "placeholder": "0, 1, 2, 3…"
+                },
+                "museum": {
+                    "label": "Kiểu"
                 },
                 "name": {
                     "label": "Tên",
@@ -4018,7 +4022,13 @@
                     "label": "Kiểu"
                 },
                 "pump": {
-                    "label": "Bơm"
+                    "label": "Bơm",
+                    "options": {
+                        "manual": "Bơm Tay",
+                        "no": "Không có",
+                        "powered": "Máy Bơm",
+                        "yes": "Có"
+                    }
                 },
                 "railway": {
                     "label": "Kiểu"
@@ -4751,6 +4761,10 @@
                     "name": "Bảng Quảng cáo",
                     "terms": "bảng quảng cáo, biển quảng cáo, panô quảng cáo, pano quảng cáo, pa-nô quảng cáo, pa nô quảng cáo, bang quang cao, bien quang cao, pano quang cao, pa-no quang cao, pa no quang cao"
                 },
+                "advertising/board": {
+                    "name": "Bảng Tin nhắn",
+                    "terms": "bảng tin nhắn, bảng nhắn tin, bang tin nhan, bang nhan tin"
+                },
                 "advertising/column": {
                     "name": "Cột Quảng cáo",
                     "terms": "cột quảng cáo, cột morris, cột áp phích, cot quang cao, cot morris, cot ap phich"
@@ -5010,6 +5024,10 @@
                     "name": "Võ đường",
                     "terms": "võ đường, trường võ thuật, phòng tập võ thuật, võ thuật, karate, judo, nhu đạo, vo duong, truong vo thuat, phong tap vo thuat, vo thuat, nhu dao"
                 },
+                "amenity/dressing_room": {
+                    "name": "Phòng Thay đồ",
+                    "terms": "phòng thay đồ, phòng thay áo, phòng thay quần áo, phong thay do, phong thay ao, phong thay quan ao"
+                },
                 "amenity/drinking_water": {
                     "name": "Nước Uống",
                     "terms": "máy nước, vòi nước uống, nước uống, uống, may nuoc, voi nuoc uong, nuoc uong, uong"
@@ -5115,10 +5133,6 @@
                     "name": "Dàn Karaoke",
                     "terms": "dàn karaoke, phòng karaoke, truyền hình karaoke, ktv, karaoke, dan karaoke, phong karaoke, truyen hinh karaoke"
                 },
-                "amenity/kindergarten": {
-                    "name": "Sân Nhà trẻ",
-                    "terms": "sân nhà trẻ, sân nhà giữ trẻ, sân trường mẫu giáo, sân trường mầm non, san nha tre, san nha giu tre, san truong mau giao, san truong mam non"
-                },
                 "amenity/language_school": {
                     "name": "Trường học Ngoại ngữ",
                     "terms": "trường học ngoại ngữ, trường học ngôn ngữ, trường ngoại ngữ, trường ngôn ngữ, truong hoc ngoai ngu, truong hoc ngon ngu, truong ngoai ngu, truong ngon ngu"
@@ -5187,8 +5201,8 @@
                     "terms": "bãi đậu xe ngầm, bãi đỗ xe ngầm, bai dau xe ngam, bai do xe ngam"
                 },
                 "amenity/parking_entrance": {
-                    "name": "Lối Ra vào Ga ra",
-                    "terms": "lối ra vào ga ra, lối ra vào ga-ra, lối ra ga ra, lối vào ga ra, lối ra ga-ra, lối ra ga-ra, loi ra vao ga ra, loi ra vao ga-ra, loi ra ga ra, loi vao ga ra, loi ra ga-ra, loi ra ga-ra"
+                    "name": "Lối Ra vào Bãi Đậu xe Cao tầng",
+                    "terms": "lối ra vào bãi đậu xe cao tầng, lối ra vào bãi đỗ xe cao tầng, lối ra vào bãi giữ xe cao tầng, lối ra vào bãi đậu xe nhiều tầng, lối ra vào bãi đỗ xe nhiều tầng, lối ra vào bãi giữ xe nhiều tầng, loi ra vao bai dau xe cao tang, loi ra vao bai do xe cao tang, loi ra vao bai giu xe cao tang, loi ra vao bai dau xe nhieu tang, loi ra vao bai do xe nhieu tang, loi ra vao bai giu xe nhieu tang"
                 },
                 "amenity/parking_space": {
                     "name": "Chỗ Đậu xe",
@@ -5893,10 +5907,6 @@
                     "name": "Tòa nhà Công nghiệp",
                     "terms": "tòa nhà công nghiệp, toà nhà công nghiệp, toa nha cong nghiep"
                 },
-                "building/kindergarten": {
-                    "name": "Nhà trẻ",
-                    "terms": "nhà trẻ, nhà giữ trẻ, trường mẫu giáo, trường mầm non, nha tre, nha giu tre, truong mau giao, truong mam non"
-                },
                 "building/mosque": {
                     "name": "Nhà thờ Hồi giáo",
                     "terms": "nhà thờ hồi giáo, thánh đường hồi giáo, giáo đường hồi giáo, nha tho hoi giao, thanh duong hoi giao, giao duong hoi giao"
@@ -6263,9 +6273,9 @@
                 "emergency/yes": {
                     "name": "Dành cho Dịch vụ Khẩn cấp"
                 },
-                "entrance": {
-                    "name": "Lối Ra vào",
-                    "terms": "lối vào, cửa ra vào, cửa ra, cửa vào, cổng vào, loi vao, cua ra vao, cua ra, cua vao, cong vao"
+                "entrance/emergency": {
+                    "name": "Lối thoát Khẩn cấp",
+                    "terms": "lối thoát khẩn cấp, lối ra khẩn cấp, loi thoat khan cap, loi ra khan cap"
                 },
                 "ford": {
                     "name": "Nơi Lội qua Sông",
@@ -6661,6 +6671,10 @@
                     "name": "Mốc Biên giới",
                     "terms": "mốc biên giới, mốc ranh giới, moc bien gioi, moc ranh gioi"
                 },
+                "historic/building": {
+                    "name": "Tòa nhà Lịch sử",
+                    "terms": "tòa nhà lịch sử, toà nhà lịch sử, toa nha lich su"
+                },
                 "historic/castle": {
                     "name": "Lâu đài",
                     "terms": "lâu đài, lau dai"
@@ -6770,8 +6784,7 @@
                     "terms": "nghĩa địa, nghĩa trang, bãi tha ma, mộ, nghia dia, nghia trang, bai tha ma, mo"
                 },
                 "landuse/churchyard": {
-                    "name": "Sân Nhà thờ",
-                    "terms": "sân nhà thờ, khu đất nhà thờ, sân nhà thờ chính tòa, khu đất nhà thờ chính tòa, sân nhà thờ chính toà, khu đất nhà thờ chính toà, sân nhà thờ chánh tòa, khu đất nhà thờ chánh tòa, sân nhà thờ chánh toà, khu đất nhà thờ chánh tòa, san nha tho, khu dat nha tho, san nha tho chinh toa, khu dat nha tho chinh toa, san nha tho chanh toa, khu dat nha tho chanh toa"
+                    "name": "Sân Nhà thờ"
                 },
                 "landuse/commercial": {
                     "name": "Đất Thương mại",
@@ -7239,6 +7252,10 @@
                 "man_made/antenna": {
                     "name": "Ăngten",
                     "terms": "ăngten, ăng-ten, ăng ten, anten, an-ten, radio, rađiô, ra-đi-ô, vô tuyến, anten radio, anten rađiô, an-ten ra-đi-ô, tv, tivi, anten tv, anten tivi, angten, ang-ten, ang ten, anten, an-ten, ra-di-o, vo tuyen, anten ra-di-o"
+                },
+                "man_made/beehive": {
+                    "name": "Tổ ong",
+                    "terms": "tổ ong, to ong"
                 },
                 "man_made/breakwater": {
                     "name": "Đê Chắn Sóng",
@@ -7763,22 +7780,6 @@
                     "name": "Văn phòng Nhà cung cấp Nước uống",
                     "terms": "văn phòng nhà cung cấp nước uống, văn phòng hãng cung cấp nước uống, văn phòng hội đồng thủy cục, văn phòng hội đồng thuỷ cục, van phong nha cung cap nuoc uong, van phong hang cung cap nuoc uong, van phong hoi dong thuy cuc"
                 },
-                "piste/downhill": {
-                    "name": "Tuyến đường Trượt tuyết Dốc xuống",
-                    "terms": "tuyến đường trượt tuyết dốc xuống, tuyến đường mòn trượt tuyết dốc xuống, tuyen duong truot tuyet doc xuong, tuyen duong mon truot tuyet, doc xuong"
-                },
-                "piste/downhill/halfpipe": {
-                    "name": "Nửa ống",
-                    "terms": "nửa ống, trượt nửa ống, nua ong, truot nua ong"
-                },
-                "piste/hike": {
-                    "name": "Đường mòn Giày tuyết",
-                    "terms": "đường mòn giày tuyết, đường mòn đi bộ giày tuyết, đường mòn mùa đông, duong mon giay tuyet, duong mon di bo giay tuyet, duong mon mua dong"
-                },
-                "piste/piste": {
-                    "name": "Đường mòn Thể thao Mùa đông",
-                    "terms": "đường mòn thể thao mùa đông, trượt tuyết, ski, xki, nordic, băng đồng, việt dã, xuống dốc, an pơ, an-pơ, anpơ, trượt ván trên tuyết, xe trượt tuyết, giày tuyết, trượt băng, duong mon the thao mua dong, truot tuyet, bang dong, viet da, xuong doc, an po, an-po, anpo, truot van tren tuyet, xe truot tuyet, giay tuyet, truot bang"
-                },
                 "place": {
                     "name": "Địa phương"
                 },
@@ -7938,9 +7939,6 @@
                 "power/pole": {
                     "name": "Cột điện",
                     "terms": "cột điện, cot dien"
-                },
-                "power/sub_station": {
-                    "name": "Trạm Điện Phụ"
                 },
                 "power/substation": {
                     "name": "Trạm Điện Phụ",
@@ -8270,10 +8268,6 @@
                     "name": "Tiệm Rượu",
                     "terms": "tiệm rượu, nơi bán rượu, chỗ bán rượu, quầy bán rượu, cửa hàng rượu, cửa hàng bán rượu, tiệm bán rượu, tiem ruou, noi ban ruou, cho ban ruou, quay ban ruou, cua hang ruou, cua hang ban ruou, tiem ban ruou"
                 },
-                "shop/anime": {
-                    "name": "Tiệm Anime",
-                    "terms": "tiệm anime, cửa hàng anime, cửa hiệu anime, quán anime, tiem anime, cua hang anime, cua hieu anime, quan anime"
-                },
                 "shop/antiques": {
                     "name": "Tiệm Đồ Cổ",
                     "terms": "tiệm đồ cổ, cửa hàng đồ cổ, cửa hiệu đồ cổ, người bán đồ cổ, chỗ bán đồ cổ, nơi bán đồ cổ, tiem do co, cua hang do co, cua hieu do co, nguoi ban do co, cho ban do co, noi ban do co"
@@ -8412,10 +8406,6 @@
                 "shop/country_store": {
                     "name": "Tiệm Nông thôn",
                     "terms": "tiệm nông thôn, cửa hàng nông thôn, tiệm tạp hóa, tiệm tạp hoá, cửa hàng tạp hóa, cửa hàng tạp hoá, tiem nong thon, cua hang nong thon, tiem tap hoa, cua hang tap hoa"
-                },
-                "shop/craft": {
-                    "name": "Tiệm Bán đồ Thủ công",
-                    "terms": "tiệm bán đồ thủ công, cửa hàng bán đồ thủ công, cửa hiệu bán đồ thủ công, thủ công mỹ nghệ, nội thất, sơn, hoa giả, giấy, bút, khắc gỗ, tiem ban do thu cong, cua hang ban do thu cong, cua hieu ban do thu cong, thu cong my nghe, noi that, son, hoa gia, giay, but, khac go"
                 },
                 "shop/curtain": {
                     "name": "Tiệm Màn cửa",
@@ -8567,8 +8557,8 @@
                     "terms": "gian hàng, quầy hàng, quầy báo, tờ báo, tạp chí, tin tức, thuốc lá, gian hang, quay hang, quay bao, to bao, tap chi, tin tuc, thuoc la"
                 },
                 "shop/kitchen": {
-                    "name": "Tiệm Trang trí Nội thất",
-                    "terms": "tiem trang tri noi that, cua hang trang tri noi that, cua hieu trang tri noi that"
+                    "name": "Tiệm Thiết kế Phòng bếp",
+                    "terms": "tiệm thiết kế phòng bếp, cửa hàng thiết kế phòng bếp, tiệm trang trí nội thất phòng bếp, cửa hàng trang trí nội thất phòng bếp, tiem thiet ke phong bep, cua hang thiet ke phong bep, tiem trang tri noi that phong bep, cua hang trang tri noi that phong bep"
                 },
                 "shop/laundry": {
                     "name": "Tiệm Máy giặt",
@@ -9446,6 +9436,13 @@
                 "description": "GSI Kiban 2500 theo finds.jp. Có ích trong việc vẽ nhưng hơi cũ hơn.",
                 "name": "GSI Nhật Bản KIBAN 2500"
             },
+            "gothenburg-citymap": {
+                "attribution": {
+                    "text": "© đô thị Göteborg, CC0"
+                },
+                "description": "Bản đồ Göteborg tả thành phố nhìn chung. Nó bao gồm thông tin tổng quát về đất đai, viễn thông, thủy văn, tòa nhà, số nhà, tên đường, phân cấp hành chính, và các nhãn định hướng khác.",
+                "name": "Bản đồ Thành phố Göteborg"
+            },
             "gsi.go.jp": {
                 "attribution": {
                     "text": "GSI Nhật Bản"
@@ -9704,18 +9701,6 @@
                 "name": "GeoPhilly",
                 "description": "Cuộc họp mặt cho những người hâm mộ bản đồ ở khu vực Philadelphia",
                 "extendedDescription": "GeoPhilly liên hiệp các nhà phát triển, nhà địa lý học, người hâm mộ về dữ liệu và dữ liệu mở, “civic hacker”, và người nghiện bản đồ để bày tỏ say mê bản đồ và chia sẻ các câu chuyện trong bản đồ. Nếu bạn sử dụng bản đồ trong việc làm hoặc chỉ muốn tìm hiểu thêm, bạn nên tham gia cuộc họp mặt này! Chúng ta cố gắng tổ chức các sự kiện mở rộng, thân thiện, cùng giáo dục cùng giải trí, bao gồm họp mặt tại quán rượu, bài thuyết trình nhanh chóng, và workshop. Mời bạn cùng xây dựng một cộng đồng không gian địa lý đa dạng văn hóa và gây cảm hứng tại Philadelphia!"
-            },
-            "LATAM-Facebook": {
-                "name": "Facebook OpenStreetMap Mỹ Latinh",
-                "description": "OpenStreetMap Mỹ Latinh tại Facebook"
-            },
-            "LATAM-Telegram": {
-                "name": "Telegram OpenStreetMap Mỹ Latinh",
-                "description": "Telegram OpenStreetMap dành cho Mỹ Latinh"
-            },
-            "LATAM-Twitter": {
-                "name": "Twitter OpenStreetMap Mỹ Latinh",
-                "description": "Theo dõi chúng tôi trên Twitter: {url}"
             },
             "MapMinnesota": {
                 "name": "MapMinnesota",
@@ -10182,7 +10167,14 @@
             "OSMF": {
                 "name": "Quỹ OpenStreetMap",
                 "description": "Quỹ OpenStreetMap là một tổ chức phi lợi nhận tại Vương quốc Anh hỗ trợ dự án OpenStreetMap",
-                "extendedDescription": "Quỹ OSM hỗ trợ OpenStreetMap bằng cách gây quỹ, quản trị các máy chủ OSM, tổ chức hội nghị Trạng thái Bản đồ (State of the Map) hàng năm, và phối hợp những người tình nguyện bảo trì OSM. Bạn có thể ủng hộ OpenStreetMap và có tiếng nói về tương lai của đến dự án bằng cách trở thành một thành viên Quỹ OSM: {signupUrl}"
+                "extendedDescription": "Quỹ OSM hỗ trợ OpenStreetMap bằng cách gây quỹ, quản trị các máy chủ OSM, tổ chức hội nghị Trạng thái Bản đồ (State of the Map) hàng năm, và phối hợp những người tình nguyện bảo trì OSM. Bạn có thể ủng hộ OpenStreetMap và có tiếng nói về tương lai của đến dự án bằng cách trở thành một thành viên Quỹ OSM: {signupUrl}",
+                "events": {
+                    "sotm2020": {
+                        "name": "Trạng thái Bản đồ 2020",
+                        "description": "Qua ba ngày tại Cape Town, Nam Phi, tham dự hội nghị OpenStreetMap toàn cầu hàng năm, tụ họp mọi người trong cộng đồng để xã hội hóa, chia sẻ kinh nghiệm, và học tập.",
+                        "where": "Cape Town, Nam Phi"
+                    }
+                }
             },
             "OpenCleveland-meetup": {
                 "name": "Open Cleveland",
@@ -10673,10 +10665,6 @@
             },
             "osm-kerala-wiki": {
                 "name": "OpenStreetMap Kerala"
-            },
-            "osm-latam": {
-                "name": "OpenStreetMap Mỹ Latinh",
-                "description": "Hỗ trợ OpenStreetMap tại Mỹ Latinh"
             },
             "osm-mg-facebook": {
                 "name": "Nhóm Facebook OpenStreetMap Madagascar",

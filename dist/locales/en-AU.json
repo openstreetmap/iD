@@ -5,6 +5,9 @@
         },
         "presets": {
             "fields": {
+                "changing_table": {
+                    "label": "Nappy Changing Table"
+                },
                 "height": {
                     "label": "Height (Metres)"
                 },

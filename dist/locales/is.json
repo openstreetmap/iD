@@ -2418,10 +2418,6 @@
                 "level": {
                     "label": "Hæð"
                 },
-                "levels": {
-                    "label": "Hæðir",
-                    "placeholder": "2, 4, 6..."
-                },
                 "liaison": {
                     "label": "Tegund"
                 },
@@ -3608,9 +3604,6 @@
                 "amenity/internet_cafe": {
                     "name": "Netkaffihús"
                 },
-                "amenity/kindergarten": {
-                    "name": "Forskóla-/Leikskólalóð"
-                },
                 "amenity/language_school": {
                     "name": "Tungumálaskóli"
                 },
@@ -3643,9 +3636,6 @@
                 },
                 "amenity/parking/multi-storey": {
                     "name": "Bílastæðahús á mörgum hæðum"
-                },
-                "amenity/parking_entrance": {
-                    "name": "Inngangur/Útgangur bílastæðahúss"
                 },
                 "amenity/parking_space": {
                     "name": "Bílastæðarými"
@@ -4082,9 +4072,6 @@
                 "building/industrial": {
                     "name": "Iðnaðarhúsnæði"
                 },
-                "building/kindergarten": {
-                    "name": "Forskóla-/Leikskólabygging"
-                },
                 "building/mosque": {
                     "name": "Moskubygging"
                 },
@@ -4334,9 +4321,6 @@
                 },
                 "emergency/yes": {
                     "name": "Neyðaraðgangur: Já"
-                },
-                "entrance": {
-                    "name": "Inngangur/Útgangur"
                 },
                 "ford": {
                     "name": "Vað"
@@ -5261,29 +5245,8 @@
                 "office/water_utility": {
                     "name": "Skrifstofa vatnsveitu"
                 },
-                "piste/downhill": {
-                    "name": "Rennslis/gönguskíðaleið"
-                },
-                "piste/hike": {
-                    "name": "Snjóþrúgu eða vetrargönguleið"
-                },
-                "piste/ice_skate": {
-                    "name": "Skautabraut"
-                },
-                "piste/nordic": {
-                    "name": "Gönguskíðaleið"
-                },
-                "piste/piste": {
-                    "name": "Vetraríþróttaleiðir"
-                },
                 "piste/skitour": {
                     "name": "Ferðaskíðaleið"
-                },
-                "piste/sled": {
-                    "name": "Sleðabraut"
-                },
-                "piste/sleigh": {
-                    "name": "Sleðabraut"
                 },
                 "place": {
                     "name": "Staður"
@@ -5404,9 +5367,6 @@
                 },
                 "power/pole": {
                     "name": "Rafmagnsstaur"
-                },
-                "power/sub_station": {
-                    "name": "Undirstöð"
                 },
                 "power/substation": {
                     "name": "Undirstöð"
@@ -5593,9 +5553,6 @@
                 "shop/alcohol": {
                     "name": "Vínbúð"
                 },
-                "shop/anime": {
-                    "name": "Anime-búð"
-                },
                 "shop/antiques": {
                     "name": "Antíkverslun"
                 },
@@ -5694,9 +5651,6 @@
                 },
                 "shop/cosmetics": {
                     "name": "Snyrtivöruverslun"
-                },
-                "shop/craft": {
-                    "name": "Handverksverslun"
                 },
                 "shop/curtain": {
                     "name": "Gluggatjaldaverslun"

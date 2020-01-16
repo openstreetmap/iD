@@ -1287,10 +1287,6 @@
                 "level": {
                     "label": "Nivel"
                 },
-                "levels": {
-                    "label": "Niveles",
-                    "placeholder": "2, 4, 6..."
-                },
                 "lit": {
                     "label": "Lluz"
                 },
@@ -2147,9 +2143,6 @@
                 "amenity/ice_cream": {
                     "name": "Xeladería"
                 },
-                "amenity/kindergarten": {
-                    "name": "Antoxana d'escuela infantil/preescolar"
-                },
                 "amenity/library": {
                     "name": "Biblioteca",
                     "terms": "Llibros,Centru de llectura"
@@ -2167,9 +2160,6 @@
                 "amenity/nightclub": {
                     "name": "Discoteca",
                     "terms": "Disco, discobar, baille"
-                },
-                "amenity/parking_entrance": {
-                    "name": "Entrada/Salida de garaxe"
                 },
                 "amenity/parking_space": {
                     "name": "Espaciu d'aparcamientu"
@@ -2493,9 +2483,6 @@
                     "name": "Edificiu industrial",
                     "terms": "Nave,Fábrica,Taller"
                 },
-                "building/kindergarten": {
-                    "name": "Edificiu de preescolar/guardería"
-                },
                 "building/public": {
                     "name": "Edificiu públicu"
                 },
@@ -2720,10 +2707,6 @@
                 },
                 "emergency/yes": {
                     "name": "Accesu d'emerxencia Si"
-                },
-                "entrance": {
-                    "name": "Entrada/Salida",
-                    "terms": "Accesu, puerta"
                 },
                 "ford": {
                     "name": "Vau"
@@ -3461,9 +3444,6 @@
                 "power/pole": {
                     "name": "Poste eléctricu"
                 },
-                "power/sub_station": {
-                    "name": "Subestación"
-                },
                 "power/substation": {
                     "name": "Subestación"
                 },
@@ -3555,9 +3535,6 @@
                     "name": "Llicorería",
                     "terms": "Bodega"
                 },
-                "shop/anime": {
-                    "name": "Tienda d'anime"
-                },
                 "shop/antiques": {
                     "name": "Anticuariu"
                 },
@@ -3630,9 +3607,6 @@
                 },
                 "shop/cosmetics": {
                     "name": "Perfumería"
-                },
-                "shop/craft": {
-                    "name": "Tienda de manualidaes"
                 },
                 "shop/curtain": {
                     "name": "Tienda de cortines"

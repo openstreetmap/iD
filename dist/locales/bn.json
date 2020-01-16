@@ -651,10 +651,6 @@
                 "length": {
                     "label": "দৈর্ঘ্য (মিটার)"
                 },
-                "levels": {
-                    "label": "স্তর",
-                    "placeholder": "২, ৪, ৬..."
-                },
                 "location": {
                     "label": "অবস্থান"
                 },

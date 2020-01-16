@@ -1056,10 +1056,6 @@
                 "level": {
                     "label": "ಮಟ್ಟ"
                 },
-                "levels": {
-                    "label": "ಮಟ್ಟ",
-                    "placeholder": "2, 4, 6..."
-                },
                 "lit": {
                     "label": "ಜ್ಯೋತಿ"
                 },
@@ -1450,9 +1446,6 @@
                 },
                 "building/industrial": {
                     "name": "ಕೈಗಾರಿಕಾ ಕಟ್ಟಡ"
-                },
-                "building/kindergarten": {
-                    "name": "ಶಿಶುವಿಹಾರ/ಬಾಲವಾಡಿ ಕಟ್ಟಡ"
                 },
                 "building/public": {
                     "name": "ಸಾರ್ವಜನಿಕ ಕಟ್ಟಡ"

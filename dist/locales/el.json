@@ -1229,7 +1229,7 @@
                         "city": "Πόλη",
                         "city!cn": "Πόλη / Νομαρχία / Περιφέρεια",
                         "city!jp": "Πόλη/Κωμόπολη/Χωριό/Ειδικό Διαμέρισμα του Τόκιο",
-                        "city!vn": "Πόλη",
+                        "city!vn": "Πόλη/Κωμόπολη",
                         "conscriptionnumber": "123",
                         "country": "Χώρα",
                         "county": "Επαρχεία",
@@ -1337,6 +1337,12 @@
                 "attraction": {
                     "label": "Τύπος"
                 },
+                "baby_feeding": {
+                    "label": "Χώρος Νοσηλείας Βρεφών",
+                    "options": {
+                        "no": "Κανένα"
+                    }
+                },
                 "baby_seat": {
                     "label": "Κάθισμα βρέφους"
                 },
@@ -1404,6 +1410,9 @@
                 },
                 "booth": {
                     "label": "Κουβούκλιο"
+                },
+                "bottle": {
+                    "label": "Εμφιάλωση"
                 },
                 "boules": {
                     "label": "Είδος"
@@ -2145,11 +2154,6 @@
                     "label": "Επίπεδο",
                     "terms": "Επίπεδα, Στάδια"
                 },
-                "levels": {
-                    "label": "Επίπεδα",
-                    "placeholder": "2, 4, 6...",
-                    "terms": "Επίπεδα, Στάδια"
-                },
                 "liaison": {
                     "label": "Τύπος"
                 },
@@ -2744,6 +2748,9 @@
                         "yes": "Ναι"
                     },
                     "placeholder": "Ναι, Όχι, Μόνο"
+                },
+                "segregated": {
+                    "label": "Διαχωρισμός Ποδηλάτων-Πεζών"
                 },
                 "self_service": {
                     "label": "Αυτο-Εξυπηρέτηση"
@@ -3496,10 +3503,6 @@
                 "amenity/internet_cafe": {
                     "name": "Internet Cafe"
                 },
-                "amenity/kindergarten": {
-                    "name": "Χώρος Νηπιαγωγείου/Παιδικού σταθμού",
-                    "terms": "Νηπιαγωγείο, Βρεφονηπιακός σταθμός, Παιδικός σταθμός"
-                },
                 "amenity/language_school": {
                     "name": "Φροντιστήριο Ξένων Γλωσσών"
                 },
@@ -3548,10 +3551,6 @@
                 },
                 "amenity/parking/underground": {
                     "name": "Υπόγειος Χώρος Στάθμευσης"
-                },
-                "amenity/parking_entrance": {
-                    "name": "Είσοδος/Εξοδος Χώρου Στάθμευσης",
-                    "terms": "Είσοδος/έξοδος γκαράζ, Είσοδος/έξοδος πάρκινγκ"
                 },
                 "amenity/parking_space": {
                     "name": "Χώρος Στάθμευσης Ενός Μόνο Οχήματος"
@@ -3604,6 +3603,9 @@
                 "amenity/police": {
                     "name": "Αστυνομικό Τμήμα",
                     "terms": "Αστυνομία, τροχαία, ΕΛ.ΑΣ."
+                },
+                "amenity/post_depot": {
+                    "name": "Γραφείο Ταξινόμησης Αλληλογραφίας"
                 },
                 "amenity/post_office": {
                     "name": "Ταχυδρομείο",
@@ -4139,9 +4141,6 @@
                     "name": "Βιομηχανικό Κτίριο",
                     "terms": "Βιομηχανικό κτήριο"
                 },
-                "building/kindergarten": {
-                    "name": "Κτίριο Νηπιαγωγείου/Παιδικού Σταθμού"
-                },
                 "building/mosque": {
                     "name": "Κτίριο Μιναρέ"
                 },
@@ -4437,9 +4436,6 @@
                 "emergency/yes": {
                     "name": "Πρόσβαση Εκτάκτου Ανάγκης Ναι"
                 },
-                "entrance": {
-                    "name": "Είσοδος/Έξοδος"
-                },
                 "ford": {
                     "name": "Κοιτόστρωση"
                 },
@@ -4585,7 +4581,7 @@
                     "name": "Χώρος Στάθμευσης Εκτάκτου Ανάγκης"
                 },
                 "highway/footway": {
-                    "name": "Μονοπάτι Αποκλειστικά για Πεζοπορία",
+                    "name": "Μονοπάτι Πεζοπορίας",
                     "terms": "Μονοπάτι, Διαδρομή πεζού, πεζοδρόμιο, πεζόδρομος, βόλτα"
                 },
                 "highway/footway/conveying": {
@@ -4792,7 +4788,7 @@
                     "name": "Τύμβος"
                 },
                 "historic/wayside_cross": {
-                    "name": "Εικονοστάσιο"
+                    "name": "Σταυρός Μνήματος"
                 },
                 "historic/wayside_shrine": {
                     "name": "Εικονοστάσιο",
@@ -4837,8 +4833,7 @@
                     "terms": "Νεκροταφείο"
                 },
                 "landuse/churchyard": {
-                    "name": "Περίβολος Εκκλησίας",
-                    "terms": "Περίβολος Εκκλησίας, Χώρος πέριξ εκκλησιαστικού κτιρίου"
+                    "name": "Περίβολος Εκκλησίας"
                 },
                 "landuse/commercial": {
                     "name": "Επιχειρηματική Περιοχή"
@@ -5388,6 +5383,12 @@
                     "name": "Εργοστάσιο",
                     "terms": "Εργοστάσιο, Φάμπρικα"
                 },
+                "military/office": {
+                    "name": "Στρατολογικό Γραφείο"
+                },
+                "natural": {
+                    "name": "Φυσικό Χαρακτηριστικό"
+                },
                 "natural/bare_rock": {
                     "name": "Γυμνός Βράχος"
                 },
@@ -5497,6 +5498,9 @@
                     "name": "Έλος",
                     "terms": "Υγρότοπος"
                 },
+                "natural/wood": {
+                    "name": "Φυσικό Δάσος"
+                },
                 "noexit/yes": {
                     "name": "Αδιέξοδο",
                     "terms": "Αδιέξοδο"
@@ -5529,6 +5533,9 @@
                 "office/company": {
                     "name": "Εταιρικό Γραφείο"
                 },
+                "office/consulting": {
+                    "name": "Γραφείο Συμβούλων"
+                },
                 "office/coworking": {
                     "name": "Χώρος Συνεργασίας"
                 },
@@ -5540,6 +5547,9 @@
                 },
                 "office/diplomatic/embassy": {
                     "name": "Πρεσβεία"
+                },
+                "office/diplomatic/liaison": {
+                    "name": "Γραφείο Διασύνδεσης"
                 },
                 "office/educational_institution": {
                     "name": "Εκπαιδευτικό Ίδρυμα"
@@ -5568,7 +5578,7 @@
                     "name": "Γραφείο Ιδρύματος"
                 },
                 "office/government": {
-                    "name": "Κυβερνητικό Γραφείο",
+                    "name": "Γραφείο του Δημόσιου",
                     "terms": "Γραφείο κυβέρνησης, πολιτικό γραφείο"
                 },
                 "office/government/register_office": {
@@ -5609,6 +5619,9 @@
                 "office/physician": {
                     "name": "Ιατρός"
                 },
+                "office/political_party": {
+                    "name": "Γραφείο Πολιτικού Κόμματος"
+                },
                 "office/private_investigator": {
                     "name": "Γραφείο Ιδιωτικού Ερευνητή"
                 },
@@ -5635,18 +5648,6 @@
                 },
                 "office/water_utility": {
                     "name": "Γραφείο Εκμετάλλευσης Νερού"
-                },
-                "piste/downhill": {
-                    "name": "Κατηφορική Πίστα / Πίστα Σκι"
-                },
-                "piste/downhill/halfpipe": {
-                    "name": "Πίστα με Κλίσεις"
-                },
-                "piste/hike": {
-                    "name": "Χιονοδρομικό ή Χειμερινό Μονοπάτι Πεζοπορίας"
-                },
-                "piste/piste": {
-                    "name": "Διαδρομές Χειμερινών Αθλημάτων"
                 },
                 "place": {
                     "name": "Τόπος"
@@ -5763,9 +5764,6 @@
                 "power/pole": {
                     "name": "Κολόνα Ρεύματος",
                     "terms": "στύλος ηλεκτρισμού"
-                },
-                "power/sub_station": {
-                    "name": "Υποσταθμός "
                 },
                 "power/substation": {
                     "name": "Υποσταθμός"
@@ -5886,8 +5884,11 @@
                 "public_transport/stop_position_trolleybus": {
                     "name": "Χώρος Στάσης Τρόλεϊ"
                 },
+                "railway": {
+                    "name": "Σιδηροδρομικά Χαρακτηριστικά"
+                },
                 "railway/abandoned": {
-                    "name": "Αποξηλωμένη Σιδηροδρομική Γραμμή"
+                    "name": "Αποξηλωμένη Σιδηροτροχιά"
                 },
                 "railway/buffer_stop": {
                     "name": "Ταμπονιέρα"
@@ -6112,9 +6113,6 @@
                 },
                 "shop/country_store": {
                     "name": "Είδη Εξοχής"
-                },
-                "shop/craft": {
-                    "name": "Καταστήματα Τεχνών και Χειροτεχνίας"
                 },
                 "shop/curtain": {
                     "name": "Είδη Κουρτίνας"
@@ -6686,7 +6684,7 @@
                     "terms": "Διαδρομή πορθμείου, Δρομολόγιο πορθμείου"
                 },
                 "type/route/foot": {
-                    "name": "Διαδρομή Πεζοπόρων"
+                    "name": "Διαδρομή Πεζοπορίας"
                 },
                 "type/route/hiking": {
                     "name": "Διαδρομή Ορεινής Ανάβασης"

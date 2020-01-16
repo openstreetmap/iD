@@ -1569,10 +1569,6 @@
                 "level": {
                     "label": "Poschodie"
                 },
-                "levels": {
-                    "label": "Podlažia",
-                    "placeholder": "2, 4, 6..."
-                },
                 "lit": {
                     "label": "Osvetlená"
                 },
@@ -2467,10 +2463,6 @@
                     "name": "Internetová kaviareň",
                     "terms": "internetova kaviaren,internetkafe,internet kafe"
                 },
-                "amenity/kindergarten": {
-                    "name": "Detská škôlka",
-                    "terms": "detska skolka,škôlka,skolka"
-                },
                 "amenity/library": {
                     "name": "Knižnica",
                     "terms": "Kniznica,biblioteka,bibliotéka,skriptáren,skriptaren"
@@ -2489,10 +2481,6 @@
                 },
                 "amenity/nursing_home": {
                     "name": "Ošetrovateľské centum"
-                },
-                "amenity/parking_entrance": {
-                    "name": "Vhod/východ do garáže",
-                    "terms": "vchod/vychod do garaze,vchod,vychod,garáž,garaz,parkovanie"
                 },
                 "amenity/parking_space": {
                     "name": "Parkovacie miesto",
@@ -2847,10 +2835,6 @@
                     "name": "Priemyselná budova",
                     "terms": "premyselna budova,industrialna,industriálna,výroba,vyroba"
                 },
-                "building/kindergarten": {
-                    "name": "Budova škôlky",
-                    "terms": "budova skolky,skolka,škôlka"
-                },
                 "building/public": {
                     "name": "Verejná budova",
                     "terms": "verejna budova"
@@ -3106,10 +3090,6 @@
                 "emergency/yes": {
                     "name": "Núdzový vstup áno"
                 },
-                "entrance": {
-                    "name": "Vchod/východ",
-                    "terms": "vchod/vychod,vchod,vychod,východ,vstup,výstup,vchodové dvere,vchodove dvere"
-                },
                 "ford": {
                     "name": "Brod",
                     "terms": "brod rieky,rieka,prechod cez rieku"
@@ -3334,8 +3314,7 @@
                     "terms": "cintorin,hroby,pohrebisko,hrobky,cmiter"
                 },
                 "landuse/churchyard": {
-                    "name": "Kostolný pozemok",
-                    "terms": "kostolny pozemok,kostol"
+                    "name": "Kostolný pozemok"
                 },
                 "landuse/commercial": {
                     "name": "Komerčná zóna",
@@ -3799,9 +3778,6 @@
                     "name": "Elektrický stĺp",
                     "terms": "stlp elektrickeho vedenia,stožiar,stoziar,elektrický stĺp,elektricky stlp,Stĺp elektrického vedenia"
                 },
-                "power/sub_station": {
-                    "name": "Rozvodná stanica"
-                },
                 "power/substation": {
                     "name": "Elektrická rozvodňa",
                     "terms": "elektricka rozvodna,transformator,transformátor"
@@ -3868,10 +3844,6 @@
                 "shop/alcohol": {
                     "name": "Obchod s alkoholom",
                     "terms": "alkohol"
-                },
-                "shop/anime": {
-                    "name": "Obchod s anime",
-                    "terms": "anime"
                 },
                 "shop/antiques": {
                     "name": "Obchod so tarožitnosťami",
@@ -3984,10 +3956,6 @@
                 "shop/cosmetics": {
                     "name": "Obchod s kozmetikou",
                     "terms": "kozmetika,drogeria"
-                },
-                "shop/craft": {
-                    "name": "Obchod s umeleckými potrebami",
-                    "terms": "Obchod s umeleckymi potrebami,umelecké potreby,umelecke potreby"
                 },
                 "shop/curtain": {
                     "name": "Obchod so záclonami",

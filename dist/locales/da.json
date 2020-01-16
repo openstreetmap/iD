@@ -124,7 +124,7 @@
                     "area": "Gjorde et område cirkulært."
                 },
                 "not_closed": "Dette kan ikke gøres cirkulært fordi det ikke er en løkke.",
-                "too_large": "Dette kan ikke gøres cirkulært, da kortudsnittet ikke viser nok af objektet.",
+                "too_large": "Dette kan ikke gøres cirkulært, da ikke nok af det er synligt i den nuværende visning.",
                 "connected_to_hidden": "Dette kan ikke gøres cirkulært, da det er forbundet til et skjult objekt.",
                 "not_downloaded": "Dette kan ikke gøres cirkulært, da dele af det ikke er indlæst endnu.",
                 "already_circular": "Dette kan ikke gøres cirkulært, fordi det allerede er cirkulært."
@@ -167,7 +167,8 @@
                     "multiple": "Disse kan ikke gøres retvinklede fordi de ikke er tæt på at være retvinklede i forvejen."
                 },
                 "too_large": {
-                    "single": "Dette kan ikke gøres retvinklet fordi ikke nok af det er synligt i den nuværende visning."
+                    "single": "Dette kan ikke gøres retvinklet, da ikke nok af det er synligt i den nuværende visning.",
+                    "multiple": "Disse kan ikke gøres retvinklede, da ikke nok af dem er synlige i den nuværende visning."
                 },
                 "connected_to_hidden": {
                     "single": "Dette kan ikke gøres retvinklet fordi det er forbundet til et skjult kortobjekt.",
@@ -189,9 +190,9 @@
                     "points": "Udrettede flere punkter.",
                     "line": "Udrettede en linje."
                 },
-                "too_bendy": "Denne linje kan ikke rettes ud da den bøjer for meget.",
+                "too_bendy": "Dettee kan ikke udrettes da den bøjer for meget.",
                 "connected_to_hidden": "Dette kan ikke rettes ud fordi det er forbundet til et skjult kortobjekt.",
-                "not_downloaded": "Dette kan ikke gøres udrettes, da dele af det ikke er indlæst endnu."
+                "not_downloaded": "Dette kan ikke udrettes, da dele af det ikke er indlæst endnu."
             },
             "delete": {
                 "title": "Slet",
@@ -208,8 +209,8 @@
                     "multiple": "Slettede {n} objekter."
                 },
                 "too_large": {
-                    "single": "Dette objekt kan ikke slettes da ikke nok er synligt.",
-                    "multiple": "Disse objekter kan ikke slettes da ikke nok er synligt."
+                    "single": "Dette objekt kan ikke slettes, da ikke nok af det er synligt i den nuværende visning.",
+                    "multiple": "Disse objekter kan ikke slettes, da ikke nok af dem er synlige i den nuværende visning."
                 },
                 "incomplete_relation": {
                     "single": "Dette kortobjekt kan ikke slettes, da det ikke er blevet indlæst helt.",
@@ -295,6 +296,9 @@
                 },
                 "key": "D",
                 "annotation": "Frakoblede linjer/områder.",
+                "too_large": {
+                    "single": "Dette kan ikke afkobles, da ikke nok af det er synligt i den nuværende visning."
+                },
                 "not_connected": "Der er ikke nok linjer/områder at frakoble her.",
                 "not_downloaded": "Dette kan ikke afkobles, da dele af det ikke er indlæst endnu.",
                 "connected_to_hidden": "Dette kan ikke frakobles, da det er forbundet til et skjult objekt.",
@@ -310,7 +314,8 @@
                 "restriction": "Disse kortobjekter kan ikke fusioneres, da det ville ødelægge en \"{relation}\"-relation.",
                 "relation": "Disse kortobjekter kan ikke fusioneres, da deres relationsroller er i konflikt. ",
                 "incomplete_relation": "Disse kortobjekter kan ikke fusioneres, da mindst et af dem ikke er blevet indlæst helt.",
-                "conflicting_tags": "Disse objekter kan ikke fusioneres fordi nogle af deres tags har konfliktende værdier."
+                "conflicting_tags": "Disse objekter kan ikke fusioneres fordi nogle af deres tags har konfliktende værdier.",
+                "paths_intersect": "Disse objekter kan ikke fusioneres, da den resulterende vej så ville krydse sig selv."
             },
             "move": {
                 "title": "Flyt",
@@ -331,8 +336,8 @@
                     "multiple": "Disse kortobjekter kan ikke flyttes da de ikke er helt indlæst."
                 },
                 "too_large": {
-                    "single": "Dette objekt kan ikke blive flyttet da ikke nok af det er synligt.",
-                    "multiple": "Disse objekter kan ikke flyttes da der ikke er nok af dem i synligt område."
+                    "single": "Dette objekt kan ikke flyttes, da ikke nok af det er synligt i den nuværende visning.",
+                    "multiple": "Disse objekter kan ikke flyttes, da ikke nok af dem er synlige i den nuværende visning."
                 },
                 "connected_to_hidden": {
                     "single": "Dette kortobjekt kan ikke flyttes, da det er forbundet til et skjult kortobjekt.",
@@ -377,8 +382,8 @@
                     "multiple": "Disse kortobjekter kan ikke spejlvendes, da de ikke er blevet indlæst helt."
                 },
                 "too_large": {
-                    "single": "Dette objekt kan ikke spejlvendes, da der ikke er nok af det synligt i den nuværende visning.",
-                    "multiple": "Disse objekter kan ikke spejlvendes, da der ikke er nok af dem synligt i den nuværende visning."
+                    "single": "Dette objekt kan ikke spejlvendes, da ikke nok af det er synligt i den nuværende visning.",
+                    "multiple": "Disse objekter kan ikke spejlvendes, da ikke nok af den er synlige i den nuværende visning."
                 },
                 "connected_to_hidden": {
                     "single": "Dette kortobjekt kan ikke spejlvendes, da det er forbundet til et skjult kortobjekt.",
@@ -406,8 +411,8 @@
                     "multiple": "Disse kortobjekter kan ikke roteres da de ikke er blevet indlæst helt."
                 },
                 "too_large": {
-                    "single": "Dette objekt kan ikke roteres da ikke nok af det er synligt i den nuværende visning.",
-                    "multiple": "Disse objekter kan ikke roteres da der ikke er nok af dem synligt i den nuværende visning."
+                    "single": "Dette objekt kan ikke roteres, da ikke nok af det er synligt i den nuværende visning.",
+                    "multiple": "Disse objekter kan ikke roteres, da ikke nok af dem er synlige i den nuværende visning."
                 },
                 "connected_to_hidden": {
                     "single": "Dette objekt kan ikke roteres da det er forbundet med et skjult objekt.",
@@ -420,7 +425,21 @@
             },
             "reverse": {
                 "title": "Vend om",
-                "key": "V"
+                "description": {
+                    "point": "Vend retningen af dette punkt.",
+                    "points": "Vend retningen af disse punkter.",
+                    "line": "Få denne linje til at løbe i den modsatte retning.",
+                    "lines": "Få disse linjer til at løbe i den modsatte retning.",
+                    "features": "Vend retningen af disse objekter."
+                },
+                "key": "V",
+                "annotation": {
+                    "point": "Vendte et punkt.",
+                    "points": "Vendte flere punkter.",
+                    "line": "Vendte en linje.",
+                    "lines": "Vendte flere linjer.",
+                    "features": "Vendte flere objekter."
+                }
             },
             "split": {
                 "title": "Opdel",
@@ -460,7 +479,7 @@
                 },
                 "too_large": {
                     "area": {
-                        "single": "Et punkt kunne ikke frigøres fra dette område fordi der ikke er tilstrækkeligt meget af det som er synligt."
+                        "single": "Et punkt kunne ikke frigøres fra dette område, da ikke nok af det er synligt i den nuværende visning."
                     }
                 },
                 "restriction": {
@@ -540,6 +559,15 @@
         "feature_info": {
             "hidden_warning": "{count} skjulte objekter",
             "hidden_details": "Disse objekter er for øjeblikket skjulte: {details}"
+        },
+        "osm_api_status": {
+            "message": {
+                "error": "OpenStreetMap-API'et kan ikke kontaktes. Dine redigeringer er sikret lokalt. Kontroller din netværksforbindelse. ",
+                "offline": "OpenStreetMap-API'et er ikke online. Dine redigeringer er sikret lokalt. Kom tilbage senere og prøv igen.",
+                "readonly": "OpenStreetMap-API'et er i øjeblikket i skrivebeskyttet tilstand. Du kan fortsætte med at redigere, men må vente med at gemme dine ændringer.",
+                "rateLimit": "OpenStreetMap-API'et begrænser anonyme forbindelser. Du kan komme ud over dette ved at logge ind."
+            },
+            "retry": "Prøv igen"
         },
         "commit": {
             "title": "Upload til OpenStreetMap",
@@ -710,6 +738,7 @@
             "switch": "Skift tilbage til denne baggrund",
             "custom": "Brugerdefineret",
             "overlays": "Overlægninger",
+            "imagery_problem_faq": "Rapporter et problem med luftfoto",
             "reset": "nulstil",
             "reset_all": "Nulstil alt.",
             "display_options": "Visningsindstillinger",
@@ -723,7 +752,8 @@
                 "key": "/"
             },
             "panel": {
-                "description": "Vis detalje-panel på kortet"
+                "description": "Vis detalje-panel på kortet",
+                "tooltip": "Vis avanceret baggundsinformation."
             },
             "fix_misalignment": "Juster luftfoto-offset",
             "offset": "Træk et vilkårligt sted i det grå område nedenfor for at justere luftfotoets offset, eller indtast offset-værdien i meter."
@@ -832,6 +862,10 @@
                 "description": "Pister",
                 "tooltip": "Skibakker, kælkebakker, skøjtespor etc."
             },
+            "aerialways": {
+                "description": "Svæveegenskaber",
+                "tooltip": "Stolelifte, gondoler, svævebaner, etc."
+            },
             "power": {
                 "description": "Elektricitet",
                 "tooltip": "Højspændingsmaster, kraftværker, transformatorstationer, osv."
@@ -888,7 +922,11 @@
             "description": "Præferencer",
             "privacy": {
                 "title": "Privatliv",
-                "privacy_link": "Se privatlivspolitik for iD"
+                "privacy_link": "Se privatlivspolitik for iD",
+                "third_party_icons": {
+                    "description": "Vis tredjeparts-ikoner",
+                    "tooltip": "Deaktiver denne for at undgå at der indlæses ikoner fra tredjeparts-services som Wikimedia Commons, Facebook eller Twitter."
+                }
             }
         },
         "restore": {
@@ -980,7 +1018,34 @@
         "full_screen": "Skift fuldskærmstilstand",
         "QA": {
             "improveOSM": {
-                "title": "ImproveOSM-detektering"
+                "title": "ImproveOSM-detektering",
+                "geometry_types": {
+                    "path": "stier",
+                    "parking": "parkering",
+                    "road": "veje",
+                    "both": "veje og parkering"
+                },
+                "directions": {
+                    "east": "øst",
+                    "north": "nord",
+                    "northeast": "nordøst",
+                    "northwest": "nordvest",
+                    "south": "syd",
+                    "southeast": "sydøst",
+                    "southwest": "sydvest",
+                    "west": "vest"
+                },
+                "error_types": {
+                    "ow": {
+                        "title": "Manglende ensretning",
+                        "description": "På denne {highway} blev {percentage}% af {num_trips} registrerede ture foretaget i retningen fra {from_node} to {to_node}. Den kan mangle en markering som \"ensrettet\"."
+                    },
+                    "mr": {
+                        "title": "Manglende geometri",
+                        "description": "{num_trips} registrerede ture i dette område indikerer at der kan mangle en {geometry_type} her.",
+                        "description_alt": "Data fra en tredjepart indikerer at der kan mangle en {geometry_type} her."
+                    }
+                }
             },
             "keepRight": {
                 "title": "KeepRight-Fejl",
@@ -1164,7 +1229,10 @@
         "mapillary_map_features": {
             "title": "Kortobjekter",
             "tooltip": "Kortobjekter fra Mapillary",
-            "request_data": "Hent data"
+            "request_data": "Hent data",
+            "object": {
+                "trash_can": "skraldespand"
+            }
         },
         "mapillary": {
             "signs": {
@@ -1249,8 +1317,8 @@
                 "keyboard": "Du kan se en liste over tastaturgenveje ved at trykke på `?`-tasten."
             },
             "feature_editor": {
-                "title": "Redigeringsværktøj til kortobjekter",
-                "intro": "*Redigeringsværktøjet til kortobjekter* kommer frem i kanten af kortet, og gør det muligt at se og redigere alle informationer om det markerede kortobjekt.",
+                "title": "Objekteditor",
+                "intro": "Et redigeringsværktøj for kortobjekter, *objekteditoren*, kommer frem i kanten af kortet, og gør det muligt at se og redigere alle informationer om det markerede kortobjekt.",
                 "definitions": "I toppen vises kortobjektets type. I midten et antal *felter* som viser kortobjektets attributter, såsom dets navn eller adresse.",
                 "type_h": "Kortobjekt-type",
                 "type": "Du kan klikke på objekttypen for at ændre et kortobjekts type. Alt hvad der eksisterer i den virkelige verden kan tilføjes til OpenStreetMap, så der er tusindvis af typer at vælge imellem.",
@@ -1285,10 +1353,29 @@
                 "modify_line_h": "Ændring af linjer"
             },
             "areas": {
-                "intro": "*Områder* bruges til at indikere afgrænsningen af større objekter såsom søer, bygninger eller boligområder. Områder bør kortlægges langs kanten af det fysiske objekt de repræsenter, eksempelvis for en bygning langs dens fundament."
+                "title": "Områder",
+                "intro": "*Områder* bruges til at indikere afgrænsningen af større objekter såsom søer, bygninger eller boligområder. Områder bør kortlægges langs kanten af det fysiske objekt de repræsenter, eksempelvis for en bygning langs dens fundament.",
+                "square_area_h": "Gør hjørner retvinklede"
             },
             "relations": {
-                "title": "Relationer"
+                "title": "Relationer",
+                "intro": "En *relation* er en speciel type kortobjekt i OpenStreetMap som grupperer andre kortobjekter. De kortobjekter der tilhører en relation kaldes *medlemmer*, og hvert medlem kan have en *rolle* i forhold til relationen.",
+                "edit_relation_h": "Redigering af relationer",
+                "edit_relation": "I bunden af objekteditoren kan du udvidde \"Alle relationer\"-afsnittet for at se om det markerede kortobjekt er medlem af nogle relationer. I så fald kan du klikke på relationen for at markere og redigere den.",
+                "edit_relation_add": "For at tilføje et kortobjekt til en relation skal du markere kortobjektet, klik derefter på {plus} tilføj-knappen i \"Alle relationer\"-afsnittet i objekteditoren. Her kan du vælge mellem nærliggende relationer på en liste, eller vælge \"Ny relation...\"-valgmuligheden.",
+                "edit_relation_delete": "Du kan klikke på {delete} **Slet**-knappen for at fjerne de markerede kortobjekter fra relationen. Hvis du fjerner alle medlemmer fra en relation slettes relationen automatisk.",
+                "maintain_relation_h": "Vedligehold af relationer",
+                "maintain_relation": "For det meste vil iD vedligeholde relationer automatisk mens du redigerer. Du skal dog være forsigtig når du erstatter objekter der kan være medlemmer af relationer. Hvis du for eksempel sletter et vejsegment og tegner et nyt som erstatning, bør du tilføje det nye til de samme relationer (ruter, svingbegrænsninger etc.) som det oprindelige.",
+                "relation_types_h": "Relationstyper",
+                "multipolygon_h": "Multipolygoner",
+                "multipolygon": "En *multipolygon*-relation er en gruppe af et eller flere *ydre* og et eller flere *indre* kortobjekter. De ydre definerer de ydre kanter af multipolygonen, mens de indre definerer under-områder, eller huller, der er skåret ud af af multipolygonen.",
+                "multipolygon_create": "For at tilføje en multipolygon, for eksempel en bygning med et hul i, skal du tegne den ydre kant som et område og den indre kant som en lukket linje, eller et andet område. Tryk `{shift}`+{leftclick} venstreklik for at markere begge objekter, {rightclick} højreklik for at vise redigeringsmenuen og vælg så {merge} **Fusioner**-operationen.",
+                "multipolygon_merge": "Fusionering af flere linjer eller områder vil tilføje en ny multipolygon-relation med samtlige markerede områder som medlemmer. iD vælger automatisk indre og ydre-roller alt efter hvilke objekter der er indeholdt i andre.",
+                "turn_restriction_h": "Svingbegrænsninger",
+                "turn_restriction": "En relation af typen *svingbegrænsning* er en gruppe af flere vejsegmenter i et kryds. En svingbegrænsning består af en *fra*-vej, *via*-noder eller veje og en *til*-vej.",
+                "turn_restriction_field": "For at redigere svingbegrænsninger skal du markere den fælles node, hvor en eller flere veje mødes. I objekteditoren vil ses et specielt \"Svingbegrænsninger\"-felt som viser en model af krydset.",
+                "turn_restriction_editing": "I \"Svingbegrænsninger\"-feltet klik for at vælge en \"fra\"-vej og se hvilke sving der er tilladt eller begrænset ind på \"til\"-vejene. Du kan klikke på sving-ikonerne for at skifte mellem tilladt og begrænset. iD opretter relationer automatisk og tildeler fra, via og til-rollerne ud fra dine valg. ",
+                "route_h": "Ruter"
             },
             "imagery": {
                 "title": "Luftfoto i baggrunden",
@@ -1312,8 +1399,8 @@
                         "title": "Om",
                         "about": "Dette felt gør det muligt at inspicere og redigere svingbegrænsninger. Det viser en model af det valgte vejkryds inklusiv forbundne veje i nærheden.",
                         "from_via_to": "En svingbegrænsning indeholder altid: en **FRA-vej**, en **TIL-vej** og enten en **VIA-node** eller en eller flere **VIA-veje**.",
-                        "maxdist": "Med \"{distField}\"-kontrolelementet indstilles hvor langt omkring der søges efter forbundne veje,",
-                        "maxvia": "Med \"{viaField}\"-kontrolelementet justeres hvor mange VIA-veje der kan inkluderes. (tip: så få som muligt bør foretrækkes)"
+                        "maxdist": "Med \"{distField}\"-kontrolelementet indstilles hvor langt omkring der søges efter forbundne veje.",
+                        "maxvia": "Med \"{viaField}\"-kontrolelementet justeres hvor mange VIA-veje der kan inkluderes (tip: så få som muligt bør foretrækkes)."
                     },
                     "inspecting": {
                         "title": "Inspektion",
@@ -1411,8 +1498,17 @@
                 "tip": "Find rutningsproblemer med ensrettede kortobjekter"
             },
             "fix": {
+                "extract_point": {
+                    "title": "Frigør dette punkt"
+                },
                 "ignore_issue": {
                     "title": "Ignorer dette problem"
+                },
+                "reverse_feature": {
+                    "title": "Vend dette kortobjekt"
+                },
+                "square_feature": {
+                    "title": "Gør dette kortobjekt retvinklet"
                 }
             }
         },
@@ -1719,7 +1815,8 @@
                     "sidebar": "Åbn/luk sidebar",
                     "wireframe": "Skift trådnet-tilstand",
                     "osm_data": "Vis/skjul OpenStreetMap-data",
-                    "minimap": "Åbn/luk minikort"
+                    "minimap": "Åbn/luk minikort",
+                    "highlight_edits": "Fremhæv ugemte ændringer"
                 },
                 "selecting": {
                     "title": "Markering af kortobjekter",
@@ -1729,7 +1826,8 @@
                     "search": "Find kortobjekter der indeholder tekst"
                 },
                 "with_selected": {
-                    "edit_menu": "Åbn/luk redigeringsmenu"
+                    "edit_menu": "Åbn/luk redigeringsmenu",
+                    "zoom_to": "Zoom til markerede kortobjekter"
                 },
                 "vertex_selected": {
                     "title": "Ved markeret node",
@@ -1757,9 +1855,13 @@
                     "continue_line": "Fortsæt linje fra markerede node",
                     "merge": "Kombiner (fusioner) markerede kortobjekter",
                     "disconnect": "Separér kortobjekter ved markerede node",
+                    "extract": "Frigør et punkt fra et objekt",
                     "split": "Opdel linje i to ved markerede node",
+                    "reverse": "Vend markerede kortobjekter",
                     "move": "Flyt markerede kortobjekter",
                     "rotate": "Rotér markerede kortobjekter",
+                    "orthogonalize": "Gør linje eller områdes hjørner retvinklede",
+                    "straighten": "Udret en linje eller punkter",
                     "circularize": "Gør en lukket linje eller område rundt",
                     "reflect_long": "Spejl kortobjekt over den længste led",
                     "reflect_short": "Spejl kortobjekt over den korteste led",
@@ -2581,10 +2683,6 @@
                 },
                 "level": {
                     "label": "Etage"
-                },
-                "levels": {
-                    "label": "Etager",
-                    "placeholder": "2, 4, 6..."
                 },
                 "lit": {
                     "label": "Gadebelysning"
@@ -3530,10 +3628,6 @@
                     "name": "Internetcafe",
                     "terms": "Internetcafe"
                 },
-                "amenity/kindergarten": {
-                    "name": "Børnehavegrund",
-                    "terms": "Børnehavegrund"
-                },
                 "amenity/language_school": {
                     "name": "Sprogskole",
                     "terms": "sprog,lingvistik,skole,uddannelse"
@@ -3575,10 +3669,6 @@
                 "amenity/parking/multi-storey": {
                     "name": "Fleretagesparkering",
                     "terms": "parkeringskælder,kælder,parkeringshus"
-                },
-                "amenity/parking_entrance": {
-                    "name": "Parkeringsgarage Indgang/Udgang",
-                    "terms": "Parkeringsgarage Indgang/Udgang, Parkeringskælder Indgang/Udgang"
                 },
                 "amenity/parking_space": {
                     "name": "Parkeringsbås",
@@ -4053,10 +4143,6 @@
                     "name": "Industribygning",
                     "terms": "Industribygning"
                 },
-                "building/kindergarten": {
-                    "name": "Børnehavebygning",
-                    "terms": "Børnehavebygning"
-                },
                 "building/public": {
                     "name": "Offentlig bygning",
                     "terms": "Offentlig bygning"
@@ -4342,10 +4428,6 @@
                 "emergency/yes": {
                     "name": "Udrykningskørsel Ja"
                 },
-                "entrance": {
-                    "name": "Indgang/Udgang",
-                    "terms": "Indgang/Udgang"
-                },
                 "ford": {
                     "name": "Vadested",
                     "terms": "Vadested"
@@ -4429,8 +4511,16 @@
                     "name": "Indendørskorridor",
                     "terms": "Indendørskorridor, Indendørspassage"
                 },
-                "highway/crossing/unmarked": {
+                "highway/crossing": {
                     "name": "Fodgængerovergang"
+                },
+                "highway/crossing/unmarked": {
+                    "name": "Umarkeret fodgængerovergang",
+                    "terms": "overgang,fodgænger,fodgængerovergang"
+                },
+                "highway/crossing/unmarked-raised": {
+                    "name": "Umarkeret fodgængerovergang (hævet)",
+                    "terms": "overgang,fodgænger,fodgængerovergang,bump,hævet"
                 },
                 "highway/cycleway": {
                     "name": "Cykelsti",
@@ -4668,8 +4758,7 @@
                     "terms": "Gravplads"
                 },
                 "landuse/churchyard": {
-                    "name": "Kirkeområde",
-                    "terms": "Kirkegård"
+                    "name": "Kirkeområde"
                 },
                 "landuse/commercial": {
                     "name": "Kommercielt område",
@@ -5417,9 +5506,6 @@
                     "name": "Elmast (telefonmast)",
                     "terms": "Elmast (telefonmast)"
                 },
-                "power/sub_station": {
-                    "name": "Transformatorstation"
-                },
                 "power/substation": {
                     "name": "Transformatorstation",
                     "terms": "Transformatorstation"
@@ -5520,10 +5606,6 @@
                 "shop/alcohol": {
                     "name": "Vinforhandler",
                     "terms": "Vinforhandler, Vinbutik, Vinforretning"
-                },
-                "shop/anime": {
-                    "name": "Animebutik",
-                    "terms": "Animebutik, Animeforretning"
                 },
                 "shop/antiques": {
                     "name": "Antikvitetsforretning",
@@ -5655,10 +5737,6 @@
                 "shop/cosmetics": {
                     "name": "Kosmetikbutik",
                     "terms": "Kosmetikbutik, Kosmetikforretning"
-                },
-                "shop/craft": {
-                    "name": "Hobbyforretning",
-                    "terms": "Hobbyforretning"
                 },
                 "shop/curtain": {
                     "name": "Gardinbutik",

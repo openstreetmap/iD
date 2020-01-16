@@ -1946,10 +1946,6 @@
                 "level": {
                     "label": "Level"
                 },
-                "levels": {
-                    "label": "Levels",
-                    "placeholder": "2, 4, 6..."
-                },
                 "lit": {
                     "label": "Lit"
                 },
@@ -2881,9 +2877,6 @@
                 "amenity/internet_cafe": {
                     "name": "Internet Cafe"
                 },
-                "amenity/kindergarten": {
-                    "name": "Preschool/Kindergarten Grounds"
-                },
                 "amenity/library": {
                     "name": "Library"
                 },
@@ -2913,9 +2906,6 @@
                 },
                 "amenity/parking/multi-storey": {
                     "name": "Multistory Car Park"
-                },
-                "amenity/parking_entrance": {
-                    "name": "Parking Garage Entrance/Exit"
                 },
                 "amenity/parking_space": {
                     "name": "Parking Space"
@@ -3277,9 +3267,6 @@
                 "building/industrial": {
                     "name": "Industrial Building"
                 },
-                "building/kindergarten": {
-                    "name": "Preschool/Kindergarten Building"
-                },
                 "building/mosque": {
                     "name": "Mosque Building"
                 },
@@ -3513,9 +3500,6 @@
                 },
                 "emergency/yes": {
                     "name": "Emergency Access Yes"
-                },
-                "entrance": {
-                    "name": "Entrance/Exit"
                 },
                 "ford": {
                     "name": "Ford"
@@ -4456,9 +4440,6 @@
                 "power/pole": {
                     "name": "Power Pole"
                 },
-                "power/sub_station": {
-                    "name": "Substation"
-                },
                 "power/substation": {
                     "name": "Substation"
                 },
@@ -4615,9 +4596,6 @@
                 "shop/alcohol": {
                     "name": "Off licence (Alcohol shop)"
                 },
-                "shop/anime": {
-                    "name": "Anime Shop"
-                },
                 "shop/antiques": {
                     "name": "Antiques Shop"
                 },
@@ -4716,9 +4694,6 @@
                 },
                 "shop/cosmetics": {
                     "name": "Cosmetics Shop"
-                },
-                "shop/craft": {
-                    "name": "Art and Craft Supplies Shop"
                 },
                 "shop/curtain": {
                     "name": "Curtain Shop"

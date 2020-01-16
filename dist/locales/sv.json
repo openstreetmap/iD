@@ -2852,6 +2852,11 @@
                     "label": "Byggnad",
                     "terms": "Byggnad, hus, konstruktion, byggnadsverk, bygge, anläggning, fastighet, kåk"
                 },
+                "building/levels": {
+                    "label": "Våningar",
+                    "placeholder": "2, 4, 6...",
+                    "terms": "Våningar, våning, byggnadsvåning, plan"
+                },
                 "building/levels/underground": {
                     "label": "Underjordiska våningar",
                     "placeholder": "2, 4, 6...",
@@ -2867,7 +2872,8 @@
                     "terms": "Material, tillverkat av"
                 },
                 "building_area": {
-                    "label": "Byggnad"
+                    "label": "Byggnad",
+                    "terms": "Byggnad, hus, konstruktion, byggnadsverk, bygge, anläggning, fastighet, kåk"
                 },
                 "bunker_type": {
                     "label": "Typ"
@@ -3599,11 +3605,6 @@
                     "label": "Våningar",
                     "terms": "Våningar, våning, byggnadsvåning, plan"
                 },
-                "levels": {
-                    "label": "Våningar",
-                    "placeholder": "2, 4, 6...",
-                    "terms": "våning, byggnadsvåning, husvåning, plan, husplan, byggnadsplan, våningar"
-                },
                 "liaison": {
                     "label": "Typ"
                 },
@@ -3748,6 +3749,9 @@
                     },
                     "placeholder": "0, 1, 2, 3...",
                     "terms": "Svårighetsgrad – Mountainbike uppför, Mountainbike, cykel, terrängkörning"
+                },
+                "museum": {
+                    "label": "Typ"
                 },
                 "name": {
                     "label": "Namn",
@@ -4036,6 +4040,15 @@
                 "public_bookcase/type": {
                     "label": "Typ"
                 },
+                "pump": {
+                    "label": "Pump",
+                    "options": {
+                        "manual": "Manuell handpump",
+                        "no": "Ingen",
+                        "powered": "Motordriven pump",
+                        "yes": "Ja"
+                    }
+                },
                 "railway": {
                     "label": "Typ"
                 },
@@ -4074,6 +4087,10 @@
                 },
                 "ref/isil": {
                     "label": "ISIL-kod"
+                },
+                "ref/vatin": {
+                    "label": "VAT ID-nummer",
+                    "terms": "VAT, VAT ID, vat, moms, momsnummer, momsregistreringsnummer, skatt, bolagsnummer"
                 },
                 "ref_aeroway_gate": {
                     "label": "Gatenummer"
@@ -4324,6 +4341,10 @@
                 "shop": {
                     "label": "Typ"
                 },
+                "shower": {
+                    "label": "Duschar",
+                    "terms": "Dusch, duschutrymme, duschkabin, duschbad, badrum, duschrum"
+                },
                 "siren/purpose": {
                     "label": "Syfte"
                 },
@@ -4525,6 +4546,10 @@
                 },
                 "to": {
                     "label": "Till"
+                },
+                "toilets": {
+                    "label": "Toaletter",
+                    "terms": "Toalett, klosett, vattenklosett, wc, avträde, toa, dass, utedass, bajamaja, torrklosett, hemlighus, klo, mugg, bekvämlighetsinrättning, skithus, Baja-Maja, badrum, latrin, vattentoalett"
                 },
                 "toilets/disposal": {
                     "label": "Omhändertagande",
@@ -4752,6 +4777,11 @@
                     "label": "Wikidata",
                     "terms": "Wikidata, wiki"
                 },
+                "wikimedia_commons": {
+                    "label": "Wikimedia Commons-sida",
+                    "placeholder": "File:Exempel.jpg",
+                    "terms": "wikimedia, wikipedia, wiki, commons"
+                },
                 "wikipedia": {
                     "label": "Wikipedia",
                     "terms": "Wikipedia, wiki"
@@ -4814,6 +4844,10 @@
                     "name": "Transportlinbana",
                     "terms": "Transportlift, transportlinbana, varulift, gruvlift, linbana, transport, varor, gods, transportbana, lift, industri, industrilift"
                 },
+                "aerialway/j-bar": {
+                    "name": "J-krokslift",
+                    "terms": "Ankarlift, J-bygellift, J-lift, släplift, skidlift, lift, linbana"
+                },
                 "aerialway/magic_carpet": {
                     "name": "Rullband",
                     "terms": "Rullband, släplift, skidliften, lift, magisk matta"
@@ -4833,6 +4867,10 @@
                 "aerialway/rope_tow": {
                     "name": "Replift",
                     "terms": "Replift, släplift, skidlift, linbana, lift"
+                },
+                "aerialway/t-bar": {
+                    "name": "Ankarlift",
+                    "terms": "Ankarlift, T-bygellift, T-lift, släplift, skidlift, lift, linbana"
                 },
                 "aerialway/zip_line": {
                     "name": "Zipline",
@@ -5175,10 +5213,6 @@
                     "name": "Internetkafé",
                     "terms": "Internetcafé, internetcafe, internetcaffe, cybercafé, internetkafé"
                 },
-                "amenity/kindergarten": {
-                    "name": "Förskoleområde",
-                    "terms": "Förskola, dagis, daghem, lekskola, kindergarten, lekis, lekplats,"
-                },
                 "amenity/language_school": {
                     "name": "Språkskola",
                     "terms": "Språkskola, språkutbildning, språkkurs, esl, språk"
@@ -5245,10 +5279,6 @@
                 "amenity/parking/underground": {
                     "name": "Underjordisk parkering",
                     "terms": "Underjordisk parkering, parkering, parkeringsplats, p-plats, parkeringsområde, bilparkering, Underjordisk, fordonsparkering, parkeringshus, parkeringsgarage"
-                },
-                "amenity/parking_entrance": {
-                    "name": "In- och utfart parkeringsgarage",
-                    "terms": "garage, parkeringshus, infart, utfart"
                 },
                 "amenity/parking_space": {
                     "name": "Parkeringsruta",
@@ -5576,6 +5606,9 @@
                 "amenity/toilets/disposal/flush": {
                     "name": "Vattentoalett",
                     "terms": "Vattentoalett, toalett, spoltoalett, badrum, WC"
+                },
+                "amenity/toilets/disposal/pitlatrine": {
+                    "name": "Grop-latrin"
                 },
                 "amenity/townhall": {
                     "name": "Kommunhus",
@@ -5992,10 +6025,6 @@
                     "name": "Industribyggnad",
                     "terms": "Industribyggnad, fabrik, industri, lager"
                 },
-                "building/kindergarten": {
-                    "name": "Förskolebyggnad",
-                    "terms": "Förskola, dagis, daghem, lekskola, kindergarten, lekis,  förskolebyggnad, dagisbyggnad, dagishus, förskolehus, barnomsorg"
-                },
                 "building/mosque": {
                     "name": "Moskébyggnad",
                     "terms": "Moskébyggnad, moské, islam, minaret, muhammedansk helgedom, muhammedanism, muslim"
@@ -6353,10 +6382,6 @@
                 },
                 "emergency/yes": {
                     "name": "Åtkomst för utryckningsfordon – Ja"
-                },
-                "entrance": {
-                    "name": "In-/Utgång",
-                    "terms": "Ingång, utgång, entré, dörr, huvudentré"
                 },
                 "ford": {
                     "name": "Vadställe",
@@ -6879,8 +6904,7 @@
                     "terms": "Kyrkogård, begravningsplats, gravfält, griftegård, grav"
                 },
                 "landuse/churchyard": {
-                    "name": "Kyrkogård (utan gravar)",
-                    "terms": "Kyrkogård, kyrka, kyrkområde, andligt område, begravningskapell, gravkapell, kristen, kristendom, religion, religiös, religiöst område"
+                    "name": "Kyrkogård (utan gravar)"
                 },
                 "landuse/commercial": {
                     "name": "Kommersiell område",
@@ -7281,6 +7305,10 @@
                 },
                 "leisure/slipway": {
                     "name": "Stapelbädd",
+                    "terms": "Stapelbädd, Sjösättningsplats, staplar, varv, docka, fartygsdocka, torrdocka, båtramp, sjösättning, båtramp"
+                },
+                "leisure/slipway_point": {
+                    "name": "Sjösättningsplats",
                     "terms": "Stapelbädd, Sjösättningsplats, staplar, varv, docka, fartygsdocka, torrdocka, båtramp, sjösättning, båtramp"
                 },
                 "leisure/sports_centre": {
@@ -7820,41 +7848,9 @@
                     "name": "Vattenleverantör",
                     "terms": "Vattenleverantör, Dricksvatten, vattenbolag"
                 },
-                "piste/downhill": {
-                    "name": "Utförsåkning",
-                    "terms": "Utförsåkning, skidor, alpint, snowboard, pist, skidbacke, slalombacke"
-                },
-                "piste/downhill/halfpipe": {
-                    "name": "Halfpipe",
-                    "terms": "Utförsåkning, skidor, skida, alpint, snowboard, pist, skidbacke, slalombacke, halfpipe, half pipe, half-pipe"
-                },
-                "piste/hike": {
-                    "name": "Snöskorvandring eller vintervandring",
-                    "terms": "Snöskorvandring eller vintervandring, Snöskorvandring, vintervandring, snöskor, vandring, pist, skidor, vandringsled"
-                },
-                "piste/ice_skate": {
-                    "name": "Skridskoled",
-                    "terms": "Skridskoled, skridskor, skridskobana, isbana, is, skridskoåkning, pist"
-                },
-                "piste/nordic": {
-                    "name": "Längdskidåkning eller off-pist/Skidspår",
-                    "terms": "Längdskidåkning eller off-pist/Skidspår, Längdskidåkning, off-pist, skidspår, skidor, längdskidor, skating, pist"
-                },
-                "piste/piste": {
-                    "name": "Vintersportspår",
-                    "terms": "Vintersportspår, skidor, skida, off-pist, offpist, utförsåkning, utför, alpint, snowboard, skidtur, skidåkning, släde, häst, vintervandring, snöskor, is, isåkning, skridsko, skridskoåkning"
-                },
                 "piste/skitour": {
                     "name": "Skidturspår",
                     "terms": "Skidturspår, skidtur, skidspår, skidor, skidåkning, skidturåkning, pist"
-                },
-                "piste/sled": {
-                    "name": "Slädspår",
-                    "terms": "Slädspår, slädpist, skidor, släde, pist"
-                },
-                "piste/sleigh": {
-                    "name": "Slädspår",
-                    "terms": "Slädspår, slädpist, skidor, släde, pist"
                 },
                 "place": {
                     "name": "Plats"
@@ -8023,9 +8019,6 @@
                 "power/pole": {
                     "name": "Kraftledningsstolpe",
                     "terms": "Kraftledningsstolpe, elledningsstolpe, stolpe, kraftledningsmast, elledningsmast, mast"
-                },
-                "power/sub_station": {
-                    "name": "Fördelningsstation"
                 },
                 "power/substation": {
                     "name": "Fördelningsstation",
@@ -8323,10 +8316,6 @@
                     "name": "Vin-och-spritaffär",
                     "terms": "Vinaffär, spritaffär, vin- och sprit, vin- och spritaffär, systemet, systembolaget, bolaget, alkohol, öl, vin, sprit"
                 },
-                "shop/anime": {
-                    "name": "Anime-affär",
-                    "terms": "Anime, animēshon, manga, mangastil, Kodomo, Shōjo, shoujo, shojo, Josei, Shōnen"
-                },
                 "shop/antiques": {
                     "name": "Antikaffär",
                     "terms": "Antikaffär, antikshop, antikt, antikvitetsaffär, antikvariat"
@@ -8481,10 +8470,6 @@
                 "shop/country_store": {
                     "name": "Lanthandel",
                     "terms": "Lanthandel, landet"
-                },
-                "shop/craft": {
-                    "name": "Konst- och hantverksbutik",
-                    "terms": "Konsthantverk, konstverk, hantverk, slöjd"
                 },
                 "shop/curtain": {
                     "name": "Gardinaffär",
@@ -9839,18 +9824,6 @@
                 "description": "Träffar för kart-entusiaster kring Philadelphia",
                 "extendedDescription": "GeoPhilly förenar utvecklare, geografer, data-nördar, open source-entusiaster, civila hackare och kartmissbrukare i vår gemensamma kärlek för kartor och vad de berättar för oss. Om du använder kartor som en del av ditt arbete eller bara vill lära dig mer, är det här samlingspunkten för dig! Våra aktiviteter syftar till att vara öppna, vänliga, pedagogiska och sociala och spänna allt från roliga stunder till korta föreläsningar eller till och med workshops. Kom och skapa en varierad, inspirerande geo-gemenskap i Philadelphia med oss!"
             },
-            "LATAM-Facebook": {
-                "name": "OpenStreetMap Latam på Facebook",
-                "description": "OpenStreetMap Latam på Facebook"
-            },
-            "LATAM-Telegram": {
-                "name": "Telegram för OpenStreetMap Latam",
-                "description": "OpenStreetMap-Telegram för Latinamerika"
-            },
-            "LATAM-Twitter": {
-                "name": "OpenStreetMap Latam på Twitter",
-                "description": "Följ oss på Twitter på {url}"
-            },
             "MapMinnesota": {
                 "name": "MapMinnesota",
                 "description": "Kartläggare och OpenStreetMap-användare kring Minneapolis–Saint Paul",
@@ -10674,10 +10647,6 @@
                 "name": "OSM Kenya",
                 "description": "OSM Kenya är en sammanslutning av OSM-bidragsgivare och -användare",
                 "extendedDescription": "OSM är en lokal gemenskap för personer intresserade av OpenStreetMap och inkluderar organisationer, utvecklare och YouthMappers-filialer i landet."
-            },
-            "osm-latam": {
-                "name": "OpenStreetMap Latam",
-                "description": "Stöder OpenStreetMap i Latinamerika"
             },
             "osm-mg-facebook": {
                 "name": "Facebook-grupp för OpenStreetMap Madagaskar",

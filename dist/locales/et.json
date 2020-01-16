@@ -1233,9 +1233,6 @@
                 "length": {
                     "label": "Pikkus (meetrites)"
                 },
-                "levels": {
-                    "label": "Korruseid"
-                },
                 "liaison": {
                     "label": "Tüüp"
                 },
@@ -1857,10 +1854,6 @@
                     "name": "Internetikohvik",
                     "terms": "Internetipunkt"
                 },
-                "amenity/kindergarten": {
-                    "name": "Lasteaed",
-                    "terms": "Eelkool"
-                },
                 "amenity/library": {
                     "name": "Raamatukogu"
                 },
@@ -1890,9 +1883,6 @@
                 },
                 "amenity/parking/underground": {
                     "name": "Maa-alune parkla"
-                },
-                "amenity/parking_entrance": {
-                    "name": "Parkimismaja sisse/väljapääs"
                 },
                 "amenity/parking_space": {
                     "name": "Parkimiskoht",
@@ -2217,9 +2207,6 @@
                 "building/industrial": {
                     "name": "Tööstushoone"
                 },
-                "building/kindergarten": {
-                    "name": "Lasteaiahoone"
-                },
                 "building/public": {
                     "name": "Avalik hoone"
                 },
@@ -2433,9 +2420,6 @@
                 "emergency/water_tank": {
                     "name": "Tuletõrjevee mahuti",
                     "terms": "veevõtukoht,tuletõrjemahuti"
-                },
-                "entrance": {
-                    "name": "Sisse- ja Väljapääs"
                 },
                 "ford": {
                     "name": "Koolmekoht",
@@ -3255,9 +3239,6 @@
                     "name": "Elektripost",
                     "terms": "õhuliinipost"
                 },
-                "power/sub_station": {
-                    "name": "Alajaam"
-                },
                 "power/substation": {
                     "name": "Alajaam"
                 },
@@ -3446,10 +3427,6 @@
                 "shop/cosmetics": {
                     "name": "Kosmeetikapood",
                     "terms": "moekauplus"
-                },
-                "shop/craft": {
-                    "name": "Käsitöökauplus",
-                    "terms": "Kuntsitarvete kauplus"
                 },
                 "shop/curtain": {
                     "name": "Kardinakauplus"
