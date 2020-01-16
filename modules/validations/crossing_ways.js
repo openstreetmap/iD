@@ -3,7 +3,8 @@ import { actionChangeTags } from '../actions/change_tags';
 import { actionMergeNodes } from '../actions/merge_nodes';
 import { actionSplit } from '../actions/split';
 import { modeSelect } from '../modes/select';
-import { geoAngle, geoExtent, geoLineIntersection, geoSphericalClosestNode, geoSphericalDistance, geoVecAngle, geoMetersToLon } from '../geo';
+import { geoAngle, geoExtent, geoLatToMeters, geoLonToMeters, geoLineIntersection,
+    geoSphericalClosestNode, geoSphericalDistance, geoVecAngle, geoVecLength, geoMetersToLat, geoMetersToLon } from '../geo';
 import { osmNode } from '../osm/node';
 import { osmFlowingWaterwayTagValues, osmPathHighwayTagValues, osmRailwayTrackTagValues, osmRoutableHighwayTagValues } from '../osm/tags';
 import { t } from '../util/locale';
@@ -524,17 +525,42 @@ export function validationCrossingWays(context) {
                     // clamp the length to a reasonable range
                     structLengthMeters = Math.min(Math.max(structLengthMeters, 4), 50);
 
-                    var angle = geoVecAngle(edgeNodes[0].loc, edgeNodes[1].loc);
+                    function geomToProj(geoPoint) {
+                        return [
+                            geoLonToMeters(geoPoint[0], geoPoint[1]),
+                            geoLatToMeters(geoPoint[1])
+                        ];
+                    }
+                    function projToGeom(projPoint) {
+                        var lat = geoMetersToLat(projPoint[1]);
+                        return [
+                            geoMetersToLon(projPoint[0], lat),
+                            lat
+                        ];
+                    }
+
+                    var projEdgeNode1 = geomToProj(edgeNodes[0].loc);
+                    var projEdgeNode2 = geomToProj(edgeNodes[1].loc);
+
+                    var projectedAngle = geoVecAngle(projEdgeNode1, projEdgeNode2);
+
+                    var projectedCrossingLoc = geomToProj(crossingLoc);
+                    var linearToSphericalMetersRatio = geoVecLength(projEdgeNode1, projEdgeNode2) /
+                        geoSphericalDistance(edgeNodes[0].loc, edgeNodes[1].loc);
+
+                    function locSphericalDistanceFromCrossingLoc(angle, distanceMeters) {
+                        var lengthSphericalMeters = distanceMeters * linearToSphericalMetersRatio;
+                        return projToGeom([
+                            projectedCrossingLoc[0] + Math.cos(angle) * lengthSphericalMeters,
+                            projectedCrossingLoc[1] + Math.sin(angle) * lengthSphericalMeters
+                        ]);
+                    }
 
                     var endpointLocGetter1 = function(lengthMeters) {
-                        var length = geoMetersToLon(lengthMeters, crossingLoc[1]);
-                        return [crossingLoc[0] + Math.cos(angle) * length,
-                                crossingLoc[1] + Math.sin(angle) * length];
+                        return locSphericalDistanceFromCrossingLoc(projectedAngle, lengthMeters);
                     };
                     var endpointLocGetter2 = function(lengthMeters) {
-                        var length = geoMetersToLon(lengthMeters, crossingLoc[1]);
-                        return [crossingLoc[0] + Math.cos(angle + Math.PI) * length,
-                                crossingLoc[1] + Math.sin(angle + Math.PI) * length];
+                        return locSphericalDistanceFromCrossingLoc(projectedAngle + Math.PI, lengthMeters);
                     };
 
                     // avoid creating very short edges from splitting too close to another node
@@ -544,30 +570,46 @@ export function validationCrossingWays(context) {
                     function determineEndpoint(edge, endNode, locGetter) {
                         var newNode;
 
-                        var idealLength = structLengthMeters / 2;
+                        var idealLengthMeters = structLengthMeters / 2;
 
                         // distance between the crossing location and the end of the edge,
                         // the maximum length of this side of the structure
                         var crossingToEdgeEndDistance = geoSphericalDistance(crossingLoc, endNode.loc);
 
-                        if (crossingToEdgeEndDistance - idealLength > minEdgeLengthMeters) {
+                        if (crossingToEdgeEndDistance - idealLengthMeters > minEdgeLengthMeters) {
                             // the edge is long enough to insert a new node
 
                             // the loc that would result in the full expected length
-                            var idealNodeLoc = locGetter(idealLength);
+                            var idealNodeLoc = locGetter(idealLengthMeters);
 
                             newNode = osmNode();
                             graph = actionAddMidpoint({ loc: idealNodeLoc, edge: edge }, newNode)(graph);
 
-                        } else if (endNode.isIntersection(graph)) {
-                            // the end node is an intersection, try to leave a segment
-                            // between it and the structure - #7202
+                        } else {
+                            var edgeCount = 0;
+                            endNode.parentIntersectionWays(graph).forEach(function(way) {
+                                way.nodes.forEach(function(nodeID) {
+                                    if (nodeID === endNode.id) {
+                                        if ((endNode.id === way.first() && endNode.id !== way.last()) ||
+                                            (endNode.id === way.last() && endNode.id !== way.first())) {
+                                            edgeCount += 1;
+                                        } else {
+                                            edgeCount += 2;
+                                        }
+                                    }
+                                });
+                            });
 
-                            var insetLength = crossingToEdgeEndDistance - minEdgeLengthMeters;
-                            if (insetLength > minEdgeLengthMeters) {
-                                var insetNodeLoc = locGetter(insetLength);
-                                newNode = osmNode();
-                                graph = actionAddMidpoint({ loc: insetNodeLoc, edge: edge }, newNode)(graph);
+                            if (edgeCount >= 3) {
+                                // the end node is a junction, try to leave a segment
+                                // between it and the structure - #7202
+
+                                var insetLength = crossingToEdgeEndDistance - minEdgeLengthMeters;
+                                if (insetLength > minEdgeLengthMeters) {
+                                    var insetNodeLoc = locGetter(insetLength);
+                                    newNode = osmNode();
+                                    graph = actionAddMidpoint({ loc: insetNodeLoc, edge: edge }, newNode)(graph);
+                                }
                             }
                         }
 
