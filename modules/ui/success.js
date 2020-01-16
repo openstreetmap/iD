@@ -114,39 +114,32 @@ export function uiSuccess(context) {
       }));
 
 
-    // Gather community polygon IDs intersecting the map..
-    let matchFeatures = data.community.query(context.map().center(), true) || [];
-    let matchIDs = matchFeatures.map(feature => feature.id);
+    // Get community index features intersecting the map..
+    let communities = [];
+    const properties = data.community.query(context.map().center(), true) || [];
 
-    // Gather community resources that are either global or match a polygon.
-    let matchResources = Object.values(data.community.resources)
-      .filter(v => { return !v.featureId || matchIDs.indexOf(v.featureId) !== -1; });
-
-    if (matchResources.length) {
-      // sort by size ascending, then by community rank
-      matchResources.sort((a, b) => {
-        let aSize = Infinity;
-        let bSize = Infinity;
-        let aOrder = a.order || 0;
-        let bOrder = b.order || 0;
-
-        if (a.featureId) {
-          aSize = data.community.features[a.featureId].properties.area;
-        }
-        if (b.featureId) {
-          bSize = data.community.features[b.featureId].properties.area;
-        }
-
-        return aSize < bSize ? -1 : aSize > bSize ? 1 : bOrder - aOrder;
+    // Gather the communities from the result
+    properties.forEach(props => {
+      const resourceIDs = Array.from(props.resourceIDs);
+      resourceIDs.forEach(resourceID => {
+        const resource = data.community.resources[resourceID];
+        communities.push({
+          area: props.area || Infinity,
+          order: resource.order || 0,
+          resource: resource
+        });
       });
+    });
 
-      body
-        .call(showCommunityLinks, matchResources);
-    }
+    // sort communities by feature area ascending, community order descending
+    communities.sort((a, b) => a.area - b.area || b.order - a.order);
+
+    body
+      .call(showCommunityLinks, communities.map(c => c.resource));
   }
 
 
-  function showCommunityLinks(selection, matchResources) {
+  function showCommunityLinks(selection, resources) {
     let communityLinks = selection
       .append('div')
       .attr('class', 'save-communityLinks');
@@ -160,7 +153,7 @@ export function uiSuccess(context) {
       .attr('class', 'community-table');
 
     let row = table.selectAll('.community-row')
-      .data(matchResources);
+      .data(resources);
 
     let rowEnter = row.enter()
       .append('tr')
