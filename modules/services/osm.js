@@ -991,24 +991,26 @@ export default {
 
         _tileCache.inflight[tile.id] = this.loadFromAPI(
             path + tile.extent.toParam(),
-            function(err, parsed) {
-                delete _tileCache.inflight[tile.id];
-                if (!err) {
-                    delete _tileCache.toLoad[tile.id];
-                    _tileCache.loaded[tile.id] = true;
-                    var bbox = tile.extent.bbox();
-                    bbox.id = tile.id;
-                    _tileCache.rtree.insert(bbox);
-                }
-                if (callback) {
-                    callback(err, Object.assign({ data: parsed }, tile));
-                }
-                if (!hasInflightRequests(_tileCache)) {
-                    dispatch.call('loaded');     // stop the spinner
-                }
-            },
+            tileCallback,
             options
         );
+
+        function tileCallback(err, parsed) {
+            delete _tileCache.inflight[tile.id];
+            if (!err) {
+                delete _tileCache.toLoad[tile.id];
+                _tileCache.loaded[tile.id] = true;
+                var bbox = tile.extent.bbox();
+                bbox.id = tile.id;
+                _tileCache.rtree.insert(bbox);
+            }
+            if (callback) {
+                callback(err, Object.assign({ data: parsed }, tile));
+            }
+            if (!hasInflightRequests(_tileCache)) {
+                dispatch.call('loaded');     // stop the spinner
+            }
+        }
     },
 
 
