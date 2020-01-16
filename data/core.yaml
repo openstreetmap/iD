@@ -1324,7 +1324,7 @@ en:
       relation_types_h: "Relation Types"
       multipolygon_h: "Multipolygons"
       multipolygon: "A *multipolygon* relation is a group of one or more *outer* features and one or more inner features. The outer features define the outer edges of the multipolygon, and the inner features define sub-areas or holes cut out from the inside of the multipolygon."
-      multipolygon_create: "To create a multipolygon, for example a building with a hole in it, draw the outer edge as an area and the inner edge as a line or different kind of area. Then `{shift}`+{leftclick} left-click to select both features, {rightclick} right-click to show the edit menu, and select the {merge} **Merge** command."
+      multipolygon_create: "To create a multipolygon, for example a building with a hole in it, draw the outer edge as an area and the inner edge as a closed line to outline the inner geometry, or as another area if the hole has distinct features by itself. Then `{shift}`+{leftclick} left-click to select both features, {rightclick} right-click to show the edit menu, and select the {merge} **Merge** command."
       multipolygon_merge: "Merging several lines or areas will create a new multipolygon relation with all selected areas as members. iD will choose the inner and outer roles automatically, based on which features are contained inside other features."
       turn_restriction_h: "Turn restrictions"
       turn_restriction: "A *turn restriction* relation is a group of several road segments in an intersection. Turn restrictions consist of a *from* road, *via* node or roads, and a *to* road."
