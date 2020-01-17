@@ -698,6 +698,10 @@
                 "description": "Gebouwen",
                 "tooltip": "Gebouwen, afdaken, garages …"
             },
+            "building_parts": {
+                "description": "Gebouwdelen",
+                "tooltip": "3D Gebouw- en dakcomponenten"
+            },
             "landuse": {
                 "description": "Landindeling",
                 "tooltip": "Bossen, landbouwgronden, parken, woongebieden, winkelzones …"
@@ -768,7 +772,19 @@
                 }
             }
         },
+        "preferences": {
+            "title": "Voorkeuren",
+            "description": "Voorkeuren",
+            "privacy": {
+                "title": "Privacy",
+                "privacy_link": "Bekijk het iD privacybeleid",
+                "third_party_icons": {
+                    "description": "Weergeef iconen van derde partijen"
+                }
+            }
+        },
         "restore": {
+            "heading": "Je hebt niet opgeslagen wijzigingen",
             "restore": "Herstel mijn wijzigingen"
         },
         "save": {
@@ -2131,6 +2147,15 @@
                 "access_simple": {
                     "label": "Gebruik toegelaten voor"
                 },
+                "addr/interpolation": {
+                    "label": "Type",
+                    "options": {
+                        "all": "Alle",
+                        "alphabetic": "Alfabetisch",
+                        "even": "Even",
+                        "odd": "Oneven"
+                    }
+                },
                 "address": {
                     "label": "Adres",
                     "placeholders": {
@@ -2320,6 +2345,14 @@
                 },
                 "building": {
                     "label": "Gebouw"
+                },
+                "building/levels": {
+                    "label": "Verdiepingen",
+                    "placeholder": "2, 4, 6..."
+                },
+                "building/levels/underground": {
+                    "label": "Ondergrondse verdiepingen",
+                    "placeholder": "2, 4, 6..."
                 },
                 "building/levels_building": {
                     "label": "Verdiepingen in gebouw"
@@ -2948,10 +2981,6 @@
                 "level": {
                     "label": "Verdieping"
                 },
-                "levels": {
-                    "label": "Niveaus",
-                    "placeholder": "2, 4, 6 …"
-                },
                 "lit": {
                     "label": "Verlicht"
                 },
@@ -2983,6 +3012,9 @@
                 },
                 "material": {
                     "label": "Materiaal"
+                },
+                "max_age": {
+                    "label": "Maximale leeftijd"
                 },
                 "maxheight": {
                     "label": "Maximale hoogte",
@@ -3337,6 +3369,9 @@
                 },
                 "ref/isil": {
                     "label": "ISIL-referentiecode"
+                },
+                "ref/vatin": {
+                    "label": "BTW-nummer"
                 },
                 "ref_aeroway_gate": {
                     "label": "Poortnummer"
@@ -4262,10 +4297,6 @@
                     "name": "Internetcafé",
                     "terms": "cyberspace,cybercafé"
                 },
-                "amenity/kindergarten": {
-                    "name": "Gebied van Crèche/Kleuterschool",
-                    "terms": "kleuterschool,kinderdagverblijf,peuterspeelzaal"
-                },
                 "amenity/language_school": {
                     "name": "Taalschool"
                 },
@@ -4316,10 +4347,6 @@
                 },
                 "amenity/parking/underground": {
                     "name": "Ondergronds parkeren"
-                },
-                "amenity/parking_entrance": {
-                    "name": "Ingang/Uitgang van parkeergelegenheid",
-                    "terms": "inrit,uitrit"
                 },
                 "amenity/parking_space": {
                     "name": "Parkeerplaats binnen parkeergelegenheid",
@@ -4952,10 +4979,6 @@
                     "name": "Industrieel gebouw",
                     "terms": "industriegebouw,bedrijfsgebouw"
                 },
-                "building/kindergarten": {
-                    "name": "Kleuterschool/Gebouw van crèche",
-                    "terms": "kleuterschool,kinderdagverblijf,peuterspeelzaal"
-                },
                 "building/mosque": {
                     "name": "Moskeegebouw",
                     "terms": "masjid,pleinmoskee"
@@ -5282,10 +5305,6 @@
                 },
                 "emergency/yes": {
                     "name": "Toegang voor hulpdiensten: ja"
-                },
-                "entrance": {
-                    "name": "Ingang/Uitgang",
-                    "terms": "ingang,uitgang"
                 },
                 "ford": {
                     "name": "Voorde (doorwaadbare plaats)",
@@ -5688,8 +5707,7 @@
                     "terms": "begraafplaats,kerkhof"
                 },
                 "landuse/churchyard": {
-                    "name": "Kerkhof",
-                    "terms": "begraafplaats,zerken,dood,graf"
+                    "name": "Kerkhof"
                 },
                 "landuse/commercial": {
                     "name": "Commercieel gebied",
@@ -6540,37 +6558,9 @@
                     "name": "Kantoor van watermaatschappij",
                     "terms": "watermaatschappij*,waterleidingsmaatschappij*"
                 },
-                "piste/downhill": {
-                    "name": "Downhillpiste"
-                },
-                "piste/downhill/halfpipe": {
-                    "name": "Halfpipe"
-                },
-                "piste/hike": {
-                    "name": "Sneeuwschoenrennen- of winterwandelpad"
-                },
-                "piste/ice_skate": {
-                    "name": "Schaatsring"
-                },
-                "piste/nordic": {
-                    "name": "Langlaufpiste",
-                    "terms": "noordse skipiste,noords skiën,loipe"
-                },
-                "piste/piste": {
-                    "name": "Wintersportpad",
-                    "terms": "wintersportpiste"
-                },
                 "piste/skitour": {
                     "name": "Toerskipad",
                     "terms": "ski-alpinismepad,ski mountaineering,skilooppad,langlaufpiste"
-                },
-                "piste/sled": {
-                    "name": "Slee-piste",
-                    "terms": "sledepiste"
-                },
-                "piste/sleigh": {
-                    "name": "Arrenslee-piste",
-                    "terms": "sledepiste,sleepiste,trekdiersleepiste"
                 },
                 "place": {
                     "name": "Plaats"
@@ -6720,9 +6710,6 @@
                 "power/pole": {
                     "name": "Elektriciteitspaal",
                     "terms": "stroom,laagspanning,laagspanningsleiding,elektriciteitsnet,elektriciteitskabel"
-                },
-                "power/sub_station": {
-                    "name": "Klein onderstation"
                 },
                 "power/substation": {
                     "name": "Transformatiestation",
@@ -6961,10 +6948,6 @@
                     "name": "Slijterij",
                     "terms": "alcoholwinkel"
                 },
-                "shop/anime": {
-                    "name": "Animewinkel",
-                    "terms": "cosplay,mangawinkel,japans,stripwinkel,dakimakura"
-                },
                 "shop/antiques": {
                     "name": "Antiquair",
                     "terms": "antiekwinkel"
@@ -7104,10 +7087,6 @@
                 "shop/country_store": {
                     "name": "Outdoorzaak",
                     "terms": "kampeerzaak,landelijk,scoutingwinkel,jacht,ruiter,paardrijden,tuinmachines"
-                },
-                "shop/craft": {
-                    "name": "Schilder- en Tekengereedschapswinkel",
-                    "terms": "kunstbenodigdhedenwinkel,knutselwinkel"
                 },
                 "shop/curtain": {
                     "name": "Gordijnenwinkel",
@@ -8366,10 +8345,6 @@
             "GeoPhilly": {
                 "name": "GeoPhilly"
             },
-            "LATAM-Telegram": {
-                "name": "OpenStreetMap Latam Telegram",
-                "description": "OpenStreetMap Telegram voor Latijns Amerika"
-            },
             "MapMinnesota": {
                 "name": "MapMinnesota"
             },
@@ -8901,6 +8876,10 @@
             },
             "kosovo-telegram": {
                 "name": "OpenStreetMap Kosovo op Telegram"
+            },
+            "nl-forum": {
+                "name": "OpenStreetMap NL Forum",
+                "description": "Nederlands OpenStreetMap web forum"
             },
             "no-forum": {
                 "description": "OpenStreetMap Noorwegen webforum"

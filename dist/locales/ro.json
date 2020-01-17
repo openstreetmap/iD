@@ -1296,10 +1296,6 @@
                 "level": {
                     "label": "Nivel"
                 },
-                "levels": {
-                    "label": "Nivele",
-                    "placeholder": "2, 4, 6..."
-                },
                 "location": {
                     "label": "Locație"
                 },
@@ -1791,9 +1787,6 @@
                 "amenity/internet_cafe": {
                     "name": "Internet Cafe"
                 },
-                "amenity/kindergarten": {
-                    "name": "Preșcoală/Grădiniță"
-                },
                 "amenity/library": {
                     "name": "Librărie"
                 },
@@ -1805,9 +1798,6 @@
                 },
                 "amenity/nightclub": {
                     "name": "Club de Noapte"
-                },
-                "amenity/parking_entrance": {
-                    "name": "Intrare/Ieșire Garaj"
                 },
                 "amenity/parking_space": {
                     "name": "Loc de Parcare"
@@ -1983,9 +1973,6 @@
                 "building/industrial": {
                     "name": "Clădire Industrială"
                 },
-                "building/kindergarten": {
-                    "name": "Preșcoală/Grădiniță"
-                },
                 "building/public": {
                     "name": "Clădire Publică"
                 },
@@ -2066,9 +2053,6 @@
                 },
                 "emergency/defibrillator": {
                     "name": "Defibrilator"
-                },
-                "entrance": {
-                    "name": "Intrare/Ieșire"
                 },
                 "ford": {
                     "name": "Vad"
@@ -2583,9 +2567,6 @@
                 "power/pole": {
                     "name": "Stâlp de Energie"
                 },
-                "power/sub_station": {
-                    "name": "SubStație"
-                },
                 "power/substation": {
                     "name": "Substație"
                 },
@@ -2640,9 +2621,6 @@
                 "shop/alcohol": {
                     "name": "Magazin de Băuturi Alcoolice",
                     "terms": "G"
-                },
-                "shop/anime": {
-                    "name": "Magazin Anime"
                 },
                 "shop/antiques": {
                     "name": "Anticariat"

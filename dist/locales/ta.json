@@ -1044,10 +1044,6 @@
                 "level": {
                     "label": "நிலை"
                 },
-                "levels": {
-                    "label": "நிலைகள்",
-                    "placeholder": "2, 4, 6..."
-                },
                 "location": {
                     "label": "இடம்"
                 },
@@ -1922,9 +1918,6 @@
                 "emergency/water_tank": {
                     "name": "அவசர நீர் தொட்டி"
                 },
-                "entrance": {
-                    "name": "நுழைவு / வெளியேறு"
-                },
                 "healthcare/alternative": {
                     "name": "மாற்று மருத்துவம்"
                 },
@@ -2183,9 +2176,6 @@
                 "power/line": {
                     "name": "மின் கம்பி"
                 },
-                "power/sub_station": {
-                    "name": "துணைநிலையம்"
-                },
                 "power/substation": {
                     "name": "துணைநிலையம்"
                 },
@@ -2242,9 +2232,6 @@
                 },
                 "shop/alcohol": {
                     "name": "மதுபானக் கடை"
-                },
-                "shop/anime": {
-                    "name": "பசைக் கடை"
                 },
                 "shop/antiques": {
                     "name": "பழம்பொருள் அங்காடி"

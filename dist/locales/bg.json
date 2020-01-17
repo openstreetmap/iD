@@ -1423,10 +1423,6 @@
                 "level": {
                     "label": "Ниво"
                 },
-                "levels": {
-                    "label": "Нива",
-                    "placeholder": "2, 4, 6..."
-                },
                 "lit": {
                     "label": "Осветление"
                 },
@@ -2284,9 +2280,6 @@
                 },
                 "power/pole": {
                     "name": "Електрически стълб"
-                },
-                "power/sub_station": {
-                    "name": "Подстанция"
                 },
                 "power/tower": {
                     "name": "Жере"

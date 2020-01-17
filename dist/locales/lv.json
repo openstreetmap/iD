@@ -1498,10 +1498,6 @@
                 "level": {
                     "label": "Stāvs"
                 },
-                "levels": {
-                    "label": "Stāvu skaits",
-                    "placeholder": "2, 4, 6..."
-                },
                 "lit": {
                     "label": "Apgaismots"
                 },
@@ -2223,9 +2219,6 @@
                 "amenity/internet_cafe": {
                     "name": "Interneta Kafejnīca"
                 },
-                "amenity/kindergarten": {
-                    "terms": "bēŗnudārzs,pirmskola"
-                },
                 "amenity/library": {
                     "name": "Bibliotēka",
                     "terms": "grāmatas, lasītava"
@@ -2251,10 +2244,6 @@
                 "amenity/parking/multi-storey": {
                     "name": "Daudzlīmeņu Stāvvieta",
                     "terms": "Garāža, daudzstāvu, stāvi, ēka, autostāvieta"
-                },
-                "amenity/parking_entrance": {
-                    "name": "Daudzlīmeņu Stāvvietas Ieeja/Izeja",
-                    "terms": "daudzstāvu stāvvieta, ieeja, izeja, iebrauktuve, izbrauktuve"
                 },
                 "amenity/place_of_worship": {
                     "name": "Dievnams",
@@ -2564,9 +2553,6 @@
                 "building/industrial": {
                     "name": "Industijas Ēka"
                 },
-                "building/kindergarten": {
-                    "name": "Bērnudārza / Pirmskolas ēka"
-                },
                 "building/mosque": {
                     "name": "Mošejas Ēka"
                 },
@@ -2725,9 +2711,6 @@
                 },
                 "emergency/siren": {
                     "name": "Sirēna"
-                },
-                "entrance": {
-                    "name": "Ieeja/Izeja"
                 },
                 "golf/hole": {
                     "name": "Golfa bedrīte"
@@ -3183,9 +3166,6 @@
                     "name": "Elektrības stabs",
                     "terms": "elektrostabs"
                 },
-                "power/sub_station": {
-                    "name": "Metro stacija"
-                },
                 "power/substation": {
                     "name": "Apakšstacija"
                 },
@@ -3339,10 +3319,6 @@
                 },
                 "shop/cosmetics": {
                     "name": "Kosmētikas veikals"
-                },
-                "shop/craft": {
-                    "name": "Mākslas piederumu veikals",
-                    "terms": "māksla, resursi, krāsas, rāmji, zīmēt"
                 },
                 "shop/curtain": {
                     "name": "Aizkaru veikals"

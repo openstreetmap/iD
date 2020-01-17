@@ -733,10 +733,6 @@
                 "length": {
                     "label": "Panjang (Meter)"
                 },
-                "levels": {
-                    "label": "Tingkatan",
-                    "placeholder": "2, 4, 6..."
-                },
                 "lit": {
                     "label": "Disinari"
                 },
@@ -1115,9 +1111,6 @@
                 "amenity/hospital": {
                     "name": "Lingkungan Rumah Sakit"
                 },
-                "amenity/kindergarten": {
-                    "name": "Lingkungan Prasekolah/Taman Kanak-kanak"
-                },
                 "amenity/library": {
                     "name": "Perpustakaan",
                     "terms": "Perpustakaan"
@@ -1130,9 +1123,6 @@
                 },
                 "amenity/nightclub": {
                     "name": "Kelab Malam"
-                },
-                "amenity/parking_entrance": {
-                    "name": "Pintu Masuk/Keluar Area Parkir"
                 },
                 "amenity/place_of_worship": {
                     "name": "Tempat Beribadah",
@@ -1298,9 +1288,6 @@
                 "building/industrial": {
                     "name": "Bangunan Industri"
                 },
-                "building/kindergarten": {
-                    "name": "Bangunan Prasekolah/Taman Kanak-kanak"
-                },
                 "building/public": {
                     "name": "Bangunan Umum"
                 },
@@ -1436,9 +1423,6 @@
                 },
                 "emergency/phone": {
                     "name": "Telepon Darurat"
-                },
-                "entrance": {
-                    "name": "Pintu Masuk/Keluar"
                 },
                 "ford": {
                     "name": "Ford"
@@ -1607,8 +1591,7 @@
                     "terms": "Kuburan, Makam, TPU, Tempat Pemakaman Umum"
                 },
                 "landuse/churchyard": {
-                    "name": "Halaman Gereja",
-                    "terms": "Lahan Gereja"
+                    "name": "Halaman Gereja"
                 },
                 "landuse/commercial": {
                     "name": "Daerah Komersial",
@@ -1934,9 +1917,6 @@
                 "power/pole": {
                     "name": "Tiang Listrik"
                 },
-                "power/sub_station": {
-                    "name": "Terminal"
-                },
                 "power/substation": {
                     "name": "Terminal"
                 },
@@ -1983,10 +1963,6 @@
                 },
                 "shop/alcohol": {
                     "name": "Toko Minuman"
-                },
-                "shop/anime": {
-                    "name": "Toko Anime",
-                    "terms": "Manga, Komik"
                 },
                 "shop/antiques": {
                     "name": "Toko Barang Antik"
@@ -2067,9 +2043,6 @@
                 },
                 "shop/cosmetics": {
                     "name": "Toko Kosmetik"
-                },
-                "shop/craft": {
-                    "name": "Toko Kesenian dan Kerajinan Tangan"
                 },
                 "shop/curtain": {
                     "name": "Toko Gorden",

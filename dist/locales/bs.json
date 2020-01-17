@@ -454,10 +454,6 @@
                 "leisure": {
                     "label": "Vrsta"
                 },
-                "levels": {
-                    "label": "Nivoi",
-                    "placeholder": "2, 4, 6..."
-                },
                 "lit": {
                     "label": "Osvijetljeno"
                 },
@@ -1475,9 +1471,6 @@
                 "power/pole": {
                     "name": "Naponski stub",
                     "terms": "naponski stub,stub el. napajanja"
-                },
-                "power/sub_station": {
-                    "name": "Trafo stanica"
                 },
                 "power/tower": {
                     "name": "Visokonaponski dalekovod",

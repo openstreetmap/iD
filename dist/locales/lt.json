@@ -1954,10 +1954,6 @@
                 "level": {
                     "label": "Lygis"
                 },
-                "levels": {
-                    "label": "Lygiai",
-                    "placeholder": "2, 4, 6..."
-                },
                 "lit": {
                     "label": "Apšvietimas"
                 },
@@ -2832,10 +2828,6 @@
                 "amenity/internet_cafe": {
                     "name": "Interneto kavinė"
                 },
-                "amenity/kindergarten": {
-                    "name": "Vaikų darželio plotas",
-                    "terms": "vaikų darželis,darželio plotas"
-                },
                 "amenity/language_school": {
                     "name": "Kalbų mokykla"
                 },
@@ -3156,10 +3148,6 @@
                     "name": "Pramoninis pastatas",
                     "terms": "pramoninis,pastatas,statinys,gamykla,įmonė"
                 },
-                "building/kindergarten": {
-                    "name": "Vaikų darželio pastatas",
-                    "terms": "vaikų darželis,darželio pastatas"
-                },
                 "building/mosque": {
                     "name": "Mečetės pastatas"
                 },
@@ -3377,10 +3365,6 @@
                 },
                 "emergency/water_tank": {
                     "name": "Skubaus atvejo vandens rezervuaras"
-                },
-                "entrance": {
-                    "name": "Įėjimas/Išėjimas",
-                    "terms": "įėjimas,išėjimas"
                 },
                 "ford": {
                     "name": "Brasta",
@@ -3995,9 +3979,6 @@
                     "name": "Elektros stulpas",
                     "terms": "stulpas,elektros stulpas"
                 },
-                "power/sub_station": {
-                    "name": "Pastotė"
-                },
                 "power/substation": {
                     "name": "Pastotė",
                     "terms": "pastotė"
@@ -4069,9 +4050,6 @@
                 "shop/alcohol": {
                     "name": "Alkoholinių gėrimų parduotuvė",
                     "terms": "alkoholio parduotuvė"
-                },
-                "shop/anime": {
-                    "name": "Anime parduotuvė"
                 },
                 "shop/antiques": {
                     "name": "Atikvarų parduotuvė",
@@ -4169,9 +4147,6 @@
                 },
                 "shop/cosmetics": {
                     "name": "Kosmetikos parduotuvė"
-                },
-                "shop/craft": {
-                    "name": "Meno ir amatų parduotuvė"
                 },
                 "shop/curtain": {
                     "name": "Užuolaidų parduotuvė"
@@ -4846,9 +4821,6 @@
             },
             "osm-de": {
                 "name": "OpenStreetMap Vokietija"
-            },
-            "osm-latam": {
-                "name": "OpenStreetMap Lotynų Amerika"
             },
             "osm-se": {
                 "name": "OpenStreetMap.se"

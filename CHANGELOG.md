@@ -30,7 +30,7 @@ _Breaking changes, which may affect downstream projects or sites that embed iD, 
 -->
 
 # 2.17.1
-##### Planned: 2020-Jan-13
+##### 2020-Jan-16
 
 #### :boom: Breaking Changes
 * Remove support for Node 8 (Node 10 or higher is now required)
