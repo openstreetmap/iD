@@ -25,6 +25,11 @@ export function uiPresetList(context) {
 
 
     function presetList(selection) {
+        if (!_entityID) {
+            //selection.html('');
+            return;
+        }
+
         var entity = context.entity(_entityID);
         var geometry = context.geometry(_entityID);
 
@@ -461,7 +466,9 @@ export function uiPresetList(context) {
     presetList.entityID = function(val) {
         if (!arguments.length) return _entityID;
         _entityID = val;
-        presetList.preset(context.presets().match(context.entity(_entityID), context.graph()));
+        if (_entityID) {
+            presetList.preset(context.presets().match(context.entity(_entityID), context.graph()));
+        }
         return presetList;
     };
 

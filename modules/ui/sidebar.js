@@ -167,10 +167,10 @@ export function uiSidebar(context) {
                     .classed('inspector-hidden', false)
                     .classed('inspector-hover', true);
 
-                if (inspector.entityID() !== datum.id || inspector.state() !== 'hover') {
+                if (inspector.entityIDs() !== [datum.id] || inspector.state() !== 'hover') {
                     inspector
                         .state('hover')
-                        .entityID(datum.id);
+                        .entityIDs([datum.id]);
 
                     inspectorWrap
                         .call(inspector);
@@ -206,17 +206,16 @@ export function uiSidebar(context) {
         };
 
 
-        sidebar.select = function(id, newFeature) {
+        sidebar.select = function(ids, newFeature) {
             sidebar.hide();
 
-            if (id) {
-                var entity = context.entity(id);
-                // uncollapse the sidebar
-                if (selection.classed('collapsed')) {
-                    if (newFeature) {
-                        var extent = entity.extent(context.graph());
-                        sidebar.expand(sidebar.intersects(extent));
-                    }
+            if (ids && ids.length) {
+
+                var entity = ids.length === 1 && context.entity(ids[0]);
+                if (entity && newFeature && selection.classed('collapsed')) {
+                    // uncollapse the sidebar
+                    var extent = entity.extent(context.graph());
+                    sidebar.expand(sidebar.intersects(extent));
                 }
 
                 featureListWrap
@@ -226,24 +225,25 @@ export function uiSidebar(context) {
                     .classed('inspector-hidden', false)
                     .classed('inspector-hover', false);
 
-                if (inspector.entityID() !== id || inspector.state() !== 'select') {
+                if (inspector.entityIDs() !== ids || inspector.state() !== 'select') {
                     inspector
                         .state('select')
-                        .entityID(id)
+                        .entityIDs(ids)
                         .newFeature(newFeature);
 
                     inspectorWrap
                         .call(inspector, newFeature);
                 }
 
-                sidebar.showPresetList = function() {
-                    inspector.showList(context.presets().match(entity, context.graph()));
-                };
-
             } else {
                 inspector
                     .state('hide');
             }
+        };
+
+
+        sidebar.showPresetList = function() {
+            inspector.showList();
         };
 
 

@@ -22,6 +22,7 @@ export function uiRawTagEditor(context) {
     var _readOnlyTags = [];
     // the keys in the order we want them to display
     var _orderedKeys = [];
+    var _keyValues = null;
     var _showBlank = false;
     var _updatePreference = true;
     var _expanded = false;
@@ -29,7 +30,7 @@ export function uiRawTagEditor(context) {
     var _state;
     var _preset;
     var _tags;
-    var _entityID;
+    var _entityIDs;
 
 
     function rawTagEditor(selection) {
@@ -89,7 +90,10 @@ export function uiRawTagEditor(context) {
 
         // View Options
         var options = wrap.selectAll('.raw-tag-options')
-            .data([0]);
+            .data((!_entityIDs || _entityIDs.length === 1) ? [0] : []);
+
+        options.exit()
+            .remove();
 
         var optionsEnter = options.enter()
             .append('div')
@@ -237,17 +241,23 @@ export function uiRawTagEditor(context) {
                 var key = row.select('input.key');      // propagate bound data
                 var value = row.select('input.value');  // propagate bound data
 
-                if (_entityID && taginfo && _state !== 'hover') {
+                if (_entityIDs && taginfo && _state !== 'hover') {
                     bindTypeahead(key, value);
                 }
 
-                var isRelation = (_entityID && context.entity(_entityID).type === 'relation');
                 var reference;
 
-                if (isRelation && d.key === 'type') {
-                    reference = uiTagReference({ rtype: d.value }, context);
+                if (typeof d.value !== 'string') {
+                    reference = uiTagReference({ key: d.key }, context);
                 } else {
-                    reference = uiTagReference({ key: d.key, value: d.value }, context);
+                    var isRelation = _entityIDs && _entityIDs.some(function(entityID) {
+                        return context.entity(entityID).type === 'relation';
+                    });
+                    if (isRelation && d.key === 'type') {
+                        reference = uiTagReference({ rtype: d.value }, context);
+                    } else {
+                        reference = uiTagReference({ key: d.key, value: d.value }, context);
+                    }
                 }
 
                 if (_state === 'hover') {
@@ -266,12 +276,19 @@ export function uiRawTagEditor(context) {
             .attr('title', function(d) { return d.key; })
             .call(utilGetSetValue, function(d) { return d.key; })
             .attr('readonly', function(d) {
-                return isReadOnly(d) || null;
+                return (isReadOnly(d) || (typeof d.value !== 'string')) || null;
             });
 
         items.selectAll('input.value')
-            .attr('title', function(d) { return d.value; })
-            .call(utilGetSetValue, function(d) { return d.value; })
+            .attr('title', function(d) {
+                return typeof d.value === 'string' ? d.value : Array.from(_keyValues[d.key]).sort().join('; ');
+            })
+            .attr('placeholder', function(d) {
+                return typeof d.value === 'string' ? null : t('inspector.multiple_values');
+            })
+            .call(utilGetSetValue, function(d) {
+                return typeof d.value === 'string' ? d.value : '';
+            })
             .attr('readonly', function(d) {
                 return isReadOnly(d) || null;
             });
@@ -376,7 +393,24 @@ export function uiRawTagEditor(context) {
         function bindTypeahead(key, value) {
             if (isReadOnly(key.datum())) return;
 
-            var geometry = context.geometry(_entityID);
+            if (typeof value.datum().value !== 'string' && _keyValues) {
+                value.call(uiCombobox(context, 'tag-value')
+                    .minItems(1)
+                    .fetcher(function(value, callback) {
+                        var keyString = utilGetSetValue(key);
+                        if (!_keyValues[keyString]) return;
+                        var data = Array.from(_keyValues[keyString]).map(function(tagValue) {
+                            return {
+                                value: tagValue,
+                                title: tagValue
+                            };
+                        });
+                        callback(data);
+                    }));
+                return;
+            }
+
+            var geometry = context.geometry(_entityIDs[0]);
 
             key.call(uiCombobox(context, 'tag-key')
                 .fetcher(function(value, callback) {
@@ -432,6 +466,8 @@ export function uiRawTagEditor(context) {
 
 
         function keyChange(d) {
+            if (d3_select(this).attr('readonly')) return;
+
             var kOld = d.key;
             var kNew = this.value.trim();
             var row = this.parentNode.parentNode;
@@ -486,6 +522,9 @@ export function uiRawTagEditor(context) {
 
         function valueChange(d) {
             if (isReadOnly(d)) return;
+
+            // exit if this is a multiselection and no value was entered
+            if (typeof d.value !== 'string' && !this.value) return;
 
             _pendingChange  = _pendingChange || {};
 
@@ -550,7 +589,7 @@ export function uiRawTagEditor(context) {
     rawTagEditor.preset = function(val) {
         if (!arguments.length) return _preset;
         _preset = val;
-        if (_preset.isFallback()) {
+        if (_preset && _preset.isFallback()) {
             _expanded = true;
             _updatePreference = false;
         } else {
@@ -568,12 +607,72 @@ export function uiRawTagEditor(context) {
     };
 
 
-    rawTagEditor.entityID = function(val) {
-        if (!arguments.length) return _entityID;
-        if (_entityID !== val) {
+    rawTagEditor.entityIDs = function(val) {
+        if (!arguments.length) return _entityIDs;
+        if (_entityIDs !== val) {
+            _entityIDs = val;
             _orderedKeys = [];
-            _entityID = val;
         }
+
+        if (_entityIDs.length > 1) {
+            // require the list editor when editing multiple entities
+            _tagView = 'list';
+        } else {
+            _tagView = (context.storage('raw-tag-editor-view') || 'list');
+        }
+
+        var combinedTags = {};
+        var sharedKeys = null;
+        _keyValues = {};
+
+        _entityIDs.forEach(function(entityID) {
+            var entity = context.entity(entityID);
+            var entityTags = entity.tags;
+            var entityKey;
+
+            if (sharedKeys === null) {
+                sharedKeys = {};
+                for (entityKey in entityTags) {
+                    sharedKeys[entityKey] = true;
+                }
+            } else {
+                for (var sharedKey in sharedKeys) {
+                    if (!entityTags.hasOwnProperty(sharedKey)) {
+                        delete sharedKeys[sharedKey];
+                    }
+                }
+            }
+
+            for (entityKey in entityTags) {
+
+                var entityValue = entityTags[entityKey];
+
+                if (!_keyValues.hasOwnProperty(entityKey)) {
+                    _keyValues[entityKey] = new Set();
+                }
+                _keyValues[entityKey].add(entityValue);
+
+                if (combinedTags.hasOwnProperty(entityKey)) {
+                    var combinedValue = combinedTags[entityKey];
+                    if (combinedValue !== true &&
+                        combinedValue !== entityValue) {
+
+                        combinedTags[entityKey] = true;
+                    }
+                } else {
+                    combinedTags[entityKey] = entityValue;
+                }
+            }
+        });
+
+        for (var key in combinedTags) {
+            if (!sharedKeys.hasOwnProperty(key)) {
+                // treat tags that aren't shared by all entities the same as if there are multiple values
+                combinedTags[key] = true;
+            }
+        }
+
+        rawTagEditor.tags(combinedTags);
         return rawTagEditor;
     };
 

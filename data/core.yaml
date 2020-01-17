@@ -555,6 +555,7 @@ en:
     edit_reference: "edit/translate"
     wiki_reference: View documentation
     wiki_en_reference: View documentation in English
+    multiple_values: Multiple Values
     hidden_preset:
       manual: "{features} are hidden. Enable them in the Map Data pane."
       zoom: "{features} are hidden. Zoom in to enable them."
@@ -566,6 +567,7 @@ en:
     incomplete: <not downloaded>
     feature_list: Search features
     edit: Edit feature
+    edit_features: Edit features
     check:
       "yes": "Yes"
       "no": "No"
