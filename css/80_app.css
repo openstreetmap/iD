@@ -1848,6 +1848,13 @@ a.hide-toggle {
     fill: transparent;
 }
 
+#search-add-list-item-preset-category-waterway
+ .preset-icon-category-border path {
+    stroke-width: 1.3px;
+    stroke: currentColor;
+    fill: #7092ff;
+}
+
 .preset-icon-line {
     margin: auto;
     position: absolute;
