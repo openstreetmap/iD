@@ -7,7 +7,8 @@ import { svgIcon } from '../svg/icon';
 import { uiCombobox } from './combobox';
 import { uiDisclosure } from './disclosure';
 import { uiTagReference } from './tag_reference';
-import { utilArrayDifference, utilGetSetValue, utilNoAuto, utilRebind, utilTagDiff } from '../util';
+import { utilArrayDifference, utilArrayIdentical } from '../util/array';
+import { utilGetSetValue, utilNoAuto, utilRebind, utilTagDiff } from '../util';
 
 
 export function uiRawTagEditor(context) {
@@ -609,7 +610,7 @@ export function uiRawTagEditor(context) {
 
     rawTagEditor.entityIDs = function(val) {
         if (!arguments.length) return _entityIDs;
-        if (_entityIDs !== val) {
+        if (!_entityIDs || !val || !utilArrayIdentical(_entityIDs, val)) {
             _entityIDs = val;
             _orderedKeys = [];
         }

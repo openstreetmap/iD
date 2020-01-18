@@ -8,7 +8,7 @@ import {
     event as d3_event,
     selectAll as d3_selectAll
 } from 'd3-selection';
-
+import { utilArrayIdentical } from '../util/array';
 import { osmEntity, osmNote, qaError } from '../osm';
 import { services } from '../services';
 import { uiDataEditor } from './data_editor';
@@ -167,7 +167,7 @@ export function uiSidebar(context) {
                     .classed('inspector-hidden', false)
                     .classed('inspector-hover', true);
 
-                if (inspector.entityIDs() !== [datum.id] || inspector.state() !== 'hover') {
+                if (!inspector.entityIDs() || !utilArrayIdentical(inspector.entityIDs(), [datum.id]) || inspector.state() !== 'hover') {
                     inspector
                         .state('hover')
                         .entityIDs([datum.id]);
@@ -225,7 +225,7 @@ export function uiSidebar(context) {
                     .classed('inspector-hidden', false)
                     .classed('inspector-hover', false);
 
-                if (inspector.entityIDs() !== ids || inspector.state() !== 'select') {
+                if (!inspector.entityIDs() || !utilArrayIdentical(inspector.entityIDs(), ids) || inspector.state() !== 'select') {
                     inspector
                         .state('select')
                         .entityIDs(ids)
