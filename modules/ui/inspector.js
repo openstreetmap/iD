@@ -101,7 +101,10 @@ export function uiInspector(context) {
         if (!preset) {
             if (_entityIDs.length !== 1) return;
 
-            preset = context.presets().match(_entityIDs[0], context.graph());
+            var entity = context.hasEntity(_entityIDs[0]);
+            if (!entity) return;
+
+            preset = context.presets().match(entity, context.graph());
         }
 
         wrap.transition()
