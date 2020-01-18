@@ -1,4 +1,17 @@
 
+// Returns true if a and b have the same elements at the same indices.
+export function utilArrayIdentical(a, b) {
+    // an array is always identical to itself
+    if (a === b) return true;
+
+    var i = a.length;
+    if (i !== b.length) return false;
+    while (i--) {
+        if (a[i] !== b[i]) return false;
+    }
+    return true;
+}
+
 // http://2ality.com/2015/01/es6-set-operations.html
 
 // Difference (a \ b): create a set that contains those elements of set a that are not in set b.
@@ -136,4 +149,3 @@ export function utilArrayUniqBy(a, key) {
         return acc;
     }, []);
 }
-

@@ -1,13 +1,15 @@
 import { event as d3_event, select as d3_select } from 'd3-selection';
 
-import { t } from '../util/locale';
 import { modeSelect } from '../modes/select';
 import { osmEntity } from '../osm';
 import { svgIcon } from '../svg/icon';
 import { utilDisplayName, utilHighlightEntities } from '../util';
 
 
-export function uiSelectionList(context, selectedIDs) {
+export function uiSelectionList(context) {
+
+    var _selectedIDs = [];
+
 
     function selectEntity(entity) {
         context.enter(modeSelect(context, [entity.id]));
@@ -16,33 +18,25 @@ export function uiSelectionList(context, selectedIDs) {
 
     function deselectEntity(entity) {
         d3_event.stopPropagation();
+
+        var selectedIDs = _selectedIDs.slice();
         var index = selectedIDs.indexOf(entity.id);
         if (index > -1) {
             selectedIDs.splice(index, 1);
+            context.enter(modeSelect(context, selectedIDs));
         }
-        context.enter(modeSelect(context, selectedIDs));
     }
 
 
     function selectionList(selection) {
-        selection.classed('selection-list-pane', true);
 
-        var header = selection
+        var list = selection.selectAll('.feature-list')
+            .data([0]);
+
+        list = list.enter()
             .append('div')
-            .attr('class', 'header fillL cf');
-
-        header
-            .append('h3')
-            .text(t('inspector.multiselect'));
-
-        var listWrap = selection
-            .append('div')
-            .attr('class', 'inspector-body');
-
-        var list = listWrap
-            .append('div')
-            .attr('class', 'feature-list cf');
-
+            .attr('class', 'feature-list')
+            .merge(list);
 
         context.history()
             .on('change.selectionList', function(difference) {
@@ -51,11 +45,10 @@ export function uiSelectionList(context, selectedIDs) {
 
         drawList();
 
-
         function drawList() {
-            var entities = selectedIDs
+            var entities = _selectedIDs
                 .map(function(id) { return context.hasEntity(id); })
-                .filter(function(entity) { return entity; });
+                .filter(Boolean);
 
             var items = list.selectAll('.feature-list-item')
                 .data(entities, osmEntity.key);
@@ -118,6 +111,14 @@ export function uiSelectionList(context, selectedIDs) {
                 .text(function(entity) { return utilDisplayName(entity); });
         }
     }
+
+
+    selectionList.selectedIDs = function(val) {
+        if (!arguments.length) return _selectedIDs;
+        _selectedIDs = val;
+        return selectionList;
+    };
+
 
     return selectionList;
 }

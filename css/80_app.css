@@ -1245,16 +1245,10 @@ a.hide-toggle {
     display: flex;
     flex-flow: row wrap;
     justify-content: flex-end;
-    padding: 0 20px;
+    padding: 5px 0 0 0;
 }
 .quick-link {
     margin: 0 5px;
-}
-
-.data-editor .quick-links,
-.error-editor .quick-links,
-.note-editor .quick-links {
-    padding: 5px 0 0 0;
 }
 
 
