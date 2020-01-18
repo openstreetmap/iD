@@ -91,13 +91,13 @@ export function uiRawTagEditor(context) {
 
         // View Options
         var options = wrap.selectAll('.raw-tag-options')
-            .data((!_entityIDs || _entityIDs.length === 1) ? [0] : []);
+            .data([0]);
 
         options.exit()
             .remove();
 
         var optionsEnter = options.enter()
-            .append('div')
+            .insert('div', ':first-child')
             .attr('class', 'raw-tag-options');
 
         var optionEnter = optionsEnter.selectAll('.raw-tag-option')
@@ -342,7 +342,9 @@ export function uiRawTagEditor(context) {
             var str = rows
                 .filter(function(row) { return row.key && row.key.trim() !== ''; })
                 .map(function(row) {
-                    var val = row.value ? stringify(row.value) : '';
+                    var rawVal = row.value;
+                    if (rawVal === true) rawVal = '*';
+                    var val = rawVal ? stringify(rawVal) : '';
                     return stringify(row.key) + '=' + val;
                 })
                 .join('\n');
@@ -371,12 +373,20 @@ export function uiRawTagEditor(context) {
             tagDiff.forEach(function(change) {
                 if (isReadOnly({ key: change.key })) return;
 
+                // skip unchanged multiselection placeholders
+                if (change.newVal === '*' && change.oldVal === true) return;
+
                 if (change.type === '-') {
                     _pendingChange[change.key] = undefined;
                 } else if (change.type === '+') {
                     _pendingChange[change.key] = change.newVal || '';
                 }
             });
+
+            if (Object.keys(_pendingChange).length === 0) {
+                _pendingChange = null;
+                return;
+            }
 
             scheduleChange();
         }
@@ -614,13 +624,6 @@ export function uiRawTagEditor(context) {
         if (!_entityIDs || !val || !utilArrayIdentical(_entityIDs, val)) {
             _entityIDs = val;
             _orderedKeys = [];
-        }
-
-        if (_entityIDs.length > 1) {
-            // require the list editor when editing multiple entities
-            _tagView = 'list';
-        } else {
-            _tagView = (context.storage('raw-tag-editor-view') || 'list');
         }
 
         var combinedTags = {};
