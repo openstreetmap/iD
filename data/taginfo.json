@@ -115,6 +115,7 @@
     {"key": "amenity", "value": "drinking_water", "description": "🄿 Drinking Water", "object_types": ["node"], "icon_url": "https://cdn.jsdelivr.net/gh/mapbox/maki/icons/drinking-water-15.svg"},
     {"key": "amenity", "value": "driving_school", "description": "🄿 Driving School", "object_types": ["node", "area"], "icon_url": "https://cdn.jsdelivr.net/gh/mapbox/maki/icons/car-15.svg"},
     {"key": "amenity", "value": "events_venue", "description": "🄿 Events Venue", "object_types": ["node", "area"], "icon_url": "https://cdn.jsdelivr.net/gh/openstreetmap/iD@master/svg/fontawesome/fas-users.svg"},
+    {"key": "amenity", "value": "exhibition_centre", "description": "🄿 Exposition Center", "object_types": ["node", "area"], "icon_url": "https://cdn.jsdelivr.net/gh/openstreetmap/iD@master/svg/fontawesome/fas-user-tie.svg"},
     {"key": "amenity", "value": "fast_food", "description": "🄿 Fast Food", "object_types": ["node", "area"], "icon_url": "https://cdn.jsdelivr.net/gh/mapbox/maki/icons/fast-food-15.svg"},
     {"key": "cuisine", "value": "ice_cream", "description": "🄿 Ice Cream Fast Food (unsearchable)", "object_types": ["node", "area"], "icon_url": "https://cdn.jsdelivr.net/gh/openstreetmap/iD@master/svg/fontawesome/fas-ice-cream.svg"},
     {"key": "cuisine", "value": "burger", "description": "🄿 Burger Fast Food", "object_types": ["node", "area"], "icon_url": "https://cdn.jsdelivr.net/gh/mapbox/maki/icons/fast-food-15.svg"},

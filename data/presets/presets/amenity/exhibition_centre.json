@@ -26,14 +26,18 @@
         "area"
     ],
     "tags": {
-        "amenity": "conference_centre"
+        "amenity": "exhibition_centre"
     },
     "terms": [
-        "auditorium",
-        "conference",
+        "exhibition center",
+        "fair",
         "exhibition",
         "exposition",
-        "lecture"
+        "trade fair",
+        "trade show",
+        "trade exhibition",
+        "expo",
+        "tradeshow"
     ],
-    "name": "Convention Center"
+    "name": "Exposition Center"
 }

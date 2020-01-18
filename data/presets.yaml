@@ -3142,6 +3142,11 @@ en:
         name: Events Venue
         # 'terms: banquet hall,baptism,Bar Mitzvah,Bat Mitzvah,birthdays,celebrations,conferences,confirmation,meetings,parties,party,quinceañera,reunions,weddings'
         terms: '<translate with synonyms or related terms for ''Events Venue'', separated by commas>'
+      amenity/exhibition_centre:
+        # amenity=exhibition_centre
+        name: Exposition Center
+        # 'terms: exhibition center,fair,exhibition,exposition,trade fair,trade show,trade exhibition,expo,tradeshow'
+        terms: '<translate with synonyms or related terms for ''Exposition Center'', separated by commas>'
       amenity/fast_food:
         # amenity=fast_food
         name: Fast Food
