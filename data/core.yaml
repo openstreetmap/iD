@@ -557,6 +557,7 @@ en:
     edit_reference: "edit/translate"
     wiki_reference: View documentation
     wiki_en_reference: View documentation in English
+    key_value: "key=value"
     multiple_values: Multiple Values
     hidden_preset:
       manual: "{features} are hidden. Enable them in the Map Data pane."
