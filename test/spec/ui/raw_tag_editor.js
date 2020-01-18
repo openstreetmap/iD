@@ -3,7 +3,7 @@ describe('iD.uiRawTagEditor', function() {
 
     function render(tags) {
         taglist = iD.uiRawTagEditor(context)
-            .entityID(entity.id)
+            .entityIDs([entity.id])
             .preset({isFallback: function() { return false; }})
             .tags(tags)
             .expanded(true);
