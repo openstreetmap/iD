@@ -1,6 +1,9 @@
 
 // Returns true if a and b have the same elements at the same indices.
 export function utilArrayIdentical(a, b) {
+    // an array is always identical to itself
+    if (a === b) return true;
+
     var i = a.length;
     if (i !== b.length) return false;
     while (i--) {
@@ -146,4 +149,3 @@ export function utilArrayUniqBy(a, key) {
         return acc;
     }, []);
 }
-
