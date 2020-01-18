@@ -43,7 +43,7 @@
     "bin": {"key": "bin", "type": "check", "label": "Waste Bin", "terms": ["garbage can", "trash can"]},
     "blind": {"key": "blind", "type": "radio", "strings": {"options": {"yes": "Yes", "limited": "Limited", "no": "No"}}, "label": "Blind Person Access", "terms": ["sight impairment", "vision impairment"]},
     "blood_components": {"key": "blood:", "type": "multiCombo", "label": "Blood Components", "strings": {"options": {"whole": "whole blood", "plasma": "plasma", "platelets": "platelets", "stemcells": "stem cell samples"}}},
-    "board_type": {"key": "board_type", "type": "typeCombo", "label": "Type"},
+    "board_type": {"key": "board_type", "type": "combo", "label": "Type"},
     "bollard": {"key": "bollard", "type": "combo", "label": "Type"},
     "booth": {"key": "booth", "type": "combo", "label": "Booth", "caseSensitive": true},
     "bottle": {"key": "bottle", "type": "check", "label": "Bottle Filling"},

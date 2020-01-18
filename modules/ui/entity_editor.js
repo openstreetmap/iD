@@ -1,4 +1,4 @@
-import { event as d3_event, selectAll as d3_selectAll } from 'd3-selection';
+import { event as d3_event, selectAll as d3_selectAll, select as d3_select } from 'd3-selection';
 import deepEqual from 'fast-deep-equal';
 
 import { t } from '../util/locale';
@@ -17,7 +17,6 @@ import { uiEntityIssues } from './entity_issues';
 import { uiSelectionList } from './selection_list';
 import { utilCleanTags } from '../util';
 import { uiViewOnOSM } from './view_on_osm';
-
 
 export function uiEntityEditor(context) {
     var _state = 'select';
@@ -56,177 +55,192 @@ export function uiEntityEditor(context) {
         body = body
             .merge(bodyEnter);
 
-        function manageSection(klass, shouldHave, update, create) {
-            var section = body.selectAll('.' + klass.split(' ')[0])
-                .data(shouldHave ? [0] : []);
-
-            section.exit().remove();
-
-            var sectionEnter = section.enter()
-                .append('div')
-                .attr('class', klass);
-
-            if (create && !sectionEnter.empty()) {
-                create(sectionEnter);
-            }
-
-            section = sectionEnter
-                .merge(section);
-
-            if (update && !section.empty()) {
-                update(section);
-            }
-        }
-
-        manageSection('selection-list', _entityIDs.length > 1, function(section) {
-            section
-                .call(selectionList
-                    .setSelectedIDs(_entityIDs)
-                );
-        });
-
-        manageSection('preset-list-item inspector-inner', entityID, function(section) {
-
-            if (_presetFavorite) {
-                section.selectAll('.preset-list-button-wrap .accessory-buttons')
-                    .call(_presetFavorite.button);
-            }
-
-            // update header
-            if (_tagReference) {
-                section.selectAll('.preset-list-button-wrap .accessory-buttons')
-                    .call(_tagReference.button);
-
-                section.selectAll('.preset-list-item')
-                    .call(_tagReference.body);
-            }
-
-            section.selectAll('.preset-reset')
-                .on('click', function() {
-                    if (presetBrowser.isShown()) {
-                        presetBrowser.hide();
-                    } else {
-                        presetBrowser.setAllowedGeometry([context.geometry(entityID)]);
-                        presetBrowser.show();
-                    }
-                })
-                .on('mousedown', function() {
-                    d3_event.preventDefault();
-                    d3_event.stopPropagation();
-                })
-                .on('mouseup', function() {
-                    d3_event.preventDefault();
-                    d3_event.stopPropagation();
-                });
-
-            section.select('.preset-list-item button')
-                .call(uiPresetIcon(context)
-                    .geometry(context.geometry(entityID))
-                    .preset(_activePreset)
-                    .pointMarker(false)
-                );
-
-            // NOTE: split on en-dash, not a hypen (to avoid conflict with hyphenated names)
-            var label = section.select('.label-inner');
-            var nameparts = label.selectAll('.namepart')
-                .data(_activePreset.name().split(' – '), function(d) { return d; });
-
-            nameparts.exit()
-                .remove();
-
-            nameparts
-                .enter()
-                .append('div')
-                .attr('class', 'namepart')
-                .text(function(d) { return d; });
-
-        }, function(sectionEnter) {
-
-            var presetButtonWrap = sectionEnter
-                .append('div')
-                .attr('class', 'preset-list-button-wrap');
-
-            var presetButton = presetButtonWrap.append('button')
-                .attr('class', 'preset-list-button preset-reset')
-                .call(tooltip().title(t('inspector.back_tooltip')).placement('bottom'));
-
-            presetButton
-                .append('div')
-                .attr('class', 'label')
-                .append('div')
-                .attr('class', 'label-inner');
-
-            presetButtonWrap.append('div')
-                .attr('class', 'accessory-buttons');
-
-            presetButtonWrap
-                .call(presetBrowser.scrollContainer(body));
-
-            // start with the preset browser open if the feature is new and untagged
-            if (_newFeature && !entity.hasNonGeometryTags()) {
-                presetBrowser.setAllowedGeometry([context.geometry(entityID)]);
-                presetBrowser.show();
-            }
-
-        });
-
-        manageSection('entity-issues', entityID, function(section) {
-            section
-                .call(entityIssues
-                    .entityID(entityID)
-                );
-        });
-
-        manageSection('preset-editor', entityID, function(section) {
-            section
-                .call(presetEditor
-                    .preset(_activePreset)
-                    .entityID(entityID)
-                    .tags(tags)
-                    .state(_state)
-                );
-        });
-
-        manageSection('raw-tag-editor inspector-inner', true, function(section) {
-            section
-                .call(rawTagEditor
-                    .preset(_activePreset)
-                    .entityIDs(_entityIDs)
-                    .state(_state)
-                );
-        });
-
-        manageSection('raw-member-editor inspector-inner', entity && entity.type === 'relation', function(section) {
-            section
-                .call(rawMemberEditor
-                    .entityID(entityID)
-                );
-        });
-
-        manageSection('raw-membership-editor inspector-inner', entityID, function(section) {
-            section
-                .call(rawMembershipEditor
-                    .entityID(entityID)
-                );
-        });
-
-        manageSection('key-trap-wrap', true, function(section) {
-            section.select('key-trap')
-                .on('keydown.key-trap', function() {
-                // On tabbing, send focus back to the first field on the inspector-body
-                // (probably the `name` field) #4159
-                if (d3_event.keyCode === 9 && !d3_event.shiftKey) {
-                    d3_event.preventDefault();
-                    body.select('input').node().focus();
+        var sectionInfos = [
+            {
+                klass: 'selection-list',
+                shouldHave: _entityIDs.length > 1,
+                update: function(section) {
+                    section
+                        .call(selectionList
+                            .selectedIDs(_entityIDs)
+                        );
                 }
-            });
-        }, function(sectionEnter) {
-            sectionEnter
-                .append('input')
-                .attr('type', 'text')
-                .attr('class', 'key-trap');
+            },
+            {
+                klass: 'preset-list-item inspector-inner',
+                shouldHave: entityID,
+                create: function(sectionEnter) {
+
+                    var presetButtonWrap = sectionEnter
+                        .append('div')
+                        .attr('class', 'preset-list-button-wrap');
+
+                    var presetButton = presetButtonWrap.append('button')
+                        .attr('class', 'preset-list-button preset-reset')
+                        .call(tooltip().title(t('inspector.back_tooltip')).placement('bottom'));
+
+                    presetButton
+                        .append('div')
+                        .attr('class', 'label')
+                        .append('div')
+                        .attr('class', 'label-inner');
+
+                    presetButtonWrap.append('div')
+                        .attr('class', 'accessory-buttons');
+                },
+                update: function(section) {
+
+                    // update header
+                    if (_tagReference) {
+                        section.selectAll('.preset-list-button-wrap .accessory-buttons')
+                            .call(_tagReference.button);
+
+                        section.selectAll('.preset-list-item')
+                            .call(_tagReference.body);
+                    }
+
+                    section.selectAll('.preset-reset')
+                        .on('click', function() {
+                            if (presetBrowser.isShown()) {
+                                presetBrowser.hide();
+                            } else {
+                                presetBrowser.setAllowedGeometry([context.geometry(entityID)]);
+                                presetBrowser.show();
+                            }
+                        })
+                        .on('mousedown', function() {
+                            d3_event.preventDefault();
+                            d3_event.stopPropagation();
+                        })
+                        .on('mouseup', function() {
+                            d3_event.preventDefault();
+                            d3_event.stopPropagation();
+                        });
+
+                    section.select('.preset-list-item button')
+                        .call(uiPresetIcon(context)
+                            .geometry(context.geometry(entityID))
+                            .preset(_activePreset)
+                            .pointMarker(false)
+                        );
+
+                    // NOTE: split on en-dash, not a hypen (to avoid conflict with hyphenated names)
+                    var label = section.select('.label-inner');
+                    var nameparts = label.selectAll('.namepart')
+                        .data(_activePreset.name().split(' – '), function(d) { return d; });
+
+                    nameparts.exit()
+                        .remove();
+
+                    nameparts
+                        .enter()
+                        .append('div')
+                        .attr('class', 'namepart')
+                        .text(function(d) { return d; });
+
+                }
+            }, {
+                klass: 'entity-issues',
+                shouldHave: entityID,
+                update: function(section) {
+                    section
+                        .call(entityIssues
+                            .entityID(entityID)
+                        );
+                }
+            }, {
+                klass: 'preset-editor',
+                shouldHave: entityID,
+                update: function(section) {
+                    section
+                        .call(presetEditor
+                            .preset(_activePreset)
+                            .entityID(entityID)
+                            .tags(tags)
+                            .state(_state)
+                        );
+                }
+            }, {
+                klass: 'raw-tag-editor inspector-inner',
+                shouldHave: true,
+                update: function(section) {
+                    section
+                        .call(rawTagEditor
+                            .preset(_activePreset)
+                            .entityIDs(_entityIDs)
+                            .state(_state)
+                        );
+                }
+            }, {
+                klass: 'raw-member-editor inspector-inner',
+                shouldHave: entity && entity.type === 'relation',
+                update: function(section) {
+                    section
+                        .call(rawMemberEditor
+                            .entityID(entityID)
+                        );
+                }
+            }, {
+                klass: 'raw-membership-editor inspector-inner',
+                shouldHave: entityID,
+                update: function(section) {
+                    section
+                        .call(rawMembershipEditor
+                            .entityID(entityID)
+                        );
+                }
+            }, {
+                klass: 'key-trap-wrap',
+                shouldHave: true,
+                create: function(sectionEnter) {
+                    sectionEnter
+                        .append('input')
+                        .attr('type', 'text')
+                        .attr('class', 'key-trap');
+                },
+                update: function(section) {
+                    section.select('key-trap')
+                        .on('keydown.key-trap', function() {
+                        // On tabbing, send focus back to the first field on the inspector-body
+                        // (probably the `name` field) #4159
+                        if (d3_event.keyCode === 9 && !d3_event.shiftKey) {
+                            d3_event.preventDefault();
+                            body.select('input').node().focus();
+                        }
+                    });
+                }
+            }
+        ];
+
+        sectionInfos = sectionInfos.filter(function(info) {
+            return info.shouldHave;
         });
 
+        var sections = body.selectAll('.section')
+            .data(sectionInfos, function(d) { return d.klass; });
+
+        sections.exit().remove();
+
+        var sectionsEnter = sections.enter()
+            .append('div')
+            .attr('class', function(d) {
+                return 'section ' + d.klass;
+            });
+
+        sectionsEnter.each(function(d) {
+            if (d.create) {
+                d.create(d3_select(this));
+            }
+        });
+
+        sections = sectionsEnter
+            .merge(sections);
+
+        sections.each(function(d) {
+            if (d.update) {
+                d.update(d3_select(this));
+            }
+        });
         var footer = selection.selectAll('.inspector-footer')
             .data([0]);
 

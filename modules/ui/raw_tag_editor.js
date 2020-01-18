@@ -7,7 +7,8 @@ import { svgIcon } from '../svg/icon';
 import { uiCombobox } from './combobox';
 import { uiDisclosure } from './disclosure';
 import { uiTagReference } from './tag_reference';
-import { utilArrayDifference, utilGetSetValue, utilNoAuto, utilRebind, utilTagDiff } from '../util';
+import { utilArrayDifference, utilArrayIdentical } from '../util/array';
+import { utilGetSetValue, utilNoAuto, utilRebind, utilTagDiff } from '../util';
 
 
 export function uiRawTagEditor(context) {
@@ -90,13 +91,13 @@ export function uiRawTagEditor(context) {
 
         // View Options
         var options = wrap.selectAll('.raw-tag-options')
-            .data((!_entityIDs || _entityIDs.length === 1) ? [0] : []);
+            .data([0]);
 
         options.exit()
             .remove();
 
         var optionsEnter = options.enter()
-            .append('div')
+            .insert('div', ':first-child')
             .attr('class', 'raw-tag-options');
 
         var optionEnter = optionsEnter.selectAll('.raw-tag-option')
@@ -108,7 +109,7 @@ export function uiRawTagEditor(context) {
             .attr('class', function(d) {
                 return 'raw-tag-option raw-tag-option-' + d.id + (_tagView === d.id ? ' selected' : '');
             })
-            .attr('title', function(d) { return d.id; })
+            .attr('title', function(d) { return t('icons.' + d.id); })
             .on('click', function(d) {
                 _tagView = d.id;
                 context.storage('raw-tag-editor-view', d.id);
@@ -138,6 +139,7 @@ export function uiRawTagEditor(context) {
             .append('textarea')
             .attr('class', 'tag-text' + (_tagView !== 'text' ? ' hide' : ''))
             .call(utilNoAuto)
+            .attr('placeholder', t('inspector.key_value'))
             .attr('spellcheck', 'false')
             .merge(textarea);
 
@@ -340,7 +342,9 @@ export function uiRawTagEditor(context) {
             var str = rows
                 .filter(function(row) { return row.key && row.key.trim() !== ''; })
                 .map(function(row) {
-                    var val = row.value ? stringify(row.value) : '';
+                    var rawVal = row.value;
+                    if (rawVal === true) rawVal = '*';
+                    var val = rawVal ? stringify(rawVal) : '';
                     return stringify(row.key) + '=' + val;
                 })
                 .join('\n');
@@ -369,12 +373,20 @@ export function uiRawTagEditor(context) {
             tagDiff.forEach(function(change) {
                 if (isReadOnly({ key: change.key })) return;
 
+                // skip unchanged multiselection placeholders
+                if (change.newVal === '*' && change.oldVal === true) return;
+
                 if (change.type === '-') {
                     _pendingChange[change.key] = undefined;
                 } else if (change.type === '+') {
                     _pendingChange[change.key] = change.newVal || '';
                 }
             });
+
+            if (Object.keys(_pendingChange).length === 0) {
+                _pendingChange = null;
+                return;
+            }
 
             scheduleChange();
         }
@@ -609,16 +621,9 @@ export function uiRawTagEditor(context) {
 
     rawTagEditor.entityIDs = function(val) {
         if (!arguments.length) return _entityIDs;
-        if (_entityIDs !== val) {
+        if (!_entityIDs || !val || !utilArrayIdentical(_entityIDs, val)) {
             _entityIDs = val;
             _orderedKeys = [];
-        }
-
-        if (_entityIDs.length > 1) {
-            // require the list editor when editing multiple entities
-            _tagView = 'list';
-        } else {
-            _tagView = (context.storage('raw-tag-editor-view') || 'list');
         }
 
         var combinedTags = {};
