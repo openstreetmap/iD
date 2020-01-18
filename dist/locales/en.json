@@ -10095,20 +10095,6 @@
                 "description": "Satellite and aerial imagery.",
                 "name": "Mapbox Satellite"
             },
-            "Maxar-Premium": {
-                "attribution": {
-                    "text": "Terms & Feedback"
-                },
-                "description": "Maxar Premium is a mosaic composed of Maxar basemap with select regions filled with +Vivid or custom area of interest imagery, 50cm resolution or better, and refreshed more frequently with ongoing updates.",
-                "name": "Maxar Premium Imagery (Beta)"
-            },
-            "Maxar-Standard": {
-                "attribution": {
-                    "text": "Terms & Feedback"
-                },
-                "description": "Maxar Standard is a curated set of imagery covering 86% of the earth’s landmass, with 30-60cm resolution where available, backfilled by Landsat. Average age is 2.31 years, with some areas updated 2x per year.",
-                "name": "Maxar Standard Imagery (Beta)"
-            },
             "OSM_Inspector-Addresses": {
                 "attribution": {
                     "text": "© Geofabrik GmbH, OpenStreetMap contributors, CC-BY-SA"
@@ -10295,6 +10281,13 @@
                 },
                 "description": "GSI Kiban 2500 via finds.jp. Good for tracing, but a bit older.",
                 "name": "Japan GSI KIBAN 2500"
+            },
+            "gothenburg-citymap": {
+                "attribution": {
+                    "text": "© Gothenburg municipality, CC0"
+                },
+                "description": "The city map is an overview map that describes Gothenburg. It contains general information about land, communications, hydrography, buildings, address numbers and street names, administrative division and other orientation text.",
+                "name": "Gothenburg City map"
             },
             "gsi.go.jp": {
                 "attribution": {
