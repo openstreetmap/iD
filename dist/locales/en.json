@@ -709,7 +709,6 @@
             "back_tooltip": "Change feature",
             "remove": "Remove",
             "search": "Search",
-            "multiselect": "Selected features",
             "unknown": "Unknown",
             "incomplete": "<not downloaded>",
             "feature_list": "Search features",
