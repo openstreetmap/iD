@@ -100,7 +100,7 @@ export function uiEntityEditor(context) {
                 update: function(section) {
                     section
                         .call(selectionList
-                            .setSelectedIDs(_entityIDs)
+                            .selectedIDs(_entityIDs)
                         );
                 }
             },

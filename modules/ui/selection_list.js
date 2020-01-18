@@ -8,7 +8,7 @@ import { utilDisplayName, utilHighlightEntities } from '../util';
 
 export function uiSelectionList(context) {
 
-    var selectedIDs = [];
+    var _selectedIDs = [];
 
 
     function selectEntity(entity) {
@@ -18,21 +18,25 @@ export function uiSelectionList(context) {
 
     function deselectEntity(entity) {
         d3_event.stopPropagation();
+
+        var selectedIDs = _selectedIDs.slice();
         var index = selectedIDs.indexOf(entity.id);
         if (index > -1) {
             selectedIDs.splice(index, 1);
+            context.enter(modeSelect(context, selectedIDs));
         }
-        context.enter(modeSelect(context, selectedIDs));
     }
 
 
     function selectionList(selection) {
 
         var list = selection.selectAll('.feature-list')
-            .data([0])
-            .enter()
+            .data([0]);
+
+        list = list.enter()
             .append('div')
-            .attr('class', 'feature-list');
+            .attr('class', 'feature-list')
+            .merge(list);
 
         context.history()
             .on('change.selectionList', function(difference) {
@@ -41,11 +45,10 @@ export function uiSelectionList(context) {
 
         drawList();
 
-
         function drawList() {
-            var entities = selectedIDs
+            var entities = _selectedIDs
                 .map(function(id) { return context.hasEntity(id); })
-                .filter(function(entity) { return entity; });
+                .filter(Boolean);
 
             var items = list.selectAll('.feature-list-item')
                 .data(entities, osmEntity.key);
@@ -109,10 +112,13 @@ export function uiSelectionList(context) {
         }
     }
 
-    selectionList.setSelectedIDs = function(val) {
-        selectedIDs = val;
+
+    selectionList.selectedIDs = function(val) {
+        if (!arguments.length) return _selectedIDs;
+        _selectedIDs = val;
         return selectionList;
     };
+
 
     return selectionList;
 }
