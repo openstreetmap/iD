@@ -8,6 +8,8 @@ en:
     copy: copy
     view_on: view on {domain}
     favorite: favorite
+    list: list
+    text: text
   toolbar:
     inspect: Inspect
     undo_redo: Undo / Redo

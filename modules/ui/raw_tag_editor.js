@@ -109,7 +109,7 @@ export function uiRawTagEditor(context) {
             .attr('class', function(d) {
                 return 'raw-tag-option raw-tag-option-' + d.id + (_tagView === d.id ? ' selected' : '');
             })
-            .attr('title', function(d) { return d.id; })
+            .attr('title', function(d) { return t('icons.' + d.id); })
             .on('click', function(d) {
                 _tagView = d.id;
                 context.storage('raw-tag-editor-view', d.id);
