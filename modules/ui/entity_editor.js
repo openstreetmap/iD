@@ -245,18 +245,15 @@ export function uiEntityEditor(context) {
                     sectionEnter
                         .append('input')
                         .attr('type', 'text')
-                        .attr('class', 'key-trap');
-                },
-                update: function(section) {
-                    section.select('key-trap')
+                        .attr('class', 'key-trap')
                         .on('keydown.key-trap', function() {
-                        // On tabbing, send focus back to the first field on the inspector-body
-                        // (probably the `name` field) #4159
-                        if (d3_event.keyCode === 9 && !d3_event.shiftKey) {
-                            d3_event.preventDefault();
-                            body.select('input').node().focus();
-                        }
-                    });
+                            // On tabbing, send focus back to the first field on the inspector-body
+                            // (probably the `name` field) #4159
+                            if (d3_event.keyCode === 9 && !d3_event.shiftKey) {
+                                d3_event.preventDefault();
+                                body.select('input').node().focus();
+                            }
+                        });
                 }
             }
         ];
