@@ -47,14 +47,6 @@ en:
       key: N
     add_preset:
       title: "Add {feature}"
-      point:
-        title: "Add {feature} as a point"
-      line:
-        title: "Add {feature} as a line"
-      area:
-        title: "Add {feature} as an area"
-      building:
-        title: "Add {feature} as a building"
     browse:
       title: Browse
       description: Pan and zoom the map.
