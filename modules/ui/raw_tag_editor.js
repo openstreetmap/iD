@@ -285,6 +285,9 @@ export function uiRawTagEditor(context) {
             .attr('title', function(d) {
                 return typeof d.value === 'string' ? d.value : Array.from(_keyValues[d.key]).sort().join('; ');
             })
+            .classed('conflicting', function(d) {
+                return typeof d.value !== 'string';
+            })
             .attr('placeholder', function(d) {
                 return typeof d.value === 'string' ? null : t('inspector.multiple_values');
             })

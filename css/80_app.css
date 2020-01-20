@@ -2359,6 +2359,9 @@ button.raw-tag-option svg.icon {
 [dir='rtl'] .tag-row input.value {
     border-left: 1px solid #ccc;
 }
+.tag-row input.value.conflicting::placeholder {
+    font-style: italic;
+}
 
 .tag-row:first-child input.key {
     border-top: 1px solid #ccc;
