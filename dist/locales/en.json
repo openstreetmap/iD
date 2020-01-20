@@ -754,7 +754,7 @@
                 "description": "Show Detail Panel",
                 "tooltip": "Show advanced background information."
             },
-            "fix_misalignment": "Adjust imagery offset",
+            "fix_misalignment": "Imagery Offset",
             "offset": "Drag anywhere in the gray area below to adjust the imagery offset, or enter the offset values in meters."
         },
         "map_data": {
