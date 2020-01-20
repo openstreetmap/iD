@@ -349,7 +349,10 @@ export function uiRawTagEditor(context) {
                 })
                 .join('\n');
 
-            return _state === 'hover' ? str : str + '\n';
+            if (_state !== 'hover' && str.length) {
+                return str + '\n';
+            }
+            return  str;
         }
 
 
