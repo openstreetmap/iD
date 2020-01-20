@@ -10,6 +10,7 @@ en:
     favorite: favorite
     list: list
     text: text
+    deselect: deselect
   toolbar:
     inspect: Inspect
     undo_redo: Undo / Redo

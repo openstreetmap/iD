@@ -10,7 +10,8 @@
             "view_on": "view on {domain}",
             "favorite": "favorite",
             "list": "list",
-            "text": "text"
+            "text": "text",
+            "deselect": "deselect"
         },
         "toolbar": {
             "inspect": "Inspect",

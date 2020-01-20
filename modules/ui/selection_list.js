@@ -3,6 +3,7 @@ import { event as d3_event, select as d3_select } from 'd3-selection';
 import { modeSelect } from '../modes/select';
 import { osmEntity } from '../osm';
 import { svgIcon } from '../svg/icon';
+import { t } from '../util/locale';
 import { utilDisplayName, utilHighlightEntities } from '../util';
 
 
@@ -79,6 +80,7 @@ export function uiSelectionList(context) {
             enter
                 .append('button')
                 .attr('class', 'close')
+                .attr('title', t('icons.deselect'))
                 .on('click', deselectEntity)
                 .call(svgIcon('#iD-icon-close'));
 
