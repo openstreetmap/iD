@@ -176,7 +176,7 @@ export function uiRawMembershipEditor(context) {
 
         var gt = parents.length > 1000 ? '>' : '';
         selection.call(uiDisclosure(context, 'raw_membership_editor', true)
-            .title(t('inspector.all_relations') + ' (' + gt + memberships.length + ')')
+            .title(t('inspector.relations_count', { count: gt + memberships.length }))
             .expanded(true)
             .updatePreference(false)
             .on('toggled', function(expanded) {

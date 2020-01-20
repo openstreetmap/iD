@@ -25,7 +25,7 @@ export function uiPresetEditor(context) {
 
     function presetEditor(selection) {
         selection.call(uiDisclosure(context, 'preset_fields', true)
-            .title(t('inspector.all_fields'))
+            .title(t('inspector.fields'))
             .content(render)
         );
     }

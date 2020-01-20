@@ -1637,6 +1637,9 @@ a.hide-toggle {
     flex: 0 0 auto;
     padding: 10px;
 }
+.feature-list-item .close .icon {
+    opacity: 0.5;
+}
 .feature-list-item .entity-type {
     color: #7092ff;
 }
@@ -1677,6 +1680,19 @@ a.hide-toggle {
     margin-right: auto;
     margin-left: auto;
     margin-bottom: 10px;
+}
+.selected-features .feature-list {
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    overflow: hidden;
+    margin-top: 5px;
+    background: #fff;
+}
+.selected-features .feature-list-item {
+    border-bottom: 1px solid #ccc;
+}
+.selected-features .feature-list-item:last-child {
+    border: none;
 }
 
 /* Success Screen / Community Index

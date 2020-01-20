@@ -38,7 +38,7 @@ export function uiRawTagEditor(context) {
         var count = Object.keys(_tags).filter(function(d) { return d; }).length;
 
         var disclosure = uiDisclosure(context, 'raw_tag_editor', false)
-            .title(t('inspector.all_tags') + ' (' + count + ')')
+            .title(t('inspector.tags_count', { count: count }))
             .on('toggled', toggled)
             .updatePreference(_updatePreference)
             .content(content);
