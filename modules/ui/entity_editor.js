@@ -95,7 +95,7 @@ export function uiEntityEditor(context) {
 
         var sectionInfos = [
             {
-                klass: 'selection-list',
+                klass: 'selected-features inspector-inner',
                 shouldHave: _entityIDs.length > 1,
                 update: function(section) {
                     section

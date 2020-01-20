@@ -842,8 +842,7 @@ a.hide-toggle {
 .preset-list-pane .inspector-body {
     top: 120px;
 }
-.entity-editor-pane .inspector-body,
-.selection-list-pane .inspector-body {
+.entity-editor-pane .inspector-body {
     top: 60px;
 }
 
@@ -914,6 +913,7 @@ a.hide-toggle {
     font-weight: bold;
     height: 40px;
     line-height: 20px;
+    display: flex;
 }
 .feature-list-item:hover {
     background-color: #ececec;
@@ -927,7 +927,7 @@ a.hide-toggle {
     white-space: nowrap;
     text-overflow: ellipsis;
     overflow: hidden;
-    border-left: 1px solid rgba(0, 0, 0, .1);
+    flex: 1 1 auto;
 }
 [dir='rtl'] .feature-list-item .label {
     text-align: right;
@@ -937,11 +937,11 @@ a.hide-toggle {
     opacity: .5;
 }
 .feature-list-item .close {
-    float: right;
     padding: 10px;
+
 }
 .feature-list-item .close .icon {
-    opacity: 1;
+    opacity: 0.5;
 }
 .feature-list-item .entity-type {
     color: #7092ff;
@@ -958,7 +958,15 @@ a.hide-toggle {
     padding-left: 0;
     padding-right: 10px;
 }
-
+.selected-features .feature-list {
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    overflow: hidden;
+    margin-top: 5px;
+}
+.selected-features .feature-list-item:last-child {
+    border: none;
+}
 
 /* Preset List and Icons
 ------------------------------------------------------- */
