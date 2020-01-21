@@ -10,11 +10,11 @@
   ],
   "license": "ISC",
   "scripts": {
-    "all": "npm-run-all -s clean build dist",
+    "all": "npm-run-all -s clean build build:legacy dist",
     "build": "node --max-old-space-size=4096 build.js",
     "build:legacy": "rollup --config rollup.config.legacy.js",
     "clean": "shx rm -f dist/*.js dist/*.map dist/*.css dist/img/*.svg",
-    "dist": "npm-run-all -p build:legacy dist:**",
+    "dist": "npm-run-all -p dist:**",
     "dist:mapillary": "shx mkdir -p dist/mapillary-js && shx cp -R node_modules/mapillary-js/dist/* dist/mapillary-js/",
     "dist:pannellum": "shx mkdir -p dist/pannellum-streetside && shx cp -R node_modules/pannellum/build/* dist/pannellum-streetside/",
     "dist:min": "uglifyjs dist/iD.legacy.js --compress --mangle --output dist/iD.min.js",
