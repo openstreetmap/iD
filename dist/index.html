@@ -21,11 +21,8 @@
       newScript.onerror = checkScript;
 
       var isIE11 = !!(navigator.userAgent.match(/Trident/) && !navigator.userAgent.match(/MSIE/));
-      if (isIE11) {
-        newScript.src = 'iD.min.js';
-      } else {
-        newScript.src = 'iD.min.js';
-      }
+      // currently all minified files are legacy ES5 because of uglifyJS
+      newScript.src = isIE11 ? 'iD.min.js' : 'id.min.js';
 
       document.getElementsByTagName('head')[0].appendChild(newScript);
 

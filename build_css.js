@@ -18,19 +18,19 @@ function buildCSS() {
 
   return _currBuild =
     Promise.resolve()
-    .then(() => doGlob('css/**/*.css'))
-    .then((files) => doConcat(files, 'dist/iD.css'))
-    .then(() => {
-      console.timeEnd(END);
-      console.log('');
-      _currBuild = null;
-    })
-    .catch((err) => {
-      console.error(err);
-      console.log('');
-      _currBuild = null;
-      process.exit(1);
-    });
+      .then(() => doGlob('css/**/*.css'))
+      .then((files) => doConcat(files, 'dist/iD.css'))
+      .then(() => {
+        console.timeEnd(END);
+        console.log('');
+        _currBuild = null;
+      })
+      .catch((err) => {
+        console.error(err);
+        console.log('');
+        _currBuild = null;
+        process.exit(1);
+      });
 }
 
 

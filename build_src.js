@@ -1,10 +1,9 @@
 /* eslint-disable no-console */
-const buble = require('@rollup/plugin-buble');
 const colors = require('colors/safe');
-const commonjs = require('rollup-plugin-commonjs');
+const commonjs = require('@rollup/plugin-commonjs');
 const includePaths = require('rollup-plugin-includepaths');
-const json = require('rollup-plugin-json');
-const nodeResolve = require('rollup-plugin-node-resolve');
+const json = require('@rollup/plugin-json');
+const nodeResolve = require('@rollup/plugin-node-resolve');
 const rollup = require('rollup');
 const shell = require('shelljs');
 // const visualizer = require('rollup-plugin-visualizer');
@@ -24,18 +23,18 @@ function buildSrc() {
 
   return _currBuild =
     Promise.resolve()
-    .then(() => buildBundle())
-    .then(() => {
-      console.timeEnd(END);
-      console.log('');
-      _currBuild = null;
-    })
-    .catch((err) => {
-      console.error(err);
-      console.log('');
-      _currBuild = null;
-      process.exit(1);
-    });
+      .then(() => buildBundle())
+      .then(() => {
+        console.timeEnd(END);
+        console.log('');
+        _currBuild = null;
+      })
+      .catch((err) => {
+        console.error(err);
+        console.log('');
+        _currBuild = null;
+        process.exit(1);
+      });
 }
 
 
@@ -66,8 +65,7 @@ function buildBundle() {
           dedupe: ['object-inspect']
         }),
         commonjs(),
-        json({ indent: '' }),
-        buble(),
+        json({ indent: '' })
         // viz causes src build to take about 3x longer; skip
         // visualizer({
         //   filename: 'docs/statistics.html',

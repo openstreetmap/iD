@@ -21,11 +21,7 @@
       newScript.onerror = checkScript;
 
       var isIE11 = !!(navigator.userAgent.match(/Trident/) && !navigator.userAgent.match(/MSIE/));
-      if (isIE11) {
-        newScript.src = 'dist/iD.js';
-      } else {
-        newScript.src = 'dist/iD.js';
-      }
+      newScript.src = isIE11 ? 'dist/iD.legacy.js' : 'dist/iD.js';
 
       document.getElementsByTagName('head')[0].appendChild(newScript);
 
