@@ -27,6 +27,13 @@ export function presetCollection(collection) {
             }));
         },
 
+        matchAllGeometry: function(geometries) {
+            return presetCollection(this.collection.filter(function(d) {
+                if (!d) return false;
+                return d.matchAllGeometry(geometries);
+            }));
+        },
+
         matchAnyGeometry: function(geometries) {
             return presetCollection(this.collection.filter(function(d) {
                 return geometries.some(function(geometry) {

@@ -18,27 +18,16 @@ import { utilKeybinding, utilNoAuto, utilRebind } from '../util';
 
 
 export function uiPresetList(context) {
-    var dispatch = d3_dispatch('choose');
-    var _entityID;
-    var _currentPreset;
+    var dispatch = d3_dispatch('cancel', 'choose');
+    var _entityIDs;
+    var _currentPresets;
     var _autofocus = false;
 
 
     function presetList(selection) {
-        if (!_entityID) {
-            //selection.html('');
-            return;
-        }
+        if (!_entityIDs) return;
 
-        var entity = context.entity(_entityID);
-        var geometry = context.geometry(_entityID);
-
-        // Treat entities on addr:interpolation lines as points, not vertices (#3241)
-        if (geometry === 'vertex' && entity.isOnAddressLine(context.graph())) {
-            geometry = 'point';
-        }
-
-        var presets = context.presets().matchGeometry(geometry);
+        var presets = context.presets().matchAllGeometry(entityGeometries());
 
         selection.html('');
 
@@ -53,7 +42,7 @@ export function uiPresetList(context) {
         messagewrap
             .append('button')
             .attr('class', 'preset-choose')
-            .on('click', function() { dispatch.call('choose', this, _currentPreset); })
+            .on('click', function() { dispatch.call('cancel', this); })
             .call(svgIcon((textDirection === 'rtl') ? '#iD-icon-backward' : '#iD-icon-forward'));
 
         function initialKeydown() {
@@ -63,7 +52,7 @@ export function uiPresetList(context) {
                  d3_event.keyCode === utilKeybinding.keyCodes['⌦'])) {
                 d3_event.preventDefault();
                 d3_event.stopPropagation();
-                operationDelete([_entityID], context)();
+                operationDelete(_entityIDs, context)();
 
             // hack to let undo work when search is autofocused
             } else if (search.property('value').length === 0 &&
@@ -104,19 +93,19 @@ export function uiPresetList(context) {
         function inputevent() {
             var value = search.property('value');
             list.classed('filtered', value.length);
-            var entity = context.entity(_entityID);
+            var extent = combinedEntityExtent();
             var results, messageText;
-            if (value.length && entity) {
-                var center = entity.extent(context.graph()).center();
+            if (value.length && extent) {
+                var center = extent.center();
                 var countryCode = countryCoder.iso1A2Code(center);
 
-                results = presets.search(value, geometry, countryCode && countryCode.toLowerCase());
+                results = presets.search(value, entityGeometries()[0], countryCode && countryCode.toLowerCase());
                 messageText = t('inspector.results', {
                     n: results.collection.length,
                     search: value
                 });
             } else {
-                results = context.presets().defaults(geometry, 36);
+                results = context.presets().defaults(entityGeometries()[0], 36);
                 messageText = t('inspector.choose');
             }
             list.call(drawList, results);
@@ -151,14 +140,17 @@ export function uiPresetList(context) {
         var list = listWrap
             .append('div')
             .attr('class', 'preset-list fillL cf')
-            .call(drawList, context.presets().defaults(geometry, 36));
+            .call(drawList, context.presets().defaults(entityGeometries()[0], 36));
 
         context.features().on('change.preset-list', updateForFeatureHiddenState);
     }
 
 
     function drawList(list, presets) {
+        presets = presets.matchAllGeometry(entityGeometries());
         var collection = presets.collection.reduce(function(collection, preset) {
+            if (!preset) return collection;
+
             if (preset.members) {
                 if (preset.members.collection.filter(function(preset) {
                     return preset.addable();
@@ -182,7 +174,7 @@ export function uiPresetList(context) {
         items.enter()
             .append('div')
             .attr('class', function(item) { return 'preset-list-item preset-' + item.preset.id.replace('/', '-'); })
-            .classed('current', function(item) { return item.preset === _currentPreset; })
+            .classed('current', function(item) { return _currentPresets.indexOf(item.preset) !== -1; })
             .each(function(item) { d3_select(this).call(item); })
             .style('opacity', 0)
             .transition()
@@ -285,12 +277,14 @@ export function uiPresetList(context) {
                 item.choose();
             }
 
+            var geometries = entityGeometries();
+
             var button = wrap
                 .append('button')
                 .attr('class', 'preset-list-button')
                 .classed('expanded', false)
                 .call(uiPresetIcon(context)
-                    .geometry(context.geometry(_entityID))
+                    .geometry(geometries.length === 1 && geometries[0])
                     .preset(preset))
                 .on('click', click)
                 .on('keydown', function() {
@@ -355,7 +349,7 @@ export function uiPresetList(context) {
                     .style('padding-bottom', '0px');
             } else {
                 shown = true;
-                var members = preset.members.matchGeometry(context.geometry(_entityID));
+                var members = preset.members.matchAllGeometry(entityGeometries());
                 sublist.call(drawList, members);
                 box.transition()
                     .duration(200)
@@ -375,10 +369,12 @@ export function uiPresetList(context) {
             var wrap = selection.append('div')
                 .attr('class', 'preset-list-button-wrap');
 
+            var geometries = entityGeometries();
+
             var button = wrap.append('button')
                 .attr('class', 'preset-list-button')
                 .call(uiPresetIcon(context)
-                    .geometry(context.geometry(_entityID))
+                    .geometry(geometries.length === 1 && geometries[0])
                     .preset(preset))
                 .on('click', item.choose)
                 .on('keydown', itemKeydown);
@@ -404,9 +400,16 @@ export function uiPresetList(context) {
         item.choose = function() {
             if (d3_select(this).classed('disabled')) return;
 
-            context.presets().setMostRecent(preset, context.geometry(_entityID));
+            context.presets().setMostRecent(preset, entityGeometries()[0]);
             context.perform(
-                actionChangePreset(_entityID, _currentPreset, preset),
+                function(graph) {
+                    for (var i in _entityIDs) {
+                        var entityID = _entityIDs[i];
+                        var oldPreset = context.presets().match(graph.entity(entityID), graph);
+                        graph = actionChangePreset(entityID, oldPreset, preset)(graph);
+                    }
+                    return graph;
+                },
                 t('operations.change_tags.annotation')
             );
 
@@ -420,26 +423,30 @@ export function uiPresetList(context) {
         };
 
         item.preset = preset;
-        item.reference = uiTagReference(preset.reference(context.geometry(_entityID)), context);
+        item.reference = uiTagReference(preset.reference(entityGeometries()[0]), context);
 
         return item;
     }
 
 
     function updateForFeatureHiddenState() {
-        if (!context.hasEntity(_entityID)) return;
+        if (!_entityIDs.every(context.hasEntity)) return;
 
-        var geometry = context.geometry(_entityID);
+        var geometries = entityGeometries();
         var button = d3_selectAll('.preset-list .preset-list-button');
 
         // remove existing tooltips
         button.call(tooltip().destroyAny);
 
         button.each(function(item, index) {
-            var hiddenPresetFeaturesId = context.features().isHiddenPreset(item.preset, geometry);
+            var hiddenPresetFeaturesId;
+            for (var i in geometries) {
+                hiddenPresetFeaturesId = context.features().isHiddenPreset(item.preset, geometries[i]);
+                if (hiddenPresetFeaturesId) break;
+            }
             var isHiddenPreset = !context.inIntro() &&
                 !!hiddenPresetFeaturesId &&
-                item.preset !== _currentPreset;
+                (_currentPresets.length !== 1 || item.preset !== _currentPresets[0]);
 
             d3_select(this)
                 .classed('disabled', isHiddenPreset);
@@ -462,23 +469,60 @@ export function uiPresetList(context) {
         return presetList;
     };
 
-
-    presetList.entityID = function(val) {
-        if (!arguments.length) return _entityID;
-        _entityID = val;
-        if (_entityID) {
-            presetList.preset(context.presets().match(context.entity(_entityID), context.graph()));
+    presetList.entityIDs = function(val) {
+        if (!arguments.length) return _entityIDs;
+        _entityIDs = val;
+        if (_entityIDs && _entityIDs.length) {
+            var presets = _entityIDs.map(function(entityID) {
+                return context.presets().match(context.entity(entityID), context.graph());
+            });
+            presetList.presets(presets);
         }
         return presetList;
     };
 
-
-    presetList.preset = function(val) {
-        if (!arguments.length) return _currentPreset;
-        _currentPreset = val;
+    presetList.presets = function(val) {
+        if (!arguments.length) return _currentPresets;
+        _currentPresets = val;
         return presetList;
     };
 
+    function entityGeometries() {
+
+        var counts = {};
+
+        for (var i in _entityIDs) {
+            var entityID = _entityIDs[i];
+            var entity = context.entity(entityID);
+            var geometry = context.geometry(entityID);
+
+            // Treat entities on addr:interpolation lines as points, not vertices (#3241)
+            if (geometry === 'vertex' && entity.isOnAddressLine(context.graph())) {
+                geometry = 'point';
+            }
+
+            if (!counts[geometry]) counts[geometry] = 0;
+            counts[geometry] += 1;
+        }
+
+        return Object.keys(counts).sort(function(geom1, geom2) {
+            return counts[geom2] - counts[geom1];
+        });
+    }
+
+    function combinedEntityExtent() {
+        var extent;
+        _entityIDs.forEach(function(entityID) {
+            var entity = context.graph().entity(entityID);
+            var entityExtent = entity.extent(context.graph());
+            if (!extent) {
+                extent = entityExtent;
+            } else {
+                extent = extent.extend(entityExtent);
+            }
+        });
+        return extent;
+    }
 
     return utilRebind(presetList, dispatch, 'on');
 }

@@ -553,10 +553,11 @@ en:
     wiki_en_reference: View documentation in English
     key_value: "key=value"
     multiple_values: Multiple Values
+    multiple_types: Multiple Types
     hidden_preset:
       manual: "{features} are hidden. Enable them in the Map Data pane."
       zoom: "{features} are hidden. Zoom in to enable them."
-    back_tooltip: Change feature
+    back_tooltip: Change feature type
     remove: Remove
     search: Search
     unknown: Unknown

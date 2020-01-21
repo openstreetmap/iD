@@ -1007,6 +1007,7 @@ a.hide-toggle {
     display: flex;
     align-items: center;
     justify-content: center;
+    flex: 0 0 auto;
 }
 .preset-icon-container.small {
     width: 40px;
@@ -1134,26 +1135,32 @@ a.hide-toggle {
     align-items: center;
     background-color: #f6f6f6;
     text-align: left;
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    right: 0;
     padding: 5px 10px;
-    left: 60px;
     border-left: 1px solid rgba(0, 0, 0, .1);
+    flex: 1 1 100%;
 }
 [dir='rtl'] .preset-list-button .label {
     text-align: right;
-    left: 0;
-    right: 60px;
     border-left: none;
     border-right: 1px solid rgba(0, 0, 0, .1);
+}
+[dir='ltr'] .preset-list-item.mixed-types .preset-list-button .label {
+    border-top-right-radius: 4px;
+    border-bottom-right-radius: 4px;
+}
+[dir='rtl'] .preset-list-item.mixed-types .preset-list-button .label {
+    border-top-left-radius: 4px;
+    border-bottom-left-radius: 4px;
 }
 [dir='ltr'] .category .preset-list-button .label {
     border-radius: 0px 4px 4px 0px;
 }
 [dir='rtl'] .category .preset-list-button .label {
     border-radius: 4px 0px 0px 4px;
+}
+
+.preset-list-item.mixed-types .label {
+    font-style: italic;
 }
 
 .preset-list-button .label-inner {

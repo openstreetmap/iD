@@ -17,6 +17,7 @@ import { uiPresetEditor } from './preset_editor';
 import { uiEntityIssues } from './entity_issues';
 import { uiSelectionList } from './selection_list';
 import { uiTooltipHtml } from './tooltipHtml';
+import { utilArrayIdentical } from '../util/array';
 import { utilCleanTags, utilRebind } from '../util';
 
 
@@ -27,7 +28,7 @@ export function uiEntityEditor(context) {
     var _modified = false;
     var _base;
     var _entityIDs;
-    var _activePreset;
+    var _activePresets = [];
     var _tagReference;
     var _newFeature;
 
@@ -40,9 +41,9 @@ export function uiEntityEditor(context) {
     var rawMembershipEditor = uiRawMembershipEditor(context);
 
     function entityEditor(selection) {
-        var entityID = singularEntityID();
-        var entity = entityID && context.entity(entityID);
-        var tags = entity && Object.assign({}, entity.tags);  // shallow copy
+
+        var singularEntityID = _entityIDs.length === 1 && _entityIDs[0];
+        var singularEntity = singularEntityID && context.entity(singularEntityID);
 
         // Header
         var header = selection.selectAll('.header')
@@ -72,12 +73,11 @@ export function uiEntityEditor(context) {
             .merge(headerEnter);
 
         header.selectAll('h3')
-            .text(entityID ? t('inspector.edit') : t('inspector.edit_features'));
+            .text(singularEntityID ? t('inspector.edit') : t('inspector.edit_features'));
 
         header.selectAll('.preset-reset')
-            .style('display', entityID ? null : 'none')
             .on('click', function() {
-                dispatch.call('choose', this, _activePreset);
+                dispatch.call('choose', this, _activePresets);
             });
 
         // Body
@@ -95,27 +95,24 @@ export function uiEntityEditor(context) {
 
         var sectionInfos = [
             {
-                klass: 'selected-features inspector-inner',
-                shouldHave: _entityIDs.length > 1,
-                update: function(section) {
-                    section
-                        .call(selectionList
-                            .selectedIDs(_entityIDs)
-                        );
-                }
-            },
-            {
                 klass: 'preset-list-item inspector-inner',
-                shouldHave: entityID,
+                shouldHave: true,
                 create: function(sectionEnter) {
 
                     var presetButtonWrap = sectionEnter
                         .append('div')
                         .attr('class', 'preset-list-button-wrap');
 
-                    var presetButton = presetButtonWrap.append('button')
+                    var presetButton = presetButtonWrap
+                        .append('button')
                         .attr('class', 'preset-list-button preset-reset')
-                        .call(tooltip().title(t('inspector.back_tooltip')).placement('bottom'));
+                        .call(tooltip()
+                            .title(t('inspector.back_tooltip'))
+                            .placement('bottom')
+                        );
+
+                    presetButton.append('div')
+                        .attr('class', 'preset-icon-container');
 
                     presetButton
                         .append('div')
@@ -125,6 +122,9 @@ export function uiEntityEditor(context) {
 
                     presetButtonWrap.append('div')
                         .attr('class', 'accessory-buttons');
+
+                    sectionEnter.append('div')
+                        .attr('class', 'tag-reference-body-wrap');
 
                     // update quick links
                     var choices = [{
@@ -145,18 +145,22 @@ export function uiEntityEditor(context) {
                 },
                 update: function(section) {
 
+                    section.classed('mixed-types', _activePresets.length > 1);
+
                     // update header
                     if (_tagReference) {
                         section.selectAll('.preset-list-button-wrap .accessory-buttons')
+                            .style('display', _activePresets.length === 1 ? null : 'none')
                             .call(_tagReference.button);
 
-                        section.selectAll('.preset-list-item')
+                        section.selectAll('.tag-reference-body-wrap')
+                            .style('display', _activePresets.length === 1 ? null : 'none')
                             .call(_tagReference.body);
                     }
 
                     section.selectAll('.preset-reset')
                         .on('click', function() {
-                             dispatch.call('choose', this, _activePreset);
+                             dispatch.call('choose', this, _activePresets);
                         })
                         .on('mousedown', function() {
                             d3_event.preventDefault();
@@ -167,16 +171,19 @@ export function uiEntityEditor(context) {
                             d3_event.stopPropagation();
                         });
 
+                    var geometries = entityGeometries();
                     section.select('.preset-list-item button')
                         .call(uiPresetIcon(context)
-                            .geometry(context.geometry(entityID))
-                            .preset(_activePreset)
+                            .geometry(_activePresets.length === 1 ? (geometries.length === 1 && geometries[0]) : null)
+                            .preset(_activePresets.length === 1 ? _activePresets[0] : context.presets().item('point'))
                         );
 
                     // NOTE: split on en-dash, not a hypen (to avoid conflict with hyphenated names)
+                    var names = _activePresets.length === 1 ? _activePresets[0].name().split(' – ') : [t('inspector.multiple_types')];
+
                     var label = section.select('.label-inner');
                     var nameparts = label.selectAll('.namepart')
-                        .data(_activePreset.name().split(' – '), function(d) { return d; });
+                        .data(names, function(d) { return d; });
 
                     nameparts.exit()
                         .remove();
@@ -188,24 +195,35 @@ export function uiEntityEditor(context) {
                         .text(function(d) { return d; });
 
                 }
-            }, {
+            },
+            {
+                klass: 'selected-features inspector-inner',
+                shouldHave: _entityIDs.length > 1,
+                update: function(section) {
+                    section
+                        .call(selectionList
+                            .selectedIDs(_entityIDs)
+                        );
+                }
+            },
+            {
                 klass: 'entity-issues',
-                shouldHave: entityID,
+                shouldHave: singularEntityID,
                 update: function(section) {
                     section
                         .call(entityIssues
-                            .entityID(entityID)
+                            .entityID(singularEntityID)
                         );
                 }
             }, {
                 klass: 'preset-editor',
-                shouldHave: entityID,
+                shouldHave: singularEntityID,
                 update: function(section) {
                     section
                         .call(presetEditor
-                            .preset(_activePreset)
-                            .entityID(entityID)
-                            .tags(tags)
+                            .preset(_activePresets[0])
+                            .entityID(singularEntityID)
+                            .tags(Object.assign({}, singularEntity.tags))
                             .state(_state)
                         );
                 }
@@ -215,27 +233,27 @@ export function uiEntityEditor(context) {
                 update: function(section) {
                     section
                         .call(rawTagEditor
-                            .preset(_activePreset)
+                            .preset(_activePresets[0])
                             .entityIDs(_entityIDs)
                             .state(_state)
                         );
                 }
             }, {
                 klass: 'raw-member-editor inspector-inner',
-                shouldHave: entity && entity.type === 'relation',
+                shouldHave: singularEntity && singularEntity.type === 'relation',
                 update: function(section) {
                     section
                         .call(rawMemberEditor
-                            .entityID(entityID)
+                            .entityID(singularEntityID)
                         );
                 }
             }, {
                 klass: 'raw-membership-editor inspector-inner',
-                shouldHave: entityID,
+                shouldHave: singularEntityID,
                 update: function(section) {
                     section
                         .call(rawMembershipEditor
-                            .entityID(entityID)
+                            .entityID(singularEntityID)
                         );
                 }
             }, {
@@ -303,11 +321,22 @@ export function uiEntityEditor(context) {
             _entityIDs = _entityIDs.filter(context.hasEntity);
             if (!_entityIDs.length) return;
 
-            loadActivePreset();
+            var priorActivePreset = _activePresets.length === 1 && _activePresets[0];
+
+            loadActivePresets();
 
             var graph = context.graph();
             entityEditor.modified(_base !== graph);
             entityEditor(selection);
+
+            if (priorActivePreset && _activePresets.length === 1 && priorActivePreset !== _activePresets[0]) {
+                // flash the button to indicate the preset changed
+                d3_selectAll('.entity-editor button.preset-reset .label')
+                    .style('background-color', '#fff')
+                    .transition()
+                    .duration(750)
+                    .style('background-color', null);
+            }
         }
     }
 
@@ -381,13 +410,13 @@ export function uiEntityEditor(context) {
 
     entityEditor.entityIDs = function(val) {
         if (!arguments.length) return _entityIDs;
-        if (_entityIDs === val) return entityEditor;  // exit early if no change
+        if (val && _entityIDs && utilArrayIdentical(_entityIDs, val)) return entityEditor;  // exit early if no change
 
         _entityIDs = val;
         _base = context.graph();
         _coalesceChanges = false;
 
-        loadActivePreset();
+        loadActivePresets();
 
         return entityEditor
             .modified(false);
@@ -401,56 +430,68 @@ export function uiEntityEditor(context) {
     };
 
 
-    function singularEntityID() {
-        if (_entityIDs.length === 1) {
-            return _entityIDs[0];
-        }
-        return null;
-    }
-
-
-    function loadActivePreset() {
-        var entityID = singularEntityID();
-        var entity = entityID && context.hasEntity(entityID);
-        if (!entity) return;
+    function loadActivePresets() {
 
         var graph = context.graph();
-        var match = context.presets().match(entity, graph);
 
-        // A "weak" preset doesn't set any tags. (e.g. "Address")
-        var weakPreset = _activePreset &&
-            Object.keys(_activePreset.addTags || {}).length === 0;
+        var counts = {};
 
-        // Don't replace a weak preset with a fallback preset (e.g. "Point")
-        if ((weakPreset && match.isFallback()) ||
-            // don't reload for same preset
-            match === _activePreset) return;
+        for (var i in _entityIDs) {
+            var entity = graph.hasEntity(_entityIDs[i]);
+            if (!entity) return;
 
-        if (_activePreset && match.id !== _activePreset.id) {
-            // flash the button to indicate the preset changed
-            d3_selectAll('.entity-editor button.preset-reset .label')
-                .style('background-color', '#fff')
-                .transition()
-                .duration(500)
-                .style('background-color', null);
+            var match = context.presets().match(entity, graph);
+
+            if (!counts[match.id]) counts[match.id] = 0;
+            counts[match.id] += 1;
         }
 
-        entityEditor.preset(match);
+        var matches = Object.keys(counts).sort(function(p1, p2) {
+            return counts[p2] - counts[p1];
+        }).map(function(pID) {
+            return context.presets().item(pID);
+        });
+
+        // A "weak" preset doesn't set any tags. (e.g. "Address")
+        var weakPreset = _activePresets.length === 1 &&
+            Object.keys(_activePresets[0].addTags || {}).length === 0;
+        // Don't replace a weak preset with a fallback preset (e.g. "Point")
+        if (weakPreset && matches.length === 0 && matches[0].isFallback()) return;
+
+        entityEditor.presets(matches);
     }
 
-    entityEditor.preset = function(val) {
-        if (!arguments.length) return _activePreset;
-        if (val !== _activePreset) {
-            _activePreset = val;
-            var entityID = singularEntityID();
-            if (entityID) {
-                _tagReference = uiTagReference(_activePreset.reference(context.geometry(entityID)), context)
+    entityEditor.presets = function(val) {
+        if (!arguments.length) return _activePresets;
+
+        // don't reload the same preset
+        if (!utilArrayIdentical(val, _activePresets)) {
+
+            _activePresets = val;
+
+            var geometries = entityGeometries();
+            if (_activePresets.length === 1 && geometries.length) {
+                _tagReference = uiTagReference(_activePresets[0].reference(geometries[0]), context)
                     .showing(false);
             }
         }
         return entityEditor;
     };
 
+    function entityGeometries() {
+
+        var counts = {};
+
+        for (var i in _entityIDs) {
+            var geometry = context.geometry(_entityIDs[i]);
+            if (!counts[geometry]) counts[geometry] = 0;
+            counts[geometry] += 1;
+        }
+
+        return Object.keys(counts).sort(function(geom1, geom2) {
+            return counts[geom2] - counts[geom1];
+        });
+    }
 
     return utilRebind(entityEditor, dispatch, 'on');
 }

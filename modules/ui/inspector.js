@@ -19,9 +19,13 @@ export function uiInspector(context) {
 
     function inspector(selection, newFeature) {
         presetList
-            .entityID(_entityIDs.length === 1 && _entityIDs[0])
+            .entityIDs(_entityIDs)
             .autofocus(_newFeature)
-            .on('choose', inspector.setPreset);
+            .on('choose', inspector.setPreset)
+            .on('cancel', function() {
+                wrap.transition()
+                    .styleTween('right', function() { return d3_interpolate('-100%', '0%'); });
+            });
 
         entityEditor
             .state(_state)
@@ -96,22 +100,17 @@ export function uiInspector(context) {
             );
     }
 
-    inspector.showList = function(preset) {
-
-        if (!preset) {
-            if (_entityIDs.length !== 1) return;
-
-            var entity = context.hasEntity(_entityIDs[0]);
-            if (!entity) return;
-
-            preset = context.presets().match(entity, context.graph());
-        }
+    inspector.showList = function(presets) {
 
         wrap.transition()
             .styleTween('right', function() { return d3_interpolate('0%', '-100%'); });
 
+        if (presets) {
+            presetList.presets(presets);
+        }
+
         presetPane
-            .call(presetList.preset(preset).autofocus(true));
+            .call(presetList.autofocus(true));
     };
 
     inspector.setPreset = function(preset) {
@@ -119,14 +118,14 @@ export function uiInspector(context) {
         // upon setting multipolygon, go to the area preset list instead of the editor
         if (preset.id === 'type/multipolygon') {
             presetPane
-                .call(presetList.preset(preset).autofocus(true));
+                .call(presetList.autofocus(true));
 
         } else {
             wrap.transition()
                 .styleTween('right', function() { return d3_interpolate('-100%', '0%'); });
 
             editorPane
-                .call(entityEditor.preset(preset));
+                .call(entityEditor.presets([preset]));
         }
 
     };

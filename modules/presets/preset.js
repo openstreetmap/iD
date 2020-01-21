@@ -109,6 +109,13 @@ export function presetPreset(id, preset, fields, addable, rawPresets) {
     };
 
 
+    preset.matchAllGeometry = function(geometries) {
+        return geometries.every(function(geometry) {
+            return preset.geometry.indexOf(geometry) >= 0;
+        });
+    };
+
+
     preset.originalScore = preset.matchScore || 1;
 
 

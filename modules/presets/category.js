@@ -28,6 +28,12 @@ export function presetCategory(id, category, all) {
         return category.geometry.indexOf(geometry) >= 0;
     };
 
+    category.matchAllGeometry = function(geometries) {
+        return category.members.collection.some(function(preset) {
+            return preset.matchAllGeometry(geometries);
+        });
+    };
+
 
     category.matchScore = function() {
         return -1;
