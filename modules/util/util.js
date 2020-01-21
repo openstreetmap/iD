@@ -167,12 +167,17 @@ export function utilDisplayName(entity) {
     var localizedNameKey = 'name:' + utilDetect().locale.toLowerCase().split('-')[0];
     var name = entity.tags[localizedNameKey] || entity.tags.name || entity.tags["building:flats"] || entity.tags.flats || entity.tags.houses || '';
     var network = entity.tags.cycle_network || entity.tags.network;
+    var maxSpeed = entity.tags.maxspeed;
 
     if (!name && entity.tags.ref) {
         name = entity.tags.ref;
         if (network) {
             name = network + ' ' + name;
         }
+    }
+
+    if (maxSpeed) {
+        name = 'ms:' + maxSpeed + '    ' + name;
     }
 
     return name;

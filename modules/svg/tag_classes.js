@@ -1,5 +1,5 @@
 import { select as d3_select } from 'd3-selection';
-import { osmPavedTags, osmPrivateTags, osmCustomersTags, osmDestinationTags } from '../osm/tags';
+import { osmPavedTags, osmPrivateTags, osmCustomersTags, osmDestinationTags, osmSidewalkBoth, osmSidewalkRightOrLeft, osmSidewalkNo } from '../osm/tags';
 
 
 export function svgTagClasses() {
@@ -160,6 +160,8 @@ export function svgTagClasses() {
             var _private = false;
             var customers = false;
             var destination = false;
+            var sidewalk = 'blank';
+
             for (k in t) {
                 v = t[k];
                 if (k in osmPavedTags) {
@@ -175,6 +177,15 @@ export function svgTagClasses() {
                 if (k in osmDestinationTags) {
                     destination = !!osmDestinationTags[k][v];
                 }
+                if (k in osmSidewalkBoth && !!osmSidewalkBoth[k][v]) {
+                    sidewalk = 'both';
+                }
+                if (k in osmSidewalkRightOrLeft && !!osmSidewalkRightOrLeft[k][v]) {
+                    sidewalk = 'oneside';
+                }
+                if (k in osmSidewalkNo && !!osmSidewalkNo[k][v]) {
+                    sidewalk = 'no';
+                }
             }
             if (!paved) {
                 classes.push('tag-unpaved');
@@ -187,6 +198,9 @@ export function svgTagClasses() {
             }
             if (destination) {
                 classes.push('tag-destination');
+            }
+            if (sidewalk !== 'blank') {
+                classes.push('tag-sidewalk-' + sidewalk);
             }
         }
 
