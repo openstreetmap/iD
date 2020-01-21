@@ -709,21 +709,18 @@ path.line.stroke.tag-highway.tag-footway-access_aisle.tag-destination {
 
 
 path.line.casing.tag-highway.tag-sidewalk-both {
-    stroke-width: 14;
+    stroke-width: 12;
     stroke: #35972c;
-    stroke-dasharray: 4, 2;
 }
 
 path.line.casing.tag-highway.tag-sidewalk-oneside {
-    stroke-width: 14;
+    stroke-width: 12;
     stroke: #fbff00;
-    stroke-dasharray: 4, 2;
 }
 
 path.line.casing.tag-highway.tag-sidewalk-no {
-    stroke-width: 14;
+    stroke-width: 12;
     stroke: #ff9100;
-    stroke-dasharray: 4, 2;
 }
 
 /* highway midpoints */
