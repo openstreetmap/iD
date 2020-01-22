@@ -27,11 +27,7 @@ export default {
         'martinez-polygon-clipping': 'node_modules/martinez-polygon-clipping/dist/martinez.umd.js'
       }
     }),
-    nodeResolve({
-      mainFields: ['module', 'main'],
-      browser: false,
-      dedupe: ['object-inspect']
-    }),
+    nodeResolve({ dedupe: ['object-inspect'] }),
     commonjs(),
     json({ indent: '' }),
     visualizer({
