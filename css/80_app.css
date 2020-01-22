@@ -1138,6 +1138,7 @@ a.hide-toggle {
     padding: 5px 10px;
     border-left: 1px solid rgba(0, 0, 0, .1);
     flex: 1 1 100%;
+    align-self: stretch;
 }
 [dir='rtl'] .preset-list-button .label {
     text-align: right;
