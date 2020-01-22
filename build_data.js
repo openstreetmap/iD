@@ -25,6 +25,14 @@ const request = require('request').defaults({ maxSockets: 1 });
 let _currBuild = null;
 
 
+// if called directly, do the thing.
+if (process.argv[1].indexOf('build_data.js') > -1) {
+  buildData();
+} else {
+  module.exports = buildCSS;
+}
+
+
 function buildData() {
   if (_currBuild) return _currBuild;
 

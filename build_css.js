@@ -5,6 +5,13 @@ const glob = require('glob');
 
 let _currBuild = null;
 
+// if called directly, do the thing.
+if (process.argv[1].indexOf('build_css.js') > -1) {
+  buildCSS();
+} else {
+  module.exports = buildCSS;
+}
+
 
 function buildCSS() {
   if (_currBuild) return _currBuild;
@@ -52,5 +59,3 @@ function doConcat(files, output) {
   });
 }
 
-
-module.exports = buildCSS;
