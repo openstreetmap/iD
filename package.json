@@ -12,7 +12,10 @@
   "scripts": {
     "all": "npm-run-all -s clean build build:legacy dist",
     "build": "node --max-old-space-size=4096 build.js",
-    "build:legacy": "rollup --config rollup.config.legacy.js",
+    "build:all": "npm-run-all -s build:development",
+    "build:dev": "rollup --config config/rollup.config.dev.js",
+    "build:legacy": "rollup --config config/rollup.config.legacy.js",
+    "build:stats": "rollup --config config/rollup.config.stats.js",
     "clean": "shx rm -f dist/*.js dist/*.map dist/*.css dist/img/*.svg",
     "dist": "npm-run-all -p dist:**",
     "dist:mapillary": "shx mkdir -p dist/mapillary-js && shx cp -R node_modules/mapillary-js/dist/* dist/mapillary-js/",

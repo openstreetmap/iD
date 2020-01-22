@@ -5,6 +5,11 @@ import includePaths from 'rollup-plugin-includepaths';
 import json from '@rollup/plugin-json';
 import nodeResolve from '@rollup/plugin-node-resolve';
 
+
+// The "legacy" build includes all modules in a single bundle:
+// * Runs `buble` to transpile ES6 -> ES5 (needed for IE11 and PhantomJS)
+// * No sourcemaps
+
 export default {
   input: './modules/id.js',
   onwarn: onWarn,
