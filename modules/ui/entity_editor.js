@@ -156,7 +156,7 @@ export function uiEntityEditor(context) {
                             .append('div')
                             .attr('class', 'tag-reference-body-wrap')
                             .merge(tagReferenceBodyWrap);
-                        /*
+
                         selection
                             .selectAll('.preset-quick-links')
                             .data([0])
@@ -173,7 +173,7 @@ export function uiEntityEditor(context) {
                                     context.mode().zoomToSelected();
                                 }
                             }]));
-                        */
+
                         // update header
                         if (_tagReference) {
                             selection.selectAll('.preset-list-button-wrap .accessory-buttons')
