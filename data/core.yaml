@@ -536,6 +536,7 @@ en:
     show_more: Show More
     view_on_osm: View on openstreetmap.org
     view_on_keepRight: View on keepright.at
+    feature_type: Feature Type
     fields: Fields
     tags_count: "Tags ({count})"
     members_count: "Members ({count})"

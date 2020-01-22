@@ -1290,8 +1290,8 @@ a.hide-toggle {
 .preset-editor .form-fields-container:empty {
     display: none;
 }
-.entity-editor-pane .preset-list-item {
-    margin-bottom: 0;
+.preset-list-item a.hide-toggle {
+    margin-bottom: 5px;
 }
 
 /*

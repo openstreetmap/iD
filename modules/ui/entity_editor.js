@@ -7,6 +7,7 @@ import { tooltip } from '../util/tooltip';
 import { actionChangeTags } from '../actions/change_tags';
 import { modeBrowse } from '../modes/browse';
 import { svgIcon } from '../svg/icon';
+import { uiDisclosure } from './disclosure';
 import { uiPresetIcon } from './preset_icon';
 import { uiQuickLinks } from './quick_links';
 import { uiRawMemberEditor } from './raw_member_editor';
@@ -95,108 +96,6 @@ export function uiEntityEditor(context) {
 
         var sectionInfos = [
             {
-                klass: 'preset-list-item inspector-inner',
-                shouldHave: true,
-                create: function(sectionEnter) {
-
-                    var presetButtonWrap = sectionEnter
-                        .append('div')
-                        .attr('class', 'preset-list-button-wrap');
-
-                    var presetButton = presetButtonWrap
-                        .append('button')
-                        .attr('class', 'preset-list-button preset-reset')
-                        .call(tooltip()
-                            .title(t('inspector.back_tooltip'))
-                            .placement('bottom')
-                        );
-
-                    presetButton.append('div')
-                        .attr('class', 'preset-icon-container');
-
-                    presetButton
-                        .append('div')
-                        .attr('class', 'label')
-                        .append('div')
-                        .attr('class', 'label-inner');
-
-                    presetButtonWrap.append('div')
-                        .attr('class', 'accessory-buttons');
-
-                    sectionEnter.append('div')
-                        .attr('class', 'tag-reference-body-wrap');
-
-                    // update quick links
-                    var choices = [{
-                        id: 'zoom_to',
-                        label: 'inspector.zoom_to.title',
-                        tooltip: function() {
-                            return uiTooltipHtml(t('inspector.zoom_to.tooltip_feature'), t('inspector.zoom_to.key'));
-                        },
-                        click: function zoomTo() {
-                            context.mode().zoomToSelected();
-                        }
-                    }];
-
-                    sectionEnter
-                        .append('div')
-                        .attr('class', 'preset-quick-links')
-                        .call(quickLinks.choices(choices));
-                },
-                update: function(section) {
-
-                    section.classed('mixed-types', _activePresets.length > 1);
-
-                    // update header
-                    if (_tagReference) {
-                        section.selectAll('.preset-list-button-wrap .accessory-buttons')
-                            .style('display', _activePresets.length === 1 ? null : 'none')
-                            .call(_tagReference.button);
-
-                        section.selectAll('.tag-reference-body-wrap')
-                            .style('display', _activePresets.length === 1 ? null : 'none')
-                            .call(_tagReference.body);
-                    }
-
-                    section.selectAll('.preset-reset')
-                        .on('click', function() {
-                             dispatch.call('choose', this, _activePresets);
-                        })
-                        .on('mousedown', function() {
-                            d3_event.preventDefault();
-                            d3_event.stopPropagation();
-                        })
-                        .on('mouseup', function() {
-                            d3_event.preventDefault();
-                            d3_event.stopPropagation();
-                        });
-
-                    var geometries = entityGeometries();
-                    section.select('.preset-list-item button')
-                        .call(uiPresetIcon(context)
-                            .geometry(_activePresets.length === 1 ? (geometries.length === 1 && geometries[0]) : null)
-                            .preset(_activePresets.length === 1 ? _activePresets[0] : context.presets().item('point'))
-                        );
-
-                    // NOTE: split on en-dash, not a hypen (to avoid conflict with hyphenated names)
-                    var names = _activePresets.length === 1 ? _activePresets[0].name().split(' – ') : [t('inspector.multiple_types')];
-
-                    var label = section.select('.label-inner');
-                    var nameparts = label.selectAll('.namepart')
-                        .data(names, function(d) { return d; });
-
-                    nameparts.exit()
-                        .remove();
-
-                    nameparts
-                        .enter()
-                        .append('div')
-                        .attr('class', 'namepart')
-                        .text(function(d) { return d; });
-
-                }
-            },
-            {
                 klass: 'selected-features inspector-inner',
                 shouldHave: _entityIDs.length > 1,
                 update: function(section) {
@@ -204,6 +103,124 @@ export function uiEntityEditor(context) {
                         .call(selectionList
                             .selectedIDs(_entityIDs)
                         );
+                }
+            },
+            {
+                klass: 'preset-list-item inspector-inner',
+                shouldHave: true,
+                update: function(section) {
+
+                    section.classed('mixed-types', _activePresets.length > 1);
+
+                    section
+                        .call(
+                            uiDisclosure(context, 'feature_type', true)
+                                .title(t('inspector.feature_type'))
+                                .content(renderFeatureType)
+                        );
+
+                    function renderFeatureType(selection) {
+                        var presetButtonWrap = selection
+                            .selectAll('.preset-list-button-wrap')
+                            .data([0])
+                            .enter()
+                            .append('div')
+                            .attr('class', 'preset-list-button-wrap');
+
+                        var presetButton = presetButtonWrap
+                            .append('button')
+                            .attr('class', 'preset-list-button preset-reset')
+                            .call(tooltip()
+                                .title(t('inspector.back_tooltip'))
+                                .placement('bottom')
+                            );
+
+                        presetButton.append('div')
+                            .attr('class', 'preset-icon-container');
+
+                        presetButton
+                            .append('div')
+                            .attr('class', 'label')
+                            .append('div')
+                            .attr('class', 'label-inner');
+
+                        presetButtonWrap.append('div')
+                            .attr('class', 'accessory-buttons');
+
+                        var tagReferenceBodyWrap = selection
+                            .selectAll('.tag-reference-body-wrap')
+                            .data([0]);
+
+                        tagReferenceBodyWrap = tagReferenceBodyWrap
+                            .enter()
+                            .append('div')
+                            .attr('class', 'tag-reference-body-wrap')
+                            .merge(tagReferenceBodyWrap);
+                        /*
+                        selection
+                            .selectAll('.preset-quick-links')
+                            .data([0])
+                            .enter()
+                            .append('div')
+                            .attr('class', 'preset-quick-links')
+                            .call(quickLinks.choices([{
+                                id: 'zoom_to',
+                                label: 'inspector.zoom_to.title',
+                                tooltip: function() {
+                                    return uiTooltipHtml(t('inspector.zoom_to.tooltip_feature'), t('inspector.zoom_to.key'));
+                                },
+                                click: function zoomTo() {
+                                    context.mode().zoomToSelected();
+                                }
+                            }]));
+                        */
+                        // update header
+                        if (_tagReference) {
+                            selection.selectAll('.preset-list-button-wrap .accessory-buttons')
+                                .style('display', _activePresets.length === 1 ? null : 'none')
+                                .call(_tagReference.button);
+
+                            tagReferenceBodyWrap
+                                .style('display', _activePresets.length === 1 ? null : 'none')
+                                .call(_tagReference.body);
+                        }
+
+                        selection.selectAll('.preset-reset')
+                            .on('click', function() {
+                                 dispatch.call('choose', this, _activePresets);
+                            })
+                            .on('mousedown', function() {
+                                d3_event.preventDefault();
+                                d3_event.stopPropagation();
+                            })
+                            .on('mouseup', function() {
+                                d3_event.preventDefault();
+                                d3_event.stopPropagation();
+                            });
+
+                        var geometries = entityGeometries();
+                        selection.select('.preset-list-item button')
+                            .call(uiPresetIcon(context)
+                                .geometry(_activePresets.length === 1 ? (geometries.length === 1 && geometries[0]) : null)
+                                .preset(_activePresets.length === 1 ? _activePresets[0] : context.presets().item('point'))
+                            );
+
+                        // NOTE: split on en-dash, not a hypen (to avoid conflict with hyphenated names)
+                        var names = _activePresets.length === 1 ? _activePresets[0].name().split(' – ') : [t('inspector.multiple_types')];
+
+                        var label = selection.select('.label-inner');
+                        var nameparts = label.selectAll('.namepart')
+                            .data(names, function(d) { return d; });
+
+                        nameparts.exit()
+                            .remove();
+
+                        nameparts
+                            .enter()
+                            .append('div')
+                            .attr('class', 'namepart')
+                            .text(function(d) { return d; });
+                    }
                 }
             },
             {
