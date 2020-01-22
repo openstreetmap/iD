@@ -3,6 +3,7 @@ import buble from '@rollup/plugin-buble';
 import commonjs from '@rollup/plugin-commonjs';
 import includePaths from 'rollup-plugin-includepaths';
 import json from '@rollup/plugin-json';
+import progress from 'rollup-plugin-progress';
 import nodeResolve from '@rollup/plugin-node-resolve';
 
 
@@ -20,6 +21,7 @@ export default {
     strict: false
   },
   plugins: [
+    progress(),
     includePaths({
       paths: ['node_modules/d3/node_modules'],  // npm2 or windows
       include: {
