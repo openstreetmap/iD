@@ -29,7 +29,7 @@ let _currBuild = null;
 if (process.argv[1].indexOf('build_data.js') > -1) {
   buildData();
 } else {
-  module.exports = buildCSS;
+  module.exports = buildData;
 }
 
 
