@@ -173,7 +173,7 @@ export function uiRawMemberEditor(context) {
                         .append('button')
                         .attr('class', 'member-zoom')
                         .attr('title', t('icons.zoom_to'))
-                        .call(svgIcon('#iD-icon-geolocate'))
+                        .call(svgIcon('#iD-icon-framed-dot', 'monochrome'))
                         .on('click', zoomToMember);
 
                 } else {

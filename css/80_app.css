@@ -386,6 +386,10 @@ button[disabled].action:hover {
     height: 20px;
 }
 
+.icon.monochrome use {
+    fill: currentColor;
+}
+
 .icon.inline {
     vertical-align: text-top;
     width: 14px;
