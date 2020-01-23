@@ -205,6 +205,10 @@
       "replace": {"barrier": "fence", "fence_type": "wood"}
     },
     {
+      "old": {"bicycle:oneway": "*"},
+      "replace": {"oneway:bicycle": "$1"}
+    },
+    {
       "old": {"building": "entrance"},
       "replace": {"entrance": "*"}
     },
