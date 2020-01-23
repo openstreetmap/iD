@@ -30,7 +30,7 @@
     ],
     "tags": {
         "amenity": "doctors"
-        "healthcare:speciality":"anaesthetics"
+        "healthcare:speciality": "anaesthetics"
     },
     "addTags": {
         "amenity": "doctors",
