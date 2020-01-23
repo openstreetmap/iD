@@ -13,7 +13,6 @@ transifex.auth
 /dist/*.css
 /dist/*.map
 /dist/img/*.svg
-/dist/data/
 /dist/mapillary-js/
 /dist/pannellum-streetside/
 
