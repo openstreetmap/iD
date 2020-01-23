@@ -28,6 +28,7 @@
     ],
     "tags": {
         "amenity": "doctors"
+        "healthcare:speciality": "child_psychiatry"
     },
     "addTags": {
         "amenity": "doctors",
