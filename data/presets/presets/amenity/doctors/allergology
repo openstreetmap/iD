@@ -28,7 +28,7 @@
     ],
     "tags": {
         "amenity": "doctors"
-        "healthcare:speciality":"allergology"
+        "healthcare:speciality": "allergology"
     },
     "addTags": {
         "amenity": "doctors",
