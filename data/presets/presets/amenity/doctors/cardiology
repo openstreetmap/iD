@@ -28,6 +28,7 @@
     ],
     "tags": {
         "amenity": "doctors"
+        "healthcare:speciality": "cardiology"
     },
     "addTags": {
         "amenity": "doctors",
