@@ -29,6 +29,7 @@
     ],
     "tags": {
         "amenity": "doctors"
+        "healthcare:speciality": "community"
     },
     "addTags": {
         "amenity": "doctors",
