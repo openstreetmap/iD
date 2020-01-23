@@ -673,6 +673,8 @@ export function uiMapData(context) {
             .merge(container);
 
         updatePhotoOverlays();
+
+
     }
 
 
@@ -707,10 +709,6 @@ export function uiMapData(context) {
             .append('div')
             .attr('class', 'layer-feature-list-container');
 
-        containerEnter
-            .append('ul')
-            .attr('class', 'layer-list layer-feature-list');
-
         var footer = containerEnter
             .append('div')
             .attr('class', 'feature-list-links section-footer');
@@ -732,6 +730,13 @@ export function uiMapData(context) {
             .on('click', function() {
                 context.features().disableAll();
             });
+
+
+        containerEnter
+            .append('ul')
+            .attr('class', 'layer-list layer-feature-list');
+
+        
 
         // Update
         container = container
