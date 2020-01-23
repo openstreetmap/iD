@@ -6768,7 +6768,7 @@ en:
       office/research:
         # office=research
         name: Research Office
-        # 'terms: R and D,research and development,research lab'
+        # 'terms: R and D,research and development,research lab,r&d,rnd'
         terms: '<translate with synonyms or related terms for ''Research Office'', separated by commas>'
       office/surveyor:
         # office=surveyor
