@@ -1,0 +1,42 @@
+{
+    "icon": "fas-biohazard",
+    "fields": [
+        "name",
+        "operator",
+        "healthcare/speciality",
+        "address",
+        "building_area",
+        "opening_hours"
+    ],
+    "moreFields": [
+        "email",
+        "fax",
+        "gnis/feature_id",
+        "level",
+        "payment_multi",
+        "phone",
+        "website",
+        "wheelchair"
+    ],
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "terms": [
+        "hygene",
+        "community doctor",
+        "community medecine",
+    ],
+    "tags": {
+        "amenity": "doctors"
+    },
+    "addTags": {
+        "amenity": "doctors",
+        "healthcare": "doctor"
+    },
+    "reference": {
+        "key": "amenity",
+        "value": "doctors"
+    },
+    "name": "Community doctor"
+}
