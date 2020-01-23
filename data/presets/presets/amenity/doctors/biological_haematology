@@ -1,5 +1,5 @@
 {
-    "icon": "maki-doctor",
+    "icon": "fas-tint",
     "fields": [
         "name",
         "operator",
