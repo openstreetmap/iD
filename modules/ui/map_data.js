@@ -673,8 +673,6 @@ export function uiMapData(context) {
             .merge(container);
 
         updatePhotoOverlays();
-
-
     }
 
 
@@ -735,9 +733,7 @@ export function uiMapData(context) {
         containerEnter
             .append('ul')
             .attr('class', 'layer-list layer-feature-list');
-
         
-
         // Update
         container = container
             .merge(containerEnter);
