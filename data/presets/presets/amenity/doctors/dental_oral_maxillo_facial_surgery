@@ -1,0 +1,43 @@
+{
+    "icon": "maki-doctor",
+    "fields": [
+        "name",
+        "operator",
+        "healthcare/speciality",
+        "address",
+        "building_area",
+        "opening_hours"
+    ],
+    "moreFields": [
+        "email",
+        "fax",
+        "gnis/feature_id",
+        "level",
+        "payment_multi",
+        "phone",
+        "website",
+        "wheelchair"
+    ],
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "terms": [
+        "face surgeon",
+        "dental oral maxillo facial surgeon",
+        "oral and maxillofacial surgeon"
+    ],
+    "tags": {
+        "amenity": "doctors"
+        "healthcare:speciality": "dental_oral_maxillo_facial_surgery"
+    },
+    "addTags": {
+        "amenity": "doctors",
+        "healthcare": "doctor"
+    },
+    "reference": {
+        "key": "amenity",
+        "value": "doctors"
+    },
+    "name": "Oral and maxillofacial surgeon"
+}
