@@ -28,7 +28,7 @@
     ],
     "tags": {
         "amenity": "doctors"
-        "healthcare:speciality":"biological_haematology"
+        "healthcare:speciality": "biological_haematology"
     },
     "addTags": {
         "amenity": "doctors",
