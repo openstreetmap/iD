@@ -28,6 +28,7 @@
     ],
     "tags": {
         "amenity": "doctors"
+        "healthcare:speciality": "biology"        
     },
     "addTags": {
         "amenity": "doctors",
