@@ -80,7 +80,7 @@ export function uiFormFields(context) {
             .append('div')
             .attr('class', 'more-fields')
             .append('label')
-            .text(t('inspector.fields'))
+            .text(t('inspector.add_fields'))
             .merge(more);
 
 
