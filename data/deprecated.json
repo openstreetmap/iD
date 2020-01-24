@@ -229,6 +229,14 @@
       "replace": {"building:colour": "$1"}
     },
     {
+      "old": {"building:height": "*"},
+      "replace": {"height": "$1"}
+    },
+    {
+      "old": {"building:min_height": "*"},
+      "replace": {"min_height": "$1"}
+    },
+    {
       "old": {"building:roof:colour": "*"},
       "replace": {"roof:colour": "$1"}
     },

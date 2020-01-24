@@ -1998,6 +1998,8 @@
     {"key": "building", "value": "home", "description": "🄳 ➜ building=house"},
     {"key": "building", "value": "household", "description": "🄳 ➜ building=house"},
     {"key": "building:color", "description": "🄳 ➜ building:colour=*"},
+    {"key": "building:height", "description": "🄳 ➜ height=*"},
+    {"key": "building:min_height", "description": "🄳 ➜ min_height=*"},
     {"key": "building:roof:colour", "description": "🄳 ➜ roof:colour=*"},
     {"key": "building:type", "description": "🄳 ➜ building=*"},
     {"key": "camp_site", "value": "camp_pitch", "description": "🄳 ➜ tourism=camp_pitch"},
