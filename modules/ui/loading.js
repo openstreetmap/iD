@@ -32,14 +32,14 @@ export function uiLoading(context) {
   };
 
 
-  loading.message = (val) => {
+  loading.message = function(val) {
     if (!arguments.length) return _message;
     _message = val;
     return loading;
   };
 
 
-  loading.blocking = (val) => {
+  loading.blocking = function(val) {
     if (!arguments.length) return _blocking;
     _blocking = val;
     return loading;

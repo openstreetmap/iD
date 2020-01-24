@@ -359,14 +359,14 @@ export function uiSuccess(context) {
   }
 
 
-  success.changeset = (val) => {
+  success.changeset = function(val) {
     if (!arguments.length) return _changeset;
     _changeset = val;
     return success;
   };
 
 
-  success.location = (val) => {
+  success.location = function(val) {
     if (!arguments.length) return _location;
     _location = val;
     return success;
