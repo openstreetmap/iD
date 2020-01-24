@@ -9019,7 +9019,7 @@
                 },
                 "shop/car_repair": {
                     "name": "Car Repair Shop",
-                    "terms": "automobile,automotive,garage,service"
+                    "terms": "auto mechanic,automechanic,automobile,automotive,garage,inspection,oil change,service"
                 },
                 "shop/car": {
                     "name": "Car Dealership",

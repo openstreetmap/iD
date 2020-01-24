@@ -7579,7 +7579,7 @@ en:
       shop/car_repair:
         # shop=car_repair
         name: Car Repair Shop
-        # 'terms: automobile,automotive,garage,service'
+        # 'terms: auto mechanic,automechanic,automobile,automotive,garage,inspection,oil change,service'
         terms: '<translate with synonyms or related terms for ''Car Repair Shop'', separated by commas>'
       shop/caravan:
         # shop=caravan
