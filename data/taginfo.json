@@ -1340,7 +1340,7 @@
     {"key": "bath:type", "value": "onsen", "description": "🄵 Specialty"},
     {"key": "bath:type", "value": "foot_bath", "description": "🄵 Specialty"},
     {"key": "bath:type", "value": "hot_spring", "description": "🄵 Specialty"},
-    {"key": "beauty", "description": "🄵 Beauty Specialty"},
+    {"key": "beauty", "description": "🄵 Services"},
     {"key": "bench", "description": "🄵 Bench"},
     {"key": "bicycle_parking", "description": "🄵 Type"},
     {"key": "bin", "description": "🄵 Waste Bin"},

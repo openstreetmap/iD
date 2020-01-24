@@ -285,7 +285,7 @@ en:
           onsen: Japanese Onsen
       beauty:
         # beauty=*
-        label: Beauty Specialty
+        label: Services
       bench:
         # bench=*
         label: Bench
