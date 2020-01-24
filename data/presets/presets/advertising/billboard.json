@@ -1,6 +1,7 @@
 {
     "icon": "temaki-billboard",
     "fields": [
+        "access_simple",
         "direction",
         "lit"
     ],

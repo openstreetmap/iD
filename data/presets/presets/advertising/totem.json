@@ -1,6 +1,7 @@
 {
     "fields": [
         "operator",
+        "access_simple",
         "lit",
         "visibility",
         "direction",
