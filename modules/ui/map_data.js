@@ -697,6 +697,7 @@ export function uiMapData(context) {
 
         updateVisualDiffList();
     }
+    
 
 
     function renderFeatureList(selection) {
@@ -730,6 +731,7 @@ export function uiMapData(context) {
             });
 
 
+        
         containerEnter
             .append('ul')
             .attr('class', 'layer-list layer-feature-list');
@@ -742,6 +744,7 @@ export function uiMapData(context) {
 
         updateFeatureList();
     }
+
 
     function updatePhotoOverlays() {
         _photoOverlayContainer
