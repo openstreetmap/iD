@@ -1,6 +1,6 @@
 {
     "key": "sidewalk",
-    "type": "text",
+    "type": "combo",
     "label": "Sidewalk",
     "placeholder": "both, left, right, no..."
 }
