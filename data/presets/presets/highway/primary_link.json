@@ -5,6 +5,7 @@
         "destination/ref_oneway",
         "oneway",
         "maxspeed",
+        "sidewalk",
         "lanes",
         "surface",
         "structure",

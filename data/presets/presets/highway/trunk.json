@@ -5,6 +5,7 @@
         "ref_road_number",
         "oneway",
         "maxspeed",
+        "sidewalk",
         "lanes",
         "surface",
         "structure",

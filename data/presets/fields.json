@@ -374,6 +374,7 @@
     "shelter": {"key": "shelter", "type": "check", "label": "Shelter"},
     "shop": {"key": "shop", "type": "typeCombo", "label": "Type"},
     "shower": {"key": "shower", "type": "check", "label": "Showers"},
+    "sidewalk": {"key": "sidewalk", "type": "sidewalk", "label": "Sidewalk", "placeholder": "both, left, right, no..."},
     "siren/purpose": {"key": "siren:purpose", "type": "combo", "label": "Purpose"},
     "siren/type": {"key": "siren:type", "type": "combo", "label": "Type", "strings": {"options": {"pneumatic": "Pneumatic", "electronic": "Electronic", "other": "Other"}}},
     "site_type": {"key": "site_type", "type": "combo", "label": "Site Type"},

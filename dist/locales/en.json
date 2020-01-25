@@ -4492,6 +4492,10 @@
                     "label": "Showers",
                     "terms": ""
                 },
+                "sidewalk": {
+                    "label": "Sidewalk",
+                    "placeholder": "both, left, right, no..."
+                },
                 "siren/purpose": {
                     "label": "Purpose"
                 },

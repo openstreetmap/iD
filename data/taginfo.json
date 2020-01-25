@@ -1781,6 +1781,7 @@
     {"key": "shelter_type", "description": "🄵 Type"},
     {"key": "shelter", "description": "🄵 Shelter"},
     {"key": "shower", "description": "🄵 Showers"},
+    {"key": "sidewalk", "description": "🄵 Sidewalk"},
     {"key": "siren:purpose", "description": "🄵 Purpose"},
     {"key": "siren:type", "value": "pneumatic", "description": "🄵 Type"},
     {"key": "siren:type", "value": "electronic", "description": "🄵 Type"},

@@ -4,6 +4,7 @@
         "name",
         "oneway",
         "maxspeed",
+        "sidewalk",
         "lanes",
         "surface",
         "structure",

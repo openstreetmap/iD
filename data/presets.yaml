@@ -2147,6 +2147,11 @@ en:
         # shower=*
         label: Showers
         terms: '[translate with synonyms or related terms for ''Showers'', separated by commas]'
+      sidewalk:
+        # sidewalk=*
+        label: Sidewalk
+        # sidewalk field placeholder
+        placeholder: 'both, left, right, no...'
       siren/purpose:
         # 'siren:purpose=*'
         label: Purpose
