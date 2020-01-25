@@ -3,7 +3,7 @@ import RBush from 'rbush';
 import { dispatch as d3_dispatch } from 'd3-dispatch';
 import { json as d3_json } from 'd3-fetch';
 
-import { currentLocale, t } from '../util/locale';
+import { currentLocale } from '../util/locale';
 import { geoExtent, geoVecAdd } from '../geo';
 import { qaError } from '../osm';
 import { utilRebind, utilTiler, utilQsString } from '../util';
@@ -45,10 +45,6 @@ function updateRtree(item, replace) {
   if (replace) {
     _erCache.rtree.insert(item);
   }
-}
-
-function linkEntity(d) {
-  return `<a class="error_entity_link">${d}</a>`;
 }
 
 // Errors shouldn't obscure eachother
@@ -139,22 +135,9 @@ export default {
                   item // category of the issue for styling
                 });
 
-                // Special handling for some error types
-                switch (d.item) {
-                  case 8300:
-                  case 8360: {
-                    let k = error_class;
-
-                    // First 17 classes are all speed limits
-                    if (item === 8300 && error_class <= 17) {
-                      k = 1;
-                    }
-
-                    // Setting elems here prevents UI error detail requests
-                    d.replacements = [t(`QA.osmose.error_types.${d.item}.parts.${k}`)];
-                    d.elems = [];
-                    break;
-                  }
+                // Setting elems here prevents UI error detail requests
+                if (d.item === 8300 || d.item === 8360) {
+                  d.elems = [];
                 }
 
                 _erCache.data[d.id] = d;
@@ -187,35 +170,50 @@ export default {
         // Assign directly for immediate use in the callback
         d.elems = data.elems.map(e => e.type.substring(0,1) + e.id);
 
-        // Element links used in the error description
-        d.replacements = d.elems.map(linkEntity);
-
         // Some error types have details in their subtitle
         const special = {
-          '3040-3040': /Bad value for (.+)/i,
-          '3090-3090': /Incorrect date "(.+)"/i,
-          '4010-4010': /Tag (.+) is deprecated: (.+)/i,
-          '4010-40102': /Tag (.+) is deprecated: (.+)/i,
-          '4030-900': /Conflict between tags: (.+), (.+)/i,
-          '5070-50703': /"(.+)"=".+" unexpected symbol char \(.+, (.+)\)/i,
-          '5070-50704': /Umbalanced (.+)/i,
-          '5070-50705': /Unexpected char (.+)/i,
-          '9010-9010003': /(.+)/
+          tags: {
+            '3040-3040': /Bad tag value: "(.+)"/i,
+            '4010-4010': /Tag (.+) is deprecated/i,
+            '4010-40102': /Tag (.+) is deprecated/i,
+            '4030-900': /Conflict between tags: (.+), (.+)/i,
+            '5070-50703': /"(.+)"=".+" unexpected/i,
+            '9010-9010001': /(.+) is unnecessary/i
+          },
+          values: {
+            '3090-3090': /Incorrect date "(.+)"/i,
+            '9010-9010003': /(.+)/
+          },
+          chars: {
+            '5070-50703': /unexpected symbol char \(.+, (.+)\)/i,
+            '5070-50704': /Umbalanced (.+)/i,
+            '5070-50705': /Unexpected char (.+)/i
+          },
+          sug_tags: {
+            '4010-4010': /Tag .+ is deprecated: (.+)/i,
+            '4010-40102': /Tag .+ is deprecated: (.+)/i,
+          }
         };
-        if (d.error_type in special) {
-          let [, ...details] = special[d.error_type].exec(data.subtitle);
-          d.replacements.push(...details);
+        for (let type in special) {
+          if (d.error_type in special[type]) {
+            // Destructuring doesn't work if no match returns null, hence []
+            let [, ...details] = special[type][d.error_type].exec(data.subtitle) || [];
 
-          if (d.error_type === '5070-50703') {
-            d.replacements[2] = String.fromCharCode(details[1]);
+            if (
+              d.error_type === '5070-50703'
+              && type === 'chars'
+              && details
+            ) {
+              details[0] = String.fromCharCode(details[0]);
+            }
+
+            // This error has a rare subtitle variant
+            if (d.error_type === '9010-9010001' && !details) {
+              [, ...details] = /\. Remove (.+)/i.exec(data.subtitle) || [];
+            }
+
+            if (details) d[type] = details;
           }
-        } else if (d.error_type === '9010-9010001') {
-          // This error has a rare subtitle variant
-          let details = /(.+) is unnecessary/i.exec(data.subtitle);
-          if (details == null) {
-            details = /\. Remove (.+)/i.exec(data.subtitle);
-          }
-          d.replacements.push(details[1]);
         }
 
         this.replaceError(d);
@@ -235,7 +233,7 @@ export default {
     const langs = { [locale]: true };
 
     // Need English strings if not already fetched for fallback values
-    if (locale != 'en' && !('en' in _stringCache)) {
+    if (locale !== 'en' && !('en' in _stringCache)) {
       langs.en = true;
     }
 
@@ -284,7 +282,7 @@ export default {
 
   getStrings(issueType, locale=currentLocale) {
     const l = (locale in _stringCache) ? _stringCache[locale][issueType] : {};
-    const en = ('en' in _stringCache) ? _stringCache['en'][issueType] : {};
+    const en = ('en' in _stringCache) ? _stringCache.en[issueType] : {};
 
     // Fallback to English if string is untranslated
     return Object.assign({}, en, l);

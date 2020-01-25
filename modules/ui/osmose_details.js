@@ -3,7 +3,6 @@ import {
     select as d3_select
 } from 'd3-selection';
 
-import { dataEn } from '../../data';
 import { modeSelect } from '../modes/select';
 import { t } from '../util/locale';
 import { services } from '../services';
@@ -14,23 +13,14 @@ export function uiOsmoseDetails(context) {
     var _error;
 
 
-    function errorDetail(d) {
+    function issueDetail(d) {
         var unknown = t('inspector.unknown');
 
         if (!d) return unknown;
 
-        // Some errors fall back to their category for strings
-        var i, et;
-        var keys = [d.error_type, d.item];
-        for (i = 0; i < 2; i++) {
-            et = dataEn.QA.osmose.error_types[keys[i]];
-
-            if (et && et.description) {
-                return t('QA.osmose.error_types.' + keys[i] + '.description', d.replacements);
-            }
-        }
-
-        return unknown;
+        // Issue description supplied by Osmose
+        var s = services.osmose.getStrings(d.error_type);
+        return ('description' in s) ? s.description : unknown;
     }
 
 
@@ -58,16 +48,30 @@ export function uiOsmoseDetails(context) {
             .append('h4')
             .text(function() { return t('QA.keepRight.detail_description'); });
 
+        descriptionEnter
+            .append('div')
+            .attr('class', 'error-details-description-text')
+            .html(issueDetail);
+
+        descriptionEnter
+            .append('h4')
+            .attr('class', 'error-details-subtitle')
+            .text(function() { return t('QA.osmose.elems_title'); });
+
+        var elementList = descriptionEnter
+            .append('ul')
+            .attr('class', 'error-details-elements');
+
         services.osmose.loadErrorDetail(_error, function(err, d) {
-            if (d.elems === undefined) { return; }
+            if (d.elems === undefined) return;
 
-            descriptionEnter
-                .append('div')
-                .attr('class', 'error-details-description-text')
-                .html(errorDetail);
-
-            // If there are entity links in the error message..
-            descriptionEnter.selectAll('.error_entity_link, .error_object_link')
+            elementList.selectAll('.error_entity_link')
+                .data(d.elems)
+                .enter()
+                .append('li')
+                .append('a')
+                .attr('class', 'error_entity_link')
+                .text(function(d) { return d; })
                 .each(function() {
                     var link = d3_select(this);
                     var entityID = this.textContent;
@@ -116,6 +120,26 @@ export function uiOsmoseDetails(context) {
                         }
                     }
                 });
+
+            // Things like keys and values are dynamic details
+            const special = { tags: true, values: true, chars: true, sug_tags: true };
+            for (let type in special) {
+                if (type in d) {
+                    descriptionEnter
+                        .append('h4')
+                        .attr('class', 'error-details-subtitle')
+                        .text(function() { return t(`QA.osmose.details.${type}`); });
+
+                    descriptionEnter
+                        .append('ul')
+                        .attr('class', 'error-details-list')
+                        .selectAll('li')
+                        .data(d[type])
+                        .enter()
+                        .append('li')
+                        .html(function(d) { return d; });
+                }
+            }
 
             // Don't hide entities related to this error - #5880
             context.features().forceVisible(d.elems);

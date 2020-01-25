@@ -1,5 +1,5 @@
 import { services } from '../services';
-import { currentLocale, t } from '../util/locale';
+import { t } from '../util/locale';
 
 
 export function uiOsmoseHeader() {
@@ -13,11 +13,7 @@ export function uiOsmoseHeader() {
 
         // Issue titles supplied by Osmose
         var s = services.osmose.getStrings(d.error_type);
-        if ('title' in s) {
-            return s.title;
-        }
-
-        return unknown;
+        return ('title' in s) ? s.title : unknown;
     }
 
 

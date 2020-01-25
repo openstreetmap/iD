@@ -2753,6 +2753,10 @@ input.key-trap {
 [dir='rtl'] .error-details-description-text::first-letter {
     text-transform: none;  /* #5877 */
 }
+.error-details-description
+.error-details-subtitle {
+    padding-top: 10px;
+}
 
 .note-save .new-comment-input,
 .error-save .new-comment-input {
