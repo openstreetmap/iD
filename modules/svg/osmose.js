@@ -63,7 +63,8 @@ export function svgOsmose(projection, context, dispatch) {
 
     // Enable the layer.  This shows the errors and transitions them to visible.
     function layerOn() {
-        editOn();
+        // Strings supplied by Osmose fetched before showing layer for first time
+        getService().loadStrings(editOn);
 
         drawLayer
             .style('opacity', 0)

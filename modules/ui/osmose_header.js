@@ -1,5 +1,5 @@
-import { dataEn } from '../../data';
-import { t } from '../util/locale';
+import { services } from '../services';
+import { currentLocale, t } from '../util/locale';
 
 
 export function uiOsmoseHeader() {
@@ -11,15 +11,10 @@ export function uiOsmoseHeader() {
 
         if (!d) return unknown;
 
-        // Some errors fall back to their category for strings
-        var i, et;
-        var keys = [d.error_type, d.item];
-        for (i = 0; i < 2; i++) {
-            et = dataEn.QA.osmose.error_types[keys[i]];
-
-            if (et && et.title) {
-                return t('QA.osmose.error_types.' + keys[i] + '.title');
-            }
+        // Issue titles supplied by Osmose
+        var s = services.osmose.getStrings(d.error_type);
+        if ('title' in s) {
+            return s.title;
         }
 
         return unknown;

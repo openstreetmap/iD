@@ -1035,49 +1035,33 @@
                 "title": "Osmose Issue",
                 "error_types": {
                     "0": {
-                        "title": "Building Intersection",
                         "description": "{0} and {1} intersect."
                     },
                     "1070": {
-                        "title": "Highway intersecting water",
                         "description": "{1} intersects with {0}, but there is no junction node, bridge, or tunnel."
                     },
                     "1150": {
-                        "title": "Overlapping Similar Areas",
                         "description": "{0} and {1} overlap."
                     },
                     "1190": {
-                        "title": "Approximate Way",
                         "description": "{0} looks like it could be mapped more accurately."
                     },
                     "3161": {
-                        "title": "Missing Parking Access",
                         "description": "There is no highway leading to {0}."
                     },
-                    "3200": {
-                        "title": "Invalid Area Tagging"
-                    },
                     "3220": {
-                        "title": "All Access Allowed",
                         "description": "{0} has an \"access=yes\" or \"access=permissive\" tag which permits use by all transport modes (ski, horse, hazmat, etc.)."
                     },
                     "4010": {
-                        "title": "Deprecated Tagging",
                         "description": "{0} uses tag \"{1}\" which is deprecated in favour of \"{2}\"."
                     },
                     "4080": {
-                        "title": "Object Mapped Twice",
                         "description": "{0} and {1} both appear to represent the same object."
                     },
-                    "5010": {
-                        "title": "Orthographic Error"
-                    },
                     "7040": {
-                        "title": "Unfinished Power Line",
                         "description": "A power line appears to be unfinished at {0}."
                     },
                     "8300": {
-                        "title": "Traffic Sign Suggestion",
                         "description": "Traffic signs detected by Mapillary suggest there may be an unmapped {0} nearby.",
                         "parts": {
                             "1": "speed limit",
@@ -1089,7 +1073,6 @@
                         }
                     },
                     "8360": {
-                        "title": "Missing Street Object",
                         "description": "Object detection by Mapillary suggests there may be an unmapped {0} nearby.",
                         "parts": {
                             "1": "bench",
@@ -1100,52 +1083,33 @@
                         }
                     },
                     "0-3": {
-                        "title": "Suspiciously Small Building",
                         "description": "{0} is a suspisciously small building."
                     },
                     "0-4": {
-                        "title": "Gap Between Buildings",
                         "description": "A gap exists between {0} and {1} which looks suspiciously small."
                     },
                     "1040-1": {
-                        "title": "Invalid Polygon",
                         "description": "{0} intersects itself."
                     },
                     "1050-1": {
-                        "title": "Reversed Roundabout",
                         "description": "{0} looks like a roundabout mapped in the wrong direction for this location."
                     },
                     "1050-1050": {
-                        "title": "Reversed Mini-Roundabout",
                         "description": "{0} looks like a mini-roundabout with the incorrect \"direction\" tag for this location."
                     },
-                    "1070-1": {
-                        "title": "Highway intersecting building"
-                    },
-                    "1070-8": {
-                        "title": "Highway intersecting highway"
-                    },
-                    "1070-10": {
-                        "title": "Waterway intersecting waterway"
-                    },
                     "1280-1": {
-                        "title": "Incorrect Speed Camera",
                         "description": "{0} should be on the highway or part of an \"enforcement\" relation."
                     },
                     "2110-21101": {
-                        "title": "Unknown Named Object",
                         "description": "{0} has a name but no feature tag."
                     },
                     "2110-21102": {
-                        "title": "Missing Relation Type",
                         "description": "{0} is missing a \"type\" tag."
                     },
                     "3040-3040": {
-                        "title": "Unusual Tagging",
                         "description": "{0} has a non-conventional tag value: \"{1}\"."
                     },
                     "3090-3090": {
-                        "title": "Invalid Date",
                         "description": "{0} is tagged with an invalid date value: \"{1}\"."
                     },
                     "3200-32001": {
@@ -1158,11 +1122,9 @@
                         "description": "{0} is tagged \"area=no\", but this feature already isn't an area."
                     },
                     "3250-32501": {
-                        "title": "Invalid Opening Hours",
                         "description": "{0} has an invalid value for the \"opening_hours\" tag."
                     },
                     "4030-900": {
-                        "title": "Conflicting Tags",
                         "description": "{0} is tagged with both \"{1}\" and \"{2}\"."
                     },
                     "5010-803": {
@@ -1172,39 +1134,30 @@
                         "description": "The \"name\" of {0} has excessive space characters."
                     },
                     "5070-50703": {
-                        "title": "Unexpected Symbol",
                         "description": "{0} has an unexpected symbol, {2}, in the \"{1}\" tag."
                     },
                     "5070-50704": {
-                        "title": "Unbalanced Punctuation",
                         "description": "{0} has an unbalanced {1} character in its name."
                     },
                     "5070-50705": {
-                        "title": "Unexpected Punctuation",
                         "description": "{0} has an unexpected {1} character in its name."
                     },
                     "7040-1": {
-                        "title": "Lone Power Support",
                         "description": "{0} is a power tower or pole with no connected power lines."
                     },
                     "7040-4": {
-                        "title": "Extra Power Line Node",
                         "description": "Power lines should only have nodes at supports and {0} is not tagged as a pole or tower."
                     },
                     "7090-1": {
-                        "title": "Disconnected Level Crossing",
                         "description": "{0} is a level crossing at a non-junction node."
                     },
                     "7090-3": {
-                        "title": "Disconnected Highway Feature",
                         "description": "{0} is highway feature or barrier with no connected highway."
                     },
                     "9010-9010001": {
-                        "title": "Unnecessary Tag",
                         "description": "{0} is redundantly tagged with \"{1}\"."
                     },
                     "9010-9010003": {
-                        "title": "Descriptive Name",
                         "description": "{0} appears to have a descriptive name: \"{1}\"."
                     }
                 }

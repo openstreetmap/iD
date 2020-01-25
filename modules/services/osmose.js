@@ -3,16 +3,17 @@ import RBush from 'rbush';
 import { dispatch as d3_dispatch } from 'd3-dispatch';
 import { json as d3_json } from 'd3-fetch';
 
-import { t } from '../util/locale';
+import { currentLocale, t } from '../util/locale';
 import { geoExtent, geoVecAdd } from '../geo';
 import { qaError } from '../osm';
 import { utilRebind, utilTiler, utilQsString } from '../util';
-import { services } from '../../data/qa_errors.json';
+import { services as qaServices } from '../../data/qa_errors.json';
 
 const tiler = utilTiler();
 const dispatch = d3_dispatch('loaded');
 const _osmoseUrlRoot = 'https://osmose.openstreetmap.fr/en/api/0.3beta/';
 const _erZoom = 14;
+const _stringCache = {};
 
 // This gets reassigned if reset
 let _erCache;
@@ -91,7 +92,7 @@ export default {
     let params = {
       // Tiles return a maximum # of errors
       // So we want to filter our request for only types iD supports
-      item: services.osmose.items.join()
+      item: qaServices.osmose.items.join()
     };
 
     // determine the needed tiles to cover the view
@@ -121,10 +122,10 @@ export default {
             data.features.forEach(issue => {
               const { item, class: error_class, uuid: identifier } = issue.properties;
               // Item is the type of error, w/ class tells us the sub-type
-              const error_type = [item, error_class].join('-');
+              const error_type = `${item}-${error_class}`;
 
               // Filter out unsupported error types (some are too specific or advanced)
-              if (error_type in services.osmose.errorIcons) {
+              if (error_type in qaServices.osmose.errorIcons) {
                 let loc = issue.geometry.coordinates; // lon, lat
                 loc = preventCoincident(loc);
 
@@ -223,6 +224,70 @@ export default {
       .catch(err => {
         if (callback) callback(err.message);
       });
+  },
+
+  loadStrings(callback, locale=currentLocale) {
+    if (locale in _stringCache) {
+        if (callback) callback(null, _stringCache[locale]);
+        return;
+    }
+
+    const langs = { [locale]: true };
+
+    // Need English strings if not already fetched for fallback values
+    if (locale != 'en' && !('en' in _stringCache)) {
+      langs.en = true;
+    }
+
+    // TODO: Currently all locales are served, in future a param will be available to request specifics
+    const url = _osmoseUrlRoot + 'items';
+
+    d3_json(url)
+      .then(data => {
+        for (let l in langs) {
+          _stringCache[l] = {};
+        }
+
+        for (let i = 0; i < data.categories.length; i++) {
+          let cat = data.categories[i];
+
+          for (let j = 0; j < cat.items.length; j++) {
+            let item = cat.items[j];
+
+            // Only need to cache strings for supported error types
+            // TODO: may be possible to request additional filter by `item`
+            if (qaServices.osmose.items.indexOf(item.item) !== -1) {
+              for (let k = 0; k < item.class.length; k++) {
+                let { class: cl, item: cat } = item.class[k];
+                let issueType = `${cat}-${cl}`;
+
+                for (let l in langs) {
+                  _stringCache[l][issueType] = {};
+
+                  let issueStrings = _stringCache[l][issueType];
+
+                  // TODO: Only title is currently served, in future description and other strings will be too
+                  let { title: {[l]: title} } = item.class[k];
+                  if (title) issueStrings.title = title;
+                }
+              }
+            }
+          }
+        }
+
+        if (callback) callback(null, _stringCache[locale]);
+      })
+      .catch(err => {
+        if (callback) callback(err.message);
+      });
+  },
+
+  getStrings(issueType, locale=currentLocale) {
+    const l = (locale in _stringCache) ? _stringCache[locale][issueType] : {};
+    const en = ('en' in _stringCache) ? _stringCache['en'][issueType] : {};
+
+    // Fallback to English if string is untranslated
+    return Object.assign({}, en, l);
   },
 
   postUpdate(d, callback) {
