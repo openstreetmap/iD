@@ -1,9 +1,11 @@
 {
     "fields": [
         "operator",
-        "access_simple",
         "lit",
-        "visibility",
+        "visibility"
+    ],
+    "moreFields": [
+        "access_simple",
         "direction",
         "height"
     ],

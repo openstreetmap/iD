@@ -1,8 +1,13 @@
 {
     "icon": "temaki-storage_tank",
     "fields": [
+        "operator",
+        "lit",
+        "visibility"
+    ],
+    "moreFields": [
         "access_simple",
-        "lit"
+        "height"
     ],
     "geometry": [
         "point",
