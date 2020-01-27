@@ -432,9 +432,18 @@ export function uiFieldCombo(field, context) {
                     };
                 });
 
+                var currLength = arr.join(';').length;
+
                 // limit the input length to the remaining available characters
-                maxLength = services.osm.maxCharsForTagValue() - (tags[field.key] || '').length;
+                maxLength = services.osm.maxCharsForTagValue() - currLength;
+
+                if (currLength > 0) {
+                    // account for the separator if a new value will be appended to existing
+                    maxLength -= 1;
+                }
             }
+            // a negative maxlength doesn't make sense
+            maxLength = Math.max(0, maxLength);
 
             // Exclude existing multikeys from combo options..
             var available = objectDifference(_comboData, _multiData);
@@ -443,8 +452,9 @@ export function uiFieldCombo(field, context) {
             // Hide 'Add' button if this field uses fixed set of
             // translateable optstrings and they're all currently used,
             // or if the field is already at its character limit
-            container.selectAll('.combobox-input, .combobox-caret')
-                .classed('hide', (optstrings && !available.length) || !maxLength);
+            var hideAdd = (optstrings && !available.length) || maxLength <= 0;
+            container.selectAll('.chiplist .input-wrap')
+                .style('display', hideAdd ? 'none' : null);
 
 
             // Render chips
