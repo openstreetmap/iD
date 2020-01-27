@@ -6,6 +6,7 @@ import { select as d3_select } from 'd3-selection';
 
 import { t, currentLocale, addTranslation, setLocale } from '../util/locale';
 
+import { coreData } from './data';
 import { coreHistory } from './history';
 import { coreValidator } from './validator';
 import { dataLocales, dataEn } from '../../data';
@@ -92,9 +93,11 @@ export function coreContext() {
 
   /* Straight accessors. Avoid using these if you can. */
   let _connection;
+  let _data;
   let _history;
   let _validator;
   context.connection = () => _connection;
+  context.data = () => _data;
   context.history = () => _history;
   context.validator = () => _validator;
 
@@ -467,6 +470,7 @@ export function coreContext() {
     _locale = _locale.split('-')[0];
   }
 
+  _data = coreData(context);
   _history = coreHistory(context);
   _validator = coreValidator(context);
 
