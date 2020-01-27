@@ -111,6 +111,7 @@ export function coreValidator(context) {
         var view = context.map().extent();
 
         return issues.filter(function(issue) {
+            if (!issue) return false;
             if (opts.includeDisabledRules === 'only' && !_disabledRules[issue.type]) return false;
             if (!opts.includeDisabledRules && _disabledRules[issue.type]) return false;
 
@@ -196,6 +197,7 @@ export function coreValidator(context) {
         return Array.from(issueIDs)
             .map(function(id) { return cache.issuesByIssueID[id]; })
             .filter(function(issue) {
+                if (!issue) return false;
                 if (opts.includeDisabledRules === 'only' && !_disabledRules[issue.type]) return false;
                 if (!opts.includeDisabledRules && _disabledRules[issue.type]) return false;
 
