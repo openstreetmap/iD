@@ -60,9 +60,9 @@ export function coreContext() {
   _storage = _storage || (() => {
     let s = {};
     return {
-        getItem: (k) => s[k],
-        setItem: (k, v) => s[k] = v,
-        removeItem: (k) => delete s[k]
+      getItem: (k) => s[k],
+      setItem: (k, v) => s[k] = v,
+      removeItem: (k) => delete s[k]
     };
   })();
 
@@ -332,10 +332,10 @@ export function coreContext() {
   context.editableDataEnabled = () => _map.editableDataEnabled();
   context.surfaceRect = () => _map.surface.node().getBoundingClientRect();
   context.editable = () => {
-     // don't allow editing during save
-     const mode = context.mode();
-     if (!mode || mode.id === 'save') return false;
-     return _map.editableDataEnabled();
+    // don't allow editing during save
+    const mode = context.mode();
+    if (!mode || mode.id === 'save') return false;
+    return _map.editableDataEnabled();
   };
 
 
