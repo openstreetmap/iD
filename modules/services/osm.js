@@ -529,6 +529,21 @@ export default {
     },
 
 
+    maxCharsForTagKey: function() {
+        return 255;
+    },
+
+
+    maxCharsForTagValue: function() {
+        return 255;
+    },
+
+
+    maxCharsForRelationRole: function() {
+        return 255;
+    },
+
+
     entityURL: function(entity) {
         return urlroot + '/' + entity.type + '/' + entity.osmId();
     },

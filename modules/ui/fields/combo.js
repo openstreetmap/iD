@@ -359,6 +359,7 @@ export function uiFieldCombo(field, context) {
             .append('input')
             .attr('type', 'text')
             .attr('id', 'preset-input-' + field.safeid)
+            .attr('maxlength', services.osm.maxCharsForTagValue())
             .call(utilNoAuto)
             .call(initCombo, selection)
             .merge(input);
@@ -400,6 +401,8 @@ export function uiFieldCombo(field, context) {
         if (isMulti || isSemi) {
             _multiData = [];
 
+            var maxLength;
+
             if (isMulti) {
                 // Build _multiData array containing keys already set..
                 for (var k in tags) {
@@ -417,6 +420,9 @@ export function uiFieldCombo(field, context) {
                 // Set keys for form-field modified (needed for undo and reset buttons)..
                 field.keys = _multiData.map(function(d) { return d.key; });
 
+                // limit the input length so it fits after prepending the key prefix
+                maxLength = services.osm.maxCharsForTagKey() - field.key.length;
+
             } else if (isSemi) {
                 var arr = utilArrayUniq((tags[field.key] || '').split(';')).filter(Boolean);
                 _multiData = arr.map(function(k) {
@@ -425,6 +431,9 @@ export function uiFieldCombo(field, context) {
                         value: displayValue(k)
                     };
                 });
+
+                // limit the input length to the remaining available characters
+                maxLength = services.osm.maxCharsForTagValue() - (tags[field.key] || '').length;
             }
 
             // Exclude existing multikeys from combo options..
@@ -432,9 +441,10 @@ export function uiFieldCombo(field, context) {
             combobox.data(available);
 
             // Hide 'Add' button if this field uses fixed set of
-            // translateable optstrings and they're all currently used..
+            // translateable optstrings and they're all currently used,
+            // or if the field is already at its character limit
             container.selectAll('.combobox-input, .combobox-caret')
-                .classed('hide', optstrings && !available.length);
+                .classed('hide', (optstrings && !available.length) || !maxLength);
 
 
             // Render chips
@@ -466,6 +476,9 @@ export function uiFieldCombo(field, context) {
                 .on('click', removeMultikey)
                 .attr('class', 'remove')
                 .text('×');
+
+            container.selectAll('input[type="text"]')
+                .attr('maxlength', maxLength);
 
         } else {
             utilGetSetValue(input, displayValue(tags[field.key]));

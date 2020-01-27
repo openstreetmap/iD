@@ -248,7 +248,7 @@ export function uiRawMembershipEditor(context) {
                 .append('input')
                 .attr('class', 'member-role')
                 .property('type', 'text')
-                .attr('maxlength', 255)
+                .attr('maxlength', services.osm.maxCharsForRelationRole())
                 .attr('placeholder', t('inspector.role'))
                 .call(utilNoAuto)
                 .property('value', function(d) { return d.member.role; })
@@ -296,7 +296,7 @@ export function uiRawMembershipEditor(context) {
                 .append('input')
                 .attr('class', 'member-role')
                 .property('type', 'text')
-                .attr('maxlength', 255)
+                .attr('maxlength', services.osm.maxCharsForRelationRole())
                 .attr('placeholder', t('inspector.role'))
                 .call(utilNoAuto);
 

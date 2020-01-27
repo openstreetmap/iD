@@ -1,6 +1,7 @@
 import { dispatch as d3_dispatch } from 'd3-dispatch';
 import { select as d3_select } from 'd3-selection';
 
+import { services } from '../../services';
 import { uiCombobox } from '../combobox';
 import { utilGetSetValue, utilNoAuto, utilRebind } from '../../util';
 
@@ -54,6 +55,7 @@ export function uiFieldCycleway(field, context) {
             .attr('class', 'preset-input-cycleway-wrap')
             .append('input')
             .attr('type', 'text')
+            .attr('maxlength', services.osm.maxCharsForTagValue())
             .attr('class', function(d) { return 'preset-input-cycleway preset-input-' + stripcolon(d); })
             .call(utilNoAuto)
             .each(function(d) {

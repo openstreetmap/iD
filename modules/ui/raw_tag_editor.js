@@ -207,7 +207,7 @@ export function uiRawTagEditor(context) {
             .append('input')
             .property('type', 'text')
             .attr('class', 'key')
-            .attr('maxlength', 255)
+            .attr('maxlength', services.osm.maxCharsForTagKey())
             .call(utilNoAuto)
             .on('blur', keyChange)
             .on('change', keyChange);
@@ -218,7 +218,7 @@ export function uiRawTagEditor(context) {
             .append('input')
             .property('type', 'text')
             .attr('class', 'value')
-            .attr('maxlength', 255)
+            .attr('maxlength', services.osm.maxCharsForTagValue())
             .call(utilNoAuto)
             .on('blur', valueChange)
             .on('change', valueChange)
@@ -362,11 +362,13 @@ export function uiRawTagEditor(context) {
         function textChanged() {
             var newText = this.value.trim();
             var newTags = {};
+            var maxKeyLength = services.osm.maxCharsForTagKey();
+            var maxValueLength = services.osm.maxCharsForTagValue();
             newText.split('\n').forEach(function(row) {
                 var m = row.match(/^\s*([^=]+)=(.*)$/);
                 if (m !== null) {
-                    var k = unstringify(m[1].trim());
-                    var v = unstringify(m[2].trim());
+                    var k = unstringify(m[1].trim()).substr(0, maxKeyLength);
+                    var v = unstringify(m[2].trim()).substr(0, maxValueLength);
                     newTags[k] = v;
                 }
             });

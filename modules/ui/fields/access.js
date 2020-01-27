@@ -1,6 +1,7 @@
 import { dispatch as d3_dispatch } from 'd3-dispatch';
 import { select as d3_select } from 'd3-selection';
 
+import { services } from '../../services';
 import { uiCombobox } from '../combobox';
 import { utilGetSetValue, utilNoAuto, utilRebind } from '../../util';
 
@@ -46,6 +47,7 @@ export function uiFieldAccess(field, context) {
             .attr('class', 'preset-input-access-wrap')
             .append('input')
             .attr('type', 'text')
+            .attr('maxlength', services.osm.maxCharsForTagValue())
             .attr('class', function(d) { return 'preset-input-access preset-input-access-' + d; })
             .call(utilNoAuto)
             .each(function(d) {

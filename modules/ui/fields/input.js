@@ -4,6 +4,7 @@ import * as countryCoder from '@ideditor/country-coder';
 
 import { t, textDirection } from '../../util/locale';
 import { dataPhoneFormats } from '../../../data';
+import { services } from '../../services';
 import { utilGetSetValue, utilNoAuto, utilRebind } from '../../util';
 import { svgIcon } from '../../svg/icon';
 
@@ -45,6 +46,7 @@ export function uiFieldText(field, context) {
             .attr('type', field.type === 'identifier' ? 'text' : field.type)
             .attr('id', fieldID)
             .attr('placeholder', field.placeholder() || t('inspector.unknown'))
+            .attr('maxlength', services.osm.maxCharsForTagValue())
             .classed(field.type, true)
             .call(utilNoAuto)
             .merge(input);

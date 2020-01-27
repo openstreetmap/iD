@@ -150,7 +150,8 @@ osmEntity.prototype = {
                 merged[k] = t2;
             } else if (t1 !== t2) {
                 changed = true;
-                merged[k] = utilArrayUnion(t1.split(/;\s*/), t2.split(/;\s*/)).join(';');
+                merged[k] = utilArrayUnion(t1.split(/;\s*/), t2.split(/;\s*/)).join(';')
+                    .substr(0, 255); // avoid exceeding character limit; see also services/osm.js -> maxCharsForTagValue()
             }
         }
         return changed ? this.update({ tags: merged }) : this;

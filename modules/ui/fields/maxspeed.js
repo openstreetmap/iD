@@ -2,6 +2,7 @@ import { dispatch as d3_dispatch } from 'd3-dispatch';
 import { select as d3_select } from 'd3-selection';
 import * as countryCoder from '@ideditor/country-coder';
 
+import { services } from '../../services';
 import { uiCombobox } from '../combobox';
 import { utilGetSetValue, utilNoAuto, utilRebind } from '../../util';
 
@@ -39,6 +40,7 @@ export function uiFieldMaxspeed(field, context) {
             .append('input')
             .attr('type', 'text')
             .attr('id', 'preset-input-' + field.safeid)
+            .attr('maxlength', services.osm.maxCharsForTagValue() - 4)
             .attr('placeholder', field.placeholder())
             .call(utilNoAuto)
             .call(speedCombo)
