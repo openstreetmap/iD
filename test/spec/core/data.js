@@ -1,8 +1,8 @@
 describe('iD.coreData', function() {
     var _context;
-    var _oldData;
 
     before(function() {
+        iD.data = iD.data || {};
         iD.data.test = { hello: 'world' };
     });
 

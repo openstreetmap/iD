@@ -10,7 +10,7 @@ gaze(['css/**/*.css'], (err, watcher) => {
   watcher.on('all', () => buildCSS());
 });
 
-const server = new StaticServer({ rootPath: __dirname, port: 8080, followSymlink: true });
+const server = new StaticServer({ rootPath: process.cwd(), port: 8080, followSymlink: true });
 server.start(() => {
-  console.log(colors.yellow('Listening on ' + server.port));
+  console.log(colors.yellow(`Listening on ${server.port}`));
 });

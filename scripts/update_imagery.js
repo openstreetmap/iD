@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 const fs = require('fs');
 const sources = require('editor-layer-index/imagery.json');
 const prettyStringify = require('json-stringify-pretty-compact');

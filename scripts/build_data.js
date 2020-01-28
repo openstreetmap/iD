@@ -3,15 +3,15 @@ const colors = require('colors/safe');
 const fs = require('fs');
 const glob = require('glob');
 const jsonschema = require('jsonschema');
+const nsi = require('name-suggestion-index');
 const path = require('path');
 const prettyStringify = require('json-stringify-pretty-compact');
 const shell = require('shelljs');
 const YAML = require('js-yaml');
 
-const fieldSchema = require('./data/presets/schema/field.json');
-const presetSchema = require('./data/presets/schema/preset.json');
-const nsi = require('name-suggestion-index');
-const deprecated = require('./data/deprecated.json').dataDeprecated;
+const fieldSchema = require('../data/presets/schema/field.json');
+const presetSchema = require('../data/presets/schema/preset.json');
+const deprecated = require('../data/deprecated.json').dataDeprecated;
 
 // fontawesome icons
 const fontawesome = require('@fortawesome/fontawesome-svg-core');
@@ -141,8 +141,8 @@ function validate(file, instance, schema) {
   let validationErrors = jsonschema.validate(instance, schema).errors;
 
   if (validationErrors.length) {
-    console.error(file + ': ');
-    validationErrors.forEach((error) => {
+    console.error(`${file}: `);
+    validationErrors.forEach(error => {
       if (error.property) {
         console.error(error.property + ' ' + error.message);
       } else {
@@ -158,7 +158,7 @@ function validate(file, instance, schema) {
 function generateCategories(tstrings, faIcons, tnpIcons) {
   let categories = {};
 
-  glob.sync(__dirname + '/data/presets/categories/*.json').forEach(file => {
+  glob.sync('data/presets/categories/*.json').forEach(file => {
     let category = read(file);
     let id = 'category-' + path.basename(file, '.json');
     tstrings.categories[id] = { name: category.name };
@@ -181,7 +181,7 @@ function generateCategories(tstrings, faIcons, tnpIcons) {
 function generateFields(tstrings, faIcons, tnpIcons, searchableFieldIDs) {
   let fields = {};
 
-  glob.sync(__dirname + '/data/presets/fields/**/*.json').forEach(file => {
+  glob.sync('data/presets/fields/**/*.json').forEach(file => {
     let field = read(file);
     let id = stripLeadingUnderscores(file.match(/presets\/fields\/([^.]*)\.json/)[1]);
 
@@ -273,7 +273,7 @@ function suggestionsToPresets(presets) {
 
     // still no match?
     if (!preset) {
-      console.log('Warning:  No preset "' + presetID + '" for name-suggestion "' + name + '"');
+      console.log(`Warning:  No preset "${presetID}" for name-suggestion "${name}"`);
       return;
     }
 
@@ -329,7 +329,7 @@ function suggestionsToPresets(presets) {
 
 function stripLeadingUnderscores(str) {
   return str.split('/')
-    .map(function(s) { return s.replace(/^_/,''); })
+    .map(s => s.replace(/^_/,''))
     .join('/');
 }
 
@@ -337,7 +337,7 @@ function stripLeadingUnderscores(str) {
 function generatePresets(tstrings, faIcons, tnpIcons, searchableFieldIDs) {
   let presets = {};
 
-  glob.sync(__dirname + '/data/presets/presets/**/*.json').forEach(file => {
+  glob.sync('data/presets/presets/**/*.json').forEach(file => {
     let preset = read(file);
     let id = stripLeadingUnderscores(file.match(/presets\/presets\/([^.]*)\.json/)[1]);
 
@@ -379,23 +379,23 @@ function generateTranslations(fields, presets, tstrings, searchableFieldIDs) {
     let optkeys = Object.keys(options);
 
     if (f.keys) {
-      field['label#'] = f.keys.map(k => { return k + '=*'; }).join(', ');
+      field['label#'] = f.keys.map(k => `${k}=*`).join(', ');
       optkeys.forEach(k => {
         if (id === 'access') {
-          options[k]['title#'] = options[k]['description#'] = 'access=' + k;
+          options[k]['title#'] = options[k]['description#'] = `access=${k}`;
         } else {
-          options[k + '#'] = k + '=yes';
+          options[k + '#'] = `${k}=yes`;
         }
       });
     } else if (f.key) {
-      field['label#'] = f.key + '=*';
+      field['label#'] = `${f.key}=*`;
       optkeys.forEach(k => {
-        options[k + '#'] = f.key + '=' + k;
+        options[k + '#'] = `${f.key}=${k}`;
       });
     }
 
     if (f.placeholder) {
-      field['placeholder#'] = id + ' field placeholder';
+      field['placeholder#'] = `${id} field placeholder`;
     }
 
     if (searchableFieldIDs[id]) {
@@ -417,14 +417,14 @@ function generateTranslations(fields, presets, tstrings, searchableFieldIDs) {
     let keys = Object.keys(tags);
 
     if (keys.length) {
-      preset['name#'] = keys.map(k => { return k + '=' + tags[k]; }).join(', ');
+      preset['name#'] = keys.map(k => `${k}=${tags[k]}`).join(', ');
     }
 
     if (p.searchable !== false) {
       if (p.terms && p.terms.length) {
         preset['terms#'] = 'terms: ' + p.terms.join();
       }
-      preset.terms = '<translate with synonyms or related terms for \'' + preset.name + '\', separated by commas>';
+      preset.terms = `<translate with synonyms or related terms for '${preset.name}', separated by commas>`;
     } else {
       delete tstrings.presets[id].terms;
       delete p.terms;
@@ -466,7 +466,7 @@ function generateTaginfo(presets, fields) {
     }
     if (preset.name) {
       let legacy = (preset.searchable === false) ? ' (unsearchable)' : '';
-      tag.description = [ '🄿 ' + preset.name + legacy ];
+      tag.description = [ `🄿 ${preset.name}${legacy}` ];
     }
     if (preset.geometry) {
       setObjectType(tag, preset);
@@ -505,14 +505,14 @@ function generateTaginfo(presets, fields) {
           if (value === 'undefined' || value === '*' || value === '') return;
           let tag = { key: key, value: value };
           if (field.label) {
-            tag.description = [ '🄵 ' + field.label ];
+            tag.description = [ `🄵 ${field.label}` ];
           }
           coalesceTags(taginfo, tag);
         });
       } else {
         let tag = { key: key };
         if (field.label) {
-          tag.description = [ '🄵 ' + field.label ];
+          tag.description = [ `🄵 ${field.label}` ];
         }
         coalesceTags(taginfo, tag);
       }
@@ -532,7 +532,7 @@ function generateTaginfo(presets, fields) {
       for (let replaceKey in elem.replace) {
         let replaceValue = elem.replace[replaceKey];
         if (replaceValue === '$1') replaceValue = '*';
-        replacementStrings.push(replaceKey + '=' + replaceValue);
+        replacementStrings.push(`${replaceKey}=${replaceValue}`);
       }
       let description = '🄳';
       if (replacementStrings.length > 0) {
@@ -553,9 +553,8 @@ function generateTaginfo(presets, fields) {
   function coalesceTags(taginfo, tag) {
     if (!tag.key) return;
 
-    let currentTaginfoEntries = taginfo.tags.filter(t => {
-      return (t.key === tag.key && t.value === tag.value);
-    });
+    let currentTaginfoEntries = taginfo.tags
+      .filter(t => (t.key === tag.key && t.value === tag.value));
 
     if (currentTaginfoEntries.length === 0) {
       taginfo.tags.push(tag);
@@ -600,7 +599,7 @@ function generateTaginfo(presets, fields) {
 
 
 function generateTerritoryLanguages() {
-  let allRawInfo = read('./node_modules/cldr-core/supplemental/territoryInfo.json').supplemental.territoryInfo;
+  let allRawInfo = require('cldr-core/supplemental/territoryInfo.json').supplemental.territoryInfo;
   let territoryLanguages = {};
 
   Object.keys(allRawInfo).forEach(territoryCode => {
@@ -608,14 +607,14 @@ function generateTerritoryLanguages() {
     if (!territoryLangInfo) return;
     let langCodes = Object.keys(territoryLangInfo);
 
-    territoryLanguages[territoryCode.toLowerCase()] = langCodes.sort(function(langCode1, langCode2) {
+    territoryLanguages[territoryCode.toLowerCase()] = langCodes.sort((langCode1, langCode2) => {
       let popPercent1 = parseFloat(territoryLangInfo[langCode1]._populationPercent);
       let popPercent2 = parseFloat(territoryLangInfo[langCode2]._populationPercent);
       if (popPercent1 === popPercent2) {
         return langCode1.localeCompare(langCode2, 'en', { sensitivity: 'base' });
       }
       return popPercent2 - popPercent1;
-    }).map(langCode => { return langCode.replace('_', '-'); });
+    }).map(langCode => langCode.replace('_', '-'));
   });
 
   return territoryLanguages;
@@ -692,7 +691,7 @@ function validatePresetFields(presets, fields) {
       if (fieldCount > maxFieldsBeforeWarning) {
         // Fields with `prerequisiteTag` probably won't show up initially,
         // so don't count them against the limits.
-        let fieldsWithoutPrerequisites = preset.fields.filter(fieldID => {
+        const fieldsWithoutPrerequisites = preset.fields.filter(fieldID => {
           if (fields[fieldID] && fields[fieldID].prerequisiteTag) return false;
           return true;
         });
@@ -715,7 +714,7 @@ function validateDefaults(defaults, categories, presets) {
     let members = defaults.defaults[name];
     members.forEach(id => {
       if (!presets[id] && !categories[id]) {
-        console.error('Unknown category or preset: ' + id + ' in default ' + name);
+        console.error(`Unknown category or preset: ${id} in default ${name}`);
         console.log('');
         process.exit(1);
       }
@@ -763,9 +762,9 @@ function writeFaIcons(faIcons) {
     const name = key.substring(4);
     const def = fontawesome.findIconDefinition({ prefix: prefix, iconName: name });
     try {
-      writeFileProm('svg/fontawesome/' + key + '.svg', fontawesome.icon(def).html);
+      writeFileProm(`svg/fontawesome/${key}.svg`, fontawesome.icon(def).html);
     } catch (error) {
-      console.error('Error: No FontAwesome icon for ' + key);
+      console.error(`Error: No FontAwesome icon for ${key}`);
       throw (error);
     }
   }
@@ -782,13 +781,13 @@ function writeTnpIcons(tnpIcons) {
    *  }
    */
   let nounAuth;
-  if (fs.existsSync('./the_noun_project.auth')) {
-    nounAuth = JSON.parse(fs.readFileSync('./the_noun_project.auth', 'utf8'));
+  if (fs.existsSync('../the_noun_project.auth')) {
+    nounAuth = JSON.parse(fs.readFileSync('../the_noun_project.auth', 'utf8'));
   }
   const baseURL = 'http://api.thenounproject.com/icon/';
 
   let unusedSvgFiles = fs.readdirSync('svg/the-noun-project', 'utf8')
-    .reduce(function(obj, name) {
+    .reduce((obj, name) => {
       if (name.endsWith('.svg')) {
         obj[name] = true;
       }
@@ -797,19 +796,19 @@ function writeTnpIcons(tnpIcons) {
 
   for (const key in tnpIcons) {
     const id = key.substring(4);
-    const fileName = id + '.svg';
+    const fileName = `${id}.svg`;
 
     if (unusedSvgFiles[fileName]) {
       delete unusedSvgFiles[fileName];
     }
 
-    const localPath = 'svg/the-noun-project/' + fileName;
+    const localPath = `svg/the-noun-project/${fileName}`;
 
     // don't redownload existing icons
     if (fs.existsSync(localPath)) continue;
 
     if (!nounAuth) {
-      console.error('No authentication file for The Noun Project. Cannot download icon: ' + key);
+      console.error(`No authentication file for The Noun Project. Cannot download icon: ${key}`);
       continue;
     }
 
@@ -819,7 +818,7 @@ function writeTnpIcons(tnpIcons) {
 
   // remove icons that are not needed
   for (const unusedFileName in unusedSvgFiles) {
-    shell.rm('-f', ['svg/the-noun-project/' + unusedFileName]);
+    shell.rm('-f', [`svg/the-noun-project/${unusedFileName}`]);
   }
 }
 
@@ -839,13 +838,13 @@ function handleTheNounProjectResponse(err, resp, body) {
     console.error('The Noun Project has not provided a URL to download the icon "' + icon.term + '" (tnp-' + icon.id + ').');
     return;
   }
-  request.get(iconURL, function(err2, resp2, svg) {
+  request.get(iconURL, (err2, resp2, svg) => {
     if (err2) {
       console.error(err2);
       return;
     }
     try {
-      writeFileProm('svg/the-noun-project/' + icon.id + '.svg', svg);
+      writeFileProm(`svg/the-noun-project/${icon.id}.svg`, svg);
     } catch (error) {
       console.error(error);
       throw (error);
