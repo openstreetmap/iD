@@ -52,7 +52,7 @@ export function uiCommit(context) {
         var osm = context.connection();
         if (!osm) return;
 
-        var tagCharLimit = osm.maxCharsForTagValue();
+        var tagCharLimit = context.maxCharsForTagValue();
 
         // expire stored comment, hashtags, source after cutoff datetime - #3947 #4899
         var commentDate = +context.storage('commentDate') || 0;
@@ -515,7 +515,7 @@ export function uiCommit(context) {
     function updateChangeset(changed, onInput) {
         var tags = Object.assign({}, _changeset.tags);   // shallow copy
 
-        var tagCharLimit = services.osm.maxCharsForTagValue();
+        var tagCharLimit = context.maxCharsForTagValue();
 
         Object.keys(changed).forEach(function(k) {
             var v = changed[k];

@@ -209,7 +209,7 @@ export function uiRawMemberEditor(context) {
             .append('input')
             .attr('class', 'member-role')
             .property('type', 'text')
-            .attr('maxlength', services.osm.maxCharsForRelationRole())
+            .attr('maxlength', context.maxCharsForRelationRole())
             .attr('placeholder', t('inspector.role'))
             .call(utilNoAuto);
 

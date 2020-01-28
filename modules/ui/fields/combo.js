@@ -359,7 +359,7 @@ export function uiFieldCombo(field, context) {
             .append('input')
             .attr('type', 'text')
             .attr('id', 'preset-input-' + field.safeid)
-            .attr('maxlength', services.osm.maxCharsForTagValue())
+            .attr('maxlength', context.maxCharsForTagValue())
             .call(utilNoAuto)
             .call(initCombo, selection)
             .merge(input);
@@ -421,7 +421,7 @@ export function uiFieldCombo(field, context) {
                 field.keys = _multiData.map(function(d) { return d.key; });
 
                 // limit the input length so it fits after prepending the key prefix
-                maxLength = services.osm.maxCharsForTagKey() - field.key.length;
+                maxLength = context.maxCharsForTagKey() - field.key.length;
 
             } else if (isSemi) {
                 var arr = utilArrayUniq((tags[field.key] || '').split(';')).filter(Boolean);
@@ -435,7 +435,7 @@ export function uiFieldCombo(field, context) {
                 var currLength = arr.join(';').length;
 
                 // limit the input length to the remaining available characters
-                maxLength = services.osm.maxCharsForTagValue() - currLength;
+                maxLength = context.maxCharsForTagValue() - currLength;
 
                 if (currLength > 0) {
                     // account for the separator if a new value will be appended to existing

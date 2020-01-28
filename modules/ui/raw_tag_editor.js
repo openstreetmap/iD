@@ -207,7 +207,7 @@ export function uiRawTagEditor(context) {
             .append('input')
             .property('type', 'text')
             .attr('class', 'key')
-            .attr('maxlength', services.osm.maxCharsForTagKey())
+            .attr('maxlength', context.maxCharsForTagKey())
             .call(utilNoAuto)
             .on('blur', keyChange)
             .on('change', keyChange);
@@ -218,7 +218,7 @@ export function uiRawTagEditor(context) {
             .append('input')
             .property('type', 'text')
             .attr('class', 'value')
-            .attr('maxlength', services.osm.maxCharsForTagValue())
+            .attr('maxlength', context.maxCharsForTagValue())
             .call(utilNoAuto)
             .on('blur', valueChange)
             .on('change', valueChange)
@@ -362,8 +362,8 @@ export function uiRawTagEditor(context) {
         function textChanged() {
             var newText = this.value.trim();
             var newTags = {};
-            var maxKeyLength = services.osm.maxCharsForTagKey();
-            var maxValueLength = services.osm.maxCharsForTagValue();
+            var maxKeyLength = context.maxCharsForTagKey();
+            var maxValueLength = context.maxCharsForTagValue();
             newText.split('\n').forEach(function(row) {
                 var m = row.match(/^\s*([^=]+)=(.*)$/);
                 if (m !== null) {

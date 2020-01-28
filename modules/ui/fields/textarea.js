@@ -1,7 +1,6 @@
 import { dispatch as d3_dispatch } from 'd3-dispatch';
 import { select as d3_select } from 'd3-selection';
 
-import { services } from '../../services';
 import { t } from '../../util/locale';
 import {
     utilGetSetValue,
@@ -10,7 +9,7 @@ import {
 } from '../../util';
 
 
-export function uiFieldTextarea(field) {
+export function uiFieldTextarea(field, context) {
     var dispatch = d3_dispatch('change');
     var input = d3_select(null);
 
@@ -31,7 +30,7 @@ export function uiFieldTextarea(field) {
             .append('textarea')
             .attr('id', 'preset-input-' + field.safeid)
             .attr('placeholder', field.placeholder() || t('inspector.unknown'))
-            .attr('maxlength', services.osm.maxCharsForTagValue())
+            .attr('maxlength', context.maxCharsForTagValue())
             .call(utilNoAuto)
             .on('input', change(true))
             .on('blur', change())

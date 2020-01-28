@@ -147,7 +147,7 @@ export function uiFieldLocalized(field, context) {
             .attr('id', 'preset-input-' + field.safeid)
             .attr('class', 'localized-main')
             .attr('placeholder', field.placeholder())
-            .attr('maxlength', services.osm.maxCharsForTagValue())
+            .attr('maxlength', context.maxCharsForTagValue())
             .call(utilNoAuto)
             .merge(input);
 
@@ -511,7 +511,7 @@ export function uiFieldLocalized(field, context) {
                     .append('input')
                     .attr('type', 'text')
                     .attr('placeholder', t('translate.localized_translation_name'))
-                    .attr('maxlength', services.osm.maxCharsForTagValue())
+                    .attr('maxlength', context.maxCharsForTagValue())
                     .attr('class', 'localized-value')
                     .on('blur', changeValue)
                     .on('change', changeValue);

@@ -4,7 +4,6 @@ import * as countryCoder from '@ideditor/country-coder';
 
 import { dataAddressFormats } from '../../../data';
 import { geoExtent, geoChooseEdge, geoSphericalDistance } from '../../geo';
-import { services } from '../../services';
 import { uiCombobox } from '../combobox';
 import { utilArrayUniqBy, utilGetSetValue, utilNoAuto, utilRebind } from '../../util';
 import { t } from '../../util/locale';
@@ -164,7 +163,7 @@ export function uiFieldAddress(field, context) {
                 var tkey = addrField.strings.placeholders[localkey] ? localkey : d.id;
                 return addrField.t('placeholders.' + tkey);
             })
-            .attr('maxlength', services.osm.maxCharsForTagValue())
+            .attr('maxlength', context.maxCharsForTagValue())
             .attr('class', function (d) { return 'addr-' + d.id; })
             .call(utilNoAuto)
             .each(addDropdown)

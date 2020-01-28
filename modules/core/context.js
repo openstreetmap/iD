@@ -207,6 +207,19 @@ export function coreContext() {
   };
 
 
+  context.maxCharsForTagKey = function() {
+    return 255;
+  };
+
+  context.maxCharsForTagValue = function() {
+    return 255;
+  };
+
+  context.maxCharsForRelationRole = function() {
+    return 255;
+  };
+
+
   /* History */
   let _inIntro = false;
   context.inIntro = function(val) {

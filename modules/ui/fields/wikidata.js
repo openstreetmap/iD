@@ -198,7 +198,7 @@ export function uiFieldWikidata(field, context) {
                     var siteID = lang.replace('-', '_') + 'wiki';
                     if (entity.sitelinks[siteID]) {
                         foundPreferred = true;
-                        currTags[_wikipediaKey] = (lang + ':' + entity.sitelinks[siteID].title).substr(0, services.osm.maxCharsForTagValue());
+                        currTags[_wikipediaKey] = (lang + ':' + entity.sitelinks[siteID].title).substr(0, context.maxCharsForTagValue());
                         // use the first match
                         break;
                     }
@@ -220,7 +220,7 @@ export function uiFieldWikidata(field, context) {
                     } else {
                         var wikiLang = wikiSiteKeys[0].slice(0, -4).replace('_', '-');
                         var wikiTitle = entity.sitelinks[wikiSiteKeys[0]].title;
-                        currTags[_wikipediaKey] = (wikiLang + ':' + wikiTitle).substr(0, services.osm.maxCharsForTagValue());
+                        currTags[_wikipediaKey] = (wikiLang + ':' + wikiTitle).substr(0, context.maxCharsForTagValue());
                     }
                 }
             }
