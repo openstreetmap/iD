@@ -7,7 +7,6 @@
 }
 .preset-icon .icon.tag-railway {
     color: #555;
-    fill: #eee;
 }
 
 /* lines */
@@ -33,7 +32,8 @@ path.line.stroke.tag-railway {
     stroke-width: 2;
     stroke-dasharray: 6,6;
 }
-.preset-icon-container path.line.stroke.tag-railway:not(.tag-status) {
+.preset-icon-container path.line.stroke.tag-railway:not(.tag-status),
+.preset-icon-container path.line.stroke.tag-railway.tag-status-disused {
     stroke-dasharray: 6;
 }
 
@@ -53,18 +53,20 @@ path.line.stroke.tag-railway {
 }
 
 
-.preset-icon .icon.tag-railway-disused,
-.preset-icon .icon.tag-railway-abandoned {
+.preset-icon .icon.tag-railway.tag-status {
     color: #999;
-    fill: #eee;
 }
-path.line.casing.tag-railway-disused,
-path.line.casing.tag-railway-abandoned {
+path.line.casing.tag-railway.tag-status {
     stroke: #999;
 }
-path.line.stroke.tag-railway-disused,
-path.line.stroke.tag-railway-abandoned {
+path.line.stroke.tag-railway.tag-status:not(.tag-service) {
     stroke: #eee;
+}
+.preset-icon .icon.tag-railway.tag-status-disused {
+    color: #808080;
+}
+path.line.casing.tag-railway.tag-status-disused {
+    stroke: #808080;
 }
 
 

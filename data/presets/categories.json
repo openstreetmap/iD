@@ -97,7 +97,7 @@
       ]
     },
     "category-rail": {
-      "icon": "iD-railway-rail",
+      "icon": "temaki-railway_track",
       "name": "Rails",
       "members": [
         "railway/rail",
