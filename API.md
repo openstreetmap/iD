@@ -241,7 +241,7 @@ Optional properties:
 * `best` - If set to `true`, this imagery is considered "better than Bing" and may be chosen by default when iD starts.  Will display with a star in the background imagery list.  Defaults to `false`
 
 For more details about the `iD.data.imagery` structure, see
-[`update_imagery.js`](https://github.com/openstreetmap/iD/blob/master/data/update_imagery.js).
+[`update_imagery.js`](https://github.com/openstreetmap/iD/blob/master/scripts/update_imagery.js).
 
 
 ### Presets
