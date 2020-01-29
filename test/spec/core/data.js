@@ -2,7 +2,6 @@ describe('iD.coreData', function() {
     var _context;
 
     before(function() {
-        iD.data = iD.data || {};
         iD.data.test = { hello: 'world' };
     });
 
@@ -36,26 +35,27 @@ describe('iD.coreData', function() {
                 .then(function(data) {
                     expect(data).to.be.a('object');
                     expect(data.hello).to.eql('world');
-                    done();
                 })
-                .catch(function(err) {
-                    throw err;
-                    done();
-                });
+                .finally(done);
+
+            window.setTimeout(function() {}, 20); // async - to let the promise settle in phantomjs
         });
+
         it('returns a promise rejected if we can not get the data', function(done) {
             var data = iD.coreData(_context);
             var prom = data.get('wat');
             prom
                 .then(function(data) {
-                    throw new Error('got data ' + data);
-                    done();
+                    throw new Error('We were not supposed to get data but did: ' + data);
                 })
                 .catch(function(err) {
                     expect(/^Unknown data file/.test(err)).to.be.true;
-                    done();
-                });
+                })
+                .finally(done);
+
+            window.setTimeout(function() {}, 20);  // async - to let the promise settle in phantomjs
         });
+
         it('returns a promise to fetch data if we do not already have the data', function(done) {
             var files = { 'intro_graph': 'data/intro_graph.min.json' };
             var data = iD.coreData(_context).fileMap(files);
@@ -65,12 +65,10 @@ describe('iD.coreData', function() {
                 .then(function(data) {
                     expect(data).to.be.a('object');
                     expect(data.n1.tags.name).to.eql('Three Rivers City Hall');
-                    done();
                 })
-                .catch(function(err) {
-                    throw err;
-                    done();
-                });
+                .finally(done);
+
+            window.setTimeout(function() {}, 20);  // async - to let the promise settle in phantomjs
         });
     });
 

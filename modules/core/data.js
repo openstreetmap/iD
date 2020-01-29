@@ -18,7 +18,8 @@ export function coreData(context) {
     'locales': 'data/locales.min.json',
     'phone_formats': 'data/phone_formats.min.json',
     'shortcuts': 'data/shortcuts.min.json',
-    'territory_languages': 'data/territory_languages.min.json'
+    'territory_languages': 'data/territory_languages.min.json',
+    'wikipedia': 'data/wikipedia.min.json'
   };
 
 
