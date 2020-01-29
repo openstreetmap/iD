@@ -42,6 +42,7 @@ export function modeSave(context) {
     var _errors = [];
     var _origChanges;
     var _location;
+    var _success;
 
     var _discardTags = {};
     context.data().get('discarded')
@@ -292,7 +293,8 @@ export function modeSave(context) {
             var history = context.history();
             var changes = history.changes(actionDiscardTags(history.difference(), _discardTags));
             if (changes.modified.length || changes.created.length || changes.deleted.length) {
-                loadLocation();  // so it is ready when we display the save screen
+                // fire off some async work that we want to be ready later
+                prepareForSuccess();  // geocode current location and load community index
                 osm.putChangeset(changeset, changes, uploadCallback);
             } else {        // changes were insignificant or reverted by user
                 d3_select('.inspector-wrap *').remove();
@@ -319,7 +321,7 @@ export function modeSave(context) {
 
         } else {
             context.history().clearSaved();
-            success(changeset);
+            showSuccess(changeset);
             // Add delay to allow for postgres replication #1646 #2678
             window.setTimeout(function() {
                 d3_select('.inspector-wrap *').remove();
@@ -451,10 +453,10 @@ export function modeSave(context) {
     }
 
 
-    function success(changeset) {
+    function showSuccess(changeset) {
         commit.reset();
 
-        var ui = uiSuccess(context)
+        var ui = _success
             .changeset(changeset)
             .location(_location)
             .on('cancel', function() { context.ui().sidebar.hide(); });
@@ -477,7 +479,8 @@ export function modeSave(context) {
 
     // Reverse geocode current map location so we can display a message on
     // the success screen like "Thank you for editing around place, region."
-    function loadLocation() {
+    function prepareForSuccess() {
+        _success = uiSuccess(context);
         _location = null;
         if (!services.geocoder) return;
 
