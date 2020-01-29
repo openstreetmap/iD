@@ -11,7 +11,7 @@ const YAML = require('js-yaml');
 
 const fieldSchema = require('../data/presets/schema/field.json');
 const presetSchema = require('../data/presets/schema/preset.json');
-const deprecated = require('../data/deprecated.json').dataDeprecated;
+const deprecated = require('../data/deprecated.json');
 
 // fontawesome icons
 const fontawesome = require('@fortawesome/fontawesome-svg-core');
@@ -85,7 +85,7 @@ function buildData() {
     'data/presets/presets.json',
     'data/presets.yaml',
     'data/taginfo.json',
-    'data/territory-languages.json',
+    'data/territory_languages.json',
     'dist/locales/en.json',
     'svg/fontawesome/*.svg',
   ]);
@@ -110,10 +110,26 @@ function buildData() {
     writeFileProm('data/presets/presets.json', prettyStringify({ presets: presets }, { maxLength: 9999 }) ),
     writeFileProm('data/presets.yaml', translationsToYAML(translations) ),
     writeFileProm('data/taginfo.json', prettyStringify(taginfo, { maxLength: 9999 }) ),
-    writeFileProm('data/territory-languages.json', prettyStringify({ dataTerritoryLanguages: territoryLanguages }, { maxLength: 9999 }) ),
+    writeFileProm('data/territory_languages.json', prettyStringify(territoryLanguages, { maxLength: 9999 }) ),
     writeEnJson(tstrings),
     writeFaIcons(faIcons),
-    writeTnpIcons(tnpIcons)
+    writeTnpIcons(tnpIcons),
+    minifyJSON('data/presets/categories.json', 'dist/data/categories.min.json'),
+    minifyJSON('data/presets/fields.json', 'dist/data/fields.min.json'),
+    minifyJSON('data/presets/presets.json', 'dist/data/presets.min.json'),
+    minifyJSON('data/address_formats.json', 'dist/data/address_formats.min.json'),
+    minifyJSON('data/deprecated.json', 'dist/data/deprecated.min.json'),
+    minifyJSON('data/discarded.json', 'dist/data/discarded.min.json'),
+    minifyJSON('data/imagery.json', 'dist/data/imagery.min.json'),
+    minifyJSON('data/intro_graph.json', 'dist/data/intro_graph.min.json'),
+    minifyJSON('data/keepRight.json', 'dist/data/keepRight.min.json'),
+    minifyJSON('data/languages.json', 'dist/data/languages.min.json'),
+    minifyJSON('data/locales.json', 'dist/data/locales.min.json'),
+    minifyJSON('data/phone_formats.json', 'dist/data/phone_formats.min.json'),
+    minifyJSON('data/qa_errors.json', 'dist/data/qa_errors.min.json'),
+    minifyJSON('data/shortcuts.json', 'dist/data/shortcuts.min.json'),
+    minifyJSON('data/taginfo.json', 'dist/data/taginfo.min.json'),
+    minifyJSON('data/territory_languages.json', 'dist/data/territory_languages.min.json')
   ];
 
   return _currBuild =
@@ -868,6 +884,22 @@ function readFileProm(path, options) {
     fs.readFile(path, options, (err, data) => {
       if (err) return reject(err);
       resolve(data);
+    });
+  });
+}
+
+
+function minifyJSON(inPath, outPath) {
+  return new Promise((resolve, reject) => {
+    fs.readFile(inPath, 'utf8', (err, data) => {
+      if (err) return reject(err);
+
+      const minified = JSON.stringify(JSON.parse(data));
+      fs.writeFile(outPath, minified, (err) => {
+        if (err) return reject(err);
+        resolve();
+      });
+
     });
   });
 }

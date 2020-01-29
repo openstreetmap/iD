@@ -13,6 +13,12 @@ import { validationIssue, validationIssueFix } from '../core/validation';
 export function validationOutdatedTags(context) {
     var type = 'outdated_tags';
 
+    // initialize deprecated tags array
+    var _dataDeprecated = [];
+    context.data().get('deprecated')
+        .then(function(d) { _dataDeprecated = d; })
+        .catch(function() { /* ignore */ });
+
     // initialize name-suggestion-index matcher
     var nsiMatcher = matcher();
     nsiMatcher.buildMatchIndex(brands.brands);
@@ -43,7 +49,7 @@ export function validationOutdatedTags(context) {
         }
 
         // upgrade tags..
-        var deprecatedTags = entity.deprecatedTags();
+        var deprecatedTags = entity.deprecatedTags(_dataDeprecated);
         if (deprecatedTags.length) {
             deprecatedTags.forEach(function(tag) {
                 graph = actionUpgradeTags(entity.id, tag.old, tag.replace)(graph);

@@ -2,7 +2,6 @@ import { dispatch as d3_dispatch } from 'd3-dispatch';
 import { select as d3_select } from 'd3-selection';
 import * as countryCoder from '@ideditor/country-coder';
 
-import { dataAddressFormats } from '../../../data';
 import { geoExtent, geoChooseEdge, geoSphericalDistance } from '../../geo';
 import { uiCombobox } from '../combobox';
 import { utilArrayUniqBy, utilGetSetValue, utilNoAuto, utilRebind } from '../../util';
@@ -12,10 +11,21 @@ import { t } from '../../util/locale';
 export function uiFieldAddress(field, context) {
     var dispatch = d3_dispatch('init', 'change');
     var wrap = d3_select(null);
+    var addrField = context.presets().field('address');   // needed for placeholder strings
+
     var _isInitialized = false;
     var _entity;
-    // needed for placeholder strings
-    var addrField = context.presets().field('address');
+    var _addressFormats = [{
+        format: [
+          ['housenumber', 'street'],
+          ['city', 'postcode']
+        ]
+      }];
+
+    context.data().get('address_formats')
+        .then(function(d) { _addressFormats = d; })
+        .catch(function() { /* ignore */ });
+
 
     function getNearStreets() {
         var extent = _entity.extent(context.graph());
@@ -113,8 +123,8 @@ export function uiFieldAddress(field, context) {
         countryCode = countryCode.toLowerCase();
 
         var addressFormat;
-        for (var i = 0; i < dataAddressFormats.length; i++) {
-            var format = dataAddressFormats[i];
+        for (var i = 0; i < _addressFormats.length; i++) {
+            var format = _addressFormats[i];
             if (!format.countryCodes) {
                 addressFormat = format;   // choose the default format, keep going
             } else if (format.countryCodes.indexOf(countryCode) !== -1) {

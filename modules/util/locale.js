@@ -1,6 +1,5 @@
-import { dataLanguages } from '../../../data';
-
 var translations = Object.create(null);
+var _dataLanguages = {};
 
 export var currentLocale = 'en';
 export var textDirection = 'ltr';
@@ -73,7 +72,6 @@ export function t(s, o, loc) {
  *
  * @param {string} dir ltr or rtl
  */
-
 export function setTextDirection(dir) {
     textDirection = dir;
 }
@@ -86,38 +84,42 @@ export function setScriptNames(obj) {
     scriptNames = obj;
 }
 
-export function languageName(code, options) {
-    if (languageNames[code]) { // name in locale langauge
+export function languageName(context, code, options) {
+    // Data access is async now, which makes this complicated.
+    // If _dataLanguages haven't been loaded yet, try to load them.
+    // Worst case, we fallback to the code until the file has been loaded.
+    if (!Object.keys(_dataLanguages).length) {
+        context.data().get('languages')
+            .then(function(d) { _dataLanguages = d; })
+            .catch(function() { /* ignore */ });
+    }
 
+    if (languageNames[code]) { // name in locale langauge
         // e.g. German
         return languageNames[code];
     }
+
     // sometimes we only want the local name
     if (options && options.localOnly) return null;
 
-    var langInfo = dataLanguages[code];
-
+    var langInfo = _dataLanguages[code];
     if (langInfo) {
         if (langInfo.nativeName) { // name in native language
-
             // e.g. Deutsch (de)
             return t('translate.language_and_code', { language: langInfo.nativeName, code: code });
 
         } else if (langInfo.base && langInfo.script) {
-
             var base = langInfo.base; // the code of the langauge this is based on
 
             if (languageNames[base]) { // base language name in locale langauge
                 var scriptCode = langInfo.script;
                 var script = scriptNames[scriptCode] || scriptCode;
-
                 // e.g. Serbian (Cyrillic)
                 return t('translate.language_and_code', { language: languageNames[base], code: script });
 
-            } else if (dataLanguages[base] && dataLanguages[base].nativeName) {
-
+            } else if (_dataLanguages[base] && _dataLanguages[base].nativeName) {
                 // e.g. српски (sr-Cyrl)
-                return t('translate.language_and_code', { language: dataLanguages[base].nativeName, code: code });
+                return t('translate.language_and_code', { language: _dataLanguages[base].nativeName, code: code });
             }
         }
     }

@@ -1,6 +1,5 @@
 import { debug } from '../index';
 import { osmIsInterestingTag } from './tags';
-import { dataDeprecated } from '../../data/index';
 import { utilArrayUnion } from '../util';
 
 
@@ -52,7 +51,7 @@ osmEntity.key = function(entity) {
 
 var _deprecatedTagValuesByKey;
 
-osmEntity.deprecatedTagValuesByKey = function() {
+osmEntity.deprecatedTagValuesByKey = function(dataDeprecated) {
     if (!_deprecatedTagValuesByKey) {
         _deprecatedTagValuesByKey = {};
         dataDeprecated.forEach(function(d) {
@@ -187,7 +186,7 @@ osmEntity.prototype = {
         return true;
     },
 
-    deprecatedTags: function() {
+    deprecatedTags: function(dataDeprecated) {
         var tags = this.tags;
 
         // if there are no tags, none can be deprecated

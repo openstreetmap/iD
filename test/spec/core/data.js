@@ -22,7 +22,7 @@ describe('iD.coreData', function() {
         });
         it('sets the fileMap', function() {
             var data = iD.coreData(_context);
-            var files = { 'intro_graph': 'data/intro_graph.json' };
+            var files = { 'intro_graph': 'data/intro_graph.min.json' };
             expect(data.fileMap(files)).to.be.ok;
         });
     });
@@ -31,31 +31,46 @@ describe('iD.coreData', function() {
         it('returns a promise resolved if we already have the data', function(done) {
             var data = iD.coreData(_context);
             var prom = data.get('test');
-            expect(prom).to.be.a('promise');
-            prom.then(function (data) {
-                expect(data).to.be.a('object');
-                expect(data.hello).to.eql('world');
-                done();
-            });
+            // expect(prom).to.be.a('promise');   // these are polyfilled in phantomjs
+            prom
+                .then(function(data) {
+                    expect(data).to.be.a('object');
+                    expect(data.hello).to.eql('world');
+                    done();
+                })
+                .catch(function(err) {
+                    throw err;
+                    done();
+                });
         });
         it('returns a promise rejected if we can not get the data', function(done) {
             var data = iD.coreData(_context);
             var prom = data.get('wat');
-            prom.catch(function (err) {
-                expect(/^Unknown data file/.test(err)).to.be.true;
-                done();
-            });
+            prom
+                .then(function(data) {
+                    throw new Error('got data ' + data);
+                    done();
+                })
+                .catch(function(err) {
+                    expect(/^Unknown data file/.test(err)).to.be.true;
+                    done();
+                });
         });
         it('returns a promise to fetch data if we do not already have the data', function(done) {
-            var files = { 'intro_graph': 'data/intro_graph.json' };
+            var files = { 'intro_graph': 'data/intro_graph.min.json' };
             var data = iD.coreData(_context).fileMap(files);
             var prom = data.get('intro_graph');
-            expect(prom).to.be.a('promise');
-            prom.then(function (data) {
-                expect(data).to.be.a('object');
-                expect(data.n1.tags.name).to.eql('Three Rivers City Hall');
-                done();
-            });
+            // expect(prom).to.be.a('promise');   // these are polyfilled in phantomjs
+            prom
+                .then(function(data) {
+                    expect(data).to.be.a('object');
+                    expect(data.n1.tags.name).to.eql('Three Rivers City Hall');
+                    done();
+                })
+                .catch(function(err) {
+                    throw err;
+                    done();
+                });
         });
     });
 

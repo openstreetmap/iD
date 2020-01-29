@@ -1,10 +1,6 @@
-import {
-    select as d3_select,
-    selectAll as d3_selectAll
-} from 'd3-selection';
+import { select as d3_select, selectAll as d3_selectAll } from 'd3-selection';
 
 import { t } from '../util/locale';
-import { dataShortcuts } from '../../data';
 import { svgIcon } from '../svg/icon';
 import { uiCmd } from './cmd';
 import { uiModal } from './modal';
@@ -28,7 +24,7 @@ export function uiShortcuts(context) {
                 }
             } else {
                 _modalSelection = uiModal(_selection);
-                shortcutsModal(_modalSelection);
+                _modalSelection.call(shortcutsModal);
             }
         });
 
@@ -37,20 +33,21 @@ export function uiShortcuts(context) {
         _modalSelection.select('.modal')
             .classed('modal-shortcuts', true);
 
-        var shortcutsModal = _modalSelection.select('.content');
+        var content = _modalSelection.select('.content');
 
-        shortcutsModal
+        content
             .append('div')
             .attr('class', 'modal-section')
             .append('h3')
             .text(t('shortcuts.title'));
 
-        shortcutsModal
-            .call(render);
+        context.data().get('shortcuts')
+            .then(function(data) { content.call(render, data); })
+            .catch(function() { /* ignore */ });
     }
 
 
-    function render(selection) {
+    function render(selection, dataShortcuts) {
         var wrapper = selection
             .selectAll('.wrapper')
             .data([0]);
@@ -80,7 +77,7 @@ export function uiShortcuts(context) {
             .attr('class', 'tab')
             .on('click', function (d, i) {
                 _activeTab = i;
-                render(selection);
+                render(selection, dataShortcuts);
             });
 
         tabsEnter
@@ -257,7 +254,7 @@ export function uiShortcuts(context) {
         _selection = selection;
         if (show) {
             _modalSelection = uiModal(selection);
-            shortcutsModal(_modalSelection);
+            _modalSelection.call(shortcutsModal);
         }
     };
 }

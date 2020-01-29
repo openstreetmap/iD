@@ -43,6 +43,11 @@ export function modeSave(context) {
     var _origChanges;
     var _location;
 
+    var _discardTags = {};
+    context.data().get('discarded')
+        .then(function(d) { _discardTags = d; })
+        .catch(function() { /* ignore */ });
+
 
     function cancel(selectedID) {
         if (selectedID) {
@@ -92,7 +97,7 @@ export function modeSave(context) {
         _errors = [];
 
         // Store original changes, in case user wants to download them as an .osc file
-        _origChanges = history.changes(actionDiscardTags(history.difference()));
+        _origChanges = history.changes(actionDiscardTags(history.difference(), _discardTags));
 
         // First time, `history.perform` a no-op action.
         // Any conflict resolutions will be done as `history.replace`
@@ -241,15 +246,15 @@ export function modeSave(context) {
                 if (sameVersions(local, remote)) return;
 
                 var action = actionMergeRemoteChanges;
-                var merge = action(id, localGraph, remoteGraph, formatUser);
+                var merge = action(id, localGraph, remoteGraph, _discardTags, formatUser);
 
                 history.replace(merge);
 
                 var mergeConflicts = merge.conflicts();
                 if (!mergeConflicts.length) return;  // merged safely
 
-                var forceLocal = action(id, localGraph, remoteGraph).withOption('force_local');
-                var forceRemote = action(id, localGraph, remoteGraph).withOption('force_remote');
+                var forceLocal = action(id, localGraph, remoteGraph, _discardTags).withOption('force_local');
+                var forceRemote = action(id, localGraph, remoteGraph, _discardTags).withOption('force_remote');
                 var keepMine = t('save.conflict.' + (remote.visible ? 'keep_local' : 'restore'));
                 var keepTheirs = t('save.conflict.' + (remote.visible ? 'keep_remote' : 'delete'));
 
@@ -285,7 +290,7 @@ export function modeSave(context) {
 
         } else {
             var history = context.history();
-            var changes = history.changes(actionDiscardTags(history.difference()));
+            var changes = history.changes(actionDiscardTags(history.difference(), _discardTags));
             if (changes.modified.length || changes.created.length || changes.deleted.length) {
                 loadLocation();  // so it is ready when we display the save screen
                 osm.putChangeset(changeset, changes, uploadCallback);

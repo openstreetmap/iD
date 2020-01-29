@@ -3,7 +3,6 @@ import { select as d3_select, event as d3_event } from 'd3-selection';
 import * as countryCoder from '@ideditor/country-coder';
 
 import { t, textDirection } from '../../util/locale';
-import { dataPhoneFormats } from '../../../data';
 import { utilGetSetValue, utilNoAuto, utilRebind } from '../../util';
 import { svgIcon } from '../../svg/icon';
 
@@ -21,6 +20,13 @@ export function uiFieldText(field, context) {
     var input = d3_select(null);
     var outlinkButton = d3_select(null);
     var _entity;
+    var _phoneFormats = {};
+
+    if (field.type === 'tel') {
+        context.data().get('phone_formats')
+            .then(function(d) { _phoneFormats = d; })
+            .catch(function() { /* ignore */ });
+    }
 
     function i(selection) {
         var preset = _entity && context.presets().match(_entity, context.graph());
@@ -61,7 +67,7 @@ export function uiFieldText(field, context) {
         if (field.type === 'tel' && _entity) {
             var center = _entity.extent(context.graph()).center();
             var countryCode = countryCoder.iso1A2Code(center);
-            var format = countryCode && dataPhoneFormats[countryCode.toLowerCase()];
+            var format = countryCode && _phoneFormats[countryCode.toLowerCase()];
             if (format) {
                 wrap.selectAll('#' + fieldID)
                     .attr('placeholder', format);

@@ -3,8 +3,6 @@ import { select as d3_select, event as d3_event } from 'd3-selection';
 import * as countryCoder from '@ideditor/country-coder';
 
 import { currentLocale, t, languageName } from '../../util/locale';
-import { dataLanguages } from '../../../data';
-import { dataTerritoryLanguages } from '../../../data';
 import { services } from '../../services';
 import { svgIcon } from '../../svg';
 import { tooltip } from '../../util/tooltip';
@@ -12,29 +10,7 @@ import { uiCombobox } from '../combobox';
 import { utilDetect } from '../../util/detect';
 import { utilArrayUniq, utilEditDistance, utilGetSetValue, utilNoAuto, utilRebind } from '../../util';
 
-var languagesArray = [];
-function loadLanguagesArray() {
-    if (languagesArray.length !== 0) return;
-
-    // some conversion is needed to ensure correct OSM tags are used
-    var replacements = {
-        sr: 'sr-Cyrl',      // in OSM, `sr` implies Cyrillic
-        'sr-Cyrl': false    // `sr-Cyrl` isn't used in OSM
-    };
-
-    for (var code in dataLanguages) {
-        if (replacements[code] === false) continue;
-        var metaCode = code;
-        if (replacements[code]) metaCode = replacements[code];
-
-        languagesArray.push({
-            localName: languageName(metaCode, { localOnly: true }),
-            nativeName: dataLanguages[metaCode].nativeName,
-            code: code,
-            label: languageName(metaCode)
-        });
-    }
-}
+var _languagesArray = [];
 
 
 export function uiFieldLocalized(field, context) {
@@ -43,6 +19,16 @@ export function uiFieldLocalized(field, context) {
     var input = d3_select(null);
     var localizedInputs = d3_select(null);
     var _countryCode;
+
+    context.data().get('languages')
+        .then(loadLanguagesArray)
+        .catch(function() { /* ignore */ });
+
+    var _territoryLanguages = {};
+    context.data().get('territory_languages')
+        .then(function(d) { _territoryLanguages = d; })
+        .catch(function() { /* ignore */ });
+
 
     var allSuggestions = context.presets().collection.filter(function(p) {
         return p.suggestion === true;
@@ -64,6 +50,30 @@ export function uiFieldLocalized(field, context) {
         .placement('left');
     var _wikiTitles;
     var _entity;
+
+
+    function loadLanguagesArray(dataLanguages) {
+        if (_languagesArray.length !== 0) return;
+
+        // some conversion is needed to ensure correct OSM tags are used
+        var replacements = {
+            sr: 'sr-Cyrl',      // in OSM, `sr` implies Cyrillic
+            'sr-Cyrl': false    // `sr-Cyrl` isn't used in OSM
+        };
+
+        for (var code in dataLanguages) {
+            if (replacements[code] === false) continue;
+            var metaCode = code;
+            if (replacements[code]) metaCode = replacements[code];
+
+            _languagesArray.push({
+                localName: languageName(context, metaCode, { localOnly: true }),
+                nativeName: dataLanguages[metaCode].nativeName,
+                code: code,
+                label: languageName(context, metaCode)
+            });
+        }
+    }
 
 
     function calcLocked() {
@@ -90,6 +100,7 @@ export function uiFieldLocalized(field, context) {
 
         field.locked(isLocked);
     }
+
 
     // update _multilingual, maintaining the existing order
     function calcMultilingual(tags) {
@@ -119,9 +130,6 @@ export function uiFieldLocalized(field, context) {
 
 
     function localized(selection) {
-        // load if needed
-        loadLanguagesArray();
-
         _selection = selection;
         calcLocked();
         var isLocked = field.locked();
@@ -376,7 +384,7 @@ export function uiFieldLocalized(field, context) {
     function changeLang(d) {
         var lang = utilGetSetValue(d3_select(this));
         var t = {};
-        var language = languagesArray.find(function(d) {
+        var language = _languagesArray.find(function(d) {
             return (d.localName && d.localName.toLowerCase() === lang.toLowerCase()) ||
                 d.label.toLowerCase() === lang.toLowerCase() ||
                 (d.nativeName && d.nativeName.toLowerCase() === lang.toLowerCase());
@@ -418,18 +426,18 @@ export function uiFieldLocalized(field, context) {
         // show the user's language first
         var langCodes = [currentLocale, currentLocale.split('-')[0]];
 
-        if (_countryCode && dataTerritoryLanguages[_countryCode]) {
-            langCodes = langCodes.concat(dataTerritoryLanguages[_countryCode]);
+        if (_countryCode && _territoryLanguages[_countryCode]) {
+            langCodes = langCodes.concat(_territoryLanguages[_countryCode]);
         }
 
         var langItems = [];
         langCodes.forEach(function(code) {
-            var langItem = languagesArray.find(function(item) {
+            var langItem = _languagesArray.find(function(item) {
                 return item.code === code;
             });
             if (langItem) langItems.push(langItem);
         });
-        langItems = utilArrayUniq(langItems.concat(languagesArray));
+        langItems = utilArrayUniq(langItems.concat(_languagesArray));
 
         cb(langItems.filter(function(d) {
             return d.label.toLowerCase().indexOf(v) >= 0 ||
@@ -537,7 +545,7 @@ export function uiFieldLocalized(field, context) {
         entries.order();
 
         utilGetSetValue(entries.select('.localized-lang'), function(d) {
-            return languageName(d.lang);
+            return languageName(context, d.lang);
         });
 
         utilGetSetValue(entries.select('.localized-value'),

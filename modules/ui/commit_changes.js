@@ -18,6 +18,11 @@ export function uiCommitChanges(context) {
     var detected = utilDetect();
     var _entityID;
 
+    var _discardTags = {};
+    context.data().get('discarded')
+        .then(function(d) { _discardTags = d; })
+        .catch(function() { /* ignore */ });
+
 
     function commitChanges(selection) {
         var history = context.history();
@@ -96,7 +101,7 @@ export function uiCommitChanges(context) {
 
         // Download changeset link
         var changeset = new osmChangeset().update({ id: undefined });
-        var changes = history.changes(actionDiscardTags(history.difference()));
+        var changes = history.changes(actionDiscardTags(history.difference(), _discardTags));
 
         delete changeset.id;  // Export without chnageset_id
 
@@ -158,9 +163,9 @@ export function uiCommitChanges(context) {
     }
 
 
-    commitChanges.entityID = function(_) {
+    commitChanges.entityID = function(val) {
         if (!arguments.length) return _entityID;
-        _entityID = _;
+        _entityID = val;
         return commitChanges;
     };
 

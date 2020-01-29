@@ -56,7 +56,8 @@ export function uiIntro(context) {
           }
         }
         selection.call(startIntro);
-      });
+      })
+      .catch(function() { /* ignore */ });
   }
 
 

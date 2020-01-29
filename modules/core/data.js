@@ -9,7 +9,16 @@ export function coreData(context) {
   let _module = {};
   let _inflight = {};
   let _fileMap = {
-    'intro_graph': 'data/intro_graph.json'
+    'address_formats': 'data/address_formats.min.json',
+    'deprecated': 'data/deprecated.min.json',
+    'discarded': 'data/discarded.min.json',
+    'imagery': 'data/imagery.min.json',
+    'intro_graph': 'data/intro_graph.min.json',
+    'languages': 'data/languages.min.json',
+    'locales': 'data/locales.min.json',
+    'phone_formats': 'data/phone_formats.min.json',
+    'shortcuts': 'data/shortcuts.min.json',
+    'territory_languages': 'data/territory_languages.min.json'
   };
 
 

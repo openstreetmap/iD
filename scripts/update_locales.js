@@ -9,7 +9,7 @@ const colors = require('colors/safe');
 const resources = ['core', 'presets', 'imagery', 'community'];
 const outdir = 'dist/locales/';
 const apiroot = 'https://www.transifex.com/api/2';
-const projectURL = `${apiroot}/project/id-editor/`;
+const projectURL = `${apiroot}/project/id-editor`;
 
 
 /*
@@ -22,21 +22,14 @@ const projectURL = `${apiroot}/project/id-editor/`;
  *  }
  *  */
 
-const auth = JSON.parse(fs.readFileSync('../transifex.auth', 'utf8'));
-
-// const sourceCore = YAML.load(fs.readFileSync('../data/core.yaml', 'utf8'));
-// const sourcePresets = YAML.load(fs.readFileSync('../data/presets.yaml', 'utf8'));
-// const sourceImagery = YAML.load(fs.readFileSync('../node_modules/editor-layer-index/i18n/en.yaml', 'utf8'));
-// const sourceCommunity = YAML.load(fs.readFileSync('../node_modules/osm-community-index/i18n/en.yaml', 'utf8'));
-
-const dataShortcuts = JSON.parse(fs.readFileSync('../data/shortcuts.json', 'utf8')).dataShortcuts;
-
-const cldrMainDir = '../node_modules/cldr-localenames-full/main/';
+const auth = JSON.parse(fs.readFileSync('./transifex.auth', 'utf8'));
+const dataShortcuts = JSON.parse(fs.readFileSync('data/shortcuts.json', 'utf8'));
+const cldrMainDir = 'node_modules/cldr-localenames-full/main/';
 
 let referencedScripts = [];
 
-const languageInfo = { dataLanguages: getLangNamesInNativeLang() };
-fs.writeFileSync('data/languages.json', JSON.stringify(languageInfo, null, 4));
+const languageInfo = getLangNamesInNativeLang();
+fs.writeFileSync('data/languages.json', prettyStringify(languageInfo, { maxLength: 200 }));
 
 let shortcuts = [];
 dataShortcuts.forEach(tab => {
@@ -103,9 +96,9 @@ asyncMap(resources, getResource, (err, results) => {
     (err) => {
       if (!err) {
         const keys = Object.keys(dataLocales).sort();
-        let sorted = {};
-        keys.forEach(k => sorted[k] = dataLocales[k]);
-        fs.writeFileSync('data/locales.json', prettyStringify({ dataLocales: sorted }, { maxLength: 99999 }));
+        let sortedLocales = {};
+        keys.forEach(k => sortedLocales[k] = dataLocales[k]);
+        fs.writeFileSync('data/locales.json', prettyStringify({ dataLocales: sortedLocales }, { maxLength: 99999 }));
       }
     }
   );
@@ -113,7 +106,7 @@ asyncMap(resources, getResource, (err, results) => {
 
 
 function getResource(resource, callback) {
-  let resourceURL = `${projectURL}resource/${resource}/`;
+  let resourceURL = `${projectURL}/resource/${resource}`;
   getLanguages(resourceURL, (err, codes) => {
     if (err) return callback(err);
 
@@ -195,8 +188,8 @@ function getLanguageInfo(code, callback) {
 }
 
 
-function getLanguages(resource, callback) {
-  let url = `${resource}?details`;
+function getLanguages(resourceURL, callback) {
+  let url = `${resourceURL}?details`;
   request.get(url, { auth: auth }, (err, resp, body) => {
     if (err) return callback(err);
     console.log(`${resp.statusCode}: ${url}`);

@@ -1,30 +1,29 @@
-import { dataDiscarded } from '../../data';
 
-export function actionDiscardTags(difference) {
+export function actionDiscardTags(difference, discardTags) {
+  discardTags = discardTags || {};
 
-    return function(graph) {
-        function discardTags(entity) {
-            var tags = {};
-            var keys = Object.keys(entity.tags);
-            var discarded = false;
+  return (graph) => {
+    difference.modified().forEach(checkTags);
+    difference.created().forEach(checkTags);
+    return graph;
 
-            for (var i = 0; i < keys.length; i++) {
-                var k = keys[i];
-                if (dataDiscarded[k] || !entity.tags[k]) {
-                    discarded = true;
-                } else {
-                    tags[k] = entity.tags[k];
-                }
-            }
+    function checkTags(entity) {
+      const keys = Object.keys(entity.tags);
+      let didDiscard = false;
+      let tags = {};
 
-            if (discarded) {
-                graph = graph.replace(entity.update({ tags: tags }));
-            }
+      for (let i = 0; i < keys.length; i++) {
+        const k = keys[i];
+        if (discardTags[k] || !entity.tags[k]) {
+          didDiscard = true;
+        } else {
+          tags[k] = entity.tags[k];
         }
+      }
+      if (didDiscard) {
+        graph = graph.replace(entity.update({ tags: tags }));
+      }
+    }
 
-        difference.modified().forEach(discardTags);
-        difference.created().forEach(discardTags);
-
-        return graph;
-    };
+  };
 }

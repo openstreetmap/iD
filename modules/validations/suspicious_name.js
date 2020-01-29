@@ -58,7 +58,7 @@ export function validationSuspiciousName() {
                 var entity = context.hasEntity(this.entityIds[0]);
                 if (!entity) return '';
                 var preset = utilPreset(entity, context);
-                var langName = langCode && languageName(langCode);
+                var langName = langCode && languageName(context, langCode);
                 return t('issues.generic_name.message' + (langName ? '_language' : ''),
                     { feature: preset.name(), name: genericName, language: langName }
                 );
@@ -105,7 +105,7 @@ export function validationSuspiciousName() {
                 var entity = context.hasEntity(this.entityIds[0]);
                 if (!entity) return '';
                 var preset = utilPreset(entity, context);
-                var langName = langCode && languageName(langCode);
+                var langName = langCode && languageName(context, langCode);
                 return t('issues.incorrect_name.message' + (langName ? '_language' : ''),
                     { feature: preset.name(), name: incorrectName, language: langName }
                 );

@@ -1,12 +1,26 @@
 describe('iD.uiFieldLocalized', function() {
     var context, selection, field;
 
+    before(function() {
+        iD.data.languages = {
+          de: { nativeName: 'Deutsch' },
+          en: { nativeName: 'English' }
+        };
+        iD.data.territory_languages = {};
+    });
+
+    after(function() {
+        delete iD.data.languages;
+        delete iD.data.territory_languages;
+    });
+
     beforeEach(function() {
         context = iD.coreContext();
         selection = d3.select(document.createElement('div'));
         field = iD.presetField('name', { key: 'name', type: 'localized' });
         field.locked = function() { return false; };
     });
+
 
     it('adds a blank set of fields when the + button is clicked', function() {
         var localized = iD.uiFieldLocalized(field, context);

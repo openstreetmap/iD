@@ -279,7 +279,7 @@ export function uiSuccess(context) {
 
       if (d.languageCodes && d.languageCodes.length) {
         const languageList = d.languageCodes
-          .map(code => languageName(code))
+          .map(code => languageName(context, code))
           .join(', ');
 
         moreEnter

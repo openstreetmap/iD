@@ -19,6 +19,8 @@ iD.data.presets = {
         man_made: { name: 'Man Made', tags: { man_made: '*' }, geometry: ['vertex', 'point', 'line', 'area'] }
     }
 };
+// creating `coreContext` creates validators, and `validatonOutdatedTags` will try to load this
+iD.data.deprecated = [];
 
 
 mocha.setup({

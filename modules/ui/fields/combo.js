@@ -38,6 +38,13 @@ export function uiFieldCombo(field, context) {
     var _entity;
     var _countryCode;
 
+    // initialize deprecated tags array
+    var _dataDeprecated = [];
+    context.data().get('deprecated')
+        .then(function(d) { _dataDeprecated = d; })
+        .catch(function() { /* ignore */ });
+
+
     // ensure multiCombo field.key ends with a ':'
     if (isMulti && /[^:]$/.test(field.key)) {
         field.key += ':';
@@ -193,7 +200,7 @@ export function uiFieldCombo(field, context) {
                 return !d.count || d.count > 10;
             });
 
-            var deprecatedValues = osmEntity.deprecatedTagValuesByKey()[field.key];
+            var deprecatedValues = osmEntity.deprecatedTagValuesByKey(_dataDeprecated)[field.key];
             if (deprecatedValues) {
                 // don't suggest deprecated tag values
                 data = data.filter(function(d) {

@@ -1,9 +1,21 @@
 describe('iD.validations.outdated_tags', function () {
     var context;
 
+    before(function() {
+        iD.data.deprecated = [
+          { old: { highway: 'no' } },
+          { old: { highway: 'ford' }, replace: { ford: '*' } }
+        ];
+    });
+
+    after(function() {
+        delete iD.data.deprecated;
+    });
+
     beforeEach(function() {
         context = iD.coreContext();
     });
+
 
     function createWay(tags) {
         var n1 = iD.osmNode({id: 'n-1', loc: [4,4]});
