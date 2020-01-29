@@ -360,9 +360,6 @@ export function coreContext() {
     tile: false,        // tile boundaries
     collision: false,   // label collision bounding boxes
     imagery: false,     // imagery bounding polygons
-    community: false,   // community bounding polygons
-    imperial: false,    // imperial (not metric) bounding polygons
-    driveLeft: false,   // driveLeft bounding polygons
     target: false,      // touch targets
     downloaded: false   // downloaded data from osm
   };

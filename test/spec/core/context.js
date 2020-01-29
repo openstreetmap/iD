@@ -53,17 +53,14 @@ describe('iD.coreContext', function() {
 
     describe('#debug', function() {
         it('sets and gets debug flags', function() {
-            var context = iD.coreContext(),
-                flags = {
-                    tile: false,
-                    collision: false,
-                    community: false,
-                    imagery: false,
-                    imperial: false,
-                    driveLeft: false,
-                    target: false,
-                    downloaded: false
-                };
+            var context = iD.coreContext();
+            var flags = {
+                tile: false,
+                collision: false,
+                imagery: false,
+                target: false,
+                downloaded: false
+            };
 
             expect(context.debugFlags()).to.eql(flags);
 
