@@ -1,13 +1,17 @@
 import { dispatch as d3_dispatch } from 'd3-dispatch';
 import { select as d3_select } from 'd3-selection';
 
+import LocationConflation from '@ideditor/location-conflation';
+import whichPolygon from 'which-polygon';
+
 import { t, languageName } from '../util/locale';
-import { data } from '../../data';
 import { svgIcon } from '../svg/icon';
 import { uiDisclosure } from '../ui/disclosure';
 import { utilDetect } from '../util/detect';
 import { utilRebind } from '../util/rebind';
 
+
+let _oci = null;
 
 export function uiSuccess(context) {
   const MAXEVENTS = 2;
@@ -15,6 +19,37 @@ export function uiSuccess(context) {
   const dispatch = d3_dispatch('cancel');
   let _changeset;
   let _location;
+  ensureOSMCommunityIndex();   // start fetching the data
+
+
+  function ensureOSMCommunityIndex() {
+    const data = context.data();
+    return Promise.all([ data.get('oci_resources'), data.get('oci_features') ])
+      .then(vals => {
+        if (_oci) return _oci;
+
+        const ociResources = vals[0];
+        const loco = new LocationConflation(vals[1]);
+        let ociFeatures = {};
+
+        Object.values(ociResources).forEach(resource => {
+          const feature = loco.resolveLocationSet(resource.locationSet);
+          let ociFeature = ociFeatures[feature.id];
+          if (!ociFeature) {
+            ociFeature = JSON.parse(JSON.stringify(feature));  // deep clone
+            ociFeature.properties.resourceIDs = new Set();
+            ociFeatures[feature.id] = ociFeature;
+          }
+          ociFeature.properties.resourceIDs.add(resource.id);
+        });
+
+        return _oci = {
+          features: ociFeatures,
+          resources: ociResources,
+          query: whichPolygon({ type: 'FeatureCollection', features: Object.values(ociFeatures) })
+        };
+      });
+  }
 
 
   // string-to-date parsing in JavaScript is weird
@@ -114,28 +149,31 @@ export function uiSuccess(context) {
       }));
 
 
-    // Get community index features intersecting the map..
-    let communities = [];
-    const properties = data.community.query(context.map().center(), true) || [];
+    // Get OSM community index features intersecting the map..
+    ensureOSMCommunityIndex()
+      .then(oci => {
+        let communities = [];
+        const properties = oci.query(context.map().center(), true) || [];
 
-    // Gather the communities from the result
-    properties.forEach(props => {
-      const resourceIDs = Array.from(props.resourceIDs);
-      resourceIDs.forEach(resourceID => {
-        const resource = data.community.resources[resourceID];
-        communities.push({
-          area: props.area || Infinity,
-          order: resource.order || 0,
-          resource: resource
+        // Gather the communities from the result
+        properties.forEach(props => {
+          const resourceIDs = Array.from(props.resourceIDs);
+          resourceIDs.forEach(resourceID => {
+            const resource = oci.resources[resourceID];
+            communities.push({
+              area: props.area || Infinity,
+              order: resource.order || 0,
+              resource: resource
+            });
+          });
         });
+
+        // sort communities by feature area ascending, community order descending
+        communities.sort((a, b) => a.area - b.area || b.order - a.order);
+
+        body
+          .call(showCommunityLinks, communities.map(c => c.resource));
       });
-    });
-
-    // sort communities by feature area ascending, community order descending
-    communities.sort((a, b) => a.area - b.area || b.order - a.order);
-
-    body
-      .call(showCommunityLinks, communities.map(c => c.resource));
   }
 
 
