@@ -405,6 +405,7 @@ export function coreContext() {
   };
 
   context.asset = (val) => {
+    if (/^http(s)?:\/\//i.test(val)) return val;
     const filename = _assetPath + val;
     return _assetMap[filename] || filename;
   };

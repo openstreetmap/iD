@@ -29,6 +29,10 @@ describe('iD.coreContext', function() {
             context = iD.coreContext().assetPath('iD/').assetMap(assets);
         });
 
+        it('ignores absolute urls', function() {
+            expect(context.asset('HTTP://hello')).to.eql('HTTP://hello');
+            expect(context.asset('https://world')).to.eql('https://world');
+        });
         it('looks first in assetMap', function() {
             expect(context.asset('img/loader.gif')).to.eql('/assets/iD/img/loader-b66184b5c4afbccc25f.gif');
         });
