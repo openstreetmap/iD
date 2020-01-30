@@ -1,7 +1,7 @@
 import {
     geoExtent, geoLineIntersection, geoMetersToLat, geoMetersToLon,
     geoSphericalDistance, geoVecInterp, geoHasSelfIntersections,
-    geoSphericalClosestNode
+    geoSphericalClosestNode, geoAngle
 } from '../geo';
 
 import { actionAddMidpoint } from '../actions/add_midpoint';
@@ -213,6 +213,42 @@ export function validationAlmostJunction(context) {
             return true;
         }
 
+        function findNearbyEndNodes(node, way2) {
+            return [
+                way2.nodes[0],
+                way2.nodes[way2.nodes.length - 1]
+            ].map(d => graph.entity(d))
+            .filter(d => {
+                // Node cannot be near to itself, but other endnode of same way could be
+                // 4.25m based on extending 5m ahead and .75m quick fix node joining
+                return d.id !== node.id
+                    && geoSphericalDistance(node.loc, d.loc) <= 4.25;
+            });
+        }
+
+        function findAlmostCollinear(midNode, tipNode, endNodes) {
+            // Both nodes could be close, so want to join whichever is closest to collinear
+            let mostCollinear;
+            let minAngle = Infinity;
+
+            // Checks midNode -> tipNode -> endNode for collinearity
+            endNodes.forEach(endNode => {
+                const a1 = geoAngle(midNode, tipNode, context.projection) + Math.PI;
+                const a2 = geoAngle(midNode, endNode, context.projection) + Math.PI;
+                const diff = Math.max(a1, a2) - Math.min(a1, a2);
+
+                if (diff < minAngle) {
+                    mostCollinear = endNode;
+                    minAngle = diff;
+                }
+            });
+
+            /* 9° threshold set by considering right angle triangle
+            based on .75m node joining threshold and 5m extension */
+            if (minAngle <= 9 * Math.PI / 180) return mostCollinear;
+
+            return null;
+        }
 
         function canConnectByExtend(way, endNodeIdx) {
             var EXTEND_TH_METERS = 5;
@@ -253,6 +289,20 @@ export function validationAlmostJunction(context) {
                         nB = graph.entity(nBid);
                     var crossLoc = geoLineIntersection([tipNode.loc, extTipLoc], [nA.loc, nB.loc]);
                     if (crossLoc) {
+                        // When endpoints are close, just join if resulting small change in angle (#7201)
+                        let nearEndNodes = findNearbyEndNodes(tipNode, way2);
+                        if (nearEndNodes.length > 0) {
+                            let collinear = findAlmostCollinear(midNode, tipNode, nearEndNodes);
+                            if (collinear) {
+                                return {
+                                    node: tipNode,
+                                    wid: way2.id,
+                                    edge: [collinear.id, collinear.id],
+                                    cross_loc: collinear.loc
+                                };
+                            }
+                        }
+
                         return {
                             node: tipNode,
                             wid: way2.id,
