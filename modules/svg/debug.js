@@ -1,6 +1,5 @@
 import { select as d3_select } from 'd3-selection';
 
-import { data } from '../../data';
 import { svgPath } from './helpers';
 
 
@@ -70,19 +69,22 @@ export function svgDebug(projection, context) {
 
     // imagery
     const extent = context.map().extent();
-    const matchImagery = (showImagery && data.imagery.query.bbox(extent.rectangle(), true)) || [];
-    const features = matchImagery.map(d => data.imagery.features[d.id]);
+    context.data().get('imagery')
+      .then(d => {
+        const hits = (showImagery && d.query.bbox(extent.rectangle(), true)) || [];
+        const features = hits.map(d => d.features[d.id]);
 
-    let imagery = layer.selectAll('path.debug-imagery')
-      .data(features);
+        let imagery = layer.selectAll('path.debug-imagery')
+          .data(features);
 
-    imagery.exit()
-      .remove();
+        imagery.exit()
+          .remove();
 
-    imagery.enter()
-      .append('path')
-      .attr('class', 'debug-imagery debug orange');
-
+        imagery.enter()
+          .append('path')
+          .attr('class', 'debug-imagery debug orange');
+      })
+      .catch(() => { /* ignore */ });
 
     // downloaded
     const osm = context.connection();
