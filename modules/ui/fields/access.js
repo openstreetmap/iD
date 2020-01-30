@@ -3,11 +3,12 @@ import { select as d3_select } from 'd3-selection';
 
 import { uiCombobox } from '../combobox';
 import { utilGetSetValue, utilNoAuto, utilRebind } from '../../util';
-
+import { t } from '../../util/locale';
 
 export function uiFieldAccess(field, context) {
     var dispatch = d3_dispatch('change');
     var items = d3_select(null);
+    var _tags;
 
     function access(selection) {
         var wrap = selection.selectAll('.form-field-input-wrap')
@@ -68,7 +69,12 @@ export function uiFieldAccess(field, context) {
 
     function change(d) {
         var tag = {};
-        tag[d] = utilGetSetValue(d3_select(this)) || undefined;
+        var value = utilGetSetValue(d3_select(this));
+
+        // don't override multiple values with blank string
+        if (!value && typeof _tags[d] !== 'string') return;
+
+        tag[d] = value || undefined;
         dispatch.call('change', this, tag);
     }
 
@@ -94,7 +100,7 @@ export function uiFieldAccess(field, context) {
     };
 
 
-    var placeholders = {
+    var placeholdersByHighway = {
         footway: {
             foot: 'designated',
             motor_vehicle: 'no'
@@ -199,24 +205,48 @@ export function uiFieldAccess(field, context) {
 
 
     access.tags = function(tags) {
-        utilGetSetValue(items.selectAll('.preset-input-access'),
-            function(d) { return tags[d] || ''; })
-            .attr('placeholder', function() {
-                return tags.access ? tags.access : field.placeholder();
+        _tags = tags;
+
+        utilGetSetValue(items.selectAll('.preset-input-access'), function(d) {
+                return typeof tags[d] === 'string' ? tags[d] : '';
+            })
+            .classed('mixed', function(d) {
+                return tags[d] && Array.isArray(tags[d]);
+            })
+            .attr('title', function(d) {
+                return tags[d] && Array.isArray(tags[d]) && tags[d].filter(Boolean).join('; ');
+            })
+            .attr('placeholder', function(d) {
+                if (tags[d] && Array.isArray(tags[d])) {
+                    return t('inspector.multiple_values');
+                }
+                if (d === 'access') {
+                    return 'yes';
+                }
+                if (tags.access && typeof tags.access === 'string') {
+                    return tags.access;
+                }
+                if (tags.highway) {
+                    if (typeof tags.highway === 'string') {
+                        if (placeholdersByHighway[tags.highway] &&
+                            placeholdersByHighway[tags.highway][d]) {
+
+                            return placeholdersByHighway[tags.highway][d];
+                        }
+                    } else {
+                        var impliedAccesses = tags.highway.filter(Boolean).map(function(highwayVal) {
+                            return placeholdersByHighway[highwayVal] && placeholdersByHighway[highwayVal][d];
+                        }).filter(Boolean);
+
+                        if (impliedAccesses.length === tags.highway.length &&
+                            new Set(impliedAccesses).size === 1) {
+                            // if all the highway values have the same implied access for this type then use that
+                            return impliedAccesses[0];
+                        }
+                    }
+                }
+                return field.placeholder();
             });
-
-        items.selectAll('.preset-input-access-access')
-            .attr('placeholder', 'yes');
-
-        var which = tags.highway;
-        if (!placeholders[which]) return;
-
-        var keys = Object.keys(placeholders[which]);
-        keys.forEach(function(k) {
-            var v = placeholders[which][k];
-            items.selectAll('.preset-input-access-' + k)
-                .attr('placeholder', tags.access || v);
-        });
     };
 
 

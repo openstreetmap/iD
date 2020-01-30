@@ -19,7 +19,7 @@ import { uiEntityIssues } from './entity_issues';
 import { uiSelectionList } from './selection_list';
 import { uiTooltipHtml } from './tooltipHtml';
 import { utilArrayIdentical } from '../util/array';
-import { utilCleanTags, utilRebind } from '../util';
+import { utilCleanTags, utilCombinedTags, utilRebind } from '../util';
 
 
 export function uiEntityEditor(context) {
@@ -36,7 +36,7 @@ export function uiEntityEditor(context) {
     var selectionList = uiSelectionList(context);
     var entityIssues = uiEntityIssues(context);
     var quickLinks = uiQuickLinks();
-    var presetEditor = uiPresetEditor(context).on('change', changeTags);
+    var presetEditor = uiPresetEditor(context).on('change', changeTags).on('revert', revertTags);
     var rawTagEditor = uiRawTagEditor(context).on('change', changeTags);
     var rawMemberEditor = uiRawMemberEditor(context);
     var rawMembershipEditor = uiRawMembershipEditor(context);
@@ -45,6 +45,8 @@ export function uiEntityEditor(context) {
 
         var singularEntityID = _entityIDs.length === 1 && _entityIDs[0];
         var singularEntity = singularEntityID && context.entity(singularEntityID);
+
+        var combinedTags = utilCombinedTags(_entityIDs, context.graph());
 
         // Header
         var header = selection.selectAll('.header')
@@ -234,13 +236,13 @@ export function uiEntityEditor(context) {
                 }
             }, {
                 klass: 'preset-editor',
-                shouldHave: singularEntityID,
+                shouldHave: true,
                 update: function(section) {
                     section
                         .call(presetEditor
-                            .preset(_activePresets[0])
-                            .entityID(singularEntityID)
-                            .tags(Object.assign({}, singularEntity.tags))
+                            .presets(_activePresets)
+                            .entityIDs(_entityIDs)
+                            .tags(combinedTags)
                             .state(_state)
                         );
                 }
@@ -252,6 +254,7 @@ export function uiEntityEditor(context) {
                         .call(rawTagEditor
                             .preset(_activePresets[0])
                             .entityIDs(_entityIDs)
+                            .tags(combinedTags)
                             .state(_state)
                         );
                 }
@@ -408,6 +411,60 @@ export function uiEntityEditor(context) {
         if (!onInput) {
             context.validator().validate();
         }
+    }
+
+    function revertTags(keys) {
+
+        var actions = [];
+        for (var i in _entityIDs) {
+            var entityID = _entityIDs[i];
+
+            var original = context.graph().base().entities[entityID];
+            var changed = {};
+            for (var j in keys) {
+                var key = keys[j];
+                changed[key] = original ? original.tags[key] : undefined;
+            }
+
+            var entity = context.entity(entityID);
+            var tags = Object.assign({}, entity.tags);   // shallow copy
+
+            for (var k in changed) {
+                if (!k) continue;
+                var v = changed[k];
+                if (v !== undefined || tags.hasOwnProperty(k)) {
+                    tags[k] = v;
+                }
+            }
+
+
+            tags = utilCleanTags(tags);
+
+            if (!deepEqual(entity.tags, tags)) {
+                actions.push(actionChangeTags(entityID, tags));
+            }
+
+        }
+
+        if (actions.length) {
+            var combinedAction = function(graph) {
+                actions.forEach(function(action) {
+                    graph = action(graph);
+                });
+                return graph;
+            };
+
+            var annotation = t('operations.change_tags.annotation');
+
+            if (_coalesceChanges) {
+                context.overwrite(combinedAction, annotation);
+            } else {
+                context.perform(combinedAction, annotation);
+                _coalesceChanges = false;
+            }
+        }
+
+        context.validator().validate();
     }
 
 

@@ -14,7 +14,9 @@ export function uiFieldAddress(field, context) {
     var addrField = context.presets().field('address');   // needed for placeholder strings
 
     var _isInitialized = false;
-    var _entity;
+    var _entityIDs = [];
+    var _tags;
+    var _countryCode;
     var _addressFormats = [{
         format: [
           ['housenumber', 'street'],
@@ -28,7 +30,7 @@ export function uiFieldAddress(field, context) {
 
 
     function getNearStreets() {
-        var extent = _entity.extent(context.graph());
+        var extent = combinedEntityExtent();
         var l = extent.center();
         var box = geoExtent(l).padByMeters(200);
 
@@ -60,7 +62,7 @@ export function uiFieldAddress(field, context) {
 
 
     function getNearCities() {
-        var extent = _entity.extent(context.graph());
+        var extent = combinedEntityExtent();
         var l = extent.center();
         var box = geoExtent(l).padByMeters(200);
 
@@ -98,12 +100,12 @@ export function uiFieldAddress(field, context) {
     }
 
     function getNearValues(key) {
-        var extent = _entity.extent(context.graph());
+        var extent = combinedEntityExtent();
         var l = extent.center();
         var box = geoExtent(l).padByMeters(200);
 
         var results = context.intersects(box)
-            .filter(function hasTag(d) { return d.id !== _entity.id && d.tags[key]; })
+            .filter(function hasTag(d) { return _entityIDs.indexOf(d.id) === -1 && d.tags[key]; })
             .map(function(d) {
                 return {
                     title: d.tags[key],
@@ -119,15 +121,16 @@ export function uiFieldAddress(field, context) {
     }
 
 
-    function updateForCountryCode(countryCode) {
-        countryCode = countryCode.toLowerCase();
+    function updateForCountryCode() {
+
+        if (!_countryCode) return;
 
         var addressFormat;
         for (var i = 0; i < _addressFormats.length; i++) {
             var format = _addressFormats[i];
             if (!format.countryCodes) {
                 addressFormat = format;   // choose the default format, keep going
-            } else if (format.countryCodes.indexOf(countryCode) !== -1) {
+            } else if (format.countryCodes.indexOf(_countryCode) !== -1) {
                 addressFormat = format;   // choose the country format, stop here
                 break;
             }
@@ -168,11 +171,7 @@ export function uiFieldAddress(field, context) {
             .enter()
             .append('input')
             .property('type', 'text')
-            .attr('placeholder', function (d) {
-                var localkey = d.id + '!' + countryCode;
-                var tkey = addrField.strings.placeholders[localkey] ? localkey : d.id;
-                return addrField.t('placeholders.' + tkey);
-            })
+            .call(updatePlaceholder)
             .attr('maxlength', context.maxCharsForTagValue())
             .attr('class', function (d) { return 'addr-' + d.id; })
             .call(utilNoAuto)
@@ -220,16 +219,21 @@ export function uiFieldAddress(field, context) {
             .attr('class', 'form-field-input-wrap form-field-input-' + field.type)
             .merge(wrap);
 
-        if (_entity) {
+        var extent = combinedEntityExtent();
+
+        if (extent) {
             var countryCode;
             if (context.inIntro()) {
                 // localize the address format for the walkthrough
                 countryCode = t('intro.graph.countrycode');
             } else {
-                var center = _entity.extent(context.graph()).center();
+                var center = extent.center();
                 countryCode = countryCoder.iso1A2Code(center);
             }
-            if (countryCode) updateForCountryCode(countryCode);
+            if (countryCode) {
+                _countryCode = countryCode.toLowerCase();
+                updateForCountryCode();
+            }
         }
     }
 
@@ -240,29 +244,65 @@ export function uiFieldAddress(field, context) {
 
             wrap.selectAll('input')
                 .each(function (subfield) {
-                    tags[field.key + ':' + subfield.id] = this.value || undefined;
+                    var key = field.key + ':' + subfield.id;
+
+                    // don't override multiple values with blank string
+                    if (Array.isArray(_tags[key]) && !this.value) return;
+
+                    tags[key] = this.value || undefined;
                 });
 
             dispatch.call('change', this, tags, onInput);
         };
     }
 
-
-    function updateTags(tags) {
-        utilGetSetValue(wrap.selectAll('input'), function (subfield) {
-            return tags[field.key + ':' + subfield.id] || '';
+    function updatePlaceholder(inputSelection) {
+        return inputSelection.attr('placeholder', function(subfield) {
+            if (_tags && Array.isArray(_tags[field.key + ':' + subfield.id])) {
+                return t('inspector.multiple_values');
+            }
+            if (_countryCode) {
+                var localkey = subfield.id + '!' + _countryCode;
+                var tkey = addrField.strings.placeholders[localkey] ? localkey : subfield.id;
+                return addrField.t('placeholders.' + tkey);
+            }
         });
     }
 
 
-    address.entity = function(val) {
-        if (!arguments.length) return _entity;
-        _entity = val;
+    function updateTags(tags) {
+        utilGetSetValue(wrap.selectAll('input'), function (subfield) {
+                var val = tags[field.key + ':' + subfield.id];
+                return typeof val === 'string' ? val : '';
+            })
+            .attr('title', function(subfield) {
+                var val = tags[field.key + ':' + subfield.id];
+                return val && Array.isArray(val) && val.filter(Boolean).join('; ');
+            })
+            .classed('mixed', function(subfield) {
+                return Array.isArray(tags[field.key + ':' + subfield.id]);
+            })
+            .call(updatePlaceholder);
+    }
+
+
+    function combinedEntityExtent() {
+        return _entityIDs && _entityIDs.length && _entityIDs.reduce(function(extent, entityID) {
+            var entity = context.graph().entity(entityID);
+            return extent.extend(entity.extent(context.graph()));
+        }, geoExtent());
+    }
+
+
+    address.entityIDs = function(val) {
+        if (!arguments.length) return _entityIDs;
+        _entityIDs = val;
         return address;
     };
 
 
     address.tags = function(tags) {
+        _tags = tags;
         if (_isInitialized) {
             updateTags(tags);
         } else {

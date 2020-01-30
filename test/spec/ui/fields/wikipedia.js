@@ -79,7 +79,7 @@ describe('iD.uiFieldWikipedia', function() {
     });
 
     it('sets language, value', function(done) {
-        var wikipedia = iD.uiFieldWikipedia(field, context).entity(entity);
+        var wikipedia = iD.uiFieldWikipedia(field, context).entityIDs([entity.id]);
         window.setTimeout(function() {   // async, so data will be available
             wikipedia.on('change', changeTags);
             selection.call(wikipedia);
@@ -105,7 +105,7 @@ describe('iD.uiFieldWikipedia', function() {
     });
 
     it('recognizes pasted URLs', function(done) {
-        var wikipedia = iD.uiFieldWikipedia(field, context).entity(entity);
+        var wikipedia = iD.uiFieldWikipedia(field, context).entityIDs([entity.id]);
         window.setTimeout(function() {   // async, so data will be available
             wikipedia.on('change', changeTags);
             selection.call(wikipedia);
@@ -136,7 +136,7 @@ describe('iD.uiFieldWikipedia', function() {
     });
 
     it.skip('does not set delayed wikidata tag if graph has changed', function(done) {
-        var wikipedia = iD.uiFieldWikipedia(field, context).entity(entity);
+        var wikipedia = iD.uiFieldWikipedia(field, context).entityIDs([entity.id]);
         wikipedia.on('change', changeTags);
         selection.call(wikipedia);
 

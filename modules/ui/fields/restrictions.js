@@ -615,11 +615,11 @@ export function uiFieldRestrictions(field, context) {
     }
 
 
-    restrictions.entity = function(val) {
+    restrictions.entityIDs = function(val) {
         _intersection = null;
         _fromWayID = null;
         _oldTurns = null;
-        _vertexID = val.id;
+        _vertexID = val[0];
     };
 
 
@@ -642,3 +642,5 @@ export function uiFieldRestrictions(field, context) {
 
     return utilRebind(restrictions, dispatch, 'on');
 }
+
+uiFieldRestrictions.supportsMultiselection = false;

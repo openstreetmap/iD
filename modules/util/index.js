@@ -10,6 +10,7 @@ export { utilArrayUniqBy } from './array';
 
 export { utilAsyncMap } from './util';
 export { utilCleanTags } from './clean_tags';
+export { utilCombinedTags } from './util';
 export { utilDeepMemberSelector } from './util';
 export { utilDetect } from './detect';
 export { utilDisplayName } from './util';

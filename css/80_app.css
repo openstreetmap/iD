@@ -220,6 +220,11 @@ input[type="radio"] {
     margin-right: 0;
 }
 
+input.mixed::placeholder,
+textarea.mixed::placeholder {
+    font-style: italic;
+}
+
 /* tables */
 table {
     background-color: #fff;
@@ -1591,6 +1596,11 @@ a.hide-toggle {
     z-index: 3000;
     cursor: grabbing;
 }
+.form-field-input-multicombo li.mixed {
+    border-color: #eff2f7;
+    color: #888;
+    font-style: italic;
+}
 
 .form-field-input-multicombo li.chip span {
     display: block;
@@ -1707,6 +1717,9 @@ a.hide-toggle {
 }
 .form-field-input-check > span {
     flex: 1 1 auto;
+}
+.form-field-input-check > span.mixed {
+    font-style: italic;
 }
 .form-field-input-check > .reverser.button {
     flex: 0 1 auto;
@@ -2370,9 +2383,6 @@ button.raw-tag-option svg.icon {
 }
 [dir='rtl'] .tag-row input.value {
     border-left: 1px solid #ccc;
-}
-.tag-row input.value.conflicting::placeholder {
-    font-style: italic;
 }
 
 .tag-row:first-child input.key {

@@ -19,7 +19,7 @@ export function uiFieldRadio(field, context) {
     var typeField;
     var layerField;
     var _oldType = {};
-    var _entity;
+    var _entityIDs = [];
 
 
     function selectedKey() {
@@ -104,7 +104,7 @@ export function uiFieldRadio(field, context) {
         // Type
         if (type) {
             if (!typeField || typeField.id !== selected) {
-                typeField = uiField(context, type, _entity, { wrap: false })
+                typeField = uiField(context, type, _entityIDs, { wrap: false })
                     .on('change', changeType);
             }
             typeField.tags(tags);
@@ -147,7 +147,7 @@ export function uiFieldRadio(field, context) {
         // Layer
         if (layer && showLayer) {
             if (!layerField) {
-                layerField = uiField(context, layer, _entity, { wrap: false })
+                layerField = uiField(context, layer, _entityIDs, { wrap: false })
                     .on('change', changeLayer);
             }
             layerField.tags(tags);
@@ -301,13 +301,20 @@ export function uiFieldRadio(field, context) {
     };
 
 
-    radio.entity = function(val) {
-        if (!arguments.length) return _entity;
-        _entity = val;
+    radio.entityIDs = function(val) {
+        if (!arguments.length) return _entityIDs;
+        _entityIDs = val;
         _oldType = {};
         return radio;
     };
 
 
+    radio.isAllowed = function() {
+        return _entityIDs.length === 1;
+    };
+
+
     return utilRebind(radio, dispatch, 'on');
 }
+
+uiFieldRadio.supportsMultiselection = false;
