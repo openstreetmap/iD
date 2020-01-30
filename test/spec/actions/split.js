@@ -1,7 +1,7 @@
 describe('iD.actionSplit', function () {
 
     beforeEach(function () {
-        iD.areaKeys = iD.coreContext().presets().areaKeys();
+        iD.areaKeys = iD.coreContext().init().presets().areaKeys();
     });
 
 

@@ -66,7 +66,7 @@ describe('uiCombobox', function() {
     beforeEach(function() {
         body = d3.select('body');
         container = body.append('div').attr('class', 'id-container');
-        context = iD.coreContext().container(container);
+        context = iD.coreContext().container(container).init();
         content = container.append('div');
         input = content.append('input');
         combobox = iD.uiCombobox(context);

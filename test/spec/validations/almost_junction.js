@@ -2,7 +2,7 @@ describe('iD.validations.almost_junction', function () {
     var context;
 
     beforeEach(function() {
-        context = iD.coreContext();
+        context = iD.coreContext().init();
     });
 
     function horizontalVertialCloserThanThd() {

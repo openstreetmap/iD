@@ -2,7 +2,7 @@ describe('iD.validations.mismatched_geometry', function () {
     var context;
 
     beforeEach(function() {
-        context = iD.Context();
+        context = iD.coreContext().init();
     });
 
     function createPoint(tags) {

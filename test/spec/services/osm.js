@@ -27,7 +27,7 @@ describe('iD.serviceOsm', function () {
     beforeEach(function () {
         serverFetch = window.fakeFetch().create();  // unauthenticated calls use d3-fetch
         serverXHR = sinon.fakeServer.create();      // authenticated calls use XHR via osm-auth
-        context = iD.coreContext();
+        context = iD.coreContext().init();
         connection = context.connection();
         connection.switch({ urlroot: 'http://www.openstreetmap.org' });
         connection.reset();

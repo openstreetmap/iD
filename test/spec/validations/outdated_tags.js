@@ -13,7 +13,7 @@ describe('iD.validations.outdated_tags', function () {
     });
 
     beforeEach(function() {
-        context = iD.coreContext();
+        context = iD.coreContext().init();
     });
 
 

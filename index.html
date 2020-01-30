@@ -34,6 +34,7 @@
         } else {
           var context = iD.coreContext().assetPath('dist/');
           window.context = window.id = context;  // for debugging
+          context.init();
 
           // disable boundaries (unless we have an explicit disable_features list)
           var q = iD.utilStringQs(window.location.hash.substring(1));

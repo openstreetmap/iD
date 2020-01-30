@@ -34,6 +34,7 @@
 
         } else {
           var context = iD.coreContext();
+          context.init();
 
           // disable boundaries (unless we have an explicit disable_features list)
           var q = iD.utilStringQs(window.location.hash.substring(1));

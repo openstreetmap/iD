@@ -2,7 +2,7 @@ describe('iD.validations.suspicious_name', function () {
     var context;
 
     beforeEach(function() {
-        context = iD.coreContext();
+        context = iD.coreContext().init();
     });
 
     function createWay(tags) {

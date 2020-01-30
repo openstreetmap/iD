@@ -2,7 +2,7 @@ describe('iD.validations.disconnected_way', function () {
     var context;
 
     beforeEach(function() {
-        context = iD.coreContext();
+        context = iD.coreContext().init();
     });
 
     function createWay(tags) {

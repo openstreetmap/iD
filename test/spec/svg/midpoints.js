@@ -9,7 +9,7 @@ describe('iD.svgMidpoints', function () {
 
 
     beforeEach(function () {
-        context = iD.coreContext();
+        context = iD.coreContext().init();
         context.enter({
             id: 'select',
             enter: function() { },

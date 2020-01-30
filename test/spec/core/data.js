@@ -10,7 +10,7 @@ describe('iD.coreData', function() {
     });
 
     beforeEach(function() {
-        _context = iD.coreContext();
+        _context = iD.coreContext().init();
     });
 
 

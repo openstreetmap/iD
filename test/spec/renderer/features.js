@@ -3,7 +3,7 @@ describe('iD.rendererFeatures', function() {
     var context, features;
 
     beforeEach(function() {
-        context = iD.coreContext();
+        context = iD.coreContext().init();
         d3.select(document.createElement('div'))
             .attr('id', 'map')
             .call(context.map());

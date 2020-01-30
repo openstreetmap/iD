@@ -24,7 +24,7 @@ describe('iD.presetIndex', function () {
 
         it('returns a collection containing presets matching a geometry and tags', function () {
             iD.data.presets = testPresets;
-            var presets = iD.coreContext().presets();
+            var presets = iD.coreContext().init().presets();
             var way = iD.osmWay({ tags: { highway: 'residential' } });
             var graph = iD.coreGraph([way]);
 
@@ -33,7 +33,7 @@ describe('iD.presetIndex', function () {
 
         it('returns the appropriate fallback preset when no tags match', function () {
             iD.data.presets = testPresets;
-            var presets = iD.coreContext().presets();
+            var presets = iD.coreContext().init().presets();
             var point = iD.osmNode();
             var line = iD.osmWay({ tags: { foo: 'bar' } });
             var graph = iD.coreGraph([point, line]);
@@ -44,7 +44,7 @@ describe('iD.presetIndex', function () {
 
         it('matches vertices on a line as points', function () {
             iD.data.presets = testPresets;
-            var presets = iD.coreContext().presets();
+            var presets = iD.coreContext().init().presets();
             var point = iD.osmNode({ tags: { leisure: 'park' } });
             var line = iD.osmWay({ nodes: [point.id], tags: { 'highway': 'residential' } });
             var graph = iD.coreGraph([point, line]);
@@ -54,7 +54,7 @@ describe('iD.presetIndex', function () {
 
         it('matches vertices on an addr:interpolation line as points', function () {
             iD.data.presets = testPresets;
-            var presets = iD.coreContext().presets();
+            var presets = iD.coreContext().init().presets();
             var point = iD.osmNode({ tags: { leisure: 'park' } });
             var line = iD.osmWay({ nodes: [point.id], tags: { 'addr:interpolation': 'even' } });
             var graph = iD.coreGraph([point, line]);
@@ -79,44 +79,44 @@ describe('iD.presetIndex', function () {
 
         it('whitelists keys for presets with area geometry', function () {
             iD.data.presets = testPresets;
-            var presets = iD.coreContext().presets();
+            var presets = iD.coreContext().init().presets();
             expect(presets.areaKeys()).to.include.keys('natural');
         });
 
         it('blacklists key-values for presets with a line geometry', function () {
             iD.data.presets = testPresets;
-            var presets = iD.coreContext().presets();
+            var presets = iD.coreContext().init().presets();
             expect(presets.areaKeys().natural).to.include.keys('tree_row');
             expect(presets.areaKeys().natural.tree_row).to.be.true;
         });
 
         it('blacklists key-values for presets with both area and line geometry', function () {
             iD.data.presets = testPresets;
-            var presets = iD.coreContext().presets();
+            var presets = iD.coreContext().init().presets();
             expect(presets.areaKeys().leisure).to.include.keys('track');
         });
 
         it('does not blacklist key-values for presets with neither area nor line geometry', function () {
             iD.data.presets = testPresets;
-            var presets = iD.coreContext().presets();
+            var presets = iD.coreContext().init().presets();
             expect(presets.areaKeys().natural).not.to.include.keys('peak');
         });
 
         it('does not blacklist generic \'*\' key-values', function () {
             iD.data.presets = testPresets;
-            var presets = iD.coreContext().presets();
+            var presets = iD.coreContext().init().presets();
             expect(presets.areaKeys().natural).not.to.include.keys('natural');
         });
 
         it('ignores keys like \'highway\' that are assumed to be lines', function () {
             iD.data.presets = testPresets;
-            var presets = iD.coreContext().presets();
+            var presets = iD.coreContext().init().presets();
             expect(presets.areaKeys()).not.to.include.keys('highway');
         });
 
         it('ignores suggestion presets', function () {
             iD.data.presets = testPresets;
-            var presets = iD.coreContext().presets();
+            var presets = iD.coreContext().init().presets();
             expect(presets.areaKeys()).not.to.include.keys('amenity');
         });
     });
@@ -125,7 +125,7 @@ describe('iD.presetIndex', function () {
         it('builds presets from provided', function () {
             var surfShop = iD.osmNode({ tags: { amenity: 'shop', 'shop:type': 'surf' } });
             var graph = iD.coreGraph([surfShop]);
-            var presets = iD.coreContext().presets();
+            var presets = iD.coreContext().init().presets();
             var morePresets = {
                 presets: {
                     'amenity/shop/surf': {
@@ -145,7 +145,7 @@ describe('iD.presetIndex', function () {
             var firstStreetJetty = iD.osmNode({ tags: { man_made: 'jetty' } });
             var entities = [surfShop, firstStreetJetty];
             var graph = iD.coreGraph(entities);
-            var presets = iD.coreContext().presets();
+            var presets = iD.coreContext().init().presets();
             var morePresets = {
                 presets: {
                     'amenity/shop/surf': {
@@ -199,7 +199,7 @@ describe('iD.presetIndex', function () {
 
         it('prefers building to multipolygon', function () {
             iD.data.presets = testPresets;
-            var presets = iD.coreContext().presets();
+            var presets = iD.coreContext().init().presets();
             var relation = iD.osmRelation({ tags: { type: 'multipolygon', building: 'yes' } });
             var graph = iD.coreGraph([relation]);
             expect(presets.match(relation, graph).id).to.eql('building');
@@ -207,7 +207,7 @@ describe('iD.presetIndex', function () {
 
         it('prefers building to address', function () {
             iD.data.presets = testPresets;
-            var presets = iD.coreContext().presets();
+            var presets = iD.coreContext().init().presets();
             var way = iD.osmWay({ tags: { area: 'yes', building: 'yes', 'addr:housenumber': '1234' } });
             var graph = iD.coreGraph([way]);
             expect(presets.match(way, graph).id).to.eql('building');
@@ -215,7 +215,7 @@ describe('iD.presetIndex', function () {
 
         it('prefers pedestrian to area', function () {
             iD.data.presets = testPresets;
-            var presets = iD.coreContext().presets();
+            var presets = iD.coreContext().init().presets();
             var way = iD.osmWay({ tags: { area: 'yes', highway: 'pedestrian' } });
             var graph = iD.coreGraph([way]);
             expect(presets.match(way, graph).id).to.eql('highway/pedestrian_area');
@@ -258,13 +258,13 @@ describe('iD.presetIndex', function () {
             var url = 'https://fakemaprules.io/fake.json';
 
             // no exernal presets yet
-            expect(iD.coreContext().presets().match(surfShop, graph).id).to.eql('point');
+            expect(iD.coreContext().init().presets().match(surfShop, graph).id).to.eql('point');
 
             // reset graph...
             graph = iD.coreGraph([surfShop]);
 
             // add the validations query param...
-            iD.coreContext().presets().fromExternal(url, function (externalPresets) {
+            iD.coreContext().init().presets().fromExternal(url, function (externalPresets) {
                 expect(externalPresets.match(surfShop, graph).id).to.eql('8bc64d6d');
             });
 
@@ -277,7 +277,7 @@ describe('iD.presetIndex', function () {
         it('makes only the external presets initially addable', function () {
             var url = 'https://fakemaprules.io/fake.json';
 
-            iD.coreContext().presets().fromExternal(url, function(externalPresets) {
+            iD.coreContext().init().presets().fromExternal(url, function(externalPresets) {
                 var external = externalPresets.collection.reduce(function(presets, preset) {
                     if (!preset.hasOwnProperty('members') && preset.addable()) {
                         presets.push(preset.id);

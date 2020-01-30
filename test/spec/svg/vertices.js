@@ -8,7 +8,7 @@ describe('iD.svgVertices', function () {
 
 
     beforeEach(function () {
-        context = iD.coreContext();
+        context = iD.coreContext().init();
         d3.select(document.createElement('div'))
             .attr('id', 'map')
             .call(context.map().centerZoom([0, 0], 17));

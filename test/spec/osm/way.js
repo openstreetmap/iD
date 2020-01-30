@@ -406,7 +406,7 @@ describe('iD.osmWay', function() {
 
     describe('#isArea', function() {
         before(function() {
-            iD.coreContext();
+            iD.coreContext().init();
         });
 
         it('returns false when the way has no tags', function() {

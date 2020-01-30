@@ -472,103 +472,106 @@ export function coreContext() {
 
 
   /* Init */
+  context.init = () => {
+    context.projection = geoRawMercator();
+    context.curtainProjection = geoRawMercator();
 
-  context.projection = geoRawMercator();
-  context.curtainProjection = geoRawMercator();
-
-  _locale = utilDetect().locale;
-  if (_locale && !dataLocales.hasOwnProperty(_locale)) {
-    _locale = _locale.split('-')[0];
-  }
-
-  _data = coreData(context);
-  _history = coreHistory(context);
-  _validator = coreValidator(context);
-
-  context.graph = _history.graph;
-  context.changes = _history.changes;
-  context.intersects = _history.intersects;
-  context.pauseChangeDispatch = _history.pauseChangeDispatch;
-  context.resumeChangeDispatch = _history.resumeChangeDispatch;
-
-  // Debounce save, since it's a synchronous localStorage write,
-  // and history changes can happen frequently (e.g. when dragging).
-  context.debouncedSave = _debounce(context.save, 350);
-  function withDebouncedSave(fn) {
-    return function() {
-      const result = fn.apply(_history, arguments);
-      context.debouncedSave();
-      return result;
-    };
-  }
-
-  context.perform = withDebouncedSave(_history.perform);
-  context.replace = withDebouncedSave(_history.replace);
-  context.pop = withDebouncedSave(_history.pop);
-  context.overwrite = withDebouncedSave(_history.overwrite);
-  context.undo = withDebouncedSave(_history.undo);
-  context.redo = withDebouncedSave(_history.redo);
-
-  _ui = uiInit(context);
-
-  _connection = services.osm;
-  _background = rendererBackground(context);
-  _features = rendererFeatures(context);
-  _photos = rendererPhotos(context);
-  _presets = presetIndex(context);
-
-  const hash = utilStringQs(window.location.hash);
-
-  if (services.maprules && hash.maprules) {
-    d3_json(hash.maprules)
-      .then(mapcss => {
-        services.maprules.init();
-        mapcss.forEach(mapcssSelector => services.maprules.addRule(mapcssSelector));
-      })
-      .catch(() => { /* ignore */ });
-  }
-
-  _map = rendererMap(context);
-  context.mouse = _map.mouse;
-  context.extent = _map.extent;
-  context.pan = _map.pan;
-  context.zoomIn = _map.zoomIn;
-  context.zoomOut = _map.zoomOut;
-  context.zoomInFurther = _map.zoomInFurther;
-  context.zoomOutFurther = _map.zoomOutFurther;
-  context.redrawEnable = _map.redrawEnable;
-
-  Object.values(services).forEach(service => {
-    if (service && typeof service.init === 'function') {
-      service.init(context);
+    _locale = utilDetect().locale;
+    if (_locale && !dataLocales.hasOwnProperty(_locale)) {
+      _locale = _locale.split('-')[0];
     }
-  });
 
-  _validator.init();
-  _background.init();
-  _features.init();
-  _photos.init();
+    _data = coreData(context);
+    _history = coreHistory(context);
+    _validator = coreValidator(context);
 
-  let presetsParameter = hash.presets;
-  if (presetsParameter && presetsParameter.indexOf('://') !== -1) {
-    // a URL of external presets file
-    _presets.fromExternal(external, (externalPresets) => {
-      context.presets = () => externalPresets;  // default + external presets...
+    context.graph = _history.graph;
+    context.changes = _history.changes;
+    context.intersects = _history.intersects;
+    context.pauseChangeDispatch = _history.pauseChangeDispatch;
+    context.resumeChangeDispatch = _history.resumeChangeDispatch;
+
+    // Debounce save, since it's a synchronous localStorage write,
+    // and history changes can happen frequently (e.g. when dragging).
+    context.debouncedSave = _debounce(context.save, 350);
+    function withDebouncedSave(fn) {
+      return function() {
+        const result = fn.apply(_history, arguments);
+        context.debouncedSave();
+        return result;
+      };
+    }
+
+    context.perform = withDebouncedSave(_history.perform);
+    context.replace = withDebouncedSave(_history.replace);
+    context.pop = withDebouncedSave(_history.pop);
+    context.overwrite = withDebouncedSave(_history.overwrite);
+    context.undo = withDebouncedSave(_history.undo);
+    context.redo = withDebouncedSave(_history.redo);
+
+    _ui = uiInit(context);
+
+    _connection = services.osm;
+    _background = rendererBackground(context);
+    _features = rendererFeatures(context);
+    _photos = rendererPhotos(context);
+    _presets = presetIndex(context);
+
+    const hash = utilStringQs(window.location.hash);
+
+    if (services.maprules && hash.maprules) {
+      d3_json(hash.maprules)
+        .then(mapcss => {
+          services.maprules.init();
+          mapcss.forEach(mapcssSelector => services.maprules.addRule(mapcssSelector));
+        })
+        .catch(() => { /* ignore */ });
+    }
+
+    _map = rendererMap(context);
+    context.mouse = _map.mouse;
+    context.extent = _map.extent;
+    context.pan = _map.pan;
+    context.zoomIn = _map.zoomIn;
+    context.zoomOut = _map.zoomOut;
+    context.zoomInFurther = _map.zoomInFurther;
+    context.zoomOutFurther = _map.zoomOutFurther;
+    context.redrawEnable = _map.redrawEnable;
+
+    Object.values(services).forEach(service => {
+      if (service && typeof service.init === 'function') {
+        service.init(context);
+      }
+    });
+
+    _validator.init();
+    _background.init();
+    _features.init();
+    _photos.init();
+
+    let presetsParameter = hash.presets;
+    if (presetsParameter && presetsParameter.indexOf('://') !== -1) {
+      // a URL of external presets file
+      _presets.fromExternal(external, (externalPresets) => {
+        context.presets = () => externalPresets;  // default + external presets...
+        osmSetAreaKeys(_presets.areaKeys());
+        osmSetPointTags(_presets.pointTags());
+        osmSetVertexTags(_presets.vertexTags());
+      });
+    } else {
+      let addablePresetIDs;
+      if (presetsParameter) {
+        // a list of allowed preset IDs
+        addablePresetIDs = presetsParameter.split(',');
+      }
+      _presets.init(addablePresetIDs);
       osmSetAreaKeys(_presets.areaKeys());
       osmSetPointTags(_presets.pointTags());
       osmSetVertexTags(_presets.vertexTags());
-    });
-  } else {
-    let addablePresetIDs;
-    if (presetsParameter) {
-      // a list of allowed preset IDs
-      addablePresetIDs = presetsParameter.split(',');
     }
-    _presets.init(addablePresetIDs);
-    osmSetAreaKeys(_presets.areaKeys());
-    osmSetPointTags(_presets.pointTags());
-    osmSetVertexTags(_presets.vertexTags());
-  }
+    return context;
+  };
+
 
   return context;
 }
