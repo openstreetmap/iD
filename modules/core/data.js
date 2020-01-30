@@ -21,7 +21,7 @@ export function coreData(context) {
     'phone_formats': 'data/phone_formats.min.json',
     'shortcuts': 'data/shortcuts.min.json',
     'territory_languages': 'data/territory_languages.min.json',
-    'wikipedia': 'data/wikipedia.min.json'
+    'wmf_sitematrix': 'https://cdn.jsdelivr.net/npm/wmf-sitematrix@0.1/wikipedia.min.json'
   };
 
 

@@ -23,7 +23,7 @@ export function uiFieldWikipedia(field, context) {
   // be available the first time through, so things like the fetchers and
   // the language() function will not work immediately.
   let _dataWikipedia = [];
-  context.data().get('wikipedia')
+  context.data().get('wmf_sitematrix')
     .then(d => _dataWikipedia = d)
     .catch(() => { /* ignore */ });
 

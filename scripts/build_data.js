@@ -87,6 +87,7 @@ function buildData() {
     'data/taginfo.json',
     'data/territory_languages.json',
     'dist/locales/en.json',
+    'dist/data/*',
     'svg/fontawesome/*.svg',
   ]);
 
@@ -97,7 +98,6 @@ function buildData() {
   let translations = generateTranslations(fields, presets, tstrings, searchableFieldIDs);
   let taginfo = generateTaginfo(presets, fields);
   let territoryLanguages = generateTerritoryLanguages();
-  let wikipedia = require('wmf-sitematrix').wikipedia;
 
   // Additional consistency checks
   validateCategoryPresets(categories, presets);
@@ -112,7 +112,6 @@ function buildData() {
     writeFileProm('data/presets.yaml', translationsToYAML(translations) ),
     writeFileProm('data/taginfo.json', prettyStringify(taginfo, { maxLength: 9999 }) ),
     writeFileProm('data/territory_languages.json', prettyStringify(territoryLanguages, { maxLength: 9999 }) ),
-    writeFileProm('dist/data/wikipedia.min.json', JSON.stringify(wikipedia)),
     writeEnJson(tstrings),
     writeFaIcons(faIcons),
     writeTnpIcons(tnpIcons),
