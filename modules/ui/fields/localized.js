@@ -158,7 +158,6 @@ export function uiFieldLocalized(field, context) {
             .attr('type', 'text')
             .attr('id', 'preset-input-' + field.safeid)
             .attr('class', 'localized-main')
-            .attr('placeholder', field.placeholder())
             .attr('maxlength', context.maxCharsForTagValue())
             .call(utilNoAuto)
             .merge(input);
@@ -375,7 +374,12 @@ export function uiFieldLocalized(field, context) {
                     return;
                 }
                 var t = {};
-                t[field.key] = utilGetSetValue(d3_select(this)) || undefined;
+                var val = utilGetSetValue(d3_select(this)) || undefined;
+
+                // don't override multiple values with blank string
+                if (!val && Array.isArray(_tags[field.key])) return;
+
+                t[field.key] = val;
                 dispatch.call('change', this, t, onInput);
             };
         }
@@ -419,6 +423,10 @@ export function uiFieldLocalized(field, context) {
     function changeValue(d) {
         if (!d.lang) return;
         var value = utilGetSetValue(d3_select(this)) || undefined;
+
+        // don't override multiple values with blank string
+        if (!value && Array.isArray(d.value)) return;
+
         var t = {};
         t[key(d.lang)] = value;
         d.value = value;
@@ -524,7 +532,6 @@ export function uiFieldLocalized(field, context) {
                 wrap
                     .append('input')
                     .attr('type', 'text')
-                    .attr('placeholder', t('translate.localized_translation_name'))
                     .attr('maxlength', context.maxCharsForTagValue())
                     .attr('class', 'localized-value')
                     .on('blur', changeValue)
@@ -554,8 +561,18 @@ export function uiFieldLocalized(field, context) {
             return languageName(context, d.lang);
         });
 
-        utilGetSetValue(entries.select('.localized-value'),
-            function(d) { return d.value; });
+        utilGetSetValue(entries.select('.localized-value'), function(d) {
+                return typeof d.value === 'string' ? d.value : '';
+            })
+            .attr('title', function(d) {
+                return Array.isArray(d.value) ? d.value.filter(Boolean).join('; ') : null;
+            })
+            .attr('placeholder', function(d) {
+                return Array.isArray(d.value) ? t('inspector.multiple_values') : t('translate.localized_translation_name');
+            })
+            .classed('mixed', function(d) {
+                return Array.isArray(d.value);
+            });
     }
 
 
@@ -563,7 +580,7 @@ export function uiFieldLocalized(field, context) {
         _tags = tags;
 
         // Fetch translations from wikipedia
-        if (tags.wikipedia && !_wikiTitles) {
+        if (typeof tags.wikipedia === 'string' && !_wikiTitles) {
             _wikiTitles = {};
             var wm = tags.wikipedia.match(/([^:]+):(.+)/);
             if (wm && wm[0] && wm[1]) {
@@ -574,7 +591,12 @@ export function uiFieldLocalized(field, context) {
             }
         }
 
-        utilGetSetValue(input, tags[field.key] || '');
+        var isMixed = Array.isArray(tags[field.key]);
+
+        utilGetSetValue(input, typeof tags[field.key] === 'string' ? tags[field.key] : '')
+            .attr('title', isMixed ? tags[field.key].filter(Boolean).join('; ') : undefined)
+            .attr('placeholder', isMixed ? t('inspector.multiple_values') : field.placeholder())
+            .classed('mixed', isMixed);
 
         calcMultilingual(tags);
 
@@ -611,5 +633,3 @@ export function uiFieldLocalized(field, context) {
 
     return utilRebind(localized, dispatch, 'on');
 }
-
-uiFieldLocalized.supportsMultiselection = false;
