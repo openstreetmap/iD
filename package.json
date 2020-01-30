@@ -13,7 +13,7 @@
     "all": "npm-run-all -s clean build build:legacy dist",
     "build": "npm-run-all -s build:css build:data build:dev",
     "build:css": "node scripts/build_css.js",
-    "build:data": "node scripts/build_data.js",
+    "build:data": "shx mkdir -p dist/data && node scripts/build_data.js",
     "build:dev": "rollup --config config/rollup.config.dev.js",
     "build:legacy": "rollup --config config/rollup.config.legacy.js",
     "build:stats": "rollup --config config/rollup.config.stats.js",
