@@ -168,4 +168,5 @@ sources.concat(keep).forEach(source => {
 
 imagery.sort((a, b) => a.name.localeCompare(b.name));
 
-fs.writeFileSync('data/imagery.json', prettyStringify({ dataImagery: imagery }));
+fs.writeFileSync('data/imagery.json', prettyStringify(imagery));
+fs.writeFileSync('dist/data/imagery.min.json', JSON.stringify(imagery));
