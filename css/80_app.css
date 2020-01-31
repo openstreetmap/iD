@@ -1767,6 +1767,9 @@ a.hide-toggle {
     color: #7092ff;
     cursor: pointer;
 }
+.form-field-input-radio > label.mixed {
+    font-style: italic;
+}
 .form-field-input-radio > label:last-child {
     border-radius: 0 0 4px 4px;
 }

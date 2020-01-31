@@ -264,16 +264,29 @@ export function uiFieldRadio(field, context) {
 
 
     radio.tags = function(tags) {
-        function checked(d) {
+
+        radios.property('checked', function(d) {
             if (field.key) {
                 return tags[field.key] === d;
-            } else {
-                return !!(tags[d] && tags[d].toLowerCase() !== 'no');
             }
-        }
+            return !!(typeof tags[d] === 'string' && tags[d].toLowerCase() !== 'no');
+        });
 
-        labels.classed('active', checked);
-        radios.property('checked', checked);
+        labels
+            .classed('active', function(d) {
+                if (field.key) {
+                    return (Array.isArray(tags[field.key]) && tags[field.key].includes(d))
+                        || tags[field.key] === d;
+                }
+                return Array.isArray(tags[d]) || !!(tags[d] && tags[d].toLowerCase() !== 'no');
+            })
+            .classed('mixed', function(d) {
+                if (field.key) {
+                    return Array.isArray(tags[field.key]) && tags[field.key].includes(d);
+                }
+                return Array.isArray(tags[d]);
+            });
+
 
         var selection = radios.filter(function() { return this.checked; });
 
@@ -316,5 +329,3 @@ export function uiFieldRadio(field, context) {
 
     return utilRebind(radio, dispatch, 'on');
 }
-
-uiFieldRadio.supportsMultiselection = false;
