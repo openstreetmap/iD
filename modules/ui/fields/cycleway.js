@@ -144,7 +144,7 @@ export function uiFieldCycleway(field, context) {
                     if (Array.isArray(tags[d])) {
                         vals = vals.concat(tags[d]);
                     }
-                    return vals.filter(Boolean).join('; ');
+                    return vals.filter(Boolean).join('\n');
                 }
                 return null;
             })

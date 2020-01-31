@@ -551,7 +551,7 @@ export function uiFieldCombo(field, context) {
             }).filter(Boolean);
 
             utilGetSetValue(input, !isMixed ? displayValue(tags[field.key]) : '')
-                .attr('title', isMixed ? mixedValues.join('; ') : undefined)
+                .attr('title', isMixed ? mixedValues.join('\n') : undefined)
                 .attr('placeholder', isMixed ? t('inspector.multiple_values') : _staticPlaceholder || '')
                 .classed('mixed', isMixed);
         }

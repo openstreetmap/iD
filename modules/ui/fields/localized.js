@@ -565,7 +565,7 @@ export function uiFieldLocalized(field, context) {
                 return typeof d.value === 'string' ? d.value : '';
             })
             .attr('title', function(d) {
-                return Array.isArray(d.value) ? d.value.filter(Boolean).join('; ') : null;
+                return Array.isArray(d.value) ? d.value.filter(Boolean).join('\n') : null;
             })
             .attr('placeholder', function(d) {
                 return Array.isArray(d.value) ? t('inspector.multiple_values') : t('translate.localized_translation_name');
@@ -594,7 +594,7 @@ export function uiFieldLocalized(field, context) {
         var isMixed = Array.isArray(tags[field.key]);
 
         utilGetSetValue(input, typeof tags[field.key] === 'string' ? tags[field.key] : '')
-            .attr('title', isMixed ? tags[field.key].filter(Boolean).join('; ') : undefined)
+            .attr('title', isMixed ? tags[field.key].filter(Boolean).join('\n') : undefined)
             .attr('placeholder', isMixed ? t('inspector.multiple_values') : field.placeholder())
             .classed('mixed', isMixed);
 

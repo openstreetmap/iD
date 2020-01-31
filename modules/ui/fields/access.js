@@ -214,7 +214,7 @@ export function uiFieldAccess(field, context) {
                 return tags[d] && Array.isArray(tags[d]);
             })
             .attr('title', function(d) {
-                return tags[d] && Array.isArray(tags[d]) && tags[d].filter(Boolean).join('; ');
+                return tags[d] && Array.isArray(tags[d]) && tags[d].filter(Boolean).join('\n');
             })
             .attr('placeholder', function(d) {
                 if (tags[d] && Array.isArray(tags[d])) {

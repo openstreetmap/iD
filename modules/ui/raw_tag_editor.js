@@ -282,7 +282,7 @@ export function uiRawTagEditor(context) {
 
         items.selectAll('input.value')
             .attr('title', function(d) {
-                return Array.isArray(d.value) ? d.value.filter(Boolean).join('; ') : d.value;
+                return Array.isArray(d.value) ? d.value.filter(Boolean).join('\n') : d.value;
             })
             .classed('mixed', function(d) {
                 return Array.isArray(d.value);

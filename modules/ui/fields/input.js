@@ -195,7 +195,7 @@ export function uiFieldText(field, context) {
         var isMixed = Array.isArray(tags[field.key]);
 
         utilGetSetValue(input, !isMixed && tags[field.key] ? tags[field.key] : '')
-            .attr('title', isMixed ? tags[field.key].filter(Boolean).join('; ') : undefined)
+            .attr('title', isMixed ? tags[field.key].filter(Boolean).join('\n') : undefined)
             .attr('placeholder', isMixed ? t('inspector.multiple_values') : (field.placeholder() || t('inspector.unknown')))
             .classed('mixed', isMixed);
 

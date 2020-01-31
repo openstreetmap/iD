@@ -286,7 +286,7 @@ export function uiFieldWikidata(field, context) {
 
         var isMixed = Array.isArray(tags[field.key]);
         d3_select('li.wikidata-search input')
-            .attr('title', isMixed ? tags[field.key].filter(Boolean).join('; ') : null)
+            .attr('title', isMixed ? tags[field.key].filter(Boolean).join('\n') : null)
             .attr('placeholder', isMixed ? t('inspector.multiple_values') : '')
             .classed('mixed', isMixed);
 
