@@ -1,11 +1,10 @@
 {
     "icon": "maki-bus",
     "fields": [
-        "name",
-        "network",
-        "operator",
-        "bench",
-        "shelter"
+        "{public_transport/platform_point}"
+    ],
+    "moreFields": [
+        "{public_transport/platform_point}"
     ],
     "geometry": [
         "point",
