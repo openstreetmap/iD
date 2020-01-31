@@ -5222,7 +5222,7 @@ en:
       historic/pillory:
         # historic=pillory
         name: Historic Pillory
-        # 'terms: military'
+        # 'terms: attraction'
         terms: '<translate with synonyms or related terms for ''Historic Pillory'', separated by commas>'
       historic/ruins:
         # historic=ruins
