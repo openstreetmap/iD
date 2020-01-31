@@ -13,6 +13,7 @@
         "covered",
         "frequency_electrified",
         "highspeed",
+        "incline",
         "maxspeed",
         "service_rail",
         "usage_rail",

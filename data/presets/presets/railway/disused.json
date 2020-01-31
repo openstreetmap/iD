@@ -1,13 +1,11 @@
 {
     "icon": "temaki-railway_track",
     "fields": [
-        "operator",
-        "structure",
-        "service_rail",
-        "usage_rail"
+        "{railway/light_rail}"
     ],
     "moreFields": [
-        "covered"
+        "{railway/light_rail}",
+        "highspeed"
     ],
     "geometry": [
         "line"

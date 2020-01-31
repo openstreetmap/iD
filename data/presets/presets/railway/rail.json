@@ -1,20 +1,11 @@
 {
     "icon": "temaki-railway_track",
     "fields": [
-        "name",
-        "operator",
-        "structure",
-        "gauge",
-        "electrified",
-        "service_rail",
-        "usage_rail"
+        "{railway/light_rail}"
     ],
     "moreFields": [
-        "covered",
-        "frequency_electrified",
-        "highspeed",
-        "maxspeed",
-        "voltage_electrified"
+        "{railway/light_rail}",
+        "highspeed"
     ],
     "geometry": [
         "line"

@@ -3228,6 +3228,7 @@
                 },
                 "electrified": {
                     "label": "Electrification",
+                    "terms": "contact line,powered,third rail",
                     "placeholder": "Contact Line, Electrified Rail...",
                     "options": {
                         "contact_line": "Contact Line",

@@ -131,7 +131,7 @@
     "drinking_water": {"key": "drinking_water", "type": "check", "label": "Drinkable", "terms": ["drinkworthy", "potable"]},
     "drive_through": {"key": "drive_through", "type": "check", "label": "Drive-Through"},
     "duration": {"key": "duration", "type": "text", "label": "Duration", "placeholder": "00:00"},
-    "electrified": {"key": "electrified", "type": "combo", "label": "Electrification", "placeholder": "Contact Line, Electrified Rail...", "strings": {"options": {"contact_line": "Contact Line", "rail": "Electrified Rail", "yes": "Yes (unspecified)", "no": "No"}}},
+    "electrified": {"key": "electrified", "type": "combo", "label": "Electrification", "placeholder": "Contact Line, Electrified Rail...", "strings": {"options": {"contact_line": "Contact Line", "rail": "Electrified Rail", "yes": "Yes (unspecified)", "no": "No"}}, "terms": ["contact line", "powered", "third rail"]},
     "elevation": {"key": "ele", "type": "number", "icon": "elevation", "universal": true, "label": "Elevation", "terms": ["altitude"]},
     "email": {"key": "email", "type": "email", "placeholder": "example@example.com", "label": "Email"},
     "embankment": {"key": "embankment", "type": "typeCombo", "label": "Type", "placeholder": "Default"},

@@ -786,6 +786,8 @@ en:
           'yes': Yes (unspecified)
         # electrified field placeholder
         placeholder: 'Contact Line, Electrified Rail...'
+        # 'terms: contact line,powered,third rail'
+        terms: '[translate with synonyms or related terms for ''Electrification'', separated by commas]'
       elevation:
         # ele=*
         label: Elevation
