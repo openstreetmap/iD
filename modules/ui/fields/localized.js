@@ -79,28 +79,35 @@ export function uiFieldLocalized(field, context) {
 
 
     function calcLocked() {
-        if (!_entityIDs || _entityIDs.length !== 1) {    // the original entity
-            field.locked(false);
-            return;
-        }
 
-        var latest = context.hasEntity(_entityIDs[0]);
-        if (!latest) {    // get current entity, possibly edited
-            field.locked(false);
-            return;
-        }
+        // only lock the Name field
+        var isLocked = field.id === 'name' &&
+            _entityIDs.length &&
+            // lock the field if any feature needs it
+            _entityIDs.some(function(entityID) {
 
-        var original = context.graph().base().entities[_entityIDs[0]];
+                var entity = context.graph().hasEntity(entityID);
+                if (!entity) return false;
 
-        var hasOriginalName = original && latest.tags.name && latest.tags.name === original.tags.name;
-        var hasWikidata = latest.tags.wikidata || latest.tags['name:etymology:wikidata'];
-        var preset = context.presets().match(latest, context.graph());
-        var isSuggestion = preset && preset.suggestion;
-        var showsBrand = preset && preset.fields
-            .filter(function(d) { return d.id === 'brand'; }).length;
+                var original = context.graph().base().entities[_entityIDs[0]];
+                var hasOriginalName = original && entity.tags.name && entity.tags.name === original.tags.name;
+                // if the name was already edited manually then allow further editing
+                if (!hasOriginalName) return false;
 
-        var isLocked = !!(field.id === 'name' && hasOriginalName &&
-            (hasWikidata || (isSuggestion && !showsBrand)));
+                // features linked to Wikidata are likely important and should be protected
+                if (entity.tags.wikidata) return true;
+
+                // assume the name has already been confirmed if its source has been researched
+                if (entity.tags['name:etymology:wikidata']) return true;
+
+                var preset = context.presets().match(entity, context.graph());
+                var isSuggestion = preset && preset.suggestion;
+                var showsBrand = preset && preset.fields.filter(function(d) {
+                    return d.id === 'brand';
+                }).length;
+                // protect standardized brand names
+                return isSuggestion && !showsBrand;
+            });
 
         field.locked(isLocked);
     }
