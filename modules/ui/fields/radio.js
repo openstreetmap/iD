@@ -272,6 +272,13 @@ export function uiFieldRadio(field, context) {
             return !!(typeof tags[d] === 'string' && tags[d].toLowerCase() !== 'no');
         });
 
+        function isMixed(d) {
+            if (field.key) {
+                return Array.isArray(tags[field.key]) && tags[field.key].includes(d);
+            }
+            return Array.isArray(tags[d]);
+        }
+
         labels
             .classed('active', function(d) {
                 if (field.key) {
@@ -280,11 +287,9 @@ export function uiFieldRadio(field, context) {
                 }
                 return Array.isArray(tags[d]) || !!(tags[d] && tags[d].toLowerCase() !== 'no');
             })
-            .classed('mixed', function(d) {
-                if (field.key) {
-                    return Array.isArray(tags[field.key]) && tags[field.key].includes(d);
-                }
-                return Array.isArray(tags[d]);
+            .classed('mixed', isMixed)
+            .attr('title', function(d) {
+                return isMixed(d) ? t('inspector.unshared_value_tooltip') : null;
             });
 
 

@@ -526,6 +526,9 @@ export function uiFieldCombo(field, context) {
                 .classed('draggable', allowDragAndDrop)
                 .classed('mixed', function(d) {
                     return d.isMixed;
+                })
+                .attr('title', function(d) {
+                    return d.isMixed ? t('inspector.unshared_value_tooltip') : null;
                 });
 
             if (allowDragAndDrop) {
