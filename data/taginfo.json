@@ -2225,6 +2225,7 @@
     {"key": "tower:type", "value": "anchor", "description": "🄳 ➜ line_attachment=anchor"},
     {"key": "tower:type", "value": "suspension", "description": "🄳 ➜ line_attachment=suspension"},
     {"key": "townhall:village", "value": "yes", "description": "🄳 ➜ amenity=townhall + townhall:type=village"},
+    {"key": "tunnel", "value": "1", "description": "🄳 ➜ tunnel=yes"},
     {"key": "type", "value": "broad_leaved", "description": "🄳 ➜ leaf_type=broadleaved"},
     {"key": "type", "value": "caldera", "description": "🄳 ➜ volcano:type=caldera"},
     {"key": "type", "value": "conifer", "description": "🄳 ➜ leaf_type=needleleaved"},

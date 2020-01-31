@@ -1256,6 +1256,10 @@
     "replace": {"amenity": "townhall", "townhall:type": "village"}
   },
   {
+    "old": {"tunnel": "1"},
+    "replace": {"tunnel": "yes"}
+  },
+  {
     "old": {"type": "audio", "amenity": "studio"},
     "replace": {"studio": "audio"}
   },
