@@ -4875,10 +4875,10 @@
             },
             "presets": {
                 "aerialway": {
-                    "name": "Aerialway"
+                    "name": "Aerialway Feature"
                 },
                 "aeroway": {
-                    "name": "Aeroway"
+                    "name": "Aeroway Feature"
                 },
                 "amenity": {
                     "name": "Amenity"
@@ -10075,7 +10075,7 @@
             },
             "MAPNIK": {
                 "attribution": {
-                    "text": "© OpenStreetMap contributors, CC-BY-SA 2.0"
+                    "text": "© OpenStreetMap contributors, CC-BY-SA"
                 },
                 "description": "The default OpenStreetMap layer.",
                 "name": "OpenStreetMap (Standard)"

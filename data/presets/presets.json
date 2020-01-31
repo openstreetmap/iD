@@ -1,7 +1,7 @@
 {
   "presets": {
-    "aerialway": {"fields": ["name", "aerialway"], "moreFields": ["layer"], "geometry": ["point", "vertex", "line"], "tags": {"aerialway": "*"}, "searchable": false, "name": "Aerialway"},
-    "aeroway": {"icon": "maki-airport", "fields": ["aeroway"], "geometry": ["point", "vertex", "line", "area"], "tags": {"aeroway": "*"}, "searchable": false, "name": "Aeroway"},
+    "aerialway": {"fields": ["name", "aerialway"], "moreFields": ["layer"], "geometry": ["point", "vertex", "line"], "tags": {"aerialway": "*"}, "searchable": false, "name": "Aerialway Feature"},
+    "aeroway": {"icon": "maki-airport", "fields": ["aeroway"], "geometry": ["point", "vertex", "line", "area"], "tags": {"aeroway": "*"}, "searchable": false, "name": "Aeroway Feature"},
     "amenity": {"fields": ["amenity"], "geometry": ["point", "vertex", "line", "area"], "tags": {"amenity": "*"}, "searchable": false, "name": "Amenity"},
     "attraction": {"icon": "maki-star", "fields": ["name", "attraction", "operator", "opening_hours", "fee", "charge_fee"], "moreFields": ["address", "email", "fax", "opening_hours", "payment_multi", "phone", "website"], "geometry": ["point", "vertex", "line", "area"], "tags": {"attraction": "*"}, "searchable": false, "name": "Attraction"},
     "boundary": {"fields": ["boundary"], "geometry": ["line"], "tags": {"boundary": "*"}, "searchable": false, "name": "Boundary", "matchScore": 0.45},
@@ -17,7 +17,7 @@
     "natural": {"icon": "maki-natural", "fields": ["name", "natural"], "moreFields": ["gnis/feature_id"], "geometry": ["point", "vertex", "line", "area"], "tags": {"natural": "*"}, "searchable": false, "name": "Natural Feature"},
     "place": {"fields": ["name", "place"], "moreFields": ["gnis/feature_id"], "geometry": ["point", "vertex", "area"], "tags": {"place": "*"}, "searchable": false, "name": "Place"},
     "playground": {"icon": "maki-playground", "fields": ["playground", "playground/theme", "min_age", "max_age", "wheelchair", "blind", "height"], "moreFields": ["access_simple", "colour", "ref"], "geometry": ["point", "vertex", "line", "area"], "tags": {"playground": "*"}, "searchable": false, "name": "Playground Equipment"},
-    "power": {"geometry": ["point", "vertex", "line", "area"], "tags": {"power": "*"}, "fields": ["power"], "moreFields": ["material"], "searchable": false, "name": "Power Feature"},
+    "power": {"icon": "temaki-power", "geometry": ["point", "vertex", "line", "area"], "tags": {"power": "*"}, "fields": ["power"], "moreFields": ["material"], "searchable": false, "name": "Power Feature"},
     "railway": {"icon": "temaki-rail_profile", "fields": ["railway"], "geometry": ["point", "vertex", "line", "area"], "tags": {"railway": "*"}, "searchable": false, "name": "Railway Feature"},
     "seamark": {"icon": "maki-harbor", "fields": ["seamark/type"], "geometry": ["point", "vertex", "line", "area"], "tags": {"seamark:type": "*"}, "searchable": false, "name": "Seamark"},
     "tourism": {"icon": "maki-attraction", "fields": ["name", "tourism"], "geometry": ["point", "vertex", "line", "area"], "tags": {"tourism": "*"}, "searchable": false, "name": "Tourism Feature"},

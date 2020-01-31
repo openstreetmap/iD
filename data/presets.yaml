@@ -2767,7 +2767,7 @@ en:
         terms: '<translate with synonyms or related terms for ''Advertising Totem'', separated by commas>'
       aerialway:
         # aerialway=*
-        name: Aerialway
+        name: Aerialway Feature
       aerialway/cable_car:
         # aerialway=cable_car
         name: Cable Car
@@ -2835,7 +2835,7 @@ en:
         terms: '<translate with synonyms or related terms for ''Zip Line'', separated by commas>'
       aeroway:
         # aeroway=*
-        name: Aeroway
+        name: Aeroway Feature
       aeroway/aerodrome:
         # aeroway=aerodrome
         name: Airport
