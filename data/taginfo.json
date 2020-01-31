@@ -563,6 +563,7 @@
     {"key": "historic", "value": "memorial", "description": "🄿 Memorial", "object_types": ["node", "area"], "icon_url": "https://cdn.jsdelivr.net/gh/mapbox/maki/icons/monument-15.svg"},
     {"key": "memorial", "value": "plaque", "description": "🄿 Commemorative Plaque", "object_types": ["node"], "icon_url": "https://cdn.jsdelivr.net/gh/ideditor/temaki/icons/plaque.svg"},
     {"key": "historic", "value": "monument", "description": "🄿 Monument", "object_types": ["node", "area"], "icon_url": "https://cdn.jsdelivr.net/gh/mapbox/maki/icons/monument-15.svg"},
+    {"key": "historic", "value": "pillory", "description": "🄿 Historic Pillory", "object_types": ["node", "area"], "icon_url": "https://cdn.jsdelivr.net/gh/mapbox/maki/icons/monument-15.svg"},
     {"key": "historic", "value": "ruins", "description": "🄿 Ruins", "object_types": ["node", "area"], "icon_url": "https://cdn.jsdelivr.net/gh/ideditor/temaki/icons/ruins.svg"},
     {"key": "historic", "value": "tomb", "description": "🄿 Tomb", "object_types": ["node", "area"], "icon_url": "https://cdn.jsdelivr.net/gh/mapbox/maki/icons/cemetery-15.svg"},
     {"key": "historic", "value": "wayside_cross", "description": "🄿 Wayside Cross", "object_types": ["node", "area"], "icon_url": "https://cdn.jsdelivr.net/gh/mapbox/maki/icons/religious-christian-15.svg"},

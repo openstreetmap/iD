@@ -7141,6 +7141,10 @@
                     "name": "Monument",
                     "terms": ""
                 },
+                "historic/pillory": {
+                    "name": "Historic Pillory",
+                    "terms": "attraction"
+                },
                 "historic/ruins": {
                     "name": "Ruins",
                     "terms": ""
@@ -10077,7 +10081,7 @@
             },
             "MAPNIK": {
                 "attribution": {
-                    "text": "© OpenStreetMap contributors, CC-BY-SA"
+                    "text": "© OpenStreetMap contributors, CC-BY-SA 2.0"
                 },
                 "description": "The default OpenStreetMap layer.",
                 "name": "OpenStreetMap (Standard)"

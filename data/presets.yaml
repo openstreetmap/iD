@@ -5336,6 +5336,11 @@ en:
         # historic=monument
         name: Monument
         terms: '<translate with synonyms or related terms for ''Monument'', separated by commas>'
+      historic/pillory:
+        # historic=pillory
+        name: Historic Pillory
+        # 'terms: attraction'
+        terms: '<translate with synonyms or related terms for ''Historic Pillory'', separated by commas>'
       historic/ruins:
         # historic=ruins
         name: Ruins
