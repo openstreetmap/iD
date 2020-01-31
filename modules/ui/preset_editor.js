@@ -10,17 +10,18 @@ import { modeBrowse } from '../modes/browse';
 import { uiDisclosure } from './disclosure';
 import { uiField } from './field';
 import { uiFormFields } from './form_fields';
+import { utilArrayIdentical } from '../util/array';
 import { utilArrayUnion, utilRebind } from '../util';
 
 
 export function uiPresetEditor(context) {
-    var dispatch = d3_dispatch('change');
+    var dispatch = d3_dispatch('change', 'revert');
     var formFields = uiFormFields(context);
     var _state;
     var _fieldsArr;
-    var _preset;
+    var _presets = [];
     var _tags;
-    var _entityID;
+    var _entityIDs;
 
 
     function presetEditor(selection) {
@@ -33,36 +34,56 @@ export function uiPresetEditor(context) {
 
     function render(selection) {
         if (!_fieldsArr) {
-            var entity = context.entity(_entityID);
-            var geometry = context.geometry(_entityID);
-            var presets = context.presets();
+
+            var graph = context.graph();
+
+            var geometries = Object.keys(_entityIDs.reduce(function(geoms, entityID) {
+                return geoms[graph.entity(entityID).geometry(graph)] = true;
+            }, {}));
+
+            var presetsManager = context.presets();
+
+            var combinedFields = _presets.reduce(function(fields, preset) {
+                if (!fields.length) return preset.fields;
+                return fields.filter(function(field) {
+                    return preset.fields.indexOf(field) !== -1 || preset.moreFields.indexOf(field) !== -1;
+                });
+            }, []);
+
+            var combinedMoreFields = _presets.reduce(function(fields, preset) {
+                if (!fields.length) return preset.moreFields;
+                return fields.filter(function(field) {
+                    return preset.fields.indexOf(field) !== -1 || preset.moreFields.indexOf(field) !== -1;
+                });
+            }, []);
 
             _fieldsArr = [];
 
-            _preset.fields.forEach(function(field) {
-                if (field.matchGeometry(geometry)) {
+            combinedFields.forEach(function(field) {
+                if (field.matchAllGeometry(geometries)) {
                     _fieldsArr.push(
-                        uiField(context, field, entity)
+                        uiField(context, field, _entityIDs)
                     );
                 }
             });
 
-            if (entity.isHighwayIntersection(context.graph()) && presets.field('restrictions')) {
+            var singularEntity = _entityIDs.length === 1 && graph.hasEntity(_entityIDs[0]);
+            if (singularEntity && singularEntity.isHighwayIntersection(graph) && presetsManager.field('restrictions')) {
                 _fieldsArr.push(
-                    uiField(context, presets.field('restrictions'), entity)
+                    uiField(context, presetsManager.field('restrictions'), _entityIDs)
                 );
             }
 
-            var additionalFields = utilArrayUnion(_preset.moreFields, presets.universal());
+            var additionalFields = utilArrayUnion(combinedMoreFields, presetsManager.universal());
             additionalFields.sort(function(field1, field2) {
                 return field1.label().localeCompare(field2.label(), currentLocale);
             });
 
             additionalFields.forEach(function(field) {
-                if (_preset.fields.indexOf(field) === -1 &&
-                    field.matchGeometry(geometry)) {
+                if (combinedFields.indexOf(field) === -1 &&
+                    field.matchAllGeometry(geometries)) {
                     _fieldsArr.push(
-                        uiField(context, field, entity, { show: false })
+                        uiField(context, field, _entityIDs, { show: false })
                     );
                 }
             });
@@ -71,6 +92,9 @@ export function uiPresetEditor(context) {
                 field
                     .on('change', function(t, onInput) {
                         dispatch.call('change', field, t, onInput);
+                    })
+                    .on('revert', function(keys) {
+                        dispatch.call('revert', field, keys);
                     });
             });
         }
@@ -100,11 +124,12 @@ export function uiPresetEditor(context) {
     }
 
 
-    presetEditor.preset = function(val) {
-        if (!arguments.length) return _preset;
-        if (_preset && _preset.id === val.id) return presetEditor;
-        _preset = val;
-        _fieldsArr = null;
+    presetEditor.presets = function(val) {
+        if (!arguments.length) return _presets;
+        if (!_presets || !val || !utilArrayIdentical(_presets, val)) {
+            _presets = val;
+            _fieldsArr = null;
+        }
         return presetEditor;
     };
 
@@ -124,11 +149,12 @@ export function uiPresetEditor(context) {
     };
 
 
-    presetEditor.entityID = function(val) {
-        if (!arguments.length) return _entityID;
-        if (_entityID === val) return presetEditor;
-        _entityID = val;
-        _fieldsArr = null;
+    presetEditor.entityIDs = function(val) {
+        if (!arguments.length) return _entityIDs;
+        if (!val || !_entityIDs || !utilArrayIdentical(_entityIDs, val)) {
+            _entityIDs = val;
+            _fieldsArr = null;
+        }
         return presetEditor;
     };
 

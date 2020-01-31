@@ -23,7 +23,6 @@ export function uiRawTagEditor(context) {
     var _readOnlyTags = [];
     // the keys in the order we want them to display
     var _orderedKeys = [];
-    var _keyValues = null;
     var _showBlank = false;
     var _updatePreference = true;
     var _expanded = false;
@@ -283,10 +282,10 @@ export function uiRawTagEditor(context) {
 
         items.selectAll('input.value')
             .attr('title', function(d) {
-                return typeof d.value === 'string' ? d.value : Array.from(_keyValues[d.key]).sort().join('; ');
+                return Array.isArray(d.value) ? d.value.filter(Boolean).join('\n') : d.value;
             })
-            .classed('conflicting', function(d) {
-                return typeof d.value !== 'string';
+            .classed('mixed', function(d) {
+                return Array.isArray(d.value);
             })
             .attr('placeholder', function(d) {
                 return typeof d.value === 'string' ? null : t('inspector.multiple_values');
@@ -346,7 +345,7 @@ export function uiRawTagEditor(context) {
                 .filter(function(row) { return row.key && row.key.trim() !== ''; })
                 .map(function(row) {
                     var rawVal = row.value;
-                    if (rawVal === true) rawVal = '*';
+                    if (typeof rawVal !== 'string') rawVal = '*';
                     var val = rawVal ? stringify(rawVal) : '';
                     return stringify(row.key) + '=' + val;
                 })
@@ -382,7 +381,7 @@ export function uiRawTagEditor(context) {
                 if (isReadOnly({ key: change.key })) return;
 
                 // skip unchanged multiselection placeholders
-                if (change.newVal === '*' && change.oldVal === true) return;
+                if (change.newVal === '*' && typeof change.oldVal !== 'string') return;
 
                 if (change.type === '-') {
                     _pendingChange[change.key] = undefined;
@@ -413,13 +412,13 @@ export function uiRawTagEditor(context) {
         function bindTypeahead(key, value) {
             if (isReadOnly(key.datum())) return;
 
-            if (typeof value.datum().value !== 'string' && _keyValues) {
+            if (Array.isArray(value.datum().value)) {
                 value.call(uiCombobox(context, 'tag-value')
                     .minItems(1)
                     .fetcher(function(value, callback) {
                         var keyString = utilGetSetValue(key);
-                        if (!_keyValues[keyString]) return;
-                        var data = Array.from(_keyValues[keyString]).map(function(tagValue) {
+                        if (!_tags[keyString]) return;
+                        var data = _tags[keyString].filter(Boolean).map(function(tagValue) {
                             return {
                                 value: tagValue,
                                 title: tagValue
@@ -633,59 +632,6 @@ export function uiRawTagEditor(context) {
             _entityIDs = val;
             _orderedKeys = [];
         }
-
-        var combinedTags = {};
-        var sharedKeys = null;
-        _keyValues = {};
-
-        _entityIDs.forEach(function(entityID) {
-            var entity = context.entity(entityID);
-            var entityTags = entity.tags;
-            var entityKey;
-
-            if (sharedKeys === null) {
-                sharedKeys = {};
-                for (entityKey in entityTags) {
-                    sharedKeys[entityKey] = true;
-                }
-            } else {
-                for (var sharedKey in sharedKeys) {
-                    if (!entityTags.hasOwnProperty(sharedKey)) {
-                        delete sharedKeys[sharedKey];
-                    }
-                }
-            }
-
-            for (entityKey in entityTags) {
-
-                var entityValue = entityTags[entityKey];
-
-                if (!_keyValues.hasOwnProperty(entityKey)) {
-                    _keyValues[entityKey] = new Set();
-                }
-                _keyValues[entityKey].add(entityValue);
-
-                if (combinedTags.hasOwnProperty(entityKey)) {
-                    var combinedValue = combinedTags[entityKey];
-                    if (combinedValue !== true &&
-                        combinedValue !== entityValue) {
-
-                        combinedTags[entityKey] = true;
-                    }
-                } else {
-                    combinedTags[entityKey] = entityValue;
-                }
-            }
-        });
-
-        for (var key in combinedTags) {
-            if (!sharedKeys.hasOwnProperty(key)) {
-                // treat tags that aren't shared by all entities the same as if there are multiple values
-                combinedTags[key] = true;
-            }
-        }
-
-        rawTagEditor.tags(combinedTags);
         return rawTagEditor;
     };
 

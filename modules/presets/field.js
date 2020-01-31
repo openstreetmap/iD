@@ -13,6 +13,12 @@ export function presetField(id, field) {
         return !field.geometry || field.geometry === geometry;
     };
 
+    field.matchAllGeometry = function(geometries) {
+        return !field.geometry || geometries.every(function(geometry) {
+            return field.geometry.indexOf(geometry) !== -1;
+        });
+    };
+
 
     field.t = function(scope, options) {
         return t('presets.fields.' + id + '.' + scope, options);

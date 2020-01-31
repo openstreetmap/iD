@@ -28,7 +28,7 @@ export function uiFormFields(context) {
 
 
         var fields = container.selectAll('.wrap-form-field')
-            .data(shown, function(d) { return d.id + (d.entityID || ''); });
+            .data(shown, function(d) { return d.id + (d.entityIDs ? d.entityIDs.join() : ''); });
 
         fields.exit()
             .remove();

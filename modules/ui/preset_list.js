@@ -12,6 +12,7 @@ import { actionChangePreset } from '../actions/change_preset';
 import { operationDelete } from '../operations/delete';
 import { svgIcon } from '../svg/index';
 import { tooltip } from '../util/tooltip';
+import { geoExtent } from '../geo/extent';
 import { uiPresetIcon } from './preset_icon';
 import { uiTagReference } from './tag_reference';
 import { utilKeybinding, utilNoAuto, utilRebind } from '../util';
@@ -511,17 +512,10 @@ export function uiPresetList(context) {
     }
 
     function combinedEntityExtent() {
-        var extent;
-        _entityIDs.forEach(function(entityID) {
+        return _entityIDs.reduce(function(extent, entityID) {
             var entity = context.graph().entity(entityID);
-            var entityExtent = entity.extent(context.graph());
-            if (!extent) {
-                extent = entityExtent;
-            } else {
-                extent = extent.extend(entityExtent);
-            }
-        });
-        return extent;
+            return extent.extend(entity.extent(context.graph()));
+        }, geoExtent());
     }
 
     return utilRebind(presetList, dispatch, 'on');

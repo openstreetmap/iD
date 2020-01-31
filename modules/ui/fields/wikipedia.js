@@ -17,7 +17,7 @@ export function uiFieldWikipedia(field, context) {
   let _lang = d3_select(null);
   let _title = d3_select(null);
   let _wikiURL = '';
-  let _entity;
+  let _entityIDs;
 
   // A concern here in switching to async data means that _dataWikipedia will not
   // be available the first time through, so things like the fetchers and
@@ -43,8 +43,15 @@ export function uiFieldWikipedia(field, context) {
 
   const titleCombo = uiCombobox(context, 'wikipedia-title')
     .fetcher((value, callback) => {
-      if (!value && _entity) {
-        value = context.entity(_entity.id).tags.name || '';
+      if (!value) {
+        value = '';
+        for (let i in _entityIDs) {
+          let entity = context.hasEntity(_entityIDs[i]);
+          if (entity.tags.name) {
+            value = entity.tags.name;
+            break;
+          }
+        }
       }
       const searchfn = value.length > 7 ? wikipedia.search : wikipedia.suggestions;
       searchfn(language()[2], value, (query, data) => {
@@ -196,7 +203,7 @@ export function uiFieldWikipedia(field, context) {
 
     // attempt asynchronous update of wikidata tag..
     const initGraph = context.graph();
-    const initEntityID = _entity.id;
+    const initEntityIDs = _entityIDs;
 
     wikidata.itemsByTitle(language()[2], value, (err, data) => {
       if (err || !data || !Object.keys(data).length) return;
@@ -206,13 +213,26 @@ export function uiFieldWikipedia(field, context) {
 
       const qids = Object.keys(data);
       const value = qids && qids.find(id => id.match(/^Q\d+$/));
-      let currTags = Object.assign({}, context.entity(initEntityID).tags);  // shallow copy
 
-      currTags.wikidata = value;
+      let actions = initEntityIDs.map((entityID) => {
+        let entity = context.entity(entityID).tags;
+        let currTags = Object.assign({}, entity);  // shallow copy
+        if (currTags.wikidata !== value) {
+            currTags.wikidata = value;
+            return actionChangeTags(entityID, currTags);
+        }
+      }).filter(Boolean);
+
+      if (!actions.length) return;
 
       // Coalesce the update of wikidata tag into the previous tag change
       context.overwrite(
-        actionChangeTags(initEntityID, currTags),
+        function actionUpdateWikidataTags(graph) {
+          actions.forEach(function(action) {
+            graph = action(graph);
+          });
+          return graph;
+        },
         context.history().undoAnnotation()
       );
 
@@ -223,7 +243,7 @@ export function uiFieldWikipedia(field, context) {
 
 
   wiki.tags = (tags) => {
-    const value = tags[field.key] || '';
+    const value = typeof tags[field.key] === 'string' ? tags[field.key] : '';
     const m = value.match(/([^:]+):([^#]+)(?:#(.+))?/);
     const l = m && _dataWikipedia.find(d => m[1] === d[2]);
     let anchor = m && m[3];
@@ -256,9 +276,9 @@ export function uiFieldWikipedia(field, context) {
   };
 
 
-  wiki.entity = function(val) {
-    if (!arguments.length) return _entity;
-    _entity = val;
+  wiki.entityIDs = (val) => {
+    if (!arguments.length) return _entityIDs;
+    _entityIDs = val;
     return wiki;
   };
 
@@ -270,3 +290,5 @@ export function uiFieldWikipedia(field, context) {
 
   return utilRebind(wiki, dispatch, 'on');
 }
+
+uiFieldWikipedia.supportsMultiselection = false;

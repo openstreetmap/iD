@@ -12,6 +12,7 @@ import {
 export function uiFieldTextarea(field, context) {
     var dispatch = d3_dispatch('change');
     var input = d3_select(null);
+    var _tags;
 
 
     function textarea(selection) {
@@ -29,7 +30,6 @@ export function uiFieldTextarea(field, context) {
         input = input.enter()
             .append('textarea')
             .attr('id', 'preset-input-' + field.safeid)
-            .attr('placeholder', field.placeholder() || t('inspector.unknown'))
             .attr('maxlength', context.maxCharsForTagValue())
             .call(utilNoAuto)
             .on('input', change(true))
@@ -41,15 +41,28 @@ export function uiFieldTextarea(field, context) {
 
     function change(onInput) {
         return function() {
+
+            var val = utilGetSetValue(input) || undefined;
+
+            // don't override multiple values with blank string
+            if (!val && Array.isArray(_tags[field.key])) return;
+
             var t = {};
-            t[field.key] = utilGetSetValue(input) || undefined;
+            t[field.key] = val;
             dispatch.call('change', this, t, onInput);
         };
     }
 
 
     textarea.tags = function(tags) {
-        utilGetSetValue(input, tags[field.key] || '');
+        _tags = tags;
+
+        var isMixed = Array.isArray(tags[field.key]);
+
+        utilGetSetValue(input, !isMixed && tags[field.key] ? tags[field.key] : '')
+            .attr('title', isMixed ? tags[field.key].filter(Boolean).join('\n') : undefined)
+            .attr('placeholder', isMixed ? t('inspector.multiple_values') : (field.placeholder() || t('inspector.unknown')))
+            .classed('mixed', isMixed);
     };
 
 

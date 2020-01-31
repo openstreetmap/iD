@@ -694,6 +694,7 @@
             "key_value": "key=value",
             "multiple_values": "Multiple Values",
             "multiple_types": "Multiple Types",
+            "unshared_value_tooltip": "not shared by all features",
             "hidden_preset": {
                 "manual": "{features} are hidden. Enable them in the Map Data pane.",
                 "zoom": "{features} are hidden. Zoom in to enable them."
