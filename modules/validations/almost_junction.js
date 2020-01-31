@@ -27,38 +27,39 @@ export function validationAlmostJunction(context) {
     const SIG_ANGLE_TH = Math.atan(WELD_TH_METERS / EXTEND_TH_METERS);
 
     function isHighway(entity) {
-        return entity.type === 'way' &&
-            osmRoutableHighwayTagValues[entity.tags.highway];
+        return entity.type === 'way'
+            && osmRoutableHighwayTagValues[entity.tags.highway];
     }
 
     function isTaggedAsNotContinuing(node) {
-        return node.tags.noexit === 'yes' ||
-            node.tags.amenity === 'parking_entrance' ||
-            (node.tags.entrance && node.tags.entrance !== 'no');
+        return node.tags.noexit === 'yes'
+            || node.tags.amenity === 'parking_entrance'
+            || (node.tags.entrance && node.tags.entrance !== 'no');
     }
 
 
-    var validation = function checkAlmostJunction(entity, graph) {
+    const validation = function checkAlmostJunction(entity, graph) {
         if (!isHighway(entity)) return [];
         if (entity.isDegenerate()) return [];
 
-        var tree = context.history().tree();
-        var issues = [];
+        const tree = context.history().tree();
+        const extendableNodeInfos = findConnectableEndNodesByExtension(entity);
 
-        var extendableNodeInfos = findConnectableEndNodesByExtension(entity);
-        extendableNodeInfos.forEach(function(extendableNodeInfo) {
+        let issues = [];
+
+        extendableNodeInfos.forEach(extendableNodeInfo => {
             issues.push(new validationIssue({
-                type: type,
+                type,
                 subtype: 'highway-highway',
                 severity: 'warning',
-                message: function(context) {
-                    var entity1 = context.hasEntity(this.entityIds[0]);
+                message(context) {
+                    const entity1 = context.hasEntity(this.entityIds[0]);
                     if (this.entityIds[0] === this.entityIds[2]) {
                         return entity1 ? t('issues.almost_junction.self.message', {
                             feature: utilDisplayLabel(entity1, context)
                         }) : '';
                     } else {
-                        var entity2 = context.hasEntity(this.entityIds[2]);
+                        const entity2 = context.hasEntity(this.entityIds[2]);
                         return (entity1 && entity2) ? t('issues.almost_junction.message', {
                             feature: utilDisplayLabel(entity1, context),
                             feature2: utilDisplayLabel(entity2, context)
@@ -81,18 +82,18 @@ export function validationAlmostJunction(context) {
 
 
         function makeFixes(context) {
-            var fixes = [new validationIssueFix({
+            let fixes = [new validationIssueFix({
                 icon: 'iD-icon-abutment',
                 title: t('issues.fix.connect_features.title'),
-                onClick: function(context) {
-                    var endNodeId = this.issue.entityIds[1];
-                    var endNode = context.entity(endNodeId);
-                    var targetEdge = this.issue.data.edge;
-                    var crossLoc = this.issue.data.cross_loc;
-                    var edgeNodes = [context.entity(targetEdge[0]), context.entity(targetEdge[1])];
-                    var closestNodeInfo = geoSphericalClosestNode(edgeNodes, crossLoc);
+                onClick(context) {
+                    const endNodeId = this.issue.entityIds[1];
+                    const endNode = context.entity(endNodeId);
+                    const targetEdge = this.issue.data.edge;
+                    const crossLoc = this.issue.data.cross_loc;
+                    const edgeNodes = [context.entity(targetEdge[0]), context.entity(targetEdge[1])];
+                    const closestNodeInfo = geoSphericalClosestNode(edgeNodes, crossLoc);
 
-                    var annotation = t('issues.fix.connect_almost_junction.annotation');
+                    const annotation = t('issues.fix.connect_almost_junction.annotation');
                     // already a point nearby, just connect to that
                     if (closestNodeInfo.distance < WELD_TH_METERS) {
                         context.perform(
@@ -109,15 +110,15 @@ export function validationAlmostJunction(context) {
                 }
             })];
 
-            var node = context.hasEntity(this.entityIds[1]);
+            const node = context.hasEntity(this.entityIds[1]);
             if (node && !node.hasInterestingTags()) {
                 // node has no descriptive tags, suggest noexit fix
                 fixes.push(new validationIssueFix({
                     icon: 'maki-barrier',
                     title: t('issues.fix.tag_as_disconnected.title'),
-                    onClick: function(context) {
-                        var nodeID = this.issue.entityIds[1];
-                        var tags = Object.assign({}, context.entity(nodeID).tags);
+                    onClick(context) {
+                        const nodeID = this.issue.entityIds[1];
+                        const tags = Object.assign({}, context.entity(nodeID).tags);
                         tags.noexit = 'yes';
                         context.perform(
                             actionChangeTags(nodeID, tags),
@@ -143,7 +144,7 @@ export function validationAlmostJunction(context) {
 
         function isExtendableCandidate(node, way) {
             // can not accurately test vertices on tiles not downloaded from osm - #5938
-            var osm = services.osm;
+            const osm = services.osm;
             if (osm && !osm.isDataLoaded(node.loc)) {
                 return false;
             }
@@ -151,8 +152,8 @@ export function validationAlmostJunction(context) {
                 return false;
             }
 
-            var occurences = 0;
-            for (var index in way.nodes) {
+            let occurences = 0;
+            for (const index in way.nodes) {
                 if (way.nodes[index] === node.id) {
                     occurences += 1;
                     if (occurences > 1) {
@@ -165,18 +166,18 @@ export function validationAlmostJunction(context) {
 
 
         function findConnectableEndNodesByExtension(way) {
-            var results = [];
+            let results = [];
             if (way.isClosed()) return results;
 
-            var testNodes;
-            var indices = [0, way.nodes.length - 1];
-            indices.forEach(function(nodeIndex) {
-                var nodeID = way.nodes[nodeIndex];
-                var node = graph.entity(nodeID);
+            let testNodes;
+            const indices = [0, way.nodes.length - 1];
+            indices.forEach(nodeIndex => {
+                const nodeID = way.nodes[nodeIndex];
+                const node = graph.entity(nodeID);
 
                 if (!isExtendableCandidate(node, way)) return;
 
-                var connectionInfo = canConnectByExtend(way, nodeIndex);
+                const connectionInfo = canConnectByExtend(way, nodeIndex);
                 if (!connectionInfo) return;
 
                 testNodes = graph.childNodes(way).slice();   // shallow copy
@@ -207,11 +208,11 @@ export function validationAlmostJunction(context) {
                 !(hasTag(way.tags, 'tunnel') && hasTag(way2.tags, 'tunnel'))) return false;
 
             // must have equivalent layers and levels
-            var layer1 = way.tags.layer || '0',
+            const layer1 = way.tags.layer || '0',
                 layer2 = way2.tags.layer || '0';
             if (layer1 !== layer2) return false;
 
-            var level1 = way.tags.level || '0',
+            const level1 = way.tags.level || '0',
                 level2 = way2.tags.level || '0';
             if (level1 !== level2) return false;
 
@@ -255,43 +256,42 @@ export function validationAlmostJunction(context) {
         }
 
         function canConnectByExtend(way, endNodeIdx) {
-            var EXTEND_TH_METERS = 5;
-            var tipNid = way.nodes[endNodeIdx];  // the 'tip' node for extension point
-            var midNid = endNodeIdx === 0 ? way.nodes[1] : way.nodes[way.nodes.length - 2];  // the other node of the edge
-            var tipNode = graph.entity(tipNid);
-            var midNode = graph.entity(midNid);
-            var lon = tipNode.loc[0];
-            var lat = tipNode.loc[1];
-            var lon_range = geoMetersToLon(EXTEND_TH_METERS, lat) / 2;
-            var lat_range = geoMetersToLat(EXTEND_TH_METERS) / 2;
-            var queryExtent = geoExtent([
+            const tipNid = way.nodes[endNodeIdx];  // the 'tip' node for extension point
+            const midNid = endNodeIdx === 0 ? way.nodes[1] : way.nodes[way.nodes.length - 2];  // the other node of the edge
+            const tipNode = graph.entity(tipNid);
+            const midNode = graph.entity(midNid);
+            const lon = tipNode.loc[0];
+            const lat = tipNode.loc[1];
+            const lon_range = geoMetersToLon(EXTEND_TH_METERS, lat) / 2;
+            const lat_range = geoMetersToLat(EXTEND_TH_METERS) / 2;
+            const queryExtent = geoExtent([
                 [lon - lon_range, lat - lat_range],
                 [lon + lon_range, lat + lat_range]
             ]);
 
             // first, extend the edge of [midNode -> tipNode] by EXTEND_TH_METERS and find the "extended tip" location
-            var edgeLen = geoSphericalDistance(midNode.loc, tipNode.loc);
-            var t = EXTEND_TH_METERS / edgeLen + 1.0;
-            var extTipLoc = geoVecInterp(midNode.loc, tipNode.loc, t);
+            const edgeLen = geoSphericalDistance(midNode.loc, tipNode.loc);
+            const t = EXTEND_TH_METERS / edgeLen + 1.0;
+            const extTipLoc = geoVecInterp(midNode.loc, tipNode.loc, t);
 
             // then, check if the extension part [tipNode.loc -> extTipLoc] intersects any other ways
-            var intersected = tree.intersects(queryExtent, graph);
-            for (var i = 0; i < intersected.length; i++) {
-                var way2 = intersected[i];
+            const intersected = tree.intersects(queryExtent, graph);
+            for (let i = 0; i < intersected.length; i++) {
+                let way2 = intersected[i];
 
                 if (!isHighway(way2)) continue;
 
                 if (!canConnectWays(way, way2)) continue;
 
-                for (var j = 0; j < way2.nodes.length - 1; j++) {
-                    var nAid = way2.nodes[j],
+                for (let j = 0; j < way2.nodes.length - 1; j++) {
+                    let nAid = way2.nodes[j],
                         nBid = way2.nodes[j + 1];
 
                     if (nAid === tipNid || nBid === tipNid) continue;
 
-                    var nA = graph.entity(nAid),
+                    let nA = graph.entity(nAid),
                         nB = graph.entity(nBid);
-                    var crossLoc = geoLineIntersection([tipNode.loc, extTipLoc], [nA.loc, nB.loc]);
+                    let crossLoc = geoLineIntersection([tipNode.loc, extTipLoc], [nA.loc, nB.loc]);
                     if (crossLoc) {
                         // When endpoints are close, just join if resulting small change in angle (#7201)
                         let nearEndNodes = findNearbyEndNodes(tipNode, way2);
