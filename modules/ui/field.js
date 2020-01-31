@@ -295,7 +295,7 @@ export function uiField(context, presetField, entityIDs, options) {
     // A non-allowed field is hidden from the user altogether
     field.isAllowed = function() {
 
-        if (entityIDs.length > 1 && uiFields[field.type].supportsMultiselection === false) return;
+        if (entityIDs && entityIDs.length > 1 && uiFields[field.type].supportsMultiselection === false) return;
 
         if (field.countryCodes || field.notCountryCodes) {
             var extent = combinedEntityExtent();
@@ -318,7 +318,8 @@ export function uiField(context, presetField, entityIDs, options) {
 
         var prerequisiteTag = field.prerequisiteTag;
 
-        if (!tagsContainFieldKey() && // ignore tagging prerequisites if a value is already present
+        if (entityIDs &&
+            !tagsContainFieldKey() && // ignore tagging prerequisites if a value is already present
             prerequisiteTag) {
             return entityIDs.some(function(entityID) {
                 var entity = context.graph().entity(entityID);
