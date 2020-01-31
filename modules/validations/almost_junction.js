@@ -18,8 +18,13 @@ import { services } from '../services';
  * Look for roads that can be connected to other roads with a short extension
  */
 export function validationAlmostJunction(context) {
-    var type = 'almost_junction';
-
+    const type = 'almost_junction';
+    const EXTEND_TH_METERS = 5;
+    const WELD_TH_METERS = 0.75;
+    // Comes from considering bounding case of parallel ways
+    const CLOSE_NODE_TH = EXTEND_TH_METERS - WELD_TH_METERS;
+    // Comes from considering bounding case of perpendicular ways
+    const SIG_ANGLE_TH = Math.atan(WELD_TH_METERS / EXTEND_TH_METERS);
 
     function isHighway(entity) {
         return entity.type === 'way' &&
@@ -89,7 +94,7 @@ export function validationAlmostJunction(context) {
 
                     var annotation = t('issues.fix.connect_almost_junction.annotation');
                     // already a point nearby, just connect to that
-                    if (closestNodeInfo.distance < 0.75) {
+                    if (closestNodeInfo.distance < WELD_TH_METERS) {
                         context.perform(
                             actionMergeNodes([closestNodeInfo.node.id, endNode.id], closestNodeInfo.node.loc),
                             annotation
@@ -220,15 +225,14 @@ export function validationAlmostJunction(context) {
             ].map(d => graph.entity(d))
             .filter(d => {
                 // Node cannot be near to itself, but other endnode of same way could be
-                // 4.25m based on extending 5m ahead and .75m quick fix node joining
                 return d.id !== node.id
-                    && geoSphericalDistance(node.loc, d.loc) <= 4.25;
+                    && geoSphericalDistance(node.loc, d.loc) <= CLOSE_NODE_TH;
             });
         }
 
-        function findAlmostCollinear(midNode, tipNode, endNodes) {
+        function findSmallJoinAngle(midNode, tipNode, endNodes) {
             // Both nodes could be close, so want to join whichever is closest to collinear
-            let mostCollinear;
+            let joinTo;
             let minAngle = Infinity;
 
             // Checks midNode -> tipNode -> endNode for collinearity
@@ -238,14 +242,14 @@ export function validationAlmostJunction(context) {
                 const diff = Math.max(a1, a2) - Math.min(a1, a2);
 
                 if (diff < minAngle) {
-                    mostCollinear = endNode;
+                    joinTo = endNode;
                     minAngle = diff;
                 }
             });
 
-            /* 9° threshold set by considering right angle triangle
-            based on .75m node joining threshold and 5m extension */
-            if (minAngle <= 9 * Math.PI / 180) return mostCollinear;
+            /* Threshold set by considering right angle triangle
+            based on node joining threshold and extension distance */
+            if (minAngle <= SIG_ANGLE_TH) return joinTo;
 
             return null;
         }
@@ -292,7 +296,7 @@ export function validationAlmostJunction(context) {
                         // When endpoints are close, just join if resulting small change in angle (#7201)
                         let nearEndNodes = findNearbyEndNodes(tipNode, way2);
                         if (nearEndNodes.length > 0) {
-                            let collinear = findAlmostCollinear(midNode, tipNode, nearEndNodes);
+                            let collinear = findSmallJoinAngle(midNode, tipNode, nearEndNodes);
                             if (collinear) {
                                 return {
                                     node: tipNode,
