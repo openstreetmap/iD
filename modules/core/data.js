@@ -17,6 +17,7 @@ export function coreData(context) {
     'languages': 'data/languages.min.json',
     'locales': 'data/locales.min.json',
     'nsi_brands': 'https://cdn.jsdelivr.net/npm/name-suggestion-index@3/dist/brands.min.json',
+    'nsi_filters': 'https://cdn.jsdelivr.net/npm/name-suggestion-index@3/dist/filters.min.json',
     'oci_features': 'https://cdn.jsdelivr.net/npm/osm-community-index@2/dist/features.min.json',
     'oci_resources': 'https://cdn.jsdelivr.net/npm/osm-community-index@2/dist/resources.min.json',
     'phone_formats': 'data/phone_formats.min.json',

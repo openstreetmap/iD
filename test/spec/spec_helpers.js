@@ -20,9 +20,10 @@ iD.data.presets = {
     }
 };
 
-// creating `coreContext` creates validators, and `validatonOutdatedTags` will try to load these
+// creating `coreContext` creates validators and some of the validators try loading these
 iD.data.deprecated = [];
 iD.data.nsi_brands = [];
+iD.data.nsi_filters = [];
 
 
 mocha.setup({
