@@ -54,12 +54,12 @@ export function validationAlmostJunction(context) {
         severity: 'warning',
         message(context) {
           const entity1 = context.hasEntity(this.entityIds[0]);
-          if (this.entityIds[0] === this.entityIds[3]) {
+          if (this.entityIds[0] === this.entityIds[2]) {
             return entity1 ? t('issues.almost_junction.self.message', {
               feature: utilDisplayLabel(entity1, context)
             }) : '';
           } else {
-            const entity2 = context.hasEntity(this.entityIds[3]);
+            const entity2 = context.hasEntity(this.entityIds[2]);
             return (entity1 && entity2) ? t('issues.almost_junction.message', {
               feature: utilDisplayLabel(entity1, context),
               feature2: utilDisplayLabel(entity2, context)
@@ -69,13 +69,13 @@ export function validationAlmostJunction(context) {
         reference: showReference,
         entityIds: [
           entity.id,
-          extendableNodeInfo.mid.id,
           extendableNodeInfo.node.id,
           extendableNodeInfo.wid,
         ],
         loc: extendableNodeInfo.node.loc,
         hash: JSON.stringify(extendableNodeInfo.node.loc),
         data: {
+          midId: extendableNodeInfo.mid.id,
           edge: extendableNodeInfo.edge,
           cross_loc: extendableNodeInfo.cross_loc
         },
@@ -91,8 +91,8 @@ export function validationAlmostJunction(context) {
         title: t('issues.fix.connect_features.title'),
         onClick(context) {
           const annotation = t('issues.fix.connect_almost_junction.annotation');
-          const [, midNodeId, endNodeId, crossWayId] = this.issue.entityIds;
-          const midNode = context.entity(midNodeId);
+          const [, endNodeId, crossWayId] = this.issue.entityIds;
+          const midNode = context.entity(this.issue.data.midId);
           const endNode = context.entity(endNodeId);
           const crossWay = context.entity(crossWayId);
 
@@ -130,14 +130,14 @@ export function validationAlmostJunction(context) {
         }
       })];
 
-      const node = context.hasEntity(this.entityIds[2]);
+      const node = context.hasEntity(this.entityIds[1]);
       if (node && !node.hasInterestingTags()) {
         // node has no descriptive tags, suggest noexit fix
         fixes.push(new validationIssueFix({
           icon: 'maki-barrier',
           title: t('issues.fix.tag_as_disconnected.title'),
           onClick(context) {
-            const nodeID = this.issue.entityIds[2];
+            const nodeID = this.issue.entityIds[1];
             const tags = Object.assign({}, context.entity(nodeID).tags);
             tags.noexit = 'yes';
             context.perform(

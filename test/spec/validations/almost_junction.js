@@ -244,11 +244,10 @@ describe('iD.validations.almost_junction', function () {
         var issue = issues[0];
         expect(issue.type).to.eql('almost_junction');
         expect(issue.subtype).to.eql('highway-highway');
-        expect(issue.entityIds).to.have.lengthOf(4);
+        expect(issue.entityIds).to.have.lengthOf(3);
         expect(issue.entityIds[0]).to.eql('w-1');
-        expect(issue.entityIds[1]).to.eql('n-2');
-        expect(issue.entityIds[2]).to.eql('n-1');
-        expect(issue.entityIds[3]).to.eql('w-2');
+        expect(issue.entityIds[1]).to.eql('n-1');
+        expect(issue.entityIds[2]).to.eql('w-2');
 
         expect(issue.loc).to.have.lengthOf(2);
         expect(issue.loc[0]).to.eql(22.42357);
@@ -275,11 +274,10 @@ describe('iD.validations.almost_junction', function () {
         var issue = issues[0];
         expect(issue.type).to.eql('almost_junction');
         expect(issue.subtype).to.eql('highway-highway');
-        expect(issue.entityIds).to.have.lengthOf(4);
+        expect(issue.entityIds).to.have.lengthOf(3);
         expect(issue.entityIds[0]).to.eql('w-1');
-        expect(issue.entityIds[1]).to.eql('n-2');
-        expect(issue.entityIds[2]).to.eql('n-1');
-        expect(issue.entityIds[3]).to.eql('w-2');
+        expect(issue.entityIds[1]).to.eql('n-1');
+        expect(issue.entityIds[2]).to.eql('w-2');
 
         expect(issue.loc).to.have.lengthOf(2);
         expect(issue.loc[0]).to.eql(22.42357);
@@ -324,11 +322,10 @@ describe('iD.validations.almost_junction', function () {
         var issue = issues[0];
         expect(issue.type).to.eql('almost_junction');
         expect(issue.subtype).to.eql('highway-highway');
-        expect(issue.entityIds).to.have.lengthOf(4);
+        expect(issue.entityIds).to.have.lengthOf(3);
         expect(issue.entityIds[0]).to.eql('w-2');
-        expect(issue.entityIds[1]).to.eql('n-4');
-        expect(issue.entityIds[2]).to.eql('n-3');
-        expect(issue.entityIds[3]).to.eql('w-1');
+        expect(issue.entityIds[1]).to.eql('n-3');
+        expect(issue.entityIds[2]).to.eql('w-1');
 
         issue.fixes(context)[0].onClick(context);
         var w1 = context.entity('w-1');
@@ -344,11 +341,10 @@ describe('iD.validations.almost_junction', function () {
         var issue = issues[0];
         expect(issue.type).to.eql('almost_junction');
         expect(issue.subtype).to.eql('highway-highway');
-        expect(issue.entityIds).to.have.lengthOf(4);
+        expect(issue.entityIds).to.have.lengthOf(3);
         expect(issue.entityIds[0]).to.eql('w-2');
-        expect(issue.entityIds[1]).to.eql('n-4');
-        expect(issue.entityIds[2]).to.eql('n-3');
-        expect(issue.entityIds[3]).to.eql('w-1');
+        expect(issue.entityIds[1]).to.eql('n-3');
+        expect(issue.entityIds[2]).to.eql('w-1');
 
         issue.fixes(context)[0].onClick(context);
         var w1 = context.entity('w-1');
@@ -364,11 +360,10 @@ describe('iD.validations.almost_junction', function () {
         var issue = issues[0];
         expect(issue.type).to.eql('almost_junction');
         expect(issue.subtype).to.eql('highway-highway');
-        expect(issue.entityIds).to.have.lengthOf(4);
+        expect(issue.entityIds).to.have.lengthOf(3);
         expect(issue.entityIds[0]).to.eql('w-1');
-        expect(issue.entityIds[1]).to.eql('n-4');
-        expect(issue.entityIds[2]).to.eql('n-5');
-        expect(issue.entityIds[3]).to.eql('w-1');
+        expect(issue.entityIds[1]).to.eql('n-5');
+        expect(issue.entityIds[2]).to.eql('w-1');
 
         issue.fixes(context)[0].onClick(context);
         var w = context.entity('w-1');
@@ -384,11 +379,10 @@ describe('iD.validations.almost_junction', function () {
         var issue = issues[0];
         expect(issue.type).to.eql('almost_junction');
         expect(issue.subtype).to.eql('highway-highway');
-        expect(issue.entityIds).to.have.lengthOf(4);
+        expect(issue.entityIds).to.have.lengthOf(3);
         expect(issue.entityIds[0]).to.eql('w-2');
-        expect(issue.entityIds[1]).to.eql('n-6');
-        expect(issue.entityIds[2]).to.eql('n-5');
-        expect(issue.entityIds[3]).to.eql('w-1');
+        expect(issue.entityIds[1]).to.eql('n-5');
+        expect(issue.entityIds[2]).to.eql('w-1');
 
         issue.fixes(context)[0].onClick(context);
         var w1 = context.entity('w-1');
