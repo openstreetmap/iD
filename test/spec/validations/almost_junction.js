@@ -237,7 +237,7 @@ describe('iD.validations.almost_junction', function () {
         expect(issues).to.have.lengthOf(0);
     });
 
-    it('horizontal and vertical road, closer than threshold', function() {
+    it('flags horizontal and vertical road closer than threshold', function() {
         horizontalVertialCloserThanThd();
         var issues = validate();
         expect(issues).to.have.lengthOf(1);
@@ -267,7 +267,7 @@ describe('iD.validations.almost_junction', function () {
         expect(issues).to.have.lengthOf(0);
     });
 
-    it('horizontal and tilted road, closer than threshold', function() {
+    it('flags horizontal and tilted road closer than threshold', function() {
         horizontalTiltedCloserThanThd();
         var issues = validate();
         expect(issues).to.have.lengthOf(1);
@@ -297,19 +297,19 @@ describe('iD.validations.almost_junction', function () {
         expect(issues).to.have.lengthOf(0);
     });
 
-    it('horizontal and vertical road, further than threshold', function() {
+    it('ignores horizontal and vertical road further than threshold', function() {
         horizontalVertialFurtherThanThd();
         var issues = validate();
         expect(issues).to.have.lengthOf(0);
     });
 
-    it('horizontal and vertical road, closer than threshold but with noexit tag', function() {
+    it('ignores horizontal and vertical road closer than threshold, but with noexit tag', function() {
         horizontalVertialWithNoExit();
         var issues = validate();
         expect(issues).to.have.lengthOf(0);
     });
 
-    it('two horizontal roads, closer than threshold', function() {
+    it('ignores two horizontal roads closer than threshold', function() {
         twoHorizontalCloserThanThd();
         var issues = validate();
         expect(issues).to.have.lengthOf(0);
