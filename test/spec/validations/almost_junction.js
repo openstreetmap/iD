@@ -148,8 +148,6 @@ describe('iD.validations.almost_junction', function () {
             iD.actionAddEntity(n4),
             iD.actionAddEntity(w2)
         );
-
-        return n1;
     }
 
     function closeEndNodesBigAngle() {
@@ -174,8 +172,6 @@ describe('iD.validations.almost_junction', function () {
             iD.actionAddEntity(n4),
             iD.actionAddEntity(w2)
         );
-
-        return n1;
     }
 
     function closeEndNodesSmallAngleSelf() {
@@ -195,8 +191,6 @@ describe('iD.validations.almost_junction', function () {
             iD.actionAddEntity(n5),
             iD.actionAddEntity(w1)
         );
-
-        return n1;
     }
 
     function closeEndNodesBothSmallAngle() {
@@ -225,8 +219,6 @@ describe('iD.validations.almost_junction', function () {
             iD.actionAddEntity(n6),
             iD.actionAddEntity(w2)
         );
-
-        return n1;
     }
 
     function validate() {
@@ -252,10 +244,11 @@ describe('iD.validations.almost_junction', function () {
         var issue = issues[0];
         expect(issue.type).to.eql('almost_junction');
         expect(issue.subtype).to.eql('highway-highway');
-        expect(issue.entityIds).to.have.lengthOf(3);
+        expect(issue.entityIds).to.have.lengthOf(4);
         expect(issue.entityIds[0]).to.eql('w-1');
-        expect(issue.entityIds[1]).to.eql('n-1');
-        expect(issue.entityIds[2]).to.eql('w-2');
+        expect(issue.entityIds[1]).to.eql('n-2');
+        expect(issue.entityIds[2]).to.eql('n-1');
+        expect(issue.entityIds[3]).to.eql('w-2');
 
         expect(issue.loc).to.have.lengthOf(2);
         expect(issue.loc[0]).to.eql(22.42357);
@@ -282,10 +275,11 @@ describe('iD.validations.almost_junction', function () {
         var issue = issues[0];
         expect(issue.type).to.eql('almost_junction');
         expect(issue.subtype).to.eql('highway-highway');
-        expect(issue.entityIds).to.have.lengthOf(3);
+        expect(issue.entityIds).to.have.lengthOf(4);
         expect(issue.entityIds[0]).to.eql('w-1');
-        expect(issue.entityIds[1]).to.eql('n-1');
-        expect(issue.entityIds[2]).to.eql('w-2');
+        expect(issue.entityIds[1]).to.eql('n-2');
+        expect(issue.entityIds[2]).to.eql('n-1');
+        expect(issue.entityIds[3]).to.eql('w-2');
 
         expect(issue.loc).to.have.lengthOf(2);
         expect(issue.loc[0]).to.eql(22.42357);
@@ -324,91 +318,82 @@ describe('iD.validations.almost_junction', function () {
     });
 
     it('joins close endpoints if insignificant angle change', function() {
-        var n1 = closeEndNodesSmallAngle();
+        closeEndNodesSmallAngle();
         var issues = validate();
         expect(issues).to.have.lengthOf(1);
         var issue = issues[0];
         expect(issue.type).to.eql('almost_junction');
         expect(issue.subtype).to.eql('highway-highway');
-        expect(issue.entityIds).to.have.lengthOf(3);
+        expect(issue.entityIds).to.have.lengthOf(4);
         expect(issue.entityIds[0]).to.eql('w-2');
-        expect(issue.entityIds[1]).to.eql('n-3');
-        expect(issue.entityIds[2]).to.eql('w-1');
+        expect(issue.entityIds[1]).to.eql('n-4');
+        expect(issue.entityIds[2]).to.eql('n-3');
+        expect(issue.entityIds[3]).to.eql('w-1');
 
-        // Duplicate edge nodes means endpoints will be joined
-        expect(issue.data.edge).to.have.lengthOf(2);
-        expect(issue.data.edge[0]).to.eql('n-1');
-        expect(issue.data.edge[1]).to.eql('n-1');
-
-        // Crossing set to loc of end node means endpoints will be joined
-        expect(issue.data.cross_loc).to.have.lengthOf(2);
-        expect(issue.data.cross_loc).to.eql(n1.loc);
+        issue.fixes(context)[0].onClick(context);
+        var w1 = context.entity('w-1');
+        var w2 = context.entity('w-2');
+        var joined = w2.nodes[0] === w1.nodes[0];
+        expect(joined).to.be.true;
     });
 
     it('won\'t join close endpoints if significant angle change', function() {
-        var n1 = closeEndNodesBigAngle();
+        closeEndNodesBigAngle();
         var issues = validate();
         expect(issues).to.have.lengthOf(1);
         var issue = issues[0];
         expect(issue.type).to.eql('almost_junction');
         expect(issue.subtype).to.eql('highway-highway');
-        expect(issue.entityIds).to.have.lengthOf(3);
+        expect(issue.entityIds).to.have.lengthOf(4);
         expect(issue.entityIds[0]).to.eql('w-2');
-        expect(issue.entityIds[1]).to.eql('n-3');
-        expect(issue.entityIds[2]).to.eql('w-1');
+        expect(issue.entityIds[1]).to.eql('n-4');
+        expect(issue.entityIds[2]).to.eql('n-3');
+        expect(issue.entityIds[3]).to.eql('w-1');
 
-        // Differing edge nodes means endpoints won't be joined
-        expect(issue.data.edge).to.have.lengthOf(2);
-        expect(issue.data.edge[0]).to.eql('n-1');
-        expect(issue.data.edge[1]).to.eql('n-2');
-
-        // Crossing different from loc of end node means endpoints won't be joined
-        expect(issue.data.cross_loc).to.have.lengthOf(2);
-        expect(issue.data.cross_loc).to.not.eql(n1.loc);
+        issue.fixes(context)[0].onClick(context);
+        var w1 = context.entity('w-1');
+        var w2 = context.entity('w-2');
+        var joined = w2.nodes[0] === w1.nodes[0];
+        expect(joined).not.to.be.true;
     });
 
     it('joins close endpoints of the same way', function() {
-        var n1 = closeEndNodesSmallAngleSelf();
+        closeEndNodesSmallAngleSelf();
         var issues = validate();
         expect(issues).to.have.lengthOf(1);
         var issue = issues[0];
         expect(issue.type).to.eql('almost_junction');
         expect(issue.subtype).to.eql('highway-highway');
-        expect(issue.entityIds).to.have.lengthOf(3);
+        expect(issue.entityIds).to.have.lengthOf(4);
         expect(issue.entityIds[0]).to.eql('w-1');
-        expect(issue.entityIds[1]).to.eql('n-5');
-        expect(issue.entityIds[2]).to.eql('w-1');
+        expect(issue.entityIds[1]).to.eql('n-4');
+        expect(issue.entityIds[2]).to.eql('n-5');
+        expect(issue.entityIds[3]).to.eql('w-1');
 
-        // Duplicate edge nodes means endpoints will be joined
-        expect(issue.data.edge).to.have.lengthOf(2);
-        expect(issue.data.edge[0]).to.eql('n-1');
-        expect(issue.data.edge[1]).to.eql('n-1');
-
-        // Crossing set to loc of end node means endpoints will be joined
-        expect(issue.data.cross_loc).to.have.lengthOf(2);
-        expect(issue.data.cross_loc).to.eql(n1.loc);
+        issue.fixes(context)[0].onClick(context);
+        var w = context.entity('w-1');
+        var joined = w.nodes[0] === w.nodes[w.nodes.length - 1];
+        expect(joined).to.be.true;
     });
 
 
     it('joins to close endpoint with smaller angle change', function() {
-        var n1 = closeEndNodesBothSmallAngle();
+        closeEndNodesBothSmallAngle();
         var issues = validate();
         expect(issues).to.have.lengthOf(1);
         var issue = issues[0];
         expect(issue.type).to.eql('almost_junction');
         expect(issue.subtype).to.eql('highway-highway');
-        expect(issue.entityIds).to.have.lengthOf(3);
+        expect(issue.entityIds).to.have.lengthOf(4);
         expect(issue.entityIds[0]).to.eql('w-2');
-        expect(issue.entityIds[1]).to.eql('n-5');
-        expect(issue.entityIds[2]).to.eql('w-1');
+        expect(issue.entityIds[1]).to.eql('n-6');
+        expect(issue.entityIds[2]).to.eql('n-5');
+        expect(issue.entityIds[3]).to.eql('w-1');
 
-        // Duplicate edge nodes means endpoints will be joined
-        expect(issue.data.edge).to.have.lengthOf(2);
-        expect(issue.data.edge[0]).to.eql('n-1');
-        expect(issue.data.edge[1]).to.eql('n-1');
-
-        // Crossing set to loc of end node means endpoints will be joined
-        expect(issue.data.cross_loc).to.have.lengthOf(2);
-        expect(issue.data.cross_loc).to.eql(n1.loc);
+        issue.fixes(context)[0].onClick(context);
+        var w1 = context.entity('w-1');
+        var w2 = context.entity('w-2');
+        var joined = w2.nodes[0] === w1.nodes[0];
+        expect(joined).to.be.true;
     });
 });
