@@ -18,6 +18,7 @@ const _osmoseItems =
     .reduce((unique, item) => unique.indexOf(item) !== -1 ? unique : [...unique, item], []);
 const _erZoom = 14;
 const _stringCache = {};
+const _colorCache = {};
 
 // This gets reassigned if reset
 let _erCache;
@@ -227,8 +228,11 @@ export default {
           return;
         }
 
-        // TODO: Item has 'color' key with hex color code value, automatically style issue markers
-        // const { item, color } = item;
+        // Cache served item colors to automatically style issue markers later
+        const { item: itemInt, color } = item;
+        if (color.test(/^#[A-Fa-f0-9]{6}|[A-Fa-f0-9]{3}/)) {
+          _colorCache[itemInt] = color;
+        }
 
         // Value of root key will be null if no string exists
         // If string exists, value is an object with key 'auto' for string
@@ -259,6 +263,10 @@ export default {
   getStrings(issueType, locale=currentLocale) {
     // No need to fallback to English, Osmose API handles this for us
     return (locale in _stringCache) ? _stringCache[locale][issueType] : {};
+  },
+
+  getColor(itemType) {
+    return (itemType in _colorCache) ? _colorCache[itemType] : '#FFFFFF';
   },
 
   postUpdate(d, callback) {

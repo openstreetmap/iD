@@ -142,7 +142,7 @@ export function svgOsmose(projection, context, dispatch) {
 
         markersEnter
             .append('polygon')
-            .attr('fill', 'currentColor')
+            .attr('fill', d => getService().getColor(d.item))
             .call(markerPath, 'qa_error-fill');
 
         markersEnter

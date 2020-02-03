@@ -54,7 +54,7 @@ export function uiOsmoseHeader() {
 
         svgEnter
             .append('polygon')
-            .attr('fill', 'currentColor')
+            .attr('fill', d => services.osmose.getColor(d.item))
             .attr('class', 'qa_error-fill')
             .attr('points', '16,3 4,3 1,6 1,17 4,20 7,20 10,27 13,20 16,20 19,17.033 19,6');
 
