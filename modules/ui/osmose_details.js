@@ -48,7 +48,7 @@ export function uiOsmoseDetails(context) {
             .text(() => t('QA.keepRight.detail_description'));
 
         descriptionEnter
-            .append('div')
+            .append('p')
             .attr('class', 'error-details-description-text')
             .html(d => issueString(d, 'detail'));
 
@@ -63,8 +63,8 @@ export function uiOsmoseDetails(context) {
                 .text(() => t('QA.osmose.fix_title'));
 
             descriptionEnter
-                .append('div')
-                .attr('class', 'error-details-description-text')
+                .append('p')
+                .attr('class', 'error-details-fix-text')
                 .html(d => issueString(d, 'fix'));
         }
 
@@ -76,8 +76,8 @@ export function uiOsmoseDetails(context) {
                 .text(() => t('QA.osmose.trap_title'));
 
             descriptionEnter
-                .append('div')
-                .attr('class', 'error-details-description-text')
+                .append('p')
+                .attr('class', 'error-details-trap-text')
                 .html(d => issueString(d, 'trap'));
         }
 
@@ -161,7 +161,7 @@ export function uiOsmoseDetails(context) {
 
                     detailsDiv
                         .append('ul')
-                        .attr('class', 'error-details-list')
+                        .attr('class', `error-details-${type}`)
                         .selectAll('li')
                         .data(d[type])
                         .enter()

@@ -230,6 +230,12 @@ export default {
         return;
     }
 
+    function format(string) {
+      // Some strings contain markdown syntax
+      string = string.replace(/\[((?:.|\n)+?)\]\((.+?)\)/g, '<a href="$2">$1</a>');
+      return string.replace(/`(.+?)`/g, '<code>$1</code>');
+    }
+
     // Osmose API falls back to English strings where untranslated or if locale doesn't exist
     const url = _osmoseUrlRoot + 'items?' + utilQsString({ langs: locale });
 
@@ -246,7 +252,7 @@ export default {
             // TODO: Item has 'color' key with hex color code value, automatically style issue markers
 
             // Only need to cache strings for supported error types
-            // TODO: Investigate making multiple requests with filter by `item` and `class` to reduce data further
+            // TODO: Instead, make multiple requests with filter by `item` and `class` to reduce data further
             // See endpoint: https://osmose.openstreetmap.fr/en/api/0.3beta/items/X/class/X?langs=X
             if (qaServices.osmose.items.indexOf(item.item) !== -1) {
               for (let k = 0; k < item.class.length; k++) {
@@ -256,14 +262,11 @@ export default {
 
                 // Value of root key will be null if no string exists
                 // If string exists, value is an object with key 'auto' for string
-                let { title, detail, trap, fix, example } = item.class[k];
+                let { title, detail, trap, fix } = item.class[k];
                 if (title) issueStrings.title = title.auto;
-                // TODO: Replace \[(.+?)\]\((.+?)\) pattern with <a href="\2">\1</a>
-                // TODO: Replace `(.+?)` with some sort of code styling
-                if (detail) issueStrings.detail = detail.auto;
-                if (trap) issueStrings.trap = trap.auto;
-                if (fix) issueStrings.fix = fix.auto;
-                if (example) issueStrings.example = example.auto;
+                if (detail) issueStrings.detail = format(detail.auto);
+                if (trap) issueStrings.trap = format(trap.auto);
+                if (fix) issueStrings.fix = format(fix.auto);
 
                 _stringCache[locale][issueType] = issueStrings;
               }
