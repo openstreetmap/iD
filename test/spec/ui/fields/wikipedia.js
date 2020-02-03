@@ -1,6 +1,39 @@
 describe('iD.uiFieldWikipedia', function() {
     var entity, context, selection, field, server;
 
+    before(function() {
+        iD.data.wmf_sitematrix = [
+          ['German','Deutsch','de'],
+          ['English','English','en']
+        ];
+        iD.services.wikipedia = iD.serviceWikipedia;
+        iD.services.wikidata = iD.serviceWikidata;
+    });
+
+    after(function() {
+        delete iD.data.wmf_sitematrix;
+        delete iD.services.wikipedia;
+        delete iD.services.wikidata;
+    });
+
+    beforeEach(function() {
+        entity = iD.osmNode({id: 'n12345'});
+        context = iD.coreContext().init();
+        context.history().merge([entity]);
+        selection = d3.select(document.createElement('div'));
+        field = iD.presetField('wikipedia', {
+            key: 'wikipedia',
+            keys: ['wikipedia', 'wikidata'],
+            type: 'wikipedia'
+        });
+        server = createServer({ respondImmediately: true });
+    });
+
+    afterEach(function() {
+        server.restore();
+    });
+
+
     function changeTags(changed) {
         var e = context.entity(entity.id);
         var annotation = 'Changed tags.';
@@ -34,37 +67,6 @@ describe('iD.uiFieldWikipedia', function() {
         return server;
     }
 
-    before(function() {
-        iD.data.wikipedia = [
-          ['German','Deutsch','de'],
-          ['English','English','en']
-        ];
-        iD.services.wikipedia = iD.serviceWikipedia;
-        iD.services.wikidata = iD.serviceWikidata;
-    });
-
-    after(function() {
-        delete iD.data.wikipedia;
-        delete iD.services.wikipedia;
-        delete iD.services.wikidata;
-    });
-
-    beforeEach(function() {
-        entity = iD.osmNode({id: 'n12345'});
-        context = iD.coreContext().init();
-        context.history().merge([entity]);
-        selection = d3.select(document.createElement('div'));
-        field = iD.presetField('wikipedia', {
-            key: 'wikipedia',
-            keys: ['wikipedia', 'wikidata'],
-            type: 'wikipedia'
-        });
-        server = createServer({ respondImmediately: true });
-    });
-
-    afterEach(function() {
-        server.restore();
-    });
 
     it('recognizes lang:title format', function(done) {
         var wikipedia = iD.uiFieldWikipedia(field, context);
