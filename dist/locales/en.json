@@ -6571,6 +6571,10 @@
                     "name": "Lifeguard",
                     "terms": "CPR,rescue"
                 },
+                "emergency/mountain_rescue": {
+                    "name": "Mountain Rescue",
+                    "terms": "EMS,EMT,rescue"
+                },
                 "emergency/phone": {
                     "name": "Emergency Phone",
                     "terms": ""
