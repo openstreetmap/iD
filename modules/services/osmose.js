@@ -13,9 +13,9 @@ const tiler = utilTiler();
 const dispatch = d3_dispatch('loaded');
 const _osmoseUrlRoot = 'https://osmose.openstreetmap.fr/en/api/0.3beta';
 const _osmoseItems =
-  qaServices.osmose.errorIcons.keys()
-  .map(s => s.split('-')[0])
-  .reduce((unique, item) => unique.indexOf(item) !== -1 ? unique : [...unique, item], []);
+  Object.keys(qaServices.osmose.errorIcons)
+    .map(s => s.split('-')[0])
+    .reduce((unique, item) => unique.indexOf(item) !== -1 ? unique : [...unique, item], []);
 const _erZoom = 14;
 const _stringCache = {};
 
@@ -186,11 +186,11 @@ export default {
   },
 
   loadStrings(callback, locale=currentLocale) {
-    const issueTypes = qaServices.osmose.errorIcons.keys();
+    const issueTypes = Object.keys(qaServices.osmose.errorIcons);
 
     if (
       locale in _stringCache
-      && _stringCache[locale].keys().length === issueTypes.length
+      && Object.keys(_stringCache[locale]).length === issueTypes.length
     ) {
         if (callback) callback(null, _stringCache[locale]);
         return;
