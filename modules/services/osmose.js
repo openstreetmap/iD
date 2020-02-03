@@ -12,6 +12,10 @@ import { services as qaServices } from '../../data/qa_errors.json';
 const tiler = utilTiler();
 const dispatch = d3_dispatch('loaded');
 const _osmoseUrlRoot = 'https://osmose.openstreetmap.fr/en/api/0.3beta';
+const _osmoseItems =
+  qaServices.osmose.errorIcons.keys()
+  .map(s => s.split('-')[0])
+  .reduce((unique, item) => unique.indexOf(item) !== -1 ? unique : [...unique, item], []);
 const _erZoom = 14;
 const _stringCache = {};
 
@@ -88,7 +92,7 @@ export default {
     let params = {
       // Tiles return a maximum # of errors
       // So we want to filter our request for only types iD supports
-      item: qaServices.osmose.items.join()
+      item: _osmoseItems
     };
 
     // determine the needed tiles to cover the view
@@ -182,60 +186,74 @@ export default {
   },
 
   loadStrings(callback, locale=currentLocale) {
-    if (locale in _stringCache) {
+    const issueTypes = qaServices.osmose.errorIcons.keys();
+
+    if (
+      locale in _stringCache
+      && _stringCache[locale].keys().length === issueTypes.length
+    ) {
         if (callback) callback(null, _stringCache[locale]);
         return;
     }
 
-    function format(string) {
+    // May be partially populated already if some requests were successful
+    if (!(locale in _stringCache)) {
+      _stringCache[locale] = {};
+    }
+
+    const format = string => {
       // Some strings contain markdown syntax
       string = string.replace(/\[((?:.|\n)+?)\]\((.+?)\)/g, '<a href="$2">$1</a>');
       return string.replace(/`(.+?)`/g, '<code>$1</code>');
-    }
+    };
 
-    // Osmose API falls back to English strings where untranslated or if locale doesn't exist
-    const url = `${_osmoseUrlRoot}/items?langs=${locale}`;
+    // Only need to cache strings for supported issue types
+    // Using multiple individual item + class requests to reduce fetched data size
+    const allRequests = issueTypes.map(issueType => {
+      // No need to request data we already have
+      if (issueType in _stringCache[locale]) return;
 
-    d3_json(url)
-      .then(data => {
-        _stringCache[locale] = {};
+      const cacheData = data => {
+        // Bunch of nested single value arrays of objects
+        const [ cat = {items:[]} ] = data.categories;
+        const [ item = {class:[]} ] = cat.items;
+        const [ cl = null ] = item.class;
 
-        for (let i = 0; i < data.categories.length; i++) {
-          let cat = data.categories[i];
-
-          for (let j = 0; j < cat.items.length; j++) {
-            let item = cat.items[j];
-
-            // TODO: Item has 'color' key with hex color code value, automatically style issue markers
-
-            // Only need to cache strings for supported error types
-            // TODO: Instead, make multiple requests with filter by `item` and `class` to reduce data further
-            // See endpoint: https://osmose.openstreetmap.fr/en/api/0.3beta/items/X/class/X?langs=X
-            if (qaServices.osmose.items.indexOf(item.item) !== -1) {
-              for (let k = 0; k < item.class.length; k++) {
-                let { class: cl, item: cat } = item.class[k];
-                let issueType = `${cat}-${cl}`;
-                let issueStrings = {};
-
-                // Value of root key will be null if no string exists
-                // If string exists, value is an object with key 'auto' for string
-                let { title, detail, trap, fix } = item.class[k];
-                if (title) issueStrings.title = title.auto;
-                if (detail) issueStrings.detail = format(detail.auto);
-                if (trap) issueStrings.trap = format(trap.auto);
-                if (fix) issueStrings.fix = format(fix.auto);
-
-                _stringCache[locale][issueType] = issueStrings;
-              }
-            }
-          }
+        // If null default value is reached, data wasn't as expected (or was empty)
+        if (!cl) {
+          /* eslint-disable no-console */
+          console.log(`Osmose strings request (${issueType}) had unexpected data`);
+          /* eslint-enable no-console */
+          return;
         }
 
-        if (callback) callback(null, _stringCache[locale]);
-      })
-      .catch(err => {
-        if (callback) callback(err.message);
-      });
+        // TODO: Item has 'color' key with hex color code value, automatically style issue markers
+        // const { item, color } = item;
+
+        // Value of root key will be null if no string exists
+        // If string exists, value is an object with key 'auto' for string
+        const { title, detail, fix, trap } = cl;
+
+        let issueStrings = {};
+        if (title) issueStrings.title = title.auto;
+        if (detail) issueStrings.detail = format(detail.auto);
+        if (trap) issueStrings.trap = format(trap.auto);
+        if (fix) issueStrings.fix = format(fix.auto);
+
+        _stringCache[locale][issueType] = issueStrings;
+      };
+
+      const [ item, cl ] = issueType.split('-');
+
+      // Osmose API falls back to English strings where untranslated or if locale doesn't exist
+      const url = `${_osmoseUrlRoot}/items/${item}/class/${cl}?langs=${locale}`;
+
+      return jsonPromise(url, cacheData);
+    });
+
+    Promise.all(allRequests)
+      .then(() => { if (callback) callback(null, _stringCache[locale]); })
+      .catch(err => { if (callback) callback(err); });
   },
 
   getStrings(issueType, locale=currentLocale) {
@@ -314,3 +332,16 @@ export default {
     return _erCache.closed;
   }
 };
+
+function jsonPromise(url, then) {
+  return new Promise((resolve, reject) => {
+    d3_json(url)
+      .then(data => {
+        then(data);
+        resolve();
+      })
+      .catch(err => {
+        reject(err);
+      });
+  });
+}
