@@ -1036,7 +1036,8 @@
                 "detail_title": "Issue Details",
                 "elems_title": "Issue Elements",
                 "fix_title": "Fix Guidelines",
-                "trap_title": "Common Mistakes"
+                "trap_title": "Common Mistakes",
+                "translation": "Translations supplied by Osmose"
             },
             "improveOSM": {
                 "title": "ImproveOSM Detection",

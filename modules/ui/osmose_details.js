@@ -40,7 +40,7 @@ export function uiOsmoseDetails(context) {
 
         var descriptionEnter = detailsEnter
             .append('div')
-            .attr('class', 'error-details-description');
+            .attr('class', 'error-details-subsection');
 
         // Description
         descriptionEnter
@@ -53,22 +53,22 @@ export function uiOsmoseDetails(context) {
             .html(d => issueString(d, 'detail'));
 
         // Elements (populated later as data is requested)
-        const detailsDiv = descriptionEnter
+        const detailsDiv = detailsEnter
             .append('div')
             .attr('class', 'error-details-subsection');
 
-        const elemsDiv = descriptionEnter
+        const elemsDiv = detailsEnter
             .append('div')
             .attr('class', 'error-details-subsection');
 
         // Suggested Fix (musn't exist for every issue type)
         if (issueString(_error, 'fix') !== unknown) {
-            let div = descriptionEnter
+            let div = detailsEnter
                 .append('div')
-                .attr('class', 'error-details-subsection')
+                .attr('class', 'error-details-subsection');
 
             div.append('h4')
-                .text(() => t('QA.osmose.fix_title'))
+                .text(() => t('QA.osmose.fix_title'));
 
             div.append('p')
                 .html(d => issueString(d, 'fix'));
@@ -76,16 +76,29 @@ export function uiOsmoseDetails(context) {
 
         // Common Pitfalls (musn't exist for every issue type)
         if (issueString(_error, 'trap') !== unknown) {
-            let div = descriptionEnter
+            let div = detailsEnter
                 .append('div')
-                .attr('class', 'error-details-subsection')
+                .attr('class', 'error-details-subsection');
 
             div.append('h4')
-                .text(() => t('QA.osmose.trap_title'))
+                .text(() => t('QA.osmose.trap_title'));
 
             div.append('p')
                 .html(d => issueString(d, 'trap'));
         }
+
+        detailsEnter
+            .append('div')
+            .attr('class', 'translation-link')
+            .append('a')
+            .attr('target', '_blank')
+            .attr('rel', 'noopener noreferrer') // security measure
+            .attr('href', 'https://www.transifex.com/openstreetmap-france/osmose')
+            .text(d => t('QA.osmose.translation'))
+            .append('svg')
+            .attr('class', 'icon inline')
+            .append('use')
+            .attr('href', '#iD-icon-out-link');
 
         services.osmose.loadErrorDetail(_error, (err, d) => {
             // No details to add if there are no associated issue elements
@@ -96,7 +109,7 @@ export function uiOsmoseDetails(context) {
                 detailsDiv
                     .append('h4')
                     .attr('class', 'error-details-subtitle')
-                    .text(() => t('QA.osmose.detail_title'))
+                    .text(() => t('QA.osmose.detail_title'));
 
                 detailsDiv
                     .append('p')
