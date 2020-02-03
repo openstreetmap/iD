@@ -22,6 +22,10 @@ export function uiFieldLocalized(field, context) {
     var _countryCode;
     var _tags;
 
+
+    // A concern here in switching to async data means that _languagesArray will not
+    // be available the first time through, so things like the fetchers and
+    // the language() function will not work immediately.
     context.data().get('languages')
         .then(loadLanguagesArray)
         .catch(function() { /* ignore */ });
