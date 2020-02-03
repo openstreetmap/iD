@@ -27,8 +27,7 @@ describe('iD.validations.suspicious_name', function () {
         );
     }
 
-    function validate() {
-        var validator = iD.validationSuspiciousName(context);
+    function validate(validator) {
         var changes = context.history().changes();
         var entities = changes.modified.concat(changes.created);
         var issues = [];
@@ -41,7 +40,7 @@ describe('iD.validations.suspicious_name', function () {
     it('has no errors on init', function(done) {
         var validator = iD.validationSuspiciousName(context);
         window.setTimeout(function() {   // async, so data will be available
-            var issues = validate();
+            var issues = validate(validator);
             expect(issues).to.have.lengthOf(0);
             done();
         }, 20);
@@ -51,7 +50,7 @@ describe('iD.validations.suspicious_name', function () {
         createWay({});
         var validator = iD.validationSuspiciousName(context);
         window.setTimeout(function() {   // async, so data will be available
-            var issues = validate();
+            var issues = validate(validator);
             expect(issues).to.have.lengthOf(0);
             done();
         }, 20);
@@ -61,7 +60,7 @@ describe('iD.validations.suspicious_name', function () {
         createWay({ shop: 'supermarket' });
         var validator = iD.validationSuspiciousName(context);
         window.setTimeout(function() {   // async, so data will be available
-            var issues = validate();
+            var issues = validate(validator);
             expect(issues).to.have.lengthOf(0);
             done();
         }, 20);
@@ -71,7 +70,7 @@ describe('iD.validations.suspicious_name', function () {
         createWay({ shop: 'supermarket', name: 'Lou\'s' });
         var validator = iD.validationSuspiciousName(context);
         window.setTimeout(function() {   // async, so data will be available
-            var issues = validate();
+            var issues = validate(validator);
             expect(issues).to.have.lengthOf(0);
             done();
         }, 20);
@@ -81,7 +80,7 @@ describe('iD.validations.suspicious_name', function () {
         createWay({ shop: 'supermarket', name: 'Lou\'s Store' });
         var validator = iD.validationSuspiciousName(context);
         window.setTimeout(function() {   // async, so data will be available
-            var issues = validate();
+            var issues = validate(validator);
             expect(issues).to.have.lengthOf(0);
             done();
         }, 20);
@@ -91,7 +90,7 @@ describe('iD.validations.suspicious_name', function () {
         createWay({ shop: 'supermarket', name: 'Store' });
         var validator = iD.validationSuspiciousName(context);
         window.setTimeout(function() {   // async, so data will be available
-            var issues = validate();
+            var issues = validate(validator);
             expect(issues).to.have.lengthOf(1);
             var issue = issues[0];
             expect(issue.type).to.eql('suspicious_name');
@@ -106,7 +105,7 @@ describe('iD.validations.suspicious_name', function () {
         createWay({ amenity: 'drinking_water', name: 'Amenity' });
         var validator = iD.validationSuspiciousName(context);
         window.setTimeout(function() {   // async, so data will be available
-            var issues = validate();
+            var issues = validate(validator);
             expect(issues).to.have.lengthOf(1);
             var issue = issues[0];
             expect(issue.type).to.eql('suspicious_name');
@@ -121,7 +120,7 @@ describe('iD.validations.suspicious_name', function () {
         createWay({ shop: 'red_bicycle_emporium', name: 'Red Bicycle Emporium' });
         var validator = iD.validationSuspiciousName(context);
         window.setTimeout(function() {   // async, so data will be available
-            var issues = validate();
+            var issues = validate(validator);
             expect(issues).to.have.lengthOf(1);
             var issue = issues[0];
             expect(issue.type).to.eql('suspicious_name');
@@ -136,7 +135,7 @@ describe('iD.validations.suspicious_name', function () {
         createWay({ shop: 'supermarket', name: 'Lou\'s', 'not:name': 'Lous' });
         var validator = iD.validationSuspiciousName(context);
         window.setTimeout(function() {   // async, so data will be available
-            var issues = validate();
+            var issues = validate(validator);
             expect(issues).to.have.lengthOf(0);
             done();
         }, 20);
@@ -146,7 +145,7 @@ describe('iD.validations.suspicious_name', function () {
         createWay({ shop: 'supermarket', name: 'Lous', 'not:name': 'Lous' });
         var validator = iD.validationSuspiciousName(context);
         window.setTimeout(function() {   // async, so data will be available
-            var issues = validate();
+            var issues = validate(validator);
             expect(issues).to.have.lengthOf(1);
             var issue = issues[0];
             expect(issue.type).to.eql('suspicious_name');
@@ -161,7 +160,7 @@ describe('iD.validations.suspicious_name', function () {
         createWay({ shop: 'supermarket', name: 'Lous', 'not:name': 'Louis\';Lous;Louis\'s' });
         window.setTimeout(function() {   // async, so data will be available
             var validator = iD.validationSuspiciousName(context);
-            var issues = validate();
+            var issues = validate(validator);
             expect(issues).to.have.lengthOf(1);
             var issue = issues[0];
             expect(issue.type).to.eql('suspicious_name');
