@@ -230,21 +230,12 @@ export default {
         return;
     }
 
-    const langs = { [locale]: true };
-
-    // Need English strings if not already fetched for fallback values
-    if (locale !== 'en' && !('en' in _stringCache)) {
-      langs.en = true;
-    }
-
-    // TODO: Currently all locales are served, in future a param will be available to request specifics
-    const url = _osmoseUrlRoot + 'items';
+    // Osmose API falls back to English strings where untranslated or if locale doesn't exist
+    const url = _osmoseUrlRoot + 'items?' + utilQsString({ langs: locale });
 
     d3_json(url)
       .then(data => {
-        for (let l in langs) {
-          _stringCache[l] = {};
-        }
+        _stringCache[locale] = {};
 
         for (let i = 0; i < data.categories.length; i++) {
           let cat = data.categories[i];
@@ -252,22 +243,27 @@ export default {
           for (let j = 0; j < cat.items.length; j++) {
             let item = cat.items[j];
 
+            // TODO: Item has 'color' key with hex color code value, automatically style issue markers
+
             // Only need to cache strings for supported error types
-            // TODO: may be possible to request additional filter by `item`
+            // TODO: Investigate making multiple requests with filter by `item` and `class` to reduce data further
+            // See endpoint: https://osmose.openstreetmap.fr/en/api/0.3beta/items/X/class/X?langs=X
             if (qaServices.osmose.items.indexOf(item.item) !== -1) {
               for (let k = 0; k < item.class.length; k++) {
                 let { class: cl, item: cat } = item.class[k];
                 let issueType = `${cat}-${cl}`;
+                let issueStrings = {};
 
-                for (let l in langs) {
-                  _stringCache[l][issueType] = {};
+                // Value of root key will be null if no string exists
+                // If string exists, value is an object with key 'auto' for string
+                let { title, detail, trap, fix, example } = item.class[k];
+                if (title) issueStrings.title = title.auto;
+                if (detail) issueStrings.detail = detail.auto;
+                if (trap) issueStrings.trap = trap.auto;
+                if (fix) issueStrings.fix = fix.auto;
+                if (example) issueStrings.example = example.auto;
 
-                  let issueStrings = _stringCache[l][issueType];
-
-                  // TODO: Only title is currently served, in future description and other strings will be too
-                  let { title: {[l]: title} } = item.class[k];
-                  if (title) issueStrings.title = title;
-                }
+                _stringCache[locale][issueType] = issueStrings;
               }
             }
           }
@@ -281,11 +277,8 @@ export default {
   },
 
   getStrings(issueType, locale=currentLocale) {
-    const l = (locale in _stringCache) ? _stringCache[locale][issueType] : {};
-    const en = ('en' in _stringCache) ? _stringCache.en[issueType] : {};
-
-    // Fallback to English if string is untranslated
-    return Object.assign({}, en, l);
+    // No need to fallback to English, Osmose API handles this for us
+    return (locale in _stringCache) ? _stringCache[locale][issueType] : {};
   },
 
   postUpdate(d, callback) {

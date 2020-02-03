@@ -20,15 +20,15 @@ export function uiOsmoseDetails(context) {
 
         // Issue description supplied by Osmose
         var s = services.osmose.getStrings(d.error_type);
-        return ('description' in s) ? s.description : unknown;
+        return ('detail' in s) ? s.detail : unknown;
     }
 
 
     function osmoseDetails(selection) {
         var details = selection.selectAll('.error-details')
             .data(
-                (_error ? [_error] : []),
-                function(d) { return d.id + '-' + (d.status || 0); }
+                _error ? [_error] : [],
+                d => `${d.id}-${d.status || 0}`
             );
 
         details.exit()
@@ -39,30 +39,31 @@ export function uiOsmoseDetails(context) {
             .attr('class', 'error-details error-details-container');
 
 
-        // description
         var descriptionEnter = detailsEnter
             .append('div')
             .attr('class', 'error-details-description');
 
+        // Description
         descriptionEnter
             .append('h4')
-            .text(function() { return t('QA.keepRight.detail_description'); });
+            .text(() => t('QA.keepRight.detail_description'));
 
         descriptionEnter
             .append('div')
             .attr('class', 'error-details-description-text')
             .html(issueDetail);
 
+        // Elements (populated later as data is requested)
         descriptionEnter
             .append('h4')
             .attr('class', 'error-details-subtitle')
-            .text(function() { return t('QA.osmose.elems_title'); });
+            .text(() => t('QA.osmose.elems_title'));
 
         var elementList = descriptionEnter
             .append('ul')
             .attr('class', 'error-details-elements');
 
-        services.osmose.loadErrorDetail(_error, function(err, d) {
+        services.osmose.loadErrorDetail(_error, (err, d) => {
             if (d.elems === undefined) return;
 
             elementList.selectAll('.error_entity_link')
@@ -71,7 +72,7 @@ export function uiOsmoseDetails(context) {
                 .append('li')
                 .append('a')
                 .attr('class', 'error_entity_link')
-                .text(function(d) { return d; })
+                .text(d => d)
                 .each(function() {
                     var link = d3_select(this);
                     var entityID = this.textContent;
@@ -79,11 +80,11 @@ export function uiOsmoseDetails(context) {
 
                     // Add click handler
                     link
-                        .on('mouseenter', function() {
+                        .on('mouseenter', () => {
                             context.surface().selectAll(utilEntityOrMemberSelector([entityID], context.graph()))
                                 .classed('hover', true);
                         })
-                        .on('mouseleave', function() {
+                        .on('mouseleave', () => {
                             context.surface().selectAll('.hover')
                                 .classed('hover', false);
                         })
@@ -123,12 +124,12 @@ export function uiOsmoseDetails(context) {
 
             // Things like keys and values are dynamic details
             const special = { tags: true, values: true, chars: true, sug_tags: true };
-            for (let type in special) {
+            for (const type in special) {
                 if (type in d) {
                     descriptionEnter
                         .append('h4')
                         .attr('class', 'error-details-subtitle')
-                        .text(function() { return t(`QA.osmose.details.${type}`); });
+                        .text(() => t(`QA.osmose.details.${type}`));
 
                     descriptionEnter
                         .append('ul')
@@ -137,7 +138,7 @@ export function uiOsmoseDetails(context) {
                         .data(d[type])
                         .enter()
                         .append('li')
-                        .html(function(d) { return d; });
+                        .html(d => d);
                 }
             }
 
@@ -148,7 +149,7 @@ export function uiOsmoseDetails(context) {
     }
 
 
-    osmoseDetails.error = function(val) {
+    osmoseDetails.error = (val) => {
         if (!arguments.length) return _error;
         _error = val;
         return osmoseDetails;
