@@ -190,25 +190,16 @@ export function coreValidator(context) {
     validator.getSharedEntityIssues = function(entityIDs, options) {
         var cache = _headCache;
 
-        var issueIDs;
-
         // gather the issues that are common to all the entities
-        entityIDs.forEach(function(entityID) {
+        var issueIDs = entityIDs.reduce(function(acc, entityID) {
             var entityIssueIDs = cache.issuesByEntityID[entityID];
-            if (!entityIssueIDs) return;
-
-            if (!issueIDs) {
-                issueIDs = new Set(entityIssueIDs);
+            if (!entityIssueIDs) {
+                return acc;
             } else {
-                for (let elem of issueIDs) {
-                    if (!entityIssueIDs.has(elem)) {
-                        issueIDs.delete(elem);
-                    }
-                }
+                return new Set([...acc, ...entityIssueIDs]);
             }
-        });
+        }, new Set());
 
-        if (!issueIDs) return [];
 
         var opts = options || {};
 
