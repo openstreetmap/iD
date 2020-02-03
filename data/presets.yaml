@@ -4746,6 +4746,11 @@ en:
         name: Lifeguard
         # 'terms: CPR,rescue'
         terms: '<translate with synonyms or related terms for ''Lifeguard'', separated by commas>'
+      emergency/mountain_rescue:
+        # emergency=mountain_rescue
+        name: Mountain Rescue
+        # 'terms: EMS,EMT,rescue'
+        terms: '<translate with synonyms or related terms for ''Mountain Rescue'', separated by commas>'
       emergency/no:
         # emergency=no
         name: Emergency Access No

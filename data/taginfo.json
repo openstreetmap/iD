@@ -452,6 +452,7 @@
     {"key": "emergency", "value": "landing_site", "description": "🄿 Emergency Landing Site", "object_types": ["node", "area"], "icon_url": "https://cdn.jsdelivr.net/gh/mapbox/maki/icons/heliport-15.svg"},
     {"key": "emergency", "value": "life_ring", "description": "🄿 Life Ring", "object_types": ["node"], "icon_url": "https://cdn.jsdelivr.net/gh/openstreetmap/iD@master/svg/fontawesome/fas-life-ring.svg"},
     {"key": "emergency", "value": "lifeguard", "description": "🄿 Lifeguard", "object_types": ["node", "area"], "icon_url": "https://cdn.jsdelivr.net/gh/openstreetmap/iD@master/svg/fontawesome/fas-life-ring.svg"},
+    {"key": "emergency", "value": "mountain_rescue", "description": "🄿 Mountain Rescue", "object_types": ["node", "area"], "icon_url": "https://cdn.jsdelivr.net/gh/openstreetmap/iD@master/svg/fontawesome/fas-ambulance.svg"},
     {"key": "emergency", "value": "phone", "description": "🄿 Emergency Phone", "object_types": ["node"], "icon_url": "https://cdn.jsdelivr.net/gh/mapbox/maki/icons/emergency-phone-15.svg"},
     {"key": "emergency", "value": "siren", "description": "🄿 Siren", "object_types": ["node"], "icon_url": "https://cdn.jsdelivr.net/gh/openstreetmap/iD@master/svg/fontawesome/fas-volume-up.svg"},
     {"key": "emergency", "value": "water_tank", "description": "🄿 Emergency Water Tank", "object_types": ["node"], "icon_url": "https://cdn.jsdelivr.net/gh/mapbox/maki/icons/water-15.svg"},
