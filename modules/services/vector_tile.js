@@ -65,8 +65,8 @@ function vtToGeoJSON(data, tile, mergeCache) {
                     var merged = mergeCache[propertyhash];
                     if (merged && merged.length) {
                         var other = merged[0];
-                        var coords = martinez.union(
-                            feature.geometry.coordinates, other.geometry.coordinates
+                        var coords = martinez(
+                            feature.geometry.coordinates, other.geometry.coordinates, 1 /*UNION*/
                         );
 
                         if (!coords || !coords.length) {

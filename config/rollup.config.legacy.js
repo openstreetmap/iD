@@ -23,10 +23,7 @@ export default {
   plugins: [
     progress(),
     includePaths({
-      paths: ['node_modules/d3/node_modules'],  // npm2 or windows
-      include: {
-        'martinez-polygon-clipping': 'node_modules/martinez-polygon-clipping/dist/martinez.umd.js'
-      }
+      paths: ['node_modules/d3/node_modules']   // npm2 or windows
     }),
     nodeResolve({ dedupe: ['object-inspect'] }),
     commonjs(),
