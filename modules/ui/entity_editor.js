@@ -525,7 +525,7 @@ export function uiEntityEditor(context) {
         var weakPreset = _activePresets.length === 1 &&
             Object.keys(_activePresets[0].addTags || {}).length === 0;
         // Don't replace a weak preset with a fallback preset (e.g. "Point")
-        if (weakPreset && matches.length === 0 && matches[0].isFallback()) return;
+        if (weakPreset && matches.length === 1 && matches[0].isFallback()) return;
 
         entityEditor.presets(matches);
     }
