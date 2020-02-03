@@ -854,6 +854,10 @@ a.hide-toggle {
 .entity-editor-pane .inspector-body {
     top: 60px;
 }
+/* preserve extra space at bottom of inspector to allow for dropdown options - #5280 */
+.entity-editor .section:last-child {
+    margin-bottom: 150px;
+}
 
 .inspector-inner {
     padding: 20px 20px 5px 20px;
@@ -2560,11 +2564,6 @@ img.tag-reference-wiki-image {
     -moz-box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.3);
     box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.3);
     */
-}
-
-/* preserve extra space at bottom of inspector to allow for dropdown options - #5280 */
-.raw-membership-editor.inspector-inner {
-    margin-bottom: 150px;
 }
 
 /* hidden field to prevent user from tabbing out of the sidebar */
