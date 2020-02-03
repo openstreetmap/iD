@@ -109,7 +109,6 @@ export function uiEntityEditor(context) {
             },
             {
                 klass: 'preset-list-item inspector-inner',
-                shouldHave: true,
                 update: function(section) {
 
                     section.classed('mixed-types', _activePresets.length > 1);
@@ -227,16 +226,14 @@ export function uiEntityEditor(context) {
             },
             {
                 klass: 'entity-issues',
-                shouldHave: singularEntityID,
                 update: function(section) {
                     section
                         .call(entityIssues
-                            .entityID(singularEntityID)
+                            .entityIDs(_entityIDs)
                         );
                 }
             }, {
                 klass: 'preset-editor',
-                shouldHave: true,
                 update: function(section) {
                     section
                         .call(presetEditor
@@ -248,7 +245,6 @@ export function uiEntityEditor(context) {
                 }
             }, {
                 klass: 'raw-tag-editor inspector-inner',
-                shouldHave: true,
                 update: function(section) {
                     section
                         .call(rawTagEditor
@@ -278,7 +274,6 @@ export function uiEntityEditor(context) {
                 }
             }, {
                 klass: 'key-trap-wrap',
-                shouldHave: true,
                 create: function(sectionEnter) {
                     sectionEnter
                         .append('input')
@@ -297,7 +292,7 @@ export function uiEntityEditor(context) {
         ];
 
         sectionInfos = sectionInfos.filter(function(info) {
-            return info.shouldHave;
+            return info.shouldHave === undefined || info.shouldHave;
         });
 
         var sections = body.selectAll('.section')

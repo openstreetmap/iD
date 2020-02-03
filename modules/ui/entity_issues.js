@@ -3,13 +3,14 @@ import { event as d3_event, select as d3_select } from 'd3-selection';
 import { svgIcon } from '../svg/icon';
 import { t } from '../util/locale';
 import { uiDisclosure } from './disclosure';
+import { utilArrayIdentical } from '../util/array';
 import { utilHighlightEntities } from '../util';
 
 
 export function uiEntityIssues(context) {
     var _selection = d3_select(null);
     var _activeIssueID;
-    var _entityID;
+    var _entityIDs = [];
 
     // Refresh on validated events
     context.validator()
@@ -36,7 +37,7 @@ export function uiEntityIssues(context) {
     }
 
     function getIssues() {
-        return context.validator().getEntityIssues(_entityID, { includeDisabledRules: true });
+        return context.validator().getSharedEntityIssues(_entityIDs, { includeDisabledRules: true });
     }
 
     function makeActiveIssue(issueID) {
@@ -81,13 +82,13 @@ export function uiEntityIssues(context) {
             .on('mouseover.highlight', function(d) {
                 // don't hover-highlight the selected entity
                 var ids = d.entityIds
-                    .filter(function(e) { return e !== _entityID; });
+                    .filter(function(e) { return _entityIDs.indexOf(e) === -1; });
 
                 utilHighlightEntities(ids, true, context);
             })
             .on('mouseout.highlight', function(d) {
                 var ids = d.entityIds
-                    .filter(function(e) { return e !== _entityID; });
+                    .filter(function(e) { return _entityIDs.indexOf(e) === -1; });
 
                 utilHighlightEntities(ids, false, context);
             });
@@ -265,10 +266,10 @@ export function uiEntityIssues(context) {
     }
 
 
-    entityIssues.entityID = function(val) {
-        if (!arguments.length) return _entityID;
-        if (_entityID !== val) {
-            _entityID = val;
+    entityIssues.entityIDs = function(val) {
+        if (!arguments.length) return _entityIDs;
+        if (!_entityIDs || !val || !utilArrayIdentical(_entityIDs, val)) {
+            _entityIDs = val;
             _activeIssueID = null;
         }
         return entityIssues;

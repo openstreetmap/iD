@@ -186,10 +186,28 @@ export function coreValidator(context) {
         'disconnected_way', 'impossible_oneway'
     ];
 
-    validator.getEntityIssues = function(entityID, options) {
+    // returns the issues that the given entity IDs have in common, matching the given options
+    validator.getSharedEntityIssues = function(entityIDs, options) {
         var cache = _headCache;
 
-        var issueIDs = cache.issuesByEntityID[entityID];
+        var issueIDs;
+
+        // gather the issues that are common to all the entities
+        entityIDs.forEach(function(entityID) {
+            var entityIssueIDs = cache.issuesByEntityID[entityID];
+            if (!entityIssueIDs) return;
+
+            if (!issueIDs) {
+                issueIDs = new Set(entityIssueIDs);
+            } else {
+                for (let elem of issueIDs) {
+                    if (!entityIssueIDs.has(elem)) {
+                        issueIDs.delete(elem);
+                    }
+                }
+            }
+        });
+
         if (!issueIDs) return [];
 
         var opts = options || {};
@@ -223,6 +241,11 @@ export function coreValidator(context) {
                     return index1 !== -1 ? -1 : 1;
                 }
             });
+    };
+
+
+    validator.getEntityIssues = function(entityID, options) {
+        return validator.getSharedEntityIssues([entityID], options);
     };
 
 
