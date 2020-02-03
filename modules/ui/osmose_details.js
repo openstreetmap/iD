@@ -85,6 +85,20 @@ export function uiOsmoseDetails(context) {
             // No details to add if there are no associated issue elements
             if (!d.elems || d.elems.length === 0) return;
 
+            // Things like keys and values are dynamically added to a subtitle string
+            if (d.detail) {
+                detailsDiv
+                    .append('h4')
+                    .attr('class', 'error-details-subtitle')
+                    .text(() => t('QA.osmose.detail_title'));
+
+                detailsDiv
+                    .append('p')
+                    .attr('class', 'error-details-detail')
+                    .html(d => d.detail);
+            }
+
+            // Create list of linked issue elements
             detailsDiv
                 .append('h4')
                 .attr('class', 'error-details-subtitle')
@@ -148,27 +162,6 @@ export function uiOsmoseDetails(context) {
                         }
                     }
                 });
-
-            // TODO: Show the dynamic subtitle string directly once langs parameter is added
-            // Things like keys and values are dynamic details
-            const special = { tags: true, values: true, chars: true, sug_tags: true };
-            for (const type in special) {
-                if (type in d) {
-                    detailsDiv
-                        .append('h4')
-                        .attr('class', 'error-details-subtitle')
-                        .text(() => t(`QA.osmose.details.${type}`));
-
-                    detailsDiv
-                        .append('ul')
-                        .attr('class', `error-details-${type}`)
-                        .selectAll('li')
-                        .data(d[type])
-                        .enter()
-                        .append('li')
-                        .html(d => d);
-                }
-            }
 
             // Don't hide entities related to this error - #5880
             context.features().forceVisible(d.elems);

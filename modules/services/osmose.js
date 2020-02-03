@@ -11,7 +11,7 @@ import { services as qaServices } from '../../data/qa_errors.json';
 
 const tiler = utilTiler();
 const dispatch = d3_dispatch('loaded');
-const _osmoseUrlRoot = 'https://osmose.openstreetmap.fr/en/api/0.3beta/';
+const _osmoseUrlRoot = 'https://osmose.openstreetmap.fr/en/api/0.3beta';
 const _erZoom = 14;
 const _stringCache = {};
 
@@ -104,7 +104,7 @@ export default {
       if (_erCache.loadedTile[tile.id] || _erCache.inflightTile[tile.id]) return;
 
       let [ x, y, z ] = tile.xyz;
-      let url = _osmoseUrlRoot + `issues/${z}/${x}/${y}.json?` + utilQsString(params);
+      let url = `${_osmoseUrlRoot}/issues/${z}/${x}/${y}.json?` + utilQsString(params);
 
       let controller = new AbortController();
       _erCache.inflightTile[tile.id] = controller;
@@ -162,7 +162,7 @@ export default {
       return;
     }
 
-    let url = _osmoseUrlRoot + `issue/${d.identifier}`;
+    let url = `${_osmoseUrlRoot}/issue/${d.identifier}?langs=${currentLocale}`;
 
     d3_json(url)
       .then(data => {
@@ -170,51 +170,8 @@ export default {
         // Assign directly for immediate use in the callback
         d.elems = data.elems.map(e => e.type.substring(0,1) + e.id);
 
-        // Some error types have details in their subtitle
-        const special = {
-          tags: {
-            '3040-3040': /Bad tag value: "(.+)"/i,
-            '4010-4010': /Tag (.+) is deprecated/i,
-            '4010-40102': /Tag (.+) is deprecated/i,
-            '4030-900': /Conflict between tags: (.+), (.+)/i,
-            '5070-50703': /"(.+)"=".+" unexpected/i,
-            '9010-9010001': /(.+) is unnecessary/i
-          },
-          values: {
-            '3090-3090': /Incorrect date "(.+)"/i,
-            '9010-9010003': /(.+)/
-          },
-          chars: {
-            '5070-50703': /unexpected symbol char \(.+, (.+)\)/i,
-            '5070-50704': /Umbalanced (.+)/i,
-            '5070-50705': /Unexpected char (.+)/i
-          },
-          sug_tags: {
-            '4010-4010': /Tag .+ is deprecated: (.+)/i,
-            '4010-40102': /Tag .+ is deprecated: (.+)/i,
-          }
-        };
-        for (let type in special) {
-          if (d.error_type in special[type]) {
-            // Destructuring doesn't work if no match returns null, hence []
-            let [, ...details] = special[type][d.error_type].exec(data.subtitle) || [];
-
-            if (
-              d.error_type === '5070-50703'
-              && type === 'chars'
-              && details
-            ) {
-              details[0] = String.fromCharCode(details[0]);
-            }
-
-            // This error has a rare subtitle variant
-            if (d.error_type === '9010-9010001' && !details) {
-              [, ...details] = /\. Remove (.+)/i.exec(data.subtitle) || [];
-            }
-
-            if (details) d[type] = details;
-          }
-        }
+        // Some issues have instance specific detail in a subtitle
+        d.detail = data.subtitle;
 
         this.replaceError(d);
         if (callback) callback(null, d);
@@ -237,7 +194,7 @@ export default {
     }
 
     // Osmose API falls back to English strings where untranslated or if locale doesn't exist
-    const url = _osmoseUrlRoot + 'items?' + utilQsString({ langs: locale });
+    const url = `${_osmoseUrlRoot}/items?langs=${locale}`;
 
     d3_json(url)
       .then(data => {
@@ -292,7 +249,7 @@ export default {
     }
 
     // UI sets the status to either 'done' or 'false'
-    let url = _osmoseUrlRoot + `issue/${d.identifier}/${d.newStatus}`;
+    let url = `${_osmoseUrlRoot}/issue/${d.identifier}/${d.newStatus}`;
 
     let controller = new AbortController();
     _erCache.inflightPost[d.id] = controller;

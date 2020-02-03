@@ -1033,15 +1033,10 @@
         "QA": {
             "osmose": {
                 "title": "Osmose Issue",
+                "detail_title": "Issue Details",
                 "elems_title": "Issue Elements",
                 "fix_title": "Fix Guidelines",
-                "trap_title": "Common Pitfalls",
-                "details": {
-                    "values": "Issue Values",
-                    "tags": "Issue Tags",
-                    "chars": "Issue Characters",
-                    "sug_tags": "Suggested Tags"
-                }
+                "trap_title": "Common Mistakes"
             },
             "improveOSM": {
                 "title": "ImproveOSM Detection",
