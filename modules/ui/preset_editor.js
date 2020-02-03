@@ -43,23 +43,32 @@ export function uiPresetEditor(context) {
 
             var presetsManager = context.presets();
 
-            var combinedFields = _presets.reduce(function(fields, preset) {
-                if (!fields.length) return preset.fields;
-                return fields.filter(function(field) {
-                    return preset.fields.indexOf(field) !== -1 || preset.moreFields.indexOf(field) !== -1;
-                });
-            }, []);
+            var allFields = [], allMoreFields = [];
+            var sharedTotalFields;
 
-            var combinedMoreFields = _presets.reduce(function(fields, preset) {
-                if (!fields.length) return preset.moreFields;
-                return fields.filter(function(field) {
-                    return preset.fields.indexOf(field) !== -1 || preset.moreFields.indexOf(field) !== -1;
-                });
-            }, []);
+            _presets.forEach(function(preset) {
+                allFields = utilArrayUnion(allFields, preset.fields);
+                allMoreFields = utilArrayUnion(allMoreFields, preset.moreFields);
+
+                if (!sharedTotalFields) {
+                    sharedTotalFields = utilArrayUnion(preset.fields, preset.moreFields);
+                } else {
+                    sharedTotalFields = sharedTotalFields.filter(function(field) {
+                        return preset.fields.indexOf(field) !== -1 || preset.moreFields.indexOf(field) !== -1;
+                    });
+                }
+            });
+
+            var sharedFields = allFields.filter(function(field) {
+                return sharedTotalFields.indexOf(field) !== -1;
+            });
+            var sharedMoreFields = allMoreFields.filter(function(field) {
+                return sharedTotalFields.indexOf(field) !== -1;
+            });
 
             _fieldsArr = [];
 
-            combinedFields.forEach(function(field) {
+            sharedFields.forEach(function(field) {
                 if (field.matchAllGeometry(geometries)) {
                     _fieldsArr.push(
                         uiField(context, field, _entityIDs)
@@ -74,13 +83,13 @@ export function uiPresetEditor(context) {
                 );
             }
 
-            var additionalFields = utilArrayUnion(combinedMoreFields, presetsManager.universal());
+            var additionalFields = utilArrayUnion(sharedMoreFields, presetsManager.universal());
             additionalFields.sort(function(field1, field2) {
                 return field1.label().localeCompare(field2.label(), currentLocale);
             });
 
             additionalFields.forEach(function(field) {
-                if (combinedFields.indexOf(field) === -1 &&
+                if (sharedFields.indexOf(field) === -1 &&
                     field.matchAllGeometry(geometries)) {
                     _fieldsArr.push(
                         uiField(context, field, _entityIDs, { show: false })
