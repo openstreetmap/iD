@@ -667,6 +667,7 @@ en:
         label: Direction (Degrees Clockwise)
         # direction field placeholder
         placeholder: '45, 90, 180, 270'
+        terms: '[translate with synonyms or related terms for ''Direction (Degrees Clockwise)'', separated by commas]'
       direction_cardinal:
         # direction=*
         label: Direction

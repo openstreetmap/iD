@@ -3178,6 +3178,7 @@
                 },
                 "direction": {
                     "label": "Direction (Degrees Clockwise)",
+                    "terms": "",
                     "placeholder": "45, 90, 180, 270"
                 },
                 "dispensing": {
