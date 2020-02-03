@@ -258,6 +258,8 @@ export default {
                 // If string exists, value is an object with key 'auto' for string
                 let { title, detail, trap, fix, example } = item.class[k];
                 if (title) issueStrings.title = title.auto;
+                // TODO: Replace \[(.+?)\]\((.+?)\) pattern with <a href="\2">\1</a>
+                // TODO: Replace `(.+?)` with some sort of code styling
                 if (detail) issueStrings.detail = detail.auto;
                 if (trap) issueStrings.trap = trap.auto;
                 if (fix) issueStrings.fix = fix.auto;

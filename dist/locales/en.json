@@ -1034,6 +1034,8 @@
             "osmose": {
                 "title": "Osmose Issue",
                 "elems_title": "Issue Elements",
+                "fix_title": "Fix Guidelines",
+                "trap_title": "Common Pitfalls",
                 "details": {
                     "values": "Issue Values",
                     "tags": "Issue Tags",

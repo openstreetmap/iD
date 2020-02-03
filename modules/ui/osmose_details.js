@@ -10,17 +10,16 @@ import { utilDisplayName, utilEntityOrMemberSelector } from '../util';
 
 
 export function uiOsmoseDetails(context) {
-    var _error;
+    let _error;
+    const unknown = t('inspector.unknown');
 
 
-    function issueDetail(d) {
-        var unknown = t('inspector.unknown');
-
+    function issueString(d, type) {
         if (!d) return unknown;
 
         // Issue description supplied by Osmose
         var s = services.osmose.getStrings(d.error_type);
-        return ('detail' in s) ? s.detail : unknown;
+        return (type in s) ? s[type] : unknown;
     }
 
 
@@ -51,22 +50,50 @@ export function uiOsmoseDetails(context) {
         descriptionEnter
             .append('div')
             .attr('class', 'error-details-description-text')
-            .html(issueDetail);
+            .html(d => issueString(d, 'detail'));
 
         // Elements (populated later as data is requested)
-        descriptionEnter
-            .append('h4')
-            .attr('class', 'error-details-subtitle')
-            .text(() => t('QA.osmose.elems_title'));
+        const detailsDiv = descriptionEnter.append('div');
 
-        var elementList = descriptionEnter
-            .append('ul')
-            .attr('class', 'error-details-elements');
+        // Suggested Fix (musn't exist for every issue type)
+        if (issueString(_error, 'fix') !== unknown) {
+            descriptionEnter
+                .append('h4')
+                .attr('class', 'error-details-subtitle')
+                .text(() => t('QA.osmose.fix_title'));
+
+            descriptionEnter
+                .append('div')
+                .attr('class', 'error-details-description-text')
+                .html(d => issueString(d, 'fix'));
+        }
+
+        // Common Pitfalls (musn't exist for every issue type)
+        if (issueString(_error, 'trap') !== unknown) {
+            descriptionEnter
+                .append('h4')
+                .attr('class', 'error-details-subtitle')
+                .text(() => t('QA.osmose.trap_title'));
+
+            descriptionEnter
+                .append('div')
+                .attr('class', 'error-details-description-text')
+                .html(d => issueString(d, 'trap'));
+        }
 
         services.osmose.loadErrorDetail(_error, (err, d) => {
-            if (d.elems === undefined) return;
+            // No details to add if there are no associated issue elements
+            if (!d.elems || d.elems.length === 0) return;
 
-            elementList.selectAll('.error_entity_link')
+            detailsDiv
+                .append('h4')
+                .attr('class', 'error-details-subtitle')
+                .text(() => t('QA.osmose.elems_title'));
+
+            detailsDiv
+                .append('ul')
+                .attr('class', 'error-details-elements')
+                .selectAll('.error_entity_link')
                 .data(d.elems)
                 .enter()
                 .append('li')
@@ -122,16 +149,17 @@ export function uiOsmoseDetails(context) {
                     }
                 });
 
+            // TODO: Show the dynamic subtitle string directly once langs parameter is added
             // Things like keys and values are dynamic details
             const special = { tags: true, values: true, chars: true, sug_tags: true };
             for (const type in special) {
                 if (type in d) {
-                    descriptionEnter
+                    detailsDiv
                         .append('h4')
                         .attr('class', 'error-details-subtitle')
                         .text(() => t(`QA.osmose.details.${type}`));
 
-                    descriptionEnter
+                    detailsDiv
                         .append('ul')
                         .attr('class', 'error-details-list')
                         .selectAll('li')
