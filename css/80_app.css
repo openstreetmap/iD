@@ -2753,9 +2753,9 @@ input.key-trap {
 [dir='rtl'] .error-details-description-text::first-letter {
     text-transform: none;  /* #5877 */
 }
-.error-details-description
-.error-details-subtitle {
+.error-details-subsection h4 {
     padding-top: 10px;
+    padding-bottom: 0px;
 }
 .error-details code {
     padding: .2em .4em;

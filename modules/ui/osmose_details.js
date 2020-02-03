@@ -53,31 +53,37 @@ export function uiOsmoseDetails(context) {
             .html(d => issueString(d, 'detail'));
 
         // Elements (populated later as data is requested)
-        const detailsDiv = descriptionEnter.append('div');
+        const detailsDiv = descriptionEnter
+            .append('div')
+            .attr('class', 'error-details-subsection');
+
+        const elemsDiv = descriptionEnter
+            .append('div')
+            .attr('class', 'error-details-subsection');
 
         // Suggested Fix (musn't exist for every issue type)
         if (issueString(_error, 'fix') !== unknown) {
-            descriptionEnter
-                .append('h4')
-                .attr('class', 'error-details-subtitle')
-                .text(() => t('QA.osmose.fix_title'));
+            let div = descriptionEnter
+                .append('div')
+                .attr('class', 'error-details-subsection')
 
-            descriptionEnter
-                .append('p')
-                .attr('class', 'error-details-fix-text')
+            div.append('h4')
+                .text(() => t('QA.osmose.fix_title'))
+
+            div.append('p')
                 .html(d => issueString(d, 'fix'));
         }
 
         // Common Pitfalls (musn't exist for every issue type)
         if (issueString(_error, 'trap') !== unknown) {
-            descriptionEnter
-                .append('h4')
-                .attr('class', 'error-details-subtitle')
-                .text(() => t('QA.osmose.trap_title'));
+            let div = descriptionEnter
+                .append('div')
+                .attr('class', 'error-details-subsection')
 
-            descriptionEnter
-                .append('p')
-                .attr('class', 'error-details-trap-text')
+            div.append('h4')
+                .text(() => t('QA.osmose.trap_title'))
+
+            div.append('p')
                 .html(d => issueString(d, 'trap'));
         }
 
@@ -90,21 +96,20 @@ export function uiOsmoseDetails(context) {
                 detailsDiv
                     .append('h4')
                     .attr('class', 'error-details-subtitle')
-                    .text(() => t('QA.osmose.detail_title'));
+                    .text(() => t('QA.osmose.detail_title'))
 
                 detailsDiv
                     .append('p')
-                    .attr('class', 'error-details-detail')
                     .html(d => d.detail);
             }
 
             // Create list of linked issue elements
-            detailsDiv
+            elemsDiv
                 .append('h4')
                 .attr('class', 'error-details-subtitle')
                 .text(() => t('QA.osmose.elems_title'));
 
-            detailsDiv
+            elemsDiv
                 .append('ul')
                 .attr('class', 'error-details-elements')
                 .selectAll('.error_entity_link')
