@@ -160,30 +160,26 @@ export default {
     });
   },
 
-  loadErrorDetail(d, callback) {
+  loadErrorDetail(d) {
     // Error details only need to be fetched once
     if (d.elems !== undefined) {
-      if (callback) callback(null, d);
-      return;
+      return Promise.resolve(d);
     }
 
-    let url = `${_osmoseUrlRoot}/issue/${d.identifier}?langs=${currentLocale}`;
+    const url = `${_osmoseUrlRoot}/issue/${d.identifier}?langs=${currentLocale}`;
+    const cacheDetails = data => {
+      // Associated elements used for highlighting
+      // Assign directly for immediate use in the callback
+      d.elems = data.elems.map(e => e.type.substring(0,1) + e.id);
 
-    d3_json(url)
-      .then(data => {
-        // Associated elements used for highlighting
-        // Assign directly for immediate use in the callback
-        d.elems = data.elems.map(e => e.type.substring(0,1) + e.id);
+      // Some issues have instance specific detail in a subtitle
+      d.detail = data.subtitle;
 
-        // Some issues have instance specific detail in a subtitle
-        d.detail = data.subtitle;
+      this.replaceError(d);
+    };
 
-        this.replaceError(d);
-        if (callback) callback(null, d);
-      })
-      .catch(err => {
-        if (callback) callback(err.message);
-      });
+    return jsonPromise(url, cacheDetails)
+      .then(() => d);
   },
 
   loadStrings(callback, locale=currentLocale) {
