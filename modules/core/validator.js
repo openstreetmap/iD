@@ -195,11 +195,14 @@ export function coreValidator(context) {
             var entityIssueIDs = cache.issuesByEntityID[entityID];
             if (!entityIssueIDs) {
                 return acc;
-            } else {
-                return new Set([...acc, ...entityIssueIDs]);
             }
-        }, new Set());
-
+            if (!acc) {
+                return new Set(entityIssueIDs);
+            }
+            return new Set([...acc].filter(function(elem) {
+                return entityIssueIDs.has(elem);
+            }));
+        }, null) || [];
 
         var opts = options || {};
 
