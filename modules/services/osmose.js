@@ -230,7 +230,7 @@ export default {
 
         // Cache served item colors to automatically style issue markers later
         const { item: itemInt, color } = item;
-        if (color.test(/^#[A-Fa-f0-9]{6}|[A-Fa-f0-9]{3}/)) {
+        if (/^#[A-Fa-f0-9]{6}|[A-Fa-f0-9]{3}/.test(color)) {
           _colorCache[itemInt] = color;
         }
 
