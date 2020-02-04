@@ -862,16 +862,15 @@ en:
           title: Missing Turn Restriction
           description: '{num_passed} of {num_trips} recorded trips (travelling {travel_direction}) make a turn from {from_way} to {to_way} at {junction}. There may be a missing "{turn_restriction}" restriction.'
     keepRight:
-      title: KeepRight Error
-      detail_title: Error
+      title: KeepRight
       detail_description: Description
       comment: Comment
       comment_placeholder: Enter a comment to share with other users.
-      close: Close (Error Fixed)
-      ignore: Ignore (Not an Error)
+      close: Close (Issue Fixed)
+      ignore: Remove (False Positive)
       save_comment: Save Comment
       close_comment: Close and Comment
-      ignore_comment: Ignore and Comment
+      ignore_comment: Remove and Comment
       error_parts:
         this_node: 'this node'
         this_way: 'this way'
