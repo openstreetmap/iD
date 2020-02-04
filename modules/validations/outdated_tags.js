@@ -156,10 +156,10 @@ export function validationOutdatedTags(context) {
 
     let prefix = '';
     if (subtype === 'noncanonical_brand') {
-      prefix = 'noncanonical_brand';
+      prefix = 'noncanonical_brand.';
     } else if (subtype === 'deprecated_tags' && isOnlyAddingTags) {
       subtype = 'incomplete_tags';
-      prefix = 'incomplete';
+      prefix = 'incomplete.';
     }
 
     // don't allow autofixing brand tags
@@ -208,7 +208,7 @@ export function validationOutdatedTags(context) {
       const currEntity = context.hasEntity(entity.id);
       if (!currEntity) return '';
 
-      let messageID = `issues.outdated_tags.${prefix}.message`;
+      let messageID = `issues.outdated_tags.${prefix}message`;
       if (subtype === 'noncanonical_brand' && isOnlyAddingTags) {
         messageID += '_incomplete';
       }
@@ -224,7 +224,7 @@ export function validationOutdatedTags(context) {
       enter
         .append('div')
         .attr('class', 'issue-reference')
-        .text(t(`issues.outdated_tags.${prefix}.reference`));
+        .text(t(`issues.outdated_tags.${prefix}reference`));
 
       enter
         .append('strong')

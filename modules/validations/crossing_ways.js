@@ -54,7 +54,7 @@ export function validationCrossingWays(context) {
         return getFeatureTypeForTags(tags);
     }
 
-    // blacklist
+    // discard
     var ignoredBuildings = {
         demolished: true, dismantled: true, proposed: true, razed: true
     };
