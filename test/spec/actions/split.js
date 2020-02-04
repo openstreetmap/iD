@@ -1,10 +1,5 @@
 describe('iD.actionSplit', function () {
 
-    beforeEach(function () {
-        iD.areaKeys = iD.coreContext().init().presets().areaKeys();
-    });
-
-
     describe('#disabled', function () {
         it('returns falsy for a non-end node of a single way', function () {
             //
@@ -1108,7 +1103,7 @@ describe('iD.actionSplit', function () {
                     iD.osmNode({id: 'b', loc: [1,1]}),
                     iD.osmNode({id: 'c', loc: [1,0]}),
                     iD.osmNode({id: 'd', loc: [0,0]}),
-                    iD.osmWay({id: '-', tags: {building: 'yes'}, nodes: ['a', 'b', 'c', 'd', 'a']})
+                    iD.osmWay({id: '-', tags: {area: 'yes'}, nodes: ['a', 'b', 'c', 'd', 'a']})
                 ]);
 
                 graph = iD.actionSplit('a', ['='])(graph);
@@ -1117,7 +1112,7 @@ describe('iD.actionSplit', function () {
                 expect(graph.parentRelations(graph.entity('-'))).to.have.length(1);
 
                 var relation = graph.parentRelations(graph.entity('-'))[0];
-                expect(relation.tags).to.eql({type: 'multipolygon', building: 'yes'});
+                expect(relation.tags).to.eql({type: 'multipolygon', area: 'yes'});
                 expect(relation.members).to.eql([
                     {id: '-', role: 'outer', type: 'way'},
                     {id: '=', role: 'outer', type: 'way'}
@@ -1146,14 +1141,14 @@ describe('iD.actionSplit', function () {
                     iD.osmNode({id: 'a'}),
                     iD.osmNode({id: 'b'}),
                     iD.osmNode({id: 'c'}),
-                    iD.osmWay({'id': '-', nodes: ['a', 'b', 'c'], tags: {natural: 'water'}}),
+                    iD.osmWay({'id': '-', nodes: ['a', 'b', 'c'], tags: { area: 'yes' }}),
                     iD.osmRelation({id: 'r', members: [{id: '-', type: 'way', role: 'outer'}], tags: {type: 'multipolygon'}})
                 ]);
 
                 graph = iD.actionSplit('b', ['='])(graph);
 
                 expect(graph.entity('-').tags).to.eql({});
-                expect(graph.entity('r').tags).to.eql({type: 'multipolygon', natural: 'water'});
+                expect(graph.entity('r').tags).to.eql({type: 'multipolygon', area: 'yes' });
                 var ids = graph.entity('r').members.map(function(m) { return m.id; });
                 expect(ids).to.have.ordered.members(['-', '=']);
             });
