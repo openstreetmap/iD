@@ -4956,7 +4956,7 @@
                 },
                 "advertising/board": {
                     "name": "Notice Board",
-                    "terms": ""
+                    "terms": "advertising,announcements,blackboard,bulletin board,bulletinboard,cork board,corkboard,fliers,flyers,noticeboard,pin board,pinboard,sign,whiteboard"
                 },
                 "advertising/column": {
                     "name": "Advertising Column",
@@ -6350,7 +6350,7 @@
                 },
                 "building/static_caravan": {
                     "name": "Static Mobile Home",
-                    "terms": ""
+                    "terms": "house trailer,manufactured home,mobile home,prefabricated home,residential caravan,static caravan,trailer home"
                 },
                 "building/temple": {
                     "name": "Temple Building",

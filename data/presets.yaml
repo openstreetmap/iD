@@ -2755,6 +2755,7 @@ en:
       advertising/board:
         # advertising=board
         name: Notice Board
+        # 'terms: advertising,announcements,blackboard,bulletin board,bulletinboard,cork board,corkboard,fliers,flyers,noticeboard,pin board,pinboard,sign,whiteboard'
         terms: '<translate with synonyms or related terms for ''Notice Board'', separated by commas>'
       advertising/column:
         # advertising=column
@@ -4405,6 +4406,7 @@ en:
       building/static_caravan:
         # building=static_caravan
         name: Static Mobile Home
+        # 'terms: house trailer,manufactured home,mobile home,prefabricated home,residential caravan,static caravan,trailer home'
         terms: '<translate with synonyms or related terms for ''Static Mobile Home'', separated by commas>'
       building/temple:
         # building=temple
