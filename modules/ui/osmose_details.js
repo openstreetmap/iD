@@ -91,7 +91,8 @@ export function uiOsmoseDetails(context) {
           .html(d => issueString(d, 'trap'));
     }
 
-    detailsEnter
+    // Translation link below details container
+    selection
       .append('div')
         .attr('class', 'translation-link')
       .append('a')
