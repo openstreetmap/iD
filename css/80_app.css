@@ -2734,24 +2734,43 @@ input.key-trap {
     padding-top: 20px;
 }
 
-.error-details {
-    padding: 10px;
-}
 .error-details-container {
     background: #ececec;
     padding: 10px;
     margin-top: 20px;
     border-radius: 4px;
     border: 1px solid #ccc;
+    display: flex;
+    flex-direction: column;
 }
 .error-details-description {
     margin-bottom: 10px;
+    display: flex;
+    flex-direction: column;
 }
 .error-details-description-text::first-letter {
     text-transform: capitalize;
 }
 [dir='rtl'] .error-details-description-text::first-letter {
     text-transform: none;  /* #5877 */
+}
+.error-details-subsection h4 {
+    padding-top: 10px;
+    padding-bottom: 0;
+}
+.error-details code {
+    padding: .2em .4em;
+    margin: 0;
+    font-size: 85%;
+    font-family: monospace;
+    background-color: rgba(27,31,35,.05);
+    border-radius: 3px;
+}
+.error-details + .translation-link {
+    margin-top: 5px;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
 }
 
 .note-save .new-comment-input,

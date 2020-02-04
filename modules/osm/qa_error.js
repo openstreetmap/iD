@@ -44,13 +44,8 @@ Object.assign(qaError.prototype, {
         if (this.service && this.error_type) {
             var serviceInfo = services[this.service];
 
-            if (serviceInfo) {
-                var errInfo = serviceInfo.errorTypes[this.error_type];
-
-                if (errInfo) {
-                    this.icon = errInfo.icon;
-                    this.category = errInfo.category;
-                }
+            if (serviceInfo && serviceInfo.errorIcons) {
+                this.icon = serviceInfo.errorIcons[this.error_type];
             }
         }
 

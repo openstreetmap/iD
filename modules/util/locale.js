@@ -45,7 +45,7 @@ export function t(s, o, loc) {
     if (rep !== undefined) {
         if (o) {
             for (var k in o) {
-                var variable = '{' + k + '}';
+                var variable = '\\{' + k + '\\}';
                 var re = new RegExp(variable, 'g'); // check globally for variables
                 rep = rep.replace(re, o[k]);
             }

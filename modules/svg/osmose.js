@@ -5,16 +5,16 @@ import { modeBrowse } from '../modes/browse';
 import { svgPointTransform } from './helpers';
 import { services } from '../services';
 
-var _improveOsmEnabled = false;
+var _osmoseEnabled = false;
 var _errorService;
 
 
-export function svgImproveOSM(projection, context, dispatch) {
+export function svgOsmose(projection, context, dispatch) {
     var throttledRedraw = _throttle(function () { dispatch.call('change'); }, 1000);
     var minZoom = 12;
     var touchLayer = d3_select(null);
     var drawLayer = d3_select(null);
-    var _improveOsmVisible = false;
+    var _osmoseVisible = false;
 
     function markerPath(selection, klass) {
         selection
@@ -24,12 +24,12 @@ export function svgImproveOSM(projection, context, dispatch) {
     }
 
 
-    // Loosely-coupled improveOSM service for fetching errors.
+    // Loosely-coupled osmose service for fetching errors.
     function getService() {
-        if (services.improveOSM && !_errorService) {
-            _errorService = services.improveOSM;
+        if (services.osmose && !_errorService) {
+            _errorService = services.osmose;
             _errorService.on('loaded', throttledRedraw);
-        } else if (!services.improveOSM && _errorService) {
+        } else if (!services.osmose && _errorService) {
             _errorService = null;
         }
 
@@ -39,8 +39,8 @@ export function svgImproveOSM(projection, context, dispatch) {
 
     // Show the errors
     function editOn() {
-        if (!_improveOsmVisible) {
-            _improveOsmVisible = true;
+        if (!_osmoseVisible) {
+            _osmoseVisible = true;
             drawLayer
                 .style('display', 'block');
         }
@@ -49,13 +49,13 @@ export function svgImproveOSM(projection, context, dispatch) {
 
     // Immediately remove the errors and their touch targets
     function editOff() {
-        if (_improveOsmVisible) {
-            _improveOsmVisible = false;
+        if (_osmoseVisible) {
+            _osmoseVisible = false;
             drawLayer
                 .style('display', 'none');
-            drawLayer.selectAll('.qa_error.improveOSM')
+            drawLayer.selectAll('.qa_error.osmose')
                 .remove();
-            touchLayer.selectAll('.qa_error.improveOSM')
+            touchLayer.selectAll('.qa_error.osmose')
                 .remove();
         }
     }
@@ -63,7 +63,11 @@ export function svgImproveOSM(projection, context, dispatch) {
 
     // Enable the layer.  This shows the errors and transitions them to visible.
     function layerOn() {
-        editOn();
+        // Strings supplied by Osmose fetched before showing layer for first time
+        // NOTE: Currently no way to change locale in iD at runtime, would need to re-call this method if that's ever implemented
+        // FIXME: If layer is toggled quickly multiple requests are sent
+        // FIXME: No error handling in place
+        getService().loadStrings(editOn);
 
         drawLayer
             .style('opacity', 0)
@@ -80,7 +84,7 @@ export function svgImproveOSM(projection, context, dispatch) {
     function layerOff() {
         throttledRedraw.cancel();
         drawLayer.interrupt();
-        touchLayer.selectAll('.qa_error.improveOSM')
+        touchLayer.selectAll('.qa_error.osmose')
             .remove();
 
         drawLayer
@@ -96,7 +100,7 @@ export function svgImproveOSM(projection, context, dispatch) {
 
     // Update the error markers
     function updateMarkers() {
-        if (!_improveOsmVisible || !_improveOsmEnabled) return;
+        if (!_osmoseVisible || !_osmoseEnabled) return;
 
         var service = getService();
         var selectedID = context.selectedErrorID();
@@ -104,7 +108,7 @@ export function svgImproveOSM(projection, context, dispatch) {
         var getTransform = svgPointTransform(projection);
 
         // Draw markers..
-        var markers = drawLayer.selectAll('.qa_error.improveOSM')
+        var markers = drawLayer.selectAll('.qa_error.osmose')
             .data(data, function(d) { return d.id; });
 
         // exit
@@ -119,7 +123,8 @@ export function svgImproveOSM(projection, context, dispatch) {
                     'qa_error',
                     d.service,
                     'error_id-' + d.id,
-                    'error_type-' + d.error_type
+                    'error_type-' + d.error_type,
+                    'item-' + d.item
                 ].join(' ');
             });
 
@@ -137,7 +142,7 @@ export function svgImproveOSM(projection, context, dispatch) {
 
         markersEnter
             .append('polygon')
-            .attr('fill', 'currentColor')
+            .attr('fill', d => getService().getColor(d.item))
             .call(markerPath, 'qa_error-fill');
 
         markersEnter
@@ -169,7 +174,7 @@ export function svgImproveOSM(projection, context, dispatch) {
         if (touchLayer.empty()) return;
         var fillClass = context.getDebug('target') ? 'pink ' : 'nocolor ';
 
-        var targets = touchLayer.selectAll('.qa_error.improveOSM')
+        var targets = touchLayer.selectAll('.qa_error.osmose')
             .data(data, function(d) { return d.id; });
 
         // exit
@@ -199,8 +204,8 @@ export function svgImproveOSM(projection, context, dispatch) {
     }
 
 
-    // Draw the ImproveOSM layer and schedule loading errors and updating markers.
-    function drawImproveOSM(selection) {
+    // Draw the Osmose layer and schedule loading errors and updating markers.
+    function drawOsmose(selection) {
         var service = getService();
 
         var surface = context.surface();
@@ -208,7 +213,7 @@ export function svgImproveOSM(projection, context, dispatch) {
             touchLayer = surface.selectAll('.data-layer.touch .layer-touch.markers');
         }
 
-        drawLayer = selection.selectAll('.layer-improveOSM')
+        drawLayer = selection.selectAll('.layer-osmose')
             .data(service ? [0] : []);
 
         drawLayer.exit()
@@ -216,11 +221,11 @@ export function svgImproveOSM(projection, context, dispatch) {
 
         drawLayer = drawLayer.enter()
             .append('g')
-            .attr('class', 'layer-improveOSM')
-            .style('display', _improveOsmEnabled ? 'block' : 'none')
+            .attr('class', 'layer-osmose')
+            .style('display', _osmoseEnabled ? 'block' : 'none')
             .merge(drawLayer);
 
-        if (_improveOsmEnabled) {
+        if (_osmoseEnabled) {
             if (service && ~~context.map().zoom() >= minZoom) {
                 editOn();
                 service.loadErrors(projection);
@@ -233,11 +238,11 @@ export function svgImproveOSM(projection, context, dispatch) {
 
 
     // Toggles the layer on and off
-    drawImproveOSM.enabled = function(val) {
-        if (!arguments.length) return _improveOsmEnabled;
+    drawOsmose.enabled = function(val) {
+        if (!arguments.length) return _osmoseEnabled;
 
-        _improveOsmEnabled = val;
-        if (_improveOsmEnabled) {
+        _osmoseEnabled = val;
+        if (_osmoseEnabled) {
             layerOn();
         } else {
             layerOff();
@@ -251,10 +256,10 @@ export function svgImproveOSM(projection, context, dispatch) {
     };
 
 
-    drawImproveOSM.supported = function() {
+    drawOsmose.supported = function() {
         return !!getService();
     };
 
 
-    return drawImproveOSM;
+    return drawOsmose;
 }

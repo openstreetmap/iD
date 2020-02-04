@@ -67,7 +67,6 @@ function buildData() {
   let faIcons = {
     'fas-i-cursor': {},
     'fas-lock': {},
-    'fas-long-arrow-alt-right': {},
     'fas-th-list': {},
     'fas-user-cog': {}
   };
@@ -90,7 +89,7 @@ function buildData() {
     'dist/data/*',
     'svg/fontawesome/*.svg',
   ]);
-
+  readQAErrorIcons(faIcons, tnpIcons);
   let categories = generateCategories(tstrings, faIcons, tnpIcons);
   let fields = generateFields(tstrings, faIcons, tnpIcons, searchableFieldIDs);
   let presets = generatePresets(tstrings, faIcons, tnpIcons, searchableFieldIDs);
@@ -168,6 +167,27 @@ function validate(file, instance, schema) {
     });
     console.log('');
     process.exit(1);
+  }
+}
+
+
+function readQAErrorIcons(faIcons, tnpIcons) {
+  const qa = read('data/qa_errors.json');
+
+  for (const service in qa.services) {
+    for (const error in qa.services[service].errorIcons) {
+      const icon = qa.services[service]
+        .errorIcons[error];
+
+      // fontawesome icon, remember for later
+      if (/^fa[srb]-/.test(icon)) {
+        faIcons[icon] = {};
+      }
+      // noun project icon, remember for later
+      if (/^tnp-/.test(icon)) {
+        tnpIcons[icon] = {};
+      }
+    }
   }
 }
 

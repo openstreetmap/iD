@@ -1,8 +1,8 @@
-import { dataEn } from '../../data';
+import { services } from '../services';
 import { t } from '../util/locale';
 
 
-export function uiImproveOsmHeader() {
+export function uiOsmoseHeader() {
     var _error;
 
 
@@ -10,18 +10,14 @@ export function uiImproveOsmHeader() {
         var unknown = t('inspector.unknown');
 
         if (!d) return unknown;
-        var errorType = d.error_key;
-        var et = dataEn.QA.improveOSM.error_types[errorType];
 
-        if (et && et.title) {
-            return t('QA.improveOSM.error_types.' + errorType + '.title');
-        } else {
-            return unknown;
-        }
+        // Issue titles supplied by Osmose
+        var s = services.osmose.getStrings(d.error_type);
+        return ('title' in s) ? s.title : unknown;
     }
 
 
-    function improveOsmHeader(selection) {
+    function osmoseHeader(selection) {
         var header = selection.selectAll('.error-header')
             .data(
                 (_error ? [_error] : []),
@@ -51,13 +47,14 @@ export function uiImproveOsmHeader() {
                     'qa_error',
                     d.service,
                     'error_id-' + d.id,
-                    'error_type-' + d.error_type
+                    'error_type-' + d.error_type,
+                    'item-' + d.item
                 ].join(' ');
             });
 
         svgEnter
             .append('polygon')
-            .attr('fill', 'currentColor')
+            .attr('fill', d => services.osmose.getColor(d.item))
             .attr('class', 'qa_error-fill')
             .attr('points', '16,3 4,3 1,6 1,17 4,20 7,20 10,27 13,20 16,20 19,17.033 19,6');
 
@@ -85,12 +82,12 @@ export function uiImproveOsmHeader() {
     }
 
 
-    improveOsmHeader.error = function(val) {
+    osmoseHeader.error = function(val) {
         if (!arguments.length) return _error;
         _error = val;
-        return improveOsmHeader;
+        return osmoseHeader;
     };
 
 
-    return improveOsmHeader;
+    return osmoseHeader;
 }

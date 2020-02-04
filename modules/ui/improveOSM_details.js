@@ -78,11 +78,11 @@ export function uiImproveOsmDetails(context) {
 
                 // Add click handler
                 link
-                    .on('mouseover', function() {
+                    .on('mouseenter', function() {
                         context.surface().selectAll(utilEntityOrMemberSelector([entityID], context.graph()))
                             .classed('hover', true);
                     })
-                    .on('mouseout', function() {
+                    .on('mouseleave', function() {
                         context.surface().selectAll('.hover')
                             .classed('hover', false);
                     })
@@ -122,6 +122,7 @@ export function uiImproveOsmDetails(context) {
 
         // Don't hide entities related to this error - #5880
         context.features().forceVisible(relatedEntities);
+        context.map().pan([0,0]);  // trigger a redraw
     }
 
 

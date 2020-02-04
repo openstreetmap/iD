@@ -16,6 +16,7 @@ import { uiFeatureList } from './feature_list';
 import { uiInspector } from './inspector';
 import { uiImproveOsmEditor } from './improveOSM_editor';
 import { uiKeepRightEditor } from './keepRight_editor';
+import { uiOsmoseEditor } from './osmose_editor';
 import { uiNoteEditor } from './note_editor';
 import { textDirection } from '../util/locale';
 
@@ -26,6 +27,7 @@ export function uiSidebar(context) {
     var noteEditor = uiNoteEditor(context);
     var improveOsmEditor = uiImproveOsmEditor(context);
     var keepRightEditor = uiKeepRightEditor(context);
+    var osmoseEditor = uiOsmoseEditor(context);
     var _current;
     var _wasData = false;
     var _wasNote = false;
@@ -147,8 +149,15 @@ export function uiSidebar(context) {
                     datum = errService.getError(datum.id);
                 }
 
-                // Temporary solution while only two services
-                var errEditor = (datum.service === 'keepRight') ? keepRightEditor : improveOsmEditor;
+                // Currently only three possible services
+                var errEditor;
+                if (datum.service === 'keepRight') {
+                    errEditor = keepRightEditor;
+                } else if (datum.service === 'osmose') {
+                    errEditor = osmoseEditor;
+                } else {
+                    errEditor = improveOsmEditor;
+                }
 
                 d3_selectAll('.qa_error.' + datum.service)
                     .classed('hover', function(d) { return d.id === datum.id; });
