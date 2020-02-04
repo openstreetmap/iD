@@ -11,15 +11,13 @@ import { utilDisplayName, utilEntityOrMemberSelector } from '../util';
 
 export function uiOsmoseDetails(context) {
   let _error;
-  const unknown = t('inspector.unknown');
-
 
   function issueString(d, type) {
-    if (!d) return unknown;
+    if (!d) return '';
 
-    // Issue description supplied by Osmose
+    // Issue strings are cached from Osmose API
     const s = services.osmose.getStrings(d.error_type);
-    return (type in s) ? s[type] : unknown;
+    return (type in s) ? s[type] : '';
   }
 
 
@@ -39,18 +37,20 @@ export function uiOsmoseDetails(context) {
 
 
     // Description
-    const descriptionDiv = detailsEnter
-      .append('div')
-        .attr('class', 'error-details-subsection');
+    if (issueString(_error, 'detail')) {
+      const div = detailsEnter
+        .append('div')
+          .attr('class', 'error-details-subsection');
 
-    descriptionDiv
-      .append('h4')
-        .text(() => t('QA.keepRight.detail_description'));
+      div
+        .append('h4')
+          .text(() => t('QA.keepRight.detail_description'));
 
-    descriptionDiv
-      .append('p')
-        .attr('class', 'error-details-description-text')
-        .html(d => issueString(d, 'detail'));
+      div
+        .append('p')
+          .attr('class', 'error-details-description-text')
+          .html(d => issueString(d, 'detail'));
+    }
 
     // Elements (populated later as data is requested)
     const detailsDiv = detailsEnter
@@ -62,8 +62,8 @@ export function uiOsmoseDetails(context) {
         .attr('class', 'error-details-subsection');
 
     // Suggested Fix (musn't exist for every issue type)
-    if (issueString(_error, 'fix') !== unknown) {
-      let div = detailsEnter
+    if (issueString(_error, 'fix')) {
+      const div = detailsEnter
         .append('div')
           .attr('class', 'error-details-subsection');
 
@@ -77,8 +77,8 @@ export function uiOsmoseDetails(context) {
     }
 
     // Common Pitfalls (musn't exist for every issue type)
-    if (issueString(_error, 'trap') !== unknown) {
-      let div = detailsEnter
+    if (issueString(_error, 'trap')) {
+      const div = detailsEnter
         .append('div')
           .attr('class', 'error-details-subsection');
 
