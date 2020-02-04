@@ -625,13 +625,13 @@ en:
         tooltip: Note data from OpenStreetMap
         title: OpenStreetMap notes
       keepRight:
-        tooltip: Automatically detected map issues from keepright.at
+        tooltip: Data issues detected by keepright.at
         title: KeepRight Issues
       improveOSM:
-        tooltip: Missing data automatically detected by improveosm.org
+        tooltip: Missing data detected by improveosm.org
         title: ImproveOSM Issues
       osmose:
-        tooltip: Automatically detected map issues from osmose.openstreetmap.fr
+        tooltip: Data issues detected by osmose.openstreetmap.fr
         title: Osmose Issues
       custom:
         tooltip: "Drag and drop a data file onto the page, or click the button to setup"
@@ -829,11 +829,11 @@ en:
   QA:
     osmose:
       title: Osmose Issue
-      detail_title: Issue Details
-      elems_title: Issue Elements
+      detail_title: Details
+      elems_title: Features
       fix_title: Fix Guidelines
       trap_title: Common Mistakes
-      translation: Translations supplied by Osmose
+      translation: Translations provided by Osmose
     improveOSM:
       title: ImproveOSM Detection
       geometry_types:
@@ -1353,7 +1353,7 @@ en:
       title: Quality Assurance
       intro: "*Quality Assurance* (Q/A) tools can find improper tags, disconnected roads, and other issues with OpenStreetMap, which mappers can then fix. To view existing Q/A issues, click the {data} **Map data** panel to enable a specific Q/A layer."
       tools_h: "Tools"
-      tools: "The following tools are currently supported: [KeepRight](https://www.keepright.at/), [ImproveOSM](https://improveosm.org/en/) and [Osmose](https://osmose.openstreetmap.fr/). Expect iD to support more Q/A tools in the future."
+      tools: "The following tools are currently supported: [KeepRight](https://www.keepright.at/), [ImproveOSM](https://improveosm.org/en/) and [Osmose](https://osmose.openstreetmap.fr/)."
       issues_h: "Handling Issues"
       issues: "Handling Q/A issues is similar to handling notes. Click on a marker to view the issue details in the sidebar. Each tool has its own capabilities, but generally you can comment and/or close an issue."
     field:
