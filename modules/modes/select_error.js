@@ -18,7 +18,7 @@ import { uiKeepRightEditor } from '../ui/keepRight_editor';
 import { uiOsmoseEditor } from '../ui/osmose_editor';
 import { utilKeybinding } from '../util';
 
-
+// NOTE: Don't change name of this until UI v3 is merged
 export function modeSelectError(context, selectedErrorID, selectedErrorService) {
     var mode = {
         id: 'select-error',
@@ -118,7 +118,7 @@ export function modeSelectError(context, selectedErrorID, selectedErrorService) 
             if (!checkSelectedID()) return;
 
             var selection = context.surface()
-                .selectAll('.error_id-' + selectedErrorID + '.' + selectedErrorService);
+                .selectAll('.itemId-' + selectedErrorID + '.' + selectedErrorService);
 
             if (selection.empty()) {
                 // Return to browse mode if selected DOM elements have
@@ -150,7 +150,7 @@ export function modeSelectError(context, selectedErrorID, selectedErrorService) 
             .call(keybinding.unbind);
 
         context.surface()
-            .selectAll('.qa_error.selected')
+            .selectAll('.qaItem.selected')
             .classed('selected hover', false);
 
         context.map()

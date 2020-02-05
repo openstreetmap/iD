@@ -10,13 +10,13 @@ import { utilDisplayName, utilEntityOrMemberSelector } from '../util';
 
 
 export function uiOsmoseDetails(context) {
-  let _error;
+  let _qaItem;
 
   function issueString(d, type) {
     if (!d) return '';
 
     // Issue strings are cached from Osmose API
-    const s = services.osmose.getStrings(d.error_type);
+    const s = services.osmose.getStrings(d.itemType);
     return (type in s) ? s[type] : '';
   }
 
@@ -24,7 +24,7 @@ export function uiOsmoseDetails(context) {
   function osmoseDetails(selection) {
     const details = selection.selectAll('.error-details')
       .data(
-        _error ? [_error] : [],
+        _qaItem ? [_qaItem] : [],
         d => `${d.id}-${d.status || 0}`
       );
 
@@ -33,14 +33,14 @@ export function uiOsmoseDetails(context) {
 
     const detailsEnter = details.enter()
       .append('div')
-        .attr('class', 'error-details error-details-container');
+        .attr('class', 'error-details qa-details-container');
 
 
     // Description
-    if (issueString(_error, 'detail')) {
+    if (issueString(_qaItem, 'detail')) {
       const div = detailsEnter
         .append('div')
-          .attr('class', 'error-details-subsection');
+          .attr('class', 'qa-details-subsection');
 
       div
         .append('h4')
@@ -48,24 +48,24 @@ export function uiOsmoseDetails(context) {
 
       div
         .append('p')
-          .attr('class', 'error-details-description-text')
+          .attr('class', 'qa-details-description-text')
           .html(d => issueString(d, 'detail'));
     }
 
     // Elements (populated later as data is requested)
     const detailsDiv = detailsEnter
       .append('div')
-        .attr('class', 'error-details-subsection');
+        .attr('class', 'qa-details-subsection');
 
     const elemsDiv = detailsEnter
       .append('div')
-        .attr('class', 'error-details-subsection');
+        .attr('class', 'qa-details-subsection');
 
     // Suggested Fix (musn't exist for every issue type)
-    if (issueString(_error, 'fix')) {
+    if (issueString(_qaItem, 'fix')) {
       const div = detailsEnter
         .append('div')
-          .attr('class', 'error-details-subsection');
+          .attr('class', 'qa-details-subsection');
 
       div
         .append('h4')
@@ -77,10 +77,10 @@ export function uiOsmoseDetails(context) {
     }
 
     // Common Pitfalls (musn't exist for every issue type)
-    if (issueString(_error, 'trap')) {
+    if (issueString(_qaItem, 'trap')) {
       const div = detailsEnter
         .append('div')
-          .attr('class', 'error-details-subsection');
+          .attr('class', 'qa-details-subsection');
 
       div
         .append('h4')
@@ -105,7 +105,7 @@ export function uiOsmoseDetails(context) {
       .append('use')
         .attr('href', '#iD-icon-out-link');
 
-    services.osmose.loadErrorDetail(_error)
+    services.osmose.loadIssueDetail(_qaItem)
       .then(d => {
         // No details to add if there are no associated issue elements
         if (!d.elems || d.elems.length === 0) return;
@@ -116,7 +116,6 @@ export function uiOsmoseDetails(context) {
         if (d.detail) {
           detailsDiv
             .append('h4')
-              .attr('class', 'error-details-subtitle')
               .text(() => t('QA.osmose.detail_title'));
 
           detailsDiv
@@ -127,13 +126,10 @@ export function uiOsmoseDetails(context) {
         // Create list of linked issue elements
         elemsDiv
           .append('h4')
-            .attr('class', 'error-details-subtitle')
             .text(() => t('QA.osmose.elems_title'));
 
         elemsDiv
-          .append('ul')
-            .attr('class', 'error-details-elements')
-          .selectAll('.error_entity_link')
+          .append('ul').selectAll('li')
           .data(d.elems)
           .enter()
           .append('li')
@@ -189,7 +185,7 @@ export function uiOsmoseDetails(context) {
               }
             });
 
-        // Don't hide entities related to this error - #5880
+        // Don't hide entities related to this issue - #5880
         context.features().forceVisible(d.elems);
         context.map().pan([0,0]);  // trigger a redraw
       })
@@ -197,9 +193,9 @@ export function uiOsmoseDetails(context) {
   }
 
 
-  osmoseDetails.error = val => {
-    if (!arguments.length) return _error;
-    _error = val;
+  osmoseDetails.issue = function(val) {
+    if (!arguments.length) return _qaItem;
+    _qaItem = val;
     return osmoseDetails;
   };
 

@@ -98,9 +98,9 @@
 }
 
 .mode-browse .note,
-.mode-browse .qa_error,
+.mode-browse .qaItem,
 .mode-select .note,
-.mode-select .qa_error,
+.mode-select .qaItem,
 .turn rect,
 .turn circle {
     cursor: pointer;

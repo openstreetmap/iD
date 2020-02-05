@@ -6,7 +6,7 @@ import { modeSelect } from '../modes/select';
 import { modeSelectData } from '../modes/select_data';
 import { modeSelectNote } from '../modes/select_note';
 import { modeSelectError } from '../modes/select_error';
-import { osmEntity, osmNote, qaError } from '../osm';
+import { osmEntity, osmNote, QAItem } from '../osm';
 
 
 export function behaviorSelect(context) {
@@ -173,7 +173,7 @@ export function behaviorSelect(context) {
                 .selectedNoteID(datum.id)
                 .enter(modeSelectNote(context, datum.id));
 
-        } else if (datum instanceof qaError & !isMultiselect) {  // clicked an external QA error
+        } else if (datum instanceof QAItem & !isMultiselect) {  // clicked an external QA issue
             context
                 .selectedErrorID(datum.id)
                 .enter(modeSelectError(context, datum.id, datum.service));

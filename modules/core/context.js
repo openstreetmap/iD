@@ -292,6 +292,7 @@ export function coreContext() {
     return context;
   };
 
+  // NOTE: Don't change the name of this until UI v3 is merged
   let _selectedErrorID;
   context.selectedErrorID = function(errorID) {
     if (!arguments.length) return _selectedErrorID;

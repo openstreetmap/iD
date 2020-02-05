@@ -90,7 +90,7 @@ function buildData() {
     'dist/data/*',
     'svg/fontawesome/*.svg',
   ]);
-  readQAErrorIcons(faIcons, tnpIcons);
+  readQAIssueIcons(faIcons, tnpIcons);
   let categories = generateCategories(tstrings, faIcons, tnpIcons);
   let fields = generateFields(tstrings, faIcons, tnpIcons, searchableFieldIDs);
   let presets = generatePresets(tstrings, faIcons, tnpIcons, searchableFieldIDs);
@@ -128,7 +128,7 @@ function buildData() {
     minifyJSON('data/languages.json', 'dist/data/languages.min.json'),
     minifyJSON('data/locales.json', 'dist/data/locales.min.json'),
     minifyJSON('data/phone_formats.json', 'dist/data/phone_formats.min.json'),
-    minifyJSON('data/qa_errors.json', 'dist/data/qa_errors.min.json'),
+    minifyJSON('data/qa_data.json', 'dist/data/qa_data.min.json'),
     minifyJSON('data/shortcuts.json', 'dist/data/shortcuts.min.json'),
     minifyJSON('data/taginfo.json', 'dist/data/taginfo.min.json'),
     minifyJSON('data/territory_languages.json', 'dist/data/territory_languages.min.json')
@@ -173,13 +173,12 @@ function validate(file, instance, schema) {
 }
 
 
-function readQAErrorIcons(faIcons, tnpIcons) {
-  const qa = read('data/qa_errors.json');
+function readQAIssueIcons(faIcons, tnpIcons) {
+  const qa = read('data/qa_data.json');
 
-  for (const service in qa.services) {
-    for (const error in qa.services[service].errorIcons) {
-      const icon = qa.services[service]
-        .errorIcons[error];
+  for (const service in qa) {
+    for (const item in qa[service].icons) {
+      const icon = qa[service].icons[item];
 
       // fontawesome icon, remember for later
       if (/^fa[srb]-/.test(icon)) {

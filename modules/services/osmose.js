@@ -5,23 +5,21 @@ import { json as d3_json } from 'd3-fetch';
 
 import { currentLocale } from '../util/locale';
 import { geoExtent, geoVecAdd } from '../geo';
-import { qaError } from '../osm';
+import { QAItem } from '../osm';
 import { utilRebind, utilTiler, utilQsString } from '../util';
-import { services as qaServices } from '../../data/qa_errors.json';
+import * as qaServices from '../../data/qa_data.json';
 
 const tiler = utilTiler();
 const dispatch = d3_dispatch('loaded');
+const _tileZoom = 14;
 const _osmoseUrlRoot = 'https://osmose.openstreetmap.fr/en/api/0.3beta';
 const _osmoseItems =
-  Object.keys(qaServices.osmose.errorIcons)
+  Object.keys(qaServices.osmose.icons)
     .map(s => s.split('-')[0])
     .reduce((unique, item) => unique.indexOf(item) !== -1 ? unique : [...unique, item], []);
-const _erZoom = 14;
-const _stringCache = {};
-const _colorCache = {};
 
 // This gets reassigned if reset
-let _erCache;
+let _cache;
 
 function abortRequest(controller) {
   if (controller) {
@@ -39,20 +37,20 @@ function abortUnwantedRequests(cache, tiles) {
   });
 }
 
-function encodeErrorRtree(d) {
+function encodeIssueRtree(d) {
   return { minX: d.loc[0], minY: d.loc[1], maxX: d.loc[0], maxY: d.loc[1], data: d };
 }
 
-// replace or remove error from rtree
+// Replace or remove QAItem from rtree
 function updateRtree(item, replace) {
-  _erCache.rtree.remove(item, (a, b) => a.data.id === b.data.id);
+  _cache.rtree.remove(item, (a, b) => a.data.id === b.data.id);
 
   if (replace) {
-    _erCache.rtree.insert(item);
+    _cache.rtree.insert(item);
   }
 }
 
-// Errors shouldn't obscure eachother
+// Issues shouldn't obscure eachother
 function preventCoincident(loc) {
   let coincident = false;
   do {
@@ -60,7 +58,7 @@ function preventCoincident(loc) {
     let delta = coincident ? [0.00001, 0] : [0, 0.00001];
     loc = geoVecAdd(loc, delta);
     let bbox = geoExtent(loc).bbox();
-    coincident = _erCache.rtree.search(bbox).length;
+    coincident = _cache.rtree.search(bbox).length;
   } while (coincident);
 
   return loc;
@@ -68,7 +66,7 @@ function preventCoincident(loc) {
 
 export default {
   init() {
-    if (!_erCache) {
+    if (!_cache) {
       this.reset();
     }
 
@@ -76,77 +74,72 @@ export default {
   },
 
   reset() {
-    if (_erCache) {
-      Object.values(_erCache.inflightTile).forEach(abortRequest);
+    if (_cache) {
+      Object.values(_cache.inflightTile).forEach(abortRequest);
     }
-    _erCache = {
+    _cache = {
       data: {},
       loadedTile: {},
       inflightTile: {},
       inflightPost: {},
       closed: {},
-      rtree: new RBush()
+      rtree: new RBush(),
+      strings: {},
+      colors: {}
     };
   },
 
-  loadErrors(projection) {
+  loadIssues(projection) {
     let params = {
-      // Tiles return a maximum # of errors
+      // Tiles return a maximum # of issues
       // So we want to filter our request for only types iD supports
       item: _osmoseItems
     };
 
     // determine the needed tiles to cover the view
     let tiles = tiler
-      .zoomExtent([_erZoom, _erZoom])
+      .zoomExtent([_tileZoom, _tileZoom])
       .getTiles(projection);
 
     // abort inflight requests that are no longer needed
-    abortUnwantedRequests(_erCache, tiles);
+    abortUnwantedRequests(_cache, tiles);
 
     // issue new requests..
     tiles.forEach(tile => {
-      if (_erCache.loadedTile[tile.id] || _erCache.inflightTile[tile.id]) return;
+      if (_cache.loadedTile[tile.id] || _cache.inflightTile[tile.id]) return;
 
       let [ x, y, z ] = tile.xyz;
       let url = `${_osmoseUrlRoot}/issues/${z}/${x}/${y}.json?` + utilQsString(params);
 
       let controller = new AbortController();
-      _erCache.inflightTile[tile.id] = controller;
+      _cache.inflightTile[tile.id] = controller;
 
       d3_json(url, { signal: controller.signal })
         .then(data => {
-          delete _erCache.inflightTile[tile.id];
-          _erCache.loadedTile[tile.id] = true;
+          delete _cache.inflightTile[tile.id];
+          _cache.loadedTile[tile.id] = true;
 
           if (data.features) {
             data.features.forEach(issue => {
-              const { item, class: error_class, uuid: identifier } = issue.properties;
-              // Item is the type of error, w/ class tells us the sub-type
-              const error_type = `${item}-${error_class}`;
+              const { item, class: cl, uuid: id } = issue.properties;
+              /* Osmose issues are uniquely identified by a unique
+                `item` and `class` combination (both integer values) */
+              const itemType = `${item}-${cl}`;
 
-              // Filter out unsupported error types (some are too specific or advanced)
-              if (error_type in qaServices.osmose.errorIcons) {
+              // Filter out unsupported issue types (some are too specific or advanced)
+              if (itemType in qaServices.osmose.icons) {
                 let loc = issue.geometry.coordinates; // lon, lat
                 loc = preventCoincident(loc);
 
-                let d = new qaError({
-                  // Info required for every error
-                  loc,
-                  service: 'osmose',
-                  error_type,
-                  // Extra details needed for this service
-                  identifier, // needed to query and update the error
-                  item // category of the issue for styling
-                });
+                let d = new QAItem(loc, 'osmose', itemType, id, { item });
 
-                // Setting elems here prevents UI error detail requests
-                if (d.item === 8300 || d.item === 8360) {
+                // Setting elems here prevents UI detail requests
+                if (item === 8300 || item === 8360) {
                   d.elems = [];
                 }
 
-                _erCache.data[d.id] = d;
-                _erCache.rtree.insert(encodeErrorRtree(d));
+                _cache.data[d.id] = d;
+                _cache.rtree.insert(encodeIssueRtree(d));
               }
             });
           }
@@ -154,48 +147,47 @@ export default {
           dispatch.call('loaded');
         })
         .catch(() => {
-          delete _erCache.inflightTile[tile.id];
-          _erCache.loadedTile[tile.id] = true;
+          delete _cache.inflightTile[tile.id];
+          _cache.loadedTile[tile.id] = true;
         });
     });
   },
 
-  loadErrorDetail(d) {
-    // Error details only need to be fetched once
-    if (d.elems !== undefined) {
-      return Promise.resolve(d);
+  loadIssueDetail(issue) {
+    // Issue details only need to be fetched once
+    if (issue.elems !== undefined) {
+      return Promise.resolve(issue);
     }
 
-    const url = `${_osmoseUrlRoot}/issue/${d.identifier}?langs=${currentLocale}`;
+    const url = `${_osmoseUrlRoot}/issue/${issue.id}?langs=${currentLocale}`;
     const cacheDetails = data => {
       // Associated elements used for highlighting
       // Assign directly for immediate use in the callback
-      d.elems = data.elems.map(e => e.type.substring(0,1) + e.id);
+      issue.elems = data.elems.map(e => e.type.substring(0,1) + e.id);
 
       // Some issues have instance specific detail in a subtitle
-      d.detail = data.subtitle;
+      issue.detail = data.subtitle;
 
-      this.replaceError(d);
+      this.replaceItem(issue);
     };
 
-    return jsonPromise(url, cacheDetails)
-      .then(() => d);
+    return jsonPromise(url, cacheDetails).then(() => issue);
   },
 
   loadStrings(callback, locale=currentLocale) {
-    const issueTypes = Object.keys(qaServices.osmose.errorIcons);
+    const items = Object.keys(qaServices.osmose.icons);
 
     if (
-      locale in _stringCache
-      && Object.keys(_stringCache[locale]).length === issueTypes.length
+      locale in _cache.strings
+      && Object.keys(_cache.strings[locale]).length === items.length
     ) {
-        if (callback) callback(null, _stringCache[locale]);
+        if (callback) callback(null, _cache.strings[locale]);
         return;
     }
 
     // May be partially populated already if some requests were successful
-    if (!(locale in _stringCache)) {
-      _stringCache[locale] = {};
+    if (!(locale in _cache.strings)) {
+      _cache.strings[locale] = {};
     }
 
     const format = string => {
@@ -206,9 +198,9 @@ export default {
 
     // Only need to cache strings for supported issue types
     // Using multiple individual item + class requests to reduce fetched data size
-    const allRequests = issueTypes.map(issueType => {
+    const allRequests = items.map(itemType => {
       // No need to request data we already have
-      if (issueType in _stringCache[locale]) return;
+      if (itemType in _cache.strings[locale]) return;
 
       const cacheData = data => {
         // Bunch of nested single value arrays of objects
@@ -219,7 +211,7 @@ export default {
         // If null default value is reached, data wasn't as expected (or was empty)
         if (!cl) {
           /* eslint-disable no-console */
-          console.log(`Osmose strings request (${issueType}) had unexpected data`);
+          console.log(`Osmose strings request (${itemType}) had unexpected data`);
           /* eslint-enable no-console */
           return;
         }
@@ -227,7 +219,7 @@ export default {
         // Cache served item colors to automatically style issue markers later
         const { item: itemInt, color } = item;
         if (/^#[A-Fa-f0-9]{6}|[A-Fa-f0-9]{3}/.test(color)) {
-          _colorCache[itemInt] = color;
+          _cache.colors[itemInt] = color;
         }
 
         // Value of root key will be null if no string exists
@@ -240,10 +232,10 @@ export default {
         if (trap) issueStrings.trap = format(trap.auto);
         if (fix) issueStrings.fix = format(fix.auto);
 
-        _stringCache[locale][issueType] = issueStrings;
+        _cache.strings[locale][itemType] = issueStrings;
       };
 
-      const [ item, cl ] = issueType.split('-');
+      const [ item, cl ] = itemType.split('-');
 
       // Osmose API falls back to English strings where untranslated or if locale doesn't exist
       const url = `${_osmoseUrlRoot}/items/${item}/class/${cl}?langs=${locale}`;
@@ -252,88 +244,87 @@ export default {
     });
 
     Promise.all(allRequests)
-      .then(() => { if (callback) callback(null, _stringCache[locale]); })
+      .then(() => { if (callback) callback(null, _cache.strings[locale]); })
       .catch(err => { if (callback) callback(err); });
   },
 
-  getStrings(issueType, locale=currentLocale) {
+  getStrings(itemType, locale=currentLocale) {
     // No need to fallback to English, Osmose API handles this for us
-    return (locale in _stringCache) ? _stringCache[locale][issueType] : {};
+    return (locale in _cache.strings) ? _cache.strings[locale][itemType] : {};
   },
 
   getColor(itemType) {
-    return (itemType in _colorCache) ? _colorCache[itemType] : '#FFFFFF';
+    return (itemType in _cache.colors) ? _cache.colors[itemType] : '#FFFFFF';
   },
 
-  postUpdate(d, callback) {
-    if (_erCache.inflightPost[d.id]) {
-      return callback({ message: 'Error update already inflight', status: -2 }, d);
+  postUpdate(issue, callback) {
+    if (_cache.inflightPost[issue.id]) {
+      return callback({ message: 'Issue update already inflight', status: -2 }, issue);
     }
 
     // UI sets the status to either 'done' or 'false'
-    let url = `${_osmoseUrlRoot}/issue/${d.identifier}/${d.newStatus}`;
+    const url = `${_osmoseUrlRoot}/issue/${issue.id}/${issue.newStatus}`;
+    const controller = new AbortController();
+    const after = () => {
+      delete _cache.inflightPost[issue.id];
 
-    let controller = new AbortController();
-    _erCache.inflightPost[d.id] = controller;
+      this.removeItem(issue);
+      if (issue.newStatus === 'done') {
+        // Keep track of the number of issues closed per `item` to tag the changeset
+        if (!(issue.item in _cache.closed)) {
+          _cache.closed[issue.item] = 0;
+        }
+        _cache.closed[issue.item] += 1;
+      }
+      if (callback) callback(null, issue);
+    };
+
+    _cache.inflightPost[issue.id] = controller;
 
     fetch(url, { signal: controller.signal })
-      .then(() => {
-        delete _erCache.inflightPost[d.id];
-
-        this.removeError(d);
-        if (d.newStatus === 'done') {
-          // No error identifier, so we give a count of each category
-          if (!(d.item in _erCache.closed)) {
-            _erCache.closed[d.item] = 0;
-          }
-          _erCache.closed[d.item] += 1;
-        }
-        if (callback) callback(null, d);
-      })
+      .then(after)
       .catch(err => {
-        delete _erCache.inflightPost[d.id];
+        delete _cache.inflightPost[issue.id];
         if (callback) callback(err.message);
       });
   },
 
+  // Get all cached QAItems covering the viewport
+  getItems(projection) {
+    const viewport = projection.clipExtent();
+    const min = [viewport[0][0], viewport[1][1]];
+    const max = [viewport[1][0], viewport[0][1]];
+    const bbox = geoExtent(projection.invert(min), projection.invert(max)).bbox();
 
-  // get all cached errors covering the viewport
-  getErrors(projection) {
-    let viewport = projection.clipExtent();
-    let min = [viewport[0][0], viewport[1][1]];
-    let max = [viewport[1][0], viewport[0][1]];
-    let bbox = geoExtent(projection.invert(min), projection.invert(max)).bbox();
-
-    return _erCache.rtree.search(bbox).map(d => {
-      return d.data;
-    });
+    return _cache.rtree.search(bbox).map(d => d.data);
   },
 
-  // get a single error from the cache
+  // Get a QAItem from cache
+  // NOTE: Don't change method name until UI v3 is merged
   getError(id) {
-    return _erCache.data[id];
+    return _cache.data[id];
   },
 
-  // replace a single error in the cache
-  replaceError(error) {
-    if (!(error instanceof qaError) || !error.id) return;
+  // Replace a single QAItem in the cache
+  replaceItem(item) {
+    if (!(item instanceof QAItem) || !item.id) return;
 
-    _erCache.data[error.id] = error;
-    updateRtree(encodeErrorRtree(error), true); // true = replace
-    return error;
+    _cache.data[item.id] = item;
+    updateRtree(encodeIssueRtree(item), true); // true = replace
+    return item;
   },
 
-  // remove a single error from the cache
-  removeError(error) {
-    if (!(error instanceof qaError) || !error.id) return;
+  // Remove a single QAItem from the cache
+  removeItem(item) {
+    if (!(item instanceof QAItem) || !item.id) return;
 
-    delete _erCache.data[error.id];
-    updateRtree(encodeErrorRtree(error), false); // false = remove
+    delete _cache.data[item.id];
+    updateRtree(encodeIssueRtree(item), false); // false = remove
   },
 
   // Used to populate `closed:osmose:*` changeset tags
   getClosedCounts() {
-    return _erCache.closed;
+    return _cache.closed;
   }
 };
 

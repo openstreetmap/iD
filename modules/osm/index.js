@@ -4,7 +4,7 @@ export { osmNode } from './node';
 export { osmNote } from './note';
 export { osmRelation } from './relation';
 export { osmWay } from './way';
-export { qaError } from './qa_error';
+export { QAItem } from './qa_item';
 
 export {
     osmIntersection,

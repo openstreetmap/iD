@@ -9,7 +9,7 @@ import {
     selectAll as d3_selectAll
 } from 'd3-selection';
 import { utilArrayIdentical } from '../util/array';
-import { osmEntity, osmNote, qaError } from '../osm';
+import { osmEntity, osmNote, QAItem } from '../osm';
 import { services } from '../services';
 import { uiDataEditor } from './data_editor';
 import { uiFeatureList } from './feature_list';
@@ -31,7 +31,7 @@ export function uiSidebar(context) {
     var _current;
     var _wasData = false;
     var _wasNote = false;
-    var _wasQAError = false;
+    var _wasQaItem = false;
 
 
     function sidebar(selection) {
@@ -140,8 +140,8 @@ export function uiSidebar(context) {
                 selection.selectAll('.sidebar-component')
                     .classed('inspector-hover', true);
 
-            } else if (datum instanceof qaError) {
-                _wasQAError = true;
+            } else if (datum instanceof QAItem) {
+                _wasQaItem = true;
 
                 var errService = services[datum.service];
                 if (errService) {
@@ -159,7 +159,7 @@ export function uiSidebar(context) {
                     errEditor = improveOsmEditor;
                 }
 
-                d3_selectAll('.qa_error.' + datum.service)
+                d3_selectAll('.qaItem.' + datum.service)
                     .classed('hover', function(d) { return d.id === datum.id; });
 
                 sidebar
@@ -193,12 +193,12 @@ export function uiSidebar(context) {
                 inspector
                     .state('hide');
 
-            } else if (_wasData || _wasNote || _wasQAError) {
+            } else if (_wasData || _wasNote || _wasQaItem) {
                 _wasNote = false;
                 _wasData = false;
-                _wasQAError = false;
+                _wasQaItem = false;
                 d3_selectAll('.note').classed('hover', false);
-                d3_selectAll('.qa_error').classed('hover', false);
+                d3_selectAll('.qaItem').classed('hover', false);
                 sidebar.hide();
             }
         }

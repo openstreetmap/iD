@@ -14,229 +14,208 @@ import { uiViewOnKeepRight } from './view_on_keepRight';
 
 import { utilNoAuto, utilRebind } from '../util';
 
-
 export function uiKeepRightEditor(context) {
-    var dispatch = d3_dispatch('change');
-    var keepRightDetails = uiKeepRightDetails(context);
-    var keepRightHeader = uiKeepRightHeader(context);
-    var quickLinks = uiQuickLinks();
+  const dispatch = d3_dispatch('change');
+  const qaDetails = uiKeepRightDetails(context);
+  const qaHeader = uiKeepRightHeader(context);
+  const quickLinks = uiQuickLinks();
 
-    var _error;
+  let _qaItem;
 
+  function keepRightEditor(selection) {
+    // quick links
+    const choices = [{
+      id: 'zoom_to',
+      label: 'inspector.zoom_to.title',
+      tooltip: () => uiTooltipHtml(t('inspector.zoom_to.tooltip_qaItem'), t('inspector.zoom_to.key')),
+      click: () => context.mode().zoomToSelected()
+    }];
 
-    function keepRightEditor(selection) {
-        // quick links
-        var choices = [{
-            id: 'zoom_to',
-            label: 'inspector.zoom_to.title',
-            tooltip: function() {
-                return uiTooltipHtml(t('inspector.zoom_to.tooltip_issue'), t('inspector.zoom_to.key'));
-            },
-            click: function zoomTo() {
-                context.mode().zoomToSelected();
-            }
-        }];
+    const headerEnter = selection.selectAll('.header')
+      .data([0])
+      .enter()
+      .append('div')
+        .attr('class', 'header fillL');
 
+    headerEnter
+      .append('button')
+        .attr('class', 'fr qa-editor-close')
+        .on('click', () => context.enter(modeBrowse(context)))
+        .call(svgIcon('#iD-icon-close'));
 
-        var header = selection.selectAll('.header')
-            .data([0]);
-
-        var headerEnter = header.enter()
-            .append('div')
-            .attr('class', 'header fillL');
-
-        headerEnter
-            .append('button')
-            .attr('class', 'fr error-editor-close')
-            .on('click', function() {
-                context.enter(modeBrowse(context));
-            })
-            .call(svgIcon('#iD-icon-close'));
-
-        headerEnter
-            .append('h3')
-            .text(t('QA.keepRight.title'));
+    headerEnter
+      .append('h3')
+        .text(t('QA.keepRight.title'));
 
 
-        var body = selection.selectAll('.body')
-            .data([0]);
+    let body = selection.selectAll('.body')
+      .data([0]);
 
-        body = body.enter()
-            .append('div')
-            .attr('class', 'body')
-            .merge(body);
+    body = body.enter()
+      .append('div')
+        .attr('class', 'body')
+      .merge(body);
 
-        var editor = body.selectAll('.error-editor')
-            .data([0]);
+    const editor = body.selectAll('.qa-editor')
+      .data([0]);
 
-        editor.enter()
-            .append('div')
-            .attr('class', 'modal-section error-editor')
-            .merge(editor)
-            .call(keepRightHeader.error(_error))
-            .call(quickLinks.choices(choices))
-            .call(keepRightDetails.error(_error))
-            .call(keepRightSaveSection);
+    editor.enter()
+      .append('div')
+        .attr('class', 'modal-section qa-editor')
+      .merge(editor)
+        .call(qaHeader.issue(_qaItem))
+        .call(quickLinks.choices(choices))
+        .call(qaDetails.issue(_qaItem))
+        .call(keepRightSaveSection);
 
 
-        var footer = selection.selectAll('.footer')
-            .data([0]);
+    const footer = selection.selectAll('.footer')
+      .data([0]);
 
-        footer.enter()
-            .append('div')
-            .attr('class', 'footer')
-            .merge(footer)
-            .call(uiViewOnKeepRight(context).what(_error));
+    footer.enter()
+      .append('div')
+      .attr('class', 'footer')
+      .merge(footer)
+      .call(uiViewOnKeepRight(context).what(_qaItem));
+  }
+
+
+  function keepRightSaveSection(selection) {
+    const isSelected = (_qaItem && _qaItem.id === context.selectedErrorID());
+    const isShown = (_qaItem && (isSelected || _qaItem.newComment || _qaItem.comment));
+    let saveSection = selection.selectAll('.qa-save')
+      .data(
+        (isShown ? [_qaItem] : []),
+        d => `${d.id}-${d.status || 0}`
+      );
+
+    // exit
+    saveSection.exit()
+      .remove();
+
+    // enter
+    const saveSectionEnter = saveSection.enter()
+      .append('div')
+        .attr('class', 'qa-save save-section cf');
+
+    saveSectionEnter
+      .append('h4')
+        .attr('class', '.qa-save-header')
+        .text(t('QA.keepRight.comment'));
+
+    saveSectionEnter
+      .append('textarea')
+        .attr('class', 'new-comment-input')
+        .attr('placeholder', t('QA.keepRight.comment_placeholder'))
+        .attr('maxlength', 1000)
+        .property('value', d => d.newComment || d.comment)
+        .call(utilNoAuto)
+        .on('input', changeInput)
+        .on('blur', changeInput);
+
+    // update
+    saveSection = saveSectionEnter
+      .merge(saveSection)
+        .call(qaSaveButtons);
+
+    function changeInput() {
+      const input = d3_select(this);
+      let val = input.property('value').trim();
+
+      if (val === _qaItem.comment) {
+        val = undefined;
+      }
+
+      // store the unsaved comment with the issue itself
+      _qaItem = _qaItem.update({ newComment: val });
+
+      const qaService = services.keepRight;
+      if (qaService) {
+        qaService.replaceItem(_qaItem);  // update keepright cache
+      }
+
+      saveSection
+        .call(qaSaveButtons);
     }
+  }
 
 
-    function keepRightSaveSection(selection) {
-        var isSelected = (_error && _error.id === context.selectedErrorID());
-        var isShown = (_error && (isSelected || _error.newComment || _error.comment));
-        var saveSection = selection.selectAll('.error-save')
-            .data(
-                (isShown ? [_error] : []),
-                function(d) { return d.id + '-' + (d.status || 0); }
-            );
+  function qaSaveButtons(selection) {
+    const isSelected = (_qaItem && _qaItem.id === context.selectedErrorID());
+    let buttonSection = selection.selectAll('.buttons')
+      .data((isSelected ? [_qaItem] : []), d => d.status + d.id);
 
-        // exit
-        saveSection.exit()
-            .remove();
+    // exit
+    buttonSection.exit()
+      .remove();
 
-        // enter
-        var saveSectionEnter = saveSection.enter()
-            .append('div')
-            .attr('class', 'error-save save-section cf');
+    // enter
+    const buttonEnter = buttonSection.enter()
+      .append('div')
+        .attr('class', 'buttons');
 
-        saveSectionEnter
-            .append('h4')
-            .attr('class', '.error-save-header')
-            .text(t('QA.keepRight.comment'));
+    buttonEnter
+      .append('button')
+        .attr('class', 'button comment-button action')
+        .text(t('QA.keepRight.save_comment'));
 
-        saveSectionEnter
-            .append('textarea')
-            .attr('class', 'new-comment-input')
-            .attr('placeholder', t('QA.keepRight.comment_placeholder'))
-            .attr('maxlength', 1000)
-            .property('value', function(d) { return d.newComment || d.comment; })
-            .call(utilNoAuto)
-            .on('input', changeInput)
-            .on('blur', changeInput);
+    buttonEnter
+      .append('button')
+        .attr('class', 'button close-button action');
 
-        // update
-        saveSection = saveSectionEnter
-            .merge(saveSection)
-            .call(keepRightSaveButtons);
+    buttonEnter
+      .append('button')
+        .attr('class', 'button ignore-button action');
 
+    // update
+    buttonSection = buttonSection
+      .merge(buttonEnter);
 
-        function changeInput() {
-            var input = d3_select(this);
-            var val = input.property('value').trim();
-
-            if (val === _error.comment) {
-                val = undefined;
-            }
-
-            // store the unsaved comment with the error itself
-            _error = _error.update({ newComment: val });
-
-            var keepRight = services.keepRight;
-            if (keepRight) {
-                keepRight.replaceError(_error);  // update keepright cache
-            }
-
-            saveSection
-                .call(keepRightSaveButtons);
+    buttonSection.select('.comment-button')   // select and propagate data
+      .attr('disabled', d => d.newComment ? null : true)
+      .on('click.comment', function(d) {
+        this.blur();    // avoid keeping focus on the button - #4641
+        const qaService = services.keepRight;
+        if (qaService) {
+          qaService.postUpdate(d, (err, item) => dispatch.call('change', item));
         }
-    }
+      });
 
+    buttonSection.select('.close-button')   // select and propagate data
+      .text(d => {
+        const andComment = (d.newComment ? '_comment' : '');
+        return t(`QA.keepRight.close${andComment}`);
+      })
+      .on('click.close', function(d) {
+        this.blur();    // avoid keeping focus on the button - #4641
+        const qaService = services.keepRight;
+        if (qaService) {
+          d.newStatus = 'ignore_t';   // ignore temporarily (item fixed)
+          qaService.postUpdate(d, (err, item) => dispatch.call('change', item));
+        }
+      });
 
-    function keepRightSaveButtons(selection) {
-        var isSelected = (_error && _error.id === context.selectedErrorID());
-        var buttonSection = selection.selectAll('.buttons')
-            .data((isSelected ? [_error] : []), function(d) { return d.status + d.id; });
+    buttonSection.select('.ignore-button')   // select and propagate data
+      .text(d => {
+        const andComment = (d.newComment ? '_comment' : '');
+        return t(`QA.keepRight.ignore${andComment}`);
+      })
+      .on('click.ignore', function(d) {
+        this.blur();    // avoid keeping focus on the button - #4641
+        const qaService = services.keepRight;
+        if (qaService) {
+          d.newStatus = 'ignore';   // ignore permanently (false positive)
+          qaService.postUpdate(d, (err, item) => dispatch.call('change', item));
+        }
+      });
+  }
 
-        // exit
-        buttonSection.exit()
-            .remove();
+  // NOTE: Don't change method name until UI v3 is merged
+  keepRightEditor.error = function(val) {
+    if (!arguments.length) return _qaItem;
+    _qaItem = val;
+    return keepRightEditor;
+  };
 
-        // enter
-        var buttonEnter = buttonSection.enter()
-            .append('div')
-            .attr('class', 'buttons');
-
-        buttonEnter
-            .append('button')
-            .attr('class', 'button comment-button action')
-            .text(t('QA.keepRight.save_comment'));
-
-        buttonEnter
-            .append('button')
-            .attr('class', 'button close-button action');
-
-        buttonEnter
-            .append('button')
-            .attr('class', 'button ignore-button action');
-
-
-        // update
-        buttonSection = buttonSection
-            .merge(buttonEnter);
-
-        buttonSection.select('.comment-button')   // select and propagate data
-            .attr('disabled', function(d) {
-                return d.newComment === undefined ? true : null;
-            })
-            .on('click.comment', function(d) {
-                this.blur();    // avoid keeping focus on the button - #4641
-                var keepRight = services.keepRight;
-                if (keepRight) {
-                    keepRight.postKeepRightUpdate(d, function(err, error) {
-                        dispatch.call('change', error);
-                    });
-                }
-            });
-
-        buttonSection.select('.close-button')   // select and propagate data
-            .text(function(d) {
-                var andComment = (d.newComment !== undefined ? '_comment' : '');
-                return t('QA.keepRight.close' + andComment);
-            })
-            .on('click.close', function(d) {
-                this.blur();    // avoid keeping focus on the button - #4641
-                var keepRight = services.keepRight;
-                if (keepRight) {
-                    d.state = 'ignore_t';   // ignore temporarily (error fixed)
-                    keepRight.postKeepRightUpdate(d, function(err, error) {
-                        dispatch.call('change', error);
-                    });
-                }
-            });
-
-        buttonSection.select('.ignore-button')   // select and propagate data
-            .text(function(d) {
-                var andComment = (d.newComment !== undefined ? '_comment' : '');
-                return t('QA.keepRight.ignore' + andComment);
-            })
-            .on('click.ignore', function(d) {
-                this.blur();    // avoid keeping focus on the button - #4641
-                var keepRight = services.keepRight;
-                if (keepRight) {
-                    d.state = 'ignore';   // ignore permanently (false positive)
-                    keepRight.postKeepRightUpdate(d, function(err, error) {
-                        dispatch.call('change', error);
-                    });
-                }
-            });
-    }
-
-
-    keepRightEditor.error = function(val) {
-        if (!arguments.length) return _error;
-        _error = val;
-        return keepRightEditor;
-    };
-
-
-    return utilRebind(keepRightEditor, dispatch, 'on');
+  return utilRebind(keepRightEditor, dispatch, 'on');
 }

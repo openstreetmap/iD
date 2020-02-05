@@ -1,10 +1,10 @@
 
-/* OSM Notes and KeepRight Layers */
+/* OSM Notes and QA Layers */
 
-.error-header-icon .qa_error-fill,
-.layer-keepRight .qa_error .qa_error-fill,
-.layer-improveOSM .qa_error .qa_error-fill,
-.layer-osmose .qa_error .qa_error-fill {
+.qa-header-icon .qaItem-fill,
+.layer-keepRight .qaItem .qaItem-fill,
+.layer-improveOSM .qaItem .qaItem-fill,
+.layer-osmose .qaItem .qaItem-fill {
     stroke: #333;
     stroke-width: 1.3px;  /* NOTE: likely a better way to scale the icon stroke */
 }
@@ -43,113 +43,111 @@
     height: 15px;
 }
 
-/* adjustment for error icon */
-
-.error-header-icon .preset-icon-28 {
+/* adjustment to center QA icons */
+.qa-header-icon .preset-icon-28 {
     top: auto;
     left: auto;
 }
-
-.error-header-icon {
+.qa-header-icon {
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
-/* Keep Right Errors
+/* Keep Right Issues
 ------------------------------------------------------- */
-.keepRight.error_type-20,     /* multiple nodes on same spot */
-.keepRight.error_type-40,     /* impossible oneways */
-.keepRight.error_type-210,    /* self intersecting ways */
-.keepRight.error_type-270,    /* unusual motorway connection */
-.keepRight.error_type-310,    /* roundabout issues */
-.keepRight.error_type-320,    /* improper _link */
-.keepRight.error_type-350 {   /* improper bridge tag */
+.keepRight.itemType-20,     /* multiple nodes on same spot */
+.keepRight.itemType-40,     /* impossible oneways */
+.keepRight.itemType-210,    /* self intersecting ways */
+.keepRight.itemType-270,    /* unusual motorway connection */
+.keepRight.itemType-310,    /* roundabout issues */
+.keepRight.itemType-320,    /* improper _link */
+.keepRight.itemType-350 {   /* improper bridge tag */
     color: #ff9;
 }
 
-.keepRight.error_type-50 {    /* almost junctions */
+.keepRight.itemType-50 {    /* almost junctions */
     color: #88f;
 }
 
-.keepRight.error_type-60,     /* deprecated tags */
-.keepRight.error_type-70,     /* tagging issues */
-.keepRight.error_type-90,     /* motorway without ref */
-.keepRight.error_type-100,    /* place of worship without religion */
-.keepRight.error_type-110,    /* poi without name */
-.keepRight.error_type-150,    /* railway crossing without tag */
-.keepRight.error_type-220,    /* misspelled tag */
-.keepRight.error_type-380 {   /* non-physical sport tag */
+.keepRight.itemType-60,     /* deprecated tags */
+.keepRight.itemType-70,     /* tagging issues */
+.keepRight.itemType-90,     /* motorway without ref */
+.keepRight.itemType-100,    /* place of worship without religion */
+.keepRight.itemType-110,    /* poi without name */
+.keepRight.itemType-150,    /* railway crossing without tag */
+.keepRight.itemType-220,    /* misspelled tag */
+.keepRight.itemType-380 {   /* non-physical sport tag */
     color: #5d0;
 }
 
-.keepRight.error_type-130 {   /* disconnected ways */
+.keepRight.itemType-130 {   /* disconnected ways */
     color: #fa3;
 }
 
-.keepRight.error_type-170 {   /* FIXME tag */
+.keepRight.itemType-170 {   /* FIXME tag */
     color: #ff0;
 }
 
-.keepRight.error_type-190 {   /* intersection without junction */
+.keepRight.itemType-190 {   /* intersection without junction */
     color: #f33;
 }
 
-.keepRight.error_type-200 {   /* overlapping ways */
+.keepRight.itemType-200 {   /* overlapping ways */
     color: #fdbf6f;
 }
 
-.keepRight.error_type-160,    /* railway layer conflict */
-.keepRight.error_type-230 {   /* layer conflict */
+.keepRight.itemType-160,    /* railway layer conflict */
+.keepRight.itemType-230 {   /* layer conflict */
     color: #b60;
 }
 
-.keepRight.error_type-280 {   /* boundary issues */
+.keepRight.itemType-280 {   /* boundary issues */
     color: #5f47a0;
 }
 
-.keepRight.error_type-180,    /* relation without type */
-.keepRight.error_type-290 {   /* turn restriction issues */
+.keepRight.itemType-180,    /* relation without type */
+.keepRight.itemType-290 {   /* turn restriction issues */
     color: #ace;
 }
 
-.keepRight.error_type-300,    /* missing maxspeed */
-.keepRight.error_type-390 {   /* missing tracktype */
+.keepRight.itemType-300,    /* missing maxspeed */
+.keepRight.itemType-390 {   /* missing tracktype */
     color: #090;
 }
 
-.keepRight.error_type-360,    /* language unknown */
-.keepRight.error_type-370,    /* doubled places */
-.keepRight.error_type-410 {   /* website issues */
+.keepRight.itemType-360,    /* language unknown */
+.keepRight.itemType-370,    /* doubled places */
+.keepRight.itemType-410 {   /* website issues */
     color: #f9b;
 }
 
-.keepRight.error_type-120,    /* way without nodes */
-.keepRight.error_type-400 {   /* geometry / turn angles */
+.keepRight.itemType-120,    /* way without nodes */
+.keepRight.itemType-400 {   /* geometry / turn angles */
     color: #c35;
 }
 
-/* ImproveOSM Errors
+/* ImproveOSM Issues
 ------------------------------------------------------- */
 
-.improveOSM.error_type-ow {   /* missing one way */
+.improveOSM.itemType-ow {   /* missing one way */
     color: #1E90FF;
 }
 
-.improveOSM.error_type-mr-road {   /* missing road */
+.improveOSM.itemType-mr-road {   /* missing road */
     color: #B452CD;
 }
-.improveOSM.error_type-mr-path {   /* missing path */
+.improveOSM.itemType-mr-path {   /* missing path */
     color: #A0522D;
 }
-.improveOSM.error_type-mr-parking {   /* missing parking */
+.improveOSM.itemType-mr-parking {   /* missing parking */
     color: #EEEE00;
 }
-.improveOSM.error_type-mr-both {   /* missing road+parking */
+.improveOSM.itemType-mr-both {   /* missing road+parking */
     color: #FFA500;
 }
 
-.improveOSM.error_type-tr {   /* missing turn restriction */
+.improveOSM.itemType-tr {   /* missing turn restriction */
     color: #EC1C24;
 }
 

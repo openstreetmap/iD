@@ -45,7 +45,7 @@
 
 /* `.target` objects are interactive */
 /* They can be picked up, clicked, hovered, or things can connect to them */
-.qa_error.target,
+.qaItem.target,
 .note.target,
 .node.target,
 .turn .target {
@@ -83,7 +83,7 @@
 /* points, notes & QA */
 
 /* points, notes, markers */
-g.qa_error .stroke,
+g.qaItem .stroke,
 g.note .stroke {
     stroke: #222;
     stroke-width: 1;
@@ -91,7 +91,7 @@ g.note .stroke {
     opacity: 0.6;
 }
 
-g.qa_error.active .stroke,
+g.qaItem.active .stroke,
 g.note.active .stroke {
     stroke: #222;
     stroke-width: 1;
@@ -106,7 +106,7 @@ g.point .stroke {
 }
 
 
-g.qa_error .shadow,
+g.qaItem .shadow,
 g.point .shadow,
 g.note .shadow {
     fill: none;
@@ -115,14 +115,14 @@ g.note .shadow {
     stroke-opacity: 0;
 }
 
-g.qa_error.hover:not(.selected) .shadow,
+g.qaItem.hover:not(.selected) .shadow,
 g.note.hover:not(.selected) .shadow,
 g.point.related:not(.selected) .shadow,
 g.point.hover:not(.selected) .shadow {
     stroke-opacity: 0.5;
 }
 
-g.qa_error.selected .shadow,
+g.qaItem.selected .shadow,
 g.note.selected .shadow,
 g.point.selected .shadow {
     stroke-opacity: 0.7;

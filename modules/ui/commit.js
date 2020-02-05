@@ -138,7 +138,7 @@ export function uiCommit(context) {
 
         // assign tags for closed issues and notes
         var osmClosed = osm.getClosedIDs();
-        var issueType;
+        var itemType;
         if (osmClosed.length) {
             tags['closed:note'] = osmClosed.join(';').substr(0, tagCharLimit);
         }
@@ -150,14 +150,14 @@ export function uiCommit(context) {
         }
         if (services.improveOSM) {
             var iOsmClosed = services.improveOSM.getClosedCounts();
-            for (issueType in iOsmClosed) {
-                tags['closed:improveosm:' + issueType] = iOsmClosed[issueType].toString().substr(0, tagCharLimit);
+            for (itemType in iOsmClosed) {
+                tags['closed:improveosm:' + itemType] = iOsmClosed[itemType].toString().substr(0, tagCharLimit);
             }
         }
         if (services.osmose) {
             var osmoseClosed = services.osmose.getClosedCounts();
-            for (issueType in osmoseClosed) {
-                tags['closed:osmose:' + issueType] = osmoseClosed[issueType].toString().substr(0, tagCharLimit);
+            for (itemType in osmoseClosed) {
+                tags['closed:osmose:' + itemType] = osmoseClosed[itemType].toString().substr(0, tagCharLimit);
             }
         }
 

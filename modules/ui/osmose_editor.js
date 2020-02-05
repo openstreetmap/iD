@@ -12,159 +12,140 @@ import { uiTooltipHtml } from './tooltipHtml';
 
 import { utilRebind } from '../util';
 
-
 export function uiOsmoseEditor(context) {
-    var dispatch = d3_dispatch('change');
-    var errorDetails = uiOsmoseDetails(context);
-    var errorHeader = uiOsmoseHeader(context);
-    var quickLinks = uiQuickLinks();
+  const dispatch = d3_dispatch('change');
+  const qaDetails = uiOsmoseDetails(context);
+  const qaHeader = uiOsmoseHeader(context);
+  const quickLinks = uiQuickLinks();
 
-    var _error;
+  let _qaItem;
 
+  function osmoseEditor(selection) {
+    // quick links
+    const choices = [{
+      id: 'zoom_to',
+      label: 'inspector.zoom_to.title',
+      tooltip: () => uiTooltipHtml(t('inspector.zoom_to.tooltip_qaItem'), t('inspector.zoom_to.key')),
+      click: () => context.mode().zoomToSelected()
+    }];
 
-    function osmoseEditor(selection) {
-        // quick links
-        var choices = [{
-            id: 'zoom_to',
-            label: 'inspector.zoom_to.title',
-            tooltip: function() {
-                return uiTooltipHtml(t('inspector.zoom_to.tooltip_issue'), t('inspector.zoom_to.key'));
-            },
-            click: function zoomTo() {
-                context.mode().zoomToSelected();
-            }
-        }];
+    const header = selection.selectAll('.header')
+      .data([0]);
 
+    const headerEnter = header.enter()
+      .append('div')
+        .attr('class', 'header fillL');
 
-        var header = selection.selectAll('.header')
-            .data([0]);
+    headerEnter
+      .append('button')
+        .attr('class', 'fr qa-editor-close')
+        .on('click', () => context.enter(modeBrowse(context)))
+        .call(svgIcon('#iD-icon-close'));
 
-        var headerEnter = header.enter()
-            .append('div')
-            .attr('class', 'header fillL');
+    headerEnter
+      .append('h3')
+        .text(t('QA.osmose.title'));
 
-        headerEnter
-            .append('button')
-            .attr('class', 'fr error-editor-close')
-            .on('click', function() {
-                context.enter(modeBrowse(context));
-            })
-            .call(svgIcon('#iD-icon-close'));
+    let body = selection.selectAll('.body')
+      .data([0]);
 
-        headerEnter
-            .append('h3')
-            .text(t('QA.osmose.title'));
+    body = body.enter()
+        .append('div')
+        .attr('class', 'body')
+      .merge(body);
 
+    let editor = body.selectAll('.qa-editor')
+      .data([0]);
 
-        var body = selection.selectAll('.body')
-            .data([0]);
+    editor.enter()
+      .append('div')
+        .attr('class', 'modal-section qa-editor')
+      .merge(editor)
+        .call(qaHeader.issue(_qaItem))
+        .call(quickLinks.choices(choices))
+        .call(qaDetails.issue(_qaItem))
+        .call(osmoseSaveSection);
+  }
 
-        body = body.enter()
-            .append('div')
-            .attr('class', 'body')
-            .merge(body);
+  function osmoseSaveSection(selection) {
+    const isSelected = (_qaItem && _qaItem.id === context.selectedErrorID());
+    const isShown = (_qaItem && isSelected);
+    let saveSection = selection.selectAll('.qa-save')
+      .data(
+        (isShown ? [_qaItem] : []),
+        d => `${d.id}-${d.status || 0}`
+      );
 
-        var editor = body.selectAll('.error-editor')
-            .data([0]);
+    // exit
+    saveSection.exit()
+      .remove();
 
-        editor.enter()
-            .append('div')
-            .attr('class', 'modal-section error-editor')
-            .merge(editor)
-            .call(errorHeader.error(_error))
-            .call(quickLinks.choices(choices))
-            .call(errorDetails.error(_error))
-            .call(osmoseSaveSection);
-    }
+    // enter
+    const saveSectionEnter = saveSection.enter()
+      .append('div')
+        .attr('class', 'qa-save save-section cf');
 
-    function osmoseSaveSection(selection) {
-        var isSelected = (_error && _error.id === context.selectedErrorID());
-        var isShown = (_error && isSelected);
-        var saveSection = selection.selectAll('.error-save')
-            .data(
-                (isShown ? [_error] : []),
-                function(d) { return d.id + '-' + (d.status || 0); }
-            );
+    // update
+    saveSection = saveSectionEnter
+      .merge(saveSection)
+        .call(qaSaveButtons);
+  }
 
-        // exit
-        saveSection.exit()
-            .remove();
+  function qaSaveButtons(selection) {
+    const isSelected = (_qaItem && _qaItem.id === context.selectedErrorID());
+    let buttonSection = selection.selectAll('.buttons')
+      .data((isSelected ? [_qaItem] : []), d => d.status + d.id);
 
-        // enter
-        var saveSectionEnter = saveSection.enter()
-            .append('div')
-            .attr('class', 'error-save save-section cf');
+    // exit
+    buttonSection.exit()
+      .remove();
 
-        // update
-        saveSection = saveSectionEnter
-            .merge(saveSection)
-            .call(errorSaveButtons);
-    }
+    // enter
+    const buttonEnter = buttonSection.enter()
+      .append('div')
+        .attr('class', 'buttons');
 
-    function errorSaveButtons(selection) {
-        var isSelected = (_error && _error.id === context.selectedErrorID());
-        var buttonSection = selection.selectAll('.buttons')
-            .data((isSelected ? [_error] : []), function(d) { return d.status + d.id; });
+    buttonEnter
+      .append('button')
+        .attr('class', 'button close-button action');
 
-        // exit
-        buttonSection.exit()
-            .remove();
+    buttonEnter
+      .append('button')
+        .attr('class', 'button ignore-button action');
 
-        // enter
-        var buttonEnter = buttonSection.enter()
-            .append('div')
-            .attr('class', 'buttons');
+    // update
+    buttonSection = buttonSection
+      .merge(buttonEnter);
 
-        buttonEnter
-            .append('button')
-            .attr('class', 'button close-button action');
+    buttonSection.select('.close-button')
+      .text(() => t('QA.keepRight.close'))
+      .on('click.close', function(d) {
+        this.blur();    // avoid keeping focus on the button - #4641
+        const qaService = services.osmose;
+        if (qaService) {
+          d.newStatus = 'done';
+          qaService.postUpdate(d, (err, item) => dispatch.call('change', item));
+        }
+      });
 
-        buttonEnter
-            .append('button')
-            .attr('class', 'button ignore-button action');
+    buttonSection.select('.ignore-button')
+      .text(() => t('QA.keepRight.ignore'))
+      .on('click.ignore', function(d) {
+        this.blur();    // avoid keeping focus on the button - #4641
+        const qaService = services.osmose;
+        if (qaService) {
+          d.newStatus = 'false';
+          qaService.postUpdate(d, (err, item) => dispatch.call('change', item));
+        }
+      });
+  }
 
+  // NOTE: Don't change method name until UI v3 is merged
+  osmoseEditor.error = function(val) {
+    if (!arguments.length) return _qaItem;
+    _qaItem = val;
+    return osmoseEditor;
+  };
 
-        // update
-        buttonSection = buttonSection
-            .merge(buttonEnter);
-
-        buttonSection.select('.close-button')
-            .text(function() {
-                return t('QA.keepRight.close');
-            })
-            .on('click.close', function(d) {
-                this.blur();    // avoid keeping focus on the button - #4641
-                var errorService = services.osmose;
-                if (errorService) {
-                    d.newStatus = 'done';
-                    errorService.postUpdate(d, function(err, error) {
-                        dispatch.call('change', error);
-                    });
-                }
-            });
-
-        buttonSection.select('.ignore-button')
-            .text(function() {
-                return t('QA.keepRight.ignore');
-            })
-            .on('click.ignore', function(d) {
-                this.blur();    // avoid keeping focus on the button - #4641
-                var errorService = services.osmose;
-                if (errorService) {
-                    d.newStatus = 'false';
-                    errorService.postUpdate(d, function(err, error) {
-                        dispatch.call('change', error);
-                    });
-                }
-            });
-    }
-
-    osmoseEditor.error = function(val) {
-        if (!arguments.length) return _error;
-        _error = val;
-        return osmoseEditor;
-    };
-
-
-    return utilRebind(osmoseEditor, dispatch, 'on');
+  return utilRebind(osmoseEditor, dispatch, 'on');
 }

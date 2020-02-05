@@ -4,68 +4,61 @@ import { t } from '../util/locale';
 
 
 export function uiKeepRightHeader() {
-    var _error;
+  let _qaItem;
 
+  function issueTitle(d) {
+    const unknown = t('inspector.unknown');
 
-    function errorTitle(d) {
-        var unknown = t('inspector.unknown');
+    if (!d) return unknown;
+    const { itemType, parentIssueType } = d;
 
-        if (!d) return unknown;
-        var errorType = d.error_type;
-        var parentErrorType = d.parent_error_type;
+    const et = dataEn.QA.keepRight.errorTypes[itemType];
+    const pt = dataEn.QA.keepRight.errorTypes[parentIssueType];
 
-        var et = dataEn.QA.keepRight.errorTypes[errorType];
-        var pt = dataEn.QA.keepRight.errorTypes[parentErrorType];
-
-        if (et && et.title) {
-            return t('QA.keepRight.errorTypes.' + errorType + '.title');
-        } else if (pt && pt.title) {
-            return t('QA.keepRight.errorTypes.' + parentErrorType + '.title');
-        } else {
-            return unknown;
-        }
+    if (et && et.title) {
+      return t(`QA.keepRight.errorTypes.${itemType}.title`);
+    } else if (pt && pt.title) {
+      return t(`QA.keepRight.errorTypes.${parentIssueType}.title`);
+    } else {
+      return unknown;
     }
+  }
 
+  function keepRightHeader(selection) {
+    const header = selection.selectAll('.qa-header')
+      .data(
+        (_qaItem ? [_qaItem] : []),
+        d => `${d.id}-${d.status || 0}`
+      );
 
-    function keepRightHeader(selection) {
-        var header = selection.selectAll('.error-header')
-            .data(
-                (_error ? [_error] : []),
-                function(d) { return d.id + '-' + (d.status || 0); }
-            );
+    header.exit()
+      .remove();
 
-        header.exit()
-            .remove();
+    const headerEnter = header.enter()
+      .append('div')
+        .attr('class', 'qa-header');
 
-        var headerEnter = header.enter()
-            .append('div')
-            .attr('class', 'error-header');
+    const iconEnter = headerEnter
+      .append('div')
+        .attr('class', 'qa-header-icon')
+        .classed('new', d => d.id < 0);
 
-        var iconEnter = headerEnter
-            .append('div')
-            .attr('class', 'error-header-icon')
-            .classed('new', function(d) { return d.id < 0; });
+    iconEnter
+      .append('div')
+        .attr('class', d => `preset-icon-28 qaItem ${d.service} itemId-${d.id} itemType-${d.parentIssueType}`)
+        .call(svgIcon('#iD-icon-bolt', 'qaItem-fill'));
 
-        iconEnter
-            .append('div')
-            .attr('class', function(d) {
-                return 'preset-icon-28 qa_error ' + d.service + ' error_id-' + d.id + ' error_type-' + d.parent_error_type;
-            })
-            .call(svgIcon('#iD-icon-bolt', 'qa_error-fill'));
+    headerEnter
+      .append('div')
+        .attr('class', 'qa-header-label')
+        .text(issueTitle);
+  }
 
-        headerEnter
-            .append('div')
-            .attr('class', 'error-header-label')
-            .text(errorTitle);
-    }
-
-
-    keepRightHeader.error = function(val) {
-        if (!arguments.length) return _error;
-        _error = val;
-        return keepRightHeader;
-    };
-
-
+  keepRightHeader.issue = val => {
+    if (!arguments.length) return _qaItem;
+    _qaItem = val;
     return keepRightHeader;
+  };
+
+  return keepRightHeader;
 }
