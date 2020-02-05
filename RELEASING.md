@@ -38,7 +38,7 @@ $  git push origin 2.x
 $  git checkout release
 $  git reset --hard 2.x
 $  npm run all
-$  git add -f dist/*.css dist/*.js dist/img/*.svg dist/mapillary-js/ dist/pannellum-streetside/
+$  git add -f dist/*.css dist/*.js dist/data/* dist/img/*.svg dist/mapillary-js/ dist/pannellum-streetside/
 $  git commit -m 'Check in build'
 $  git tag vA.B.C
 $  git push origin -f release vA.B.C
