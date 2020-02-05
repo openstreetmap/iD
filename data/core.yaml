@@ -85,17 +85,29 @@ en:
     circularize:
       title: Circularize
       description:
-        line: Make this line circular.
-        area: Make this area circular.
+        single: Make this feature circular.
+        multiple: Make these features circular.
       key: O
       annotation:
-        line: Made a line circular.
-        area: Made an area circular.
-      not_closed: This can't be made circular because it's not a loop.
-      too_large: This can't be made circular because not enough of it is currently visible.
-      connected_to_hidden: This can't be made circular because it is connected to a hidden feature.
-      not_downloaded: This can't be made circular because parts of it have not yet been downloaded.
-      already_circular: This can't be made circular because it's already circular.
+        single: Made a feature circular.
+        multiple: Made features circular.
+      multiple_blockers:
+        multiple: These can't be made circular for multiple reasons.
+      not_closed:
+        single: This can't be made circular because it's not a loop.
+        multiple: These can't be made circular because they aren't loops.
+      too_large:
+        single: This can't be made circular because not enough of it is currently visible.
+        multiple: These can't be made circular because not enough of them are currently visible.
+      connected_to_hidden:
+        single: This can't be made circular because it is connected to a hidden feature.
+        multiple: These can't be made circular because some are connected to hidden features.
+      not_downloaded:
+        single: This can't be made circular because parts of it have not yet been downloaded.
+        multiple: These can't be made circular because parts of them have not yet been downloaded.
+      already_circular:
+        single: This can't be made more circular than it already is.
+        multiple: These can't be made more circular than they already are.
     orthogonalize:
       title: Square
       description:
