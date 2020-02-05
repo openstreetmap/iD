@@ -138,6 +138,7 @@
     "entrance": {"key": "entrance", "type": "typeCombo", "label": "Type"},
     "except": {"key": "except", "type": "combo", "label": "Exceptions"},
     "faces": {"key": "faces", "type": "number", "minValue": 0, "label": "Faces"},
+    "facility": {"key": "facility", "type": "multiCombo", "label": "Facilities", "strings": {"options": {"foot": "Foot", "arm": "Arm", "face": "Face"}}},
     "fax": {"key": "fax", "type": "tel", "label": "Fax", "placeholder": "+31 42 123 4567"},
     "fee": {"key": "fee", "type": "check", "label": "Fee"},
     "fence_type": {"key": "fence_type", "type": "combo", "label": "Type"},

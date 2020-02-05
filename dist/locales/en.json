@@ -3249,6 +3249,14 @@
                 "faces": {
                     "label": "Faces"
                 },
+                "facility": {
+                    "label": "Facilities",
+                    "options": {
+                        "foot": "Foot",
+                        "arm": "Arm",
+                        "face": "Face"
+                    }
+                },
                 "fax": {
                     "label": "Fax",
                     "terms": "",
@@ -5320,6 +5328,10 @@
                 "amenity/kindergarten": {
                     "name": "Preschool/Kindergarten Grounds",
                     "terms": "kindergarden,pre-school"
+                },
+                "amenity/kneipp_water_cure": {
+                    "name": "Kneipp Water Cure",
+                    "terms": ""
                 },
                 "amenity/language_school": {
                     "name": "Language School",
@@ -9919,7 +9931,7 @@
             },
             "MAPNIK": {
                 "attribution": {
-                    "text": "© OpenStreetMap contributors, CC-BY-SA"
+                    "text": "© OpenStreetMap contributors, CC-BY-SA 2.0"
                 },
                 "description": "The default OpenStreetMap layer.",
                 "name": "OpenStreetMap (Standard)"
@@ -10117,6 +10129,13 @@
                 },
                 "description": "GSI Kiban 2500 via finds.jp. Good for tracing, but a bit older.",
                 "name": "Japan GSI KIBAN 2500"
+            },
+            "gothenburg-citymap": {
+                "attribution": {
+                    "text": "© Gothenburg municipality, CC0"
+                },
+                "description": "The city map is an overview map that describes Gothenburg. It contains general information about land, communications, hydrography, buildings, address numbers and street names, administrative division and other orientation text.",
+                "name": "Gothenburg City map"
             },
             "gsi.go.jp": {
                 "attribution": {

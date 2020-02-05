@@ -1,0 +1,13 @@
+{
+    "key": "facility",
+    "type": "multiCombo",
+    "label": "Facilities",
+    "strings": {
+        "options": {
+            "foot": "Foot",
+            "arm": "Arm",
+            "face": "Face"
+            
+        }
+    }
+}
