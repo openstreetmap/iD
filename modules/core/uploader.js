@@ -28,12 +28,6 @@ export function coreUploader(context) {
 
     var _isSaving = false;
 
-    var _toCheck = [];
-    var _toLoad = [];
-    var _loaded = {};
-    var _toLoadCount = 0;
-    var _toLoadTotal = 0;
-
     var _conflicts = [];
     var _errors = [];
     var _origChanges;
@@ -56,9 +50,7 @@ export function coreUploader(context) {
         }
 
         var osm = context.connection();
-        if (!osm) {
-            return;
-        }
+        if (!osm) return;
 
         // If user somehow got logged out mid-save, try to reauthenticate..
         // This can happen if they were logged in from before, but the tokens are no longer valid.
@@ -77,8 +69,6 @@ export function coreUploader(context) {
         }
 
         var history = context.history();
-        var localGraph = context.graph();
-        var remoteGraph = coreGraph(history.base(), true);
 
         _conflicts = [];
         _errors = [];
@@ -88,6 +78,7 @@ export function coreUploader(context) {
 
         // First time, `history.perform` a no-op action.
         // Any conflict resolutions will be done as `history.replace`
+        // Remember to pop this later if needed
         if (!tryAgain) {
             history.perform(actionNoop());
         }
@@ -98,31 +89,45 @@ export function coreUploader(context) {
 
         // Do the full (slow) conflict check..
         } else {
-            var summary = history.difference().summary();
-            _toCheck = [];
-            for (var i = 0; i < summary.length; i++) {
-                var item = summary[i];
-                if (item.changeType === 'modified') {
-                    _toCheck.push(item.entity.id);
-                }
-            }
+            performFullConflictCheck(changeset);
+        }
 
-            _toLoad = withChildNodes(_toCheck, localGraph);
-            _loaded = {};
-            _toLoadCount = 0;
-            _toLoadTotal = _toLoad.length;
+    };
 
-            if (_toCheck.length) {
-                dispatch.call('progressChanged', this, _toLoadCount, _toLoadTotal);
-                _toLoad.forEach(function(id) { _loaded[id] = false; });
-                osm.loadMultiple(_toLoad, loaded);
-            } else {
-                upload(changeset);
+
+    function performFullConflictCheck(changeset) {
+
+        var osm = context.connection();
+        if (!osm) return;
+
+        var history = context.history();
+
+        var localGraph = context.graph();
+        var remoteGraph = coreGraph(history.base(), true);
+
+        var summary = history.difference().summary();
+        var _toCheck = [];
+        for (var i = 0; i < summary.length; i++) {
+            var item = summary[i];
+            if (item.changeType === 'modified') {
+                _toCheck.push(item.entity.id);
             }
         }
 
-        return;
+        var _toLoad = withChildNodes(_toCheck, localGraph);
+        var _loaded = {};
+        var _toLoadCount = 0;
+        var _toLoadTotal = _toLoad.length;
 
+        if (_toCheck.length) {
+            dispatch.call('progressChanged', this, _toLoadCount, _toLoadTotal);
+            _toLoad.forEach(function(id) { _loaded[id] = false; });
+            osm.loadMultiple(_toLoad, loaded);
+        } else {
+            upload(changeset);
+        }
+
+        return;
 
         function withChildNodes(ids, graph) {
             var s = new Set(ids);
@@ -150,7 +155,7 @@ export function coreUploader(context) {
                     msg: err.message || err.responseText,
                     details: [ t('save.status_code', { code: err.status }) ]
                 });
-                hasErrors();
+                didResultInErrors();
 
             } else {
                 var loadMore = [];
@@ -195,6 +200,7 @@ export function coreUploader(context) {
 
                 if (!_toLoad.length) {
                     detectConflicts();
+                    upload(changeset);
                 }
             }
         }
@@ -261,10 +267,8 @@ export function coreUploader(context) {
                     ]
                 });
             });
-
-            upload(changeset);
         }
-    };
+    }
 
 
     function upload(changeset) {
@@ -274,31 +278,23 @@ export function coreUploader(context) {
         }
 
         if (_conflicts.length) {
-
-            _conflicts.sort(function(a, b) { return b.id.localeCompare(a.id); });
-
-            dispatch.call('resultConflicts', this, changeset, _conflicts, _origChanges);
-
-            endSave();
+            didResultInConflicts(changeset);
 
         } else if (_errors.length) {
-            hasErrors();
+            didResultInErrors();
 
         } else {
             var history = context.history();
             var changes = history.changes(actionDiscardTags(history.difference(), _discardTags));
             if (changes.modified.length || changes.created.length || changes.deleted.length) {
-                // fire off some async work that we want to be ready later
+
                 dispatch.call('willAttemptUpload', this);
+
                 osm.putChangeset(changeset, changes, uploadCallback);
-            } else {        // changes were insignificant or reverted by user
 
-                dispatch.call('resultNoChanges', this);
-
-                endSave();
-
-                // reset iD
-                context.flush();
+            } else {
+                // changes were insignificant or reverted by user
+                didResultInNoChanges();
             }
         }
     }
@@ -306,37 +302,64 @@ export function coreUploader(context) {
 
     function uploadCallback(err, changeset) {
         if (err) {
-            if (err.status === 409) {          // 409 Conflict
-                uploader.save(changeset, true, true);   // tryAgain = true, checkConflicts = true
+            if (err.status === 409) {  // 409 Conflict
+                uploader.save(changeset, true, true);  // tryAgain = true, checkConflicts = true
             } else {
                 _errors.push({
                     msg: err.message || err.responseText,
                     details: [ t('save.status_code', { code: err.status }) ]
                 });
-                hasErrors();
+                didResultInErrors();
             }
 
         } else {
-            context.history().clearSaved();
-            dispatch.call('resultSuccess', this, changeset);
-            // Add delay to allow for postgres replication #1646 #2678
-            window.setTimeout(function() {
-                endSave();
-
-                // reset iD
-                context.flush();
-            }, 2500);
+            didResultInSuccess(changeset);
         }
     }
 
+    function didResultInNoChanges() {
 
-    function hasErrors() {
+        dispatch.call('resultNoChanges', this);
+
+        endSave();
+
+        context.flush(); // reset iD
+    }
+
+    function didResultInErrors() {
 
         context.history().pop();
 
         dispatch.call('resultErrors', this, _errors);
 
         endSave();
+    }
+
+
+    function didResultInConflicts(changeset) {
+
+        _conflicts.sort(function(a, b) { return b.id.localeCompare(a.id); });
+
+        dispatch.call('resultConflicts', this, changeset, _conflicts, _origChanges);
+
+        endSave();
+    }
+
+
+    function didResultInSuccess(changeset) {
+
+        // delete the edit stack cached to local storage
+        context.history().clearSaved();
+
+        dispatch.call('resultSuccess', this, changeset);
+
+        // Add delay to allow for postgres replication #1646 #2678
+        window.setTimeout(function() {
+
+            endSave();
+
+            context.flush(); // reset iD
+        }, 2500);
     }
 
 
@@ -356,7 +379,7 @@ export function coreUploader(context) {
         var history = context.history();
 
         for (var i = 0; i < _conflicts.length; i++) {
-            if (_conflicts[i].chosen === 1) {  // user chose "keep theirs"
+            if (_conflicts[i].chosen === 1) {  // user chose "use theirs"
                 var entity = context.hasEntity(_conflicts[i].id);
                 if (entity && entity.type === 'way') {
                     var children = utilArrayUniq(entity.nodes);

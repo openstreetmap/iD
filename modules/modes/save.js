@@ -25,6 +25,7 @@ export function modeSave(context) {
         .on('saveStarted.modeSave', function() {
             keybindingOff();
         })
+        // fire off some async work that we want to be ready later
         .on('willAttemptUpload.modeSave', prepareForSuccess)
         .on('progressChanged.modeSave', showProgress)
         .on('resultNoChanges.modeSave', function() {
@@ -73,7 +74,7 @@ export function modeSave(context) {
             .origChanges(origChanges)
             .on('cancel', function() {
                 context.container().selectAll('#content')
-                    .attr('class', 'inactive')
+                    .attr('class', 'inactive');
                 selection.remove();
                 keybindingOn();
 
