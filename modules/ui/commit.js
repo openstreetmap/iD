@@ -38,7 +38,7 @@ var hashtagRegex = /(#[^\u2000-\u206F\u2E00-\u2E7F\s\\'!"#$%()*,.\/:;<=>?@\[\]^`
 
 
 export function uiCommit(context) {
-    var dispatch = d3_dispatch('cancel', 'save');
+    var dispatch = d3_dispatch('cancel');
     var _userDetails;
     var _selection;
 
@@ -372,7 +372,7 @@ export function uiCommit(context) {
             .on('click.save', function() {
                 if (!d3_select(this).classed('disabled')) {
                     this.blur();    // avoid keeping focus on the button - #4641
-                    dispatch.call('save', this, _changeset);
+                    context.uploader().save(_changeset);
                 }
             });
 

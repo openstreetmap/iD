@@ -484,5 +484,20 @@ export function uiInit(context) {
         }
     };
 
+
+    var _saveLoading = d3_select(null);
+
+    context.uploader()
+        .on('saveStarted.ui', function() {
+            _saveLoading = uiLoading(context)
+                .message(t('save.uploading'))
+                .blocking(true);
+            context.container().call(_saveLoading);  // block input during upload
+        })
+        .on('saveEnded.ui', function() {
+            _saveLoading.close();
+            _saveLoading = d3_select(null);
+        });
+
     return ui;
 }

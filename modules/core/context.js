@@ -9,6 +9,7 @@ import { t, currentLocale, addTranslation, setLocale } from '../util/locale';
 import { coreData } from './data';
 import { coreHistory } from './history';
 import { coreValidator } from './validator';
+import { coreUploader } from './uploader';
 import { dataLocales, dataEn } from '../../data';
 import { geoRawMercator } from '../geo/raw_mercator';
 import { modeSelect } from '../modes/select';
@@ -96,10 +97,12 @@ export function coreContext() {
   let _data;
   let _history;
   let _validator;
+  let _uploader;
   context.connection = () => _connection;
   context.data = () => _data;
   context.history = () => _history;
   context.validator = () => _validator;
+  context.uploader = () => _uploader;
 
   /* Connection */
   context.preauth = (options) => {
@@ -466,6 +469,10 @@ export function coreContext() {
     _validator.reset();
     _features.reset();
     _history.reset();
+    _uploader.reset();
+
+    // don't leave stale state in the inspector
+    d3_select('.inspector-wrap *').remove();
 
     return context;
   };
@@ -484,6 +491,7 @@ export function coreContext() {
     _data = coreData(context);
     _history = coreHistory(context);
     _validator = coreValidator(context);
+    _uploader = coreUploader(context);
 
     context.graph = _history.graph;
     context.changes = _history.changes;
