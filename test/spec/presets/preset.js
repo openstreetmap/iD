@@ -97,15 +97,15 @@ describe('iD.presetPreset', function() {
     });
 
     describe('#setTags', function() {
-        var savedAreaKeys;
+        var _savedAreaKeys;
 
         before(function () {
-            savedAreaKeys = iD.areaKeys;
-            iD.setAreaKeys({ building: {}, natural: {} });
+            _savedAreaKeys = iD.osmAreaKeys;
+            iD.osmSetAreaKeys({ building: {}, natural: {} });
         });
 
         after(function () {
-            iD.setAreaKeys(savedAreaKeys);
+            iD.osmSetAreaKeys(_savedAreaKeys);
         });
 
         it('adds match tags', function() {

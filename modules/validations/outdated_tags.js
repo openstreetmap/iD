@@ -56,6 +56,7 @@ export function validationOutdatedTags(context) {
     const oldTags = Object.assign({}, entity.tags);  // shallow copy
     let preset = context.presets().match(entity, graph);
     let subtype = 'deprecated_tags';
+    if (!preset) return [];
 
     // upgrade preset..
     if (preset.replacement) {

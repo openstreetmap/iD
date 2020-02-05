@@ -7,18 +7,30 @@ iD.data.imagery = [];
 for (var k in iD.services) { delete iD.services[k]; }
 
 // run with a minimal set of presets for speed
-iD.data.presets = {
-    presets: {
-        area: { name: 'Area', tags: {}, geometry: ['area'] },
-        line: { name: 'Line', tags: {}, geometry: ['line'] },
-        point: { name: 'Point', tags: {}, geometry: ['point'] },
-        vertex: { name: 'Vertex', tags: {}, geometry: ['vertex'] },
-        relation: { name: 'Relation', tags: {}, geometry: ['relation'] },
-        // for tests related to areaKeys:
-        building: { name: 'Building', tags: { building: 'yes' }, geometry: ['point', 'area'] },
-        man_made: { name: 'Man Made', tags: { man_made: '*' }, geometry: ['vertex', 'point', 'line', 'area'] }
-    }
+// iD.data.presets = {
+//     presets: {
+//         area: { name: 'Area', tags: {}, geometry: ['area'] },
+//         line: { name: 'Line', tags: {}, geometry: ['line'] },
+//         point: { name: 'Point', tags: {}, geometry: ['point'] },
+//         vertex: { name: 'Vertex', tags: {}, geometry: ['vertex'] },
+//         relation: { name: 'Relation', tags: {}, geometry: ['relation'] },
+//         // for tests related to areaKeys:
+//         building: { name: 'Building', tags: { building: 'yes' }, geometry: ['point', 'area'] },
+//         man_made: { name: 'Man Made', tags: { man_made: '*' }, geometry: ['vertex', 'point', 'line', 'area'] }
+//     }
+// };
+
+iD.data.preset_categories = {};
+iD.data.preset_defaults = {};
+iD.data.preset_fields = {};
+iD.data.preset_presets = {
+    area: { name: 'Area', tags: {}, geometry: ['area'] },
+    line: { name: 'Line', tags: {}, geometry: ['line'] },
+    point: { name: 'Point', tags: {}, geometry: ['point'] },
+    vertex: { name: 'Vertex', tags: {}, geometry: ['vertex'] },
+    relation: { name: 'Relation', tags: {}, geometry: ['relation'] }
 };
+
 
 // creating `coreContext` creates validators and some of the validators try loading these
 iD.data.deprecated = [];
