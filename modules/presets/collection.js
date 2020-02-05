@@ -1,14 +1,23 @@
 import { utilArrayUniq, utilEditDistance } from '../util';
 
 
+//
+// `presetCollection` is a wrapper around an `Array` of presets `collection`,
+// and decorated with some extra methods for searching and matching geometry
+//
 export function presetCollection(collection) {
   const MAXRESULTS = 50;
-
   let _this = {};
+  let _memo = {};
 
   _this.collection = collection;
 
-  _this.item = (id) => _this.collection.find(d => d.id === id);
+  _this.item = (id) => {
+    if (_memo[id]) return _memo[id];
+    const found = _this.collection.find(d => d.id === id);
+    if (found) _memo[id] = found;
+    return found;
+  };
 
   _this.index = (id) => _this.collection.findIndex(d => d.id === id);
 
@@ -19,16 +28,15 @@ export function presetCollection(collection) {
   };
 
   _this.matchAllGeometry = (geometries) => {
-    return presetCollection(_this.collection.filter(d => {
-      if (!d) return false;
-      return d.matchAllGeometry(geometries);
-    }));
+    return presetCollection(
+      _this.collection.filter(d => d && d.matchAllGeometry(geometries))
+    );
   };
 
   _this.matchAnyGeometry = (geometries) => {
-    return presetCollection(_this.collection.filter(d => {
-      return geometries.some(geom => d.matchGeometry(geom));
-    }));
+    return presetCollection(
+      _this.collection.filter(d => geometries.some(geom => d.matchGeometry(geom)))
+    );
   };
 
   _this.fallback = (geometry) => {
@@ -38,7 +46,7 @@ export function presetCollection(collection) {
   };
 
   _this.search = (value, geometry, countryCode) => {
-    if (!value) return this;
+    if (!value) return _this;
 
     value = value.toLowerCase().trim();
 

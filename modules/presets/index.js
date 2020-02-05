@@ -15,8 +15,10 @@ export { presetField };
 export { presetPreset };
 
 
-// wraps a presetCollection with methods for
-// loading new data and returning defaults
+//
+// `presetIndex` wraps a `presetCollection`
+// with methods for loading new data and returning defaults
+//
 export function presetIndex(context) {
   const dispatch = d3_dispatch('recentsChange');
   const MAXRECENTS = 30;

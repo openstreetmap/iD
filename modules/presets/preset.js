@@ -95,9 +95,7 @@ export function presetPreset(presetID, preset, fields, addable, rawPresets) {
 
   _this.matchGeometry = (geom) => _this.geometry.indexOf(geom) >= 0;
 
-  _this.matchAllGeometry = (geometries) => {
-    return geometries.every(geom => _this.geometry.indexOf(geom) >= 0);
-  };
+  _this.matchAllGeometry = (geoms) => geoms.every(_this.matchGeometry);
 
   _this.originalScore = _this.matchScore || 1;
 

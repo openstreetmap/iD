@@ -16,6 +16,18 @@ describe('iD.presetPreset', function() {
         });
     });
 
+    describe('#matchAllGeometry', function() {
+        it('returns false if they don\'t all match', function() {
+            var preset = iD.presetPreset('test', {geometry: ['line']});
+            expect(preset.matchAllGeometry(['point','line'])).to.equal(false);
+        });
+
+        it('returns true if they do all match', function() {
+            var preset = iD.presetPreset('test', {geometry: ['point', 'line']});
+            expect(preset.matchAllGeometry(['point','line'])).to.equal(true);
+        });
+    });
+
     describe('#matchScore', function() {
         it('returns -1 if preset does not match tags', function() {
             var preset = iD.presetPreset('test', {tags: {foo: 'bar'}});
