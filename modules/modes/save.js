@@ -65,16 +65,23 @@ export function modeSave(context) {
             .append('div')
             .attr('class','sidebar-component');
 
+        context.container().selectAll('#content')
+            .attr('class', 'active');
+
         var ui = uiConflicts(context)
             .conflictList(conflicts)
             .origChanges(origChanges)
             .on('cancel', function() {
+                context.container().selectAll('#content')
+                    .attr('class', 'inactive')
                 selection.remove();
                 keybindingOn();
 
                 uploader.cancelConflictResolution();
             })
             .on('save', function() {
+                context.container().selectAll('#content')
+                    .attr('class', 'inactive');
                 selection.remove();
 
                 uploader.processResolvedConflicts(changeset);
