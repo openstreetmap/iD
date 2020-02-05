@@ -1,7 +1,6 @@
 import { dispatch as d3_dispatch } from 'd3-dispatch';
-import { json as d3_json } from 'd3-fetch';
+// import { json as d3_json } from 'd3-fetch';
 
-import { data } from '../../data/index';
 import { osmNodeGeometriesForTags } from '../osm/tags';
 import { presetCategory } from './category';
 import { presetCollection } from './collection';
@@ -24,13 +23,21 @@ export function presetIndex(context) {
   const MAXRECENTS = 30;
   let _presetData;
 
-  let _this = presetCollection([]);  // collection of all presets
+  // seed the preset lists with geometry fallbacks
+  const POINT = presetPreset('point', { name: 'Point', tags: {}, geometry: ['point'], matchScore: 0.1 } );
+  const VERTEX = presetPreset('vertex', { name: 'Point', tags: {}, geometry: ['vertex'], matchScore: 0.1 } );
+  const LINE = presetPreset('line', { name: 'Line', tags: {}, geometry: ['line'], matchScore: 0.1 } );
+  const AREA = presetPreset('area', { name: 'Area', tags: { area: 'yes' }, geometry: ['area'], matchScore: 0.1 } );
+  const RELATION = presetPreset('relation', { name: 'Relation', tags: {}, geometry: ['relation'], matchScore: 0.1 } );
+  const FALLBACKS = [POINT, VERTEX, LINE, AREA, RELATION];
+
+  let _this = presetCollection(FALLBACKS);
   let _defaults = {
-    point: presetCollection([]),
-    vertex: presetCollection([]),
-    line: presetCollection([]),
-    area: presetCollection([]),
-    relation: presetCollection([])
+    point: presetCollection([POINT]),
+    vertex: presetCollection([VERTEX]),
+    line: presetCollection([LINE]),
+    area: presetCollection([AREA]),
+    relation: presetCollection([RELATION])
   };
 
   let _fields = {};
@@ -39,7 +46,7 @@ export function presetIndex(context) {
   // let _addablePresetIDs;    // presets that the user can add
 
   // Index of presets by (geometry, tag key).
-  let _index = { point: {}, vertex: {}, line: {}, area: {}, relation: {} };
+  let _geometryIndex = { point: {}, vertex: {}, line: {}, area: {}, relation: {} };
 
 
   function ensurePresetData() {
@@ -66,11 +73,6 @@ export function presetIndex(context) {
   // _this.init = (addablePresetIDs) => {
   _this.init = () => {
     // _addablePresetIDs = addablePresetIDs;
-    _this.collection = [];
-    _recents = null;
-    _fields = {};
-    _universal = [];
-    _index = { point: {}, vertex: {}, line: {}, area: {}, relation: {} };
 
     // let addable = true;
     // if (addablePresetIDs) {
@@ -83,23 +85,23 @@ export function presetIndex(context) {
   };
 
 
-  _this.reset = () => {
-    _defaults = {
-      point: presetCollection([]),
-      vertex: presetCollection([]),
-      line: presetCollection([]),
-      area: presetCollection([]),
-      relation: presetCollection([])
-    };
+  // _this.reset = () => {
+  //   _defaults = {
+  //     point: presetCollection([]),
+  //     vertex: presetCollection([]),
+  //     line: presetCollection([]),
+  //     area: presetCollection([]),
+  //     relation: presetCollection([])
+  //   };
 
-    _this.collection = [];
-    _recents = null;
-    _fields = {};
-    _universal = [];
-    _index = { point: {}, vertex: {}, line: {}, area: {}, relation: {} };
+  //   _this.collection = [];
+  //   _recents = null;
+  //   _fields = {};
+  //   _universal = [];
+  //   _geometryIndex = { point: {}, vertex: {}, line: {}, area: {}, relation: {} };
 
-    return _this;
-  };
+  //   return _this;
+  // };
 
 
   // _this.fromExternal = (external, done) => {
@@ -176,7 +178,7 @@ export function presetIndex(context) {
       const geometry = preset.geometry;
 
       for (let j = 0; j < geometry.length; j++) {
-        let g = _index[geometry[j]];
+        let g = _geometryIndex[geometry[j]];
         for (let k in preset.tags) {
           (g[k] = g[k] || []).push(preset);
         }
@@ -199,7 +201,7 @@ export function presetIndex(context) {
 
 
   _this.matchTags = (tags, geometry) => {
-    const geometryMatches = _index[geometry];
+    const geometryMatches = _geometryIndex[geometry];
     let address;
     let best = -1;
     let match;
