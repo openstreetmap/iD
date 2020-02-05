@@ -56,22 +56,17 @@ export function operationCircularize(selectedIDs, context) {
     operation.disabled = function() {
         if (!_actions.length) return '';
 
-        var actionDisabled;
-        var actionDisableds = {};
+        var actionDisableds = _actions.map(function(action) {
+            return action.disabled(context.graph());
+        }).filter(Boolean);
 
-        if (_actions.every(function(action) {
-            var disabled = action.disabled(context.graph());
-            if (disabled) actionDisableds[disabled] = true;
-            return disabled;
-        })) {
-            actionDisabled = _actions[0].disabled(context.graph());
-        }
+        if (actionDisableds.length === _actions.length) {
+            // none of the features can be circularized
 
-        if (actionDisabled) {
-            if (Object.keys(actionDisableds).length > 1) {
+            if (new Set(actionDisableds).size > 1) {
                 return 'multiple_blockers';
             }
-            return actionDisabled;
+            return actionDisableds[0];
         } else if (_extent.percentContainedIn(context.extent()) < 0.8) {
             return 'too_large';
         } else if (someMissing()) {
