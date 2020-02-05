@@ -357,15 +357,24 @@ export function modeSave(context) {
         loading.close();
         _isSaving = false;
 
+        context.container().selectAll('#content')
+            .attr('class', 'active');
+
         var ui = uiConflicts(context)
             .conflictList(_conflicts)
             .origChanges(_origChanges)
             .on('cancel', function() {
+                context.container().selectAll('#content')
+                    .attr('class', 'inactive');
+
                 history.pop();
                 selection.remove();
                 keybindingOn();
             })
             .on('save', function() {
+                context.container().selectAll('#content')
+                    .attr('class', 'inactive');
+
                 for (var i = 0; i < _conflicts.length; i++) {
                     if (_conflicts[i].chosen === 1) {  // user chose "keep theirs"
                         var entity = context.hasEntity(_conflicts[i].id);
