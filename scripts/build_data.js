@@ -106,9 +106,9 @@ function buildData() {
 
   // Save individual data files
   let tasks = [
-    writeFileProm('data/presets/categories.json', prettyStringify(categories) ),
-    writeFileProm('data/presets/fields.json', prettyStringify({ fields: fields }, { maxLength: 9999 }) ),
-    writeFileProm('data/presets/presets.json', prettyStringify({ presets: presets }, { maxLength: 9999 }) ),
+    writeFileProm('data/presets/categories.json', prettyStringify(categories, { maxLength: 9999 }) ),
+    writeFileProm('data/presets/fields.json', prettyStringify(fields, { maxLength: 9999 }) ),
+    writeFileProm('data/presets/presets.json', prettyStringify(presets, { maxLength: 9999 }) ),
     writeFileProm('data/presets.yaml', translationsToYAML(translations) ),
     writeFileProm('data/taginfo.json', prettyStringify(taginfo, { maxLength: 9999 }) ),
     writeFileProm('data/territory_languages.json', prettyStringify(territoryLanguages, { maxLength: 9999 }) ),
