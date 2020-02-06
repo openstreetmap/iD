@@ -1,5 +1,4 @@
 import { dispatch as d3_dispatch } from 'd3-dispatch';
-// import { json as d3_json } from 'd3-fetch';
 
 import { osmNodeGeometriesForTags } from '../osm/tags';
 import { presetCategory } from './category';
@@ -29,9 +28,10 @@ export function presetIndex(context) {
   const LINE = presetPreset('line', { name: 'Line', tags: {}, geometry: ['line'], matchScore: 0.1 } );
   const AREA = presetPreset('area', { name: 'Area', tags: { area: 'yes' }, geometry: ['area'], matchScore: 0.1 } );
   const RELATION = presetPreset('relation', { name: 'Relation', tags: {}, geometry: ['relation'], matchScore: 0.1 } );
-  const FALLBACKS = [POINT, VERTEX, LINE, AREA, RELATION];
 
-  let _this = presetCollection(FALLBACKS);
+  let _this = presetCollection([POINT, VERTEX, LINE, AREA, RELATION]);
+  let _presets = { point: POINT, vertex: VERTEX, line: LINE, area: AREA, relation: RELATION };
+
   let _defaults = {
     point: presetCollection([POINT]),
     vertex: presetCollection([VERTEX]),
@@ -41,9 +41,10 @@ export function presetIndex(context) {
   };
 
   let _fields = {};
+  let _categories = {};
   let _universal = [];
   let _recents;
-  // let _addablePresetIDs;    // presets that the user can add
+  let _addablePresetIDs;    // presets that the user can add
 
   // Index of presets by (geometry, tag key).
   let _geometryIndex = { point: {}, vertex: {}, line: {}, area: {}, relation: {} };
@@ -70,120 +71,87 @@ export function presetIndex(context) {
   }
 
 
-  // _this.init = (addablePresetIDs) => {
   _this.init = () => {
-    // _addablePresetIDs = addablePresetIDs;
-
-    // let addable = true;
-    // if (addablePresetIDs) {
-    //   addable = (presetID) => addablePresetIDs.indexOf(presetID) !== -1;
-    // }
-    // return _this.build(d, addable);
-
     return ensurePresetData()
-      .then(d => _this.build(d));
+      .then(_this.merge);
   };
 
 
-  // _this.reset = () => {
-  //   _defaults = {
-  //     point: presetCollection([]),
-  //     vertex: presetCollection([]),
-  //     line: presetCollection([]),
-  //     area: presetCollection([]),
-  //     relation: presetCollection([])
-  //   };
-
-  //   _this.collection = [];
-  //   _recents = null;
-  //   _fields = {};
-  //   _universal = [];
-  //   _geometryIndex = { point: {}, vertex: {}, line: {}, area: {}, relation: {} };
-
-  //   return _this;
-  // };
-
-
-  // _this.fromExternal = (external, done) => {
-  //   _this.reset();
-  //   d3_json(external)
-  //     .then(externalPresets => {
-  //       _this.build(data.presets, false);    // load the default presets as non-addable to start
-  //       _addablePresetIDs = externalPresets.presets && Object.keys(externalPresets.presets);
-  //       _this.build(externalPresets, true);  // then load the external presets as addable
-  //     })
-  //     .catch(() => _this.init())
-  //     .finally(() => done(_this));
-  // };
-
-  // _this.build = (d, addable) => {
-  _this.build = (d) => {
-    if (d.fields && Object.keys(d.fields).length) {
+  _this.merge = (d) => {
+    // Merge Fields
+    if (d.fields) {
       Object.keys(d.fields).forEach(fieldID => {
         const f = d.fields[fieldID];
-        _fields[fieldID] = presetField(fieldID, f);
-        if (f.universal) {
-          _universal.push(_fields[fieldID]);
+        if (f) {   // add or replace
+          _fields[fieldID] = presetField(fieldID, f);
+        } else {   // remove
+          delete _fields[fieldID];
         }
       });
     }
 
-    if (d.presets && Object.keys(d.presets).length) {
-      const rawPresets = d.presets;
+    // Merge Presets
+    if (d.presets) {
       Object.keys(d.presets).forEach(presetID => {
         const p = d.presets[presetID];
-        const existing = _this.index(presetID);
-        // const isAddable = typeof addable === 'function' ? addable(presetID, p) : addable;
-        const isAddable = true;
-        if (existing !== -1) {
-          _this.collection[existing] = presetPreset(presetID, p, _fields, isAddable, rawPresets);
-        } else {
-          _this.collection.push(presetPreset(presetID, p, _fields, isAddable, rawPresets));
+        if (p) {   // add or replace
+          // _presets[presetID] = presetPreset(presetID, p, _fields, isAddable, _presets);
+          _presets[presetID] = presetPreset(presetID, p, _fields, true);
+        } else {   // remove (but not if it's a fallback)
+          const existing = _presets[presetID];
+          if (existing && !existing.isFallback()) {
+            delete _presets[presetID];
+          }
         }
       });
     }
 
-    if (d.categories && Object.keys(d.categories).length) {
+    // Merge Categories
+    if (d.categories) {
       Object.keys(d.categories).forEach(categoryID => {
         const c = d.categories[categoryID];
-        const existing = _this.index(categoryID);
-        if (existing !== -1) {
-          _this.collection[existing] = presetCategory(categoryID, c, _this);
-        } else {
-          _this.collection.push(presetCategory(categoryID, c, _this));
+        if (c) {   // add or replace
+          _categories[categoryID] = presetCategory(categoryID, c, _this);
+        } else {   // remove
+          delete _categories[categoryID];
         }
       });
     }
 
-    const getItem = (_this.item).bind(_this);
-    // if (_addablePresetIDs) {
-    //   ['area', 'line', 'point', 'vertex', 'relation'].forEach(geometry => {
-    //     _defaults[geometry] = presetCollection(
-    //       _addablePresetIDs.map(getItem).filter(preset => preset.geometry.indexOf(geometry) !== -1)
-    //     );
-    //   });
-    // } else if (d.defaults) {
-    if (d.defaults && Object.keys(d.defaults).length) {
-      _defaults = {
-        point: presetCollection(d.defaults.point.map(getItem)),
-        vertex: presetCollection(d.defaults.vertex.map(getItem)),
-        line: presetCollection(d.defaults.line.map(getItem)),
-        area: presetCollection(d.defaults.area.map(getItem)),
-        relation: presetCollection(d.defaults.relation.map(getItem))
-      };
-    }
-
-    for (let i = 0; i < _this.collection.length; i++) {
-      const preset = _this.collection[i];
-      const geometry = preset.geometry;
-
-      for (let j = 0; j < geometry.length; j++) {
-        let g = _geometryIndex[geometry[j]];
-        for (let k in preset.tags) {
-          (g[k] = g[k] || []).push(preset);
+    // Merge Defaults
+    if (d.defaults) {
+      Object.keys(d.defaults).forEach(geometry => {
+        const def = d.defaults[geometry];
+        if (Array.isArray(def)) {   // add or replace
+          _defaults[geometry] = presetCollection(
+            def.map(presetID => _presets[presetID]).filter(Boolean)
+          );
+        } else {   // remove
+          delete _defaults[geometry];
         }
-      }
+      });
     }
+
+    // Rebuild universal fields
+    _universal = Object.values(_fields).reduce((acc, field) => {
+      if (field.universal) acc.push(field);
+      return acc;
+    }, []);
+
+    // Rebuild _this.collection
+    _this.collection = Object.values(_presets).concat(Object.values(_categories));
+
+    // Rebuild geometry index
+    _geometryIndex = { point: {}, vertex: {}, line: {}, area: {}, relation: {} };
+    _this.collection.forEach(preset => {
+      (preset.geometry || []).forEach(geometry => {
+        let g = _geometryIndex[geometry];
+        for (let key in preset.tags) {
+          (g[key] = g[key] || []).push(preset);
+        }
+      });
+    });
+
     return _this;
   };
 
@@ -481,6 +449,7 @@ export function presetIndex(context) {
     items.unshift(item);
     setRecents(items);
   };
+
 
   return utilRebind(_this, dispatch, 'on');
 }

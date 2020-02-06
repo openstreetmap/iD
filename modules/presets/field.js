@@ -2,6 +2,10 @@ import { t } from '../util/locale';
 import { utilSafeClassName } from '../util/util';
 
 
+//
+// `presetField` decorates a given `field` Object
+// with some extra methods for searching and matching geometry
+//
 export function presetField(fieldID, field) {
   let _this = Object.assign({}, field);   // shallow copy
 

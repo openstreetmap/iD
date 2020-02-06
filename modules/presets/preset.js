@@ -4,6 +4,10 @@ import { utilArrayUniq, utilObjectOmit } from '../util';
 import { utilSafeClassName } from '../util/util';
 
 
+//
+// `presetPreset` decorates a given `preset` Object
+// with some extra methods for searching and matching geometry
+//
 export function presetPreset(presetID, preset, fields, addable, rawPresets) {
   let _this = Object.assign({}, preset);   // shallow copy
 

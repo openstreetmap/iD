@@ -2,12 +2,18 @@ import { t } from '../util/locale';
 import { presetCollection } from './collection';
 
 
+//
+// `presetCategory` builds a `presetCollection` of member presets,
+// decorated with some extra methods for searching and matching geometry
+//
 export function presetCategory(categoryID, category, all) {
   let _this = Object.assign({}, category);   // shallow copy
 
   _this.id = categoryID;
 
-  _this.members = presetCollection(_this.members.map(presetID => all.item(presetID)));
+  _this.members = presetCollection(
+    category.members.map(presetID => all.item(presetID)).filter(Boolean)
+  );
 
   _this.geometry = _this.members.collection
     .reduce((acc, preset) => {
