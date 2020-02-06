@@ -265,7 +265,7 @@ export default {
             if (data.entities) {
               data.entities.forEach(feature => {
                 const { point, id, segments, numberOfPasses, turnType } = feature;
-                const itemId = `${id.replace(/[,:+#]/g, "_")}`;
+                const itemId = `${id.replace(/[,:+#]/g, '_')}`;
 
                 // Turn restrictions could be missing at same junction
                 // We also want to bump the error up so node is accessible
