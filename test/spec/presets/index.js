@@ -14,9 +14,6 @@ describe('iD.presetIndex', function () {
 
     describe('#match', function () {
         var testPresets = {
-            point: { tags: {}, geometry: ['point'] },
-            line: { tags: {}, geometry: ['line'] },
-            vertex: { tags: {}, geometry: ['vertex'] },
             residential: { tags: { highway: 'residential' }, geometry: ['line'] },
             park: { tags: { leisure: 'park' }, geometry: ['point', 'area'] }
         };
@@ -200,11 +197,6 @@ describe('iD.presetIndex', function () {
 
     describe('expected matches', function () {
         var testPresets = {
-            area: { name: 'Area', tags: {}, geometry: ['area'] },
-            line: { name: 'Line', tags: {}, geometry: ['line'] },
-            point: { name: 'Point', tags: {}, geometry: ['point'] },
-            vertex: { name: 'Vertex', tags: {}, geometry: ['vertex'] },
-            relation: { name: 'Relation', tags: {}, geometry: ['relation'] },
             building: { name: 'Building', tags: { building: 'yes' }, geometry: ['area'] },
             'type/multipolygon': {
                 name: 'Multipolygon',
