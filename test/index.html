@@ -24,147 +24,172 @@
     }
   </script>
 
-  <!-- include source files here... -->
-  <script src='../dist/iD.legacy.js'></script>
-  <script src='spec/spec_helpers.js'></script>
-
-  <!-- include spec files below... -->
-  <script src='spec/actions/add_entity.js'></script>
-  <script src='spec/actions/add_member.js'></script>
-  <script src='spec/actions/add_midpoint.js'></script>
-  <script src='spec/actions/change_member.js'></script>
-  <script src='spec/actions/change_preset.js'></script>
-  <script src='spec/actions/change_tags.js'></script>
-  <script src='spec/actions/circularize.js'></script>
-  <script src='spec/actions/connect.js'></script>
-  <script src='spec/actions/copy_entities.js'></script>
-  <script src='spec/actions/delete_member.js'></script>
-  <script src='spec/actions/delete_multiple.js'></script>
-  <script src='spec/actions/delete_node.js'></script>
-  <script src='spec/actions/delete_relation.js'></script>
-  <script src='spec/actions/delete_way.js'></script>
-  <script src='spec/actions/discard_tags.js'></script>
-  <script src='spec/actions/disconnect.js'></script>
-  <script src='spec/actions/join.js'></script>
-  <script src='spec/actions/merge.js'></script>
-  <script src='spec/actions/merge_nodes.js'></script>
-  <script src='spec/actions/merge_polygon.js'></script>
-  <script src='spec/actions/merge_remote_changes.js'></script>
-  <script src='spec/actions/move.js'></script>
-  <script src='spec/actions/move_node.js'></script>
-  <script src='spec/actions/noop.js'></script>
-  <script src='spec/actions/orthogonalize.js'></script>
-  <script src='spec/actions/restrict_turn.js'></script>
-  <script src='spec/actions/reverse.js'></script>
-  <script src='spec/actions/revert.js'></script>
-  <script src='spec/actions/split.js'></script>
-  <script src='spec/actions/straighten_nodes.js'></script>
-  <script src='spec/actions/straighten_way.js'></script>
-  <script src='spec/actions/unrestrict_turn.js'></script>
-  <script src='spec/actions/reflect.js'></script>
-  <script src='spec/actions/extract.js'></script>
-  <script src='spec/actions/upgrade_tags.js'></script>
-
-  <script src='spec/behavior/hash.js'></script>
-  <script src='spec/behavior/hover.js'></script>
-  <script src='spec/behavior/select.js'></script>
-  <script src='spec/behavior/lasso.js'></script>
-
-  <script src='spec/core/context.js'></script>
-  <script src='spec/core/data.js'></script>
-  <script src='spec/core/difference.js'></script>
-  <script src='spec/core/graph.js'></script>
-  <script src='spec/core/history.js'></script>
-  <script src='spec/core/tree.js'></script>
-  <script src='spec/core/validator.js'></script>
-
-  <script src='spec/geo/extent.js'></script>
-  <script src='spec/geo/geo.js'></script>
-  <script src='spec/geo/geom.js'></script>
-  <script src='spec/geo/vector.js'></script>
-
-  <script src='spec/lib/locale.js'></script>
-
-  <script src='spec/modes/add_point.js'></script>
-  <script src='spec/modes/add_note.js'></script>
-
-  <script src='spec/operations/extract.js'></script>
-  <script src='spec/operations/straighten.js'></script>
-
-  <script src='spec/osm/changeset.js'></script>
-  <script src='spec/osm/entity.js'></script>
-  <script src='spec/osm/intersection.js'></script>
-  <script src='spec/osm/multipolygon.js'></script>
-  <script src='spec/osm/lanes.js'></script>
-  <script src='spec/osm/node.js'></script>
-  <script src='spec/osm/note.js'></script>
-  <script src='spec/osm/relation.js'></script>
-  <script src='spec/osm/way.js'></script>
-
-  <script src='spec/presets/category.js'></script>
-  <script src='spec/presets/collection.js'></script>
-  <script src='spec/presets/index.js'></script>
-  <script src='spec/presets/preset.js'></script>
-
-  <script src='spec/renderer/background_source.js'></script>
-  <script src='spec/renderer/features.js'></script>
-  <script src='spec/renderer/map.js'></script>
-  <script src='spec/renderer/tile_layer.js'></script>
-
-  <script src='spec/services/mapillary.js'></script>
-  <script src='spec/services/maprules.js'></script>
-  <script src='spec/services/nominatim.js'></script>
-  <script src='spec/services/openstreetcam.js'></script>
-  <script src='spec/services/osm.js'></script>
-  <script src='spec/services/osm_wikibase.js'></script>
-  <script src='spec/services/streetside.js'></script>
-  <script src='spec/services/taginfo.js'></script>
-
-  <script src='spec/svg/areas.js'></script>
-  <script src='spec/svg/data.js'></script>
-  <script src='spec/svg/icon.js'></script>
-  <script src='spec/svg/layers.js'></script>
-  <script src='spec/svg/lines.js'></script>
-  <script src='spec/svg/midpoints.js'></script>
-  <script src='spec/svg/osm.js'></script>
-  <script src='spec/svg/points.js'></script>
-  <script src='spec/svg/svg.js'></script>
-  <script src='spec/svg/tag_classes.js'></script>
-  <script src='spec/svg/vertices.js'></script>
-
-  <script src='spec/ui/cmd.js'></script>
-  <script src='spec/ui/combobox.js'></script>
-  <script src='spec/ui/confirm.js'></script>
-  <script src='spec/ui/flash.js'></script>
-  <script src='spec/ui/inspector.js'></script>
-  <script src='spec/ui/modal.js'></script>
-  <script src='spec/ui/raw_tag_editor.js'></script>
-
-  <script src='spec/ui/fields/access.js'></script>
-  <script src='spec/ui/fields/localized.js'></script>
-  <script src='spec/ui/fields/wikipedia.js'></script>
-
-  <script src='spec/util/array.js'></script>
-  <script src='spec/util/clean_tags.js'></script>
-  <script src='spec/util/keybinding.js'></script>
-  <script src='spec/util/object.js'></script>
-  <script src='spec/util/session_mutex.js'></script>
-  <script src='spec/util/util.js'></script>
-
-  <script src='spec/validations/almost_junction.js'></script>
-  <script src='spec/validations/crossing_ways.js'></script>
-  <script src='spec/validations/disconnected_way.js'></script>
-  <script src='spec/validations/incompatible_source.js'></script>
-  <script src='spec/validations/mismatched_geometry.js'></script>
-  <script src='spec/validations/missing_role.js'></script>
-  <script src='spec/validations/missing_tag.js'></script>
-  <script src='spec/validations/outdated_tags.js'></script>
-  <script src='spec/validations/private_data.js'></script>
-  <script src='spec/validations/suspicious_name.js'></script>
-
   <script>
-    window.mocha.run();
-  </script>
-</body>
+    var scripts = [
+      'spec/actions/add_entity.js',
+      'spec/actions/add_member.js',
+      'spec/actions/add_midpoint.js',
+      'spec/actions/change_member.js',
+      'spec/actions/change_preset.js',
+      'spec/actions/change_tags.js',
+      'spec/actions/circularize.js',
+      'spec/actions/connect.js',
+      'spec/actions/copy_entities.js',
+      'spec/actions/delete_member.js',
+      'spec/actions/delete_multiple.js',
+      'spec/actions/delete_node.js',
+      'spec/actions/delete_relation.js',
+      'spec/actions/delete_way.js',
+      'spec/actions/discard_tags.js',
+      'spec/actions/disconnect.js',
+      'spec/actions/join.js',
+      'spec/actions/merge.js',
+      'spec/actions/merge_nodes.js',
+      'spec/actions/merge_polygon.js',
+      'spec/actions/merge_remote_changes.js',
+      'spec/actions/move.js',
+      'spec/actions/move_node.js',
+      'spec/actions/noop.js',
+      'spec/actions/orthogonalize.js',
+      'spec/actions/restrict_turn.js',
+      'spec/actions/reverse.js',
+      'spec/actions/revert.js',
+      'spec/actions/split.js',
+      'spec/actions/straighten_nodes.js',
+      'spec/actions/straighten_way.js',
+      'spec/actions/unrestrict_turn.js',
+      'spec/actions/reflect.js',
+      'spec/actions/extract.js',
+      'spec/actions/upgrade_tags.js',
 
+      'spec/behavior/hash.js',
+      'spec/behavior/hover.js',
+      'spec/behavior/select.js',
+      'spec/behavior/lasso.js',
+
+      'spec/core/context.js',
+      'spec/core/data.js',
+      'spec/core/difference.js',
+      'spec/core/graph.js',
+      'spec/core/history.js',
+      'spec/core/tree.js',
+      'spec/core/validator.js',
+
+      'spec/geo/extent.js',
+      'spec/geo/geo.js',
+      'spec/geo/geom.js',
+      'spec/geo/vector.js',
+
+      'spec/lib/locale.js',
+
+      'spec/modes/add_point.js',
+      'spec/modes/add_note.js',
+
+      'spec/operations/extract.js',
+      'spec/operations/straighten.js',
+
+      'spec/osm/changeset.js',
+      'spec/osm/entity.js',
+      'spec/osm/intersection.js',
+      'spec/osm/multipolygon.js',
+      'spec/osm/lanes.js',
+      'spec/osm/node.js',
+      'spec/osm/note.js',
+      'spec/osm/relation.js',
+      'spec/osm/way.js',
+
+      'spec/presets/category.js',
+      'spec/presets/collection.js',
+      'spec/presets/index.js',
+      'spec/presets/preset.js',
+
+      'spec/renderer/background_source.js',
+      'spec/renderer/features.js',
+      'spec/renderer/map.js',
+      'spec/renderer/tile_layer.js',
+
+      'spec/services/mapillary.js',
+      'spec/services/maprules.js',
+      'spec/services/nominatim.js',
+      'spec/services/openstreetcam.js',
+      'spec/services/osm.js',
+      'spec/services/osm_wikibase.js',
+      'spec/services/streetside.js',
+      'spec/services/taginfo.js',
+
+      'spec/svg/areas.js',
+      'spec/svg/data.js',
+      'spec/svg/icon.js',
+      'spec/svg/layers.js',
+      'spec/svg/lines.js',
+      'spec/svg/midpoints.js',
+      'spec/svg/osm.js',
+      'spec/svg/points.js',
+      'spec/svg/svg.js',
+      'spec/svg/tag_classes.js',
+      'spec/svg/vertices.js',
+
+      'spec/ui/cmd.js',
+      'spec/ui/combobox.js',
+      'spec/ui/confirm.js',
+      'spec/ui/flash.js',
+      'spec/ui/inspector.js',
+      'spec/ui/modal.js',
+      'spec/ui/raw_tag_editor.js',
+
+      'spec/ui/fields/access.js',
+      'spec/ui/fields/localized.js',
+      'spec/ui/fields/wikipedia.js',
+
+      'spec/util/array.js',
+      'spec/util/clean_tags.js',
+      'spec/util/keybinding.js',
+      'spec/util/object.js',
+      'spec/util/session_mutex.js',
+      'spec/util/util.js',
+
+      'spec/validations/almost_junction.js',
+      'spec/validations/crossing_ways.js',
+      'spec/validations/disconnected_way.js',
+      'spec/validations/incompatible_source.js',
+      'spec/validations/mismatched_geometry.js',
+      'spec/validations/missing_role.js',
+      'spec/validations/missing_tag.js',
+      'spec/validations/outdated_tags.js',
+      'spec/validations/private_data.js',
+      'spec/validations/suspicious_name.js'
+    ];
+
+    var isPhantomJS = !!(navigator.userAgent.match(/PhantomJS/));
+    var isIE11 = !!(navigator.userAgent.match(/Trident/) && !navigator.userAgent.match(/MSIE/));
+
+    // Prepend scripts to run at the beginning.
+
+    // Third Script?  PhantomJS can test some other capabilities
+    if (isPhantomJS) scripts.unshift('spec/phantom.js');
+
+    // Second Script:  Always run spec helpers
+    scripts.unshift('spec/spec_helpers.js');
+
+    // First script: Choose either modern or legacy iD build..
+    scripts.unshift((isPhantomJS || isIE11) ? '../dist/iD.legacy.js' : '../dist/iD.js');
+
+
+    // Create and execute all scripts in specified order..
+    (function nextScript() {
+      if (!scripts.length) {
+        window.mocha.run();
+        return;
+      }
+      var src = scripts.shift();
+      var newScript;
+      newScript = document.createElement('script');
+      newScript.type = 'text/javascript';
+      newScript.src = src;
+      newScript.onload = nextScript;
+      document.getElementsByTagName('body')[0].appendChild(newScript);
+    })();
+  </script>
+
+</body>
 </html>
