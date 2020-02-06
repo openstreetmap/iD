@@ -3,7 +3,8 @@ const colors = require('colors/safe');
 const fs = require('fs');
 const glob = require('glob');
 const jsonschema = require('jsonschema');
-const nsi = require('name-suggestion-index');
+const nsiBrands = require('name-suggestion-index/dist/brands.json').brands;
+const nsiWikidata = require('name-suggestion-index/dist/wikidata.json').wikidata;
 const path = require('path');
 const prettyStringify = require('json-stringify-pretty-compact');
 const shell = require('shelljs');
@@ -261,11 +262,8 @@ function generateFields(tstrings, faIcons, tnpIcons, searchableFieldIDs) {
 
 
 function suggestionsToPresets(presets) {
-  const brands = nsi.brands.brands;
-  const wikidata = nsi.wikidata.wikidata;
-
-  Object.keys(brands).forEach(kvnd => {
-    const suggestion = brands[kvnd];
+  Object.keys(nsiBrands).forEach(kvnd => {
+    const suggestion = nsiBrands[kvnd];
     const qid = suggestion.tags['brand:wikidata'];
     if (!qid || !/^Q\d+$/.test(qid)) return;   // wikidata tag missing or looks wrong..
 
@@ -333,7 +331,7 @@ function suggestionsToPresets(presets) {
     };
 
     let logoURL;
-    let logoURLs = wikidata[qid] && wikidata[qid].logos;
+    let logoURLs = nsiWikidata[qid] && nsiWikidata[qid].logos;
     if (logoURLs) {
       if (logoURLs.wikidata && preferCommons[qid]) {
         logoURL = logoURLs.wikidata;
