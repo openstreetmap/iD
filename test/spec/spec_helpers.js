@@ -18,6 +18,8 @@ iD.data.preset_presets = {};
 iD.data.deprecated = [];
 iD.data.nsi_brands = [];
 iD.data.nsi_filters = { discardNames: [] };
+// Initializing `coreContext` initializes `_uploader`, which tries loading:
+iD.data.discarded = {};
 
 
 mocha.setup({
