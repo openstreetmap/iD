@@ -23,18 +23,17 @@ export function presetIndex(context) {
   let _presetData;
 
   // seed the preset lists with geometry fallbacks
-  const POINT = presetPreset('point', { name: 'Point', tags: {}, geometry: ['point'], matchScore: 0.1 } );
-  const VERTEX = presetPreset('vertex', { name: 'Point', tags: {}, geometry: ['vertex'], matchScore: 0.1 } );
+  const POINT = presetPreset('point', { name: 'Point', tags: {}, geometry: ['point', 'vertex'], matchScore: 0.1 } );
   const LINE = presetPreset('line', { name: 'Line', tags: {}, geometry: ['line'], matchScore: 0.1 } );
   const AREA = presetPreset('area', { name: 'Area', tags: { area: 'yes' }, geometry: ['area'], matchScore: 0.1 } );
   const RELATION = presetPreset('relation', { name: 'Relation', tags: {}, geometry: ['relation'], matchScore: 0.1 } );
 
-  let _this = presetCollection([POINT, VERTEX, LINE, AREA, RELATION]);
-  let _presets = { point: POINT, vertex: VERTEX, line: LINE, area: AREA, relation: RELATION };
+  let _this = presetCollection([POINT, LINE, AREA, RELATION]);
+  let _presets = { point: POINT, line: LINE, area: AREA, relation: RELATION };
 
   let _defaults = {
     point: presetCollection([POINT]),
-    vertex: presetCollection([VERTEX]),
+    vertex: presetCollection([POINT]),
     line: presetCollection([LINE]),
     area: presetCollection([AREA]),
     relation: presetCollection([RELATION])

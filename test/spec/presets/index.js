@@ -12,6 +12,36 @@ describe('iD.presetIndex', function () {
     });
 
 
+    describe('#init', function () {
+        it('has a fallback point preset', function () {
+            var node = iD.osmNode({ id: 'n' });
+            var graph = iD.coreGraph([node]);
+            var presets = iD.coreContext().init().presets();
+            expect(presets.match(node, graph).id).to.eql('point');
+        });
+        it('has a fallback line preset', function () {
+            var node = iD.osmNode({ id: 'n' });
+            var way = iD.osmWay({ id: 'w', nodes: ['n'] });
+            var graph = iD.coreGraph([node, way]);
+            var presets = iD.coreContext().init().presets();
+            expect(presets.match(way, graph).id).to.eql('line');
+        });
+        it('has a fallback area preset', function () {
+            var node = iD.osmNode({ id: 'n' });
+            var way = iD.osmWay({ id: 'w', nodes: ['n'], tags: { area: 'yes' }});
+            var graph = iD.coreGraph([node, way]);
+            var presets = iD.coreContext().init().presets();
+            expect(presets.match(way, graph).id).to.eql('area');
+        });
+        it('has a fallback relation preset', function () {
+            var relation = iD.osmRelation({ id: 'r' });
+            var graph = iD.coreGraph([relation]);
+            var presets = iD.coreContext().init().presets();
+            expect(presets.match(relation, graph).id).to.eql('relation');
+        });
+    });
+
+
     describe('#match', function () {
         var testPresets = {
             residential: { tags: { highway: 'residential' }, geometry: ['line'] },
