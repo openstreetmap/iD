@@ -1168,6 +1168,9 @@ en:
       kerb/height:
         # 'kerb:height=*'
         label: Height
+      kneipp_water_cure_multi:
+        # 'kneipp_water_cure:=*'
+        label: Basin Types
       label:
         # label=*
         label: Label
@@ -3271,6 +3274,10 @@ en:
         name: Preschool / Kindergarten Grounds
         # 'terms: kindergarden,pre-school'
         terms: '<translate with synonyms or related terms for ''Preschool / Kindergarten Grounds'', separated by commas>'
+      amenity/kneipp_water_cure:
+        # amenity=kneipp_water_cure
+        name: Kneipp Water Cure
+        terms: '<translate with synonyms or related terms for ''Kneipp Water Cure'', separated by commas>'
       amenity/language_school:
         # amenity=language_school
         name: Language School

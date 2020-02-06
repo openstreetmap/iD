@@ -3609,6 +3609,9 @@
                 "kerb/height": {
                     "label": "Height"
                 },
+                "kneipp_water_cure_multi": {
+                    "label": "Basin Types"
+                },
                 "label": {
                     "label": "Label"
                 },
@@ -5424,6 +5427,10 @@
                 "amenity/kindergarten": {
                     "name": "Preschool / Kindergarten Grounds",
                     "terms": "kindergarden,pre-school"
+                },
+                "amenity/kneipp_water_cure": {
+                    "name": "Kneipp Water Cure",
+                    "terms": ""
                 },
                 "amenity/language_school": {
                     "name": "Language School",

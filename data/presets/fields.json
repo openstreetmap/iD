@@ -216,6 +216,7 @@
   "junction/ref_oneway": {"key": "junction:ref", "type": "text", "label": "Junction Number", "prerequisiteTag": {"key": "oneway", "value": "yes"}},
   "kerb": {"key": "kerb", "type": "combo", "label": "Curb"},
   "kerb/height": {"key": "kerb:height", "type": "combo", "snake_case": false, "label": "Height"},
+  "kneipp_water_cure_multi": {"key": "kneipp_water_cure:", "type": "multiCombo", "label": "Basin Types"},
   "label": {"key": "label", "type": "textarea", "label": "Label"},
   "lamp_type": {"key": "lamp_type", "type": "combo", "label": "Type"},
   "landuse": {"key": "landuse", "type": "typeCombo", "label": "Type"},
