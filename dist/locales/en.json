@@ -3546,6 +3546,9 @@
                 "kerb/height": {
                     "label": "Height"
                 },
+                "kneipp_water_cure_multi": {
+                    "label": "Basin Types"
+                },
                 "label": {
                     "label": "Label"
                 },

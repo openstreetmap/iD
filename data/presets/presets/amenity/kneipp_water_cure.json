@@ -1,7 +1,7 @@
 {
     "icon": "maki-hospital",
     "fields": [ 
-        "facility",       
+        "kneipp_water_cure_multi",       
         "opening_hours",
         "fee"
                                       

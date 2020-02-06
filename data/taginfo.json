@@ -1536,6 +1536,7 @@
     {"key": "junction:ref", "description": "🄵 Junction Number"},
     {"key": "kerb", "description": "🄵 Curb"},
     {"key": "kerb:height", "description": "🄵 Height"},
+    {"key": "kneipp_water_cure:", "description": "🄵 Basin Types"},
     {"key": "label", "description": "🄵 Label"},
     {"key": "lamp_type", "description": "🄵 Type"},
     {"key": "lanes", "description": "🄵 Lanes"},

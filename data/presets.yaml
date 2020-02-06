@@ -1128,6 +1128,9 @@ en:
       kerb/height:
         # 'kerb:height=*'
         label: Height
+      kneipp_water_cure_multi:
+        # 'kneipp_water_cure:=*'
+        label: Basin Types
       label:
         # label=*
         label: Label
