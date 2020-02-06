@@ -1,9 +1,15 @@
 describe('iD.validations.mismatched_geometry', function () {
-    var context;
+    var context, _savedAreaKeys;
 
     beforeEach(function() {
+        _savedAreaKeys = iD.osmAreaKeys;
         context = iD.coreContext().init();
     });
+
+    afterEach(function() {
+        iD.osmSetAreaKeys(_savedAreaKeys);
+    });
+
 
     function createPoint(tags) {
         var n1 = iD.osmNode({id: 'n-1', loc: [4,4], tags: tags});
@@ -82,6 +88,7 @@ describe('iD.validations.mismatched_geometry', function () {
     });
 
     it('flags open way with area tag', function() {
+        iD.osmSetAreaKeys({ building: {} });
         createOpenWay({ building: 'yes' });
         var issues = validate();
         expect(issues).to.have.lengthOf(1);

@@ -22,14 +22,16 @@ export function validationMismatchedGeometry(context) {
             return null;
         }
 
-        if (context.presets().matchTags(tagSuggestingArea, 'line') ===
-            context.presets().matchTags(tagSuggestingArea, 'area')) {
+        var asLine = context.presets().matchTags(tagSuggestingArea, 'line');
+        var asArea = context.presets().matchTags(tagSuggestingArea, 'area');
+        if (asLine && asArea && (asLine === asArea)) {
             // these tags also allow lines and making this an area wouldn't matter
             return null;
         }
 
         return tagSuggestingArea;
     }
+
 
     function makeConnectEndpointsFixOnClick(way, graph) {
         // must have at least three nodes to close this automatically

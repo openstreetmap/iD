@@ -557,26 +557,30 @@ export function coreContext() {
     _features.init();
     _photos.init();
 
-    let presetsParameter = hash.presets;
-    if (presetsParameter && presetsParameter.indexOf('://') !== -1) {
-      // a URL of external presets file
-      _presets.fromExternal(external, (externalPresets) => {
-        context.presets = () => externalPresets;  // default + external presets...
-        osmSetAreaKeys(_presets.areaKeys());
-        osmSetPointTags(_presets.pointTags());
-        osmSetVertexTags(_presets.vertexTags());
-      });
-    } else {
-      let addablePresetIDs;
-      if (presetsParameter) {
-        // a list of allowed preset IDs
-        addablePresetIDs = presetsParameter.split(',');
-      }
-      _presets.init(addablePresetIDs);
-      osmSetAreaKeys(_presets.areaKeys());
-      osmSetPointTags(_presets.pointTags());
-      osmSetVertexTags(_presets.vertexTags());
-    }
+    // let presetsParameter = hash.presets;
+    // if (presetsParameter && presetsParameter.indexOf('://') !== -1) {
+    //   // a URL of external presets file
+    //   _presets.fromExternal(external, (externalPresets) => {
+    //     context.presets = () => externalPresets;  // default + external presets...
+    //     osmSetAreaKeys(_presets.areaKeys());
+    //     osmSetPointTags(_presets.pointTags());
+    //     osmSetVertexTags(_presets.vertexTags());
+    //   });
+    // } else {
+      // let addablePresetIDs;
+      // if (presetsParameter) {
+      //   // a list of allowed preset IDs
+      //   addablePresetIDs = presetsParameter.split(',');
+      // }
+      // _presets.init(addablePresetIDs);
+      _presets.init()
+        .then(() => {
+          osmSetAreaKeys(_presets.areaKeys());
+          osmSetPointTags(_presets.pointTags());
+          osmSetVertexTags(_presets.vertexTags());
+        });
+    // }
+
     return context;
   };
 

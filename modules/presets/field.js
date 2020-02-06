@@ -1,47 +1,37 @@
 import { t } from '../util/locale';
 import { utilSafeClassName } from '../util/util';
 
-export function presetField(id, field) {
-    field = Object.assign({}, field);   // shallow copy
 
-    field.id = id;
+//
+// `presetField` decorates a given `field` Object
+// with some extra methods for searching and matching geometry
+//
+export function presetField(fieldID, field) {
+  let _this = Object.assign({}, field);   // shallow copy
 
-    // for use in classes, element ids, css selectors
-    field.safeid = utilSafeClassName(id);
+  _this.id = fieldID;
 
-    field.matchGeometry = function(geometry) {
-        return !field.geometry || field.geometry === geometry;
-    };
+  // for use in classes, element ids, css selectors
+  _this.safeid = utilSafeClassName(fieldID);
 
-    field.matchAllGeometry = function(geometries) {
-        return !field.geometry || geometries.every(function(geometry) {
-            return field.geometry.indexOf(geometry) !== -1;
-        });
-    };
+  _this.matchGeometry = (geom) => !_this.geometry || _this.geometry === geom;
 
+  _this.matchAllGeometry = (geometries) => {
+    return !_this.geometry || geometries.every(geom => _this.geometry.indexOf(geom) !== -1);
+  };
 
-    field.t = function(scope, options) {
-        return t('presets.fields.' + id + '.' + scope, options);
-    };
+  _this.t = (scope, options) => t(`presets.fields.${fieldID}.${scope}`, options);
 
+  _this.label = () => _this.overrideLabel || _this.t('label', { 'default': fieldID });
 
-    field.label = function() {
-        return field.overrideLabel || field.t('label', {'default': id});
-    };
+  const _placeholder = _this.placeholder;
+  _this.placeholder = () => _this.t('placeholder', { 'default': _placeholder });
 
+  _this.originalTerms = (_this.terms || []).join();
 
-    var placeholder = field.placeholder;
-    field.placeholder = function() {
-        return field.t('placeholder', {'default': placeholder});
-    };
+  _this.terms = () => _this.t('terms', { 'default': _this.originalTerms })
+    .toLowerCase().trim().split(/\s*,+\s*/);
 
 
-    field.originalTerms = (field.terms || []).join();
-
-    field.terms = function() {
-        return field.t('terms', { 'default': field.originalTerms }).toLowerCase().trim().split(/\s*,+\s*/);
-    };
-
-
-    return field;
+  return _this;
 }

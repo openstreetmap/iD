@@ -15,56 +15,56 @@ describe('iD.presetCollection', function() {
             tags: {},
             geometry: ['area']
         }),
-        grill: iD.presetPreset('__test/amenity/bbq', {
+        grill: iD.presetPreset('amenity/bbq', {
             name: 'Grill',
             tags: { amenity: 'bbq' },
             geometry: ['point'],
             terms: []
         }),
-        sandpit: iD.presetPreset('__test/amenity/grit_bin', {
+        sandpit: iD.presetPreset('amenity/grit_bin', {
             name: 'Sandpit',
             tags: { amenity: 'grit_bin' },
             geometry: ['point'],
             terms: []
         }),
-        residential: iD.presetPreset('__test/highway/residential', {
+        residential: iD.presetPreset('highway/residential', {
             name: 'Residential Area',
             tags: { highway: 'residential' },
             geometry: ['point', 'area'],
             terms: []
         }),
-        grass1: iD.presetPreset('__test/landuse/grass1', {
+        grass1: iD.presetPreset('landuse/grass1', {
             name: 'Grass',
             tags: { landuse: 'grass' },
             geometry: ['point', 'area'],
             terms: []
         }),
-        grass2: iD.presetPreset('__test/landuse/grass2', {
+        grass2: iD.presetPreset('landuse/grass2', {
             name: 'Ğṝȁß',
             tags: { landuse: 'ğṝȁß' },
             geometry: ['point', 'area'],
             terms: []
         }),
-        park: iD.presetPreset('__test/leisure/park', {
+        park: iD.presetPreset('leisure/park', {
             name: 'Park',
             tags: { leisure: 'park' },
             geometry: ['point', 'area'],
             terms: [ 'grass' ],
             matchScore: 0.5
         }),
-        parking: iD.presetPreset('__test/amenity/parking', {
+        parking: iD.presetPreset('amenity/parking', {
             name: 'Parking',
             tags: { amenity: 'parking' },
             geometry: ['point', 'area'],
             terms: [ 'cars' ]
         }),
-        soccer: iD.presetPreset('__test/leisure/pitch/soccer', {
+        soccer: iD.presetPreset('leisure/pitch/soccer', {
             name: 'Soccer Field',
             tags: { leisure: 'pitch', sport: 'soccer' },
             geometry: ['point', 'area'],
             terms: ['fußball']
         }),
-        football: iD.presetPreset('__test/leisure/pitch/american_football', {
+        football: iD.presetPreset('leisure/pitch/american_football', {
             name: 'Football Field',
             tags: { leisure: 'pitch', sport: 'american_football' },
             geometry: ['point', 'area'],
@@ -80,7 +80,7 @@ describe('iD.presetCollection', function() {
 
     describe('#item', function() {
         it('fetches a preset by id', function() {
-            expect(c.item('__test/highway/residential')).to.equal(p.residential);
+            expect(c.item('highway/residential')).to.equal(p.residential);
         });
     });
 
@@ -148,7 +148,7 @@ describe('iD.presetCollection', function() {
         });
 
         it('excludes presets with searchable: false', function() {
-            var excluded = iD.presetPreset('__test/excluded', {
+            var excluded = iD.presetPreset('excluded', {
                 name: 'excluded',
                 tags: { amenity: 'excluded' },
                 geometry: ['point'],

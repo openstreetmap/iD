@@ -33,7 +33,7 @@ export function operationDowngrade(selectedIDs, context) {
         var entity = graph.entity(entityID);
         var preset = context.presets().match(entity, graph);
 
-        if (preset.isFallback()) return null;
+        if (!preset || preset.isFallback()) return null;
 
         if (entity.type === 'node' &&
             preset.id !== 'address' &&

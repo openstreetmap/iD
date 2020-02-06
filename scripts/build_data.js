@@ -105,18 +105,19 @@ function buildData() {
 
   // Save individual data files
   let tasks = [
-    writeFileProm('data/presets/categories.json', prettyStringify({ categories: categories }) ),
-    writeFileProm('data/presets/fields.json', prettyStringify({ fields: fields }, { maxLength: 9999 }) ),
-    writeFileProm('data/presets/presets.json', prettyStringify({ presets: presets }, { maxLength: 9999 }) ),
+    writeFileProm('data/presets/categories.json', prettyStringify(categories, { maxLength: 9999 }) ),
+    writeFileProm('data/presets/fields.json', prettyStringify(fields, { maxLength: 9999 }) ),
+    writeFileProm('data/presets/presets.json', prettyStringify(presets, { maxLength: 9999 }) ),
     writeFileProm('data/presets.yaml', translationsToYAML(translations) ),
     writeFileProm('data/taginfo.json', prettyStringify(taginfo, { maxLength: 9999 }) ),
     writeFileProm('data/territory_languages.json', prettyStringify(territoryLanguages, { maxLength: 9999 }) ),
     writeEnJson(tstrings),
     writeFaIcons(faIcons),
     writeTnpIcons(tnpIcons),
-    minifyJSON('data/presets/categories.json', 'dist/data/categories.min.json'),
-    minifyJSON('data/presets/fields.json', 'dist/data/fields.min.json'),
-    minifyJSON('data/presets/presets.json', 'dist/data/presets.min.json'),
+    minifyJSON('data/presets/categories.json', 'dist/data/preset_categories.min.json'),
+    minifyJSON('data/presets/defaults.json', 'dist/data/preset_defaults.min.json'),
+    minifyJSON('data/presets/fields.json', 'dist/data/preset_fields.min.json'),
+    minifyJSON('data/presets/presets.json', 'dist/data/preset_presets.min.json'),
     minifyJSON('data/address_formats.json', 'dist/data/address_formats.min.json'),
     minifyJSON('data/deprecated.json', 'dist/data/deprecated.min.json'),
     minifyJSON('data/discarded.json', 'dist/data/discarded.min.json'),
@@ -747,8 +748,8 @@ function validatePresetFields(presets, fields) {
 }
 
 function validateDefaults(defaults, categories, presets) {
-  Object.keys(defaults.defaults).forEach(name => {
-    let members = defaults.defaults[name];
+  Object.keys(defaults).forEach(name => {
+    const members = defaults[name];
     members.forEach(id => {
       if (!presets[id] && !categories[id]) {
         console.error(`Unknown category or preset: ${id} in default ${name}`);

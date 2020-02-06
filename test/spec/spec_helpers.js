@@ -2,25 +2,19 @@
 /* eslint no-extend-native:off */
 iD.debug = true;
 
-// disable things that use the network
-iD.data.imagery = [];
+// Disable things that use the network
 for (var k in iD.services) { delete iD.services[k]; }
 
-// run with a minimal set of presets for speed
-iD.data.presets = {
-    presets: {
-        area: { name: 'Area', tags: {}, geometry: ['area'] },
-        line: { name: 'Line', tags: {}, geometry: ['line'] },
-        point: { name: 'Point', tags: {}, geometry: ['point'] },
-        vertex: { name: 'Vertex', tags: {}, geometry: ['vertex'] },
-        relation: { name: 'Relation', tags: {}, geometry: ['relation'] },
-        // for tests related to areaKeys:
-        building: { name: 'Building', tags: { building: 'yes' }, geometry: ['point', 'area'] },
-        man_made: { name: 'Man Made', tags: { man_made: '*' }, geometry: ['vertex', 'point', 'line', 'area'] }
-    }
-};
+// Run without data for speed (tests which need data can set it up themselves)
 
-// creating `coreContext` creates validators and some of the validators try loading these
+// Initializing `coreContext` initializes `_background`, which tries loading:
+iD.data.imagery = [];
+// Initializing `coreContext` initializes `_presets`, which tries loading:
+iD.data.preset_categories = {};
+iD.data.preset_defaults = {};
+iD.data.preset_fields = {};
+iD.data.preset_presets = {};
+// Initializing `coreContext` initializes `_validator`, which tries loading:
 iD.data.deprecated = [];
 iD.data.nsi_brands = [];
 iD.data.nsi_filters = { discardNames: [] };
