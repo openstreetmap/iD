@@ -479,10 +479,14 @@ export function coreContext() {
   };
 
 
+  /* Projections */
+  context.projection = geoRawMercator();
+  context.curtainProjection = geoRawMercator();
+
+
   /* Init */
   context.init = () => {
-    context.projection = geoRawMercator();
-    context.curtainProjection = geoRawMercator();
+    const hash = utilStringQs(window.location.hash);
 
     _locale = utilDetect().locale;
     if (_locale && !dataLocales.hasOwnProperty(_locale)) {
@@ -526,15 +530,8 @@ export function coreContext() {
     _photos = rendererPhotos(context);
     _presets = presetIndex(context);
 
-    const hash = utilStringQs(window.location.hash);
-
-    if (services.maprules && hash.maprules) {
-      d3_json(hash.maprules)
-        .then(mapcss => {
-          services.maprules.init();
-          mapcss.forEach(mapcssSelector => services.maprules.addRule(mapcssSelector));
-        })
-        .catch(() => { /* ignore */ });
+    if (hash.presets) {
+      _presets.addablePresetIDs(new Set(hash.presets.split(',')));
     }
 
     _map = rendererMap(context);
@@ -557,30 +554,21 @@ export function coreContext() {
     _background.init();
     _features.init();
     _photos.init();
+    _presets.init()
+      .then(() => {
+        osmSetAreaKeys(_presets.areaKeys());
+        osmSetPointTags(_presets.pointTags());
+        osmSetVertexTags(_presets.vertexTags());
+      });
 
-    // let presetsParameter = hash.presets;
-    // if (presetsParameter && presetsParameter.indexOf('://') !== -1) {
-    //   // a URL of external presets file
-    //   _presets.fromExternal(external, (externalPresets) => {
-    //     context.presets = () => externalPresets;  // default + external presets...
-    //     osmSetAreaKeys(_presets.areaKeys());
-    //     osmSetPointTags(_presets.pointTags());
-    //     osmSetVertexTags(_presets.vertexTags());
-    //   });
-    // } else {
-      // let addablePresetIDs;
-      // if (presetsParameter) {
-      //   // a list of allowed preset IDs
-      //   addablePresetIDs = presetsParameter.split(',');
-      // }
-      // _presets.init(addablePresetIDs);
-      _presets.init()
-        .then(() => {
-          osmSetAreaKeys(_presets.areaKeys());
-          osmSetPointTags(_presets.pointTags());
-          osmSetVertexTags(_presets.vertexTags());
-        });
-    // }
+    if (services.maprules && hash.maprules) {
+      d3_json(hash.maprules)
+        .then(mapcss => {
+          services.maprules.init();
+          mapcss.forEach(mapcssSelector => services.maprules.addRule(mapcssSelector));
+        })
+        .catch(() => { /* ignore */ });
+    }
 
     return context;
   };

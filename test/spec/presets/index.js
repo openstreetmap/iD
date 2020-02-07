@@ -178,6 +178,24 @@ describe('iD.presetIndex', function () {
     });
 
 
+    describe('#addablePresetIDs', function () {
+        it('addablePresetIDs is initially null', function () {
+            var presets = iD.coreContext().init().presets();
+            expect(presets.addablePresetIDs()).to.be.null;
+        });
+
+        it('can set and get addablePresetIDs', function () {
+            var presets = iD.coreContext().init().presets();
+            var ids = new Set(['point']);   // can only add points
+            presets.addablePresetIDs(ids);
+
+            expect(presets.item('point').addable()).to.be.true;
+            expect(presets.item('line').addable()).to.be.false;
+            expect(presets.addablePresetIDs()).to.eql(ids);
+        });
+    });
+
+
     describe.skip('#build', function () {
         it('builds presets from provided', function () {
             var surfShop = iD.osmNode({ tags: { amenity: 'shop', 'shop:type': 'surf' } });

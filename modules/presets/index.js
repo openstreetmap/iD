@@ -42,8 +42,8 @@ export function presetIndex(context) {
   let _fields = {};
   let _categories = {};
   let _universal = [];
+  let _addablePresetIDs = null;   // Set of preset IDs that the user can add
   let _recents;
-  let _addablePresetIDs;    // presets that the user can add
 
   // Index of presets by (geometry, tag key).
   let _geometryIndex = { point: {}, vertex: {}, line: {}, area: {}, relation: {} };
@@ -94,8 +94,9 @@ export function presetIndex(context) {
       Object.keys(d.presets).forEach(presetID => {
         const p = d.presets[presetID];
         if (p) {   // add or replace
+          const isAddable = !_addablePresetIDs || _addablePresetIDs.has(presetID);
+          _presets[presetID] = presetPreset(presetID, p, _fields, isAddable);
           // _presets[presetID] = presetPreset(presetID, p, _fields, isAddable, _presets);
-          _presets[presetID] = presetPreset(presetID, p, _fields, true);
         } else {   // remove (but not if it's a fallback)
           const existing = _presets[presetID];
           if (existing && !existing.isFallback()) {
@@ -318,6 +319,18 @@ export function presetIndex(context) {
     return presetCollection(
       utilArrayUniq(rec.concat(def).concat(_this.fallback(geometry)))
     );
+  };
+
+  // pass a Set of addable preset ids
+  _this.addablePresetIDs = function(val) {
+    if (!arguments.length) return _addablePresetIDs;
+
+    _addablePresetIDs = val;
+    if (_addablePresetIDs) {   // reset all presets
+      _this.collection.forEach(p => p.addable(_addablePresetIDs.has(p.id)));
+    }
+
+    return _this;
   };
 
 
