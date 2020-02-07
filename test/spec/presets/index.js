@@ -192,6 +192,10 @@ describe('iD.presetIndex', function () {
             expect(presets.item('point').addable()).to.be.true;
             expect(presets.item('line').addable()).to.be.false;
             expect(presets.addablePresetIDs()).to.eql(ids);
+
+            presets.addablePresetIDs(null);
+            expect(presets.item('point').addable()).to.be.true;
+            expect(presets.item('line').addable()).to.be.true;
         });
     });
 

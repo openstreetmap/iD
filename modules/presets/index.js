@@ -328,6 +328,8 @@ export function presetIndex(context) {
     _addablePresetIDs = val;
     if (_addablePresetIDs) {   // reset all presets
       _this.collection.forEach(p => p.addable(_addablePresetIDs.has(p.id)));
+    } else {
+      _this.collection.forEach(p => p.addable(true));
     }
 
     return _this;
