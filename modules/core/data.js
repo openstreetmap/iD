@@ -1,6 +1,7 @@
 import { json as d3_json } from 'd3-fetch';
-import { data as _data } from '../../data';  // prebundled data
 
+let _data = {};
+export { _data as data };
 
 //
 // The coreData module fetches data from JSON files

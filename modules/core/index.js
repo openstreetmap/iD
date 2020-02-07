@@ -1,5 +1,5 @@
 export { coreContext } from './context';
-export { coreData } from './data';
+export { data, coreData } from './data';
 export { coreDifference } from './difference';
 export { coreGraph } from './graph';
 export { coreHistory } from './history';
