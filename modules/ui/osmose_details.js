@@ -1,6 +1,7 @@
 import {
   event as d3_event,
-  select as d3_select
+  select as d3_select,
+  selectAll as d3_selectAll
 } from 'd3-selection';
 
 import { modeSelect } from '../modes/select';
@@ -105,12 +106,18 @@ export function uiOsmoseDetails(context) {
       .append('use')
         .attr('href', '#iD-icon-out-link');
 
+    // Save current item to check if UI changed by time request resolves
+    const thisItem = _qaItem;
     services.osmose.loadIssueDetail(_qaItem)
       .then(d => {
         // No details to add if there are no associated issue elements
         if (!d.elems || d.elems.length === 0) return;
 
-        // TODO: Do nothing if UI has moved on by the time this resolves
+        // Do nothing if UI has moved on by the time this resolves
+        if (
+          context.selectedErrorID() !== thisItem.id
+          && d3_selectAll(`.qaItem.osmose.hover.itemId-${thisItem.id}`).empty()
+        ) return;
 
         // Things like keys and values are dynamically added to a subtitle string
         if (d.detail) {
