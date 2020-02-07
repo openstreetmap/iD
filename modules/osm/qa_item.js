@@ -1,4 +1,3 @@
-import * as qaServices from '../../data/qa_data.json';
 
 export class QAItem {
   constructor(loc, service, itemType, id, props) {
@@ -13,12 +12,8 @@ export class QAItem {
     this.update(props);
 
     // Some QA services have marker icons to differentiate issues
-    if (service && itemType) {
-      const serviceInfo = qaServices[service];
-
-      if (serviceInfo && serviceInfo.icons) {
-        this.icon = serviceInfo.icons[itemType];
-      }
+    if (service && typeof service.getIcon === 'function') {
+      this.icon = service.getIcon(itemType);
     }
 
     return this;

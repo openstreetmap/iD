@@ -27,6 +27,7 @@ export function coreData(context) {
     'preset_fields': 'data/preset_fields.min.json',
     'preset_presets': 'data/preset_presets.min.json',
     'phone_formats': 'data/phone_formats.min.json',
+    'qa_data': 'data/qa_data.min.json',
     'shortcuts': 'data/shortcuts.min.json',
     'territory_languages': 'data/territory_languages.min.json',
     'wmf_sitematrix': 'https://cdn.jsdelivr.net/npm/wmf-sitematrix@0.1/wikipedia.min.json'

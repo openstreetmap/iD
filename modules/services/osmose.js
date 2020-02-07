@@ -7,16 +7,12 @@ import { currentLocale } from '../util/locale';
 import { geoExtent, geoVecAdd } from '../geo';
 import { QAItem } from '../osm';
 import { utilRebind, utilTiler, utilQsString } from '../util';
-import * as qaServices from '../../data/qa_data.json';
 
 const tiler = utilTiler();
 const dispatch = d3_dispatch('loaded');
 const _tileZoom = 14;
 const _osmoseUrlRoot = 'https://osmose.openstreetmap.fr/en/api/0.3beta';
-const _osmoseItems =
-  Object.keys(qaServices.osmose.icons)
-    .map(s => s.split('-')[0])
-    .reduce((unique, item) => unique.indexOf(item) !== -1 ? unique : [...unique, item], []);
+let _osmoseData = { icons: {}, items: [] };
 
 // This gets reassigned if reset
 let _cache;
@@ -65,7 +61,15 @@ function preventCoincident(loc) {
 }
 
 export default {
-  init() {
+  init(context) {
+    context.data().get('qa_data')
+      .then(d => {
+        _osmoseData = d.osmose;
+        _osmoseData.items = Object.keys(d.osmose.icons)
+          .map(s => s.split('-')[0])
+          .reduce((unique, item) => unique.indexOf(item) !== -1 ? unique : [...unique, item], []);
+      });
+
     if (!_cache) {
       this.reset();
     }
@@ -93,7 +97,7 @@ export default {
     let params = {
       // Tiles return a maximum # of issues
       // So we want to filter our request for only types iD supports
-      item: _osmoseItems
+      item: _osmoseData.items
     };
 
     // determine the needed tiles to cover the view
@@ -127,7 +131,7 @@ export default {
               const itemType = `${item}-${cl}`;
 
               // Filter out unsupported issue types (some are too specific or advanced)
-              if (itemType in qaServices.osmose.icons) {
+              if (itemType in _osmoseData.icons) {
                 let loc = issue.geometry.coordinates; // lon, lat
                 loc = preventCoincident(loc);
 
@@ -175,7 +179,7 @@ export default {
   },
 
   loadStrings(locale=currentLocale) {
-    const items = Object.keys(qaServices.osmose.icons);
+    const items = Object.keys(_osmoseData.icons);
 
     if (
       locale in _cache.strings
@@ -300,6 +304,11 @@ export default {
   // NOTE: Don't change method name until UI v3 is merged
   getError(id) {
     return _cache.data[id];
+  },
+
+  // get the name of the icon to display for this item
+  getIcon(itemType) {
+    return _osmoseData.icons[itemType];
   },
 
   // Replace a single QAItem in the cache

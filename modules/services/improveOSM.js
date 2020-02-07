@@ -18,6 +18,8 @@ const _impOsmUrls = {
   mr: 'https://grab.community.improve-osm.org/missingGeoService',
   tr: 'https://grab.community.improve-osm.org/turnRestrictionService'
 };
+let _impOsmData = { icons: {} };
+
 
 // This gets reassigned if reset
 let _cache;
@@ -116,7 +118,10 @@ function preventCoincident(loc, bumpUp) {
 }
 
 export default {
-  init() {
+  init(context) {
+    context.data().get('qa_data')
+      .then(d => _impOsmData = d.improveOSM);
+
     if (!_cache) {
       this.reset();
     }
@@ -446,6 +451,11 @@ export default {
   // NOTE: Don't change method name until UI v3 is merged
   getError(id) {
     return _cache.data[id];
+  },
+
+  // get the name of the icon to display for this item
+  getIcon(itemType) {
+    return _impOsmData.icons[itemType];
   },
 
   // Replace a single QAItem in the cache
