@@ -8,12 +8,12 @@ import { QAItem } from '../osm';
 import { t } from '../util/locale';
 import { utilRebind, utilTiler, utilQsString } from '../util';
 
-import { errorTypes, localizeStrings } from '../../data/keepRight.json';
 
 const tiler = utilTiler();
 const dispatch = d3_dispatch('loaded');
 const _tileZoom = 14;
 const _krUrlRoot = 'https://www.keepright.at';
+let _krData = { errorTypes: {}, localizeStrings: {} };
 
 // This gets reassigned if reset
 let _cache;
@@ -67,7 +67,7 @@ function tokenReplacements(d) {
   const htmlRegex = new RegExp(/<\/[a-z][\s\S]*>/);
   const replacements = {};
 
-  const issueTemplate = errorTypes[d.whichType];
+  const issueTemplate = _krData.errorTypes[d.whichType];
   if (!issueTemplate) {
     /* eslint-disable no-console */
     console.log('No Template: ', d.whichType);
@@ -102,8 +102,8 @@ function tokenReplacements(d) {
       capture = '\\' +  capture + '\\';
     } else {
       const compare = capture.toLowerCase();
-      if (localizeStrings[compare]) {   // some replacement strings can be localized
-        capture = t('QA.keepRight.error_parts.' + localizeStrings[compare]);
+      if (_krData.localizeStrings[compare]) {   // some replacement strings can be localized
+        capture = t('QA.keepRight.error_parts.' + _krData.localizeStrings[compare]);
       }
     }
 
@@ -116,8 +116,8 @@ function tokenReplacements(d) {
 
 function parseError(capture, idType) {
   const compare = capture.toLowerCase();
-  if (localizeStrings[compare]) {   // some replacement strings can be localized
-    capture = t('QA.keepRight.error_parts.' + localizeStrings[compare]);
+  if (_krData.localizeStrings[compare]) {   // some replacement strings can be localized
+    capture = t('QA.keepRight.error_parts.' + _krData.localizeStrings[compare]);
   }
 
   switch (idType) {
@@ -255,7 +255,10 @@ function parseError(capture, idType) {
 
 
 export default {
-  init() {
+  init(context) {
+    context.data().get('keepRight')
+      .then(d => _krData = d);
+
     if (!_cache) {
       this.reset();
     }
@@ -333,12 +336,12 @@ export default {
             // if there is a parent, save its error type e.g.:
             //  Error 191 = "highway-highway"
             //  Error 190 = "intersections without junctions"  (parent)
-            const issueTemplate = errorTypes[itemType];
+            const issueTemplate = _krData.errorTypes[itemType];
             const parentIssueType = (Math.floor(itemType / 10) * 10).toString();
 
             // try to handle error type directly, fallback to parent error type.
             const whichType = issueTemplate ? itemType : parentIssueType;
-            const whichTemplate = errorTypes[whichType];
+            const whichTemplate = _krData.errorTypes[whichType];
 
             // Rewrite a few of the errors at this point..
             // This is done to make them easier to linkify and translate.

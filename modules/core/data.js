@@ -14,6 +14,7 @@ export function coreData(context) {
     'discarded': 'data/discarded.min.json',
     'imagery': 'data/imagery.min.json',
     'intro_graph': 'data/intro_graph.min.json',
+    'keepRight': 'data/keepRight.min.json',
     'languages': 'data/languages.min.json',
     'locales': 'data/locales.min.json',
     'nsi_brands': 'https://cdn.jsdelivr.net/npm/name-suggestion-index@4/dist/brands.min.json',
