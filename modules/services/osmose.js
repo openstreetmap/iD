@@ -171,7 +171,7 @@ export default {
       this.replaceItem(issue);
     };
 
-    return jsonPromise(url, cacheDetails).then(() => issue);
+    return d3_json(url).then(cacheDetails).then(() => issue);
   },
 
   loadStrings(locale=currentLocale) {
@@ -239,7 +239,7 @@ export default {
       // Osmose API falls back to English strings where untranslated or if locale doesn't exist
       const url = `${_osmoseUrlRoot}/items/${item}/class/${cl}?langs=${locale}`;
 
-      return jsonPromise(url, cacheData);
+      return d3_json(url).then(cacheData);
     });
 
     return Promise.all(allRequests).then(() => _cache.strings[locale]);
@@ -324,16 +324,3 @@ export default {
     return _cache.closed;
   }
 };
-
-function jsonPromise(url, then) {
-  return new Promise((resolve, reject) => {
-    d3_json(url)
-      .then(data => {
-        then(data);
-        resolve();
-      })
-      .catch(err => {
-        reject(err);
-      });
-  });
-}
