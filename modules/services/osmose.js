@@ -174,15 +174,14 @@ export default {
     return jsonPromise(url, cacheDetails).then(() => issue);
   },
 
-  loadStrings(callback, locale=currentLocale) {
+  loadStrings(locale=currentLocale) {
     const items = Object.keys(qaServices.osmose.icons);
 
     if (
       locale in _cache.strings
       && Object.keys(_cache.strings[locale]).length === items.length
     ) {
-        if (callback) callback(null, _cache.strings[locale]);
-        return;
+        return Promise.resolve(_cache.strings[locale]);
     }
 
     // May be partially populated already if some requests were successful
@@ -243,9 +242,7 @@ export default {
       return jsonPromise(url, cacheData);
     });
 
-    Promise.all(allRequests)
-      .then(() => { if (callback) callback(null, _cache.strings[locale]); })
-      .catch(err => { if (callback) callback(err); });
+    return Promise.all(allRequests).then(() => _cache.strings[locale]);
   },
 
   getStrings(itemType, locale=currentLocale) {
