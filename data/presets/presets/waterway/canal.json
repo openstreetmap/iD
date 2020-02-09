@@ -4,6 +4,7 @@
         "name",
         "structure_waterway",
         "width",
+        "depth",
         "intermittent",
         "lock"
     ],

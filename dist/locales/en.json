@@ -3134,6 +3134,9 @@
                         "no": "None"
                     }
                 },
+                "depth": {
+                    "label": "Depth (Meters)"
+                },
                 "description": {
                     "label": "Description",
                     "terms": "summary"

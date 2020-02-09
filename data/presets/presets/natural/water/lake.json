@@ -2,6 +2,7 @@
     "icon": "maki-water",
     "fields": [
         "{natural/water}",
+        "depth",
         "salt",
         "tidal"
     ],
