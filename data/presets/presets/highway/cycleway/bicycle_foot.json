@@ -3,6 +3,16 @@
         "fr", "lt", "pl"
     ],
     "icon": "temaki-pedestrian_and_cyclist",
+    "fields": [
+        "name",
+        "segregated",
+        "oneway",
+        "surface",
+        "width",
+        "structure",
+        "access",
+        "incline"
+    ],
     "geometry": [
         "line"
     ],
@@ -24,16 +34,6 @@
         "multi-use trail",
         "segregated trail",
         "rail trail"
-    ],
-    "fields": [
-        "name",
-        "segregated",
-        "oneway",
-        "surface",
-        "width",
-        "structure",
-        "access",
-        "incline"
     ],
     "matchScore": 0.9,
     "name": "Cycle & Foot Path"

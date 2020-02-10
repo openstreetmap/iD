@@ -500,7 +500,7 @@
     {"key": "crossing", "value": "unmarked", "description": "🄿 Unmarked Crossing, 🄿 Unmarked Cycle Crossing", "object_types": ["node"], "icon_url": "https://cdn.jsdelivr.net/gh/ideditor/temaki/icons/pedestrian.svg"},
     {"key": "highway", "value": "cycleway", "description": "🄿 Cycle Path", "object_types": ["way"], "icon_url": "https://cdn.jsdelivr.net/gh/openstreetmap/iD@master/svg/fontawesome/fas-biking.svg"},
     {"key": "cycleway", "value": "crossing", "description": "🄿 Cycle Crossing (unsearchable)", "object_types": ["way"], "icon_url": "https://cdn.jsdelivr.net/gh/ideditor/temaki/icons/cyclist_crosswalk.svg"},
-    {"key": "foot", "value": "designated", "description": "🄿 Cycle & Foot Path, 🄵 Allowed Access", "object_types": ["way"], "icon_url": "https://cdn.jsdelivr.net/gh/ideditor/temaki/icons/pedestrian_and_cyclist.svg"},
+    {"key": "foot", "value": "designated", "description": "🄿 Cycle & Foot Path, 🄿 Cycle & Foot Crossing, 🄵 Allowed Access", "object_types": ["way"], "icon_url": "https://cdn.jsdelivr.net/gh/ideditor/temaki/icons/pedestrian_and_cyclist.svg"},
     {"key": "highway", "value": "elevator", "description": "🄿 Elevator", "object_types": ["node"], "icon_url": "https://cdn.jsdelivr.net/gh/ideditor/temaki/icons/elevator.svg"},
     {"key": "highway", "value": "emergency_bay", "description": "🄿 Emergency Stopping Place", "object_types": ["node"], "icon_url": "https://cdn.jsdelivr.net/gh/mapbox/maki/icons/car-15.svg"},
     {"key": "highway", "value": "footway", "description": "🄿 Foot Path", "object_types": ["way"], "icon_url": "https://cdn.jsdelivr.net/gh/ideditor/temaki/icons/pedestrian.svg"},

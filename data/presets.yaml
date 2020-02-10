@@ -5000,13 +5000,18 @@ en:
       highway/cycleway/crossing:
         # cycleway=crossing
         name: Cycle Crossing
+      highway/cycleway/crossing/bicycle_foot:
+        # 'highway=cycleway, cycleway=crossing, foot=designated'
+        name: Cycle & Foot Crossing
+        # 'terms: bicycle and foot crosswalk,bike and pedestrian crossing,cycleway,cycling,cyclist'
+        terms: '<translate with synonyms or related terms for ''Cycle & Foot Crossing'', separated by commas>'
       highway/cycleway/crossing/marked:
-        # 'cycleway=crossing, crossing=marked'
+        # 'highway=cycleway, cycleway=crossing, crossing=marked'
         name: Marked Cycle Crossing
         # 'terms: cycle crosswalk,cycle path crossing,cycleway crossing,bicycle crossing,bike crossing'
         terms: '<translate with synonyms or related terms for ''Marked Cycle Crossing'', separated by commas>'
       highway/cycleway/crossing/unmarked:
-        # 'cycleway=crossing, crossing=unmarked'
+        # 'highway=cycleway, cycleway=crossing, crossing=unmarked'
         name: Unmarked Cycle Crossing
         # 'terms: cycle path crossing,cycleway crossing,bicycle crossing,bike crossing'
         terms: '<translate with synonyms or related terms for ''Unmarked Cycle Crossing'', separated by commas>'
