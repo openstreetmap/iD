@@ -1,7 +1,17 @@
 describe('iD.presetPreset', function() {
-    it('has optional fields', function() {
-        var preset = iD.presetPreset('test', {});
-        expect(preset.fields).to.eql([]);
+
+    describe('#fields', function() {
+        it('has no fields by default', function() {
+            var preset = iD.presetPreset('test', {});
+            expect(preset.fields()).to.eql([]);
+        });
+    });
+
+    describe('#moreFields', function() {
+        it('has no moreFields by default', function() {
+            var preset = iD.presetPreset('test', {});
+            expect(preset.moreFields()).to.eql([]);
+        });
     });
 
     describe('#matchGeometry', function() {
@@ -136,14 +146,16 @@ describe('iD.presetPreset', function() {
         });
 
         it('adds default tags of fields with matching geometry', function() {
+            var isAddable = true;
             var field = iD.presetField('field', {key: 'building', geometry: 'area', default: 'yes'});
-            var preset = iD.presetPreset('test', {fields: ['field']}, {field: field});
+            var preset = iD.presetPreset('test', {fields: ['field']}, isAddable, {field: field});
             expect(preset.setTags({}, 'area')).to.eql({area: 'yes', building: 'yes'});
         });
 
         it('adds no default tags of fields with non-matching geometry', function() {
+            var isAddable = true;
             var field = iD.presetField('field', {key: 'building', geometry: 'area', default: 'yes'});
-            var preset = iD.presetPreset('test', {fields: ['field']}, {field: field});
+            var preset = iD.presetPreset('test', {fields: ['field']}, isAddable, {field: field});
             expect(preset.setTags({}, 'point')).to.eql({});
         });
 
@@ -179,8 +191,9 @@ describe('iD.presetPreset', function() {
         });
 
         it('removes tags that match field default tags', function() {
-            var field = iD.presetField('field', {key: 'building', geometry: 'area', default: 'yes'}),
-                preset = iD.presetPreset('test', {fields: ['field']}, {field: field});
+            var isAddable = true;
+            var field = iD.presetField('field', {key: 'building', geometry: 'area', default: 'yes'});
+            var preset = iD.presetPreset('test', {fields: ['field']}, isAddable, {field: field});
             expect(preset.unsetTags({building: 'yes'}, 'area')).to.eql({});
         });
 
@@ -190,8 +203,9 @@ describe('iD.presetPreset', function() {
         });
 
         it('preserves tags that do not match field default tags', function() {
-            var field = iD.presetField('field', {key: 'building', geometry: 'area', default: 'yes'}),
-                preset = iD.presetPreset('test', {fields: ['field']}, {field: field});
+            var isAddable = true;
+            var field = iD.presetField('field', {key: 'building', geometry: 'area', default: 'yes'});
+            var preset = iD.presetPreset('test', {fields: ['field']}, isAddable, {field: field});
             expect(preset.unsetTags({building: 'yep'}, 'area')).to.eql({ building: 'yep'});
         });
 

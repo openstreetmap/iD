@@ -8,9 +8,13 @@ import { utilSafeClassName } from '../util/util';
 // `presetPreset` decorates a given `preset` Object
 // with some extra methods for searching and matching geometry
 //
-export function presetPreset(presetID, preset, allFields, addable, rawPresets) {
+export function presetPreset(presetID, preset, addable, allFields, allPresets) {
+  allFields = allFields || {};
+  allPresets = allPresets || {};
   let _this = Object.assign({}, preset);   // shallow copy
   let _addable = addable || false;
+  let _resolvedFields;      // cache
+  let _resolvedMoreFields;  // cache
 
   _this.id = presetID;
 
@@ -24,13 +28,15 @@ export function presetPreset(presetID, preset, allFields, addable, rawPresets) {
 
   _this.originalReference = _this.reference || {};
 
-  _this.fields = (_this.fields || []).map(f => allFields[f]);
+  _this.originalFields = (_this.fields || []);
 
-  _this.moreFields = (_this.moreFields || []).map(f => allFields[f]);
+  _this.originalMoreFields = (_this.moreFields || []);
 
-  if (rawPresets) {
-    resolveFieldInheritance();
-  }
+  _this.fields = () => _resolvedFields || (_resolvedFields = resolve('fields'));
+
+  _this.moreFields = () => _resolvedMoreFields || (_resolvedMoreFields = resolve('moreFields'));
+
+  _this.resetFields = () => _resolvedFields = _resolvedMoreFields = null;
 
   _this.tags = _this.tags || {};
 
@@ -141,7 +147,7 @@ export function presetPreset(presetID, preset, allFields, addable, rawPresets) {
     tags = utilObjectOmit(tags, Object.keys(_this.removeTags));
 
     if (geometry && !skipFieldDefaults) {
-      _this.fields.forEach(field => {
+      _this.fields().forEach(field => {
         if (field.matchGeometry(geometry) && field.key && field.default === tags[field.key]) {
           delete tags[field.key];
         }
@@ -188,7 +194,7 @@ export function presetPreset(presetID, preset, allFields, addable, rawPresets) {
     }
 
     if (geometry && !skipFieldDefaults) {
-      _this.fields.forEach(field => {
+      _this.fields().forEach(field => {
         if (field.matchGeometry(geometry) && field.key && !tags[field.key] && field.default) {
           tags[field.key] = field.default;
         }
@@ -201,66 +207,57 @@ export function presetPreset(presetID, preset, allFields, addable, rawPresets) {
 
   // For a preset without fields, use the fields of the parent preset.
   // Replace {preset} placeholders with the fields of the specified presets.
-  function resolveFieldInheritance() {
+  function resolve(which) {
+    const fieldIDs = (which === 'fields' ? _this.originalFields : _this.originalMoreFields);
+    let resolved = [];
 
-    ['fields', 'moreFields'].forEach(prop => {
-      let fieldIDs = [];
-      if (preset[prop] && preset[prop].length) {    // fields were defined
-        preset[prop].forEach(fieldID => {
-          const match = fieldID.match(/\{(.*)\}/);
-          if (match !== null) {        // presetID wrapped in braces {}
-            const inheritIDs = inheritedFieldIDs(match[1], prop);
-            if (inheritIDs !== null) {
-              fieldIDs = fieldIDs.concat(inheritIDs);
-            } else {
-              /* eslint-disable no-console */
-              console.log(`Cannot resolve presetID ${match[0]} found in ${_this.id} ${prop}`);
-              /* eslint-enable no-console */
-            }
-          } else {
-            fieldIDs.push(fieldID);  // no braces - just a normal field
-          }
-        });
-
-      } else {  // no fields defined, so use the parent's if possible
-        const endIndex = _this.id.lastIndexOf('/');
-        const parentID = endIndex && _this.id.substring(0, endIndex);
-        if (parentID) {
-          fieldIDs = inheritedFieldIDs(parentID, prop);
-        }
+    fieldIDs.forEach(fieldID => {
+      const match = fieldID.match(/\{(.*)\}/);
+      if (match !== null) {    // a presetID wrapped in braces {}
+        resolved = resolved.concat(inheritFields(match[1], which));
+      } else if (allFields[fieldID]) {    // a normal fieldID
+        resolved.push(allFields[fieldID]);
+      } else {
+        console.log(`Cannot resolve "${fieldID}" found in ${_this.id}.${which}`);  // eslint-disable-line no-console
       }
-
-      fieldIDs = utilArrayUniq(fieldIDs);
-      preset[prop] = fieldIDs;
-      rawPresets[_this.id][prop] = fieldIDs;
     });
 
-    // Skip `fields` for the keys which define the _this.
-    // These are usually `typeCombo` fields like `shop=*`
-    function shouldInheritFieldWithID(fieldID) {
-      const f = allFields[fieldID];
-      if (f.key) {
-        if (_this.tags[f.key] !== undefined &&
-          // inherit anyway if multiple values are allowed or just a checkbox
-          f.type !== 'multiCombo' && f.type !== 'semiCombo' && f.type !== 'check'
-        ) return false;
+    // no fields resolved, so use the parent's if possible
+    if (!resolved.length) {
+      const endIndex = _this.id.lastIndexOf('/');
+      const parentID = endIndex && _this.id.substring(0, endIndex);
+      if (parentID) {
+        resolved = inheritFields(parentID, which);
       }
-      return true;
     }
 
-    // returns an array of field IDs to inherit from the given presetID, if found
-    function inheritedFieldIDs(presetID, prop) {
-      if (!presetID) return null;
+    return utilArrayUniq(resolved);
 
-      const inheritPreset = rawPresets[presetID];
-      if (!inheritPreset) return null;
 
-      let inheritFieldIDs = inheritPreset[prop] || [];
-      if (prop === 'fields') {
-        inheritFieldIDs = inheritFieldIDs.filter(shouldInheritFieldWithID);
+    // returns an array of fields to inherit from the given presetID, if found
+    function inheritFields(presetID, which) {
+      const parent = allPresets[presetID];
+      if (!parent) return [];
+
+      if (which === 'fields') {
+        return parent.fields().filter(shouldInherit);
+      } else if (which === 'moreFields') {
+        return parent.moreFields();
+      } else {
+        return [];
       }
+    }
 
-      return inheritFieldIDs;
+
+    // Skip `fields` for the keys which define the preset.
+    // These are usually `typeCombo` fields like `shop=*`
+    function shouldInherit(f) {
+      if (f.key && _this.tags[f.key] !== undefined &&
+        // inherit anyway if multiple values are allowed or just a checkbox
+        f.type !== 'multiCombo' && f.type !== 'semiCombo' && f.type !== 'check'
+      ) return false;
+
+      return true;
     }
   }
 

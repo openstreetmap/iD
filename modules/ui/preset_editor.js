@@ -43,18 +43,22 @@ export function uiPresetEditor(context) {
 
             var presetsManager = context.presets();
 
-            var allFields = [], allMoreFields = [];
+            var allFields = [];
+            var allMoreFields = [];
             var sharedTotalFields;
 
             _presets.forEach(function(preset) {
-                allFields = utilArrayUnion(allFields, preset.fields);
-                allMoreFields = utilArrayUnion(allMoreFields, preset.moreFields);
+                var fields = preset.fields();
+                var moreFields = preset.moreFields();
+
+                allFields = utilArrayUnion(allFields, fields);
+                allMoreFields = utilArrayUnion(allMoreFields, moreFields);
 
                 if (!sharedTotalFields) {
-                    sharedTotalFields = utilArrayUnion(preset.fields, preset.moreFields);
+                    sharedTotalFields = utilArrayUnion(fields, moreFields);
                 } else {
                     sharedTotalFields = sharedTotalFields.filter(function(field) {
-                        return preset.fields.indexOf(field) !== -1 || preset.moreFields.indexOf(field) !== -1;
+                        return fields.indexOf(field) !== -1 || moreFields.indexOf(field) !== -1;
                     });
                 }
             });

@@ -95,8 +95,7 @@ export function presetIndex(context) {
         const p = d.presets[presetID];
         if (p) {   // add or replace
           const isAddable = !_addablePresetIDs || _addablePresetIDs.has(presetID);
-          _presets[presetID] = presetPreset(presetID, p, _fields, isAddable);
-          // _presets[presetID] = presetPreset(presetID, p, _fields, isAddable, _presets);
+          _presets[presetID] = presetPreset(presetID, p, isAddable, _fields, _presets);
         } else {   // remove (but not if it's a fallback)
           const existing = _presets[presetID];
           if (existing && !existing.isFallback()) {
@@ -132,11 +131,11 @@ export function presetIndex(context) {
       });
     }
 
-    // Rebuild universal fields
-    _universal = Object.values(_fields).reduce((acc, field) => {
-      if (field.universal) acc.push(field);
-      return acc;
-    }, []);
+    // Rebuild universal fields array
+    _universal = Object.values(_fields).filter(field => field.universal);
+
+    // Reset all the preset fields - they'll need to be resolved again
+    Object.values(_presets).forEach(preset => preset.resetFields());
 
     // Rebuild _this.collection
     _this.collection = Object.values(_presets).concat(Object.values(_categories));

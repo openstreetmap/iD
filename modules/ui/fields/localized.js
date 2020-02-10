@@ -106,7 +106,7 @@ export function uiFieldLocalized(field, context) {
 
                 var preset = context.presets().match(entity, context.graph());
                 var isSuggestion = preset && preset.suggestion;
-                var showsBrand = preset && preset.fields.filter(function(d) {
+                var showsBrand = preset && preset.originalFields.filter(function(d) {
                     return d.id === 'brand';
                 }).length;
                 // protect standardized brand names
