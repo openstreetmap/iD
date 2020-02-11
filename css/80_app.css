@@ -1179,12 +1179,10 @@ a.hide-toggle {
 
 .preset-list-button .label-inner {
     width: 100%;
+    line-height: 1.35em;
 }
 .preset-list-button .label-inner .namepart {
-    height: 17px;
-    white-space: nowrap;
     text-overflow: ellipsis;
-    overflow: hidden;
 }
 .preset-list-button .label-inner .namepart:nth-child(2) {
     font-weight: normal;
