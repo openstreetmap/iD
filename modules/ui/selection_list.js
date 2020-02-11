@@ -128,7 +128,11 @@ export function uiSelectionList(context) {
             .text(function(entity) { return context.presets().match(entity, context.graph()).name(); });
 
         items.selectAll('.entity-name')
-            .text(function(entity) { return utilDisplayName(entity); });
+            .text(function(d) {
+                // fetch latest entity
+                var entity = context.entity(d.id)
+                return utilDisplayName(entity);
+            });
     }
 
     function updateTitle() {
