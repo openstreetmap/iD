@@ -3249,14 +3249,6 @@
                 "faces": {
                     "label": "Faces"
                 },
-                "facility": {
-                    "label": "Facilities",
-                    "options": {
-                        "foot": "Foot",
-                        "arm": "Arm",
-                        "face": "Face"
-                    }
-                },
                 "fax": {
                     "label": "Fax",
                     "terms": "",
@@ -6062,6 +6054,10 @@
                 "barrier/sally_port": {
                     "name": "Sally Port",
                     "terms": "Postern,castle side gate"
+                },
+                "barrier/spike": {
+                    "name": "Spike",
+                    "terms": ""
                 },
                 "barrier/stile": {
                     "name": "Stile",
