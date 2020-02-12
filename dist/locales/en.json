@@ -6055,7 +6055,7 @@
                     "name": "Sally Port",
                     "terms": "Postern,castle side gate"
                 },
-                "barrier/spike_strip": {
+                "barrier/spike": {
                     "name": "Spike Strip",
                     "terms": ""
                 },
