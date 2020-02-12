@@ -4078,10 +4078,10 @@ en:
         name: Sally Port
         # 'terms: Postern,castle side gate'
         terms: '<translate with synonyms or related terms for ''Sally Port'', separated by commas>'
-      barrier/spike:
-        # barrier=spike
-        name: Spike
-        terms: '<translate with synonyms or related terms for ''Spike'', separated by commas>'
+      barrier/spike_strip:
+        # barrier=spike Strip
+        name: Spike Strip
+        terms: '<translate with synonyms or related terms for ''Spike Strip'', separated by commas>'
       barrier/stile:
         # barrier=stile
         name: Stile
