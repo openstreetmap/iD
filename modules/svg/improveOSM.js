@@ -127,10 +127,10 @@ export function svgImproveOSM(projection, context, dispatch) {
 
     markersEnter
       .append('use')
-        .attr('transform', 'translate(-5.5, -21)')
+        .attr('transform', 'translate(-6.5, -23)')
         .attr('class', 'icon-annotation')
-        .attr('width', '11px')
-        .attr('height', '11px')
+        .attr('width', '13px')
+        .attr('height', '13px')
         .attr('xlink:href', d => {
           const picon = d.icon;
 

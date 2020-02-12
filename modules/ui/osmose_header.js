@@ -48,9 +48,9 @@ export function uiOsmoseHeader() {
     svgEnter
       .append('use')
         .attr('class', 'icon-annotation')
-        .attr('width', '11px')
-        .attr('height', '11px')
-        .attr('transform', 'translate(4.5, 7)')
+        .attr('width', '13px')
+        .attr('height', '13px')
+        .attr('transform', 'translate(3.5, 5)')
         .attr('xlink:href', d => {
           const picon = d.icon;
 
