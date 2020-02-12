@@ -3,7 +3,7 @@ export class QAItem {
   constructor(loc, service, itemType, id, props) {
     // Store required properties
     this.loc = loc;
-    this.service = service;
+    this.service = service.title;
     this.itemType = itemType;
 
     // All issues must have an ID for selection, use generic if none specified
@@ -33,7 +33,7 @@ export class QAItem {
     return this;
   }
 
-  // Generic handling for services without nice IDs
+  // Generic handling for newly created QAItems
   static id() {
     return this.nextId--;
   }

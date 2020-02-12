@@ -118,6 +118,8 @@ function preventCoincident(loc, bumpUp) {
 }
 
 export default {
+  title: 'improveOSM',
+
   init(context) {
     context.data().get('qa_data')
       .then(d => _impOsmData = d.improveOSM);
@@ -209,7 +211,7 @@ export default {
                 // One-ways can land on same segment in opposite direction
                 loc = preventCoincident(loc, false);
 
-                let d = new QAItem(loc, 'improveOSM', k, itemId, {
+                let d = new QAItem(loc, this, k, itemId, {
                   issueKey: k, // used as a category
                   identifier: { // used to post changes
                     wayId,
@@ -246,7 +248,7 @@ export default {
                 let loc = pointAverage(feature.points);
                 loc = preventCoincident(loc, false);
 
-                let d = new QAItem(loc, 'improveOSM', `${k}-${geoType}`, itemId, {
+                let d = new QAItem(loc, this, `${k}-${geoType}`, itemId, {
                   issueKey: k,
                   identifier: { x, y }
                 });
@@ -282,7 +284,7 @@ export default {
                 const via_node = ids[3];
                 const to_way = ids[2].split(':')[1];
 
-                let d = new QAItem(loc, 'improveOSM', k, itemId, {
+                let d = new QAItem(loc, this, k, itemId, {
                   issueKey: k,
                   identifier: id,
                   objectId: via_node,

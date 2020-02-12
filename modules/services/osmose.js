@@ -61,6 +61,8 @@ function preventCoincident(loc) {
 }
 
 export default {
+  title: 'osmose',
+
   init(context) {
     context.data().get('qa_data')
       .then(d => {
@@ -135,7 +137,7 @@ export default {
                 let loc = issue.geometry.coordinates; // lon, lat
                 loc = preventCoincident(loc);
 
-                let d = new QAItem(loc, 'osmose', itemType, id, { item });
+                let d = new QAItem(loc, this, itemType, id, { item });
 
                 // Setting elems here prevents UI detail requests
                 if (item === 8300 || item === 8360) {
