@@ -2752,9 +2752,11 @@ input.key-trap {
 [dir='rtl'] .qa-details-description-text::first-letter {
     text-transform: none;  /* #5877 */
 }
-.qa-details-subsection h4 {
-    padding-top: 10px;
-    padding-bottom: 0;
+.qa-details-subsection:not(:last-child) {
+    margin-bottom: 10px;
+}
+.qa-details-subsection:empty {
+    display: none;
 }
 .qa-details-container code {
     padding: .2em .4em;
