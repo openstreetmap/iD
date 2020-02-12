@@ -130,7 +130,7 @@ export function uiSelectionList(context) {
         items.selectAll('.entity-name')
             .text(function(d) {
                 // fetch latest entity
-                var entity = context.entity(d.id)
+                var entity = context.entity(d.id);
                 return utilDisplayName(entity);
             });
     }
