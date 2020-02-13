@@ -81,7 +81,7 @@ const whitelist = [
         description: 'Maxar Premium is a mosaic composed of Maxar basemap with select regions filled with +Vivid or custom area of interest imagery, 50cm resolution or better, and refreshed more frequently with ongoing updates.',
         icon: 'https://osmlab.github.io/editor-layer-index/sources/world/Maxar.png',
         max_zoom: 22,
-        url: '7586487389962e3f7835ab2cd9de36186233a5cc87e2d6c4eefc99854cdee999618d8924afb64904e2fa08f2beefd70d8c38eacb2e7210526a4da48222c02d89373d2d0c0506bae7e9e2267c45b0d0ece2f4d207dc7bfc885fd6e33c2d12cfb73de8924c80c34d2b7c7e6d69273913e7445092f229632b02ed4b66a38472045ba30b01c62566d988eaed8d0fb4618412c0c984a264554628056d643160ccd4b17fe53c6edfe19852a65281e2ac1bfa7ba5a2c42425',
+        url: '7586487389962e3f6e31ab2ed8ca321f2f3fe2cf87f1dedce8fc918b4692efd86fcd816ab8a35303effb1be9abe39b1cce3fe6db2c740044364ae68560822c88373d2c784325baf4e1fa007c6dbedab4cea3fa0dd86ee0ae4feeef032d33dcac28e4b16c90d55a42087c6b66526423ea1b4cc7e63c613940eb1c60f48270060bf41c5fcb6a628985ebe6801e9e71f041cc9f8df06b0345600376663e7dc1cdbc7df16876d8b5d006ed5782e6af4bfe2ff5a292',
         encrypted: true
     }, {
         id: 'Maxar-Standard',
@@ -96,7 +96,7 @@ const whitelist = [
         description: 'Maxar Standard is a curated set of imagery covering 86% of the earth’s landmass, with 30-60cm resolution where available, backfilled by Landsat. Average age is 2.31 years, with some areas updated 2x per year.',
         icon: 'https://osmlab.github.io/editor-layer-index/sources/world/Maxar.png',
         max_zoom: 22,
-        url: '7586487389962e3f7835ab2cd9de36186233a5cc87e2d6c4eefc99854cdee999618d8924afb64904e2fa08f2beefd70d8c38eacb2e7210526a4da48222c02d89373d2d0c0506bae7e9e2267c45b0d0ece2f4d207dc7bfc885fd6e33c2d12cfb73de8924c80c34d2b7c7e6d69273913e7445092f229632b02ed4b66a38472045ba30b01c62566d988eaed8d0fb4618412c09880f43e5e4678056d666367c5d4b17fef336edfb09f07a651d3e3ab4af97ef2f1c47122',
+        url: '7586487389962e3f6e31ab2ed8ca321f2f3fe2cf87f1dedce8fc918b4692efd86fcd816ab8a35303effb1be9abe39b1cce3fe6db2c740044364ae68560822c88373d2c784325baf4e1fa007c6dbedab4cea3fa0dd86ee0ae4feeef032d33dcac28e4b16c90d55a42087c6b66526423ea1b4cc7e63c613940eb1c60f48270060bf41c5fcb6a628985ebe6801e9e71f010c8c9d7fb6b534560012461377dc1cdb672f16827dfe0d005bf5685b7ac4ea97cf5f795',
         encrypted: true
     }
 ];
