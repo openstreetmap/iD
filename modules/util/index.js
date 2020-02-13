@@ -1,3 +1,6 @@
+export { utilAesEncrypt } from './aes';
+export { utilAesDecrypt } from './aes';
+
 export { utilArrayChunk } from './array';
 export { utilArrayDifference } from './array';
 export { utilArrayFlatten } from './array';
