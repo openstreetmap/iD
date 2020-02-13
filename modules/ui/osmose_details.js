@@ -7,7 +7,7 @@ import {
 import { modeSelect } from '../modes/select';
 import { t } from '../util/locale';
 import { services } from '../services';
-import { utilDisplayName, utilEntityOrMemberSelector } from '../util';
+import { utilDisplayName, utilHighlightEntities } from '../util';
 
 
 export function uiOsmoseDetails(context) {
@@ -151,15 +151,16 @@ export function uiOsmoseDetails(context) {
               // Add click handler
               link
                 .on('mouseenter', () => {
-                  context.surface().selectAll(utilEntityOrMemberSelector([entityID], context.graph()))
-                    .classed('hover', true);
+                  utilHighlightEntities([entityID], true, context);
                 })
                 .on('mouseleave', () => {
-                  context.surface().selectAll('.hover')
-                    .classed('hover', false);
+                  utilHighlightEntities([entityID], false, context);
                 })
                 .on('click', () => {
                   d3_event.preventDefault();
+
+                  utilHighlightEntities([entityID], false, context);
+
                   const osmlayer = context.layers().layer('osm');
                   if (!osmlayer.enabled()) {
                     osmlayer.enabled(true);

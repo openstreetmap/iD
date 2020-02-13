@@ -6,7 +6,7 @@ import {
 import { dataEn } from '../../data';
 import { modeSelect } from '../modes/select';
 import { t } from '../util/locale';
-import { utilDisplayName, utilEntityOrMemberSelector, utilEntityRoot } from '../util';
+import { utilDisplayName, utilHighlightEntities, utilEntityRoot } from '../util';
 
 export function uiImproveOsmDetails(context) {
   let _qaItem;
@@ -76,15 +76,16 @@ export function uiImproveOsmDetails(context) {
         // Add click handler
         link
           .on('mouseenter', () => {
-            context.surface().selectAll(utilEntityOrMemberSelector([entityID], context.graph()))
-              .classed('hover', true);
+            utilHighlightEntities([entityID], true, context);
           })
           .on('mouseleave', () => {
-            context.surface().selectAll('.hover')
-              .classed('hover', false);
+            utilHighlightEntities([entityID], false, context);
           })
           .on('click', () => {
             d3_event.preventDefault();
+
+            utilHighlightEntities([entityID], false, context);
+
             const osmlayer = context.layers().layer('osm');
             if (!osmlayer.enabled()) {
               osmlayer.enabled(true);
