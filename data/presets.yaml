@@ -446,6 +446,8 @@ en:
       check_date:
         # check_date=*
         label: Last Checked Date
+        # check_date field placeholder
+        placeholder: YYYY-MM-DD
       clothes:
         # clothes=*
         label: Clothes
@@ -1550,6 +1552,8 @@ en:
       opening_date:
         # opening_date=*
         label: Expected Opening Date
+        # opening_date field placeholder
+        placeholder: YYYY-MM-DD
       opening_hours:
         # opening_hours=*
         label: Hours
@@ -2283,6 +2287,8 @@ en:
       start_date:
         # start_date=*
         label: Start Date
+        # start_date field placeholder
+        placeholder: YYYY-MM-DD
         # 'terms: inception'
         terms: '[translate with synonyms or related terms for ''Start Date'', separated by commas]'
       step_count:

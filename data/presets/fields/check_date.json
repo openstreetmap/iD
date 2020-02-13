@@ -1,5 +1,6 @@
 {
     "key": "check_date",
     "type": "text",
-    "label": "Last Checked Date"
+    "label": "Last Checked Date",
+    "placeholder": "YYYY-MM-DD"
 }
