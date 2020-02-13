@@ -68,6 +68,37 @@ const supportedWMSProjections = [
 
 const whitelist = [
     // Add custom sources here if needed.
+    {
+        id: 'Maxar-Premium',
+        name: 'Maxar Premium Imagery (Beta)',
+        type: 'tms',
+        default: true,
+        attribution: {
+            required: true,
+            text: 'Terms & Feedback',
+            url: 'https://wiki.openstreetmap.org/wiki/DigitalGlobe'
+        },
+        description: 'Maxar Premium is a mosaic composed of Maxar basemap with select regions filled with +Vivid or custom area of interest imagery, 50cm resolution or better, and refreshed more frequently with ongoing updates.',
+        icon: 'https://osmlab.github.io/editor-layer-index/sources/world/Maxar.png',
+        max_zoom: 22,
+        url: '7586487389962e3f7835ab2cd9de36186233a5cc87e2d6c4eefc99854cdee999618d8924afb64904e2fa08f2beefd70d8c38eacb2e7210526a4da48222c02d89373d2d0c0506bae7e9e2267c45b0d0ece2f4d207dc7bfc885fd6e33c2d12cfb73de8924c80c34d2b7c7e6d69273913e7445092f229632b02ed4b66a38472045ba30b01c62566d988eaed8d0fb4618412c0c984a264554628056d643160ccd4b17fe53c6edfe19852a65281e2ac1bfa7ba5a2c42425',
+        encrypted: true
+    }, {
+        id: 'Maxar-Standard',
+        name: 'Maxar Standard Imagery (Beta)',
+        type: 'tms',
+        default: true,
+        attribution: {
+            required: true,
+            text: 'Terms & Feedback',
+            url: 'https://wiki.openstreetmap.org/wiki/DigitalGlobe'
+        },
+        description: 'Maxar Standard is a curated set of imagery covering 86% of the earth’s landmass, with 30-60cm resolution where available, backfilled by Landsat. Average age is 2.31 years, with some areas updated 2x per year.',
+        icon: 'https://osmlab.github.io/editor-layer-index/sources/world/Maxar.png',
+        max_zoom: 22,
+        url: '7586487389962e3f7835ab2cd9de36186233a5cc87e2d6c4eefc99854cdee999618d8924afb64904e2fa08f2beefd70d8c38eacb2e7210526a4da48222c02d89373d2d0c0506bae7e9e2267c45b0d0ece2f4d207dc7bfc885fd6e33c2d12cfb73de8924c80c34d2b7c7e6d69273913e7445092f229632b02ed4b66a38472045ba30b01c62566d988eaed8d0fb4618412c09880f43e5e4678056d666367c5d4b17fef336edfb09f07a651d3e3ab4af97ef2f1c47122',
+        encrypted: true
+    }
 ];
 
 
@@ -159,7 +190,7 @@ sources.concat(whitelist).forEach(function(source) {
         im.terms_html = attribution.html;
     }
 
-    ['best', 'default', 'description', 'icon', 'overlay', 'tileSize'].forEach(function(a) {
+    ['best', 'default', 'description', 'encrypted', 'icon', 'overlay', 'tileSize'].forEach(function(a) {
         if (source[a]) {
             im[a] = source[a];
         }

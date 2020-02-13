@@ -3,6 +3,7 @@ import { json as d3_json } from 'd3-fetch';
 
 import { t } from '../util/locale';
 import { geoExtent, geoSphericalDistance } from '../geo';
+import { utilAesDecrypt } from '../util/aes';
 import { utilDetect } from '../util/detect';
 
 
@@ -33,7 +34,7 @@ export function rendererBackgroundSource(data) {
     var name = source.name;
     var description = source.description;
     var best = !!source.best;
-    var template = source.template;
+    var template = source.encrypted ? utilAesDecrypt(source.template) : source.template;
 
     source.tileSize = data.tileSize || 256;
     source.zoomExtent = data.zoomExtent || [0, 22];
