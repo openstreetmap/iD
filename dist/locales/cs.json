@@ -7,7 +7,10 @@
             "undo": "Zpět",
             "zoom_to": "přiblížit",
             "copy": "kopírovat",
-            "favorite": "oblíbené"
+            "favorite": "oblíbené",
+            "list": "seznam",
+            "text": "text",
+            "deselect": "odznačit"
         },
         "toolbar": {
             "inspect": "Prozkoumat",
@@ -49,19 +52,7 @@
                 "key": "N"
             },
             "add_preset": {
-                "title": "Přidat {feature}",
-                "point": {
-                    "title": "Přidat {feature} jako bod"
-                },
-                "line": {
-                    "title": "přidat {feature} jako linii"
-                },
-                "area": {
-                    "title": "Přidat {feature} jako plochu"
-                },
-                "building": {
-                    "title": "Přidat {feature} jako budovu"
-                }
+                "title": "Přidat {feature}"
             },
             "browse": {
                 "title": "Procházet",
@@ -114,24 +105,20 @@
             },
             "circularize": {
                 "title": "Zakulatit",
-                "description": {
-                    "line": "Udělat z této linie kruh.",
-                    "area": "Udělat z této plochy kruh."
-                },
-                "key": "O",
-                "annotation": {
-                    "line": "Zakulatit linii.",
-                    "area": "Zakulatit plochu."
-                },
-                "not_closed": "Nelze zakulatit, neboť nejde o smyčku.",
-                "too_large": "Nelze zakulatit, protože není vidět dostatečně velká část.",
-                "connected_to_hidden": "Nelze zakulatit, protože je napojen na skrytý prvek.",
-                "not_downloaded": "Nelze zakulatit, neboť části tohoto objektu nebyly dosud stažené.",
-                "already_circular": "To nelze udělat kruhové, protože to je již kruhové."
+                "key": "O"
             },
             "orthogonalize": {
                 "title": "Zpravoúhlit",
-                "key": "Q"
+                "description": {
+                    "corner": {
+                        "single": "Zpravoúhlit tento roh.",
+                        "multiple": "Zpravoúhlit tyto rohy."
+                    }
+                },
+                "key": "Q",
+                "multiple_blockers": {
+                    "multiple": "Nelze zpravoúhlit z několika důvodů."
+                }
             },
             "straighten": {
                 "title": "Narovnat",
@@ -191,7 +178,8 @@
                 "title": "Degradovat",
                 "description": {
                     "building_address": "Odstraňte všechny značky které nemají souvislost s adresu a budovou.",
-                    "building": "Odstraňte všechny značky nesouvisející s budovami."
+                    "building": "Odstraňte všechny značky nesouvisející s budovami.",
+                    "address": "Odstranit všechny neadresní štítky."
                 },
                 "annotation": {
                     "building": {
@@ -383,7 +371,11 @@
                 }
             },
             "extract": {
+                "title": "Vyjmout",
                 "key": "E",
+                "annotation": {
+                    "single": "Vyjmutý bod."
+                },
                 "connected_to_hidden": {
                     "vertex": {
                         "single": "Tento bod nelze extrahovat, protože je připojen ke skrytému prvku."
@@ -571,10 +563,6 @@
             "show_more": "Zobrazit víc",
             "view_on_osm": "Zobrazit na openstreetmap.org",
             "view_on_keepRight": "Zobrazit na keepright.at",
-            "all_fields": "Všechny vlastnosti",
-            "all_tags": "Všechny vlastnosti",
-            "all_members": "Všechny prvky",
-            "all_relations": "Všechny relace",
             "add_to_relation": "Přidat k relaci",
             "new_relation": "Nová relace...",
             "choose_relation": "Vybrat nadřazenou(rodičovskou) relaci",
@@ -588,10 +576,8 @@
             "hidden_preset": {
                 "zoom": "{features} jsou skryté. Pro jejich zobrazení přibližte."
             },
-            "back_tooltip": "Změnit prvek",
             "remove": "Odstranit",
             "search": "Hledat",
-            "multiselect": "Vyber prvky",
             "unknown": "Není známo",
             "incomplete": "<nebylo staženo>",
             "feature_list": "Hledat prvky",
@@ -614,10 +600,7 @@
             "way": "Linie",
             "relation": "Relace",
             "location": "Poloha",
-            "add_fields": "Přidat vlastnost:",
-            "lock": {
-                "suggestion": "Pole \"{label}\" je uzamčeno, protože je načteno z vlastnosti Wikidata. Smazat či upravit ho můžete v sekci Všechny vlastnosti."
-            }
+            "add_fields": "Přidat vlastnost:"
         },
         "background": {
             "title": "Pozadí",
@@ -644,7 +627,6 @@
             "panel": {
                 "description": "Zobrazit panel detailů"
             },
-            "fix_misalignment": "Zarovnat podklad",
             "offset": "Vizuálně vyrovnejte posunutí podkladů v šedé oblasti tak, aby lícovaly s mapou. Nebo zadejte hodnotu posunu v metrech."
         },
         "map_data": {
@@ -662,11 +644,9 @@
                     "title": "OpenStreetMap poznámky"
                 },
                 "keepRight": {
-                    "tooltip": "Automaticky odhalený problém z keepright.at",
                     "title": "Problémy z KeepRight"
                 },
                 "improveOSM": {
-                    "tooltip": "Chybějící data byla automaticky detekována pomocí improveosm.org",
                     "title": "Problémy ImproveOSM"
                 },
                 "custom": {
@@ -934,16 +914,11 @@
                 }
             },
             "keepRight": {
-                "title": "Problém KeepRight",
-                "detail_title": "Chyba",
                 "detail_description": "Popis",
                 "comment": "Komentář",
                 "comment_placeholder": "Vložte komentář, který bude sdílen s dalšími uživateli.",
-                "close": "Zavřít (chyba opravena)",
-                "ignore": "Ignorovat (není chyba)",
                 "save_comment": "Uložit komentář",
                 "close_comment": "Zavřít a okomentovat",
-                "ignore_comment": "Ignorovat a okomentovat",
                 "error_parts": {
                     "this_node": "tento bod",
                     "this_way": "tato linie",
@@ -1379,6 +1354,7 @@
             },
             "points": {
                 "title": "Body",
+                "intro": "*Body* lze použít k označení prvků, jako jsou obchody, restaurace a památky. Označují konkrétní umístění a popisují, co je tam.",
                 "add_point_h": "Přidávání bodů",
                 "add_point_finish": "Chcete-li umístit nový bod na mapu, umístěte kurzor myši na místo, kam má bod směřovat, potom klikněte levým tlačítkem myši nebo stiskněte `mezerník '.",
                 "move_point_h": "Přesun bodů",
@@ -1404,6 +1380,7 @@
             },
             "areas": {
                 "title": "Plochy",
+                "intro": "*Plochy* se používají k zobrazení hranic prvků, jako jsou jezera, budovy a obytné oblasti. Plochy by měly být obkresleny kolem okraje prvku, který představují, například kolem základny budovy.",
                 "point_or_area_h": "Body, nebo plochy?",
                 "point_or_area": "Mnohé funkce mohou být reprezentovány jako body nebo oblasti. Měli byste mapovat stavby a obrysy nemovitostí jako oblasti, kdykoli je to možné. Umístěte body uvnitř budovy, aby reprezentovaly podniky, vybavení a další funkce umístěné uvnitř budovy.",
                 "add_area_h": "Přidávání ploch",
@@ -1417,14 +1394,14 @@
             "relations": {
                 "title": "Relace",
                 "edit_relation_h": "Úpravy relací",
-                "edit_relation": "V dolní části editoru funkcí můžete rozbalit část \"Všechny relace\", abyste zjistili, zda je vybraná funkce členem nějakých relací. Potom můžete kliknout na odkaz pro jeho výběr a úpravu.",
-                "edit_relation_add": "Chcete-li do relace přidat funkci, vyberte tuto funkci a potom klepněte na tlačítko {plus} add v sekci \"Všechny vztahy\" v editoru funkcí. Můžete si vybrat ze seznamu blízkých relací nebo zvolit možnost \"Nová relace...\".",
+                "maintain_relation_h": "Udržování relací",
                 "relation_types_h": "Typy relací",
                 "multipolygon_h": "Multipolygony",
                 "turn_restriction_h": "Omezení odbočování",
                 "turn_restriction_editing": "V poli \"Omezit odbočení\" klepnutím vyberte cestu \"od\" a zjistěte, zda jsou povoleny nebo omezeny na jakoukoli cestu \"na\". Klepnutím na ikony otočení je můžete přepínat mezi povolenými a omezenými. iD editor vytvoří vztahy automaticky a nastaví z, přes, a na na základě vašich rozhodnutí.",
                 "route_h": "Trasy",
-                "boundary_h": "Hranice"
+                "boundary_h": "Hranice",
+                "boundary": "Relace *hranice* je skupina jednoho nebo více liniových prvků, které společně tvoří administrativní hranici."
             },
             "notes": {
                 "title": "Poznámky",
@@ -2134,6 +2111,7 @@
                         "block_number": "Číslo bloku",
                         "block_number!jp": "Č. bloku",
                         "city": "Město",
+                        "city!cn": "Město/Prefektura/Společenství",
                         "city!jp": "Velkoměsto/Město/Vesnice/Tokijský zvláštní okrsek",
                         "city!vn": "Obec",
                         "conscriptionnumber": "123",
@@ -4000,9 +3978,6 @@
                 "advertising/column": {
                     "name": "Reklamní sloup"
                 },
-                "aerialway": {
-                    "name": "Lanovka/vlek"
-                },
                 "aerialway/cable_car": {
                     "name": "Kabinová lanovka",
                     "terms": "kabinková lanovka,kabinová lanovka,kabinková lanová dráha,kabinová lanová dráha"
@@ -4042,9 +4017,6 @@
                 "aerialway/rope_tow": {
                     "name": "Vlek - kotvičkový",
                     "terms": "lyžařský vlek,vlek,kotva,kotvička,lanový vlek"
-                },
-                "aeroway": {
-                    "name": "Přistávací dráha"
                 },
                 "aeroway/aerodrome": {
                     "name": "Letiště",
@@ -4347,6 +4319,9 @@
                 },
                 "amenity/parking/underground": {
                     "name": "Podzemní parkoviště"
+                },
+                "amenity/parking_entrance": {
+                    "name": "Vjezd / Výjezd krytého parkoviště"
                 },
                 "amenity/parking_space": {
                     "name": "Parkovací místo",
@@ -4703,6 +4678,9 @@
                     "name": "Plocha",
                     "terms": "území,oblast,plocha,prostor"
                 },
+                "area/highway": {
+                    "name": "Plocha silnice"
+                },
                 "attraction": {
                     "name": "Atrakce"
                 },
@@ -4726,6 +4704,9 @@
                 },
                 "attraction/maze": {
                     "name": "Bludiště"
+                },
+                "attraction/river_rafting": {
+                    "name": "Jízda na divoké řece"
                 },
                 "attraction/roller_coaster": {
                     "name": "Horská dráha"
@@ -5271,6 +5252,9 @@
                 },
                 "emergency/yes": {
                     "name": "Vjezd záchranných vozidel povolen"
+                },
+                "entrance": {
+                    "name": "Vchod / Východ"
                 },
                 "ford": {
                     "name": "Brod",
@@ -5885,6 +5869,12 @@
                     "name": "Venkovní tělocvična",
                     "terms": "fitko,fitness,tělocvična"
                 },
+                "leisure/fitness_station/horizontal_bar": {
+                    "name": "Vodorovná tyč"
+                },
+                "leisure/fitness_station/parallel_bars": {
+                    "name": "Rovnoběžné tyče"
+                },
                 "leisure/fitness_station/rings": {
                     "name": "Cvičební kruhy"
                 },
@@ -6071,6 +6061,9 @@
                 "man_made/breakwater": {
                     "name": "Vlnolam",
                     "terms": "pobřežní hráz,násep,kameny,molo,zábrana"
+                },
+                "man_made/bridge": {
+                    "name": "Plocha mostu"
                 },
                 "man_made/chimney": {
                     "name": "Komín",
@@ -6816,6 +6809,9 @@
                     "name": "Prodejna alkoholu",
                     "terms": "alkohol,alkoholický"
                 },
+                "shop/anime": {
+                    "name": "obchod s Anime / Manga"
+                },
                 "shop/antiques": {
                     "name": "Starožitnictví",
                     "terms": "starožitnost,starožitnosti,starožitnictví,antikvář,antikvity,antikvita,antikvariát"
@@ -6949,6 +6945,9 @@
                 "shop/cosmetics": {
                     "name": "Obchod s kosmetikou",
                     "terms": "kosmetika,kosmetický,makeup,parfém,parfumerie"
+                },
+                "shop/craft": {
+                    "name": "Obchod s řemeslnými výrobky"
                 },
                 "shop/curtain": {
                     "name": "Obchod se závěsy",
@@ -7717,9 +7716,6 @@
                 "name": "Světové snímky Esri (Clarity) Beta"
             },
             "MAPNIK": {
-                "attribution": {
-                    "text": "© Přispěvatelé OpenStreetMap, CC-BY-SA"
-                },
                 "description": "Výchozí vrstva OpenStreetMap.",
                 "name": "OpenStreetMap (standardní)"
             },
@@ -7874,16 +7870,6 @@
                 },
                 "description": "Překrytí anotací poskytuje basemap.at."
             },
-            "basemap.at-surface": {
-                "attribution": {
-                    "text": "basemap.at"
-                }
-            },
-            "basemap.at-terrain": {
-                "attribution": {
-                    "text": "basemap.at"
-                }
-            },
             "eufar-balaton": {
                 "attribution": {
                     "text": "Ortofoto EUFAR Balaton 2010"
@@ -7896,12 +7882,6 @@
                 },
                 "description": "GSI Kiban 2500 přes finds.jp. Dobrá pro odvozování dat, ale trochu starší.",
                 "name": "GSI KIBAN 2500 Japonsko"
-            },
-            "gsi.go.jp": {
-                "attribution": {
-                    "text": "GSI Japonsko"
-                },
-                "description": "Ortofoto GSI Japonsko. většinou lepší než Bing, ale trochu starší."
             },
             "gsi.go.jp_airphoto": {
                 "attribution": {
@@ -8169,9 +8149,6 @@
             "OSM-Utah": {
                 "name": "OpenStreetMap Utah",
                 "description": "Mapovači a uživatelé OpenStreetMap na území Salt Lake City"
-            },
-            "OSM-Vancouver-meetup": {
-                "name": "OpenStreetMap Vancouver"
             },
             "OSM-Wyoming": {
                 "name": "OpenStreetMap Wyoming",

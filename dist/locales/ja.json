@@ -8,7 +8,10 @@
             "zoom_to": "ここにズーム",
             "copy": "コピー",
             "view_on": "{domain}で閲覧",
-            "favorite": "お気に入り"
+            "favorite": "お気に入り",
+            "list": "リスト",
+            "text": "テキスト",
+            "deselect": "選択解除"
         },
         "toolbar": {
             "inspect": "位置検索/タグ編集",
@@ -51,19 +54,7 @@
                 "key": "N"
             },
             "add_preset": {
-                "title": "{feature}を追加する",
-                "point": {
-                    "title": "{feature}をポイントとして追加する"
-                },
-                "line": {
-                    "title": "{feature}をラインとして追加する"
-                },
-                "area": {
-                    "title": "{feature}をエリアとして追加する"
-                },
-                "building": {
-                    "title": "{feature} を建物として追加する"
-                }
+                "title": "{feature}を追加する"
             },
             "browse": {
                 "title": "ブラウズ",
@@ -117,19 +108,37 @@
             "circularize": {
                 "title": "円状に並べる",
                 "description": {
-                    "line": "ラインを円状に整形",
-                    "area": "エリアを円状に整形"
+                    "single": "この地物を円状に整形",
+                    "multiple": "これらの地物を円状に整形"
                 },
                 "key": "O",
                 "annotation": {
-                    "line": "ラインを円状に整形",
-                    "area": "エリアを円状に整形"
+                    "single": "地物を円状に整形しました。",
+                    "multiple": "地物を円状に整形しました。"
                 },
-                "not_closed": "エリアが閉じられていないため、円状に整形することができません",
-                "too_large": "ウェイが完全には表示されていないため、円状に整形することができません。",
-                "connected_to_hidden": "非表示の地物に接続しているため、円状に整形することができません。",
-                "not_downloaded": "一部がまだダウンロードされていないため、円状に整形できません。",
-                "already_circular": "既に円形のため、円形化できません。"
+                "multiple_blockers": {
+                    "multiple": "複数の理由によりこれらは円状にできません。"
+                },
+                "not_closed": {
+                    "single": "エリアが閉じられていないため、円状に整形することができません",
+                    "multiple": "エリアが閉じられていないため、円状に整形することができません"
+                },
+                "too_large": {
+                    "single": "全体が表示されていないため、円状に整形することができません。",
+                    "multiple": "全体が表示されていないため、円状に整形することができません。"
+                },
+                "connected_to_hidden": {
+                    "single": "非表示の地物に接続しているため、円状に整形することができません。",
+                    "multiple": "非表示の地物に接続しているものがあるため、円状に整形することができません。"
+                },
+                "not_downloaded": {
+                    "single": "一部がまだダウンロードされていないため、円状に整形できません。",
+                    "multiple": "一部がまだダウンロードされていないため、円状に整形できません。"
+                },
+                "already_circular": {
+                    "single": "既に円状です。",
+                    "multiple": "既に円状です。"
+                }
             },
             "orthogonalize": {
                 "title": "直角化",
@@ -684,10 +693,12 @@
             "show_more": "次を表示",
             "view_on_osm": "openstreetmap.orgで確認",
             "view_on_keepRight": "keepright.at 上で閲覧",
-            "all_fields": "すべての項目",
-            "all_tags": "すべてのタグ",
-            "all_members": "すべてのメンバー",
-            "all_relations": "すべてのリレーション",
+            "feature_type": "地物の種類",
+            "fields": "すべての項目",
+            "tags_count": "タグ ({count})",
+            "members_count": "メンバー ({count})",
+            "relations_count": "リレーション ({count})",
+            "features_count": "地物 ({count})",
             "add_to_relation": "リレーションに追加",
             "new_relation": "新しいリレーション...",
             "choose_relation": "親のリレーションを選択",
@@ -698,18 +709,22 @@
             "edit_reference": "編集/翻訳",
             "wiki_reference": "ドキュメントを見る",
             "wiki_en_reference": "ドキュメントを英語で見る",
+            "key_value": "key=value",
+            "multiple_values": "複数の値",
+            "multiple_types": "複数の種類",
+            "unshared_value_tooltip": "全ての地物では共有されていません",
             "hidden_preset": {
                 "manual": "{features} が非表示となっています。地図データ設定ペインで有効化してください。",
                 "zoom": "{features} が非表示となっています。ズームインして有効化してください。"
             },
-            "back_tooltip": "地物の編集",
+            "back_tooltip": "地物の種類を変更",
             "remove": "削除",
             "search": "検索",
-            "multiselect": "選択中の地物",
             "unknown": "不明",
             "incomplete": "<ダウンロード未完了>",
             "feature_list": "地物名や座標で位置検索してズーム",
             "edit": "地物エディタ",
+            "edit_features": "地物を編集",
             "check": {
                 "yes": "はい",
                 "no": "いいえ",
@@ -730,7 +745,7 @@
             "location": "位置",
             "add_fields": "項目追加: ",
             "lock": {
-                "suggestion": "Wikidataタグがあるため「{label}」欄はロックされました。「すべてのタグ」セクションでタグを削除または編集できます。"
+                "suggestion": "wikidataタグがあるために\"{label}\" 項目はロックされています。「すべてのタグ」セクションで削除・編集可能です。"
             }
         },
         "background": {
@@ -760,7 +775,7 @@
                 "description": "詳細パネルを表示",
                 "tooltip": "高度な背景情報を表示"
             },
-            "fix_misalignment": "背景位置の調整",
+            "fix_misalignment": "背景画像オフセット",
             "offset": "画像の位置を調整するには、灰色のエリアのどこかをドラッグするか、ずれ幅をメートル単位で入力するかしてください。"
         },
         "map_data": {
@@ -778,12 +793,16 @@
                     "title": "OpenStreetMapのメモ"
                 },
                 "keepRight": {
-                    "tooltip": "keepright.atが自動検知したマップの改善提案",
+                    "tooltip": "keepright.at が検知したデータの改善提案",
                     "title": "KeepRight の改善提案"
                 },
                 "improveOSM": {
-                    "tooltip": "improveosm.org が自動検知した設定漏れデータ",
+                    "tooltip": "improveosm.org が検知した設定漏れデータ",
                     "title": "ImproveOSM の改善提案(日本は未対応)"
+                },
+                "osmose": {
+                    "tooltip": "osmose.openstreetmap.fr が検知したデータの改善提案",
+                    "title": "Osmose の改善提案"
                 },
                 "custom": {
                     "tooltip": "ページ上にデータファイルをドラッグ＆ドロップするか、画面右側のボタンをクリックして設定してください",
@@ -1030,6 +1049,14 @@
         "cannot_zoom": "現在のモードでは、これ以上ズームアウトできません。",
         "full_screen": "フルスクリーンにする",
         "QA": {
+            "osmose": {
+                "title": "Osmose の改善提案",
+                "detail_title": "詳細",
+                "elems_title": "地物",
+                "fix_title": "修正ガイドライン",
+                "trap_title": "よくある間違い",
+                "translation": "Osmose による翻訳"
+            },
             "improveOSM": {
                 "title": "ImproveOSM 検知内容",
                 "geometry_types": {
@@ -1065,16 +1092,15 @@
                 }
             },
             "keepRight": {
-                "title": "KeepRight の指摘内容",
-                "detail_title": "エラー",
+                "title": "KeepRight",
                 "detail_description": "説明",
                 "comment": "コメント",
                 "comment_placeholder": "コメントを入力して他のユーザーと状況を共有します。",
                 "close": "クローズ (エラー修正済)",
-                "ignore": "無視 (エラーではない)",
+                "ignore": "削除 (偽陽性)",
                 "save_comment": "コメントのみ",
                 "close_comment": "コメント＆クローズ",
-                "ignore_comment": "コメント＆無視（エラーではない）",
+                "ignore_comment": "削除＆コメント",
                 "error_parts": {
                     "this_node": "このノード",
                     "this_way": "このウェイ",
@@ -1532,7 +1558,7 @@
                 "fields_example": "地物の種別ごとにそれぞれ異なる項目が表示されます。例えば、道路には路面、制限速度といった項目が表示されますが、レストランには提供される食事の種別や営業時間が表示されます。",
                 "fields_add_field": "「項目追加」欄でドロップダウンをクリックすると、説明、Wikipedia（記事へのリンク）、車椅子の利用可否などの項目をさらに追加することができます。",
                 "tags_h": "タグ",
-                "tags_all_tags": "項目セクションの下のほうに「すべてのタグ」セクションがあり、選択した地物のためのOpenStreetMap*タグ*をどれでも編集することができます。各タグは*キー*と*値*から成っており、これはOpenStreetMapに蓄積されている全ての地物を定義するデータ要素です。（項目セクションではOpenStreetMapタグを直接憶えていなくても日本語のインタフェースで探して入力できるようになっていますが、ここではタグを直接編集できます。いちばん下の「+」をクリックすると、項目セクションに表示されていないタグを手入力で追加することもできます。）",
+                "tags_all_tags": "すべての項目セクションの下のほうに「すべてのタグ」セクションがあり、選択した地物のためのOpenStreetMap*タグ*をどれでも編集することができます。各タグは*キー*と*値*から成っており、これはOpenStreetMapに蓄積されている全ての地物を定義するデータ要素です。（すべての項目セクションではOpenStreetMapタグを直接憶えていなくても日本語のインタフェースで探して入力できるようになっていますが、ここではタグを直接編集できます。いちばん下の「+」をクリックすると、項目セクションに表示されていないタグを手入力で追加することもできます。）",
                 "tags_resources": "地物のタグを手入力で編集するにはOpenStreetMapについてある程度の知識が必要です。[OpenStreetMap Wiki](https://wiki.openstreetmap.org/wiki/JA:Main_Page) や [Taginfo](https://taginfo.openstreetmap.org/)などのリソースを活用したり相談したりして広く受け入れられているOpenStreetMapのタグ付け方法を学んでください。"
             },
             "points": {
@@ -1656,7 +1682,7 @@
                 "title": "品質改善",
                 "intro": "*品質改善* (Q/A) 用のツールはOpenStreetMap内の不適切なタグ、接続されていない道路、その他の課題などを見つけ出し、マッパーはそれを見て修正することができます。Q/A の課題にどのようなものがあるか見てみる場合は、 {data} **地図データ設定** パネルをクリックして、専用の Q/A レイヤを有効化してください。（訳注：見つけ出された課題はあくまで機械的にピックアップされたものであり、必ずしもエラーではない場合があります。現地の状態やタグ付けの知識があまり無い場合にはくれぐれも注意してください。まずは地元や自分でマッピングした内容の修正から始めると良いでしょう。）",
                 "tools_h": "ツール",
-                "tools": "現在は次のツールがサポートされています: [KeepRight](https://www.keepright.at/)及び[ImproveOSM](https://improveosm.org/en/)。iD は将来 [Osmose](https://osmose.openstreetmap.fr/), その他の Q/A ツールもサポートしたいと考えています。",
+                "tools": "現在は次のツールがサポートされています: [KeepRight](https://www.keepright.at/)、[ImproveOSM](https://improveosm.org/en/)及び [Osmose](https://osmose.openstreetmap.fr/)。",
                 "issues_h": "課題の扱い方",
                 "issues": "Q/A の課題の扱い方はメモと似ています。マーカーをクリックすると、サードバー内で課題の詳細を見ることができます。各ツールにはそれぞれにできることがありますが、たいていコメントを付けたり課題をクローズしたりすることができます。"
             },
@@ -2800,7 +2826,7 @@
                     }
                 },
                 "beauty": {
-                    "label": "美容の種類"
+                    "label": "美容サービスの種類"
                 },
                 "bench": {
                     "label": "ベンチ",
@@ -3142,7 +3168,8 @@
                 },
                 "direction": {
                     "label": "方向(度、時計回り)",
-                    "placeholder": "45, 90, 180, 270"
+                    "placeholder": "45, 90, 180, 270",
+                    "terms": "方向, 度, 角度"
                 },
                 "direction_cardinal": {
                     "label": "方角",
@@ -3234,7 +3261,8 @@
                         "rail": "集電レール",
                         "yes": "電化（未定義）"
                     },
-                    "placeholder": "架線、集電レール..."
+                    "placeholder": "架線、集電レール...",
+                    "terms": "電化"
                 },
                 "elevation": {
                     "label": "標高",
@@ -3571,6 +3599,9 @@
                 },
                 "kerb/height": {
                     "label": "縁石の高さ"
+                },
+                "kneipp_water_cure_multi": {
+                    "label": "種類"
                 },
                 "label": {
                     "label": "ラベル"
@@ -4043,9 +4074,15 @@
                 "plant": {
                     "label": "植物"
                 },
+                "plant/method": {
+                    "label": "発電方法"
+                },
                 "plant/output/electricity": {
                     "label": "発電所出力形態：電気",
                     "placeholder": "500 MW, 1000 MW, 2000 MW..."
+                },
+                "plant/source": {
+                    "label": "動力源"
                 },
                 "playground": {
                     "label": "種類"
@@ -4891,7 +4928,7 @@
                     "terms": "トーテム広告, トーテム看板, 看板, 広告"
                 },
                 "aerialway": {
-                    "name": "索道"
+                    "name": "索道の地物"
                 },
                 "aerialway/cable_car": {
                     "name": "交走式ロープウェイ",
@@ -4946,7 +4983,7 @@
                     "terms": "ジップライン, ロープ, アウトドア"
                 },
                 "aeroway": {
-                    "name": "航空施設"
+                    "name": "空路の地物"
                 },
                 "aeroway/aerodrome": {
                     "name": "空港",
@@ -5208,6 +5245,10 @@
                     "name": "イベント施設",
                     "terms": "イベント施設, イベント会場, 会場, 催事, 催事場, 結婚式場"
                 },
+                "amenity/exhibition_centre": {
+                    "name": "展示場",
+                    "terms": "展示場, エキシビジョンセンター, 会場, 展示会場, 見本市"
+                },
                 "amenity/fast_food": {
                     "name": "ファストフード全般",
                     "terms": "ファストフード店, ファストフード, ジャンクフード, ジャンク, ファーストフード, 飲食店, 軽食, 食事, 料理, 食べる. ハンバーガー, フライドチキン, 立ち食い, ランチ"
@@ -5306,9 +5347,17 @@
                     "name": "幼稚園/保育園（代表点または敷地）",
                     "terms": "幼稚園の敷地, 保育園の敷地, 保育園, 幼稚園, 教育, 学校, 育児"
                 },
+                "amenity/kneipp_water_cure": {
+                    "name": "足浴場（ヨーロッパ）",
+                    "terms": "足浴場（ヨーロッパ）, 足浴, 水浴, 足湯"
+                },
                 "amenity/language_school": {
                     "name": "外国語教室",
                     "terms": "外国語教室, 外国語学校, 英会話, 英会話教室, 英会話スクール, 外国語, 学習, 語学, 語学教室"
+                },
+                "amenity/lavoir": {
+                    "name": "共同洗い場",
+                    "terms": "共同洗い場, 洗濯, 食器洗い"
                 },
                 "amenity/letter_box": {
                     "name": "郵便受け",
@@ -6578,6 +6627,10 @@
                     "name": "ライフガード",
                     "terms": "ライフガード, 救護員, 監視員"
                 },
+                "emergency/mountain_rescue": {
+                    "name": "山岳救助",
+                    "terms": "山岳救助, 緊急, 遭難"
+                },
                 "emergency/no": {
                     "name": "緊急車両の利用不可"
                 },
@@ -7079,6 +7132,10 @@
                 "historic/monument": {
                     "name": "記念堂",
                     "terms": "記念堂, 記念建造物, 歴史"
+                },
+                "historic/pillory": {
+                    "name": "さらし台",
+                    "terms": "さらし台, 処刑, 歴史, 史跡"
                 },
                 "historic/ruins": {
                     "name": "廃墟",
@@ -8512,6 +8569,30 @@
                 "power/plant": {
                     "name": "発電所",
                     "terms": "発電所, 発電所の敷地"
+                },
+                "power/plant/source/coal": {
+                    "name": "石炭発電所",
+                    "terms": "石炭発電所, 火力発電所, 発電所, 電力, 石炭"
+                },
+                "power/plant/source/gas": {
+                    "name": "ガス発電所",
+                    "terms": "ガス発電所, 火力発電所, 発電, 発電所, ガス, 電力"
+                },
+                "power/plant/source/hydro": {
+                    "name": "水力発電所",
+                    "terms": "水力発電所, 水力, 発電, 発電所, 電力"
+                },
+                "power/plant/source/nuclear": {
+                    "name": "原子力発電所",
+                    "terms": "原子力発電所, 原発, 発電, 電力, 発電所"
+                },
+                "power/plant/source/solar": {
+                    "name": "太陽光発電所",
+                    "terms": "原子力発電所, ソーラー, 電力, 発電所"
+                },
+                "power/plant/source/wind": {
+                    "name": "風力発電所",
+                    "terms": "風力発電所, 風力, 発電所, 電力"
                 },
                 "power/pole": {
                     "name": "電柱",
@@ -10016,7 +10097,7 @@
             },
             "MAPNIK": {
                 "attribution": {
-                    "text": "© OpenStreetMap contributors, CC-BY-SA"
+                    "text": "© OpenStreetMap contributors, CC-BY-SA 2.0"
                 },
                 "description": "OpenStreetMap標準レイヤーです。",
                 "name": "OpenStreetMap (標準)"
@@ -10187,20 +10268,6 @@
                 "description": "Annotation overlay provided by basemap.at.",
                 "name": "basemap.at Overlay"
             },
-            "basemap.at-surface": {
-                "attribution": {
-                    "text": "basemap.at"
-                },
-                "description": "Surface layer provided by basemap.at.",
-                "name": "basemap.at Surface"
-            },
-            "basemap.at-terrain": {
-                "attribution": {
-                    "text": "basemap.at"
-                },
-                "description": "Terrain layer provided by basemap.at.",
-                "name": "basemap.at Terrain"
-            },
             "eufar-balaton": {
                 "attribution": {
                     "text": "EUFAR Balaton ortofotó 2010"
@@ -10221,13 +10288,6 @@
                 },
                 "description": "The city map is an overview map that describes Gothenburg. It contains general information about land, communications, hydrography, buildings, address numbers and street names, administrative division and other orientation text.",
                 "name": "Gothenburg City map"
-            },
-            "gsi.go.jp": {
-                "attribution": {
-                    "text": "国土地理院 オルソ"
-                },
-                "description": "最大ズームレベル17。歪みは補正（オルソ化）済みであり、概してBingより位置精度が高く国内では最も安定して利用可能な画像だが、Bingよりやや古い場合がある。",
-                "name": "国土地理院 電子国土基本図(オルソ画像)"
             },
             "gsi.go.jp_airphoto": {
                 "attribution": {
@@ -10908,10 +10968,6 @@
                 "description": "Mappers and OpenStreetMap users in the Salt Lake City area",
                 "extendedDescription": "Activities may include things like Learn To Map workshops, mapping parties and outdoor data collection. The events will take place in the SLC area, at least initially.  We are looking for seasoned mappers as well as people new to OSM. Join and let's do some mapping!"
             },
-            "OSM-Vancouver-meetup": {
-                "name": "OpenStreetMap Vancouver",
-                "description": "Mappers and OpenStreetMap users in the Vancouver, BC area"
-            },
             "OSM-Wyoming": {
                 "name": "OpenStreetMap Wyoming",
                 "description": "Mappers and OpenStreetMap users in the state of Wyoming",
@@ -11210,6 +11266,22 @@
             "fi-mailinglist": {
                 "name": "Talk-fi Mailing List",
                 "description": "Talk-fi is the official mailing list for the Finnish OSM community"
+            },
+            "fr-35-wiki": {
+                "name": "OpenStreetMap Rennes Wiki page",
+                "description": "Wiki page of Rennes OSM local group"
+            },
+            "fr-bzh-mailinglist": {
+                "name": "Talk-fr-bzh Mailing List",
+                "description": "Talk-fr-bzh mailing list"
+            },
+            "fr-bzh-twitter": {
+                "name": "OSM-BZH on Twitter",
+                "description": "OpenStreetMap BZH on Twitter: {url}"
+            },
+            "fr-bzh-website": {
+                "name": "OpenStreetMap BZH Website",
+                "description": "The map which speaks Breton"
             },
             "fr-chapter": {
                 "name": "OpenStreetMap France Local Chapter",

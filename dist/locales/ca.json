@@ -89,18 +89,7 @@
             },
             "circularize": {
                 "title": "Feu-ho circular",
-                "description": {
-                    "line": "Feu aquesta línia circular",
-                    "area": "Feu aquesta àrea circular"
-                },
-                "key": "O",
-                "annotation": {
-                    "line": "Heu fet una línia circular.",
-                    "area": "Heu fet una àrea circular."
-                },
-                "not_closed": "Això no es pot fer circular perquè no té els extrems units.",
-                "too_large": "Això no es pot fer circular perquè no hi ha suficient superfície visble.",
-                "connected_to_hidden": "No es pot distribuir en cercle perquè està connectat a un objecte ocult."
+                "key": "O"
             },
             "orthogonalize": {
                 "title": "Quadra",
@@ -457,10 +446,6 @@
             },
             "show_more": "Mostra'n més",
             "view_on_osm": "Mostra-ho a openstreetmap.org",
-            "all_fields": "Tots els camps",
-            "all_tags": "Totes les etiquetes",
-            "all_members": "Tots els membres",
-            "all_relations": "Totes les relacions",
             "new_relation": "Nova relació…",
             "role": "Rol",
             "choose": "Seleccioneu el tipus d'objecte",
@@ -468,10 +453,8 @@
             "edit_reference": "edita/tradueix",
             "wiki_reference": "Mostra la documentació",
             "wiki_en_reference": "Mostra la documentació en anglès",
-            "back_tooltip": "Modifica l'objecte",
             "remove": "Eliminar",
             "search": "Cercar",
-            "multiselect": "Objectes seleccionats",
             "unknown": "Desconegut",
             "incomplete": "<no baixat>",
             "feature_list": "Cerca objectes",
@@ -517,7 +500,6 @@
                 "tooltip": "Mostra un mapa amb menys zoom per ajudar a localitzar l'àrea que es mostra actualment.",
                 "key": "/"
             },
-            "fix_misalignment": "Ajusta la alineació de la imatgeria",
             "offset": "Arrosega cap a qualsevol lloc de la zona gris de sota per ajustar la alineació de la imatgeria, o entra els valors de la alineació en metres."
         },
         "map_data": {
@@ -696,12 +678,10 @@
                 }
             },
             "keepRight": {
-                "detail_title": "Error",
                 "detail_description": "Descripció",
                 "comment": "Comentari",
                 "save_comment": "Desa el comentari",
                 "close_comment": "Tanca i comenta",
-                "ignore_comment": "Ignora i comenta",
                 "error_parts": {
                     "this_node": "aquest node",
                     "this_way": "aquesta via",
@@ -2786,9 +2766,6 @@
                 "advertising/column": {
                     "terms": "Columna publicitària, publicitat, cartell, propaganda"
                 },
-                "aerialway": {
-                    "name": "Transport per cable"
-                },
                 "aerialway/cable_car": {
                     "name": "Telefèric",
                     "terms": "Telefèric"
@@ -2819,9 +2796,6 @@
                 },
                 "aerialway/rope_tow": {
                     "name": "Corda remuntadora"
-                },
-                "aeroway": {
-                    "name": "Infraestructura aeroportuària"
                 },
                 "aeroway/aerodrome": {
                     "name": "Aeroport",
@@ -4671,7 +4645,7 @@
                     "name": "Perruqueria"
                 },
                 "shop/hardware": {
-                    "name": "Drogueria"
+                    "name": "Ferreteria"
                 },
                 "shop/hearing_aids": {
                     "name": "Centre d'audició"
@@ -5109,9 +5083,6 @@
                 "name": "Imatges aèries d'Esri (Claredat) Beta"
             },
             "MAPNIK": {
-                "attribution": {
-                    "text": "© col·laboradors d'OpenStreetMap, CC-BY-SA"
-                },
                 "description": "La capa d'OpenStreetMap predeterminada.",
                 "name": "OpenStreetMap (Estàndard)"
             },

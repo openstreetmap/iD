@@ -50,19 +50,7 @@
                 "key": "N"
             },
             "add_preset": {
-                "title": "Adăugați",
-                "point": {
-                    "title": "Adăugați '{feature}' ca punct"
-                },
-                "line": {
-                    "title": "Adăugați '{feature}' ca o linie"
-                },
-                "area": {
-                    "title": "Adăugați '{feature}' ca zonă"
-                },
-                "building": {
-                    "title": "Adăugați '{feature}' ca clădire"
-                }
+                "title": "Adăugați"
             },
             "browse": {
                 "title": "Navighează",
@@ -115,19 +103,7 @@
             },
             "circularize": {
                 "title": "Circularizează",
-                "description": {
-                    "line": "Fă această linie circulară.",
-                    "area": "Fă această suprafață circulară."
-                },
-                "key": "O",
-                "annotation": {
-                    "line": "Am făcut linia circulară.",
-                    "area": "Am facut suprafața circulară."
-                },
-                "not_closed": "Această linie nu poate fi transformată într-un cerc din moment ce nu este circulară.",
-                "too_large": "Această linie nu poate fi transformată într-un cerc din moment ce momentan nu este destul din ea vizibil.",
-                "connected_to_hidden": "Această linie nu poate fi transformată într-un cerc din moment ce este conectată la un obiect ascuns.",
-                "not_downloaded": "Aceasta nu poate fi făcută circulară, deoarece părți din ea nu au fost încă descărcate."
+                "key": "O"
             },
             "orthogonalize": {
                 "title": "Pătrat",
@@ -416,18 +392,12 @@
         "inspector": {
             "show_more": "Arată mai mult",
             "view_on_osm": "Vezi pe openstreetmap.org",
-            "all_fields": "Toate câmpurile",
-            "all_tags": "Toate tagurile",
-            "all_members": "Toți membrii",
-            "all_relations": "Toate relațiile",
             "new_relation": "Relație nouă",
             "role": "Rol",
             "choose": "Selectează tip de obiect",
             "results": "{n} rezultate pentru {search}",
-            "back_tooltip": "Schimbă trăsătură",
             "remove": "Şterge",
             "search": "Caută",
-            "multiselect": "Obiecte selectate",
             "unknown": "Necunoscut",
             "incomplete": "<not downloaded>",
             "feature_list": "Caută obiecte",
@@ -463,8 +433,7 @@
             "reset": "resetează",
             "minimap": {
                 "key": "/"
-            },
-            "fix_misalignment": "Ajustează ofset de imagine"
+            }
         },
         "map_data": {
             "title": "Date de Hartă",
@@ -1672,9 +1641,6 @@
                 },
                 "aerialway/mixed_lift": {
                     "name": "Lift Mixat"
-                },
-                "aeroway": {
-                    "name": "Aeroway"
                 },
                 "aeroway/aerodrome": {
                     "name": "Aeroport"
@@ -3066,9 +3032,6 @@
                 "name": "Imagini aeriane Bing"
             },
             "MAPNIK": {
-                "attribution": {
-                    "text": "© Contribuitori OpenStreetMap, CC-BY-SA"
-                },
                 "description": "Stratul OpenStreetMap implicit.",
                 "name": "OpenStreetMap (Standard)"
             },

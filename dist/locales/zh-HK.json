@@ -85,18 +85,7 @@
             },
             "circularize": {
                 "title": "圓形化",
-                "description": {
-                    "line": "將這條綫變為圓形。",
-                    "area": "將這個範圍變為圓形。"
-                },
-                "key": "O",
-                "annotation": {
-                    "line": "將一條綫變為圓形。",
-                    "area": "將一個範圍變為圓形。"
-                },
-                "not_closed": "未能將這個變為圓形因為它未成為一圈。",
-                "too_large": "未能將這個轉為圓形因為它不是被完全看得到。",
-                "connected_to_hidden": "未能將這個轉為圓形因為它連接著一個隱藏的特徵。"
+                "key": "O"
             },
             "orthogonalize": {
                 "title": "方形化",
@@ -455,10 +444,6 @@
             "show_more": "顯示更多",
             "view_on_osm": "在 openstreetmap.org 中檢視",
             "view_on_keepRight": "在 keepright.at 上查看",
-            "all_fields": "所有資料",
-            "all_tags": "所有標籤",
-            "all_members": "所有構件",
-            "all_relations": "所有關係",
             "add_to_relation": "新增至關係",
             "new_relation": "建立新關係⋯⋯",
             "role": "作用",
@@ -467,10 +452,8 @@
             "no_documentation_key": "沒有相關文件",
             "wiki_reference": "查看文件",
             "wiki_en_reference": "查看英文版文件",
-            "back_tooltip": "變更特徵",
             "remove": "移除",
             "search": "搜尋",
-            "multiselect": "已選擇的特徵",
             "unknown": "未知",
             "incomplete": "<未下載>",
             "feature_list": "搜尋特徵",
@@ -516,7 +499,6 @@
                 "tooltip": "顯示縮小地圖以確定現在被顯示範圍的位置",
                 "key": "/"
             },
-            "fix_misalignment": "校正對位誤差",
             "offset": "於以下灰色範圍內平移或者輸入以米量度的誤差值就可校正對位誤差。"
         },
         "map_data": {
@@ -692,13 +674,8 @@
                 }
             },
             "keepRight": {
-                "title": "KeepRight 錯誤",
-                "detail_title": "錯誤",
-                "close": "關閉 (已修正錯誤)",
-                "ignore": "忽略 (不是錯誤)",
                 "save_comment": "儲存留言",
-                "close_comment": "關閉並留言",
-                "ignore_comment": "忽略並留言"
+                "close_comment": "關閉並留言"
             }
         },
         "mapillary_images": {
@@ -2725,9 +2702,6 @@
                     "name": "Billboard",
                     "terms": "Billboard, 廣告板"
                 },
-                "aerialway": {
-                    "name": "纜車路線"
-                },
                 "aerialway/cable_car": {
                     "name": "纜車",
                     "terms": "Cable Car,纜車"
@@ -2767,9 +2741,6 @@
                 "aerialway/rope_tow": {
                     "name": "牽繩",
                     "terms": "牽繩"
-                },
-                "aeroway": {
-                    "name": "航空設施"
                 },
                 "aeroway/aerodrome": {
                     "name": "機場",
@@ -5733,9 +5704,6 @@
                 "name": "Esri World (Clarity) Beta 航攝圖"
             },
             "MAPNIK": {
-                "attribution": {
-                    "text": "© OpenStreetMap 貢獻者，CC-BY-SA"
-                },
                 "description": "預設的 OpenStreetMap 圖層。",
                 "name": "OpenStreetMap（標準）"
             },
@@ -5871,13 +5839,6 @@
                     "text": "GSI KIBAN 2500"
                 },
                 "name": "日本 GSI KIBAN 2500"
-            },
-            "gsi.go.jp": {
-                "attribution": {
-                    "text": "GSI 日本"
-                },
-                "description": "日本 GSI 正射影像。通常比 bing 好，但有點舊。",
-                "name": "日本 GSI 正射影像"
             },
             "gsi.go.jp_std_map": {
                 "attribution": {

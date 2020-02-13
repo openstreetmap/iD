@@ -66,18 +66,7 @@
             },
             "circularize": {
                 "title": "Pina-bilog",
-                "description": {
-                    "line": "Gawing pabilog ang linyang ito.",
-                    "area": "Gawing pabilog ang area o poligong ito."
-                },
-                "key": "O",
-                "annotation": {
-                    "line": "Ginawang pabilog and isang linya.",
-                    "area": "Ginawang pabilog and isang area o poligon."
-                },
-                "not_closed": "Hindi ito maaaring gawing pabilog dahil hindi ito isang \"loop\".",
-                "too_large": "Hindi na ito maaaring gawing pabilog dahil hindi sapat ang kasalukuyang nakikita sa mapa.",
-                "connected_to_hidden": "Hindi magawang pabilog dahil may nakatagong feature na konektado dito."
+                "key": "O"
             },
             "orthogonalize": {
                 "title": "Iskawalado"
@@ -326,17 +315,12 @@
         "inspector": {
             "show_more": "Higit pang detalye",
             "view_on_osm": "Tingnan sa openstreetmap.org",
-            "all_tags": "Lahat ng tags",
-            "all_members": "Lahat ng kasapi",
-            "all_relations": "Lahat ng \"relation\"",
             "new_relation": "Bagong relation ...",
             "role": "Kasapi",
             "choose": "Pumili ng uri ng \"features\"",
             "results": "{n} mga resulta para sa {search}",
-            "back_tooltip": "Baguhin ang \"feature\"",
             "remove": "Alisin",
             "search": "Mag-search",
-            "multiselect": "Mga piniling tampok",
             "unknown": "Unknown",
             "incomplete": "<not downloaded>",
             "feature_list": "Mag-hanap ng \"feature\"",
@@ -361,8 +345,7 @@
             "reset": "I-reset",
             "minimap": {
                 "tooltip": "Ipakita ang naka-zoom out na mapa upang makatulong na mahanap ang mga lugar na kasalukuyang ipinapakita."
-            },
-            "fix_misalignment": "Baguhin ang imagery offset"
+            }
         },
         "map_data": {
             "title": "Data ng mapa",

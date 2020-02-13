@@ -77,18 +77,7 @@
             },
             "circularize": {
                 "title": "Zaokroži",
-                "description": {
-                    "line": "Črto spremeni v krožnico.",
-                    "area": "Mnogokotnik spremeni v krog."
-                },
-                "key": "O",
-                "annotation": {
-                    "line": "zaokroževanje črte ×",
-                    "area": "zaokroževanje mnogokotnika ×"
-                },
-                "not_closed": "Izbora ni mogoče spremeniti v krog, ker zanka ni sklenjena.",
-                "too_large": "Tega mnogokotnika ni mogoče spremeniti v krog, ker ga preveč sega izven trenutnega vidnega polja.",
-                "connected_to_hidden": "Predmeta ni mogoče spremeniti v krog, ker je povezan s skritim predmetom."
+                "key": "O"
             },
             "orthogonalize": {
                 "title": "Poravnaj kote"
@@ -395,18 +384,12 @@
         "inspector": {
             "show_more": "Pokaži več",
             "view_on_osm": "Odpri na openstreetmap.org",
-            "all_fields": "Vsa polja",
-            "all_tags": "Vse oznake",
-            "all_members": "Vsi člani",
-            "all_relations": "Vse zveze",
             "new_relation": "Nova zveza ...",
             "role": "Vloga",
             "choose": "Izberite vrsto predmeta",
             "results": "{n} zadetkov iskanja {search}",
-            "back_tooltip": "Spremeni predmet",
             "remove": "Odstrani",
             "search": "Poišči",
-            "multiselect": "Izbrani predmeti",
             "unknown": "Neznano",
             "incomplete": "<ni prejeto>",
             "feature_list": "Iskanje po zemljevidu",
@@ -451,7 +434,6 @@
                 "tooltip": "Pokaži oddaljen zemljevid za pomoč pri določanju trenutno prikazanega mesta.",
                 "key": "/"
             },
-            "fix_misalignment": "Popravi zamik ozadja",
             "offset": "Povlecite spodnje temnejše sivo področju za prilagoditev zamika ali pa vnesite zamik številčno v metrih."
         },
         "map_data": {
@@ -2222,9 +2204,6 @@
                     "name": "Oglasni pano",
                     "terms": "reklamni pano, oglasniki, reklama,advertisment,ads"
                 },
-                "aerialway": {
-                    "name": "Žičnica"
-                },
                 "aerialway/cable_car": {
                     "name": "Nihalka",
                     "terms": "nihalka,gondola,kabinska žičnica"
@@ -2263,9 +2242,6 @@
                 "aerialway/rope_tow": {
                     "name": "Vlečna vrv",
                     "terms": "vlečnica"
-                },
-                "aeroway": {
-                    "name": "Letalstvo"
                 },
                 "aeroway/aerodrome": {
                     "name": "Letališče",
@@ -4683,9 +4659,6 @@
                 }
             },
             "MAPNIK": {
-                "attribution": {
-                    "text": "Skupnost © OpenStreetMap z dovoljenjem CC-BY-SA"
-                },
                 "description": "Privzeta plast zemljevida OpenStreetMap",
                 "name": "OpenStreetMap (standardni)"
             },

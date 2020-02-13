@@ -48,15 +48,7 @@
             },
             "circularize": {
                 "title": "Maak rond",
-                "description": {
-                    "line": "Maak hierdie lyn rond.",
-                    "area": "Maak die area rond."
-                },
-                "key": "O",
-                "annotation": {
-                    "line": "Maak 'n lyn rond.",
-                    "area": "Maak 'n area rond."
-                }
+                "key": "O"
             },
             "delete": {
                 "title": "Verwyder",
@@ -462,9 +454,6 @@
             "presets": {
                 "address": {
                     "name": "Adres"
-                },
-                "aeroway": {
-                    "name": "Aanloopbaan"
                 },
                 "aeroway/aerodrome": {
                     "name": "Lughawe"

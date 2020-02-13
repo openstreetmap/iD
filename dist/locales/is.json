@@ -85,18 +85,7 @@
             },
             "circularize": {
                 "title": "Hringlaga",
-                "description": {
-                    "line": "Gera línu að hring.",
-                    "area": "Gera svæðið hringlaga."
-                },
-                "key": "O",
-                "annotation": {
-                    "line": "Gerði línu að hring.",
-                    "area": "Gerði svæði að hring."
-                },
-                "not_closed": "Það er ekki hægt að gera þetta hringlaga því að það er ekki samfelld röð hnúta.",
-                "too_large": "Ekki er hægt að gera þetta hringlaga því að það sést ekki í nógu mikið af því.",
-                "connected_to_hidden": "Ekki er hægt að gera þetta að hring því að það tengist földu eigindi."
+                "key": "O"
             },
             "orthogonalize": {
                 "title": "Hornrétta"
@@ -481,10 +470,6 @@
             "show_more": "Sýna meira",
             "view_on_osm": "Skoða á openstreetmap.org",
             "view_on_keepRight": "Skoða á keepright.at",
-            "all_fields": "Öll gagnasvið",
-            "all_tags": "Öll merki",
-            "all_members": "Allir meðlimir",
-            "all_relations": "Öll vensl",
             "new_relation": "Ný vensl...",
             "choose_relation": "Veldu yfirvensl",
             "role": "Hlutverk",
@@ -493,10 +478,8 @@
             "edit_reference": "breyta/þýða",
             "wiki_reference": "Skoða hjálp/leiðbeiningar",
             "wiki_en_reference": "Skoða leiðbeiningar á ensku",
-            "back_tooltip": "Breyta eigindum",
             "remove": "Fjarlægja",
             "search": "Leita",
-            "multiselect": "Valdar fitjur",
             "unknown": "Óþekkt",
             "incomplete": "<ekki hlaðið niður>",
             "feature_list": "Leita að fitjum/eigindum",
@@ -519,10 +502,7 @@
             "way": "Leið",
             "relation": "Vensl",
             "location": "Staðsetning",
-            "add_fields": "Bæta við svæði:",
-            "lock": {
-                "suggestion": "Merkið \"{label}\" er læst því fyrir er Wikidata-merki. Þú getur eytt því eða breytt merkjunum í \"Öll merki\"."
-            }
+            "add_fields": "Bæta við svæði:"
         },
         "background": {
             "title": "Bakgrunnur",
@@ -545,7 +525,6 @@
                 "tooltip": "Birta smágert yfirlitskort sem hjálpar til við að staðsetja svæðið sem verið er að vinna með í kortaglugganum.",
                 "key": "/"
             },
-            "fix_misalignment": "Laga hliðrun mynda",
             "offset": "Dragðu til í gráa svæðinu hér fyrir neðan til að laga til hliðrun myndefnis, eða settu inn gildi hliðrunar í metrum."
         },
         "map_data": {
@@ -563,11 +542,9 @@
                     "title": "OpenStreetMap minnispunktar"
                 },
                 "keepRight": {
-                    "tooltip": "Vandamál sem greind voru sjálfvirkt hjá keepright.at",
                     "title": "KeepRight-vandamál"
                 },
                 "improveOSM": {
-                    "tooltip": "improveosm.org greindi sjálfvirkt að gögn vantar",
                     "title": "ImproveOSM-vandamál"
                 },
                 "custom": {
@@ -773,16 +750,11 @@
                 }
             },
             "keepRight": {
-                "title": "KeepRight-villa",
-                "detail_title": "Villa",
                 "detail_description": "Lýsing",
                 "comment": "Athugasemd",
                 "comment_placeholder": "Settu inn athugasemd sem deilt er með öðrum notendum.",
-                "close": "Loka (villa lagfærð)",
-                "ignore": "Hunsa (ekki villa)",
                 "save_comment": "Vista athugasemd",
                 "close_comment": "Loka og gera athugasemd",
-                "ignore_comment": "Hunsa og gera athugasemd",
                 "error_parts": {
                     "this_node": "þessi hnútur",
                     "this_way": "þessi leið",
@@ -1026,11 +998,9 @@
                 "type": "Þú getur smellt á gerð fitjunnar til að breyta henni í einhverja aðra tegund. Öllu sem til er í raunheimum á að vera hægt að bæta inn í OpenStreetMap, þannig að það eru þúsundir mismunandi eiginda sem hægt er að velja úr.",
                 "type_picker": "Tegundavalið birtir algengustu gerðir eiginda, svo sem garða, sjúkrahús, veitingastaði, vegi og byggingar. Þú getur leitað að hverju sem er með því að skrifa inn í leitarreitinn. Þú getur líka smellt á {inspect} **upplýsinga** táknmyndina næst fitjutegundinni til að fræðast meira um hana.",
                 "fields_h": "Gagnasvið",
-                "fields_all_fields": "Hlutinn \"Öll gagnasvið\" inniheldur öll þau eigindi fitju sem þú getur breytt. Í OpenStreetMap eru öll gagnasviðin valkvæð, og það er í góðu lagi að skilja gagnasvið eftir autt ef þú ert ekki viss.",
                 "fields_example": "Hver gerð fitju mun birta mismunandi gagnasvið. Sem dæmi má nefna að gata mun birta svið fyrir vegyfirborð og hraðatakmarkanir, en veitingastaður mun aftur birta svið fyrir hvaða tegundir matar þar fást og á hvaða tímum hann er opinn.",
                 "fields_add_field": "Þú getur líka smellt á \"Bæta við gagnasviði\" fellilistann til að bæta við fleiri sviðum, svo sem lýsingu, Wikipedia-tengli, hjólastólaaðgangi, og fleiru.",
                 "tags_h": "Merki",
-                "tags_all_tags": "Fyrir neðan hlutann með gagnasviðunum, er annar hluti með heitinu \"Öll merki\" sem þú getur flett út til að vinna með hvert einasta OpenStreetMap *merki* fyrir valda fitju. Hvert merki samanstendur af *lykill* (key) og *gildi* (value), gagnaeinindum sem skilgreina öll eigindi/fitjur sem geymd eru í OpenStreetMap.",
                 "tags_resources": "Breytingar á merkjum eiginda/fitja krefst nokkurrar þekkingar á OpenStreetMap. Þú ættir að fletta upp í heimildum á borð við [wiki-síður OpenStreetMap](https://wiki.openstreetmap.org/wiki/Main_Page) eða [Taginfo](https://taginfo.openstreetmap.org/) til að vita meira um ásættanlegar aðferðir við merkingar í OpenStreetMap."
             },
             "points": {
@@ -1091,8 +1061,6 @@
                 "title": "Vensl",
                 "intro": "*Vensl* (relation) er sérstök tegund eiginda í OpenStreetMap sem hópar saman önnur eigindi/fitjur. Fitjur eða eigindi sem tilheyra venslum kallast *meðlimir* (members), og getur hver meðlimur haft *hlutverk* (role) í venslunum.",
                 "edit_relation_h": "Breytingar á venslum",
-                "edit_relation": "Neðst í fitjuritlinum geturðu flett út hlutanum \"Öll vensl\" til að sjá hvort valin fitja sé meðlimur í einhverjum venslum. Þú getur svo smellt á venslin til að velja þau og breyta þeim.",
-                "edit_relation_add": "Til að bæta fitju við vensl, veldu þá fitjuna, smelltu síðan á {plus} plúshnappinn í \"Öll vensl\" hluta fitjuritilsins. Þú getur þá valið úr lista yfir nálæg vensl eða farið á valkostinn \"Ný vensl...\".",
                 "edit_relation_delete": "Þú getur einnig smellt á {delete} **Eyða** hnappin til að fjarlægja völdu fitjuna úr venslunum. Ef þú fjarlægir alla meðlimi úr venslum, verður þeim venslum eytt sjálfvirkt.",
                 "maintain_relation_h": "Viðhalda venslum",
                 "maintain_relation": "Oftast nær mun iD viðhalda venslum um leið og þú sýslar með breytingar. Þú ættir að fara varlega þegar þú ert að skipta út fitjum sem gætu verið meðlimir í venslum. Til dæmis ef þú eyðir vegbút og teiknar nýjan veghluta í stað hans, ættirðu að bæta nýja veghlutanum í sömu vensl (vegir, beygjutakmarkanir, o.s.frv.) eins og upprunalegi vegurinn hafði.",
@@ -1107,10 +1075,8 @@
                 "turn_restriction_editing": "Í gagnasviðinu \"Takmarkanir á beygjum\", smelltu til að velja \"frá\" (from) veg, og skoðaðu hvort beygjur séu leyfðar eða takmarkaðar við einhverja af \"til\" (to) vegina. Þú getur smellt á beygjutáknin til að víxla þeim á milli leyft og takmarkað. iD mun útbúa venslin sjálfvirkt og stilla hlutverkin 'frá', 'gegnum', og 'til' eftir því sem þú hefur valið.",
                 "route_h": "Leiðir",
                 "route": "Venslin *leið* er hópur einnar eða fleiri fitja sem saman mynda leiðakerfi, svo sem eins og strætisvagnaleið, gönguleið eða þjóðveg.",
-                "route_add": "Til að bæta fitju við leiðavensl, veldu þá fitjuna og skrunaðu niður í hlutann \"Öll vensl\" í fitjuritlinum, smelltu síðan á {plus} plúshnappinn til að bæta þessari fitju við einhver nærliggjandi vensl eða í ný vensl.",
                 "boundary_h": "Svæðamörk",
-                "boundary": "Venslin *svæðamörk* er hópur einnar eða fleiri línufitja sem saman mynda stjórnsýslutengd mörk svæða.",
-                "boundary_add": "Til að bæta fitju við svæðamarkavensl, veldu þá fitjuna og skrunaðu niður í hlutann \"Öll vensl\" í fitjuritlinum, smelltu síðan á {plus} plúshnappinn til að bæta þessari fitju við einhver nærliggjandi vensl eða í ný vensl."
+                "boundary": "Venslin *svæðamörk* er hópur einnar eða fleiri línufitja sem saman mynda stjórnsýslutengd mörk svæða."
             },
             "notes": {
                 "title": "Minnispunktar",
@@ -1154,7 +1120,6 @@
                 "title": "Gæðastýring",
                 "intro": "Verkfæri *Gæðastjórnunar* (Q/A) geta fundið gölluð merki, ótengda vegi og önnur vandamál í OpenStreetMap, sem kortagerðarfólk getur þá lagað. Til að skoða fyrirliggjandi Q/A vandamál, smelltu á spjaldið {data} **Kortagögn** til að virkja tiltekið Q/A-lag.",
                 "tools_h": "Verkfæri",
-                "tools": "Eftirfarandi verkfæri eru studd um þessar mundir: [KeepRight](https://www.keepright.at/) og [ImproveOSM](https://improveosm.org/en/). Stefnt er að því að iD styðji [Osmose](https://osmose.openstreetmap.fr/) og fleiri Q/A-verkfæri í framtíðinni.",
                 "issues_h": "Meðhöndlun vandamála"
             },
             "field": {
@@ -3356,9 +3321,6 @@
                 "advertising/billboard": {
                     "name": "Auglýsingaspjald"
                 },
-                "aerialway": {
-                    "name": "Víralyfta"
-                },
                 "aerialway/cable_car": {
                     "name": "Kláfur"
                 },
@@ -3388,9 +3350,6 @@
                 },
                 "aerialway/rope_tow": {
                     "name": "Kaðallyfta"
-                },
-                "aeroway": {
-                    "name": "Loftlína"
                 },
                 "aeroway/aerodrome": {
                     "name": "Flugvöllur"
@@ -6215,9 +6174,6 @@
                 "name": "Heimsmyndir frá Esri (Clarity) prófun"
             },
             "MAPNIK": {
-                "attribution": {
-                    "text": "© Þátttakendur í OpenStreetMap, CC-BY-SA"
-                },
                 "description": "Sjálfgefna OpenStreetMap-lagið.",
                 "name": "OpenStreetMap (staðlað)"
             },
@@ -6379,13 +6335,6 @@
                 },
                 "description": "GSI Kiban 2500 í gegnum finds.jp. Gott til að teikna eftir, en dálítið eldra.",
                 "name": "Japan GSI KIBAN 2500"
-            },
-            "gsi.go.jp": {
-                "attribution": {
-                    "text": "GSI Japan"
-                },
-                "description": "Japan GSI uppréttar ortho loftmyndir. Venjulega betra en Bing, en dálítið eldra.",
-                "name": "Japan GSI uppréttar ortho loftmyndir"
             },
             "gsi.go.jp_airphoto": {
                 "attribution": {
@@ -6802,10 +6751,6 @@
             "OSM-Utah": {
                 "name": "OpenStreetMap Utah",
                 "description": "Kortagerðarfólk og notendur OpenStreetMap á Salt Lake City-svæðinu"
-            },
-            "OSM-Vancouver-meetup": {
-                "name": "OpenStreetMap Vancouver",
-                "description": "Kortagerðarfólk og notendur OpenStreetMap í Vancouver, BC-svæðinu"
             },
             "OSM-Wyoming": {
                 "name": "OpenStreetMap Wyoming",

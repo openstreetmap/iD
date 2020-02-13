@@ -63,16 +63,7 @@
             },
             "circularize": {
                 "title": "Zaokružite",
-                "description": {
-                    "line": "Napravite ovu liniju kružnom.",
-                    "area": "Napravite ovo područje kružnim."
-                },
-                "key": "O",
-                "annotation": {
-                    "line": "Napravite liniju kružnom.",
-                    "area": "Napravite područje kružnim."
-                },
-                "not_closed": "Ovo se ne može napraviti kružnim jer to nije petlja."
+                "key": "O"
             },
             "orthogonalize": {
                 "title": "Kvadrat"
@@ -187,14 +178,10 @@
         "inspector": {
             "show_more": "Prikazati više",
             "view_on_osm": "Pogledajte na stranici openstreetmap.org",
-            "all_tags": "Sve oznake",
-            "all_members": "Svi članovi",
-            "all_relations": "Sve relacije",
             "new_relation": "Nova relacija...",
             "role": "Uloga",
             "choose": "Odaberite tip svojstva",
             "results": "{search} dala {n} rezultata",
-            "back_tooltip": "Promijeniti značajku",
             "remove": "Uklonite",
             "search": "Pretraga",
             "unknown": "Nepoznato",
@@ -604,9 +591,6 @@
                 },
                 "aerialway/gondola": {
                     "name": "Gondola"
-                },
-                "aeroway": {
-                    "name": "Avio-put"
                 },
                 "aeroway/aerodrome": {
                     "name": "Aerodrom",

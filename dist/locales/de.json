@@ -1,14 +1,17 @@
 {
     "de": {
         "icons": {
-            "download": "download",
+            "download": "Herunterladen",
             "information": "Info",
             "remove": "entfernen",
             "undo": "rückgängig",
             "zoom_to": "zoome zu",
             "copy": "kopieren",
             "view_on": "Blick auf {domain}",
-            "favorite": "Favorit"
+            "favorite": "Favorit",
+            "list": "Liste",
+            "text": "Text",
+            "deselect": "abwählen"
         },
         "toolbar": {
             "inspect": "Seitenleiste",
@@ -51,19 +54,7 @@
                 "key": "N"
             },
             "add_preset": {
-                "title": "{feature} hinzufügen",
-                "point": {
-                    "title": "{feature} als Punkt hinzufügen"
-                },
-                "line": {
-                    "title": "{feature} als Linie hinzufügen"
-                },
-                "area": {
-                    "title": "{feature} als Fläche hinzufügen"
-                },
-                "building": {
-                    "title": "{feature} als Gebäude hinzufügen"
-                }
+                "title": "{feature} hinzufügen"
             },
             "browse": {
                 "title": "Durchsuchen",
@@ -117,19 +108,37 @@
             "circularize": {
                 "title": "Kreisförmig machen",
                 "description": {
-                    "line": "Diese Linie kreisförmig machen.",
-                    "area": "Diese Fläche kreisförmig machen."
+                    "single": "Mache dieses Objekt kreisförmig.",
+                    "multiple": "Mache diese Objekte kreisförmig."
                 },
                 "key": "O",
                 "annotation": {
-                    "line": "Eine Linie kreisförmig gemacht.",
-                    "area": "Eine Fläche kreisförmig gemacht."
+                    "single": "Das Objekt wurde kreisförmig gemacht.",
+                    "multiple": "Diese Objekte wurden kreisförmig gemacht."
                 },
-                "not_closed": "Dies kann nicht kreisförmig gemacht werden, weil es nicht geschlossen ist.",
-                "too_large": "Dies kann nicht kreisförmig gemacht werden, weil derzeit nicht genug davon sichtbar ist.",
-                "connected_to_hidden": "Dies kann nicht kreisförmig gemacht werden, weil es mit einem versteckten Objekt verbunden ist.",
-                "not_downloaded": "Dies kann nicht kreisförmig gemacht werden, weil Teile davon noch nicht heruntergeladen wurden.",
-                "already_circular": "Dies kann nicht kreisförmig gemacht werden, weil es bereits kreisförmig ist."
+                "multiple_blockers": {
+                    "multiple": "Diese Objekte können aus mehreren Gründen nicht kreisförmig gemacht werden."
+                },
+                "not_closed": {
+                    "single": "Dieses Objekt kann aus mehreren Gründen nicht kreisförmig gemacht werden.",
+                    "multiple": "Diese Objekte können nicht kreisförmig gemacht werden, weil sie keine Schleifen sind."
+                },
+                "too_large": {
+                    "single": "Dieses Objekt kann nicht kreisförmig gemacht werden, weil es keine Schleife ist.",
+                    "multiple": "Diese Objekte können nicht kreisförmig gemacht werden, weil nicht genügend davon sichtbar ist."
+                },
+                "connected_to_hidden": {
+                    "single": "Dieses Objekt kann nicht kreisförmig gemacht werden, weil es mit einem versteckten Objekte verbunden ist.",
+                    "multiple": "Diese Objekte können nicht kreisförmig gemacht werden, weil sie mit versteckten Objekten verbunden sind."
+                },
+                "not_downloaded": {
+                    "single": "Dieses Objekt kann nicht kreisförmig gemacht werden, weil Teile davon noch nicht heruntergeladen wurden.",
+                    "multiple": "Diese Objekte können nicht kreisförmig gemacht werden, weil Teile davon noch nicht heruntergeladen wurden."
+                },
+                "already_circular": {
+                    "single": "Dieses Objekt kann nicht kreisförmig gemacht werden, weil es bereits kreisförmig ist.",
+                    "multiple": "Diese Objekte können nicht kreisförmig gemacht werden, weil sie bereits kreisförmig sind."
+                }
             },
             "orthogonalize": {
                 "title": "Rechtwinklig machen",
@@ -174,8 +183,8 @@
                     "multiple": "Diese können nicht rechtwinklig gemacht werden, weil nicht genug davon sichtbar ist."
                 },
                 "connected_to_hidden": {
-                    "single": "Das kann nicht rechtwinklig gemacht werden, weil es mit einem unsichtbaren Objekt verbunden ist.",
-                    "multiple": "Diese könne nicht rechtwinklig gemacht werden, weil mache davon mit einem unsichtbaren Objekt verbunden sind."
+                    "single": "Das kann nicht rechtwinklig gemacht werden, weil es mit einem versteckten Objekt verbunden ist.",
+                    "multiple": "Diese könne nicht rechtwinklig gemacht werden, weil mache davon mit einem versteckten Objekt verbunden sind."
                 },
                 "not_downloaded": {
                     "single": "Das kann nicht rechtwinklig gemacht werden, weil Teile davon noch nicht heruntergeladen wurden.",
@@ -684,10 +693,12 @@
             "show_more": "Mehr zeigen",
             "view_on_osm": "Auf openstreetmap.org ansehen",
             "view_on_keepRight": "Auf keepright.at ansehen",
-            "all_fields": "Alle Felder",
-            "all_tags": "Alle Eigenschaften",
-            "all_members": "Alle Mitglieder",
-            "all_relations": "Alle Relationen",
+            "feature_type": "Objekttyp",
+            "fields": "Felder",
+            "tags_count": "Eigenschaften ({count})",
+            "members_count": "Mitglieder ({count})",
+            "relations_count": "Relationen ({count})",
+            "features_count": "Objekte ({count})",
             "add_to_relation": "Zu einer Relation hinzufügen",
             "new_relation": "Neue Relation …",
             "choose_relation": "Wähle eine Relation",
@@ -698,18 +709,22 @@
             "edit_reference": "bearbeite/übersetze",
             "wiki_reference": "Dokumentation ansehen",
             "wiki_en_reference": "Dokumentation auf Englisch ansehen",
+            "key_value": "Schlüssel=Wert",
+            "multiple_values": "Mehrere Werte",
+            "multiple_types": "Mehrere Typen",
+            "unshared_value_tooltip": "nicht von allen Objekten gemeinsam genutzt",
             "hidden_preset": {
                 "manual": "{features} sind versteckt, Schalte sie beim Kartendaten-Feld ein.",
                 "zoom": "{features} sind versteckt. Zoome hinein um sie zu sehen."
             },
-            "back_tooltip": "Objekt ändern",
+            "back_tooltip": "Objekttyp ändern",
             "remove": "Entfernen",
             "search": "Suchen",
-            "multiselect": "Ausgewählte Objekte",
             "unknown": "Unbekannt",
             "incomplete": "<nicht heruntergeladen>",
             "feature_list": "Objekte suchen",
             "edit": "Objekt bearbeiten",
+            "edit_features": "Bearbeite Objekte",
             "check": {
                 "yes": "Ja",
                 "no": "Nein",
@@ -730,7 +745,7 @@
             "location": "Lage",
             "add_fields": "Feld hinzufügen:",
             "lock": {
-                "suggestion": "Das Feld \"{label}\" ist gesperrt, weil es eine Wikidata Eigenschaft gibt. Du kannst sie im Bereich \"Alle Eigenschaften\" editieren oder löschen."
+                "suggestion": "Das Feld \"{label}\" ist gesperrt weil es ein Wikidata-Feld ist. Du kannt es löschen oder die Eigenschaften im Bereich \"Eigenschaften\" bearbeiten."
             }
         },
         "background": {
@@ -760,7 +775,7 @@
                 "description": "Zeige Detail-Feld",
                 "tooltip": "Erweiterte Hintergrundinformationen anzeigen."
             },
-            "fix_misalignment": "Hintergrund-Versatz anpassen",
+            "fix_misalignment": "Bildmaterial-Versatz",
             "offset": "Ziehe irgendwo unterhalbe im grauen Bereich um den Versatz des Bildmaterials anzupassen oder gib die Versatz-Werte in Metern ein."
         },
         "map_data": {
@@ -778,12 +793,16 @@
                     "title": "OpenStreetMap Hinweise"
                 },
                 "keepRight": {
-                    "tooltip": "Automatisch gemeldete Probleme von keepright.at",
+                    "tooltip": "Datenproblem gefunden von keepright.at",
                     "title": "KeepRight Probleme"
                 },
                 "improveOSM": {
-                    "tooltip": "Fehlende Daten automatisch gemeldet von improveosm.org",
+                    "tooltip": "Fehlende Daten gefunden von improveosm.org",
                     "title": "ImproveOSM Probleme"
+                },
+                "osmose": {
+                    "tooltip": "Datenproblem gefunden von osmose.openstreetmap.fr",
+                    "title": "Osmose Probleme"
                 },
                 "custom": {
                     "tooltip": "Ziehe ein Datenfile per Drag & Drop auf die Seite oder  klicke den Knopf zum Einstellen",
@@ -802,7 +821,7 @@
         "visual_diff": {
             "highlight_edits": {
                 "description": "Änderungen hervorheben",
-                "tooltip": "Geänderte Objekte hervorheben"
+                "tooltip": "Bearbeitete Objekte hervorheben"
             }
         },
         "photo_overlays": {
@@ -978,7 +997,7 @@
             }
         },
         "success": {
-            "just_edited": "Du hast gerade OpenStreetMap geändert!",
+            "just_edited": "Du hast gerade OpenStreetMap bearbeitet!",
             "thank_you": "Danke für die Verbesserung der Karte.",
             "thank_you_location": "Danke für die Verbesserung der Karte bei {where}.",
             "thank_you_where": {
@@ -1030,6 +1049,14 @@
         "cannot_zoom": "Du kannst im aktuellen Modus nicht weiter herauszoomen.",
         "full_screen": "Vollbildmodus ein-/ausschalten",
         "QA": {
+            "osmose": {
+                "title": "Osmose Problem",
+                "detail_title": "Details",
+                "elems_title": "Objekte",
+                "fix_title": "Korrekturrichtlinien",
+                "trap_title": "Häufige Fehler",
+                "translation": "Übersetzungen von Osmose"
+            },
             "improveOSM": {
                 "title": "ImproveOSM Meldungen",
                 "geometry_types": {
@@ -1065,16 +1092,15 @@
                 }
             },
             "keepRight": {
-                "title": "KeepRight Fehler",
-                "detail_title": "Fehler",
+                "title": "KeepRight",
                 "detail_description": "Beschreibung",
                 "comment": "Kommentar",
                 "comment_placeholder": "Gib einen Kommentar für andere Benutzer ein.",
-                "close": "Schließen (Fehler behoben)",
-                "ignore": "Ignoriere (Kein Fehler)",
+                "close": "Schließe (Problem behoben)",
+                "ignore": "Entferne (Kein Fehler)",
                 "save_comment": "Speichere den Kommentar",
                 "close_comment": "Kommentiere und Schließe",
-                "ignore_comment": "Kommentiere und Ignoriere",
+                "ignore_comment": "Kommentiere und Entferne",
                 "error_parts": {
                     "this_node": "dieser Knoten",
                     "this_way": "dieser Weg",
@@ -1375,7 +1401,7 @@
                         "description": "{var1} könnte eine veraltete URL haben: {var2} enthält den verdächtigen Text \"{var3}\"."
                     },
                     "413": {
-                        "description": "{var1} könnte eine veraltete URL haben: {var2} fehlen die Keywords \"{var3}\"."
+                        "description": "{var1} könnte eine veraltete URL haben: {var2} fehlen die Schlüssel \"{var3}\"."
                     }
                 }
             }
@@ -1484,7 +1510,7 @@
                 "title": "Hilfe",
                 "welcome": "Willkommen beim iD Editor für [OpenStreetMap](https://www.openstreetmap.org/). Mit diesem Editor kannst du OpenStreetMap direkt in deinem Browser verbessern.",
                 "open_data_h": "Open Data",
-                "open_data": "Deine Änderungen auf dieser Karte werden für alle Nutzer von OpenStreetMap sichtbar. Du kannst Ortskenntnis, Vor-Ort-Erhebung oder Bildmaterial von Luftaufnahmen und Straßenfotos als Grundlage für deine Bearbeitungen verwenden. Kopieren von kommerziellen Quellen wie Google [ist streng verboten](https://www.openstreetmap.org/copyright).",
+                "open_data": "Deine Bearbeitungen auf dieser Karte werden für alle Nutzer von OpenStreetMap sichtbar. Du kannst Ortskenntnis, Vor-Ort-Erhebung oder Bildmaterial von Luftaufnahmen und Straßenfotos als Grundlage für deine Bearbeitungen verwenden. Kopieren von kommerziellen Quellen wie Google [ist streng verboten](https://www.openstreetmap.org/copyright).",
                 "before_start_h": "Bevor du anfängst",
                 "before_start": "Du solltest mit OpenStreetMap und diesem Editor vertraut sein, bevor du mit dem Bearbeiten anfängst. iD hat einen Rundgang mit dem du die Grundlagen des OpenStreetMap-Bearbeitens lernen kannst. Klicke \"Rundgang starten\" um das Lernprogramm zu starten - es dauert nur etwa 15 Minuten.",
                 "open_source_h": "Open Source",
@@ -1516,7 +1542,7 @@
                 "upload_h": "Hochladen",
                 "upload": "Vor dem Hochladen deiner Änderungen musst du einen [Änderungssatz-Kommentar](https://wiki.openstreetmap.org/wiki/DE:Good_changeset_comments) eingeben. Dann klicke auf **Hochladen** um deine Änderungen an OpenStreetMap zu schicken, wo sie in die Karte aufgenommen und öffentlich für alle sichtbar werden.",
                 "backups_h": "Automatische Sicherungen",
-                "backups": "Wenn du deine Bearbeitungen nicht beenden kannst, beispielsweise weil dein Computer abstürzt oder du den Browser Tag schließt, sind deine Änderungen lokal in deinem Browser gespeichert. Wenn du die Seite wieder öffnest (mit dem gleichen Rechner und Browser) wird dir iD anbieten, deine Änderungen wiederherzustellen.",
+                "backups": "Wenn du deine Bearbeitungen nicht beenden kannst, beispielsweise weil dein Computer abstürzt oder du den Browser Tag schließt, sind deine Bearbeitungen lokal in deinem Browser gespeichert. Wenn du die Seite wieder öffnest (mit dem gleichen Rechner und Browser) wird dir iD anbieten, deine Bearbeitungen wiederherzustellen.",
                 "keyboard_h": "Tastenkürzel",
                 "keyboard": "Du kannst eine Liste der Tastenkürzel durch Drücken der `?` Taste ansehen."
             },
@@ -1528,11 +1554,11 @@
                 "type": "Du kannst auf den Objekttyp klicken um dem Objekt einem anderen Typ zu geben. Alles in der echten Welt kann zu OpenStreetMap hinzugefügt werden, daher kannst du aus tausenden Objekttypen wählen.",
                 "type_picker": "Die Typauswahl zeigt die am häufigsten genutzten Objekttypen wie Park, Spital, Restaurant, Straße oder Gebäude. Du kannst durch Tippen in dem Suchfeld nach dem gewünschten Objekttyp suchen oder das {inspect} **Info** Symbol neben dem Objekttyp klicken um nähere Informationen zu bekommen.",
                 "fields_h": "Felder",
-                "fields_all_fields": "Der Bereich \"Alle Felder\" enthält alle Objektdetails die du bearbeiten kannst. In OpenStreetMap sind alle Felder optional und es ist okay ein Feld leer zu lassen, wenn du unsicher bist.",
+                "fields_all_fields": "Der Bereich \"Felder\" enthält alle Details des Objektes die du bearbeiten kannst. In OpenStreetMap sind alle Felder optional, es ist OK ein Feld leer zu lassen, wenn du unsicher bist.",
                 "fields_example": "Für jeden Objekttyp werden unterschiedliche Felder angezeigt. So können für eine Straße Felder für Oberfläche und Geschwindigkeitsbeschränkung und für ein Restaurant Felder für die angebotene Küche und die Öffnungszeiten angezeigt werden.",
                 "fields_add_field": "Du kannst auch auf \"Feld hinzufügen\" klicken und Felder aus der Dropdown-Liste hinzufügen, beispielsweise Beschreibung, Wikipedia Link oder Rollstuhlzugänglichkeit.",
                 "tags_h": "Eigenschaften",
-                "tags_all_tags": "Unter den Feldern kannst du den Bereich \"Alle Eigenschaften\" aufklappen und alle OpenStreetMap *Eigenschaften* des ausgewählten Objekts bearbeiten. Jede Eigenschaft besteht aus einem *Schlüssel* und einem *Wert*, damit werden alle in OpenStreetMap gespeicherten Objekte beschrieben.",
+                "tags_all_tags": "Unter den Feldern kannst du den Bereich \"Eigenschaften\" aufklappen und alle OpenStreetMap *Eigenschaften* des ausgewählten Objekts bearbeiten. Jede Eigenschaft besteht aus einem *Schlüssel* and einem *Wert*, damit werden alle in OpenStreetMap gespeicherten Objekte beschrieben.",
                 "tags_resources": "Das Bearbeiten der Eigenschaften von Objekten erfordert detailliertes Wissen über OpenStreetMap. Um mehr über akzeptierte Eigenschaften zu erfahren solltest du dich im [OpenStreetMap Wiki](https://wiki.openstreetmap.org/wiki/Main_Page) oder bei [Taginfo](https://taginfo.openstreetmap.org/) informieren."
             },
             "points": {
@@ -1593,8 +1619,8 @@
                 "title": "Relationen",
                 "intro": "Eine *Relation* ist ein spezieller Objekttyp in OpenStreetMap, der andere Objekte zusammenfasst. Die Objekte, die zu einer Relation gehören werden *Mitglieder* genannt und jedes Mitglied kann eine *Rolle* in der Relation haben.",
                 "edit_relation_h": "Relationen bearbeiten",
-                "edit_relation": "Unten im Objekteditor kannst du den Bereich \"Alle Relationen\" aufklappen und sehen, ob das ausgewählte Objekt Mitglied von Relationen ist. Du kannst auf eine Relation klicken, um sie auszuwählen und zu bearbeiten.",
-                "edit_relation_add": "Um ein Objekt zu einer Relation hinzuzufügen wähle das Objekt aus, und klicke dann den {plus} Knopf im Bereich \"Alle Relationen\" im Objekteditor. Du kannst in der Liste eine Relation in der Nähe oder \"Neue Relation ...\" wählen.",
+                "edit_relation": "Unten im Objekteditor kannst du den Bereich \"Relationen\" aufklappen und sehen, ob das ausgewählte Objekt Mitglied von Relationen ist. Du kannst auf eine Relation klicken, um sie auszuwählen und zu bearbeiten.",
+                "edit_relation_add": "Um ein Objekt zu einer Relation hinzuzufügen wähle das Objekt aus, gehen nach unten zum Bereich \"Relationen\" im Objekteditor, dann klicke den {plus} Knopf um dieses Objekte zu einer Relation in der Nähe oder einer \"Neue Relation ...\" hinzuzufügen.",
                 "edit_relation_delete": "Du kannst auch auf den {delete} **Löschen** Knopf klicken, um das ausgewählte Objekt aus der Relationen zu entfernen. Wenn du alle Mitglieder einer Relation entfernst, wird die Relation automatisch gelöscht.",
                 "maintain_relation_h": "Relationen bearbeiten",
                 "maintain_relation": "Normalerweise kümmert sich iD während der Bearbeitung automatisch um die Relationen. Du solltest aufpassen, wenn du Objekte austauschst, die Mitglieder von Relationen sein können. Wenn du einen Straßenabschnitt löschst und einen neuen Straßenabschnitt zeichnest, um ihn zu ersetzen, solltest du den neuen Straßenabschnitt auch zu den Relationen (Routen, Abbiegebeschränkungen usw.) mit den gleiche Rollen hinzufügen, in denen der gelöschte Straßenabschnitt war.",
@@ -1609,10 +1635,10 @@
                 "turn_restriction_editing": "Im Feld \"Abbiegebeschränkungen\" wähle eine \"von\" Straße durch Klicken aus, dann siehst du ob Abbiegen zu allen \"nach\" Straßen erlaubt oder verboten ist. Du kannst das Abbiege-Symbol anklicken um zwischen erlaubt und verboten umzuschalten. iD wird die Relationen automatisch erzeugen und die Rollen \"von\", \"via\" und \"nach\" entsprechend deiner Auswahl vergeben.",
                 "route_h": "Routen",
                 "route": "Eine Relation des Typ *Route* fasst eine oder mehrere Linien zusammen, die gemeinsam ein Streckennetz wie eine Busstrecke, eine Zugstrecke oder eine Autobahnstrecke bilden.",
-                "route_add": "Um ein Objekt zu einer Route hinzuzufügen, wähle das Objekt aus und scrolle im Objekteditor nach unten zum Bereich \"Alle Relationen\", klicke auf den {plus} Knopf um dieses Objekt einer in der Nähe vorhandenen oder einer neuen Relation hinzuzufügen.",
+                "route_add": "Um ein Objekt zu einer Routenrelation hinzuzufügen wähle das Objekt aus, gehen nach unten zum Bereich \"Relationen\" im Objekteditor, dann klicke den {plus} Knopf um dieses Objekte zu einer Relation in der Nähe oder einer neuen Relation hinzuzufügen.",
                 "boundary_h": "Grenzen",
                 "boundary": "Eine Relation vom Typ *Grenze* fasst eine oder mehrere Linien zusammen, die gemeinsam eine Verwaltungsgrenze bilden.",
-                "boundary_add": "Um ein Objekt zu einer Grenze hinzuzufügen, wähle das Objekt aus und scrolle im Objekteditor nach unten zum Bereich \"Alle Relationen\", klicke auf den {plus} Knopf um dieses Objekt einer in der Nähe vorhandenen oder einer neuen Relation hinzuzufügen."
+                "boundary_add": "Um ein Objekt zu einer Grenzrelation hinzuzufügen wähle das Objekt aus, gehen nach unten zum Bereich \"Relationen\" im Objekteditor, dann klicke den {plus} Knopf um dieses Objekte zu einer Relation in der Nähe oder einer neuen Relation hinzuzufügen."
             },
             "notes": {
                 "title": "Hinweise",
@@ -1623,7 +1649,7 @@
                 "update_note_h": "Kommentieren, Schließen und Wieder öffnen",
                 "update_note": "Ein bestehender Hinweis kann kommentiert, geschlossen oder wieder geöffnet werden. Einen Hinweis zu schließen bedeutet, dass das dadurch beschriebene Problem bereinigt ist. Einen Hinweis wieder zu öffnen bedeutet, dass das ursprünglich beschriebene Problem doch nicht bereinigt ist.",
                 "save_note_h": "Hinweise speichern",
-                "save_note": "Hinweise müssen alle einzeln über den Knopf unter den Hinweis-Kommentaren gespeichert werden. Hinweise sind *nicht* Teil des Änderungssatzes, den du zu OpenStreetMap hochlädst."
+                "save_note": "Du musst bei Hinweisen jede Bearbeitung über den Knopf unter den Hinweis-Kommentaren speichern. Hinweise sind **nicht** Teil des Änderungssatzes, den du zu OpenStreetMap hochlädst."
             },
             "imagery": {
                 "title": "Hintergrund-Bildmaterial",
@@ -1656,7 +1682,7 @@
                 "title": "Qualitätssicherung",
                 "intro": "Werkzeuge zur *Qualitätssicherung* (QS) können unpassende Eigeschaften, nicht verbundene Straßen und andere Probleme mit OpenStreetMap finden, die dann von Mappern behoben werden können. Um solche QS-Probleme zu sehen klicke das {data} **Kartendaten**-Feld um eine bestimmte QS-Ebene einzuschalten.",
                 "tools_h": "Werkzeuge",
-                "tools": "Die folgenden Werkzeuge werden derzeit unterstützt:  [KeepRight](https://www.keepright.at/) und [ImproveOSM](https://improveosm.org/en/). iD wird [Osmose](https://osmose.openstreetmap.fr/) und weitere QS-Werkzeuge in Zukunft unterstützen.",
+                "tools": "Die folgenden Werkzeuge werden unterstützt: [KeepRight](https://www.keepright.at/), [ImproveOSM](https://improveosm.org/en/) und [Osmose](https://osmose.openstreetmap.fr/).",
                 "issues_h": "Problembehandlung",
                 "issues": "QS-Probleme werden ähnlich wie Hinweise bearbeitet. Klicke auf einen Marker um die Details in der Seitenleiste zu sehen. Jedes QS-Werkzeug hat seine eigenen Möglichkeiten, aber generell kannst du Probleme kommentieren und/oder schließen."
             },
@@ -1694,7 +1720,7 @@
                         "simple_example": "Vermeide beispielsweise Abbiegebeschränkungen mit einem \"via-Weg\", wenn die Modellierung auch mit einem \"via-Knoten\" möglich ist.",
                         "indirect": "**Einige Beschränkungen zeigen den Text \"(indirekt)\" an und werden heller angezeigt.**",
                         "indirect_example": "Diese Beschränkungen existieren wegen einer anderen Beschränkung in der Nähe. Zum Beispiel werden durch eine \"Nur Geradeaus\" Beschränkung indirekt ür alle anderen Wege über die Kreuzung \"Keine Kehrtwende\" Beschränkungen erstellt.",
-                        "indirect_noedit": "Indirekte Beschränkungen sollte man nicht ändern. Stattdessen sollte man die angrenzende, direkte Beschränkung ändern."
+                        "indirect_noedit": "Indirekte Beschränkungen sollte man nicht bearbeiten. Stattdessen sollte man die angrenzende, direkte Beschränkung bearbeiten."
                     }
                 }
             }
@@ -1720,7 +1746,7 @@
                     "everything_in_view": "Alles im Kartenausschnitt sieht gut aus",
                     "edits": "Deine Bearbeitungen sehen gut aus",
                     "edits_in_view": "Deine Bearbeitungen im Kartenausschnitt sehen gut aus",
-                    "no_edits": "Du hast noch keine Änderungen"
+                    "no_edits": "Du hast noch keine Bearbeitungen"
                 },
                 "hidden_issues": {
                     "none": "Gemeldet Probleme werden hier angezeigt",
@@ -2427,7 +2453,7 @@
                     "wireframe": "Gittermodus ein-/ausschalten",
                     "osm_data": "OpenStreetMap Daten ein-/ausblenden",
                     "minimap": "Minimap ein-/ausblenden",
-                    "highlight_edits": "Ungesicherte Änderungen hervorheben"
+                    "highlight_edits": "Ungesicherte Bearbeitungen hervorheben"
                 },
                 "selecting": {
                     "title": "Objekte auswählen",
@@ -2485,7 +2511,7 @@
                     "paste": "Kopierte Objekte einfügen",
                     "undo": "Letzte Bearbeitung rückgängig machen",
                     "redo": "Letzte Bearbeitung wiederherstellen",
-                    "save": "Änderungen speichern"
+                    "save": "Bearbeitungen speichern"
                 }
             },
             "tools": {
@@ -2803,7 +2829,7 @@
                     }
                 },
                 "beauty": {
-                    "label": "Schönheitsbedarf"
+                    "label": "Schönheitssalon"
                 },
                 "bench": {
                     "label": "Sitzbank",
@@ -3145,7 +3171,8 @@
                 },
                 "direction": {
                     "label": "Blickrichtung (Grad im Uhrzeigersinn)",
-                    "placeholder": "45, 90, 180, 270"
+                    "placeholder": "45, 90, 180, 270",
+                    "terms": "Richtung (Grade im Uhrzeigersinn)"
                 },
                 "direction_cardinal": {
                     "label": "Blickrichtung",
@@ -3237,7 +3264,8 @@
                         "rail": "Stromschiene",
                         "yes": "Ja (unspezifiziert)"
                     },
-                    "placeholder": "Oberleitung, Stromschiene …"
+                    "placeholder": "Oberleitung, Stromschiene …",
+                    "terms": "Elektrifzierung"
                 },
                 "elevation": {
                     "label": "Höhe in m über dem Meeresspiegel",
@@ -3580,6 +3608,9 @@
                 },
                 "kerb/height": {
                     "label": "Höhe"
+                },
+                "kneipp_water_cure_multi": {
+                    "label": "Kneippbeckentyp"
                 },
                 "label": {
                     "label": "Label"
@@ -4879,7 +4910,7 @@
             },
             "presets": {
                 "addr/interpolation": {
-                    "name": "Address-Interpolation"
+                    "name": "Adress-Interpolation"
                 },
                 "address": {
                     "name": "Adresse",
@@ -4906,7 +4937,7 @@
                     "terms": "Werbemasten"
                 },
                 "aerialway": {
-                    "name": "Seilbahn"
+                    "name": "Lifte ..."
                 },
                 "aerialway/cable_car": {
                     "name": "Seilbahn",
@@ -4961,7 +4992,7 @@
                     "terms": "Seilrutsche, Flying Fox, Seilbahn, Tirolienne, Tyrolienne, Guerillarutsche"
                 },
                 "aeroway": {
-                    "name": "Luftfahrt"
+                    "name": "Flugverkehr ..."
                 },
                 "aeroway/aerodrome": {
                     "name": "Flughafen",
@@ -5189,7 +5220,7 @@
                     "terms": "Krematorium, Feuerhalle, Einäscherungshalle"
                 },
                 "amenity/dentist": {
-                    "name": "Zahnarzt",
+                    "name": "Zahnarzt, Zahnärztin",
                     "terms": "Zahnarzt, Dentist, Stomatologe"
                 },
                 "amenity/dive_centre": {
@@ -5197,8 +5228,8 @@
                     "terms": "Tauchschule, Tauchzentrum"
                 },
                 "amenity/doctors": {
-                    "name": "Arzt",
-                    "terms": "Arzt, Ärztin, Mediziner, Medizinerin"
+                    "name": "Arzt, Ärztin",
+                    "terms": "Arzt, Ärztin, Mediziner, Medizinerin, Doktor, Doktorin"
                 },
                 "amenity/dojo": {
                     "name": "Kampfsportstudio",
@@ -5222,6 +5253,10 @@
                 "amenity/events_venue": {
                     "name": "Veranstaltungszentrum",
                     "terms": "Veranstaltungszentrum"
+                },
+                "amenity/exhibition_centre": {
+                    "name": "Messezentrum",
+                    "terms": "Messezentrum,Messegelände,Messe"
                 },
                 "amenity/fast_food": {
                     "name": "Schnellimbiss",
@@ -5320,6 +5355,10 @@
                 "amenity/kindergarten": {
                     "name": "Kindergartengrundstück",
                     "terms": "Kindergarten, Vorschule"
+                },
+                "amenity/kneipp_water_cure": {
+                    "name": "Kneippanlage",
+                    "terms": "Kneippanlage"
                 },
                 "amenity/language_school": {
                     "name": "Sprachschule",
@@ -5853,7 +5892,7 @@
                     "terms": "Süßigkeitenautomat"
                 },
                 "amenity/veterinary": {
-                    "name": "Tierarzt",
+                    "name": "Tierarzt, Tierärztin",
                     "terms": "Tierarzt, Tierärztin, Veterinär, Tierklinik, Tierarztpraxis"
                 },
                 "amenity/waste/dog_excrement": {
@@ -6069,6 +6108,10 @@
                 "barrier/sally_port": {
                     "name": "Sicherheitsschleuse",
                     "terms": "Sicherheitsschleuse, Durchgang, Durchlass durch ein Gemäuer, Tore, Gitter"
+                },
+                "barrier/spikes": {
+                    "name": "Nagelstreifen",
+                    "terms": "Nagelstreifen, Nagelsperre, Nagelband, Nagelstreifen, Nagelkette Nagelgurt, Reifenkiller"
                 },
                 "barrier/stile": {
                     "name": "Zaunübertritt",
@@ -6601,6 +6644,10 @@
                     "name": "Rettungsschwimmerstation",
                     "terms": "Rettungsschwimmerstation, Rettungsschwimmerposten, Rettungsschwimmerplatz"
                 },
+                "emergency/mountain_rescue": {
+                    "name": "Bergrettung",
+                    "terms": "Bergrettung, Rettung am Berg,"
+                },
                 "emergency/no": {
                     "name": "keine Notzufahrt"
                 },
@@ -6809,6 +6856,10 @@
                 },
                 "highway/cycleway/crossing": {
                     "name": "Fahrradüberfahrt (eigener Weg)"
+                },
+                "highway/cycleway/crossing/bicycle_foot": {
+                    "name": "Rad- und Fußübergang",
+                    "terms": "Rad- und Fußübergang, Fahrradübergang und Fußgängerübergang"
                 },
                 "highway/cycleway/crossing/marked": {
                     "name": "Gekennzeichneter Fahrrad-Übergang",
@@ -7103,6 +7154,10 @@
                     "name": "Monument",
                     "terms": "Denkmal, Monument"
                 },
+                "historic/pillory": {
+                    "name": "Pranger",
+                    "terms": "Pranger, Schandpfahl, Schandbühne"
+                },
                 "historic/ruins": {
                     "name": "Ruine",
                     "terms": "Ruine, Ruinen, Ruinenstätte"
@@ -7215,7 +7270,7 @@
                 },
                 "landuse/forest": {
                     "name": "Bewirtschafteter Wald",
-                    "terms": "Bewirtschafteter Wald"
+                    "terms": "Bewirtschafteter Wald, Forst, Forstwald, Nutzwald, Wald"
                 },
                 "landuse/garages": {
                     "name": "Garagenhof",
@@ -8141,7 +8196,7 @@
                 },
                 "natural/wood": {
                     "name": "Wald ohne forstwirtschafliche Nutzung",
-                    "terms": "Baum, Bäume"
+                    "terms": "Wald, Naturwald, Urwald, Baum, Bäume"
                 },
                 "network/type/node_network": {
                     "name": "Knotenroute",
@@ -9928,7 +9983,7 @@
                     "terms": "Standort, Stelle, Grundstück, Platz, Ort, Site"
                 },
                 "type/waterway": {
-                    "name": "Wasserwege",
+                    "name": "Wasserweg",
                     "terms": "Strom, Fluss, Bach, Graben, Damm, Wehr"
                 },
                 "waterway": {
@@ -10073,7 +10128,7 @@
             },
             "MAPNIK": {
                 "attribution": {
-                    "text": "© OpenStreetMap-Mitwirkende, CC BY-SA"
+                    "text": "© OpenStreetMap-Mitwirkende, CC-BY-SA 2.0"
                 },
                 "description": "Standard OpenStreetMap Kartenansicht",
                 "name": "OpenStreetMap (Standard)"
@@ -10244,20 +10299,6 @@
                 "description": "Anmerkungen von basemap.at.",
                 "name": "basemap.at Überlagerung"
             },
-            "basemap.at-surface": {
-                "attribution": {
-                    "text": "basemap.at"
-                },
-                "description": "Oberflächenkarte von basemap.at.",
-                "name": "basemap.at Oberfläche"
-            },
-            "basemap.at-terrain": {
-                "attribution": {
-                    "text": "basemap.at"
-                },
-                "description": "Geländekarte von basemap.at.",
-                "name": "basemap.at Gelände"
-            },
             "eufar-balaton": {
                 "attribution": {
                     "text": "EUFAR Balaton Orthofoto 2010"
@@ -10278,13 +10319,6 @@
                 },
                 "description": "Die Karte der Gemeinde ist eine Überblickskarte die Gothenburg zeigt. Sie enthält Informationen über Flächennutzung, Kommunikation, Hydrgraphie, Gebäude, Adressen und Straßennamen. administrative Gliederung und Orientierungstexte.",
                 "name": "Karte der Gemeinde Gothenburg"
-            },
-            "gsi.go.jp": {
-                "attribution": {
-                    "text": "GSI Japan"
-                },
-                "description": "Japan GSI Orthofoto. Normalerweise etwas besser als Bing, aber auch älter.",
-                "name": "Japan GSI Orthofoto"
             },
             "gsi.go.jp_airphoto": {
                 "attribution": {
@@ -10505,7 +10539,7 @@
             "Bay-Area-OpenStreetMappers": {
                 "name": "Bay Area OpenStreetMappers",
                 "description": "Verbessere OpenStreetMap in der Bay Area",
-                "extendedDescription": "Diese Gruppe beschäftigt sich mit der Vergrößerung der OpenStreetMap Gemeinschaft hier in der Bay Area (San Francisco). Unsere Veranstaltungen sind für alle offen, sowohl für Open Source Liebhaber, Radfahrenden, GIS Fachleute, Geocachers und alle anderen. Alle die an Karten, Kartenerstellung und freien Karte interessiert sind, sind in unserer Gruppe und bei unseren Veranstaltungen willkommen."
+                "extendedDescription": "Diese Gruppe beschäftigt sich mit der Vergrößerung der OpenStreetMap Gemeinschaft hier in der Bay Area (San Francisco). Unsere Veranstaltungen sind für alle offen, sowohl für Open Source Liebhaber, Radfahrenden, GIS Fachleute, Geocachers und alle anderen. Alle die an Karten, Kartenerstellung und freien Karte interessiert sind, sind in unserer Gruppe und bei unseren Veranstaltungen willkommen. "
             },
             "Central-Pennsylvania-OSM": {
                 "name": "Zentral-Pennsylvania OSM",
@@ -10965,10 +10999,6 @@
                 "description": "Mapper und OpenStreetMap Benutzer in Salt Lake City, USA",
                 "extendedDescription": "Activitäten beinhalten Workshop zum Erlernen des Mappens, Mapathong (Mapping Parties und Datensammlung vor Ort. Die Veranstaltungen finden in der SLC area statt, zumindest anfänglichen.  Wir suchen erfahrene Mapper und Menschen die OSM kennenlernenn wollen. Beteilige dich und lass und mappen!"
             },
-            "OSM-Vancouver-meetup": {
-                "name": "OpenStreetMap Vancouver",
-                "description": "Mapper und OpenStreetMap Benutzer in Vancouver, Kanada"
-            },
             "OSM-Wyoming": {
                 "name": "OpenStreetMap Wyoming",
                 "description": "Mapper und OpenStreetMap Benutzer in Wyoming, USA",
@@ -11267,6 +11297,22 @@
             "fi-mailinglist": {
                 "name": "Talk-fi Mailing Liste",
                 "description": "Talk-fi ist die offizielle Mailing Liste für die Finnische OSM Gemeinschaft"
+            },
+            "fr-35-wiki": {
+                "name": "OpenStreetMap Rennes Wiki page",
+                "description": "Wiki Page der lokalen Rennes OSM Gruppe"
+            },
+            "fr-bzh-mailinglist": {
+                "name": "Talk-fr-bzh Mailing Liste",
+                "description": "Talk-fr-bzh Mailing Liste"
+            },
+            "fr-bzh-twitter": {
+                "name": "OSM-BZH auf Twitter",
+                "description": "OpenStreetMap BZH auf Twitter: {url}"
+            },
+            "fr-bzh-website": {
+                "name": "OpenStreetMap BZH Website",
+                "description": "Die bretonisch sprechende Karte"
             },
             "fr-chapter": {
                 "name": "OpenStreetMap Frankreich Landesverband",

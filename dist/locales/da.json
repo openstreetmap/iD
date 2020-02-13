@@ -49,19 +49,7 @@
                 "tail": "Klik på kortet for at tilføje en bemærkning."
             },
             "add_preset": {
-                "title": "Tilføj {feature}",
-                "point": {
-                    "title": "Tilføj {feature} som punkt"
-                },
-                "line": {
-                    "title": "Tilføj {feature} som linje"
-                },
-                "area": {
-                    "title": "Tilføj {feature} som et område"
-                },
-                "building": {
-                    "title": "Tilføj {feature} som en bygning"
-                }
+                "title": "Tilføj {feature}"
             },
             "browse": {
                 "title": "Gennemse",
@@ -114,20 +102,7 @@
             },
             "circularize": {
                 "title": "Cirkulariser",
-                "description": {
-                    "line": "Gør denne linje cirkulær.",
-                    "area": "Gør dette område cirkulært."
-                },
-                "key": "O",
-                "annotation": {
-                    "line": "Gjorde en linje cirkulær.",
-                    "area": "Gjorde et område cirkulært."
-                },
-                "not_closed": "Dette kan ikke gøres cirkulært fordi det ikke er en løkke.",
-                "too_large": "Dette kan ikke gøres cirkulært, da ikke nok af det er synligt i den nuværende visning.",
-                "connected_to_hidden": "Dette kan ikke gøres cirkulært, da det er forbundet til et skjult objekt.",
-                "not_downloaded": "Dette kan ikke gøres cirkulært, da dele af det ikke er indlæst endnu.",
-                "already_circular": "Dette kan ikke gøres cirkulært, fordi det allerede er cirkulært."
+                "key": "O"
             },
             "orthogonalize": {
                 "title": "Gør retvinklet",
@@ -679,10 +654,6 @@
             "show_more": "Vis mere",
             "view_on_osm": "Se på openstreetmap.org",
             "view_on_keepRight": "Vis på keepright.at",
-            "all_fields": "Alle felter",
-            "all_tags": "Alle tags",
-            "all_members": "Alle medlemmer",
-            "all_relations": "Alle relationer",
             "add_to_relation": "Tilføj til en relation",
             "new_relation": "Ny relation...",
             "choose_relation": "Vælg den overordnede relation",
@@ -697,10 +668,8 @@
                 "manual": "{features} er skjulte. Indstil visning i Kortdata-fanen.",
                 "zoom": "{features} er skjulte. Zoom ind for at se dem."
             },
-            "back_tooltip": "Ændr objekt",
             "remove": "Fjern",
             "search": "Søg",
-            "multiselect": "Valgte objekter",
             "unknown": "Ukendt",
             "incomplete": "<ikke downloadet>",
             "feature_list": "Find objekter",
@@ -723,10 +692,7 @@
             "way": "Vej",
             "relation": "Relation",
             "location": "Sted",
-            "add_fields": "Tilføj felt:",
-            "lock": {
-                "suggestion": "Feltet \"{label}\" er låst fordi der er et Wikidata-tag. Du kan slette dette eller redigere egenskaben i \"Alle tags\"-afsnittet."
-            }
+            "add_fields": "Tilføj felt:"
         },
         "background": {
             "title": "Baggrund",
@@ -755,7 +721,6 @@
                 "description": "Vis detalje-panel på kortet",
                 "tooltip": "Vis avanceret baggundsinformation."
             },
-            "fix_misalignment": "Juster luftfoto-offset",
             "offset": "Træk et vilkårligt sted i det grå område nedenfor for at justere luftfotoets offset, eller indtast offset-værdien i meter."
         },
         "map_data": {
@@ -773,11 +738,9 @@
                     "title": "OpenStreetMap-bemærkninger"
                 },
                 "keepRight": {
-                    "tooltip": "Automatiskt detekterede kortproblemer fra keepright.at",
                     "title": "KeepRight-problemer"
                 },
                 "improveOSM": {
-                    "tooltip": "Manglende data som er automatisk detekteret af improveosm.org",
                     "title": "ImproveOSM-problemer"
                 },
                 "custom": {
@@ -1048,16 +1011,11 @@
                 }
             },
             "keepRight": {
-                "title": "KeepRight-Fejl",
-                "detail_title": "Fejl",
                 "detail_description": "Beskrivelse",
                 "comment": "Kommentar",
                 "comment_placeholder": "Indtast en kommentar der deles med andre brugere.",
-                "close": "Lukket (fejl rettet)",
-                "ignore": "Ignorer (ikke en fejl)",
                 "save_comment": "Gem kommentar",
                 "close_comment": "Luk og Kommentér",
-                "ignore_comment": "Ignorer og Kommentér",
                 "error_parts": {
                     "this_node": "denne node",
                     "this_way": "denne vej",
@@ -1324,11 +1282,9 @@
                 "type": "Du kan klikke på objekttypen for at ændre et kortobjekts type. Alt hvad der eksisterer i den virkelige verden kan tilføjes til OpenStreetMap, så der er tusindvis af typer at vælge imellem.",
                 "type_picker": "Typevælgeren viser de mest almindeligt forekommende, såsom parker, hospitaler, restauranter, veje og bygninger. Du kan søge ved at skrive hvad du leder efter i søgeboksen. Du  kan også klikke på {inspect} **Info**-ikonet ved siden af objekttypen for at lære mere om denne.",
                 "fields_h": "Felter",
-                "fields_all_fields": "Sektionen \"Alle felter\" indeholder alle de felter objektet kan indeholde, og som du kan redigere. I OpenStreetMap er alle felter valgfri, og det er helt OK at efterlade et felt tomt hvis du er usikker.",
                 "fields_example": "Hver objekttype vil vise forskellige felter. Eksempelvis kan der for en vej vises felter for dens belægning og hastighedsgrænse, mens der for en restaurant kan vises felter for hvilken mad der serveres og dens åbningstider. ",
                 "fields_add_field": "Du kan også klikke på \"Tilføj felt\"-boksen for at tilføje yderligere felter, såsom beskrivelse, Wikipedia-link, kørestolsegnethed og meget mere.",
                 "tags_h": "Tags (mærker)",
-                "tags_all_tags": "Under afsnittet med felter kan du udvide \"Alle tags\"-sektionen for at redigere alle OpenStreetMap-*tags* for det markerede kortobjekt. Hvert tag, eller mærke, består af en *nøgle* og en *værdi*, dette er dataelementer som definer samtlige de egenskaber som er gemt i OpenStreetMap.",
                 "tags_resources": "Redigering af et kortobjekts tags kræver et vist kendskab til OpenStreetMap. Du bør studere ressourcer som [OpenStreetMap-wikien](https://wiki.openstreetmap.org/wiki/Main_Page) eller [Taginfo](https://taginfo.openstreetmap.org/) for at lære mere om den gængse praksis for OpenStreetMap-tagging."
             },
             "points": {
@@ -1361,8 +1317,6 @@
                 "title": "Relationer",
                 "intro": "En *relation* er en speciel type kortobjekt i OpenStreetMap som grupperer andre kortobjekter. De kortobjekter der tilhører en relation kaldes *medlemmer*, og hvert medlem kan have en *rolle* i forhold til relationen.",
                 "edit_relation_h": "Redigering af relationer",
-                "edit_relation": "I bunden af objekteditoren kan du udvidde \"Alle relationer\"-afsnittet for at se om det markerede kortobjekt er medlem af nogle relationer. I så fald kan du klikke på relationen for at markere og redigere den.",
-                "edit_relation_add": "For at tilføje et kortobjekt til en relation skal du markere kortobjektet, klik derefter på {plus} tilføj-knappen i \"Alle relationer\"-afsnittet i objekteditoren. Her kan du vælge mellem nærliggende relationer på en liste, eller vælge \"Ny relation...\"-valgmuligheden.",
                 "edit_relation_delete": "Du kan klikke på {delete} **Slet**-knappen for at fjerne de markerede kortobjekter fra relationen. Hvis du fjerner alle medlemmer fra en relation slettes relationen automatisk.",
                 "maintain_relation_h": "Vedligehold af relationer",
                 "maintain_relation": "For det meste vil iD vedligeholde relationer automatisk mens du redigerer. Du skal dog være forsigtig når du erstatter objekter der kan være medlemmer af relationer. Hvis du for eksempel sletter et vejsegment og tegner et nyt som erstatning, bør du tilføje det nye til de samme relationer (ruter, svingbegrænsninger etc.) som det oprindelige.",
@@ -1388,9 +1342,6 @@
             },
             "streetlevel": {
                 "intro": "Gadefotoer er brugbare til kortlægning af trafikskilte, forretninger og andre detaljer der ikke kan ses fra satellit og ortografiske-fotoer. iD-værktøjet understøtter gadefotoer fra [Bing Streetside](https://www.microsoft.com/en-us/maps/streetside), [Mapillary](https://www.mapillary.com), og [OpenStreetCam](https://www.openstreetcam.org)."
-            },
-            "qa": {
-                "tools": "De følgende værktøjer er understøttet for nuværende: [KeepRight](https://www.keepright.at/) og [ImproveOSM](https://improveosm.org/en/). Forvent at iD får understøttelse for [Osmose](https://osmose.openstreetmap.fr/) og andre kvalitetssikringsværktøjer i fremtiden."
             },
             "field": {
                 "restrictions": {
@@ -2153,9 +2104,6 @@
                         "onsen": "Japansk varmebad"
                     }
                 },
-                "beauty": {
-                    "label": "Skønhedsspecialitet"
-                },
                 "bench": {
                     "label": "Bænk"
                 },
@@ -2579,6 +2527,9 @@
                         "undefined": "Nej"
                     }
                 },
+                "hot_water": {
+                    "label": "Varmt vand"
+                },
                 "incline": {
                     "label": "Stigning"
                 },
@@ -2717,7 +2668,12 @@
                     "label": "Max tid"
                 },
                 "maxweight": {
-                    "label": "Maksimalvægt"
+                    "label": "Maksimalvægt",
+                    "terms": "max,maksimal,maks,vægt,veje,"
+                },
+                "maxweight_bridge": {
+                    "label": "Maksimalvægt",
+                    "terms": "max,maksimal,maks,vægt,veje,"
                 },
                 "memorial": {
                     "label": "Type"
@@ -3005,6 +2961,18 @@
                 "sanitary_dump_station": {
                     "label": "Sanitærdeponi"
                 },
+                "seamark/beacon_lateral/category": {
+                    "options": {
+                        "waterway_left": "Vandvej venstre",
+                        "waterway_right": "Vandvej højre"
+                    }
+                },
+                "seamark/buoy_lateral/category": {
+                    "options": {
+                        "waterway_left": "Vandvej venstre",
+                        "waterway_right": "Vandvej højre"
+                    }
+                },
                 "seasonal": {
                     "label": " Sæsonpræget"
                 },
@@ -3268,6 +3236,11 @@
                     "label": "Type",
                     "placeholder": "Standard"
                 },
+                "usage_rail": {
+                    "options": {
+                        "tourism": "Turisme"
+                    }
+                },
                 "visibility": {
                     "label": "Synlighed",
                     "options": {
@@ -3307,6 +3280,13 @@
                 },
                 "water_point": {
                     "label": "Vandbrønd"
+                },
+                "water_source": {
+                    "label": "Vandkilde"
+                },
+                "water_volume": {
+                    "label": "Volume af vandreserve (m³)",
+                    "terms": "volume,mængde,reserve,vand"
                 },
                 "waterway": {
                     "label": "Type"
@@ -3349,9 +3329,6 @@
                 "advertising/column": {
                     "name": "Reklamesøjle"
                 },
-                "aerialway": {
-                    "name": "Skiliftbane"
-                },
                 "aerialway/cable_car": {
                     "name": "Svævebane",
                     "terms": "Svævebane, Gondolbane"
@@ -3391,9 +3368,6 @@
                 "aerialway/rope_tow": {
                     "name": "Tovlift",
                     "terms": "Tovlift"
-                },
-                "aeroway": {
-                    "name": "Lufthavnsvej"
                 },
                 "aeroway/aerodrome": {
                     "name": "Lufthavn",
@@ -3497,9 +3471,17 @@
                     "name": "Cafe",
                     "terms": "Cafe, Café"
                 },
+                "amenity/car_pooling": {
+                    "name": "Samkørselsstation",
+                    "terms": "delebil,samkørsel,mødested,gomore,ride share"
+                },
                 "amenity/car_rental": {
                     "name": "Biludlejning",
                     "terms": "Biludlejning"
+                },
+                "amenity/car_sharing": {
+                    "name": "Delebilsstation",
+                    "terms": "delebil,samkørsel,mødested"
                 },
                 "amenity/car_wash": {
                     "name": "Bilvask",
@@ -3573,7 +3555,8 @@
                     "terms": "Dojo,Kampsportsakademi,Kampsportsklub"
                 },
                 "amenity/drinking_water": {
-                    "name": "Drikkevand"
+                    "name": "Drikkevand",
+                    "terms": "vand,vandhane,fontæne,drik,drikke"
                 },
                 "amenity/driving_school": {
                     "name": "Køreskole",
@@ -3628,6 +3611,10 @@
                     "name": "Internetcafe",
                     "terms": "Internetcafe"
                 },
+                "amenity/kindergarten": {
+                    "name": "Børnehave/vuggestue-grund",
+                    "terms": "børnehave,vuggestue,pasning,børnepasning,børn,institution"
+                },
                 "amenity/language_school": {
                     "name": "Sprogskole",
                     "terms": "sprog,lingvistik,skole,uddannelse"
@@ -3669,6 +3656,9 @@
                 "amenity/parking/multi-storey": {
                     "name": "Fleretagesparkering",
                     "terms": "parkeringskælder,kælder,parkeringshus"
+                },
+                "amenity/parking_entrance": {
+                    "name": "Ind/udgang til parkeringsgarage"
                 },
                 "amenity/parking_space": {
                     "name": "Parkeringsbås",
@@ -3917,12 +3907,16 @@
                     "terms": "Affaldsstation, Omlasteplads"
                 },
                 "amenity/water_point": {
-                    "name": "Genbrugsvand",
-                    "terms": "Genbrugsvand"
+                    "name": "Tankning af drikkevand",
+                    "terms": "vand,drik,drikke,drikkevand,campingvogn,autocamper,campist"
                 },
                 "amenity/watering_place": {
                     "name": "Dyrevandtrug",
-                    "terms": "Dyrevandtrug, Vandtrug"
+                    "terms": "Dyrevandtrug, Vandtrug,drikke,dyr,drik,vanding"
+                },
+                "amenity/weighbridge": {
+                    "name": "Brovægt",
+                    "terms": "vægt,køretøj,truck,bil,vogn,vogntog,"
                 },
                 "area": {
                     "name": "Område",
@@ -3958,7 +3952,8 @@
                     "terms": "tog,jernbane"
                 },
                 "attraction/water_slide": {
-                    "name": "Vandrutchebane"
+                    "name": "Vandrutchebane",
+                    "terms": "rutchebane,vandland,"
                 },
                 "barrier": {
                     "name": "Barriere",
@@ -4142,6 +4137,10 @@
                 "building/industrial": {
                     "name": "Industribygning",
                     "terms": "Industribygning"
+                },
+                "building/kindergarten": {
+                    "name": "Børnehave/vuggestue-bygning",
+                    "terms": "børnehave,vuggestue,pasning,børnepasning,børn,institution,bygning"
                 },
                 "building/public": {
                     "name": "Offentlig bygning",
@@ -4425,8 +4424,15 @@
                 "emergency/private": {
                     "name": "Udrykningkørsel Privat"
                 },
+                "emergency/water_tank": {
+                    "name": "Branddam",
+                    "terms": "brand,dam,beredskab,reservoir"
+                },
                 "emergency/yes": {
                     "name": "Udrykningskørsel Ja"
+                },
+                "entrance": {
+                    "name": "Indgang/Udgang"
                 },
                 "ford": {
                     "name": "Vadested",
@@ -5077,6 +5083,10 @@
                     "name": "Plansilo",
                     "terms": "Køresilo"
                 },
+                "man_made/cairn": {
+                    "name": "Varde",
+                    "terms": "sten,stak,bunke,stenbunke,struktur,,monument"
+                },
                 "man_made/chimney": {
                     "name": "Skorsten",
                     "terms": "Skorsten"
@@ -5111,6 +5121,10 @@
                 "man_made/lighthouse": {
                     "name": "Fyr (navigation)",
                     "terms": "Fyr (navigation)"
+                },
+                "man_made/manhole/water": {
+                    "name": "Dæksel til vandforsyning",
+                    "terms": "dæksel, vand,forsyning"
                 },
                 "man_made/mast": {
                     "name": "Mast",
@@ -5159,6 +5173,10 @@
                 "man_made/storage_tank": {
                     "name": "Lagertank",
                     "terms": "Tank, Gylletank"
+                },
+                "man_made/storage_tank/water": {
+                    "name": "Vandtank",
+                    "terms": "tank,vand,lager,opbevaring"
                 },
                 "man_made/surveillance": {
                     "name": "Overvågning",
@@ -5384,6 +5402,10 @@
                     "name": "Tinglysningskontor",
                     "terms": "Tinglysningskontor"
                 },
+                "office/guide": {
+                    "name": "Turguidekontor",
+                    "terms": "tur,guide,turist,føring,ferie,bjergguide,dykkerguide"
+                },
                 "office/insurance": {
                     "name": "Forsikringselskab",
                     "terms": "Forsikringsselskab"
@@ -5499,8 +5521,8 @@
                     "terms": "Elledning"
                 },
                 "power/plant": {
-                    "name": "Transformatorgrund",
-                    "terms": "Transformatorgrund, strømtransformatorstationsgrunde"
+                    "name": "Kraftværksgrund",
+                    "terms": "kraftværk,elkraft,elektricitet,el,generator"
                 },
                 "power/pole": {
                     "name": "Elmast (telefonmast)",
@@ -5681,6 +5703,10 @@
                 "shop/car": {
                     "name": "Bilforhandler",
                     "terms": "Bilforhandler,autoforhandler,bil,køretøj"
+                },
+                "shop/car/second_hand": {
+                    "name": "Brugtvognsforhandler",
+                    "terms": "autoforhandler,bil,automobil,bilforhandler,autokøretøj"
                 },
                 "shop/car_parts": {
                     "name": "Biludstyrsbutik",
@@ -6070,6 +6096,9 @@
                     "name": "Vinforretning",
                     "terms": "Vinforretning, Vinbutik, Vinhandler"
                 },
+                "tourism": {
+                    "name": "Turismeegenskab"
+                },
                 "tourism/alpine_hut": {
                     "name": "Bjerghytte",
                     "terms": "Bjerghytte"
@@ -6139,7 +6168,7 @@
                 },
                 "tourism/information/office": {
                     "name": "Turistinformationskontor",
-                    "terms": "Turistinformationskontor"
+                    "terms": "turistinformation,information,tur,guide,turist,føring,ferie"
                 },
                 "tourism/motel": {
                     "name": "Motel",
@@ -6261,7 +6290,7 @@
                 },
                 "type/route/detour": {
                     "name": "Omvejsrute",
-                    "terms": "Omvejsrute, Omkørsel"
+                    "terms": "Omvejsrute, Omkørsel,omvej"
                 },
                 "type/route/ferry": {
                     "name": "Færgerute",
@@ -6387,9 +6416,6 @@
                 "name": "Esri World fotos (Clarity) Beta"
             },
             "MAPNIK": {
-                "attribution": {
-                    "text": "© OpenStreetMap bidragsydere, CC BY-SA"
-                },
                 "description": "Standard-laget fra OpenStreetMap.",
                 "name": "OpenStreetMap (standard)"
             },

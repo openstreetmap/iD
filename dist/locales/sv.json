@@ -8,7 +8,10 @@
             "zoom_to": "Zooma till",
             "copy": "kopiera",
             "view_on": "visa på {domain}",
-            "favorite": "favorit"
+            "favorite": "favorit",
+            "list": "lista",
+            "text": "text",
+            "deselect": "avmarkera"
         },
         "toolbar": {
             "inspect": "Inspektera",
@@ -51,19 +54,7 @@
                 "key": "N"
             },
             "add_preset": {
-                "title": "Lägg till {feature}",
-                "point": {
-                    "title": "Lägg till {feature} som en punkt"
-                },
-                "line": {
-                    "title": "Lägg till {feature} som en linje"
-                },
-                "area": {
-                    "title": "Lägg till {feature} som ett område"
-                },
-                "building": {
-                    "title": "Lägg till {feature} som en byggnad"
-                }
+                "title": "Lägg till {feature}"
             },
             "browse": {
                 "title": "Navigera",
@@ -117,19 +108,37 @@
             "circularize": {
                 "title": "Gör till cirkel",
                 "description": {
-                    "line": "Gör denna linje rund.",
-                    "area": "Gör området runt."
+                    "single": "Gör detta objekt runt.",
+                    "multiple": "Gör dessa objekt runa."
                 },
                 "key": "O",
                 "annotation": {
-                    "line": "Gjorde en linje rund.",
-                    "area": "Gjorde ett område runt."
+                    "single": "Gör ett objekt runt.",
+                    "multiple": "Gör objekt runda."
                 },
-                "not_closed": "Denna kan inte göras rund då den inte är en loop.",
-                "too_large": "Denna kan inte göras runt då inte tillräckligt är synligt för tillfället.",
-                "connected_to_hidden": "Detta kan inte göras runt då det är kopplat till ett dolt objekt.",
-                "not_downloaded": "Detta kan inte göras runt då delar av det ännu inte har laddats ned.",
-                "already_circular": "Denna kan inte göras rund då den redan är rund."
+                "multiple_blockers": {
+                    "multiple": "Dessa kan inte göras runda på grund av flera anledningar."
+                },
+                "not_closed": {
+                    "single": "Detta kan inte göras runt då det inte är en loop.",
+                    "multiple": "Dessa kan inte göras runda då de inte är loopar."
+                },
+                "too_large": {
+                    "single": "Detta kan inte göras runt då inte tillräckligt av det är synligt.",
+                    "multiple": "Dessa kan inte göras runda då inte tillräckligt av dem är synliga."
+                },
+                "connected_to_hidden": {
+                    "single": "Detta kan inte göras runt då det är kopplat till ett dolt objekt.",
+                    "multiple": "Dessa kan inte göras runda då vissa av dem är kopplade till dolda objekt."
+                },
+                "not_downloaded": {
+                    "single": "Detta kan inte göras runt då delar av det ännu inte har laddats ned.",
+                    "multiple": "Dessa kan inte göras runda då delar av dem ännu inte har laddats ned."
+                },
+                "already_circular": {
+                    "single": "Detta kan inte göras mer runt än det redan är.",
+                    "multiple": "Dessa kan inte göras mer runda än de redan är."
+                }
             },
             "orthogonalize": {
                 "title": "Räta upp",
@@ -684,10 +693,12 @@
             "show_more": "Visa mer",
             "view_on_osm": "Visa på openstreetmap.org",
             "view_on_keepRight": "Visa på keepright.at",
-            "all_fields": "Alla egenskaper",
-            "all_tags": "Alla taggar",
-            "all_members": "Alla medlemmar",
-            "all_relations": "Alla relationer",
+            "feature_type": "Objekttyp",
+            "fields": "Egenskaper",
+            "tags_count": "Taggar ({count})",
+            "members_count": "Medlemmar ({count})",
+            "relations_count": "Relationer ({count})",
+            "features_count": "Objekt ({count})",
             "add_to_relation": "Lägg till i en relation",
             "new_relation": "Ny relation...",
             "choose_relation": "Välj en föräldrarelation",
@@ -698,18 +709,20 @@
             "edit_reference": "ändra/översätt",
             "wiki_reference": "Visa dokumentation",
             "wiki_en_reference": "Visa dokumentation på engelska",
+            "key_value": "nyckel=värde",
+            "multiple_values": "Multipla värden",
             "hidden_preset": {
                 "manual": "{features} är dolda. Aktivera dem i panelen Kartdata.",
                 "zoom": "{features} är dolda. Zooma in för att aktivera dem. "
             },
-            "back_tooltip": "Ändra objekt",
+            "back_tooltip": "Ändra objekttyp",
             "remove": "Ta bort",
             "search": "Sök",
-            "multiselect": "Valda objekt",
             "unknown": "Okänd",
             "incomplete": "<inte hämtad>",
             "feature_list": "Sök efter objekt",
             "edit": "Ändra objekt",
+            "edit_features": "Redigera objekt",
             "check": {
                 "yes": "Ja",
                 "no": "Nej",
@@ -730,7 +743,7 @@
             "location": "Plats",
             "add_fields": "Lägg till egenskap:",
             "lock": {
-                "suggestion": "Egenskapen \"{label}\" är låst då det finns en Wikidata-tagg. Du kan ta bort den eller redigera taggen i sektionen \"Alla taggar\"."
+                "suggestion": "Egenskapen \"{label}\" är låst då det finns en Wikidata-tagg. Du kan ta bort den eller redigera taggen i sektionen \"Taggar."
             }
         },
         "background": {
@@ -760,7 +773,6 @@
                 "description": "Visa detaljpanel",
                 "tooltip": "Visa avancerad bakgrundsinformation."
             },
-            "fix_misalignment": "Justera bildplacering",
             "offset": "Dra i den grå ytan nedan för att justera bildplaceringen, eller ange hur mycket det ska justeras i meter."
         },
         "map_data": {
@@ -778,12 +790,16 @@
                     "title": "OpenStreetMap-anteckningar"
                 },
                 "keepRight": {
-                    "tooltip": "Hittar automatiskt problem på kartan via keepright.at",
+                    "tooltip": "Dataproblem hittad av keepright.at",
                     "title": "KeepRight-problem"
                 },
                 "improveOSM": {
-                    "tooltip": "Saknad data automatiskt detekterat av improveosm.org",
+                    "tooltip": "Saknad data hittad av improveosm.org",
                     "title": "ImproveOSM-problem"
+                },
+                "osmose": {
+                    "tooltip": "Dataproblem hittade av osmose.openstreetmap.fr",
+                    "title": "Osmose-problem"
                 },
                 "custom": {
                     "tooltip": "Drag och släpp en datafil på sidan, eller klicka på knappen för att ställa in",
@@ -1030,6 +1046,12 @@
         "cannot_zoom": "Går ej att zooma ut ytterligare i nuvarande läge. ",
         "full_screen": "Växla fullskärm",
         "QA": {
+            "osmose": {
+                "title": "Osmose-problem",
+                "detail_title": "Detaljer",
+                "elems_title": "Objekt",
+                "trap_title": "Vanliga misstag"
+            },
             "improveOSM": {
                 "title": "ImproveOSM-upptäckt",
                 "geometry_types": {
@@ -1065,16 +1087,15 @@
                 }
             },
             "keepRight": {
-                "title": "KeepRight-fel",
-                "detail_title": "Fel",
+                "title": "KeepRight",
                 "detail_description": "Beskrivning",
                 "comment": "Kommentar",
                 "comment_placeholder": "Skriv en kommentar att dela med andra användare. ",
-                "close": "Stäng (fel fixat)",
-                "ignore": "Ignorera (inte ett fel) ",
+                "close": "Stäng (problem fixat)",
+                "ignore": "Radera (inte ett fel) ",
                 "save_comment": "Spara kommentar",
                 "close_comment": "Stäng och kommentera",
-                "ignore_comment": "Ignorera och kommentera",
+                "ignore_comment": "Radera och kommentera",
                 "error_parts": {
                     "this_node": "denna nod",
                     "this_way": "denna väg",
@@ -1528,11 +1549,11 @@
                 "type": "Du kan klicka på objekttyp för att ändra objektet till en annan typ. Allt som finns i den verkliga världen kan läggas till i OpenStreetMap, så det finns tusentals objekttyper att välja bland.",
                 "type_picker": "Typväljaren visar de vanligaste objekttyperna, så som parker, sjukhus, restauranger, vägar och byggnader. Du kan söka efter vad som helst genom att skriva vad du söker efter i sökrutan. Du kan också klicka på {inspect} **Info**-ikonen bredvid en objekttyp för att lära dig mer om den.",
                 "fields_h": "Egenskaper",
-                "fields_all_fields": "Sektionen \"Alla egenskaper\" innehåller alla objektets detaljer som du kan redigera. I OpenStreetMap är alla egenskaper valfria, och det är ok att lämna en egenskap blank om du är osäker.",
+                "fields_all_fields": "Sektionen \"Egenskaper\" innehåller alla objektets detaljer som du kan redigera. I OpenStreetMap är alla egenskaper valfria, och det är ok att lämna en egenskap blank om du är osäker.",
                 "fields_example": "Varje objekttyp kommer att visa olika egenskaper. En väg t.ex. kan ha egenskaper om dess ytbeläggning och hastighetsbegränsning, medan en restaurang kan har egenskaper om vilken typ av mat de serverar och öppettider. ",
                 "fields_add_field": "Du kan även klicka på \"Lägg till egenskap\" för att lägga till fler egenskaper, så som beskrivning, Wikipedia-länk, handikappanpassning m.m.",
                 "tags_h": "Taggar",
-                "tags_all_tags": "Under sektionen egenskaper kan du trycka på \"Alla taggar\" för att redigera någon av OpenStreetMaps *taggar* för valt objekt. Varje tagg består av *nyckel* och *värde*, och är dataelement som definierar egenskaper för objektet lagrat på OpenStreetMap.",
+                "tags_all_tags": "Under sektionen egenskaper kan du trycka på \"Taggar\" för att redigera någon av OpenStreetMaps *taggar* för valt objekt. Varje tagg består av *nyckel* och *värde*, och är dataelement som definierar egenskaper för objektet lagrat i OpenStreetMap.",
                 "tags_resources": "Att redigera ett objekts taggar kräver viss kunskap om OpenStreetMap. Du bör ta en titt på sidor så som [OpenStreetMap Wiki](https://wiki.openstreetmap.org/wiki/Main_Page) eller [Taginfo](https://taginfo.openstreetmap.org/) för att lära dig mer om accepterade taggnings-principer på OpenStreetMap."
             },
             "points": {
@@ -1593,8 +1614,8 @@
                 "title": "Relationer",
                 "intro": "En *relation* är en speciell typ av objekt i OpenStreetMap som grupperar ihop andra objekt. Objekten som ingår i en relation kallas *medlemmar*, och varje medlem har en *roll* i relationen.",
                 "edit_relation_h": "Redigera relationer",
-                "edit_relation": "Längst ned i objektredigeraren kan du expandera sektionen \"Alla relationer\" för att se om valt objekt är medlem i någon relation. Du kan sedan klicka på en relation för att redigera den.",
-                "edit_relation_add": "För att lägga till ett objekt till en relation, markera objektet och klicka på  knappen {plus} **Lägg till** längst ned i sektionen \"Alla relationer\" i objektredigeraren. Du kan välja från en lista över närliggande relationer, eller välja \"Ny relation...\".",
+                "edit_relation": "Längst ned i objektredigeraren kan du expandera sektionen \"Relationer\" för att se om valt objekt är medlem i någon relation. Du kan sedan klicka på en relation för att redigera den.",
+                "edit_relation_add": "För att lägga till ett objekt till en relation, markera objektet och klicka på  knappen {plus} lägg till i sektionen \"Relationer\" i objektredigeraren. Du kan välja från en lista över närliggande relationer, eller välja \"Ny relation...\".",
                 "edit_relation_delete": "Du kan även klicka på knappen {delete} **Radera** för att radera valt objekt från relationen. Om du raderar alla medlemmar från en relation kommer relationen automatiskt att raderas. ",
                 "maintain_relation_h": "Hantera relationer",
                 "maintain_relation": "För det mesta hanterar iD relationerna automatiskt när du redigerar. Du bör vara försiktig när du ersätter objekt som kan vara medlemmar i relationer. Om du t.ex. raderar en sektion av en väg och ritar en ny sektion för att ersätta den, bör du lägga till den nya sektionen till samma relationer (rutter, svängrestriktioner, etc.) som den ursprungliga vägen.",
@@ -1609,10 +1630,10 @@
                 "turn_restriction_editing": "I egenskapen \"Svängrestriktioner\", klicka på en \"från\"-väg för att se om det är tillåtet eller förbjudet att svänga in på någon av \"till\"-vägarna. Du kan klicka på sväng-ikonerna för att växla dem mellan tillåtet och förbjudet. iD kommer automatiskt skapa relationer och sätta rollerna \"från\", \"via\" och \"till\" baserat på dina val.",
                 "route_h": "Rutter",
                 "route": "En *rutt*-relation är en grupp av en eller flera linjer som tillsammans formar ett ruttnätverk, så som buss-rutter, tåg-rutter eller väg-rutt.",
-                "route_add": "För att lägga till ett objekt till en rutt-relation, välj objektet och bläddra ned till sektionen \"Alla relationer\" i objektredigeraren. Klicka sedan på knappen {plus} **Lägg till** för att lägga till detta objekt till en närliggande existerande relation eller en ny relation.",
+                "route_add": "För att lägga till ett objekt till en rutt-relation, välj objektet och bläddra ned till sektionen \"Relationer\" i objektredigeraren. Klicka sedan på knappen {plus} Lägg till för att lägga till detta objekt till en närliggande existerande relation eller en ny relation.",
                 "boundary_h": "Gränser",
                 "boundary": "En *gräns*-relation är en grupp av en eller flera linjer som tillsammans formar en administrativ gräns.",
-                "boundary_add": "För att lägga till ett objekt till en gräns-relation, välj objektet och bläddra ned till sektionen \"Alla relationer\" i objektredigeraren. Klicka sedan på knappen {plus} **Lägg till** för att lägga till detta objekt till en närliggande existerande relation eller en ny relation."
+                "boundary_add": "För att lägga till ett objekt till en gräns-relation, välj objektet och bläddra ned till sektionen \"Relationer\" i objektredigeraren. Klicka sedan på knappen {plus} lägg till för att lägga till detta objekt till en närliggande existerande relation eller en ny relation."
             },
             "notes": {
                 "title": "Anteckningar",
@@ -1656,7 +1677,7 @@
                 "title": "Kvalitetssäkring",
                 "intro": "\"Kvalitetssäkringsverktyg\" (Q/A=Quality Assurance) kan hitta olämpliga taggar, icke anslutna vägar och andra typer av problem på OpenStreetMap, som kartläggare sedan kan rätta till.  För att visa existerande Q/A-problem, klicka på panelen {data} **Kartdata** för att aktivera ett specifikt Q/A-lager.",
                 "tools_h": "Verktyg",
-                "tools": "Följande verktyg stöds för tillfället: [KeepRight](https://www.keepright.at/) och [ImproveOSM](https://improveosm.org/en/). Du kan förvänta dig att iD kommer att stödja [Osmose](https://osmose.openstreetmap.fr/) och andra Q/A-verktygen i framtiden.",
+                "tools": "Följande verktyg stöds för tillfället: [KeepRight](https://www.keepright.at/), [ImproveOSM](https://improveosm.org/en/) och [Osmose](https://osmose.openstreetmap.fr/).",
                 "issues_h": "Hantera problem",
                 "issues": "Hanteringen av Q/A-problem liknar hanteringen av anteckningar. Klicka på en markör för att se detaljer om problemet i sidopanelen. Varje verktyg har sina egna möjligheter, men generellt kan du kommentera och/eller stänga ett problem."
             },
@@ -2756,6 +2777,15 @@
                 "attraction": {
                     "label": "Typ"
                 },
+                "baby_feeding": {
+                    "label": "Plats för amning av spädbarn",
+                    "options": {
+                        "no": "Ingen",
+                        "room": "Dedikerat rum",
+                        "yes": "Markerad plats"
+                    },
+                    "terms": "baby, spädbarn, amning, matning, amma, bröstmjölk, nappflaska, välling, ge bröstet, di, dia, dägga"
+                },
                 "baby_seat": {
                     "label": "Barnstol"
                 },
@@ -2787,7 +2817,7 @@
                     }
                 },
                 "beauty": {
-                    "label": "Skönhetsspecialitet"
+                    "label": "Tjänster"
                 },
                 "bench": {
                     "label": "Bänk",
@@ -3323,6 +3353,9 @@
                 "fuel_multi": {
                     "label": "Bränslen"
                 },
+                "gambling": {
+                    "label": "Spel"
+                },
                 "gauge": {
                     "label": "Spårvidd"
                 },
@@ -3370,6 +3403,7 @@
                     "terms": "Ledstång, räcke"
                 },
                 "hashtags": {
+                    "label": "Hashtaggar",
                     "placeholder": "#exempel"
                 },
                 "healthcare": {
@@ -4000,9 +4034,15 @@
                 "plant": {
                     "label": "Växt"
                 },
+                "plant/method": {
+                    "label": "Genereringsmetod"
+                },
                 "plant/output/electricity": {
                     "label": "Effektuttaget",
                     "placeholder": "500 MW, 1000 MW, 2000 MW..."
+                },
+                "plant/source": {
+                    "label": "Energikälla"
                 },
                 "playground": {
                     "label": "Typ"
@@ -4306,6 +4346,9 @@
                     },
                     "placeholder": "Ja, nej, enbart",
                     "terms": "Second hand, loppis, andrahand, begagnad, antikvariat"
+                },
+                "segregated": {
+                    "label": "Separation av cyklister/gående"
                 },
                 "self_service": {
                     "label": "Självbetjäning"
@@ -4821,9 +4864,6 @@
                     "name": "Reklampelare",
                     "terms": "reklampelare,  affischpelare, billboard, annonspelare, annonstavla, annonsering, marknadsföring, reklam, annons, affisch, annons, reklamplats"
                 },
-                "aerialway": {
-                    "name": "Linbana"
-                },
                 "aerialway/cable_car": {
                     "name": "Kabinbana",
                     "terms": "Kabinbana, pendelbana, linbana"
@@ -4875,9 +4915,6 @@
                 "aerialway/zip_line": {
                     "name": "Zipline",
                     "terms": "Zipline, linbana, glidbana, travers, zip-line, zipwire"
-                },
-                "aeroway": {
-                    "name": "Flygtrafik"
                 },
                 "aeroway/aerodrome": {
                     "name": "Flygplats",
@@ -5754,6 +5791,10 @@
                     "name": "Pariserhjul",
                     "terms": "Pariserhjul, stort hjul, nöjespark, temapark, tivoli, åkattraktion, karusell, nöjeskarusell"
                 },
+                "attraction/bumper_car": {
+                    "name": "Radiobilar",
+                    "terms": "Radiobilar, radiobil, nöjespark, temapark, tivoli, åkattraktion"
+                },
                 "attraction/bungee_jumping": {
                     "name": "Bungyjump",
                     "terms": "Bungyjump,  bungee jump, nöjespark, temapark, tivoli, hopplattform"
@@ -5766,9 +5807,21 @@
                     "name": "Mörk åktur",
                     "terms": "Mörk åktur, spöktåg, åkattraktion, karusell, nöjeskarusell, nöjespark, temapark, tivoli"
                 },
+                "attraction/drop_tower": {
+                    "name": "Fritt fall",
+                    "terms": "Fritt fall, åkattraktion, karusell, nöjeskarusell, nöjespark, temapark, tivoli"
+                },
                 "attraction/maze": {
                     "name": "Labyrint",
                     "terms": "Labyrint, irrgång, Trojaborg,Trojeborg, Trädgårdslabyrint, irrgång, slingergång"
+                },
+                "attraction/pirate_ship": {
+                    "name": "Båtgunga",
+                    "terms": "Båtgunga, piratskepp, vikingaskepp, gunga, gungande båt, roterande båt, Åkattraktion, karusell, nöjeskarusell, nöjespark, temapark, tivoli"
+                },
+                "attraction/river_rafting": {
+                    "name": "Forsränning",
+                    "terms": "Forsränning, forsbana, Vattenbana, fors, Åkattraktion, karusell, nöjeskarusell, nöjespark, temapark, tivoli"
                 },
                 "attraction/roller_coaster": {
                     "name": "Berg- och dalbana",
@@ -6024,6 +6077,10 @@
                 "building/industrial": {
                     "name": "Industribyggnad",
                     "terms": "Industribyggnad, fabrik, industri, lager"
+                },
+                "building/kindergarten": {
+                    "name": "Förskolebyggnad",
+                    "terms": "Förskola, dagis, daghem, lekskola, kindergarten, lekis,  förskolebyggnad, dagisbyggnad, dagishus, förskolehus, barnomsorg"
                 },
                 "building/mosque": {
                     "name": "Moskébyggnad",
@@ -6383,6 +6440,14 @@
                 "emergency/yes": {
                     "name": "Åtkomst för utryckningsfordon – Ja"
                 },
+                "entrance": {
+                    "name": "Entré / utgång",
+                    "terms": "Ingång, utgång, entré, dörr, huvudentré"
+                },
+                "entrance/emergency": {
+                    "name": "Nödutgång",
+                    "terms": "Nödutgång, branddörr, brandutgång, dörr, utgång"
+                },
                 "ford": {
                     "name": "Vadställe",
                     "terms": "Vadställe, vad, övergångsställe"
@@ -6497,6 +6562,9 @@
                 "healthcare/speech_therapist": {
                     "name": "Logoped (röst/tal)",
                     "terms": "Logoped, tal, terapeut, terapi, röst, språk, språkstörning, talstörning, röststörning, dysfagi"
+                },
+                "highway": {
+                    "name": "Vägobjekt"
                 },
                 "highway/bridleway": {
                     "name": "Ridväg",
@@ -6864,6 +6932,10 @@
                     "name": "Dörr inomhus",
                     "terms": "Dörr inomhus, inomhusdörr, dörr, dörram, dörröppning, ingång, utgång"
                 },
+                "indoor/elevator": {
+                    "name": "Innomhushisschakt",
+                    "terms": "innomhushisschakt, hisschakt, hiss, schakt"
+                },
                 "indoor/room": {
                     "name": "Rum",
                     "terms": "Rum, inomhusrum, cell, kammare, foajé, lobby"
@@ -6883,6 +6955,9 @@
                 "junction": {
                     "name": "Korsning",
                     "terms": "korsning, vägkorsningar, övergångsställe, järnvägskorsning, rondell, cirkulationsplats, trafiksignal, stoppskylt, stoppsignal, vägkors, trafikplats, trafikkorsning, gatukorsning"
+                },
+                "landuse": {
+                    "name": "Markanvändning"
                 },
                 "landuse/allotments": {
                     "name": "Koloniområde",
@@ -6909,6 +6984,10 @@
                 "landuse/commercial": {
                     "name": "Kommersiell område",
                     "terms": "Kommersiell, kommersiellt, affärsområde, handelsområde, shoppingområde, handel, butiksområde"
+                },
+                "landuse/construction": {
+                    "name": "Byggarbetsplats",
+                    "terms": "Byggarbetsplats, bygge, Byggnad under konstruktion, Byggnad under uppförande, byggarbete,  byggnation, byggnadsplats"
                 },
                 "landuse/farm": {
                     "name": "Åkermark"
@@ -7365,6 +7444,9 @@
                     "name": "Linje",
                     "terms": "Linje, streck, sträcka, utsträckning"
                 },
+                "man_made": {
+                    "name": "Människoskapat objekt"
+                },
                 "man_made/adit": {
                     "name": "Horisontell gruvgång (Stoll)",
                     "terms": "stoll, gruva, gruvgång, horisontell gruvgång, gruvgång, gruvingång, gruvhål, dagort, sidoort, Stollen, lichtloch"
@@ -7416,6 +7498,10 @@
                 "man_made/lighthouse": {
                     "name": "Fyr",
                     "terms": "Fyr, fyrtorn, fyrskepp"
+                },
+                "man_made/manhole": {
+                    "name": "Gatubrunn",
+                    "terms": "Gatubrunn, brunn, dagvattenbrunn, dagvatten, avlopp, telekom, telefoni, manhålslucka, Brunnslock, manlucka, manhål, avloppsbrunn, a-brunn, Brandpost, Rensbrunn"
                 },
                 "man_made/mast": {
                     "name": "Mast",
@@ -7848,9 +7934,29 @@
                     "name": "Vattenleverantör",
                     "terms": "Vattenleverantör, Dricksvatten, vattenbolag"
                 },
+                "piste/ice_skate": {
+                    "name": "Skridskoled",
+                    "terms": "Skridskoled, skridskor, skridskobana, isbana, skridskorink, rink, is, skridskoåkning, pist"
+                },
+                "piste/nordic": {
+                    "name": "Längdskidspår",
+                    "terms": "Längdskidåkning, off-pist, längdskidor, Längdskidåkning, off-pist, skidspår, skidor, skating, pist, längdåkning,"
+                },
+                "piste/piste": {
+                    "name": "Vintersportspår / Pist",
+                    "terms": "Vintersportspår, skidor, skida, off-pist, offpist, utförsåkning, utför, alpint, snowboard, skidtur, skidåkning, släde, häst, vintervandring, snöskor, is, isåkning, skridsko, skridskoåkning, pist, längdskidor, längdskidspår, alpint, alpin"
+                },
                 "piste/skitour": {
                     "name": "Skidturspår",
                     "terms": "Skidturspår, skidtur, skidspår, skidor, skidåkning, skidturåkning, pist"
+                },
+                "piste/sled": {
+                    "name": "Pulkabacke",
+                    "terms": "pulka, pulkabacke, bob, rodel, pist, släde, kälke, snowracer"
+                },
+                "piste/sleigh": {
+                    "name": "Slädspår",
+                    "terms": "Släde, slädspår, hundsläde, häst, hästsläde, pist, slädpist, hundspann, husky, kälke"
                 },
                 "place": {
                     "name": "Plats"
@@ -9359,7 +9465,7 @@
             },
             "MAPNIK": {
                 "attribution": {
-                    "text": "© OpenStreetMaps bidragsgivare, CC-BY-SA"
+                    "text": "© OpenStreetMaps bidragsgivare, CC-BY-SA 2.0"
                 },
                 "description": "Standardlagret på OpenStreetMap.",
                 "name": "OpenStreetMap (standard)"
@@ -9530,20 +9636,6 @@
                 "description": "Noteringsöverdrag tillhandahållen av basemap.at.",
                 "name": "basemap.at Överdrag"
             },
-            "basemap.at-surface": {
-                "attribution": {
-                    "text": "basemap.at"
-                },
-                "description": "Ytlager tillhandahållen av basemap.at.",
-                "name": "basemap.at Yta"
-            },
-            "basemap.at-terrain": {
-                "attribution": {
-                    "text": "basemap.at"
-                },
-                "description": "Terränglager tillhandahållen av basemap.at.",
-                "name": "basemap.at Terräng"
-            },
             "eufar-balaton": {
                 "attribution": {
                     "text": "EUFAR Balaton ortofoto 2010"
@@ -9564,13 +9656,6 @@
                 },
                 "description": "Stadskartan är en översiktlig karta som beskriver Göteborg. Den innehåller generell information om mark, kommunikation, hydrografi, byggnader, adressnummer och gatunamn, administrativ indelning och övrig orienterande text.",
                 "name": "Göteborg Stadskarta"
-            },
-            "gsi.go.jp": {
-                "attribution": {
-                    "text": "GSI Japan"
-                },
-                "description": "Japan GSI ortho-flygfoton. Vanligtvis bättre än Bing, men lite äldre",
-                "name": "Japan GSI ortho-flygfoton"
             },
             "gsi.go.jp_airphoto": {
                 "attribution": {
@@ -10200,10 +10285,6 @@
                 "name": "OpenStreetMap Utah",
                 "description": "Kartläggare och OpenStreetMap-användare runt Salt Lake City",
                 "extendedDescription": "Aktiviteter kan vara saker så som workshops där man lär sig att kartlägga, kartläggningsfester och datainsamling utomhus. Aktiviteterna kommer äga rum kring Salt Lake City, åtminstone initialt. Vi söker både efter erfarna kartläggare och nybörjare. Gå med och låt oss göra lite kartläggning!"
-            },
-            "OSM-Vancouver-meetup": {
-                "name": "OpenStreetMap Vancouver",
-                "description": "Kartläggare och OpenStreetMap-användare i Vancouver, BC-området"
             },
             "OSM-Wyoming": {
                 "name": "OpenStreetMap Wyoming",

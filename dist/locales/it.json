@@ -7,7 +7,10 @@
             "undo": "annulla",
             "zoom_to": "zoom a",
             "copy": "copia",
-            "favorite": "preferisci"
+            "favorite": "preferisci",
+            "list": "lista",
+            "text": "testo",
+            "deselect": "deseleziona"
         },
         "toolbar": {
             "inspect": "Ispeziona",
@@ -50,19 +53,7 @@
                 "key": "N"
             },
             "add_preset": {
-                "title": "Aggiungi {feature}",
-                "point": {
-                    "title": "Aggiungi {feature} come nodo"
-                },
-                "line": {
-                    "title": "Aggiungi {feature} come linea"
-                },
-                "area": {
-                    "title": "Aggiungi {feature} come area"
-                },
-                "building": {
-                    "title": "Aggiungi {feature} come edificio"
-                }
+                "title": "Aggiungi {feature}"
             },
             "browse": {
                 "title": "Naviga",
@@ -115,24 +106,32 @@
             },
             "circularize": {
                 "title": "Rendi rotondo",
-                "description": {
-                    "line": "Rendi questa linea circolare.",
-                    "area": "Rendi quest'area circolare."
-                },
-                "key": "O",
-                "annotation": {
-                    "line": "Crea una linea circolare",
-                    "area": "Crea un'area circolare"
-                },
-                "not_closed": "Questo non può essere reso circolare perché non è un anello.",
-                "too_large": "Questo elemento non può essere reso circolare perché non è del tutto visibile.",
-                "connected_to_hidden": "Questo elemento non può essere reso circolare perché è connesso con un elemento invisibile.",
-                "not_downloaded": "Impossibile rendere circolare perché alcune sue parti non sono ancora state scaricate.",
-                "already_circular": "Questo non può essere reso circolare in quanto è già circolare."
+                "key": "O"
             },
             "orthogonalize": {
                 "title": "Ortogonalizza",
-                "key": "Q"
+                "description": {
+                    "corner": {
+                        "single": "Rendi questo angolo retto.",
+                        "multiple": "Rendi questi angoli retti."
+                    },
+                    "feature": {
+                        "single": "Rendi retti gli angoli di questo elemento.",
+                        "multiple": "Rendi retti gli angoli di questi elementi."
+                    }
+                },
+                "key": "Q",
+                "multiple_blockers": {
+                    "multiple": "Impossibile renderli retti per vari motivi."
+                },
+                "end_vertex": {
+                    "single": "Impossibile renderlo retto perché è una estremità.",
+                    "multiple": "Impossibile renderli retti perché sono delle estremità."
+                },
+                "square_enough": {
+                    "single": "Impossibile renderlo più retto di quanto non sia già.",
+                    "multiple": "Impossibile renderli retti più di quanto non siano già."
+                }
             },
             "straighten": {
                 "title": "Raddrizzare",
@@ -630,10 +629,12 @@
             "show_more": "Mostra di più",
             "view_on_osm": "Vedi su openstreetmap.org",
             "view_on_keepRight": "Vedi su keepright.at",
-            "all_fields": "Tutti i campi",
-            "all_tags": "Tutti i tag",
-            "all_members": "Tutti i membri",
-            "all_relations": "Tutte le relazioni",
+            "feature_type": "Tipo di elemento",
+            "fields": "Campi",
+            "tags_count": "Etichette ({count})",
+            "members_count": "Membri ({count})",
+            "relations_count": "Relazioni ({count})",
+            "features_count": "Elementi ({count})",
             "add_to_relation": "Aggiungi ad una relazione",
             "new_relation": "Nuova relazione...",
             "choose_relation": "Scegli una relazione genitore",
@@ -644,18 +645,21 @@
             "edit_reference": "modifica/traduci",
             "wiki_reference": "Vedi la documentazione",
             "wiki_en_reference": "Vedi la documentazione in inglese",
+            "key_value": "chiave=valore",
+            "multiple_values": "Valori multipli",
+            "multiple_types": "Tipi multipli",
             "hidden_preset": {
                 "manual": "{elementi} sono nascosti. Abilitale nel pannello Dati della mappa.",
                 "zoom": "{elementi} sono nascosti. Ingrandisci per abilitarle."
             },
-            "back_tooltip": "Cambia elemento",
+            "back_tooltip": "Cambia tipo di elemento",
             "remove": "Rimuovere",
             "search": "Cerca",
-            "multiselect": "Elementi selezionati",
             "unknown": "Sconosciuto",
             "incomplete": "<non scaricato>",
             "feature_list": "Cerca elementi",
             "edit": "Modifica elemento",
+            "edit_features": "Modifica elementi",
             "check": {
                 "yes": "Sì",
                 "no": "No",
@@ -674,10 +678,7 @@
             "way": "Linea",
             "relation": "Relazione",
             "location": "Posizione",
-            "add_fields": "Aggiungi campo:",
-            "lock": {
-                "suggestion": "Il campo \"{label}\" è bloccato perché c'è un tag Wikidata. Puoi cancellarlo o modificare i tag nella sezione \"Tutti i tag\"."
-            }
+            "add_fields": "Aggiungi campo:"
         },
         "background": {
             "title": "Sfondo",
@@ -706,7 +707,6 @@
                 "description": "Mostra pannello dettagli",
                 "tooltip": "Mostra informazioni avanzate sullo sfondo."
             },
-            "fix_misalignment": "Correggi spostamento immagini",
             "offset": "Per correggere lo spostamento delle immagini trascina dove preferisci all'interno dell'area grigia sottostante o inserisci i valori correttivi in metri."
         },
         "map_data": {
@@ -724,11 +724,9 @@
                     "title": "Note di OpenStreetMap"
                 },
                 "keepRight": {
-                    "tooltip": "Problemi della mappa rilevati automaticamente da keepright.at",
                     "title": "Problemi KeepRight"
                 },
                 "improveOSM": {
-                    "tooltip": "Dati mancanti rilevati automaticamente da improveosm.org",
                     "title": "Problemi ImproveOSM"
                 },
                 "custom": {
@@ -1003,16 +1001,11 @@
                 }
             },
             "keepRight": {
-                "title": "Errore KeepRight",
-                "detail_title": "Errore",
                 "detail_description": "Descrizione",
                 "comment": "Commento",
                 "comment_placeholder": "Inserisci un commento da condividere con gli altri utenti.",
-                "close": "Chiudi (errore risolto)",
-                "ignore": "Ignora (non si tratta di un errore)",
                 "save_comment": "Salva commento",
                 "close_comment": "Chiudi e commenta",
-                "ignore_comment": "Ignora e commenta",
                 "error_parts": {
                     "this_node": "questo nodo",
                     "this_way": "questa linea",
@@ -1425,11 +1418,9 @@
                 "type": "Puoi cliccare sul tipo dell'elemento per cambiarlo in un tipo differente. Tutto ciò che esiste nel mondo reale può essere aggiunto ad OpenStreetMap, pertanto ci sono migliaia di tipologie tra le quali scegliere.",
                 "type_picker": "Il raccoglitore dei tipi mostra i tipi di elementi più comuni, come ad esempio i parchi pubblici, gli ospedali, i ristoranti, le strade e gli edifici. Cerca qualsiasi oggetto scrivendo nel riquadro di ricerca. Per conoscere i dettagli del tipo di elemento clicca l'icona {inspect} **Informazioni** a fianco.",
                 "fields_h": "Campi",
-                "fields_all_fields": "La sezione \"Tutti i campi\" contiene i dettagli dell'elemento che puoi modificare. In OpenStreetMap, tutti i campi sono opzionali, puoi lasciarne uno vuoto se non sei sicuro.",
                 "fields_example": "Ogni elemento mostrerà campi differenti. Per esempio, per una una strada sarà possibile impostare la sua superficie e il limite di velocità, mentre per un ristorante saranno mostrati campi del cibo servito e degli orari di apertura.",
                 "fields_add_field": "Per aggiungere delle informazioni puoi cliccare \"Aggiungi campo\"",
                 "tags_h": "Etichette",
-                "tags_all_tags": "Sotto la sezione dei campi, puoi espandere la sezione \"Tutti i tag\" per modificare un qualsiasi *tag* di OpenStreetMap per l'elemento selezionato. Ogni tag è formato da una *chiave* ed un *valore* che definiscono ciascuno degli elementi presenti in OpenStreetMap.",
                 "tags_resources": "La modifica dei tag di un elemento richiede una conoscenza intermedia di OpenStreetMap. Dovresti consultare la [wiki di OpenStreetMap](https://wiki.openstreetmap.org/wiki/Main_Page) o [Taginfo](https://taginfo.openstreetmap.org/) per imparare quali usare di volta in volta."
             },
             "points": {
@@ -1490,8 +1481,6 @@
                 "title": "Relazioni",
                 "intro": "Una *relazione* è un tipo speciale di elemento di OpenStreetMap che serve a raggruppare insieme altri elementi. Gli elementi appartenenti ad una relazione sono chiamati *membri* e ogni membro può avere un *ruolo* nella relazione.",
                 "edit_relation_h": "Modificare le relazioni",
-                "edit_relation": "In fondo all'editor dell'elemento è presente la sezione \"Tutte le relazioni\" che puoi espandere per verificare se l'elemento selezionato è membro di qualche relazione. Puoi cliccare sulla relazione per selezionarla e quindi modificarla.",
-                "edit_relation_add": "Per aggiungere un elemento ad una relazione, seleziona prima l'elemento, quindi premi il pulsante {plus} aggiungi nella sezione \"Tutte le relazioni\" dell'editor dell'elemento. Puoi scegliere tra una lista di relazioni vicine oppure selezionare l'opzione \"Nuova relazione...\".",
                 "edit_relation_delete": "Puoi anche cliccare il pulsante {delete} **Cancella** per rimuovere l'elemento selezionato dalla relazione. Se rimuovi tutti i membri di una relazione, questa verrà eliminata a sua volta.",
                 "maintain_relation_h": "Manutenere le relazioni",
                 "maintain_relation": "Nella maggior parte dei casi, iD si occuperà automaticamente delle relazioni mentre fai le tue modifiche. Dovresti comunque prestare attenzione quando rimpiazzi elementi che potrebbero essere membri di una relazione. Per esempio, se elimini una parte di strada e tracci un altro pezzo al suo posto, dovresti poi aggiungere anche la nuova strada alle stesse relazioni (percorsi, divieti di svolta, etc.) dell'originale.",
@@ -1506,10 +1495,8 @@
                 "turn_restriction_editing": "Nel campo \"Obblighi di svolta\", clicca per selezionare una strada \"da\" e decidi se le svolte sono consentite oppure vietate per ogni strada \"verso\". Clicca nelle icone di svolta per alternare lo stato tra consentito e vietato. iD creerà automaticamente le relazione e imposterà i ruoli \"da\", \"via\" e \"verso\" basandosi sulle tue scelte.",
                 "route_h": "Percorsi",
                 "route": "Una relazione *percorso* consiste in un gruppo di uno o più elementi linea che formano insieme una rete di percorsi, come per esempio la linea di un autobus, quella di un treno oppure un percorso stradale.",
-                "route_add": "Per aggiungere un elemento ad una relazione percorso, seleziona l'elemento e scorri verso il basso fino alla sezione \"Tutte le relazioni\" dell'editor dell'elemento, poi clicca il pulsante {plus} aggiungi per aggiungere questo elemento ad una relazione vicina già esistente oppure per crearne una nuova.",
                 "boundary_h": "Confini",
-                "boundary": "Una relazione *Confine* consiste in un gruppo di uno o più elementi linea che insieme formano un confine amministrativo.",
-                "boundary_add": "Per aggiungere un elemento ad una relazione confine, seleziona l'elemento e scorri verso il basso fino alla sezione \"Tutte le relazioni\" dell'editor dell'elemento, poi clicca sul pulsante {plus} aggiungi per aggiungere l'elemento ad una relazione vicina già esistente o per crearne una nuova."
+                "boundary": "Una relazione *Confine* consiste in un gruppo di uno o più elementi linea che insieme formano un confine amministrativo."
             },
             "notes": {
                 "title": "Note",
@@ -1553,7 +1540,6 @@
                 "title": "Controllo qualità.",
                 "intro": "Gli strumenti di controllo della qualità (Q/A in inglese) individuano etichette improprie, strade separate dalle altre e altri problemi in OpenStreetMap che gli altri mappatori possono risolvere. Per vedere i problemi esistenti, clicca sul pannello {data} **Dati della mappa** per abilitare uno specifico livello Q/A. ",
                 "tools_h": "Strumenti",
-                "tools": "Sono supportati i seguenti strumenti:  [KeepRight](https://www.keepright.at/) e [ImproveOSM](https://improveosm.org/en/). In futuro iD supporterà [Osmose](https://osmose.openstreetmap.fr/) e altri strumenti per il controllo della qualità.",
                 "issues_h": "Gestire i problemi",
                 "issues": "La gestione dei problemi di qualità è simile a quella delle note. Clicca su un segnaposto per vedere i dettagli del problema sulla barra laterale. Ogni strumento ha le sue proprietà a sé ma in genere è possibile commentare e/o chiudere un problema."
             },
@@ -2665,9 +2651,6 @@
                         "hot_spring": "Sorgente termale",
                         "onsen": "Onsen giapponese"
                     }
-                },
-                "beauty": {
-                    "label": "Specialità"
                 },
                 "bench": {
                     "label": "Panchina",
@@ -4487,9 +4470,6 @@
                     "name": "Espositore pubblicitario cilindrico",
                     "terms": "espositore pubblicitario,espositori,cilindro,cilindrico,pubblicità,cartellone,totem"
                 },
-                "aerialway": {
-                    "name": "Trasporto a fune"
-                },
                 "aerialway/cable_car": {
                     "name": "Funivia",
                     "terms": "tramvia,tranvia"
@@ -4533,9 +4513,6 @@
                 "aerialway/zip_line": {
                     "name": "Teleferica",
                     "terms": "aereo,aerea,volo,volante,pista,corsia,volpe volante,vela,foefie,fune,tirolese,traverso,zipline,zip,corda"
-                },
-                "aeroway": {
-                    "name": "Aeroporto"
                 },
                 "aeroway/aerodrome": {
                     "name": "Aeroporto",
@@ -8114,7 +8091,7 @@
                     "terms": "caccia,frecce,arco,archi,proiettili,bossoli,balestra,balestre,fucili,fucile,trappola,trappole,faretra,cartucciera"
                 },
                 "shop/interior_decoration": {
-                    "name": "Negozio di casalinghi",
+                    "name": "Negozio di decorazioni per interni",
                     "terms": "decorazioni,interni,casalinghi"
                 },
                 "shop/jewelry": {
@@ -8828,9 +8805,6 @@
                 "name": "Esri World Imagery (Clarity) Beta"
             },
             "MAPNIK": {
-                "attribution": {
-                    "text": "© OpenStreetMap contributors, CC-BY-SA"
-                },
                 "description": "Il livello base di OpenStreetMap.",
                 "name": "OpenStreetMap (Standard)"
             },
@@ -9000,20 +8974,6 @@
                 "description": "Annotazioni sovrapposte fornite da basemap.at.",
                 "name": "Sovrimpresso basemap.at"
             },
-            "basemap.at-surface": {
-                "attribution": {
-                    "text": "basemap.at"
-                },
-                "description": "Livello superficie fornito da basemap.at.",
-                "name": "Superficie basemap.at"
-            },
-            "basemap.at-terrain": {
-                "attribution": {
-                    "text": "basemap.at"
-                },
-                "description": "Livello terreno fornito da basemap.at.",
-                "name": "Terreno basemap.at"
-            },
             "eufar-balaton": {
                 "attribution": {
                     "text": "Ortofoto EUFAR di Balaton 2010"
@@ -9027,13 +8987,6 @@
                 },
                 "description": "GSI Kiban 2500 via finds.jp. Buono per la tracciatura ma un po’ vecchio.",
                 "name": "GSI KIBAN 2500 Giappone"
-            },
-            "gsi.go.jp": {
-                "attribution": {
-                    "text": "GSI Giappone"
-                },
-                "description": "Ortofoto di GSI Giappone. In genere migliori di Bing ma un po’ più vecchie.",
-                "name": "Ortofoto di GSI Giappone"
             },
             "gsi.go.jp_airphoto": {
                 "attribution": {
@@ -9633,10 +9586,6 @@
                 "name": "OpenStreetMap dello Utah",
                 "description": "Mappaori e utenti OpenStreetMap dell’area di Salt Lake City",
                 "extendedDescription": "Le attività comprendono cose come lezioni per imparare a mappare, feste di mappatura e uscite all’aperto per la raccolta di dati. Gli eventi avverranno nell’area SLC, almeno all’inizio. Stiamo cercando sia mappatori esperti che alle prime armi. Unisciti e andiamo a mappare!"
-            },
-            "OSM-Vancouver-meetup": {
-                "name": "OpenStreetMap di Vancouver",
-                "description": "Mappatori e utenti OpenStreetMap di Vancouver, area Colombia Britannica"
             },
             "OSM-Wyoming": {
                 "name": "OpenStreetMap del Wyoming",

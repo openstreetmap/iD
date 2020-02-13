@@ -172,7 +172,6 @@
         },
         "QA": {
             "keepRight": {
-                "detail_title": "Feil",
                 "detail_description": "Skildring",
                 "comment": "Kommentar",
                 "error_parts": {

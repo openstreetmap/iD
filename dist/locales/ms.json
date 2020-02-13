@@ -71,18 +71,7 @@
             },
             "circularize": {
                 "title": "Jadikan lebih bulat",
-                "description": {
-                    "line": "Buatkan garis ini menjadi bulat.",
-                    "area": "Buatkan kawasan ini menjadi bulatan."
-                },
-                "key": "O",
-                "annotation": {
-                    "line": "Suatu garis telah dijadikan membulat.",
-                    "area": "Suatu kawasan telah dijadikan bulatan."
-                },
-                "not_closed": "Ini tidak dapat dijadikan membulat kerana garis tidak berbentuk gelung.",
-                "too_large": "Ini tidak dapat dijadikan membulat kerana bahagian penting tidak kelihatan secukupnya.",
-                "connected_to_hidden": "Ini tidak dapat dijadikan membulat kerana bersambung dengan gambaran yang tersorok."
+                "key": "O"
             },
             "orthogonalize": {
                 "title": "Bucu sudut tepat"
@@ -390,18 +379,12 @@
         "inspector": {
             "show_more": "Tunjukkan Lagi",
             "view_on_osm": "Lihat pada openstreetmap.org",
-            "all_fields": "Semua tempat kosong",
-            "all_tags": "Semua tag",
-            "all_members": "Semua ahli",
-            "all_relations": "Semua hubungan",
             "new_relation": "Hubungan baru...",
             "role": "Peranan",
             "choose": "Pilih jenis ciri",
             "results": "{n} keputusan untuk {search}",
-            "back_tooltip": "Tukar ciri",
             "remove": "Keluarkan",
             "search": "Gelintar",
-            "multiselect": "Ciri-ciri terpilih",
             "unknown": "Tidak Diketahui",
             "incomplete": "<not downloaded>",
             "feature_list": "Cari ciri",
@@ -439,7 +422,6 @@
                 "tooltip": "Tunjukkan peta yang dizum keluar untuk membantu mencari kawasan yang dipaparkan saat ini.",
                 "key": "/"
             },
-            "fix_misalignment": "Laraskan ofset imejan",
             "offset": "Seret di mana-mana dalam kawasan kelabu di bawah untuk melaraskan ofset imejan, atau masukkan nilai-nilai ofset dalam meter."
         },
         "map_data": {
@@ -1931,9 +1913,6 @@
                 "advertising/billboard": {
                     "name": "Papan Iklan"
                 },
-                "aerialway": {
-                    "name": "Jalan Udara"
-                },
                 "aerialway/cable_car": {
                     "name": "Kereta Kabel"
                 },
@@ -2514,9 +2493,6 @@
                 }
             },
             "MAPNIK": {
-                "attribution": {
-                    "text": "© Penyumbang-penyumbang OpenStreetMap, CC-BY-SA"
-                },
                 "description": "Lapisan OpenStreetMap tersedia.",
                 "name": "OpenStreetMap (Standard)"
             },

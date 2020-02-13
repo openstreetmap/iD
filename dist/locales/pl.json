@@ -8,7 +8,10 @@
             "zoom_to": "powiększ do",
             "copy": "kopiuj",
             "view_on": "otwórz w {domain}",
-            "favorite": "ulubiony"
+            "favorite": "ulubiony",
+            "list": "lista",
+            "text": "tekst",
+            "deselect": "odznacz"
         },
         "toolbar": {
             "inspect": "Przegląd",
@@ -51,19 +54,7 @@
                 "key": "N"
             },
             "add_preset": {
-                "title": "Dodaj {feature}",
-                "point": {
-                    "title": "Dodaj {feature} jako punkt"
-                },
-                "line": {
-                    "title": "Dodaj {feature} jako linię"
-                },
-                "area": {
-                    "title": "Dodaj {feature} jako obszar"
-                },
-                "building": {
-                    "title": "Dodaj {feature} jako budynek"
-                }
+                "title": "Dodaj {feature}"
             },
             "browse": {
                 "title": "Przeglądaj",
@@ -117,19 +108,37 @@
             "circularize": {
                 "title": "Zaokrąglij",
                 "description": {
-                    "line": "Utwórz okrąg z tej linii.",
-                    "area": "Utwórz koło z tego obszaru."
+                    "single": "Utwórz koło z tego obszaru.",
+                    "multiple": "Utwórz koła z tych obszarów."
                 },
                 "key": "O",
                 "annotation": {
-                    "line": "Utworzono okrąg z linii.",
-                    "area": "Utworzono koło z obszaru."
+                    "single": "Utworzono koło z obszaru.",
+                    "multiple": "Utworzono koła z obszarów."
                 },
-                "not_closed": "Z tego obiektu nie można zrobić okręgu, ponieważ nie jest pętlą.",
-                "too_large": "Nie można zaokrąglić tego obiektu, ponieważ nie jest on wystarczająco widoczny.",
-                "connected_to_hidden": "Z tego obiektu nie można utworzyć okręgu, ponieważ jest połączony z innym ukrytym obiektem.",
-                "not_downloaded": "Z tego obiektu nie można utworzyć okręgu, ponieważ nie został całkowicie pobrany.",
-                "already_circular": "To już jest okrągłe."
+                "multiple_blockers": {
+                    "multiple": "Nie można zaokrąglić tych obiektów z wielu powodów."
+                },
+                "not_closed": {
+                    "single": "Z tego obiektu nie można zrobić okręgu, bo nie jest zamkniętą linią.",
+                    "multiple": "Z tych obiektów nie można zrobić okręgów, bo nie są zamkniętymi liniami."
+                },
+                "too_large": {
+                    "single": "Nie można zaokrąglić tego obiektu, ponieważ nie jest on wystarczająco widoczny.",
+                    "multiple": "Nie można zaokrąglić tych obiektów, ponieważ nie są one wystarczająco widoczne."
+                },
+                "connected_to_hidden": {
+                    "single": "Z tego obiektu nie można utworzyć okręgu, ponieważ jest połączony z innym ukrytym obiektem.",
+                    "multiple": "Z tych obiektów nie można utworzyć okręgów, ponieważ są połączone z innym ukrytym obiektem."
+                },
+                "not_downloaded": {
+                    "single": "Z tego obiektu nie można utworzyć okręgu, ponieważ nie został całkowicie pobrany.",
+                    "multiple": "Z tych obiektów nie można utworzyć okręgów, ponieważ nie zostały całkowicie pobrane."
+                },
+                "already_circular": {
+                    "single": "Tego obiektu nie da się już bardziej zaokrąglić.",
+                    "multiple": "Tych obiektów nie da się już bardziej zaokrąglić."
+                }
             },
             "orthogonalize": {
                 "title": "Popraw prostopadłość",
@@ -684,10 +693,12 @@
             "show_more": "Wyświetl więcej",
             "view_on_osm": "Wyświetl na openstreetmap.org",
             "view_on_keepRight": "Wyświetl na keepright.at",
-            "all_fields": "Wszystkie pola",
-            "all_tags": "Wszystkie znaczniki",
-            "all_members": "Wszystkie człony relacji",
-            "all_relations": "Wszystkie relacje",
+            "feature_type": "Rodzaj obiektu",
+            "fields": "Wszystkie pola",
+            "tags_count": "Wszystkie znaczniki ({count})",
+            "members_count": "Człony relacji ({count})",
+            "relations_count": "Wszystkie relacje ({count})",
+            "features_count": "Obiekty ({count})",
             "add_to_relation": "Dodaj do relacji",
             "new_relation": "Nowa relacja...",
             "choose_relation": "Wybierz relację nadrzędną",
@@ -698,6 +709,10 @@
             "edit_reference": "edytuj/tłumacz",
             "wiki_reference": "Przegląd dokumentacji",
             "wiki_en_reference": "Przegląd dokumentacji w języku angielskim",
+            "key_value": "klucz=wartość",
+            "multiple_values": "Wiele wartości",
+            "multiple_types": "Różne rodzaje",
+            "unshared_value_tooltip": "nie jest wspólne dla wszystkich obiektów",
             "hidden_preset": {
                 "manual": "{features} są ukryte. Włącz je w panelu Dane mapy.",
                 "zoom": "{features} są ukryte. Przybliż mapę, żeby je aktywować."
@@ -705,11 +720,11 @@
             "back_tooltip": "Zmień rodzaj obiektu",
             "remove": "Usuń",
             "search": "Szukaj",
-            "multiselect": "Wybrane obiekty",
             "unknown": "Nieznane",
             "incomplete": "<niepobrane>",
             "feature_list": "Wyszukiwanie rodzaju obiektu",
             "edit": "Edytor obiektu",
+            "edit_features": "Edycja obiektów",
             "check": {
                 "yes": "Tak",
                 "no": "Nie",
@@ -760,7 +775,7 @@
                 "description": "Pokaż panel szczegółów tła",
                 "tooltip": "Pokazuje szczegółowe informacje o podkładzie."
             },
-            "fix_misalignment": "Dopasuj przesunięcie warstwy tła",
+            "fix_misalignment": "Przesunięcie warstwy tła",
             "offset": "Przeciągnij szare pole poniżej, aby dostosować przesunięcie warstwy tła, lub wprowadź wartości przesunięcia w metrach."
         },
         "map_data": {
@@ -778,12 +793,16 @@
                     "title": "Uwagi OpenStreetMap"
                 },
                 "keepRight": {
-                    "tooltip": "Problemy na mapie automatycznie wykryte przez keepright.at",
+                    "tooltip": "Problemy na mapie wykryte przez keepright.at",
                     "title": "Problemy KeepRight"
                 },
                 "improveOSM": {
-                    "tooltip": "Brakujące dane automatycznie wykryte przez improveosm.org",
+                    "tooltip": "Brakujące dane wykryte przez improveosm.org",
                     "title": "Problemy ImproveOSM"
+                },
+                "osmose": {
+                    "tooltip": "Problemy na mapie wykryte przez osmose.openstreetmap.fr",
+                    "title": "Problemy Osmose"
                 },
                 "custom": {
                     "tooltip": "Przeciągnij i upuść plik danych na stronę lub kliknij przycisk, aby ustawić",
@@ -1030,6 +1049,14 @@
         "cannot_zoom": "Nie można bardziej oddalić widoku w obecnym trybie.",
         "full_screen": "Tryb pełnoekranowy",
         "QA": {
+            "osmose": {
+                "title": "Problem Osmose",
+                "detail_title": "Szczegóły",
+                "elems_title": "Obiekty:",
+                "fix_title": "Zalecenia dotyczące naprawy",
+                "trap_title": "Często popełniane błędy",
+                "translation": "Tłumaczenia dostarczone przez Osmose"
+            },
             "improveOSM": {
                 "title": "Wykrycie ImproveOSM",
                 "geometry_types": {
@@ -1066,15 +1093,14 @@
             },
             "keepRight": {
                 "title": "Błąd KeepRight",
-                "detail_title": "Błąd",
                 "detail_description": "Opis",
                 "comment": "Komentarz",
                 "comment_placeholder": "Wprowadź komentarz, aby podzielić się z innymi użytkownikami.",
-                "close": "Zamknij (Błąd został naprawiony)",
-                "ignore": "Ignoruj (To nie jest błąd)",
+                "close": "Zamknięte (Problem rozwiązany)",
+                "ignore": "Usuń (fałszywy alarm)",
                 "save_comment": "Zachowaj komentarz",
                 "close_comment": "Rozwiąż i zostaw komentarz",
-                "ignore_comment": "Ignoruj i zostaw komentarz",
+                "ignore_comment": "Usuń i skomentuj",
                 "error_parts": {
                     "this_node": "ten węzeł",
                     "this_way": "ta droga",
@@ -1337,7 +1363,7 @@
                     },
                     "360": {
                         "title": "Brakująca lokalna nazwa",
-                        "description": "Ten błąd występuje gdy:\n\n– jest nazwa w innym języku, ale brakuje \"name:pl=\" (najczęściej). Dodaj wtedy name:pl={var2}.\n\n– jest nazwa w innym języku \"name:xx=\", ale brakuje \"name=\"\n\n– nazwy dla domyślnego i lokalnego języka nie są takie same."
+                        "description": "Ten błąd występuje gdy:\n\n– jest nazwa w innym języku, ale brakuje \"name:pl=\" (najczęściej). Dodaj wtedy name:pl={var2}.\n\n– jest nazwa w innym języku \"name:xx=\", ale brakuje \"name=\"\n\n– nazwy dla domyślnego i lokalnego języka nie są takie same.\nObiekt: {var1}"
                     },
                     "370": {
                         "title": "Zdublowane obiekty",
@@ -1656,7 +1682,7 @@
                 "title": "Zapewnienie jakości",
                 "intro": "Narzędzia zapewnienia jakości pomagają wskazać niewłaściwe tagi, niepołączone drogi i inne problemy na OpenStreetMap, które mapujący mogą naprawić. Żeby wyświetlić istniejące problemy, kliknij {data}**Dane mapy** na panelu bocznym, żeby włączyć odpowiednią warstwę.",
                 "tools_h": "Narzędzia",
-                "tools": "Aktualnie wspierane narzędzia to [KeepRight](https://www.keepright.at/) i [ImproveOSM](https://improveosm.org/en/). Oczekujące na wsparcie: [Osmose](https://osmose.openstreetmap.fr/).",
+                "tools": "Aktualnie wspierane narzędzia to [KeepRight](https://www.keepright.at/), [ImproveOSM](https://improveosm.org/en/) i [Osmose](https://osmose.openstreetmap.fr/).",
                 "issues_h": "Obsługa problemów",
                 "issues": "Obsługa problemów jest podobna do obsługi notatek. Kliknij znaczek, aby wyświetlić szczegóły problemu na pasku bocznym. Każde narzędzie ma swoje własne możliwości, ale zazwyczaj można je komentować i zamykać."
             },
@@ -2803,7 +2829,7 @@
                     }
                 },
                 "beauty": {
-                    "label": "Specjalność"
+                    "label": "Usługi"
                 },
                 "bench": {
                     "label": "Ławka",
@@ -3145,7 +3171,8 @@
                 },
                 "direction": {
                     "label": "Kierunek (stopnie)",
-                    "placeholder": "45, 90, 180, 270"
+                    "placeholder": "45, 90, 180, 270",
+                    "terms": "kierunek"
                 },
                 "direction_cardinal": {
                     "label": "Kierunek świata",
@@ -3237,7 +3264,8 @@
                         "rail": "Trzecia szyna",
                         "yes": "Tak (nieokreślone)"
                     },
-                    "placeholder": "Linia napowietrzna, Trzecia szyna"
+                    "placeholder": "Linia napowietrzna, Trzecia szyna",
+                    "terms": "elektryfikacja"
                 },
                 "elevation": {
                     "label": "Wysokość n.p.m. (WGS84)",
@@ -3581,6 +3609,9 @@
                 "kerb/height": {
                     "label": "Wysokość"
                 },
+                "kneipp_water_cure_multi": {
+                    "label": "Rodzaje"
+                },
                 "label": {
                     "label": "Etykieta"
                 },
@@ -3803,7 +3834,7 @@
                 },
                 "name": {
                     "label": "Nazwa",
-                    "placeholder": "Powszechnie używana nazwa (jeśli istnieje)",
+                    "placeholder": "Powszechna nazwa własna (tylko jeśli istnieje)",
                     "terms": "nazwa"
                 },
                 "natural": {
@@ -4906,7 +4937,7 @@
                     "terms": "totem reklamowy, tablica reklamowa, stacja paliw, stacja benzynowa"
                 },
                 "aerialway": {
-                    "name": "Wyciąg narciarski"
+                    "name": "Transport napowietrzny"
                 },
                 "aerialway/cable_car": {
                     "name": "Kolejka górska",
@@ -5048,7 +5079,7 @@
                 },
                 "amenity/bar": {
                     "name": "Bar alkoholowy",
-                    "terms": "bar, bar koktajlowy, koktajl bar, koktajle, drinki, wyszynk, wino, wódka, piwo"
+                    "terms": "bar, bar koktajlowy, koktajl bar, koktajle, drinki, wyszynk, winiarnia, wino, wódka, piwo"
                 },
                 "amenity/bar/lgbtq": {
                     "name": "Bar LGBT",
@@ -5223,6 +5254,10 @@
                     "name": "Sala bankietowa",
                     "terms": "sala bankietowa, bankiety, sala weselna, wesela, przyjęcia, imprezy, uroczystości"
                 },
+                "amenity/exhibition_centre": {
+                    "name": "Centrum targowo-wystawiennicze",
+                    "terms": "centrum wystawowe, centrum wystawiennicze, centrum targowo-wystawiennicze, centrum targowe, wystawy, targi"
+                },
                 "amenity/fast_food": {
                     "name": "Bar / fast food",
                     "terms": "bar, bar mleczny, stołówka, kantyna, bufet, jadalnia, bistro, knajpa, karczma, gospoda, zajazd, pizzeria, kebab, gyros, hot dog, fast food, McDonald's, McDonald, drive-in"
@@ -5320,6 +5355,10 @@
                 "amenity/kindergarten": {
                     "name": "Teren przedszkola/żłobka",
                     "terms": "teren przedszkola, teren żłobka, przedszkole, żłobek, dzieci"
+                },
+                "amenity/kneipp_water_cure": {
+                    "name": "Basen Kneippa",
+                    "terms": "basen kneippa, brodzik kneippa, hydroterapia kneippa"
                 },
                 "amenity/language_school": {
                     "name": "Szkoła językowa",
@@ -5450,7 +5489,7 @@
                 },
                 "amenity/place_of_worship/muslim": {
                     "name": "Meczet (czynny)",
-                    "terms": "meczet"
+                    "terms": "meczet, świątynia muzułmańska, islam"
                 },
                 "amenity/place_of_worship/shinto": {
                     "name": "Sanktuarium shintoistyczne",
@@ -5667,7 +5706,7 @@
                 },
                 "amenity/social_facility": {
                     "name": "Placówka pomocy społecznej",
-                    "terms": "opieka społeczna, mops, gops, mopr, ośrodek opieki społecznej"
+                    "terms": "opieka społeczna, mops, gops, mopr, ośrodek opieki społecznej, dzienny dom pomocy społecznej, dom seniora, jadłodajnia, noclegownia, bezdomni"
                 },
                 "amenity/social_facility/ambulatory_care": {
                     "name": "Opieka ambulatoryjna",
@@ -5854,7 +5893,7 @@
                 },
                 "amenity/veterinary": {
                     "name": "Weterynarz",
-                    "terms": "Zakład weterynaryjny, lecznica dla zwierząt"
+                    "terms": "weterynarz, zakład weterynaryjny, gabinet weterynajryjny, przychodnia weterynaryjna, klinika weterynaryjna, lecznica dla zwierząt, leczenie, zwierzęta"
                 },
                 "amenity/waste/dog_excrement": {
                     "name": "Kosz na psie odchody",
@@ -6422,7 +6461,7 @@
                     "terms": "rękodzieło, rękodzieła, rzemiosło, rzemieślnik, rzemieślnicy"
                 },
                 "craft/hvac": {
-                    "name": "Ogrzewanie / wentylacja",
+                    "name": "Ogrzewanie / wentylacja (firma)",
                     "terms": "ogrzewanie, wentylacja, klimatyzacja, rzemiosło, rzemieślnik, rzemieślnicy"
                 },
                 "craft/insulator": {
@@ -6600,6 +6639,10 @@
                 "emergency/lifeguard": {
                     "name": "Ratownik",
                     "terms": "ratownik,RKO,CPR,pomoc"
+                },
+                "emergency/mountain_rescue": {
+                    "name": "Stacja ratownictwa górskiego",
+                    "terms": "stacja ratownictwa górskiego, górskie ochotniczne pogotowie ratunkowe, gopr, topr, góry, pomoc"
                 },
                 "emergency/no": {
                     "name": "Brak dojazdu dla służb ratowniczych"
@@ -6809,6 +6852,10 @@
                 },
                 "highway/cycleway/crossing": {
                     "name": "Przejazd rowerowy"
+                },
+                "highway/cycleway/crossing/bicycle_foot": {
+                    "name": "Przejazd pieszo-rowerowy",
+                    "terms": "przejazd pieszo-rowerowy"
                 },
                 "highway/cycleway/crossing/marked": {
                     "name": "Oznakowany przejazd rowerowy",
@@ -7102,6 +7149,10 @@
                 "historic/monument": {
                     "name": "Duży pomnik",
                     "terms": "monument,pomnik"
+                },
+                "historic/pillory": {
+                    "name": "Pręgierz",
+                    "terms": "pręgierz, słup, kolumna, zabytek"
                 },
                 "historic/ruins": {
                     "name": "Ruiny",
@@ -7504,7 +7555,7 @@
                 },
                 "leisure/picnic_table/chess": {
                     "name": "Stolik szachowy",
-                    "terms": "stół szachowy, szachownica"
+                    "terms": "stół szachowy, szachownica, szachy"
                 },
                 "leisure/pitch": {
                     "name": "Boisko",
@@ -7931,7 +7982,7 @@
                 },
                 "man_made/water_well": {
                     "name": "Studnia",
-                    "terms": "studnia"
+                    "terms": "studnia, ujęcie wody, woda"
                 },
                 "man_made/water_works": {
                     "name": "Zakład uzdatniania wody",
@@ -8154,7 +8205,7 @@
                 },
                 "office": {
                     "name": "Biuro",
-                    "terms": "Biuro,"
+                    "terms": "biuro"
                 },
                 "office/accountant": {
                     "name": "Biuro rachunkowe",
@@ -8189,7 +8240,7 @@
                 },
                 "office/company": {
                     "name": "Biuro firmy",
-                    "terms": "biuro firmy"
+                    "terms": "biuro firmy, firma, przedsiębiorstwo"
                 },
                 "office/consulting": {
                     "name": "Biuro konsultanta",
@@ -8276,8 +8327,8 @@
                     "terms": "firma it, firma informatyczna"
                 },
                 "office/lawyer": {
-                    "name": "Biuro prawnicze",
-                    "terms": "prawnik, kancelaria, adwokat, radca"
+                    "name": "Biuro prawnika",
+                    "terms": "biuro prawnika, kancelaria, prawnik, adwokat, radca prawny, notariusz, komornik, rzeczoznawca"
                 },
                 "office/lawyer/notary": {
                     "name": "Notariusz"
@@ -8922,7 +8973,7 @@
                 },
                 "shop/baby_goods": {
                     "name": "Sklep z artykułami dla dzieci i niemowląt",
-                    "terms": "sklep niemowlęcy"
+                    "terms": "akcesoria dla dzieci i niemowląt, sklep dziecięcy, artykuły dziecięce, wózki dziecięce, dzieci"
                 },
                 "shop/bag": {
                     "name": "Sklep z torebkami/walizkami",
@@ -10075,7 +10126,7 @@
             },
             "MAPNIK": {
                 "attribution": {
-                    "text": "© autorzy OpenStreetMap, CC-BY-SA"
+                    "text": "© autorzy OpenStreetMap, CC BY-SA 2.0"
                 },
                 "description": "Domyślny podkład OpenStreetMap",
                 "name": "OpenStreetMap (Standard)"
@@ -10246,20 +10297,6 @@
                 "description": "Nakładka z adnotacjami dostarczona przez basemap.at",
                 "name": "Nakładka basemap.at"
             },
-            "basemap.at-surface": {
-                "attribution": {
-                    "text": "basemap.at"
-                },
-                "description": "Warstwa dostarczona przez basemap.at.",
-                "name": "basemap.at (powierzchnia)"
-            },
-            "basemap.at-terrain": {
-                "attribution": {
-                    "text": "basemap.at"
-                },
-                "description": "Warstwa dostarczona przez basemap.at.",
-                "name": "basemap.at (model wysokościowy)"
-            },
             "eufar-balaton": {
                 "attribution": {
                     "text": "EUFAR Balaton ortofotó 2010"
@@ -10280,13 +10317,6 @@
                 },
                 "description": "Mapa miasta to mapa przeglądowa Göteborga. Zawiera ogólne informacje o gruntach, komunikacji, hydrografii, budynkach, adresach, nazwach ulic i podziale administracyjnym.",
                 "name": "Mapa Göteborga"
-            },
-            "gsi.go.jp": {
-                "attribution": {
-                    "text": "GSI Japonia"
-                },
-                "description": "Ortofotomapa z japońskiego GSI. Zazwyczaj lepsza niż Bing, ale trochę starsza.",
-                "name": "Ortofotomapa z japońskiego GSI"
             },
             "gsi.go.jp_airphoto": {
                 "attribution": {
@@ -10958,10 +10988,6 @@
                 "description": "Mapujący i użytkownicy OpenStreetMap z okolic Salt Lake City",
                 "extendedDescription": "Na działalność mogą składać się takie rzeczy, jak warsztaty Naucz Się Mapować, imprezy mapowania i zbieranie danych w terenie. Wydarzenia, przynajmniej na razie, będą miały miejsce w okolicach SLC. Szukamy wprawionych mapujących, jak również nowych ludzi. Dołącz do nas i zacznij mapować!"
             },
-            "OSM-Vancouver-meetup": {
-                "name": "OpenStreetMap Vancouver",
-                "description": "Mapujący i użytkownicy OpenStreetMap z okolic Vancouver"
-            },
             "OSM-Wyoming": {
                 "name": "OpenStreetMap Wyoming",
                 "description": "Mapujący i użytkownicy OpenStreetMap ze stanu Wyoming",
@@ -11260,6 +11286,22 @@
             "fi-mailinglist": {
                 "name": "Lista dyskusyjna Talk-fi",
                 "description": "Talk-fi to oficjalna lista dyskusyjna fińskiej społeczności OSM"
+            },
+            "fr-35-wiki": {
+                "name": "OpenStreetMap Rennes na Wiki",
+                "description": "Strona na Wiki lokalnej grupy Rennes OSM"
+            },
+            "fr-bzh-mailinglist": {
+                "name": "Lista dyskusyjna Talk-fr-bzh",
+                "description": "Lista dyskusyjna Talk-fr-bzh"
+            },
+            "fr-bzh-twitter": {
+                "name": "OSM-BZH na Twitterze",
+                "description": "OpenStreetMap BZH na Twitterze: {url}"
+            },
+            "fr-bzh-website": {
+                "name": "Strona OpenStreetMap BZH",
+                "description": "Mapa w języku bretońskim"
             },
             "fr-chapter": {
                 "name": "Oddział lokalny OpenStreetMap Francja",

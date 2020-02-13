@@ -8,7 +8,10 @@
             "zoom_to": "缩放至",
             "copy": "复制",
             "view_on": "在 {domain} 上查看",
-            "favorite": "收藏"
+            "favorite": "收藏",
+            "list": "列表",
+            "text": "文本",
+            "deselect": "取消选择"
         },
         "toolbar": {
             "inspect": "检查",
@@ -51,19 +54,7 @@
                 "key": "N"
             },
             "add_preset": {
-                "title": "添加 {feature}",
-                "point": {
-                    "title": "添加 {feature} 为点"
-                },
-                "line": {
-                    "title": "添加 {feature} 为线"
-                },
-                "area": {
-                    "title": "添加 {feature} 为区域"
-                },
-                "building": {
-                    "title": "添加 {feature} 为建筑物"
-                }
+                "title": "添加 {feature}"
             },
             "browse": {
                 "title": "浏览",
@@ -117,19 +108,37 @@
             "circularize": {
                 "title": "环状化",
                 "description": {
-                    "line": "环状化该线。",
-                    "area": "将此区域变成圆形。"
+                    "single": "环状化该要素。",
+                    "multiple": "环状化这些要素。"
                 },
                 "key": "O",
                 "annotation": {
-                    "line": "使线环状化。",
-                    "area": "将区域变成圆形。"
+                    "single": "环状化一个要素。",
+                    "multiple": "环状化多个要素。"
                 },
-                "not_closed": "该要素不是一个闭合环，无法将其环状化。",
-                "too_large": "该要素的可见部分不足，无法将其环状化。",
-                "connected_to_hidden": "该要素与某一隐藏要素相连，无法将其环状化。",
-                "not_downloaded": "该要素的一部分未被下载，无法将其环状化。",
-                "already_circular": "该要素已近似圆形，无法将其环状化。"
+                "multiple_blockers": {
+                    "multiple": "由于多个原因，无法环状化这些要素。"
+                },
+                "not_closed": {
+                    "single": "该要素不是一个闭合环，无法将其环状化。",
+                    "multiple": "这些要素不是闭合环，无法将它们环状化。"
+                },
+                "too_large": {
+                    "single": "该要素的可见部分不足，无法将其环状化。",
+                    "multiple": "这些要素的可见部分不足，无法将它们环状化。"
+                },
+                "connected_to_hidden": {
+                    "single": "该要素与某一隐藏要素相连，无法将其环状化。",
+                    "multiple": "这些要素与某些隐藏要素相连，无法将它们环状化。"
+                },
+                "not_downloaded": {
+                    "single": "该要素有一部分未被下载，无法将其环状化。",
+                    "multiple": "这些要素有一部分未被下载，无法将它们环状化。"
+                },
+                "already_circular": {
+                    "single": "无法使其更为环状化。",
+                    "multiple": "无法使它们更为环转化。"
+                }
             },
             "orthogonalize": {
                 "title": "直角化",
@@ -155,11 +164,11 @@
                     }
                 },
                 "multiple_blockers": {
-                    "multiple": "由于多个原因，无法将其所在角化为直角。"
+                    "multiple": "由于多个原因，无法将它们的所在角化为直角。"
                 },
                 "end_vertex": {
                     "single": "该点为端点，无法将其所在角化为直角。",
-                    "multiple": "这些点为端点，无法将其所在角化为直角。"
+                    "multiple": "这些点为端点，无法将它们的所在角化为直角。"
                 },
                 "square_enough": {
                     "single": "无法使其更为直角化。",
@@ -167,19 +176,19 @@
                 },
                 "not_squarish": {
                     "single": "该要素不是近似方形的，无法将其直角化。",
-                    "multiple": "这些要素不是近似方形的，无法将其直角化。"
+                    "multiple": "这些要素不是近似方形的，无法将它们直角化。"
                 },
                 "too_large": {
                     "single": "该要素的可见部分不足，无法将其直角化。",
-                    "multiple": "这些要素的可见部分不足，无法将其直角化。"
+                    "multiple": "这些要素的可见部分不足，无法将它们直角化。"
                 },
                 "connected_to_hidden": {
                     "single": "该要素与一隐藏要素相连，无法将其直角化。",
-                    "multiple": "这些要素与某些隐藏要素相连，无法将其直角化。"
+                    "multiple": "这些要素与某些隐藏要素相连，无法将它们直角化。"
                 },
                 "not_downloaded": {
                     "single": "该要素有一部分未被下载，无法将其直角化。",
-                    "multiple": "这些要素有一部分未被下载，无法将其直角化。"
+                    "multiple": "这些要素有一部分未被下载，无法将它们直角化。"
                 }
             },
             "straighten": {
@@ -313,7 +322,7 @@
                 "key": "C",
                 "annotation": "已合并 {n} 个要素。",
                 "not_eligible": "这些要素不可以合并。",
-                "not_adjacent": "这些要素的结束节点并未相连，无法将其合并。",
+                "not_adjacent": "这些要素的结束节点并未相连，无法将它们合并。",
                 "restriction": "这些要素不能被合并，因为这样会破坏 “{relation}” 关系。",
                 "relation": "这些要素不能被合并，因为其有冲突的关系成员。",
                 "incomplete_relation": "这些要素未全部下载，无法将它们合并。",
@@ -684,10 +693,12 @@
             "show_more": "显示更多",
             "view_on_osm": "在 openstreetmap.org 上查看",
             "view_on_keepRight": "在 keepright.at 查看",
-            "all_fields": "所有字段",
-            "all_tags": "所有标签",
-            "all_members": "所有成员",
-            "all_relations": "所有关系",
+            "feature_type": "要素类型",
+            "fields": "字段",
+            "tags_count": "标签 ({count})",
+            "members_count": "成员 ({count})",
+            "relations_count": "关系 ({count})",
+            "features_count": "要素 ({count})",
             "add_to_relation": "添加至一个关系",
             "new_relation": "新关系...",
             "choose_relation": "选择一个父关系",
@@ -698,18 +709,22 @@
             "edit_reference": "编辑/翻译",
             "wiki_reference": "查看参考资料",
             "wiki_en_reference": "查看英文参考资料",
+            "key_value": "键=值",
+            "multiple_values": "多个值",
+            "multiple_types": "多个类型",
+            "unshared_value_tooltip": "非全部要素共享",
             "hidden_preset": {
                 "manual": "{features} 已隐藏。请在地图数据面板中启用它们。",
                 "zoom": "{features} 已隐藏。请放大地图以启用它们。"
             },
-            "back_tooltip": "变更要素",
+            "back_tooltip": "更改要素类型",
             "remove": "删除",
             "search": "搜索",
-            "multiselect": "已选择的要素",
             "unknown": "未知",
             "incomplete": "<未下载>",
             "feature_list": "搜索要素",
             "edit": "编辑要素",
+            "edit_features": "编辑要素",
             "check": {
                 "yes": "是",
                 "no": "否",
@@ -730,7 +745,7 @@
             "location": "位置",
             "add_fields": "添加字段：",
             "lock": {
-                "suggestion": "\"{label}\" 字段已锁定，因为存在维基数据的标签。你可以删除或在“所有标签”内编辑它。"
+                "suggestion": "由于存在维基数据标签，\"{label}\" 字段已被锁定。你可以删除或在“标签”部分里编辑该字段。"
             }
         },
         "background": {
@@ -760,7 +775,7 @@
                 "description": "显示细节面板",
                 "tooltip": "显示高级背景信息"
             },
-            "fix_misalignment": "调整影像偏移",
+            "fix_misalignment": "影像偏移",
             "offset": "拖动下方的灰色区域来调整影像偏移，或以米为单位输入偏移值。"
         },
         "map_data": {
@@ -778,12 +793,16 @@
                     "title": "OpenStreetMap 笔记"
                 },
                 "keepRight": {
-                    "tooltip": "自动使用 keepright.at 探测地图问题",
+                    "tooltip": "由 keepright.at 检测到的数据问题",
                     "title": "KeepRight 问题"
                 },
                 "improveOSM": {
-                    "tooltip": "使用 improveosm.org 自动探测缺失数据",
+                    "tooltip": "由 improveosm.org 检测到的缺失数据",
                     "title": "ImproveOSM 问题"
+                },
+                "osmose": {
+                    "tooltip": "由 osmose.openstreetmap.fr 检测到的数据问题",
+                    "title": "Osmose 问题"
                 },
                 "custom": {
                     "tooltip": "将数据文件拖放到页面上，或点击按钮设置",
@@ -1030,6 +1049,14 @@
         "cannot_zoom": "在此模式下不能再缩小",
         "full_screen": "切换全屏",
         "QA": {
+            "osmose": {
+                "title": "Osmose 问题",
+                "detail_title": "详情",
+                "elems_title": "要素",
+                "fix_title": "修复指导",
+                "trap_title": "常见错误",
+                "translation": "Osmose 提供的翻译"
+            },
             "improveOSM": {
                 "title": "ImproveOSM 检测",
                 "geometry_types": {
@@ -1065,16 +1092,15 @@
                 }
             },
             "keepRight": {
-                "title": "KeepRight 错误",
-                "detail_title": "错误",
+                "title": "KeepRight",
                 "detail_description": "描述",
                 "comment": "评论",
                 "comment_placeholder": "输入评论并分享给其他用户。",
-                "close": "关闭 (错误已解决)",
-                "ignore": "忽略 (并非错误)",
+                "close": "关闭（问题已解决）",
+                "ignore": "移除（误报）",
                 "save_comment": "保存评论",
                 "close_comment": "关闭并评论",
-                "ignore_comment": "忽略并评论",
+                "ignore_comment": "移除并评论",
                 "error_parts": {
                     "this_node": "此节点",
                     "this_way": "此路径",
@@ -1528,11 +1554,11 @@
                 "type": "您可以点击要素类型将要素更改为其他类型。任何在现实中的存在的事物都可以被添加至 OpenStreetMap，因此有数以千计的要素类型可供选择。",
                 "type_picker": "类型选项框显示了最常见的要素类型，例如公园、医院、餐厅、道路和建筑物。您可以通过在搜索框中键入来查找任何内容。您还可以点击要素类型旁边的 {inspect} **信息** 图标以了解更多有关信息。",
                 "fields_h": "字段",
-                "fields_all_fields": "“所有字段”部分包含所有您可以编辑的要素细节。在 OpenStreetMap 中，所有字段都是选填的，如果您不确定，可以将字段留空。",
+                "fields_all_fields": "“字段”部分包含所有您可以编辑的要素细节。在 OpenStreetMap 中，所有字段都是选填的，如果您不确定，可以将字段留空。",
                 "fields_example": "每种要素类型都会显示不同的字段。例如，道路会显示路面铺设和限制速度等字段，而餐厅则会显示食物类型以及营业时间等字段。",
                 "fields_add_field": "您还可以点击“添加字段”下拉列表增加更多的字段，例如描述、维基百科链接和轮椅通道等等。",
                 "tags_h": "标签",
-                "tags_all_tags": "在字段部分的下方，您可以展开“所有标签”部分，以编辑选中要素的任何 OpenStreetMap *标签* (*tags*)。每个标签都包含一个 *键* (*key*) 和 *值* (*value*)，用来定义所有存储在 OpenStreetMap 中的要素。",
+                "tags_all_tags": "在字段部分的下方，您可以展开“标签”部分以编辑选中要素的任何 OpenStreetMap *标签* (*tags*)。每个标签都包含一个 *键* (*key*) 和 *值* (*value*)，用来定义所有存放在 OpenStreetMap 中的要素。",
                 "tags_resources": "编辑要素的标签时需要具备一定水平的 OpenStreetMap 知识。您应该查阅像 [OpenStreetMap Wiki](https://wiki.openstreetmap.org/wiki/Main_Page) 或 [Taginfo](https://taginfo.openstreetmap.org/) 等资源来了解更多关于认可的 OpenStreetMap 标签操作。"
             },
             "points": {
@@ -1593,8 +1619,8 @@
                 "title": "关系",
                 "intro": "*关系* (*Relation*) 是 OpenStreetMap 中一种特殊类型的要素，它将其他要素组合在一起。属于关系的要素称为 *成员* (*members*)，每个成员在关系中可以有个 *角色* (*role*)。",
                 "edit_relation_h": "编辑关系",
-                "edit_relation": "在要素编辑器的底部，您可以展开“所有关系”部分以查看所选要素是否为任何关系的成员。然后您可以点击关系以选择和编辑。",
-                "edit_relation_add": "要向关系添加要素，请选择该要素，然后在要素编辑器 \"所有关系\" 中点击 {plus} 添加按钮。您可以从附近关系的列表中进行选择，或选择 \"新关系…\" 选项。",
+                "edit_relation": "在要素编辑器的底部，您可以展开“关系”部分以查看所选要素是否为任何关系的成员。之后您可以点击关系以选中并编辑它。",
+                "edit_relation_add": "要向关系中添加要素，请先选择该要素，然后在要素编辑器的“关系”部分中点击 {plus} 添加按钮。接着您可以从附近关系的列表中查找关系，或选择“新关系…”选项。",
                 "edit_relation_delete": "您还可以点击 {delete} **删除** 按钮从关系中删除所选要素。如果您删除了关系中的所有成员，则将自动删除该关系。",
                 "maintain_relation_h": "维护关系",
                 "maintain_relation": "在大部分情况下，iD 会在您编辑时自动维护关系。在替换要素时，您应留意其可能是某关系的成员。例如，如果您删除一段道路并绘制一段新的道路来替换它，则应将新段添加到与原道路相同的关系（线路和转向限制等）。",
@@ -1609,10 +1635,10 @@
                 "turn_restriction_editing": "在 \"转向限制\" 字段中，点击选择一条“起始”道路，并查看是否允许或限制转向至任何“结束”道路。您可以点击转向图标在允许和限制之间切换。iD 将自动创建关系，并根据您的选择设定起始、经由和结束角色。",
                 "route_h": "线路",
                 "route": "*线路* (*route*) 关系是能形成线路网络的单/多个路径要素的组合，例如公共汽车线路、列车线路或公路线路。",
-                "route_add": "要向线路关系添加要素，请选择该要素并向下滚动到要素编辑器的 \"所有关系\" 部分，然后点击 {plus} 添加按钮将此要素添加到附近的现有关系或新关系中。",
+                "route_add": "要向线路关系中添加要素，请先选择该要素并向下滚动到要素编辑器的“关系”部分，然后点击 {plus} 添加按钮将此要素添加到附近的现有关系或新关系中。",
                 "boundary_h": "边界",
                 "boundary": "*边界* (*boundary*) 关系是能构成行政区域界线的单/多个路径要素的组合。",
-                "boundary_add": "要向边界关系添加要素，请选择该要素并向下滚动到要素编辑器的 \"所有关系\" 部分，然后点击 {plus} 添加按钮将此要素添加到附近的现有关系或新关系中。"
+                "boundary_add": "要向边界关系中添加要素，请先选择该要素并向下滚动到要素编辑器的“关系”部分，然后点击 {plus} 添加按钮将此要素添加到附近的现有关系或新关系中。"
             },
             "notes": {
                 "title": "笔记",
@@ -1656,7 +1682,7 @@
                 "title": "质量保证",
                 "intro": "*质量保证* (Quality Assurance, Q/A) 工具可以搜寻不正确的标签、断开的道路以及其他 OpenStreetMap 的问题以供绘图者修复。要查看现有的 Q/A 问题，点击 {data} **地图数据** 面板以启用特定的 Q/A 图层。",
                 "tools_h": "工具",
-                "tools": "目前支持以下工具：[KeepRight](https://www.keepright.at/) 和 [ImproveOSM](https://improveosm.org/en/)。未来 iD 将会支持 [Osmose](https://osmose.openstreetmap.fr/) 以及更多 Q/A 工具。",
+                "tools": "目前支持以下工具：[KeepRight](https://www.keepright.at/)、[ImproveOSM](https://improveosm.org/en/) 和 [Osmose](https://osmose.openstreetmap.fr/)。",
                 "issues_h": "处理问题",
                 "issues": "处理 Q/A 问题与处理笔记相似。点击其中一个标记，然后在侧边栏中查看问题详情。每个工具都有自己的功能，但通常您可以评论和/或关闭问题。"
             },
@@ -2030,7 +2056,7 @@
                     "title": "删除此要素"
                 },
                 "extract_point": {
-                    "title": "提取节点。"
+                    "title": "提取节点"
                 },
                 "ignore_issue": {
                     "title": "忽略此问题"
@@ -2803,7 +2829,7 @@
                     }
                 },
                 "beauty": {
-                    "label": "美容专业"
+                    "label": "服务"
                 },
                 "bench": {
                     "label": "长凳",
@@ -2841,7 +2867,7 @@
                     "label": "类型"
                 },
                 "booth": {
-                    "label": "岗亭,小屋"
+                    "label": "岗亭"
                 },
                 "bottle": {
                     "label": "瓶子灌装"
@@ -3268,7 +3294,7 @@
                     "label": "类型"
                 },
                 "except": {
-                    "label": "异常"
+                    "label": "除外"
                 },
                 "expected_rcn_route_relations": {
                     "label": "相邻自行车节点"
@@ -3890,11 +3916,42 @@
                     },
                     "placeholder": "容易，中阶，进阶"
                 },
+                "piste/difficulty_downhill": {
+                    "label": "难度",
+                    "options": {
+                        "advanced": "高级（黑色菱形）",
+                        "easy": "初级（绿色圆圈）",
+                        "expert": "专家（双黑菱形）",
+                        "extreme": "极限（需要攀岩装备）",
+                        "freeride": "自由（偏离轨道）",
+                        "intermediate": "中级（蓝色方块）",
+                        "novice": "新手（教学级别）"
+                    },
+                    "placeholder": "初级、中级、高级..."
+                },
                 "piste/difficulty_nordic": {
-                    "label": "难度"
+                    "label": "难度",
+                    "options": {
+                        "advanced": "高级 - 雪道狭窄、陡峭或有结冰，并有急转弯",
+                        "easy": "初级 - 坡度较平缓，且陡坡较短",
+                        "expert": "专家 - 周围有危险地形",
+                        "intermediate": "中级 - 有陡坡",
+                        "novice": "新手 - 平缓，不需要精力"
+                    },
+                    "placeholder": "初级、中级、高级..."
                 },
                 "piste/difficulty_skitour": {
-                    "label": "难度"
+                    "label": "难度",
+                    "options": {
+                        "advanced": "高级 - S: 坡度 40-45°",
+                        "easy": "初级 - WS: 坡度 30-35°",
+                        "expert": "专家 - SS: 坡度 45–50°",
+                        "extreme": "极限 - EX: 坡度 >55°",
+                        "freeride": "自由 - AS: 坡度 50–55°",
+                        "intermediate": "中级 - ZS: 坡度 35-40°",
+                        "novice": "新手 - L: 坡度 <30°"
+                    },
+                    "placeholder": "初级、中级、高级..."
                 },
                 "piste/grooming": {
                     "label": "雪道类型",
@@ -4108,7 +4165,9 @@
                     "label": "分类",
                     "options": {
                         "danger_left": "左侧危险",
-                        "danger_right": "右侧危险"
+                        "danger_right": "右侧危险",
+                        "waterway_left": "航道左侧",
+                        "waterway_right": "航道右侧"
                     }
                 },
                 "seamark/beacon_lateral/colour": {
@@ -4125,6 +4184,9 @@
                 "seamark/beacon_lateral/system": {
                     "label": "系统",
                     "options": {
+                        "cevni": "CEVNI",
+                        "iala-a": "IALA A",
+                        "iala-b": "IALA B",
                         "other": "其它"
                     }
                 },
@@ -4572,6 +4634,9 @@
                 "wall": {
                     "label": "类型"
                 },
+                "waste": {
+                    "label": "垃圾"
+                },
                 "water": {
                     "label": "类型"
                 },
@@ -4652,7 +4717,7 @@
                     "terms": "广告,广告柱,广告亭,广告牌,柱"
                 },
                 "aerialway": {
-                    "name": "缆车线路"
+                    "name": "缆车要素"
                 },
                 "aerialway/cable_car": {
                     "name": "大缆车",
@@ -4703,7 +4768,7 @@
                     "terms": "滑索,飞索,绳索,滑缆,飞人,空中,高空,滑翔"
                 },
                 "aeroway": {
-                    "name": "机场路径"
+                    "name": "机场要素"
                 },
                 "aeroway/aerodrome": {
                     "name": "机场",
@@ -4779,6 +4844,10 @@
                 "amenity/bar": {
                     "name": "酒吧",
                     "terms": "酒吧"
+                },
+                "amenity/bar/lgbtq": {
+                    "name": "LGBTQ+ 酒吧",
+                    "terms": "lgb,lgbt,lgbtq,同性恋,双性恋,双性,跨性别,酷儿,同性恋酒吧"
                 },
                 "amenity/bbq": {
                     "name": "烧烤设施",
@@ -4873,6 +4942,10 @@
                 "amenity/community_centre": {
                     "name": "社区活动中心",
                     "terms": "活动室"
+                },
+                "amenity/community_centre/lgbtq": {
+                    "name": "LGBTQ+ 社区中心",
+                    "terms": "lgb,lgbt,lgbtq,同性恋,双性恋,双性,跨性别,酷儿,同性恋活动,同性恋大厅"
                 },
                 "amenity/compressed_air": {
                     "name": "压缩空气",
@@ -6572,8 +6645,8 @@
                     "terms": "铁路用地"
                 },
                 "landuse/recreation_ground": {
-                    "name": "绿地",
-                    "terms": "绿地"
+                    "name": "康体场地",
+                    "terms": "绿地,康体,游乐场,康乐"
                 },
                 "landuse/religious": {
                     "name": "宗教场所",
@@ -6916,6 +6989,9 @@
                 },
                 "man_made/tower/communication": {
                     "name": "通信塔"
+                },
+                "man_made/tower/observation": {
+                    "name": "瞭望塔"
                 },
                 "man_made/tunnel": {
                     "name": "隧道范围",
@@ -8625,7 +8701,7 @@
             },
             "MAPNIK": {
                 "attribution": {
-                    "text": "© OpenStreetMap 贡献者, 署名-相同方式共享"
+                    "text": "© OpenStreetMap 贡献者, 署名-相同方式共享 2.0"
                 },
                 "description": "OpenStreetMap 默认图层",
                 "name": "OpenStreetMap (标准)"
@@ -8796,20 +8872,6 @@
                 "description": "由basemap.at 提供的注释叠加层",
                 "name": "basemap.at 叠加层"
             },
-            "basemap.at-surface": {
-                "attribution": {
-                    "text": "basemap.at"
-                },
-                "description": "由 basemap.at 提供的地表层",
-                "name": "basemap.at 地表"
-            },
-            "basemap.at-terrain": {
-                "attribution": {
-                    "text": "basemap.at"
-                },
-                "description": "由basemap.at 提供的地形层",
-                "name": "basemap.at 地形"
-            },
             "eufar-balaton": {
                 "attribution": {
                     "text": "欧洲空载研究舰队(EUFAR) 巴拉顿正射影像（2010）"
@@ -8830,13 +8892,6 @@
                 },
                 "description": "城市地图是描述哥德堡的概览地图。 它包含有关土地、通讯、水文、建筑物、地址号码和街道名称，行政区划和其他方向性文字的一般信息。",
                 "name": "哥德堡城市地图"
-            },
-            "gsi.go.jp": {
-                "attribution": {
-                    "text": "日本国土地理院"
-                },
-                "description": "日本国土地理院正射影像(电子国土基本图)。通常比 Bing 更好，但较为陈旧。",
-                "name": "日本国土地理院正射影像"
             },
             "gsi.go.jp_airphoto": {
                 "attribution": {
@@ -9475,10 +9530,6 @@
             "OSM-Utah": {
                 "name": "OpenStreetMap 犹他州",
                 "description": "位于盐湖城区域的绘图者和 OpenStreetMap 用户"
-            },
-            "OSM-Vancouver-meetup": {
-                "name": "OpenStreetMap 温哥华",
-                "description": "位于不列颠哥伦比亚省温哥华的绘图者和 OpenStreetMap 用户"
             },
             "OSM-Wyoming": {
                 "name": "OpenStreetMap 怀俄明州",

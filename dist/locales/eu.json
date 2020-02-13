@@ -100,17 +100,7 @@
             },
             "circularize": {
                 "title": "Biribildu",
-                "description": {
-                    "line": "Lerro hau biribila egin.",
-                    "area": "Leku hau biribila egin."
-                },
-                "key": "O",
-                "annotation": {
-                    "line": "Lerro zirkular bat egin da.",
-                    "area": "Area zirkular bat egin da."
-                },
-                "too_large": "Hau ezin da zirkularra egin gaur egun ez dagoelako nahikoa erabilgarri.",
-                "connected_to_hidden": "Hau ezin da zirkularra egin ezkutuko funtzio bati konektatuta dagoelako."
+                "key": "O"
             },
             "orthogonalize": {
                 "title": "Laukia"

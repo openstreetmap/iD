@@ -8,7 +8,10 @@
             "zoom_to": "縮放至",
             "copy": "複製",
             "view_on": "在 {domain} 上檢視",
-            "favorite": "最愛"
+            "favorite": "最愛",
+            "list": "清單",
+            "text": "文字",
+            "deselect": "取消選取"
         },
         "toolbar": {
             "inspect": "檢查",
@@ -51,19 +54,7 @@
                 "key": "N"
             },
             "add_preset": {
-                "title": "新增 {feature}",
-                "point": {
-                    "title": "新增 {feature} 為點"
-                },
-                "line": {
-                    "title": "新增 {feature} 為線"
-                },
-                "area": {
-                    "title": "新增 {feature} 為區域"
-                },
-                "building": {
-                    "title": "新增 {feature} 為建築"
-                }
+                "title": "新增 {feature}"
             },
             "browse": {
                 "title": "瀏覽",
@@ -117,19 +108,37 @@
             "circularize": {
                 "title": "環形化",
                 "description": {
-                    "line": "把此線段環形化。",
-                    "area": "把此區域環形化。"
+                    "single": "讓此圖徽變成圓形。",
+                    "multiple": "讓這些圖徽變成圓形。"
                 },
                 "key": "O",
                 "annotation": {
-                    "line": " 將線段變成環形。",
-                    "area": "將一區域製成環形。"
+                    "single": "已讓圖徽變為圓形。",
+                    "multiple": "已讓圖徽變為圓形。"
                 },
-                "not_closed": "非圈狀物件，不能環形化。",
-                "too_large": "因物件尚未有足夠部份正在顯示，不能環形化。",
-                "connected_to_hidden": "這個沒辦法圓形化，因為與其他隱藏的圖徵相連",
-                "not_downloaded": "因物件尚未有足夠部份下載，因此不能環形化。 ",
-                "already_circular": "無法將其變為圓形，因為其已是圓形。"
+                "multiple_blockers": {
+                    "multiple": "因為多種理由，無法將它們變成圓形。"
+                },
+                "not_closed": {
+                    "single": "由於其並未循環，所以無法變成圓形。",
+                    "multiple": "由於這些圖徽並未循環，所以無法變成圓形。"
+                },
+                "too_large": {
+                    "single": "因為沒有足夠的可視部份，所以無法變成圓形。",
+                    "multiple": "因為沒有足夠的可視部份，所以無法變成圓形。"
+                },
+                "connected_to_hidden": {
+                    "single": "因為其連至隱藏的圖徽，所以無法變成圓形。",
+                    "multiple": "因為連至隱藏的圖徽，所以無法變成圓形。"
+                },
+                "not_downloaded": {
+                    "single": "因為部份內容尚未下載，所以無法變成圓形。",
+                    "multiple": "因為部份內容尚未下載，所以無法變成圓形。"
+                },
+                "already_circular": {
+                    "single": "因為已經是圓形，所以無法再變成圓形。",
+                    "multiple": "因為已經是圓形，所以無法再變成圓形。"
+                }
             },
             "orthogonalize": {
                 "title": "方角化",
@@ -684,10 +693,12 @@
             "show_more": "顯示更多",
             "view_on_osm": "在 openstreetmap.org 中檢視",
             "view_on_keepRight": "在 keepright.at 檢視",
-            "all_fields": "全部欄位",
-            "all_tags": "所有標籤",
-            "all_members": "所有成員",
-            "all_relations": "所有關係",
+            "feature_type": "圖徽類型",
+            "fields": "欄位",
+            "tags_count": "標籤 ({count})",
+            "members_count": "成員 ({count})",
+            "relations_count": "關係 ({count})",
+            "features_count": "圖徽 ({count})",
             "add_to_relation": "新增至關係",
             "new_relation": "建立新關係...",
             "choose_relation": "選擇父關係",
@@ -698,18 +709,22 @@
             "edit_reference": "編輯/翻譯",
             "wiki_reference": "觀看說明文件",
             "wiki_en_reference": "觀看英文的說明文件",
+            "key_value": "key=value",
+            "multiple_values": "多重值",
+            "multiple_types": "多重類型",
+            "unshared_value_tooltip": "並未被所有圖徽共享",
             "hidden_preset": {
                 "manual": "{features} 已隱藏。在地圖資料面板中啟用它們。",
                 "zoom": "{features} 已隱藏。拉近以啟用它們。"
             },
-            "back_tooltip": "修改物件",
+            "back_tooltip": "變更圖徽類型",
             "remove": "移除",
             "search": "搜尋",
-            "multiselect": "已選取的圖徽",
             "unknown": "未知種類",
             "incomplete": "<未下載>",
             "feature_list": "搜尋物件",
             "edit": "編輯特徵",
+            "edit_features": "編輯圖徽",
             "check": {
                 "yes": "是",
                 "no": "否",
@@ -730,7 +745,7 @@
             "location": "地點",
             "add_fields": "新增欄位",
             "lock": {
-                "suggestion": "\"{label}\" 欄位已經因為是維基數據標籤而鎖住，你可以刪除它或是在\"所有標籤\"部分編輯。"
+                "suggestion": "「{label}」欄位已被鎖定，因為其有 Wikidata 標籤。您可以刪除它或在「標籤」部份中編輯標籤。"
             }
         },
         "background": {
@@ -760,7 +775,7 @@
                 "description": "顯示詳情面板",
                 "tooltip": "顯示進階背景資訊"
             },
-            "fix_misalignment": "調整影像偏移",
+            "fix_misalignment": "空拍圖偏移量",
             "offset": "在灰色區域內拖拉調整影像偏移，或是輸入偏移公尺數。"
         },
         "map_data": {
@@ -778,12 +793,16 @@
                     "title": "開放街圖註記"
                 },
                 "keepRight": {
-                    "tooltip": "自動從 keepright.at 偵測地圖問題",
+                    "tooltip": "由 keepright.at 偵測到的資料問題",
                     "title": "KeepRight 問題"
                 },
                 "improveOSM": {
-                    "tooltip": "由 improveosm.org 自動偵測到遺失資料",
+                    "tooltip": "由 improveosm.org 偵測到的遺失資料",
                     "title": "ImproveOSM 問題"
+                },
+                "osmose": {
+                    "tooltip": "由 osmose.openstreetmap.fr 偵測到的資料問題",
+                    "title": "Osmose 問題"
                 },
                 "custom": {
                     "tooltip": "拖曳資料檔案到頁面上，或點選按鈕以設定",
@@ -1030,6 +1049,14 @@
         "cannot_zoom": "在此模式下不能再縮小。",
         "full_screen": "啟動全螢幕",
         "QA": {
+            "osmose": {
+                "title": "Osmose 問題",
+                "detail_title": "詳細資訊",
+                "elems_title": "圖徽",
+                "fix_title": "修復指南",
+                "trap_title": "常見錯誤",
+                "translation": "由 Osmose 提供的翻譯"
+            },
             "improveOSM": {
                 "title": " ImproveOSM 偵測",
                 "geometry_types": {
@@ -1065,16 +1092,15 @@
                 }
             },
             "keepRight": {
-                "title": "KeepRIght 錯誤",
-                "detail_title": "錯誤",
+                "title": "KeepRight",
                 "detail_description": "説明",
                 "comment": "評論",
                 "comment_placeholder": "輸入評論以與其他使用者分享。",
-                "close": "關閉(錯誤已修正)",
-                "ignore": "忽略(並非錯誤)",
+                "close": "關閉（問題已修復）",
+                "ignore": "移除（誤報）",
                 "save_comment": "儲存評論",
                 "close_comment": "關閉並評論",
-                "ignore_comment": "忽略並評論",
+                "ignore_comment": "移除並留言",
                 "error_parts": {
                     "this_node": "這個節點",
                     "this_way": "這條路徑",
@@ -1528,11 +1554,11 @@
                 "type": "你可以點選圖徵類型來改變不同的圖徵類型。所有現實世界存在的東西都可以加到開放街圖上面，所以總共有成千種圖徵類型能夠選擇。",
                 "type_picker": "類選選擇器顯示最常見的圖徵類儒，像是公園、醫院、餐廳、道路建築。你可以藉由在搜尋框輸入任何東西來搜尋。你也可以點選圖徵類型旁邊的 {inspect} **資訊**圖示來得到更多資訊。",
                 "fields_h": "欄位",
-                "fields_all_fields": "\"所有欄位\"部分含有你能編輯，所有圖徵的詳細資訊。在開放街圖，所有的欄位都是選擇性的，你不確定的話可以選擇留空。",
+                "fields_all_fields": "「欄位」部份中包含了所有您可能會想要編輯的詳細資訊。在開放街圖中，所有的欄位都是可選的，如果您不確定某個欄位要怎麼填的話，可以將其留空。",
                 "fields_example": "每一個圖徵類型會有不同的欄位。舉例來說，道路類可能就有路面和速限的欄位，而餐廳則會顯示食物類型，以及營業時間的欄位。",
                 "fields_add_field": "你也可以按下拉選單\"新增欄位\"，增加新的欄位，像是描述、維基百科連結、輪椅通通等項目。",
                 "tags_h": "標籤",
-                "tags_all_tags": "下面的欄位選擇，你可以展開\"所有標籤\"部分，替你選擇的圖徵加上任何在開放街圖上面的標籤。每一個標籤由一個\"鍵\"和\"值\"構成，資料元件定義所有在開放街圖上儲存的圖徵。",
+                "tags_all_tags": "在欄位部份下方，您可以展開「標籤」部份以編輯選定的圖徽的任何開放街圖「標籤」。每個標籤都包含了一個 *key* 與 *value*，資料元素定義了所有儲存在開放街圖中的圖徽。",
                 "tags_resources": "編輯圖徵的標籤需要開放街圖進階的知識。你應該參考 [開放街圖 Wiki](https://wiki.openstreetmap.org/wiki/Main_Page) 或 [Taginfo](https://taginfo.openstreetmap.org/) 熟悉已經被接受的開放街圖標籤慣例。"
             },
             "points": {
@@ -1593,8 +1619,8 @@
                 "title": "關聯",
                 "intro": "*關聯*是開放街圖特殊型態的圖徵，能夠將其他圖徵組織成一組。屬於關聯的圖徵被稱為*成員*，而每個成員在關聯裡都會有*角色*。",
                 "edit_relation_h": "編輯關聯",
-                "edit_relation": "在圖徵編輯器裡的最下面，你可以展開\"所有關係\"部分，能看到選擇的圖徵是那些關聯的成員。你可以點選關聯選擇和編輯關聯。",
-                "edit_relation_add": "要將圖徵加到關聯裡，選擇圖徵，接著點圖徵編輯器中\"所有關係\"部分的 {plus} 加號按鈕。你可以從附近關聯的清單選擇，或是選\"新關係...\"選項。",
+                "edit_relation": "在圖徽編輯器底部，您可以展開「關係」部份以檢視選定的圖徽是否為任何關係的成員。然後您可以點擊關係選取並編輯它。",
+                "edit_relation_add": "要將圖徽新增到關係中，選取圖徽，然後在圖徽編輯器的「關係」部份中點擊 {plus} 新增按鈕。您可以從附近的關係清單中選擇，或是選擇「新關係……」選項。",
                 "edit_relation_delete": "你也可以按 {delete} **刪除**按鈕將關聯中的選擇圖徵移除。如果你移除關聯中所有的成員，關聯也將被自動刪除。",
                 "maintain_relation_h": "維護關聯",
                 "maintain_relation": "大部分的情形來說，你編輯時 iD 會自動維護關聯，你應當特別注意替換關聯中的成員。舉例來說，如果你刪除一段路，用新繪製的路段取代，你應當如同原來的一樣，將新的部分加到同一個關聯 (路線、轉彎限制等)。",
@@ -1609,10 +1635,10 @@
                 "turn_restriction_editing": "在\"轉彎限制\"欄位中，點選\"從\"道路，接著看是允許或是限制\"到\"道路。你可以點轉彎圖示切換允許或是限制，iD 會依據從、經由、到的角色，自動新建關聯。",
                 "route_h": "路線",
                 "route": "*路線*關聯是一個由一個或多個線段圖徵組成的道路網路群組，像是公車路線、火車路線或是公路路線。",
-                "route_add": "要增加圖徵到路線關聯，選擇圖徵在圖徵編輯器，向下滾動到\"所有關係\"部分，接著點 {plus} 加號按鈕，增加圖徵到鄰近已存在或是新的關聯中。",
+                "route_add": "要將圖徽新增到路徑關係中，選取圖徽並往下捲到圖徽編輯器的「關係」部份，然後點擊 {plus} 新增按鈕以新增此圖徽到附近既有的關係或新關係中。",
                 "boundary_h": "邊界",
                 "boundary": "*邊界*關聯是一個由一個或多個線段圖徵組成的行政邊界。",
-                "boundary_add": "要增加圖徵到邊界關聯，選擇圖徵在圖徵編輯器，向下滾動到\"所有關係\"部分，接著點 {plus} 加號按鈕，增加圖徵到鄰近已存在或是新的關聯中。"
+                "boundary_add": "要將圖徽新增到邊界關係中，選取圖徽並往下捲到圖徽編輯器的「關係」部份，然後點擊 {plus} 新增按鈕以新增此圖徽到附近既有的關係或新關係中。"
             },
             "notes": {
                 "title": "備註",
@@ -1656,7 +1682,7 @@
                 "title": "品質保証",
                 "intro": "*品質保証* (Q/A, Quality Assurance) 工具能找出開放街圖上，不適當地標籤，為連結的道路或是其他問題，圖客能藉此修復。要檢視現有的 Q/A 問題，,回擊 {data} **地圖資料**儀表板開啓特定 Q/A 圖層。",
                 "tools_h": "工具",
-                "tools": "目前支援以下的工具：[KeepRight](https://www.keepright.at/) 和[ImproveOSM](https://improveosm.org/en/)，之後  iD 將支援 [Osmose](https://osmose.openstreetmap.fr/)，未來將支援更多 Q/A 工具。",
+                "tools": "目前支援以下工具：[KeepRight](https://www.keepright.at/), [ImproveOSM](https://improveosm.org/en/) 與 [Osmose](https://osmose.openstreetmap.fr/)。",
                 "issues_h": "處理問題",
                 "issues": "處理 Q/A 問題類似處理註解。點選已存在的 Q/A 問題會埴滿整個側邊欄，像是問題種類以及相關的圖徵。每個工具都有其能耐，但是一般來說你可以回應和/或關閉問題。"
             },
@@ -2803,7 +2829,7 @@
                     }
                 },
                 "beauty": {
-                    "label": "美容專門"
+                    "label": "服務"
                 },
                 "bench": {
                     "label": "長凳",
@@ -3145,7 +3171,8 @@
                 },
                 "direction": {
                     "label": "方向 (順時針角度)",
-                    "placeholder": "45、90、180、270"
+                    "placeholder": "45、90、180、270",
+                    "terms": "方向（順時針角度）"
                 },
                 "direction_cardinal": {
                     "label": "方向",
@@ -3237,7 +3264,8 @@
                         "rail": "第三軌供電",
                         "yes": "是 (未指名)"
                     },
-                    "placeholder": "架空電車線, 第三軌供電"
+                    "placeholder": "架空電車線, 第三軌供電",
+                    "terms": "電氣化"
                 },
                 "elevation": {
                     "label": "海拔高度",
@@ -3580,6 +3608,9 @@
                 },
                 "kerb/height": {
                     "label": "高度"
+                },
+                "kneipp_water_cure_multi": {
+                    "label": "盆地類型"
                 },
                 "label": {
                     "label": "標籤"
@@ -4906,7 +4937,7 @@
                     "terms": "招牌"
                 },
                 "aerialway": {
-                    "name": "纜車路線"
+                    "name": "纜車圖徽"
                 },
                 "aerialway/cable_car": {
                     "name": "纜車",
@@ -4961,7 +4992,7 @@
                     "terms": "流籠"
                 },
                 "aeroway": {
-                    "name": "機場相關設施"
+                    "name": "航空圖徽"
                 },
                 "aeroway/aerodrome": {
                     "name": "機場",
@@ -5221,6 +5252,10 @@
                     "name": "活動場館",
                     "terms": "活動場館"
                 },
+                "amenity/exhibition_centre": {
+                    "name": "展覽中心",
+                    "terms": "展覽中心"
+                },
                 "amenity/fast_food": {
                     "name": "速食餐廳",
                     "terms": "速食店"
@@ -5318,6 +5353,10 @@
                 "amenity/kindergarten": {
                     "name": "幼稚園",
                     "terms": "幼稚園,幼兒園"
+                },
+                "amenity/kneipp_water_cure": {
+                    "name": "Kneipp 水療",
+                    "terms": "Kneipp 水療"
                 },
                 "amenity/language_school": {
                     "name": "語言學校",
@@ -6588,6 +6627,10 @@
                     "name": "救生員",
                     "terms": "救生員"
                 },
+                "emergency/mountain_rescue": {
+                    "name": "山區救援站",
+                    "terms": "山區救援站"
+                },
                 "emergency/no": {
                     "name": "不開放緊急通行"
                 },
@@ -6796,6 +6839,10 @@
                 },
                 "highway/cycleway/crossing": {
                     "name": "自行車穿越道"
+                },
+                "highway/cycleway/crossing/bicycle_foot": {
+                    "name": "自行車與行人穿越道",
+                    "terms": "自行車與行人穿越道"
                 },
                 "highway/cycleway/crossing/marked": {
                     "name": "有標記的單車穿越道",
@@ -7089,6 +7136,10 @@
                 "historic/monument": {
                     "name": "纪念建築物",
                     "terms": "纪念碑,紀念塔,古蹟"
+                },
+                "historic/pillory": {
+                    "name": "頸手枷",
+                    "terms": "頸手枷"
                 },
                 "historic/ruins": {
                     "name": "遺址",
@@ -10046,7 +10097,7 @@
             },
             "MAPNIK": {
                 "attribution": {
-                    "text": "© OpenStreetMap 貢獻者，CC-BY-SA"
+                    "text": "© OpenStreetMap 貢獻者，CC-BY-SA 2.0"
                 },
                 "description": "預設的 OpenStreetMap 圖層",
                 "name": "OpenStreetMap（標準）"
@@ -10217,20 +10268,6 @@
                 "description": "由 basemap.at 提供的註釋覆蓋層。",
                 "name": "basemap.at 覆蓋層"
             },
-            "basemap.at-surface": {
-                "attribution": {
-                    "text": "basemap.at"
-                },
-                "description": "由 basemap.at 提供的表面層。",
-                "name": "basemap.at 表面"
-            },
-            "basemap.at-terrain": {
-                "attribution": {
-                    "text": "basemap.at"
-                },
-                "description": "由 basemap.at 提供的地形圖層。",
-                "name": "basemap.at 地形"
-            },
             "eufar-balaton": {
                 "attribution": {
                     "text": "EUFAR 巴拉頓正射影像 2010"
@@ -10251,13 +10288,6 @@
                 },
                 "description": "城市地圖是描述哥特堡的概覽地圖。它包含了關於土地、通訊、水文、建築、地址號碼與街道名稱、行政區劃與其他方向文字等的一般性資訊。",
                 "name": "哥特堡城市地圖"
-            },
-            "gsi.go.jp": {
-                "attribution": {
-                    "text": "GSI 日本"
-                },
-                "description": "日本 GSI 正射影像。通常比 bing 好，但有點老舊。",
-                "name": "日本 GSI 正射影像"
             },
             "gsi.go.jp_airphoto": {
                 "attribution": {
@@ -10857,10 +10887,6 @@
                 "name": "開放街圖猶他",
                 "description": "在鹽湖城區域的圖客與開放街圖使用者",
                 "extendedDescription": "我們可能會舉辦的活動有：學習製圖工作坊、製圖派對與戶外資料蒐集。活動將會在鹽湖城區舉辦，至少一開始是這樣。我們正在尋找經驗豐富的圖客與 OSM 新手。加入我們，一起來製圖吧！"
-            },
-            "OSM-Vancouver-meetup": {
-                "name": "開放街圖溫哥華",
-                "description": "英屬哥倫比亞溫哥華一帶的圖客與開放街圖使用者"
             },
             "OSM-Wyoming": {
                 "name": "開放街圖懷俄明",

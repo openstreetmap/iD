@@ -66,18 +66,7 @@
             },
             "circularize": {
                 "title": "Poner en círculu",
-                "description": {
-                    "line": "Facer esta llinia circular.",
-                    "area": "Facer esti área circular."
-                },
-                "key": "O",
-                "annotation": {
-                    "line": "Facer una llinia circular.",
-                    "area": "Facer un área circular."
-                },
-                "not_closed": "Nun pué facese circular porque nun ye un llazu.",
-                "too_large": "Esto nun pue facese circular porque anguaño nun ye visible bastante.",
-                "connected_to_hidden": "Nun pué facese circular porque ta coneutao a una carauterística tapecida."
+                "key": "O"
             },
             "orthogonalize": {
                 "title": "Escuadrar"
@@ -376,18 +365,12 @@
         "inspector": {
             "show_more": "Ver más",
             "view_on_osm": "Ver en openstreetmap.org",
-            "all_fields": "Tolos campos",
-            "all_tags": "Toles etiquetes",
-            "all_members": "Tolos miembros",
-            "all_relations": "Toles rellaciones",
             "new_relation": "Nueva rellación...",
             "role": "Rol",
             "choose": "Seleicione un tipu de carauterística",
             "results": "{n} resultaos pa {search}",
-            "back_tooltip": "Camudar carauterística",
             "remove": "Desaniciar",
             "search": "Guetar",
-            "multiselect": "Elementos seleicionaos",
             "unknown": "Desconocíu",
             "incomplete": "<non descargao>",
             "feature_list": "Buscar carauterístiques",
@@ -424,8 +407,7 @@
             "minimap": {
                 "tooltip": "Amuesa un mapa alloñáu p'ayudar a alcontrar l'área que se ve actualmente.",
                 "key": "/"
-            },
-            "fix_misalignment": "Axustar el desplazamientu de les imáxenes"
+            }
         },
         "map_data": {
             "title": "Datos del mapa",
@@ -1918,9 +1900,6 @@
                     "name": "Tableru d'anuncios",
                     "terms": "anunciu, publicidá, cartelera"
                 },
-                "aerialway": {
-                    "name": "Tendíu aéreu"
-                },
                 "aerialway/cable_car": {
                     "name": "Teleféricu",
                     "terms": "teleféricu"
@@ -1950,9 +1929,6 @@
                 },
                 "aerialway/rope_tow": {
                     "name": "Cuerda de remolque"
-                },
-                "aeroway": {
-                    "name": "Via d'aviación"
                 },
                 "aeroway/aerodrome": {
                     "name": "Aeropuertu",
@@ -4121,9 +4097,6 @@
                 "name": "Imáxenes mundiales Esri"
             },
             "MAPNIK": {
-                "attribution": {
-                    "text": "© collaboradores d'OpenStreetMap, CC-BY-SA"
-                },
                 "description": "La capa predeterminada d'OpenStreetMap.",
                 "name": "OpenStreetMap (Estándar)"
             },

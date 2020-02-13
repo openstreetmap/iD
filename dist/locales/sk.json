@@ -63,18 +63,7 @@
             },
             "circularize": {
                 "title": "Usporiadať do kruhu",
-                "description": {
-                    "line": "Usporiadať túto čiaru do kruhu.",
-                    "area": "Usporiadať túto plochu do kruhu."
-                },
-                "key": "O",
-                "annotation": {
-                    "line": "Usporiadanie čiary do kruhu.",
-                    "area": "Usporiadanie plochy do kruhu."
-                },
-                "not_closed": "Tento objekt nemožno usporiadať do kruhu, pretože nie je uzavretý do slučky.",
-                "too_large": "Tento objekt nemožno usporiadať do kruhu, pretože niektoré jeho časti nie sú viditeľné.",
-                "connected_to_hidden": "Tento objekt nemožno usporiadať do kruhu, pretože je spojený so skrytým objektom."
+                "key": "O"
             },
             "orthogonalize": {
                 "title": "Usporiadať do pravého uhla"
@@ -369,18 +358,12 @@
         "inspector": {
             "show_more": "Zobraziť viac",
             "view_on_osm": "Zobraziť na openstreetmap.org",
-            "all_fields": "Všetky polia",
-            "all_tags": "Všetky označenia",
-            "all_members": "Všetky členy",
-            "all_relations": "Všetky relácie",
             "new_relation": "Nová relácia...",
             "role": "Rola",
             "choose": "Zvoľte typ objektu",
             "results": "{n} výsledkov pre {search}",
-            "back_tooltip": "Zmeň typ objektu",
             "remove": "Odstráň",
             "search": "Hľadaj",
-            "multiselect": "Vybrané objekty",
             "unknown": "Neznámy",
             "incomplete": "<nebolo stiahnuté>",
             "feature_list": "Hľadaj objekty",
@@ -418,7 +401,6 @@
                 "tooltip": "Zobraziť oddialenú mapu pre ľahšie lokalizovanie práve zobrazenej oblasti.",
                 "key": "/"
             },
-            "fix_misalignment": "Upraviť posun obrázkov",
             "offset": "Potiahnutím kdekoľvek v šedej ploche nižšie upravíte posun obrázkov, alebo zadajte hodnotu posunu v metroch."
         },
         "map_data": {
@@ -2200,9 +2182,6 @@
                     "name": "Bilboard",
                     "terms": "bilbord,bilboardy,billboardy,reklama,pútač,putac"
                 },
-                "aerialway": {
-                    "name": "Vzdušná doprava"
-                },
                 "aerialway/cable_car": {
                     "name": "Kabínková lanovka",
                     "terms": "kyvadlova lanovka,kyvadlo,lanovka,kabínka,kabinka"
@@ -2242,9 +2221,6 @@
                 "aerialway/rope_tow": {
                     "name": "Lanový vlek",
                     "terms": "lanovy vlek"
-                },
-                "aeroway": {
-                    "name": "Letectvo"
                 },
                 "aeroway/aerodrome": {
                     "name": "Letisko",
@@ -4498,9 +4474,6 @@
                 "name": "Esri snímky sveta"
             },
             "MAPNIK": {
-                "attribution": {
-                    "text": "© OpenStreetMap prispievatelia, CC-BY-SA"
-                },
                 "description": "Štandardná vrstva OpenStreetMap.",
                 "name": "OpenStreetMap (Štandardná)"
             },

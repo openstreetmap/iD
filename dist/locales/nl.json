@@ -50,19 +50,7 @@
                 "key": "N"
             },
             "add_preset": {
-                "title": "Toevoegen {feature}",
-                "point": {
-                    "title": "Voeg {feature} toe als punt"
-                },
-                "line": {
-                    "title": "Voeg {feature} toe als lijn"
-                },
-                "area": {
-                    "title": "Voeg {feature} toe als vlak"
-                },
-                "building": {
-                    "title": "Voeg {feature} toe as gebouw"
-                }
+                "title": "Toevoegen {feature}"
             },
             "browse": {
                 "title": "Blader",
@@ -115,19 +103,7 @@
             },
             "circularize": {
                 "title": "Maak rond",
-                "description": {
-                    "line": "Maak deze lijn rond.",
-                    "area": "Maak dit vlak rond."
-                },
-                "key": "O",
-                "annotation": {
-                    "line": "Lijn rondgemaakt.",
-                    "area": "Vlak rondgemaakt."
-                },
-                "not_closed": "Dit kan niet rondgemaakt worden omdat het geen lus is.",
-                "too_large": "Dit kan niet rondgemaakt worden omdat slechts een te klein deel ervan momenteel zichtbaar is.",
-                "connected_to_hidden": "Dit kan niet rondgemaakt worden omdat het verbonden is met een verborgen object.",
-                "not_downloaded": "Dit object kan niet circulair gemaakt worden omdat het niet volledig gedownload is."
+                "key": "O"
             },
             "orthogonalize": {
                 "title": "Maak hoeken recht",
@@ -546,10 +522,6 @@
             "show_more": "Toon meer",
             "view_on_osm": "Bekijk op openstreetmap.org",
             "view_on_keepRight": "Bekijk op keepright.at",
-            "all_fields": "Alle eigenschappen",
-            "all_tags": "Alle tags",
-            "all_members": "Alle leden",
-            "all_relations": "Alle relaties",
             "add_to_relation": "Voeg aan een relatie toe",
             "new_relation": "Nieuwe relatie …",
             "choose_relation": "Kies een ouderrelatie",
@@ -564,10 +536,8 @@
                 "manual": "{features} zijn verborgen. Toon deze in het Kaartdata paneel.",
                 "zoom": "{features} zijn verborgen. Zoom in om deze te tonen."
             },
-            "back_tooltip": "Wijzig object",
             "remove": "Verwijder",
             "search": "Zoeken",
-            "multiselect": "Geselecteerde objecten",
             "unknown": "Onbekend",
             "incomplete": "<niet gedownload>",
             "feature_list": "Zoek objecttype",
@@ -590,10 +560,7 @@
             "way": "Weg",
             "relation": "Relatie",
             "location": "Locatie",
-            "add_fields": "Voeg eigenschap toe:",
-            "lock": {
-                "suggestion": "Het \"{label}\" veld is vergrendeld omdat er een Wikidata tag bestaat. Je kunt het verwijderen of bewerken in de \"All tags\" sectie."
-            }
+            "add_fields": "Voeg eigenschap toe:"
         },
         "background": {
             "title": "Achtergrond",
@@ -622,7 +589,6 @@
                 "description": "Toon detailpaneel",
                 "tooltip": "Toon geavanceerde achtergrondinformatie"
             },
-            "fix_misalignment": "Verplaatsing van luchtfoto aanpassen",
             "offset": "Sleep ergens in de grijze zone hieronder om de verplaatsing van de luchtfoto aan te passen, of voer de waarden in in meter."
         },
         "map_data": {
@@ -640,11 +606,9 @@
                     "title": "Kaartopmerkingen van OpenStreetMap"
                 },
                 "keepRight": {
-                    "tooltip": "Automatisch herkende kaartproblemen van keepright.at",
                     "title": "KeepRight Problemen"
                 },
                 "improveOSM": {
-                    "tooltip": "Missende data automatisch gedetecteerd door improveosm.org",
                     "title": "ImproveOSM Problemen"
                 },
                 "custom": {
@@ -897,16 +861,11 @@
                 }
             },
             "keepRight": {
-                "title": "KeepRight Fout",
-                "detail_title": "Fout",
                 "detail_description": "Beschrijving",
                 "comment": "Commentaar",
                 "comment_placeholder": "Voer commentaar in om te delen met andere gebruikers.",
-                "close": "Sluit (fout gefikst)",
-                "ignore": "Negeer (niet een fout)",
                 "save_comment": "Sla commentaar op",
                 "close_comment": "Sluit en voeg commentarieer toe",
-                "ignore_comment": "Negeer en voeg commentaar toe",
                 "error_parts": {
                     "this_node": "Dit knooppunt",
                     "this_way": "deze weg",
@@ -1317,11 +1276,9 @@
                 "type": "Je kunt op het objecttype klikken om het object te wijzigen in een ander type. Alles dat bestaat in de echte wereld kan aan OpenStreetMap toegevoegd worden. Er zijn dus duizenden objecttypes om uit te kiezen.",
                 "type_picker": "De typezoeker toont de meest voorkomende objecttypes, zoals parken, ziekenhuizen, restaurants, wegen en gebouwen. Je kan naar types zoeken door in de zoekbalk te typen. Klik op het \"{inspect} **Info**\"-icoontje naast het objecttype om meer uitleg te krijgen over het type.",
                 "fields_h": "Velden",
-                "fields_all_fields": "Het gedeelte \"Alle velden\" bevat alle details over een object die je zou kunnen bewerken. Alle velden zijn optioneel in OpenStreetMap, het is dus oké om een veld leeg te laten als je twijfelt of als het niet van toepassing lijkt.",
                 "fields_example": "Elk objecttype zal andere velden tonen. Een weg zal bijvoorbeeld velden laten zien over het type wegdek en de snelheidslimiet, maar een restaurant zal velden laten zien over de openingstijden en het type eten dat er geserveerd wordt.",
                 "fields_add_field": "Je kunt ook in het \"Voeg eigenschap toe\"-veld klikken om meer velden toe te voegen, zoals een beschrijving, Wikipedia-link en rolstoeltoegankelijkheidsinfo.",
                 "tags_h": "Tags",
-                "tags_all_tags": "Onder het velden gedeelte kun je het \"Alle tags\"-gedeelte uitklappen om de OpenStreetMap-*tags* voor het geselecteerde object te bekijken en bewerken. Elke tag bestaat uit een *sleutel* (Engels: *key*) en een *waarde*, die de echte waarden zijn die opgeslagen in OpenStreetMap. Een punt dat je in iD aanduidt als \"Restaurant\" met naam \"De Gouden Lepel\" is slechts een abstractie voor een node met de tags `amenity`=`restaurant` en `name`=`De Gouden Lepel`.",
                 "tags_resources": "Voor het bewerken van de tags van een object heb je wat meer kennis nodig van OpenStreetMap. Je moet de [OpenStreetMap Wiki](https://wiki.openstreetmap.org/wiki/Main_Page) raadplegen om te leren over tagging in OpenStreetMap. Op [Taginfo](https://taginfo.openstreetmap.org/) kan je statistieken zien over hoeveel keer elke tag momenteel in OpenStreetMap gebruikt wordt."
             },
             "points": {
@@ -1382,8 +1339,6 @@
                 "title": "Relaties",
                 "intro": "Een *relatie* is een speciaal soort object in OpenStreetMap dat andere objecten groepeert. De objecten die tot een relatie behoren worden haar *leden* genoemd (Engels: *members*) en elk lid kan een *rol* hebben in de relatie.",
                 "edit_relation_h": "Relaties bewerken",
-                "edit_relation": "Onderaan de objectbewerker kan je het \"Alle relaties\"-gedeelte uitklappen om te zien of het geselecteerde object lid is van een relatie. Je kunt vervolgens op de relatie klikken om de relatie te selecteren en te bewerken.",
-                "edit_relation_add": "Om een object aan een relatie toe te voegen, selecteer je het object en klik je op de {plus}-knop in het \"Alle relaties\"-gedeelte van de objectbewerker. Je kan nu kiezen uit een lijst van relaties in de buurt of een nieuwe maken met de optie \"Nieuwe relatie …\"",
                 "edit_relation_delete": "Met de \"{delete} **Verwijder**\"-knop verwijder je het geselecteerde object uit een relatie. Wanneer je alle leden van een relatie verwijdert, zal de relatie automatisch ook verwijderd worden.",
                 "maintain_relation_h": "Relaties onderhouden",
                 "maintain_relation": "Over het algemeen zal iD automatisch relaties onderhouden wanneer je bewerkingen uitvoert. Wees voorzichtig wanneer je objecten vervangt die onderdeel kunnen zijn van een relatie. Bijvoorbeeld als je een deel van een weg verwijdert en een nieuw deel tekent om het te vervangen, zal je het nieuwe deel moeten toevoegen aan dezelfde relaties (routes, afslagbeperkingen, enz.) als het origineel.",
@@ -1398,10 +1353,8 @@
                 "turn_restriction_editing": "In dat veld kan je een \"van\"-weg selecteren door erop te klikken. Vervolgens kan je zien of afslaan toegestaan is tot elke mogelijke \"naar\"-weg. Je kan op de icoontjes klikken om te kiezen tussen toegestaan en verboden. iD zal automatisch de nodige relaties aanmaken of verwijderen en de *from*-, *via*- en *to*-rollen instellen op basis van jouw keuzes.",
                 "route_h": "Routes",
                 "route": "Een *route*-relatie is een groep van een of meerdere lijnen die samen een routenetwerk vormen, zoals een bus- of treintraject of een snelweg.",
-                "route_add": "Om een object aan een routerelatie toe te voegen, selecteer je het object en klik je op de {plus}-knop in het \"Alle relaties\"-gedeelte van de objectbewerker. Je kan nu kiezen uit een lijst van relaties in de buurt of een nieuwe aanmaken met \"Nieuwe relatie …\"",
                 "boundary_h": "Grenzen",
-                "boundary": "Een of *grens*-relatie (Engels: *boundary*) is een groep van een of meerdere lijnen die samen een administratieve grens vormen.",
-                "boundary_add": "Om een object aan een grensrelatie toe te voegen, selecteer je het \nobject en klik je op de {plus}-knop in het \"Alle relaties\"-gedeelte van \nde objectbewerker. Je kan nu kiezen uit een lijst van relaties in de \nbuurt of een nieuwe aanmaken met \"Nieuwe relatie …\""
+                "boundary": "Een of *grens*-relatie (Engels: *boundary*) is een groep van een of meerdere lijnen die samen een administratieve grens vormen."
             },
             "notes": {
                 "title": "Kaartopmerkingen",
@@ -1445,7 +1398,6 @@
                 "title": "Kwaliteitscontrole",
                 "intro": "Tools voor *kwaliteitscontrole* (afgekort \"Q/A\", van het Engelse *quality assurance*) kunnen helpen bij het vinden van onjuiste tags, niet verbonden wegen en andere problemen met OpenStreetMap die dan door mappers verholpen kunnen worden. Om bestaande Q/A-problemen te bekijken, klik op het {data} **Kaartdata**-paneel om een specifieke Q/A-laag aan te zetten.",
                 "tools_h": "Gereedschappen",
-                "tools": "De volgende tools worden op dit moment ondersteund: [KeepRight](https://www.keepright.at/) en [ImproveOSM](https://improveosm.org/en/). In de toekomst worden [Osmose](https://osmose.openstreetmap.fr/) en meer Q/A-tools ondersteund.",
                 "issues_h": "Problemen behandelen",
                 "issues": "Q/A-problemen verhelpen is vergelijkbaar met notities. Klik op een marker om de details van het probleem te bekijken in de zijbalk. Elke tool heeft zijn eigen mogelijkheden, maar over het algemeen kun je opmerkingen plaatsen en/of het probleem sluiten."
             },
@@ -2296,9 +2248,6 @@
                         "hot_spring": "Warmwaterbron",
                         "onsen": "Japanse onsen"
                     }
-                },
-                "beauty": {
-                    "label": "Schoonheidsspecialist"
                 },
                 "bench": {
                     "label": "Zitbank"
@@ -3974,9 +3923,6 @@
                     "name": "Reclamezuil",
                     "terms": "reclamepaal,advertentiezuil,advertentiepaal"
                 },
-                "aerialway": {
-                    "name": "Kabelbaan"
-                },
                 "aerialway/cable_car": {
                     "name": "Kabelbaan met één of twee cabines",
                     "terms": "skilift"
@@ -4016,9 +3962,6 @@
                 "aerialway/rope_tow": {
                     "name": "Sleeplift",
                     "terms": "skilift,bugellift,handvat"
-                },
-                "aeroway": {
-                    "name": "Vliegveld"
                 },
                 "aeroway/aerodrome": {
                     "name": "Luchthaven",
@@ -7904,7 +7847,7 @@
             },
             "MAPNIK": {
                 "attribution": {
-                    "text": "© OpenStreetMap-bijdragers, CC-BY-SA"
+                    "text": "© OpenStreetMap contributors, CC-BY-SA 2.0"
                 },
                 "description": "De standaard OpenStreetMap-laag",
                 "name": "OpenStreetMap (Standaard)"
@@ -8075,20 +8018,6 @@
                 "description": "Annotatie-overlay is geleverd door basemap.at.",
                 "name": "basemap.at Overlay"
             },
-            "basemap.at-surface": {
-                "attribution": {
-                    "text": "basemap.at"
-                },
-                "description": "Oppervlaktelaag is geleverd door basemap.at.",
-                "name": "basemap.at Oppervlakte"
-            },
-            "basemap.at-terrain": {
-                "attribution": {
-                    "text": "basemap.at"
-                },
-                "description": "Terreinlaag is geleverd door basemap.at.",
-                "name": "basemap.at Terrein"
-            },
             "eufar-balaton": {
                 "attribution": {
                     "text": "EUFAR Balaton orthofoto's 2010"
@@ -8103,12 +8032,12 @@
                 "description": "GIS KIBAN 2500 van finds.jp. Goed voor het tekenen van tracés, maar iets ouder.",
                 "name": "Japan GSI KIBAN 2500"
             },
-            "gsi.go.jp": {
+            "gothenburg-citymap": {
                 "attribution": {
-                    "text": "GSI Japan"
+                    "text": "© Gemeente Gotenburg, CC0"
                 },
-                "description": "Japan GSI orthofoto. Gewoonlijk beter dan Bing, maar iets ouder.",
-                "name": "Japan GSI orthofoto"
+                "description": "Deze stadskaart is een overzichtskaart die Gotenburg beschrijft. Het bevat algemene informatie over landgebruik, communicatie, hydrografie, gebouwen, huisnummers en straatnamen, administratieve indeling en andere oriënterende teksten.",
+                "name": "Stadskaart Gotenburg"
             },
             "gsi.go.jp_airphoto": {
                 "attribution": {
@@ -8589,9 +8518,6 @@
             },
             "OSM-Utah": {
                 "name": "OpenStreetMap Utah"
-            },
-            "OSM-Vancouver-meetup": {
-                "name": "OpenStreetMap Vancouver"
             },
             "OSM-Wyoming": {
                 "name": "OpenStreetMap Wyoming"

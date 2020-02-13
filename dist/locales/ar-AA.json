@@ -52,12 +52,6 @@
             "change_tags": {
                 "annotation": ".العلامات المتغيرة"
             },
-            "circularize": {
-                "annotation": {
-                    "line": ".جعل خط دائري",
-                    "area": "جعل مساحة  دائرية"
-                }
-            },
             "orthogonalize": {
                 "title": "مربع"
             },

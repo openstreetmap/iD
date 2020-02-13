@@ -8,7 +8,10 @@
             "zoom_to": "fokusi",
             "copy": "kopii",
             "view_on": "montri ĉe {domain}",
-            "favorite": "elstarigi"
+            "favorite": "elstarigi",
+            "list": "listo",
+            "text": "teksto",
+            "deselect": "malelekti"
         },
         "toolbar": {
             "inspect": "Redaktilo",
@@ -51,19 +54,7 @@
                 "key": "N"
             },
             "add_preset": {
-                "title": "Aldoni “{feature}”-n",
-                "point": {
-                    "title": "Aldoni “{feature}”-n kiel punkton"
-                },
-                "line": {
-                    "title": "Aldoni “{feature}”-n kiel linion"
-                },
-                "area": {
-                    "title": "Aldoni “{feature}”-n kiel areon"
-                },
-                "building": {
-                    "title": "Aldoni “{feature}”-n kiel konstruaĵon"
-                }
+                "title": "Aldoni “{feature}”-n"
             },
             "browse": {
                 "title": "Foliumi",
@@ -116,20 +107,7 @@
             },
             "circularize": {
                 "title": "Rondigi",
-                "description": {
-                    "line": "Fari ĉi tiun linion ronda.",
-                    "area": "Fari ĉi tiun areon ronda."
-                },
-                "key": "O",
-                "annotation": {
-                    "line": "Rondigis linion.",
-                    "area": "Rondigis areon."
-                },
-                "not_closed": "Ĉi tiu ne povas esti rondigita, ĉar ĝi ne estas cikla.",
-                "too_large": "Ĉi tiu ne povas esti rondigita,  ĉar malsufiĉa parto de ĝi estas nune videbla.",
-                "connected_to_hidden": "Ĉi tiu ne povas esti rondigita, ĉar ĝi estas kunigita al kaŝita objekto.",
-                "not_downloaded": "Tio ĉi ne povas esti rondigita, ĉar parto de ĝi ankoraŭ ne estas elŝutita.",
-                "already_circular": "Tio ĉi ne povas esti rondigita, ĉar ĝi jam estas cirkla."
+                "key": "O"
             },
             "orthogonalize": {
                 "title": "Kvadratigi",
@@ -683,10 +661,11 @@
             "show_more": "Montri pli",
             "view_on_osm": "Montri ĉe openstreetmap.org",
             "view_on_keepRight": "Montri ĉe keepright.at",
-            "all_fields": "Ĉiuj kampoj",
-            "all_tags": "Ĉiuj etikedoj",
-            "all_members": "Ĉiuj anoj",
-            "all_relations": "Ĉiuj rilatoj",
+            "fields": "Kampoj",
+            "tags_count": "Etikedoj ({count})",
+            "members_count": "Anoj ({count})",
+            "relations_count": "Rilatoj ({count})",
+            "features_count": "Objektoj ({count})",
             "add_to_relation": "Aldoni al rilato",
             "new_relation": "Nova rilato…",
             "choose_relation": "Elektu superan rilaton",
@@ -697,18 +676,19 @@
             "edit_reference": "redakti/traduki",
             "wiki_reference": "Montri dokumentaron",
             "wiki_en_reference": "Montri dokumenteron en la angla",
+            "key_value": "ŝlosilo=valoro",
+            "multiple_values": "Pluraj valoroj",
             "hidden_preset": {
                 "manual": "{features} estas kaŝitaj. Vi povas aktivigi ilin per la panelo de map-datumoj.",
                 "zoom": "{features} estas kaŝitaj. Pligrandigu por vidigi ilin."
             },
-            "back_tooltip": "Ŝanĝi objekton",
             "remove": "Forigi",
             "search": "Serĉi",
-            "multiselect": "Elektitaj objektoj",
             "unknown": "Nekonata",
             "incomplete": "<ne elŝutita>",
             "feature_list": "Serĉi objektojn",
             "edit": "Redakti objekton",
+            "edit_features": "Redakti objektojn",
             "check": {
                 "yes": "Jes",
                 "no": "Ne",
@@ -729,7 +709,7 @@
             "location": "Pozicio",
             "add_fields": "Aldoni kampon:",
             "lock": {
-                "suggestion": "La kampo “{label}” estas neredaktebla, ĉar estas etikedo de Vikidatumoj. Vi povas forigi ĝin aŭ redakti aliajn etikedojn en la sekcio “ĉiuj etikedoj”."
+                "suggestion": "La kampo “{label}” estas neredaktebla, ĉar estas etikedo de Vikidatumoj. Vi povas forigi ĝin aŭ redakti la etikedojn en la sekcio “etikedoj”."
             }
         },
         "background": {
@@ -759,7 +739,7 @@
                 "description": "Montri panelon de detaloj",
                 "tooltip": "Montri pliajn informojn pri fotaro."
             },
-            "fix_misalignment": "Ĝustigi fotaran deŝovon",
+            "fix_misalignment": "Deŝovo de fotaro",
             "offset": "Trenu ie ajn ene griza kampo sube por korekti fotaran deŝovon aŭ entajpu valorojn de deŝovo en metroj."
         },
         "map_data": {
@@ -777,11 +757,9 @@
                     "title": "OpenStreetMap-rimarkoj"
                 },
                 "keepRight": {
-                    "tooltip": "Aŭtomate trovitajn map-erarojn el keepright.at",
                     "title": "KeepRight-eraroj"
                 },
                 "improveOSM": {
-                    "tooltip": "Mankantaj datumoj aŭtomate trovitaj de ImproveOSM.org",
                     "title": "ImproveOSM-eraroj"
                 },
                 "custom": {
@@ -1063,16 +1041,11 @@
                 }
             },
             "keepRight": {
-                "title": "KeepRight-eraro",
-                "detail_title": "Eraro",
                 "detail_description": "Priskribo",
                 "comment": "Komento",
                 "comment_placeholder": "Skribu komenton por sciigi aliajn uzantojn.",
-                "close": "Fermi (eraro riparita)",
-                "ignore": "Ignori (ne eraro)",
                 "save_comment": "Konservi komenton",
                 "close_comment": "Fermi kaj komenti",
-                "ignore_comment": "Ignori kaj komenti",
                 "error_parts": {
                     "this_node": "tiu ĉi nodo",
                     "this_way": "tiu ĉi linio",
@@ -1526,11 +1499,11 @@
                 "type": "Vi povas klaki specon de objekto por ŝanĝi ĝin al alia. Ĉio, kio ekzistas en la reala mondo povas esti aldonita al OpenStreetMap, do estas miloj da specoj de elekteblaj objektoj.",
                 "type_picker": "La spec-elektilo montras la plej popularajn specojn de objektoj, kiel parkojn, malsanulejojn, restoraciojn, vojojn kaj konstruaĵojn. Vi povas serĉi ion ajn per entajpi ĝin en serĉujon. Vi ankaŭ povas klaki la piktogramon {inspect} **informojn** ĉe speco de objekto por sciigi pli pri ĝi.",
                 "fields_h": "Kampoj",
-                "fields_all_fields": "La sekcio “ĉiuj kampoj“ enhavas ĉiujn redakteblajn detalojn pri la objekto. En OpenStreetMap ĉiuj kampoj estas malnepraj, do estas ĝuste lasi ilin malplenaj se vi malcertas.",
+                "fields_all_fields": "La sekcio “kampoj“ enhavas ĉiujn redakteblajn detalojn pri la objekto. En OpenStreetMap ĉiuj kampoj estas malnepraj, do estas ĝuste lasi ilin malplenaj se vi malcertas.",
                 "fields_example": "Ĉe ĉiu objekto vidiĝos diversaj kampoj. Ekzemple, ĉe vojo vidiĝos kampoj pri ĝia pavimo kaj rapidlimo, tamen ĉe restoracio vidiĝos kampoj pri manĝospeco kaj horoj de malfermado.",
                 "fields_add_field": "Vi povas klaki rapid-aldonan menuon “aldoni kampojn” por aldoni pliajn kampojn, kiel priskribon, Vikipedian ligilon, rulseĝan alireblecon kaj pli.",
                 "tags_h": "Etikedoj",
-                "tags_all_tags": "Malsupre de kampa sekcio vi povas etendi la sekcion “ĉiuj kampoj” por redakti ĉiujn OpenStreetMap-ajn etikedojn por la elektita objekto. Ĉiu etikedo konsistas el “ŝlosilo” kaj “valoro”, datumoj difinantaj ĉiujn objektojn konservitajn en OpenStreetMap.",
+                "tags_all_tags": "Sube de la sekcio “kampoj” vi povas etendi la sekcion “kampoj” por redakti ĉiujn OpenStreetMap-etikedojn por la elektita objekto. Ĉiu etikedo konsistas el “ŝlosilo” kaj “valoro”: datumoj difinantaj ĉiujn objektojn konservitajn en OpenStreetMap.",
                 "tags_resources": "Redakti etikedojn de objekto bezonas iom da scio pri OpenStreetMap. Vi devus konatiĝi kun informaroj kiel [OpenStreetMap-vikio](https://wiki.openstreetmap.org/wiki/Eo:Main_Page) aŭ [Taginfo](https://taginfo.openstreetmap.org/) por sciigi pli pri akceptataj manieroj de etikedado en OpenStreetMap."
             },
             "points": {
@@ -1591,8 +1564,8 @@
                 "title": "Rilatoj",
                 "intro": "*Rilato* estas speciala speco de objekto en OpenStreetMap, kiu grupigas aliajn objektojn. Objektojn apartenantajn al rilato oni nomas kiel *anojn* kaj ĉiu ano povas havi *rolon* en la rilato.",
                 "edit_relation_h": "Redakti rilatojn",
-                "edit_relation": "Malsupre de la objekt-redaktilo vi povas etendi la sekcion *ĉiuj rilatoj* por vidi ĉu la elektita objekto estas ano de iu rilato. Vi ankaŭ povas klaki la rilaton por elekti kaj redakti ĝin.",
-                "edit_relation_add": "Por aldoni objekton al rilato, elektu ĝin, sekve klaku la butonon {plus} aldoni rilaton en la sekcio “ĉiuj rilatoj” de la objekt-redaktilo. Vi povas elekti el listo de proksimaj rilatoj aŭ krei la novan rilaton.",
+                "edit_relation": "Malsupre de la objekt-redaktilo vi povas etendi la sekcion *rilatoj* por vidi ĉu la elektita objekto estas ano de iu rilato. Vi ankaŭ povas klaki la rilaton por elekti kaj redakti ĝin.",
+                "edit_relation_add": "Por aldoni objekton al rilato, elektu ĝin, sekve klaku la butonon {plus} aldoni rilaton en la sekcio “rilatoj” de la objekt-redaktilo. Vi povas elekti el listo de proksimaj rilatoj aŭ krei novan rilaton.",
                 "edit_relation_delete": "Vi ankaŭ povas klaki la butonon {delete} **forigi** por forigi la elektitan objekton el la rilato. Se vi forigos ĉiuj anoj de la rilato, la rilato aŭtomate foriĝos.",
                 "maintain_relation_h": "Administri rilatojn",
                 "maintain_relation": "Pri plejparto da rilatoj iD administros aŭtomate dum kiam vi redaktos. Vi devus esti singarda dum anstataŭigi objektojn kiujn povas esti anoj de rilatoj. Ekzemple se vi forigos fragmenton de vojo kaj desegnos novan fragmenton por anstataŭigi ĝin, vi devus aldoni novan fragmenton al la samaj rilatoj (kursoj, turnaj limigoj, ktp) kiel la eksa.",
@@ -1607,10 +1580,10 @@
                 "turn_restriction_editing": "Ĉe la kampo “turnaj limigoj”, klaku por elekti vojon “el” kaj rigardu ĉu turnoj estas permesataj aŭ malpermesataj al vojoj “al”. Vi povas klaki piktogramojn de turnoj por baskuli ilin inter permesata kaj malpermesata. iD aŭtomate kreos rilatojn kaj agordos rolojn “el”, “tra” kaj “al” depende de via elektoj.",
                 "route_h": "Kursoj",
                 "route": "Rilato “kurso” estas grupo da unu aŭ pli liniaj objektoj kiuj kune formas kursan reton, kiel linion aŭtobusan, fervojan aŭ aŭtovojon.",
-                "route_add": "Por aldoni objekton al kursan rilaton, elektu ĝin kaj ŝovumu suben ĝis la sekcio “ĉiuj rilatoj”  de la odjekt-redaktilo, sekve klaku la butonon {plus} aldoni por aldoni tiun ĉi objekton al proksima ekzistanta rilato aŭ al nova rilato.",
+                "route_add": "Por aldoni objekton al kursan rilaton, elektu ĝin kaj ŝovumu suben ĝis la sekcio “rilatoj”  de la objekt-redaktilo, sekve klaku la butonon {plus} aldoni por aldoni tiun ĉi objekton al proksima ekzistanta rilato aŭ al nova rilato.",
                 "boundary_h": "Limoj",
                 "boundary": "Rilato “limo” estas grupo da unu aŭ pli liniaj objektoj kiuj kune formas administran limon.",
-                "boundary_add": "Por aldoni objekton al liman rilaton, elektu ĝin kaj ŝovumu suben ĝis la sekcio “ĉiuj rilatoj”  de la odjekt-redaktilo, sekve klaku la butonon {plus} aldoni por aldoni tiun ĉi objekton al proksima ekzistanta rilato aŭ al nova rilato."
+                "boundary_add": "Por aldoni objekton al liman rilaton, elektu ĝin kaj ŝovumu suben ĝis la sekcio “rilatoj”  de la objekt-redaktilo, sekve klaku la butonon {plus} aldoni por aldoni tiun ĉi objekton al proksima ekzistanta rilato aŭ al nova rilato."
             },
             "notes": {
                 "title": "Rimarkoj",
@@ -1654,7 +1627,6 @@
                 "title": "Certigo pri kvalito",
                 "intro": "Iloj por certigo pri kvalito povas trovi malĝustajn etikedojn, nekonektitajn vojojn kaj aliajn problemojn pri OpenStreetMap, kiuj mapigistoj povas ripari. Por vidigi ekzistajn problemojn pri kvalito, klaku la panelon {data} **map-datumoj** por vidigi specifan tavolon de problemoj pri kvalito.",
                 "tools_h": "Iloj",
-                "tools": "La jenaj iloj estas nuntempe disponeblaj: [KeepRight](https://www.keepright.at/) kaj [ImproveOSM](https://improveosm.org/). Esperu al iD subteni estontece [Osmose](https://osmose.openstreetmap.fr/) kaj pliajn ilojn.",
                 "issues_h": "Pritrakti problemojn",
                 "issues": "Pritrakti problemojn pri kvalito estas simila al pritrakti rimarkojn. Klaku la markon por vidigi detalojn pri la problemo sur la flankbreto. Ĉiu ilo karakterizas per siaj propraj kapabloj, sed ĝenerale vi povas komenti aŭ fermi problemon."
             },
@@ -2780,9 +2752,6 @@
                         "hot_spring": "Tervarma akvofonto",
                         "onsen": "Japana onsen-o"
                     }
-                },
-                "beauty": {
-                    "label": "Servo(j)"
                 },
                 "bench": {
                     "label": "Benko",
@@ -4560,9 +4529,6 @@
                     "name": "Reklam-kolono",
                     "terms": "reklamkolono,kolumno,afiŝkolono"
                 },
-                "aerialway": {
-                    "name": "Kablotransporto"
-                },
                 "aerialway/cable_car": {
                     "name": "Telfero unu-vagoneta (alterna)",
                     "terms": "telfero,kablovojo,aertelfero"
@@ -4606,9 +4572,6 @@
                 "aerialway/zip_line": {
                     "name": "Ŝnurega deglitejo",
                     "terms": "ŝnura kurso,tirola kablotransporto"
-                },
-                "aeroway": {
-                    "name": "Aertransporto"
                 },
                 "aeroway/aerodrome": {
                     "name": "Aerodromo",
@@ -9195,9 +9158,6 @@
                 "name": "Tutmonda fotaro de Esri (pli klara) Beta"
             },
             "MAPNIK": {
-                "attribution": {
-                    "text": "© kontribuintoj de OpenStreetMap, CC-BY-SA"
-                },
                 "description": "Norma map-tavolo de OpenStreetMap.",
                 "name": "OpenStreetMap (norma mapo)"
             },
@@ -9363,20 +9323,6 @@
                 "description": "Surtavolo de notoj de basemap.at.",
                 "name": "basemap.at surtavolo"
             },
-            "basemap.at-surface": {
-                "attribution": {
-                    "text": "basemap.at"
-                },
-                "description": "Tavolo de supraĵo liverata de basemap.at.",
-                "name": "basemap.at supraĵo"
-            },
-            "basemap.at-terrain": {
-                "attribution": {
-                    "text": "basemap.at"
-                },
-                "description": "Tavolo de altreliefo liverata de basemap.at.",
-                "name": "basemap.at altreliefo"
-            },
             "eufar-balaton": {
                 "attribution": {
                     "text": "EUFAR Balaton ortofotó 2010"
@@ -9390,13 +9336,6 @@
                 },
                 "description": "GSI Kiban 2500 de finds.jp. Bona por mapigi, sed malpli aktuala.",
                 "name": "Japanujo GSI KIBAN 2500"
-            },
-            "gsi.go.jp": {
-                "attribution": {
-                    "text": "GSI Japanujo"
-                },
-                "description": "Ortfotmapo de GSI Japanujo. Kutime pli akurata ol Bing, sed malpli nova.",
-                "name": "Ortfotmapo GSI Japanujo (korektita)"
             },
             "gsi.go.jp_airphoto": {
                 "attribution": {
@@ -9829,10 +9768,6 @@
             "OSM-US-Slack": {
                 "name": "OpenStreetMap US ĉe Slack",
                 "description": "Bonvenon ĉiuj! Aliĝu al ni ĉe {signupUrl}"
-            },
-            "OSM-Vancouver-meetup": {
-                "name": "OpenStreetMap Vancouver",
-                "description": "Mapigistoj kaj uzantoj de OpenStreetMap en Vankuvero, Brita Kolumbio"
             },
             "OSM-help": {
                 "name": "Helpo pri OpenStreetMap",

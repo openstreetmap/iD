@@ -71,18 +71,7 @@
             },
             "circularize": {
                 "title": "Circularise",
-                "description": {
-                    "line": "Make this line circular.",
-                    "area": "Make this area circular."
-                },
-                "key": "O",
-                "annotation": {
-                    "line": "Made a line circular.",
-                    "area": "Made an area circular."
-                },
-                "not_closed": "This can't be made circular because it's not a loop.",
-                "too_large": "This can't be made circular because not enough of it is currently visible.",
-                "connected_to_hidden": "This can't be made circular because it is connected to a hidden feature."
+                "key": "O"
             },
             "orthogonalize": {
                 "title": "Square"
@@ -427,18 +416,12 @@
         "inspector": {
             "show_more": "Show More",
             "view_on_osm": "View on openstreetmap.org",
-            "all_fields": "All fields",
-            "all_tags": "All tags",
-            "all_members": "All members",
-            "all_relations": "All relations",
             "new_relation": "New relation...",
             "role": "Role",
             "choose": "Select feature type",
             "results": "{n} results for {search}",
-            "back_tooltip": "Change feature",
             "remove": "Remove",
             "search": "Search",
-            "multiselect": "Selected features",
             "unknown": "Unknown",
             "incomplete": "<not downloaded>",
             "feature_list": "Search features",
@@ -484,7 +467,6 @@
                 "tooltip": "Show a zoomed out map to help locate the area currently displayed.",
                 "key": "/"
             },
-            "fix_misalignment": "Adjust imagery offset",
             "offset": "Drag anywhere in the gray area below to adjust the imagery offset, or enter the offset values in meters."
         },
         "map_data": {
@@ -698,11 +680,9 @@
                 "type": "You can click on the feature type to change the feature to a different type. Everything that exists in the real world can be added to OpenStreetMap, so there are thousands of feature types to choose from.",
                 "type_picker": "The type picker displays the most common feature types, such as parks, hospitals, restaurants, roads, and buildings. You can search for anything by typing what you're looking for in the search box. You can also click the {inspect} **Info** icon next to the feature type to learn more about it.",
                 "fields_h": "Fields",
-                "fields_all_fields": "The \"All fields\" section contains all of the feature's details that you may edit. In OpenStreetMap, all of the fields are optional, and it's OK to leave a field blank if you are unsure.",
                 "fields_example": "Each feature type will display different fields. For example, a road may display fields for its surface and speed limit, but a restaurant may display fields for the type of food it serves and the hours it is open.",
                 "fields_add_field": "You can also click the \"Add field\" dropdown to add more fields, such as a description, Wikipedia link, wheelchair access, and more.",
                 "tags_h": "Tags",
-                "tags_all_tags": "Below the fields section, you can expand the \"All tags\" section to edit any of the OpenStreetMap *tags* for the selected feature. Each tag consists of a *key* and *value*, data elements that define all of the features stored in OpenStreetMap.",
                 "tags_resources": "Editing a feature's tags requires intermediate knowledge about OpenStreetMap. You should consult resources like the [OpenStreetMap Wiki](https://wiki.openstreetmap.org/wiki/Main_Page) or [Taginfo](https://taginfo.openstreetmap.org/) to learn more about accepted OpenStreetMap tagging practices."
             },
             "points": {
@@ -763,8 +743,6 @@
                 "title": "Relations",
                 "intro": "A *relation* is a special type of feature in OpenStreetMap that groups together other features. The features that belong to a relation are called *members*, and each member can have a *role* in the relation.",
                 "edit_relation_h": "Editing Relations",
-                "edit_relation": "At the bottom of the feature editor, you can expand the \"All relations\" section to see if the selected feature is a member of any relations. You can then click on the relation to select and edit it.",
-                "edit_relation_add": "To add a feature to a relation, select the feature, then click the {plus} add button in the \"All relations\" section of the feature editor. You can choose from a list of nearby relations, or choose the \"New relation...\" option.",
                 "edit_relation_delete": "You can also click the {delete} **Delete** button to remove the selected feature from the relation. If you remove all of the members from a relation, the relation will be deleted automatically.",
                 "maintain_relation_h": "Maintaining Relations",
                 "maintain_relation": "For the most part, iD will maintain relations automatically as you edit. You should take care when replacing features that might be members of relations. For example if you delete a section of road and draw a new section of road to replace it, you should add the new section to the same relations (routes, turn restrictions, etc.) as the original.",
@@ -779,10 +757,8 @@
                 "turn_restriction_editing": "In the \"Turn Restrictions\" field, click to select a \"from\" road, and see whether turns are allowed or restricted to any of the \"to\" roads. You can click on the turn icons to toggle them between allowed and restricted. iD will create relations automatically and set the from, via, and to roles based on your choices.",
                 "route_h": "Routes",
                 "route": "A *route* relation is a group of one or more line features that together form a route network, like a bus route, train route, or highway route.",
-                "route_add": "To add a feature to a route relation, select the feature and scroll down to the \"All relations\" section of the feature editor, then click the {plus} add button to add this feature to a nearby existing relation or a new relation.",
                 "boundary_h": "Boundaries",
-                "boundary": "A *boundary* relation is a group of one or more line features that together form an administrative boundary.",
-                "boundary_add": "To add a feature to a boundary relation, select the feature and scroll down to the \"All relations\" section of the feature editor, then click the {plus} add button to add this feature to a nearby existing relation or a new relation."
+                "boundary": "A *boundary* relation is a group of one or more line features that together form an administrative boundary."
             },
             "imagery": {
                 "title": "Background Imagery",
@@ -2656,9 +2632,6 @@
                 "advertising/column": {
                     "name": "Advertising Column"
                 },
-                "aerialway": {
-                    "name": "Aerialway"
-                },
                 "aerialway/cable_car": {
                     "name": "Cable Car"
                 },
@@ -2689,9 +2662,6 @@
                 },
                 "aerialway/rope_tow": {
                     "name": "Rope Tow Lift"
-                },
-                "aeroway": {
-                    "name": "Aeroway"
                 },
                 "aeroway/aerodrome": {
                     "name": "Airport"
@@ -5259,9 +5229,6 @@
                 "name": "Esri World Imagery (Clarity) Beta"
             },
             "MAPNIK": {
-                "attribution": {
-                    "text": "© OpenStreetMap contributors, CC-BY-SA"
-                },
                 "description": "The default OpenStreetMap layer.",
                 "name": "OpenStreetMap (Standard)"
             },

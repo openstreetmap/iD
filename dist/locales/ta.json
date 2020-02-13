@@ -61,15 +61,7 @@
             },
             "circularize": {
                 "title": "வட்டமிடுக",
-                "description": {
-                    "line": "கோட்டினை வட்டமாக்கு",
-                    "area": "இந்தப் பகுதியை வட்டமாக்குக."
-                },
-                "key": "O",
-                "annotation": {
-                    "line": "கோடு வட்டமாக்கப்பட்டது.",
-                    "area": "ஒருப் பகுதி வட்டமாக்கப்பட்டது."
-                }
+                "key": "O"
             },
             "orthogonalize": {
                 "title": "சதுரம்"
@@ -202,12 +194,8 @@
         "inspector": {
             "show_more": "மேலும் காட்டு",
             "view_on_osm": "openstreetmap.org இல் பார்",
-            "all_tags": "எல்லாக் குறிச்சொற்களும்",
-            "all_members": "எல்லா உறுப்பினர்களும்",
-            "all_relations": "அனைத்து உறவுகள்",
             "new_relation": "புது தொடர்பு...",
             "role": "செயல்பங்கு",
-            "back_tooltip": "அம்சத்தைப் மாற்ற",
             "remove": "நீக்கு",
             "search": "தேடு",
             "incomplete": "<பதிவிறக்கம் செய்யப்படவில்லை>",
@@ -2445,9 +2433,6 @@
                 }
             },
             "MAPNIK": {
-                "attribution": {
-                    "text": "© OpenStreetMap பங்களிப்பாளர்கள், CC-BY-SA"
-                },
                 "name": "OpenStreetMap (வழக்கமான)"
             },
             "Mapbox": {
@@ -2521,11 +2506,6 @@
             "basemap.at-orthofoto": {
                 "attribution": {
                     "text": "basemap.at"
-                }
-            },
-            "gsi.go.jp": {
-                "attribution": {
-                    "text": "GSI சப்பான்"
                 }
             },
             "gsi.go.jp_std_map": {
@@ -2719,9 +2699,6 @@
             },
             "OSM-US": {
                 "name": "OpenStreetMap அமெரிக்கா"
-            },
-            "OSM-Vancouver-meetup": {
-                "name": "OpenStreetMap வேன்கூவர்"
             },
             "OSM-Wyoming": {
                 "name": "OpenStreetMap வொயோமிங்"

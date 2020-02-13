@@ -86,20 +86,7 @@
             },
             "circularize": {
                 "title": "Daireleştir",
-                "description": {
-                    "line": "Bu çizgiyi daireleştir.",
-                    "area": "Bu alanı daireleştir."
-                },
-                "key": "O",
-                "annotation": {
-                    "line": "Çizgi daireleştirildi.",
-                    "area": "Alan daireleştirildi."
-                },
-                "not_closed": "Bu daireleştirilemez çünkü kapalı bir nesne değil.",
-                "too_large": "Bu daireleştirilemez, çünkü yeteri kadarı görünür halde değil.",
-                "connected_to_hidden": "Bu nesne daireleştirilemez, çünkü gizli bir nesneye bağlı.",
-                "not_downloaded": "Bazı bölümleri henüz indirilmediğinden bu dairesel hale getirilemez.",
-                "already_circular": "Bu dairesel yapılamaz çünkü zaten daireseldir."
+                "key": "O"
             },
             "orthogonalize": {
                 "title": "Kareleştir",
@@ -500,10 +487,6 @@
             "show_more": "Daha Fazla Göster",
             "view_on_osm": "OpenStreetMap.org sayfasında bak",
             "view_on_keepRight": "keepright.at sitesinde görüntüle",
-            "all_fields": "Tüm detaylar",
-            "all_tags": "Tüm etiketler",
-            "all_members": "Tüm üyeler",
-            "all_relations": "Tüm kümeler",
             "add_to_relation": "Bir kümeye ekle",
             "new_relation": "Yeni küme...",
             "choose_relation": "Bir küme seçin",
@@ -517,10 +500,8 @@
                 "manual": "{features} gizlendi. Harita Verileri bölmesinde bunları etkinleştirin.",
                 "zoom": "{features} gizlendi. Etkinleştirmek için yakınlaştırın."
             },
-            "back_tooltip": "Türü değiştir",
             "remove": "Kaldır",
             "search": "Ara",
-            "multiselect": "Seçilen nesneler",
             "unknown": "Bilinmiyor. Lütfen doldur.",
             "incomplete": "<indirilmedi>",
             "feature_list": "Nesne ara",
@@ -570,7 +551,6 @@
             "panel": {
                 "description": "Ayrıntı Panelini Göster"
             },
-            "fix_misalignment": "Uydu görüntüsünü ayarla",
             "offset": "Uydu görüntüsünü ayarlamak için gri kısımda herhangi bir yere taşı ya da göreceli konum değerlerini metre cinsinden gir."
         },
         "map_data": {
@@ -588,11 +568,9 @@
                     "title": "OpenStreetMap'ın Notları"
                 },
                 "keepRight": {
-                    "tooltip": "Keepright.at adresinden otomatik olarak algılanan harita sorunları",
                     "title": "KeepRight Sorunları"
                 },
                 "improveOSM": {
-                    "tooltip": "Improeosm.org tarafından otomatik olarak eksik veriler tespit edildi",
                     "title": "ImproveOSM Sorunları"
                 },
                 "custom": {
@@ -2874,9 +2852,6 @@
                     "name": "Reklam Panosu",
                     "terms": "Reklam Panosu, Bilbord"
                 },
-                "aerialway": {
-                    "name": "Teleferik Yolu"
-                },
                 "aerialway/cable_car": {
                     "name": "Teleferik",
                     "terms": "Teleferik"
@@ -2916,9 +2891,6 @@
                 "aerialway/rope_tow": {
                     "name": "Çekme Halat Teleferik",
                     "terms": "Çekme Halat Teleferik"
-                },
-                "aeroway": {
-                    "name": "Hava Yolu"
                 },
                 "aeroway/aerodrome": {
                     "name": "Havaalanı",
@@ -6147,9 +6119,6 @@
                 "name": "Esri Uydu Görüntüleri (Net) Beta"
             },
             "MAPNIK": {
-                "attribution": {
-                    "text": "© OpenStreetMap destekçileri, CC-BY-SA"
-                },
                 "description": "Varsayılan OpenStreetMap katmanı.",
                 "name": "OpenStreetMap (Klasik)"
             },

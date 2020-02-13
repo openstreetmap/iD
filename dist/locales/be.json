@@ -50,19 +50,7 @@
                 "key": "N"
             },
             "add_preset": {
-                "title": "Дадаць {feature}",
-                "point": {
-                    "title": "Дадайце {feature} у якасці кропкі"
-                },
-                "line": {
-                    "title": "Дадайце {feature} у якасці лініі"
-                },
-                "area": {
-                    "title": "Дадайце {feature} у якасці палігона"
-                },
-                "building": {
-                    "title": "Дадайце {feature} у якасці будынка"
-                }
+                "title": "Дадаць {feature}"
             },
             "browse": {
                 "title": "Агляд",
@@ -115,19 +103,7 @@
             },
             "circularize": {
                 "title": "Закругліць",
-                "description": {
-                    "line": "Ператварыць лінію ў акружнасць.",
-                    "area": "Ператварыць палігон у акружнасць."
-                },
-                "key": "О",
-                "annotation": {
-                    "line": "Лінія была пераўтворана ў акружнасць.",
-                    "area": "Палігон быў пераўтвораны ў акружнасць."
-                },
-                "not_closed": "Аб'ект нельга ператварыць у акружнасць - ён не замкнуты.",
-                "too_large": "Аб'ект нельга ператварыць у акружнасць, паколькі большая яго частка схаваная",
-                "connected_to_hidden": "Немагчыма пераўтварыць у акружнасць, бо маецца злучэнне са схаваным аб'ектам.",
-                "not_downloaded": "Аб'ект нельга ператварыць у акружнасць - яго часткі яшчэ не загружаныя."
+                "key": "О"
             },
             "orthogonalize": {
                 "title": "Выраўнаваць вуглы",
@@ -270,8 +246,7 @@
             },
             "panel": {
                 "description": "Паказаць дэталі"
-            },
-            "fix_misalignment": "Налады зруху фону"
+            }
         },
         "map_data": {
             "title": "Даныя карты",
@@ -389,9 +364,6 @@
                 "name": "сусветныя здымкі Esri (Clarity)"
             },
             "MAPNIK": {
-                "attribution": {
-                    "text": "© OpenStreetMap contributors, CC-BY-SA"
-                },
                 "description": "Слой OpenStreetMap па змаўчанні.",
                 "name": "OpenStreetMap (Стандартны)"
             },
@@ -551,20 +523,6 @@
                 "description": "Слой з подпісамі ад basemap.at.",
                 "name": "basemap.at - дапаможны слой"
             },
-            "basemap.at-surface": {
-                "attribution": {
-                    "text": "basemap.at"
-                },
-                "description": "Паверхневы слой basemap.at.",
-                "name": "basemap.at Паверхня"
-            },
-            "basemap.at-terrain": {
-                "attribution": {
-                    "text": "basemap.at"
-                },
-                "description": "Ландшафтны слой ад basemap.at.",
-                "name": "basemap.at Ландшафт"
-            },
             "eufar-balaton": {
                 "attribution": {
                     "text": "EUFAR Balaton ortofotó 2010"
@@ -578,13 +536,6 @@
                 },
                 "description": "GSI Kiban 2500 ад find.jp. Падыходзіць для картаграфавання, але крыху састарэла.",
                 "name": "Japan GSI KIBAN 2500"
-            },
-            "gsi.go.jp": {
-                "attribution": {
-                    "text": "GSI Japan"
-                },
-                "description": "Japan GSI ортаздымкі. Падыходзіць для картаграфавання, але крыху састарэла.",
-                "name": "Japan GSI ортаздымкі"
             },
             "gsi.go.jp_airphoto": {
                 "attribution": {

@@ -78,18 +78,7 @@
             },
             "circularize": {
                 "title": "Muuda ringikujuliseks",
-                "description": {
-                    "line": "Tee see joon ringikujuliseks.",
-                    "area": "Tee see ala ringikujuliseks."
-                },
-                "key": "O",
-                "annotation": {
-                    "line": "Joon tehtud ringikujuliseks.",
-                    "area": "Ala tehtud ringikujuliseks."
-                },
-                "not_closed": "Seda ei saa teha ringikujuliseks, kuna see ei ole silmus.",
-                "too_large": "Seda ei saa teha ringikujuliseks, kuna see ei ole täielikult nähtaval.",
-                "connected_to_hidden": "Seda ei saa teha ringikujuliseks, kuna see on ühendatud peidetud objektiga."
+                "key": "O"
             },
             "orthogonalize": {
                 "title": "Nurgad täisnurkseks"
@@ -388,20 +377,14 @@
             "show_more": "Näita rohkem",
             "view_on_osm": "Vaata asukohas openstreetmap.org",
             "view_on_keepRight": "Vaata lehel keepright.at",
-            "all_fields": "Kõik väljad",
-            "all_tags": "Kõik sildid",
-            "all_members": "Kõik liikmed",
-            "all_relations": "Kõik relatsioonid",
             "add_to_relation": "Lisa relatsiooni",
             "new_relation": "Uus relatsioon...",
             "choose_relation": "Vali vanemrelatsioon",
             "role": "Roll",
             "choose": "Vali objekti liik",
             "results": "{n} tulemust otsingule {search}",
-            "back_tooltip": "Muuda objekti",
             "remove": "Eemalda",
             "search": "Otsi",
-            "multiselect": "Valitud objektid",
             "unknown": "Teadmata",
             "incomplete": "<alla laadimata>",
             "feature_list": "Otsi objekte",
@@ -444,7 +427,6 @@
                 "description": "Näita pisikaarti",
                 "tooltip": "Näita väljasuumitud kaarti, et aidata tuvastada kuvatud ala."
             },
-            "fix_misalignment": "Korrigeeri pildimaterjali nihet",
             "offset": "Lohista alumist halli kasti, et sättida kattekaardi nihet või siseta nihe meetrites."
         },
         "map_data": {
@@ -461,11 +443,9 @@
                     "title": "OpenStreetMapi märked"
                 },
                 "keepRight": {
-                    "tooltip": "Automaatselt tuvastatud keepright.at-i kaardiprobleemid",
                     "title": "KeepRighti probleemid"
                 },
                 "improveOSM": {
-                    "tooltip": "Puuduvad andmed, mille improveosm.org on automaatselt avastatud",
                     "title": "ImproveOSM-i probleemid"
                 },
                 "custom": {
@@ -606,16 +586,11 @@
         "full_screen": "Lülita täisekraanile",
         "QA": {
             "keepRight": {
-                "title": "KeepRight Viga",
-                "detail_title": "Viga",
                 "detail_description": "Kirjeldus",
                 "comment": "Kommentaar",
                 "comment_placeholder": "Lisa kommentaar, mida teistega jagada.",
-                "close": "Sulge (Viga Parandatud)",
-                "ignore": "Ignoreeri (Ei Ole Viga)",
                 "save_comment": "Salvesta Kommentaar",
                 "close_comment": "Sulge ja Kommenteeri",
-                "ignore_comment": "Ignoreeri ja Kommenteeri",
                 "error_parts": {
                     "this_relation": "see relatsioon"
                 },

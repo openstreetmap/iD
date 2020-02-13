@@ -50,19 +50,7 @@
                 "key": "J"
             },
             "add_preset": {
-                "title": "{feature} hozzáadása",
-                "point": {
-                    "title": "{feature} hozzáadása pontként"
-                },
-                "line": {
-                    "title": "{feature} hozzáadása vonalként"
-                },
-                "area": {
-                    "title": "{feature} hozzáadása területként"
-                },
-                "building": {
-                    "title": "{feature} hozzáadása épületként"
-                }
+                "title": "{feature} hozzáadása"
             },
             "browse": {
                 "title": "Böngészés",
@@ -115,20 +103,7 @@
             },
             "circularize": {
                 "title": "Kör alakúvá tétel",
-                "description": {
-                    "line": "Kör alakúvá teszi a vonalat.",
-                    "area": "Kör alakúvá teszi a területet."
-                },
-                "key": "O",
-                "annotation": {
-                    "line": "Vonal kör alakúvá téve.",
-                    "area": "Terület kör alakúvá téve."
-                },
-                "not_closed": "Nem lehet kör alakúvá tenni, mert nem hurok.",
-                "too_large": "Nem lehet kör alakúvá tenni, mert túl kevés látszik belőle.",
-                "connected_to_hidden": "Nem lehet kör alakúvá tenni, mert egy rejtett elemhez csatlakozik.",
-                "not_downloaded": "Nem lehet kör alakúvá tenni, mert egyes részei nincsenek letöltve.",
-                "already_circular": "Nem lehet köralakúvá tenni, mert már köralakú."
+                "key": "O"
             },
             "orthogonalize": {
                 "title": "Derékszögesítés",
@@ -659,10 +634,6 @@
             "show_more": "Mutass többet",
             "view_on_osm": "Megtekintés openstreetmap.org-on",
             "view_on_keepRight": "Megtekintés a keepright.at-en",
-            "all_fields": "Összes mező",
-            "all_tags": "Összes címke",
-            "all_members": "Összes kapcsolattag",
-            "all_relations": "Összes kapcsolat",
             "add_to_relation": "Hozzáadás kapcsolathoz",
             "new_relation": "Új kapcsolat…",
             "choose_relation": "Szülő kapcsolat kiválasztása",
@@ -677,10 +648,8 @@
                 "manual": "{features} el vannak rejtve. Engedélyezd őket a Térképadatok alatt.",
                 "zoom": "{features} el vannak rejtve. Nagyíts az engedélyezésükhöz."
             },
-            "back_tooltip": "Elem megváltoztatása",
             "remove": "Eltávolítás",
             "search": "Keresés",
-            "multiselect": "Kijelölt elemek",
             "unknown": "Ismeretlen",
             "incomplete": "<nincs letöltve>",
             "feature_list": "Elem keresése",
@@ -703,10 +672,7 @@
             "way": "Út",
             "relation": "Kapcsolat",
             "location": "Pozíció",
-            "add_fields": "Mező hozzáadása:",
-            "lock": {
-                "suggestion": "A \"{label}\" mező zárolva van, mert van hozzá Wikidata címke. Törölhető, vagy a címkék szerkeszthetők a \"Minden címke\" szakaszban."
-            }
+            "add_fields": "Mező hozzáadása:"
         },
         "background": {
             "title": "Háttér",
@@ -735,7 +701,6 @@
                 "description": "Részletes infó",
                 "tooltip": "Háttérinformációk"
             },
-            "fix_misalignment": "Légifelvétel elcsúszásának korrigálása",
             "offset": "Húzz bárhol a lenti szürke területen a légifelvétel elcsúszásának korrigálásához, vagy add meg az elcsúszást méterben."
         },
         "map_data": {
@@ -753,11 +718,9 @@
                     "title": "OpenStreetMap jegyzetek"
                 },
                 "keepRight": {
-                    "tooltip": "Automatikusan észlelt térkép problémák a keepright.at-ről",
                     "title": "KeepRight problémák"
                 },
                 "improveOSM": {
-                    "tooltip": "Az improveosm.org által automatikusan észlelt hiányzó adatok",
                     "title": "ImproveOSM problémák"
                 },
                 "custom": {
@@ -1019,16 +982,11 @@
                 }
             },
             "keepRight": {
-                "title": "KeepRight hiba",
-                "detail_title": "Hiba",
                 "detail_description": "Leírás",
                 "comment": "Hozzászólás",
                 "comment_placeholder": "Megjegyzés írása a többi felhasználó számára.",
-                "close": "Lezárás (hiba javítva)",
-                "ignore": "Mellőzés (nem hiba)",
                 "save_comment": "Hozzászólás mentése",
                 "close_comment": "Lezárás és hozzászólás",
-                "ignore_comment": "Mellőzés és hozzászólás",
                 "error_parts": {
                     "this_node": "ez a pont",
                     "this_way": "ez az út",
@@ -1468,11 +1426,9 @@
                 "type": "Az elem típusára kattintva meg lehet változtatni. Több ezer elemtípus között választhatsz.",
                 "type_picker": "A típusválasztó felajánlja a leggyakoribb elemtípusokat (például park, kórház, étterem, út, épület). Bármire rá lehet keresni a keresőmezőbe való beírással. Az  {inspect}  **Infó**-ra kattintva az elem mellett további információk jelennek meg.",
                 "fields_h": "Mezők",
-                "fields_all_fields": "Az \"összes mező\" rész tartalmazza az alapvető információkat. Az OpenStreetMap-ben minden mező opcionális, tehát nem szükséges megadni mindet, ha nem vagy bennük biztos.",
                 "fields_example": "Minden elemtípus különböző mezőket jelenít meg.  Például egy út adata lehet az anyaga vagy a rajta érvényes sebesség-korlátozás, míg egy étterem  az ott felszolgált ételek típusát tünteti fel, vagy a nyitvatartási időt.",
                 "fields_add_field": "A \"mező hozzáadása\" részre kattintva további információkat lehet megadni (pl. Wikipédia hivatkozást, lehet-e ott kerekesszékkel közlekedni, stb.)",
                 "tags_h": "Címkék",
-                "tags_all_tags": "A mezők alatti részen, az \"Összes címke\" résznél címkéket lehet megadni az adott elemhez. Minden címke egy \"kulcs\" és egy \"érték\" adatból áll. ",
                 "tags_resources": "Egy elem címkéinek szerkesztése az OpenStreetMap alapfogalmainak legalább középszintű ismeretét igényli. Ehhez érdemes megnézni az  [OpenStreetMap Wiki](https://wiki.openstreetmap.org/wiki/Main_Page) vagy [Taginfo](https://taginfo.openstreetmap.org/) oldalakat az OpenStreetMap-ben használatos gyakorlatról."
             },
             "points": {
@@ -1533,8 +1489,6 @@
                 "title": "Kapcsolatok",
                 "intro": "Az  OpenStreetMap  egyik speciális fogalma a *kapcsolat*, ami több elemet logikailag kapcsol egymáshoz. A kapcsolatnak  *tagjai* vannak, és minden tagnak van valamilyen *szerepe* a kapcsolatban.",
                 "edit_relation_h": "Kapcsolatok szerkesztése",
-                "edit_relation": "Az elemszerkesztőben lévő \"Összes kapcsolat\" szakaszban látható, hogy az adott elem mely kapcsolatok tagja. A kapcsolat rákattintva kiválasztható és szerkeszthető.",
-                "edit_relation_add": "Elem hozzáadása egy kapcsolathoz úgy történik, hogy az elem kiválasztása után kattintani kell a {plus}  gombra az \"Összes kapcsolat\" szakaszban. Ezután lehet választani a közeli kapcsolatok közül valamelyiket, vagy az \"Új kapcsolat\" lehetőségét.",
                 "edit_relation_delete": "A  {delete} **Töröl** gombra kattintva az adott elem eltávolítható a kapcsolatból. Ha egy kapcsolatból eltávolítunk minden tagot, a kapcsolat automatikusan megszűnik.",
                 "maintain_relation_h": "Kapcsolatok fenntartása",
                 "maintain_relation": "Az iD szerkesztő mindent megtesz, hogy fenntartsa a megadott kapcsolatokat a szerkesztés után is. Ugyanakkor figyelni kell rá, hogy ha átrajzolunk egy elemet, ami valamivel kapcsolatban lehet, például törlünk egy útszakaszt, majd újból megrajzoljuk, akkor ugyanazokat a kapcsolatokat meg kell majd adnunk, amiknek az adott útszakasz eredetileg a tagja volt (ilyen például a kanyarodási korlátozás).",
@@ -1549,10 +1503,8 @@
                 "turn_restriction_editing": "A *kanyarodási korlátozások* mezőben kattintással kiválasztható az *innen* útszakasz, és itt megadható, hogy az *ide* útszakaszok felé szabad-e kanyarodni vagy sem. A kanyarodási ikonra kattintva a megengedés vagy tiltás ki- vagy bekapcsolható. Az iD szerkesztő a kiválasztásoknak megfelelően létrehozza a kapcsolatokat, és beállítja a *honnan*, *keresztül* és *ide* szerepeket.",
                 "route_h": "Útvonalak",
                 "route": "Az *útvonal* egy kapcsolat, ami vonal elemeket foglal magában, ilyen például egy busz útvonala vagy egy vasúti útvonal. ",
-                "route_add": "Elem hozzáadása egy útvonal kapcsolathoz úgy történik, hogy az elem kiválasztása után az \"Összes kapcsolat\" szakaszban kattintani kell a {plus}  gombra. Ezután lehet választani a közeli kapcsolatok közül valamelyiket, vagy az \"Új kapcsolat\" lehetőségét.",
                 "boundary_h": "Határok",
-                "boundary": "A *határvonal* egy kapcsolat, ami több vonal elemet tartalmaz, amik együtt adminisztratív határvonalat alkotnak.",
-                "boundary_add": "Elem hozzáadása egy határvonal kapcsolathoz úgy történik, hogy az elem kiválasztása után az \"Összes kapcsolat\" szakaszban kattintani kell a {plus}  gombra. Ezután lehet választani a közeli kapcsolatok közül valamelyiket, vagy az \"Új kapcsolat\" lehetőségét."
+                "boundary": "A *határvonal* egy kapcsolat, ami több vonal elemet tartalmaz, amik együtt adminisztratív határvonalat alkotnak."
             },
             "notes": {
                 "title": "Jegyzetek",
@@ -2670,9 +2622,6 @@
                         "hot_spring": "Melegforrás",
                         "onsen": "Japán onzen"
                     }
-                },
-                "beauty": {
-                    "label": "Szépségszalon"
                 },
                 "bench": {
                     "label": "Pad",
@@ -4515,9 +4464,6 @@
                 "advertising/totem": {
                     "name": "Reklámoszlop"
                 },
-                "aerialway": {
-                    "name": "Drótkötélpálya"
-                },
                 "aerialway/cable_car": {
                     "name": "Kabinos felvonó",
                     "terms": "Nagykabinos lift, sífelvonó"
@@ -4560,9 +4506,6 @@
                 },
                 "aerialway/zip_line": {
                     "name": "Kötélcsúszda"
-                },
-                "aeroway": {
-                    "name": "Légi közeledés"
                 },
                 "aeroway/aerodrome": {
                     "name": "Repülőtér",
@@ -8854,9 +8797,6 @@
                 "name": "Esri World felvételek (Clarity) béta"
             },
             "MAPNIK": {
-                "attribution": {
-                    "text": "© OpenStreetMap-közreműködők, CC-BY-SA"
-                },
                 "description": "Alapértelmezett OpenStreetMap-réteg:",
                 "name": "OpenStreetMap (standard)"
             },
@@ -9015,20 +8955,6 @@
                 "description": "A megnevezéseket a basemap.at biztosítja.",
                 "name": "basemap.at térképelőtér"
             },
-            "basemap.at-surface": {
-                "attribution": {
-                    "text": "basemap.at"
-                },
-                "description": "A felületi réteget a basemap.at biztosítja.",
-                "name": "basemap.at felület"
-            },
-            "basemap.at-terrain": {
-                "attribution": {
-                    "text": "basemap.at"
-                },
-                "description": "A domborzati réteget a basemap.at biztosítja.",
-                "name": "basemap.at domborzat"
-            },
             "eufar-balaton": {
                 "attribution": {
                     "text": "EUFAR Balaton ortofotó 2010"
@@ -9042,13 +8968,6 @@
                 },
                 "description": "GSI Kiban 2500 a finds.jp jóvoltából. Rajzoláshoz jó, de kicsit régebbi.",
                 "name": "Japán GSI KIBAN 2500"
-            },
-            "gsi.go.jp": {
-                "attribution": {
-                    "text": "GSI Japán"
-                },
-                "description": "Japán GSI ortofotó. Általában jobb mint a Bing, de kicsit régebbi.",
-                "name": "Japán GSI ortofotó"
             },
             "gsi.go.jp_airphoto": {
                 "attribution": {
@@ -9441,9 +9360,6 @@
             },
             "OSM-Utah": {
                 "name": "OpenStreetMap Utah"
-            },
-            "OSM-Vancouver-meetup": {
-                "name": "OpenStreetMap Vancouver"
             },
             "OSM-Wyoming": {
                 "name": "OpenStreetMap Wyoming"

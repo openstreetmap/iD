@@ -84,18 +84,7 @@
             },
             "circularize": {
                 "title": "Hanaboribory.",
-                "description": {
-                    "line": "Hanaboribory ity tsipika ity.",
-                    "area": "Hanaboribory ity faritra ity."
-                },
-                "key": "O",
-                "annotation": {
-                    "line": "Nanaboribory an'ilay tsipika.",
-                    "area": "Nanaboribory an'ilay faritra."
-                },
-                "not_closed": "Tsy mety atao boribory ity satria tsy mihodina tanteraka.",
-                "too_large": "Tsy mety atao boribory ity satria tsy ampy ny faritra miseho aminy.",
-                "connected_to_hidden": "Tsy mety atao boribory ity satria mifampitohy amina zavatra tsy miseho."
+                "key": "O"
             },
             "orthogonalize": {
                 "title": "Efajoro"
@@ -404,17 +393,11 @@
         "inspector": {
             "show_more": "Hampiseho Misimisy Kokoa",
             "view_on_osm": "Hijery ao amin'ny openstreetmap.org",
-            "all_fields": "Ny saha rehetra",
-            "all_tags": "Ny tags rehetra",
-            "all_members": "Ny mpikambana rehetra",
-            "all_relations": "Ny relations rehetra",
             "role": "Anjara asa",
             "choose": "Safidio ny karazan'ny singa",
             "results": "Vokatra {n} hoan'ny {search}",
-            "back_tooltip": "Hanova ny singa",
             "remove": "Hanala",
             "search": "Hikaroka",
-            "multiselect": "Singa voafidy",
             "unknown": "Tsy fantatra",
             "feature_list": "Hikaroka singa",
             "edit": "Hanova ny singa",
@@ -457,7 +440,6 @@
                 "description": "Hampiseho ny sarintany kely",
                 "tooltip": "Hampiseho sarintany jerena lavitra mba hanampy amin'ny fahitana ny toerana misy ny sarintany miseho."
             },
-            "fix_misalignment": "Hanamboatra ny fihitsin'ny ny sary",
             "offset": "Akisaho mankany amin'izay tianao eo amin'ny faritra volondavenona eto ambany mba hanovana ny fihitsin'ny sary, na ampidiro ny sandan'ny fikisahana amin'ny metatra."
         },
         "map_data": {

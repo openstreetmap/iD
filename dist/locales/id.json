@@ -67,18 +67,7 @@
             },
             "circularize": {
                 "title": "Melingkar",
-                "description": {
-                    "line": "Buat garis ini melingkar.",
-                    "area": "Buat area ini melingkar."
-                },
-                "key": "O",
-                "annotation": {
-                    "line": "Buat garis melingkar.",
-                    "area": "Buat sebuah area melingkar."
-                },
-                "not_closed": "Ini tidak bisa dibuat berputar karena bukan sebuah garis tertutup.",
-                "too_large": "Tidak bisa dibuat bentuk lingkaran karena belum cukup terlihat.",
-                "connected_to_hidden": "Tidak bisa dibuat melingkar karena terhubung dengan fitur tersembunyi."
+                "key": "O"
             },
             "orthogonalize": {
                 "title": "Persegi"
@@ -229,15 +218,10 @@
         "inspector": {
             "show_more": "Tampilkan Lainnya",
             "view_on_osm": "Lihat di openstreetmap.org",
-            "all_fields": "Semua wilayah",
-            "all_tags": "Semua tag",
-            "all_members": "Semua anggota",
-            "all_relations": "Semua relasi",
             "new_relation": "Buat relasi baru",
             "role": "Aturan",
             "choose": "Pilih Tipe Fitur",
             "results": "{n} hasil untuk {search}",
-            "back_tooltip": "Ubah Fitur",
             "remove": "Buang",
             "search": "Cari",
             "unknown": "Tidak diketahui",
@@ -267,7 +251,6 @@
             "minimap": {
                 "tooltip": "Menampilkan peta diperkecil untuk membantu penentuan letak area yang sedang dilihat."
             },
-            "fix_misalignment": "Setel offset citra",
             "offset": "Seret di mana pun dalam area abu-abu untuk menyetel offset citra, atau masukkan nilai offset dalam meter."
         },
         "map_data": {
@@ -975,9 +958,6 @@
                 },
                 "aerialway/gondola": {
                     "name": "Gondola"
-                },
-                "aeroway": {
-                    "name": "Aeroway"
                 },
                 "aeroway/aerodrome": {
                     "name": "Bandar udara",

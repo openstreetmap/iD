@@ -76,18 +76,7 @@
             },
             "circularize": {
                 "title": "Jepi formë qarku",
-                "description": {
-                    "line": "Bëj këtë vijë rrethore.",
-                    "area": "Bëj këte sipërfaqe rrethore."
-                },
-                "key": "O",
-                "annotation": {
-                    "line": "Një vijë u bë rrethore.",
-                    "area": "Një sipërfaqe u bë rrethore."
-                },
-                "not_closed": "Kjo nuk mund bëhet rrethore sepse nuk është lak.",
-                "too_large": "Kjo nuk mund bëhet rrethore sepse nuk ështe mjaftueshmërisht e dukshme.",
-                "connected_to_hidden": "Kjo nuk mund bëhet rrethore sepse është lidhur me një tipar të fshehur."
+                "key": "O"
             },
             "orthogonalize": {
                 "title": "Katror"
@@ -352,18 +341,12 @@
         "inspector": {
             "show_more": "Paraqit më tepër",
             "view_on_osm": "Shiko në openstreetmap.org",
-            "all_fields": "Të gjithë fushat",
-            "all_tags": "Të gjithë etiketat",
-            "all_members": "Të gjithë anëtarët",
-            "all_relations": "Të gjithë lidhjet",
             "new_relation": "Lidhje të re...",
             "role": "Rol",
             "choose": "Zgjidhni llojën e tiparit",
             "results": "{n} rezultate për {search}",
-            "back_tooltip": "Ndrysho tiparin",
             "remove": "Hiq",
             "search": "Kërko",
-            "multiselect": "Karakteristikat e përzgjedhura",
             "unknown": "I panjohur",
             "incomplete": "<not downloaded>",
             "feature_list": "Kërko tiparet",

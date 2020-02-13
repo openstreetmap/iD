@@ -80,18 +80,7 @@
             },
             "circularize": {
                 "title": "Pārveidot par apļveida",
-                "description": {
-                    "line": "Pārveidot šo līniju par apļveida.",
-                    "area": "Pārveidot šo apgabalu par apļveida"
-                },
-                "key": "O",
-                "annotation": {
-                    "line": "Līnija pārveidota par apļveida.",
-                    "area": "Apgabals pārveidots par apļveida."
-                },
-                "not_closed": "Šo objektu nevar pārveidot par apļveida, jo tas nav pabeigts.",
-                "too_large": "Šo objektu nevar padarīt par apļvaida, jo tas nav pietiekami redzams.",
-                "connected_to_hidden": "Šo nevar padarīt par apļveida, jo tas ir pievienots pie paslēpta objekta."
+                "key": "O"
             },
             "orthogonalize": {
                 "title": "Kvadrāts"
@@ -388,17 +377,12 @@
         "inspector": {
             "show_more": "Rādīt vairāk",
             "view_on_osm": "Apskatīt openstreetmap.org",
-            "all_fields": "Visi lauki",
-            "all_members": "Visi biedri",
-            "all_relations": "Visas relācijas",
             "new_relation": "Jauna relācija...",
             "role": "Loma",
             "choose": "Izvēlieties objekta tipu",
             "results": "Atrasti {n} rezultāti meklējot {search}",
-            "back_tooltip": "Mainīt objektu",
             "remove": "Noņemt ",
             "search": "Meklēt",
-            "multiselect": "Izvēlētie objekti",
             "unknown": "Nezināms",
             "incomplete": "<nav lejuplādēts>",
             "feature_list": "Meklēt objektus",
@@ -440,7 +424,6 @@
                 "tooltip": "Parādīt attālinātu skatu lai palīdzētu atrast pašlaik redzamo vietu.",
                 "key": "/"
             },
-            "fix_misalignment": "Mainīt fona nobīdi",
             "offset": "Velc jebkur zemāk esošajā pelēkajā reģionā lai regulētu attēlu nobīdi, vai ievadi nobīdes attālumu numerātiski."
         },
         "map_data": {
@@ -2038,9 +2021,6 @@
                 "aerialway/cable_car": {
                     "name": "Trosu Ceļš"
                 },
-                "aeroway": {
-                    "name": "Skrejceļš"
-                },
                 "aeroway/aerodrome": {
                     "name": "Lidosta"
                 },
@@ -3599,6 +3579,34 @@
             }
         },
         "imagery": {
+            "AGIV": {
+                "attribution": {
+                    "text": "© agentschap Informatie Vlaanderen"
+                },
+                "name": "AIV Flanders vissjaunākie aerofotoattēli."
+            },
+            "AGIV10cm": {
+                "attribution": {
+                    "text": "© agentschap Informatie Vlaanderen"
+                },
+                "name": "AGIV Flanders 2013-2015 aerofotoattēli 10cm"
+            },
+            "AGIVFlandersGRB": {
+                "attribution": {
+                    "text": "© agentschap Informatie Vlaanderen"
+                },
+                "name": "AGIV Flanders GRB"
+            },
+            "AIV_DHMV_II_HILL_25cm": {
+                "attribution": {
+                    "text": "© agentschap Informatie Vlaanderen"
+                }
+            },
+            "AIV_DHMV_II_SVF_25cm": {
+                "attribution": {
+                    "text": "© agentschap Informatie Vlaanderen"
+                }
+            },
             "Bing": {
                 "description": "Satelītu un aerofotoattēli.",
                 "name": "Bing aerofotoattēli"
@@ -3622,9 +3630,6 @@
                 "name": "Esri Pasaules Attēli (Skaidrība) Beta"
             },
             "MAPNIK": {
-                "attribution": {
-                    "text": "© OpenStreetMap ieguldītāji, CC-BY-SA"
-                },
                 "description": "Noklusējuma OpenStreetMap slānis.",
                 "name": "OpenStreetMap (Standarta)"
             },
@@ -3695,6 +3700,10 @@
                 "description": "Dzeltens = Publiska domēna kartes dati no ASV tautskaites. Sarkans = Dati, kas nav atrodami OpenStreetMap",
                 "name": "TIGER Ceļi 2018"
             },
+            "US-TIGER-Roads-2019": {
+                "description": "Dzeltens = Publiska domēna kartes dati no ASV tautskaites. Sarkans = Dati, kas nav atrodami OpenStreetMap",
+                "name": "TIGER Ceļi 2019"
+            },
             "US_Forest_Service_roads_overlay": {
                 "description": "Šoseja: Zaļa apmale = neklasificēts. Brūna apmale = trase. Virsma: grants = gaiši brūns pildījums, Asfalts = melns, Bruģēts = pelēks, betons = zils, zāle = zaļš. Sezonāli = baltas strīpas.",
                 "name": "ASV Meža Ceļu Pārklājums"
@@ -3716,6 +3725,12 @@
                     "text": "Realizēts, izmantojot  UrbIS®© - Izplatīšana & Copyright CIRB"
                 },
                 "name": "UrbIS-Ortho 2018"
+            },
+            "UrbISOrtho2019": {
+                "attribution": {
+                    "text": "Realizēts, izmantojot  Brussels UrbIS®© - Izplatīšana & Autortiesības CIRB"
+                },
+                "name": "UrbIS-Ortho 2019"
             },
             "UrbisAdmFR": {
                 "attribution": {
@@ -3773,6 +3788,12 @@
                 "description": "Ortofoto slāni nodrošina basemap.at. \"Pēctecis\" geoimage.at attēlošanai.",
                 "name": "basemap.at Ortofoto"
             },
+            "basemap.at-overlay": {
+                "attribution": {
+                    "text": "basemap.at"
+                },
+                "name": "basemap.at Pārklājs"
+            },
             "eufar-balaton": {
                 "attribution": {
                     "text": "EUFAR Balton ortofoto 2010"
@@ -3786,13 +3807,6 @@
                 },
                 "description": "GSI Kiban 2500 caur finds,jp. Labs trasēšanai, bet nedaudz novecojis,",
                 "name": "Japānas GSI KIBAN 2500"
-            },
-            "gsi.go.jp": {
-                "attribution": {
-                    "text": "GSI Japāna"
-                },
-                "description": "Japānas GSI ortogrāfiskie attēli. Parasti labāki par bing, bet nedaudz vecāki.",
-                "name": "Japānas GSI ortogrāfiskie attēli"
             },
             "gsi.go.jp_airphoto": {
                 "attribution": {
@@ -4016,10 +4030,25 @@
                 "name": "Kods priekš Sanhosē Slack",
                 "description": "Visi ir laipni aicināti! Piesakies {signupUrl}, tad pievienojies #osm kanālam."
             },
+            "DF-telegram": {
+                "extendedDescription": "Pievienojies kopienai lai uzzinātu vairāk par OpenStreetMap, uzdod jautājumus vai piedalies saietos. Visi ir gaidīti!"
+            },
+            "Galicia-Twitter": {
+                "description": "Seko mums Twitterī: {url}"
+            },
             "GeoPhilly": {
                 "name": "GeoPhilly",
                 "description": "Saiets karšu entuziastiem Filadelfijas apkārtnē",
                 "extendedDescription": "GeoPhilly apvieno izstrādātājus, ģeogrāfus, datu nūģus, atvērtā pirmkoda entuziastus, civilos hakerus un karšu atkarīgos kopējā karšu mīlestībā  un to izteiktajiem stāstiem. Ja tu izmanto kartes savā darbā, vai vienkārši gribi uzzināt vairāk, tad šis saiets ir priekš tevis! Mūsu pasākumu mērķis ir būt atvērtiem, draudzīgiem, izglītojošiem un sociāliem, un tie iet no laimīgām stundām līdz ātrām runām un pat darbnīcām. Nāc un izveido diversu, iedvesmojošu kopienu Filadelfijā kopā ar mums!"
+            },
+            "MapColabora-mailinglist": {
+                "name": "Mapeado Colaborativo / Geoinquietos Zaragoza"
+            },
+            "MapColabora-meetup": {
+                "name": "Mapeado Colaborativo / Geoinquietos Zaragoza"
+            },
+            "MapColabora-twitter": {
+                "name": "Mapeado Colaborativo / Geoinquietos Zaragoza"
             },
             "MapMinnesota": {
                 "name": "MapMinesota",
@@ -4032,6 +4061,9 @@
             },
             "Maptime-ME-meetup": {
                 "name": "MaptimeME"
+            },
+            "MaptimeHRVA-twitter": {
+                "description": "Seko mums Twitterī: {url}"
             },
             "Nottingham-OSM-pub-meetup": {
                 "name": "Austrummidlendas (Notingemas) Ikmēneša bāra saiets",
@@ -4262,9 +4294,8 @@
                 "name": "OpenStreetMap Twiteris",
                 "description": "Seko mums Twitterī: {url}"
             },
-            "OSM-Vancouver-meetup": {
-                "name": "OpenStreetMap Vankūvera",
-                "description": "Kartētāji un OpenStreetMap lietotāji Vankūveras, BC apkārtnē"
+            "OSM-US-Slack": {
+                "description": "Visi ir laipni aicināti! Piesakies {signupUrl}"
             },
             "OSM-br-mailinglist": {
                 "name": "Talk-br E-pasta saraksts"
@@ -4318,7 +4349,8 @@
                 "description": "Seko mums Twitterī: {url}"
             },
             "RS-telegram": {
-                "description": "Pievienojies OpenStreetMap Rio Grande do Sul kopienai Telegram"
+                "description": "Pievienojies OpenStreetMap Rio Grande do Sul kopienai Telegram",
+                "extendedDescription": "Pievienojies kopienai lai uzzinātu vairāk par OpenStreetMap, uzdod jautājumus vai piedalies saietos. Visi ir gaidīti!"
             },
             "South-Tyrol-Mailing-List": {
                 "name": "OpenStreetMap Dienvidtiroles e-pasta saraksts",
@@ -4340,6 +4372,9 @@
             "al-telegram": {
                 "name": "OSM Albānijas Telegram kanāls",
                 "description": "OpenStreetMap Albānijas Telegram kanāls"
+            },
+            "al-twitter": {
+                "description": "Seko mums Twitterī: {url}"
             },
             "at-forum": {
                 "name": "OpenStreetMap Austrijas Forums",
@@ -4399,6 +4434,9 @@
                 "name": "Cape Coasta universitātes YouthMappers",
                 "description": "Seko mums Twitterī: {url}"
             },
+            "ch-twitter": {
+                "description": "Seko mums Twitterī: {url}"
+            },
             "czech-community": {
                 "name": "Čehijas OSM Kopiena",
                 "description": "Kartes portāls, mājaslapa un kontakinformācija OSM biedriem Čehijā"
@@ -4450,6 +4488,9 @@
             "dk-mailinglist": {
                 "name": "Talk-dk E-pasta saraksts",
                 "description": "E-pasta saraksts, kur var diskutēt par OpenStreetMap Dānijā"
+            },
+            "es-twitter": {
+                "description": "Seko mums Twitterī: {url}"
             },
             "fi-forum": {
                 "name": "OpenStreetMap FI forums",
@@ -4562,6 +4603,9 @@
                 "name": "OpenStreetMap Norvēģijas e-pasta saraksts",
                 "description": "E-pasta saraskts OpenStreetMap kartētājiem, lietotājiem, izstrādātājiem un entuziastiem Norvēģijā"
             },
+            "osm-asia-telegram": {
+                "description": "Pievienojies mūsu ģimenei: {url}"
+            },
             "osm-at": {
                 "name": "OpenStreetMap Austrija",
                 "description": "Platforma informācijai par OpenStreetMap Austrijā"
@@ -4578,6 +4622,13 @@
                 "name": "OpenStreetMap Gana Twitterī",
                 "description": "Seko mums Twitterī: {url}"
             },
+            "osm-india-telegram": {
+                "description": "Pievienojies mūsu ģimenei: {url}"
+            },
+            "osm-iran-forum": {
+                "name": "OpenStreetMap Irānas interneta forums",
+                "description": "OpenStreetMap Irānas interneta forums"
+            },
             "osm-mg-facebook": {
                 "name": "OpenStreetMap Madagaskaras Facebook Grupa",
                 "description": "Malgašu Facebook grupa cilvēkiem, kas interesējas par OpenStreetMap."
@@ -4585,6 +4636,9 @@
             "osm-se": {
                 "name": "OpenStreetMap.se",
                 "description": "Nodrošina OSM servisus un informāciju vietējai Zviedrijas kopienai"
+            },
+            "osm-za-twitter": {
+                "description": "Seko mums Twitterī: {url}"
             },
             "osmcz-facebook": {
                 "name": "OpenStreetMap CZ Facebookā"
@@ -4629,6 +4683,10 @@
                 "name": "OpenStreetMap Slovēnijas e-pasta saraksts",
                 "description": "E-pasta saraksts Slovēnijas OpenStreetMap kopienai"
             },
+            "sk-facebook": {
+                "name": "Freemap.sk Slovākija kopienas Facebook lapa",
+                "description": "Freemap.sk Slovākija kopienas Facebook lapa"
+            },
             "talk-au": {
                 "name": "Talk-au E-pasta saraksts"
             },
@@ -4645,9 +4703,24 @@
                 "description": "Visi ir laipni aicināti! Piesakies {signupUrl}",
                 "extendedDescription": "E-pasta saraksts kartētājiem Romā un Lazio apkārtnē."
             },
+            "talk-it-piemonte_mailinglist": {
+                "description": "Visi ir laipni aicināti! Piesakies {signupUrl}"
+            },
             "talk-mg": {
                 "name": "Talk-mg E-pasta liste",
                 "description": "Vieta, kur Madagaskaras OpenStreetMap lietotāji, kopienas un kartētāji var dalīties un diskutēt."
+            },
+            "ym-Central-Washington-University": {
+                "name": "Ģeogrāfijas Klubs"
+            },
+            "ym-Oklahoma-State-University": {
+                "name": "Ģeogrāfijas Klubs"
+            },
+            "ym-University-of-Maryland-College-Park": {
+                "name": "Ģeogrāfijas Klubs"
+            },
+            "ym-Western-Michigan-University": {
+                "name": "Ģeogrāfijas Klubs"
             }
         }
     }

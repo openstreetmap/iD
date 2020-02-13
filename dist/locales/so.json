@@ -39,11 +39,7 @@
                 "annotation": "Taxanbaha la beddelay."
             },
             "circularize": {
-                "title": "Goobo geli",
-                "description": {
-                    "line": "Ka dhig khadkan wareeg."
-                },
-                "not_closed": "Tani lagama dhigi karo wareeg maxaa yeelay ma aha duub"
+                "title": "Goobo geli"
             },
             "delete": {
                 "title": "Tirtir",
@@ -136,9 +132,6 @@
         },
         "inspector": {
             "view_on_osm": "Ka eeg openstreetmap.org",
-            "all_fields": "Dhammaan goobaha",
-            "all_tags": "Dhammaan taxanbayaasha",
-            "all_relations": "Dhammaan xiriirada",
             "choose": "Dooro nooca tilmaamaha",
             "search": "Raadi",
             "feature_list": "Tilmaamaha Waydiimaha",

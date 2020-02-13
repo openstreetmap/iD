@@ -8,7 +8,10 @@
             "zoom_to": "zoom para",
             "copy": "copiar",
             "view_on": "ver no {domain}",
-            "favorite": "favorito"
+            "favorite": "favorito",
+            "list": "lista",
+            "text": "texto",
+            "deselect": "desmarcar"
         },
         "toolbar": {
             "inspect": "Inspecionar",
@@ -51,19 +54,7 @@
                 "key": "N"
             },
             "add_preset": {
-                "title": "Adicionar {feature}",
-                "point": {
-                    "title": "Adicionar {feature} como um ponto"
-                },
-                "line": {
-                    "title": "Adicionar {feature} como uma linha"
-                },
-                "area": {
-                    "title": "Adicionar {feature} como uma área"
-                },
-                "building": {
-                    "title": "Adicionar {feature} como um edifício"
-                }
+                "title": "Adicionar {feature}"
             },
             "browse": {
                 "title": "Navegar",
@@ -117,19 +108,37 @@
             "circularize": {
                 "title": "Circularizar",
                 "description": {
-                    "line": "Tornar essa linha circular.",
-                    "area": "Tornar essa área circular."
+                    "single": "Fazer esse recurso circular.",
+                    "multiple": "Fazer esses recursos circulares."
                 },
                 "key": "O",
                 "annotation": {
-                    "line": "Circularizou uma linha.",
-                    "area": "Circularizou uma área."
+                    "single": "Tornou um recurso circular.",
+                    "multiple": "Características feitas circulares."
                 },
-                "not_closed": "Não é possível circularizar isso porque isto não forma um ciclo fechado.",
-                "too_large": "Não é possível circularizar isso porque uma parte disso não está visível.",
-                "connected_to_hidden": "Não foi possível tornar um círculo pois está conectado a um elemento oculto.",
-                "not_downloaded": "Isso não pode ser feito circular porque partes dele ainda não foram baixadas.",
-                "already_circular": "Isso não pode ser circular porque já é circular."
+                "multiple_blockers": {
+                    "multiple": "Estes não podem ser tornados circulares por várias razões."
+                },
+                "not_closed": {
+                    "single": "Isso não pode ser circular porque não é um rotação.",
+                    "multiple": "Estes não podem ser circulares porque não são rotações."
+                },
+                "too_large": {
+                    "single": "Isso não pode ser circular porque não há quantidade suficiente visível no momento.",
+                    "multiple": "Eles não podem ser circulares porque atualmente não há um número suficiente deles visível."
+                },
+                "connected_to_hidden": {
+                    "single": "Isso não pode ser circular porque está conectado a um recurso oculto.",
+                    "multiple": "Eles não podem ser circulares porque alguns estão conectados a recursos ocultos."
+                },
+                "not_downloaded": {
+                    "single": "Isso não pode ser circular porque partes dele ainda não foram baixadas.",
+                    "multiple": "Eles não podem ser circulares porque partes deles ainda não foram baixados."
+                },
+                "already_circular": {
+                    "single": "Isso não pode ser mais circular do que já é.",
+                    "multiple": "Estes não podem ser feitos mais circulares do que já são."
+                }
             },
             "orthogonalize": {
                 "title": "Ortogonalizar",
@@ -684,10 +693,12 @@
             "show_more": "Mostrar Mais",
             "view_on_osm": "Ver no openstreetmap.org",
             "view_on_keepRight": "Ver no keepright.at",
-            "all_fields": "Todos os campos",
-            "all_tags": "Todas as etiquetas",
-            "all_members": "Todos os membros",
-            "all_relations": "Todas as relações",
+            "feature_type": "Tipo de recurso",
+            "fields": "Campos",
+            "tags_count": "Etiquetas ({count})",
+            "members_count": "Membros ({count})",
+            "relations_count": "Relações ({count})",
+            "features_count": "Recursos ({count})",
             "add_to_relation": "Adicionar a uma relação",
             "new_relation": "Nova relação...",
             "choose_relation": "Escolha uma relação pai",
@@ -698,18 +709,22 @@
             "edit_reference": "editar/traduzir",
             "wiki_reference": "Ver documentação",
             "wiki_en_reference": "Ver documentação em inglês",
+            "key_value": "key=value",
+            "multiple_values": "Valores múltiplos",
+            "multiple_types": "Vários tipos",
+            "unshared_value_tooltip": "não compartilhado por todos os recursos",
             "hidden_preset": {
                 "manual": "{features} estão escondidos. Ative-os no painel Dados do mapa.",
                 "zoom": "{features} estão escondidos. Aumente o zoom para ativá-los."
             },
-            "back_tooltip": "Alterar elemento",
+            "back_tooltip": "Alterar o tipo de recurso",
             "remove": "Remover",
             "search": "Procurar",
-            "multiselect": "Elementos selecionados",
             "unknown": "Desconhecido",
             "incomplete": "<não baixado>",
             "feature_list": "Buscar elementos",
             "edit": "Editar elemento",
+            "edit_features": "Editar recursos",
             "check": {
                 "yes": "Sim",
                 "no": "Não",
@@ -730,7 +745,7 @@
             "location": "Local",
             "add_fields": "Adicionar campo:",
             "lock": {
-                "suggestion": "O campo  \"{label}\" está bloqueado porque existe uma etiqueta do Wikidata. Você pode excluí-lo ou editá-lo na seção \"Todas as etiquetas\"."
+                "suggestion": "O campo \"{label}\" está bloqueado porque há uma tag Wikidata. Você pode excluí-lo ou editar as etiquetas na seção \"Etiquetas\"."
             }
         },
         "background": {
@@ -760,7 +775,7 @@
                 "description": "Mostrar painel de detalhes",
                 "tooltip": "Mostrar informações avançadas de plano de fundo."
             },
-            "fix_misalignment": "Ajustar o deslocamento da imagem de fundo",
+            "fix_misalignment": "Deslocamento de imagens",
             "offset": "Arraste em qualquer ponto da área cinza abaixo para ajustar o deslocamento da imagem, ou entre com o valor do deslocamento em metros."
         },
         "map_data": {
@@ -778,12 +793,16 @@
                     "title": "Notas do OpenStreetMap"
                 },
                 "keepRight": {
-                    "tooltip": "Detectou automaticamente os erros de mapeamento do keepright.at",
+                    "tooltip": "Problemas de dados detectados por keepright.at",
                     "title": "Erros do KeepRight"
                 },
                 "improveOSM": {
-                    "tooltip": "Dados perdidos detectados automaticamente por improveosm.org",
+                    "tooltip": "Dados ausentes detectados por improveosm.org",
                     "title": "Problemas ImproveOSM"
+                },
+                "osmose": {
+                    "tooltip": "Problemas de dados detectados por osmose.openstreetmap.fr",
+                    "title": "Problemas Osmose"
                 },
                 "custom": {
                     "tooltip": "Arraste e solte um arquivo de dados na página ou clique no botão para configurar",
@@ -1030,6 +1049,14 @@
         "cannot_zoom": "Não é possível afastar mais no modo atual.",
         "full_screen": "Alterar para Tela Cheia",
         "QA": {
+            "osmose": {
+                "title": "Problema Osmose ",
+                "detail_title": "Detalhes",
+                "elems_title": "Recursos",
+                "fix_title": "Diretrizes para correção",
+                "trap_title": "Erros comuns",
+                "translation": "Traduções fornecidas por Osmose"
+            },
             "improveOSM": {
                 "title": "Detecção do ImproveOSM",
                 "geometry_types": {
@@ -1065,16 +1092,15 @@
                 }
             },
             "keepRight": {
-                "title": "Erro no KeepRight",
-                "detail_title": "Erro",
+                "title": "KeepRight",
                 "detail_description": "Descrição",
                 "comment": "Comentário",
                 "comment_placeholder": "Insira um comentário para compartilhar com outros usuários.",
-                "close": "Fechar (erro já corrigido)",
-                "ignore": "Ignorar (Não é um erro)",
+                "close": "Fechar (problema corrigido)",
+                "ignore": "Remover (falso positivo)",
                 "save_comment": "Salvar Comentário",
                 "close_comment": "Fechar e Comentar",
-                "ignore_comment": "Ignorar e Comentar",
+                "ignore_comment": "Remover e comentar",
                 "error_parts": {
                     "this_node": "este nó",
                     "this_way": "este caminho",
@@ -1528,11 +1554,11 @@
                 "type": "Você pode clicar no tipo do elemento para alterar para um tipo diferente. Tudo que existe no mundo real pode ser adicionado ao OpenStreetMap, então existem milhares de tipos de elementos para escolher.",
                 "type_picker": "O selecionador de tipo mostrará sugestões para os tipos de elementos mais comuns, como parques, hospitais, restaurantes, ruas e edifícios. Você pode pesquisar por qualquer outro elemento, digitando o que você procura na caixa de pesquisa. Clique no botão {inspect} **Informação** próximo ao tipo de elemento para aprender mais sobre ele.",
                 "fields_h": "Campos",
-                "fields_all_fields": "A seção \"Todos os campos\" contém todos os detalhes do elemento que você pode editar. No OpenStreetMap, todos os campos são opcionais, e não tem problema deixar em branco se você não souber.",
+                "fields_all_fields": "A seçaõ de \"Campos\" contém todos os detalhes do recurso que você pode editar. No OpenStreetMap, todos os campos são opcionais e não há problema em deixar um campo em branco se você não tiver certeza.",
                 "fields_example": "Cada tipo de elemento mostrará diferentes campos no formulário. Por exemplo, uma via deve mostrar os campos para superfície e limite de velocidade, mas um restaurante terá campos para tipo de comida que é servida e os horários em que está aberto.",
                 "fields_add_field": "Você também pode clicar no menu de \"Adicionar campo\" para adicionar outras informações, como um link da Wikipédia, acessibilidade para cadeirantes, entre outros.",
                 "tags_h": "Etiquetas",
-                "tags_all_tags": "Abaixo da seção dos campos, você pode expandir a seção \"Todas as etiquetas\" para editar qualquer das *etiquetas* do OpenStreetMap para o elemento selecionado. Cada etiqueta consiste numa *chave* e um *valor*, dados que definem todos os elementos guardados no OpenStreetMap.",
+                "tags_all_tags": "Abaixo da seção de campos, você pode expandir a seção \"Etiquetas\" para editar qualquer uma das etiquetas OpenStreetMap * para o recurso selecionado. Cada etiqueta consiste em uma * chave* e * valor*, elementos de dados que definem todos os recursos armazenados no OpenStreetMap.",
                 "tags_resources": "Editar as etiquetas dos elementos requer conhecimento intermediário sobre o OpenStreetMap. Consulte fontes como a [Wiki do OpenStreetMap](https://wiki.openstreetmap.org/wiki/Main_Page) ou o [Taginfo](https://taginfo.openstreetmap.org/) para aprender sobre as práticas de etiquetagem aceitas no OpenStreetMap."
             },
             "points": {
@@ -1593,8 +1619,8 @@
                 "title": "Relações",
                 "intro": "Uma *relação* é um tipo especial de elemento no OpenStreetMap que agrupa outros elementos. Os elementos que pertencem a uma relação são chamados de *membros*, e cada membro pode ter uma *função* na relação.",
                 "edit_relation_h": "Editando Relações",
-                "edit_relation": "Na parte inferior do editor de elementos, você pode expandir a seção \"Todas as relações\" para ver se o elemento selecionado é um membro de alguma relação. Você pode clicar na relação para selecioná-la e editá-la.",
-                "edit_relation_add": "Para adicionar um elemento a uma relação, selecione o elemento e clique no botão {plus} em \"Todas as relações\" na seção do editor de elementos. Você pode escolher de uma lista de relações na próximas ou escolher a opção \"Nova relação...\".",
+                "edit_relation": "Na parte inferior do editor de recursos, você pode expandir a seção \"Relações\" para ver se o recurso selecionado é membro de alguma relação. Você pode clicar na relação para selecioná-la e editá-la.",
+                "edit_relation_add": "Para adicionar um recurso a uma relação, selecione o recurso e clique no botão {plus} adicionar na seção \"Relações\" do editor de recursos. Você pode escolher em uma lista de relações próximas ou escolher a opção \"Nova relação ...\".",
                 "edit_relation_delete": "Pode também clicar no botão {delete} **Eliminar** para remover o elemento selecionado da relação. Se remover todos os elementos de uma relação, a relação será eliminada automaticamente. ",
                 "maintain_relation_h": "Mantendo Relações",
                 "maintain_relation": "Na maioria das vezes, o iD manterá as relações automaticamente conforme você edita. Você deve tomar cuidado ao substituir elementos que possam ser membros de relações. Por exemplo, se você excluir um pedaço de estrada e desenhar um novo para substituí-lo, adicione-o às mesmas relações (rotas, restrições de conversão, etc.) do original.",
@@ -1609,10 +1635,10 @@
                 "turn_restriction_editing": "No campo \"Restrições de Conversão\", clique para selecionar uma estrada \"de\" e veja se as conversões são permitidas ou proibidas a qualquer uma das estradas \"para\". Você pode clicar nos ícones de conversão para alterná-los entre permitido e proibido. O iD criará relações automaticamente e definirá as funções \"de\", \"através\" e \"para\" com base nas suas escolhas.",
                 "route_h": "Rotas",
                 "route": "Uma relação *rota* é um grupo de uma ou mais linhas que, juntas, formam uma rede de rotas, como uma rota de ônibus, rota de trem ou rota de rodovia.",
-                "route_add": "Para adicionar um elemento a uma relação de rota, selecione o elemento e vá até ao fundo em \"todas as relações\" na secção do editor de elementos, depois clique no botão {plus} para adicionar este elemento a uma relação próxima ou criar uma nova relação.",
+                "route_add": "Para adicionar um recurso a uma relação de rota, selecione o recurso e role para baixo até a seção \"Relações\" do editor de recursos e clique no botão {plus} adicionar para adicionar esse recurso a uma relação existente nas proximidades ou a uma nova relação.",
                 "boundary_h": "Fronteiras",
                 "boundary": "Uma relação *limite* é um grupo de uma ou mais linhas que, juntas, formam um limite administrativo.",
-                "boundary_add": "Para adicionar um elemento a uma relação de fronteira, selecione o elemento e desça até à secção \"Todas as relações\" do editor de elementos e clique no botão adicionar {plus} para adicionar os elementos próximos que existam na relação ou numa nova relação."
+                "boundary_add": "Para adicionar um recurso a uma relação de fronteira, selecione o recurso e role para baixo até a seção \"Relações\" do editor de recursos e clique no botão {plus} adicionar para adicionar esse recurso a uma relação existente nas proximidades ou a uma nova relação."
             },
             "notes": {
                 "title": "Notas",
@@ -1656,7 +1682,7 @@
                 "title": "Verificação de qualidade",
                 "intro": "* Verificação de qualidade * (Q/A) ferramentas de terceiros que ajudam a melhorar a qualidade dos dados do OSM. Eles listam automaticamente erros, conflitos e problemas detectados com os dados, que os mapeadores podem então corrigir. Para ver os problemas existentes em Q/A, clique no painel {data} **Dados do mapa** para ativar uma camada Q/A específica.",
                 "tools_h": "Ferramentas",
-                "tools": "As seguintes ferramentas são suportadas atualmente: [KeepRight](https://www.keepright.at/) e  [ImproveOSM](https://improveosm.org/en/). Espere que o iD suporte [Osmose](https://osmose.openstreetmap.fr/) e mais ferramentas Q/A no futuro.",
+                "tools": "As seguintes ferramentas são suportadas atualmente: [KeepRight](https://www.keepright.at/), [ImproveOSM](https://improveosm.org/en/) e [Osmose](https://osmose.openstreetmap.fr/).",
                 "issues_h": "Problemas de manuseio",
                 "issues": "Lidar com questões Q/A é semelhante ao tratamento de notas. Clique em um marcador para ver os detalhes do problema na barra lateral. Cada ferramenta tem seus próprios recursos, mas geralmente você pode comentar e/ou fechar um problema."
             },
@@ -2801,7 +2827,7 @@
                     }
                 },
                 "beauty": {
-                    "label": "Especialidade de beleza"
+                    "label": "Serviço"
                 },
                 "bench": {
                     "label": "Assento",
@@ -2871,7 +2897,8 @@
                 },
                 "building/levels": {
                     "label": "Níveis",
-                    "placeholder": "2, 4, 6..."
+                    "placeholder": "2, 4, 6...",
+                    "terms": "número de andares, pavimentos, pisos, andares"
                 },
                 "building/levels/underground": {
                     "label": "Níveis subterrâneos",
@@ -3560,6 +3587,9 @@
                 "kerb/height": {
                     "label": "Altura"
                 },
+                "kneipp_water_cure_multi": {
+                    "label": "Tipos de bacia"
+                },
                 "label": {
                     "label": "Etiqueta"
                 },
@@ -3685,7 +3715,8 @@
                 },
                 "maxheight": {
                     "label": "Altura Máxima",
-                    "placeholder": "4, 4.5, 5, 14'0\", 14'6\", 15'0\""
+                    "placeholder": "4, 4.5, 5, 14'0\", 14'6\", 15'0\"",
+                    "terms": "altura máxima,limite de altura"
                 },
                 "maxspeed": {
                     "label": "Limite de Velocidade",
@@ -3812,7 +3843,8 @@
                     "label": "Nomes incorretos"
                 },
                 "note": {
-                    "label": "Nota"
+                    "label": "Nota",
+                    "terms": "nota,comentário"
                 },
                 "office": {
                     "label": "Tipo"
@@ -3999,9 +4031,15 @@
                 "plant": {
                     "label": "Planta"
                 },
+                "plant/method": {
+                    "label": "Método de geração"
+                },
                 "plant/output/electricity": {
                     "label": "Potência",
                     "placeholder": "500 MW, 1000 MW, 2000 MW..."
+                },
+                "plant/source": {
+                    "label": "Fonte de energia"
                 },
                 "playground": {
                     "label": "Tipo"
@@ -4806,7 +4844,7 @@
                     "terms": "Totem de publicidade"
                 },
                 "aerialway": {
-                    "name": "Teleférico do tipo cabine"
+                    "name": "Recurso de vias aéreas"
                 },
                 "aerialway/cable_car": {
                     "name": "Teleférico",
@@ -4861,7 +4899,7 @@
                     "terms": "Tirolesa"
                 },
                 "aeroway": {
-                    "name": "Aerovia"
+                    "name": "Recurso aéreos "
                 },
                 "aeroway/aerodrome": {
                     "name": "Aeroporto ou aeródromo",
@@ -5122,6 +5160,10 @@
                     "name": "Local de Eventos",
                     "terms": "Local de Eventos"
                 },
+                "amenity/exhibition_centre": {
+                    "name": "Centro de exposições",
+                    "terms": "Centro de exposições"
+                },
                 "amenity/fast_food": {
                     "name": "Lanchonete",
                     "terms": "fast food, lanchonete, lanches, Lancheria, comida rápida"
@@ -5189,7 +5231,7 @@
                     "terms": "Sala de jogos"
                 },
                 "amenity/grave_yard": {
-                    "name": "Cemitério",
+                    "name": "Cemitério paroquial",
                     "terms": "Cemitério"
                 },
                 "amenity/grit_bin": {
@@ -5223,6 +5265,10 @@
                 "amenity/language_school": {
                     "name": "Escola de idiomas",
                     "terms": "Escola de idiomas"
+                },
+                "amenity/lavoir": {
+                    "name": "Lavanderia pública",
+                    "terms": "lavadeiro, lavadero, local de lavagem de roupas público"
                 },
                 "amenity/letter_box": {
                     "name": "Caixa de correio",
@@ -6475,6 +6521,10 @@
                     "name": "Salva-vidas",
                     "terms": "salva-vidas,salva vidas,guarda-vidas,guarda vidas,bombeiro,resgate,cpr,rcp,rcr"
                 },
+                "emergency/mountain_rescue": {
+                    "name": "Resgate na montanha",
+                    "terms": "Resgate na montanha"
+                },
                 "emergency/no": {
                     "name": "Acesso de Emergência Não Permitido"
                 },
@@ -6975,6 +7025,10 @@
                 "historic/monument": {
                     "name": "Monumento",
                     "terms": "Monumento, Estátua"
+                },
+                "historic/pillory": {
+                    "name": "Pelourinho histórico",
+                    "terms": "Pelourinho histórico"
                 },
                 "historic/ruins": {
                     "name": "Ruínas",
@@ -8014,20 +8068,20 @@
                     "terms": "zona úmida, pântano, charco, paul, sapal, turfa, solo, cobertura de solo"
                 },
                 "natural/wood": {
-                    "name": "Madeira natural",
-                    "terms": "Madeira natural"
+                    "name": "Mata nativa",
+                    "terms": "arvoredo,bosque,mata,matagal,mato,floresta,selva"
                 },
                 "network/type/node_network": {
                     "name": "Nó de rede recreativa",
                     "terms": "Nó de rede recreativa"
                 },
                 "noexit/yes": {
-                    "name": "Rua sem Saída",
+                    "name": "Rua sem saída",
                     "terms": "sem saída, rua fechada, beco sem saída, beco, bloqueio"
                 },
                 "office": {
                     "name": "Escritório",
-                    "terms": "Escritório"
+                    "terms": "escritório,gabinete,banca,estúdio,repartição,sala,seção"
                 },
                 "office/accountant": {
                     "name": "Escritório de Contabilidade",
@@ -8225,6 +8279,10 @@
                     "name": "Trilha de patinação no gelo",
                     "terms": "Trilha de patinação no gelo"
                 },
+                "piste/nordic": {
+                    "name": "Trilha de esqui de fundo",
+                    "terms": "Trilha de esqui de fundo"
+                },
                 "piste/piste": {
                     "name": "Trilha para esportes de neve / pista",
                     "terms": "Trilha para esportes de neve / pista"
@@ -8404,6 +8462,30 @@
                 "power/plant": {
                     "name": "Área de Usina Elétrica",
                     "terms": "usina de produção de energia, energia elétrica, eletricidade, hidrelétrica, fazenda eólica, eletricidade, energia solar, usina nuclear, termoelétrica, termelétrica"
+                },
+                "power/plant/source/coal": {
+                    "name": "Usina de carvão",
+                    "terms": "Usina de carvão"
+                },
+                "power/plant/source/gas": {
+                    "name": "Usina a Gás",
+                    "terms": "Usina a Gás"
+                },
+                "power/plant/source/hydro": {
+                    "name": "Usina Hidrelétrica",
+                    "terms": "Usina Hidrelétrica"
+                },
+                "power/plant/source/nuclear": {
+                    "name": "Usina nuclear",
+                    "terms": "Usina nuclear"
+                },
+                "power/plant/source/solar": {
+                    "name": "Central fotovoltaica",
+                    "terms": "Central fotovoltaica"
+                },
+                "power/plant/source/wind": {
+                    "name": "Parque eólico",
+                    "terms": "Parque eólico"
                 },
                 "power/pole": {
                     "name": "Poste de Transmissão",
@@ -8736,6 +8818,10 @@
                 "shop/alcohol": {
                     "name": "Loja de alcoólicos licenciada",
                     "terms": "Loja de Licores"
+                },
+                "shop/anime": {
+                    "name": "Loja de Anime / Manga",
+                    "terms": "Loja de Anime / Manga"
                 },
                 "shop/antiques": {
                     "name": "Loja de Antiguidades",
@@ -9900,7 +9986,7 @@
             },
             "MAPNIK": {
                 "attribution": {
-                    "text": "© Colaboradores do OpenStreetMap, CC-BY-SA"
+                    "text": "© Colaboradores do OpenStreetMap, CC-BY-SA 2.0"
                 },
                 "description": "A camada padrão do OpenStreetMap.",
                 "name": "OpenStreetMap (Padrão)"
@@ -10071,20 +10157,6 @@
                 "description": "Sobreposição de anotação fornecida por basemap.at.",
                 "name": "Anotação do basemap.at"
             },
-            "basemap.at-surface": {
-                "attribution": {
-                    "text": "basemap.at"
-                },
-                "description": "Camada de superfície fornecida por basemap.at.",
-                "name": "Superfície do basemap.at"
-            },
-            "basemap.at-terrain": {
-                "attribution": {
-                    "text": "basemap.at"
-                },
-                "description": "Camada de terreno fornecida por basemap.at.",
-                "name": "Terreno do basemap.at"
-            },
             "eufar-balaton": {
                 "attribution": {
                     "text": "EUFAR Balaton ortofotó 2010"
@@ -10105,13 +10177,6 @@
                 },
                 "description": "O mapa da cidade é um mapa geral que descreve Gotemburgo. Ele contém informações gerais sobre terrenos, comunicações, hidrografia, edifícios, números de endereços e nomes de ruas, divisão administrativa e outro texto de orientação.",
                 "name": "Mapa da cidade de Gotemburgo "
-            },
-            "gsi.go.jp": {
-                "attribution": {
-                    "text": "GSI Japão"
-                },
-                "description": "Japão GSI orto imagens. Normalmente melhor que o bing, mas um pouco mais velho.",
-                "name": "orto imagens de Japão GSI"
             },
             "gsi.go.jp_airphoto": {
                 "attribution": {
@@ -10352,21 +10417,62 @@
                 "description": "O grupo de usuários do OpenStreetMap para Dallas-Fort Worth",
                 "extendedDescription": "Dallas, Fort Worth e todas as cidades estão repletas de pessoas criativas e conhecedoras de tecnologia. A visão deste grupo de usuários é encontrar novas maneiras de usar o incrível recurso do OSM."
             },
+            "Galicia-Telegram": {
+                "name": "Telegram OpenStreetMap Galícia",
+                "description": "Telegram OpenStreetMap na Galícia"
+            },
+            "Galicia-Twitter": {
+                "name": "Twitter OpenStreetMap Galícia",
+                "description": "Siga-nos no Twitter em {url}"
+            },
             "GeoPhilly": {
                 "name": "GeoPhilly",
                 "description": "Encontro para entusiastas do mapa na área de Filadélfia",
                 "extendedDescription": "A GeoPhilly une desenvolvedores, geógrafos, geeks de dados, entusiastas do código aberto, hackers cívicos e viciados em mapas em nosso amor compartilhado pelos mapas e pelas histórias que contam. Se você usa mapas como parte do seu trabalho ou apenas quer aprender mais, este é o encontro para você! Nossos eventos visam ser abertos, amigáveis, educacionais e sociais e vão desde happy hours até palestras relâmpago ou até workshops. Venha criar uma comunidade geoespacial diversificada e inspiradora na Filadélfia conosco!"
+            },
+            "MapColabora-mailinglist": {
+                "name": "Mapeamento Colaborativo / Geoinquietos Saragoça",
+                "description": "Mapeamento Colaborativo / Fórum Geoinquietos Saragoça"
+            },
+            "MapColabora-meetup": {
+                "name": "Mapeamento Colaborativo / Geoinquietos Saragoça",
+                "description": "Mapeamento Colaborativo / Página de Reunião Geoinquietos Saragoça "
+            },
+            "MapColabora-twitter": {
+                "name": "Mapemanento Colaborativo / Geoinquietos Saragoça",
+                "description": "Mapeamento Colaborativo / Conta no Twitter Geoinquietos Saragoça"
+            },
+            "MapMinnesota": {
+                "description": "Mapeadores e entusiastas do OpenStreetMap na Região Metropolitana de Minneapolis",
+                "extendedDescription": "Conectando entusiastas em Minnesota e Região Metropolitana de Minneapolis!"
             },
             "Mapping-DC-meetup": {
                 "name": "Mapeamneto de DC",
                 "description": "Melhore o OpenStreetMap na área do DC",
                 "extendedDescription": "Somos um grupo de mapeadores voluntários que visam melhorar o OpenStreetMap na área de DC. Também pretendemos ensinar aos outros sobre o ecossistema OSM, análise de dados, cartografia e GIS. Nós nos reunimos a cada dois meses nos encontros para nos concentrar em uma área da nossa cidade."
             },
+            "MappingWR": {
+                "description": "Fazendo rotas de menos emissões de carbono em torno de Waterloo. Região fácil de encontrar."
+            },
             "Maptime-Bogota": {
-                "name": "Horário de Bogotá"
+                "name": "Horário de Bogotá",
+                "description": "Estamos interessados em um grupo para mapear no OpenStreetMap em torno de Bogotá.",
+                "extendedDescription": "Aprender a coletar dados em campo e digitalizar para o OpenStreetMap. Não é necessário ter conhecimento local!  Você apenas precisa de desejo para participar, aprender e se divertir."
+            },
+            "Maptime-ME-meetup": {
+                "description": "Mapeadores e usuários do OpenStreetMap, em torno de Portland, ME",
+                "extendedDescription": "Tempo de mapeamento é, literalmente, tempo para criação de mapas. Nossa missão é abrir as portas de possibilidades cartográficas para qualquer um interessado por criar tempo e espaço para o aprendizado colaborativo, exploração e criação de mapas usando ferramentas de mapeamento e tecnologias."
+            },
+            "Maptime-Oceania-Slack": {
+                "description": "Cadastre-se em {signupUrl}"
             },
             "MaptimeHRVA-twitter": {
                 "description": "Siga-nos no Twitter em {url}"
+            },
+            "Nottingham-OSM-pub-meetup": {
+                "name": "Encontro mensal no bar em Midlands Orientais (Nottingham)",
+                "description": "Encontro social para os mapeadores das Midlands Orientais e usuários",
+                "extendedDescription": "Um grupo faz reuniões desde Março de 2011, inicialmente em Nottingham, e, recentemente em Derby, de vez em quando em outro lugar em Midlands Orientais. Estes são grupos sociais, mas tem um lugar excelente para vir e perguntar questões específicas sobre OSM, na área ou algum lugar em geral. Nos meses de verão nós usualmente damos uma luz para mapeamento em uma hora nas proximidades do nosso ponto de encontro. O grupo como um todo tem um interesse especial em direitos de mapeamento público da via e de vez em quando tem reuniões de mapeamento para essa proposta."
             },
             "OSM-AR-facebook": {
                 "name": "Facebook OpenStreetMap Argentina",

@@ -77,18 +77,7 @@
             },
             "circularize": {
                 "title": "Zaokruži",
-                "description": {
-                    "line": "Zaokruži ovu liniju.",
-                    "area": "Zaokruži ovo područje."
-                },
-                "key": "O",
-                "annotation": {
-                    "line": "Linija je zaokružena.",
-                    "area": "Područje je zaokruženo."
-                },
-                "not_closed": "Ovo se ne može zaokružiti jer nije zatvoren objekt.",
-                "too_large": "Ovo se ne može zaokružiti jer je trenutno premali dio elementa vidljiv.",
-                "connected_to_hidden": "Ovo se ne može zaokružiti jer je spojeno na skriveni element karte."
+                "key": "O"
             },
             "orthogonalize": {
                 "title": "Stavi pod pravi kut"
@@ -433,18 +422,12 @@
         "inspector": {
             "show_more": "Prikaži više",
             "view_on_osm": "Pogledaj na openstreetmap.org",
-            "all_fields": "Sva polja",
-            "all_tags": "Sve oznake",
-            "all_members": "Svi članovi",
-            "all_relations": "Sve relacije",
             "new_relation": "Nova relacija...",
             "role": "Uloga",
             "choose": "Odaberi vrstu elementa",
             "results": "{n} rezultata za {search}",
-            "back_tooltip": "Promijeni element karte",
             "remove": "Ukloni",
             "search": "Pretraži",
-            "multiselect": "Odabrani elementi",
             "unknown": "Nepoznato",
             "incomplete": "<nije preuzeto>",
             "feature_list": "Traži elemente karte",
@@ -490,7 +473,6 @@
                 "tooltip": "Prikaži udaljeni prikaz karte za lakše lociranje trenutno prikazanog područja.",
                 "key": "/"
             },
-            "fix_misalignment": "Popravi odstupanje snimaka",
             "offset": "Pomakni bilo gdje na donjem sivom području za usklađivanje snimaka, ili unesi iznose odstupanja u metrima."
         },
         "map_data": {
@@ -1406,9 +1388,6 @@
                         "hot_spring": "Vrući izvor",
                         "onsen": "Japansko Onsen kupalište"
                     }
-                },
-                "beauty": {
-                    "label": "Specijalizacija njege"
                 },
                 "bench": {
                     "label": "Klupa"
@@ -2380,9 +2359,6 @@
                     "name": "Adresa",
                     "terms": "kućna adresa,adresa,kućni broj"
                 },
-                "aerialway": {
-                    "name": "Žičara"
-                },
                 "aerialway/cable_car": {
                     "name": "Skijaški vlak",
                     "terms": "uspinjača"
@@ -2406,9 +2382,6 @@
                 },
                 "aerialway/rope_tow": {
                     "name": "Konop za vuču skijaša"
-                },
-                "aeroway": {
-                    "name": "Zračni promet"
                 },
                 "aeroway/aerodrome": {
                     "name": "Zračna luka",
@@ -4768,9 +4741,6 @@
                 }
             },
             "MAPNIK": {
-                "attribution": {
-                    "text": "© OpenStreetMap doprinositelji, CC-BY-SA"
-                },
                 "description": "Zadani OpenStreetMap sloj.",
                 "name": "OpenStreetMap (Standardni)"
             },

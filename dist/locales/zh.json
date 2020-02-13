@@ -60,16 +60,7 @@
             },
             "circularize": {
                 "title": "圆",
-                "description": {
-                    "line": "把直线制作成圆形。",
-                    "area": "把面制作成圆形。"
-                },
-                "key": "O",
-                "annotation": {
-                    "line": "把线制作成圆形。",
-                    "area": "把面制作成圆形。"
-                },
-                "not_closed": "该要素不可编辑为圆，因为它不是一个循环。"
+                "key": "O"
             },
             "delete": {
                 "title": "删除",
@@ -170,13 +161,9 @@
         "inspector": {
             "show_more": "显示更多",
             "view_on_osm": "在openstreetmap.org上查看",
-            "all_tags": "所有标签",
-            "all_members": "所有成员",
-            "all_relations": "所有关系",
             "role": "角色",
             "choose": "选择对象的类型",
             "results": "{search}共有{n}个结果",
-            "back_tooltip": "修改要素",
             "remove": "删除",
             "search": "搜索",
             "unknown": "未知",
@@ -503,9 +490,6 @@
             "presets": {
                 "address": {
                     "name": "地址"
-                },
-                "aeroway": {
-                    "name": "机场相关道路"
                 },
                 "aeroway/aerodrome": {
                     "name": "机场"

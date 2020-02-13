@@ -8,7 +8,10 @@
             "zoom_to": "zoomer dessus",
             "copy": "copier",
             "view_on": "voir sur {domain}",
-            "favorite": "favoris"
+            "favorite": "favoris",
+            "list": "liste",
+            "text": "texte",
+            "deselect": "Désélectionner"
         },
         "toolbar": {
             "inspect": "Inspecter",
@@ -51,19 +54,7 @@
                 "key": "N"
             },
             "add_preset": {
-                "title": "Ajouter {feature}",
-                "point": {
-                    "title": "Ajouter {feature} en tant que point"
-                },
-                "line": {
-                    "title": "Ajouter {feature} en tant que ligne"
-                },
-                "area": {
-                    "title": "Ajouter {feature} en tant que surface"
-                },
-                "building": {
-                    "title": "Ajouter {feature} en tant que bâtiment"
-                }
+                "title": "Ajouter {feature}"
             },
             "browse": {
                 "title": "Naviguer",
@@ -117,19 +108,37 @@
             "circularize": {
                 "title": "Arrondir",
                 "description": {
-                    "line": "Rendre circulaire cette ligne.",
-                    "area": "Rendre circulaire ce polygone."
+                    "single": "Arrondir cet élément.",
+                    "multiple": "Arrondir ces éléments."
                 },
                 "key": "O",
                 "annotation": {
-                    "line": "ligne rendue circulaire.",
-                    "area": "polygone rendu circulaire."
+                    "single": "Arrondir un élément.",
+                    "multiple": "Arrondir des éléments."
                 },
-                "not_closed": "Cet élément ne peut pas être rendu circulaire car il ne boucle pas.",
-                "too_large": "Ceci ne peut pas être transformé en cercle parce qu'une partie n'est pas visible.",
-                "connected_to_hidden": "Ceci ne peut pas être transformé en cercle parce que c'est connecté à un élément caché.",
-                "not_downloaded": "Cet élément ne peut pas être rendu circulaire car une partie n'est pas encore téléchargée.",
-                "already_circular": "Impossible de rendre l'élément circulaire, il l'est déjà."
+                "multiple_blockers": {
+                    "multiple": "Ces éléments ne peuvent être arrondis pour plusieurs raisons."
+                },
+                "not_closed": {
+                    "single": "Cet élément ne peut être arrondi car il ne s'agit pas d'une boucle.",
+                    "multiple": "Ces éléments ne peuvent être arrondis car ce ne sont pas des boucles."
+                },
+                "too_large": {
+                    "single": "Cet élément ne peut être arrondi car il n'est pas assez visible.",
+                    "multiple": "Ces éléments ne peuvent être arrondis car ils ne sont pas assez visibles."
+                },
+                "connected_to_hidden": {
+                    "single": "Cet élément ne peut être arrondi car il est connecté à un objet masqué.",
+                    "multiple": "Ces éléments ne peuvent être arrondis car certains d'entre eux sont connectés à des objets masqués."
+                },
+                "not_downloaded": {
+                    "single": "Cet élément ne peut être arrondi car il n'a pas été complètement téléchargé.",
+                    "multiple": "Ces éléments ne peuvent être arrondis car ils n'ont pas été complètement téléchargés."
+                },
+                "already_circular": {
+                    "single": "Cet élément ne peut être arrondi davantage qu'actuellement.",
+                    "multiple": "Ces éléments ne peuvent être arrondis davantage qu'actuellement."
+                }
             },
             "orthogonalize": {
                 "title": "Carré",
@@ -137,6 +146,10 @@
                     "corner": {
                         "single": "Rendre ce coin orthogonal",
                         "multiple": "Rendre ces coins orthogonaux"
+                    },
+                    "feature": {
+                        "single": "Rendre cet élément orthogonal",
+                        "multiple": "Rendre ces éléments orthogonaux"
                     }
                 },
                 "key": "Q",
@@ -144,7 +157,22 @@
                     "corner": {
                         "single": "Coin rendu orthogonal",
                         "multiple": "Coins rendus orthogonaux"
+                    },
+                    "feature": {
+                        "single": "Élément rendu orthogonal",
+                        "multiple": "Eléments rendus orthogonaux"
                     }
+                },
+                "multiple_blockers": {
+                    "multiple": "Cet élément ne peut être orthogonalisé pour plusieurs raisons."
+                },
+                "end_vertex": {
+                    "single": "Cet élément ne peut être orthogonalisé car c'est une extrémité.",
+                    "multiple": "Ces éléments ne peuvent être orthogonalisés car ce sont des extrémités."
+                },
+                "square_enough": {
+                    "single": "Cet élément ne peut pas être plus orthogonal qu'il ne l'est déjà.",
+                    "multiple": "Ces éléments ne peuvent pas être plus orthogonaux qu'ils ne le sont déjà."
                 }
             },
             "straighten": {
@@ -649,10 +677,12 @@
             "show_more": "Plus d'informations",
             "view_on_osm": "Consulter sur openstreetmap.org",
             "view_on_keepRight": "Voir sur keepright.at",
-            "all_fields": "Tous les champs",
-            "all_tags": "Tous les attributs",
-            "all_members": "Tous les membres",
-            "all_relations": "Toutes les relations",
+            "feature_type": "Type d'élément",
+            "fields": "Champs",
+            "tags_count": "Attributs ({count})",
+            "members_count": "Membres ({count})",
+            "relations_count": "Relations ({count})",
+            "features_count": "Éléments ({count})",
             "add_to_relation": "Ajouter à une relation",
             "new_relation": "Nouvelle relation…",
             "choose_relation": "Sélectionnez une relation parente",
@@ -663,18 +693,21 @@
             "edit_reference": "modifier ou traduire",
             "wiki_reference": "Voir la documentation",
             "wiki_en_reference": "Voir la documentation en anglais",
+            "key_value": "clé=valeur",
+            "multiple_values": "Plusieur valeurs",
+            "multiple_types": "Plusieurs types",
+            "unshared_value_tooltip": "non partagé par tous les éléments",
             "hidden_preset": {
                 "manual": "{features} sont cachés. Activez-les dans le panneau de données de carte.",
                 "zoom": "{features} sont cachés. Zoomez pour les afficher."
             },
-            "back_tooltip": "Changer l'objet",
             "remove": "Supprimer",
             "search": "Rechercher",
-            "multiselect": "Éléments sélectionnés",
             "unknown": "Inconnu",
             "incomplete": "<non téléchargé>",
             "feature_list": "Rechercher des objets",
             "edit": "Modifier l'élément",
+            "edit_features": "Modifier les éléments",
             "check": {
                 "yes": "Oui",
                 "no": "Non",
@@ -695,7 +728,7 @@
             "location": "Endroit",
             "add_fields": "Ajouter un attribut :",
             "lock": {
-                "suggestion": "Le champ « {label} » est verrouillé car il y a un attribut Wikidata. Vous pouvez l'effacer ou l'éditer dans la section « Tous les attributs »."
+                "suggestion": "Le champ « {label} » est verrouillé car il y a un attribut Wikidata. Vous pouvez l'effacer ou l'éditer dans la section « Attributs »."
             }
         },
         "background": {
@@ -725,7 +758,6 @@
                 "description": "Afficher la barre des détails",
                 "tooltip": "Afficher les informations avancées sur le fond."
             },
-            "fix_misalignment": "Ajuster le décalage du fond de carte",
             "offset": "« Glissez » partout dans la zone grise ci-dessous pour ajuster le décalage d'image, ou entrez les valeurs de décalage en mètres."
         },
         "map_data": {
@@ -743,12 +775,16 @@
                     "title": "Notes d'OpenStreetMap"
                 },
                 "keepRight": {
-                    "tooltip": "Problèmes détectés automatiquement par keepright.at",
+                    "tooltip": "Anomalies détectées par keepright.at",
                     "title": "Problèmes KeepRight"
                 },
                 "improveOSM": {
-                    "tooltip": "Données manquantes automatiquement détectées par improveosm.org",
+                    "tooltip": "Données manquantes détectées par improveosm.org",
                     "title": "Problèmes ImproveOSM"
+                },
+                "osmose": {
+                    "tooltip": "Anomalies détectées par osmose.openstreetmap.fr",
+                    "title": "Signalements Osmose"
                 },
                 "custom": {
                     "tooltip": "Faîtes glisser-déposer un fichier de données sur la page, ou cliquez sur le bouton pour les paramétrer",
@@ -895,6 +931,7 @@
             "description": "Préférences",
             "key": "P",
             "privacy": {
+                "title": "Vie privée",
                 "privacy_link": "Voir la politique de confidentialité d'iD",
                 "third_party_icons": {
                     "description": "Afficher les icônes tierces",
@@ -970,6 +1007,7 @@
             "text": "iD est un outil convivial mais puissant pour contribuer à la meilleure carte libre du monde. Ceci est la version {version}. Pour plus d'informations consultez {website} et rapportez les bogues sur {github}.",
             "privacy_update": "Notre politique de protection de la vie privée a récemment été mise à jour.",
             "privacy_policy": "Politique de confidentialité d'iD",
+            "privacy": "{updateMessage} En utilisant ce logiciel, vous reconnaissez accepter pleinement la {privacyLink}.",
             "walkthrough": "Commencer le guide",
             "start": "Modifier maintenant"
         },
@@ -993,6 +1031,12 @@
         "cannot_zoom": "Impossible de zoomer plus en arrière dans ce mode.",
         "full_screen": "Afficher/cacher le plein écran",
         "QA": {
+            "osmose": {
+                "title": "Signalement Osmose",
+                "detail_title": "Détails",
+                "trap_title": "Erreurs fréquentes",
+                "translation": "Traduction fournie par Osmose"
+            },
             "improveOSM": {
                 "title": "Détections ImproveOSM",
                 "geometry_types": {
@@ -1028,16 +1072,14 @@
                 }
             },
             "keepRight": {
-                "title": "Erreur KeepRight",
-                "detail_title": "Erreur",
                 "detail_description": "Description",
                 "comment": "Commentaire",
                 "comment_placeholder": "Saisissez un commentaire à partager avec d'autres utilisateurs.",
-                "close": "Fermer (erreur corrigée)",
-                "ignore": "Ignorer (pas une erreur)",
+                "close": "Fermer (signalement corrigé)",
+                "ignore": "Supprimer (faux positif)",
                 "save_comment": "Enregistrer le commentaire",
                 "close_comment": "Fermer et commenter",
-                "ignore_comment": "Ignorer et commenter",
+                "ignore_comment": "Supprimer et commenter",
                 "error_parts": {
                     "this_node": "ce nœud",
                     "this_way": "ce chemin",
@@ -1362,9 +1404,25 @@
                 "bike_rack": "arceau à vélo",
                 "cctv_camera": "caméra de surveillance",
                 "fire_hydrant": "borne incendie",
+                "mailbox": "boite aux lettres",
+                "manhole": "Bouche d'égout",
+                "phone_booth": "Cabine téléphonique",
+                "sign": {
+                    "advertisement": "Publicité"
+                },
+                "street_light": "lampadaire",
+                "support": {
+                    "utility_pole": "Poteau d'infrastructure"
+                },
                 "traffic_light": {
-                    "other": "feux tricolores"
-                }
+                    "cyclists": "feux tricolores pour cyclistes",
+                    "general_horizontal": "feux tricolores horizontaux",
+                    "general_single": "feux tricolore simples",
+                    "general_upright": "feux tricolores verticaux",
+                    "other": "feux tricolores",
+                    "pedestrians": "feux tricolores pour piétons"
+                },
+                "trash_can": "poubelle"
             }
         },
         "mapillary": {
@@ -1459,11 +1517,9 @@
                 "type": "Vous pouvez cliquer sur le type d'un élément pour le changer pour un autre type. Tout ce qui exist dans le monde réel peut être ajouter dans OpenStreetMap, Il y a donc de milliers de types possibles",
                 "type_picker": "Le sélectionneur de type affiche les types d'éléments les plus fréquents, tels que les parcs, hôpitaux, restaurants, routes et bâtiments. Vous pouvez tout cherchez en tapant ce que vous voulez dans le champs de recherche. Vous pouvez aussi cliquer sur l'icône {inspect} **Info** à côté du type de l'élément pour en apprendre plus.",
                 "fields_h": "Champs",
-                "fields_all_fields": "La section « Tous les champs » contient toutes les informations qui peuvent être modifiées. Dans OpenStreetMap, tous les champs sont facultatifs. Vous pouvez toujours les laisser vides en cas de doute.",
                 "fields_example": "Chaque type d’élément affichera des champs différents. Par exemple, une route peut afficher des champs pour le type de surface et la limitation de vitesse et un restaurant peut afficher des champs pour le type de nourriture servie et ses horaires d'ouverture.",
                 "fields_add_field": "Vous pouvez aussi cliquer sur le menu déroulant « Ajouter un champ » pour ajouter plus d'informations, comme une description, un lien Wikipédia, un accès handicapé, et cetera…",
                 "tags_h": "Attributs",
-                "tags_all_tags": "En dessous de la partie avec les champs, vous pouvez développer la section « Tous les attributs » pour modifier les *attributs* OpenStreetMap de l’élément sélectionné. Chaque tag consiste en une *clef* et une *valeur*, des données qui définissent tous les éléments enregistrés dans OpenStreetMap.",
                 "tags_resources": "Vous aurez besoin d'un niveau de connaissance intermédiaire sur OpenStreetMap pour modifier les attributs d'un élément. Vous devriez consulter des ressources comme le [Wiki d’OpenStreetMap](https://wiki.openstreetmap.org/wiki/Main_Page) ou [Taginfo](https://taginfo.openstreetmap.org/) pour en apprendre plus sur les pratiques de tagging acceptées dans OpenStreetMap."
             },
             "points": {
@@ -1524,8 +1580,6 @@
                 "title": "Relations",
                 "intro": "Une *relation* est un élément spécial dans OpenStreetMap qui regroupe ensemble d'autres éléments. Les éléments qui appartiennent à une relation sont appelés *membres*, et chacun de ces membres peut avoir un *rôle* dans la relation.",
                 "edit_relation_h": "Modifier des Relations",
-                "edit_relation": "Au bas de l'éditeur d'éléments, vous pouvez développer la section « Toutes les relations » pour voir si l'élément sélectionné est membre d'une ou plusieurs relations. Vous pouvez alors cliquer sur la relation pour la sélectionner et la modifier.",
-                "edit_relation_add": "Pour ajouter un élément à une relation, sélectionnez cet élément, puis cliquez sur le bouton d'ajout {plus} dans la section « Toutes les relations » de l'éditeur d'éléments. Vous pouvez choisir la relation dans une liste contenant les relations présentes aux environs, ou bien en créer une nouvelle avec l'option « Nouvelle relation… ».",
                 "edit_relation_delete": "Vous pouvez également cliquer sur le bouton **Supprimer** {delete}  pour supprimer un élément d'une relation. Si vous supprimez tous les éléments d'une relation, celle-ci sera automatiquement supprimée.",
                 "maintain_relation_h": "Maintenir des Relations",
                 "maintain_relation": "La plupart du temps, iD maintient automatiquement les relations lors de l'édition.\nVous devez toutefois faire attention quand vous remplacez des éléments qui sont membres de relations. Par exemple, si vous supprimez la section d'une route et que vous en créez une nouvelle pour la remplacer, vous devez impérativement ajouter la nouvelle section aux mêmes relations que l'ancienne (itinéraires, interdictions de tourner, etc…).",
@@ -1540,10 +1594,9 @@
                 "turn_restriction_editing": "Dans le champ « interdictions de tourner », cliquez pour sélectionner une route « depuis », et voyez s'il est autorisé ou non de tourner sur une ou plusieurs routes « vers ». Vous pouvez cliquer sur l'icône de direction pour basculer la position entre autorisé et interdit. iD créera automatiquement les relations et mettra à jour les rôles selon votre saisie.",
                 "route_h": "Itinéraires",
                 "route": "Une relation *itinéraire* est un groupe d'une ou plusieurs lignes formant ensemble un réseau, comme un itinéraire de bus, un itinéraire ferroviaire, ou un itinéraire routier.",
-                "route_add": "Pour ajouter un élément à une relation itinéraire, sélectionnez cet élément, puis cliquez sur le bouton d'ajout {plus} dans la section « Toutes les relations » de l'éditeur d'éléments. Vous pouvez choisir la relation parmi celles présentes aux environs, ou bien en créer une nouvelle.",
                 "boundary_h": "Frontières",
                 "boundary": "Une relation *frontière* est un groupe d'une ou plusieurs lignes formant ensemble une frontière administrative.",
-                "boundary_add": "Pour ajouter un élément à une relation frontière, sélectionnez cet élément, puis cliquez sur le bouton d'ajout {plus} dans la section « Toutes les relations » de l'éditeur d'éléments. Vous pouvez choisir la relation parmi celles présentes aux environs, ou bien en créer une nouvelle."
+                "boundary_add": "Pour ajouter un élément à une relation frontière, sélectionnez cet élément et défilez vers le bas jusqu'à la section \"Relations\" de l'éditeur d'éléments, puis cliquez sur le bouton d'ajout {plus} pour ajouter cet élément à une relation existante proche ou à une nouvelle relation."
             },
             "notes": {
                 "title": "Notes",
@@ -1587,7 +1640,7 @@
                 "title": "Assurance qualité",
                 "intro": "*Les outils d'assurance qualité* (Q/A) peuvent trouver des attributs incorrects, des chemins déconnectés et d'autres problèmes dans OpenStreetMap que vous pouvez ensuite corriger. Pour visualiser les problèmes de qualité existants, cliquez sur le panneau {data} **Données de carte** pour activer une couche Q/A spécifique.",
                 "tools_h": "Outils",
-                "tools": "Les outils suivants sont actuellement supportés : [KeepRight](https://www.keepright.at/) et [ImproveOSM](https://improveosm.org/fr/). Attendez-vous à ce qu'iD supporte [Osmose](https://osmose.openstreetmap.fr/) et bien plus d'outils de Q/A dans le futur.",
+                "tools": "Les outils suivants sont pris en charge actuellement: [KeepRight](https://www.keepright.at/), [ImproveOSM](https://improveosm.org/en/) et [Osmose](https://osmose.openstreetmap.fr/).",
                 "issues_h": "Gérer les problèmes",
                 "issues": "La gestion des problème de Q/A est similaire à celle des notes. Cliquez sur un marqueur pour afficher les détails du problème sur la barre latérale. Chaque outil a ses propres fonctionnalités, mais généralement vous pouvez commenter ou fermer un problème."
             },
@@ -2368,6 +2421,7 @@
                     "search": "Trouver des éléments correspondant à la recherche."
                 },
                 "with_selected": {
+                    "title": "Avec les éléments sélectionnés",
                     "edit_menu": "Afficher/cacher le menu d'édition",
                     "zoom_to": "Zoomer sur les éléments sélectionnés"
                 },
@@ -2552,6 +2606,9 @@
                         "motor_vehicle": "Véhicules motorisés"
                     }
                 },
+                "access_aisle": {
+                    "label": "Type"
+                },
                 "access_simple": {
                     "label": "Accès autorisé",
                     "terms": "permis,autorisé,privé,public,publique"
@@ -2683,6 +2740,11 @@
                 "attraction": {
                     "label": "Type"
                 },
+                "baby_feeding": {
+                    "options": {
+                        "room": "Pièce dédiée"
+                    }
+                },
                 "baby_seat": {
                     "label": "Siège bébé"
                 },
@@ -2712,9 +2774,6 @@
                         "hot_spring": "Source chaude",
                         "onsen": "Onsen, bain japonais"
                     }
-                },
-                "beauty": {
-                    "label": "Spécialité du salon"
                 },
                 "bench": {
                     "label": "Banc",
@@ -3249,6 +3308,9 @@
                 "fuel_multi": {
                     "label": "Types de carburants"
                 },
+                "gambling": {
+                    "label": "Jeux"
+                },
                 "gauge": {
                     "label": "Écartement"
                 },
@@ -3275,11 +3337,17 @@
                 "generator/type": {
                     "label": "Type"
                 },
+                "geyser/height": {
+                    "label": "Hauteur de l'éruption"
+                },
                 "government": {
                     "label": "Type"
                 },
                 "grape_variety": {
                     "label": "Cépages"
+                },
+                "group_only": {
+                    "label": "Groupes uniquement"
                 },
                 "guest_house": {
                     "label": "Type"
@@ -3293,6 +3361,7 @@
                     "terms": "rampe,main courante,rambarde"
                 },
                 "hashtags": {
+                    "label": "Hashtags",
                     "placeholder": "#exemple"
                 },
                 "healthcare": {
@@ -3580,6 +3649,9 @@
                     "label": "ID de l'image Mapillary",
                     "terms": "identifiant, image, mapillary"
                 },
+                "marker": {
+                    "label": "Type"
+                },
                 "material": {
                     "label": "Matériau",
                     "terms": "matériau,matière,substance"
@@ -3673,6 +3745,9 @@
                     "placeholder": "0, 1, 2, 3...",
                     "terms": "VTT,cyclisme,difficulté"
                 },
+                "museum": {
+                    "label": "Type"
+                },
                 "name": {
                     "label": "Nom",
                     "placeholder": "Nom courant (si existant)",
@@ -3756,6 +3831,9 @@
                         "undefined": "Par défaut : Oui",
                         "yes": "Oui"
                     }
+                },
+                "openfire": {
+                    "label": "Feux ouverts autorisés"
                 },
                 "opening_date": {
                     "label": "Date d'ouverture prévue"
@@ -3923,6 +4001,9 @@
                 "plant/output/electricity": {
                     "label": "Puissance",
                     "placeholder": "500 MW, 1000 MW, 2000 MW..."
+                },
+                "plant/source": {
+                    "label": "Source d'énergie"
                 },
                 "playground": {
                     "label": "Type"
@@ -4221,6 +4302,9 @@
                     "placeholder": "Oui, non, uniquement",
                     "terms": "seconde-main,seconde main,occasion,deuxième-main"
                 },
+                "segregated": {
+                    "label": "Séparation cyclistes-piétons"
+                },
                 "self_service": {
                     "label": "Libre service"
                 },
@@ -4254,6 +4338,9 @@
                 },
                 "shop": {
                     "label": "Type"
+                },
+                "shower": {
+                    "label": "Douches"
                 },
                 "siren/purpose": {
                     "label": "Usage"
@@ -4456,6 +4543,9 @@
                 },
                 "to": {
                     "label": "Vers"
+                },
+                "toilets": {
+                    "label": "Toiletes "
                 },
                 "toilets/disposal": {
                     "label": "Évacuation/traitement",
@@ -4746,9 +4836,6 @@
                     "name": "Totem publicitaire",
                     "terms": "panneau publicitaire,publicité,affichage des prix,prix,informations"
                 },
-                "aerialway": {
-                    "name": "Transport par câble aérien"
-                },
                 "aerialway/cable_car": {
                     "name": "Téléphérique",
                     "terms": "téléphérique, telepherique, téléférique, teleferique, télécabine, telecabine, remontée mécanique, nacelle, cabine, bulle, cable car, remontées mécaniques,remontée mécaniques,tire-fesses,télé-siège,télésiège"
@@ -4792,9 +4879,6 @@
                 "aerialway/zip_line": {
                     "name": "Tyrolienne",
                     "terms": "Câble aérien, câble de canopée, tyrolienne..."
-                },
-                "aeroway": {
-                    "name": "Aviation"
                 },
                 "aeroway/aerodrome": {
                     "name": "Aéroport",
@@ -5051,6 +5135,9 @@
                     "name": "Établissement accueillant des événements",
                     "terms": "banquet,baptême,bar mitzvah,bat mitzvah,anniversaires,célébrations,conférences,confirmation,rencontres,fêtes,mariages"
                 },
+                "amenity/exhibition_centre": {
+                    "name": "Centre d'expositions"
+                },
                 "amenity/fast_food": {
                     "name": "Restauration rapide",
                     "terms": "fast food, restauration rapide, service au comptoir, vente à emporter, à emporter, a emporter, burger, sandwich, kebab, panini, tacos"
@@ -5140,6 +5227,9 @@
                 "amenity/language_school": {
                     "name": "École de langues",
                     "terms": "école de langues,langues étrangères"
+                },
+                "amenity/lavoir": {
+                    "name": "Lavoir"
                 },
                 "amenity/letter_box": {
                     "name": "Boîte aux lettres privée",
@@ -6172,6 +6262,9 @@
                     "name": "Ramoneur",
                     "terms": "Ramoneur, Cheminée"
                 },
+                "craft/cleaning": {
+                    "name": "Service de nettoyage"
+                },
                 "craft/clockmaker": {
                     "name": "Horloger",
                     "terms": "Horloger, Horlogerie"
@@ -6258,6 +6351,9 @@
                 "craft/plumber": {
                     "name": "Plombier",
                     "terms": "Plombier"
+                },
+                "craft/pottery": {
+                    "name": "Potier"
                 },
                 "craft/rigger": {
                     "name": "Gréeur",
@@ -6832,6 +6928,9 @@
                     "name": "Borne frontière",
                     "terms": "Borne frontière"
                 },
+                "historic/building": {
+                    "name": "Bâtiment historique"
+                },
                 "historic/castle": {
                     "name": "Château",
                     "terms": "Château"
@@ -7156,6 +7255,9 @@
                 "leisure/escape_game": {
                     "name": "Escape game",
                     "terms": "escape game,escape room,puzzle room,quest room"
+                },
+                "leisure/firepit": {
+                    "name": "Emplacement pour feu"
                 },
                 "leisure/fishing": {
                     "name": "Lieu de pêche",
@@ -7756,6 +7858,9 @@
                     "name": "Alpage",
                     "terms": "Alpage, Tunturi, montagne, colline"
                 },
+                "natural/geyser": {
+                    "name": "Geyser"
+                },
                 "natural/glacier": {
                     "name": "Glacier",
                     "terms": "Glacier"
@@ -8078,9 +8183,15 @@
                 "piste/ice_skate": {
                     "name": "Piste de patin à glace"
                 },
+                "piste/nordic": {
+                    "name": "Piste de ski de fond"
+                },
                 "piste/skitour": {
                     "name": "Ski de Randonnée",
                     "terms": "ski, skitour, piste, randonnée, ski de rando, rando"
+                },
+                "piste/sled": {
+                    "name": "Piste de luge"
                 },
                 "piste/sleigh": {
                     "name": "Piste de traîneau"
@@ -8249,6 +8360,24 @@
                 "power/plant": {
                     "name": "Centrale électrique",
                     "terms": "Centrale électrique"
+                },
+                "power/plant/source/coal": {
+                    "name": "Centrale au charbon"
+                },
+                "power/plant/source/gas": {
+                    "name": "Centrale au gaz"
+                },
+                "power/plant/source/hydro": {
+                    "name": "Centrale hydroélectrique"
+                },
+                "power/plant/source/nuclear": {
+                    "name": "Centrale nucléaire"
+                },
+                "power/plant/source/solar": {
+                    "name": "Ferme solaire"
+                },
+                "power/plant/source/wind": {
+                    "name": "Fermé d'éoliennes"
                 },
                 "power/pole": {
                     "name": "Poteau électrique",
@@ -8528,6 +8657,9 @@
                 "railway/tram_stop": {
                     "name": "Emplacement où s'arrête le tram"
                 },
+                "railway/yard": {
+                    "name": "Dépôt ferroviaire"
+                },
                 "relation": {
                     "name": "Relation",
                     "terms": "Relation"
@@ -8705,9 +8837,16 @@
                     "name": "Magasin de vêtements",
                     "terms": "Magasin de vêtements"
                 },
+                "shop/clothes/second_hand": {
+                    "name": "Magasin de vêtements de seconde main",
+                    "terms": "occasion,vêtements,habits,deuxième main,friperie"
+                },
                 "shop/clothes/underwear": {
                     "name": "Boutique de sous-vêtements",
                     "terms": "boutique,magasin de sous-vêtements,sous-vêtements,slips,boxers,soutient-gorges,lingerie,chaussettes"
+                },
+                "shop/clothes/wedding": {
+                    "name": "Magasin de vêtements de mariage"
                 },
                 "shop/coffee": {
                     "name": "Boutique de vente de cafés",
@@ -8756,6 +8895,9 @@
                 "shop/doityourself": {
                     "name": "Magasin de bricolage",
                     "terms": "Magasin de bricolage"
+                },
+                "shop/doors": {
+                    "name": "Magasin de portes"
                 },
                 "shop/dry_cleaning": {
                     "name": "Pressing",
@@ -9034,6 +9176,9 @@
                     "name": "Tirage de photos",
                     "terms": "Photographe, Tirage de photos"
                 },
+                "shop/pottery": {
+                    "name": "Magasin de poterie"
+                },
                 "shop/printer_ink": {
                     "name": "Vendeur d'encre pour imprimante",
                     "terms": "imprimante,fax,encre,cartouche,impression"
@@ -9129,6 +9274,9 @@
                 "shop/tobacco": {
                     "name": "Bureau de tabac",
                     "terms": "Buraliste"
+                },
+                "shop/tool_hire": {
+                    "name": "Location d'outils"
                 },
                 "shop/toys": {
                     "name": "Magasin de jouets",
@@ -9249,6 +9397,9 @@
                     "name": "Camping",
                     "terms": "Terrain de camping,Site de camping,Aire de camping"
                 },
+                "tourism/camp_site/group_only": {
+                    "name": "Aire de camping pour groupes"
+                },
                 "tourism/caravan_site": {
                     "name": "Aire pour caravanes",
                     "terms": "Aire pour caravanes"
@@ -9308,6 +9459,9 @@
                 "tourism/museum": {
                     "name": "Musée",
                     "terms": "Musée"
+                },
+                "tourism/museum/history": {
+                    "name": "Musée d'histoire"
                 },
                 "tourism/picnic_site": {
                     "name": "Aire de pique-nique",
@@ -9675,7 +9829,7 @@
             },
             "MAPNIK": {
                 "attribution": {
-                    "text": "© contributeurs OpenStreetMap, CC-BY-SA"
+                    "text": "© Les contributeurs et contributrices OpenStreetMap, CC-BY-SA 2.0"
                 },
                 "description": "Couche OpenStreetMap par défaut",
                 "name": "OpenStreetMap (Standard)"
@@ -9846,20 +10000,6 @@
                 "description": "Surcouche d'annotations fournie par basemap.at.",
                 "name": "Surcouche basemap.at"
             },
-            "basemap.at-surface": {
-                "attribution": {
-                    "text": "basemap.at"
-                },
-                "description": "Couche de surface fournie par basemap.at.",
-                "name": "Surface basemap.at"
-            },
-            "basemap.at-terrain": {
-                "attribution": {
-                    "text": "basemap.at"
-                },
-                "description": "Couche terrain fournie par basemap.at.",
-                "name": "Terrain basemap.at"
-            },
             "eufar-balaton": {
                 "attribution": {
                     "text": "EUFAR Balaton ortofotó 2010"
@@ -9880,13 +10020,6 @@
                 },
                 "description": "La carte décrit de manière globale la ville de Göteborg. Elle contient des informations générales sur le terrain, les communications, l'hydrographie, les bâtiments, les adresses et les noms de rues, les divisions administratives.",
                 "name": "Carte de la ville de Göteborg"
-            },
-            "gsi.go.jp": {
-                "attribution": {
-                    "text": "GSI Japon"
-                },
-                "description": "Imagerie ortho GSI du Japon. Typiquement meilleure que bing, mais un peu plus vieille.",
-                "name": "Imagerie ortho GSI du Japon"
             },
             "gsi.go.jp_airphoto": {
                 "attribution": {
@@ -10140,6 +10273,17 @@
                 "description": "Réunion pour les passionnés de cartographie dans la région de Philadelphie",
                 "extendedDescription": "GeoPhilly unit les développeurs, les géographes, les passionnés de données et d'open source, les hackers civiques et les drogués de la carte dans l'amour partagé pour les cartes et les histoires qu'elles racontent. Que vous utilisiez des cartes dans votre travail ou que vous souhaitiez en savoir plus, c'est la bonne réunion ! Nos événements essayent d'être ouverts, amicaux, éducatifs et sociaux et vont des happy hours aux présentations rapides voire aux ateliers. Venez créer une communauté géospatiale diversifiée et inspirante à Philadelphie avec nous !"
             },
+            "MapColabora-mailinglist": {
+                "name": "Mapeado Colaborativo / Geoinquietos Saragosse",
+                "description": "Liste de diffusion de Mapeado Colaborativo / Geoinquietos Saragosse"
+            },
+            "MapColabora-meetup": {
+                "name": "Mapeado Colaborativo / Geoinquietos Saragosse"
+            },
+            "MapColabora-twitter": {
+                "name": "Mapeado Colaborativo / Geoinquietos Saragosse",
+                "description": "Compte Twitter de Mapeado Colaborativo / Geoinquietos Saragosse"
+            },
             "MapMinnesota": {
                 "name": "MapMinnesota",
                 "description": "Cartographes et amateurs d'OpenStreetMap dans la région des villes jumelles",
@@ -10245,7 +10389,8 @@
                 "description": "Une liste de diffusion pour discuter d'OpenStreetMap au Canada."
             },
             "OSM-CA-telegram": {
-                "name": "@osmca sur Telegram"
+                "name": "@osmca sur Telegram",
+                "description": "Chat Telegram d'OpenStreetMap Canada"
             },
             "OSM-CL-facebook": {
                 "name": "Page Facebook d'OpenStreetMap Chili",
@@ -10554,10 +10699,6 @@
                 "description": "Cartographes et utilisateurs d'OpenStreetMap dans la région de Salt Lake City",
                 "extendedDescription": "Les activités peuvent être des ateliers pour apprendre à cartographier, des cartoparties et des collectes de données en extérieur. Les événement se déroulent dans la zone de SLC au moins au départ. Nous cherchons des cartographes chevronnés ainsi que des nouveaux sur OSM. Rejoignez-nous et cartographions !"
             },
-            "OSM-Vancouver-meetup": {
-                "name": "OpenStreetMap Vancouver",
-                "description": "Cartographes et utilisateurs d'OpenStreetMap à Vancouver"
-            },
             "OSM-Wyoming": {
                 "name": "OpenStreetMap Wyoming",
                 "description": "Cartographes et utilisateurs d'OpenStreetMap dans la région de Wyoming",
@@ -10828,6 +10969,10 @@
                 "name": "Fil Twitter d'OpenStreetMap Espagne",
                 "description": "Suivez-nous sur Twitter à l'adresse {url}"
             },
+            "et-telegram": {
+                "name": "@OpenStreetMapEthiopia sur Telegram",
+                "description": "Chat Telegram d'OpenStreetMap Éthiopie"
+            },
             "fi-forum": {
                 "name": "Forum OpenStreetMap FI",
                 "description": "Forum web d'OpenStreetMap Finlande"
@@ -10839,6 +10984,22 @@
             "fi-mailinglist": {
                 "name": "Liste de diffusion Talk-fi",
                 "description": "Talk-fi est la liste de diffusion officielle de la communauté d'OSM en Finlande"
+            },
+            "fr-35-wiki": {
+                "name": "Page wiki d'OpenStreetMap Rennes",
+                "description": "Page wiki du groupe local OSM Rennes"
+            },
+            "fr-bzh-mailinglist": {
+                "name": "Liste de diffusion Talk-fr-bzh",
+                "description": "Liste de diffusion Talk-fr-bzh"
+            },
+            "fr-bzh-twitter": {
+                "name": "OSM-BZH sur Twitter",
+                "description": "OpenStreetMap BZH sur Twitter: {url}"
+            },
+            "fr-bzh-website": {
+                "name": "Site web d'OpenStreetMap BZH",
+                "description": "La carte qui parle breton"
             },
             "fr-chapter": {
                 "name": "Chapitre local OpenStreetMap France",
@@ -10883,6 +11044,10 @@
             },
             "geogeeks_perth_meetup": {
                 "description": "Groupe de rencontre basé à Perth pour les personnes intéressées par la cartographie, les données géospatiales et les logiciels libres. Nous travaillerons sur tout ce qui implique un sens du lieu."
+            },
+            "guatemala-telegram": {
+                "name": "OSM Guatemala sur Telegram",
+                "description": "Chat Telegram d'OpenStreetMap Guatemala"
             },
             "hr-facebook": {
                 "name": "Groupe Facebook d'OpenStreetMap Croatie",
@@ -10982,6 +11147,10 @@
                 "name": "Fil Twitter d'OpenStreetMap Italie",
                 "description": "Suivez-nous sur Twitter à l'adresse {url}"
             },
+            "kazakhstan-telegram": {
+                "name": "OSM Kazakhstan sur Telegram",
+                "description": "Chat Telegram d'OpenStreetMap Kazakhstan"
+            },
             "kosovo-matrix": {
                 "description": "Groupe public semi-officiel de tout le Kosovo. Nous accueillons tous les cartographes de partout et dans toutes les langues."
             },
@@ -11000,8 +11169,15 @@
                 "name": "Liste de diffusion Talk-latam",
                 "description": "Talk-latam est la liste de diffusion officielle pour la communauté latino-américaine d'OpenStreetMap"
             },
+            "latam-telegram": {
+                "name": "Telegram d'OpenStreetMap Amérique Latine"
+            },
             "latam-twitter": {
+                "name": "Twitter d'OpenStreetMap Amérique Latine",
                 "description": "OpenStreetMap Amérique Latine sur Twitter: {url}"
+            },
+            "latam-wiki": {
+                "description": "Tout ce que vous devez savoir sur la cartographie en Amérique Latine"
             },
             "lu-mailinglist": {
                 "name": "Liste de diffusion Talk-lu",
@@ -11019,6 +11195,14 @@
                 "name": "Groupe local Mappa Mercia",
                 "description": "Un endroit pour les amateurs d'OpenStreetMap dans les Midlands",
                 "extendedDescription": "Mappa Mercia est un projet pour faire grandir OpenStreetMap dans les West Midlands au Royaume-Uni. Nous organisons des événements communautaires, fournissons de l'aide et du support aux organisations locales qui veulent libérer leurs données."
+            },
+            "md-googlegroup": {
+                "name": "Groupe Google d'OSM Moldavie",
+                "description": "Groupe Google d'OpenStreetMap Moldavie"
+            },
+            "md-telegram": {
+                "name": "@OSMMoldova sur Telegram",
+                "description": "Chat Telegram d'OpenStreetMap Moldavie"
             },
             "ni-facebook": {
                 "name": "Communauté OpenStreetMap NI",
@@ -11181,7 +11365,8 @@
                 "description": "Communauté OpenStreetMap de Graz sur twitter"
             },
             "panama-telegram": {
-                "name": "OSM Panama sur Telegram"
+                "name": "OSM Panama sur Telegram",
+                "description": "Chat Telegram d'OpenStreetMap Panama"
             },
             "pt-mailinglist": {
                 "name": "Liste de diffusion Talk-pt",
@@ -11191,8 +11376,13 @@
                 "name": "OpenStreetMap Portugal sur Telegram",
                 "description": "Groupe Telegram de la communauté portugaise d'OpenStreetMap {url}"
             },
+            "romania-facebook": {
+                "name": "Groupe Facebook d'OpenStreetMap Roumanie",
+                "description": "Un groupe pour les cartographes et les utilisateurs d'OpenStreetMap en Roumanie"
+            },
             "romania-telegram": {
-                "name": "@OSMRomania sur Telegram"
+                "name": "@OSMRomania sur Telegram",
+                "description": "Chat Telegram d'OpenStreetMap Roumanie"
             },
             "sa-telegram": {
                 "name": "OSM Arabie Saoudite sur Telegram",
@@ -11219,7 +11409,8 @@
                 "description": "Une liste de diffusion pour discuter d'OpenStreetMap en Suède"
             },
             "se-telegram": {
-                "name": "OSM Suède sur Telegram"
+                "name": "OSM Suède sur Telegram",
+                "description": "Chat Telegram d'OpenStreetMap Suède"
             },
             "se-twitter": {
                 "name": "OpenStreetMap Suède sur Twitter",
@@ -11262,6 +11453,7 @@
                 "extendedDescription": "Liste de diffusion pour Rome et la région du Lazio"
             },
             "talk-it-piemonte_mailinglist": {
+                "description": "Tout le monde est bienvenu! Inscrivez-vous à l'adresse {signupUrl}",
                 "extendedDescription": "Liste de diffusion pour la région du Piémont."
             },
             "talk-mg": {
@@ -11333,6 +11525,10 @@
             "uy-mailinglist": {
                 "name": "Liste de diffusion talk-uy",
                 "description": "Talk-uy est la liste de diffusion officielle pour la communauté uruguayenne d'OSM"
+            },
+            "uzbekistan-telegram": {
+                "name": "OSM Ouzbékistan sur Telegram",
+                "description": "Chat Telegram d'OpenStreetMap Ouzbékistan"
             },
             "ve-forum": {
                 "name": "Forum OpenStreetMap VE",

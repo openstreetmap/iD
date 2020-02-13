@@ -68,18 +68,7 @@
             },
             "circularize": {
                 "title": "整圓",
-                "description": {
-                    "line": "整圓條綫",
-                    "area": "整圓範圍"
-                },
-                "key": "O",
-                "annotation": {
-                    "line": "整圓條綫。",
-                    "area": "整圓範圍。"
-                },
-                "not_closed": "無得整圓，根本唔係圈。",
-                "too_large": "無得整圓，睇到嘅部份唔夠做。",
-                "connected_to_hidden": "無得整圓，佢連咗去隱藏地貌。"
+                "key": "O"
             },
             "orthogonalize": {
                 "title": "整方"
@@ -266,15 +255,10 @@
         "inspector": {
             "show_more": "睇多啲",
             "view_on_osm": "入公家街圖睇",
-            "all_fields": "所有欄位",
-            "all_tags": "所有籤",
-            "all_members": "所有成員",
-            "all_relations": "所有關聯",
             "new_relation": "開新關聯⋯⋯",
             "role": "作用",
             "choose": "揀地貌",
             "results": "{search}搵出{n}項",
-            "back_tooltip": "轉地貌",
             "remove": "移走",
             "search": "搵",
             "unknown": "未知",
@@ -304,7 +288,6 @@
             "minimap": {
                 "tooltip": "開個縮圖，幫手搵返家下睇到嘅範圍。"
             },
-            "fix_misalignment": "校正背圖對位誤差",
             "offset": "下面灰帶內，拖到任何位，去校正背圖對位誤差，又或者，以米為單位，入返啲差額。"
         },
         "map_data": {
@@ -1550,9 +1533,6 @@
                     "name": "地埗",
                     "terms": "Address,地址,地埗,址"
                 },
-                "aerialway": {
-                    "name": "吊道"
-                },
                 "aerialway/cable_car": {
                     "name": "吊車",
                     "terms": "Cable Car,吊車,䌫車"
@@ -1576,9 +1556,6 @@
                 "aerialway/pylon": {
                     "name": "吊車塔",
                     "terms": "Areialway Pylon,吊車塔,纜車纜塔"
-                },
-                "aeroway": {
-                    "name": "航空設施"
                 },
                 "aeroway/aerodrome": {
                     "name": "飛機場",
@@ -2914,9 +2891,6 @@
                 }
             },
             "MAPNIK": {
-                "attribution": {
-                    "text": "版權所有，公家街圖協力人。共創之下，任發任改，然而必須提及協力者，改咗必以同樣條款發放。"
-                },
                 "description": "預設公家街圖層",
                 "name": "公家街圖（一般）"
             },

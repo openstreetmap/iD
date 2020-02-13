@@ -79,6 +79,9 @@
                 "healthcare/blood_donation": {
                     "name": "Blood Donor Centre"
                 },
+                "highway/construction": {
+                    "name": "Road Under Construction"
+                },
                 "highway/crossing/marked": {
                     "name": "Marked Crossing"
                 },
@@ -90,6 +93,9 @@
                 },
                 "highway/crossing/zebra-raised": {
                     "name": "Marked Crossing (Raised)"
+                },
+                "highway/cycleway/bicycle_foot": {
+                    "name": "Shared Path"
                 },
                 "highway/footway/marked": {
                     "name": "Marked Crossing"

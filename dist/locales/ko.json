@@ -7,7 +7,10 @@
             "undo": "실행 취소",
             "zoom_to": "확대",
             "copy": "복사",
-            "favorite": "즐겨찾기"
+            "favorite": "즐겨찾기",
+            "list": "목록",
+            "text": "텍스트",
+            "deselect": "선택 해제"
         },
         "toolbar": {
             "undo_redo": "실행 취소 / 다시 실행",
@@ -48,19 +51,7 @@
                 "key": "N"
             },
             "add_preset": {
-                "title": "{feature} 추가하기",
-                "point": {
-                    "title": "점으로 {feature} 추가하기"
-                },
-                "line": {
-                    "title": "선으로 {feature} 추가하기"
-                },
-                "area": {
-                    "title": "공간으로 {feature} 추가하기"
-                },
-                "building": {
-                    "title": "건물로 {feature} 추가하기"
-                }
+                "title": "{feature} 추가하기"
             },
             "browse": {
                 "title": "찾아보기",
@@ -113,19 +104,7 @@
             },
             "circularize": {
                 "title": "둥글게 하기",
-                "description": {
-                    "line": "이 선을 둥글게 만듭니다.",
-                    "area": "이 공간을 둥글게 만듭니다."
-                },
-                "key": "O",
-                "annotation": {
-                    "line": "선을 둥글게 만들었습니다.",
-                    "area": "공간을 둥글게 만들었습니다."
-                },
-                "not_closed": "공간이 닫혀있지 않기 때문에 둥글게 만들 수 없습니다.",
-                "too_large": "공간이 현재 충분히 보이지 않기 때문에 둥글게 만들 수 없습니다.",
-                "connected_to_hidden": "숨겨진 지물에 연결되어 있기 때문에 둥글게 만들 수 없습니다.",
-                "not_downloaded": "일부분이 다운로드되지 않았기 때문에 둥글게 만들 수 없습니다."
+                "key": "O"
             },
             "orthogonalize": {
                 "title": "각지게 하기",
@@ -593,10 +572,11 @@
             "show_more": "더 보기",
             "view_on_osm": "openstreetmap.org에서 보기",
             "view_on_keepRight": "keepright.at에서 보기",
-            "all_fields": "모든 필드",
-            "all_tags": "모든 태그",
-            "all_members": "모든 구성원",
-            "all_relations": "모든 관계",
+            "fields": "필드",
+            "tags_count": "태그({count})",
+            "members_count": "구성원({count})",
+            "relations_count": "관계({count})",
+            "features_count": "지물({count})",
             "add_to_relation": "관계에 추가",
             "new_relation": "새로운 관계...",
             "role": "역할",
@@ -604,10 +584,8 @@
             "results": "{search}에 대한 결과 {n}개",
             "wiki_reference": "문서 보기",
             "wiki_en_reference": "영어 문서 보기",
-            "back_tooltip": "지물 바꾸기",
             "remove": "제거",
             "search": "검색",
-            "multiselect": "선택된 지물",
             "unknown": "알 수 없음",
             "incomplete": "<다운로드되지 않음>",
             "feature_list": "지물 검색",
@@ -630,10 +608,7 @@
             "way": "길",
             "relation": "관계",
             "location": "위치",
-            "add_fields": "필드 추가:",
-            "lock": {
-                "suggestion": "Wikidata 태그가 있기 때문에 \"{label}\" 필드가 잠겼습니다. \"모든 태그\" 섹션에서 태그를 삭제하거나 편집할 수 있습니다."
-            }
+            "add_fields": "필드 추가:"
         },
         "background": {
             "title": "배경",
@@ -645,7 +620,7 @@
             "switch": "이 배경으로 복귀합니다",
             "custom": "사용자 지정",
             "overlays": "오버레이",
-            "reset": "재설정",
+            "reset": "초기화",
             "reset_all": "모두 초기화",
             "display_options": "디스플레이 옵션",
             "brightness": "명도",
@@ -657,7 +632,9 @@
                 "tooltip": "현재 보여지는 지역을 찾을 수 있도록 지도를 축소하여 보여줍니다.",
                 "key": "/"
             },
-            "fix_misalignment": "사진 오프셋 조절",
+            "panel": {
+                "description": "상세 패널 보기"
+            },
             "offset": "아래의 회색 영역을 드래그하여 사진 오프셋을 조절하거나, 오프셋 값을 미터 단위로 입력하세요."
         },
         "map_data": {
@@ -675,11 +652,9 @@
                     "title": "OpenStreetMap 참고"
                 },
                 "keepRight": {
-                    "tooltip": "keepright.at에서 자동으로 감지한 지도 문제점",
                     "title": "KeepRight 문제점"
                 },
                 "improveOSM": {
-                    "tooltip": "improveosm.org에서 자동으로 감지한 누락된 데이터",
                     "title": "ImproveOSM 문제점"
                 },
                 "custom": {
@@ -688,9 +663,15 @@
                     "zoom": "확대하여 데이터 보기"
                 }
             },
+            "style_options": "스타일 설정",
             "map_features": "지도 지물",
             "autohidden": "이 지물은 화면에 너무 많이 보여질 수 있기 때문에 자동으로 숨겨집니다. 편집하려면 확대할 수 있습니다.",
             "osmhidden": "이 기능은 OpenStreetMap 레이어를 숨겨서 자동으로 숨겨졌습니다."
+        },
+        "visual_diff": {
+            "highlight_edits": {
+                "description": "변경 사항 강조"
+            }
         },
         "photo_overlays": {
             "title": "사진 오버레이",
@@ -806,8 +787,17 @@
             "key": "P",
             "privacy": {
                 "title": "개인정보",
-                "privacy_link": "iD 개인정보처리방침 보기"
+                "privacy_link": "iD 개인정보처리방침 보기",
+                "third_party_icons": {
+                    "description": "서드 파티 아이콘 표시"
+                }
             }
+        },
+        "restore": {
+            "heading": "저장하지 않은 변경 사항이 있습니다",
+            "description": "이전 편집 시에 저장하지 않은 변경 사항을 복구하시겠습니까?",
+            "restore": "변경 사항 복구",
+            "reset": "변경 사항 폐기"
         },
         "save": {
             "title": "저장",
@@ -882,15 +872,10 @@
         "full_screen": "전체 화면 전환",
         "QA": {
             "keepRight": {
-                "title": "KeepRight 오류",
-                "detail_title": "오류",
                 "detail_description": "설명",
                 "comment": "댓글",
-                "close": "닫기(오류 수정됨)",
-                "ignore": "무시(오류가 아님)",
                 "save_comment": "댓글 저장",
                 "close_comment": "닫고 댓글 추가",
-                "ignore_comment": "무시하고 댓글 추가",
                 "error_parts": {
                     "this_node": "이 노드",
                     "this_way": "이 길",
@@ -1227,11 +1212,9 @@
                 "type": "지물 유형을 클릭해 선택한 지물을 다른 유형으로 바꿀 수 있습니다. 현실 세계에 존재하는 모든 것은 OpenStreetMap에 추가될 수 있기 때문에, 고를 수 있는 수천 가지의 지물 유형이 있습니다.",
                 "type_picker": "유형 선택기는 공원, 병원, 음식점, 도로 및 건물과 같은 가장 흔한 지물 유형을 표시합니다. 검색 상자에 찾고자 하는 것을 입력하여 무엇이든 찾을 수 있습니다. 또한 지물 유형 옆의 {inspect} **정보** 아이콘을 클릭해 더 많은 정보를 얻을 수 있습니다.",
                 "fields_h": "필드",
-                "fields_all_fields": "\"모든 필드\" 부분은 지물의 편집 가능한 모든 사항을 포함합니다. OpenStreetMap에서 모든 필드는 선택 사항이며, 확실하지 않은 필드는 비워 놓아도 됩니다.",
                 "fields_example": "각 지물 유형은 서로 다른 필드를 표시합니다. 예를 들어, 도로가 노면과 제한 속도 필드를 표시하는 반면, 음식점은 제공하는 음식의 종류와 영업시간 필드를 표시할 수 있습니다.",
                 "fields_add_field": "또한 \"필드 추가\" 드롭다운을 클릭해 설명, 위키백과 링크, 휠체어 접근성과 같은 더 많은 필드를 추가할 수 있습니다.",
                 "tags_h": "태그",
-                "tags_all_tags": "필드 부분 아래, \"모든 태그\" 부분을 펼쳐 선택한 지물의 OpenStreetMap *태그*를 편집할 수 있습니다. 각 태그는 OpenStreetMap에 저장된 모든 지물을 정의하는 데이터 요소인 *키*와 *값*으로 구성됩니다.",
                 "tags_resources": "지물의 태그를 편집하는 일은 OpenStreetMap에 대한 중급 수준의 지식을 필요로 합니다. OpenStreetMap 태그 관행에 대해 더 알아보기 위해서는 [OpenStreetMap Wiki](https://wiki.openstreetmap.org/wiki/Ko:%EC%B2%98%EC%9D%8C_%ED%99%94%EB%A9%B4) 또는 [Taginfo](https://taginfo.openstreetmap.org/)를 참고하세요."
             },
             "points": {
@@ -1292,8 +1275,6 @@
                 "title": "관계",
                 "intro": "*관계*는 다른 지물들을 묶는 OpenStreetMap의 특수한 지물입니다. 관계에 속하는 지물을 *구성원*이라고 하며, 각 구성원은 관계 내에서 *역할*을 가질 수 있습니다.",
                 "edit_relation_h": "관계 편집하기",
-                "edit_relation": "지물 편집기의 맨 아래에서, \"모든 관계\" 부분을 펼쳐 선택한 지물이 관계의 구성원인지 볼 수 있습니다. 그리고 관계를 클릭해 관계를 선택하고 편집할 수 있습니다.",
-                "edit_relation_add": "지물을 관계에 추가하려면 지물을 선택하고 지물 편집기의 \"모든 관계\" 부분의 {plus} 추가 버튼을 클릭하세요. 근처의 관계 목록에서 선택하거나, \"새 관계...\" 옵션을 선택할 수 있습니다.",
                 "edit_relation_delete": "또한 {delete} **삭제** 버튼을 클릭해 선택한 지물을 관계에서 제거할 수 있습니다. 관계로부터 모든 구성원을 제거하면, 관계가 자동으로 삭제됩니다.",
                 "maintain_relation_h": "관계 유지하기",
                 "maintain_relation": "대부분의 경우 iD는 편집에 따라 자동으로 관계를 유지합니다. 관계의 구성원일 수 있는 지물을 대체할 때에는 주의해야 합니다. 예를 들어 도로의 일부분을 삭제하고 이를 대체하기 위해 새로운 도로 분절을 그린다면, 새 도로 분절을 기존 도로와 같은 관계(노선, 회전 제한 등)에 추가해야 합니다.",
@@ -1302,10 +1283,8 @@
                 "turn_restriction_h": "회전 제한",
                 "route_h": "노선",
                 "route": "*노선* 관계는 버스 노선, 기차 노선, 고속 도로 노선과 같은 노선망을 이루는 한 개 이상의 선 지물의 집단입니다.",
-                "route_add": "지물을 노선 관계에 추가하려면 지물을 선택하고 지물 편집기의 \"모든 관계\" 부분으로 아래로 스크롤한 다음, {plus} 추가 버튼을 클릭해 지물을 근처의 기존 관계나 새로운 관계에 추가하세요.",
                 "boundary_h": "경계",
-                "boundary": "*경계* 관계는 행정 경계를 이루는 한 개 이상의 선 지물의 집단입니다.",
-                "boundary_add": "지물을 경계 관계에 추가하려면 지물을 선택하고 지물 편집기의 \"모든 관계\" 부분으로 아래로 스크롤한 다음, {plus} 추가 버튼을 클릭해 지물을 근처의 기존 관계나 새로운 관계에 추가하세요."
+                "boundary": "*경계* 관계는 행정 경계를 이루는 한 개 이상의 선 지물의 집단입니다."
             },
             "notes": {
                 "title": "참고",
@@ -1390,7 +1369,14 @@
                     "no_edits": "아직 아무것도 편집하지 않았습니다"
                 },
                 "hidden_issues": {
-                    "none": "감지된 오류가 여기에 나타납니다"
+                    "none": "감지된 오류가 여기에 나타납니다",
+                    "elsewhere": "화면 밖 문제점: {count}",
+                    "everything_else": "다른 문제점: {count}",
+                    "everything_else_elsewhere": "화면 밖 다른 문제점: {count}",
+                    "disabled_rules": "비활성화된 규칙에 따른 문제점: {count}",
+                    "disabled_rules_elsewhere": "비활성화된 규칙에 따른 화면 밖 문제점: {count}",
+                    "ignored_issues": "무시된 문제점: {count}",
+                    "ignored_issues_elsewhere": "무시된 화면 밖 문제점: {count}"
                 }
             },
             "options": {
@@ -1473,6 +1459,9 @@
                 "email": {
                     "reference": "이메일 주소는 \"user@example.com\"와 같은 형태여야 합니다."
                 }
+            },
+            "missing_role": {
+                "title": "역할 없음"
             },
             "missing_tag": {
                 "title": "태그 없음",
@@ -3052,9 +3041,15 @@
                 "plant": {
                     "label": "식물"
                 },
+                "plant/method": {
+                    "label": "발전 방식"
+                },
                 "plant/output/electricity": {
                     "label": "전력 출력",
                     "placeholder": "500 MW, 1000 MW, 2000 MW..."
+                },
+                "plant/source": {
+                    "label": "에너지원"
                 },
                 "playground/theme": {
                     "label": "테마"
@@ -3275,6 +3270,7 @@
                     "label": "계절 한정"
                 },
                 "seats": {
+                    "label": "좌석 수",
                     "placeholder": "2, 4, 6..."
                 },
                 "second_hand": {
@@ -3285,6 +3281,9 @@
                         "yes": "예"
                     },
                     "placeholder": "예, 아니오, 전용"
+                },
+                "self_service": {
+                    "label": "셀프서비스"
                 },
                 "service": {
                     "label": "유형"
@@ -3706,9 +3705,6 @@
                     "name": "광고란",
                     "terms": "광고란,광고 게시판,게시판"
                 },
-                "aerialway": {
-                    "name": "공중 이동로"
-                },
                 "aerialway/cable_car": {
                     "name": "케이블카",
                     "terms": "케이블카"
@@ -3728,6 +3724,9 @@
                 "aerialway/goods": {
                     "name": "화물 항공로",
                     "terms": "화물 항공 운송"
+                },
+                "aerialway/j-bar": {
+                    "name": "J-바 리프트"
                 },
                 "aerialway/magic_carpet": {
                     "name": "매직 카펫 리프트",
@@ -3749,8 +3748,11 @@
                     "name": "로프 견인 리프트",
                     "terms": "로프 견인 리프트"
                 },
-                "aeroway": {
-                    "name": "항공 시설"
+                "aerialway/t-bar": {
+                    "name": "T-바 리프트"
+                },
+                "aerialway/zip_line": {
+                    "name": "집라인"
                 },
                 "aeroway/aerodrome": {
                     "name": "공항",
@@ -3775,6 +3777,9 @@
                 "aeroway/runway": {
                     "name": "활주로",
                     "terms": "활주로"
+                },
+                "aeroway/spaceport": {
+                    "name": "우주 공항"
                 },
                 "aeroway/taxiway": {
                     "name": "유도로",
@@ -3826,8 +3831,8 @@
                     "terms": "바베큐/그릴"
                 },
                 "amenity/bench": {
-                    "name": "좌석",
-                    "terms": "벤치"
+                    "name": "벤치",
+                    "terms": "의자"
                 },
                 "amenity/bicycle_parking": {
                     "name": "자전거 주차장",
@@ -3912,6 +3917,9 @@
                     "name": "커뮤니티 센터",
                     "terms": "커뮤니티 센터"
                 },
+                "amenity/community_centre/lgbtq": {
+                    "name": "LGBTQ+ 커뮤니티 센터"
+                },
                 "amenity/compressed_air": {
                     "name": "압축된 공기",
                     "terms": "압축 공기"
@@ -3962,6 +3970,9 @@
                 },
                 "amenity/events_venue": {
                     "name": "행사장"
+                },
+                "amenity/exhibition_centre": {
+                    "name": "전시회장"
                 },
                 "amenity/fast_food": {
                     "name": "패스트푸드",
@@ -4469,6 +4480,9 @@
                 "amenity/watering_place": {
                     "name": "동물 급수 장소",
                     "terms": "동물 음수대"
+                },
+                "amenity/weighbridge": {
+                    "name": "트럭 저울"
                 },
                 "area": {
                     "name": "지역",
@@ -4981,6 +4995,9 @@
                     "name": "제화공",
                     "terms": "화공"
                 },
+                "craft/signmaker": {
+                    "name": "간판공"
+                },
                 "craft/stonemason": {
                     "name": "석공",
                     "terms": "석공"
@@ -5189,6 +5206,9 @@
                 },
                 "healthcare/speech_therapist": {
                     "name": "언어치료사"
+                },
+                "highway": {
+                    "name": "도로 지물"
                 },
                 "highway/bridleway": {
                     "name": "승마 도로",
@@ -5570,6 +5590,9 @@
                     "name": "꽃밭",
                     "terms": "화단"
                 },
+                "landuse/forest": {
+                    "terms": "숲"
+                },
                 "landuse/garages": {
                     "name": "차고 부지"
                 },
@@ -5847,6 +5870,9 @@
                     "name": "승마 경기장",
                     "terms": "승마 경기장"
                 },
+                "leisure/pitch/field_hockey": {
+                    "name": "필드하키장"
+                },
                 "leisure/pitch/netball": {
                     "name": "네트볼 코트"
                 },
@@ -5919,12 +5945,21 @@
                 "leisure/track/cycling": {
                     "name": "자전거 경주로"
                 },
+                "leisure/track/cycling_point": {
+                    "name": "자전거 경주로"
+                },
                 "leisure/track/horse_racing": {
+                    "name": "경마 경주로"
+                },
+                "leisure/track/horse_racing_point": {
                     "name": "경마 경주로"
                 },
                 "leisure/track/running": {
                     "name": "육상 트랙",
                     "terms": "달리기,경주로"
+                },
+                "leisure/track/running_point": {
+                    "name": "육상 트랙"
                 },
                 "leisure/water_park": {
                     "name": "워터파크",
@@ -5943,6 +5978,9 @@
                 },
                 "man_made/antenna": {
                     "name": "안테나"
+                },
+                "man_made/beacon": {
+                    "name": "비컨"
                 },
                 "man_made/beehive": {
                     "name": "벌통",
@@ -6052,6 +6090,9 @@
                 "man_made/pipeline/underground": {
                     "name": "지하 파이프라인"
                 },
+                "man_made/pipeline/valve": {
+                    "name": "파이프라인 밸브"
+                },
                 "man_made/pumping_station": {
                     "name": "펌프장",
                     "terms": "펌프장"
@@ -6124,6 +6165,18 @@
                 "man_made/works": {
                     "name": "공장",
                     "terms": "공장"
+                },
+                "military/bunker": {
+                    "name": "군용 벙커"
+                },
+                "military/nuclear_explosion_site": {
+                    "name": "핵폭발 지역"
+                },
+                "military/trench": {
+                    "name": "군용 참호"
+                },
+                "natural": {
+                    "name": "자연 지물"
                 },
                 "natural/bare_rock": {
                     "name": "노출된 암반",
@@ -6231,6 +6284,9 @@
                     "name": "호수",
                     "terms": "호수"
                 },
+                "natural/water/moat": {
+                    "name": "해자"
+                },
                 "natural/water/pond": {
                     "name": "연못",
                     "terms": "연못"
@@ -6248,6 +6304,10 @@
                 "natural/wetland": {
                     "name": "습지",
                     "terms": "늪,갈대밭,갯벌,간석지"
+                },
+                "natural/wood": {
+                    "name": "자연림",
+                    "terms": "숲"
                 },
                 "noexit/yes": {
                     "name": "출구 없음",
@@ -6413,6 +6473,9 @@
                 "office/water_utility": {
                     "name": "수도사업소"
                 },
+                "piste/sled": {
+                    "name": "썰맷길"
+                },
                 "place": {
                     "name": "장소"
                 },
@@ -6509,11 +6572,14 @@
                 "polling_station": {
                     "name": "임시 투표소"
                 },
+                "power": {
+                    "name": "전력 지물"
+                },
                 "power/cable/underground": {
                     "name": "지하 전력 케이블"
                 },
                 "power/generator": {
-                    "name": "발전소",
+                    "name": "발전기",
                     "terms": "발전소"
                 },
                 "power/generator/method/photovoltaic": {
@@ -6536,6 +6602,12 @@
                 "power/plant": {
                     "name": "발전소 부지",
                     "terms": "발전소 부지"
+                },
+                "power/plant/source/coal": {
+                    "name": "석탄 발전소"
+                },
+                "power/plant/source/gas": {
+                    "name": "가스 발전소"
                 },
                 "power/plant/source/hydro": {
                     "name": "수력 발전소"
@@ -6712,6 +6784,9 @@
                 "public_transport/stop_position_trolleybus": {
                     "name": "트롤리버스 정차 위치",
                     "terms": "버스,전기,대중교통,무궤도,전차,트롤리"
+                },
+                "railway": {
+                    "name": "철도 지물"
                 },
                 "railway/abandoned": {
                     "name": "버려진 철도",
@@ -7152,6 +7227,9 @@
                     "name": "고급 오디오 가게",
                     "terms": "스테레오,비디오"
                 },
+                "shop/hobby": {
+                    "name": "취미 가게"
+                },
                 "shop/houseware": {
                     "name": "가정용품 가게",
                     "terms": "가정용품 상점"
@@ -7432,6 +7510,9 @@
                 "telecom/data_center": {
                     "name": "데이터 센터"
                 },
+                "tourism": {
+                    "name": "관광 지물"
+                },
                 "tourism/alpine_hut": {
                     "name": "고산장"
                 },
@@ -7709,6 +7790,9 @@
                     "name": "물길",
                     "terms": "수로"
                 },
+                "waterway": {
+                    "name": "수로 지물"
+                },
                 "waterway/boatyard": {
                     "name": "보트 선착장",
                     "terms": "조선소"
@@ -7736,6 +7820,9 @@
                 "waterway/fuel": {
                     "name": "해양 주유소",
                     "terms": "해양 주유소"
+                },
+                "waterway/lock_gate": {
+                    "name": "갑문"
                 },
                 "waterway/milestone": {
                     "name": "수로 거리표"
@@ -7790,9 +7877,6 @@
                 "name": "Esri (선명한) 세계 이미지 베타"
             },
             "MAPNIK": {
-                "attribution": {
-                    "text": "© OpenStreetMap 기여자, CC-BY-SA"
-                },
                 "description": "기본 OpenStreetMap 레이어",
                 "name": "OpenStreetMap (일반)"
             },

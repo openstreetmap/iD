@@ -7,7 +7,9 @@
             "undo": "sugrąžinti",
             "zoom_to": "padidinti iki",
             "copy": "kopijuoti",
-            "favorite": "mėgstamas"
+            "favorite": "mėgstamas",
+            "list": "sąrašas",
+            "text": "tekstas"
         },
         "toolbar": {
             "inspect": "Apžvelgti",
@@ -97,18 +99,7 @@
             },
             "circularize": {
                 "title": "Apvalinti",
-                "description": {
-                    "line": "Suapvalinti šią liniją.",
-                    "area": "Suapvalinti šį plotą."
-                },
-                "key": "O",
-                "annotation": {
-                    "line": "Suapvalinta linija.",
-                    "area": "Suapvalintas plotas."
-                },
-                "not_closed": "Negalima suapvalinti, nes linija nėra uždara.",
-                "too_large": "Negalima suapvalinti, nes nepilnai matoma",
-                "connected_to_hidden": "Negalima suapvalinti, nes yra prijungtas prie paslėpto objekto."
+                "key": "O"
             },
             "orthogonalize": {
                 "title": "Statūs kampai",
@@ -495,10 +486,6 @@
             "show_more": "Rodyti daugiau",
             "view_on_osm": "Žiūrėti svetainėje openstreetmap.org",
             "view_on_keepRight": "Rodyti per keepright.at",
-            "all_fields": "Visi laukai",
-            "all_tags": "Visos žymos",
-            "all_members": "Visi nariai",
-            "all_relations": "Visi ryšiai",
             "add_to_relation": "Pridėti į ryšį",
             "new_relation": "Naujas ryšys...",
             "choose_relation": "Pasirinkti tėvinį ryšį",
@@ -509,10 +496,8 @@
             "edit_reference": "redaguoti/versti",
             "wiki_reference": "Rodyti dokumentaciją",
             "wiki_en_reference": "Rodyti dokumentaciją anglų kalba",
-            "back_tooltip": "Keisti objektą",
             "remove": "Pašalinti",
             "search": "Ieškoti",
-            "multiselect": "Pažymėti objektai",
             "unknown": "Nežinoma",
             "incomplete": "<neatsiųsta>",
             "feature_list": "Ieškoti objektų",
@@ -558,7 +543,6 @@
                 "tooltip": "Rodyti atitolintą žemėlapį, kad būtų lengviau rasti šiuo metu rodomą vietą.",
                 "key": "/"
             },
-            "fix_misalignment": "Keisti fono poslinkį",
             "offset": "Tempkite bet kur pilkoje zonoje, kad keistumėte orotofotografijos poslinkį, arba įvesktie poslinkių reikšmes metrais."
         },
         "map_data": {
@@ -583,8 +567,28 @@
                     "zoom": "Priartinti duomenims"
                 }
             },
+            "style_options": "Stiliaus pasirinkimai",
             "map_features": "Žemėlapio savybės",
             "autohidden": "Šie objektai buvo automatiškai paslėpti, nes ekrane tektų rodyti per daug. Galite didinti, jei norite juos keisti."
+        },
+        "visual_diff": {
+            "highlight_edits": {
+                "description": "Paryškinti pakeitimus"
+            }
+        },
+        "photo_overlays": {
+            "traffic_signs": {
+                "title": "Eismo ženklai"
+            },
+            "photo_type": {
+                "flat": {
+                    "tooltip": "Tradicinės nuotraukos"
+                },
+                "panoramic": {
+                    "title": "Panoraminės nuotraukos",
+                    "tooltip": "360° nuotraukos"
+                }
+            }
         },
         "feature": {
             "points": {
@@ -606,6 +610,9 @@
             "buildings": {
                 "description": "Pastatai",
                 "tooltip": "Pastatai, pastogės, garažai ir pan."
+            },
+            "building_parts": {
+                "description": "Pastatų dalys"
             },
             "landuse": {
                 "description": "Žemėnaudos objektai",
@@ -666,6 +673,18 @@
                 }
             }
         },
+        "preferences": {
+            "title": "Parametrai",
+            "description": "Parametrai",
+            "privacy": {
+                "title": "Privatumas"
+            }
+        },
+        "restore": {
+            "heading": "Jūs turite neišsaugotų pakeitimų",
+            "restore": "Atstatyti mano pakeitimus",
+            "reset": "Atmesti mano pakeitimus"
+        },
         "save": {
             "title": "Išsaugoti",
             "help": "Peržiūrėkite jūsų pakeitimus ir įkelkite juos į OpenStreetMap, taip padarydami juos matomais kitiems naudotojams.",
@@ -700,6 +719,7 @@
             }
         },
         "success": {
+            "thank_you": "Ačiū už žemėlapio tobulinimą.",
             "help_link_text": "Detalės",
             "help_link_url": "https://wiki.openstreetmap.org/wiki/FAQ#I_have_just_made_some_changes_to_the_map._How_do_I_get_to_see_my_changes.3F",
             "view_on_osm": "Rodyti pakeitimus OSM",
@@ -714,6 +734,10 @@
         "confirm": {
             "okay": "Gerai",
             "cancel": "Nutraukti"
+        },
+        "splash": {
+            "privacy_policy": "iD privatumo politika",
+            "start": "Redaguoti dabar"
         },
         "source_switch": {
             "live": "gyva",
@@ -736,6 +760,8 @@
         "full_screen": "Perjungti pilną ekraną",
         "QA": {
             "keepRight": {
+                "detail_description": "Aprašymas",
+                "comment": "Komentaras",
                 "errorTypes": {
                     "400": {
                         "title": "Geometrijos problema"
@@ -1272,6 +1298,12 @@
                 "category-landuse": {
                     "name": "Žemėnaudos objektai"
                 },
+                "category-path": {
+                    "name": "Takai"
+                },
+                "category-rail": {
+                    "name": "Gelžkeliai"
+                },
                 "category-restriction": {
                     "name": "Apribojimo objektai"
                 },
@@ -1328,8 +1360,17 @@
                         "motor_vehicle": "Motorinis transportas"
                     }
                 },
+                "access_aisle": {
+                    "label": "Tipas"
+                },
                 "access_simple": {
                     "label": "Leidžiamas priėjimas"
+                },
+                "addr/interpolation": {
+                    "label": "Tipas",
+                    "options": {
+                        "all": "Visi"
+                    }
                 },
                 "address": {
                     "label": "Adresas",
@@ -1415,6 +1456,9 @@
                 "animal_shelter": {
                     "label": "Gyvūnams"
                 },
+                "architect": {
+                    "label": "Architektas"
+                },
                 "area/highway": {
                     "label": "Tipas"
                 },
@@ -1427,10 +1471,19 @@
                 "atm": {
                     "label": "ATM"
                 },
+                "attraction": {
+                    "label": "Tipas"
+                },
                 "backrest": {
                     "label": "Atlošas"
                 },
+                "bar": {
+                    "label": "Baras"
+                },
                 "barrier": {
+                    "label": "Tipas"
+                },
+                "basin": {
                     "label": "Tipas"
                 },
                 "bath/open_air": {
@@ -1456,6 +1509,12 @@
                 "bin": {
                     "label": "Šiukšliadėžė"
                 },
+                "blind": {
+                    "options": {
+                        "no": "Ne",
+                        "yes": "Taip"
+                    }
+                },
                 "blood_components": {
                     "label": "Kraujo komponentai",
                     "options": {
@@ -1466,6 +1525,9 @@
                     }
                 },
                 "board_type": {
+                    "label": "Tipas"
+                },
+                "bollard": {
                     "label": "Tipas"
                 },
                 "boules": {
@@ -1486,6 +1548,16 @@
                 },
                 "building": {
                     "label": "Pastatas"
+                },
+                "building/levels": {
+                    "label": "Lygiai",
+                    "placeholder": "2, 4, 6..."
+                },
+                "building/levels/underground": {
+                    "placeholder": "2, 4, 6..."
+                },
+                "building/levels_building": {
+                    "placeholder": "2, 4, 6..."
                 },
                 "building_area": {
                     "label": "Pastatas"
@@ -1518,6 +1590,12 @@
                 "castle_type": {
                     "label": "Tipas"
                 },
+                "charge_fee": {
+                    "placeholder": "1 EUR, 5 USD, 10 JPY…"
+                },
+                "charge_toll": {
+                    "placeholder": "1 EUR, 5 USD, 10 JPY…"
+                },
                 "clothes": {
                     "label": "Drabužiai"
                 },
@@ -1539,6 +1617,9 @@
                 "construction": {
                     "label": "Tipas"
                 },
+                "consulate": {
+                    "label": "Tipas"
+                },
                 "contact/webcam": {
                     "placeholder": "http://pavyzdys.lt/"
                 },
@@ -1554,6 +1635,9 @@
                 },
                 "country": {
                     "label": "Šalis"
+                },
+                "couplings": {
+                    "placeholder": "1, 2, 3..."
                 },
                 "covered": {
                     "label": "Padengta"
@@ -1636,6 +1720,11 @@
                 "denotation": {
                     "label": "Žymėjimas"
                 },
+                "departures_board": {
+                    "options": {
+                        "yes": "Taip"
+                    }
+                },
                 "description": {
                     "label": "Aprašymas"
                 },
@@ -1645,6 +1734,12 @@
                 "devices": {
                     "label": "Įrenginiai",
                     "placeholder": "1, 2, 3..."
+                },
+                "diameter": {
+                    "placeholder": "5 mm, 10 cm, 15 in…"
+                },
+                "diplomatic": {
+                    "label": "Type"
                 },
                 "direction": {
                     "label": "Kryptis (Laipsniai pagal laikrodžio rodyklę)",
@@ -1691,6 +1786,26 @@
                 "dock": {
                     "label": "Tipas"
                 },
+                "dog": {
+                    "label": "Šunys",
+                    "options": {
+                        "leashed": "Tik su pavadėliu",
+                        "no": "Neleidžiama",
+                        "yes": "Leidžiama"
+                    }
+                },
+                "door": {
+                    "label": "Durys"
+                },
+                "door_type": {
+                    "label": "Tipas"
+                },
+                "drink_multi": {
+                    "label": "Gėrimai"
+                },
+                "drinking_water": {
+                    "label": "Geriamas"
+                },
                 "drive_through": {
                     "label": "Pravažiavimas"
                 },
@@ -1719,8 +1834,17 @@
                     "label": "Tipas",
                     "placeholder": "Numatytas"
                 },
+                "embassy": {
+                    "label": "Tipas"
+                },
                 "emergency": {
                     "label": "Avarinis"
+                },
+                "emergency_combo": {
+                    "label": "Tipas"
+                },
+                "enforcement": {
+                    "label": "Tipas"
                 },
                 "entrance": {
                     "label": "Tipas"
@@ -1748,6 +1872,9 @@
                 "fireplace": {
                     "label": "Laužavietė"
                 },
+                "fishing": {
+                    "label": "Žvejyba"
+                },
                 "fitness_station": {
                     "label": "Įrengimų Tipas"
                 },
@@ -1761,14 +1888,23 @@
                     "label": "Tipas",
                     "placeholder": "Numatytas"
                 },
+                "fountain": {
+                    "label": "Tipas"
+                },
                 "frequency": {
                     "label": "Naudojamas dažnis"
+                },
+                "from": {
+                    "label": "Nuo"
                 },
                 "fuel": {
                     "label": "Degalai"
                 },
                 "fuel_multi": {
                     "label": "Kuro tipai"
+                },
+                "gambling": {
+                    "label": "Žaidimai"
                 },
                 "gauge": {
                     "label": "Matuoklis"
@@ -1796,6 +1932,9 @@
                     "label": "Tipas"
                 },
                 "government": {
+                    "label": "Tipas"
+                },
+                "guest_house": {
                     "label": "Tipas"
                 },
                 "handicap": {
@@ -1851,6 +1990,9 @@
                         "undefined": "Ne"
                     }
                 },
+                "hot_water": {
+                    "label": "Karštas vanduo"
+                },
                 "incline": {
                     "label": "Nuolydis"
                 },
@@ -1860,6 +2002,9 @@
                         "down": "Žemyn",
                         "up": "Aukštyn"
                     }
+                },
+                "indoor_type": {
+                    "label": "Tipas"
                 },
                 "industrial": {
                     "label": "Tipas"
@@ -1886,8 +2031,19 @@
                 "internet_access/fee": {
                     "label": "Nemokama interneto prieiga"
                 },
+                "interval": {
+                    "label": "Intervalas"
+                },
+                "junction_line": {
+                    "options": {
+                        "circular": "Eismo žiedas"
+                    }
+                },
                 "kerb": {
                     "label": "Bordiūras"
+                },
+                "kerb/height": {
+                    "label": "Aukštis"
                 },
                 "label": {
                     "label": "Pavadinimas"
@@ -1954,6 +2110,12 @@
                 "level": {
                     "label": "Lygis"
                 },
+                "level_semi": {
+                    "label": "Lygiai"
+                },
+                "liaison": {
+                    "label": "Tipas"
+                },
                 "lit": {
                     "label": "Apšvietimas"
                 },
@@ -1969,11 +2131,20 @@
                 "manhole": {
                     "label": "Tipas"
                 },
+                "manufacturer": {
+                    "label": "Gamintojas"
+                },
                 "map_size": {
                     "label": "Aprėptis"
                 },
                 "map_type": {
                     "label": "Tipas"
+                },
+                "marker": {
+                    "label": "Tipas"
+                },
+                "max_age": {
+                    "label": "Maksimalus amžius"
                 },
                 "maxheight": {
                     "label": "Maksimalus aukštis",
@@ -1993,8 +2164,18 @@
                 "maxweight": {
                     "label": "Maksimalus svoris"
                 },
+                "maxweight_bridge": {
+                    "label": "Maksimalus svoris"
+                },
                 "memorial": {
                     "label": "Tipas"
+                },
+                "min_age": {
+                    "label": "Minimalus amžius"
+                },
+                "minspeed": {
+                    "label": "Minimalus leistinas greitis",
+                    "placeholder": "20, 30, 40..."
                 },
                 "monitoring_multi": {
                     "label": "Stebėjimas"
@@ -2034,6 +2215,9 @@
                         "5": "5: Labai status, dviratį pagrinde reikia stumti arba nešti"
                     },
                     "placeholder": "0, 1, 2, 3..."
+                },
+                "museum": {
+                    "label": "Tipas"
                 },
                 "name": {
                     "label": "Pavadinimas",
@@ -2098,7 +2282,8 @@
                     }
                 },
                 "opening_hours": {
-                    "label": "Valandos"
+                    "label": "Valandos",
+                    "placeholder": "Nežinoma"
                 },
                 "operator": {
                     "label": "Operatorius"
@@ -2191,7 +2376,14 @@
                     "label": "Tipas"
                 },
                 "plant/output/electricity": {
-                    "label": "Energijos išvesties galia"
+                    "label": "Energijos išvesties galia",
+                    "placeholder": "500 MW, 1000 MW, 2000 MW..."
+                },
+                "playground": {
+                    "label": "Tipas"
+                },
+                "playground/theme": {
+                    "label": "Tema"
                 },
                 "population": {
                     "label": "Gyventojų skaičius"
@@ -2204,6 +2396,15 @@
                 },
                 "product": {
                     "label": "Produktai"
+                },
+                "public_bookcase/type": {
+                    "label": "Tipas"
+                },
+                "pump": {
+                    "options": {
+                        "no": "Nėra",
+                        "yes": "Taip"
+                    }
                 },
                 "railway": {
                     "label": "Tipas"
@@ -2222,7 +2423,12 @@
                     "label": "Priima"
                 },
                 "recycling_type": {
-                    "label": "Tipas"
+                    "label": "Tipas",
+                    "options": {
+                        "centre": "Centras",
+                        "container": "Konteineris"
+                    },
+                    "placeholder": "Konteineris, Centras"
                 },
                 "ref": {
                     "label": "Šaltinio kodas"
@@ -2260,11 +2466,20 @@
                 "religion": {
                     "label": "Religija"
                 },
+                "residential": {
+                    "label": "Tipas"
+                },
+                "resort": {
+                    "label": "Tipas"
+                },
                 "restriction": {
                     "label": "Tipas"
                 },
                 "restrictions": {
                     "label": "Posūkio apribojimai"
+                },
+                "room": {
+                    "label": "Tipas"
                 },
                 "rooms": {
                     "label": "Kambariai"
@@ -2287,6 +2502,15 @@
                     },
                     "placeholder": "Kalnų žygiai, Alpių žygiai..."
                 },
+                "salt": {
+                    "label": "Druska"
+                },
+                "screen": {
+                    "placeholder": "1, 4, 8…"
+                },
+                "scuba_diving": {
+                    "label": "Paslaugos"
+                },
                 "seamark/beacon_isolated_danger/shape": {
                     "label": "Forma"
                 },
@@ -2297,6 +2521,7 @@
                     }
                 },
                 "seamark/beacon_lateral/colour": {
+                    "label": "Spalva",
                     "options": {
                         "green": "Žalia",
                         "grey": "Pilka",
@@ -2319,6 +2544,7 @@
                     }
                 },
                 "seamark/buoy_lateral/colour": {
+                    "label": "Spalva",
                     "options": {
                         "green": "Žalia",
                         "green;red;green": "Žalia-raudona-žalia",
@@ -2351,6 +2577,9 @@
                 "seasonal": {
                     "label": "Sezoninis"
                 },
+                "seats": {
+                    "placeholder": "2, 4, 6..."
+                },
                 "second_hand": {
                     "options": {
                         "no": "Ne",
@@ -2363,6 +2592,9 @@
                     "label": "Tipas"
                 },
                 "service/bicycle": {
+                    "label": "Paslaugos"
+                },
+                "service/vehicle": {
                     "label": "Paslaugos"
                 },
                 "service_rail": {
@@ -2384,6 +2616,9 @@
                 },
                 "shop": {
                     "label": "Tipas"
+                },
+                "shower": {
+                    "label": "Dušai"
                 },
                 "siren/purpose": {
                     "label": "Tikslas"
@@ -2420,6 +2655,9 @@
                         "impassable": "Nepravažiuojama / jokiam ratuotam transportui"
                     }
                 },
+                "sms": {
+                    "label": "SMS"
+                },
                 "social_facility": {
                     "label": "Tipas"
                 },
@@ -2447,12 +2685,18 @@
                 "step_count": {
                     "label": "Laiptų kiekis"
                 },
+                "stile": {
+                    "label": "Tipas"
+                },
                 "stop": {
                     "label": "Sustojimo tipas",
                     "options": {
                         "all": "Visi keliai",
                         "minor": "Mažas Kelias"
                     }
+                },
+                "street_cabinet": {
+                    "label": "Tipas"
                 },
                 "structure": {
                     "label": "Struktūra",
@@ -2514,6 +2758,12 @@
                     },
                     "placeholder": "Taip, ne, tik išsinešimui..."
                 },
+                "to": {
+                    "label": "Į"
+                },
+                "toilets": {
+                    "label": "Tualetai"
+                },
                 "toilets/disposal": {
                     "options": {
                         "bucket": "Kibiras"
@@ -2531,6 +2781,9 @@
                 "tower/type": {
                     "label": "Tipas"
                 },
+                "townhall/type": {
+                    "label": "Tipas"
+                },
                 "tracktype": {
                     "label": "Kelio tipas",
                     "placeholder": "Tvirtas, daugiausia tvirtas, minkštas..."
@@ -2540,6 +2793,9 @@
                 },
                 "traffic_calming": {
                     "label": "Tipas"
+                },
+                "traffic_sign": {
+                    "label": "Eismo ženklas"
                 },
                 "traffic_signals": {
                     "label": "Tipas"
@@ -2575,6 +2831,9 @@
                 "trees": {
                     "label": "Medžiai"
                 },
+                "trench": {
+                    "label": "Tipas"
+                },
                 "tunnel": {
                     "label": "Tipas",
                     "placeholder": "Numatytas"
@@ -2589,6 +2848,9 @@
                         "test": "Testas",
                         "tourism": "Turizmas"
                     }
+                },
+                "valve": {
+                    "label": "Tipas"
                 },
                 "vending": {
                     "label": "Prekių Tipas"
@@ -2634,7 +2896,12 @@
                     "label": "Tipas"
                 },
                 "wheelchair": {
-                    "label": "Prieiga vežimėliu"
+                    "label": "Prieiga vežimėliu",
+                    "options": {
+                        "limited": "Ribotas",
+                        "no": "Ne",
+                        "yes": "Taip"
+                    }
                 },
                 "width": {
                     "label": "Plotis (Metrais)"
@@ -2653,9 +2920,6 @@
                 },
                 "advertising/column": {
                     "name": "Reklaminis stovas"
-                },
-                "aerialway": {
-                    "name": "Oro transporto kelias"
                 },
                 "aerialway/cable_car": {
                     "name": "Funikulierius",
@@ -4589,9 +4853,6 @@
                 }
             },
             "MAPNIK": {
-                "attribution": {
-                    "text": "© OpenStreetMap talkininkai, CC-BY-SA"
-                },
                 "name": "OpenStreetMap (Standartinis)"
             },
             "Mapbox": {
@@ -4601,11 +4862,6 @@
             },
             "finds.jp_KBN_2500": {
                 "name": "Japonija GSI KIBAN 2500"
-            },
-            "gsi.go.jp": {
-                "attribution": {
-                    "text": "GSI Japonija"
-                }
             },
             "gsi.go.jp_std_map": {
                 "attribution": {
@@ -4753,9 +5009,6 @@
             },
             "OSM-Utah": {
                 "name": "OpenStreetMap Juta"
-            },
-            "OSM-Vancouver-meetup": {
-                "name": "OpenStreetMap Vankuveris"
             },
             "OSM-Wyoming": {
                 "name": "OpenStreetMap Vajomingas"
