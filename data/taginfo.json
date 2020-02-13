@@ -318,6 +318,7 @@
     {"key": "barrier", "value": "lift_gate", "description": "🄿 Lift Gate", "object_types": ["node", "way"], "icon_url": "https://cdn.jsdelivr.net/gh/ideditor/temaki/icons/lift_gate.svg"},
     {"key": "barrier", "value": "retaining_wall", "description": "🄿 Retaining Wall", "object_types": ["way", "area"], "icon_url": "https://cdn.jsdelivr.net/gh/ideditor/temaki/icons/wall.svg"},
     {"key": "barrier", "value": "sally_port", "description": "🄿 Sally Port", "object_types": ["node"], "icon_url": "https://cdn.jsdelivr.net/gh/openstreetmap/iD@master/svg/fontawesome/fas-dungeon.svg"},
+    {"key": "barrier", "value": "spikes", "description": "🄿 Spike Strip", "object_types": ["node"], "icon_url": "https://cdn.jsdelivr.net/gh/mapbox/maki/icons/fence-15.svg"},
     {"key": "barrier", "value": "stile", "description": "🄿 Stile", "object_types": ["node"], "icon_url": "https://cdn.jsdelivr.net/gh/mapbox/maki/icons/roadblock-15.svg"},
     {"key": "barrier", "value": "swing_gate", "description": "🄿 Swing Gate", "object_types": ["node"], "icon_url": "https://cdn.jsdelivr.net/gh/ideditor/temaki/icons/gate.svg"},
     {"key": "barrier", "value": "toll_booth", "description": "🄿 Toll Booth", "object_types": ["node", "area"], "icon_url": "https://cdn.jsdelivr.net/gh/mapbox/maki/icons/roadblock-15.svg"},

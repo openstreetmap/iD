@@ -1,0 +1,12 @@
+{
+    "icon": "maki-fence",
+    
+    "geometry": [
+        "vertex"
+    ],
+    "tags": {
+        "barrier": "spikes"
+    },
+    "name": "Spike Strip",
+    "matchScore": 0.50
+}

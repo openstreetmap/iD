@@ -6163,6 +6163,10 @@
                     "name": "Sally Port",
                     "terms": "Postern,castle side gate"
                 },
+                "barrier/spikes": {
+                    "name": "Spike Strip",
+                    "terms": ""
+                },
                 "barrier/stile": {
                     "name": "Stile",
                     "terms": ""

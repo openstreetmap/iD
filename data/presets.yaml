@@ -4179,6 +4179,10 @@ en:
         name: Sally Port
         # 'terms: Postern,castle side gate'
         terms: '<translate with synonyms or related terms for ''Sally Port'', separated by commas>'
+      barrier/spikes:
+        # barrier=spikes
+        name: Spike Strip
+        terms: '<translate with synonyms or related terms for ''Spike Strip'', separated by commas>'
       barrier/stile:
         # barrier=stile
         name: Stile

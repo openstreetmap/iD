@@ -321,6 +321,7 @@
   "barrier/lift_gate": {"icon": "temaki-lift_gate", "fields": ["access", "opening_hours"], "geometry": ["vertex", "line"], "tags": {"barrier": "lift_gate"}, "name": "Lift Gate"},
   "barrier/retaining_wall": {"icon": "temaki-wall", "fields": ["height", "material"], "geometry": ["line", "area"], "tags": {"barrier": "retaining_wall"}, "name": "Retaining Wall"},
   "barrier/sally_port": {"icon": "fas-dungeon", "geometry": ["vertex"], "tags": {"barrier": "sally_port"}, "terms": ["Postern", "castle side gate"], "name": "Sally Port"},
+  "barrier/spikes": {"icon": "maki-fence", "geometry": ["vertex"], "tags": {"barrier": "spikes"}, "name": "Spike Strip", "matchScore": 0.5},
   "barrier/stile": {"icon": "maki-roadblock", "fields": ["access", "stile", "material"], "geometry": ["vertex"], "tags": {"barrier": "stile"}, "name": "Stile"},
   "barrier/swing_gate": {"icon": "temaki-gate", "fields": ["{barrier/gate}"], "moreFields": ["{barrier/gate}"], "geometry": ["vertex"], "tags": {"barrier": "swing_gate"}, "name": "Swing Gate"},
   "barrier/toll_booth": {"icon": "maki-roadblock", "fields": ["access", "building_area", "payment_multi", "currency_multi"], "moreFields": ["address", "email", "fax", "opening_hours", "phone", "website"], "geometry": ["vertex", "area"], "tags": {"barrier": "toll_booth"}, "name": "Toll Booth"},
