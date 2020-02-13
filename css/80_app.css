@@ -2741,16 +2741,14 @@ input.key-trap {
     display: flex;
     flex-direction: column;
 }
-.qa-details-description {
-    margin-bottom: 10px;
-    display: flex;
-    flex-direction: column;
-}
 .qa-details-description-text::first-letter {
     text-transform: capitalize;
 }
 [dir='rtl'] .qa-details-description-text::first-letter {
     text-transform: none;  /* #5877 */
+}
+.qa-details-subsection h4 {
+    padding-bottom: 2px;
 }
 .qa-details-subsection:not(:last-child) {
     margin-bottom: 10px;

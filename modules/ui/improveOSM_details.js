@@ -49,7 +49,7 @@ export function uiImproveOsmDetails(context) {
     // description
     const descriptionEnter = detailsEnter
       .append('div')
-        .attr('class', 'qa-details-description');
+        .attr('class', 'qa-details-subsection');
 
     descriptionEnter
       .append('h4')
