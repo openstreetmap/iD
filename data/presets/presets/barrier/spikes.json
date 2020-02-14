@@ -1,5 +1,11 @@
 {
     "icon": "temaki-spike_strip",
+    "fields": [
+        "direction",
+        "access",
+        "height",
+        "colour"
+    ],
     "geometry": [
         "vertex"
     ],
