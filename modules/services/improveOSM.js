@@ -325,39 +325,33 @@ export default {
     });
   },
 
-  getComments(d, callback) {
+  getComments(item) {
     // If comments already retrieved no need to do so again
-    if (d.comments) {
-      if (callback) callback({}, d);
-      return;
+    if (item.comments) {
+      return Promise.resolve(item);
     }
 
-    const key = d.issueKey;
+    const key = item.issueKey;
     let qParams = {};
 
     if (key === 'ow') {
-      qParams = d.identifier;
+      qParams = item.identifier;
     } else if (key === 'mr') {
-      qParams.tileX = d.identifier.x;
-      qParams.tileY = d.identifier.y;
+      qParams.tileX = item.identifier.x;
+      qParams.tileY = item.identifier.y;
     } else if (key === 'tr') {
-      qParams.targetId = d.identifier;
+      qParams.targetId = item.identifier;
     }
 
     const url = `${_impOsmUrls[key]}/retrieveComments?` + utilQsString(qParams);
-    const after = data => {
-      // Assign directly for immediate use in the callback
+    const cacheComments = data => {
+      // Assign directly for immediate use afterwards
       // comments are served newest to oldest
-      d.comments = data.comments ? data.comments.reverse() : [];
-      this.replaceItem(d);
-      if (callback) callback(null, d);
+      item.comments = data.comments ? data.comments.reverse() : [];
+      this.replaceItem(item);
     };
 
-    d3_json(url)
-      .then(after)
-      .catch(err => {
-        if (callback) callback(err.message);
-      });
+    return d3_json(url).then(cacheComments).then(() => item);
   },
 
   postUpdate(d, callback) {
