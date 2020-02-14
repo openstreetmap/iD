@@ -29,6 +29,15 @@ _Breaking changes, which may affect downstream projects or sites that embed iD, 
 [@xxxx]: https://github.com/xxxx
 -->
 
+# 2.17.2
+##### 2020-Feb-14
+
+#### :tada: New Features
+* Restore Maxar Imagery layers, using masked iD-specific connection keys ([#7355])
+
+[#7355]: https://github.com/openstreetmap/iD/issues/7355
+
+
 # 2.17.1
 ##### 2020-Jan-16
 

@@ -27,7 +27,7 @@ export function coreContext() {
   let context = utilRebind({}, dispatch, 'on');
   let _deferred = new Set();
 
-  context.version = '2.17.1';
+  context.version = '2.17.2';
   context.privacyVersion = '20191217';
 
   // create a special translation that contains the keys in place of the strings
