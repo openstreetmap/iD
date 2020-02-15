@@ -24,6 +24,7 @@ export function uiViewOnOsmose() {
       .append('a')
         .attr('class', 'view-on-osmose')
         .attr('target', '_blank')
+        .attr('rel', 'noopener') // security measure
         .attr('href', d => d)
         .call(svgIcon('#iD-icon-out-link', 'inline'));
 
