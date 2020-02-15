@@ -4086,8 +4086,8 @@
                     "terms": "Psikoterapist"
                 },
                 "healthcare/rehabilitation": {
-                    "name": "Rehabilitasyon Merkezi, İyileştirme Merkezi",
-                    "terms": "Rehabilitasyon Tesisi"
+                    "name": "Rehabilitasyon Tesisi",
+                    "terms": "Rehabilitasyon Merkezi, İyileştirme Merkezi"
                 },
                 "healthcare/speech_therapist": {
                     "name": "Konuşma Terapisti",
@@ -4176,7 +4176,7 @@
                 },
                 "highway/living_street": {
                     "name": "Sokak",
-                    "terms": "Sokak"
+                    "terms": "Sokak, Yaya Öncelikli Yol"
                 },
                 "highway/mini_roundabout": {
                     "name": "Küçük Dönel Kavşak",
@@ -4216,8 +4216,8 @@
                     "name": "Motor Sporları Yarış Pisti"
                 },
                 "highway/residential": {
-                    "name": "Yerleşim Yeri Yolu",
-                    "terms": "Yerleşim Yeri Yolu, Mahalle Arası Yol"
+                    "name": "İmar Yolu",
+                    "terms": "Yerleşim Yeri Yolu, İmar Yolu, Mahalle Arası Yol, Cadde"
                 },
                 "highway/rest_area": {
                     "name": "Dinlenme Alanı",
@@ -4240,8 +4240,8 @@
                     "terms": "Servis Yolu"
                 },
                 "highway/service/alley": {
-                    "name": "Ara Sokak",
-                    "terms": "Ara Sokak, Dar Yol"
+                    "name": "Geçit",
+                    "terms": "Geçit, Aralık, Dar Yol"
                 },
                 "highway/service/drive-through": {
                     "name": "Arabaya Servis Yolu",
@@ -4249,7 +4249,7 @@
                 },
                 "highway/service/driveway": {
                     "name": "Özel Yol",
-                    "terms": "Özel Yol"
+                    "terms": "Özel Yol, Mülk Yolu"
                 },
                 "highway/service/emergency_access": {
                     "name": "Acil Erişim",
@@ -4293,7 +4293,7 @@
                 },
                 "highway/traffic_mirror": {
                     "name": "Trafik Aynası",
-                    "terms": "Trafik Aynası"
+                    "terms": "Trafik Aynası, Görüş Sağlayıcı Ayna"
                 },
                 "highway/traffic_signals": {
                     "name": "Trafik İşaretleri",
@@ -4316,8 +4316,8 @@
                     "terms": "Dönüş Yeri, Dönüş Adası"
                 },
                 "highway/unclassified": {
-                    "name": "Tali Yol",
-                    "terms": "Tali Yol, Bilinmeyen Yol, Önemsiz Yol"
+                    "name": "Tasnif Dışı Yol",
+                    "terms": "Tasnif Dışı Yol, Tali Yol, Bilinmeyen Yol, Önemsiz Yol"
                 },
                 "historic": {
                     "name": "Tarihi Yer",
