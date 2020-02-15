@@ -60,6 +60,16 @@ function preventCoincident(loc) {
   return loc;
 }
 
+// Osmose strings can contain markdown formatting
+function parseMarkdown(string) {
+  // URLs
+  string = string.replace(/\[((?:.|\n)+?)\]\((.+?)\)/g,
+    '<a href="$2" target="_blank" rel="noopener">$1</a>');
+
+  // Code snippets
+  return string.replace(/`(.+?)`/g, '<code>$1</code>');
+}
+
 export default {
   title: 'osmose',
 
@@ -172,7 +182,7 @@ export default {
       issue.elems = data.elems.map(e => e.type.substring(0,1) + e.id);
 
       // Some issues have instance specific detail in a subtitle
-      issue.detail = data.subtitle;
+      issue.detail = parseMarkdown(data.subtitle);
 
       this.replaceItem(issue);
     };
@@ -194,12 +204,6 @@ export default {
     if (!(locale in _cache.strings)) {
       _cache.strings[locale] = {};
     }
-
-    const format = string => {
-      // Some strings contain markdown syntax
-      string = string.replace(/\[((?:.|\n)+?)\]\((.+?)\)/g, '<a href="$2">$1</a>');
-      return string.replace(/`(.+?)`/g, '<code>$1</code>');
-    };
 
     // Only need to cache strings for supported issue types
     // Using multiple individual item + class requests to reduce fetched data size
@@ -233,9 +237,9 @@ export default {
 
         let issueStrings = {};
         if (title) issueStrings.title = title.auto;
-        if (detail) issueStrings.detail = format(detail.auto);
-        if (trap) issueStrings.trap = format(trap.auto);
-        if (fix) issueStrings.fix = format(fix.auto);
+        if (detail) issueStrings.detail = parseMarkdown(detail.auto);
+        if (trap) issueStrings.trap = parseMarkdown(trap.auto);
+        if (fix) issueStrings.fix = parseMarkdown(fix.auto);
 
         _cache.strings[locale][itemType] = issueStrings;
       };
