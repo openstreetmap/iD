@@ -547,6 +547,7 @@ en:
       tooltip_issue: "Center and zoom the map to focus on this issue."
     show_more: Show More
     view_on_osm: View on openstreetmap.org
+    view_on_osmose: View on osmose.openstreetmap.fr
     view_on_keepRight: View on keepright.at
     feature_type: Feature Type
     fields: Fields

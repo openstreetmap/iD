@@ -333,5 +333,9 @@ export default {
   // Used to populate `closed:osmose:*` changeset tags
   getClosedCounts() {
     return _cache.closed;
+  },
+
+  itemURL(item) {
+    return `https://osmose.openstreetmap.fr/error/${item.id}`;
   }
 };

@@ -9,6 +9,7 @@ import { uiOsmoseDetails } from './osmose_details';
 import { uiOsmoseHeader } from './osmose_header';
 import { uiQuickLinks } from './quick_links';
 import { uiTooltipHtml } from './tooltipHtml';
+import { uiViewOnOsmose } from './view_on_osmose';
 
 import { utilRebind } from '../util';
 
@@ -65,6 +66,15 @@ export function uiOsmoseEditor(context) {
         .call(quickLinks.choices(choices))
         .call(qaDetails.issue(_qaItem))
         .call(osmoseSaveSection);
+
+    const footer = selection.selectAll('.footer')
+      .data([0]);
+
+    footer.enter()
+      .append('div')
+      .attr('class', 'footer')
+      .merge(footer)
+      .call(uiViewOnOsmose(context).what(_qaItem));
   }
 
   function osmoseSaveSection(selection) {
