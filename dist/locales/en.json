@@ -1055,8 +1055,7 @@
                 "detail_title": "Details",
                 "elems_title": "Features",
                 "fix_title": "Fix Guidelines",
-                "trap_title": "Common Mistakes",
-                "translation": "Translations provided by Osmose"
+                "trap_title": "Common Mistakes"
             },
             "improveOSM": {
                 "title": "ImproveOSM Detection",

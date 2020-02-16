@@ -846,7 +846,6 @@ en:
       elems_title: Features
       fix_title: Fix Guidelines
       trap_title: Common Mistakes
-      translation: Translations provided by Osmose
     improveOSM:
       title: ImproveOSM Detection
       geometry_types:

@@ -92,20 +92,6 @@ export function uiOsmoseDetails(context) {
           .html(d => issueString(d, 'trap'));
     }
 
-    // Translation link below details container
-    selection
-      .append('div')
-        .attr('class', 'translation-link')
-      .append('a')
-        .attr('target', '_blank')
-        .attr('rel', 'noopener noreferrer') // security measure
-        .attr('href', 'https://www.transifex.com/openstreetmap-france/osmose')
-        .text(() => t('QA.osmose.translation'))
-      .append('svg')
-        .attr('class', 'icon inline')
-      .append('use')
-        .attr('href', '#iD-icon-out-link');
-
     // Save current item to check if UI changed by time request resolves
     const thisItem = _qaItem;
     services.osmose.loadIssueDetail(_qaItem)
