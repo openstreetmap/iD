@@ -21,7 +21,7 @@ export function utilTagDiff(oldTags, newTags) {
         var oldVal = oldTags[k];
         var newVal = newTags[k];
 
-        if (oldVal && (!newVal || newVal !== oldVal)) {
+        if ((oldVal || oldVal === '') && (!newVal || newVal !== oldVal)) {
             tagDiff.push({
                 type: '-',
                 key: k,
@@ -30,7 +30,7 @@ export function utilTagDiff(oldTags, newTags) {
                 display: '- ' + k + '=' + oldVal
             });
         }
-        if (newVal && (!oldVal || newVal !== oldVal)) {
+        if ((newVal || newVal === '') && (!oldVal || newVal !== oldVal)) {
             tagDiff.push({
                 type: '+',
                 key: k,
