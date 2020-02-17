@@ -27,7 +27,8 @@ if you're looking for something to do.
 * [Translate!](https://github.com/openstreetmap/iD/blob/master/CONTRIBUTING.md#translating)
 * Test a prerelease version of iD:
   * Stable mirror of `release` branch:  https://preview.ideditor.com/release
-  * Development mirror of `master` branch + latest translations:  https://preview.ideditor.com/master
+  * Development mirror of `2.x` branch + latest translations: https://2-x--ideditor.netlify.com
+  * Development mirror of v3 prototype branch (`master`):  https://preview.ideditor.com/master
 
 Come on in, the water's lovely. More help? Ping `bhousel` or `quincylvania` on:
 * [OpenStreetMap US Slack](https://slack.openstreetmap.us/)
