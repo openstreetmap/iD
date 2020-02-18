@@ -1,23 +1,17 @@
-import {
-    event as d3_event,
-    select as d3_select
-} from 'd3-selection';
 
 import marked from 'marked';
-import { svgIcon } from '../svg/icon';
-import { uiCmd } from './cmd';
-import { uiIntro } from './intro/intro';
-import { uiShortcuts } from './shortcuts';
-import { uiTooltipHtml } from './tooltipHtml';
+import { svgIcon } from '../../svg/icon';
+import { uiCmd } from '../cmd';
+import { uiIntro } from '../intro/intro';
+import { uiShortcuts } from '../shortcuts';
+import { uiTooltipHtml } from '../tooltipHtml';
+import { uiPane } from '../pane';
 
-import { t, textDirection } from '../util/locale';
-import { tooltip } from '../util/tooltip';
-import { icon } from './intro/helper';
+import { t, textDirection } from '../../util/locale';
+import { tooltip } from '../../util/tooltip';
+import { icon } from '../intro/helper';
 
 export function uiHelp(context) {
-    var key = t('help.key');
-
-    var _pane = d3_select(null);
 
     var docKeys = [
         ['help', [
@@ -281,36 +275,18 @@ export function uiHelp(context) {
         };
     });
 
-    var paneTooltip = tooltip()
-        .placement((textDirection === 'rtl') ? 'right' : 'left')
-        .html(true)
-        .title(uiTooltipHtml(t('help.title'), key));
+    var helpPane = uiPane('help', context)
+        .key(t('help.key'))
+        .title(t('help.title'))
+        .description(t('help.title'))
+        .iconName('iD-icon-help');
 
-    function hidePane() {
-        context.ui().togglePanes();
-    }
-
-    uiHelp.togglePane = function() {
-        if (d3_event) d3_event.preventDefault();
-        paneTooltip.hide();
-        context.ui().togglePanes(!_pane.classed('shown') ? _pane : undefined);
-    };
-
-    uiHelp.renderToggleButton = function(selection) {
-
-        selection.append('button')
-            .on('click', uiHelp.togglePane)
-            .call(svgIcon('#iD-icon-help', 'light'))
-            .call(paneTooltip);
-    };
-
-
-    uiHelp.renderPane = function(selection) {
+    helpPane.renderContent = function(content) {
 
         function clickHelp(d, i) {
             var rtl = (textDirection === 'rtl');
             content.property('scrollTop', 0);
-            doctitle.html(d.title);
+            helpPane.selection().select('.pane-heading h2').html(d.title);
 
             body.html(d.html);
             body.selectAll('a')
@@ -373,29 +349,6 @@ export function uiHelp(context) {
             context.container().call(uiShortcuts(context), true);
         }
 
-
-        _pane = selection.append('div')
-            .attr('class', 'help-wrap map-pane fillL hide')
-            .attr('pane', 'help');
-
-        var heading = _pane
-            .append('div')
-            .attr('class', 'pane-heading');
-
-        var doctitle = heading
-            .append('h2')
-            .text(t('help.title'));
-
-        heading
-            .append('button')
-            .on('click', hidePane)
-            .call(svgIcon('#iD-icon-close'));
-
-
-        var content = _pane
-            .append('div')
-            .attr('class', 'pane-content');
-
         var toc = content
             .append('ul')
             .attr('class', 'toc');
@@ -454,10 +407,7 @@ export function uiHelp(context) {
 
         clickHelp(docs[0], 0);
 
-        context.keybinding()
-            .on(key, uiHelp.togglePane);
-
     };
 
-    return uiHelp;
+    return helpPane;
 }

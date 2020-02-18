@@ -2,19 +2,18 @@ import _debounce from 'lodash-es/debounce';
 
 import { event as d3_event, select as d3_select } from 'd3-selection';
 
-import { t, textDirection } from '../util/locale';
-import { tooltip } from '../util/tooltip';
+import { t } from '../../util/locale';
+import { tooltip } from '../../util/tooltip';
 
 //import { actionNoop } from '../actions/noop';
-import { geoSphericalDistance } from '../geo';
-import { svgIcon } from '../svg/icon';
-import { uiDisclosure } from './disclosure';
-import { uiTooltipHtml } from './tooltipHtml';
-import { utilGetSetValue, utilHighlightEntities, utilNoAuto } from '../util';
+import { geoSphericalDistance } from '../../geo';
+import { svgIcon } from '../../svg/icon';
+import { uiDisclosure } from '../disclosure';
+import { utilGetSetValue, utilHighlightEntities, utilNoAuto } from '../../util';
+import { uiPane } from '../pane';
 
 
 export function uiIssues(context) {
-    var key = t('issues.key');
 
     var MINSQUARE = 0;
     var MAXSQUARE = 20;
@@ -23,8 +22,6 @@ export function uiIssues(context) {
     var _errorsSelection = d3_select(null);
     var _warningsSelection = d3_select(null);
     var _rulesList = d3_select(null);
-    var _pane = d3_select(null);
-    var _toggleButton = d3_select(null);
 
     var _errors = [];
     var _warnings = [];
@@ -40,22 +37,6 @@ export function uiIssues(context) {
     context.map().on('move.uiIssues',
         _debounce(function() { window.requestIdleCallback(update); }, 1000)
     );
-
-
-    function addNotificationBadge(selection) {
-        var d = 10;
-        selection.selectAll('svg.notification-badge')
-            .data([0])
-            .enter()
-            .append('svg')
-            .attr('viewbox', '0 0 ' + d + ' ' + d)
-            .attr('class', 'notification-badge hide')
-            .append('circle')
-            .attr('cx', d / 2)
-            .attr('cy', d / 2)
-            .attr('r', (d / 2) - 1)
-            .attr('fill', 'currentColor');
-    }
 
 
     function renderErrorsList(selection) {
@@ -402,7 +383,7 @@ export function uiIssues(context) {
                 var opts = cases[type];
                 var hiddenIssues = context.validator().getIssues(opts);
                 if (hiddenIssues.length) {
-                    _pane.select('.issues-none .details')
+                    issuesPane.selection().select('.issues-none .details')
                         .text(t(
                             'issues.no_issues.hidden_issues.' + type,
                             { count: hiddenIssues.length.toString() }
@@ -410,7 +391,7 @@ export function uiIssues(context) {
                     return;
                 }
             }
-            _pane.select('.issues-none .details')
+            issuesPane.selection().select('.issues-none .details')
                 .text(t('issues.no_issues.hidden_issues.none'));
         }
 
@@ -465,7 +446,7 @@ export function uiIssues(context) {
             messageType = 'no_edits';
         }
 
-        _pane.select('.issues-none .message')
+        issuesPane.selection().select('.issues-none .message')
             .text(t('issues.no_issues.message.' + messageType));
 
     }
@@ -487,31 +468,25 @@ export function uiIssues(context) {
         _warnings = _warnings.slice(0, 1000);
 
 
-        _toggleButton.selectAll('.notification-badge')
-            .classed('error', (_errors.length > 0))
-            .classed('warning', (_errors.length === 0 && _warnings.length > 0))
-            .classed('hide', (_errors.length === 0 && _warnings.length === 0));
-
-
-        _pane.selectAll('.issues-errors')
+        issuesPane.selection().selectAll('.issues-errors')
             .classed('hide', _errors.length === 0);
 
         if (_errors.length > 0) {
-            _pane.selectAll('.hide-toggle-issues_errors .hide-toggle-text')
+            issuesPane.selection().selectAll('.hide-toggle-issues_errors .hide-toggle-text')
                 .text(t('issues.errors.list_title', { count: errorCount }));
-            if (!_pane.select('.disclosure-wrap-issues_errors').classed('hide')) {
+            if (!issuesPane.selection().select('.disclosure-wrap-issues_errors').classed('hide')) {
                 _errorsSelection
                     .call(drawIssuesList, 'errors', _errors);
             }
         }
 
-        _pane.selectAll('.issues-warnings')
+        issuesPane.selection().selectAll('.issues-warnings')
             .classed('hide', _warnings.length === 0);
 
         if (_warnings.length > 0) {
-            _pane.selectAll('.hide-toggle-issues_warnings .hide-toggle-text')
+            issuesPane.selection().selectAll('.hide-toggle-issues_warnings .hide-toggle-text')
                 .text(t('issues.warnings.list_title', { count: warningCount }));
-            if (!_pane.select('.disclosure-wrap-issues_warnings').classed('hide')) {
+            if (!issuesPane.selection().select('.disclosure-wrap-issues_warnings').classed('hide')) {
                 _warningsSelection
                     .call(drawIssuesList, 'warnings', _warnings);
                 renderIgnoredIssuesReset(_warningsSelection);
@@ -520,14 +495,14 @@ export function uiIssues(context) {
 
         var hasIssues = _warnings.length > 0 || _errors.length > 0;
 
-        var issuesNone = _pane.select('.issues-none');
+        var issuesNone = issuesPane.selection().select('.issues-none');
         issuesNone.classed('hide', hasIssues);
         if (!hasIssues) {
             renderIgnoredIssuesReset(issuesNone);
             setNoIssuesText();
         }
 
-        if (!_pane.select('.disclosure-wrap-issues_rules').classed('hide')) {
+        if (!issuesPane.selection().select('.disclosure-wrap-issues_rules').classed('hide')) {
             updateRulesList();
         }
 
@@ -654,58 +629,14 @@ export function uiIssues(context) {
     }
 
 
-    function hidePane() {
-        context.ui().togglePanes();
-    }
+    var issuesPane = uiPane('issues', context)
+        .key(t('issues.key'))
+        .title(t('issues.title'))
+        .description(t('issues.title'))
+        .iconName('iD-icon-alert');
 
 
-
-    var paneTooltip = tooltip()
-        .placement((textDirection === 'rtl') ? 'right' : 'left')
-        .html(true)
-        .title(uiTooltipHtml(t('issues.title'), key));
-
-
-
-    uiIssues.togglePane = function() {
-        if (d3_event) d3_event.preventDefault();
-        paneTooltip.hide();
-        context.ui().togglePanes(!_pane.classed('shown') ? _pane : undefined);
-    };
-
-
-    uiIssues.renderToggleButton = function(selection) {
-        _toggleButton = selection
-            .append('button')
-            .on('click', uiIssues.togglePane)
-            .call(svgIcon('#iD-icon-alert', 'light'))
-            .call(addNotificationBadge)
-            .call(paneTooltip);
-    };
-
-
-    uiIssues.renderPane = function(selection) {
-        _pane = selection
-            .append('div')
-            .attr('class', 'fillL map-pane issues-pane hide')
-            .attr('pane', 'map-issues');
-
-        var heading = _pane
-            .append('div')
-            .attr('class', 'pane-heading');
-
-        heading
-            .append('h2')
-            .text(t('issues.title'));
-
-        heading
-            .append('button')
-            .on('click', hidePane)
-            .call(svgIcon('#iD-icon-close'));
-
-        var content = _pane
-            .append('div')
-            .attr('class', 'pane-content');
+    issuesPane.renderContent = function(content) {
 
         content
             .append('div')
@@ -743,10 +674,7 @@ export function uiIssues(context) {
             );
 
         // update();
-
-        context.keybinding()
-            .on(key, uiIssues.togglePane);
     };
 
-    return uiIssues;
+    return issuesPane;
 }

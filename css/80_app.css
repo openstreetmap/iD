@@ -440,19 +440,6 @@ button[disabled].action:hover {
     color: #333;
 }
 
-.notification-badge {
-    display: block;
-    position: absolute;
-    width: 10px;
-    height: 10px;
-    right: 7px;
-    top: 9px;
-}
-
-.notification-badge.hide {
-    display: none;
-}
-
 
 /* Toolbar / Persistent UI Elements
 ------------------------------------------------------- */
@@ -556,7 +543,7 @@ button.save .count {
     text-align: center;
 }
 
-.help-wrap svg.icon.pre-text.add-note,
+.help-pane svg.icon.pre-text.add-note,
 button.add-note svg.icon {
     height: 15px;
     width: 15px;
@@ -573,7 +560,7 @@ button.add-note svg.icon {
     margin-left: 4px;
     margin-right: unset;
 }
-.help-wrap svg.icon.pre-text.add-note {
+.help-pane svg.icon.pre-text.add-note {
     margin-left: 3px;
     margin-right: 3px;
 }
@@ -3185,10 +3172,6 @@ button.autofix.action.active {
     /*fill: #597be7;*/
 }
 
-.notification-badge.warning {
-    color: #ffdf5c;
-}
-
 
 /* error styles */
 .errors-list,
@@ -3230,10 +3213,6 @@ button.autofix.action.active {
     fill: #840c00;
     /*color: #597be7;*/
     /*fill: #597be7;*/
-}
-
-.notification-badge.error {
-    color: #ff0c05;
 }
 
 
@@ -3584,7 +3563,7 @@ li.issue-fix-item:not(.actionable) .fix-icon {
     z-index: 10;
 }
 
-.map-pane.help-wrap {
+.map-pane.help-pane {
     width: 600px;
 }
 
@@ -3624,12 +3603,12 @@ li.issue-fix-item:not(.actionable) .fix-icon {
 
 /* Help
 ------------------------------------------------------- */
-.help-wrap p {
+.help-pane p {
     font-size: 15px;
     margin-bottom: 20px;
 }
 
-.help-wrap .left-content .body p code {
+.help-pane .left-content .body p code {
     padding: 3px 4px;
     font-size: 12px;
     color: #555;
@@ -3642,14 +3621,14 @@ li.issue-fix-item:not(.actionable) .fix-icon {
     box-shadow: inset 0 -1px 0 #bbb;
 }
 
-.help-wrap .left-content .icon.pre-text {
+.help-pane .left-content .icon.pre-text {
     vertical-align: text-top;
     margin-right: 0;
     margin-left: 0;
     display: inline-block;
 }
 
-.help-wrap .toc {
+.help-pane .toc {
     width: 40%;
     float: right;
     margin-left: 20px;
@@ -3657,68 +3636,68 @@ li.issue-fix-item:not(.actionable) .fix-icon {
     padding-left: 5px;
 }
 
-.help-wrap .toc li a,
-.help-wrap .nav a {
+.help-pane .toc li a,
+.help-pane .nav a {
     display: block;
     border: 1px solid #ccc;
     padding: 5px 10px;
 }
 
-.help-wrap .toc li a {
+.help-pane .toc li a {
     border-bottom: 0;
 }
 
-.help-wrap .toc li a:hover,
-.help-wrap .nav a:hover {
+.help-pane .toc li a:hover,
+.help-pane .nav a:hover {
     background: #ececec;
 }
 
-.help-wrap .toc li a.selected {
+.help-pane .toc li a.selected {
     background: #e8ebff;
 }
 
-.help-wrap .toc li:first-child a {
+.help-pane .toc li:first-child a {
     border-radius: 4px 4px 0 0;
 }
 
-.help-wrap .toc li:nth-last-child(3) a {
+.help-pane .toc li:nth-last-child(3) a {
     border-bottom: 1px solid #ccc;
     border-radius: 0 0 4px 4px
 }
 
-.help-wrap .toc li.shortcuts a,
-.help-wrap .toc li.walkthrough a {
+.help-pane .toc li.shortcuts a,
+.help-pane .toc li.walkthrough a {
     overflow: hidden;
     margin-top: 10px;
     border-bottom: 1px solid #ccc;
     border-radius: 4px;
 }
 
-.help-wrap .toc li.walkthrough a {
+.help-pane .toc li.walkthrough a {
     text-align: center;
 }
 
-.help-wrap .nav {
+.help-pane .nav {
     position: relative;
     padding-bottom: 30px;
 }
 
-.help-wrap .nav a {
+.help-pane .nav a {
     float: left;
     width: 50%;
     text-align: center;
 }
 
-.help-wrap .nav a:first-child {
+.help-pane .nav a:first-child {
     border-radius: 4px 0 0 4px;
 }
 
-.help-wrap .nav a:last-child:not(:only-child) {
+.help-pane .nav a:last-child:not(:only-child) {
     border-radius: 0 4px 4px 0;
     border-left: 0;
 }
 
-.help-wrap .nav a:only-child {
+.help-pane .nav a:only-child {
     width: 100%;
     border-radius: 4px;
 }

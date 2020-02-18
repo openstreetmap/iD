@@ -14,22 +14,17 @@ import { utilGetDimensions } from '../util/dimensions';
 
 import { uiAccount } from './account';
 import { uiAttribution } from './attribution';
-import { uiBackground } from './background';
 import { uiContributors } from './contributors';
 import { uiFeatureInfo } from './feature_info';
 import { uiFullScreen } from './full_screen';
 import { uiGeolocate } from './geolocate';
-import { uiHelp } from './help';
 import { uiInfo } from './info';
 import { uiIntro } from './intro';
-import { uiIssues } from './issues';
 import { uiIssuesInfo } from './issues_info';
 import { uiLoading } from './loading';
-import { uiMapData } from './map_data';
 import { uiMapInMap } from './map_in_map';
 import { uiNotice } from './notice';
 import { uiPhotoviewer } from './photoviewer';
-import { uiPreferences } from './preferences';
 import { uiRestore } from './restore';
 import { uiScale } from './scale';
 import { uiShortcuts } from './shortcuts';
@@ -42,6 +37,11 @@ import { uiVersion } from './version';
 import { uiZoom } from './zoom';
 import { uiCmd } from './cmd';
 
+import { uiBackground } from './panes/background';
+import { uiHelp } from './panes/help';
+import { uiIssues } from './panes/issues';
+import { uiMapData } from './panes/map_data';
+import { uiPreferences } from './panes/preferences';
 
 export function uiInit(context) {
     var _initCounter = 0;
@@ -106,35 +106,20 @@ export function uiInit(context) {
             .attr('class', 'map-control geolocate-control')
             .call(uiGeolocate(context));
 
-        var background = uiBackground(context);
-        controls
-            .append('div')
-            .attr('class', 'map-control background-control')
-            .call(background.renderToggleButton);
+        var uiPanes = [
+            uiBackground(context),
+            uiMapData(context),
+            uiIssues(context),
+            uiPreferences(context),
+            uiHelp(context)
+        ];
 
-        var mapData = uiMapData(context);
-        controls
-            .append('div')
-            .attr('class', 'map-control map-data-control')
-            .call(mapData.renderToggleButton);
-
-        var issues = uiIssues(context);
-        controls
-            .append('div')
-            .attr('class', 'map-control map-issues-control')
-            .call(issues.renderToggleButton);
-
-        var preferences = uiPreferences(context);
-        controls
-            .append('div')
-            .attr('class', 'map-control preferences-control')
-            .call(preferences.renderToggleButton);
-
-        var help = uiHelp(context);
-        controls
-            .append('div')
-            .attr('class', 'map-control help-control')
-            .call(help.renderToggleButton);
+        uiPanes.forEach(function(pane) {
+            controls
+                .append('div')
+                .attr('class', 'map-control ' + pane.id + '-control')
+                .call(pane.renderToggleButton);
+        });
 
         content
             .append('div')
@@ -252,12 +237,10 @@ export function uiInit(context) {
             .append('div')
             .attr('class', 'map-panes');
 
-        panes
-            .call(background.renderPane)
-            .call(mapData.renderPane)
-            .call(issues.renderPane)
-            .call(preferences.renderPane)
-            .call(help.renderPane);
+        uiPanes.forEach(function(pane) {
+            panes
+                .call(pane.renderPane);
+        });
 
         ui.info = uiInfo(context);
 

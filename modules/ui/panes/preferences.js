@@ -1,22 +1,14 @@
-import { event as d3_event, select as d3_select } from 'd3-selection';
+import { event as d3_event } from 'd3-selection';
 
-import { svgIcon } from '../svg/icon';
-import { t, textDirection } from '../util/locale';
-import { tooltip } from '../util/tooltip';
-import { uiDisclosure } from './disclosure';
-import { uiTooltipHtml } from './tooltipHtml';
+import { svgIcon } from '../../svg/icon';
+import { t } from '../../util/locale';
+import { tooltip } from '../../util/tooltip';
+import { uiDisclosure } from '../disclosure';
+import { uiPane } from '../pane';
 
 
 export function uiPreferences(context) {
-  const key = t('preferences.key');
-  let _pane = d3_select(null);
   let _showThirdPartyIcons = context.storage('preferences.privacy.thirdpartyicons') || 'true';
-
-  const paneTooltip = tooltip()
-    .placement((textDirection === 'rtl') ? 'right' : 'left')
-    .html(true)
-    .title(uiTooltipHtml(t('preferences.description'), key));
-
 
   function renderPrivacyOptions(selection) {
     // enter
@@ -74,46 +66,13 @@ export function uiPreferences(context) {
     }
   }
 
+  let preferencesPane = uiPane('preferences', context)
+    .key(t('preferences.key'))
+    .title(t('preferences.title'))
+    .description(t('preferences.description'))
+    .iconName('fas-user-cog');
 
-  uiPreferences.togglePane = () => {
-    if (d3_event) d3_event.preventDefault();
-    paneTooltip.hide();
-    context.ui().togglePanes(!_pane.classed('shown') ? _pane : undefined);
-  };
-
-
-  uiPreferences.renderToggleButton = (selection) => {
-    selection
-      .append('button')
-      .on('click', uiPreferences.togglePane)
-      .call(svgIcon('#fas-user-cog', 'light'))
-      .call(paneTooltip);
-  };
-
-
-  uiPreferences.renderPane = (selection) => {
-    _pane = selection
-      .append('div')
-      .attr('class', 'fillL map-pane preferences-pane hide')
-      .attr('pane', 'preferences');
-
-    let heading = _pane
-      .append('div')
-      .attr('class', 'pane-heading');
-
-    heading
-      .append('h2')
-      .text(t('preferences.title'));
-
-    heading
-      .append('button')
-      .on('click', () => context.ui().togglePanes())
-      .call(svgIcon('#iD-icon-close'));
-
-
-    let content = _pane
-      .append('div')
-      .attr('class', 'pane-content');
+  preferencesPane.renderContent = (content) => {
 
     content
       .append('div')
@@ -122,10 +81,7 @@ export function uiPreferences(context) {
         .title(t('preferences.privacy.title'))
         .content(renderPrivacyOptions)
       );
-
-    context.keybinding()
-      .on(key, uiPreferences.togglePane);
   };
 
-  return uiPreferences;
+  return preferencesPane;
 }

@@ -3,22 +3,22 @@ import _debounce from 'lodash-es/debounce';
 import { descending as d3_descending, ascending as d3_ascending } from 'd3-array';
 import { event as d3_event, select as d3_select } from 'd3-selection';
 
-import { t, textDirection } from '../util/locale';
-import { svgIcon } from '../svg/icon';
-import { uiBackgroundDisplayOptions } from './background_display_options';
-import { uiBackgroundOffset } from './background_offset';
-import { uiCmd } from './cmd';
-import { uiDisclosure } from './disclosure';
-import { uiMapInMap } from './map_in_map';
-import { uiSettingsCustomBackground } from './settings/custom_background';
-import { uiTooltipHtml } from './tooltipHtml';
-import { tooltip } from '../util/tooltip';
+import { t, textDirection } from '../../util/locale';
+import { tooltip } from '../../util/tooltip';
+import { svgIcon } from '../../svg/icon';
+import { uiBackgroundDisplayOptions } from '../background_display_options';
+import { uiBackgroundOffset } from '../background_offset';
+import { uiCmd } from '../cmd';
+import { uiDisclosure } from '../disclosure';
+import { uiMapInMap } from '../map_in_map';
+import { uiSettingsCustomBackground } from '../settings/custom_background';
+import { uiTooltipHtml } from '../tooltipHtml';
+import { uiPane } from '../pane';
 
 
 export function uiBackground(context) {
-    var key = t('background.key');
 
-    var _pane = d3_select(null);
+    var _key = t('background.key');
 
     var _customSource = context.background().findSource('custom');
     var _previousBackground = context.background().findSource(context.storage('background-last-used-toggle'));
@@ -51,7 +51,7 @@ export function uiBackground(context) {
                     .html(true)
                     .title(function() {
                         var tip = '<div>' + t('background.switch') + '</div>';
-                        return uiTooltipHtml(tip, uiCmd('⌘' + key));
+                        return uiTooltipHtml(tip, uiCmd('⌘' + _key));
                     })
                 );
             } else if (description || isOverflowing) {
@@ -292,11 +292,11 @@ export function uiBackground(context) {
 
 
     function update() {
-        if (!_pane.select('.disclosure-wrap-background_list').classed('hide')) {
+        if (!backgroundPane.selection().select('.disclosure-wrap-background_list').classed('hide')) {
             updateBackgroundList();
         }
 
-        if (!_pane.select('.disclosure-wrap-overlay_list').classed('hide')) {
+        if (!backgroundPane.selection().select('.disclosure-wrap-overlay_list').classed('hide')) {
             updateOverlayList();
         }
 
@@ -318,55 +318,14 @@ export function uiBackground(context) {
         }
     }
 
-    var paneTooltip = tooltip()
-        .placement((textDirection === 'rtl') ? 'right' : 'left')
-        .html(true)
-        .title(uiTooltipHtml(t('background.description'), key));
 
-    uiBackground.togglePane = function() {
-        if (d3_event) d3_event.preventDefault();
-        paneTooltip.hide();
-        context.ui().togglePanes(!_pane.classed('shown') ? _pane : undefined);
-    };
+    var backgroundPane = uiPane('background', context)
+        .key(_key)
+        .title(t('background.title'))
+        .description(t('background.description'))
+        .iconName('iD-icon-layers');
 
-    function hidePane() {
-        context.ui().togglePanes();
-    }
-
-    uiBackground.renderToggleButton = function(selection) {
-
-        selection
-            .append('button')
-            .on('click', uiBackground.togglePane)
-            .call(svgIcon('#iD-icon-layers', 'light'))
-            .call(paneTooltip);
-    };
-
-    uiBackground.renderPane = function(selection) {
-
-        _pane = selection
-            .append('div')
-            .attr('class', 'fillL map-pane background-pane hide')
-            .attr('pane', 'background');
-
-
-        var heading = _pane
-            .append('div')
-            .attr('class', 'pane-heading');
-
-        heading
-            .append('h2')
-            .text(t('background.title'));
-
-        heading
-            .append('button')
-            .on('click', hidePane)
-            .call(svgIcon('#iD-icon-close'));
-
-
-        var content = _pane
-            .append('div')
-            .attr('class', 'pane-content');
+    backgroundPane.renderContent = function(content) {
 
         // background list
         content
@@ -411,9 +370,8 @@ export function uiBackground(context) {
         update();
 
         context.keybinding()
-            .on(key, uiBackground.togglePane)
-            .on(uiCmd('⌘' + key), quickSwitch);
+            .on(uiCmd('⌘' + _key), quickSwitch);
     };
 
-    return uiBackground;
+    return backgroundPane;
 }

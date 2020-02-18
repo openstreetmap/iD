@@ -3,19 +3,19 @@ import {
     select as d3_select
 } from 'd3-selection';
 
-import { svgIcon } from '../svg/icon';
-import { t, textDirection } from '../util/locale';
-import { tooltip } from '../util/tooltip';
-import { geoExtent } from '../geo';
-import { modeBrowse } from '../modes/browse';
-import { uiDisclosure } from './disclosure';
-import { uiSettingsCustomData } from './settings/custom_data';
-import { uiTooltipHtml } from './tooltipHtml';
-import { uiCmd } from './cmd';
+import { svgIcon } from '../../svg/icon';
+import { t, textDirection } from '../../util/locale';
+import { tooltip } from '../../util/tooltip';
+import { geoExtent } from '../../geo';
+import { modeBrowse } from '../../modes/browse';
+import { uiDisclosure } from '../disclosure';
+import { uiSettingsCustomData } from '../settings/custom_data';
+import { uiTooltipHtml } from '../tooltipHtml';
+import { uiCmd } from '../cmd';
+import { uiPane } from '../pane';
 
 
 export function uiMapData(context) {
-    var key = t('map_data.key');
     var osmDataToggleKey = uiCmd('⌥' + t('area_fill.wireframe.key'));
     var features = context.features().keys();
     var layers = context.layers();
@@ -23,8 +23,6 @@ export function uiMapData(context) {
 
     var settingsCustomData = uiSettingsCustomData(context)
         .on('change', customChanged);
-
-    var _pane = d3_select(null);
 
     var _fillSelected = context.storage('area-fill') || 'partial';
     var _dataLayerContainer = d3_select(null);
@@ -775,16 +773,16 @@ export function uiMapData(context) {
 
     function update() {
 
-        if (!_pane.select('.disclosure-wrap-data_layers').classed('hide')) {
+        if (!mapDataPane.selection().select('.disclosure-wrap-data_layers').classed('hide')) {
             updateDataLayers();
         }
-        if (!_pane.select('.disclosure-wrap-photo_overlays').classed('hide')) {
+        if (!mapDataPane.selection().select('.disclosure-wrap-photo_overlays').classed('hide')) {
             updatePhotoOverlays();
         }
-        if (!_pane.select('.disclosure-wrap-fill_area').classed('hide')) {
+        if (!mapDataPane.selection().select('.disclosure-wrap-fill_area').classed('hide')) {
             updateFillList();
         }
-        if (!_pane.select('.disclosure-wrap-map_features').classed('hide')) {
+        if (!mapDataPane.selection().select('.disclosure-wrap-map_features').classed('hide')) {
             updateFeatureList();
         }
 
@@ -809,56 +807,13 @@ export function uiMapData(context) {
         context.map().pan([0,0]);  // trigger a redraw
     }
 
-    var paneTooltip = tooltip()
-        .placement((textDirection === 'rtl') ? 'right' : 'left')
-        .html(true)
-        .title(uiTooltipHtml(t('map_data.description'), key));
+    var mapDataPane = uiPane('map-data', context)
+        .key(t('map_data.key'))
+        .title(t('map_data.title'))
+        .description(t('map_data.description'))
+        .iconName('iD-icon-data');
 
-    function hidePane() {
-        context.ui().togglePanes();
-    }
-
-    uiMapData.togglePane = function() {
-        if (d3_event) d3_event.preventDefault();
-        paneTooltip.hide();
-        context.ui().togglePanes(!_pane.classed('shown') ? _pane : undefined);
-    };
-
-    uiMapData.renderToggleButton = function(selection) {
-
-        selection
-            .append('button')
-            .on('click', uiMapData.togglePane)
-            .call(svgIcon('#iD-icon-data', 'light'))
-            .call(paneTooltip);
-    };
-
-
-    uiMapData.renderPane = function(selection) {
-
-        _pane = selection
-            .append('div')
-            .attr('class', 'fillL map-pane map-data-pane hide')
-            .attr('pane', 'map-data');
-
-        var heading = _pane
-            .append('div')
-            .attr('class', 'pane-heading');
-
-        heading
-            .append('h2')
-            .text(t('map_data.title'));
-
-        heading
-            .append('button')
-            .on('click', hidePane)
-            .call(svgIcon('#iD-icon-close'));
-
-
-        var content = _pane
-            .append('div')
-            .attr('class', 'pane-content');
-
+    mapDataPane.renderContent = function(content) {
 
         // data layers
         content
@@ -905,7 +860,6 @@ export function uiMapData(context) {
         setFill(_fillSelected);
 
         context.keybinding()
-            .on(key, uiMapData.togglePane)
             .on(t('area_fill.wireframe.key'), toggleWireframe)
             .on(osmDataToggleKey, function() {
                 d3_event.preventDefault();
@@ -915,5 +869,5 @@ export function uiMapData(context) {
             .on(t('map_data.highlight_edits.key'), toggleHighlightEdited);
     };
 
-    return uiMapData;
+    return mapDataPane;
 }
