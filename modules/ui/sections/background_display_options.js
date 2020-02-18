@@ -3,10 +3,10 @@ import {
     select as d3_select
 } from 'd3-selection';
 
-import { t, textDirection } from '../util/locale';
-import { svgIcon } from '../svg/icon';
-import { uiDisclosure } from './disclosure';
-import { utilDetect } from '../util/detect';
+import { t, textDirection } from '../../util/locale';
+import { svgIcon } from '../../svg/icon';
+import { uiDisclosure } from '../disclosure';
+import { utilDetect } from '../../util/detect';
 
 
 export function uiBackgroundDisplayOptions(context) {

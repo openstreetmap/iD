@@ -13,7 +13,7 @@ import { utilGetSetValue, utilHighlightEntities, utilNoAuto } from '../../util';
 import { uiPane } from '../pane';
 
 
-export function uiIssues(context) {
+export function uiPaneIssues(context) {
 
     var MINSQUARE = 0;
     var MAXSQUARE = 20;

@@ -7,7 +7,7 @@ import { uiDisclosure } from '../disclosure';
 import { uiPane } from '../pane';
 
 
-export function uiPreferences(context) {
+export function uiPanePreferences(context) {
   let _showThirdPartyIcons = context.storage('preferences.privacy.thirdpartyicons') || 'true';
 
   function renderPrivacyOptions(selection) {

@@ -4,10 +4,10 @@ import {
     selectAll as d3_selectAll
 } from 'd3-selection';
 
-import { t, textDirection } from '../util/locale';
-import { geoMetersToOffset, geoOffsetToMeters } from '../geo';
-import { svgIcon } from '../svg/icon';
-import { uiDisclosure } from './disclosure';
+import { t, textDirection } from '../../util/locale';
+import { geoMetersToOffset, geoOffsetToMeters } from '../../geo';
+import { svgIcon } from '../../svg/icon';
+import { uiDisclosure } from '../disclosure';
 
 
 export function uiBackgroundOffset(context) {

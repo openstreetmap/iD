@@ -37,11 +37,11 @@ import { uiVersion } from './version';
 import { uiZoom } from './zoom';
 import { uiCmd } from './cmd';
 
-import { uiBackground } from './panes/background';
-import { uiHelp } from './panes/help';
-import { uiIssues } from './panes/issues';
-import { uiMapData } from './panes/map_data';
-import { uiPreferences } from './panes/preferences';
+import { uiPaneBackground } from './panes/background';
+import { uiPaneHelp } from './panes/help';
+import { uiPaneIssues } from './panes/issues';
+import { uiPaneMapData } from './panes/map_data';
+import { uiPanePreferences } from './panes/preferences';
 
 export function uiInit(context) {
     var _initCounter = 0;
@@ -107,11 +107,11 @@ export function uiInit(context) {
             .call(uiGeolocate(context));
 
         var uiPanes = [
-            uiBackground(context),
-            uiMapData(context),
-            uiIssues(context),
-            uiPreferences(context),
-            uiHelp(context)
+            uiPaneBackground(context),
+            uiPaneMapData(context),
+            uiPaneIssues(context),
+            uiPanePreferences(context),
+            uiPaneHelp(context)
         ];
 
         uiPanes.forEach(function(pane) {

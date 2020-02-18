@@ -15,7 +15,7 @@ import { uiCmd } from '../cmd';
 import { uiPane } from '../pane';
 
 
-export function uiMapData(context) {
+export function uiPaneMapData(context) {
     var osmDataToggleKey = uiCmd('⌥' + t('area_fill.wireframe.key'));
     var features = context.features().keys();
     var layers = context.layers();

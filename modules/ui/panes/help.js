@@ -11,7 +11,7 @@ import { t, textDirection } from '../../util/locale';
 import { tooltip } from '../../util/tooltip';
 import { icon } from '../intro/helper';
 
-export function uiHelp(context) {
+export function uiPaneHelp(context) {
 
     var docKeys = [
         ['help', [
