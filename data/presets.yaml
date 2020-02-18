@@ -4188,6 +4188,7 @@ en:
       barrier/spikes:
         # barrier=spikes
         name: Spike Strip
+        # 'terms: one-way traffic treadles,stingers,stop sticks,tire deflation device,tire shredders,traffic spikes'
         terms: '<translate with synonyms or related terms for ''Spike Strip'', separated by commas>'
       barrier/stile:
         # barrier=stile
