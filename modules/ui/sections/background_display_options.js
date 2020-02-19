@@ -5,28 +5,30 @@ import {
 
 import { t, textDirection } from '../../util/locale';
 import { svgIcon } from '../../svg/icon';
-import { uiDisclosure } from '../disclosure';
+import { uiSection } from '../section';
 import { utilDetect } from '../../util/detect';
 
 
 export function uiBackgroundDisplayOptions(context) {
-    var detected = utilDetect();
-    var storedOpacity = context.storage('background-opacity');
-    var minVal = 0.25;
-    var maxVal = detected.cssfilters ? 2 : 1;
 
-    var sliders = detected.cssfilters
+    var section = uiSection('background-display-options', context)
+        .title(t('background.display_options'));
+
+    var _detected = utilDetect();
+    var _storedOpacity = context.storage('background-opacity');
+    var _minVal = 0.25;
+    var _maxVal = _detected.cssfilters ? 2 : 1;
+
+    var _sliders = _detected.cssfilters
         ? ['brightness', 'contrast', 'saturation', 'sharpness']
         : ['brightness'];
 
     var _options = {
-        brightness: (storedOpacity !== null ? (+storedOpacity) : 1),
+        brightness: (_storedOpacity !== null ? (+_storedOpacity) : 1),
         contrast: 1,
         saturation: 1,
         sharpness: 1
     };
-
-    var _selection = d3_select(null);
 
 
     function clamp(x, min, max) {
@@ -39,7 +41,7 @@ export function uiBackgroundDisplayOptions(context) {
             val = d3_event.target.value;
         }
 
-        val = clamp(val, minVal, maxVal);
+        val = clamp(val, _minVal, _maxVal);
 
         _options[d] = val;
         context.background()[d](val);
@@ -48,12 +50,11 @@ export function uiBackgroundDisplayOptions(context) {
             context.storage('background-opacity', val);
         }
 
-        _selection
-            .call(render);
+        section.rerenderContent();
     }
 
 
-    function render(selection) {
+    section.renderDisclosureContent = function(selection) {
         var container = selection.selectAll('.display-options-container')
             .data([0]);
 
@@ -63,7 +64,7 @@ export function uiBackgroundDisplayOptions(context) {
 
         // add slider controls
         var slidersEnter = containerEnter.selectAll('.display-control')
-            .data(sliders)
+            .data(_sliders)
             .enter()
             .append('div')
             .attr('class', function(d) { return 'display-control display-control-' + d; });
@@ -78,8 +79,8 @@ export function uiBackgroundDisplayOptions(context) {
             .append('input')
             .attr('class', function(d) { return 'display-option-input display-option-input-' + d; })
             .attr('type', 'range')
-            .attr('min', minVal)
-            .attr('max', maxVal)
+            .attr('min', _minVal)
+            .attr('max', _maxVal)
             .attr('step', '0.05')
             .on('input', function(d) {
                 var val = d3_select(this).property('value');
@@ -103,8 +104,8 @@ export function uiBackgroundDisplayOptions(context) {
             .attr('href', '#')
             .text(t('background.reset_all'))
             .on('click', function() {
-                for (var i = 0; i < sliders.length; i++) {
-                    updateValue(sliders[i],1);
+                for (var i = 0; i < _sliders.length; i++) {
+                    updateValue(_sliders[i],1);
                 }
             });
 
@@ -125,19 +126,8 @@ export function uiBackgroundDisplayOptions(context) {
         if (containerEnter.size() && _options.brightness !== 1) {
             context.background().brightness(_options.brightness);
         }
-    }
+    };
 
 
-    function backgroundDisplayOptions(selection) {
-        _selection = selection;
-
-        selection
-            .call(uiDisclosure(context, 'background_display_options', true)
-                .title(t('background.display_options'))
-                .content(render)
-            );
-    }
-
-
-    return backgroundDisplayOptions;
+    return section;
 }

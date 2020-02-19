@@ -1,3 +1,4 @@
+import _debounce from 'lodash-es/debounce';
 import { descending as d3_descending, ascending as d3_ascending } from 'd3-array';
 import {
     event as d3_event,
@@ -8,9 +9,9 @@ import { t, textDirection } from '../../util/locale';
 import { tooltip } from '../../util/tooltip';
 import { svgIcon } from '../../svg/icon';
 import { uiCmd } from '../cmd';
-import { uiDisclosure } from '../disclosure';
 import { uiSettingsCustomBackground } from '../settings/custom_background';
 import { uiMapInMap } from '../map_in_map';
+import { uiSection } from '../section';
 import { uiTooltipHtml } from '../tooltipHtml';
 
 export function uiBackgroundList(context) {
@@ -19,14 +20,17 @@ export function uiBackgroundList(context) {
 
     var _customSource = context.background().findSource('custom');
 
-    var settingsCustomBackground = uiSettingsCustomBackground(context)
+    var _settingsCustomBackground = uiSettingsCustomBackground(context)
         .on('change', customChanged);
+
+    var section = uiSection('background-list', context)
+        .title(t('background.backgrounds'));
 
     function previousBackgroundID() {
         return context.storage('background-last-used-toggle');
     }
 
-    function render(selection) {
+    section.renderDisclosureContent = function(selection) {
 
         // the background list
         var container = selection.selectAll('.layer-background-list')
@@ -105,8 +109,9 @@ export function uiBackgroundList(context) {
             .append('span')
             .text(t('background.imagery_problem_faq'));
 
-        updateBackgroundList();
-    }
+        _backgroundList
+            .call(drawListItems, 'radio', chooseBackground, function(d) { return !d.isHidden() && !d.overlay; });
+    };
 
     function setTooltips(selection) {
         selection.each(function(d, i, nodes) {
@@ -134,11 +139,6 @@ export function uiBackgroundList(context) {
                 );
             }
         });
-    }
-
-    function updateBackgroundList() {
-        _backgroundList
-            .call(drawListItems, 'radio', chooseBackground, function(d) { return !d.isHidden() && !d.overlay; });
     }
 
     function drawListItems(layerList, type, change, filter) {
@@ -247,22 +247,22 @@ export function uiBackgroundList(context) {
     function editCustom() {
         d3_event.preventDefault();
         context.container()
-            .call(settingsCustomBackground);
+            .call(_settingsCustomBackground);
     }
 
-
-    function backgroundList(selection) {
-        selection
-            .call(uiDisclosure(context, 'background_list', true)
-                .title(t('background.backgrounds'))
-                .content(render)
-            );
-    }
 
     context.background()
         .on('change.background_list', function() {
             _backgroundList.call(updateLayerSelections);
         });
 
-    return backgroundList;
+    context.map()
+        .on('move.background_list',
+            _debounce(function() {
+                // layers in-view may have changed due to map move
+                window.requestIdleCallback(section.rerenderContent);
+            }, 1000)
+        );
+
+    return section;
 }

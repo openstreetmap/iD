@@ -7,11 +7,16 @@ import {
 import { t, textDirection } from '../../util/locale';
 import { geoMetersToOffset, geoOffsetToMeters } from '../../geo';
 import { svgIcon } from '../../svg/icon';
-import { uiDisclosure } from '../disclosure';
+import { uiSection } from '../section';
 
 
 export function uiBackgroundOffset(context) {
-    var directions = [
+
+    var section = uiSection('background-offset', context)
+        .title(t('background.fix_misalignment'))
+        .expandedByDefault(false);
+
+    var _directions = [
         ['right', [0.5, 0]],
         ['top', [0, -0.5]],
         ['left', [-0.5, 0]],
@@ -129,7 +134,7 @@ export function uiBackgroundOffset(context) {
     }
 
 
-    function render(selection) {
+    section.renderDisclosureContent = function(selection) {
         var container = selection.selectAll('.nudge-container')
             .data([0]);
 
@@ -156,7 +161,7 @@ export function uiBackgroundOffset(context) {
         containerEnter
             .append('div')
             .selectAll('button')
-            .data(directions).enter()
+            .data(_directions).enter()
             .append('button')
             .attr('class', function(d) { return d[0] + ' nudge'; })
             .on('contextmenu', d3_eventCancel)
@@ -177,20 +182,10 @@ export function uiBackgroundOffset(context) {
             .call(svgIcon('#iD-icon-' + (textDirection === 'rtl' ? 'redo' : 'undo')));
 
         updateValue();
-    }
-
-
-    function backgroundOffset(selection) {
-        selection
-            .call(uiDisclosure(context, 'background_offset', false)
-                .title(t('background.fix_misalignment'))
-                .content(render)
-            );
-    }
-
+    };
 
     context.background()
         .on('change.backgroundOffset-update', updateValue);
 
-    return backgroundOffset;
+    return section;
 }

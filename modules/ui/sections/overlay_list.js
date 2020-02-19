@@ -1,3 +1,4 @@
+import _debounce from 'lodash-es/debounce';
 import { descending as d3_descending, ascending as d3_ascending } from 'd3-array';
 import {
     event as d3_event,
@@ -6,25 +7,14 @@ import {
 
 import { t } from '../../util/locale';
 import { tooltip } from '../../util/tooltip';
-import { uiDisclosure } from '../disclosure';
+import { uiSection } from '../section';
 
 export function uiOverlayList(context) {
 
+    var section = uiSection('overlay-list', context)
+        .title(t('background.overlays'));
+
     var _overlayList = d3_select(null);
-
-    function render(selection) {
-
-        var container = selection.selectAll('.layer-overlay-list')
-            .data([0]);
-
-        _overlayList = container.enter()
-            .append('ul')
-            .attr('class', 'layer-list layer-overlay-list')
-            .attr('dir', 'auto')
-            .merge(container);
-
-        updateOverlayList();
-    }
 
     function setTooltips(selection) {
         selection.each(function(d, i, nodes) {
@@ -107,18 +97,28 @@ export function uiOverlayList(context) {
         }
     }
 
-    function updateOverlayList() {
+    section.renderDisclosureContent = function(selection) {
+
+        var container = selection.selectAll('.layer-overlay-list')
+            .data([0]);
+
+        _overlayList = container.enter()
+            .append('ul')
+            .attr('class', 'layer-list layer-overlay-list')
+            .attr('dir', 'auto')
+            .merge(container);
+
         _overlayList
             .call(drawListItems, 'checkbox', chooseOverlay, function(d) { return !d.isHidden() && d.overlay; });
-    }
+    };
 
-    function overlayList(selection) {
-        selection
-            .call(uiDisclosure(context, 'overlay_list', true)
-                .title(t('background.overlays'))
-                .content(render)
-            );
-    }
+    context.map()
+        .on('move.overlay_list',
+            _debounce(function() {
+                // layers in-view may have changed due to map move
+                window.requestIdleCallback(section.rerenderContent);
+            }, 1000)
+        );
 
-    return overlayList;
+    return section;
 }

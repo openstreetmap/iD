@@ -15,6 +15,7 @@ export function uiPane(id, context) {
     var _title = '';
     var _description = '';
     var _iconName = '';
+    var _sections; // array of uiSection objects
 
     var _paneSelection = d3_select(null);
 
@@ -48,6 +49,12 @@ export function uiPane(id, context) {
         return pane;
     };
 
+    pane.sections = function(val) {
+        if (!arguments.length) return _sections;
+        _sections = val;
+        return pane;
+    };
+
     pane.selection = function() {
         return _paneSelection;
     };
@@ -78,8 +85,14 @@ export function uiPane(id, context) {
             .call(_paneTooltip);
     };
 
-    pane.renderContent = function() {
-        // override
+    pane.renderContent = function(selection) {
+        // override to fully customize content
+
+        if (_sections) {
+            _sections.forEach(function(section) {
+                selection.call(section.render);
+            });
+        }
     };
 
     pane.renderPane = function(selection) {

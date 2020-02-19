@@ -3,25 +3,24 @@ import _debounce from 'lodash-es/debounce';
 import { event as d3_event, select as d3_select } from 'd3-selection';
 
 import { t } from '../../util/locale';
-import { tooltip } from '../../util/tooltip';
 
 //import { actionNoop } from '../actions/noop';
 import { geoSphericalDistance } from '../../geo';
 import { svgIcon } from '../../svg/icon';
 import { uiDisclosure } from '../disclosure';
-import { utilGetSetValue, utilHighlightEntities, utilNoAuto } from '../../util';
+import { utilHighlightEntities } from '../../util';
 import { uiPane } from '../pane';
+import { uiValidationRules } from '../sections/validation_rules';
 
 
 export function uiPaneIssues(context) {
 
-    var MINSQUARE = 0;
-    var MAXSQUARE = 20;
-    var DEFAULTSQUARE = 5;  // see also unsquare_way.js
-
     var _errorsSelection = d3_select(null);
     var _warningsSelection = d3_select(null);
-    var _rulesList = d3_select(null);
+
+    var _rulesListContainer = d3_select(null);
+
+    var _validationRules = uiValidationRules(context);
 
     var _errors = [];
     var _warnings = [];
@@ -313,69 +312,6 @@ export function uiPaneIssues(context) {
         });
     }
 
-
-    function renderRulesList(selection) {
-        var container = selection.selectAll('.issues-rulelist-container')
-            .data([0]);
-
-        var containerEnter = container.enter()
-            .append('div')
-            .attr('class', 'issues-rulelist-container');
-
-        containerEnter
-            .append('ul')
-            .attr('class', 'layer-list issue-rules-list');
-
-        var ruleLinks = containerEnter
-            .append('div')
-            .attr('class', 'issue-rules-links section-footer');
-
-        ruleLinks
-            .append('a')
-            .attr('class', 'issue-rules-link')
-            .attr('href', '#')
-            .text(t('issues.enable_all'))
-            .on('click', function() {
-                context.validator().disableRules([]);
-            });
-
-        ruleLinks
-            .append('a')
-            .attr('class', 'issue-rules-link')
-            .attr('href', '#')
-            .text(t('issues.disable_all'))
-            .on('click', function() {
-                var keys = context.validator().getRuleKeys();
-                context.validator().disableRules(keys);
-            });
-
-
-        // Update
-        container = container
-            .merge(containerEnter);
-
-        _rulesList = container.selectAll('.issue-rules-list');
-
-        updateRulesList();
-    }
-
-
-    function updateRulesList() {
-        var ruleKeys = context.validator().getRuleKeys();
-        _rulesList
-            .call(drawListItems, ruleKeys, 'checkbox', 'rule', toggleRule, isRuleEnabled);
-    }
-
-
-    function isRuleEnabled(d) {
-        return context.validator().isRuleEnabled(d);
-    }
-
-
-    function toggleRule(d) {
-        context.validator().toggleRule(d);
-    }
-
     function setNoIssuesText() {
 
         function checkForHiddenIssues(cases) {
@@ -502,10 +438,8 @@ export function uiPaneIssues(context) {
             setNoIssuesText();
         }
 
-        if (!issuesPane.selection().select('.disclosure-wrap-issues_rules').classed('hide')) {
-            updateRulesList();
-        }
-
+        _rulesListContainer
+            .call(_validationRules.render);
 
         function byDistance(a, b) {
             return a.dist - b.dist;
@@ -516,116 +450,6 @@ export function uiPaneIssues(context) {
             var dist = extent ? geoSphericalDistance(center, extent.center()) : 0;
             return Object.assign(issue, { dist: dist });
         }
-    }
-
-
-    function drawListItems(selection, data, type, name, change, active) {
-        var items = selection.selectAll('li')
-            .data(data);
-
-        // Exit
-        items.exit()
-            .remove();
-
-        // Enter
-        var enter = items.enter()
-            .append('li');
-
-        if (name === 'rule') {
-            enter
-                .call(tooltip()
-                    .title(function(d) { return t('issues.' + d + '.tip'); })
-                    .placement('top')
-                );
-        }
-
-        var label = enter
-            .append('label');
-
-        label
-            .append('input')
-            .attr('type', type)
-            .attr('name', name)
-            .on('change', change);
-
-        label
-            .append('span')
-            .html(function(d) {
-                var params = {};
-                if (d === 'unsquare_way') {
-                    params.val = '<span class="square-degrees"></span>';
-                }
-                return t('issues.' + d + '.title', params);
-            });
-
-        // Update
-        items = items
-            .merge(enter);
-
-        items
-            .classed('active', active)
-            .selectAll('input')
-            .property('checked', active)
-            .property('indeterminate', false);
-
-
-        // user-configurable square threshold
-        var degStr = context.storage('validate-square-degrees');
-        if (degStr === null) {
-            degStr = '' + DEFAULTSQUARE;
-        }
-
-        var span = items.selectAll('.square-degrees');
-        var input = span.selectAll('.square-degrees-input')
-            .data([0]);
-
-        // enter / update
-        input.enter()
-            .append('input')
-            .attr('type', 'number')
-            .attr('min', '' + MINSQUARE)
-            .attr('max', '' + MAXSQUARE)
-            .attr('step', '0.5')
-            .attr('class', 'square-degrees-input')
-            .call(utilNoAuto)
-            .on('click', function () {
-                d3_event.preventDefault();
-                d3_event.stopPropagation();
-                this.select();
-            })
-            .on('keyup', function () {
-                if (d3_event.keyCode === 13) { // enter
-                    this.blur();
-                    this.select();
-                }
-            })
-            .on('blur', changeSquare)
-            .merge(input)
-            .property('value', degStr);
-    }
-
-
-    function changeSquare() {
-        var input = d3_select(this);
-        var degStr = utilGetSetValue(input).trim();
-        var degNum = parseFloat(degStr, 10);
-
-        if (!isFinite(degNum)) {
-            degNum = DEFAULTSQUARE;
-        } else if (degNum > MAXSQUARE) {
-            degNum = MAXSQUARE;
-        } else if (degNum < MINSQUARE) {
-            degNum = MINSQUARE;
-        }
-
-        degNum = Math.round(degNum * 10 ) / 10;   // round to 1 decimal
-        degStr = '' + degNum;
-
-        input
-            .property('value', degStr);
-
-        context.storage('validate-square-degrees', degStr);
-        context.validator().reloadUnsquareIssues();
     }
 
 
@@ -664,16 +488,12 @@ export function uiPaneIssues(context) {
                 .content(renderWarningsList)
             );
 
-        // rules
-        content
+        // rules list
+        _rulesListContainer = content
             .append('div')
-            .attr('class', 'issues-rules')
-            .call(uiDisclosure(context, 'issues_rules', false)
-                .title(t('issues.rules.title'))
-                .content(renderRulesList)
-            );
+            .attr('class', 'issues-rules');
 
-        // update();
+        update();
     };
 
     return issuesPane;
