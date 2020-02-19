@@ -31,11 +31,6 @@ export function uiPaneMapData(context) {
     var _mapStyleOptionsSection = uiSectionMapStyleOptions(context);
     var _mapFeaturesSection = uiSectionMapFeatures(context);
 
-    function autoHiddenFeature(d) {
-        if (d.type === 'kr_error') return context.errors().autoHidden(d);
-        return context.features().autoHidden(d);
-    }
-
 
     function showsQA(d) {
         var QAKeys = [d];
@@ -574,10 +569,6 @@ export function uiPaneMapData(context) {
                 .html(true)
                 .title(function(d) {
                     var tip = t(name + '.' + d + '.tooltip');
-                    if (name === 'keepRight' && autoHiddenFeature(d)) {
-                        var msg = showsLayer('osm') ? t('map_data.autohidden') : t('map_data.osmhidden');
-                        tip += '<div>' + msg + '</div>';
-                    }
                     return uiTooltipHtml(tip);
                 })
                 .placement('top')
@@ -604,9 +595,7 @@ export function uiPaneMapData(context) {
             .classed('active', active)
             .selectAll('input')
             .property('checked', active)
-            .property('indeterminate', function(d) {
-                return name === 'keepRight' && autoHiddenFeature(d);
-            });
+            .property('indeterminate', false);
     }
 
 
