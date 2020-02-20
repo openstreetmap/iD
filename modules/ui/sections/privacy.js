@@ -10,11 +10,12 @@ import { uiSection } from '../section';
 export function uiSectionPrivacy(context) {
 
     let section = uiSection('preferences-third-party', context)
-      .title(t('preferences.privacy.title'));
+      .title(t('preferences.privacy.title'))
+      .disclosureContent(renderDisclosureContent);
 
     let _showThirdPartyIcons = context.storage('preferences.privacy.thirdpartyicons') || 'true';
 
-    section.renderDisclosureContent = function(selection) {
+    function renderDisclosureContent(selection) {
       // enter
       let privacyOptionsListEnter = selection.selectAll('.privacy-options-list')
         .data([0])
@@ -68,7 +69,7 @@ export function uiSectionPrivacy(context) {
           .select('input')
           .property('checked', (_showThirdPartyIcons === 'true'));
       }
-    };
+    }
 
     return section;
 }

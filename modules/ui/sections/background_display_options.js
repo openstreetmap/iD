@@ -9,10 +9,11 @@ import { uiSection } from '../section';
 import { utilDetect } from '../../util/detect';
 
 
-export function uiBackgroundDisplayOptions(context) {
+export function uiSectionBackgroundDisplayOptions(context) {
 
     var section = uiSection('background-display-options', context)
-        .title(t('background.display_options'));
+        .title(t('background.display_options'))
+        .disclosureContent(renderDisclosureContent);
 
     var _detected = utilDetect();
     var _storedOpacity = context.storage('background-opacity');
@@ -30,11 +31,9 @@ export function uiBackgroundDisplayOptions(context) {
         sharpness: 1
     };
 
-
     function clamp(x, min, max) {
         return Math.max(min, Math.min(x, max));
     }
-
 
     function updateValue(d, val) {
         if (!val && d3_event && d3_event.target) {
@@ -50,11 +49,10 @@ export function uiBackgroundDisplayOptions(context) {
             context.storage('background-opacity', val);
         }
 
-        section.rerenderContent();
+        section.reRender();
     }
 
-
-    section.renderDisclosureContent = function(selection) {
+    function renderDisclosureContent(selection) {
         var container = selection.selectAll('.display-options-container')
             .data([0]);
 
@@ -126,8 +124,7 @@ export function uiBackgroundDisplayOptions(context) {
         if (containerEnter.size() && _options.brightness !== 1) {
             context.background().brightness(_options.brightness);
         }
-    };
-
+    }
 
     return section;
 }

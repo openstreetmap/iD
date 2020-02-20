@@ -9,10 +9,11 @@ import { t } from '../../util/locale';
 import { tooltip } from '../../util/tooltip';
 import { uiSection } from '../section';
 
-export function uiOverlayList(context) {
+export function uiSectionOverlayList(context) {
 
     var section = uiSection('overlay-list', context)
-        .title(t('background.overlays'));
+        .title(t('background.overlays'))
+        .disclosureContent(renderDisclosureContent);
 
     var _overlayList = d3_select(null);
 
@@ -97,7 +98,7 @@ export function uiOverlayList(context) {
         }
     }
 
-    section.renderDisclosureContent = function(selection) {
+    function renderDisclosureContent(selection) {
 
         var container = selection.selectAll('.layer-overlay-list')
             .data([0]);
@@ -110,13 +111,13 @@ export function uiOverlayList(context) {
 
         _overlayList
             .call(drawListItems, 'checkbox', chooseOverlay, function(d) { return !d.isHidden() && d.overlay; });
-    };
+    }
 
     context.map()
         .on('move.overlay_list',
             _debounce(function() {
                 // layers in-view may have changed due to map move
-                window.requestIdleCallback(section.rerenderContent);
+                window.requestIdleCallback(section.reRender);
             }, 1000)
         );
 

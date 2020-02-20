@@ -13,9 +13,10 @@ export function uiSectionPhotoOverlays(context) {
 
     var section = uiSection('photo-overlays', context)
         .title(t('photo_overlays.title'))
+        .disclosureContent(renderDisclosureContent)
         .expandedByDefault(false);
 
-    section.renderDisclosureContent = function(selection) {
+    function renderDisclosureContent(selection) {
         var container = selection.selectAll('.photo-overlay-container')
             .data([0]);
 
@@ -25,7 +26,7 @@ export function uiSectionPhotoOverlays(context) {
             .merge(container)
             .call(drawPhotoItems)
             .call(drawPhotoTypeItems);
-    };
+    }
 
     function drawPhotoItems(selection) {
         var photoKeys = context.photos().overlayLayerIDs();
@@ -194,8 +195,8 @@ export function uiSectionPhotoOverlays(context) {
         }
     }
 
-    context.layers().on('change.uiSectionPhotoOverlays', section.rerenderContent);
-    context.photos().on('change.uiSectionPhotoOverlays', section.rerenderContent);
+    context.layers().on('change.uiSectionPhotoOverlays', section.reRender);
+    context.photos().on('change.uiSectionPhotoOverlays', section.reRender);
 
     return section;
 }

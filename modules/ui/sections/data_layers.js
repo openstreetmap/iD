@@ -22,9 +22,10 @@ export function uiSectionDataLayers(context) {
     var layers = context.layers();
 
     var section = uiSection('data-layers', context)
-        .title(t('map_data.data_layers'));
+        .title(t('map_data.data_layers'))
+        .disclosureContent(renderDisclosureContent);
 
-    section.renderDisclosureContent = function(selection) {
+    function renderDisclosureContent(selection) {
         var container = selection.selectAll('.data-layer-container')
             .data([0]);
 
@@ -36,7 +37,7 @@ export function uiSectionDataLayers(context) {
             .call(drawQAItems)
             .call(drawCustomDataItems)
             .call(drawVectorItems);      // Beta - Detroit mapping challenge
-    };
+    }
 
     function showsLayer(which) {
         var layer = layers.layer(which);
@@ -377,13 +378,13 @@ export function uiSectionDataLayers(context) {
         }
     }
 
-    context.layers().on('change.uiSectionDataLayers', section.rerenderContent);
+    context.layers().on('change.uiSectionDataLayers', section.reRender);
 
     context.map()
         .on('move.uiSectionDataLayers',
             _debounce(function() {
                 // Detroit layers may have moved in or out of view
-                window.requestIdleCallback(section.rerenderContent);
+                window.requestIdleCallback(section.reRender);
             }, 1000)
         );
 

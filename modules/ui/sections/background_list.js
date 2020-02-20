@@ -14,7 +14,7 @@ import { uiMapInMap } from '../map_in_map';
 import { uiSection } from '../section';
 import { uiTooltipHtml } from '../tooltipHtml';
 
-export function uiBackgroundList(context) {
+export function uiSectionBackgroundList(context) {
 
     var _backgroundList = d3_select(null);
 
@@ -24,13 +24,14 @@ export function uiBackgroundList(context) {
         .on('change', customChanged);
 
     var section = uiSection('background-list', context)
-        .title(t('background.backgrounds'));
+        .title(t('background.backgrounds'))
+        .disclosureContent(renderDisclosureContent);
 
     function previousBackgroundID() {
         return context.storage('background-last-used-toggle');
     }
 
-    section.renderDisclosureContent = function(selection) {
+    function renderDisclosureContent(selection) {
 
         // the background list
         var container = selection.selectAll('.layer-background-list')
@@ -111,7 +112,7 @@ export function uiBackgroundList(context) {
 
         _backgroundList
             .call(drawListItems, 'radio', chooseBackground, function(d) { return !d.isHidden() && !d.overlay; });
-    };
+    }
 
     function setTooltips(selection) {
         selection.each(function(d, i, nodes) {
@@ -260,7 +261,7 @@ export function uiBackgroundList(context) {
         .on('move.background_list',
             _debounce(function() {
                 // layers in-view may have changed due to map move
-                window.requestIdleCallback(section.rerenderContent);
+                window.requestIdleCallback(section.reRender);
             }, 1000)
         );
 

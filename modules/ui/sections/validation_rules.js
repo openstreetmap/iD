@@ -15,9 +15,10 @@ export function uiSectionValidationRules(context) {
     var DEFAULTSQUARE = 5;  // see also unsquare_way.js
 
     var section = uiSection('issues-rules', context)
+        .disclosureContent(renderDisclosureContent)
         .title(t('issues.rules.title'));
 
-    section.renderDisclosureContent = function(selection) {
+    function renderDisclosureContent(selection) {
         var container = selection.selectAll('.issues-rulelist-container')
             .data([0]);
 
@@ -61,7 +62,7 @@ export function uiSectionValidationRules(context) {
 
         container.selectAll('.issue-rules-list')
             .call(drawListItems, ruleKeys, 'checkbox', 'rule', toggleRule, isRuleEnabled);
-    };
+    }
 
     function drawListItems(selection, data, type, name, change, active) {
         var items = selection.selectAll('li')

@@ -4,10 +4,10 @@ import { t } from '../../util/locale';
 import { uiCmd } from '../cmd';
 import { uiPane } from '../pane';
 
-import { uiBackgroundDisplayOptions } from '../sections/background_display_options';
-import { uiBackgroundList } from '../sections/background_list';
-import { uiBackgroundOffset } from '../sections/background_offset';
-import { uiOverlayList } from '../sections/overlay_list';
+import { uiSectionBackgroundDisplayOptions } from '../sections/background_display_options';
+import { uiSectionBackgroundList } from '../sections/background_list';
+import { uiSectionBackgroundOffset } from '../sections/background_offset';
+import { uiSectionOverlayList } from '../sections/overlay_list';
 
 export function uiPaneBackground(context) {
 
@@ -34,10 +34,10 @@ export function uiPaneBackground(context) {
         .description(t('background.description'))
         .iconName('iD-icon-layers')
         .sections([
-            uiBackgroundList(context),
-            uiOverlayList(context),
-            uiBackgroundDisplayOptions(context),
-            uiBackgroundOffset(context)
+            uiSectionBackgroundList(context),
+            uiSectionOverlayList(context),
+            uiSectionBackgroundDisplayOptions(context),
+            uiSectionBackgroundOffset(context)
         ]);
 
     return backgroundPane;

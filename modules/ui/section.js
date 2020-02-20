@@ -13,6 +13,8 @@ export function uiSection(id, context) {
     var _title;
     var _expandedByDefault = utilFunctor(true);
     var _shouldDisplay;
+    var _content;
+    var _disclosureContent;
 
     var _containerSelection = d3_select(null);
 
@@ -38,6 +40,18 @@ export function uiSection(id, context) {
         return section;
     };
 
+    section.content = function(val) {
+        if (!arguments.length) return _content;
+        _content = val;
+        return section;
+    };
+
+    section.disclosureContent = function(val) {
+        if (!arguments.length) return _disclosureContent;
+        _disclosureContent = val;
+        return section;
+    };
+
     // may be called multiple times
     section.render = function(selection) {
 
@@ -57,10 +71,16 @@ export function uiSection(id, context) {
             .call(renderContent);
     };
 
-    section.containerSelection = function() {
+    section.reRender = function() {
+        _containerSelection
+            .call(renderContent);
+    };
+
+    section.selection = function() {
         return _containerSelection;
     };
 
+    // may be called multiple times
     function renderContent(selection) {
         if (_shouldDisplay) {
             var shouldDisplay = _shouldDisplay();
@@ -70,30 +90,24 @@ export function uiSection(id, context) {
                 return;
             }
         }
-        section.renderContent(selection);
-    }
 
-    // may be called multiple times
-    section.renderContent = function(containerSelection) {
-
-        if (section.renderDisclosureContent) {
+        if (_disclosureContent) {
             if (!_disclosure) {
                 _disclosure = uiDisclosure(context, id.replace(/-/g, '_'), _expandedByDefault())
                     .title(_title || '')
-                    .content(section.renderDisclosureContent);
+                    .content(_disclosureContent);
             }
-            containerSelection
+            selection
                 .call(_disclosure);
+
+            return;
         }
-    };
 
-    section.rerenderContent = function() {
-        _containerSelection
-            .call(renderContent);
-    };
-
-    // override to enable disclosure
-    section.renderDisclosureContent = undefined;
+        if (_content) {
+            selection
+                .call(_content);
+        }
+    }
 
     return section;
 }

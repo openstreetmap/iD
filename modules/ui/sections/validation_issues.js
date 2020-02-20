@@ -20,6 +20,7 @@ export function uiSectionValidationIssues(id, severity, context) {
             var issueCountText = _issues.length > 1000 ? '1000+' : String(_issues.length);
             return t('issues.' + severity + 's.list_title', { count: issueCountText });
         })
+        .disclosureContent(renderDisclosureContent)
         .shouldDisplay(function() {
             return _issues && _issues.length;
         });
@@ -36,7 +37,7 @@ export function uiSectionValidationIssues(id, severity, context) {
         _issues = context.validator().getIssuesBySeverity(getOptions())[severity];
     }
 
-    section.renderDisclosureContent = function(selection) {
+    function renderDisclosureContent(selection) {
 
         var center = context.map().center();
         var graph = context.graph();
@@ -58,7 +59,7 @@ export function uiSectionValidationIssues(id, severity, context) {
 
         selection
             .call(drawIssuesList, issues);
-    };
+    }
 
     function drawIssuesList(selection, issues) {
         var list = selection.selectAll('.issues-list')
@@ -209,7 +210,7 @@ export function uiSectionValidationIssues(id, severity, context) {
     context.validator().on('validated.uiSectionValidationIssues' + id, function() {
         window.requestIdleCallback(function() {
             reloadIssues();
-            section.rerenderContent();
+            section.reRender();
         });
     });
 
@@ -221,7 +222,7 @@ export function uiSectionValidationIssues(id, severity, context) {
                     reloadIssues();
                 }
                 // always reload list to re-sort-by-distance
-                section.rerenderContent();
+                section.reRender();
             });
         }, 1000)
     );

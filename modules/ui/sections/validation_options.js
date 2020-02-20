@@ -7,9 +7,10 @@ import { uiSection } from '../section';
 
 export function uiSectionValidationOptions(context) {
 
-    var section = uiSection('issues-options', context);
+    var section = uiSection('issues-options', context)
+        .content(renderContent);
 
-    section.renderContent = function(selection) {
+    function renderContent(selection) {
 
         var container = selection.selectAll('.issues-options-container')
             .data([0]);
@@ -54,7 +55,7 @@ export function uiSectionValidationOptions(context) {
         valuesEnter
             .append('span')
             .text(function(d) { return t('issues.options.' + d.key + '.' + d.value); });
-    };
+    }
 
     function getOptions() {
         return {

@@ -10,10 +10,11 @@ import { svgIcon } from '../../svg/icon';
 import { uiSection } from '../section';
 
 
-export function uiBackgroundOffset(context) {
+export function uiSectionBackgroundOffset(context) {
 
     var section = uiSection('background-offset', context)
         .title(t('background.fix_misalignment'))
+        .disclosureContent(renderDisclosureContent)
         .expandedByDefault(false);
 
     var _directions = [
@@ -134,7 +135,7 @@ export function uiBackgroundOffset(context) {
     }
 
 
-    section.renderDisclosureContent = function(selection) {
+    function renderDisclosureContent(selection) {
         var container = selection.selectAll('.nudge-container')
             .data([0]);
 
@@ -182,7 +183,7 @@ export function uiBackgroundOffset(context) {
             .call(svgIcon('#iD-icon-' + (textDirection === 'rtl' ? 'redo' : 'undo')));
 
         updateValue();
-    };
+    }
 
     context.background()
         .on('change.backgroundOffset-update', updateValue);

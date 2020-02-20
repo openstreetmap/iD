@@ -11,9 +11,10 @@ export function uiSectionMapStyleOptions(context) {
 
     var section = uiSection('fill-area', context)
         .title(t('map_data.style_options'))
+        .disclosureContent(renderDisclosureContent)
         .expandedByDefault(false);
 
-    section.renderDisclosureContent = function(selection) {
+    function renderDisclosureContent(selection) {
         var container = selection.selectAll('.layer-fill-list')
             .data([0]);
 
@@ -33,7 +34,7 @@ export function uiSectionMapStyleOptions(context) {
             .call(drawListItems, ['highlight_edits'], 'checkbox', 'visual_diff', toggleHighlightEdited, function() {
                 return context.surface().classed('highlight-edited');
             });
-    };
+    }
 
     function drawListItems(selection, data, type, name, change, active) {
         var items = selection.selectAll('li')
@@ -95,7 +96,7 @@ export function uiSectionMapStyleOptions(context) {
     }
 
     context.map()
-        .on('changeHighlighting.ui_style, changeAreaFill.ui_style', section.rerenderContent);
+        .on('changeHighlighting.ui_style, changeAreaFill.ui_style', section.reRender);
 
     return section;
 }

@@ -7,6 +7,7 @@ import { uiSection } from '../section';
 export function uiSectionValidationStatus(context) {
 
     var section = uiSection('issues-status', context)
+        .content(renderContent)
         .shouldDisplay(function() {
             var issues = context.validator().getIssues(getOptions());
             return issues.length === 0;
@@ -19,7 +20,7 @@ export function uiSectionValidationStatus(context) {
         };
     }
 
-    section.renderContent = function(selection) {
+    function renderContent(selection) {
 
         var box = selection.selectAll('.box')
             .data([0]);
@@ -48,7 +49,7 @@ export function uiSectionValidationStatus(context) {
 
         renderIgnoredIssuesReset(selection);
         setNoIssuesText(selection);
-    };
+    }
 
     function renderIgnoredIssuesReset(selection) {
 
@@ -161,12 +162,12 @@ export function uiSectionValidationStatus(context) {
     }
 
     context.validator().on('validated.uiSectionValidationStatus', function() {
-        window.requestIdleCallback(section.rerenderContent);
+        window.requestIdleCallback(section.reRender);
     });
 
     context.map().on('move.uiSectionValidationStatus',
         _debounce(function() {
-            window.requestIdleCallback(section.rerenderContent);
+            window.requestIdleCallback(section.reRender);
         }, 1000)
     );
 

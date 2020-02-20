@@ -9,9 +9,10 @@ export function uiSectionMapFeatures(context) {
 
     var section = uiSection('map-features', context)
         .title(t('map_data.map_features'))
+        .disclosureContent(renderDisclosureContent)
         .expandedByDefault(false);
 
-    section.renderDisclosureContent = function(selection) {
+    function renderDisclosureContent(selection) {
 
         var container = selection.selectAll('.layer-feature-list-container')
             .data([0]);
@@ -52,7 +53,7 @@ export function uiSectionMapFeatures(context) {
 
         container.selectAll('.layer-feature-list')
             .call(drawListItems, _features, 'checkbox', 'feature', clickFeature, showsFeature);
-    };
+    }
 
     function drawListItems(selection, data, type, name, change, active) {
         var items = selection.selectAll('li')
@@ -121,7 +122,7 @@ export function uiSectionMapFeatures(context) {
 
     // add listeners
     context.features()
-        .on('change.map_features', section.rerenderContent);
+        .on('change.map_features', section.reRender);
 
     return section;
 }
