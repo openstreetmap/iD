@@ -1,21 +1,21 @@
-var translations = Object.create(null);
-var _dataLanguages = {};
+let _translations = Object.create(null);
+let _dataLanguages = {};
 
-export var currentLocale = 'en';
-export var textDirection = 'ltr';
-export var languageNames = {};
-export var scriptNames = {};
+export let currentLocale = 'en';
+export let textDirection = 'ltr';
+export let languageNames = {};
+export let scriptNames = {};
 
 export function setLocale(val) {
-    if (translations[val] !== undefined) {
-        currentLocale = val;
-    } else if (translations[val.split('-')[0]]) {
-        currentLocale = val.split('-')[0];
-    }
+  if (_translations[val] !== undefined) {
+    currentLocale = val;
+  } else if (_translations[val.split('-')[0]]) {
+    currentLocale = val.split('-')[0];
+  }
 }
 
 export function addTranslation(id, value) {
-    translations[id] = value;
+  _translations[id] = value;
 }
 
 /**
@@ -23,48 +23,48 @@ export function addTranslation(id, value) {
  * language, and return it.  This function will be called recursively
  * with locale `en` if a string can not be found in the requested language.
  *
- * @param {string}   s   string identifier
- * @param {object?}  o   object of token replacements and default string
- * @param {string?}  loc locale to use
- * @returns {string?} locale string
+ * @param {string}    s             string identifier
+ * @param {object?}   replacements  token replacements and default string
+ * @param {string?}   locale        locale to use (defaults to currentLocale)
+ * @returns {string?} localized string
  */
-export function t(s, o, loc) {
-    loc = loc || currentLocale;
+export function t(s, replacements, locale) {
+  locale = locale || currentLocale;
 
-    var path = s
-        .split('.')
-        .map(function (s) { return s.replace(/<TX_DOT>/g, '.'); })
-        .reverse();
+  let path = s
+    .split('.')
+    .map(s => s.replace(/<TX_DOT>/g, '.'))
+    .reverse();
 
-    var rep = translations[loc];
+  let result = _translations[locale];
 
-    while (rep !== undefined && path.length) {
-        rep = rep[path.pop()];
+  while (result !== undefined && path.length) {
+    result = result[path.pop()];
+  }
+
+  if (result !== undefined) {
+    if (replacements) {
+      for (let k in replacements) {
+        const token = `{${k}}`;
+        const regex = new RegExp(token, 'g');
+        result = result.replace(regex, replacements[k]);
+      }
     }
+    return result;
+  }
 
-    if (rep !== undefined) {
-        if (o) {
-            for (var k in o) {
-                var variable = '\\{' + k + '\\}';
-                var re = new RegExp(variable, 'g'); // check globally for variables
-                rep = rep.replace(re, o[k]);
-            }
-        }
-        return rep;
-    }
+  if (locale !== 'en') {
+    return t(s, replacements, 'en');  // fallback - recurse with 'en'
+  }
 
-    if (loc !== 'en') {
-        return t(s, o, 'en');
-    }
+  if (replacements && 'default' in replacements) {
+    return replacements.default;      // fallback - replacements.default
+  }
 
-    if (o && 'default' in o) {
-        return o.default;
-    }
+  const missing = `Missing ${locale} translation: ${s}`;
+  if (typeof console !== 'undefined') console.error(missing);  // eslint-disable-line
 
-    var missing = 'Missing ' + loc + ' translation: ' + s;
-    if (typeof console !== 'undefined') console.error(missing); // eslint-disable-line
-
-    return missing;
+  return missing;
 }
 
 /**
@@ -73,55 +73,55 @@ export function t(s, o, loc) {
  * @param {string} dir ltr or rtl
  */
 export function setTextDirection(dir) {
-    textDirection = dir;
+  textDirection = dir;
 }
 
 export function setLanguageNames(obj) {
-    languageNames = obj;
+  languageNames = obj;
 }
 
 export function setScriptNames(obj) {
-    scriptNames = obj;
+  scriptNames = obj;
 }
 
 export function languageName(context, code, options) {
-    // Data access is async now, which makes this complicated.
-    // If _dataLanguages haven't been loaded yet, try to load them.
-    // Worst case, we fallback to the code until the file has been loaded.
-    if (!Object.keys(_dataLanguages).length) {
-        context.data().get('languages')
-            .then(function(d) { _dataLanguages = d; })
-            .catch(function() { /* ignore */ });
+  // Data access is async now, which makes this complicated.
+  // If _dataLanguages haven't been loaded yet, try to load them.
+  // Worst case, we fallback to the code until the file has been loaded.
+  if (!Object.keys(_dataLanguages).length) {
+    context.data().get('languages')
+      .then(d => _dataLanguages = d)
+      .catch(() => { /* ignore */ });
+  }
+
+  if (languageNames[code]) {  // name in locale langauge
+    // e.g. "German"
+    return languageNames[code];
+  }
+
+  // sometimes we only want the local name
+  if (options && options.localOnly) return null;
+
+  const langInfo = _dataLanguages[code];
+  if (langInfo) {
+    if (langInfo.nativeName) {  // name in native language
+      // e.g. "Deutsch (de)"
+      return t('translate.language_and_code', { language: langInfo.nativeName, code: code });
+
+    } else if (langInfo.base && langInfo.script) {
+      const base = langInfo.base;   // the code of the langauge this is based on
+
+      if (languageNames[base]) {   // base language name in locale langauge
+        const scriptCode = langInfo.script;
+        const script = scriptNames[scriptCode] || scriptCode;
+        // e.g. "Serbian (Cyrillic)"
+        return t('translate.language_and_code', { language: languageNames[base], code: script });
+
+      } else if (_dataLanguages[base] && _dataLanguages[base].nativeName) {
+        // e.g. "српски (sr-Cyrl)"
+        return t('translate.language_and_code', { language: _dataLanguages[base].nativeName, code: code });
+      }
     }
-
-    if (languageNames[code]) { // name in locale langauge
-        // e.g. German
-        return languageNames[code];
-    }
-
-    // sometimes we only want the local name
-    if (options && options.localOnly) return null;
-
-    var langInfo = _dataLanguages[code];
-    if (langInfo) {
-        if (langInfo.nativeName) { // name in native language
-            // e.g. Deutsch (de)
-            return t('translate.language_and_code', { language: langInfo.nativeName, code: code });
-
-        } else if (langInfo.base && langInfo.script) {
-            var base = langInfo.base; // the code of the langauge this is based on
-
-            if (languageNames[base]) { // base language name in locale langauge
-                var scriptCode = langInfo.script;
-                var script = scriptNames[scriptCode] || scriptCode;
-                // e.g. Serbian (Cyrillic)
-                return t('translate.language_and_code', { language: languageNames[base], code: script });
-
-            } else if (_dataLanguages[base] && _dataLanguages[base].nativeName) {
-                // e.g. српски (sr-Cyrl)
-                return t('translate.language_and_code', { language: _dataLanguages[base].nativeName, code: code });
-            }
-        }
-    }
-    return code; // if not found, use the code
+  }
+  return code;  // if not found, use the code
 }
