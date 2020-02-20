@@ -3,7 +3,6 @@ import {
   select as d3_select
 } from 'd3-selection';
 
-import { dataEn } from '../../data';
 import { modeSelect } from '../modes/select';
 import { t } from '../util/locale';
 import { utilDisplayName, utilHighlightEntities, utilEntityRoot } from '../util';
@@ -11,25 +10,15 @@ import { utilDisplayName, utilHighlightEntities, utilEntityRoot } from '../util'
 export function uiImproveOsmDetails(context) {
   let _qaItem;
 
+
   function issueDetail(d) {
-    const unknown = t('inspector.unknown');
-
-    if (!d) return unknown;
-
     if (d.desc) return d.desc;
-
-    const itemType = d.issueKey;
-    const et = dataEn.QA.improveOSM.error_types[itemType];
-
-    let detail;
-    if (et && et.description) {
-      detail = t(`QA.improveOSM.error_types.${itemType}.description`, d.replacements);
-    } else {
-      detail = unknown;
-    }
-
-    return detail;
+    const issueKey = d.issueKey;
+    d.replacements = d.replacements || {};
+    d.replacements.default = t('inspector.unknown');  // special key `default` works as a fallback string
+    return t(`QA.improveOSM.error_types.${issueKey}.description`, d.replacements);
   }
+
 
   function improveOsmDetails(selection) {
     const details = selection.selectAll('.error-details')
