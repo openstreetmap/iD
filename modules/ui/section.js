@@ -49,13 +49,17 @@ export function uiSection(id, context) {
             .call(section.renderContent);
     };
 
+    section.containerSelection = function() {
+        return _containerSelection;
+    };
+
     // may be called multiple times
     section.renderContent = function(containerSelection) {
 
-        if (section.renderDisclosureContent && _title) {
+        if (section.renderDisclosureContent) {
             if (!_disclosure) {
                 _disclosure = uiDisclosure(context, id.replace(/-/g, '_'), _expandedByDefault)
-                    .title(_title)
+                    .title(_title || '')
                     .content(section.renderDisclosureContent);
             }
             containerSelection

@@ -8,7 +8,7 @@ import { utilGetSetValue, utilNoAuto } from '../../util';
 import { tooltip } from '../../util/tooltip';
 import { uiSection } from '../section';
 
-export function uiValidationRules(context) {
+export function uiSectionValidationRules(context) {
 
     var MINSQUARE = 0;
     var MAXSQUARE = 20;

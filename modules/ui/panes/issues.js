@@ -1,200 +1,33 @@
 import _debounce from 'lodash-es/debounce';
-
-import { event as d3_event, select as d3_select } from 'd3-selection';
+import { event as d3_event } from 'd3-selection';
 
 import { t } from '../../util/locale';
-
-//import { actionNoop } from '../actions/noop';
-import { geoSphericalDistance } from '../../geo';
 import { svgIcon } from '../../svg/icon';
-import { uiDisclosure } from '../disclosure';
-import { utilHighlightEntities } from '../../util';
 import { uiPane } from '../pane';
-import { uiValidationRules } from '../sections/validation_rules';
+import { uiSectionValidationIssues } from '../sections/validation_issues';
+import { uiSectionValidationRules } from '../sections/validation_rules';
 
 
 export function uiPaneIssues(context) {
 
-    var _errorsSelection = d3_select(null);
-    var _warningsSelection = d3_select(null);
+    var _validationRules = uiSectionValidationRules(context);
+    var _validationErrors = uiSectionValidationIssues('issues-errors', 'error', context);
+    var _validationWarnings = uiSectionValidationIssues('issues-warnings', 'warning', context);
 
-    var _rulesListContainer = d3_select(null);
+    function getOptions() {
+        return {
+            what: context.storage('validate-what') || 'edited',    // 'all', 'edited'
+            where: context.storage('validate-where') || 'all'  // 'all', 'visible'
+        };
+    }
 
-    var _validationRules = uiValidationRules(context);
-
-    var _errors = [];
-    var _warnings = [];
-    var _options = {
-        what: context.storage('validate-what') || 'edited',    // 'all', 'edited'
-        where: context.storage('validate-where') || 'all'  // 'all', 'visible'
-    };
-
-    // listeners
-    context.validator().on('validated.uiIssues',
+    // listen for updates that affect the "no issues" box
+    context.validator().on('validated.uiPaneIssues',
         function() { window.requestIdleCallback(update); }
     );
-    context.map().on('move.uiIssues',
+    context.map().on('move.uiPaneIssues',
         _debounce(function() { window.requestIdleCallback(update); }, 1000)
     );
-
-
-    function renderErrorsList(selection) {
-        _errorsSelection = selection
-            .call(drawIssuesList, 'errors', _errors);
-    }
-
-
-    function renderWarningsList(selection) {
-        _warningsSelection = selection
-            .call(drawIssuesList, 'warnings', _warnings);
-    }
-
-
-    function drawIssuesList(selection, which, issues) {
-        var list = selection.selectAll('.issues-list')
-            .data([0]);
-
-        list = list.enter()
-            .append('ul')
-            .attr('class', 'layer-list issues-list ' + which + '-list')
-            .merge(list);
-
-
-        var items = list.selectAll('li')
-            .data(issues, function(d) { return d.id; });
-
-        // Exit
-        items.exit()
-            .remove();
-
-        // Enter
-        var itemsEnter = items.enter()
-            .append('li')
-            .attr('class', function (d) { return 'issue severity-' + d.severity; })
-            .on('click', function(d) {
-                context.validator().focusIssue(d);
-            })
-            .on('mouseover', function(d) {
-                utilHighlightEntities(d.entityIds, true, context);
-            })
-            .on('mouseout', function(d) {
-                utilHighlightEntities(d.entityIds, false, context);
-            });
-
-
-        var labelsEnter = itemsEnter
-            .append('div')
-            .attr('class', 'issue-label');
-
-        var textEnter = labelsEnter
-            .append('span')
-            .attr('class', 'issue-text');
-
-        textEnter
-            .append('span')
-            .attr('class', 'issue-icon')
-            .each(function(d) {
-                var iconName = '#iD-icon-' + (d.severity === 'warning' ? 'alert' : 'error');
-                d3_select(this)
-                    .call(svgIcon(iconName));
-            });
-
-        textEnter
-            .append('span')
-            .attr('class', 'issue-message');
-
-        /*
-        labelsEnter
-            .append('span')
-            .attr('class', 'issue-autofix')
-            .each(function(d) {
-                if (!d.autoFix) return;
-
-                d3_select(this)
-                    .append('button')
-                    .attr('title', t('issues.fix_one.title'))
-                    .datum(d.autoFix)  // set button datum to the autofix
-                    .attr('class', 'autofix action')
-                    .on('click', function(d) {
-                        d3_event.preventDefault();
-                        d3_event.stopPropagation();
-
-                        var issuesEntityIDs = d.issue.entityIds;
-                        utilHighlightEntities(issuesEntityIDs.concat(d.entityIds), false, context);
-
-                        context.perform.apply(context, d.autoArgs);
-                        context.validator().validate();
-                    })
-                    .call(svgIcon('#iD-icon-wrench'));
-            });
-        */
-
-        // Update
-        items = items
-            .merge(itemsEnter)
-            .order();
-
-        items.selectAll('.issue-message')
-            .text(function(d) {
-                return d.message(context);
-            });
-
-        /*
-        // autofix
-        var canAutoFix = issues.filter(function(issue) { return issue.autoFix; });
-
-        var autoFixAll = selection.selectAll('.autofix-all')
-            .data(canAutoFix.length ? [0] : []);
-
-        // exit
-        autoFixAll.exit()
-            .remove();
-
-        // enter
-        var autoFixAllEnter = autoFixAll.enter()
-            .insert('div', '.issues-list')
-            .attr('class', 'autofix-all');
-
-        var linkEnter = autoFixAllEnter
-            .append('a')
-            .attr('class', 'autofix-all-link')
-            .attr('href', '#');
-
-        linkEnter
-            .append('span')
-            .attr('class', 'autofix-all-link-text')
-            .text(t('issues.fix_all.title'));
-
-        linkEnter
-            .append('span')
-            .attr('class', 'autofix-all-link-icon')
-            .call(svgIcon('#iD-icon-wrench'));
-
-        if (which === 'warnings') {
-            renderIgnoredIssuesReset(selection);
-        }
-
-        // update
-        autoFixAll = autoFixAll
-            .merge(autoFixAllEnter);
-
-        autoFixAll.selectAll('.autofix-all-link')
-            .on('click', function() {
-                context.pauseChangeDispatch();
-                context.perform(actionNoop());
-                canAutoFix.forEach(function(issue) {
-                    var args = issue.autoFix.autoArgs.slice();  // copy
-                    if (typeof args[args.length - 1] !== 'function') {
-                        args.pop();
-                    }
-                    args.push(t('issues.fix_all.annotation'));
-                    context.replace.apply(context, args);
-                });
-                context.resumeChangeDispatch();
-                context.validator().validate();
-            });
-        */
-    }
 
 
     function updateOptionValue(d, val) {
@@ -202,7 +35,6 @@ export function uiPaneIssues(context) {
             val = d3_event.target.value;
         }
 
-        _options[d] = val;
         context.storage('validate-' + d, val);
         context.validator().validate();
     }
@@ -246,7 +78,7 @@ export function uiPaneIssues(context) {
             .attr('type', 'radio')
             .attr('name', function(d) { return 'issues-option-' + d.key; })
             .attr('value', function(d) { return d.value; })
-            .property('checked', function(d) { return _options[d.key] === d.value; })
+            .property('checked', function(d) { return getOptions()[d.key] === d.value; })
             .on('change', function(d) { updateOptionValue(d.key, d.value); });
 
         valuesEnter
@@ -314,10 +146,12 @@ export function uiPaneIssues(context) {
 
     function setNoIssuesText() {
 
+        var opts = getOptions();
+
         function checkForHiddenIssues(cases) {
             for (var type in cases) {
-                var opts = cases[type];
-                var hiddenIssues = context.validator().getIssues(opts);
+                var hiddenOpts = cases[type];
+                var hiddenIssues = context.validator().getIssues(hiddenOpts);
                 if (hiddenIssues.length) {
                     issuesPane.selection().select('.issues-none .details')
                         .text(t(
@@ -333,7 +167,7 @@ export function uiPaneIssues(context) {
 
         var messageType;
 
-        if (_options.what === 'edited' && _options.where === 'visible') {
+        if (opts.what === 'edited' && opts.where === 'visible') {
 
             messageType = 'edits_in_view';
 
@@ -347,7 +181,7 @@ export function uiPaneIssues(context) {
                 ignored_issues_elsewhere: { what: 'edited', where: 'all', includeIgnored: 'only' }
             });
 
-        } else if (_options.what === 'edited' && _options.where === 'all') {
+        } else if (opts.what === 'edited' && opts.where === 'all') {
 
             messageType = 'edits';
 
@@ -357,7 +191,7 @@ export function uiPaneIssues(context) {
                 ignored_issues: { what: 'edited', where: 'all', includeIgnored: 'only' }
             });
 
-        } else if (_options.what === 'all' && _options.where === 'visible') {
+        } else if (opts.what === 'all' && opts.where === 'visible') {
 
             messageType = 'everything_in_view';
 
@@ -368,7 +202,7 @@ export function uiPaneIssues(context) {
                 ignored_issues: { what: 'all', where: 'visible', includeIgnored: 'only' },
                 ignored_issues_elsewhere: { what: 'all', where: 'all', includeIgnored: 'only' }
             });
-        } else if (_options.what === 'all' && _options.where === 'all') {
+        } else if (opts.what === 'all' && opts.where === 'all') {
 
             messageType = 'everything';
 
@@ -378,7 +212,7 @@ export function uiPaneIssues(context) {
             });
         }
 
-        if (_options.what === 'edited' && context.history().difference().summary().length === 0) {
+        if (opts.what === 'edited' && context.history().difference().summary().length === 0) {
             messageType = 'no_edits';
         }
 
@@ -389,47 +223,9 @@ export function uiPaneIssues(context) {
 
 
     function update() {
-        var issuesBySeverity = context.validator().getIssuesBySeverity(_options);
+        var issues = context.validator().getIssues(getOptions());
 
-        // sort issues by distance away from the center of the map
-        var center = context.map().center();
-        var graph = context.graph();
-        _errors = issuesBySeverity.error.map(withDistance).sort(byDistance);
-        _warnings = issuesBySeverity.warning.map(withDistance).sort(byDistance);
-
-        // cut off at 1000
-        var errorCount = _errors.length > 1000 ? '1000+' : String(_errors.length);
-        var warningCount = _warnings.length > 1000 ? '1000+' : String(_warnings.length);
-        _errors = _errors.slice(0, 1000);
-        _warnings = _warnings.slice(0, 1000);
-
-
-        issuesPane.selection().selectAll('.issues-errors')
-            .classed('hide', _errors.length === 0);
-
-        if (_errors.length > 0) {
-            issuesPane.selection().selectAll('.hide-toggle-issues_errors .hide-toggle-text')
-                .text(t('issues.errors.list_title', { count: errorCount }));
-            if (!issuesPane.selection().select('.disclosure-wrap-issues_errors').classed('hide')) {
-                _errorsSelection
-                    .call(drawIssuesList, 'errors', _errors);
-            }
-        }
-
-        issuesPane.selection().selectAll('.issues-warnings')
-            .classed('hide', _warnings.length === 0);
-
-        if (_warnings.length > 0) {
-            issuesPane.selection().selectAll('.hide-toggle-issues_warnings .hide-toggle-text')
-                .text(t('issues.warnings.list_title', { count: warningCount }));
-            if (!issuesPane.selection().select('.disclosure-wrap-issues_warnings').classed('hide')) {
-                _warningsSelection
-                    .call(drawIssuesList, 'warnings', _warnings);
-                renderIgnoredIssuesReset(_warningsSelection);
-            }
-        }
-
-        var hasIssues = _warnings.length > 0 || _errors.length > 0;
+        var hasIssues = issues.length > 0;
 
         var issuesNone = issuesPane.selection().select('.issues-none');
         issuesNone.classed('hide', hasIssues);
@@ -438,18 +234,14 @@ export function uiPaneIssues(context) {
             setNoIssuesText();
         }
 
-        _rulesListContainer
+        issuesPane.selection().select('.issues-errors')
+            .call(_validationErrors.render);
+
+        issuesPane.selection().select('.issues-warnings')
+            .call(_validationWarnings.render);
+
+        issuesPane.selection().select('.issues-rules')
             .call(_validationRules.render);
-
-        function byDistance(a, b) {
-            return a.dist - b.dist;
-        }
-
-        function withDistance(issue) {
-            var extent = issue.extent(graph);
-            var dist = extent ? geoSphericalDistance(center, extent.center()) : 0;
-            return Object.assign(issue, { dist: dist });
-        }
     }
 
 
@@ -475,21 +267,15 @@ export function uiPaneIssues(context) {
         // errors
         content
             .append('div')
-            .attr('class', 'issues-errors')
-            .call(uiDisclosure(context, 'issues_errors', true)
-                .content(renderErrorsList)
-            );
+            .attr('class', 'issues-errors');
 
         // warnings
         content
             .append('div')
-            .attr('class', 'issues-warnings')
-            .call(uiDisclosure(context, 'issues_warnings', true)
-                .content(renderWarningsList)
-            );
+            .attr('class', 'issues-warnings');
 
         // rules list
-        _rulesListContainer = content
+        content
             .append('div')
             .attr('class', 'issues-rules');
 
