@@ -3,6 +3,7 @@ import {
 } from 'd3-selection';
 
 import { uiDisclosure } from './disclosure';
+import { utilFunctor } from '../util';
 
 // A unit of controls or info to be used in a layout, such as within a pane.
 // Can be labeled and collapsible.
@@ -10,7 +11,8 @@ export function uiSection(id, context) {
 
     var _disclosure;
     var _title;
-    var _expandedByDefault = true;
+    var _expandedByDefault = utilFunctor(true);
+    var _shouldDisplay;
 
     var _containerSelection = d3_select(null);
 
@@ -20,13 +22,19 @@ export function uiSection(id, context) {
 
     section.title = function(val) {
         if (!arguments.length) return _title;
-        _title = val;
+        _title = utilFunctor(val);
         return section;
     };
 
     section.expandedByDefault = function(val) {
         if (!arguments.length) return _expandedByDefault;
-        _expandedByDefault = val;
+        _expandedByDefault = utilFunctor(val);
+        return section;
+    };
+
+    section.shouldDisplay = function(val) {
+        if (!arguments.length) return _shouldDisplay;
+        _shouldDisplay = utilFunctor(val);
         return section;
     };
 
@@ -46,19 +54,31 @@ export function uiSection(id, context) {
             .merge(_containerSelection);
 
         _containerSelection
-            .call(section.renderContent);
+            .call(renderContent);
     };
 
     section.containerSelection = function() {
         return _containerSelection;
     };
 
+    function renderContent(selection) {
+        if (_shouldDisplay) {
+            var shouldDisplay = _shouldDisplay();
+            selection.classed('hide', !shouldDisplay);
+            if (!shouldDisplay) {
+                selection.html('');
+                return;
+            }
+        }
+        section.renderContent(selection);
+    }
+
     // may be called multiple times
     section.renderContent = function(containerSelection) {
 
         if (section.renderDisclosureContent) {
             if (!_disclosure) {
-                _disclosure = uiDisclosure(context, id.replace(/-/g, '_'), _expandedByDefault)
+                _disclosure = uiDisclosure(context, id.replace(/-/g, '_'), _expandedByDefault())
                     .title(_title || '')
                     .content(section.renderDisclosureContent);
             }
@@ -67,13 +87,13 @@ export function uiSection(id, context) {
         }
     };
 
-    // override to enable disclosure
-    section.renderDisclosureContent = undefined;
-
     section.rerenderContent = function() {
         _containerSelection
-            .call(section.renderContent);
+            .call(renderContent);
     };
+
+    // override to enable disclosure
+    section.renderDisclosureContent = undefined;
 
     return section;
 }

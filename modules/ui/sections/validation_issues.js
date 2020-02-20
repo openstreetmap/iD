@@ -19,6 +19,9 @@ export function uiSectionValidationIssues(id, severity, context) {
             if (!_issues) return '';
             var issueCountText = _issues.length > 1000 ? '1000+' : String(_issues.length);
             return t('issues.' + severity + 's.list_title', { count: issueCountText });
+        })
+        .shouldDisplay(function() {
+            return _issues && _issues.length;
         });
 
     function getOptions() {
@@ -32,19 +35,6 @@ export function uiSectionValidationIssues(id, severity, context) {
     function reloadIssues() {
         _issues = context.validator().getIssuesBySeverity(getOptions())[severity];
     }
-
-    var _parentRenderContent = section.renderContent;
-
-    section.renderContent = function(selection) {
-
-        var isHidden = !_issues || !_issues.length;
-
-        selection.classed('hide', isHidden);
-
-        if (!isHidden) {
-            selection.call(_parentRenderContent);
-        }
-    };
 
     section.renderDisclosureContent = function(selection) {
 
@@ -225,12 +215,14 @@ export function uiSectionValidationIssues(id, severity, context) {
 
     context.map().on('move.uiSectionValidationIssues' + id,
         _debounce(function() {
-            if (getOptions().where === 'visible') {
-                // must refetch issues if they are viewport-dependent
-                reloadIssues();
-            }
-            // always reload list to re-sort-by-distance
-            window.requestIdleCallback(section.rerenderContent);
+            window.requestIdleCallback(function() {
+                if (getOptions().where === 'visible') {
+                    // must refetch issues if they are viewport-dependent
+                    reloadIssues();
+                }
+                // always reload list to re-sort-by-distance
+                section.rerenderContent();
+            });
         }, 1000)
     );
 

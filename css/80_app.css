@@ -3258,14 +3258,14 @@ button.autofix.action.active {
     padding: 5px;
 }
 
-.issues-none .box {
+.section-issues-status .box {
     border-radius: 4px;
     border: 1px solid #72d979;
     background: #c6ffca;
     padding: 5px !important;
     display: flex;
 }
-.issues-none .icon {
+.section-issues-status .icon {
     color: #05ac10;
 }
 
