@@ -318,6 +318,10 @@ export function utilCombinedTags(entityIDs, graph) {
 
 
 export function utilStringQs(str) {
+    var i = 0;  // advance past any leading '?' or '#' characters
+    while (i < str.length && (str[i] === '?' || str[i] === '#')) i++;
+    str = str.slice(i);
+
     return str.split('&').reduce(function(obj, pair){
         var parts = pair.split('=');
         if (parts.length === 2) {

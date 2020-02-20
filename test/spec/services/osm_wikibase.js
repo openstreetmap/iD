@@ -21,7 +21,7 @@ describe('iD.serviceOsmWikibase', function () {
 
 
   function query(url) {
-    return iD.utilStringQs(url.substring(url.indexOf('?') + 1));
+    return iD.utilStringQs(url.substring(url.indexOf('?')));
   }
 
   function adjust(params, data) {

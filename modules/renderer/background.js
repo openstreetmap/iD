@@ -203,7 +203,7 @@ export function rendererBackground(context) {
     const EPSILON = 0.01;
     const x = +meters[0].toFixed(2);
     const y = +meters[1].toFixed(2);
-    let q = utilStringQs(window.location.hash.substring(1));
+    let hash = utilStringQs(window.location.hash);
 
     let id = currSource.id;
     if (id === 'custom') {
@@ -211,25 +211,25 @@ export function rendererBackground(context) {
     }
 
     if (id) {
-      q.background = id;
+      hash.background = id;
     } else {
-      delete q.background;
+      delete hash.background;
     }
 
     if (o) {
-      q.overlays = o;
+      hash.overlays = o;
     } else {
-      delete q.overlays;
+      delete hash.overlays;
     }
 
     if (Math.abs(x) > EPSILON || Math.abs(y) > EPSILON) {
-      q.offset = `${x},${y}`;
+      hash.offset = `${x},${y}`;
     } else {
-      delete q.offset;
+      delete hash.offset;
     }
 
     if (!window.mocha) {
-      window.location.replace('#' + utilQsString(q, true));
+      window.location.replace('#' + utilQsString(hash, true));
     }
 
     let imageryUsed = [];
@@ -444,9 +444,9 @@ export function rendererBackground(context) {
       return geoExtent([params[2], params[1]]);  // lon,lat
     }
 
-    const q = utilStringQs(window.location.hash.substring(1));
-    const requested = q.background || q.layer;
-    let extent = parseMapParams(q.map);
+    const hash = utilStringQs(window.location.hash);
+    const requested = hash.background || hash.layer;
+    let extent = parseMapParams(hash.map);
 
     ensureImageryIndex()
       .then(imageryIndex => {
@@ -479,7 +479,7 @@ export function rendererBackground(context) {
           background.toggleOverlayLayer(locator);
         }
 
-        const overlays = (q.overlays || '').split(',');
+        const overlays = (hash.overlays || '').split(',');
         overlays.forEach(overlay => {
           overlay = background.findSource(overlay);
           if (overlay) {
@@ -487,15 +487,15 @@ export function rendererBackground(context) {
           }
         });
 
-        if (q.gpx) {   // todo: move elsewhere - this doesn't belong in background
+        if (hash.gpx) {   // todo: move elsewhere - this doesn't belong in background
           const gpx = context.layers().layer('data');
           if (gpx) {
-            gpx.url(q.gpx, '.gpx');
+            gpx.url(hash.gpx, '.gpx');
           }
         }
 
-        if (q.offset) {
-          const offset = q.offset
+        if (hash.offset) {
+          const offset = hash.offset
             .replace(/;/g, ',')
             .split(',')
             .map(n => !isNaN(n) && n);
