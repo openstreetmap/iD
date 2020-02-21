@@ -29,27 +29,6 @@ export function coreContext() {
   context.version = '2.17.2';
   context.privacyVersion = '20191217';
 
-  // // create a special translation that contains the keys in place of the strings
-  // let tkeys = JSON.parse(JSON.stringify(dataEn));  // clone deep
-  // let parents = [];
-
-  // function traverser(v, k, obj) {
-  //   parents.push(k);
-  //   if (typeof v === 'object') {
-  //     forOwn(v, traverser);
-  //   } else if (typeof v === 'string') {
-  //     obj[k] = parents.join('.');
-  //   }
-  //   parents.pop();
-  // }
-
-  // function forOwn(obj, fn) {
-  //   Object.keys(obj).forEach(k => fn(obj[k], k, obj));
-  // }
-
-  // forOwn(tkeys, traverser);
-  // addLocale('_tkeys_', tkeys);
-
 
   // https://github.com/openstreetmap/iD/issues/772
   // http://mathiasbynens.be/notes/localstorage-pattern#comment-9
@@ -206,17 +185,11 @@ export function coreContext() {
   };
 
 
-  context.maxCharsForTagKey = function() {
-    return 255;
-  };
+  context.maxCharsForTagKey = () => 255;
 
-  context.maxCharsForTagValue = function() {
-    return 255;
-  };
+  context.maxCharsForTagValue = () => 255;
 
-  context.maxCharsForRelationRole = function() {
-    return 255;
-  };
+  context.maxCharsForRelationRole = () => 255;
 
 
   /* History */
