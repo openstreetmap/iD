@@ -1,9 +1,9 @@
-import * as d3 from 'd3';  // TODO: remove (needed for tests?)
+import * as d3 from 'd3';  // remove someday, see #4379
+export { d3 };
 
 export * from './actions/index';
 export * from './behavior/index';
 export * from './core/index';
-export * from '../data/index';
 export * from './geo/index';
 export * from './modes/index';
 export * from './operations/index';
@@ -48,4 +48,3 @@ export { uiPresetEditor as uiPreset } from './ui/preset_editor';
 
 export var debug = false;
 
-export { d3 };

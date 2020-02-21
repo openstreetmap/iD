@@ -4,13 +4,12 @@ import { dispatch as d3_dispatch } from 'd3-dispatch';
 import { json as d3_json } from 'd3-fetch';
 import { select as d3_select } from 'd3-selection';
 
-import { t, localeStrings, setLocale } from '../util/locale';
+import { t, setLocale, localeStrings, localeData } from '../util/locale';
 
 import { coreData } from './data';
 import { coreHistory } from './history';
 import { coreValidator } from './validator';
 import { coreUploader } from './uploader';
-import { dataLocales } from '../../data';
 import { geoRawMercator } from '../geo/raw_mercator';
 import { modeSelect } from '../modes/select';
 import { osmSetAreaKeys, osmSetPointTags, osmSetVertexTags } from '../osm/tags';
@@ -50,9 +49,6 @@ export function coreContext() {
 
   // forOwn(tkeys, traverser);
   // addLocale('_tkeys_', tkeys);
-
-  // addLocale('en', dataEn);
-  // setLocale('en');
 
 
   // https://github.com/openstreetmap/iD/issues/772
@@ -432,17 +428,17 @@ export function coreContext() {
 
 
   /* Locales */
-  // Returns a Promise to load the strings for the given locale
+  // Returns a Promise to load the strings for the requested locale
   context.loadLocale = (requested) => {
     let locale = requested;
 
     if (!_data) {
       return Promise.reject('loadLocale called before init');
     }
-    if (!dataLocales.hasOwnProperty(locale)) {  // Not supported, e.g. 'es-FAKE'
-      locale = locale.split('-')[0];            // Fallback to the first part 'es'
+    if (!localeData[locale]) {        // Locale not supported, e.g. 'es-FAKE'
+      locale = locale.split('-')[0];  // Fallback to the first part 'es'
     }
-    if (!dataLocales.hasOwnProperty(locale)) {
+    if (!localeData[locale]) {
       return Promise.reject(`Unsupported locale: ${requested}`);
     }
 
@@ -452,7 +448,7 @@ export function coreContext() {
 
     let fileMap = _data.fileMap();
     const key = `locale_${locale}`;
-    fileMap[key] = `locales/${locale}.json`;  // .min.json?
+    fileMap[key] = `locales/${locale}.json`;
 
     return _data.get(key)
       .then(d => {
@@ -500,9 +496,14 @@ export function coreContext() {
 
     _data = coreData(context);
 
-    // always load the English locale, then load preferred locale.
+    // Start loading data:
+    // 1. the list of supported locales
+    // 2. the English locale strings (used as fallbacks)
+    // 3. the preferred locale strings (detected by utilDetect)
     const requested = utilDetect().locale;
-    context.loadLocale('en')
+    _data.get('locales')
+      .then(d => Object.assign(localeData, d))
+      .then(() => context.loadLocale('en'))
       .then(() => context.loadLocale(requested))
       .then(received => {      // `received` may not match `requested`.
         setLocale(received);   // (e.g. 'es-FAKE' will return 'es')

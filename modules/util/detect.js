@@ -1,5 +1,4 @@
-import { currentLocale, setTextDirection, setLanguageNames, setScriptNames } from './locale';
-import { dataLocales } from '../../data/index';
+import { currentLocale, localeData, setTextDirection, setLanguageNames, setScriptNames } from './locale';
 import { utilStringQs } from './util';
 
 let _detected;
@@ -126,7 +125,7 @@ export function utilDetect(force) {
   }
 
   // detect text direction
-  const lang = dataLocales[_detected.locale] || dataLocales[_detected.language];
+  const lang = localeData[_detected.locale] || localeData[_detected.language];
   if ((lang && lang.rtl) || (hash.rtl === 'true')) {
     _detected.textDirection = 'rtl';
   } else {

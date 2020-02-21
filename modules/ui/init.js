@@ -340,8 +340,8 @@ export function uiInit(context) {
 
 
     // `ui()` renders the iD interface into the given node, assigning
-    // that node as the `container`.  We need to delay rendering until
-    // the locale has been loaded (i.e. promise settled), because the
+    // that node as the `container`.  We need to delay rendering until the
+    // locale data has been loaded (i.e. promises all settled), because the
     // UI code expects localized strings to be available.
     function ui(node, callback) {
         _initCallback = callback;
@@ -349,7 +349,11 @@ export function uiInit(context) {
         context.container(container);
 
         const current = utilDetect().locale;
-        context.loadLocale(current)
+
+        context.data().get('locales')
+            .then(function () {
+                return context.loadLocale(current);
+            })
             .then(function() {
                 render(container);
                 if (callback) callback();

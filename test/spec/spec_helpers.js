@@ -7,7 +7,8 @@ for (var k in iD.services) { delete iD.services[k]; }
 
 // Run without data for speed (tests which need data can set it up themselves)
 
-// Initializing `coreContext` will try loading the English locale strings:
+// Initializing `coreContext` will try loading the locale data and English locale strings:
+iD.data.locales = { en: { rtl: false, languageNames: {}, scriptNames: {} }};
 iD.data.locale_en = { en: {} };
 // Initializing `coreContext` initializes `_background`, which tries loading:
 iD.data.imagery = [];

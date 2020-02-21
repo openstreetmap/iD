@@ -1,27 +1,42 @@
 let _dataLanguages = {};
 
 
-// `localeStrings` is an object containing all loaded locale codes -> string data
+// `localeData` is an object containing all _supported_ locale codes -> language info
+// `context.init()` will load this before anything else.
 // {
-// en: {icons: {…}, toolbar: {…}, modes: {…}, operations: {…}, …},
-// de: {icons: {…}, toolbar: {…}, modes: {…}, operations: {…}, …},
+// en: { rtl: false, languageNames: {…}, scriptNames: {…} },
+// de: { rtl: false, languageNames: {…}, scriptNames: {…} },
 // …
 // }
-export let localeStrings = Object.create(null);
+export let localeData = {};
+
+// `localeStrings` is an object containing all _loaded_ locale codes -> string data
+// `context.init()` will load the 'en' strings.
+// {
+// en: { icons: {…}, toolbar: {…}, modes: {…}, operations: {…}, … },
+// de: { icons: {…}, toolbar: {…}, modes: {…}, operations: {…}, … },
+// …
+// }
+export let localeStrings = {};
 
 export let currentLocale;
 export let textDirection = 'ltr';
 export let languageNames = {};
 export let scriptNames = {};
 
-export function setLocale(locale) {
-  currentLocale = locale;
-  // if (localeStrings[locale] !== undefined) {
-  //   currentLocale = locale;
-  // } else if (localeStrings[locale.split('-')[0]]) {
-  //   currentLocale = locale.split('-')[0];
-  // }
+export function setLocale(val) {
+  currentLocale = val;
 }
+export function setTextDirection(val) {
+  textDirection = val;
+}
+export function setLanguageNames(val) {
+  languageNames = val;
+}
+export function setScriptNames(val) {
+  scriptNames = val;
+}
+
 
 /**
  * Given a string identifier, try to find that string in the current
@@ -72,22 +87,6 @@ export function t(s, replacements, locale) {
   return missing;
 }
 
-/**
- * Given string 'ltr' or 'rtl', save that setting
- *
- * @param {string} dir ltr or rtl
- */
-export function setTextDirection(dir) {
-  textDirection = dir;
-}
-
-export function setLanguageNames(obj) {
-  languageNames = obj;
-}
-
-export function setScriptNames(obj) {
-  scriptNames = obj;
-}
 
 export function languageName(context, code, options) {
   // Data access is async now, which makes this complicated.
