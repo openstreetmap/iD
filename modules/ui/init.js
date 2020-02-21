@@ -4,13 +4,15 @@ import {
     selectAll as d3_selectAll
 } from 'd3-selection';
 
-import { t, textDirection } from '../util/locale';
+import { t, textDirection, setLocale } from '../util/locale';
+
 import { tooltip } from '../util/tooltip';
 
 import { behaviorHash } from '../behavior';
 import { modeBrowse } from '../modes/browse';
 import { svgDefs, svgIcon } from '../svg';
 import { utilGetDimensions } from '../util/dimensions';
+import { utilDetect } from '../util/detect';
 
 import { uiAccount } from './account';
 import { uiAttribution } from './attribution';
@@ -337,31 +339,48 @@ export function uiInit(context) {
     }
 
 
+    // `ui()` renders the iD interface into the given node, assigning
+    // that node as the `container`.  We need to delay rendering until
+    // the locale has been loaded (i.e. promise settled), because the
+    // UI code expects localized strings to be available.
     function ui(node, callback) {
         _initCallback = callback;
         var container = d3_select(node);
         context.container(container);
-        context.loadLocale(function(err) {
-            if (!err) {
+
+        const current = utilDetect().locale;
+        context.loadLocale(current)
+            .then(function() {
                 render(container);
-            }
-            if (callback) {
-                callback(err);
-            }
-        });
+                if (callback) callback();
+            })
+            .catch(function(err) {
+                console.error(err);  // eslint-disable-line
+                if (callback) callback(err);
+            });
     }
 
 
-    ui.restart = function(arg) {
+    // `ui.restart()` will destroy and rebuild the entire iD interface,
+    // for example to switch the locale while iD is running.
+    ui.restart = function(locale) {
         context.keybinding().clear();
-        context.locale(arg);
-        context.loadLocale(function(err) {
-            if (!err) {
+
+        var requested = locale || utilDetect().locale;
+        context.loadLocale(requested)
+            .then(function(received) {   // `received` may not match `requested`.
+                setLocale(received);     // (e.g. 'es-FAKE' will return 'es')
+                utilDetect(true);        // Then force redetection
+
                 context.container().selectAll('*').remove();
                 render(context.container());
+
                 if (_initCallback) _initCallback();
-            }
-        });
+            })
+            .catch(function(err) {
+                console.error(err);  // eslint-disable-line
+                if (_initCallback) _initCallback(err);
+            });
     };
 
     ui.sidebar = uiSidebar(context);

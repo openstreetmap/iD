@@ -1,21 +1,26 @@
-let _translations = Object.create(null);
 let _dataLanguages = {};
 
-export let currentLocale = 'en';
+
+// `localeStrings` is an object containing all loaded locale codes -> string data
+// {
+// en: {icons: {…}, toolbar: {…}, modes: {…}, operations: {…}, …},
+// de: {icons: {…}, toolbar: {…}, modes: {…}, operations: {…}, …},
+// …
+// }
+export let localeStrings = Object.create(null);
+
+export let currentLocale;
 export let textDirection = 'ltr';
 export let languageNames = {};
 export let scriptNames = {};
 
-export function setLocale(val) {
-  if (_translations[val] !== undefined) {
-    currentLocale = val;
-  } else if (_translations[val.split('-')[0]]) {
-    currentLocale = val.split('-')[0];
-  }
-}
-
-export function addTranslation(id, value) {
-  _translations[id] = value;
+export function setLocale(locale) {
+  currentLocale = locale;
+  // if (localeStrings[locale] !== undefined) {
+  //   currentLocale = locale;
+  // } else if (localeStrings[locale.split('-')[0]]) {
+  //   currentLocale = locale.split('-')[0];
+  // }
 }
 
 /**
@@ -23,10 +28,10 @@ export function addTranslation(id, value) {
  * language, and return it.  This function will be called recursively
  * with locale `en` if a string can not be found in the requested language.
  *
- * @param {string}    s             string identifier
- * @param {object?}   replacements  token replacements and default string
- * @param {string?}   locale        locale to use (defaults to currentLocale)
- * @returns {string?} localized string
+ * @param  {string}   s             string identifier
+ * @param  {object?}  replacements  token replacements and default string
+ * @param  {string?}  locale        locale to use (defaults to currentLocale)
+ * @return {string?}  localized string
  */
 export function t(s, replacements, locale) {
   locale = locale || currentLocale;
@@ -36,7 +41,7 @@ export function t(s, replacements, locale) {
     .map(s => s.replace(/<TX_DOT>/g, '.'))
     .reverse();
 
-  let result = _translations[locale];
+  let result = localeStrings[locale];
 
   while (result !== undefined && path.length) {
     result = result[path.pop()];

@@ -4,13 +4,13 @@ import { dispatch as d3_dispatch } from 'd3-dispatch';
 import { json as d3_json } from 'd3-fetch';
 import { select as d3_select } from 'd3-selection';
 
-import { t, currentLocale, addTranslation, setLocale } from '../util/locale';
+import { t, localeStrings, setLocale } from '../util/locale';
 
 import { coreData } from './data';
 import { coreHistory } from './history';
 import { coreValidator } from './validator';
 import { coreUploader } from './uploader';
-import { dataLocales, dataEn } from '../../data';
+import { dataLocales } from '../../data';
 import { geoRawMercator } from '../geo/raw_mercator';
 import { modeSelect } from '../modes/select';
 import { osmSetAreaKeys, osmSetPointTags, osmSetVertexTags } from '../osm/tags';
@@ -30,29 +30,29 @@ export function coreContext() {
   context.version = '2.17.2';
   context.privacyVersion = '20191217';
 
-  // create a special translation that contains the keys in place of the strings
-  let tkeys = JSON.parse(JSON.stringify(dataEn));  // clone deep
-  let parents = [];
+  // // create a special translation that contains the keys in place of the strings
+  // let tkeys = JSON.parse(JSON.stringify(dataEn));  // clone deep
+  // let parents = [];
 
-  function traverser(v, k, obj) {
-    parents.push(k);
-    if (typeof v === 'object') {
-      forOwn(v, traverser);
-    } else if (typeof v === 'string') {
-      obj[k] = parents.join('.');
-    }
-    parents.pop();
-  }
+  // function traverser(v, k, obj) {
+  //   parents.push(k);
+  //   if (typeof v === 'object') {
+  //     forOwn(v, traverser);
+  //   } else if (typeof v === 'string') {
+  //     obj[k] = parents.join('.');
+  //   }
+  //   parents.pop();
+  // }
 
-  function forOwn(obj, fn) {
-    Object.keys(obj).forEach(k => fn(obj[k], k, obj));
-  }
+  // function forOwn(obj, fn) {
+  //   Object.keys(obj).forEach(k => fn(obj[k], k, obj));
+  // }
 
-  forOwn(tkeys, traverser);
-  addTranslation('_tkeys_', tkeys);
+  // forOwn(tkeys, traverser);
+  // addLocale('_tkeys_', tkeys);
 
-  addTranslation('en', dataEn);
-  setLocale('en');
+  // addLocale('en', dataEn);
+  // setLocale('en');
 
 
   // https://github.com/openstreetmap/iD/issues/772
@@ -231,6 +231,8 @@ export function coreContext() {
     return context;
   };
 
+  // Immediately save the user's history to localstorage, if possible
+  // This is called someteimes, but also on the `window.onbeforeunload` handler
   context.save = () => {
     // no history save, no message onbeforeunload
     if (_inIntro || d3_select('.modal').size()) return;
@@ -259,6 +261,18 @@ export function coreContext() {
       return t('save.unsaved_changes');
     }
   };
+
+  // Debounce save, since it's a synchronous localStorage write,
+  // and history changes can happen frequently (e.g. when dragging).
+  context.debouncedSave = _debounce(context.save, 350);
+
+  function withDebouncedSave(fn) {
+    return function() {
+      const result = fn.apply(_history, arguments);
+      context.debouncedSave();
+      return result;
+    };
+  }
 
 
   /* Graph */
@@ -417,38 +431,34 @@ export function coreContext() {
   context.imagePath = (val) => context.asset(`img/${val}`);
 
 
-  /* locales */
-  // `locale` letiable contains a "requested locale".
-  // It won't become the `currentLocale` until after loadLocale() is called.
-  let _locale, _localePath;
+  /* Locales */
+  // Returns a Promise to load the strings for the given locale
+  context.loadLocale = (requested) => {
+    let locale = requested;
 
-  context.locale = function(loc, path) {
-    if (!arguments.length) return currentLocale;
-    _locale = loc;
-    _localePath = path;
-    return context;
-  };
-
-  context.loadLocale = (callback) => {
-    if (_locale && _locale !== 'en' && dataLocales.hasOwnProperty(_locale)) {
-      _localePath = _localePath || context.asset(`locales/${_locale}.json`);
-      d3_json(_localePath)
-        .then(result => {
-          addTranslation(_locale, result[_locale]);
-          setLocale(_locale);
-          utilDetect(true);
-          if (callback) callback();
-        })
-        .catch(err => {
-          if (callback) callback(err.message);
-        });
-    } else {
-      if (_locale) {
-        setLocale(_locale);
-        utilDetect(true);
-      }
-      if (callback) callback();
+    if (!_data) {
+      return Promise.reject('loadLocale called before init');
     }
+    if (!dataLocales.hasOwnProperty(locale)) {  // Not supported, e.g. 'es-FAKE'
+      locale = locale.split('-')[0];            // Fallback to the first part 'es'
+    }
+    if (!dataLocales.hasOwnProperty(locale)) {
+      return Promise.reject(`Unsupported locale: ${requested}`);
+    }
+
+    if (localeStrings[locale]) {    // already loaded
+      return Promise.resolve(locale);
+    }
+
+    let fileMap = _data.fileMap();
+    const key = `locale_${locale}`;
+    fileMap[key] = `locales/${locale}.json`;  // .min.json?
+
+    return _data.get(key)
+      .then(d => {
+        localeStrings[locale] = d[locale];
+        return locale;
+      });
   };
 
 
@@ -488,12 +498,18 @@ export function coreContext() {
   context.init = () => {
     const hash = utilStringQs(window.location.hash);
 
-    _locale = utilDetect().locale;
-    if (_locale && !dataLocales.hasOwnProperty(_locale)) {
-      _locale = _locale.split('-')[0];
-    }
-
     _data = coreData(context);
+
+    // always load the English locale, then load preferred locale.
+    const requested = utilDetect().locale;
+    context.loadLocale('en')
+      .then(() => context.loadLocale(requested))
+      .then(received => {      // `received` may not match `requested`.
+        setLocale(received);   // (e.g. 'es-FAKE' will return 'es')
+        utilDetect(true);      // Then force redetection
+      })
+      .catch(err => console.error(err));  // eslint-disable-line
+
     _history = coreHistory(context);
     _validator = coreValidator(context);
     _uploader = coreUploader(context);
@@ -503,17 +519,6 @@ export function coreContext() {
     context.intersects = _history.intersects;
     context.pauseChangeDispatch = _history.pauseChangeDispatch;
     context.resumeChangeDispatch = _history.resumeChangeDispatch;
-
-    // Debounce save, since it's a synchronous localStorage write,
-    // and history changes can happen frequently (e.g. when dragging).
-    context.debouncedSave = _debounce(context.save, 350);
-    function withDebouncedSave(fn) {
-      return function() {
-        const result = fn.apply(_history, arguments);
-        context.debouncedSave();
-        return result;
-      };
-    }
 
     context.perform = withDebouncedSave(_history.perform);
     context.replace = withDebouncedSave(_history.replace);
