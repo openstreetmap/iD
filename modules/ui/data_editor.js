@@ -4,14 +4,14 @@ import { svgIcon } from '../svg/icon';
 
 import { uiDataHeader } from './data_header';
 import { uiQuickLinks } from './quick_links';
-import { uiRawTagEditor } from './raw_tag_editor';
+import { uiSectionRawTagEditor } from './sections/raw_tag_editor';
 import { uiTooltipHtml } from './tooltipHtml';
 
 
 export function uiDataEditor(context) {
     var dataHeader = uiDataHeader();
     var quickLinks = uiQuickLinks();
-    var rawTagEditor = uiRawTagEditor(context);
+    var rawTagEditor = uiSectionRawTagEditor(context);
     var _datum;
 
 
@@ -74,13 +74,14 @@ export function uiDataEditor(context) {
         // enter/update
         rte.enter()
             .append('div')
-            .attr('class', 'raw-tag-editor inspector-inner data-editor')
+            .attr('class', 'raw-tag-editor data-editor')
             .merge(rte)
             .call(rawTagEditor
                 .expanded(true)
                 .readOnlyTags([/./])
                 .tags((_datum && _datum.properties) || {})
                 .state('hover')
+                .render
             )
             .selectAll('textarea.tag-text')
             .attr('readonly', true)

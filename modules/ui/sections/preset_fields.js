@@ -1,20 +1,25 @@
 import { dispatch as d3_dispatch } from 'd3-dispatch';
-
 import {
     event as d3_event,
     select as d3_select
 } from 'd3-selection';
 
-import { currentLocale, t } from '../util/locale';
-import { modeBrowse } from '../modes/browse';
-import { uiDisclosure } from './disclosure';
-import { uiField } from './field';
-import { uiFormFields } from './form_fields';
-import { utilArrayIdentical } from '../util/array';
-import { utilArrayUnion, utilRebind } from '../util';
+import { utilArrayIdentical } from '../../util/array';
+import { utilArrayUnion, utilRebind } from '../../util';
+import { currentLocale, t } from '../../util/locale';
+import { modeBrowse } from '../../modes/browse';
+import { uiField } from '../field';
+import { uiFormFields } from '../form_fields';
+import { uiSection } from '../section';
 
+export function uiSectionPresetFields(context) {
 
-export function uiPresetEditor(context) {
+    var section = uiSection('preset-fields', context)
+        .title(function() {
+            return t('inspector.fields');
+        })
+        .disclosureContent(renderDisclosureContent);
+
     var dispatch = d3_dispatch('change', 'revert');
     var formFields = uiFormFields(context);
     var _state;
@@ -23,16 +28,7 @@ export function uiPresetEditor(context) {
     var _tags;
     var _entityIDs;
 
-
-    function presetEditor(selection) {
-        selection.call(uiDisclosure(context, 'preset_fields', true)
-            .title(t('inspector.fields'))
-            .content(render)
-        );
-    }
-
-
-    function render(selection) {
+    function renderDisclosureContent(selection) {
         if (!_fieldsArr) {
 
             var graph = context.graph();
@@ -123,7 +119,7 @@ export function uiPresetEditor(context) {
             .call(formFields
                 .fieldsArr(_fieldsArr)
                 .state(_state)
-                .klass('inspector-inner fillL3')
+                .klass('grouped-items-area')
             );
 
 
@@ -136,41 +132,36 @@ export function uiPresetEditor(context) {
             });
     }
 
-
-    presetEditor.presets = function(val) {
+    section.presets = function(val) {
         if (!arguments.length) return _presets;
         if (!_presets || !val || !utilArrayIdentical(_presets, val)) {
             _presets = val;
             _fieldsArr = null;
         }
-        return presetEditor;
+        return section;
     };
 
-
-    presetEditor.state = function(val) {
+    section.state = function(val) {
         if (!arguments.length) return _state;
         _state = val;
-        return presetEditor;
+        return section;
     };
 
-
-    presetEditor.tags = function(val) {
+    section.tags = function(val) {
         if (!arguments.length) return _tags;
         _tags = val;
         // Don't reset _fieldsArr here.
-        return presetEditor;
+        return section;
     };
 
-
-    presetEditor.entityIDs = function(val) {
+    section.entityIDs = function(val) {
         if (!arguments.length) return _entityIDs;
         if (!val || !_entityIDs || !utilArrayIdentical(_entityIDs, val)) {
             _entityIDs = val;
             _fieldsArr = null;
         }
-        return presetEditor;
+        return section;
     };
 
-
-    return utilRebind(presetEditor, dispatch, 'on');
+    return utilRebind(section, dispatch, 'on');
 }

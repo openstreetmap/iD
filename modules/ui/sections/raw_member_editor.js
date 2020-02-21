@@ -4,24 +4,40 @@ import {
     select as d3_select
 } from 'd3-selection';
 
-import { t } from '../util/locale';
-import { actionChangeMember } from '../actions/change_member';
-import { actionDeleteMember } from '../actions/delete_member';
-import { actionMoveMember } from '../actions/move_member';
-import { modeBrowse } from '../modes/browse';
-import { modeSelect } from '../modes/select';
-import { osmEntity } from '../osm';
-import { svgIcon } from '../svg/icon';
-import { services } from '../services';
-import { uiCombobox } from './combobox';
-import { uiDisclosure } from './disclosure';
-import { utilDisplayName, utilDisplayType, utilHighlightEntities, utilNoAuto } from '../util';
+import { t } from '../../util/locale';
+import { actionChangeMember } from '../../actions/change_member';
+import { actionDeleteMember } from '../../actions/delete_member';
+import { actionMoveMember } from '../../actions/move_member';
+import { modeBrowse } from '../../modes/browse';
+import { modeSelect } from '../../modes/select';
+import { osmEntity } from '../../osm';
+import { svgIcon } from '../../svg/icon';
+import { services } from '../../services';
+import { uiCombobox } from '../combobox';
+import { uiSection } from '../section';
+import { utilDisplayName, utilDisplayType, utilHighlightEntities, utilNoAuto } from '../../util';
 
 
-export function uiRawMemberEditor(context) {
+export function uiSectionRawMemberEditor(context) {
+
+    var section = uiSection('raw-member-editor', context)
+        .shouldDisplay(function() {
+            if (!_entityIDs || _entityIDs.length !== 1) return false;
+            
+            var entity = context.hasEntity(_entityIDs[0]);
+            return entity && entity.type === 'relation';
+        })
+        .title(function() {
+            var entity = context.hasEntity(_entityIDs[0]);
+            if (!entity) return '';
+
+            var gt = entity.members.length > _maxMembers ? '>' : '';
+            return t('inspector.members_count', { count: gt + entity.members.slice(0, _maxMembers).length });
+        })
+        .disclosureContent(renderDisclosureContent);
+
     var taginfo = services.taginfo;
-    var _entityID;
-    var _contentSelection = d3_select(null);
+    var _entityIDs;
     var _maxMembers = 1000;
 
     function downloadMember(d) {
@@ -30,7 +46,7 @@ export function uiRawMemberEditor(context) {
         // display the loading indicator
         d3_select(this.parentNode).classed('tag-reference-loading', true);
         context.loadEntity(d.id, function() {
-            updateDisclosureContent(_contentSelection);
+            section.reRender();
         });
     }
 
@@ -91,11 +107,12 @@ export function uiRawMemberEditor(context) {
         }
     }
 
-    function updateDisclosureContent(selection) {
-        _contentSelection = selection;
+    function renderDisclosureContent(selection) {
+
+        var entityID = _entityIDs[0];
 
         var memberships = [];
-        var entity = context.entity(_entityID);
+        var entity = context.entity(entityID);
         entity.members.slice(0, _maxMembers).forEach(function(member, index) {
             memberships.push({
                 index: index,
@@ -363,29 +380,12 @@ export function uiRawMemberEditor(context) {
         }
     }
 
-    function rawMemberEditor(selection) {
-        var entity = context.entity(_entityID);
-
-        var gt = entity.members.length > _maxMembers ? '>' : '';
-        selection.call(uiDisclosure(context, 'raw_member_editor', true)
-            .title(t('inspector.members_count', { count: gt + entity.members.slice(0, _maxMembers).length }))
-            .expanded(true)
-            .updatePreference(false)
-            .on('toggled', function(expanded) {
-                if (expanded) {
-                    selection.node().parentNode.scrollTop += 200;
-                }
-            })
-            .content(updateDisclosureContent)
-        );
-    }
-
-    rawMemberEditor.entityID = function(val) {
-        if (!arguments.length) return _entityID;
-        _entityID = val;
-        return rawMemberEditor;
+    section.entityIDs = function(val) {
+        if (!arguments.length) return _entityIDs;
+        _entityIDs = val;
+        return section;
     };
 
 
-    return rawMemberEditor;
+    return section;
 }

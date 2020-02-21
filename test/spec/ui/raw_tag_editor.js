@@ -1,17 +1,17 @@
-describe('iD.uiRawTagEditor', function() {
+describe('iD.uiSectionRawTagEditor', function() {
     var taglist, element, entity, context;
 
     function render(tags) {
-        taglist = iD.uiRawTagEditor(context)
+        taglist = iD.uiSectionRawTagEditor(context)
             .entityIDs([entity.id])
-            .preset({isFallback: function() { return false; }})
+            .presets([{isFallback: function() { return false; }}])
             .tags(tags)
             .expanded(true);
 
         element = d3.select('body')
             .append('div')
             .attr('class', 'ui-wrap')
-            .call(taglist);
+            .call(taglist.render);
     }
 
     beforeEach(function () {

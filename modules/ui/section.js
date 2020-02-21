@@ -9,13 +9,13 @@ import { utilFunctor } from '../util';
 // Can be labeled and collapsible.
 export function uiSection(id, context) {
 
-    var _disclosure;
     var _title;
     var _expandedByDefault = utilFunctor(true);
     var _shouldDisplay;
     var _content;
     var _disclosureContent;
 
+    var _disclosure;
     var _containerSelection = d3_select(null);
 
     var section = {
@@ -80,6 +80,10 @@ export function uiSection(id, context) {
         return _containerSelection;
     };
 
+    section.disclosure = function() {
+        return _disclosure;
+    };
+
     // may be called multiple times
     function renderContent(selection) {
         if (_shouldDisplay) {
@@ -95,6 +99,9 @@ export function uiSection(id, context) {
             if (!_disclosure) {
                 _disclosure = uiDisclosure(context, id.replace(/-/g, '_'), _expandedByDefault())
                     .title(_title || '')
+                    /*.on('toggled', function(expanded) {
+                        if (expanded) { selection.node().parentNode.scrollTop += 200; }
+                    })*/
                     .content(_disclosureContent);
             }
             selection

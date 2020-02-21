@@ -841,14 +841,12 @@ a.hide-toggle {
 .entity-editor-pane .inspector-body {
     top: 60px;
 }
-/* preserve extra space at bottom of inspector to allow for dropdown options - #5280 */
-.entity-editor .section:last-child {
-    margin-bottom: 150px;
+.entity-editor {
+    padding: 20px;
 }
-
-.inspector-inner {
-    padding: 20px 20px 5px 20px;
-    position: relative;
+/* preserve extra space at bottom of inspector to allow for dropdown options - #5280 */
+.entity-editor > div:last-child {
+    margin-bottom: 150px;
 }
 
 #sidebar .search-header .icon {
@@ -875,6 +873,10 @@ a.hide-toggle {
     text-indent: 30px;
     font-size: 18px;
     font-weight: bold;
+}
+
+.section {
+    margin-bottom: 30px;
 }
 
 
@@ -958,13 +960,13 @@ a.hide-toggle {
     padding-left: 0;
     padding-right: 10px;
 }
-.selected-features .feature-list {
+.section-selected-features .feature-list {
     border: 1px solid #ccc;
     border-radius: 4px;
     overflow: hidden;
     margin-top: 5px;
 }
-.selected-features .feature-list-item:last-child {
+.section-selected-features .feature-list-item:last-child {
     border: none;
 }
 
@@ -1268,24 +1270,13 @@ a.hide-toggle {
 
 /* Entity/Preset Editor
 ------------------------------------------------------- */
-.entity-issues,
-.preset-editor {
-    overflow: hidden;
-    padding: 10px 0px 5px 0px;
-}
-.entity-issues a.hide-toggle,
-.preset-editor a.hide-toggle {
-    margin: 0 20px 5px 20px;
-}
-.entity-issues .disclosure-wrap-entity_issues,
-.preset-editor .form-fields-container {
+.section .grouped-items-area {
     padding: 10px;
-    margin: 0 10px 10px 10px;
+    margin: 0 -10px 10px -10px;
     border-radius: 8px;
     background: #ececec;
 }
-.entity-issues .disclosure-wrap-entity_issues:empty,
-.preset-editor .form-fields-container:empty {
+.section .grouped-items-area:empty {
     display: none;
 }
 .preset-list-item a.hide-toggle {
@@ -2242,7 +2233,7 @@ div.combobox {
 /* More Fields dropdown
 ------------------------------------------------------- */
 .more-fields {
-    padding: 0 20px 20px 20px;
+    margin-top: 10px;
     font-weight: bold;
 }
 .changeset-editor .more-fields {
@@ -2478,43 +2469,47 @@ img.tag-reference-wiki-image {
     position: relative;
     width: 100%;
 }
-.raw-tag-editor .tag-reference-body {
+.section-raw-tag-editor .tag-reference-body {
     width: 100%;
 }
-.raw-tag-editor .tag-row.readonly .tag-reference-body {
+.section-raw-tag-editor .tag-row.readonly .tag-reference-body {
     background: #f6f6f6;
     color: #333;
 }
-.raw-tag-editor .tag-row:not(:last-child) .tag-reference-body.expanded {
+.section-raw-tag-editor .tag-row:not(:last-child) .tag-reference-body.expanded {
     border-bottom: 1px solid #ccc;
 }
-.raw-tag-editor .tag-row.readonly .tag-reference-body.expanded {
+.section-raw-tag-editor .tag-row.readonly .tag-reference-body.expanded {
     border-top: 1px solid #ccc;
 }
 
 
 /* Raw Member / Membership Editor
 ------------------------------------------------------- */
+.section-raw-member-editor .member-list:empty,
+.section-raw-membership-editor .member-list:empty {
+    display: none;
+}
 
-.raw-member-editor .member-list,
-.raw-membership-editor .member-list {
+.section-raw-member-editor .member-list,
+.section-raw-membership-editor .member-list {
     padding-top: 10px;
 }
-.raw-member-editor .member-list li,
-.raw-membership-editor .member-list li {
+.section-raw-member-editor .member-list li,
+.section-raw-membership-editor .member-list li {
     position: relative;
     border-radius: 4px;
     margin: 0;
     padding-bottom: 10px;
 }
-.raw-member-editor .member-row .member-entity-name,
-.raw-membership-editor .member-row .member-entity-name {
+.section-raw-member-editor .member-row .member-entity-name,
+.section-raw-membership-editor .member-row .member-entity-name {
     font-weight: normal;
     padding-left: 10px;
 }
 
-[dir='rtl'] .raw-member-editor .member-row .member-entity-name,
-[dir='rtl'] .raw-membership-editor .member-row .member-entity-name {
+[dir='rtl'] .section-raw-member-editor .member-row .member-entity-name,
+[dir='rtl'] .section-raw-membership-editor .member-row .member-entity-name {
     padding-left:0;
     padding-right: 10px;
 }
@@ -2541,7 +2536,7 @@ img.tag-reference-wiki-image {
     border: 0;
 }
 
-.raw-member-editor .member-row.dragging {
+.section-raw-member-editor .member-row.dragging {
     opacity: 0.75;
     z-index: 3000;
     /*
@@ -2815,11 +2810,11 @@ input.key-trap {
 }
 
 /* custom data editor - no info/delete buttons */
-.data-editor.raw-tag-editor .tag-row button {
+.data-editor.section-raw-tag-editor .tag-row button {
     display: none;
 }
-.data-editor.raw-tag-editor .tag-row .key-wrap,
-.data-editor.raw-tag-editor .tag-row .value-wrap {
+.data-editor.section-raw-tag-editor .tag-row .key-wrap,
+.data-editor.section-raw-tag-editor .tag-row .value-wrap {
     width: 50%;
 }
 
@@ -3280,42 +3275,42 @@ input.square-degrees-input {
 
 
 /* Entity Issues List */
-.entity-issues .issue-container .issue {
+.section-entity-issues .issue-container .issue {
     border-radius: 4px;
     border: 1px solid #ccc;
     background: #f6f6f6;
 }
-.entity-issues .issue-container:not(.active) .issue-text:hover,
-.entity-issues .issue-container:not(.active) .issue-info-button:hover {
+.section-entity-issues .issue-container:not(.active) .issue-text:hover,
+.section-entity-issues .issue-container:not(.active) .issue-info-button:hover {
     background: #f1f1f1;
 }
-.entity-issues .issue .issue-label .issue-text {
+.section-entity-issues .issue .issue-label .issue-text {
     padding-right: 10px;
 }
-[dir='rtl'] .entity-issues .issue .issue-label .issue-text {
+[dir='rtl'] .section-entity-issues .issue .issue-label .issue-text {
     padding-right: unset;
     padding-left: 10px;
 }
 
-.entity-issues .issue-container.active .issue-label .issue-text {
+.section-entity-issues .issue-container.active .issue-label .issue-text {
     font-weight: bold;
 }
-.entity-issues .issue-container:not(:last-of-type) {
+.section-entity-issues .issue-container:not(:last-of-type) {
     margin-bottom: 5px;
 }
-.entity-issues .issue-container.active:not(:first-of-type) {
+.section-entity-issues .issue-container.active:not(:first-of-type) {
     margin-top: 10px;
 }
-.entity-issues .issue-container.active:not(:last-of-type) {
+.section-entity-issues .issue-container.active:not(:last-of-type) {
     margin-bottom: 10px;
 }
 
 /* fixes */
-.entity-issues .issue-fix-list {
+.section-entity-issues .issue-fix-list {
     border-top: 1px solid;
     border-color: inherit;
 }
-.entity-issues .issue-container.active .issue-fix-list:empty {
+.section-entity-issues .issue-container.active .issue-fix-list:empty {
     display: none;
 }
 
@@ -3596,7 +3591,7 @@ li.issue-fix-item:not(.actionable) .fix-icon {
     padding: 10px 20px 20px 40px;
 }
 
-.pane-content > div {
+.help-pane .pane-content > div {
     padding-bottom: 15px;
 }
 
@@ -3705,7 +3700,7 @@ li.issue-fix-item:not(.actionable) .fix-icon {
 
 /* Inspector (hover styles)
 ------------------------------------------------------- */
-.inspector-hover .entity-issues .issue-container .issue .issue-label,
+.inspector-hover .section-entity-issues .issue-container .issue .issue-label,
 .inspector-hover .form-field-input-wrap .label,
 .inspector-hover .form-field-input-multicombo .chiplist,
 .inspector-hover .form-field-button,
@@ -3725,7 +3720,7 @@ li.issue-fix-item:not(.actionable) .fix-icon {
 .inspector-hover a,
 .inspector-hover .form-field-input-multicombo .chip,
 .inspector-hover .form-field-input-check span,
-.inspector-hover .entity-issues .issue .icon {
+.inspector-hover .section-entity-issues .issue .icon {
     color: #666;
 }
 
@@ -3736,8 +3731,8 @@ li.issue-fix-item:not(.actionable) .fix-icon {
 
 /* no scrollbars */
 .inspector-hover div {
-    overflow-x: hidden;
-    overflow-y: hidden;
+    overflow-x: visible;
+    overflow-y: visible;
 }
 
 /* hide and remove from layout */
@@ -3749,9 +3744,9 @@ li.issue-fix-item:not(.actionable) .fix-icon {
 .inspector-hover .form-field-input-radio label,
 .inspector-hover .form-field-input-radio label span,
 .inspector-hover .form-field-input-radio label.remove .icon,
-.inspector-hover .inspector-inner .add-row,
-.inspector-hover .entity-issues .issue-container .issue-fix-list,
-.inspector-hover .entity-issues .issue-container .issue-info-button {
+.inspector-hover .add-row,
+.inspector-hover .section-entity-issues .issue-container .issue-fix-list,
+.inspector-hover .section-entity-issues .issue-container .issue-info-button {
     display: none;
 }
 
@@ -3769,17 +3764,17 @@ li.issue-fix-item:not(.actionable) .fix-icon {
 }
 
 /* Unstyle the active entity issue on hover */
-.inspector-hover .entity-issues .issue-container.active {
+.inspector-hover .section-entity-issues .issue-container.active {
     margin-top: 1px;
     margin-bottom: 1px;
 }
-.inspector-hover .entity-issues .issue-container * {
+.inspector-hover .section-entity-issues .issue-container * {
     border-color: #ccc !important;
 }
-.inspector-hover .entity-issues .issue-container.active .issue-label {
+.inspector-hover .section-entity-issues .issue-container.active .issue-label {
     border-bottom: 0;
 }
-.inspector-hover .entity-issues .issue-container.active .issue-label .issue-text {
+.inspector-hover .section-entity-issues .issue-container.active .issue-label .issue-text {
     font-weight: normal;
 }
 

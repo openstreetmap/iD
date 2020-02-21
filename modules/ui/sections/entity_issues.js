@@ -1,70 +1,54 @@
 import { event as d3_event, select as d3_select } from 'd3-selection';
 
-import { svgIcon } from '../svg/icon';
-import { t } from '../util/locale';
-import { uiDisclosure } from './disclosure';
-import { utilArrayIdentical } from '../util/array';
-import { utilHighlightEntities } from '../util';
+import { svgIcon } from '../../svg/icon';
+import { utilArrayIdentical } from '../../util/array';
+import { t } from '../../util/locale';
+import { utilHighlightEntities } from '../../util';
+import { uiSection } from '../section';
 
+export function uiSectionEntityIssues(context) {
 
-export function uiEntityIssues(context) {
-    var _selection = d3_select(null);
-    var _activeIssueID;
     var _entityIDs = [];
+    var _issues = [];
+    var _activeIssueID;
 
-    // Refresh on validated events
+    var section = uiSection('entity-issues', context)
+        .shouldDisplay(function() {
+            return _issues.length > 0;
+        })
+        .title(function() {
+            return t('issues.list_title', { count: _issues.length });
+        })
+        .disclosureContent(renderDisclosureContent);
+
     context.validator()
         .on('validated.entity_issues', function() {
-             _selection.selectAll('.disclosure-wrap-entity_issues')
-                 .call(render);
-
-            update();
+            // Refresh on validated events
+            reloadIssues();
+            section.reRender();
         })
         .on('focusedIssue.entity_issues', function(issue) {
              makeActiveIssue(issue.id);
         });
 
-
-    function entityIssues(selection) {
-        _selection = selection;
-
-        selection
-            .call(uiDisclosure(context, 'entity_issues', true)
-                .content(render)
-            );
-
-        update();
-    }
-
-    function getIssues() {
-        return context.validator().getSharedEntityIssues(_entityIDs, { includeDisabledRules: true });
+    function reloadIssues() {
+        _issues = context.validator().getSharedEntityIssues(_entityIDs, { includeDisabledRules: true });
     }
 
     function makeActiveIssue(issueID) {
         _activeIssueID = issueID;
-        _selection.selectAll('.issue-container')
+        section.selection().selectAll('.issue-container')
             .classed('active', function(d) { return d.id === _activeIssueID; });
     }
 
-    function update() {
+    function renderDisclosureContent(selection) {
 
-        var issues = getIssues();
+        selection.classed('grouped-items-area', true);
 
-        _selection
-            .classed('hide', issues.length === 0);
-
-        _selection.selectAll('.hide-toggle-entity_issues span')
-            .text(t('issues.list_title', { count: issues.length }));
-    }
-
-
-    function render(selection) {
-        var issues = getIssues();
-        _activeIssueID = issues.length > 0 ? issues[0].id : null;
-
+        _activeIssueID = _issues.length > 0 ? _issues[0].id : null;
 
         var containers = selection.selectAll('.issue-container')
-            .data(issues, function(d) { return d.id; });
+            .data(_issues, function(d) { return d.id; });
 
         // Exit
         containers.exit()
@@ -265,16 +249,15 @@ export function uiEntityIssues(context) {
             });
     }
 
-
-    entityIssues.entityIDs = function(val) {
+    section.entityIDs = function(val) {
         if (!arguments.length) return _entityIDs;
         if (!_entityIDs || !val || !utilArrayIdentical(_entityIDs, val)) {
             _entityIDs = val;
             _activeIssueID = null;
+            reloadIssues();
         }
-        return entityIssues;
+        return section;
     };
 
-
-    return entityIssues;
+    return section;
 }

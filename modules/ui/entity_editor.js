@@ -3,24 +3,19 @@ import { event as d3_event, selectAll as d3_selectAll, select as d3_select } fro
 import deepEqual from 'fast-deep-equal';
 
 import { t, textDirection } from '../util/locale';
-import { tooltip } from '../util/tooltip';
 import { actionChangeTags } from '../actions/change_tags';
 import { modeBrowse } from '../modes/browse';
 import { svgIcon } from '../svg/icon';
-import { uiDisclosure } from './disclosure';
-import { uiPresetIcon } from './preset_icon';
-import { uiQuickLinks } from './quick_links';
-import { uiRawMemberEditor } from './raw_member_editor';
-import { uiRawMembershipEditor } from './raw_membership_editor';
-import { uiRawTagEditor } from './raw_tag_editor';
-import { uiTagReference } from './tag_reference';
-import { uiPresetEditor } from './preset_editor';
-import { uiEntityIssues } from './entity_issues';
-import { uiSelectionList } from './selection_list';
-import { uiTooltipHtml } from './tooltipHtml';
 import { utilArrayIdentical } from '../util/array';
 import { utilCleanTags, utilCombinedTags, utilRebind } from '../util';
 
+import { uiSectionEntityIssues } from './sections/entity_issues';
+import { uiSectionFeatureType } from './sections/feature_type';
+import { uiSectionPresetFields } from './sections/preset_fields';
+import { uiSectionRawMemberEditor } from './sections/raw_member_editor';
+import { uiSectionRawMembershipEditor } from './sections/raw_membership_editor';
+import { uiSectionRawTagEditor } from './sections/raw_tag_editor';
+import { uiSectionSelectionList } from './sections/selection_list';
 
 export function uiEntityEditor(context) {
     var dispatch = d3_dispatch('choose');
@@ -30,21 +25,11 @@ export function uiEntityEditor(context) {
     var _base;
     var _entityIDs;
     var _activePresets = [];
-    var _tagReference;
     var _newFeature;
 
-    var selectionList = uiSelectionList(context);
-    var entityIssues = uiEntityIssues(context);
-    var quickLinks = uiQuickLinks();
-    var presetEditor = uiPresetEditor(context).on('change', changeTags).on('revert', revertTags);
-    var rawTagEditor = uiRawTagEditor(context).on('change', changeTags);
-    var rawMemberEditor = uiRawMemberEditor(context);
-    var rawMembershipEditor = uiRawMembershipEditor(context);
+    var _sections;
 
     function entityEditor(selection) {
-
-        var singularEntityID = _entityIDs.length === 1 && _entityIDs[0];
-        var singularEntity = singularEntityID && context.entity(singularEntityID);
 
         var combinedTags = utilCombinedTags(_entityIDs, context.graph());
 
@@ -76,7 +61,7 @@ export function uiEntityEditor(context) {
             .merge(headerEnter);
 
         header.selectAll('h3')
-            .text(singularEntityID ? t('inspector.edit') : t('inspector.edit_features'));
+            .text(_entityIDs.length === 1 ? t('inspector.edit') : t('inspector.edit_features'));
 
         header.selectAll('.preset-reset')
             .on('click', function() {
@@ -96,230 +81,53 @@ export function uiEntityEditor(context) {
         body = body
             .merge(bodyEnter);
 
-        var sectionInfos = [
-            {
-                klass: 'selected-features inspector-inner',
-                shouldHave: _entityIDs.length > 1,
-                update: function(section) {
-                    section
-                        .call(selectionList
-                            .selectedIDs(_entityIDs)
-                        );
-                }
-            },
-            {
-                klass: 'preset-list-item inspector-inner',
-                update: function(section) {
+        if (!_sections) {
+            _sections = [
+                uiSectionSelectionList(context),
+                uiSectionFeatureType(context).on('choose', function(presets) {
+                    dispatch.call('choose', this, presets);
+                }),
+                uiSectionEntityIssues(context),
+                uiSectionPresetFields(context).on('change', changeTags).on('revert', revertTags),
+                uiSectionRawTagEditor(context).on('change', changeTags),
+                uiSectionRawMemberEditor(context),
+                uiSectionRawMembershipEditor(context)
+            ];
+        }
 
-                    section.classed('mixed-types', _activePresets.length > 1);
-
-                    section
-                        .call(
-                            uiDisclosure(context, 'feature_type', true)
-                                .title(t('inspector.feature_type'))
-                                .content(renderFeatureType)
-                        );
-
-                    function renderFeatureType(selection) {
-                        var presetButtonWrap = selection
-                            .selectAll('.preset-list-button-wrap')
-                            .data([0])
-                            .enter()
-                            .append('div')
-                            .attr('class', 'preset-list-button-wrap');
-
-                        var presetButton = presetButtonWrap
-                            .append('button')
-                            .attr('class', 'preset-list-button preset-reset')
-                            .call(tooltip()
-                                .title(t('inspector.back_tooltip'))
-                                .placement('bottom')
-                            );
-
-                        presetButton.append('div')
-                            .attr('class', 'preset-icon-container');
-
-                        presetButton
-                            .append('div')
-                            .attr('class', 'label')
-                            .append('div')
-                            .attr('class', 'label-inner');
-
-                        presetButtonWrap.append('div')
-                            .attr('class', 'accessory-buttons');
-
-                        var tagReferenceBodyWrap = selection
-                            .selectAll('.tag-reference-body-wrap')
-                            .data([0]);
-
-                        tagReferenceBodyWrap = tagReferenceBodyWrap
-                            .enter()
-                            .append('div')
-                            .attr('class', 'tag-reference-body-wrap')
-                            .merge(tagReferenceBodyWrap);
-
-                        selection
-                            .selectAll('.preset-quick-links')
-                            .data([0])
-                            .enter()
-                            .append('div')
-                            .attr('class', 'preset-quick-links')
-                            .call(quickLinks.choices([{
-                                id: 'zoom_to',
-                                label: 'inspector.zoom_to.title',
-                                tooltip: function() {
-                                    return uiTooltipHtml(t('inspector.zoom_to.tooltip_feature'), t('inspector.zoom_to.key'));
-                                },
-                                click: function zoomTo() {
-                                    context.mode().zoomToSelected();
-                                }
-                            }]));
-
-                        // update header
-                        if (_tagReference) {
-                            selection.selectAll('.preset-list-button-wrap .accessory-buttons')
-                                .style('display', _activePresets.length === 1 ? null : 'none')
-                                .call(_tagReference.button);
-
-                            tagReferenceBodyWrap
-                                .style('display', _activePresets.length === 1 ? null : 'none')
-                                .call(_tagReference.body);
-                        }
-
-                        selection.selectAll('.preset-reset')
-                            .on('click', function() {
-                                 dispatch.call('choose', this, _activePresets);
-                            })
-                            .on('mousedown', function() {
-                                d3_event.preventDefault();
-                                d3_event.stopPropagation();
-                            })
-                            .on('mouseup', function() {
-                                d3_event.preventDefault();
-                                d3_event.stopPropagation();
-                            });
-
-                        var geometries = entityGeometries();
-                        selection.select('.preset-list-item button')
-                            .call(uiPresetIcon(context)
-                                .geometry(_activePresets.length === 1 ? (geometries.length === 1 && geometries[0]) : null)
-                                .preset(_activePresets.length === 1 ? _activePresets[0] : context.presets().item('point'))
-                            );
-
-                        // NOTE: split on en-dash, not a hypen (to avoid conflict with hyphenated names)
-                        var names = _activePresets.length === 1 ? _activePresets[0].name().split(' – ') : [t('inspector.multiple_types')];
-
-                        var label = selection.select('.label-inner');
-                        var nameparts = label.selectAll('.namepart')
-                            .data(names, function(d) { return d; });
-
-                        nameparts.exit()
-                            .remove();
-
-                        nameparts
-                            .enter()
-                            .append('div')
-                            .attr('class', 'namepart')
-                            .text(function(d) { return d; });
-                    }
-                }
-            },
-            {
-                klass: 'entity-issues',
-                update: function(section) {
-                    section
-                        .call(entityIssues
-                            .entityIDs(_entityIDs)
-                        );
-                }
-            }, {
-                klass: 'preset-editor',
-                update: function(section) {
-                    section
-                        .call(presetEditor
-                            .presets(_activePresets)
-                            .entityIDs(_entityIDs)
-                            .tags(combinedTags)
-                            .state(_state)
-                        );
-                }
-            }, {
-                klass: 'raw-tag-editor inspector-inner',
-                update: function(section) {
-                    section
-                        .call(rawTagEditor
-                            .preset(_activePresets[0])
-                            .entityIDs(_entityIDs)
-                            .tags(combinedTags)
-                            .state(_state)
-                        );
-                }
-            }, {
-                klass: 'raw-member-editor inspector-inner',
-                shouldHave: singularEntity && singularEntity.type === 'relation',
-                update: function(section) {
-                    section
-                        .call(rawMemberEditor
-                            .entityID(singularEntityID)
-                        );
-                }
-            }, {
-                klass: 'raw-membership-editor inspector-inner',
-                shouldHave: singularEntityID,
-                update: function(section) {
-                    section
-                        .call(rawMembershipEditor
-                            .entityID(singularEntityID)
-                        );
-                }
-            }, {
-                klass: 'key-trap-wrap',
-                create: function(sectionEnter) {
-                    sectionEnter
-                        .append('input')
-                        .attr('type', 'text')
-                        .attr('class', 'key-trap')
-                        .on('keydown.key-trap', function() {
-                            // On tabbing, send focus back to the first field on the inspector-body
-                            // (probably the `name` field) #4159
-                            if (d3_event.keyCode === 9 && !d3_event.shiftKey) {
-                                d3_event.preventDefault();
-                                body.select('input').node().focus();
-                            }
-                        });
-                }
+        _sections.forEach(function(section) {
+            if (section.entityIDs) {
+                section.entityIDs(_entityIDs);
             }
-        ];
-
-        sectionInfos = sectionInfos.filter(function(info) {
-            return info.shouldHave === undefined || info.shouldHave;
+            if (section.presets) {
+                section.presets(_activePresets);
+            }
+            if (section.tags) {
+                section.tags(combinedTags);
+            }
+            if (section.state) {
+                section.state(_state);
+            }
+            body.call(section.render);
         });
 
-        var sections = body.selectAll('.section')
-            .data(sectionInfos, function(d) { return d.klass; });
-
-        sections.exit().remove();
-
-        var sectionsEnter = sections.enter()
+        body
+            .selectAll('.key-trap-wrap')
+            .data([0])
+            .enter()
             .append('div')
-            .attr('class', function(d) {
-                return 'section ' + d.klass;
+            .attr('class', 'key-trap-wrap')
+            .append('input')
+            .attr('type', 'text')
+            .attr('class', 'key-trap')
+            .on('keydown.key-trap', function() {
+                // On tabbing, send focus back to the first field on the inspector-body
+                // (probably the `name` field) #4159
+                if (d3_event.keyCode === 9 && !d3_event.shiftKey) {
+                    d3_event.preventDefault();
+                    body.select('input').node().focus();
+                }
             });
-
-        sectionsEnter.each(function(d) {
-            if (d.create) {
-                d.create(d3_select(this));
-            }
-        });
-
-        sections = sectionsEnter
-            .merge(sections);
-
-        sections.each(function(d) {
-            if (d.update) {
-                d.update(d3_select(this));
-            }
-        });
 
         context.history()
             .on('change.entity-editor', historyChanged);
@@ -535,32 +343,10 @@ export function uiEntityEditor(context) {
 
         // don't reload the same preset
         if (!utilArrayIdentical(val, _activePresets)) {
-
             _activePresets = val;
-
-            var geometries = entityGeometries();
-            if (_activePresets.length === 1 && geometries.length) {
-                _tagReference = uiTagReference(_activePresets[0].reference(geometries[0]), context)
-                    .showing(false);
-            }
         }
         return entityEditor;
     };
-
-    function entityGeometries() {
-
-        var counts = {};
-
-        for (var i in _entityIDs) {
-            var geometry = context.geometry(_entityIDs[i]);
-            if (!counts[geometry]) counts[geometry] = 0;
-            counts[geometry] += 1;
-        }
-
-        return Object.keys(counts).sort(function(geom1, geom2) {
-            return counts[geom2] - counts[geom1];
-        });
-    }
 
     return utilRebind(entityEditor, dispatch, 'on');
 }

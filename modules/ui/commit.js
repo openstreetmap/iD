@@ -11,7 +11,7 @@ import { tooltip } from '../util/tooltip';
 import { uiChangesetEditor } from './changeset_editor';
 import { uiCommitChanges } from './commit_changes';
 import { uiCommitWarnings } from './commit_warnings';
-import { uiRawTagEditor } from './raw_tag_editor';
+import { uiSectionRawTagEditor } from './sections/raw_tag_editor';
 import { utilArrayGroupBy, utilRebind } from '../util';
 import { utilDetect } from '../util/detect';
 
@@ -44,7 +44,7 @@ export function uiCommit(context) {
 
     var changesetEditor = uiChangesetEditor(context)
         .on('change', changeTags);
-    var rawTagEditor = uiRawTagEditor(context)
+    var rawTagEditor = uiSectionRawTagEditor(context)
         .on('change', changeTags);
     var commitChanges = uiCommitChanges(context);
     var commitWarnings = uiCommitWarnings(context);
@@ -399,6 +399,7 @@ export function uiCommit(context) {
                 .expanded(expanded)
                 .readOnlyTags(readOnlyTags)
                 .tags(Object.assign({}, _changeset.tags))   // shallow copy
+                .render
             );
 
 

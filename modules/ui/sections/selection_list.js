@@ -1,43 +1,36 @@
 import { event as d3_event, select as d3_select } from 'd3-selection';
 
-import { modeSelect } from '../modes/select';
-import { osmEntity } from '../osm';
-import { svgIcon } from '../svg/icon';
-import { uiDisclosure } from './disclosure';
-import { t } from '../util/locale';
-import { utilDisplayName, utilHighlightEntities } from '../util';
+import { modeSelect } from '../../modes/select';
+import { osmEntity } from '../../osm';
+import { svgIcon } from '../../svg/icon';
+import { uiSection } from '../section';
+import { t } from '../../util/locale';
+import { utilDisplayName, utilHighlightEntities } from '../../util';
 
-
-export function uiSelectionList(context) {
+export function uiSectionSelectionList(context) {
 
     var _selectedIDs = [];
-    var _selection = d3_select(null);
+
+    var section = uiSection('selected-features', context)
+        .shouldDisplay(function() {
+            return _selectedIDs.length > 1;
+        })
+        .title(function() {
+            return t('inspector.features_count', { count: _selectedIDs.length });
+        })
+        .disclosureContent(renderDisclosureContent);
 
     context.history()
         .on('change.selectionList', function(difference) {
             if (difference) {
-                _selection.selectAll('.disclosure-wrap')
-                    .call(render);
-
-                updateTitle();
+                section.reRender();
             }
         });
 
-    function selectionList(selection) {
-        _selection = selection;
-
-        selection
-            .call(uiDisclosure(context, 'selected_features', true)
-                .content(render)
-            );
-
-        updateTitle();
-    }
-
-    selectionList.selectedIDs = function(val) {
+    section.entityIDs = function(val) {
         if (!arguments.length) return _selectedIDs;
         _selectedIDs = val;
-        return selectionList;
+        return section;
     };
 
     function selectEntity(entity) {
@@ -55,7 +48,7 @@ export function uiSelectionList(context) {
         }
     }
 
-    function render(selection) {
+    function renderDisclosureContent(selection) {
 
         var list = selection.selectAll('.feature-list')
             .data([0]);
@@ -135,10 +128,5 @@ export function uiSelectionList(context) {
             });
     }
 
-    function updateTitle() {
-        _selection.selectAll('.hide-toggle span')
-            .text(t('inspector.features_count', { count: _selectedIDs.length }));
-    }
-
-    return selectionList;
+    return section;
 }

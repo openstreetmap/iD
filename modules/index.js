@@ -15,6 +15,8 @@ export * from './svg/index';
 export * from './ui/fields/index';
 export * from './ui/intro/index';
 export * from './ui/panels/index';
+export * from './ui/panes/index';
+export * from './ui/sections/index';
 export * from './ui/settings/index';
 export * from './ui/index';
 export * from './util/index';
@@ -44,7 +46,6 @@ export { rendererFeatures as Features } from './renderer/features';
 export { rendererMap as Map } from './renderer/map';
 export { rendererTileLayer as TileLayer } from './renderer/tile_layer';
 export { utilDetect as Detect } from './util/detect';
-export { uiPresetEditor as uiPreset } from './ui/preset_editor';
+export { uiSectionPresetFields as uiPreset } from './ui/sections/preset_fields';
 
 export var debug = false;
-
