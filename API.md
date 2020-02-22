@@ -81,7 +81,7 @@ vocabulary established by iD, and to the tags present on OSM entities.
 
 ### OSM Data Model classes
 
-An SVG element on the map to which an iD.Entity has been bound as a datum shall
+An SVG element on the map to which an iD.osmEntity has been bound as a datum shall
 have a class with that datum's type, i.e. either `.node` or `.way`. (If and when
 we add visual representations for relations, `.relation` may also be valid.)
 

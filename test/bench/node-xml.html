@@ -78,7 +78,7 @@
     .add('four', function() {
         var o = { type: 'node', loc: [0, 0] },
             attrs = obj.attributes;
-        o.id = attrs.id.nodeValue;
+        o.id = attrs.iD.osmNodeValue;
         o.loc[0] = parseFloat(attrs.lon.nodeValue);
         o.loc[1] = parseFloat(attrs.lat.nodeValue);
         o.version = attrs.version.nodeValue;
