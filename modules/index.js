@@ -1,6 +1,3 @@
-import * as d3 from 'd3';  // remove someday, see #4379
-export { d3 };
-
 export * from './actions/index';
 export * from './behavior/index';
 export * from './core/index';
@@ -23,3 +20,19 @@ export * from './util/index';
 export * from './validations/index';
 
 export let debug = false;
+
+// reexport just what our tests use, see #4379
+import * as D3 from 'd3';
+export let d3 = {
+  customEvent: D3.customEvent,
+  dispatch:  D3.dispatch,
+  event:  D3.event,
+  geoMercator: D3.geoMercator,
+  geoProjection: D3.geoProjection,
+  polygonArea: D3.polygonArea,
+  polygonCentroid: D3.polygonCentroid,
+  select: D3.select,
+  selectAll: D3.selectAll,
+  timerFlush: D3.timerFlush
+};
+

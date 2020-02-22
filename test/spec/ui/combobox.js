@@ -15,7 +15,7 @@ describe('uiCombobox', function() {
         var start = input.property('selectionStart');
         var finis = input.property('selectionEnd');
 
-        iD.d3.customEvent(happen.makeEvent({
+        d3.customEvent(happen.makeEvent({
             type: 'keydown',
             keyCode: keyCode
         }), input.on('keydown.combo-input'));

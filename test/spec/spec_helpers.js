@@ -26,7 +26,7 @@ iD.data.discarded = {};
 
 
 mocha.setup({
-    timeout: 60000,  // 1 minute
+    timeout: 5000,  // 5 sec
     ui: 'bdd',
     globals: [
         '__onresize.tail-size',
