@@ -3,13 +3,12 @@ import { select as d3_select } from 'd3-selection';
 import deepEqual from 'fast-deep-equal';
 
 import { t } from '../util/locale';
-import { modeBrowse } from '../modes/browse';
 import { osmChangeset } from '../osm';
 import { svgIcon } from '../svg/icon';
 import { services } from '../services';
 import { tooltip } from '../util/tooltip';
 import { uiChangesetEditor } from './changeset_editor';
-import { uiCommitChanges } from './commit_changes';
+import { uiSectionChanges } from './sections/changes';
 import { uiCommitWarnings } from './commit_warnings';
 import { uiSectionRawTagEditor } from './sections/raw_tag_editor';
 import { utilArrayGroupBy, utilRebind } from '../util';
@@ -46,7 +45,7 @@ export function uiCommit(context) {
         .on('change', changeTags);
     var rawTagEditor = uiSectionRawTagEditor(context)
         .on('change', changeTags);
-    var commitChanges = uiCommitChanges(context);
+    var commitChanges = uiSectionChanges(context);
     var commitWarnings = uiCommitWarnings(context);
 
 
@@ -217,7 +216,9 @@ export function uiCommit(context) {
             .attr('class', 'header-block header-block-outer header-block-close')
             .append('button')
             .attr('class', 'close')
-            .on('click', function() { context.enter(modeBrowse(context)); })
+            .on('click', function() {
+                dispatch.call('cancel', this);
+            })
             .call(svgIcon('#iD-icon-close'));
 
         var body = selection.selectAll('.body')
@@ -363,8 +364,7 @@ export function uiCommit(context) {
 
         buttonSection.selectAll('.cancel-button')
             .on('click.cancel', function() {
-                var selectedID = commitChanges.entityID();
-                dispatch.call('cancel', this, selectedID);
+                dispatch.call('cancel', this);
             });
 
         buttonSection.selectAll('.save-button')
@@ -402,9 +402,16 @@ export function uiCommit(context) {
                 .render
             );
 
+        var changesSection = body.selectAll('.commit-changes-section')
+            .data([0]);
+
+        changesSection = changesSection.enter()
+            .append('div')
+            .attr('class', 'modal-section commit-changes-section')
+            .merge(changesSection);
 
         // Change summary
-        body.call(commitChanges);
+        changesSection.call(commitChanges.render);
 
 
         function toggleRequestReview() {

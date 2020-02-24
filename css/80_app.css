@@ -2236,9 +2236,6 @@ div.combobox {
     margin-top: 10px;
     font-weight: bold;
 }
-.changeset-editor .more-fields {
-    padding: 15px 20px 0 20px;
-}
 
 .more-fields label {
     display: flex;
@@ -2270,7 +2267,6 @@ div.combobox {
     flex-flow: row nowrap;
     flex-direction: row-reverse;
     margin-top: -25px;
-    padding: 0 3px;
 }
 button.raw-tag-option {
     flex: 0 0 20px;
@@ -4929,10 +4925,6 @@ svg.mouseclick use.right {
 .changeset-list li span.count {
     font-size: 10px;
     color: #555;
-}
-
-.mode-save .commit-section .changeset-list button {
-    border-left: 1px solid #ccc;
 }
 
 .changeset-list li span.count:before { content: '('; }

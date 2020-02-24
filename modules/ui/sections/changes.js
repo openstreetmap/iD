@@ -1,43 +1,46 @@
 import { select as d3_select } from 'd3-selection';
 
-import { t } from '../util/locale';
-import { JXON } from '../util/jxon';
-import { actionDiscardTags } from '../actions/discard_tags';
-import { osmChangeset } from '../osm';
-import { svgIcon } from '../svg/icon';
-import { utilDetect } from '../util/detect';
+import { t } from '../../util/locale';
+import { JXON } from '../../util/jxon';
+import { actionDiscardTags } from '../../actions/discard_tags';
+import { osmChangeset } from '../../osm';
+import { svgIcon } from '../../svg/icon';
+import { utilDetect } from '../../util/detect';
+import { uiSection } from '../section';
 
 import {
     utilDisplayName,
     utilDisplayType,
     utilEntityOrMemberSelector
-} from '../util';
+} from '../../util';
 
 
-export function uiCommitChanges(context) {
+export function uiSectionChanges(context) {
     var detected = utilDetect();
-    var _entityID;
 
     var _discardTags = {};
     context.data().get('discarded')
         .then(function(d) { _discardTags = d; })
         .catch(function() { /* ignore */ });
 
+    var section = uiSection('changes-list', context)
+        .title(function() {
+            var history = context.history();
+            var summary = history.difference().summary();
+            return t('commit.changes', { count: summary.length });
+        })
+        .disclosureContent(renderDisclosureContent);
 
-    function commitChanges(selection) {
+    function renderDisclosureContent(selection) {
         var history = context.history();
         var summary = history.difference().summary();
 
-        var container = selection.selectAll('.modal-section.commit-section')
+        var container = selection.selectAll('.commit-section')
             .data([0]);
 
         var containerEnter = container.enter()
             .append('div')
-            .attr('class', 'commit-section modal-section fillL2');
-
-        containerEnter
-            .append('h3')
-            .text(t('commit.changes', { count: summary.length }));
+            .attr('class', 'commit-section');
 
         containerEnter
             .append('ul')
@@ -150,25 +153,14 @@ export function uiCommitChanges(context) {
 
 
         function click(change) {
-            if (change.changeType === 'deleted') {
-                _entityID = null;
-            } else {
+            if (change.changeType !== 'deleted') {
                 var entity = change.entity;
-                _entityID = change.entity.id;
                 context.map().zoomToEase(entity);
-                context.surface().selectAll(utilEntityOrMemberSelector([_entityID], context.graph()))
+                context.surface().selectAll(utilEntityOrMemberSelector([entity.id], context.graph()))
                     .classed('hover', true);
             }
         }
     }
 
-
-    commitChanges.entityID = function(val) {
-        if (!arguments.length) return _entityID;
-        _entityID = val;
-        return commitChanges;
-    };
-
-
-    return commitChanges;
+    return section;
 }

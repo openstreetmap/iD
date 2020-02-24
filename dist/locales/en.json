@@ -590,7 +590,7 @@
             "request_review": "I would like someone to review my edits.",
             "save": "Upload",
             "cancel": "Cancel",
-            "changes": "{count} Changes",
+            "changes": "Changes ({count})",
             "download_changes": "Download osmChange file",
             "errors": "Errors",
             "warnings": "Warnings",

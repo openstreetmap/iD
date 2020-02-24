@@ -1,6 +1,7 @@
 export { uiSectionBackgroundDisplayOptions } from './background_display_options';
 export { uiSectionBackgroundList } from './background_list';
 export { uiSectionBackgroundOffset } from './background_offset';
+export { uiSectionChanges } from './changes';
 export { uiSectionDataLayers } from './data_layers';
 export { uiSectionEntityIssues } from './entity_issues';
 export { uiSectionFeatureType } from './feature_type';
