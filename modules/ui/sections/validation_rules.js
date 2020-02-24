@@ -180,5 +180,9 @@ export function uiSectionValidationRules(context) {
         context.validator().toggleRule(d);
     }
 
+    context.validator().on('validated.uiSectionValidationRules', function() {
+        window.requestIdleCallback(section.reRender);
+    });
+
     return section;
 }
