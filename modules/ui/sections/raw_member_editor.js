@@ -23,7 +23,7 @@ export function uiSectionRawMemberEditor(context) {
     var section = uiSection('raw-member-editor', context)
         .shouldDisplay(function() {
             if (!_entityIDs || _entityIDs.length !== 1) return false;
-            
+
             var entity = context.hasEntity(_entityIDs[0]);
             return entity && entity.type === 'relation';
         })
@@ -54,7 +54,7 @@ export function uiSectionRawMemberEditor(context) {
         d3_event.preventDefault();
 
         var entity = context.entity(d.id);
-        context.map().zoomTo(entity);
+        context.map().zoomToEase(entity);
 
         // highlight the feature in case it wasn't previously on-screen
         utilHighlightEntities([d.id], true, context);
