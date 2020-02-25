@@ -6022,27 +6022,12 @@ en:
         name: Cycling Track
         # 'terms: bicycle track,bicycling track,cycle racetrack,velodrome'
         terms: '<translate with synonyms or related terms for ''Cycling Track'', separated by commas>'
-      leisure/track/cycling_point:
-        # 'leisure=track, sport=cycling'
-        name: Cycling Track
-        # 'terms: bicycle track,bicycling track,cycle racetrack,velodrome'
-        terms: '<translate with synonyms or related terms for ''Cycling Track'', separated by commas>'
       leisure/track/horse_racing:
         # 'leisure=track, sport=horse_racing'
         name: Horse Racing Track
         # 'terms: equestrian race track,horse race betting,horseracing,horsetrack,horse racetrack'
         terms: '<translate with synonyms or related terms for ''Horse Racing Track'', separated by commas>'
-      leisure/track/horse_racing_point:
-        # 'leisure=track, sport=horse_racing'
-        name: Horse Racing Track
-        # 'terms: equestrian race track,horse race betting,horseracing,horsetrack,horse racetrack'
-        terms: '<translate with synonyms or related terms for ''Horse Racing Track'', separated by commas>'
       leisure/track/running:
-        # 'leisure=track, sport=running'
-        name: Running Track
-        # 'terms: athletics track,decathlon,foot race,long distance running,marathon,middle distance running,racetrack,running,sprint,track,walking'
-        terms: '<translate with synonyms or related terms for ''Running Track'', separated by commas>'
-      leisure/track/running_point:
         # 'leisure=track, sport=running'
         name: Running Track
         # 'terms: athletics track,decathlon,foot race,long distance running,marathon,middle distance running,racetrack,running,sprint,track,walking'

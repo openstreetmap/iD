@@ -9,12 +9,17 @@
         "lanes"
     ],
     "geometry": [
+        "point",
         "line",
         "area"
     ],
     "tags": {
         "leisure": "track",
         "sport": "horse_racing"
+    },
+    "reference": {
+        "key": "sport",
+        "value": "horse_racing"
     },
     "terms": [
         "equestrian race track",

@@ -9,12 +9,17 @@
         "lanes"
     ],
     "geometry": [
+        "point",
         "line",
         "area"
     ],
     "tags": {
         "leisure": "track",
         "sport": "cycling"
+    },
+    "reference": {
+        "key": "sport",
+        "value": "cycling"
     },
     "terms": [
         "bicycle track",

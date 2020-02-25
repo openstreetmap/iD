@@ -8,6 +8,10 @@
         "highway": "raceway",
         "sport": "karting"
     },
+    "reference": {
+        "key": "sport",
+        "value": "karting"
+    },
     "terms": [
         "carting",
         "go carts",

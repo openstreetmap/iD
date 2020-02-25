@@ -7735,25 +7735,13 @@
                     "name": "Racetrack (Non-Motorsport)",
                     "terms": "cycle,dog,greyhound,horse,race*,track"
                 },
-                "leisure/track/cycling_point": {
-                    "name": "Cycling Track",
-                    "terms": "bicycle track,bicycling track,cycle racetrack,velodrome"
-                },
                 "leisure/track/cycling": {
                     "name": "Cycling Track",
                     "terms": "bicycle track,bicycling track,cycle racetrack,velodrome"
                 },
-                "leisure/track/horse_racing_point": {
-                    "name": "Horse Racing Track",
-                    "terms": "equestrian race track,horse race betting,horseracing,horsetrack,horse racetrack"
-                },
                 "leisure/track/horse_racing": {
                     "name": "Horse Racing Track",
                     "terms": "equestrian race track,horse race betting,horseracing,horsetrack,horse racetrack"
-                },
-                "leisure/track/running_point": {
-                    "name": "Running Track",
-                    "terms": "athletics track,decathlon,foot race,long distance running,marathon,middle distance running,racetrack,running,sprint,track,walking"
                 },
                 "leisure/track/running": {
                     "name": "Running Track",
