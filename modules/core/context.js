@@ -150,7 +150,7 @@ export function coreContext() {
 
   context.zoomToEntity = (entityID, zoomTo) => {
     if (zoomTo !== false) {
-      this.loadEntity(entityID, (err, result) => {
+      context.loadEntity(entityID, (err, result) => {
         if (err) return;
         const entity = result.data.find(e => e.id === entityID);
         if (entity) {
