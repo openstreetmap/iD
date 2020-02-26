@@ -54,7 +54,7 @@
     "fast-json-stable-stringify": "2.1.0",
     "lodash-es": "~4.17.15",
     "marked": "0.8.0",
-    "martinez-polygon-clipping": "0.6.0",
+    "martinez-polygon-clipping": "0.6.2",
     "node-diff3": "1.0.0",
     "osm-auth": "1.0.2",
     "pannellum": "2.4.1",
