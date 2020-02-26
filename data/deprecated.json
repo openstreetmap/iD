@@ -68,6 +68,10 @@
     "replace": {"amenity": "charging_station"}
   },
   {
+     "old": {"amenity": "charging_station", "car": "*"},
+     "replace": {"amenity": "charging_station", "motorcar": "$1"}
+  },
+  {
     "old": {"amenity": "fire_hydrant"},
     "replace": {"emergency": "fire_hydrant"}
   },
