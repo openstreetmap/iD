@@ -10,9 +10,10 @@ import { t } from '../../util/locale';
 import { utilArrayDifference, utilArrayIdentical } from '../../util/array';
 import { utilGetSetValue, utilNoAuto, utilRebind, utilTagDiff } from '../../util';
 
-export function uiSectionRawTagEditor(context) {
+export function uiSectionRawTagEditor(id, context) {
 
-    var section = uiSection('raw-tag-editor', context)
+    var section = uiSection(id, context)
+        .classes('raw-tag-editor')
         .title(function() {
             var count = Object.keys(_tags).filter(function(d) { return d; }).length;
             return t('inspector.tags_count', { count: count });
@@ -32,8 +33,6 @@ export function uiSectionRawTagEditor(context) {
     // the keys in the order we want them to display
     var _orderedKeys = [];
     var _showBlank = false;
-    var _updatePreference = true;
-    var _expanded = false;
     var _pendingChange = null;
     var _state;
     var _presets;
@@ -576,11 +575,9 @@ export function uiSectionRawTagEditor(context) {
         if (!arguments.length) return _presets;
         _presets = val;
         if (_presets && _presets.length && _presets[0].isFallback()) {
-            _expanded = true;
-            _updatePreference = false;
+            section.disclosureExpanded(true);
         } else {
-            _expanded = undefined;
-            _updatePreference = true;
+            section.disclosureExpanded(null);
         }
         return section;
     };
@@ -599,14 +596,6 @@ export function uiSectionRawTagEditor(context) {
             _entityIDs = val;
             _orderedKeys = [];
         }
-        return section;
-    };
-
-
-    section.expanded = function(val) {
-        if (!arguments.length) return _expanded;
-        _expanded = val;
-        _updatePreference = false;
         return section;
     };
 

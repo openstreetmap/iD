@@ -1,5 +1,5 @@
 import { dispatch as d3_dispatch } from 'd3-dispatch';
-import { event as d3_event, selectAll as d3_selectAll, select as d3_select } from 'd3-selection';
+import { event as d3_event, selectAll as d3_selectAll } from 'd3-selection';
 import deepEqual from 'fast-deep-equal';
 
 import { t, textDirection } from '../util/locale';
@@ -89,7 +89,7 @@ export function uiEntityEditor(context) {
                 }),
                 uiSectionEntityIssues(context),
                 uiSectionPresetFields(context).on('change', changeTags).on('revert', revertTags),
-                uiSectionRawTagEditor(context).on('change', changeTags),
+                uiSectionRawTagEditor('raw-tag-editor', context).on('change', changeTags),
                 uiSectionRawMemberEditor(context),
                 uiSectionRawMembershipEditor(context)
             ];

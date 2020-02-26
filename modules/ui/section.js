@@ -9,17 +9,26 @@ import { utilFunctor } from '../util';
 // Can be labeled and collapsible.
 export function uiSection(id, context) {
 
-    var _title;
-    var _expandedByDefault = utilFunctor(true);
+    var _classes = utilFunctor('');
     var _shouldDisplay;
     var _content;
-    var _disclosureContent;
 
     var _disclosure;
+    var _title;
+    var _expandedByDefault = utilFunctor(true);
+    var _disclosureContent;
+    var _disclosureExpanded;
+
     var _containerSelection = d3_select(null);
 
     var section = {
         id: id
+    };
+
+    section.classes = function(val) {
+        if (!arguments.length) return _classes;
+        _classes = utilFunctor(val);
+        return section;
     };
 
     section.title = function(val) {
@@ -52,6 +61,12 @@ export function uiSection(id, context) {
         return section;
     };
 
+    section.disclosureExpanded = function(val) {
+        if (!arguments.length) return _disclosureExpanded;
+        _disclosureExpanded = val;
+        return section;
+    };
+
     // may be called multiple times
     section.render = function(selection) {
 
@@ -62,7 +77,7 @@ export function uiSection(id, context) {
         var sectionEnter = _containerSelection
             .enter()
             .append('div')
-            .attr('class', 'section section-' + id);
+            .attr('class', 'section section-' + id + ' ' + (_classes && _classes() || ''));
 
         _containerSelection = sectionEnter
             .merge(_containerSelection);
@@ -103,6 +118,10 @@ export function uiSection(id, context) {
                         if (expanded) { selection.node().parentNode.scrollTop += 200; }
                     })*/
                     .content(_disclosureContent);
+            }
+            if (_disclosureExpanded !== undefined) {
+                _disclosure.expanded(_disclosureExpanded);
+                _disclosureExpanded = undefined;
             }
             selection
                 .call(_disclosure);

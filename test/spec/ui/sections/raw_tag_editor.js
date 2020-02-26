@@ -2,11 +2,11 @@ describe('iD.uiSectionRawTagEditor', function() {
     var taglist, element, entity, context;
 
     function render(tags) {
-        taglist = iD.uiSectionRawTagEditor(context)
+        taglist = iD.uiSectionRawTagEditor('raw-tag-editor', context)
             .entityIDs([entity.id])
             .presets([{isFallback: function() { return false; }}])
             .tags(tags)
-            .expanded(true);
+            .expandedByDefault(true);
 
         element = d3.select('body')
             .append('div')

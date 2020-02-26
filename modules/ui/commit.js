@@ -43,8 +43,9 @@ export function uiCommit(context) {
 
     var changesetEditor = uiChangesetEditor(context)
         .on('change', changeTags);
-    var rawTagEditor = uiSectionRawTagEditor(context)
-        .on('change', changeTags);
+    var rawTagEditor = uiSectionRawTagEditor('changeset-tag-editor', context)
+        .on('change', changeTags)
+        .readOnlyTags(readOnlyTags);
     var commitChanges = uiSectionChanges(context);
     var commitWarnings = uiCommitWarnings(context);
 
@@ -393,11 +394,8 @@ export function uiCommit(context) {
             .attr('class', 'modal-section tag-section raw-tag-editor')
             .merge(tagSection);
 
-        var expanded = !tagSection.selectAll('a.hide-toggle.expanded').empty();
         tagSection
             .call(rawTagEditor
-                .expanded(expanded)
-                .readOnlyTags(readOnlyTags)
                 .tags(Object.assign({}, _changeset.tags))   // shallow copy
                 .render
             );
@@ -418,12 +416,10 @@ export function uiCommit(context) {
             var rr = requestReviewInput.property('checked');
             updateChangeset({ review_requested: (rr ? 'yes' : undefined) });
 
-            var expanded = !tagSection.selectAll('a.hide-toggle.expanded').empty();
             tagSection
                 .call(rawTagEditor
-                    .expanded(expanded)
-                    .readOnlyTags(readOnlyTags)
                     .tags(Object.assign({}, _changeset.tags))   // shallow copy
+                    .render
                 );
         }
     }

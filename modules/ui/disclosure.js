@@ -10,14 +10,21 @@ import { textDirection } from '../util/locale';
 
 export function uiDisclosure(context, key, expandedDefault) {
     var dispatch = d3_dispatch('toggled');
-    var _preference = (context.storage('disclosure.' + key + '.expanded'));
-    var _expanded = (_preference === null ? !!expandedDefault : (_preference === 'true'));
+    var _expanded;
     var _title = utilFunctor('');
     var _updatePreference = true;
     var _content = function () {};
 
 
     var disclosure = function(selection) {
+
+        if (_expanded === undefined || _expanded === null) {
+            // loading _expanded here allows it to be reset by calling `disclosure.expanded(null)`
+
+            var preference = context.storage('disclosure.' + key + '.expanded');
+            _expanded = preference === null ? !!expandedDefault : (preference === 'true');
+        }
+
         var hideToggle = selection.selectAll('.hide-toggle-' + key)
             .data([0]);
 

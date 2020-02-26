@@ -2465,17 +2465,17 @@ img.tag-reference-wiki-image {
     position: relative;
     width: 100%;
 }
-.section-raw-tag-editor .tag-reference-body {
+.raw-tag-editor .tag-reference-body {
     width: 100%;
 }
-.section-raw-tag-editor .tag-row.readonly .tag-reference-body {
+.raw-tag-editor .tag-row.readonly .tag-reference-body {
     background: #f6f6f6;
     color: #333;
 }
-.section-raw-tag-editor .tag-row:not(:last-child) .tag-reference-body.expanded {
+.raw-tag-editor .tag-row:not(:last-child) .tag-reference-body.expanded {
     border-bottom: 1px solid #ccc;
 }
-.section-raw-tag-editor .tag-row.readonly .tag-reference-body.expanded {
+.raw-tag-editor .tag-row.readonly .tag-reference-body.expanded {
     border-top: 1px solid #ccc;
 }
 
@@ -2806,11 +2806,11 @@ input.key-trap {
 }
 
 /* custom data editor - no info/delete buttons */
-.data-editor.section-raw-tag-editor .tag-row button {
+.data-editor.raw-tag-editor .tag-row button {
     display: none;
 }
-.data-editor.section-raw-tag-editor .tag-row .key-wrap,
-.data-editor.section-raw-tag-editor .tag-row .value-wrap {
+.data-editor.raw-tag-editor .tag-row .key-wrap,
+.data-editor.raw-tag-editor .tag-row .value-wrap {
     width: 50%;
 }
 

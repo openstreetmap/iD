@@ -11,7 +11,9 @@ import { uiTooltipHtml } from './tooltipHtml';
 export function uiDataEditor(context) {
     var dataHeader = uiDataHeader();
     var quickLinks = uiQuickLinks();
-    var rawTagEditor = uiSectionRawTagEditor(context);
+    var rawTagEditor = uiSectionRawTagEditor('custom-data-tag-editor', context)
+        .expandedByDefault(true)
+        .readOnlyTags([/./]);
     var _datum;
 
 
@@ -77,8 +79,6 @@ export function uiDataEditor(context) {
             .attr('class', 'raw-tag-editor data-editor')
             .merge(rte)
             .call(rawTagEditor
-                .expanded(true)
-                .readOnlyTags([/./])
                 .tags((_datum && _datum.properties) || {})
                 .state('hover')
                 .render
