@@ -731,6 +731,10 @@
     "replace": {"man_made": "petroleum_well", "substance": "oil"}
   },
   {
+    "old": {"man_made": "telephone_exchange"},
+    "replace": {"telecom": "exchange"}
+  },
+  {
     "old": {"man_made": "village_pump"},
     "replace": {"man_made": "water_well"}
   },

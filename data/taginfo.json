@@ -2112,6 +2112,7 @@
     {"key": "man_made", "value": "fuel_storage_tank", "description": "🄳 ➜ man_made=storage_tank + content=fuel"},
     {"key": "man_made", "value": "oil_tank", "description": "🄳 ➜ man_made=storage_tank + content=oil"},
     {"key": "man_made", "value": "oil_well", "description": "🄳 ➜ man_made=petroleum_well + substance=oil"},
+    {"key": "man_made", "value": "telephone_exchange", "description": "🄳 ➜ telecom=exchange"},
     {"key": "man_made", "value": "village_pump", "description": "🄳 ➜ man_made=water_well"},
     {"key": "man_made", "value": "wastewater_tank", "description": "🄳 ➜ man_made=storage_tank + content=wastewater"},
     {"key": "man_made", "value": "water_tank", "description": "🄳 ➜ man_made=storage_tank + content=water"},
