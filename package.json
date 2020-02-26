@@ -39,7 +39,7 @@
     "translations": "node scripts/update_locales.js"
   },
   "dependencies": {
-    "@ideditor/country-coder": "^3.1.0",
+    "@ideditor/country-coder": "^3.2.0",
     "@ideditor/location-conflation": "~0.3.0",
     "@mapbox/sexagesimal": "1.2.0",
     "@mapbox/togeojson": "0.16.0",
