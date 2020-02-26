@@ -212,6 +212,10 @@
     "replace": {"oneway:bicycle": "$1"}
   },
   {
+    "old": {"bridge": "1"},
+    "replace": {"bridge": "yes"}
+  },
+  {
     "old": {"building": "entrance"},
     "replace": {"entrance": "*"}
   },

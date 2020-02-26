@@ -1999,6 +1999,7 @@
     {"key": "barrier", "value": "wire_fence", "description": "🄳 ➜ barrier=fence + fence_type=wire"},
     {"key": "barrier", "value": "wood_fence", "description": "🄳 ➜ barrier=fence + fence_type=wood"},
     {"key": "bicycle:oneway", "description": "🄳 ➜ oneway:bicycle=*"},
+    {"key": "bridge", "value": "1", "description": "🄳 ➜ bridge=yes"},
     {"key": "building", "value": "family_house", "description": "🄳 ➜ building=house"},
     {"key": "building", "value": "home", "description": "🄳 ➜ building=house"},
     {"key": "building", "value": "household", "description": "🄳 ➜ building=house"},
