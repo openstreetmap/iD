@@ -2423,6 +2423,9 @@ en:
       target:
         # target=*
         label: Target
+      telecom/medium:
+        # 'telecom:medium=*'
+        label: Medium
       tidal:
         # tidal=*
         label: Tidal
@@ -8250,6 +8253,11 @@ en:
         name: Data Center
         # 'terms: computer systems storage,information technology,server farm,the cloud,telecommunications'
         terms: '<translate with synonyms or related terms for ''Data Center'', separated by commas>'
+      telecom/exchange:
+        # telecom=exchange
+        name: Telecom Exchange
+        # 'terms: telecommunications,telephone exchange,telephone switch'
+        terms: '<translate with synonyms or related terms for ''Telecom Exchange'', separated by commas>'
       tourism:
         # tourism=*
         name: Tourism Feature

@@ -4635,6 +4635,9 @@
                 "target": {
                     "label": "Target"
                 },
+                "telecom/medium": {
+                    "label": "Medium"
+                },
                 "tidal": {
                     "label": "Tidal",
                     "terms": ""
@@ -9614,6 +9617,10 @@
                 "telecom/data_center": {
                     "name": "Data Center",
                     "terms": "computer systems storage,information technology,server farm,the cloud,telecommunications"
+                },
+                "telecom/exchange": {
+                    "name": "Telecom Exchange",
+                    "terms": "telecommunications,telephone exchange,telephone switch"
                 },
                 "tourism/alpine_hut": {
                     "name": "Alpine Hut",

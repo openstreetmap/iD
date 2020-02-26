@@ -419,6 +419,7 @@
   "tactile_paving": {"key": "tactile_paving", "type": "check", "label": "Tactile Paving"},
   "takeaway": {"key": "takeaway", "type": "combo", "label": "Takeaway", "placeholder": "Yes, No, Takeaway Only...", "strings": {"options": {"yes": "Yes", "no": "No", "only": "Takeaway Only"}}, "terms": ["take out", "takeout"]},
   "target": {"key": "target", "type": "combo", "label": "Target"},
+  "telecom/medium": {"key": "telecom:medium", "type": "combo", "label": "Medium"},
   "tidal": {"key": "tidal", "type": "check", "label": "Tidal"},
   "to": {"key": "to", "type": "text", "label": "To"},
   "toilets": {"key": "toilets", "type": "check", "label": "Toilets"},
