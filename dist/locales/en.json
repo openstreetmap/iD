@@ -8036,7 +8036,7 @@
                     "terms": "air force,army,base,fight,force,guard,marine,navy,troop,war"
                 },
                 "military/checkpoint": {
-                    "name": "Checkpoint",
+                    "name": "Military Checkpoint",
                     "terms": "air force,army,base,force,guard,marine,navy,troop,war"
                 },
                 "military/nuclear_explosion_site": {

@@ -6379,9 +6379,9 @@ en:
         terms: '<translate with synonyms or related terms for ''Military Bunker'', separated by commas>'
       military/checkpoint:
         # military=checkpoint
-        name: Checkpoint
+        name: Military Checkpoint
         # 'terms: air force,army,base,force,guard,marine,navy,troop,war'
-        terms: '<translate with synonyms or related terms for ''Checkpoint'', separated by commas>'
+        terms: '<translate with synonyms or related terms for ''Military Checkpoint'', separated by commas>'
       military/nuclear_explosion_site:
         # military=nuclear_explosion_site
         name: Nuclear Explosion Site
