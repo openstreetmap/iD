@@ -4,7 +4,7 @@ import { geoExtent } from '../geo';
 import { modeBrowse } from '../modes/browse';
 import { svgIcon } from '../svg/icon';
 import { uiLoading } from './loading';
-
+import { uiTooltipHtml } from './tooltipHtml';
 
 export function uiGeolocate(context) {
     var geoOptions = { enableHighAccuracy: false, timeout: 6000 /* 6sec */ };
@@ -13,7 +13,6 @@ export function uiGeolocate(context) {
     var _position;
     var _extent;
     var _timeoutID;
-
 
     function click() {
         if (context.inIntro()) return;
@@ -39,7 +38,6 @@ export function uiGeolocate(context) {
         map.centerZoomEase(_extent.center(), Math.min(20, map.extentZoom(_extent)));
     }
 
-
     function success(geolocation) {
         _position = geolocation;
         var coords = _position.coords;
@@ -48,11 +46,9 @@ export function uiGeolocate(context) {
         finish();
     }
 
-
     function error() {
         finish();
     }
-
 
     function finish() {
         locating.close();  // unblock ui
@@ -60,16 +56,19 @@ export function uiGeolocate(context) {
         _timeoutID = undefined;
     }
 
-
     return function(selection) {
         if (!navigator.geolocation) return;
 
         selection
             .append('button')
-            .attr('title', t('geolocate.title'))
             .on('click', click)
             .call(svgIcon('#iD-icon-geolocate', 'light'))
             .call(tooltip()
-                .placement((textDirection === 'rtl') ? 'right' : 'left'));
+                .placement((textDirection === 'rtl') ? 'right' : 'left')
+                .html(true)
+                .title(uiTooltipHtml(t('geolocate.title'), t('geolocate.key')))
+            );
+
+        context.keybinding().on(t('geolocate.key'), click);
     };
 }

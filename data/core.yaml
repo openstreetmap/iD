@@ -535,6 +535,7 @@ en:
     search: Search worldwide...
     no_results_worldwide: No results found
   geolocate:
+    key: L
     title: Show My Location
     locating: "Locating, please wait..."
   inspector:
@@ -1974,6 +1975,7 @@ en:
         pan_more: "Pan map by one screenful"
         zoom: "Zoom in / Zoom out"
         zoom_more: "Zoom in / Zoom out by a lot"
+        geolocate: "Zoom to my location"
       help:
         title: "Help"
         help: "Show help/documentation"
