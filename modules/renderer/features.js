@@ -64,14 +64,14 @@ export function rendererFeatures(context) {
 
     function update() {
         if (!window.mocha) {
-            var q = utilStringQs(window.location.hash.substring(1));
+            var hash = utilStringQs(window.location.hash);
             var disabled = features.disabled();
             if (disabled.length) {
-                q.disable_features = disabled.join(',');
+                hash.disable_features = disabled.join(',');
             } else {
-                delete q.disable_features;
+                delete hash.disable_features;
             }
-            window.location.replace('#' + utilQsString(q, true));
+            window.location.replace('#' + utilQsString(hash, true));
             context.storage('disabled-features', disabled.join(','));
         }
         _hidden = features.hidden();
@@ -579,9 +579,9 @@ export function rendererFeatures(context) {
             storageDisabled.forEach(features.disable);
         }
 
-        var q = utilStringQs(window.location.hash.substring(1));
-        if (q.disable_features) {
-            var hashDisabled = q.disable_features.replace(/;/g, ',').split(',');
+        var hash = utilStringQs(window.location.hash);
+        if (hash.disable_features) {
+            var hashDisabled = hash.disable_features.replace(/;/g, ',').split(',');
             hashDisabled.forEach(features.disable);
         }
     };

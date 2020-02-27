@@ -30,7 +30,7 @@ function clamp(num, min, max) {
 
 
 export function rendererMap(context) {
-    var dispatch = d3_dispatch('move', 'drawn', 'crossEditableZoom');
+    var dispatch = d3_dispatch('move', 'drawn', 'crossEditableZoom', 'changeHighlighting', 'changeAreaFill');
     var projection = context.projection;
     var curtainProjection = context.curtainProjection;
     var drawLayers = svgLayers(projection, context);
@@ -181,6 +181,9 @@ export function rendererMap(context) {
                     dispatch.call('drawn', this, { full: false });
                 }
             });
+
+        // must call after surface init
+        updateAreaFill();
 
         context.on('enter.map',  function() {
             if (map.editableDataEnabled(true /* skip zoom check */) && !_isTransformed) {
@@ -978,6 +981,49 @@ export function rendererMap(context) {
         _minzoom = val;
         return map;
     };
+
+
+    map.toggleHighlightEdited = function() {
+        surface.classed('highlight-edited', !surface.classed('highlight-edited'));
+        map.pan([0,0]);  // trigger a redraw
+        dispatch.call('changeHighlighting', this);
+    };
+
+
+    map.areaFillOptions = ['wireframe', 'partial', 'full'];
+
+    map.activeAreaFill = function(val) {
+        if (!arguments.length) return context.storage('area-fill') || 'partial';
+
+        context.storage('area-fill', val);
+        if (val !== 'wireframe') {
+            context.storage('area-fill-toggle', val);
+        }
+        updateAreaFill();
+        map.pan([0,0]);  // trigger a redraw
+        dispatch.call('changeAreaFill', this);
+        return map;
+    };
+
+    map.toggleWireframe = function() {
+
+        var activeFill = map.activeAreaFill();
+
+        if (activeFill === 'wireframe') {
+            activeFill = context.storage('area-fill-toggle') || 'partial';
+        } else {
+            activeFill = 'wireframe';
+        }
+
+        map.activeAreaFill(activeFill);
+    };
+
+    function updateAreaFill() {
+        var activeFill = map.activeAreaFill();
+        map.areaFillOptions.forEach(function(opt) {
+            surface.classed('fill-' + opt, Boolean(opt === activeFill));
+        });
+    }
 
 
     map.layers = drawLayers;

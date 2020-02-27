@@ -3,33 +3,22 @@ import {
   select as d3_select
 } from 'd3-selection';
 
-import { dataEn } from '../../data';
 import { modeSelect } from '../modes/select';
 import { t } from '../util/locale';
-import { utilDisplayName, utilEntityOrMemberSelector, utilEntityRoot } from '../util';
+import { utilDisplayName, utilHighlightEntities, utilEntityRoot } from '../util';
 
 export function uiImproveOsmDetails(context) {
   let _qaItem;
 
+
   function issueDetail(d) {
-    const unknown = t('inspector.unknown');
-
-    if (!d) return unknown;
-
     if (d.desc) return d.desc;
-
-    const itemType = d.issueKey;
-    const et = dataEn.QA.improveOSM.error_types[itemType];
-
-    let detail;
-    if (et && et.description) {
-      detail = t(`QA.improveOSM.error_types.${itemType}.description`, d.replacements);
-    } else {
-      detail = unknown;
-    }
-
-    return detail;
+    const issueKey = d.issueKey;
+    d.replacements = d.replacements || {};
+    d.replacements.default = t('inspector.unknown');  // special key `default` works as a fallback string
+    return t(`QA.improveOSM.error_types.${issueKey}.description`, d.replacements);
   }
+
 
   function improveOsmDetails(selection) {
     const details = selection.selectAll('.error-details')
@@ -49,7 +38,7 @@ export function uiImproveOsmDetails(context) {
     // description
     const descriptionEnter = detailsEnter
       .append('div')
-        .attr('class', 'qa-details-description');
+        .attr('class', 'qa-details-subsection');
 
     descriptionEnter
       .append('h4')
@@ -76,15 +65,16 @@ export function uiImproveOsmDetails(context) {
         // Add click handler
         link
           .on('mouseenter', () => {
-            context.surface().selectAll(utilEntityOrMemberSelector([entityID], context.graph()))
-              .classed('hover', true);
+            utilHighlightEntities([entityID], true, context);
           })
           .on('mouseleave', () => {
-            context.surface().selectAll('.hover')
-              .classed('hover', false);
+            utilHighlightEntities([entityID], false, context);
           })
           .on('click', () => {
             d3_event.preventDefault();
+
+            utilHighlightEntities([entityID], false, context);
+
             const osmlayer = context.layers().layer('osm');
             if (!osmlayer.enabled()) {
               osmlayer.enabled(true);

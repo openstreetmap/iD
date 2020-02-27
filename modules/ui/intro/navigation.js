@@ -304,7 +304,7 @@ export function uiIntroNavigation(context, reveal) {
             }
         });
 
-        reveal('.inspector-body .preset-list-item.inspector-inner',
+        reveal('.entity-editor .preset-list-item',
             t('intro.navigation.preset_townhall', { preset: preset.name() }),
             { buttonText: t('intro.ok'), buttonCallback: onClick }
         );

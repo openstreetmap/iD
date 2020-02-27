@@ -140,7 +140,7 @@ export function uiPresetList(context) {
 
         var list = listWrap
             .append('div')
-            .attr('class', 'preset-list fillL cf')
+            .attr('class', 'preset-list')
             .call(drawList, context.presets().defaults(entityGeometries()[0], 36));
 
         context.features().on('change.preset-list', updateForFeatureHiddenState);

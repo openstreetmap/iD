@@ -6,6 +6,14 @@
     "tags": {
         "building": "farm_auxiliary"
     },
+    "terms": [
+        "agriculture",
+        "auxilary",
+        "chicken coop",
+        "farm auxiliary",
+        "pigsty",
+        "sty"
+    ],
     "matchScore": 0.5,
     "name": "Farm Building"
 }

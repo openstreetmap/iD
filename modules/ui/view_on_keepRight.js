@@ -24,7 +24,8 @@ export function uiViewOnKeepRight() {
       .append('a')
         .attr('class', 'view-on-keepRight')
         .attr('target', '_blank')
-        .attr('href', function(d) { return d; })
+        .attr('rel', 'noopener') // security measure
+        .attr('href', d => d)
         .call(svgIcon('#iD-icon-out-link', 'inline'));
 
     linkEnter

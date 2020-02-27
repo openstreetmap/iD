@@ -192,10 +192,7 @@ export function coreValidator(context) {
 
         // gather the issues that are common to all the entities
         var issueIDs = entityIDs.reduce(function(acc, entityID) {
-            var entityIssueIDs = cache.issuesByEntityID[entityID];
-            if (!entityIssueIDs) {
-                return acc;
-            }
+            var entityIssueIDs = cache.issuesByEntityID[entityID] || new Set();
             if (!acc) {
                 return new Set(entityIssueIDs);
             }

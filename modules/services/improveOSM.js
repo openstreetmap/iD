@@ -118,6 +118,8 @@ function preventCoincident(loc, bumpUp) {
 }
 
 export default {
+  title: 'improveOSM',
+
   init(context) {
     context.data().get('qa_data')
       .then(d => _impOsmData = d.improveOSM);
@@ -209,7 +211,7 @@ export default {
                 // One-ways can land on same segment in opposite direction
                 loc = preventCoincident(loc, false);
 
-                let d = new QAItem(loc, 'improveOSM', k, itemId, {
+                let d = new QAItem(loc, this, k, itemId, {
                   issueKey: k, // used as a category
                   identifier: { // used to post changes
                     wayId,
@@ -246,7 +248,7 @@ export default {
                 let loc = pointAverage(feature.points);
                 loc = preventCoincident(loc, false);
 
-                let d = new QAItem(loc, 'improveOSM', `${k}-${geoType}`, itemId, {
+                let d = new QAItem(loc, this, `${k}-${geoType}`, itemId, {
                   issueKey: k,
                   identifier: { x, y }
                 });
@@ -282,7 +284,7 @@ export default {
                 const via_node = ids[3];
                 const to_way = ids[2].split(':')[1];
 
-                let d = new QAItem(loc, 'improveOSM', k, itemId, {
+                let d = new QAItem(loc, this, k, itemId, {
                   issueKey: k,
                   identifier: id,
                   objectId: via_node,
@@ -323,39 +325,33 @@ export default {
     });
   },
 
-  getComments(d, callback) {
+  getComments(item) {
     // If comments already retrieved no need to do so again
-    if (d.comments) {
-      if (callback) callback({}, d);
-      return;
+    if (item.comments) {
+      return Promise.resolve(item);
     }
 
-    const key = d.issueKey;
+    const key = item.issueKey;
     let qParams = {};
 
     if (key === 'ow') {
-      qParams = d.identifier;
+      qParams = item.identifier;
     } else if (key === 'mr') {
-      qParams.tileX = d.identifier.x;
-      qParams.tileY = d.identifier.y;
+      qParams.tileX = item.identifier.x;
+      qParams.tileY = item.identifier.y;
     } else if (key === 'tr') {
-      qParams.targetId = d.identifier;
+      qParams.targetId = item.identifier;
     }
 
     const url = `${_impOsmUrls[key]}/retrieveComments?` + utilQsString(qParams);
-    const after = data => {
-      // Assign directly for immediate use in the callback
+    const cacheComments = data => {
+      // Assign directly for immediate use afterwards
       // comments are served newest to oldest
-      d.comments = data.comments ? data.comments.reverse() : [];
-      this.replaceItem(d);
-      if (callback) callback(null, d);
+      item.comments = data.comments ? data.comments.reverse() : [];
+      this.replaceItem(item);
     };
 
-    d3_json(url)
-      .then(after)
-      .catch(err => {
-        if (callback) callback(err.message);
-      });
+    return d3_json(url).then(cacheComments).then(() => item);
   },
 
   postUpdate(d, callback) {

@@ -28,7 +28,7 @@ export function uiSuccess(context) {
       .then(vals => {
         if (_oci) return _oci;
 
-        const ociResources = vals[0];
+        const ociResources = vals[0].resources;
         const loco = new LocationConflation(vals[1]);
         let ociFeatures = {};
 

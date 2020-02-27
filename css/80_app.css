@@ -417,6 +417,7 @@ button[disabled].action:hover {
 
 .icon.light {
     color: #fff;
+    fill: currentColor;
 }
 .icon.created {
     color: #00ca07;
@@ -438,19 +439,6 @@ button[disabled].action:hover {
 
 .icon-annotation {
     color: #333;
-}
-
-.notification-badge {
-    display: block;
-    position: absolute;
-    width: 10px;
-    height: 10px;
-    right: 7px;
-    top: 9px;
-}
-
-.notification-badge.hide {
-    display: none;
 }
 
 
@@ -556,7 +544,7 @@ button.save .count {
     text-align: center;
 }
 
-.help-wrap svg.icon.pre-text.add-note,
+.help-pane svg.icon.pre-text.add-note,
 button.add-note svg.icon {
     height: 15px;
     width: 15px;
@@ -573,7 +561,7 @@ button.add-note svg.icon {
     margin-left: 4px;
     margin-right: unset;
 }
-.help-wrap svg.icon.pre-text.add-note {
+.help-pane svg.icon.pre-text.add-note {
     margin-left: 3px;
     margin-right: 3px;
 }
@@ -854,14 +842,12 @@ a.hide-toggle {
 .entity-editor-pane .inspector-body {
     top: 60px;
 }
-/* preserve extra space at bottom of inspector to allow for dropdown options - #5280 */
-.entity-editor .section:last-child {
-    margin-bottom: 150px;
+.entity-editor {
+    padding: 20px;
 }
-
-.inspector-inner {
-    padding: 20px 20px 5px 20px;
-    position: relative;
+/* preserve extra space at bottom of inspector to allow for dropdown options - #5280 */
+.entity-editor > div:last-child {
+    margin-bottom: 150px;
 }
 
 #sidebar .search-header .icon {
@@ -888,6 +874,10 @@ a.hide-toggle {
     text-indent: 30px;
     font-size: 18px;
     font-weight: bold;
+}
+
+.section {
+    margin-bottom: 30px;
 }
 
 
@@ -971,13 +961,13 @@ a.hide-toggle {
     padding-left: 0;
     padding-right: 10px;
 }
-.selected-features .feature-list {
+.section-selected-features .feature-list {
     border: 1px solid #ccc;
     border-radius: 4px;
     overflow: hidden;
     margin-top: 5px;
 }
-.selected-features .feature-list-item:last-child {
+.section-selected-features .feature-list-item:last-child {
     border: none;
 }
 
@@ -1179,12 +1169,10 @@ a.hide-toggle {
 
 .preset-list-button .label-inner {
     width: 100%;
+    line-height: 1.35em;
 }
 .preset-list-button .label-inner .namepart {
-    height: 17px;
-    white-space: nowrap;
     text-overflow: ellipsis;
-    overflow: hidden;
 }
 .preset-list-button .label-inner .namepart:nth-child(2) {
     font-weight: normal;
@@ -1283,24 +1271,13 @@ a.hide-toggle {
 
 /* Entity/Preset Editor
 ------------------------------------------------------- */
-.entity-issues,
-.preset-editor {
-    overflow: hidden;
-    padding: 10px 0px 5px 0px;
-}
-.entity-issues a.hide-toggle,
-.preset-editor a.hide-toggle {
-    margin: 0 20px 5px 20px;
-}
-.entity-issues .disclosure-wrap-entity_issues,
-.preset-editor .form-fields-container {
+.section .grouped-items-area {
     padding: 10px;
-    margin: 0 10px 10px 10px;
+    margin: 0 -10px 10px -10px;
     border-radius: 8px;
     background: #ececec;
 }
-.entity-issues .disclosure-wrap-entity_issues:empty,
-.preset-editor .form-fields-container:empty {
+.section .grouped-items-area:empty {
     display: none;
 }
 .preset-list-item a.hide-toggle {
@@ -2257,11 +2234,8 @@ div.combobox {
 /* More Fields dropdown
 ------------------------------------------------------- */
 .more-fields {
-    padding: 0 20px 20px 20px;
+    margin-top: 10px;
     font-weight: bold;
-}
-.changeset-editor .more-fields {
-    padding: 15px 20px 0 20px;
 }
 
 .more-fields label {
@@ -2294,7 +2268,6 @@ div.combobox {
     flex-flow: row nowrap;
     flex-direction: row-reverse;
     margin-top: -25px;
-    padding: 0 3px;
 }
 button.raw-tag-option {
     flex: 0 0 20px;
@@ -2510,26 +2483,30 @@ img.tag-reference-wiki-image {
 
 /* Raw Member / Membership Editor
 ------------------------------------------------------- */
+.section-raw-member-editor .member-list:empty,
+.section-raw-membership-editor .member-list:empty {
+    display: none;
+}
 
-.raw-member-editor .member-list,
-.raw-membership-editor .member-list {
+.section-raw-member-editor .member-list,
+.section-raw-membership-editor .member-list {
     padding-top: 10px;
 }
-.raw-member-editor .member-list li,
-.raw-membership-editor .member-list li {
+.section-raw-member-editor .member-list li,
+.section-raw-membership-editor .member-list li {
     position: relative;
     border-radius: 4px;
     margin: 0;
     padding-bottom: 10px;
 }
-.raw-member-editor .member-row .member-entity-name,
-.raw-membership-editor .member-row .member-entity-name {
+.section-raw-member-editor .member-row .member-entity-name,
+.section-raw-membership-editor .member-row .member-entity-name {
     font-weight: normal;
     padding-left: 10px;
 }
 
-[dir='rtl'] .raw-member-editor .member-row .member-entity-name,
-[dir='rtl'] .raw-membership-editor .member-row .member-entity-name {
+[dir='rtl'] .section-raw-member-editor .member-row .member-entity-name,
+[dir='rtl'] .section-raw-membership-editor .member-row .member-entity-name {
     padding-left:0;
     padding-right: 10px;
 }
@@ -2556,7 +2533,7 @@ img.tag-reference-wiki-image {
     border: 0;
 }
 
-.raw-member-editor .member-row.dragging {
+.section-raw-member-editor .member-row.dragging {
     opacity: 0.75;
     z-index: 3000;
     /*
@@ -2743,11 +2720,6 @@ input.key-trap {
     display: flex;
     flex-direction: column;
 }
-.qa-details-description {
-    margin-bottom: 10px;
-    display: flex;
-    flex-direction: column;
-}
 .qa-details-description-text::first-letter {
     text-transform: capitalize;
 }
@@ -2755,8 +2727,13 @@ input.key-trap {
     text-transform: none;  /* #5877 */
 }
 .qa-details-subsection h4 {
-    padding-top: 10px;
-    padding-bottom: 0;
+    padding-bottom: 2px;
+}
+.qa-details-subsection:not(:last-child) {
+    margin-bottom: 10px;
+}
+.qa-details-subsection:empty {
+    display: none;
 }
 .qa-details-container code {
     padding: .2em .4em;
@@ -2765,12 +2742,6 @@ input.key-trap {
     font-family: monospace;
     background-color: rgba(27,31,35,.05);
     border-radius: 3px;
-}
-.qa-details-container + .translation-link {
-    margin-top: 5px;
-    display: flex;
-    flex-direction: row;
-    justify-content: flex-end;
 }
 
 .note-save .new-comment-input,
@@ -2905,8 +2876,10 @@ div.full-screen > button:hover {
 }
 
 
-/* Zoom Buttons
+/* Map Controls
 ------------------------------------------------------- */
+
+/* Zoom in/out buttons */
 .zoombuttons > button.zoom-in {
     border-radius: 4px 0 0 0;
 }
@@ -2914,9 +2887,7 @@ div.full-screen > button:hover {
     border-radius: 0 4px 0 0;
 }
 
-
-/* Geolocate Button
-------------------------------------------------------- */
+/* Geolocate button */
 .geolocate-control {
     margin-bottom: 10px;
 }
@@ -2925,6 +2896,12 @@ div.full-screen > button:hover {
 }
 [dir='rtl'] .geolocate-control > button {
     border-radius: 0 0 4px 0;
+}
+
+/* Zoom to selection button */
+.zoom-to-selection-control .icon {
+    width: 22px;
+    height: 22px;
 }
 
 
@@ -3193,10 +3170,6 @@ button.autofix.action.active {
     /*fill: #597be7;*/
 }
 
-.notification-badge.warning {
-    color: #ffdf5c;
-}
-
 
 /* error styles */
 .errors-list,
@@ -3238,10 +3211,6 @@ button.autofix.action.active {
     fill: #840c00;
     /*color: #597be7;*/
     /*fill: #597be7;*/
-}
-
-.notification-badge.error {
-    color: #ff0c05;
 }
 
 
@@ -3287,14 +3256,14 @@ button.autofix.action.active {
     padding: 5px;
 }
 
-.issues-none .box {
+.section-issues-status .box {
     border-radius: 4px;
     border: 1px solid #72d979;
     background: #c6ffca;
     padding: 5px !important;
     display: flex;
 }
-.issues-none .icon {
+.section-issues-status .icon {
     color: #05ac10;
 }
 
@@ -3309,42 +3278,42 @@ input.square-degrees-input {
 
 
 /* Entity Issues List */
-.entity-issues .issue-container .issue {
+.section-entity-issues .issue-container .issue {
     border-radius: 4px;
     border: 1px solid #ccc;
     background: #f6f6f6;
 }
-.entity-issues .issue-container:not(.active) .issue-text:hover,
-.entity-issues .issue-container:not(.active) .issue-info-button:hover {
+.section-entity-issues .issue-container:not(.active) .issue-text:hover,
+.section-entity-issues .issue-container:not(.active) .issue-info-button:hover {
     background: #f1f1f1;
 }
-.entity-issues .issue .issue-label .issue-text {
+.section-entity-issues .issue .issue-label .issue-text {
     padding-right: 10px;
 }
-[dir='rtl'] .entity-issues .issue .issue-label .issue-text {
+[dir='rtl'] .section-entity-issues .issue .issue-label .issue-text {
     padding-right: unset;
     padding-left: 10px;
 }
 
-.entity-issues .issue-container.active .issue-label .issue-text {
+.section-entity-issues .issue-container.active .issue-label .issue-text {
     font-weight: bold;
 }
-.entity-issues .issue-container:not(:last-of-type) {
+.section-entity-issues .issue-container:not(:last-of-type) {
     margin-bottom: 5px;
 }
-.entity-issues .issue-container.active:not(:first-of-type) {
+.section-entity-issues .issue-container.active:not(:first-of-type) {
     margin-top: 10px;
 }
-.entity-issues .issue-container.active:not(:last-of-type) {
+.section-entity-issues .issue-container.active:not(:last-of-type) {
     margin-bottom: 10px;
 }
 
 /* fixes */
-.entity-issues .issue-fix-list {
+.section-entity-issues .issue-fix-list {
     border-top: 1px solid;
     border-color: inherit;
 }
-.entity-issues .issue-container.active .issue-fix-list:empty {
+.section-entity-issues .issue-container.active .issue-fix-list:empty {
     display: none;
 }
 
@@ -3592,7 +3561,7 @@ li.issue-fix-item:not(.actionable) .fix-icon {
     z-index: 10;
 }
 
-.map-pane.help-wrap {
+.map-pane.help-pane {
     width: 600px;
 }
 
@@ -3625,19 +3594,19 @@ li.issue-fix-item:not(.actionable) .fix-icon {
     padding: 10px 20px 20px 40px;
 }
 
-.pane-content > div {
+.help-pane .pane-content > div {
     padding-bottom: 15px;
 }
 
 
 /* Help
 ------------------------------------------------------- */
-.help-wrap p {
+.help-pane p {
     font-size: 15px;
     margin-bottom: 20px;
 }
 
-.help-wrap .left-content .body p code {
+.help-pane .left-content .body p code {
     padding: 3px 4px;
     font-size: 12px;
     color: #555;
@@ -3650,14 +3619,14 @@ li.issue-fix-item:not(.actionable) .fix-icon {
     box-shadow: inset 0 -1px 0 #bbb;
 }
 
-.help-wrap .left-content .icon.pre-text {
+.help-pane .left-content .icon.pre-text {
     vertical-align: text-top;
     margin-right: 0;
     margin-left: 0;
     display: inline-block;
 }
 
-.help-wrap .toc {
+.help-pane .toc {
     width: 40%;
     float: right;
     margin-left: 20px;
@@ -3665,68 +3634,68 @@ li.issue-fix-item:not(.actionable) .fix-icon {
     padding-left: 5px;
 }
 
-.help-wrap .toc li a,
-.help-wrap .nav a {
+.help-pane .toc li a,
+.help-pane .nav a {
     display: block;
     border: 1px solid #ccc;
     padding: 5px 10px;
 }
 
-.help-wrap .toc li a {
+.help-pane .toc li a {
     border-bottom: 0;
 }
 
-.help-wrap .toc li a:hover,
-.help-wrap .nav a:hover {
+.help-pane .toc li a:hover,
+.help-pane .nav a:hover {
     background: #ececec;
 }
 
-.help-wrap .toc li a.selected {
+.help-pane .toc li a.selected {
     background: #e8ebff;
 }
 
-.help-wrap .toc li:first-child a {
+.help-pane .toc li:first-child a {
     border-radius: 4px 4px 0 0;
 }
 
-.help-wrap .toc li:nth-last-child(3) a {
+.help-pane .toc li:nth-last-child(3) a {
     border-bottom: 1px solid #ccc;
     border-radius: 0 0 4px 4px
 }
 
-.help-wrap .toc li.shortcuts a,
-.help-wrap .toc li.walkthrough a {
+.help-pane .toc li.shortcuts a,
+.help-pane .toc li.walkthrough a {
     overflow: hidden;
     margin-top: 10px;
     border-bottom: 1px solid #ccc;
     border-radius: 4px;
 }
 
-.help-wrap .toc li.walkthrough a {
+.help-pane .toc li.walkthrough a {
     text-align: center;
 }
 
-.help-wrap .nav {
+.help-pane .nav {
     position: relative;
     padding-bottom: 30px;
 }
 
-.help-wrap .nav a {
+.help-pane .nav a {
     float: left;
     width: 50%;
     text-align: center;
 }
 
-.help-wrap .nav a:first-child {
+.help-pane .nav a:first-child {
     border-radius: 4px 0 0 4px;
 }
 
-.help-wrap .nav a:last-child:not(:only-child) {
+.help-pane .nav a:last-child:not(:only-child) {
     border-radius: 0 4px 4px 0;
     border-left: 0;
 }
 
-.help-wrap .nav a:only-child {
+.help-pane .nav a:only-child {
     width: 100%;
     border-radius: 4px;
 }
@@ -3734,7 +3703,7 @@ li.issue-fix-item:not(.actionable) .fix-icon {
 
 /* Inspector (hover styles)
 ------------------------------------------------------- */
-.inspector-hover .entity-issues .issue-container .issue .issue-label,
+.inspector-hover .section-entity-issues .issue-container .issue .issue-label,
 .inspector-hover .form-field-input-wrap .label,
 .inspector-hover .form-field-input-multicombo .chiplist,
 .inspector-hover .form-field-button,
@@ -3754,7 +3723,7 @@ li.issue-fix-item:not(.actionable) .fix-icon {
 .inspector-hover a,
 .inspector-hover .form-field-input-multicombo .chip,
 .inspector-hover .form-field-input-check span,
-.inspector-hover .entity-issues .issue .icon {
+.inspector-hover .section-entity-issues .issue .icon {
     color: #666;
 }
 
@@ -3765,8 +3734,8 @@ li.issue-fix-item:not(.actionable) .fix-icon {
 
 /* no scrollbars */
 .inspector-hover div {
-    overflow-x: hidden;
-    overflow-y: hidden;
+    overflow-x: visible;
+    overflow-y: visible;
 }
 
 /* hide and remove from layout */
@@ -3778,9 +3747,9 @@ li.issue-fix-item:not(.actionable) .fix-icon {
 .inspector-hover .form-field-input-radio label,
 .inspector-hover .form-field-input-radio label span,
 .inspector-hover .form-field-input-radio label.remove .icon,
-.inspector-hover .inspector-inner .add-row,
-.inspector-hover .entity-issues .issue-container .issue-fix-list,
-.inspector-hover .entity-issues .issue-container .issue-info-button {
+.inspector-hover .add-row,
+.inspector-hover .section-entity-issues .issue-container .issue-fix-list,
+.inspector-hover .section-entity-issues .issue-container .issue-info-button {
     display: none;
 }
 
@@ -3798,17 +3767,17 @@ li.issue-fix-item:not(.actionable) .fix-icon {
 }
 
 /* Unstyle the active entity issue on hover */
-.inspector-hover .entity-issues .issue-container.active {
+.inspector-hover .section-entity-issues .issue-container.active {
     margin-top: 1px;
     margin-bottom: 1px;
 }
-.inspector-hover .entity-issues .issue-container * {
+.inspector-hover .section-entity-issues .issue-container * {
     border-color: #ccc !important;
 }
-.inspector-hover .entity-issues .issue-container.active .issue-label {
+.inspector-hover .section-entity-issues .issue-container.active .issue-label {
     border-bottom: 0;
 }
-.inspector-hover .entity-issues .issue-container.active .issue-label .issue-text {
+.inspector-hover .section-entity-issues .issue-container.active .issue-label .issue-text {
     font-weight: normal;
 }
 
@@ -4963,10 +4932,6 @@ svg.mouseclick use.right {
 .changeset-list li span.count {
     font-size: 10px;
     color: #555;
-}
-
-.mode-save .commit-section .changeset-list button {
-    border-left: 1px solid #ccc;
 }
 
 .changeset-list li span.count:before { content: '('; }

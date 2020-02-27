@@ -15,18 +15,18 @@ export function rendererPhotos(context) {
     function updateStorage() {
         if (window.mocha) return;
 
-        var q = utilStringQs(window.location.hash.substring(1));
+        var hash = utilStringQs(window.location.hash);
         var enabled = context.layers().all().filter(function(d) {
             return _layerIDs.indexOf(d.id) !== -1 && d.layer && d.layer.supported() && d.layer.enabled();
         }).map(function(d) {
             return d.id;
         });
         if (enabled.length) {
-            q.photo_overlay = enabled.join(',');
+            hash.photo_overlay = enabled.join(',');
         } else {
-            delete q.photo_overlay;
+            delete hash.photo_overlay;
         }
-        window.location.replace('#' + utilQsString(q, true));
+        window.location.replace('#' + utilQsString(hash, true));
     }
 
     photos.overlayLayerIDs = function() {
@@ -73,9 +73,9 @@ export function rendererPhotos(context) {
     };
 
     photos.init = function() {
-        var q = utilStringQs(window.location.hash.substring(1));
-        if (q.photo_overlay) {
-            var hashOverlayIDs = q.photo_overlay.replace(/;/g, ',').split(',');
+        var hash = utilStringQs(window.location.hash);
+        if (hash.photo_overlay) {
+            var hashOverlayIDs = hash.photo_overlay.replace(/;/g, ',').split(',');
             hashOverlayIDs.forEach(function(id) {
                 var layer = context.layers().layer(id);
                 if (layer) layer.enabled(true);

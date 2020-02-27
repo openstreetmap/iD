@@ -29,6 +29,15 @@ _Breaking changes, which may affect downstream projects or sites that embed iD, 
 [@xxxx]: https://github.com/xxxx
 -->
 
+# 2.17.2
+##### 2020-Feb-14
+
+#### :tada: New Features
+* Restore Maxar Imagery layers, using masked iD-specific connection keys ([#7355])
+
+[#7355]: https://github.com/openstreetmap/iD/issues/7355
+
+
 # 2.17.1
 ##### 2020-Jan-16
 
@@ -5340,8 +5349,8 @@ _Map traffic signals, stop signs, benches, crossings, street lamps, fountains, t
 ##### 2013-Nov-22
 * Support for loading GPX-files via url parameter (#1965)
 * Update osm-auth (#1904)
-* Update 3rd party dependencies (Lo-Dash, D3, RBush)
-* Build iD.Way.areaKeys from presets
+* Update 3rd party dependencies (Lodash, D3, RBush)
+* Build areaKeys from presets
 * Add public_transport, military, emankment presets
 * Reverse cardinal directions for relation member roles
 * Improved warning visibility (#1973)

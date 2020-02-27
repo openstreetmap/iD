@@ -245,6 +245,13 @@ These are separate translations for uniformity reasons and because some language
  may translate "type" differently in "type of aeroway" and "type of amenity", for
  example.
 
+**Why can't I find the Osmose QA layer translations?** The Osmose QA strings are
+ pulled in from the external Osmose API. You can contribute to the
+ [Osmose Transifex project](https://www.transifex.com/projects/p/osmose/)
+ and the results will be seen in iD once deployed.
+
+Note that if you want to add/update English translations in Osmose then you will
+ need to head on over to the [Osmose backend source code](https://github.com/osm-fr/osmose-backend).
 
 ## Adding New Strings for Translation or Updating Existing Strings
 

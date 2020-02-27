@@ -10,8 +10,18 @@ export function svgTagClasses() {
         'building:part', 'indoor'
     ];
     var statuses = [
-        'proposed', 'construction', 'disused', 'abandoned', 'dismantled',
-        'razed', 'demolished', 'obliterated', 'intermittent'
+        // nonexistent, might be built
+        'proposed', 'planned',
+        // under maintentance or between groundbreaking and opening
+        'construction',
+        // existent but not functional
+        'disused',
+        // dilapidated to nonexistent
+        'abandoned',
+        // nonexistent, still may appear in imagery
+        'dismantled', 'razed', 'demolished', 'obliterated',
+        // existent occasionally, e.g. stormwater drainage basin
+        'intermittent'
     ];
     var secondaries = [
         'oneway', 'bridge', 'tunnel', 'embankment', 'cutting', 'barrier',

@@ -7,7 +7,7 @@ import {
 import { modeSelect } from '../modes/select';
 import { t } from '../util/locale';
 import { services } from '../services';
-import { utilDisplayName, utilEntityOrMemberSelector } from '../util';
+import { utilDisplayName, utilHighlightEntities } from '../util';
 
 
 export function uiOsmoseDetails(context) {
@@ -50,7 +50,10 @@ export function uiOsmoseDetails(context) {
       div
         .append('p')
           .attr('class', 'qa-details-description-text')
-          .html(d => issueString(d, 'detail'));
+          .html(d => issueString(d, 'detail'))
+        .selectAll('a')
+          .attr('rel', 'noopener')
+          .attr('target', '_blank');
     }
 
     // Elements (populated later as data is requested)
@@ -74,7 +77,10 @@ export function uiOsmoseDetails(context) {
 
       div
         .append('p')
-          .html(d => issueString(d, 'fix'));
+          .html(d => issueString(d, 'fix'))
+        .selectAll('a')
+          .attr('rel', 'noopener')
+          .attr('target', '_blank');
     }
 
     // Common Pitfalls (musn't exist for every issue type)
@@ -89,22 +95,11 @@ export function uiOsmoseDetails(context) {
 
       div
         .append('p')
-          .html(d => issueString(d, 'trap'));
+          .html(d => issueString(d, 'trap'))
+        .selectAll('a')
+          .attr('rel', 'noopener')
+          .attr('target', '_blank');
     }
-
-    // Translation link below details container
-    selection
-      .append('div')
-        .attr('class', 'translation-link')
-      .append('a')
-        .attr('target', '_blank')
-        .attr('rel', 'noopener noreferrer') // security measure
-        .attr('href', 'https://www.transifex.com/openstreetmap-france/osmose')
-        .text(() => t('QA.osmose.translation'))
-      .append('svg')
-        .attr('class', 'icon inline')
-      .append('use')
-        .attr('href', '#iD-icon-out-link');
 
     // Save current item to check if UI changed by time request resolves
     const thisItem = _qaItem;
@@ -127,7 +122,10 @@ export function uiOsmoseDetails(context) {
 
           detailsDiv
             .append('p')
-              .html(d => d.detail);
+              .html(d => d.detail)
+            .selectAll('a')
+              .attr('rel', 'noopener')
+              .attr('target', '_blank');
         }
 
         // Create list of linked issue elements
@@ -151,15 +149,16 @@ export function uiOsmoseDetails(context) {
               // Add click handler
               link
                 .on('mouseenter', () => {
-                  context.surface().selectAll(utilEntityOrMemberSelector([entityID], context.graph()))
-                    .classed('hover', true);
+                  utilHighlightEntities([entityID], true, context);
                 })
                 .on('mouseleave', () => {
-                  context.surface().selectAll('.hover')
-                    .classed('hover', false);
+                  utilHighlightEntities([entityID], false, context);
                 })
                 .on('click', () => {
                   d3_event.preventDefault();
+
+                  utilHighlightEntities([entityID], false, context);
+
                   const osmlayer = context.layers().layer('osm');
                   if (!osmlayer.enabled()) {
                     osmlayer.enabled(true);

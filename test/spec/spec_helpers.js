@@ -7,6 +7,9 @@ for (var k in iD.services) { delete iD.services[k]; }
 
 // Run without data for speed (tests which need data can set it up themselves)
 
+// Initializing `coreContext` will try loading the locale data and English locale strings:
+iD.data.locales = { en: { rtl: false, languageNames: {}, scriptNames: {} }};
+iD.data.locale_en = { en: {} };
 // Initializing `coreContext` initializes `_background`, which tries loading:
 iD.data.imagery = [];
 // Initializing `coreContext` initializes `_presets`, which tries loading:
@@ -23,7 +26,7 @@ iD.data.discarded = {};
 
 
 mocha.setup({
-    timeout: 60000,  // 1 minute
+    timeout: 5000,  // 5 sec
     ui: 'bdd',
     globals: [
         '__onresize.tail-size',

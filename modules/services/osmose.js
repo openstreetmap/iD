@@ -3,6 +3,8 @@ import RBush from 'rbush';
 import { dispatch as d3_dispatch } from 'd3-dispatch';
 import { json as d3_json } from 'd3-fetch';
 
+import marked from 'marked';
+
 import { currentLocale } from '../util/locale';
 import { geoExtent, geoVecAdd } from '../geo';
 import { QAItem } from '../osm';
@@ -61,6 +63,8 @@ function preventCoincident(loc) {
 }
 
 export default {
+  title: 'osmose',
+
   init(context) {
     context.data().get('qa_data')
       .then(d => {
@@ -135,7 +139,7 @@ export default {
                 let loc = issue.geometry.coordinates; // lon, lat
                 loc = preventCoincident(loc);
 
-                let d = new QAItem(loc, 'osmose', itemType, id, { item });
+                let d = new QAItem(loc, this, itemType, id, { item });
 
                 // Setting elems here prevents UI detail requests
                 if (item === 8300 || item === 8360) {
@@ -170,7 +174,7 @@ export default {
       issue.elems = data.elems.map(e => e.type.substring(0,1) + e.id);
 
       // Some issues have instance specific detail in a subtitle
-      issue.detail = data.subtitle;
+      issue.detail = marked(data.subtitle);
 
       this.replaceItem(issue);
     };
@@ -192,12 +196,6 @@ export default {
     if (!(locale in _cache.strings)) {
       _cache.strings[locale] = {};
     }
-
-    const format = string => {
-      // Some strings contain markdown syntax
-      string = string.replace(/\[((?:.|\n)+?)\]\((.+?)\)/g, '<a href="$2">$1</a>');
-      return string.replace(/`(.+?)`/g, '<code>$1</code>');
-    };
 
     // Only need to cache strings for supported issue types
     // Using multiple individual item + class requests to reduce fetched data size
@@ -229,11 +227,12 @@ export default {
         // If string exists, value is an object with key 'auto' for string
         const { title, detail, fix, trap } = cl;
 
+        // Osmose titles shouldn't contain markdown
         let issueStrings = {};
         if (title) issueStrings.title = title.auto;
-        if (detail) issueStrings.detail = format(detail.auto);
-        if (trap) issueStrings.trap = format(trap.auto);
-        if (fix) issueStrings.fix = format(fix.auto);
+        if (detail) issueStrings.detail = marked(detail.auto);
+        if (trap) issueStrings.trap = marked(trap.auto);
+        if (fix) issueStrings.fix = marked(fix.auto);
 
         _cache.strings[locale][itemType] = issueStrings;
       };
@@ -331,5 +330,9 @@ export default {
   // Used to populate `closed:osmose:*` changeset tags
   getClosedCounts() {
     return _cache.closed;
+  },
+
+  itemURL(item) {
+    return `https://osmose.openstreetmap.fr/error/${item.id}`;
   }
 };

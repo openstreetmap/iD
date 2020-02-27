@@ -30,6 +30,7 @@ let referencedScripts = [];
 
 const languageInfo = getLangNamesInNativeLang();
 fs.writeFileSync('data/languages.json', prettyStringify(languageInfo, { maxLength: 200 }));
+fs.writeFileSync('dist/data/languages.min.json', JSON.stringify(languageInfo));
 
 let shortcuts = [];
 dataShortcuts.forEach(tab => {
@@ -74,7 +75,7 @@ asyncMap(resources, getResource, (err, results) => {
       } else {
         let obj = {};
         obj[code] = allStrings[code];
-        fs.writeFileSync(outdir + code + '.json', JSON.stringify(obj, null, 4));
+        fs.writeFileSync(`${outdir}${code}.json`, JSON.stringify(obj));
 
         getLanguageInfo(code, (err, info) => {
           let rtl = info && info.rtl;
@@ -98,7 +99,8 @@ asyncMap(resources, getResource, (err, results) => {
         const keys = Object.keys(dataLocales).sort();
         let sortedLocales = {};
         keys.forEach(k => sortedLocales[k] = dataLocales[k]);
-        fs.writeFileSync('data/locales.json', prettyStringify({ dataLocales: sortedLocales }, { maxLength: 99999 }));
+        fs.writeFileSync('data/locales.json', prettyStringify(sortedLocales, { maxLength: 99999 }));
+        fs.writeFileSync('dist/data/locales.min.json', JSON.stringify(sortedLocales));
       }
     }
   );

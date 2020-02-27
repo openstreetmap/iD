@@ -1,4 +1,3 @@
-import { dataEn } from '../../data';
 import { svgIcon } from '../svg/icon';
 import { t } from '../util/locale';
 
@@ -6,23 +5,20 @@ import { t } from '../util/locale';
 export function uiKeepRightHeader() {
   let _qaItem;
 
+
   function issueTitle(d) {
-    const unknown = t('inspector.unknown');
-
-    if (!d) return unknown;
     const { itemType, parentIssueType } = d;
+    const unknown = t('inspector.unknown');
+    let replacements = d.replacements || {};
+    replacements.default = unknown;  // special key `default` works as a fallback string
 
-    const et = dataEn.QA.keepRight.errorTypes[itemType];
-    const pt = dataEn.QA.keepRight.errorTypes[parentIssueType];
-
-    if (et && et.title) {
-      return t(`QA.keepRight.errorTypes.${itemType}.title`);
-    } else if (pt && pt.title) {
-      return t(`QA.keepRight.errorTypes.${parentIssueType}.title`);
-    } else {
-      return unknown;
+    let title = t(`QA.keepRight.errorTypes.${itemType}.title`, replacements);
+    if (title === unknown) {
+      title = t(`QA.keepRight.errorTypes.${parentIssueType}.title`, replacements);
     }
+    return title;
   }
+
 
   function keepRightHeader(selection) {
     const header = selection.selectAll('.qa-header')
@@ -54,7 +50,8 @@ export function uiKeepRightHeader() {
         .text(issueTitle);
   }
 
-  keepRightHeader.issue = val => {
+
+  keepRightHeader.issue = function(val) {
     if (!arguments.length) return _qaItem;
     _qaItem = val;
     return keepRightHeader;

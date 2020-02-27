@@ -590,7 +590,7 @@
             "request_review": "I would like someone to review my edits.",
             "save": "Upload",
             "cancel": "Cancel",
-            "changes": "{count} Changes",
+            "changes": "Changes ({count})",
             "download_changes": "Download osmChange file",
             "errors": "Errors",
             "warnings": "Warnings",
@@ -678,20 +678,18 @@
             "no_results_worldwide": "No results found"
         },
         "geolocate": {
+            "key": "L",
             "title": "Show My Location",
             "locating": "Locating, please wait..."
         },
         "inspector": {
             "zoom_to": {
                 "key": "Z",
-                "title": "Zoom to this",
-                "tooltip_feature": "Center and zoom the map to focus on this feature.",
-                "tooltip_note": "Center and zoom the map to focus on this note.",
-                "tooltip_data": "Center and zoom the map to focus on this data.",
-                "tooltip_issue": "Center and zoom the map to focus on this issue."
+                "title": "Zoom To Selection"
             },
             "show_more": "Show More",
             "view_on_osm": "View on openstreetmap.org",
+            "view_on_osmose": "View on osmose.openstreetmap.fr",
             "view_on_keepRight": "View on keepright.at",
             "feature_type": "Feature Type",
             "fields": "Fields",
@@ -1043,8 +1041,8 @@
             "used_with": "used with {type}"
         },
         "zoom": {
-            "in": "Zoom in",
-            "out": "Zoom out"
+            "in": "Zoom In",
+            "out": "Zoom Out"
         },
         "cannot_zoom": "Cannot zoom out further in current mode.",
         "full_screen": "Toggle Full Screen",
@@ -1054,8 +1052,7 @@
                 "detail_title": "Details",
                 "elems_title": "Features",
                 "fix_title": "Fix Guidelines",
-                "trap_title": "Common Mistakes",
-                "translation": "Translations provided by Osmose"
+                "trap_title": "Common Mistakes"
             },
             "improveOSM": {
                 "title": "ImproveOSM Detection",
@@ -2434,7 +2431,8 @@
                     "pan": "Pan map",
                     "pan_more": "Pan map by one screenful",
                     "zoom": "Zoom in / Zoom out",
-                    "zoom_more": "Zoom in / Zoom out by a lot"
+                    "zoom_more": "Zoom in / Zoom out by a lot",
+                    "geolocate": "Zoom to my location"
                 },
                 "help": {
                     "title": "Help",
@@ -2967,7 +2965,13 @@
                     "placeholder": "1 EUR, 5 USD, 10 JPY…"
                 },
                 "check_date": {
-                    "label": "Last Checked Date"
+                    "label": "Last Checked Date",
+                    "placeholder": "YYYY-MM-DD"
+                },
+                "circumference": {
+                    "label": "Circumference",
+                    "terms": "",
+                    "placeholder": "1 m, 20 cm, 30 in…"
                 },
                 "clothes": {
                     "label": "Clothes"
@@ -3921,7 +3925,8 @@
                     "terms": ""
                 },
                 "opening_date": {
-                    "label": "Expected Opening Date"
+                    "label": "Expected Opening Date",
+                    "placeholder": "YYYY-MM-DD"
                 },
                 "opening_hours": {
                     "label": "Hours",
@@ -4518,7 +4523,8 @@
                 },
                 "start_date": {
                     "label": "Start Date",
-                    "terms": "inception"
+                    "terms": "inception",
+                    "placeholder": "YYYY-MM-DD"
                 },
                 "step_count": {
                     "label": "Number of Steps",
@@ -4631,6 +4637,9 @@
                 },
                 "target": {
                     "label": "Target"
+                },
+                "telecom/medium": {
+                    "label": "Medium"
                 },
                 "tidal": {
                     "label": "Tidal",
@@ -6163,6 +6172,10 @@
                     "name": "Sally Port",
                     "terms": "Postern,castle side gate"
                 },
+                "barrier/spikes": {
+                    "name": "Spike Strip",
+                    "terms": "one-way traffic treadles,stingers,stop sticks,tire deflation device,tire shredders,traffic spikes"
+                },
                 "barrier/stile": {
                     "name": "Stile",
                     "terms": ""
@@ -6278,7 +6291,7 @@
                 },
                 "building/farm_auxiliary": {
                     "name": "Farm Building",
-                    "terms": ""
+                    "terms": "agriculture,auxilary,chicken coop,farm auxiliary,pigsty,sty"
                 },
                 "building/farm": {
                     "name": "Farm House",
@@ -6350,7 +6363,7 @@
                 },
                 "building/retail": {
                     "name": "Retail Building",
-                    "terms": ""
+                    "terms": "shop building,store building"
                 },
                 "building/roof": {
                     "name": "Roof",
@@ -7728,25 +7741,13 @@
                     "name": "Racetrack (Non-Motorsport)",
                     "terms": "cycle,dog,greyhound,horse,race*,track"
                 },
-                "leisure/track/cycling_point": {
-                    "name": "Cycling Track",
-                    "terms": "bicycle track,bicycling track,cycle racetrack,velodrome"
-                },
                 "leisure/track/cycling": {
                     "name": "Cycling Track",
                     "terms": "bicycle track,bicycling track,cycle racetrack,velodrome"
                 },
-                "leisure/track/horse_racing_point": {
-                    "name": "Horse Racing Track",
-                    "terms": "equestrian race track,horse race betting,horseracing,horsetrack,horse racetrack"
-                },
                 "leisure/track/horse_racing": {
                     "name": "Horse Racing Track",
                     "terms": "equestrian race track,horse race betting,horseracing,horsetrack,horse racetrack"
-                },
-                "leisure/track/running_point": {
-                    "name": "Running Track",
-                    "terms": "athletics track,decathlon,foot race,long distance running,marathon,middle distance running,racetrack,running,sprint,track,walking"
                 },
                 "leisure/track/running": {
                     "name": "Running Track",
@@ -8041,7 +8042,7 @@
                     "terms": "air force,army,base,fight,force,guard,marine,navy,troop,war"
                 },
                 "military/checkpoint": {
-                    "name": "Checkpoint",
+                    "name": "Military Checkpoint",
                     "terms": "air force,army,base,force,guard,marine,navy,troop,war"
                 },
                 "military/nuclear_explosion_site": {
@@ -9620,6 +9621,10 @@
                     "name": "Data Center",
                     "terms": "computer systems storage,information technology,server farm,the cloud,telecommunications"
                 },
+                "telecom/exchange": {
+                    "name": "Telecom Exchange",
+                    "terms": "telecommunications,telephone exchange,telephone switch"
+                },
                 "tourism/alpine_hut": {
                     "name": "Alpine Hut",
                     "terms": "cabin,climbing hut,lodge,lodging,overnight accommodations,wilderness hut"
@@ -10297,20 +10302,6 @@
                 "description": "Annotation overlay provided by basemap.at.",
                 "name": "basemap.at Overlay"
             },
-            "basemap.at-surface": {
-                "attribution": {
-                    "text": "basemap.at"
-                },
-                "description": "Surface layer provided by basemap.at.",
-                "name": "basemap.at Surface"
-            },
-            "basemap.at-terrain": {
-                "attribution": {
-                    "text": "basemap.at"
-                },
-                "description": "Terrain layer provided by basemap.at.",
-                "name": "basemap.at Terrain"
-            },
             "eufar-balaton": {
                 "attribution": {
                     "text": "EUFAR Balaton ortofotó 2010"
@@ -10331,13 +10322,6 @@
                 },
                 "description": "The city map is an overview map that describes Gothenburg. It contains general information about land, communications, hydrography, buildings, address numbers and street names, administrative division and other orientation text.",
                 "name": "Gothenburg City map"
-            },
-            "gsi.go.jp": {
-                "attribution": {
-                    "text": "GSI Japan"
-                },
-                "description": "Japan GSI ortho Imagery. Usually better than bing, but a bit older.",
-                "name": "Japan GSI ortho Imagery"
             },
             "gsi.go.jp_airphoto": {
                 "attribution": {

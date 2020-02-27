@@ -23,6 +23,9 @@ export function uiSplash(context) {
     context.storage('sawSplash', true);
     context.storage('sawPrivacyVersion', context.privacyVersion);
 
+    // fetch intro graph data now, while user is looking at the splash screen
+    context.data().get('intro_graph');
+
     let modalSelection = uiModal(selection);
 
     modalSelection.select('.modal')

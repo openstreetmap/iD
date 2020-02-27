@@ -446,6 +446,14 @@ en:
       check_date:
         # check_date=*
         label: Last Checked Date
+        # check_date field placeholder
+        placeholder: YYYY-MM-DD
+      circumference:
+        # circumference=*
+        label: Circumference
+        # circumference field placeholder
+        placeholder: '1 m, 20 cm, 30 in…'
+        terms: '[translate with synonyms or related terms for ''Circumference'', separated by commas]'
       clothes:
         # clothes=*
         label: Clothes
@@ -1550,6 +1558,8 @@ en:
       opening_date:
         # opening_date=*
         label: Expected Opening Date
+        # opening_date field placeholder
+        placeholder: YYYY-MM-DD
       opening_hours:
         # opening_hours=*
         label: Hours
@@ -2283,6 +2293,8 @@ en:
       start_date:
         # start_date=*
         label: Start Date
+        # start_date field placeholder
+        placeholder: YYYY-MM-DD
         # 'terms: inception'
         terms: '[translate with synonyms or related terms for ''Start Date'', separated by commas]'
       step_count:
@@ -2417,6 +2429,9 @@ en:
       target:
         # target=*
         label: Target
+      telecom/medium:
+        # 'telecom:medium=*'
+        label: Medium
       tidal:
         # tidal=*
         label: Tidal
@@ -4179,6 +4194,11 @@ en:
         name: Sally Port
         # 'terms: Postern,castle side gate'
         terms: '<translate with synonyms or related terms for ''Sally Port'', separated by commas>'
+      barrier/spikes:
+        # barrier=spikes
+        name: Spike Strip
+        # 'terms: one-way traffic treadles,stingers,stop sticks,tire deflation device,tire shredders,traffic spikes'
+        terms: '<translate with synonyms or related terms for ''Spike Strip'', separated by commas>'
       barrier/stile:
         # barrier=stile
         name: Stile
@@ -4301,6 +4321,7 @@ en:
       building/farm_auxiliary:
         # building=farm_auxiliary
         name: Farm Building
+        # 'terms: agriculture,auxilary,chicken coop,farm auxiliary,pigsty,sty'
         terms: '<translate with synonyms or related terms for ''Farm Building'', separated by commas>'
       building/garage:
         # building=garage
@@ -4374,6 +4395,7 @@ en:
       building/retail:
         # building=retail
         name: Retail Building
+        # 'terms: shop building,store building'
         terms: '<translate with synonyms or related terms for ''Retail Building'', separated by commas>'
       building/roof:
         # building=roof
@@ -6011,27 +6033,12 @@ en:
         name: Cycling Track
         # 'terms: bicycle track,bicycling track,cycle racetrack,velodrome'
         terms: '<translate with synonyms or related terms for ''Cycling Track'', separated by commas>'
-      leisure/track/cycling_point:
-        # 'leisure=track, sport=cycling'
-        name: Cycling Track
-        # 'terms: bicycle track,bicycling track,cycle racetrack,velodrome'
-        terms: '<translate with synonyms or related terms for ''Cycling Track'', separated by commas>'
       leisure/track/horse_racing:
         # 'leisure=track, sport=horse_racing'
         name: Horse Racing Track
         # 'terms: equestrian race track,horse race betting,horseracing,horsetrack,horse racetrack'
         terms: '<translate with synonyms or related terms for ''Horse Racing Track'', separated by commas>'
-      leisure/track/horse_racing_point:
-        # 'leisure=track, sport=horse_racing'
-        name: Horse Racing Track
-        # 'terms: equestrian race track,horse race betting,horseracing,horsetrack,horse racetrack'
-        terms: '<translate with synonyms or related terms for ''Horse Racing Track'', separated by commas>'
       leisure/track/running:
-        # 'leisure=track, sport=running'
-        name: Running Track
-        # 'terms: athletics track,decathlon,foot race,long distance running,marathon,middle distance running,racetrack,running,sprint,track,walking'
-        terms: '<translate with synonyms or related terms for ''Running Track'', separated by commas>'
-      leisure/track/running_point:
         # 'leisure=track, sport=running'
         name: Running Track
         # 'terms: athletics track,decathlon,foot race,long distance running,marathon,middle distance running,racetrack,running,sprint,track,walking'
@@ -6383,9 +6390,9 @@ en:
         terms: '<translate with synonyms or related terms for ''Military Bunker'', separated by commas>'
       military/checkpoint:
         # military=checkpoint
-        name: Checkpoint
+        name: Military Checkpoint
         # 'terms: air force,army,base,force,guard,marine,navy,troop,war'
-        terms: '<translate with synonyms or related terms for ''Checkpoint'', separated by commas>'
+        terms: '<translate with synonyms or related terms for ''Military Checkpoint'', separated by commas>'
       military/nuclear_explosion_site:
         # military=nuclear_explosion_site
         name: Nuclear Explosion Site
@@ -8254,6 +8261,11 @@ en:
         name: Data Center
         # 'terms: computer systems storage,information technology,server farm,the cloud,telecommunications'
         terms: '<translate with synonyms or related terms for ''Data Center'', separated by commas>'
+      telecom/exchange:
+        # telecom=exchange
+        name: Telecom Exchange
+        # 'terms: telecommunications,telephone exchange,telephone switch'
+        terms: '<translate with synonyms or related terms for ''Telecom Exchange'', separated by commas>'
       tourism:
         # tourism=*
         name: Tourism Feature

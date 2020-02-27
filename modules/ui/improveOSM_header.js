@@ -1,23 +1,17 @@
-import { dataEn } from '../../data';
 import { t } from '../util/locale';
 
 
 export function uiImproveOsmHeader() {
   let _qaItem;
 
+
   function issueTitle(d) {
-    const unknown = t('inspector.unknown');
-
-    if (!d) return unknown;
-    const { issueKey } = d;
-    const et = dataEn.QA.improveOSM.error_types[issueKey];
-
-    if (et && et.title) {
-      return t(`QA.improveOSM.error_types.${issueKey}.title`);
-    } else {
-      return unknown;
-    }
+    const issueKey = d.issueKey;
+    d.replacements = d.replacements || {};
+    d.replacements.default = t('inspector.unknown');  // special key `default` works as a fallback string
+    return t(`QA.improveOSM.error_types.${issueKey}.title`, d.replacements);
   }
+
 
   function improveOsmHeader(selection) {
     const header = selection.selectAll('.qa-header')
@@ -52,17 +46,16 @@ export function uiImproveOsmHeader() {
     svgEnter
       .append('use')
         .attr('class', 'icon-annotation')
-        .attr('width', '11px')
-        .attr('height', '11px')
-        .attr('transform', 'translate(4.5, 7)')
+        .attr('width', '13px')
+        .attr('height', '13px')
+        .attr('transform', 'translate(3.5, 5)')
         .attr('xlink:href', d => {
           const picon = d.icon;
-
           if (!picon) {
-          return '';
+            return '';
           } else {
-          const isMaki = /^maki-/.test(picon);
-          return `#${picon}${isMaki ? '-11' : ''}`;
+            const isMaki = /^maki-/.test(picon);
+            return `#${picon}${isMaki ? '-11' : ''}`;
           }
         });
 

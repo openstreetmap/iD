@@ -3,7 +3,7 @@ import { dispatch as d3_dispatch } from 'd3-dispatch';
 import deepEqual from 'fast-deep-equal';
 import turf_bboxClip from '@turf/bbox-clip';
 import stringify from 'fast-json-stable-stringify';
-import martinez from 'martinez-polygon-clipping';
+import * as martinez from 'martinez-polygon-clipping';
 
 import Protobuf from 'pbf';
 import vt from '@mapbox/vector-tile';
@@ -65,8 +65,9 @@ function vtToGeoJSON(data, tile, mergeCache) {
                     var merged = mergeCache[propertyhash];
                     if (merged && merged.length) {
                         var other = merged[0];
-                        var coords = martinez(
-                            feature.geometry.coordinates, other.geometry.coordinates, 1 /*UNION*/
+                        var coords = martinez.union(
+                            feature.geometry.coordinates,
+                            other.geometry.coordinates
                         );
 
                         if (!coords || !coords.length) {

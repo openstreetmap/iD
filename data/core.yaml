@@ -456,7 +456,7 @@ en:
     request_review: "I would like someone to review my edits."
     save: Upload
     cancel: Cancel
-    changes: "{count} Changes"
+    changes: "Changes ({count})"
     download_changes: Download osmChange file
     errors: Errors
     warnings: Warnings
@@ -535,18 +535,16 @@ en:
     search: Search worldwide...
     no_results_worldwide: No results found
   geolocate:
+    key: L
     title: Show My Location
     locating: "Locating, please wait..."
   inspector:
     zoom_to:
       key: Z
-      title: Zoom to this
-      tooltip_feature: "Center and zoom the map to focus on this feature."
-      tooltip_note: "Center and zoom the map to focus on this note."
-      tooltip_data: "Center and zoom the map to focus on this data."
-      tooltip_issue: "Center and zoom the map to focus on this issue."
+      title: Zoom To Selection
     show_more: Show More
     view_on_osm: View on openstreetmap.org
+    view_on_osmose: View on osmose.openstreetmap.fr
     view_on_keepRight: View on keepright.at
     feature_type: Feature Type
     fields: Fields
@@ -834,8 +832,8 @@ en:
     on_wiki: "{tag} on wiki.osm.org"
     used_with: "used with {type}"
   zoom:
-    in: Zoom in
-    out: Zoom out
+    in: Zoom In
+    out: Zoom Out
   cannot_zoom: "Cannot zoom out further in current mode."
   full_screen: Toggle Full Screen
   QA:
@@ -845,7 +843,6 @@ en:
       elems_title: Features
       fix_title: Fix Guidelines
       trap_title: Common Mistakes
-      translation: Translations provided by Osmose
     improveOSM:
       title: ImproveOSM Detection
       geometry_types:
@@ -1978,6 +1975,7 @@ en:
         pan_more: "Pan map by one screenful"
         zoom: "Zoom in / Zoom out"
         zoom_more: "Zoom in / Zoom out by a lot"
+        geolocate: "Zoom to my location"
       help:
         title: "Help"
         help: "Show help/documentation"

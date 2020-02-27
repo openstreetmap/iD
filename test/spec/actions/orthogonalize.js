@@ -129,7 +129,7 @@ describe('iD.actionOrthogonalize', function () {
         });
 
         it('preserves the shape of skinny quads', function () {
-            var projection = iD.d3.geoMercator();
+            var projection = d3.geoMercator();
             var tests = [[
                 [-77.0339864831478, 38.8616391227204],
                 [-77.0209775298677, 38.8613609264884],

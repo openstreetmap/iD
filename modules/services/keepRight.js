@@ -255,6 +255,8 @@ function parseError(capture, idType) {
 
 
 export default {
+  title: 'keepRight',
+
   init(context) {
     context.data().get('keepRight')
       .then(d => _krData = d);
@@ -381,7 +383,7 @@ export default {
               coincident = _cache.rtree.search(bbox).length;
             } while (coincident);
 
-            let d = new QAItem(loc, 'keepRight', itemType, id, {
+            let d = new QAItem(loc, this, itemType, id, {
               comment,
               description,
               whichType,

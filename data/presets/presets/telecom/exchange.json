@@ -1,0 +1,23 @@
+{
+    "icon": "temaki-cable",
+    "fields": [
+        "ref",
+        "operator",
+        "telecom/medium",
+        "address",
+        "building_area"
+    ],
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "tags": {
+        "telecom": "exchange"
+    },
+    "terms": [
+        "telecommunications",
+        "telephone exchange",
+        "telephone switch"
+    ],
+    "name": "Telecom Exchange"
+}
