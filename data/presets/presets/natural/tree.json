@@ -4,6 +4,7 @@
         "leaf_type_singular",
         "leaf_cycle_singular",
         "denotation",
+        "height",
         "diameter"
     ],
     "moreFields": [
