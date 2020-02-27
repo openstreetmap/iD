@@ -8,10 +8,8 @@ import { t } from '../../util/locale';
 import { tooltip } from '../../util/tooltip';
 import { utilRebind } from '../../util';
 import { uiPresetIcon } from '../preset_icon';
-import { uiQuickLinks } from '../quick_links';
 import { uiSection } from '../section';
 import { uiTagReference } from '../tag_reference';
-import { uiTooltipHtml } from '../tooltipHtml';
 
 
 export function uiSectionFeatureType(context) {
@@ -22,7 +20,6 @@ export function uiSectionFeatureType(context) {
     var _presets = [];
 
     var _tagReference;
-    var _quickLinks = uiQuickLinks();
 
     var section = uiSection('feature-type', context)
         .title(t('inspector.feature_type'))
@@ -69,23 +66,6 @@ export function uiSectionFeatureType(context) {
             .append('div')
             .attr('class', 'tag-reference-body-wrap')
             .merge(tagReferenceBodyWrap);
-
-        selection
-            .selectAll('.preset-quick-links')
-            .data([0])
-            .enter()
-            .append('div')
-            .attr('class', 'preset-quick-links')
-            .call(_quickLinks.choices([{
-                id: 'zoom_to',
-                label: 'inspector.zoom_to.title',
-                tooltip: function() {
-                    return uiTooltipHtml(t('inspector.zoom_to.tooltip_feature'), t('inspector.zoom_to.key'));
-                },
-                click: function zoomTo() {
-                    context.mode().zoomToSelected();
-                }
-            }]));
 
         // update header
         if (_tagReference) {

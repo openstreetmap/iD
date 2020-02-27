@@ -9,8 +9,6 @@ import { svgIcon } from '../svg/icon';
 import { uiImproveOsmComments } from './improveOSM_comments';
 import { uiImproveOsmDetails } from './improveOSM_details';
 import { uiImproveOsmHeader } from './improveOSM_header';
-import { uiQuickLinks } from './quick_links';
-import { uiTooltipHtml } from './tooltipHtml';
 
 import { utilNoAuto, utilRebind } from '../util';
 
@@ -19,18 +17,10 @@ export function uiImproveOsmEditor(context) {
   const qaDetails = uiImproveOsmDetails(context);
   const qaComments = uiImproveOsmComments(context);
   const qaHeader = uiImproveOsmHeader(context);
-  const quickLinks = uiQuickLinks();
 
   let _qaItem;
 
   function improveOsmEditor(selection) {
-    // quick links
-    const choices = [{
-      id: 'zoom_to',
-      label: 'inspector.zoom_to.title',
-      tooltip: () => uiTooltipHtml(t('inspector.zoom_to.tooltip_qaItem'), t('inspector.zoom_to.key')),
-      click: () => context.mode().zoomToSelected()
-    }];
 
     const headerEnter = selection.selectAll('.header')
       .data([0])
@@ -64,7 +54,6 @@ export function uiImproveOsmEditor(context) {
         .attr('class', 'modal-section qa-editor')
       .merge(editor)
         .call(qaHeader.issue(_qaItem))
-        .call(quickLinks.choices(choices))
         .call(qaDetails.issue(_qaItem))
         .call(qaComments.issue(_qaItem))
         .call(improveOsmSaveSection);

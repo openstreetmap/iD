@@ -417,6 +417,7 @@ button[disabled].action:hover {
 
 .icon.light {
     color: #fff;
+    fill: currentColor;
 }
 .icon.created {
     color: #00ca07;
@@ -2875,8 +2876,10 @@ div.full-screen > button:hover {
 }
 
 
-/* Zoom Buttons
+/* Map Controls
 ------------------------------------------------------- */
+
+/* Zoom in/out buttons */
 .zoombuttons > button.zoom-in {
     border-radius: 4px 0 0 0;
 }
@@ -2884,9 +2887,7 @@ div.full-screen > button:hover {
     border-radius: 0 4px 0 0;
 }
 
-
-/* Geolocate Button
-------------------------------------------------------- */
+/* Geolocate button */
 .geolocate-control {
     margin-bottom: 10px;
 }
@@ -2895,6 +2896,12 @@ div.full-screen > button:hover {
 }
 [dir='rtl'] .geolocate-control > button {
     border-radius: 0 0 4px 0;
+}
+
+/* Zoom to selection button */
+.zoom-to-selection-control .icon {
+    width: 22px;
+    height: 22px;
 }
 
 
