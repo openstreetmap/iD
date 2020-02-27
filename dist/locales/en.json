@@ -680,7 +680,8 @@
         "geolocate": {
             "key": "L",
             "title": "Show My Location",
-            "locating": "Locating, please wait..."
+            "locating": "Locating, please wait...",
+            "cannot_locate": "Your location is unavailable"
         },
         "inspector": {
             "zoom_to": {

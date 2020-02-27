@@ -538,6 +538,7 @@ en:
     key: L
     title: Show My Location
     locating: "Locating, please wait..."
+    location_unavailable: Your location is unavailable
   inspector:
     zoom_to:
       key: Z

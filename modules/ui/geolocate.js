@@ -5,6 +5,7 @@ import { tooltip } from '../util/tooltip';
 import { geoExtent } from '../geo';
 import { modeBrowse } from '../modes/browse';
 import { svgIcon } from '../svg/icon';
+import { uiFlash } from './flash';
 import { uiLoading } from './loading';
 import { uiTooltipHtml } from './tooltipHtml';
 
@@ -33,7 +34,7 @@ export function uiGeolocate(context) {
         }
         // This timeout ensures that we still call finish() even if
         // the user declines to share their location in Firefox
-        _timeoutID = setTimeout(finish, 10000 /* 10sec */ );
+        _timeoutID = setTimeout(error, 10000 /* 10sec */ );
     }
 
     function zoomTo() {
@@ -52,6 +53,9 @@ export function uiGeolocate(context) {
     }
 
     function error() {
+        uiFlash()
+            .text(t('geolocate.location_unavailable'))
+            .iconName('#iD-icon-geolocate')();
         finish();
     }
 
@@ -66,7 +70,7 @@ export function uiGeolocate(context) {
     }
 
     return function(selection) {
-        if (!navigator.geolocation) return;
+        if (!navigator.geolocation || !navigator.geolocation.getCurrentPosition) return;
 
         _button = selection
             .append('button')
