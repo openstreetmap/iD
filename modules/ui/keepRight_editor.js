@@ -8,8 +8,6 @@ import { svgIcon } from '../svg/icon';
 
 import { uiKeepRightDetails } from './keepRight_details';
 import { uiKeepRightHeader } from './keepRight_header';
-import { uiQuickLinks } from './quick_links';
-import { uiTooltipHtml } from './tooltipHtml';
 import { uiViewOnKeepRight } from './view_on_keepRight';
 
 import { utilNoAuto, utilRebind } from '../util';
@@ -18,18 +16,10 @@ export function uiKeepRightEditor(context) {
   const dispatch = d3_dispatch('change');
   const qaDetails = uiKeepRightDetails(context);
   const qaHeader = uiKeepRightHeader(context);
-  const quickLinks = uiQuickLinks();
 
   let _qaItem;
 
   function keepRightEditor(selection) {
-    // quick links
-    const choices = [{
-      id: 'zoom_to',
-      label: 'inspector.zoom_to.title',
-      tooltip: () => uiTooltipHtml(t('inspector.zoom_to.tooltip_qaItem'), t('inspector.zoom_to.key')),
-      click: () => context.mode().zoomToSelected()
-    }];
 
     const headerEnter = selection.selectAll('.header')
       .data([0])
@@ -64,7 +54,6 @@ export function uiKeepRightEditor(context) {
         .attr('class', 'modal-section qa-editor')
       .merge(editor)
         .call(qaHeader.issue(_qaItem))
-        .call(quickLinks.choices(choices))
         .call(qaDetails.issue(_qaItem))
         .call(keepRightSaveSection);
 

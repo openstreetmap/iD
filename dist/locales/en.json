@@ -684,11 +684,7 @@
         "inspector": {
             "zoom_to": {
                 "key": "Z",
-                "title": "Zoom to this",
-                "tooltip_feature": "Center and zoom the map to focus on this feature.",
-                "tooltip_note": "Center and zoom the map to focus on this note.",
-                "tooltip_data": "Center and zoom the map to focus on this data.",
-                "tooltip_issue": "Center and zoom the map to focus on this issue."
+                "title": "Zoom To Selection"
             },
             "show_more": "Show More",
             "view_on_osm": "View on openstreetmap.org",
@@ -1044,8 +1040,8 @@
             "used_with": "used with {type}"
         },
         "zoom": {
-            "in": "Zoom in",
-            "out": "Zoom out"
+            "in": "Zoom In",
+            "out": "Zoom Out"
         },
         "cannot_zoom": "Cannot zoom out further in current mode.",
         "full_screen": "Toggle Full Screen",

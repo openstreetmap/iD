@@ -7,8 +7,6 @@ import { svgIcon } from '../svg/icon';
 
 import { uiOsmoseDetails } from './osmose_details';
 import { uiOsmoseHeader } from './osmose_header';
-import { uiQuickLinks } from './quick_links';
-import { uiTooltipHtml } from './tooltipHtml';
 import { uiViewOnOsmose } from './view_on_osmose';
 
 import { utilRebind } from '../util';
@@ -17,18 +15,10 @@ export function uiOsmoseEditor(context) {
   const dispatch = d3_dispatch('change');
   const qaDetails = uiOsmoseDetails(context);
   const qaHeader = uiOsmoseHeader(context);
-  const quickLinks = uiQuickLinks();
 
   let _qaItem;
 
   function osmoseEditor(selection) {
-    // quick links
-    const choices = [{
-      id: 'zoom_to',
-      label: 'inspector.zoom_to.title',
-      tooltip: () => uiTooltipHtml(t('inspector.zoom_to.tooltip_qaItem'), t('inspector.zoom_to.key')),
-      click: () => context.mode().zoomToSelected()
-    }];
 
     const header = selection.selectAll('.header')
       .data([0]);
@@ -63,7 +53,6 @@ export function uiOsmoseEditor(context) {
         .attr('class', 'modal-section qa-editor')
       .merge(editor)
         .call(qaHeader.issue(_qaItem))
-        .call(quickLinks.choices(choices))
         .call(qaDetails.issue(_qaItem))
         .call(osmoseSaveSection);
 
