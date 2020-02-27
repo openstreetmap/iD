@@ -2968,6 +2968,11 @@
                     "label": "Last Checked Date",
                     "placeholder": "YYYY-MM-DD"
                 },
+                "circumference": {
+                    "label": "Circumference",
+                    "terms": "",
+                    "placeholder": "1 m, 20 cm, 30 in…"
+                },
                 "clothes": {
                     "label": "Clothes"
                 },

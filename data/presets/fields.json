@@ -70,6 +70,7 @@
   "charge_fee": {"key": "charge", "type": "text", "label": "Fee Amount", "placeholder": "1 EUR, 5 USD, 10 JPY…", "prerequisiteTag": {"key": "fee", "valueNot": "no"}},
   "charge_toll": {"key": "charge", "type": "text", "label": "Toll Amount", "placeholder": "1 EUR, 5 USD, 10 JPY…", "prerequisiteTag": {"key": "toll", "valueNot": "no"}},
   "check_date": {"key": "check_date", "type": "text", "label": "Last Checked Date", "placeholder": "YYYY-MM-DD"},
+  "circumference": {"key": "circumference", "type": "combo", "label": "Circumference", "snake_case": false, "placeholder": "1 m, 20 cm, 30 in…"},
   "clothes": {"key": "clothes", "type": "semiCombo", "label": "Clothes"},
   "club": {"key": "club", "type": "typeCombo", "label": "Type"},
   "collection_times": {"key": "collection_times", "type": "text", "label": "Collection Times"},

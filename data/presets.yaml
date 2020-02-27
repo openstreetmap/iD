@@ -448,6 +448,12 @@ en:
         label: Last Checked Date
         # check_date field placeholder
         placeholder: YYYY-MM-DD
+      circumference:
+        # circumference=*
+        label: Circumference
+        # circumference field placeholder
+        placeholder: '1 m, 20 cm, 30 in…'
+        terms: '[translate with synonyms or related terms for ''Circumference'', separated by commas]'
       clothes:
         # clothes=*
         label: Clothes

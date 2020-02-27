@@ -1378,6 +1378,7 @@
     {"key": "changing_table", "description": "🄵 Diaper Changing Table"},
     {"key": "charge", "description": "🄵 Fee Amount, 🄵 Toll Amount"},
     {"key": "check_date", "description": "🄵 Last Checked Date"},
+    {"key": "circumference", "description": "🄵 Circumference"},
     {"key": "clothes", "description": "🄵 Clothes"},
     {"key": "collection_times", "description": "🄵 Collection Times"},
     {"key": "colour", "description": "🄵 Color"},
