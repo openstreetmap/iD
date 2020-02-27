@@ -4315,6 +4315,7 @@ en:
       building/farm_auxiliary:
         # building=farm_auxiliary
         name: Farm Building
+        # 'terms: agriculture,auxilary,chicken coop,farm auxiliary,pigsty,sty'
         terms: '<translate with synonyms or related terms for ''Farm Building'', separated by commas>'
       building/garage:
         # building=garage

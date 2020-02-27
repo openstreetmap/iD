@@ -351,7 +351,7 @@
   "building/construction": {"icon": "maki-building", "geometry": ["area"], "tags": {"building": "construction"}, "matchScore": 0.5, "name": "Building Under Construction"},
   "building/detached": {"icon": "maki-home", "geometry": ["area"], "tags": {"building": "detached"}, "terms": ["home", "single", "family", "residence", "dwelling"], "matchScore": 0.5, "name": "Detached House"},
   "building/dormitory": {"icon": "maki-building", "fields": ["{building}", "smoking"], "geometry": ["area"], "tags": {"building": "dormitory"}, "matchScore": 0.5, "name": "Dormitory"},
-  "building/farm_auxiliary": {"icon": "maki-farm", "geometry": ["area"], "tags": {"building": "farm_auxiliary"}, "matchScore": 0.5, "name": "Farm Building"},
+  "building/farm_auxiliary": {"icon": "maki-farm", "geometry": ["area"], "tags": {"building": "farm_auxiliary"}, "terms": ["agriculture", "auxilary", "chicken coop", "farm auxiliary", "pigsty", "sty"], "matchScore": 0.5, "name": "Farm Building"},
   "building/farm": {"icon": "maki-farm", "geometry": ["area"], "tags": {"building": "farm"}, "matchScore": 0.5, "name": "Farm House"},
   "building/garage": {"icon": "fas-warehouse", "fields": ["{building}", "capacity"], "geometry": ["area"], "tags": {"building": "garage"}, "matchScore": 0.5, "name": "Garage"},
   "building/garages": {"icon": "fas-warehouse", "fields": ["{building}", "capacity"], "geometry": ["area"], "tags": {"building": "garages"}, "matchScore": 0.5, "name": "Garages"},

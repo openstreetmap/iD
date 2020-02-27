@@ -6284,7 +6284,7 @@
                 },
                 "building/farm_auxiliary": {
                     "name": "Farm Building",
-                    "terms": ""
+                    "terms": "agriculture,auxilary,chicken coop,farm auxiliary,pigsty,sty"
                 },
                 "building/farm": {
                     "name": "Farm House",
