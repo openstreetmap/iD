@@ -1,3 +1,5 @@
+import { select as d3_select } from 'd3-selection';
+
 import { t, textDirection } from '../util/locale';
 import { tooltip } from '../util/tooltip';
 import { geoExtent } from '../geo';
@@ -13,6 +15,7 @@ export function uiGeolocate(context) {
     var _position;
     var _extent;
     var _timeoutID;
+    var _button = d3_select(null);
 
     function click() {
         if (context.inIntro()) return;
@@ -26,6 +29,7 @@ export function uiGeolocate(context) {
             }
         } else {
             layer.enabled(null, false);
+            updateButtonState();
         }
         // This timeout ensures that we still call finish() even if
         // the user declines to share their location in Firefox
@@ -35,6 +39,7 @@ export function uiGeolocate(context) {
     function zoomTo() {
         var map = context.map();
         layer.enabled(_position, true);
+        updateButtonState();
         map.centerZoomEase(_extent.center(), Math.min(20, map.extentZoom(_extent)));
     }
 
@@ -56,10 +61,14 @@ export function uiGeolocate(context) {
         _timeoutID = undefined;
     }
 
+    function updateButtonState() {
+        _button.classed('active', layer.enabled());
+    }
+
     return function(selection) {
         if (!navigator.geolocation) return;
 
-        selection
+        _button = selection
             .append('button')
             .on('click', click)
             .call(svgIcon('#iD-icon-geolocate', 'light'))

@@ -125,7 +125,7 @@ export function uiInit(context) {
         uiPanes.forEach(function(pane) {
             controls
                 .append('div')
-                .attr('class', 'map-control ' + pane.id + '-control')
+                .attr('class', 'map-control map-pane-control ' + pane.id + '-control')
                 .call(pane.renderToggleButton);
         });
 
@@ -458,7 +458,7 @@ export function uiInit(context) {
         shownPanes
             .classed('shown', false);
 
-        d3_selectAll('.map-control button')
+        d3_selectAll('.map-pane-control button')
             .classed('active', false);
 
         if (showPane) {
