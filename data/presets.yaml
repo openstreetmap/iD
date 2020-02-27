@@ -4389,6 +4389,7 @@ en:
       building/retail:
         # building=retail
         name: Retail Building
+        # 'terms: shop building,store building'
         terms: '<translate with synonyms or related terms for ''Retail Building'', separated by commas>'
       building/roof:
         # building=roof

@@ -10,6 +10,10 @@
     "tags": {
         "building": "retail"
     },
+    "terms": [
+        "shop building",
+        "store building"
+    ],
     "matchScore": 0.5,
     "name": "Retail Building"
 }

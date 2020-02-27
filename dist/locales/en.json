@@ -6356,7 +6356,7 @@
                 },
                 "building/retail": {
                     "name": "Retail Building",
-                    "terms": ""
+                    "terms": "shop building,store building"
                 },
                 "building/roof": {
                     "name": "Roof",

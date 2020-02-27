@@ -369,7 +369,7 @@
   "building/pavilion": {"icon": "maki-building", "fields": ["{building}", "smoking"], "geometry": ["area"], "terms": ["sports"], "tags": {"building": "pavilion"}, "matchScore": 0.5, "name": "Pavilion Building"},
   "building/public": {"icon": "maki-building", "fields": ["{building}", "smoking"], "moreFields": ["{building}", "polling_station"], "geometry": ["area"], "tags": {"building": "public"}, "matchScore": 0.5, "name": "Public Building"},
   "building/residential": {"icon": "maki-residential-community", "geometry": ["area"], "tags": {"building": "residential"}, "matchScore": 0.5, "name": "Residential Building"},
-  "building/retail": {"icon": "maki-commercial", "fields": ["{building}", "smoking"], "geometry": ["area"], "tags": {"building": "retail"}, "matchScore": 0.5, "name": "Retail Building"},
+  "building/retail": {"icon": "maki-commercial", "fields": ["{building}", "smoking"], "geometry": ["area"], "tags": {"building": "retail"}, "terms": ["shop building", "store building"], "matchScore": 0.5, "name": "Retail Building"},
   "building/roof": {"icon": "maki-shelter", "fields": ["{building}", "layer"], "geometry": ["area"], "tags": {"building": "roof"}, "matchScore": 0.5, "name": "Roof"},
   "building/ruins": {"icon": "temaki-ruins", "geometry": ["area"], "tags": {"building": "ruins"}, "matchScore": 0.5, "name": "Building Ruins"},
   "building/school": {"icon": "fas-school", "moreFields": ["{building}", "polling_station"], "geometry": ["area"], "terms": ["academy", "elementary school", "middle school", "high school"], "tags": {"building": "school"}, "matchScore": 0.5, "name": "School Building"},
