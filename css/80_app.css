@@ -876,7 +876,7 @@ a.hide-toggle {
     font-weight: bold;
 }
 
-.section {
+.section:not(:last-child) {
     margin-bottom: 30px;
 }
 
