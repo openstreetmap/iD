@@ -105,6 +105,7 @@
   "denomination": {"key": "denomination", "type": "combo", "label": "Denomination", "prerequisiteTag": {"key": "religion", "valueNot": "none"}},
   "denotation": {"key": "denotation", "type": "combo", "label": "Denotation"},
   "departures_board": {"key": "departures_board", "type": "combo", "label": "Departures Board", "strings": {"options": {"yes": "Yes", "timetable": "Timetable", "realtime": "Realtime", "no": "None"}}},
+  "depth": {"key": "depth", "minValue": 0, "type": "number", "label": "Depth (Meters)"},
   "description": {"key": "description", "type": "textarea", "label": "Description", "universal": true, "terms": ["summary"]},
   "design": {"key": "design", "type": "combo", "label": "Design"},
   "destination_oneway": {"key": "destination", "type": "semiCombo", "label": "Destinations", "prerequisiteTag": {"key": "oneway", "value": "yes"}, "snake_case": false},
