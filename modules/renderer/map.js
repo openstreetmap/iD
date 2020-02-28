@@ -58,7 +58,7 @@ export function rendererMap(context) {
     var _mouseEvent;
     var _lastWithinEditableZoom;
 
-    var zoom = d3_zoom()
+    var d3Zoomer = d3_zoom()
         .scaleExtent([kMin, kMax])
         .interpolate(d3_interpolate)
         .filter(zoomEventFilter)
@@ -130,8 +130,8 @@ export function rendererMap(context) {
 
         selection
             .on('dblclick.map', dblClick)
-            .call(zoom)
-            .call(zoom.transform, projection.transform());
+            .call(d3Zoomer)
+            .call(d3Zoomer.transform, projection.transform());
 
         supersurface = selection.append('div')
             .attr('id', 'supersurface')
@@ -668,11 +668,11 @@ export function rendererMap(context) {
                 .transition()
                 .duration(duration)
                 .on('start', function() { map.startEase(); })
-                .call(zoom.transform, d3_zoomIdentity.translate(t2.x, t2.y).scale(t2.k));
+                .call(d3Zoomer.transform, d3_zoomIdentity.translate(t2.x, t2.y).scale(t2.k));
         } else {
             projection.transform(t2);
             _transformStart = t2;
-            _selection.call(zoom.transform, _transformStart);
+            _selection.call(d3Zoomer.transform, _transformStart);
         }
 
         return true;
@@ -712,11 +712,11 @@ export function rendererMap(context) {
                 .transition()
                 .duration(duration)
                 .on('start', function() { map.startEase(); })
-                .call(zoom.transform, d3_zoomIdentity.translate(t[0], t[1]).scale(k));
+                .call(d3Zoomer.transform, d3_zoomIdentity.translate(t[0], t[1]).scale(k));
         } else {
             projection.translate(t);
             _transformStart = projection.transform();
-            _selection.call(zoom.transform, _transformStart);
+            _selection.call(d3Zoomer.transform, _transformStart);
             dispatch.call('move', this, map);
             immediateRedraw();
         }
