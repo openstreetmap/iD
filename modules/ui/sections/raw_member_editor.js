@@ -241,9 +241,22 @@ export function uiSectionRawMemberEditor(context) {
             wrapEnter.each(bindTypeahead);
         }
 
+        // update
+        items = items
+            .merge(itemsEnter)
+            .order();
+
+        items.select('input.member-role')
+            .property('value', function(d) { return d.role; })
+            .on('blur', changeRole)
+            .on('change', changeRole);
+
+        items.select('button.member-delete')
+            .on('click', deleteMember);
+
         var dragOrigin, targetIndex;
 
-        itemsEnter.call(d3_drag()
+        items.call(d3_drag()
             .on('start', function() {
                 dragOrigin = {
                     x: d3_event.x,
@@ -269,12 +282,12 @@ export function uiSectionRawMemberEditor(context) {
                         var node = d3_select(this).node();
                         if (index === index2) {
                             return 'translate(' + x + 'px, ' + y + 'px)';
-                        } else if (index2 > index && d3_event.y > node.offsetTop - node.offsetHeight) {
+                        } else if (index2 > index && d3_event.y > node.offsetTop) {
                             if (targetIndex === null || index2 > targetIndex) {
                                 targetIndex = index2;
                             }
                             return 'translateY(-100%)';
-                        } else if (index2 < index && d3_event.y < node.offsetTop) {
+                        } else if (index2 < index && d3_event.y < node.offsetTop + node.offsetHeight) {
                             if (targetIndex === null || index2 < targetIndex) {
                                 targetIndex = index2;
                             }
@@ -304,19 +317,6 @@ export function uiSectionRawMemberEditor(context) {
                 }
             })
         );
-
-
-        // update
-        items = items
-            .merge(itemsEnter);
-
-        items.select('input.member-role')
-            .property('value', function(d) { return d.role; })
-            .on('blur', changeRole)
-            .on('change', changeRole);
-
-        items.select('button.member-delete')
-            .on('click', deleteMember);
 
 
 

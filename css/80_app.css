@@ -1280,9 +1280,6 @@ a.hide-toggle {
 .section .grouped-items-area:empty {
     display: none;
 }
-.preset-list-item a.hide-toggle {
-    margin-bottom: 5px;
-}
 
 /*
     The parts of a field:
@@ -2490,7 +2487,8 @@ img.tag-reference-wiki-image {
 
 .section-raw-member-editor .member-list,
 .section-raw-membership-editor .member-list {
-    padding-top: 10px;
+    position: relative; /* required for drag-and-drop */
+    padding-top: 5px;
 }
 .section-raw-member-editor .member-list li,
 .section-raw-membership-editor .member-list li {
