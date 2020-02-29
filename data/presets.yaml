@@ -631,6 +631,9 @@ en:
           timetable: Timetable
           # departures_board=yes
           'yes': 'Yes'
+      depth:
+        # depth=*
+        label: Depth (Meters)
       description:
         # description=*
         label: Description

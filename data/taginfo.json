@@ -1436,6 +1436,7 @@
     {"key": "departures_board", "value": "timetable", "description": "🄵 Departures Board"},
     {"key": "departures_board", "value": "realtime", "description": "🄵 Departures Board"},
     {"key": "departures_board", "value": "no", "description": "🄵 Departures Board"},
+    {"key": "depth", "description": "🄵 Depth (Meters)"},
     {"key": "description", "description": "🄵 Description"},
     {"key": "design", "description": "🄵 Design"},
     {"key": "destination", "description": "🄵 Destinations"},
