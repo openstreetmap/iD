@@ -18,6 +18,13 @@ export function uiSectionValidationRules(context) {
         .disclosureContent(renderDisclosureContent)
         .title(t('issues.rules.title'));
 
+    var _ruleKeys = context.validator().getRuleKeys()
+        .filter(function(key) { return key !== 'maprules'; })
+        .sort(function(key1, key2) {
+            // alphabetize by localized title
+            return t('issues.' + key1 + '.title') < t('issues.' + key2 + '.title') ? -1 : 1;
+        });
+
     function renderDisclosureContent(selection) {
         var container = selection.selectAll('.issues-rulelist-container')
             .data([0]);
@@ -49,8 +56,7 @@ export function uiSectionValidationRules(context) {
             .attr('href', '#')
             .text(t('issues.disable_all'))
             .on('click', function() {
-                var keys = context.validator().getRuleKeys();
-                context.validator().disableRules(keys);
+                context.validator().disableRules(_ruleKeys);
             });
 
 
@@ -58,10 +64,8 @@ export function uiSectionValidationRules(context) {
         container = container
             .merge(containerEnter);
 
-        var ruleKeys = context.validator().getRuleKeys();
-
         container.selectAll('.issue-rules-list')
-            .call(drawListItems, ruleKeys, 'checkbox', 'rule', toggleRule, isRuleEnabled);
+            .call(drawListItems, _ruleKeys, 'checkbox', 'rule', toggleRule, isRuleEnabled);
     }
 
     function drawListItems(selection, data, type, name, change, active) {

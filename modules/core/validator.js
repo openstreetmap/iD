@@ -4,7 +4,6 @@ import { coreDifference } from './difference';
 import { geoExtent } from '../geo/extent';
 import { modeSelect } from '../modes/select';
 import { utilArrayGroupBy, utilRebind } from '../util';
-import { t } from '../util/locale';
 import * as Validations from '../validations/index';
 
 
@@ -241,12 +240,7 @@ export function coreValidator(context) {
 
 
     validator.getRuleKeys = function() {
-        return Object.keys(_rules)
-            .filter(function(key) { return key !== 'maprules'; })
-            .sort(function(key1, key2) {
-                // alphabetize by localized title
-                return t('issues.' + key1 + '.title') < t('issues.' + key2 + '.title') ? -1 : 1;
-            });
+        return Object.keys(_rules);
     };
 
 
