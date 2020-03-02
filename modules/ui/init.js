@@ -18,6 +18,7 @@ import { uiAccount } from './account';
 import { uiAttribution } from './attribution';
 import { uiContributors } from './contributors';
 import { uiFeatureInfo } from './feature_info';
+import { uiFlash } from './flash';
 import { uiFullScreen } from './full_screen';
 import { uiGeolocate } from './geolocate';
 import { uiInfo } from './info';
@@ -62,6 +63,12 @@ export function uiInit(context) {
 
         var map = context.map();
         map.redrawEnable(false);  // don't draw until we've set zoom/lat/long
+
+        map
+            .on('hitMinZoom.ui', function() {
+                uiFlash()
+                    .text(t('cannot_zoom'))();
+            });
 
         container
             .append('svg')

@@ -6,11 +6,9 @@ import { scaleLinear as d3_scaleLinear } from 'd3-scale';
 import { event as d3_event, select as d3_select } from 'd3-selection';
 import { zoom as d3_zoom, zoomIdentity as d3_zoomIdentity } from 'd3-zoom';
 
-import { t } from '../util/locale';
 import { geoExtent, geoRawMercator, geoScaleToZoom, geoZoomToScale } from '../geo';
 import { modeBrowse } from '../modes/browse';
 import { svgAreas, svgLabels, svgLayers, svgLines, svgMidpoints, svgPoints, svgVertices } from '../svg';
-import { uiFlash } from '../ui/flash';
 import { utilFastMouse, utilFunctor, utilSetTransform, utilEntityAndDeepMemberIDs } from '../util/util';
 import { utilBindOnce } from '../util/bind_once';
 import { utilDetect } from '../util/detect';
@@ -30,7 +28,11 @@ function clamp(num, min, max) {
 
 
 export function rendererMap(context) {
-    var dispatch = d3_dispatch('move', 'drawn', 'crossEditableZoom', 'changeHighlighting', 'changeAreaFill');
+    var dispatch = d3_dispatch(
+        'move', 'drawn',
+        'crossEditableZoom', 'hitMinZoom',
+        'changeHighlighting', 'changeAreaFill'
+    );
     var projection = context.projection;
     var curtainProjection = context.curtainProjection;
     var drawLayers = svgLayers(projection, context);
@@ -516,7 +518,7 @@ export function rendererMap(context) {
 
         if (geoScaleToZoom(k, TILESIZE) < _minzoom) {
             surface.interrupt();
-            uiFlash().text(t('cannot_zoom'))();
+            dispatch.call('hitMinZoom', this, map);
             setCenterZoom(map.center(), context.minEditableZoom(), 0, true);
             scheduleRedraw();
             dispatch.call('move', this, map);
@@ -797,7 +799,7 @@ export function rendererMap(context) {
 
         if (z2 < _minzoom) {
             surface.interrupt();
-            uiFlash().text(t('cannot_zoom'))();
+            dispatch.call('hitMinZoom', this, map);
             z2 = context.minEditableZoom();
         }
 
