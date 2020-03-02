@@ -2,7 +2,6 @@ import { event as d3_event, select as d3_select } from 'd3-selection';
 import { t } from '../util/locale';
 
 import { modeBrowse } from './browse';
-import { modeSelect } from './select';
 import { services } from '../services';
 import { uiConflicts } from '../ui/conflicts';
 import { uiConfirm } from '../ui/confirm';
