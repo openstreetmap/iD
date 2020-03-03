@@ -4105,6 +4105,7 @@ en:
       barrier/border_control:
         # barrier=border_control
         name: Border Control
+        # 'terms: checkpoint,customs,international boundary,passport check,port of entry,visa'
         terms: '<translate with synonyms or related terms for ''Border Control'', separated by commas>'
       barrier/cattle_grid:
         # barrier=cattle_grid

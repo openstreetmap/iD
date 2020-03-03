@@ -6094,7 +6094,7 @@
                 },
                 "barrier/border_control": {
                     "name": "Border Control",
-                    "terms": ""
+                    "terms": "checkpoint,customs,international boundary,passport check,port of entry,visa"
                 },
                 "barrier/cattle_grid": {
                     "name": "Cattle Grid",
