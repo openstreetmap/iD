@@ -25,17 +25,16 @@ export function uiIssuesInfo(context) {
 
         var shownItems = [];
 
+        var liveIssues = context.validator().getIssues({
+            what: context.storage('validate-what') || 'edited',
+            where: context.storage('validate-where') || 'all'
+        });
+        if (liveIssues.length) {
+            warningsItem.count = liveIssues.length;
+            shownItems.push(warningsItem);
+        }
+
         if (context.storage('validate-what') === 'all') {
-
-            var liveIssues = context.validator().getIssues({
-                what: context.storage('validate-what') || 'edited',
-                where: context.storage('validate-where') || 'all'
-            });
-            if (liveIssues.length) {
-                warningsItem.count = liveIssues.length;
-                shownItems.push(warningsItem);
-            }
-
             var resolvedIssues = context.validator().getResolvedIssues();
             if (resolvedIssues.length) {
                 resolvedItem.count = resolvedIssues.length;
