@@ -2009,6 +2009,7 @@
     {"key": "building", "value": "household", "description": "🄳 ➜ building=house"},
     {"key": "building:color", "description": "🄳 ➜ building:colour=*"},
     {"key": "building:height", "description": "🄳 ➜ height=*"},
+    {"key": "building:material", "value": "Brick", "description": "🄳 ➜ building:material=brick"},
     {"key": "building:min_height", "description": "🄳 ➜ min_height=*"},
     {"key": "building:roof:colour", "description": "🄳 ➜ roof:colour=*"},
     {"key": "building:type", "description": "🄳 ➜ building=*"},

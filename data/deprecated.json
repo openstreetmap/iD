@@ -240,6 +240,10 @@
     "replace": {"height": "$1"}
   },
   {
+    "old": {"building:material": "Brick"},
+    "replace": {"building:material": "brick"}
+  },
+  {
     "old": {"building:min_height": "*"},
     "replace": {"min_height": "$1"}
   },
