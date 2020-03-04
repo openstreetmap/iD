@@ -1353,10 +1353,6 @@
                 "level": {
                     "label": "Aras"
                 },
-                "levels": {
-                    "label": "Aras",
-                    "placeholder": "2, 4, 6..."
-                },
                 "lit": {
                     "label": "Bernyala"
                 },
@@ -2131,9 +2127,6 @@
                 "building/industrial": {
                     "name": "Bangunan Perindustrian"
                 },
-                "building/kindergarten": {
-                    "name": "Bangunan Prasekolah/Tadika"
-                },
                 "building/mosque": {
                     "name": "Bangunan Masjid",
                     "terms": "Bangunan Surau, Musolla"
@@ -2363,9 +2356,6 @@
                 },
                 "power/pole": {
                     "name": "Tiang Elektrik"
-                },
-                "power/sub_station": {
-                    "name": "Pencawang"
                 },
                 "power/substation": {
                     "name": "Pencawang"

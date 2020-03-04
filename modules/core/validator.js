@@ -64,8 +64,8 @@ export function coreValidator(context) {
     };
 
 
-    // when the user changes the squaring thereshold, rerun this on all buildings
-    validator.changeSquareThreshold = function() {
+    // must update issues when the user changes the unsquare thereshold
+    validator.reloadUnsquareIssues = function() {
 
         reloadUnsquareIssues(_headCache, context.graph());
         reloadUnsquareIssues(_baseCache, context.history().base());

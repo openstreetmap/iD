@@ -1881,7 +1881,7 @@
             },
             "mismatched_geometry": {
                 "title": "Niedopasowana geometria",
-                "tip": "Niektóre obiekty nie powinny wierzchołkiem na drodze lub obszarze, a inne odwrotnie – nie powinny być wolno stojącymi punktami."
+                "tip": "Niektóre obiekty nie powinny być wierzchołkiem na drodze lub obszarze, a inne odwrotnie – nie powinny być wolno stojącymi punktami."
             },
             "missing_role": {
                 "title": "Brakujące role",
@@ -1987,7 +1987,7 @@
             },
             "vertex_as_point": {
                 "message": "Ten obiekt powinien być częścią drogi lub obszaru.",
-                "reference": "Niektóre obiekty nie powinny być wolno stojącymi punktami, tylko być wierzchołkiem na drodze lub obszarze."
+                "reference": "Niektóre obiekty nie powinny być wolno stojącymi punktami, tylko wierzchołkiem na drodze lub obszarze."
             },
             "fix": {
                 "add_a_bridge": {
@@ -2759,6 +2759,15 @@
                 "attraction": {
                     "label": "Rodzaj"
                 },
+                "baby_feeding": {
+                    "label": "Miejsce do karmienia niemowlęcia",
+                    "options": {
+                        "no": "Nie",
+                        "room": "Osobny pokój",
+                        "yes": "Wyznaczone miejsce"
+                    },
+                    "terms": "miejsce do karmienia niemowlęcia, karmienie dziecka, karmienie piersią"
+                },
                 "baby_seat": {
                     "label": "Dla niemowląt"
                 },
@@ -2862,6 +2871,11 @@
                     "label": "Budynek",
                     "terms": "budynek"
                 },
+                "building/levels": {
+                    "label": "Liczba kondygnacji",
+                    "placeholder": "2, 4, 6...",
+                    "terms": "kondygnacje, piętra, poziomy"
+                },
                 "building/levels/underground": {
                     "label": "Kondygnacje podziemne",
                     "placeholder": "2, 4, 6...",
@@ -2877,7 +2891,8 @@
                     "terms": "materiał"
                 },
                 "building_area": {
-                    "label": "Budynek"
+                    "label": "Budynek",
+                    "terms": "budynek"
                 },
                 "bunker_type": {
                     "label": "Rodzaj"
@@ -3014,7 +3029,8 @@
                     "label": "Wyspa azylu"
                 },
                 "cuisine": {
-                    "label": "Kuchnia"
+                    "label": "Kuchnia",
+                    "terms": "kuchnia"
                 },
                 "currency_multi": {
                     "label": "Rodzaje środków płatności",
@@ -3254,6 +3270,12 @@
                 "except": {
                     "label": "Wyjątki"
                 },
+                "expected_rcn_route_relations": {
+                    "label": "Sąsiednie węzły rowerowe"
+                },
+                "expected_rwn_route_relations": {
+                    "label": "Sąsiednie węzły piesze"
+                },
                 "faces": {
                     "label": "Liczba powierzchni"
                 },
@@ -3333,6 +3355,9 @@
                 },
                 "fuel_multi": {
                     "label": "Rodzaje paliw"
+                },
+                "gambling": {
+                    "label": "Gry"
                 },
                 "gauge": {
                     "label": "Rozstaw szyn"
@@ -3544,7 +3569,7 @@
                 "junction_line": {
                     "label": "Rodzaj skrzyżowania",
                     "options": {
-                        "circular": "Skrzyżowanie o ruchu okrężnym",
+                        "circular": "Rondo (bez pierwszeństwa)",
                         "jughandle": "Jughandle",
                         "roundabout": "Rondo"
                     },
@@ -3627,11 +3652,6 @@
                 "level_semi": {
                     "label": "Piętro",
                     "terms": "piętro"
-                },
-                "levels": {
-                    "label": "Liczba kondygnacji",
-                    "placeholder": "2, 4, 6...",
-                    "terms": "kondygnacje, piętra, poziomy"
                 },
                 "liaison": {
                     "label": "Rodzaj"
@@ -3778,9 +3798,12 @@
                     "placeholder": "0, 1, 2, 3...",
                     "terms": "skala trudności podjazdów dla rowerów górskich"
                 },
+                "museum": {
+                    "label": "Rodzaj"
+                },
                 "name": {
                     "label": "Nazwa",
-                    "placeholder": "Powszechna nazwa własna (tylko jeśli istnieje)",
+                    "placeholder": "Powszechnie używana nazwa (jeśli istnieje)",
                     "terms": "nazwa"
                 },
                 "natural": {
@@ -4029,9 +4052,15 @@
                 "plant": {
                     "label": "Roślina"
                 },
+                "plant/method": {
+                    "label": "Metoda wytwarzania energii"
+                },
                 "plant/output/electricity": {
                     "label": "Moc wyjściowa",
                     "placeholder": "500 MW, 1000 MW, 2000 MW..."
+                },
+                "plant/source": {
+                    "label": "Źródło energii"
                 },
                 "playground": {
                     "label": "Rodzaj"
@@ -4070,7 +4099,13 @@
                     "label": "Rodzaj"
                 },
                 "pump": {
-                    "label": "Pompa"
+                    "label": "Pompa",
+                    "options": {
+                        "manual": "Ręczna",
+                        "no": "Brak",
+                        "powered": "Z napędem",
+                        "yes": "Tak"
+                    }
                 },
                 "railway": {
                     "label": "Rodzaj"
@@ -4329,6 +4364,9 @@
                     },
                     "placeholder": "Tak, Nie, Tylko",
                     "terms": "sprzedaż używanych"
+                },
+                "segregated": {
+                    "label": "Rozdzielona"
                 },
                 "self_service": {
                     "label": "Samoobsługowa"
@@ -5046,7 +5084,7 @@
                 },
                 "amenity/bicycle_repair_station": {
                     "name": "Samoobsługowa stacja naprawy rowerów",
-                    "terms": "naprawa rowerów, serwis, rowery"
+                    "terms": "naprawa rowerów, serwis, rowery, naprawy"
                 },
                 "amenity/biergarten": {
                     "name": "Ogródek piwny",
@@ -5085,7 +5123,7 @@
                 },
                 "amenity/casino": {
                     "name": "Kasyno",
-                    "terms": "kasyno, ruletka"
+                    "terms": "kasyno, ruletka, poker, bakarat, blackjack, hazard"
                 },
                 "amenity/charging_station": {
                     "name": "Stacja ładowania pojazdów",
@@ -5247,6 +5285,10 @@
                     "name": "Stacja paliw",
                     "terms": "stacja benzynowa,gaz,lpg"
                 },
+                "amenity/gambling": {
+                    "name": "Salon pachinko/bingo",
+                    "terms": "pachinko, bingo, automaty do gry, hazard, kasyno"
+                },
                 "amenity/grave_yard": {
                     "name": "Cmentarz przykościelny",
                     "terms": "cmentarz,pochówek"
@@ -5277,11 +5319,15 @@
                 },
                 "amenity/kindergarten": {
                     "name": "Teren przedszkola/żłobka",
-                    "terms": "teren żłobka, teren przedszkola"
+                    "terms": "teren przedszkola, teren żłobka, przedszkole, żłobek, dzieci"
                 },
                 "amenity/language_school": {
                     "name": "Szkoła językowa",
                     "terms": "esl,szkoła języków,języki"
+                },
+                "amenity/lavoir": {
+                    "name": "Pralnia (przy rzece)",
+                    "terms": "pralnia zewnętrzna, pranie"
                 },
                 "amenity/letter_box": {
                     "name": "Prywatna skrzynka pocztowa",
@@ -5942,8 +5988,8 @@
                     "terms": "kontrola graniczna"
                 },
                 "barrier/cattle_grid": {
-                    "name": "Przeszkoda dla bydła",
-                    "terms": "kratka,bydło"
+                    "name": "Przeszkoda dla zwierząt",
+                    "terms": "przeszkoda dla zwierząt, przeszkoda dla bydła, bydło, psy, kratka"
                 },
                 "barrier/chain": {
                     "name": "Łańcuch",
@@ -6027,6 +6073,10 @@
                 "barrier/stile": {
                     "name": "Przełaz",
                     "terms": "przełaz"
+                },
+                "barrier/swing_gate": {
+                    "name": "Szlaban (przesuwany w poziomie)",
+                    "terms": "szlaban, bariera"
                 },
                 "barrier/toll_booth": {
                     "name": "Punkt poboru opłat",
@@ -6353,7 +6403,7 @@
                 },
                 "craft/electronics_repair": {
                     "name": "Punkt napraw sprzętu elektronicznego",
-                    "terms": "naprawa RTV, naprawa elektroniki, naprawa telewizorów, serwis, serwis RTV, sprzęt RTV, rzemiosło, rzemieślnik, rzemieślnicy"
+                    "terms": "naprawa RTV, naprawa elektroniki, naprawa telewizorów, naprawy, serwis RTV, sprzęt RTV, rzemiosło, rzemieślnik, rzemieślnicy"
                 },
                 "craft/floorer": {
                     "name": "Kładzenie posadzek",
@@ -6539,6 +6589,10 @@
                     "name": "Apteczka",
                     "terms": "apteczka,bandaż,pierwsza pomoc,zestaw medyczny"
                 },
+                "emergency/landing_site": {
+                    "name": "Awaryjne lądowisko",
+                    "terms": "awaryjne lądowisko dla helikopterów, awaryjne lądowisko dla śmigłowców, śmigłowiec, lotnisko"
+                },
                 "emergency/life_ring": {
                     "name": "Koło ratunkowe",
                     "terms": "koło ratunkowe"
@@ -6573,7 +6627,7 @@
                 },
                 "entrance": {
                     "name": "Wejście/wyjście",
-                    "terms": "Wejście, Wyjście"
+                    "terms": "wejście, wyjście"
                 },
                 "entrance/emergency": {
                     "name": "Wyjście ewakuacyjne",
@@ -6587,7 +6641,7 @@
                     "name": "Bród"
                 },
                 "golf/bunker": {
-                    "name": "Bunkier",
+                    "name": "Bunkier (golf)",
                     "terms": "sand trap"
                 },
                 "golf/cartpath": {
@@ -7005,6 +7059,10 @@
                     "name": "Kamień graniczny",
                     "terms": "kamień,graniczny"
                 },
+                "historic/building": {
+                    "name": "Zabytkowy budynek",
+                    "terms": "zabytkowy budynek, historyczny budynek, budynek zabytkowy, budynek historyczny, zabytek"
+                },
                 "historic/castle": {
                     "name": "Zamek",
                     "terms": "zamek,gród"
@@ -7130,8 +7188,7 @@
                     "terms": "cmentarz"
                 },
                 "landuse/churchyard": {
-                    "name": "Dziedziniec kościelny",
-                    "terms": "Plac kościelny"
+                    "name": "Dziedziniec kościelny"
                 },
                 "landuse/commercial": {
                     "name": "Obszar biurowo-biznesowy",
@@ -7287,7 +7344,7 @@
                 },
                 "leisure/adult_gaming_centre": {
                     "name": "Salon gier hazardowych",
-                    "terms": "automat do gier"
+                    "terms": "salon gier hazardowych, automat do gier, automaty do gier, hazard"
                 },
                 "leisure/amusement_arcade": {
                     "name": "Salon gier",
@@ -7419,7 +7476,7 @@
                 },
                 "leisure/ice_rink": {
                     "name": "Lodowisko",
-                    "terms": "lodowisko, ślizgawka"
+                    "terms": "lodowisko, ślizgawka, łyżwy, łyżwiarstwo, hokej na lodzie, curling"
                 },
                 "leisure/marina": {
                     "name": "Przystań",
@@ -8192,11 +8249,15 @@
                 },
                 "office/government": {
                     "name": "Biuro rządowe lub samorządowe",
-                    "terms": "urząd, urzędnik"
+                    "terms": "biuro rządowe, biuro samorządowe, urząd miasta, urząd gminy, starostwo powiatowe, urząd wojewódzki, urząd marszałkowski, sejmik województwa, rada powiatu, rada gminy, rada sołecka, rada dzielnicy, rada osiedla, urząd pracy, ministerstwo, administracja publiczna, władze administracyjne, władze samorządowe"
+                },
+                "office/government/prosecutor": {
+                    "name": "Prokuratura",
+                    "terms": "prokuratura, prokurator, urząd"
                 },
                 "office/government/register_office": {
                     "name": "Urząd stanu cywilnego",
-                    "terms": "USC, stan cywilny,śluby,metryki,rejestracja urodzin"
+                    "terms": "urząd stanu cywilnego, USC, stan cywilny, śluby, metryki, rejestracja urodzin"
                 },
                 "office/government/tax": {
                     "name": "Urząd skarbowy",
@@ -8285,27 +8346,27 @@
                 },
                 "piste/downhill": {
                     "name": "Narciarska trasa donwhillowa",
-                    "terms": "narciarska trasa downhillowa,narty,alpy,snowboard,downhill,trasa narciarska"
+                    "terms": "narciarska trasa downhillowa, narty, snowboard, alpy, downhill, trasa narciarska, narciarstwo"
                 },
                 "piste/downhill/halfpipe": {
                     "name": "Rampa (snowboard)",
                     "terms": "rampa, half-pipe, half pipe, halfpipe, snowboard, narty, narciarstwo"
                 },
                 "piste/hike": {
-                    "name": "Rakiety śniegowe lub zimowy szlak wspinaczkowy",
-                    "terms": "rakiety śnieżne lub zimowy szlak wspinaczkowy,wspinaczka,zimowa wspinaczka,rakiety śniegowe,trasa narciarska,narty"
+                    "name": "Zimowy szlak wspinaczkowy / rakiety śnieżne",
+                    "terms": "zimowy szlak wspinaczkowy, rakiety śnieżne, wspinaczka, zimowa wspinaczka, trasa narciarska, narty, narciarstwo"
                 },
                 "piste/ice_skate": {
                     "name": "Trasa łyżwiarska",
-                    "terms": "trasa łyżwiarska,lód,łyżwiarstwo,narty,trasa narciarska"
+                    "terms": "trasa łyżwiarska, łyżwiarstwo, lód, lodowisko, narty, trasa narciarska, narciarstwo"
                 },
                 "piste/nordic": {
                     "name": "Trasa narciarstwa klasycznego lub przełajowego",
-                    "terms": "szlak narciarstwa klasycznego lub przełajowego,narty,klasyczne,przełajowe,narciarstwo,trasa narciarska"
+                    "terms": "szlak narciarstwa klasycznego, szlak narciarstwa przełajowego, narty, klasyczne, przełajowe, narciarstwo, trasa narciarska"
                 },
                 "piste/piste": {
                     "name": "Szlaki sportów zimowych",
-                    "terms": "szlaki sportów zimowych, narty, klasyczne, przełajowe, downhill, alpejskie, snowboard, wycieczki narciarskie, sanki, saneczki,sanie, kulig, skijöring, husky, koń, zimowa wspinaczka, rakiety śniegowe, lód, łyżwiarstwo"
+                    "terms": "szlaki sportów zimowych, narty, klasyczne, przełajowe, downhill, alpejskie, snowboard, wycieczki narciarskie, sanki, saneczki, sanie, kulig, skijöring, husky, koń, zimowa wspinaczka, rakiety śniegowe, lód, łyżwiarstwo"
                 },
                 "piste/skitour": {
                     "name": "Narciarski szlak turystyczny",
@@ -8313,11 +8374,11 @@
                 },
                 "piste/sled": {
                     "name": "Trasa saneczkowa",
-                    "terms": "trasa saneczkowa,narty,sanki,saneczki,sanie,kulig,trasa narciarska"
+                    "terms": "trasa saneczkowa, sanki, saneczki, sanie, kulig, bobsleje, narty, trasa narciarska, narciarstwo"
                 },
                 "piste/sleigh": {
                     "name": "Trasa do kuligów",
-                    "terms": "trasa do kuligów,narty,trasa narciarska,sanki,saneczki,sanie,skijöring,husky,koń"
+                    "terms": "trasa do kuligów, narty, trasa narciarska, narciarstwo, sanki, saneczki, sanie, skijöring, husky, koń"
                 },
                 "place": {
                     "name": "Miejsce"
@@ -8413,8 +8474,8 @@
                     "terms": "bujak sprężynowy, sprężynowiec"
                 },
                 "playground/roundabout": {
-                    "name": "Karuzela",
-                    "terms": "karuzela"
+                    "name": "Karuzela (na placu zabaw)",
+                    "terms": "karuzela, plac zabaw"
                 },
                 "playground/sandpit": {
                     "name": "Piaskownica",
@@ -8487,12 +8548,33 @@
                     "name": "Elektrownia",
                     "terms": "elektrownia, elektrociepłownia, generator"
                 },
+                "power/plant/source/coal": {
+                    "name": "Elektrownia węglowa",
+                    "terms": "elektrownia węglowa"
+                },
+                "power/plant/source/gas": {
+                    "name": "Elektrownia gazowa",
+                    "terms": "elektrownia gazowa"
+                },
+                "power/plant/source/hydro": {
+                    "name": "Elektrownia wodna",
+                    "terms": "elektrownia wodna, hydroelektrownia przepływowa, zapora wodna, elektrownia szczytowo-pompowa"
+                },
+                "power/plant/source/nuclear": {
+                    "name": "Elektrownia jądrowa",
+                    "terms": "elektrownia jądrowa, elektrownia atomowa, reaktor jądrowy"
+                },
+                "power/plant/source/solar": {
+                    "name": "Elektrownia słoneczna",
+                    "terms": "elektrownia słoneczna, farma fotowoltaiczna"
+                },
+                "power/plant/source/wind": {
+                    "name": "Elektrownia wiatrowa",
+                    "terms": "elektrownia wiatrowa, farma wiatrowa, siłownia wiatrowa"
+                },
                 "power/pole": {
                     "name": "Słup elektryczny",
                     "terms": "słup elektryczny"
-                },
-                "power/sub_station": {
-                    "name": "Podstacja"
                 },
                 "power/substation": {
                     "name": "Podstacja",
@@ -8852,7 +8934,7 @@
                 },
                 "shop/bathroom_furnishing": {
                     "name": "Sklep z wyposażeniem łazienek",
-                    "terms": "łazienki"
+                    "terms": "łazienki, wyposażenie łazienek, meble łazienkowe, akcesoria łazienkowe, armatura sanitarna, wanny, prysznice, baterie, brodziki, zlewy, zlewozmywaki, umywalki"
                 },
                 "shop/beauty": {
                     "name": "Salon urody",
@@ -8915,7 +8997,11 @@
                 },
                 "shop/car": {
                     "name": "Sprzedaż samochodów",
-                    "terms": "sprzedawca samochodów, dealer samochodowy, salon samochodowy, komis samochodowy, autokomis, używane samochody"
+                    "terms": "sprzedawca samochodów, dealer samochodowy, salon samochodowy, sprzedaż samochodów, sprzedaż aut, samochody, auta"
+                },
+                "shop/car/second_hand": {
+                    "name": "Komis samochodowy",
+                    "terms": "komis samochodowy, autokomis, używane samochody, używane auta, sprzedawca samochodów, dealer samochodowy, sprzedaż samochodów, sprzedaż aut, samochody, auta"
                 },
                 "shop/car_parts": {
                     "name": "Sklep z częściami do samochodów",
@@ -8923,7 +9009,7 @@
                 },
                 "shop/car_repair": {
                     "name": "Warsztat samochodowy",
-                    "terms": "warsztat samochodowy, auto serwis, autoserwis, auto-serwis, mechanik, naprawa, serwis, garaż, samochód, auto, samochodowy"
+                    "terms": "warsztat samochodowy, auto serwis, autoserwis, auto-serwis, mechanik, naprawa, naprawy, serwis, garaż, samochód, auto, samochodowy"
                 },
                 "shop/caravan": {
                     "name": "Sklep z kamperami i przyczepami",
@@ -8955,11 +9041,19 @@
                 },
                 "shop/clothes": {
                     "name": "Sklep odzieżowy",
-                    "terms": "odzież, ubrania, ciuchy, odzież używana, lumpeks, suknie ślubne, garnitury, bielizna, sklep z bielizną"
+                    "terms": "odzież, ubrania, ciuchy, butik, suknie ślubne, garnitury"
+                },
+                "shop/clothes/second_hand": {
+                    "name": "Sklep z odzieżą używaną",
+                    "terms": "odzież używana, lumpeks, ciuchland, ciucholand, ciuchy, ubrania"
                 },
                 "shop/clothes/underwear": {
                     "name": "Sklep z bielizną",
                     "terms": "bielizna"
+                },
+                "shop/clothes/wedding": {
+                    "name": "Salon sukien ślubnych",
+                    "terms": "salon sukien ślubnych, suknie ślubne, sukienki ślubne, odzież, ubrania"
                 },
                 "shop/coffee": {
                     "name": "Sklep z kawą",
@@ -8991,7 +9085,7 @@
                 },
                 "shop/craft": {
                     "name": "Sklep z artykułami dla artystów",
-                    "terms": "sklep z artykułami dla artystów, artykuły dla artystów, artykuły dla plastyków, farby, sztalugi, papiery, kartony, tektury, płótna, pastele, pędzle, ramy, ramki, drewno, narzędzia, papierniczy"
+                    "terms": "sklep z artykułami dla artystów, artykuły dla artystów, artykuły dla plastyków, farby, sztalugi, papiery, kartony, tektury, płótna, pastele, pędzle, ramy, ramki, drewno, narzędzia, papierniczy, sklep papierniczy"
                 },
                 "shop/curtain": {
                     "name": "Sklep z zasłonami",
@@ -9200,7 +9294,7 @@
                 },
                 "shop/lottery": {
                     "name": "Kolektura",
-                    "terms": "lotto"
+                    "terms": "kolektura, loteria, lotto, hazard"
                 },
                 "shop/mall": {
                     "name": "Centrum handlowe",
@@ -9232,7 +9326,7 @@
                 },
                 "shop/motorcycle_repair": {
                     "name": "Warsztat motocyklowy",
-                    "terms": "warsztat motocyklowy, mechanik, naprawa, serwis, garaż, motocykl, motor, samochód, auto, rower"
+                    "terms": "warsztat motocyklowy, mechanik, naprawa, naprawy, serwis, garaż, motocykl, motor, samochód, auto, rower"
                 },
                 "shop/music": {
                     "name": "Sklep muzyczny",
@@ -9592,6 +9686,10 @@
                     "name": "Muzeum",
                     "terms": "Muzeum"
                 },
+                "tourism/museum/history": {
+                    "name": "Muzeum historyczne",
+                    "terms": "muzeum historyczne"
+                },
                 "tourism/picnic_site": {
                     "name": "Miejsce na piknik",
                     "terms": "miejsce na piknik"
@@ -9707,6 +9805,10 @@
                 "type/enforcement": {
                     "name": "Kontrola",
                     "terms": "kontrola"
+                },
+                "type/enforcement/maxspeed": {
+                    "name": "Egzekwowanie ograniczenia prędkości",
+                    "terms": "egzekwowanie ograniczenia prędkości, ograniczenie prędkości, fotoradar"
                 },
                 "type/multipolygon": {
                     "name": "Wielokąt złożony"
@@ -9896,6 +9998,10 @@
                 "waterway/stream_intermittent": {
                     "name": "Strumień okresowy",
                     "terms": "strumień okresowy,potok okresowy"
+                },
+                "waterway/tidal_channel": {
+                    "name": "Kanał pływowy",
+                    "terms": "kanał pływowy, pływy, ciek"
                 },
                 "waterway/water_point": {
                     "name": "Miejsce poboru wody (dla łodzi)",
@@ -10425,17 +10531,17 @@
                 "description": "Spotkania dla entuzjastów map z okolic Filadelfii",
                 "extendedDescription": "GeoPhilly łączy programistów, geografów, geeków danych, entuzjastów otwartych źródeł, hakerów obywatelskich i uzależnionych od map w naszej wspólnej miłości do map i historii, które się za nią kryją. Jeżeli używasz map w swojej pracy lub po prostu chcesz się czegoś nauczyć, to jest spotkanie dla ciebie! Nasze wydarzenia mają być otwarte, przyjacielskie, edukacyjne i towarzyskie, więc obejmują zarówno luźne spotkania, jak i burzliwe dyskusje, a nawet warsztaty. Przyjdź, aby stworzyć razem z nami zróżnicowaną i inspirującą społeczność geoprzestrzenną w Filadelfii!"
             },
-            "LATAM-Facebook": {
-                "name": "OpenStreetMap Latam na Facebooku",
-                "description": "OpenStreetMap Latam na Facebooku"
+            "MapColabora-mailinglist": {
+                "name": "Mapeado Colaborativo / Geoinquietos Zaragoza",
+                "description": "Lista dyskusyjna Mapeado Colaborativo / Geoinquietos Zaragoza"
             },
-            "LATAM-Telegram": {
-                "name": "OpenStreetMap Latam na Telegramie",
-                "description": "Kanał OpenStreetMap Ameryka Łacińska na Telegramie"
+            "MapColabora-meetup": {
+                "name": "Mapeado Colaborativo / Geoinquietos Zaragoza",
+                "description": "Mapeado Colaborativo / Geoinquietos Zaragoza na Meetup"
             },
-            "LATAM-Twitter": {
-                "name": "OpenStreetMap Latam na Twitterze",
-                "description": "Obserwuj nas na Twitterze: {url}"
+            "MapColabora-twitter": {
+                "name": "Mapeado Colaborativo / Geoinquietos Zaragoza",
+                "description": "Mapeado Colaborativo / Geoinquietos Zaragoza na Twitterze"
             },
             "MapMinnesota": {
                 "name": "MapMinnesota",
@@ -10540,6 +10646,10 @@
             "OSM-CA-mailinglist": {
                 "name": "Lista dyskusyjna OSM-CA",
                 "description": "Lista dyskusyjna OpenStreetMap w Kanadzie"
+            },
+            "OSM-CA-telegram": {
+                "name": "@osmca na Telegramie",
+                "description": "Kanał OpenStreetMap Kanada na Telegramie"
             },
             "OSM-CL-facebook": {
                 "name": "OpenStreetMap Chile na Facebooku",
@@ -10756,7 +10866,7 @@
                 "extendedDescription": "OpenStreetMap (OSM) to mapa świata robiona przez ludzi takich, jak ty. To mapa, którą ty tworzysz, która jest rozdawana za darmo, jak Wikipedia. Wejdź na osm.org, aby dowiedzieć się więcej i przyjdź na nasze spotkanie, żeby porozmawiać o mapach, wesprzeć OSM i dobrze się bawić!"
             },
             "OSM-Portland-forum": {
-                "name": "Grupa OpenStreetMap PDX Google",
+                "name": "Grupa Google OpenStreetMap PDX",
                 "description": "Forum i lista dyskusyjna dla użytkowników OpenStreetMap z okolic Portland",
                 "extendedDescription": "Ta grupa ma ułatwiać ulepszanie OpenStreetMap w okolicach Portland, aby wesprzeć aplikacje takie jak Open Trip Planner."
             },
@@ -10881,7 +10991,7 @@
             },
             "OSM-india-mailinglist": {
                 "name": "Lista dyskusyjna OpenStreetMap Indie",
-                "description": "Talk-in  to oficjalna lista dyskusyjna hinduskiej społeczności OSM"
+                "description": "Talk-in to oficjalna lista dyskusyjna hinduskiej społeczności OSM"
             },
             "OSM-india-twitter": {
                 "name": "OpenStreetMap Indie na Twitterze",
@@ -10911,7 +11021,14 @@
             "OSMF": {
                 "name": "Fundacja OpenStreetMap ",
                 "description": "OSMF to działająca w UK fundacja non-profit, która wspiera projekt OpenStreetMap",
-                "extendedDescription": "OSMF wspiera OpenStreetMap poprzez zbieranie funduszy, utrzymywanie serwerów, na których działa OSM, organizowanie corocznej konferencji State of the Map i koordynowanie wolontariuszy zapewniających działanie OSM. Możesz pokazać swoje wsparcie i mieć wpływ na kierunek rozwoju OpenStreetMap, poprzez dołączenie jako członek OSMF tutaj: {signupUrl}"
+                "extendedDescription": "OSMF wspiera OpenStreetMap poprzez zbieranie funduszy, utrzymywanie serwerów, na których działa OSM, organizowanie corocznej konferencji State of the Map i koordynowanie wolontariuszy zapewniających działanie OSM. Możesz pokazać swoje wsparcie i mieć wpływ na kierunek rozwoju OpenStreetMap, poprzez dołączenie jako członek OSMF tutaj: {signupUrl}",
+                "events": {
+                    "sotm2020": {
+                        "name": "State of the Map 2020",
+                        "description": "Dołącz do nas na 3 dni w w Kapsztadzie w RPA na doroczną ogólnoświatową konferencję OpenStreetMap, która gromadzi wszystkich członków społeczności, aby nawiązywać kontakty, dzielić się i uczyć.",
+                        "where": "Kapsztad, RPA"
+                    }
+                }
             },
             "OpenCleveland-meetup": {
                 "name": "Open Cleveland",
@@ -10972,7 +11089,7 @@
             },
             "at-mailinglist": {
                 "name": "Lista dyskusyjna Talk-at",
-                "description": "Talk-at  to oficjalna lista dyskusyjna austriackiej społeczności OSM"
+                "description": "Talk-at to oficjalna lista dyskusyjna austriackiej społeczności OSM"
             },
             "at-twitter": {
                 "name": "OpenStreetMap Austria na Twitterze",
@@ -11022,6 +11139,11 @@
                 "name": "OpenStreetMap Wikiprojekt Bułgaria",
                 "description": "Strona Wikiprojektu dla Bułgarii"
             },
+            "bi-vc-cvl_wiki": {
+                "name": "OSMers BI-VC-CVL",
+                "description": "Mapujący z północnego Piemontu",
+                "extendedDescription": "Oprócz comiesięcznych spotkań mamy też grupę na WhatsApp."
+            },
             "bw-facebook": {
                 "name": "Mapowanie Botswany na Facebooku",
                 "description": "Strona OpenStreetMap w Botswanie"
@@ -11050,6 +11172,10 @@
             "ch-twitter": {
                 "name": "OpenStreetMap Szwajcaria na Twitterze",
                 "description": "Obserwuj nas na Twitterze: {url}"
+            },
+            "cuneo-telegram": {
+                "name": "Mapujący OpenStreetMap z Cuneo",
+                "description": "Kanał OpenStreetMap Cuneo na Telegramie"
             },
             "czech-community": {
                 "name": "Czeska społeczność OSM",
@@ -11099,6 +11225,10 @@
                 "name": "OpenStreetMap Niemcy na Telegramie",
                 "description": "Dołącz do grupy OpenStreetMap Niemcy na Telegramie: {url}"
             },
+            "de-viersen-meetup": {
+                "name": "Spotkania OpenStreetMap Viersen",
+                "description": "Spotkania społeczności i użytkowników OSM z Viersen i Mönchengladbach"
+            },
             "dk-forum": {
                 "name": "Forum www OpenStreetMap Dania",
                 "description": "Forum www OpenStreetMap Dania"
@@ -11114,6 +11244,10 @@
             "es-twitter": {
                 "name": "OpenStreetMap Hiszpania na Twitterze",
                 "description": "Obserwuj nas na Twitterze: {url}"
+            },
+            "et-telegram": {
+                "name": "@OpenStreetMapEthiopia na Telegramie",
+                "description": "Kanał OpenStreetMap Etiopia na Telegramie"
             },
             "fi-forum": {
                 "name": "Forum OpenStreetMap FI",
@@ -11157,7 +11291,7 @@
             },
             "galicia-wiki": {
                 "name": "OpenStreetMap Wikiprojekt Galicja",
-                "description": "Wszystko, co powinieneś wiedzieć o mapowaniu w Galicji: {url}"
+                "description": "Wszystko, co powinniście wiedzieć o mapowaniu w Galicji: {url}"
             },
             "gb-irc": {
                 "name": "OpenStreetMap Zjednoczone Królestwo na IRC",
@@ -11170,6 +11304,10 @@
             },
             "geogeeks_perth_meetup": {
                 "name": "Spotkania GeoGeeks Perth"
+            },
+            "guatemala-telegram": {
+                "name": "OSM Gwatemala na Telegramie",
+                "description": "Kanał OpenStreetMap Gwatemala na Telegramie"
             },
             "hr-facebook": {
                 "name": "OpenStreetMap Chorwacja na Facebooku",
@@ -11269,6 +11407,10 @@
                 "name": "OpenStreetMap Włochy na Twitterze",
                 "description": "Obserwuj nas na Twitterze: {url}"
             },
+            "kazakhstan-telegram": {
+                "name": "OSM Kazachstan na Telegramie",
+                "description": "Kanał OpenStreetMap Kazachstan na Telegramie"
+            },
             "kosovo-matrix": {
                 "name": "OpenStreetMap Kosowo na Matriksie (połączony z tym na Telegramie)",
                 "description": "Półoficjalna grupa publiczna dla Kosowa i okolic. Zapraszamy wszystkich mapujących z dowolnego kraju i z dowolnym językiem."
@@ -11276,6 +11418,34 @@
             "kosovo-telegram": {
                 "name": "OpenStreetMap Kosowo na Telegramie",
                 "description": "Półoficjalna grupa publiczna na Telegramie dla Kosowa i okolic. Zapraszamy wszystkich mapujących z dowolnego kraju i z dowolnym językiem."
+            },
+            "latam-facebook": {
+                "name": "OpenStreetMap Ameryka Łacińska na Facebooku",
+                "description": "Mapujący i OpenStreetMap Ameryka Łacińska na Facebooku"
+            },
+            "latam-irc": {
+                "name": "OpenStreetMap Ameryka Łacińska na IRC",
+                "description": "Wejdź na kanał #osm-latam na irc.oftc.net (port 6667)"
+            },
+            "latam-mailinglist": {
+                "name": "Lista dyskusyjna Talk-latam",
+                "description": "Talk-latam to oficjalna lista dyskusyjna latynoamerykańskiej społeczności OSM"
+            },
+            "latam-matrix": {
+                "name": "Kanał OpenStreetMap Ameryka Łacińska na Matriksie",
+                "description": "Rozmawiaj z innymi członkami latynoamerykańskiej społeczności OpenStreetMap na Matriksie."
+            },
+            "latam-telegram": {
+                "name": "OpenStreetMap Ameryka Łacińska na Telegramie",
+                "description": "Rozmawiaj z innymi członkami latynoamerykańskiej społeczności OpenStreetMap na Telegramie."
+            },
+            "latam-twitter": {
+                "name": "OpenStreetMap Ameryka Łacińska na Twitterze",
+                "description": "OpenStreetMap Ameryka Łacińska na Twitterze: {url}"
+            },
+            "latam-wiki": {
+                "name": "OpenStreetMap Wikiprojekt Ameryka Łacińska",
+                "description": "Wszystko, co powinniście wiedzieć o mapowaniu w Ameryce Łacińskiej"
             },
             "lu-mailinglist": {
                 "name": "Lista dyskusyjna Talk-lu",
@@ -11294,6 +11464,14 @@
                 "name": "Lokalna grupa Mappa Mercia",
                 "description": "Baza dla fanów OpenStreetMap i Midlands",
                 "extendedDescription": "Mappa Mercia jest projektem rozwoju OpenStreetMap w West Midlands w UK. Organizujemy różne wydarzenia, uczymy i wspieramy lokalne organizacje, które chcą się podzielić z nami swoimi danymi."
+            },
+            "md-googlegroup": {
+                "name": "Grupa Google OSM Mołdawia",
+                "description": "Grupa Google OpenStreetMap Mołdawia"
+            },
+            "md-telegram": {
+                "name": "@OSMMoldova na Telegramie",
+                "description": "Kanał OpenStreetMap Mołdawia na Telegramie"
             },
             "ni-facebook": {
                 "name": "Społeczność OpenStreetMap NI",
@@ -11332,7 +11510,7 @@
                 "description": "Lista dyskusyjna dla mapujących i użytkowników OpenStreetMap w Norwegii"
             },
             "no-telegram": {
-                "name": "@OSM_no na Telegram",
+                "name": "@OSM_no na Telegramie",
                 "description": "Kanał OpenStreetMap Norwegia na Telegramie"
             },
             "osm-afghanistan-facebook": {
@@ -11390,7 +11568,7 @@
             },
             "osm-india-wiki": {
                 "name": "Hinduski OpenStreetMap na Wikiprojekt",
-                "description": "Wszystko, co powinieneś wiedzieć o mapowaniu w Indiach: {url}"
+                "description": "Wszystko, co powinniście wiedzieć o mapowaniu w Indiach: {url}"
             },
             "osm-india-youtube": {
                 "name": "OpenStreetMap Indie na YouTube",
@@ -11423,10 +11601,6 @@
                 "name": "OpenStreetMap Kerala",
                 "description": "Dowiedz się więcej o mapowaniu Kerali: {url}"
             },
-            "osm-latam": {
-                "name": "OpenStreetMap Latam",
-                "description": "Wspieranie OpenStreetMap w Ameryce Łacińskiej"
-            },
             "osm-mg-facebook": {
                 "name": "OpenStreetMap Madagaskar na Facebooku",
                 "description": "Grupa na Facebooku dla osób z Madagaskaru zainteresowanych OpenStreetMap."
@@ -11438,6 +11612,10 @@
             "osm-se": {
                 "name": "OpenStreetMap.se",
                 "description": "Zapewniaj usługi OSM i informacje dla lokalnej społeczności w Szwecji"
+            },
+            "osm-za-twitter": {
+                "name": "OpenStreetMap RPA na Twitterze",
+                "description": "Obserwuj nas na Twitterze: {url}"
             },
             "osmcz-facebook": {
                 "name": "OpenStreetMap CZ na Facebooku",
@@ -11455,6 +11633,10 @@
                 "name": "Społeczność OSM Graz na Twitterze",
                 "description": "Społeczność OpenStreetMap Graz na Twitterze"
             },
+            "panama-telegram": {
+                "name": "OSM Panama na Telegramie",
+                "description": "Kanał OpenStreetMap Panama na Telegramie"
+            },
             "pt-mailinglist": {
                 "name": "Lista dyskusyjna Talk-pt",
                 "description": "Talk-pt to oficjalna lista dyskusyjna portugalskiej społeczności OSM"
@@ -11462,6 +11644,14 @@
             "pt-telegram": {
                 "name": "OpenStreetMap Portugalia na Telegramie",
                 "description": "Grupa na Telegramie portugalskiej społeczności OpenStreetMap {url}"
+            },
+            "romania-facebook": {
+                "name": "OpenStreetMap Rumunia na Facebooku",
+                "description": "Mapujący i użytkownicy OpenStreetMap w Rumunii"
+            },
+            "romania-telegram": {
+                "name": "@OSMRomania na Telegramie",
+                "description": "Kanał OpenStreetMap Rumunia na Telegramie"
             },
             "sa-telegram": {
                 "name": "OSM Arabia Saudyjska na Telegramie",
@@ -11486,6 +11676,10 @@
             "se-mailinglist": {
                 "name": "Lista dyskusyjna Talk-se",
                 "description": "Lista dyskusyjna OpenStreetMap w Szwecji"
+            },
+            "se-telegram": {
+                "name": "OSM Szwecja na Telegramie",
+                "description": "Kanał OpenStreetMap Szwecja na Telegramie"
             },
             "se-twitter": {
                 "name": "OpenStreetMap Szwecja na Twitterze",
@@ -11536,12 +11730,21 @@
                 "description": "Zapraszamy wszystkich! Zarejestruj się tutaj {signupUrl}",
                 "extendedDescription": "Lista dyskusyjna dla obszarów Rzymu i Lacjum."
             },
+            "talk-it-piemonte_mailinglist": {
+                "name": "Regionalna lista dyskusyjna OSM Włochy dla Piemontu",
+                "description": "Zapraszamy wszystkich! Zarejestruj się tutaj {signupUrl}",
+                "extendedDescription": "Lista dyskusyjna dla Piemontu."
+            },
             "talk-mg": {
                 "name": "Lista dyskusyjna Talk-mg",
                 "description": "Miejsce rozmów twórców, społeczności i użytkowników OpenStreetMap na Madagaskarze."
             },
             "talk-nz": {
                 "name": "Lista dyskusyjna Talk-nz"
+            },
+            "talk-za": {
+                "name": "Lista dyskusyjna Talk-za",
+                "description": "Talk-za to oficjalna lista dyskusyjna południowoafrykańskiej społeczności OSM"
             },
             "ua-facebook": {
                 "name": "OpenStreetMap Ukraina na Facebooku",
@@ -11601,6 +11804,10 @@
                 "name": "Lista dyskusyjna Talk-uy",
                 "description": "Talk-uy to oficjalna lista dyskusyjna urugwajskiej społeczności OSM"
             },
+            "uzbekistan-telegram": {
+                "name": "OSM Uzbekistan na Telegramie",
+                "description": "Kanał OpenStreetMap Uzbekistan na Telegramie"
+            },
             "ve-forum": {
                 "name": "Forum OpenStreetMap VE",
                 "description": "Forum www OpenStreetMap Wenezuela"
@@ -11612,6 +11819,10 @@
             "ve-telegram": {
                 "name": "OSM Wenezuela na Telegramie",
                 "description": "Dołącz do społeczności OpenStreetMap Wenezuela na Telegramie"
+            },
+            "ym-AASTU": {
+                "name": "AASTU Youth Mappers",
+                "description": "Oddział YouthMappers na Science and Technology University w Addis Abebie"
             },
             "ym-Abia-State-University": {
                 "name": "AbsuMappersTeam",
@@ -11729,6 +11940,7 @@
                 "description": "Oddział YouthMappers na Ignatius Ajuru University of Education"
             },
             "ym-Indiana-University-of-Pennsylvania": {
+                "name": "Geospatial Science Club",
                 "description": "Oddział YouthMappers na Indiana University of Pennsylvania"
             },
             "ym-Insititue-d-Enseignement-Superieur-de-Ruhengeri": {

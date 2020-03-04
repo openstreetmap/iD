@@ -3517,10 +3517,6 @@
                 "level": {
                     "label": "Etaĝo"
                 },
-                "levels": {
-                    "label": "Kiom da etaĝoj",
-                    "placeholder": "2, 4, 6…"
-                },
                 "liaison": {
                     "label": "Speco"
                 },
@@ -4936,10 +4932,6 @@
                     "name": "Retkafejo",
                     "terms": "interreta kafejo,retumejo"
                 },
-                "amenity/kindergarten": {
-                    "name": "Infanvartejo (ISCED 0)",
-                    "terms": "infanoghardeno,infanogxardeno,antaŭlernejo,kindergarteno,infanĝardeno,infanghardeno,infangxardeno,infanvartejo,lernludejo"
-                },
                 "amenity/language_school": {
                     "name": "Lingva lernejo",
                     "terms": "lingvolernejo"
@@ -5002,10 +4994,6 @@
                 "amenity/parking/underground": {
                     "name": "Parkumejo subtera",
                     "terms": "parkejo subtera,subtera parkumejo"
-                },
-                "amenity/parking_entrance": {
-                    "name": "Parkumeja/garaĝa enveturejo/elveturejo",
-                    "terms": "alirejo,enirejo,elirejo"
                 },
                 "amenity/parking_space": {
                     "name": "Parkumeja loko (detala)",
@@ -5738,10 +5726,6 @@
                     "name": "Industria konstruaĵo",
                     "terms": "industrio,fabriko"
                 },
-                "building/kindergarten": {
-                    "name": "Konstruaĵo de infanvartejo",
-                    "terms": "infanghardeno,infangxardeno,infanoĝardeno,antaŭlernejo,kindergarteno,infanĝardeno,infanvartejo"
-                },
                 "building/mosque": {
                     "name": "Moskea konstruaĵo",
                     "terms": "moskeo,islamo,minareto"
@@ -6109,10 +6093,6 @@
                 },
                 "emergency/yes": {
                     "name": "Vivsav-serva aliro: jes"
-                },
-                "entrance": {
-                    "name": "Enirejo/elirejo",
-                    "terms": "eniro,eliro,pordego,pordo"
                 },
                 "ford": {
                     "name": "Travadejo",
@@ -6631,8 +6611,7 @@
                     "terms": "tombarejo,mortintejo,enterigejo,sepultejo,nekropolo"
                 },
                 "landuse/churchyard": {
-                    "name": "Preĝeja korto",
-                    "terms": "preĝejkorto,preghejkorto,pregxejkorto,kirko,korto"
+                    "name": "Preĝeja korto"
                 },
                 "landuse/commercial": {
                     "name": "Oficeja tereno",
@@ -7659,41 +7638,9 @@
                     "name": "Oficejo de akv-provizanta firmao",
                     "terms": "akvoprovizo,akvokondukto"
                 },
-                "piste/downhill": {
-                    "name": "Skivojo alpa (malsuprenira)",
-                    "terms": "skivojo,skitrako,alpa skiado"
-                },
-                "piste/downhill/halfpipe": {
-                    "name": "Duontubo",
-                    "terms": "neĝtabulado,neĝparko"
-                },
-                "piste/hike": {
-                    "name": "Skivojo marŝada",
-                    "terms": "bastonmarŝado,skiŝuado,marŝado,vintra marŝado"
-                },
-                "piste/ice_skate": {
-                    "name": "Skivojo glitkurada",
-                    "terms": "glitkurado,sketado,glitado"
-                },
-                "piste/nordic": {
-                    "name": "Skivojo nordia (skikurada)",
-                    "terms": "nordia skiado,skikurado"
-                },
-                "piste/piste": {
-                    "name": "Vintrosporta kurso",
-                    "terms": "vintra sporto,skikurso,skivego,neĝtabulado"
-                },
                 "piste/skitour": {
                     "name": "Skivojo ski-ekskursuma",
                     "terms": "bastonmarŝado,skiŝuado,marŝado,vintra marŝado"
-                },
-                "piste/sled": {
-                    "name": "Skivojo glitveturila",
-                    "terms": "sledado,glitveturilado"
-                },
-                "piste/sleigh": {
-                    "name": "Skivojo glitveturila (tirata de hundoj)",
-                    "terms": "sledado,glitveturilado,hundosledado"
                 },
                 "place": {
                     "name": "Ejo"
@@ -7863,9 +7810,6 @@
                 "power/pole": {
                     "name": "Elektrofosto (ĝis 161kV)",
                     "terms": "fosto,elektrfosto,elektromasto"
-                },
-                "power/sub_station": {
-                    "name": "Elektrosubcentralo"
                 },
                 "power/substation": {
                     "name": "Elektrosubcentralo",
@@ -8187,10 +8131,6 @@
                     "name": "Alkohola vendejo",
                     "terms": "alkoholejo,vino,brando,trinkaĵo,drinkaĵo"
                 },
-                "shop/anime": {
-                    "name": "Animea vendejo",
-                    "terms": "mangao,anime,manga,japanbildrakontoj"
-                },
                 "shop/antiques": {
                     "name": "Antikvaĵa vendejo",
                     "terms": "antikvaĵejo,antikvajhejo,antikvajxejo"
@@ -8341,10 +8281,6 @@
                 "shop/country_store": {
                     "name": "Ĝenerala vendejo",
                     "terms": "ĝenerala vendejo"
-                },
-                "shop/craft": {
-                    "name": "Materialoj-por-metio vendejo",
-                    "terms": "metio,metiado,manmetio,artisto,plastikisto,artaĵo"
                 },
                 "shop/curtain": {
                     "name": "Kurtena vendejo",
@@ -9696,18 +9632,6 @@
                 "description": "Renkontiĝo por map-ŝatantoj proksime de Filadelfio",
                 "extendedDescription": "GeoPhilly kunigas programistojn, geografiistoj, fanatikuloj de datumoj kaj malfermkoda programaro, lertuloj kaj map-ŝatantoj en la komuna amo al mapoj kaj historioj pri ili. Se vi uzas mapojn en laboro aŭ simple volas sciiĝi pli, tiu ĉi renkontiĝo estas por vi! Niaj renkontiĝoj estas malfermitaj, amikecaj, instruantaj kaj sociaj kaj temas pri klaĉado, teĥnika babilado kaj eĉ laboro. Alvenu por krei diversan kaj inspiran mapigan komunumon en Filadelfio kun ni!"
             },
-            "LATAM-Facebook": {
-                "name": "OpenStreetMap Latam Facebook",
-                "description": "OpenStreetMap Latam ĉe Facebook"
-            },
-            "LATAM-Telegram": {
-                "name": "OpenStreetMap Latam Telegram",
-                "description": "Telegram-grupo por OpenStreetMap en Latinameriko"
-            },
-            "LATAM-Twitter": {
-                "name": "OpenStreetMap Latam Twitter",
-                "description": "Sekvu nin ĉe Twitter ĉe {url}"
-            },
             "MapMinnesota": {
                 "name": "Map Minnesota",
                 "description": "Mapigistoj kaj ŝatantoj de OpenStreetMap en Mineapolo kaj Saint Paul",
@@ -10210,10 +10134,6 @@
             "osm-gh-twitter": {
                 "name": "OpenStreetMap Ghana ĉe Twitter",
                 "description": "Sekvu nin ĉe Twitter: {url}"
-            },
-            "osm-latam": {
-                "name": "OpenStreetMap Latam",
-                "description": "Subteni OpenStreetMap en Latinameriko"
             },
             "osm-mg-facebook": {
                 "name": "Facebook-grupo OpenStreetMap Madagascar",

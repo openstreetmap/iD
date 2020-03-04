@@ -2,7 +2,9 @@
     "fields": [
         "name",
         "rwn_ref",
-        "rcn_ref"
+        "expected_rwn_route_relations",
+        "rcn_ref",
+        "expected_rcn_route_relations"
     ],
     "geometry": [
         "vertex"

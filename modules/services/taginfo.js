@@ -106,26 +106,27 @@ function filterRoles(geometry) {
 function valKey(d) {
     return {
         value: d.key,
-        title: d.key,
-        count: d.count
+        title: d.key
     };
 }
 
 
 function valKeyDescription(d) {
-    return {
+    var obj = {
         value: d.value,
-        title: d.description || d.value,
-        count: d.count
+        title: d.description || d.value
     };
+    if (d.count) {
+        obj.count = d.count;
+    }
+    return obj;
 }
 
 
 function roleKey(d) {
     return {
         value: d.role,
-        title: d.role,
-        count: d.count
+        title: d.role
     };
 }
 

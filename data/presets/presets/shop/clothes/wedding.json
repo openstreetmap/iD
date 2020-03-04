@@ -1,0 +1,28 @@
+{
+    "icon": "temaki-gown",
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "tags": {
+        "shop": "clothes",
+        "clothes": "wedding"
+    },
+    "reference": {
+        "key": "clothes",
+        "value": "wedding"
+    },
+    "terms": [
+        "boutique",
+        "bridal",
+        "bride",
+        "bridegroom",
+        "bridesmaid",
+        "groom",
+        "groomsman",
+        "tuxedo",
+        "wedding dress",
+        "wedding gown"
+    ],
+    "name": "Wedding Clothes Store"
+}

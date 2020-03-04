@@ -1971,10 +1971,6 @@
                 "level": {
                     "label": "Nivell"
                 },
-                "levels": {
-                    "label": "Nivells",
-                    "placeholder": "2, 4, 6..."
-                },
                 "lit": {
                     "label": "Il·luminació"
                 },
@@ -3031,9 +3027,6 @@
                     "name": "Cifercafè",
                     "terms": "Cifercafè, cafè d'internet, xatfeteria"
                 },
-                "amenity/kindergarten": {
-                    "name": "Centre preescolar"
-                },
                 "amenity/language_school": {
                     "name": "Escola d'idiomes",
                     "terms": "Acadèmia d'idiomes, escola de llengües, acadèmia de llengües"
@@ -3057,9 +3050,6 @@
                 },
                 "amenity/nursing_home": {
                     "name": "Llar d'avis"
-                },
-                "amenity/parking_entrance": {
-                    "name": "Entrada de Garatge/Sortida"
                 },
                 "amenity/parking_space": {
                     "name": "Espai d'aparcament"
@@ -3472,9 +3462,6 @@
                     "name": "Edifici industrial",
                     "terms": "Edifici industrial"
                 },
-                "building/kindergarten": {
-                    "name": "Edifici de preescolar"
-                },
                 "building/mosque": {
                     "name": "Edifici d'una mesquita"
                 },
@@ -3712,10 +3699,6 @@
                 },
                 "emergency/yes": {
                     "name": "Accés per a emergències permès"
-                },
-                "entrance": {
-                    "name": "Entrada/Sortida",
-                    "terms": "Entrada/Sortida"
                 },
                 "ford": {
                     "name": "Ford"
@@ -4432,9 +4415,6 @@
                 "power/pole": {
                     "name": "Piló de línia elèctrica"
                 },
-                "power/sub_station": {
-                    "name": "Subestació"
-                },
                 "power/substation": {
                     "name": "Subestació",
                     "terms": "Subestació elèctrica, Estació elèctrica, Central elèctrica"
@@ -4508,9 +4488,6 @@
                 "shop/alcohol": {
                     "name": "Botiga de licors",
                     "terms": "Licoreria, Botiga de licors"
-                },
-                "shop/anime": {
-                    "name": "Botiga de còmics"
                 },
                 "shop/antiques": {
                     "name": "Botiga d'antiguitats"
@@ -4616,10 +4593,6 @@
                 "shop/cosmetics": {
                     "name": "Botiga de cosmètics",
                     "terms": "Botiga de perfums, Cosmètics, Cosmètica, Perfums, Perfumeria"
-                },
-                "shop/craft": {
-                    "name": "Botiga per a les arts plàstiques",
-                    "terms": "Botiga de manualitats, Manualitats, Arts plàstiques"
                 },
                 "shop/curtain": {
                     "name": "Botiga de cortines",
@@ -5422,9 +5395,6 @@
             }
         },
         "community": {
-            "LATAM-Twitter": {
-                "description": "Segueix-nos a Twitter a {url}"
-            },
             "OSM-AR-telegram": {
                 "name": "Telegram d'OpenStreetMap Argentina",
                 "description": "Uneix-te a la comunitat argentina d'OpenStreetMap a Telegram"

@@ -1661,10 +1661,6 @@
                 "level": {
                     "label": "Raven"
                 },
-                "levels": {
-                    "label": "Število nadstropij",
-                    "placeholder": "2, 4, 6..."
-                },
                 "lit": {
                     "label": "Osvetljenost"
                 },
@@ -2489,10 +2485,6 @@
                     "name": "Internet Cafe",
                     "terms": "internet, kiber, taksi, tele, kava, net, omrežje, internet kafe"
                 },
-                "amenity/kindergarten": {
-                    "name": "Vrtčevsko območje",
-                    "terms": "vzgojno,varstveni,zavod,vrtec"
-                },
                 "amenity/library": {
                     "name": "Knjižnica",
                     "terms": "biblioteka"
@@ -2520,10 +2512,6 @@
                 "amenity/parking/multi-storey": {
                     "name": "Parkirna hiša",
                     "terms": "Garažna hiša,garaža"
-                },
-                "amenity/parking_entrance": {
-                    "name": "Vzhod/izhod v parkirno hišo",
-                    "terms": "Uvoz/izvoz iz parkirne hiše"
                 },
                 "amenity/parking_space": {
                     "name": "Parkirni prostor",
@@ -2859,10 +2847,6 @@
                     "name": "Industrijska zgradba",
                     "terms": "tovarna,proizvodna hala,proizvodni obrat"
                 },
-                "building/kindergarten": {
-                    "name": "Vrtec",
-                    "terms": "vrtec,otroci,vzgoja,plenice,predšolsk*"
-                },
                 "building/public": {
                     "name": "Javna zgradba",
                     "terms": "upravne stavbe,stavbe v javni lasti,upravne zgradbe,zgradbe v javni lasti"
@@ -3138,10 +3122,6 @@
                 "emergency/yes": {
                     "name": "Dovoljen dostop v sili"
                 },
-                "entrance": {
-                    "name": "Vhod/Izhod",
-                    "terms": "vstop/izstop"
-                },
                 "ford": {
                     "name": "Plitvina",
                     "terms": "brodenje,brod"
@@ -3408,8 +3388,7 @@
                     "terms": "navje,grobišče,žale,britof"
                 },
                 "landuse/churchyard": {
-                    "name": "Cerkveno dvorišče",
-                    "terms": "cerkvena okolica"
+                    "name": "Cerkveno dvorišče"
                 },
                 "landuse/commercial": {
                     "name": "Poslovno področje",
@@ -3985,9 +3964,6 @@
                     "name": "Steber daljnovoda",
                     "terms": "kandelaber"
                 },
-                "power/sub_station": {
-                    "name": "Razdelilna transformatorska postaja"
-                },
                 "power/substation": {
                     "name": "Razdelilna transformatorska postaja"
                 },
@@ -4065,10 +4041,6 @@
                 "shop/alcohol": {
                     "name": "Trgovina z alkoholnimi pijačami",
                     "terms": "alkoholne pijače"
-                },
-                "shop/anime": {
-                    "name": "Trgovina Anime",
-                    "terms": "Anime, manga, kostumi, maske"
                 },
                 "shop/antiques": {
                     "name": "Starinarnica",
@@ -4181,9 +4153,6 @@
                 },
                 "shop/cosmetics": {
                     "name": "Kozmetična trgovina"
-                },
-                "shop/craft": {
-                    "name": "Trgovina z ročnimi izdelki"
                 },
                 "shop/curtain": {
                     "name": "Trgovina z zavesami",

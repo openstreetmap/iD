@@ -8,9 +8,9 @@ describe('iD.uiRawTagEditor', function() {
         context.history().merge([entity]);
 
         taglist = iD.uiRawTagEditor(context)
-            .tags(tags)
             .entityIDs([entity.id])
             .preset({isFallback: function() { return false; }})
+            .tags(tags)
             .expanded(true);
 
         element = d3.select('body')

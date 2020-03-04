@@ -2935,7 +2935,7 @@
                     "options": {
                         "no": "Non presente",
                         "realtime": "In tempo reale",
-                        "timetable": "Orario",
+                        "timetable": "Tabella oraria",
                         "yes": "Sì"
                     }
                 },
@@ -3417,10 +3417,6 @@
                 "level_semi": {
                     "label": "Piani",
                     "terms": "[traduci con sinonimi o termini legati a 'Piani', separati da virgole]"
-                },
-                "levels": {
-                    "label": "Piani",
-                    "placeholder": "2, 4, 6..."
                 },
                 "liaison": {
                     "label": "Tipo"
@@ -4164,7 +4160,7 @@
                     "options": {
                         "bridge": "Ponte",
                         "cutting": "Infossato",
-                        "embankment": "Argine",
+                        "embankment": "Terrapieno",
                         "ford": "Guado",
                         "tunnel": "Tunnel"
                     },
@@ -4861,10 +4857,6 @@
                     "name": "Internet Cafe",
                     "terms": "caffè,te,bar,internet,point,internet point,cybercafe"
                 },
-                "amenity/kindergarten": {
-                    "name": "Area della scuola d'infanzia",
-                    "terms": "scuola d'infanzia,scuola di infanzia,asilo,assistenza all'infanzia,asilo d'infanzia,scuola materna,scuola dell'infanzia,asilo nido"
-                },
                 "amenity/language_school": {
                     "name": "Scuola di lingue straniere",
                     "terms": "scuola,lingue,lingua,inglese,tedesco,arabo,cinese,spagnolo"
@@ -4923,10 +4915,6 @@
                     "name": "Parcheggio sotterraneo",
                     "terms": "auto,automobile,veicolo,parcheggio,posto auto,parcheggio auto,parcheggio camper,sotto la superficie,sotterraneo,veicoli"
                 },
-                "amenity/parking_entrance": {
-                    "name": "Entrata/Uscita Garage",
-                    "terms": "garage,posto auto,posteggio,parcheggio"
-                },
                 "amenity/parking_space": {
                     "name": "Stallo",
                     "terms": "posto auto"
@@ -4958,6 +4946,9 @@
                 "amenity/place_of_worship/christian": {
                     "name": "Chiesa cristiana",
                     "terms": "cristiano,abbazia,basilica,cattedrale,presbiterio,cappella,chiesa,casa di Dio,luogo di preghiera,luogo di culto,missione,oratorio,parrocchia,sacello,edicola votiva,tabernacolo,tempio"
+                },
+                "amenity/place_of_worship/christian/jehovahs_witness": {
+                    "name": "Sala del Regno dei testimoni di Geova"
                 },
                 "amenity/place_of_worship/hindu": {
                     "name": "Tempio Hindu",
@@ -5174,6 +5165,18 @@
                 "amenity/studio": {
                     "name": "Studio radiotelevisivo",
                     "terms": "studio,radio,televisione,registrazione,in onda,studio di registrazione"
+                },
+                "amenity/studio/audio": {
+                    "name": "Studio di registrazione audio"
+                },
+                "amenity/studio/radio": {
+                    "name": "Studio emittente radiofonica"
+                },
+                "amenity/studio/television": {
+                    "name": "Studio emittente televisiva"
+                },
+                "amenity/studio/video": {
+                    "name": "Studio di produzione video"
                 },
                 "amenity/swimming_pool": {
                     "name": "Piscina"
@@ -5610,10 +5613,6 @@
                     "name": "Edificio industriale",
                     "terms": "Edifico industriale"
                 },
-                "building/kindergarten": {
-                    "name": "Edificio di una scuola d'infanzia",
-                    "terms": "asilo nido,primavera"
-                },
                 "building/mosque": {
                     "name": "Moschea (edificio)",
                     "terms": "moschea,moschee,islam,sala della preghiera,preghiera,minareto"
@@ -5631,7 +5630,7 @@
                     "terms": "edificio residenziale,casa"
                 },
                 "building/retail": {
-                    "name": "Negozio",
+                    "name": "Edificio per negozi",
                     "terms": "edificio commerciale,commerciale,negozi,rivendita,concessionario"
                 },
                 "building/roof": {
@@ -5679,7 +5678,7 @@
                     "terms": "villette,fila di case"
                 },
                 "building/train_station": {
-                    "name": "Stazione dei treni"
+                    "name": "Edificio primario stazione ferroviaria"
                 },
                 "building/transportation": {
                     "name": "Stazione (mezzi di trasporto)"
@@ -5964,10 +5963,6 @@
                 },
                 "emergency/yes": {
                     "name": "Accesso di emergenza"
-                },
-                "entrance": {
-                    "name": "Entrata/Uscita",
-                    "terms": "entrata,uscita,emergenza,accesso,porta,portone,ingresso"
                 },
                 "ford": {
                     "name": "Guado",
@@ -6470,8 +6465,7 @@
                     "terms": "Cimitero"
                 },
                 "landuse/churchyard": {
-                    "name": "Area parrocchiale",
-                    "terms": "sagrato,parrocchia"
+                    "name": "Area parrocchiale"
                 },
                 "landuse/commercial": {
                     "name": "Area commerciale",
@@ -6948,8 +6942,13 @@
                     "name": "Linea di demarcazione",
                     "terms": "Linea di taglio"
                 },
+                "man_made/dyke": {
+                    "name": "Argine",
+                    "terms": "argine,terrapieno,rialzo"
+                },
                 "man_made/embankment": {
-                    "name": "Terrapieno"
+                    "name": "Terrapieno",
+                    "terms": "argine,terrapieno,rialzo"
                 },
                 "man_made/flagpole": {
                     "name": "Pennone",
@@ -7384,41 +7383,9 @@
                 "office/water_utility": {
                     "name": "Ufficio azienda di fornitura dell'acqua"
                 },
-                "piste/downhill": {
-                    "name": "Pista sciistica",
-                    "terms": "sci,alpino,alpinismo,alpinistico,snowboard,discesa,pista,piste,tavola,neve"
-                },
-                "piste/downhill/halfpipe": {
-                    "name": "Halfpipe",
-                    "terms": "sci,alpino,alpinismo,halfpipe,tubo,mezzo,mezzo tubo,snowboard,tavola,discesa,pista,piste,neve"
-                },
-                "piste/hike": {
-                    "name": "Ciaspolate o sentieri invernali",
-                    "terms": "escursione,invernale,gita,passeggiata,tour,trekking,ciaspola,ciaspole,ciaspolata,racchette da neve,pista,sci,montagna,inverno,neve"
-                },
-                "piste/ice_skate": {
-                    "name": "Pista per pattinaggio sul ghiaccio",
-                    "terms": "ghiaccio,pattinaggio,piste,sci,neve,lama,pattini"
-                },
-                "piste/nordic": {
-                    "name": "Pista per sci nordico",
-                    "terms": "sci,nordico,fondo,sci di fondo,pattinaggio,pista,neve"
-                },
-                "piste/piste": {
-                    "name": "Pista per sport invernali",
-                    "terms": "sci,nordico,fondo,sci di fondo,discesa,alpino,alpinismo,snowboard,tavola,ski tour,gita su sci,slitta,slittino,husky,cani,traino,cavallo,escursione invernale,gita invernale,ciaspola,racchette da neve,ciaspolata,ciaspolate,ghiaccio,pattinaggio"
-                },
                 "piste/skitour": {
                     "name": "Pista per sci alpinismo",
                     "terms": "sci,ski tour,gita su sci,sci di fondo,alpinismo,escursione su sci,piste,pista"
-                },
-                "piste/sled": {
-                    "name": "Pista per slittini",
-                    "terms": "sci,slitta,slittino,pista,cani,traino"
-                },
-                "piste/sleigh": {
-                    "name": "Pista per slitte",
-                    "terms": "sci,pista,slitta,slittino,cani da slitta,ski joring,husky,cani,cavallo,traino"
                 },
                 "place": {
                     "name": "Luogo"
@@ -7533,11 +7500,11 @@
                 },
                 "power/generator": {
                     "name": "Generatore di energia",
-                    "terms": "Centrale elettrica"
+                    "terms": "turbina,mulino,rotore,alternatore,reattore,cella,caldaia"
                 },
                 "power/generator/method/photovoltaic": {
-                    "name": "Pannelli solari",
-                    "terms": "modulo fotovoltaico,solare,luce del sole, pannello,pannelli,fotovoltaico,fotovoltaici"
+                    "name": "Pannello fotovoltaico",
+                    "terms": "modulo,schiera,solare,luce del sole,pannelli,fotovoltaici"
                 },
                 "power/generator/source/hydro": {
                     "name": "Turbina idraulica",
@@ -7548,7 +7515,8 @@
                     "terms": "fissione,generatore,nucleare,testata,reattore,nucleo,atomi,reazione,radioattivo,radioattività,Chernobyl,Cernobil"
                 },
                 "power/generator/source/wind": {
-                    "name": "Turbina eolica"
+                    "name": "Turbina eolica",
+                    "terms": "aerogeneratore,eolico,vento,elica,pale"
                 },
                 "power/line": {
                     "name": "Linea elettrica",
@@ -7559,15 +7527,24 @@
                     "terms": "corrente,elettricità,elettrodotto,cavo elettrico"
                 },
                 "power/plant": {
-                    "name": "Area della Centrale elettrica",
-                    "terms": "carbone,gas,generatore,idroelettrico,nucleare,energia,elettrica,elettricità,elettrico,centrale,produzione"
+                    "name": "Impianto di produzione energia",
+                    "terms": "centrale,produzione,energia,elettrica,termoelettrica,idroelettrica,carbone,gas,nucleare,parco,elettrico,solare,fotovoltaico,termoelettrico,eolico,impianto,inceneritore,termovalorizzatore,digestore,elettricità"
+                },
+                "power/plant/source/coal": {
+                    "name": "Centrale a carbone"
+                },
+                "power/plant/source/gas": {
+                    "name": "Centrale a gas"
+                },
+                "power/plant/source/hydro": {
+                    "name": "Centrale idroelettrica"
+                },
+                "power/plant/source/nuclear": {
+                    "name": "Centrale nucleare"
                 },
                 "power/pole": {
                     "name": "Palo della luce",
                     "terms": "Pilone elettricità"
-                },
-                "power/sub_station": {
-                    "name": "Sottostazione elettrica"
                 },
                 "power/substation": {
                     "name": "Sottostazione",
@@ -7660,10 +7637,12 @@
                     "name": "Stazione metropolitana"
                 },
                 "public_transport/station_train": {
-                    "name": "Stazione treno"
+                    "name": "Stazione ferroviaria",
+                    "terms": "stop,fermata,transito,treno,passeggeri"
                 },
                 "public_transport/station_train_halt": {
-                    "name": "Fermata del treno a richiesta"
+                    "name": "Fermata ferroviaria (facoltativa/su richiesta)",
+                    "terms": "stop,stazione,transito,treno,passeggeri"
                 },
                 "public_transport/station_tram": {
                     "name": "Stazione tram"
@@ -7733,7 +7712,7 @@
                     "terms": "funicolare,treno,trenino"
                 },
                 "railway/halt": {
-                    "name": "Fermata a richiesta"
+                    "name": "Fermata ferroviaria (facoltativa/su richiesta)"
                 },
                 "railway/level_crossing": {
                     "name": "Passaggio a livello (strada)"
@@ -7773,7 +7752,7 @@
                     "terms": "segnale,semaforo,luci"
                 },
                 "railway/station": {
-                    "name": "Stazione"
+                    "name": "Stazione ferroviaria"
                 },
                 "railway/subway": {
                     "name": "Metropolitana",
@@ -7840,10 +7819,6 @@
                 },
                 "shop/alcohol": {
                     "name": "Negozio di liquori"
-                },
-                "shop/anime": {
-                    "name": "Negozio di manga",
-                    "terms": "negozio di anime,anime,manga,Giappone,cosplay,figurine,fumetti,costumi"
                 },
                 "shop/antiques": {
                     "name": "Antiquario",
@@ -7990,10 +7965,6 @@
                     "name": "Negozio di cosmetici",
                     "terms": "Cosmetica,Negozio di cosmetica,Profumeria"
                 },
-                "shop/craft": {
-                    "name": "Negozio di arti e mestieri",
-                    "terms": "Arti e mestieri"
-                },
                 "shop/curtain": {
                     "name": "Negozio di tende",
                     "terms": "tende,tendaggi,finestre"
@@ -8021,6 +7992,10 @@
                 "shop/e-cigarette": {
                     "name": "Negozio di sigarette elettroniche",
                     "terms": "elettronica,vapore,sigarette,e-cigarette"
+                },
+                "shop/electrical": {
+                    "name": "Negozio di materiale elettrico",
+                    "terms": "cavi,prese,spine,interruttori,portalampada,plafoniere,lampadine"
                 },
                 "shop/electronics": {
                     "name": "Negozio di elettronica",
@@ -8165,7 +8140,8 @@
                     "terms": "cuoio,curame"
                 },
                 "shop/lighting": {
-                    "name": "Negozio di illuminazione"
+                    "name": "Negozio di illuminazione",
+                    "terms": "lampade,lampadari,plafoniere"
                 },
                 "shop/locksmith": {
                     "name": "Fabbro",
@@ -8507,6 +8483,9 @@
                 },
                 "tourism/museum": {
                     "name": "Museo"
+                },
+                "tourism/museum/history": {
+                    "name": "Museo di storia"
                 },
                 "tourism/picnic_site": {
                     "name": "Area picnic",
@@ -9300,18 +9279,6 @@
                 "description": "Meetup per appassionati di mappe nella zona di Philadelphia",
                 "extendedDescription": "Geophilly unisce sviluppatori, geografi, data geek, appassionati open source, civic hacker e drogati di mappe nella comune passione passione per le mappe e delle storie che possono raccontare. Se usate delle mappe nel vostro lavoro o se voltete soltanto saperne di più, questo è il meetup adatto per voi! I nostri eventi mirano a essere aperti, amichevoli, educativi e sociali, e spaziano dalle piacevoli chiacchierate agli incontri lampo e perfino agli workshop. Venite a creare una community geospaziale variegata e ispirativa con noi a Philadelphia!"
             },
-            "LATAM-Facebook": {
-                "name": "Facebook di OpenStreetMap dell’America Latina",
-                "description": "OpenStreetMap dell’America Latina su Facebook"
-            },
-            "LATAM-Telegram": {
-                "name": "Telegram di OpenStreetMap dell’America Latina",
-                "description": "Telegram di OpenStreetMap per l’America Latina"
-            },
-            "LATAM-Twitter": {
-                "name": "Twitter di OpenStreetMap dell’America Latina",
-                "description": "Seguici su Twitter all’indirizzo {url}"
-            },
             "MapMinnesota": {
                 "name": "MapMinnesota",
                 "description": "Mappatori e appassionati di OpenStreetMap nell’area delle Twin Cities.",
@@ -10067,10 +10034,6 @@
             "osm-iran-telegram": {
                 "name": "Telegram di OpenStreetMap dell’Iran",
                 "description": "Ti invitiamo a unirti al nostro canale Telegram all’indirizzo {url}. Abbiamo anche un supergruppo con molti utenti OSM interessati all’Iran. Trovi il link nella biografia del canale."
-            },
-            "osm-latam": {
-                "name": "OpenStreetMap dell’America Latina",
-                "description": "Sosteniamo OpenStreetMap in America Latina"
             },
             "osm-mg-facebook": {
                 "name": "Gruppo Facebook di OpenStreetMap del Madagascar",

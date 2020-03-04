@@ -4,7 +4,7 @@
         "name",
         "address",
         "building_area",
-        "outdoor_seating",
+        "opening_hours",
         "min_age",
         "brewery"
     ],
@@ -18,7 +18,8 @@
         "internet_access/ssid",
         "level",
         "microbrewery",
-        "opening_hours",
+        "operator",
+        "outdoor_seating",
         "payment_multi",
         "phone",
         "ref/vatin",

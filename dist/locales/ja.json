@@ -2756,6 +2756,15 @@
                 "attraction": {
                     "label": "種類"
                 },
+                "baby_feeding": {
+                    "label": "授乳",
+                    "options": {
+                        "no": "授乳不可",
+                        "room": "授乳室あり",
+                        "yes": "授乳可"
+                    },
+                    "terms": "授乳, 授乳室, 赤ちゃん"
+                },
                 "baby_seat": {
                     "label": "ベビーシート"
                 },
@@ -2859,6 +2868,11 @@
                     "label": "建物",
                     "terms": "建物, ビル"
                 },
+                "building/levels": {
+                    "label": "総階数",
+                    "placeholder": "2, 4, 6...",
+                    "terms": "総階数, 階数, フロア数"
+                },
                 "building/levels/underground": {
                     "label": "地下階数",
                     "placeholder": "2, 4, 6...",
@@ -2874,7 +2888,8 @@
                     "terms": "材料, 素材"
                 },
                 "building_area": {
-                    "label": "建物"
+                    "label": "建物",
+                    "terms": "建物, ビル, 建築物"
                 },
                 "bunker_type": {
                     "label": "種類"
@@ -3011,7 +3026,8 @@
                     "label": "横断島"
                 },
                 "cuisine": {
-                    "label": "料理"
+                    "label": "料理",
+                    "terms": "料理, 食事, 飲食"
                 },
                 "currency_multi": {
                     "label": "通貨の種類",
@@ -3331,6 +3347,9 @@
                 "fuel_multi": {
                     "label": "燃料の種類"
                 },
+                "gambling": {
+                    "label": "遊戯の種類"
+                },
                 "gauge": {
                     "label": "軌間"
                 },
@@ -3625,11 +3644,6 @@
                     "label": "階数",
                     "terms": "階数"
                 },
-                "levels": {
-                    "label": "総階数",
-                    "placeholder": "2, 4, 6...",
-                    "terms": "階, フロア"
-                },
                 "liaison": {
                     "label": "交流組織の種類"
                 },
@@ -3774,6 +3788,9 @@
                     },
                     "placeholder": "0, 1, 2, 3...",
                     "terms": "マウンテンバイク・アップヒルの難易度, マウンテンバイク, アップヒル, 難易度"
+                },
+                "museum": {
+                    "label": "博物館の種類"
                 },
                 "name": {
                     "label": "名称",
@@ -4067,7 +4084,13 @@
                     "label": "種類"
                 },
                 "pump": {
-                    "label": "ポンプの動力源"
+                    "label": "ポンプの動力源",
+                    "options": {
+                        "manual": "手動",
+                        "no": "無し",
+                        "powered": "機械式",
+                        "yes": "有り"
+                    }
                 },
                 "railway": {
                     "label": "路線の種類"
@@ -4326,6 +4349,9 @@
                     },
                     "placeholder": "中古品のみ、中古品あり、中古品なし",
                     "terms": "中古, 古物"
+                },
+                "segregated": {
+                    "label": "レーン分離"
                 },
                 "self_service": {
                     "label": "セルフサービス"
@@ -5244,6 +5270,10 @@
                     "name": "ガソリンスタンド",
                     "terms": "ガソリンスタンド, ガス, ガスステーション, 自動車, バイク, 燃料"
                 },
+                "amenity/gambling": {
+                    "name": "ギャンブル場",
+                    "terms": "ギャンブル場, 賭博場, カジノ"
+                },
                 "amenity/grave_yard": {
                     "name": "墓地（宗教施設内など、小）",
                     "terms": "墓地, 霊園, 墓場, お墓, 墓苑, 墓所"
@@ -6025,6 +6055,10 @@
                     "name": "通路",
                     "terms": "通路, 踏み越し段, 障害物, バリア"
                 },
+                "barrier/swing_gate": {
+                    "name": "スイングゲート",
+                    "terms": "スイングゲート, 旋回ゲート"
+                },
                 "barrier/toll_booth": {
                     "name": "料金所（道路、橋）",
                     "terms": "料金所, 障害物, バリア"
@@ -6532,6 +6566,10 @@
                     "name": "救命キット",
                     "terms": "救命キット, 救急セット, 救急救命セット"
                 },
+                "emergency/landing_site": {
+                    "name": "緊急着陸地点",
+                    "terms": "緊急着陸地点, 救命"
+                },
                 "emergency/life_ring": {
                     "name": "救命浮き輪",
                     "terms": "救命浮き輪, ライフブイ, 救命浮環, 救命浮標"
@@ -6998,6 +7036,10 @@
                     "name": "境界石",
                     "terms": "境界石, 境界杭, 歴史"
                 },
+                "historic/building": {
+                    "name": "歴史的建築物",
+                    "terms": "歴史的建築物, 歴史的家屋, 史跡, 保存家屋"
+                },
                 "historic/castle": {
                     "name": "城",
                     "terms": "城, 城郭, 歴史, 城址, 城跡, お城"
@@ -7123,8 +7165,7 @@
                     "terms": "墓地, 霊園, 墓場, お墓, 墓苑, 墓所"
                 },
                 "landuse/churchyard": {
-                    "name": "教会（土地区画）",
-                    "terms": "教会, 教会の敷地"
+                    "name": "教会（土地区画）"
                 },
                 "landuse/commercial": {
                     "name": "オフィス街",
@@ -8187,6 +8228,10 @@
                     "name": "行政機関事務所",
                     "terms": "行政機関事務所"
                 },
+                "office/government/prosecutor": {
+                    "name": "検察庁",
+                    "terms": "検察庁, 検察, 検察官, 法"
+                },
                 "office/government/register_office": {
                     "name": "イギリス等の出生、結婚、死亡などの登録所",
                     "terms": "登記所, 法人登記, 登録所, 法務局, 印鑑証明, 役所, 土地"
@@ -8278,15 +8323,15 @@
                 },
                 "piste/downhill": {
                     "name": "ダウンヒル",
-                    "terms": "ダウンヒル, スキールート"
+                    "terms": "ダウンヒル, スキールート, スキー, スノーボード"
                 },
                 "piste/downhill/halfpipe": {
                     "name": "ハーフパイプ",
-                    "terms": "ハーフパイプ, スノーボード, スキー, スポーツ, ウィンタースポーツ, スキー場"
+                    "terms": "ハーフパイプ, スノーボード, スキー"
                 },
                 "piste/hike": {
-                    "name": "ハイキング",
-                    "terms": "ハイキング, スキーコース"
+                    "name": "冬季ハイキング",
+                    "terms": "冬季ハイキング, ハイキング"
                 },
                 "piste/ice_skate": {
                     "name": "アイススケート",
@@ -8296,21 +8341,9 @@
                     "name": "ノルディック/クロスカントリー",
                     "terms": "ノルディック/クロスカントリー, ノルディック, クロスカントリー, スキーコース"
                 },
-                "piste/piste": {
-                    "name": "種類",
-                    "terms": "種類"
-                },
                 "piste/skitour": {
                     "name": "スキーツアー",
                     "terms": "スキーツアー, スキーコース"
-                },
-                "piste/sled": {
-                    "name": "そり（小型）",
-                    "terms": "そり, 橇, スキーコース"
-                },
-                "piste/sleigh": {
-                    "name": "そり（中型）",
-                    "terms": "そり, 橇, スキーコース"
                 },
                 "place": {
                     "name": "地名"
@@ -8483,9 +8516,6 @@
                 "power/pole": {
                     "name": "電柱",
                     "terms": "電柱, 電信柱"
-                },
-                "power/sub_station": {
-                    "name": "変電所"
                 },
                 "power/substation": {
                     "name": "変電所",
@@ -8817,7 +8847,7 @@
                 },
                 "shop/anime": {
                     "name": "アニメショップ",
-                    "terms": "アニメショップ, 娯楽, アニメ, コスプレ, マンガ, まんが"
+                    "terms": "アニメショップ, 娯楽, アニメ, コスプレ, マンガ, まんが, アニメ店"
                 },
                 "shop/antiques": {
                     "name": "古美術品店",
@@ -8910,6 +8940,10 @@
                     "name": "カーディーラー",
                     "terms": "自動車販売店, カーディーラー, 中古車販売店"
                 },
+                "shop/car/second_hand": {
+                    "name": "中古車店",
+                    "terms": "中古車店, 中古屋, カーディーラー"
+                },
                 "shop/car_parts": {
                     "name": "カー用品店",
                     "terms": "自動車部品店, カーパーツショップ, カー用品, 自動車用品"
@@ -8950,9 +8984,17 @@
                     "name": "衣料品店",
                     "terms": "衣料品店, 洋服店, 呉服店, 衣類, 服, スーツ, 和服, 着物, 古着"
                 },
+                "shop/clothes/second_hand": {
+                    "name": "衣料品店（リサイクル）",
+                    "terms": "リサイクル店, 古着屋, 中古屋, リサイクルショップ, 衣料品店（リサイクル）, 衣料品店"
+                },
                 "shop/clothes/underwear": {
                     "name": "下着店",
                     "terms": "下着店, 衣料, 服, 衣類, 買い物, 店舗, 下着, アンダーウェア"
+                },
+                "shop/clothes/wedding": {
+                    "name": "衣料品店（婚礼）",
+                    "terms": "衣料品店（婚礼）, ウェディングドレス, 結婚, 衣料品店"
                 },
                 "shop/coffee": {
                     "name": "コーヒー豆販売店",
@@ -9585,6 +9627,10 @@
                     "name": "博物館・美術館",
                     "terms": "博物館, 美術館, 資料館, アート, 歴史"
                 },
+                "tourism/museum/history": {
+                    "name": "歴史博物館",
+                    "terms": "歴史博物館, 歴史館, 博物館"
+                },
                 "tourism/picnic_site": {
                     "name": "ピクニック場",
                     "terms": "ピクニック場, バーベキュー場, アウトドア"
@@ -9700,6 +9746,10 @@
                 "type/enforcement": {
                     "name": "交通取締り",
                     "terms": "交通取締り, 取締り, 交通安全, 交通違反取締り"
+                },
+                "type/enforcement/maxspeed": {
+                    "name": "速度制限",
+                    "terms": "交通取締り, 取締り, 交通安全, 交通違反取締り, レーダー, 速度制限"
                 },
                 "type/multipolygon": {
                     "name": "マルチポリゴン"
@@ -9889,6 +9939,10 @@
                 "waterway/stream_intermittent": {
                     "name": "間欠河川",
                     "terms": "間欠河川, 季節涸川"
+                },
+                "waterway/tidal_channel": {
+                    "name": "感潮水路",
+                    "terms": "感潮水路, クリーク, 水路"
                 },
                 "waterway/water_point": {
                     "name": "船舶用飲料水給水所",
@@ -10427,17 +10481,17 @@
                 "description": "Meetup for map enthusiasts in the Philadelphia area",
                 "extendedDescription": "GeoPhilly unites developers, geographers, data geeks, open source enthusiasts, civic hackers and map addicts in our shared love of maps and the stories they tell. If you use maps as part of your work or just want to learn more, this is the meetup for you!  Our events aim to be open, friendly, educational and social and range from happy hours to lightning talks or even workshops. Come create a diverse, inspiring geospatial community in the Philadelphia with us!"
             },
-            "LATAM-Facebook": {
-                "name": "OpenStreetMap Latam Facebook",
-                "description": "OpenStreetMap Latam on Facebook"
+            "MapColabora-mailinglist": {
+                "name": "Mapeado Colaborativo / Geoinquietos Zaragoza",
+                "description": "Mapeado Colaborativo / Geoinquietos Zaragoza Mailing list"
             },
-            "LATAM-Telegram": {
-                "name": "OpenStreetMap Latam Telegram",
-                "description": "OpenStreetMap Telegram for Latin America"
+            "MapColabora-meetup": {
+                "name": "Mapeado Colaborativo / Geoinquietos Zaragoza",
+                "description": "Mapeado Colaborativo / Geoinquietos Zaragoza Meetup page"
             },
-            "LATAM-Twitter": {
-                "name": "OpenStreetMap Latam Twitter",
-                "description": "Follow us on Twitter at {url}"
+            "MapColabora-twitter": {
+                "name": "Mapeado Colaborativo / Geoinquietos Zaragoza",
+                "description": "Mapeado Colaborativo / Geoinquietos Zaragoza Twitter Account"
             },
             "MapMinnesota": {
                 "name": "MapMinnesota",
@@ -10542,6 +10596,10 @@
             "OSM-CA-mailinglist": {
                 "name": "OSM-CA mailing list",
                 "description": "A mailing list to discuss OpenStreetMap in Canada."
+            },
+            "OSM-CA-telegram": {
+                "name": "@osmca on Telegram",
+                "description": "OpenStreetMap Canada Telegram chat"
             },
             "OSM-CL-facebook": {
                 "name": "OpenStreetMap Chile Facebook",
@@ -10913,7 +10971,14 @@
             "OSMF": {
                 "name": "OpenStreetMap ファウンデーション",
                 "description": "OSMF は英国に拠点を置くOpenStreetMapプロジェクトをサポートする非営利組織です",
-                "extendedDescription": "OSMF supports the OpenStreetMap by fundraising, maintaining the servers which power OSM, organizing the annual State of the Map conference, and coordinating the volunteers who keep OSM running. You can show your support and have a voice in the direction of OpenStreetMap by joining as an OSMF member here: {signupUrl}"
+                "extendedDescription": "OSMF supports the OpenStreetMap by fundraising, maintaining the servers which power OSM, organizing the annual State of the Map conference, and coordinating the volunteers who keep OSM running. You can show your support and have a voice in the direction of OpenStreetMap by joining as an OSMF member here: {signupUrl}",
+                "events": {
+                    "sotm2020": {
+                        "name": "State of the Map 2020",
+                        "description": "Join us for 3 days in Cape Town, South Africa for the annual worldwide OpenStreetMap conference, bringing together everyone in the community to socialize, share, and learn.",
+                        "where": "Cape Town, South Africa"
+                    }
+                }
             },
             "OpenCleveland-meetup": {
                 "name": "Open Cleveland",
@@ -11024,6 +11089,11 @@
                 "name": "OpenStreetMap Wikiproject Bulgaria",
                 "description": "Wikiproject page for Bulgaria"
             },
+            "bi-vc-cvl_wiki": {
+                "name": "OSMers BI-VC-CVL",
+                "description": "Mappers of northern Piedmont",
+                "extendedDescription": "In addition to the monthly meetings, we also have a WhatsApp group."
+            },
             "bw-facebook": {
                 "name": "Mapping Botswana on Facebook",
                 "description": "Page of OpenStreetMap in Botswana"
@@ -11052,6 +11122,10 @@
             "ch-twitter": {
                 "name": "OpenStreetMap Switzerland Twitter",
                 "description": "Follow us on Twitter: {url}"
+            },
+            "cuneo-telegram": {
+                "name": "OpenStreetMap Cuneo Mappers",
+                "description": "OpenStreetMap Cuneo Telegram chat"
             },
             "czech-community": {
                 "name": "Czech OSM community",
@@ -11101,6 +11175,10 @@
                 "name": "OpenStreetMap Germany Telegram",
                 "description": "Join the OpenStreetMap Germany Telegram supergroup at {url}"
             },
+            "de-viersen-meetup": {
+                "name": "OpenStreetMap Viersen Meetup",
+                "description": "OSM community and users meetup Kreis Viersen and Mönchengladbach"
+            },
             "dk-forum": {
                 "name": "OpenStreetMap Denmark Web Forum",
                 "description": "OpenStreetMap Denmark web forum"
@@ -11116,6 +11194,10 @@
             "es-twitter": {
                 "name": "OpenStreetMap España Twitter",
                 "description": "Follow us on Twitter at {url}"
+            },
+            "et-telegram": {
+                "name": "@OpenStreetMapEthiopia on Telegram",
+                "description": "OpenStreetMap Ethiopia Telegram chat"
             },
             "fi-forum": {
                 "name": "OpenStreetMap FI forum",
@@ -11173,6 +11255,10 @@
             "geogeeks_perth_meetup": {
                 "name": "GeoGeeks Perth Meetup",
                 "description": "Perth-based meetup group for people interested in mapping, geospatial data, and open source. We'll be working on anything that involves a sense of place."
+            },
+            "guatemala-telegram": {
+                "name": "OSM Guatemala on Telegram",
+                "description": "OpenStreetMap Guatemala Telegram chat"
             },
             "hr-facebook": {
                 "name": "OpenStreetMap Croatia Facebook group",
@@ -11273,6 +11359,10 @@
                 "name": "OpenStreetMap Italy Twitter",
                 "description": "Follow us on Twitter at {url}"
             },
+            "kazakhstan-telegram": {
+                "name": "OSM Kazakhstan on Telegram",
+                "description": "OpenStreetMap Kazakhstan Telegram chat"
+            },
             "kosovo-matrix": {
                 "name": "OpenStreetMap Kosovo on Matrix (bridged with the one in Telegram)",
                 "description": "Semi-official all-Kosovo public group. We welcome all mappers from anywhere in any language."
@@ -11280,6 +11370,34 @@
             "kosovo-telegram": {
                 "name": "OpenStreetMap Kosovo on Telegram",
                 "description": "Semi-official all-Kosovo Telegram public group. We welcome all mappers from anywhere in any language."
+            },
+            "latam-facebook": {
+                "name": "OpenStreetMap Latin America Facebook",
+                "description": "Mappers and OpenStreetMap on Facebook in Latin America"
+            },
+            "latam-irc": {
+                "name": "OpenStreetMap Latin America IRC",
+                "description": "Join #osm-latam on irc.oftc.net (port 6667)"
+            },
+            "latam-mailinglist": {
+                "name": "Talk-latam Mailing List",
+                "description": "Talk-latam is the official mailing list for the Latinamerican OpenStreetMap community"
+            },
+            "latam-matrix": {
+                "name": "OpenStreetMap Latin America Matrix",
+                "description": "Chat with other members of the Latinamerican OSM community, it is bridged with the Telegram chat"
+            },
+            "latam-telegram": {
+                "name": "OpenStreetMap Latin America Telegram",
+                "description": "Chat with other members of the Latinamerican OSM community, it is bridged with the Matrix chat"
+            },
+            "latam-twitter": {
+                "name": "OpenStreetMap Latin America Twitter",
+                "description": "OpenStreetMap Latin America on Twitter: {url}"
+            },
+            "latam-wiki": {
+                "name": "OpenStreetMap Wikiproject Latin America",
+                "description": "Everything you need to know about mapping in Latin America"
             },
             "lu-mailinglist": {
                 "name": "Talk-lu Mailing List",
@@ -11298,6 +11416,14 @@
                 "name": "Mappa Mercia local group",
                 "description": "A home for OpenStreetMap enthusiasts in the Midlands",
                 "extendedDescription": "Mappa Mercia is a project to grow OpenStreetMap in the West Midlands, UK. We run community events, provide training and support local organisations wishing to open up their data."
+            },
+            "md-googlegroup": {
+                "name": "OSM Moldova Google Group",
+                "description": "OpenStreetMap Moldova Google Group"
+            },
+            "md-telegram": {
+                "name": "@OSMMoldova on Telegram",
+                "description": "OpenStreetMap Moldova Telegram chat"
             },
             "ni-facebook": {
                 "name": "OpenStreetMap NI Community",
@@ -11427,10 +11553,6 @@
                 "name": "OpenStreetMap Kerala",
                 "description": "Want to know more about Kerala Mapping: {url}"
             },
-            "osm-latam": {
-                "name": "OpenStreetMap Latam",
-                "description": "Supporting OpenStreetMap in Latin America"
-            },
             "osm-mg-facebook": {
                 "name": "OpenStreetMap Madagascar Facebook Group",
                 "description": "Malagasy Facebook group for people interested in OpenStreetMap."
@@ -11442,6 +11564,10 @@
             "osm-se": {
                 "name": "OpenStreetMap.se",
                 "description": "Provide OSM services and information for the local community in Sweden"
+            },
+            "osm-za-twitter": {
+                "name": "OpenStreetMap South Africa on Twitter",
+                "description": "Follow us on Twitter: {url}"
             },
             "osmcz-facebook": {
                 "name": "OpenStreetMap CZ on Facebook",
@@ -11459,6 +11585,10 @@
                 "name": "OSM community Graz on twitter",
                 "description": "OpenStreetMap community in Graz on twitter"
             },
+            "panama-telegram": {
+                "name": "OSM Panama on Telegram",
+                "description": "OpenStreetMap Panama Telegram chat"
+            },
             "pt-mailinglist": {
                 "name": "Talk-pt Mailing List",
                 "description": "Talk-pt is the official mailing list for the Portuguese OSM community"
@@ -11466,6 +11596,14 @@
             "pt-telegram": {
                 "name": "OpenStreetMap Portugal on Telegram",
                 "description": "Telegram Group of the Portuguese OpenStreetMap community {url}"
+            },
+            "romania-facebook": {
+                "name": "OpenStreetMap Romania Facebook group",
+                "description": "Group for mappers and users of OpenStreetMap in Romania"
+            },
+            "romania-telegram": {
+                "name": "@OSMRomania on Telegram",
+                "description": "OpenStreetMap Romania Telegram chat"
             },
             "sa-telegram": {
                 "name": "OSM Saudi Arabia on Telegram",
@@ -11490,6 +11628,10 @@
             "se-mailinglist": {
                 "name": "Talk-se Mailing List",
                 "description": "A mailing list to discuss OpenStreetMap in Sweden"
+            },
+            "se-telegram": {
+                "name": "OSM Sweden on Telegram",
+                "description": "OpenStreetMap Sweden Telegram chat"
             },
             "se-twitter": {
                 "name": "OpenStreetMap Sweden on Twitter",
@@ -11540,6 +11682,11 @@
                 "description": "All are welcome! Sign up at {signupUrl}",
                 "extendedDescription": "Mailinglist for Rome and Lazio area."
             },
+            "talk-it-piemonte_mailinglist": {
+                "name": "OSM Italy regional talk list for Piemonte",
+                "description": "All are welcome! Sign up at {signupUrl}",
+                "extendedDescription": "Mailinglist for Piemonte region."
+            },
             "talk-mg": {
                 "name": "Talk-mg Mailing List",
                 "description": "Place for OpenStreetMap contributors, communities and users in Madagascar to share and discuss."
@@ -11547,6 +11694,10 @@
             "talk-nz": {
                 "name": "Talk-nz Mailing List",
                 "description": "New Zealand's OSM community talk"
+            },
+            "talk-za": {
+                "name": "Talk-za Mailing List",
+                "description": "Talk-za is the official mailing list for South African OSM community."
             },
             "ua-facebook": {
                 "name": "OpenStreetMap Ukraine Facebook group",
@@ -11606,6 +11757,10 @@
                 "name": "Talk-uy Mailing List",
                 "description": "Talk-uy is the official mailing list for the Uruguayan OSM community"
             },
+            "uzbekistan-telegram": {
+                "name": "OSM Uzbekistan on Telegram",
+                "description": "OpenStreetMap Uzbekistan Telegram chat"
+            },
             "ve-forum": {
                 "name": "OpenStreetMap VE Forum",
                 "description": "OpenStreetMap Venezuela web forum"
@@ -11617,6 +11772,11 @@
             "ve-telegram": {
                 "name": "OpenStreetMap Venezuela Telegram",
                 "description": "Join the OpenStreetMap Venezuela community on Telegram"
+            },
+            "ym-AASTU": {
+                "name": "AASTU Youth Mappers",
+                "description": "YouthMappers chapter at Addis Ababa Science and Technology University",
+                "extendedDescription": "The Association of Geomatics Engineering Students (AGES), aims at promoting GIS products and services as well as training students on the use of the same. It not only promotes socialization between the students and practicing professionals, but also provides a platform for exchanging new ideas for holding new GIS and surveying events and training at the university."
             },
             "ym-Abia-State-University": {
                 "name": "AbsuMappersTeam",

@@ -12,6 +12,9 @@
         "line",
         "area"
     ],
+    "tags": {
+        "piste:type": "skitour"
+    },
     "terms": [
         "ski",
         "skitour",
@@ -19,8 +22,5 @@
         "ski touring",
         "piste"
     ],
-    "tags": {
-        "piste:type": "skitour"
-    },
     "name": "Ski Touring Trail"
 }

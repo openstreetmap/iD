@@ -282,10 +282,6 @@
                 "level": {
                     "label": "Lefel"
                 },
-                "levels": {
-                    "label": "Lefelau",
-                    "placeholder": "2, 4, 6..."
-                },
                 "location": {
                     "label": "Lleoliad"
                 },

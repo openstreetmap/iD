@@ -1,5 +1,5 @@
 {
-    "icon": "maki-water",
+    "icon": "temaki-well_pump_manual",
     "fields": [
         "ref",
         "operator",
@@ -20,6 +20,7 @@
     "terms": [
         "aquifer",
         "drinking water",
+        "water pump",
         "water point",
         "water source"
     ],

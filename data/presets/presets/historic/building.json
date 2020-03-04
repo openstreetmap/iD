@@ -1,0 +1,27 @@
+{
+    "icon": "maki-home",
+    "fields": [
+        "{building}",
+        "start_date"
+    ],
+    "moreFields": [
+        "{building}",
+        "access_simple"
+    ],
+    "geometry": [
+        "area"
+    ],
+    "tags": {
+        "historic": "building"
+    },
+    "addTags": {
+        "historic": "building",
+        "building": "*"
+    },
+    "reference": {
+        "key": "historic",
+        "value": "building"
+    },
+    "matchScore": 0.5,
+    "name": "Historic Building"
+}

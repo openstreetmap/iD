@@ -7,6 +7,7 @@
             "undo": "annuler",
             "zoom_to": "zoomer dessus",
             "copy": "copier",
+            "view_on": "voir sur {domain}",
             "favorite": "favoris"
         },
         "toolbar": {
@@ -530,6 +531,12 @@
             "hidden_details": "Ces éléments sont actuellement cachés : {details}"
         },
         "osm_api_status": {
+            "message": {
+                "error": "Impossible d'atteindre l'API OpenStreetMap. Vos éditions sont stockées localement. Vérifiez votre connexion réseau.",
+                "offline": "L'API OpenStreetMap est hors ligne. Vos éditions sont stockées localement. Veuillez revenir ici ultérieurement.",
+                "readonly": "L'API OpenStreetMap est actuellement en lecture seule. Vous pouvez continuer à éditer, mais vous devez attendre pour enregistrer vos modifications.",
+                "rateLimit": "L'API OpenStreetMap limite les connexions anonymes. Vous pouvez résoudre ce problème en vous connectant."
+            },
             "retry": "Réessayer"
         },
         "commit": {
@@ -886,7 +893,14 @@
         "preferences": {
             "title": "Préférences",
             "description": "Préférences",
-            "key": "P"
+            "key": "P",
+            "privacy": {
+                "privacy_link": "Voir la politique de confidentialité d'iD",
+                "third_party_icons": {
+                    "description": "Afficher les icônes tierces",
+                    "tooltip": "Décochez cette case pour éviter de charger des icônes à partir de sites tiers tels que Wikimedia Commons, Facebook, ou Twitter."
+                }
+            }
         },
         "restore": {
             "heading": "Vous avez des modifications non enregistrées",
@@ -954,6 +968,8 @@
         "splash": {
             "welcome": "Bienvenue sur iD, l'éditeur en ligne d'OpenStreetMap",
             "text": "iD est un outil convivial mais puissant pour contribuer à la meilleure carte libre du monde. Ceci est la version {version}. Pour plus d'informations consultez {website} et rapportez les bogues sur {github}.",
+            "privacy_update": "Notre politique de protection de la vie privée a récemment été mise à jour.",
+            "privacy_policy": "Politique de confidentialité d'iD",
             "walkthrough": "Commencer le guide",
             "start": "Modifier maintenant"
         },
@@ -2336,6 +2352,7 @@
                     "background_switch": "Reprendre l'imagerie précédemment utilisée",
                     "map_data": "Afficher/cacher le panneau de données",
                     "issues": "Afficher/cacher le panneau de validation des problèmes",
+                    "preferences": "Afficher/cacher le panneau de préférences utilisateur",
                     "fullscreen": "Passer en plein écran",
                     "sidebar": "Afficher/cacher barre latérale",
                     "wireframe": "Afficher/cacher le mode filaire",
@@ -2351,7 +2368,8 @@
                     "search": "Trouver des éléments correspondant à la recherche."
                 },
                 "with_selected": {
-                    "edit_menu": "Afficher/cacher le menu d'édition"
+                    "edit_menu": "Afficher/cacher le menu d'édition",
+                    "zoom_to": "Zoomer sur les éléments sélectionnés"
                 },
                 "vertex_selected": {
                     "title": "Avec le nœud sélectionné",
@@ -2761,6 +2779,10 @@
                     "label": "Bâtiment ",
                     "terms": "bâtiment,construction,bâtiment,batiment"
                 },
+                "building/levels": {
+                    "label": "Étages",
+                    "placeholder": "2, 4, 6..."
+                },
                 "building/levels/underground": {
                     "label": "Niveaux souterrains",
                     "placeholder": "2, 4, 6…",
@@ -3069,6 +3091,9 @@
                 "distance": {
                     "label": "Distance"
                 },
+                "disused/railway": {
+                    "label": "Type"
+                },
                 "dock": {
                     "label": "Type"
                 },
@@ -3344,6 +3369,9 @@
                         "undefined": "Non"
                     }
                 },
+                "hot_water": {
+                    "label": "Eau chaude"
+                },
                 "iata": {
                     "label": "Code aéroport AITA"
                 },
@@ -3503,11 +3531,6 @@
                     "label": "Niveaux",
                     "terms": "niveaux,étages,paliers"
                 },
-                "levels": {
-                    "label": "Nombre de niveaux",
-                    "placeholder": "2, 4, 6...",
-                    "terms": "niveaux, étages, paliers"
-                },
                 "liaison": {
                     "label": "Type"
                 },
@@ -3554,7 +3577,8 @@
                     "label": "Type"
                 },
                 "mapillary": {
-                    "label": "ID de l'image Mapillary"
+                    "label": "ID de l'image Mapillary",
+                    "terms": "identifiant, image, mapillary"
                 },
                 "material": {
                     "label": "Matériau",
@@ -3977,6 +4001,10 @@
                 },
                 "ref/isil": {
                     "label": "Code ISIL"
+                },
+                "ref/vatin": {
+                    "label": "Numéro d'identifiant TVA",
+                    "terms": "TVA, taxe, identifiant, intracommunautaire"
                 },
                 "ref_aeroway_gate": {
                     "label": "Numéro de porte"
@@ -4910,6 +4938,9 @@
                     "name": "Café",
                     "terms": "Café, bar, salon de thé, pub, brasserie, restaurant, cafe"
                 },
+                "amenity/car_pooling": {
+                    "name": "Aire de covoiturage"
+                },
                 "amenity/car_rental": {
                     "name": "Location de voiture",
                     "terms": "Location de voitures, loueur de voiture, loueur de véhicule, car rental"
@@ -5106,10 +5137,6 @@
                     "name": "Cybercafé",
                     "terms": "Café internet,Cybercafé"
                 },
-                "amenity/kindergarten": {
-                    "name": "Établissement pré-scolaire - école maternelle, jardin d'enfants",
-                    "terms": "école maternelle, école enfantine, jardin d'enfants, école primaire, école, écoliers,  petite section, moyenne section, grande section, PS-MS-GS, kindergarten, crèche, halte-garderie"
-                },
                 "amenity/language_school": {
                     "name": "École de langues",
                     "terms": "école de langues,langues étrangères"
@@ -5178,8 +5205,8 @@
                     "terms": "parking souterrain,sous-terrain,souterrain,parc de stationnement souterrain,voiture,camion"
                 },
                 "amenity/parking_entrance": {
-                    "name": "Entrée ou sortie de parking",
-                    "terms": "Entrée/Sortie de parking"
+                    "name": "Entrée / sortie de garage ou parking",
+                    "terms": "parking, garage, entrée, sortie, entree, stationnement, parc de stationnement"
                 },
                 "amenity/parking_space": {
                     "name": "Place de parking",
@@ -6003,10 +6030,6 @@
                     "name": "Bâtiment industriel",
                     "terms": "Bâtiment industriel"
                 },
-                "building/kindergarten": {
-                    "name": "Bâtiment pré-scolaire - école maternelle, jardin d'enfants",
-                    "terms": "école maternelle, école enfantine, jardin d'enfants, école primaire, école, écoliers,  petite section, moyenne section, grande section, PS-MS-GS, kindergarten, crèche, halte-garderie"
-                },
                 "building/mosque": {
                     "name": "Mosquée - Bâtiment",
                     "terms": "mosquée,bâtiment,religion"
@@ -6383,8 +6406,12 @@
                     "name": "Accessible aux services d'urgences"
                 },
                 "entrance": {
-                    "name": "Entrée/Sortie",
-                    "terms": "Entrée/Sortie,Évacuation,Porte d'entrée"
+                    "name": "Entrée / sortie",
+                    "terms": "entrée, entree, porte, sortie, issue"
+                },
+                "entrance/emergency": {
+                    "name": "Sortie de secours",
+                    "terms": "sortie de secours, porte, issue de secours, évacuation, urgence, incendie"
                 },
                 "ford": {
                     "name": "Gué",
@@ -6927,8 +6954,7 @@
                     "terms": "Cimetière"
                 },
                 "landuse/churchyard": {
-                    "name": "Terrain entourant une église",
-                    "terms": "Cimetière"
+                    "name": "Terrain entourant une église"
                 },
                 "landuse/commercial": {
                     "name": "Zone de bureaux",
@@ -7850,6 +7876,9 @@
                     "name": "Zone humide",
                     "terms": "Zone humide, Marais, Marécage"
                 },
+                "natural/wood": {
+                    "name": "Bois naturel"
+                },
                 "network/type/node_network": {
                     "name": "Itinéraire de ballade",
                     "terms": "itinéraire de ballade,route,rcn,rwn"
@@ -8046,41 +8075,15 @@
                     "name": "Agence de l'eau",
                     "terms": "Agence de l'eau, Compagnie des eaux"
                 },
-                "piste/downhill": {
-                    "name": "Ski de Descente / Alpin",
-                    "terms": "ski, piste, alpin, descente, snowboard"
-                },
-                "piste/downhill/halfpipe": {
-                    "name": "Tremplin",
-                    "terms": "demi-lune,tremplin,halfpipe"
-                },
-                "piste/hike": {
-                    "name": "Piste Raquette ou Piétons",
-                    "terms": "ski, piste, marche, randonnée, raquette, piéton"
-                },
                 "piste/ice_skate": {
-                    "name": "Piste Patins à Glace",
-                    "terms": "ski, piste, patin, glace"
-                },
-                "piste/nordic": {
-                    "name": "Piste de Ski Nordique / Ski de Fond",
-                    "terms": "ski, piste, fond, nordique, classique, skating"
-                },
-                "piste/piste": {
-                    "name": "Piste Sports d'Hiver",
-                    "terms": "ski, nordique, fond, alpin, descente, snowboard, randonnée, rando, luge, traîneau, ski-joring, husky, cheval, raquette, piéton, glace, patin à glace"
+                    "name": "Piste de patin à glace"
                 },
                 "piste/skitour": {
                     "name": "Ski de Randonnée",
                     "terms": "ski, skitour, piste, randonnée, ski de rando, rando"
                 },
-                "piste/sled": {
-                    "name": "Piste de Luge",
-                    "terms": "ski, piste, luge, traîneau"
-                },
                 "piste/sleigh": {
-                    "name": "Piste pour Traîneaux",
-                    "terms": "ski, piste, luge, traîneau, ski-joring, husky, cheval"
+                    "name": "Piste de traîneau"
                 },
                 "place": {
                     "name": "Lieu"
@@ -8250,9 +8253,6 @@
                 "power/pole": {
                     "name": "Poteau électrique",
                     "terms": "Pylone électrique, Poteau électrique"
-                },
-                "power/sub_station": {
-                    "name": "Poste de transformation"
                 },
                 "power/substation": {
                     "name": "Sous-station",
@@ -8576,8 +8576,7 @@
                     "terms": "Cave, Caviste, Magasin de vin, Vins & Spiritueux"
                 },
                 "shop/anime": {
-                    "name": "Boutique d'« animes »",
-                    "terms": "Vente de mangas, de CD et DVD, déguisements, accessoires"
+                    "name": "Boutique de manga et anime"
                 },
                 "shop/antiques": {
                     "name": "Antiquaire",
@@ -8737,10 +8736,6 @@
                 "shop/country_store": {
                     "name": "Magasin de campagne",
                     "terms": "campagne,chasse,pêche,équitation,cheval,chevaux"
-                },
-                "shop/craft": {
-                    "name": "Magasin d'arts et loisirs créatifs",
-                    "terms": "Magasin des Beaux-Arts, Magasin d'arts graphiques"
                 },
                 "shop/curtain": {
                     "name": "Magasin de rideaux",
@@ -9879,6 +9874,13 @@
                 "description": "GSI Kiban 2500 via finds.jp. Bonnes données pour tracer des routes, mais un peu vieilles.",
                 "name": "GSI KIBAN 2500 japonais"
             },
+            "gothenburg-citymap": {
+                "attribution": {
+                    "text": "© Municipalité de Göteborg, CC0"
+                },
+                "description": "La carte décrit de manière globale la ville de Göteborg. Elle contient des informations générales sur le terrain, les communications, l'hydrographie, les bâtiments, les adresses et les noms de rues, les divisions administratives.",
+                "name": "Carte de la ville de Göteborg"
+            },
             "gsi.go.jp": {
                 "attribution": {
                     "text": "GSI Japon"
@@ -10138,18 +10140,6 @@
                 "description": "Réunion pour les passionnés de cartographie dans la région de Philadelphie",
                 "extendedDescription": "GeoPhilly unit les développeurs, les géographes, les passionnés de données et d'open source, les hackers civiques et les drogués de la carte dans l'amour partagé pour les cartes et les histoires qu'elles racontent. Que vous utilisiez des cartes dans votre travail ou que vous souhaitiez en savoir plus, c'est la bonne réunion ! Nos événements essayent d'être ouverts, amicaux, éducatifs et sociaux et vont des happy hours aux présentations rapides voire aux ateliers. Venez créer une communauté géospatiale diversifiée et inspirante à Philadelphie avec nous !"
             },
-            "LATAM-Facebook": {
-                "name": "Facebook d'OpenStreetMap Amérique Latine",
-                "description": "OpenStreetMap Amérique Latine sur Facebook"
-            },
-            "LATAM-Telegram": {
-                "name": "Télégram d'OpenStreetMap Amérique Latine",
-                "description": "Télégram OpenStreetMap pour l'Amérique Latine"
-            },
-            "LATAM-Twitter": {
-                "name": "Fil Twitter d'OpenStreetMap Amérique Latine",
-                "description": "Suivez-nous sur Twitter à l'adresse {url}"
-            },
             "MapMinnesota": {
                 "name": "MapMinnesota",
                 "description": "Cartographes et amateurs d'OpenStreetMap dans la région des villes jumelles",
@@ -10253,6 +10243,9 @@
             "OSM-CA-mailinglist": {
                 "name": "Liste de diffusion OSM-CA",
                 "description": "Une liste de diffusion pour discuter d'OpenStreetMap au Canada."
+            },
+            "OSM-CA-telegram": {
+                "name": "@osmca sur Telegram"
             },
             "OSM-CL-facebook": {
                 "name": "Page Facebook d'OpenStreetMap Chili",
@@ -10624,7 +10617,14 @@
             "OSMF": {
                 "name": "Fondation OpenStreetMap",
                 "description": "OSMF est une organisation à but non lucratif de droit britannique qui soutient le projet OpenStreetMap",
-                "extendedDescription": "OSMF supporte le projet OpenStreetMap en levant des fonds, en maintenant les serveurs d'OSM, en organisant la conférence annuelle State of the Map, et en coordonnant les volontaires qui permettent à OSM de fonctionner. Vous pouvez apporter votre aide et faire entendre votre voix dans OpenStreetMap en devenant membre d'OSMF ici: {signupUrl}"
+                "extendedDescription": "OSMF supporte le projet OpenStreetMap en levant des fonds, en maintenant les serveurs d'OSM, en organisant la conférence annuelle State of the Map, et en coordonnant les volontaires qui permettent à OSM de fonctionner. Vous pouvez apporter votre aide et faire entendre votre voix dans OpenStreetMap en devenant membre d'OSMF ici: {signupUrl}",
+                "events": {
+                    "sotm2020": {
+                        "name": "State of the Map 2020",
+                        "description": "Rejoignez-nous pendant 3 jours au Cap, Afrique du Sud, pour la conférence mondiale annuelle d'OpenStreetMap, rassemblant l'ensemble de la communauté, pour se rencontrer, partager et apprendre.",
+                        "where": "Le Cap, Afrique du Sud"
+                    }
+                }
             },
             "OpenCleveland-meetup": {
                 "name": "Open Cleveland",
@@ -10693,7 +10693,8 @@
             },
             "be-chapter": {
                 "name": "Chapitre local OpenStreetMap Belgique",
-                "description": "Nous aidons OpenStreetMap à croître et à s'améliorer en Belgique."
+                "description": "Nous aidons OpenStreetMap à croître et à s'améliorer en Belgique.",
+                "extendedDescription": "Si vous désirez aider à améliorer et agrandir la communauté de cartographie en Belgique, pour rendre les gens encore plus enthousiastes à cartographier, OpenStreetMap Belgique est le fait pour vous."
             },
             "be-facebook": {
                 "name": "Communauté Facebook d'OpenStreetMap BE",
@@ -10880,6 +10881,9 @@
                 "name": "Liste de diffusion Talk-gb",
                 "description": "Talk-gb est la liste de diffusion principale pour la communauté OSM du Royaume-Uni (incluant l'Irlande du Nord)"
             },
+            "geogeeks_perth_meetup": {
+                "description": "Groupe de rencontre basé à Perth pour les personnes intéressées par la cartographie, les données géospatiales et les logiciels libres. Nous travaillerons sur tout ce qui implique un sens du lieu."
+            },
             "hr-facebook": {
                 "name": "Groupe Facebook d'OpenStreetMap Croatie",
                 "description": "Groupe Facebook d'OpenStreetMap Croatie"
@@ -10900,6 +10904,10 @@
                 "name": "Forum OpenStreetMap HU",
                 "description": "Forum web d'OpenStreetMap Hongrie"
             },
+            "hu-matrix": {
+                "name": "Salle matricielle HU d'OpenStreetMap",
+                "description": "Salle matricielle Hongroise d'OpenStreetMap"
+            },
             "hu-meetup": {
                 "name": "Réunion d'OpenStreetMap Hongrie",
                 "description": "La plate-forme pour l'organisation des réunions en Hongrie"
@@ -10910,7 +10918,8 @@
             },
             "ireland-chapter": {
                 "name": "Chapitre local OpenStreetMap Irlande",
-                "description": "Nous aidons OpenStreetMap à croître et à s'améliorer en Irlande."
+                "description": "Nous aidons OpenStreetMap à croître et à s'améliorer en Irlande.",
+                "extendedDescription": "OpenStreetMap Ireland fournit une voix pour le projet OpenStreetMap sur l'île d'Irlande, en plus d'interagir avec d'autres initiatives ouvertes."
             },
             "ireland-facebook": {
                 "name": "Groupe Facebook d'OpenStreetMap Irlande",
@@ -10973,13 +10982,38 @@
                 "name": "Fil Twitter d'OpenStreetMap Italie",
                 "description": "Suivez-nous sur Twitter à l'adresse {url}"
             },
+            "kosovo-matrix": {
+                "description": "Groupe public semi-officiel de tout le Kosovo. Nous accueillons tous les cartographes de partout et dans toutes les langues."
+            },
             "kosovo-telegram": {
                 "name": "OpenStreetMap Kosovo sur Telegram",
                 "description": "Groupe Telegram public semi-officiel pour tout le Kosovo.  Nous accueillons tous les cartographes de n'importe où dans toutes les langues."
             },
+            "latam-facebook": {
+                "name": "Facebook d'OpenStreetMap Amérique Latine"
+            },
+            "latam-irc": {
+                "name": "IRC d'OpenStreetMap Amérique Latine",
+                "description": "Rejoignez #osm-latam sur irc.oftc.net (port 6667)"
+            },
+            "latam-mailinglist": {
+                "name": "Liste de diffusion Talk-latam",
+                "description": "Talk-latam est la liste de diffusion officielle pour la communauté latino-américaine d'OpenStreetMap"
+            },
+            "latam-twitter": {
+                "description": "OpenStreetMap Amérique Latine sur Twitter: {url}"
+            },
             "lu-mailinglist": {
                 "name": "Liste de diffusion Talk-lu",
                 "description": "Liste de diffusion officielle pour la communauté luxembourgeoise d'OSM"
+            },
+            "mailinglist-sk-googlegroups": {
+                "name": "Liste de diffusion Slovaque dans un groupe Google",
+                "description": "Liste de diffusion officielle pour la communauté Slovaque"
+            },
+            "map-kibera": {
+                "name": "Carte Kibera certifiée",
+                "description": "\"Map Kibera\" est une organisation reconnue travaillant au Kenya"
             },
             "mappa-mercia-group": {
                 "name": "Groupe local Mappa Mercia",
@@ -11111,11 +11145,8 @@
                 "description": "Nous cartographions le Kerala ensemble. Rejoignez notre groupe Telegram. {url}"
             },
             "osm-kerala-wiki": {
-                "name": "OpenStreetMap Kerala"
-            },
-            "osm-latam": {
-                "name": "OpenStreetMap Amérique Latine",
-                "description": "Supporte OpenStreetMap en Amérique Latine"
+                "name": "OpenStreetMap Kerala",
+                "description": "En savoir plus sur le mappage \"Kerala\": {url}"
             },
             "osm-mg-facebook": {
                 "name": "Groupe Facebook OpenStreetMap Madagascar",
@@ -11128,6 +11159,10 @@
             "osm-se": {
                 "name": "OpenStreetMap.se",
                 "description": "Des nouvelles de la communauté OpenStreetMap suédoise"
+            },
+            "osm-za-twitter": {
+                "name": "OpenStreetMap Afrique du Sud sur Twitter",
+                "description": "Suivez-nous sur Twitter: {url}"
             },
             "osmcz-facebook": {
                 "name": "OpenStreetMap CZ sur Facebook",
@@ -11145,6 +11180,9 @@
                 "name": "Communauté OSM de Graz sur twitter",
                 "description": "Communauté OpenStreetMap de Graz sur twitter"
             },
+            "panama-telegram": {
+                "name": "OSM Panama sur Telegram"
+            },
             "pt-mailinglist": {
                 "name": "Liste de diffusion Talk-pt",
                 "description": "Talk-pt est la liste de diffusion officielle de la communauté portugaise d'OSM"
@@ -11152,6 +11190,9 @@
             "pt-telegram": {
                 "name": "OpenStreetMap Portugal sur Telegram",
                 "description": "Groupe Telegram de la communauté portugaise d'OpenStreetMap {url}"
+            },
+            "romania-telegram": {
+                "name": "@OSMRomania sur Telegram"
             },
             "sa-telegram": {
                 "name": "OSM Arabie Saoudite sur Telegram",
@@ -11177,6 +11218,9 @@
                 "name": "Liste de diffusion Talk-se",
                 "description": "Une liste de diffusion pour discuter d'OpenStreetMap en Suède"
             },
+            "se-telegram": {
+                "name": "OSM Suède sur Telegram"
+            },
             "se-twitter": {
                 "name": "OpenStreetMap Suède sur Twitter",
                 "description": "Suivez-nous sur Twitter : {url}"
@@ -11192,6 +11236,13 @@
             "si-twitter": {
                 "name": "Fil Twitter d'OpenStreetMap Slovénie",
                 "description": "Suivez OpenStreetMap Slovénie sur Twitter : {url}"
+            },
+            "sk-facebook": {
+                "name": "Page Facebook de la communauté Slovaque de Freemap.sk",
+                "description": "Page Facebook de la communauté Slovaque de Freemap.sk"
+            },
+            "sk-freemap": {
+                "name": "Site web Slovaque de \"Freemap\" d'OpenStreetMap"
             },
             "talk-au": {
                 "name": "Liste de diffusion talk-au",
@@ -11210,12 +11261,20 @@
                 "description": "Vous êtes tous les bienvenus ! Enregistrez-vous sur {signupUrl}",
                 "extendedDescription": "Liste de diffusion pour Rome et la région du Lazio"
             },
+            "talk-it-piemonte_mailinglist": {
+                "extendedDescription": "Liste de diffusion pour la région du Piémont."
+            },
             "talk-mg": {
                 "name": "Liste de diffusion talk-mg",
                 "description": "Le lieu de rencontre des contributeurs OpenStreetMap, des communautés et des utilisateurs à Madagascar où partager et discuter."
             },
             "talk-nz": {
-                "name": "Liste de diffusion Talk-nz"
+                "name": "Liste de diffusion Talk-nz",
+                "description": "Discussion de la communauté OSM en Nouvelle-Zélande"
+            },
+            "talk-za": {
+                "name": "Liste de diffusion Talk-za",
+                "description": "Talk-za est la liste de diffusion officielle pour la communauté sud-africaine d'OSM."
             },
             "ua-facebook": {
                 "name": "Groupe Facebook d'OpenStreetMap Ukraine",
@@ -11311,7 +11370,8 @@
                 "description": "Chapitre YouthMappers à l'Asian University for Women"
             },
             "ym-Ball-State-University": {
-                "name": "Gamma Thêta Upsilon - Chapitre Iota Oméga"
+                "name": "Gamma Thêta Upsilon - Chapitre Iota Oméga",
+                "description": "Chapitre de \"YouthMappers\" à l'université de Ball State"
             },
             "ym-Busitema-University": {
                 "name": "Good Mappers",
@@ -11324,6 +11384,7 @@
                 "extendedDescription": "Les étudiants en SIG à Cal U apprennent à appliquer une approche théorique de l'espace à la réalité pratique. Le programme d'enseignement de l'université se porte notamment sur l'utilisation des SIG dans la gestion des urgences."
             },
             "ym-Central-Washington-University": {
+                "name": "Club de géographie",
                 "description": "Chapitre YouthMappers à la Central Washington University"
             },
             "ym-Centre-Universitaire-de-Recherche-et-dApplication-en-Tldtection-CURAT-de-lUniversit-Felix-Houphouet-Boigny": {
@@ -11335,6 +11396,14 @@
                 "name": "Clemson Mappers",
                 "description": "Chapitre YouthMappers à l'Université de Clemson"
             },
+            "ym-College-of-William-and-Mary": {
+                "name": "Sur toute la carte !",
+                "description": "Chapitre de \"YouthMappers\" au Collège de William et Mary"
+            },
+            "ym-Cornell-University": {
+                "name": "Société de cartographie",
+                "description": "Chapitre de \"YouthMappers\" à l'université de Cornell"
+            },
             "ym-Cuttington-University": {
                 "name": "YouthMappers de l'Université de Cuttington",
                 "description": "Chapitre YouthMappers à l'Université de Cuttington",
@@ -11345,10 +11414,20 @@
                 "description": "Chapitre YouthMappers à l'Université des Technologies Dedan Kimathi",
                 "extendedDescription": "GDEV est un groupe d'étudiants en SIG enthosiastes à DeKUT qui cherche à aider les étudiants à partager, s'engager et apprendre les uns des autres en matière de géospatial"
             },
+            "ym-Dhaka-College": {
+                "name": "Le collège Daka de \"YouthMappers\"",
+                "description": "Chapitre de \"YouthMappers\" au collège Dhaka"
+            },
             "ym-Dhaka-University": {
-                "name": "YouthMappers Openstreetmap"
+                "name": "YouthMappers Openstreetmap",
+                "description": "Chapitre de \"YouthMappers\" à l'université de Dhaka"
+            },
+            "ym-Eastern-University": {
+                "name": "\"YouthMappers\" à l'université de l'Est",
+                "description": "Chapitre de \"YouthMappers\" à l'université de l'Est"
             },
             "ym-Far-Eastern-University-Institute-of-Technology": {
+                "name": "Société d'ordinateurs \"Junior Philippines\"",
                 "description": "Chapitre YouthMappers à la Far Eastern University - Institut de Technologie",
                 "extendedDescription": "FEU a été reconnue comme l'une des universités majeures aux Philippines. Sa mission est centrée sur la formation de diplômés contribuant au développement du pays. L'université vise continuellement l'excellence pour être un établissement de premier plan non seulement aux Philippines, mais aussi dans tout le Sud-Est Asiatique."
             },
@@ -11385,6 +11464,7 @@
                 "description": "Chapitre YouthMappers à l'Université du Gujarat"
             },
             "ym-Gulu-University": {
+                "name": "Cartographes CSGU",
                 "description": "Chapitre YouthMappers à l'Université de Gulu"
             },
             "ym-Heidelberg-University": {
@@ -11398,6 +11478,7 @@
                 "extendedDescription": "Nous sommes un chapitre YouthMappers de l'Ignatius Ajuru University of Education impliqué dans la cartographie collective de notre environnement et la cartographie à distance des communautés résilientes. Nous sommes une équipe de volontaires qui utilisent openstreetmap et d'autres sources géospatiales ouvertes pour cartographier."
             },
             "ym-Indiana-University-of-Pennsylvania": {
+                "name": "Club de science géospatiale",
                 "description": "Chapitre YouthMappers à l'Université Indiana de Pennsylvanie"
             },
             "ym-Insititue-d-Enseignement-Superieur-de-Ruhengeri": {
@@ -11439,9 +11520,11 @@
                 "extendedDescription": "YouthMappers ITU est une communauté étudiante interdisciplinaire et collaborative, dont le but est de promouvoir une cartographie humanitaire des zones vulnérables, et de développer et partager des informations spatiales stratégiques et innovantes pour les futures villes, en utilisant les systèmes d'information géographique et l'open data."
             },
             "ym-Jacksonville-State-University": {
+                "name": "Équipe de cartographes \"JSU Disaster\"",
                 "description": "Chapitre YouthMappers à l'Université d’État de Jacksonville"
             },
             "ym-Jahangirnagar-University": {
+                "name": "\"YouthMappers\" à l'IRS dans l'université de Jahangirnagar ",
                 "description": "Chapitre YouthMappers à l'Université Jahangirnagar"
             },
             "ym-Jomo-Kenyatta-University-of-Agriculture-and-Technology": {
@@ -11488,6 +11571,7 @@
                 "description": "Chapitre YouthMappers à l'Université McGill"
             },
             "ym-Miami-University": {
+                "name": "Société de planification et de géographie",
                 "description": "Chapitre YouthMappers à l'Université de Miami"
             },
             "ym-Moi-University": {
@@ -11545,6 +11629,9 @@
                 "name": "YouthMappers au Sacred Heart Junior College",
                 "description": "Chapitre YouthMappers au Sacred Heart Junior College"
             },
+            "ym-Sherubtse-College": {
+                "name": "Société géographique"
+            },
             "ym-Sokoine-University-of-Agriculture": {
                 "description": "Chapitre YouthMappers à l'Université d'Agriculture Sokoine"
             },
@@ -11595,7 +11682,9 @@
                 "description": "Chapitre YouthMappers à l'Université Autonome de Madrid"
             },
             "ym-Universidad-Distrital-Francisco-Jose-de-Caldas": {
-                "name": "YouthMappers à Bogota"
+                "name": "YouthMappers à Bogota",
+                "description": "Chapitre YouthMappers à l'Université Districtale Francisco José de Caldas",
+                "extendedDescription": "L'Université Districtale Francisco José de Caldas est une université de recherche publique, mixte, basée à Bogota, Colombie, avec un effectif de 26.140 étudiants."
             },
             "ym-Universidad-Nacional-Autnoma-de-Honduras": {
                 "name": "PumaGis Hn",
@@ -11669,6 +11758,7 @@
                 "extendedDescription": "SpaceTime est une communauté de cartographie de la Faculté de Géographie de l'Université Muhammadiyah de Surakarta. SpaceTime a été fondée par Bruce Maldy Pratama, Mukhlis Akbar et Irfandi Fauzi. Ce sont des étudiants actifs de la Faculté de Géographie de l'Université Muhammadiyah Surakarta."
             },
             "ym-University-of-California-Davis": {
+                "name": "Club de cartographie",
                 "description": "Chapitre YouthMappers à l'Université de Californie, Davis"
             },
             "ym-University-of-Cape-Coast": {
@@ -11676,7 +11766,11 @@
                 "description": "Chapitre YouthMappers à l'Université de Cape Coast",
                 "extendedDescription": "Nous sommes une société qui comprend tous les étudiants du département de géographie et de planification locale à l'Université de Cape Coast. Notre principal objectif est de promouvoir l'intérêt pour la discipline en classe et en dehors. Notre devise est « nous comprenons la Terre et ses habitants »."
             },
+            "ym-University-of-Central-Florida": {
+                "name": "Société d'information géospatiale"
+            },
             "ym-University-of-Chicago": {
+                "name": "Société \"Tobler\"",
                 "description": "Chapitre YouthMappers à l'Université de Chicago"
             },
             "ym-University-of-Dar-es-Salaam": {
@@ -11708,7 +11802,8 @@
                 "extendedDescription": "Chanco Malawi YouthMappers est l'organisation étudiante de cartographie de Chancellor College à l'Université du Malawi. Les étudiants de ce chapitre se concentrent sur la cartographie pour les besoins en développement et scientifiques du Malawi."
             },
             "ym-University-of-Maryland-College-Park": {
-                "description": "Chapitre YouthMappers à l'Université du Maryland - College Park"
+                "name": "Club de géographie",
+                "description": "Chapitre de \"YouthMappers\" à l'Université du Maryland - Parc du collège"
             },
             "ym-University-of-Mines-and-Technology": {
                 "name": "UMaT YouthMappers",
@@ -11736,6 +11831,7 @@
                 "extendedDescription": "Le Club de Géographie est une organisation étudiante de l'Université du Nord du Texas qui accueille tous les étudiants intéressés par la géographie.Son objectif est de promouvoir l'intérêt pour la géographie à travers le développement des liens entre les étudiants et la faculté. Le club cherche également à faire connaître les besoins des étudiants en géographie et organise un forum pour présenter des idées innovantes au service de la communauté de l'université."
             },
             "ym-University-of-Oregon": {
+                "name": "Carte faite par \"Nothwest\"",
                 "description": "Chapitre YouthMappers à l'Université de l'Oregon"
             },
             "ym-University-of-Panama": {
@@ -11784,6 +11880,7 @@
                 "extendedDescription": "L'UP Resilience Institute a été fondé en 2016 afin de renforcer les communautés locales par la recherche multidisciplinaire et les actions de résilience. Avec le Centre NOAH de l'UP, et l'aide de différentes organisations, nous avons fourni des cartes de bâtiments pour 17 provinces sur 82 et chargé plus de 4 millions d'empreintes dans Openstreetmap."
             },
             "ym-Western-Michigan-University": {
+                "name": "Club de géographie",
                 "description": "Chapitre YouthMappers à l'Université de l'Ouest du Michigan"
             },
             "ym-Yarmouk-University": {

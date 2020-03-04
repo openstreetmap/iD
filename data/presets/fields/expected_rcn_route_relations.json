@@ -1,0 +1,5 @@
+{
+    "key": "expected_rcn_route_relations",
+    "type": "number",
+    "label": "Adjacent Cycling Nodes"
+}

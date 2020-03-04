@@ -1889,10 +1889,6 @@
                 "level": {
                     "label": "Kat"
                 },
-                "levels": {
-                    "label": "Broj katova",
-                    "placeholder": "2, 4, 6..."
-                },
                 "lit": {
                     "label": "Osvijetljeno"
                 },
@@ -2584,9 +2580,6 @@
                 "amenity/hunting_stand": {
                     "name": "Lovačka čeka"
                 },
-                "amenity/kindergarten": {
-                    "name": "Dvorište vrtića"
-                },
                 "amenity/library": {
                     "name": "Knjižnica",
                     "terms": "knjižnica,biblioteka,čitaonica,zbirka knjiga"
@@ -2604,9 +2597,6 @@
                 "amenity/parking": {
                     "name": "Parkiralište za automobile",
                     "terms": "parking,kamione"
-                },
-                "amenity/parking_entrance": {
-                    "name": "Parking garaža Ulaz/Izlaz"
                 },
                 "amenity/parking_space": {
                     "name": "Parkirališno mjesto"
@@ -2974,9 +2964,6 @@
                 "building/industrial": {
                     "name": "Industrijska zgrada"
                 },
-                "building/kindergarten": {
-                    "name": "Zgrada vrtića"
-                },
                 "building/mosque": {
                     "name": "Zgrada džamije"
                 },
@@ -3185,9 +3172,6 @@
                 },
                 "emergency/phone": {
                     "name": "Telefon za nuždu"
-                },
-                "entrance": {
-                    "name": "Ulaz/izlaz"
                 },
                 "ford": {
                     "name": "Prijelaz preko potoka"
@@ -3961,9 +3945,6 @@
                     "name": "Električni stup",
                     "terms": "stup dalekovoda"
                 },
-                "power/sub_station": {
-                    "name": "Trafostanica"
-                },
                 "power/substation": {
                     "name": "Trafostanica"
                 },
@@ -4244,10 +4225,6 @@
                 },
                 "shop/cosmetics": {
                     "name": "Prodavaonica kozmetike"
-                },
-                "shop/craft": {
-                    "name": "Hobby & art trgovina",
-                    "terms": "dućan za hobije, slikarski dućan, kistovi"
                 },
                 "shop/curtain": {
                     "name": "Trgovina za zastore"

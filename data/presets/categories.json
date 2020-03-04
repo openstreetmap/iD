@@ -79,8 +79,7 @@
         "natural/coastline",
         "natural/tree_row",
         "natural/peak",
-        "natural/cliff",
-        "natural/beach"
+        "natural/cliff"
       ]
     },
     "category-path": {

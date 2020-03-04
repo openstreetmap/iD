@@ -25,7 +25,7 @@ export function uiPresetEditor(context) {
 
     function presetEditor(selection) {
         selection.call(uiDisclosure(context, 'preset_fields', true)
-            .title(t('inspector.all_fields'))
+            .title(t('inspector.fields'))
             .content(render)
         );
     }
@@ -59,7 +59,8 @@ export function uiPresetEditor(context) {
             });
 
             additionalFields.forEach(function(field) {
-                if (_preset.fields.indexOf(field) === -1) {
+                if (_preset.fields.indexOf(field) === -1 &&
+                    field.matchGeometry(geometry)) {
                     _fieldsArr.push(
                         uiField(context, field, entity, { show: false })
                     );

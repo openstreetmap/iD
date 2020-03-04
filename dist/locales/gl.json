@@ -1005,6 +1005,8 @@
             "welcome": "Benvido ó editor en liña iD do OpenStreetMap",
             "text": "O iD é unha ferramenta amigábel pero poderosa para contribuír ó mellor mapa libre do mundo. Esta é a versión {versión}. Para obter máis información olla {website} e informa dos erros en {github}.",
             "privacy_update": "Recentemente foi actualizada a nosa política de privacidade.",
+            "privacy_policy": "Política de privacidade do iD",
+            "privacy": "{updateMessage} Ó empregar este software, aceptas facelo dacordo con {privacyLink}.",
             "walkthrough": "Comezar o titorial",
             "start": "Editar agora"
         },
@@ -1411,7 +1413,7 @@
                 "cctv_camera": "cámara de vixiancia (CCTV)",
                 "fire_hydrant": "hidrante",
                 "mailbox": "caixa do correo",
-                "manhole": "tapa de sumidoiro",
+                "manhole": "pozo de inspección",
                 "phone_booth": "cabina telefónica",
                 "sign": {
                     "advertisement": "anuncio",
@@ -3502,10 +3504,6 @@
                 "level": {
                     "label": "Nivel"
                 },
-                "levels": {
-                    "label": "Andares do edificio",
-                    "placeholder": "2, 4, 6..."
-                },
                 "liaison": {
                     "label": "Tipo"
                 },
@@ -4920,10 +4918,6 @@
                     "name": "Internet café",
                     "terms": "internet, terminais, cafe, cyber, cyber cafe, cybercafe, ciber, ciber café, cibercafé, xogos, xogos en rede"
                 },
-                "amenity/kindergarten": {
-                    "name": "Zona de gardaría ou xardín de infancia",
-                    "terms": "preescolar, xardín de infancia, guardería, infantil, párvulos, garderia, gardería, gardaria, parvulos, gardaría"
-                },
                 "amenity/language_school": {
                     "name": "Escola de idiomas",
                     "terms": "escola, colexio, idiomas, linguas"
@@ -4988,9 +4982,6 @@
                 },
                 "amenity/parking/underground": {
                     "name": "Aparcadoiro subterráneo"
-                },
-                "amenity/parking_entrance": {
-                    "name": "Entrada/Saída de garaxe de aparcadoiro"
                 },
                 "amenity/parking_space": {
                     "name": "Praza de aparcadoiro"
@@ -5672,10 +5663,6 @@
                 "building/industrial": {
                     "name": "Edificio industrial"
                 },
-                "building/kindergarten": {
-                    "name": "Edificio de preescolar/xardín de infancia",
-                    "terms": "preescolar, parvulario, párvulos, xardín, xardín de infancia, xardín infantil, edificio, kinder"
-                },
                 "building/mosque": {
                     "name": "Edificio da mesquita"
                 },
@@ -5994,9 +5981,6 @@
                 },
                 "emergency/yes": {
                     "name": "Acceso de emerxencia permitido"
-                },
-                "entrance": {
-                    "name": "Entrada/Saída"
                 },
                 "ford": {
                     "name": "Vao",
@@ -6442,8 +6426,7 @@
                     "name": "Cemiterio"
                 },
                 "landuse/churchyard": {
-                    "name": "Adro",
-                    "terms": "adro, igrexa"
+                    "name": "Adro"
                 },
                 "landuse/commercial": {
                     "name": "Zona de oficinas",
@@ -6853,6 +6836,30 @@
                     "name": "Faro",
                     "terms": "faro, baliza"
                 },
+                "man_made/manhole": {
+                    "name": "Pozo de inspección",
+                    "terms": "cuberta, buraco, burato, sumidoiro, tapa de sumidoiro, rede de sumidoiro, alcantarilla, alcantarillado, telecomunicacións, boca de sumidoiro, rexistro, colector, colectores, foxo, foxos, furaco, furado"
+                },
+                "man_made/manhole/gas": {
+                    "name": "Pozo de inspección de servizo de gas",
+                    "terms": "cuberta, gas, calefacción, buraco, burato, inspección, pozo"
+                },
+                "man_made/manhole/power": {
+                    "name": "Pozo de inspección de rede eléctrica",
+                    "terms": "cuberta, buraco, burato, eléctrico, electricidade, pozo, inspección"
+                },
+                "man_made/manhole/sewer": {
+                    "name": "Pozo de inspección de sumidoiro",
+                    "terms": "cuberta, desagüe, buraco, burato, alcantarillado, pozo, inspección, sumidoiro, rede de sumidoiro, tapa de sumidoiro, inspeccion, auga, augas negras, alcantarilla, augas residuais, residual, refugallo, refugallos"
+                },
+                "man_made/manhole/telecom": {
+                    "name": "Pozo de inspección de telecomunicacións",
+                    "terms": "cable, cabo, cuberta, teléfono, buraco, burato, telecomunicacións, pozo, inspección"
+                },
+                "man_made/manhole/water": {
+                    "name": "Pozo de inspección de servizo de agua",
+                    "terms": "cuberta, bebida, burato, buraco, utilidade, auga, pozo, inspección, inspeccion, tapa de sumidoiro, sumidoiro"
+                },
                 "man_made/mast": {
                     "name": "Mastro",
                     "terms": "mastro, pau, poste, hasta, antena, telefonía, comunicación, torre"
@@ -7027,6 +7034,10 @@
                     "name": "Cume",
                     "terms": "crista, cumieira, cumeira, cume, cumeada, tergo, serras, montañas, cresta, montaña, canto, crista elevada, bico, cima, cúspide, pico, petouto, picoto, picouto, cumio"
                 },
+                "natural/rock": {
+                    "name": "Rocha incrustada",
+                    "terms": "rocha, pedra, pena, penedo, roca, con, farallón"
+                },
                 "natural/saddle": {
                     "name": "Paso de montaña",
                     "terms": "porto de montaña, paso de montaña"
@@ -7046,8 +7057,13 @@
                     "name": "Manancial",
                     "terms": "manancial, fonte, auga"
                 },
+                "natural/stone": {
+                    "name": "Pedra solta",
+                    "terms": "rocha, pedra, pena, penedo, roca, con, farallón"
+                },
                 "natural/tree": {
-                    "name": "Árbore"
+                    "name": "Árbore",
+                    "terms": "arbore, árbore, árvore, árbol, arbol, arbusto"
                 },
                 "natural/tree_row": {
                     "name": "Ringleira de árbores"
@@ -7242,13 +7258,6 @@
                     "name": "Oficina de servizos públicos de auga",
                     "terms": "servizo público, servicio público, publico, auga, agua, saneamento"
                 },
-                "piste/downhill/halfpipe": {
-                    "name": "Mediotubo",
-                    "terms": "esquí, alpino, halfpipe, half pipe, snowboard, costa abaixo, pista, medio tubo, medio-tubo, meio-tubo, meio tubo, skate, patín, patinete, monopatín, longboard, board, bici, bmx, bicicleta de competición"
-                },
-                "piste/piste": {
-                    "name": "Pistas de deportes de inverno"
-                },
                 "place": {
                     "name": "Lugar"
                 },
@@ -7347,9 +7356,6 @@
                 "power/pole": {
                     "name": "Piar eléctrico",
                     "terms": "poste, electricidade, postes de electricidade, poste de electricidade, piar de enerxía"
-                },
-                "power/sub_station": {
-                    "name": "Subestación"
                 },
                 "power/substation": {
                     "name": "Subestación"
@@ -7559,9 +7565,6 @@
                 "shop/alcohol": {
                     "name": "Licoraría"
                 },
-                "shop/anime": {
-                    "name": "Tenda de anime"
-                },
                 "shop/antiques": {
                     "name": "Tenda de antigüidades"
                 },
@@ -7667,9 +7670,6 @@
                 },
                 "shop/cosmetics": {
                     "name": "Tenda de cosméticos"
-                },
-                "shop/craft": {
-                    "name": "Tenda de artes e oficios"
                 },
                 "shop/curtain": {
                     "name": "Tenda de cortinas"
@@ -8527,6 +8527,13 @@
                 "description": "GSI Kiban 2500 a través do finds.jp. Bo para rastrexar, pero un pouco máis vello.",
                 "name": "Xapón GSI KIBAN 2500"
             },
+            "gothenburg-citymap": {
+                "attribution": {
+                    "text": "© Concello de Gotemburgo, CC0"
+                },
+                "description": "O mapa da cidade é un mapa xeral que describe Gotemburgo. Contén información xeral acerca dos terreos, comunicacións, hidrografía, edificios, números de enderezo, nomes de rúas, división administrativa e outros textos orientativos.",
+                "name": "Mapa da cidade de Gotemburgo"
+            },
             "gsi.go.jp": {
                 "attribution": {
                     "text": "Xapón GSI"
@@ -8764,13 +8771,6 @@
             },
             "GeoPhilly": {
                 "name": "GeoPhilly"
-            },
-            "LATAM-Facebook": {
-                "name": "Facebook do OpenStreetMap Latinoamérica",
-                "description": "OpenStreetMap Latinoamérica no Facebook"
-            },
-            "LATAM-Twitter": {
-                "description": "Séguenos no Twitter en {url}"
             },
             "MapMinnesota": {
                 "name": "MapMinnesota"

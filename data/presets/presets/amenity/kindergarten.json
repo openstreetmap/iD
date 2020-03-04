@@ -11,9 +11,13 @@
         "email",
         "fax",
         "gnis/feature_id",
+        "internet_access",
+        "internet_access/fee",
+        "internet_access/ssid",
         "level",
         "max_age",
         "min_age",
+        "not/name",
         "opening_hours",
         "payment_multi",
         "website",
@@ -30,5 +34,5 @@
     "tags": {
         "amenity": "kindergarten"
     },
-    "name": "Preschool/Kindergarten Grounds"
+    "name": "Preschool / Kindergarten Grounds"
 }

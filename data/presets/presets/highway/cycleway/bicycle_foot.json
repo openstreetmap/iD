@@ -25,6 +25,16 @@
         "segregated trail",
         "rail trail"
     ],
+    "fields": [
+        "name",
+        "segregated",
+        "oneway",
+        "surface",
+        "width",
+        "structure",
+        "access",
+        "incline"
+    ],
     "matchScore": 0.9,
     "name": "Cycle & Foot Path"
 }

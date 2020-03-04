@@ -1081,10 +1081,6 @@
                 "level": {
                     "label": "Maila"
                 },
-                "levels": {
-                    "label": "Mailak",
-                    "placeholder": "2, 4, 6..."
-                },
                 "lit": {
                     "label": "Argitu"
                 },
@@ -1862,9 +1858,6 @@
                 "amenity/internet_cafe": {
                     "name": "Internet kafetegi"
                 },
-                "amenity/kindergarten": {
-                    "name": "Aurreskola/Haurtzandegi"
-                },
                 "amenity/language_school": {
                     "name": "Hizkuntz eskola"
                 },
@@ -1888,9 +1881,6 @@
                 },
                 "amenity/parking/multi-storey": {
                     "name": "Maila anitzeko aparkaleku"
-                },
-                "amenity/parking_entrance": {
-                    "name": "Aparkaleku garajearen Sarrera/Irteera"
                 },
                 "amenity/parking_space": {
                     "name": "Aparkatzeko lekua"
@@ -2173,9 +2163,6 @@
         "community": {
             "Code-for-San-Jose-Slack": {
                 "description": "Pertsona oro ongi etorria da! Izena eman {signupUrl}-en, gero batu #osm katea."
-            },
-            "LATAM-Twitter": {
-                "description": "Jarrai gaitzazu Twitter-en hemen {url}"
             },
             "OSM-AR-facebook": {
                 "extendedDescription": "Lekuko komunitateko albisteak"

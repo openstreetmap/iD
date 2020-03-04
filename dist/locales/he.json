@@ -2756,8 +2756,20 @@
                 "attraction": {
                     "label": "סוג"
                 },
+                "baby_feeding": {
+                    "label": "אזור הנקת תינוקות",
+                    "options": {
+                        "no": "אין",
+                        "room": "חדר מוקצה",
+                        "yes": "מתחם מסומן"
+                    },
+                    "terms": "הנקה,חלב,אמא,אימא,יניקה"
+                },
                 "baby_seat": {
                     "label": "מושב תינוקות"
+                },
+                "backcountry": {
+                    "label": "ללא סימון"
                 },
                 "backrest": {
                     "label": "משענת"
@@ -2827,6 +2839,9 @@
                 "booth": {
                     "label": "ביתן"
                 },
+                "bottle": {
+                    "label": "מילוי בקבוקים"
+                },
                 "boules": {
                     "label": "סוג"
                 },
@@ -2851,6 +2866,10 @@
                 "building": {
                     "label": "בניין",
                     "terms": "מבנה,רב־קומות,רב קומות,רב-קומות,מגדל,בית מגורים"
+                },
+                "building/levels": {
+                    "label": "קומות",
+                    "placeholder": "2, 4, 6…"
                 },
                 "building/levels/underground": {
                     "label": "קומות תת־קרקעיות",
@@ -3304,6 +3323,9 @@
                 "fuel_multi": {
                     "label": "סוגי דלק"
                 },
+                "gambling": {
+                    "label": "משחקים"
+                },
                 "gauge": {
                     "label": "מדד"
                 },
@@ -3329,6 +3351,9 @@
                 "generator/type": {
                     "label": "סוג"
                 },
+                "geyser/height": {
+                    "label": "גובה ההתפרצות"
+                },
                 "gnis/feature_id": {
                     "label": "מזהה תכונה במאגר GNIS",
                     "terms": "GNIS,ID,מערכת מידע גאוגרפית לשמות"
@@ -3338,6 +3363,10 @@
                 },
                 "grape_variety": {
                     "label": "סוגי ענבים"
+                },
+                "group_only": {
+                    "label": "קבוצות בלבד",
+                    "terms": "מדריך,הדרכה,קבוצה,טיול מאורגן"
                 },
                 "guest_house": {
                     "label": "סוג"
@@ -3423,6 +3452,9 @@
                         "stables": "יש",
                         "undefined": "אין"
                     }
+                },
+                "hot_water": {
+                    "label": "מים חמים"
                 },
                 "iata": {
                     "label": "קוד נמל תעופה של IATA"
@@ -3571,11 +3603,6 @@
                 "level_semi": {
                     "label": "קומות"
                 },
-                "levels": {
-                    "label": "קומות",
-                    "placeholder": "2, 4, 6",
-                    "terms": "קומות,דרגות,מפלסים"
-                },
                 "liaison": {
                     "label": "סוג"
                 },
@@ -3616,6 +3643,9 @@
                 },
                 "map_type": {
                     "label": "סוג"
+                },
+                "mapillary": {
+                    "label": "מזהה תמונה ב־Mapillary"
                 },
                 "marker": {
                     "label": "סוג"
@@ -3701,6 +3731,9 @@
                     },
                     "placeholder": "0, 1, 2, 3..."
                 },
+                "museum": {
+                    "label": "סוג"
+                },
                 "name": {
                     "label": "שם",
                     "placeholder": "שם נפוץ (אם בכלל)"
@@ -3746,7 +3779,8 @@
                     "label": "רשת"
                 },
                 "not/name": {
-                    "label": "שמות שגויים"
+                    "label": "שמות שגויים",
+                    "terms": "שגויים,שמות שגויים,טעות בשמות,שגיאה,טעות"
                 },
                 "note": {
                     "label": "הערה"
@@ -3776,6 +3810,10 @@
                         "undefined": "כנראה שכן",
                         "yes": "כן"
                     }
+                },
+                "openfire": {
+                    "label": "מותר אש גלויה",
+                    "terms": "מותר מדורות,מותר להדליק אש"
                 },
                 "opening_date": {
                     "label": "מועד הפתיחה הצפוי"
@@ -3973,7 +4011,13 @@
                     "label": "סוג"
                 },
                 "pump": {
-                    "label": "משאבה"
+                    "label": "משאבה",
+                    "options": {
+                        "manual": "משאבה ידנית",
+                        "no": "אין",
+                        "powered": "משאבה מופעלת מכונה",
+                        "yes": "כן"
+                    }
                 },
                 "railway": {
                     "label": "סוג"
@@ -4009,6 +4053,10 @@
                 },
                 "ref/isil": {
                     "label": "קוד ISIL"
+                },
+                "ref/vatin": {
+                    "label": "מס׳ מזהה מס",
+                    "terms": "זיהוי מס,מס הכנסה,מס,זיהוי"
                 },
                 "ref_aeroway_gate": {
                     "label": "מספר שער"
@@ -4247,6 +4295,10 @@
                 "shop": {
                     "label": "סוג"
                 },
+                "shower": {
+                    "label": "מקלחות",
+                    "terms": "מקלחת,טוש,אמבטיה,התקלחות,שטיפה,שטיף"
+                },
                 "siren/purpose": {
                     "label": "תכלית"
                 },
@@ -4436,6 +4488,10 @@
                 },
                 "to": {
                     "label": "יעד"
+                },
+                "toilets": {
+                    "label": "שירותים",
+                    "terms": "טואלט,בית שימוש"
                 },
                 "toilets/disposal": {
                     "label": "סילוק",
@@ -5071,6 +5127,10 @@
                     "name": "תחנת דלק",
                     "terms": "תחנת דלק"
                 },
+                "amenity/gambling": {
+                    "name": "היכל הימורים",
+                    "terms": "קזינו,הימורים,סלוט מאשין,קולטה,פוקר,סלוטס,מכונות הימורים,בלק ג׳ק,בינגו,התערבות"
+                },
                 "amenity/grave_yard": {
                     "name": "בית עלמין",
                     "terms": "בית קברות"
@@ -5098,10 +5158,6 @@
                 "amenity/karaoke_box": {
                     "name": "תיבת קריוקי",
                     "terms": "מועדון קריוקי, חדר קריוקי,קראוקי,טלוויזיית קריוקי,מסך קריוקי,טלוויזית קריוקי,פלאג אין"
-                },
-                "amenity/kindergarten": {
-                    "name": "גן חובה",
-                    "terms": "גן חובה"
                 },
                 "amenity/language_school": {
                     "name": "בית ספר לשפות",
@@ -5169,10 +5225,6 @@
                 "amenity/parking/underground": {
                     "name": "חנייה תת־קרקעית",
                     "terms": "חניית כלי רכב,חנייה למכוניות,חניון,חניון לילה,חנייה על פני הקרקע,חניית משאיות,חניית מכוניות"
-                },
-                "amenity/parking_entrance": {
-                    "name": "כניסה לחניון",
-                    "terms": "כניסה לחניון"
                 },
                 "amenity/parking_space": {
                     "name": "אזור חניה",
@@ -5966,10 +6018,6 @@
                     "name": "בניין תעשייתי",
                     "terms": "בניין תעשייתי"
                 },
-                "building/kindergarten": {
-                    "name": "גן חובה",
-                    "terms": "גן חובה"
-                },
                 "building/mosque": {
                     "name": "מסגד",
                     "terms": "מסגד"
@@ -6336,10 +6384,6 @@
                 },
                 "emergency/yes": {
                     "name": "כניסת חירום"
-                },
-                "entrance": {
-                    "name": "כניסה/יציאה",
-                    "terms": "כניסה/יציאה"
                 },
                 "ford": {
                     "name": "מקום צליחה",
@@ -6868,8 +6912,7 @@
                     "terms": "בית עלמין"
                 },
                 "landuse/churchyard": {
-                    "name": "חצר כנסייה",
-                    "terms": "חצר כנסייה"
+                    "name": "חצר כנסייה"
                 },
                 "landuse/commercial": {
                     "name": "אזור מסחרי",
@@ -7919,41 +7962,9 @@
                     "name": "משרד לשירות ציבורי - מים",
                     "terms": "משרד לשירות ציבורי - מים"
                 },
-                "piste/downhill": {
-                    "name": "סקי אלפיני",
-                    "terms": "גלישת מורד,סקי ראן,דאונהיל,אלפיני"
-                },
-                "piste/downhill/halfpipe": {
-                    "name": "חצי צינור",
-                    "terms": "סקי,חצי צינור,גלישה"
-                },
-                "piste/hike": {
-                    "name": "שביל חורף",
-                    "terms": "שביל שלג"
-                },
-                "piste/ice_skate": {
-                    "name": "מסלול החלקה על הקרח",
-                    "terms": "מסלול מחליקיים,החלקה"
-                },
-                "piste/nordic": {
-                    "name": "שביל סקי חורף",
-                    "terms": "שביל סקי חורף,שביל סקי נורדי"
-                },
-                "piste/piste": {
-                    "name": "שבילי ספורט חורף",
-                    "terms": "שבילי ספורט חורפי,שבילי טיולי חורף,מסלול טיול חורף,מסלול טיול שלג"
-                },
                 "piste/skitour": {
                     "name": "מסלול סיורי סקי",
                     "terms": "סקי למטיילים,טיולי סקי,מסלול,טיול סקי"
-                },
-                "piste/sled": {
-                    "name": "מסלול מזחלות פתוחות",
-                    "terms": "מסלול מזחלות,מזחלת"
-                },
-                "piste/sleigh": {
-                    "name": "מסלול מזחלות סגורות",
-                    "terms": "מסלול מזחלות,מזחלת"
                 },
                 "place": {
                     "name": "מקום"
@@ -8126,9 +8137,6 @@
                 "power/pole": {
                     "name": "עמוד חשמל",
                     "terms": "תורן חשמל"
-                },
-                "power/sub_station": {
-                    "name": "תחנה תת קרקעית"
                 },
                 "power/substation": {
                     "name": "תחנה תת קרקעית",
@@ -8441,10 +8449,6 @@
                     "name": "חנות משקאות חריפים",
                     "terms": "חנות משקאות"
                 },
-                "shop/anime": {
-                    "name": "חנות אנימה",
-                    "terms": "חנות סרטים מצוירים יפנים"
-                },
                 "shop/antiques": {
                     "name": "חנות עתיקות",
                     "terms": "חנות עתיקות"
@@ -8603,10 +8607,6 @@
                 "shop/country_store": {
                     "name": "חנות למטיילים",
                     "terms": "למטייל,ריקושט,ציוד טיולים,שקי שינה,מחנאות,אוהלים,חוץ"
-                },
-                "shop/craft": {
-                    "name": "חנות חפצי אומנות",
-                    "terms": "חנות דברי אומנות"
                 },
                 "shop/curtain": {
                     "name": "חנות וילונות",
@@ -9179,6 +9179,10 @@
                     "name": "מוזיאון",
                     "terms": "מוזאון"
                 },
+                "tourism/museum/history": {
+                    "name": "מוזיאון היסטוריה",
+                    "terms": "מוצגים,היסטוריה,היכל,מוסד"
+                },
                 "tourism/picnic_site": {
                     "name": "פיקניק",
                     "terms": "פיקניק"
@@ -9290,6 +9294,10 @@
                 "type/enforcement": {
                     "name": "אכיפה",
                     "terms": "שיטור,רגולציה,חוק"
+                },
+                "type/enforcement/maxspeed": {
+                    "name": "אכיפת מגבלת מהירות",
+                    "terms": "רדאר,מכמונת,מצלמה,מצלמת מהירות,מהירות מרבית,מהירות מקסימלית,מהירות מקסימאלית"
                 },
                 "type/multipolygon": {
                     "name": "רב־מצולעים"
@@ -9444,6 +9452,10 @@
                 "waterway/drain": {
                     "name": "נקז",
                     "terms": "נקז"
+                },
+                "waterway/fish_pass": {
+                    "name": "מעבר דגים",
+                    "terms": "מעבר צלופחים,מעבר דגה,מדרגות דגים,דרך דגים,סולם דגים,נדידת דגים"
                 },
                 "waterway/fuel": {
                     "name": "תחנת תדלוק ימית",
@@ -10000,22 +10012,18 @@
                 "description": "קבוצת משתמשי OpenStreetMap בדלאס-פורט וורת׳",
                 "extendedDescription": "דלאס, פורט וורת׳ וכל הערים שביניהן שופעות באנשים יצירתיים ומוכשרים טכנולוגית. החזון של קבוצת המשתמשים הזאת היא למצוא דרכים חדשות להשתמש במשאב המדהים שנקרא OSM."
             },
+            "Galicia-Telegram": {
+                "name": "הטלגרם של OpenStreetMap גליסיה",
+                "description": "טלגרם של OpenStreetMap עבור גליסיה"
+            },
+            "Galicia-Twitter": {
+                "name": "הטוויטר של OpenStreetMap גליסיה",
+                "description": "ניתן לעקוב אחרינו בטוויטר בכתובת {url}"
+            },
             "GeoPhilly": {
                 "name": "GeoPhilly",
                 "description": "קבוצת מפגשים לחובבי מפות באזור פילדלפיה",
                 "extendedDescription": "GeoPhilly היא קבוצה של מפתחים, מומחי גאוגרפיה, גיקים של מידע, חובבי קוד פתוח, האקרים אזרחיים ומכורי מפות שמתאגדים סביב אהבתם המשותפת למפות ולסיפורים שהן מספרות. אם מפות משמשות אותך כחלק מהעבודה שלך או שפשוט מעניין אותך לדעת יותר, המפגש הזה מיועד לך! האירועים שלנו מתוכננים להיות פתוחים, ידידותיים, חינוכיים וחברתיים, החל מהרמת כוסית דרך הרצאות בזק ואפילו סדנאות. מזמינים אותך ליצור קהילה גאו־‏מרחבית מגוונת ומעוררת השראה בפילדלפיה ביחד אתנו!"
-            },
-            "LATAM-Facebook": {
-                "name": " הפייסבוק של OpenStreetMap אמריקה הלטינית",
-                "description": "OpenStreetMap אמריקה הלטינית בפייסבוק"
-            },
-            "LATAM-Telegram": {
-                "name": "הטלגרם של OpenStreetMap אמריקה הלטינית",
-                "description": "טלגרם של OpenStreetMap עבור אמריקה הלטינית"
-            },
-            "LATAM-Twitter": {
-                "name": "הטוויטר של OpenStreetMap אמריקה הלטינית",
-                "description": "ניתן לעקוב אחרינו בטוויטר בכתובת {url}"
             },
             "MapMinnesota": {
                 "name": "MapMinnesota",
@@ -10036,6 +10044,9 @@
                 "name": "MaptimeME",
                 "description": "ממפים ומשתמשי OpenStreetMap סביב פורטלנד, מיין",
                 "extendedDescription": "Maptime כשמו כן הוא, זמן ליצירת מפות. המטרה שלנו היא לפתוח את הדלת לאפשרויות מגוונות ליצירת מפות לכל מי שמעוניין על ידי יצירת מקום ללמידה שיתופית, חקירה ויצירת מפות באמצעות כלים וטכנולוגיות למיפוי."
+            },
+            "Maptime-Oceania-Slack": {
+                "description": "ניתן להירשם בכתובת {signupUrl}"
             },
             "MaptimeHRVA-twitter": {
                 "name": "MaptimeHRVA טוייטר",
@@ -10431,7 +10442,12 @@
             "OSMF": {
                 "name": "קרן OpenStreetMap",
                 "description": "OSMF הוא ארגון בריטי ללא מטרות רווח שתומך במיזם OpenStreetMap",
-                "extendedDescription": "OSMF תומך ב־OpenStreetMap על ידי תרומה, תחזוקת השרתים שעליהם פועלת מערכת OSM, ארגון הכנס State of the Map ותיאום בין המתנדבים שדואגים ש־OSM ימשיך להכות גלים. ניתן להראות את תמיכתך ולתת את קולך ל־OpenStreetMap על ידי הצטרפות לחברות ב־OSMF דרך כאן: {signupUrl}"
+                "extendedDescription": "OSMF תומך ב־OpenStreetMap על ידי תרומה, תחזוקת השרתים שעליהם פועלת מערכת OSM, ארגון הכנס State of the Map ותיאום בין המתנדבים שדואגים ש־OSM ימשיך להכות גלים. ניתן להראות את תמיכתך ולתת את קולך ל־OpenStreetMap על ידי הצטרפות לחברות ב־OSMF דרך כאן: {signupUrl}",
+                "events": {
+                    "sotm2020": {
+                        "where": "קייפטאון, דרום אפריקה"
+                    }
+                }
             },
             "OpenCleveland-meetup": {
                 "name": "קליבלנד פתוחה",
@@ -10482,6 +10498,10 @@
                 "name": "ערוץ הטלגרם של OSM אלבניה",
                 "description": "ערוץ הטלגרם של OpenStreetMap אלבניה"
             },
+            "al-twitter": {
+                "name": "הטוויטר של OpenStreetMap אלבניה",
+                "description": "ניתן לעקוב אחרינו בטוויטר בכתובת {url}"
+            },
             "at-forum": {
                 "name": "הפורום של OpenStreetMap אוסטריה",
                 "description": "הפורום הרשמי לשאלות על OpenStreetMap בתוך וסביב אוסטריה"
@@ -10494,7 +10514,11 @@
                 "name": "הטוויטר של OpenStreetMap אוסטריה",
                 "description": "הטוויטר של OpenStreetMap אוסטריה: {url}"
             },
+            "be-chapter": {
+                "description": "אנו מסייעים לפתח ולטפח את OpenStreetMap בבלגיה."
+            },
             "be-facebook": {
+                "name": "קהילת הפייסבוק של OpenStreetMap בלגיה",
                 "description": "ממפים ומשתמשים ב־OpenStreetMap בבלגיה בפייסבוק"
             },
             "be-forum": {
@@ -10524,6 +10548,9 @@
                 "name": "הטוויטר של OpenStreetMap בלגיה",
                 "description": "OSM בלגיה בטווויטר: ‎@osm_be"
             },
+            "bg-forum": {
+                "name": "הפורום של OpenStreetMap בולגריה"
+            },
             "bw-facebook": {
                 "name": "מיפוי בוטסואנה בפייסבוק",
                 "description": "העמוד של OpenStreetMap בבוטסואנה"
@@ -10540,6 +10567,9 @@
                 "name": "הממפים הצעירים של אוניברסיטת קייפ קוסט",
                 "description": "ניתן לעקוב אחרינו בטוויטר: {url}",
                 "extendedDescription": "זה הכינוי הרשמי של אגף הממפים הצעירים באוניברסיטת קייפ קוסט, גאנה. אנו אוהבים מפות, נתונים פתוחים וגם לעזור לחלשים."
+            },
+            "ch-twitter": {
+                "description": "ניתן לעקוב אחרינו בטוויטר: {url}"
             },
             "czech-community": {
                 "name": "קהילת OSM הצ׳כית",
@@ -10565,6 +10595,10 @@
                 "name": "הפורום של OpenStreetMap גרמניה",
                 "description": "הפורום המקוון של OpenStreetMap גרמניה"
             },
+            "de-hamburg-telegram": {
+                "name": "ערוץ הטלגרם של OSM המבורג",
+                "description": "הטלגרם של OpenStreetMap המבורג: {url}"
+            },
             "de-irc": {
                 "name": "OpenStreetMap גרמניה ב־IRC",
                 "description": "ניתן להצטרף ל־‎#osm-de תחת irc.oftc.net (פתחה 6667)"
@@ -10572,6 +10606,9 @@
             "de-mailinglist": {
                 "name": "קבוצת הדיוור Talk-de",
                 "description": "Talk-de היא קבוצת הדיוור הרשמית של קהילת OSM הגרמנית"
+            },
+            "de-matrix": {
+                "name": "ה־Matrix של OpenStreetMap גרמניה"
             },
             "de-ostwestfalen-lippe-mailinglist": {
                 "name": "קבוצת הדיוור OWL",
@@ -10621,9 +10658,17 @@
                 "name": "קבוצת הדיוור Talk-fr",
                 "description": "קבוצת הדיוור Talk-fr"
             },
+            "fr-telegram": {
+                "name": "הטלגרם של OpenStreetMap צרפת",
+                "description": "קבוצת טלגרם לקהילת OSM צרפת: {url}"
+            },
             "fr-twitter": {
                 "name": "הטוויטר של OpenStreetMap צרפת",
                 "description": "הטוויטר של OpenStreetMap צרפת: {url}"
+            },
+            "galicia-wiki": {
+                "name": "OpenStreetMap Wikiproject גליסיה",
+                "description": "כל מה שצריך לדעת על מיפוי בגליסיה: {url}"
             },
             "gb-irc": {
                 "name": "OpenStreetMap המלכה המאוחדת ב־IRC",
@@ -10656,6 +10701,18 @@
             "hu-meetup": {
                 "name": "קבוצת המפגשים של OpenStreetMap הונגרי",
                 "description": "הפלטפורמה לכינוס מפגשים בהונגריה"
+            },
+            "il-telegram": {
+                "name": "ערוץ הטלגרם של OSM ישראל",
+                "description": "קבוצת טלגרם לקהילת OpenStreetMap ישראל: {url}"
+            },
+            "ireland-telegram": {
+                "name": "ערוץ הטלגרם של OSM אירלנד",
+                "description": "הטלגרם של OpenStreetMap אירלנד"
+            },
+            "ireland-twitter": {
+                "name": "הטוויטר של OpenStreetMap אירלנד",
+                "description": "הטוויטר של OpenStreetMap אירלנד: {url}"
             },
             "is-facebook": {
                 "name": "OSM איסלנד בפייסבוק",
@@ -10693,10 +10750,41 @@
                 "name": "OpenStreetMap קוסובו בטלגרם",
                 "description": "קבוצת טלגרם ציבורית חצי רשמית לכלל קוסובו. אנו מזמינים את כל הממפים מכל מקום ובכל שפה."
             },
+            "latam-facebook": {
+                "name": " הפייסבוק של OpenStreetMap אמריקה הלטינית"
+            },
+            "latam-irc": {
+                "name": "OpenStreetMap אמריקה הלטינית ב־IRC",
+                "description": "ניתן להצטרף ל־‎#osm-latam תחת irc.oftc.net (פתחה 6667)"
+            },
+            "latam-mailinglist": {
+                "name": "קבוצת הדיוור Talk-latam"
+            },
+            "latam-matrix": {
+                "name": "ערוץ ה־Matrix של OpenStreetMap אמריקה הלטינית"
+            },
+            "latam-telegram": {
+                "name": "הטלגרם של OpenStreetMap אמריקה הלטינית"
+            },
+            "latam-twitter": {
+                "description": "הטוויטר של OpenStreetMap אמריקה הלטינית: {url}"
+            },
+            "latam-wiki": {
+                "name": "OpenStreetMap Wikiproject אמריקה הלטינית",
+                "description": "כל מה שצריך לדעת על מיפוי באמריקה הלטינית {url}"
+            },
             "mappa-mercia-group": {
                 "name": "הקבוצה המקומית Mappa Mercia",
                 "description": "בית לחובבי OpenStreetMap במידלנדס",
                 "extendedDescription": "מיזם Mappa Mercia מיועד לטפל את OpenStreetMap במערב המידלנדס, אנגליה. אנו מגבשים אירועים קהילתיים, מספקים הכשרה ותומכים בארגונים מקומיים שרוצים לפתוח את הנתונים שלהם."
+            },
+            "ni-telegram": {
+                "name": "ערוץ הטלגרם של OSM ניקרגואה",
+                "description": "הטלגרם של OpenStreetMap ניקרגואה"
+            },
+            "ni-twitter": {
+                "name": "הטוויטר של OpenStreetMap ניקרגואה",
+                "description": "OSM ניקרגואה בטווויטר: ‎@osm_ni"
             },
             "no-forum": {
                 "name": "הפורום המקוון של OpenStreetMap נורווגיה",
@@ -10713,6 +10801,10 @@
             "no-telegram": {
                 "name": "‎@OSM_no בטלגרם",
                 "description": "הטלגרם של OpenStreetMap נורבגיה"
+            },
+            "osm-afghanistan-facebook": {
+                "name": "OpenStreetMap אפגניסטן",
+                "description": "שיפור OpenStreetMap באפגניסטן"
             },
             "osm-asia-telegram": {
                 "name": "OSM אסיה טלגרם",
@@ -10773,9 +10865,15 @@
                 "name": "הטלגרם של OpenStreetMap איראן",
                 "description": "מזמינים אותך להצטרף לערוץ הטלגרם שלנו בכתובת {url}. יש לנו גם קבוצת על של משתמשי OSM רבים שמתעניינים באיראן. ניתן למצוא את הקישור אליה בביוגרפיה של הערוץ."
             },
-            "osm-latam": {
-                "name": "OpenStreetMap אמריקה הלטינית",
-                "description": "תמיכה ב־OpenStreetMap באמריקה הלטינית"
+            "osm-kenya": {
+                "name": "OSM קניה"
+            },
+            "osm-kerala-telegram": {
+                "name": "הטלגרם של OpenStreetMap קרלה",
+                "description": "אנחנו ממפים את קרלה ביחד. מזמינים אותך להצטרף לקבוצת הטלגרם שלנו. {url}"
+            },
+            "osm-kerala-wiki": {
+                "name": "OpenStreetMap קרלה"
             },
             "osm-mg-facebook": {
                 "name": "קבוצת הפייסבוק של OpenStreetMap במדגסקר ",
@@ -10848,6 +10946,33 @@
             "talk-mg": {
                 "name": "קבוצת הדיוור Talk-mg",
                 "description": "מקום לתורמים, קהילות ומשתמשי OpenStreetMap במדגסקר לשתף ולדון זה עם זה."
+            },
+            "ua-github": {
+                "name": "OpenStreetMap אוקראינה ב־GitHub",
+                "description": "ה־GitHub של OpenStreetMap אוקראינה"
+            },
+            "ua-osm": {
+                "name": "האתר של OpenStreetMap אוקראינה",
+                "description": "האתר של OpenStreetMap באוקראינה"
+            },
+            "ua-slack": {
+                "name": "ה־Slack של OpenStreetMap אוקראינה",
+                "description": "ניתן להצטרף לקהילה של OpenStreetMap אוקראינה ב־Slack"
+            },
+            "ua-telegram": {
+                "name": "‎@osmUA בטלגרם",
+                "description": "הטלגרם של OpenStreetMap אוקראינה"
+            },
+            "ua-twitter": {
+                "name": "OpenStreetMap אוקראינה בטוויטר",
+                "description": "OpenStreetMap אוקראינה בטוויטר: {url}"
+            },
+            "uk-localchapter": {
+                "name": "OpenStreetMap הממלכה המאוחדת"
+            },
+            "uk-london-twitter": {
+                "name": "הטוויטר של OpenStreetMap לונדון",
+                "description": "הטוויטר של OpenStreetMap לונדון: {url}"
             },
             "us-ma-mailinglist": {
                 "name": "קבוצת הדיוור Talk-us-massachusetts",

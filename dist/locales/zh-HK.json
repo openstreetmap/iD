@@ -1857,10 +1857,6 @@
                 "level": {
                     "label": "圖層"
                 },
-                "levels": {
-                    "label": "樓層數",
-                    "placeholder": "2, 4, 6..."
-                },
                 "lit": {
                     "label": "照明"
                 },
@@ -3038,10 +3034,6 @@
                     "name": "網吧",
                     "terms": "Internet Cafe, 互聯網餐廳"
                 },
-                "amenity/kindergarten": {
-                    "name": "學前照顧/幼稚園範圍",
-                    "terms": "幼兒園,幼稚園用地,幼稚園"
-                },
                 "amenity/language_school": {
                     "name": "語言學校",
                     "terms": "語言學校,外文學校,外語學校"
@@ -3088,10 +3080,6 @@
                 "amenity/parking/multi-storey": {
                     "name": "多層停車場",
                     "terms": "多層泊車場,停車場,泊車場"
-                },
-                "amenity/parking_entrance": {
-                    "name": "停車場入口/出口",
-                    "terms": "停車場入口,停車場出口"
                 },
                 "amenity/parking_space": {
                     "name": "泊車位",
@@ -3602,10 +3590,6 @@
                     "name": "工業樓宇",
                     "terms": "Industrial Building,工業建築物,工業樓宇"
                 },
-                "building/kindergarten": {
-                    "name": "學前照顧/幼稚園建築物",
-                    "terms": "幼兒園校舍,幼稚園校舍"
-                },
                 "building/mosque": {
                     "name": "清真寺建築物",
                     "terms": "Mosque Building, 清真寺建築物"
@@ -3896,10 +3880,6 @@
                 },
                 "emergency/yes": {
                     "name": "緊急通道"
-                },
-                "entrance": {
-                    "name": "入口/出口",
-                    "terms": "出入口,出口,入口"
                 },
                 "ford": {
                     "name": "淺灘",
@@ -4220,8 +4200,7 @@
                     "terms": "Cemetery,墓地,墳場"
                 },
                 "landuse/churchyard": {
-                    "name": "教堂庭院",
-                    "terms": "教堂用地"
+                    "name": "教堂庭院"
                 },
                 "landuse/commercial": {
                     "name": "商業區",
@@ -4875,9 +4854,6 @@
                     "name": "電綫杆",
                     "terms": "Power Pole,電綫杆,電線桿"
                 },
-                "power/sub_station": {
-                    "name": "配電站"
-                },
                 "power/substation": {
                     "name": "變壓站",
                     "terms": "變壓站, 配電站, 電力分站"
@@ -5005,10 +4981,6 @@
                 "shop/alcohol": {
                     "name": "酒類專賣店",
                     "terms": "Liquor Store,酒店,酒莊,酒類商店"
-                },
-                "shop/anime": {
-                    "name": "動漫店",
-                    "terms": "動漫店"
                 },
                 "shop/antiques": {
                     "name": "古董店",
@@ -5140,10 +5112,6 @@
                 "shop/cosmetics": {
                     "name": "化妝品店",
                     "terms": "化妝品店"
-                },
-                "shop/craft": {
-                    "name": "工藝品店",
-                    "terms": "工藝品店,工藝品商店,手工藝店,手作坊"
                 },
                 "shop/curtain": {
                     "name": "窗簾店",

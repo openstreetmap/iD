@@ -1,4 +1,5 @@
 {
+    "icon": "temaki-drag_lift",
     "geometry": [
         "line"
     ],
@@ -10,5 +11,10 @@
     "tags": {
         "aerialway": "drag_lift"
     },
+    "terms": [
+        "skiing",
+        "snowboarding",
+        "surface cable"
+    ],
     "name": "Drag Lift"
 }

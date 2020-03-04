@@ -7,6 +7,7 @@
             "undo": "تراجع",
             "zoom_to": "تكبير إلى",
             "copy": "نسخ",
+            "view_on": "إظهار على {domain}",
             "favorite": "المفضلة"
         },
         "toolbar": {
@@ -46,21 +47,21 @@
                 "label": "إضافة ملاحظة",
                 "description": "رصدت مشكلة؟ دع مخططوا الخرائط الآخرين يعرفون بذلك.",
                 "tail": "انقر على الخريطة لإضافة ملاحظة.",
-                "key": "ح"
+                "key": "شماليات"
             },
             "add_preset": {
                 "title": "إضافة {feature}",
                 "point": {
-                    "title": "إضافة {feature} كـ نقطة"
+                    "title": "إضافة {feature} كـنقطة"
                 },
                 "line": {
-                    "title": "إضافة {feature} كـ خط"
+                    "title": "إضافة {feature} كـخط"
                 },
                 "area": {
-                    "title": "إضافة {feature} كـ مساحة"
+                    "title": "إضافة {feature} كـمساحة"
                 },
                 "building": {
-                    "title": "إضافة {feature} كـ مبنى"
+                    "title": "إضافة {feature} كـمبنى"
                 }
             },
             "browse": {
@@ -94,7 +95,7 @@
             },
             "continue": {
                 "key": "ك",
-                "title": "إكمال",
+                "title": "إستمرار",
                 "description": "إكمال هذا الخط.",
                 "not_eligible": "لا يوجد خط يمكن إكماله هنا.",
                 "multiple": "يمكن إكمال عدة خطوط هنا. لاختيار خط، اضغط على مفتاح Shift ثم انقر عليه لتحديده.",
@@ -2918,10 +2919,6 @@
                 "level": {
                     "label": "المستوى"
                 },
-                "levels": {
-                    "label": "الطوابق",
-                    "placeholder": "2, 4, 6..."
-                },
                 "liaison": {
                     "label": "النوع"
                 },
@@ -4030,10 +4027,6 @@
                     "name": "مقهى إنترنت",
                     "terms": "مقهى إنترنت"
                 },
-                "amenity/kindergarten": {
-                    "name": "روضة أطفال",
-                    "terms": "روضة أطفال"
-                },
                 "amenity/language_school": {
                     "name": "مدرسة لغات"
                 },
@@ -4070,10 +4063,6 @@
                 "amenity/parking/underground": {
                     "name": "موقف تحت الأرض",
                     "terms": "جراج"
-                },
-                "amenity/parking_entrance": {
-                    "name": "مدخل ومخرج جراج وقوف",
-                    "terms": "مدخل, مخرج"
                 },
                 "amenity/parking_space": {
                     "name": "موقف سيارات"
@@ -4538,10 +4527,6 @@
                     "name": "مبنى صناعي",
                     "terms": "مبنى صناعي"
                 },
-                "building/kindergarten": {
-                    "name": "مبنى روضة أطفال",
-                    "terms": "روضة; أطفال"
-                },
                 "building/mosque": {
                     "name": "مبنى المسجد",
                     "terms": "مبنى المسجد"
@@ -4745,10 +4730,6 @@
                 "emergency/phone": {
                     "name": "هاتف طوارئ",
                     "terms": "هاتف طوارئ"
-                },
-                "entrance": {
-                    "name": "مدخل ومخرج",
-                    "terms": "دخول; خروج; مدخل; مخرج"
                 },
                 "ford": {
                     "name": "ممر مائي",
@@ -5747,9 +5728,6 @@
                     "name": "برج كهرباء",
                     "terms": "برج كهرباء"
                 },
-                "power/sub_station": {
-                    "name": "محطة فرعية"
-                },
                 "power/substation": {
                     "name": "محطة فرعية",
                     "terms": "محطة فرعية"
@@ -5925,9 +5903,6 @@
                     "name": "متجر خمور",
                     "terms": "محل خمور,خمور,متجر خمور"
                 },
-                "shop/anime": {
-                    "name": "متجر أفلام رسوم متحركة"
-                },
                 "shop/antiques": {
                     "name": "متجر تحف وأنتيكات"
                 },
@@ -6047,10 +6022,6 @@
                 "shop/cosmetics": {
                     "name": "متجر مستحضرات التجميل",
                     "terms": "متجر مستحضرات التجميل"
-                },
-                "shop/craft": {
-                    "name": "متجر الفنون والحرف",
-                    "terms": "متجر الفنون والحرف"
                 },
                 "shop/curtain": {
                     "name": "محل بيع الستائر",

@@ -3314,10 +3314,6 @@
                 "level": {
                     "label": "سطح"
                 },
-                "levels": {
-                    "label": "طبقه",
-                    "placeholder": "2, 4, 6..."
-                },
                 "liaison": {
                     "label": "نوع"
                 },
@@ -4346,10 +4342,6 @@
                     "name": "کافی‌نت",
                     "terms": "کافه‌ی اینترنت, کافینت, اینترنت"
                 },
-                "amenity/kindergarten": {
-                    "name": "محوطه پیش دبستانی / مهدکودک",
-                    "terms": "پیش دبستانی، مهد کودک، مدرسه، کودکستان"
-                },
                 "amenity/language_school": {
                     "name": "آموزشگاه زبان",
                     "terms": "زبانکده، آکادمی موسیقی، مدرسه موسیقی"
@@ -4389,9 +4381,6 @@
                 "amenity/parking/underground": {
                     "name": "پارکینگ زیرزمینی",
                     "terms": "پارکینگ خودرو"
-                },
-                "amenity/parking_entrance": {
-                    "name": "ورودی/خروجی پارکینگ"
                 },
                 "amenity/parking_space": {
                     "name": "جای پارک"
@@ -4807,10 +4796,6 @@
                 "building/industrial": {
                     "name": "ساختمان صنعتی"
                 },
-                "building/kindergarten": {
-                    "name": "ساختمان پیش دبستانی / کودکستان",
-                    "terms": "پیش دبستانی، مهد کودک، مدرسه، کودکستان"
-                },
                 "building/mosque": {
                     "name": "ساختمان مسجد"
                 },
@@ -5040,9 +5025,6 @@
                 },
                 "emergency/yes": {
                     "name": "دسترسی اضطراری بله"
-                },
-                "entrance": {
-                    "name": "ورود/خروج"
                 },
                 "ford": {
                     "name": "گدار",
@@ -5987,9 +5969,6 @@
                 "power/plant": {
                     "name": "محدوده نیروگاه برق"
                 },
-                "power/sub_station": {
-                    "name": "ایستگاه فرعی"
-                },
                 "power/substation": {
                     "name": "ایستگاه فرعی"
                 },
@@ -6077,10 +6056,6 @@
                 },
                 "shop/alcohol": {
                     "name": "مغازه مشروبات الکلی"
-                },
-                "shop/anime": {
-                    "name": "فروشگاه انیمه",
-                    "terms": "مانگا, ژاپن"
                 },
                 "shop/antiques": {
                     "name": "فروشگاه عتیقه‌جات",
@@ -6199,9 +6174,6 @@
                 },
                 "shop/cosmetics": {
                     "name": "فروشگاه آرایشی و بهداشتی "
-                },
-                "shop/craft": {
-                    "name": "فروشگاه هنر و صنایع دستی"
                 },
                 "shop/curtain": {
                     "name": "پرده فروشی"

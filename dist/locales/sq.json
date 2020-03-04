@@ -834,9 +834,6 @@
                     "label": "Shtresë",
                     "placeholder": "0"
                 },
-                "levels": {
-                    "placeholder": "2, 4, 6..."
-                },
                 "location": {
                     "label": "Vendndodhja"
                 },

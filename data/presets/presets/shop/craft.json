@@ -1,5 +1,5 @@
 {
-    "icon": "fas-palette",
+    "icon": "fas-cut",
     "geometry": [
         "point",
         "area"
@@ -12,5 +12,5 @@
         "paint*",
         "frame"
     ],
-    "name": "Arts and Crafts Store"
+    "name": "Arts & Crafts Store"
 }

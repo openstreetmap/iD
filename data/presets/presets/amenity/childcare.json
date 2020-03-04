@@ -6,19 +6,23 @@
         "operator/type",
         "address",
         "building_area",
-        "opening_hours"
+        "opening_hours",
+        "website"
     ],
     "moreFields": [
         "baby_feeding",
         "email",
         "fax",
         "gnis/feature_id",
+        "internet_access",
+        "internet_access/fee",
+        "internet_access/ssid",
         "level",
         "max_age",
         "min_age",
+        "not/name",
         "payment_multi",
         "phone",
-        "website",
         "wheelchair"
     ],
     "geometry": [

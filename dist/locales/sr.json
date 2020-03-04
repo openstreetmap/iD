@@ -1650,10 +1650,6 @@
                 "level_semi": {
                     "label": "Нивои"
                 },
-                "levels": {
-                    "label": "Спратови",
-                    "placeholder": "2, 4, 6..."
-                },
                 "liaison": {
                     "label": "Врста"
                 },
@@ -2326,9 +2322,6 @@
                 "amenity/internet_cafe": {
                     "name": "Интернет кафе"
                 },
-                "amenity/kindergarten": {
-                    "name": "Предшколско двориште"
-                },
                 "amenity/library": {
                     "name": "Библиотека"
                 },
@@ -2343,9 +2336,6 @@
                 },
                 "amenity/nursing_home": {
                     "name": "Старачки дом"
-                },
-                "amenity/parking_entrance": {
-                    "name": "Улаз/излаз јавне гараже"
                 },
                 "amenity/parking_space": {
                     "name": "Паркинг простор"
@@ -2720,10 +2710,6 @@
                     "name": "Индустријска зграда",
                     "terms": "индустријска зграда, индустријски објекат, производни погон, погон, фабрика"
                 },
-                "building/kindergarten": {
-                    "name": "Вртић",
-                    "terms": "вртић, предшколска зграда, предшколско, обданиште"
-                },
                 "building/public": {
                     "name": "Јавна зграда"
                 },
@@ -2956,9 +2942,6 @@
                 },
                 "emergency/siren": {
                     "name": "Сирена"
-                },
-                "entrance": {
-                    "name": "Улаз/излаз"
                 },
                 "golf/bunker": {
                     "name": "Пешчана замка"
@@ -3665,9 +3648,6 @@
                 },
                 "power/pole": {
                     "name": "Напонски стуб"
-                },
-                "power/sub_station": {
-                    "name": "Трафо-станица"
                 },
                 "power/substation": {
                     "name": "Трафо-станица",

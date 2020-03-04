@@ -48,13 +48,7 @@ export function uiFieldMaxspeed(field, context) {
             .on('change', change)
             .on('blur', change);
 
-        var loc;
-        if (_entity.type === 'node') {
-            loc = _entity.loc;
-        } else {
-            var childNodes = context.graph().childNodes(context.entity(_entity.id));
-            loc = childNodes[~~(childNodes.length/2)].loc;
-        }
+        var loc = _entity.extent(context.graph()).center();
 
         _isImperial = countryCoder.roadSpeedUnit(loc) === 'mph';
 

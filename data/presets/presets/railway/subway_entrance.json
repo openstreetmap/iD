@@ -6,7 +6,8 @@
     ],
     "fields": [
         "name",
-        "level"
+        "level",
+        "wheelchair"
     ],
     "tags": {
         "railway": "subway_entrance"

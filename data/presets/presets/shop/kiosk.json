@@ -1,9 +1,5 @@
 {
     "icon": "fas-store",
-    "fields": [
-        "{shop}",
-        "levels"
-    ],
     "geometry": [
         "point",
         "area"

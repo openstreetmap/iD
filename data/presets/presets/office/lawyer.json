@@ -7,6 +7,16 @@
     "tags": {
         "office": "lawyer"
     },
-    "terms": [],
+    "terms": [
+        "advocate",
+        "attorney",
+        "barrister",
+        "counsellor",
+        "counselor",
+        "defender",
+        "lawyer",
+        "legal",
+        "prosecutor"
+    ],
     "name": "Law Office"
 }

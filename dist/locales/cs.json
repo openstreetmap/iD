@@ -383,7 +383,12 @@
                 }
             },
             "extract": {
-                "key": "E"
+                "key": "E",
+                "connected_to_hidden": {
+                    "vertex": {
+                        "single": "Tento bod nelze extrahovat, protože je připojen ke skrytému prvku."
+                    }
+                }
             }
         },
         "restriction": {
@@ -436,7 +441,8 @@
             "translate": "Přeložit",
             "localized_translation_label": "Vícejazyčný název",
             "localized_translation_language": "Zvolte jazyk",
-            "localized_translation_name": "Název"
+            "localized_translation_name": "Název",
+            "language_and_code": "{language} ({code})"
         },
         "zoom_in_edit": "Pro editaci přibližte",
         "login": "Přihlásit",
@@ -451,6 +457,9 @@
         "feature_info": {
             "hidden_warning": "{count} skrytých prvků",
             "hidden_details": "Tyto prvky jsou právě skryté: {details}"
+        },
+        "osm_api_status": {
+            "retry": "Opakovat"
         },
         "commit": {
             "title": "Odeslat na OpenStreetMap",
@@ -467,6 +476,7 @@
             "deleted": "Smazáno",
             "created": "Vytvořeno",
             "outstanding_errors_message": "Prosím, vyřešte nejdříve všechny chuby. Zbývá jich {count}.",
+            "comment_needed_message": "Nejprve prosím přidejte komentář k changesetu.",
             "about_changeset_comments": "Více o komentářích ke změnám (anglicky)",
             "about_changeset_comments_link": "//wiki.openstreetmap.org/wiki/Good_changeset_comments",
             "google_warning": "V komentáři jste zmínili Google. Důrazně upozorňujeme, že kopírování z map Googlu je zakázáno (a navíc jsou zastaralé).",
@@ -620,6 +630,7 @@
             "custom": "Vlastní",
             "overlays": "Překryvné vrstvy",
             "reset": "vrátit na začátek",
+            "reset_all": "Resetovat vše",
             "display_options": "Volby zobrazení",
             "brightness": "Jas",
             "contrast": "Kontrast",
@@ -629,6 +640,9 @@
                 "description": "Zobrazit minimapu",
                 "tooltip": "Zobrazit přehledovou mapku zobrazující aktuální výřez v širším okolí",
                 "key": "I"
+            },
+            "panel": {
+                "description": "Zobrazit panel detailů"
             },
             "fix_misalignment": "Zarovnat podklad",
             "offset": "Vizuálně vyrovnejte posunutí podkladů v šedé oblasti tak, aby lícovaly s mapou. Nebo zadejte hodnotu posunu v metrech."
@@ -661,9 +675,17 @@
                     "zoom": "Přiblížit na data"
                 }
             },
+            "highlight_edits": {
+                "key": "G"
+            },
             "map_features": "Mapové prvky",
             "autohidden": "Tyto prvky jsou nyní skryté, protože jinak by jich na mapě bylo zobrazeno příliš mnoho. Když mapu zvětšíte, můžete je zobrazit a editovat.",
             "osmhidden": "Tyto prvky byly automaticky skryté, protože je skrytá vrstva OpenStreetMap."
+        },
+        "visual_diff": {
+            "highlight_edits": {
+                "description": "Zvýraznit změny"
+            }
         },
         "photo_overlays": {
             "title": "Fotografické překryvy",
@@ -780,6 +802,16 @@
                 }
             }
         },
+        "preferences": {
+            "title": "Předvolby",
+            "description": "Předvolby",
+            "key": "P",
+            "privacy": {
+                "third_party_icons": {
+                    "tooltip": "Zrušte zaškrtnutí tohoto políčka, abyste zabránili načítání ikon z webů třetích stran, jako jsou Wikimedia Commons, Facebook nebo Twitter."
+                }
+            }
+        },
         "restore": {
             "heading": "Máte neuložené změny",
             "description": "Přejete si obnovit neuložené změny z předchozí editace?",
@@ -845,6 +877,8 @@
         },
         "splash": {
             "welcome": "Vítejte v OpenStreetMap editoru iD",
+            "privacy_policy": "Zásady ochrany osobních údajů iD",
+            "walkthrough": "Spusťte návod",
             "start": "Upravit nyní"
         },
         "source_switch": {
@@ -1224,6 +1258,31 @@
         "mapillary_images": {
             "tooltip": "Fotografie z úrovně ulice z Mapillary"
         },
+        "mapillary_map_features": {
+            "construction": {
+                "flat": {
+                    "crosswalk_plain": "prostý přechod pro chodce"
+                }
+            },
+            "marking": {
+                "discrete": {
+                    "crosswalk_zebra": "přechod pro chodce"
+                }
+            },
+            "object": {
+                "bench": "lavice",
+                "bike_rack": "stojan na kola",
+                "cctv_camera": "CCTV kamera",
+                "fire_hydrant": "požární hydrant",
+                "mailbox": "poštovní schránka",
+                "phone_booth": "telefonní budka",
+                "sign": {
+                    "information": "informační tabule"
+                },
+                "street_light": "pouliční světlo",
+                "trash_can": "odpadkový koš"
+            }
+        },
         "mapillary": {
             "title": "Mapillary",
             "signs": {
@@ -1521,6 +1580,12 @@
                 "tip": "Najít prvky s nepravoúhlými rohy, které by mohly být zakresleny lépe"
             },
             "fix": {
+                "add_a_bridge": {
+                    "title": "Přidat most"
+                },
+                "add_a_tunnel": {
+                    "title": "Přidat tunel"
+                },
                 "connect_almost_junction": {
                     "annotation": "Připojeny velmi blízké prvky."
                 },
@@ -2916,10 +2981,6 @@
                 "level": {
                     "label": "Patro"
                 },
-                "levels": {
-                    "label": "Počet nadzemních podlaží",
-                    "placeholder": "2, 4, 6..."
-                },
                 "liaison": {
                     "label": "Druh"
                 },
@@ -4247,10 +4308,6 @@
                     "name": "Internetová kavárna",
                     "terms": "internetová kavárna,kyberkavárna,kavárna,káva"
                 },
-                "amenity/kindergarten": {
-                    "name": "Prostor školky/jeslí",
-                    "terms": "jesle,školka,kindergarten,předškolní,mateřská školka"
-                },
                 "amenity/language_school": {
                     "name": "Jazyková škola"
                 },
@@ -4290,10 +4347,6 @@
                 },
                 "amenity/parking/underground": {
                     "name": "Podzemní parkoviště"
-                },
-                "amenity/parking_entrance": {
-                    "name": "Vjezd do/výjezd z garáží",
-                    "terms": "parkoviště,parking,parkování,stání,garáž,garáže,vjezd,výjezd"
                 },
                 "amenity/parking_space": {
                     "name": "Parkovací místo",
@@ -4888,10 +4941,6 @@
                     "name": "Průmyslová budova",
                     "terms": "průmyslová budova,industriální,výroba"
                 },
-                "building/kindergarten": {
-                    "name": "Budova školky/jeslí",
-                    "terms": "jesle,školka,kindergarten,předškolní,mateřská školka"
-                },
                 "building/mosque": {
                     "name": "Budova mešity",
                     "terms": "Teroristická buňka"
@@ -5222,10 +5271,6 @@
                 },
                 "emergency/yes": {
                     "name": "Vjezd záchranných vozidel povolen"
-                },
-                "entrance": {
-                    "name": "Vchod/východ",
-                    "terms": "vchod,východ,vjezd,výjezd,vlez,výlez,vstup"
                 },
                 "ford": {
                     "name": "Brod",
@@ -5660,8 +5705,7 @@
                     "terms": "hřbitov,pohřebiště"
                 },
                 "landuse/churchyard": {
-                    "name": "Prostor kolem kostela",
-                    "terms": "kostel,kaple,kaplička,hřbitov,krchov,krematorium"
+                    "name": "Prostor kolem kostela"
                 },
                 "landuse/commercial": {
                     "name": "Oblast kanceláří, podniků",
@@ -6417,18 +6461,6 @@
                 "office/travel_agent": {
                     "name": "Cestovní kancelář"
                 },
-                "piste/downhill": {
-                    "name": "Sjezdovka"
-                },
-                "piste/piste": {
-                    "name": "Zimní sportovní stezky"
-                },
-                "piste/sled": {
-                    "name": "Bobová dráha"
-                },
-                "piste/sleigh": {
-                    "name": "Sáňková dráha"
-                },
                 "place": {
                     "name": "Místo"
                 },
@@ -6550,9 +6582,6 @@
                 "power/pole": {
                     "name": "Sloup elektrického vedení",
                     "terms": "sloup el.vedení,elektrický sloup,sloup elektrického vedení,sloupový stožár"
-                },
-                "power/sub_station": {
-                    "name": "Transformátorová stanice"
                 },
                 "power/substation": {
                     "name": "Transformátorová stanice",
@@ -6787,10 +6816,6 @@
                     "name": "Prodejna alkoholu",
                     "terms": "alkohol,alkoholický"
                 },
-                "shop/anime": {
-                    "name": "Prodejna anime",
-                    "terms": "anime,manga,cosplay"
-                },
                 "shop/antiques": {
                     "name": "Starožitnictví",
                     "terms": "starožitnost,starožitnosti,starožitnictví,antikvář,antikvity,antikvita,antikvariát"
@@ -6924,10 +6949,6 @@
                 "shop/cosmetics": {
                     "name": "Obchod s kosmetikou",
                     "terms": "kosmetika,kosmetický,makeup,parfém,parfumerie"
-                },
-                "shop/craft": {
-                    "name": "Výtvarné potřeby",
-                    "terms": "kreslení,malování,řezbářství,umění,umělecký"
                 },
                 "shop/curtain": {
                     "name": "Obchod se závěsy",
@@ -8029,9 +8050,6 @@
             "GeoPhilly": {
                 "name": "GeoPhilly"
             },
-            "LATAM-Twitter": {
-                "description": "Sledujte nás na Twitteru na {url}"
-            },
             "Mapping-DC-meetup": {
                 "name": "Mapování DC",
                 "description": "Vylepšete OpenStreetMap na území DC"
@@ -8276,9 +8294,6 @@
             },
             "osm-iran-telegram": {
                 "name": "OpenStreetMap Iran Telegram"
-            },
-            "osm-latam": {
-                "name": "OpenStreetMap Latam"
             },
             "osm-mg-facebook": {
                 "name": "Facebooková skupina OpenStreetMap Madagaskar"

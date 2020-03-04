@@ -1,23 +1,25 @@
 {
     "icon": "maki-entrance-alt1",
+    "fields": [
+        "ref",
+        "entrance",
+        "door",
+        "access_simple",
+        "wheelchair",
+        "level",
+        "address"
+    ],
     "geometry": [
         "vertex"
     ],
+    "tags": {
+        "entrance": "*"
+    },
     "terms": [
         "entrance",
         "exit",
         "door"
     ],
-    "tags": {
-        "entrance": "*"
-    },
-    "fields": [
-        "entrance",
-        "door",
-        "access_simple",
-        "level",
-        "address"
-    ],
     "matchScore": 0.8,
-    "name": "Entrance/Exit"
+    "name": "Entrance / Exit"
 }

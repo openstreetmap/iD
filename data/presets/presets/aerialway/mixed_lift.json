@@ -1,4 +1,5 @@
 {
+    "icon": "maki-aerialway",
     "geometry": [
         "line"
     ],
@@ -14,5 +15,10 @@
     "tags": {
         "aerialway": "mixed_lift"
     },
+    "terms": [
+        "aerial cable",
+        "skiing",
+        "snowboarding"
+    ],
     "name": "Mixed Lift"
 }

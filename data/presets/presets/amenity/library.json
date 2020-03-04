@@ -19,6 +19,7 @@
         "fax",
         "gnis/feature_id",
         "level",
+        "not/name",
         "opening_hours",
         "payment_multi",
         "phone",

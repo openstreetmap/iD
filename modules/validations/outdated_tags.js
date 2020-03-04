@@ -56,7 +56,11 @@ export function validationOutdatedTags(context) {
         if (preset.tags !== preset.addTags) {
             Object.keys(preset.addTags).forEach(function(k) {
                 if (!newTags[k]) {
-                    newTags[k] = preset.addTags[k];
+                    if (preset.addTags[k] === '*') {
+                        newTags[k] = 'yes';
+                    } else {
+                        newTags[k] = preset.addTags[k];
+                    }
                 }
             });
         }

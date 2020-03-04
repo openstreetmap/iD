@@ -54,7 +54,7 @@ export function uiFormFields(context) {
         var moreFields = notShown.map(function(field) {
             var label = field.label();
             titles.push(label);
-            
+
             var terms = field.terms();
             if (field.key) terms.push(field.key);
             if (field.keys) terms = terms.concat(field.keys);
@@ -80,7 +80,7 @@ export function uiFormFields(context) {
             .append('div')
             .attr('class', 'more-fields')
             .append('label')
-            .text(t('inspector.add_fields'))
+            .text(t('inspector.fields'))
             .merge(more);
 
 

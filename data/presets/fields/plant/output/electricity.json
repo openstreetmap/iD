@@ -1,6 +1,7 @@
 {
     "key": "plant:output:electricity",
-    "type": "text",
+    "type": "typeCombo",
     "label": "Power Output",
-    "placeholder": "500 MW, 1000 MW, 2000 MW..."
+    "placeholder": "500 MW, 1000 MW, 2000 MW...",
+    "snake_case": false
 }

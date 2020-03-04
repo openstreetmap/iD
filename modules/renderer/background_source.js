@@ -509,7 +509,7 @@ rendererBackgroundSource.Custom = function(template) {
 
 
     source.imageryUsed = function() {
-        return 'Custom (' + source.template() + ')';
+        return 'Custom (' + source.template() + ' )';
     };
 
 

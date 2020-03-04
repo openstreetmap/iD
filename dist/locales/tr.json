@@ -504,6 +504,7 @@
             "all_tags": "Tüm etiketler",
             "all_members": "Tüm üyeler",
             "all_relations": "Tüm kümeler",
+            "add_to_relation": "Bir kümeye ekle",
             "new_relation": "Yeni küme...",
             "choose_relation": "Bir küme seçin",
             "role": "Görev",
@@ -998,6 +999,12 @@
                 "message": "{feature}, {feature2} ile çakışıyor",
                 "building-highway": {
                     "reference": "Binalarla yolların kesiştiği yerler; köprüler, tüneller veya farklı katmanlarla ayrılmalıdır."
+                },
+                "building-railway": {
+                    "reference": "Binalarla demir yollarının kesiştiği yerler; köprüler, tüneller veya farklı katmanlarla ayrılmalıdır."
+                },
+                "building-waterway": {
+                    "reference": "Binalarla su yollarının kesiştiği yerler; köprüler, tüneller veya farklı katmanlarla ayrılmalıdır."
                 },
                 "highway-highway": {
                     "reference": "Yol kesişimlerinde köprüler, tüneller veya kavşaklar kullanılmalıdır."
@@ -2016,6 +2023,9 @@
                 "height": {
                     "label": "Yükseklik (metre)"
                 },
+                "height_building": {
+                    "label": "Yapı Yüksekliği (Metre)"
+                },
                 "highway": {
                     "label": "Tür"
                 },
@@ -2160,10 +2170,6 @@
                 "level": {
                     "label": "Seviye"
                 },
-                "levels": {
-                    "label": "Katlar",
-                    "placeholder": "2, 4, 6..."
-                },
                 "lit": {
                     "label": "Işıklandırma"
                 },
@@ -2187,6 +2193,9 @@
                 },
                 "mapillary": {
                     "label": "Mapillary Görüntü Kimliği"
+                },
+                "material": {
+                    "label": "Materyal"
                 },
                 "maxheight": {
                     "label": "En Fazla Yükseklik",
@@ -2943,6 +2952,10 @@
                     "name": "Terminal",
                     "terms": "Terminal"
                 },
+                "aeroway/windsock": {
+                    "name": "Rüzgâr hortumu",
+                    "terms": "rüzgar hortumu"
+                },
                 "amenity": {
                     "name": "Tesis"
                 },
@@ -2985,6 +2998,9 @@
                 "amenity/bicycle_parking": {
                     "name": "Bisiklet Parkı",
                     "terms": "Bisiklet Parkı"
+                },
+                "amenity/bicycle_parking/building": {
+                    "name": "Bisiklet Park Yeri"
                 },
                 "amenity/bicycle_rental": {
                     "name": "Bisiklet Kiralama",
@@ -3145,10 +3161,6 @@
                     "name": "İnternet Kafe",
                     "terms": "İnternet Kafe"
                 },
-                "amenity/kindergarten": {
-                    "name": "Anaokulu",
-                    "terms": "Anaokulu, Kreş"
-                },
                 "amenity/library": {
                     "name": "Kütüphane",
                     "terms": "Kütüphane"
@@ -3182,12 +3194,11 @@
                 "amenity/parking": {
                     "name": "Otopark"
                 },
+                "amenity/parking/multi-storey": {
+                    "name": "Çok Katlı Otopark"
+                },
                 "amenity/parking/underground": {
                     "name": "Yeraltı Park Yeri"
-                },
-                "amenity/parking_entrance": {
-                    "name": "Garaj Giriş/Çıkışı",
-                    "terms": "Garaj Giriş/Çıkışı, Park Yeri Giriş/Çıkışı"
                 },
                 "amenity/parking_space": {
                     "name": "Park Yeri",
@@ -3643,6 +3654,9 @@
                 "building/entrance": {
                     "name": "Giriş/Çıkış"
                 },
+                "building/farm_auxiliary": {
+                    "name": "Çiftlik Binası"
+                },
                 "building/garage": {
                     "name": "Garaj",
                     "terms": "Garaj"
@@ -3654,6 +3668,9 @@
                 "building/greenhouse": {
                     "name": "Sera",
                     "terms": "Sera"
+                },
+                "building/hangar": {
+                    "name": "Hangar"
                 },
                 "building/hospital": {
                     "name": "Hastane",
@@ -3672,16 +3689,15 @@
                     "terms": "Baraka"
                 },
                 "building/industrial": {
-                    "name": "Sanayi",
-                    "terms": "Endüstriyel Bina"
-                },
-                "building/kindergarten": {
-                    "name": "Anaokulu",
-                    "terms": "Kreş"
+                    "name": "Endüstriyel Bina",
+                    "terms": "Sanayi Binası"
                 },
                 "building/mosque": {
-                    "name": "Camii",
-                    "terms": "Camii"
+                    "name": "Cami",
+                    "terms": "Cami"
+                },
+                "building/pavilion": {
+                    "name": "Köşk"
                 },
                 "building/public": {
                     "name": "Devlet Binası",
@@ -3739,6 +3755,9 @@
                     "name": "Sıra Evler",
                     "terms": "Sıra Evler"
                 },
+                "building/train_station": {
+                    "name": "Tren İstasyonu Binası"
+                },
                 "building/transportation": {
                     "name": "Terminal",
                     "terms": "Terminal"
@@ -3753,6 +3772,9 @@
                 },
                 "building_part": {
                     "name": "Yapı bölümü"
+                },
+                "building_point": {
+                    "name": "Bina"
                 },
                 "club": {
                     "name": "Klüb",
@@ -3937,6 +3959,9 @@
                     "name": "Şarap Fabrikası",
                     "terms": "Şarap Fabrikası"
                 },
+                "demolished/building": {
+                    "name": "Son Zamanlarda Yıkılmış Bina"
+                },
                 "embankment": {
                     "name": "Toprak Dolgu"
                 },
@@ -3979,10 +4004,6 @@
                 },
                 "emergency/yes": {
                     "name": "Acil Erişim"
-                },
-                "entrance": {
-                    "name": "Giriş/Çıkış",
-                    "terms": "Giriş/Çıkış"
                 },
                 "ford": {
                     "name": "Sığ Geçit, Akarsu Üzerinde Geçit Yeri",
@@ -4310,6 +4331,9 @@
                     "name": "Sınır İşareti",
                     "terms": "Sınır İşareti, Sınır Taşı"
                 },
+                "historic/building": {
+                    "name": "Tarihi Bina"
+                },
                 "historic/castle": {
                     "name": "Kale",
                     "terms": "Kale"
@@ -4370,8 +4394,7 @@
                     "terms": "Mezarlık"
                 },
                 "landuse/churchyard": {
-                    "name": "Kilise Bahçesi",
-                    "terms": "Kilise Bahçesi"
+                    "name": "Kilise Bahçesi"
                 },
                 "landuse/commercial": {
                     "name": "Ticari Alan",
@@ -4677,6 +4700,9 @@
                     "name": "Tünel Girişi",
                     "terms": "Tünel Girişi, Maden Girişi"
                 },
+                "man_made/beacon": {
+                    "name": "Fener"
+                },
                 "man_made/breakwater": {
                     "name": "Dalgakıran",
                     "terms": "Dalgakıran"
@@ -4939,6 +4965,10 @@
                 "office/diplomatic/consulate": {
                     "name": "Konsolosluk"
                 },
+                "office/diplomatic/embassy": {
+                    "name": "Büyükelçilik",
+                    "terms": "Elçilik"
+                },
                 "office/educational_institution": {
                     "name": "Eğitim Kurumu",
                     "terms": "Okul"
@@ -5132,9 +5162,6 @@
                     "name": "Elektrik Direği",
                     "terms": "Elektrik Direği"
                 },
-                "power/sub_station": {
-                    "name": "Ara İstasyon"
-                },
                 "power/substation": {
                     "name": "Trafo",
                     "terms": "Trafo"
@@ -5296,9 +5323,15 @@
                     "name": "Metro Girişi",
                     "terms": "Metro Girişi"
                 },
+                "railway/train_wash": {
+                    "name": "Tren Yıkama"
+                },
                 "railway/tram": {
                     "name": "Tramvay",
                     "terms": "Tramvay"
+                },
+                "railway/yard": {
+                    "name": "Demir Yolu Sahası"
                 },
                 "relation": {
                     "name": "İlişki",
@@ -5315,10 +5348,6 @@
                 "shop/alcohol": {
                     "name": "İçki Dükkanı",
                     "terms": "İçki Dükkanı"
-                },
-                "shop/anime": {
-                    "name": "Animasyon Mağazası",
-                    "terms": "Animasyon Mağazası"
                 },
                 "shop/antiques": {
                     "name": "Antika Dükkanı",
@@ -5450,10 +5479,6 @@
                 "shop/cosmetics": {
                     "name": "Kozmetik Mağazası",
                     "terms": "Kozmetik Mağazası"
-                },
-                "shop/craft": {
-                    "name": "Nalbant",
-                    "terms": "Nalbant"
                 },
                 "shop/curtain": {
                     "name": "Perde Mağazası",
@@ -5798,6 +5823,10 @@
                     "name": "Sanat Eseri",
                     "terms": "Sanat Eseri"
                 },
+                "tourism/artwork/graffiti": {
+                    "name": "Duvar Yazısı",
+                    "terms": "Graffiti, Duvar Resmi"
+                },
                 "tourism/artwork/statue": {
                     "name": "Heykel"
                 },
@@ -5966,6 +5995,10 @@
                 },
                 "type/restriction/only_straight_on": {
                     "name": "Sadece Düz Gidiş"
+                },
+                "type/restriction/only_u_turn": {
+                    "name": "Sadece U Dönüşü",
+                    "terms": "Sadece U-Dönüşü"
                 },
                 "type/route": {
                     "name": "Güzergah",
@@ -6285,9 +6318,6 @@
         },
         "community": {
             "Galicia-Twitter": {
-                "description": "Bizi Twitter'da {url} adresinden takip edin"
-            },
-            "LATAM-Twitter": {
                 "description": "Bizi Twitter'da {url} adresinden takip edin"
             },
             "MaptimeHRVA-twitter": {

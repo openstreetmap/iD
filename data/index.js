@@ -12,8 +12,8 @@ export { dataTerritoryLanguages } from './territory-languages.json';
 export { en as dataEn } from '../dist/locales/en.json';
 
 import {
-    features as ociFeatures,
-    resources as ociResources
+  features as ociCustomFeatures,
+  resources as ociResources
 } from 'osm-community-index';
 
 import { dataImagery } from './imagery.json';
@@ -23,37 +23,38 @@ import { categories } from './presets/categories.json';
 import { groups } from './presets/groups.json';
 import { fields } from './presets/fields.json';
 
-import { geoArea as d3_geoArea } from 'd3-geo';
+import LocationConflation from '@ideditor/location-conflation';
 import whichPolygon from 'which-polygon';
 
 
 // index the osm-community-index
-var ociFeatureCollection = Object.values(ociFeatures).map(function(feature) {
-    // workaround for which-polygon: only supports `properties`, not `id`
-    // https://github.com/mapbox/which-polygon/pull/6
-    feature.properties = {
-        id: feature.id,
-        area: d3_geoArea(feature)   // also precompute areas
-    };
-    return feature;
+let ociFeatures = {};
+const loco = new LocationConflation({ type: 'FeatureCollection', features: ociCustomFeatures });
+
+Object.values(ociResources).forEach(resource => {
+  const feature = loco.resolveLocationSet(resource.locationSet);
+  let ociFeature = ociFeatures[feature.id];
+  if (!ociFeature) {
+    ociFeature = JSON.parse(JSON.stringify(feature));  // deep clone
+    ociFeature.properties.resourceIDs = new Set();
+    ociFeatures[feature.id] = ociFeature;
+  }
+  ociFeature.properties.resourceIDs.add(resource.id);
 });
 
 
-export var data = {
-    community: {
-        features: ociFeatures,
-        resources: ociResources,
-        query: whichPolygon({
-            type: 'FeatureCollection',
-            features: ociFeatureCollection
-        })
-    },
-    imagery: dataImagery,  //legacy
-    presets: {
-        presets: presets,
-        defaults: defaults,
-        categories: categories,
-        fields: fields
-    },
-    groups: groups
+export let data = {
+  community: {
+    features: ociFeatures,
+    resources: ociResources,
+    query: whichPolygon({ type: 'FeatureCollection', features: Object.values(ociFeatures) })
+  },
+  imagery: dataImagery,  //legacy
+  presets: {
+    presets: presets,
+    defaults: defaults,
+    categories: categories,
+    fields: fields
+  },
+  groups: groups
 };

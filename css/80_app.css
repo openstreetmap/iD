@@ -1190,6 +1190,9 @@ button.add-preset.disabled .preset-icon-container {
     overflow: hidden;
     padding: 20px;
 }
+.preset-list-button .label-inner .namepart:nth-child(2) {
+    font-weight: normal;
+}
 
 .header button,
 .modal > button {
@@ -1634,6 +1637,9 @@ a.hide-toggle {
     flex: 0 0 auto;
     padding: 10px;
 }
+.feature-list-item .close .icon {
+    opacity: 0.5;
+}
 .feature-list-item .entity-type {
     color: #7092ff;
 }
@@ -1674,6 +1680,19 @@ a.hide-toggle {
     margin-right: auto;
     margin-left: auto;
     margin-bottom: 10px;
+}
+.selected-features .feature-list {
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    overflow: hidden;
+    margin-top: 5px;
+    background: #fff;
+}
+.selected-features .feature-list-item {
+    border-bottom: 1px solid #ccc;
+}
+.selected-features .feature-list-item:last-child {
+    border: none;
 }
 
 /* Success Screen / Community Index
@@ -1862,6 +1881,13 @@ a.hide-toggle {
     stroke-width: 1.3px;
     stroke: currentColor;
     fill: transparent;
+}
+
+#search-add-list-item-preset-category-waterway
+ .preset-icon-category-border path {
+    stroke-width: 1.3px;
+    stroke: currentColor;
+    fill: #7092ff;
 }
 
 .preset-icon-line {
@@ -2403,20 +2429,28 @@ button.preset-favorite-button.active .icon {
     margin-left: 6px;
 }
 
-.form-field-input-multicombo li.chips {
+.form-field-input-multicombo li.chip {
     background-color: #eff2f7;
     border: 1px solid #ccd5e3;
     line-height: 25px;
     max-width: 100%;
 }
-[dir='ltr'] .form-field-input-multicombo li.chips {
+[dir='ltr'] .form-field-input-multicombo li.chip {
     padding: 2px 0px 2px 5px;
 }
-[dir='rtl'] .form-field-input-multicombo li.chips {
+[dir='rtl'] .form-field-input-multicombo li.chip {
     padding: 2px 5px 2px 0px;
 }
+.form-field-input-multicombo li.chip.draggable {
+    cursor: grab;
+}
+.form-field-input-multicombo li.chip.dragging {
+    opacity: 0.75;
+    z-index: 3000;
+    cursor: grabbing;
+}
 
-.form-field-input-multicombo li.chips span {
+.form-field-input-multicombo li.chip span {
     display: block;
     flex: 1 1 auto;
     overflow: hidden;
@@ -2450,7 +2484,7 @@ button.preset-favorite-button.active .icon {
     border-radius: 4px !important;
 }
 
-.form-field-input-multicombo .full-line-chips li.chips {
+.form-field-input-multicombo .full-line-chips li.chip {
     width: 100%;
 }
 .form-field-input-multicombo .full-line-chips .input-wrap {
@@ -3594,7 +3628,7 @@ img.tag-reference-wiki-image {
     right: 0;
     top: 141px;
     width: 40px;
-    position: fixed;
+    position: absolute;
     z-index: 100;
 }
 [dir='rtl'] .map-controls {
@@ -4498,13 +4532,13 @@ li.issue-fix-item:not(.actionable) .fix-icon {
 }
 
 .inspector-hover a,
-.inspector-hover .form-field-input-multicombo .chips,
+.inspector-hover .form-field-input-multicombo .chip,
 .inspector-hover .form-field-input-check span,
 .inspector-hover .entity-issues .issue .icon {
     color: #666;
 }
 
-.inspector-hover .form-field-input-multicombo .chips {
+.inspector-hover .form-field-input-multicombo .chip {
     background: #eee;
     border: 1px solid #ccc;
 }
@@ -4535,11 +4569,12 @@ li.issue-fix-item:not(.actionable) .fix-icon {
 .inspector-hover .combobox-caret,
 .inspector-hover .header button,
 .inspector-hover .quick-links,
-.inspector-hover .form-field-input-multicombo .chips .remove,
+.inspector-hover .form-field-input-multicombo .chip .remove,
 .inspector-hover .hide-toggle:before,
 .inspector-hover .more-fields,
 .inspector-hover .field-label button,
-.inspector-hover .tag-row button {
+.inspector-hover .tag-row button,
+.inspector-hover .footer * {
     opacity: 0;
 }
 
@@ -5312,7 +5347,7 @@ img.tile-debug {
 .shaded:before {
     content:'';
     background: rgba(0,0,0,0.5);
-    position: fixed;
+    position: absolute;
     left: 0px; right: 0px; top: 0px; bottom: 0px;
 }
 

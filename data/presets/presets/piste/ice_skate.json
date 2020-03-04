@@ -11,14 +11,15 @@
         "line",
         "area"
     ],
-    "terms": [
-        "ice",
-        "skating",
-        "ski",
-        "piste"
-    ],
     "tags": {
         "piste:type": "ice_skate"
     },
-    "name": "Ice Skating Piste"
+    "terms": [
+        "ice rink",
+        "ice track",
+        "iceskating",
+        "piste",
+        "skates"
+    ],
+    "name": "Ice Skating Trail"
 }
