@@ -100,7 +100,7 @@ export function uiSectionPresetFields(context) {
             _fieldsArr.forEach(function(field) {
                 field
                     .on('change', function(t, onInput) {
-                        dispatch.call('change', field, t, onInput);
+                        dispatch.call('change', field, _entityIDs, t, onInput);
                     })
                     .on('revert', function(keys) {
                         dispatch.call('revert', field, keys);

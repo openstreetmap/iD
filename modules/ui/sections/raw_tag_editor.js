@@ -553,9 +553,14 @@ export function uiSectionRawTagEditor(id, context) {
     }
 
     function scheduleChange() {
+        // Cache IDs in case the editor is reloaded before the change event is called. - #6028
+        var entityIDs = _entityIDs;
+
         // Delay change in case this change is blurring an edited combo. - #5878
         window.setTimeout(function() {
-            dispatch.call('change', this, _pendingChange);
+            if (!_pendingChange) return;
+
+            dispatch.call('change', this, entityIDs, _pendingChange);
             _pendingChange = null;
         }, 10);
     }

@@ -166,11 +166,12 @@ export function uiEntityEditor(context) {
 
     // Tag changes that fire on input can all get coalesced into a single
     // history operation when the user leaves the field.  #2342
-    function changeTags(changed, onInput) {
+    // Use explicit entityIDs in case the selection changes before the event is fired.
+    function changeTags(entityIDs, changed, onInput) {
 
         var actions = [];
-        for (var i in _entityIDs) {
-            var entityID = _entityIDs[i];
+        for (var i in entityIDs) {
+            var entityID = entityIDs[i];
             var entity = context.entity(entityID);
 
             var tags = Object.assign({}, entity.tags);   // shallow copy
