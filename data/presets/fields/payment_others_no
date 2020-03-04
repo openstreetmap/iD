@@ -1,0 +1,10 @@
+    "key": "payment:others",
+    "type": "onewayCheck",
+    "label": "The list of payment methods accepted is complete",
+    "strings": {
+        "options": {
+            "undefined": "Assumed to be No",
+            "no": "Yes",
+        }
+    }
+}
