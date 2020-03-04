@@ -1,7 +1,13 @@
 {
-    "key": "internet_access:fee",
-    "type": "check",
+ "key": "internet_access:fee",
+    "type": "combo",
     "label": "Internet Access Fee",
+    "strings": {
+        "options": {
+            "yes": "Yes",
+            "no": "No",
+            "customers": "For not-facility-customers only",
+        }
     "prerequisiteTag": {
         "key": "internet_access",
         "valueNot": "no"
