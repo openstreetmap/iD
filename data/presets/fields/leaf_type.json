@@ -9,5 +9,6 @@
             "mixed": "Mixed",
             "leafless": "Leafless"
         }
-    }
+    },
+    "fixedOptions": "values"
 }

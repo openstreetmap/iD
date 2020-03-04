@@ -10,6 +10,7 @@
             "only": "Takeaway Only"
         }
     },
+    "fixedOptions": "values",
     "terms": [
         "take out",
         "takeout"

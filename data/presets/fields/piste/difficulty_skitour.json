@@ -13,5 +13,6 @@
             "freeride": "Freeride - AS: 50–55° incline",
             "extreme": "Extreme - EX: >55° incline"
         }
-    }
+    },
+    "fixedOptions": "values"
 }

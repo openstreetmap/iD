@@ -378,12 +378,14 @@ export function uiCombobox(context, klass) {
             // enter/update
             options.enter()
                 .append('a')
-                .attr('class', 'combobox-option')
                 .attr('title', function(d) { return d.title; })
                 .text(function(d) { return d.display || d.value; })
                 .on('mouseenter', _mouseEnterHandler)
                 .on('mouseleave', _mouseLeaveHandler)
                 .merge(options)
+                .attr('class', function(d) {
+                    return 'combobox-option ' + (d.klass || '');
+                })
                 .classed('selected', function(d) { return d.value === _selected; })
                 .on('click.combo-option', accept)
                 .order();

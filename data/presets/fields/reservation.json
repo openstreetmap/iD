@@ -9,5 +9,6 @@
             "required": "Required",
             "recommended": "Recommended"
         }
-    }
+    },
+    "fixedOptions": "values"
 }

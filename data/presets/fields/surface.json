@@ -1,5 +1,21 @@
 {
     "key": "surface",
     "type": "combo",
-    "label": "Surface"
+    "label": "Surface",
+    "strings": {
+        "options": {
+            "asphalt": "Asphalt",
+            "unpaved": "Unpaved",
+            "paved": "Paved",
+            "ground": "Ground",
+            "gravel": "Gravel",
+            "concrete": "Concrete",
+            "paving_stones": "Paving Stones",
+            "dirt": "Dirt",
+            "grass": "Grass",
+            "sand": "Sand",
+            "wood": "Wood",
+            "artificial_turf": "Artificial Turf"
+        }
+    }
 }

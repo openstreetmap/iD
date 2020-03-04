@@ -8,5 +8,6 @@
             "mogul": "Mogul",
             "backcountry": "Backcountry - no grooming"
         }
-    }
+    },
+    "fixedOptions": "values"
 }

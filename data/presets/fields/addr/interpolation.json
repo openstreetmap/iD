@@ -9,5 +9,6 @@
             "odd": "Odd",
             "alphabetic": "Alphabetic"
         }
-   }
+   },
+   "fixedOptions": "values"
 }

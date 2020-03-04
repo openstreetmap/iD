@@ -8,5 +8,6 @@
             "panning": "Panning",
             "dome": "Dome"
         }
-    }
+    },
+    "fixedOptions": "values"
 }

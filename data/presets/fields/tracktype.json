@@ -11,5 +11,6 @@
             "grade4": "Mostly Soft: soil/sand/grass with some hard material mixed in",
             "grade5": "Soft: soil/sand/grass"
         }
-    }
+    },
+    "fixedOptions": "values"
 }

@@ -8,5 +8,6 @@
             "guard": "Guard",
             "ALPR": "Automatic License Plate Reader"
         }
-    }
+    },
+    "fixedOptions": "values"
 }

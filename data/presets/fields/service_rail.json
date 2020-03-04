@@ -9,5 +9,6 @@
             "siding": "Siding",
             "crossover": "Crossover"
         }
-    }
+    },
+    "fixedOptions": "values"
 }

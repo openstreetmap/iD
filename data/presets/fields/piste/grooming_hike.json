@@ -7,5 +7,6 @@
             "classic": "Classic - Winter Hiking",
             "backcountry": "Backcountry - Snowshoeing"
         }
-    }
+    },
+    "fixedOptions": "values"
 }

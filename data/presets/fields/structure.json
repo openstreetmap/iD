@@ -17,5 +17,6 @@
             "cutting": "Cutting",
             "ford": "Ford"
         }
-    }
+    },
+    "fixedOptions": "values"
 }

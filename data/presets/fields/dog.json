@@ -9,6 +9,7 @@
             "no": "Not Allowed"
         }
     },
+    "fixedOptions": "values",
     "terms": [
         "animals",
         "pets"

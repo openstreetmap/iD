@@ -8,5 +8,6 @@
             "floor-mounted_crane": "Floor-mounted Crane",
             "travel_lift": "Travel Lift"
         }
-    }
+    },
+    "fixedOptions": "values"
 }

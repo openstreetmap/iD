@@ -9,5 +9,6 @@
             "wall": "Wall",
             "pipe": "Capped Pipe"
         }
-    }
+    },
+    "fixedOptions": "values"
 }

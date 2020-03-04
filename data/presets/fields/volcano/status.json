@@ -8,5 +8,6 @@
             "dormant": "Dormant",
             "extinct": "Extinct"
         }
-    }
+    },
+    "fixedOptions": "values"
 }

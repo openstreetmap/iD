@@ -123,6 +123,15 @@
                 "type": "object"
             }
         },
+        "fixedOptions": {
+            "description": "String specifying whether `options` limits the possible suggestions and/or values (combo fields only)",
+            "type": "string",
+            "enum": [
+                "none",
+                "suggestions",
+                "values"
+            ]
+        },
         "snake_case": {
             "description": "If true, replace spaces with underscores in the tag value (combo fields only)",
             "type": "boolean",

@@ -328,26 +328,38 @@ associated with building features (but only if drawn as a closed area).
 }
 ```
 
+##### `fixedOptions`
+
+Combo field types that provide options through the `options` or `strings` property
+can use the `fixedOptions` property to specify if and how those options affect
+the allowed suggestions and values.
+
+* `none` - (default) Suggestions are populated from TagInfo and any value is allowed.
+* `suggestions` - Suggestions are populated from the `options` list but any value is allowed.
+* `values` - Suggestions are populated from the `options` list and only those values are allowed.
+
 ##### `options`
 
-Combo field types can provide dropdown values in an `options` array.
-The user can pick from any of the options, or type their own value.
+Combo field types can provide raw, untranslatable dropdown values in an `options` array.
 
 ```js
 {
-    "key": "diaper",
+    "key": "content",
     "type": "combo",
-    "label": "Diaper Changing Available",
-    "options": ["yes", "no", "room", "1", "2", "3", "4", "5"]
+    "label": "Content",
+    "options": ["silage", "water", "oil", "fuel", "slurry", "gas", "manure", "sewage"],
+    "fixedOptions": "suggestions"
 }
 ```
 
 ##### `strings`
 
-Combo field types can accept name-value pairs in the `strings` property.
-This is helpful when the field has a fixed number of options and you want to be
-able to provide a translatable description of each option.  When using `strings`,
-the user can not type their own value, they must choose one of the given values.
+The `strings` object contains values that the field wants to be translated on Transifex.
+
+Combo field types can accept key-label pairs in the `options` value of the `strings` property.
+This list will override the basic `options` property.
+If `fixedOptions` is `none` (as per default), then raw and labeled values might be mixed
+in the dropdown suggestions.
 
 ```js
 {
@@ -366,7 +378,8 @@ the user can not type their own value, they must choose one of the given values.
             "very_horrible": "Specialized off-road: tractor, ATV",
             "impassable": "Impassable / No wheeled vehicle"
         }
-    }
+    },
+    "fixedOptions": "values"
 }
 ```
 

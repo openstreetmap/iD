@@ -12,5 +12,6 @@
             "dangerous": "Dangerous: Passable only for very experienced riders and horses and only in good weather. Dismount.",
             "impossible": "Impassable: Way or bridge not passable for horses. Too narrow, insuffient support, obstacles like ladders. Danger of life."
         }
-    }
+    },
+    "fixedOptions": "values"
 }

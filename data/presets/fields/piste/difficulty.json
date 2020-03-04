@@ -13,5 +13,6 @@
             "freeride": "Freeride",
             "extreme": "Extreme"
         }
-    }
+    },
+    "fixedOptions": "values"
 }

@@ -9,5 +9,6 @@
         "options": {
             "tunnel": "Tunnel"
         }
-    }
+    },
+    "fixedOptions": "values"
 }

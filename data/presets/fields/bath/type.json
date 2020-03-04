@@ -8,5 +8,6 @@
       "foot_bath": "Foot Bath",
       "hot_spring": "Hot Spring"
     }
-  }
+  },
+  "fixedOptions": "values"
 }

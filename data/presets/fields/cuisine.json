@@ -2,6 +2,30 @@
     "key": "cuisine",
     "type": "semiCombo",
     "label": "Cuisines",
+    "strings": {
+        "options": {
+            "pizza": "Pizza",
+            "burger": "Burger",
+            "regional": "Regional",
+            "coffee_shop": "Coffee Shop",
+            "italian": "Italian",
+            "chinese": "Chinese",
+            "sandwich": "Sandwich",
+            "japanese": "Japanese",
+            "mexican": "Mexican",
+            "kebab": "Kebab",
+            "indian": "Indian",
+            "chicken": "Chicken",
+            "asian": "Asian",
+            "french": "French",
+            "thai": "Thai",
+            "american": "American",
+            "sushi": "Sushi",
+            "ice_cream": "Ice Cream",
+            "german": "German",
+            "greek": "Greek"
+        }
+    },
     "terms": [
         "fare",
         "food types"

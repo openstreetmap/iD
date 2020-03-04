@@ -13,5 +13,6 @@
             "5": "5: Maximum difficulty, boulder fields, landslides",
             "6": "6: Not rideable except by the very best mountain bikers"
         }
-    }
+    },
+    "fixedOptions": "values"
 }

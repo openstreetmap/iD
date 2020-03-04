@@ -8,6 +8,6 @@
             "backward": "Backward",
             "reversible": "Reversible"
         }
-    }
-
+    },
+    "fixedOptions": "values"
 }

@@ -10,5 +10,6 @@
             "nwn": "National",
             "iwn": "International"
         }
-    }
+    },
+    "fixedOptions": "values"
 }

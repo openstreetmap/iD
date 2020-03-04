@@ -15,5 +15,6 @@
             "playground": "Playground",
             "connection": "Connection"
         }
-    }
+    },
+    "fixedOptions": "values"
 }

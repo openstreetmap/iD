@@ -8,5 +8,6 @@
             "exit": "Exit",
             "both": "Both"
         }
-    }
+    },
+    "fixedOptions": "values"
 }

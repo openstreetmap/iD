@@ -10,5 +10,6 @@
             "semi_deciduous": "Semi-Deciduous",
             "mixed": "Mixed"
         }
-    }
+    },
+    "fixedOptions": "values"
 }

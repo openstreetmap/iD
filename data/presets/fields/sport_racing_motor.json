@@ -2,9 +2,12 @@
     "key": "sport",
     "type": "semiCombo",
     "label": "Sports",
-    "options": [
-        "motor",
-        "karting",
-        "motocross"
-    ]
+    "strings": {
+        "options": {
+            "motor": "Motorsport",
+            "karting": "Karting",
+            "motocross": "Motocross"
+        }
+    },
+    "fixedOptions": "suggestions"
 }

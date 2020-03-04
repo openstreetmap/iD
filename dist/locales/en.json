@@ -2606,7 +2606,15 @@
                 },
                 "access_simple": {
                     "label": "Allowed Access",
-                    "terms": "permitted,private,public"
+                    "terms": "permitted,private,public",
+                    "options": {
+                        "yes": "Yes",
+                        "permissive": "Permissive",
+                        "private": "Private",
+                        "customers": "Customers",
+                        "permit": "Permit",
+                        "no": "None"
+                    }
                 },
                 "access": {
                     "label": "Allowed Access",
@@ -3061,7 +3069,29 @@
                 },
                 "cuisine": {
                     "label": "Cuisines",
-                    "terms": "fare,food types"
+                    "terms": "fare,food types",
+                    "options": {
+                        "pizza": "Pizza",
+                        "burger": "Burger",
+                        "regional": "Regional",
+                        "coffee_shop": "Coffee Shop",
+                        "italian": "Italian",
+                        "chinese": "Chinese",
+                        "sandwich": "Sandwich",
+                        "japanese": "Japanese",
+                        "mexican": "Mexican",
+                        "kebab": "Kebab",
+                        "indian": "Indian",
+                        "chicken": "Chicken",
+                        "asian": "Asian",
+                        "french": "French",
+                        "thai": "Thai",
+                        "american": "American",
+                        "sushi": "Sushi",
+                        "ice_cream": "Ice Cream",
+                        "german": "German",
+                        "greek": "Greek"
+                    }
                 },
                 "currency_multi": {
                     "label": "Currency Types",
@@ -3169,7 +3199,16 @@
                 },
                 "diet_multi": {
                     "label": "Diet Types",
-                    "terms": "gluten free,fruitarian,halal,kosher,lactose free,meat,pescatarian,raw,vegan,vegetarian"
+                    "terms": "gluten free,fruitarian,halal,kosher,lactose free,meat,pescatarian,raw,vegan,vegetarian",
+                    "options": {
+                        "vegetarian": "Vegetarian",
+                        "vegan": "Vegan",
+                        "halal": "Halal",
+                        "gluten_free": "Gluten-Free",
+                        "kosher": "Kosher",
+                        "lactose_free": "Lactose-Free",
+                        "pescetarian": "Pescetarian"
+                    }
                 },
                 "diplomatic": {
                     "label": "Type"
@@ -3222,7 +3261,13 @@
                     "label": "Dispenses Prescriptions"
                 },
                 "display": {
-                    "label": "Display"
+                    "label": "Display",
+                    "options": {
+                        "analog": "Analog",
+                        "digital": "Digital",
+                        "sundial": "Sundial",
+                        "unorthodox": "Unorthodox"
+                    }
                 },
                 "distance": {
                     "label": "Distance"
@@ -3545,7 +3590,11 @@
                 },
                 "incline": {
                     "label": "Incline",
-                    "terms": ""
+                    "terms": "",
+                    "options": {
+                        "up": "Up",
+                        "down": "Down"
+                    }
                 },
                 "indoor_type": {
                     "label": "Type"
@@ -4425,7 +4474,14 @@
                     "label": "Service Times"
                 },
                 "service": {
-                    "label": "Type"
+                    "label": "Type",
+                    "options": {
+                        "parking_aisle": "Parking Aisle",
+                        "driveway": "Driveway",
+                        "alley": "Alley",
+                        "emergency_access": "Emergency Access",
+                        "drive-through": "Drive-Through"
+                    }
                 },
                 "service/bicycle": {
                     "label": "Services"
@@ -4503,20 +4559,46 @@
                 },
                 "source": {
                     "label": "Sources",
-                    "terms": "reference"
+                    "terms": "reference",
+                    "options": {
+                        "survey": "Survey",
+                        "local knowledge": "Local Knowledge",
+                        "gps": "GPS",
+                        "aerial imagery": "Aerial Imagery",
+                        "streetlevel imagery": "Street-Level Photos"
+                    }
                 },
                 "species/wikidata": {
                     "label": "Species Wikidata",
                     "terms": ""
                 },
                 "sport_ice": {
-                    "label": "Sports"
+                    "label": "Sports",
+                    "options": {
+                        "ice_skating": "Ice Skating",
+                        "ice_hockey": "Ice Hockey",
+                        "multi": "Multiple",
+                        "curling": "Curling",
+                        "ice_stock": "Ice Stock"
+                    }
                 },
                 "sport_racing_motor": {
-                    "label": "Sports"
+                    "label": "Sports",
+                    "options": {
+                        "motor": "Motorsport",
+                        "karting": "Karting",
+                        "motocross": "Motocross"
+                    }
                 },
                 "sport_racing_nonmotor": {
-                    "label": "Sports"
+                    "label": "Sports",
+                    "options": {
+                        "bmx": "BMX",
+                        "cycling": "Cycling",
+                        "dog_racing": "Dog Racing",
+                        "horse_racing": "Horse Racing",
+                        "running": "Running"
+                    }
                 },
                 "sport": {
                     "label": "Sports"
@@ -4593,7 +4675,21 @@
                 },
                 "surface": {
                     "label": "Surface",
-                    "terms": ""
+                    "terms": "",
+                    "options": {
+                        "asphalt": "Asphalt",
+                        "unpaved": "Unpaved",
+                        "paved": "Paved",
+                        "ground": "Ground",
+                        "gravel": "Gravel",
+                        "concrete": "Concrete",
+                        "paving_stones": "Paving Stones",
+                        "dirt": "Dirt",
+                        "grass": "Grass",
+                        "sand": "Sand",
+                        "wood": "Wood",
+                        "artificial_turf": "Artificial Turf"
+                    }
                 },
                 "surveillance": {
                     "label": "Surveillance Kind"

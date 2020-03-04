@@ -12,5 +12,6 @@
             "4": "4: Avg. incline <30%, poor condition, big rocks/branches",
             "5": "5: Very steep, bike generally needs to be pushed or carried"
         }
-    }
+    },
+    "fixedOptions": "values"
 }

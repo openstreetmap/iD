@@ -2,6 +2,17 @@
     "key": "diet:",
     "type": "multiCombo",
     "label": "Diet Types",
+    "strings": {
+        "options": {
+            "vegetarian": "Vegetarian",
+            "vegan": "Vegan",
+            "halal": "Halal",
+            "gluten_free": "Gluten-Free",
+            "kosher": "Kosher",
+            "lactose_free": "Lactose-Free",
+            "pescetarian": "Pescetarian"
+        }
+    },
     "terms": [
         "gluten free",
         "fruitarian",

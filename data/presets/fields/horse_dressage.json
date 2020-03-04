@@ -8,6 +8,7 @@
             "equestrian": "Yes"
         }
     },
+    "fixedOptions": "values",
     "reference": {
         "key": "sport",
         "value": "equestrian"

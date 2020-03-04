@@ -12,5 +12,6 @@
             "yes": "Allowed everywhere",
             "dedicated": "Dedicated to smokers (e.g. smokers' club)"
         }
-    }
+    },
+    "fixedOptions": "values"
 }

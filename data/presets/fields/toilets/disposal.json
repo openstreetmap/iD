@@ -9,5 +9,6 @@
             "chemical": "Chemical",
             "bucket": "Bucket"
         }
-    }
+    },
+    "fixedOptions": "values"
 }

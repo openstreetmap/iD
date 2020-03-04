@@ -11,5 +11,6 @@
         "nitrox_filling",
         "trimix_filling",
         "oxygen_filling"
-    ]
+    ],
+    "fixedOptions": "suggestions"
 }

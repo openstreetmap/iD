@@ -2,7 +2,17 @@
     "key": "access",
     "type": "combo",
     "label": "Allowed Access",
-    "options": ["yes", "permissive", "private", "customers", "permit", "no"],
+    "strings": {
+        "options": {
+            "yes": "Yes",
+            "permissive": "Permissive",
+            "private": "Private",
+            "customers": "Customers",
+            "permit": "Permit",
+            "no": "None"
+        }
+    },
+    "fixedOptions": "suggestions",
     "terms": [
         "permitted",
         "private",

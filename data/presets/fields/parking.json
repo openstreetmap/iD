@@ -12,5 +12,6 @@
             "garage_boxes": "Garage Boxes",
             "lane": "Roadside Lane"
         }
-    }
+    },
+    "fixedOptions": "values"
 }

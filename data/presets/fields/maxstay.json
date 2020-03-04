@@ -15,5 +15,6 @@
         "1 day",
         "2 day"
     ],
+    "fixedOptions": "suggestions",
     "snake_case": false
 }

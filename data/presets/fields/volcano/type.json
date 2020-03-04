@@ -8,5 +8,6 @@
             "shield": "Shield",
             "scoria": "Scoria"
         }
-    }
+    },
+    "fixedOptions": "values"
 }

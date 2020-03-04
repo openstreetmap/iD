@@ -8,5 +8,6 @@
             "green": "Green",
             "grey": "Grey"
         }
-    }
+    },
+    "fixedOptions": "values"
 }

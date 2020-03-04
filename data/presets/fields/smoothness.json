@@ -14,5 +14,6 @@
             "very_horrible": "Specialized off-road: tractor, ATV",
             "impassable": "Impassable / No wheeled vehicle"
         }
-    }
+    },
+    "fixedOptions": "values"
 }

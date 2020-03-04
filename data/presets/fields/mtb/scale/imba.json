@@ -11,5 +11,6 @@
             "3": "Difficult (black diamond)",
             "4": "Extremely Difficult (double black diamond)"
         }
-    }
+    },
+    "fixedOptions": "values"
 }

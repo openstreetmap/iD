@@ -13,5 +13,6 @@
             "freeride": "Freeride (off-piste)",
             "extreme": "Extreme (climbing equipment required)"
         }
-    }
+    },
+    "fixedOptions": "values"
 }

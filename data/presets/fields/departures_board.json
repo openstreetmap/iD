@@ -9,5 +9,6 @@
             "realtime": "Realtime",
             "no": "None"
         }
-    }
+    },
+    "fixedOptions": "values"
 }

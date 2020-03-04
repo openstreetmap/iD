@@ -7,5 +7,6 @@
             "clockwise": "Clockwise",
             "anticlockwise": "Counterclockwise"
         }
-    }
+    },
+    "fixedOptions": "values"
 }

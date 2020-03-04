@@ -12,5 +12,6 @@
             "horrible": "Horrible: often pathless, some orientation skills required",
             "no": "No: pathless, excellent orientation skills required"
         }
-    }
+    },
+    "fixedOptions": "values"
 }

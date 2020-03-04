@@ -7,5 +7,6 @@
             "up": "Up",
             "down": "Down"
         }
-    }
+    },
+    "fixedOptions": "values"
 }

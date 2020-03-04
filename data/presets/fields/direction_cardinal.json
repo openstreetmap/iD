@@ -21,5 +21,6 @@
             "WNW": "West-northwest",
             "NNW": "North-northwest"
         }
-    }
+    },
+    "fixedOptions": "values"
 }

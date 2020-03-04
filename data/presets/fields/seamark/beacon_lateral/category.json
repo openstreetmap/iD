@@ -11,5 +11,6 @@
             "danger_left":"Danger Left",
             "danger_right":"Danger Right"
         }
-    }
+    },
+    "fixedOptions": "values"
 }

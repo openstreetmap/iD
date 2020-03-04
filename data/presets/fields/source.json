@@ -6,13 +6,16 @@
     "label": "Sources",
     "snake_case": false,
     "caseSensitive": true,
-    "options": [
-        "survey",
-        "local knowledge",
-        "gps",
-        "aerial imagery",
-        "streetlevel imagery"
-    ],
+    "strings": {
+        "options": {
+            "survey": "Survey",
+            "local knowledge": "Local Knowledge",
+            "gps": "GPS",
+            "aerial imagery": "Aerial Imagery",
+            "streetlevel imagery": "Street-Level Photos"
+        }
+    },
+    "fixedOptions": "suggestions",
     "terms": [
         "reference"
     ]

@@ -2,11 +2,14 @@
     "key": "sport",
     "type": "semiCombo",
     "label": "Sports",
-    "options": [
-        "bmx",
-        "cycling",
-        "dog_racing",
-        "horse_racing",
-        "running"
-    ]
+    "strings": {
+        "options": {
+            "bmx": "BMX",
+            "cycling": "Cycling",
+            "dog_racing": "Dog Racing",
+            "horse_racing": "Horse Racing",
+            "running": "Running"
+        }
+    },
+    "fixedOptions": "suggestions"
 }

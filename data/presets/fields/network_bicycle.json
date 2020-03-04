@@ -10,5 +10,6 @@
             "ncn": "National",
             "icn": "International"
         }
-    }
+    },
+    "fixedOptions": "values"
 }

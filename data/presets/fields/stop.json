@@ -7,5 +7,6 @@
           "all": "All Ways",
           "minor": "Minor Road"
         }
-    }
+    },
+    "fixedOptions": "values"
 }

@@ -10,5 +10,6 @@
             "nhn": "National",
             "ihn": "International"
         }
-    }
+    },
+    "fixedOptions": "values"
 }

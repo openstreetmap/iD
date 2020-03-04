@@ -8,5 +8,6 @@
             "electronic": "Electronic",
             "other": "Other"
         }
-    }
+    },
+    "fixedOptions": "values"
 }

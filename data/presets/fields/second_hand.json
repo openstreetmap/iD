@@ -9,5 +9,6 @@
             "no": "No",
             "only": "Only"
         }
-    }
+    },
+    "fixedOptions": "values"
 }

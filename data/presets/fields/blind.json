@@ -8,6 +8,7 @@
             "no": "No"
         }
     },
+    "fixedOptions": "values",
     "label": "Blind Person Access",
     "terms": [
         "sight impairment",

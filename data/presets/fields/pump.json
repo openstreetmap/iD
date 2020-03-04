@@ -9,5 +9,6 @@
             "powered": "Machine-Powered Pump",
             "no": "None"
         }
-    }
+    },
+    "fixedOptions": "values"
 }

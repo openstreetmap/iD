@@ -2,5 +2,13 @@
     "key": "display",
     "type": "combo",
     "label": "Display",
-    "options": ["analog", "digital", "sundial", "unorthodox"]
+    "strings": {
+        "options": {
+            "analog": "Analog",
+            "digital": "Digital",
+            "sundial": "Sundial",
+            "unorthodox": "Unorthodox"
+        }
+    },
+    "fixedOptions": "suggestions"
 }

@@ -9,5 +9,6 @@
             "semi_evergreen": "Semi-Evergreen",
             "semi_deciduous": "Semi-Deciduous"
         }
-    }
+    },
+    "fixedOptions": "values"
 }

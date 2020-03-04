@@ -11,6 +11,7 @@
             "no": "No"
         }
     },
+    "fixedOptions": "values",
     "terms": [
         "contact line",
         "powered",

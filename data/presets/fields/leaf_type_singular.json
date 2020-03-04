@@ -8,5 +8,6 @@
             "needleleaved": "Needleleaved",
             "leafless": "Leafless"
         }
-    }
+    },
+    "fixedOptions": "values"
 }

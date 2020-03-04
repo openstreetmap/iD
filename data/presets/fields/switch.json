@@ -9,5 +9,6 @@
             "disconnector": "Disconnector",
             "earthing": "Earthing"
         }
-    }
+    },
+    "fixedOptions": "values"
 }

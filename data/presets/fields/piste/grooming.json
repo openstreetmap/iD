@@ -11,5 +11,6 @@
             "scooter": "Scooter/Snowmobile",
             "skating": "Skating"
         }
-    }
+    },
+    "fixedOptions": "values"
 }

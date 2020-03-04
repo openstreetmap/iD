@@ -11,6 +11,7 @@
             "terminal": "Terminal"
         }
     },
+    "fixedOptions": "values",
     "terms": [
         "wifi",
         "wlan"

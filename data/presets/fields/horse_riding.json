@@ -8,6 +8,7 @@
             "horse_riding": "Yes"
         }
     },
+    "fixedOptions": "values",
     "reference": {
         "key": "leisure",
         "value": "horse_riding"

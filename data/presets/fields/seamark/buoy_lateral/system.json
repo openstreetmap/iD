@@ -9,5 +9,6 @@
             "cevni": "CEVNI",
             "other": "Other"
         }
-    }
+    },
+    "fixedOptions": "values"
 }
