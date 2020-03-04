@@ -1,10 +1,14 @@
 {
     "icon": "iD-highway-trunk-link",
     "fields": [
-        "{highway/motorway_link}"
+        "{highway/motorway_link}",
+        "sidewalk",
+        "sidewalk/separate-left",
+        "sidewalk/separate-right"
     ],
     "moreFields": [
-        "{highway/motorway_link}"
+        "{highway/motorway_link}",
+        "sidewalk"
     ],
     "geometry": [
         "line"

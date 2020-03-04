@@ -4525,7 +4525,14 @@
                 },
                 "sidewalk": {
                     "label": "Sidewalk",
+                    "terms": "",
                     "placeholder": "both, left, right, no..."
+                },
+                "sidewalk/separate-left": {
+                    "label": "Has left sidewalk"
+                },
+                "sidewalk/separate-right": {
+                    "label": "Has right sidewalk"
                 },
                 "siren/purpose": {
                     "label": "Purpose"

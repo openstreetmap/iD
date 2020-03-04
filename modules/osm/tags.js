@@ -111,43 +111,29 @@ export var osmSidewalkSeparate = {
 };
 
 export var osmSidewalkSeparateLeft = {
-    'sidewalk:left': {
-        'separate': true,
-        'no': false
-    },
-    'foot': {
-        'yes': false
+    'sidewalk:separate:left': {
+        'yes': true
     }
 };
 
 export var osmSidewalkSeparateRight = {
-    'sidewalk:right': {
-        'separate': true,
-        'no': false
-    },
-    'foot': {
-        'yes': false
+    'sidewalk:separate:right': {
+        'yes': true
     }
 };
 
 export var osmSidewalkSeparateRightOrLeft = {
-    'sidewalk:right': {
-        'separate': true,
+    'sidewalk:separate:right': {
+        'yes': true
     },
-    'sidewalk:left': {
-        'separate': true,
-    },
-    'foot': {
-        'yes': false
+    'sidewalk:separate:left': {
+        'yes': true
     }
 };
 
 export var osmSidewalkSeparateBoth = {
-    'sidewalk:both': {
-        'yes': true,
-    },
-    'foot': {
-        'yes': false
+    'sidewalk:separate:both': {
+        'yes': true
     }
 };
 

@@ -157,24 +157,77 @@ export function svgTagClasses() {
         // For highways, look for surface tagging..
         if (primary === 'highway' || primary === 'aeroway') {
             var paved = (t.highway !== 'track');
+            var ignoreSidewalk = (
+               t.highway === 'motorway'
+            || t.highway === 'motorway_link'
+            || t.highway === 'track'
+            || t.highway === 'footway'
+            || t.highway === 'cycleway'
+            || t.highway === 'service'
+            || t.highway === 'living_street'
+            || t.highway === 'pedestrian'
+            || t.highway === 'escape'
+            || t.highway === 'raceway'
+            || t.highway === 'bridleway'
+            || t.highway === 'steps'
+            || t.highway === 'path'
+            || t.highway === 'corridor'
+            || t.highway === 'proposed'
+            || t.highway === 'construction'
+            );
+            var ignoreMaxSpeed = (
+               t.highway === 'track'
+            || t.highway === 'footway'
+            || t.highway === 'cycleway'
+            || t.highway === 'service'
+            || t.highway === 'pedestrian'
+            || t.highway === 'escape'
+            || t.highway === 'raceway'
+            || t.highway === 'bridleway'
+            || t.highway === 'steps'
+            || t.highway === 'path'
+            || t.highway === 'corridor'
+            || t.highway === 'proposed'
+            || t.highway === 'construction'
+            );
             var _private = false;
             var customers = false;
             var destination = false;
             var sidewalk = 'blank';
             var cycleway = 'blank';
-
-            var sidewalk_use_sidepath = false;
-            var cycleway_use_sidepath = false;
+            var sidewalkLeft = false;
+            var sidewalkRight = false;
+            var sidewalkOneSide = false;
+            var sidewalkSeparate = false;
+            var sidewalkBoth = false;
+            var cyclewayWithPedestrian = true;
+            var isCycleway = (t.highway === 'cycleway');
+            var sidewalkUseSidepath = false;
+            var cyclewayUseSidepath = false;
+            var hasMaxSpeed = false;
+            var hasLanes = false;
 
             for (k in t) {
                 v = t[k];
                 if (k === 'foot' && v === 'use_sidepath')
                 {
-                    separate_use_sidepath = true;
+                    sidewalkUseSidepath = true;
                 }
                 if (k === 'bicycle' && v === 'use_sidepath')
                 {
-                    cycleway_use_sidepath = true;
+                    cyclewayUseSidepath = true;
+                }
+                if (k === 'maxspeed' && v >= 10 && v <= 100)
+                {
+                    hasMaxSpeed = true;
+                }
+                if (k === 'lanes' && v >= 1 && v <= 10)
+                {
+                    hasLanes = true;
+                }
+                if (isCycleway && k === 'foot' && v === 'no')
+                {
+                    cyclewayWithPedestrian = false;
                 }
                 if (k in osmPavedTags) {
                     paved = !!osmPavedTags[k][v];
@@ -202,30 +255,32 @@ export function svgTagClasses() {
                 if (k in osmSidewalkBoth && !!osmSidewalkBoth[k][v]) {
                     sidewalk = 'both';
                 }
-                if (k in osmSidewalkSeparate && !!osmSidewalkSeparate[k][v]) {
-                    sidewalk = 'separate';
-                }
-                if (k in osmSidewalkSeparateLeft && !!osmSidewalkSeparateLeft[k][v]) {
-                    sidewalk = 'separate_left';
-                }
-                if (k in osmSidewalkSeparateRight && !!osmSidewalkSeparateRight[k][v]) {
-                    sidewalk = 'separate_right';
-                }
-                if (k in osmSidewalkSeparateBoth && !!osmSidewalkSeparateBoth[k][v]) {
-                    sidewalk = 'separate_both';
-                }
-                if (k in osmSidewalkSeparate && !!osmSidewalkSeparate[k][v]) {
-                    sidewalk = 'separate';
-                }
-                if (k in osmSidewalkRightOrLeft && !!osmSidewalkRightOrLeft[k][v]) {
-                    sidewalk = 'oneside';
-                }
-                if (k in osmSidewalkSeparateRightOrLeft && !!osmSidewalkSeparateRightOrLeft[k][v]) {
-                    sidewalk = 'separate_oneside';
-                }
                 if (k in osmSidewalkNo && !!osmSidewalkNo[k][v]) {
                     sidewalk = 'no';
                 }
+                if (k in osmSidewalkSeparate && !!osmSidewalkSeparate[k][v]) {
+                    sidewalkSeparate = true;
+                }
+                if (k in osmSidewalkRightOrLeft && !!osmSidewalkRightOrLeft[k][v]) {
+                    sidewalkOneSide;
+                }
+                if (k in osmSidewalkSeparateLeft && !!osmSidewalkSeparateLeft[k][v]) {
+                    sidewalkSeparate = true;
+                    sidewalkLeft = true;
+                }
+                if (k in osmSidewalkSeparateRight && !!osmSidewalkSeparateRight[k][v]) {
+                    sidewalkSeparate = true;
+                    sidewalkRight = true;
+                }
+                if (k in osmSidewalkSeparateRightOrLeft && !!osmSidewalkSeparateRightOrLeft[k][v]) {
+                    sidewalkSeparate = true;
+                    sidewalkOneSide = true;
+                }
+                if (k in osmSidewalkSeparateBoth && !!osmSidewalkSeparateBoth[k][v]) {
+                    sidewalkSeparate = true;
+                    sidewalkBoth = true;
+                }
+                
             }
             if (!paved) {
                 classes.push('tag-unpaved');
@@ -239,13 +294,42 @@ export function svgTagClasses() {
             if (destination) {
                 classes.push('tag-destination');
             }
+            if (sidewalkSeparate) {
+                classes.push('tag-sidewalk-separate');
+            }
+            if (sidewalkLeft && sidewalkRight)
+            {
+                sidewalkBoth = true;
+            }
+            if (sidewalkOneSide || sidewalkLeft || sidewalkRight)
+            {
+                classes.push('tag-sidewalk-oneside');
+            }
+            if (sidewalkBoth)
+            {
+                classes.push('tag-sidewalk-both');
+            }
+            if (!ignoreSidewalk && sidewalk === 'blank' && !sidewalkBoth && !sidewalkOneSide && !sidewalkLeft && !sidewalkRight)
+            {
+                classes.push('tag-sidewalk-missing');
+            }
+
+            if (sidewalkUseSidepath)
+            {
+                classes.push('tag-sidewalk-use_sidepath');
+            }
+            if (cyclewayUseSidepath)
+            {
+                classes.push('tag-cycleway-use_sidepath');
+            }
+
             if (sidewalk !== 'blank') {
                 classes.push('tag-sidewalk-' + sidewalk);
-                if (sidewalk_use_sidepath)
+                if (sidewalkUseSidepath)
                 {
                     classes.push('tag-sidewalk-use_sidepath');
                 }
-                if (cycleway_use_sidepath)
+                if (cyclewayUseSidepath)
                 {
                     classes.push('tag-cycleway-use_sidepath');
                 }
@@ -253,6 +337,17 @@ export function svgTagClasses() {
             if (cycleway !== 'blank') {
                 classes.push('tag-cycleway-' + cycleway);
             }
+            if (isCycleway && !cyclewayWithPedestrian)
+            {
+                classes.push('tag-cycleway-no_pedestrian');
+            }
+            if (!ignoreMaxSpeed && !hasMaxSpeed) {
+                classes.push('tag-maxspeed-missing');
+            }
+            if (!ignoreMaxSpeed && !hasLanes) {
+                classes.push('tag-lanes-missing');
+            }
+
         }
 
         // If this is a wikidata-tagged item, add a class for that..

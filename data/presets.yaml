@@ -2182,6 +2182,13 @@ en:
         label: Sidewalk
         # sidewalk field placeholder
         placeholder: 'both, left, right, no...'
+        terms: '[translate with synonyms or related terms for ''Sidewalk'', separated by commas]'
+      sidewalk/separate-left:
+        # 'sidewalk:separate:left=*'
+        label: Has left sidewalk
+      sidewalk/separate-right:
+        # 'sidewalk:separate:right=*'
+        label: Has right sidewalk
       siren/purpose:
         # 'siren:purpose=*'
         label: Purpose
@@ -5257,12 +5264,12 @@ en:
         # 'terms: road,street'
         terms: '<translate with synonyms or related terms for ''Service Road'', separated by commas>'
       highway/service-customers:
-        # 'highway=service, access=customers'
+        # 'highway=service, motor_vehicle=customers'
         name: Customers Service Road
         # 'terms: road,street'
         terms: '<translate with synonyms or related terms for ''Customers Service Road'', separated by commas>'
       highway/service-customers-unpaved:
-        # 'highway=service, access=customers, surface=unpaved'
+        # 'highway=service, motor_vehicle=customers, surface=unpaved'
         name: Customers Unpaved Service Road
         # 'terms: road,street'
         terms: '<translate with synonyms or related terms for ''Customers Unpaved Service Road'', separated by commas>'
@@ -5276,11 +5283,11 @@ en:
         name: Alley
         terms: '<translate with synonyms or related terms for ''Alley'', separated by commas>'
       highway/service/customers-driveway:
-        # 'highway=service, service=driveway, access=customers'
+        # 'highway=service, service=driveway, motor_vehicle=customers'
         name: Customers Driveway
         terms: '<translate with synonyms or related terms for ''Customers Driveway'', separated by commas>'
       highway/service/customers-parking-aisle:
-        # 'highway=service, service=parking_aisle, access=customers'
+        # 'highway=service, service=parking_aisle, motor_vehicle=customers'
         name: Customers Parking Aisle
         terms: '<translate with synonyms or related terms for ''Customers Parking Aisle'', separated by commas>'
       highway/service/drive-through:
@@ -5292,7 +5299,7 @@ en:
         name: Driveway
         terms: '<translate with synonyms or related terms for ''Driveway'', separated by commas>'
       highway/service/emergency_access:
-        # 'highway=service, service=emergency_access'
+        # 'highway=service, service=emergency_access, emergency=yes, access=no'
         name: Emergency Access
         terms: '<translate with synonyms or related terms for ''Emergency Access'', separated by commas>'
       highway/service/parking_aisle:

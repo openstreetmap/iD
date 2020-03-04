@@ -1,0 +1,10 @@
+{
+  "key": "sidewalk:separate:left",
+  "type": "check",
+  "label": "Has left sidewalk",
+  "options": ["yes", "no"],
+  "prerequisiteTag": {
+      "key": "sidewalk",
+      "value": "separate"
+  }
+}

@@ -207,9 +207,10 @@ path.line.casing.tag-highway-residential,
 path.line.casing.tag-residential {
     stroke: #444;
 }
-path.line.casing.tag-highway-residential.tag-destination,
-path.line.casing.tag-residential.tag-destination {
-    stroke: rgb(129, 23, 103);
+path.line.stroke.tag-highway.tag-destination {
+    stroke: rgb(255, 0, 191);
+    stroke-dasharray: 10, 15;
+    stroke-linecap: round;
 }
 .preset-icon .icon.tag-highway-unclassified {
     color: #dca;
@@ -499,6 +500,8 @@ path.line.casing.tag-highway-bridleway.tag-unpaved {
     stroke-dasharray: none;
 }
 
+
+
 .preset-icon .icon.tag-highway-path,
 .preset-icon .icon.tag-highway-footway.tag-public_transport-platform,
 .preset-icon .icon.tag-highway-footway.tag-man_made-pier {
@@ -708,29 +711,12 @@ path.line.stroke.tag-highway.tag-footway-access_aisle.tag-destination {
 }
 
 
-/*path.line.casing.tag-highway.tag-sidewalk-both {
-    stroke-width: 12;
-    stroke: #35972c;
-}*/
-
-path.line.casing.tag-highway.tag-sidewalk-separate-both, path.line.casing.tag-highway.tag-sidewalk-both {
-    stroke-width: 12;
-    stroke: #35972c;
-    stroke-dasharray: 4, 2;
-}
-
-path.line.casing.tag-highway.tag-sidewalk-separate-both.tag-sidewalk_use_sidepath, path.line.casing.tag-highway.tag-sidewalk-both.tag-sidewalk_use_sidepath {
-    stroke-width: 12;
-    stroke: #35972c;
-    stroke-dasharray: none;
-}
-
-path.line.casing.tag-highway.tag-sidewalk-both {
+path.line.casing.tag-highway.tag-sidewalk-both, path.line.casing.tag-highway.tag-sidewalk-separate_both {
     stroke-width: 12;
     stroke: #35972c;
 }
 
-path.line.casing.tag-highway.tag-sidewalk-oneside {
+path.line.casing.tag-highway.tag-sidewalk-oneside, path.line.casing.tag-highway.tag-sidewalk-separate_oneside {
     stroke-width: 12;
     stroke: #fbff00;
 }
@@ -738,6 +724,46 @@ path.line.casing.tag-highway.tag-sidewalk-oneside {
 path.line.casing.tag-highway.tag-sidewalk-no {
     stroke-width: 12;
     stroke: #ff9100;
+}
+
+path.line.casing.tag-cycleway-track,
+path.line.casing.tag-cycleway-track.tag-unpaved {
+    stroke: #91cdfd;
+}
+
+
+/* errors: */
+path.line.stroke.tag-highway.tag-maxspeed-missing {
+    stroke-linecap: butt !important;
+    stroke: #ff0000 !important;
+    stroke-dasharray: 2 !important;
+}
+
+path.line.stroke.tag-highway.tag-lanes-missing {
+    stroke-linecap: butt !important;
+    stroke: #9e8234 !important;
+    stroke-dasharray: 2 !important;
+}
+
+path.line.stroke.tag-highway.tag-sidewalk-separate:not(.tag-sidewalk-use_sidepath), 
+path.line.stroke.tag-highway.tag-sidewalk-use_sidepath:not(.tag-sidewalk-separate), 
+path.line.stroke.tag-highway.tag-sidewalk-missing {
+    stroke-linecap: butt !important;
+    stroke: #ff7000 !important;
+    stroke-dasharray: 2 !important;
+}
+
+path.line.casing.tag-highway.tag-sidewalk-separate:not(.tag-sidewalk-use_sidepath), 
+path.line.casing.tag-highway.tag-sidewalk-use_sidepath:not(.tag-sidewalk-separate), 
+path.line.casing.tag-highway.tag-sidewalk-missing, 
+path.line.casing.tag-highway.tag-maxspeed-missing,
+path.line.casing.tag-highway.tag-lanes-missing {
+    stroke: #202020 !important;
+}
+
+path.line.stroke.tag-highway-cycleway.tag-cycleway-no_pedestrian, .low-zoom path.line.stroke.tag-highway-cycleway.tag-cycleway-no_pedestrian {
+    stroke-linecap: butt;
+    stroke-dasharray: none;
 }
 
 /* highway midpoints */
@@ -753,3 +779,6 @@ g.midpoint.tag-highway-bridleway .fill {
     stroke-opacity: .8;
     opacity: .8;
 }
+
+
+

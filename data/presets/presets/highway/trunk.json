@@ -6,10 +6,12 @@
         "oneway",
         "maxspeed",
         "sidewalk",
+        "sidewalk/separate-left",
+        "sidewalk/separate-right",
         "lanes",
+        "access",
         "surface",
-        "structure",
-        "access"
+        "structure"
     ],
     "moreFields": [
         "charge_toll",
