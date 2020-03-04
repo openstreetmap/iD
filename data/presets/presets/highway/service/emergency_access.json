@@ -5,7 +5,9 @@
     ],
     "tags": {
         "highway": "service",
-        "service": "emergency_access"
+        "service": "emergency_access",
+        "emergency": "yes",
+        "access": "no"
     },
     "reference": {
         "key": "service",

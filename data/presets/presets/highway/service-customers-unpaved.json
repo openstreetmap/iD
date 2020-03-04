@@ -26,7 +26,7 @@
   ],
   "tags": {
       "highway": "service",
-      "access": "customers",
+      "motor_vehicle": "customers",
       "surface": "unpaved"
   },
   "terms": [

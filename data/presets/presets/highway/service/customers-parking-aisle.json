@@ -6,7 +6,7 @@
   "tags": {
       "highway": "service",
       "service": "parking_aisle",
-      "access": "customers"
+      "motor_vehicle": "customers"
   },
   "reference": {
       "key": "service",

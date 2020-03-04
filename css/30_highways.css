@@ -708,6 +708,23 @@ path.line.stroke.tag-highway.tag-footway-access_aisle.tag-destination {
 }
 
 
+/*path.line.casing.tag-highway.tag-sidewalk-both {
+    stroke-width: 12;
+    stroke: #35972c;
+}*/
+
+path.line.casing.tag-highway.tag-sidewalk-separate-both, path.line.casing.tag-highway.tag-sidewalk-both {
+    stroke-width: 12;
+    stroke: #35972c;
+    stroke-dasharray: 4, 2;
+}
+
+path.line.casing.tag-highway.tag-sidewalk-separate-both.tag-sidewalk_use_sidepath, path.line.casing.tag-highway.tag-sidewalk-both.tag-sidewalk_use_sidepath {
+    stroke-width: 12;
+    stroke: #35972c;
+    stroke-dasharray: none;
+}
+
 path.line.casing.tag-highway.tag-sidewalk-both {
     stroke-width: 12;
     stroke: #35972c;

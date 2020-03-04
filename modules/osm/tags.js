@@ -101,6 +101,56 @@ export var osmSidewalkBoth = {
     }
 };
 
+export var osmSidewalkSeparate = {
+    'sidewalk': {
+        'separate': true
+    },
+    'foot': {
+        'yes': false
+    }
+};
+
+export var osmSidewalkSeparateLeft = {
+    'sidewalk:left': {
+        'separate': true,
+        'no': false
+    },
+    'foot': {
+        'yes': false
+    }
+};
+
+export var osmSidewalkSeparateRight = {
+    'sidewalk:right': {
+        'separate': true,
+        'no': false
+    },
+    'foot': {
+        'yes': false
+    }
+};
+
+export var osmSidewalkSeparateRightOrLeft = {
+    'sidewalk:right': {
+        'separate': true,
+    },
+    'sidewalk:left': {
+        'separate': true,
+    },
+    'foot': {
+        'yes': false
+    }
+};
+
+export var osmSidewalkSeparateBoth = {
+    'sidewalk:both': {
+        'yes': true,
+    },
+    'foot': {
+        'yes': false
+    }
+};
+
 export var osmSidewalkNo = {
     'sidewalk': {
         'none': true,
@@ -112,6 +162,24 @@ export var osmSidewalkRightOrLeft = {
     'sidewalk': {
         'right': true,
         'left': true
+    }
+};
+
+export var osmCyclewayTrack = {
+    'cycleway': {
+        'track': true
+    }
+};
+
+export var osmCyclewayLane = {
+    'cycleway': {
+        'lane': true
+    }
+};
+
+export var osmCyclewayLaneNotOneway = {
+    'cycleway:lane:oneway': {
+        'no': true
     }
 };
 

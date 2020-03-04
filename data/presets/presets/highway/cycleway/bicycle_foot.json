@@ -13,7 +13,8 @@
     "addTags": {
         "highway": "cycleway",
         "foot": "designated",
-        "bicycle": "designated"
+        "bicycle": "designated",
+        "cycleway": "track"
     },
     "terms": [
         "bicycle and foot path",

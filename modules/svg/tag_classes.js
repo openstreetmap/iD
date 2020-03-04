@@ -1,5 +1,5 @@
 import { select as d3_select } from 'd3-selection';
-import { osmPavedTags, osmPrivateTags, osmCustomersTags, osmDestinationTags, osmSidewalkBoth, osmSidewalkRightOrLeft, osmSidewalkNo } from '../osm/tags';
+import { osmPavedTags, osmPrivateTags, osmCustomersTags, osmDestinationTags, osmSidewalkBoth, osmSidewalkSeparate, osmSidewalkSeparateRight, osmSidewalkSeparateBoth, osmSidewalkSeparateLeft, osmSidewalkSeparateRightOrLeft, osmSidewalkRightOrLeft, osmSidewalkNo, osmCyclewayTrack, osmCyclewayLane, osmCyclewayLaneNotOneway } from '../osm/tags';
 
 
 export function svgTagClasses() {
@@ -161,9 +161,21 @@ export function svgTagClasses() {
             var customers = false;
             var destination = false;
             var sidewalk = 'blank';
+            var cycleway = 'blank';
+
+            var sidewalk_use_sidepath = false;
+            var cycleway_use_sidepath = false;
 
             for (k in t) {
                 v = t[k];
+                if (k === 'foot' && v === 'use_sidepath')
+                {
+                    separate_use_sidepath = true;
+                }
+                if (k === 'bicycle' && v === 'use_sidepath')
+                {
+                    cycleway_use_sidepath = true;
+                }
                 if (k in osmPavedTags) {
                     paved = !!osmPavedTags[k][v];
                     //break;
@@ -177,11 +189,39 @@ export function svgTagClasses() {
                 if (k in osmDestinationTags) {
                     destination = !!osmDestinationTags[k][v];
                 }
+
+                if (k in osmCyclewayTrack && !!osmCyclewayTrack[k][v]) {
+                    cycleway = 'track';
+                }
+                if (k in osmCyclewayLane && !!osmCyclewayLane[k][v]) {
+                    cycleway = 'lane';
+                }
+                if (k in osmCyclewayLaneNotOneway && !!osmCyclewayLaneNotOneway[k][v]) {
+                    cycleway = 'not_one_way';
+                }
                 if (k in osmSidewalkBoth && !!osmSidewalkBoth[k][v]) {
                     sidewalk = 'both';
                 }
+                if (k in osmSidewalkSeparate && !!osmSidewalkSeparate[k][v]) {
+                    sidewalk = 'separate';
+                }
+                if (k in osmSidewalkSeparateLeft && !!osmSidewalkSeparateLeft[k][v]) {
+                    sidewalk = 'separate_left';
+                }
+                if (k in osmSidewalkSeparateRight && !!osmSidewalkSeparateRight[k][v]) {
+                    sidewalk = 'separate_right';
+                }
+                if (k in osmSidewalkSeparateBoth && !!osmSidewalkSeparateBoth[k][v]) {
+                    sidewalk = 'separate_both';
+                }
+                if (k in osmSidewalkSeparate && !!osmSidewalkSeparate[k][v]) {
+                    sidewalk = 'separate';
+                }
                 if (k in osmSidewalkRightOrLeft && !!osmSidewalkRightOrLeft[k][v]) {
                     sidewalk = 'oneside';
+                }
+                if (k in osmSidewalkSeparateRightOrLeft && !!osmSidewalkSeparateRightOrLeft[k][v]) {
+                    sidewalk = 'separate_oneside';
                 }
                 if (k in osmSidewalkNo && !!osmSidewalkNo[k][v]) {
                     sidewalk = 'no';
@@ -201,6 +241,17 @@ export function svgTagClasses() {
             }
             if (sidewalk !== 'blank') {
                 classes.push('tag-sidewalk-' + sidewalk);
+                if (sidewalk_use_sidepath)
+                {
+                    classes.push('tag-sidewalk-use_sidepath');
+                }
+                if (cycleway_use_sidepath)
+                {
+                    classes.push('tag-cycleway-use_sidepath');
+                }
+            }
+            if (cycleway !== 'blank') {
+                classes.push('tag-cycleway-' + cycleway);
             }
         }
 

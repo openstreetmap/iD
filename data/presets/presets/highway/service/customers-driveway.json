@@ -6,7 +6,7 @@
   "tags": {
       "highway": "service",
       "service": "driveway",
-      "access": "customers"
+      "motor_vehicle": "customers"
   },
   "reference": {
       "key": "service",
