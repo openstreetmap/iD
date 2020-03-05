@@ -125,7 +125,7 @@ export function uiCommit(context) {
 
         // assign tags for imagery used
         var imageryUsed = context.history().imageryUsed().join(';').substr(0, 255);
-        tags.imagery_used = 'CMM Aerial Photos April 2018 resolution: 10cm';
+        tags.imagery_used = imageryUsed;//'CMM Aerial Photos April 2018 resolution: 10cm';
         
         // assign tags for closed issues and notes
         var osmClosed = osm.getClosedIDs();
