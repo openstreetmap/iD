@@ -3,8 +3,7 @@ import { dispatch as d3_dispatch } from 'd3-dispatch';
 import {
     event as d3_event,
     mouse as d3_mouse,
-    select as d3_select,
-    touches as d3_touches
+    select as d3_select
 } from 'd3-selection';
 
 import { behaviorEdit } from './edit';
@@ -35,6 +34,9 @@ export function behaviorDraw(context) {
     var _mouseLeave = false;
     var _lastMouse = null;
 
+    // use pointer events on supported platforms; fallback to mouse events
+    var _pointerPrefix = 'PointerEvent' in window ? 'pointer' : 'mouse';
+
 
     // related code
     // - `mode/drag_node.js` `datum()`
@@ -57,29 +59,25 @@ export function behaviorDraw(context) {
     }
 
 
-    function mousedown() {
+    function pointerdown() {
 
         function point() {
-            var p = context.container().node();
-            return touchId !== null ? d3_touches(p).filter(function(p) {
-                return p.identifier === touchId;
-            })[0] : d3_mouse(p);
+            return d3_mouse(context.container().node());
         }
 
         var element = d3_select(this);
-        var touchId = d3_event.touches ? d3_event.changedTouches[0].identifier : null;
         var t1 = +new Date();
         var p1 = point();
 
-        element.on('mousemove.draw', null);
+        element.on(_pointerPrefix + 'move.draw', null);
 
-        d3_select(window).on('mouseup.draw', function() {
+        d3_select(window).on(_pointerPrefix + 'up.draw', function() {
             var t2 = +new Date();
             var p2 = point();
             var dist = geoVecLength(p1, p2);
 
-            element.on('mousemove.draw', mousemove);
-            d3_select(window).on('mouseup.draw', null);
+            element.on(_pointerPrefix + 'move.draw', pointermove);
+            d3_select(window).on(_pointerPrefix + 'up.draw', null);
 
             if (dist < closeTolerance || (dist < tolerance && (t2 - t1) < 500)) {
                 // Prevent a quick second click
@@ -100,7 +98,7 @@ export function behaviorDraw(context) {
     }
 
 
-    function mousemove() {
+    function pointermove() {
         _lastMouse = d3_event;
         dispatch.call('move', this, datum());
     }
@@ -120,7 +118,7 @@ export function behaviorDraw(context) {
     }
 
     // related code
-    // - `mode/drag_node.js`     `doMode()`
+    // - `mode/drag_node.js`     `doMove()`
     // - `behavior/draw.js`      `click()`
     // - `behavior/draw_way.js`  `move()`
     function click() {
@@ -215,8 +213,8 @@ export function behaviorDraw(context) {
         selection
             .on('mouseenter.draw', mouseenter)
             .on('mouseleave.draw', mouseleave)
-            .on('mousedown.draw', mousedown)
-            .on('mousemove.draw', mousemove);
+            .on(_pointerPrefix + 'down.draw', pointerdown)
+            .on(_pointerPrefix + 'move.draw', pointermove);
 
         d3_select(document)
             .call(keybinding);
@@ -238,11 +236,11 @@ export function behaviorDraw(context) {
         selection
             .on('mouseenter.draw', null)
             .on('mouseleave.draw', null)
-            .on('mousedown.draw', null)
-            .on('mousemove.draw', null);
+            .on(_pointerPrefix + 'down.draw', null)
+            .on(_pointerPrefix + 'move.draw', null);
 
         d3_select(window)
-            .on('mouseup.draw', null);
+            .on(_pointerPrefix + 'up.draw', null);
             // note: keyup.space-block, click.draw-block should remain
 
         d3_select(document)

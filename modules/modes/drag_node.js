@@ -192,7 +192,7 @@ export function modeDragNode(context) {
 
         if (!_nudgeInterval) {   // If not nudging at the edge of the viewport, try to snap..
             // related code
-            // - `mode/drag_node.js`     `doMode()`
+            // - `mode/drag_node.js`     `doMove()`
             // - `behavior/draw.js`      `click()`
             // - `behavior/draw_way.js`  `move()`
             var d = datum();

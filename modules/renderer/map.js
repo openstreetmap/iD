@@ -64,6 +64,9 @@ export function rendererMap(context) {
     // whether a pointerdown event started the zoom
     var _pointerDown = false;
 
+    // use pointer events on supported platforms; fallback to mouse events
+    var _pointerPrefix = 'PointerEvent' in window ? 'pointer' : 'mouse';
+
     // use pointer event interaction if supported; fallback to touch/mouse events in d3-zoom
     var _zoomerPannerFunction = 'PointerEvent' in window ? utilZoomPan : d3_zoom;
 
@@ -169,27 +172,27 @@ export function rendererMap(context) {
                 _gestureTransformStart = projection.transform();
             })
             .on('gesturechange.surface', gestureChange)
-            .on('mousedown.zoom', function() {
+            .on(_pointerPrefix + 'down.zoom', function() {
                 if (d3_event.button === 2) {
                     d3_event.stopPropagation();
                 }
             }, true)
-            .on('mouseup.zoom', function() {
+            .on(_pointerPrefix + 'up.zoom', function() {
                 if (resetTransform()) {
                     immediateRedraw();
                 }
             })
-            .on('mousemove.map', function() {
+            .on(_pointerPrefix + 'move.map', function() {
                 _mouseEvent = d3_event;
             })
-            .on('mouseover.vertices', function() {
+            .on(_pointerPrefix + 'over.vertices', function() {
                 if (map.editableDataEnabled() && !_isTransformed) {
                     var hover = d3_event.target.__data__;
                     surface.call(drawVertices.drawHover, context.graph(), hover, map.extent());
                     dispatch.call('drawn', this, { full: false });
                 }
             })
-            .on('mouseout.vertices', function() {
+            .on(_pointerPrefix + 'out.vertices', function() {
                 if (map.editableDataEnabled() && !_isTransformed) {
                     var hover = d3_event.relatedTarget && d3_event.relatedTarget.__data__;
                     surface.call(drawVertices.drawHover, context.graph(), hover, map.extent());
@@ -898,7 +901,7 @@ export function rendererMap(context) {
 
 
     map.startEase = function() {
-        utilBindOnce(surface, 'mousedown.ease', function() {
+        utilBindOnce(surface, _pointerPrefix + 'down.ease', function() {
             map.cancelEase();
         });
         return map;

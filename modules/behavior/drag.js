@@ -5,8 +5,7 @@ import {
     event as d3_event,
     mouse as d3_mouse,
     select as d3_select,
-    selection as d3_selection,
-    touches as d3_touches
+    selection as d3_selection
 } from 'd3-selection';
 
 import { osmNote } from '../osm';
@@ -37,6 +36,8 @@ export function behaviorDrag() {
     var _target;
     var _surface;
 
+    // use pointer events on supported platforms; fallback to mouse events
+    var _pointerPrefix = 'PointerEvent' in window ? 'pointer' : 'mouse';
 
     var d3_event_userSelectProperty = utilPrefixCSSProperty('UserSelect');
     var d3_event_userSelectSuppress = function() {
@@ -68,15 +69,14 @@ export function behaviorDrag() {
         _event = eventOf(_target, arguments);
 
         var eventTarget = d3_event.target;
-        var touchId = d3_event.touches ? d3_event.changedTouches[0].identifier : null;
         var offset;
         var startOrigin = point();
         var started = false;
-        var selectEnable = d3_event_userSelectSuppress(touchId !== null ? 'drag-' + touchId : 'drag');
+        var selectEnable = d3_event_userSelectSuppress();
 
         d3_select(window)
-            .on(touchId !== null ? 'touchmove.drag-' + touchId : 'mousemove.drag', dragmove)
-            .on(touchId !== null ? 'touchend.drag-' + touchId : 'mouseup.drag', dragend, true);
+            .on(_pointerPrefix + 'move.drag', dragmove)
+            .on(_pointerPrefix + 'up.drag', dragend, true);
 
         if (_origin) {
             offset = _origin.apply(_target, arguments);
@@ -85,16 +85,12 @@ export function behaviorDrag() {
             offset = [0, 0];
         }
 
-        if (touchId === null) {
-            d3_event.stopPropagation();
-        }
+        d3_event.stopPropagation();
 
 
         function point() {
             var p = _surface || _target.parentNode;
-            return touchId !== null ? d3_touches(p).filter(function(p) {
-                return p.identifier === touchId;
-            })[0] : d3_mouse(p);
+            return d3_mouse(p);
         }
 
 
@@ -134,8 +130,8 @@ export function behaviorDrag() {
             }
 
             d3_select(window)
-                .on(touchId !== null ? 'touchmove.drag-' + touchId : 'mousemove.drag', null)
-                .on(touchId !== null ? 'touchend.drag-' + touchId : 'mouseup.drag', null);
+                .on(_pointerPrefix + 'move.drag', null)
+                .on(_pointerPrefix + 'up.drag', null);
 
             selectEnable();
         }
@@ -171,15 +167,13 @@ export function behaviorDrag() {
         }
 
         selection
-            .on('mousedown.drag' + _selector, delegate)
-            .on('touchstart.drag' + _selector, delegate);
+            .on(_pointerPrefix + 'down.drag' + _selector, delegate);
     }
 
 
     behavior.off = function(selection) {
         selection
-            .on('mousedown.drag' + _selector, null)
-            .on('touchstart.drag' + _selector, null);
+            .on(_pointerPrefix + 'down.drag' + _selector, null);
     };
 
 
@@ -199,8 +193,8 @@ export function behaviorDrag() {
 
     behavior.cancel = function() {
         d3_select(window)
-            .on('mousemove.drag', null)
-            .on('mouseup.drag', null);
+            .on(_pointerPrefix + 'move.drag', null)
+            .on(_pointerPrefix + 'up.drag', null);
         return behavior;
     };
 

@@ -76,7 +76,7 @@ export function behaviorDrawWay(context, wayID, index, mode, startGraph, baselin
 
 
     // related code
-    // - `mode/drag_node.js`     `doMode()`
+    // - `mode/drag_node.js`     `doMove()`
     // - `behavior/draw.js`      `click()`
     // - `behavior/draw_way.js`  `move()`
     function move(datum) {
