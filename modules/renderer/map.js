@@ -14,6 +14,7 @@ import { utilBindOnce } from '../util/bind_once';
 import { utilDetect } from '../util/detect';
 import { utilGetDimensions } from '../util/dimensions';
 import { utilRebind } from '../util/rebind';
+import { utilZoomPan } from '../util/zoom_pan';
 
 // constants
 var TILESIZE = 256;
@@ -60,11 +61,23 @@ export function rendererMap(context) {
     var _mouseEvent;
     var _lastWithinEditableZoom;
 
-    var d3Zoomer = d3_zoom()
+    // whether a pointerdown event started the zoom
+    var _pointerDown = false;
+
+    // use pointer event interaction if supported; fallback to touch/mouse events in d3-zoom
+    var _zoomerPannerFunction = 'PointerEvent' in window ? utilZoomPan : d3_zoom;
+
+    var _zoomerPanner = _zoomerPannerFunction()
         .scaleExtent([kMin, kMax])
         .interpolate(d3_interpolate)
         .filter(zoomEventFilter)
-        .on('zoom', zoomPan);
+        .on('zoom.map', zoomPan)
+        .on('start.map', function() {
+            _pointerDown = d3_event.sourceEvent && d3_event.sourceEvent.type === 'pointerdown';
+        })
+        .on('end.map', function() {
+            _pointerDown = false;
+        });
 
     var scheduleRedraw = _throttle(redraw, 750);
     // var isRedrawScheduled = false;
@@ -132,8 +145,8 @@ export function rendererMap(context) {
 
         selection
             .on('dblclick.map', dblClick)
-            .call(d3Zoomer)
-            .call(d3Zoomer.transform, projection.transform());
+            .call(_zoomerPanner)
+            .call(_zoomerPanner.transform, projection.transform());
 
         supersurface = selection.append('div')
             .attr('id', 'supersurface')
@@ -403,6 +416,10 @@ export function rendererMap(context) {
         // They might be triggered by the user scrolling the mouse wheel,
         // or 2-finger pinch/zoom gestures, the transform may need adjustment.
         if (source && source.type === 'wheel') {
+
+            // assume that the gesture is already handled by pointer events
+            if (_pointerDown) return;
+
             var detected = utilDetect();
             var dX = source.deltaX;
             var dY = source.deltaY;
@@ -670,11 +687,11 @@ export function rendererMap(context) {
                 .transition()
                 .duration(duration)
                 .on('start', function() { map.startEase(); })
-                .call(d3Zoomer.transform, d3_zoomIdentity.translate(t2.x, t2.y).scale(t2.k));
+                .call(_zoomerPanner.transform, d3_zoomIdentity.translate(t2.x, t2.y).scale(t2.k));
         } else {
             projection.transform(t2);
             _transformStart = t2;
-            _selection.call(d3Zoomer.transform, _transformStart);
+            _selection.call(_zoomerPanner.transform, _transformStart);
         }
 
         return true;
@@ -714,11 +731,11 @@ export function rendererMap(context) {
                 .transition()
                 .duration(duration)
                 .on('start', function() { map.startEase(); })
-                .call(d3Zoomer.transform, d3_zoomIdentity.translate(t[0], t[1]).scale(k));
+                .call(_zoomerPanner.transform, d3_zoomIdentity.translate(t[0], t[1]).scale(k));
         } else {
             projection.translate(t);
             _transformStart = projection.transform();
-            _selection.call(d3Zoomer.transform, _transformStart);
+            _selection.call(_zoomerPanner.transform, _transformStart);
             dispatch.call('move', this, map);
             immediateRedraw();
         }
