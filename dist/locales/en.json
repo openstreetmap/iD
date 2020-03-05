@@ -4529,10 +4529,18 @@
                     "placeholder": "both, left, right, no..."
                 },
                 "sidewalk/separate-left": {
-                    "label": "Has left sidewalk"
+                    "label": "Has separate left sidewalk",
+                    "options": {
+                        "separate": "Separate",
+                        "no": "No"
+                    }
                 },
                 "sidewalk/separate-right": {
-                    "label": "Has right sidewalk"
+                    "label": "Has separate right sidewalk",
+                    "options": {
+                        "separate": "Separate",
+                        "no": "No"
+                    }
                 },
                 "siren/purpose": {
                     "label": "Purpose"

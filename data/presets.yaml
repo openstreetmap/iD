@@ -2184,11 +2184,21 @@ en:
         placeholder: 'both, left, right, no...'
         terms: '[translate with synonyms or related terms for ''Sidewalk'', separated by commas]'
       sidewalk/separate-left:
-        # 'sidewalk:separate:left=*'
-        label: Has left sidewalk
+        # 'sidewalk:left=*'
+        label: Has separate left sidewalk
+        options:
+          # 'sidewalk:left=no'
+          'no': 'No'
+          # 'sidewalk:left=separate'
+          separate: Separate
       sidewalk/separate-right:
-        # 'sidewalk:separate:right=*'
-        label: Has right sidewalk
+        # 'sidewalk:right=*'
+        label: Has separate right sidewalk
+        options:
+          # 'sidewalk:right=no'
+          'no': 'No'
+          # 'sidewalk:right=separate'
+          separate: Separate
       siren/purpose:
         # 'siren:purpose=*'
         label: Purpose

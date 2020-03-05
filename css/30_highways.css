@@ -716,9 +716,14 @@ path.line.casing.tag-highway.tag-sidewalk-both, path.line.casing.tag-highway.tag
     stroke: #35972c;
 }
 
-path.line.casing.tag-highway.tag-sidewalk-oneside, path.line.casing.tag-highway.tag-sidewalk-separate_oneside {
+path.line.casing.tag-highway.tag-sidewalk-left, path.line.casing.tag-highway.tag-sidewalk-separate_left {
     stroke-width: 12;
-    stroke: #fbff00;
+    stroke: #fffb00;
+}
+
+path.line.casing.tag-highway.tag-sidewalk-right, path.line.casing.tag-highway.tag-sidewalk-separate_right {
+    stroke-width: 12;
+    stroke: #a778ff;
 }
 
 path.line.casing.tag-highway.tag-sidewalk-no {
@@ -747,7 +752,8 @@ path.line.stroke.tag-highway.tag-lanes-missing {
 
 path.line.stroke.tag-highway.tag-sidewalk-separate:not(.tag-sidewalk-use_sidepath), 
 path.line.stroke.tag-highway.tag-sidewalk-use_sidepath:not(.tag-sidewalk-separate), 
-path.line.stroke.tag-highway.tag-sidewalk-missing {
+path.line.stroke.tag-highway.tag-sidewalk-missing,
+path.line.stroke.tag-highway.tag-sidewalk-missing_separate_specify {
     stroke-linecap: butt !important;
     stroke: #ff7000 !important;
     stroke-dasharray: 2 !important;
@@ -757,7 +763,8 @@ path.line.casing.tag-highway.tag-sidewalk-separate:not(.tag-sidewalk-use_sidepat
 path.line.casing.tag-highway.tag-sidewalk-use_sidepath:not(.tag-sidewalk-separate), 
 path.line.casing.tag-highway.tag-sidewalk-missing, 
 path.line.casing.tag-highway.tag-maxspeed-missing,
-path.line.casing.tag-highway.tag-lanes-missing {
+path.line.casing.tag-highway.tag-lanes-missing,
+path.line.casing.tag-highway.tag-sidewalk-missing_separate_specify {
     stroke: #202020 !important;
 }
 

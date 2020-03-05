@@ -1,10 +1,15 @@
 {
-  "key": "sidewalk:separate:right",
-  "type": "check",
-  "label": "Has right sidewalk",
-  "options": ["yes", "no"],
+  "key": "sidewalk:right",
+  "label": "Has separate right sidewalk",
+  "type": "radio",
+  "strings": {
+      "options": {
+          "separate": "Separate",
+          "no": "No"
+      }
+  },
   "prerequisiteTag": {
       "key": "sidewalk",
-      "value": "separate"
+      "valueNot": "no"
   }
 }

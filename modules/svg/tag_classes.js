@@ -1,5 +1,5 @@
 import { select as d3_select } from 'd3-selection';
-import { osmPavedTags, osmPrivateTags, osmCustomersTags, osmDestinationTags, osmSidewalkBoth, osmSidewalkSeparate, osmSidewalkSeparateRight, osmSidewalkSeparateBoth, osmSidewalkSeparateLeft, osmSidewalkSeparateRightOrLeft, osmSidewalkRightOrLeft, osmSidewalkNo, osmCyclewayTrack, osmCyclewayLane, osmCyclewayLaneNotOneway } from '../osm/tags';
+import { osmPavedTags, osmPrivateTags, osmCustomersTags, osmDestinationTags, osmSidewalkBoth, osmSidewalkSeparate, osmSidewalkSeparateRight, osmSidewalkSeparateLeft, osmSidewalkRight, osmSidewalkLeft, osmSidewalkNo, osmCyclewayTrack, osmCyclewayLane, osmCyclewayLaneNotOneway } from '../osm/tags';
 
 
 export function svgTagClasses() {
@@ -197,12 +197,12 @@ export function svgTagClasses() {
             var cycleway = 'blank';
             var sidewalkLeft = false;
             var sidewalkRight = false;
-            var sidewalkOneSide = false;
             var sidewalkSeparate = false;
             var sidewalkBoth = false;
             var cyclewayWithPedestrian = true;
             var isCycleway = (t.highway === 'cycleway');
             var sidewalkUseSidepath = false;
+            var sidewalkSeparateLeftRightOrBoth = false;
             var cyclewayUseSidepath = false;
             var hasMaxSpeed = false;
             var hasLanes = false;
@@ -261,8 +261,11 @@ export function svgTagClasses() {
                 if (k in osmSidewalkSeparate && !!osmSidewalkSeparate[k][v]) {
                     sidewalkSeparate = true;
                 }
-                if (k in osmSidewalkRightOrLeft && !!osmSidewalkRightOrLeft[k][v]) {
-                    sidewalkOneSide;
+                if (k in osmSidewalkRight && !!osmSidewalkRight[k][v]) {
+                    sidewalkRight;
+                }
+                if (k in osmSidewalkLeft && !!osmSidewalkLeft[k][v]) {
+                    sidewalkLeft;
                 }
                 if (k in osmSidewalkSeparateLeft && !!osmSidewalkSeparateLeft[k][v]) {
                     sidewalkSeparate = true;
@@ -271,14 +274,6 @@ export function svgTagClasses() {
                 if (k in osmSidewalkSeparateRight && !!osmSidewalkSeparateRight[k][v]) {
                     sidewalkSeparate = true;
                     sidewalkRight = true;
-                }
-                if (k in osmSidewalkSeparateRightOrLeft && !!osmSidewalkSeparateRightOrLeft[k][v]) {
-                    sidewalkSeparate = true;
-                    sidewalkOneSide = true;
-                }
-                if (k in osmSidewalkSeparateBoth && !!osmSidewalkSeparateBoth[k][v]) {
-                    sidewalkSeparate = true;
-                    sidewalkBoth = true;
                 }
                 
             }
@@ -295,23 +290,40 @@ export function svgTagClasses() {
                 classes.push('tag-destination');
             }
             if (sidewalkSeparate) {
+                sidewalk = 'separate';
                 classes.push('tag-sidewalk-separate');
             }
             if (sidewalkLeft && sidewalkRight)
             {
                 sidewalkBoth = true;
+                sidewalkSeparateLeftRightOrBoth = sidewalkSeparate;
+                classes.push('tag-sidewalk-both');
             }
-            if (sidewalkOneSide || sidewalkLeft || sidewalkRight)
+            if (!sidewalkBoth && sidewalkLeft)
             {
+                classes.push('tag-sidewalk-left');
+            }
+            if (!sidewalkBoth && sidewalkRight)
+            {
+                classes.push('tag-sidewalk-right');
+            }
+            if (!sidewalkBoth && (sidewalkLeft || sidewalkRight))
+            {
+                sidewalkSeparateLeftRightOrBoth = sidewalkSeparate;
                 classes.push('tag-sidewalk-oneside');
             }
             if (sidewalkBoth)
             {
                 classes.push('tag-sidewalk-both');
             }
-            if (!ignoreSidewalk && sidewalk === 'blank' && !sidewalkBoth && !sidewalkOneSide && !sidewalkLeft && !sidewalkRight)
+            if (!ignoreSidewalk && sidewalk === 'blank' && !sidewalkBoth && !sidewalkLeft && !sidewalkRight)
             {
                 classes.push('tag-sidewalk-missing');
+            }
+
+            if (sidewalkSeparate && !sidewalkSeparateLeftRightOrBoth)
+            {
+                classes.push('tag-sidewalk-missing_separate_specify');
             }
 
             if (sidewalkUseSidepath)
