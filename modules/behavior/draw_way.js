@@ -199,7 +199,7 @@ export function behaviorDrawWay(context, wayID, index, mode, startGraph, baselin
             .on('keyup.drawWay', keyup);
 
         context.map()
-            .dblclickEnable(false)
+            .dblclickZoomEnable(false)
             .on('drawn.draw', setActiveElements);
 
         setActiveElements();
@@ -347,7 +347,7 @@ export function behaviorDrawWay(context, wayID, index, mode, startGraph, baselin
         context.resumeChangeDispatch();
 
         window.setTimeout(function() {
-            context.map().dblclickEnable(true);
+            context.map().dblclickZoomEnable(true);
         }, 1000);
 
         var isNewFeature = !mode.isContinuing;
@@ -365,7 +365,7 @@ export function behaviorDrawWay(context, wayID, index, mode, startGraph, baselin
         context.resumeChangeDispatch();
 
         window.setTimeout(function() {
-            context.map().dblclickEnable(true);
+            context.map().dblclickZoomEnable(true);
         }, 1000);
 
         context.surface()

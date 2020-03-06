@@ -15,6 +15,7 @@ import { utilDetect } from '../util/detect';
 import { utilGetDimensions } from '../util/dimensions';
 import { utilRebind } from '../util/rebind';
 import { utilZoomPan } from '../util/zoom_pan';
+import { utilDoubleUp } from '../util/double_up';
 
 // constants
 var TILESIZE = 256;
@@ -50,7 +51,7 @@ export function rendererMap(context) {
     var surface = d3_select(null);
 
     var _dimensions = [1, 1];
-    var _dblClickEnabled = true;
+    var _dblClickZoomEnabled = true;
     var _redrawEnabled = true;
     var _gestureTransformStart;
     var _transformStart = projection.transform();
@@ -81,6 +82,7 @@ export function rendererMap(context) {
         .on('end.map', function() {
             _pointerDown = false;
         });
+    var _doubleUpHandler = utilDoubleUp();
 
     var scheduleRedraw = _throttle(redraw, 750);
     // var isRedrawScheduled = false;
@@ -147,9 +149,9 @@ export function rendererMap(context) {
             });
 
         selection
-            .on('dblclick.map', dblClick)
             .call(_zoomerPanner)
-            .call(_zoomerPanner.transform, projection.transform());
+            .call(_zoomerPanner.transform, projection.transform())
+            .on('dblclick.zoom', null); // override d3-zoom dblclick handling
 
         supersurface = selection.append('div')
             .attr('id', 'supersurface')
@@ -168,6 +170,7 @@ export function rendererMap(context) {
 
         surface
             .call(drawLabels.observe)
+            .call(_doubleUpHandler)
             .on('gesturestart.surface', function() {
                 _gestureTransformStart = projection.transform();
             })
@@ -202,6 +205,28 @@ export function rendererMap(context) {
 
         // must call after surface init
         updateAreaFill();
+
+        _doubleUpHandler.on('doubleUp.map', function(p0) {
+            if (!_dblClickZoomEnabled) return;
+
+            // don't zoom if targeting something other than the map itself
+            if (typeof d3_event.target.__data__ === 'object' &&
+                // or area fills
+                !d3_select(d3_event.target).classed('fill')) return;
+
+            var zoomOut = d3_event.shiftKey;
+
+            var t = projection.transform();
+
+            var p1 = t.invert(p0);
+
+            t = t.scale(zoomOut ? 0.5 : 2);
+
+            t.x = p0[0] - p1[0] * t.k;
+            t.y = p0[1] - p1[1] * t.k;
+
+            map.transformEase(t);
+        });
 
         context.on('enter.map',  function() {
             if (map.editableDataEnabled(true /* skip zoom check */) && !_isTransformed) {
@@ -367,12 +392,7 @@ export function rendererMap(context) {
     }
 
 
-    function dblClick() {
-        if (!_dblClickEnabled) {
-            d3_event.preventDefault();
-            d3_event.stopImmediatePropagation();
-        }
-    }
+
 
 
     function gestureChange() {
@@ -662,9 +682,9 @@ export function rendererMap(context) {
     };
 
 
-    map.dblclickEnable = function(val) {
-        if (!arguments.length) return _dblClickEnabled;
-        _dblClickEnabled = val;
+    map.dblclickZoomEnable = function(val) {
+        if (!arguments.length) return _dblClickZoomEnabled;
+        _dblClickZoomEnabled = val;
         return map;
     };
 
@@ -1049,6 +1069,11 @@ export function rendererMap(context) {
 
 
     map.layers = drawLayers;
+
+
+    map.doubleUpHandler = function() {
+        return _doubleUpHandler;
+    };
 
 
     return utilRebind(map, dispatch, 'on');

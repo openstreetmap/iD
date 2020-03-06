@@ -85,10 +85,10 @@ export function behaviorDraw(context) {
                     d3_event.stopPropagation();
                 }, true);
 
-                context.map().dblclickEnable(false);
+                context.map().dblclickZoomEnable(false);
 
                 window.setTimeout(function() {
-                    context.map().dblclickEnable(true);
+                    context.map().dblclickZoomEnable(true);
                     d3_select(window).on('click.draw-block', null);
                 }, 500);
 

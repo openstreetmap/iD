@@ -64,7 +64,7 @@ export function behaviorDrag() {
     }
 
 
-    function dragstart() {
+    function pointerdown() {
         _target = this;
         _event = eventOf(_target, arguments);
 
@@ -75,8 +75,8 @@ export function behaviorDrag() {
         var selectEnable = d3_event_userSelectSuppress();
 
         d3_select(window)
-            .on(_pointerPrefix + 'move.drag', dragmove)
-            .on(_pointerPrefix + 'up.drag', dragend, true);
+            .on(_pointerPrefix + 'move.drag', pointermove)
+            .on(_pointerPrefix + 'up.drag', pointerup, true);
 
         if (_origin) {
             offset = _origin.apply(_target, arguments);
@@ -94,7 +94,7 @@ export function behaviorDrag() {
         }
 
 
-        function dragmove() {
+        function pointermove() {
             var p = point();
             var dx = p[0] - startOrigin[0];
             var dy = p[1] - startOrigin[1];
@@ -118,7 +118,7 @@ export function behaviorDrag() {
         }
 
 
-        function dragend() {
+        function pointerup() {
             if (started) {
                 _event({ type: 'end' });
 
@@ -147,7 +147,7 @@ export function behaviorDrag() {
 
     function behavior(selection) {
         var matchesSelector = utilPrefixDOMProperty('matchesSelector');
-        var delegate = dragstart;
+        var delegate = pointerdown;
 
         if (_selector) {
             delegate = function() {
@@ -160,7 +160,7 @@ export function behaviorDrag() {
                         : datum && datum.properties && datum.properties.entity;
 
                     if (entity && target[matchesSelector](_selector)) {
-                        return dragstart.call(target, entity);
+                        return pointerdown.call(target, entity);
                     }
                 }
             };

@@ -3,7 +3,7 @@
 
 import { dispatch as d3_dispatch } from 'd3-dispatch';
 import { interpolateZoom } from 'd3-interpolate';
-import { event as d3_event, customEvent as d3_customEvent, select as d3_select, mouse as d3_mouse } from 'd3-selection';
+import { event as d3_event, customEvent as d3_customEvent, mouse as d3_mouse } from 'd3-selection';
 import { interrupt as d3_interrupt } from 'd3-transition';
 import constant from '../../node_modules/d3-zoom/src/constant.js';
 import ZoomEvent from '../../node_modules/d3-zoom/src/event.js';
@@ -70,7 +70,6 @@ export function utilZoomPan() {
   function zoom(selection) {
     selection
         .property('__zoom', defaultTransform)
-        .on('dblclick.zoom', dblclicked)
         .on('pointerdown.zoom', pointerdown)
         .on('pointermove.zoom', pointermove)
         .on('pointerup.zoom pointercancel.zoom', pointerup)
@@ -247,20 +246,6 @@ export function utilZoomPan() {
     }
   }
 
-  function dblclicked() {
-    if (!filter.apply(this, arguments)) return;
-    var t0 = this.__zoom,
-        p0 = d3_mouse(this),
-        p1 = t0.invert(p0),
-        k1 = t0.k * (d3_event.shiftKey ? 0.5 : 2),
-        t1 = constrain(translate(scale(t0, k1), p0, p1), extent.apply(this, arguments), translateExtent);
-
-    d3_event.preventDefault();
-    d3_event.stopImmediatePropagation();
-    if (duration > 0) d3_select(this).transition().duration(duration).call(schedule, t1, p0);
-    else d3_select(this).call(zoom.transform, t1);
-  }
-
   var downPointerIDs = new Set();
 
   function pointerdown() {
@@ -347,13 +332,6 @@ export function utilZoomPan() {
     if (g.touch0) g.touch0[1] = this.__zoom.invert(g.touch0[0]);
     else {
       g.end();
-      // If this was a dbltap, reroute to the (optional) dblclick.zoom handler.
-      if (g.taps === 2) {
-        // This currently never appears to be called but mobile Safari still
-        // seems to get regular dblclick events upon double-tapping.
-        var p = d3_select(this).on('dblclick.zoom');
-        if (p) p.apply(this, arguments);
-      }
     }
   }
 

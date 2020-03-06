@@ -325,8 +325,8 @@ export function modeSelect(context, selectedIDs) {
                 breatheBehavior.restartIfNeeded(context.surface());
             });
 
-        context.surface()
-            .on('dblclick.select', dblclick);
+        context.map().doubleUpHandler()
+            .on('doubleUp.modeSelect', didDoubleUp);
 
 
         selectElements();
@@ -359,7 +359,7 @@ export function modeSelect(context, selectedIDs) {
         }
 
 
-        function dblclick() {
+        function didDoubleUp(loc) {
             if (!context.map().withinEditableZoom()) return;
 
             var target = d3_select(d3_event.target);
@@ -369,7 +369,7 @@ export function modeSelect(context, selectedIDs) {
             if (!entity) return;
 
             if (entity instanceof osmWay && target.classed('target')) {
-                var choice = geoChooseEdge(context.childNodes(entity), context.mouse(), context.projection);
+                var choice = geoChooseEdge(context.childNodes(entity), loc, context.projection);
                 var prev = entity.nodes[choice.index - 1];
                 var next = entity.nodes[choice.index];
 
@@ -378,16 +378,10 @@ export function modeSelect(context, selectedIDs) {
                     t('operations.add.annotation.vertex')
                 );
 
-                d3_event.preventDefault();
-                d3_event.stopPropagation();
-
             } else if (entity.type === 'midpoint') {
                 context.perform(
                     actionAddMidpoint({ loc: entity.loc, edge: entity.edge }, osmNode()),
                     t('operations.add.annotation.vertex'));
-
-                d3_event.preventDefault();
-                d3_event.stopPropagation();
             }
         }
 
@@ -573,9 +567,6 @@ export function modeSelect(context, selectedIDs) {
             .on('redone.select', null);
 
         var surface = context.surface();
-
-        surface
-            .on('dblclick.select', null);
 
         surface
             .selectAll('.selected-member')

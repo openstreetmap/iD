@@ -7,6 +7,7 @@ import { modeSelectData } from '../modes/select_data';
 import { modeSelectNote } from '../modes/select_note';
 import { modeSelectError } from '../modes/select_error';
 import { osmEntity, osmNote, QAItem } from '../osm';
+import { utilArrayIdentical } from '../util/array';
 
 
 export function behaviorSelect(context) {
@@ -136,8 +137,10 @@ export function behaviorSelect(context) {
                     // multiple things already selected, just show the menu...
                     mode.suppressMenu(false).reselect();
                 } else {
-                    // select a single thing..
-                    context.enter(modeSelect(context, [datum.id]).suppressMenu(_suppressMenu));
+                    if (mode.id !== 'select' || !utilArrayIdentical(mode.selectedIDs(), [datum.id])) {
+                        // select a single thing if it's not already selected
+                        context.enter(modeSelect(context, [datum.id]).suppressMenu(_suppressMenu));
+                    }
                 }
 
             } else {
