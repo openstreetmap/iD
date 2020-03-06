@@ -92,7 +92,7 @@ export function behaviorDraw(context) {
                     d3_select(window).on('click.draw-block', null);
                 }, 500);
 
-                click();
+                click(d3_mouse(context.surface().node()));
             }
         }, true);
     }
@@ -121,7 +121,7 @@ export function behaviorDraw(context) {
     // - `mode/drag_node.js`     `doMove()`
     // - `behavior/draw.js`      `click()`
     // - `behavior/draw_way.js`  `move()`
-    function click() {
+    function click(loc) {
         var d = datum();
         var target = d && d.properties && d.properties.entity;
 
@@ -133,7 +133,7 @@ export function behaviorDraw(context) {
 
         } else if (target && target.type === 'way' && (mode.id !== 'add-point' || mode.preset.matchGeometry('vertex'))) {   // Snap to a way
             var choice = geoChooseEdge(
-                context.childNodes(target), context.mouse(), context.projection, context.activeID()
+                context.childNodes(target), loc, context.projection, context.activeID()
             );
             if (choice) {
                 var edge = [target.nodes[choice.index - 1], target.nodes[choice.index]];
@@ -141,12 +141,13 @@ export function behaviorDraw(context) {
                 return;
             }
         } else if (mode.id !== 'add-point' || mode.preset.matchGeometry('point')) {
-            dispatch.call('click', this, context.map().mouseCoordinates(), d);
+            var locLatLng = context.projection.invert(loc);
+            dispatch.call('click', this, locLatLng, d);
         }
 
     }
 
-
+    // treat a spacebar press like a click
     function space() {
         d3_event.preventDefault();
         d3_event.stopPropagation();
@@ -172,7 +173,11 @@ export function behaviorDraw(context) {
             d3_select(window).on('keyup.space-block', null);
         });
 
-        click();
+        // get the current mouse position
+        var loc = context.map().mouse() ||
+            // or the map center if the mouse has never entered the map
+            context.projection(context.map().center());
+        click(loc);
     }
 
 

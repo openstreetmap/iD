@@ -16,30 +16,41 @@ import { utilKeybinding } from '../util';
 
 export function behaviorDrawWay(context, wayID, index, mode, startGraph, baselineGraph) {
 
-    var origWay = context.entity(wayID);
+    var _origWay = context.entity(wayID);
 
-    var annotation = t((origWay.isDegenerate() ?
+    var _annotation = t((_origWay.isDegenerate() ?
         'operations.start.annotation.' :
         'operations.continue.annotation.') + context.geometry(wayID)
     );
 
     var behavior = behaviorDraw(context);
-    behavior.hover().initialNodeID(index ? origWay.nodes[index] :
-        (origWay.isClosed() ? origWay.nodes[origWay.nodes.length - 2] : origWay.nodes[origWay.nodes.length - 1]));
+    behavior.hover().initialNodeID(index ? _origWay.nodes[index] :
+        (_origWay.isClosed() ? _origWay.nodes[_origWay.nodes.length - 2] : _origWay.nodes[_origWay.nodes.length - 1]));
 
     var _tempEdits = 0;
 
-    var end = osmNode({ loc: context.map().mouseCoordinates() });
+    // The osmNode to be placed.
+    // This is temporary and just follows the mouse cursor until an "add" event occurs.
+    var _drawNode;
+
+    function createDrawNode(loc) {
+        // don't make the draw node until we actually need it
+        _drawNode = osmNode({ loc: loc });
+
+        context.pauseChangeDispatch();
+        // Add the drawing node to the graph.
+        // We must make sure to remove this edit later.
+        context.perform(_actionAddDrawNode(_drawNode));
+        _tempEdits++;
+        context.resumeChangeDispatch();
+
+        setActiveElements();
+    }
 
     // Push an annotated state for undo to return back to.
     // We must make sure to remove this edit later.
     context.pauseChangeDispatch();
-    context.perform(actionNoop(), annotation);
-    _tempEdits++;
-
-    // Add the drawing node to the graph.
-    // We must make sure to remove this edit later.
-    context.perform(_actionAddDrawNode());
+    context.perform(actionNoop(), _annotation);
     _tempEdits++;
     context.resumeChangeDispatch();
 
@@ -80,24 +91,28 @@ export function behaviorDrawWay(context, wayID, index, mode, startGraph, baselin
     // - `behavior/draw.js`      `click()`
     // - `behavior/draw_way.js`  `move()`
     function move(datum) {
+
+        var loc = context.map().mouseCoordinates();
+
+        if (!_drawNode) createDrawNode(loc);
+
         context.surface().classed('nope-disabled', d3_event.altKey);
 
         var targetLoc = datum && datum.properties && datum.properties.entity && allowsVertex(datum.properties.entity) && datum.properties.entity.loc;
         var targetNodes = datum && datum.properties && datum.properties.nodes;
-        var loc = context.map().mouseCoordinates();
 
         if (targetLoc) {   // snap to node/vertex - a point target with `.loc`
             loc = targetLoc;
 
         } else if (targetNodes) {   // snap to way - a line target with `.nodes`
-            var choice = geoChooseEdge(targetNodes, context.mouse(), context.projection, end.id);
+            var choice = geoChooseEdge(targetNodes, context.mouse(), context.projection, _drawNode.id);
             if (choice) {
                 loc = choice.loc;
             }
         }
 
-        context.replace(actionMoveNode(end.id, loc));
-        end = context.entity(end.id);
+        context.replace(actionMoveNode(_drawNode.id, loc));
+        _drawNode = context.entity(_drawNode.id);
         checkGeometry(false);
     }
 
@@ -107,7 +122,7 @@ export function behaviorDrawWay(context, wayID, index, mode, startGraph, baselin
     // `finishDraw` - Only checks the relevant line segments if finishing drawing
     function checkGeometry(finishDraw) {
         var nopeDisabled = context.surface().classed('nope-disabled');
-        var isInvalid = isInvalidGeometry(end, context.graph(), finishDraw);
+        var isInvalid = _drawNode ? isInvalidGeometry(_drawNode, context.graph(), finishDraw) : false;
 
         if (nopeDisabled) {
             context.surface()
@@ -128,7 +143,7 @@ export function behaviorDrawWay(context, wayID, index, mode, startGraph, baselin
             var parent = parents[i];
             var nodes = graph.childNodes(parent).slice();  // shallow copy
 
-            if (origWay.isClosed()) { // Check if Area
+            if (_origWay.isClosed()) { // Check if Area
                 if (finishDraw) {
                     if (nodes.length < 3) return false;
                     nodes.splice(-2, 1);
@@ -172,7 +187,9 @@ export function behaviorDrawWay(context, wayID, index, mode, startGraph, baselin
 
 
     function setActiveElements() {
-        context.surface().selectAll('.' + end.id)
+        if (!_drawNode) return;
+
+        context.surface().selectAll('.' + _drawNode.id)
             .classed('active', true);
     }
 
@@ -243,20 +260,20 @@ export function behaviorDrawWay(context, wayID, index, mode, startGraph, baselin
     };
 
 
-    function _actionAddDrawNode() {
+    function _actionAddDrawNode(drawNode) {
         return function(graph) {
             return graph
-                .replace(end)
-                .replace(origWay.addNode(end.id, index));
+                .replace(drawNode)
+                .replace(_origWay.addNode(drawNode.id, index));
         };
     }
 
 
-    function _actionReplaceDrawNode(newNode) {
+    function _actionReplaceDrawNode(drawNode, newNode) {
         return function(graph) {
             return graph
-                .replace(origWay.addNode(newNode.id, index))
-                .remove(end);
+                .replace(_origWay.addNode(newNode.id, index))
+                .remove(drawNode);
         };
     }
 
@@ -267,13 +284,19 @@ export function behaviorDrawWay(context, wayID, index, mode, startGraph, baselin
             return;   // can't click here
         }
 
+        if (!_drawNode) createDrawNode(loc);
+
+        // always move the node to the final loc in case move wasn't consistently called (e.g. on touch devices)
+        context.replace(actionMoveNode(_drawNode.id, loc));
+        _drawNode = context.entity(_drawNode.id);
+
         context.pauseChangeDispatch();
         context.pop(_tempEdits);
         _tempEdits = 0;
 
         context.perform(
-            _actionAddDrawNode(),
-            annotation
+            _actionAddDrawNode(_drawNode),
+            _annotation
         );
 
         context.resumeChangeDispatch();
@@ -288,14 +311,16 @@ export function behaviorDrawWay(context, wayID, index, mode, startGraph, baselin
             return;   // can't click here
         }
 
+        if (!_drawNode) createDrawNode();
+
         context.pauseChangeDispatch();
         context.pop(_tempEdits);
         _tempEdits = 0;
 
         context.perform(
-            _actionAddDrawNode(),
-            actionAddMidpoint({ loc: loc, edge: edge }, end),
-            annotation
+            _actionAddDrawNode(_drawNode),
+            actionAddMidpoint({ loc: loc, edge: edge }, _drawNode),
+            _annotation
         );
 
         context.resumeChangeDispatch();
@@ -310,13 +335,15 @@ export function behaviorDrawWay(context, wayID, index, mode, startGraph, baselin
             return;   // can't click here
         }
 
+        if (!_drawNode) createDrawNode();
+
         context.pauseChangeDispatch();
         context.pop(_tempEdits);
         _tempEdits = 0;
 
         context.perform(
-            _actionReplaceDrawNode(node),
-            annotation
+            _actionReplaceDrawNode(_drawNode, node),
+            _annotation
         );
 
         context.resumeChangeDispatch();
@@ -378,7 +405,7 @@ export function behaviorDrawWay(context, wayID, index, mode, startGraph, baselin
 
 
     drawWay.activeID = function() {
-        if (!arguments.length) return end.id;
+        if (!arguments.length) return _drawNode && _drawNode.id;
         // no assign
         return drawWay;
     };
