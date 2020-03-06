@@ -1,3 +1,5 @@
+import { dispatch as d3_dispatch } from 'd3-dispatch';
+
 import {
     event as d3_event,
     select as d3_select
@@ -12,9 +14,12 @@ import { geoChooseEdge, geoHasSelfIntersections } from '../geo';
 import { modeBrowse } from '../modes/browse';
 import { modeSelect } from '../modes/select';
 import { osmNode } from '../osm/node';
+import { utilRebind } from '../util/rebind';
 import { utilKeybinding } from '../util';
 
 export function behaviorDrawWay(context, wayID, index, mode, startGraph, baselineGraph) {
+
+    var dispatch = d3_dispatch('rejectedSelfIntersection');
 
     var _origWay = context.entity(wayID);
 
@@ -281,6 +286,7 @@ export function behaviorDrawWay(context, wayID, index, mode, startGraph, baselin
     // Accept the current position of the drawing node and continue drawing.
     drawWay.add = function(loc, d) {
         if ((d && d.properties && d.properties.nope) || context.surface().classed('nope')) {
+            dispatch.call('rejectedSelfIntersection', this);
             return;   // can't click here
         }
 
@@ -308,6 +314,7 @@ export function behaviorDrawWay(context, wayID, index, mode, startGraph, baselin
     // Connect the way to an existing way.
     drawWay.addWay = function(loc, edge, d) {
         if ((d && d.properties && d.properties.nope) || context.surface().classed('nope')) {
+            dispatch.call('rejectedSelfIntersection', this);
             return;   // can't click here
         }
 
@@ -332,6 +339,7 @@ export function behaviorDrawWay(context, wayID, index, mode, startGraph, baselin
     // Connect the way to an existing node and continue drawing.
     drawWay.addNode = function(node, d) {
         if ((d && d.properties && d.properties.nope) || context.surface().classed('nope')) {
+            dispatch.call('rejectedSelfIntersection', this);
             return;   // can't click here
         }
 
@@ -417,5 +425,5 @@ export function behaviorDrawWay(context, wayID, index, mode, startGraph, baselin
     };
 
 
-    return drawWay;
+    return utilRebind(drawWay, dispatch, 'on');
 }

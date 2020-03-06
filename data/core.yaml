@@ -837,6 +837,10 @@ en:
     out: Zoom Out
   cannot_zoom: "Cannot zoom out further in current mode."
   full_screen: Toggle Full Screen
+  self_intersection:
+    error:
+      lines: Lines cannot cross over themselves.
+      areas: Areas cannot cross over themselves.
   QA:
     osmose:
       title: Osmose Issue
