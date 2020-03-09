@@ -241,6 +241,11 @@ export function modeDragNode(context) {
                         { relation: context.presets().item('type/restriction').name() }
                     ))();
             }
+        } else if (isInvalid) {
+            var errorID = isInvalid === 'line' ? 'lines' : 'areas';
+            uiFlash()
+                .duration(3000)
+                .text(t('self_intersection.error.' + errorID))();
         } else {
             if (nope) {   // about to un-nope, remove hint
                 uiFlash()
@@ -309,7 +314,7 @@ export function modeDragNode(context) {
                     if (nodes.find(function(n) { return n.id === entity.id; })) {
                         activeIndex = k;
                         if (geoHasSelfIntersections(nodes, entity.id)) {
-                            return true;
+                            return 'multipolygonMember';
                         }
                     }
                     rings[k].coords = nodes.map(function(n) { return n.loc; });
@@ -321,7 +326,7 @@ export function modeDragNode(context) {
 
                     // make sure active ring doesnt cross passive rings
                     if (geoHasLineIntersections(rings[activeIndex].nodes, rings[k].nodes, entity.id)) {
-                        return true;
+                        return 'multipolygonRing';
                     }
                 }
             }
@@ -332,7 +337,7 @@ export function modeDragNode(context) {
             if (activeIndex === null) {
                 nodes = parent.nodes.map(function(nodeID) { return graph.entity(nodeID); });
                 if (nodes.length && geoHasSelfIntersections(nodes, entity.id)) {
-                    return true;
+                    return parent.geometry(graph);
                 }
             }
 
