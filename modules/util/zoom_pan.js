@@ -35,10 +35,6 @@ function defaultWheelDelta() {
   return -d3_event.deltaY * (d3_event.deltaMode === 1 ? 0.05 : d3_event.deltaMode ? 1 : 0.002);
 }
 
-function defaultTouchable() {
-  return navigator.maxTouchPoints || ('ontouchstart' in this);
-}
-
 function defaultConstrain(transform, extent, translateExtent) {
   var dx0 = transform.invertX(extent[0][0]) - translateExtent[0][0],
       dx1 = transform.invertX(extent[1][0]) - translateExtent[1][0],
@@ -55,7 +51,6 @@ export function utilZoomPan() {
       extent = defaultExtent,
       constrain = defaultConstrain,
       wheelDelta = defaultWheelDelta,
-      touchable = defaultTouchable,
       scaleExtent = [0, Infinity],
       translateExtent = [[-Infinity, -Infinity], [Infinity, Infinity]],
       duration = 250,
@@ -341,10 +336,6 @@ export function utilZoomPan() {
 
   zoom.filter = function(_) {
     return arguments.length ? (filter = typeof _ === 'function' ? _ : constant(!!_), zoom) : filter;
-  };
-
-  zoom.touchable = function(_) {
-    return arguments.length ? (touchable = typeof _ === 'function' ? _ : constant(!!_), zoom) : touchable;
   };
 
   zoom.extent = function(_) {
