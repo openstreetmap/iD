@@ -54,6 +54,15 @@ export function uiInit(context) {
 
 
     function render(container) {
+
+        container
+            // disable double-tap-to-zoom on touchscreens
+            .on('click.ui', eventCancel)
+            // disable pinch-to-zoom in Safari
+            .on('gesturestart.ui', eventCancel)
+            .on('gesturechange.ui', eventCancel)
+            .on('gestureend.ui', eventCancel);
+
         container
             .attr('dir', textDirection);
 
@@ -284,9 +293,6 @@ export function uiInit(context) {
         };
 
         d3_select(window)
-            .on('gesturestart.editor', eventCancel)
-            .on('gesturechange.editor', eventCancel)
-            .on('gestureend.editor', eventCancel)
             .on('resize.editor', ui.onResize);
 
 
