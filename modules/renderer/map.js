@@ -229,37 +229,37 @@ export function rendererMap(context) {
         });
 
         context.on('enter.map',  function() {
-            if (map.editableDataEnabled(true /* skip zoom check */) && !_isTransformed) {
-                // redraw immediately any objects affected by a change in selectedIDs.
-                var graph = context.graph();
-                var selectedAndParents = {};
-                context.selectedIDs().forEach(function(id) {
-                    var entity = graph.hasEntity(id);
-                    if (entity) {
-                        selectedAndParents[entity.id] = entity;
-                        if (entity.type === 'node') {
-                            graph.parentWays(entity).forEach(function(parent) {
-                                selectedAndParents[parent.id] = parent;
-                            });
-                        }
+            if (!map.editableDataEnabled(true /* skip zoom check */)) return;
+
+            // redraw immediately any objects affected by a change in selectedIDs.
+            var graph = context.graph();
+            var selectedAndParents = {};
+            context.selectedIDs().forEach(function(id) {
+                var entity = graph.hasEntity(id);
+                if (entity) {
+                    selectedAndParents[entity.id] = entity;
+                    if (entity.type === 'node') {
+                        graph.parentWays(entity).forEach(function(parent) {
+                            selectedAndParents[parent.id] = parent;
+                        });
                     }
-                });
-                var data = Object.values(selectedAndParents);
-                var filter = function(d) { return d.id in selectedAndParents; };
+                }
+            });
+            var data = Object.values(selectedAndParents);
+            var filter = function(d) { return d.id in selectedAndParents; };
 
-                data = context.features().filter(data, graph);
+            data = context.features().filter(data, graph);
 
-                surface
-                    .call(drawVertices.drawSelected, graph, map.extent())
-                    .call(drawLines, graph, data, filter)
-                    .call(drawAreas, graph, data, filter)
-                    .call(drawMidpoints, graph, data, filter, map.trimmedExtent());
+            surface
+                .call(drawVertices.drawSelected, graph, map.extent())
+                .call(drawLines, graph, data, filter)
+                .call(drawAreas, graph, data, filter)
+                .call(drawMidpoints, graph, data, filter, map.trimmedExtent());
 
-                dispatch.call('drawn', this, { full: false });
+            dispatch.call('drawn', this, { full: false });
 
-                // redraw everything else later
-                scheduleRedraw();
-            }
+            // redraw everything else later
+            scheduleRedraw();
         });
 
         map.dimensions(utilGetDimensions(selection));
