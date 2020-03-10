@@ -56,8 +56,16 @@ export function uiInit(context) {
     function render(container) {
 
         container
-            // disable double-tap-to-zoom on touchscreens
-            .on('click.ui', eventCancel)
+            .on('click.ui', function() {
+                var isTargetingLabel = d3_event.composedPath().some(function(node) {
+                    return node.nodeName === 'LABEL';
+                });
+                // clicking a <label> affects its <input> by default so don't prevent that
+                if (isTargetingLabel) return;
+
+                // disable double-tap-to-zoom on touchscreens
+                d3_event.preventDefault();
+            })
             // disable pinch-to-zoom in Safari
             .on('gesturestart.ui', eventCancel)
             .on('gesturechange.ui', eventCancel)
