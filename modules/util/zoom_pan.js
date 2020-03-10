@@ -5,9 +5,10 @@ import { dispatch as d3_dispatch } from 'd3-dispatch';
 import { interpolateZoom } from 'd3-interpolate';
 import { event as d3_event, customEvent as d3_customEvent, mouse as d3_mouse } from 'd3-selection';
 import { interrupt as d3_interrupt } from 'd3-transition';
-import constant from '../../node_modules/d3-zoom/src/constant.js';
 import ZoomEvent from '../../node_modules/d3-zoom/src/event.js';
 import { Transform, identity } from '../../node_modules/d3-zoom/src/transform.js';
+
+import { utilFunctor } from './util';
 
 // Ignore right-click, since that should open the context menu.
 function defaultFilter() {
@@ -317,15 +318,15 @@ export function utilZoomPan() {
   }
 
   zoom.wheelDelta = function(_) {
-    return arguments.length ? (wheelDelta = typeof _ === 'function' ? _ : constant(+_), zoom) : wheelDelta;
+    return arguments.length ? (wheelDelta = utilFunctor(+_), zoom) : wheelDelta;
   };
 
   zoom.filter = function(_) {
-    return arguments.length ? (filter = typeof _ === 'function' ? _ : constant(!!_), zoom) : filter;
+    return arguments.length ? (filter = utilFunctor(!!_), zoom) : filter;
   };
 
   zoom.extent = function(_) {
-    return arguments.length ? (extent = typeof _ === 'function' ? _ : constant([[+_[0][0], +_[0][1]], [+_[1][0], +_[1][1]]]), zoom) : extent;
+    return arguments.length ? (extent = utilFunctor([[+_[0][0], +_[0][1]], [+_[1][0], +_[1][1]]]), zoom) : extent;
   };
 
   zoom.scaleExtent = function(_) {
