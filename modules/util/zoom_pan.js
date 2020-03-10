@@ -182,8 +182,8 @@ export function utilZoomPan() {
     },
     zoom: function(key, transform) {
       if (this.mouse && key !== 'mouse') this.mouse[1] = transform.invert(this.mouse[0]);
-      if (this.touch0 && key !== 'touch') this.touch0[1] = transform.invert(this.touch0[0]);
-      if (this.touch1 && key !== 'touch') this.touch1[1] = transform.invert(this.touch1[0]);
+      if (this.pointer0 && key !== 'touch') this.pointer0[1] = transform.invert(this.pointer0[0]);
+      if (this.pointer1 && key !== 'touch') this.pointer1[1] = transform.invert(this.pointer1[0]);
       this.that.__zoom = transform;
       this.emit('zoom');
       return this;
@@ -250,12 +250,12 @@ export function utilZoomPan() {
     d3_event.stopImmediatePropagation();
     var loc = d3_mouse(this);
     var p = [loc, this.__zoom.invert(loc), d3_event.pointerId];
-    if (!g.touch0) {
-       g.touch0 = p;
+    if (!g.pointer0) {
+       g.pointer0 = p;
        started = true;
 
-    } else if (!g.touch1 && g.touch0[2] !== p[2]) {
-       g.touch1 = p;
+    } else if (!g.pointer1 && g.pointer0[2] !== p[2]) {
+       g.pointer1 = p;
     }
 
     if (started) {
@@ -267,32 +267,41 @@ export function utilZoomPan() {
   function pointermove() {
     if (!this.__zooming) return;
 
-    // don't pan if no pointer is down, e.g. after a down mouse was moved off the map and released
-    if ('buttons' in d3_event && !d3_event.buttons) return;
-
-    var loc = d3_mouse(this);
-
     var g = gesture(this, arguments);
-    var t, p, l;
+
+    var isPointer0 = g.pointer0 && g.pointer0[2] === d3_event.pointerId;
+    var isPointer1 = !isPointer0 && g.pointer1 && g.pointer1[2] === d3_event.pointerId;
+
+    if ((isPointer0 || isPointer1) && 'buttons' in d3_event && !d3_event.buttons) {
+      // The pointer went up without ending the gesture somehow, e.g.
+      // a down mouse was moved off the map and released. End it here.
+      if (g.pointer0) downPointerIDs.delete(g.pointer0[2]);
+      if (g.pointer1) downPointerIDs.delete(g.pointer1[2]);
+      g.end();
+      return;
+    }
 
     d3_event.preventDefault();
     d3_event.stopImmediatePropagation();
 
-    if (g.touch0 && g.touch0[2] === d3_event.pointerId) g.touch0[0] = loc;
-    else if (g.touch1 && g.touch1[2] === d3_event.pointerId) g.touch1[0] = loc;
+    var loc = d3_mouse(this);
+    var t, p, l;
+
+    if (isPointer0) g.pointer0[0] = loc;
+    else if (isPointer1) g.pointer1[0] = loc;
 
     t = g.that.__zoom;
-    if (g.touch1) {
-      var p0 = g.touch0[0], l0 = g.touch0[1],
-          p1 = g.touch1[0], l1 = g.touch1[1],
+    if (g.pointer1) {
+      var p0 = g.pointer0[0], l0 = g.pointer0[1],
+          p1 = g.pointer1[0], l1 = g.pointer1[1],
           dp = (dp = p1[0] - p0[0]) * dp + (dp = p1[1] - p0[1]) * dp,
           dl = (dl = l1[0] - l0[0]) * dl + (dl = l1[1] - l0[1]) * dl;
       t = scale(t, Math.sqrt(dp / dl));
       p = [(p0[0] + p1[0]) / 2, (p0[1] + p1[1]) / 2];
       l = [(l0[0] + l1[0]) / 2, (l0[1] + l1[1]) / 2];
-    } else if (g.touch0) {
-      p = g.touch0[0];
-      l = g.touch0[1];
+    } else if (g.pointer0) {
+      p = g.pointer0[0];
+      l = g.pointer0[1];
     }
     else return;
     g.zoom('touch', constrain(translate(t, p, l), g.extent, translateExtent));
@@ -307,14 +316,14 @@ export function utilZoomPan() {
 
     d3_event.stopImmediatePropagation();
 
-    if (g.touch0 && g.touch0[2] === d3_event.pointerId) delete g.touch0;
-    else if (g.touch1 && g.touch1[2] === d3_event.pointerId) delete g.touch1;
+    if (g.pointer0 && g.pointer0[2] === d3_event.pointerId) delete g.pointer0;
+    else if (g.pointer1 && g.pointer1[2] === d3_event.pointerId) delete g.pointer1;
 
-    if (g.touch1 && !g.touch0) {
-      g.touch0 = g.touch1;
-      delete g.touch1;
+    if (g.pointer1 && !g.pointer0) {
+      g.pointer0 = g.pointer1;
+      delete g.pointer1;
     }
-    if (g.touch0) g.touch0[1] = this.__zoom.invert(g.touch0[0]);
+    if (g.pointer0) g.pointer0[1] = this.__zoom.invert(g.pointer0[0]);
     else {
       g.end();
     }
