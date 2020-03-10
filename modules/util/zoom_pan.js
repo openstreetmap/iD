@@ -267,6 +267,9 @@ export function utilZoomPan() {
   function pointermove() {
     if (!this.__zooming) return;
 
+    // don't pan if no pointer is down, e.g. after a down mouse was moved off the map and released
+    if ('buttons' in d3_event && !d3_event.buttons) return;
+
     var loc = d3_mouse(this);
 
     var g = gesture(this, arguments);
