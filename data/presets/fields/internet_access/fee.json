@@ -7,7 +7,6 @@
             "yes": "Yes",
             "no": "No",
             "customers": "For not-facility-customers only",
-        }
     "prerequisiteTag": {
         "key": "internet_access",
         "valueNot": "no"
