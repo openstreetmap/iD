@@ -193,7 +193,7 @@ var jsonparsers = {
     node: function nodeData(obj, uid) {
         return new osmNode({
             id:  uid,
-            visible: true,
+            visible: typeof obj.visible === 'boolean' ? obj.visible : true,
             version: obj.version.toString(),
             changeset: obj.changeset.toString(),
             timestamp: obj.timestamp,
@@ -207,7 +207,7 @@ var jsonparsers = {
     way: function wayData(obj, uid) {
         return new osmWay({
             id:  uid,
-            visible: true,
+            visible: typeof obj.visible === 'boolean' ? obj.visible : true,
             version: obj.version.toString(),
             changeset: obj.changeset.toString(),
             timestamp: obj.timestamp,
@@ -221,7 +221,7 @@ var jsonparsers = {
     relation: function relationData(obj, uid) {
         return new osmRelation({
             id:  uid,
-            visible: true,
+            visible: typeof obj.visible === 'boolean' ? obj.visible : true,
             version: obj.version.toString(),
             changeset: obj.changeset.toString(),
             timestamp: obj.timestamp,
