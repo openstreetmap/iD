@@ -149,6 +149,10 @@ export function rendererMap(context) {
             });
 
         selection
+            .on('wheel.map mousewheel.map', function() {
+                // disable swipe-to-navigate browser pages on trackpad/magic mouse – #5552
+                d3_event.preventDefault();
+            })
             .call(_zoomerPanner)
             .call(_zoomerPanner.transform, projection.transform())
             .on('dblclick.zoom', null); // override d3-zoom dblclick handling
