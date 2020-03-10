@@ -56,11 +56,7 @@ export function utilZoomPan() {
       duration = 250,
       interpolate = interpolateZoom,
       listeners = d3_dispatch('start', 'zoom', 'end'),
-      touchstarting,
-      touchending,
-      touchDelay = 500,
-      wheelDelay = 150,
-      clickDistance2 = 0;
+      wheelDelay = 150;
 
   function zoom(selection) {
     selection
@@ -173,7 +169,6 @@ export function utilZoomPan() {
     this.args = args;
     this.active = 0;
     this.extent = extent.apply(that, args);
-    this.taps = 0;
   }
 
   Gesture.prototype = {
@@ -257,17 +252,12 @@ export function utilZoomPan() {
     if (!g.touch0) {
        g.touch0 = p;
        started = true;
-       g.taps = 1 + !!touchstarting;
 
     } else if (!g.touch1 && g.touch0[2] !== p[2]) {
        g.touch1 = p;
-       g.taps = 0;
     }
 
-    if (touchstarting) touchstarting = clearTimeout(touchstarting);
-
     if (started) {
-      if (g.taps < 2) touchstarting = setTimeout(function() { touchstarting = null; }, touchDelay);
       d3_interrupt(this);
       g.start();
     }
@@ -283,8 +273,6 @@ export function utilZoomPan() {
 
     d3_event.preventDefault();
     d3_event.stopImmediatePropagation();
-    if (touchstarting) touchstarting = clearTimeout(touchstarting);
-    g.taps = 0;
 
     if (g.touch0 && g.touch0[2] === d3_event.pointerId) g.touch0[0] = loc;
     else if (g.touch1 && g.touch1[2] === d3_event.pointerId) g.touch1[0] = loc;
@@ -314,8 +302,6 @@ export function utilZoomPan() {
     var g = gesture(this, arguments);
 
     d3_event.stopImmediatePropagation();
-    if (touchending) clearTimeout(touchending);
-    touchending = setTimeout(function() { touchending = null; }, touchDelay);
 
     if (g.touch0 && g.touch0[2] === d3_event.pointerId) delete g.touch0;
     else if (g.touch1 && g.touch1[2] === d3_event.pointerId) delete g.touch1;
@@ -365,10 +351,6 @@ export function utilZoomPan() {
   zoom.on = function() {
     var value = listeners.on.apply(listeners, arguments);
     return value === listeners ? zoom : value;
-  };
-
-  zoom.clickDistance = function(_) {
-    return arguments.length ? (clickDistance2 = (_ = +_) * _, zoom) : Math.sqrt(clickDistance2);
   };
 
   return zoom;
