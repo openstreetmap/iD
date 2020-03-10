@@ -366,6 +366,7 @@ export function behaviorDrawWay(context, wayID, index, mode, startGraph, baselin
     drawWay.finish = function() {
         checkGeometry(true);   // finishDraw = true
         if (context.surface().classed('nope')) {
+            dispatch.call('rejectedSelfIntersection', this);
             return;   // can't click here
         }
 
