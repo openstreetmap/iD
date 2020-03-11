@@ -6137,8 +6137,8 @@ en:
         terms: '<translate with synonyms or related terms for ''Gasometer'', separated by commas>'
       man_made/groyne:
         # man_made=groyne
-        name: Groyne
-        terms: '<translate with synonyms or related terms for ''Groyne'', separated by commas>'
+        name: Groin
+        terms: '<translate with synonyms or related terms for ''Groin'', separated by commas>'
       man_made/lighthouse:
         # man_made=lighthouse
         name: Lighthouse
