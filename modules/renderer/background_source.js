@@ -1,4 +1,4 @@
-import { geoArea as d3_geoArea, geoMercatorRaw as d3_geoMercatorRaw } from 'd3-geo';
+import { geoMercatorRaw as d3_geoMercatorRaw } from 'd3-geo';
 import { json as d3_json } from 'd3-fetch';
 
 import { t } from '../util/locale';
@@ -72,9 +72,7 @@ export function rendererBackgroundSource(data) {
 
 
     source.area = function() {
-        if (!data.polygon) return Number.MAX_VALUE;  // worldwide
-        var area = d3_geoArea({ type: 'MultiPolygon', coordinates: [ data.polygon ] });
-        return isNaN(area) ? 0 : area;
+        return data.area || Number.MAX_VALUE;
     };
 
 
