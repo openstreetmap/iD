@@ -49,7 +49,7 @@ describe('iD.uiSectionRawTagEditor', function() {
     });
 
     it('removes tags when clicking the remove button', function (done) {
-        taglist.on('change', function(tags) {
+        taglist.on('change', function(entityIDs, tags) {
             expect(tags).to.eql({highway: undefined});
             done();
         });
