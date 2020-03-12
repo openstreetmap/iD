@@ -8,9 +8,7 @@ import whichPolygon from 'which-polygon';
 import { geoExtent, geoMetersToOffset, geoOffsetToMeters} from '../geo';
 import { rendererBackgroundSource } from './background_source';
 import { rendererTileLayer } from './tile_layer';
-import { utilQsString, utilStringQs } from '../util';
-import { utilDetect } from '../util/detect';
-import { utilRebind } from '../util/rebind';
+import { utilAesDecrypt, utilDetect, utilQsString, utilStringQs, utilRebind } from '../util';
 
 
 let _imageryIndex = null;
@@ -589,6 +587,11 @@ function preprocessSources(sources) {
     'EPSG:3785': true
   };
 
+  const apikeys = {
+    'Maxar-Premium': '2ac35d3bc99b64243066ef6888846358386da6cadbe0de9dbaf6ce8c17dae8d532d0d46f',
+    'Maxar-Standard': '7bc70b61c29b34243064bd6f818463583262a6ca8ae78b9db9a4cf8b46d9ed8261d08168'
+  };
+
 
   let keepImagery = [];
   sources.forEach(source => {
@@ -603,13 +606,9 @@ function preprocessSources(sources) {
       locationSet: source.locationSet
     };
 
-    // Maxar sources
-    if (source.id === 'Maxar-Premium') {
-      im.template = '7586487389962e3f6e31ab2ed8ca321f2f3fe2cf87f1dedce8fc918b4692efd86fcd816ab8a35303effb1be9abe39b1cce3fe6db2c740044364ae68560822c88373d2c784325baf4e1fa007c6dbedab4cea3fa0dd86ee0ae4feeef032d33dcac28e4b16c90d55a42087c6b66526423ea1b4cc7e63c613940eb1c60f48270060bf41c5fcb6a628985ebe6801e9e71f041cc9f8df06b0345600376663e7dc1cdbc7df16876d8b5d006ed5782e6af4bfe2ff5a292';
-      im.encrypted = true;
-    } else if (source.id === 'Maxar-Standard') {
-      im.template = '7586487389962e3f6e31ab2ed8ca321f2f3fe2cf87f1dedce8fc918b4692efd86fcd816ab8a35303effb1be9abe39b1cce3fe6db2c740044364ae68560822c88373d2c784325baf4e1fa007c6dbedab4cea3fa0dd86ee0ae4feeef032d33dcac28e4b16c90d55a42087c6b66526423ea1b4cc7e63c613940eb1c60f48270060bf41c5fcb6a628985ebe6801e9e71f010c8c9d7fb6b534560012461377dc1cdb672f16827dfe0d005bf5685b7ac4ea97cf5f795';
-      im.encrypted = true;
+    // decrypt api keys
+    if (apikeys[source.id]) {
+      im.apikey = utilAesDecrypt(apikeys[source.id]);
     }
 
     // A few sources support 512px tiles

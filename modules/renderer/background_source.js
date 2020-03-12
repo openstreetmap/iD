@@ -3,7 +3,6 @@ import { json as d3_json } from 'd3-fetch';
 
 import { t } from '../util/locale';
 import { geoExtent, geoSphericalDistance } from '../geo';
-import { utilAesDecrypt } from '../util/aes';
 import { utilDetect } from '../util/detect';
 
 
@@ -34,7 +33,7 @@ export function rendererBackgroundSource(data) {
     var name = source.name;
     var description = source.description;
     var best = !!source.best;
-    var template = source.encrypted ? utilAesDecrypt(source.template) : source.template;
+    var template = source.template;
 
     source.tileSize = data.tileSize || 256;
     source.zoomExtent = data.zoomExtent || [0, 22];
@@ -81,14 +80,16 @@ export function rendererBackgroundSource(data) {
     };
 
 
-    source.template = function(_) {
+    source.template = function(val) {
         if (!arguments.length) return template;
-        if (source.id === 'custom') template = _;
+        if (source.id === 'custom') template = val;
         return source;
     };
 
 
     source.url = function(coord) {
+        var result = template;
+
         if (this.type === 'wms') {
             var tileToProjectedCoords = (function(x, y, z) {
                 //polyfill for IE11, PhantomJS
@@ -120,7 +121,8 @@ export function rendererBackgroundSource(data) {
             var projection = this.projection;
             var minXmaxY = tileToProjectedCoords(coord[0], coord[1], coord[2]);
             var maxXminY = tileToProjectedCoords(coord[0]+1, coord[1]+1, coord[2]);
-            return template.replace(/\{(\w+)\}/g, function (token, key) {
+
+            result = result.replace(/\{(\w+)\}/g, function (token, key) {
               switch (key) {
                 case 'width':
                 case 'height':
@@ -143,28 +145,40 @@ export function rendererBackgroundSource(data) {
                   return token;
               }
             });
+
+        } else if (this.type === 'tms') {
+            result = result
+                .replace('{x}', coord[0])
+                .replace('{y}', coord[1])
+                // TMS-flipped y coordinate
+                .replace(/\{[t-]y\}/, Math.pow(2, coord[2]) - coord[1] - 1)
+                .replace(/\{z(oom)?\}/, coord[2]);
+
+        } else if (this.type === 'bing') {
+            result = result
+                .replace('{u}', function() {
+                    var u = '';
+                    for (var zoom = coord[2]; zoom > 0; zoom--) {
+                        var b = 0;
+                        var mask = 1 << (zoom - 1);
+                        if ((coord[0] & mask) !== 0) b++;
+                        if ((coord[1] & mask) !== 0) b += 2;
+                        u += b.toString();
+                    }
+                    return u;
+                });
+
         }
-        return template
-            .replace('{x}', coord[0])
-            .replace('{y}', coord[1])
-            // TMS-flipped y coordinate
-            .replace(/\{[t-]y\}/, Math.pow(2, coord[2]) - coord[1] - 1)
-            .replace(/\{z(oom)?\}/, coord[2])
+
+        result = result
+            .replace('{apikey}', (this.apikey || ''))
             .replace(/\{switch:([^}]+)\}/, function(s, r) {
                 var subdomains = r.split(',');
                 return subdomains[(coord[0] + coord[1]) % subdomains.length];
-            })
-            .replace('{u}', function() {
-                var u = '';
-                for (var zoom = coord[2]; zoom > 0; zoom--) {
-                    var b = 0;
-                    var mask = 1 << (zoom - 1);
-                    if ((coord[0] & mask) !== 0) b++;
-                    if ((coord[1] & mask) !== 0) b += 2;
-                    u += b.toString();
-                }
-                return u;
             });
+
+
+        return result;
     };
 
 
