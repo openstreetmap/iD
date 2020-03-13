@@ -490,7 +490,7 @@ rendererBackgroundSource.Esri = function(data) {
 
 
 rendererBackgroundSource.None = function() {
-    var source = rendererBackgroundSource({ id: 'none', template: '' });
+    var source = rendererBackgroundSource({ id: 'none', template: '', isGlobal: true });
 
 
     source.name = function() {
@@ -513,7 +513,7 @@ rendererBackgroundSource.None = function() {
 
 
 rendererBackgroundSource.Custom = function(template) {
-    var source = rendererBackgroundSource({ id: 'custom', template: template });
+    var source = rendererBackgroundSource({ id: 'custom', template: template, isGlobal: true });
 
 
     source.name = function() {

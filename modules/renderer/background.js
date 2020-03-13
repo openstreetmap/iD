@@ -284,8 +284,9 @@ export function rendererBackground(context) {
     const currSource = baseLayer.source();
 
     return _imageryIndex.backgrounds.filter(source => {
+      if (source.isGlobal) return true;                          // always include imagery with worldwide coverage
       if (includeCurrent && currSource === source) return true;  // optionally include the current imagery
-      if (zoom && zoom < 6) return source.isGlobal;              // optionally exclude local imagery at low zooms
+      if (zoom && zoom < 6) return false;                        // optionally exclude local imagery at low zooms
       return visible[source.id];                                 // include imagery visible in given extent
     });
   };
