@@ -57,11 +57,14 @@ export function uiInit(context) {
 
         container
             .on('click.ui', function() {
-                var isTargetingLabel = d3_event.composedPath().some(function(node) {
-                    return node.nodeName === 'LABEL';
+                // some targets have default click events we don't want to override
+                var isOkayTarget = d3_event.composedPath().some(function(node) {
+                    // clicking <label> affects its <input> by default
+                    return node.nodeName === 'LABEL' ||
+                        // clicking <a> opens a hyperlink by default
+                        node.nodeName === 'A';
                 });
-                // clicking a <label> affects its <input> by default so don't prevent that
-                if (isTargetingLabel) return;
+                if (isOkayTarget) return;
 
                 // disable double-tap-to-zoom on touchscreens
                 d3_event.preventDefault();
