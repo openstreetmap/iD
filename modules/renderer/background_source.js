@@ -135,8 +135,8 @@ export function rendererBackgroundSource(data) {
                 }
             });
 
-            var tileSize = this.tileSize;
-            var projection = this.projection;
+            var tileSize = source.tileSize;
+            var projection = source.projection;
             var minXmaxY = tileToProjectedCoords(coord[0], coord[1], coord[2]);
             var maxXminY = tileToProjectedCoords(coord[0]+1, coord[1]+1, coord[2]);
 
@@ -189,7 +189,7 @@ export function rendererBackgroundSource(data) {
 
         // these apply to any type..
         result = result
-            .replace('{apikey}', (this.apikey || ''))
+            .replace('{apikey}', (source.apikey || ''))
             .replace(/\{switch:([^}]+)\}/, function(s, r) {
                 var subdomains = r.split(',');
                 return subdomains[(coord[0] + coord[1]) % subdomains.length];
