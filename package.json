@@ -111,14 +111,6 @@
     "svg-sprite": "1.5.0",
     "uglify-js": "~3.8.0"
   },
-  "greenkeeper": {
-    "label": "chore-greenkeeper",
-    "ignore": [
-      "object-inspect",
-      "pannellum",
-      "sinon"
-    ]
-  },
   "engines": {
     "node": ">=10"
   }
