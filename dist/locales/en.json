@@ -3236,6 +3236,9 @@
                 "disused/railway": {
                     "label": "Type"
                 },
+                "disused/shop": {
+                    "label": "Type"
+                },
                 "dock": {
                     "label": "Type"
                 },
@@ -6658,6 +6661,9 @@
                 },
                 "disused/railway": {
                     "name": "Disused Railway Feature"
+                },
+                "disused/shop": {
+                    "name": "Disused Shop"
                 },
                 "emergency/designated": {
                     "name": "Emergency Access Designated"

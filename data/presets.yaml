@@ -745,6 +745,9 @@ en:
       disused/railway:
         # 'disused:railway=*'
         label: Type
+      disused/shop:
+        # 'disused:shop=*'
+        label: Type
       dock:
         # dock=*
         label: Type
@@ -4723,6 +4726,9 @@ en:
       disused/railway:
         # 'disused:railway=*'
         name: Disused Railway Feature
+      disused/shop:
+        # 'disused:shop=*'
+        name: Disused Shop
       embankment:
         # embankment=yes
         name: Embankment

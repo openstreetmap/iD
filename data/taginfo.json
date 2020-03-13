@@ -438,6 +438,7 @@
     {"key": "cycleway", "value": "asl", "description": "🄿 Advanced Stop Line", "object_types": ["node"], "icon_url": "https://cdn.jsdelivr.net/gh/mapbox/maki/icons/bicycle-15.svg"},
     {"key": "demolished:building", "description": "🄿 Recently Demolished Building (unsearchable)", "object_types": ["area"], "icon_url": "https://cdn.jsdelivr.net/gh/openstreetmap/iD@master/svg/fontawesome/fas-house-damage.svg"},
     {"key": "disused:railway", "description": "🄿 Disused Railway Feature (unsearchable), 🄵 Type", "object_types": ["node", "way", "area"], "icon_url": "https://cdn.jsdelivr.net/gh/ideditor/temaki/icons/rail_profile.svg"},
+    {"key": "disused:shop", "description": "🄿 Disused Shop (unsearchable), 🄵 Type", "object_types": ["node", "area"]},
     {"key": "emergency", "value": "designated", "description": "🄿 Emergency Access Designated (unsearchable)", "object_types": ["way"]},
     {"key": "emergency", "value": "destination", "description": "🄿 Emergency Access Destination (unsearchable)", "object_types": ["way"]},
     {"key": "emergency", "value": "no", "description": "🄿 Emergency Access No (unsearchable)", "object_types": ["way"]},

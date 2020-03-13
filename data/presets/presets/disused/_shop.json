@@ -1,0 +1,15 @@
+{
+    "fields": [
+        "disused/shop"
+    ],
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "tags": {
+        "disused:shop": "*"
+    },
+    "matchScore": 0.05,
+    "searchable": false,
+    "name": "Disused Shop"
+}
