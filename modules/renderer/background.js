@@ -51,6 +51,8 @@ export function rendererBackground(context) {
           // Features resolved from loco should have area precalculated.
           source.area = feature.properties.area || Infinity;
 
+          // Flag if this is a "global" source
+          source.isGlobal = feature.id === 'Q2';
 
           // Instantiate a `rendererBackgroundSource`
           let background;
@@ -283,7 +285,7 @@ export function rendererBackground(context) {
 
     return _imageryIndex.backgrounds.filter(source => {
       if (includeCurrent && currSource === source) return true;  // optionally include the current imagery
-      if (zoom && zoom < 6) return false;                        // optionally exclude local imagery at low zooms
+      if (zoom && zoom < 6) return source.isGlobal;              // optionally exclude local imagery at low zooms
       return visible[source.id];                                 // include imagery visible in given extent
     });
   };
