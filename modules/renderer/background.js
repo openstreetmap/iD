@@ -2,14 +2,13 @@ import { dispatch as d3_dispatch } from 'd3-dispatch';
 import { interpolateNumber as d3_interpolateNumber } from 'd3-interpolate';
 import { select as d3_select } from 'd3-selection';
 
+import LocationConflation from '@ideditor/location-conflation';
 import whichPolygon from 'which-polygon';
 
 import { geoExtent, geoMetersToOffset, geoOffsetToMeters} from '../geo';
 import { rendererBackgroundSource } from './background_source';
 import { rendererTileLayer } from './tile_layer';
-import { utilQsString, utilStringQs } from '../util';
-import { utilDetect } from '../util/detect';
-import { utilRebind } from '../util/rebind';
+import { utilAesDecrypt, utilDetect, utilQsString, utilStringQs, utilRebind } from '../util';
 
 
 let _imageryIndex = null;
@@ -27,49 +26,51 @@ export function rendererBackground(context) {
 
 
   function ensureImageryIndex() {
-    return context.data().get('imagery')
-      .then(sources => {
+    const data = context.data();
+    return Promise.all([ data.get('imagery_sources'), data.get('imagery_features') ])
+      .then(vals => {
         if (_imageryIndex) return _imageryIndex;
 
-        _imageryIndex = {
-          imagery: sources,
-          features: {}
-        };
+        const sources = preprocessSources(Object.values(vals[0]));
+        const loco = new LocationConflation(vals[1]);
+        let features = {};
+        let backgrounds = [];
 
-        // use which-polygon to support efficient index and querying for imagery
-        const features = sources.map(source => {
-          if (!source.polygon) return null;
-          // workaround for editor-layer-index weirdness..
-          // Add an extra array nest to each element in `source.polygon`
-          // so the rings are not treated as a bunch of holes:
-          // what we have: [ [[outer],[hole],[hole]] ]
-          // what we want: [ [[outer]],[[outer]],[[outer]] ]
-          const rings = source.polygon.map(ring => [ring]);
-
-          const feature = {
-            type: 'Feature',
-            properties: { id: source.id },
-            geometry: { type: 'MultiPolygon', coordinates: rings }
-          };
-
-          _imageryIndex.features[source.id] = feature;
-          return feature;
-
-        }).filter(Boolean);
-
-        _imageryIndex.query = whichPolygon({ type: 'FeatureCollection', features: features });
-
-
-        // Instantiate `rendererBackgroundSource` objects for each source
-        _imageryIndex.backgrounds = sources.map(source => {
-          if (source.type === 'bing') {
-            return rendererBackgroundSource.Bing(source, dispatch);
-          } else if (/^EsriWorldImagery/.test(source.id)) {
-            return rendererBackgroundSource.Esri(source);
-          } else {
-            return rendererBackgroundSource(source);
+        // process all sources
+        sources.forEach(source => {
+          // Resolve the locationSet to a GeoJSON feature..
+          const resolvedFeature = loco.resolveLocationSet(source.locationSet);
+          let feature = features[resolvedFeature.id];
+          if (!feature) {
+            feature = JSON.parse(JSON.stringify(resolvedFeature));  // deep clone
+            feature.properties.sourceIDs = new Set();
+            features[resolvedFeature.id] = feature;
           }
+          feature.properties.sourceIDs.add(source.id);
+
+          // Features resolved from loco should have area precalculated.
+          source.area = feature.properties.area || Infinity;
+
+          // Flag if this is a "global" source
+          source.isGlobal = feature.id === 'Q2';
+
+          // Instantiate a `rendererBackgroundSource`
+          let background;
+          if (source.type === 'bing') {
+            background = rendererBackgroundSource.Bing(source, dispatch);
+          } else if (/^EsriWorldImagery/.test(source.id)) {
+            background = rendererBackgroundSource.Esri(source);
+          } else {
+            background = rendererBackgroundSource(source);
+          }
+          backgrounds.push(background);
         });
+
+        _imageryIndex = {
+          features: features,
+          backgrounds: backgrounds,
+          query: whichPolygon({ type: 'FeatureCollection', features: Object.values(features) })
+        };
 
         // Add 'None'
         _imageryIndex.backgrounds.unshift(rendererBackgroundSource.None());
@@ -273,14 +274,17 @@ export function rendererBackground(context) {
   background.sources = (extent, zoom, includeCurrent) => {
     if (!_imageryIndex) return [];   // called before init()?
 
+    // Gather the source ids visible in the given extent
     let visible = {};
-    (_imageryIndex.query.bbox(extent.rectangle(), true) || [])
-      .forEach(d => visible[d.id] = true);
+    let hits = _imageryIndex.query.bbox(extent.rectangle(), true) || [];
+    hits.forEach(properties => {
+      Array.from(properties.sourceIDs).forEach(sourceID => visible[sourceID] = true);
+    });
 
     const currSource = baseLayer.source();
 
     return _imageryIndex.backgrounds.filter(source => {
-      if (!source.polygon) return true;                          // always include imagery with worldwide coverage
+      if (source.isGlobal) return true;                          // always include imagery with worldwide coverage
       if (includeCurrent && currSource === source) return true;  // optionally include the current imagery
       if (zoom && zoom < 6) return false;                        // optionally exclude local imagery at low zooms
       return visible[source.id];                                 // include imagery visible in given extent
@@ -474,7 +478,7 @@ export function rendererBackground(context) {
           );
         }
 
-        const locator = imageryIndex.backgrounds.find(d => d.overlay && d.default);
+        const locator = imageryIndex.backgrounds.find(d => d.id === 'mapbox_locator_overlay');
         if (locator) {
           background.toggleOverlayLayer(locator);
         }
@@ -504,10 +508,179 @@ export function rendererBackground(context) {
             background.offset(geoMetersToOffset(offset));
           }
         }
-      })
-      .catch(() => { /* ignore */ });
+      });
+      // .catch(() => { /* ignore */ });
   };
 
 
   return utilRebind(background, dispatch, 'on');
+}
+
+
+
+// Historically, iD has used a different imagery subset than what we pulled
+// from the external imagery index.  This remapping previously happened
+// in the `update_imagery.js` script before the imagery was bundled with iD.
+//
+// Now that the client fetches imagery at runtime, it needs to happen here.
+// *This code should change to be more flexible.*
+//
+function preprocessSources(sources) {
+
+  // ignore imagery more than 20 years old..
+  let cutoffDate = new Date();
+  cutoffDate.setFullYear(cutoffDate.getFullYear() - 20);
+
+  const discard = {
+    'osmbe': true,                        // 'OpenStreetMap (Belgian Style)'
+    'osmfr': true,                        // 'OpenStreetMap (French Style)'
+    'osm-mapnik-german_style': true,      // 'OpenStreetMap (German Style)'
+    'HDM_HOT': true,                      // 'OpenStreetMap (HOT Style)'
+    'osm-mapnik-black_and_white': true,   // 'OpenStreetMap (Standard Black & White)'
+    'osm-mapnik-no_labels': true,         // 'OpenStreetMap (Mapnik, no labels)'
+    'OpenStreetMap-turistautak': true,    // 'OpenStreetMap (turistautak)'
+
+    'hike_n_bike': true,                  // 'Hike & Bike'
+    'landsat': true,                      // 'Landsat'
+    'skobbler': true,                     // 'Skobbler'
+    'public_transport_oepnv': true,       // 'Public Transport (ÖPNV)'
+    'tf-cycle': true,                     // 'Thunderforest OpenCycleMap'
+    'tf-landscape': true,                 // 'Thunderforest Landscape'
+    'qa_no_address': true,                // 'QA No Address'
+    'wikimedia-map': true,                // 'Wikimedia Map'
+
+    'openinframap-petroleum': true,
+    'openinframap-power': true,
+    'openinframap-telecoms': true,
+    'openpt_map': true,
+    'openrailwaymap': true,
+    'openseamap': true,
+    'opensnowmap-overlay': true,
+
+    'US-TIGER-Roads-2012': true,
+    'US-TIGER-Roads-2014': true,
+
+    'Waymarked_Trails-Cycling': true,
+    'Waymarked_Trails-Hiking': true,
+    'Waymarked_Trails-Horse_Riding': true,
+    'Waymarked_Trails-MTB': true,
+    'Waymarked_Trails-Skating': true,
+    'Waymarked_Trails-Winter_Sports': true,
+
+    'OSM_Inspector-Addresses': true,
+    'OSM_Inspector-Geometry': true,
+    'OSM_Inspector-Highways': true,
+    'OSM_Inspector-Multipolygon': true,
+    'OSM_Inspector-Places': true,
+    'OSM_Inspector-Routing': true,
+    'OSM_Inspector-Tagging': true,
+
+    'EOXAT2018CLOUDLESS': true
+  };
+
+  const supportedWMSProjections = {
+    'EPSG:4326': true,
+    'EPSG:3857': true,
+    'EPSG:900913': true,
+    'EPSG:3587': true,
+    'EPSG:54004': true,
+    'EPSG:41001': true,
+    'EPSG:102113': true,
+    'EPSG:102100': true,
+    'EPSG:3785': true
+  };
+
+  const apikeys = {
+    'Maxar-Premium': '2ac35d3bc99b64243066ef6888846358386da6cadbe0de9dbaf6ce8c17dae8d532d0d46f',
+    'Maxar-Standard': '7bc70b61c29b34243064bd6f818463583262a6ca8ae78b9db9a4cf8b46d9ed8261d08168'
+  };
+
+
+  let keepImagery = [];
+  sources.forEach(source => {
+    if (source.type !== 'tms' && source.type !== 'wms' && source.type !== 'bing') return;
+    if (source.id in discard) return;
+
+    let im = {
+      id: source.id,
+      type: source.type,
+      name: source.name,
+      template: source.url,   // this one renamed
+      locationSet: source.locationSet
+    };
+
+    // decrypt api keys
+    if (apikeys[source.id]) {
+      im.apikey = utilAesDecrypt(apikeys[source.id]);
+    }
+
+    // A few sources support 512px tiles
+    if (source.id === 'Mapbox') {
+      im.template = im.template.replace('.jpg', '@2x.jpg');
+      im.tileSize = 512;
+    } else if (source.id === 'mtbmap-no') {
+      im.tileSize = 512;
+    } else {
+      im.tileSize = 256;
+    }
+
+    // Some WMS sources are supported, check projection
+    if (source.type === 'wms') {
+      const projection = (source.available_projections || []).find(p => supportedWMSProjections[p]);
+      if (!projection) return;
+      if (sources.some(other => other.name === source.name && other.type !== source.type)) return;
+      im.projection = projection;
+    }
+
+
+    let startDate, endDate, isValid;
+
+    if (source.end_date) {
+      endDate = new Date(source.end_date);
+      isValid = !isNaN(endDate.getTime());
+      if (isValid) {
+        if (endDate <= cutoffDate) return;  // too old
+        im.endDate = endDate;
+      }
+    }
+
+    if (source.start_date) {
+      startDate = new Date(source.start_date);
+      isValid = !isNaN(startDate.getTime());
+      if (isValid) {
+        im.startDate = startDate;
+      }
+    }
+
+    im.zoomExtent = [
+      source.min_zoom || 0,
+      source.max_zoom || 24
+    ];
+
+    if (source.id === 'mapbox_locator_overlay') {
+      im.overzoom = false;
+    }
+
+    const attribution = source.attribution || {};
+    if (attribution.url)  { im.terms_url = attribution.url; }
+    if (attribution.text) { im.terms_text = attribution.text; }
+    if (attribution.html) { im.terms_html = attribution.html; }
+
+
+    if (source.icon) {
+      if (/^http(s)?/i.test(source.icon)) {
+        im.icon = source.icon;
+      } else {
+        im.icon = `https://cdn.jsdelivr.net/npm/@ideditor/imagery-index@0.1/dist/images/${source.icon}`;
+      }
+    }
+
+    if (source.best)        { im.best = source.best; }
+    if (source.overlay)     { im.overlay = source.overlay; }
+    if (source.description) { im.description = source.description; }
+
+    keepImagery.push(im);
+  });
+
+  return keepImagery;
 }

@@ -18,8 +18,6 @@ export function uiSectionBackgroundList(context) {
 
     var _backgroundList = d3_select(null);
 
-    var _customSource = context.background().findSource('custom');
-
     var _settingsCustomBackground = uiSettingsCustomBackground(context)
         .on('change', customChanged);
 
@@ -235,11 +233,14 @@ export function uiSectionBackgroundList(context) {
 
 
     function customChanged(d) {
+        var customSource = context.background().findSource('custom');
+        if (!customSource) return;
+
         if (d && d.template) {
-            _customSource.template(d.template);
-            chooseBackground(_customSource);
+            customSource.template(d.template);
+            chooseBackground(customSource);
         } else {
-            _customSource.template('');
+            customSource.template('');
             chooseBackground(context.background().findSource('none'));
         }
     }

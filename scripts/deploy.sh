@@ -29,13 +29,7 @@ if [[ "${rev}" != "${orig}" ]] ; then
   npm install > /dev/null 2>&1
 fi
 
-# pull latest imagery
-rm -rf node_modules/editor-layer-index/
-git clone https://github.com/osmlab/editor-layer-index.git node_modules/editor-layer-index > /dev/null 2>&1
-rm -rf node_modules/editor-layer-index/.git/
-
 # build everything
-npm run imagery
 npm run all
 
 # pull latest translations
