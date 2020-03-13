@@ -29,44 +29,44 @@ function vintageRange(vintage) {
 
 export function rendererBackgroundSource(data) {
     var source = Object.assign({}, data);   // shallow copy
-    var offset = [0, 0];
-    var name = source.name;
-    var description = source.description;
-    var best = !!source.best;
-    var template = source.template;
+    var _offset = [0, 0];
+    var _name = source.name;
+    var _description = source.description;
+    var _best = !!source.best;
+    var _template = source.template;
 
     source.tileSize = data.tileSize || 256;
     source.zoomExtent = data.zoomExtent || [0, 22];
     source.overzoom = data.overzoom !== false;
 
     source.offset = function(val) {
-        if (!arguments.length) return offset;
-        offset = val;
+        if (!arguments.length) return _offset;
+        _offset = val;
         return source;
     };
 
 
     source.nudge = function(val, zoomlevel) {
-        offset[0] += val[0] / Math.pow(2, zoomlevel);
-        offset[1] += val[1] / Math.pow(2, zoomlevel);
+        _offset[0] += val[0] / Math.pow(2, zoomlevel);
+        _offset[1] += val[1] / Math.pow(2, zoomlevel);
         return source;
     };
 
 
     source.name = function() {
         var id_safe = source.id.replace(/\./g, '<TX_DOT>');
-        return t('imagery.' + id_safe + '.name', { default: name });
+        return t('imagery.' + id_safe + '.name', { default: _name });
     };
 
 
     source.description = function() {
         var id_safe = source.id.replace(/\./g, '<TX_DOT>');
-        return t('imagery.' + id_safe + '.description', { default: description });
+        return t('imagery.' + id_safe + '.description', { default: _description });
     };
 
 
     source.best = function() {
-        return best;
+        return _best;
     };
 
 
@@ -81,16 +81,34 @@ export function rendererBackgroundSource(data) {
 
 
     source.template = function(val) {
-        if (!arguments.length) return template;
-        if (source.id === 'custom') template = val;
+        if (!arguments.length) return _template;
+        if (source.id === 'custom') {
+            _template = val;
+        }
         return source;
     };
 
 
     source.url = function(coord) {
-        var result = template;
+        var result = _template;
+        if (result === '') return result;   // source 'none'
 
-        if (this.type === 'wms') {
+
+        // Guess a type based on the tokens present in the template
+        // (This is for 'custom' source, where we don't know)
+        if (!source.type) {
+            if (/\{(proj|wkid|bbox)\}/.test(_template)) {
+                source.type = 'wms';
+                source.projection = 'EPSG:3857';  // guess
+            } else if (/\{(x|y)\}/.test(_template)) {
+                source.type = 'tms';
+            } else if (/\{u\}/.test(_template)) {
+                source.type = 'bing';
+            }
+        }
+
+
+        if (source.type === 'wms') {
             var tileToProjectedCoords = (function(x, y, z) {
                 //polyfill for IE11, PhantomJS
                 var sinh = Math.sinh || function(x) {
@@ -102,7 +120,7 @@ export function rendererBackgroundSource(data) {
                 var lon = x / zoomSize * Math.PI * 2 - Math.PI;
                 var lat = Math.atan(sinh(Math.PI * (1 - 2 * y / zoomSize)));
 
-                switch (this.projection) {
+                switch (source.projection) {
                     case 'EPSG:4326':
                         return {
                             x: lon * 180 / Math.PI,
@@ -115,7 +133,7 @@ export function rendererBackgroundSource(data) {
                             y: 20037508.34 / Math.PI * mercCoords[1]
                         };
                 }
-            }).bind(this);
+            });
 
             var tileSize = this.tileSize;
             var projection = this.projection;
@@ -146,7 +164,7 @@ export function rendererBackgroundSource(data) {
               }
             });
 
-        } else if (this.type === 'tms') {
+        } else if (source.type === 'tms') {
             result = result
                 .replace('{x}', coord[0])
                 .replace('{y}', coord[1])
@@ -154,7 +172,7 @@ export function rendererBackgroundSource(data) {
                 .replace(/\{[t-]y\}/, Math.pow(2, coord[2]) - coord[1] - 1)
                 .replace(/\{z(oom)?\}/, coord[2]);
 
-        } else if (this.type === 'bing') {
+        } else if (source.type === 'bing') {
             result = result
                 .replace('{u}', function() {
                     var u = '';
@@ -167,9 +185,9 @@ export function rendererBackgroundSource(data) {
                     }
                     return u;
                 });
-
         }
 
+        // these apply to any type..
         result = result
             .replace('{apikey}', (this.apikey || ''))
             .replace(/\{switch:([^}]+)\}/, function(s, r) {
