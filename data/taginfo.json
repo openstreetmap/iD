@@ -613,7 +613,7 @@
     {"key": "military", "value": "danger_area", "description": "🄿 Danger Area", "object_types": ["node", "area"], "icon_url": "https://cdn.jsdelivr.net/gh/mapbox/maki/icons/danger-15.svg"},
     {"key": "military", "value": "naval_base", "description": "🄿 Naval Base", "object_types": ["node", "area"], "icon_url": "https://cdn.jsdelivr.net/gh/ideditor/temaki/icons/military.svg"},
     {"key": "military", "value": "obstacle_course", "description": "🄿 Obstacle Course", "object_types": ["node", "area"], "icon_url": "https://cdn.jsdelivr.net/gh/ideditor/temaki/icons/military.svg"},
-    {"key": "military", "value": "range", "description": "🄿 Military Range", "object_types": ["node", "area"], "icon_url": "https://cdn.jsdelivr.net/gh/ideditor/temaki/icons/military.svg"},
+    {"key": "military", "value": "range", "description": "🄿 Military Range", "object_types": ["node", "area"], "icon_url": "https://cdn.jsdelivr.net/gh/openstreetmap/iD@master/svg/fontawesome/fas-bullseye.svg"},
     {"key": "military", "value": "training_area", "description": "🄿 Training Area", "object_types": ["node", "area"], "icon_url": "https://cdn.jsdelivr.net/gh/ideditor/temaki/icons/military.svg"},
     {"key": "landuse", "value": "orchard", "description": "🄿 Orchard", "object_types": ["area"], "icon_url": "https://cdn.jsdelivr.net/gh/mapbox/maki/icons/park-15.svg"},
     {"key": "landuse", "value": "plant_nursery", "description": "🄿 Plant Nursery", "object_types": ["area"], "icon_url": "https://cdn.jsdelivr.net/gh/mapbox/maki/icons/garden-15.svg"},
