@@ -1045,7 +1045,7 @@
     {"key": "shop", "value": "flooring", "description": "🄿 Flooring Supply Shop", "object_types": ["node", "area"], "icon_url": "https://cdn.jsdelivr.net/gh/ideditor/temaki/icons/tools.svg"},
     {"key": "shop", "value": "florist", "description": "🄿 Florist", "object_types": ["node", "area"], "icon_url": "https://cdn.jsdelivr.net/gh/mapbox/maki/icons/florist-15.svg"},
     {"key": "shop", "value": "frame", "description": "🄿 Framing Shop", "object_types": ["node", "area"], "icon_url": "https://cdn.jsdelivr.net/gh/openstreetmap/iD@master/svg/fontawesome/fas-vector-square.svg"},
-    {"key": "shop", "value": "frozen_food", "description": "🄿 Frozen Food", "object_types": ["node", "area"], "icon_url": "https://cdn.jsdelivr.net/gh/mapbox/maki/icons/shop-15.svg"},
+    {"key": "shop", "value": "frozen_food", "description": "🄿 Frozen Food Store", "object_types": ["node", "area"], "icon_url": "https://cdn.jsdelivr.net/gh/mapbox/maki/icons/shop-15.svg"},
     {"key": "shop", "value": "fuel", "description": "🄿 Fuel Shop", "object_types": ["node", "area"], "icon_url": "https://cdn.jsdelivr.net/gh/ideditor/temaki/icons/propane_tank.svg"},
     {"key": "shop", "value": "funeral_directors", "description": "🄿 Funeral Home", "object_types": ["node", "area"], "icon_url": "https://cdn.jsdelivr.net/gh/mapbox/maki/icons/cemetery-15.svg"},
     {"key": "shop", "value": "furniture", "description": "🄿 Furniture Store", "object_types": ["node", "area"], "icon_url": "https://cdn.jsdelivr.net/gh/openstreetmap/iD@master/svg/fontawesome/fas-couch.svg"},

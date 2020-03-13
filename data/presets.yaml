@@ -7819,8 +7819,8 @@ en:
         terms: '<translate with synonyms or related terms for ''Framing Shop'', separated by commas>'
       shop/frozen_food:
         # shop=frozen_food
-        name: Frozen Food
-        terms: '<translate with synonyms or related terms for ''Frozen Food'', separated by commas>'
+        name: Frozen Food Store
+        terms: '<translate with synonyms or related terms for ''Frozen Food Store'', separated by commas>'
       shop/fuel:
         # shop=fuel
         name: Fuel Shop
