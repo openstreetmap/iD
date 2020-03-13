@@ -1,4 +1,5 @@
 {
+    "icon": "temaki-telescope",
     "fields": [
         "name",
         "operator",

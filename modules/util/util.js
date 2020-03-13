@@ -21,7 +21,7 @@ export function utilTagDiff(oldTags, newTags) {
         var oldVal = oldTags[k];
         var newVal = newTags[k];
 
-        if ((oldVal || oldVal === '') && (!newVal || newVal !== oldVal)) {
+        if ((oldVal || oldVal === '') && (newVal === undefined || newVal !== oldVal)) {
             tagDiff.push({
                 type: '-',
                 key: k,
@@ -30,7 +30,7 @@ export function utilTagDiff(oldTags, newTags) {
                 display: '- ' + k + '=' + oldVal
             });
         }
-        if ((newVal || newVal === '') && (!oldVal || newVal !== oldVal)) {
+        if ((newVal || newVal === '') && (oldVal === undefined || newVal !== oldVal)) {
             tagDiff.push({
                 type: '+',
                 key: k,
@@ -318,6 +318,10 @@ export function utilCombinedTags(entityIDs, graph) {
 
 
 export function utilStringQs(str) {
+    var i = 0;  // advance past any leading '?' or '#' characters
+    while (i < str.length && (str[i] === '?' || str[i] === '#')) i++;
+    str = str.slice(i);
+
     return str.split('&').reduce(function(obj, pair){
         var parts = pair.split('=');
         if (parts.length === 2) {

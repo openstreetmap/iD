@@ -1,5 +1,5 @@
 {
-    "icon": "maki-roadblock",
+    "icon": "temaki-passport_checkpoint",
     "fields": [
         "access",
         "building_area"
@@ -18,5 +18,13 @@
     "tags": {
         "barrier": "border_control"
     },
+    "terms": [
+        "checkpoint",
+        "customs",
+        "international boundary",
+        "passport check",
+        "port of entry",
+        "visa"
+    ],
     "name": "Border Control"
 }

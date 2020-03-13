@@ -39,11 +39,6 @@ path.line.stroke.tag-taxiway {
     stroke-width: 3;
 }
 
-.preset-icon .icon.tag-aeroway-taxiway,
-.preset-icon .icon.tag-taxiway {
-    color: #ff0;
-    fill: #666;
-}
 path.line.stroke.tag-aeroway-taxiway,
 path.line.stroke.tag-taxiway {
     stroke: #ff0;

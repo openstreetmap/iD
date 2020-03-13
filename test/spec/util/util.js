@@ -79,9 +79,26 @@ describe('iD.util', function() {
     });
 
     it('utilStringQs', function() {
-        expect(iD.utilStringQs('foo=bar')).to.eql({foo: 'bar'});
-        expect(iD.utilStringQs('foo=bar&one=2')).to.eql({foo: 'bar', one: '2' });
-        expect(iD.utilStringQs('')).to.eql({});
+        it('splits a parameter string into k=v pairs', function() {
+            expect(iD.utilStringQs('foo=bar')).to.eql({foo: 'bar'});
+            expect(iD.utilStringQs('foo=bar&one=2')).to.eql({foo: 'bar', one: '2' });
+            expect(iD.utilStringQs('')).to.eql({});
+        });
+        it('trims leading # if present', function() {
+            expect(iD.utilStringQs('#foo=bar')).to.eql({foo: 'bar'});
+            expect(iD.utilStringQs('#foo=bar&one=2')).to.eql({foo: 'bar', one: '2' });
+            expect(iD.utilStringQs('#')).to.eql({});
+        });
+        it('trims leading ? if present', function() {
+            expect(iD.utilStringQs('?foo=bar')).to.eql({foo: 'bar'});
+            expect(iD.utilStringQs('?foo=bar&one=2')).to.eql({foo: 'bar', one: '2' });
+            expect(iD.utilStringQs('?')).to.eql({});
+        });
+        it('trims leading #? if present', function() {
+            expect(iD.utilStringQs('#?foo=bar')).to.eql({foo: 'bar'});
+            expect(iD.utilStringQs('#?foo=bar&one=2')).to.eql({foo: 'bar', one: '2' });
+            expect(iD.utilStringQs('#?')).to.eql({});
+        });
     });
 
     it('utilQsString', function() {

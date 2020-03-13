@@ -39,11 +39,11 @@ describe('iD.actionStraightenWay', function () {
 
     it('deletes empty nodes', function() {
         var graph = iD.coreGraph([
-                iD.osmNode({id: 'a', loc: [0, 0]}),
-                iD.osmNode({id: 'b', loc: [1, 0.01], tags: {}}),
-                iD.osmNode({id: 'c', loc: [2, 0]}),
-                iD.osmWay({id: '-', nodes: ['a', 'b', 'c']})
-            ]);
+            iD.osmNode({id: 'a', loc: [0, 0]}),
+            iD.osmNode({id: 'b', loc: [1, 0.01], tags: {}}),
+            iD.osmNode({id: 'c', loc: [2, 0]}),
+            iD.osmWay({id: '-', nodes: ['a', 'b', 'c']})
+        ]);
 
         graph = iD.actionStraightenWay(['-'], projection)(graph);
         expect(graph.entity('-').nodes).to.eql(['a', 'c']);
@@ -52,11 +52,11 @@ describe('iD.actionStraightenWay', function () {
 
     it('does not delete tagged nodes', function() {
        var graph = iD.coreGraph([
-                iD.osmNode({id: 'a', loc: [0, 0]}),
-                iD.osmNode({id: 'b', loc: [1, 0.01], tags: {foo: 'bar'}}),
-                iD.osmNode({id: 'c', loc: [2, 0]}),
-                iD.osmWay({id: '-', nodes: ['a', 'b', 'c']})
-            ]);
+            iD.osmNode({id: 'a', loc: [0, 0]}),
+            iD.osmNode({id: 'b', loc: [1, 0.01], tags: {foo: 'bar'}}),
+            iD.osmNode({id: 'c', loc: [2, 0]}),
+            iD.osmWay({id: '-', nodes: ['a', 'b', 'c']})
+        ]);
 
         graph = iD.actionStraightenWay(['-'], projection)(graph);
         expect(graph.entity('-').nodes).to.eql(['a', 'b', 'c']);
@@ -66,12 +66,12 @@ describe('iD.actionStraightenWay', function () {
 
     it('does not delete nodes connected to other ways', function() {
         var graph = iD.coreGraph([
-                iD.osmNode({id: 'a', loc: [0, 0]}),
-                iD.osmNode({id: 'b', loc: [1, 0.01]}),
-                iD.osmNode({id: 'c', loc: [2, 0]}),
-                iD.osmWay({id: '-', nodes: ['a', 'b', 'c']}),
-                iD.osmWay({id: '=', nodes: ['b']})
-            ]);
+            iD.osmNode({id: 'a', loc: [0, 0]}),
+            iD.osmNode({id: 'b', loc: [1, 0.01]}),
+            iD.osmNode({id: 'c', loc: [2, 0]}),
+            iD.osmWay({id: '-', nodes: ['a', 'b', 'c']}),
+            iD.osmWay({id: '=', nodes: ['b']})
+        ]);
 
         graph = iD.actionStraightenWay(['-'], projection)(graph);
         expect(graph.entity('-').nodes).to.eql(['a', 'b', 'c']);
@@ -80,19 +80,19 @@ describe('iD.actionStraightenWay', function () {
     });
 
     it('straightens multiple, connected ways', function() {
-        var graph = iD.Graph([
-                iD.Node({id: 'a', loc: [0, 0]}),
-                iD.Node({id: 'b', loc: [1, 0.01], tags: {foo: 'bar'}}),
-                iD.Node({id: 'c', loc: [2, -0.01]}),
-                iD.Node({id: 'd', loc: [3, 0]}),
-                iD.Way({id: '-', nodes: ['a', 'b', 'c', 'd']}),
+        var graph = iD.coreGraph([
+            iD.osmNode({id: 'a', loc: [0, 0]}),
+            iD.osmNode({id: 'b', loc: [1, 0.01], tags: {foo: 'bar'}}),
+            iD.osmNode({id: 'c', loc: [2, -0.01]}),
+            iD.osmNode({id: 'd', loc: [3, 0]}),
+            iD.osmWay({id: '-', nodes: ['a', 'b', 'c', 'd']}),
 
-                iD.Node({id: 'e', loc: [4, 0]}),
-                iD.Node({id: 'f', loc: [5, 0.01], tags: {foo: 'bar'}}),
-                iD.Node({id: 'g', loc: [6, -0.01]}),
-                iD.Node({id: 'h', loc: [7, 0]}),
-                iD.Way({id: '--', nodes: ['d', 'e', 'f', 'g', 'h']})
-            ]);
+            iD.osmNode({id: 'e', loc: [4, 0]}),
+            iD.osmNode({id: 'f', loc: [5, 0.01], tags: {foo: 'bar'}}),
+            iD.osmNode({id: 'g', loc: [6, -0.01]}),
+            iD.osmNode({id: 'h', loc: [7, 0]}),
+            iD.osmWay({id: '--', nodes: ['d', 'e', 'f', 'g', 'h']})
+        ]);
 
         graph = iD.actionStraightenWay(['-', '--'], projection)(graph);
         expect(graph.entity('-').nodes).to.eql(['a', 'b', 'd']);
@@ -103,19 +103,19 @@ describe('iD.actionStraightenWay', function () {
     });
 
     it('straightens multiple, connected ways going in different directions', function() {
-        var graph = iD.Graph([
-                iD.Node({id: 'a', loc: [0, 0]}),
-                iD.Node({id: 'b', loc: [1, 0.01], tags: {foo: 'bar'}}),
-                iD.Node({id: 'c', loc: [2, -0.01]}),
-                iD.Node({id: 'd', loc: [3, 0]}),
-                iD.Way({id: '-', nodes: ['a', 'b', 'c', 'd']}),
+        var graph = iD.coreGraph([
+            iD.osmNode({id: 'a', loc: [0, 0]}),
+            iD.osmNode({id: 'b', loc: [1, 0.01], tags: {foo: 'bar'}}),
+            iD.osmNode({id: 'c', loc: [2, -0.01]}),
+            iD.osmNode({id: 'd', loc: [3, 0]}),
+            iD.osmWay({id: '-', nodes: ['a', 'b', 'c', 'd']}),
 
-                iD.Node({id: 'e', loc: [4, 0]}),
-                iD.Node({id: 'f', loc: [5, 0.01], tags: {foo: 'bar'}}),
-                iD.Node({id: 'g', loc: [6, -0.01]}),
-                iD.Node({id: 'h', loc: [7, 0]}),
-                iD.Way({id: '--', nodes: ['h', 'g', 'f', 'e', 'd']})
-            ]);
+            iD.osmNode({id: 'e', loc: [4, 0]}),
+            iD.osmNode({id: 'f', loc: [5, 0.01], tags: {foo: 'bar'}}),
+            iD.osmNode({id: 'g', loc: [6, -0.01]}),
+            iD.osmNode({id: 'h', loc: [7, 0]}),
+            iD.osmWay({id: '--', nodes: ['h', 'g', 'f', 'e', 'd']})
+        ]);
 
         graph = iD.actionStraightenWay(['-', '--'], projection)(graph);
         expect(graph.entity('-').nodes).to.eql(['a', 'b', 'd']);
@@ -132,12 +132,12 @@ describe('iD.actionStraightenWay', function () {
 
         it('straighten at t = 0', function() {
            var graph = iD.coreGraph([
-                    iD.osmNode({id: 'a', loc: [0, 0]}),
-                    iD.osmNode({id: 'b', loc: [1, 0.01], tags: {foo: 'bar'}}),
-                    iD.osmNode({id: 'c', loc: [2, -0.01]}),
-                    iD.osmNode({id: 'd', loc: [3, 0]}),
-                    iD.osmWay({id: '-', nodes: ['a', 'b', 'c', 'd']})
-                ]);
+                iD.osmNode({id: 'a', loc: [0, 0]}),
+                iD.osmNode({id: 'b', loc: [1, 0.01], tags: {foo: 'bar'}}),
+                iD.osmNode({id: 'c', loc: [2, -0.01]}),
+                iD.osmNode({id: 'd', loc: [3, 0]}),
+                iD.osmWay({id: '-', nodes: ['a', 'b', 'c', 'd']})
+            ]);
 
             graph = iD.actionStraightenWay(['-'], projection)(graph, 0);
             expect(graph.entity('-').nodes).to.eql(['a', 'b', 'c', 'd']);
@@ -149,12 +149,12 @@ describe('iD.actionStraightenWay', function () {
 
         it('straighten at t = 0.5', function() {
            var graph = iD.coreGraph([
-                    iD.osmNode({id: 'a', loc: [0, 0]}),
-                    iD.osmNode({id: 'b', loc: [1, 0.01], tags: {foo: 'bar'}}),
-                    iD.osmNode({id: 'c', loc: [2, -0.01]}),
-                    iD.osmNode({id: 'd', loc: [3, 0]}),
-                    iD.osmWay({id: '-', nodes: ['a', 'b', 'c', 'd']})
-                ]);
+                iD.osmNode({id: 'a', loc: [0, 0]}),
+                iD.osmNode({id: 'b', loc: [1, 0.01], tags: {foo: 'bar'}}),
+                iD.osmNode({id: 'c', loc: [2, -0.01]}),
+                iD.osmNode({id: 'd', loc: [3, 0]}),
+                iD.osmWay({id: '-', nodes: ['a', 'b', 'c', 'd']})
+            ]);
 
             graph = iD.actionStraightenWay(['-'], projection)(graph, 0.5);
             expect(graph.entity('-').nodes).to.eql(['a', 'b', 'c', 'd']);
@@ -166,12 +166,12 @@ describe('iD.actionStraightenWay', function () {
 
         it('straighten at t = 1', function() {
            var graph = iD.coreGraph([
-                    iD.osmNode({id: 'a', loc: [0, 0]}),
-                    iD.osmNode({id: 'b', loc: [1, 0.01], tags: {foo: 'bar'}}),
-                    iD.osmNode({id: 'c', loc: [2, -0.01]}),
-                    iD.osmNode({id: 'd', loc: [3, 0]}),
-                    iD.osmWay({id: '-', nodes: ['a', 'b', 'c', 'd']})
-                ]);
+                iD.osmNode({id: 'a', loc: [0, 0]}),
+                iD.osmNode({id: 'b', loc: [1, 0.01], tags: {foo: 'bar'}}),
+                iD.osmNode({id: 'c', loc: [2, -0.01]}),
+                iD.osmNode({id: 'd', loc: [3, 0]}),
+                iD.osmWay({id: '-', nodes: ['a', 'b', 'c', 'd']})
+            ]);
 
             graph = iD.actionStraightenWay(['-'], projection)(graph, 1);
             expect(graph.entity('-').nodes).to.eql(['a', 'b', 'd']);

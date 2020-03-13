@@ -32,6 +32,10 @@
             "separator": ","
           },
           {
+            "shortcuts": ["geolocate.key"],
+            "text": "shortcuts.browsing.navigation.geolocate"
+          },
+          {
             "section": "display_options",
             "text": "shortcuts.browsing.display_options.title"
           },

@@ -456,7 +456,7 @@ en:
     request_review: "I would like someone to review my edits."
     save: Upload
     cancel: Cancel
-    changes: "{count} Changes"
+    changes: "Changes ({count})"
     download_changes: Download osmChange file
     errors: Errors
     warnings: Warnings
@@ -535,16 +535,14 @@ en:
     search: Search worldwide...
     no_results_worldwide: No results found
   geolocate:
+    key: L
     title: Show My Location
     locating: "Locating, please wait..."
+    location_unavailable: Your location is unavailable.
   inspector:
     zoom_to:
       key: Z
-      title: Zoom to this
-      tooltip_feature: "Center and zoom the map to focus on this feature."
-      tooltip_note: "Center and zoom the map to focus on this note."
-      tooltip_data: "Center and zoom the map to focus on this data."
-      tooltip_issue: "Center and zoom the map to focus on this issue."
+      title: Zoom To Selection
     show_more: Show More
     view_on_osm: View on openstreetmap.org
     view_on_osmose: View on osmose.openstreetmap.fr
@@ -735,7 +733,7 @@ en:
     custom_background:
       tooltip: Edit custom background
       header: Custom Background Settings
-      instructions: "Enter a tile URL template. Valid tokens are:\n   {zoom} or {z}, {x}, {y} for Z/X/Y tile scheme\n   {-y} or {ty} for flipped TMS-style Y coordinates\n   {u} for quadtile scheme\n   {switch:a,b,c} for DNS server multiplexing\n\nExample:\n{example}"
+      instructions: "Enter a tile URL template below.\n\nSupported WMS tokens:\n  `{proj}`: requested projection (`EPSG:3857` only)\n  `{wkid}`: same as proj, but without the EPSG (`3857` only)\n  `{width}`, `{height}`: requested image dimensions (`256` only)\n  `{bbox}`: requested bounding box (e.g. `minX,minY,maxX,maxY`)\n\nSupported TMS tokens:\n  `{zoom}` or `{z}, `{x}`, `{y}`: Z/X/Y tile coordinates\n  `{-y}` or `{ty}`: flipped TMS-style Y coordinates\n  `{switch:a,b,c}`: DNS server multiplexing\n  `{u}`: quadtile (Bing) scheme\n\nExample:\n{example}"
       template:
         placeholder: Enter a url template
     custom_data:
@@ -835,10 +833,14 @@ en:
     on_wiki: "{tag} on wiki.osm.org"
     used_with: "used with {type}"
   zoom:
-    in: Zoom in
-    out: Zoom out
+    in: Zoom In
+    out: Zoom Out
   cannot_zoom: "Cannot zoom out further in current mode."
   full_screen: Toggle Full Screen
+  self_intersection:
+    error:
+      lines: Lines cannot cross over themselves.
+      areas: Areas cannot cross over themselves.
   QA:
     osmose:
       title: Osmose Issue
@@ -1978,6 +1980,7 @@ en:
         pan_more: "Pan map by one screenful"
         zoom: "Zoom in / Zoom out"
         zoom_more: "Zoom in / Zoom out by a lot"
+        geolocate: "Zoom to my location"
       help:
         title: "Help"
         help: "Show help/documentation"

@@ -3,6 +3,8 @@ import RBush from 'rbush';
 import { dispatch as d3_dispatch } from 'd3-dispatch';
 import { json as d3_json } from 'd3-fetch';
 
+import marked from 'marked';
+
 import { currentLocale } from '../util/locale';
 import { geoExtent, geoVecAdd } from '../geo';
 import { QAItem } from '../osm';
@@ -58,16 +60,6 @@ function preventCoincident(loc) {
   } while (coincident);
 
   return loc;
-}
-
-// Osmose strings can contain markdown formatting
-function parseMarkdown(string) {
-  // URLs
-  string = string.replace(/\[((?:.|\n)+?)\]\((.+?)\)/g,
-    '<a href="$2" target="_blank" rel="noopener">$1</a>');
-
-  // Code snippets
-  return string.replace(/`(.+?)`/g, '<code>$1</code>');
 }
 
 export default {
@@ -182,7 +174,7 @@ export default {
       issue.elems = data.elems.map(e => e.type.substring(0,1) + e.id);
 
       // Some issues have instance specific detail in a subtitle
-      issue.detail = parseMarkdown(data.subtitle);
+      issue.detail = marked(data.subtitle);
 
       this.replaceItem(issue);
     };
@@ -235,11 +227,12 @@ export default {
         // If string exists, value is an object with key 'auto' for string
         const { title, detail, fix, trap } = cl;
 
+        // Osmose titles shouldn't contain markdown
         let issueStrings = {};
         if (title) issueStrings.title = title.auto;
-        if (detail) issueStrings.detail = parseMarkdown(detail.auto);
-        if (trap) issueStrings.trap = parseMarkdown(trap.auto);
-        if (fix) issueStrings.fix = parseMarkdown(fix.auto);
+        if (detail) issueStrings.detail = marked(detail.auto);
+        if (trap) issueStrings.trap = marked(trap.auto);
+        if (fix) issueStrings.fix = marked(fix.auto);
 
         _cache.strings[locale][itemType] = issueStrings;
       };

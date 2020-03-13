@@ -9,12 +9,17 @@
         "lanes"
     ],
     "geometry": [
+        "point",
         "line",
         "area"
     ],
     "tags": {
         "leisure": "track",
         "sport": "running"
+    },
+    "reference": {
+        "key": "sport",
+        "value": "running"
     },
     "terms": [
         "athletics track",

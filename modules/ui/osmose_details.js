@@ -50,7 +50,10 @@ export function uiOsmoseDetails(context) {
       div
         .append('p')
           .attr('class', 'qa-details-description-text')
-          .html(d => issueString(d, 'detail'));
+          .html(d => issueString(d, 'detail'))
+        .selectAll('a')
+          .attr('rel', 'noopener')
+          .attr('target', '_blank');
     }
 
     // Elements (populated later as data is requested)
@@ -74,7 +77,10 @@ export function uiOsmoseDetails(context) {
 
       div
         .append('p')
-          .html(d => issueString(d, 'fix'));
+          .html(d => issueString(d, 'fix'))
+        .selectAll('a')
+          .attr('rel', 'noopener')
+          .attr('target', '_blank');
     }
 
     // Common Pitfalls (musn't exist for every issue type)
@@ -89,7 +95,10 @@ export function uiOsmoseDetails(context) {
 
       div
         .append('p')
-          .html(d => issueString(d, 'trap'));
+          .html(d => issueString(d, 'trap'))
+        .selectAll('a')
+          .attr('rel', 'noopener')
+          .attr('target', '_blank');
     }
 
     // Save current item to check if UI changed by time request resolves
@@ -113,7 +122,10 @@ export function uiOsmoseDetails(context) {
 
           detailsDiv
             .append('p')
-              .html(d => d.detail);
+              .html(d => d.detail)
+            .selectAll('a')
+              .attr('rel', 'noopener')
+              .attr('target', '_blank');
         }
 
         // Create list of linked issue elements

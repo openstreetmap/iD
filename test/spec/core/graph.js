@@ -1,19 +1,19 @@
 describe('iD.coreGraph', function() {
     describe('constructor', function () {
         it('accepts an entities Array', function () {
-            var entity = iD.Entity(),
+            var entity = iD.osmEntity(),
                 graph = iD.coreGraph([entity]);
             expect(graph.entity(entity.id)).to.equal(entity);
         });
 
         it('accepts a Graph', function () {
-            var entity = iD.Entity(),
+            var entity = iD.osmEntity(),
                 graph = iD.coreGraph(iD.coreGraph([entity]));
             expect(graph.entity(entity.id)).to.equal(entity);
         });
 
         it('copies other\'s entities', function () {
-            var entity = iD.Entity(),
+            var entity = iD.osmEntity(),
                 base   = iD.coreGraph([entity]),
                 graph  = iD.coreGraph(base);
             expect(graph.entities).not.to.equal(base.entities);

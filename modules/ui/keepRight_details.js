@@ -3,33 +3,28 @@ import {
   select as d3_select
 } from 'd3-selection';
 
-import { dataEn } from '../../data';
 import { modeSelect } from '../modes/select';
 import { t } from '../util/locale';
 import { utilDisplayName, utilHighlightEntities, utilEntityRoot } from '../util';
 
+
 export function uiKeepRightDetails(context) {
   let _qaItem;
 
+
   function issueDetail(d) {
+    const { itemType, parentIssueType } = d;
     const unknown = t('inspector.unknown');
-    if (!d) return unknown;
+    let replacements = d.replacements || {};
+    replacements.default = unknown;  // special key `default` works as a fallback string
 
-    const { itemType, parentIssueType, replacements } = d;
-    const et = dataEn.QA.keepRight.errorTypes[itemType];
-    const pt = dataEn.QA.keepRight.errorTypes[parentIssueType];
-
-    let detail;
-    if (et && et.description) {
-      detail = t(`QA.keepRight.errorTypes.${itemType}.description`, replacements);
-    } else if (pt && pt.description) {
+    let detail = t(`QA.keepRight.errorTypes.${itemType}.description`, replacements);
+    if (detail === unknown) {
       detail = t(`QA.keepRight.errorTypes.${parentIssueType}.description`, replacements);
-    } else {
-      detail = unknown;
     }
-
     return detail;
   }
+
 
   function keepRightDetails(selection) {
     const details = selection.selectAll('.error-details')

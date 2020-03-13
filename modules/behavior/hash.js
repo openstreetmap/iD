@@ -39,7 +39,7 @@ export function behaviorHash(context) {
         var center = map.center();
         var zoom = map.zoom();
         var precision = Math.max(0, Math.ceil(Math.log(zoom) / Math.LN2));
-        var q = utilObjectOmit(utilStringQs(window.location.hash.substring(1)),
+        var q = utilObjectOmit(utilStringQs(window.location.hash),
             ['comment', 'source', 'hashtags', 'walkthrough']
         );
         var newParams = {};
@@ -91,7 +91,7 @@ export function behaviorHash(context) {
             .on('hashchange.hash', hashchange);
 
         if (window.location.hash) {
-            var q = utilStringQs(window.location.hash.substring(1));
+            var q = utilStringQs(window.location.hash);
 
             if (q.id) {
                 context.zoomToEntity(q.id.split(',')[0], !q.map);

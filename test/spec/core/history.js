@@ -452,7 +452,7 @@ describe('iD.coreHistory', function () {
             expect(history.graph().entity('n-1')).to.eql(iD.osmNode({id: 'n-1', loc: [1, 2]}));
             expect(history.undoAnnotation()).to.eql('Added a point.');
             expect(history.imageryUsed()).to.eql(['Bing']);
-            expect(iD.Entity.id.next).to.eql({node: -2, way: -1, relation: -1});
+            expect(iD.osmEntity.id.next).to.eql({node: -2, way: -1, relation: -1});
         });
 
         it('restores from v1 JSON (modification)', function() {
@@ -469,7 +469,7 @@ describe('iD.coreHistory', function () {
             expect(history.graph().entity('n-1')).to.eql(iD.osmNode({id: 'n-1', loc: [2, 3], v: 1}));
             expect(history.undoAnnotation()).to.eql('Moved a point.');
             expect(history.imageryUsed()).to.eql(['Bing']);
-            expect(iD.Entity.id.next).to.eql({node: -2, way: -1, relation: -1});
+            expect(iD.osmEntity.id.next).to.eql({node: -2, way: -1, relation: -1});
         });
 
         it('restores from v1 JSON (deletion)', function() {
@@ -486,7 +486,7 @@ describe('iD.coreHistory', function () {
             expect(history.graph().hasEntity('n1')).to.be.undefined;
             expect(history.undoAnnotation()).to.eql('Deleted a point.');
             expect(history.imageryUsed()).to.eql(['Bing']);
-            expect(iD.Entity.id.next).to.eql({node: -1, way: -2, relation: -3});
+            expect(iD.osmEntity.id.next).to.eql({node: -1, way: -2, relation: -3});
         });
 
         it('restores from v2 JSON (creation)', function() {
@@ -506,7 +506,7 @@ describe('iD.coreHistory', function () {
             expect(history.graph().entity('n-1')).to.eql(iD.osmNode({id: 'n-1', loc: [1, 2]}));
             expect(history.undoAnnotation()).to.eql('Added a point.');
             expect(history.imageryUsed()).to.eql(['Bing']);
-            expect(iD.Entity.id.next).to.eql({node: -2, way: -1, relation: -1});
+            expect(iD.osmEntity.id.next).to.eql({node: -2, way: -1, relation: -1});
             expect(history.difference().created().length).to.eql(1);
         });
 
@@ -528,7 +528,7 @@ describe('iD.coreHistory', function () {
             expect(history.graph().entity('n1')).to.eql(iD.osmNode({id: 'n1', loc: [2, 3], v: 1}));
             expect(history.undoAnnotation()).to.eql('Moved a point.');
             expect(history.imageryUsed()).to.eql(['Bing']);
-            expect(iD.Entity.id.next).to.eql({node: -2, way: -1, relation: -1});
+            expect(iD.osmEntity.id.next).to.eql({node: -2, way: -1, relation: -1});
             expect(history.difference().modified().length).to.eql(1);
         });
 
@@ -548,7 +548,7 @@ describe('iD.coreHistory', function () {
             expect(history.graph().hasEntity('n1')).to.be.undefined;
             expect(history.undoAnnotation()).to.eql('Deleted a point.');
             expect(history.imageryUsed()).to.eql(['Bing']);
-            expect(iD.Entity.id.next).to.eql({node: -1, way: -2, relation: -3});
+            expect(iD.osmEntity.id.next).to.eql({node: -1, way: -2, relation: -3});
             expect(history.difference().deleted().length).to.eql(1);
         });
 
@@ -570,7 +570,7 @@ describe('iD.coreHistory', function () {
             expect(history.graph().entity('n-1')).to.eql(iD.osmNode({id: 'n-1', loc: [1, 2]}));
             expect(history.undoAnnotation()).to.eql('Added a point.');
             expect(history.imageryUsed()).to.eql(['Bing']);
-            expect(iD.Entity.id.next).to.eql({node: -2, way: -1, relation: -1});
+            expect(iD.osmEntity.id.next).to.eql({node: -2, way: -1, relation: -1});
             expect(history.difference().created().length).to.eql(1);
         });
 
@@ -592,7 +592,7 @@ describe('iD.coreHistory', function () {
             expect(history.graph().entity('n1')).to.eql(iD.osmNode({id: 'n1', loc: [2, 3], v: 1}));
             expect(history.undoAnnotation()).to.eql('Moved a point.');
             expect(history.imageryUsed()).to.eql(['Bing']);
-            expect(iD.Entity.id.next).to.eql({node: -2, way: -1, relation: -1});
+            expect(iD.osmEntity.id.next).to.eql({node: -2, way: -1, relation: -1});
             expect(history.difference().modified().length).to.eql(1);
         });
 
@@ -612,7 +612,7 @@ describe('iD.coreHistory', function () {
             expect(history.graph().hasEntity('n1')).to.be.undefined;
             expect(history.undoAnnotation()).to.eql('Deleted a point.');
             expect(history.imageryUsed()).to.eql(['Bing']);
-            expect(iD.Entity.id.next).to.eql({node: -1, way: -2, relation: -3});
+            expect(iD.osmEntity.id.next).to.eql({node: -1, way: -2, relation: -3});
             expect(history.difference().deleted().length).to.eql(1);
         });
     });

@@ -16,11 +16,8 @@ on the iD project, and then create this file with contents like<br><pre>
 #### Update `2.x` branch
 ```bash
 $  git checkout 2.x
-$  rm -rf node_modules/editor-layer-index/
-$  npm install
-$  npm run imagery
+$  npm run install
 $  npm run all
-$  git add . && git commit -m 'npm run imagery'
 $  npm run translations
 $  git add . && git commit -m 'npm run translations'
 ```
