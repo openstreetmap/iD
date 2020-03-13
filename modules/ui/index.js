@@ -44,7 +44,6 @@ export { uiNoteHeader } from './note_header';
 export { uiNoteReport } from './note_report';
 export { uiPresetIcon } from './preset_icon';
 export { uiPresetList } from './preset_list';
-export { uiRadialMenu } from './radial_menu';
 export { uiRestore } from './restore';
 export { uiScale } from './scale';
 export { uiSidebar } from './sidebar';

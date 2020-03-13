@@ -77,8 +77,7 @@ ul li {
 }
 
 a,
-button,
-.radial-menu-item {
+button {
     cursor: pointer;
 }
 
@@ -5279,46 +5278,6 @@ li.hide + li.version .badge .tooltip .popover-arrow {
 [dir='rtl'] li.hide + li.version .badge .tooltip .popover-arrow {
     left: 15px !important;
     right: auto !important;
-}
-
-
-/* Contextual Radial Menu (deprecated)
-------------------------------------------------------- */
-.radial-menu-tooltip {
-    opacity: 0.8;
-    display: none;
-    position: absolute;
-    width: 200px;
-}
-
-.radial-menu-background {
-    fill: none;
-    stroke: black;
-    stroke-opacity: 0.5;
-}
-
-.radial-menu-item circle {
-    fill: #eee;
-}
-
-.radial-menu-item circle:active,
-.radial-menu-item circle:hover {
-    fill: #fff;
-}
-
-.radial-menu-item.disabled circle {
-    cursor: auto;
-    fill: rgba(255,255,255,.5);
-}
-
-.radial-menu-item use {
-    fill: #222;
-    color: #79f;
-}
-
-.radial-menu-item.disabled use {
-    fill: rgba(32,32,32,.5);
-    color: rgba(40,40,40,.5);
 }
 
 

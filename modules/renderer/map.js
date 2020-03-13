@@ -603,8 +603,7 @@ export function rendererMap(context) {
     function resetTransform() {
         if (!_isTransformed) return false;
 
-        // deprecation warning - Radial Menu to be removed in iD v3
-        surface.selectAll('.edit-menu, .radial-menu').interrupt().remove();
+        surface.selectAll('.edit-menu').interrupt().remove();
         utilSetTransform(supersurface, 0, 0);
         _isTransformed = false;
         if (context.inIntro()) {
