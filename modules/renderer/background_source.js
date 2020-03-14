@@ -3,7 +3,7 @@ import { json as d3_json } from 'd3-fetch';
 
 import { t } from '../util/locale';
 import { geoExtent, geoSphericalDistance } from '../geo';
-import { utilDetect } from '../util/detect';
+import { utilDetect, utilQsString, utilStringQs } from '../util';
 
 
 function localeDateString(s) {
@@ -540,7 +540,26 @@ rendererBackgroundSource.Custom = function(template) {
 
 
     source.imageryUsed = function() {
-        return 'Custom (' + source.template() + ' )';
+        // sanitize personal connection tokens - #6801
+        var cleaned = source.template();
+
+        // from query string parameters
+        if (cleaned.indexOf('?') !== -1) {
+            var parts = cleaned.split('?', 2);
+            var qs = utilStringQs(parts[1]);
+
+            ['access_token', 'connectId', 'token'].forEach(function(param) {
+                if (qs[param]) {
+                    qs[param] = '{apikey}';
+                }
+            });
+            cleaned = parts[0] + '?' + utilQsString(qs, true);  // true = soft encode
+        }
+
+        // from wms/wmts api path parameters
+        cleaned = cleaned.replace(/token\/(\w+)/, 'token/{apikey}');
+
+        return 'Custom (' + cleaned + ' )';
     };
 
 
