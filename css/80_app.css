@@ -328,32 +328,32 @@ button.disabled {
     cursor: not-allowed;
 }
 
-.joined > * {
+.joined > button {
     border-radius: 0;
-    border-right: 1px solid rgba(0,0,0,.5);
+    border-width: 0;
+    border-style: solid;
+    border-color: rgba(0,0,0,.5);
 }
-[dir='rtl'] .joined > * {
-    border-left: 1px solid rgba(0,0,0,.5);
-    border-right: none;
+.fillL .joined > button {
+    border-color: #fff;
 }
-
-.fillL .joined > * {
-    border-right: 1px solid #fff;
+[dir='ltr'] .joined > button:not(:last-child) {
+    border-right-width: 1px;
 }
-.joined > *:first-child {
-    border-radius: 4px 0 0 4px;
-}
-[dir='rtl'] .joined > *:first-child {
-    border-radius: 0 4px 4px 0;
-}
-.joined > *:last-child {
-    border-right-width: 0;
-    border-radius: 0 4px 4px 0;
-}
-[dir='rtl'] .joined > *.bar-button:last-child {
-    border-radius: 4px 0 0 4px;
+[dir='rtl'] .joined > button:not(:last-child) {
+    border-left-width: 1px;
 }
 
+[dir='ltr'] .joined > button:first-child,
+[dir='rtl'] .joined > button:last-child {
+    border-top-left-radius: 4px;
+    border-bottom-left-radius: 4px;
+}
+[dir='ltr'] .joined > button:last-child,
+[dir='rtl'] .joined > button:first-child {
+    border-top-right-radius: 4px;
+    border-bottom-right-radius: 4px;
+}
 
 /* Action buttons */
 button.action {

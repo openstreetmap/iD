@@ -94,7 +94,7 @@ export function uiToolSegemented(context) {
 
     tool.allowed = function() {
         if (tool.loadItems) tool.loadItems();
-        return tool.items.length > 1;
+        return tool.items.length > 0;
     };
 
     tool.install = function() {

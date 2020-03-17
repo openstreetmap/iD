@@ -55,9 +55,7 @@ export function uiToolStructure(context) {
     var prevWayID;
 
     tool.loadItems = function() {
-        tool.items = [
-            structureNone
-        ];
+        tool.items = [];
 
         var tags = activeTags();
 
@@ -70,6 +68,11 @@ export function uiToolStructure(context) {
 
         if (allowsStructure(osmTagsAllowingBridges)) tool.items.push(structureBridge);
         if (allowsStructure(osmTagsAllowingTunnels)) tool.items.push(structureTunnel);
+
+        if (tool.items.length) {
+            // only show "none" option if other structures are supported
+            tool.items = [structureNone].concat(tool.items);
+        }
     };
 
     tool.chooseItem = function(d) {
@@ -182,10 +185,10 @@ export function uiToolStructure(context) {
         return structureNone;
     };
 
-    var parentAvailable = tool.allowed;
+    var parentAllowed = tool.allowed;
     tool.allowed = function() {
         var modeID = context.mode().id;
-        return parentAvailable() && (modeID === 'add-line' || modeID === 'draw-line');
+        return parentAllowed() && (modeID === 'add-line' || modeID === 'draw-line');
     };
 
     return tool;
