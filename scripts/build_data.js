@@ -70,7 +70,8 @@ function buildData() {
     'fas-lock': {},
     'fas-th-list': {},
     'fas-user-cog': {},
-    'fas-toolbox': {}
+    'fas-toolbox': {},
+    'fas-history': {}
   };
 
   // The Noun Project icons used

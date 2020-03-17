@@ -6,7 +6,7 @@ export function uiToolAddRecent(context) {
     var tool = uiToolQuickPresets(context);
     tool.id = 'add_recent';
     tool.label = t('toolbar.recent');
-    tool.iconName = 'fas-clock';
+    tool.iconName = 'fas-history';
 
     tool.itemsToDraw = function() {
         if (context.presets().getAddable().length) return [];
