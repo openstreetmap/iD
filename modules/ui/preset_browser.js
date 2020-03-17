@@ -594,7 +594,7 @@ export function uiPresetBrowser(context, allowedGeometry, onChoose, onCancel) {
 
             var isAutoHidden = context.features().autoHidden(hiddenPresetFeatures.key);
             var tooltipIdSuffix = isAutoHidden ? 'zoom' : 'manual';
-            var tooltipObj = { features: hiddenPresetFeatures.title };
+            var tooltipObj = { features: t('feature.' + hiddenPresetFeatures + '.description') };
             button.call(tooltip('dark')
                 .html(true)
                 .title(t('inspector.hidden_preset.' + tooltipIdSuffix, tooltipObj))

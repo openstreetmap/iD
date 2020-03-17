@@ -83,7 +83,8 @@ export function uiToolQuickPresets(context) {
                 var hiddenPresetFeatures = context.features().isHiddenPreset(d.preset, d.preset.geometry[0]);
                 var isAutoHidden = context.features().autoHidden(hiddenPresetFeatures.key);
                 var tooltipIdSuffix = isAutoHidden ? 'zoom' : 'manual';
-                protoMode.description = t('inspector.hidden_preset.' + tooltipIdSuffix, { features: hiddenPresetFeatures.title });
+                var layerTitle = t('feature.' + hiddenPresetFeatures + '.description');
+                protoMode.description = t('inspector.hidden_preset.' + tooltipIdSuffix, { features: layerTitle });
                 protoMode.key = null;
             }
 
