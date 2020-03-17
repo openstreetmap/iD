@@ -24,6 +24,8 @@ export function modeDrawArea(context, wayID, startGraph, button, addMode) {
     };
 
     mode.enter = function() {
+        mode.skipEnter = false;
+
         if (addMode) {
             // Add in case this draw mode was entered from somewhere besides modeAddArea.
             // Duplicates are resolved later.
@@ -35,10 +37,14 @@ export function modeDrawArea(context, wayID, startGraph, button, addMode) {
         _behavior = behaviorDrawWay(context, wayID, undefined, startGraph)
             .tail(t('modes.draw_area.tail'))
             .on('doneSegment.modeDrawArea', function() {
+                if (mode.skipEnter) return;
+
                 // re-enter this mode to start the next segment
                 context.enter(mode);
             })
             .on('finish.modeDrawArea revert.modeDrawArea', function() {
+                if (mode.skipEnter) return;
+
                 if (mode.repeatAddedFeature()) {
                     context.enter(addMode);
                 } else {
@@ -70,6 +76,14 @@ export function modeDrawArea(context, wayID, startGraph, button, addMode) {
 
     mode.exit = function() {
         context.uninstall(_behavior);
+    };
+
+    // complete drawing, if possible
+    mode.finish = function(skipEnter) {
+        if (skipEnter) {
+            mode.skipEnter = true;
+        }
+        return _behavior.finish();
     };
 
     mode.selectedIDs = function() {

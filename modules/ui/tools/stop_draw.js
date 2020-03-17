@@ -23,7 +23,7 @@ export function uiToolStopDraw(context) {
         },
         onClick: function() {
             var mode = context.mode();
-            if (cancelOrFinish === 'finish' && mode.finish) {
+            if (mode && mode.finish) {
                 mode.finish();
             } else {
                 context.enter(modeBrowse(context));
