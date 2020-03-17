@@ -1050,6 +1050,10 @@ a.hide-toggle {
     z-index: 2;
     visibility: hidden;
 }
+.preset-icon-container.small img.image-icon {
+    width: 34px;
+    height: 34px;
+}
 .preset-icon-container.showing-img img.image-icon {
     visibility: visible;
 }
