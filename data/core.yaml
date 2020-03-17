@@ -71,6 +71,8 @@ en:
       description: "Add restaurants, monuments, postal boxes or other points to the map."
       tail: Click on the map to add a point.
       filter_tooltip: points
+      warning:
+        vertex_placement: This must be placed along a line or area.
     add_note:
       title: Note
       label: Add Note
