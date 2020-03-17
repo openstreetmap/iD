@@ -11,15 +11,24 @@ import { actionMoveNode } from '../actions/move_node';
 import { actionNoop } from '../actions/noop';
 import { behaviorDraw } from './draw';
 import { geoChooseEdge, geoHasSelfIntersections } from '../geo';
-import { modeBrowse } from '../modes/browse';
-import { modeSelect } from '../modes/select';
 import { osmNode } from '../osm/node';
 import { utilRebind } from '../util/rebind';
 import { utilKeybinding } from '../util';
 
-export function behaviorDrawWay(context, wayID, index, mode, startGraph) {
+export function behaviorDrawWay(context, wayID, index, startGraph) {
 
-    var dispatch = d3_dispatch('rejectedSelfIntersection');
+    var dispatch = d3_dispatch(
+        // completed the drawing session
+        'finish',
+        // aborted the drawing session; graph was reset
+        'revert',
+
+        // this particular segment is complete; drawing should continue
+        'doneSegment',
+
+        // the drawing of a self-intersecting way was attempted but not performed
+        'rejectedSelfIntersection'
+    );
 
     var _origWay = context.entity(wayID);
 
@@ -197,21 +206,17 @@ export function behaviorDrawWay(context, wayID, index, mode, startGraph) {
 
         context.pauseChangeDispatch();
 
-        var nextMode;
+        var shouldContinue = false;
 
-        if (context.graph() === startGraph) { // we've undone back to the beginning
-            nextMode = modeSelect(context, [wayID]);
-        } else {
+        if (context.graph() !== startGraph) { // not yet at the beginning
             context.history()
                 .on('undone.draw', null);
             // remove whatever segment was drawn previously
             context.undo();
 
-            if (context.graph() === startGraph) { // we've undone back to the beginning
-                nextMode = modeSelect(context, [wayID]);
-            } else {
+            if (context.graph() !== startGraph) { // not yet at the beginning
                 // continue drawing
-                nextMode = mode;
+                shouldContinue = true;
             }
         }
 
@@ -220,7 +225,12 @@ export function behaviorDrawWay(context, wayID, index, mode, startGraph) {
         context.pop(1);
 
         context.resumeChangeDispatch();
-        context.enter(nextMode);
+
+        if (shouldContinue) {
+            dispatch.call('doneSegment', this);
+        } else {
+            dispatch.call('finish', this);
+        }
     }
 
 
@@ -246,7 +256,7 @@ export function behaviorDrawWay(context, wayID, index, mode, startGraph) {
             .on('clickWay', drawWay.addWay)
             .on('clickNode', drawWay.addNode)
             .on('undo', context.undo)
-            .on('cancel', drawWay.cancel)
+            .on('cancel', drawWay.revert)
             .on('finish', drawWay.finish);
 
         d3_select(window)
@@ -279,6 +289,7 @@ export function behaviorDrawWay(context, wayID, index, mode, startGraph) {
         }
 
         context.map()
+            .dblclickZoomEnable(true)
             .on('drawn.draw', null);
 
         surface.call(behavior.off)
@@ -322,12 +333,12 @@ export function behaviorDrawWay(context, wayID, index, mode, startGraph) {
         }
 
         context.pauseChangeDispatch();
-        doAdd();
+        var finalNode = doAdd();
         // we just replaced the temporary edit with the real one
         _didResolveTempEdit = true;
         context.resumeChangeDispatch();
 
-        context.enter(mode);
+        dispatch.call('doneSegment', this, context.entity(finalNode.id));
     }
 
 
@@ -335,6 +346,7 @@ export function behaviorDrawWay(context, wayID, index, mode, startGraph) {
     drawWay.add = function(loc, d) {
         attemptAdd(d, loc, function() {
             // don't need to do anything extra
+            return _drawNode;
         });
     };
 
@@ -346,6 +358,7 @@ export function behaviorDrawWay(context, wayID, index, mode, startGraph) {
                 actionAddMidpoint({ loc: loc, edge: edge }, _drawNode),
                 _annotation
             );
+            return _drawNode;
         });
     };
 
@@ -366,6 +379,7 @@ export function behaviorDrawWay(context, wayID, index, mode, startGraph) {
                 },
                 _annotation
             );
+            return node;
         });
     };
 
@@ -377,7 +391,7 @@ export function behaviorDrawWay(context, wayID, index, mode, startGraph) {
         checkGeometry(false /* includeDrawNode */);
         if (context.surface().classed('nope')) {
             dispatch.call('rejectedSelfIntersection', this);
-            return;   // can't click here
+            return false;   // can't click here
         }
 
         context.pauseChangeDispatch();
@@ -388,35 +402,28 @@ export function behaviorDrawWay(context, wayID, index, mode, startGraph) {
 
         var way = context.hasEntity(wayID);
         if (!way || way.isDegenerate()) {
-            drawWay.cancel();
-            return;
+            drawWay.revert();
+            return true;
         }
 
-        window.setTimeout(function() {
-            context.map().dblclickZoomEnable(true);
-        }, 1000);
+        dispatch.call('finish', this);
 
-        var isNewFeature = !mode.isContinuing;
-        context.enter(modeSelect(context, [wayID]).newFeature(isNewFeature));
+        return true;
     };
 
 
-    // Cancel the draw operation, delete everything, and return to browse mode.
-    drawWay.cancel = function() {
+    // Cancel drawing and reset everything from this draw session
+    drawWay.revert = function() {
         context.pauseChangeDispatch();
         resetToStartGraph();
         context.resumeChangeDispatch();
-
-        window.setTimeout(function() {
-            context.map().dblclickZoomEnable(true);
-        }, 1000);
 
         context.surface()
             .classed('nope', false)
             .classed('nope-disabled', false)
             .classed('nope-suppressed', false);
 
-        context.enter(modeBrowse(context));
+        dispatch.call('revert', this);
     };
 
 

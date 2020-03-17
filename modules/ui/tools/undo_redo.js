@@ -16,7 +16,9 @@ export function uiToolUndoRedo(context) {
 
     var tool = {
         id: 'undo_redo',
-        label: t('toolbar.undo_redo')
+        label: t('toolbar.undo_redo'),
+        iconName: textDirection === 'rtl' ? 'iD-icon-redo' : 'iD-icon-undo',
+        userToggleable: false
     };
 
     var commands = [{
@@ -36,43 +38,67 @@ export function uiToolUndoRedo(context) {
         return context.mode() && context.mode().id !== 'save' && context.map().editableDataEnabled(true /* ignore min zoom */);
     }
 
+    var tooltipBehavior = tooltip()
+        .placement('bottom')
+        .html(true)
+        .title(function (d) {
+            return uiTooltipHtml(d.annotation() ?
+                t(d.id + '.tooltip', {action: d.annotation()}) :
+                t(d.id + '.nothing'), d.cmd);
+        })
+        .scrollContainer(d3_select('#bar'));
+
+    var buttons;
 
     tool.render = function(selection) {
-        var tooltipBehavior = tooltip()
-            .placement('bottom')
-            .html(true)
-            .title(function (d) {
-                return uiTooltipHtml(d.annotation() ?
-                    t(d.id + '.tooltip', {action: d.annotation()}) :
-                    t(d.id + '.nothing'), d.cmd);
-            })
-            .scrollContainer(d3_select('#bar'));
 
-        var buttons = selection.selectAll('button')
-            .data(commands)
+        buttons = selection.selectAll('button')
+            .data(commands);
+
+        var buttonsEnter = buttons
             .enter()
             .append('button')
             .attr('class', function(d) { return 'disabled ' + d.id + '-button bar-button'; })
             .on('click', function(d) { return d.action(); })
             .call(tooltipBehavior);
 
-        buttons.each(function(d) {
-            var iconName = d.id;
+        buttonsEnter.each(function(d) {
+            var iconName;
             if (textDirection === 'rtl') {
-                if (iconName === 'undo') {
-                    iconName = 'redo';
-                } else if (iconName === 'redo') {
-                    iconName = 'undo';
-                }
+                // reverse the icons for right-to-left layout
+                iconName = d.id === 'undo' ? 'redo' : 'undo';
+            } else {
+                iconName = d.id;
             }
             d3_select(this)
                 .call(svgIcon('#iD-icon-' + iconName));
         });
 
+        buttons = buttonsEnter.merge(buttons);
+    };
+
+    function update() {
+        buttons
+            .property('disabled', !editable())
+            .classed('disabled', function(d) {
+                return !editable() || !d.annotation();
+            })
+            .each(function() {
+                var selection = d3_select(this);
+                if (!selection.select('.tooltip.in').empty()) {
+                    selection.call(tooltipBehavior.updateContent);
+                }
+            });
+    }
+
+    tool.allowed = function() {
+        return context.mode().id !== 'save';
+    };
+
+    tool.install = function() {
         context.keybinding()
             .on(commands[0].cmd, function() { d3_event.preventDefault(); commands[0].action(); })
             .on(commands[1].cmd, function() { d3_event.preventDefault(); commands[1].action(); });
-
 
         var debouncedUpdate = _debounce(update, 500, { leading: true, trailing: true });
 
@@ -87,21 +113,6 @@ export function uiToolUndoRedo(context) {
 
         context
             .on('enter.undo_redo', update);
-
-
-        function update() {
-            buttons
-                .property('disabled', !editable())
-                .classed('disabled', function(d) {
-                    return !editable() || !d.annotation();
-                })
-                .each(function() {
-                    var selection = d3_select(this);
-                    if (!selection.select('.tooltip.in').empty()) {
-                        selection.call(tooltipBehavior.updateContent);
-                    }
-                });
-        }
     };
 
     tool.uninstall = function() {

@@ -18,7 +18,7 @@ export { presetPreset };
 // with methods for loading new data and returning defaults
 //
 export function presetIndex(context) {
-  const dispatch = d3_dispatch('recentsChange');
+  const dispatch = d3_dispatch('favoritePreset', 'recentsChange');
   const MAXRECENTS = 30;
   let _presetData;
 
@@ -44,6 +44,7 @@ export function presetIndex(context) {
   let _universal = [];
   let _addablePresetIDs = null;   // Set of preset IDs that the user can add
   let _recents;
+  let _favorites;
 
   // Index of presets by (geometry, tag key).
   let _geometryIndex = { point: {}, vertex: {}, line: {}, area: {}, relation: {} };
@@ -321,7 +322,7 @@ export function presetIndex(context) {
   };
 
   // pass a Set of addable preset ids
-  _this.addablePresetIDs = function(val) {
+  _this.addablePresetIDs = (val) => {
     if (!arguments.length) return _addablePresetIDs;
 
     _addablePresetIDs = val;
@@ -342,37 +343,45 @@ export function presetIndex(context) {
   };
 
 
-  function RibbonItem(preset, geometry, source) {
+  function RibbonItem(preset, source) {
     let item = {};
     item.preset = preset;
-    item.geometry = geometry;
     item.source = source;
 
+    item.isFavorite = () => item.source === 'favorite';
     item.isRecent = () => item.source === 'recent';
-    item.matches = (preset, geometry) => item.preset.id === preset.id && item.geometry === geometry;
-    item.minified = () => ({ pID: item.preset.id, geom: item.geometry });
+    item.matches = (preset) => item.preset.id === preset.id;
+    item.minified = () => ({ pID: item.preset.id });
 
     return item;
   }
 
 
   function ribbonItemForMinified(d, source) {
-    if (d && d.pID && d.geom) {
+    if (d && d.pID) {
       const preset = _this.item(d.pID);
       if (!preset) return null;
-
-      let geom = d.geom;
-      // treat point and vertex features as one geometry
-      if (geom === 'vertex') geom = 'point';
-
-      // iD's presets could have changed since this was saved,
-      // so make sure it's still valid.
-      if (preset.matchGeometry(geom) || (geom === 'point' && preset.matchGeometry('vertex'))) {
-        return RibbonItem(preset, geom, source);
-      }
+      return RibbonItem(preset, source);
     }
     return null;
   }
+
+
+  _this.getGenericRibbonItems = () => {
+    return ['point', 'line', 'area'].map(id => RibbonItem(_this.item(id), 'generic'));
+  };
+
+
+  _this.getAddable = () => {
+      if (!_addablePresetIDs) return [];
+
+      return _addablePresetIDs.map((id) => {
+        const preset = _this.item(id);
+        if (preset) {
+          return RibbonItem(preset, 'addable');
+        }
+      }).filter(Boolean);
+  };
 
 
   function setRecents(items) {
@@ -397,8 +406,21 @@ export function presetIndex(context) {
   };
 
 
-  _this.removeRecent = (preset, geometry) => {
-    const item = _this.recentMatching(preset, geometry);
+  _this.addRecent = (preset, besidePreset, after) => {
+    const recents = _this.getRecents();
+
+    const beforeItem = _this.recentMatching(besidePreset);
+    let toIndex = recents.indexOf(beforeItem);
+    if (after) toIndex += 1;
+
+    const newItem = RibbonItem(preset, 'recent');
+    recents.splice(toIndex, 0, newItem);
+    setRecents(recents);
+  };
+
+
+  _this.removeRecent = (preset) => {
+    const item = _this.recentMatching(preset);
     if (item) {
       let items = _this.getRecents();
       items.splice(items.indexOf(item), 1);
@@ -407,11 +429,10 @@ export function presetIndex(context) {
   };
 
 
-  _this.recentMatching = (preset, geometry) => {
-    geometry = _this.fallback(geometry).id;
+  _this.recentMatching = (preset) => {
     const items = _this.getRecents();
     for (let i in items) {
-      if (items[i].matches(preset, geometry)) {
+      if (items[i].matches(preset)) {
         return items[i];
       }
     }
@@ -439,18 +460,16 @@ export function presetIndex(context) {
   };
 
 
-  _this.setMostRecent = (preset, geometry) => {
+  _this.setMostRecent = (preset) => {
     if (context.inIntro()) return;
     if (preset.searchable === false) return;
 
-    geometry = _this.fallback(geometry).id;
-
     let items = _this.getRecents();
-    let item = _this.recentMatching(preset, geometry);
+    let item = _this.recentMatching(preset);
     if (item) {
       items.splice(items.indexOf(item), 1);
     } else {
-      item = RibbonItem(preset, geometry, 'recent');
+      item = RibbonItem(preset, 'recent');
     }
 
     // remove the last recent (first in, first out)
@@ -461,6 +480,86 @@ export function presetIndex(context) {
     // prepend array
     items.unshift(item);
     setRecents(items);
+  };
+
+  function setFavorites(items) {
+    _favorites = items;
+    const minifiedItems = items.map(d => d.minified());
+    context.storage('preset_favorites', JSON.stringify(minifiedItems));
+
+    // call update
+    dispatch.call('favoritePreset');
+  }
+
+  _this.addFavorite = (preset, besidePreset, after) => {
+      const favorites = _this.getFavorites();
+
+      const beforeItem = _this.favoriteMatching(besidePreset);
+      let toIndex = favorites.indexOf(beforeItem);
+      if (after) toIndex += 1;
+
+      const newItem = RibbonItem(preset, 'favorite');
+      favorites.splice(toIndex, 0, newItem);
+      setFavorites(favorites);
+  };
+
+  _this.toggleFavorite = (preset) => {
+    const favs = _this.getFavorites();
+    const favorite = _this.favoriteMatching(preset);
+    if (favorite) {
+      favs.splice(favs.indexOf(favorite), 1);
+    } else {
+      // only allow 10 favorites
+      if (favs.length === 10) {
+          // remove the last favorite (last in, first out)
+          favs.pop();
+      }
+      // append array
+      favs.push(RibbonItem(preset, 'favorite'));
+    }
+    setFavorites(favs);
+  };
+
+
+  _this.removeFavorite = (preset) => {
+    const item = _this.favoriteMatching(preset);
+    if (item) {
+      const items = _this.getFavorites();
+      items.splice(items.indexOf(item), 1);
+      setFavorites(items);
+    }
+  };
+
+
+  _this.getFavorites = () => {
+    if (!_favorites) {
+
+      // fetch from local storage
+      let rawFavorites = JSON.parse(context.storage('preset_favorites'));
+
+      if (!rawFavorites) {
+        rawFavorites = [];
+        context.storage('preset_favorites', JSON.stringify(rawFavorites));
+      }
+
+      _favorites = rawFavorites.reduce((output, d) => {
+        const item = ribbonItemForMinified(d, 'favorite');
+        if (item && item.preset.addable()) output.push(item);
+        return output;
+      }, []);
+    }
+    return _favorites;
+  };
+
+
+  _this.favoriteMatching = (preset) => {
+    const favs = _this.getFavorites();
+    for (let index in favs) {
+      if (favs[index].matches(preset)) {
+        return favs[index];
+      }
+    }
+    return null;
   };
 
 

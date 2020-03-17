@@ -8,6 +8,7 @@ export function uiPresetIcon(context) {
   let _preset;
   let _geometry;
   let _sizeClass = 'medium';
+  let _pointMarker = true;
 
 
   function isSmall() {
@@ -242,7 +243,7 @@ export function uiPresetIcon(context) {
     const isTnp = picon && /^tnp-/.test(picon);
     const isiDIcon = picon && !(isMaki || isTemaki || isFa || isTnp);
     const isCategory = !p.setTags;
-    const drawPoint = picon && geom === 'point' && isSmall() && !isFallback;
+    const drawPoint = picon && geom === 'point' && isSmall() && !isFallback && _pointMarker;
     const drawVertex = picon !== null && geom === 'vertex' && (!isSmall() || !isFallback);
     const drawLine = picon && geom === 'line' && !isFallback && !isCategory;
     const drawArea = picon && geom === 'area' && !isFallback;
@@ -408,6 +409,13 @@ export function uiPresetIcon(context) {
   presetIcon.sizeClass = function(val) {
     if (!arguments.length) return _sizeClass;
     _sizeClass = val;
+    return presetIcon;
+  };
+
+
+  presetIcon.pointMarker = function(val) {
+    if (!arguments.length) return _pointMarker;
+    _pointMarker = val;
     return presetIcon;
   };
 

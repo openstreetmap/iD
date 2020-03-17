@@ -1,59 +1,84 @@
 import { t } from '../util/locale';
 import { behaviorDrawWay } from '../behavior/draw_way';
+import { modeSelect } from './select';
 import { uiFlash } from '../ui/flash';
 
 
-export function modeDrawArea(context, wayID, startGraph, button) {
+export function modeDrawArea(context, wayID, startGraph, button, addMode) {
     var mode = {
         button: button,
-        id: 'draw-area'
+        id: 'draw-area',
+        addMode: addMode
     };
 
-    var behavior;
+    var _behavior;
 
     mode.wayID = wayID;
 
+    mode.repeatAddedFeature = function(val) {
+        if (addMode) return addMode.repeatAddedFeature(val);
+    };
+
+    mode.addedEntityIDs = function() {
+        if (addMode) return addMode.addedEntityIDs();
+    };
+
     mode.enter = function() {
+        if (addMode) {
+            // Add in case this draw mode was entered from somewhere besides modeAddArea.
+            // Duplicates are resolved later.
+            addMode.addAddedEntityID(wayID);
+        }
+
         var way = context.entity(wayID);
 
-        behavior = behaviorDrawWay(context, wayID, undefined, mode, startGraph)
+        _behavior = behaviorDrawWay(context, wayID, undefined, startGraph)
             .tail(t('modes.draw_area.tail'))
+            .on('doneSegment.modeDrawArea', function() {
+                // re-enter this mode to start the next segment
+                context.enter(mode);
+            })
+            .on('finish.modeDrawArea revert.modeDrawArea', function() {
+                if (mode.repeatAddedFeature()) {
+                    context.enter(addMode);
+                } else {
+                    var newMode = modeSelect(context, mode.addedEntityIDs() || [wayID])
+                        .newFeature(true);
+                    context.enter(newMode);
+                }
+            })
             .on('rejectedSelfIntersection.modeDrawArea', function() {
                 uiFlash()
                     .text(t('self_intersection.error.areas'))();
             });
 
-        var addNode = behavior.addNode;
+        var addNode = _behavior.addNode;
 
-        behavior.addNode = function(node, d) {
+        _behavior.addNode = function(node, d) {
             var length = way.nodes.length;
             var penultimate = length > 2 ? way.nodes[length - 2] : null;
 
             if (node.id === way.first() || node.id === penultimate) {
-                behavior.finish();
+                _behavior.finish();
             } else {
                 addNode(node, d);
             }
         };
 
-        context.install(behavior);
+        context.install(_behavior);
     };
-
 
     mode.exit = function() {
-        context.uninstall(behavior);
+        context.uninstall(_behavior);
     };
-
 
     mode.selectedIDs = function() {
         return [wayID];
     };
 
-
     mode.activeID = function() {
-        return (behavior && behavior.activeID()) || [];
+        return _behavior && _behavior.activeID();
     };
-
 
     return mode;
 }
