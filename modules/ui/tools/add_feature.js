@@ -18,7 +18,7 @@ export function uiToolAddFeature(context) {
         id: 'add_feature',
         label: t('toolbar.add_feature'),
         itemClass: 'disclosing',
-        iconName: 'iD-presets-grid',
+        iconName: 'iD-features-grid',
         iconClass: 'icon-30'
     };
 
