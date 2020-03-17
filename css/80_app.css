@@ -5471,7 +5471,8 @@ li.hide + li.version .badge .tooltip .popover-arrow {
 /* Preset browser
 ------------------------------------------------------- */
 .preset-browser.poplist {
-    min-width: 300px;
+    width: 100%;
+    max-width: 325px;
 }
 .assistant .preset-browser.poplist {
     top: 84px;
