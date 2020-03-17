@@ -262,14 +262,14 @@ export function presetPreset(presetID, preset, addable, allFields, allPresets) {
   }
 
   // The geometry type to use when adding a new feature of this preset
-  _this.defaultAddGeometry = (context, allowedGeometries)=> {
+  _this.defaultAddGeometry = (context, allowedGeometries) => {
     var geometry = _this.geometry.slice().filter((geom) => {
       if (allowedGeometries && allowedGeometries.indexOf(geom) === -1) return false;
       if (context.features().isHiddenPreset(_this, geom)) return false;
       return true;
     });
 
-    var mostRecentAddGeom = context.storage('preset.' + preset.id + '.addGeom');
+    var mostRecentAddGeom = context.storage('preset.' + _this.id + '.addGeom');
     if (mostRecentAddGeom === 'vertex') mostRecentAddGeom = 'point';
     if (mostRecentAddGeom && geometry.indexOf(mostRecentAddGeom) !== -1) {
       return mostRecentAddGeom;
