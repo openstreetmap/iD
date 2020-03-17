@@ -54,9 +54,10 @@ export function uiPresetIcon(context) {
 
 
   function renderCircleFill(fillEnter) {
-    const w = 60;
-    const h = 60;
-    const d = 40;
+    const w = isSmall() ? 40 : 60;
+    const h = w;
+    const d = w * 2 / 3;
+    const r = d / 2;
 
     fillEnter
       .append('svg')
@@ -67,7 +68,7 @@ export function uiPresetIcon(context) {
       .append('circle')
       .attr('cx', w / 2)
       .attr('cy', h / 2)
-      .attr('r', d / 2);
+      .attr('r', r);
   }
 
 

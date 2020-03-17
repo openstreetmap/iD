@@ -1114,7 +1114,7 @@ a.hide-toggle {
 .preset-icon-fill-vertex circle {
     stroke-width: 1.5px;
     stroke: #333;
-    fill: #efefef;
+    fill: none;
     backface-visibility: hidden;
 }
 
