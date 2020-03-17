@@ -11,9 +11,11 @@ export function uiToolAddFavorite(context) {
     tool.itemsToDraw = function() {
         if (context.presets().getAddable().length) return [];
 
-        var items = context.presets().getFavorites().slice(0, 10);
-
         var precedingCount = context.storage('tool.add_generic.toggledOn') === 'true' ? 3 : 0;
+
+        var maxFavorites = 10 - precedingCount;
+
+        var items = context.presets().getFavorites().slice(0, maxFavorites);
 
         items.forEach(function(item, index) {
             var totalIndex = precedingCount + index;
