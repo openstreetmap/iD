@@ -160,156 +160,162 @@ export function uiToolQuickPresets(context) {
                     );
             });
 
-        var scrollNode = d3_select('#bar').node();
-        var dragOrigin, dragMoved, targetData;
-        var ltr = textDirection === 'ltr',
-            rtl = !ltr;
-
         buttonsEnter
             .filter('.add-favorite, .add-recent')
-            .call(d3_drag()
-            .on('start', function() {
-                var node = d3_select(this).node();
-                dragOrigin = {
-                    x: d3_event.x,
-                    y: d3_event.y,
-                    nodeLeft: node.offsetLeft,
-                    nodeTop: node.offsetTop,
-                };
-                targetData = null;
-                dragMoved = false;
-            })
-            .on('drag', function(d) {
-                dragMoved = true;
-
-                var deltaX = d3_event.x - dragOrigin.x,
-                    deltaY = d3_event.y - dragOrigin.y;
-
-                var button = d3_select(this);
-
-                if (!button.classed('dragging')) {
-                    // haven't committed to dragging yet
-
-                    // don't display drag until dragging beyond a distance threshold
-                    if (Math.sqrt(Math.pow(deltaX, 2) + Math.pow(deltaY, 2)) <= 5) return;
-
-                    // setup dragging
-
-                    d3_select(this.parentNode)
-                        .insert('div', '#' + button.attr('id'))
-                        .attr('class', 'drag-placeholder');
-
-                    button
-                        .classed('dragging', true)
-                        // must use absolute position so button will display if dragged out of the toolbar
-                        .style('position', 'absolute');
-                }
-
-                var draggingNode = button.node();
-                var eventX = d3_event.x + draggingNode.parentNode.offsetLeft;
-                var origLeft = dragOrigin.nodeLeft;
-
-                button
-                    .classed('removing', deltaY > 50)
-                    .style('left', dragOrigin.nodeLeft + deltaX - scrollNode.scrollLeft + 'px')
-                    .style('top', dragOrigin.nodeTop + deltaY + 'px');
-
-                targetData = null;
-
-                d3_selectAll('#bar button.add-favorite, #bar button.add-recent')
-                    .style('transform', function(d2) {
-
-                        if (d.button === d2.button) return null;
-
-                        // no need to reposition elements if dragging out of toolbar
-                        if (deltaY > 50) return null;
-
-                        var node = d3_select(this).node(),
-                            nodeLeft = node.offsetLeft,
-                            nodeRight = nodeLeft + node.offsetWidth;
-
-                        if ((ltr && nodeLeft > origLeft && eventX > nodeLeft) ||
-                            (rtl && nodeLeft < origLeft && eventX < nodeRight)) {
-
-                            if ((ltr && eventX < nodeRight) ||
-                                (rtl && eventX > nodeLeft)) {
-                                targetData = d2;
-                            }
-                            return 'translateX(' + (ltr ? '-' : '') + '100%)';
-
-                        } else if ((ltr && nodeLeft < origLeft && eventX < nodeRight) ||
-                                   (rtl && nodeLeft > origLeft && eventX > nodeLeft)) {
-
-                            if ((ltr && eventX > nodeLeft) ||
-                                (rtl && eventX < nodeRight)) {
-                                targetData = d2;
-                            }
-                            return 'translateX(' + (ltr ? '' : '-') + '100%)';
-                        }
-
-                        return null;
-                    });
-            })
-            .on('end', function(d) {
-
-                if (dragMoved && !d3_select(this).classed('dragging')) {
-                    // didn't move, interpret as a click
-                    toggleMode(d);
-                    return;
-                }
-
-                d3_selectAll('#bar .drag-placeholder')
-                    .remove();
-
-                d3_select(this)
-                    .classed('dragging', false)
-                    .classed('removing', false)
-                    .style('position', null);
-
-                d3_selectAll('#bar button.add-favorite, #bar button.add-recent')
-                    .style('transform', null);
-
-                var deltaY = d3_event.y - dragOrigin.y;
-                if (deltaY > 50) {
-                    // dragged out of the top bar, remove
-
-                    if (d.isFavorite()) {
-                        context.presets().removeFavorite(d.preset);
-                        // also remove this as a recent so it doesn't still appear
-                        context.presets().removeRecent(d.preset);
-                    } else if (d.isRecent()) {
-                        context.presets().removeRecent(d.preset);
-                    }
-                } else if (targetData !== null) {
-                    // dragged to a new position, reorder
-
-                    if (d.isFavorite()) {
-                        context.presets().removeFavorite(d.preset);
-                        if (targetData.isRecent()) {
-                            // also remove this as a recent so it doesn't appear twice
-                            context.presets().removeRecent(d.preset);
-                        }
-                    } else if (d.isRecent()) {
-                        context.presets().removeRecent(d.preset);
-                    }
-
-                    var draggingAfter = (ltr && d3_event.x > dragOrigin.x) ||
-                                        (rtl && d3_event.x < dragOrigin.x);
-
-                    if (targetData.isFavorite()) {
-                        context.presets().addFavorite(d.preset, targetData.preset, draggingAfter);
-                    } else if (targetData.isRecent()) {
-                        context.presets().addRecent(d.preset, targetData.preset, draggingAfter);
-                    }
-                }
-            })
-        );
+            .call(_d3Dragger);
 
         // update
         buttons = buttons
             .merge(buttonsEnter)
             .classed('disabled', function(d) { return !enabled(d); });
     }
+
+    var _scrollNode, _dragOrigin, _dragMoved, _targetData;
+
+    var _d3Dragger = d3_drag()
+        .on('start', function() {
+            _scrollNode = d3_select('#bar').node();
+
+            var node = d3_select(this).node();
+            _dragOrigin = {
+                x: d3_event.x,
+                y: d3_event.y,
+                nodeLeft: node.offsetLeft,
+                nodeTop: node.offsetTop,
+            };
+            _targetData = null;
+            _dragMoved = false;
+        })
+        .on('drag', function(d) {
+            _dragMoved = true;
+
+            var ltr = textDirection === 'ltr',
+                rtl = !ltr;
+
+            var deltaX = d3_event.x - _dragOrigin.x,
+                deltaY = d3_event.y - _dragOrigin.y;
+
+            var button = d3_select(this);
+
+            if (!button.classed('dragging')) {
+                // haven't committed to dragging yet
+
+                // don't display drag until dragging beyond a distance threshold
+                if (Math.sqrt(Math.pow(deltaX, 2) + Math.pow(deltaY, 2)) <= 5) return;
+
+                // setup dragging
+
+                d3_select(this.parentNode)
+                    .insert('div', '#' + button.attr('id'))
+                    .attr('class', 'drag-placeholder');
+
+                button
+                    .classed('dragging', true)
+                    // must use absolute position so button will display if dragged out of the toolbar
+                    .style('position', 'absolute');
+            }
+
+            var draggingNode = button.node();
+            var eventX = d3_event.x + draggingNode.parentNode.offsetLeft;
+            var origLeft = _dragOrigin.nodeLeft;
+
+            button
+                .classed('removing', deltaY > 50)
+                .style('left', _dragOrigin.nodeLeft + deltaX - _scrollNode.scrollLeft + 'px')
+                .style('top', _dragOrigin.nodeTop + deltaY + 'px');
+
+            _targetData = null;
+
+            d3_selectAll('#bar button.add-favorite, #bar button.add-recent')
+                .style('transform', function(d2) {
+
+                    if (d.button === d2.button) return null;
+
+                    // no need to reposition elements if dragging out of toolbar
+                    if (deltaY > 50) return null;
+
+                    var node = d3_select(this).node(),
+                        nodeLeft = node.offsetLeft,
+                        nodeRight = nodeLeft + node.offsetWidth;
+
+                    if ((ltr && nodeLeft > origLeft && eventX > nodeLeft) ||
+                        (rtl && nodeLeft < origLeft && eventX < nodeRight)) {
+
+                        if ((ltr && eventX < nodeRight) ||
+                            (rtl && eventX > nodeLeft)) {
+                            _targetData = d2;
+                        }
+                        return 'translateX(' + (ltr ? '-' : '') + '100%)';
+
+                    } else if ((ltr && nodeLeft < origLeft && eventX < nodeRight) ||
+                               (rtl && nodeLeft > origLeft && eventX > nodeLeft)) {
+
+                        if ((ltr && eventX > nodeLeft) ||
+                            (rtl && eventX < nodeRight)) {
+                            _targetData = d2;
+                        }
+                        return 'translateX(' + (ltr ? '' : '-') + '100%)';
+                    }
+
+                    return null;
+                });
+        })
+        .on('end', function(d) {
+
+            if (_dragMoved && !d3_select(this).classed('dragging')) {
+                // didn't move, interpret as a click
+                toggleMode(d);
+                return;
+            }
+
+            var ltr = textDirection === 'ltr',
+                rtl = !ltr;
+
+            d3_selectAll('#bar .drag-placeholder')
+                .remove();
+
+            d3_select(this)
+                .classed('dragging', false)
+                .classed('removing', false)
+                .style('position', null);
+
+            d3_selectAll('#bar button.add-favorite, #bar button.add-recent')
+                .style('transform', null);
+
+            var deltaY = d3_event.y - _dragOrigin.y;
+            if (deltaY > 50) {
+                // dragged out of the top bar, remove
+
+                if (d.isFavorite()) {
+                    context.presets().removeFavorite(d.preset);
+                    // also remove this as a recent so it doesn't still appear
+                    context.presets().removeRecent(d.preset);
+                } else if (d.isRecent()) {
+                    context.presets().removeRecent(d.preset);
+                }
+            } else if (_targetData !== null) {
+                // dragged to a new position, reorder
+
+                if (d.isFavorite()) {
+                    context.presets().removeFavorite(d.preset);
+                    if (_targetData.isRecent()) {
+                        // also remove this as a recent so it doesn't appear twice
+                        context.presets().removeRecent(d.preset);
+                    }
+                } else if (d.isRecent()) {
+                    context.presets().removeRecent(d.preset);
+                }
+
+                var draggingAfter = (ltr && d3_event.x > _dragOrigin.x) ||
+                                    (rtl && d3_event.x < _dragOrigin.x);
+
+                if (_targetData.isFavorite()) {
+                    context.presets().addFavorite(d.preset, _targetData.preset, draggingAfter);
+                } else if (_targetData.isRecent()) {
+                    context.presets().addRecent(d.preset, _targetData.preset, draggingAfter);
+                }
+            }
+        });
 
     tool.allowed = function() {
         return tool.itemsToDraw().length > 0;
