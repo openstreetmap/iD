@@ -621,10 +621,6 @@ button.add-note svg.icon {
     -ms-filter: "FlipH";
 }
 
-#bar.narrow button.bar-button .label {
-    display: none;
-}
-
 [dir='ltr'] .undo-redo button:first-of-type {
     margin-right: 1px;
 }
