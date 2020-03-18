@@ -129,7 +129,11 @@ export function popover(klass) {
         var enter = popoverSelection.enter()
             .append('div')
             .attr('class', 'popover popover-' + _id + ' ' + (klass ? klass : ''))
-            .classed('arrowed', _hasArrow.apply(this, arguments));
+            .classed('arrowed', _hasArrow.apply(this, arguments))
+            .on('wheel.popover mousewheel.popover', function() {
+                // don't pass wheel events to the anchor
+                d3_event.stopPropagation();
+            });
 
         enter
             .append('div')
