@@ -13,6 +13,7 @@ export function modeDrawArea(context, mode) {
     mode.button = mode.button || 'area';
     mode.startGraph = mode.startGraph || context.graph();
     mode.preset = mode.addMode && mode.addMode.preset;
+    mode.geometry = mode.addMode ? mode.addMode.geometry : 'area';
 
     mode.isContinuing = function() {
         return false;
@@ -30,8 +31,7 @@ export function modeDrawArea(context, mode) {
         mode.skipEnter = false;
 
         if (mode.addMode) {
-            // Add in case this draw mode was entered from somewhere besides modeAddArea.
-            // Duplicates are resolved later.
+            // Add in case this draw mode was entered from somewhere besides modeAddArea
             mode.addMode.addAddedEntityID(mode.wayID);
         }
 

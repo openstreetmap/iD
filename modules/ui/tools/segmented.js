@@ -33,7 +33,7 @@ export function uiToolSegemented(context) {
 
     tool.render = function(selection) {
         container = selection;
-        var active = tool.activeItem();
+        var activeItem = tool.activeItem();
 
         var buttons = selection.selectAll('.bar-button')
             .data(tool.items, function(d) { return d.id; });
@@ -41,15 +41,16 @@ export function uiToolSegemented(context) {
         buttons.exit()
             .remove();
 
-        buttons
+        var buttonsEnter = buttons
             .enter()
             .append('button')
             .attr('class', function(d) {
-                return 'bar-button ' + d.id + ' ' + (d === active ? 'active' : '');
+                return 'bar-button ' + d.id;
             })
             .attr('tabindex', -1)
             .on('click', function(d) {
-                if (d3_select(this).classed('active')) return;
+                var button = d3_select(this);
+                if (button.classed('active') || button.classed('disabled')) return;
 
                 setActiveItem(d);
             })
@@ -63,6 +64,19 @@ export function uiToolSegemented(context) {
                 d3_select(this)
                     .call(tooltipBehavior)
                     .call(svgIcon('#' + d.icon, d.iconClass));
+            });
+
+        buttons = buttonsEnter.merge(buttons);
+
+        buttons
+            .classed('active', function(d) {
+                return d === activeItem;
+            })
+            .classed('disabled', function(d) {
+                if (tool.isItemEnabled) {
+                    return !tool.isItemEnabled(d);
+                }
+                return false;
             });
     };
 
@@ -79,11 +93,17 @@ export function uiToolSegemented(context) {
     }
 
     function toggleItem() {
-        if (tool.items.length === 0) return;
-
         var active = tool.activeItem();
-        var index = tool.items.indexOf(active);
-        if (index === tool.items.length - 1) {
+
+        var enabledItems = tool.items.slice().filter(function(item) {
+            return item === active || !tool.isItemEnabled || tool.isItemEnabled(item);
+        });
+
+        if (enabledItems === 0 ||
+            (enabledItems.length === 1 && enabledItems[0] === active)) return;
+
+        var index = enabledItems.indexOf(active);
+        if (index === enabledItems.length - 1) {
             index = 0;
         } else {
             index += 1;

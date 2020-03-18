@@ -88,8 +88,13 @@ export function modeAddPoint(context, mode) {
     }
 
     function didFinishAdding(node) {
-        _allAddedEntityIDs.push(node.id);
-        if (!mode.repeatAddedFeature()) {
+        if (_allAddedEntityIDs.indexOf(node.id) === -1) {
+            _allAddedEntityIDs.push(node.id);
+        }
+        if (mode.repeatAddedFeature()) {
+            // re-enter the mode to trigger UI updates
+            context.enter(mode);
+        } else {
             mode.finish();
         }
     }

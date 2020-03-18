@@ -38,13 +38,13 @@ export function uiToolAddingGeometry(context) {
             icon: 'iD-icon-area',
             label: t('modes.add_area.title'),
             mode: modeAddArea
-        },
+        }/*,
         building: {
             id: 'building',
             icon: 'maki-building-15',
             label: t('presets.presets.building.name'),
             mode: modeAddArea
-        }
+        }*/
     };
 
     tool.chooseItem = function(item) {
@@ -66,30 +66,35 @@ export function uiToolAddingGeometry(context) {
         return items[context.mode().geometry];
     };
 
+    tool.isItemEnabled = function(item) {
+        return item === tool.activeItem() || context.mode().addedEntityIDs().length === 0;
+    };
+
+    var _validModeIDs = new Set(['add-point', 'add-line', 'add-area', 'draw-line', 'draw-area']);
+
     tool.loadItems = function() {
         var mode = context.mode();
 
-        if (!mode.preset ||
-            (mode.id !== 'add-point' && mode.id !== 'add-line' && mode.id !== 'add-area') ||
-            mode.addedEntityIDs().length > 0) {
+        if (!mode || !mode.preset || !_validModeIDs.has(mode.id)) {
             tool.items = [];
-        } else {
-            var geometries = context.mode().preset.geometry.slice().sort().reverse();
-            var vertexIndex = geometries.indexOf('vertex');
-            if (vertexIndex !== -1 && geometries.indexOf('point') !== -1) {
-                geometries.splice(vertexIndex, 1);
-            }
-
-            var areaIndex = geometries.indexOf('area');
-            if (areaIndex !== -1 && mode.preset.setTags(mode.defaultTags, 'area').building) {
-                geometries.splice(areaIndex, 1);
-                geometries.push('building');
-            }
-
-            tool.items = geometries.map(function(geom) {
-                return items[geom];
-            }).filter(Boolean);
+            return;
         }
+
+        var geometries = context.mode().preset.geometry.slice().sort().reverse();
+        var vertexIndex = geometries.indexOf('vertex');
+        if (vertexIndex !== -1 && geometries.indexOf('point') !== -1) {
+            geometries.splice(vertexIndex, 1);
+        }
+/*
+        var areaIndex = geometries.indexOf('area');
+        if (areaIndex !== -1 && mode.preset.setTags(mode.defaultTags, 'area').building) {
+            geometries.splice(areaIndex, 1);
+            geometries.push('building');
+        }
+*/
+        tool.items = geometries.map(function(geom) {
+            return items[geom];
+        }).filter(Boolean);
     };
 
     return tool;

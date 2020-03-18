@@ -327,6 +327,9 @@ button.disabled {
     color: rgba(0,0,0,.4);
     cursor: not-allowed;
 }
+button.disabled.active {
+    background-color: rgba(112, 146, 255, 0.25);
+}
 
 .joined > button {
     border-radius: 0;
