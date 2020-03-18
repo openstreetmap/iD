@@ -16,20 +16,17 @@ export function uiToolStructure(context) {
     tool.label = t('presets.fields.structure.label');
     tool.key = t('toolbar.structure.key');
     tool.iconName = 'temaki-bridge';
-    tool.iconClass = 'icon-30';
 
     var structureNone = {
         id: 'none',
         icon: 'iD-structure-none',
         label: t('toolbar.structure.none.title'),
-        iconClass: 'icon-30',
         tags: {}
     };
     var structureBridge = {
         id: 'bridge',
         icon: 'temaki-bridge',
         label: t('presets.fields.structure.options.bridge'),
-        iconClass: 'icon-30',
         tags: {
             bridge: 'yes'
         },
@@ -42,7 +39,6 @@ export function uiToolStructure(context) {
         id: 'tunnel',
         icon: 'temaki-tunnel',
         label: t('presets.fields.structure.options.tunnel'),
-        iconClass: 'icon-30',
         tags: {
             tunnel: 'yes'
         },
