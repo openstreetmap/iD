@@ -2,6 +2,9 @@
 const colors = require('colors/safe');
 const concat = require('concat-files');
 const glob = require('glob');
+const fs = require('fs');
+const postcss = require('postcss');
+const prepend = require('postcss-selector-prepend');
 
 let _currBuild = null;
 
@@ -27,6 +30,13 @@ function buildCSS() {
     Promise.resolve()
       .then(() => doGlob('css/**/*.css'))
       .then(files => doConcat(files, 'dist/iD.css'))
+      .then(function () {
+        const css = fs.readFileSync('dist/iD.css', 'utf8');
+        return postcss([prepend({ selector: '#id-container ' })]).process(css);
+      })
+      .then(function (result) {
+        fs.writeFileSync('dist/iD.css', result.css);
+      })
       .then(() => {
         console.timeEnd(END);
         console.log('');
@@ -58,4 +68,3 @@ function doConcat(files, output) {
     });
   });
 }
-

@@ -4,12 +4,8 @@
   Opera misbehaves when the window is resized vertically unless 100% width + height are
   applied to both html and body. https://gist.github.com/jfirebaugh/bd225bcfdd3a633850c4
 */
-html, body {
-    width: 100%;
-    height: 100%;
-}
 
-body {
+#id-container {
     font: normal 12px/1.6667 "-apple-system", BlinkMacSystemFont,
         "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell",
         "Fira Sans", "Droid Sans", "Helvetica Neue", "Arial",
