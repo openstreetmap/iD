@@ -4,37 +4,40 @@ import { modeSelect } from './select';
 import { uiFlash } from '../ui/flash';
 
 
-export function modeDrawArea(context, wayID, startGraph, button, addMode) {
-    var mode = {
-        button: button,
-        id: 'draw-area',
-        addMode: addMode
-    };
+export function modeDrawArea(context, mode) {
 
     var _behavior;
 
-    mode.wayID = wayID;
+    mode.id = 'draw-area';
+
+    mode.button = mode.button || 'area';
+    mode.startGraph = mode.startGraph || context.graph();
+    mode.preset = mode.addMode && mode.addMode.preset;
+
+    mode.isContinuing = function() {
+        return false;
+    };
 
     mode.repeatAddedFeature = function(val) {
-        if (addMode) return addMode.repeatAddedFeature(val);
+        if (mode.addMode) return mode.addMode.repeatAddedFeature(val);
     };
 
     mode.addedEntityIDs = function() {
-        if (addMode) return addMode.addedEntityIDs();
+        if (mode.addMode) return mode.addMode.addedEntityIDs();
     };
 
     mode.enter = function() {
         mode.skipEnter = false;
 
-        if (addMode) {
+        if (mode.addMode) {
             // Add in case this draw mode was entered from somewhere besides modeAddArea.
             // Duplicates are resolved later.
-            addMode.addAddedEntityID(wayID);
+            mode.addMode.addAddedEntityID(mode.wayID);
         }
 
-        var way = context.entity(wayID);
+        var way = context.entity(mode.wayID);
 
-        _behavior = behaviorDrawWay(context, wayID, undefined, startGraph)
+        _behavior = behaviorDrawWay(context, mode.wayID, undefined, mode.startGraph)
             .tail(t('modes.draw_area.tail'))
             .on('doneSegment.modeDrawArea', function() {
                 if (mode.skipEnter) return;
@@ -46,9 +49,9 @@ export function modeDrawArea(context, wayID, startGraph, button, addMode) {
                 if (mode.skipEnter) return;
 
                 if (mode.repeatAddedFeature()) {
-                    context.enter(addMode);
+                    context.enter(mode.addMode);
                 } else {
-                    var newMode = modeSelect(context, mode.addedEntityIDs() || [wayID])
+                    var newMode = modeSelect(context, mode.addedEntityIDs() || [mode.wayID])
                         .newFeature(true);
                     context.enter(newMode);
                 }
@@ -87,7 +90,7 @@ export function modeDrawArea(context, wayID, startGraph, button, addMode) {
     };
 
     mode.selectedIDs = function() {
-        return [wayID];
+        return [mode.wayID];
     };
 
     mode.activeID = function() {

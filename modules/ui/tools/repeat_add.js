@@ -55,7 +55,7 @@ export function uiToolRepeatAdd(context) {
     tool.allowed = function() {
         var mode = context.mode();
         if (mode.id === 'add-point' || mode.id === 'add-line' || mode.id === 'add-area') return true;
-        return (mode.id === 'draw-line' || mode.id === 'draw-area') && !mode.isContinuing;
+        return (mode.id === 'draw-line' || mode.id === 'draw-area') && !mode.isContinuing();
     };
 
     tool.install = function() {

@@ -5,42 +5,42 @@ import { modeSelect } from './select';
 import { uiFlash } from '../ui/flash';
 
 
-export function modeDrawLine(context, wayID, startGraph, button, affix, addMode) {
-    var mode = {
-        button: button,
-        id: 'draw-line',
-        addMode: addMode,
-        affix: affix
-    };
+export function modeDrawLine(context, mode) {
 
     var _behavior;
 
-    mode.wayID = wayID;
+    mode.id = 'draw-line';
 
-    mode.isContinuing = !!affix;
+    mode.button = mode.button || 'line';
+    mode.startGraph = mode.startGraph || context.graph();
+    mode.preset = mode.addMode && mode.addMode.preset;
+
+    mode.isContinuing = function() {
+        return !!mode.affix;
+    };
 
     mode.repeatAddedFeature = function(val) {
-        if (addMode) return addMode.repeatAddedFeature(val);
+        if (mode.addMode) return mode.addMode.repeatAddedFeature(val);
     };
 
     mode.addedEntityIDs = function() {
-        if (addMode) return addMode.addedEntityIDs();
+        if (mode.addMode) return mode.addMode.addedEntityIDs();
     };
 
     mode.enter = function() {
         mode.skipEnter = false;
 
-        if (addMode) {
+        if (mode.addMode) {
             // Add in case this draw mode was entered from somewhere besides modeAddLine.
             // Duplicates are resolved later.
-            addMode.addAddedEntityID(wayID);
+            mode.addMode.addAddedEntityID(mode.wayID);
         }
 
-        var way = context.entity(wayID);
-        var index = (affix === 'prefix') ? 0 : undefined;
-        var headID = (affix === 'prefix') ? way.first() : way.last();
+        var way = context.entity(mode.wayID);
+        var index = (mode.affix === 'prefix') ? 0 : undefined;
+        var headID = (mode.affix === 'prefix') ? way.first() : way.last();
 
-        _behavior = behaviorDrawWay(context, wayID, index, startGraph)
+        _behavior = behaviorDrawWay(context, mode.wayID, index, mode.startGraph)
             .tail(t('modes.draw_line.tail'))
             .on('doneSegment.modeDrawLine', function(node) {
                 if (mode.defaultNodeTags && node && !Object.keys(node.tags).length) {
@@ -56,10 +56,10 @@ export function modeDrawLine(context, wayID, startGraph, button, affix, addMode)
                 if (mode.skipEnter) return;
 
                 if (mode.repeatAddedFeature()) {
-                    context.enter(addMode);
+                    context.enter(mode.addMode);
                 } else {
-                    var newMode = modeSelect(context, mode.addedEntityIDs() || [wayID])
-                        .newFeature(!mode.isContinuing);
+                    var newMode = modeSelect(context, mode.addedEntityIDs() || [mode.wayID])
+                        .newFeature(!mode.isContinuing());
                     context.enter(newMode);
                 }
             })
@@ -93,7 +93,7 @@ export function modeDrawLine(context, wayID, startGraph, button, affix, addMode)
     };
 
     mode.selectedIDs = function() {
-        return [wayID];
+        return [mode.wayID];
     };
 
     mode.activeID = function() {

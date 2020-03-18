@@ -27,7 +27,7 @@ export function operationContinue(selectedIDs, context) {
     var operation = function() {
         var candidate = candidateWays()[0];
         context.enter(
-            modeDrawLine(context, candidate.id, context.graph(), 'line', candidate.affix(vertex.id))
+            modeDrawLine(context, { wayID: candidate.id, affix: candidate.affix(vertex.id) })
         );
     };
 

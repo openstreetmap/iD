@@ -225,7 +225,7 @@ export function validationImpossibleOneway() {
         }
 
         context.enter(
-            modeDrawLine(context, way.id, context.graph(), 'line', way.affix(vertex.id))
+            modeDrawLine(context, { wayID: way.id, affix: way.affix(vertex.id) })
         );
     }
 

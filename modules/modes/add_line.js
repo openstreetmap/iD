@@ -96,7 +96,12 @@ export function modeAddLine(context, mode) {
 
     function enterDrawMode(way, startGraph) {
         _allAddedEntityIDs.push(way.id);
-        var drawMode = modeDrawLine(context, way.id, startGraph, mode.button, null, mode);
+        var drawMode = modeDrawLine(context, {
+            wayID: way.id,
+            startGraph: startGraph,
+            button: mode.button,
+            addMode: mode
+        });
         drawMode.defaultNodeTags = mode.defaultNodeTags;
         context.enter(drawMode);
     }

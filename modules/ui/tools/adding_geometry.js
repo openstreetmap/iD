@@ -53,11 +53,12 @@ export function uiToolAddingGeometry(context) {
         oldMode.preset.setMostRecentAddGeometry(context, item.id);
 
         var newMode = item.mode(context, {
-            button: oldMode.button,
-            preset: oldMode.preset,
-            geometry: item.id,
-            title: oldMode.title
-        });
+                button: oldMode.button,
+                preset: oldMode.preset,
+                geometry: item.id,
+                title: oldMode.title
+            })
+            .repeatAddedFeature(oldMode.repeatAddedFeature());
         context.enter(newMode);
     };
 

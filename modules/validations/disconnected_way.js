@@ -199,7 +199,7 @@ export function validationDisconnectedWay() {
                     }
 
                     context.enter(
-                        modeDrawLine(context, wayId, context.graph(), 'line', way.affix(vertexId))
+                        modeDrawLine(context, { wayID: wayId, affix: way.affix(vertexId) })
                     );
                 }
             });
