@@ -110,6 +110,7 @@ export function modeAddLine(context, mode) {
         if (mode.addedEntityIDs().length) {
             context.enter(
                 modeSelect(context, mode.addedEntityIDs())
+                    .presets(mode.preset ? [mode.preset] : null)
                     .newFeature(true)
             );
         } else {

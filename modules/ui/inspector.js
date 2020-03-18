@@ -17,7 +17,7 @@ export function uiInspector(context) {
     var _newFeature = false;
 
 
-    function inspector(selection, newFeature) {
+    function inspector(selection, presets) {
         presetList
             .entityIDs(_entityIDs)
             .autofocus(_newFeature)
@@ -31,6 +31,10 @@ export function uiInspector(context) {
             .state(_state)
             .entityIDs(_entityIDs)
             .on('choose', inspector.showList);
+
+        if (presets) {
+            entityEditor.presets(presets);
+        }
 
         wrap = selection.selectAll('.panewrap')
             .data([0]);
@@ -52,6 +56,12 @@ export function uiInspector(context) {
         editorPane = wrap.selectAll('.entity-editor-pane');
 
         function shouldDefaultToPresetList() {
+
+            // if an explicit preset is set then we're coming from a draw mode
+            if (presets && presets.filter(function(preset) {
+                return !preset.isFallback();
+            }).length) return false;
+
             // can only change preset on single selection
             if (_entityIDs.length !== 1) return false;
 
@@ -63,7 +73,7 @@ export function uiInspector(context) {
             if (entity.hasNonGeometryTags()) return false;
 
             // prompt to select preset if feature is new and untagged
-            if (newFeature) return true;
+            if (_newFeature) return true;
 
             // all existing features except vertices should default to inspector
             if (entity.geometry(context.graph()) !== 'vertex') return false;

@@ -52,6 +52,7 @@ export function modeDrawArea(context, mode) {
                     context.enter(mode.addMode);
                 } else {
                     var newMode = modeSelect(context, mode.addedEntityIDs() || [mode.wayID])
+                        .presets(mode.preset ? [mode.preset] : null)
                         .newFeature(true);
                     context.enter(newMode);
                 }

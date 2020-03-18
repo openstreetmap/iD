@@ -50,6 +50,8 @@ export function modeSelect(context, selectedIDs) {
     var inspector;   // unused?
     var editMenu;
     var _timeout = null;
+    // the explicit presets for the features in this selection
+    var _presets;
     var _newFeature = false;
     var _suppressMenu = true;
     var _follow = false;
@@ -225,6 +227,13 @@ export function modeSelect(context, selectedIDs) {
     };
 
 
+    mode.presets = function(val) {
+        if (!arguments.length) return _presets;
+        _presets = val;
+        return mode;
+    };
+
+
     mode.suppressMenu = function(val) {
         if (!arguments.length) return _suppressMenu;
         _suppressMenu = val;
@@ -291,7 +300,7 @@ export function modeSelect(context, selectedIDs) {
             .call(keybinding);
 
         context.ui().sidebar
-            .select(selectedIDs, _newFeature);
+            .select(selectedIDs, _newFeature, _presets);
 
         context.history()
             .on('change.select', function() {

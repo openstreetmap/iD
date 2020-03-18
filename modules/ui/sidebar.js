@@ -215,7 +215,7 @@ export function uiSidebar(context) {
         };
 
 
-        sidebar.select = function(ids, newFeature) {
+        sidebar.select = function(ids, newFeature, presets) {
             sidebar.hide();
 
             if (ids && ids.length) {
@@ -241,7 +241,7 @@ export function uiSidebar(context) {
                         .newFeature(newFeature);
 
                     inspectorWrap
-                        .call(inspector, newFeature);
+                        .call(inspector, presets);
                 }
 
             } else {

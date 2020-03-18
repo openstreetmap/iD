@@ -102,7 +102,9 @@ export function modeAddPoint(context, mode) {
     mode.finish = function() {
         if (mode.addedEntityIDs().length) {
             context.enter(
-                modeSelect(context, mode.addedEntityIDs()).newFeature(true)
+                modeSelect(context, mode.addedEntityIDs())
+                    .presets(mode.preset ? [mode.preset] : null)
+                    .newFeature(true)
             );
         } else {
             context.enter(
