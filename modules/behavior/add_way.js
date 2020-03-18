@@ -1,7 +1,6 @@
 import { dispatch as d3_dispatch } from 'd3-dispatch';
 
 import { behaviorDraw } from './draw';
-import { modeBrowse } from '../modes/browse';
 import { utilRebind } from '../util/rebind';
 
 

@@ -6,7 +6,6 @@ import {
 import * as countryCoder from '@ideditor/country-coder';
 
 import { t, textDirection } from '../util/locale';
-import { services } from '../services';
 import { svgIcon } from '../svg/index';
 import { tooltip } from '../util/tooltip';
 import { popover } from '../util/popover';
