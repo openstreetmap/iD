@@ -5181,35 +5181,35 @@ svg.mouseclick use.right {
     border-color: transparent;
     border-style: solid;
 }
-.popover.top .popover-arrow {
+.popover.top > .popover-arrow {
     bottom: -5px;
     left: 50%;
     margin-left: -5px;
     border-top-color: #fff;
     border-width: 5px 5px 0;
 }
-.popover.right .popover-arrow {
+.popover.right > .popover-arrow {
     top: 50%;
     left: -5px;
     margin-top: -5px;
     border-right-color: #fff;
     border-width: 5px 5px 5px 0;
 }
-.popover.left .popover-arrow {
+.popover.left > .popover-arrow {
     top: 50%;
     right: -5px;
     margin-top: -5px;
     border-left-color: #fff;
     border-width: 5px 0 5px 5px;
 }
-.popover.bottom .popover-arrow {
+.popover.bottom > .popover-arrow {
     top: -5px;
     left: 50%;
     margin-left: -5px;
     border-bottom-color: #fff;
     border-width: 0 5px 5px;
 }
-.popover:not(.arrowed) .popover-arrow {
+.popover:not(.arrowed) > .popover-arrow {
     display: none;
 }
 
@@ -5239,24 +5239,24 @@ svg.mouseclick use.right {
 }
 
 /* dark tooltips for sidebar / panels */
-.tooltip.dark.top .popover-arrow,
-.map-pane .tooltip.top .popover-arrow,
-#sidebar .tooltip.top .popover-arrow {
+.tooltip.dark.top > .popover-arrow,
+.map-pane .tooltip.top > .popover-arrow,
+#sidebar .tooltip.top > .popover-arrow {
     border-top-color: #000;
 }
-.tooltip.dark.bottom .popover-arrow,
-.map-pane .tooltip.bottom .popover-arrow,
-#sidebar .tooltip.bottom .popover-arrow {
+.tooltip.dark.bottom > .popover-arrow,
+.map-pane .tooltip.bottom > .popover-arrow,
+#sidebar .tooltip.bottom > .popover-arrow {
     border-bottom-color: #000;
 }
-.tooltip.dark.left .popover-arrow,
-.map-pane .tooltip.left .popover-arrow,
-#sidebar .tooltip.left .popover-arrow {
+.tooltip.dark.left > .popover-arrow,
+.map-pane .tooltip.left > .popover-arrow,
+#sidebar .tooltip.left > .popover-arrow {
     border-left-color: #000;
 }
-.tooltip.dark.right .popover-arrow,
-.map-pane .tooltip.right .popover-arrow,
-#sidebar .tooltip.right .popover-arrow {
+.tooltip.dark.right > .popover-arrow,
+.map-pane .tooltip.right > .popover-arrow,
+#sidebar .tooltip.right > .popover-arrow {
     border-right-color: #000;
 }
 .tooltip.dark .popover-inner,
@@ -5298,13 +5298,13 @@ li.hide + li.version .badge .tooltip {
     left: 5px !important;
     right: auto !important;
 }
-li:first-of-type .badge .tooltip .popover-arrow,
-li.hide + li.version .badge .tooltip .popover-arrow {
+li:first-of-type .badge .tooltip > .popover-arrow,
+li.hide + li.version .badge .tooltip > .popover-arrow {
     right: 15px !important;
     left: auto !important;
 }
-[dir='rtl'] li:first-of-type .badge .tooltip .popover-arrow,
-[dir='rtl'] li.hide + li.version .badge .tooltip .popover-arrow {
+[dir='rtl'] li:first-of-type .badge .tooltip > .popover-arrow,
+[dir='rtl'] li.hide + li.version .badge .tooltip > .popover-arrow {
     left: 15px !important;
     right: auto !important;
 }
