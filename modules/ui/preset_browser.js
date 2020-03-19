@@ -1,9 +1,9 @@
 import {
     event as d3_event,
-    select as d3_select,
-    selectAll as d3_selectAll
+    select as d3_select
 } from 'd3-selection';
 import { dispatch as d3_dispatch } from 'd3-dispatch';
+import deepEqual from 'fast-deep-equal';
 import * as countryCoder from '@ideditor/country-coder';
 
 import { t, textDirection } from '../util/locale';
@@ -26,7 +26,8 @@ export function uiPresetBrowser(context) {
 
     var _presets;
 
-    var _closeKey;
+    // the hotkey that was used to open the browser
+    var _openKey;
 
     // all possible geometries
     var _allowedGeometry = [];
@@ -53,9 +54,9 @@ export function uiPresetBrowser(context) {
         return browser;
     };
 
-    browser.closeKey = function(val) {
-        if (!arguments.length) return _closeKey && _closeKey.key;
-        _closeKey = { key: val, time: new Date().getTime() };
+    browser.openKey = function(val) {
+        if (!arguments.length) return _openKey && _openKey.key;
+        _openKey = { key: val, time: new Date().getTime() };
         return browser;
     };
 
@@ -128,13 +129,12 @@ export function uiPresetBrowser(context) {
         search.node().focus();
         search.node().setSelectionRange(0, search.property('value').length);
 
+        reloadCountryCode();
+
         updateResultsList();
 
         context.features()
             .on('change.preset-browser.' + _uid , updateForFeatureHiddenState);
-
-        // reload in case the user moved countries
-        reloadCountryCode();
     };
 
     var parentHide = browser.hide;
@@ -175,6 +175,7 @@ export function uiPresetBrowser(context) {
             .on('click', function(d) {
                 toggleShownGeometry(d);
                 if (_shownGeometry.length === 0) {
+                    // invert the selection instead of toggling all types off
                     updateShownGeometry(_allowedGeometry);
                     toggleShownGeometry(d);
                 }
@@ -221,14 +222,15 @@ export function uiPresetBrowser(context) {
 
     function keydown() {
 
-        if (_closeKey && d3_event.key === _closeKey.key) {
-            if (new Date().getTime() - _closeKey.time < 750) {
-                // limit close timeframe since the key could be used in searching
+        if (_openKey && d3_event.key === _openKey.key) {
+            if (new Date().getTime() - _openKey.time < 750) {
+                // Close the browser if the open key is pressed again within a short
+                // timeframe, but not longer since the key could be used for search input
                 search.node().blur();
                 d3_event.preventDefault();
                 d3_event.stopPropagation();
             }
-            _closeKey = null;
+            _openKey = null;
         }
 
         var nextFocus,
@@ -289,7 +291,7 @@ export function uiPresetBrowser(context) {
         }
     }
 
-    function getDefaultResults() {
+    function getDefaultResults(geometries, countryCode) {
 
         //var graph = context.graph();
 
@@ -381,9 +383,9 @@ export function uiPresetBrowser(context) {
             if (preset.addable && !preset.addable()) return false;
 
             // skip presets not valid in this country
-            if (_countryCode && preset.countryCodes && preset.countryCodes.indexOf(_countryCode) === -1) return false;
+            if (countryCode && preset.countryCodes && preset.countryCodes.indexOf(countryCode) === -1) return false;
 
-            return preset.defaultAddGeometry(context, _shownGeometry);
+            return preset.defaultAddGeometry(context, geometries);
         }).slice(0, 50);
     }
 
@@ -394,17 +396,39 @@ export function uiPresetBrowser(context) {
         if (countryCode) countryCode = countryCode.toLowerCase();
         if (_countryCode !== countryCode) {
             _countryCode = countryCode;
-            updateResultsList();
         }
     }
 
-    function getRawResults() {
-        if (search.empty()) return [];
+    // the query that was run to
+    var _shownQuery = {
+        value: null,
+        geometry: null,
+        countryCode: null
+    };
 
-        var value = search.property('value');
+    function updateResultsList() {
+
+        // update only if the browser is visible
+        if (!browser.isShown()) return;
+
+        var list = poplistContent.selectAll('.list');
+        if (search.empty() || list.empty()) return;
+
+        var value = search.property('value').trim();
+
+        var query = {
+            value: value,
+            geometry: _shownGeometry.slice(),
+            countryCode: _countryCode
+        };
+
+        // the results will be the same if the parameters are the same, so don't reload
+        if (deepEqual(query, _shownQuery)) return;
+
         var results;
+
         if (value.length) {
-            results = _presets.search(value, _shownGeometry, _countryCode).collection
+            results = _presets.search(query.value, query.geometry, query.countryCode).collection
                 .filter(function(d) {
                     if (d.members) {
                         return d.members.collection.some(function(preset) {
@@ -414,20 +438,9 @@ export function uiPresetBrowser(context) {
                     return d.addable();
                 });
         } else {
-            results = getDefaultResults();
+            results = getDefaultResults(query.geometry, query.countryCode);
         }
-        return results;
-    }
 
-    function updateResultsList() {
-
-        if (!browser.isShown()) return;
-
-        var list = poplistContent.selectAll('.list');
-
-        if (search.empty() || list.empty()) return;
-
-        var results = getRawResults();
         list.call(drawList, results);
 
         list.selectAll('.list-item.focused')
@@ -439,6 +452,8 @@ export function uiPresetBrowser(context) {
         var resultCount = results.length;
         poplistFooter.selectAll('.message')
             .text(t('modes.add_feature.' + (resultCount === 1 ? 'result' : 'results'), { count: resultCount }));
+
+        _shownQuery = query;
     }
 
     function focusListItem(selection, scrollingToShow) {
@@ -587,7 +602,8 @@ export function uiPresetBrowser(context) {
 
     function updateForFeatureHiddenState() {
 
-        var listItem = d3_selectAll('.add-feature .poplist .list-item');
+        var listItem = poplistContent.selectAll('.list-item');
+        if (listItem.empty()) return;
 
         // remove existing tooltips
         listItem.selectAll('button.choose').call(tooltip().destroyAny);
@@ -699,9 +715,6 @@ export function uiPresetBrowser(context) {
         };
         return item;
     }
-
-    // load the initial country code
-    reloadCountryCode();
 
     return utilRebind(browser, dispatch, 'on');
 }

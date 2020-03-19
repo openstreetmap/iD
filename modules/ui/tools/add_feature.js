@@ -126,7 +126,7 @@ export function uiToolAddFeature(context) {
             button.classed('active', true);
 
             presetBrowser
-                .closeKey(d3_event.key)
+                .openKey(d3_event.key)
                 .show();
             d3_event.preventDefault();
             d3_event.stopPropagation();
