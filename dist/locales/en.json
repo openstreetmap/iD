@@ -613,10 +613,6 @@
         "loading_auth": "Connecting to OpenStreetMap...",
         "report_a_bug": "Report a bug",
         "help_translate": "Help translate",
-        "sidebar": {
-            "key": "`",
-            "tooltip": "Toggle the sidebar."
-        },
         "feature_info": {
             "hidden_warning": "{count} hidden features",
             "hidden_details": "These features are currently hidden: {details}"
