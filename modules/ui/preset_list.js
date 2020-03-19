@@ -401,7 +401,7 @@ export function uiPresetList(context) {
         item.choose = function() {
             if (d3_select(this).classed('disabled')) return;
 
-            context.presets().setMostRecent(preset, entityGeometries()[0]);
+            context.presets().setMostRecent(preset);
             context.perform(
                 function(graph) {
                     for (var i in _entityIDs) {
