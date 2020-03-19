@@ -29,7 +29,39 @@ export function uiToolAddFeature(context) {
     var button = d3_select(null);
 
     var key = t('modes.add_feature.key');
-    var keys = [key, '`', '²', '@']; // #5663, #6864 - common QWERTY, AZERTY
+
+    // We really want the key to the left of the number row to trigger the preset
+    // browser, but this varies across keyboard layouts. Since web apps can't detect
+    // layouts, and since the locale and keyboard may not match even if this shortcut
+    // is translated, we hardcode the keys for a number of common layouts if
+    // collisions with other shortcuts are unlikely.
+    // - #7258, #5663, #6864
+    var keys = [
+        key,
+        '`', // US English (and more--all these locale names are just examples)
+        '\'',// Brazilian
+        '„', // Georgian
+        '²', // French
+        '@', // Dutch
+        '|', // Norwegian
+        '\\',// Italian
+        '§', // Swedish
+        '#', // Finnish
+        'º', // Spanish
+        '^', // German
+        '½', // Danish
+        '÷', // Farsi
+        'ˇ', // Estonian
+        'ذ', // Arabic
+        '¸', // Croatian
+        '˛', // Polish
+        'ё', // Belarusian
+        'ä', // Uighur Latin
+        'ә', // Bashkir
+        'ċ', // Maltese
+        'ч', // Bulgarian Phonetic
+        'ञ'  // Nepali
+    ];
 
     tool.render = function(selection) {
 
