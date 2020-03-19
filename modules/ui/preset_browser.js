@@ -26,6 +26,8 @@ export function uiPresetBrowser(context) {
 
     var _presets;
 
+    var _closeKey;
+
     // all possible geometries
     var _allowedGeometry = [];
     // subset of `_allowedGeometry` toggled on by the user
@@ -48,6 +50,12 @@ export function uiPresetBrowser(context) {
         updateShownGeometry(val);
         renderFilterButtons();
         updateResultsList();
+        return browser;
+    };
+
+    browser.closeKey = function(val) {
+        if (!arguments.length) return _closeKey && _closeKey.key;
+        _closeKey = { key: val, time: new Date().getTime() };
         return browser;
     };
 
@@ -212,6 +220,16 @@ export function uiPresetBrowser(context) {
     }
 
     function keydown() {
+
+        if (_closeKey && d3_event.key === _closeKey.key) {
+            if (new Date().getTime() - _closeKey.time < 750) {
+                // limit close timeframe since the key could be used in searching
+                search.node().blur();
+                d3_event.preventDefault();
+                d3_event.stopPropagation();
+            }
+            _closeKey = null;
+        }
 
         var nextFocus,
             priorFocus,
