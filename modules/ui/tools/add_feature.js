@@ -121,6 +121,8 @@ export function uiToolAddFeature(context) {
     tool.install = function() {
 
         context.keybinding().on(keys, function() {
+            if (button.classed('disabled')) return;
+
             button.classed('active', true);
 
             presetBrowser
