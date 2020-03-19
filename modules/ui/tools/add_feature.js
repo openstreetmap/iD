@@ -22,8 +22,10 @@ export function uiToolAddFeature(context) {
         iconClass: 'icon-30'
     };
 
-    var allowedGeometry = ['point', 'vertex', 'line', 'area'];
-    var presetBrowser = uiPresetBrowser(context, allowedGeometry, browserDidSelectPreset, browserDidClose)
+    var presetBrowser = uiPresetBrowser(context)
+        .allowedGeometry(['point', 'vertex', 'line', 'area'])
+        .on('choose.addFeature', browserDidSelectPreset)
+        .on('hide.addFeature', browserDidClose)
         .scrollContainer(d3_select('#bar'));
 
     var button = d3_select(null);

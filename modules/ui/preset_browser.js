@@ -3,6 +3,7 @@ import {
     select as d3_select,
     selectAll as d3_selectAll
 } from 'd3-selection';
+import { dispatch as d3_dispatch } from 'd3-dispatch';
 import * as countryCoder from '@ideditor/country-coder';
 
 import { t, textDirection } from '../util/locale';
@@ -14,16 +15,21 @@ import { uiPresetFavoriteButton } from './preset_favorite_button';
 import { uiPresetIcon } from './preset_icon';
 //import { groupManager } from '../entities/group_manager';
 import { utilKeybinding, utilNoAuto } from '../util';
+import { utilRebind } from '../util/rebind';
 
-export function uiPresetBrowser(context, allowedGeometry, onChoose, onCancel) {
+export function uiPresetBrowser(context) {
+
+    var dispatch = d3_dispatch('choose', 'hide');
 
     // multiple preset browsers could be instantiated at once, give each a unique ID
-    var uid = (new Date()).getTime().toString();
+    var _uid = (new Date()).getTime().toString();
 
-    var presets;
+    var _presets;
 
-    var shownGeometry = [];
-    updateShownGeometry(allowedGeometry);
+    // all possible geometries
+    var _allowedGeometry = [];
+    // subset of `_allowedGeometry` toggled on by the user
+    var _shownGeometry = [];
 
     var search = d3_select(null),
         poplistContent = d3_select(null),
@@ -35,6 +41,15 @@ export function uiPresetBrowser(context, allowedGeometry, onChoose, onCancel) {
         .placement('bottom')
         .alignment('leading')
         .hasArrow(false);
+
+    browser.allowedGeometry = function(val) {
+        if (!arguments.length) return _allowedGeometry;
+        _allowedGeometry = val;
+        updateShownGeometry(val);
+        renderFilterButtons();
+        updateResultsList();
+        return browser;
+    };
 
     browser.content(function() {
         return function(selection) {
@@ -108,7 +123,7 @@ export function uiPresetBrowser(context, allowedGeometry, onChoose, onCancel) {
         updateResultsList();
 
         context.features()
-            .on('change.preset-browser.' + uid , updateForFeatureHiddenState);
+            .on('change.preset-browser.' + _uid , updateForFeatureHiddenState);
 
         // reload in case the user moved countries
         reloadCountryCode();
@@ -117,13 +132,13 @@ export function uiPresetBrowser(context, allowedGeometry, onChoose, onCancel) {
     var parentHide = browser.hide;
     browser.hide = function() {
         parentHide();
-        if (onCancel) onCancel();
+        dispatch.call('hide', this);
     };
 
     function renderFilterButtons() {
         var selection = poplistFooter.select('.filter-wrap');
 
-        var geomForButtons = allowedGeometry.slice();
+        var geomForButtons = _allowedGeometry.slice();
         var vertexIndex = geomForButtons.indexOf('vertex');
         if (vertexIndex !== -1) geomForButtons.splice(vertexIndex, 1);
 
@@ -151,8 +166,8 @@ export function uiPresetBrowser(context, allowedGeometry, onChoose, onCancel) {
             })
             .on('click', function(d) {
                 toggleShownGeometry(d);
-                if (shownGeometry.length === 0) {
-                    updateShownGeometry(allowedGeometry);
+                if (_shownGeometry.length === 0) {
+                    updateShownGeometry(_allowedGeometry);
                     toggleShownGeometry(d);
                 }
                 updateFilterButtonsStates();
@@ -162,22 +177,13 @@ export function uiPresetBrowser(context, allowedGeometry, onChoose, onCancel) {
         updateFilterButtonsStates();
     }
 
-
-    browser.setAllowedGeometry = function(array) {
-        allowedGeometry = array;
-        updateShownGeometry(array);
-        renderFilterButtons();
-        updateResultsList();
-    };
-
-
     function updateShownGeometry(geom) {
-        shownGeometry = geom.slice().sort();
-        presets = context.presets().matchAnyGeometry(shownGeometry);
+        _shownGeometry = geom.slice().sort();
+        _presets = context.presets().matchAnyGeometry(_shownGeometry);
     }
 
     function toggleShownGeometry(d) {
-        var geom = shownGeometry;
+        var geom = _shownGeometry;
         var index = geom.indexOf(d);
         if (index === -1) {
             geom.push(d);
@@ -192,7 +198,7 @@ export function uiPresetBrowser(context, allowedGeometry, onChoose, onCancel) {
     function updateFilterButtonsStates() {
         poplistFooter.selectAll('button.filter')
             .classed('active', function(d) {
-                return shownGeometry.indexOf(d) !== -1;
+                return _shownGeometry.indexOf(d) !== -1;
             });
     }
 
@@ -359,7 +365,7 @@ export function uiPresetBrowser(context, allowedGeometry, onChoose, onCancel) {
             // skip presets not valid in this country
             if (_countryCode && preset.countryCodes && preset.countryCodes.indexOf(_countryCode) === -1) return false;
 
-            return preset.defaultAddGeometry(context, shownGeometry);
+            return preset.defaultAddGeometry(context, _shownGeometry);
         }).slice(0, 50);
     }
 
@@ -380,7 +386,7 @@ export function uiPresetBrowser(context, allowedGeometry, onChoose, onCancel) {
         var value = search.property('value');
         var results;
         if (value.length) {
-            results = presets.search(value, shownGeometry, _countryCode).collection
+            results = _presets.search(value, _shownGeometry, _countryCode).collection
                 .filter(function(d) {
                     if (d.members) {
                         return d.members.collection.some(function(preset) {
@@ -549,7 +555,7 @@ export function uiPresetBrowser(context, allowedGeometry, onChoose, onCancel) {
         item.each(function(d) {
             if (!d.preset) return;
 
-            var reference = uiTagReference(d.preset.reference(d.preset.defaultAddGeometry(context, shownGeometry)), context);
+            var reference = uiTagReference(d.preset.reference(d.preset.defaultAddGeometry(context, _shownGeometry)), context);
 
             var thisItem = d3_select(this);
             thisItem.selectAll('.row').call(reference.button, 'accessory', 'info');
@@ -575,7 +581,7 @@ export function uiPresetBrowser(context, allowedGeometry, onChoose, onCancel) {
             var hiddenPresetFeatures;
 
             for (var i in item.preset.geometry) {
-                if (shownGeometry.indexOf(item.preset.geometry[i]) !== -1) {
+                if (_shownGeometry.indexOf(item.preset.geometry[i]) !== -1) {
                     hiddenPresetFeatures = context.features().isHiddenPreset(item.preset, item.preset.geometry[i]);
                     if (!hiddenPresetFeatures) {
                         break;
@@ -644,7 +650,7 @@ export function uiPresetBrowser(context, allowedGeometry, onChoose, onCancel) {
             chooseExpandable(item, d3_select(selection.node().closest('.list-item')));
         };
         item.subitems = function() {
-            return category.members.matchAnyGeometry(shownGeometry).collection
+            return category.members.matchAnyGeometry(_shownGeometry).collection
                 .filter(function(preset) {
                     return preset.addable();
                 })
@@ -668,7 +674,8 @@ export function uiPresetBrowser(context, allowedGeometry, onChoose, onCancel) {
         item.choose = function() {
             if (d3_select(this).classed('disabled')) return;
 
-            if (onChoose) onChoose(preset, preset.defaultAddGeometry(context, shownGeometry));
+            var geometry = preset.defaultAddGeometry(context, _shownGeometry);
+            dispatch.call('choose', this, preset, geometry);
 
             search.node().blur();
         };
@@ -678,5 +685,5 @@ export function uiPresetBrowser(context, allowedGeometry, onChoose, onCancel) {
     // load the initial country code
     reloadCountryCode();
 
-    return browser;
+    return utilRebind(browser, dispatch, 'on');
 }
