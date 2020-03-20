@@ -11,7 +11,7 @@ export function uiToolAddRecent(context) {
     tool.itemsToDraw = function() {
         if (context.presets().getAddable().length) return [];
 
-        var maxShown = 72;
+        var maxShown = 82;
         var maxRecents = 10;
         var precedingCount = context.storage('tool.add_generic.toggledOn') === 'true' ? 3 : 0;
 

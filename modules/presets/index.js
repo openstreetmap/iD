@@ -532,7 +532,7 @@ export function presetIndex(context) {
             item = RibbonItem(preset, 'recent');
         }
         // allow 30 recents
-        if (items.length === 61) {
+        if (items.length === 81) {
             // remove the last favorite (first in, first out)
             items.pop();
         }
