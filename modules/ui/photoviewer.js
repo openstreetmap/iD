@@ -104,7 +104,7 @@ export function uiPhotoviewer(context) {
     }
 
     photoviewer.onMapResize = function() {
-        var photoviewer = d3_select('#photoviewer');
+        var photoviewer = d3_select('.photoviewer');
         var content = d3_select('#content');
         var mapDimensions = utilGetDimensions(content, true);
         // shrink photo viewer if it is too big

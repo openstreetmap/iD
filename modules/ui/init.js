@@ -285,7 +285,7 @@ export function uiInit(context) {
 
         overMap
             .append('div')
-            .attr('id', 'photoviewer')
+            .attr('class', 'photoviewer')
             .classed('al', true)       // 'al'=left,  'ar'=right
             .classed('hide', true)
             .call(ui.photoviewer);

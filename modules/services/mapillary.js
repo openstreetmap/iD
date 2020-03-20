@@ -379,7 +379,7 @@ export default {
 
     loadViewer: function(context) {
         // add mly-wrapper
-        var wrap = d3_select('#photoviewer').selectAll('.mly-wrapper')
+        var wrap = d3_select('.photoviewer').selectAll('.mly-wrapper')
             .data([0]);
 
         wrap.enter()
@@ -419,7 +419,7 @@ export default {
 
 
     showViewer: function() {
-        var wrap = d3_select('#photoviewer')
+        var wrap = d3_select('.photoviewer')
             .classed('hide', false);
 
         var isHidden = wrap.selectAll('.photo-wrapper.mly-wrapper.hide').size();
@@ -447,7 +447,7 @@ export default {
             _mlyViewer.getComponent('sequence').stop();
         }
 
-        var viewer = d3_select('#photoviewer');
+        var viewer = d3_select('.photoviewer');
         if (!viewer.empty()) viewer.datum(null);
 
         viewer
@@ -562,7 +562,7 @@ export default {
         // There just might be a delay before user sees detections, captured_at, etc.
         var d = _mlyCache.images.forImageKey[imageKey];
 
-        var viewer = d3_select('#photoviewer');
+        var viewer = d3_select('.photoviewer');
         if (!viewer.empty()) viewer.datum(d);
 
         imageKey = (d && d.key) || imageKey;
