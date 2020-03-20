@@ -50,13 +50,13 @@ export function uiScale(context) {
             loc2 = projection.invert([maxLength, dims[1]]),
             scale = scaleDefs(loc1, loc2);
 
-        selection.select('#scale-path')
+        selection.select('.scale-path')
             .attr('d', 'M0.5,0.5v' + tickHeight + 'h' + scale.px + 'v-' + tickHeight);
 
-        selection.select('#scale-textgroup')
+        selection.select('.scale-textgroup')
             .attr('transform', 'translate(' + (scale.px + 8) + ',' + tickHeight + ')');
 
-        selection.select('#scale-text')
+        selection.select('.scale-text')
             .text(scale.text);
     }
 
@@ -68,20 +68,20 @@ export function uiScale(context) {
         }
 
         var scalegroup = selection.append('svg')
-            .attr('id', 'scale')
+            .attr('class', 'scale')
             .on('click', switchUnits)
             .append('g')
             .attr('transform', 'translate(10,11)');
 
         scalegroup
             .append('path')
-            .attr('id', 'scale-path');
+            .attr('class', 'scale-path');
 
         scalegroup
             .append('g')
-            .attr('id', 'scale-textgroup')
+            .attr('class', 'scale-textgroup')
             .append('text')
-            .attr('id', 'scale-text');
+            .attr('class', 'scale-text');
 
         selection.call(update);
 

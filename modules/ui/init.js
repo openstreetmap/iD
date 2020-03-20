@@ -163,11 +163,11 @@ export function uiInit(context) {
         // Add attribution and footer
         var about = content
             .append('div')
-            .attr('id', 'about');
+            .attr('class', 'map-footer');
 
         about
             .append('div')
-            .attr('id', 'attrib')
+            .attr('class', 'attribution-wrap')
             .attr('dir', 'ltr')
             .call(uiAttribution(context));
 
@@ -179,7 +179,7 @@ export function uiInit(context) {
 
         var footer = about
             .append('div')
-            .attr('class', 'map-footer fillD');
+            .attr('class', 'map-footer-bar fillD');
 
         footer
             .append('div')
@@ -187,18 +187,18 @@ export function uiInit(context) {
 
         var footerWrap = footer
             .append('div')
-            .attr('class', 'map-footer-wrap footer-show');
+            .attr('class', 'main-footer-wrap footer-show');
 
         footerWrap
             .append('div')
-            .attr('id', 'scale-block')
+            .attr('class', 'scale-block')
             .call(uiScale(context));
 
         var aboutList = footerWrap
             .append('div')
-            .attr('id', 'info-block')
+            .attr('class', 'info-block')
             .append('ul')
-            .attr('id', 'about-list');
+            .attr('class', 'map-footer-list');
 
         if (!context.embed()) {
             aboutList
@@ -437,7 +437,7 @@ export function uiInit(context) {
 
         // check if header or footer have overflowed
         ui.checkOverflow('.top-toolbar');
-        ui.checkOverflow('.map-footer');
+        ui.checkOverflow('.map-footer-bar');
 
         // Use outdated code so it works on Explorer
         var resizeWindowEvent = document.createEvent('Event');

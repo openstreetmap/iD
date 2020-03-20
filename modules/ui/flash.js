@@ -17,7 +17,7 @@ export function uiFlash() {
             _flashTimer.stop();
         }
 
-        d3_select('.map-footer-wrap')
+        d3_select('.main-footer-wrap')
             .classed('footer-hide', true)
             .classed('footer-show', false);
         d3_select('.flash-wrap')
@@ -73,7 +73,7 @@ export function uiFlash() {
 
         _flashTimer = d3_timeout(function() {
             _flashTimer = null;
-            d3_select('.map-footer-wrap')
+            d3_select('.main-footer-wrap')
                 .classed('footer-hide', false)
                 .classed('footer-show', true);
             d3_select('.flash-wrap')

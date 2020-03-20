@@ -43,7 +43,7 @@
           }
 
           context.ui()(container, function() {
-            context.container().select('#about-list')
+            context.container().select('.map-footer-list')
               .insert('li', '.user-list')
               .attr('class', 'source-switch')
               .call(iD.uiSourceSwitch(context)

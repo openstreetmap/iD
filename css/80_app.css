@@ -4155,9 +4155,9 @@ img.tile-debug {
 }
 
 
-/* About Section, Attribution, Footer
+/* Map Footer
 ------------------------------------------------------- */
-#about {
+.map-footer {
     width: 100%;
     position: absolute;
     right: 0;
@@ -4169,61 +4169,13 @@ img.tile-debug {
     -ms-user-select: element;
 }
 
-#attrib {
-    width: 100%;
-    height: 20px;
-    margin-bottom: 5px;
-}
-
-#attrib * { pointer-events: all; }
-
-.base-layer-attribution,
-.overlay-layer-attribution {
-    position: absolute;
-    color: #ccc;
-    font-size: 10px;
-}
-
-.base-layer-attribution {
-    left: 10px;
-}
-
-.overlay-layer-attribution {
-    right: 10px;
-}
-
-.overlay-layer-attribution .attribution:not(:last-child):after {
-    content: '; ';
-}
-
-.attribution a,
-.attribution a:visited {
-    color: #ccf;
-}
-
-.attribution a:hover {
-    color: #aaf;
-}
-
-.attribution .source-image {
-    height: 20px;
-    vertical-align: middle;
-    border-radius: 3px;
-}
-
-.attribution span {
-    margin: 0 3px;
-}
-
-.map-footer {
+.map-footer-bar {
     pointer-events: all;
     display: block;
     height: 30px;
 }
 
-
-/* Footer - Flash messages
-------------------------------------------------------- */
+.main-footer-wrap,
 .flash-wrap {
     display: flex;
     flex: 0 0 100%;
@@ -4235,6 +4187,72 @@ img.tile-debug {
     left: 0;
 }
 
+.footer-show {
+    bottom: 0px;
+    transition: bottom 75ms linear;
+    -moz-transition: bottom 75ms linear;
+    -webkit-transition: bottom 75ms linear;
+}
+
+.footer-hide {
+    bottom: -35px;
+    transition: bottom 75ms linear;
+    -moz-transition: bottom 75ms linear;
+    -webkit-transition: bottom 75ms linear;
+}
+
+
+/* Attribution
+------------------------------------------------------- */
+.attribution-wrap {
+    width: 100%;
+    height: 20px;
+    margin-bottom: 5px;
+}
+
+.attribution-wrap * { pointer-events: all; }
+
+.attribution-wrap .base-layer-attribution,
+.attribution-wrap .overlay-layer-attribution {
+    position: absolute;
+    color: #ccc;
+    font-size: 10px;
+}
+
+.attribution-wrap .base-layer-attribution {
+    left: 10px;
+}
+
+.attribution-wrap .overlay-layer-attribution {
+    right: 10px;
+}
+
+.attribution-wrap .overlay-layer-attribution .attribution:not(:last-child):after {
+    content: '; ';
+}
+
+.attribution-wrap .attribution a,
+.attribution-wrap .attribution a:visited {
+    color: #ccf;
+}
+
+.attribution-wrap .attribution a:hover {
+    color: #aaf;
+}
+
+.attribution-wrap .attribution .source-image {
+    height: 20px;
+    vertical-align: middle;
+    border-radius: 3px;
+}
+
+.attribution-wrap .attribution span {
+    margin: 0 3px;
+}
+
+
+/* Footer - Flash messages
+------------------------------------------------------- */
 .flash-content {
     display: flex;
     flex: 1 0 auto;
@@ -4279,35 +4297,9 @@ img.tile-debug {
     flex: 1 1 auto;
 }
 
-.map-footer-wrap {
-    display: flex;
-    flex: 0 0 100%;
-    flex-flow: row nowrap;
-    justify-content: space-between;
-    max-height: 30px;
-    position: absolute;
-    right: 0;
-    left: 0;
-}
-
-.footer-show {
-    bottom: 0px;
-    transition: bottom 75ms linear;
-    -moz-transition: bottom 75ms linear;
-    -webkit-transition: bottom 75ms linear;
-}
-
-.footer-hide {
-    bottom: -35px;
-    transition: bottom 75ms linear;
-    -moz-transition: bottom 75ms linear;
-    -webkit-transition: bottom 75ms linear;
-}
-
-
-/* Footer - Scale bar, About, Source Switcher
+/* Scale bar
 ------------------------------------------------------- */
-#scale-block {
+.map-footer-bar .scale-block {
     vertical-align: bottom;
     width: 250px;
     max-height: 30px;
@@ -4318,60 +4310,62 @@ img.tile-debug {
     user-select: none;
 }
 
-#info-block {
-    max-height: 30px;
-    flex: 1 1 auto;
-}
-
-#scale {
+.scale-block .scale {
     height: 30px;
     width: 100%;
 }
-[dir='rtl'] #scale {
+[dir='rtl'] .scale-block .scale {
     transform: scaleX(-1);
 }
 
-#scale:hover {
+.scale-block .scale:hover {
     cursor: pointer;
 }
 
-#scale text {
+.scale-block .scale text {
     font: 12px sans-serif;
     stroke: none;
     fill: #ccc;
     text-anchor: start;
 }
-[dir='rtl'] #scale text {
+[dir='rtl'] .scale-block .scale text {
     transform: scaleX(-1);
 }
 
-#scale path {
+.scale-block .scale path {
     fill: none;
     stroke: #ccc;
     stroke-width: 1;
     shape-rendering: crispEdges;
 }
 
-#about-list {
+/* Footer - About, Source Switcher
+------------------------------------------------------- */
+.map-footer-bar .info-block {
+    max-height: 30px;
+    flex: 1 1 auto;
+}
+
+.map-footer-list {
     text-align: right;
     margin-right: 10px;
     clear: right;
     overflow: hidden;
 }
-[dir='rtl'] #about-list {
+[dir='rtl'] .map-footer-list {
     text-align: left;
     clear: left;
     margin-left: 10px;
     margin-right: 0;
 }
 
-#about-list li {
+.map-footer-list li {
     float: right;
     border-left: 1px solid rgba(255,255,255,.5);
     padding: 5px 0 5px 5px;
     margin-left: 5px;
 }
-[dir='rtl'] #about-list li {
+[dir='rtl'] .map-footer-list li {
     float: left;
     border-left: none;
     border-right: 1px solid rgba(255,255,255,.5);
@@ -4379,35 +4373,35 @@ img.tile-debug {
     margin-right: 5px;
     padding: 5px 5px 5px 0;
 }
-#about-list li:empty {
+.map-footer-list li:empty {
     display: none;
 }
 
-#about-list li:last-child {
+.map-footer-list li:last-child {
     border-left: 0;
     margin-left: 0;
     padding-left: 0;
 }
-[dir='rtl'] #about-list li:last-child {
+[dir='rtl'] .map-footer-list li:last-child {
     border-right: none;
 }
 
-#about-list a.chip {
+.map-footer-list a.chip {
     padding: 2px 4px 3px 4px;
     border-radius: 2px;
     color: #eee;
 }
-#about-list a.chip .icon {
+.map-footer-list a.chip .icon {
     width: 14px;
     height: 14px;
     margin-top: 3px;
 }
-[dir='ltr'] #about-list a.chip .icon,
-[dir='ltr'] #about-list a.chip span {
+[dir='ltr'] .map-footer-list a.chip .icon,
+[dir='ltr'] .map-footer-list a.chip span {
     margin-right: 3px;
 }
-[dir='rtl'] #about-list a.chip .icon,
-[dir='rtl'] #about-list a.chip span {
+[dir='rtl'] .map-footer-list a.chip .icon,
+[dir='rtl'] .map-footer-list a.chip span {
     margin-left: 3px;
 }
 
