@@ -155,8 +155,8 @@ path.fill.tag-status-construction {
     fill: rgba(196, 189, 25, 0.3);
 }
 path.fill.tag-landuse-residential.tag-has-flats {
-    stroke: rgba(255, 230, 0, 0.3);
-    fill: rgba(255, 238, 0, 0.3);
+    stroke: rgba(255, 230, 0, 0.2);
+    fill: rgba(255, 238, 0, 0.2);
 }
 .pattern-color-construction {
     fill: rgba(196, 189, 25, 0.3);

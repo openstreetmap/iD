@@ -41,7 +41,8 @@
       "highway": "path",
       "informal": "yes",
       "path": "desire",
-      "access": "private"
+      "access": "private",
+      "motor_vehicle": "no"
   },
   "name": "Private InformalPath"
 }

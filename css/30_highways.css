@@ -429,7 +429,10 @@ path.line.casing.tag-highway-service.tag-service.tag-destination,
 path.line.casing.tag-service.tag-service.tag-destination {
     stroke: rgb(168, 32, 127);
 }
-
+path.line.casing.tag-highway-service.tag-service.tag-delivery,
+path.line.casing.tag-service.tag-service.tag-delivery {
+    stroke: rgb(17, 190, 147);
+}
 path.line.casing.tag-highway-service.tag-private,
 path.line.casing.tag-service.tag-private {
     stroke: rgb(143, 32, 32);

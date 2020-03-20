@@ -32,7 +32,8 @@
   ],
   "tags": {
       "highway": "footway",
-      "access": "customers"
+      "access": "customers",
+      "motor_vehicle": "no"
   },
   "matchScore": 0.9,
   "name": "Customers Foot Path"

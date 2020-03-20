@@ -3,6 +3,9 @@
     "geometry": [
         "area"
     ],
+    "fields": [
+        "building/flats"
+    ],
     "tags": {
         "building": "residential"
     },

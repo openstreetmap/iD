@@ -1,0 +1,7 @@
+{
+  "key": "building:flats",
+  "type": "number",
+  "minValue": 0,
+  "label": "Number of flats",
+  "placeholder": "1, 2, 3..."
+}

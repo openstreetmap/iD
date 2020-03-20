@@ -363,6 +363,16 @@ en:
         label: Building
         # 'terms: structure'
         terms: '[translate with synonyms or related terms for ''Building'', separated by commas]'
+      building/flats:
+        # 'building:flats=*'
+        label: Number of flats
+        # building/flats field placeholder
+        placeholder: '1, 2, 3...'
+      building/flats_building:
+        # 'building:flats=*'
+        label: Building Flats
+        # building/flats_building field placeholder
+        placeholder: '1, 2, 3...'
       building/levels:
         # 'building:levels=*'
         label: Levels
@@ -880,6 +890,11 @@ en:
       flag/type:
         # 'flag:type=*'
         label: Flag Type
+      flats:
+        # flats=*
+        label: Number of flats
+        # flats field placeholder
+        placeholder: '1, 2, 3...'
       floating:
         # floating=*
         label: Floating
@@ -5091,7 +5106,7 @@ en:
         # 'terms: hike,hiking,promenade,trackway,trail,walk'
         terms: '<translate with synonyms or related terms for ''Foot Path'', separated by commas>'
       highway/footway/access_aisle:
-        # 'highway=footway, footway=access_aisle'
+        # 'highway=footway, footway=access_aisle, motor_vehicle=no'
         name: Access Aisle
         # 'terms: accessible van loading zone,disabled parking access zone,handicap parking access zone,parking lot aisle,striped zone,tow zone,tow-away zone,towaway zone,wheelchair aisle'
         terms: '<translate with synonyms or related terms for ''Access Aisle'', separated by commas>'
@@ -5104,15 +5119,20 @@ en:
         # footway=crossing
         name: Pedestrian Crossing
       highway/footway/customers:
-        # 'highway=footway, access=customers'
+        # 'highway=footway, access=customers, motor_vehicle=no'
         name: Customers Foot Path
         # 'terms: hike,hiking,promenade,trackway,trail,walk'
         terms: '<translate with synonyms or related terms for ''Customers Foot Path'', separated by commas>'
       highway/footway/customers-informal:
-        # 'highway=path, informal=yes, path=desire, access=customers'
+        # 'highway=path, informal=yes, path=desire, access=customers, motor_vehicle=no'
         name: Customers InformalPath
         # 'terms: hike,hiking,trackway,trail,walk,desire,informal'
         terms: '<translate with synonyms or related terms for ''Customers InformalPath'', separated by commas>'
+      highway/footway/customers_access_aisle:
+        # 'highway=footway, footway=access_aisle, access=customers, motor_vehicle=no'
+        name: Customers Access Aisle
+        # 'terms: accessible van loading zone,disabled parking access zone,handicap parking access zone,parking lot aisle,striped zone,tow zone,tow-away zone,towaway zone,wheelchair aisle'
+        terms: '<translate with synonyms or related terms for ''Customers Access Aisle'', separated by commas>'
       highway/footway/marked:
         # 'footway=crossing, crossing=marked'
         name: Marked Crosswalk
@@ -5124,15 +5144,20 @@ en:
         # 'terms: zebra crossing,marked crossing,crosswalk,flat top,hump,speed,slow'
         terms: '<translate with synonyms or related terms for ''Marked Crosswalk (Raised)'', separated by commas>'
       highway/footway/private:
-        # 'highway=footway, access=private'
+        # 'highway=footway, access=private, motor_vehicle=no'
         name: Private Foot Path
         # 'terms: hike,hiking,promenade,trackway,trail,walk'
         terms: '<translate with synonyms or related terms for ''Private Foot Path'', separated by commas>'
       highway/footway/private-informal:
-        # 'highway=path, informal=yes, path=desire, access=private'
+        # 'highway=path, informal=yes, path=desire, access=private, motor_vehicle=no'
         name: Private InformalPath
         # 'terms: hike,hiking,trackway,trail,walk,desire,informal'
         terms: '<translate with synonyms or related terms for ''Private InformalPath'', separated by commas>'
+      highway/footway/private_access_aisle:
+        # 'highway=footway, footway=access_aisle, access=private, motor_vehicle=no'
+        name: Private Access Aisle
+        # 'terms: accessible van loading zone,disabled parking access zone,handicap parking access zone,parking lot aisle,striped zone,tow zone,tow-away zone,towaway zone,wheelchair aisle'
+        terms: '<translate with synonyms or related terms for ''Private Access Aisle'', separated by commas>'
       highway/footway/sidewalk:
         # footway=sidewalk
         name: Sidewalk

@@ -166,33 +166,6 @@ export var osmCyclewayLaneNotOneway = {
     }
 };
 
-export var osmPrivateTags = {
-    'access': {
-        'private': true
-    },
-    'motor_vehicle': {
-        'private': true
-    }
-};
-
-export var osmCustomersTags = {
-    'access': {
-        'customers': true
-    },
-    'motor_vehicle': {
-        'customers': true
-    }
-};
-
-export var osmDestinationTags = {
-    'access': {
-        'destination': true
-    },
-    'motor_vehicle': {
-        'destination': true
-    }
-};
-
 export var osmRightSideIsInsideTags = {
     'natural': {
         'cliff': true,

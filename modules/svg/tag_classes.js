@@ -1,5 +1,5 @@
 import { select as d3_select } from 'd3-selection';
-import { osmPavedTags, osmPrivateTags, osmCustomersTags, osmDestinationTags, osmSidewalkBoth, osmSidewalkSeparate, osmSidewalkSeparateRight, osmSidewalkSeparateLeft, osmSidewalkRight, osmSidewalkLeft, osmSidewalkNo, osmCyclewayTrack, osmCyclewayLane, osmCyclewayLaneNotOneway } from '../osm/tags';
+import { osmPavedTags, osmSidewalkBoth, osmSidewalkSeparate, osmSidewalkSeparateRight, osmSidewalkSeparateLeft, osmSidewalkRight, osmSidewalkLeft, osmSidewalkNo, osmCyclewayTrack, osmCyclewayLane, osmCyclewayLaneNotOneway } from '../osm/tags';
 
 
 export function svgTagClasses() {
@@ -7,7 +7,7 @@ export function svgTagClasses() {
         'building', 'highway', 'railway', 'waterway', 'aeroway', 'aerialway',
         'piste:type', 'boundary', 'power', 'amenity', 'natural', 'landuse',
         'leisure', 'military', 'place', 'man_made', 'route', 'attraction',
-        'building:part', 'indoor'
+        'building:part', 'indoor', 'entrance'
     ];
     var statuses = [
         'proposed', 'construction', 'disused', 'abandoned', 'dismantled',
@@ -135,6 +135,18 @@ export function svgTagClasses() {
             classes.push('tag-' + k + '-' + v);
         }
 
+        if (primary === 'entrance')
+        {
+            for (k in t) {
+                v = t[k];
+                if (k === 'entrance' && v === 'main')
+                {
+                    classes.push('tag-entrance-main');
+                    break;
+                }
+            }
+        }
+
         // check for number of flats in building or landuse residential:
         if (primary === 'building' || (primary === 'landuse' && t.landuse === 'residential'))
         {
@@ -193,6 +205,7 @@ export function svgTagClasses() {
             var _private = false;
             var customers = false;
             var destination = false;
+            var noMotorVehicle = false;
             var sidewalk = 'blank';
             var cycleway = 'blank';
             var sidewalkLeft = false;
@@ -206,6 +219,7 @@ export function svgTagClasses() {
             var cyclewayUseSidepath = false;
             var hasMaxSpeed = false;
             var hasLanes = false;
+            var delivery = false;
 
             for (k in t) {
                 v = t[k];
@@ -233,16 +247,21 @@ export function svgTagClasses() {
                     paved = !!osmPavedTags[k][v];
                     //break;
                 }
-                if (k in osmPrivateTags) {
-                    _private = !!osmPrivateTags[k][v];
+                if ((k === 'bicycle' || k === 'foot' || k === 'motor_vehicle' || k === 'access') && v === 'private') {
+                    _private = true;
                 }
-                if (k in osmCustomersTags) {
-                    customers = !!osmCustomersTags[k][v];
+                if ((k === 'bicycle' || k === 'foot' || k === 'motor_vehicle' || k === 'access') && v === 'customers') {
+                    customers = true;
                 }
-                if (k in osmDestinationTags) {
-                    destination = !!osmDestinationTags[k][v];
+                if ((k === 'bicycle' || k === 'foot' || k === 'motor_vehicle' || k === 'access') && v === 'destination') {
+                    destination = true;
                 }
-
+                if ((k === 'bicycle' || k === 'foot' || k === 'motor_vehicle' || k === 'access') && v === 'delivery') {
+                    delivery = true;
+                }
+                if (k === 'motor_vehicle' && v === 'no') {
+                    noMotorVehicle = true;
+                }
                 if (k in osmCyclewayTrack && !!osmCyclewayTrack[k][v]) {
                     cycleway = 'track';
                 }
@@ -285,6 +304,12 @@ export function svgTagClasses() {
             }
             if (customers) {
                 classes.push('tag-customers');
+            }
+            if (noMotorVehicle) {
+                classes.push('tag-no-motor_vehicle');
+            }
+            if (delivery) {
+                classes.push('tag-delivery');
             }
             if (destination) {
                 classes.push('tag-destination');

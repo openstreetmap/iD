@@ -2992,6 +2992,14 @@
                     "label": "Building",
                     "terms": "structure"
                 },
+                "building/flats_building": {
+                    "label": "Building Flats",
+                    "placeholder": "1, 2, 3..."
+                },
+                "building/flats": {
+                    "label": "Number of flats",
+                    "placeholder": "1, 2, 3..."
+                },
                 "building/levels_building": {
                     "label": "Building Levels",
                     "terms": "",
@@ -3441,6 +3449,10 @@
                 },
                 "flag/type": {
                     "label": "Flag Type"
+                },
+                "flats": {
+                    "label": "Number of flats",
+                    "placeholder": "1, 2, 3..."
                 },
                 "floating": {
                     "label": "Floating"
@@ -7035,6 +7047,10 @@
                     "name": "Moving Walkway",
                     "terms": "moving sidewalk,autwalk,skywalk,travolator,travelator,travellator,conveyor"
                 },
+                "highway/footway/customers_access_aisle": {
+                    "name": "Customers Access Aisle",
+                    "terms": "accessible van loading zone,disabled parking access zone,handicap parking access zone,parking lot aisle,striped zone,tow zone,tow-away zone,towaway zone,wheelchair aisle"
+                },
                 "highway/footway/customers-informal": {
                     "name": "Customers InformalPath",
                     "terms": "hike,hiking,trackway,trail,walk,desire,informal"
@@ -7050,6 +7066,10 @@
                 "highway/footway/marked": {
                     "name": "Marked Crosswalk",
                     "terms": "marked foot path crossing,marked crossing,marked pedestrian crosswalk,zebra crossing"
+                },
+                "highway/footway/private_access_aisle": {
+                    "name": "Private Access Aisle",
+                    "terms": "accessible van loading zone,disabled parking access zone,handicap parking access zone,parking lot aisle,striped zone,tow zone,tow-away zone,towaway zone,wheelchair aisle"
                 },
                 "highway/footway/private-informal": {
                     "name": "Private InformalPath",
