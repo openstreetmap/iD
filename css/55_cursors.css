@@ -6,7 +6,7 @@
 }
 
 .map-in-map,
-#map {
+.main-map {
     cursor: auto; /* Opera */
     cursor: url(img/cursor-grab.png) 9 9, auto; /* FF */
 }
@@ -54,13 +54,13 @@
     cursor: url(img/cursor-select-remove.png), pointer; /* FF */
 }
 
-.mode-add-preset #map,
-.mode-draw-line #map,
-.mode-draw-area #map,
-.mode-add-line  #map,
-.mode-add-area  #map,
-.mode-drag-node #map,
-.mode-drag-note #map {
+.mode-add-preset .main-map,
+.mode-draw-line .main-map,
+.mode-draw-area .main-map,
+.mode-add-line  .main-map,
+.mode-add-area  .main-map,
+.mode-drag-node .main-map,
+.mode-drag-note .main-map {
     cursor: crosshair; /* Opera */
     cursor: url(img/cursor-draw.png) 9 9, crosshair; /* FF */
 }
@@ -83,13 +83,13 @@
     cursor: url(img/cursor-draw-connect-vertex.png) 9 9, crosshair; /* FF */
 }
 
-.mode-add-point #map,
-.mode-add-note #map,
-.mode-browse.lasso #map,
+.mode-add-point .main-map,
+.mode-add-note .main-map,
+.mode-browse.lasso .main-map,
 .mode-browse.lasso .way,
 .mode-browse.lasso .vertex,
 .mode-browse.lasso .midpoint,
-.mode-select.lasso #map,
+.mode-select.lasso .main-map,
 .mode-select.lasso .way,
 .mode-select.lasso .vertex,
 .mode-select.lasso .midpoint {

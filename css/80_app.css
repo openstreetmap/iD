@@ -3907,7 +3907,7 @@ img.tile-debug {
 
 /* Map
 ------------------------------------------------------- */
-#map {
+.main-map {
     position: relative;
     overflow: hidden;
     height: 100%;

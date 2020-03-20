@@ -107,7 +107,7 @@ export function modeDragNote(context) {
 
     var drag = behaviorDrag()
         .selector('.layer-touch.markers .target.note.new')
-        .surface(d3_select('#map').node())
+        .surface(d3_select('.main-map').node())
         .origin(origin)
         .on('start', start)
         .on('move', move)

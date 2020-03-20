@@ -115,7 +115,7 @@ export function uiInit(context) {
 
         content
             .append('div')
-            .attr('id', 'map')
+            .attr('class', 'main-map')
             .attr('dir', 'ltr')
             .call(map);
 

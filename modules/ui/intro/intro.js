@@ -72,7 +72,7 @@ export function uiIntro(context) {
     let zoom = context.map().zoom();
     let background = context.background().baseLayerSource();
     let overlays = context.background().overlayLayerSources();
-    let opacity = d3_selectAll('#map .layer-background').style('opacity');
+    let opacity = d3_selectAll('.main-map .layer-background').style('opacity');
     let caches = osm && osm.caches();
     let baseEntities = context.history().graph().base().entities;
 
@@ -109,7 +109,7 @@ export function uiIntro(context) {
     });
 
 
-    d3_selectAll('#map .layer-background').style('opacity', 1);
+    d3_selectAll('.main-map .layer-background').style('opacity', 1);
 
     let curtain = uiCurtain();
     selection.call(curtain);
@@ -156,7 +156,7 @@ export function uiIntro(context) {
 
       curtain.remove();
       navwrap.remove();
-      d3_selectAll('#map .layer-background').style('opacity', opacity);
+      d3_selectAll('.main-map .layer-background').style('opacity', opacity);
       d3_selectAll('button.sidebar-toggle').classed('disabled', false);
       if (osm) { osm.toggle(true).reset().caches(caches); }
       context.history().reset().merge(Object.values(baseEntities));

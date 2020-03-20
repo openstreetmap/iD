@@ -11,7 +11,7 @@ describe('iD.svgLines', function () {
     beforeEach(function () {
         context = iD.coreContext().init();
         d3.select(document.createElement('div'))
-            .attr('id', 'map')
+            .attr('class', 'main-map')
             .call(context.map().centerZoom([0, 0], 17));
         surface = context.surface();
     });
