@@ -488,8 +488,8 @@ button[disabled].action:hover {
     left: 0;
     top: 0;
     z-index: 101;
-    transform: scale(0.85);
-    transform-origin: left top;
+    /*transform: scale(0.85);
+    transform-origin: left top;*/
 }
 #bar {
     display: flex;
@@ -538,7 +538,7 @@ button[disabled].action:hover {
 }
 #bar .toolbar-item .item-label {
     text-align: center;
-    font-size: 13px;
+    font-size: 11px;
     white-space: nowrap;
     margin: 1px 2px 2px 2px;
 }
@@ -1857,8 +1857,8 @@ a.hide-toggle {
     justify-content: center;
 }
 .preset-icon-container.small {
-    width: 40px;
-    height: 40px;
+    width: 35px;
+    height: 35px;
     flex: 0 0 auto;
 }
 .preset-icon-container img.image-icon {
