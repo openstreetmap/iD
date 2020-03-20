@@ -487,8 +487,9 @@ button[disabled].action:hover {
     position: absolute;
     left: 0;
     top: 0;
-    right: 0;
     z-index: 101;
+    transform: scale(0.85);
+    transform-origin: left top;
 }
 #bar {
     display: flex;
@@ -514,7 +515,7 @@ button[disabled].action:hover {
     justify-content: center;
     padding-top: 5px;
     padding-bottom: 5px;
-    transform: scale(0.8);
+    /*transform: scale(0.8);*/
     
 }
 #bar .toolbar-item .item-content {
@@ -525,6 +526,7 @@ button[disabled].action:hover {
     height: 35px;
     width: auto;
     margin: 0 5px;
+    /*transform: scale(0.8);*/
 }
 [dir='ltr'] #bar .toolbar-item:last-child .item-content,
 [dir='rtl'] #bar .toolbar-item:first-child .item-content {
@@ -535,9 +537,8 @@ button[disabled].action:hover {
     margin-left: 10px;
 }
 #bar .toolbar-item .item-label {
-    display: none;
     text-align: center;
-    font-size: 10px;
+    font-size: 13px;
     white-space: nowrap;
     margin: 1px 2px 2px 2px;
 }
