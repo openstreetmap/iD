@@ -2775,48 +2775,24 @@ en:
           zigzag: Zig Zag
         terms: '[translate with synonyms or related terms for ''Windings Configuration'', separated by commas]'
     groups:
-      toggleable/aerialways:
-        description: 'Chair Lifts, Gondolas, Zip Lines, etc.'
-        name: Aerial Features
-      toggleable/boundaries:
-        description: Administrative Boundaries
-        name: Boundaries
-      toggleable/building_parts:
-        description: 3D Building and Roof Components
-        name: Building Parts
       toggleable/buildings:
         description: 'Houses, Shelters, Garages, etc.'
         name: Buildings
-      toggleable/indoor:
-        description: 'Rooms, Corridors, Stairwells, etc.'
-        name: Indoor Features
       toggleable/landuse:
         description: 'Forests, Farmland, Parks, Residential, Commercial, etc.'
         name: Landuse Features
-      toggleable/past_future:
-        description: 'Proposed, Construction, Abandoned, Demolished, etc.'
-        name: Past/Future Features
       toggleable/paths:
         description: 'Sidewalks, Foot Paths, Cycle Paths, etc.'
         name: Paths
-      toggleable/pistes:
-        description: 'Ski Slopes, Sled Runs, Ice Skating Trails, etc.'
-        name: Pistes
       toggleable/points:
         description: Points of Interest
         name: Points
-      toggleable/power:
-        description: 'Power Lines, Power Plants, Substations, etc.'
-        name: Power Features
-      toggleable/rail:
-        description: 'Rails, Train Signals, etc.'
-        name: Railway Features
       toggleable/service_roads:
         description: 'Driveways, Parking Aisles, Tracks, etc.'
         name: Service Roads
       toggleable/traffic_roads:
-        description: 'Highways, Streets, etc.'
-        name: Traffic Roads
+        description: 'Highways, Streets, Railways, Aerialways, etc.'
+        name: 'Traffic Roads, railways and aerialways'
       toggleable/water:
         description: 'Rivers, Lakes, Ponds, Basins, etc.'
         name: Water Features

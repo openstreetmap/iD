@@ -1,10 +1,21 @@
 {
-    "name": "Traffic Roads",
-    "description": "Highways, Streets, etc.",
+    "name": "Traffic Roads, railways and aerialways",
+    "description": "Highways, Streets, Railways, Aerialways, etc.",
     "toggleable": true,
     "matches": {
         "geometry": "line",
-        "allTags": {
+        "anyTags": {
+            "aerialway": {
+                "*": true,
+                "no": false,
+                "yes": false,
+                "station": false
+            },
+            "railway": {
+                "*": true,
+                "no": false
+            },
+            "landuse": "railway",
             "highway": {
                 "motorway": true,
                 "motorway_link": true,

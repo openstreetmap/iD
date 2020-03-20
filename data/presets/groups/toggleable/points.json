@@ -2,7 +2,7 @@
     "name": "Points",
     "description": "Points of Interest",
     "toggleable": {
-        "maxShown": 200
+        "maxShown": 500
     },
     "matches": {
         "geometry": "point"

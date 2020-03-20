@@ -4,7 +4,8 @@
     "toggleable": true,
     "matches": {
         "geometry": ["line", "area"],
-        "allTags": {
+        "anyTags": {
+            "barrier": "*",
             "highway": {
                 "path": true,
                 "footway": true,
