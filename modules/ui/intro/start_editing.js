@@ -39,7 +39,7 @@ export function uiIntroStartEditing(context, reveal) {
 
     function showSave() {
         d3_selectAll('.shaded').remove();  // in case user opened keyboard shortcuts
-        reveal('#bar button.save',
+        reveal('.top-toolbar button.save',
             t('intro.startediting.save'), {
                 buttonText: t('intro.ok'),
                 buttonCallback: function() { showStart(); }

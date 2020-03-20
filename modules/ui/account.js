@@ -12,21 +12,21 @@ export function uiAccount(context) {
         if (!osm) return;
 
         if (!osm.authenticated()) {
-            selection.selectAll('#userLink, #logoutLink')
+            selection.selectAll('.userLink, .logoutLink')
                 .classed('hide', true);
             return;
         }
 
         osm.userDetails(function(err, details) {
-            var userLink = selection.select('#userLink'),
-                logoutLink = selection.select('#logoutLink');
+            var userLink = selection.select('.userLink'),
+                logoutLink = selection.select('.logoutLink');
 
             userLink.html('');
             logoutLink.html('');
 
             if (err || !details) return;
 
-            selection.selectAll('#userLink, #logoutLink')
+            selection.selectAll('.userLink, .logoutLink')
                 .classed('hide', false);
 
             // Link
@@ -63,11 +63,11 @@ export function uiAccount(context) {
 
     return function(selection) {
         selection.append('li')
-            .attr('id', 'logoutLink')
+            .attr('class', 'logoutLink')
             .classed('hide', true);
 
         selection.append('li')
-            .attr('id', 'userLink')
+            .attr('class', 'userLink')
             .classed('hide', true);
 
         if (osm) {

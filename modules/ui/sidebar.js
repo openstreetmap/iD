@@ -43,7 +43,7 @@ export function uiSidebar(context) {
 
         var resizer = selection
             .append('div')
-            .attr('id', 'sidebar-resizer');
+            .attr('class', 'sidebar-resizer');
 
         // Set the initial width constraints
         selection

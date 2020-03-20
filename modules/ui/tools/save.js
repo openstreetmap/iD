@@ -80,7 +80,7 @@ export function uiToolSave(context) {
             .placement('bottom')
             .html(true)
             .title(uiTooltipHtml(t('save.no_changes'), key))
-            .scrollContainer(d3_select('#bar'));
+            .scrollContainer(d3_select('.top-toolbar'));
 
         button = selection
             .append('button')

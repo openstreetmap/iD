@@ -97,7 +97,7 @@ export function uiInit(context) {
 
         container
             .append('div')
-            .attr('id', 'sidebar')
+            .attr('class', 'sidebar')
             .call(ui.sidebar);
 
         var content = container
@@ -108,10 +108,9 @@ export function uiInit(context) {
         // Top toolbar
         content
             .append('div')
-            .attr('id', 'bar-wrap')
+            .attr('class', 'top-toolbar-wrap')
             .append('div')
-            .attr('id', 'bar')
-            .attr('class', 'fillD')
+            .attr('class', 'top-toolbar fillD')
             .call(uiTopToolbar(context));
 
         content
@@ -180,18 +179,15 @@ export function uiInit(context) {
 
         var footer = about
             .append('div')
-            .attr('id', 'footer')
-            .attr('class', 'fillD');
+            .attr('class', 'map-footer fillD');
 
         footer
             .append('div')
-            .attr('id', 'flash-wrap')
-            .attr('class', 'footer-hide');
+            .attr('class', 'flash-wrap footer-hide');
 
         var footerWrap = footer
             .append('div')
-            .attr('id', 'footer-wrap')
-            .attr('class', 'footer-show');
+            .attr('class', 'map-footer-wrap footer-show');
 
         footerWrap
             .append('div')
@@ -428,7 +424,7 @@ export function uiInit(context) {
         // This will call `getBoundingClientRect` and trigger reflow,
         //  but the values will be cached for later use.
         var mapDimensions = utilGetDimensions(d3_select('#content'), true);
-        utilGetDimensions(d3_select('#sidebar'), true);
+        utilGetDimensions(d3_select('.sidebar'), true);
 
         if (withPan !== undefined) {
             map.redrawEnable(false);
@@ -440,8 +436,8 @@ export function uiInit(context) {
         ui.photoviewer.onMapResize();
 
         // check if header or footer have overflowed
-        ui.checkOverflow('#bar');
-        ui.checkOverflow('#footer');
+        ui.checkOverflow('.top-toolbar');
+        ui.checkOverflow('.map-footer');
 
         // Use outdated code so it works on Explorer
         var resizeWindowEvent = document.createEvent('Event');

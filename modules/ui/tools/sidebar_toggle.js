@@ -22,7 +22,7 @@ export function uiToolSidebarToggle(context) {
                 .placement('bottom')
                 .html(true)
                 .title(uiTooltipHtml(t('sidebar.tooltip'), t('sidebar.key')))
-                .scrollContainer(d3_select('#bar'))
+                .scrollContainer(d3_select('.top-toolbar'))
             )
             .call(svgIcon('#iD-icon-sidebar-' + (textDirection === 'rtl' ? 'right' : 'left')));
     };

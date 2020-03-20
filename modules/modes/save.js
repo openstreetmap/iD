@@ -57,7 +57,7 @@ export function modeSave(context) {
     function showConflicts(changeset, conflicts, origChanges) {
 
         var selection = context.container()
-            .select('#sidebar')
+            .select('.sidebar')
             .append('div')
             .attr('class','sidebar-component');
 

@@ -443,14 +443,14 @@ button[disabled].action:hover {
 
 /* Toolbar / Persistent UI Elements
 ------------------------------------------------------- */
-#bar-wrap {
+.top-toolbar-wrap {
     position: absolute;
     left: 0;
     top: 0;
     right: 0;
     z-index: 101;
 }
-#bar {
+.top-toolbar {
     display: flex;
     flex-flow: row nowrap;
     justify-content: space-between;
@@ -464,16 +464,16 @@ button[disabled].action:hover {
     scrollbar-width: none; /* Firefox */
     -ms-overflow-style: none; /* IE, Edge */
 }
-#bar::-webkit-scrollbar {
+.top-toolbar::-webkit-scrollbar {
     display: none; /* Chrome, Safari, Opera */
 }
-#bar .toolbar-item {
+.top-toolbar .toolbar-item {
     display: flex;
     flex: 0 1 auto;
     flex-flow: column wrap;
     justify-content: center;
 }
-#bar .toolbar-item .item-content {
+.top-toolbar .toolbar-item .item-content {
     display: flex;
     flex: 0 1 auto;
     flex-flow: row nowrap;
@@ -482,31 +482,31 @@ button[disabled].action:hover {
     width: auto;
     margin: 0 5px;
 }
-[dir='ltr'] #bar .toolbar-item:last-child .item-content,
-[dir='rtl'] #bar .toolbar-item:first-child .item-content {
+[dir='ltr'] .top-toolbar .toolbar-item:last-child .item-content,
+[dir='rtl'] .top-toolbar .toolbar-item:first-child .item-content {
     margin-right: 10px;
 }
-[dir='ltr'] #bar .toolbar-item:first-child .item-content,
-[dir='rtl'] #bar .toolbar-item:last-child .item-content {
+[dir='ltr'] .top-toolbar .toolbar-item:first-child .item-content,
+[dir='rtl'] .top-toolbar .toolbar-item:last-child .item-content {
     margin-left: 10px;
 }
-#bar .toolbar-item .item-label {
+.top-toolbar .toolbar-item .item-label {
     text-align: center;
     font-size: 11px;
     white-space: nowrap;
     margin: 1px 2px 2px 2px;
 }
-#bar .toolbar-item.spacer {
+.top-toolbar .toolbar-item.spacer {
     width: 100%;
     flex-grow: 2;
 }
-#bar .toolbar-item:first-child {
+.top-toolbar .toolbar-item:first-child {
     justify-content: flex-start;
 }
-#bar .toolbar-item:last-child {
+.top-toolbar .toolbar-item:last-child {
     justify-content: flex-end;
 }
-#bar .toolbar-item:empty:not(.spacer) {
+.top-toolbar .toolbar-item:empty:not(.spacer) {
     display: none;
 }
 button.bar-button {
@@ -587,11 +587,11 @@ button.add-note svg.icon {
 }
 
 
-#bar.narrow .spinner,
-#bar.narrow button.bar-button .label {
+.top-toolbar.narrow .spinner,
+.top-toolbar.narrow button.bar-button .label {
     display: none;
 }
-#bar.narrow button .count {
+.top-toolbar.narrow button .count {
     border-left-width: 0;
     border-right-width: 0;
 }
@@ -738,7 +738,7 @@ a.hide-toggle {
 
 /* Sidebar / Inspector
 ------------------------------------------------------- */
-#sidebar {
+.sidebar {
     position: relative;
     float: left;
     height: 100%;
@@ -748,13 +748,13 @@ a.hide-toggle {
     border: 0px solid #ccc;
     border-right-width: 1px;
 }
-[dir='rtl'] #sidebar {
+[dir='rtl'] .sidebar {
     float: right;
     border-right-width: 0px;
     border-left-width: 1px;
 }
 
-#sidebar-resizer {
+.sidebar-resizer {
     position: absolute;
     top: 0;
     right: -6px;
@@ -762,17 +762,17 @@ a.hide-toggle {
     width: 6px;
     cursor: col-resize;
 }
-[dir='rtl'] #sidebar-resizer {
+[dir='rtl'] .sidebar-resizer {
     right: auto;
     left: -6px;
 }
 
-#sidebar.collapsed #sidebar-resizer {
+.sidebar.collapsed .sidebar-resizer {
     /* make target wider to avoid the user accidentally resizing window */
     width: 10px;
     right: -10px;
 }
-[dir='rtl'] #sidebar.collapsed #sidebar-resizer {
+[dir='rtl'] .sidebar.collapsed .sidebar-resizer {
     left: -10px;
 }
 
@@ -849,19 +849,19 @@ a.hide-toggle {
     margin-bottom: 150px;
 }
 
-#sidebar .search-header .icon {
+.sidebar .search-header .icon {
     display: block;
     position: absolute;
     left: 10px;
     top: 80px;
     pointer-events: none;
 }
-[dir='rtl'] #sidebar .search-header .icon {
+[dir='rtl'] .sidebar .search-header .icon {
     left: auto;
     right: 10px;
 }
 
-#sidebar .search-header input {
+.sidebar .search-header input {
     position: absolute;
     top: 60px;
     height: 60px;
@@ -4215,7 +4215,7 @@ img.tile-debug {
     margin: 0 3px;
 }
 
-#footer {
+.map-footer {
     pointer-events: all;
     display: block;
     height: 30px;
@@ -4224,7 +4224,7 @@ img.tile-debug {
 
 /* Footer - Flash messages
 ------------------------------------------------------- */
-#flash-wrap {
+.flash-wrap {
     display: flex;
     flex: 0 0 100%;
     flex-flow: row nowrap;
@@ -4279,7 +4279,7 @@ img.tile-debug {
     flex: 1 1 auto;
 }
 
-#footer-wrap {
+.map-footer-wrap {
     display: flex;
     flex: 0 0 100%;
     flex-flow: row nowrap;
@@ -5212,22 +5212,22 @@ svg.mouseclick use.right {
 /* dark tooltips for sidebar / panels */
 .tooltip.dark.top .popover-arrow,
 .map-pane .tooltip.top .popover-arrow,
-#sidebar .tooltip.top .popover-arrow {
+.sidebar .tooltip.top .popover-arrow {
     border-top-color: #000;
 }
 .tooltip.dark.bottom .popover-arrow,
 .map-pane .tooltip.bottom .popover-arrow,
-#sidebar .tooltip.bottom .popover-arrow {
+.sidebar .tooltip.bottom .popover-arrow {
     border-bottom-color: #000;
 }
 .tooltip.dark.left .popover-arrow,
 .map-pane .tooltip.left .popover-arrow,
-#sidebar .tooltip.left .popover-arrow {
+.sidebar .tooltip.left .popover-arrow {
     border-left-color: #000;
 }
 .tooltip.dark.right .popover-arrow,
 .map-pane .tooltip.right .popover-arrow,
-#sidebar .tooltip.right .popover-arrow {
+.sidebar .tooltip.right .popover-arrow {
     border-right-color: #000;
 }
 .tooltip.dark .popover-inner,
@@ -5236,15 +5236,15 @@ svg.mouseclick use.right {
 .map-pane .popover-inner,
 .map-pane .tooltip-heading,
 .map-pane .keyhint-wrap,
-#sidebar .popover-inner,
-#sidebar .tooltip-heading,
-#sidebar .keyhint-wrap {
+.sidebar .popover-inner,
+.sidebar .tooltip-heading,
+.sidebar .keyhint-wrap {
     background: #000;
     color: #ccc;
 }
 .tooltip.dark kbd,
 .map-pane .tooltip kbd,
-#sidebar .tooltip kbd {
+.sidebar .tooltip kbd {
     background-color: #666;
     border: solid 1px #444;
     border-bottom-color: #333;
