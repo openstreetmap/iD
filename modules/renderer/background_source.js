@@ -1,9 +1,11 @@
-import { geoMercatorRaw as d3_geoMercatorRaw } from 'd3-geo';
+import { geoArea as d3_geoArea, geoMercatorRaw as d3_geoMercatorRaw } from 'd3-geo';
 import { json as d3_json } from 'd3-fetch';
 
 import { t } from '../util/locale';
 import { geoExtent, geoSphericalDistance } from '../geo';
-import { utilDetect, utilQsString, utilStringQs } from '../util';
+import { utilQsString, utilStringQs } from '../util';
+import { utilAesDecrypt } from '../util/aes';
+import { utilDetect } from '../util/detect';
 
 
 function localeDateString(s) {
@@ -29,49 +31,51 @@ function vintageRange(vintage) {
 
 export function rendererBackgroundSource(data) {
     var source = Object.assign({}, data);   // shallow copy
-    var _offset = [0, 0];
-    var _name = source.name;
-    var _description = source.description;
-    var _best = !!source.best;
-    var _template = source.template;
+    var offset = [0, 0];
+    var name = source.name;
+    var description = source.description;
+    var best = !!source.best;
+    var template = source.encrypted ? utilAesDecrypt(source.template) : source.template;
 
     source.tileSize = data.tileSize || 256;
     source.zoomExtent = data.zoomExtent || [0, 22];
     source.overzoom = data.overzoom !== false;
 
     source.offset = function(val) {
-        if (!arguments.length) return _offset;
-        _offset = val;
+        if (!arguments.length) return offset;
+        offset = val;
         return source;
     };
 
 
     source.nudge = function(val, zoomlevel) {
-        _offset[0] += val[0] / Math.pow(2, zoomlevel);
-        _offset[1] += val[1] / Math.pow(2, zoomlevel);
+        offset[0] += val[0] / Math.pow(2, zoomlevel);
+        offset[1] += val[1] / Math.pow(2, zoomlevel);
         return source;
     };
 
 
     source.name = function() {
         var id_safe = source.id.replace(/\./g, '<TX_DOT>');
-        return t('imagery.' + id_safe + '.name', { default: _name });
+        return t('imagery.' + id_safe + '.name', { default: name });
     };
 
 
     source.description = function() {
         var id_safe = source.id.replace(/\./g, '<TX_DOT>');
-        return t('imagery.' + id_safe + '.description', { default: _description });
+        return t('imagery.' + id_safe + '.description', { default: description });
     };
 
 
     source.best = function() {
-        return _best;
+        return best;
     };
 
 
     source.area = function() {
-        return data.area || Number.MAX_VALUE;
+        if (!data.polygon) return Number.MAX_VALUE;  // worldwide
+        var area = d3_geoArea({ type: 'MultiPolygon', coordinates: [ data.polygon ] });
+        return isNaN(area) ? 0 : area;
     };
 
 
@@ -80,35 +84,15 @@ export function rendererBackgroundSource(data) {
     };
 
 
-    source.template = function(val) {
-        if (!arguments.length) return _template;
-        if (source.id === 'custom') {
-            _template = val;
-        }
+    source.template = function(_) {
+        if (!arguments.length) return template;
+        if (source.id === 'custom') template = _;
         return source;
     };
 
 
     source.url = function(coord) {
-        var result = _template;
-        if (result === '') return result;   // source 'none'
-
-
-        // Guess a type based on the tokens present in the template
-        // (This is for 'custom' source, where we don't know)
-        if (!source.type) {
-            if (/\{(proj|wkid|bbox)\}/.test(_template)) {
-                source.type = 'wms';
-                source.projection = 'EPSG:3857';  // guess
-            } else if (/\{(x|y)\}/.test(_template)) {
-                source.type = 'tms';
-            } else if (/\{u\}/.test(_template)) {
-                source.type = 'bing';
-            }
-        }
-
-
-        if (source.type === 'wms') {
+        if (this.type === 'wms') {
             var tileToProjectedCoords = (function(x, y, z) {
                 //polyfill for IE11, PhantomJS
                 var sinh = Math.sinh || function(x) {
@@ -120,7 +104,7 @@ export function rendererBackgroundSource(data) {
                 var lon = x / zoomSize * Math.PI * 2 - Math.PI;
                 var lat = Math.atan(sinh(Math.PI * (1 - 2 * y / zoomSize)));
 
-                switch (source.projection) {
+                switch (this.projection) {
                     case 'EPSG:4326':
                         return {
                             x: lon * 180 / Math.PI,
@@ -133,14 +117,13 @@ export function rendererBackgroundSource(data) {
                             y: 20037508.34 / Math.PI * mercCoords[1]
                         };
                 }
-            });
+            }).bind(this);
 
-            var tileSize = source.tileSize;
-            var projection = source.projection;
+            var tileSize = this.tileSize;
+            var projection = this.projection;
             var minXmaxY = tileToProjectedCoords(coord[0], coord[1], coord[2]);
             var maxXminY = tileToProjectedCoords(coord[0]+1, coord[1]+1, coord[2]);
-
-            result = result.replace(/\{(\w+)\}/g, function (token, key) {
+            return template.replace(/\{(\w+)\}/g, function (token, key) {
               switch (key) {
                 case 'width':
                 case 'height':
@@ -163,40 +146,28 @@ export function rendererBackgroundSource(data) {
                   return token;
               }
             });
-
-        } else if (source.type === 'tms') {
-            result = result
-                .replace('{x}', coord[0])
-                .replace('{y}', coord[1])
-                // TMS-flipped y coordinate
-                .replace(/\{[t-]y\}/, Math.pow(2, coord[2]) - coord[1] - 1)
-                .replace(/\{z(oom)?\}/, coord[2]);
-
-        } else if (source.type === 'bing') {
-            result = result
-                .replace('{u}', function() {
-                    var u = '';
-                    for (var zoom = coord[2]; zoom > 0; zoom--) {
-                        var b = 0;
-                        var mask = 1 << (zoom - 1);
-                        if ((coord[0] & mask) !== 0) b++;
-                        if ((coord[1] & mask) !== 0) b += 2;
-                        u += b.toString();
-                    }
-                    return u;
-                });
         }
-
-        // these apply to any type..
-        result = result
-            .replace('{apikey}', (source.apikey || ''))
+        return template
+            .replace('{x}', coord[0])
+            .replace('{y}', coord[1])
+            // TMS-flipped y coordinate
+            .replace(/\{[t-]y\}/, Math.pow(2, coord[2]) - coord[1] - 1)
+            .replace(/\{z(oom)?\}/, coord[2])
             .replace(/\{switch:([^}]+)\}/, function(s, r) {
                 var subdomains = r.split(',');
                 return subdomains[(coord[0] + coord[1]) % subdomains.length];
+            })
+            .replace('{u}', function() {
+                var u = '';
+                for (var zoom = coord[2]; zoom > 0; zoom--) {
+                    var b = 0;
+                    var mask = 1 << (zoom - 1);
+                    if ((coord[0] & mask) !== 0) b++;
+                    if ((coord[1] & mask) !== 0) b += 2;
+                    u += b.toString();
+                }
+                return u;
             });
-
-
-        return result;
     };
 
 
@@ -508,7 +479,7 @@ rendererBackgroundSource.Esri = function(data) {
 
 
 rendererBackgroundSource.None = function() {
-    var source = rendererBackgroundSource({ id: 'none', template: '', isGlobal: true });
+    var source = rendererBackgroundSource({ id: 'none', template: '' });
 
 
     source.name = function() {
@@ -531,7 +502,7 @@ rendererBackgroundSource.None = function() {
 
 
 rendererBackgroundSource.Custom = function(template) {
-    var source = rendererBackgroundSource({ id: 'custom', template: template, isGlobal: true });
+    var source = rendererBackgroundSource({ id: 'custom', template: template });
 
 
     source.name = function() {

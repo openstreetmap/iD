@@ -13,7 +13,7 @@ import { utilRebind, utilTiler, utilQsString } from '../util';
 const tiler = utilTiler();
 const dispatch = d3_dispatch('loaded');
 const _tileZoom = 14;
-const _osmoseUrlRoot = 'https://osmose.openstreetmap.fr/en/api/0.3beta';
+const _osmoseUrlRoot = 'https://osmose.openstreetmap.fr/api/0.3beta';
 let _osmoseData = { icons: {}, items: [] };
 
 // This gets reassigned if reset

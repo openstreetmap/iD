@@ -908,6 +908,7 @@
     {"key": "playground", "value": "swing", "description": "🄿 Swing", "object_types": ["node"], "icon_url": "https://cdn.jsdelivr.net/gh/mapbox/maki/icons/playground-15.svg"},
     {"key": "playground", "value": "zipwire", "description": "🄿 Zip Wire", "object_types": ["node", "way"], "icon_url": "https://cdn.jsdelivr.net/gh/mapbox/maki/icons/playground-15.svg"},
     {"key": "polling_station", "description": "🄿 Temporary Polling Place, 🄵 Polling Place", "object_types": ["node", "area"], "icon_url": "https://cdn.jsdelivr.net/gh/openstreetmap/iD@master/svg/fontawesome/fas-vote-yea.svg"},
+    {"key": "power", "value": "cable", "description": "🄿 Power Cable (unsearchable)", "object_types": ["way"], "icon_url": "https://cdn.jsdelivr.net/gh/ideditor/temaki/icons/cable.svg"},
     {"key": "power", "value": "generator", "description": "🄿 Power Generator", "object_types": ["node", "area"], "icon_url": "https://cdn.jsdelivr.net/gh/ideditor/temaki/icons/power.svg"},
     {"key": "generator:method", "value": "photovoltaic", "description": "🄿 Solar Panel", "object_types": ["area", "node"], "icon_url": "https://cdn.jsdelivr.net/gh/openstreetmap/iD@master/svg/fontawesome/fas-solar-panel.svg"},
     {"key": "generator:source", "value": "hydro", "description": "🄿 Water Turbine", "object_types": ["node", "area"], "icon_url": "https://cdn.jsdelivr.net/gh/ideditor/temaki/icons/power.svg"},

@@ -11,8 +11,7 @@ for (var k in iD.services) { delete iD.services[k]; }
 iD.data.locales = { en: { rtl: false, languageNames: {}, scriptNames: {} }};
 iD.data.locale_en = { en: {} };
 // Initializing `coreContext` initializes `_background`, which tries loading:
-iD.data.imagery_sources = [];
-iD.data.imagery_features = { type: 'FeatureCollection', features: [] };
+iD.data.imagery = [];
 // Initializing `coreContext` initializes `_presets`, which tries loading:
 iD.data.preset_categories = {};
 iD.data.preset_defaults = {};

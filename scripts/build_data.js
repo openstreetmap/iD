@@ -124,6 +124,7 @@ function buildData() {
     minifyJSON('data/address_formats.json', 'dist/data/address_formats.min.json'),
     minifyJSON('data/deprecated.json', 'dist/data/deprecated.min.json'),
     minifyJSON('data/discarded.json', 'dist/data/discarded.min.json'),
+    minifyJSON('data/imagery.json', 'dist/data/imagery.min.json'),
     minifyJSON('data/intro_graph.json', 'dist/data/intro_graph.min.json'),
     minifyJSON('data/keepRight.json', 'dist/data/keepRight.min.json'),
     minifyJSON('data/languages.json', 'dist/data/languages.min.json'),
@@ -773,16 +774,16 @@ function translationsToYAML(translations) {
 
 function writeEnJson(tstrings) {
   const readCoreYaml = readFileProm('data/core.yaml', 'utf8');
-  const readImagery = readFileProm('node_modules/@ideditor/imagery-index/i18n/en.yaml', 'utf8');
+  const readImagery = readFileProm('node_modules/editor-layer-index/i18n/en.yaml', 'utf8');
   const readCommunity = readFileProm('node_modules/osm-community-index/i18n/en.yaml', 'utf8');
 
   return Promise.all([readCoreYaml, readImagery, readCommunity])
     .then(data => {
-      const core = YAML.load(data[0]);
-      const imagery = YAML.load(data[1]);
-      const community = YAML.load(data[2]);
+      let core = YAML.load(data[0]);
+      let imagery = YAML.load(data[1]);
+      let community = YAML.load(data[2]);
 
-      const enjson = core;
+      let enjson = core;
       enjson.en.presets = tstrings;
       enjson.en.imagery = imagery.en.imagery;
       enjson.en.community = community.en;

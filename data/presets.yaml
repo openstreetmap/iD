@@ -7031,6 +7031,9 @@ en:
       power:
         # power=*
         name: Power Feature
+      power/cable:
+        # power=cable
+        name: Power Cable
       power/cable/underground:
         # 'power=cable, location=underground'
         name: Underground Power Cable

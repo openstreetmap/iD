@@ -3,7 +3,7 @@
 [![Build Status](https://travis-ci.org/openstreetmap/iD.svg?branch=master)](https://travis-ci.org/openstreetmap/iD)
 
 
-:warning: _The [`master`](https://github.com/openstreetmap/iD/tree/master) branch is undergoing significant breaking changes for v3 over the next few months. [`2.x`](https://github.com/openstreetmap/iD/tree/2.x) is considerably more stable and is currently the recommended branch for downstream development._
+:warning: _We've recently changed our branch names. [`develop`](https://github.com/openstreetmap/iD/tree/develop) is now the default branch, replacing `2.x`. [`v3-prototype`](https://github.com/openstreetmap/iD/tree/v3-prototype) is now the alpha version of iD v3, replacing `master`. [`release`](https://github.com/openstreetmap/iD/tree/release) is still `release`._
 
 [Watch the video](https://2019.stateofthemap.us/program/sat/id-v3.html) from our talk at State of the Map US 2019 to learn more about the current status of iD and our goals for v3.
 
@@ -27,8 +27,8 @@ if you're looking for something to do.
 * [Translate!](https://github.com/openstreetmap/iD/blob/master/CONTRIBUTING.md#translating)
 * Test a prerelease version of iD:
   * Stable mirror of `release` branch:  https://preview.ideditor.com/release
-  * Development mirror of `2.x` branch + latest translations: https://2-x--ideditor.netlify.com
-  * Development mirror of v3 prototype branch (`master`):  https://preview.ideditor.com/master
+  * Development mirror of `develop` branch + latest translations: https://2-x--ideditor.netlify.com
+  * Development mirror of `v3-prototype` branch:  https://preview.ideditor.com/master
 
 Come on in, the water's lovely. More help? Ping `bhousel` or `quincylvania` on:
 * [OpenStreetMap US Slack](https://slack.openstreetmap.us/)
@@ -87,18 +87,16 @@ development, see [CONTRIBUTING.md](CONTRIBUTING.md).
 iD is available under the [ISC License](https://opensource.org/licenses/ISC).
 See the [LICENSE.md](LICENSE.md) file for more details.
 
-iD also relies on portions of the following open source software.
+iD also bundles portions of the following open source software.
 
 * [D3.js (BSD-3-Clause)](https://github.com/d3/d3)
 * [CLDR (Unicode Consortium Terms of Use)](https://github.com/unicode-cldr/cldr-json)
+* [editor-layer-index (CC-BY-SA 3.0)](https://github.com/osmlab/editor-layer-index)
 * [Font Awesome (CC-BY 4.0)](https://fontawesome.com/license)
 * [Maki (CC0 1.0)](https://github.com/mapbox/maki)
-* [Temaki (CC0 1.0)](https://github.com/ideditor/temaki)
 * [Mapillary JS (MIT)](https://github.com/mapillary/mapillary-js)
-* [Pannellum (MIT)](https://github.com/mpetroff/pannellum)
 * [name-suggestion-index (BSD-3-Clause)](https://github.com/osmlab/name-suggestion-index)
 * [osm-community-index (ISC)](https://github.com/osmlab/osm-community-index)
-* [imagery-index (ISC)](https://github.com/ideditor/imagery-index)
 
 
 ## Thank you

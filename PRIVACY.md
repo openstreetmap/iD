@@ -24,7 +24,7 @@ Details on that are [here](https://github.com/openstreetmap/iD/blob/master/modul
 
 ### Background imagery and other third party services
 
-If you use background or streetside imagery to aid your edits, your browser must fetch information and images from a third-party imagery host. That use is governed by the respective privacy policies of each imagery host. The [Imagery Index](https://github.com/ideditor/imagery-index) and [iD Editor GitHub code](https://github.com/openstreetmap/iD/blob/master/modules/ui/map_data.js) provide detailed information as to imagery layers available in iD. In addition, you may use third party services to assist your editing or check for errors. See [here](https://github.com/openstreetmap/iD/tree/master/modules/services) for details. If you do not wish to interact with these third parties, do not use these features.
+If you use background or streetside imagery to aid your edits, your browser must fetch information and images from a third-party imagery host. That use is governed by the respective privacy policies of each imagery host. The [Editor Layer Index](https://github.com/osmlab/editor-layer-index) and [iD Editor GitHub code](https://github.com/openstreetmap/iD/blob/master/modules/ui/map_data.js) provides detailed information as to imagery layer available in iD. In addition, you may use third party services to assist your editing or check for errors. See [here](https://github.com/openstreetmap/iD/tree/master/modules/services) for details. If you do not wish to interact with these third parties, do not use these features.
 
 ### Name Suggestion Index
 
@@ -37,5 +37,4 @@ If you believe that we hold information that would allow us to correct, amend, o
 
 ### Changelog
 
-* _2020-Mar-02_ - Swap osmlab/editor-layer-index -> ideditor/imagery-index
 * _2019-Dec-17_ - Initial version.
