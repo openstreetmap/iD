@@ -512,14 +512,17 @@ button[disabled].action:hover {
     flex: 0 1 auto;
     flex-flow: column wrap;
     justify-content: center;
-    padding-top: 10px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    transform: scale(0.8);
+    
 }
 #bar .toolbar-item .item-content {
     display: flex;
     flex: 0 1 auto;
     flex-flow: row nowrap;
     justify-content: center;
-    height: 40px;
+    height: 35px;
     width: auto;
     margin: 0 5px;
 }
@@ -532,8 +535,9 @@ button[disabled].action:hover {
     margin-left: 10px;
 }
 #bar .toolbar-item .item-label {
+    display: none;
     text-align: center;
-    font-size: 11px;
+    font-size: 10px;
     white-space: nowrap;
     margin: 1px 2px 2px 2px;
 }
