@@ -20,5 +20,6 @@
     "tags": {
         "barrier": "gate"
     },
-    "name": "Gate"
+    "name": "Gate",
+    "shortcut": ["⌥+⇧+g"]
 }
