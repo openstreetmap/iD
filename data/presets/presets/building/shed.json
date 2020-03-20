@@ -11,5 +11,6 @@
         "building": "shed"
     },
     "matchScore": 0.5,
-    "name": "Shed"
+    "name": "Shed",
+    "shortcut": ["⇧+s"]
 }

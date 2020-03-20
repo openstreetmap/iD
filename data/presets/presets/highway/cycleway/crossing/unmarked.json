@@ -31,5 +31,6 @@
         "bike crossing"
     ],
     "matchScore": 0.95,
-    "name": "Unmarked Cycle Crossing"
+    "name": "Unmarked Cycle Crossing",
+    "shortcut": ["⌥+c"]
 }

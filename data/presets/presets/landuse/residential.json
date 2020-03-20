@@ -13,5 +13,6 @@
     },
     "terms": [],
     "matchScore": 0.9,
-    "name": "Residential Area"
+    "name": "Residential Area",
+    "shortcut": ["^+c"]
 }

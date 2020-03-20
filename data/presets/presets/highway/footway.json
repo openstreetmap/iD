@@ -33,5 +33,6 @@
     "tags": {
         "highway": "footway"
     },
-    "name": "Foot Path"
+    "name": "Foot Path",
+    "shortcut": ["f"]
 }

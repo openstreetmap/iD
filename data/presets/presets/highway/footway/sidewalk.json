@@ -18,5 +18,6 @@
         "pavement",
         "sidepath"
     ],
-    "name": "Sidewalk"
+    "name": "Sidewalk",
+    "shortcut": ["⇧+f"]
 }

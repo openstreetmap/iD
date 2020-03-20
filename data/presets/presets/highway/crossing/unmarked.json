@@ -21,5 +21,6 @@
         "value": "unmarked"
     },
     "terms": [],
-    "name": "Unmarked Crossing"
+    "name": "Unmarked Crossing",
+    "shortcut": ["⇧+u"]
 }

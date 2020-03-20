@@ -12,5 +12,6 @@
         "barrier": "fence"
     },
     "name": "Fence",
-    "matchScore": 0.25
+    "matchScore": 0.25,
+    "shortcut": ["n"]
 }

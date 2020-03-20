@@ -12,5 +12,6 @@
       "key": "service",
       "value": "driveway"
   },
-  "name": "Private Driveway"
+  "name": "Private Driveway",
+  "shortcut": ["⌥+⇧+d"]
 }

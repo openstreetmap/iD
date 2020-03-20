@@ -36,5 +36,6 @@
       "motor_vehicle": "no"
   },
   "matchScore": 0.9,
-  "name": "Customers Foot Path"
+  "name": "Customers Foot Path",
+  "shortcut": ["⌥+f"]
 }

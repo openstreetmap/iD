@@ -28,5 +28,6 @@
         "unmarked crosswalk",
         "unmarked pedestrian crossing"
     ],
-    "name": "Unmarked Crossing"
+    "name": "Unmarked Crossing",
+    "shortcut": ["⌥+⇧+u"]
 }

@@ -12,5 +12,6 @@
       "key": "service",
       "value": "parking_aisle"
   },
-  "name": "Customers Parking Aisle"
+  "name": "Customers Parking Aisle",    
+  "shortcut": ["⌥+a"]
 }

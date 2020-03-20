@@ -5,13 +5,13 @@
   ],
   "tags": {
       "highway": "service",
-      "service": "parking_aisle",
-      "access": "private"
+      "service": "driveway",
+      "motor_vehicle": "destination"
   },
   "reference": {
       "key": "service",
-      "value": "parking_aisle"
+      "value": "driveway"
   },
-  "name": "Private Parking Aisle",
-  "shortcut": ["⌥+⇧+a"]
+  "name": "Destination Driveway",
+  "shortcut": ["⌥+e"]
 }

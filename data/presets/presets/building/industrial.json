@@ -7,5 +7,6 @@
         "building": "industrial"
     },
     "matchScore": 0.5,
-    "name": "Industrial Building"
+    "name": "Industrial Building",
+    "shortcut": ["⇧+i"]
 }

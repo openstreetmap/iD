@@ -5301,6 +5301,14 @@ en:
         # 'highway=service, service=parking_aisle, motor_vehicle=customers'
         name: Customers Parking Aisle
         terms: '<translate with synonyms or related terms for ''Customers Parking Aisle'', separated by commas>'
+      highway/service/destination-driveway:
+        # 'highway=service, service=driveway, motor_vehicle=destination'
+        name: Destination Driveway
+        terms: '<translate with synonyms or related terms for ''Destination Driveway'', separated by commas>'
+      highway/service/destination-parking-aisle:
+        # 'highway=service, service=parking_aisle, motor_vehicle=destination'
+        name: Destination Parking Aisle
+        terms: '<translate with synonyms or related terms for ''Destination Parking Aisle'', separated by commas>'
       highway/service/drive-through:
         # 'highway=service, service=drive-through'
         name: Drive-Through

@@ -44,5 +44,6 @@
       "key": "footway",
       "value": "access_aisle"
   },
-  "name": "Customers Access Aisle"
+  "name": "Customers Access Aisle",
+  "shortcut": ["⌥+i"]
 }

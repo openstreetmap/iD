@@ -11,5 +11,6 @@
         "building": "garage"
     },
     "matchScore": 0.5,
-    "name": "Garage"
+    "name": "Garage",
+    "shortcut": ["⇧+g"]
 }

@@ -16,5 +16,6 @@
     "tags": {
         "traffic_calming": "hump"
     },
-    "name": "Speed Hump"
+    "name": "Speed Hump",
+    "shortcut": ["⌥+h"]
 }

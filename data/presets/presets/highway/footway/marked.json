@@ -29,5 +29,6 @@
         "marked pedestrian crosswalk",
         "zebra crossing"
     ],
-    "name": "Marked Crosswalk"
+    "name": "Marked Crosswalk",
+    "shortcut": ["⌥+⇧+m"]
 }

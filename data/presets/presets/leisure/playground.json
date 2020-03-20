@@ -26,5 +26,6 @@
     "tags": {
         "leisure": "playground"
     },
-    "name": "Playground"
+    "name": "Playground",
+    "shortcut": ["⇧+y"]
 }

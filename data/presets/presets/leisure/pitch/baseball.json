@@ -13,5 +13,6 @@
         "value": "baseball"
     },
     "terms": [],
-    "name": "Baseball Field"
+    "name": "Baseball Field",
+    "shortcut": ["⇧+b"]
 }

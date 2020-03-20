@@ -7,5 +7,6 @@
         "building": "farm_auxiliary"
     },
     "matchScore": 0.5,
-    "name": "Farm Building"
+    "name": "Farm Building",
+    "shortcut": ["⇧+r"]
 }

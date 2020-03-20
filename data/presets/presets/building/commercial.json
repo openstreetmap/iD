@@ -11,5 +11,6 @@
         "building": "commercial"
     },
     "matchScore": 0.5,
-    "name": "Commercial Building"
+    "name": "Commercial Building",
+    "shortcut": ["⇧+c"]
 }

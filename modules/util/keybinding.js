@@ -44,13 +44,15 @@ export function utilKeybinding(namespace) {
 
 
         function matches(binding, testShift) {
+            
             var event = d3_event;
+
             var isMatch = false;
             var tryKeyCode = true;
 
             // Prefer a match on `KeyboardEvent.key`
-            if (event.key !== undefined) {
-                tryKeyCode = (event.key.charCodeAt(0) > 255);  // outside ISO-Latin-1
+            if (!binding.event.modifiers.altKey && !binding.event.modifiers.ctrlKey && !binding.event.modifiers.metaKey && event.key !== undefined) {
+                tryKeyCode = (event.key.charCodeAt(0) > 255);  // outside ISO-Latin-1                
                 isMatch = true;
 
                 if (binding.event.key === undefined) {
@@ -63,21 +65,21 @@ export function utilKeybinding(namespace) {
                         isMatch = false;
                 }
             }
-
+            
             // Fallback match on `KeyboardEvent.keyCode`, can happen if:
             // - browser doesn't support `KeyboardEvent.key`
             // - `KeyboardEvent.key` is outside ISO-Latin-1 range (cyrillic?)
-            if (!isMatch && tryKeyCode) {
+            if ((!isMatch) && tryKeyCode) {
                 isMatch = (event.keyCode === binding.event.keyCode);
             }
 
             if (!isMatch) return false;
 
             // test modifier keys
-            if (!(event.ctrlKey && event.altKey)) {  // if both are set, assume AltGr and skip it - #4096
-                if (event.ctrlKey !== binding.event.modifiers.ctrlKey) return false;
-                if (event.altKey !== binding.event.modifiers.altKey) return false;
-            }
+            //if (!(event.ctrlKey && event.altKey)) {  // if both are set, assume AltGr and skip it - #4096
+            if (event.ctrlKey !== binding.event.modifiers.ctrlKey) return false;
+            if (event.altKey !== binding.event.modifiers.altKey) return false;
+            //}
             if (event.metaKey !== binding.event.modifiers.metaKey) return false;
             if (testShift && event.shiftKey !== binding.event.modifiers.shiftKey) return false;
 

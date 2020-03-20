@@ -17,5 +17,6 @@
         "dwelling"
     ],
     "matchScore": 0.5,
-    "name": "Detached House"
+    "name": "Detached House",
+    "shortcut": ["⇧+d"]
 }

@@ -43,5 +43,6 @@
       "truck parking",
       "vehicle parking"
   ],
-  "name": "Private Parking Lot"
+  "name": "Private Parking Lot",
+  "shortcut": ["⌥+⇧+p"]
 }

@@ -15,5 +15,6 @@
     "terms": [
         "football"
     ],
-    "name": "Soccer Field"
+    "name": "Soccer Field",
+    "shortcut": ["⇧+o"]
 }

@@ -7179,6 +7179,14 @@
                     "name": "Customers Parking Aisle",
                     "terms": ""
                 },
+                "highway/service/destination-driveway": {
+                    "name": "Destination Driveway",
+                    "terms": ""
+                },
+                "highway/service/destination-parking-aisle": {
+                    "name": "Destination Parking Aisle",
+                    "terms": ""
+                },
                 "highway/service/drive-through": {
                     "name": "Drive-Through",
                     "terms": ""

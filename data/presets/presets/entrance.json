@@ -21,5 +21,6 @@
         "door"
     ],
     "matchScore": 0.8,
-    "name": "Entrance / Exit"
+    "name": "Entrance / Exit",
+    "shortcut": ["e"]
 }

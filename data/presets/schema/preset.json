@@ -117,6 +117,12 @@
                 "type": "string",
                 "pattern": "^[a-z]{2}$"
             }
+        },
+        "shortcut": {
+            "description": "Add shortcuts with or without modifiers (array)",
+            "type": "array",
+            "additionalProperties": false,
+            "required": false
         }
     },
     "additionalProperties": false
