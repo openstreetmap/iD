@@ -87,18 +87,16 @@ development, see [CONTRIBUTING.md](CONTRIBUTING.md).
 iD is available under the [ISC License](https://opensource.org/licenses/ISC).
 See the [LICENSE.md](LICENSE.md) file for more details.
 
-iD also relies on portions of the following open source software.
+iD also bundles portions of the following open source software.
 
 * [D3.js (BSD-3-Clause)](https://github.com/d3/d3)
 * [CLDR (Unicode Consortium Terms of Use)](https://github.com/unicode-cldr/cldr-json)
+* [editor-layer-index (CC-BY-SA 3.0)](https://github.com/osmlab/editor-layer-index)
 * [Font Awesome (CC-BY 4.0)](https://fontawesome.com/license)
 * [Maki (CC0 1.0)](https://github.com/mapbox/maki)
-* [Temaki (CC0 1.0)](https://github.com/ideditor/temaki)
 * [Mapillary JS (MIT)](https://github.com/mapillary/mapillary-js)
-* [Pannellum (MIT)](https://github.com/mpetroff/pannellum)
 * [name-suggestion-index (BSD-3-Clause)](https://github.com/osmlab/name-suggestion-index)
 * [osm-community-index (ISC)](https://github.com/osmlab/osm-community-index)
-* [imagery-index (ISC)](https://github.com/ideditor/imagery-index)
 
 
 ## Thank you

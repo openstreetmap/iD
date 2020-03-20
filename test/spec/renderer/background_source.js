@@ -5,7 +5,10 @@ describe('iD.rendererBackgroundSource', function() {
     });
 
     it('supports tms replacement tokens', function() {
-        var source = iD.rendererBackgroundSource({ type: 'tms', template: '{z}/{x}/{y}' });
+        var source = iD.rendererBackgroundSource({
+            type: 'tms',
+            template: '{z}/{x}/{y}'
+        });
         expect(source.url([0,1,2])).to.equal('2/0/1');
     });
 
@@ -32,12 +35,12 @@ describe('iD.rendererBackgroundSource', function() {
     });
 
     it('supports subdomains', function() {
-        var source = iD.rendererBackgroundSource({ type: 'tms', template: '{switch:a,b}/{z}/{x}/{y}' });
+        var source = iD.rendererBackgroundSource({ template: '{switch:a,b}/{z}/{x}/{y}'});
         expect(source.url([0,1,2])).to.equal('b/2/0/1');
     });
 
     it('distributes requests between subdomains', function() {
-        var source = iD.rendererBackgroundSource({ type: 'tms', template: '{switch:a,b}/{z}/{x}/{y}' });
+        var source = iD.rendererBackgroundSource({ template: '{switch:a,b}/{z}/{x}/{y}' });
         expect(source.url([0,1,1])).to.equal('b/1/0/1');
         expect(source.url([0,2,1])).to.equal('a/1/0/2');
     });

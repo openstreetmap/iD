@@ -27,7 +27,7 @@ export function coreContext() {
   let _deferred = new Set();
 
   context.version = '2.17.2';
-  context.privacyVersion = '20200312';
+  context.privacyVersion = '20191217';
 
 
   // https://github.com/openstreetmap/iD/issues/772
