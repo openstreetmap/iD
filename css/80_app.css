@@ -34,20 +34,20 @@ body {
     width: 100%;
 }
 
-#content {
+.main-content {
     position: relative;
     overflow: hidden;
     height: 100%;
 }
 
-#content.active {
+.main-content.active {
     -webkit-filter: none !important;
     filter: none !important;
     -webkit-duration: 200ms;
     transition-duration: 200ms;
 }
 
-#content.inactive {
+.main-content.inactive {
     -webkit-filter: grayscale(80%) brightness(80%);
     filter: grayscale(80%) brightness(80%);
     -webkit-duration: 200ms;

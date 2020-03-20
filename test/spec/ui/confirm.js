@@ -4,11 +4,11 @@ describe('iD.uiConfirm', function () {
     beforeEach(function() {
         elem = d3.select('body')
             .append('div')
-            .attr('id', 'confirm-wrap');
+            .attr('class', 'confirm-wrap');
     });
 
     afterEach(function() {
-        d3.select('#confirm-wrap')
+        d3.select('.confirm-wrap')
             .remove();
     });
 

@@ -105,7 +105,7 @@ export function uiPhotoviewer(context) {
 
     photoviewer.onMapResize = function() {
         var photoviewer = d3_select('.photoviewer');
-        var content = d3_select('#content');
+        var content = d3_select('.main-content');
         var mapDimensions = utilGetDimensions(content, true);
         // shrink photo viewer if it is too big
         // (-90 preserves space at top and bottom of map used by menus)

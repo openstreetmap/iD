@@ -102,8 +102,7 @@ export function uiInit(context) {
 
         var content = container
             .append('div')
-            .attr('id', 'content')
-            .attr('class', 'active');
+            .attr('class', 'main-content active');
 
         // Top toolbar
         content
@@ -247,7 +246,7 @@ export function uiInit(context) {
 
 
         // Setup map dimensions and move map to initial center/zoom.
-        // This should happen after #content and toolbars exist.
+        // This should happen after .main-content and toolbars exist.
         ui.onResize();
         map.redrawEnable(true);
 
@@ -423,7 +422,7 @@ export function uiInit(context) {
         // Recalc dimensions of map and sidebar.. (`true` = force recalc)
         // This will call `getBoundingClientRect` and trigger reflow,
         //  but the values will be cached for later use.
-        var mapDimensions = utilGetDimensions(d3_select('#content'), true);
+        var mapDimensions = utilGetDimensions(d3_select('.main-content'), true);
         utilGetDimensions(d3_select('.sidebar'), true);
 
         if (withPan !== undefined) {

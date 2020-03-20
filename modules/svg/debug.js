@@ -30,7 +30,7 @@ export function svgDebug(projection, context) {
     }
 
 
-    let legend = d3_select('#content')
+    let legend = d3_select('.main-content')
       .selectAll('.debug-legend')
       .data(debugData.length ? [0] : []);
 
