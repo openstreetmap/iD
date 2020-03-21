@@ -3585,7 +3585,7 @@
                     "terms": ""
                 },
                 "internet_access": {
-                    "label": "Internet Access",
+                    "label": "Internet Connection",
                     "terms": "wifi,wlan",
                     "options": {
                         "yes": "Yes",
@@ -3596,8 +3596,13 @@
                     }
                 },
                 "internet_access/fee": {
-                    "label": "Internet Access Fee",
-                    "terms": "wifi fee"
+                    "label": "Internet Access",
+                    "terms": "wifi fee",
+                    "options": {
+                        "no": "Free",
+                        "yes": "Paid",
+                        "customers": "Customers Only"
+                    }
                 },
                 "internet_access/ssid": {
                     "label": "Wifi Network Name",
