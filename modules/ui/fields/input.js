@@ -44,8 +44,6 @@ export function uiFieldText(field, context) {
             .attr('class', 'form-field-input-wrap form-field-input-' + field.type)
             .merge(wrap);
 
-        var fieldID = 'preset-input-' + field.safeid;
-
         input = wrap.selectAll('input')
             .data([0]);
 
@@ -71,7 +69,7 @@ export function uiFieldText(field, context) {
             var countryCode = extent && countryCoder.iso1A2Code(extent.center());
             var format = countryCode && _phoneFormats[countryCode.toLowerCase()];
             if (format) {
-                wrap.selectAll('#' + field.domId)
+                wrap.selectAll('input')
                     .attr('placeholder', format);
             }
 
