@@ -41,7 +41,7 @@ export function uiFieldAddress(field, context) {
                     (extent[0][0] + extent[1][0]) / 2,
                     (extent[0][1] + extent[1][1]) / 2
                 ]);
-                var choice = geoChooseEdge(context.childNodes(d), loc, context.projection);
+                var choice = geoChooseEdge(context.graph().childNodes(d), loc, context.projection);
 
                 return {
                     title: d.tags.name,

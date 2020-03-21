@@ -133,7 +133,7 @@ export function behaviorDraw(context) {
 
         } else if (target && target.type === 'way' && (mode.id !== 'add-point' || mode.preset.matchGeometry('vertex'))) {   // Snap to a way
             var choice = geoChooseEdge(
-                context.childNodes(target), loc, context.projection, context.activeID()
+                context.graph().childNodes(target), loc, context.projection, context.activeID()
             );
             if (choice) {
                 var edge = [target.nodes[choice.index - 1], target.nodes[choice.index]];
