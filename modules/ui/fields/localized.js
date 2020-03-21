@@ -167,7 +167,7 @@ export function uiFieldLocalized(field, context) {
         input = input.enter()
             .append('input')
             .attr('type', 'text')
-            .attr('id', 'preset-input-' + field.safeid)
+            .attr('id', field.domId)
             .attr('class', 'localized-main')
             .attr('maxlength', context.maxCharsForTagValue())
             .call(utilNoAuto)

@@ -113,7 +113,7 @@ export function uiFieldWikipedia(field, context) {
       .append('input')
       .attr('type', 'text')
       .attr('class', 'wiki-title')
-      .attr('id', `preset-input-${field.safeid}`)
+      .attr('id', field.domId)
       .attr('maxlength', context.maxCharsForTagValue() - 4)
       .call(utilNoAuto)
       .call(titleCombo)

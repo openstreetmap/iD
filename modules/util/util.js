@@ -514,3 +514,10 @@ export function utilHashcode(str) {
 export function utilSafeClassName(str) {
     return str.toLowerCase().replace(/[^a-z0-9]+/g, '_');
 }
+
+// Returns string based on `str` that is highly unlikely to collide with an id
+// used previously or that's present elsewhere in the document. Useful for preventing
+// browser-provided autofills or when embedding iD on pages with unknown elements.
+export function utilUniqueDomId(str) {
+    return 'ideditor-' + utilSafeClassName(str) + '-' + new Date().getTime().toString();
+}

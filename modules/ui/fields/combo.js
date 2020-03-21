@@ -381,7 +381,7 @@ export function uiFieldCombo(field, context) {
         input = input.enter()
             .append('input')
             .attr('type', 'text')
-            .attr('id', 'preset-input-' + field.safeid)
+            .attr('id', field.domId)
             .attr('maxlength', context.maxCharsForTagValue())
             .call(utilNoAuto)
             .call(initCombo, selection)

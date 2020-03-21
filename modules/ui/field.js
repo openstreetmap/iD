@@ -10,7 +10,7 @@ import { geoExtent } from '../geo/extent';
 import { uiFieldHelp } from './field_help';
 import { uiFields } from './fields';
 import { uiTagReference } from './tag_reference';
-import { utilRebind } from '../util';
+import { utilRebind, utilUniqueDomId } from '../util';
 
 
 export function uiField(context, presetField, entityIDs, options) {
@@ -24,6 +24,7 @@ export function uiField(context, presetField, entityIDs, options) {
 
     var dispatch = d3_dispatch('change', 'revert');
     var field = Object.assign({}, presetField);   // shallow copy
+    field.domId = utilUniqueDomId('form-field-' + field.safeid);
     var _show = options.show;
     var _state = '';
     var _tags = {};
@@ -123,7 +124,7 @@ export function uiField(context, presetField, entityIDs, options) {
             var labelEnter = enter
                 .append('label')
                 .attr('class', 'field-label')
-                .attr('for', function(d) { return 'preset-input-' + d.safeid; });
+                .attr('for', function(d) { return d.domId; });
 
             var textEnter = labelEnter
                 .append('span')

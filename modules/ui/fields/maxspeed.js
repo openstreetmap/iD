@@ -35,13 +35,13 @@ export function uiFieldMaxspeed(field, context) {
             .merge(wrap);
 
 
-        input = wrap.selectAll('#preset-input-' + field.safeid)
+        input = wrap.selectAll('#' + field.domId)
             .data([0]);
 
         input = input.enter()
             .append('input')
             .attr('type', 'text')
-            .attr('id', 'preset-input-' + field.safeid)
+            .attr('id', field.domId)
             .attr('maxlength', context.maxCharsForTagValue() - 4)
             .call(utilNoAuto)
             .call(speedCombo)
