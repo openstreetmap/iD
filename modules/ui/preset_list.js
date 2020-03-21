@@ -495,7 +495,7 @@ export function uiPresetList(context) {
         for (var i in _entityIDs) {
             var entityID = _entityIDs[i];
             var entity = context.entity(entityID);
-            var geometry = context.geometry(entityID);
+            var geometry = entity.geometry(context.graph());
 
             // Treat entities on addr:interpolation lines as points, not vertices (#3241)
             if (geometry === 'vertex' && entity.isOnAddressLine(context.graph())) {

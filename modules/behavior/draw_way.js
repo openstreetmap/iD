@@ -25,7 +25,7 @@ export function behaviorDrawWay(context, wayID, index, mode, startGraph) {
 
     var _annotation = t((_origWay.isDegenerate() ?
         'operations.start.annotation.' :
-        'operations.continue.annotation.') + context.geometry(wayID)
+        'operations.continue.annotation.') + _origWay.geometry(context.graph())
     );
 
     var behavior = behaviorDraw(context);

@@ -69,7 +69,7 @@ export function operationMove(selectedIDs, context) {
 
     operation.annotation = function() {
         return selectedIDs.length === 1 ?
-            t('operations.move.annotation.' + context.geometry(selectedIDs[0])) :
+            t('operations.move.annotation.' + context.graph().geometry(selectedIDs[0])) :
             t('operations.move.annotation.multiple');
     };
 

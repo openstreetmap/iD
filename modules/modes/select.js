@@ -156,7 +156,7 @@ export function modeSelect(context, selectedIDs) {
         if (!editMenu) return;
 
         var entity = singular();
-        if (entity && context.geometry(entity.id) === 'relation') {
+        if (entity && entity.geometry(context.graph()) === 'relation') {
             _suppressMenu = true;
         } else {
             var point = context.mouse();
@@ -377,7 +377,7 @@ export function modeSelect(context, selectedIDs) {
             var surface = context.surface();
             var entity = singular();
 
-            if (entity && context.geometry(entity.id) === 'relation') {
+            if (entity && entity.geometry(context.graph()) === 'relation') {
                 _suppressMenu = true;
             }
 

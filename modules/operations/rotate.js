@@ -69,7 +69,7 @@ export function operationRotate(selectedIDs, context) {
 
     operation.annotation = function() {
         return selectedIDs.length === 1 ?
-            t('operations.rotate.annotation.' + context.geometry(selectedIDs[0])) :
+            t('operations.rotate.annotation.' + context.graph().geometry(selectedIDs[0])) :
             t('operations.rotate.annotation.multiple');
     };
 

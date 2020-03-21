@@ -403,7 +403,7 @@ export function uiSectionRawTagEditor(id, context) {
             return;
         }
 
-        var geometry = context.geometry(_entityIDs[0]);
+        var geometry = context.graph().geometry(_entityIDs[0]);
 
         key.call(uiCombobox(context, 'tag-key')
             .fetcher(function(value, callback) {

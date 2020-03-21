@@ -9,7 +9,7 @@ export function operationExtract(selectedIDs, context) {
     var entityID = selectedIDs.length && selectedIDs[0];
     var action = actionExtract(entityID, context.projection);
 
-    var geometry = entityID && context.geometry(entityID);
+    var geometry = entityID && context.graph().geometry(entityID);
     var extent = geometry === 'area' && context.entity(entityID).extent(context.graph());
 
 

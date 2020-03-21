@@ -143,7 +143,7 @@ export function uiSectionFeatureType(context) {
         var counts = {};
 
         for (var i in _entityIDs) {
-            var geometry = context.geometry(_entityIDs[i]);
+            var geometry = context.graph().geometry(_entityIDs[i]);
             if (!counts[geometry]) counts[geometry] = 0;
             counts[geometry] += 1;
         }

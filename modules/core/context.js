@@ -247,7 +247,6 @@ export function coreContext() {
   /* Graph */
   context.hasEntity = (id) => _history.graph().hasEntity(id);
   context.entity = (id) => _history.graph().entity(id);
-  context.geometry = (id) => context.entity(id).geometry(_history.graph());
 
 
   /* Modes */

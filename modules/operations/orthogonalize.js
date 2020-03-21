@@ -16,7 +16,7 @@ export function operationOrthogonalize(selectedIDs, context) {
     function chooseAction(entityID) {
 
         var entity = context.entity(entityID);
-        var geometry = context.geometry(entityID);
+        var geometry = entity.geometry(context.graph());
 
         if (!_extent) {
             _extent =  entity.extent(context.graph());

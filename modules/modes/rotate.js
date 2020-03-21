@@ -42,7 +42,7 @@ export function modeRotate(context, entityIDs) {
         operationReflectShort(entityIDs, context).behavior
     ];
     var annotation = entityIDs.length === 1 ?
-        t('operations.rotate.annotation.' + context.geometry(entityIDs[0])) :
+        t('operations.rotate.annotation.' + context.graph().geometry(entityIDs[0])) :
         t('operations.rotate.annotation.multiple');
 
     var _prevGraph;

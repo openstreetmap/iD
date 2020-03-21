@@ -188,7 +188,7 @@ export function uiFieldCombo(field, context) {
         };
 
         if (_entityIDs.length) {
-            params.geometry = context.geometry(_entityIDs[0]);
+            params.geometry = context.graph().geometry(_entityIDs[0]);
         }
 
         taginfo[fn](params, function(err, data) {

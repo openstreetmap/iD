@@ -162,7 +162,7 @@ export function uiFeatureList(context) {
                 localResults.push({
                     id: entity.id,
                     entity: entity,
-                    geometry: context.geometry(entity.id),
+                    geometry: entity.geometry(graph),
                     type: type,
                     name: name,
                     distance: distance

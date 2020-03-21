@@ -414,7 +414,7 @@ export function uiSectionRawMembershipEditor(context) {
                     taginfo.roles({
                         debounce: true,
                         rtype: rtype || '',
-                        geometry: context.geometry(entityID),
+                        geometry: context.graph().geometry(entityID),
                         query: role
                     }, function(err, data) {
                         if (!err) callback(sort(role, data));
