@@ -158,7 +158,7 @@ export function rendererMap(context) {
             .on('dblclick.zoom', null); // override d3-zoom dblclick handling
 
         supersurface = selection.append('div')
-            .attr('id', 'supersurface')
+            .attr('class', 'supersurface')
             .call(utilSetTransform, 0, 0);
 
         // Need a wrapper div because Opera can't cope with an absolutely positioned
@@ -169,8 +169,7 @@ export function rendererMap(context) {
 
         map.surface = surface = wrapper
             .call(drawLayers)
-            .selectAll('.surface')
-            .attr('id', 'surface');
+            .selectAll('.surface');
 
         surface
             .call(drawLabels.observe)

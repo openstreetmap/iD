@@ -3918,7 +3918,7 @@ img.tile-debug {
     user-select: none;
 }
 
-#supersurface {
+.supersurface {
     transform-origin: 0 0;
     -ms-transform-origin: 0 0;
     -webkit-transform-origin: 0 0;
@@ -3926,7 +3926,7 @@ img.tile-debug {
     -o-transform-origin: 0 0;
 }
 
-#supersurface, .layer {
+.supersurface, .layer {
     position: absolute;
     top: 0;
     left: 0;
