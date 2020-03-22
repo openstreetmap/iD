@@ -14,9 +14,12 @@
         "railway": "rail"
     },
     "terms": [
+        "permanent way",
         "rail line",
         "railroad track",
+        "railway track",
+        "track",
         "train track"
     ],
-    "name": "Rail"
+    "name": "Train Track"
 }

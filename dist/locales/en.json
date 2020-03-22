@@ -8879,7 +8879,7 @@
                     "terms": ""
                 },
                 "railway/funicular": {
-                    "name": "Funicular",
+                    "name": "Funicular Track",
                     "terms": "venicular,cliff railway,cable car,cable railway,funicular railway"
                 },
                 "railway/level_crossing": {
@@ -8887,7 +8887,7 @@
                     "terms": "crossing,railroad crossing,level crossing,grade crossing,road through railroad,train crossing"
                 },
                 "railway/light_rail": {
-                    "name": "Light Rail",
+                    "name": "Light Rail Track",
                     "terms": "light rail,streetcar,trolley"
                 },
                 "railway/milestone": {
@@ -8895,23 +8895,23 @@
                     "terms": "milestone,marker"
                 },
                 "railway/miniature": {
-                    "name": "Miniature Railway",
+                    "name": "Miniature Train Track",
                     "terms": "rideable miniature railway,narrow gauge railway,minimum gauge railway"
                 },
                 "railway/monorail": {
-                    "name": "Monorail",
+                    "name": "Monorail Track",
                     "terms": ""
                 },
                 "railway/narrow_gauge": {
-                    "name": "Narrow Gauge Rail",
+                    "name": "Narrow Gauge Track",
                     "terms": "narrow gauge railway,narrow gauge railroad"
                 },
                 "railway/rail": {
-                    "name": "Rail",
-                    "terms": "rail line,railroad track,train track"
+                    "name": "Train Track",
+                    "terms": "permanent way,rail line,railroad track,railway track,track,train track"
                 },
                 "railway/rail/highspeed": {
-                    "name": "High-Speed Rail",
+                    "name": "High-Speed Train Track",
                     "terms": "bullet train,fast rail,high speed rail,highspeed rail,HSR"
                 },
                 "railway/signal": {
@@ -8923,8 +8923,8 @@
                     "terms": "metro,transit"
                 },
                 "railway/subway": {
-                    "name": "Subway",
-                    "terms": "metro,transit"
+                    "name": "Subway Track",
+                    "terms": "metro,transit,underground railway"
                 },
                 "railway/switch": {
                     "name": "Railway Switch",
@@ -8935,8 +8935,8 @@
                     "terms": "wash,clean"
                 },
                 "railway/tram": {
-                    "name": "Tram",
-                    "terms": "light rail,streetcar,tram,trolley"
+                    "name": "Tram Track",
+                    "terms": "electric street railway,light rail,streetcar,tramway,trolley"
                 },
                 "railway/yard": {
                     "name": "Rail Yard",

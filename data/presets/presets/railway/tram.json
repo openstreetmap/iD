@@ -13,10 +13,11 @@
         "railway": "tram"
     },
     "terms": [
+        "electric street railway",
         "light rail",
         "streetcar",
-        "tram",
+        "tramway",
         "trolley"
     ],
-    "name": "Tram"
+    "name": "Tram Track"
 }
