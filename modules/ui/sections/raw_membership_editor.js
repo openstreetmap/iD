@@ -145,7 +145,7 @@ export function uiSectionRawMembershipEditor(context) {
             });
         } else {
 
-            context.intersects(context.extent()).forEach(function(entity) {
+            context.intersects(context.map().extent()).forEach(function(entity) {
                 if (entity.type !== 'relation' || entity.id === entityID) return;
 
                 var value = baseDisplayLabel(entity);

@@ -27,7 +27,7 @@ export function modeDragNote(context) {
     function startNudge(nudge) {
         if (_nudgeInterval) window.clearInterval(_nudgeInterval);
         _nudgeInterval = window.setInterval(function() {
-            context.pan(nudge);
+            context.map().pan(nudge);
             doMove(nudge);
         }, 50);
     }

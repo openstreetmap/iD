@@ -59,7 +59,7 @@ export function modeMove(context, entityIDs, baseGraph) {
             fn = context.overwrite;
         }
 
-        var currMouse = context.mouse();
+        var currMouse = context.map().mouse();
         var origMouse = context.projection(_origin);
         var delta = geoVecSubtract(geoVecSubtract(currMouse, origMouse), nudge);
 
@@ -71,7 +71,7 @@ export function modeMove(context, entityIDs, baseGraph) {
     function startNudge(nudge) {
         if (_nudgeInterval) window.clearInterval(_nudgeInterval);
         _nudgeInterval = window.setInterval(function() {
-            context.pan(nudge);
+            context.map().pan(nudge);
             doMove(nudge);
         }, 50);
     }
@@ -87,7 +87,7 @@ export function modeMove(context, entityIDs, baseGraph) {
 
     function move() {
         doMove();
-        var nudge = geoViewportEdge(context.mouse(), context.map().dimensions());
+        var nudge = geoViewportEdge(context.map().mouse(), context.map().dimensions());
         if (nudge) {
             startNudge(nudge);
         } else {

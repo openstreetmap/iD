@@ -66,7 +66,7 @@ export function operationExtract(selectedIDs, context) {
             return reason;
         } else if (geometry === 'vertex' && selectedIDs.some(context.hasHiddenConnections)) {
             return 'connected_to_hidden';
-        } else if (extent && extent.area() && extent.percentContainedIn(context.extent()) < 0.8) {
+        } else if (extent && extent.area() && extent.percentContainedIn(context.map().extent()) < 0.8) {
             return 'too_large';
         }
 

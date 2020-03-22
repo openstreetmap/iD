@@ -84,7 +84,7 @@ export function operationDisconnect(selectedIDs, context) {
             if (reason) return reason;
         }
 
-        if (disconnectingWayID && extent.percentContainedIn(context.extent()) < 0.8) {
+        if (disconnectingWayID && extent.percentContainedIn(context.map().extent()) < 0.8) {
             return 'too_large.single';
         } else if (disconnectingWayID && someMissing()) {
             return 'not_downloaded';

@@ -34,7 +34,7 @@ export function behaviorLasso(context) {
                 context.surface().call(lasso);
             }
 
-            lasso.p(context.mouse());
+            lasso.p(context.map().mouse());
         }
 
 

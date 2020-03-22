@@ -26,7 +26,7 @@ export function operationMove(selectedIDs, context) {
 
 
     operation.disabled = function() {
-        if (extent.area() && extent.percentContainedIn(context.extent()) < 0.8) {
+        if (extent.area() && extent.percentContainedIn(context.map().extent()) < 0.8) {
             return 'too_large';
         } else if (someMissing()) {
             return 'not_downloaded';

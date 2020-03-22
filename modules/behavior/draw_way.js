@@ -129,7 +129,7 @@ export function behaviorDrawWay(context, wayID, index, mode, startGraph) {
             loc = targetLoc;
 
         } else if (targetNodes) {   // snap to way - a line target with `.nodes`
-            var choice = geoChooseEdge(targetNodes, context.mouse(), context.projection, _drawNode.id);
+            var choice = geoChooseEdge(targetNodes, context.map().mouse(), context.projection, _drawNode.id);
             if (choice) {
                 loc = choice.loc;
             }

@@ -159,7 +159,7 @@ export function modeSelect(context, selectedIDs) {
         if (entity && entity.geometry(context.graph()) === 'relation') {
             _suppressMenu = true;
         } else {
-            var point = context.mouse();
+            var point = context.map().mouse();
             var viewport = geoExtent(context.projection.clipExtent()).polygon();
 
             if (point && geoPointInPolygon(point, viewport)) {

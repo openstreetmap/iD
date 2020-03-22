@@ -152,7 +152,7 @@ export function behaviorDraw(context) {
         d3_event.preventDefault();
         d3_event.stopPropagation();
 
-        var currSpace = context.mouse();
+        var currSpace = context.map().mouse();
         if (_disableSpace && _lastSpace) {
             var dist = geoVecLength(_lastSpace, currSpace);
             if (dist > tolerance) {

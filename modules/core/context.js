@@ -512,14 +512,6 @@ export function coreContext() {
     }
 
     _map = rendererMap(context);
-    context.mouse = _map.mouse;
-    context.extent = _map.extent;
-    context.pan = _map.pan;
-    context.zoomIn = _map.zoomIn;
-    context.zoomOut = _map.zoomOut;
-    context.zoomInFurther = _map.zoomInFurther;
-    context.zoomOutFurther = _map.zoomOutFurther;
-    context.redrawEnable = _map.redrawEnable;
 
     Object.values(services).forEach(service => {
       if (service && typeof service.init === 'function') {
