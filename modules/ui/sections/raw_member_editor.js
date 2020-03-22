@@ -346,7 +346,7 @@ export function uiSectionRawMemberEditor(context) {
                     // not yet downloaded, it's ok to guess based on type.
                     var geometry;
                     if (d.member) {
-                        geometry = context.geometry(d.member.id);
+                        geometry = context.graph().geometry(d.member.id);
                     } else if (d.type === 'relation') {
                         geometry = 'relation';
                     } else if (d.type === 'way') {

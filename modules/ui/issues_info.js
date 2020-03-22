@@ -71,7 +71,7 @@ export function uiIssuesInfo(context) {
 
                         tooltipBehavior.hide(d3_select(this));
                         // open the Issues pane
-                        context.ui().togglePanes(d3_select('.map-panes .issues-pane'));
+                        context.ui().togglePanes(context.container().select('.map-panes .issues-pane'));
                     });
 
                 chipSelection.call(svgIcon('#' + d.iconID));

@@ -16,7 +16,7 @@ export function behaviorPaste(context) {
         d3_event.preventDefault();
 
         var baseGraph = context.graph();
-        var mouse = context.mouse();
+        var mouse = context.map().mouse();
         var projection = context.projection;
         var viewport = geoExtent(projection.clipExtent()).polygon();
 

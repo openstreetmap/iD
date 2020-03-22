@@ -247,8 +247,6 @@ export function coreContext() {
   /* Graph */
   context.hasEntity = (id) => _history.graph().hasEntity(id);
   context.entity = (id) => _history.graph().entity(id);
-  context.childNodes = (way) => _history.graph().childNodes(way);
-  context.geometry = (id) => context.entity(id).geometry(_history.graph());
 
 
   /* Modes */
@@ -491,7 +489,6 @@ export function coreContext() {
     _uploader = coreUploader(context);
 
     context.graph = _history.graph;
-    context.changes = _history.changes;
     context.intersects = _history.intersects;
     context.pauseChangeDispatch = _history.pauseChangeDispatch;
     context.resumeChangeDispatch = _history.resumeChangeDispatch;
@@ -516,14 +513,6 @@ export function coreContext() {
     }
 
     _map = rendererMap(context);
-    context.mouse = _map.mouse;
-    context.extent = _map.extent;
-    context.pan = _map.pan;
-    context.zoomIn = _map.zoomIn;
-    context.zoomOut = _map.zoomOut;
-    context.zoomInFurther = _map.zoomInFurther;
-    context.zoomOutFurther = _map.zoomOutFurther;
-    context.redrawEnable = _map.redrawEnable;
 
     Object.values(services).forEach(service => {
       if (service && typeof service.init === 'function') {

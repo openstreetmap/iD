@@ -111,7 +111,7 @@ export function behaviorSelect(context) {
         if (dist > tolerance) return;
 
         var datum = d3_event.target.__data__ || (_lastMouse && _lastMouse.target.__data__);
-        var isMultiselect = d3_event.shiftKey || d3_select('#surface .lasso').node();
+        var isMultiselect = d3_event.shiftKey || context.surface().select('.lasso').node();
 
         processClick(datum, isMultiselect);
     }

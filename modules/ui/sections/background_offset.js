@@ -1,7 +1,6 @@
 import {
     event as d3_event,
-    select as d3_select,
-    selectAll as d3_selectAll
+    select as d3_select
 } from 'd3-selection';
 
 import { t, textDirection } from '../../util/locale';
@@ -36,12 +35,12 @@ export function uiSectionBackgroundOffset(context) {
         var x = +meters[0].toFixed(2);
         var y = +meters[1].toFixed(2);
 
-        d3_selectAll('.nudge-inner-rect')
+        context.container().selectAll('.nudge-inner-rect')
             .select('input')
             .classed('error', false)
             .property('value', x + ', ' + y);
 
-        d3_selectAll('.nudge-reset')
+        context.container().selectAll('.nudge-reset')
             .classed('disabled', function() {
                 return (x === 0 && y === 0);
             });
@@ -125,7 +124,7 @@ export function uiSectionBackgroundOffset(context) {
             })
             .on('mouseup.offset', function() {
                 if (d3_event.button !== 0) return;
-                d3_selectAll('.nudge-surface')
+                context.container().selectAll('.nudge-surface')
                     .remove();
 
                 d3_select(window)

@@ -6,7 +6,7 @@ import { modeSelect } from '../modes/select';
 
 export function operationSplit(selectedIDs, context) {
     var vertices = selectedIDs
-        .filter(function(id) { return context.geometry(id) === 'vertex'; });
+        .filter(function(id) { return context.graph().geometry(id) === 'vertex'; });
     var entityID = vertices[0];
     var action = actionSplit(entityID);
     var ways = [];
@@ -48,7 +48,7 @@ export function operationSplit(selectedIDs, context) {
         if (disable) {
             return t('operations.split.' + disable);
         } else if (ways.length === 1) {
-            return t('operations.split.description.' + context.geometry(ways[0].id));
+            return t('operations.split.description.' + context.graph().geometry(ways[0].id));
         } else {
             return t('operations.split.description.multiple');
         }
@@ -57,7 +57,7 @@ export function operationSplit(selectedIDs, context) {
 
     operation.annotation = function() {
         return ways.length === 1 ?
-            t('operations.split.annotation.' + context.geometry(ways[0].id)) :
+            t('operations.split.annotation.' + context.graph().geometry(ways[0].id)) :
             t('operations.split.annotation.multiple', { n: ways.length });
     };
 

@@ -1133,7 +1133,7 @@ en:
         label: Intermittent
       internet_access:
         # internet_access=*
-        label: Internet Access
+        label: Internet Connection
         options:
           # internet_access=no
           'no': 'No'
@@ -1146,12 +1146,19 @@ en:
           # internet_access=yes
           'yes': 'Yes'
         # 'terms: wifi,wlan'
-        terms: '[translate with synonyms or related terms for ''Internet Access'', separated by commas]'
+        terms: '[translate with synonyms or related terms for ''Internet Connection'', separated by commas]'
       internet_access/fee:
         # 'internet_access:fee=*'
-        label: Internet Access Fee
+        label: Internet Access
+        options:
+          # 'internet_access:fee=customers'
+          customers: Customers Only
+          # 'internet_access:fee=no'
+          'no': Free
+          # 'internet_access:fee=yes'
+          'yes': Paid
         # 'terms: wifi fee'
-        terms: '[translate with synonyms or related terms for ''Internet Access Fee'', separated by commas]'
+        terms: '[translate with synonyms or related terms for ''Internet Access'', separated by commas]'
       internet_access/ssid:
         # 'internet_access:ssid=*'
         label: Wifi Network Name
@@ -5597,9 +5604,9 @@ en:
         terms: '<translate with synonyms or related terms for ''Naval Base'', separated by commas>'
       landuse/military/obstacle_course:
         # military=obstacle_course
-        name: Obstacle Course
+        name: Military Obstacle Course
         # 'terms: army,base,force,guard,marine,navy,troop,war'
-        terms: '<translate with synonyms or related terms for ''Obstacle Course'', separated by commas>'
+        terms: '<translate with synonyms or related terms for ''Military Obstacle Course'', separated by commas>'
       landuse/military/range:
         # military=range
         name: Military Range
@@ -5607,9 +5614,9 @@ en:
         terms: '<translate with synonyms or related terms for ''Military Range'', separated by commas>'
       landuse/military/training_area:
         # military=training_area
-        name: Training Area
+        name: Military Training Area
         # 'terms: air force,army,base,fight,fire,force,guard,gun,marine,navy,rifle,shoot*,snip*,train,troop,war'
-        terms: '<translate with synonyms or related terms for ''Training Area'', separated by commas>'
+        terms: '<translate with synonyms or related terms for ''Military Training Area'', separated by commas>'
       landuse/orchard:
         # landuse=orchard
         name: Orchard
@@ -7357,9 +7364,9 @@ en:
         terms: '<translate with synonyms or related terms for ''Disused Railway'', separated by commas>'
       railway/funicular:
         # railway=funicular
-        name: Funicular
+        name: Funicular Track
         # 'terms: venicular,cliff railway,cable car,cable railway,funicular railway'
-        terms: '<translate with synonyms or related terms for ''Funicular'', separated by commas>'
+        terms: '<translate with synonyms or related terms for ''Funicular Track'', separated by commas>'
       railway/halt:
         # railway=halt
         name: Train Station (Halt / Request)
@@ -7370,9 +7377,9 @@ en:
         terms: '<translate with synonyms or related terms for ''Railway Crossing (Road)'', separated by commas>'
       railway/light_rail:
         # railway=light_rail
-        name: Light Rail
+        name: Light Rail Track
         # 'terms: light rail,streetcar,trolley'
-        terms: '<translate with synonyms or related terms for ''Light Rail'', separated by commas>'
+        terms: '<translate with synonyms or related terms for ''Light Rail Track'', separated by commas>'
       railway/milestone:
         # railway=milestone
         name: Railway Milestone
@@ -7380,31 +7387,31 @@ en:
         terms: '<translate with synonyms or related terms for ''Railway Milestone'', separated by commas>'
       railway/miniature:
         # railway=miniature
-        name: Miniature Railway
+        name: Miniature Train Track
         # 'terms: rideable miniature railway,narrow gauge railway,minimum gauge railway'
-        terms: '<translate with synonyms or related terms for ''Miniature Railway'', separated by commas>'
+        terms: '<translate with synonyms or related terms for ''Miniature Train Track'', separated by commas>'
       railway/monorail:
         # railway=monorail
-        name: Monorail
-        terms: '<translate with synonyms or related terms for ''Monorail'', separated by commas>'
+        name: Monorail Track
+        terms: '<translate with synonyms or related terms for ''Monorail Track'', separated by commas>'
       railway/narrow_gauge:
         # railway=narrow_gauge
-        name: Narrow Gauge Rail
+        name: Narrow Gauge Track
         # 'terms: narrow gauge railway,narrow gauge railroad'
-        terms: '<translate with synonyms or related terms for ''Narrow Gauge Rail'', separated by commas>'
+        terms: '<translate with synonyms or related terms for ''Narrow Gauge Track'', separated by commas>'
       railway/platform:
         # railway=platform
         name: Train Platform
       railway/rail:
         # railway=rail
-        name: Rail
-        # 'terms: rail line,railroad track,train track'
-        terms: '<translate with synonyms or related terms for ''Rail'', separated by commas>'
+        name: Train Track
+        # 'terms: permanent way,rail line,railroad track,railway track,track,train track'
+        terms: '<translate with synonyms or related terms for ''Train Track'', separated by commas>'
       railway/rail/highspeed:
         # 'railway=rail, highspeed=yes'
-        name: High-Speed Rail
+        name: High-Speed Train Track
         # 'terms: bullet train,fast rail,high speed rail,highspeed rail,HSR'
-        terms: '<translate with synonyms or related terms for ''High-Speed Rail'', separated by commas>'
+        terms: '<translate with synonyms or related terms for ''High-Speed Train Track'', separated by commas>'
       railway/signal:
         # railway=signal
         name: Railway Signal
@@ -7415,9 +7422,9 @@ en:
         name: Train Station
       railway/subway:
         # railway=subway
-        name: Subway
-        # 'terms: metro,transit'
-        terms: '<translate with synonyms or related terms for ''Subway'', separated by commas>'
+        name: Subway Track
+        # 'terms: metro,transit,underground railway'
+        terms: '<translate with synonyms or related terms for ''Subway Track'', separated by commas>'
       railway/subway_entrance:
         # railway=subway_entrance
         name: Subway Entrance
@@ -7435,9 +7442,9 @@ en:
         terms: '<translate with synonyms or related terms for ''Train Wash'', separated by commas>'
       railway/tram:
         # railway=tram
-        name: Tram
-        # 'terms: light rail,streetcar,tram,trolley'
-        terms: '<translate with synonyms or related terms for ''Tram'', separated by commas>'
+        name: Tram Track
+        # 'terms: electric street railway,light rail,streetcar,tramway,trolley'
+        terms: '<translate with synonyms or related terms for ''Tram Track'', separated by commas>'
       railway/tram_stop:
         # railway=tram_stop
         name: Tram Stopping Position

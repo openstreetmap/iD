@@ -703,7 +703,7 @@ export function svgLabels(projection, context) {
         layers.selectAll('.nolabel')
             .classed('nolabel', false);
 
-        var mouse = context.mouse();
+        var mouse = context.map().mouse();
         var graph = context.graph();
         var selectedIDs = context.selectedIDs();
         var ids = [];

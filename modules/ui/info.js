@@ -94,7 +94,7 @@ export function uiInfo(context) {
                     wasActive = [which];
                 }
 
-                d3_select('.' + which + '-panel-toggle-item')
+                context.container().select('.' + which + '-panel-toggle-item')
                     .classed('active', active[which])
                     .select('input')
                     .property('checked', active[which]);

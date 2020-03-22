@@ -11,7 +11,7 @@ import { uiChangesetEditor } from './changeset_editor';
 import { uiSectionChanges } from './sections/changes';
 import { uiCommitWarnings } from './commit_warnings';
 import { uiSectionRawTagEditor } from './sections/raw_tag_editor';
-import { utilArrayGroupBy, utilRebind } from '../util';
+import { utilArrayGroupBy, utilRebind, utilUniqueDomId } from '../util';
 import { utilDetect } from '../util/detect';
 
 
@@ -311,14 +311,16 @@ export function uiCommit(context) {
             .append('div')
             .attr('class', 'request-review');
 
+        var requestReviewDomId = utilUniqueDomId('commit-input-request-review');
+
         var labelEnter = requestReviewEnter
             .append('label')
-            .attr('for', 'commit-input-request-review');
+            .attr('for', requestReviewDomId);
 
         labelEnter
             .append('input')
             .attr('type', 'checkbox')
-            .attr('id', 'commit-input-request-review');
+            .attr('id', requestReviewDomId);
 
         labelEnter
             .append('span')

@@ -57,27 +57,30 @@ export function modeSave(context) {
     function showConflicts(changeset, conflicts, origChanges) {
 
         var selection = context.container()
-            .select('#sidebar')
+            .select('.sidebar')
             .append('div')
             .attr('class','sidebar-component');
 
-        context.container().selectAll('#content')
-            .attr('class', 'active');
+        context.container().selectAll('.main-content')
+            .classed('active', true)
+            .classed('inactive', false);
 
         var ui = uiConflicts(context)
             .conflictList(conflicts)
             .origChanges(origChanges)
             .on('cancel', function() {
-                context.container().selectAll('#content')
-                    .attr('class', 'inactive');
+                context.container().selectAll('.main-content')
+                    .classed('active', false)
+                    .classed('inactive', true);
                 selection.remove();
                 keybindingOn();
 
                 uploader.cancelConflictResolution();
             })
             .on('save', function() {
-                context.container().selectAll('#content')
-                    .attr('class', 'inactive');
+                context.container().selectAll('.main-content')
+                    .classed('active', false)
+                    .classed('inactive', true);
                 selection.remove();
 
                 uploader.processResolvedConflicts(changeset);
@@ -206,8 +209,9 @@ export function modeSave(context) {
 
         keybindingOn();
 
-        context.container().selectAll('#content')
-            .attr('class', 'inactive');
+        context.container().selectAll('.main-content')
+            .classed('active', false)
+            .classed('inactive', true);
 
         var osm = context.connection();
         if (!osm) {
@@ -233,8 +237,9 @@ export function modeSave(context) {
 
         keybindingOff();
 
-        context.container().selectAll('#content')
-            .attr('class', 'active');
+        context.container().selectAll('.main-content')
+            .classed('active', true)
+            .classed('inactive', false);
 
         context.ui().sidebar.hide();
     };

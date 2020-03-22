@@ -69,7 +69,7 @@ export function svgGeolocate(projection) {
 
         pointsEnter
             .append('circle')
-            .attr('id', 'geolocate-radius')
+            .attr('class', 'geolocate-radius')
             .attr('dx', '0')
             .attr('dy', '0')
             .attr('fill', 'rgb(15,128,225)')
@@ -88,7 +88,7 @@ export function svgGeolocate(projection) {
         groups.merge(pointsEnter)
             .attr('transform', transform);
 
-        d3_select('#geolocate-radius').attr('r', accuracy(_position.coords.accuracy, geolocation.loc));
+        layer.select('.geolocate-radius').attr('r', accuracy(_position.coords.accuracy, geolocation.loc));
     }
 
     function drawLocation(selection) {

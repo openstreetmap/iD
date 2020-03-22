@@ -25,7 +25,7 @@ export function operationDelete(selectedIDs, context) {
         if (selectedIDs.length === 1) {
             var id = selectedIDs[0];
             var entity = context.entity(id);
-            var geometry = context.geometry(id);
+            var geometry = entity.geometry(context.graph());
             var parents = context.graph().parentWays(entity);
             var parent = parents[0];
 
@@ -72,7 +72,7 @@ export function operationDelete(selectedIDs, context) {
 
 
     operation.disabled = function() {
-        if (extent.area() && extent.percentContainedIn(context.extent()) < 0.8) {
+        if (extent.area() && extent.percentContainedIn(context.map().extent()) < 0.8) {
             return 'too_large';
         } else if (someMissing()) {
             return 'not_downloaded';
@@ -140,7 +140,7 @@ export function operationDelete(selectedIDs, context) {
 
     operation.annotation = function() {
         return selectedIDs.length === 1 ?
-            t('operations.delete.annotation.' + context.geometry(selectedIDs[0])) :
+            t('operations.delete.annotation.' + context.graph().geometry(selectedIDs[0])) :
             t('operations.delete.annotation.multiple', { n: selectedIDs.length });
     };
 

@@ -158,10 +158,10 @@ export function modeSelect(context, selectedIDs) {
         if (!editMenu) return;
 
         var entity = singular();
-        if (entity && context.geometry(entity.id) === 'relation') {
+        if (entity && entity.geometry(context.graph()) === 'relation') {
             _suppressMenu = true;
         } else {
-            var point = context.mouse();
+            var point = context.map().mouse();
             var viewport = geoExtent(context.projection.clipExtent()).polygon();
 
             if (point && geoPointInPolygon(point, viewport)) {
@@ -363,7 +363,7 @@ export function modeSelect(context, selectedIDs) {
             if (!entity) return;
 
             if (entity instanceof osmWay && target.classed('target')) {
-                var choice = geoChooseEdge(context.childNodes(entity), loc, context.projection);
+                var choice = geoChooseEdge(context.graph().childNodes(entity), loc, context.projection);
                 var prev = entity.nodes[choice.index - 1];
                 var next = entity.nodes[choice.index];
 
@@ -386,7 +386,7 @@ export function modeSelect(context, selectedIDs) {
             var surface = context.surface();
             var entity = singular();
 
-            if (entity && context.geometry(entity.id) === 'relation') {
+            if (entity && entity.geometry(context.graph()) === 'relation') {
                 _suppressMenu = true;
             }
 

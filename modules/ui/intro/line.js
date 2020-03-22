@@ -217,7 +217,7 @@ export function uiIntroLine(context, reveal) {
 
         context.map().centerEase(tulipRoadIntersection, 500);
 
-        reveal('#surface', t('intro.lines.continue_line'));
+        reveal('.surface', t('intro.lines.continue_line'));
 
         context.on('enter.intro', function(mode) {
             if (mode.id === 'draw-line')
@@ -362,7 +362,7 @@ export function uiIntroLine(context, reveal) {
         context.history().checkpoint('doneAddLine');
 
         timeout(function() {
-            reveal('#surface', t('intro.lines.did_name_road'), {
+            reveal('.surface', t('intro.lines.did_name_road'), {
                 buttonText: t('intro.ok'),
                 buttonCallback: function() { continueTo(updateLine); }
             });

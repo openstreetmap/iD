@@ -51,7 +51,7 @@ export function modeDragNode(context) {
     function startNudge(entity, nudge) {
         if (_nudgeInterval) window.clearInterval(_nudgeInterval);
         _nudgeInterval = window.setInterval(function() {
-            context.pan(nudge);
+            context.map().pan(nudge);
             doMove(entity, nudge);
         }, 50);
     }
@@ -207,7 +207,7 @@ export function modeDragNode(context) {
                 }
 
             } else if (targetNodes) {   // snap to way - a line target with `.nodes`
-                edge = geoChooseEdge(targetNodes, context.mouse(), context.projection, end.id);
+                edge = geoChooseEdge(targetNodes, context.map().mouse(), context.projection, end.id);
                 if (edge) {
                     loc = edge.loc;
                 }
@@ -379,7 +379,7 @@ export function modeDragNode(context) {
             );
 
         } else if (target && target.type === 'way') {
-            var choice = geoChooseEdge(context.childNodes(target), context.mouse(), context.projection, entity.id);
+            var choice = geoChooseEdge(context.graph().childNodes(target), context.map().mouse(), context.projection, entity.id);
             context.replace(
                 actionAddMidpoint({
                     loc: choice.loc,
@@ -445,7 +445,7 @@ export function modeDragNode(context) {
 
     var drag = behaviorDrag()
         .selector('.layer-touch.points .target')
-        .surface(d3_select('#map').node())
+        .surface(context.container().select('.main-map').node())
         .origin(origin)
         .on('start', start)
         .on('move', move)

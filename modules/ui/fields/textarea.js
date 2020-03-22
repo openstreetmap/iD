@@ -29,7 +29,7 @@ export function uiFieldTextarea(field, context) {
 
         input = input.enter()
             .append('textarea')
-            .attr('id', 'preset-input-' + field.safeid)
+            .attr('id', field.domId)
             .attr('maxlength', context.maxCharsForTagValue())
             .call(utilNoAuto)
             .on('input', change(true))

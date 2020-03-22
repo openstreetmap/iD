@@ -9,7 +9,7 @@ export function operationExtract(selectedIDs, context) {
     var entityID = selectedIDs.length && selectedIDs[0];
     var action = actionExtract(entityID, context.projection);
 
-    var geometry = entityID && context.geometry(entityID);
+    var geometry = entityID && context.graph().hasEntity(entityID) && context.graph().geometry(entityID);
     var extent = geometry === 'area' && context.entity(entityID).extent(context.graph());
 
 
@@ -66,7 +66,7 @@ export function operationExtract(selectedIDs, context) {
             return reason;
         } else if (geometry === 'vertex' && selectedIDs.some(context.hasHiddenConnections)) {
             return 'connected_to_hidden';
-        } else if (extent && extent.area() && extent.percentContainedIn(context.extent()) < 0.8) {
+        } else if (extent && extent.area() && extent.percentContainedIn(context.map().extent()) < 0.8) {
             return 'too_large';
         }
 

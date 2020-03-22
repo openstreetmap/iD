@@ -34,7 +34,7 @@ export function behaviorDrawWay(context, wayID, index, startGraph) {
 
     var _annotation = t((_origWay.isDegenerate() ?
         'operations.start.annotation.' :
-        'operations.continue.annotation.') + context.geometry(wayID)
+        'operations.continue.annotation.') + _origWay.geometry(context.graph())
     );
 
     var behavior = behaviorDraw(context);
@@ -138,7 +138,7 @@ export function behaviorDrawWay(context, wayID, index, startGraph) {
             loc = targetLoc;
 
         } else if (targetNodes) {   // snap to way - a line target with `.nodes`
-            var choice = geoChooseEdge(targetNodes, context.mouse(), context.projection, _drawNode.id);
+            var choice = geoChooseEdge(targetNodes, context.map().mouse(), context.projection, _drawNode.id);
             if (choice) {
                 loc = choice.loc;
             }

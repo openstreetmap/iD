@@ -162,7 +162,7 @@ export function uiFeatureList(context) {
                 localResults.push({
                     id: entity.id,
                     entity: entity,
-                    geometry: context.geometry(entity.id),
+                    geometry: entity.geometry(graph),
                     type: type,
                     name: name,
                     distance: distance
@@ -343,7 +343,7 @@ export function uiFeatureList(context) {
                     context.map().center(d.entity.loc);
                 } else if (d.entity.type === 'way') {
                     var center = context.projection(context.map().center());
-                    var edge = geoChooseEdge(context.childNodes(d.entity), center, context.projection);
+                    var edge = geoChooseEdge(context.graph().childNodes(d.entity), center, context.projection);
                     context.map().center(edge.loc);
                 }
                 context.enter(modeSelect(context, [d.entity.id]));

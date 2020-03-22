@@ -17,12 +17,14 @@ export function uiFlash() {
             _flashTimer.stop();
         }
 
-        d3_select('#footer-wrap')
-            .attr('class', 'footer-hide');
-        d3_select('#flash-wrap')
-            .attr('class', 'footer-show');
+        d3_select('.main-footer-wrap')
+            .classed('footer-hide', true)
+            .classed('footer-show', false);
+        d3_select('.flash-wrap')
+            .classed('footer-hide', false)
+            .classed('footer-show', true);
 
-        var content = d3_select('#flash-wrap').selectAll('.flash-content')
+        var content = d3_select('.flash-wrap').selectAll('.flash-content')
             .data([0]);
 
         // Enter
@@ -71,10 +73,12 @@ export function uiFlash() {
 
         _flashTimer = d3_timeout(function() {
             _flashTimer = null;
-            d3_select('#footer-wrap')
-                .attr('class', 'footer-show');
-            d3_select('#flash-wrap')
-                .attr('class', 'footer-hide');
+            d3_select('.main-footer-wrap')
+                .classed('footer-hide', false)
+                .classed('footer-show', true);
+            d3_select('.flash-wrap')
+                .classed('footer-hide', true)
+                .classed('footer-show', false);
         }, _duration);
 
         return content;

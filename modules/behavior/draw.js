@@ -134,7 +134,7 @@ export function behaviorDraw(context) {
 
         } else if (target && target.type === 'way' && (mode.id !== 'add-point' || mode.preset.matchGeometry('vertex'))) {   // Snap to a way
             var choice = geoChooseEdge(
-                context.childNodes(target), loc, context.projection, context.activeID()
+                context.graph().childNodes(target), loc, context.projection, context.activeID()
             );
             if (choice) {
                 var edge = [target.nodes[choice.index - 1], target.nodes[choice.index]];
@@ -158,7 +158,7 @@ export function behaviorDraw(context) {
         d3_event.preventDefault();
         d3_event.stopPropagation();
 
-        var currSpace = context.mouse();
+        var currSpace = context.map().mouse();
         if (_disableSpace && _lastSpace) {
             var dist = geoVecLength(_lastSpace, currSpace);
             if (dist > tolerance) {

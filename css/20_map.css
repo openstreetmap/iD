@@ -38,7 +38,7 @@
     pointer-events: none;
 }
 
-.lasso #map {
+.lasso .main-map {
     pointer-events: visibleStroke;
 }
 

@@ -19,7 +19,7 @@ export function uiToolRepeatAdd(context) {
     var tooltipBehavior = tooltip()
         .placement('bottom')
         .html(true)
-        .scrollContainer(d3_select('#bar'));
+        .scrollContainer(d3_select('.top-toolbar'));
 
     tool.render = function(selection) {
 

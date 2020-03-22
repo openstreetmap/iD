@@ -114,7 +114,7 @@ export function uiSectionSelectionList(context) {
         items.selectAll('.entity-geom-icon use')
             .attr('href', function() {
                 var entity = this.parentNode.parentNode.__data__;
-                return '#iD-icon-' + context.geometry(entity.id);
+                return '#iD-icon-' + entity.geometry(context.graph());
             });
 
         items.selectAll('.entity-type')

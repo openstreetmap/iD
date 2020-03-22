@@ -1,5 +1,5 @@
 import { interpolate as d3_interpolate } from 'd3-interpolate';
-import { select as d3_select, selectAll as d3_selectAll } from 'd3-selection';
+import { select as d3_select } from 'd3-selection';
 
 import { uiEntityEditor } from './entity_editor';
 import { uiPresetList } from './preset_list';
@@ -146,7 +146,7 @@ export function uiInspector(context) {
         entityEditor.state(_state);
 
         // remove any old field help overlay that might have gotten attached to the inspector
-        d3_selectAll('.field-help-body').remove();
+        context.container().selectAll('.field-help-body').remove();
 
         return inspector;
     };

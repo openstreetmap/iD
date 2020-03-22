@@ -60,7 +60,7 @@ export function uiToolSegemented(context) {
                     .placement('bottom')
                     .html(true)
                     .title(title)
-                    .scrollContainer(d3_select('#bar'));
+                    .scrollContainer(d3_select('.top-toolbar'));
                 d3_select(this)
                     .call(tooltipBehavior)
                     .call(svgIcon('#' + d.icon, d.iconClass));

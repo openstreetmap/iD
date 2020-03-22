@@ -1,7 +1,7 @@
 import _debounce from 'lodash-es/debounce';
 
 import { drag as d3_drag } from 'd3-drag';
-import { event as d3_event, select as d3_select, selectAll as d3_selectAll } from 'd3-selection';
+import { event as d3_event, select as d3_select } from 'd3-selection';
 
 import { modeAddArea, modeAddLine, modeAddPoint, modeBrowse } from '../../modes';
 import { t, textDirection } from '../../util/locale';
@@ -139,7 +139,7 @@ export function uiToolQuickPresets(context) {
                 .title(function(d) {
                     return d.key ? uiTooltipHtml(d.description, d.key) : d.description;
                 })
-                .scrollContainer(d3_select('#bar'))
+                .scrollContainer(d3_select('.top-toolbar'))
             );
 
         buttonsEnter
@@ -174,7 +174,7 @@ export function uiToolQuickPresets(context) {
 
     var _d3Dragger = d3_drag()
         .on('start', function() {
-            _scrollNode = d3_select('#bar').node();
+            _scrollNode = d3_select('.top-toolbar').node();
 
             var node = d3_select(this).node();
             _dragOrigin = {
@@ -226,7 +226,7 @@ export function uiToolQuickPresets(context) {
 
             _targetData = null;
 
-            d3_selectAll('#bar button.add-favorite, #bar button.add-recent')
+            context.container().selectAll('.top-toolbar button.add-favorite, .top-toolbar button.add-recent')
                 .style('transform', function(d2) {
 
                     if (d.button === d2.button) return null;
@@ -271,7 +271,7 @@ export function uiToolQuickPresets(context) {
             var ltr = textDirection === 'ltr',
                 rtl = !ltr;
 
-            d3_selectAll('#bar .drag-placeholder')
+            context.container().selectAll('.top-toolbar .drag-placeholder')
                 .remove();
 
             d3_select(this)
@@ -279,7 +279,7 @@ export function uiToolQuickPresets(context) {
                 .classed('removing', false)
                 .style('position', null);
 
-            d3_selectAll('#bar button.add-favorite, #bar button.add-recent')
+            context.container().selectAll('.top-toolbar button.add-favorite, .top-toolbar button.add-recent')
                 .style('transform', null);
 
             var deltaY = d3_event.y - _dragOrigin.y;

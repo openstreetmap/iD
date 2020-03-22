@@ -1,7 +1,6 @@
 import {
     event as d3_event,
-    select as d3_select,
-    selectAll as d3_selectAll
+    select as d3_select
 } from 'd3-selection';
 
 import { t, textDirection, setLocale } from '../util/locale';
@@ -97,26 +96,24 @@ export function uiInit(context) {
 
         container
             .append('div')
-            .attr('id', 'sidebar')
+            .attr('class', 'sidebar')
             .call(ui.sidebar);
 
         var content = container
             .append('div')
-            .attr('id', 'content')
-            .attr('class', 'active');
+            .attr('class', 'main-content active');
 
         // Top toolbar
         content
             .append('div')
-            .attr('id', 'bar-wrap')
+            .attr('class', 'top-toolbar-wrap')
             .append('div')
-            .attr('id', 'bar')
-            .attr('class', 'fillD')
+            .attr('class', 'top-toolbar fillD')
             .call(uiTopToolbar(context));
 
         content
             .append('div')
-            .attr('id', 'map')
+            .attr('class', 'main-map')
             .attr('dir', 'ltr')
             .call(map);
 
@@ -164,11 +161,11 @@ export function uiInit(context) {
         // Add attribution and footer
         var about = content
             .append('div')
-            .attr('id', 'about');
+            .attr('class', 'map-footer');
 
         about
             .append('div')
-            .attr('id', 'attrib')
+            .attr('class', 'attribution-wrap')
             .attr('dir', 'ltr')
             .call(uiAttribution(context));
 
@@ -180,29 +177,26 @@ export function uiInit(context) {
 
         var footer = about
             .append('div')
-            .attr('id', 'footer')
-            .attr('class', 'fillD');
+            .attr('class', 'map-footer-bar fillD');
 
         footer
             .append('div')
-            .attr('id', 'flash-wrap')
-            .attr('class', 'footer-hide');
+            .attr('class', 'flash-wrap footer-hide');
 
         var footerWrap = footer
             .append('div')
-            .attr('id', 'footer-wrap')
-            .attr('class', 'footer-show');
+            .attr('class', 'main-footer-wrap footer-show');
 
         footerWrap
             .append('div')
-            .attr('id', 'scale-block')
+            .attr('class', 'scale-block')
             .call(uiScale(context));
 
         var aboutList = footerWrap
             .append('div')
-            .attr('id', 'info-block')
+            .attr('class', 'info-block')
             .append('ul')
-            .attr('id', 'about-list');
+            .attr('class', 'map-footer-list');
 
         if (!context.embed()) {
             aboutList
@@ -251,7 +245,7 @@ export function uiInit(context) {
 
 
         // Setup map dimensions and move map to initial center/zoom.
-        // This should happen after #content and toolbars exist.
+        // This should happen after .main-content and toolbars exist.
         ui.onResize();
         map.redrawEnable(true);
 
@@ -289,7 +283,7 @@ export function uiInit(context) {
 
         overMap
             .append('div')
-            .attr('id', 'photoviewer')
+            .attr('class', 'photoviewer')
             .classed('al', true)       // 'al'=left,  'ar'=right
             .classed('hide', true)
             .call(ui.photoviewer);
@@ -358,7 +352,7 @@ export function uiInit(context) {
             return function() {
                 if (d3_select('.combobox').size()) return;
                 d3_event.preventDefault();
-                context.pan(d, 100);
+                context.map().pan(d, 100);
             };
         }
 
@@ -426,8 +420,8 @@ export function uiInit(context) {
         // Recalc dimensions of map and sidebar.. (`true` = force recalc)
         // This will call `getBoundingClientRect` and trigger reflow,
         //  but the values will be cached for later use.
-        var mapDimensions = utilGetDimensions(d3_select('#content'), true);
-        utilGetDimensions(d3_select('#sidebar'), true);
+        var mapDimensions = utilGetDimensions(context.container().select('.main-content'), true);
+        utilGetDimensions(context.container().select('.sidebar'), true);
 
         if (withPan !== undefined) {
             map.redrawEnable(false);
@@ -439,8 +433,8 @@ export function uiInit(context) {
         ui.photoviewer.onMapResize();
 
         // check if header or footer have overflowed
-        ui.checkOverflow('#bar');
-        ui.checkOverflow('#footer');
+        ui.checkOverflow('.top-toolbar');
+        ui.checkOverflow('.map-footer-bar');
 
         // Use outdated code so it works on Explorer
         var resizeWindowEvent = document.createEvent('Event');
@@ -474,14 +468,14 @@ export function uiInit(context) {
     };
 
     ui.togglePanes = function(showPane) {
-        var shownPanes = d3_selectAll('.map-pane.shown');
+        var shownPanes = context.container().selectAll('.map-pane.shown');
 
         var side = textDirection === 'ltr' ? 'right' : 'left';
 
         shownPanes
             .classed('shown', false);
 
-        d3_selectAll('.map-pane-control button')
+        context.container().selectAll('.map-pane-control button')
             .classed('active', false);
 
         if (showPane) {
@@ -489,7 +483,7 @@ export function uiInit(context) {
                 .style('display', 'none')
                 .style(side, '-500px');
 
-            d3_selectAll('.' + showPane.attr('pane') + '-control button')
+            context.container().selectAll('.' + showPane.attr('pane') + '-control button')
                 .classed('active', true);
 
             showPane
