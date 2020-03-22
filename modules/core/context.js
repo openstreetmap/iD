@@ -487,7 +487,6 @@ export function coreContext() {
     _uploader = coreUploader(context);
 
     context.graph = _history.graph;
-    context.changes = _history.changes;
     context.intersects = _history.intersects;
     context.pauseChangeDispatch = _history.pauseChangeDispatch;
     context.resumeChangeDispatch = _history.resumeChangeDispatch;
