@@ -1,7 +1,6 @@
 import { dispatch as d3_dispatch } from 'd3-dispatch';
 import {
-    select as d3_select,
-    selectAll as d3_selectAll
+    select as d3_select
 } from 'd3-selection';
 
 import { t } from '../../util/locale';
@@ -38,7 +37,7 @@ export function uiIntroStartEditing(context, reveal) {
     }
 
     function showSave() {
-        d3_selectAll('.shaded').remove();  // in case user opened keyboard shortcuts
+        context.container().selectAll('.shaded').remove();  // in case user opened keyboard shortcuts
         reveal('.top-toolbar button.save',
             t('intro.startediting.save'), {
                 buttonText: t('intro.ok'),
@@ -48,7 +47,7 @@ export function uiIntroStartEditing(context, reveal) {
     }
 
     function showStart() {
-        d3_selectAll('.shaded').remove();  // in case user opened keyboard shortcuts
+        context.container().selectAll('.shaded').remove();  // in case user opened keyboard shortcuts
 
         modalSelection = uiModal(context.container());
 
@@ -86,7 +85,7 @@ export function uiIntroStartEditing(context, reveal) {
 
     chapter.exit = function() {
         modalSelection.remove();
-        d3_selectAll('.shaded').remove();  // in case user opened keyboard shortcuts
+        context.container().selectAll('.shaded').remove();  // in case user opened keyboard shortcuts
     };
 
 

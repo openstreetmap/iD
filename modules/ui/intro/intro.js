@@ -1,4 +1,4 @@
-import { select as d3_select, selectAll as d3_selectAll } from 'd3-selection';
+import { select as d3_select } from 'd3-selection';
 
 import { t, textDirection } from '../../util/locale';
 import { localize } from './helper';
@@ -72,14 +72,14 @@ export function uiIntro(context) {
     let zoom = context.map().zoom();
     let background = context.background().baseLayerSource();
     let overlays = context.background().overlayLayerSources();
-    let opacity = d3_selectAll('.main-map .layer-background').style('opacity');
+    let opacity = context.container().selectAll('.main-map .layer-background').style('opacity');
     let caches = osm && osm.caches();
     let baseEntities = context.history().graph().base().entities;
 
     // Show sidebar and disable the sidebar resizing button
     // (this needs to be before `context.inIntro(true)`)
     context.ui().sidebar.expand();
-    d3_selectAll('button.sidebar-toggle').classed('disabled', true);
+    context.container().selectAll('button.sidebar-toggle').classed('disabled', true);
 
     // Block saving
     context.inIntro(true);
@@ -109,7 +109,7 @@ export function uiIntro(context) {
     });
 
 
-    d3_selectAll('.main-map .layer-background').style('opacity', 1);
+    context.container().selectAll('.main-map .layer-background').style('opacity', 1);
 
     let curtain = uiCurtain();
     selection.call(curtain);
@@ -156,8 +156,8 @@ export function uiIntro(context) {
 
       curtain.remove();
       navwrap.remove();
-      d3_selectAll('.main-map .layer-background').style('opacity', opacity);
-      d3_selectAll('button.sidebar-toggle').classed('disabled', false);
+      context.container().selectAll('.main-map .layer-background').style('opacity', opacity);
+      context.container().selectAll('button.sidebar-toggle').classed('disabled', false);
       if (osm) { osm.toggle(true).reset().caches(caches); }
       context.history().reset().merge(Object.values(baseEntities));
       context.background().baseLayerSource(background);

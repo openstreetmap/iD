@@ -263,7 +263,7 @@ export function uiMapInMap(context) {
 
             _isHidden = !_isHidden;
 
-            d3_select('.minimap-toggle-item')
+            context.container().select('.minimap-toggle-item')
                 .classed('active', !_isHidden)
                 .select('input')
                 .property('checked', !_isHidden);

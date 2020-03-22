@@ -4,9 +4,7 @@ import { drag as d3_drag } from 'd3-drag';
 import { interpolateNumber as d3_interpolateNumber } from 'd3-interpolate';
 
 import {
-    select as d3_select,
-    event as d3_event,
-    selectAll as d3_selectAll
+    event as d3_event
 } from 'd3-selection';
 import { utilArrayIdentical } from '../util/array';
 import { osmEntity, osmNote, QAItem } from '../osm';
@@ -35,7 +33,7 @@ export function uiSidebar(context) {
 
 
     function sidebar(selection) {
-        var container = d3_select('#id-container');
+        var container = context.container();
         var minWidth = 280;
         var sidebarWidth;
         var containerWidth;
@@ -159,7 +157,7 @@ export function uiSidebar(context) {
                     errEditor = improveOsmEditor;
                 }
 
-                d3_selectAll('.qaItem.' + datum.service)
+                context.container().selectAll('.qaItem.' + datum.service)
                     .classed('hover', function(d) { return d.id === datum.id; });
 
                 sidebar
@@ -197,8 +195,8 @@ export function uiSidebar(context) {
                 _wasNote = false;
                 _wasData = false;
                 _wasQaItem = false;
-                d3_selectAll('.note').classed('hover', false);
-                d3_selectAll('.qaItem').classed('hover', false);
+                context.container().selectAll('.note').classed('hover', false);
+                context.container().selectAll('.qaItem').classed('hover', false);
                 sidebar.hide();
             }
         }

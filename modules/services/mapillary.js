@@ -379,7 +379,8 @@ export default {
 
     loadViewer: function(context) {
         // add mly-wrapper
-        var wrap = d3_select('.photoviewer').selectAll('.mly-wrapper')
+        var wrap = context.container().select('.photoviewer')
+            .selectAll('.mly-wrapper')
             .data([0]);
 
         wrap.enter()
@@ -440,14 +441,14 @@ export default {
     },
 
 
-    hideViewer: function() {
+    hideViewer: function(context) {
         _mlySelectedImageKey = null;
 
         if (!_mlyFallback && _mlyViewer) {
             _mlyViewer.getComponent('sequence').stop();
         }
 
-        var viewer = d3_select('.photoviewer');
+        var viewer = context.container().select('.photoviewer');
         if (!viewer.empty()) viewer.datum(null);
 
         viewer
@@ -455,7 +456,7 @@ export default {
             .selectAll('.photo-wrapper')
             .classed('hide', true);
 
-        d3_selectAll('.viewfield-group, .sequence, .icon-detected')
+        context.container().selectAll('.viewfield-group, .sequence, .icon-detected')
             .classed('currentView', false);
 
         return this.setStyles(null, true);

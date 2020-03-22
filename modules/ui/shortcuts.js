@@ -1,4 +1,4 @@
-import { select as d3_select, selectAll as d3_selectAll } from 'd3-selection';
+import { select as d3_select } from 'd3-selection';
 
 import { t } from '../util/locale';
 import { svgIcon } from '../svg/icon';
@@ -17,7 +17,7 @@ export function uiShortcuts(context) {
 
     context.keybinding()
         .on([t('shortcuts.toggle.key'), '?'], function () {
-            if (d3_selectAll('.modal-shortcuts').size()) {  // already showing
+            if (context.container().selectAll('.modal-shortcuts').size()) {  // already showing
                 if (_modalSelection) {
                     _modalSelection.close();
                     _modalSelection = null;

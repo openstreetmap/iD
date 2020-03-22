@@ -1,5 +1,5 @@
 import { dispatch as d3_dispatch } from 'd3-dispatch';
-import { event as d3_event, selectAll as d3_selectAll } from 'd3-selection';
+import { event as d3_event } from 'd3-selection';
 import deepEqual from 'fast-deep-equal';
 
 import { t, textDirection } from '../util/locale';
@@ -154,7 +154,7 @@ export function uiEntityEditor(context) {
 
             if (priorActivePreset && _activePresets.length === 1 && priorActivePreset !== _activePresets[0]) {
                 // flash the button to indicate the preset changed
-                d3_selectAll('.entity-editor button.preset-reset .label')
+                context.container().selectAll('.entity-editor button.preset-reset .label')
                     .style('background-color', '#fff')
                     .transition()
                     .duration(750)

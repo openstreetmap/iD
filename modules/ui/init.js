@@ -1,7 +1,6 @@
 import {
     event as d3_event,
-    select as d3_select,
-    selectAll as d3_selectAll
+    select as d3_select
 } from 'd3-selection';
 
 import { t, textDirection, setLocale } from '../util/locale';
@@ -422,8 +421,8 @@ export function uiInit(context) {
         // Recalc dimensions of map and sidebar.. (`true` = force recalc)
         // This will call `getBoundingClientRect` and trigger reflow,
         //  but the values will be cached for later use.
-        var mapDimensions = utilGetDimensions(d3_select('.main-content'), true);
-        utilGetDimensions(d3_select('.sidebar'), true);
+        var mapDimensions = utilGetDimensions(context.container().select('.main-content'), true);
+        utilGetDimensions(context.container().select('.sidebar'), true);
 
         if (withPan !== undefined) {
             map.redrawEnable(false);
@@ -470,14 +469,14 @@ export function uiInit(context) {
     };
 
     ui.togglePanes = function(showPane) {
-        var shownPanes = d3_selectAll('.map-pane.shown');
+        var shownPanes = context.container().selectAll('.map-pane.shown');
 
         var side = textDirection === 'ltr' ? 'right' : 'left';
 
         shownPanes
             .classed('shown', false);
 
-        d3_selectAll('.map-pane-control button')
+        context.container().selectAll('.map-pane-control button')
             .classed('active', false);
 
         if (showPane) {
@@ -485,7 +484,7 @@ export function uiInit(context) {
                 .style('display', 'none')
                 .style(side, '-500px');
 
-            d3_selectAll('.' + showPane.attr('pane') + '-control button')
+            context.container().selectAll('.' + showPane.attr('pane') + '-control button')
                 .classed('active', true);
 
             showPane

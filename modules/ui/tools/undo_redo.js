@@ -46,7 +46,7 @@ export function uiToolUndoRedo(context) {
                     t(d.id + '.tooltip', {action: d.annotation()}) :
                     t(d.id + '.nothing'), d.cmd);
             })
-            .scrollContainer(d3_select('.top-toolbar'));
+            .scrollContainer(context.container().select('.top-toolbar'));
 
         var buttons = selection.selectAll('button')
             .data(commands)

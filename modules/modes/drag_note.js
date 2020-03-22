@@ -1,6 +1,5 @@
 import {
-    event as d3_event,
-    select as d3_select
+    event as d3_event
 } from 'd3-selection';
 
 import { services } from '../services';
@@ -107,7 +106,7 @@ export function modeDragNote(context) {
 
     var drag = behaviorDrag()
         .selector('.layer-touch.markers .target.note.new')
-        .surface(d3_select('.main-map').node())
+        .surface(context.container().select('.main-map').node())
         .origin(origin)
         .on('start', start)
         .on('move', move)

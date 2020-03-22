@@ -3,8 +3,7 @@ import * as countryCoder from '@ideditor/country-coder';
 
 import {
     event as d3_event,
-    select as d3_select,
-    selectAll as d3_selectAll
+    select as d3_select
 } from 'd3-selection';
 
 import { t, textDirection } from '../util/locale';
@@ -434,7 +433,7 @@ export function uiPresetList(context) {
         if (!_entityIDs.every(context.hasEntity)) return;
 
         var geometries = entityGeometries();
-        var button = d3_selectAll('.preset-list .preset-list-button');
+        var button = context.container().selectAll('.preset-list .preset-list-button');
 
         // remove existing tooltips
         button.call(tooltip().destroyAny);

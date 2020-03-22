@@ -130,7 +130,7 @@ export function uiToolOldDrawModes(context) {
                     .placement('bottom')
                     .html(true)
                     .title(function(d) { return uiTooltipHtml(d.description, d.key); })
-                    .scrollContainer(d3_select('.top-toolbar'))
+                    .scrollContainer(context.container().select('.top-toolbar'))
                 );
 
             buttonsEnter

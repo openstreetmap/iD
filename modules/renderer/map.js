@@ -827,7 +827,7 @@ export function rendererMap(context) {
     };
 
     map.unobscuredOffsetPx = function() {
-        var openPane = d3_select('.map-panes .map-pane.shown');
+        var openPane = context.container().select('.map-panes .map-pane.shown');
         if (!openPane.empty()) {
             return [openPane.node().offsetWidth/2, 0];
         }

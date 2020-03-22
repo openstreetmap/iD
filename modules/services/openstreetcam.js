@@ -371,10 +371,10 @@ export default {
     },
 
 
-    hideViewer: function() {
+    hideViewer: function(context) {
         _oscSelectedImage = null;
 
-        var viewer = d3_select('.photoviewer');
+        var viewer = context.container().select('.photoviewer');
         if (!viewer.empty()) viewer.datum(null);
 
         viewer
@@ -382,7 +382,7 @@ export default {
             .selectAll('.photo-wrapper')
             .classed('hide', true);
 
-        d3_selectAll('.viewfield-group, .sequence, .icon-sign')
+        context.container().selectAll('.viewfield-group, .sequence, .icon-sign')
             .classed('currentView', false);
 
         return this.setStyles(null, true);
