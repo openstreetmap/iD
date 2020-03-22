@@ -311,16 +311,16 @@ export function uiCommit(context) {
             .append('div')
             .attr('class', 'request-review');
 
-        var id = utilUniqueDomId('commit-input-request-review');
+        var requestReviewDomId = utilUniqueDomId('commit-input-request-review');
 
         var labelEnter = requestReviewEnter
             .append('label')
-            .attr('for', id);
+            .attr('for', requestReviewDomId);
 
         labelEnter
             .append('input')
             .attr('type', 'checkbox')
-            .attr('id', id);
+            .attr('id', requestReviewDomId);
 
         labelEnter
             .append('span')
