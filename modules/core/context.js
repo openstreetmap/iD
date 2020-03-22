@@ -391,7 +391,7 @@ export function coreContext() {
     context.container = function(val) {
         if (!arguments.length) return container;
         container = val;
-        container.classed('id-container', true);
+        container.classed('ideditor', true);
         return context;
     };
     var embed;

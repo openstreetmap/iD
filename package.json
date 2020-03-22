@@ -90,6 +90,8 @@
     "object-inspect": "0.4.0",
     "osm-community-index": "2.0.0",
     "phantomjs-prebuilt": "~2.1.11",
+    "postcss": "^7.0.27",
+    "postcss-selector-prepend": "^0.5.0",
     "request": "^2.88.0",
     "rollup": "~1.27.2",
     "rollup-plugin-commonjs": "^10.1.0",

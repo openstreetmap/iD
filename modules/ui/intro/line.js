@@ -1036,11 +1036,11 @@ export function uiIntroLine(context, reveal) {
 
     function play() {
         dispatch.call('done');
-        reveal('#id-container',
+        reveal('.ideditor',
             t('intro.lines.play', { next: t('intro.buildings.title') }), {
                 tooltipBox: '.intro-nav-wrap .chapter-building',
                 buttonText: t('intro.ok'),
-                buttonCallback: function() { reveal('#id-container'); }
+                buttonCallback: function() { reveal('.ideditor'); }
             }
         );
    }

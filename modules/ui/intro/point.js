@@ -476,11 +476,11 @@ export function uiIntroPoint(context, reveal) {
 
     function play() {
         dispatch.call('done');
-        reveal('#id-container',
+        reveal('.ideditor',
             t('intro.points.play', { next: t('intro.areas.title') }), {
                 tooltipBox: '.intro-nav-wrap .chapter-area',
                 buttonText: t('intro.ok'),
-                buttonCallback: function() { reveal('#id-container'); }
+                buttonCallback: function() { reveal('.ideditor'); }
             }
         );
     }

@@ -8,11 +8,11 @@
     padding: 5px;
     background-color: #fff;
 }
-[dir='ltr'] #photoviewer {
+.ideditor[dir='ltr'] #photoviewer {
     margin-left: 10px;
     margin-right: 2px;
 }
-[dir='rtl'] #photoviewer {
+.ideditor[dir='rtl'] #photoviewer {
     margin-right: 10px;
     margin-left: 2px;
 }
@@ -99,8 +99,8 @@
 .viewfield-group {
     pointer-events: none;
 }
-.mode-browse .viewfield-group,
-.mode-select .viewfield-group {
+.ideditor.mode-browse .viewfield-group,
+.ideditor.mode-select .viewfield-group {
     pointer-events: visible;
     cursor: pointer;
 }

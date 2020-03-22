@@ -33,7 +33,7 @@ export function uiSidebar(context) {
 
 
     function sidebar(selection) {
-        var container = d3_select('#id-container');
+        var container = context.container();
         var minWidth = 280;
         var sidebarWidth;
         var containerWidth;

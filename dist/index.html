@@ -14,13 +14,23 @@
         <!--[if !IE]>-->
         <script src='iD.js'></script>
         <!--<![endif]-->
+
+        <style type='text/css'>
+          /* apply document-level styling to standalone iD only */
+          html, body {
+            width: 100%;
+            height: 100%;
+            margin: 0;
+            padding: 0;
+          }
+        </style>
     </head>
     <body>
         <div id='id-container'></div>
         <script>
             if (typeof iD == 'undefined' || !iD.utilDetect().support) {
                 document.getElementById('id-container').innerHTML = 'Sorry, your browser is not currently supported. Please use Potlatch 2 to edit the map.';
-                document.getElementById('id-container').className = 'unsupported';
+                document.getElementById('id-container').style.padding = '20px';
 
             } else {
                 var id = iD.coreContext();
