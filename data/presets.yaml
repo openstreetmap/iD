@@ -5604,9 +5604,9 @@ en:
         terms: '<translate with synonyms or related terms for ''Naval Base'', separated by commas>'
       landuse/military/obstacle_course:
         # military=obstacle_course
-        name: Obstacle Course
+        name: Military Obstacle Course
         # 'terms: army,base,force,guard,marine,navy,troop,war'
-        terms: '<translate with synonyms or related terms for ''Obstacle Course'', separated by commas>'
+        terms: '<translate with synonyms or related terms for ''Military Obstacle Course'', separated by commas>'
       landuse/military/range:
         # military=range
         name: Military Range
@@ -5614,9 +5614,9 @@ en:
         terms: '<translate with synonyms or related terms for ''Military Range'', separated by commas>'
       landuse/military/training_area:
         # military=training_area
-        name: Training Area
+        name: Military Training Area
         # 'terms: air force,army,base,fight,fire,force,guard,gun,marine,navy,rifle,shoot*,snip*,train,troop,war'
-        terms: '<translate with synonyms or related terms for ''Training Area'', separated by commas>'
+        terms: '<translate with synonyms or related terms for ''Military Training Area'', separated by commas>'
       landuse/orchard:
         # landuse=orchard
         name: Orchard

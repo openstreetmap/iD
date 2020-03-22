@@ -7399,7 +7399,7 @@
                     "terms": "base,fight,force,guard,marine,navy,ship,sub,troop,war"
                 },
                 "landuse/military/obstacle_course": {
-                    "name": "Obstacle Course",
+                    "name": "Military Obstacle Course",
                     "terms": "army,base,force,guard,marine,navy,troop,war"
                 },
                 "landuse/military/range": {
@@ -7407,7 +7407,7 @@
                     "terms": "air force,army,base,fight,fire,force,guard,gun,marine,navy,rifle,shoot*,snip*,train,troop,war"
                 },
                 "landuse/military/training_area": {
-                    "name": "Training Area",
+                    "name": "Military Training Area",
                     "terms": "air force,army,base,fight,fire,force,guard,gun,marine,navy,rifle,shoot*,snip*,train,troop,war"
                 },
                 "landuse/orchard": {
