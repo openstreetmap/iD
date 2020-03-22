@@ -67,6 +67,7 @@ export function uiFieldWikidata(field, context) {
         searchInput = searchRowEnter
             .append('input')
             .attr('type', 'text')
+            .attr('id', field.domId)
             .style('flex', '1')
             .call(utilNoAuto);
 
@@ -111,13 +112,11 @@ export function uiFieldWikidata(field, context) {
         enter
             .append('span')
             .attr('class', 'label')
-            .attr('for', function(d) { return 'preset-input-wikidata-' + d; })
             .text(function(d) { return t('wikidata.' + d); });
 
         enter
             .append('input')
             .attr('type', 'text')
-            .attr('id', function(d) { return 'preset-input-wikidata-' + d; })
             .call(utilNoAuto)
             .classed('disabled', 'true')
             .attr('readonly', 'true');
