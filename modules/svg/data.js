@@ -150,7 +150,7 @@ export function svgData(projection, context, dispatch) {
 
 
     function clipPathID(d) {
-        return 'data-' + d.__featurehash__ + '-clippath';
+        return 'ideditor-data-' + d.__featurehash__ + '-clippath';
     }
 
 

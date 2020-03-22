@@ -91,7 +91,7 @@ export function uiInit(context) {
 
         container
             .append('svg')
-            .attr('id', 'defs')
+            .attr('id', 'ideditor-defs')
             .call(svgDefs(context));
 
         container

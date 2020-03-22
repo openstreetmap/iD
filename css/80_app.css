@@ -54,7 +54,7 @@ body {
     transition-duration: 200ms;
 }
 
-#defs {
+#ideditor-defs {
     /* Can't be display: none or the clippaths are ignored. */
     position: absolute;
     width: 0;
