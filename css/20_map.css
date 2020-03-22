@@ -132,8 +132,8 @@ g.point.selected .shadow {
 g.point ellipse.stroke {
     display: none;
 }
-.mode-drag-note g.note.active ellipse.stroke,
-.mode-drag-node g.point.active ellipse.stroke {
+.ideditor.mode-drag-note g.note.active ellipse.stroke,
+.ideditor.mode-drag-node g.point.active ellipse.stroke {
     display: block;
 }
 

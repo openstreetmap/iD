@@ -363,7 +363,7 @@ export function coreContext() {
   context.container = function(val) {
     if (!arguments.length) return _container;
     _container = val;
-    _container.classed('id-container', true);
+    _container.classed('ideditor', true);
     return context;
   };
   let _embed;

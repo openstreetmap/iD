@@ -530,11 +530,11 @@ export function uiIntroNavigation(context, reveal) {
 
     function play() {
         dispatch.call('done');
-        reveal('#id-container',
+        reveal('.ideditor',
             t('intro.navigation.play', { next: t('intro.points.title') }), {
                 tooltipBox: '.intro-nav-wrap .chapter-point',
                 buttonText: t('intro.ok'),
-                buttonCallback: function() { reveal('#id-container'); }
+                buttonCallback: function() { reveal('.ideditor'); }
             }
         );
     }

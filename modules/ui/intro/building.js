@@ -757,11 +757,11 @@ export function uiIntroBuilding(context, reveal) {
 
     function play() {
         dispatch.call('done');
-        reveal('#id-container',
+        reveal('.ideditor',
             t('intro.buildings.play', { next: t('intro.startediting.title') }), {
                 tooltipBox: '.intro-nav-wrap .chapter-startEditing',
                 buttonText: t('intro.ok'),
-                buttonCallback: function() { reveal('#id-container'); }
+                buttonCallback: function() { reveal('.ideditor'); }
             }
         );
     }
