@@ -474,12 +474,12 @@ function generateTranslations(fields, presets, tstrings, searchableFieldIDs) {
 function generateTaginfo(presets, fields) {
   let taginfo = {
     'data_format': 1,
-    'data_url': 'https://raw.githubusercontent.com/openstreetmap/iD/master/data/taginfo.json',
+    'data_url': 'https://raw.githubusercontent.com/openstreetmap/iD/develop/data/taginfo.json',
     'project': {
       'name': 'iD Editor',
       'description': 'Online editor for OSM data.',
       'project_url': 'https://github.com/openstreetmap/iD',
-      'doc_url': 'https://github.com/openstreetmap/iD/blob/master/data/presets/README.md',
+      'doc_url': 'https://github.com/openstreetmap/iD/blob/develop/data/presets/README.md',
       'icon_url': 'https://cdn.jsdelivr.net/gh/openstreetmap/iD@release/dist/img/logo.png',
       'keywords': ['editor']
     },
@@ -515,13 +515,13 @@ function generateTaginfo(presets, fields) {
       tag.icon_url = 'https://cdn.jsdelivr.net/gh/ideditor/temaki/icons/' +
         preset.icon.replace(/^temaki-/, '') + '.svg';
     } else if (/^fa[srb]-/.test(preset.icon)) {
-      tag.icon_url = 'https://cdn.jsdelivr.net/gh/openstreetmap/iD@master/svg/fontawesome/' +
+      tag.icon_url = 'https://cdn.jsdelivr.net/gh/openstreetmap/iD@develop/svg/fontawesome/' +
         preset.icon + '.svg';
     } else if (/^iD-/.test(preset.icon)) {
-      tag.icon_url = 'https://cdn.jsdelivr.net/gh/openstreetmap/iD@master/svg/iD-sprite/presets/' +
+      tag.icon_url = 'https://cdn.jsdelivr.net/gh/openstreetmap/iD@develop/svg/iD-sprite/presets/' +
         preset.icon.replace(/^iD-/, '') + '.svg';
     } else if (/^tnp-/.test(preset.icon)) {
-      tag.icon_url = 'https://cdn.jsdelivr.net/gh/openstreetmap/iD@master/svg/the-noun-project/' +
+      tag.icon_url = 'https://cdn.jsdelivr.net/gh/openstreetmap/iD@develop/svg/the-noun-project/' +
         preset.icon.replace(/^tnp-/, '') + '.svg';
     }
 
