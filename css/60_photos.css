@@ -99,8 +99,8 @@
 .viewfield-group {
     pointer-events: none;
 }
-.mode-browse .viewfield-group,
-.mode-select .viewfield-group {
+.ideditor.mode-browse .viewfield-group,
+.ideditor.mode-select .viewfield-group {
     pointer-events: visible;
     cursor: pointer;
 }

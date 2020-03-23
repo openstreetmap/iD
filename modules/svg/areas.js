@@ -12,7 +12,7 @@ export function svgAreas(projection, context) {
     function getPatternStyle(tags) {
         var imageID = svgTagPattern(tags);
         if (imageID) {
-            return 'url("#' + imageID + '")';
+            return 'url("#ideditor-' + imageID + '")';
         }
         return '';
     }
@@ -134,7 +134,7 @@ export function svgAreas(projection, context) {
         var clipPathsEnter = clipPaths.enter()
            .append('clipPath')
            .attr('class', 'clipPath-osm')
-           .attr('id', function(entity) { return entity.id + '-clippath'; });
+           .attr('id', function(entity) { return 'ideditor-' + entity.id + '-clippath'; });
 
         clipPathsEnter
            .append('path');
@@ -183,7 +183,7 @@ export function svgAreas(projection, context) {
                 this.setAttribute('class', entity.type + ' area ' + layer + ' ' + entity.id);
 
                 if (layer === 'fill') {
-                    this.setAttribute('clip-path', 'url(#' + entity.id + '-clippath)');
+                    this.setAttribute('clip-path', 'url(#ideditor-' + entity.id + '-clippath)');
                     this.style.fill = this.style.stroke = getPatternStyle(entity.tags);
                 }
             })

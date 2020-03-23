@@ -1,7 +1,6 @@
 import {
   event as d3_event,
-  select as d3_select,
-  selectAll as d3_selectAll
+  select as d3_select
 } from 'd3-selection';
 
 import { modeSelect } from '../modes/select';
@@ -111,7 +110,7 @@ export function uiOsmoseDetails(context) {
         // Do nothing if UI has moved on by the time this resolves
         if (
           context.selectedErrorID() !== thisItem.id
-          && d3_selectAll(`.qaItem.osmose.hover.itemId-${thisItem.id}`).empty()
+          && context.container().selectAll(`.qaItem.osmose.hover.itemId-${thisItem.id}`).empty()
         ) return;
 
         // Things like keys and values are dynamically added to a subtitle string

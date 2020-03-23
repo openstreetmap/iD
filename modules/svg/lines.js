@@ -306,11 +306,11 @@ export function svgLines(projection, context) {
             layergroup.selectAll('g.line-stroke-highlighted')
                 .call(drawLineGroup, 'stroke', true);
 
-            addMarkers(layergroup, 'oneway', 'onewaygroup', onewaydata, 'url(#oneway-marker)');
+            addMarkers(layergroup, 'oneway', 'onewaygroup', onewaydata, 'url(#ideditor-oneway-marker)');
             addMarkers(layergroup, 'sided', 'sidedgroup', sideddata,
                 function marker(d) {
                     var category = graph.entity(d.id).sidednessIdentifier();
-                    return 'url(#sided-marker-' + category + ')';
+                    return 'url(#ideditor-sided-marker-' + category + ')';
                 }
             );
         });
