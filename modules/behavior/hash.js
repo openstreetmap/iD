@@ -2,6 +2,7 @@ import _throttle from 'lodash-es/throttle';
 
 import { select as d3_select } from 'd3-selection';
 
+import { utilDisplayLabel } from '../util';
 import { geoSphericalDistance } from '../geo';
 import { modeBrowse } from '../modes/browse';
 import { utilObjectOmit, utilQsString, utilStringQs } from '../util';
@@ -29,7 +30,6 @@ export function behaviorHash(context) {
             if (mode && mode.id.match(/^draw/) !== null && dist > maxdist) {
                 context.enter(modeBrowse(context));
             }
-
             map.centerZoom([args[2], Math.min(lat, Math.max(-lat, args[1]))], args[0]);
         }
     };
@@ -51,20 +51,54 @@ export function behaviorHash(context) {
         if (selected.length) {
             newParams.id = selected.join(',');
         }
-
+ 
         newParams.map = zoom.toFixed(2) +
             '/' + center[1].toFixed(precision) +
             '/' + center[0].toFixed(precision);
 
+        updateTitle(selected, center[1].toFixed(precision), center[0].toFixed(precision));
+
         return '#' + utilQsString(Object.assign(q, newParams), true);
     };
+
+    function updateTitle(selected, center1, center0){
+        //selection
+        var oldTitle = document.title;
+        var endIndex = oldTitle.indexOf('-');
+        var oldIDStr = oldTitle.substring(endIndex+2);
+        if (selected.length === 1) {
+            if (endIndex === -1) {
+                oldTitle += ' - ' + utilDisplayLabel(context.entity(selected[0]), context);
+            }
+            else {
+                var newIDStr = utilDisplayLabel(context.entity(selected[0]), context);
+                oldTitle = oldTitle.replace(oldIDStr, newIDStr);
+            }
+        }
+        else if (selected.length > 1 ) {
+            newIDStr = utilDisplayLabel(context.entity(selected[0]), context) + ' and ' + (selected.length-1).toString() + ' more';
+            oldTitle = oldTitle.replace(oldIDStr, newIDStr);
+        }
+        else {
+            if (endIndex !== -1){
+                oldIDStr = oldTitle.substring(endIndex);
+                oldTitle = oldTitle.replace(oldIDStr, '');
+            }
+            //map location
+            oldTitle += ' - (' + center1 + ',' + center0 + ')';
+        }
+
+        document.title = oldTitle;
+
+    }
 
 
     function update() {
         if (context.inIntro()) return;
         var s1 = formatter(context.map());
         if (s0 !== s1) {
-            window.location.replace(s0 = s1);  // don't recenter the map!
+            s0 = s1;
+            window.location.replace(s0);  // don't recenter the map!
         }
     }
 
@@ -94,8 +128,11 @@ export function behaviorHash(context) {
             var q = utilStringQs(window.location.hash);
 
             if (q.id) {
-                context.zoomToEntity(q.id.split(',')[0], !q.map);
-            }
+                if (!context.history().hasRestorableChanges()) {
+                    // targeting specific features: download, select, and zoom to them
+                    context.zoomToEntities(q.id.split(','));
+                }
+            }                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           
 
             // Store these here instead of updating local storage since local
             // storage could be flushed if the user discards pending changes
