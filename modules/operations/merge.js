@@ -22,7 +22,7 @@ export function operationMerge(selectedIDs, context) {
 
         } else if (!merge.disabled(context.graph())) {
             return merge;
-            
+
         } else if (!mergePolygon.disabled(context.graph())) {
             return mergePolygon;
         }
@@ -37,6 +37,12 @@ export function operationMerge(selectedIDs, context) {
         context.validator().validate();
 
         var resultIDs = selectedIDs.filter(context.hasEntity);
+        if (resultIDs.length > 1) {
+            var interestingIDs = resultIDs.filter(function(id) {
+                return context.entity(id).hasInterestingTags();
+            });
+            if (interestingIDs.length) resultIDs = interestingIDs;
+        }
         context.enter(modeSelect(context, resultIDs));
     };
 
