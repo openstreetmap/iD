@@ -2,47 +2,41 @@ import { t } from '../util/locale';
 import { presetCollection } from './collection';
 
 
-export function presetCategory(id, category, all) {
-    category = Object.assign({}, category);   // shallow copy
+//
+// `presetCategory` builds a `presetCollection` of member presets,
+// decorated with some extra methods for searching and matching geometry
+//
+export function presetCategory(categoryID, category, all) {
+  let _this = Object.assign({}, category);   // shallow copy
 
-    category.id = id;
+  _this.id = categoryID;
 
+  _this.members = presetCollection(
+    category.members.map(presetID => all.item(presetID)).filter(Boolean)
+  );
 
-    category.members = presetCollection(category.members.map(function(id) {
-        return all.item(id);
-    }));
-
-
-    category.geometry = category.members.collection.reduce(function(geometries, preset) {
-        for (var index in preset.geometry) {
-            var geometry = preset.geometry[index];
-            if (geometries.indexOf(geometry) === -1) {
-                geometries.push(geometry);
-            }
+  _this.geometry = _this.members.collection
+    .reduce((acc, preset) => {
+      for (let i in preset.geometry) {
+        const geometry = preset.geometry[i];
+        if (acc.indexOf(geometry) === -1) {
+          acc.push(geometry);
         }
-        return geometries;
+      }
+      return acc;
     }, []);
 
+  _this.matchGeometry = (geom) => _this.geometry.indexOf(geom) >= 0;
 
-    category.matchGeometry = function(geometry) {
-        return category.geometry.indexOf(geometry) >= 0;
-    };
+  _this.matchAllGeometry = (geometries) => _this.members.collection
+    .some(preset => preset.matchAllGeometry(geometries));
 
+  _this.matchScore = () => -1;
 
-    category.matchScore = function() {
-        return -1;
-    };
+  _this.name = () => t(`presets.categories.${categoryID}.name`, { 'default': categoryID });
 
-
-    category.name = function() {
-        return t('presets.categories.' + id + '.name', {'default': id});
-    };
+  _this.terms = () => [];
 
 
-    category.terms = function() {
-        return [];
-    };
-
-
-    return category;
+  return _this;
 }

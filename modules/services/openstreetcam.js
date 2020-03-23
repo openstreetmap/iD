@@ -173,7 +173,7 @@ function searchLimited(limit, projection, rtree) {
 
 function zoomPan() {
     var t = d3_event.transform;
-    d3_select('#photoviewer .osc-image-wrap')
+    d3_select('.photoviewer .osc-image-wrap')
         .call(utilSetTransform, t.x, t.y, t.k);
 }
 
@@ -247,7 +247,7 @@ export default {
         var that = this;
 
         // add osc-wrapper
-        var wrap = d3_select('#photoviewer').selectAll('.osc-wrapper')
+        var wrap = d3_select('.photoviewer').selectAll('.osc-wrapper')
             .data([0]);
 
         var wrapEnter = wrap.enter()
@@ -316,7 +316,7 @@ export default {
                 if (r < -180) r += 360;
                 sequence.rotation = r;
 
-                var wrap = d3_select('#photoviewer .osc-wrapper');
+                var wrap = d3_select('.photoviewer .osc-wrapper');
 
                 wrap
                     .transition()
@@ -352,7 +352,7 @@ export default {
 
 
     showViewer: function() {
-        var viewer = d3_select('#photoviewer')
+        var viewer = d3_select('.photoviewer')
             .classed('hide', false);
 
         var isHidden = viewer.selectAll('.photo-wrapper.osc-wrapper.hide').size();
@@ -371,10 +371,10 @@ export default {
     },
 
 
-    hideViewer: function() {
+    hideViewer: function(context) {
         _oscSelectedImage = null;
 
-        var viewer = d3_select('#photoviewer');
+        var viewer = context.container().select('.photoviewer');
         if (!viewer.empty()) viewer.datum(null);
 
         viewer
@@ -382,7 +382,7 @@ export default {
             .selectAll('.photo-wrapper')
             .classed('hide', true);
 
-        d3_selectAll('.viewfield-group, .sequence, .icon-sign')
+        context.container().selectAll('.viewfield-group, .sequence, .icon-sign')
             .classed('currentView', false);
 
         return this.setStyles(null, true);
@@ -390,7 +390,7 @@ export default {
 
 
     updateViewer: function(d) {
-        var wrap = d3_select('#photoviewer .osc-wrapper');
+        var wrap = d3_select('.photoviewer .osc-wrapper');
         var imageWrap = wrap.selectAll('.osc-image-wrap');
         var attribution = wrap.selectAll('.photo-attribution').html('');
 
@@ -461,7 +461,7 @@ export default {
 
     selectImage: function(d) {
         _oscSelectedImage = d;
-        var viewer = d3_select('#photoviewer');
+        var viewer = d3_select('.photoviewer');
         if (!viewer.empty()) viewer.datum(d);
 
         this.setStyles(null, true);
@@ -503,7 +503,7 @@ export default {
         var hoveredSequence = hoveredSequenceKey && _oscCache.sequences[hoveredSequenceKey];
         var hoveredImageKeys = (hoveredSequence && hoveredSequence.images.map(function (d) { return d.key; })) || [];
 
-        var viewer = d3_select('#photoviewer');
+        var viewer = d3_select('.photoviewer');
         var selected = viewer.empty() ? undefined : viewer.datum();
         var selectedImageKey = selected && selected.key;
         var selectedSequenceKey = this.getSequenceKeyForImage(selected);

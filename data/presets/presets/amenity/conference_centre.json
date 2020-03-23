@@ -3,18 +3,20 @@
     "fields": [
         "name",
         "operator",
+        "operator/type",
         "building_area",
         "address",
         "website",
-        "internet_access"
+        "internet_access",
+        "internet_access/fee",
+        "internet_access/ssid"
     ],
     "moreFields": [
         "air_conditioning",
         "email",
         "fax",
         "gnis/feature_id",
-        "internet_access/fee",
-        "internet_access/ssid",
+        "not/name",
         "phone",
         "smoking",
         "wheelchair"

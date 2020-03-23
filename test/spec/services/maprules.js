@@ -1,9 +1,9 @@
 describe('maprules', function() {
-    var _ruleChecks, savedAreaKeys, validationRules;
+    var _ruleChecks, _savedAreaKeys, validationRules;
 
     before(function() {
-        savedAreaKeys = iD.areaKeys;
-        iD.setAreaKeys({ building: {}, amenity: {} });
+        _savedAreaKeys = iD.osmAreaKeys;
+        iD.osmSetAreaKeys({ building: {}, amenity: {} });
 
         iD.services.maprules = iD.serviceMapRules;
         iD.serviceMapRules.init();
@@ -11,7 +11,7 @@ describe('maprules', function() {
     });
 
     after(function() {
-        iD.setAreaKeys(savedAreaKeys);
+        iD.osmSetAreaKeys(_savedAreaKeys);
         delete iD.services.maprules;
     });
 

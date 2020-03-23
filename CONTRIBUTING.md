@@ -185,7 +185,7 @@ Work in Progress.  Don't start work on these, somebody else already did!
 
 ## Verifying Bug Fixes
 
-To verify a bug fix (or test a new feature), use the [master deployment](http://preview.ideditor.com/master/)
+To verify a bug fix (or test a new feature), use the [develop deployment](http://preview.ideditor.com/master/)
 (http://preview.ideditor.com/master/), which is updated every 10 minutes with the
 latest code and translation strings.
 
@@ -228,7 +228,7 @@ project** button near the bottom of the project page. You can edit your
 getting too many notifications.
 
 Translations are licensed under
-[ISC](https://raw.github.com/openstreetmap/iD/master/LICENSE.md), the same license
+[ISC](https://raw.github.com/openstreetmap/iD/develop/LICENSE.md), the same license
 as iD.
 
 **Why are there so many duplicate "Type" translations?** There are multiple
@@ -245,6 +245,13 @@ These are separate translations for uniformity reasons and because some language
  may translate "type" differently in "type of aeroway" and "type of amenity", for
  example.
 
+**Why can't I find the Osmose QA layer translations?** The Osmose QA strings are
+ pulled in from the external Osmose API. You can contribute to the
+ [Osmose Transifex project](https://www.transifex.com/projects/p/osmose/)
+ and the results will be seen in iD once deployed.
+
+Note that if you want to add/update English translations in Osmose then you will
+ need to head on over to the [Osmose backend source code](https://github.com/osm-fr/osmose-backend).
 
 ## Adding New Strings for Translation or Updating Existing Strings
 
@@ -391,7 +398,7 @@ Additionally here is a step-by-step workflow example for beginners:
 
 4. Clone or download your local copy of iD from your GitHub account using https `git clone https://github.com/<yourgithubaccount>/iD.git` or using ssh `git clone git@github.com:{{yourgithubaccount}}/iD.git`. In your local copy you'll have a "remote" called origin.
 
-5. Switch to the iD directory, create a working branch (choose a descriptive name) and switch to it : `cd iD ; git checkout -b <working-branch-name>`. Never do anything in master branch.
+5. Switch to the iD directory, create a working branch (choose a descriptive name) and switch to it : `cd iD ; git checkout -b <working-branch-name>`. Never do anything in develop branch.
 
 6. Edit file(s) and try your change locally (See above).
 
@@ -412,13 +419,13 @@ you can clean up by deleting the branch from your GitHub-iD-Clone and your local
 
 ### Restart with another PR after some while
 
-If you did not use your copy of iD for some while, other Pull Request gets merged and you don't have the latest version of iD. You can replace your master with whatever is in our master. If you have not done so yet: Add the main repo as an "upstream" remote:
+If you did not use your copy of iD for some while, other Pull Request gets merged and you don't have the latest version of iD. You can replace your develop with whatever is in our develop. If you have not done so yet: Add the main repo as an "upstream" remote:
 
 `git remote add upstream git@github.com:openstreetmap/iD.git`
 
-Then change to the master branch and get everything from upstream (the main repository)
+Then change to the develop branch and get everything from upstream (the main repository)
 
-`git checkout master ; git fetch --all && git reset --hard upstream/master`
+`git checkout develop ; git fetch --all && git reset --hard upstream/develop`
 
 
 ## Submitting directly in the Browser
@@ -435,11 +442,11 @@ Additionally here is a step-by-step workflow example for beginners:
 
 2. Go to the [iD main repository](https://github.com/openstreetmap/iD) and fork iD into your GitHub account (Fork is top right).
 
-3. Create a New Branch by clicking on "Branch: master" and entering the name of a new branch (choose a descriptive name).
+3. Create a New Branch by clicking on "Branch: develop" and entering the name of a new branch (choose a descriptive name).
 
 4. Navigate to the file you want to edit and click on "Edit this file" and apply your changes to the file. Alternatively, you could also "Create a new file".
 
-5. When finished editing the file enter a commit text (the description is optional) and commit directly to the newly created branch. You may repeat 4 and 5 until all required changes are commited.
+5. When finished editing the file enter a commit text (the description is optional) and commit directly to the newly created branch. You may repeat 4 and 5 until all required changes are committed.
 
 6. Navigate back to your "id" project - https://github.com/{{yourgithubaccount}}/iD
 

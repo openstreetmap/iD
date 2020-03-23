@@ -1,8 +1,9 @@
 import { t } from '../util/locale';
 import { behaviorDrawWay } from '../behavior/draw_way';
+import { uiFlash } from '../ui/flash';
 
 
-export function modeDrawLine(context, wayID, startGraph, baselineGraph, button, affix, continuing) {
+export function modeDrawLine(context, wayID, startGraph, button, affix, continuing) {
     var mode = {
         button: button,
         id: 'draw-line'
@@ -19,8 +20,12 @@ export function modeDrawLine(context, wayID, startGraph, baselineGraph, button, 
         var index = (affix === 'prefix') ? 0 : undefined;
         var headID = (affix === 'prefix') ? way.first() : way.last();
 
-        behavior = behaviorDrawWay(context, wayID, index, mode, startGraph, baselineGraph)
-            .tail(t('modes.draw_line.tail'));
+        behavior = behaviorDrawWay(context, wayID, index, mode, startGraph)
+            .tail(t('modes.draw_line.tail'))
+            .on('rejectedSelfIntersection.modeDrawLine', function() {
+                uiFlash()
+                    .text(t('self_intersection.error.lines'))();
+            });
 
         var addNode = behavior.addNode;
         behavior.addNode = function(node, d) {

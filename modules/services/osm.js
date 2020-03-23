@@ -193,7 +193,7 @@ var jsonparsers = {
     node: function nodeData(obj, uid) {
         return new osmNode({
             id:  uid,
-            visible: true,
+            visible: typeof obj.visible === 'boolean' ? obj.visible : true,
             version: obj.version.toString(),
             changeset: obj.changeset.toString(),
             timestamp: obj.timestamp,
@@ -207,7 +207,7 @@ var jsonparsers = {
     way: function wayData(obj, uid) {
         return new osmWay({
             id:  uid,
-            visible: true,
+            visible: typeof obj.visible === 'boolean' ? obj.visible : true,
             version: obj.version.toString(),
             changeset: obj.changeset.toString(),
             timestamp: obj.timestamp,
@@ -221,7 +221,7 @@ var jsonparsers = {
     relation: function relationData(obj, uid) {
         return new osmRelation({
             id:  uid,
-            visible: true,
+            visible: typeof obj.visible === 'boolean' ? obj.visible : true,
             version: obj.version.toString(),
             changeset: obj.changeset.toString(),
             timestamp: obj.timestamp,
@@ -369,7 +369,8 @@ var parsers = {
             id: uid,
             display_name: attrs.display_name && attrs.display_name.value,
             account_created: attrs.account_created && attrs.account_created.value,
-            changesets_count: 0
+            changesets_count: '0',
+            active_blocks: '0'
         };
 
         var img = obj.getElementsByTagName('img');
@@ -380,6 +381,14 @@ var parsers = {
         var changesets = obj.getElementsByTagName('changesets');
         if (changesets && changesets[0] && changesets[0].getAttribute('count')) {
             user.changesets_count = changesets[0].getAttribute('count');
+        }
+
+        var blocks = obj.getElementsByTagName('blocks');
+        if (blocks && blocks[0]) {
+            var received = blocks[0].getElementsByTagName('received');
+            if (received && received[0] && received[0].getAttribute('active')) {
+                user.active_blocks = received[0].getAttribute('active');
+            }
         }
 
         _userCache.user[uid] = user;
@@ -588,7 +597,7 @@ export default {
                     if (err) {
                         return callback(err);
                     } else {
-                        return parseXML(payload, callback, options);
+                        return parseJSON(payload, callback, options);
                     }
                 }
             }
@@ -599,7 +608,7 @@ export default {
         } else {
             var url = urlroot + path;
             var controller = new AbortController();
-            d3_xml(url, { signal: controller.signal })
+            d3_json(url, { signal: controller.signal })
                 .then(function(data) {
                     done(null, data);
                 })
@@ -629,7 +638,7 @@ export default {
         var options = { skipSeen: false };
 
         this.loadFromAPI(
-            '/api/0.6/' + type + '/' + osmID + (type !== 'node' ? '/full' : ''),
+            '/api/0.6/' + type + '/' + osmID + (type !== 'node' ? '/full' : '') + '.json',
             function(err, entities) {
                 if (callback) callback(err, { data: entities });
             },
@@ -646,7 +655,7 @@ export default {
         var options = { skipSeen: false };
 
         this.loadFromAPI(
-            '/api/0.6/' + type + '/' + osmID + '/' + version,
+            '/api/0.6/' + type + '/' + osmID + '/' + version + '.json',
             function(err, entities) {
                 if (callback) callback(err, { data: entities });
             },
@@ -657,6 +666,7 @@ export default {
 
     // Load multiple entities in chunks
     // (note: callback may be called multiple times)
+    // Unlike `loadEntity`, child nodes and members are not fetched
     // GET /api/0.6/[nodes|ways|relations]?#parameters
     loadMultiple: function(ids, callback) {
         var that = this;
@@ -669,7 +679,7 @@ export default {
 
             utilArrayChunk(osmIDs, 150).forEach(function(arr) {
                 that.loadFromAPI(
-                    '/api/0.6/' + type + '?' + type + '=' + arr.join(),
+                    '/api/0.6/' + type + '.json?' + type + '=' + arr.join(),
                     function(err, entities) {
                         if (callback) callback(err, { data: entities });
                     },
@@ -976,29 +986,31 @@ export default {
             dispatch.call('loading');   // start the spinner
         }
 
-        var path = '/api/0.6/map?bbox=';
+        var path = '/api/0.6/map.json?bbox=';
         var options = { skipSeen: true };
 
         _tileCache.inflight[tile.id] = this.loadFromAPI(
             path + tile.extent.toParam(),
-            function(err, parsed) {
-                delete _tileCache.inflight[tile.id];
-                if (!err) {
-                    delete _tileCache.toLoad[tile.id];
-                    _tileCache.loaded[tile.id] = true;
-                    var bbox = tile.extent.bbox();
-                    bbox.id = tile.id;
-                    _tileCache.rtree.insert(bbox);
-                }
-                if (callback) {
-                    callback(err, Object.assign({ data: parsed }, tile));
-                }
-                if (!hasInflightRequests(_tileCache)) {
-                    dispatch.call('loaded');     // stop the spinner
-                }
-            },
+            tileCallback,
             options
         );
+
+        function tileCallback(err, parsed) {
+            delete _tileCache.inflight[tile.id];
+            if (!err) {
+                delete _tileCache.toLoad[tile.id];
+                _tileCache.loaded[tile.id] = true;
+                var bbox = tile.extent.bbox();
+                bbox.id = tile.id;
+                _tileCache.rtree.insert(bbox);
+            }
+            if (callback) {
+                callback(err, Object.assign({ data: parsed }, tile));
+            }
+            if (!hasInflightRequests(_tileCache)) {
+                dispatch.call('loaded');     // stop the spinner
+            }
+        }
     },
 
 

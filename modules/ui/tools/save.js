@@ -1,5 +1,5 @@
 import { interpolateRgb as d3_interpolateRgb } from 'd3-interpolate';
-import { event as d3_event, select as d3_select } from 'd3-selection';
+import { event as d3_event } from 'd3-selection';
 
 import { t } from '../../util/locale';
 import { modeSave } from '../../modes';
@@ -81,7 +81,7 @@ export function uiToolSave(context) {
             .placement('bottom')
             .html(true)
             .title(uiTooltipHtml(t('save.no_changes'), key))
-            .scrollContainer(d3_select('#bar'));
+            .scrollContainer(context.container().select('.top-toolbar'));
 
         button = selection
             .append('button')

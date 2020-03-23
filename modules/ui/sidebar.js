@@ -4,18 +4,17 @@ import { drag as d3_drag } from 'd3-drag';
 import { interpolateNumber as d3_interpolateNumber } from 'd3-interpolate';
 
 import {
-    select as d3_select,
-    event as d3_event,
-    selectAll as d3_selectAll
+    event as d3_event
 } from 'd3-selection';
-
-import { osmEntity, osmNote, qaError } from '../osm';
+import { utilArrayIdentical } from '../util/array';
+import { osmEntity, osmNote, QAItem } from '../osm';
 import { services } from '../services';
 import { uiDataEditor } from './data_editor';
 import { uiFeatureList } from './feature_list';
 import { uiInspector } from './inspector';
 import { uiImproveOsmEditor } from './improveOSM_editor';
 import { uiKeepRightEditor } from './keepRight_editor';
+import { uiOsmoseEditor } from './osmose_editor';
 import { uiNoteEditor } from './note_editor';
 import { textDirection } from '../util/locale';
 
@@ -26,14 +25,15 @@ export function uiSidebar(context) {
     var noteEditor = uiNoteEditor(context);
     var improveOsmEditor = uiImproveOsmEditor(context);
     var keepRightEditor = uiKeepRightEditor(context);
+    var osmoseEditor = uiOsmoseEditor(context);
     var _current;
     var _wasData = false;
     var _wasNote = false;
-    var _wasQAError = false;
+    var _wasQaItem = false;
 
 
     function sidebar(selection) {
-        var container = d3_select('#id-container');
+        var container = context.container();
         var minWidth = 280;
         var sidebarWidth;
         var containerWidth;
@@ -41,7 +41,7 @@ export function uiSidebar(context) {
 
         var resizer = selection
             .append('div')
-            .attr('id', 'sidebar-resizer');
+            .attr('class', 'sidebar-resizer');
 
         // Set the initial width constraints
         selection
@@ -138,8 +138,8 @@ export function uiSidebar(context) {
                 selection.selectAll('.sidebar-component')
                     .classed('inspector-hover', true);
 
-            } else if (datum instanceof qaError) {
-                _wasQAError = true;
+            } else if (datum instanceof QAItem) {
+                _wasQaItem = true;
 
                 var errService = services[datum.service];
                 if (errService) {
@@ -147,10 +147,17 @@ export function uiSidebar(context) {
                     datum = errService.getError(datum.id);
                 }
 
-                // Temporary solution while only two services
-                var errEditor = (datum.service === 'keepRight') ? keepRightEditor : improveOsmEditor;
+                // Currently only three possible services
+                var errEditor;
+                if (datum.service === 'keepRight') {
+                    errEditor = keepRightEditor;
+                } else if (datum.service === 'osmose') {
+                    errEditor = osmoseEditor;
+                } else {
+                    errEditor = improveOsmEditor;
+                }
 
-                d3_selectAll('.qa_error.' + datum.service)
+                context.container().selectAll('.qaItem.' + datum.service)
                     .classed('hover', function(d) { return d.id === datum.id; });
 
                 sidebar
@@ -167,10 +174,10 @@ export function uiSidebar(context) {
                     .classed('inspector-hidden', false)
                     .classed('inspector-hover', true);
 
-                if (inspector.entityID() !== datum.id || inspector.state() !== 'hover') {
+                if (!inspector.entityIDs() || !utilArrayIdentical(inspector.entityIDs(), [datum.id]) || inspector.state() !== 'hover') {
                     inspector
                         .state('hover')
-                        .entityID(datum.id);
+                        .entityIDs([datum.id]);
 
                     inspectorWrap
                         .call(inspector);
@@ -184,12 +191,12 @@ export function uiSidebar(context) {
                 inspector
                     .state('hide');
 
-            } else if (_wasData || _wasNote || _wasQAError) {
+            } else if (_wasData || _wasNote || _wasQaItem) {
                 _wasNote = false;
                 _wasData = false;
-                _wasQAError = false;
-                d3_selectAll('.note').classed('hover', false);
-                d3_selectAll('.qa_error').classed('hover', false);
+                _wasQaItem = false;
+                context.container().selectAll('.note').classed('hover', false);
+                context.container().selectAll('.qaItem').classed('hover', false);
                 sidebar.hide();
             }
         }
@@ -206,17 +213,16 @@ export function uiSidebar(context) {
         };
 
 
-        sidebar.select = function(id, newFeature) {
+        sidebar.select = function(ids, newFeature) {
             sidebar.hide();
 
-            if (id) {
-                var entity = context.entity(id);
-                // uncollapse the sidebar
-                if (selection.classed('collapsed')) {
-                    if (newFeature) {
-                        var extent = entity.extent(context.graph());
-                        sidebar.expand(sidebar.intersects(extent));
-                    }
+            if (ids && ids.length) {
+
+                var entity = ids.length === 1 && context.entity(ids[0]);
+                if (entity && newFeature && selection.classed('collapsed')) {
+                    // uncollapse the sidebar
+                    var extent = entity.extent(context.graph());
+                    sidebar.expand(sidebar.intersects(extent));
                 }
 
                 featureListWrap
@@ -226,24 +232,25 @@ export function uiSidebar(context) {
                     .classed('inspector-hidden', false)
                     .classed('inspector-hover', false);
 
-                if (inspector.entityID() !== id || inspector.state() !== 'select') {
+                if (!inspector.entityIDs() || !utilArrayIdentical(inspector.entityIDs(), ids) || inspector.state() !== 'select') {
                     inspector
                         .state('select')
-                        .entityID(id)
+                        .entityIDs(ids)
                         .newFeature(newFeature);
 
                     inspectorWrap
                         .call(inspector, newFeature);
                 }
 
-                sidebar.showPresetList = function() {
-                    inspector.showList(context.presets().match(entity, context.graph()));
-                };
-
             } else {
                 inspector
                     .state('hide');
             }
+        };
+
+
+        sidebar.showPresetList = function() {
+            inspector.showList();
         };
 
 

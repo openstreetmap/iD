@@ -18,7 +18,7 @@ import { uiCmd } from './cmd';
 import {
     utilDisplayName,
     utilDisplayType,
-    utilEntityOrMemberSelector,
+    utilHighlightEntities,
     utilNoAuto
 } from '../util';
 
@@ -153,7 +153,7 @@ export function uiFeatureList(context) {
 
                 var name = utilDisplayName(entity) || '';
                 if (name.toLowerCase().indexOf(q) < 0) continue;
-                
+
                 var matched = context.presets().match(entity, graph);
                 var type = (matched && matched.name()) || utilDisplayType(entity.id);
                 var extent = entity.extent(graph);
@@ -162,7 +162,7 @@ export function uiFeatureList(context) {
                 localResults.push({
                     id: entity.id,
                     entity: entity,
-                    geometry: context.geometry(entity.id),
+                    geometry: entity.geometry(graph),
                     type: type,
                     name: name,
                     distance: distance
@@ -321,19 +321,20 @@ export function uiFeatureList(context) {
         function mouseover(d) {
             if (d.id === -1) return;
 
-            context.surface().selectAll(utilEntityOrMemberSelector([d.id], context.graph()))
-                .classed('hover', true);
+            utilHighlightEntities([d.id], true, context);
         }
 
 
-        function mouseout() {
-            context.surface().selectAll('.hover')
-                .classed('hover', false);
+        function mouseout(d) {
+            utilHighlightEntities([d.id], false, context);
         }
 
 
         function click(d) {
             d3_event.preventDefault();
+
+            utilHighlightEntities([d.id], false, context);
+
             if (d.location) {
                 context.map().centerZoomEase([d.location[1], d.location[0]], 19);
             }
@@ -342,7 +343,7 @@ export function uiFeatureList(context) {
                     context.map().center(d.entity.loc);
                 } else if (d.entity.type === 'way') {
                     var center = context.projection(context.map().center());
-                    var edge = geoChooseEdge(context.childNodes(d.entity), center, context.projection);
+                    var edge = geoChooseEdge(context.graph().childNodes(d.entity), center, context.projection);
                     context.map().center(edge.loc);
                 }
                 context.enter(modeSelect(context, [d.entity.id]));

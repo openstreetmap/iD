@@ -111,7 +111,7 @@ export function svgLabels(projection, context) {
         paths.enter()
             .append('path')
             .style('stroke-width', get(labels, 'font-size'))
-            .attr('id', function(d) { return 'labelpath-' + d.id; })
+            .attr('id', function(d) { return 'ideditor-labelpath-' + d.id; })
             .attr('class', classes)
             .merge(paths)
             .attr('d', get(labels, 'lineString'));
@@ -140,7 +140,7 @@ export function svgLabels(projection, context) {
             .filter(filter)
             .data(entities, osmEntity.key)
             .attr('startOffset', '50%')
-            .attr('xlink:href', function(d) { return '#labelpath-' + d.id; })
+            .attr('xlink:href', function(d) { return '#ideditor-labelpath-' + d.id; })
             .text(utilDisplayNameForPath);
     }
 
@@ -703,7 +703,7 @@ export function svgLabels(projection, context) {
         layers.selectAll('.nolabel')
             .classed('nolabel', false);
 
-        var mouse = context.mouse();
+        var mouse = context.map().mouse();
         var graph = context.graph();
         var selectedIDs = context.selectedIDs();
         var ids = [];

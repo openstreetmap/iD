@@ -500,7 +500,7 @@ export default {
     let that = this;
 
     // create ms-wrapper, a photo wrapper class
-    let wrap = d3_select('#photoviewer').selectAll('.ms-wrapper')
+    let wrap = d3_select('.photoviewer').selectAll('.ms-wrapper')
       .data([0]);
 
     // inject ms-wrapper into the photoviewer div
@@ -568,7 +568,7 @@ export default {
 
     function step(stepBy) {
       return () => {
-        let viewer = d3_select('#photoviewer');
+        let viewer = d3_select('.photoviewer');
         let selected = viewer.empty() ? undefined : viewer.datum();
         if (!selected) return;
 
@@ -670,7 +670,7 @@ export default {
       }
     }
 
-    let wrap = d3_select('#photoviewer')
+    let wrap = d3_select('.photoviewer')
       .classed('hide', false);
 
     let isHidden = wrap.selectAll('.photo-wrapper.ms-wrapper.hide').size();
@@ -692,8 +692,8 @@ export default {
   /**
    * hideViewer()
    */
-  hideViewer: function () {
-    let viewer = d3_select('#photoviewer');
+  hideViewer: function (context) {
+    let viewer = context.container().select('.photoviewer');
     if (!viewer.empty()) viewer.datum(null);
 
     viewer
@@ -701,7 +701,7 @@ export default {
       .selectAll('.photo-wrapper')
       .classed('hide', true);
 
-    d3_selectAll('.viewfield-group, .sequence, .icon-sign')
+    context.container().selectAll('.viewfield-group, .sequence, .icon-sign')
       .classed('currentView', false);
 
     return this.setStyles(null, true);
@@ -713,12 +713,12 @@ export default {
    */
   selectImage: function (d) {
     let that = this;
-    let viewer = d3_select('#photoviewer');
+    let viewer = d3_select('.photoviewer');
     if (!viewer.empty()) viewer.datum(d);
 
     this.setStyles(null, true);
 
-    let wrap = d3_select('#photoviewer .ms-wrapper');
+    let wrap = d3_select('.photoviewer .ms-wrapper');
     let attribution = wrap.selectAll('.photo-attribution').html('');
 
     wrap.selectAll('.pnlm-load-box')   // display "loading.."
@@ -894,7 +894,7 @@ export default {
     let hoveredSequence = hoveredSequenceKey && _ssCache.sequences[hoveredSequenceKey];
     let hoveredBubbleKeys =  (hoveredSequence && hoveredSequence.bubbles.map(d => d.key)) || [];
 
-    let viewer = d3_select('#photoviewer');
+    let viewer = d3_select('.photoviewer');
     let selected = viewer.empty() ? undefined : viewer.datum();
     let selectedBubbleKey = selected && selected.key;
     let selectedSequenceKey = this.getSequenceKeyForBubble(selected);

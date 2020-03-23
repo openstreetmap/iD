@@ -6,7 +6,6 @@ describe('iD.operationExtract', function () {
     fakeContext = {};
     fakeContext.graph = function () { return graph; };
     fakeContext.hasHiddenConnections = function () { return false; };
-    fakeContext.geometry = function () { return 'vertex'; };
 
     var fakeTags = { 'name': 'fake' };
 

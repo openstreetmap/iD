@@ -28,7 +28,7 @@ export function uiFormFields(context) {
 
 
         var fields = container.selectAll('.wrap-form-field')
-            .data(shown, function(d) { return d.id + (d.entityID || ''); });
+            .data(shown, function(d) { return d.id + (d.entityIDs ? d.entityIDs.join() : ''); });
 
         fields.exit()
             .remove();
@@ -54,7 +54,7 @@ export function uiFormFields(context) {
         var moreFields = notShown.map(function(field) {
             var label = field.label();
             titles.push(label);
-            
+
             var terms = field.terms();
             if (field.key) terms.push(field.key);
             if (field.keys) terms = terms.concat(field.keys);

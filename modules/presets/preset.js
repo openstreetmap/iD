@@ -4,284 +4,263 @@ import { utilArrayUniq, utilObjectOmit } from '../util';
 import { utilSafeClassName } from '../util/util';
 
 
-export function presetPreset(id, preset, fields, visible, rawPresets) {
-    preset = Object.assign({}, preset);   // shallow copy
+//
+// `presetPreset` decorates a given `preset` Object
+// with some extra methods for searching and matching geometry
+//
+export function presetPreset(presetID, preset, addable, allFields, allPresets) {
+  allFields = allFields || {};
+  allPresets = allPresets || {};
+  let _this = Object.assign({}, preset);   // shallow copy
+  let _addable = addable || false;
+  let _resolvedFields;      // cache
+  let _resolvedMoreFields;  // cache
 
-    preset.id = id;
+  _this.id = presetID;
 
-    // for use in classes, element ids, css selectors
-    preset.safeid = utilSafeClassName(id);
+  _this.safeid = utilSafeClassName(presetID);  // for use in css classes, selectors, element ids
 
-    preset.parentPresetID = function() {
-        var endIndex = preset.id.lastIndexOf('/');
-        if (endIndex < 0) return null;
+  _this.originalTerms = (_this.terms || []).join();
 
-        return preset.id.substring(0, endIndex);
-    };
+  _this.originalName = _this.name || '';
 
+  _this.originalScore = _this.matchScore || 1;
 
-    // For a preset without fields, use the fields of the parent preset.
-    // Replace {preset} placeholders with the fields of the specified presets.
-    function resolveFieldInheritance() {
+  _this.originalReference = _this.reference || {};
 
-        // Skip `fields` for the keys which define the preset.
-        // These are usually `typeCombo` fields like `shop=*`
-        function shouldInheritFieldWithID(fieldID) {
-            var f = fields[fieldID];
-            if (f.key) {
-                if (preset.tags[f.key] !== undefined &&
-                    // inherit anyway if multiple values are allowed or just a checkbox
-                    f.type !== 'multiCombo' && f.type !== 'semiCombo' && f.type !== 'check') {
-                    return false;
-                }
-            }
-            return true;
-        }
+  _this.originalFields = (_this.fields || []);
 
-        // returns an array of field IDs to inherit from the given presetID, if found
-        function inheritedFieldIDs(presetID, prop) {
-            if (!presetID) return null;
+  _this.originalMoreFields = (_this.moreFields || []);
 
-            var inheritPreset = rawPresets[presetID];
-            if (!inheritPreset) return null;
+  _this.fields = () => _resolvedFields || (_resolvedFields = resolve('fields'));
 
-            var inheritFieldIDs = inheritPreset[prop] || [];
+  _this.moreFields = () => _resolvedMoreFields || (_resolvedMoreFields = resolve('moreFields'));
 
-            if (prop === 'fields') {
-                inheritFieldIDs = inheritFieldIDs.filter(shouldInheritFieldWithID);
-            }
+  _this.resetFields = () => _resolvedFields = _resolvedMoreFields = null;
 
-            return inheritFieldIDs;
-        }
+  _this.tags = _this.tags || {};
 
+  _this.addTags = _this.addTags || _this.tags;
 
-        ['fields', 'moreFields'].forEach(function(prop) {
-            var fieldIDs = [];
-            if (preset[prop] && preset[prop].length) {    // fields were defined
-                preset[prop].forEach(function(fieldID) {
-                    var match = fieldID.match(/\{(.*)\}/);
-                    if (match !== null) {        // presetID wrapped in braces {}
-                        var inheritIDs = inheritedFieldIDs(match[1], prop);
-                        if (inheritIDs !== null) {
-                            fieldIDs = fieldIDs.concat(inheritIDs);
-                        } else {
-                            /* eslint-disable no-console */
-                            console.log('Cannot resolve presetID ' + match[0] +
-                                ' found in ' + preset.id + ' ' + prop);
-                            /* eslint-enable no-console */
-                        }
-                    } else {
-                        fieldIDs.push(fieldID);  // no braces - just a normal field
-                    }
-                });
+  _this.removeTags = _this.removeTags || _this.addTags;
 
-            } else {  // no fields defined, so use the parent's if possible
-                fieldIDs = inheritedFieldIDs(preset.parentPresetID(), prop);
-            }
-            // resolve duplicate fields
-            fieldIDs = utilArrayUniq(fieldIDs);
+  _this.geometry = (_this.geometry || []);
 
-            // update this preset with the results
-            preset[prop] = fieldIDs;
+  _this.matchGeometry = (geom) => _this.geometry.indexOf(geom) >= 0;
 
-            // update the raw object to allow for multiple levels of inheritance
-            rawPresets[preset.id][prop] = fieldIDs;
-        });
+  _this.matchAllGeometry = (geoms) => geoms.every(_this.matchGeometry);
+
+  _this.matchScore = (entityTags) => {
+    const tags = _this.tags;
+    let seen = {};
+    let score = 0;
+
+    // match on tags
+    for (let k in tags) {
+      seen[k] = true;
+      if (entityTags[k] === tags[k]) {
+        score += _this.originalScore;
+      } else if (tags[k] === '*' && k in entityTags) {
+        score += _this.originalScore / 2;
+      } else {
+        return -1;
+      }
     }
 
-    if (rawPresets) {
-        resolveFieldInheritance();
+    // boost score for additional matches in addTags - #6802
+    const addTags = _this.addTags;
+    for (let k in addTags) {
+      if (!seen[k] && entityTags[k] === addTags[k]) {
+        score += _this.originalScore;
+      }
     }
 
-    preset.fields = (preset.fields || []).map(getFields);
-    preset.moreFields = (preset.moreFields || []).map(getFields);
-    preset.geometry = (preset.geometry || []);
+    return score;
+  };
 
-    visible = visible || false;
 
-    function getFields(f) {
-        return fields[f];
+  let _textCache = {};
+  _this.t = (scope, options) => {
+    const textID = `presets.presets.${presetID}.${scope}`;
+    if (_textCache[textID]) return _textCache[textID];
+    return _textCache[textID] = t(textID, options);
+  };
+
+
+  _this.name = () => {
+    if (_this.suggestion) {
+      let path = presetID.split('/');
+      path.pop();  // remove brand name
+      // NOTE: insert an en-dash, not a hypen (to avoid conflict with fr - nl names in Brussels etc)
+      return _this.originalName + ' – ' + t('presets.presets.' + path.join('/') + '.name');
+    }
+    return _this.t('name', { 'default': _this.originalName });
+  };
+
+
+  _this.terms = () => _this.t('terms', { 'default': _this.originalTerms })
+    .toLowerCase().trim().split(/\s*,+\s*/);
+
+
+  _this.isFallback = () => {
+    const tagCount = Object.keys(_this.tags).length;
+    return tagCount === 0 || (tagCount === 1 && _this.tags.hasOwnProperty('area'));
+  };
+
+
+  _this.addable = function(val) {
+    if (!arguments.length) return _addable;
+    _addable = val;
+    return _this;
+  };
+
+
+  _this.reference = (geom) => {
+    // Lookup documentation on Wikidata...
+    const qid = _this.tags.wikidata || _this.tags['brand:wikidata'] || _this.tags['operator:wikidata'];
+    if (qid) {
+      return { qid: qid };
+    }
+
+    // Lookup documentation on OSM Wikibase...
+    let key = _this.originalReference.key || Object.keys(utilObjectOmit(_this.tags, 'name'))[0];
+    let value = _this.originalReference.value || _this.tags[key];
+
+    if (geom === 'relation' && key === 'type') {
+      if (value in _this.tags) {
+        key = value;
+        value = _this.tags[key];
+      } else {
+        return { rtype: value };
+      }
+    }
+
+    if (value === '*') {
+      return { key: key };
+    } else {
+      return { key: key, value: value };
+    }
+  };
+
+
+  _this.unsetTags = (tags, geometry, skipFieldDefaults) => {
+    tags = utilObjectOmit(tags, Object.keys(_this.removeTags));
+
+    if (geometry && !skipFieldDefaults) {
+      _this.fields().forEach(field => {
+        if (field.matchGeometry(geometry) && field.key && field.default === tags[field.key]) {
+          delete tags[field.key];
+        }
+      });
+    }
+
+    delete tags.area;
+    return tags;
+  };
+
+
+  _this.setTags = (tags, geometry, skipFieldDefaults) => {
+    const addTags = _this.addTags;
+    tags = Object.assign({}, tags);   // shallow copy
+
+    for (let k in addTags) {
+      if (addTags[k] === '*') {
+        tags[k] = 'yes';
+      } else {
+        tags[k] = addTags[k];
+      }
+    }
+
+    // Add area=yes if necessary.
+    // This is necessary if the geometry is already an area (e.g. user drew an area) AND any of:
+    // 1. chosen preset could be either an area or a line (`barrier=city_wall`)
+    // 2. chosen preset doesn't have a key in osmAreaKeys (`railway=station`)
+    if (!addTags.hasOwnProperty('area')) {
+      delete tags.area;
+      if (geometry === 'area') {
+        let needsAreaTag = true;
+        if (_this.geometry.indexOf('line') === -1) {
+          for (let k in addTags) {
+            if (k in osmAreaKeys) {
+              needsAreaTag = false;
+              break;
+            }
+          }
+        }
+        if (needsAreaTag) {
+          tags.area = 'yes';
+        }
+      }
+    }
+
+    if (geometry && !skipFieldDefaults) {
+      _this.fields().forEach(field => {
+        if (field.matchGeometry(geometry) && field.key && !tags[field.key] && field.default) {
+          tags[field.key] = field.default;
+        }
+      });
+    }
+
+    return tags;
+  };
+
+
+  // For a preset without fields, use the fields of the parent preset.
+  // Replace {preset} placeholders with the fields of the specified presets.
+  function resolve(which) {
+    const fieldIDs = (which === 'fields' ? _this.originalFields : _this.originalMoreFields);
+    let resolved = [];
+
+    fieldIDs.forEach(fieldID => {
+      const match = fieldID.match(/\{(.*)\}/);
+      if (match !== null) {    // a presetID wrapped in braces {}
+        resolved = resolved.concat(inheritFields(match[1], which));
+      } else if (allFields[fieldID]) {    // a normal fieldID
+        resolved.push(allFields[fieldID]);
+      } else {
+        console.log(`Cannot resolve "${fieldID}" found in ${_this.id}.${which}`);  // eslint-disable-line no-console
+      }
+    });
+
+    // no fields resolved, so use the parent's if possible
+    if (!resolved.length) {
+      const endIndex = _this.id.lastIndexOf('/');
+      const parentID = endIndex && _this.id.substring(0, endIndex);
+      if (parentID) {
+        resolved = inheritFields(parentID, which);
+      }
+    }
+
+    return utilArrayUniq(resolved);
+
+
+    // returns an array of fields to inherit from the given presetID, if found
+    function inheritFields(presetID, which) {
+      const parent = allPresets[presetID];
+      if (!parent) return [];
+
+      if (which === 'fields') {
+        return parent.fields().filter(shouldInherit);
+      } else if (which === 'moreFields') {
+        return parent.moreFields();
+      } else {
+        return [];
+      }
     }
 
 
-    preset.matchGeometry = function(geometry) {
-        return preset.geometry.indexOf(geometry) >= 0;
-    };
+    // Skip `fields` for the keys which define the preset.
+    // These are usually `typeCombo` fields like `shop=*`
+    function shouldInherit(f) {
+      if (f.key && _this.tags[f.key] !== undefined &&
+        // inherit anyway if multiple values are allowed or just a checkbox
+        f.type !== 'multiCombo' && f.type !== 'semiCombo' && f.type !== 'check'
+      ) return false;
+
+      return true;
+    }
+  }
 
 
-    preset.originalScore = preset.matchScore || 1;
-
-
-    preset.matchScore = function(entityTags) {
-        var tags = preset.tags;
-        var seen = {};
-        var score = 0;
-        var k;
-
-        // match on tags
-        for (k in tags) {
-            seen[k] = true;
-            if (entityTags[k] === tags[k]) {
-                score += preset.originalScore;
-            } else if (tags[k] === '*' && k in entityTags) {
-                score += preset.originalScore / 2;
-            } else {
-                return -1;
-            }
-        }
-
-        // boost score for additional matches in addTags - #6802
-        var addTags = preset.addTags;
-        for (k in addTags) {
-            if (!seen[k] && entityTags[k] === addTags[k]) {
-                score += preset.originalScore;
-            }
-        }
-
-        return score;
-    };
-
-
-    var _textCache = {};
-
-    preset.t = function(scope, options) {
-        var textID = 'presets.presets.' + id + '.' + scope;
-
-        if (_textCache[textID]) return _textCache[textID];
-
-        var text = t(textID, options);
-        _textCache[textID] = text;
-        return text;
-    };
-
-
-    preset.originalName = preset.name || '';
-
-
-    preset.name = function() {
-        if (preset.suggestion) {
-            var path = id.split('/');
-            path.pop();  // remove brand name
-            // NOTE: insert an en-dash, not a hypen (to avoid conflict with fr - nl names in Brussels etc)
-            return preset.originalName + ' – ' + t('presets.presets.' + path.join('/') + '.name');
-        }
-        return preset.t('name', { 'default': preset.originalName });
-    };
-
-
-    preset.originalTerms = (preset.terms || []).join();
-
-
-    preset.terms = function() {
-        return preset.t('terms', { 'default': preset.originalTerms }).toLowerCase().trim().split(/\s*,+\s*/);
-    };
-
-
-    preset.isFallback = function() {
-        var tagCount = Object.keys(preset.tags).length;
-        return tagCount === 0 || (tagCount === 1 && preset.tags.hasOwnProperty('area'));
-    };
-
-    preset.visible = function(val) {
-        if (!arguments.length) return visible;
-        visible = val;
-        return visible;
-    };
-
-
-    var reference = preset.reference || {};
-    preset.reference = function(geometry) {
-        // Lookup documentation on Wikidata...
-        var qid = preset.tags.wikidata || preset.tags['brand:wikidata'] || preset.tags['operator:wikidata'];
-        if (qid) {
-            return { qid: qid };
-        }
-
-        // Lookup documentation on OSM Wikibase...
-        var key = reference.key || Object.keys(utilObjectOmit(preset.tags, 'name'))[0];
-        var value = reference.value || preset.tags[key];
-
-        if (geometry === 'relation' && key === 'type') {
-            if (value in preset.tags) {
-                key = value;
-                value = preset.tags[key];
-            } else {
-                return { rtype: value };
-            }
-        }
-
-        if (value === '*') {
-            return { key: key };
-        } else {
-            return { key: key, value: value };
-        }
-    };
-
-
-    preset.removeTags = preset.removeTags || preset.addTags || preset.tags || {};
-    preset.unsetTags = function(tags, geometry) {
-        tags = utilObjectOmit(tags, Object.keys(preset.removeTags));
-
-        for (var f in preset.fields) {
-            var field = preset.fields[f];
-            if (field.matchGeometry(geometry) && field.default === tags[field.key]) {
-                delete tags[field.key];
-            }
-        }
-
-        delete tags.area;
-        return tags;
-    };
-
-
-    preset.addTags = preset.addTags || preset.tags || {};
-    preset.setTags = function(tags, geometry, skipFieldDefaults) {
-        var addTags = preset.addTags;
-        var k;
-
-        tags = Object.assign({}, tags);   // shallow copy
-
-        for (k in addTags) {
-            if (addTags[k] === '*') {
-                tags[k] = 'yes';
-            } else {
-                tags[k] = addTags[k];
-            }
-        }
-
-        // Add area=yes if necessary.
-        // This is necessary if the geometry is already an area (e.g. user drew an area) AND any of:
-        // 1. chosen preset could be either an area or a line (`barrier=city_wall`)
-        // 2. chosen preset doesn't have a key in osmAreaKeys (`railway=station`)
-        if (!addTags.hasOwnProperty('area')) {
-            delete tags.area;
-            if (geometry === 'area') {
-                var needsAreaTag = true;
-                if (preset.geometry.indexOf('line') === -1) {
-                    for (k in addTags) {
-                        if (k in osmAreaKeys) {
-                            needsAreaTag = false;
-                            break;
-                        }
-                    }
-                }
-                if (needsAreaTag) {
-                    tags.area = 'yes';
-                }
-            }
-        }
-        if (geometry && !skipFieldDefaults) {
-            for (var f in preset.fields) {
-                var field = preset.fields[f];
-                if (field.matchGeometry(geometry) && field.key && !tags[field.key] && field.default) {
-                    tags[field.key] = field.default;
-                }
-            }
-        }
-
-        return tags;
-    };
-
-
-    return preset;
+  return _this;
 }

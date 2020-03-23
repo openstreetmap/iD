@@ -1,13 +1,10 @@
 {
     "icon": "temaki-tram",
     "fields": [
-        "{railway/rail}"
+        "{railway/light_rail}"
     ],
     "moreFields": [
-        "covered",
-        "frequency_electrified",
-        "maxspeed",
-        "voltage_electrified"
+        "{railway/light_rail}"
     ],
     "geometry": [
         "line"
@@ -16,10 +13,11 @@
         "railway": "tram"
     },
     "terms": [
+        "electric street railway",
         "light rail",
         "streetcar",
-        "tram",
+        "tramway",
         "trolley"
     ],
-    "name": "Tram"
+    "name": "Tram Track"
 }

@@ -1,5 +1,5 @@
 {
     "key": "bridge:support",
-    "type": "combo",
+    "type": "typeCombo",
     "label": "Type"
 }

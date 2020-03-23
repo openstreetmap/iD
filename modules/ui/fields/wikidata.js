@@ -27,7 +27,7 @@ export function uiFieldWikidata(field, context) {
     var _qid = null;
     var _wikidataEntity = null;
     var _wikiURL = '';
-    var _entity;
+    var _entityIDs = [];
 
     var _wikipediaKey = field.keys && field.keys.find(function(key) {
             return key.includes('wikipedia');
@@ -67,6 +67,7 @@ export function uiFieldWikidata(field, context) {
         searchInput = searchRowEnter
             .append('input')
             .attr('type', 'text')
+            .attr('id', field.domId)
             .style('flex', '1')
             .call(utilNoAuto);
 
@@ -111,13 +112,11 @@ export function uiFieldWikidata(field, context) {
         enter
             .append('span')
             .attr('class', 'label')
-            .attr('for', function(d) { return 'preset-input-wikidata-' + d; })
             .text(function(d) { return t('wikidata.' + d); });
 
         enter
             .append('input')
             .attr('type', 'text')
-            .attr('id', function(d) { return 'preset-input-wikidata-' + d; })
             .call(utilNoAuto)
             .classed('disabled', 'true')
             .attr('readonly', 'true');
@@ -141,8 +140,15 @@ export function uiFieldWikidata(field, context) {
 
     function fetchWikidataItems(q, callback) {
 
-        if (!q && _entity) {
-            q = (_hintKey && context.entity(_entity.id).tags[_hintKey]) || '';
+        if (!q && _hintKey) {
+            // other tags may be good search terms
+            for (var i in _entityIDs) {
+                var entity = context.hasEntity(_entityIDs[i]);
+                if (entity.tags[_hintKey]) {
+                    q = entity.tags[_hintKey];
+                    break;
+                }
+            }
         }
 
         wikidata.itemsForSearchQuery(q, function(err, data) {
@@ -165,7 +171,7 @@ export function uiFieldWikidata(field, context) {
 
         // attempt asynchronous update of wikidata tag..
         var initGraph = context.graph();
-        var initEntityID = _entity.id;
+        var initEntityIDs = _entityIDs;
 
         wikidata.entityByQID(_qid, function(err, entity) {
             if (err) return;
@@ -189,7 +195,7 @@ export function uiFieldWikidata(field, context) {
                 }
             });
 
-            var currTags = Object.assign({}, context.entity(initEntityID).tags);  // shallow copy
+            var newWikipediaValue;
 
             if (_wikipediaKey) {
                 var foundPreferred;
@@ -198,7 +204,7 @@ export function uiFieldWikidata(field, context) {
                     var siteID = lang.replace('-', '_') + 'wiki';
                     if (entity.sitelinks[siteID]) {
                         foundPreferred = true;
-                        currTags[_wikipediaKey] = lang + ':' + entity.sitelinks[siteID].title;
+                        newWikipediaValue = lang + ':' + entity.sitelinks[siteID].title;
                         // use the first match
                         break;
                     }
@@ -214,26 +220,52 @@ export function uiFieldWikidata(field, context) {
 
                     if (wikiSiteKeys.length === 0) {
                         // if no wikipedia pages are linked to this wikidata entity, delete that tag
-                        if (currTags[_wikipediaKey]) {
-                            delete currTags[_wikipediaKey];
-                        }
+                        newWikipediaValue = null;
                     } else {
                         var wikiLang = wikiSiteKeys[0].slice(0, -4).replace('_', '-');
                         var wikiTitle = entity.sitelinks[wikiSiteKeys[0]].title;
-                        currTags[_wikipediaKey] = wikiLang + ':' + wikiTitle;
+                        newWikipediaValue = wikiLang + ':' + wikiTitle;
                     }
                 }
             }
 
+            if (newWikipediaValue) {
+                newWikipediaValue = newWikipediaValue.substr(0, context.maxCharsForTagValue());
+            }
+
+            if (typeof newWikipediaValue === 'undefined') return;
+
+            var actions = initEntityIDs.map(function(entityID) {
+                var entity = context.hasEntity(entityID);
+                if (!entity) return;
+
+                var currTags = Object.assign({}, entity.tags);  // shallow copy
+                if (newWikipediaValue === null) {
+                    if (!currTags[_wikipediaKey]) return;
+
+                    delete currTags[_wikipediaKey];
+                } else {
+                    currTags[_wikipediaKey] = newWikipediaValue;
+                }
+
+                return actionChangeTags(entityID, currTags);
+            }).filter(Boolean);
+
+            if (!actions.length) return;
+
             // Coalesce the update of wikidata tag into the previous tag change
             context.overwrite(
-                actionChangeTags(initEntityID, currTags),
+                function actionUpdateWikipediaTags(graph) {
+                    actions.forEach(function(action) {
+                        graph = action(graph);
+                    });
+                    return graph;
+                },
                 context.history().undoAnnotation()
             );
 
             // do not dispatch.call('change') here, because entity_editor
             // changeTags() is not intended to be called asynchronously
-
         });
     }
 
@@ -250,7 +282,14 @@ export function uiFieldWikidata(field, context) {
 
 
     wiki.tags = function(tags) {
-        _qid = tags[field.key] || '';
+
+        var isMixed = Array.isArray(tags[field.key]);
+        d3_select('li.wikidata-search input')
+            .attr('title', isMixed ? tags[field.key].filter(Boolean).join('\n') : null)
+            .attr('placeholder', isMixed ? t('inspector.multiple_values') : '')
+            .classed('mixed', isMixed);
+
+        _qid = typeof tags[field.key] === 'string' && tags[field.key] || '';
 
         if (!/^Q[0-9]*$/.test(_qid)) {   // not a proper QID
             unrecognized();
@@ -327,9 +366,9 @@ export function uiFieldWikidata(field, context) {
     }
 
 
-    wiki.entity = function(val) {
-        if (!arguments.length) return _entity;
-        _entity = val;
+    wiki.entityIDs = function(val) {
+        if (!arguments.length) return _entityIDs;
+        _entityIDs = val;
         return wiki;
     };
 

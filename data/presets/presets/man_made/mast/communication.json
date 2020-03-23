@@ -4,6 +4,10 @@
         "{man_made/mast}",
         "communication_multi"
     ],
+    "moreFields": [
+        "{man_made/mast}",
+        "mimics"
+    ],
     "geometry": [
         "point"
     ],

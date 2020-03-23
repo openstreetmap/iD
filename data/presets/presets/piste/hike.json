@@ -12,16 +12,16 @@
         "line",
         "area"
     ],
-    "terms": [
-        "hike",
-        "winter hiking",
-        "snowshoe",
-        "snowshoeing",
-        "piste",
-        "ski"
-    ],
     "tags": {
         "piste:type": "hike"
     },
-    "name": "Snowshoeing or Winter Hiking Trail"
+    "terms": [
+        "hike",
+        "nordic walking",
+        "piste",
+        "show shoeing",
+        "snowshoe",
+        "snowshoeing"
+    ],
+    "name": "Snowshoeing / Winter Hiking Trail"
 }

@@ -1,25 +1,18 @@
 {
     "icon": "temaki-wind_turbine",
     "fields": [
+        "ref",
         "operator",
         "generator/type",
-        "generator/output/electricity",
-        "height",
-        "ref"
+        "generator/output/electricity"
     ],
     "moreFields": [
-        "manufacturer"
+        "{power/generator}"
     ],
     "geometry": [
         "point",
         "vertex",
         "area"
-    ],
-    "terms": [
-        "generator",
-        "turbine",
-        "windmill",
-        "wind"
     ],
     "tags": {
         "power": "generator",
@@ -30,5 +23,11 @@
         "key": "generator:source",
         "value": "wind"
     },
+    "terms": [
+        "generator",
+        "turbine",
+        "windmill",
+        "wind"
+    ],
     "name": "Wind Turbine"
 }

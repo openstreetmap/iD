@@ -179,16 +179,21 @@ Object.assign(osmNode.prototype, {
     },
 
 
-    isIntersection: function(resolver) {
-        return resolver.transient(this, 'isIntersection', function() {
+    parentIntersectionWays: function(resolver) {
+        return resolver.transient(this, 'parentIntersectionWays', function() {
             return resolver.parentWays(this).filter(function(parent) {
                 return (parent.tags.highway ||
                     parent.tags.waterway ||
                     parent.tags.railway ||
                     parent.tags.aeroway) &&
                     parent.geometry(resolver) === 'line';
-            }).length > 1;
+            });
         });
+    },
+
+
+    isIntersection: function(resolver) {
+        return this.parentIntersectionWays(resolver).length > 1;
     },
 
 

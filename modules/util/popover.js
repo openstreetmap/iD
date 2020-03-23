@@ -18,6 +18,9 @@ export function popover(klass) {
     var _displayType = utilFunctor('');
     var _hasArrow = utilFunctor(true);
 
+    // use pointer events on supported platforms; fallback to mouse events
+    var _pointerPrefix = 'PointerEvent' in window ? 'pointer' : 'mouse';
+
     popover.displayType = function(val) {
         if (arguments.length) {
             _displayType = utilFunctor(val);
@@ -98,10 +101,10 @@ export function popover(klass) {
         selector = selector || '.popover-' + _id;
 
         selection
-            .on('mouseenter.popover', null)
-            .on('mouseleave.popover', null)
-            .on('mouseup.popover', null)
-            .on('mousedown.popover', null)
+            .on(_pointerPrefix + 'enter.popover', null)
+            .on(_pointerPrefix + 'leave.popover', null)
+            .on(_pointerPrefix + 'up.popover', null)
+            .on(_pointerPrefix + 'down.popover', null)
             .on('click.popover', null)
             .attr('title', function() {
                 return this.getAttribute('data-original-title') || this.getAttribute('title');
@@ -115,8 +118,6 @@ export function popover(klass) {
     popover.destroyAny = function(selection) {
         selection.call(popover.destroy, '.popover');
     };
-
-    var isTouchEvent = false;
 
     function setup() {
         var anchor = d3_select(this);
@@ -151,20 +152,16 @@ export function popover(klass) {
         var display = _displayType.apply(this, arguments);
 
         if (display === 'hover') {
-            anchor.on('touchstart.popover', function() {
-                // hack to avoid showing popovers upon touch input
-                isTouchEvent = true;
-            });
-            anchor.on('mouseenter.popover', show);
-            anchor.on('mouseleave.popover', hide);
+            anchor.on(_pointerPrefix + 'enter.popover', show);
+            anchor.on(_pointerPrefix + 'leave.popover', hide);
 
         } else if (display === 'clickFocus') {
             anchor
-                .on('mousedown.popover', function() {
+                .on(_pointerPrefix + 'down.popover', function() {
                     d3_event.preventDefault();
                     d3_event.stopPropagation();
                 })
-                .on('mouseup.popover', function() {
+                .on(_pointerPrefix + 'up.popover', function() {
                     d3_event.preventDefault();
                     d3_event.stopPropagation();
                 })
@@ -182,8 +179,9 @@ export function popover(klass) {
 
 
     function show() {
-        if (isTouchEvent) {
-            isTouchEvent = false;
+        var displayType = _displayType.apply(this, arguments);
+        if (displayType === 'hover' && d3_event.pointerType === 'touch') {
+            // don't show hover popovers on touch devices
             return;
         }
         var anchor = d3_select(this);
@@ -197,7 +195,7 @@ export function popover(klass) {
 
         popoverSelection.classed('in', true);
 
-        if (_displayType.apply(this, arguments) === 'clickFocus') {
+        if (displayType === 'clickFocus') {
             anchor.classed('active', true);
             popoverSelection.node().focus();
         }

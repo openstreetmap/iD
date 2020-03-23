@@ -463,7 +463,7 @@ export function uiIntroPoint(context, reveal) {
         });
 
         var iconName = '#iD-icon-' + (textDirection === 'rtl' ? 'redo' : 'undo');
-        reveal('#bar button.undo-button',
+        reveal('.top-toolbar button.undo-button',
             t('intro.points.undo', { button: icon(iconName, 'pre-text') })
         );
 
@@ -476,11 +476,11 @@ export function uiIntroPoint(context, reveal) {
 
     function play() {
         dispatch.call('done');
-        reveal('#id-container',
+        reveal('.ideditor',
             t('intro.points.play', { next: t('intro.areas.title') }), {
                 tooltipBox: '.intro-nav-wrap .chapter-area',
                 buttonText: t('intro.ok'),
-                buttonCallback: function() { reveal('#id-container'); }
+                buttonCallback: function() { reveal('.ideditor'); }
             }
         );
     }

@@ -1,5 +1,5 @@
 {
-    "icon": "fas-flag-checkered",
+    "icon": "temaki-speedway_8",
     "geometry": [
         "line",
         "area"
@@ -7,6 +7,10 @@
     "tags": {
         "highway": "raceway",
         "sport": "karting"
+    },
+    "reference": {
+        "key": "sport",
+        "value": "karting"
     },
     "terms": [
         "carting",

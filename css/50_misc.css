@@ -368,17 +368,17 @@ path.line.casing.tag-bridge.tag-unpaved {
 
 
 /* Status (e.g. proposed, abandoned) */
-path.area.stroke.tag-status,
-path.line.stroke.tag-status,
-path.area.casing.tag-status,
-path.line.casing.tag-status {
+path.area.stroke.tag-status:not(.tag-status-disused),
+path.line.stroke.tag-status:not(.tag-status-disused),
+path.area.casing.tag-status:not(.tag-status-disused),
+path.line.casing.tag-status:not(.tag-status-disused) {
     stroke-linecap: butt;
     stroke-dasharray: 7, 3;
 }
-.low-zoom path.area.stroke.tag-status,
-.low-zoom path.line.stroke.tag-status,
-.low-zoom path.area.casing.tag-status,
-.low-zoom path.line.casing.tag-status {
+.low-zoom path.area.stroke.tag-status:not(.tag-status-disused),
+.low-zoom path.line.stroke.tag-status:not(.tag-status-disused),
+.low-zoom path.area.casing.tag-status:not(.tag-status-disused),
+.low-zoom path.line.casing.tag-status:not(.tag-status-disused) {
     stroke-dasharray: 5, 2;
 }
 

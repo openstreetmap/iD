@@ -94,6 +94,7 @@ export function uiEditMenu(context, operations) {
 
         buttonsEnter
             .append('use')
+            .attr('class', 'operation-icon')
             .attr('width', '20')
             .attr('height', '20')
             .attr('transform', function () { return 'translate(' + [2 * p, 5] + ')'; })
@@ -105,7 +106,7 @@ export function uiEditMenu(context, operations) {
             .classed('disabled', function(d) { return d.disabled(); });
 
 
-        tooltip = d3_select('#id-container')
+        tooltip = d3_select('.ideditor')
             .append('div')
             .attr('class', 'popover tooltip edit-menu-tooltip');
 

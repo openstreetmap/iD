@@ -25,17 +25,16 @@ export function uiIssuesInfo(context) {
 
         var shownItems = [];
 
+        var liveIssues = context.validator().getIssues({
+            what: context.storage('validate-what') || 'edited',
+            where: context.storage('validate-where') || 'all'
+        });
+        if (liveIssues.length) {
+            warningsItem.count = liveIssues.length;
+            shownItems.push(warningsItem);
+        }
+
         if (context.storage('validate-what') === 'all') {
-
-            var liveIssues = context.validator().getIssues({
-                what: context.storage('validate-what') || 'edited',
-                where: context.storage('validate-where') || 'all'
-            });
-            if (liveIssues.length) {
-                warningsItem.count = liveIssues.length;
-                shownItems.push(warningsItem);
-            }
-
             var resolvedIssues = context.validator().getResolvedIssues();
             if (resolvedIssues.length) {
                 resolvedItem.count = resolvedIssues.length;
@@ -72,7 +71,7 @@ export function uiIssuesInfo(context) {
 
                         tooltipBehavior.hide(d3_select(this));
                         // open the Issues pane
-                        context.ui().togglePanes(d3_select('.map-panes .issues-pane'));
+                        context.ui().togglePanes(context.container().select('.map-panes .issues-pane'));
                     });
 
                 chipSelection.call(svgIcon('#' + d.iconID));

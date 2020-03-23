@@ -29,8 +29,17 @@ _Breaking changes, which may affect downstream projects or sites that embed iD, 
 [@xxxx]: https://github.com/xxxx
 -->
 
+# 2.17.2
+##### 2020-Feb-14
+
+#### :tada: New Features
+* Restore Maxar Imagery layers, using masked iD-specific connection keys ([#7355])
+
+[#7355]: https://github.com/openstreetmap/iD/issues/7355
+
+
 # 2.17.1
-##### Planned: 2020-Jan-13
+##### 2020-Jan-16
 
 #### :boom: Breaking Changes
 * Remove support for Node 8 (Node 10 or higher is now required)
@@ -104,13 +113,14 @@ _Breaking changes, which may affect downstream projects or sites that embed iD, 
 * Add Secondhand Clothing Store preset ([#7164])
 * Add Public Prosecutor's Office preset ([#7225])
 * Add Speed Limit Enforcement preset ([#7234])
-* Add presets: Emergency Exit, Geyser, Used Car Dealership, Wedding Clothes Store, Backcountry Camping Area, Group Camping Area, History Museum
+* Add presets: Emergency Exit, Geyser, Used Car Dealership, Wedding Clothes Store, Backcountry Camping Area, Group Camping Area, History Museum, Wind Farm, Solar Farm, Nuclear Power Plant, Hydroelectric Power Station, Coal-Fired Power Plant, Gas-Fired Power Plant
 * Rename "Anime Shop" to "Anime / Manga Shop" ([#7223])
+* Simplify the names of various Piste presets
 * Update Arts & Crafts Store icon ([#7228])
 * Update Dressmaker icon ([#7229])
 * Update Water Well icon ([#7170])
 * Update Butcher icon ([#7216])
-* Update preset icons: Cathedral Building, Church Building, College Building, Hospital Building, Hotel Building, Preschool / Kindergarten Building, Mosque Building, School Building, University Building, Recently Demolished Building, Residential Area, Apartment Complex, Water Tap, Island, Islet, Kiosk, Fireworks Store, Row Houses, Houseboat, Tailor, Sewing Supply Shop
+* Update preset icons: Cathedral Building, Church Building, College Building, Hospital Building, Hotel Building, Preschool / Kindergarten Building, Mosque Building, School Building, University Building, Recently Demolished Building, Residential Area, Apartment Complex, Water Tap, Island, Islet, Kiosk, Fireworks Store, Row Houses, Houseboat, Tailor, Sewing Supply Shop, Aerialway Pylon, Mixed Lift, Drag Lift, Platter Lift, J-Bar Lift, T-Bar Lift
 * Add Baby Nursing Area field ([#7152])
 * Add Bicycle-Pedestrian Separation field to Cycle & Foot Path ([#7204], thanks [@hikemaniac])
 * Add Wheelchair Access field to Entrance / Exit ([#7214])
@@ -162,7 +172,7 @@ _Breaking changes, which may affect downstream projects or sites that embed iD, 
 _Find the "Add a bridge" and "Add a tunnel" fixes for each crossing in the Issues inspector._
 * :earth_africa: Selected features now stay visible while zoomed out, plus you can zoom to multiple features together.<br/>
 _Select a few large features and press <kbd>Z</kbd> to view their full extent, no matter how vast._
-* :handshake: iD now has its own [Privacy Policy](https://github.com/openstreetmap/iD/blob/master/PRIVACY.md).<br/>
+* :handshake: iD now has its own [Privacy Policy](https://github.com/openstreetmap/iD/blob/develop/PRIVACY.md).<br/>
 _Press <kbd>P</kbd> to view privacy preferences._
 
 #### :boom: Breaking Changes
@@ -2611,7 +2621,7 @@ _Activate the Bing Streetside layer by opening the Map Data pane (shortcut <kbd>
   * Added support for more icon sets (such as [FontAwesome](https://fontawesome.com/icons?d=gallery)) for presets or other iD icons ([#3025])
   * Extracted many preset icons from the iD sprite into a separate project: [bhousel/temaki](https://github.com/bhousel/temaki)
   * Many presets that previously did not have a suitable icon now have one.
-  * :warning: All icons in iD now use prefixed names. (e.g. `iD-`, `maki-`, etc). See the [preset README](https://github.com/openstreetmap/iD/blob/master/data/presets/README.md#icons) for more details.
+  * :warning: All icons in iD now use prefixed names. (e.g. `iD-`, `maki-`, etc). See the [preset README](https://github.com/openstreetmap/iD/blob/develop/data/presets/README.md#icons) for more details.
 
 [#5050]: https://github.com/openstreetmap/iD/issues/5050
 [#3924]: https://github.com/openstreetmap/iD/issues/3924
@@ -4675,7 +4685,7 @@ _Map traffic signals, stop signs, benches, crossings, street lamps, fountains, t
   * Many deprecated names are still exported as symbols, e.g. `iD.Context` - we will remove these eventually
 * :warning: Customized iD deployments can manipulate live objects, rather than iD.Context accessors
   * No longer need to call things like `presets()`, `imagery()`, `taginfo()` when creating `iD.Context`
-  * See [API.md](https://github.com/openstreetmap/iD/blob/master/API.md#customized-deployments) for details on customized deployments
+  * See [API.md](https://github.com/openstreetmap/iD/blob/develop/API.md#customized-deployments) for details on customized deployments
 * :warning: iD has upgraded to the latest released versions of d3, lodash, rbush, etc.
   * d3 no longer adds itself to the global namespace, but can now be accessed via `iD.d3`
 * :warning: iD now uses `npm` scripts for all build processes
@@ -5339,8 +5349,8 @@ _Map traffic signals, stop signs, benches, crossings, street lamps, fountains, t
 ##### 2013-Nov-22
 * Support for loading GPX-files via url parameter (#1965)
 * Update osm-auth (#1904)
-* Update 3rd party dependencies (Lo-Dash, D3, RBush)
-* Build iD.Way.areaKeys from presets
+* Update 3rd party dependencies (Lodash, D3, RBush)
+* Build areaKeys from presets
 * Add public_transport, military, emankment presets
 * Reverse cardinal directions for relation member roles
 * Improved warning visibility (#1973)

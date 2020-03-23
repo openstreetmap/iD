@@ -19,7 +19,7 @@ export function uiFieldRadio(field, context) {
     var typeField;
     var layerField;
     var _oldType = {};
-    var _entity;
+    var _entityIDs = [];
 
 
     function selectedKey() {
@@ -104,7 +104,7 @@ export function uiFieldRadio(field, context) {
         // Type
         if (type) {
             if (!typeField || typeField.id !== selected) {
-                typeField = uiField(context, type, _entity, { wrap: false })
+                typeField = uiField(context, type, _entityIDs, { wrap: false })
                     .on('change', changeType);
             }
             typeField.tags(tags);
@@ -147,7 +147,7 @@ export function uiFieldRadio(field, context) {
         // Layer
         if (layer && showLayer) {
             if (!layerField) {
-                layerField = uiField(context, layer, _entity, { wrap: false })
+                layerField = uiField(context, layer, _entityIDs, { wrap: false })
                     .on('change', changeLayer);
             }
             layerField.tags(tags);
@@ -264,16 +264,34 @@ export function uiFieldRadio(field, context) {
 
 
     radio.tags = function(tags) {
-        function checked(d) {
+
+        radios.property('checked', function(d) {
             if (field.key) {
                 return tags[field.key] === d;
-            } else {
-                return !!(tags[d] && tags[d].toLowerCase() !== 'no');
             }
+            return !!(typeof tags[d] === 'string' && tags[d].toLowerCase() !== 'no');
+        });
+
+        function isMixed(d) {
+            if (field.key) {
+                return Array.isArray(tags[field.key]) && tags[field.key].includes(d);
+            }
+            return Array.isArray(tags[d]);
         }
 
-        labels.classed('active', checked);
-        radios.property('checked', checked);
+        labels
+            .classed('active', function(d) {
+                if (field.key) {
+                    return (Array.isArray(tags[field.key]) && tags[field.key].includes(d))
+                        || tags[field.key] === d;
+                }
+                return Array.isArray(tags[d]) || !!(tags[d] && tags[d].toLowerCase() !== 'no');
+            })
+            .classed('mixed', isMixed)
+            .attr('title', function(d) {
+                return isMixed(d) ? t('inspector.unshared_value_tooltip') : null;
+            });
+
 
         var selection = radios.filter(function() { return this.checked; });
 
@@ -301,11 +319,16 @@ export function uiFieldRadio(field, context) {
     };
 
 
-    radio.entity = function(val) {
-        if (!arguments.length) return _entity;
-        _entity = val;
+    radio.entityIDs = function(val) {
+        if (!arguments.length) return _entityIDs;
+        _entityIDs = val;
         _oldType = {};
         return radio;
+    };
+
+
+    radio.isAllowed = function() {
+        return _entityIDs.length === 1;
     };
 
 

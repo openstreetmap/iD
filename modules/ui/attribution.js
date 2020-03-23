@@ -4,102 +4,103 @@ import { t } from '../util/locale';
 
 
 export function uiAttribution(context) {
-    var selection;
+  let _selection = d3_select(null);
 
 
-    function attribution(data, klass) {
-        var div = selection.selectAll('.' + klass)
-            .data([0]);
+  function render(selection, data, klass) {
+    let div = selection.selectAll(`.${klass}`)
+      .data([0]);
 
-        div = div.enter()
-            .append('div')
-            .attr('class', klass)
-            .merge(div);
-
-
-        var background = div.selectAll('.attribution')
-            .data(data, function(d) { return d.name(); });
-
-        background.exit()
-            .remove();
-
-        background = background.enter()
-            .append('span')
-            .attr('class', 'attribution')
-            .each(function(d) {
-                if (d.terms_html) {
-                    d3_select(this)
-                        .html(d.terms_html);
-                    return;
-                }
-
-                var selection;
-                if (d.terms_url) {
-                    selection = d3_select(this)
-                        .append('a')
-                        .attr('href', d.terms_url)
-                        .attr('target', '_blank');
-                } else {
-                    selection = d3_select(this);
-                }
+    div = div.enter()
+      .append('div')
+      .attr('class', klass)
+      .merge(div);
 
 
-                var id_safe = d.id.replace(/\./g, '<TX_DOT>');
-                var terms_text = t('imagery.' + id_safe + '.attribution.text',
-                    { default: d.terms_text || d.id || d.name() }
-                );
+    let attributions = div.selectAll('.attribution')
+      .data(data, d => d.id);
 
-                if (d.icon && !d.overlay) {
-                    selection
-                        .append('img')
-                        .attr('class', 'source-image')
-                        .attr('src', d.icon);
-                }
+    attributions.exit()
+      .remove();
 
-                selection
-                    .append('span')
-                    .attr('class', 'attribution-text')
-                    .text(terms_text);
-            })
-            .merge(background);
+    attributions = attributions.enter()
+      .append('span')
+      .attr('class', 'attribution')
+      .each((d, i, nodes) => {
+        let attribution = d3_select(nodes[i]);
 
+        if (d.terms_html) {
+          attribution.html(d.terms_html);
+          return;
+        }
 
-        var copyright = background.selectAll('.copyright-notice')
-            .data(function(d) {
-                var notice = d.copyrightNotices(context.map().zoom(), context.map().extent());
-                return notice ? [notice] : [];
-            });
+        if (d.terms_url) {
+          attribution = attribution
+            .append('a')
+            .attr('href', d.terms_url)
+            .attr('target', '_blank');
+        }
 
-        copyright.exit()
-            .remove();
+        const sourceID = d.id.replace(/\./g, '<TX_DOT>');
+        const terms_text = t(`imagery.${sourceID}.attribution.text`,
+          { default: d.terms_text || d.id || d.name() }
+        );
 
-        copyright = copyright.enter()
-            .append('span')
-            .attr('class', 'copyright-notice')
-            .merge(copyright);
+        if (d.icon && !d.overlay) {
+          attribution
+            .append('img')
+            .attr('class', 'source-image')
+            .attr('src', d.icon);
+        }
 
-        copyright
-            .text(String);
-    }
-
-
-    function update() {
-        attribution([context.background().baseLayerSource()], 'base-layer-attribution');
-        attribution(context.background().overlayLayerSources().filter(function (s) {
-            return s.validZoom(context.map().zoom());
-        }), 'overlay-layer-attribution');
-    }
+        attribution
+          .append('span')
+          .attr('class', 'attribution-text')
+          .text(terms_text);
+      })
+      .merge(attributions);
 
 
-    return function(select) {
-        selection = select;
+    let copyright = attributions.selectAll('.copyright-notice')
+      .data(d => {
+        let notice = d.copyrightNotices(context.map().zoom(), context.map().extent());
+        return notice ? [notice] : [];
+      });
 
-        context.background()
-            .on('change.attribution', update);
+    copyright.exit()
+      .remove();
 
-        context.map()
-            .on('move.attribution', _throttle(update, 400, {leading: false}));
+    copyright = copyright.enter()
+      .append('span')
+      .attr('class', 'copyright-notice')
+      .merge(copyright);
 
-        update();
-    };
+    copyright
+      .text(String);
+  }
+
+
+  function update() {
+    let baselayer = context.background().baseLayerSource();
+    _selection
+      .call(render, (baselayer ? [baselayer] : []), 'base-layer-attribution');
+
+    const z = context.map().zoom();
+    let overlays = context.background().overlayLayerSources() || [];
+    _selection
+      .call(render, overlays.filter(s => s.validZoom(z)), 'overlay-layer-attribution');
+  }
+
+
+  return function(selection) {
+    _selection = selection;
+
+    context.background()
+      .on('change.attribution', update);
+
+    context.map()
+      .on('move.attribution', _throttle(update, 400, { leading: false }));
+
+    update();
+  };
 }

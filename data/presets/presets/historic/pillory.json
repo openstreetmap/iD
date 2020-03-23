@@ -1,0 +1,20 @@
+{
+    "icon": "maki-monument",
+    "fields": [
+        "name",
+        "building_area",
+        "access_simple",
+        "start_date"
+    ],
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "tags": {
+        "historic": "pillory"
+    },
+    "terms": [
+        "attraction"
+    ],
+    "name": "Historic Pillory"
+}

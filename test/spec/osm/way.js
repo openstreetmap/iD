@@ -1,4 +1,16 @@
 describe('iD.osmWay', function() {
+    var _savedAreaKeys;
+
+    before(function() {
+        _savedAreaKeys = iD.osmAreaKeys;
+        iD.osmSetAreaKeys({ building: {} });
+    });
+
+    after(function() {
+        iD.osmSetAreaKeys(_savedAreaKeys);
+    });
+
+
     if (iD.debug) {
         it('freezes nodes', function () {
             expect(Object.isFrozen(iD.osmWay().nodes)).to.be.true;
@@ -405,10 +417,6 @@ describe('iD.osmWay', function() {
     });
 
     describe('#isArea', function() {
-        before(function() {
-            iD.coreContext();
-        });
-
         it('returns false when the way has no tags', function() {
             expect(iD.osmWay().isArea()).to.equal(false);
         });
@@ -421,7 +429,7 @@ describe('iD.osmWay', function() {
             expect(iD.osmWay({nodes: ['n1', 'n1']}).isArea()).to.equal(false);
         });
 
-        it('returns true if the way is closed and has a key in iD.areaKeys', function() {
+        it('returns true if the way is closed and has a key in iD.osmAreaKeys', function() {
             expect(iD.osmWay({nodes: ['n1', 'n1'], tags: {building: 'yes'}}).isArea()).to.equal(true);
         });
 
@@ -435,7 +443,7 @@ describe('iD.osmWay', function() {
             expect(iD.osmWay({nodes: ['n1', 'n1'], tags: { railway: 'wash' }}).isArea(), 'railway=wash').to.equal(true);
         });
 
-        it('returns false if the way is closed and has no keys in iD.areaKeys', function() {
+        it('returns false if the way is closed and has no keys in iD.osmAreaKeys', function() {
             expect(iD.osmWay({nodes: ['n1', 'n1'], tags: {a: 'b'}}).isArea()).to.equal(false);
         });
 

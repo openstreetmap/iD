@@ -1,7 +1,17 @@
 describe('iD.presetPreset', function() {
-    it('has optional fields', function() {
-        var preset = iD.presetPreset('test', {});
-        expect(preset.fields).to.eql([]);
+
+    describe('#fields', function() {
+        it('has no fields by default', function() {
+            var preset = iD.presetPreset('test', {});
+            expect(preset.fields()).to.eql([]);
+        });
+    });
+
+    describe('#moreFields', function() {
+        it('has no moreFields by default', function() {
+            var preset = iD.presetPreset('test', {});
+            expect(preset.moreFields()).to.eql([]);
+        });
     });
 
     describe('#matchGeometry', function() {
@@ -13,6 +23,18 @@ describe('iD.presetPreset', function() {
         it('returns true if it does match', function() {
             var preset = iD.presetPreset('test', {geometry: ['point', 'line']});
             expect(preset.matchGeometry('point')).to.equal(true);
+        });
+    });
+
+    describe('#matchAllGeometry', function() {
+        it('returns false if they don\'t all match', function() {
+            var preset = iD.presetPreset('test', {geometry: ['line']});
+            expect(preset.matchAllGeometry(['point','line'])).to.equal(false);
+        });
+
+        it('returns true if they do all match', function() {
+            var preset = iD.presetPreset('test', {geometry: ['point', 'line']});
+            expect(preset.matchAllGeometry(['point','line'])).to.equal(true);
         });
     });
 
@@ -97,15 +119,15 @@ describe('iD.presetPreset', function() {
     });
 
     describe('#setTags', function() {
-        var savedAreaKeys;
+        var _savedAreaKeys;
 
         before(function () {
-            savedAreaKeys = iD.areaKeys;
-            iD.setAreaKeys({ building: {}, natural: {} });
+            _savedAreaKeys = iD.osmAreaKeys;
+            iD.osmSetAreaKeys({ building: {}, natural: {} });
         });
 
         after(function () {
-            iD.setAreaKeys(savedAreaKeys);
+            iD.osmSetAreaKeys(_savedAreaKeys);
         });
 
         it('adds match tags', function() {
@@ -124,14 +146,16 @@ describe('iD.presetPreset', function() {
         });
 
         it('adds default tags of fields with matching geometry', function() {
+            var isAddable = true;
             var field = iD.presetField('field', {key: 'building', geometry: 'area', default: 'yes'});
-            var preset = iD.presetPreset('test', {fields: ['field']}, {field: field});
+            var preset = iD.presetPreset('test', {fields: ['field']}, isAddable, {field: field});
             expect(preset.setTags({}, 'area')).to.eql({area: 'yes', building: 'yes'});
         });
 
         it('adds no default tags of fields with non-matching geometry', function() {
+            var isAddable = true;
             var field = iD.presetField('field', {key: 'building', geometry: 'area', default: 'yes'});
-            var preset = iD.presetPreset('test', {fields: ['field']}, {field: field});
+            var preset = iD.presetPreset('test', {fields: ['field']}, isAddable, {field: field});
             expect(preset.setTags({}, 'point')).to.eql({});
         });
 
@@ -167,8 +191,9 @@ describe('iD.presetPreset', function() {
         });
 
         it('removes tags that match field default tags', function() {
-            var field = iD.presetField('field', {key: 'building', geometry: 'area', default: 'yes'}),
-                preset = iD.presetPreset('test', {fields: ['field']}, {field: field});
+            var isAddable = true;
+            var field = iD.presetField('field', {key: 'building', geometry: 'area', default: 'yes'});
+            var preset = iD.presetPreset('test', {fields: ['field']}, isAddable, {field: field});
             expect(preset.unsetTags({building: 'yes'}, 'area')).to.eql({});
         });
 
@@ -178,8 +203,9 @@ describe('iD.presetPreset', function() {
         });
 
         it('preserves tags that do not match field default tags', function() {
-            var field = iD.presetField('field', {key: 'building', geometry: 'area', default: 'yes'}),
-                preset = iD.presetPreset('test', {fields: ['field']}, {field: field});
+            var isAddable = true;
+            var field = iD.presetField('field', {key: 'building', geometry: 'area', default: 'yes'});
+            var preset = iD.presetPreset('test', {fields: ['field']}, isAddable, {field: field});
             expect(preset.unsetTags({building: 'yep'}, 'area')).to.eql({ building: 'yep'});
         });
 
@@ -194,12 +220,12 @@ describe('iD.presetPreset', function() {
         });
     });
 
-    describe('#visible', function() {
-        it('sets/gets visibility of preset', function() {
+    describe('#addable', function() {
+        it('sets/gets addability of preset', function() {
             var preset = iD.presetPreset('test', {}, false);
-            expect(preset.visible()).to.be.false;
-            preset.visible(true);
-            expect(preset.visible()).to.be.true;
+            expect(preset.addable()).to.be.false;
+            preset.addable(true);
+            expect(preset.addable()).to.be.true;
         });
     });
 });

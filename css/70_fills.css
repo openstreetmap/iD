@@ -46,7 +46,7 @@
 .fill-partial path.area.fill.tag-indoor {
     stroke-width: 20px;
 }
-.mode-browse .fill-partial path.area.fill,
-.mode-select .fill-partial path.area.fill {
+.ideditor.mode-browse .fill-partial path.area.fill,
+.ideditor.mode-select .fill-partial path.area.fill {
     pointer-events: visibleStroke;
 }

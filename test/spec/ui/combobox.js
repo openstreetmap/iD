@@ -15,7 +15,7 @@ describe('uiCombobox', function() {
         var start = input.property('selectionStart');
         var finis = input.property('selectionEnd');
 
-        iD.d3.customEvent(happen.makeEvent({
+        d3.customEvent(happen.makeEvent({
             type: 'keydown',
             keyCode: keyCode
         }), input.on('keydown.combo-input'));
@@ -65,8 +65,8 @@ describe('uiCombobox', function() {
 
     beforeEach(function() {
         body = d3.select('body');
-        container = body.append('div').attr('class', 'id-container');
-        context = iD.coreContext().container(container);
+        container = body.append('div').attr('class', 'ideditor');
+        context = iD.coreContext().container(container).init();
         content = container.append('div');
         input = content.append('input');
         combobox = iD.uiCombobox(context);
@@ -92,7 +92,7 @@ describe('uiCombobox', function() {
         input.call(combobox.data(data));
         focusTypeahead(input);
         simulateKeypress('↓');
-        expect(d3.select('.id-container > div.combobox').nodes().length).to.equal(1);
+        expect(d3.select('.ideditor > div.combobox').nodes().length).to.equal(1);
     });
 
     it('filters entries to those matching the value', function() {

@@ -1,9 +1,21 @@
 describe('iD.validations.outdated_tags', function () {
     var context;
 
-    beforeEach(function() {
-        context = iD.coreContext();
+    before(function() {
+        iD.data.deprecated = [
+          { old: { highway: 'no' } },
+          { old: { highway: 'ford' }, replace: { ford: '*' } }
+        ];
     });
+
+    after(function() {
+        iD.data.deprecated = [];
+    });
+
+    beforeEach(function() {
+        context = iD.coreContext().init();
+    });
+
 
     function createWay(tags) {
         var n1 = iD.osmNode({id: 'n-1', loc: [4,4]});
@@ -33,8 +45,7 @@ describe('iD.validations.outdated_tags', function () {
         );
     }
 
-    function validate() {
-        var validator = iD.validationOutdatedTags(context);
+    function validate(validator) {
         var changes = context.history().changes();
         var entities = changes.modified.concat(changes.created);
         var issues = [];
@@ -44,63 +55,91 @@ describe('iD.validations.outdated_tags', function () {
         return issues;
     }
 
-    it('has no errors on init', function() {
-        var issues = validate();
-        expect(issues).to.have.lengthOf(0);
+    it('has no errors on init', function(done) {
+        var validator = iD.validationOutdatedTags(context);
+        window.setTimeout(function() {   // async, so data will be available
+            var issues = validate(validator);
+            expect(issues).to.have.lengthOf(0);
+            done();
+        }, 20);
     });
 
-    it('has no errors on good tags', function() {
+    it('has no errors on good tags', function(done) {
         createWay({'highway': 'unclassified'});
-        var issues = validate();
-        expect(issues).to.have.lengthOf(0);
+        var validator = iD.validationOutdatedTags(context);
+        window.setTimeout(function() {   // async, so data will be available
+            var issues = validate(validator);
+            expect(issues).to.have.lengthOf(0);
+            done();
+        }, 20);
     });
 
-    it('flags deprecated tag with replacement', function() {
+    it('flags deprecated tag with replacement', function(done) {
         createWay({'highway': 'ford'});
-        var issues = validate();
-        expect(issues).to.have.lengthOf(1);
-        var issue = issues[0];
-        expect(issue.type).to.eql('outdated_tags');
-        expect(issue.subtype).to.eql('deprecated_tags');
-        expect(issue.severity).to.eql('warning');
-        expect(issue.entityIds).to.have.lengthOf(1);
-        expect(issue.entityIds[0]).to.eql('w-1');
+        var validator = iD.validationOutdatedTags(context);
+        window.setTimeout(function() {   // async, so data will be available
+            var issues = validate(validator);
+            expect(issues).to.have.lengthOf(1);
+            var issue = issues[0];
+            expect(issue.type).to.eql('outdated_tags');
+            expect(issue.subtype).to.eql('deprecated_tags');
+            expect(issue.severity).to.eql('warning');
+            expect(issue.entityIds).to.have.lengthOf(1);
+            expect(issue.entityIds[0]).to.eql('w-1');
+            done();
+        }, 20);
     });
 
-    it('flags deprecated tag with no replacement', function() {
+    it('flags deprecated tag with no replacement', function(done) {
         createWay({'highway': 'no'});
-        var issues = validate();
-        expect(issues).to.have.lengthOf(1);
-        var issue = issues[0];
-        expect(issue.type).to.eql('outdated_tags');
-        expect(issue.subtype).to.eql('deprecated_tags');
-        expect(issue.severity).to.eql('warning');
-        expect(issue.entityIds).to.have.lengthOf(1);
-        expect(issue.entityIds[0]).to.eql('w-1');
+        var validator = iD.validationOutdatedTags(context);
+        window.setTimeout(function() {   // async, so data will be available
+            var issues = validate(validator);
+            expect(issues).to.have.lengthOf(1);
+            var issue = issues[0];
+            expect(issue.type).to.eql('outdated_tags');
+            expect(issue.subtype).to.eql('deprecated_tags');
+            expect(issue.severity).to.eql('warning');
+            expect(issue.entityIds).to.have.lengthOf(1);
+            expect(issue.entityIds[0]).to.eql('w-1');
+            done();
+        }, 20);
     });
 
-    it('ignores way with no relations', function() {
+    it('ignores way with no relations', function(done) {
         createWay({});
-        var issues = validate();
-        expect(issues).to.have.lengthOf(0);
+        var validator = iD.validationOutdatedTags(context);
+        window.setTimeout(function() {   // async, so data will be available
+            var issues = validate(validator);
+            expect(issues).to.have.lengthOf(0);
+            done();
+        }, 20);
     });
 
-    it('ignores multipolygon tagged on the relation', function() {
+    it('ignores multipolygon tagged on the relation', function(done) {
         createRelation({}, { type: 'multipolygon', building: 'yes' });
-        var issues = validate();
-        expect(issues).to.have.lengthOf(0);
+        var validator = iD.validationOutdatedTags(context);
+        window.setTimeout(function() {   // async, so data will be available
+            var issues = validate(validator);
+            expect(issues).to.have.lengthOf(0);
+            done();
+        }, 20);
     });
 
-    it('flags multipolygon tagged on the outer way', function() {
+    it('flags multipolygon tagged on the outer way', function(done) {
         createRelation({ building: 'yes' }, { type: 'multipolygon' });
-        var issues = validate();
-        expect(issues).to.not.have.lengthOf(0);
-        var issue = issues[0];
-        expect(issue.type).to.eql('outdated_tags');
-        expect(issue.subtype).to.eql('old_multipolygon');
-        expect(issue.entityIds).to.have.lengthOf(2);
-        expect(issue.entityIds[0]).to.eql('w-1');
-        expect(issue.entityIds[1]).to.eql('r-1');
+        var validator = iD.validationOutdatedTags(context);
+        window.setTimeout(function() {   // async, so data will be available
+            var issues = validate(validator);
+            expect(issues).to.not.have.lengthOf(0);
+            var issue = issues[0];
+            expect(issue.type).to.eql('outdated_tags');
+            expect(issue.subtype).to.eql('old_multipolygon');
+            expect(issue.entityIds).to.have.lengthOf(2);
+            expect(issue.entityIds[0]).to.eql('w-1');
+            expect(issue.entityIds[1]).to.eql('r-1');
+            done();
+        }, 20);
     });
 
 });

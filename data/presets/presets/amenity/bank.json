@@ -5,6 +5,7 @@
         "operator",
         "address",
         "building_area",
+        "opening_hours",
         "atm",
         "drive_through"
     ],
@@ -19,7 +20,6 @@
         "internet_access/fee",
         "internet_access/ssid",
         "level",
-        "opening_hours",
         "phone",
         "ref/vatin",
         "website",

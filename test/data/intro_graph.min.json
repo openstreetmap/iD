@@ -1,0 +1,15 @@
+{
+  "n1": {
+    "id": "n1",
+    "loc": [-85.636433, 41.942959],
+    "tags": {
+      "addr:city": "Three Rivers",
+      "addr:housenumber": "333",
+      "addr:postcode": "49093",
+      "addr:state": "MI",
+      "addr:street": "Michigan Avenue",
+      "amenity": "townhall",
+      "name": "Three Rivers City Hall"
+    }
+  }
+}

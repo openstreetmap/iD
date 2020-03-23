@@ -1,13 +1,10 @@
 {
     "icon": "temaki-subway",
     "fields": [
-        "{railway/rail}"
+        "{railway/light_rail}"
     ],
     "moreFields": [
-        "covered",
-        "frequency_electrified",
-        "maxspeed",
-        "voltage_electrified"
+        "{railway/light_rail}"
     ],
     "geometry": [
         "line"
@@ -17,7 +14,8 @@
     },
     "terms": [
         "metro",
-        "transit"
+        "transit",
+        "underground railway"
     ],
-    "name": "Subway"
+    "name": "Subway Track"
 }

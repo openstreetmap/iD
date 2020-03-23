@@ -1,0 +1,46 @@
+{
+    "icon": "temaki-wind_turbine",
+    "fields": [
+        "name",
+        "operator",
+        "address",
+        "plant/output/electricity",
+        "start_date"
+    ],
+    "moreFields": [
+        "{power/plant}"
+    ],
+    "geometry": [
+        "area"
+    ],
+    "tags": {
+        "power": "plant",
+        "plant:source": "wind"
+    },
+    "addTags": {
+        "power": "plant",
+        "plant:source": "wind",
+        "plant:method": "wind_turbine",
+        "plant:output:electricity": "*"
+    },
+    "removeTags": {
+        "power": "plant",
+        "plant:method": "*",
+        "plant:source": "wind",
+        "plant:output:electricity": "*",
+        "landuse": "industrial"
+    },
+    "reference": {
+        "key": "plant:source",
+        "value": "wind"
+    },
+    "terms": [
+        "offshore wind",
+        "wind park",
+        "wind power plant",
+        "wind power station",
+        "wind turbines",
+        "windmills"
+    ],
+    "name": "Wind Farm"
+}

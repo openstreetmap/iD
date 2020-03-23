@@ -3,16 +3,15 @@ import { select as d3_select } from 'd3-selection';
 import deepEqual from 'fast-deep-equal';
 
 import { t } from '../util/locale';
-import { modeBrowse } from '../modes/browse';
 import { osmChangeset } from '../osm';
 import { svgIcon } from '../svg/icon';
 import { services } from '../services';
 import { tooltip } from '../util/tooltip';
 import { uiChangesetEditor } from './changeset_editor';
-import { uiCommitChanges } from './commit_changes';
+import { uiSectionChanges } from './sections/changes';
 import { uiCommitWarnings } from './commit_warnings';
-import { uiRawTagEditor } from './raw_tag_editor';
-import { utilArrayGroupBy, utilRebind } from '../util';
+import { uiSectionRawTagEditor } from './sections/raw_tag_editor';
+import { utilArrayGroupBy, utilRebind, utilUniqueDomId } from '../util';
 import { utilDetect } from '../util/detect';
 
 
@@ -25,7 +24,11 @@ var readOnlyTags = [
     /^host$/,
     /^locale$/,
     /^warnings:/,
-    /^resolved:/
+    /^resolved:/,
+    /^closed:note$/,
+    /^closed:keepright$/,
+    /^closed:improveosm:/,
+    /^closed:osmose:/
 ];
 
 // treat most punctuation (except -, _, +, &) as hashtag delimiters - #4398
@@ -34,15 +37,16 @@ var hashtagRegex = /(#[^\u2000-\u206F\u2E00-\u2E7F\s\\'!"#$%()*,.\/:;<=>?@\[\]^`
 
 
 export function uiCommit(context) {
-    var dispatch = d3_dispatch('cancel', 'save');
+    var dispatch = d3_dispatch('cancel');
     var _userDetails;
     var _selection;
 
     var changesetEditor = uiChangesetEditor(context)
         .on('change', changeTags);
-    var rawTagEditor = uiRawTagEditor(context)
-        .on('change', changeTags);
-    var commitChanges = uiCommitChanges(context);
+    var rawTagEditor = uiSectionRawTagEditor('changeset-tag-editor', context)
+        .on('change', changeTags)
+        .readOnlyTags(readOnlyTags);
+    var commitChanges = uiSectionChanges(context);
     var commitWarnings = uiCommitWarnings(context);
 
 
@@ -51,6 +55,8 @@ export function uiCommit(context) {
 
         var osm = context.connection();
         if (!osm) return;
+
+        var tagCharLimit = context.maxCharsForTagValue();
 
         // expire stored comment, hashtags, source after cutoff datetime - #3947 #4899
         var commentDate = +context.storage('commentDate') || 0;
@@ -84,9 +90,9 @@ export function uiCommit(context) {
             var detected = utilDetect();
             tags = {
                 comment: context.storage('comment') || '',
-                created_by: ('iD ' + context.version).substr(0, 255),
-                host: detected.host.substr(0, 255),
-                locale: detected.locale.substr(0, 255)
+                created_by: ('iD ' + context.version).substr(0, tagCharLimit),
+                host: detected.host.substr(0, tagCharLimit),
+                locale: detected.locale.substr(0, tagCharLimit)
             };
 
             // call findHashtags initially - this will remove stored
@@ -118,7 +124,7 @@ export function uiCommit(context) {
                     }
                 });
 
-                tags.source = sources.join(';').substr(0, 255);
+                tags.source = sources.join(';').substr(0, tagCharLimit);
             }
 
             _changeset = new osmChangeset({ tags: tags });
@@ -127,24 +133,31 @@ export function uiCommit(context) {
         tags = Object.assign({}, _changeset.tags);   // shallow copy
 
         // assign tags for imagery used
-        var imageryUsed = context.history().imageryUsed().join(';').substr(0, 255);
+        var imageryUsed = context.history().imageryUsed().join(';').substr(0, tagCharLimit);
         tags.imagery_used = imageryUsed || 'None';
 
         // assign tags for closed issues and notes
         var osmClosed = osm.getClosedIDs();
+        var itemType;
         if (osmClosed.length) {
-            tags['closed:note'] = osmClosed.join(';').substr(0, 255);
+            tags['closed:note'] = osmClosed.join(';').substr(0, tagCharLimit);
         }
         if (services.keepRight) {
             var krClosed = services.keepRight.getClosedIDs();
             if (krClosed.length) {
-                tags['closed:keepright'] = krClosed.join(';').substr(0, 255);
+                tags['closed:keepright'] = krClosed.join(';').substr(0, tagCharLimit);
             }
         }
         if (services.improveOSM) {
-            var iOsmClosed = services.improveOSM.getClosedIDs();
-            if (iOsmClosed.length) {
-                tags['closed:improveosm'] = iOsmClosed.join(';').substr(0, 255);
+            var iOsmClosed = services.improveOSM.getClosedCounts();
+            for (itemType in iOsmClosed) {
+                tags['closed:improveosm:' + itemType] = iOsmClosed[itemType].toString().substr(0, tagCharLimit);
+            }
+        }
+        if (services.osmose) {
+            var osmoseClosed = services.osmose.getClosedCounts();
+            for (itemType in osmoseClosed) {
+                tags['closed:osmose:' + itemType] = osmoseClosed[itemType].toString().substr(0, tagCharLimit);
             }
         }
 
@@ -163,10 +176,10 @@ export function uiCommit(context) {
                     var issuesBySubtype = utilArrayGroupBy(issuesOfType, 'subtype');
                     for (var issueSubtype in issuesBySubtype) {
                         var issuesOfSubtype = issuesBySubtype[issueSubtype];
-                        tags[prefix + ':' + issueType + ':' + issueSubtype] = issuesOfSubtype.length.toString().substr(0, 255);
+                        tags[prefix + ':' + issueType + ':' + issueSubtype] = issuesOfSubtype.length.toString().substr(0, tagCharLimit);
                     }
                 } else {
-                    tags[prefix + ':' + issueType] = issuesOfType.length.toString().substr(0, 255);
+                    tags[prefix + ':' + issueType] = issuesOfType.length.toString().substr(0, tagCharLimit);
                 }
             }
         }
@@ -204,7 +217,9 @@ export function uiCommit(context) {
             .attr('class', 'header-block header-block-outer header-block-close')
             .append('button')
             .attr('class', 'close')
-            .on('click', function() { context.enter(modeBrowse(context)); })
+            .on('click', function() {
+                dispatch.call('cancel', this);
+            })
             .call(svgIcon('#iD-icon-close'));
 
         var body = selection.selectAll('.body')
@@ -296,14 +311,16 @@ export function uiCommit(context) {
             .append('div')
             .attr('class', 'request-review');
 
+        var requestReviewDomId = utilUniqueDomId('commit-input-request-review');
+
         var labelEnter = requestReviewEnter
             .append('label')
-            .attr('for', 'commit-input-request-review');
+            .attr('for', requestReviewDomId);
 
         labelEnter
             .append('input')
             .attr('type', 'checkbox')
-            .attr('id', 'commit-input-request-review');
+            .attr('id', requestReviewDomId);
 
         labelEnter
             .append('span')
@@ -350,8 +367,7 @@ export function uiCommit(context) {
 
         buttonSection.selectAll('.cancel-button')
             .on('click.cancel', function() {
-                var selectedID = commitChanges.entityID();
-                dispatch.call('cancel', this, selectedID);
+                dispatch.call('cancel', this);
             });
 
         buttonSection.selectAll('.save-button')
@@ -359,7 +375,7 @@ export function uiCommit(context) {
             .on('click.save', function() {
                 if (!d3_select(this).classed('disabled')) {
                     this.blur();    // avoid keeping focus on the button - #4641
-                    dispatch.call('save', this, _changeset);
+                    context.uploader().save(_changeset);
                 }
             });
 
@@ -380,29 +396,32 @@ export function uiCommit(context) {
             .attr('class', 'modal-section tag-section raw-tag-editor')
             .merge(tagSection);
 
-        var expanded = !tagSection.selectAll('a.hide-toggle.expanded').empty();
         tagSection
             .call(rawTagEditor
-                .expanded(expanded)
-                .readOnlyTags(readOnlyTags)
                 .tags(Object.assign({}, _changeset.tags))   // shallow copy
+                .render
             );
 
+        var changesSection = body.selectAll('.commit-changes-section')
+            .data([0]);
+
+        changesSection = changesSection.enter()
+            .append('div')
+            .attr('class', 'modal-section commit-changes-section')
+            .merge(changesSection);
 
         // Change summary
-        body.call(commitChanges);
+        changesSection.call(commitChanges.render);
 
 
         function toggleRequestReview() {
             var rr = requestReviewInput.property('checked');
             updateChangeset({ review_requested: (rr ? 'yes' : undefined) });
 
-            var expanded = !tagSection.selectAll('a.hide-toggle.expanded').empty();
             tagSection
                 .call(rawTagEditor
-                    .expanded(expanded)
-                    .readOnlyTags(readOnlyTags)
                     .tags(Object.assign({}, _changeset.tags))   // shallow copy
+                    .render
                 );
         }
     }
@@ -416,8 +435,7 @@ export function uiCommit(context) {
             return t('commit.outstanding_errors_message', { count: errors.length });
 
         } else {
-            var n = d3_select('#preset-input-comment').node();
-            var hasChangesetComment = n && n.value.length > 0;
+            var hasChangesetComment = _changeset && _changeset.tags.comment && _changeset.tags.comment.trim().length;
             if (!hasChangesetComment) {
                 return t('commit.comment_needed_message');
             }
@@ -426,7 +444,7 @@ export function uiCommit(context) {
     }
 
 
-    function changeTags(changed, onInput) {
+    function changeTags(_, changed, onInput) {
         if (changed.hasOwnProperty('comment')) {
             if (changed.comment === undefined) {
                 changed.comment = '';
@@ -513,16 +531,18 @@ export function uiCommit(context) {
     function updateChangeset(changed, onInput) {
         var tags = Object.assign({}, _changeset.tags);   // shallow copy
 
+        var tagCharLimit = context.maxCharsForTagValue();
+
         Object.keys(changed).forEach(function(k) {
             var v = changed[k];
-            k = k.trim().substr(0, 255);
+            k = k.trim().substr(0, tagCharLimit);
             if (readOnlyTags.indexOf(k) !== -1) return;
 
             if (k !== '' && v !== undefined) {
                 if (onInput) {
                     tags[k] = v;
                 } else {
-                    tags[k] = v.trim().substr(0, 255);
+                    tags[k] = v.trim().substr(0, tagCharLimit);
                 }
             } else {
                 delete tags[k];
@@ -534,7 +554,7 @@ export function uiCommit(context) {
             var commentOnly = changed.hasOwnProperty('comment') && (changed.comment !== '');
             var arr = findHashtags(tags, commentOnly);
             if (arr.length) {
-                tags.hashtags = arr.join(';').substr(0, 255);
+                tags.hashtags = arr.join(';').substr(0, tagCharLimit);
                 context.storage('hashtags', tags.hashtags);
             } else {
                 delete tags.hashtags;

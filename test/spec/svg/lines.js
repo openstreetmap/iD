@@ -9,9 +9,9 @@ describe('iD.svgLines', function () {
 
 
     beforeEach(function () {
-        context = iD.coreContext();
+        context = iD.coreContext().init();
         d3.select(document.createElement('div'))
-            .attr('id', 'map')
+            .attr('class', 'main-map')
             .call(context.map().centerZoom([0, 0], 17));
         surface = context.surface();
     });
@@ -162,9 +162,9 @@ describe('iD.svgLines', function () {
             var selection = surface.selectAll('g.onewaygroup > path');
 
             expect(selection.size()).to.eql(3);
-            expect(selection.nodes()[0].attributes['marker-mid'].nodeValue).to.eql('url(#oneway-marker)');
-            expect(selection.nodes()[1].attributes['marker-mid'].nodeValue).to.eql('url(#oneway-marker)');
-            expect(selection.nodes()[2].attributes['marker-mid'].nodeValue).to.eql('url(#oneway-marker)');
+            expect(selection.nodes()[0].attributes['marker-mid'].nodeValue).to.eql('url(#ideditor-oneway-marker)');
+            expect(selection.nodes()[1].attributes['marker-mid'].nodeValue).to.eql('url(#ideditor-oneway-marker)');
+            expect(selection.nodes()[2].attributes['marker-mid'].nodeValue).to.eql('url(#ideditor-oneway-marker)');
         });
 
         it('has two marker layers for alternating oneway ways', function() {
@@ -179,8 +179,8 @@ describe('iD.svgLines', function () {
 
             var selection = surface.selectAll('g.onewaygroup > path');
             expect(selection.size()).to.eql(2);
-            expect(selection.nodes()[0].attributes['marker-mid'].nodeValue).to.eql('url(#oneway-marker)');
-            expect(selection.nodes()[1].attributes['marker-mid'].nodeValue).to.eql('url(#oneway-marker)');
+            expect(selection.nodes()[0].attributes['marker-mid'].nodeValue).to.eql('url(#ideditor-oneway-marker)');
+            expect(selection.nodes()[1].attributes['marker-mid'].nodeValue).to.eql('url(#ideditor-oneway-marker)');
         });
 
         it('has no marker layer for oneway=no ways', function() {
@@ -216,10 +216,10 @@ describe('iD.svgLines', function () {
             surface.call(iD.svgLines(projection, context), graph, [i_n, i_nc, i_b, i_mm], all);
             var selection = surface.selectAll('g.sidedgroup > path');
             expect(selection.size()).to.eql(4);
-            expect(selection.nodes()[0].attributes['marker-mid'].nodeValue).to.eql('url(#sided-marker-natural)');
-            expect(selection.nodes()[1].attributes['marker-mid'].nodeValue).to.eql('url(#sided-marker-coastline)');
-            expect(selection.nodes()[2].attributes['marker-mid'].nodeValue).to.eql('url(#sided-marker-barrier)');
-            expect(selection.nodes()[3].attributes['marker-mid'].nodeValue).to.eql('url(#sided-marker-man_made)');
+            expect(selection.nodes()[0].attributes['marker-mid'].nodeValue).to.eql('url(#ideditor-sided-marker-natural)');
+            expect(selection.nodes()[1].attributes['marker-mid'].nodeValue).to.eql('url(#ideditor-sided-marker-coastline)');
+            expect(selection.nodes()[2].attributes['marker-mid'].nodeValue).to.eql('url(#ideditor-sided-marker-barrier)');
+            expect(selection.nodes()[3].attributes['marker-mid'].nodeValue).to.eql('url(#ideditor-sided-marker-man_made)');
         });
 
         it('has no marker layer for two_sided way', function() {

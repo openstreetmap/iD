@@ -27,7 +27,7 @@ describe('iD.serviceOsm', function () {
     beforeEach(function () {
         serverFetch = window.fakeFetch().create();  // unauthenticated calls use d3-fetch
         serverXHR = sinon.fakeServer.create();      // authenticated calls use XHR via osm-auth
-        context = iD.coreContext();
+        context = iD.coreContext().init();
         connection = context.connection();
         connection.switch({ urlroot: 'http://www.openstreetmap.org' });
         connection.reset();
@@ -138,29 +138,27 @@ describe('iD.serviceOsm', function () {
     });
 
     describe('#loadFromAPI', function () {
-        var path = '/api/0.6/map?bbox=-74.542,40.655,-74.541,40.656';
-        var response = '<?xml version="1.0" encoding="UTF-8"?>' +
-            '<osm version="0.6">' +
-            '  <bounds minlat="40.655" minlon="-74.542" maxlat="40.656" maxlon="-74.541"/>' +
-            '  <node id="105340439" visible="true" version="2" changeset="2880013" timestamp="2009-10-18T07:47:39Z" user="woodpeck_fixbot" uid="147510" lat="40.6555" lon="-74.5415"/>' +
-            '  <node id="105340442" visible="true" version="2" changeset="2880013" timestamp="2009-10-18T07:47:39Z" user="woodpeck_fixbot" uid="147510" lat="40.6556" lon="-74.5416"/>' +
-            '  <way id="40376199" visible="true" version="1" changeset="2403012" timestamp="2009-09-07T16:01:13Z" user="NJDataUploads" uid="148169">' +
-            '    <nd ref="105340439"/>' +
-            '    <nd ref="105340442"/>' +
-            '    <tag k="highway" v="residential"/>' +
-            '    <tag k="name" v="Potomac Drive"/>' +
-            '  </way>' +
-            '</osm>';
+        var path = '/api/0.6/map.json?bbox=-74.542,40.655,-74.541,40.656';
+        var response =
+            '{' +
+            '    "version":"0.6",' +
+            '    "bounds":{"minlat":40.6550000,"minlon":-74.5420000,"maxlat":40.6560000,"maxlon":-74.5410000},' +
+            '    "elements":[' +
+            '        {"type":"node","id":"105340439","visible":true,"version":2,"changeset":2880013,"timestamp":"2009-10-18T07:47:39Z","user":"woodpeck_fixbot","uid":147510,"lat":40.6555,"lon":-74.5415},' +
+            '        {"type":"node","id":"105340442","visible":true,"version":2,"changeset":2880013,"timestamp":"2009-10-18T07:47:39Z","user":"woodpeck_fixbot","uid":147510,"lat":40.6556,"lon":-74.5416},' +
+            '        {"type":"way","id":"40376199","visible":true,"version":1,"changeset":2403012,"timestamp":"2009-09-07T16:01:13Z","user":"NJDataUploads","uid":148169,"nodes":[105340439,105340442],"tags":{"highway":"residential","name":"Potomac Drive"}}' +
+            '    ]' +
+            '}';
 
         it('returns an object', function(done) {
-            connection.loadFromAPI(path, function (err, xml) {
+            connection.loadFromAPI(path, function (err, payload) {
                 expect(err).to.not.be.ok;
-                expect(typeof xml).to.eql('object');
+                expect(typeof payload).to.eql('object');
                 done();
             });
 
             serverFetch.respondWith('GET', 'http://www.openstreetmap.org' + path,
-                [200, { 'Content-Type': 'text/xml' }, response]);
+                [200, { 'Content-Type': 'application/json' }, response]);
             serverFetch.respond();
         });
 
@@ -177,7 +175,7 @@ describe('iD.serviceOsm', function () {
             serverXHR.respondWith('GET', 'http://www.openstreetmap.org' + path,
                 [400, { 'Content-Type': 'text/plain' }, 'Bad Request']);
             serverFetch.respondWith('GET', 'http://www.openstreetmap.org' + path,
-                [200, { 'Content-Type': 'text/xml' }, response]);
+                [200, { 'Content-Type': 'application/json' }, response]);
 
             serverXHR.respond();
             serverFetch.respond();
@@ -195,7 +193,7 @@ describe('iD.serviceOsm', function () {
             serverXHR.respondWith('GET', 'http://www.openstreetmap.org' + path,
                 [401, { 'Content-Type': 'text/plain' }, 'Unauthorized']);
             serverFetch.respondWith('GET', 'http://www.openstreetmap.org' + path,
-                [200, { 'Content-Type': 'text/xml' }, response]);
+                [200, { 'Content-Type': 'application/json' }, response]);
 
             serverXHR.respond();
             serverFetch.respond();
@@ -213,7 +211,7 @@ describe('iD.serviceOsm', function () {
             serverXHR.respondWith('GET', 'http://www.openstreetmap.org' + path,
                 [403, { 'Content-Type': 'text/plain' }, 'Forbidden']);
             serverFetch.respondWith('GET', 'http://www.openstreetmap.org' + path,
-                [200, { 'Content-Type': 'text/xml' }, response]);
+                [200, { 'Content-Type': 'application/json' }, response]);
 
             serverXHR.respond();
             serverFetch.respond();
@@ -251,19 +249,14 @@ describe('iD.serviceOsm', function () {
 
 
     describe('#loadTiles', function() {
-        var tileXML = '<?xml version="1.0" encoding="UTF-8"?>' +
-            '<osm version="0.6">' +
-            ' <bounds minlat="40.6681396" minlon="-74.0478516" maxlat="40.6723060" maxlon="-74.0423584"/>' +
-            ' <node id="368395606" visible="true" version="3" changeset="28924294" timestamp="2015-02-18T04:25:04Z" user="peace2" uid="119748" lat="40.6694299" lon="-74.0444216">' +
-            '  <tag k="addr:state" v="NJ"/>' +
-            '  <tag k="ele" v="0"/>' +
-            '  <tag k="gnis:county_name" v="Hudson"/>' +
-            '  <tag k="gnis:feature_id" v="881377"/>' +
-            '  <tag k="gnis:feature_type" v="Bay"/>' +
-            '  <tag k="name" v="Upper Bay"/>' +
-            '  <tag k="natural" v="bay"/>' +
-            ' </node>' +
-            '</osm>';
+        var tileResponse =
+            '{' +
+            '    "version":"0.6",' +
+            '    "bounds":{"minlat":40.6681396,"minlon":-74.0478516,"maxlat":40.6723060,"maxlon":-74.0423584},' +
+            '    "elements":[' +
+            '        {"type":"node","id":"368395606","visible":true,"version":3,"changeset":28924294,"timestamp":"2015-02-18T04:25:04Z","user":"peace2","uid":119748,"lat":40.6694299,"lon":-74.0444216,"tags":{"addr:state":"NJ","ele":"0","gnis:county_name":"Hudson","gnis:feature_id":"881377","gnis:feature_type":"Bay","name":"Upper Bay","natural":"bay"}}' +
+            '    ]' +
+            '}';
 
         beforeEach(function() {
             var dimensions = [64, 64];
@@ -277,8 +270,8 @@ describe('iD.serviceOsm', function () {
             var spy = sinon.spy();
             connection.loadTiles(context.projection, spy);
 
-            serverFetch.respondWith('GET', /map\?bbox/,
-                [200, { 'Content-Type': 'text/xml' }, tileXML]);
+            serverFetch.respondWith('GET', /map.json\?bbox/,
+                [200, { 'Content-Type': 'application/json' }, tileResponse]);
             serverFetch.respond();
 
             window.setTimeout(function() {
@@ -291,8 +284,8 @@ describe('iD.serviceOsm', function () {
             expect(connection.isDataLoaded([-74.0444216, 40.6694299])).to.be.not.ok;
 
             connection.loadTiles(context.projection);
-            serverFetch.respondWith('GET', /map\?bbox/,
-                [200, { 'Content-Type': 'text/xml' }, tileXML]);
+            serverFetch.respondWith('GET', /map.json\?bbox/,
+                [200, { 'Content-Type': 'application/json' }, tileResponse]);
             serverFetch.respond();
 
             window.setTimeout(function() {
@@ -303,15 +296,21 @@ describe('iD.serviceOsm', function () {
     });
 
     describe('#loadEntity', function () {
-        var nodeXML = '<?xml version="1.0" encoding="UTF-8"?>' +
-            '<osm>' +
-            '<node id="1" version="1" changeset="1" lat="0" lon="0" visible="true" timestamp="2009-03-07T03:26:33Z"></node>' +
-            '</osm>';
-        var wayXML = '<?xml version="1.0" encoding="UTF-8"?>' +
-            '<osm>' +
-            '<node id="1" version="1" changeset="2817006" lat="0" lon="0" visible="true" timestamp="2009-10-11T18:03:23Z"/>' +
-            '<way id="1" visible="true" timestamp="2008-01-03T05:24:43Z" version="1" changeset="522559"><nd ref="1"/></way>' +
-            '</osm>';
+        var nodeResponse =
+            '{' +
+            '    "version":"0.6",' +
+            '    "elements":[' +
+            '        {"type":"node","id":1,"visible":true,"version":1,"changeset":28924294,"timestamp":"2009-03-07T03:26:33Z","user":"peace2","uid":119748,"lat":0,"lon":0}' +
+            '    ]' +
+            '}';
+        var wayResponse =
+            '{' +
+            '    "version":"0.6",' +
+            '    "elements":[' +
+            '        {"type":"node","id":1,"visible":true,"version":1,"changeset":2817006,"timestamp":"2009-10-11T18:03:23Z","user":"peace2","uid":119748,"lat":0,"lon":0},' +
+            '        {"type":"way","id":1,"visible":true,"version":1,"changeset":522559,"timestamp":"2008-01-03T05:24:43Z","user":"peace2","uid":119748,"nodes":[1]}' +
+            '    ]' +
+            '}';
 
         it('loads a node', function(done) {
             var id = 'n1';
@@ -321,8 +320,8 @@ describe('iD.serviceOsm', function () {
                 done();
             });
 
-            serverFetch.respondWith('GET', 'http://www.openstreetmap.org/api/0.6/node/1',
-                [200, { 'Content-Type': 'text/xml' }, nodeXML]);
+            serverFetch.respondWith('GET', 'http://www.openstreetmap.org/api/0.6/node/1.json',
+                [200, { 'Content-Type': 'application/json' }, nodeResponse]);
             serverFetch.respond();
         });
 
@@ -334,8 +333,8 @@ describe('iD.serviceOsm', function () {
                 done();
             });
 
-            serverFetch.respondWith('GET', 'http://www.openstreetmap.org/api/0.6/way/1/full',
-                [200, { 'Content-Type': 'text/xml' }, wayXML]);
+            serverFetch.respondWith('GET', 'http://www.openstreetmap.org/api/0.6/way/1/full.json',
+                [200, { 'Content-Type': 'application/json' }, wayResponse]);
             serverFetch.respond();
         });
 
@@ -352,22 +351,29 @@ describe('iD.serviceOsm', function () {
                 serverFetch.respond();
             });
 
-            serverFetch.respondWith('GET', 'http://www.openstreetmap.org/api/0.6/node/1',
-                [200, { 'Content-Type': 'text/xml' }, nodeXML]);
+            serverFetch.respondWith('GET', 'http://www.openstreetmap.org/api/0.6/node/1.json',
+                [200, { 'Content-Type': 'application/json' }, nodeResponse]);
             serverFetch.respond();
         });
     });
 
 
     describe('#loadEntityVersion', function () {
-        var nodeXML = '<?xml version="1.0" encoding="UTF-8"?>' +
-            '<osm>' +
-            '<node id="1" version="1" changeset="1" lat="0" lon="0" visible="true" timestamp="2009-03-07T03:26:33Z"></node>' +
-            '</osm>';
-        var wayXML = '<?xml version="1.0" encoding="UTF-8"?>' +
-            '<osm>' +
-            '<way id="1" visible="true" timestamp="2008-01-03T05:24:43Z" version="1" changeset="522559"><nd ref="1"/></way>' +
-            '</osm>';
+        var nodeResponse =
+            '{' +
+            '    "version":"0.6",' +
+            '    "elements":[' +
+            '        {"type":"node","id":1,"visible":true,"version":1,"changeset":28924294,"timestamp":"2009-03-07T03:26:33Z","user":"peace2","uid":119748,"lat":0,"lon":0}' +
+            '    ]' +
+            '}';
+        var wayResponse =
+            '{' +
+            '    "version":"0.6",' +
+            '    "elements":[' +
+            '        {"type":"node","id":1,"visible":true,"version":1,"changeset":2817006,"timestamp":"2009-10-11T18:03:23Z","user":"peace2","uid":119748,"lat":0,"lon":0},' +
+            '        {"type":"way","id":1,"visible":true,"version":1,"changeset":522559,"timestamp":"2008-01-03T05:24:43Z","user":"peace2","uid":119748,"nodes":[1]}' +
+            '    ]' +
+            '}';
 
         it('loads a node', function(done) {
             var id = 'n1';
@@ -377,8 +383,8 @@ describe('iD.serviceOsm', function () {
                 done();
             });
 
-            serverFetch.respondWith('GET', 'http://www.openstreetmap.org/api/0.6/node/1/1',
-                [200, { 'Content-Type': 'text/xml' }, nodeXML]);
+            serverFetch.respondWith('GET', 'http://www.openstreetmap.org/api/0.6/node/1/1.json',
+                [200, { 'Content-Type': 'application/json' }, nodeResponse]);
             serverFetch.respond();
         });
 
@@ -390,8 +396,8 @@ describe('iD.serviceOsm', function () {
                 done();
             });
 
-            serverFetch.respondWith('GET', 'http://www.openstreetmap.org/api/0.6/way/1/1',
-                [200, { 'Content-Type': 'text/xml' }, wayXML]);
+            serverFetch.respondWith('GET', 'http://www.openstreetmap.org/api/0.6/way/1/1.json',
+                [200, { 'Content-Type': 'application/json' }, wayResponse]);
             serverFetch.respond();
         });
 
@@ -408,8 +414,8 @@ describe('iD.serviceOsm', function () {
                 serverFetch.respond();
             });
 
-            serverFetch.respondWith('GET', 'http://www.openstreetmap.org/api/0.6/node/1/1',
-                [200, { 'Content-Type': 'text/xml' }, nodeXML]);
+            serverFetch.respondWith('GET', 'http://www.openstreetmap.org/api/0.6/node/1/1.json',
+                [200, { 'Content-Type': 'application/json' }, nodeResponse]);
             serverFetch.respond();
         });
     });

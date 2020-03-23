@@ -4,11 +4,12 @@ import { dispatch as d3_dispatch } from 'd3-dispatch';
 import { json as d3_json } from 'd3-fetch';
 import { select as d3_select } from 'd3-selection';
 
-import { t, currentLocale, addTranslation, setLocale } from '../util/locale';
+import { t, setLocale, localeStrings, localeData } from '../util/locale';
 
+import { coreData } from './data';
 import { coreHistory } from './history';
 import { coreValidator } from './validator';
-import { dataLocales, dataEn } from '../../data';
+import { coreUploader } from './uploader';
 import { geoRawMercator } from '../geo/raw_mercator';
 import { modeSelect } from '../modes/select';
 import { osmSetAreaKeys, osmSetPointTags, osmSetVertexTags } from '../osm/tags';
@@ -21,573 +22,525 @@ import { utilKeybinding, utilRebind, utilStringQs } from '../util';
 
 
 export function coreContext() {
-    var dispatch = d3_dispatch('enter', 'exit', 'change');
-    var context = utilRebind({}, dispatch, 'on');
-    var _deferred = new Set();
+  const dispatch = d3_dispatch('enter', 'exit', 'change');
+  let context = utilRebind({}, dispatch, 'on');
+  let _deferred = new Set();
 
-    context.version = '2.17.0';
-    context.privacyVersion = '20191217';
+  context.version = '2.17.2';
+  context.privacyVersion = '20191217';
 
-    // create a special translation that contains the keys in place of the strings
-    var tkeys = JSON.parse(JSON.stringify(dataEn));  // clone deep
-    var parents = [];
 
-    function traverser(v, k, obj) {
-        parents.push(k);
-        if (typeof v === 'object') {
-            forOwn(v, traverser);
-        } else if (typeof v === 'string') {
-            obj[k] = parents.join('.');
+  // https://github.com/openstreetmap/iD/issues/772
+  // http://mathiasbynens.be/notes/localstorage-pattern#comment-9
+  let _storage;
+  try { _storage = localStorage; } catch (e) {}  // eslint-disable-line no-empty
+  _storage = _storage || (() => {
+    let s = {};
+    return {
+      getItem: (k) => s[k],
+      setItem: (k, v) => s[k] = v,
+      removeItem: (k) => delete s[k]
+    };
+  })();
+
+  context.storage = function(k, v) {
+    try {
+      if (arguments.length === 1) return _storage.getItem(k);
+      else if (v === null) _storage.removeItem(k);
+      else _storage.setItem(k, v);
+    } catch (e) {
+      /* eslint-disable no-console */
+      if (typeof console !== 'undefined') {
+        console.error('localStorage quota exceeded');
+      }
+      /* eslint-enable no-console */
+    }
+  };
+
+
+  /* User interface and keybinding */
+  let _ui;
+  context.ui = () => _ui;
+
+  let _keybinding = utilKeybinding('context');
+  context.keybinding = () => _keybinding;
+  d3_select(document).call(_keybinding);
+
+
+  /* Straight accessors. Avoid using these if you can. */
+  let _connection;
+  let _data;
+  let _history;
+  let _validator;
+  let _uploader;
+  context.connection = () => _connection;
+  context.data = () => _data;
+  context.history = () => _history;
+  context.validator = () => _validator;
+  context.uploader = () => _uploader;
+
+  /* Connection */
+  context.preauth = (options) => {
+    if (_connection) {
+      _connection.switch(options);
+    }
+    return context;
+  };
+
+
+  function afterLoad(cid, callback) {
+    return (err, result) => {
+      if (err) {
+        // 400 Bad Request, 401 Unauthorized, 403 Forbidden..
+        if (err.status === 400 || err.status === 401 || err.status === 403) {
+          if (_connection) {
+            _connection.logout();
+          }
         }
-        parents.pop();
+        if (typeof callback === 'function') {
+          callback(err);
+        }
+        return;
+
+      } else if (_connection && _connection.getConnectionId() !== cid) {
+        if (typeof callback === 'function') {
+          callback({ message: 'Connection Switched', status: -1 });
+        }
+        return;
+
+      } else {
+        _history.merge(result.data, result.extent);
+        if (typeof callback === 'function') {
+          callback(err, result);
+        }
+        return;
+      }
+    };
+  }
+
+
+  context.loadTiles = (projection, callback) => {
+    const handle = window.requestIdleCallback(() => {
+      _deferred.delete(handle);
+      if (_connection && context.editableDataEnabled()) {
+        const cid = _connection.getConnectionId();
+        _connection.loadTiles(projection, afterLoad(cid, callback));
+      }
+    });
+    _deferred.add(handle);
+  };
+
+  context.loadTileAtLoc = (loc, callback) => {
+    const handle = window.requestIdleCallback(() => {
+      _deferred.delete(handle);
+      if (_connection && context.editableDataEnabled()) {
+        const cid = _connection.getConnectionId();
+        _connection.loadTileAtLoc(loc, afterLoad(cid, callback));
+      }
+    });
+    _deferred.add(handle);
+  };
+
+  context.loadEntity = (entityID, callback) => {
+    if (_connection) {
+      const cid = _connection.getConnectionId();
+      _connection.loadEntity(entityID, afterLoad(cid, callback));
+    }
+  };
+
+  context.zoomToEntity = (entityID, zoomTo) => {
+    if (zoomTo !== false) {
+      context.loadEntity(entityID, (err, result) => {
+        if (err) return;
+        const entity = result.data.find(e => e.id === entityID);
+        if (entity) {
+          _map.zoomTo(entity);
+        }
+      });
     }
 
-    function forOwn(obj, fn) {
-        Object.keys(obj).forEach(function(k) { fn(obj[k], k, obj); });
-    }
-
-    forOwn(tkeys, traverser);
-    addTranslation('_tkeys_', tkeys);
-
-    addTranslation('en', dataEn);
-    setLocale('en');
-
-
-    // https://github.com/openstreetmap/iD/issues/772
-    // http://mathiasbynens.be/notes/localstorage-pattern#comment-9
-    var storage;
-    try { storage = localStorage; } catch (e) {}  // eslint-disable-line no-empty
-    storage = storage || (function() {
-        var s = {};
-        return {
-            getItem: function(k) { return s[k]; },
-            setItem: function(k, v) { s[k] = v; },
-            removeItem: function(k) { delete s[k]; }
-        };
-    })();
-
-    context.storage = function(k, v) {
-        try {
-            if (arguments.length === 1) return storage.getItem(k);
-            else if (v === null) storage.removeItem(k);
-            else storage.setItem(k, v);
-        } catch (e) {
-            // localstorage quota exceeded
-            /* eslint-disable no-console */
-            if (typeof console !== 'undefined') console.error('localStorage quota exceeded');
-            /* eslint-enable no-console */
-        }
-    };
-
-
-    /* User interface and keybinding */
-    var ui;
-    context.ui = function() { return ui; };
-
-    var keybinding = utilKeybinding('context');
-    context.keybinding = function() { return keybinding; };
-    d3_select(document).call(keybinding);
-
-
-    /* Straight accessors. Avoid using these if you can. */
-    var connection, history, validator;
-    context.connection = function() { return connection; };
-    context.history = function() { return history; };
-    context.validator = function() { return validator; };
-
-    /* Connection */
-    context.preauth = function(options) {
-        if (connection) {
-            connection.switch(options);
-        }
-        return context;
-    };
-
-
-    function afterLoad(cid, callback) {
-        return function(err, result) {
-            if (err) {
-                // 400 Bad Request, 401 Unauthorized, 403 Forbidden..
-                if (err.status === 400 || err.status === 401 || err.status === 403) {
-                    if (connection) {
-                        connection.logout();
-                    }
-                }
-                if (typeof callback === 'function') {
-                    callback(err);
-                }
-                return;
-
-            } else if (connection && connection.getConnectionId() !== cid) {
-                if (typeof callback === 'function') {
-                    callback({ message: 'Connection Switched', status: -1 });
-                }
-                return;
-
-            } else {
-                history.merge(result.data, result.extent);
-                if (typeof callback === 'function') {
-                    callback(err, result);
-                }
-                return;
-            }
-        };
-    }
-
-
-    context.loadTiles = function(projection, callback) {
-        var handle = window.requestIdleCallback(function() {
-            _deferred.delete(handle);
-            if (connection && context.editableDataEnabled()) {
-                var cid = connection.getConnectionId();
-                connection.loadTiles(projection, afterLoad(cid, callback));
-            }
-        });
-        _deferred.add(handle);
-    };
-
-    context.loadTileAtLoc = function(loc, callback) {
-        var handle = window.requestIdleCallback(function() {
-            _deferred.delete(handle);
-            if (connection && context.editableDataEnabled()) {
-                var cid = connection.getConnectionId();
-                connection.loadTileAtLoc(loc, afterLoad(cid, callback));
-            }
-        });
-        _deferred.add(handle);
-    };
-
-    context.loadEntity = function(entityID, callback) {
-        if (connection) {
-            var cid = connection.getConnectionId();
-            connection.loadEntity(entityID, afterLoad(cid, callback));
-        }
-    };
-
-    context.zoomToEntity = function(entityID, zoomTo) {
-        if (zoomTo !== false) {
-            this.loadEntity(entityID, function(err, result) {
-                if (err) return;
-                var entity = result.data.find(function(e) { return e.id === entityID; });
-                if (entity) {
-                    map.zoomTo(entity);
-                }
-            });
-        }
-
-        map.on('drawn.zoomToEntity', function() {
-            if (!context.hasEntity(entityID)) return;
-            map.on('drawn.zoomToEntity', null);
-            context.on('enter.zoomToEntity', null);
-            context.enter(modeSelect(context, [entityID]));
-        });
-
-        context.on('enter.zoomToEntity', function() {
-            if (mode.id !== 'browse') {
-                map.on('drawn.zoomToEntity', null);
-                context.on('enter.zoomToEntity', null);
-            }
-        });
-    };
-
-    var minEditableZoom = 16;
-    context.minEditableZoom = function(val) {
-        if (!arguments.length) return minEditableZoom;
-        minEditableZoom = val;
-        if (connection) {
-            connection.tileZoom(val);
-        }
-        return context;
-    };
-
-
-    /* History */
-    var inIntro = false;
-    context.inIntro = function(val) {
-        if (!arguments.length) return inIntro;
-        inIntro = val;
-        return context;
-    };
-
-    context.save = function() {
-        // no history save, no message onbeforeunload
-        if (inIntro || d3_select('.modal').size()) return;
-
-        var canSave;
-        if (mode && mode.id === 'save') {
-            canSave = false;
-
-            // Attempt to prevent user from creating duplicate changes - see #5200
-            if (services.osm && services.osm.isChangesetInflight()) {
-                history.clearSaved();
-                return;
-            }
-
-        } else {
-            canSave = context.selectedIDs().every(function(id) {
-                var entity = context.hasEntity(id);
-                return entity && !entity.isDegenerate();
-            });
-        }
-
-        if (canSave) {
-            history.save();
-        }
-        if (history.hasChanges()) {
-            return t('save.unsaved_changes');
-        }
-    };
-
-
-    /* Graph */
-    context.hasEntity = function(id) {
-        return history.graph().hasEntity(id);
-    };
-    context.entity = function(id) {
-        return history.graph().entity(id);
-    };
-    context.childNodes = function(way) {
-        return history.graph().childNodes(way);
-    };
-    context.geometry = function(id) {
-        return context.entity(id).geometry(history.graph());
-    };
-
-
-    /* Modes */
-    var mode;
-    context.mode = function() {
-        return mode;
-    };
-    context.enter = function(newMode) {
-        if (mode) {
-            mode.exit();
-            dispatch.call('exit', this, mode);
-        }
-
-        mode = newMode;
-        mode.enter();
-        dispatch.call('enter', this, mode);
-    };
-
-    context.selectedIDs = function() {
-        if (mode && mode.selectedIDs) {
-            return mode.selectedIDs();
-        } else {
-            return [];
-        }
-    };
-
-    context.activeID = function() {
-        return mode && mode.activeID && mode.activeID();
-    };
-
-    var _selectedNoteID;
-    context.selectedNoteID = function(noteID) {
-        if (!arguments.length) return _selectedNoteID;
-        _selectedNoteID = noteID;
-        return context;
-    };
-
-    var _selectedErrorID;
-    context.selectedErrorID = function(errorID) {
-        if (!arguments.length) return _selectedErrorID;
-        _selectedErrorID = errorID;
-        return context;
-    };
-
-
-    /* Behaviors */
-    context.install = function(behavior) {
-        context.surface().call(behavior);
-    };
-    context.uninstall = function(behavior) {
-        context.surface().call(behavior.off);
-    };
-
-
-    /* Copy/Paste */
-    var copyIDs = [], copyGraph;
-    context.copyGraph = function() { return copyGraph; };
-    context.copyIDs = function(val) {
-        if (!arguments.length) return copyIDs;
-        copyIDs = val;
-        copyGraph = history.graph();
-        return context;
-    };
-
-
-    /* Background */
-    var background;
-    context.background = function() { return background; };
-
-
-    /* Features */
-    var features;
-    context.features = function() { return features; };
-    context.hasHiddenConnections = function(id) {
-        var graph = history.graph();
-        var entity = graph.entity(id);
-        return features.hasHiddenConnections(entity, graph);
-    };
-
-
-    /* Photos */
-    var photos;
-    context.photos = function() { return photos; };
-
-
-    /* Presets */
-    var presets;
-    context.presets = function() { return presets; };
-
-
-    /* Map */
-    var map;
-    context.map = function() { return map; };
-    context.layers = function() { return map.layers; };
-    context.surface = function() { return map.surface; };
-    context.editableDataEnabled = function() { return map.editableDataEnabled(); };
-    context.editable = function() {
-
-       // don't allow editing during save
-       var mode = context.mode();
-       if (!mode || mode.id === 'save') return false;
-
-       return map.editableDataEnabled();
-    };
-    context.surfaceRect = function() {
-        return map.surface.node().getBoundingClientRect();
-    };
-
-
-    /* Debug */
-    var debugFlags = {
-        tile: false,        // tile boundaries
-        collision: false,   // label collision bounding boxes
-        imagery: false,     // imagery bounding polygons
-        community: false,   // community bounding polygons
-        imperial: false,    // imperial (not metric) bounding polygons
-        driveLeft: false,   // driveLeft bounding polygons
-        target: false,      // touch targets
-        downloaded: false   // downloaded data from osm
-    };
-    context.debugFlags = function() {
-        return debugFlags;
-    };
-    context.setDebug = function(flag, val) {
-        if (arguments.length === 1) val = true;
-        debugFlags[flag] = val;
-        dispatch.call('change');
-        return context;
-    };
-    context.getDebug = function(flag) {
-        return flag && debugFlags[flag];
-    };
-
-
-    /* Container */
-    var container = d3_select(document.body);
-    context.container = function(val) {
-        if (!arguments.length) return container;
-        container = val;
-        container.classed('id-container', true);
-        return context;
-    };
-    var embed;
-    context.embed = function(val) {
-        if (!arguments.length) return embed;
-        embed = val;
-        return context;
-    };
-
-
-    /* Assets */
-    var assetPath = '';
-    context.assetPath = function(val) {
-        if (!arguments.length) return assetPath;
-        assetPath = val;
-        return context;
-    };
-
-    var assetMap = {};
-    context.assetMap = function(val) {
-        if (!arguments.length) return assetMap;
-        assetMap = val;
-        return context;
-    };
-
-    context.asset = function(val) {
-        var filename = assetPath + val;
-        return assetMap[filename] || filename;
-    };
-
-    context.imagePath = function(val) {
-        return context.asset('img/' + val);
-    };
-
-
-    /* locales */
-    // `locale` variable contains a "requested locale".
-    // It won't become the `currentLocale` until after loadLocale() is called.
-    var locale, localePath;
-
-    context.locale = function(loc, path) {
-        if (!arguments.length) return currentLocale;
-        locale = loc;
-        localePath = path;
-        return context;
-    };
-
-    context.loadLocale = function(callback) {
-        if (locale && locale !== 'en' && dataLocales.hasOwnProperty(locale)) {
-            localePath = localePath || context.asset('locales/' + locale + '.json');
-            d3_json(localePath)
-                .then(function(result) {
-                    addTranslation(locale, result[locale]);
-                    setLocale(locale);
-                    utilDetect(true);
-                    if (callback) callback();
-                })
-                .catch(function(err) {
-                    if (callback) callback(err.message);
-                });
-        } else {
-            if (locale) {
-                setLocale(locale);
-                utilDetect(true);
-            }
-            if (callback) {
-                callback();
-            }
-        }
-    };
-
-
-    /* reset (aka flush) */
-    context.reset = context.flush = function() {
-        context.debouncedSave.cancel();
-
-        Array.from(_deferred).forEach(function(handle) {
-            window.cancelIdleCallback(handle);
-            _deferred.delete(handle);
-        });
-
-        Object.values(services).forEach(function(service) {
-            if (service && typeof service.reset === 'function') {
-                service.reset(context);
-            }
-        });
-
-        validator.reset();
-        features.reset();
-        history.reset();
-
-        return context;
-    };
-
-
-    /* Init */
-
-    context.projection = geoRawMercator();
-    context.curtainProjection = geoRawMercator();
-
-    locale = utilDetect().locale;
-    if (locale && !dataLocales.hasOwnProperty(locale)) {
-        locale = locale.split('-')[0];
-    }
-
-    history = coreHistory(context);
-    validator = coreValidator(context);
-
-    context.graph = history.graph;
-    context.changes = history.changes;
-    context.intersects = history.intersects;
-    context.pauseChangeDispatch = history.pauseChangeDispatch;
-    context.resumeChangeDispatch = history.resumeChangeDispatch;
-
-    // Debounce save, since it's a synchronous localStorage write,
-    // and history changes can happen frequently (e.g. when dragging).
-    context.debouncedSave = _debounce(context.save, 350);
-    function withDebouncedSave(fn) {
-        return function() {
-            var result = fn.apply(history, arguments);
-            context.debouncedSave();
-            return result;
-        };
-    }
-
-    context.perform = withDebouncedSave(history.perform);
-    context.replace = withDebouncedSave(history.replace);
-    context.pop = withDebouncedSave(history.pop);
-    context.overwrite = withDebouncedSave(history.overwrite);
-    context.undo = withDebouncedSave(history.undo);
-    context.redo = withDebouncedSave(history.redo);
-
-    ui = uiInit(context);
-
-    connection = services.osm;
-    background = rendererBackground(context);
-    features = rendererFeatures(context);
-    photos = rendererPhotos(context);
-    presets = presetIndex(context);
-
-    if (services.maprules && utilStringQs(window.location.hash).maprules) {
-        var maprules = utilStringQs(window.location.hash).maprules;
-        d3_json(maprules)
-            .then(function(mapcss) {
-                services.maprules.init();
-                mapcss.forEach(function(mapcssSelector) {
-                    return services.maprules.addRule(mapcssSelector);
-                });
-            })
-            .catch(function() {
-                /* ignore */
-            });
-    }
-
-    map = rendererMap(context);
-    context.mouse = map.mouse;
-    context.extent = map.extent;
-    context.pan = map.pan;
-    context.zoomIn = map.zoomIn;
-    context.zoomOut = map.zoomOut;
-    context.zoomInFurther = map.zoomInFurther;
-    context.zoomOutFurther = map.zoomOutFurther;
-    context.redrawEnable = map.redrawEnable;
-
-    Object.values(services).forEach(function(service) {
-        if (service && typeof service.init === 'function') {
-            service.init(context);
-        }
+    _map.on('drawn.zoomToEntity', () => {
+      if (!context.hasEntity(entityID)) return;
+      _map.on('drawn.zoomToEntity', null);
+      context.on('enter.zoomToEntity', null);
+      context.enter(modeSelect(context, [entityID]));
     });
 
-    validator.init();
-    background.init();
-    features.init();
-    photos.init();
+    context.on('enter.zoomToEntity', () => {
+      if (_mode.id !== 'browse') {
+        _map.on('drawn.zoomToEntity', null);
+        context.on('enter.zoomToEntity', null);
+      }
+    });
+  };
 
-    var presetsParameter = utilStringQs(window.location.hash).presets;
-    if (presetsParameter && presetsParameter.indexOf('://') !== -1) {
-        // assume URL of external presets file
+  let _minEditableZoom = 16;
+  context.minEditableZoom = function(val) {
+    if (!arguments.length) return _minEditableZoom;
+    _minEditableZoom = val;
+    if (_connection) {
+      _connection.tileZoom(val);
+    }
+    return context;
+  };
 
-        presets.fromExternal(external, function(externalPresets) {
-            context.presets = function() { return externalPresets; }; // default + external presets...
-            osmSetAreaKeys(presets.areaKeys());
-            osmSetPointTags(presets.pointTags());
-            osmSetVertexTags(presets.vertexTags());
-        });
+
+  context.maxCharsForTagKey = () => 255;
+
+  context.maxCharsForTagValue = () => 255;
+
+  context.maxCharsForRelationRole = () => 255;
+
+
+  /* History */
+  let _inIntro = false;
+  context.inIntro = function(val) {
+    if (!arguments.length) return _inIntro;
+    _inIntro = val;
+    return context;
+  };
+
+  // Immediately save the user's history to localstorage, if possible
+  // This is called someteimes, but also on the `window.onbeforeunload` handler
+  context.save = () => {
+    // no history save, no message onbeforeunload
+    if (_inIntro || d3_select('.modal').size()) return;
+
+    let canSave;
+    if (_mode && _mode.id === 'save') {
+      canSave = false;
+
+      // Attempt to prevent user from creating duplicate changes - see #5200
+      if (services.osm && services.osm.isChangesetInflight()) {
+        _history.clearSaved();
+        return;
+      }
+
     } else {
-        var addablePresetIDs;
-        if (presetsParameter) {
-            // assume list of allowed preset IDs
-            addablePresetIDs = presetsParameter.split(',');
-        }
-        presets.init(addablePresetIDs);
-        osmSetAreaKeys(presets.areaKeys());
-        osmSetPointTags(presets.pointTags());
-        osmSetVertexTags(presets.vertexTags());
+      canSave = context.selectedIDs().every(id => {
+        const entity = context.hasEntity(id);
+        return entity && !entity.isDegenerate();
+      });
+    }
+
+    if (canSave) {
+      _history.save();
+    }
+    if (_history.hasChanges()) {
+      return t('save.unsaved_changes');
+    }
+  };
+
+  // Debounce save, since it's a synchronous localStorage write,
+  // and history changes can happen frequently (e.g. when dragging).
+  context.debouncedSave = _debounce(context.save, 350);
+
+  function withDebouncedSave(fn) {
+    return function() {
+      const result = fn.apply(_history, arguments);
+      context.debouncedSave();
+      return result;
+    };
+  }
+
+
+  /* Graph */
+  context.hasEntity = (id) => _history.graph().hasEntity(id);
+  context.entity = (id) => _history.graph().entity(id);
+
+
+  /* Modes */
+  let _mode;
+  context.mode = () => _mode;
+  context.enter = (newMode) => {
+    if (_mode) {
+      _mode.exit();
+      dispatch.call('exit', this, _mode);
+    }
+
+    _mode = newMode;
+    _mode.enter();
+    dispatch.call('enter', this, _mode);
+  };
+
+  context.selectedIDs = () => (_mode && _mode.selectedIDs && _mode.selectedIDs()) || [];
+  context.activeID = () => _mode && _mode.activeID && _mode.activeID();
+
+  let _selectedNoteID;
+  context.selectedNoteID = function(noteID) {
+    if (!arguments.length) return _selectedNoteID;
+    _selectedNoteID = noteID;
+    return context;
+  };
+
+  // NOTE: Don't change the name of this until UI v3 is merged
+  let _selectedErrorID;
+  context.selectedErrorID = function(errorID) {
+    if (!arguments.length) return _selectedErrorID;
+    _selectedErrorID = errorID;
+    return context;
+  };
+
+
+  /* Behaviors */
+  context.install = (behavior) => context.surface().call(behavior);
+  context.uninstall = (behavior) => context.surface().call(behavior.off);
+
+
+  /* Copy/Paste */
+  let _copyGraph;
+  context.copyGraph = () => _copyGraph;
+
+  let _copyIDs = [];
+  context.copyIDs = function(val) {
+    if (!arguments.length) return _copyIDs;
+    _copyIDs = val;
+    _copyGraph = _history.graph();
+    return context;
+  };
+
+
+  /* Background */
+  let _background;
+  context.background = () => _background;
+
+
+  /* Features */
+  let _features;
+  context.features = () => _features;
+  context.hasHiddenConnections = (id) => {
+    const graph = _history.graph();
+    const entity = graph.entity(id);
+    return _features.hasHiddenConnections(entity, graph);
+  };
+
+
+  /* Photos */
+  let _photos;
+  context.photos = () => _photos;
+
+
+  /* Presets */
+  let _presets;
+  context.presets = () => _presets;
+
+
+  /* Map */
+  let _map;
+  context.map = () => _map;
+  context.layers = () => _map.layers;
+  context.surface = () => _map.surface;
+  context.editableDataEnabled = () => _map.editableDataEnabled();
+  context.surfaceRect = () => _map.surface.node().getBoundingClientRect();
+  context.editable = () => {
+    // don't allow editing during save
+    const mode = context.mode();
+    if (!mode || mode.id === 'save') return false;
+    return _map.editableDataEnabled();
+  };
+
+
+  /* Debug */
+  let _debugFlags = {
+    tile: false,        // tile boundaries
+    collision: false,   // label collision bounding boxes
+    imagery: false,     // imagery bounding polygons
+    target: false,      // touch targets
+    downloaded: false   // downloaded data from osm
+  };
+  context.debugFlags = () => _debugFlags;
+  context.getDebug = (flag) => flag && _debugFlags[flag];
+  context.setDebug = function(flag, val) {
+    if (arguments.length === 1) val = true;
+    _debugFlags[flag] = val;
+    dispatch.call('change');
+    return context;
+  };
+
+
+  /* Container */
+  let _container = d3_select(document.body);
+  context.container = function(val) {
+    if (!arguments.length) return _container;
+    _container = val;
+    _container.classed('ideditor', true);
+    return context;
+  };
+  let _embed;
+  context.embed = function(val) {
+    if (!arguments.length) return _embed;
+    _embed = val;
+    return context;
+  };
+
+
+  /* Assets */
+  let _assetPath = '';
+  context.assetPath = function(val) {
+    if (!arguments.length) return _assetPath;
+    _assetPath = val;
+    return context;
+  };
+
+  let _assetMap = {};
+  context.assetMap = function(val) {
+    if (!arguments.length) return _assetMap;
+    _assetMap = val;
+    return context;
+  };
+
+  context.asset = (val) => {
+    if (/^http(s)?:\/\//i.test(val)) return val;
+    const filename = _assetPath + val;
+    return _assetMap[filename] || filename;
+  };
+
+  context.imagePath = (val) => context.asset(`img/${val}`);
+
+
+  /* Locales */
+  // Returns a Promise to load the strings for the requested locale
+  context.loadLocale = (requested) => {
+    let locale = requested;
+
+    if (!_data) {
+      return Promise.reject('loadLocale called before init');
+    }
+    if (!localeData[locale]) {        // Locale not supported, e.g. 'es-FAKE'
+      locale = locale.split('-')[0];  // Fallback to the first part 'es'
+    }
+    if (!localeData[locale]) {
+      return Promise.reject(`Unsupported locale: ${requested}`);
+    }
+
+    if (localeStrings[locale]) {    // already loaded
+      return Promise.resolve(locale);
+    }
+
+    let fileMap = _data.fileMap();
+    const key = `locale_${locale}`;
+    fileMap[key] = `locales/${locale}.json`;
+
+    return _data.get(key)
+      .then(d => {
+        localeStrings[locale] = d[locale];
+        return locale;
+      });
+  };
+
+
+  /* reset (aka flush) */
+  context.reset = context.flush = () => {
+    context.debouncedSave.cancel();
+
+    Array.from(_deferred).forEach(handle => {
+      window.cancelIdleCallback(handle);
+      _deferred.delete(handle);
+    });
+
+    Object.values(services).forEach(service => {
+      if (service && typeof service.reset === 'function') {
+        service.reset(context);
+      }
+    });
+
+    _validator.reset();
+    _features.reset();
+    _history.reset();
+    _uploader.reset();
+
+    // don't leave stale state in the inspector
+    d3_select('.inspector-wrap *').remove();
+
+    return context;
+  };
+
+
+  /* Projections */
+  context.projection = geoRawMercator();
+  context.curtainProjection = geoRawMercator();
+
+
+  /* Init */
+  context.init = () => {
+    const hash = utilStringQs(window.location.hash);
+
+    _data = coreData(context);
+
+    // Start loading data:
+    // 1. the list of supported locales
+    // 2. the English locale strings (used as fallbacks)
+    // 3. the preferred locale strings (detected by utilDetect)
+    const requested = utilDetect().locale;
+    _data.get('locales')
+      .then(d => Object.assign(localeData, d))
+      .then(() => context.loadLocale('en'))
+      .then(() => context.loadLocale(requested))
+      .then(received => {      // `received` may not match `requested`.
+        setLocale(received);   // (e.g. 'es-FAKE' will return 'es')
+        utilDetect(true);      // Then force redetection
+      })
+      .catch(err => console.error(err));  // eslint-disable-line
+
+    _history = coreHistory(context);
+    _validator = coreValidator(context);
+    _uploader = coreUploader(context);
+
+    context.graph = _history.graph;
+    context.intersects = _history.intersects;
+    context.pauseChangeDispatch = _history.pauseChangeDispatch;
+    context.resumeChangeDispatch = _history.resumeChangeDispatch;
+
+    context.perform = withDebouncedSave(_history.perform);
+    context.replace = withDebouncedSave(_history.replace);
+    context.pop = withDebouncedSave(_history.pop);
+    context.overwrite = withDebouncedSave(_history.overwrite);
+    context.undo = withDebouncedSave(_history.undo);
+    context.redo = withDebouncedSave(_history.redo);
+
+    _ui = uiInit(context);
+
+    _connection = services.osm;
+    _background = rendererBackground(context);
+    _features = rendererFeatures(context);
+    _photos = rendererPhotos(context);
+    _presets = presetIndex(context);
+
+    if (hash.presets) {
+      _presets.addablePresetIDs(new Set(hash.presets.split(',')));
+    }
+
+    _map = rendererMap(context);
+
+    Object.values(services).forEach(service => {
+      if (service && typeof service.init === 'function') {
+        service.init(context);
+      }
+    });
+
+    _validator.init();
+    _background.init();
+    _features.init();
+    _photos.init();
+    _presets.init()
+      .then(() => {
+        osmSetAreaKeys(_presets.areaKeys());
+        osmSetPointTags(_presets.pointTags());
+        osmSetVertexTags(_presets.vertexTags());
+      });
+
+    if (services.maprules && hash.maprules) {
+      d3_json(hash.maprules)
+        .then(mapcss => {
+          services.maprules.init();
+          mapcss.forEach(mapcssSelector => services.maprules.addRule(mapcssSelector));
+        })
+        .catch(() => { /* ignore */ });
     }
 
     return context;
+  };
+
+
+  return context;
 }

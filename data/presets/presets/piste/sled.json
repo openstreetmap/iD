@@ -12,16 +12,17 @@
         "line",
         "area"
     ],
-    "terms": [
-        "ski",
-        "sled",
-        "luge",
-        "sleigh",
-        "sledge",
-        "piste"
-    ],
     "tags": {
         "piste:type": "sled"
     },
-    "name": "Sled Piste"
+    "terms": [
+        "bobsled",
+        "luge",
+        "piste",
+        "skeleton",
+        "sledge",
+        "sleigh",
+        "toboggan"
+    ],
+    "name": "Sled Run"
 }

@@ -5,7 +5,10 @@
         "operator",
         "address",
         "building_area",
-        "opening_hours"
+        "opening_hours",
+        "internet_access",
+        "internet_access/fee",
+        "internet_access/ssid"
     ],
     "moreFields": [
         "capacity",
@@ -13,10 +16,8 @@
         "email",
         "fax",
         "gnis/feature_id",
-        "internet_access",
-        "internet_access/fee",
-        "internet_access/ssid",
         "level",
+        "not/name",
         "outdoor_seating",
         "phone",
         "smoking",

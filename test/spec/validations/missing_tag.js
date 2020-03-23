@@ -2,7 +2,7 @@ describe('iD.validations.missing_tag', function () {
     var context;
 
     beforeEach(function() {
-        context = iD.coreContext();
+        context = iD.coreContext().init();
     });
 
     function createWay(tags) {

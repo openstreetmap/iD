@@ -11,15 +11,15 @@ rendering the map data as well as many sorts of general DOM manipulation tasks
 for which jQuery would often be used.
 
 Notable features of d3 that are used by iD include
-[d3.fetch](https://github.com/d3/d3/blob/master/API.md#fetches-d3-fetch), which is
+[d3.fetch](https://github.com/d3/d3/blob/develop/API.md#fetches-d3-fetch), which is
 used to make the API requests to download data from openstreetmap.org and save changes;
-[d3.dispatch](https://github.com/d3/d3/blob/master/API.md#dispatches-d3-dispatch),
+[d3.dispatch](https://github.com/d3/d3/blob/develop/API.md#dispatches-d3-dispatch),
 which provides a callback-based [Observer
 pattern](http://en.wikipedia.org/wiki/Observer_pattern) between different
 parts of iD;
-[d3.geoPath](https://github.com/d3/d3/blob/master/API.md#paths), which
+[d3.geoPath](https://github.com/d3/d3/blob/develop/API.md#paths), which
 generates SVG paths for lines and areas; and
-[d3.zoom](https://github.com/d3/d3/blob/master/API.md#zooming-d3-zoom),
+[d3.zoom](https://github.com/d3/d3/blob/develop/API.md#zooming-d3-zoom),
 which implements map panning and zooming.
 
 
@@ -233,7 +233,7 @@ of duplicating the code to implement this behavior in all these modes, we
 extract it to `iD.behaviorHover`.
 
 _Behaviors_ take their inspiration from [d3's
-behaviors](https://github.com/d3/d3/blob/master/API.md). Like d3's `zoom`
+behaviors](https://github.com/d3/d3/blob/develop/API.md). Like d3's `zoom`
 and `drag`, each iD behavior is a function that takes as input a d3 selection
 (assumed to consist of a single element) and installs the DOM event bindings
 necessary to implement the behavior. The `Hover` behavior, for example,
@@ -342,7 +342,7 @@ argument is required, a `context`.
 
 The constructor function returns a draw function which accepts a d3 selection.
 Drawing is then accomplished with
-[d3.selection#call](https://github.com/d3/d3-selection/blob/master/README.md#selection_call):
+[d3.selection#call](https://github.com/d3/d3-selection/blob/develop/README.md#selection_call):
 
 ```js
     footer = footer.enter()

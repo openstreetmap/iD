@@ -1,5 +1,5 @@
 {
-    "icon": "maki-barrier",
+    "icon": "temaki-military_checkpoint",
     "fields": [
         "name"
     ],
@@ -22,5 +22,5 @@
         "troop",
         "war"
     ],
-    "name": "Checkpoint"
+    "name": "Military Checkpoint"
 }

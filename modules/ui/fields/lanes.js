@@ -9,10 +9,10 @@ export function uiFieldLanes(field, context) {
     var dispatch = d3_dispatch('change');
     var LANE_WIDTH = 40;
     var LANE_HEIGHT = 200;
-    var _entityID;
+    var _entityIDs = [];
 
     function lanes(selection) {
-        var lanesData = context.entity(_entityID).lanes();
+        var lanesData = context.entity(_entityIDs[0]).lanes();
 
         if (!d3_select('.inspector-wrap.inspector-hidden').empty() || !selection.node().parentNode) {
             selection.call(lanes.off);
@@ -122,10 +122,8 @@ export function uiFieldLanes(field, context) {
     }
 
 
-    lanes.entity = function(val) {
-        if (!_entityID || _entityID !== val.id) {
-            _entityID = val.id;
-        }
+    lanes.entityIDs = function(val) {
+        _entityIDs = val;
     };
 
     lanes.tags = function() {};
@@ -134,3 +132,5 @@ export function uiFieldLanes(field, context) {
 
     return utilRebind(lanes, dispatch, 'on');
 }
+
+uiFieldLanes.supportsMultiselection = false;

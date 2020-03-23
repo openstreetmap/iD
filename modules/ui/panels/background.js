@@ -1,8 +1,7 @@
 import _debounce from 'lodash-es/debounce';
 
 import {
-    event as d3_event,
-    select as d3_select
+    event as d3_event
 } from 'd3-selection';
 
 import { t } from '../../util/locale';
@@ -20,6 +19,8 @@ export function uiPanelBackground(context) {
 
     function redraw(selection) {
         var source = background.baseLayerSource();
+        if (!source) return;
+
         var isDG = (source.id.match(/^DigitalGlobe/i) !== null);
 
         if (currSourceName !== source.name()) {
@@ -99,7 +100,7 @@ export function uiPanelBackground(context) {
     var debouncedGetMetadata = _debounce(getMetadata, 250);
 
     function getMetadata(selection) {
-        var tile = d3_select('.layer-background img.tile-center');   // tile near viewport center
+        var tile = context.container().select('.layer-background img.tile-center');   // tile near viewport center
         if (tile.empty()) return;
 
         var sourceName = currSourceName;

@@ -8,6 +8,10 @@
         "highway": "raceway",
         "sport": "motocross"
     },
+    "reference": {
+        "key": "sport",
+        "value": "motocross"
+    },
     "terms": [
         "off-road racing",
         "offroad moto racing",

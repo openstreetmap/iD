@@ -4,7 +4,6 @@ import { coreDifference } from './difference';
 import { geoExtent } from '../geo/extent';
 import { modeSelect } from '../modes/select';
 import { utilArrayGroupBy, utilRebind } from '../util';
-import { t } from '../util/locale';
 import * as Validations from '../validations/index';
 
 
@@ -111,6 +110,7 @@ export function coreValidator(context) {
         var view = context.map().extent();
 
         return issues.filter(function(issue) {
+            if (!issue) return false;
             if (opts.includeDisabledRules === 'only' && !_disabledRules[issue.type]) return false;
             if (!opts.includeDisabledRules && _disabledRules[issue.type]) return false;
 
@@ -185,17 +185,27 @@ export function coreValidator(context) {
         'disconnected_way', 'impossible_oneway'
     ];
 
-    validator.getEntityIssues = function(entityID, options) {
+    // returns the issues that the given entity IDs have in common, matching the given options
+    validator.getSharedEntityIssues = function(entityIDs, options) {
         var cache = _headCache;
 
-        var issueIDs = cache.issuesByEntityID[entityID];
-        if (!issueIDs) return [];
+        // gather the issues that are common to all the entities
+        var issueIDs = entityIDs.reduce(function(acc, entityID) {
+            var entityIssueIDs = cache.issuesByEntityID[entityID] || new Set();
+            if (!acc) {
+                return new Set(entityIssueIDs);
+            }
+            return new Set([...acc].filter(function(elem) {
+                return entityIssueIDs.has(elem);
+            }));
+        }, null) || [];
 
         var opts = options || {};
 
         return Array.from(issueIDs)
             .map(function(id) { return cache.issuesByIssueID[id]; })
             .filter(function(issue) {
+                if (!issue) return false;
                 if (opts.includeDisabledRules === 'only' && !_disabledRules[issue.type]) return false;
                 if (!opts.includeDisabledRules && _disabledRules[issue.type]) return false;
 
@@ -224,13 +234,13 @@ export function coreValidator(context) {
     };
 
 
+    validator.getEntityIssues = function(entityID, options) {
+        return validator.getSharedEntityIssues([entityID], options);
+    };
+
+
     validator.getRuleKeys = function() {
-        return Object.keys(_rules)
-            .filter(function(key) { return key !== 'maprules'; })
-            .sort(function(key1, key2) {
-                // alphabetize by localized title
-                return t('issues.' + key1 + '.title') < t('issues.' + key2 + '.title') ? -1 : 1;
-            });
+        return Object.keys(_rules);
     };
 
 

@@ -15,9 +15,10 @@ import { modeDragNode } from './drag_node';
 import { modeDragNote } from './drag_note';
 import { uiImproveOsmEditor } from '../ui/improveOSM_editor';
 import { uiKeepRightEditor } from '../ui/keepRight_editor';
+import { uiOsmoseEditor } from '../ui/osmose_editor';
 import { utilKeybinding } from '../util';
 
-
+// NOTE: Don't change name of this until UI v3 is merged
 export function modeSelectError(context, selectedErrorID, selectedErrorService) {
     var mode = {
         id: 'select-error',
@@ -41,6 +42,16 @@ export function modeSelectError(context, selectedErrorID, selectedErrorService) 
             break;
         case 'keepRight':
             errorEditor = uiKeepRightEditor(context)
+            .on('change', function() {
+                context.map().pan([0,0]);  // trigger a redraw
+                var error = checkSelectedID();
+                if (!error) return;
+                context.ui().sidebar
+                    .show(errorEditor.error(error));
+            });
+            break;
+        case 'osmose':
+            errorEditor = uiOsmoseEditor(context)
             .on('change', function() {
                 context.map().pan([0,0]);  // trigger a redraw
                 var error = checkSelectedID();
@@ -107,7 +118,7 @@ export function modeSelectError(context, selectedErrorID, selectedErrorService) 
             if (!checkSelectedID()) return;
 
             var selection = context.surface()
-                .selectAll('.error_id-' + selectedErrorID + '.' + selectedErrorService);
+                .selectAll('.itemId-' + selectedErrorID + '.' + selectedErrorService);
 
             if (selection.empty()) {
                 // Return to browse mode if selected DOM elements have
@@ -139,7 +150,7 @@ export function modeSelectError(context, selectedErrorID, selectedErrorService) 
             .call(keybinding.unbind);
 
         context.surface()
-            .selectAll('.qa_error.selected')
+            .selectAll('.qaItem.selected')
             .classed('selected hover', false);
 
         context.map()

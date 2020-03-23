@@ -11,10 +11,6 @@
         "line"
     ],
     "tags": {
-        "cycleway": "crossing",
-        "crossing": "marked"
-    },
-    "addTags": {
         "highway": "cycleway",
         "cycleway": "crossing",
         "crossing": "marked"

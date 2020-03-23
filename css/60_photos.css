@@ -1,5 +1,5 @@
 /* photo viewer div */
-#photoviewer {
+.photoviewer {
     position: relative;
     flex-shrink: 0;
     margin-bottom: 10px;
@@ -8,23 +8,23 @@
     padding: 5px;
     background-color: #fff;
 }
-[dir='ltr'] #photoviewer {
+.ideditor[dir='ltr'] .photoviewer {
     margin-left: 10px;
     margin-right: 2px;
 }
-[dir='rtl'] #photoviewer {
+.ideditor[dir='rtl'] .photoviewer {
     margin-right: 10px;
     margin-left: 2px;
 }
 
 @media screen and (min-width: 1600px) {
-    #photoviewer {
+    .photoviewer {
         width: 490px;
         height: 370px;
     }
 }
 
-#photoviewer button.thumb-hide {
+.photoviewer button.thumb-hide {
     border-radius: 0;
     padding: 5px;
     position: absolute;
@@ -33,7 +33,7 @@
     z-index: 50;
 }
 
-#photoviewer button.resize-handle-xy {
+.photoviewer button.resize-handle-xy {
     border-radius: 0;
     position: absolute;
     top: 0;
@@ -44,7 +44,7 @@
     width: 25px;
 }
 
-#photoviewer button.resize-handle-x {
+.photoviewer button.resize-handle-x {
     border-radius: 0;
     position: absolute;
     top: 0;
@@ -56,7 +56,7 @@
     width: 6px;
 }
 
-#photoviewer button.resize-handle-y {
+.photoviewer button.resize-handle-y {
     border-radius: 0;
     position: absolute;
     top: 0;
@@ -99,8 +99,8 @@
 .viewfield-group {
     pointer-events: none;
 }
-.mode-browse .viewfield-group,
-.mode-select .viewfield-group {
+.ideditor.mode-browse .viewfield-group,
+.ideditor.mode-select .viewfield-group {
     pointer-events: visible;
     cursor: pointer;
 }

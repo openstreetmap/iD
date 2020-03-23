@@ -1,5 +1,5 @@
 {
-    "icon": "iD-railway-rail",
+    "icon": "maki-rail",
     "fields": [
         "name",
         "ref_route",

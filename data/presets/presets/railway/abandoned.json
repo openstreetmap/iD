@@ -1,5 +1,5 @@
 {
-    "icon": "iD-railway-abandoned",
+    "icon": "temaki-railway_track_askew",
     "fields": [
         "name",
         "structure",
@@ -7,7 +7,8 @@
         "usage_rail"
     ],
     "moreFields": [
-        "covered"
+        "covered",
+        "incline"
     ],
     "geometry": [
         "line"

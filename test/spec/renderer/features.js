@@ -3,9 +3,9 @@ describe('iD.rendererFeatures', function() {
     var context, features;
 
     beforeEach(function() {
-        context = iD.coreContext();
+        context = iD.coreContext().init();
         d3.select(document.createElement('div'))
-            .attr('id', 'map')
+            .attr('class', 'main-map')
             .call(context.map());
         context.map().zoom(16);
         features = iD.rendererFeatures(context);

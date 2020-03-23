@@ -3,12 +3,14 @@ import { select as d3_select } from 'd3-selection';
 
 import { uiCombobox } from '../combobox';
 import { utilGetSetValue, utilNoAuto, utilRebind } from '../../util';
+import { t } from '../../util/locale';
 
 
 export function uiFieldCycleway(field, context) {
     var dispatch = d3_dispatch('change');
     var items = d3_select(null);
     var wrap = d3_select(null);
+    var _tags;
 
     function cycleway(selection) {
 
@@ -54,6 +56,7 @@ export function uiFieldCycleway(field, context) {
             .attr('class', 'preset-input-cycleway-wrap')
             .append('input')
             .attr('type', 'text')
+            .attr('maxlength', context.maxCharsForTagValue())
             .attr('class', function(d) { return 'preset-input-cycleway preset-input-' + stripcolon(d); })
             .call(utilNoAuto)
             .each(function(d) {
@@ -72,29 +75,40 @@ export function uiFieldCycleway(field, context) {
     }
 
 
-    function change() {
-        var left = utilGetSetValue(d3_select('.preset-input-cyclewayleft'));
-        var right = utilGetSetValue(d3_select('.preset-input-cyclewayright'));
+    function change(key) {
+
+        var newValue = utilGetSetValue(d3_select(this));
+
+        // don't override multiple values with blank string
+        if (!newValue && (Array.isArray(_tags.cycleway) || Array.isArray(_tags[key]))) return;
+
+        if (newValue === 'none' || newValue === '') { newValue = undefined; }
+
+        var otherKey = key === 'cycleway:left' ? 'cycleway:right' : 'cycleway:left';
+        var otherValue = typeof _tags.cycleway === 'string' ? _tags.cycleway : _tags[otherKey];
+        if (otherValue && Array.isArray(otherValue)) {
+            // we must always have an explicit value for comparison
+            otherValue = otherValue[0];
+        }
+        if (otherValue === 'none' || otherValue === '') { otherValue = undefined; }
+
         var tag = {};
-
-        if (left === 'none' || left === '') { left = undefined; }
-        if (right === 'none' || right === '') { right = undefined; }
-
-        // Always set both left and right as changing one can affect the other
-        tag = {
-            cycleway: undefined,
-            'cycleway:left': left,
-            'cycleway:right': right
-        };
 
         // If the left and right tags match, use the cycleway tag to tag both
         // sides the same way
-        if (left === right) {
+        if (newValue === otherValue) {
             tag = {
-                cycleway: left,
+                cycleway: newValue,
                 'cycleway:left': undefined,
                 'cycleway:right': undefined
             };
+        } else {
+            // Always set both left and right as changing one can affect the other
+            tag = {
+                cycleway: undefined
+            };
+            tag[key] = newValue;
+            tag[otherKey] = otherValue;
         }
 
         dispatch.call('change', this, tag);
@@ -112,14 +126,37 @@ export function uiFieldCycleway(field, context) {
 
 
     cycleway.tags = function(tags) {
+        _tags = tags;
+
+        // If cycleway is set, use that instead of individual values
+        var commonValue = typeof tags.cycleway === 'string' && tags.cycleway;
+
         utilGetSetValue(items.selectAll('.preset-input-cycleway'), function(d) {
-                // If cycleway is set, always return that
-                if (tags.cycleway) {
-                    return tags.cycleway;
-                }
-                return tags[d] || '';
+                if (commonValue) return commonValue;
+                return !tags.cycleway && typeof tags[d] === 'string' ? tags[d] : '';
             })
-            .attr('placeholder', field.placeholder());
+            .attr('title', function(d) {
+                if (Array.isArray(tags.cycleway) || Array.isArray(tags[d])) {
+                    var vals = [];
+                    if (Array.isArray(tags.cycleway)) {
+                        vals = vals.concat(tags.cycleway);
+                    }
+                    if (Array.isArray(tags[d])) {
+                        vals = vals.concat(tags[d]);
+                    }
+                    return vals.filter(Boolean).join('\n');
+                }
+                return null;
+            })
+            .attr('placeholder', function(d) {
+                if (Array.isArray(tags.cycleway) || Array.isArray(tags[d])) {
+                    return t('inspector.multiple_values');
+                }
+                return field.placeholder();
+            })
+            .classed('mixed', function(d) {
+                return Array.isArray(tags.cycleway) || Array.isArray(tags[d]);
+            });
     };
 
 

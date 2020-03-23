@@ -81,9 +81,9 @@ describe('iD.svgData', function () {
     }
 
     beforeEach(function () {
-        context = iD.coreContext();
+        context = iD.coreContext().init();
         d3.select(document.createElement('div'))
-            .attr('id', 'map')
+            .attr('class', 'main-map')
             .call(context.map().centerZoom([-74.389286, 40.1502754], 17));
 
         surface = context.surface();

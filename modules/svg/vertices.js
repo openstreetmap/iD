@@ -192,7 +192,7 @@ export function svgVertices(projection, context) {
             .attr('class', 'viewfield')
             .attr('d', 'M0,0H0')
             .merge(viewfields)
-            .attr('marker-start', 'url(#viewfield-marker' + (wireframe ? '-wireframe' : '') + ')')
+            .attr('marker-start', 'url(#ideditor-viewfield-marker' + (wireframe ? '-wireframe' : '') + ')')
             .attr('transform', function(d) { return 'rotate(' + d + ')'; });
     }
 

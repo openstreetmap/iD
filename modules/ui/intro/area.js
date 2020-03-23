@@ -470,11 +470,11 @@ export function uiIntroArea(context, reveal) {
 
     function play() {
         dispatch.call('done');
-        reveal('#id-container',
+        reveal('.ideditor',
             t('intro.areas.play', { next: t('intro.lines.title') }), {
                 tooltipBox: '.intro-nav-wrap .chapter-line',
                 buttonText: t('intro.ok'),
-                buttonCallback: function() { reveal('#id-container'); }
+                buttonCallback: function() { reveal('.ideditor'); }
             }
         );
     }

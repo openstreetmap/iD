@@ -8,6 +8,9 @@ en:
     copy: copy
     view_on: view on {domain}
     favorite: favorite
+    list: list
+    text: text
+    deselect: deselect
   toolbar:
     inspect: Inspect
     undo_redo: Undo / Redo
@@ -44,14 +47,6 @@ en:
       key: N
     add_preset:
       title: "Add {feature}"
-      point:
-        title: "Add {feature} as a point"
-      line:
-        title: "Add {feature} as a line"
-      area:
-        title: "Add {feature} as an area"
-      building:
-        title: "Add {feature} as a building"
     browse:
       title: Browse
       description: Pan and zoom the map.
@@ -90,17 +85,29 @@ en:
     circularize:
       title: Circularize
       description:
-        line: Make this line circular.
-        area: Make this area circular.
+        single: Make this feature circular.
+        multiple: Make these features circular.
       key: O
       annotation:
-        line: Made a line circular.
-        area: Made an area circular.
-      not_closed: This can't be made circular because it's not a loop.
-      too_large: This can't be made circular because not enough of it is currently visible.
-      connected_to_hidden: This can't be made circular because it is connected to a hidden feature.
-      not_downloaded: This can't be made circular because parts of it have not yet been downloaded.
-      already_circular: This can't be made circular because it's already circular.
+        single: Made a feature circular.
+        multiple: Made features circular.
+      multiple_blockers:
+        multiple: These can't be made circular for multiple reasons.
+      not_closed:
+        single: This can't be made circular because it's not a loop.
+        multiple: These can't be made circular because they aren't loops.
+      too_large:
+        single: This can't be made circular because not enough of it is currently visible.
+        multiple: These can't be made circular because not enough of them are currently visible.
+      connected_to_hidden:
+        single: This can't be made circular because it is connected to a hidden feature.
+        multiple: These can't be made circular because some are connected to hidden features.
+      not_downloaded:
+        single: This can't be made circular because parts of it have not yet been downloaded.
+        multiple: These can't be made circular because parts of them have not yet been downloaded.
+      already_circular:
+        single: This can't be made more circular than it already is.
+        multiple: These can't be made more circular than they already are.
     orthogonalize:
       title: Square
       description:
@@ -449,7 +456,7 @@ en:
     request_review: "I would like someone to review my edits."
     save: Upload
     cancel: Cancel
-    changes: "{count} Changes"
+    changes: "Changes ({count})"
     download_changes: Download osmChange file
     errors: Errors
     warnings: Warnings
@@ -528,23 +535,24 @@ en:
     search: Search worldwide...
     no_results_worldwide: No results found
   geolocate:
+    key: L
     title: Show My Location
     locating: "Locating, please wait..."
+    location_unavailable: Your location is unavailable.
   inspector:
     zoom_to:
       key: Z
-      title: Zoom to this
-      tooltip_feature: "Center and zoom the map to focus on this feature."
-      tooltip_note: "Center and zoom the map to focus on this note."
-      tooltip_data: "Center and zoom the map to focus on this data."
-      tooltip_issue: "Center and zoom the map to focus on this issue."
+      title: Zoom To Selection
     show_more: Show More
     view_on_osm: View on openstreetmap.org
+    view_on_osmose: View on osmose.openstreetmap.fr
     view_on_keepRight: View on keepright.at
-    all_fields: All fields
-    all_tags: All tags
-    all_members: All members
-    all_relations: All relations
+    feature_type: Feature Type
+    fields: Fields
+    tags_count: "Tags ({count})"
+    members_count: "Members ({count})"
+    relations_count: "Relations ({count})"
+    features_count: "Features ({count})"
     add_to_relation: Add to a relation
     new_relation: New relation...
     choose_relation: Choose a parent relation
@@ -555,17 +563,21 @@ en:
     edit_reference: "edit/translate"
     wiki_reference: View documentation
     wiki_en_reference: View documentation in English
+    key_value: "key=value"
+    multiple_values: Multiple Values
+    multiple_types: Multiple Types
+    unshared_value_tooltip: not shared by all features
     hidden_preset:
       manual: "{features} are hidden. Enable them in the Map Data pane."
       zoom: "{features} are hidden. Zoom in to enable them."
-    back_tooltip: Change feature
+    back_tooltip: Change feature type
     remove: Remove
     search: Search
-    multiselect: Selected features
     unknown: Unknown
     incomplete: <not downloaded>
     feature_list: Search features
     edit: Edit feature
+    edit_features: Edit features
     check:
       "yes": "Yes"
       "no": "No"
@@ -583,7 +595,7 @@ en:
     location: Location
     add_fields: "Add field:"
     lock:
-      suggestion: 'The "{label}" field is locked because there is a Wikidata tag. You can delete it or edit the tags in the "All tags" section.'
+      suggestion: 'The "{label}" field is locked because there is a Wikidata tag. You can delete it or edit the tags in the "Tags" section.'
   background:
     title: Background
     description: Background settings
@@ -609,7 +621,7 @@ en:
     panel:
       description: Show Detail Panel
       tooltip: Show advanced background information.
-    fix_misalignment: Adjust imagery offset
+    fix_misalignment: Imagery Offset
     offset: "Drag anywhere in the gray area below to adjust the imagery offset, or enter the offset values in meters."
   map_data:
     title: Map Data
@@ -624,11 +636,14 @@ en:
         tooltip: Note data from OpenStreetMap
         title: OpenStreetMap notes
       keepRight:
-        tooltip: Automatically detected map issues from keepright.at
+        tooltip: Data issues detected by keepright.at
         title: KeepRight Issues
       improveOSM:
-        tooltip: Missing data automatically detected by improveosm.org
+        tooltip: Missing data detected by improveosm.org
         title: ImproveOSM Issues
+      osmose:
+        tooltip: Data issues detected by osmose.openstreetmap.fr
+        title: Osmose Issues
       custom:
         tooltip: "Drag and drop a data file onto the page, or click the button to setup"
         title: Custom Map Data
@@ -818,11 +833,21 @@ en:
     on_wiki: "{tag} on wiki.osm.org"
     used_with: "used with {type}"
   zoom:
-    in: Zoom in
-    out: Zoom out
+    in: Zoom In
+    out: Zoom Out
   cannot_zoom: "Cannot zoom out further in current mode."
   full_screen: Toggle Full Screen
+  self_intersection:
+    error:
+      lines: Lines cannot cross over themselves.
+      areas: Areas cannot cross over themselves.
   QA:
+    osmose:
+      title: Osmose Issue
+      detail_title: Details
+      elems_title: Features
+      fix_title: Fix Guidelines
+      trap_title: Common Mistakes
     improveOSM:
       title: ImproveOSM Detection
       geometry_types:
@@ -851,16 +876,15 @@ en:
           title: Missing Turn Restriction
           description: '{num_passed} of {num_trips} recorded trips (travelling {travel_direction}) make a turn from {from_way} to {to_way} at {junction}. There may be a missing "{turn_restriction}" restriction.'
     keepRight:
-      title: KeepRight Error
-      detail_title: Error
+      title: KeepRight
       detail_description: Description
       comment: Comment
       comment_placeholder: Enter a comment to share with other users.
-      close: Close (Error Fixed)
-      ignore: Ignore (Not an Error)
+      close: Close (Issue Fixed)
+      ignore: Remove (False Positive)
       save_comment: Save Comment
       close_comment: Close and Comment
-      ignore_comment: Ignore and Comment
+      ignore_comment: Remove and Comment
       error_parts:
         this_node: 'this node'
         this_way: 'this way'
@@ -1187,7 +1211,7 @@ en:
       before_start: "You should be familiar with OpenStreetMap and this editor before you start editing. iD contains a walkthrough to teach you the basics of editing OpenStreetMap. Click \"Start the Walkthrough\" on this screen to take the tutorial - it takes only about 15 minutes."
       open_source_h: "Open Source"
       open_source: "The iD editor is a collaborative open source project, and you are using version {version} now. The source code is available [on GitHub](https://github.com/openstreetmap/iD)."
-      open_source_help: "You can help iD by [translating](https://github.com/openstreetmap/iD/blob/master/CONTRIBUTING.md#translating) or [reporting bugs](https://github.com/openstreetmap/iD/issues)."
+      open_source_help: "You can help iD by [translating](https://github.com/openstreetmap/iD/blob/develop/CONTRIBUTING.md#translating) or [reporting bugs](https://github.com/openstreetmap/iD/issues)."
     overview:
       title: Overview
       navigation_h: "Navigation"
@@ -1223,11 +1247,11 @@ en:
       type: "You can click on the feature type to change the feature to a different type. Everything that exists in the real world can be added to OpenStreetMap, so there are thousands of feature types to choose from."
       type_picker: "The type picker displays the most common feature types, such as parks, hospitals, restaurants, roads, and buildings. You can search for anything by typing what you're looking for in the search box. You can also click the {inspect} **Info** icon next to the feature type to learn more about it."
       fields_h: "Fields"
-      fields_all_fields: "The \"All fields\" section contains all of the feature's details that you may edit. In OpenStreetMap, all of the fields are optional, and it's OK to leave a field blank if you are unsure."
+      fields_all_fields: "The \"Fields\" section contains all of the feature's details that you may edit. In OpenStreetMap, all of the fields are optional, and it's OK to leave a field blank if you are unsure."
       fields_example: "Each feature type will display different fields. For example, a road may display fields for its surface and speed limit, but a restaurant may display fields for the type of food it serves and the hours it is open."
       fields_add_field: "You can also click the \"Add field\" dropdown to add more fields, such as a description, Wikipedia link, wheelchair access, and more."
       tags_h: "Tags"
-      tags_all_tags: "Below the fields section, you can expand the \"All tags\" section to edit any of the OpenStreetMap *tags* for the selected feature. Each tag consists of a *key* and *value*, data elements that define all of the features stored in OpenStreetMap."
+      tags_all_tags: "Below the fields section, you can expand the \"Tags\" section to edit any of the OpenStreetMap *tags* for the selected feature. Each tag consists of a *key* and *value*, data elements that define all of the features stored in OpenStreetMap."
       tags_resources: "Editing a feature's tags requires intermediate knowledge about OpenStreetMap. You should consult resources like the [OpenStreetMap Wiki](https://wiki.openstreetmap.org/wiki/Main_Page) or [Taginfo](https://taginfo.openstreetmap.org/) to learn more about accepted OpenStreetMap tagging practices."
     points:
       title: Points
@@ -1284,8 +1308,8 @@ en:
       title: Relations
       intro: "A *relation* is a special type of feature in OpenStreetMap that groups together other features. The features that belong to a relation are called *members*, and each member can have a *role* in the relation."
       edit_relation_h: "Editing Relations"
-      edit_relation: "At the bottom of the feature editor, you can expand the \"All relations\" section to see if the selected feature is a member of any relations. You can then click on the relation to select and edit it."
-      edit_relation_add: "To add a feature to a relation, select the feature, then click the {plus} add button in the \"All relations\" section of the feature editor. You can choose from a list of nearby relations, or choose the \"New relation...\" option."
+      edit_relation: "At the bottom of the feature editor, you can expand the \"Relations\" section to see if the selected feature is a member of any relations. You can then click on the relation to select and edit it."
+      edit_relation_add: "To add a feature to a relation, select the feature, then click the {plus} add button in the \"Relations\" section of the feature editor. You can choose from a list of nearby relations, or choose the \"New relation...\" option."
       edit_relation_delete: "You can also click the {delete} **Delete** button to remove the selected feature from the relation. If you remove all of the members from a relation, the relation will be deleted automatically."
       maintain_relation_h: "Maintaining Relations"
       maintain_relation: "For the most part, iD will maintain relations automatically as you edit. You should take care when replacing features that might be members of relations. For example if you delete a section of road and draw a new section of road to replace it, you should add the new section to the same relations (routes, turn restrictions, etc.) as the original."
@@ -1300,10 +1324,10 @@ en:
       turn_restriction_editing: "In the \"Turn Restrictions\" field, click to select a \"from\" road, and see whether turns are allowed or restricted to any of the \"to\" roads. You can click on the turn icons to toggle them between allowed and restricted. iD will create relations automatically and set the from, via, and to roles based on your choices."
       route_h: "Routes"
       route: "A *route* relation is a group of one or more line features that together form a route network, like a bus route, train route, or highway route."
-      route_add: "To add a feature to a route relation, select the feature and scroll down to the \"All relations\" section of the feature editor, then click the {plus} add button to add this feature to a nearby existing relation or a new relation."
+      route_add: "To add a feature to a route relation, select the feature and scroll down to the \"Relations\" section of the feature editor, then click the {plus} add button to add this feature to a nearby existing relation or a new relation."
       boundary_h: "Boundaries"
       boundary: "A *boundary* relation is a group of one or more line features that together form an administrative boundary."
-      boundary_add: "To add a feature to a boundary relation, select the feature and scroll down to the \"All relations\" section of the feature editor, then click the {plus} add button to add this feature to a nearby existing relation or a new relation."
+      boundary_add: "To add a feature to a boundary relation, select the feature and scroll down to the \"Relations\" section of the feature editor, then click the {plus} add button to add this feature to a nearby existing relation or a new relation."
     notes:
       title: Notes
       intro: "*Notes* are used to alert other users that a feature requires fixing or attention. Notes mark a specific location on the map. To view existing notes or add new ones, click the {data} **Map data** panel to enable the OpenStreetMap notes layer."
@@ -1342,7 +1366,7 @@ en:
       title: Quality Assurance
       intro: "*Quality Assurance* (Q/A) tools can find improper tags, disconnected roads, and other issues with OpenStreetMap, which mappers can then fix. To view existing Q/A issues, click the {data} **Map data** panel to enable a specific Q/A layer."
       tools_h: "Tools"
-      tools: "The following tools are currently supported: [KeepRight](https://www.keepright.at/) and [ImproveOSM](https://improveosm.org/en/). Expect iD to support [Osmose](https://osmose.openstreetmap.fr/) and more Q/A tools in the future."
+      tools: "The following tools are currently supported: [KeepRight](https://www.keepright.at/), [ImproveOSM](https://improveosm.org/en/) and [Osmose](https://osmose.openstreetmap.fr/)."
       issues_h: "Handling Issues"
       issues: "Handling Q/A issues is similar to handling notes. Click on a marker to view the issue details in the sidebar. Each tool has its own capabilities, but generally you can comment and/or close an issue."
     field:
@@ -1956,6 +1980,7 @@ en:
         pan_more: "Pan map by one screenful"
         zoom: "Zoom in / Zoom out"
         zoom_more: "Zoom in / Zoom out by a lot"
+        geolocate: "Zoom to my location"
       help:
         title: "Help"
         help: "Show help/documentation"

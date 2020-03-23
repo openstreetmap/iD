@@ -391,21 +391,21 @@ export function uiPresetIcon(context) {
   }
 
 
-  presetIcon.preset = (val) => {
+  presetIcon.preset = function(val) {
     if (!arguments.length) return _preset;
     _preset = utilFunctor(val);
     return presetIcon;
   };
 
 
-  presetIcon.geometry = (val) => {
+  presetIcon.geometry = function(val) {
     if (!arguments.length) return _geometry;
     _geometry = utilFunctor(val);
     return presetIcon;
   };
 
 
-  presetIcon.sizeClass = (val) => {
+  presetIcon.sizeClass = function(val) {
     if (!arguments.length) return _sizeClass;
     _sizeClass = val;
     return presetIcon;

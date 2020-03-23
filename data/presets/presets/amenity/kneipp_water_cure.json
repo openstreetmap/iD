@@ -1,0 +1,26 @@
+{
+    "icon": "maki-hospital",
+    "fields": [ 
+        "kneipp_water_cure_multi",       
+        "opening_hours",
+        "fee"
+                                      
+        
+        
+        
+    ],
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "terms": [],
+    "tags": {
+        "amenity": "kneipp_water_cure"
+        
+    },
+    "reference": {
+        "key": "amenity",
+        "value": "kneipp_water_cure"
+    },
+    "name": "Kneipp Water Cure"
+}

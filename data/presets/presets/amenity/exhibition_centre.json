@@ -1,0 +1,43 @@
+{
+    "icon": "fas-user-tie",
+    "fields": [
+        "name",
+        "operator",
+        "operator/type",
+        "building_area",
+        "address",
+        "website",
+        "internet_access",
+        "internet_access/fee",
+        "internet_access/ssid"
+    ],
+    "moreFields": [
+        "air_conditioning",
+        "email",
+        "fax",
+        "gnis/feature_id",
+        "not/name",
+        "phone",
+        "smoking",
+        "wheelchair"
+    ],
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "tags": {
+        "amenity": "exhibition_centre"
+    },
+    "terms": [
+        "exhibition center",
+        "fair",
+        "exhibition",
+        "exposition",
+        "trade fair",
+        "trade show",
+        "trade exhibition",
+        "expo",
+        "tradeshow"
+    ],
+    "name": "Exposition Center"
+}

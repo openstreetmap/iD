@@ -1,16 +1,19 @@
 {
     "icon": "temaki-power",
     "fields": [
+        "ref",
         "operator",
         "generator/source",
         "generator/method",
         "generator/type",
-        "generator/output/electricity",
-        "ref"
+        "generator/output/electricity"
     ],
     "moreFields": [
+        "colour",
+        "height",
         "level",
-        "manufacturer"
+        "manufacturer",
+        "material"
     ],
     "geometry": [
         "point",

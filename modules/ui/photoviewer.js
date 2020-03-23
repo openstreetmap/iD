@@ -18,9 +18,9 @@ export function uiPhotoviewer(context) {
             .append('button')
             .attr('class', 'thumb-hide')
             .on('click', function () {
-                if (services.streetside) { services.streetside.hideViewer(); }
-                if (services.mapillary) { services.mapillary.hideViewer(); }
-                if (services.openstreetcam) { services.openstreetcam.hideViewer(); }
+                if (services.streetside) { services.streetside.hideViewer(context); }
+                if (services.mapillary) { services.mapillary.hideViewer(context); }
+                if (services.openstreetcam) { services.openstreetcam.hideViewer(context); }
             })
             .append('div')
             .call(svgIcon('#iD-icon-close'));
@@ -104,8 +104,8 @@ export function uiPhotoviewer(context) {
     }
 
     photoviewer.onMapResize = function() {
-        var photoviewer = d3_select('#photoviewer');
-        var content = d3_select('#content');
+        var photoviewer = context.container().select('.photoviewer');
+        var content = context.container().select('.main-content');
         var mapDimensions = utilGetDimensions(content, true);
         // shrink photo viewer if it is too big
         // (-90 preserves space at top and bottom of map used by menus)

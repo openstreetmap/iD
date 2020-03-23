@@ -5,7 +5,8 @@ describe.skip('iD.modeAddPoint', function() {
         var container = d3.select(document.createElement('div'));
 
         context = iD.coreContext()
-            .container(container);
+            .container(container)
+            .init();
 
         context.loadTiles = function () {};
 
@@ -21,7 +22,7 @@ describe.skip('iD.modeAddPoint', function() {
         it('adds a point', function() {
             happen.mousedown(context.surface().node(), {});
             happen.mouseup(window, {});
-            expect(context.changes().created).to.have.length(1);
+            expect(context.history().changes().created).to.have.length(1);
             context.mode().exit();
             d3.select('window').on('click.draw-block', null);
         });
@@ -30,7 +31,7 @@ describe.skip('iD.modeAddPoint', function() {
             happen.mousedown(context.surface().node(), {});
             happen.mouseup(window, {});
             expect(context.mode().id).to.equal('select');
-            expect(context.mode().selectedIDs()).to.eql([context.changes().created[0].id]);
+            expect(context.mode().selectedIDs()).to.eql([context.history().changes().created[0].id]);
             context.mode().exit();
         });
     });

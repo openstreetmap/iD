@@ -107,7 +107,7 @@ export function uiToolNotes(context) {
                     .placement('bottom')
                     .html(true)
                     .title(function(d) { return uiTooltipHtml(d.description, d.key); })
-                    .scrollContainer(d3_select('#bar'))
+                    .scrollContainer(context.container().select('.top-toolbar'))
                 );
 
             buttonsEnter
@@ -118,7 +118,7 @@ export function uiToolNotes(context) {
 
             // if we are adding/removing the buttons, check if toolbar has overflowed
             if (buttons.enter().size() || buttons.exit().size()) {
-                context.ui().checkOverflow('#bar', true);
+                context.ui().checkOverflow('.top-toolbar', true);
             }
 
             // update

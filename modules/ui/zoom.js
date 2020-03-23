@@ -11,44 +11,40 @@ import { tooltip } from '../util/tooltip';
 
 
 export function uiZoom(context) {
+
     var zooms = [{
         id: 'zoom-in',
         icon: 'plus',
         title: t('zoom.in'),
-        action: context.zoomIn,
+        action: zoomIn,
         key: '+'
     }, {
         id: 'zoom-out',
         icon: 'minus',
         title: t('zoom.out'),
-        action: context.zoomOut,
+        action: zoomOut,
         key: '-'
     }];
 
-
     function zoomIn() {
         d3_event.preventDefault();
-        context.zoomIn();
+        context.map().zoomIn();
     }
-
 
     function zoomOut() {
         d3_event.preventDefault();
-        context.zoomOut();
+        context.map().zoomOut();
     }
-
 
     function zoomInFurther() {
         d3_event.preventDefault();
-        context.zoomInFurther();
+        context.map().zoomInFurther();
     }
-
 
     function zoomOutFurther() {
         d3_event.preventDefault();
-        context.zoomOutFurther();
+        context.map().zoomOutFurther();
     }
-
 
     return function(selection) {
         var button = selection.selectAll('button')

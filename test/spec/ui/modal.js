@@ -4,11 +4,11 @@ describe('iD.uiModal', function () {
     beforeEach(function() {
         elem = d3.select('body')
             .append('div')
-            .attr('id', 'modal-wrap');
+            .attr('class', 'modal-wrap');
     });
 
     afterEach(function() {
-        d3.select('#modal-wrap')
+        d3.select('.modal-wrap')
             .remove();
     });
 

@@ -181,7 +181,7 @@ export function uiFieldHelp(context, fieldName) {
         if (_wrap.empty()) return;
 
         // absolute position relative to the inspector, so it "floats" above the fields
-        _inspector = d3_select('#sidebar .entity-editor-pane .inspector-body');
+        _inspector = d3_select('.sidebar .entity-editor-pane .inspector-body');
         if (_inspector.empty()) return;
 
         _body = _inspector.selectAll('.field-help-body')

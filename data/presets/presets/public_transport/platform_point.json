@@ -13,6 +13,7 @@
         "gnis/feature_id",
         "level",
         "lit",
+        "tactile_paving",
         "wheelchair"
     ],
     "geometry": [

@@ -42,7 +42,7 @@ export function modeRotate(context, entityIDs) {
         operationReflectShort(entityIDs, context).behavior
     ];
     var annotation = entityIDs.length === 1 ?
-        t('operations.rotate.annotation.' + context.geometry(entityIDs[0])) :
+        t('operations.rotate.annotation.' + context.graph().geometry(entityIDs[0])) :
         t('operations.rotate.annotation.multiple');
 
     var _prevGraph;
@@ -74,7 +74,7 @@ export function modeRotate(context, entityIDs) {
         }
 
 
-        var currMouse = context.mouse();
+        var currMouse = context.map().mouse();
         var currAngle = Math.atan2(currMouse[1] - _pivot[1], currMouse[0] - _pivot[0]);
 
         if (typeof _prevAngle === 'undefined') _prevAngle = currAngle;

@@ -19,7 +19,7 @@ export function uiCurtain() {
     function curtain(selection) {
         surface = selection
             .append('svg')
-            .attr('id', 'curtain')
+            .attr('class', 'curtain')
             .style('z-index', 1000)
             .style('pointer-events', 'none')
             .style('position', 'absolute')

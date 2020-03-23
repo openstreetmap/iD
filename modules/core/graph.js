@@ -46,6 +46,11 @@ coreGraph.prototype = {
     },
 
 
+    geometry: function(id) {
+        return this.entity(id).geometry(this);
+    },
+
+
     transient: function(entity, key, fn) {
         var id = entity.id;
         var transients = this.transients[id] || (this.transients[id] = {});

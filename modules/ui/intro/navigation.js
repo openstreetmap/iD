@@ -57,9 +57,9 @@ export function uiIntroNavigation(context, reveal) {
         timeout(function() {
             var centerStart = context.map().center();
 
-            reveal('#surface', t('intro.navigation.drag'));
+            reveal('.surface', t('intro.navigation.drag'));
             context.map().on('drawn.intro', function() {
-                reveal('#surface', t('intro.navigation.drag'), { duration: 0 });
+                reveal('.surface', t('intro.navigation.drag'), { duration: 0 });
             });
 
             context.map().on('move.intro', function() {
@@ -82,7 +82,7 @@ export function uiIntroNavigation(context, reveal) {
     function zoomMap() {
         var zoomStart = context.map().zoom();
 
-        reveal('#surface',
+        reveal('.surface',
             t('intro.navigation.zoom', {
                 plus: icon('#iD-icon-plus', 'pre-text'),
                 minus: icon('#iD-icon-minus', 'pre-text')
@@ -90,7 +90,7 @@ export function uiIntroNavigation(context, reveal) {
         );
 
         context.map().on('drawn.intro', function() {
-            reveal('#surface',
+            reveal('.surface',
                 t('intro.navigation.zoom', {
                     plus: icon('#iD-icon-plus', 'pre-text'),
                     minus: icon('#iD-icon-minus', 'pre-text')
@@ -115,12 +115,12 @@ export function uiIntroNavigation(context, reveal) {
     function features() {
         var onClick = function() { continueTo(pointsLinesAreas); };
 
-        reveal('#surface', t('intro.navigation.features'),
+        reveal('.surface', t('intro.navigation.features'),
             { buttonText: t('intro.ok'), buttonCallback: onClick }
         );
 
         context.map().on('drawn.intro', function() {
-            reveal('#surface', t('intro.navigation.features'),
+            reveal('.surface', t('intro.navigation.features'),
                 { duration: 0, buttonText: t('intro.ok'), buttonCallback: onClick }
             );
         });
@@ -134,12 +134,12 @@ export function uiIntroNavigation(context, reveal) {
     function pointsLinesAreas() {
         var onClick = function() { continueTo(nodesWays); };
 
-        reveal('#surface', t('intro.navigation.points_lines_areas'),
+        reveal('.surface', t('intro.navigation.points_lines_areas'),
             { buttonText: t('intro.ok'), buttonCallback: onClick }
         );
 
         context.map().on('drawn.intro', function() {
-            reveal('#surface', t('intro.navigation.points_lines_areas'),
+            reveal('.surface', t('intro.navigation.points_lines_areas'),
                 { duration: 0, buttonText: t('intro.ok'), buttonCallback: onClick }
             );
         });
@@ -153,12 +153,12 @@ export function uiIntroNavigation(context, reveal) {
     function nodesWays() {
         var onClick = function() { continueTo(clickTownHall); };
 
-        reveal('#surface', t('intro.navigation.nodes_ways'),
+        reveal('.surface', t('intro.navigation.nodes_ways'),
             { buttonText: t('intro.ok'), buttonCallback: onClick }
         );
 
         context.map().on('drawn.intro', function() {
-            reveal('#surface', t('intro.navigation.nodes_ways'),
+            reveal('.surface', t('intro.navigation.nodes_ways'),
                 { duration: 0, buttonText: t('intro.ok'), buttonCallback: onClick }
             );
         });
@@ -304,7 +304,7 @@ export function uiIntroNavigation(context, reveal) {
             }
         });
 
-        reveal('.inspector-body .preset-list-item.inspector-inner',
+        reveal('.entity-editor .preset-list-item',
             t('intro.navigation.preset_townhall', { preset: preset.name() }),
             { buttonText: t('intro.ok'), buttonCallback: onClick }
         );
@@ -530,11 +530,11 @@ export function uiIntroNavigation(context, reveal) {
 
     function play() {
         dispatch.call('done');
-        reveal('#id-container',
+        reveal('.ideditor',
             t('intro.navigation.play', { next: t('intro.points.title') }), {
                 tooltipBox: '.intro-nav-wrap .chapter-point',
                 buttonText: t('intro.ok'),
-                buttonCallback: function() { reveal('#id-container'); }
+                buttonCallback: function() { reveal('.ideditor'); }
             }
         );
     }

@@ -73,3 +73,29 @@ describe('iD.rendererBackgroundSource', function() {
         expect(source.validZoom(17)).to.be.false;
     });
 });
+
+describe('iD.rendererBackgroundSource.Custom', function() {
+    describe('#imageryUsed', function() {
+        it('returns an imagery_used string', function() {
+            var source = iD.rendererBackgroundSource.Custom('http://example.com');
+            expect(source.imageryUsed()).to.eql('Custom (http://example.com )');  // note ' )' space
+        });
+        it('sanitizes `access_token`', function() {
+            var source = iD.rendererBackgroundSource.Custom('http://example.com?access_token=MYTOKEN');
+            expect(source.imageryUsed()).to.eql('Custom (http://example.com?access_token={apikey} )');
+        });
+        it('sanitizes `connectId`', function() {
+            var source = iD.rendererBackgroundSource.Custom('http://example.com?connectId=MYTOKEN');
+            expect(source.imageryUsed()).to.eql('Custom (http://example.com?connectId={apikey} )');
+        });
+        it('sanitizes `token`', function() {
+            var source = iD.rendererBackgroundSource.Custom('http://example.com?token=MYTOKEN');
+            expect(source.imageryUsed()).to.eql('Custom (http://example.com?token={apikey} )');
+        });
+        it('sanitizes wms path `token`', function() {
+            var source = iD.rendererBackgroundSource.Custom('http://example.com/wms/v1/token/MYTOKEN/1.0.0/layer');
+            expect(source.imageryUsed()).to.eql('Custom (http://example.com/wms/v1/token/{apikey}/1.0.0/layer )');
+        });
+    });
+
+});

@@ -6,7 +6,8 @@ import { modeSelect } from '../modes/select';
 import { modeSelectData } from '../modes/select_data';
 import { modeSelectNote } from '../modes/select_note';
 import { modeSelectError } from '../modes/select_error';
-import { osmEntity, osmNote, qaError } from '../osm';
+import { osmEntity, osmNote, QAItem } from '../osm';
+import { utilArrayIdentical } from '../util/array';
 
 
 export function behaviorSelect(context) {
@@ -17,6 +18,8 @@ export function behaviorSelect(context) {
     var _suppressMenu = true;
     var _p1 = null;
 
+    // use pointer events on supported platforms; fallback to mouse events
+    var _pointerPrefix = 'PointerEvent' in window ? 'pointer' : 'mouse';
 
     function point() {
         return d3_mouse(context.container().node());
@@ -53,25 +56,25 @@ export function behaviorSelect(context) {
     }
 
 
-    function mousedown() {
+    function pointerdown() {
         if (!_p1) {
             _p1 = point();
         }
         d3_select(window)
-            .on('mouseup.select', mouseup, true);
+            .on(_pointerPrefix + 'up.select', pointerup, true);
 
         _suppressMenu = !isShowAlways;
     }
 
 
-    function mousemove() {
+    function pointermove() {
         if (d3_event) {
             _lastMouse = d3_event;
         }
     }
 
 
-    function mouseup() {
+    function pointerup() {
         click();
     }
 
@@ -99,7 +102,7 @@ export function behaviorSelect(context) {
 
     function click() {
         d3_select(window)
-            .on('mouseup.select', null, true);
+            .on(_pointerPrefix + 'up.select', null, true);
 
         if (!_p1) return;
         var p2 = point();
@@ -107,17 +110,10 @@ export function behaviorSelect(context) {
         _p1 = null;
         if (dist > tolerance) return;
 
-        // Defer processing the click,
-        // because this click may trigger a blur event,
-        // and the blur event may trigger a tag change,
-        // and we really want that tag change to go to the already selected entity
-        // and not the one that we are about to select with the click  #6028, #5878
-        // (Be very careful entering modeSelect anywhere that might also blur a field!)
         var datum = d3_event.target.__data__ || (_lastMouse && _lastMouse.target.__data__);
-        var isMultiselect = d3_event.shiftKey || d3_select('#surface .lasso').node();
-        window.setTimeout(function() {
-            processClick(datum, isMultiselect);
-        }, 20);  // delay > whatever raw_tag_editor.js `scheduleChange` does (10ms).
+        var isMultiselect = d3_event.shiftKey || context.surface().select('.lasso').node();
+
+        processClick(datum, isMultiselect);
     }
 
 
@@ -141,8 +137,10 @@ export function behaviorSelect(context) {
                     // multiple things already selected, just show the menu...
                     mode.suppressMenu(false).reselect();
                 } else {
-                    // select a single thing..
-                    context.enter(modeSelect(context, [datum.id]).suppressMenu(_suppressMenu));
+                    if (mode.id !== 'select' || !utilArrayIdentical(mode.selectedIDs(), [datum.id])) {
+                        // select a single thing if it's not already selected
+                        context.enter(modeSelect(context, [datum.id]).suppressMenu(_suppressMenu));
+                    }
                 }
 
             } else {
@@ -173,7 +171,7 @@ export function behaviorSelect(context) {
                 .selectedNoteID(datum.id)
                 .enter(modeSelectNote(context, datum.id));
 
-        } else if (datum instanceof qaError & !isMultiselect) {  // clicked an external QA error
+        } else if (datum instanceof QAItem & !isMultiselect) {  // clicked an external QA issue
             context
                 .selectedErrorID(datum.id)
                 .enter(modeSelectError(context, datum.id, datum.service));
@@ -211,8 +209,8 @@ export function behaviorSelect(context) {
             });
 
         selection
-            .on('mousedown.select', mousedown)
-            .on('mousemove.select', mousemove)
+            .on(_pointerPrefix + 'down.select', pointerdown)
+            .on(_pointerPrefix + 'move.select', pointermove)
             .on('contextmenu.select', contextmenu);
 
         if (d3_event && d3_event.shiftKey) {
@@ -227,11 +225,11 @@ export function behaviorSelect(context) {
             .on('keydown.select', null)
             .on('keyup.select', null)
             .on('contextmenu.select-window', null)
-            .on('mouseup.select', null, true);
+            .on(_pointerPrefix + 'up.select', null, true);
 
         selection
-            .on('mousedown.select', null)
-            .on('mousemove.select', null)
+            .on(_pointerPrefix + 'down.select', null)
+            .on(_pointerPrefix + 'move.select', null)
             .on('contextmenu.select', null);
 
         context.surface()

@@ -1,7 +1,11 @@
+export { utilAesEncrypt } from './aes';
+export { utilAesDecrypt } from './aes';
+
 export { utilArrayChunk } from './array';
 export { utilArrayDifference } from './array';
 export { utilArrayFlatten } from './array';
 export { utilArrayGroupBy } from './array';
+export { utilArrayIdentical } from './array';
 export { utilArrayIntersection } from './array';
 export { utilArrayUnion } from './array';
 export { utilArrayUniq } from './array';
@@ -9,6 +13,7 @@ export { utilArrayUniqBy } from './array';
 
 export { utilAsyncMap } from './util';
 export { utilCleanTags } from './clean_tags';
+export { utilCombinedTags } from './util';
 export { utilDeepMemberSelector } from './util';
 export { utilDetect } from './detect';
 export { utilDisplayName } from './util';
@@ -42,4 +47,5 @@ export { utilTagDiff } from './util';
 export { utilTagText } from './util';
 export { utilTiler } from './tiler';
 export { utilTriggerEvent } from './trigger_event';
+export { utilUniqueDomId } from './util';
 export { utilWrap } from './util';

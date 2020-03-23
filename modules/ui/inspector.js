@@ -1,5 +1,5 @@
 import { interpolate as d3_interpolate } from 'd3-interpolate';
-import { select as d3_select, selectAll as d3_selectAll } from 'd3-selection';
+import { select as d3_select } from 'd3-selection';
 
 import { uiEntityEditor } from './entity_editor';
 import { uiPresetList } from './preset_list';
@@ -13,19 +13,23 @@ export function uiInspector(context) {
         presetPane = d3_select(null),
         editorPane = d3_select(null);
     var _state = 'select';
-    var _entityID;
+    var _entityIDs;
     var _newFeature = false;
 
 
     function inspector(selection, newFeature) {
         presetList
-            .entityID(_entityID)
+            .entityIDs(_entityIDs)
             .autofocus(_newFeature)
-            .on('choose', inspector.setPreset);
+            .on('choose', inspector.setPreset)
+            .on('cancel', function() {
+                wrap.transition()
+                    .styleTween('right', function() { return d3_interpolate('-100%', '0%'); });
+            });
 
         entityEditor
             .state(_state)
-            .entityID(_entityID)
+            .entityIDs(_entityIDs)
             .on('choose', inspector.showList);
 
         wrap = selection.selectAll('.panewrap')
@@ -47,16 +51,34 @@ export function uiInspector(context) {
         presetPane = wrap.selectAll('.preset-list-pane');
         editorPane = wrap.selectAll('.entity-editor-pane');
 
-        var entity = context.entity(_entityID);
+        function shouldDefaultToPresetList() {
+            // can only change preset on single selection
+            if (_entityIDs.length !== 1) return false;
 
-        var hasNonGeometryTags = entity.hasNonGeometryTags();
-        var isTaglessOrIntersectionVertex = entity.geometry(context.graph()) === 'vertex' &&
-            (!hasNonGeometryTags && !entity.isHighwayIntersection(context.graph()));
-        var issues = context.validator().getEntityIssues(_entityID);
-        // start with the preset list if the feature is new and untagged or is an uninteresting vertex
-        var showPresetList = (newFeature && !hasNonGeometryTags) || (isTaglessOrIntersectionVertex && !issues.length);
+            var entityID = _entityIDs[0];
+            var entity = context.hasEntity(entityID);
+            if (!entity) return false;
 
-        if (showPresetList) {
+            // default to inspector if there are already tags
+            if (entity.hasNonGeometryTags()) return false;
+
+            // prompt to select preset if feature is new and untagged
+            if (newFeature) return true;
+
+            // all existing features except vertices should default to inspector
+            if (entity.geometry(context.graph()) !== 'vertex') return false;
+
+            // show vertex issues if there are any
+            if (context.validator().getEntityIssues(entityID).length) return false;
+
+            // show turn retriction editor for junction vertices
+            if (entity.isHighwayIntersection(context.graph())) return false;
+
+            // otherwise show preset list for uninteresting vertices
+            return true;
+        }
+
+        if (shouldDefaultToPresetList()) {
             wrap.style('right', '-100%');
             presetPane.call(presetList);
         } else {
@@ -74,16 +96,21 @@ export function uiInspector(context) {
 
         footer
             .call(uiViewOnOSM(context)
-                .what(context.hasEntity(_entityID))
+                .what(context.hasEntity(_entityIDs.length === 1 && _entityIDs[0]))
             );
     }
 
-    inspector.showList = function(preset) {
+    inspector.showList = function(presets) {
+
         wrap.transition()
             .styleTween('right', function() { return d3_interpolate('0%', '-100%'); });
 
+        if (presets) {
+            presetList.presets(presets);
+        }
+
         presetPane
-            .call(presetList.preset(preset).autofocus(true));
+            .call(presetList.autofocus(true));
     };
 
     inspector.setPreset = function(preset) {
@@ -91,14 +118,14 @@ export function uiInspector(context) {
         // upon setting multipolygon, go to the area preset list instead of the editor
         if (preset.id === 'type/multipolygon') {
             presetPane
-                .call(presetList.preset(preset).autofocus(true));
+                .call(presetList.autofocus(true));
 
         } else {
             wrap.transition()
                 .styleTween('right', function() { return d3_interpolate('-100%', '0%'); });
 
             editorPane
-                .call(entityEditor.preset(preset));
+                .call(entityEditor.presets([preset]));
         }
 
     };
@@ -109,15 +136,15 @@ export function uiInspector(context) {
         entityEditor.state(_state);
 
         // remove any old field help overlay that might have gotten attached to the inspector
-        d3_selectAll('.field-help-body').remove();
+        context.container().selectAll('.field-help-body').remove();
 
         return inspector;
     };
 
 
-    inspector.entityID = function(val) {
-        if (!arguments.length) return _entityID;
-        _entityID = val;
+    inspector.entityIDs = function(val) {
+        if (!arguments.length) return _entityIDs;
+        _entityIDs = val;
         return inspector;
     };
 
