@@ -8,11 +8,11 @@
     padding: 5px;
     background-color: #fff;
 }
-[dir='ltr'] .photoviewer {
+.ideditor[dir='ltr'] .photoviewer {
     margin-left: 10px;
     margin-right: 2px;
 }
-[dir='rtl'] .photoviewer {
+.ideditor[dir='rtl'] .photoviewer {
     margin-right: 10px;
     margin-left: 2px;
 }
