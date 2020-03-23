@@ -9,7 +9,7 @@ of iD (e.g. `http://preview.ideditor.com/release/`), the following parameters ar
 **in the hash portion of the URL**:
 
 * __`background`__ - The value from a `sourcetag` property in iD's
-  [imagery list](https://github.com/openstreetmap/iD/blob/master/data/imagery.json),
+  [imagery list](https://github.com/openstreetmap/iD/blob/develop/data/imagery.json),
   or a custom tile URL. A custom URL is specified in the format `custom:<url>`,
   where the URL can contain the standard tile URL placeholders `{x}`, `{y}` and
   `{z}`/`{zoom}`, `{ty}` for flipped TMS-style Y coordinates, and `{switch:a,b,c}` for
@@ -33,7 +33,7 @@ of iD (e.g. `http://preview.ideditor.com/release/`), the following parameters ar
   _Example:_ `id=n1207480649`
 * __`locale`__ - A code specifying the localization to use, affecting the language, layout, and keyboard shortcuts. The default locale is set by the browser.<br/>
   _Example:_ `locale=en-US`, `locale=de`<br/>
-  _Available values:_ Any of the [supported locales](https://github.com/openstreetmap/iD/tree/master/dist/locales).
+  _Available values:_ Any of the [supported locales](https://github.com/openstreetmap/iD/tree/develop/dist/locales).
 * __`map`__ - A slash-separated `zoom/latitude/longitude`.<br/>
   _Example:_ `map=20.00/38.90085/-77.02271`
 * __`maprules`__ - A path to a [MapRules](https://github.com/radiant-maxar/maprules) service endpoint for enhanced tag validation.<br/>
@@ -123,7 +123,7 @@ have `.area` and `.way` classes.
 Elements also receive classes according to certain of the OSM key-value tags that are
 assigned to them.
 
-Tag classes are prefixed with `tag-` (see [`iD.svgTagClasses`](https://github.com/openstreetmap/iD/blob/master/js/id/svg/tag_classes.js) for details).
+Tag classes are prefixed with `tag-` (see [`iD.svgTagClasses`](https://github.com/openstreetmap/iD/blob/develop/js/id/svg/tag_classes.js) for details).
 
 #### Primary
 
@@ -240,7 +240,7 @@ Optional properties:
 * `best` - If set to `true`, this imagery is considered "better than Bing" and may be chosen by default when iD starts.  Will display with a star in the background imagery list.  Defaults to `false`
 
 For more details about the `iD.data.imagery` structure, see
-[`update_imagery.js`](https://github.com/openstreetmap/iD/blob/master/scripts/update_imagery.js).
+[`update_imagery.js`](https://github.com/openstreetmap/iD/blob/develop/scripts/update_imagery.js).
 
 
 ### Presets
@@ -249,7 +249,7 @@ iD's preset database is stored in the `iD.data.presets` object and can be overri
 or modified prior to creating the iD context.
 
 The format of the `presets` object is
-[documented here](https://github.com/openstreetmap/iD/tree/master/data/presets#custom-presets).
+[documented here](https://github.com/openstreetmap/iD/tree/develop/data/presets#custom-presets).
 
 To add a new preset to iD's existing preset database.
 ```js

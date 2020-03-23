@@ -56,7 +56,7 @@ export function uiSectionPrivacy(context) {
         .append('a')
         .attr('target', '_blank')
         .call(svgIcon('#iD-icon-out-link', 'inline'))
-        .attr('href', 'https://github.com/openstreetmap/iD/blob/master/PRIVACY.md')
+        .attr('href', 'https://github.com/openstreetmap/iD/blob/release/PRIVACY.md')
         .append('span')
         .text(t('preferences.privacy.privacy_link'));
 

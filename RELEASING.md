@@ -54,13 +54,13 @@ $  git remote add osmlab git@github.com:osmlab/openstreetmap-website.git
 $  git remote add upstream git@github.com:openstreetmap/openstreetmap-website.git
 ```
 
-#### Sync master branches
+#### Sync develop branches
 
 ```bash
 $  git fetch --all
-$  git checkout master
-$  git reset --hard upstream/master
-$  git push osmlab master
+$  git checkout develop
+$  git reset --hard upstream/develop
+$  git push osmlab develop
 ```
 
 #### Create and push branch with the new iD version
@@ -72,4 +72,4 @@ $  rm -rf vendor/assets/iD/* && vendorer
 $  git add . && git commit -m 'Update to iD vA.B.C'
 $  git push osmlab
 ```
-- [Open a pull request](https://github.com/openstreetmap/openstreetmap-website/compare/master...osmlab:master) using the [markdown text from the changelog](https://raw.githubusercontent.com/openstreetmap/iD/master/CHANGELOG.md) as the description
+- [Open a pull request](https://github.com/openstreetmap/openstreetmap-website/compare/develop...osmlab:develop) using the [markdown text from the changelog](https://raw.githubusercontent.com/openstreetmap/iD/develop/CHANGELOG.md) as the description
