@@ -49,7 +49,7 @@ export function actionMerge(ids) {
             graph = graph.remove(removeNode);
         });
 
-        if (target.tags.area) {
+        if (target.tags.area === 'yes') {
             var tags = Object.assign({}, target.tags); // shallow copy
             delete tags.area;
             if (osmTagSuggestingArea(tags)) {
