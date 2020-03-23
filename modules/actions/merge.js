@@ -1,3 +1,4 @@
+import { osmTagSuggestingArea } from '../osm/tags';
 import { utilArrayGroupBy, utilArrayUniq } from '../util';
 
 
@@ -47,6 +48,16 @@ export function actionMerge(ids) {
 
             graph = graph.remove(removeNode);
         });
+
+        if (target.tags.area) {
+            var tags = Object.assign({}, target.tags); // shallow copy
+            delete tags.area;
+            if (osmTagSuggestingArea(tags)) {
+                // remove the `area` tag if area geometry is now implied - #3851
+                target = target.update({ tags: tags });
+                graph = graph.replace(target);
+            }
+        }
 
         return graph;
     };
