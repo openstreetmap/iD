@@ -38,7 +38,7 @@ export function uiChangesetEditor(context) {
             _fieldsArr.forEach(function(field) {
                 field
                     .on('change', function(t, onInput) {
-                        dispatch.call('change', field, t, onInput);
+                        dispatch.call('change', field, undefined, t, onInput);
                     });
             });
         }
