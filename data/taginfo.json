@@ -1615,6 +1615,7 @@
     {"key": "maxweight", "description": "🄵 Max Weight"},
     {"key": "memorial", "description": "🄵 Type"},
     {"key": "microbrewery", "description": "🄵 Microbrewery"},
+    {"key": "mimics", "description": "🄵 Mimics"},
     {"key": "min_age", "description": "🄵 Minimum Age"},
     {"key": "minspeed", "description": "🄵 Minimum Speed Limit"},
     {"key": "monitoring:", "description": "🄵 Monitoring"},

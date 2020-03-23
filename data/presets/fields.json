@@ -258,6 +258,7 @@
   "maxweight": {"key": "maxweight", "type": "combo", "label": "Max Weight", "snake_case": false},
   "memorial": {"key": "memorial", "type": "typeCombo", "label": "Type"},
   "microbrewery": {"key": "microbrewery", "type": "check", "label": "Microbrewery", "terms": ["brewpub", "craft beer"]},
+  "mimics": {"key": "mimics", "type": "combo", "label": "Mimics", "terms": ["camoflauged", "disguised", "looks like", "tree"]},
   "min_age": {"key": "min_age", "type": "number", "minValue": 0, "label": "Minimum Age", "terms": ["lower age limit"]},
   "minspeed": {"key": "minspeed", "type": "maxspeed", "label": "Minimum Speed Limit", "placeholder": "20, 30, 40..."},
   "monitoring_multi": {"key": "monitoring:", "type": "multiCombo", "label": "Monitoring"},

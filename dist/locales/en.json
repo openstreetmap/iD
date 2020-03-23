@@ -3800,6 +3800,10 @@
                     "label": "Microbrewery",
                     "terms": "brewpub,craft beer"
                 },
+                "mimics": {
+                    "label": "Mimics",
+                    "terms": "camoflauged,disguised,looks like,tree"
+                },
                 "min_age": {
                     "label": "Minimum Age",
                     "terms": "lower age limit"

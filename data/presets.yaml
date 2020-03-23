@@ -1382,6 +1382,11 @@ en:
         label: Microbrewery
         # 'terms: brewpub,craft beer'
         terms: '[translate with synonyms or related terms for ''Microbrewery'', separated by commas]'
+      mimics:
+        # mimics=*
+        label: Mimics
+        # 'terms: camoflauged,disguised,looks like,tree'
+        terms: '[translate with synonyms or related terms for ''Mimics'', separated by commas]'
       min_age:
         # min_age=*
         label: Minimum Age
