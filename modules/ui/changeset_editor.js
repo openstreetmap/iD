@@ -54,7 +54,7 @@ export function uiChangesetEditor(context) {
 
 
         if (initial) {
-            var commentField = selection.select('#preset-input-comment');
+            var commentField = selection.select('.form-field-comment textarea');
             var commentNode = commentField.node();
 
             if (commentNode) {
