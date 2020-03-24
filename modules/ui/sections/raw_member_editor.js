@@ -376,7 +376,7 @@ export function uiSectionRawMemberEditor(context) {
             var row = d3_select(this);
 
             row.selectAll('input.member-role')
-                .call(uiCombobox.off);
+                .call(uiCombobox.off, context);
         }
     }
 

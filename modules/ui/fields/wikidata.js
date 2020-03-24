@@ -23,7 +23,9 @@ import { t } from '../../util/locale';
 export function uiFieldWikidata(field, context) {
     var wikidata = services.wikidata;
     var dispatch = d3_dispatch('change');
-    var searchInput = d3_select(null);
+
+    var _selection = d3_select(null);
+    var _searchInput = d3_select(null);
     var _qid = null;
     var _wikidataEntity = null;
     var _wikiURL = '';
@@ -39,6 +41,8 @@ export function uiFieldWikidata(field, context) {
         .minItems(1);
 
     function wiki(selection) {
+
+        _selection = selection;
 
         var wrap = selection.selectAll('.form-field-input-wrap')
             .data([0]);
@@ -64,14 +68,14 @@ export function uiFieldWikidata(field, context) {
             .append('li')
             .attr('class', 'wikidata-search');
 
-        searchInput = searchRowEnter
+        _searchInput = searchRowEnter
             .append('input')
             .attr('type', 'text')
             .attr('id', field.domId)
             .style('flex', '1')
             .call(utilNoAuto);
 
-        searchInput
+        _searchInput
             .on('focus', function() {
                 var node = d3_select(this).node();
                 node.setSelectionRange(0, node.value.length);
@@ -277,14 +281,14 @@ export function uiFieldWikidata(field, context) {
                 label = _wikidataEntity.id.toString();
             }
         }
-        utilGetSetValue(d3_select('li.wikidata-search input'), label);
+        utilGetSetValue(_searchInput, label);
     }
 
 
     wiki.tags = function(tags) {
 
         var isMixed = Array.isArray(tags[field.key]);
-        d3_select('li.wikidata-search input')
+        _searchInput
             .attr('title', isMixed ? tags[field.key].filter(Boolean).join('\n') : null)
             .attr('placeholder', isMixed ? t('inspector.multiple_values') : '')
             .classed('mixed', isMixed);
@@ -309,17 +313,17 @@ export function uiFieldWikidata(field, context) {
 
             var description = entityPropertyForDisplay(entity, 'descriptions');
 
-            d3_select('.form-field-wikidata button.wiki-link')
+            _selection.select('button.wiki-link')
                 .classed('disabled', false);
 
-            d3_select('.preset-wikidata-description')
+            _selection.select('.preset-wikidata-description')
                 .style('display', function(){
                     return description.length > 0 ? 'flex' : 'none';
                 })
                 .select('input')
                 .attr('value', description);
 
-            d3_select('.preset-wikidata-identifier')
+            _selection.select('.preset-wikidata-identifier')
                 .style('display', function(){
                     return entity.id ? 'flex' : 'none';
                 })
@@ -333,12 +337,12 @@ export function uiFieldWikidata(field, context) {
             _wikidataEntity = null;
             setLabelForEntity();
 
-            d3_select('.preset-wikidata-description')
+            _selection.select('.preset-wikidata-description')
                 .style('display', 'none');
-            d3_select('.preset-wikidata-identifier')
+            _selection.select('.preset-wikidata-identifier')
                 .style('display', 'none');
 
-            d3_select('.form-field-wikidata button.wiki-link')
+            _selection.select('button.wiki-link')
                 .classed('disabled', true);
 
             if (_qid && _qid !== '') {
@@ -374,7 +378,7 @@ export function uiFieldWikidata(field, context) {
 
 
     wiki.focus = function() {
-        searchInput.node().focus();
+        _searchInput.node().focus();
     };
 
 

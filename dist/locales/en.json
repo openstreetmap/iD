@@ -64,6 +64,14 @@
                 "tooltip": "Customize the toolbar."
             }
         },
+        "title": {
+            "format": {
+                "context": "{base} – {context}",
+                "changes": "({changes}) {base}",
+                "changes_context": "({changes}) {base} – {context}"
+            },
+            "labeled_and_more": "{labeled} and {count} more"
+        },
         "modes": {
             "add_feature": {
                 "search_placeholder": "Search feature types",
@@ -1562,7 +1570,7 @@
                 "before_start": "You should be familiar with OpenStreetMap and this editor before you start editing. iD contains a walkthrough to teach you the basics of editing OpenStreetMap. Click \"Start the Walkthrough\" on this screen to take the tutorial - it takes only about 15 minutes.",
                 "open_source_h": "Open Source",
                 "open_source": "The iD editor is a collaborative open source project, and you are using version {version} now. The source code is available [on GitHub](https://github.com/openstreetmap/iD).",
-                "open_source_help": "You can help iD by [translating](https://github.com/openstreetmap/iD/blob/master/CONTRIBUTING.md#translating) or [reporting bugs](https://github.com/openstreetmap/iD/issues)."
+                "open_source_help": "You can help iD by [translating](https://github.com/openstreetmap/iD/blob/develop/CONTRIBUTING.md#translating) or [reporting bugs](https://github.com/openstreetmap/iD/issues)."
             },
             "overview": {
                 "title": "Overview",
@@ -3842,6 +3850,10 @@
                 "microbrewery": {
                     "label": "Microbrewery",
                     "terms": "brewpub,craft beer"
+                },
+                "mimics": {
+                    "label": "Mimics",
+                    "terms": "camoflauged,disguised,looks like,tree"
                 },
                 "min_age": {
                     "label": "Minimum Age",

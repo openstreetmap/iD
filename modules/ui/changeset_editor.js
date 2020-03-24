@@ -38,7 +38,7 @@ export function uiChangesetEditor(context) {
             _fieldsArr.forEach(function(field) {
                 field
                     .on('change', function(t, onInput) {
-                        dispatch.call('change', field, t, onInput);
+                        dispatch.call('change', field, undefined, t, onInput);
                     });
             });
         }
@@ -54,7 +54,7 @@ export function uiChangesetEditor(context) {
 
 
         if (initial) {
-            var commentField = selection.select('#preset-input-comment');
+            var commentField = selection.select('.form-field-comment textarea');
             var commentNode = commentField.node();
 
             if (commentNode) {

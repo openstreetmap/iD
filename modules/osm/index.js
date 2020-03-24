@@ -26,6 +26,7 @@ export {
 export {
     osmAreaKeys,
     osmSetAreaKeys,
+    osmTagSuggestingArea,
     osmPointTags,
     osmSetPointTags,
     osmVertexTags,

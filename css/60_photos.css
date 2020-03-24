@@ -8,11 +8,11 @@
     padding: 5px;
     background-color: #fff;
 }
-[dir='ltr'] .photoviewer {
+.ideditor[dir='ltr'] .photoviewer {
     margin-left: 10px;
     margin-right: 2px;
 }
-[dir='rtl'] .photoviewer {
+.ideditor[dir='rtl'] .photoviewer {
     margin-right: 10px;
     margin-left: 2px;
 }
@@ -280,14 +280,14 @@ label.streetside-hires {
 
 
 /* Mapillary viewer */
-#mly .domRenderer .TagSymbol {
+#ideditor-mly .domRenderer .TagSymbol {
     font-size: 10px;
     background-color: rgba(0,0,0,0.4);
     padding: 0 4px;
     border-radius: 4px;
     top: -25px;
 }
-#mly .domRenderer .Attribution {
+#ideditor-mly .domRenderer .Attribution {
     /* we will roll our own to avoid async update issues like #4526 */
     display: none;
 }

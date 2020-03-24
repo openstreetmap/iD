@@ -1,4 +1,3 @@
-import { select as d3_select } from 'd3-selection';
 
 import { svgPath } from './helpers';
 
@@ -30,7 +29,7 @@ export function svgDebug(projection, context) {
     }
 
 
-    let legend = d3_select('.main-content')
+    let legend = context.container().select('.main-content')
       .selectAll('.debug-legend')
       .data(debugData.length ? [0] : []);
 

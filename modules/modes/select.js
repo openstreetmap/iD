@@ -186,7 +186,7 @@ export function modeSelect(context, selectedIDs) {
 
 
     function toggleMenu() {
-        if (d3_select('.edit-menu').empty()) {
+        if (context.surface().select('.edit-menu').empty()) {
             positionMenu();
             showMenu();
         } else {
@@ -420,7 +420,7 @@ export function modeSelect(context, selectedIDs) {
 
 
         function esc() {
-            if (d3_select('.combobox').size()) return;
+            if (context.container().select('.combobox').size()) return;
             context.enter(modeBrowse(context));
         }
 

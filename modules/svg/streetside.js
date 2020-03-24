@@ -163,7 +163,7 @@ export function svgStreetside(projection, context, dispatch) {
      * update().
      */
     function update() {
-        var viewer = d3_select('.photoviewer');
+        var viewer = context.container().select('.photoviewer');
         var selected = viewer.empty() ? undefined : viewer.datum();
         var z = ~~context.map().zoom();
         var showMarkers = (z >= minMarkerZoom);

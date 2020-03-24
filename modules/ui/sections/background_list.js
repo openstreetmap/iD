@@ -106,7 +106,7 @@ export function uiSectionBackgroundList(context) {
             .append('a')
             .attr('target', '_blank')
             .call(svgIcon('#iD-icon-out-link', 'inline'))
-            .attr('href', 'https://github.com/openstreetmap/iD/blob/master/FAQ.md#how-can-i-report-an-issue-with-background-imagery')
+            .attr('href', 'https://github.com/openstreetmap/iD/blob/develop/FAQ.md#how-can-i-report-an-issue-with-background-imagery')
             .append('span')
             .text(t('background.imagery_problem_faq'));
 

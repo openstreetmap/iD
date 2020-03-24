@@ -9,18 +9,18 @@
 # To use this on your own site, you'll want to change the `cp` and `chgrp`
 # lines at the end to match your web server's documentroot folder and security group.
 
-git checkout -q master
+git checkout -q develop
 git remote update > /dev/null
 
 rev=`git rev-parse --short HEAD`
-orig=`git rev-parse --short origin/master`
+orig=`git rev-parse --short origin/develop`
 
 # pull latest code
 if [[ "${rev}" != "${orig}" ]] ; then
   # avoid issues with local untracked locale files
   rm -f dist/locales/*.json
   git reset --hard HEAD
-  git pull origin master
+  git pull origin develop
 
   rev=`git rev-parse --short HEAD`
   sed -i "s/context.version = .*;/context.version = '${rev}';/" modules/core/context.js

@@ -172,7 +172,7 @@ _Breaking changes, which may affect downstream projects or sites that embed iD, 
 _Find the "Add a bridge" and "Add a tunnel" fixes for each crossing in the Issues inspector._
 * :earth_africa: Selected features now stay visible while zoomed out, plus you can zoom to multiple features together.<br/>
 _Select a few large features and press <kbd>Z</kbd> to view their full extent, no matter how vast._
-* :handshake: iD now has its own [Privacy Policy](https://github.com/openstreetmap/iD/blob/master/PRIVACY.md).<br/>
+* :handshake: iD now has its own [Privacy Policy](https://github.com/openstreetmap/iD/blob/develop/PRIVACY.md).<br/>
 _Press <kbd>P</kbd> to view privacy preferences._
 
 #### :boom: Breaking Changes
@@ -2621,7 +2621,7 @@ _Activate the Bing Streetside layer by opening the Map Data pane (shortcut <kbd>
   * Added support for more icon sets (such as [FontAwesome](https://fontawesome.com/icons?d=gallery)) for presets or other iD icons ([#3025])
   * Extracted many preset icons from the iD sprite into a separate project: [bhousel/temaki](https://github.com/bhousel/temaki)
   * Many presets that previously did not have a suitable icon now have one.
-  * :warning: All icons in iD now use prefixed names. (e.g. `iD-`, `maki-`, etc). See the [preset README](https://github.com/openstreetmap/iD/blob/master/data/presets/README.md#icons) for more details.
+  * :warning: All icons in iD now use prefixed names. (e.g. `iD-`, `maki-`, etc). See the [preset README](https://github.com/openstreetmap/iD/blob/develop/data/presets/README.md#icons) for more details.
 
 [#5050]: https://github.com/openstreetmap/iD/issues/5050
 [#3924]: https://github.com/openstreetmap/iD/issues/3924
@@ -4685,7 +4685,7 @@ _Map traffic signals, stop signs, benches, crossings, street lamps, fountains, t
   * Many deprecated names are still exported as symbols, e.g. `iD.Context` - we will remove these eventually
 * :warning: Customized iD deployments can manipulate live objects, rather than iD.Context accessors
   * No longer need to call things like `presets()`, `imagery()`, `taginfo()` when creating `iD.Context`
-  * See [API.md](https://github.com/openstreetmap/iD/blob/master/API.md#customized-deployments) for details on customized deployments
+  * See [API.md](https://github.com/openstreetmap/iD/blob/develop/API.md#customized-deployments) for details on customized deployments
 * :warning: iD has upgraded to the latest released versions of d3, lodash, rbush, etc.
   * d3 no longer adds itself to the global namespace, but can now be accessed via `iD.d3`
 * :warning: iD now uses `npm` scripts for all build processes

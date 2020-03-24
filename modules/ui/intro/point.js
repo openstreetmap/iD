@@ -121,9 +121,9 @@ export function uiIntroPoint(context, reveal) {
         }
 
         // disallow scrolling
-        d3_select('.inspector-wrap').on('wheel.intro', eventCancel);
+        context.container().select('.inspector-wrap').on('wheel.intro', eventCancel);
 
-        d3_select('.preset-search-input')
+        context.container().select('.preset-search-input')
             .on('keydown.intro', null)
             .on('keyup.intro', checkPresetSearch);
 
@@ -142,9 +142,9 @@ export function uiIntroPoint(context, reveal) {
                 context.enter(modeSelect(context, [_pointID]));
 
                 // disallow scrolling
-                d3_select('.inspector-wrap').on('wheel.intro', eventCancel);
+                context.container().select('.inspector-wrap').on('wheel.intro', eventCancel);
 
-                d3_select('.preset-search-input')
+                context.container().select('.preset-search-input')
                     .on('keydown.intro', null)
                     .on('keyup.intro', checkPresetSearch);
 
@@ -158,10 +158,10 @@ export function uiIntroPoint(context, reveal) {
 
 
         function checkPresetSearch() {
-            var first = d3_select('.preset-list-item:first-child');
+            var first = context.container().select('.preset-list-item:first-child');
 
             if (first.classed('preset-amenity-cafe')) {
-                d3_select('.preset-search-input')
+                context.container().select('.preset-search-input')
                     .on('keydown.intro', eventCancel, true)
                     .on('keyup.intro', null);
 
@@ -179,8 +179,8 @@ export function uiIntroPoint(context, reveal) {
         function continueTo(nextStep) {
             context.on('enter.intro', null);
             context.history().on('change.intro', null);
-            d3_select('.inspector-wrap').on('wheel.intro', null);
-            d3_select('.preset-search-input').on('keydown.intro keyup.intro', null);
+            context.container().select('.inspector-wrap').on('wheel.intro', null);
+            context.container().select('.preset-search-input').on('keydown.intro keyup.intro', null);
             nextStep();
         }
     }
@@ -217,7 +217,7 @@ export function uiIntroPoint(context, reveal) {
         }
 
         // reset pane, in case user happened to change it..
-        d3_select('.inspector-wrap .panewrap').style('right', '0%');
+        context.container().select('.inspector-wrap .panewrap').style('right', '0%');
 
         timeout(function() {
             // It's possible for the user to add a name in a previous step..
@@ -258,7 +258,7 @@ export function uiIntroPoint(context, reveal) {
 
     function addCloseEditor() {
         // reset pane, in case user happened to change it..
-        d3_select('.inspector-wrap .panewrap').style('right', '0%');
+        context.container().select('.inspector-wrap .panewrap').style('right', '0%');
 
         var selector = '.entity-editor-pane button.preset-close svg use';
         var href = d3_select(selector).attr('href') || '#iD-icon-close';
@@ -327,7 +327,7 @@ export function uiIntroPoint(context, reveal) {
         }
 
         // reset pane, in case user happened to untag the point..
-        d3_select('.inspector-wrap .panewrap').style('right', '0%');
+        context.container().select('.inspector-wrap .panewrap').style('right', '0%');
 
         context.on('exit.intro', function() {
             continueTo(reselectPoint);
@@ -357,7 +357,7 @@ export function uiIntroPoint(context, reveal) {
         }
 
         // reset pane, in case user happened to change it..
-        d3_select('.inspector-wrap .panewrap').style('right', '0%');
+        context.container().select('.inspector-wrap .panewrap').style('right', '0%');
 
         context.on('exit.intro', function() {
             continueTo(rightClickPoint);
@@ -496,8 +496,8 @@ export function uiIntroPoint(context, reveal) {
         context.on('enter.intro exit.intro', null);
         context.map().on('move.intro drawn.intro', null);
         context.history().on('change.intro', null);
-        d3_select('.inspector-wrap').on('wheel.intro', eventCancel);
-        d3_select('.preset-search-input').on('keydown.intro keyup.intro', null);
+        context.container().select('.inspector-wrap').on('wheel.intro', eventCancel);
+        context.container().select('.preset-search-input').on('keydown.intro keyup.intro', null);
     };
 
 

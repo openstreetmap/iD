@@ -42,7 +42,7 @@ export function svgData(projection, context, dispatch) {
             d3_event.dataTransfer.dropEffect = 'copy';
         }
 
-        d3_select('body')
+        context.container()
             .attr('dropzone', 'copy')
             .on('drop.svgData', function() {
                 d3_event.stopPropagation();

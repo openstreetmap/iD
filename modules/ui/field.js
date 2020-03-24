@@ -296,7 +296,13 @@ export function uiField(context, presetField, entityIDs, options) {
     // A non-allowed field is hidden from the user altogether
     field.isAllowed = function() {
 
-        if (entityIDs && entityIDs.length > 1 && uiFields[field.type].supportsMultiselection === false) return;
+        if (entityIDs &&
+            entityIDs.length > 1 &&
+            uiFields[field.type].supportsMultiselection === false) return false;
+
+        if (field.geometry && entityIDs.some(function(entityID) {
+            return field.geometry.indexOf(context.graph().geometry(entityID)) === -1;
+        })) return false;
 
         if (field.countryCodes || field.notCountryCodes) {
             var extent = combinedEntityExtent();

@@ -435,8 +435,7 @@ export function uiCommit(context) {
             return t('commit.outstanding_errors_message', { count: errors.length });
 
         } else {
-            var n = d3_select('#preset-input-comment').node();
-            var hasChangesetComment = n && n.value.length > 0;
+            var hasChangesetComment = _changeset && _changeset.tags.comment && _changeset.tags.comment.trim().length;
             if (!hasChangesetComment) {
                 return t('commit.comment_needed_message');
             }
@@ -445,7 +444,7 @@ export function uiCommit(context) {
     }
 
 
-    function changeTags(changed, onInput) {
+    function changeTags(_, changed, onInput) {
         if (changed.hasOwnProperty('comment')) {
             if (changed.comment === undefined) {
                 changed.comment = '';

@@ -410,6 +410,7 @@ export function validationCrossingWays(context) {
 
                 var selectedIndex = this.entityIds[0] === mode.selectedIDs()[0] ? 0 : 1;
                 var selectedFeatureType = this.data.featureTypes[selectedIndex];
+                var otherFeatureType = this.data.featureTypes[selectedIndex === 0 ? 1 : 0];
 
                 var fixes = [];
 
@@ -435,7 +436,8 @@ export function validationCrossingWays(context) {
                         fixes.push(makeAddBridgeOrTunnelFix('add_a_bridge', 'temaki-bridge', 'bridge'));
                     }
 
-                    if (allowsTunnel(selectedFeatureType)) {
+                    var skipTunnelFix = otherFeatureType === 'waterway' && selectedFeatureType !== 'waterway';
+                    if (allowsTunnel(selectedFeatureType) && !skipTunnelFix) {
                         fixes.push(makeAddBridgeOrTunnelFix('add_a_tunnel', 'temaki-tunnel', 'tunnel'));
                     }
                 }

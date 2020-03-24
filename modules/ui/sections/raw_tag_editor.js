@@ -450,10 +450,10 @@ export function uiSectionRawTagEditor(id, context) {
         var row = d3_select(this);
 
         row.selectAll('input.key')
-            .call(uiCombobox.off);
+            .call(uiCombobox.off, context);
 
         row.selectAll('input.value')
-            .call(uiCombobox.off);
+            .call(uiCombobox.off, context);
     }
 
     function keyChange(d) {

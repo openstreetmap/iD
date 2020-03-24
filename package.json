@@ -2,8 +2,10 @@
   "name": "iD",
   "version": "2.17.2",
   "description": "A friendly editor for OpenStreetMap",
-  "main": "iD.js",
-  "repository": "openstreetmap/iD",
+  "main": "dist/iD.min.js",
+  "repository": "github:openstreetmap/iD",
+  "homepage": "https://github.com/openstreetmap/iD",
+  "bugs": "https://github.com/openstreetmap/iD/issues",
   "keywords": [
     "editor",
     "openstreetmap"

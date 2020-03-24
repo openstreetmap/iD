@@ -1,7 +1,6 @@
 import { dispatch as d3_dispatch } from 'd3-dispatch';
 import {
-    event as d3_event,
-    select as d3_select
+    event as d3_event
 } from 'd3-selection';
 
 import { utilArrayIdentical } from '../../util/array';
@@ -126,7 +125,7 @@ export function uiSectionPresetFields(context) {
         selection.selectAll('.wrap-form-field input')
             .on('keydown', function() {
                 // if user presses enter, and combobox is not active, accept edits..
-                if (d3_event.keyCode === 13 && d3_select('.combobox').empty()) {
+                if (d3_event.keyCode === 13 && context.container().select('.combobox').empty()) {
                     context.enter(modeBrowse(context));
                 }
             });

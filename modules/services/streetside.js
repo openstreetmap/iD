@@ -17,7 +17,7 @@ import {
 } from '../geo';
 
 import { utilDetect } from '../util/detect';
-import { utilArrayUnion, utilQsString, utilRebind, utilTiler } from '../util';
+import { utilArrayUnion, utilQsString, utilRebind, utilTiler, utilUniqueDomId } from '../util';
 
 
 const bubbleApi = 'https://dev.virtualearth.net/mapcontrol/HumanScaleServices/GetBubbles.ashx?';
@@ -252,7 +252,7 @@ function loadImage(imgInfo) {
   return new Promise(resolve => {
     let img = new Image();
     img.onload = () => {
-      let canvas = document.getElementById('canvas' + imgInfo.face);
+      let canvas = document.getElementById('ideditor-canvas' + imgInfo.face);
       let ctx = canvas.getContext('2d');
       ctx.drawImage(img, imgInfo.x, imgInfo.y);
       resolve({ imgInfo: imgInfo, status: 'ok' });
@@ -272,7 +272,7 @@ function loadImage(imgInfo) {
 function loadCanvas(imageGroup) {
   return Promise.all(imageGroup.map(loadImage))
     .then((data) => {
-      let canvas = document.getElementById('canvas' + data[0].imgInfo.face);
+      let canvas = document.getElementById('ideditor-canvas' + data[0].imgInfo.face);
       const which = { '01': 0, '02': 1, '03': 2, '10': 3, '11': 4, '12': 5 };
       let face = data[0].imgInfo.face;
       _dataUrlArray[which[face]] = canvas.toDataURL('image/jpeg', 1.0);
@@ -292,23 +292,23 @@ function loadFaces(faceGroup) {
 
 function setupCanvas(selection, reset) {
   if (reset) {
-    selection.selectAll('#divForCanvasWork')
+    selection.selectAll('#ideditor-stitcher-canvases')
       .remove();
   }
 
   // Add the Streetside working canvases. These are used for 'stitching', or combining,
   // multiple images for each of the six faces, before passing to the Pannellum control as DataUrls
-  selection.selectAll('#divForCanvasWork')
+  selection.selectAll('#ideditor-stitcher-canvases')
     .data([0])
     .enter()
     .append('div')
-    .attr('id', 'divForCanvasWork')
+    .attr('id', 'ideditor-stitcher-canvases')
     .attr('display', 'none')
     .selectAll('canvas')
     .data(['canvas01', 'canvas02', 'canvas03', 'canvas10', 'canvas11', 'canvas12'])
     .enter()
     .append('canvas')
-    .attr('id', d => d)
+    .attr('id', d => 'ideditor-' + d)
     .attr('width', _resolution)
     .attr('height', _resolution);
 }
@@ -471,7 +471,7 @@ export default {
     };
     options.scenes[sceneID] = _sceneOptions;
 
-    _pannellumViewer = window.pannellum.viewer('viewer-streetside', options);
+    _pannellumViewer = window.pannellum.viewer('ideditor-viewer-streetside', options);
 
     _pannellumViewer
       .on('mousedown', () => {
@@ -507,14 +507,13 @@ export default {
     // (used by all to house each custom photo viewer)
     let wrapEnter = wrap.enter()
       .append('div')
-      .attr('id', 'ms')
       .attr('class', 'photo-wrapper ms-wrapper')
       .classed('hide', true);
 
     // inject div to support streetside viewer (pannellum) and attribution line
     wrapEnter
       .append('div')
-      .attr('id', 'viewer-streetside')
+      .attr('id', 'ideditor-viewer-streetside')
       .append('div')
       .attr('class', 'photo-attribution fillD');
 
@@ -541,20 +540,20 @@ export default {
       .call(setupCanvas, true);
 
     // load streetside pannellum viewer css
-    d3_select('head').selectAll('#streetside-viewercss')
+    d3_select('head').selectAll('#ideditor-streetside-viewercss')
       .data([0])
       .enter()
       .append('link')
-      .attr('id', 'streetside-viewercss')
+      .attr('id', 'ideditor-streetside-viewercss')
       .attr('rel', 'stylesheet')
       .attr('href', context.asset(pannellumViewerCSS));
 
     // load streetside pannellum viewer js
-    d3_select('head').selectAll('#streetside-viewerjs')
+    d3_select('head').selectAll('#ideditor-streetside-viewerjs')
       .data([0])
       .enter()
       .append('script')
-      .attr('id', 'streetside-viewerjs')
+      .attr('id', 'ideditor-streetside-viewerjs')
       .attr('src', context.asset(pannellumViewerJS));
 
 
@@ -732,15 +731,18 @@ export default {
       .append('div')
       .attr('class', 'attribution-row');
 
+    const hiresDomId = utilUniqueDomId('streetside-hires');
+
     // Add hires checkbox
     let label = line1
       .append('label')
+      .attr('for', hiresDomId)
       .attr('class', 'streetside-hires');
 
     label
       .append('input')
       .attr('type', 'checkbox')
-      .attr('id', 'streetside-hires-input')
+      .attr('id', hiresDomId)
       .property('checked', _hires)
       .on('click', () => {
         d3_event.stopPropagation();

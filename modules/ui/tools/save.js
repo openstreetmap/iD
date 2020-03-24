@@ -55,10 +55,10 @@ export function uiToolSave(context) {
         }
     }
 
-
     function updateCount() {
         var val = history.difference().summary().length;
         if (val === _numChanges) return;
+
         _numChanges = val;
 
         if (tooltipBehavior) {

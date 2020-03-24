@@ -3,7 +3,7 @@ import { geoArea as d3_geoArea } from 'd3-geo';
 import { geoExtent, geoVecCross } from '../geo';
 import { osmEntity } from './entity';
 import { osmLanes } from './lanes';
-import { osmAreaKeys, osmOneWayTags, osmRightSideIsInsideTags } from './tags';
+import { osmTagSuggestingArea, osmOneWayTags, osmRightSideIsInsideTags } from './tags';
 import { utilArrayUniq } from '../util';
 
 
@@ -228,37 +228,7 @@ Object.assign(osmWay.prototype, {
 
     // returns an object with the tag that implies this is an area, if any
     tagSuggestingArea: function() {
-        if (this.tags.area === 'yes') return { area: 'yes' };
-        if (this.tags.area === 'no') return null;
-
-        // `highway` and `railway` are typically linear features, but there
-        // are a few exceptions that should be treated as areas, even in the
-        // absence of a proper `area=yes` or `areaKeys` tag.. see #4194
-        var lineKeys = {
-            highway: {
-                rest_area: true,
-                services: true
-            },
-            railway: {
-                roundhouse: true,
-                station: true,
-                traverser: true,
-                turntable: true,
-                wash: true
-            }
-        };
-        var returnTags = {};
-        for (var key in this.tags) {
-            if (key in osmAreaKeys && !(this.tags[key] in osmAreaKeys[key])) {
-                returnTags[key] = this.tags[key];
-                return returnTags;
-            }
-            if (key in lineKeys && this.tags[key] in lineKeys[key]) {
-                returnTags[key] = this.tags[key];
-                return returnTags;
-            }
-        }
-        return null;
+        return osmTagSuggestingArea(this.tags);
     },
 
     isArea: function() {

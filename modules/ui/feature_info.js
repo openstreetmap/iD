@@ -1,4 +1,4 @@
-import { event as d3_event, select as d3_select } from 'd3-selection';
+import { event as d3_event } from 'd3-selection';
 
 import { t } from '../util/locale';
 import { uiTooltipHtml } from './tooltipHtml';
@@ -37,7 +37,7 @@ export function uiFeatureInfo(context) {
                     tooltipBehavior.hide();
                     d3_event.preventDefault();
                     // open the Map Data pane
-                    context.ui().togglePanes(d3_select('.map-panes .map-data-pane'));
+                    context.ui().togglePanes(context.container().select('.map-panes .map-data-pane'));
                 });
         }
 

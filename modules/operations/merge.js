@@ -1,6 +1,5 @@
 import { t } from '../util/locale';
 
-import { actionChangePreset } from '../actions/change_preset';
 import { actionJoin } from '../actions/join';
 import { actionMerge } from '../actions/merge';
 import { actionMergeNodes } from '../actions/merge_nodes';
@@ -12,61 +11,44 @@ import { modeSelect } from '../modes/select';
 
 export function operationMerge(selectedIDs, context) {
 
-    function updatePresetTags(newGraph, ids) {
-        var id = ids[0];
-        var newEntity = newGraph.hasEntity(id);
-
-        if (!newEntity) return;
-        var newPreset = context.presets().match(newEntity, newGraph);
-        context.replace(actionChangePreset(id, null, newPreset), operation.annotation());
-    }
-
-
     var join = actionJoin(selectedIDs);
     var merge = actionMerge(selectedIDs);
     var mergePolygon = actionMergePolygon(selectedIDs);
     var mergeNodes = actionMergeNodes(selectedIDs);
 
+    function getAction() {
+        if (!join.disabled(context.graph())) {
+            return join;
+
+        } else if (!merge.disabled(context.graph())) {
+            return merge;
+
+        } else if (!mergePolygon.disabled(context.graph())) {
+            return mergePolygon;
+        }
+        return mergeNodes;
+    }
 
     var operation = function() {
-        var doUpdateTags;
-        var action;
-
-        if (!join.disabled(context.graph())) {
-            doUpdateTags = false;
-            action = join;
-        } else if (!merge.disabled(context.graph())) {
-            doUpdateTags = true;
-            action = merge;
-        } else if (!mergePolygon.disabled(context.graph())) {
-            doUpdateTags = false;
-            action = mergePolygon;
-        } else {
-            doUpdateTags = true;
-            action = mergeNodes;
-        }
+        var action = getAction();
 
         context.perform(action, operation.annotation());
 
-        var ids = selectedIDs.filter(function(id) {
-            var entity = context.hasEntity(id);
-            return entity && entity.type !== 'node';
-        });
-
-        // if we merged tags, rematch preset to update tags if necessary (#3851)
-        if (doUpdateTags) {
-            updatePresetTags(context.graph(), ids);
-        }
-
         context.validator().validate();
-        context.enter(modeSelect(context, ids));
-    };
 
+        var resultIDs = selectedIDs.filter(context.hasEntity);
+        if (resultIDs.length > 1) {
+            var interestingIDs = resultIDs.filter(function(id) {
+                return context.entity(id).hasInterestingTags();
+            });
+            if (interestingIDs.length) resultIDs = interestingIDs;
+        }
+        context.enter(modeSelect(context, resultIDs));
+    };
 
     operation.available = function() {
         return selectedIDs.length >= 2;
     };
-
 
     operation.disabled = function() {
         return join.disabled(context.graph()) &&
@@ -74,7 +56,6 @@ export function operationMerge(selectedIDs, context) {
             mergePolygon.disabled(context.graph()) &&
             mergeNodes.disabled(context.graph());
     };
-
 
     operation.tooltip = function() {
         var j = join.disabled(context.graph());          // 'not_eligible', 'not_adjacent', 'restriction', 'conflicting_tags'
@@ -103,11 +84,9 @@ export function operationMerge(selectedIDs, context) {
         }
     };
 
-
     operation.annotation = function() {
         return t('operations.merge.annotation', { n: selectedIDs.length });
     };
-
 
     operation.id = 'merge';
     operation.keys = [t('operations.merge.key')];

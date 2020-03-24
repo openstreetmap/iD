@@ -221,7 +221,7 @@ export function uiInit(context) {
         issueLinks
             .append('a')
             .attr('target', '_blank')
-            .attr('href', 'https://github.com/openstreetmap/iD/blob/master/CONTRIBUTING.md#translating')
+            .attr('href', 'https://github.com/openstreetmap/iD/blob/develop/CONTRIBUTING.md#translating')
             .call(svgIcon('#iD-icon-translate', 'light'))
             .call(tooltip().title(t('help_translate')).placement('top'));
 
@@ -350,7 +350,7 @@ export function uiInit(context) {
 
         function pan(d) {
             return function() {
-                if (d3_select('.combobox').size()) return;
+                if (context.container().select('.combobox').size()) return;
                 d3_event.preventDefault();
                 context.map().pan(d, 100);
             };
