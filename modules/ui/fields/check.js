@@ -68,7 +68,7 @@ export function uiFieldCheck(field, context) {
 
 
     function reverserHidden() {
-        if (!d3_select('div.inspector-hover').empty()) return true;
+        if (!context.container().select('div.inspector-hover').empty()) return true;
         return !(_value === 'yes' || (_impliedYes && !_value));
     }
 

@@ -142,7 +142,7 @@ export function uiCombobox(context, klass) {
                     d3_event.preventDefault();
                 });
 
-            d3_select('body')
+            container
                 .on('scroll.combo-scroll', render, true);
         }
 
@@ -156,7 +156,7 @@ export function uiCombobox(context, klass) {
             container.selectAll('.combobox')
                 .remove();
 
-            d3_select('body')
+            container
                 .on('scroll.combo-scroll', null);
         }
 
@@ -486,7 +486,7 @@ export function uiCombobox(context, klass) {
 }
 
 
-uiCombobox.off = function(input) {
+uiCombobox.off = function(input, context) {
     input
         .on('focus.combo-input', null)
         .on('blur.combo-input', null)
@@ -497,6 +497,6 @@ uiCombobox.off = function(input) {
         .on('mouseup.combo-input', null);
 
 
-    d3_select('body')
+    context.container()
         .on('scroll.combo-scroll', null);
 };

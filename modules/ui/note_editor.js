@@ -133,7 +133,7 @@ export function uiNoteEditor(context) {
 
         // function changeCategory() {
         //     // NOTE: perhaps there is a better way to get value
-        //     var val = d3_select('input[name=\'category\']:checked').property('__data__') || undefined;
+        //     var val = context.container().select('input[name=\'category\']:checked').property('__data__') || undefined;
 
         //     // store the unsaved category with the note itself
         //     _note = _note.update({ newCategory: val });

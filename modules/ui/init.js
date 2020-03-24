@@ -351,7 +351,7 @@ export function uiInit(context) {
 
         function pan(d) {
             return function() {
-                if (d3_select('.combobox').size()) return;
+                if (context.container().select('.combobox').size()) return;
                 d3_event.preventDefault();
                 context.map().pan(d, 100);
             };

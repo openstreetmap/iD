@@ -81,7 +81,7 @@ export function modeSelectNote(context, selectedNoteID) {
 
 
     function esc() {
-        if (d3_select('.combobox').size()) return;
+        if (context.container().select('.combobox').size()) return;
         context.enter(modeBrowse(context));
     }
 

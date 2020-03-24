@@ -204,7 +204,7 @@ export function coreContext() {
   // This is called someteimes, but also on the `window.onbeforeunload` handler
   context.save = () => {
     // no history save, no message onbeforeunload
-    if (_inIntro || d3_select('.modal').size()) return;
+    if (_inIntro || context.container().select('.modal').size()) return;
 
     let canSave;
     if (_mode && _mode.id === 'save') {
@@ -450,7 +450,7 @@ export function coreContext() {
     _uploader.reset();
 
     // don't leave stale state in the inspector
-    d3_select('.inspector-wrap *').remove();
+    context.container().select('.inspector-wrap *').remove();
 
     return context;
   };
