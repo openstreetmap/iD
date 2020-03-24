@@ -385,25 +385,25 @@ export default {
 
         wrap.enter()
             .append('div')
-            .attr('id', 'mly')
+            .attr('id', 'ideditor-mly')
             .attr('class', 'photo-wrapper mly-wrapper')
             .classed('hide', true);
 
         // load mapillary-viewercss
-        d3_select('head').selectAll('#mapillary-viewercss')
+        d3_select('head').selectAll('#ideditor-mapillary-viewercss')
             .data([0])
             .enter()
             .append('link')
-            .attr('id', 'mapillary-viewercss')
+            .attr('id', 'ideditor-mapillary-viewercss')
             .attr('rel', 'stylesheet')
             .attr('href', context.asset(viewercss));
 
         // load mapillary-viewerjs
-        d3_select('head').selectAll('#mapillary-viewerjs')
+        d3_select('head').selectAll('#ideditor-mapillary-viewerjs')
             .data([0])
             .enter()
             .append('script')
-            .attr('id', 'mapillary-viewerjs')
+            .attr('id', 'ideditor-mapillary-viewerjs')
             .attr('src', context.asset(viewerjs));
 
         // load mapillary signs sprite
@@ -508,7 +508,7 @@ export default {
                 };
             }
 
-            _mlyViewer = new Mapillary.Viewer('mly', clientId, null, opts);
+            _mlyViewer = new Mapillary.Viewer('ideditor-mly', clientId, null, opts);
             _mlyViewer.on('nodechanged', nodeChanged);
             _mlyViewer.on('bearingchanged', bearingChanged);
             _mlyViewer.moveToKey(imageKey)
