@@ -71,7 +71,7 @@ export function uiIntroWelcome(context, reveal) {
 
         listener.on('click', function(which) {
             if (which === 'left') {
-                d3_select('.curtain-tooltip.intro-mouse .counter')
+                context.container().select('.curtain-tooltip.intro-mouse .counter')
                     .text(String(++counter));
 
                 if (counter === times) {
@@ -112,7 +112,7 @@ export function uiIntroWelcome(context, reveal) {
 
         listener.on('click', function(which) {
             if (which === 'right') {
-                d3_select('.curtain-tooltip.intro-mouse .counter')
+                context.container().select('.curtain-tooltip.intro-mouse .counter')
                     .text(String(++counter));
 
                 if (counter === times) {
@@ -145,7 +145,7 @@ export function uiIntroWelcome(context, reveal) {
 
     chapter.exit = function() {
         listener.off();
-        d3_select('.curtain-tooltip.intro-mouse')
+        context.container().select('.curtain-tooltip.intro-mouse')
             .selectAll('.counter')
             .remove();
     };
@@ -283,4 +283,3 @@ function clickListener() {
 
     return utilRebind(behavior, dispatch, 'on');
 }
-

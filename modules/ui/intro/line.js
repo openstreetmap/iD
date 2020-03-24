@@ -242,15 +242,15 @@ export function uiIntroLine(context, reveal) {
             return chapter.restart();
         });
 
-        var button = d3_select('.preset-category-road_minor .preset-list-button');
+        var button = context.container().select('.preset-category-road_minor .preset-list-button');
         if (button.empty()) return chapter.restart();
 
         // disallow scrolling
-        d3_select('.inspector-wrap').on('wheel.intro', eventCancel);
+        context.container().select('.inspector-wrap').on('wheel.intro', eventCancel);
 
         timeout(function() {
             // reset pane, in case user somehow happened to change it..
-            d3_select('.inspector-wrap .panewrap').style('right', '-100%');
+            context.container().select('.inspector-wrap .panewrap').style('right', '-100%');
 
             reveal(button.node(),
                 t('intro.lines.choose_category_road', { category: roadCategory.name() })
@@ -263,8 +263,8 @@ export function uiIntroLine(context, reveal) {
         }, 400);  // after editor pane visible
 
         function continueTo(nextStep) {
-            d3_select('.inspector-wrap').on('wheel.intro', null);
-            d3_select('.preset-list-button').on('click.intro', null);
+            context.container().select('.inspector-wrap').on('wheel.intro', null);
+            context.container().select('.preset-list-button').on('click.intro', null);
             context.on('exit.intro', null);
             nextStep();
         }
@@ -278,7 +278,7 @@ export function uiIntroLine(context, reveal) {
             return chapter.restart();
         });
 
-        var subgrid = d3_select('.preset-category-road_minor .subgrid');
+        var subgrid = context.container().select('.preset-category-road_minor .subgrid');
         if (subgrid.empty()) return chapter.restart();
 
         subgrid.selectAll(':not(.preset-highway-residential) .preset-list-button')
@@ -299,7 +299,7 @@ export function uiIntroLine(context, reveal) {
         }, 300);
 
         function continueTo(nextStep) {
-            d3_select('.preset-list-button').on('click.intro', null);
+            context.container().select('.preset-list-button').on('click.intro', null);
             context.on('exit.intro', null);
             nextStep();
         }
@@ -315,10 +315,10 @@ export function uiIntroLine(context, reveal) {
         });
 
         // disallow scrolling
-        d3_select('.inspector-wrap').on('wheel.intro', eventCancel);
+        context.container().select('.inspector-wrap').on('wheel.intro', eventCancel);
 
         timeout(function() {
-            var button = d3_select('.entity-editor-pane .preset-list-button');
+            var button = context.container().select('.entity-editor-pane .preset-list-button');
 
             reveal(button.node(),
                 t('intro.lines.retry_preset_residential', { preset: residentialPreset.name() })
@@ -331,8 +331,8 @@ export function uiIntroLine(context, reveal) {
         }, 500);
 
         function continueTo(nextStep) {
-            d3_select('.inspector-wrap').on('wheel.intro', null);
-            d3_select('.preset-list-button').on('click.intro', null);
+            context.container().select('.inspector-wrap').on('wheel.intro', null);
+            context.container().select('.preset-list-button').on('click.intro', null);
             context.on('exit.intro', null);
             nextStep();
         }
@@ -1057,8 +1057,8 @@ export function uiIntroLine(context, reveal) {
         context.on('enter.intro exit.intro', null);
         context.map().on('move.intro drawn.intro', null);
         context.history().on('change.intro', null);
-        d3_select('.inspector-wrap').on('wheel.intro', null);
-        d3_select('.preset-list-button').on('click.intro', null);
+        context.container().select('.inspector-wrap').on('wheel.intro', null);
+        context.container().select('.preset-list-button').on('click.intro', null);
     };
 
 

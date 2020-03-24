@@ -1,8 +1,7 @@
 import { dispatch as d3_dispatch } from 'd3-dispatch';
 
 import {
-    event as d3_event,
-    select as d3_select
+    event as d3_event
 } from 'd3-selection';
 
 import { t, textDirection } from '../../util/locale';
@@ -207,13 +206,13 @@ export function uiIntroBuilding(context, reveal) {
         }
 
         // disallow scrolling
-        d3_select('.inspector-wrap').on('wheel.intro', eventCancel);
+        context.container().select('.inspector-wrap').on('wheel.intro', eventCancel);
 
         timeout(function() {
             // reset pane, in case user somehow happened to change it..
-            d3_select('.inspector-wrap .panewrap').style('right', '-100%');
+            context.container().select('.inspector-wrap .panewrap').style('right', '-100%');
 
-            var button = d3_select('.preset-category-building .preset-list-button');
+            var button = context.container().select('.preset-category-building .preset-list-button');
 
             reveal(button.node(),
                 t('intro.buildings.choose_category_building', { category: buildingCatetory.name() })
@@ -238,8 +237,8 @@ export function uiIntroBuilding(context, reveal) {
         });
 
         function continueTo(nextStep) {
-            d3_select('.inspector-wrap').on('wheel.intro', null);
-            d3_select('.preset-list-button').on('click.intro', null);
+            context.container().select('.inspector-wrap').on('wheel.intro', null);
+            context.container().select('.preset-list-button').on('click.intro', null);
             context.on('enter.intro', null);
             nextStep();
         }
@@ -256,13 +255,13 @@ export function uiIntroBuilding(context, reveal) {
         }
 
         // disallow scrolling
-        d3_select('.inspector-wrap').on('wheel.intro', eventCancel);
+        context.container().select('.inspector-wrap').on('wheel.intro', eventCancel);
 
         timeout(function() {
             // reset pane, in case user somehow happened to change it..
-            d3_select('.inspector-wrap .panewrap').style('right', '-100%');
+            context.container().select('.inspector-wrap .panewrap').style('right', '-100%');
 
-            var button = d3_select('.preset-building-house .preset-list-button');
+            var button = context.container().select('.preset-building-house .preset-list-button');
 
             reveal(button.node(),
                 t('intro.buildings.choose_preset_house', { preset: housePreset.name() }),
@@ -287,8 +286,8 @@ export function uiIntroBuilding(context, reveal) {
         });
 
         function continueTo(nextStep) {
-            d3_select('.inspector-wrap').on('wheel.intro', null);
-            d3_select('.preset-list-button').on('click.intro', null);
+            context.container().select('.inspector-wrap').on('wheel.intro', null);
+            context.container().select('.preset-list-button').on('click.intro', null);
             context.on('enter.intro', null);
             nextStep();
         }
@@ -545,13 +544,13 @@ export function uiIntroBuilding(context, reveal) {
         }
 
         // disallow scrolling
-        d3_select('.inspector-wrap').on('wheel.intro', eventCancel);
+        context.container().select('.inspector-wrap').on('wheel.intro', eventCancel);
 
         timeout(function() {
             // reset pane, in case user somehow happened to change it..
-            d3_select('.inspector-wrap .panewrap').style('right', '-100%');
+            context.container().select('.inspector-wrap .panewrap').style('right', '-100%');
 
-            d3_select('.preset-search-input')
+            context.container().select('.preset-search-input')
                 .on('keydown.intro', null)
                 .on('keyup.intro', checkPresetSearch);
 
@@ -571,11 +570,11 @@ export function uiIntroBuilding(context, reveal) {
                 context.enter(modeSelect(context, [_tankID]));
 
                 // reset pane, in case user somehow happened to change it..
-                d3_select('.inspector-wrap .panewrap').style('right', '-100%');
+                context.container().select('.inspector-wrap .panewrap').style('right', '-100%');
                 // disallow scrolling
-                d3_select('.inspector-wrap').on('wheel.intro', eventCancel);
+                context.container().select('.inspector-wrap').on('wheel.intro', eventCancel);
 
-                d3_select('.preset-search-input')
+                context.container().select('.preset-search-input')
                     .on('keydown.intro', null)
                     .on('keyup.intro', checkPresetSearch);
 
@@ -588,7 +587,7 @@ export function uiIntroBuilding(context, reveal) {
         });
 
         function checkPresetSearch() {
-            var first = d3_select('.preset-list-item:first-child');
+            var first = context.container().select('.preset-list-item:first-child');
 
             if (first.classed('preset-man_made-storage_tank')) {
                 reveal(first.select('.preset-list-button').node(),
@@ -596,7 +595,7 @@ export function uiIntroBuilding(context, reveal) {
                     { duration: 300 }
                 );
 
-                d3_select('.preset-search-input')
+                context.container().select('.preset-search-input')
                     .on('keydown.intro', eventCancel, true)
                     .on('keyup.intro', null);
 
@@ -607,10 +606,10 @@ export function uiIntroBuilding(context, reveal) {
         }
 
         function continueTo(nextStep) {
-            d3_select('.inspector-wrap').on('wheel.intro', null);
+            context.container().select('.inspector-wrap').on('wheel.intro', null);
             context.on('enter.intro', null);
             context.history().on('change.intro', null);
-            d3_select('.preset-search-input').on('keydown.intro keyup.intro', null);
+            context.container().select('.preset-search-input').on('keydown.intro keyup.intro', null);
             nextStep();
         }
     }
@@ -777,9 +776,9 @@ export function uiIntroBuilding(context, reveal) {
         context.on('enter.intro exit.intro', null);
         context.map().on('move.intro drawn.intro', null);
         context.history().on('change.intro', null);
-        d3_select('.inspector-wrap').on('wheel.intro', null);
-        d3_select('.preset-search-input').on('keydown.intro keyup.intro', null);
-        d3_select('.more-fields .combobox-input').on('click.intro', null);
+        context.container().select('.inspector-wrap').on('wheel.intro', null);
+        context.container().select('.preset-search-input').on('keydown.intro keyup.intro', null);
+        context.container().select('.more-fields .combobox-input').on('click.intro', null);
     };
 
 
