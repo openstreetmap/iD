@@ -20,9 +20,6 @@ export function uiCurtain() {
         surface = selection
             .append('svg')
             .attr('class', 'curtain')
-            .style('z-index', 1000)
-            .style('pointer-events', 'none')
-            .style('position', 'absolute')
             .style('top', 0)
             .style('left', 0);
 
@@ -34,8 +31,7 @@ export function uiCurtain() {
         d3_select(window).on('resize.curtain', resize);
 
         tooltip = selection.append('div')
-            .attr('class', 'tooltip')
-            .style('z-index', 1002);
+            .attr('class', 'tooltip');
 
         tooltip
             .append('div')
