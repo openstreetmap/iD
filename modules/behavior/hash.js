@@ -5,134 +5,185 @@ import { select as d3_select } from 'd3-selection';
 import { utilDisplayLabel } from '../util';
 import { geoSphericalDistance } from '../geo';
 import { modeBrowse } from '../modes/browse';
+import { modeSelect } from '../modes/select';
 import { utilObjectOmit, utilQsString, utilStringQs } from '../util';
+import { utilArrayIdentical } from '../util/array';
+import { t } from '../util/locale';
 
 
 export function behaviorHash(context) {
-    var s0 = null; // cached window.location.hash
-    var lat = 90 - 1e-8; // allowable latitude range
 
+    // cached window.location.hash
+    var _cachedHash = null;
+    // allowable latitude range
+    var _latitudeLimit = 90 - 1e-8;
 
-    var parser = function(map, s) {
-        var q = utilStringQs(s);
-        var args = (q.map || '').split('/').map(Number);
+    function computedHashParameters() {
+        var map = context.map();
+        var center = map.center();
+        var zoom = map.zoom();
+        var precision = Math.max(0, Math.ceil(Math.log(zoom) / Math.LN2));
+        var oldParams = utilObjectOmit(utilStringQs(window.location.hash),
+            ['comment', 'source', 'hashtags', 'walkthrough']
+        );
+        var newParams = {};
 
-        if (args.length < 3 || args.some(isNaN)) {
-            return true; // replace bogus hash
+        delete oldParams.id;
+        var selected = context.selectedIDs().filter(function(id) {
+            return context.hasEntity(id);
+        });
+        if (selected.length) {
+            newParams.id = selected.join(',');
+        }
 
-        } else if (s !== formatter(map).slice(1)) {   // hash has changed
+        newParams.map = zoom.toFixed(2) +
+            '/' + center[1].toFixed(precision) +
+            '/' + center[0].toFixed(precision);
+
+        return Object.assign(oldParams, newParams);
+    }
+
+    function computedHash() {
+        return '#' + utilQsString(computedHashParameters(), true);
+    }
+
+    function computedTitle(includeChangeCount) {
+
+        var baseTitle = 'iD';
+        var contextual;
+        var changeCount;
+        var titleID;
+
+        var selected = context.selectedIDs().filter(function(id) {
+            return context.hasEntity(id);
+        });
+        if (selected.length) {
+            var firstLabel = utilDisplayLabel(context.entity(selected[0]), context);
+            if (selected.length > 1 ) {
+                contextual = t('title.labeled_and_more', {
+                    labeled: firstLabel,
+                    count: (selected.length - 1).toString()
+                });
+            } else {
+                contextual = firstLabel;
+            }
+            titleID = 'context';
+        }
+
+        if (includeChangeCount) {
+            changeCount = context.history().difference().summary().length;
+            if (changeCount > 0) {
+                titleID = contextual ? 'changes_context' : 'changes';
+            }
+        }
+
+        if (titleID) {
+            return t('title.format.' + titleID, {
+                changes: changeCount,
+                base: baseTitle,
+                context: contextual
+            });
+        }
+
+        return baseTitle;
+    }
+
+    function updateTitle(includeChangeCount) {
+        var newTitle = computedTitle(includeChangeCount);
+        if (document.title !== newTitle) {
+            document.title = newTitle;
+        }
+    }
+
+    function updateHashIfNeeded() {
+        if (context.inIntro()) return;
+
+        var latestHash = computedHash();
+        if (_cachedHash !== latestHash) {
+            _cachedHash = latestHash;
+
+            // Update the URL hash without affecting the browser navigation stack,
+            // though unavoidably creating a browser history entry
+            window.history.replaceState(null, computedTitle(false /* includeChangeCount */), latestHash);
+
+            // set the title we want displayed for the browser tab/window
+            updateTitle(true /* includeChangeCount */);
+        }
+    }
+
+    var throttledUpdate = _throttle(updateHashIfNeeded, 500);
+    var throttledUpdateTitle = _throttle(function() {
+        updateTitle(true /* includeChangeCount */);
+    }, 500);
+
+    function hashchange() {
+
+        // ignore spurious hashchange events
+        if (window.location.hash === _cachedHash) return;
+
+        _cachedHash = window.location.hash;
+
+        var q = utilStringQs(_cachedHash);
+        var mapArgs = (q.map || '').split('/').map(Number);
+
+        if (mapArgs.length < 3 || mapArgs.some(isNaN)) {
+            // replace bogus hash
+            updateHashIfNeeded();
+
+        } else {
+            // don't update if the new hash already reflects the state of iD
+            if (_cachedHash === computedHash()) return;
+
             var mode = context.mode();
-            var dist = geoSphericalDistance(map.center(), [args[2], args[1]]);
+
+            context.map().centerZoom([mapArgs[2], Math.min(_latitudeLimit, Math.max(-_latitudeLimit, mapArgs[1]))], mapArgs[0]);
+
+            if (q.id) {
+                var ids = q.id.split(',').filter(function(id) {
+                    return context.hasEntity(id);
+                });
+                var skip = mode && mode.id === 'select' && utilArrayIdentical(mode.selectedIDs(), ids);
+                if (ids.length && !skip) {
+                    context.enter(modeSelect(context, ids));
+                    return;
+                }
+            }
+
+            var center = context.map().center();
+            var dist = geoSphericalDistance(center, [mapArgs[2], mapArgs[1]]);
             var maxdist = 500;
 
             // Don't allow the hash location to change too much while drawing
             // This can happen if the user accidently hit the back button.  #3996
             if (mode && mode.id.match(/^draw/) !== null && dist > maxdist) {
                 context.enter(modeBrowse(context));
+                return;
             }
-            map.centerZoom([args[2], Math.min(lat, Math.max(-lat, args[1]))], args[0]);
-        }
-    };
-
-
-    var formatter = function(map) {
-        var center = map.center();
-        var zoom = map.zoom();
-        var precision = Math.max(0, Math.ceil(Math.log(zoom) / Math.LN2));
-        var q = utilObjectOmit(utilStringQs(window.location.hash),
-            ['comment', 'source', 'hashtags', 'walkthrough']
-        );
-        var newParams = {};
-
-        delete q.id;
-        var selected = context.selectedIDs().filter(function(id) {
-            return !context.entity(id).isNew();
-        });
-        if (selected.length) {
-            newParams.id = selected.join(',');
-        }
- 
-        newParams.map = zoom.toFixed(2) +
-            '/' + center[1].toFixed(precision) +
-            '/' + center[0].toFixed(precision);
-
-        updateTitle(selected, center[1].toFixed(precision), center[0].toFixed(precision));
-
-        return '#' + utilQsString(Object.assign(q, newParams), true);
-    };
-
-    function updateTitle(selected, center1, center0){
-        //selection
-        var oldTitle = document.title;
-        var endIndex = oldTitle.indexOf('-');
-        var oldIDStr = oldTitle.substring(endIndex+2);
-        if (selected.length === 1) {
-            if (endIndex === -1) {
-                oldTitle += ' - ' + utilDisplayLabel(context.entity(selected[0]), context);
-            }
-            else {
-                var newIDStr = utilDisplayLabel(context.entity(selected[0]), context);
-                oldTitle = oldTitle.replace(oldIDStr, newIDStr);
-            }
-        }
-        else if (selected.length > 1 ) {
-            newIDStr = utilDisplayLabel(context.entity(selected[0]), context) + ' and ' + (selected.length-1).toString() + ' more';
-            oldTitle = oldTitle.replace(oldIDStr, newIDStr);
-        }
-        else {
-            if (endIndex !== -1){
-                oldIDStr = oldTitle.substring(endIndex);
-                oldTitle = oldTitle.replace(oldIDStr, '');
-            }
-            //map location
-            oldTitle += ' - (' + center1 + ',' + center0 + ')';
-        }
-
-        document.title = oldTitle;
-
-    }
-
-
-    function update() {
-        if (context.inIntro()) return;
-        var s1 = formatter(context.map());
-        if (s0 !== s1) {
-            s0 = s1;
-            window.location.replace(s0);  // don't recenter the map!
         }
     }
-
-
-    var throttledUpdate = _throttle(update, 500);
-
-
-    function hashchange() {
-        if (window.location.hash === s0) return;  // ignore spurious hashchange events
-        if (parser(context.map(), (s0 = window.location.hash).substring(1))) {
-            update(); // replace bogus hash
-        }
-    }
-
 
     function behavior() {
         context.map()
-            .on('move.hash', throttledUpdate);
+            .on('move.behaviorHash', throttledUpdate);
+
+        context.history()
+            .on('change.behaviorHash', throttledUpdateTitle);
 
         context
-            .on('enter.hash', throttledUpdate);
+            .on('enter.behaviorHash', throttledUpdate);
 
         d3_select(window)
-            .on('hashchange.hash', hashchange);
+            .on('hashchange.behaviorHash', hashchange);
 
         if (window.location.hash) {
             var q = utilStringQs(window.location.hash);
 
             if (q.id) {
-                if (!context.history().hasRestorableChanges()) {
+                //if (!context.history().hasRestorableChanges()) {
                     // targeting specific features: download, select, and zoom to them
-                    context.zoomToEntities(q.id.split(','));
-                }
-            }                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           
+                    context.zoomToEntity(q.id.split(',')[0], !q.map);
+                //}
+            }
 
             // Store these here instead of updating local storage since local
             // storage could be flushed if the user discards pending changes
@@ -144,30 +195,31 @@ export function behaviorHash(context) {
                 behavior.startWalkthrough = true;
             }
 
-            hashchange();
-
             if (q.map) {
                 behavior.hadHash = true;
             }
+
+            hashchange();
+
+            updateTitle(false);
         }
     }
 
-
     behavior.off = function() {
         throttledUpdate.cancel();
+        throttledUpdateTitle.cancel();
 
         context.map()
-            .on('move.hash', null);
+            .on('move.behaviorHash', null);
 
         context
-            .on('enter.hash', null);
+            .on('enter.behaviorHash', null);
 
         d3_select(window)
-            .on('hashchange.hash', null);
+            .on('hashchange.behaviorHash', null);
 
         window.location.hash = '';
     };
-
 
     return behavior;
 }

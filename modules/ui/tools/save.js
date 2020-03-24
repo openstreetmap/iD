@@ -55,7 +55,6 @@ export function uiToolSave(context) {
         var val = history.difference().summary().length;
         if (val === _numChanges) return;
 
-
         _numChanges = val;
 
         if (tooltipBehavior) {
