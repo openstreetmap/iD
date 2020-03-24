@@ -197,7 +197,7 @@ export function svgDefs(context) {
                 d3_svg(url)
                     .then(function(svg) {
                         node.appendChild(
-                            d3_select(svg.documentElement).attr('id', d).node()
+                            d3_select(svg.documentElement).attr('id', 'ideditor-' + d).node()
                         );
                         if (overrideColors && d !== 'iD-sprite') {   // allow icon colors to be overridden..
                             d3_select(node).selectAll('path')
