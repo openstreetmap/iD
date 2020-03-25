@@ -56,7 +56,6 @@ export { uiSuccess } from './success';
 export { uiTagReference } from './tag_reference';
 export { uiToggle } from './toggle';
 export { uiTooltip } from './tooltip';
-export { uiTooltipHtml } from './tooltipHtml';
 export { uiVersion } from './version';
 export { uiViewOnOSM } from './view_on_osm';
 export { uiViewOnKeepRight } from './view_on_keepRight';

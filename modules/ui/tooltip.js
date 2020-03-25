@@ -1,4 +1,5 @@
 import { utilFunctor } from '../util/util';
+import { t } from '../util/locale';
 import { uiPopover } from './popover';
 
 export function uiTooltip(klass) {
@@ -17,34 +18,84 @@ export function uiTooltip(klass) {
         }
         return title;
     };
-    var _html = utilFunctor(false);
 
+    var _heading = utilFunctor(null);
+    var _keys = utilFunctor(null);
 
     tooltip.title = function(val) {
-        if (arguments.length) {
-            _title = utilFunctor(val);
-            return tooltip;
-        } else {
-            return _title;
-        }
+        if (!arguments.length) return _title;
+        _title = utilFunctor(val);
+        return tooltip;
     };
 
+    tooltip.heading = function(val) {
+        if (!arguments.length) return _heading;
+        _heading = utilFunctor(val);
+        return tooltip;
+    };
 
-    tooltip.html = function(val) {
-        if (arguments.length) {
-            _html = utilFunctor(val);
-            return tooltip;
-        } else {
-            return _html;
-        }
+    tooltip.keys = function(val) {
+        if (!arguments.length) return _keys;
+        _keys = utilFunctor(val);
+        return tooltip;
     };
 
     tooltip.content(function() {
-        var content = _title.apply(this, arguments);
-        var markup = _html.apply(this, arguments);
+        var heading = _heading.apply(this, arguments);
+        var text = _title.apply(this, arguments);
+        var keys = _keys.apply(this, arguments);
 
         return function(selection) {
-            selection[markup ? 'html' : 'text'](content);
+
+            var headingSelect = selection
+                .selectAll('.tooltip-heading')
+                .data(heading ? [heading] :[]);
+
+            headingSelect.exit()
+                .remove();
+
+            headingSelect.enter()
+                .append('div')
+                .attr('class', 'tooltip-heading')
+                .html(heading);
+
+            var textSelect = selection
+                .selectAll('.tooltip-text')
+                .data(text ? [text] :[]);
+
+            textSelect.exit()
+                .remove();
+
+            textSelect.enter()
+                .append('div')
+                .attr('class', 'tooltip-text')
+                .html(text);
+
+            var keyhintWrap = selection
+                .selectAll('.keyhint-wrap')
+                .data(keys && keys.length ? [0] : []);
+
+            keyhintWrap.exit()
+                .remove();
+
+            var keyhintWrapEnter = keyhintWrap.enter()
+                .append('div')
+                .attr('class', 'keyhint-wrap');
+
+            keyhintWrapEnter
+                .append('span')
+                .html(t('tooltip_keyhint'));
+
+            keyhintWrap = keyhintWrapEnter.merge(keyhintWrap);
+
+            keyhintWrap.selectAll('kbd.shortcut')
+                .data(keys && keys.length ? keys : [])
+                .enter()
+                .append('kbd')
+                .attr('class', 'shortcut')
+                .html(function(d) {
+                    return d;
+                });
         };
     });
 

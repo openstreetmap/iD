@@ -5,7 +5,6 @@ import { t } from '../../util/locale';
 import { modeSave } from '../../modes';
 import { svgIcon } from '../../svg';
 import { uiCmd } from '../cmd';
-import { uiTooltipHtml } from '../tooltipHtml';
 import { uiTooltip } from '../tooltip';
 
 
@@ -59,9 +58,8 @@ export function uiToolSave(context) {
 
         if (tooltipBehavior) {
             tooltipBehavior
-                .title(uiTooltipHtml(
-                    t(_numChanges > 0 ? 'save.help' : 'save.no_changes'), key)
-                );
+                .title(t(_numChanges > 0 ? 'save.help' : 'save.no_changes'))
+                .keys([key]);
         }
 
         if (button) {
@@ -78,8 +76,8 @@ export function uiToolSave(context) {
     tool.render = function(selection) {
         tooltipBehavior = uiTooltip()
             .placement('bottom')
-            .html(true)
-            .title(uiTooltipHtml(t('save.no_changes'), key))
+            .title(t('save.no_changes'))
+            .keys([key])
             .scrollContainer(context.container().select('.top-toolbar'));
 
         button = selection

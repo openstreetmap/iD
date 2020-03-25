@@ -10,7 +10,6 @@ import {
 import { t } from '../../util/locale';
 import { svgIcon } from '../../svg';
 import { uiTooltip } from '../tooltip';
-import { uiTooltipHtml } from '../tooltipHtml';
 
 export function uiToolNotes(context) {
 
@@ -105,8 +104,8 @@ export function uiToolNotes(context) {
                 })
                 .call(uiTooltip()
                     .placement('bottom')
-                    .html(true)
-                    .title(function(d) { return uiTooltipHtml(d.description, d.key); })
+                    .title(function(d) { return d.description; })
+                    .keys(function(d) { return [d.key]; })
                     .scrollContainer(context.container().select('.top-toolbar'))
                 );
 

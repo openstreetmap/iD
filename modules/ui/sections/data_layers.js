@@ -12,7 +12,6 @@ import { modeBrowse } from '../../modes/browse';
 import { uiCmd } from '../cmd';
 import { uiSection } from '../section';
 import { uiSettingsCustomData } from '../settings/custom_data';
-import { uiTooltipHtml } from '../tooltipHtml';
 
 export function uiSectionDataLayers(context) {
 
@@ -95,8 +94,8 @@ export function uiSectionDataLayers(context) {
                 if (d.id === 'osm') {
                     d3_select(this)
                         .call(uiTooltip()
-                            .html(true)
-                            .title(uiTooltipHtml(t('map_data.layers.' + d.id + '.tooltip'), uiCmd('⌥' + t('area_fill.wireframe.key'))))
+                            .title(t('map_data.layers.' + d.id + '.tooltip'))
+                            .keys([uiCmd('⌥' + t('area_fill.wireframe.key'))])
                             .placement('bottom')
                         );
                 } else {

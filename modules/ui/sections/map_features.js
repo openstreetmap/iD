@@ -1,7 +1,6 @@
 import { t } from '../../util/locale';
 import { uiTooltip } from '../tooltip';
 import { uiSection } from '../section';
-import { uiTooltipHtml } from '../tooltipHtml';
 
 export function uiSectionMapFeatures(context) {
 
@@ -67,14 +66,13 @@ export function uiSectionMapFeatures(context) {
         var enter = items.enter()
             .append('li')
             .call(uiTooltip()
-                .html(true)
                 .title(function(d) {
                     var tip = t(name + '.' + d + '.tooltip');
                     if (autoHiddenFeature(d)) {
                         var msg = showsLayer('osm') ? t('map_data.autohidden') : t('map_data.osmhidden');
                         tip += '<div>' + msg + '</div>';
                     }
-                    return uiTooltipHtml(tip);
+                    return tip;
                 })
                 .placement('top')
             );

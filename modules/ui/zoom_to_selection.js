@@ -2,7 +2,6 @@ import { select as d3_select } from 'd3-selection';
 
 import { t, textDirection } from '../util/locale';
 import { uiTooltip } from './tooltip';
-import { uiTooltipHtml } from './tooltipHtml';
 import { svgIcon } from '../svg/icon';
 
 export function uiZoomToSelection(context) {
@@ -34,8 +33,8 @@ export function uiZoomToSelection(context) {
             .call(svgIcon('#iD-icon-framed-dot', 'light'))
             .call(uiTooltip()
                 .placement((textDirection === 'rtl') ? 'right' : 'left')
-                .html(true)
-                .title(uiTooltipHtml(t('inspector.zoom_to.title'), t('inspector.zoom_to.key')))
+                .title(t('inspector.zoom_to.title'))
+                .keys([t('inspector.zoom_to.key')])
             );
 
         setEnabledState();

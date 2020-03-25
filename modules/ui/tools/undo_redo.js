@@ -8,7 +8,6 @@ import {
 import { t, textDirection } from '../../util/locale';
 import { svgIcon } from '../../svg';
 import { uiCmd } from '../cmd';
-import { uiTooltipHtml } from '../tooltipHtml';
 import { uiTooltip } from '../tooltip';
 
 
@@ -40,11 +39,13 @@ export function uiToolUndoRedo(context) {
     tool.render = function(selection) {
         var tooltipBehavior = uiTooltip()
             .placement('bottom')
-            .html(true)
             .title(function (d) {
-                return uiTooltipHtml(d.annotation() ?
+                return d.annotation() ?
                     t(d.id + '.tooltip', {action: d.annotation()}) :
-                    t(d.id + '.nothing'), d.cmd);
+                    t(d.id + '.nothing');
+            })
+            .keys(function(d) {
+                return [d.cmd];
             })
             .scrollContainer(context.container().select('.top-toolbar'));
 

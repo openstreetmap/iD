@@ -1,28 +1,27 @@
 import { event as d3_event, select as d3_select } from 'd3-selection';
 
-import { geoVecAdd, geoVecFloor } from '../geo';
+import { geoVecAdd } from '../geo';
 import { textDirection } from '../util/locale';
-import { uiTooltipHtml } from './tooltipHtml';
+import { uiTooltip } from './tooltip';
+import { svgIcon } from '../svg/icon';
 
 
 export function uiEditMenu(context, operations) {
     var menu;
     var center = [0, 0];
     var offset = [0, 0];
-    var tooltip;
 
-    var p = 8;               // top padding
-    var m = 4;               // top margin
-    var h = 15;              // height of icon
     var vpBottomMargin = 45; // viewport bottom margin
     var vpSideMargin = 35;   // viewport side margin
+
+    // hardcode these values to make menu positioning easier
     var buttonWidth = 44;
-    var buttonHeight = (2 * p + h);
+    var buttonHeight = 34;
     var menuWidth = buttonWidth;
-    var menuHeight = (2 * m) + operations.length * buttonHeight;
+    var verticalPadding = 4;
+
+    // offset the menu slightly from the target location
     var menuSideMargin = 10;
-    var tooltipWidth = 200;
-    var tooltipHeight = 200;  // a reasonable guess, real height depends on tooltip contents
 
 
     var editMenu = function (selection) {
@@ -32,6 +31,8 @@ export function uiEditMenu(context, operations) {
 
         var isRTL = textDirection === 'rtl';
         var viewport = context.surfaceRect();
+
+        var menuHeight = verticalPadding * 2 + operations.length * buttonHeight;
 
         if (!isRTL && (center[0] + menuSideMargin + menuWidth) > (viewport.width - vpSideMargin)) {
             // menu is going left-to-right and near right viewport edge, go left instead
@@ -51,68 +52,44 @@ export function uiEditMenu(context, operations) {
         var origin = geoVecAdd(center, offset);
 
         menu = selection
-            .append('g')
+            .append('div')
             .attr('class', 'edit-menu')
-            .attr('transform', 'translate(' + origin + ')')
+            .style('padding', verticalPadding + 'px 0')
+            .style('left', origin[0] + 'px')
+            .style('top', origin[1] + 'px')
             .attr('opacity', 0);
 
         menu
             .transition()
             .attr('opacity', 1);
 
-        menu
-            .append('rect')
-            .attr('class', 'edit-menu-background')
-            .attr('x', 4)
-            .attr('rx', 4)
-            .attr('ry', 4)
-            .attr('width', menuWidth)
-            .attr('height', menuHeight)
-            .attr('stroke-linecap', 'round');
-
-
         var buttons = menu.selectAll('.edit-menu-item')
             .data(operations);
 
         // enter
         var buttonsEnter = buttons.enter()
-            .append('g')
+            .append('button')
             .attr('class', function (d) { return 'edit-menu-item edit-menu-item-' + d.id; })
-            .attr('transform', function(d, i) {
-                return 'translate(' + geoVecFloor([0, m + i * buttonHeight]).join(',') + ')';
-            });
-
-        buttonsEnter
-            .append('rect')
-            .attr('x', 4)
-            .attr('width', buttonWidth)
-            .attr('height', buttonHeight)
+            .style('width', buttonWidth + 'px')
+            .style('height', buttonHeight + 'px')
             .on('click', click)
-            .on('mousedown', mousedown)
-            .on('mouseover', mouseover)
-            .on('mouseout', mouseout);
+            .on('mousedown', mousedown);
 
-        buttonsEnter
-            .append('use')
-            .attr('class', 'operation-icon')
-            .attr('width', '20')
-            .attr('height', '20')
-            .attr('transform', function () { return 'translate(' + [2 * p, 5] + ')'; })
-            .attr('xlink:href', function (d) { return '#iD-operation-' + d.id; });
+        buttonsEnter.each(function(d) {
+            d3_select(this)
+                .call(svgIcon('#iD-operation-' + d.id, 'operation-icon'))
+                .call(uiTooltip()
+                    .heading(d.title)
+                    .title(d.tooltip())
+                    .keys([d.keys[0]])
+                    .placement('right')
+                );
+        });
 
         // update
         buttons = buttonsEnter
             .merge(buttons)
             .classed('disabled', function(d) { return d.disabled(); });
-
-
-        tooltip = context.container()
-            .append('div')
-            .attr('class', 'popover tooltip edit-menu-tooltip');
-
-        tooltip
-            .append('div')
-            .attr('class', 'popover-inner');
 
 
         function click(operation) {
@@ -125,47 +102,6 @@ export function uiEditMenu(context, operations) {
         function mousedown() {
             d3_event.stopPropagation();  // https://github.com/openstreetmap/iD/issues/1869
         }
-
-        function mouseover(d, i) {
-            var tipX, tipY;
-
-            if (!isRTL) {
-                tipX = viewport.left + origin[0] + menuSideMargin + menuWidth;
-            } else {
-                tipX = viewport.left + origin[0] - 4 - tooltipWidth;
-            }
-
-            if (tipX + tooltipWidth > viewport.right) {
-                // tip is going left-to-right and near right viewport edge, go left instead
-                tipX = viewport.left + origin[0] - 4 - tooltipWidth;
-            } else if (tipX < viewport.left) {
-                // tip is going right-to-left and near left viewport edge, go right instead
-                tipX = viewport.left + origin[0] + menuSideMargin + menuWidth;
-            }
-
-            tipY = viewport.top + origin[1] + (i * buttonHeight);
-            if (tipY + tooltipHeight > viewport.bottom) {
-                // tip is near bottom viewport edge, shift upwards
-                tipY -= tipY + tooltipHeight - viewport.bottom;
-            }
-
-            tooltip
-                .style('left', tipX + 'px')
-                .style('top', tipY + 'px')
-                .style('display', 'block')
-                .selectAll('.popover-inner')
-                .html(uiTooltipHtml(d.tooltip(), d.keys[0], d.title));
-
-            // update disabled again, just in case tooltip and disabled state disagree
-            // https://github.com/openstreetmap/iD/issues/6296#issuecomment-489259027
-            d3_select(this.parentNode)
-                .classed('disabled', d.disabled());
-
-        }
-
-        function mouseout() {
-            tooltip.style('display', 'none');
-        }
     };
 
 
@@ -176,10 +112,6 @@ export function uiEditMenu(context, operations) {
                 .transition()
                 .attr('opacity', 0)
                 .remove();
-        }
-
-        if (tooltip) {
-            tooltip.remove();
         }
     };
 

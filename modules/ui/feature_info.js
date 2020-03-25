@@ -1,7 +1,6 @@
 import { event as d3_event } from 'd3-selection';
 
 import { t } from '../util/locale';
-import { uiTooltipHtml } from './tooltipHtml';
 import { uiTooltip } from './tooltip';
 
 
@@ -22,9 +21,8 @@ export function uiFeatureInfo(context) {
         if (hiddenList.length) {
             var tooltipBehavior = uiTooltip()
                 .placement('top')
-                .html(true)
                 .title(function() {
-                    return uiTooltipHtml(hiddenList.join('<br/>'));
+                    return hiddenList.join('<br/>');
                 });
 
             selection.append('a')

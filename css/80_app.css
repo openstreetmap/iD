@@ -5269,30 +5269,22 @@ li.hide + li.version .badge .tooltip .popover-arrow {
 
 /* Contextual Edit Menu
 ------------------------------------------------------- */
-.edit-menu-tooltip {
+.edit-menu {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    background: #fff;
+    border-radius: 4px;
+    /* padding set in code */
+}
+
+.edit-menu .tooltip {
     width: 200px;
 }
 
-.edit-menu-background {
-    fill: #eee;
-}
-
-.edit-menu-item rect {
-    fill: #eee;
-    cursor: default;
-}
-
-.edit-menu-item rect:active,
-.edit-menu-item rect:hover {
-    fill: #ccc;
-}
-
-.edit-menu-item.disabled rect {
-    cursor: not-allowed;
-}
-.edit-menu-item.disabled rect:hover {
-    cursor: not-allowed;
-    fill: #eee;
+.edit-menu-item {
+    border-radius: 0;
+    /* width and height set in code */
 }
 
 .edit-menu-item use {

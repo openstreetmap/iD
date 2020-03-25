@@ -7,7 +7,6 @@ import { modeBrowse } from '../modes/browse';
 import { svgIcon } from '../svg/icon';
 import { uiFlash } from './flash';
 import { uiLoading } from './loading';
-import { uiTooltipHtml } from './tooltipHtml';
 
 export function uiGeolocate(context) {
     var _geolocationOptions = {
@@ -89,8 +88,8 @@ export function uiGeolocate(context) {
             .call(svgIcon('#iD-icon-geolocate', 'light'))
             .call(uiTooltip()
                 .placement((textDirection === 'rtl') ? 'right' : 'left')
-                .html(true)
-                .title(uiTooltipHtml(t('geolocate.title'), t('geolocate.key')))
+                .title(t('geolocate.title'))
+                .keys([t('geolocate.key')])
             );
 
         context.keybinding().on(t('geolocate.key'), click);

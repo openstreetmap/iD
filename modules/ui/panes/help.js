@@ -4,7 +4,6 @@ import { svgIcon } from '../../svg/icon';
 import { uiCmd } from '../cmd';
 import { uiIntro } from '../intro/intro';
 import { uiShortcuts } from '../shortcuts';
-import { uiTooltipHtml } from '../tooltipHtml';
 import { uiPane } from '../pane';
 
 import { t, textDirection } from '../../util/locale';
@@ -365,8 +364,8 @@ export function uiPaneHelp(context) {
             .append('li')
             .attr('class', 'shortcuts')
             .call(uiTooltip()
-                .html(true)
-                .title(uiTooltipHtml(t('shortcuts.tooltip'), '?'))
+                .title(t('shortcuts.tooltip'))
+                .keys(['?'])
                 .placement('top')
             )
             .append('a')

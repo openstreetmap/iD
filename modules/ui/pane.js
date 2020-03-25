@@ -6,7 +6,6 @@ import {
 import { svgIcon } from '../svg/icon';
 import { textDirection } from '../util/locale';
 import { uiTooltip } from './tooltip';
-import { uiTooltipHtml } from './tooltipHtml';
 
 
 export function uiPane(id, context) {
@@ -74,8 +73,8 @@ export function uiPane(id, context) {
         if (!_paneTooltip) {
             _paneTooltip = uiTooltip()
                 .placement((textDirection === 'rtl') ? 'right' : 'left')
-                .html(true)
-                .title(uiTooltipHtml(_description, _key));
+                .title(_description)
+                .keys([_key]);
         }
 
         selection

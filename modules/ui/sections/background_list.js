@@ -12,7 +12,6 @@ import { uiCmd } from '../cmd';
 import { uiSettingsCustomBackground } from '../settings/custom_background';
 import { uiMapInMap } from '../map_in_map';
 import { uiSection } from '../section';
-import { uiTooltipHtml } from '../tooltipHtml';
 
 export function uiSectionBackgroundList(context) {
 
@@ -56,8 +55,8 @@ export function uiSectionBackgroundList(context) {
             .attr('class', 'minimap-toggle-item')
             .append('label')
             .call(uiTooltip()
-                .html(true)
-                .title(uiTooltipHtml(t('background.minimap.tooltip'), t('background.minimap.key')))
+                .title(t('background.minimap.tooltip'))
+                .keys([t('background.minimap.key')])
                 .placement('top')
             );
 
@@ -79,8 +78,8 @@ export function uiSectionBackgroundList(context) {
             .attr('class', 'background-panel-toggle-item')
             .append('label')
             .call(uiTooltip()
-                .html(true)
-                .title(uiTooltipHtml(t('background.panel.tooltip'), uiCmd('⌘⇧' + t('info_panels.background.key'))))
+                .title(t('background.panel.tooltip'))
+                .keys([uiCmd('⌘⇧' + t('info_panels.background.key'))])
                 .placement('top')
             );
 
@@ -127,11 +126,8 @@ export function uiSectionBackgroundList(context) {
             if (d.id === previousBackgroundID()) {
                 item.call(uiTooltip()
                     .placement(placement)
-                    .html(true)
-                    .title(function() {
-                        var tip = '<div>' + t('background.switch') + '</div>';
-                        return uiTooltipHtml(tip, uiCmd('⌘' + t('background.key')));
-                    })
+                    .title('<div>' + t('background.switch') + '</div>')
+                    .keys([uiCmd('⌘' + t('background.key'))])
                 );
             } else if (description || isOverflowing) {
                 item.call(uiTooltip()
