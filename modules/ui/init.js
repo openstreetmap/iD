@@ -311,7 +311,45 @@ export function uiInit(context) {
             .on(['⇧←', uiCmd('⌘←')], pan([map.dimensions()[0], 0]))
             .on(['⇧↑', uiCmd('⌘↑')], pan([0, map.dimensions()[1]]))
             .on(['⇧→', uiCmd('⌘→')], pan([-map.dimensions()[0], 0]))
-            .on(['⇧↓', uiCmd('⌘↓')], pan([0, -map.dimensions()[1]]));
+            .on(['⇧↓', uiCmd('⌘↓')], pan([0, -map.dimensions()[1]]))
+            .on(uiCmd('⌘' + t('background.key')), function quickSwitch() {
+                if (d3_event) {
+                    d3_event.stopImmediatePropagation();
+                    d3_event.preventDefault();
+                }
+                var previousBackground = context.background().findSource(context.storage('background-last-used-toggle'));
+                if (previousBackground) {
+                    var currentBackground = context.background().baseLayerSource();
+                    context.storage('background-last-used-toggle', currentBackground.id);
+                    context.storage('background-last-used', previousBackground.id);
+                    context.background().baseLayerSource(previousBackground);
+                }
+            })
+            .on(t('area_fill.wireframe.key'), function toggleWireframe() {
+                d3_event.preventDefault();
+                d3_event.stopPropagation();
+                context.map().toggleWireframe();
+            })
+            .on(uiCmd('⌥' + t('area_fill.wireframe.key')), function toggleOsmData() {
+                d3_event.preventDefault();
+                d3_event.stopPropagation();
+
+                // Don't allow layer changes while drawing - #6584
+                var mode = context.mode();
+                if (mode && /^draw/.test(mode.id)) return;
+
+                var layer = context.layers().layer('osm');
+                if (layer) {
+                    layer.enabled(!layer.enabled());
+                    if (!layer.enabled()) {
+                        context.enter(modeBrowse(context));
+                    }
+                }
+            })
+            .on(t('map_data.highlight_edits.key'), function toggleHighlightEdited() {
+                d3_event.preventDefault();
+                context.map().toggleHighlightEdited();
+            });
 
         context.enter(modeBrowse(context));
 
