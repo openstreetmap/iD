@@ -146,9 +146,7 @@ export function modeSelect(context, selectedIDs) {
 
 
     function closeMenu() {
-        if (editMenu) {
-            context.map().supersurface.call(editMenu.close);
-        }
+        if (editMenu) editMenu.close();
     }
 
 
@@ -263,6 +261,9 @@ export function modeSelect(context, selectedIDs) {
                 context.install(operation.behavior);
             }
         });
+
+        // remove the existing menu element, if any
+        closeMenu();
 
         editMenu = uiEditMenu(context, operations);
     }

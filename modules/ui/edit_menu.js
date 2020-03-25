@@ -7,22 +7,20 @@ import { svgIcon } from '../svg/icon';
 
 
 export function uiEditMenu(context, operations) {
-    var menu;
-    var center = [0, 0];
-    var offset = [0, 0];
+    var _menu = d3_select(null);
+    var _center = [0, 0];
 
-    var vpBottomMargin = 45; // viewport bottom margin
-    var vpSideMargin = 35;   // viewport side margin
+    var _vpBottomMargin = 45; // viewport bottom margin
+    var _vpSideMargin = 35;   // viewport side margin
 
     // hardcode these values to make menu positioning easier
-    var buttonWidth = 44;
-    var buttonHeight = 34;
-    var menuWidth = buttonWidth;
-    var verticalPadding = 4;
+    var _buttonWidth = 44;
+    var _buttonHeight = 34;
+    var _menuWidth = _buttonWidth;
+    var _verticalPadding = 4;
 
     // offset the menu slightly from the target location
-    var menuSideMargin = 10;
-
+    var _menuSideMargin = 10;
 
     var editMenu = function (selection) {
         if (!operations.length) return;
@@ -32,48 +30,45 @@ export function uiEditMenu(context, operations) {
         var isRTL = textDirection === 'rtl';
         var viewport = context.surfaceRect();
 
-        var menuHeight = verticalPadding * 2 + operations.length * buttonHeight;
+        var menuHeight = _verticalPadding * 2 + operations.length * _buttonHeight;
 
-        if (!isRTL && (center[0] + menuSideMargin + menuWidth) > (viewport.width - vpSideMargin)) {
+        if (!isRTL && (_center[0] + _menuSideMargin + _menuWidth) > (viewport.width - _vpSideMargin)) {
             // menu is going left-to-right and near right viewport edge, go left instead
             isRTL = true;
-        } else if (isRTL && (center[0] - menuSideMargin - menuWidth) < vpSideMargin) {
+        } else if (isRTL && (_center[0] - _menuSideMargin - _menuWidth) < _vpSideMargin) {
             // menu is going right-to-left and near left viewport edge, go right instead
             isRTL = false;
         }
 
-        offset[0] = (isRTL ? -1 * (menuSideMargin + menuWidth) : menuSideMargin);
+        var offset = [0, 0];
 
-        if (center[1] + menuHeight > (viewport.height - vpBottomMargin)) {
+        offset[0] = (isRTL ? -1 * (_menuSideMargin + _menuWidth) : _menuSideMargin);
+
+        if (_center[1] + menuHeight > (viewport.height - _vpBottomMargin)) {
             // menu is near bottom viewport edge, shift upwards
-            offset[1] = -1 * (center[1] + menuHeight - viewport.height + vpBottomMargin);
+            offset[1] = -1 * (_center[1] + menuHeight - viewport.height + _vpBottomMargin);
         }
 
-        var origin = geoVecAdd(center, offset);
+        var origin = geoVecAdd(_center, offset);
 
-        menu = selection
+        _menu = selection
             .append('div')
             .attr('class', 'edit-menu')
-            .style('padding', verticalPadding + 'px 0')
+            .style('padding', _verticalPadding + 'px 0')
             .style('left', origin[0] + 'px')
-            .style('top', origin[1] + 'px')
-            .attr('opacity', 0);
+            .style('top', origin[1] + 'px');
 
-        menu
-            .transition()
-            .attr('opacity', 1);
-
-        var buttons = menu.selectAll('.edit-menu-item')
+        var buttons = _menu.selectAll('.edit-menu-item')
             .data(operations);
 
         // enter
         var buttonsEnter = buttons.enter()
             .append('button')
             .attr('class', function (d) { return 'edit-menu-item edit-menu-item-' + d.id; })
-            .style('width', buttonWidth + 'px')
-            .style('height', buttonHeight + 'px')
+            .style('width', _buttonWidth + 'px')
+            .style('height', _buttonHeight + 'px')
             .on('click', click)
-            .on('mousedown', mousedown);
+            .on('pointerdown mousedown', pointerdown);
 
         buttonsEnter.each(function(d) {
             d3_select(this)
@@ -99,29 +94,21 @@ export function uiEditMenu(context, operations) {
             editMenu.close();
         }
 
-        function mousedown() {
+        function pointerdown() {
             d3_event.stopPropagation();  // https://github.com/openstreetmap/iD/issues/1869
         }
     };
 
-
     editMenu.close = function () {
-        if (menu) {
-            menu
-                .style('pointer-events', 'none')
-                .transition()
-                .attr('opacity', 0)
-                .remove();
-        }
+        _menu
+            .remove();
     };
-
 
     editMenu.center = function(val) {
-        if (!arguments.length) return center;
-        center = val;
+        if (!arguments.length) return _center;
+        _center = val;
         return editMenu;
     };
-
 
     return editMenu;
 }
