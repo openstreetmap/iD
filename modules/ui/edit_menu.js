@@ -6,8 +6,9 @@ import { uiTooltip } from './tooltip';
 import { svgIcon } from '../svg/icon';
 
 
-export function uiEditMenu(context, operations) {
+export function uiEditMenu(context) {
     var _menu = d3_select(null);
+    var _operations = [];
     var _center = [0, 0];
 
     var _vpBottomMargin = 45; // viewport bottom margin
@@ -22,15 +23,15 @@ export function uiEditMenu(context, operations) {
     // offset the menu slightly from the target location
     var _menuSideMargin = 10;
 
-    var editMenu = function (selection) {
-        if (!operations.length) return;
+    var editMenu = function(selection) {
+        if (!_operations.length) return;
 
-        selection.node().parentNode.focus();
+        selection.node().focus();
 
         var isRTL = textDirection === 'rtl';
         var viewport = context.surfaceRect();
 
-        var menuHeight = _verticalPadding * 2 + operations.length * _buttonHeight;
+        var menuHeight = _verticalPadding * 2 + _operations.length * _buttonHeight;
 
         if (!isRTL && (_center[0] + _menuSideMargin + _menuWidth) > (viewport.width - _vpSideMargin)) {
             // menu is going left-to-right and near right viewport edge, go left instead
@@ -42,7 +43,7 @@ export function uiEditMenu(context, operations) {
 
         var offset = [0, 0];
 
-        offset[0] = (isRTL ? -1 * (_menuSideMargin + _menuWidth) : _menuSideMargin);
+        offset[0] = isRTL ? -1 * (_menuSideMargin + _menuWidth) : _menuSideMargin;
 
         if (_center[1] + menuHeight > (viewport.height - _vpBottomMargin)) {
             // menu is near bottom viewport edge, shift upwards
@@ -59,7 +60,7 @@ export function uiEditMenu(context, operations) {
             .style('top', origin[1] + 'px');
 
         var buttons = _menu.selectAll('.edit-menu-item')
-            .data(operations);
+            .data(_operations);
 
         // enter
         var buttonsEnter = buttons.enter()
@@ -107,6 +108,12 @@ export function uiEditMenu(context, operations) {
     editMenu.center = function(val) {
         if (!arguments.length) return _center;
         _center = val;
+        return editMenu;
+    };
+
+    editMenu.operations = function(val) {
+        if (!arguments.length) return _operations;
+        _operations = val;
         return editMenu;
     };
 

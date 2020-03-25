@@ -48,7 +48,7 @@ export function modeSelect(context, selectedIDs) {
         modeDragNote(context).behavior
     ];
     var inspector;   // unused?
-    var editMenu;
+    var _editMenu = uiEditMenu(context);
     var _timeout = null;
     var _newFeature = false;
     var _suppressMenu = true;
@@ -146,12 +146,12 @@ export function modeSelect(context, selectedIDs) {
 
 
     function closeMenu() {
-        if (editMenu) editMenu.close();
+        if (_editMenu) _editMenu.close();
     }
 
 
     function positionMenu() {
-        if (!editMenu) return;
+        if (!_editMenu) return;
 
         var entity = singular();
         if (entity && entity.geometry(context.graph()) === 'relation') {
@@ -161,7 +161,7 @@ export function modeSelect(context, selectedIDs) {
             var viewport = geoExtent(context.projection.clipExtent()).polygon();
 
             if (point && geoPointInPolygon(point, viewport)) {
-                editMenu.center(point);
+                _editMenu.center(point);
             } else {
                 _suppressMenu = true;
             }
@@ -171,12 +171,12 @@ export function modeSelect(context, selectedIDs) {
 
     function showMenu() {
         closeMenu();
-        if (editMenu) {
+        if (_editMenu) {
 
             // disable menu if in wide selection, for example
             if (!context.map().editableDataEnabled()) return;
 
-            context.map().supersurface.call(editMenu);
+            context.map().supersurface.call(_editMenu);
         }
     }
 
@@ -265,7 +265,7 @@ export function modeSelect(context, selectedIDs) {
         // remove the existing menu element, if any
         closeMenu();
 
-        editMenu = uiEditMenu(context, operations);
+        _editMenu.operations(operations);
     }
 
 
@@ -545,7 +545,6 @@ export function modeSelect(context, selectedIDs) {
             .call(keybinding.unbind);
 
         closeMenu();
-        editMenu = undefined;
 
         context.history()
             .on('change.select', null)
