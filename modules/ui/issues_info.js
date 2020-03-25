@@ -2,7 +2,7 @@ import { event as d3_event, select as d3_select } from 'd3-selection';
 
 import { svgIcon } from '../svg/icon';
 import { t } from '../util/locale';
-import { tooltip } from '../util/tooltip';
+import { uiTooltip } from './tooltip';
 
 
 export function uiIssuesInfo(context) {
@@ -60,7 +60,7 @@ export function uiIssuesInfo(context) {
 
                 var chipSelection = d3_select(this);
 
-                var tooltipBehavior = tooltip()
+                var tooltipBehavior = uiTooltip()
                     .placement('top')
                     .title(t(d.descriptionID));
 

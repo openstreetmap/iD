@@ -1,6 +1,6 @@
 import { t } from '../util/locale';
 import { svgIcon } from '../svg/icon';
-import { tooltip } from '../util/tooltip';
+import { uiTooltip } from './tooltip';
 import { utilEntityOrMemberSelector } from '../util';
 
 
@@ -55,7 +55,7 @@ export function uiCommitWarnings(context) {
                 .attr('class', 'issue-message');
 
             itemsEnter.filter(function(d) { return d.tooltip; })
-                .call(tooltip()
+                .call(uiTooltip()
                     .title(function(d) { return d.tooltip; })
                     .placement('top')
                 );

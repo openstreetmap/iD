@@ -5,8 +5,6 @@ import {
 
 import { t, textDirection, setLocale } from '../util/locale';
 
-import { tooltip } from '../util/tooltip';
-
 import { behaviorHash } from '../behavior';
 import { modeBrowse } from '../modes/browse';
 import { svgDefs, svgIcon } from '../svg';
@@ -34,6 +32,7 @@ import { uiSidebar } from './sidebar';
 import { uiSpinner } from './spinner';
 import { uiSplash } from './splash';
 import { uiStatus } from './status';
+import { uiTooltip } from './tooltip';
 import { uiTopToolbar } from './top_toolbar';
 import { uiVersion } from './version';
 import { uiZoom } from './zoom';
@@ -216,14 +215,14 @@ export function uiInit(context) {
             .attr('target', '_blank')
             .attr('href', 'https://github.com/openstreetmap/iD/issues')
             .call(svgIcon('#iD-icon-bug', 'light'))
-            .call(tooltip().title(t('report_a_bug')).placement('top'));
+            .call(uiTooltip().title(t('report_a_bug')).placement('top'));
 
         issueLinks
             .append('a')
             .attr('target', '_blank')
             .attr('href', 'https://github.com/openstreetmap/iD/blob/develop/CONTRIBUTING.md#translating')
             .call(svgIcon('#iD-icon-translate', 'light'))
-            .call(tooltip().title(t('help_translate')).placement('top'));
+            .call(uiTooltip().title(t('help_translate')).placement('top'));
 
         aboutList
             .append('li')

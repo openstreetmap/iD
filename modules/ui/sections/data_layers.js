@@ -5,7 +5,7 @@ import {
 } from 'd3-selection';
 
 import { t, textDirection } from '../../util/locale';
-import { tooltip } from '../../util/tooltip';
+import { uiTooltip } from '../tooltip';
 import { svgIcon } from '../../svg/icon';
 import { geoExtent } from '../../geo';
 import { modeBrowse } from '../../modes/browse';
@@ -94,14 +94,14 @@ export function uiSectionDataLayers(context) {
             .each(function(d) {
                 if (d.id === 'osm') {
                     d3_select(this)
-                        .call(tooltip()
+                        .call(uiTooltip()
                             .html(true)
                             .title(uiTooltipHtml(t('map_data.layers.' + d.id + '.tooltip'), uiCmd('⌥' + t('area_fill.wireframe.key'))))
                             .placement('bottom')
                         );
                 } else {
                     d3_select(this)
-                        .call(tooltip()
+                        .call(uiTooltip()
                             .title(t('map_data.layers.' + d.id + '.tooltip'))
                             .placement('bottom')
                         );
@@ -153,7 +153,7 @@ export function uiSectionDataLayers(context) {
             .append('label')
             .each(function(d) {
                 d3_select(this)
-                    .call(tooltip()
+                    .call(uiTooltip()
                         .title(t('map_data.layers.' + d.id + '.tooltip'))
                         .placement('bottom')
                     );
@@ -254,7 +254,7 @@ export function uiSectionDataLayers(context) {
             .append('label')
             .each(function(d) {
                 d3_select(this).call(
-                    tooltip().title(d.tooltip).placement('top')
+                    uiTooltip().title(d.tooltip).placement('top')
                 );
             });
 
@@ -313,7 +313,7 @@ export function uiSectionDataLayers(context) {
 
         var labelEnter = liEnter
             .append('label')
-            .call(tooltip()
+            .call(uiTooltip()
                 .title(t('map_data.layers.custom.tooltip'))
                 .placement('top')
             );
@@ -329,7 +329,7 @@ export function uiSectionDataLayers(context) {
 
         liEnter
             .append('button')
-            .call(tooltip()
+            .call(uiTooltip()
                 .title(t('settings.custom_data.tooltip'))
                 .placement((textDirection === 'rtl') ? 'right' : 'left')
             )
@@ -338,7 +338,7 @@ export function uiSectionDataLayers(context) {
 
         liEnter
             .append('button')
-            .call(tooltip()
+            .call(uiTooltip()
                 .title(t('map_data.layers.custom.zoom'))
                 .placement((textDirection === 'rtl') ? 'right' : 'left')
             )

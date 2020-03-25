@@ -5,7 +5,7 @@ import { event as d3_event, select as d3_select } from 'd3-selection';
 import { t } from '../util/locale';
 import { textDirection } from '../util/locale';
 import { svgIcon } from '../svg/icon';
-import { tooltip } from '../util/tooltip';
+import { uiTooltip } from './tooltip';
 import { geoExtent } from '../geo/extent';
 import { uiFieldHelp } from './field_help';
 import { uiFields } from './fields';
@@ -30,7 +30,7 @@ export function uiField(context, presetField, entityIDs, options) {
     var _tags = {};
 
     var _locked = false;
-    var _lockedTip = tooltip()
+    var _lockedTip = uiTooltip()
         .title(t('inspector.lock.suggestion', { label: field.label }))
         .placement('bottom');
 

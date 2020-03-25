@@ -1,7 +1,7 @@
 import { t, textDirection } from '../../util/locale';
 import { svgIcon } from '../../svg';
 import { uiTooltipHtml } from '../tooltipHtml';
-import { tooltip } from '../../util/tooltip';
+import { uiTooltip } from '../tooltip';
 
 export function uiToolSidebarToggle(context) {
 
@@ -17,7 +17,7 @@ export function uiToolSidebarToggle(context) {
             .on('click', function() {
                 context.ui().sidebar.toggle();
             })
-            .call(tooltip()
+            .call(uiTooltip()
                 .placement('bottom')
                 .html(true)
                 .title(uiTooltipHtml(t('sidebar.tooltip'), t('sidebar.key')))

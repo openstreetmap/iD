@@ -6,7 +6,7 @@ import {
 } from 'd3-selection';
 
 import { t, textDirection } from '../../util/locale';
-import { tooltip } from '../../util/tooltip';
+import { uiTooltip } from '../tooltip';
 import { svgIcon } from '../../svg/icon';
 import { uiCmd } from '../cmd';
 import { uiSettingsCustomBackground } from '../settings/custom_background';
@@ -55,7 +55,7 @@ export function uiSectionBackgroundList(context) {
             .append('li')
             .attr('class', 'minimap-toggle-item')
             .append('label')
-            .call(tooltip()
+            .call(uiTooltip()
                 .html(true)
                 .title(uiTooltipHtml(t('background.minimap.tooltip'), t('background.minimap.key')))
                 .placement('top')
@@ -78,7 +78,7 @@ export function uiSectionBackgroundList(context) {
             .append('li')
             .attr('class', 'background-panel-toggle-item')
             .append('label')
-            .call(tooltip()
+            .call(uiTooltip()
                 .html(true)
                 .title(uiTooltipHtml(t('background.panel.tooltip'), uiCmd('⌘⇧' + t('info_panels.background.key'))))
                 .placement('top')
@@ -122,10 +122,10 @@ export function uiSectionBackgroundList(context) {
             var description = d.description();
             var isOverflowing = (span.property('clientWidth') !== span.property('scrollWidth'));
 
-            item.call(tooltip().destroyAny);
+            item.call(uiTooltip().destroyAny);
 
             if (d.id === previousBackgroundID()) {
-                item.call(tooltip()
+                item.call(uiTooltip()
                     .placement(placement)
                     .html(true)
                     .title(function() {
@@ -134,7 +134,7 @@ export function uiSectionBackgroundList(context) {
                     })
                 );
             } else if (description || isOverflowing) {
-                item.call(tooltip()
+                item.call(uiTooltip()
                     .placement(placement)
                     .title(description || d.name())
                 );
@@ -174,7 +174,7 @@ export function uiSectionBackgroundList(context) {
         enter.filter(function(d) { return d.id === 'custom'; })
             .append('button')
             .attr('class', 'layer-browse')
-            .call(tooltip()
+            .call(uiTooltip()
                 .title(t('settings.custom_background.tooltip'))
                 .placement((textDirection === 'rtl') ? 'right' : 'left')
             )
@@ -184,7 +184,7 @@ export function uiSectionBackgroundList(context) {
         enter.filter(function(d) { return d.best(); })
             .append('div')
             .attr('class', 'best')
-            .call(tooltip()
+            .call(uiTooltip()
                 .title(t('background.best_imagery'))
                 .placement((textDirection === 'rtl') ? 'right' : 'left')
             )

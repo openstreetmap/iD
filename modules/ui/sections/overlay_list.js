@@ -6,7 +6,7 @@ import {
 } from 'd3-selection';
 
 import { t } from '../../util/locale';
-import { tooltip } from '../../util/tooltip';
+import { uiTooltip } from '../tooltip';
 import { uiSection } from '../section';
 
 export function uiSectionOverlayList(context) {
@@ -25,10 +25,10 @@ export function uiSectionOverlayList(context) {
             var description = d.description();
             var isOverflowing = (span.property('clientWidth') !== span.property('scrollWidth'));
 
-            item.call(tooltip().destroyAny);
+            item.call(uiTooltip().destroyAny);
 
             if (description || isOverflowing) {
-                item.call(tooltip()
+                item.call(uiTooltip()
                     .placement(placement)
                     .title(description || d.name())
                 );

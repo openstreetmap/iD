@@ -8,7 +8,7 @@ import { uiTooltipHtml } from '../tooltipHtml';
 import { uiPane } from '../pane';
 
 import { t, textDirection } from '../../util/locale';
-import { tooltip } from '../../util/tooltip';
+import { uiTooltip } from '../tooltip';
 import { icon } from '../intro/helper';
 
 export function uiPaneHelp(context) {
@@ -364,7 +364,7 @@ export function uiPaneHelp(context) {
         var shortcuts = toc
             .append('li')
             .attr('class', 'shortcuts')
-            .call(tooltip()
+            .call(uiTooltip()
                 .html(true)
                 .title(uiTooltipHtml(t('shortcuts.tooltip'), '?'))
                 .placement('top')

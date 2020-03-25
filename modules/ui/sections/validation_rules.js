@@ -5,7 +5,7 @@ import {
 
 import { t } from '../../util/locale';
 import { utilGetSetValue, utilNoAuto } from '../../util';
-import { tooltip } from '../../util/tooltip';
+import { uiTooltip } from '../tooltip';
 import { uiSection } from '../section';
 
 export function uiSectionValidationRules(context) {
@@ -82,7 +82,7 @@ export function uiSectionValidationRules(context) {
 
         if (name === 'rule') {
             enter
-                .call(tooltip()
+                .call(uiTooltip()
                     .title(function(d) { return t('issues.' + d + '.tip'); })
                     .placement('top')
                 );

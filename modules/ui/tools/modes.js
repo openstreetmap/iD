@@ -11,7 +11,7 @@ import {
 
 import { t } from '../../util/locale';
 import { svgIcon } from '../../svg';
-import { tooltip } from '../../util/tooltip';
+import { uiTooltip } from '../tooltip';
 import { uiTooltipHtml } from '../tooltipHtml';
 
 export function uiToolOldDrawModes(context) {
@@ -126,7 +126,7 @@ export function uiToolOldDrawModes(context) {
                         context.enter(d);
                     }
                 })
-                .call(tooltip()
+                .call(uiTooltip()
                     .placement('bottom')
                     .html(true)
                     .title(function(d) { return uiTooltipHtml(d.description, d.key); })

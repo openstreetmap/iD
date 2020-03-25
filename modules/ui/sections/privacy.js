@@ -3,7 +3,7 @@ import {
 } from 'd3-selection';
 
 import { t } from '../../util/locale';
-import { tooltip } from '../../util/tooltip';
+import { uiTooltip } from '../tooltip';
 import { svgIcon } from '../../svg/icon';
 import { uiSection } from '../section';
 
@@ -27,7 +27,7 @@ export function uiSectionPrivacy(context) {
         .append('li')
         .attr('class', 'privacy-third-party-icons-item')
         .append('label')
-        .call(tooltip()
+        .call(uiTooltip()
           .title(t('preferences.privacy.third_party_icons.tooltip'))
           .placement('bottom')
         );

@@ -1,5 +1,5 @@
 import { t } from '../../util/locale';
-import { tooltip } from '../../util/tooltip';
+import { uiTooltip } from '../tooltip';
 import { uiSection } from '../section';
 import { uiTooltipHtml } from '../tooltipHtml';
 
@@ -66,7 +66,7 @@ export function uiSectionMapFeatures(context) {
         // Enter
         var enter = items.enter()
             .append('li')
-            .call(tooltip()
+            .call(uiTooltip()
                 .html(true)
                 .title(function(d) {
                     var tip = t(name + '.' + d + '.tooltip');

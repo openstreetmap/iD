@@ -1,9 +1,9 @@
-import { utilFunctor } from './util';
-import { popover } from './popover';
+import { utilFunctor } from '../util/util';
+import { uiPopover } from './popover';
 
-export function tooltip(klass) {
+export function uiTooltip(klass) {
 
-    var tooltip = popover((klass || '') + ' tooltip')
+    var tooltip = uiPopover((klass || '') + ' tooltip')
         .displayType('hover');
 
     var _title = function() {

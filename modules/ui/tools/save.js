@@ -6,7 +6,7 @@ import { modeSave } from '../../modes';
 import { svgIcon } from '../../svg';
 import { uiCmd } from '../cmd';
 import { uiTooltipHtml } from '../tooltipHtml';
-import { tooltip } from '../../util/tooltip';
+import { uiTooltip } from '../tooltip';
 
 
 export function uiToolSave(context) {
@@ -76,7 +76,7 @@ export function uiToolSave(context) {
 
 
     tool.render = function(selection) {
-        tooltipBehavior = tooltip()
+        tooltipBehavior = uiTooltip()
             .placement('bottom')
             .html(true)
             .title(uiTooltipHtml(t('save.no_changes'), key))
