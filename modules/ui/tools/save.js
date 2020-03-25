@@ -16,13 +16,13 @@ export function uiToolSave(context) {
     };
 
     var button = null;
+    var key = uiCmd('⌘S');
     var tooltipBehavior = uiTooltip()
         .placement('bottom')
         .title(t('save.no_changes'))
         .keys([key])
         .scrollContainer(context.container().select('.top-toolbar'));
     var history = context.history();
-    var key = uiCmd('⌘S');
     var _numChanges;
 
     function isSaving() {
