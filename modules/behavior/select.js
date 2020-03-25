@@ -140,6 +140,8 @@ export function behaviorSelect(context) {
                     if (mode.id !== 'select' || !utilArrayIdentical(mode.selectedIDs(), [datum.id])) {
                         // select a single thing if it's not already selected
                         context.enter(modeSelect(context, [datum.id]).suppressMenu(_suppressMenu));
+                    } else {
+                        mode.suppressMenu(_suppressMenu).reselect();
                     }
                 }
 
