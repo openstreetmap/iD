@@ -1,6 +1,6 @@
 import { t } from '../util/locale';
 import { svgIcon } from '../svg/icon';
-import { tooltip } from '../util/tooltip';
+import { uiTooltip } from './tooltip';
 
 
 // these are module variables so they are preserved through a ui.restart()
@@ -37,7 +37,7 @@ export function uiVersion(context) {
                 .attr('target', '_blank')
                 .attr('href', 'https://github.com/openstreetmap/iD/blob/release/CHANGELOG.md#whats-new')
                 .call(svgIcon('#maki-gift-11'))
-                .call(tooltip()
+                .call(uiTooltip()
                     .title(t('version.whats_new', { version: currVersion }))
                     .placement('top')
                 );

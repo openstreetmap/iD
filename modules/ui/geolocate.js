@@ -1,13 +1,12 @@
 import { select as d3_select } from 'd3-selection';
 
 import { t, textDirection } from '../util/locale';
-import { tooltip } from '../util/tooltip';
+import { uiTooltip } from './tooltip';
 import { geoExtent } from '../geo';
 import { modeBrowse } from '../modes/browse';
 import { svgIcon } from '../svg/icon';
 import { uiFlash } from './flash';
 import { uiLoading } from './loading';
-import { uiTooltipHtml } from './tooltipHtml';
 
 export function uiGeolocate(context) {
     var _geolocationOptions = {
@@ -87,10 +86,10 @@ export function uiGeolocate(context) {
             .append('button')
             .on('click', click)
             .call(svgIcon('#iD-icon-geolocate', 'light'))
-            .call(tooltip()
+            .call(uiTooltip()
                 .placement((textDirection === 'rtl') ? 'right' : 'left')
-                .html(true)
-                .title(uiTooltipHtml(t('geolocate.title'), t('geolocate.key')))
+                .title(t('geolocate.title'))
+                .keys([t('geolocate.key')])
             );
 
         context.keybinding().on(t('geolocate.key'), click);

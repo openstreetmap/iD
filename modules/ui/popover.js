@@ -1,9 +1,9 @@
 import { event as d3_event, select as d3_select } from 'd3-selection';
-import { utilFunctor } from './util';
+import { utilFunctor } from '../util/util';
 
 var _popoverID = 0;
 
-export function popover(klass) {
+export function uiPopover(klass) {
     var _id = _popoverID++;
     var _anchorSelection = d3_select(null);
     var popover = function(selection) {

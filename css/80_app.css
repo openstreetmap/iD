@@ -9,6 +9,13 @@
     border: 0;
     overflow: hidden;
 
+    /* Establish a local stacking context so all elements within iD are on the
+       same layer relative to elements outside iD - #7457.
+       https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Positioning/Understanding_z_index/The_stacking_context
+    */
+    position: relative;
+    z-index: 0;
+
     font: normal 12px/1.6667 "-apple-system", BlinkMacSystemFont,
         "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell",
         "Fira Sans", "Droid Sans", "Helvetica Neue", "Arial",
@@ -5546,30 +5553,22 @@ button.add-preset.disabled .preset-icon-container {
 
 /* Contextual Edit Menu
 ------------------------------------------------------- */
-.edit-menu-tooltip {
+.edit-menu {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    background: #fff;
+    border-radius: 4px;
+    /* padding set in code */
+}
+
+.edit-menu .tooltip {
     width: 200px;
 }
 
-.edit-menu-background {
-    fill: #eee;
-}
-
-.edit-menu-item rect {
-    fill: #eee;
-    cursor: default;
-}
-
-.edit-menu-item rect:active,
-.edit-menu-item rect:hover {
-    fill: #ccc;
-}
-
-.edit-menu-item.disabled rect {
-    cursor: not-allowed;
-}
-.edit-menu-item.disabled rect:hover {
-    cursor: not-allowed;
-    fill: #eee;
+.edit-menu-item {
+    border-radius: 0;
+    /* width and height set in code */
 }
 
 .edit-menu-item use {
@@ -5625,6 +5624,12 @@ button.add-preset.disabled .preset-icon-container {
 
 /* Intro walkthrough
  ----------------------------------------------------- */
+.curtain {
+    z-index: 1000;
+    pointer-events: none;
+    position: absolute;
+}
+
 .curtain-darkness {
     pointer-events: all;
     fill-opacity: 0.7;
@@ -5684,6 +5689,10 @@ button.add-preset.disabled .preset-icon-container {
 
 .intro-nav-wrap button.chapter.finished .status {
     display: inline-block;
+}
+
+.curtain-tooltip {
+    z-index: 1002;
 }
 
 .curtain-tooltip.tooltip.in {

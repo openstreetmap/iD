@@ -6,7 +6,7 @@ import { t } from '../util/locale';
 import { osmChangeset } from '../osm';
 import { svgIcon } from '../svg/icon';
 import { services } from '../services';
-import { tooltip } from '../util/tooltip';
+import { uiTooltip } from './tooltip';
 import { uiChangesetEditor } from './changeset_editor';
 import { uiSectionChanges } from './sections/changes';
 import { uiCommitWarnings } from './commit_warnings';
@@ -380,11 +380,11 @@ export function uiCommit(context) {
             });
 
         // remove any existing tooltip
-        tooltip().destroyAny(buttonSection.selectAll('.save-button'));
+        uiTooltip().destroyAny(buttonSection.selectAll('.save-button'));
 
         if (uploadBlockerTooltipText) {
             buttonSection.selectAll('.save-button')
-                .call(tooltip().title(uploadBlockerTooltipText).placement('top'));
+                .call(uiTooltip().title(uploadBlockerTooltipText).placement('top'));
         }
 
         // Raw Tag Editor

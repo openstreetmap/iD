@@ -4,7 +4,8 @@ import { mouse as d3_mouse } from 'd3-selection';
 import { utilRebind } from './rebind';
 import { geoVecLength } from '../geo/vector';
 
-// a double-click / double-tap event detector with wider
+// A custom double-click / double-tap event detector that works on touch devices
+// if pointer events are supported. Falls back to default `dblclick` event.
 export function utilDoubleUp() {
 
     var dispatch = d3_dispatch('doubleUp');

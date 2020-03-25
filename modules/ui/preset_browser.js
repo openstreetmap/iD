@@ -8,8 +8,8 @@ import * as countryCoder from '@ideditor/country-coder';
 
 import { t, textDirection } from '../util/locale';
 import { svgIcon } from '../svg/index';
-import { tooltip } from '../util/tooltip';
-import { popover } from '../util/popover';
+import { uiTooltip } from './tooltip';
+import { uiPopover } from './popover';
 import { uiTagReference } from './tag_reference';
 import { uiPresetFavoriteButton } from './preset_favorite_button';
 import { uiPresetIcon } from './preset_icon';
@@ -40,7 +40,7 @@ export function uiPresetBrowser(context) {
 
     var _countryCode;
 
-    var browser = popover('poplist preset-browser fillL')
+    var browser = uiPopover('poplist preset-browser fillL')
         .placement('bottom')
         .alignment('leading')
         .hasArrow(false);
@@ -606,7 +606,7 @@ export function uiPresetBrowser(context) {
         if (listItem.empty()) return;
 
         // remove existing tooltips
-        listItem.selectAll('button.choose').call(tooltip().destroyAny);
+        listItem.selectAll('button.choose').call(uiTooltip().destroyAny);
 
         listItem.each(function(item, index) {
 
@@ -633,8 +633,7 @@ export function uiPresetBrowser(context) {
             var isAutoHidden = context.features().autoHidden(hiddenPresetFeatures.key);
             var tooltipIdSuffix = isAutoHidden ? 'zoom' : 'manual';
             var tooltipObj = { features: t('feature.' + hiddenPresetFeatures + '.description') };
-            button.call(tooltip('dark')
-                .html(true)
+            button.call(uiTooltip('dark')
                 .title(t('inspector.hidden_preset.' + tooltipIdSuffix, tooltipObj))
                 .placement(index < 2 ? 'bottom' : 'top')
             );

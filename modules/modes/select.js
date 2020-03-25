@@ -149,7 +149,7 @@ export function modeSelect(context, selectedIDs) {
 
     function closeMenu() {
         if (editMenu) {
-            context.surface().call(editMenu.close);
+            context.map().supersurface.call(editMenu.close);
         }
     }
 
@@ -180,13 +180,13 @@ export function modeSelect(context, selectedIDs) {
             // disable menu if in wide selection, for example
             if (!context.map().editableDataEnabled()) return;
 
-            context.surface().call(editMenu);
+            context.map().supersurface.call(editMenu);
         }
     }
 
 
     function toggleMenu() {
-        if (context.surface().select('.edit-menu').empty()) {
+        if (context.map().supersurface.select('.edit-menu').empty()) {
             positionMenu();
             showMenu();
         } else {

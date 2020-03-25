@@ -3,9 +3,8 @@ import {
 } from 'd3-selection';
 
 import { t } from '../../util/locale';
-import { tooltip } from '../../util/tooltip';
+import { uiTooltip } from '../tooltip';
 import { uiSection } from '../section';
-import { uiTooltipHtml } from '../tooltipHtml';
 
 export function uiSectionMapStyleOptions(context) {
 
@@ -47,13 +46,14 @@ export function uiSectionMapStyleOptions(context) {
         // Enter
         var enter = items.enter()
             .append('li')
-            .call(tooltip()
-                .html(true)
+            .call(uiTooltip()
                 .title(function(d) {
-                    var tip = t(name + '.' + d + '.tooltip');
+                    return t(name + '.' + d + '.tooltip');
+                })
+                .keys(function(d) {
                     var key = (d === 'wireframe' ? t('area_fill.wireframe.key') : null);
                     if (d === 'highlight_edits') key = t('map_data.highlight_edits.key');
-                    return uiTooltipHtml(tip, key);
+                    return [key];
                 })
                 .placement('top')
             );

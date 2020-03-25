@@ -6,7 +6,7 @@ import { currentLocale, t, languageName } from '../../util/locale';
 import { geoExtent } from '../../geo';
 import { services } from '../../services';
 import { svgIcon } from '../../svg';
-import { tooltip } from '../../util/tooltip';
+import { uiTooltip } from '../tooltip';
 import { uiCombobox } from '../combobox';
 import { utilDetect } from '../../util/detect';
 import { utilArrayUniq, utilEditDistance, utilGetSetValue, utilNoAuto, utilRebind } from '../../util';
@@ -51,7 +51,7 @@ export function uiFieldLocalized(field, context) {
 
     var _selection = d3_select(null);
     var _multilingual = [];
-    var _buttonTip = tooltip()
+    var _buttonTip = uiTooltip()
         .title(t('translate.translate'))
         .placement('left');
     var _wikiTitles;

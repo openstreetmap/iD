@@ -4,11 +4,10 @@ import { svgIcon } from '../../svg/icon';
 import { uiCmd } from '../cmd';
 import { uiIntro } from '../intro/intro';
 import { uiShortcuts } from '../shortcuts';
-import { uiTooltipHtml } from '../tooltipHtml';
 import { uiPane } from '../pane';
 
 import { t, textDirection } from '../../util/locale';
-import { tooltip } from '../../util/tooltip';
+import { uiTooltip } from '../tooltip';
 import { icon } from '../intro/helper';
 
 export function uiPaneHelp(context) {
@@ -364,9 +363,9 @@ export function uiPaneHelp(context) {
         var shortcuts = toc
             .append('li')
             .attr('class', 'shortcuts')
-            .call(tooltip()
-                .html(true)
-                .title(uiTooltipHtml(t('shortcuts.tooltip'), '?'))
+            .call(uiTooltip()
+                .title(t('shortcuts.tooltip'))
+                .keys(['?'])
                 .placement('top')
             )
             .append('a')

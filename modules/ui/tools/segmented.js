@@ -3,8 +3,7 @@ import {
 } from 'd3-selection';
 
 import { svgIcon } from '../../svg/icon';
-import { uiTooltipHtml } from '../tooltipHtml';
-import { tooltip } from '../../util/tooltip';
+import { uiTooltip } from '../tooltip';
 
 export function uiToolSegemented(context) {
 
@@ -55,11 +54,10 @@ export function uiToolSegemented(context) {
                 setActiveItem(d);
             })
             .each(function(d) {
-                var title = tool.key ? uiTooltipHtml(d.label, tool.key) : d.label;
-                var tooltipBehavior = tooltip()
+                var tooltipBehavior = uiTooltip()
                     .placement('bottom')
-                    .html(true)
-                    .title(title)
+                    .title(d.label)
+                    .keys(tool.key ? [tool.key] : null)
                     .scrollContainer(d3_select('.top-toolbar'));
                 d3_select(this)
                     .call(tooltipBehavior)

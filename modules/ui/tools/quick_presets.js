@@ -5,10 +5,9 @@ import { event as d3_event, select as d3_select } from 'd3-selection';
 
 import { modeAddArea, modeAddLine, modeAddPoint, modeBrowse } from '../../modes';
 import { t, textDirection } from '../../util/locale';
-import { tooltip } from '../../util/tooltip';
+import { uiTooltip } from '../tooltip';
 import { utilSafeClassName } from '../../util/util';
 import { uiPresetIcon } from '../preset_icon';
-import { uiTooltipHtml } from '../tooltipHtml';
 
 
 export function uiToolQuickPresets(context) {
@@ -133,11 +132,13 @@ export function uiToolQuickPresets(context) {
                 if (d3_select(this).classed('disabled')) return;
                 toggleMode(d);
             })
-            .call(tooltip()
+            .call(uiTooltip()
                 .placement('bottom')
-                .html(true)
                 .title(function(d) {
-                    return d.key ? uiTooltipHtml(d.description, d.key) : d.description;
+                    return d.description;
+                })
+                .keys(function(d) {
+                    return d.key ? [d.key] : null;
                 })
                 .scrollContainer(d3_select('.top-toolbar'))
             );

@@ -1,21 +1,21 @@
 import { select as d3_select } from 'd3-selection';
 import { svgIcon } from '../../svg/icon';
-import { uiTooltipHtml } from '../tooltipHtml';
-import { tooltip } from '../../util/tooltip';
+import { uiTooltip } from '../tooltip';
 import { utilFunctor } from '../../util/util';
 
 export function uiToolSimpleButton(protoTool) {
 
     var tool = protoTool || {};
 
-    var tooltipBehavior = tooltip()
+    var tooltipBehavior = uiTooltip()
         .placement('bottom')
-        .html(true)
         .scrollContainer(d3_select('.top-toolbar'));
 
     tool.render = function(selection) {
 
-        tooltipBehavior.title(uiTooltipHtml(utilFunctor(tool.tooltipText)(), utilFunctor(tool.tooltipKey)()));
+        tooltipBehavior
+            .title(tool.tooltipText)
+            .keys([utilFunctor(tool.tooltipKey)()]);
 
         var button = selection
             .selectAll('.bar-button')

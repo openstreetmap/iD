@@ -10,7 +10,7 @@ import { t, textDirection } from '../util/locale';
 import { actionChangePreset } from '../actions/change_preset';
 import { operationDelete } from '../operations/delete';
 import { svgIcon } from '../svg/index';
-import { tooltip } from '../util/tooltip';
+import { uiTooltip } from './tooltip';
 import { geoExtent } from '../geo/extent';
 import { uiPresetIcon } from './preset_icon';
 import { uiTagReference } from './tag_reference';
@@ -436,7 +436,7 @@ export function uiPresetList(context) {
         var button = context.container().selectAll('.preset-list .preset-list-button');
 
         // remove existing tooltips
-        button.call(tooltip().destroyAny);
+        button.call(uiTooltip().destroyAny);
 
         button.each(function(item, index) {
             var hiddenPresetFeaturesId;
@@ -455,7 +455,7 @@ export function uiPresetList(context) {
                 var isAutoHidden = context.features().autoHidden(hiddenPresetFeaturesId);
                 var tooltipIdSuffix = isAutoHidden ? 'zoom' : 'manual';
                 var tooltipObj = { features: t('feature.' + hiddenPresetFeaturesId + '.description') };
-                d3_select(this).call(tooltip()
+                d3_select(this).call(uiTooltip()
                     .title(t('inspector.hidden_preset.' + tooltipIdSuffix, tooltipObj))
                     .placement(index < 2 ? 'bottom' : 'top')
                 );

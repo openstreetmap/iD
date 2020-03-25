@@ -5,8 +5,7 @@ import {
 
 import { svgIcon } from '../svg/icon';
 import { textDirection } from '../util/locale';
-import { tooltip } from '../util/tooltip';
-import { uiTooltipHtml } from './tooltipHtml';
+import { uiTooltip } from './tooltip';
 
 
 export function uiPane(id, context) {
@@ -72,10 +71,10 @@ export function uiPane(id, context) {
     pane.renderToggleButton = function(selection) {
 
         if (!_paneTooltip) {
-            _paneTooltip = tooltip()
+            _paneTooltip = uiTooltip()
                 .placement((textDirection === 'rtl') ? 'right' : 'left')
-                .html(true)
-                .title(uiTooltipHtml(_description, _key));
+                .title(_description)
+                .keys([_key]);
         }
 
         selection

@@ -5,7 +5,7 @@ import {
 
 import { utilArrayIdentical } from '../../util/array';
 import { t } from '../../util/locale';
-import { tooltip } from '../../util/tooltip';
+import { uiTooltip } from '../tooltip';
 import { utilRebind } from '../../util';
 import { uiPresetIcon } from '../preset_icon';
 import { uiSection } from '../section';
@@ -40,7 +40,7 @@ export function uiSectionFeatureType(context) {
         var presetButton = presetButtonWrap
             .append('button')
             .attr('class', 'preset-list-button preset-reset')
-            .call(tooltip()
+            .call(uiTooltip()
                 .title(t('inspector.back_tooltip'))
                 .placement('bottom')
             );

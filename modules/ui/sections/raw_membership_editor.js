@@ -16,7 +16,7 @@ import { services } from '../../services';
 import { svgIcon } from '../../svg/icon';
 import { uiCombobox } from '../combobox';
 import { uiSection } from '../section';
-import { tooltip } from '../../util/tooltip';
+import { uiTooltip } from '../tooltip';
 import { utilArrayGroupBy, utilDisplayName, utilNoAuto, utilHighlightEntities } from '../../util';
 
 
@@ -345,7 +345,7 @@ export function uiSectionRawMembershipEditor(context) {
         addRelationButton
             .call(svgIcon('#iD-icon-plus', 'light'));
         addRelationButton
-            .call(tooltip().title(t('inspector.add_to_relation')).placement(textDirection === 'ltr' ? 'right' : 'left'));
+            .call(uiTooltip().title(t('inspector.add_to_relation')).placement(textDirection === 'ltr' ? 'right' : 'left'));
 
         addRowEnter
             .append('div')

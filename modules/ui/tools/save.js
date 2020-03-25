@@ -4,8 +4,7 @@ import { t } from '../../util/locale';
 import { modeSave } from '../../modes';
 import { svgIcon } from '../../svg';
 import { uiCmd } from '../cmd';
-import { uiTooltipHtml } from '../tooltipHtml';
-import { tooltip } from '../../util/tooltip';
+import { uiTooltip } from '../tooltip';
 
 
 export function uiToolSave(context) {
@@ -17,10 +16,10 @@ export function uiToolSave(context) {
     };
 
     var button = null;
-    var tooltipBehavior = tooltip()
+    var tooltipBehavior = uiTooltip()
         .placement('bottom')
-        .html(true)
-        .title(uiTooltipHtml(t('save.no_changes'), key))
+        .title(t('save.no_changes'))
+        .keys([key])
         .scrollContainer(context.container().select('.top-toolbar'));
     var history = context.history();
     var key = uiCmd('⌘S');
@@ -63,9 +62,7 @@ export function uiToolSave(context) {
 
         if (tooltipBehavior) {
             tooltipBehavior
-                .title(uiTooltipHtml(
-                    t(val > 0 ? 'save.help' : 'save.no_changes'), key)
-                );
+                .title(t(val > 0 ? 'save.help' : 'save.no_changes'));
         }
 
         if (button) {

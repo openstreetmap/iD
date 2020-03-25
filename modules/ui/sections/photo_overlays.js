@@ -3,7 +3,7 @@ import {
 } from 'd3-selection';
 
 import { t } from '../../util/locale';
-import { tooltip } from '../../util/tooltip';
+import { uiTooltip } from '../tooltip';
 import { svgIcon } from '../../svg/icon';
 import { uiSection } from '../section';
 
@@ -74,7 +74,7 @@ export function uiSectionPhotoOverlays(context) {
                 else if (d.id === 'openstreetcam') titleID = 'openstreetcam_images.tooltip';
                 else titleID = d.id.replace(/-/g, '_') + '.tooltip';
                 d3_select(this)
-                    .call(tooltip()
+                    .call(uiTooltip()
                         .title(t(titleID))
                         .placement('top')
                     );
@@ -148,7 +148,7 @@ export function uiSectionPhotoOverlays(context) {
             .append('label')
             .each(function(d) {
                 d3_select(this)
-                    .call(tooltip()
+                    .call(uiTooltip()
                         .title(t('photo_overlays.photo_type.' + d + '.tooltip'))
                         .placement('top')
                     );

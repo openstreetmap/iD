@@ -7,8 +7,7 @@ import {
 
 import { t } from '../../util/locale';
 import { svgIcon } from '../../svg/icon';
-import { tooltip } from '../../util/tooltip';
-import { uiTooltipHtml } from '../tooltipHtml';
+import { uiTooltip } from '../tooltip';
 import { uiPresetBrowser } from '../preset_browser';
 import { modeAddArea, modeAddLine, modeAddPoint } from '../../modes';
 
@@ -92,12 +91,10 @@ export function uiToolAddFeature(context) {
                     presetBrowser.hide();
                 }
             })
-            .call(tooltip()
+            .call(uiTooltip()
                 .placement('bottom')
-                .html(true)
-                .title(function() {
-                    return uiTooltipHtml(t('modes.add_feature.description'), key);
-                })
+                .title(t('modes.add_feature.description'))
+                .keys([key])
                 .scrollContainer(d3_select('.top-toolbar'))
             )
             .call(svgIcon('#' + tool.iconName, tool.iconClass));
