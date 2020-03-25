@@ -161,7 +161,7 @@ export function modeSelect(context, selectedIDs) {
             var viewport = geoExtent(context.projection.clipExtent()).polygon();
 
             if (point && geoPointInPolygon(point, viewport)) {
-                _editMenu.center(point);
+                _editMenu.anchorLoc(point);
             } else {
                 _suppressMenu = true;
             }

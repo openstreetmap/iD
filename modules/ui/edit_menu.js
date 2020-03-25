@@ -9,7 +9,8 @@ import { svgIcon } from '../svg/icon';
 export function uiEditMenu(context) {
     var _menu = d3_select(null);
     var _operations = [];
-    var _center = [0, 0];
+    // the position the menu should be displayed relative to
+    var _anchorLoc = [0, 0];
 
     var _vpBottomMargin = 45; // viewport bottom margin
     var _vpSideMargin = 35;   // viewport side margin
@@ -20,6 +21,9 @@ export function uiEditMenu(context) {
     var _menuWidth = _buttonWidth;
     var _verticalPadding = 4;
 
+    // see also `.edit-menu .tooltip` CSS; include margin
+    var _tooltipWidth = 210;
+
     // offset the menu slightly from the target location
     var _menuSideMargin = 10;
 
@@ -28,29 +32,21 @@ export function uiEditMenu(context) {
 
         selection.node().focus();
 
-        var isRTL = textDirection === 'rtl';
+        var offset = [0, 0];
         var viewport = context.surfaceRect();
+
+        var menuLeft = displayOnLeft(viewport);
+
+        offset[0] = menuLeft ? -1 * (_menuSideMargin + _menuWidth) : _menuSideMargin;
 
         var menuHeight = _verticalPadding * 2 + _operations.length * _buttonHeight;
 
-        if (!isRTL && (_center[0] + _menuSideMargin + _menuWidth) > (viewport.width - _vpSideMargin)) {
-            // menu is going left-to-right and near right viewport edge, go left instead
-            isRTL = true;
-        } else if (isRTL && (_center[0] - _menuSideMargin - _menuWidth) < _vpSideMargin) {
-            // menu is going right-to-left and near left viewport edge, go right instead
-            isRTL = false;
-        }
-
-        var offset = [0, 0];
-
-        offset[0] = isRTL ? -1 * (_menuSideMargin + _menuWidth) : _menuSideMargin;
-
-        if (_center[1] + menuHeight > (viewport.height - _vpBottomMargin)) {
+        if (_anchorLoc[1] + menuHeight > (viewport.height - _vpBottomMargin)) {
             // menu is near bottom viewport edge, shift upwards
-            offset[1] = -1 * (_center[1] + menuHeight - viewport.height + _vpBottomMargin);
+            offset[1] = -1 * (_anchorLoc[1] + menuHeight - viewport.height + _vpBottomMargin);
         }
 
-        var origin = geoVecAdd(_center, offset);
+        var origin = geoVecAdd(_anchorLoc, offset);
 
         _menu = selection
             .append('div')
@@ -71,6 +67,8 @@ export function uiEditMenu(context) {
             .on('click', click)
             .on('pointerdown mousedown', pointerdown);
 
+        var tooltipSide = tooltipPosition(viewport, menuLeft);
+
         buttonsEnter.each(function(d) {
             d3_select(this)
                 .call(svgIcon('#iD-operation-' + d.id, 'operation-icon'))
@@ -78,7 +76,7 @@ export function uiEditMenu(context) {
                     .heading(d.title)
                     .title(d.tooltip())
                     .keys([d.keys[0]])
-                    .placement('right')
+                    .placement(tooltipSide)
                 );
         });
 
@@ -86,7 +84,6 @@ export function uiEditMenu(context) {
         buttons = buttonsEnter
             .merge(buttons)
             .classed('disabled', function(d) { return d.disabled(); });
-
 
         function click(operation) {
             d3_event.stopPropagation();
@@ -100,14 +97,60 @@ export function uiEditMenu(context) {
         }
     };
 
+    function displayOnLeft(viewport) {
+        if (textDirection === 'ltr') {
+            if ((_anchorLoc[0] + _menuSideMargin + _menuWidth) > (viewport.width - _vpSideMargin)) {
+                // right menu would be too close to the right viewport edge, go left
+                return true;
+            }
+            // prefer right menu
+            return false;
+
+        } else { // rtl
+            if ((_anchorLoc[0] - _menuSideMargin - _menuWidth) < _vpSideMargin) {
+                // left menu would be too close to the left viewport edge, go right
+                return false;
+            }
+            // prefer left menu
+            return true;
+        }
+    }
+
+    function tooltipPosition(viewport, menuLeft) {
+        if (textDirection === 'ltr') {
+            if (menuLeft) {
+                // if there's not room for a right-side menu then there definitely
+                // isn't room for right-side tooltips
+                return 'left';
+            }
+            if ((_anchorLoc[0] + _menuSideMargin + _menuWidth + _tooltipWidth) > (viewport.width - _vpSideMargin)) {
+                // right tooltips would be too close to the right viewport edge, go left
+                return 'left';
+            }
+            // prefer right tooltips
+            return 'right';
+
+        } else { // rtl
+            if (!menuLeft) {
+                return 'right';
+            }
+            if ((_anchorLoc[0] - _menuSideMargin - _menuWidth - _tooltipWidth) < _vpSideMargin) {
+                // left tooltips would be too close to the left viewport edge, go right
+                return 'right';
+            }
+            // prefer left tooltips
+            return 'left';
+        }
+    }
+
     editMenu.close = function () {
         _menu
             .remove();
     };
 
-    editMenu.center = function(val) {
-        if (!arguments.length) return _center;
-        _center = val;
+    editMenu.anchorLoc = function(val) {
+        if (!arguments.length) return _anchorLoc;
+        _anchorLoc = val;
         return editMenu;
     };
 
