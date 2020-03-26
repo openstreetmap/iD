@@ -422,6 +422,16 @@ en:
         # capacity field placeholder
         placeholder: '50, 100, 200...'
         terms: '[translate with synonyms or related terms for ''Capacity'', separated by commas]'
+      capacity/disabled_parking:
+        # 'capacity:disabled=*'
+        label: Accessible Spaces
+        # capacity/disabled_parking field placeholder
+        placeholder: '1, 2, 3...'
+      capacity_parking:
+        # capacity=*
+        label: Total Spaces
+        # capacity_parking field placeholder
+        placeholder: '10, 20, 30...'
       cash_in:
         # cash_in=*
         label: Cash In
@@ -1622,6 +1632,9 @@ en:
           surface: Surface
           # parking=underground
           underground: Underground
+      parking_space:
+        # parking_space=*
+        label: Type
       payment_multi:
         # 'payment:=*'
         label: Payment Types
@@ -3403,7 +3416,13 @@ en:
       amenity/parking_space:
         # amenity=parking_space
         name: Parking Space
+        # 'terms: parking spot,parking stall'
         terms: '<translate with synonyms or related terms for ''Parking Space'', separated by commas>'
+      amenity/parking_space/disabled:
+        # 'amenity=parking_space, parking_space=disabled'
+        name: Accessible Parking Space
+        # 'terms: disability,disabled parking stall,handicap parking spot,wheelchair'
+        terms: '<translate with synonyms or related terms for ''Accessible Parking Space'', separated by commas>'
       amenity/payment_centre:
         # amenity=payment_centre
         name: Payment Center
