@@ -15,7 +15,7 @@ export function behaviorSelect(context) {
     var isShowAlways = +context.storage('edit-menu-show-always') === 1;
     var tolerance = 4;
     var _lastMouse = null;
-    var _suppressMenu = true;
+    var _showMenu = false;
     var _p1 = null;
 
     // use pointer events on supported platforms; fallback to mouse events
@@ -63,7 +63,7 @@ export function behaviorSelect(context) {
         d3_select(window)
             .on(_pointerPrefix + 'up.select', pointerup, true);
 
-        _suppressMenu = !isShowAlways;
+        _showMenu = isShowAlways;
     }
 
 
@@ -95,7 +95,7 @@ export function behaviorSelect(context) {
         if (!_p1) {
             _p1 = point();
         }
-        _suppressMenu = false;
+        _showMenu = true;
         click();
     }
 
@@ -127,39 +127,47 @@ export function behaviorSelect(context) {
             datum = datum.parents[0];
         }
 
+        var newMode;
+
         if (datum instanceof osmEntity) {    // clicked an entity..
             var selectedIDs = context.selectedIDs();
             context.selectedNoteID(null);
             context.selectedErrorID(null);
 
             if (!isMultiselect) {
-                if (selectedIDs.length > 1 && (!_suppressMenu && !isShowAlways)) {
+                if (selectedIDs.length > 1 && (_showMenu && !isShowAlways)) {
                     // multiple things already selected, just show the menu...
-                    mode.suppressMenu(false).reselect();
+                    mode.reselect().showMenu();
                 } else {
                     if (mode.id !== 'select' || !utilArrayIdentical(mode.selectedIDs(), [datum.id])) {
+                        newMode = modeSelect(context, [datum.id]);
                         // select a single thing if it's not already selected
-                        context.enter(modeSelect(context, [datum.id]).suppressMenu(_suppressMenu));
+                        context.enter(newMode);
+                        if (_showMenu) newMode.showMenu();
                     } else {
-                        mode.suppressMenu(_suppressMenu).reselect();
+                        mode.reselect();
+                        if (_showMenu) mode.showMenu();
                     }
                 }
 
             } else {
                 if (selectedIDs.indexOf(datum.id) !== -1) {
                     // clicked entity is already in the selectedIDs list..
-                    if (!_suppressMenu && !isShowAlways) {
+                    if (_showMenu && !isShowAlways) {
                         // don't deselect clicked entity, just show the menu.
-                        mode.suppressMenu(false).reselect();
+                        mode.reselect().showMenu();
                     } else {
                         // deselect clicked entity, then reenter select mode or return to browse mode..
                         selectedIDs = selectedIDs.filter(function(id) { return id !== datum.id; });
                         context.enter(selectedIDs.length ? modeSelect(context, selectedIDs) : modeBrowse(context));
                     }
                 } else {
+
                     // clicked entity is not in the selected list, add it..
                     selectedIDs = selectedIDs.concat([datum.id]);
-                    context.enter(modeSelect(context, selectedIDs).suppressMenu(_suppressMenu));
+                    newMode = modeSelect(context, selectedIDs);
+                    context.enter(newMode);
+                    if (_showMenu) newMode.showMenu();
                 }
             }
 
@@ -187,13 +195,13 @@ export function behaviorSelect(context) {
         }
 
         // reset for next time..
-        _suppressMenu = true;
+        _showMenu = false;
     }
 
 
     function behavior(selection) {
         _lastMouse = null;
-        _suppressMenu = true;
+        _showMenu = false;
         _p1 = null;
 
         d3_select(window)

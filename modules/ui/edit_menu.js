@@ -30,8 +30,6 @@ export function uiEditMenu(context) {
     var editMenu = function(selection) {
         if (!_operations.length) return;
 
-        selection.node().focus();
-
         var offset = [0, 0];
         var viewport = context.surfaceRect();
 
