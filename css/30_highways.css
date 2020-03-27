@@ -356,11 +356,7 @@ path.line.stroke.tag-pedestrian {
 path.line.casing.tag-highway-corridor,
 path.line.casing.tag-highway-pedestrian,
 path.line.casing.tag-corridor,
-path.line.casing.tag-pedestrian,
-path.line.casing.tag-highway-corridor.tag-unpaved,
-path.line.casing.tag-highway-pedestrian.tag-unpaved,
-path.line.casing.tag-corridor.tag-unpaved,
-path.line.casing.tag-pedestrian.tag-unpaved {
+path.line.casing.tag-pedestrian {
     stroke: #8cd05f;
     stroke-linecap: round;
     stroke-dasharray: none;
@@ -449,7 +445,6 @@ path.line.stroke.tag-man_made-pier {
 }
 
 path.line.casing.tag-highway-path,
-path.line.casing.tag-highway-path.tag-unpaved,
 path.line.casing.tag-highway-footway.tag-public_transport-platform,
 path.line.casing.tag-highway-footway.tag-man_made-pier,
 path.line.casing.tag-highway.tag-crossing,
@@ -460,10 +455,7 @@ path.line.casing.tag-highway.tag-footway-access_aisle {
 }
 path.line.casing.tag-highway-footway,
 path.line.casing.tag-highway-cycleway,
-path.line.casing.tag-highway-bridleway,
-path.line.casing.tag-highway-footway.tag-unpaved,
-path.line.casing.tag-highway-cycleway.tag-unpaved,
-path.line.casing.tag-highway-bridleway.tag-unpaved {
+path.line.casing.tag-highway-bridleway {
     stroke: #fff;
     stroke-linecap: round;
     stroke-dasharray: none;
@@ -554,8 +546,7 @@ path.line.stroke.tag-highway-steps {
 .low-zoom path.line.stroke.tag-highway-steps {
     stroke-dasharray: 2, 2;
 }
-path.line.casing.tag-highway-steps,
-path.line.casing.tag-highway-steps.tag-unpaved {
+path.line.casing.tag-highway-steps {
     stroke: #fff;
     stroke-linecap: round;
     stroke-dasharray: none;
