@@ -4,7 +4,7 @@
         "name",
         "material",
         "height",
-        "elevation",
+        "ele_node",
         "inscription",
         "direction"
     ],

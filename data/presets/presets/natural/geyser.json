@@ -3,7 +3,7 @@
     "fields": [
         "name",
         "geyser/height",
-        "elevation"
+        "ele_node"
     ],
     "geometry": [
         "point"

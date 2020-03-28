@@ -300,8 +300,8 @@ export function uiField(context, presetField, entityIDs, options) {
             entityIDs.length > 1 &&
             uiFields[field.type].supportsMultiselection === false) return false;
 
-        if (field.geometry && entityIDs.some(function(entityID) {
-            return field.geometry.indexOf(context.graph().geometry(entityID)) === -1;
+        if (field.geometry && !entityIDs.every(function(entityID) {
+            return field.matchGeometry(context.graph().geometry(entityID));
         })) return false;
 
         if (field.countryCodes || field.notCountryCodes) {

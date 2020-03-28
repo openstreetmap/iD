@@ -352,18 +352,24 @@ path.line.casing.tag-cutting {
 path.line.casing.tag-unpaved {
     stroke: #ccc;
     stroke-linecap: butt;
-    stroke-dasharray: 4, 3;
+    stroke-dasharray: 4, 4;
 }
 .low-zoom path.line.casing.tag-unpaved {
-    stroke-dasharray: 3, 2;
+    stroke-dasharray: 3, 3;
 }
 path.line.casing.tag-bridge.tag-unpaved {
     stroke: #000;
-    stroke-dasharray: 4, 3;
 }
-.low-zoom path.line.casing.tag-bridge.tag-unpaved {
+/* Surface - semipaved */
+path.line.casing.tag-semipaved {
+    stroke-linecap: butt;
+    stroke-dasharray: 6, 2;
+}
+.low-zoom path.line.casing.tag-semipaved {
+    stroke-dasharray: 5, 2;
+}
+path.line.casing.tag-bridge.tag-semipaved {
     stroke: #000;
-    stroke-dasharray: 3, 2;
 }
 
 

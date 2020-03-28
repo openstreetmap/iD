@@ -2998,10 +2998,18 @@
                         "dome": "Dome"
                     }
                 },
+                "capacity_parking": {
+                    "label": "Total Spaces",
+                    "placeholder": "10, 20, 30..."
+                },
                 "capacity": {
                     "label": "Capacity",
                     "terms": "",
                     "placeholder": "50, 100, 200..."
+                },
+                "capacity/disabled_parking": {
+                    "label": "Accessible Spaces",
+                    "placeholder": "1, 2, 3..."
                 },
                 "cash_in": {
                     "label": "Cash In"
@@ -3324,6 +3332,14 @@
                     "terms": "",
                     "placeholder": "00:00"
                 },
+                "ele_node": {
+                    "label": "Elevation",
+                    "terms": "altitude,height"
+                },
+                "ele": {
+                    "label": "Elevation",
+                    "terms": "altitude,height"
+                },
                 "electrified": {
                     "label": "Electrification",
                     "terms": "contact line,powered,third rail",
@@ -3334,10 +3350,6 @@
                         "yes": "Yes (unspecified)",
                         "no": "No"
                     }
-                },
-                "elevation": {
-                    "label": "Elevation",
-                    "terms": "altitude"
                 },
                 "email": {
                     "label": "Email",
@@ -4024,6 +4036,9 @@
                 "park_ride": {
                     "label": "Park and Ride",
                     "terms": ""
+                },
+                "parking_space": {
+                    "label": "Type"
                 },
                 "parking": {
                     "label": "Type",
@@ -5572,7 +5587,11 @@
                 },
                 "amenity/parking_space": {
                     "name": "Parking Space",
-                    "terms": ""
+                    "terms": "parking spot,parking stall"
+                },
+                "amenity/parking_space/disabled": {
+                    "name": "Accessible Parking Space",
+                    "terms": "disability,disabled parking stall,handicap parking spot,wheelchair"
                 },
                 "amenity/parking": {
                     "name": "Parking Lot",

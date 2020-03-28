@@ -116,7 +116,7 @@ export var osmOneWayTags = {
     }
 };
 
-
+// solid and smooth surfaces akin to the assumed default road surface in OSM
 export var osmPavedTags = {
     'surface': {
         'paved': true,
@@ -127,6 +127,19 @@ export var osmPavedTags = {
     },
     'tracktype': {
         'grade1': true
+    }
+};
+
+// solid, if somewhat uncommon surfaces with a high range of smoothness
+export var osmSemipavedTags = {
+    'surface': {
+        'cobblestone': true,
+        'cobblestone:flattened': true,
+        'unhewn_cobblestone': true,
+        'sett': true,
+        'paving_stones': true,
+        'metal': true,
+        'wood': true
     }
 };
 

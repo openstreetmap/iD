@@ -5559,16 +5559,16 @@ button.add-preset.disabled .preset-icon-container {
     flex-direction: column;
     background: #fff;
     border-radius: 4px;
-    /* padding set in code */
+    /* padding is set in edit_menu.js */
 }
 
 .edit-menu .tooltip {
-    width: 200px;
+    width: 200px; /* see also edit_menu.js */
 }
 
 .edit-menu-item {
     border-radius: 0;
-    /* width and height set in code */
+    /* width and height are set in edit_menu.js */
 }
 
 .edit-menu-item use {

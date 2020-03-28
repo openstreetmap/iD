@@ -1,5 +1,5 @@
 import { dispatch as d3_dispatch } from 'd3-dispatch';
-import { mouse as d3_mouse } from 'd3-selection';
+import { event as d3_event, mouse as d3_mouse } from 'd3-selection';
 
 import { utilRebind } from './rebind';
 import { geoVecLength } from '../geo/vector';
@@ -22,6 +22,10 @@ export function utilDoubleUp() {
     }
 
     function pointerdown() {
+
+        // ignore right-click
+        if (d3_event.ctrlKey || d3_event.button === 2) return;
+
         // d3_mouse works since pointer events inherit from mouse events
         var loc = d3_mouse(this);
 
@@ -40,6 +44,10 @@ export function utilDoubleUp() {
     }
 
     function pointerup() {
+
+        // ignore right-click
+        if (d3_event.ctrlKey || d3_event.button === 2) return;
+
         if (!_pointer) return;
 
         _pointer.upCount += 1;

@@ -1,0 +1,25 @@
+{
+    "icon": "temaki-accessible_space",
+    "geometry": [
+        "area",
+        "point",
+        "vertex"
+    ],
+    "tags": {
+        "amenity": "parking_space",
+        "parking_space": "disabled"
+    },
+    "addTags": {
+        "amenity": "parking_space",
+        "parking_space": "disabled",
+        "capacity": "1"
+    },
+    "terms": [
+        "disability",
+        "disabled parking stall",
+        "handicap parking spot",
+        "wheelchair"
+    ],
+    "matchScore": 0.95,
+    "name": "Accessible Parking Space"
+}

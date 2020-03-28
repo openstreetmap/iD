@@ -14,7 +14,7 @@ export function presetField(fieldID, field) {
   // for use in classes, element ids, css selectors
   _this.safeid = utilSafeClassName(fieldID);
 
-  _this.matchGeometry = (geom) => !_this.geometry || _this.geometry === geom;
+  _this.matchGeometry = (geom) => !_this.geometry || _this.geometry.indexOf(geom) !== -1;
 
   _this.matchAllGeometry = (geometries) => {
     return !_this.geometry || geometries.every(geom => _this.geometry.indexOf(geom) !== -1);

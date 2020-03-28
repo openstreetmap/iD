@@ -2,9 +2,10 @@
     "key": "ele",
     "type": "number",
     "icon": "elevation",
-    "universal": true,
     "label": "Elevation",
+    "geometry": ["line", "area", "relation"],
     "terms": [
-        "altitude"
+        "altitude",
+        "height"
     ]
 }

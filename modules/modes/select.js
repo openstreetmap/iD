@@ -48,12 +48,10 @@ export function modeSelect(context, selectedIDs) {
         modeDragNote(context).behavior
     ];
     var inspector;   // unused?
-    var editMenu;
-    var _timeout = null;
     // the explicit presets for the features in this selection
     var _presets;
+    var _editMenu; // uiEditMenu
     var _newFeature = false;
-    var _suppressMenu = true;
     var _follow = false;
 
 
@@ -148,47 +146,50 @@ export function modeSelect(context, selectedIDs) {
 
 
     function closeMenu() {
-        if (editMenu) {
-            context.map().supersurface.call(editMenu.close);
-        }
+        // remove any existing menu no matter how it was added
+        context.map().supersurface
+            .select('.edit-menu').remove();
     }
 
+    mode.showMenu = function() {
 
-    function positionMenu() {
-        if (!editMenu) return;
-
-        var entity = singular();
-        if (entity && entity.geometry(context.graph()) === 'relation') {
-            _suppressMenu = true;
-        } else {
-            var point = context.map().mouse();
-            var viewport = geoExtent(context.projection.clipExtent()).polygon();
-
-            if (point && geoPointInPolygon(point, viewport)) {
-                editMenu.center(point);
-            } else {
-                _suppressMenu = true;
-            }
-        }
-    }
-
-
-    function showMenu() {
+        // remove any displayed menu
         closeMenu();
-        if (editMenu) {
 
-            // disable menu if in wide selection, for example
-            if (!context.map().editableDataEnabled()) return;
+        // disable menu if in wide selection, for example
+        if (!context.map().editableDataEnabled()) return;
 
-            context.map().supersurface.call(editMenu);
+        // don't show the menu for relations alone
+        if (selectedIDs.every(function(id) {
+            return context.graph().geometry(id) === 'relation';
+        })) return;
+
+        var point = context.map().mouse();
+        var viewport = geoExtent(context.projection.clipExtent()).polygon();
+        // make sure a vaild position can be determined
+        if (!point || !geoPointInPolygon(point, viewport)) return;
+
+        var surfaceNode = context.surface().node();
+        if (surfaceNode.focus) {   // FF doesn't support it
+            // focus the surface or else clicking off the menu may not trigger modeBrowse
+            surfaceNode.focus();
         }
-    }
+
+        // don't load the menu until it's needed
+        if (!_editMenu) _editMenu = uiEditMenu(context);
+
+        _editMenu
+            .anchorLoc(point)
+            .operations(operations);
+
+        // render the menu
+        context.map().supersurface.call(_editMenu);
+    };
 
 
     function toggleMenu() {
         if (context.map().supersurface.select('.edit-menu').empty()) {
-            positionMenu();
-            showMenu();
+            mode.showMenu();
         } else {
             closeMenu();
         }
@@ -207,16 +208,7 @@ export function modeSelect(context, selectedIDs) {
 
     mode.reselect = function() {
         if (!checkSelectedIDs()) return;
-
-        var surfaceNode = context.surface().node();
-        if (surfaceNode.focus) {   // FF doesn't support it
-            surfaceNode.focus();
-        }
-
-        positionMenu();
-        if (!_suppressMenu) {
-            showMenu();
-        }
+        return mode;
     };
 
 
@@ -230,13 +222,6 @@ export function modeSelect(context, selectedIDs) {
     mode.presets = function(val) {
         if (!arguments.length) return _presets;
         _presets = val;
-        return mode;
-    };
-
-
-    mode.suppressMenu = function(val) {
-        if (!arguments.length) return _suppressMenu;
-        _suppressMenu = val;
         return mode;
     };
 
@@ -273,7 +258,8 @@ export function modeSelect(context, selectedIDs) {
             }
         });
 
-        editMenu = uiEditMenu(context, operations);
+        // remove any displayed menu
+        closeMenu();
     }
 
 
@@ -339,13 +325,6 @@ export function modeSelect(context, selectedIDs) {
             context.map().pan([0,0]);  // full redraw, to adjust z-sorting #2914
         }
 
-        _timeout = window.setTimeout(function() {
-            positionMenu();
-            if (!_suppressMenu) {
-                showMenu();
-            }
-        }, 270);  /* after any centerEase completes */
-
 
         function update() {
             closeMenu();
@@ -384,11 +363,6 @@ export function modeSelect(context, selectedIDs) {
             if (!checkSelectedIDs()) return;
 
             var surface = context.surface();
-            var entity = singular();
-
-            if (entity && entity.geometry(context.graph()) === 'relation') {
-                _suppressMenu = true;
-            }
 
             surface.selectAll('.selected-member')
                 .classed('selected-member', false);
@@ -538,7 +512,6 @@ export function modeSelect(context, selectedIDs) {
 
 
     mode.exit = function() {
-        if (_timeout) window.clearTimeout(_timeout);
         if (inspector) wrap.call(inspector.close);
 
         operations.forEach(function(operation) {
@@ -553,7 +526,6 @@ export function modeSelect(context, selectedIDs) {
             .call(keybinding.unbind);
 
         closeMenu();
-        editMenu = undefined;
 
         context.history()
             .on('change.select', null)

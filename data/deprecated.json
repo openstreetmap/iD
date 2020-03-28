@@ -376,6 +376,10 @@
     "replace": {"direction": "W"}
   },
   {
+    "old": {"disabled_spaces":"*"},
+    "replace": {"capacity:disabled": "$1"}
+  },
+  {
     "old": {"drinkable": "*"},
     "replace": {"drinking_water": "$1"}
   },

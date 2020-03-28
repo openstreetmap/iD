@@ -2,7 +2,7 @@
     "icon": "temaki-valley",
     "fields": [
         "name",
-        "elevation",
+        "ele_node",
         "description"
     ],
     "geometry": [
