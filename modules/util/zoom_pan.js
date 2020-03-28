@@ -3,12 +3,12 @@
 
 import { dispatch as d3_dispatch } from 'd3-dispatch';
 import { interpolateZoom } from 'd3-interpolate';
-import { event as d3_event, customEvent as d3_customEvent, mouse as d3_mouse } from 'd3-selection';
+import { event as d3_event, customEvent as d3_customEvent } from 'd3-selection';
 import { interrupt as d3_interrupt } from 'd3-transition';
 import ZoomEvent from '../../node_modules/d3-zoom/src/event.js';
 import { Transform, identity } from '../../node_modules/d3-zoom/src/transform.js';
 
-import { utilFunctor } from './util';
+import { utilFastMouse, utilFunctor } from './util';
 
 // Ignore right-click, since that should open the context menu.
 function defaultFilter() {
@@ -54,10 +54,9 @@ export function utilZoomPan() {
       wheelDelta = defaultWheelDelta,
       scaleExtent = [0, Infinity],
       translateExtent = [[-Infinity, -Infinity], [Infinity, Infinity]],
-      duration = 250,
       interpolate = interpolateZoom,
       listeners = d3_dispatch('start', 'zoom', 'end'),
-      wheelDelay = 150;
+      _wheelDelay = 150;
 
   function zoom(selection) {
     selection
@@ -205,7 +204,7 @@ export function utilZoomPan() {
     var g = gesture(this, arguments),
         t = this.__zoom,
         k = Math.max(scaleExtent[0], Math.min(scaleExtent[1], t.k * Math.pow(2, wheelDelta.apply(this, arguments)))),
-        p = d3_mouse(this);
+        p = utilFastMouse(this)(d3_event);
 
     // If the mouse is in the same location as before, reuse it.
     // If there were recent wheel events, reset the wheel idle timeout.
@@ -228,7 +227,7 @@ export function utilZoomPan() {
 
     d3_event.preventDefault();
     d3_event.stopImmediatePropagation();
-    g.wheel = setTimeout(wheelidled, wheelDelay);
+    g.wheel = setTimeout(wheelidled, _wheelDelay);
     g.zoom('mouse', constrain(translate(scale(t, k), g.mouse[0], g.mouse[1]), g.extent, translateExtent));
 
     function wheelidled() {
@@ -237,18 +236,20 @@ export function utilZoomPan() {
     }
   }
 
-  var downPointerIDs = new Set();
+  var _downPointerIDs = new Set();
+  var _pointerLocGetter;
 
   function pointerdown() {
-    downPointerIDs.add(d3_event.pointerId);
+    _downPointerIDs.add(d3_event.pointerId);
 
     if (!filter.apply(this, arguments)) return;
 
-    var g = gesture(this, arguments, downPointerIDs.size === 1);
+    var g = gesture(this, arguments, _downPointerIDs.size === 1);
     var started;
 
     d3_event.stopImmediatePropagation();
-    var loc = d3_mouse(this);
+    _pointerLocGetter = utilFastMouse(this);
+    var loc = _pointerLocGetter(d3_event);
     var p = [loc, this.__zoom.invert(loc), d3_event.pointerId];
     if (!g.pointer0) {
        g.pointer0 = p;
@@ -275,8 +276,8 @@ export function utilZoomPan() {
     if ((isPointer0 || isPointer1) && 'buttons' in d3_event && !d3_event.buttons) {
       // The pointer went up without ending the gesture somehow, e.g.
       // a down mouse was moved off the map and released. End it here.
-      if (g.pointer0) downPointerIDs.delete(g.pointer0[2]);
-      if (g.pointer1) downPointerIDs.delete(g.pointer1[2]);
+      if (g.pointer0) _downPointerIDs.delete(g.pointer0[2]);
+      if (g.pointer1) _downPointerIDs.delete(g.pointer1[2]);
       g.end();
       return;
     }
@@ -284,7 +285,7 @@ export function utilZoomPan() {
     d3_event.preventDefault();
     d3_event.stopImmediatePropagation();
 
-    var loc = d3_mouse(this);
+    var loc = _pointerLocGetter(d3_event);
     var t, p, l;
 
     if (isPointer0) g.pointer0[0] = loc;
@@ -308,7 +309,7 @@ export function utilZoomPan() {
   }
 
   function pointerup() {
-    downPointerIDs.delete(d3_event.pointerId);
+    _downPointerIDs.delete(d3_event.pointerId);
 
     if (!this.__zooming) return;
 
@@ -351,10 +352,6 @@ export function utilZoomPan() {
 
   zoom.constrain = function(_) {
     return arguments.length ? (constrain = _, zoom) : constrain;
-  };
-
-  zoom.duration = function(_) {
-    return arguments.length ? (duration = +_, zoom) : duration;
   };
 
   zoom.interpolate = function(_) {

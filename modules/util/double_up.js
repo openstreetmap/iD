@@ -1,6 +1,7 @@
 import { dispatch as d3_dispatch } from 'd3-dispatch';
-import { event as d3_event, mouse as d3_mouse } from 'd3-selection';
+import { event as d3_event } from 'd3-selection';
 
+import { utilFastMouse } from './util';
 import { utilRebind } from './rebind';
 import { geoVecLength } from '../geo/vector';
 
@@ -26,8 +27,7 @@ export function utilDoubleUp() {
         // ignore right-click
         if (d3_event.ctrlKey || d3_event.button === 2) return;
 
-        // d3_mouse works since pointer events inherit from mouse events
-        var loc = d3_mouse(this);
+        var loc = utilFastMouse(this)(d3_event);
 
         if (_pointer && !pointerIsValidFor(loc)) {
             // if this pointer is no longer valid, clear it so another can be started
@@ -53,7 +53,7 @@ export function utilDoubleUp() {
         _pointer.upCount += 1;
 
         if (_pointer.upCount === 2) { // double up!
-            var loc = d3_mouse(this);
+            var loc = utilFastMouse(this)(d3_event);
             if (pointerIsValidFor(loc)) {
                 dispatch.call('doubleUp', this, loc);
             }
@@ -73,7 +73,7 @@ export function utilDoubleUp() {
             // fallback to dblclick
             selection
                 .on('dblclick.doubleUp', function() {
-                    dispatch.call('doubleUp', this, d3_mouse(this));
+                    dispatch.call('doubleUp', this, utilFastMouse(this)(d3_event));
                 });
         }
     }
