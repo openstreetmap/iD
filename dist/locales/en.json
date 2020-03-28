@@ -3289,6 +3289,14 @@
                     "terms": "",
                     "placeholder": "00:00"
                 },
+                "ele_node": {
+                    "label": "Elevation",
+                    "terms": "altitude,height"
+                },
+                "ele": {
+                    "label": "Elevation",
+                    "terms": "altitude,height"
+                },
                 "electrified": {
                     "label": "Electrification",
                     "terms": "contact line,powered,third rail",
@@ -3299,10 +3307,6 @@
                         "yes": "Yes (unspecified)",
                         "no": "No"
                     }
-                },
-                "elevation": {
-                    "label": "Elevation",
-                    "terms": "altitude"
                 },
                 "email": {
                     "label": "Email",

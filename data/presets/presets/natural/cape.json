@@ -2,7 +2,7 @@
     "icon": "temaki-beach",
     "fields": [
         "name",
-        "elevation",
+        "ele_node",
         "description"
     ],
     "geometry": [

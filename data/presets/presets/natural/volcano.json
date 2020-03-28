@@ -2,7 +2,7 @@
     "icon": "maki-volcano",
     "fields": [
         "name",
-        "elevation",
+        "ele_node",
         "volcano/status",
         "volcano/type"
     ],

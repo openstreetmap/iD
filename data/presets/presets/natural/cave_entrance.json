@@ -6,7 +6,7 @@
     ],
     "fields": [
         "name",
-        "elevation",
+        "ele_node",
         "access_simple",
         "direction",
         "fee",

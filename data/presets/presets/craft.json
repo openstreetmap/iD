@@ -11,6 +11,7 @@
     "moreFields": [
         "air_conditioning",
         "building/levels_building",
+        "ele",
         "email",
         "fax",
         "gnis/feature_id",

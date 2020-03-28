@@ -2,7 +2,7 @@
     "icon": "maki-mountain",
     "fields": [
         "name",
-        "elevation"
+        "ele_node"
     ],
     "geometry": [
         "point",

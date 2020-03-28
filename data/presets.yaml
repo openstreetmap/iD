@@ -797,6 +797,16 @@ en:
         # duration field placeholder
         placeholder: '00:00'
         terms: '[translate with synonyms or related terms for ''Duration'', separated by commas]'
+      ele:
+        # ele=*
+        label: Elevation
+        # 'terms: altitude,height'
+        terms: '[translate with synonyms or related terms for ''Elevation'', separated by commas]'
+      ele_node:
+        # ele=*
+        label: Elevation
+        # 'terms: altitude,height'
+        terms: '[translate with synonyms or related terms for ''Elevation'', separated by commas]'
       electrified:
         # electrified=*
         label: Electrification
@@ -813,11 +823,6 @@ en:
         placeholder: 'Contact Line, Electrified Rail...'
         # 'terms: contact line,powered,third rail'
         terms: '[translate with synonyms or related terms for ''Electrification'', separated by commas]'
-      elevation:
-        # ele=*
-        label: Elevation
-        # 'terms: altitude'
-        terms: '[translate with synonyms or related terms for ''Elevation'', separated by commas]'
       email:
         # email=*
         label: Email

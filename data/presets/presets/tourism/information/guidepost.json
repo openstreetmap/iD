@@ -2,7 +2,7 @@
     "icon": "fas-map-signs",
     "fields": [
         "name",
-        "elevation",
+        "ele_node",
         "operator",
         "ref"
     ],

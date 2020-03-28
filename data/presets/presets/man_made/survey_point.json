@@ -2,7 +2,7 @@
     "icon": "temaki-benchmark_disk",
     "fields": [
         "ref",
-        "elevation",
+        "ele_node",
         "inscription"
     ],
     "geometry": [

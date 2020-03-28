@@ -3,7 +3,7 @@
     "fields": [
         "name",
         "operator",
-        "elevation",
+        "ele_node",
         "address",
         "access_simple",
         "fee",
