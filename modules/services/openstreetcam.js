@@ -1,6 +1,6 @@
 import { dispatch as d3_dispatch } from 'd3-dispatch';
 import { json as d3_json } from 'd3-fetch';
-import { event as d3_event, select as d3_select, selectAll as d3_selectAll } from 'd3-selection';
+import { event as d3_event } from 'd3-selection';
 import { zoom as d3_zoom, zoomIdentity as d3_zoomIdentity } from 'd3-zoom';
 
 import RBush from 'rbush';
@@ -18,8 +18,7 @@ var dispatch = d3_dispatch('loadedImages');
 var imgZoom = d3_zoom()
     .extent([[0, 0], [320, 240]])
     .translateExtent([[0, 0], [320, 240]])
-    .scaleExtent([1, 15])
-    .on('zoom', zoomPan);
+    .scaleExtent([1, 15]);
 var _oscCache;
 var _oscSelectedImage;
 
@@ -171,13 +170,6 @@ function searchLimited(limit, projection, rtree) {
 }
 
 
-function zoomPan() {
-    var t = d3_event.transform;
-    d3_select('.photoviewer .osc-image-wrap')
-        .call(utilSetTransform, t.x, t.y, t.k);
-}
-
-
 export default {
 
     init: function() {
@@ -247,14 +239,14 @@ export default {
         var that = this;
 
         // add osc-wrapper
-        var wrap = d3_select('.photoviewer').selectAll('.osc-wrapper')
+        var wrap = context.container().select('.photoviewer').selectAll('.osc-wrapper')
             .data([0]);
 
         var wrapEnter = wrap.enter()
             .append('div')
             .attr('class', 'photo-wrapper osc-wrapper')
             .classed('hide', true)
-            .call(imgZoom)
+            .call(imgZoom.on('zoom', zoomPan))
             .on('dblclick.zoom', null);
 
         wrapEnter
@@ -302,6 +294,13 @@ export default {
         });
 
 
+        function zoomPan() {
+            var t = d3_event.transform;
+            context.container().select('.photoviewer .osc-image-wrap')
+                .call(utilSetTransform, t.x, t.y, t.k);
+        }
+
+
         function rotate(deg) {
             return function() {
                 if (!_oscSelectedImage) return;
@@ -316,7 +315,7 @@ export default {
                 if (r < -180) r += 360;
                 sequence.rotation = r;
 
-                var wrap = d3_select('.photoviewer .osc-wrapper');
+                var wrap = context.container().select('.photoviewer .osc-wrapper');
 
                 wrap
                     .transition()
@@ -344,15 +343,15 @@ export default {
                 context.map().centerEase(nextImage.loc);
 
                 that
-                    .selectImage(nextImage)
-                    .updateViewer(nextImage);
+                    .selectImage(context, nextImage)
+                    .updateViewer(context, nextImage);
             };
         }
     },
 
 
-    showViewer: function() {
-        var viewer = d3_select('.photoviewer')
+    showViewer: function(context) {
+        var viewer = context.container().select('.photoviewer')
             .classed('hide', false);
 
         var isHidden = viewer.selectAll('.photo-wrapper.osc-wrapper.hide').size();
@@ -385,12 +384,12 @@ export default {
         context.container().selectAll('.viewfield-group, .sequence, .icon-sign')
             .classed('currentView', false);
 
-        return this.setStyles(null, true);
+        return this.setStyles(context, null, true);
     },
 
 
-    updateViewer: function(d) {
-        var wrap = d3_select('.photoviewer .osc-wrapper');
+    updateViewer: function(context, d) {
+        var wrap = context.container().select('.photoviewer .osc-wrapper');
         var imageWrap = wrap.selectAll('.osc-image-wrap');
         var attribution = wrap.selectAll('.photo-attribution').html('');
 
@@ -459,14 +458,14 @@ export default {
     },
 
 
-    selectImage: function(d) {
+    selectImage: function(context, d) {
         _oscSelectedImage = d;
-        var viewer = d3_select('.photoviewer');
+        var viewer = context.container().select('.photoviewer');
         if (!viewer.empty()) viewer.datum(d);
 
-        this.setStyles(null, true);
+        this.setStyles(context, null, true);
 
-        d3_selectAll('.icon-sign')
+        context.container().selectAll('.icon-sign')
             .classed('currentView', false);
 
         return this;
@@ -486,14 +485,14 @@ export default {
     // Updates the currently highlighted sequence and selected bubble.
     // Reset is only necessary when interacting with the viewport because
     // this implicitly changes the currently selected bubble/sequence
-    setStyles: function(hovered, reset) {
+    setStyles: function(context, hovered, reset) {
         if (reset) {  // reset all layers
-            d3_selectAll('.viewfield-group')
+            context.container().selectAll('.viewfield-group')
                 .classed('highlighted', false)
                 .classed('hovered', false)
                 .classed('currentView', false);
 
-            d3_selectAll('.sequence')
+            context.container().selectAll('.sequence')
                 .classed('highlighted', false)
                 .classed('currentView', false);
         }
@@ -503,7 +502,7 @@ export default {
         var hoveredSequence = hoveredSequenceKey && _oscCache.sequences[hoveredSequenceKey];
         var hoveredImageKeys = (hoveredSequence && hoveredSequence.images.map(function (d) { return d.key; })) || [];
 
-        var viewer = d3_select('.photoviewer');
+        var viewer = context.container().select('.photoviewer');
         var selected = viewer.empty() ? undefined : viewer.datum();
         var selectedImageKey = selected && selected.key;
         var selectedSequenceKey = this.getSequenceKeyForImage(selected);
@@ -513,17 +512,17 @@ export default {
         // highlight sibling viewfields on either the selected or the hovered sequences
         var highlightedImageKeys = utilArrayUnion(hoveredImageKeys, selectedImageKeys);
 
-        d3_selectAll('.layer-openstreetcam .viewfield-group')
+        context.container().selectAll('.layer-openstreetcam .viewfield-group')
             .classed('highlighted', function(d) { return highlightedImageKeys.indexOf(d.key) !== -1; })
             .classed('hovered', function(d) { return d.key === hoveredImageKey; })
             .classed('currentView', function(d) { return d.key === selectedImageKey; });
 
-        d3_selectAll('.layer-openstreetcam .sequence')
+        context.container().selectAll('.layer-openstreetcam .sequence')
             .classed('highlighted', function(d) { return d.properties.key === hoveredSequenceKey; })
             .classed('currentView', function(d) { return d.properties.key === selectedSequenceKey; });
 
         // update viewfields if needed
-        d3_selectAll('.viewfield-group .viewfield')
+        context.container().selectAll('.viewfield-group .viewfield')
             .attr('d', viewfieldPath);
 
         function viewfieldPath() {
