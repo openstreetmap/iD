@@ -1,5 +1,4 @@
 import { event as d3_event } from 'd3-selection';
-import { uiFlash } from '../ui/flash';
 
 
 /* Creates a keybinding behavior for an operation */
@@ -15,7 +14,7 @@ export function behaviorOperation(context) {
         var flash;
 
         if (disabled) {
-            flash = uiFlash()
+            flash = context.ui().flash
                 .duration(4000)
                 .iconName('#iD-operation-' + _operation.id)
                 .iconClass('operation disabled')
@@ -24,7 +23,7 @@ export function behaviorOperation(context) {
             flash();
 
         } else {
-            flash = uiFlash()
+            flash = context.ui().flash
                 .duration(2000)
                 .iconName('#iD-operation-' + _operation.id)
                 .iconClass('operation')

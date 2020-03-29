@@ -5,7 +5,6 @@ import { uiTooltip } from './tooltip';
 import { geoExtent } from '../geo';
 import { modeBrowse } from '../modes/browse';
 import { svgIcon } from '../svg/icon';
-import { uiFlash } from './flash';
 import { uiLoading } from './loading';
 
 export function uiGeolocate(context) {
@@ -61,7 +60,7 @@ export function uiGeolocate(context) {
             // use the position from a previous call if we have one
             zoomTo();
         } else {
-            uiFlash()
+            context.ui().flash
                 .text(t('geolocate.location_unavailable'))
                 .iconName('#iD-icon-geolocate')();
         }

@@ -1,6 +1,5 @@
 import { t } from '../util/locale';
 import { behaviorDrawWay } from '../behavior/draw_way';
-import { uiFlash } from '../ui/flash';
 
 
 export function modeDrawLine(context, wayID, startGraph, button, affix, continuing) {
@@ -23,7 +22,7 @@ export function modeDrawLine(context, wayID, startGraph, button, affix, continui
         behavior = behaviorDrawWay(context, wayID, index, mode, startGraph)
             .tail(t('modes.draw_line.tail'))
             .on('rejectedSelfIntersection.modeDrawLine', function() {
-                uiFlash()
+                context.ui().flash
                     .text(t('self_intersection.error.lines'))();
             });
 

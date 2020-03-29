@@ -1,6 +1,5 @@
 import { t } from '../util/locale';
 import { behaviorDrawWay } from '../behavior/draw_way';
-import { uiFlash } from '../ui/flash';
 
 
 export function modeDrawArea(context, wayID, startGraph, button) {
@@ -19,7 +18,7 @@ export function modeDrawArea(context, wayID, startGraph, button) {
         behavior = behaviorDrawWay(context, wayID, undefined, mode, startGraph)
             .tail(t('modes.draw_area.tail'))
             .on('rejectedSelfIntersection.modeDrawArea', function() {
-                uiFlash()
+                context.ui().flash
                     .text(t('self_intersection.error.areas'))();
             });
 
