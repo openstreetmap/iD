@@ -76,7 +76,7 @@ export function uiPopover(klass) {
     };
 
     popover.isShown = function() {
-        var popoverSelection = d3_select('.popover-' + _id);
+        var popoverSelection = _anchorSelection.select('.popover-' + _id);
         return !popoverSelection.empty() && popoverSelection.classed('in');
     };
 
