@@ -1,7 +1,7 @@
 import { remove as removeDiacritics } from 'diacritics';
 import { fixRTLTextForSvg, rtlRegex } from './svg_paths_rtl_fix';
 
-import { t, textDirection } from './locale';
+import { t } from './locale';
 import { utilArrayUnion } from './array';
 import { utilDetect } from './detect';
 
