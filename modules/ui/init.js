@@ -84,8 +84,7 @@ export function uiInit(context) {
 
         map
             .on('hitMinZoom.ui', function() {
-                uiFlash()
-                    .text(t('cannot_zoom'))();
+                ui.flash.text(t('cannot_zoom'))();
             });
 
         container
@@ -446,6 +445,8 @@ export function uiInit(context) {
                 if (_initCallback) _initCallback(err);
             });
     };
+
+    ui.flash = uiFlash(context);
 
     ui.sidebar = uiSidebar(context);
 

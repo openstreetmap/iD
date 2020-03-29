@@ -1,7 +1,6 @@
 import { t } from '../util/locale';
 import { behaviorDrawWay } from '../behavior/draw_way';
 import { modeSelect } from './select';
-import { uiFlash } from '../ui/flash';
 
 
 export function modeDrawArea(context, mode) {
@@ -58,7 +57,7 @@ export function modeDrawArea(context, mode) {
                 }
             })
             .on('rejectedSelfIntersection.modeDrawArea', function() {
-                uiFlash()
+                context.ui().flash
                     .text(t('self_intersection.error.areas'))();
             });
 

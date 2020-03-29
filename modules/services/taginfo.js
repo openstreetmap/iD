@@ -195,7 +195,17 @@ export default {
         _inflight = {};
         _taginfoCache = {};
         _popularKeys = {
-            postal_code: true   // #5377
+            // manually exclude some keys – #5377, #7485
+            postal_code: true,
+            full_name: true,
+            loc_name: true,
+            reg_name: true,
+            short_name: true,
+            sorting_name: true,
+            artist_name: true,
+            nat_name: true,
+            long_name: true,
+            'bridge:name': true
         };
 
         // Fetch popular keys.  We'll exclude these from `values`

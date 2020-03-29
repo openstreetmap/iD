@@ -1,5 +1,3 @@
-import { select as d3_select } from 'd3-selection';
-
 import { t, textDirection } from '../../util/locale';
 import { localize } from './helper';
 
@@ -132,7 +130,7 @@ export function uiIntro(context) {
 
           if (i < chapterFlow.length - 1) {
             const next = chapterFlow[i + 1];
-            d3_select(`button.chapter-${next}`)
+            context.container().select(`button.chapter-${next}`)
               .classed('next', true);
           }
 

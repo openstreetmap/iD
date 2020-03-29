@@ -25,7 +25,6 @@ import {
 import { modeBrowse } from './browse';
 import { modeSelect } from './select';
 import { osmJoinWays, osmNode } from '../osm';
-import { uiFlash } from '../ui/flash';
 import { utilArrayIntersection, utilKeybinding } from '../util';
 
 
@@ -136,7 +135,7 @@ export function modeDragNode(context) {
 
         if (_isCancelled) {
             if (hasHidden) {
-                uiFlash()
+                context.ui().flash
                     .duration(4000)
                     .text(t('modes.drag_node.connected_to_hidden'))();
             }
@@ -235,7 +234,7 @@ export function modeDragNode(context) {
         var nope = context.surface().classed('nope');
         if (isInvalid === 'relation' || isInvalid === 'restriction') {
             if (!nope) {   // about to nope - show hint
-                uiFlash()
+                context.ui().flash
                     .duration(4000)
                     .text(t('operations.connect.' + isInvalid,
                         { relation: context.presets().item('type/restriction').name() }
@@ -243,12 +242,12 @@ export function modeDragNode(context) {
             }
         } else if (isInvalid) {
             var errorID = isInvalid === 'line' ? 'lines' : 'areas';
-            uiFlash()
+            context.ui().flash
                 .duration(3000)
                 .text(t('self_intersection.error.' + errorID))();
         } else {
             if (nope) {   // about to un-nope, remove hint
-                uiFlash()
+                context.ui().flash
                     .duration(1)
                     .text('')();
             }

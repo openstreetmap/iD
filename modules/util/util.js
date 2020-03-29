@@ -1,7 +1,7 @@
 import { remove as removeDiacritics } from 'diacritics';
 import { fixRTLTextForSvg, rtlRegex } from './svg_paths_rtl_fix';
 
-import { t, textDirection } from './locale';
+import { t } from './locale';
 import { utilArrayUnion } from './array';
 import { utilDetect } from './detect';
 
@@ -431,10 +431,6 @@ export function utilFastMouse(container) {
     var rectTop = rect.top;
     var clientLeft = +container.clientLeft;
     var clientTop = +container.clientTop;
-
-    if (textDirection === 'rtl') {
-        rectLeft = 0;
-    }
     return function(e) {
         return [
             e.clientX - rectLeft - clientLeft,

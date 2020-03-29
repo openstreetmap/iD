@@ -1,4 +1,4 @@
-import { event as d3_event, mouse as d3_mouse, select as d3_select } from 'd3-selection';
+import { event as d3_event, select as d3_select } from 'd3-selection';
 
 import { geoVecLength } from '../geo';
 import { modeBrowse } from '../modes/browse';
@@ -8,6 +8,7 @@ import { modeSelectNote } from '../modes/select_note';
 import { modeSelectError } from '../modes/select_error';
 import { osmEntity, osmNote, QAItem } from '../osm';
 import { utilArrayIdentical } from '../util/array';
+import { utilFastMouse } from '../util/util';
 
 
 export function behaviorSelect(context) {
@@ -22,7 +23,7 @@ export function behaviorSelect(context) {
     var _pointerPrefix = 'PointerEvent' in window ? 'pointer' : 'mouse';
 
     function point() {
-        return d3_mouse(context.container().node());
+        return utilFastMouse(context.container().node())(d3_event);
     }
 
 

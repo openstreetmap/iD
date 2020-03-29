@@ -74,9 +74,9 @@ export function svgOpenstreetcamImages(projection, context, dispatch) {
         if (!service) return;
 
         service
-            .selectImage(d)
-            .updateViewer(d)
-            .showViewer();
+            .selectImage(context, d)
+            .updateViewer(context, d)
+            .showViewer(context);
 
         context.map().centerEase(d.loc);
     }
@@ -84,13 +84,13 @@ export function svgOpenstreetcamImages(projection, context, dispatch) {
 
     function mouseover(d) {
         var service = getService();
-        if (service) service.setStyles(d);
+        if (service) service.setStyles(context, d);
     }
 
 
     function mouseout() {
         var service = getService();
-        if (service) service.setStyles(null);
+        if (service) service.setStyles(context, null);
     }
 
 

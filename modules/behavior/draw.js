@@ -2,7 +2,6 @@ import { dispatch as d3_dispatch } from 'd3-dispatch';
 
 import {
     event as d3_event,
-    mouse as d3_mouse,
     select as d3_select
 } from 'd3-selection';
 
@@ -10,7 +9,7 @@ import { behaviorEdit } from './edit';
 import { behaviorHover } from './hover';
 import { behaviorTail } from './tail';
 import { geoChooseEdge, geoVecLength } from '../geo';
-import { utilKeybinding, utilRebind } from '../util';
+import { utilFastMouse, utilKeybinding, utilRebind } from '../util';
 
 var _usedTails = {};
 var _disableSpace = false;
@@ -62,19 +61,17 @@ export function behaviorDraw(context) {
 
     function pointerdown() {
 
-        function point() {
-            return d3_mouse(context.container().node());
-        }
+        var pointerLocGetter = utilFastMouse(this);
 
         var element = d3_select(this);
         var t1 = +new Date();
-        var p1 = point();
+        var p1 = pointerLocGetter(d3_event);
 
         element.on(_pointerPrefix + 'move.draw', null);
 
         d3_select(window).on(_pointerPrefix + 'up.draw', function() {
             var t2 = +new Date();
-            var p2 = point();
+            var p2 = pointerLocGetter(d3_event);
             var dist = geoVecLength(p1, p2);
 
             element.on(_pointerPrefix + 'move.draw', pointermove);
@@ -93,7 +90,7 @@ export function behaviorDraw(context) {
                     d3_select(window).on('click.draw-block', null);
                 }, 500);
 
-                click(d3_mouse(context.surface().node()));
+                click(p2);
             }
         }, true);
     }

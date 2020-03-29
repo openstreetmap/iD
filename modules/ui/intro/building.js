@@ -339,7 +339,7 @@ export function uiIntroBuilding(context, reveal) {
             if (ids.length !== 1 || ids[0] !== _houseID) return;
 
             timeout(function() {
-                var node = selectMenuItem('orthogonalize').node();
+                var node = selectMenuItem(context, 'orthogonalize').node();
                 if (!node) return;
                 continueTo(clickSquare);
             }, 300);  // after menu visible
@@ -367,7 +367,7 @@ export function uiIntroBuilding(context, reveal) {
         var entity = context.hasEntity(_houseID);
         if (!entity) return continueTo(rightClickHouse);
 
-        var node = selectMenuItem('orthogonalize').node();
+        var node = selectMenuItem(context, 'orthogonalize').node();
         if (!node) { return continueTo(rightClickHouse); }
 
         var wasChanged = false;
@@ -386,7 +386,7 @@ export function uiIntroBuilding(context, reveal) {
         });
 
         context.map().on('move.intro drawn.intro', function() {
-            var node = selectMenuItem('orthogonalize').node();
+            var node = selectMenuItem(context, 'orthogonalize').node();
             if (!wasChanged && !node) { return continueTo(rightClickHouse); }
 
             revealEditMenu(menuCoords,
@@ -657,7 +657,7 @@ export function uiIntroBuilding(context, reveal) {
                 if (ids.length !== 1 || ids[0] !== _tankID) return;
 
                 timeout(function() {
-                    var node = selectMenuItem('circularize').node();
+                    var node = selectMenuItem(context, 'circularize').node();
                     if (!node) return;
                     continueTo(clickCircle);
                 }, 300);  // after menu visible
@@ -689,7 +689,7 @@ export function uiIntroBuilding(context, reveal) {
         var entity = context.hasEntity(_tankID);
         if (!entity) return continueTo(rightClickTank);
 
-        var node = selectMenuItem('circularize').node();
+        var node = selectMenuItem(context, 'circularize').node();
         if (!node) { return continueTo(rightClickTank); }
 
         var wasChanged = false;
@@ -708,7 +708,7 @@ export function uiIntroBuilding(context, reveal) {
         });
 
         context.map().on('move.intro drawn.intro', function() {
-            var node = selectMenuItem('circularize').node();
+            var node = selectMenuItem(context, 'circularize').node();
             if (!wasChanged && !node) { return continueTo(rightClickTank); }
 
             revealEditMenu(menuCoords,

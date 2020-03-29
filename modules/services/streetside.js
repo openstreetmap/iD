@@ -3,8 +3,7 @@ import { timer as d3_timer } from 'd3-timer';
 
 import {
   event as d3_event,
-  select as d3_select,
-  selectAll as d3_selectAll
+  select as d3_select
 } from 'd3-selection';
 
 import RBush from 'rbush';
@@ -500,7 +499,7 @@ export default {
     let that = this;
 
     // create ms-wrapper, a photo wrapper class
-    let wrap = d3_select('.photoviewer').selectAll('.ms-wrapper')
+    let wrap = context.container().select('.photoviewer').selectAll('.ms-wrapper')
       .data([0]);
 
     // inject ms-wrapper into the photoviewer div
@@ -567,7 +566,7 @@ export default {
 
     function step(stepBy) {
       return () => {
-        let viewer = d3_select('.photoviewer');
+        let viewer = context.container().select('.photoviewer');
         let selected = viewer.empty() ? undefined : viewer.datum();
         if (!selected) return;
 
@@ -630,11 +629,11 @@ export default {
 
         context.map().centerEase(nextBubble.loc);
 
-        that.selectImage(nextBubble)
+        that.selectImage(context, nextBubble)
           .then(response => {
             if (response.status === 'ok') {
               _sceneOptions.yaw = yaw;
-              that.showViewer();
+              that.showViewer(context);
             }
           });
       };
@@ -645,7 +644,7 @@ export default {
   /**
    * showViewer()
    */
-  showViewer: function(yaw) {
+  showViewer: function(context, yaw) {
     if (!_sceneOptions) return;
 
     if (yaw !== undefined) {
@@ -669,7 +668,7 @@ export default {
       }
     }
 
-    let wrap = d3_select('.photoviewer')
+    let wrap = context.container().select('.photoviewer')
       .classed('hide', false);
 
     let isHidden = wrap.selectAll('.photo-wrapper.ms-wrapper.hide').size();
@@ -703,21 +702,21 @@ export default {
     context.container().selectAll('.viewfield-group, .sequence, .icon-sign')
       .classed('currentView', false);
 
-    return this.setStyles(null, true);
+    return this.setStyles(context, null, true);
   },
 
 
   /**
    * selectImage().
    */
-  selectImage: function (d) {
+  selectImage: function (context, d) {
     let that = this;
-    let viewer = d3_select('.photoviewer');
+    let viewer = context.container().select('.photoviewer');
     if (!viewer.empty()) viewer.datum(d);
 
-    this.setStyles(null, true);
+    this.setStyles(context, null, true);
 
-    let wrap = d3_select('.photoviewer .ms-wrapper');
+    let wrap = context.container().select('.photoviewer .ms-wrapper');
     let attribution = wrap.selectAll('.photo-attribution').html('');
 
     wrap.selectAll('.pnlm-load-box')   // display "loading.."
@@ -757,11 +756,11 @@ export default {
           hfov: _pannellumViewer.getHfov()
         };
 
-        that.selectImage(d)
+        that.selectImage(context, d)
           .then(response => {
             if (response.status === 'ok') {
               _sceneOptions = Object.assign(_sceneOptions, viewstate);
-              that.showViewer();
+              that.showViewer(context);
             }
           });
       });
@@ -879,14 +878,14 @@ export default {
   // Updates the currently highlighted sequence and selected bubble.
   // Reset is only necessary when interacting with the viewport because
   // this implicitly changes the currently selected bubble/sequence
-  setStyles: function (hovered, reset) {
+  setStyles: function (context, hovered, reset) {
     if (reset) {  // reset all layers
-      d3_selectAll('.viewfield-group')
+      context.container().selectAll('.viewfield-group')
         .classed('highlighted', false)
         .classed('hovered', false)
         .classed('currentView', false);
 
-      d3_selectAll('.sequence')
+      context.container().selectAll('.sequence')
         .classed('highlighted', false)
         .classed('currentView', false);
     }
@@ -896,7 +895,7 @@ export default {
     let hoveredSequence = hoveredSequenceKey && _ssCache.sequences[hoveredSequenceKey];
     let hoveredBubbleKeys =  (hoveredSequence && hoveredSequence.bubbles.map(d => d.key)) || [];
 
-    let viewer = d3_select('.photoviewer');
+    let viewer = context.container().select('.photoviewer');
     let selected = viewer.empty() ? undefined : viewer.datum();
     let selectedBubbleKey = selected && selected.key;
     let selectedSequenceKey = this.getSequenceKeyForBubble(selected);
@@ -906,17 +905,17 @@ export default {
     // highlight sibling viewfields on either the selected or the hovered sequences
     let highlightedBubbleKeys = utilArrayUnion(hoveredBubbleKeys, selectedBubbleKeys);
 
-    d3_selectAll('.layer-streetside-images .viewfield-group')
+    context.container().selectAll('.layer-streetside-images .viewfield-group')
       .classed('highlighted', d => highlightedBubbleKeys.indexOf(d.key) !== -1)
       .classed('hovered',     d => d.key === hoveredBubbleKey)
       .classed('currentView', d => d.key === selectedBubbleKey);
 
-    d3_selectAll('.layer-streetside-images .sequence')
+    context.container().selectAll('.layer-streetside-images .sequence')
       .classed('highlighted', d => d.properties.key === hoveredSequenceKey)
       .classed('currentView', d => d.properties.key === selectedSequenceKey);
 
     // update viewfields if needed
-    d3_selectAll('.viewfield-group .viewfield')
+    context.container().selectAll('.viewfield-group .viewfield')
       .attr('d', viewfieldPath);
 
     function viewfieldPath() {

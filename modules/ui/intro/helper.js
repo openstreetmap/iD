@@ -1,5 +1,3 @@
-import { select as d3_select } from 'd3-selection';
-
 import { t } from '../../util/locale';
 import { geoSphericalDistance, geoVecNormalizedDot } from '../../geo';
 
@@ -134,8 +132,8 @@ export function isMostlySquare(points) {
 }
 
 
-export function selectMenuItem(operation) {
-    return d3_select('.edit-menu .edit-menu-item-' + operation);
+export function selectMenuItem(context, operation) {
+    return context.container().select('.edit-menu .edit-menu-item-' + operation);
 }
 
 

@@ -89,9 +89,9 @@ export function svgMapillaryImages(projection, context, dispatch) {
         if (!service) return;
 
         service
-            .selectImage(d.key)
-            .updateViewer(d.key, context)
-            .showViewer();
+            .selectImage(context, d.key)
+            .updateViewer(context, d.key)
+            .showViewer(context);
 
         context.map().centerEase(d.loc);
     }
@@ -99,13 +99,13 @@ export function svgMapillaryImages(projection, context, dispatch) {
 
     function mouseover(d) {
         var service = getService();
-        if (service) service.setStyles(d);
+        if (service) service.setStyles(context, d);
     }
 
 
     function mouseout() {
         var service = getService();
-        if (service) service.setStyles(null);
+        if (service) service.setStyles(context, null);
     }
 
 

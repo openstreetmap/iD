@@ -2,7 +2,6 @@ import { t } from '../util/locale';
 import { actionChangeTags } from '../actions/change_tags';
 import { behaviorDrawWay } from '../behavior/draw_way';
 import { modeSelect } from './select';
-import { uiFlash } from '../ui/flash';
 
 
 export function modeDrawLine(context, mode) {
@@ -65,7 +64,7 @@ export function modeDrawLine(context, mode) {
                 }
             })
             .on('rejectedSelfIntersection.modeDrawLine', function() {
-                uiFlash()
+                context.ui().flash
                     .text(t('self_intersection.error.lines'))();
             });
 

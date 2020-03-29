@@ -3,14 +3,13 @@ import { dispatch as d3_dispatch } from 'd3-dispatch';
 import {
     customEvent as d3_customEvent,
     event as d3_event,
-    mouse as d3_mouse,
     select as d3_select,
     selection as d3_selection
 } from 'd3-selection';
 
 import { osmNote } from '../osm';
 import { utilRebind } from '../util/rebind';
-import { utilPrefixCSSProperty, utilPrefixDOMProperty } from '../util';
+import { utilFastMouse, utilPrefixCSSProperty, utilPrefixDOMProperty } from '../util';
 
 
 /*
@@ -68,9 +67,12 @@ export function behaviorDrag() {
         _target = this;
         _event = eventOf(_target, arguments);
 
+        // only force reflow once per drag
+        var pointerLocGetter = utilFastMouse(_surface || _target.parentNode);
+
         var eventTarget = d3_event.target;
         var offset;
-        var startOrigin = point();
+        var startOrigin = pointerLocGetter(d3_event);
         var started = false;
         var selectEnable = d3_event_userSelectSuppress();
 
@@ -88,14 +90,8 @@ export function behaviorDrag() {
         d3_event.stopPropagation();
 
 
-        function point() {
-            var p = _surface || _target.parentNode;
-            return d3_mouse(p);
-        }
-
-
         function pointermove() {
-            var p = point();
+            var p = pointerLocGetter(d3_event);
             var dx = p[0] - startOrigin[0];
             var dy = p[1] - startOrigin[1];
 

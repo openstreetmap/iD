@@ -72,9 +72,9 @@ export function svgMapillarySigns(projection, context, dispatch) {
         });
 
         service
-            .selectImage(imageKey)
-            .updateViewer(imageKey, context)
-            .showViewer();
+            .selectImage(context, imageKey)
+            .updateViewer(context, imageKey)
+            .showViewer(context);
     }
 
 

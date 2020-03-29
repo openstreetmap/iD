@@ -98,10 +98,10 @@ export function svgStreetside(projection, context, dispatch) {
         _selectedSequence = d.sequenceKey;
 
         service
-            .selectImage(d)
+            .selectImage(context, d)
             .then(response => {
                 if (response.status === 'ok'){
-                    service.showViewer(_viewerYaw);
+                    service.showViewer(context, _viewerYaw);
                 }
             });
 
@@ -114,7 +114,7 @@ export function svgStreetside(projection, context, dispatch) {
      */
     function mouseover(d) {
         var service = getService();
-        if (service) service.setStyles(d);
+        if (service) service.setStyles(context, d);
     }
 
     /**
@@ -122,7 +122,7 @@ export function svgStreetside(projection, context, dispatch) {
      */
     function mouseout() {
         var service = getService();
-        if (service) service.setStyles(null);
+        if (service) service.setStyles(context, null);
     }
 
     /**
