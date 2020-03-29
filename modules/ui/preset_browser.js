@@ -14,7 +14,7 @@ import { uiTagReference } from './tag_reference';
 import { uiPresetFavoriteButton } from './preset_favorite_button';
 import { uiPresetIcon } from './preset_icon';
 //import { groupManager } from '../entities/group_manager';
-import { utilKeybinding, utilNoAuto } from '../util';
+import { utilKeybinding, utilNoAuto, utilUniqueDomId } from '../util';
 import { utilRebind } from '../util/rebind';
 
 export function uiPresetBrowser(context) {
@@ -520,9 +520,7 @@ export function uiPresetBrowser(context) {
         var item = selection
             .append('div')
             .attr('class', 'list-item')
-            .attr('id', function(d) {
-                return 'search-add-list-item-preset-' + d.id().replace(/[^a-zA-Z\d:]/g, '-');
-            })
+            .attr('id', function(d) { return utilUniqueDomId('preset-browser-list-item-' + d.id()); })
             .on('mouseover', function() {
                 poplistContent.selectAll('.list .list-item.focused')
                     .classed('focused', false);
@@ -653,7 +651,7 @@ export function uiPresetBrowser(context) {
 
         if (shouldExpand) {
             var subitems = item.subitems();
-            var selector = '#' + itemSelection.node().id + ' + *';
+            var selector = '#' + itemSelection.attr('id') + ' + *';
             item.subsection = d3_select(itemSelection.node().parentNode).insert('div', selector)
                 .attr('class', 'subsection subitems');
             var subitemsEnter = item.subsection.selectAll('.list-item')

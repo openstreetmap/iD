@@ -6,7 +6,7 @@ import { event as d3_event, select as d3_select } from 'd3-selection';
 import { modeAddArea, modeAddLine, modeAddPoint, modeBrowse } from '../../modes';
 import { t, textDirection } from '../../util/locale';
 import { uiTooltip } from '../tooltip';
-import { utilSafeClassName } from '../../util/util';
+import { utilUniqueDomId } from '../../util/util';
 import { uiPresetIcon } from '../preset_icon';
 
 
@@ -125,9 +125,7 @@ export function uiToolQuickPresets(context) {
             .attr('class', function(d) {
                 return d.button + ' add-button bar-button';
             })
-            .attr('id', function(d) {
-                return utilSafeClassName(d.button);
-            })
+            .attr('id', function(d) { return utilUniqueDomId('quick-preset-' + d.button); })
             .on('click.mode-buttons', function(d) {
                 if (d3_select(this).classed('disabled')) return;
                 toggleMode(d);
