@@ -25,7 +25,7 @@ export function uiToolAddFeature(context) {
         .allowedGeometry(['point', 'vertex', 'line', 'area'])
         .on('choose.addFeature', browserDidSelectPreset)
         .on('hide.addFeature', browserDidClose)
-        .scrollContainer(d3_select('.top-toolbar'));
+        .scrollContainer(context.container().select('.top-toolbar'));
 
     var button = d3_select(null);
 
@@ -95,7 +95,7 @@ export function uiToolAddFeature(context) {
                 .placement('bottom')
                 .title(t('modes.add_feature.description'))
                 .keys([key])
-                .scrollContainer(d3_select('.top-toolbar'))
+                .scrollContainer(context.container().select('.top-toolbar'))
             )
             .call(svgIcon('#' + tool.iconName, tool.iconClass));
 

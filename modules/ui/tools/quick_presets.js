@@ -140,7 +140,7 @@ export function uiToolQuickPresets(context) {
                 .keys(function(d) {
                     return d.key ? [d.key] : null;
                 })
-                .scrollContainer(d3_select('.top-toolbar'))
+                .scrollContainer(context.container().select('.top-toolbar'))
             );
 
         buttonsEnter
@@ -175,7 +175,7 @@ export function uiToolQuickPresets(context) {
 
     var _d3Dragger = d3_drag()
         .on('start', function() {
-            _scrollNode = d3_select('.top-toolbar').node();
+            _scrollNode = context.container().select('.top-toolbar').node();
 
             var node = d3_select(this).node();
             _dragOrigin = {

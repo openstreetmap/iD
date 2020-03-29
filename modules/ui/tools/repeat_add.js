@@ -1,4 +1,3 @@
-import { select as d3_select } from 'd3-selection';
 import { t } from '../../util/locale';
 import { svgIcon } from '../../svg/icon';
 import { uiTooltip } from '../tooltip';
@@ -18,7 +17,7 @@ export function uiToolRepeatAdd(context) {
     var tooltipBehavior = uiTooltip()
         .placement('bottom')
         .keys([key])
-        .scrollContainer(d3_select('.top-toolbar'));
+        .scrollContainer(context.container().select('.top-toolbar'));
 
     tool.render = function(selection) {
 

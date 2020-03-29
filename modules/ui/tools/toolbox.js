@@ -27,7 +27,7 @@ export function uiToolToolbox(context) {
             .placement('bottom')
             .alignment('leading')
             .hasArrow(false)
-            .scrollContainer(d3_select('.top-toolbar'));
+            .scrollContainer(context.container().select('.top-toolbar'));
 
     tool.render = function(selection) {
 
@@ -43,7 +43,7 @@ export function uiToolToolbox(context) {
             .call(uiTooltip()
                 .placement('bottom')
                 .title(t('toolbar.toolbox.tooltip'))
-                .scrollContainer(d3_select('.top-toolbar'))
+                .scrollContainer(context.container().select('.top-toolbar'))
             )
             .call(svgIcon('#fas-toolbox'));
 

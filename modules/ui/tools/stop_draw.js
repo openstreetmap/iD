@@ -7,7 +7,7 @@ export function uiToolStopDraw(context) {
 
     var cancelOrFinish = 'cancel';
 
-    var tool = uiToolSimpleButton({
+    var tool = uiToolSimpleButton(context, {
         id: 'stop_draw',
         label: function() {
             if (cancelOrFinish === 'finish') {

@@ -1,15 +1,14 @@
-import { select as d3_select } from 'd3-selection';
 import { svgIcon } from '../../svg/icon';
 import { uiTooltip } from '../tooltip';
 import { utilFunctor } from '../../util/util';
 
-export function uiToolSimpleButton(protoTool) {
+export function uiToolSimpleButton(context, protoTool) {
 
     var tool = protoTool || {};
 
     var tooltipBehavior = uiTooltip()
         .placement('bottom')
-        .scrollContainer(d3_select('.top-toolbar'));
+        .scrollContainer(context.container().select('.top-toolbar'));
 
     tool.render = function(selection) {
 
