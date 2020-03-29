@@ -151,7 +151,7 @@ export function svgTagClasses() {
             for (k in t) {
                 v = t[k];
                 if (k in osmPavedTags) {
-                    surface = !!osmPavedTags[k][v] ? 'paved' : 'unpaved';
+                    surface = osmPavedTags[k][v] ? 'paved' : 'unpaved';
                 }
                 if (k in osmSemipavedTags && !!osmSemipavedTags[k][v]) {
                     surface = 'semipaved';
