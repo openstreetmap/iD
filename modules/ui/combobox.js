@@ -389,12 +389,13 @@ export function uiCombobox(context, klass) {
                 .order();
 
             var node = attachTo ? attachTo.node() : input.node();
+            var containerRect = container.node().getBoundingClientRect();
             var rect = node.getBoundingClientRect();
 
             combo
-                .style('left', (rect.left + 5) + 'px')
+                .style('left', (rect.left + 5 - containerRect.left) + 'px')
                 .style('width', (rect.width - 10) + 'px')
-                .style('top', rect.height + rect.top + 'px');
+                .style('top', (rect.height + rect.top - containerRect.top) + 'px');
         }
 
 
