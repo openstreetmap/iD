@@ -401,7 +401,7 @@ export function uiIntroPoint(context, reveal) {
             if (ids.length !== 1 || ids[0] !== _pointID) return;
 
             timeout(function() {
-                var node = selectMenuItem('delete').node();
+                var node = selectMenuItem(context, 'delete').node();
                 if (!node) return;
                 continueTo(enterDelete);
             }, 300);  // after menu visible
@@ -420,7 +420,7 @@ export function uiIntroPoint(context, reveal) {
         var entity = context.hasEntity(_pointID);
         if (!entity) return chapter.restart();
 
-        var node = selectMenuItem('delete').node();
+        var node = selectMenuItem(context, 'delete').node();
         if (!node) { return continueTo(rightClickPoint); }
 
         revealEditMenu(entity.loc,

@@ -672,7 +672,7 @@ export function uiIntroLine(context, reveal) {
                 if (ids.length !== 1 || ids[0] !== eleventhAvenueEndID) return;
 
                 timeout(function() {
-                    var node = selectMenuItem('split').node();
+                    var node = selectMenuItem(context, 'split').node();
                     if (!node) return;
                     continueTo(splitIntersection);
                 }, 300);  // after menu visible
@@ -702,7 +702,7 @@ export function uiIntroLine(context, reveal) {
             return continueTo(deleteLines);
         }
 
-        var node = selectMenuItem('split').node();
+        var node = selectMenuItem(context, 'split').node();
         if (!node) { return continueTo(rightClickIntersection); }
 
         var wasChanged = false;
@@ -714,7 +714,7 @@ export function uiIntroLine(context, reveal) {
         );
 
         context.map().on('move.intro drawn.intro', function() {
-            var node = selectMenuItem('split').node();
+            var node = selectMenuItem(context, 'split').node();
             if (!wasChanged && !node) { return continueTo(rightClickIntersection); }
 
             revealEditMenu(menuCoords, t('intro.lines.split_intersection',
@@ -940,7 +940,7 @@ export function uiIntroLine(context, reveal) {
                 if (ids.length === 2 &&
                     ids.indexOf(twelfthAvenueID) !== -1 &&
                     ids.indexOf(_washingtonSegmentID) !== -1) {
-                        var node = selectMenuItem('delete').node();
+                        var node = selectMenuItem(context, 'delete').node();
                         if (!node) return;
                         continueTo(multiDelete);
                 } else if (ids.length === 1 &&
@@ -980,7 +980,7 @@ export function uiIntroLine(context, reveal) {
             return continueTo(rightClickIntersection);
         }
 
-        var node = selectMenuItem('delete').node();
+        var node = selectMenuItem(context, 'delete').node();
         if (!node) return continueTo(multiRightClick);
 
         var menuCoords = context.map().mouseCoordinates();
