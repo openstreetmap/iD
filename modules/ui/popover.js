@@ -205,9 +205,11 @@ export function uiPopover(klass) {
 
     function updateContent() {
         var anchor = d3_select(this);
-        var popoverSelection = anchor.selectAll('.popover-' + _id);
 
-        if (_content) popoverSelection.selectAll('.popover-inner').call(_content.apply(this, arguments));
+        if (_content) {
+            anchor.selectAll('.popover-' + _id + ' > .popover-inner')
+                .call(_content.apply(this, arguments));
+        }
 
         updatePosition.apply(this, arguments);
         // hack: update twice to fix instances where the absolute offset is
@@ -277,7 +279,7 @@ export function uiPopover(klass) {
                     position.x = 10;
                 }
 
-                var arrow = popoverSelection.selectAll('.popover-arrow');
+                var arrow = anchor.selectAll('.popover-' + _id + ' > .popover-arrow');
                 // keep the arrow centered on the button, or as close as possible
                 var arrowPosX = Math.min(Math.max(popoverFrame.w / 2 - (position.x - initialPosX), 10), popoverFrame.w - 10);
                 arrow.style('left', ~~arrowPosX + 'px');
