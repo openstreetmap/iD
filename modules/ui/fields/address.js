@@ -2,10 +2,11 @@ import { dispatch as d3_dispatch } from 'd3-dispatch';
 import { select as d3_select } from 'd3-selection';
 import * as countryCoder from '@ideditor/country-coder';
 
+import { fileFetcher } from '../../core/file_fetcher';
 import { geoExtent, geoChooseEdge, geoSphericalDistance } from '../../geo';
 import { uiCombobox } from '../combobox';
 import { utilArrayUniqBy, utilGetSetValue, utilNoAuto, utilRebind } from '../../util';
-import { t } from '../../util/locale';
+import { t } from '../../core/localizer';
 
 
 export function uiFieldAddress(field, context) {
@@ -24,7 +25,7 @@ export function uiFieldAddress(field, context) {
         ]
       }];
 
-    context.data().get('address_formats')
+    fileFetcher.get('address_formats')
         .then(function(d) { _addressFormats = d; })
         .catch(function() { /* ignore */ });
 

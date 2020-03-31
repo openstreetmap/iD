@@ -1,6 +1,6 @@
 import { actionMergeNodes } from '../actions/merge_nodes';
 import { utilDisplayLabel } from '../util';
-import { t } from '../util/locale';
+import { t } from '../core/localizer';
 import { validationIssue, validationIssueFix } from '../core/validation';
 import { osmPathHighwayTagValues } from '../osm/tags';
 import { geoMetersToLat, geoMetersToLon, geoSphericalDistance } from '../geo/geo';

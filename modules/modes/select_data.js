@@ -10,7 +10,7 @@ import { behaviorHover } from '../behavior/hover';
 import { behaviorLasso } from '../behavior/lasso';
 import { behaviorSelect } from '../behavior/select';
 
-import { t } from '../util/locale';
+import { t } from '../core/localizer';
 
 import { geoExtent } from '../geo';
 import { modeBrowse } from './browse';

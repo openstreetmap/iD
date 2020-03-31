@@ -3,7 +3,7 @@ import { select as d3_select } from 'd3-selection';
 
 import { uiCombobox } from '../combobox';
 import { utilGetSetValue, utilNoAuto, utilRebind } from '../../util';
-import { t } from '../../util/locale';
+import { t } from '../../core/localizer';
 
 
 export function uiFieldCycleway(field, context) {

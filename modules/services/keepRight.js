@@ -3,9 +3,10 @@ import RBush from 'rbush';
 import { dispatch as d3_dispatch } from 'd3-dispatch';
 import { json as d3_json } from 'd3-fetch';
 
+import { fileFetcher } from '../core/file_fetcher';
 import { geoExtent, geoVecAdd } from '../geo';
 import { QAItem } from '../osm';
-import { t } from '../util/locale';
+import { t } from '../core/localizer';
 import { utilRebind, utilTiler, utilQsString } from '../util';
 
 
@@ -257,8 +258,8 @@ function parseError(capture, idType) {
 export default {
   title: 'keepRight',
 
-  init(context) {
-    context.data().get('keepRight')
+  init() {
+    fileFetcher.get('keepRight')
       .then(d => _krData = d);
 
     if (!_cache) {

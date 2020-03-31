@@ -2,7 +2,7 @@ import { dispatch as d3_dispatch } from 'd3-dispatch';
 import { select as d3_select } from 'd3-selection';
 import deepEqual from 'fast-deep-equal';
 
-import { t } from '../util/locale';
+import { t, localizer } from '../core/localizer';
 import { osmChangeset } from '../osm';
 import { svgIcon } from '../svg/icon';
 import { services } from '../services';
@@ -92,7 +92,7 @@ export function uiCommit(context) {
                 comment: context.storage('comment') || '',
                 created_by: ('iD ' + context.version).substr(0, tagCharLimit),
                 host: detected.host.substr(0, tagCharLimit),
-                locale: detected.locale.substr(0, tagCharLimit)
+                locale: localizer.localeCode().substr(0, tagCharLimit)
             };
 
             // call findHashtags initially - this will remove stored

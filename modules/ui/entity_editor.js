@@ -2,7 +2,7 @@ import { dispatch as d3_dispatch } from 'd3-dispatch';
 import { event as d3_event } from 'd3-selection';
 import deepEqual from 'fast-deep-equal';
 
-import { t, textDirection } from '../util/locale';
+import { t, localizer } from '../core/localizer';
 import { actionChangeTags } from '../actions/change_tags';
 import { modeBrowse } from '../modes/browse';
 import { svgIcon } from '../svg/icon';
@@ -45,7 +45,7 @@ export function uiEntityEditor(context) {
         headerEnter
             .append('button')
             .attr('class', 'fl preset-reset preset-choose')
-            .call(svgIcon((textDirection === 'rtl') ? '#iD-icon-forward' : '#iD-icon-backward'));
+            .call(svgIcon((localizer.textDirection() === 'rtl') ? '#iD-icon-forward' : '#iD-icon-backward'));
 
         headerEnter
             .append('button')

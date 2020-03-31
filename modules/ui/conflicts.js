@@ -5,7 +5,7 @@ import {
     select as d3_select
 } from 'd3-selection';
 
-import { t } from '../util/locale';
+import { t } from '../core/localizer';
 import { JXON } from '../util/jxon';
 import { geoExtent } from '../geo';
 import { osmChangeset } from '../osm';

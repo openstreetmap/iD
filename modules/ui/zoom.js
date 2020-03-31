@@ -3,7 +3,7 @@ import {
     select as d3_select
 } from 'd3-selection';
 
-import { t, textDirection } from '../util/locale';
+import { t, localizer } from '../core/localizer';
 import { svgIcon } from '../svg/icon';
 import { uiCmd } from './cmd';
 import { uiTooltip } from './tooltip';
@@ -57,7 +57,7 @@ export function uiZoom(context) {
                 }
             })
             .call(uiTooltip()
-                .placement((textDirection === 'rtl') ? 'right' : 'left')
+                .placement((localizer.textDirection() === 'rtl') ? 'right' : 'left')
                 .title(function(d) {
                     return d.title;
                 })

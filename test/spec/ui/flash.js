@@ -2,8 +2,9 @@ describe('iD.uiFlash', function () {
     var context;
 
     beforeEach(function() {
-        context = iD.coreContext().init();
-        d3.select('body')
+        var container = d3.select('body');
+        context = iD.coreContext().init().container(container);
+        container
             .append('div')
             .attr('class', 'flash-wrap')
             .append('div')

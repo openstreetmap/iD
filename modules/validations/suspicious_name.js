@@ -1,4 +1,6 @@
-import { t, languageName } from '../util/locale';
+import { fileFetcher } from '../core/file_fetcher';
+import { localizer } from '../core/localizer';
+import { t } from '../core/localizer';
 import { utilPreset } from '../util';
 import { validationIssue, validationIssueFix } from '../core/validation';
 import { actionChangeTags } from '../actions/change_tags';
@@ -6,14 +8,14 @@ import { actionChangeTags } from '../actions/change_tags';
 
 let _discardNameRegexes = [];
 
-export function validationSuspiciousName(context) {
+export function validationSuspiciousName() {
   const type = 'suspicious_name';
   const keysToTestForGenericValues = ['amenity', 'building', 'leisure', 'man_made', 'shop', 'tourism'];
 
   // A concern here in switching to async data means that `_nsiFilters` will not
   // be available at first, so the data on early tiles may not have tags validated fully.
 
-  context.data().get('nsi_filters')
+  fileFetcher.get('nsi_filters')
     .then(filters => {
       // known list of generic names (e.g. "bar")
       _discardNameRegexes = filters.discardNames
@@ -58,7 +60,7 @@ export function validationSuspiciousName(context) {
         let entity = context.hasEntity(this.entityIds[0]);
         if (!entity) return '';
         let preset = utilPreset(entity, context);
-        let langName = langCode && languageName(context, langCode);
+        let langName = langCode && localizer.languageName(langCode);
         return t('issues.generic_name.message' + (langName ? '_language' : ''),
           { feature: preset.name(), name: genericName, language: langName }
         );
@@ -104,7 +106,7 @@ export function validationSuspiciousName(context) {
         const entity = context.hasEntity(this.entityIds[0]);
         if (!entity) return '';
         const preset = utilPreset(entity, context);
-        const langName = langCode && languageName(context, langCode);
+        const langName = langCode && localizer.languageName(langCode);
         return t('issues.incorrect_name.message' + (langName ? '_language' : ''),
           { feature: preset.name(), name: incorrectName, language: langName }
         );

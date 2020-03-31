@@ -1,5 +1,5 @@
 import { services } from '../services';
-import { t } from '../util/locale';
+import { t } from '../core/localizer';
 
 
 export function uiOsmoseHeader() {

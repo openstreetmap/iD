@@ -1,7 +1,7 @@
 import _debounce from 'lodash-es/debounce';
 
 import { svgIcon } from '../../svg/icon';
-import { t } from '../../util/locale';
+import { t } from '../../core/localizer';
 import { uiSection } from '../section';
 
 export function uiSectionValidationStatus(context) {

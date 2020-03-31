@@ -2,7 +2,7 @@ import _debounce from 'lodash-es/debounce';
 
 import { json as d3_json } from 'd3-fetch';
 
-import { utilDetect } from '../util/detect';
+import { localizer } from '../core/localizer';
 import { utilQsString } from '../util';
 
 
@@ -258,7 +258,7 @@ export default {
     //
     getDocs: function(params, callback) {
         var that = this;
-        var langCode = utilDetect().locale.toLowerCase();
+        var langCode = localizer.localeCode().toLowerCase();
         params.langCode = langCode;
 
         this.getEntity(params, function(err, data) {

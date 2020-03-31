@@ -1,20 +1,18 @@
 import { geoArea as d3_geoArea, geoMercatorRaw as d3_geoMercatorRaw } from 'd3-geo';
 import { json as d3_json } from 'd3-fetch';
 
-import { t } from '../util/locale';
+import { t, localizer } from '../core/localizer';
 import { geoExtent, geoSphericalDistance } from '../geo';
 import { utilQsString, utilStringQs } from '../util';
 import { utilAesDecrypt } from '../util/aes';
-import { utilDetect } from '../util/detect';
 
 
 function localeDateString(s) {
     if (!s) return null;
-    var detected = utilDetect();
     var options = { day: 'numeric', month: 'short', year: 'numeric' };
     var d = new Date(s);
     if (isNaN(d.getTime())) return null;
-    return d.toLocaleDateString(detected.locale, options);
+    return d.toLocaleDateString(localizer.localeCode(), options);
 }
 
 function vintageRange(vintage) {

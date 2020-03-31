@@ -1,7 +1,7 @@
 import { interpolateRgb as d3_interpolateRgb } from 'd3-interpolate';
 import { event as d3_event } from 'd3-selection';
 
-import { t } from '../../util/locale';
+import { t } from '../../core/localizer';
 import { modeSave } from '../../modes';
 import { svgIcon } from '../../svg';
 import { uiCmd } from '../cmd';

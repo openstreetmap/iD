@@ -6,7 +6,7 @@ import { modeSelect } from '../modes/select';
 import { osmJoinWays } from '../osm/multipolygon';
 import { osmNodeGeometriesForTags } from '../osm/tags';
 import { geoHasSelfIntersections, geoSphericalDistance } from '../geo';
-import { t } from '../util/locale';
+import { t } from '../core/localizer';
 import { utilDisplayLabel, utilTagText } from '../util';
 import { validationIssue, validationIssueFix } from '../core/validation';
 

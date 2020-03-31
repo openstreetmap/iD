@@ -1,7 +1,7 @@
 import { event as d3_event, select as d3_select } from 'd3-selection';
 
 import { geoVecAdd } from '../geo';
-import { textDirection } from '../util/locale';
+import { localizer } from '../core/localizer';
 import { uiTooltip } from './tooltip';
 import { svgIcon } from '../svg/icon';
 
@@ -96,7 +96,7 @@ export function uiEditMenu(context) {
     };
 
     function displayOnLeft(viewport) {
-        if (textDirection === 'ltr') {
+        if (localizer.textDirection() === 'ltr') {
             if ((_anchorLoc[0] + _menuSideMargin + _menuWidth) > (viewport.width - _vpSideMargin)) {
                 // right menu would be too close to the right viewport edge, go left
                 return true;
@@ -115,7 +115,7 @@ export function uiEditMenu(context) {
     }
 
     function tooltipPosition(viewport, menuLeft) {
-        if (textDirection === 'ltr') {
+        if (localizer.textDirection() === 'ltr') {
             if (menuLeft) {
                 // if there's not room for a right-side menu then there definitely
                 // isn't room for right-side tooltips

@@ -5,7 +5,8 @@ import { json as d3_json } from 'd3-fetch';
 
 import marked from 'marked';
 
-import { currentLocale } from '../util/locale';
+import { fileFetcher } from '../core/file_fetcher';
+import { localizer } from '../core/localizer';
 import { geoExtent, geoVecAdd } from '../geo';
 import { QAItem } from '../osm';
 import { utilRebind, utilTiler, utilQsString } from '../util';
@@ -65,8 +66,8 @@ function preventCoincident(loc) {
 export default {
   title: 'osmose',
 
-  init(context) {
-    context.data().get('qa_data')
+  init() {
+    fileFetcher.get('qa_data')
       .then(d => {
         _osmoseData = d.osmose;
         _osmoseData.items = Object.keys(d.osmose.icons)
@@ -167,7 +168,7 @@ export default {
       return Promise.resolve(issue);
     }
 
-    const url = `${_osmoseUrlRoot}/issue/${issue.id}?langs=${currentLocale}`;
+    const url = `${_osmoseUrlRoot}/issue/${issue.id}?langs=${localizer.localeCode()}`;
     const cacheDetails = data => {
       // Associated elements used for highlighting
       // Assign directly for immediate use in the callback
@@ -182,7 +183,7 @@ export default {
     return d3_json(url).then(cacheDetails).then(() => issue);
   },
 
-  loadStrings(locale=currentLocale) {
+  loadStrings(locale=localizer.localeCode()) {
     const items = Object.keys(_osmoseData.icons);
 
     if (
@@ -248,7 +249,7 @@ export default {
     return Promise.all(allRequests).then(() => _cache.strings[locale]);
   },
 
-  getStrings(itemType, locale=currentLocale) {
+  getStrings(itemType, locale=localizer.localeCode()) {
     // No need to fallback to English, Osmose API handles this for us
     return (locale in _cache.strings) ? _cache.strings[locale][itemType] : {};
   },

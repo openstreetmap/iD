@@ -4,7 +4,7 @@ import {
     select as d3_select
 } from 'd3-selection';
 
-import { t, textDirection } from '../../util/locale';
+import { t, localizer } from '../../core/localizer';
 import { uiTooltip } from '../tooltip';
 import { svgIcon } from '../../svg/icon';
 import { geoExtent } from '../../geo';
@@ -330,7 +330,7 @@ export function uiSectionDataLayers(context) {
             .append('button')
             .call(uiTooltip()
                 .title(t('settings.custom_data.tooltip'))
-                .placement((textDirection === 'rtl') ? 'right' : 'left')
+                .placement((localizer.textDirection() === 'rtl') ? 'right' : 'left')
             )
             .on('click', editCustom)
             .call(svgIcon('#iD-icon-more'));
@@ -339,7 +339,7 @@ export function uiSectionDataLayers(context) {
             .append('button')
             .call(uiTooltip()
                 .title(t('map_data.layers.custom.zoom'))
-                .placement((textDirection === 'rtl') ? 'right' : 'left')
+                .placement((localizer.textDirection() === 'rtl') ? 'right' : 'left')
             )
             .on('click', function() {
                 d3_event.preventDefault();

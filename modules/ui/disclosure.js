@@ -5,7 +5,7 @@ import { svgIcon } from '../svg/icon';
 import { utilFunctor } from '../util';
 import { utilRebind } from '../util/rebind';
 import { uiToggle } from './toggle';
-import { textDirection } from '../util/locale';
+import { localizer } from '../core/localizer';
 
 
 export function uiDisclosure(context, key, expandedDefault) {
@@ -52,7 +52,7 @@ export function uiDisclosure(context, key, expandedDefault) {
 
         hideToggle.selectAll('.hide-toggle-icon')
             .attr('xlink:href', _expanded ? '#iD-icon-down'
-                : (textDirection === 'rtl') ? '#iD-icon-backward' : '#iD-icon-forward'
+                : (localizer.textDirection() === 'rtl') ? '#iD-icon-backward' : '#iD-icon-forward'
             );
 
 
@@ -86,7 +86,7 @@ export function uiDisclosure(context, key, expandedDefault) {
 
             hideToggle.selectAll('.hide-toggle-icon')
                 .attr('xlink:href', _expanded ? '#iD-icon-down'
-                    : (textDirection === 'rtl') ? '#iD-icon-backward' : '#iD-icon-forward'
+                    : (localizer.textDirection() === 'rtl') ? '#iD-icon-backward' : '#iD-icon-forward'
                 );
 
             wrap

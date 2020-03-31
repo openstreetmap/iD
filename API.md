@@ -198,19 +198,19 @@ delete iD.services.mapillary;
 
 ### Background Imagery
 
-iD's background imagery database is stored in the `iD.data.imagery` array and can be
+iD's background imagery database is stored in the `iD.fileFetcher.cache().imagery` array and can be
 overridden or modified prior to creating the iD context.
 
 Note that the "None" and "Custom" options will always be shown in the list.
 
 To remove all imagery from iD:
 ```js
-iD.data.imagery = [];
+iD.fileFetcher.cache().imagery = [];
 ```
 
 To replace all imagery with a single source:
 ```js
-iD.data.imagery = [{
+iD.fileFetcher.cache().imagery = [{
     "id": "ExampleImagery",
     "name": "My Imagery",
     "type": "tms",
@@ -239,13 +239,13 @@ Optional properties:
 * `terms_text` - Text content to display in the imagery terms
 * `best` - If set to `true`, this imagery is considered "better than Bing" and may be chosen by default when iD starts.  Will display with a star in the background imagery list.  Defaults to `false`
 
-For more details about the `iD.data.imagery` structure, see
+For more details about the `iD.fileFetcher.cache().imagery` structure, see
 [`update_imagery.js`](https://github.com/openstreetmap/iD/blob/develop/scripts/update_imagery.js).
 
 
 ### Presets
 
-iD's preset database is stored in the `iD.data.presets` object and can be overridden
+iD's preset database is stored in the `iD.fileFetcher.cache().presets` object and can be overridden
 or modified prior to creating the iD context.
 
 The format of the `presets` object is
@@ -253,7 +253,7 @@ The format of the `presets` object is
 
 To add a new preset to iD's existing preset database.
 ```js
-iD.data.presets.presets["aerialway/zipline"] = {
+iD.fileFetcher.cache().presets.presets["aerialway/zipline"] = {
     geometry: ["line"],
     fields: ["incline"],
     tags: { "aerialway": "zip_line" },
@@ -263,12 +263,12 @@ iD.data.presets.presets["aerialway/zipline"] = {
 
 To completely replace iD's default presets with your own:
 ```js
-iD.data.presets = myPresets;
+iD.fileFetcher.cache().presets = myPresets;
 ```
 
 To run iD with the minimal set of presets that only match basic geometry types:
 ```js
-iD.data.presets = {
+iD.fileFetcher.cache().presets = {
     presets: {
         "area": {
             "name": "Area",

@@ -4,7 +4,7 @@ import { modeSelect } from '../../modes/select';
 import { osmEntity } from '../../osm';
 import { svgIcon } from '../../svg/icon';
 import { uiSection } from '../section';
-import { t } from '../../util/locale';
+import { t } from '../../core/localizer';
 import { utilDisplayName, utilHighlightEntities } from '../../util';
 
 export function uiSectionSelectionList(context) {

@@ -6,7 +6,7 @@ import { uiIntro } from '../intro/intro';
 import { uiShortcuts } from '../shortcuts';
 import { uiPane } from '../pane';
 
-import { t, textDirection } from '../../util/locale';
+import { t, localizer } from '../../core/localizer';
 import { uiTooltip } from '../tooltip';
 import { icon } from '../intro/helper';
 
@@ -247,8 +247,8 @@ export function uiPaneHelp(context) {
         merge: icon('#iD-operation-merge', 'pre-text'),
         delete: icon('#iD-operation-delete', 'pre-text'),
         close: icon('#iD-icon-close', 'pre-text'),
-        undo: icon(textDirection === 'rtl' ? '#iD-icon-redo' : '#iD-icon-undo', 'pre-text'),
-        redo: icon(textDirection === 'rtl' ? '#iD-icon-undo' : '#iD-icon-redo', 'pre-text'),
+        undo: icon(localizer.textDirection() === 'rtl' ? '#iD-icon-redo' : '#iD-icon-undo', 'pre-text'),
+        redo: icon(localizer.textDirection() === 'rtl' ? '#iD-icon-undo' : '#iD-icon-redo', 'pre-text'),
         save: icon('#iD-icon-save', 'pre-text'),
         leftclick: icon('#iD-walkthrough-mouse', 'pre-text mouseclick', 'left'),
         rightclick: icon('#iD-walkthrough-mouse', 'pre-text mouseclick', 'right'),
@@ -283,7 +283,7 @@ export function uiPaneHelp(context) {
     helpPane.renderContent = function(content) {
 
         function clickHelp(d, i) {
-            var rtl = (textDirection === 'rtl');
+            var rtl = (localizer.textDirection() === 'rtl');
             content.property('scrollTop', 0);
             helpPane.selection().select('.pane-heading h2').html(d.title);
 

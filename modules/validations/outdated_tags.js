@@ -1,7 +1,8 @@
-import { t } from '../util/locale';
+import { t } from '../core/localizer';
 import { matcher } from 'name-suggestion-index';
 import * as countryCoder from '@ideditor/country-coder';
 
+import { fileFetcher } from '../core/file_fetcher';
 import { actionChangePreset } from '../actions/change_preset';
 import { actionChangeTags } from '../actions/change_tags';
 import { actionUpgradeTags } from '../actions/upgrade_tags';
@@ -22,11 +23,11 @@ export function validationOutdatedTags(context) {
   // may not have tags validated fully.
 
   // initialize deprecated tags array
-  context.data().get('deprecated')
+  fileFetcher.get('deprecated')
     .then(d => _dataDeprecated = d)
     .catch(() => { /* ignore */ });
 
-  context.data().get('nsi_brands')
+  fileFetcher.get('nsi_brands')
     .then(d => {
       _nsi = {
         brands: d.brands,

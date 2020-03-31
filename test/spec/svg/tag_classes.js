@@ -14,23 +14,23 @@ describe('iD.svgTagClasses', function () {
 
     it('adds classes for primary tag key and key-value', function() {
         selection
-            .datum(iD.osmEntity({tags: {highway: 'primary'}}))
+            .datum(iD.osmEntity({tags: {building: 'residential'}}))
             .call(iD.svgTagClasses());
-        expect(selection.attr('class')).to.equal('tag-highway tag-highway-primary');
+        expect(selection.attr('class')).to.equal('tag-building tag-building-residential');
     });
 
     it('adds only one primary tag', function() {
         selection
-            .datum(iD.osmEntity({tags: {highway: 'primary', railway: 'rail'}}))
+            .datum(iD.osmEntity({tags: {building: 'residential', railway: 'rail'}}))
             .call(iD.svgTagClasses());
-        expect(selection.attr('class')).to.equal('tag-highway tag-highway-primary');
+        expect(selection.attr('class')).to.equal('tag-building tag-building-residential');
     });
 
     it('orders primary tags', function() {
         selection
-            .datum(iD.osmEntity({tags: {railway: 'rail', highway: 'primary'}}))
+            .datum(iD.osmEntity({tags: {railway: 'rail', building: 'residential'}}))
             .call(iD.svgTagClasses());
-        expect(selection.attr('class')).to.equal('tag-highway tag-highway-primary');
+        expect(selection.attr('class')).to.equal('tag-building tag-building-residential');
     });
 
     it('adds status tag when status in primary value (`railway=abandoned`)', function() {
@@ -70,9 +70,9 @@ describe('iD.svgTagClasses', function () {
 
     it('adds secondary tags', function() {
         selection
-            .datum(iD.osmEntity({tags: {highway: 'primary', bridge: 'yes'}}))
+            .datum(iD.osmEntity({tags: {railway: 'rail', bridge: 'yes'}}))
             .call(iD.svgTagClasses());
-        expect(selection.attr('class')).to.equal('tag-highway tag-highway-primary tag-bridge tag-bridge-yes');
+        expect(selection.attr('class')).to.equal('tag-railway tag-railway-rail tag-bridge tag-bridge-yes');
     });
 
     it('adds no bridge=no tags', function() {
@@ -235,11 +235,11 @@ describe('iD.svgTagClasses', function () {
     });
 
     it('adds tags based on the result of the `tags` accessor', function() {
-        var primary = function () { return { highway: 'primary'}; };
+        var primary = function () { return { railway: 'rail'}; };
         selection
             .datum(iD.osmEntity())
             .call(iD.svgTagClasses().tags(primary));
-        expect(selection.attr('class')).to.equal('tag-highway tag-highway-primary');
+        expect(selection.attr('class')).to.equal('tag-railway tag-railway-rail');
     });
 
     it('removes classes for tags that are no longer present', function() {

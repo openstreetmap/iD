@@ -4,7 +4,7 @@ import {
     select as d3_select
 } from 'd3-selection';
 
-import { t, textDirection } from '../../util/locale';
+import { t, localizer } from '../../core/localizer';
 import { actionChangePreset } from '../../actions/change_preset';
 import { modeBrowse } from '../../modes/browse';
 import { modeSelect } from '../../modes/select';
@@ -38,7 +38,7 @@ export function uiIntroPoint(context, reveal) {
         var width = 250 + (2 * pad);
         var height = 250;
         var startX = rect.left + point[0];
-        var left = (textDirection === 'rtl') ? (startX - width + pad) : (startX - pad);
+        var left = (localizer.textDirection() === 'rtl') ? (startX - width + pad) : (startX - pad);
         var box = {
             left: left,
             top: point[1] + rect.top - 60,
@@ -462,7 +462,7 @@ export function uiIntroPoint(context, reveal) {
             continueTo(play);
         });
 
-        var iconName = '#iD-icon-' + (textDirection === 'rtl' ? 'redo' : 'undo');
+        var iconName = '#iD-icon-' + (localizer.textDirection() === 'rtl' ? 'redo' : 'undo');
         reveal('.top-toolbar button.undo-button',
             t('intro.points.undo', { button: icon(iconName, 'pre-text') })
         );

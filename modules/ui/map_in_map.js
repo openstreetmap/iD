@@ -2,7 +2,7 @@ import { geoPath as d3_geoPath } from 'd3-geo';
 import { event as d3_event, select as d3_select } from 'd3-selection';
 import { zoom as d3_zoom, zoomIdentity as d3_zoomIdentity } from 'd3-zoom';
 
-import { t } from '../util/locale';
+import { t } from '../core/localizer';
 import { geoRawMercator, geoScaleToZoom, geoVecSubtract, geoVecScale, geoZoomToScale } from '../geo';
 import { rendererTileLayer } from '../renderer';
 import { svgDebug, svgData } from '../svg';

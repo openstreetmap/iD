@@ -2,7 +2,7 @@ import _throttle from 'lodash-es/throttle';
 import { select as d3_select } from 'd3-selection';
 import { svgPointTransform } from './helpers';
 import { services } from '../services';
-import { t } from '../util/locale';
+import { t } from '../core/localizer';
 
 export function svgMapillaryMapFeatures(projection, context, dispatch) {
     var throttledRedraw = _throttle(function () { dispatch.call('change'); }, 1000);

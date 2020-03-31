@@ -2,16 +2,16 @@ describe('iD.uiFieldLocalized', function() {
     var context, selection, field;
 
     before(function() {
-        iD.data.languages = {
+        iD.fileFetcher.cache().languages = {
           de: { nativeName: 'Deutsch' },
           en: { nativeName: 'English' }
         };
-        iD.data.territory_languages = {};
+        iD.fileFetcher.cache().territory_languages = {};
     });
 
     after(function() {
-        delete iD.data.languages;
-        delete iD.data.territory_languages;
+        delete iD.fileFetcher.cache().languages;
+        delete iD.fileFetcher.cache().territory_languages;
     });
 
     beforeEach(function() {

@@ -1,6 +1,7 @@
-import { t, textDirection } from '../../util/locale';
+import { t, localizer } from '../../core/localizer';
 import { localize } from './helper';
 
+import { fileFetcher } from '../../core/file_fetcher';
 import { coreGraph } from '../../core/graph';
 import { modeBrowse } from '../../modes/browse';
 import { osmEntity } from '../../osm/entity';
@@ -45,7 +46,7 @@ export function uiIntro(context) {
 
 
   function intro(selection) {
-    context.data().get('intro_graph')
+    fileFetcher.get('intro_graph')
       .then(dataIntroGraph => {
         // create entities for intro graph and localize names
         for (let id in dataIntroGraph) {
@@ -195,7 +196,7 @@ export function uiIntro(context) {
     buttons
       .append('span')
       .attr('class', 'status')
-      .call(svgIcon((textDirection === 'rtl' ? '#iD-icon-backward' : '#iD-icon-forward'), 'inline'));
+      .call(svgIcon((localizer.textDirection() === 'rtl' ? '#iD-icon-backward' : '#iD-icon-forward'), 'inline'));
 
     enterChapter(chapters[0]);
 

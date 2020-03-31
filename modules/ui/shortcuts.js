@@ -1,6 +1,7 @@
 import { select as d3_select } from 'd3-selection';
 
-import { t } from '../util/locale';
+import { fileFetcher } from '../core/file_fetcher';
+import { t } from '../core/localizer';
 import { svgIcon } from '../svg/icon';
 import { uiCmd } from './cmd';
 import { uiModal } from './modal';
@@ -41,7 +42,7 @@ export function uiShortcuts(context) {
             .append('h3')
             .text(t('shortcuts.title'));
 
-        context.data().get('shortcuts')
+        fileFetcher.get('shortcuts')
             .then(function(data) { content.call(render, data); })
             .catch(function() { /* ignore */ });
     }

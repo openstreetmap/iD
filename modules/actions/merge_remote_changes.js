@@ -1,7 +1,7 @@
 import deepEqual from 'fast-deep-equal';
 import { diff3Merge } from 'node-diff3';
 
-import { t } from '../util/locale';
+import { t } from '../core/localizer';
 import { actionDeleteMultiple } from './delete_multiple';
 import { osmEntity } from '../osm';
 import { utilArrayUnion, utilArrayUniq } from '../util';

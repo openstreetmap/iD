@@ -1,5 +1,5 @@
 import { actionChangeTags } from '../actions/change_tags';
-import { t } from '../util/locale';
+import { t } from '../core/localizer';
 import { utilDisplayLabel, utilTagDiff } from '../util';
 import { validationIssue, validationIssueFix } from '../core/validation';
 

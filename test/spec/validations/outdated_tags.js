@@ -2,14 +2,14 @@ describe('iD.validations.outdated_tags', function () {
     var context;
 
     before(function() {
-        iD.data.deprecated = [
+        iD.fileFetcher.cache().deprecated = [
           { old: { highway: 'no' } },
           { old: { highway: 'ford' }, replace: { ford: '*' } }
         ];
     });
 
     after(function() {
-        iD.data.deprecated = [];
+        iD.fileFetcher.cache().deprecated = [];
     });
 
     beforeEach(function() {

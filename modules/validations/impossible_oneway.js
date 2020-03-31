@@ -1,4 +1,5 @@
-import { t, textDirection } from '../util/locale';
+import { localizer } from '../core/localizer';
+import { t } from '../core/localizer';
 import { modeDrawLine } from '../modes/draw_line';
 import { actionReverse } from '../actions/reverse';
 import { utilDisplayLabel } from '../util';
@@ -184,6 +185,7 @@ export function validationImpossibleOneway() {
                         }));
                     }
                     if (node.tags.noexit !== 'yes') {
+                        var textDirection = localizer.textDirection();
                         var useLeftContinue = (isFirst && textDirection === 'ltr') ||
                             (!isFirst && textDirection === 'rtl');
                         fixes.push(new validationIssueFix({

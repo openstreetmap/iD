@@ -3,7 +3,7 @@ describe('iD.Map', function() {
 
     beforeEach(function() {
         content = d3.select('body').append('div');
-        context = iD.coreContext().init();
+        context = iD.coreContext().init().container(content);
         map = context.map();
         content.call(map);
     });
@@ -165,42 +165,42 @@ describe('iD.Map', function() {
         }
 
         specify('points use select-point cursor in browse and select modes', function() {
-            mode.attr('class', 'mode-browse');
+            mode.attr('class', 'ideditor mode-browse');
             expect(cursor(point)).to.match(/cursor-select-point/);
-            mode.attr('class', 'mode-select');
+            mode.attr('class', 'ideditor mode-select');
             expect(cursor(point)).to.match(/cursor-select-point/);
         });
 
         specify('vertices use select-vertex cursor in browse and select modes', function() {
-            mode.attr('class', 'mode-browse');
+            mode.attr('class', 'ideditor mode-browse');
             expect(cursor(vertex)).to.match(/cursor-select-vertex/);
-            mode.attr('class', 'mode-select');
+            mode.attr('class', 'ideditor mode-select');
             expect(cursor(vertex)).to.match(/cursor-select-vertex/);
         });
 
         specify('lines use select-line cursor in browse and select modes', function() {
-            mode.attr('class', 'mode-browse');
+            mode.attr('class', 'ideditor mode-browse');
             expect(cursor(line)).to.match(/cursor-select-line/);
-            mode.attr('class', 'mode-select');
+            mode.attr('class', 'ideditor mode-select');
             expect(cursor(line)).to.match(/cursor-select-line/);
         });
 
         specify('areas use select-area cursor in browse and select modes', function() {
-            mode.attr('class', 'mode-browse');
+            mode.attr('class', 'ideditor mode-browse');
             expect(cursor(area)).to.match(/cursor-select-area/);
-            mode.attr('class', 'mode-select');
+            mode.attr('class', 'ideditor mode-select');
             expect(cursor(area)).to.match(/cursor-select-area/);
         });
 
         specify('midpoints use select-split cursor in browse and select modes', function() {
-            mode.attr('class', 'mode-browse');
+            mode.attr('class', 'ideditor mode-browse');
             expect(cursor(midpoint)).to.match(/cursor-select-split/);
-            mode.attr('class', 'mode-select');
+            mode.attr('class', 'ideditor mode-select');
             expect(cursor(midpoint)).to.match(/cursor-select-split/);
         });
 
         specify('features use select-add cursor for adding to a selection', function() {
-            mode.attr('class', 'mode-select');
+            mode.attr('class', 'ideditor mode-select');
             behavior.attr('class', 'behavior-multiselect');
             expect(cursor(point)).to.match(/cursor-select-add/);
             expect(cursor(vertex)).to.match(/cursor-select-add/);
@@ -209,7 +209,7 @@ describe('iD.Map', function() {
         });
 
         specify('features use select-remove cursor for removing from a selection', function() {
-            mode.attr('class', 'mode-select');
+            mode.attr('class', 'ideditor mode-select');
             behavior.attr('class', 'behavior-multiselect');
             point.classed('selected', true);
             vertex.classed('selected', true);
@@ -225,19 +225,19 @@ describe('iD.Map', function() {
             behavior.attr('class', 'behavior-hover');
             line.classed('target', true);
             area.classed('target', true);
-            mode.attr('class', 'mode-draw-line');
+            mode.attr('class', 'ideditor mode-draw-line');
             expect(cursor(line)).to.match(/cursor-draw-connect-line/);
             expect(cursor(area)).to.match(/cursor-draw-connect-line/);
-            mode.attr('class', 'mode-draw-area');
+            mode.attr('class', 'ideditor mode-draw-area');
             expect(cursor(line)).to.match(/cursor-draw-connect-line/);
             expect(cursor(area)).to.match(/cursor-draw-connect-line/);
-            mode.attr('class', 'mode-add-line');
+            mode.attr('class', 'ideditor mode-add-line');
             expect(cursor(line)).to.match(/cursor-draw-connect-line/);
             expect(cursor(area)).to.match(/cursor-draw-connect-line/);
-            mode.attr('class', 'mode-add-area');
+            mode.attr('class', 'ideditor mode-add-area');
             expect(cursor(line)).to.match(/cursor-draw-connect-line/);
             expect(cursor(area)).to.match(/cursor-draw-connect-line/);
-            mode.attr('class', 'mode-drag-node');
+            mode.attr('class', 'ideditor mode-drag-node');
             expect(cursor(line)).to.match(/cursor-draw-connect-line/);
             expect(cursor(area)).to.match(/cursor-draw-connect-line/);
         });
@@ -245,15 +245,15 @@ describe('iD.Map', function() {
         specify('targeted vertices use draw-connect-vertex cursor in draw modes', function() {
             behavior.attr('class', 'behavior-hover');
             vertex.classed('target', true);
-            mode.attr('class', 'mode-draw-line');
+            mode.attr('class', 'ideditor mode-draw-line');
             expect(cursor(vertex)).to.match(/cursor-draw-connect-vertex/);
-            mode.attr('class', 'mode-draw-area');
+            mode.attr('class', 'ideditor mode-draw-area');
             expect(cursor(vertex)).to.match(/cursor-draw-connect-vertex/);
-            mode.attr('class', 'mode-add-line');
+            mode.attr('class', 'ideditor mode-add-line');
             expect(cursor(vertex)).to.match(/cursor-draw-connect-vertex/);
-            mode.attr('class', 'mode-add-area');
+            mode.attr('class', 'ideditor mode-add-area');
             expect(cursor(vertex)).to.match(/cursor-draw-connect-vertex/);
-            mode.attr('class', 'mode-drag-node');
+            mode.attr('class', 'ideditor mode-drag-node');
             expect(cursor(vertex)).to.match(/cursor-draw-connect-vertex/);
         });
     });

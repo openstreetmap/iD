@@ -4,7 +4,7 @@ import {
 } from 'd3-selection';
 
 import { modeSelect } from '../modes/select';
-import { t } from '../util/locale';
+import { t } from '../core/localizer';
 import { utilDisplayName, utilHighlightEntities, utilEntityRoot } from '../util';
 
 export function uiImproveOsmDetails(context) {

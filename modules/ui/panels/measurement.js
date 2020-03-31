@@ -5,16 +5,15 @@ import {
     geoCentroid as d3_geoCentroid
 } from 'd3-geo';
 
-import { t } from '../../util/locale';
+import { t, localizer } from '../../core/localizer';
 import { displayArea, displayLength, decimalCoordinatePair, dmsCoordinatePair } from '../../util/units';
 import { geoExtent } from '../../geo';
-import { utilDetect } from '../../util/detect';
 import { services } from '../../services';
 
 
 export function uiPanelMeasurement(context) {
-    var locale = utilDetect().locale;
-    var isImperial = (locale.toLowerCase() === 'en-us');
+    var locale = localizer.localeCode();
+    var isImperial = !localizer.usesMetric();
 
 
     function radiansToMeters(r) {

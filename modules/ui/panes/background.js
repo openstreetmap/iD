@@ -1,5 +1,5 @@
 
-import { t } from '../../util/locale';
+import { t } from '../../core/localizer';
 import { uiPane } from '../pane';
 
 import { uiSectionBackgroundDisplayOptions } from '../sections/background_display_options';

@@ -2,8 +2,7 @@ import * as countryCoder from '@ideditor/country-coder';
 import { dispatch as d3_dispatch } from 'd3-dispatch';
 import { event as d3_event, select as d3_select } from 'd3-selection';
 
-import { t } from '../util/locale';
-import { textDirection } from '../util/locale';
+import { t, localizer } from '../core/localizer';
 import { svgIcon } from '../svg/icon';
 import { uiTooltip } from './tooltip';
 import { geoExtent } from '../geo/extent';
@@ -154,7 +153,7 @@ export function uiField(context, presetField, entityIDs, options) {
                     .attr('class', 'modified-icon')
                     .attr('title', t('icons.undo'))
                     .attr('tabindex', -1)
-                    .call(svgIcon((textDirection === 'rtl') ? '#iD-icon-redo' : '#iD-icon-undo'));
+                    .call(svgIcon((localizer.textDirection() === 'rtl') ? '#iD-icon-redo' : '#iD-icon-undo'));
             }
         }
 

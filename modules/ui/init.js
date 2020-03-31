@@ -3,13 +3,12 @@ import {
     select as d3_select
 } from 'd3-selection';
 
-import { t, textDirection, setLocale } from '../util/locale';
+import { t, localizer } from '../core/localizer';
 
 import { behaviorHash } from '../behavior';
 import { modeBrowse } from '../modes/browse';
 import { svgDefs, svgIcon } from '../svg';
 import { utilGetDimensions } from '../util/dimensions';
-import { utilDetect } from '../util/detect';
 
 import { uiAccount } from './account';
 import { uiAttribution } from './attribution';
@@ -29,6 +28,7 @@ import { uiRestore } from './restore';
 import { uiScale } from './scale';
 import { uiShortcuts } from './shortcuts';
 import { uiSidebar } from './sidebar';
+import { uiSourceSwitch } from './source_switch';
 import { uiSpinner } from './spinner';
 import { uiSplash } from './splash';
 import { uiStatus } from './status';
@@ -47,7 +47,6 @@ import { uiPanePreferences } from './panes/preferences';
 
 export function uiInit(context) {
     var _initCounter = 0;
-    var _initCallback;
     var _needWidth = {};
 
 
@@ -73,7 +72,7 @@ export function uiInit(context) {
             .on('gestureend.ui', eventCancel);
 
         container
-            .attr('dir', textDirection);
+            .attr('dir', localizer.textDirection());
 
         // setup fullscreen keybindings (no button shown at this time)
         container
@@ -234,6 +233,17 @@ export function uiInit(context) {
             .attr('class', 'issues-info')
             .attr('tabindex', -1)
             .call(uiIssuesInfo(context));
+
+        var apiConnections = context.apiConnections();
+        if (apiConnections && apiConnections.length > 1) {
+            aboutList
+                .append('li')
+                .attr('class', 'source-switch')
+                .attr('tabindex', -1)
+                .call(uiSourceSwitch(context)
+                    .keys(apiConnections)
+                );
+        }
 
         aboutList
             .append('li')
@@ -399,52 +409,36 @@ export function uiInit(context) {
     }
 
 
-    // `ui()` renders the iD interface into the given node, assigning
-    // that node as the `container`.  We need to delay rendering until the
-    // locale data has been loaded (i.e. promises all settled), because the
-    // UI code expects localized strings to be available.
-    function ui(node, callback) {
-        _initCallback = callback;
-        var container = d3_select(node);
-        context.container(container);
+    let ui = {};
 
-        const current = utilDetect().locale;
+    let _loadPromise;
+    // renders the iD interface into the container node
+    ui.ensureLoaded = () => {
 
-        context.data().get('locales')
-            .then(function () {
-                return context.loadLocale(current);
+        if (_loadPromise) return _loadPromise;
+
+        return _loadPromise = Promise.all([
+                // must have strings and presets before loading the UI
+                localizer.ensureLoaded(),
+                context.presets().ensureLoaded()
+            ])
+            .then(() => {
+                if (!context.container().empty()) render(context.container());
             })
-            .then(function() {
-                render(container);
-                if (callback) callback();
-            })
-            .catch(function(err) {
-                console.error(err);  // eslint-disable-line
-                if (callback) callback(err);
-            });
-    }
+            .catch(err => console.error(err));  // eslint-disable-line
+    };
 
 
     // `ui.restart()` will destroy and rebuild the entire iD interface,
     // for example to switch the locale while iD is running.
-    ui.restart = function(locale) {
+    ui.restart = function() {
         context.keybinding().clear();
 
-        var requested = locale || utilDetect().locale;
-        context.loadLocale(requested)
-            .then(function(received) {   // `received` may not match `requested`.
-                setLocale(received);     // (e.g. 'es-FAKE' will return 'es')
-                utilDetect(true);        // Then force redetection
+        _loadPromise = null;
 
-                context.container().selectAll('*').remove();
-                render(context.container());
+        context.container().selectAll('*').remove();
 
-                if (_initCallback) _initCallback();
-            })
-            .catch(function(err) {
-                console.error(err);  // eslint-disable-line
-                if (_initCallback) _initCallback(err);
-            });
+        ui.ensureLoaded();
     };
 
     ui.flash = uiFlash(context);
@@ -509,7 +503,7 @@ export function uiInit(context) {
     ui.togglePanes = function(showPane) {
         var shownPanes = context.container().selectAll('.map-pane.shown');
 
-        var side = textDirection === 'ltr' ? 'right' : 'left';
+        var side = localizer.textDirection() === 'ltr' ? 'right' : 'left';
 
         shownPanes
             .classed('shown', false);

@@ -4,7 +4,7 @@ import {
 } from 'd3-selection';
 
 import * as sexagesimal from '@mapbox/sexagesimal';
-import { t } from '../util/locale';
+import { t } from '../core/localizer';
 import { dmsCoordinatePair } from '../util/units';
 import { coreGraph } from '../core/graph';
 import { geoSphericalDistance } from '../geo/geo';

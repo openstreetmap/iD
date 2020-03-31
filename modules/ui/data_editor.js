@@ -1,4 +1,4 @@
-import { t } from '../util/locale';
+import { t } from '../core/localizer';
 import { modeBrowse } from '../modes/browse';
 import { svgIcon } from '../svg/icon';
 

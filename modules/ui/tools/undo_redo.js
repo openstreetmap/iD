@@ -5,7 +5,7 @@ import {
     select as d3_select
 } from 'd3-selection';
 
-import { t, textDirection } from '../../util/locale';
+import { t, localizer } from '../../core/localizer';
 import { svgIcon } from '../../svg';
 import { uiCmd } from '../cmd';
 import { uiTooltip } from '../tooltip';
@@ -59,7 +59,7 @@ export function uiToolUndoRedo(context) {
 
         buttons.each(function(d) {
             var iconName = d.id;
-            if (textDirection === 'rtl') {
+            if (localizer.textDirection() === 'rtl') {
                 if (iconName === 'undo') {
                     iconName = 'redo';
                 } else if (iconName === 'redo') {

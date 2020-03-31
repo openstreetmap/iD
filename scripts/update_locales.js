@@ -96,6 +96,8 @@ asyncMap(resources, getResource, (err, results) => {
     },
     (err) => {
       if (!err) {
+        // list the default locale as explicitly supported
+        dataLocales['en-US'] = dataLocales.en;
         const keys = Object.keys(dataLocales).sort();
         let sortedLocales = {};
         keys.forEach(k => sortedLocales[k] = dataLocales[k]);

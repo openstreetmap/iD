@@ -6,7 +6,7 @@ import {
 } from 'd3-selection';
 
 import { utilRebind } from '../../util/rebind';
-import { t } from '../../util/locale';
+import { t } from '../../core/localizer';
 import { actionReverse } from '../../actions/reverse';
 import { osmOneWayTags } from '../../osm';
 import { svgIcon } from '../../svg/icon';

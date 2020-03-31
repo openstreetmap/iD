@@ -1,4 +1,4 @@
-import { t } from '../util/locale';
+import { t } from '../core/localizer';
 import { behaviorDrawWay } from '../behavior/draw_way';
 
 

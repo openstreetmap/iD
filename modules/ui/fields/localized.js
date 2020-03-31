@@ -2,13 +2,13 @@ import { dispatch as d3_dispatch } from 'd3-dispatch';
 import { select as d3_select, event as d3_event } from 'd3-selection';
 import * as countryCoder from '@ideditor/country-coder';
 
-import { currentLocale, t, languageName } from '../../util/locale';
+import { fileFetcher } from '../../core/file_fetcher';
+import { t, localizer } from '../../core/localizer';
 import { geoExtent } from '../../geo';
 import { services } from '../../services';
 import { svgIcon } from '../../svg';
 import { uiTooltip } from '../tooltip';
 import { uiCombobox } from '../combobox';
-import { utilDetect } from '../../util/detect';
 import { utilArrayUniq, utilEditDistance, utilGetSetValue, utilNoAuto, utilRebind } from '../../util';
 
 var _languagesArray = [];
@@ -26,12 +26,12 @@ export function uiFieldLocalized(field, context) {
     // A concern here in switching to async data means that _languagesArray will not
     // be available the first time through, so things like the fetchers and
     // the language() function will not work immediately.
-    context.data().get('languages')
+    fileFetcher.get('languages')
         .then(loadLanguagesArray)
         .catch(function() { /* ignore */ });
 
     var _territoryLanguages = {};
-    context.data().get('territory_languages')
+    fileFetcher.get('territory_languages')
         .then(function(d) { _territoryLanguages = d; })
         .catch(function() { /* ignore */ });
 
@@ -73,10 +73,10 @@ export function uiFieldLocalized(field, context) {
             if (replacements[code]) metaCode = replacements[code];
 
             _languagesArray.push({
-                localName: languageName(context, metaCode, { localOnly: true }),
+                localName: localizer.languageName(metaCode, { localOnly: true }),
                 nativeName: dataLanguages[metaCode].nativeName,
                 code: code,
-                label: languageName(context, metaCode)
+                label: localizer.languageName(metaCode)
             });
         }
     }
@@ -360,7 +360,7 @@ export function uiFieldLocalized(field, context) {
             d3_event.preventDefault();
             if (field.locked()) return;
 
-            var defaultLang = utilDetect().locale.toLowerCase().split('-')[0];
+            var defaultLang = localizer.languageCode().toLowerCase();
             var langExists = _multilingual.find(function(datum) { return datum.lang === defaultLang; });
             var isLangEn = defaultLang.indexOf('en') > -1;
             if (isLangEn || langExists) {
@@ -449,7 +449,7 @@ export function uiFieldLocalized(field, context) {
         var v = value.toLowerCase();
 
         // show the user's language first
-        var langCodes = [currentLocale, currentLocale.split('-')[0]];
+        var langCodes = [localizer.localeCode(), localizer.languageCode()];
 
         if (_countryCode && _territoryLanguages[_countryCode]) {
             langCodes = langCodes.concat(_territoryLanguages[_countryCode]);
@@ -569,7 +569,7 @@ export function uiFieldLocalized(field, context) {
         entries.order();
 
         utilGetSetValue(entries.select('.localized-lang'), function(d) {
-            return languageName(context, d.lang);
+            return localizer.languageName(d.lang);
         });
 
         utilGetSetValue(entries.select('.localized-value'), function(d) {

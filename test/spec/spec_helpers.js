@@ -8,21 +8,21 @@ for (var k in iD.services) { delete iD.services[k]; }
 // Run without data for speed (tests which need data can set it up themselves)
 
 // Initializing `coreContext` will try loading the locale data and English locale strings:
-iD.data.locales = { en: { rtl: false, languageNames: {}, scriptNames: {} }};
-iD.data.locale_en = { en: {} };
+iD.fileFetcher.cache().locales = { en: { rtl: false, languageNames: {}, scriptNames: {} }};
+iD.fileFetcher.cache().locale_en = { en: {} };
 // Initializing `coreContext` initializes `_background`, which tries loading:
-iD.data.imagery = [];
+iD.fileFetcher.cache().imagery = [];
 // Initializing `coreContext` initializes `_presets`, which tries loading:
-iD.data.preset_categories = {};
-iD.data.preset_defaults = {};
-iD.data.preset_fields = {};
-iD.data.preset_presets = {};
+iD.fileFetcher.cache().preset_categories = {};
+iD.fileFetcher.cache().preset_defaults = {};
+iD.fileFetcher.cache().preset_fields = {};
+iD.fileFetcher.cache().preset_presets = {};
 // Initializing `coreContext` initializes `_validator`, which tries loading:
-iD.data.deprecated = [];
-iD.data.nsi_brands = [];
-iD.data.nsi_filters = { discardNames: [] };
+iD.fileFetcher.cache().deprecated = [];
+iD.fileFetcher.cache().nsi_brands = [];
+iD.fileFetcher.cache().nsi_filters = { discardNames: [] };
 // Initializing `coreContext` initializes `_uploader`, which tries loading:
-iD.data.discarded = {};
+iD.fileFetcher.cache().discarded = {};
 
 
 mocha.setup({

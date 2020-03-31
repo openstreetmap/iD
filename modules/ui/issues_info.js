@@ -1,7 +1,7 @@
 import { event as d3_event, select as d3_select } from 'd3-selection';
 
 import { svgIcon } from '../svg/icon';
-import { t } from '../util/locale';
+import { t } from '../core/localizer';
 import { uiTooltip } from './tooltip';
 
 

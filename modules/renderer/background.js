@@ -4,6 +4,7 @@ import { select as d3_select } from 'd3-selection';
 
 import whichPolygon from 'which-polygon';
 
+import { fileFetcher } from '../core/file_fetcher';
 import { geoExtent, geoMetersToOffset, geoOffsetToMeters} from '../geo';
 import { rendererBackgroundSource } from './background_source';
 import { rendererTileLayer } from './tile_layer';
@@ -27,7 +28,7 @@ export function rendererBackground(context) {
 
 
   function ensureImageryIndex() {
-    return context.data().get('imagery')
+    return fileFetcher.get('imagery')
       .then(sources => {
         if (_imageryIndex) return _imageryIndex;
 
@@ -435,8 +436,12 @@ export function rendererBackground(context) {
     return background;
   };
 
+  let _loadPromise;
 
-  background.init = () => {
+  background.ensureLoaded = () => {
+
+    if (_loadPromise) return _loadPromise;
+
     function parseMapParams(qmap) {
       if (!qmap) return false;
       const params = qmap.split('/').map(Number);
@@ -448,7 +453,7 @@ export function rendererBackground(context) {
     const requested = hash.background || hash.layer;
     let extent = parseMapParams(hash.map);
 
-    ensureImageryIndex()
+    return _loadPromise = ensureImageryIndex()
       .then(imageryIndex => {
         const first = imageryIndex.backgrounds.length && imageryIndex.backgrounds[0];
 

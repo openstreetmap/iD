@@ -1,4 +1,4 @@
-import { t } from '../util/locale';
+import { t } from '../core/localizer';
 import { actionReverse } from '../actions/reverse';
 import { behaviorOperation } from '../behavior/operation';
 

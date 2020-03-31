@@ -3,7 +3,7 @@ import {
     select as d3_select
 } from 'd3-selection';
 
-import { t, textDirection } from '../../util/locale';
+import { t, localizer } from '../../core/localizer';
 import { geoMetersToOffset, geoOffsetToMeters } from '../../geo';
 import { svgIcon } from '../../svg/icon';
 import { uiSection } from '../section';
@@ -179,7 +179,7 @@ export function uiSectionBackgroundOffset(context) {
                 if (d3_event.button !== 0) return;
                 resetOffset();
             })
-            .call(svgIcon('#iD-icon-' + (textDirection === 'rtl' ? 'redo' : 'undo')));
+            .call(svgIcon('#iD-icon-' + (localizer.textDirection() === 'rtl' ? 'redo' : 'undo')));
 
         updateValue();
     }

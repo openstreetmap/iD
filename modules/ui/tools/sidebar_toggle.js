@@ -1,4 +1,4 @@
-import { t, textDirection } from '../../util/locale';
+import { t, localizer } from '../../core/localizer';
 import { svgIcon } from '../../svg';
 import { uiTooltip } from '../tooltip';
 
@@ -22,7 +22,7 @@ export function uiToolSidebarToggle(context) {
                 .keys([t('sidebar.key')])
                 .scrollContainer(context.container().select('.top-toolbar'))
             )
-            .call(svgIcon('#iD-icon-sidebar-' + (textDirection === 'rtl' ? 'right' : 'left')));
+            .call(svgIcon('#iD-icon-sidebar-' + (localizer.textDirection() === 'rtl' ? 'right' : 'left')));
     };
 
     return tool;

@@ -1,5 +1,5 @@
 
-import { t } from '../../util/locale';
+import { t } from '../../core/localizer';
 import { uiPane } from '../pane';
 
 import { uiSectionValidationIssues } from '../sections/validation_issues';

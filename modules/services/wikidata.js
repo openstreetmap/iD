@@ -1,7 +1,7 @@
 import { json as d3_json } from 'd3-fetch';
 
 import { utilArrayUniq, utilQsString } from '../util';
-import { currentLocale } from '../util/locale';
+import { localizer } from '../core/localizer';
 
 var apibase = 'https://www.wikidata.org/w/api.php?';
 var _wikidataCache = {};
@@ -81,8 +81,8 @@ export default {
 
     languagesToQuery: function() {
         return utilArrayUniq([
-            currentLocale.toLowerCase(),
-            currentLocale.split('-', 2)[0].toLowerCase(),
+            localizer.localeCode().toLowerCase(),
+            localizer.languageCode().toLowerCase(),
             'en'
         ]);
     },
@@ -180,7 +180,7 @@ export default {
             }
 
             if (entity.sitelinks) {
-                var englishLocale = (currentLocale.split('-', 2)[0].toLowerCase() === 'en');
+                var englishLocale = localizer.languageCode().toLowerCase() === 'en';
 
                 // must be one of these that we requested..
                 for (i = 0; i < langs.length; i++) {   // check each, in order of preference
@@ -188,7 +188,7 @@ export default {
                     if (entity.sitelinks[w]) {
                         var title = entity.sitelinks[w].title;
                         var tKey = 'inspector.wiki_reference';
-                        if (!englishLocale && langs[i] === 'en') {   // user's currentLocale isn't English but
+                        if (!englishLocale && langs[i] === 'en') {   // user's locale isn't English but
                             tKey = 'inspector.wiki_en_reference';    // we are sending them to enwiki anyway..
                         }
 
