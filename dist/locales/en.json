@@ -3924,8 +3924,7 @@
                     "terms": ""
                 },
                 "network/type": {
-                    "label": "Network Type",
-                    "terms": ""
+                    "label": "Network Type"
                 },
                 "not/name": {
                     "label": "Incorrect Names",

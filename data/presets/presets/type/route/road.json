@@ -4,7 +4,6 @@
         "name",
         "ref_route",
         "network_road",
-        "network/type",
         "to",
         "from"
     ],

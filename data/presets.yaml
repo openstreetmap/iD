@@ -1493,7 +1493,6 @@ en:
       network/type:
         # 'network:type=*'
         label: Network Type
-        terms: '[translate with synonyms or related terms for ''Network Type'', separated by commas]'
       network_bicycle:
         # network=*
         label: Network Class
