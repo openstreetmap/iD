@@ -55,6 +55,7 @@ export function coreContext() {
       /* eslint-enable no-console */
     }
   };
+  context.isFirstSession = !context.storage('sawSplash') && !context.storage('sawPrivacyVersion');
 
 
   /* User interface and keybinding */

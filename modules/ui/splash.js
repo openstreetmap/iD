@@ -14,12 +14,13 @@ export function uiSplash(context) {
     // If user has not seen this version of the privacy policy, show the splash again.
     let updateMessage = '';
     const sawPrivacyVersion = context.storage('sawPrivacyVersion');
+    let showSplash = !context.storage('sawSplash');
     if (sawPrivacyVersion !== context.privacyVersion) {
       updateMessage = t('splash.privacy_update');
-      context.storage('sawSplash', null);
+      showSplash = true;
     }
 
-    if (context.storage('sawSplash')) return;
+    if (!showSplash) return;
 
     context.storage('sawSplash', true);
     context.storage('sawPrivacyVersion', context.privacyVersion);
