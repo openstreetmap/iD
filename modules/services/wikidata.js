@@ -23,13 +23,18 @@ export default {
             return;
         }
 
+        var lang = this.languagesToQuery()[0];
+
         var url = apibase + utilQsString({
             action: 'wbsearchentities',
             format: 'json',
             formatversion: 2,
             search: query,
             type: 'item',
-            language: this.languagesToQuery()[0],
+            // the language to search
+            language: lang,
+            // the langauge for the label and description in the result
+            uselang: lang,
             limit: 10,
             origin: '*'
         });
