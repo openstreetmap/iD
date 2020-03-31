@@ -15,8 +15,13 @@ export function uiVersion(context) {
     var matchedVersion = currVersion.match(/\d+\.\d+\.\d+.*/);
 
     if (sawVersion === null && matchedVersion !== null) {
-        isNewVersion = (context.storage('sawVersion') !== currVersion);
-        isNewUser = !context.storage('sawSplash');
+        if (context.storage('sawVersion')) {
+            isNewUser = false;
+            isNewVersion = context.storage('sawVersion') !== currVersion;
+        } else {
+            isNewUser = true;
+            isNewVersion = true;
+        }
         context.storage('sawVersion', currVersion);
         sawVersion = currVersion;
     }
