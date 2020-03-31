@@ -3,9 +3,10 @@ import { event as d3_event, select as d3_select } from 'd3-selection';
 import { drag as d3_drag } from 'd3-drag';
 import * as countryCoder from '@ideditor/country-coder';
 
+import { fileFetcher } from '../../core/file_fetcher';
 import { geoExtent } from '../../geo';
 import { osmEntity } from '../../osm/entity';
-import { t } from '../../util/locale';
+import { t } from '../../core/localizer';
 import { services } from '../../services';
 import { uiCombobox } from '../combobox';
 import { utilArrayUniq, utilGetSetValue, utilNoAuto, utilRebind } from '../../util';
@@ -43,7 +44,7 @@ export function uiFieldCombo(field, context) {
 
     // initialize deprecated tags array
     var _dataDeprecated = [];
-    context.data().get('deprecated')
+    fileFetcher.get('deprecated')
         .then(function(d) { _dataDeprecated = d; })
         .catch(function() { /* ignore */ });
 

@@ -1,6 +1,7 @@
 import { dispatch as d3_dispatch } from 'd3-dispatch';
 
-import { osmNodeGeometriesForTags } from '../osm/tags';
+import { fileFetcher } from '../core/file_fetcher';
+import { osmNodeGeometriesForTags, osmSetAreaKeys, osmSetPointTags, osmSetVertexTags } from '../osm/tags';
 import { presetCategory } from './category';
 import { presetCollection } from './collection';
 import { presetField } from './field';
@@ -20,7 +21,6 @@ export { presetPreset };
 export function presetIndex(context) {
   const dispatch = d3_dispatch('favoritePreset', 'recentsChange');
   const MAXRECENTS = 30;
-  let _presetData;
 
   // seed the preset lists with geometry fallbacks
   const POINT = presetPreset('point', { name: 'Point', tags: {}, geometry: ['point', 'vertex'], matchScore: 0.1 } );
@@ -49,31 +49,28 @@ export function presetIndex(context) {
   // Index of presets by (geometry, tag key).
   let _geometryIndex = { point: {}, vertex: {}, line: {}, area: {}, relation: {} };
 
+  let _loadPromise;
 
-  function ensurePresetData() {
-    const data = context.data();
-    return Promise.all([
-        data.get('preset_categories'),
-        data.get('preset_defaults'),
-        data.get('preset_presets'),
-        data.get('preset_fields')
+  _this.ensureLoaded = () => {
+    if (_loadPromise) return _loadPromise;
+
+    return _loadPromise = Promise.all([
+        fileFetcher.get('preset_categories'),
+        fileFetcher.get('preset_defaults'),
+        fileFetcher.get('preset_presets'),
+        fileFetcher.get('preset_fields')
       ])
       .then(vals => {
-        if (_presetData) return _presetData;
-
-        return _presetData = {
+        _this.merge({
           categories: vals[0],
           defaults: vals[1],
           presets: vals[2],
           fields: vals[3]
-        };
+        });
+        osmSetAreaKeys(_this.areaKeys());
+        osmSetPointTags(_this.pointTags());
+        osmSetVertexTags(_this.vertexTags());
       });
-  }
-
-
-  _this.init = () => {
-    return ensurePresetData()
-      .then(_this.merge);
   };
 
 

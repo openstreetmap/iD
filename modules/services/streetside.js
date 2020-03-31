@@ -7,7 +7,7 @@ import {
 } from 'd3-selection';
 
 import RBush from 'rbush';
-import { t } from '../util/locale';
+import { t, localizer } from '../core/localizer';
 import { jsonpRequest } from '../util/jsonp_request';
 
 import {
@@ -15,7 +15,6 @@ import {
   geoRotate, geoScaleToZoom, geoVecLength
 } from '../geo';
 
-import { utilDetect } from '../util/detect';
 import { utilArrayUnion, utilQsString, utilRebind, utilTiler, utilUniqueDomId } from '../util';
 
 
@@ -54,11 +53,10 @@ function abortRequest(i) {
  */
 function localeTimestamp(s) {
   if (!s) return null;
-  const detected = utilDetect();
   const options = { day: 'numeric', month: 'short', year: 'numeric' };
   const d = new Date(s);
   if (isNaN(d.getTime())) return null;
-  return d.toLocaleString(detected.locale, options);
+  return d.toLocaleString(localizer.localeCode(), options);
 }
 
 

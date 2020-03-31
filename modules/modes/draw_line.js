@@ -1,4 +1,4 @@
-import { t } from '../util/locale';
+import { t } from '../core/localizer';
 import { actionChangeTags } from '../actions/change_tags';
 import { behaviorDrawWay } from '../behavior/draw_way';
 import { modeSelect } from './select';

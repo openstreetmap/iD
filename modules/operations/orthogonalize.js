@@ -1,4 +1,4 @@
-import { t } from '../util/locale';
+import { t } from '../core/localizer';
 import { actionOrthogonalize } from '../actions/orthogonalize';
 import { behaviorOperation } from '../behavior/operation';
 import { utilGetAllNodes } from '../util';

@@ -19,7 +19,6 @@
         "maxheight",
         "maxweight",
         "network",
-        "network/type",
         "opening_hours",
         "ref_route",
         "wheelchair"

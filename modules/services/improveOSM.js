@@ -3,10 +3,11 @@ import RBush from 'rbush';
 import { dispatch as d3_dispatch } from 'd3-dispatch';
 import { json as d3_json } from 'd3-fetch';
 
+import { fileFetcher } from '../core/file_fetcher';
 import { geoExtent, geoVecAdd, geoVecScale } from '../geo';
 import { QAItem } from '../osm';
 import { serviceOsm } from './index';
-import { t } from '../util/locale';
+import { t } from '../core/localizer';
 import { utilRebind, utilTiler, utilQsString } from '../util';
 
 
@@ -120,8 +121,8 @@ function preventCoincident(loc, bumpUp) {
 export default {
   title: 'improveOSM',
 
-  init(context) {
-    context.data().get('qa_data')
+  init() {
+    fileFetcher.get('qa_data')
       .then(d => _impOsmData = d.improveOSM);
 
     if (!_cache) {

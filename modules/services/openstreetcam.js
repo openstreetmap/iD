@@ -5,8 +5,8 @@ import { zoom as d3_zoom, zoomIdentity as d3_zoomIdentity } from 'd3-zoom';
 
 import RBush from 'rbush';
 
+import { localizer } from '../core/localizer';
 import { geoExtent, geoScaleToZoom } from '../geo';
-import { utilDetect } from '../util/detect';
 import { utilArrayUnion, utilQsString, utilRebind, utilSetTransform, utilTiler } from '../util';
 
 
@@ -449,11 +449,10 @@ export default {
 
         function localeDateString(s) {
             if (!s) return null;
-            var detected = utilDetect();
             var options = { day: 'numeric', month: 'short', year: 'numeric' };
             var d = new Date(s);
             if (isNaN(d.getTime())) return null;
-            return d.toLocaleDateString(detected.locale, options);
+            return d.toLocaleDateString(localizer.localeCode(), options);
         }
     },
 

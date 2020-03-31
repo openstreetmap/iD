@@ -1,6 +1,6 @@
 
 import { uiToolSimpleButton } from './simple_button';
-import { t } from '../../util/locale';
+import { t } from '../../core/localizer';
 import { modeBrowse } from '../../modes/browse';
 
 export function uiToolStopDraw(context) {

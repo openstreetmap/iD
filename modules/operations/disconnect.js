@@ -1,4 +1,4 @@
-import { t } from '../util/locale';
+import { t } from '../core/localizer';
 import { actionDisconnect } from '../actions/disconnect';
 import { behaviorOperation } from '../behavior/operation';
 import { utilGetAllNodes } from '../util/index';

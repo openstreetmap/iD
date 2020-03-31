@@ -4,7 +4,7 @@ import {
     event as d3_event
 } from 'd3-selection';
 
-import { t } from '../../util/locale';
+import { t } from '../../core/localizer';
 
 
 export function uiPanelBackground(context) {

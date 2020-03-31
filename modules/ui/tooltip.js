@@ -1,5 +1,5 @@
 import { utilFunctor } from '../util/util';
-import { t } from '../util/locale';
+import { t } from '../core/localizer';
 import { uiPopover } from './popover';
 
 export function uiTooltip(klass) {

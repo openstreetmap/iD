@@ -5,7 +5,7 @@ import {
     select as d3_select
 } from 'd3-selection';
 
-import { t, textDirection } from '../../util/locale';
+import { t, localizer } from '../../core/localizer';
 import { uiTooltip } from '../tooltip';
 import { svgIcon } from '../../svg/icon';
 import { uiCmd } from '../cmd';
@@ -172,7 +172,7 @@ export function uiSectionBackgroundList(context) {
             .attr('class', 'layer-browse')
             .call(uiTooltip()
                 .title(t('settings.custom_background.tooltip'))
-                .placement((textDirection === 'rtl') ? 'right' : 'left')
+                .placement((localizer.textDirection() === 'rtl') ? 'right' : 'left')
             )
             .on('click', editCustom)
             .call(svgIcon('#iD-icon-more'));
@@ -182,7 +182,7 @@ export function uiSectionBackgroundList(context) {
             .attr('class', 'best')
             .call(uiTooltip()
                 .title(t('background.best_imagery'))
-                .placement((textDirection === 'rtl') ? 'right' : 'left')
+                .placement((localizer.textDirection() === 'rtl') ? 'right' : 'left')
             )
             .append('span')
             .html('&#9733;');

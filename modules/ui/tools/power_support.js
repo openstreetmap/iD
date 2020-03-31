@@ -1,5 +1,5 @@
 import { uiToolSegemented } from './segmented';
-import { t } from '../../util/locale';
+import { t } from '../../core/localizer';
 
 export function uiToolPowerSupport(context) {
 

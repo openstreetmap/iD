@@ -8,7 +8,7 @@ import {
     polygonCentroid as d3_polygonCentroid
 } from 'd3-polygon';
 
-import { t } from '../util/locale';
+import { t } from '../core/localizer';
 import { actionRotate } from '../actions/rotate';
 import { actionNoop } from '../actions/noop';
 import { behaviorEdit } from '../behavior/edit';

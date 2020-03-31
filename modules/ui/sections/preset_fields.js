@@ -3,9 +3,9 @@ import {
     event as d3_event
 } from 'd3-selection';
 
+import { t, localizer } from '../../core/localizer';
 import { utilArrayIdentical } from '../../util/array';
 import { utilArrayUnion, utilRebind } from '../../util';
-import { currentLocale, t } from '../../util/locale';
 import { modeBrowse } from '../../modes/browse';
 import { uiField } from '../field';
 import { uiFormFields } from '../form_fields';
@@ -84,7 +84,7 @@ export function uiSectionPresetFields(context) {
 
             var additionalFields = utilArrayUnion(sharedMoreFields, presetsManager.universal());
             additionalFields.sort(function(field1, field2) {
-                return field1.label().localeCompare(field2.label(), currentLocale);
+                return field1.label().localeCompare(field2.label(), localizer.localeCode());
             });
 
             additionalFields.forEach(function(field) {

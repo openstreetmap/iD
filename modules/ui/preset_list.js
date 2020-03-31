@@ -6,7 +6,7 @@ import {
     select as d3_select
 } from 'd3-selection';
 
-import { t, textDirection } from '../util/locale';
+import { t, localizer } from '../core/localizer';
 import { actionChangePreset } from '../actions/change_preset';
 import { operationDelete } from '../operations/delete';
 import { svgIcon } from '../svg/index';
@@ -43,7 +43,7 @@ export function uiPresetList(context) {
             .append('button')
             .attr('class', 'preset-choose')
             .on('click', function() { dispatch.call('cancel', this); })
-            .call(svgIcon((textDirection === 'rtl') ? '#iD-icon-backward' : '#iD-icon-forward'));
+            .call(svgIcon((localizer.textDirection() === 'rtl') ? '#iD-icon-backward' : '#iD-icon-forward'));
 
         function initialKeydown() {
             // hack to let delete shortcut work when search is autofocused
@@ -242,7 +242,7 @@ export function uiPresetList(context) {
             }
 
         // arrow left, move focus to the parent item if there is one
-        } else if (d3_event.keyCode === utilKeybinding.keyCodes[(textDirection === 'rtl') ? '→' : '←']) {
+        } else if (d3_event.keyCode === utilKeybinding.keyCodes[(localizer.textDirection() === 'rtl') ? '→' : '←']) {
             d3_event.preventDefault();
             d3_event.stopPropagation();
             // if there is a parent item, focus on the parent item
@@ -251,7 +251,7 @@ export function uiPresetList(context) {
             }
 
         // arrow right, choose this item
-        } else if (d3_event.keyCode === utilKeybinding.keyCodes[(textDirection === 'rtl') ? '←' : '→']) {
+        } else if (d3_event.keyCode === utilKeybinding.keyCodes[(localizer.textDirection() === 'rtl') ? '←' : '→']) {
             d3_event.preventDefault();
             d3_event.stopPropagation();
             item.datum().choose.call(d3_select(this).node());
@@ -269,7 +269,7 @@ export function uiPresetList(context) {
             function click() {
                 var isExpanded = d3_select(this).classed('expanded');
                 var iconName = isExpanded ?
-                    (textDirection === 'rtl' ? '#iD-icon-backward' : '#iD-icon-forward') : '#iD-icon-down';
+                    (localizer.textDirection() === 'rtl' ? '#iD-icon-backward' : '#iD-icon-forward') : '#iD-icon-down';
                 d3_select(this)
                     .classed('expanded', !isExpanded);
                 d3_select(this).selectAll('div.label-inner svg.icon use')
@@ -289,7 +289,7 @@ export function uiPresetList(context) {
                 .on('click', click)
                 .on('keydown', function() {
                     // right arrow, expand the focused item
-                    if (d3_event.keyCode === utilKeybinding.keyCodes[(textDirection === 'rtl') ? '←' : '→']) {
+                    if (d3_event.keyCode === utilKeybinding.keyCodes[(localizer.textDirection() === 'rtl') ? '←' : '→']) {
                         d3_event.preventDefault();
                         d3_event.stopPropagation();
                         // if the item isn't expanded
@@ -298,7 +298,7 @@ export function uiPresetList(context) {
                             click.call(this);
                         }
                     // left arrow, collapse the focused item
-                    } else if (d3_event.keyCode === utilKeybinding.keyCodes[(textDirection === 'rtl') ? '→' : '←']) {
+                    } else if (d3_event.keyCode === utilKeybinding.keyCodes[(localizer.textDirection() === 'rtl') ? '→' : '←']) {
                         d3_event.preventDefault();
                         d3_event.stopPropagation();
                         // if the item is expanded
@@ -320,7 +320,7 @@ export function uiPresetList(context) {
             label
                 .append('div')
                 .attr('class', 'namepart')
-                .call(svgIcon((textDirection === 'rtl' ? '#iD-icon-backward' : '#iD-icon-forward'), 'inline'))
+                .call(svgIcon((localizer.textDirection() === 'rtl' ? '#iD-icon-backward' : '#iD-icon-forward'), 'inline'))
                 .append('span')
                 .html(function() { return preset.name() + '&hellip;'; });
 

@@ -4,7 +4,7 @@ import * as countryCoder from '@ideditor/country-coder';
 
 import { geoExtent } from '../../geo';
 import { uiCombobox } from '../combobox';
-import { t } from '../../util/locale';
+import { t } from '../../core/localizer';
 import { utilGetSetValue, utilNoAuto, utilRebind } from '../../util';
 
 

@@ -1,4 +1,4 @@
-import { t, textDirection } from '../util/locale';
+import { t, localizer } from '../core/localizer';
 import { modeDrawLine } from '../modes/draw_line';
 import { operationDelete } from '../operations/delete';
 import { utilDisplayLabel } from '../util';
@@ -45,10 +45,12 @@ export function validationDisconnectedWay() {
 
                 if (singleEntity.type === 'way' && !singleEntity.isClosed()) {
 
-                    var startFix = makeContinueDrawingFixIfAllowed(singleEntity.first(), 'start');
+                    var textDirection = localizer.textDirection();
+
+                    var startFix = makeContinueDrawingFixIfAllowed(textDirection, singleEntity.first(), 'start');
                     if (startFix) fixes.push(startFix);
 
-                    var endFix = makeContinueDrawingFixIfAllowed(singleEntity.last(), 'end');
+                    var endFix = makeContinueDrawingFixIfAllowed(textDirection, singleEntity.last(), 'end');
                     if (endFix) fixes.push(endFix);
                 }
                 if (!fixes.length) {
@@ -173,7 +175,7 @@ export function validationDisconnectedWay() {
             });
         }
 
-        function makeContinueDrawingFixIfAllowed(vertexID, whichEnd) {
+        function makeContinueDrawingFixIfAllowed(textDirection, vertexID, whichEnd) {
             var vertex = graph.hasEntity(vertexID);
             if (!vertex || vertex.tags.noexit === 'yes') return null;
 

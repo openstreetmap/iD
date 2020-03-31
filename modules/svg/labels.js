@@ -2,7 +2,7 @@ import _throttle from 'lodash-es/throttle';
 
 import { geoPath as d3_geoPath } from 'd3-geo';
 import RBush from 'rbush';
-import { textDirection } from '../util/locale';
+import { localizer } from '../core/localizer';
 
 import {
     geoExtent, geoPolygonIntersectsPolygon, geoPathLength,
@@ -401,6 +401,8 @@ export function svgLabels(projection, context) {
                 ltr: [15, y, 'start'],
                 rtl: [-15, y, 'end']
             };
+
+            var textDirection = localizer.textDirection();
 
             var coord = projection(entity.loc);
             var textPadding = 2;

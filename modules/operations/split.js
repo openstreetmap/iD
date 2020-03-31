@@ -1,4 +1,4 @@
-import { t } from '../util/locale';
+import { t } from '../core/localizer';
 import { actionSplit } from '../actions/split';
 import { behaviorOperation } from '../behavior/operation';
 import { modeSelect } from '../modes/select';

@@ -4,10 +4,10 @@ import { select as d3_select } from 'd3-selection';
 import LocationConflation from '@ideditor/location-conflation';
 import whichPolygon from 'which-polygon';
 
-import { t, languageName } from '../util/locale';
+import { fileFetcher } from '../core/file_fetcher';
+import { t, localizer } from '../core/localizer';
 import { svgIcon } from '../svg/icon';
 import { uiDisclosure } from '../ui/disclosure';
-import { utilDetect } from '../util/detect';
 import { utilRebind } from '../util/rebind';
 
 
@@ -15,7 +15,6 @@ let _oci = null;
 
 export function uiSuccess(context) {
   const MAXEVENTS = 2;
-  const detected = utilDetect();
   const dispatch = d3_dispatch('cancel');
   let _changeset;
   let _location;
@@ -23,7 +22,7 @@ export function uiSuccess(context) {
 
 
   function ensureOSMCommunityIndex() {
-    const data = context.data();
+    const data = fileFetcher;
     return Promise.all([ data.get('oci_resources'), data.get('oci_features') ])
       .then(vals => {
         if (_oci) return _oci;
@@ -317,7 +316,7 @@ export function uiSuccess(context) {
 
       if (d.languageCodes && d.languageCodes.length) {
         const languageList = d.languageCodes
-          .map(code => languageName(context, code))
+          .map(code => localizer.languageName(code))
           .join(', ');
 
         moreEnter
@@ -363,7 +362,7 @@ export function uiSuccess(context) {
             options.hour = 'numeric';
             options.minute = 'numeric';
           }
-          return d.date.toLocaleString(detected.locale, options);
+          return d.date.toLocaleString(localizer.localeCode(), options);
         });
 
       itemEnter

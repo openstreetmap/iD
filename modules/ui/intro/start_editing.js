@@ -3,7 +3,7 @@ import {
     select as d3_select
 } from 'd3-selection';
 
-import { t } from '../../util/locale';
+import { t } from '../../core/localizer';
 import { icon } from './helper';
 import { uiModal } from '../modal';
 import { utilRebind } from '../../util/rebind';

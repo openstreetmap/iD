@@ -2,12 +2,12 @@ describe('iD.presetIndex', function () {
     var _savedPresets, _savedAreaKeys;
 
     before(function() {
-        _savedPresets = iD.data.preset_presets;
+        _savedPresets = iD.fileFetcher.cache().preset_presets;
         _savedAreaKeys = iD.osmAreaKeys;
     });
 
     after(function() {
-        iD.data.preset_presets = _savedPresets;
+        iD.fileFetcher.cache().preset_presets = _savedPresets;
         iD.osmSetAreaKeys(_savedAreaKeys);
     });
 
@@ -49,54 +49,54 @@ describe('iD.presetIndex', function () {
         };
 
         it('returns a collection containing presets matching a geometry and tags', function (done) {
-            iD.data.preset_presets = testPresets;
+            iD.fileFetcher.cache().preset_presets = testPresets;
             var presets = iD.coreContext().init().presets();
-            var way = iD.osmWay({ tags: { highway: 'residential' } });
-            var graph = iD.coreGraph([way]);
-            window.setTimeout(function() {
+            presets.ensureLoaded().then(function() {
+                var way = iD.osmWay({ tags: { highway: 'residential' } });
+                var graph = iD.coreGraph([way]);
                 expect(presets.match(way, graph).id).to.eql('residential');
                 done();
-            }, 20);
+            });
         });
 
         it('returns the appropriate fallback preset when no tags match', function (done) {
-            iD.data.preset_presets = testPresets;
+            iD.fileFetcher.cache().preset_presets = testPresets;
             var presets = iD.coreContext().init().presets();
             var point = iD.osmNode();
             var line = iD.osmWay({ tags: { foo: 'bar' } });
             var graph = iD.coreGraph([point, line]);
 
-            window.setTimeout(function() {
+            presets.ensureLoaded().then(function() {
                 expect(presets.match(point, graph).id).to.eql('point');
                 expect(presets.match(line, graph).id).to.eql('line');
                 done();
-            }, 20);
+            });
         });
 
         it('matches vertices on a line as points', function (done) {
-            iD.data.preset_presets = testPresets;
+            iD.fileFetcher.cache().preset_presets = testPresets;
             var presets = iD.coreContext().init().presets();
             var point = iD.osmNode({ tags: { leisure: 'park' } });
             var line = iD.osmWay({ nodes: [point.id], tags: { 'highway': 'residential' } });
             var graph = iD.coreGraph([point, line]);
 
-            window.setTimeout(function() {
+            presets.ensureLoaded().then(function() {
                 expect(presets.match(point, graph).id).to.eql('point');
                 done();
-            }, 20);
+            });
         });
 
         it('matches vertices on an addr:interpolation line as points', function (done) {
-            iD.data.preset_presets = testPresets;
+            iD.fileFetcher.cache().preset_presets = testPresets;
             var presets = iD.coreContext().init().presets();
             var point = iD.osmNode({ tags: { leisure: 'park' } });
             var line = iD.osmWay({ nodes: [point.id], tags: { 'addr:interpolation': 'even' } });
             var graph = iD.coreGraph([point, line]);
 
-            window.setTimeout(function() {
+            presets.ensureLoaded().then(function() {
                 expect(presets.match(point, graph).id).to.eql('park');
                 done();
-            }, 20);
+            });
         });
     });
 
@@ -113,67 +113,67 @@ describe('iD.presetIndex', function () {
         };
 
         it('includes keys for presets with area geometry', function (done) {
-            iD.data.preset_presets = testPresets;
+            iD.fileFetcher.cache().preset_presets = testPresets;
             var presets = iD.coreContext().init().presets();
-            window.setTimeout(function() {
+            presets.ensureLoaded().then(function() {
                 expect(presets.areaKeys()).to.include.keys('natural');
                 done();
-            }, 20);
+            });
         });
 
         it('discards key-values for presets with a line geometry', function (done) {
-            iD.data.preset_presets = testPresets;
+            iD.fileFetcher.cache().preset_presets = testPresets;
             var presets = iD.coreContext().init().presets();
-            window.setTimeout(function() {
+            presets.ensureLoaded().then(function() {
                 expect(presets.areaKeys().natural).to.include.keys('tree_row');
                 expect(presets.areaKeys().natural.tree_row).to.be.true;
                 done();
-            }, 20);
+            });
         });
 
         it('discards key-values for presets with both area and line geometry', function (done) {
-            iD.data.preset_presets = testPresets;
+            iD.fileFetcher.cache().preset_presets = testPresets;
             var presets = iD.coreContext().init().presets();
-            window.setTimeout(function() {
+            presets.ensureLoaded().then(function() {
                 expect(presets.areaKeys().leisure).to.include.keys('track');
                 done();
-            }, 20);
+            });
         });
 
         it('does not discard key-values for presets with neither area nor line geometry', function (done) {
-            iD.data.preset_presets = testPresets;
+            iD.fileFetcher.cache().preset_presets = testPresets;
             var presets = iD.coreContext().init().presets();
-            window.setTimeout(function() {
+            presets.ensureLoaded().then(function() {
                 expect(presets.areaKeys().natural).not.to.include.keys('peak');
                 done();
-            }, 20);
+            });
         });
 
         it('does not discard generic \'*\' key-values', function (done) {
-            iD.data.preset_presets = testPresets;
+            iD.fileFetcher.cache().preset_presets = testPresets;
             var presets = iD.coreContext().init().presets();
-            window.setTimeout(function() {
+            presets.ensureLoaded().then(function() {
                 expect(presets.areaKeys().natural).not.to.include.keys('natural');
                 done();
-            }, 20);
+            });
         });
 
         it('ignores keys like \'highway\' that are assumed to be lines', function (done) {
-            iD.data.preset_presets = testPresets;
+            iD.fileFetcher.cache().preset_presets = testPresets;
             var presets = iD.coreContext().init().presets();
-            window.setTimeout(function() {
+            presets.ensureLoaded().then(function() {
                 expect(presets.areaKeys()).not.to.include.keys('highway');
                 done();
-            }, 20);
+            });
         });
 
         it('ignores suggestion presets', function (done) {
-            iD.data.preset_presets = testPresets;
+            iD.fileFetcher.cache().preset_presets = testPresets;
             var presets = iD.coreContext().init().presets();
-            window.setTimeout(function() {
+            presets.ensureLoaded().then(function() {
                 expect(presets.areaKeys()).not.to.include.keys('amenity');
                 done();
-            }, 20);
+            });
         });
     });
 
@@ -271,39 +271,39 @@ describe('iD.presetIndex', function () {
         };
 
         it('prefers building to multipolygon', function (done) {
-            iD.data.preset_presets = testPresets;
+            iD.fileFetcher.cache().preset_presets = testPresets;
             var presets = iD.coreContext().init().presets();
             var relation = iD.osmRelation({ tags: { type: 'multipolygon', building: 'yes' } });
             var graph = iD.coreGraph([relation]);
-            window.setTimeout(function() {
+            presets.ensureLoaded().then(function() {
                 var match = presets.match(relation, graph);
                 expect(match.id).to.eql('building');
                 done();
-            }, 20);
+            });
         });
 
         it('prefers building to address', function (done) {
-            iD.data.preset_presets = testPresets;
+            iD.fileFetcher.cache().preset_presets = testPresets;
             var presets = iD.coreContext().init().presets();
             var way = iD.osmWay({ tags: { area: 'yes', building: 'yes', 'addr:housenumber': '1234' } });
             var graph = iD.coreGraph([way]);
-            window.setTimeout(function() {
+            presets.ensureLoaded().then(function() {
                 var match = presets.match(way, graph);
                 expect(match.id).to.eql('building');
                 done();
-            }, 20);
+            });
         });
 
         it('prefers pedestrian to area', function (done) {
-            iD.data.preset_presets = testPresets;
+            iD.fileFetcher.cache().preset_presets = testPresets;
             var presets = iD.coreContext().init().presets();
             var way = iD.osmWay({ tags: { area: 'yes', highway: 'pedestrian' } });
             var graph = iD.coreGraph([way]);
-            window.setTimeout(function() {
+            presets.ensureLoaded().then(function() {
                 var match = presets.match(way, graph);
                 expect(match.id).to.eql('highway/pedestrian_area');
                 done();
-            }, 20);
+            });
         });
     });
 

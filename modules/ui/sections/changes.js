@@ -1,6 +1,7 @@
 import { select as d3_select } from 'd3-selection';
 
-import { t } from '../../util/locale';
+import { fileFetcher } from '../../core/file_fetcher';
+import { t } from '../../core/localizer';
 import { JXON } from '../../util/jxon';
 import { actionDiscardTags } from '../../actions/discard_tags';
 import { osmChangeset } from '../../osm';
@@ -19,7 +20,7 @@ export function uiSectionChanges(context) {
     var detected = utilDetect();
 
     var _discardTags = {};
-    context.data().get('discarded')
+    fileFetcher.get('discarded')
         .then(function(d) { _discardTags = d; })
         .catch(function() { /* ignore */ });
 

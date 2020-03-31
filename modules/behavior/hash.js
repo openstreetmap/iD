@@ -8,7 +8,7 @@ import { modeBrowse } from '../modes/browse';
 import { modeSelect } from '../modes/select';
 import { utilObjectOmit, utilQsString, utilStringQs } from '../util';
 import { utilArrayIdentical } from '../util/array';
-import { t } from '../util/locale';
+import { t } from '../core/localizer';
 
 
 export function behaviorHash(context) {

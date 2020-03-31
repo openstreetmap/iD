@@ -5,7 +5,7 @@ import {
     select as d3_select
 } from 'd3-selection';
 
-import { textDirection } from '../util/locale';
+import { localizer } from '../core/localizer';
 import { uiToggle } from './toggle';
 
 
@@ -164,7 +164,7 @@ export function uiCurtain() {
                 // tooltip to the side of the tooltipBox..
                 var tipY = tooltipBox.top + tooltipBox.height / 2 - tip.height / 2;
 
-                if (textDirection === 'rtl') {
+                if (localizer.textDirection() === 'rtl') {
                     if (tooltipBox.left - tooltipWidth - tooltipArrow < 70) {
                         side = 'right';
                         pos = [tooltipBox.left + tooltipBox.width + tooltipArrow, tipY];

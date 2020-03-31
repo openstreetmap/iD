@@ -1,4 +1,4 @@
-import { t } from '../../util/locale';
+import { t } from '../../core/localizer';
 import { uiToolQuickPresets } from './quick_presets';
 
 export function uiToolAddGeneric(context) {

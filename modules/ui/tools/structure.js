@@ -1,5 +1,5 @@
 import { uiToolSegemented } from './segmented';
-import { t } from '../../util/locale';
+import { t } from '../../core/localizer';
 import { osmTagsAllowingBridges, osmTagsAllowingTunnels } from '../../osm/tags';
 import { actionChangeTags } from '../../actions/change_tags';
 import { actionAddEntity } from '../../actions/add_entity';

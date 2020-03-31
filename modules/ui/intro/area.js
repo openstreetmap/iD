@@ -8,7 +8,7 @@ import {
     interpolateNumber as d3_interpolateNumber
 } from 'd3-interpolate';
 
-import { t } from '../../util/locale';
+import { t } from '../../core/localizer';
 import { modeBrowse } from '../../modes/browse';
 import { modeSelect } from '../../modes/select';
 import { utilRebind } from '../../util/rebind';

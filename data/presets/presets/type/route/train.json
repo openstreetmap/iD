@@ -5,7 +5,6 @@
         "ref_route",
         "operator",
         "network",
-        "network/type",
         "to",
         "from"
     ],

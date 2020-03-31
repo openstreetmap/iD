@@ -4,7 +4,7 @@ import { drag as d3_drag } from 'd3-drag';
 import { event as d3_event, select as d3_select } from 'd3-selection';
 
 import { modeAddArea, modeAddLine, modeAddPoint, modeBrowse } from '../../modes';
-import { t, textDirection } from '../../util/locale';
+import { t, localizer } from '../../core/localizer';
 import { uiTooltip } from '../tooltip';
 import { utilUniqueDomId } from '../../util/util';
 import { uiPresetIcon } from '../preset_icon';
@@ -188,7 +188,7 @@ export function uiToolQuickPresets(context) {
         .on('drag', function(d) {
             _dragMoved = true;
 
-            var ltr = textDirection === 'ltr',
+            var ltr = localizer.textDirection() === 'ltr',
                 rtl = !ltr;
 
             var deltaX = d3_event.x - _dragOrigin.x,
@@ -267,7 +267,7 @@ export function uiToolQuickPresets(context) {
                 return;
             }
 
-            var ltr = textDirection === 'ltr',
+            var ltr = localizer.textDirection() === 'ltr',
                 rtl = !ltr;
 
             context.container().selectAll('.top-toolbar .drag-placeholder')

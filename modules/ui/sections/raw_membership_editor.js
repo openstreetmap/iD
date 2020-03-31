@@ -3,7 +3,7 @@ import {
     select as d3_select
 } from 'd3-selection';
 
-import { t, textDirection } from '../../util/locale';
+import { t, localizer } from '../../core/localizer';
 
 import { actionAddEntity } from '../../actions/add_entity';
 import { actionAddMember } from '../../actions/add_member';
@@ -345,7 +345,7 @@ export function uiSectionRawMembershipEditor(context) {
         addRelationButton
             .call(svgIcon('#iD-icon-plus', 'light'));
         addRelationButton
-            .call(uiTooltip().title(t('inspector.add_to_relation')).placement(textDirection === 'ltr' ? 'right' : 'left'));
+            .call(uiTooltip().title(t('inspector.add_to_relation')).placement(localizer.textDirection() === 'ltr' ? 'right' : 'left'));
 
         addRowEnter
             .append('div')

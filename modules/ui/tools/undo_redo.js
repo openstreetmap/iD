@@ -5,7 +5,7 @@ import {
     select as d3_select
 } from 'd3-selection';
 
-import { t, textDirection } from '../../util/locale';
+import { t, localizer } from '../../core/localizer';
 import { svgIcon } from '../../svg';
 import { uiCmd } from '../cmd';
 import { uiTooltip } from '../tooltip';
@@ -16,7 +16,7 @@ export function uiToolUndoRedo(context) {
     var tool = {
         id: 'undo_redo',
         label: t('toolbar.undo_redo'),
-        iconName: textDirection === 'rtl' ? 'iD-icon-redo' : 'iD-icon-undo',
+        iconName: localizer.textDirection() === 'rtl' ? 'iD-icon-redo' : 'iD-icon-undo',
         userToggleable: false
     };
 
@@ -65,7 +65,7 @@ export function uiToolUndoRedo(context) {
 
         buttonsEnter.each(function(d) {
             var iconName;
-            if (textDirection === 'rtl') {
+            if (localizer.textDirection() === 'rtl') {
                 // reverse the icons for right-to-left layout
                 iconName = d.id === 'undo' ? 'redo' : 'undo';
             } else {

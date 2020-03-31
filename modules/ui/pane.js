@@ -4,7 +4,7 @@ import {
 } from 'd3-selection';
 
 import { svgIcon } from '../svg/icon';
-import { textDirection } from '../util/locale';
+import { localizer } from '../core/localizer';
 import { uiTooltip } from './tooltip';
 
 
@@ -72,7 +72,7 @@ export function uiPane(id, context) {
 
         if (!_paneTooltip) {
             _paneTooltip = uiTooltip()
-                .placement((textDirection === 'rtl') ? 'right' : 'left')
+                .placement((localizer.textDirection() === 'rtl') ? 'right' : 'left')
                 .title(_description)
                 .keys([_key]);
         }

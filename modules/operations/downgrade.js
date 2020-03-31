@@ -1,7 +1,7 @@
 import { actionChangeTags } from '../actions/change_tags';
 import { behaviorOperation } from '../behavior/operation';
 import { modeSelect } from '../modes/select';
-import { t } from '../util/locale';
+import { t } from '../core/localizer';
 import { uiCmd } from '../ui/cmd';
 
 

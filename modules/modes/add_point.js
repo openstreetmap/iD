@@ -1,4 +1,4 @@
-import { t } from '../util/locale';
+import { t } from '../core/localizer';
 import { behaviorDraw } from '../behavior/draw';
 import { modeBrowse } from './browse';
 import { modeSelect } from './select';

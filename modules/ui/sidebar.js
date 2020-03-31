@@ -16,7 +16,7 @@ import { uiImproveOsmEditor } from './improveOSM_editor';
 import { uiKeepRightEditor } from './keepRight_editor';
 import { uiOsmoseEditor } from './osmose_editor';
 import { uiNoteEditor } from './note_editor';
-import { textDirection } from '../util/locale';
+import { localizer } from '../core/localizer';
 
 
 export function uiSidebar(context) {
@@ -65,7 +65,7 @@ export function uiSidebar(context) {
                 resizer.classed('dragging', true);
             })
             .on('drag', function() {
-                var isRTL = (textDirection === 'rtl');
+                var isRTL = (localizer.textDirection() === 'rtl');
                 var scaleX = isRTL ? 0 : 1;
                 var xMarginProperty = isRTL ? 'margin-right' : 'margin-left';
 
@@ -306,7 +306,7 @@ export function uiSidebar(context) {
 
             var isCollapsed = selection.classed('collapsed');
             var isCollapsing = !isCollapsed;
-            var isRTL = (textDirection === 'rtl');
+            var isRTL = (localizer.textDirection() === 'rtl');
             var scaleX = isRTL ? 0 : 1;
             var xMarginProperty = isRTL ? 'margin-right' : 'margin-left';
 

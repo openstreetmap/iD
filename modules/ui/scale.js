@@ -1,11 +1,11 @@
 import { displayLength } from '../util/units';
 import { geoLonToMeters, geoMetersToLon } from '../geo';
-import { utilDetect } from '../util/detect';
+import { localizer } from '../core/localizer';
 
 
 export function uiScale(context) {
     var projection = context.projection,
-        isImperial = (utilDetect().locale.toLowerCase() === 'en-us'),
+        isImperial = !localizer.usesMetric(),
         maxLength = 180,
         tickHeight = 8;
 

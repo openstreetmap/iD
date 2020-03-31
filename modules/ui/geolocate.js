@@ -1,6 +1,6 @@
 import { select as d3_select } from 'd3-selection';
 
-import { t, textDirection } from '../util/locale';
+import { t, localizer } from '../core/localizer';
 import { uiTooltip } from './tooltip';
 import { geoExtent } from '../geo';
 import { modeBrowse } from '../modes/browse';
@@ -86,7 +86,7 @@ export function uiGeolocate(context) {
             .on('click', click)
             .call(svgIcon('#iD-icon-geolocate', 'light'))
             .call(uiTooltip()
-                .placement((textDirection === 'rtl') ? 'right' : 'left')
+                .placement((localizer.textDirection() === 'rtl') ? 'right' : 'left')
                 .title(t('geolocate.title'))
                 .keys([t('geolocate.key')])
             );

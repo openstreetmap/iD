@@ -2,7 +2,8 @@ import { dispatch as d3_dispatch } from 'd3-dispatch';
 import { select as d3_select, event as d3_event } from 'd3-selection';
 import * as countryCoder from '@ideditor/country-coder';
 
-import { t, textDirection } from '../../util/locale';
+import { fileFetcher } from '../../core/file_fetcher';
+import { t, localizer } from '../../core/localizer';
 import { geoExtent } from '../../geo';
 import { utilGetSetValue, utilNoAuto, utilRebind } from '../../util';
 import { svgIcon } from '../../svg/icon';
@@ -25,7 +26,7 @@ export function uiFieldText(field, context) {
     var _phoneFormats = {};
 
     if (field.type === 'tel') {
-        context.data().get('phone_formats')
+        fileFetcher.get('phone_formats')
             .then(function(d) { _phoneFormats = d; })
             .catch(function() { /* ignore */ });
     }
@@ -74,7 +75,7 @@ export function uiFieldText(field, context) {
             }
 
         } else if (field.type === 'number') {
-            var rtl = (textDirection === 'rtl');
+            var rtl = (localizer.textDirection() === 'rtl');
 
             input.attr('type', 'text');
 

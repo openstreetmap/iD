@@ -1,12 +1,12 @@
 import { dispatch as d3_dispatch } from 'd3-dispatch';
 import { select as d3_select, event as d3_event } from 'd3-selection';
 
-import { t } from '../../util/locale';
+import { fileFetcher } from '../../core/file_fetcher';
+import { t, localizer } from '../../core/localizer';
 import { actionChangeTags } from '../../actions/change_tags';
 import { services } from '../../services/index';
 import { svgIcon } from '../../svg/icon';
 import { uiCombobox } from '../combobox';
-import { utilDetect } from '../../util/detect';
 import { utilGetSetValue, utilNoAuto, utilRebind } from '../../util';
 
 
@@ -23,7 +23,7 @@ export function uiFieldWikipedia(field, context) {
   // be available the first time through, so things like the fetchers and
   // the language() function will not work immediately.
   let _dataWikipedia = [];
-  context.data().get('wmf_sitematrix')
+  fileFetcher.get('wmf_sitematrix')
     .then(d => _dataWikipedia = d)
     .catch(() => { /* ignore */ });
 
@@ -145,7 +145,7 @@ export function uiFieldWikipedia(field, context) {
 
   function language() {
     const value = utilGetSetValue(_lang).toLowerCase();
-    const locale = utilDetect().locale.toLowerCase();
+    const locale = localizer.localeCode().toLowerCase();
     let localeLanguage;
     return _dataWikipedia.find(d => {
       if (d[2] === locale) localeLanguage = d;

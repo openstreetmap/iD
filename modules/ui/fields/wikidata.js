@@ -17,7 +17,7 @@ import {
     utilRebind
 } from '../../util';
 
-import { t } from '../../util/locale';
+import { t } from '../../core/localizer';
 
 
 export function uiFieldWikidata(field, context) {

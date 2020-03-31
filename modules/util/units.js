@@ -1,8 +1,6 @@
-import { t } from './locale';
-import { utilDetect } from './detect';
+import { t, localizer } from '../core/localizer';
 
 var OSM_PRECISION = 7;
-var locale = utilDetect().locale;
 
 /**
  * Returns a localized representation of the given length measurement.
@@ -31,7 +29,7 @@ export function displayLength(m, isImperial) {
     }
 
     return t('units.' + unit, {
-        quantity: d.toLocaleString(locale, {
+        quantity: d.toLocaleString(localizer.localeCode(), {
             maximumSignificantDigits: 4
         })
     });
@@ -44,6 +42,7 @@ export function displayLength(m, isImperial) {
  * @param {Boolean} isImperial true for U.S. customary units; false for metric
  */
 export function displayArea(m2, isImperial) {
+    var locale = localizer.localeCode();
     var d = m2 * (isImperial ? 10.7639111056 : 1);
     var d1, d2, area;
     var unit1 = '';
@@ -108,6 +107,7 @@ function clamp(x, min, max) {
 }
 
 function displayCoordinate(deg, pos, neg) {
+    var locale = localizer.localeCode();
     var min = (Math.abs(deg) - Math.floor(Math.abs(deg))) * 60;
     var sec = (min - Math.floor(min)) * 60;
     var displayDegrees = t('units.arcdegrees', {

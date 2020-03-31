@@ -37,13 +37,13 @@ export function rendererMap(context) {
     );
     var projection = context.projection;
     var curtainProjection = context.curtainProjection;
-    var drawLayers = svgLayers(projection, context);
-    var drawPoints = svgPoints(projection, context);
-    var drawVertices = svgVertices(projection, context);
-    var drawLines = svgLines(projection, context);
-    var drawAreas = svgAreas(projection, context);
-    var drawMidpoints = svgMidpoints(projection, context);
-    var drawLabels = svgLabels(projection, context);
+    var drawLayers;
+    var drawPoints;
+    var drawVertices;
+    var drawLines;
+    var drawAreas;
+    var drawMidpoints;
+    var drawLabels;
 
     var _selection = d3_select(null);
     var supersurface = d3_select(null);
@@ -372,6 +372,15 @@ export function rendererMap(context) {
         dispatch.call('drawn', this, {full: true});
     }
 
+    map.init = function() {
+        drawLayers = svgLayers(projection, context);
+        drawPoints = svgPoints(projection, context);
+        drawVertices = svgVertices(projection, context);
+        drawLines = svgLines(projection, context);
+        drawAreas = svgAreas(projection, context);
+        drawMidpoints = svgMidpoints(projection, context);
+        drawLabels = svgLabels(projection, context);
+    };
 
     function editOff() {
         context.features().resetStats();
@@ -1070,7 +1079,7 @@ export function rendererMap(context) {
     }
 
 
-    map.layers = drawLayers;
+    map.layers = () => drawLayers;
 
 
     map.doubleUpHandler = function() {

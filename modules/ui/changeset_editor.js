@@ -1,6 +1,6 @@
 import { dispatch as d3_dispatch } from 'd3-dispatch';
 
-import { t } from '../util/locale';
+import { t } from '../core/localizer';
 import { svgIcon } from '../svg/icon';
 import { uiCombobox} from './combobox';
 import { uiField } from './field';

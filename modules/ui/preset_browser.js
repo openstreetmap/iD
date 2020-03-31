@@ -6,7 +6,7 @@ import { dispatch as d3_dispatch } from 'd3-dispatch';
 import deepEqual from 'fast-deep-equal';
 import * as countryCoder from '@ideditor/country-coder';
 
-import { t, textDirection } from '../util/locale';
+import { t, localizer } from '../core/localizer';
 import { svgIcon } from '../svg/index';
 import { uiTooltip } from './tooltip';
 import { uiPopover } from './popover';
@@ -510,7 +510,7 @@ export function uiPresetBrowser(context) {
         list.selectAll('.list-item.expanded')
             .classed('expanded', false)
             .selectAll('.label svg.icon use')
-            .attr('href', textDirection === 'rtl' ? '#iD-icon-backward' : '#iD-icon-forward');
+            .attr('href', localizer.textDirection() === 'rtl' ? '#iD-icon-backward' : '#iD-icon-forward');
 
         updateForFeatureHiddenState();
     }
@@ -560,7 +560,7 @@ export function uiPresetBrowser(context) {
         label.each(function(d) {
             if (d.subitems) {
                 d3_select(this)
-                    .call(svgIcon((textDirection === 'rtl' ? '#iD-icon-backward' : '#iD-icon-forward'), 'inline'));
+                    .call(svgIcon((localizer.textDirection() === 'rtl' ? '#iD-icon-backward' : '#iD-icon-forward'), 'inline'));
             }
         });
 
@@ -645,7 +645,7 @@ export function uiPresetBrowser(context) {
         itemSelection.classed('expanded', shouldExpand);
 
         var iconName = shouldExpand ?
-            '#iD-icon-down' : (textDirection === 'rtl' ? '#iD-icon-backward' : '#iD-icon-forward');
+            '#iD-icon-down' : (localizer.textDirection() === 'rtl' ? '#iD-icon-backward' : '#iD-icon-forward');
         itemSelection.selectAll('.label svg.icon use')
             .attr('href', iconName);
 

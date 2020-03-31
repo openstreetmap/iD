@@ -1,5 +1,5 @@
 import { uiToolSegemented } from './segmented';
-import { t } from '../../util/locale';
+import { t } from '../../core/localizer';
 import { modeAddPoint } from '../../modes/add_point';
 import { modeAddLine } from '../../modes/add_line';
 import { modeAddArea } from '../../modes/add_area';

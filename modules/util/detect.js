@@ -1,14 +1,11 @@
-import { currentLocale, localeData, setTextDirection, setLanguageNames, setScriptNames } from './locale';
-import { utilStringQs } from './util';
 
 let _detected;
 
-export function utilDetect(force) {
-  if (_detected && !force) return _detected;
+export function utilDetect(refresh) {
+  if (_detected && !refresh) return _detected;
   _detected = {};
 
   const ua = navigator.userAgent;
-  const hash = utilStringQs(window.location.hash);
   let m = null;
 
   /* Browser */
@@ -82,58 +79,21 @@ export function utilDetect(force) {
   }
 
 
-  /* Locale, Language */
-  // The locale and language specified in the url hash
-  if (hash.locale) {
-    _detected.hashLocale = hash.locale;
-    _detected.hashLanguage = hash.locale.split('-')[0];
-  }
+  /* Locale */
+  // An array of locales requested by the browser in priority order.
+  _detected.browserLocales = Array.from(new Set( // remove duplicates
+      [navigator.language]
+        .concat(navigator.languages || [])
+        .concat([
+            // old property for backwards compatibility
+            navigator.userLanguage,
+            // fallback to English
+            'en'
+        ])
+        // remove any undefined values
+        .filter(Boolean)
+    ));
 
-  // The locale and language specified by the user's browser
-  _detected.browserLocale = (navigator.language || navigator.userLanguage || 'en-US');
-  _detected.browserLanguage = _detected.browserLocale.split('-')[0];
-
-  // Search `navigator.languages` for a better locale.  Prefer the first language,
-  //   unless the second language is a culture-specific version of the first one, see #3842
-  if (navigator.languages && navigator.languages.length > 0) {
-    const code0 = navigator.languages[0];
-    const parts0 = code0.split('-');
-
-    _detected.browserLocale = code0;
-    _detected.browserLanguage = parts0[0];
-
-    if (navigator.languages.length > 1 && parts0.length === 1) {
-      const code1 = navigator.languages[1];
-      const parts1 = code1.split('-');
-
-      if (parts1[0] === parts0[0]) {
-        _detected.browserLocale = code1;
-      }
-    }
-  }
-
-  // The locale and language actually being used by iD.
-  // This can be changed at any time and is stored in the `currentLocale` export.
-  // So report those instead (except in the situation where 'en' might override 'en-US')
-  const current = currentLocale || 'en';
-  if (current === 'en') {
-    _detected.locale = _detected.hashLocale || _detected.browserLocale;
-    _detected.language = _detected.hashLanguage || _detected.browserLanguage;
-  } else {
-    _detected.locale = current;
-    _detected.language = current.split('-')[0];
-  }
-
-  // detect text direction
-  const lang = localeData[_detected.locale] || localeData[_detected.language];
-  if ((lang && lang.rtl) || (hash.rtl === 'true')) {
-    _detected.textDirection = 'rtl';
-  } else {
-    _detected.textDirection = 'ltr';
-  }
-  setTextDirection(_detected.textDirection);
-  setLanguageNames((lang && lang.languageNames) || {});
-  setScriptNames((lang && lang.scriptNames) || {});
 
   /* Host */
   const loc = window.top.location;

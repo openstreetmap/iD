@@ -1,4 +1,4 @@
-import { t } from '../util/locale';
+import { t } from '../core/localizer';
 
 import { actionJoin } from '../actions/join';
 import { actionMerge } from '../actions/merge';

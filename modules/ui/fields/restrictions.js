@@ -1,7 +1,7 @@
 import { dispatch as d3_dispatch } from 'd3-dispatch';
 import { select as d3_select, event as d3_event } from 'd3-selection';
 
-import { t } from '../../util/locale';
+import { t, localizer } from '../../core/localizer';
 import { actionRestrictTurn } from '../../actions/restrict_turn';
 import { actionUnrestrictTurn } from '../../actions/unrestrict_turn';
 import { behaviorBreathe } from '../../behavior/breathe';
@@ -9,7 +9,6 @@ import { geoExtent, geoRawMercator, geoVecScale, geoVecSubtract, geoZoomToScale 
 import { osmIntersection, osmInferRestriction, osmTurn, osmWay } from '../../osm';
 import { svgLayers, svgLines, svgTurns, svgVertices } from '../../svg';
 import { utilDisplayName, utilDisplayType, utilEntitySelector, utilFunctor, utilRebind } from '../../util';
-import { utilDetect } from '../../util/detect';
 import { utilGetDimensions, utilSetDimensions } from '../../util/dimensions';
 
 
@@ -583,7 +582,7 @@ export function uiFieldRestrictions(field, context) {
 
 
     function displayMaxDistance(maxDist) {
-        var isImperial = (utilDetect().locale.toLowerCase() === 'en-us');
+        var isImperial = !localizer.usesMetric();
         var opts;
 
         if (isImperial) {

@@ -7,7 +7,7 @@ import {
     modeBrowse
 } from '../../modes';
 
-import { t } from '../../util/locale';
+import { t } from '../../core/localizer';
 import { svgIcon } from '../../svg';
 import { uiTooltip } from '../tooltip';
 

@@ -8,7 +8,7 @@ import { behaviorHover } from '../behavior/hover';
 import { behaviorLasso } from '../behavior/lasso';
 import { behaviorSelect } from '../behavior/select';
 
-import { t } from '../util/locale';
+import { t } from '../core/localizer';
 import { services } from '../services';
 import { modeBrowse } from './browse';
 import { modeDragNode } from './drag_node';

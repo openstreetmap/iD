@@ -4,20 +4,19 @@ import { dispatch as d3_dispatch } from 'd3-dispatch';
 import { json as d3_json } from 'd3-fetch';
 import { select as d3_select } from 'd3-selection';
 
-import { t, setLocale, localeStrings, localeData } from '../util/locale';
+import { t } from '../core/localizer';
 
-import { coreData } from './data';
+import { fileFetcher as data } from './file_fetcher';
+import { localizer } from './localizer';
 import { coreHistory } from './history';
 import { coreValidator } from './validator';
 import { coreUploader } from './uploader';
 import { geoRawMercator } from '../geo/raw_mercator';
 import { modeSelect } from '../modes/select';
-import { osmSetAreaKeys, osmSetPointTags, osmSetVertexTags } from '../osm/tags';
 import { presetIndex } from '../presets';
 import { rendererBackground, rendererFeatures, rendererMap, rendererPhotos } from '../renderer';
 import { services } from '../services';
 import { uiInit } from '../ui/init';
-import { utilDetect } from '../util/detect';
 import { utilKeybinding, utilRebind, utilStringQs } from '../util';
 
 
@@ -69,12 +68,10 @@ export function coreContext() {
 
   /* Straight accessors. Avoid using these if you can. */
   let _connection;
-  let _data;
   let _history;
   let _validator;
   let _uploader;
   context.connection = () => _connection;
-  context.data = () => _data;
   context.history = () => _history;
   context.validator = () => _validator;
   context.uploader = () => _uploader;
@@ -84,6 +81,14 @@ export function coreContext() {
     if (_connection) {
       _connection.switch(options);
     }
+    return context;
+  };
+
+  /* connection options for source switcher (optional) */
+  let _apiConnections;
+  context.apiConnections = function(val) {
+    if (!arguments.length) return _apiConnections;
+    _apiConnections = val;
     return context;
   };
 
@@ -330,7 +335,7 @@ export function coreContext() {
   /* Map */
   let _map;
   context.map = () => _map;
-  context.layers = () => _map.layers;
+  context.layers = () => _map.layers();
   context.surface = () => _map.surface;
   context.editableDataEnabled = () => _map.editableDataEnabled();
   context.surfaceRect = () => _map.surface.node().getBoundingClientRect();
@@ -361,13 +366,19 @@ export function coreContext() {
 
 
   /* Container */
-  let _container = d3_select(document.body);
+  let _container = d3_select(null);
   context.container = function(val) {
     if (!arguments.length) return _container;
     _container = val;
     _container.classed('ideditor', true);
     return context;
   };
+  context.containerNode = function(val) {
+    if (!arguments.length) return context.container().node();
+    context.container(d3_select(val));
+    return context;
+  };
+
   let _embed;
   context.embed = function(val) {
     if (!arguments.length) return _embed;
@@ -381,6 +392,7 @@ export function coreContext() {
   context.assetPath = function(val) {
     if (!arguments.length) return _assetPath;
     _assetPath = val;
+    data.assetPath(val);
     return context;
   };
 
@@ -388,6 +400,7 @@ export function coreContext() {
   context.assetMap = function(val) {
     if (!arguments.length) return _assetMap;
     _assetMap = val;
+    data.assetMap(val);
     return context;
   };
 
@@ -398,37 +411,6 @@ export function coreContext() {
   };
 
   context.imagePath = (val) => context.asset(`img/${val}`);
-
-
-  /* Locales */
-  // Returns a Promise to load the strings for the requested locale
-  context.loadLocale = (requested) => {
-    let locale = requested;
-
-    if (!_data) {
-      return Promise.reject('loadLocale called before init');
-    }
-    if (!localeData[locale]) {        // Locale not supported, e.g. 'es-FAKE'
-      locale = locale.split('-')[0];  // Fallback to the first part 'es'
-    }
-    if (!localeData[locale]) {
-      return Promise.reject(`Unsupported locale: ${requested}`);
-    }
-
-    if (localeStrings[locale]) {    // already loaded
-      return Promise.resolve(locale);
-    }
-
-    let fileMap = _data.fileMap();
-    const key = `locale_${locale}`;
-    fileMap[key] = `locales/${locale}.json`;
-
-    return _data.get(key)
-      .then(d => {
-        localeStrings[locale] = d[locale];
-        return locale;
-      });
-  };
 
 
   /* reset (aka flush) */
@@ -465,82 +447,83 @@ export function coreContext() {
 
   /* Init */
   context.init = () => {
-    const hash = utilStringQs(window.location.hash);
 
-    _data = coreData(context);
+    instantiateInternal();
 
-    // Start loading data:
-    // 1. the list of supported locales
-    // 2. the English locale strings (used as fallbacks)
-    // 3. the preferred locale strings (detected by utilDetect)
-    const requested = utilDetect().locale;
-    _data.get('locales')
-      .then(d => Object.assign(localeData, d))
-      .then(() => context.loadLocale('en'))
-      .then(() => context.loadLocale(requested))
-      .then(received => {      // `received` may not match `requested`.
-        setLocale(received);   // (e.g. 'es-FAKE' will return 'es')
-        utilDetect(true);      // Then force redetection
-      })
-      .catch(err => console.error(err));  // eslint-disable-line
-
-    _history = coreHistory(context);
-    _validator = coreValidator(context);
-    _uploader = coreUploader(context);
-
-    context.graph = _history.graph;
-    context.intersects = _history.intersects;
-    context.pauseChangeDispatch = _history.pauseChangeDispatch;
-    context.resumeChangeDispatch = _history.resumeChangeDispatch;
-
-    context.perform = withDebouncedSave(_history.perform);
-    context.replace = withDebouncedSave(_history.replace);
-    context.pop = withDebouncedSave(_history.pop);
-    context.overwrite = withDebouncedSave(_history.overwrite);
-    context.undo = withDebouncedSave(_history.undo);
-    context.redo = withDebouncedSave(_history.redo);
-
-    _ui = uiInit(context);
-
-    _connection = services.osm;
-    _background = rendererBackground(context);
-    _features = rendererFeatures(context);
-    _photos = rendererPhotos(context);
-    _presets = presetIndex(context);
-
-    if (hash.presets) {
-      _presets.addablePresetIDs(new Set(hash.presets.split(',')));
-    }
-
-    _map = rendererMap(context);
-
-    Object.values(services).forEach(service => {
-      if (service && typeof service.init === 'function') {
-        service.init(context);
-      }
-    });
-
-    _validator.init();
-    _background.init();
-    _features.init();
-    _photos.init();
-    _presets.init()
-      .then(() => {
-        osmSetAreaKeys(_presets.areaKeys());
-        osmSetPointTags(_presets.pointTags());
-        osmSetVertexTags(_presets.vertexTags());
-      });
-
-    if (services.maprules && hash.maprules) {
-      d3_json(hash.maprules)
-        .then(mapcss => {
-          services.maprules.init();
-          mapcss.forEach(mapcssSelector => services.maprules.addRule(mapcssSelector));
-        })
-        .catch(() => { /* ignore */ });
-    }
+    initializeDependents();
 
     return context;
+
+    // Load variables and properties. No property of `context` should be accessed
+    // until this is complete since load statuses are indeterminate. The order
+    // of instantiation shouldn't matter.
+    function instantiateInternal() {
+
+      _history = coreHistory(context);
+      context.graph = _history.graph;
+      context.intersects = _history.intersects;
+      context.pauseChangeDispatch = _history.pauseChangeDispatch;
+      context.resumeChangeDispatch = _history.resumeChangeDispatch;
+      context.perform = withDebouncedSave(_history.perform);
+      context.replace = withDebouncedSave(_history.replace);
+      context.pop = withDebouncedSave(_history.pop);
+      context.overwrite = withDebouncedSave(_history.overwrite);
+      context.undo = withDebouncedSave(_history.undo);
+      context.redo = withDebouncedSave(_history.redo);
+
+      _validator = coreValidator(context);
+      _uploader = coreUploader(context);
+
+      _background = rendererBackground(context);
+      _features = rendererFeatures(context);
+      _map = rendererMap(context);
+      _photos = rendererPhotos(context);
+
+      _presets = presetIndex(context);
+
+      _ui = uiInit(context);
+
+      _connection = services.osm;
+    }
+
+    // Set up objects that might need to access properties of `context`. The order
+    // might matter if dependents make calls to each other. Be wary of async calls.
+    function initializeDependents() {
+
+      const hash = utilStringQs(window.location.hash);
+
+      if (hash.presets) {
+        _presets.addablePresetIDs(new Set(hash.presets.split(',')));
+      }
+
+      // kick off some async work
+      localizer.ensureLoaded();
+      _background.ensureLoaded();
+      _presets.ensureLoaded();
+
+      Object.values(services).forEach(service => {
+        if (service && typeof service.init === 'function') {
+          service.init();
+        }
+      });
+
+      _map.init();
+      _validator.init();
+      _features.init();
+      _photos.init();
+
+      if (services.maprules && hash.maprules) {
+        d3_json(hash.maprules)
+          .then(mapcss => {
+            services.maprules.init();
+            mapcss.forEach(mapcssSelector => services.maprules.addRule(mapcssSelector));
+          })
+          .catch(() => { /* ignore */ });
+      }
+
+      // if the container isn't available, e.g. when testing, don't load the UI
+      if (!context.container().empty()) _ui.ensureLoaded();
+    }
   };
 
 

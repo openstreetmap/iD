@@ -1,7 +1,7 @@
 import _debounce from 'lodash-es/debounce';
 
 import { decimalCoordinatePair, dmsCoordinatePair } from '../../util/units';
-import { t } from '../../util/locale';
+import { t } from '../../core/localizer';
 import { services } from '../../services';
 
 

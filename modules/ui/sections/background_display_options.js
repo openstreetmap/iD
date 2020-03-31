@@ -3,7 +3,7 @@ import {
     select as d3_select
 } from 'd3-selection';
 
-import { t, textDirection } from '../../util/locale';
+import { t, localizer } from '../../core/localizer';
 import { svgIcon } from '../../svg/icon';
 import { uiSection } from '../section';
 import { utilDetect } from '../../util/detect';
@@ -93,7 +93,7 @@ export function uiSectionBackgroundDisplayOptions(context) {
                 if (d3_event.button !== 0) return;
                 updateValue(d, 1);
             })
-            .call(svgIcon('#iD-icon-' + (textDirection === 'rtl' ? 'redo' : 'undo')));
+            .call(svgIcon('#iD-icon-' + (localizer.textDirection() === 'rtl' ? 'redo' : 'undo')));
 
         // reset all button
         containerEnter

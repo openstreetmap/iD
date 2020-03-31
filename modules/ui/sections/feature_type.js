@@ -4,7 +4,7 @@ import {
 } from 'd3-selection';
 
 import { utilArrayIdentical } from '../../util/array';
-import { t } from '../../util/locale';
+import { t } from '../../core/localizer';
 import { uiTooltip } from '../tooltip';
 import { utilRebind } from '../../util';
 import { uiPresetIcon } from '../preset_icon';

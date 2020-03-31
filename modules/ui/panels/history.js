@@ -1,6 +1,5 @@
-import { t } from '../../util/locale';
+import { t, localizer } from '../../core/localizer';
 import { svgIcon } from '../../svg';
-import { utilDetect } from '../../util/detect';
 
 
 export function uiPanelHistory(context) {
@@ -8,14 +7,13 @@ export function uiPanelHistory(context) {
 
     function displayTimestamp(timestamp) {
         if (!timestamp) return t('info_panels.history.unknown');
-        var detected = utilDetect();
         var options = {
             day: 'numeric', month: 'short', year: 'numeric',
             hour: 'numeric', minute: 'numeric', second: 'numeric'
         };
         var d = new Date(timestamp);
         if (isNaN(d.getTime())) return t('info_panels.history.unknown');
-        return d.toLocaleString(detected.locale, options);
+        return d.toLocaleString(localizer.localeCode(), options);
     }
 
 

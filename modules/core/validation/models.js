@@ -1,5 +1,5 @@
 import { geoExtent } from '../../geo';
-import { t } from '../../util/locale';
+import { t } from '../../core/localizer';
 
 export function validationIssue(attrs) {
     this.type = attrs.type;                // required - name of rule that created the issue (e.g. 'missing_tag')

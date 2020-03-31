@@ -1,5 +1,5 @@
 import { select as d3_select } from 'd3-selection';
-import { t } from '../util/locale';
+import { t } from '../core/localizer';
 
 import { geoScaleToZoom, geoVecLength } from '../geo';
 import { utilPrefixCSSProperty, utilTiler } from '../util';

@@ -1,7 +1,7 @@
 import { remove as removeDiacritics } from 'diacritics';
 import { fixRTLTextForSvg, rtlRegex } from './svg_paths_rtl_fix';
 
-import { t } from './locale';
+import { t, localizer } from '../core/localizer';
 import { utilArrayUnion } from './array';
 import { utilDetect } from './detect';
 
@@ -164,7 +164,7 @@ export function utilGetAllNodes(ids, graph) {
 
 
 export function utilDisplayName(entity) {
-    var localizedNameKey = 'name:' + utilDetect().locale.toLowerCase().split('-')[0];
+    var localizedNameKey = 'name:' + localizer.languageCode().toLowerCase();
     var name = entity.tags[localizedNameKey] || entity.tags.name || '';
     var network = entity.tags.cycle_network || entity.tags.network;
 
