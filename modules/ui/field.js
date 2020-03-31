@@ -327,7 +327,8 @@ export function uiField(context, presetField, entityIDs, options) {
         if (entityIDs &&
             !tagsContainFieldKey() && // ignore tagging prerequisites if a value is already present
             prerequisiteTag) {
-            return entityIDs.some(function(entityID) {
+
+            if (!entityIDs.every(function(entityID) {
                 var entity = context.graph().entity(entityID);
                 if (prerequisiteTag.key) {
                     var value = entity.tags[prerequisiteTag.key];
@@ -342,7 +343,8 @@ export function uiField(context, presetField, entityIDs, options) {
                 } else if (prerequisiteTag.keyNot) {
                     if (entity.tags[prerequisiteTag.keyNot]) return false;
                 }
-            });
+                return true;
+            })) return false;
         }
 
         return true;
