@@ -1,5 +1,6 @@
 import { select as d3_select } from 'd3-selection';
 
+import { prefs } from '../core/preferences';
 import { svgIcon, svgTagClasses } from '../svg';
 import { utilFunctor } from '../util';
 
@@ -232,7 +233,7 @@ export function uiPresetIcon(context) {
       geom = 'route';
     }
 
-    const showThirdPartyIcons = context.storage('preferences.privacy.thirdpartyicons') || 'true';
+    const showThirdPartyIcons = prefs('preferences.privacy.thirdpartyicons') || 'true';
     const isFallback = isSmall() && p.isFallback && p.isFallback();
     const imageURL = (showThirdPartyIcons === 'true') && p.imageURL;
     const picon = getIcon(p, geom);

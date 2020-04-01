@@ -1,3 +1,4 @@
+import { prefs } from '../core/preferences';
 import { fileFetcher } from '../core/file_fetcher';
 import { t } from '../core/localizer';
 import { uiIntro } from './intro';
@@ -13,8 +14,8 @@ export function uiSplash(context) {
 
     // If user has not seen this version of the privacy policy, show the splash again.
     let updateMessage = '';
-    const sawPrivacyVersion = context.storage('sawPrivacyVersion');
-    let showSplash = !context.storage('sawSplash');
+    const sawPrivacyVersion = prefs('sawPrivacyVersion');
+    let showSplash = !prefs('sawSplash');
     if (sawPrivacyVersion !== context.privacyVersion) {
       updateMessage = t('splash.privacy_update');
       showSplash = true;
@@ -22,8 +23,8 @@ export function uiSplash(context) {
 
     if (!showSplash) return;
 
-    context.storage('sawSplash', true);
-    context.storage('sawPrivacyVersion', context.privacyVersion);
+    prefs('sawSplash', true);
+    prefs('sawPrivacyVersion', context.privacyVersion);
 
     // fetch intro graph data now, while user is looking at the splash screen
     fileFetcher.get('intro_graph');

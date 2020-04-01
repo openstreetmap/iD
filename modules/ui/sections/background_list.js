@@ -5,6 +5,7 @@ import {
     select as d3_select
 } from 'd3-selection';
 
+import { prefs } from '../../core/preferences';
 import { t, localizer } from '../../core/localizer';
 import { uiTooltip } from '../tooltip';
 import { svgIcon } from '../../svg/icon';
@@ -27,7 +28,7 @@ export function uiSectionBackgroundList(context) {
         .disclosureContent(renderDisclosureContent);
 
     function previousBackgroundID() {
-        return context.storage('background-last-used-toggle');
+        return prefs('background-last-used-toggle');
     }
 
     function renderDisclosureContent(selection) {
@@ -223,8 +224,8 @@ export function uiSectionBackgroundList(context) {
 
         d3_event.preventDefault();
         var previousBackground = context.background().baseLayerSource();
-        context.storage('background-last-used-toggle', previousBackground.id);
-        context.storage('background-last-used', d.id);
+        prefs('background-last-used-toggle', previousBackground.id);
+        prefs('background-last-used', d.id);
         context.background().baseLayerSource(d);
         document.activeElement.blur();
     }

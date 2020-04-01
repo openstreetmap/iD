@@ -2,6 +2,7 @@ import { dispatch as d3_dispatch } from 'd3-dispatch';
 import { select as d3_select } from 'd3-selection';
 import deepEqual from 'fast-deep-equal';
 
+import { prefs } from '../core/preferences';
 import { t, localizer } from '../core/localizer';
 import { osmChangeset } from '../osm';
 import { svgIcon } from '../svg/icon';
@@ -59,13 +60,13 @@ export function uiCommit(context) {
         var tagCharLimit = context.maxCharsForTagValue();
 
         // expire stored comment, hashtags, source after cutoff datetime - #3947 #4899
-        var commentDate = +context.storage('commentDate') || 0;
+        var commentDate = +prefs('commentDate') || 0;
         var currDate = Date.now();
         var cutoff = 2 * 86400 * 1000;   // 2 days
         if (commentDate > currDate || currDate - commentDate > cutoff) {
-            context.storage('comment', null);
-            context.storage('hashtags', null);
-            context.storage('source', null);
+            prefs('comment', null);
+            prefs('hashtags', null);
+            prefs('source', null);
         }
 
         var tags;
@@ -76,20 +77,20 @@ export function uiCommit(context) {
             // load in the URL hash values, if any
             var hash = context.ui().hash;
             if (hash.comment) {
-                context.storage('comment', hash.comment);
-                context.storage('commentDate', Date.now());
+                prefs('comment', hash.comment);
+                prefs('commentDate', Date.now());
             }
             if (hash.source) {
-                context.storage('source', hash.source);
-                context.storage('commentDate', Date.now());
+                prefs('source', hash.source);
+                prefs('commentDate', Date.now());
             }
             if (hash.hashtags) {
-                context.storage('hashtags', hash.hashtags);
+                prefs('hashtags', hash.hashtags);
             }
 
             var detected = utilDetect();
             tags = {
-                comment: context.storage('comment') || '',
+                comment: prefs('comment') || '',
                 created_by: ('iD ' + context.version).substr(0, tagCharLimit),
                 host: detected.host.substr(0, tagCharLimit),
                 locale: localizer.localeCode().substr(0, tagCharLimit)
@@ -99,12 +100,12 @@ export function uiCommit(context) {
             // hashtags if any hashtags are found in the comment - #4304
             findHashtags(tags, true);
 
-            var hashtags = context.storage('hashtags');
+            var hashtags = prefs('hashtags');
             if (hashtags) {
                 tags.hashtags = hashtags;
             }
 
-            var source = context.storage('source');
+            var source = prefs('source');
             if (source) {
                 tags.source = source;
             }
@@ -450,16 +451,16 @@ export function uiCommit(context) {
                 changed.comment = '';
             }
             if (!onInput) {
-                context.storage('comment', changed.comment);
-                context.storage('commentDate', Date.now());
+                prefs('comment', changed.comment);
+                prefs('commentDate', Date.now());
             }
         }
         if (changed.hasOwnProperty('source')) {
             if (changed.source === undefined) {
-                context.storage('source', null);
+                prefs('source', null);
             } else if (!onInput) {
-                context.storage('source', changed.source);
-                context.storage('commentDate', Date.now());
+                prefs('source', changed.source);
+                prefs('commentDate', Date.now());
             }
         }
 
@@ -476,7 +477,7 @@ export function uiCommit(context) {
         var inHashTags = hashTags();
 
         if (inComment !== null) {                    // when hashtags are detected in comment...
-            context.storage('hashtags', null);       // always remove stored hashtags - #4304
+            prefs('hashtags', null);       // always remove stored hashtags - #4304
             if (commentOnly) { inHashTags = []; }    // optionally override hashtags field
         }
 
@@ -555,10 +556,10 @@ export function uiCommit(context) {
             var arr = findHashtags(tags, commentOnly);
             if (arr.length) {
                 tags.hashtags = arr.join(';').substr(0, tagCharLimit);
-                context.storage('hashtags', tags.hashtags);
+                prefs('hashtags', tags.hashtags);
             } else {
                 delete tags.hashtags;
-                context.storage('hashtags', null);
+                prefs('hashtags', null);
             }
         }
 
@@ -570,17 +571,17 @@ export function uiCommit(context) {
             // first 100 edits - new user
             if (changesetsCount <= 100) {
                 var s;
-                s = context.storage('walkthrough_completed');
+                s = prefs('walkthrough_completed');
                 if (s) {
                     tags['ideditor:walkthrough_completed'] = s;
                 }
 
-                s = context.storage('walkthrough_progress');
+                s = prefs('walkthrough_progress');
                 if (s) {
                     tags['ideditor:walkthrough_progress'] = s;
                 }
 
-                s = context.storage('walkthrough_started');
+                s = prefs('walkthrough_started');
                 if (s) {
                     tags['ideditor:walkthrough_started'] = s;
                 }

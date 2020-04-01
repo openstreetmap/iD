@@ -6,6 +6,7 @@ import { scaleLinear as d3_scaleLinear } from 'd3-scale';
 import { event as d3_event, select as d3_select } from 'd3-selection';
 import { zoom as d3_zoom, zoomIdentity as d3_zoomIdentity } from 'd3-zoom';
 
+import { prefs } from '../core/preferences';
 import { geoExtent, geoRawMercator, geoScaleToZoom, geoZoomToScale } from '../geo';
 import { modeBrowse } from '../modes/browse';
 import { svgAreas, svgLabels, svgLayers, svgLines, svgMidpoints, svgPoints, svgVertices } from '../svg';
@@ -1046,11 +1047,11 @@ export function rendererMap(context) {
     map.areaFillOptions = ['wireframe', 'partial', 'full'];
 
     map.activeAreaFill = function(val) {
-        if (!arguments.length) return context.storage('area-fill') || 'partial';
+        if (!arguments.length) return prefs('area-fill') || 'partial';
 
-        context.storage('area-fill', val);
+        prefs('area-fill', val);
         if (val !== 'wireframe') {
-            context.storage('area-fill-toggle', val);
+            prefs('area-fill-toggle', val);
         }
         updateAreaFill();
         map.pan([0,0]);  // trigger a redraw
@@ -1063,7 +1064,7 @@ export function rendererMap(context) {
         var activeFill = map.activeAreaFill();
 
         if (activeFill === 'wireframe') {
-            activeFill = context.storage('area-fill-toggle') || 'partial';
+            activeFill = prefs('area-fill-toggle') || 'partial';
         } else {
             activeFill = 'wireframe';
         }

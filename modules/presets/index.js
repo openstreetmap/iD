@@ -1,5 +1,6 @@
 import { dispatch as d3_dispatch } from 'd3-dispatch';
 
+import { prefs } from '../core/preferences';
 import { fileFetcher } from '../core/file_fetcher';
 import { osmNodeGeometriesForTags, osmSetAreaKeys, osmSetPointTags, osmSetVertexTags } from '../osm/tags';
 import { presetCategory } from './category';
@@ -378,7 +379,7 @@ export function presetIndex(context) {
   function setRecents(items) {
     _recents = items;
     const minifiedItems = items.map(d => d.minified());
-    context.storage('preset_recents', JSON.stringify(minifiedItems));
+    prefs('preset_recents', JSON.stringify(minifiedItems));
     dispatch.call('recentsChange');
   }
 
@@ -386,7 +387,7 @@ export function presetIndex(context) {
   _this.getRecents = () => {
     if (!_recents) {
       // fetch from local storage
-      _recents = (JSON.parse(context.storage('preset_recents')) || [])
+      _recents = (JSON.parse(prefs('preset_recents')) || [])
         .reduce((acc, d) => {
           let item = ribbonItemForMinified(d, 'recent');
           if (item && item.preset.addable()) acc.push(item);

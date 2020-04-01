@@ -1,6 +1,7 @@
 import { event as d3_event, select as d3_select } from 'd3-selection';
 
 import { geoVecLength } from '../geo';
+import { prefs } from '../core/preferences';
 import { modeBrowse } from '../modes/browse';
 import { modeSelect } from '../modes/select';
 import { modeSelectData } from '../modes/select_data';
@@ -13,7 +14,7 @@ import { utilFastMouse } from '../util/util';
 
 export function behaviorSelect(context) {
     // legacy option to show menu on every click
-    var isShowAlways = +context.storage('edit-menu-show-always') === 1;
+    var isShowAlways = +prefs('edit-menu-show-always') === 1;
     var tolerance = 4;
     var _lastMouse = null;
     var _showMenu = false;

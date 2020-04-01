@@ -6,6 +6,7 @@ import {
 //import { actionNoop } from '../actions/noop';
 import { geoSphericalDistance } from '../../geo';
 import { svgIcon } from '../../svg/icon';
+import { prefs } from '../../core/preferences';
 import { t } from '../../core/localizer';
 import { utilHighlightEntities } from '../../util';
 import { uiSection } from '../section';
@@ -27,8 +28,8 @@ export function uiSectionValidationIssues(id, severity, context) {
 
     function getOptions() {
         return {
-            what: context.storage('validate-what') || 'edited',
-            where: context.storage('validate-where') || 'all'
+            what: prefs('validate-what') || 'edited',
+            where: prefs('validate-where') || 'all'
         };
     }
 

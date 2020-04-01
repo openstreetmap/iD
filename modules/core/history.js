@@ -2,6 +2,7 @@ import { dispatch as d3_dispatch } from 'd3-dispatch';
 import { easeLinear as d3_easeLinear } from 'd3-ease';
 import { select as d3_select } from 'd3-selection';
 
+import { prefs } from './preferences';
 import { coreDifference } from './difference';
 import { coreGraph } from './graph';
 import { coreTree } from './tree';
@@ -18,7 +19,7 @@ export function coreHistory(context) {
     var lock = utilSessionMutex('lock');
 
     // restorable if iD not open in another window/tab and a saved history exists in localStorage
-    var _hasUnresolvedRestorableChanges = lock.lock() && !!context.storage(getKey('saved_history'));
+    var _hasUnresolvedRestorableChanges = lock.lock() && !!prefs(getKey('saved_history'));
 
     var duration = 150;
     var _imageryUsed = [];
@@ -656,7 +657,7 @@ export function coreHistory(context) {
                 // don't overwrite existing, unresolved changes
                 !_hasUnresolvedRestorableChanges) {
 
-                context.storage(getKey('saved_history'), history.toJSON() || null);
+                prefs(getKey('saved_history'), history.toJSON() || null);
             }
             return history;
         },
@@ -667,19 +668,19 @@ export function coreHistory(context) {
             context.debouncedSave.cancel();
             if (lock.locked()) {
                 _hasUnresolvedRestorableChanges = false;
-                context.storage(getKey('saved_history'), null);
+                prefs(getKey('saved_history'), null);
 
                 // clear the changeset metadata associated with the saved history
-                context.storage('comment', null);
-                context.storage('hashtags', null);
-                context.storage('source', null);
+                prefs('comment', null);
+                prefs('hashtags', null);
+                prefs('source', null);
             }
             return history;
         },
 
 
         savedHistoryJSON: function() {
-            return context.storage(getKey('saved_history'));
+            return prefs(getKey('saved_history'));
         },
 
 

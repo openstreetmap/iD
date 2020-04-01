@@ -1,5 +1,6 @@
 import { event as d3_event, select as d3_select } from 'd3-selection';
 
+import { prefs } from '../core/preferences';
 import { svgIcon } from '../svg/icon';
 import { t } from '../core/localizer';
 import { uiTooltip } from './tooltip';
@@ -26,15 +27,15 @@ export function uiIssuesInfo(context) {
         var shownItems = [];
 
         var liveIssues = context.validator().getIssues({
-            what: context.storage('validate-what') || 'edited',
-            where: context.storage('validate-where') || 'all'
+            what: prefs('validate-what') || 'edited',
+            where: prefs('validate-where') || 'all'
         });
         if (liveIssues.length) {
             warningsItem.count = liveIssues.length;
             shownItems.push(warningsItem);
         }
 
-        if (context.storage('validate-what') === 'all') {
+        if (prefs('validate-what') === 'all') {
             var resolvedIssues = context.validator().getResolvedIssues();
             if (resolvedIssues.length) {
                 resolvedItem.count = resolvedIssues.length;

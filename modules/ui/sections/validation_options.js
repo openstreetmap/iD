@@ -2,6 +2,7 @@ import {
     event as d3_event
 } from 'd3-selection';
 
+import { prefs } from '../../core/preferences';
 import { t } from '../../core/localizer';
 import { uiSection } from '../section';
 
@@ -59,8 +60,8 @@ export function uiSectionValidationOptions(context) {
 
     function getOptions() {
         return {
-            what: context.storage('validate-what') || 'edited',  // 'all', 'edited'
-            where: context.storage('validate-where') || 'all'    // 'all', 'visible'
+            what: prefs('validate-what') || 'edited',  // 'all', 'edited'
+            where: prefs('validate-where') || 'all'    // 'all', 'visible'
         };
     }
 
@@ -69,7 +70,7 @@ export function uiSectionValidationOptions(context) {
             val = d3_event.target.value;
         }
 
-        context.storage('validate-' + d, val);
+        prefs('validate-' + d, val);
         context.validator().validate();
     }
 

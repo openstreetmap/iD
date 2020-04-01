@@ -8,6 +8,7 @@ import { t } from '../core/localizer';
 
 import { fileFetcher as data } from './file_fetcher';
 import { localizer } from './localizer';
+import { prefs } from './preferences';
 import { coreHistory } from './history';
 import { coreValidator } from './validator';
 import { coreUploader } from './uploader';
@@ -28,34 +29,7 @@ export function coreContext() {
   context.version = '2.17.2';
   context.privacyVersion = '20191217';
 
-
-  // https://github.com/openstreetmap/iD/issues/772
-  // http://mathiasbynens.be/notes/localstorage-pattern#comment-9
-  let _storage;
-  try { _storage = localStorage; } catch (e) {}  // eslint-disable-line no-empty
-  _storage = _storage || (() => {
-    let s = {};
-    return {
-      getItem: (k) => s[k],
-      setItem: (k, v) => s[k] = v,
-      removeItem: (k) => delete s[k]
-    };
-  })();
-
-  context.storage = function(k, v) {
-    try {
-      if (arguments.length === 1) return _storage.getItem(k);
-      else if (v === null) _storage.removeItem(k);
-      else _storage.setItem(k, v);
-    } catch (e) {
-      /* eslint-disable no-console */
-      if (typeof console !== 'undefined') {
-        console.error('localStorage quota exceeded');
-      }
-      /* eslint-enable no-console */
-    }
-  };
-  context.isFirstSession = !context.storage('sawSplash') && !context.storage('sawPrivacyVersion');
+  context.isFirstSession = !prefs('sawSplash') && !prefs('sawPrivacyVersion');
 
 
   /* User interface and keybinding */
