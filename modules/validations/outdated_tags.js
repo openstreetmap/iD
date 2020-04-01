@@ -215,7 +215,7 @@ export function validationOutdatedTags() {
       if (subtype === 'noncanonical_brand' && isOnlyAddingTags) {
         messageID += '_incomplete';
       }
-      return t(messageID, { feature: utilDisplayLabel(currEntity, context) });
+      return t(messageID, { feature: utilDisplayLabel(currEntity, context.graph()) });
     }
 
 
@@ -302,7 +302,7 @@ export function validationOutdatedTags() {
       if (!currMultipolygon) return '';
 
       return t('issues.old_multipolygon.message',
-          { multipolygon: utilDisplayLabel(currMultipolygon, context) }
+          { multipolygon: utilDisplayLabel(currMultipolygon, context.graph()) }
       );
     }
 

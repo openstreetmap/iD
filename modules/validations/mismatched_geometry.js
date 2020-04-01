@@ -88,7 +88,7 @@ export function validationMismatchedGeometry() {
             message: function(context) {
                 var entity = context.hasEntity(this.entityIds[0]);
                 return entity ? t('issues.tag_suggests_area.message', {
-                    feature: utilDisplayLabel(entity, context),
+                    feature: utilDisplayLabel(entity, context.graph()),
                     tag: utilTagText({ tags: tagSuggestingArea })
                 }) : '';
             },
@@ -161,7 +161,7 @@ export function validationMismatchedGeometry() {
                 message: function(context) {
                     var entity = context.hasEntity(this.entityIds[0]);
                     return entity ? t('issues.vertex_as_point.message', {
-                        feature: utilDisplayLabel(entity, context)
+                        feature: utilDisplayLabel(entity, context.graph())
                     }) : '';
                 },
                 reference: function showReference(selection) {
@@ -184,7 +184,7 @@ export function validationMismatchedGeometry() {
                 message: function(context) {
                     var entity = context.hasEntity(this.entityIds[0]);
                     return entity ? t('issues.point_as_vertex.message', {
-                        feature: utilDisplayLabel(entity, context)
+                        feature: utilDisplayLabel(entity, context.graph())
                     }) : '';
                 },
                 reference: function showReference(selection) {
@@ -260,7 +260,7 @@ export function validationMismatchedGeometry() {
                 message: function(context) {
                     var entity = context.hasEntity(this.entityIds[0]);
                     return entity ? t('issues.unclosed_multipolygon_part.message', {
-                        feature: utilDisplayLabel(entity, context)
+                        feature: utilDisplayLabel(entity, context.graph())
                     }) : '';
                 },
                 reference: showReference,

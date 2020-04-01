@@ -99,7 +99,7 @@ export function validationPrivateData() {
             if (!currEntity) return '';
 
             return t('issues.private_data.contact.message',
-                { feature: utilDisplayLabel(currEntity, context) }
+                { feature: utilDisplayLabel(currEntity, context.graph()) }
             );
         }
 

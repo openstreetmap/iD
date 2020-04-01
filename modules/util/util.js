@@ -201,13 +201,13 @@ export function utilDisplayType(id) {
 }
 
 
-export function utilDisplayLabel(entity, context) {
+export function utilDisplayLabel(entity, graph) {
     var displayName = utilDisplayName(entity);
     if (displayName) {
         // use the display name if there is one
         return displayName;
     }
-    var preset = presetManager.match(entity, context.graph());
+    var preset = presetManager.match(entity, graph);
     if (preset && preset.name()) {
         // use the preset name if there is a match
         return preset.name();
