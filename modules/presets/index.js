@@ -19,7 +19,7 @@ export { presetPreset };
 // `presetIndex` wraps a `presetCollection`
 // with methods for loading new data and returning defaults
 //
-export function presetIndex(context) {
+export function presetIndex() {
   const dispatch = d3_dispatch('recentsChange');
   const MAXRECENTS = 30;
 
@@ -310,9 +310,9 @@ export function presetIndex(context) {
   _this.universal = () => _universal;
 
 
-  _this.defaults = (geometry, n) => {
+  _this.defaults = (geometry, n, startWithRecents) => {
     let rec = [];
-    if (!context.inIntro()) {
+    if (startWithRecents) {
       rec = _this.recent().matchGeometry(geometry).collection.slice(0, 4);
     }
     const def = utilArrayUniq(rec.concat(_defaults[geometry].collection)).slice(0, n - 1);
@@ -441,7 +441,6 @@ export function presetIndex(context) {
 
 
   _this.setMostRecent = (preset, geometry) => {
-    if (context.inIntro()) return;
     if (preset.searchable === false) return;
 
     geometry = _this.fallback(geometry).id;

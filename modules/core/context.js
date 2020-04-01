@@ -452,7 +452,7 @@ export function coreContext() {
       _map = rendererMap(context);
       _photos = rendererPhotos(context);
 
-      _presets = presetIndex(context);
+      _presets = presetIndex();
 
       _ui = uiInit(context);
 

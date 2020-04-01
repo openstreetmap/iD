@@ -105,7 +105,7 @@ export function uiPresetList(context) {
                     search: value
                 });
             } else {
-                results = context.presets().defaults(entityGeometries()[0], 36);
+                results = context.presets().defaults(entityGeometries()[0], 36, !context.inIntro());
                 messageText = t('inspector.choose');
             }
             list.call(drawList, results);
@@ -140,7 +140,7 @@ export function uiPresetList(context) {
         var list = listWrap
             .append('div')
             .attr('class', 'preset-list')
-            .call(drawList, context.presets().defaults(entityGeometries()[0], 36));
+            .call(drawList, context.presets().defaults(entityGeometries()[0], 36, !context.inIntro()));
 
         context.features().on('change.preset-list', updateForFeatureHiddenState);
     }
@@ -399,8 +399,9 @@ export function uiPresetList(context) {
 
         item.choose = function() {
             if (d3_select(this).classed('disabled')) return;
-
-            context.presets().setMostRecent(preset, entityGeometries()[0]);
+            if (!context.inIntro()) {
+                context.presets().setMostRecent(preset, entityGeometries()[0]);
+            }
             context.perform(
                 function(graph) {
                     for (var i in _entityIDs) {
