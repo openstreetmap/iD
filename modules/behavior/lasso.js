@@ -53,7 +53,7 @@ export function behaviorLasso(context) {
             var bounds = lasso.extent().map(context.projection.invert);
             var extent = geoExtent(normalize(bounds[0], bounds[1]));
 
-            var intersects = context.intersects(extent).filter(function(entity) {
+            var intersects = context.history().intersects(extent).filter(function(entity) {
                 return entity.type === 'node' &&
                     geoPointInPolygon(context.projection(entity.loc), lasso.coordinates) &&
                     !context.features().isHidden(entity, graph, entity.geometry(graph));

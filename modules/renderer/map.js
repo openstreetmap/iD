@@ -313,7 +313,7 @@ export function rendererMap(context) {
         var mode = context.mode();
         var graph = context.graph();
         var features = context.features();
-        var all = context.intersects(map.extent());
+        var all = context.history().intersects(map.extent());
         var fullRedraw = false;
         var data;
         var set;
@@ -343,7 +343,7 @@ export function rendererMap(context) {
             }
 
             if (extent) {
-                data = context.intersects(map.extent().intersection(extent));
+                data = context.history().intersects(map.extent().intersection(extent));
                 set = new Set(data.map(function(entity) { return entity.id; }));
                 filter = function(d) { return set.has(d.id); };
 

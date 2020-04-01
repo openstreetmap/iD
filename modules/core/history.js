@@ -268,6 +268,8 @@ export function coreHistory(context) {
         },
 
 
+        // Returns the entities from the active graph with bounding boxes
+        // overlapping the given `extent`.
         intersects: function(extent) {
             return _tree.intersects(extent, _stack[_index].graph);
         },

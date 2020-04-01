@@ -18,7 +18,7 @@ export function uiContributors(context) {
         if (!osm) return;
 
         var users = {},
-            entities = context.intersects(context.map().extent());
+            entities = context.history().intersects(context.map().extent());
 
         entities.forEach(function(entity) {
             if (entity && entity.user) users[entity.user] = true;

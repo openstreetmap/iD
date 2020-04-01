@@ -429,7 +429,6 @@ export function coreContext() {
 
       _history = coreHistory(context);
       context.graph = _history.graph;
-      context.intersects = _history.intersects;
       context.pauseChangeDispatch = _history.pauseChangeDispatch;
       context.resumeChangeDispatch = _history.resumeChangeDispatch;
       context.perform = withDebouncedSave(_history.perform);
