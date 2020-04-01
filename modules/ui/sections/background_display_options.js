@@ -3,6 +3,7 @@ import {
     select as d3_select
 } from 'd3-selection';
 
+import { prefs } from '../../core/preferences';
 import { t, localizer } from '../../core/localizer';
 import { svgIcon } from '../../svg/icon';
 import { uiSection } from '../section';
@@ -16,7 +17,7 @@ export function uiSectionBackgroundDisplayOptions(context) {
         .disclosureContent(renderDisclosureContent);
 
     var _detected = utilDetect();
-    var _storedOpacity = context.storage('background-opacity');
+    var _storedOpacity = prefs('background-opacity');
     var _minVal = 0.25;
     var _maxVal = _detected.cssfilters ? 2 : 1;
 
@@ -46,7 +47,7 @@ export function uiSectionBackgroundDisplayOptions(context) {
         context.background()[d](val);
 
         if (d === 'brightness') {
-            context.storage('background-opacity', val);
+            prefs('background-opacity', val);
         }
 
         section.reRender();

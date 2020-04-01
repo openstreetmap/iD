@@ -1,6 +1,7 @@
 import { dispatch as d3_dispatch } from 'd3-dispatch';
 import { event as d3_event } from 'd3-selection';
 
+import { prefs } from '../../core/preferences';
 import { t } from '../../core/localizer';
 import { uiConfirm } from '../confirm';
 import { utilNoAuto, utilRebind } from '../../util';
@@ -15,11 +16,11 @@ export function uiSettingsCustomData(context) {
         // keep separate copies of original and current settings
         var _origSettings = {
             fileList: (dataLayer && dataLayer.fileList()) || null,
-            url: context.storage('settings-custom-data-url')
+            url: prefs('settings-custom-data-url')
         };
         var _currSettings = {
             fileList: (dataLayer && dataLayer.fileList()) || null,
-            url: context.storage('settings-custom-data-url')
+            url: prefs('settings-custom-data-url')
         };
 
         // var example = 'https://{switch:a,b,c}.tile.openstreetmap.org/{zoom}/{x}/{y}.png';
@@ -98,7 +99,7 @@ export function uiSettingsCustomData(context) {
         // restore the original url
         function clickCancel() {
             textSection.select('.field-url').property('value', _origSettings.url);
-            context.storage('settings-custom-data-url', _origSettings.url);
+            prefs('settings-custom-data-url', _origSettings.url);
             this.blur();
             modal.close();
         }
@@ -111,7 +112,7 @@ export function uiSettingsCustomData(context) {
             if (_currSettings.url) { _currSettings.fileList = null; }
             if (_currSettings.fileList) { _currSettings.url = ''; }
 
-            context.storage('settings-custom-data-url', _currSettings.url);
+            prefs('settings-custom-data-url', _currSettings.url);
             this.blur();
             modal.close();
             dispatch.call('change', this, _currSettings);

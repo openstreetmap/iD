@@ -1,3 +1,4 @@
+import { prefs } from '../../core/preferences';
 import { t } from '../../core/localizer';
 import { uiToolQuickPresets } from './quick_presets';
 
@@ -11,7 +12,7 @@ export function uiToolAddFavorite(context) {
     tool.itemsToDraw = function() {
         if (context.presets().getAddable().length) return [];
 
-        var precedingCount = context.storage('tool.add_generic.toggledOn') === 'true' ? 3 : 0;
+        var precedingCount = prefs('tool.add_generic.toggledOn') === 'true' ? 3 : 0;
 
         var maxFavorites = 10 - precedingCount;
 

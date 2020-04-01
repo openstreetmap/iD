@@ -4,6 +4,7 @@ import {
     select as d3_select
 } from 'd3-selection';
 
+import { prefs } from '../../core/preferences';
 import { t, localizer } from '../../core/localizer';
 import { uiTooltip } from '../tooltip';
 import { svgIcon } from '../../svg/icon';
@@ -280,7 +281,7 @@ export function uiSectionDataLayers(context) {
         }
 
         function selectVTLayer(d) {
-            context.storage('settings-custom-data-url', d.template);
+            prefs('settings-custom-data-url', d.template);
             if (dataLayer) {
                 dataLayer.template(d.template, d.src);
                 dataLayer.enabled(true);

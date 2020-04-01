@@ -41,7 +41,8 @@ export function uiToolQuickPresets(context) {
         } else {
             if (d.preset &&
                 // don't set a recent as most recent to avoid reordering buttons
-                !d.isRecent()) {
+                !d.isRecent() &&
+                !context.inIntro()) {
                 context.presets().setMostRecent(d.preset);
             }
             context.enter(d);

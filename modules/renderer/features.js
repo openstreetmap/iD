@@ -1,5 +1,6 @@
 import { dispatch as d3_dispatch } from 'd3-dispatch';
 
+import { prefs } from '../core/preferences';
 import { osmEntity } from '../osm';
 import { utilRebind } from '../util/rebind';
 import { utilArrayGroupBy, utilArrayUnion, utilQsString, utilStringQs } from '../util';
@@ -72,7 +73,7 @@ export function rendererFeatures(context) {
                 delete hash.disable_features;
             }
             window.location.replace('#' + utilQsString(hash, true));
-            context.storage('disabled-features', disabled.join(','));
+            prefs('disabled-features', disabled.join(','));
         }
         _hidden = features.hidden();
         dispatch.call('change');
@@ -573,7 +574,7 @@ export function rendererFeatures(context) {
 
 
     features.init = function() {
-        var storage = context.storage('disabled-features');
+        var storage = prefs('disabled-features');
         if (storage) {
             var storageDisabled = storage.replace(/;/g, ',').split(',');
             storageDisabled.forEach(features.disable);

@@ -1,6 +1,7 @@
 import { dispatch as d3_dispatch } from 'd3-dispatch';
 import { select as d3_select, event as d3_event } from 'd3-selection';
 
+import { prefs } from '../../core/preferences';
 import { t, localizer } from '../../core/localizer';
 import { actionRestrictTurn } from '../../actions/restrict_turn';
 import { actionUnrestrictTurn } from '../../actions/unrestrict_turn';
@@ -16,9 +17,9 @@ export function uiFieldRestrictions(field, context) {
     var dispatch = d3_dispatch('change');
     var breathe = behaviorBreathe(context);
 
-    context.storage('turn-restriction-via-way', null);                 // remove old key
-    var storedViaWay = context.storage('turn-restriction-via-way0');   // use new key #6922
-    var storedDistance = context.storage('turn-restriction-distance');
+    prefs('turn-restriction-via-way', null);                 // remove old key
+    var storedViaWay = prefs('turn-restriction-via-way0');   // use new key #6922
+    var storedDistance = prefs('turn-restriction-distance');
 
     var _maxViaWay = storedViaWay !== null ? (+storedViaWay) : 0;
     var _maxDistance = storedDistance ? (+storedDistance) : 30;
@@ -144,7 +145,7 @@ export function uiFieldRestrictions(field, context) {
                 _maxDistance = +val;
                 _intersection = null;
                 _container.selectAll('.layer-osm .layer-turns *').remove();
-                context.storage('turn-restriction-distance', _maxDistance);
+                prefs('turn-restriction-distance', _maxDistance);
                 _parent.call(restrictions);
             });
 
@@ -186,7 +187,7 @@ export function uiFieldRestrictions(field, context) {
                 var val = d3_select(this).property('value');
                 _maxViaWay = +val;
                 _container.selectAll('.layer-osm .layer-turns *').remove();
-                context.storage('turn-restriction-via-way0', _maxViaWay);
+                prefs('turn-restriction-via-way0', _maxViaWay);
                 _parent.call(restrictions);
             });
 

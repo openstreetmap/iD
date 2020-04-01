@@ -6,6 +6,7 @@ import { svgIcon } from '../../svg/icon';
 import { uiCombobox } from '../combobox';
 import { uiSection } from '../section';
 import { uiTagReference } from '../tag_reference';
+import { prefs } from '../../core/preferences';
 import { t } from '../../core/localizer';
 import { utilArrayDifference, utilArrayIdentical } from '../../util/array';
 import { utilGetSetValue, utilNoAuto, utilRebind, utilTagDiff } from '../../util';
@@ -28,7 +29,7 @@ export function uiSectionRawTagEditor(id, context) {
         { id: 'list', icon: '#fas-th-list' }
     ];
 
-    var _tagView = (context.storage('raw-tag-editor-view') || 'list');   // 'list, 'text'
+    var _tagView = (prefs('raw-tag-editor-view') || 'list');   // 'list, 'text'
     var _readOnlyTags = [];
     // the keys in the order we want them to display
     var _orderedKeys = [];
@@ -91,7 +92,7 @@ export function uiSectionRawTagEditor(id, context) {
             .attr('title', function(d) { return t('icons.' + d.id); })
             .on('click', function(d) {
                 _tagView = d.id;
-                context.storage('raw-tag-editor-view', d.id);
+                prefs('raw-tag-editor-view', d.id);
 
                 wrap.selectAll('.raw-tag-option')
                     .classed('selected', function(datum) { return datum === d; });

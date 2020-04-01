@@ -3,6 +3,7 @@ import {
     select as d3_select,
 } from 'd3-selection';
 
+import { prefs } from '../../core/preferences';
 import { t } from '../../core/localizer';
 import { svgIcon } from '../../svg/icon';
 import { uiTooltip } from '../tooltip';
@@ -119,7 +120,7 @@ export function uiToolToolbox(context) {
                 d3_event.stopPropagation();
 
                 d.isToggledOn = !(d.isToggledOn !== false);
-                context.storage('tool.' + d.id + '.toggledOn', d.isToggledOn);
+                prefs('tool.' + d.id + '.toggledOn', d.isToggledOn);
                 updateToolList();
                 if (tool.onChange) tool.onChange();
             });
@@ -160,7 +161,7 @@ export function uiToolToolbox(context) {
         });
 
         allowedTools.forEach(function(d) {
-            var isToggledOn = context.storage('tool.' + d.id + '.toggledOn');
+            var isToggledOn = prefs('tool.' + d.id + '.toggledOn');
             if (isToggledOn !== null) {
                 d.isToggledOn = isToggledOn === 'true';
             }

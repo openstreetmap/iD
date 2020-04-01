@@ -3,6 +3,7 @@ import {
     select as d3_select
 } from 'd3-selection';
 
+import { prefs } from '../core/preferences';
 import { t, localizer } from '../core/localizer';
 
 import { behaviorHash } from '../behavior';
@@ -325,11 +326,11 @@ export function uiInit(context) {
                     d3_event.stopImmediatePropagation();
                     d3_event.preventDefault();
                 }
-                var previousBackground = context.background().findSource(context.storage('background-last-used-toggle'));
+                var previousBackground = context.background().findSource(prefs('background-last-used-toggle'));
                 if (previousBackground) {
                     var currentBackground = context.background().baseLayerSource();
-                    context.storage('background-last-used-toggle', currentBackground.id);
-                    context.storage('background-last-used', previousBackground.id);
+                    prefs('background-last-used-toggle', currentBackground.id);
+                    prefs('background-last-used', previousBackground.id);
                     context.background().baseLayerSource(previousBackground);
                 }
             })

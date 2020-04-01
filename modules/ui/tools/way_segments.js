@@ -1,4 +1,5 @@
 import { uiToolSegemented } from './segmented';
+import { prefs } from '../../core/preferences';
 import { t } from '../../core/localizer';
 
 export function uiToolWaySegments(context) {
@@ -27,11 +28,11 @@ export function uiToolWaySegments(context) {
     ];
 
     tool.chooseItem = function(item) {
-        context.storage('line-segments', item.id);
+        prefs('line-segments', item.id);
     };
 
     tool.activeItem = function() {
-        var id = context.storage('line-segments') || 'straight';
+        var id = prefs('line-segments') || 'straight';
         return tool.items.filter(function(d) { return d.id === id; })[0];
     };
 

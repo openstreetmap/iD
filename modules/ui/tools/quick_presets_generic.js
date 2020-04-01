@@ -1,3 +1,4 @@
+import { prefs } from '../../core/preferences';
 import { t } from '../../core/localizer';
 import { uiToolQuickPresets } from './quick_presets';
 
@@ -9,14 +10,14 @@ export function uiToolAddGeneric(context) {
     tool.iconName = 'iD-logo-features';
     tool.iconClass = 'icon-30';
 
-    if (context.storage('tool.add_generic.toggledOn') === null) {
+    if (prefs('tool.add_generic.toggledOn') === null) {
         if (!context.isFirstSession) {
             // assume existing user coming from iD 2, enable this item by default
             tool.isToggledOn = true;
         } else {
             tool.isToggledOn = false;
         }
-        context.storage('tool.add_generic.toggledOn', tool.isToggledOn);
+        prefs('tool.add_generic.toggledOn', tool.isToggledOn);
     }
 
     tool.itemsToDraw = function() {

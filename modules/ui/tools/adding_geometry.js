@@ -50,7 +50,7 @@ export function uiToolAddingGeometry(context) {
     tool.chooseItem = function(item) {
         var oldMode = context.mode();
 
-        oldMode.preset.setMostRecentAddGeometry(context, item.id);
+        oldMode.preset.setMostRecentAddGeometry(item.id);
 
         var newMode = item.mode(context, {
                 button: oldMode.button,

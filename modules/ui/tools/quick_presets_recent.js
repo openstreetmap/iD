@@ -1,3 +1,4 @@
+import { prefs } from '../../core/preferences';
 import { t } from '../../core/localizer';
 import { uiToolQuickPresets } from './quick_presets';
 
@@ -13,7 +14,7 @@ export function uiToolAddRecent(context) {
 
         var maxShown = 10;
         var maxRecents = 5;
-        var precedingCount = context.storage('tool.add_generic.toggledOn') === 'true' ? 3 : 0;
+        var precedingCount = prefs('tool.add_generic.toggledOn') === 'true' ? 3 : 0;
 
         var favorites = context.presets().getFavorites().slice(0, maxShown);
         var generics = context.presets().getGenericRibbonItems();
@@ -42,7 +43,7 @@ export function uiToolAddRecent(context) {
                 if (isAFavorite(recent)) {
                     continue;
                 }
-                if (isGeneric(recent) && context.storage('tool.add_generic.toggledOn') === 'true') {
+                if (isGeneric(recent) && prefs('tool.add_generic.toggledOn') === 'true') {
                     continue;
                 }
                 items.push(recent);

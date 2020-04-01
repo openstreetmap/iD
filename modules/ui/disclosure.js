@@ -1,6 +1,7 @@
 import { dispatch as d3_dispatch } from 'd3-dispatch';
 import { event as d3_event } from 'd3-selection';
 
+import { prefs } from '../core/preferences';
 import { svgIcon } from '../svg/icon';
 import { utilFunctor } from '../util';
 import { utilRebind } from '../util/rebind';
@@ -21,7 +22,7 @@ export function uiDisclosure(context, key, expandedDefault) {
         if (_expanded === undefined || _expanded === null) {
             // loading _expanded here allows it to be reset by calling `disclosure.expanded(null)`
 
-            var preference = context.storage('disclosure.' + key + '.expanded');
+            var preference = prefs('disclosure.' + key + '.expanded');
             _expanded = preference === null ? !!expandedDefault : (preference === 'true');
         }
 
@@ -78,7 +79,7 @@ export function uiDisclosure(context, key, expandedDefault) {
             _expanded = !_expanded;
 
             if (_updatePreference) {
-                context.storage('disclosure.' + key + '.expanded', _expanded);
+                prefs('disclosure.' + key + '.expanded', _expanded);
             }
 
             hideToggle

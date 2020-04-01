@@ -4,6 +4,7 @@ import { select as d3_select } from 'd3-selection';
 
 import whichPolygon from 'which-polygon';
 
+import { prefs } from '../core/preferences';
 import { fileFetcher } from '../core/file_fetcher';
 import { geoExtent, geoMetersToOffset, geoOffsetToMeters} from '../geo';
 import { rendererBackgroundSource } from './background_source';
@@ -76,7 +77,7 @@ export function rendererBackground(context) {
         _imageryIndex.backgrounds.unshift(rendererBackgroundSource.None());
 
         // Add 'Custom'
-        let template = context.storage('background-custom-template') || '';
+        let template = prefs('background-custom-template') || '';
         const custom = rendererBackgroundSource.Custom(template);
         _imageryIndex.backgrounds.unshift(custom);
 
@@ -467,12 +468,12 @@ export function rendererBackground(context) {
           const template = requested.replace(/^custom:/, '');
           const custom = background.findSource('custom');
           background.baseLayerSource(custom.template(template));
-          context.storage('background-custom-template', template);
+          prefs('background-custom-template', template);
         } else {
           background.baseLayerSource(
             background.findSource(requested) ||
             best ||
-            background.findSource(context.storage('background-last-used')) ||
+            background.findSource(prefs('background-last-used')) ||
             background.findSource('Bing') ||
             first ||
             background.findSource('none')

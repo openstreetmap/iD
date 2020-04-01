@@ -1,6 +1,7 @@
 import _debounce from 'lodash-es/debounce';
 
 import { svgIcon } from '../../svg/icon';
+import { prefs } from '../../core/preferences';
 import { t } from '../../core/localizer';
 import { uiSection } from '../section';
 
@@ -15,8 +16,8 @@ export function uiSectionValidationStatus(context) {
 
     function getOptions() {
         return {
-            what: context.storage('validate-what') || 'edited',
-            where: context.storage('validate-where') || 'all'
+            what: prefs('validate-what') || 'edited',
+            where: prefs('validate-where') || 'all'
         };
     }
 

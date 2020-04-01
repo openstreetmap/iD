@@ -1,5 +1,6 @@
 import { dispatch as d3_dispatch } from 'd3-dispatch';
 
+import { prefs } from './preferences';
 import { coreDifference } from './difference';
 import { geoExtent } from '../geo/extent';
 import { modeSelect } from '../modes/select';
@@ -32,7 +33,7 @@ export function coreValidator(context) {
             _rules[key] = fn;
         });
 
-        var disabledRules = context.storage('validate-disabledRules');
+        var disabledRules = prefs('validate-disabledRules');
         if (disabledRules) {
             disabledRules.split(',')
                 .forEach(function(key) { _disabledRules[key] = true; });
@@ -256,7 +257,7 @@ export function coreValidator(context) {
             _disabledRules[key] = true;
         }
 
-        context.storage('validate-disabledRules', Object.keys(_disabledRules).join(','));
+        prefs('validate-disabledRules', Object.keys(_disabledRules).join(','));
         validator.validate();
     };
 
@@ -267,7 +268,7 @@ export function coreValidator(context) {
             _disabledRules[k] = true;
         });
 
-        context.storage('validate-disabledRules', Object.keys(_disabledRules).join(','));
+        prefs('validate-disabledRules', Object.keys(_disabledRules).join(','));
         validator.validate();
     };
 

@@ -1,3 +1,4 @@
+import { prefs } from '../core/preferences';
 import { t } from '../core/localizer';
 import { svgIcon } from '../svg/icon';
 import { uiTooltip } from './tooltip';
@@ -15,14 +16,14 @@ export function uiVersion(context) {
     var matchedVersion = currVersion.match(/\d+\.\d+\.\d+.*/);
 
     if (sawVersion === null && matchedVersion !== null) {
-        if (context.storage('sawVersion')) {
+        if (prefs('sawVersion')) {
             isNewUser = false;
-            isNewVersion = context.storage('sawVersion') !== currVersion;
+            isNewVersion = prefs('sawVersion') !== currVersion;
         } else {
             isNewUser = true;
             isNewVersion = true;
         }
-        context.storage('sawVersion', currVersion);
+        prefs('sawVersion', currVersion);
         sawVersion = currVersion;
     }
 

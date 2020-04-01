@@ -2,6 +2,7 @@ import {
     event as d3_event
 } from 'd3-selection';
 
+import { prefs } from '../../core/preferences';
 import { t } from '../../core/localizer';
 import { uiTooltip } from '../tooltip';
 import { svgIcon } from '../../svg/icon';
@@ -13,7 +14,7 @@ export function uiSectionPrivacy(context) {
       .title(t('preferences.privacy.title'))
       .disclosureContent(renderDisclosureContent);
 
-    let _showThirdPartyIcons = context.storage('preferences.privacy.thirdpartyicons') || 'true';
+    let _showThirdPartyIcons = prefs('preferences.privacy.thirdpartyicons') || 'true';
 
     function renderDisclosureContent(selection) {
       // enter
@@ -38,7 +39,7 @@ export function uiSectionPrivacy(context) {
         .on('change', () => {
           d3_event.preventDefault();
           _showThirdPartyIcons = (_showThirdPartyIcons === 'true') ? 'false' : 'true';
-          context.storage('preferences.privacy.thirdpartyicons', _showThirdPartyIcons);
+          prefs('preferences.privacy.thirdpartyicons', _showThirdPartyIcons);
           update();
         });
 

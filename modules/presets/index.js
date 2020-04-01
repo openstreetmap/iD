@@ -1,5 +1,6 @@
 import { dispatch as d3_dispatch } from 'd3-dispatch';
 
+import { prefs } from '../core/preferences';
 import { fileFetcher } from '../core/file_fetcher';
 import { osmNodeGeometriesForTags, osmSetAreaKeys, osmSetPointTags, osmSetVertexTags } from '../osm/tags';
 import { presetCategory } from './category';
@@ -18,7 +19,7 @@ export { presetPreset };
 // `presetIndex` wraps a `presetCollection`
 // with methods for loading new data and returning defaults
 //
-export function presetIndex(context) {
+export function presetIndex() {
   const dispatch = d3_dispatch('favoritePreset', 'recentsChange');
   const MAXRECENTS = 30;
 
@@ -310,9 +311,9 @@ export function presetIndex(context) {
   _this.universal = () => _universal;
 
 
-  _this.defaults = (geometry, n) => {
+  _this.defaults = (geometry, n, startWithRecents) => {
     let rec = [];
-    if (!context.inIntro()) {
+    if (startWithRecents) {
       rec = _this.recent().matchGeometry(geometry).collection.slice(0, 4);
     }
     const def = utilArrayUniq(rec.concat(_defaults[geometry].collection)).slice(0, n - 1);
@@ -387,7 +388,7 @@ export function presetIndex(context) {
   function setRecents(items) {
     _recents = items;
     const minifiedItems = items.map(d => d.minified());
-    context.storage('preset_recents', JSON.stringify(minifiedItems));
+    prefs('preset_recents', JSON.stringify(minifiedItems));
     dispatch.call('recentsChange');
   }
 
@@ -395,7 +396,7 @@ export function presetIndex(context) {
   _this.getRecents = () => {
     if (!_recents) {
       // fetch from local storage
-      _recents = (JSON.parse(context.storage('preset_recents')) || [])
+      _recents = (JSON.parse(prefs('preset_recents')) || [])
         .reduce((acc, d) => {
           let item = ribbonItemForMinified(d, 'recent');
           if (item && item.preset.addable()) acc.push(item);
@@ -461,7 +462,6 @@ export function presetIndex(context) {
 
 
   _this.setMostRecent = (preset) => {
-    if (context.inIntro()) return;
     if (preset.searchable === false) return;
 
     let items = _this.getRecents();
@@ -485,7 +485,7 @@ export function presetIndex(context) {
   function setFavorites(items) {
     _favorites = items;
     const minifiedItems = items.map(d => d.minified());
-    context.storage('preset_favorites', JSON.stringify(minifiedItems));
+    prefs('preset_favorites', JSON.stringify(minifiedItems));
 
     // call update
     dispatch.call('favoritePreset');
@@ -535,11 +535,11 @@ export function presetIndex(context) {
     if (!_favorites) {
 
       // fetch from local storage
-      let rawFavorites = JSON.parse(context.storage('preset_favorites'));
+      let rawFavorites = JSON.parse(prefs('preset_favorites'));
 
       if (!rawFavorites) {
         rawFavorites = [];
-        context.storage('preset_favorites', JSON.stringify(rawFavorites));
+        prefs('preset_favorites', JSON.stringify(rawFavorites));
       }
 
       _favorites = rawFavorites.reduce((output, d) => {

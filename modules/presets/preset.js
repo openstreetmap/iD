@@ -1,3 +1,4 @@
+import { prefs } from '../core/preferences';
 import { t } from '../core/localizer';
 import { osmAreaKeys } from '../osm/tags';
 import { utilArrayUniq, utilObjectOmit } from '../util';
@@ -269,7 +270,7 @@ export function presetPreset(presetID, preset, addable, allFields, allPresets) {
       return true;
     });
 
-    var mostRecentAddGeom = context.storage('preset.' + _this.id + '.addGeom');
+    var mostRecentAddGeom = prefs('preset.' + _this.id + '.addGeom');
     if (mostRecentAddGeom === 'vertex') mostRecentAddGeom = 'point';
     if (mostRecentAddGeom && geometry.indexOf(mostRecentAddGeom) !== -1) {
       return mostRecentAddGeom;
@@ -285,10 +286,10 @@ export function presetPreset(presetID, preset, addable, allFields, allPresets) {
     return null;
   };
 
-  _this.setMostRecentAddGeometry = (context, geometry) => {
+  _this.setMostRecentAddGeometry = (geometry) => {
     if (_this.geometry.length > 1 &&
       _this.geometry.indexOf(geometry) !== -1) {
-      context.storage('preset.' + _this.id + '.addGeom', geometry);
+      prefs('preset.' + _this.id + '.addGeom', geometry);
     }
   };
 

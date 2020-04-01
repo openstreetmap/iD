@@ -1,6 +1,7 @@
 import { t, localizer } from '../../core/localizer';
 import { localize } from './helper';
 
+import { prefs } from '../../core/preferences';
 import { fileFetcher } from '../../core/file_fetcher';
 import { coreGraph } from '../../core/graph';
 import { modeBrowse } from '../../modes/browse';
@@ -114,10 +115,10 @@ export function uiIntro(context) {
     selection.call(curtain);
 
     // Store that the user started the walkthrough..
-    context.storage('walkthrough_started', 'yes');
+    prefs('walkthrough_started', 'yes');
 
     // Restore previous walkthrough progress..
-    let storedProgress = context.storage('walkthrough_progress') || '';
+    let storedProgress = prefs('walkthrough_progress') || '';
     let progress = storedProgress.split(';').filter(Boolean);
 
     let chapters = chapterFlow.map((chapter, i) => {
@@ -137,7 +138,7 @@ export function uiIntro(context) {
 
           // Store walkthrough progress..
           progress.push(chapter);
-          context.storage('walkthrough_progress', utilArrayUniq(progress).join(';'));
+          prefs('walkthrough_progress', utilArrayUniq(progress).join(';'));
         });
       return s;
     });
@@ -145,12 +146,12 @@ export function uiIntro(context) {
     chapters[chapters.length - 1].on('startEditing', () => {
       // Store walkthrough progress..
       progress.push('startEditing');
-      context.storage('walkthrough_progress', utilArrayUniq(progress).join(';'));
+      prefs('walkthrough_progress', utilArrayUniq(progress).join(';'));
 
       // Store if walkthrough is completed..
       let incomplete = utilArrayDifference(chapterFlow, progress);
       if (!incomplete.length) {
-        context.storage('walkthrough_completed', 'yes');
+        prefs('walkthrough_completed', 'yes');
       }
 
       curtain.remove();

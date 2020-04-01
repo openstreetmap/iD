@@ -1,20 +1,21 @@
 import { dispatch as d3_dispatch } from 'd3-dispatch';
 
+import { prefs } from '../../core/preferences';
 import { t } from '../../core/localizer';
 import { uiConfirm } from '../confirm';
 import { utilNoAuto, utilRebind } from '../../util';
 
 
-export function uiSettingsCustomBackground(context) {
+export function uiSettingsCustomBackground() {
     var dispatch = d3_dispatch('change');
 
     function render(selection) {
         // keep separate copies of original and current settings
         var _origSettings = {
-            template: context.storage('background-custom-template')
+            template: prefs('background-custom-template')
         };
         var _currSettings = {
-            template: context.storage('background-custom-template')
+            template: prefs('background-custom-template')
         };
 
         var example = 'https://{switch:a,b,c}.tile.openstreetmap.org/{zoom}/{x}/{y}.png';
@@ -68,7 +69,7 @@ export function uiSettingsCustomBackground(context) {
         // restore the original template
         function clickCancel() {
             textSection.select('.field-template').property('value', _origSettings.template);
-            context.storage('background-custom-template', _origSettings.template);
+            prefs('background-custom-template', _origSettings.template);
             this.blur();
             modal.close();
         }
@@ -76,7 +77,7 @@ export function uiSettingsCustomBackground(context) {
         // accept the current template
         function clickSave() {
             _currSettings.template = textSection.select('.field-template').property('value');
-            context.storage('background-custom-template', _currSettings.template);
+            prefs('background-custom-template', _currSettings.template);
             this.blur();
             modal.close();
             dispatch.call('change', this, _currSettings);

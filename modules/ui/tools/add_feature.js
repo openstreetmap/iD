@@ -177,7 +177,9 @@ export function uiToolAddFeature(context) {
                 return;
         }
 
-        context.presets().setMostRecent(preset);
+        if (!context.inIntro()) {
+            context.presets().setMostRecent(preset);
+        }
 
         context.enter(mode);
     }

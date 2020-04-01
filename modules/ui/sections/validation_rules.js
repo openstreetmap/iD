@@ -3,6 +3,7 @@ import {
     select as d3_select
 } from 'd3-selection';
 
+import { prefs } from '../../core/preferences';
 import { t } from '../../core/localizer';
 import { utilGetSetValue, utilNoAuto } from '../../util';
 import { uiTooltip } from '../tooltip';
@@ -119,7 +120,7 @@ export function uiSectionValidationRules(context) {
 
 
         // user-configurable square threshold
-        var degStr = context.storage('validate-square-degrees');
+        var degStr = prefs('validate-square-degrees');
         if (degStr === null) {
             degStr = '' + DEFAULTSQUARE;
         }
@@ -172,7 +173,7 @@ export function uiSectionValidationRules(context) {
         input
             .property('value', degStr);
 
-        context.storage('validate-square-degrees', degStr);
+        prefs('validate-square-degrees', degStr);
         context.validator().reloadUnsquareIssues();
     }
 

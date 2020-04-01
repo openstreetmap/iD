@@ -1,11 +1,12 @@
 import { select as d3_select } from 'd3-selection';
 
+import { prefs } from '../core/preferences';
 import { t, localizer } from '../core/localizer';
 import { svgIcon } from '../svg/icon';
 import { services } from '../services';
 
 
-export function uiNoteComments(context) {
+export function uiNoteComments() {
     var _note;
 
 
@@ -75,7 +76,7 @@ export function uiNoteComments(context) {
 
 
     function replaceAvatars(selection) {
-        var showThirdPartyIcons = context.storage('preferences.privacy.thirdpartyicons') || 'true';
+        var showThirdPartyIcons = prefs('preferences.privacy.thirdpartyicons') || 'true';
         var osm = services.osm;
         if (showThirdPartyIcons !== 'true' || !osm) return;
 
