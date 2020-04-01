@@ -5,6 +5,7 @@ import {
     select as d3_select,
 } from 'd3-selection';
 
+import { presetManager } from '../../presets';
 import { t } from '../../core/localizer';
 import { svgIcon } from '../../svg/icon';
 import { uiTooltip } from '../tooltip';
@@ -111,7 +112,7 @@ export function uiToolAddFeature(context) {
     };
 
     tool.allowed = function() {
-        var addableCount = context.presets().getAddable().length;
+        var addableCount = presetManager.getAddable().length;
         return addableCount === 0 || addableCount > 10;
     };
 
@@ -178,7 +179,7 @@ export function uiToolAddFeature(context) {
         }
 
         if (!context.inIntro()) {
-            context.presets().setMostRecent(preset);
+            presetManager.setMostRecent(preset);
         }
 
         context.enter(mode);

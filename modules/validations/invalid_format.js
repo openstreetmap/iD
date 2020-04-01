@@ -56,7 +56,7 @@ export function validationFormatting() {
                     message: function(context) {
                         var entity = context.hasEntity(this.entityIds[0]);
                         return entity ? t('issues.invalid_format.website.message' + this.data,
-                            { feature: utilDisplayLabel(entity, context), site: websites.join(', ') }) : '';
+                            { feature: utilDisplayLabel(entity, context.graph()), site: websites.join(', ') }) : '';
                     },
                     reference: showReferenceWebsite,
                     entityIds: [entity.id],
@@ -81,7 +81,7 @@ export function validationFormatting() {
                     message: function(context) {
                         var entity = context.hasEntity(this.entityIds[0]);
                         return entity ? t('issues.invalid_format.email.message' + this.data,
-                            { feature: utilDisplayLabel(entity, context), email: emails.join(', ') }) : '';
+                            { feature: utilDisplayLabel(entity, context.graph()), email: emails.join(', ') }) : '';
                     },
                     reference: showReferenceEmail,
                     entityIds: [entity.id],

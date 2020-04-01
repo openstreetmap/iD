@@ -3,7 +3,7 @@ import { actionMoveNode } from '../actions/move_node';
 import { behaviorOperation } from '../behavior/operation';
 import { modeMove } from '../modes/move';
 import { t } from '../core/localizer';
-
+import { presetManager } from '../presets';
 
 export function operationExtract(selectedIDs, context) {
     var entityID = selectedIDs.length && selectedIDs[0];
@@ -52,7 +52,7 @@ export function operationExtract(selectedIDs, context) {
         if (!entity.hasInterestingTags()) return false;
 
         if (geometry === 'area') {
-            var preset = context.presets().match(entity, graph);
+            var preset = presetManager.match(entity, graph);
             return preset.geometry.indexOf('point') !== -1;
         }
 
@@ -78,7 +78,7 @@ export function operationExtract(selectedIDs, context) {
         var disableReason = operation.disabled();
         if (disableReason) {
             return t('operations.extract.' + disableReason + '.' + geometry + '.single',
-                { relation: context.presets().item('type/restriction').name() });
+                { relation: presetManager.item('type/restriction').name() });
         } else {
             return t('operations.extract.description.' + geometry + '.single');
         }

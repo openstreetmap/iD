@@ -4,6 +4,7 @@ import {
 } from 'd3-selection';
 import _debounce from 'lodash-es/debounce';
 
+import { presetManager } from '../presets';
 import { utilFunctor } from '../util/util';
 
 import { uiToolAddFavorite, uiToolAddFeature, uiToolAddRecent, uiToolNotes, uiToolSave, uiToolUndoRedo } from './tools';
@@ -100,7 +101,7 @@ export function uiTopToolbar(context) {
 
         context.on('enter.topToolbar', update);
 
-        context.presets()
+        presetManager
             .on('favoritePreset.topToolbar', update)
             .on('recentsChange.topToolbar', update);
 

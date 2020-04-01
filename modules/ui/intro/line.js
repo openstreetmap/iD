@@ -5,6 +5,7 @@ import {
     select as d3_select
 } from 'd3-selection';
 
+import { presetManager } from '../../presets';
 import { t, localizer } from '../../core/localizer';
 import { geoSphericalDistance } from '../../geo';
 import { modeBrowse } from '../../modes/browse';
@@ -21,8 +22,8 @@ export function uiIntroLine(context, reveal) {
     var tulipRoadStart = [-85.6297754121684, 41.95805253325314];
     var tulipRoadMidpoint = [-85.62975395449628, 41.95787501510204];
     var tulipRoadIntersection = [-85.62974496187628, 41.95742515554585];
-    var roadCategory = context.presets().item('category-road_minor');
-    var residentialPreset = context.presets().item('highway/residential');
+    var roadCategory = presetManager.item('category-road_minor');
+    var residentialPreset = presetManager.item('highway/residential');
     var woodRoadID = 'w525';
     var woodRoadEndID = 'n2862';
     var woodRoadAddNode = [-85.62390110349587, 41.95397111462291];

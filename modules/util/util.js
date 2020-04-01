@@ -1,6 +1,7 @@
 import { remove as removeDiacritics } from 'diacritics';
 import { fixRTLTextForSvg, rtlRegex } from './svg_paths_rtl_fix';
 
+import { presetManager } from '../presets';
 import { t, localizer } from '../core/localizer';
 import { utilArrayUnion } from './array';
 import { utilDetect } from './detect';
@@ -200,24 +201,19 @@ export function utilDisplayType(id) {
 }
 
 
-export function utilDisplayLabel(entity, context) {
+export function utilDisplayLabel(entity, graph) {
     var displayName = utilDisplayName(entity);
     if (displayName) {
         // use the display name if there is one
         return displayName;
     }
-    var preset = utilPreset(entity, context);
+    var preset = presetManager.match(entity, graph);
     if (preset && preset.name()) {
         // use the preset name if there is a match
         return preset.name();
     }
     // fallback to the display type (node/way/relation)
     return utilDisplayType(entity.id);
-}
-
-
-export function utilPreset(entity, context) {
-    return context.presets().match(entity, context.graph());
 }
 
 

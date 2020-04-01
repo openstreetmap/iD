@@ -113,7 +113,7 @@ export function uiNoteEditor(context) {
 
         // // if new note, show categories to pick from
         // if (_note.isNew()) {
-        //     var presets = context.presets();
+        //     var presets = presetManager;
 
         //     // NOTE: this key isn't a age and therefore there is no documentation (yet)
         //     _fieldsArr = [

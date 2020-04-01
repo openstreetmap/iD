@@ -1,6 +1,7 @@
 import { t, localizer } from '../../core/localizer';
 import { localize } from './helper';
 
+import { presetManager } from '../../presets';
 import { prefs } from '../../core/preferences';
 import { fileFetcher } from '../../core/file_fetcher';
 import { coreGraph } from '../../core/graph';
@@ -124,7 +125,7 @@ export function uiIntro(context) {
     let chapters = chapterFlow.map((chapter, i) => {
       let s = chapterUi[chapter](context, curtain.reveal)
         .on('done', () => {
-          context.presets().init();  // clear away "recent" presets
+          presetManager.init();  // clear away "recent" presets
 
           buttons
             .filter(d => d.title === s.title)

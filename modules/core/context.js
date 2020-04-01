@@ -14,7 +14,7 @@ import { coreValidator } from './validator';
 import { coreUploader } from './uploader';
 import { geoRawMercator } from '../geo/raw_mercator';
 import { modeSelect } from '../modes/select';
-import { presetIndex } from '../presets';
+import { presetManager } from '../presets';
 import { rendererBackground, rendererFeatures, rendererMap, rendererPhotos } from '../renderer';
 import { services } from '../services';
 import { uiInit } from '../ui/init';
@@ -302,11 +302,6 @@ export function coreContext() {
   context.photos = () => _photos;
 
 
-  /* Presets */
-  let _presets;
-  context.presets = () => _presets;
-
-
   /* Map */
   let _map;
   context.map = () => _map;
@@ -454,8 +449,6 @@ export function coreContext() {
       _map = rendererMap(context);
       _photos = rendererPhotos(context);
 
-      _presets = presetIndex();
-
       _ui = uiInit(context);
 
       _connection = services.osm;
@@ -468,13 +461,13 @@ export function coreContext() {
       const hash = utilStringQs(window.location.hash);
 
       if (hash.presets) {
-        _presets.addablePresetIDs(new Set(hash.presets.split(',')));
+        presetManager.addablePresetIDs(new Set(hash.presets.split(',')));
       }
 
       // kick off some async work
       localizer.ensureLoaded();
       _background.ensureLoaded();
-      _presets.ensureLoaded();
+      presetManager.ensureLoaded();
 
       Object.values(services).forEach(service => {
         if (service && typeof service.init === 'function') {

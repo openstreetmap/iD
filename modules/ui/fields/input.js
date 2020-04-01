@@ -2,6 +2,7 @@ import { dispatch as d3_dispatch } from 'd3-dispatch';
 import { select as d3_select, event as d3_event } from 'd3-selection';
 import * as countryCoder from '@ideditor/country-coder';
 
+import { presetManager } from '../../presets';
 import { fileFetcher } from '../../core/file_fetcher';
 import { t, localizer } from '../../core/localizer';
 import { geoExtent } from '../../geo';
@@ -33,7 +34,7 @@ export function uiFieldText(field, context) {
 
     function i(selection) {
         var entity = _entityIDs.length && context.hasEntity(_entityIDs[0]);
-        var preset = entity && context.presets().match(entity, context.graph());
+        var preset = entity && presetManager.match(entity, context.graph());
         var isLocked = preset && preset.suggestion && field.id === 'brand';
         field.locked(isLocked);
 

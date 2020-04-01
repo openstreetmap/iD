@@ -4,6 +4,7 @@ import {
     select as d3_select
 } from 'd3-selection';
 
+import { presetManager } from '../../presets';
 import { t } from '../../core/localizer';
 import { actionChangeMember } from '../../actions/change_member';
 import { actionDeleteMember } from '../../actions/delete_member';
@@ -177,7 +178,7 @@ export function uiSectionRawMemberEditor(context) {
                         .append('span')
                         .attr('class', 'member-entity-type')
                         .text(function(d) {
-                            var matched = context.presets().match(d.member, context.graph());
+                            var matched = presetManager.match(d.member, context.graph());
                             return (matched && matched.name()) || utilDisplayType(d.member.id);
                         });
 

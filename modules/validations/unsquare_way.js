@@ -76,7 +76,7 @@ export function validationUnsquareWay(context) {
             severity: 'warning',
             message: function(context) {
                 var entity = context.hasEntity(this.entityIds[0]);
-                return entity ? t('issues.unsquare_way.message', { feature: utilDisplayLabel(entity, context) }) : '';
+                return entity ? t('issues.unsquare_way.message', { feature: utilDisplayLabel(entity, context.graph()) }) : '';
             },
             reference: showReference,
             entityIds: [entity.id],

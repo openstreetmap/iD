@@ -58,7 +58,7 @@ export function behaviorHash(context) {
             return context.hasEntity(id);
         });
         if (selected.length) {
-            var firstLabel = utilDisplayLabel(context.entity(selected[0]), context);
+            var firstLabel = utilDisplayLabel(context.entity(selected[0]), context.graph());
             if (selected.length > 1 ) {
                 contextual = t('title.labeled_and_more', {
                     labeled: firstLabel,

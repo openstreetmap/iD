@@ -1,6 +1,7 @@
 import { dispatch as d3_dispatch } from 'd3-dispatch';
 import { select as d3_select } from 'd3-selection';
 
+import { presetManager } from '../../presets';
 import { t } from '../../core/localizer';
 import { uiField } from '../field';
 import { utilArrayUnion, utilRebind } from '../../util';
@@ -76,8 +77,8 @@ export function uiFieldRadio(field, context) {
 
     function structureExtras(selection, tags) {
         var selected = selectedKey() || tags.layer !== undefined;
-        var type = context.presets().field(selected);
-        var layer = context.presets().field('layer');
+        var type = presetManager.field(selected);
+        var layer = presetManager.field('layer');
         var showLayer = (selected === 'bridge' || selected === 'tunnel' || tags.layer !== undefined);
 
 

@@ -1,5 +1,6 @@
 import { select as d3_select } from 'd3-selection';
 
+import { presetManager } from '../../presets';
 import { fileFetcher } from '../../core/file_fetcher';
 import { t } from '../../core/localizer';
 import { JXON } from '../../util/jxon';
@@ -73,7 +74,7 @@ export function uiSectionChanges(context) {
             .append('strong')
             .attr('class', 'entity-type')
             .text(function(d) {
-                var matched = context.presets().match(d.entity, d.graph);
+                var matched = presetManager.match(d.entity, d.graph);
                 return (matched && matched.name()) || utilDisplayType(d.entity.id);
             });
 

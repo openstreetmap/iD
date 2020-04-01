@@ -2,8 +2,9 @@ import {
     event as d3_event,
     select as d3_select
 } from 'd3-selection';
-
 import * as sexagesimal from '@mapbox/sexagesimal';
+
+import { presetManager } from '../presets';
 import { t } from '../core/localizer';
 import { dmsCoordinatePair } from '../util/units';
 import { coreGraph } from '../core/graph';
@@ -154,7 +155,7 @@ export function uiFeatureList(context) {
                 var name = utilDisplayName(entity) || '';
                 if (name.toLowerCase().indexOf(q) < 0) continue;
 
-                var matched = context.presets().match(entity, graph);
+                var matched = presetManager.match(entity, graph);
                 var type = (matched && matched.name()) || utilDisplayType(entity.id);
                 var extent = entity.extent(graph);
                 var distance = extent ? geoSphericalDistance(visibleCenter, extent.center()) : 0;
@@ -191,7 +192,7 @@ export function uiFeatureList(context) {
 
                     var tempEntity = osmEntity(attrs);
                     var tempGraph = coreGraph([tempEntity]);
-                    var matched = context.presets().match(tempEntity, tempGraph);
+                    var matched = presetManager.match(tempEntity, tempGraph);
                     var type = (matched && matched.name()) || utilDisplayType(id);
 
                     result.push({

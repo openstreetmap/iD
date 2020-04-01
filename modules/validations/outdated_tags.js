@@ -2,6 +2,7 @@ import { t } from '../core/localizer';
 import { matcher } from 'name-suggestion-index';
 import * as countryCoder from '@ideditor/country-coder';
 
+import { presetManager } from '../presets';
 import { fileFetcher } from '../core/file_fetcher';
 import { actionChangePreset } from '../actions/change_preset';
 import { actionChangeTags } from '../actions/change_tags';
@@ -14,7 +15,7 @@ import { validationIssue, validationIssueFix } from '../core/validation';
 let _dataDeprecated;
 let _nsi;
 
-export function validationOutdatedTags(context) {
+export function validationOutdatedTags() {
   const type = 'outdated_tags';
   const nsiKeys = ['amenity', 'shop', 'tourism', 'leisure', 'office'];
 
@@ -55,13 +56,13 @@ export function validationOutdatedTags(context) {
 
   function oldTagIssues(entity, graph) {
     const oldTags = Object.assign({}, entity.tags);  // shallow copy
-    let preset = context.presets().match(entity, graph);
+    let preset = presetManager.match(entity, graph);
     let subtype = 'deprecated_tags';
     if (!preset) return [];
 
     // upgrade preset..
     if (preset.replacement) {
-      const newPreset = context.presets().item(preset.replacement);
+      const newPreset = presetManager.item(preset.replacement);
       graph = actionChangePreset(entity.id, preset, newPreset)(graph);
       entity = graph.entity(entity.id);
       preset = newPreset;
@@ -214,7 +215,7 @@ export function validationOutdatedTags(context) {
       if (subtype === 'noncanonical_brand' && isOnlyAddingTags) {
         messageID += '_incomplete';
       }
-      return t(messageID, { feature: utilDisplayLabel(currEntity, context) });
+      return t(messageID, { feature: utilDisplayLabel(currEntity, context.graph()) });
     }
 
 
@@ -301,7 +302,7 @@ export function validationOutdatedTags(context) {
       if (!currMultipolygon) return '';
 
       return t('issues.old_multipolygon.message',
-          { multipolygon: utilDisplayLabel(currMultipolygon, context) }
+          { multipolygon: utilDisplayLabel(currMultipolygon, context.graph()) }
       );
     }
 

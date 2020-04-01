@@ -5,7 +5,7 @@ import {
 
 import { prefs } from '../core/preferences';
 import { t, localizer } from '../core/localizer';
-
+import { presetManager } from '../presets';
 import { behaviorHash } from '../behavior';
 import { modeBrowse } from '../modes/browse';
 import { svgDefs, svgIcon } from '../svg';
@@ -420,7 +420,7 @@ export function uiInit(context) {
         return _loadPromise = Promise.all([
                 // must have strings and presets before loading the UI
                 localizer.ensureLoaded(),
-                context.presets().ensureLoaded()
+                presetManager.ensureLoaded()
             ])
             .then(() => {
                 if (!context.container().empty()) render(context.container());

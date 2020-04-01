@@ -5,6 +5,7 @@ import { event as d3_event, select as d3_select } from 'd3-selection';
 
 import { modeAddArea, modeAddLine, modeAddPoint, modeBrowse } from '../../modes';
 import { t, localizer } from '../../core/localizer';
+import { presetManager } from '../../presets';
 import { uiTooltip } from '../tooltip';
 import { utilUniqueDomId } from '../../util/util';
 import { uiPresetIcon } from '../preset_icon';
@@ -43,7 +44,7 @@ export function uiToolQuickPresets(context) {
                 // don't set a recent as most recent to avoid reordering buttons
                 !d.isRecent() &&
                 !context.inIntro()) {
-                context.presets().setMostRecent(d.preset);
+                presetManager.setMostRecent(d.preset);
             }
             context.enter(d);
         }
@@ -152,7 +153,7 @@ export function uiToolQuickPresets(context) {
                 }
 
                 d3_select(this)
-                    .call(uiPresetIcon(context)
+                    .call(uiPresetIcon()
                         .geometry(geometry)
                         .preset(d.preset)
                         .sizeClass('small')
@@ -287,32 +288,32 @@ export function uiToolQuickPresets(context) {
                 // dragged out of the top bar, remove
 
                 if (d.isFavorite()) {
-                    context.presets().removeFavorite(d.preset);
+                    presetManager.removeFavorite(d.preset);
                     // also remove this as a recent so it doesn't still appear
-                    context.presets().removeRecent(d.preset);
+                    presetManager.removeRecent(d.preset);
                 } else if (d.isRecent()) {
-                    context.presets().removeRecent(d.preset);
+                    presetManager.removeRecent(d.preset);
                 }
             } else if (_targetData !== null) {
                 // dragged to a new position, reorder
 
                 if (d.isFavorite()) {
-                    context.presets().removeFavorite(d.preset);
+                    presetManager.removeFavorite(d.preset);
                     if (_targetData.isRecent()) {
                         // also remove this as a recent so it doesn't appear twice
-                        context.presets().removeRecent(d.preset);
+                        presetManager.removeRecent(d.preset);
                     }
                 } else if (d.isRecent()) {
-                    context.presets().removeRecent(d.preset);
+                    presetManager.removeRecent(d.preset);
                 }
 
                 var draggingAfter = (ltr && d3_event.x > _dragOrigin.x) ||
                                     (rtl && d3_event.x < _dragOrigin.x);
 
                 if (_targetData.isFavorite()) {
-                    context.presets().addFavorite(d.preset, _targetData.preset, draggingAfter);
+                    presetManager.addFavorite(d.preset, _targetData.preset, draggingAfter);
                 } else if (_targetData.isRecent()) {
-                    context.presets().addRecent(d.preset, _targetData.preset, draggingAfter);
+                    presetManager.addRecent(d.preset, _targetData.preset, draggingAfter);
                 }
             }
         });
@@ -335,8 +336,9 @@ export function uiToolQuickPresets(context) {
             .on('drawn.' + tool.id, debouncedUpdate);
 
         context
-            .on('enter.' + tool.id, update)
-            .presets()
+            .on('enter.' + tool.id, update);
+
+        presetManager
             .on('favoritePreset.' + tool.id, update)
             .on('recentsChange.' + tool.id, update);
     };
@@ -348,7 +350,7 @@ export function uiToolQuickPresets(context) {
             .on('exit.editor.' + tool.id, null)
             .on('enter.' + tool.id, null);
 
-        context.presets()
+        presetManager
             .on('favoritePreset.' + tool.id, null)
             .on('recentsChange.' + tool.id, null);
 

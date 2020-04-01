@@ -1,5 +1,6 @@
 import { prefs } from '../../core/preferences';
 import { t } from '../../core/localizer';
+import { presetManager } from '../../presets';
 import { uiToolQuickPresets } from './quick_presets';
 
 export function uiToolAddGeneric(context) {
@@ -21,8 +22,8 @@ export function uiToolAddGeneric(context) {
     }
 
     tool.itemsToDraw = function() {
-        if (context.presets().getAddable().length) return [];
-        var items = context.presets().getGenericRibbonItems();
+        if (presetManager.getAddable().length) return [];
+        var items = presetManager.getGenericRibbonItems();
         for (var i in items) {
             items[i].key = (parseInt(i, 10) + 1).toString();
         }

@@ -1,5 +1,6 @@
 import { prefs } from '../../core/preferences';
 import { t } from '../../core/localizer';
+import { presetManager } from '../../presets';
 import { uiToolQuickPresets } from './quick_presets';
 
 export function uiToolAddRecent(context) {
@@ -10,14 +11,14 @@ export function uiToolAddRecent(context) {
     tool.iconName = 'fas-history';
 
     tool.itemsToDraw = function() {
-        if (context.presets().getAddable().length) return [];
+        if (presetManager.getAddable().length) return [];
 
         var maxShown = 10;
         var maxRecents = 5;
         var precedingCount = prefs('tool.add_generic.toggledOn') === 'true' ? 3 : 0;
 
-        var favorites = context.presets().getFavorites().slice(0, maxShown);
-        var generics = context.presets().getGenericRibbonItems();
+        var favorites = presetManager.getFavorites().slice(0, maxShown);
+        var generics = presetManager.getGenericRibbonItems();
         precedingCount += favorites.length;
 
         function isAFavorite(recent) {
@@ -35,7 +36,7 @@ export function uiToolAddRecent(context) {
         maxRecents = Math.min(maxRecents, maxShown - precedingCount);
         var items = [];
         if (maxRecents > 0) {
-            var recents = context.presets().getRecents().filter(function(recent) {
+            var recents = presetManager.getRecents().filter(function(recent) {
                 return recent.preset.geometry.length > 1 || recent.preset.geometry[0] !== 'relation';
             });
             for (var i in recents) {

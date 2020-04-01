@@ -1,6 +1,7 @@
 import { t } from '../../core/localizer';
 import { uiToolQuickPresets } from './quick_presets';
 
+import { presetManager } from '../../presets';
 export function uiToolAddAddablePresets(context) {
 
     var tool = uiToolQuickPresets(context);
@@ -10,7 +11,7 @@ export function uiToolAddAddablePresets(context) {
 
     tool.itemsToDraw = function() {
 
-        var items = context.presets().getAddable().slice(0, 10);
+        var items = presetManager.getAddable().slice(0, 10);
 
         items.forEach(function(item, index) {
             var keyCode;

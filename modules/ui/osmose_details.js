@@ -3,6 +3,7 @@ import {
   select as d3_select
 } from 'd3-selection';
 
+import { presetManager } from '../presets';
 import { modeSelect } from '../modes/select';
 import { t } from '../core/localizer';
 import { services } from '../services';
@@ -180,7 +181,7 @@ export function uiOsmoseDetails(context) {
                 let name = utilDisplayName(entity);  // try to use common name
 
                 if (!name) {
-                  const preset = context.presets().match(entity, context.graph());
+                  const preset = presetManager.match(entity, context.graph());
                   name = preset && !preset.isFallback() && preset.name();  // fallback to preset name
                 }
 

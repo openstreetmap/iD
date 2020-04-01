@@ -6,6 +6,7 @@ import {
     select as d3_select
 } from 'd3-selection';
 
+import { presetManager } from '../presets';
 import { t, localizer } from '../core/localizer';
 import { actionChangePreset } from '../actions/change_preset';
 import { operationDelete } from '../operations/delete';
@@ -27,7 +28,7 @@ export function uiPresetList(context) {
     function presetList(selection) {
         if (!_entityIDs) return;
 
-        var presets = context.presets().matchAllGeometry(entityGeometries());
+        var presets = presetManager.matchAllGeometry(entityGeometries());
 
         selection.html('');
 
@@ -105,7 +106,7 @@ export function uiPresetList(context) {
                     search: value
                 });
             } else {
-                results = context.presets().defaults(entityGeometries()[0], 36, !context.inIntro());
+                results = presetManager.defaults(entityGeometries()[0], 36, !context.inIntro());
                 messageText = t('inspector.choose');
             }
             list.call(drawList, results);
@@ -140,7 +141,7 @@ export function uiPresetList(context) {
         var list = listWrap
             .append('div')
             .attr('class', 'preset-list')
-            .call(drawList, context.presets().defaults(entityGeometries()[0], 36, !context.inIntro()));
+            .call(drawList, presetManager.defaults(entityGeometries()[0], 36, !context.inIntro()));
 
         context.features().on('change.preset-list', updateForFeatureHiddenState);
     }
@@ -283,7 +284,7 @@ export function uiPresetList(context) {
                 .append('button')
                 .attr('class', 'preset-list-button')
                 .classed('expanded', false)
-                .call(uiPresetIcon(context)
+                .call(uiPresetIcon()
                     .geometry(geometries.length === 1 && geometries[0])
                     .preset(preset))
                 .on('click', click)
@@ -373,7 +374,7 @@ export function uiPresetList(context) {
 
             var button = wrap.append('button')
                 .attr('class', 'preset-list-button')
-                .call(uiPresetIcon(context)
+                .call(uiPresetIcon()
                     .geometry(geometries.length === 1 && geometries[0])
                     .preset(preset))
                 .on('click', item.choose)
@@ -401,13 +402,13 @@ export function uiPresetList(context) {
             if (d3_select(this).classed('disabled')) return;
 
             if (!context.inIntro()) {
-                context.presets().setMostRecent(preset);
+                presetManager.setMostRecent(preset);
             }
             context.perform(
                 function(graph) {
                     for (var i in _entityIDs) {
                         var entityID = _entityIDs[i];
-                        var oldPreset = context.presets().match(graph.entity(entityID), graph);
+                        var oldPreset = presetManager.match(graph.entity(entityID), graph);
                         graph = actionChangePreset(entityID, oldPreset, preset)(graph);
                     }
                     return graph;
@@ -476,7 +477,7 @@ export function uiPresetList(context) {
         _entityIDs = val;
         if (_entityIDs && _entityIDs.length) {
             var presets = _entityIDs.map(function(entityID) {
-                return context.presets().match(context.entity(entityID), context.graph());
+                return presetManager.match(context.entity(entityID), context.graph());
             });
             presetList.presets(presets);
         }

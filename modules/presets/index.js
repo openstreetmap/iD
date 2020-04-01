@@ -14,6 +14,8 @@ export { presetCollection };
 export { presetField };
 export { presetPreset };
 
+let _mainPresetIndex = presetIndex(); // singleton
+export { _mainPresetIndex as presetManager };
 
 //
 // `presetIndex` wraps a `presetCollection`

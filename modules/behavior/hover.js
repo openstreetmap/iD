@@ -5,6 +5,7 @@ import {
     select as d3_select
 } from 'd3-selection';
 
+import { presetManager } from '../presets';
 import { osmEntity, osmNote, QAItem } from '../osm';
 import { utilKeybinding, utilRebind } from '../util';
 
@@ -107,7 +108,7 @@ export function behaviorHover(context) {
         }
 
         function allowsVertex(d) {
-            return d.geometry(context.graph()) === 'vertex' || context.presets().allowsVertex(d, context.graph());
+            return d.geometry(context.graph()) === 'vertex' || presetManager.allowsVertex(d, context.graph());
         }
 
         function modeAllowsHover(target) {

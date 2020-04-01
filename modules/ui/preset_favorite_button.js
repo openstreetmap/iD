@@ -3,10 +3,11 @@ import {
     select as d3_select
 } from 'd3-selection';
 
+import { presetManager } from '../presets';
 import { t } from '../core/localizer';
 import { svgIcon } from '../svg/icon';
 
-export function uiPresetFavoriteButton(preset, geom, context, klass) {
+export function uiPresetFavoriteButton(preset, geom, klass) {
 
     var presetFavorite = {};
 
@@ -35,7 +36,7 @@ export function uiPresetFavoriteButton(preset, geom, context, klass) {
                 d3_event.stopPropagation();
                 d3_event.preventDefault();
 
-                context.presets().toggleFavorite(preset);
+                presetManager.toggleFavorite(preset);
 
                 update();
             });
@@ -45,10 +46,10 @@ export function uiPresetFavoriteButton(preset, geom, context, klass) {
 
     function update() {
         _button
-            .classed('active', context.presets().favoriteMatching(preset));
+            .classed('active', presetManager.favoriteMatching(preset));
     }
 
-    context.presets().on('favoritePreset.button-' + preset.safeid, update);
+    presetManager.on('favoritePreset.button-' + preset.safeid, update);
 
     return presetFavorite;
 }

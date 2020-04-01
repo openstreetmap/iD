@@ -1,5 +1,6 @@
 import { dispatch as d3_dispatch } from 'd3-dispatch';
 
+import { presetManager } from '../presets';
 import { t } from '../core/localizer';
 import { svgIcon } from '../svg/icon';
 import { uiCombobox} from './combobox';
@@ -27,7 +28,7 @@ export function uiChangesetEditor(context) {
 
         if (!_fieldsArr) {
             initial = true;
-            var presets = context.presets();
+            var presets = presetManager;
 
             _fieldsArr = [
                 uiField(context, presets.field('comment'), null, { show: true, revert: false }),

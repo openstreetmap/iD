@@ -1,4 +1,5 @@
 import { prefs } from '../../core/preferences';
+import { presetManager } from '../../presets';
 import { t } from '../../core/localizer';
 import { uiToolQuickPresets } from './quick_presets';
 
@@ -10,13 +11,13 @@ export function uiToolAddFavorite(context) {
     tool.iconName = 'iD-icon-favorite';
 
     tool.itemsToDraw = function() {
-        if (context.presets().getAddable().length) return [];
+        if (presetManager.getAddable().length) return [];
 
         var precedingCount = prefs('tool.add_generic.toggledOn') === 'true' ? 3 : 0;
 
         var maxFavorites = 10 - precedingCount;
 
-        var items = context.presets().getFavorites().slice(0, maxFavorites);
+        var items = presetManager.getFavorites().slice(0, maxFavorites);
 
         items.forEach(function(item, index) {
             var totalIndex = precedingCount + index;

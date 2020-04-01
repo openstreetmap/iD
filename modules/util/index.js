@@ -36,7 +36,6 @@ export { utilNoAuto } from './util';
 export { utilObjectOmit } from './object';
 export { utilPrefixCSSProperty } from './util';
 export { utilPrefixDOMProperty } from './util';
-export { utilPreset } from './util';
 export { utilQsString } from './util';
 export { utilRebind } from './rebind';
 export { utilSafeClassName } from './util';

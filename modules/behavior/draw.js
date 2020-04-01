@@ -5,6 +5,7 @@ import {
     select as d3_select
 } from 'd3-selection';
 
+import { presetManager } from '../presets';
 import { behaviorEdit } from './edit';
 import { behaviorHover } from './hover';
 import { behaviorTail } from './tail';
@@ -112,7 +113,7 @@ export function behaviorDraw(context) {
     }
 
     function allowsVertex(d) {
-        return d.geometry(context.graph()) === 'vertex' || context.presets().allowsVertex(d, context.graph());
+        return d.geometry(context.graph()) === 'vertex' || presetManager.allowsVertex(d, context.graph());
     }
 
     // related code

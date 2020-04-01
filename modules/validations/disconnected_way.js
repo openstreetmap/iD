@@ -25,7 +25,7 @@ export function validationDisconnectedWay() {
             message: function(context) {
                 if (this.entityIds.length === 1) {
                     var entity = context.hasEntity(this.entityIds[0]);
-                    return entity ? t('issues.disconnected_way.highway.message', { highway: utilDisplayLabel(entity, context) }) : '';
+                    return entity ? t('issues.disconnected_way.highway.message', { highway: utilDisplayLabel(entity, context.graph()) }) : '';
                 }
                 return t('issues.disconnected_way.routable.message.multiple', { count: this.entityIds.length.toString() });
             },

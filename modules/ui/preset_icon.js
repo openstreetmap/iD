@@ -1,11 +1,12 @@
 import { select as d3_select } from 'd3-selection';
 
+import { presetManager } from '../presets';
 import { prefs } from '../core/preferences';
 import { svgIcon, svgTagClasses } from '../svg';
 import { utilFunctor } from '../util';
 
 
-export function uiPresetIcon(context) {
+export function uiPresetIcon() {
   let _preset;
   let _geometry;
   let _sizeClass = 'medium';
@@ -343,7 +344,7 @@ export function uiPresetIcon(context) {
       let routeType = p.tags.type === 'waterway' ? 'waterway' : p.tags.route;
       const segmentPresetIDs = routeSegments[routeType];
       for (let i in segmentPresetIDs) {
-        const segmentPreset = context.presets().item(segmentPresetIDs[i]);
+        const segmentPreset = presetManager.item(segmentPresetIDs[i]);
         const segmentTagClasses = svgTagClasses().getClassesString(segmentPreset.tags, '');
         route.selectAll(`path.stroke.segment${i}`)
           .attr('class', `segment${i} line stroke ${segmentTagClasses}`);

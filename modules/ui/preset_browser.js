@@ -6,6 +6,7 @@ import { dispatch as d3_dispatch } from 'd3-dispatch';
 import deepEqual from 'fast-deep-equal';
 import * as countryCoder from '@ideditor/country-coder';
 
+import { presetManager } from '../presets';
 import { t, localizer } from '../core/localizer';
 import { svgIcon } from '../svg/index';
 import { uiTooltip } from './tooltip';
@@ -188,7 +189,7 @@ export function uiPresetBrowser(context) {
 
     function updateShownGeometry(geom) {
         _shownGeometry = geom.slice().sort();
-        _presets = context.presets().matchAnyGeometry(_shownGeometry);
+        _presets = presetManager.matchAnyGeometry(_shownGeometry);
     }
 
     function toggleShownGeometry(d) {
@@ -299,7 +300,7 @@ export function uiPresetBrowser(context) {
         //var scoredGroups = {};
         var scoredPresets = {};
 
-        context.presets().getRecents().slice(0, 15).forEach(function(item, index) {
+        presetManager.getRecents().slice(0, 15).forEach(function(item, index) {
             var score = (15 - index) / 15;
 
             var id = item.preset.id;
@@ -321,7 +322,7 @@ export function uiPresetBrowser(context) {
             var geom = entity.geometry(graph);
 
             // evaluate preset
-            var preset = context.presets().match(entity, graph);
+            var preset = presetManager.match(entity, graph);
             if (preset.searchable !== false && // don't recommend unsearchables
                 !preset.isFallback() && // don't recommend generics
                 !preset.suggestion) { // don't recommend brand suggestions again
@@ -548,7 +549,7 @@ export function uiPresetBrowser(context) {
                 geometry = null;
             }
             d3_select(this).call(
-                uiPresetIcon(context)
+                uiPresetIcon()
                     .geometry(geometry)
                     .preset(d.preset || d.category)
                     .sizeClass('small')
@@ -580,7 +581,7 @@ export function uiPresetBrowser(context) {
         row.each(function(d) {
             if (!d.preset) return;
 
-            var presetFavorite = uiPresetFavoriteButton(d.preset, null, context, 'accessory');
+            var presetFavorite = uiPresetFavoriteButton(d.preset, null, 'accessory');
             d3_select(this).call(presetFavorite.button);
         });
         item.each(function(d) {

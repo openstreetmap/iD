@@ -2,6 +2,7 @@ import { dispatch as d3_dispatch } from 'd3-dispatch';
 import { event as d3_event } from 'd3-selection';
 import deepEqual from 'fast-deep-equal';
 
+import { presetManager } from '../presets';
 import { t, localizer } from '../core/localizer';
 import { actionChangeTags } from '../actions/change_tags';
 import { modeBrowse } from '../modes/browse';
@@ -318,7 +319,7 @@ export function uiEntityEditor(context) {
             var entity = graph.hasEntity(_entityIDs[i]);
             if (!entity) return;
 
-            var match = context.presets().match(entity, graph);
+            var match = presetManager.match(entity, graph);
 
             if (!counts[match.id]) counts[match.id] = 0;
             counts[match.id] += 1;
@@ -327,7 +328,7 @@ export function uiEntityEditor(context) {
         var matches = Object.keys(counts).sort(function(p1, p2) {
             return counts[p2] - counts[p1];
         }).map(function(pID) {
-            return context.presets().item(pID);
+            return presetManager.item(pID);
         });
 
         // A "weak" preset doesn't set any tags. (e.g. "Address")
