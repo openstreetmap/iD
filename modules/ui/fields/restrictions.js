@@ -1,6 +1,7 @@
 import { dispatch as d3_dispatch } from 'd3-dispatch';
 import { select as d3_select, event as d3_event } from 'd3-selection';
 
+import { presetManager } from '../../presets';
 import { prefs } from '../../core/preferences';
 import { t, localizer } from '../../core/localizer';
 import { actionRestrictTurn } from '../../actions/restrict_turn';
@@ -609,7 +610,7 @@ export function uiFieldRestrictions(field, context) {
     function displayName(entityID, graph) {
         var entity = graph.entity(entityID);
         var name = utilDisplayName(entity) || '';
-        var matched = context.presets().match(entity, graph);
+        var matched = presetManager.match(entity, graph);
         var type = (matched && matched.name()) || utilDisplayType(entity.id);
         return name || type;
     }

@@ -5,13 +5,14 @@ import { actionExtract } from '../actions/extract';
 import { modeSelect } from '../modes/select';
 import { osmJoinWays } from '../osm/multipolygon';
 import { osmNodeGeometriesForTags } from '../osm/tags';
+import { presetManager } from '../presets';
 import { geoHasSelfIntersections, geoSphericalDistance } from '../geo';
 import { t } from '../core/localizer';
 import { utilDisplayLabel, utilTagText } from '../util';
 import { validationIssue, validationIssueFix } from '../core/validation';
 
 
-export function validationMismatchedGeometry(context) {
+export function validationMismatchedGeometry() {
     var type = 'mismatched_geometry';
 
     function tagSuggestingLineIsArea(entity) {
@@ -22,8 +23,8 @@ export function validationMismatchedGeometry(context) {
             return null;
         }
 
-        var asLine = context.presets().matchTags(tagSuggestingArea, 'line');
-        var asArea = context.presets().matchTags(tagSuggestingArea, 'area');
+        var asLine = presetManager.matchTags(tagSuggestingArea, 'line');
+        var asArea = presetManager.matchTags(tagSuggestingArea, 'area');
         if (asLine && asArea && (asLine === asArea)) {
             // these tags also allow lines and making this an area wouldn't matter
             return null;

@@ -8,6 +8,7 @@ import {
     interpolateNumber as d3_interpolateNumber
 } from 'd3-interpolate';
 
+import { presetManager } from '../../presets';
 import { t } from '../../core/localizer';
 import { modeBrowse } from '../../modes/browse';
 import { modeSelect } from '../../modes/select';
@@ -19,8 +20,8 @@ import { icon, pad, transitionTime } from './helper';
 export function uiIntroArea(context, reveal) {
     var dispatch = d3_dispatch('done');
     var playground = [-85.63552, 41.94159];
-    var playgroundPreset = context.presets().item('leisure/playground');
-    var descriptionField = context.presets().field('description');
+    var playgroundPreset = presetManager.item('leisure/playground');
+    var descriptionField = presetManager.field('description');
     var timeouts = [];
     var _areaID;
 

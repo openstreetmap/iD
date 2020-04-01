@@ -3,6 +3,7 @@ import {
     event as d3_event
 } from 'd3-selection';
 
+import { presetManager } from '../../presets';
 import { utilArrayIdentical } from '../../util/array';
 import { t } from '../../core/localizer';
 import { uiTooltip } from '../tooltip';
@@ -93,9 +94,9 @@ export function uiSectionFeatureType(context) {
 
         var geometries = entityGeometries();
         selection.select('.preset-list-item button')
-            .call(uiPresetIcon(context)
+            .call(uiPresetIcon()
                 .geometry(_presets.length === 1 ? (geometries.length === 1 && geometries[0]) : null)
-                .preset(_presets.length === 1 ? _presets[0] : context.presets().item('point'))
+                .preset(_presets.length === 1 ? _presets[0] : presetManager.item('point'))
             );
 
         // NOTE: split on en-dash, not a hypen (to avoid conflict with hyphenated names)

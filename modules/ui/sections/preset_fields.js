@@ -3,6 +3,7 @@ import {
     event as d3_event
 } from 'd3-selection';
 
+import { presetManager } from '../../presets';
 import { t, localizer } from '../../core/localizer';
 import { utilArrayIdentical } from '../../util/array';
 import { utilArrayUnion, utilRebind } from '../../util';
@@ -36,7 +37,7 @@ export function uiSectionPresetFields(context) {
                 return geoms[graph.entity(entityID).geometry(graph)] = true;
             }, {}));
 
-            var presetsManager = context.presets();
+            var presetsManager = presetManager;
 
             var allFields = [];
             var allMoreFields = [];

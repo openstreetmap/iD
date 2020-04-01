@@ -1,6 +1,7 @@
 import deepEqual from 'fast-deep-equal';
 import { select as d3_select } from 'd3-selection';
 
+import { presetManager } from '../presets';
 import { geoScaleToZoom } from '../geo';
 import { osmEntity } from '../osm';
 import { svgPassiveVertex, svgPointTransform } from './helpers';
@@ -54,7 +55,7 @@ export function svgVertices(projection, context) {
 
             icons[entity.id] =
                 entity.hasInterestingTags() &&
-                context.presets().match(entity, graph).icon;
+                presetManager.match(entity, graph).icon;
 
             return icons[entity.id];
         }

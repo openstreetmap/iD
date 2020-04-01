@@ -3,6 +3,7 @@ import { geoScaleToZoom } from '../geo';
 import { osmEntity } from '../osm';
 import { svgPointTransform } from './helpers';
 import { svgTagClasses } from './tag_classes';
+import { presetManager } from '../presets';
 
 export function svgPoints(projection, context) {
 
@@ -141,7 +142,7 @@ export function svgPoints(projection, context) {
         groups.select('.stroke');   // propagate bound data
         groups.select('.icon')      // propagate bound data
             .attr('xlink:href', function(entity) {
-                var preset = context.presets().match(entity, graph);
+                var preset = presetManager.match(entity, graph);
                 var picon = preset && preset.icon;
 
                 if (!picon) {

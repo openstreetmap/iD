@@ -9,6 +9,7 @@ import {
     modeBrowse
 } from '../../modes';
 
+import { presetManager } from '../../presets';
 import { t } from '../../core/localizer';
 import { svgIcon } from '../../svg';
 import { uiTooltip } from '../tooltip';
@@ -25,21 +26,21 @@ export function uiToolOldDrawModes(context) {
             title: t('modes.add_point.title'),
             button: 'point',
             description: t('modes.add_point.description'),
-            preset: context.presets().item('point'),
+            preset: presetManager.item('point'),
             key: '1'
         }),
         modeAddLine(context, {
             title: t('modes.add_line.title'),
             button: 'line',
             description: t('modes.add_line.description'),
-            preset: context.presets().item('line'),
+            preset: presetManager.item('line'),
             key: '2'
         }),
         modeAddArea(context, {
             title: t('modes.add_area.title'),
             button: 'area',
             description: t('modes.add_area.description'),
-            preset: context.presets().item('area'),
+            preset: presetManager.item('area'),
             key: '3'
         })
     ];

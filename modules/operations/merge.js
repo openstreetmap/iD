@@ -7,7 +7,7 @@ import { actionMergePolygon } from '../actions/merge_polygon';
 
 import { behaviorOperation } from '../behavior/operation';
 import { modeSelect } from '../modes/select';
-
+import { presetManager } from '../presets';
 
 export function operationMerge(selectedIDs, context) {
 
@@ -67,7 +67,7 @@ export function operationMerge(selectedIDs, context) {
         if (j && m && p && n) {
             if (j === 'restriction' || n === 'restriction') {
                 return t('operations.merge.restriction',
-                    { relation: context.presets().item('type/restriction').name() });
+                    { relation: presetManager.item('type/restriction').name() });
 
             } else if (p === 'incomplete_relation') {
                 return t('operations.merge.incomplete_relation');

@@ -3,6 +3,7 @@ import {
     select as d3_select
 } from 'd3-selection';
 
+import { presetManager } from '../../presets';
 import { t, localizer } from '../../core/localizer';
 
 import { actionAddEntity } from '../../actions/add_entity';
@@ -128,7 +129,7 @@ export function uiSectionRawMembershipEditor(context) {
         var graph = context.graph();
 
         function baseDisplayLabel(entity) {
-            var matched = context.presets().match(entity, graph);
+            var matched = presetManager.match(entity, graph);
             var presetName = (matched && matched.name()) || t('inspector.relation');
             var entityName = utilDisplayName(entity) || '';
 
@@ -238,7 +239,7 @@ export function uiSectionRawMembershipEditor(context) {
             .append('span')
             .attr('class', 'member-entity-type')
             .text(function(d) {
-                var matched = context.presets().match(d.relation, context.graph());
+                var matched = presetManager.match(d.relation, context.graph());
                 return (matched && matched.name()) || t('inspector.relation');
             });
 

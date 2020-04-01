@@ -3,6 +3,7 @@ import {
     select as d3_select
 } from 'd3-selection';
 
+import { presetManager } from '../presets';
 import { t } from '../core/localizer';
 
 import { actionAddMidpoint } from '../actions/add_midpoint';
@@ -92,7 +93,7 @@ export function modeDragNode(context) {
     function shouldSnapToNode(target) {
         if (!_activeEntity) return false;
         return _activeEntity.geometry(context.graph()) !== 'vertex' ||
-            (target.geometry(context.graph()) === 'vertex' || context.presets().allowsVertex(target, context.graph()));
+            (target.geometry(context.graph()) === 'vertex' || presetManager.allowsVertex(target, context.graph()));
     }
 
 
@@ -237,7 +238,7 @@ export function modeDragNode(context) {
                 context.ui().flash
                     .duration(4000)
                     .text(t('operations.connect.' + isInvalid,
-                        { relation: context.presets().item('type/restriction').name() }
+                        { relation: presetManager.item('type/restriction').name() }
                     ))();
             }
         } else if (isInvalid) {

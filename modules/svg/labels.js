@@ -8,7 +8,7 @@ import {
     geoExtent, geoPolygonIntersectsPolygon, geoPathLength,
     geoScaleToZoom, geoVecInterp, geoVecLength
 } from '../geo';
-
+import { presetManager } from '../presets';
 import { osmEntity } from '../osm';
 import { utilDetect } from '../util/detect';
 import { utilDisplayName, utilDisplayNameForPath, utilEntitySelector } from '../util';
@@ -200,7 +200,7 @@ export function svgLabels(projection, context) {
             .merge(icons)
             .attr('transform', get(labels, 'transform'))
             .attr('xlink:href', function(d) {
-                var preset = context.presets().match(d, context.graph());
+                var preset = presetManager.match(d, context.graph());
                 var picon = preset && preset.icon;
 
                 if (!picon) {
@@ -312,7 +312,7 @@ export function svgLabels(projection, context) {
             }
 
             // Determine which entities are label-able
-            var preset = geometry === 'area' && context.presets().match(entity, graph);
+            var preset = geometry === 'area' && presetManager.match(entity, graph);
             var icon = preset && !blacklisted(preset) && preset.icon;
 
             if (!icon && !utilDisplayName(entity))
@@ -559,7 +559,7 @@ export function svgLabels(projection, context) {
 
             if (isNaN(centroid[0]) || areaWidth < 20) return;
 
-            var preset = context.presets().match(entity, context.graph());
+            var preset = presetManager.match(entity, context.graph());
             var picon = preset && preset.icon;
             var iconSize = 17;
             var padding = 2;

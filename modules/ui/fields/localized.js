@@ -2,6 +2,7 @@ import { dispatch as d3_dispatch } from 'd3-dispatch';
 import { select as d3_select, event as d3_event } from 'd3-selection';
 import * as countryCoder from '@ideditor/country-coder';
 
+import { presetManager } from '../../presets';
 import { fileFetcher } from '../../core/file_fetcher';
 import { t, localizer } from '../../core/localizer';
 import { geoExtent } from '../../geo';
@@ -36,7 +37,7 @@ export function uiFieldLocalized(field, context) {
         .catch(function() { /* ignore */ });
 
 
-    var allSuggestions = context.presets().collection.filter(function(p) {
+    var allSuggestions = presetManager.collection.filter(function(p) {
         return p.suggestion === true;
     });
 
@@ -104,7 +105,7 @@ export function uiFieldLocalized(field, context) {
                 // assume the name has already been confirmed if its source has been researched
                 if (entity.tags['name:etymology:wikidata']) return true;
 
-                var preset = context.presets().match(entity, context.graph());
+                var preset = presetManager.match(entity, context.graph());
                 var isSuggestion = preset && preset.suggestion;
                 var showsBrand = preset && preset.originalFields.filter(function(d) {
                     return d.id === 'brand';
@@ -149,7 +150,7 @@ export function uiFieldLocalized(field, context) {
         calcLocked();
         var isLocked = field.locked();
         var singularEntity = _entityIDs.length === 1 && context.hasEntity(_entityIDs[0]);
-        var preset = singularEntity && context.presets().match(singularEntity, context.graph());
+        var preset = singularEntity && presetManager.match(singularEntity, context.graph());
 
         var wrap = selection.selectAll('.form-field-input-wrap')
             .data([0]);
@@ -258,7 +259,7 @@ export function uiFieldLocalized(field, context) {
             var latest = _entityIDs.length === 1 && context.hasEntity(_entityIDs[0]);
             if (!latest) return;   // deleting the entity blurred the field?
 
-            var preset = context.presets().match(latest, context.graph());
+            var preset = presetManager.match(latest, context.graph());
             if (preset && preset.suggestion) return;   // already accepted
 
             // note: here we are testing against "decorated" names, i.e. 'Starbucks – Cafe'

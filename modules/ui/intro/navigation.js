@@ -5,6 +5,7 @@ import {
     select as d3_select
 } from 'd3-selection';
 
+import { presetManager } from '../../presets';
 import { t } from '../../core/localizer';
 import { modeBrowse } from '../../modes/browse';
 import { modeSelect } from '../../modes/select';
@@ -20,8 +21,8 @@ export function uiIntroNavigation(context, reveal) {
     var springStreetId = 'w397';
     var springStreetEndId = 'n1834';
     var springStreet = [-85.63582, 41.94255];
-    var onewayField = context.presets().field('oneway');
-    var maxspeedField = context.presets().field('maxspeed');
+    var onewayField = presetManager.field('oneway');
+    var maxspeedField = presetManager.field('maxspeed');
 
 
     var chapter = {
@@ -290,7 +291,7 @@ export function uiIntroNavigation(context, reveal) {
 
         // preset match, in case the user happened to change it.
         var entity = context.entity(context.selectedIDs()[0]);
-        var preset = context.presets().match(entity, context.graph());
+        var preset = presetManager.match(entity, context.graph());
 
         var onClick = function() { continueTo(fieldsTownHall); };
 

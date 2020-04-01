@@ -4,6 +4,7 @@ import {
     select as d3_select
 } from 'd3-selection';
 
+import { presetManager } from '../../presets';
 import { t, localizer } from '../../core/localizer';
 import { actionChangePreset } from '../../actions/change_preset';
 import { modeBrowse } from '../../modes/browse';
@@ -17,7 +18,7 @@ export function uiIntroPoint(context, reveal) {
     var timeouts = [];
     var intersection = [-85.63279, 41.94394];
     var building = [-85.632422, 41.944045];
-    var cafePreset = context.presets().item('amenity/cafe');
+    var cafePreset = presetManager.item('amenity/cafe');
     var _pointID = null;
 
 
@@ -284,7 +285,7 @@ export function uiIntroPoint(context, reveal) {
         if (!entity) return chapter.restart();
 
         // make sure it's still a cafe, in case user somehow changed it..
-        var oldPreset = context.presets().match(entity, context.graph());
+        var oldPreset = presetManager.match(entity, context.graph());
         context.replace(actionChangePreset(_pointID, oldPreset, cafePreset));
 
         context.enter(modeBrowse(context));

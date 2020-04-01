@@ -4,6 +4,7 @@ import {
     event as d3_event
 } from 'd3-selection';
 
+import { presetManager } from '../../presets';
 import { t, localizer } from '../../core/localizer';
 import { modeBrowse } from '../../modes/browse';
 import { modeSelect } from '../../modes/select';
@@ -15,9 +16,9 @@ export function uiIntroBuilding(context, reveal) {
     var dispatch = d3_dispatch('done');
     var house = [-85.62815, 41.95638];
     var tank = [-85.62732, 41.95347];
-    var buildingCatetory = context.presets().item('category-building');
-    var housePreset = context.presets().item('building/house');
-    var tankPreset = context.presets().item('man_made/storage_tank');
+    var buildingCatetory = presetManager.item('category-building');
+    var housePreset = presetManager.item('building/house');
+    var tankPreset = presetManager.item('man_made/storage_tank');
     var timeouts = [];
     var _houseID = null;
     var _tankID = null;

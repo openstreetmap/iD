@@ -5,6 +5,7 @@ import {
     select as d3_select
 } from 'd3-selection';
 
+import { presetManager } from '../presets';
 import { t } from '../core/localizer';
 import { actionAddMidpoint } from '../actions/add_midpoint';
 import { actionMoveNode } from '../actions/move_node';
@@ -105,7 +106,7 @@ export function behaviorDrawWay(context, wayID, index, mode, startGraph) {
 
 
     function allowsVertex(d) {
-        return d.geometry(context.graph()) === 'vertex' || context.presets().allowsVertex(d, context.graph());
+        return d.geometry(context.graph()) === 'vertex' || presetManager.allowsVertex(d, context.graph());
     }
 
 

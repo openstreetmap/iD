@@ -2,6 +2,7 @@ import { dispatch as d3_dispatch } from 'd3-dispatch';
 import { select as d3_select } from 'd3-selection';
 import * as countryCoder from '@ideditor/country-coder';
 
+import { presetManager } from '../../presets';
 import { fileFetcher } from '../../core/file_fetcher';
 import { geoExtent, geoChooseEdge, geoSphericalDistance } from '../../geo';
 import { uiCombobox } from '../combobox';
@@ -12,7 +13,7 @@ import { t } from '../../core/localizer';
 export function uiFieldAddress(field, context) {
     var dispatch = d3_dispatch('init', 'change');
     var wrap = d3_select(null);
-    var addrField = context.presets().field('address');   // needed for placeholder strings
+    var addrField = presetManager.field('address');   // needed for placeholder strings
 
     var _isInitialized = false;
     var _entityIDs = [];
