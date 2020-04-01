@@ -179,7 +179,13 @@ describe('iD.presetIndex', function () {
 
 
     describe('#addablePresetIDs', function () {
-        it('addablePresetIDs is initially null', function () {
+        var testPresets = {
+            residential: { tags: { highway: 'residential' }, geometry: ['line'] },
+            park: { tags: { leisure: 'park' }, geometry: ['point', 'area'] }
+        };
+
+        it('addablePresetIDs is initially null', function (done) {
+            iD.fileFetcher.cache().preset_presets = testPresets;
             var presets = iD.presetIndex();
             presets.ensureLoaded().then(function() {
                 expect(presets.addablePresetIDs()).to.be.null;
@@ -187,19 +193,20 @@ describe('iD.presetIndex', function () {
             });
         });
 
-        it('can set and get addablePresetIDs', function () {
+        it('can set and get addablePresetIDs', function (done) {
+            iD.fileFetcher.cache().preset_presets = testPresets;
             var presets = iD.presetIndex();
             presets.ensureLoaded().then(function() {
-                var ids = new Set(['point']);   // can only add points
+                var ids = new Set(['residential']);   // can only add preset with this ID
                 presets.addablePresetIDs(ids);
 
-                expect(presets.item('point').addable()).to.be.true;
-                expect(presets.item('line').addable()).to.be.false;
+                expect(presets.item('residential').addable()).to.be.true;
+                expect(presets.item('park').addable()).to.be.false;
                 expect(presets.addablePresetIDs()).to.eql(ids);
 
                 presets.addablePresetIDs(null);
-                expect(presets.item('point').addable()).to.be.true;
-                expect(presets.item('line').addable()).to.be.true;
+                expect(presets.item('residential').addable()).to.be.true;
+                expect(presets.item('park').addable()).to.be.true;
                 done();
             });
         });
