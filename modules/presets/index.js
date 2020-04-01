@@ -103,6 +103,9 @@ export function presetIndex(context) {
       });
     }
 
+    // Need to rebuild _this.collection before loading categories
+    _this.collection = Object.values(_presets).concat(Object.values(_categories));
+
     // Merge Categories
     if (d.categories) {
       Object.keys(d.categories).forEach(categoryID => {
@@ -115,13 +118,16 @@ export function presetIndex(context) {
       });
     }
 
+    // Rebuild _this.collection after loading categories
+    _this.collection = Object.values(_presets).concat(Object.values(_categories));
+
     // Merge Defaults
     if (d.defaults) {
       Object.keys(d.defaults).forEach(geometry => {
         const def = d.defaults[geometry];
         if (Array.isArray(def)) {   // add or replace
           _defaults[geometry] = presetCollection(
-            def.map(presetID => _presets[presetID]).filter(Boolean)
+            def.map(id => _presets[id] || _categories[id]).filter(Boolean)
           );
         } else {   // remove
           delete _defaults[geometry];
@@ -134,9 +140,6 @@ export function presetIndex(context) {
 
     // Reset all the preset fields - they'll need to be resolved again
     Object.values(_presets).forEach(preset => preset.resetFields());
-
-    // Rebuild _this.collection
-    _this.collection = Object.values(_presets).concat(Object.values(_categories));
 
     // Rebuild geometry index
     _geometryIndex = { point: {}, vertex: {}, line: {}, area: {}, relation: {} };
