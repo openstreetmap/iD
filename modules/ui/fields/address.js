@@ -36,7 +36,7 @@ export function uiFieldAddress(field, context) {
         var l = extent.center();
         var box = geoExtent(l).padByMeters(200);
 
-        var streets = context.intersects(box)
+        var streets = context.history().intersects(box)
             .filter(isAddressable)
             .map(function(d) {
                 var loc = context.projection([
@@ -68,7 +68,7 @@ export function uiFieldAddress(field, context) {
         var l = extent.center();
         var box = geoExtent(l).padByMeters(200);
 
-        var cities = context.intersects(box)
+        var cities = context.history().intersects(box)
             .filter(isAddressable)
             .map(function(d) {
                 return {
@@ -106,7 +106,7 @@ export function uiFieldAddress(field, context) {
         var l = extent.center();
         var box = geoExtent(l).padByMeters(200);
 
-        var results = context.intersects(box)
+        var results = context.history().intersects(box)
             .filter(function hasTag(d) { return _entityIDs.indexOf(d.id) === -1 && d.tags[key]; })
             .map(function(d) {
                 return {
