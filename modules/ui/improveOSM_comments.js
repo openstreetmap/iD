@@ -70,7 +70,9 @@ export function uiImproveOsmComments() {
           .append('p')
             .text(d => d.text);
     })
-    .catch(err => {}); // TODO: Handle failed json request gracefully in some way
+    .catch(err => {
+      console.log(err); // eslint-disable-line no-console
+    });
   }
 
   function localeDateString(s) {

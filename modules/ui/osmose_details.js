@@ -195,7 +195,9 @@ export function uiOsmoseDetails(context) {
         context.features().forceVisible(d.elems);
         context.map().pan([0,0]);  // trigger a redraw
       })
-      .catch(err => {}); // TODO: Handle failed json request gracefully in some way
+      .catch(err => {
+        console.log(err); // eslint-disable-line no-console
+      });
   }
 
 
