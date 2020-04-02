@@ -6563,6 +6563,11 @@ en:
         name: Shingle
         # 'terms: beach,gravel,pebbles,riverbed,rounded rock fragments'
         terms: '<translate with synonyms or related terms for ''Shingle'', separated by commas>'
+      natural/shrub:
+        # natural=shrub
+        name: Shrub
+        # 'terms: bush,scrub'
+        terms: '<translate with synonyms or related terms for ''Shrub'', separated by commas>'
       natural/spring:
         # natural=spring
         name: Spring

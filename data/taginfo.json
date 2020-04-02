@@ -801,6 +801,7 @@
     {"key": "natural", "value": "scree", "description": "🄿 Scree", "object_types": ["area"]},
     {"key": "natural", "value": "scrub", "description": "🄿 Scrub", "object_types": ["area"]},
     {"key": "natural", "value": "shingle", "description": "🄿 Shingle", "object_types": ["area"]},
+    {"key": "natural", "value": "shrub", "description": "🄿 Shrub", "object_types": ["node"], "icon_url": "https://cdn.jsdelivr.net/gh/mapbox/maki/icons/park-15.svg"},
     {"key": "natural", "value": "spring", "description": "🄿 Spring", "object_types": ["node"], "icon_url": "https://cdn.jsdelivr.net/gh/mapbox/maki/icons/water-15.svg"},
     {"key": "natural", "value": "stone", "description": "🄿 Unattached Stone / Boulder", "object_types": ["node", "area"], "icon_url": "https://cdn.jsdelivr.net/gh/ideditor/temaki/icons/boulder1.svg"},
     {"key": "natural", "value": "tree_row", "description": "🄿 Tree Row", "object_types": ["way"], "icon_url": "https://cdn.jsdelivr.net/gh/ideditor/temaki/icons/tree_row.svg"},

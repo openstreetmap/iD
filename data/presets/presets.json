@@ -823,6 +823,7 @@
   "natural/scree": {"geometry": ["area"], "tags": {"natural": "scree"}, "terms": ["loose rocks"], "name": "Scree"},
   "natural/scrub": {"geometry": ["area"], "tags": {"natural": "scrub"}, "terms": ["bush", "shrubs"], "name": "Scrub"},
   "natural/shingle": {"geometry": ["area"], "tags": {"natural": "shingle"}, "terms": ["beach", "gravel", "pebbles", "riverbed", "rounded rock fragments"], "name": "Shingle"},
+  "natural/shrub": {"icon": "maki-park", "fields": ["height"], "moreFields": ["species/wikidata"], "geometry": ["point", "vertex"], "tags": {"natural": "shrub"}, "terms": ["bush", "scrub"], "name": "Shrub"},
   "natural/spring": {"icon": "maki-water", "fields": ["name", "drinking_water", "intermittent"], "geometry": ["point", "vertex"], "tags": {"natural": "spring"}, "terms": ["aquifer", "hydro", "seep", "water source"], "name": "Spring"},
   "natural/stone": {"icon": "temaki-boulder1", "fields": ["name"], "geometry": ["point", "area"], "tags": {"natural": "stone"}, "terms": ["boulder", "stone", "rock"], "name": "Unattached Stone / Boulder"},
   "natural/tree_row": {"icon": "temaki-tree_row", "fields": ["leaf_type", "leaf_cycle", "denotation"], "geometry": ["line"], "tags": {"natural": "tree_row"}, "terms": [], "name": "Tree Row"},

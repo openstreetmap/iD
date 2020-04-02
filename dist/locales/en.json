@@ -8196,6 +8196,10 @@
                     "name": "Shingle",
                     "terms": "beach,gravel,pebbles,riverbed,rounded rock fragments"
                 },
+                "natural/shrub": {
+                    "name": "Shrub",
+                    "terms": "bush,scrub"
+                },
                 "natural/spring": {
                     "name": "Spring",
                     "terms": "aquifer,hydro,seep,water source"
