@@ -65,6 +65,9 @@ describe('iD.validations.crossing_ways', function () {
     }
 
     function verifySingleCrossingIssue(issues) {
+        // each entity must produce an identical issue
+        expect(issues).to.have.lengthOf(2);
+
         var issue = issues[0];
         expect(issue.type).to.eql('crossing_ways');
         expect(issue.entityIds).to.have.lengthOf(2);
@@ -256,7 +259,7 @@ describe('iD.validations.crossing_ways', function () {
         var n6 = iD.osmNode({id: 'n-6', loc: [2,3]});
         var w2 = iD.osmWay({id: 'w-2', nodes: ['n-3', 'n-4', 'n-5'], tags: {}});
         var w3 = iD.osmWay({id: 'w-3', nodes: ['n-5', 'n-6', 'n-3'], tags: {}});
-        var r1 = iD.osmRelation({id: 'r-1', members: [{id: 'w-2'}, {id: 'w-3'}], tags: relTags});
+        var r1 = iD.osmRelation({id: 'r-1', members: [{id: 'w-2', type: 'way'}, {id: 'w-3', type: 'way'}], tags: relTags});
 
         context.perform(
             iD.actionAddEntity(n3),
@@ -269,8 +272,13 @@ describe('iD.validations.crossing_ways', function () {
         );
     }
 
-    it('one cross point between highway and building relation', function() {
-        createWayAndRelationWithOneCrossingPoint({ highway: 'residential' }, { building: 'yes' });
+    it('one cross point between highway line and building multipolygon relation', function() {
+        createWayAndRelationWithOneCrossingPoint({ highway: 'residential' }, { building: 'yes', type: 'multipolygon' });
+        verifySingleCrossingIssue(validate(), 'r-1');
+    });
+
+    it('one cross point between highway line and highway multipolygon relation', function() {
+        createWayAndRelationWithOneCrossingPoint({ highway: 'residential' }, { highway: 'footway', type: 'multipolygon' });
         verifySingleCrossingIssue(validate(), 'r-1');
     });
 
