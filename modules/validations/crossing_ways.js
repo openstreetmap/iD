@@ -17,12 +17,12 @@ export function validationCrossingWays(context) {
 
     // returns the way or its parent relation, whichever has a useful feature type
     function getFeatureWithFeatureTypeTagsForWay(way, graph) {
-        if (getFeatureTypeForTags(way.tags) === null) {
+        if (getFeatureType(way, graph) === null) {
             // if the way doesn't match a feature type, check its parent relations
             var parentRels = graph.parentRelations(way);
             for (var i = 0; i < parentRels.length; i++) {
                 var rel = parentRels[i];
-                if (getFeatureTypeForTags(rel.tags) !== null) {
+                if (getFeatureType(rel, graph) !== null) {
                     return rel;
                 }
             }
@@ -50,8 +50,8 @@ export function validationCrossingWays(context) {
 
 
     function getFeatureTypeForCrossingCheck(way, graph) {
-        var tags = getFeatureWithFeatureTypeTagsForWay(way, graph).tags;
-        return getFeatureTypeForTags(tags);
+        var feature = getFeatureWithFeatureTypeTagsForWay(way, graph);
+        return getFeatureType(feature, graph);
     }
 
     // discard
@@ -60,13 +60,19 @@ export function validationCrossingWays(context) {
     };
 
 
-    function getFeatureTypeForTags(tags) {
+    function getFeatureType(entity, graph) {
+
+        var geometry = entity.geometry(graph);
+        if (geometry !== 'line' && geometry !== 'area') return null;
+
+        var tags = entity.tags;
+
         if (hasTag(tags, 'building') && !ignoredBuildings[tags.building]) return 'building';
-
-        // don't check non-building areas
-        if (hasTag(tags, 'area')) return null;
-
         if (hasTag(tags, 'highway') && osmRoutableHighwayTagValues[tags.highway]) return 'highway';
+
+        // don't check railway or waterway areas
+        if (geometry !== 'line') return null;
+
         if (hasTag(tags, 'railway') && osmRailwayTrackTagValues[tags.railway]) return 'railway';
         if (hasTag(tags, 'waterway') && osmFlowingWaterwayTagValues[tags.waterway]) return 'waterway';
 
@@ -126,9 +132,9 @@ export function validationCrossingWays(context) {
     };
     var nonCrossingHighways = { track: true };
 
-    function tagsForConnectionNodeIfAllowed(entity1, entity2) {
-        var featureType1 = getFeatureTypeForTags(entity1.tags);
-        var featureType2 = getFeatureTypeForTags(entity2.tags);
+    function tagsForConnectionNodeIfAllowed(entity1, entity2, graph) {
+        var featureType1 = getFeatureType(entity1, graph);
+        var featureType2 = getFeatureType(entity2, graph);
         if (featureType1 === featureType2) {
             if (featureType1 === 'highway') {
                 var entity1IsPath = osmPathHighwayTagValues[entity1.tags.highway];
@@ -284,20 +290,19 @@ export function validationCrossingWays(context) {
 
 
     function waysToCheck(entity, graph) {
-        if (!getFeatureTypeForTags(entity.tags)) {
-            return [];
-        }
+        var featureType = getFeatureType(entity, graph);
+        if (!featureType) return [];
+
         if (entity.type === 'way') {
             return [entity];
-        } else if (entity.type === 'relation' &&
-            entity.isMultipolygon() &&
-            // only check multipolygons if they are buildings
-            hasTag(entity.tags, 'building')) {
+        } else if (entity.type === 'relation') {
             return entity.members.reduce(function(array, member) {
                 if (member.type === 'way' &&
-                    //(member.role === 'outer' || member.role === 'inner') &&
-                    graph.hasEntity(member.id)) {
-                    var entity = graph.entity(member.id);
+                    // only look at geometry ways
+                    (!member.role || member.role === 'outer' || member.role === 'inner')) {
+                    var entity = graph.hasEntity(member.id);
+                    // don't add duplicates
+                    if (!entity || array.includes(entity)) return;
                     array.push(entity);
                 }
                 return array;
@@ -333,7 +338,7 @@ export function validationCrossingWays(context) {
             var type1 = way1Info.featureType;
             var type2 = way2Info.featureType;
             if (type1 === type2) {
-                return utilDisplayLabel(way1Info.way, context.graph()) > utilDisplayLabel(way2Info.way, context.graph());
+                return utilDisplayLabel(way1Info.way, graph) > utilDisplayLabel(way2Info.way, graph);
             } else if (type1 === 'waterway') {
                 return true;
             } else if (type2 === 'waterway') {
@@ -347,7 +352,7 @@ export function validationCrossingWays(context) {
         var edges = [crossing.wayInfos[0].edge, crossing.wayInfos[1].edge];
         var featureTypes = [crossing.wayInfos[0].featureType, crossing.wayInfos[1].featureType];
 
-        var connectionTags = tagsForConnectionNodeIfAllowed(entities[0], entities[1]);
+        var connectionTags = tagsForConnectionNodeIfAllowed(entities[0], entities[1], graph);
 
         var featureType1 = crossing.wayInfos[0].featureType;
         var featureType2 = crossing.wayInfos[1].featureType;
@@ -378,11 +383,12 @@ export function validationCrossingWays(context) {
             subtype: subtype,
             severity: 'warning',
             message: function(context) {
-                var entity1 = context.hasEntity(this.entityIds[0]),
-                    entity2 = context.hasEntity(this.entityIds[1]);
+                var graph = context.graph();
+                var entity1 = graph.hasEntity(this.entityIds[0]),
+                    entity2 = graph.hasEntity(this.entityIds[1]);
                 return (entity1 && entity2) ? t('issues.crossing_ways.message', {
-                    feature: utilDisplayLabel(entity1, context.graph()),
-                    feature2: utilDisplayLabel(entity2, context.graph())
+                    feature: utilDisplayLabel(entity1, graph),
+                    feature2: utilDisplayLabel(entity2, graph)
                 }) : '';
             },
             reference: showReference,
@@ -404,7 +410,7 @@ export function validationCrossingWays(context) {
                 // ensure the correct connection tags are added in the fix
                 JSON.stringify(connectionTags),
             loc: crossing.crossPoint,
-            dynamicFixes: function() {
+            dynamicFixes: function(context) {
                 var mode = context.mode();
                 if (!mode || mode.id !== 'select' || mode.selectedIDs().length !== 1) return [];
 
@@ -430,12 +436,17 @@ export function validationCrossingWays(context) {
 
                     fixes.push(makeChangeLayerFix('higher'));
                     fixes.push(makeChangeLayerFix('lower'));
-                } else {
+
+                // can only add bridge/tunnel if both features are lines
+                } else if (context.graph().geometry(this.entityIds[0]) === 'line' &&
+                    context.graph().geometry(this.entityIds[1]) === 'line') {
+
                     // don't recommend adding bridges to waterways since they're uncommmon
                     if (allowsBridge(selectedFeatureType) && selectedFeatureType !== 'waterway') {
                         fixes.push(makeAddBridgeOrTunnelFix('add_a_bridge', 'temaki-bridge', 'bridge'));
                     }
 
+                    // don't recommend adding tunnels under waterways since they're uncommmon
                     var skipTunnelFix = otherFeatureType === 'waterway' && selectedFeatureType !== 'waterway';
                     if (allowsTunnel(selectedFeatureType) && !skipTunnelFix) {
                         fixes.push(makeAddBridgeOrTunnelFix('add_a_tunnel', 'temaki-tunnel', 'tunnel'));
@@ -505,7 +516,7 @@ export function validationCrossingWays(context) {
                         structLengthMeters = crossedWay && crossedWay.impliedLineWidthMeters();
                     }
                     if (structLengthMeters) {
-                        if (getFeatureTypeForTags(crossedWay.tags) === 'railway') {
+                        if (getFeatureType(crossedWay, graph) === 'railway') {
                             // bridges over railways are generally much longer than the rail bed itself, compensate
                             structLengthMeters *= 2;
                         }
@@ -647,7 +658,7 @@ export function validationCrossingWays(context) {
                         tags.layer = '1';
                     } else {
                         var tunnelValue = 'yes';
-                        if (getFeatureTypeForTags(tags) === 'waterway') {
+                        if (getFeatureType(structureWay, graph) === 'waterway') {
                             // use `tunnel=culvert` for waterways by default
                             tunnelValue = 'culvert';
                         }
@@ -664,8 +675,6 @@ export function validationCrossingWays(context) {
             }
         });
     }
-
-
 
     function makeConnectWaysFix(connectionTags) {
 
