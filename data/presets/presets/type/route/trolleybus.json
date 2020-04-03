@@ -1,0 +1,17 @@
+{
+    "icon": "temaki-trolleybus",
+    "fields": [
+        "{type/route/train}"
+    ],
+    "moreFields": [
+        "{type/route/train}"
+    ],
+    "geometry": [
+        "relation"
+    ],
+    "tags": {
+        "type": "route",
+        "route": "trolleybus"
+    },
+    "name": "Trolleybus Route"
+}

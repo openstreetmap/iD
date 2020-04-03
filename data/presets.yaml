@@ -752,6 +752,8 @@ en:
       distance:
         # distance=*
         label: Distance
+        # 'terms: length,mileage'
+        terms: '[translate with synonyms or related terms for ''Distance'', separated by commas]'
       disused/railway:
         # 'disused:railway=*'
         label: Type
@@ -8725,6 +8727,10 @@ en:
         # 'type=route, route=tram'
         name: Tram Route
         terms: '<translate with synonyms or related terms for ''Tram Route'', separated by commas>'
+      type/route/trolleybus:
+        # 'type=route, route=trolleybus'
+        name: Trolleybus Route
+        terms: '<translate with synonyms or related terms for ''Trolleybus Route'', separated by commas>'
       type/route_master:
         # type=route_master
         name: Route Master

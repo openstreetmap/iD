@@ -3247,7 +3247,8 @@
                     "label": "Display"
                 },
                 "distance": {
-                    "label": "Distance"
+                    "label": "Distance",
+                    "terms": "length,mileage"
                 },
                 "disused/railway": {
                     "label": "Type"
@@ -10040,6 +10041,10 @@
                 },
                 "type/route/tram": {
                     "name": "Tram Route",
+                    "terms": ""
+                },
+                "type/route/trolleybus": {
+                    "name": "Trolleybus Route",
                     "terms": ""
                 },
                 "type/site": {

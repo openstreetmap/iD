@@ -5,11 +5,12 @@
         "ref_route",
         "operator",
         "network",
-        "to",
-        "from"
+        "from",
+        "to"
     ],
     "moreFields": [
         "colour",
+        "distance",
         "duration",
         "interval",
         "opening_hours",
