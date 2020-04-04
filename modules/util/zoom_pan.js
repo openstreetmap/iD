@@ -266,7 +266,7 @@ export function utilZoomPan() {
   }
 
   function pointermove() {
-    if (!this.__zooming) return;
+    if (!this.__zooming || !_pointerLocGetter) return;
 
     var g = gesture(this, arguments);
 

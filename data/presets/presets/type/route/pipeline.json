@@ -1,11 +1,10 @@
 {
     "icon": "iD-pipeline-line",
     "fields": [
-        "name",
-        "ref_route",
-        "operator",
-        "to",
-        "from"
+        "{type/route/power}"
+    ],
+    "moreFields": [
+        "{type/route/power}"
     ],
     "geometry": [
         "relation"

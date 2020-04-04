@@ -447,8 +447,6 @@ export function svgLabels(projection, context) {
 
             if (length < width + 20) return;
 
-            // todo: properly clip points to viewport
-
             // % along the line to attempt to place the label
             var lineOffsets = [50, 45, 55, 40, 60, 35, 65, 30, 70,
                                25, 75, 20, 80, 15, 95, 10, 90, 5, 95];

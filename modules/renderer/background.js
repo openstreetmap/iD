@@ -493,7 +493,7 @@ export function rendererBackground(context) {
           }
         });
 
-        if (hash.gpx) {   // todo: move elsewhere - this doesn't belong in background
+        if (hash.gpx) {
           const gpx = context.layers().layer('data');
           if (gpx) {
             gpx.url(hash.gpx, '.gpx');

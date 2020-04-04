@@ -4,8 +4,12 @@
         "name",
         "ref_route",
         "network_road",
-        "to",
-        "from"
+        "from",
+        "to"
+    ],
+    "moreFields": [
+        "colour",
+        "distance"
     ],
     "geometry": [
         "relation"

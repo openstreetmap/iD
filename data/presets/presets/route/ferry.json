@@ -9,11 +9,12 @@
         "duration",
         "access",
         "toll",
-        "to",
-        "from"
+        "from",
+        "to"
     ],
     "moreFields": [
         "charge_toll",
+        "distance",
         "dog",
         "interval",
         "maxheight",

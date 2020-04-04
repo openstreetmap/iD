@@ -752,6 +752,8 @@ en:
       distance:
         # distance=*
         label: Distance
+        # 'terms: length,mileage'
+        terms: '[translate with synonyms or related terms for ''Distance'', separated by commas]'
       disused/railway:
         # 'disused:railway=*'
         label: Type
@@ -6563,6 +6565,11 @@ en:
         name: Shingle
         # 'terms: beach,gravel,pebbles,riverbed,rounded rock fragments'
         terms: '<translate with synonyms or related terms for ''Shingle'', separated by commas>'
+      natural/shrub:
+        # natural=shrub
+        name: Shrub
+        # 'terms: bush,scrub'
+        terms: '<translate with synonyms or related terms for ''Shrub'', separated by commas>'
       natural/spring:
         # natural=spring
         name: Spring
@@ -8720,6 +8727,10 @@ en:
         # 'type=route, route=tram'
         name: Tram Route
         terms: '<translate with synonyms or related terms for ''Tram Route'', separated by commas>'
+      type/route/trolleybus:
+        # 'type=route, route=trolleybus'
+        name: Trolleybus Route
+        terms: '<translate with synonyms or related terms for ''Trolleybus Route'', separated by commas>'
       type/route_master:
         # type=route_master
         name: Route Master

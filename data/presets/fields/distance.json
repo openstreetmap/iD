@@ -1,5 +1,9 @@
 {
     "key": "distance",
     "type": "text",
-    "label": "Distance"
+    "label": "Distance",
+    "terms": [
+        "length",
+        "mileage"
+    ]
 }

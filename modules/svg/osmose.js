@@ -219,10 +219,12 @@ export function svgOsmose(projection, context, dispatch) {
     if (_layerEnabled) {
       // Strings supplied by Osmose fetched before showing layer for first time
       // NOTE: Currently no way to change locale in iD at runtime, would need to re-call this method if that's ever implemented
-      // FIXME: If layer is toggled quickly multiple requests are sent
+      // Also, If layer is toggled quickly multiple requests are sent
       getService().loadStrings()
         .then(layerOn)
-        .catch(err => {}); // FIXME: Handle failed json request gracefully in some way
+        .catch(err => {
+          console.log(err); // eslint-disable-line no-console
+        });
     } else {
       layerOff();
       if (context.selectedErrorID()) {
