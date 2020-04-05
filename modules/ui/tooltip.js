@@ -5,7 +5,7 @@ import { uiPopover } from './popover';
 export function uiTooltip(klass) {
 
     var tooltip = uiPopover((klass || '') + ' tooltip')
-        .displayType('hover');
+        .displayBehavior('hover');
 
     var _title = function() {
         var title = this.getAttribute('data-original-title');

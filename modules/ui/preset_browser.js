@@ -22,13 +22,10 @@ export function uiPresetBrowser(context) {
 
     var dispatch = d3_dispatch('choose', 'hide');
 
-    // multiple preset browsers could be instantiated at once, give each a unique ID
-    var _uid = (new Date()).getTime().toString();
-
     var _presets;
 
-    // the hotkey that was used to open the browser
-    var _openKey;
+    // object containing details about the hotkey that was used to open the browser
+    var _openKeyInfo;
 
     // all possible geometries
     var _allowedGeometry = [];
@@ -44,7 +41,7 @@ export function uiPresetBrowser(context) {
     var browser = uiPopover('poplist preset-browser fillL')
         .placement('bottom')
         .alignment('leading')
-        .hasArrow(false);
+        .displayStyle('offset');
 
     browser.allowedGeometry = function(val) {
         if (!arguments.length) return _allowedGeometry;
@@ -56,8 +53,8 @@ export function uiPresetBrowser(context) {
     };
 
     browser.openKey = function(val) {
-        if (!arguments.length) return _openKey && _openKey.key;
-        _openKey = { key: val, time: new Date().getTime() };
+        if (!arguments.length) return _openKeyInfo && _openKeyInfo.key;
+        _openKeyInfo = { key: val, time: new Date().getTime() };
         return browser;
     };
 
@@ -135,7 +132,7 @@ export function uiPresetBrowser(context) {
         updateResultsList();
 
         context.features()
-            .on('change.preset-browser.' + _uid , updateForFeatureHiddenState);
+            .on('change.preset-browser.' + browser.id() , updateForFeatureHiddenState);
     };
 
     var parentHide = browser.hide;
@@ -174,6 +171,9 @@ export function uiPresetBrowser(context) {
                 d3_select(this).call(svgIcon('#iD-icon-' + d));
             })
             .on('click', function(d) {
+                d3_event.stopPropagation();
+                d3_event.preventDefault();
+
                 toggleShownGeometry(d);
                 if (_shownGeometry.length === 0) {
                     // invert the selection instead of toggling all types off
@@ -223,15 +223,15 @@ export function uiPresetBrowser(context) {
 
     function keydown() {
 
-        if (_openKey && d3_event.key === _openKey.key) {
-            if (new Date().getTime() - _openKey.time < 750) {
+        if (_openKeyInfo && d3_event.key === _openKeyInfo.key) {
+            if (new Date().getTime() - _openKeyInfo.time < 750) {
                 // Close the browser if the open key is pressed again within a short
                 // timeframe, but not longer since the key could be used for search input
                 search.node().blur();
                 d3_event.preventDefault();
                 d3_event.stopPropagation();
             }
-            _openKey = null;
+            _openKeyInfo = null;
         }
 
         var nextFocus,
@@ -539,12 +539,17 @@ export function uiPresetBrowser(context) {
         row.append('button')
             .attr('class', 'choose')
             .on('click', function(d) {
+                d3_event.stopPropagation();
+                d3_event.preventDefault();
                 d.choose.call(this);
             });
 
         row.each(function(d) {
-            var geometry = d.preset && d.preset.geometry[0];
-            if ((d.preset && d.preset.geometry.length !== 1) ||
+            var effectiveGeometries = d.preset && d.preset.geometry.filter(function(geom) {
+                return _allowedGeometry.indexOf(geom) !== -1;
+            });
+            var geometry = effectiveGeometries && effectiveGeometries[0];
+            if ((effectiveGeometries && effectiveGeometries.length !== 1) ||
                 (geometry !== 'area' && geometry !== 'line' && geometry !== 'vertex')) {
                 geometry = null;
             }

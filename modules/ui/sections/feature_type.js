@@ -3,11 +3,13 @@ import {
     event as d3_event
 } from 'd3-selection';
 
+import { actionChangePreset } from '../../actions/change_preset';
 import { presetManager } from '../../presets';
 import { utilArrayIdentical } from '../../util/array';
 import { t } from '../../core/localizer';
 import { uiTooltip } from '../tooltip';
 import { utilRebind } from '../../util';
+import { uiPresetBrowser } from '../preset_browser';
 import { uiPresetIcon } from '../preset_icon';
 import { uiSection } from '../section';
 import { uiTagReference } from '../tag_reference';
@@ -25,6 +27,31 @@ export function uiSectionFeatureType(context) {
     var section = uiSection('feature-type', context)
         .title(t('inspector.feature_type'))
         .disclosureContent(renderDisclosureContent);
+
+    var _presetBrowser = uiPresetBrowser(context)
+        .displayStyle('flush')
+        .on('choose.sectionFeatureType', function(preset) {
+            _presetBrowser.hide();
+
+            dispatch.call('choose', this, [preset]);
+
+            if (!context.inIntro()) {
+                presetManager.setMostRecent(preset);
+            }
+            context.perform(
+                function(graph) {
+                    for (var i in _entityIDs) {
+                        var entityID = _entityIDs[i];
+                        var oldPreset = presetManager.match(graph.entity(entityID), graph);
+                        graph = actionChangePreset(entityID, oldPreset, preset)(graph);
+                    }
+                    return graph;
+                },
+                t('operations.change_tags.annotation')
+            );
+
+            context.validator().validate();  // rerun validation
+        });
 
     function renderDisclosureContent(selection) {
 
@@ -80,9 +107,6 @@ export function uiSectionFeatureType(context) {
         }
 
         selection.selectAll('.preset-reset')
-            .on('click', function() {
-                 dispatch.call('choose', this, _presets);
-            })
             .on('mousedown', function() {
                 d3_event.preventDefault();
                 d3_event.stopPropagation();
@@ -90,7 +114,15 @@ export function uiSectionFeatureType(context) {
             .on('mouseup', function() {
                 d3_event.preventDefault();
                 d3_event.stopPropagation();
-            });
+            })
+            .on('click', function() {
+                if (!_presetBrowser.isShown()) {
+                    _presetBrowser.show();
+                } else {
+                    _presetBrowser.hide();
+                }
+            })
+            .call(_presetBrowser);
 
         var geometries = entityGeometries();
         selection.select('.preset-list-item button')
@@ -126,7 +158,7 @@ export function uiSectionFeatureType(context) {
         if (!arguments.length) return _presets;
 
         // don't reload the same preset
-        if (!utilArrayIdentical(val, _presets)) {
+        if (!val || !_presets || !utilArrayIdentical(val, _presets)) {
             _presets = val;
 
             var geometries = entityGeometries();
@@ -134,6 +166,8 @@ export function uiSectionFeatureType(context) {
                 _tagReference = uiTagReference(_presets[0].reference(geometries[0]), context)
                     .showing(false);
             }
+            _presetBrowser
+                .allowedGeometry(geometries);
         }
 
         return section;
@@ -144,7 +178,12 @@ export function uiSectionFeatureType(context) {
         var counts = {};
 
         for (var i in _entityIDs) {
-            var geometry = context.graph().geometry(_entityIDs[i]);
+            var entity = context.graph().entity(_entityIDs[i]);
+            var geometry = entity.geometry(context.graph());
+            // Treat entities on addr:interpolation lines as points, not vertices (#3241)
+            if (geometry === 'vertex' && entity.isOnAddressLine(context.graph())) {
+                geometry = 'point';
+            }
             if (!counts[geometry]) counts[geometry] = 0;
             counts[geometry] += 1;
         }

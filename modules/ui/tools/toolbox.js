@@ -24,10 +24,10 @@ export function uiToolToolbox(context) {
     var button = d3_select(null),
         list = d3_select(null),
         poplist = uiPopover('poplist fillL')
-            .displayType('clickFocus')
+            .displayBehavior('clickFocus')
             .placement('bottom')
             .alignment('leading')
-            .hasArrow(false)
+            .displayStyle('offset')
             .scrollContainer(context.container().select('.top-toolbar'));
 
     tool.render = function(selection) {

@@ -1,14 +1,13 @@
-import { dispatch as d3_dispatch } from 'd3-dispatch';
 import { event as d3_event } from 'd3-selection';
 import deepEqual from 'fast-deep-equal';
 
 import { presetManager } from '../presets';
-import { t, localizer } from '../core/localizer';
+import { t } from '../core/localizer';
 import { actionChangeTags } from '../actions/change_tags';
 import { modeBrowse } from '../modes/browse';
 import { svgIcon } from '../svg/icon';
 import { utilArrayIdentical } from '../util/array';
-import { utilCleanTags, utilCombinedTags, utilRebind } from '../util';
+import { utilCleanTags, utilCombinedTags } from '../util';
 
 import { uiSectionEntityIssues } from './sections/entity_issues';
 import { uiSectionFeatureType } from './sections/feature_type';
@@ -19,7 +18,6 @@ import { uiSectionRawTagEditor } from './sections/raw_tag_editor';
 import { uiSectionSelectionList } from './sections/selection_list';
 
 export function uiEntityEditor(context) {
-    var dispatch = d3_dispatch('choose');
     var _state = 'select';
     var _coalesceChanges = false;
     var _modified = false;
@@ -45,11 +43,6 @@ export function uiEntityEditor(context) {
 
         headerEnter
             .append('button')
-            .attr('class', 'fl preset-reset preset-choose')
-            .call(svgIcon((localizer.textDirection() === 'rtl') ? '#iD-icon-forward' : '#iD-icon-backward'));
-
-        headerEnter
-            .append('button')
             .attr('class', 'fr preset-close')
             .on('click', function() { context.enter(modeBrowse(context)); })
             .call(svgIcon(_modified ? '#iD-icon-apply' : '#iD-icon-close'));
@@ -63,11 +56,6 @@ export function uiEntityEditor(context) {
 
         header.selectAll('h3')
             .text(_entityIDs.length === 1 ? t('inspector.edit') : t('inspector.edit_features'));
-
-        header.selectAll('.preset-reset')
-            .on('click', function() {
-                dispatch.call('choose', this, _activePresets);
-            });
 
         // Body
         var body = selection.selectAll('.inspector-body')
@@ -85,12 +73,16 @@ export function uiEntityEditor(context) {
         if (!_sections) {
             _sections = [
                 uiSectionSelectionList(context),
-                uiSectionFeatureType(context).on('choose', function(presets) {
-                    dispatch.call('choose', this, presets);
-                }),
+                uiSectionFeatureType(context)
+                    .on('choose.entityEditor', function(presets) {
+                        entityEditor.presets(presets);
+                    }),
                 uiSectionEntityIssues(context),
-                uiSectionPresetFields(context).on('change', changeTags).on('revert', revertTags),
-                uiSectionRawTagEditor('raw-tag-editor', context).on('change', changeTags),
+                uiSectionPresetFields(context)
+                    .on('change.entityEditor', changeTags)
+                    .on('revert.entityEditor', revertTags),
+                uiSectionRawTagEditor('raw-tag-editor', context)
+                    .on('change.entityEditor', changeTags),
                 uiSectionRawMemberEditor(context),
                 uiSectionRawMembershipEditor(context)
             ];
@@ -349,6 +341,39 @@ export function uiEntityEditor(context) {
         }
         return entityEditor;
     };
+/*
+    function shouldDefaultToPresetList() {
 
-    return utilRebind(entityEditor, dispatch, 'on');
+        // if an explicit preset is set then we're coming from a draw mode
+        if (presets && presets.filter(function(preset) {
+            return !preset.isFallback();
+        }).length) return false;
+
+        // can only change preset on single selection
+        if (_entityIDs.length !== 1) return false;
+
+        var entityID = _entityIDs[0];
+        var entity = context.hasEntity(entityID);
+        if (!entity) return false;
+
+        // default to inspector if there are already tags
+        if (entity.hasNonGeometryTags()) return false;
+
+        // prompt to select preset if feature is new and untagged
+        if (_newFeature) return true;
+
+        // all existing features except vertices should default to inspector
+        if (entity.geometry(context.graph()) !== 'vertex') return false;
+
+        // show vertex issues if there are any
+        if (context.validator().getEntityIssues(entityID).length) return false;
+
+        // show turn retriction editor for junction vertices
+        if (entity.isHighwayIntersection(context.graph())) return false;
+
+        // otherwise show preset list for uninteresting vertices
+        return true;
+    }
+*/
+    return entityEditor;
 }

@@ -46,7 +46,6 @@ export { uiPresetBrowser } from './preset_browser';
 export { uiPresetFavoriteButton } from './preset_favorite_button';
 export { uiPopover } from './popover';
 export { uiPresetIcon } from './preset_icon';
-export { uiPresetList } from './preset_list';
 export { uiRestore } from './restore';
 export { uiScale } from './scale';
 export { uiSidebar } from './sidebar';
