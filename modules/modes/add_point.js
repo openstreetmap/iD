@@ -6,7 +6,6 @@ import { osmNode } from '../osm/node';
 import { actionAddEntity } from '../actions/add_entity';
 import { actionChangeTags } from '../actions/change_tags';
 import { actionAddMidpoint } from '../actions/add_midpoint';
-import { uiFlash } from '../ui/flash';
 
 export function modeAddPoint(context, mode) {
 
@@ -24,7 +23,7 @@ export function modeAddPoint(context, mode) {
             mode.finish();
         })
         .on('rejectedVertexAsPoint', function finish() {
-            uiFlash()
+            context.ui().flash
                 .text(t('modes.add_point.warning.vertex_placement'))();
         });
 
