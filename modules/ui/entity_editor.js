@@ -25,7 +25,7 @@ export function uiEntityEditor(context) {
     var _base;
     var _entityIDs;
     var _activePresets = [];
-    var _newFeature;
+    var _newFeature = false;
 
     var _sections;
 
@@ -101,6 +101,9 @@ export function uiEntityEditor(context) {
             }
             if (section.state) {
                 section.state(_state);
+            }
+            if (section.newFeature) {
+                section.newFeature(_newFeature);
             }
             body.call(section.render);
         });
@@ -360,39 +363,5 @@ export function uiEntityEditor(context) {
         return entityEditor;
     };
 
-/*
-    function shouldDefaultToPresetList() {
-
-        // if an explicit preset is set then we're coming from a draw mode
-        if (presets && presets.filter(function(preset) {
-            return !preset.isFallback();
-        }).length) return false;
-
-        // can only change preset on single selection
-        if (_entityIDs.length !== 1) return false;
-
-        var entityID = _entityIDs[0];
-        var entity = context.hasEntity(entityID);
-        if (!entity) return false;
-
-        // default to inspector if there are already tags
-        if (entity.hasNonGeometryTags()) return false;
-
-        // prompt to select preset if feature is new and untagged
-        if (_newFeature) return true;
-
-        // all existing features except vertices should default to inspector
-        if (entity.geometry(context.graph()) !== 'vertex') return false;
-
-        // show vertex issues if there are any
-        if (context.validator().getEntityIssues(entityID).length) return false;
-
-        // show turn retriction editor for junction vertices
-        if (entity.isHighwayIntersection(context.graph())) return false;
-
-        // otherwise show preset list for uninteresting vertices
-        return true;
-    }
-*/
     return entityEditor;
 }

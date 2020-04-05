@@ -21,6 +21,7 @@ export function uiSectionFeatureType(context) {
 
     var _entityIDs = [];
     var _presets = [];
+    var _newFeature = false;
 
     var _tagReference;
 
@@ -146,6 +147,11 @@ export function uiSectionFeatureType(context) {
             .append('div')
             .attr('class', 'namepart')
             .text(function(d) { return d; });
+
+
+        if (shouldOpenPresetBrowserByDefault()) {
+            _presetBrowser.show();
+        }
     }
 
     section.entityIDs = function(val) {
@@ -173,6 +179,12 @@ export function uiSectionFeatureType(context) {
         return section;
     };
 
+    section.newFeature = function(val) {
+        if (!arguments.length) return _newFeature;
+        _newFeature = val;
+        return section;
+    };
+
     function entityGeometries() {
 
         var counts = {};
@@ -191,6 +203,47 @@ export function uiSectionFeatureType(context) {
         return Object.keys(counts).sort(function(geom1, geom2) {
             return counts[geom2] - counts[geom1];
         });
+    }
+
+    function shouldOpenPresetBrowserByDefault() {
+
+        // don't open if a non-geometry preset is specified (including addresses)
+        if (_presets && _presets.filter(function(preset) {
+            return !preset.isFallback();
+        }).length) return false;
+
+        var entities = _entityIDs.map(function(entityID) {
+            return context.hasEntity(entityID);
+        }).filter(Boolean);
+
+        // ignore if entities aren't valid
+        if (!entities.length) return false;
+
+        // don't open if there are already non-geometry tags
+        if (entities.some(function(entity) {
+            return entity.hasNonGeometryTags();
+        })) return false;
+
+        // open if feature is new and untagged
+        if (_newFeature) return true;
+
+        return false;
+
+        /*
+        // don't open for non-vertices for any other reason
+        if (entities.some(function(entity) {
+            return entity.geometry(context.graph()) !== 'vertex';
+        })) return false;
+
+        // don't open if there are vertex issues, we need to show the issues list
+        if (context.validator().getSharedEntityIssues(_entityIDs, { includeDisabledRules: true }).length) return false;
+
+        // don't open for junction vertices, we need to show the turn retriction editor
+        if (entities.length === 1 && entities[0].isHighwayIntersection(context.graph())) return false;
+
+        // open for uninteresting vertices
+        return true;
+        */
     }
 
     return utilRebind(section, dispatch, 'on');
