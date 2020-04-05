@@ -101,6 +101,12 @@ export var osmSidewalkBoth = {
     }
 };
 
+export var osmSidewalkShared = {
+    'sidewalk': {
+        'shared': true
+    }
+};
+
 export var osmSidewalkSeparate = {
     'sidewalk': {
         'separate': true

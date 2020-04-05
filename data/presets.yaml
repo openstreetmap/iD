@@ -5135,7 +5135,7 @@ en:
         # 'terms: accessible van loading zone,disabled parking access zone,handicap parking access zone,parking lot aisle,striped zone,tow zone,tow-away zone,towaway zone,wheelchair aisle'
         terms: '<translate with synonyms or related terms for ''Private Access Aisle'', separated by commas>'
       highway/footway/sidewalk:
-        # footway=sidewalk
+        # 'footway=sidewalk, bicycle=no'
         name: Sidewalk
         # 'terms: pavement,sidepath'
         terms: '<translate with synonyms or related terms for ''Sidewalk'', separated by commas>'

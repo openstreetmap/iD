@@ -734,6 +734,11 @@ path.line.casing.tag-highway.tag-sidewalk-no {
     stroke: #ff9100;
 }
 
+path.line.casing.tag-highway.tag-sidewalk-shared {
+    stroke-width: 12;
+    stroke: #f153ff;
+}
+
 path.line.casing.tag-cycleway-track,
 path.line.casing.tag-cycleway-track.tag-unpaved {
     stroke: #91cdfd;

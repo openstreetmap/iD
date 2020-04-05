@@ -1,5 +1,5 @@
 import { select as d3_select } from 'd3-selection';
-import { osmPavedTags, osmSidewalkBoth, osmSidewalkSeparate, osmSidewalkSeparateRight, osmSidewalkSeparateLeft, osmSidewalkRight, osmSidewalkLeft, osmSidewalkNo, osmCyclewayTrack, osmCyclewayLane, osmCyclewayLaneNotOneway } from '../osm/tags';
+import { osmPavedTags, osmSidewalkBoth, osmSidewalkShared, osmSidewalkSeparate, osmSidewalkSeparateRight, osmSidewalkSeparateLeft, osmSidewalkRight, osmSidewalkLeft, osmSidewalkNo, osmCyclewayTrack, osmCyclewayLane, osmCyclewayLaneNotOneway } from '../osm/tags';
 
 
 export function svgTagClasses() {
@@ -277,6 +277,9 @@ export function svgTagClasses() {
                 if (k in osmSidewalkNo && !!osmSidewalkNo[k][v]) {
                     sidewalk = 'no';
                 }
+                if (k in osmSidewalkShared && !!osmSidewalkShared[k][v]) {
+                    sidewalk = 'shared';
+                }
                 if (k in osmSidewalkSeparate && !!osmSidewalkSeparate[k][v]) {
                     sidewalkSeparate = true;
                 }
@@ -313,6 +316,9 @@ export function svgTagClasses() {
             }
             if (destination) {
                 classes.push('tag-destination');
+            }
+            if (sidewalk === 'shared') {
+                classes.push('tag-sidewalk-shared');
             }
             if (sidewalkSeparate) {
                 sidewalk = 'separate';

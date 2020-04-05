@@ -4,11 +4,13 @@
         "line"
     ],
     "tags": {
-        "footway": "sidewalk"
+        "footway": "sidewalk",
+        "bicycle": "no"
     },
     "addTags": {
         "highway": "footway",
-        "footway": "sidewalk"
+        "footway": "sidewalk",
+        "bicycle": "no"
     },
     "reference": {
         "key": "footway",
