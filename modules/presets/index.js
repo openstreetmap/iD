@@ -325,7 +325,7 @@ export function presetIndex() {
   };
 
   // pass a Set of addable preset ids
-  _this.addablePresetIDs = (val) => {
+  _this.addablePresetIDs = function(val) {
     if (!arguments.length) return _addablePresetIDs;
 
     _addablePresetIDs = val;
