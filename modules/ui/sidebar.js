@@ -171,7 +171,9 @@ export function uiSidebar(context) {
                     .classed('inspector-hidden', true);
 
                 inspectorWrap
-                    .classed('inspector-hidden', false)
+                    .classed('inspector-hidden', false);
+
+                selection.selectAll('.sidebar-component')
                     .classed('inspector-hover', true);
 
                 if (!inspector.entityIDs() || !utilArrayIdentical(inspector.entityIDs(), [datum.id]) || inspector.state() !== 'hover') {
@@ -229,7 +231,9 @@ export function uiSidebar(context) {
                     .classed('inspector-hidden', true);
 
                 inspectorWrap
-                    .classed('inspector-hidden', false)
+                    .classed('inspector-hidden', false);
+
+                selection.selectAll('.sidebar-component')
                     .classed('inspector-hover', false);
 
                 if (!inspector.entityIDs() || !utilArrayIdentical(inspector.entityIDs(), ids) || inspector.state() !== 'select') {

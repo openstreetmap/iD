@@ -651,39 +651,15 @@ button.add-note svg.icon {
 }
 
 .field-help-title button.close,
-.sidebar-component .header button.data-editor-close,
-.sidebar-component .header button.note-editor-close,
-.sidebar-component .header button.qa-editor-close,
-.entity-editor-pane .header button.preset-close,
-.preset-list-pane .header button.preset-choose {
+.sidebar .header button.close {
     position: absolute;
     right: 0;
     top: 0;
 }
 .ideditor[dir='rtl'] .field-help-title button.close,
-.ideditor[dir='rtl'] .sidebar-component .header button.data-editor-close,
-.ideditor[dir='rtl'] .sidebar-component .header button.note-editor-close,
-.ideditor[dir='rtl'] .sidebar-component .header button.qa-editor-close,
-.ideditor[dir='rtl'] .entity-editor-pane .header button.preset-close,
-.ideditor[dir='rtl'] .preset-list-pane .header button.preset-choose {
+.ideditor[dir='rtl'] .sidebar .header button.close {
     left: 0;
     right: auto;
-}
-
-.entity-editor-pane .header button.preset-choose {
-    position: absolute;
-    left: 0;
-    top: 0;
-}
-.ideditor[dir='rtl'] .entity-editor-pane .header button.preset-choose {
-    left: auto;
-    right: 0;
-}
-
-.preset-choose {
-    font-size: 16px;
-    line-height: 1.25;
-    font-weight: bold;
 }
 
 .modal > button {
@@ -699,8 +675,8 @@ button.add-note svg.icon {
 }
 
 .footer {
-    position: absolute;
-    bottom: 0;
+    position: relative;
+    flex: 0 0 auto;
     margin: 0;
     padding: 5px 20px 5px 20px;
     border-top: 1px solid #ccc;
@@ -794,19 +770,19 @@ a.hide-toggle {
 }
 
 .sidebar-component {
-    position: absolute;
-    top: 0;
-    left: 0;
-    bottom: 0;
-    right: 0;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
 }
 
 .sidebar-component .body {
+    position: relative;
     width: 100%;
+    height: 100%;
     overflow: auto;
-    top: 60px;
-    bottom: 0;
-    position: absolute;
+    display: flex;
+    flex-direction: column;
 }
 
 .inspector-wrap {
@@ -824,18 +800,10 @@ a.hide-toggle {
 
 .inspector-body {
     overflow-y: auto;
-    position: absolute;
-    right: 0;
-    left: 0;
-    bottom: 0;
-}
-
-.feature-list-pane .inspector-body,
-.preset-list-pane .inspector-body {
-    top: 120px;
-}
-.entity-editor-pane .inspector-body {
-    top: 60px;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
 }
 .entity-editor {
     padding: 20px;
@@ -3489,7 +3457,6 @@ li.issue-fix-item:not(.actionable) .fix-icon {
 }
 .map-pane {
     position: relative;
-    top: 0;
     width: 400px;
     height: 100%;
     padding-bottom: 60px;
@@ -3755,7 +3722,7 @@ li.issue-fix-item:not(.actionable) .fix-icon {
 
 /* Unstyle button fields */
 .inspector-hover .form-field-input-radio label.active,
-.inspector-hover .entity-editor-pane a.hide-toggle {
+.inspector-hover a.hide-toggle {
     opacity: 1;
     background-color: transparent;
     color: #666;

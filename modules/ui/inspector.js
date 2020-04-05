@@ -1,7 +1,6 @@
 import { select as d3_select } from 'd3-selection';
 
 import { uiEntityEditor } from './entity_editor';
-import { uiViewOnOSM } from './view_on_osm';
 
 
 export function uiInspector(context) {
@@ -27,24 +26,11 @@ export function uiInspector(context) {
 
         var enter = editorPane.enter()
             .append('div')
-            .attr('class', 'entity-editor-pane');
+            .attr('class', 'entity-editor-pane sidebar-component');
 
         editorPane = editorPane.merge(enter);
 
         editorPane.call(entityEditor);
-
-        var footer = selection.selectAll('.footer')
-            .data([0]);
-
-        footer = footer.enter()
-            .append('div')
-            .attr('class', 'footer')
-            .merge(footer);
-
-        footer
-            .call(uiViewOnOSM(context)
-                .what(context.hasEntity(_entityIDs.length === 1 && _entityIDs[0]))
-            );
     }
 
     inspector.setPreset = function(preset) {

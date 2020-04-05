@@ -16,6 +16,7 @@ import { uiSectionRawMemberEditor } from './sections/raw_member_editor';
 import { uiSectionRawMembershipEditor } from './sections/raw_membership_editor';
 import { uiSectionRawTagEditor } from './sections/raw_tag_editor';
 import { uiSectionSelectionList } from './sections/selection_list';
+import { uiViewOnOSM } from './view_on_osm';
 
 export function uiEntityEditor(context) {
     var _state = 'select';
@@ -39,11 +40,11 @@ export function uiEntityEditor(context) {
         // Enter
         var headerEnter = header.enter()
             .append('div')
-            .attr('class', 'header fillL cf');
+            .attr('class', 'header fillL');
 
         headerEnter
             .append('button')
-            .attr('class', 'fr preset-close')
+            .attr('class', 'close')
             .on('click', function() { context.enter(modeBrowse(context)); })
             .call(svgIcon(_modified ? '#iD-icon-apply' : '#iD-icon-close'));
 
@@ -121,6 +122,19 @@ export function uiEntityEditor(context) {
                     body.select('input').node().focus();
                 }
             });
+
+        var footer = selection.selectAll('.footer')
+            .data([0]);
+
+        footer = footer.enter()
+            .append('div')
+            .attr('class', 'footer')
+            .merge(footer);
+
+        footer
+            .call(uiViewOnOSM(context)
+                .what(context.hasEntity(_entityIDs.length === 1 && _entityIDs[0]))
+            );
 
         context.history()
             .on('change.entity-editor', historyChanged);
