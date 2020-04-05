@@ -10,9 +10,7 @@ describe('iD.behaviorSelect', function() {
 
         context.perform(iD.actionAddEntity(a), iD.actionAddEntity(b));
 
-        container.call(context.map())
-            .append('div')
-            .attr('class', 'inspector-wrap');
+        container.call(context.map());
 
         context.surface().select('.data-layer.osm').selectAll('circle')
             .data([a, b])

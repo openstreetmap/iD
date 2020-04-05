@@ -122,7 +122,7 @@ export function uiIntroPoint(context, reveal) {
         }
 
         // disallow scrolling
-        context.container().select('.inspector-wrap').on('wheel.intro', eventCancel);
+        context.container().select('.entity-editor-pane').on('wheel.intro', eventCancel);
 
         context.container().select('.preset-search-input')
             .on('keydown.intro', null)
@@ -143,7 +143,7 @@ export function uiIntroPoint(context, reveal) {
                 context.enter(modeSelect(context, [_pointID]));
 
                 // disallow scrolling
-                context.container().select('.inspector-wrap').on('wheel.intro', eventCancel);
+                context.container().select('.entity-editor-pane').on('wheel.intro', eventCancel);
 
                 context.container().select('.preset-search-input')
                     .on('keydown.intro', null)
@@ -180,7 +180,7 @@ export function uiIntroPoint(context, reveal) {
         function continueTo(nextStep) {
             context.on('enter.intro', null);
             context.history().on('change.intro', null);
-            context.container().select('.inspector-wrap').on('wheel.intro', null);
+            context.container().select('.entity-editor-pane').on('wheel.intro', null);
             context.container().select('.preset-search-input').on('keydown.intro keyup.intro', null);
             nextStep();
         }
@@ -218,7 +218,7 @@ export function uiIntroPoint(context, reveal) {
         }
 
         // reset pane, in case user happened to change it..
-        context.container().select('.inspector-wrap .panewrap').style('right', '0%');
+        context.container().select('.entity-editor-pane .panewrap').style('right', '0%');
 
         timeout(function() {
             // It's possible for the user to add a name in a previous step..
@@ -259,7 +259,7 @@ export function uiIntroPoint(context, reveal) {
 
     function addCloseEditor() {
         // reset pane, in case user happened to change it..
-        context.container().select('.inspector-wrap .panewrap').style('right', '0%');
+        context.container().select('.entity-editor-pane .panewrap').style('right', '0%');
 
         var selector = '.entity-editor-pane button.preset-close svg use';
         var href = d3_select(selector).attr('href') || '#iD-icon-close';
@@ -328,7 +328,7 @@ export function uiIntroPoint(context, reveal) {
         }
 
         // reset pane, in case user happened to untag the point..
-        context.container().select('.inspector-wrap .panewrap').style('right', '0%');
+        context.container().select('.entity-editor-pane .panewrap').style('right', '0%');
 
         context.on('exit.intro', function() {
             continueTo(reselectPoint);
@@ -358,7 +358,7 @@ export function uiIntroPoint(context, reveal) {
         }
 
         // reset pane, in case user happened to change it..
-        context.container().select('.inspector-wrap .panewrap').style('right', '0%');
+        context.container().select('.entity-editor-pane .panewrap').style('right', '0%');
 
         context.on('exit.intro', function() {
             continueTo(rightClickPoint);
@@ -497,7 +497,7 @@ export function uiIntroPoint(context, reveal) {
         context.on('enter.intro exit.intro', null);
         context.map().on('move.intro drawn.intro', null);
         context.history().on('change.intro', null);
-        context.container().select('.inspector-wrap').on('wheel.intro', eventCancel);
+        context.container().select('.entity-editor-pane').on('wheel.intro', eventCancel);
         context.container().select('.preset-search-input').on('keydown.intro keyup.intro', null);
     };
 

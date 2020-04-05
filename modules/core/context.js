@@ -404,7 +404,7 @@ export function coreContext() {
     _uploader.reset();
 
     // don't leave stale state in the inspector
-    context.container().select('.inspector-wrap *').remove();
+    context.container().select('.entity-editor-pane *').remove();
 
     return context;
   };

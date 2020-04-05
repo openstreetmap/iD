@@ -13,7 +13,7 @@ export function uiFieldLanes(field, context) {
     function lanes(selection) {
         var lanesData = context.entity(_entityIDs[0]).lanes();
 
-        if (!context.container().select('.inspector-wrap.inspector-hidden').empty() || !selection.node().parentNode) {
+        if (!context.container().select('.sidebar-component.inspector-hidden').empty() || !selection.node().parentNode) {
             selection.call(lanes.off);
             return;
         }

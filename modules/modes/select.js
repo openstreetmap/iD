@@ -47,16 +47,11 @@ export function modeSelect(context, selectedIDs) {
         modeDragNode(context).restoreSelectedIDs(selectedIDs).behavior,
         modeDragNote(context).behavior
     ];
-    var inspector;   // unused?
     // the explicit presets for the features in this selection
     var _presets;
     var _editMenu; // uiEditMenu
     var _newFeature = false;
     var _follow = false;
-
-
-    var wrap = context.container()
-        .select('.inspector-wrap');
 
 
     function singular() {
@@ -512,7 +507,6 @@ export function modeSelect(context, selectedIDs) {
 
 
     mode.exit = function() {
-        if (inspector) wrap.call(inspector.close);
 
         operations.forEach(function(operation) {
             if (operation.behavior) {

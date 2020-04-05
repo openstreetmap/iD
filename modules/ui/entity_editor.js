@@ -65,7 +65,7 @@ export function uiEntityEditor(context) {
         // Enter
         var bodyEnter = body.enter()
             .append('div')
-            .attr('class', 'entity-editor inspector-body sep-top');
+            .attr('class', 'entity-editor inspector-body');
 
         // Update
         body = body
@@ -289,6 +289,10 @@ export function uiEntityEditor(context) {
     entityEditor.state = function(val) {
         if (!arguments.length) return _state;
         _state = val;
+
+        // remove any old field help overlay that might have gotten attached to the inspector
+        context.container().selectAll('.field-help-body').remove();
+
         return entityEditor;
     };
 
@@ -350,11 +354,12 @@ export function uiEntityEditor(context) {
         if (!arguments.length) return _activePresets;
 
         // don't reload the same preset
-        if (!utilArrayIdentical(val, _activePresets)) {
+        if (!val || !_activePresets || !utilArrayIdentical(val, _activePresets)) {
             _activePresets = val;
         }
         return entityEditor;
     };
+
 /*
     function shouldDefaultToPresetList() {
 

@@ -10,8 +10,8 @@ import { utilArrayIdentical } from '../util/array';
 import { osmEntity, osmNote, QAItem } from '../osm';
 import { services } from '../services';
 import { uiDataEditor } from './data_editor';
+import { uiEntityEditor } from './entity_editor';
 import { uiFeatureList } from './feature_list';
-import { uiInspector } from './inspector';
 import { uiImproveOsmEditor } from './improveOSM_editor';
 import { uiKeepRightEditor } from './keepRight_editor';
 import { uiOsmoseEditor } from './osmose_editor';
@@ -20,7 +20,7 @@ import { localizer } from '../core/localizer';
 
 
 export function uiSidebar(context) {
-    var inspector = uiInspector(context);
+    var entityEditor = uiEntityEditor(context);
     var dataEditor = uiDataEditor(context);
     var noteEditor = uiNoteEditor(context);
     var improveOsmEditor = uiImproveOsmEditor(context);
@@ -109,9 +109,9 @@ export function uiSidebar(context) {
             .attr('class', 'feature-list-pane')
             .call(uiFeatureList(context));
 
-        var inspectorWrap = selection
+        var entityEditorWrap = selection
             .append('div')
-            .attr('class', 'inspector-hidden inspector-wrap');
+            .attr('class', 'entity-editor-pane sidebar-component inspector-hidden');
 
 
         function hover(datum) {
@@ -170,27 +170,27 @@ export function uiSidebar(context) {
                 featureListWrap
                     .classed('inspector-hidden', true);
 
-                inspectorWrap
+                entityEditorWrap
                     .classed('inspector-hidden', false);
 
                 selection.selectAll('.sidebar-component')
                     .classed('inspector-hover', true);
 
-                if (!inspector.entityIDs() || !utilArrayIdentical(inspector.entityIDs(), [datum.id]) || inspector.state() !== 'hover') {
-                    inspector
+                if (!entityEditor.entityIDs() || !utilArrayIdentical(entityEditor.entityIDs(), [datum.id]) || entityEditor.state() !== 'hover') {
+                    entityEditor
                         .state('hover')
                         .entityIDs([datum.id]);
 
-                    inspectorWrap
-                        .call(inspector);
+                    entityEditorWrap
+                        .call(entityEditor);
                 }
 
             } else if (!_current) {
                 featureListWrap
                     .classed('inspector-hidden', false);
-                inspectorWrap
+                entityEditorWrap
                     .classed('inspector-hidden', true);
-                inspector
+                entityEditor
                     .state('hide');
 
             } else if (_wasData || _wasNote || _wasQaItem) {
@@ -230,38 +230,43 @@ export function uiSidebar(context) {
                 featureListWrap
                     .classed('inspector-hidden', true);
 
-                inspectorWrap
+                entityEditorWrap
                     .classed('inspector-hidden', false);
 
                 selection.selectAll('.sidebar-component')
                     .classed('inspector-hover', false);
 
-                if (!inspector.entityIDs() || !utilArrayIdentical(inspector.entityIDs(), ids) || inspector.state() !== 'select') {
-                    inspector
+                if (!entityEditor.entityIDs() || !utilArrayIdentical(entityEditor.entityIDs(), ids) || entityEditor.state() !== 'select') {
+                    entityEditor
                         .state('select')
                         .entityIDs(ids)
                         .newFeature(newFeature);
 
-                    inspectorWrap
-                        .call(inspector, presets);
+                    if (presets) {
+                        entityEditor
+                            .presets(presets);
+                    }
+
+                    entityEditorWrap
+                        .call(entityEditor);
                 }
 
             } else {
-                inspector
+                entityEditor
                     .state('hide');
             }
         };
 
 
         sidebar.showPresetList = function() {
-            inspector.showList();
+            entityEditor.showList();
         };
 
 
         sidebar.show = function(component, element) {
             featureListWrap
                 .classed('inspector-hidden', true);
-            inspectorWrap
+            entityEditorWrap
                 .classed('inspector-hidden', true);
 
             if (_current) _current.remove();
@@ -275,7 +280,7 @@ export function uiSidebar(context) {
         sidebar.hide = function() {
             featureListWrap
                 .classed('inspector-hidden', false);
-            inspectorWrap
+            entityEditorWrap
                 .classed('inspector-hidden', true);
 
             if (_current) _current.remove();

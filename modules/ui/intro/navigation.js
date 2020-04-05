@@ -253,7 +253,7 @@ export function uiIntroNavigation(context, reveal) {
         if (!isTownHallSelected()) return clickTownHall();
 
         // disallow scrolling
-        context.container().select('.inspector-wrap').on('wheel.intro', eventCancel);
+        context.container().select('.entity-editor-pane').on('wheel.intro', eventCancel);
 
         var onClick = function() { continueTo(presetTownHall); };
 
@@ -275,7 +275,7 @@ export function uiIntroNavigation(context, reveal) {
         function continueTo(nextStep) {
             context.on('exit.intro', null);
             context.history().on('change.intro', null);
-            context.container().select('.inspector-wrap').on('wheel.intro', null);
+            context.container().select('.entity-editor-pane').on('wheel.intro', null);
             nextStep();
         }
     }
@@ -285,9 +285,9 @@ export function uiIntroNavigation(context, reveal) {
         if (!isTownHallSelected()) return clickTownHall();
 
         // reset pane, in case user happened to change it..
-        context.container().select('.inspector-wrap .panewrap').style('right', '0%');
+        context.container().select('.entity-editor-pane .panewrap').style('right', '0%');
         // disallow scrolling
-        context.container().select('.inspector-wrap').on('wheel.intro', eventCancel);
+        context.container().select('.entity-editor-pane').on('wheel.intro', eventCancel);
 
         // preset match, in case the user happened to change it.
         var entity = context.entity(context.selectedIDs()[0]);
@@ -313,7 +313,7 @@ export function uiIntroNavigation(context, reveal) {
         function continueTo(nextStep) {
             context.on('exit.intro', null);
             context.history().on('change.intro', null);
-            context.container().select('.inspector-wrap').on('wheel.intro', null);
+            context.container().select('.entity-editor-pane').on('wheel.intro', null);
             nextStep();
         }
     }
@@ -323,9 +323,9 @@ export function uiIntroNavigation(context, reveal) {
         if (!isTownHallSelected()) return clickTownHall();
 
         // reset pane, in case user happened to change it..
-        context.container().select('.inspector-wrap .panewrap').style('right', '0%');
+        context.container().select('.entity-editor-pane .panewrap').style('right', '0%');
         // disallow scrolling
-        context.container().select('.inspector-wrap').on('wheel.intro', eventCancel);
+        context.container().select('.entity-editor-pane').on('wheel.intro', eventCancel);
 
         var onClick = function() { continueTo(closeTownHall); };
 
@@ -347,7 +347,7 @@ export function uiIntroNavigation(context, reveal) {
         function continueTo(nextStep) {
             context.on('exit.intro', null);
             context.history().on('change.intro', null);
-            context.container().select('.inspector-wrap').on('wheel.intro', null);
+            context.container().select('.entity-editor-pane').on('wheel.intro', null);
             nextStep();
         }
     }
@@ -551,7 +551,7 @@ export function uiIntroNavigation(context, reveal) {
         context.on('enter.intro exit.intro', null);
         context.map().on('move.intro drawn.intro', null);
         context.history().on('change.intro', null);
-        context.container().select('.inspector-wrap').on('wheel.intro', null);
+        context.container().select('.entity-editor-pane').on('wheel.intro', null);
         context.container().select('.search-header input').on('keydown.intro keyup.intro', null);
     };
 
