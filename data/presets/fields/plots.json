@@ -1,0 +1,7 @@
+{
+    "key": "plots",
+    "type": "number",
+    "minValue": 0,
+    "label": "Plots",
+    "placeholder": "10, 20, 30..."
+}
