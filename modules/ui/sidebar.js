@@ -106,7 +106,7 @@ export function uiSidebar(context) {
 
         var featureListWrap = selection
             .append('div')
-            .attr('class', 'feature-list-pane')
+            .attr('class', 'feature-list-pane sidebar-component')
             .call(uiFeatureList(context));
 
         var entityEditorWrap = selection
@@ -192,6 +192,9 @@ export function uiSidebar(context) {
                     .classed('inspector-hidden', true);
                 entityEditor
                     .state('hide');
+
+                selection.selectAll('.sidebar-component')
+                    .classed('inspector-hover', false);
 
             } else if (_wasData || _wasNote || _wasQaItem) {
                 _wasNote = false;
@@ -282,6 +285,9 @@ export function uiSidebar(context) {
                 .classed('inspector-hidden', false);
             entityEditorWrap
                 .classed('inspector-hidden', true);
+
+            selection.selectAll('.sidebar-component')
+                .classed('inspector-hover', false);
 
             if (_current) _current.remove();
             _current = null;

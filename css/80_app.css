@@ -804,11 +804,15 @@ a.hide-toggle {
     margin-bottom: 150px;
 }
 
+.sidebar .search-header {
+    position: relative;
+}
+
 .sidebar .search-header .icon {
     display: block;
     position: absolute;
     left: 10px;
-    top: 80px;
+    top: 20px;
     pointer-events: none;
 }
 .ideditor[dir='rtl'] .sidebar .search-header .icon {
@@ -817,8 +821,6 @@ a.hide-toggle {
 }
 
 .sidebar .search-header input {
-    position: absolute;
-    top: 60px;
     height: 60px;
     width: 100%;
     padding: 5px 10px;
