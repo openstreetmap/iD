@@ -1,7 +1,7 @@
 {
   "data_format": 1,
   "data_url": "https://raw.githubusercontent.com/openstreetmap/iD/develop/data/taginfo.json",
-  "project": {"name": "iD Editor", "description": "Online editor for OSM data.", "project_url": "https://github.com/openstreetmap/iD", "doc_url": "https://github.com/openstreetmap/iD/blob/develop/data/presets/README.md", "icon_url": "https://cdn.jsdelivr.net/gh/openstreetmap/iD@release/dist/img/logo.png", "keywords": ["editor"]},
+  "project": {"name": "iD Editor", "description": "Online editor for OSM data.", "project_url": "https://github.com/openstreetmap/iD", "doc_url": "https://github.com/openstreetmap/iD/blob/develop/data/presets/README.md", "icon_url": "https://cdn.jsdelivr.net/gh/openstreetmap/iD@release/dist/img/logo.png", "contact_name": "Quincy Morgan", "contact_email": "q@quincylvania.com"},
   "tags": [
     {"key": "aerialway", "description": "🄿 Aerialway Feature (unsearchable), 🄵 Type", "object_types": ["node", "way"]},
     {"key": "aeroway", "description": "🄿 Aeroway Feature (unsearchable), 🄵 Type", "object_types": ["node", "way", "area"], "icon_url": "https://cdn.jsdelivr.net/gh/mapbox/maki/icons/airport-15.svg"},
