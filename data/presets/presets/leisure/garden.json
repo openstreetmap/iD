@@ -2,6 +2,7 @@
     "icon": "maki-garden",
     "fields": [
         "name",
+        "garden/type",
         "operator",
         "access_simple",
         "fee",

@@ -1,0 +1,15 @@
+{
+    "key": "garden:type",
+    "type": "combo",
+    "label": "Garden Type",
+    "strings": {
+        "options": {
+            "arboretum": "Arboretum",
+            "botanical": "Botanical",
+            "community": "Community",
+            "residential": "Residential",
+            "roof_garden": "Roof Garden",
+            "show_garden": "Show Garden"
+        }
+    }
+}
