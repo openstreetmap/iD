@@ -14,21 +14,21 @@ export function behaviorLasso(context) {
         var lasso;
 
 
-        function mousedown() {
+        function pointerdown() {
             var button = 0;  // left
             if (d3_event.button === button && d3_event.shiftKey === true) {
                 lasso = null;
 
                 d3_select(window)
-                    .on(_pointerPrefix + 'move.lasso', mousemove)
-                    .on(_pointerPrefix + 'up.lasso', mouseup);
+                    .on(_pointerPrefix + 'move.lasso', pointermove)
+                    .on(_pointerPrefix + 'up.lasso', pointerup);
 
                 d3_event.stopPropagation();
             }
         }
 
 
-        function mousemove() {
+        function pointermove() {
             if (!lasso) {
                 lasso = uiLasso(context);
                 context.surface().call(lasso);
@@ -63,7 +63,7 @@ export function behaviorLasso(context) {
         }
 
 
-        function mouseup() {
+        function pointerup() {
             d3_select(window)
                 .on(_pointerPrefix + 'move.lasso', null)
                 .on(_pointerPrefix + 'up.lasso', null);
@@ -79,7 +79,7 @@ export function behaviorLasso(context) {
         }
 
         selection
-            .on(_pointerPrefix + 'down.lasso', mousedown);
+            .on(_pointerPrefix + 'down.lasso', pointerdown);
     };
 
 
