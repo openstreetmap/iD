@@ -623,9 +623,10 @@ button.add-note svg.icon {
 /* Header for modals / panes
 ------------------------------------------------------- */
 .header {
-    border-bottom: 1px solid #ccc;
-    height: 60px;
     position: relative;
+    flex: 0 0 auto;
+    height: 41px;
+    border-bottom: 1px solid #ccc;
 }
 
 .header h3 {
@@ -634,7 +635,8 @@ button.add-note svg.icon {
     white-space: nowrap;
     text-overflow: ellipsis;
     overflow: hidden;
-    padding: 20px;
+    padding: 11.5px;
+    font-size: 14px;
 }
 
 .header button,
@@ -648,6 +650,7 @@ button.add-note svg.icon {
 .header button {
     position: relative;
     height: 100%;
+    color: #666;
 }
 
 .field-help-title button.close,
@@ -2532,7 +2535,6 @@ input.key-trap {
     background-color: #f6f6f6;
     padding: 0 15px;
     flex: 1 1 100%;
-    font-size: 14px;
     font-weight: bold;
     border-radius: 0 5px 5px 0;
 }
