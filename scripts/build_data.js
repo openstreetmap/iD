@@ -481,8 +481,8 @@ function generateTaginfo(presets, fields) {
       'project_url': 'https://github.com/openstreetmap/iD',
       'doc_url': 'https://github.com/openstreetmap/iD/blob/develop/data/presets/README.md',
       'icon_url': 'https://cdn.jsdelivr.net/gh/openstreetmap/iD@release/dist/img/logo.png',
-      'contact_name': 'Bryan Housel',
-      'contact_email': 'bryan@mapbox.com'
+      'contact_name': 'Quincy Morgan',
+      'contact_email': 'q@quincylvania.com'
     },
     'tags': []
   };
