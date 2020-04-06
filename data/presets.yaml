@@ -5193,7 +5193,7 @@ en:
         # 'terms: bootleg trail,cow path,desire line,desire path,desireline,desirepath,elephant path,game trail,goat track,herd path,pig trail,shortcut,social trail,use trail'
         terms: '<translate with synonyms or related terms for ''Informal Path'', separated by commas>'
       highway/pedestrian_area:
-        # 'highway=pedestrian, area=yes'
+        # highway=pedestrian
         name: Pedestrian Area
         # 'terms: center,centre,plaza,quad,square,walkway'
         terms: '<translate with synonyms or related terms for ''Pedestrian Area'', separated by commas>'
