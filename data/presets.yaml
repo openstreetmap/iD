@@ -949,6 +949,9 @@ en:
       gambling:
         # gambling=*
         label: Games
+      garden/type:
+        # 'garden:type=*'
+        label: Garden Type
       gauge:
         # gauge=*
         label: Gauge
@@ -1832,6 +1835,11 @@ en:
       playground/theme:
         # 'playground:theme=*'
         label: Theme
+      plots:
+        # plots=*
+        label: Plots
+        # plots field placeholder
+        placeholder: '10, 20, 30...'
       polling_station:
         # polling_station=*
         label: Polling Place
@@ -5506,9 +5514,9 @@ en:
         name: Land Use Feature
       landuse/allotments:
         # landuse=allotments
-        name: Community Garden
-        # 'terms: allotment,garden'
-        terms: '<translate with synonyms or related terms for ''Community Garden'', separated by commas>'
+        name: Garden Allotments
+        # 'terms: allotment,community garden,garden'
+        terms: '<translate with synonyms or related terms for ''Garden Allotments'', separated by commas>'
       landuse/aquaculture:
         # landuse=aquaculture
         name: Aquaculture

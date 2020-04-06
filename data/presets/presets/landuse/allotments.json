@@ -4,7 +4,9 @@
         "area"
     ],
     "fields": [
-        "name"
+        "name",
+        "operator",
+        "plots"
     ],
     "moreFields": [
         "address",
@@ -18,7 +20,8 @@
     },
     "terms": [
         "allotment",
+        "community garden",
         "garden"
     ],
-    "name": "Community Garden"
+    "name": "Garden Allotments"
 }

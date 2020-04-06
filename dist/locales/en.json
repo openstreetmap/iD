@@ -3468,6 +3468,9 @@
                 "gambling": {
                     "label": "Games"
                 },
+                "garden/type": {
+                    "label": "Garden Type"
+                },
                 "gauge": {
                     "label": "Gauge"
                 },
@@ -4191,6 +4194,10 @@
                 },
                 "playground/theme": {
                     "label": "Theme"
+                },
+                "plots": {
+                    "label": "Plots",
+                    "placeholder": "10, 20, 30..."
                 },
                 "polling_station": {
                     "label": "Polling Place",
@@ -7373,8 +7380,8 @@
                     "name": "Reservoir"
                 },
                 "landuse/allotments": {
-                    "name": "Community Garden",
-                    "terms": "allotment,garden"
+                    "name": "Garden Allotments",
+                    "terms": "allotment,community garden,garden"
                 },
                 "landuse/aquaculture": {
                     "name": "Aquaculture",
