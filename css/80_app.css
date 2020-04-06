@@ -989,10 +989,13 @@ a.hide-toggle {
     visibility: hidden;
 }
 
+.preset-icon-fill-vertex circle,
+.preset-icon-category-border path,
 .preset-icon-point-border path {
     stroke: #333;
-    stroke-width: 1.2;
+    stroke-width: 1.5px;
     fill: transparent;
+    backface-visibility: hidden;
 }
 
 .preset-icon-line {
@@ -1037,13 +1040,6 @@ a.hide-toggle {
 }
 .preset-icon-fill path.area.stroke {
     fill: transparent;
-}
-
-.preset-icon-fill-vertex circle {
-    stroke-width: 1.5px;
-    stroke: #333;
-    fill: none;
-    backface-visibility: hidden;
 }
 
 .preset-icon {

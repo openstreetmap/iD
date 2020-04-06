@@ -39,6 +39,22 @@ export function uiPresetIcon() {
   }
 
 
+  function renderCategoryBorder(enter) {
+    const w = 40;
+    const h = 40;
+
+    enter
+      .append('svg')
+      .attr('class', 'preset-icon-fill preset-icon-category-border')
+      .attr('width', w)
+      .attr('height', h)
+      .attr('viewBox', `0 0 ${w} ${h}`)
+      .append('path')
+      .attr('transform', 'translate(4.5, 5)')
+      .attr('d', 'M2.40138782,0.75 L0.75,3.22708173 L0.75,24 C0.75,25.7949254 2.20507456,27.25 4,27.25 L27,27.25 C28.7949254,27.25 30.25,25.7949254 30.25,24 L30.25,7 C30.25,5.20507456 28.7949254,3.75 27,3.75 L13.5986122,3.75 L11.5986122,0.75 L2.40138782,0.75 Z');
+  }
+
+
   function renderPointBorder(enter) {
     const w = 40;
     const h = 40;
@@ -275,6 +291,17 @@ export function uiPresetIcon() {
     container
       .classed('showing-img', !!imageURL)
       .classed('fallback', isFallback);
+
+
+    let categoryBorder = container.selectAll('.preset-icon-category-border')
+      .data(isCategory ? [0] : []);
+
+    categoryBorder.exit()
+      .remove();
+
+    let categoryBorderEnter = categoryBorder.enter();
+    renderCategoryBorder(categoryBorderEnter);
+    categoryBorder = categoryBorderEnter.merge(categoryBorder);
 
 
     let pointBorder = container.selectAll('.preset-icon-point-border')
