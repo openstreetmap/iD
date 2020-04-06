@@ -12,8 +12,7 @@
         "area"
     ],
     "tags": {
-        "highway": "pedestrian",
-        "area": "yes"
+        "highway": "pedestrian"
     },
     "terms": [
         "center",
