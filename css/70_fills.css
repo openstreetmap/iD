@@ -47,6 +47,9 @@
     stroke-width: 20px;
 }
 .ideditor.mode-browse .fill-partial path.area.fill,
-.ideditor.mode-select .fill-partial path.area.fill {
+.ideditor.mode-select .fill-partial path.area.fill,
+.ideditor.mode-select-data .fill-partial path.area.fill,
+.ideditor.mode-select-error .fill-partial path.area.fill,
+.ideditor.mode-select-note .fill-partial path.area.fill {
     pointer-events: visibleStroke;
 }

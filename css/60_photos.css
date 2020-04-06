@@ -100,7 +100,10 @@
     pointer-events: none;
 }
 .ideditor.mode-browse .viewfield-group,
-.ideditor.mode-select .viewfield-group {
+.ideditor.mode-select .viewfield-group,
+.ideditor.mode-select-data .viewfield-group,
+.ideditor.mode-select-error .viewfield-group,
+.ideditor.mode-select-note .viewfield-group {
     pointer-events: visible;
     cursor: pointer;
 }

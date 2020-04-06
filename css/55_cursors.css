@@ -12,31 +12,46 @@
 }
 
 .ideditor.mode-browse .point,
-.ideditor.mode-select .point {
+.ideditor.mode-select .point,
+.ideditor.mode-select-data .point,
+.ideditor.mode-select-error .point,
+.ideditor.mode-select-note .point {
     cursor: pointer; /* Opera */
     cursor: url(img/cursor-select-point.png), pointer; /* FF */
 }
 
+.ideditor.mode-browse .vertex,
 .ideditor.mode-select .vertex,
-.ideditor.mode-browse .vertex {
+.ideditor.mode-select-data .point,
+.ideditor.mode-select-error .point,
+.ideditor.mode-select-note .point {
     cursor: pointer; /* Opera */
     cursor: url(img/cursor-select-vertex.png), pointer; /* FF */
 }
 
 .ideditor.mode-browse .line,
-.ideditor.mode-select .line {
+.ideditor.mode-select .line,
+.ideditor.mode-select-data .line,
+.ideditor.mode-select-error .line,
+.ideditor.mode-select-note .line {
     cursor: pointer; /* Opera */
     cursor: url(img/cursor-select-line.png), pointer; /* FF */
 }
 
+.ideditor.mode-browse .area,
 .ideditor.mode-select .area,
-.ideditor.mode-browse .area {
+.ideditor.mode-select-data .area,
+.ideditor.mode-select-error .area,
+.ideditor.mode-select-note .area {
     cursor: pointer; /* Opera */
     cursor: url(img/cursor-select-area.png), pointer; /* FF */
 }
 
+.ideditor.mode-browse .midpoint,
 .ideditor.mode-select .midpoint,
-.ideditor.mode-browse .midpoint {
+.ideditor.mode-select-data .midpoint,
+.ideditor.mode-select-error .midpoint,
+.ideditor.mode-select-note .midpoint {
     cursor: pointer; /* Opera */
     cursor: url(img/cursor-select-split.png), pointer; /* FF */
 }
@@ -98,9 +113,22 @@
 }
 
 .ideditor.mode-browse .note,
-.ideditor.mode-browse .qaItem,
 .ideditor.mode-select .note,
+.ideditor.mode-select-data .note,
+.ideditor.mode-select-error .note,
+.ideditor.mode-select-note .note {
+    cursor: pointer;
+}
+
+.ideditor.mode-browse .qaItem,
 .ideditor.mode-select .qaItem,
+.ideditor.mode-select-data .qaItem,
+.ideditor.mode-select-error .qaItem,
+.ideditor.mode-select-note .qaItem {
+    cursor: pointer;
+}
+
+/* turn restriction editor */
 .turn rect,
 .turn circle {
     cursor: pointer;
