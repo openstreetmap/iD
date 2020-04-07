@@ -3012,6 +3012,13 @@ body {
 .id-container {
     height: 100%;
     width: 100%;
+
+    /* Establish a local stacking context so all elements within iD are on the
+    same layer relative to elements outside iD - #7457.
+    https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Positioning/Understanding_z_index/The_stacking_context
+    */
+    position: relative;
+    z-index: 0;
 }
 
 #content {
