@@ -16,15 +16,15 @@ In order to make edits using iD, you must be logged into your OpenStreetMap acco
 
 ### Changeset information
 
-When you use iD to edit OpenStreetMap, iD uses the OpenStreetMap API to contribute edits. For quality control purposes, along with the information typically recorded for an OpenStreetMap edit, iD automatically adds tags to each changeset submitted with iD which identifies the changeset as one made with iD and information that indicates the user’s level of experience with iD editor and/or its walkthrough. See [here](https://github.com/openstreetmap/iD/blob/master/modules/ui/commit.js) for details. The [OSMF privacy policy](https://wiki.osmfoundation.org/wiki/Privacy_Policy) governs the use of this data in the OpenStreetMap database.
+When you use iD to edit OpenStreetMap, iD uses the OpenStreetMap API to contribute edits. For quality control purposes, along with the information typically recorded for an OpenStreetMap edit, iD automatically adds tags to each changeset submitted with iD which identifies the changeset as one made with iD and information that indicates the user’s level of experience with iD editor and/or its walkthrough. See [here](https://github.com/openstreetmap/iD/blob/release/modules/ui/commit.js) for details. The [OSMF privacy policy](https://wiki.osmfoundation.org/wiki/Privacy_Policy) governs the use of this data in the OpenStreetMap database.
 
 ### Editor experience tags
 
-Details on that are [here](https://github.com/openstreetmap/iD/blob/master/modules/ui/commit.js).
+Details on that are [here](https://github.com/openstreetmap/iD/blob/release/modules/ui/commit.js).
 
 ### Background imagery and other third party services
 
-If you use background or streetside imagery to aid your edits, your browser must fetch information and images from a third-party imagery host. That use is governed by the respective privacy policies of each imagery host. The [Editor Layer Index](https://github.com/osmlab/editor-layer-index) and [iD Editor GitHub code](https://github.com/openstreetmap/iD/blob/master/modules/ui/map_data.js) provides detailed information as to imagery layer available in iD. In addition, you may use third party services to assist your editing or check for errors. See [here](https://github.com/openstreetmap/iD/tree/master/modules/services) for details. If you do not wish to interact with these third parties, do not use these features.
+If you use background or streetside imagery to aid your edits, your browser must fetch information and images from a third-party imagery host. That use is governed by the respective privacy policies of each imagery host. The [Editor Layer Index](https://github.com/osmlab/editor-layer-index) and [iD Editor GitHub code](https://github.com/openstreetmap/iD/blob/release/modules/ui/map_data.js) provides detailed information as to imagery layer available in iD. In addition, you may use third party services to assist your editing or check for errors. See [here](https://github.com/openstreetmap/iD/tree/release/modules/services) for details. If you do not wish to interact with these third parties, do not use these features.
 
 ### Name Suggestion Index
 
@@ -37,4 +37,5 @@ If you believe that we hold information that would allow us to correct, amend, o
 
 ### Changelog
 
+* _2020-Apr-07_ - Update the iD GitHub repository file links to point to the `release` branch instead of the `master` branch.
 * _2019-Dec-17_ - Initial version.

@@ -27,7 +27,7 @@ export function coreContext() {
   let _deferred = new Set();
 
   context.version = '2.17.2';
-  context.privacyVersion = '20191217';
+  context.privacyVersion = '20200407';
 
   context.isFirstSession = !prefs('sawSplash') && !prefs('sawPrivacyVersion');
 
