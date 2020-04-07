@@ -26,7 +26,7 @@ export function coreContext() {
     var _deferred = new Set();
 
     context.version = '2.17.2';
-    context.privacyVersion = '20191217';
+    context.privacyVersion = '20200407';
 
     // create a special translation that contains the keys in place of the strings
     var tkeys = JSON.parse(JSON.stringify(dataEn));  // clone deep

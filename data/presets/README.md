@@ -62,7 +62,7 @@ The complete JSON schema for presets can be found in [`data/presets/schema/prese
 
 The primary name of the feature type in American English.
 
-Upon merging with `master`, this is sent to Transifex for translating to other localizations. Changing the name of an existing preset will require it to be re-translated to all localizations.
+Upon merging with `develop`, this is sent to Transifex for translating to other localizations. Changing the name of an existing preset will require it to be re-translated to all localizations.
 
 This property is required. There is no default.
 
@@ -149,7 +149,7 @@ preset are generally not inherited. E.g. the `shop` field is not inherited by `s
 
 The name of a local SVG icon file. You can use icons from any of the following icon sets. When specifying an icon, use the prefixed version of the name, for example `"icon": "maki-park"` or `"icon": "tnp-2009223"`.
 
-* [iD's spritesheet](https://github.com/openstreetmap/iD/tree/master/svg/iD-sprite/presets) (`iD-`)
+* [iD's spritesheet](https://github.com/openstreetmap/iD/tree/develop/svg/iD-sprite/presets) (`iD-`)
 * [Maki](https://labs.mapbox.com/maki-icons/) (`maki-`), map-specific icons from Mapbox
 * [Temaki](https://ideditor.github.io/temaki/docs/) (`temaki-`), an expansion pack for Maki
     * This is the best place to submit a PR if you want to create a preset icon!
