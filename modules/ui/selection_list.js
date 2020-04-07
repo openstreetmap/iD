@@ -33,7 +33,7 @@ export function uiSelectionList(context, selectedIDs) {
 
         header
             .append('h3')
-            .text(t('inspector.multiselect'));
+            .text(t('inspector.edit_features'));
 
         var listWrap = selection
             .append('div')

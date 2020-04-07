@@ -63,13 +63,13 @@ export function operationCircularize(selectedIDs, context) {
     operation.tooltip = function() {
         var disable = operation.disabled();
         return disable ?
-            t('operations.circularize.' + disable) :
-            t('operations.circularize.description.' + geometry);
+            t('operations.circularize.' + disable + '.single') :
+            t('operations.circularize.description.single');
     };
 
 
     operation.annotation = function() {
-        return t('operations.circularize.annotation.' + geometry);
+        return t('operations.circularize.annotation.single');
     };
 
 
