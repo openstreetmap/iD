@@ -1,5 +1,5 @@
 import { select as d3_select } from 'd3-selection';
-import { osmPavedTags } from '../osm/tags';
+import { osmPathHighwayTagValues, osmPavedTags, osmSemipavedTags } from '../osm/tags';
 
 
 export function svgTagClasses() {
@@ -10,8 +10,18 @@ export function svgTagClasses() {
         'building:part', 'indoor'
     ];
     var statuses = [
-        'proposed', 'construction', 'disused', 'abandoned', 'dismantled',
-        'razed', 'demolished', 'obliterated', 'intermittent'
+        // nonexistent, might be built
+        'proposed', 'planned',
+        // under maintentance or between groundbreaking and opening
+        'construction',
+        // existent but not functional
+        'disused',
+        // dilapidated to nonexistent
+        'abandoned',
+        // nonexistent, still may appear in imagery
+        'dismantled', 'razed', 'demolished', 'obliterated',
+        // existent occasionally, e.g. stormwater drainage basin
+        'intermittent'
     ];
     var secondaries = [
         'oneway', 'bridge', 'tunnel', 'embankment', 'cutting', 'barrier',
@@ -136,18 +146,18 @@ export function svgTagClasses() {
         }
 
         // For highways, look for surface tagging..
-        if (primary === 'highway' || primary === 'aeroway') {
-            var paved = (t.highway !== 'track');
+        if ((primary === 'highway' && !osmPathHighwayTagValues[t.highway]) || primary === 'aeroway') {
+            var surface = t.highway === 'track' ? 'unpaved' : 'paved';
             for (k in t) {
                 v = t[k];
                 if (k in osmPavedTags) {
-                    paved = !!osmPavedTags[k][v];
-                    break;
+                    surface = osmPavedTags[k][v] ? 'paved' : 'unpaved';
+                }
+                if (k in osmSemipavedTags && !!osmSemipavedTags[k][v]) {
+                    surface = 'semipaved';
                 }
             }
-            if (!paved) {
-                classes.push('tag-unpaved');
-            }
+            classes.push('tag-' + surface);
         }
 
         // If this is a wikidata-tagged item, add a class for that..

@@ -1260,11 +1260,7 @@ display: none;
 .ideditor path.line.casing.tag-highway-corridor,
 .ideditor path.line.casing.tag-highway-pedestrian,
 .ideditor path.line.casing.tag-corridor,
-.ideditor path.line.casing.tag-pedestrian,
-.ideditor path.line.casing.tag-highway-corridor.tag-unpaved,
-.ideditor path.line.casing.tag-highway-pedestrian.tag-unpaved,
-.ideditor path.line.casing.tag-corridor.tag-unpaved,
-.ideditor path.line.casing.tag-pedestrian.tag-unpaved {
+.ideditor path.line.casing.tag-pedestrian {
     stroke: #8cd05f;
     stroke-linecap: round;
     stroke-dasharray: none;
@@ -1353,7 +1349,6 @@ display: none;
 }
 
 .ideditor path.line.casing.tag-highway-path,
-.ideditor path.line.casing.tag-highway-path.tag-unpaved,
 .ideditor path.line.casing.tag-highway-footway.tag-public_transport-platform,
 .ideditor path.line.casing.tag-highway-footway.tag-man_made-pier,
 .ideditor path.line.casing.tag-highway.tag-crossing,
@@ -1364,10 +1359,7 @@ display: none;
 }
 .ideditor path.line.casing.tag-highway-footway,
 .ideditor path.line.casing.tag-highway-cycleway,
-.ideditor path.line.casing.tag-highway-bridleway,
-.ideditor path.line.casing.tag-highway-footway.tag-unpaved,
-.ideditor path.line.casing.tag-highway-cycleway.tag-unpaved,
-.ideditor path.line.casing.tag-highway-bridleway.tag-unpaved {
+.ideditor path.line.casing.tag-highway-bridleway {
     stroke: #fff;
     stroke-linecap: round;
     stroke-dasharray: none;
@@ -1458,8 +1450,7 @@ display: none;
 .ideditor .low-zoom path.line.stroke.tag-highway-steps {
     stroke-dasharray: 2, 2;
 }
-.ideditor path.line.casing.tag-highway-steps,
-.ideditor path.line.casing.tag-highway-steps.tag-unpaved {
+.ideditor path.line.casing.tag-highway-steps {
     stroke: #fff;
     stroke-linecap: round;
     stroke-dasharray: none;
@@ -1574,11 +1565,6 @@ display: none;
     stroke-width: 3;
 }
 
-.ideditor .preset-icon .icon.tag-aeroway-taxiway,
-.ideditor .preset-icon .icon.tag-taxiway {
-    color: #ff0;
-    fill: #666;
-}
 .ideditor path.line.stroke.tag-aeroway-taxiway,
 .ideditor path.line.stroke.tag-taxiway {
     stroke: #ff0;
@@ -1630,7 +1616,6 @@ display: none;
 }
 .ideditor .preset-icon .icon.tag-railway {
     color: #555;
-    fill: #eee;
 }
 
 /* lines */
@@ -1656,7 +1641,8 @@ display: none;
     stroke-width: 2;
     stroke-dasharray: 6,6;
 }
-.ideditor .preset-icon-container path.line.stroke.tag-railway:not(.tag-status) {
+.ideditor .preset-icon-container path.line.stroke.tag-railway:not(.tag-status),
+.ideditor .preset-icon-container path.line.stroke.tag-railway.tag-status-disused {
     stroke-dasharray: 6;
 }
 
@@ -1676,18 +1662,20 @@ display: none;
 }
 
 
-.ideditor .preset-icon .icon.tag-railway-disused,
-.ideditor .preset-icon .icon.tag-railway-abandoned {
+.ideditor .preset-icon .icon.tag-railway.tag-status {
     color: #999;
-    fill: #eee;
 }
-.ideditor path.line.casing.tag-railway-disused,
-.ideditor path.line.casing.tag-railway-abandoned {
+.ideditor path.line.casing.tag-railway.tag-status {
     stroke: #999;
 }
-.ideditor path.line.stroke.tag-railway-disused,
-.ideditor path.line.stroke.tag-railway-abandoned {
+.ideditor path.line.stroke.tag-railway.tag-status:not(.tag-service) {
     stroke: #eee;
+}
+.ideditor .preset-icon .icon.tag-railway.tag-status-disused {
+    color: #808080;
+}
+.ideditor path.line.casing.tag-railway.tag-status-disused {
+    stroke: #808080;
 }
 
 
@@ -2148,33 +2136,39 @@ display: none;
 .ideditor path.line.casing.tag-unpaved {
     stroke: #ccc;
     stroke-linecap: butt;
-    stroke-dasharray: 4, 3;
+    stroke-dasharray: 4, 4;
 }
 .ideditor .low-zoom path.line.casing.tag-unpaved {
-    stroke-dasharray: 3, 2;
+    stroke-dasharray: 3, 3;
 }
 .ideditor path.line.casing.tag-bridge.tag-unpaved {
     stroke: #000;
-    stroke-dasharray: 4, 3;
 }
-.ideditor .low-zoom path.line.casing.tag-bridge.tag-unpaved {
+/* Surface - semipaved */
+.ideditor path.line.casing.tag-semipaved {
+    stroke-linecap: butt;
+    stroke-dasharray: 6, 2;
+}
+.ideditor .low-zoom path.line.casing.tag-semipaved {
+    stroke-dasharray: 5, 2;
+}
+.ideditor path.line.casing.tag-bridge.tag-semipaved {
     stroke: #000;
-    stroke-dasharray: 3, 2;
 }
 
 
 /* Status (e.g. proposed, abandoned) */
-.ideditor path.area.stroke.tag-status,
-.ideditor path.line.stroke.tag-status,
-.ideditor path.area.casing.tag-status,
-.ideditor path.line.casing.tag-status {
+.ideditor path.area.stroke.tag-status:not(.tag-status-disused),
+.ideditor path.line.stroke.tag-status:not(.tag-status-disused),
+.ideditor path.area.casing.tag-status:not(.tag-status-disused),
+.ideditor path.line.casing.tag-status:not(.tag-status-disused) {
     stroke-linecap: butt;
     stroke-dasharray: 7, 3;
 }
-.ideditor .low-zoom path.area.stroke.tag-status,
-.ideditor .low-zoom path.line.stroke.tag-status,
-.ideditor .low-zoom path.area.casing.tag-status,
-.ideditor .low-zoom path.line.casing.tag-status {
+.ideditor .low-zoom path.area.stroke.tag-status:not(.tag-status-disused),
+.ideditor .low-zoom path.line.stroke.tag-status:not(.tag-status-disused),
+.ideditor .low-zoom path.area.casing.tag-status:not(.tag-status-disused),
+.ideditor .low-zoom path.line.casing.tag-status:not(.tag-status-disused) {
     stroke-dasharray: 5, 2;
 }
 
