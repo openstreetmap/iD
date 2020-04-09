@@ -1,5 +1,5 @@
 {
-    "icon": "maki-garden",
+    "icon": "fas-seedling",
     "fields": [
         "name",
         "operator",
