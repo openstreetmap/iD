@@ -69,6 +69,10 @@
       "replace": {"amenity": "charging_station"}
     },
     {
+       "old": {"amenity": "charging_station", "car": "*"},
+       "replace": {"amenity": "charging_station", "motorcar": "$1"}
+    },
+    {
       "old": {"amenity": "fire_hydrant"},
       "replace": {"emergency": "fire_hydrant"}
     },
@@ -205,6 +209,14 @@
       "replace": {"barrier": "fence", "fence_type": "wood"}
     },
     {
+      "old": {"bicycle:oneway": "*"},
+      "replace": {"oneway:bicycle": "$1"}
+    },
+    {
+      "old": {"bridge": "1"},
+      "replace": {"bridge": "yes"}
+    },
+    {
       "old": {"building": "entrance"},
       "replace": {"entrance": "*"}
     },
@@ -223,6 +235,18 @@
     {
       "old": {"building:color": "*"},
       "replace": {"building:colour": "$1"}
+    },
+    {
+      "old": {"building:height": "*"},
+      "replace": {"height": "$1"}
+    },
+    {
+      "old": {"building:material": "Brick"},
+      "replace": {"building:material": "brick"}
+    },
+    {
+      "old": {"building:min_height": "*"},
+      "replace": {"min_height": "$1"}
     },
     {
       "old": {"building:roof:colour": "*"},
@@ -351,6 +375,10 @@
     {
       "old": {"direction": "West"},
       "replace": {"direction": "W"}
+    },
+    {
+      "old": {"disabled_spaces":"*"},
+      "replace": {"capacity:disabled": "$1"}
     },
     {
       "old": {"drinkable": "*"},
@@ -710,6 +738,10 @@
     {
       "old": {"man_made": "oil_well"},
       "replace": {"man_made": "petroleum_well", "substance": "oil"}
+    },
+    {
+      "old": {"man_made": "telephone_exchange"},
+      "replace": {"telecom": "exchange"}
     },
     {
       "old": {"man_made": "village_pump"},
@@ -1243,6 +1275,10 @@
     {
       "old": {"townhall:village": "yes"},
       "replace": {"amenity": "townhall", "townhall:type": "village"}
+    },
+    {
+      "old": {"tunnel": "1"},
+      "replace": {"tunnel": "yes"}
     },
     {
       "old": {"type": "audio", "amenity": "studio"},

@@ -8,6 +8,7 @@
         "lit"
     ],
     "moreFields": [
+        "address",
         "charge_fee",
         "covered",
         "fee",

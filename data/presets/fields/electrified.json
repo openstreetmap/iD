@@ -10,5 +10,10 @@
             "yes": "Yes (unspecified)",
             "no": "No"
         }
-    }
+    },
+    "terms": [
+        "contact line",
+        "powered",
+        "third rail"
+    ]
 }

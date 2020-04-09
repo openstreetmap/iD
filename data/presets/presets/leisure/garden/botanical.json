@@ -1,0 +1,21 @@
+{
+    "icon": "maki-garden",
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "tags": {
+        "leisure": "garden",
+        "garden:type": "botanical"
+    },
+    "reference": {
+        "key": "garden:type",
+        "value": "botanical"
+    },
+    "terms": [
+        "botanic garden",
+        "plant collection",
+        "rare plants"
+    ],
+    "name": "Botanical Garden"
+}

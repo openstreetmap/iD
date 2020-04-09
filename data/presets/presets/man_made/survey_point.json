@@ -1,7 +1,9 @@
 {
-    "icon": "maki-monument",
+    "icon": "temaki-benchmark_disk",
     "fields": [
-        "ref"
+        "ref",
+        "ele_node",
+        "inscription"
     ],
     "geometry": [
         "point",

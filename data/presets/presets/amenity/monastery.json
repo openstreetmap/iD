@@ -4,8 +4,7 @@
         "name",
         "religion",
         "denomination",
-        "address",
-        "building_area"
+        "address"
     ],
     "moreFields": [
         "email",

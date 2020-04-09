@@ -8,6 +8,9 @@
         "network",
         "network/type"
     ],
+    "moreFields": [
+        "distance"
+    ],
     "geometry": [
         "relation"
     ],

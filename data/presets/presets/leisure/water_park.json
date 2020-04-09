@@ -1,18 +1,11 @@
 {
     "icon": "fas-swimmer",
     "fields": [
-        "name",
-        "operator",
-        "address"
+        "{tourism/theme_park}",
+        "sport"
     ],
     "moreFields": [
-        "brand",
-        "email",
-        "fax",
-        "gnis/feature_id",
-        "payment_multi",
-        "phone",
-        "website"
+        "{tourism/theme_park}"
     ],
     "geometry": [
         "area",

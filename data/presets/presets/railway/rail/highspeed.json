@@ -1,5 +1,5 @@
 {
-    "icon": "iD-railway-rail",
+    "icon": "temaki-railway_track",
     "geometry": [
         "line"
     ],
@@ -17,5 +17,5 @@
         "highspeed rail",
         "HSR"
     ],
-    "name": "High-Speed Rail"
+    "name": "High-Speed Train Track"
 }

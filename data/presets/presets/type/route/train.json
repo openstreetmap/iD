@@ -1,16 +1,16 @@
 {
-    "icon": "iD-railway-rail",
+    "icon": "maki-rail",
     "fields": [
         "name",
         "ref_route",
         "operator",
         "network",
-        "network/type",
-        "to",
-        "from"
+        "from",
+        "to"
     ],
     "moreFields": [
         "colour",
+        "distance",
         "duration",
         "interval",
         "opening_hours",

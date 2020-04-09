@@ -3,7 +3,6 @@
     "fields": [
         "post",
         "access_simple",
-        "collection_times",
         "height"
     ],
     "moreFields": [

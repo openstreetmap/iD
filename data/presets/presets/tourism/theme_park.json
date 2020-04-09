@@ -4,9 +4,11 @@
         "name",
         "operator",
         "address",
-        "opening_hours"
+        "opening_hours",
+        "website"
     ],
     "moreFields": [
+        "brand",
         "email",
         "fax",
         "gnis/feature_id",
@@ -15,7 +17,6 @@
         "internet_access/ssid",
         "payment_multi",
         "phone",
-        "website",
         "wheelchair"
     ],
     "geometry": [

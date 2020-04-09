@@ -2,6 +2,7 @@
     "icon": "temaki-sign_and_bench",
     "fields": [
         "name",
+        "ref_stop_position",
         "network",
         "operator",
         "departures_board",
@@ -13,6 +14,7 @@
         "gnis/feature_id",
         "level",
         "lit",
+        "tactile_paving",
         "wheelchair"
     ],
     "geometry": [

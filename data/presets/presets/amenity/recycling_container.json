@@ -3,6 +3,7 @@
     "fields": [
         "operator",
         "recycling_accepts",
+        "opening_hours",
         "collection_times"
     ],
     "moreFields": [
@@ -12,7 +13,7 @@
         "level",
         "manufacturer",
         "material",
-        "opening_hours"
+        "ref"
     ],
     "geometry": [
         "point",

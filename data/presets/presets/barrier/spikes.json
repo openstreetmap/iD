@@ -1,0 +1,25 @@
+{
+    "icon": "temaki-spike_strip",
+    "fields": [
+        "direction_vertex",
+        "access",
+        "height",
+        "colour"
+    ],
+    "geometry": [
+        "vertex"
+    ],
+    "tags": {
+        "barrier": "spikes"
+    },
+    "terms": [
+        "one-way traffic treadles",
+        "stingers",
+        "stop sticks",
+        "tire deflation device",
+        "tire shredders",
+        "traffic spikes"
+    ],
+    "name": "Spike Strip",
+    "matchScore": 0.50
+}

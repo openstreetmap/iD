@@ -2,7 +2,10 @@
     "fields": [
         "operator",
         "lit",
-        "visibility",
+        "visibility"
+    ],
+    "moreFields": [
+        "access_simple",
         "direction",
         "height"
     ],

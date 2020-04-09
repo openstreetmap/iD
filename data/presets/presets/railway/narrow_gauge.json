@@ -1,13 +1,10 @@
 {
-    "icon": "iD-railway-rail",
+    "icon": "temaki-railway_track_narrow",
     "fields": [
-        "{railway/rail}"
+        "{railway/light_rail}"
     ],
     "moreFields": [
-        "covered",
-        "frequency_electrified",
-        "maxspeed",
-        "voltage_electrified"
+        "{railway/light_rail}"
     ],
     "geometry": [
         "line"
@@ -19,5 +16,5 @@
         "narrow gauge railway",
         "narrow gauge railroad"
     ],
-    "name": "Narrow Gauge Rail"
+    "name": "Narrow Gauge Track"
 }

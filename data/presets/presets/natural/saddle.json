@@ -1,7 +1,7 @@
 {
-    "icon": "maki-triangle-stroked",
+    "icon": "temaki-saddle",
     "fields": [
-        "elevation"
+        "ele_node"
     ],
     "geometry": [
         "point",

@@ -1,5 +1,5 @@
 {
-    "icon": "iD-railway-rail",
+    "icon": "temaki-railway_track_unfinished",
     "fields": [
         "name",
         "opening_date",
@@ -13,6 +13,7 @@
         "covered",
         "frequency_electrified",
         "highspeed",
+        "incline",
         "maxspeed",
         "service_rail",
         "usage_rail",
@@ -24,5 +25,6 @@
     "tags": {
         "railway": "construction"
     },
+    "matchScore": 0.95,
     "name": "Railway Under Construction"
 }

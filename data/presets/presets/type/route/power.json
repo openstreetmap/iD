@@ -4,8 +4,11 @@
         "name",
         "ref_route",
         "operator",
-        "to",
-        "from"
+        "from",
+        "to"
+    ],
+    "moreFields": [
+        "distance"
     ],
     "geometry": [
         "relation"

@@ -2,6 +2,6 @@
     "key": "building",
     "type": "combo",
     "default": "yes",
-    "geometry": "area",
+    "geometry": ["area"],
     "label": "Building"
 }

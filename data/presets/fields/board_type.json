@@ -1,5 +1,5 @@
 {
     "key": "board_type",
-    "type": "typeCombo",
+    "type": "combo",
     "label": "Type"
 }

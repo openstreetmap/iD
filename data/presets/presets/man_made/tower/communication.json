@@ -2,7 +2,12 @@
     "icon": "temaki-tower_communication",
     "fields": [
         "{man_made/tower}",
-        "communication_multi"
+        "communication_multi",
+        "mimics"
+    ],
+    "moreFields": [
+        "{man_made/tower}",
+        "mimics"
     ],
     "geometry": [
         "point",

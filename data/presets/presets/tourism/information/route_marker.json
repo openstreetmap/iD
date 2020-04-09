@@ -5,7 +5,7 @@
         "operator",
         "colour",
         "material",
-        "elevation"
+        "ele_node"
     ],
     "geometry": [
         "point",

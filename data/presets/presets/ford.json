@@ -2,6 +2,7 @@
     "icon": "temaki-pedestrian",
     "fields": [
         "name",
+        "depth",
         "access",
         "seasonal"
     ],

@@ -1,0 +1,11 @@
+{
+    "key": "mimics",
+    "type": "combo",
+    "label": "Mimics",
+    "terms": [
+        "camoflauged",
+        "disguised",
+        "looks like",
+        "tree"
+    ]
+}

@@ -9,17 +9,17 @@
         "duration",
         "access",
         "toll",
-        "to",
-        "from"
+        "from",
+        "to"
     ],
     "moreFields": [
         "charge_toll",
+        "distance",
         "dog",
         "interval",
         "maxheight",
         "maxweight",
         "network",
-        "network/type",
         "opening_hours",
         "ref_route",
         "wheelchair"

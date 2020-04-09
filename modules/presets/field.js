@@ -10,7 +10,7 @@ export function presetField(id, field) {
     field.safeid = utilSafeClassName(id);
 
     field.matchGeometry = function(geometry) {
-        return !field.geometry || field.geometry === geometry;
+        return !field.geometry || field.geometry.indexOf(geometry) !== -1;
     };
 
 

@@ -1,0 +1,7 @@
+{
+    "key": "capacity:disabled",
+    "type": "number",
+    "minValue": 0,
+    "label": "Accessible Spaces",
+    "placeholder": "1, 2, 3..."
+}

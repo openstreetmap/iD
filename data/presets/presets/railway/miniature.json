@@ -1,17 +1,10 @@
 {
-    "icon": "iD-railway-rail",
+    "icon": "temaki-railway_track_mini",
     "fields": [
-        "name",
-        "structure",
-        "gauge",
-        "electrified",
-        "service_rail"
+        "{railway/light_rail}"
     ],
     "moreFields": [
-        "covered",
-        "frequency_electrified",
-        "maxspeed",
-        "voltage_electrified"
+        "{railway/light_rail}"
     ],
     "geometry": [
         "line"
@@ -24,5 +17,5 @@
         "narrow gauge railway",
         "minimum gauge railway"
     ],
-    "name": "Miniature Railway"
+    "name": "Miniature Train Track"
 }

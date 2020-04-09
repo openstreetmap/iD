@@ -1,0 +1,19 @@
+{
+    "icon": "temaki-cable",
+    "fields": [
+        "name",
+        "ref",
+        "operator",
+        "voltage",
+        "location",
+        "layer"
+    ],
+    "geometry": [
+        "line"
+    ],
+    "tags": {
+        "power": "cable"
+    },
+    "searchable": false,
+    "name": "Power Cable"
+}

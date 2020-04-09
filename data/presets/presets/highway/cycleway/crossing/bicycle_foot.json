@@ -1,0 +1,40 @@
+{
+    "notCountryCodes": [
+        "fr", "lt", "pl"
+    ],
+    "icon": "temaki-ped_cyclist_crosswalk",
+    "fields": [
+        "crossing",
+        "access",
+        "surface",
+        "tactile_paving",
+        "crossing/island"
+    ],
+    "geometry": [
+        "line"
+    ],
+    "tags": {
+        "highway": "cycleway",
+        "cycleway": "crossing",
+        "foot": "designated"
+    },
+    "addTags": {
+        "highway": "cycleway",
+        "cycleway": "crossing",
+        "foot": "designated",
+        "bicycle": "designated"
+    },
+    "reference": {
+        "key": "cycleway",
+        "value": "crossing"
+    },
+    "terms": [
+        "bicycle and foot crosswalk",
+        "bike and pedestrian crossing",
+        "cycleway",
+        "cycling",
+        "cyclist"
+    ],
+    "matchScore": 0.9,
+    "name": "Cycle & Foot Crossing"
+}

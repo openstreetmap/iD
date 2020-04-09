@@ -1,14 +1,19 @@
 {
-    "icon": "iD-railway-rail",
+    "icon": "temaki-railway_cable_track",
     "fields": [
         "name",
         "operator",
+        "incline",
         "structure",
         "gauge",
         "service_rail"
     ],
     "moreFields": [
-        "covered"
+        "covered",
+        "electrified",
+        "frequency_electrified",
+        "maxspeed",
+        "voltage_electrified"
     ],
     "geometry": [
         "line"
@@ -23,5 +28,5 @@
     "tags": {
         "railway": "funicular"
     },
-    "name": "Funicular"
+    "name": "Funicular Track"
 }

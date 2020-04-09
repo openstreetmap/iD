@@ -1,5 +1,5 @@
 {
     "key": "beauty",
-    "type": "combo",
-    "label": "Beauty Specialty"
+    "type": "semiCombo",
+    "label": "Services"
 }
