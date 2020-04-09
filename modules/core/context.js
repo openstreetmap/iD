@@ -387,7 +387,7 @@ export function coreContext() {
 
 
     /* Container */
-    var container = d3_select(document.body);
+    var container = d3_select(null);
     context.container = function(val) {
         if (!arguments.length) return container;
         container = val;
