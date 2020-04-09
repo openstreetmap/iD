@@ -7610,7 +7610,15 @@
                 },
                 "leisure/garden": {
                     "name": "Garden",
-                    "terms": ""
+                    "terms": "flowers,fruits,herbs,plants,vegetables"
+                },
+                "leisure/garden/botanical": {
+                    "name": "Botanical Garden",
+                    "terms": "botanic garden,plant collection,rare plants"
+                },
+                "leisure/garden/community": {
+                    "name": "Community Garden",
+                    "terms": "co-op garden,collective garden,communal garden"
                 },
                 "leisure/golf_course": {
                     "name": "Golf Course",

@@ -657,6 +657,8 @@
     {"key": "fitness_station", "value": "sit-up", "description": "🄿 Sit-Up Station", "object_types": ["node", "area"], "icon_url": "https://cdn.jsdelivr.net/gh/mapbox/maki/icons/pitch-15.svg"},
     {"key": "fitness_station", "value": "stairs", "description": "🄿 Exercise Stairs", "object_types": ["node", "area"], "icon_url": "https://cdn.jsdelivr.net/gh/mapbox/maki/icons/pitch-15.svg"},
     {"key": "leisure", "value": "garden", "description": "🄿 Garden", "object_types": ["node", "area"], "icon_url": "https://cdn.jsdelivr.net/gh/mapbox/maki/icons/garden-15.svg"},
+    {"key": "garden:type", "value": "botanical", "description": "🄿 Botanical Garden", "object_types": ["node", "area"], "icon_url": "https://cdn.jsdelivr.net/gh/mapbox/maki/icons/garden-15.svg"},
+    {"key": "garden:type", "value": "community", "description": "🄿 Community Garden", "object_types": ["node", "area"], "icon_url": "https://cdn.jsdelivr.net/gh/mapbox/maki/icons/garden-15.svg"},
     {"key": "leisure", "value": "golf_course", "description": "🄿 Golf Course", "object_types": ["area", "node"], "icon_url": "https://cdn.jsdelivr.net/gh/mapbox/maki/icons/golf-15.svg"},
     {"key": "leisure", "value": "hackerspace", "description": "🄿 Hackerspace", "object_types": ["node", "area"], "icon_url": "https://cdn.jsdelivr.net/gh/openstreetmap/iD@develop/svg/fontawesome/fas-code.svg"},
     {"key": "leisure", "value": "horse_riding", "description": "🄿 Horseback Riding Facility, 🄵 Horseback Riding", "object_types": ["node", "area"], "icon_url": "https://cdn.jsdelivr.net/gh/mapbox/maki/icons/horse-riding-15.svg"},

@@ -4,6 +4,7 @@
         "name",
         "garden/type",
         "operator",
+        "operator/type",
         "access_simple",
         "fee",
         "payment_multi_fee",
@@ -18,11 +19,17 @@
     ],
     "geometry": [
         "point",
-        "vertex",
         "area"
     ],
     "tags": {
         "leisure": "garden"
     },
+    "terms": [
+        "flowers",
+        "fruits",
+        "herbs",
+        "plants",
+        "vegetables"
+    ],
     "name": "Garden"
 }
