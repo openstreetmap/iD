@@ -1761,6 +1761,7 @@
     {"key": "rooms", "description": "🄵 Rooms"},
     {"key": "route_master", "description": "🄵 Type"},
     {"key": "route", "description": "🄵 Type"},
+    {"key": "ruins", "description": "🄵 Type"},
     {"key": "rwn_ref", "description": "🄵 Walking Code"},
     {"key": "sac_scale", "value": "hiking", "description": "🄵 Hiking Difficulty"},
     {"key": "sac_scale", "value": "mountain_hiking", "description": "🄵 Hiking Difficulty"},
