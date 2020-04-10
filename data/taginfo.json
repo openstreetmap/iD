@@ -952,7 +952,7 @@
     {"key": "railway", "value": "tram_stop", "description": "🄿 Tram Stopping Position (unsearchable), 🄳 ➜ railway=tram_stop + public_transport=stop_position + tram=yes", "object_types": ["node"], "icon_url": "https://cdn.jsdelivr.net/gh/ideditor/temaki/icons/tram.svg"},
     {"key": "railway", "value": "abandoned", "description": "🄿 Abandoned Railway", "object_types": ["way"], "icon_url": "https://cdn.jsdelivr.net/gh/ideditor/temaki/icons/railway_track_askew.svg"},
     {"key": "railway", "value": "buffer_stop", "description": "🄿 Buffer Stop", "object_types": ["node"], "icon_url": "https://cdn.jsdelivr.net/gh/ideditor/temaki/icons/buffer_stop.svg"},
-    {"key": "railway", "value": "construction", "description": "🄿 Railway Under Construction", "object_types": ["way"], "icon_url": "https://cdn.jsdelivr.net/gh/ideditor/temaki/icons/railway_track_unfinished.svg"},
+    {"key": "railway", "value": "construction", "description": "🄿 Railway Under Construction", "object_types": ["way"], "icon_url": "https://cdn.jsdelivr.net/gh/ideditor/temaki/icons/railway_track_partial.svg"},
     {"key": "railway", "value": "crossing", "description": "🄿 Railway Crossing (Path)", "object_types": ["node"], "icon_url": "https://cdn.jsdelivr.net/gh/ideditor/temaki/icons/pedestrian.svg"},
     {"key": "railway", "value": "derail", "description": "🄿 Railway Derailer", "object_types": ["node"], "icon_url": "https://cdn.jsdelivr.net/gh/mapbox/maki/icons/roadblock-15.svg"},
     {"key": "railway", "value": "disused", "description": "🄿 Disused Railway", "object_types": ["way"], "icon_url": "https://cdn.jsdelivr.net/gh/ideditor/temaki/icons/railway_track.svg"},
