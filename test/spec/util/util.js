@@ -252,4 +252,25 @@ describe('iD.util', function() {
             expect(iD.utilDisplayName({tags: {network: 'BART', ref: 'Yellow', from: 'Antioch', to: 'Millbrae', via: 'Pittsburg/Bay Point;San Francisco International Airport', route: 'subway'}})).to.eql('BART Yellow from Antioch to Millbrae via Pittsburg/Bay Point;San Francisco International Airport');
         });
     });
+
+    describe('utilOldestID', function() {
+        it('returns the oldest database ID', function() {
+            expect(iD.utilOldestID(['w3', 'w1', 'w2'])).to.eql('w1');
+        });
+        it('returns the oldest editor ID', function() {
+            expect(iD.utilOldestID(['w-3', 'w-2', 'w-1'])).to.eql('w-1');
+        });
+        it('returns the oldest IDs among database and editor IDs', function() {
+            expect(iD.utilOldestID(['w-1', 'w1', 'w-2'])).to.eql('w1');
+        });
+        it('returns the oldest database ID', function() {
+            expect(iD.utilOldestID(['w100', 'w-1', 'a', 'w-300', 'w2'])).to.eql('w2');
+        });
+        it('returns the oldest editor ID if no database IDs', function() {
+            expect(iD.utilOldestID(['w-100', 'w-1', 'a', 'w-300', 'w-2'])).to.eql('w-1');
+        });
+        it('returns the first ID in the list otherwise', function() {
+            expect(iD.utilOldestID(['z', 'a', 'A', 'Z'])).to.eql('z');
+        });
+    });
 });

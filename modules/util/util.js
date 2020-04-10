@@ -581,3 +581,53 @@ export function utilUnicodeCharsCount(str) {
 export function utilUnicodeCharsTruncated(str, limit) {
     return Array.from(str).slice(0, limit).join('');
 }
+
+
+// Returns the chronologically oldest ID in the list.
+// Database IDs (with positive numbers) before editor ones (with negative numbers).
+// Among each category, the closest number to 0 is the oldest.
+// Test IDs (any string that does not conform to OSM's ID scheme) are taken last.
+export function utilOldestID(ids) {
+    if (ids.length === 0) {
+        return undefined;
+    }
+
+    var idPattern = /^[cnwr](-?)(\d+)$/;
+    var decomposeID = (id) => {
+        var res = {
+            id: id,
+            num: NaN
+        };
+
+        var match = id.match(idPattern);
+        if (match) {
+            res.num = parseInt(match[2], 10);
+            res.isNew = !!match[1];
+        }
+
+        return res;
+    };
+
+    var compareDecomposed = (left, right) => {
+        if (isNaN(left.num) && isNaN(right.num)) return -1;
+        if (isNaN(left.num)) return 1;
+        if (isNaN(right.num)) return -1;
+        if (left.isNew && !right.isNew) return 1;
+        if (!left.isNew && right.isNew) return -1;
+        return Math.sign(left.num - right.num);
+    };
+
+    var oldestIDIndex = 0;
+    var oldestID = decomposeID(ids[0]);
+
+    for (var i = 1; i < ids.length; i++) {
+        var decomposed = decomposeID(ids[i]);
+
+        if (compareDecomposed(oldestID, decomposed) === 1) {
+            oldestIDIndex = i;
+            oldestID = decomposed;
+        }
+    }
+
+    return ids[oldestIDIndex];
+}
