@@ -135,7 +135,7 @@ export function svgTagClasses() {
             classes.push('tag-' + k + '-' + v);
         }
 
-        if (primary === 'entrance')
+        /*if (primary === 'entrance')
         {
             for (k in t) {
                 v = t[k];
@@ -145,7 +145,7 @@ export function svgTagClasses() {
                     break;
                 }
             }
-        }
+        }*/
 
         // check for number of flats in building or landuse residential:
         if (primary === 'building' || (primary === 'landuse' && t.landuse === 'residential'))

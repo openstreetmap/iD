@@ -457,6 +457,23 @@ path.stroke.tag-building.tag-flats-8 {
 }
 
 
-path.stroke.tag-entrance-main {
-    stroke: rgb(255, 60, 0);
+path.stroke.tag-building-detached {
+    stroke: rgb(233, 153, 61);
+}
+
+path.stroke.tag-building-apartments {
+    stroke: rgb(192, 211, 85);
+}
+
+path.stroke.tag-building-terrace {
+    stroke: rgb(114, 211, 85);
+}
+
+path.stroke.tag-building-semidetached_house {
+    stroke: rgb(85, 211, 152);
+}
+
+
+path.stroke.tag-building-house {
+    stroke: rgb(156, 36, 36);
 }
