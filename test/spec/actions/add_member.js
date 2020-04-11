@@ -148,6 +148,35 @@ describe('iD.actionAddMember', function() {
             expect(members(graph)).to.eql(['-', '=', '~', '~', '=', '-']);
         });
 
+        it('inserts the member multiple times if insertPair provided (middle) (reversed pair)', function() {
+            // Before:  a  ..  b ===> c ~~~> d <~~~ c <=== b  ..  a
+            // After:   a ---> b ===> c ~~~> d <~~~ c <=== b <--- a
+            var graph = iD.coreGraph([
+                iD.osmNode({id: 'a', loc: [0, 0]}),
+                iD.osmNode({id: 'b', loc: [0, 0]}),
+                iD.osmNode({id: 'c', loc: [0, 0]}),
+                iD.osmNode({id: 'd', loc: [0, 0]}),
+                iD.osmWay({id: '-', nodes: ['a', 'b']}),
+                iD.osmWay({id: '=', nodes: ['b', 'c']}),
+                iD.osmWay({id: '~', nodes: ['c', 'd']}),
+                iD.osmRelation({id: 'r', members: [
+                    {id: '=', type: 'way'},
+                    {id: '~', type: 'way'},
+                    {id: '~', type: 'way'},
+                    {id: '=', type: 'way'}
+                ]})
+            ]);
+
+            var member = { id: '=', type: 'way' };
+            var insertPair = {
+                originalID: '=',
+                insertedID: '-',
+                nodes: ['a','b','c']
+            };
+            graph = iD.actionAddMember('r', member, undefined, insertPair)(graph);
+            expect(members(graph)).to.eql(['-', '=', '~', '~', '=', '-']);
+        });
+
         it('inserts the member multiple times if insertPair provided (beginning/end)', function() {
             // Before:         b <=== c ~~~> d <~~~ c ===> b
             // After:   a <--- b <=== c ~~~> d <~~~ c ===> b ---> a
@@ -171,6 +200,35 @@ describe('iD.actionAddMember', function() {
             var insertPair = {
                 originalID: '=',
                 insertedID: '-',
+                nodes: ['c','b','a']
+            };
+            graph = iD.actionAddMember('r', member, undefined, insertPair)(graph);
+            expect(members(graph)).to.eql(['-', '=', '~', '~', '=', '-']);
+        });
+
+        it('inserts the member multiple times if insertPair provided (beginning/end) (reversed pair)', function() {
+            // Before:  a <--- b  ..  c ~~~> d <~~~ c  ..  b ---> a
+            // After:   a <--- b <=== c ~~~> d <~~~ c ===> b ---> a
+            var graph = iD.coreGraph([
+                iD.osmNode({id: 'a', loc: [0, 0]}),
+                iD.osmNode({id: 'b', loc: [0, 0]}),
+                iD.osmNode({id: 'c', loc: [0, 0]}),
+                iD.osmNode({id: 'd', loc: [0, 0]}),
+                iD.osmWay({id: '-', nodes: ['b', 'a']}),
+                iD.osmWay({id: '=', nodes: ['c', 'b']}),
+                iD.osmWay({id: '~', nodes: ['c', 'd']}),
+                iD.osmRelation({id: 'r', members: [
+                    {id: '-', type: 'way'},
+                    {id: '~', type: 'way'},
+                    {id: '~', type: 'way'},
+                    {id: '-', type: 'way'}
+                ]})
+            ]);
+
+            var member = { id: '-', type: 'way' };
+            var insertPair = {
+                originalID: '-',
+                insertedID: '=',
                 nodes: ['c','b','a']
             };
             graph = iD.actionAddMember('r', member, undefined, insertPair)(graph);
