@@ -226,6 +226,38 @@ describe('iD.util', function() {
         });
     });
 
+    describe('utilCompareIDs', function() {
+        it('sorts existing IDs numerically in ascending order', function() {
+            expect(iD.utilCompareIDs('w100', 'w200')).to.eql(-1);
+            expect(iD.utilCompareIDs('w100', 'w50')).to.eql(1);
+            expect(iD.utilCompareIDs('w100', 'w100')).to.eql(0);
+        });
+        it('sorts new IDs numerically in descending order', function() {
+            expect(iD.utilCompareIDs('w-100', 'w-200')).to.eql(-1);
+            expect(iD.utilCompareIDs('w-100', 'w-50')).to.eql(1);
+            expect(iD.utilCompareIDs('w-100', 'w-100')).to.eql(0);
+        });
+        it('sorts existing IDs before new IDs', function() {
+            expect(iD.utilCompareIDs('w-1', 'w1')).to.eql(1);
+            expect(iD.utilCompareIDs('w1', 'w-1')).to.eql(-1);
+            expect(iD.utilCompareIDs('w-100', 'w1')).to.eql(1);
+            expect(iD.utilCompareIDs('w100', 'w-1')).to.eql(-1);
+            expect(iD.utilCompareIDs('w-1', 'w100')).to.eql(1);
+            expect(iD.utilCompareIDs('w1', 'w-100')).to.eql(-1);
+        });
+        it('sorts existing and new IDs before anything else', function() {
+            expect(iD.utilCompareIDs('w1', 'asdf')).to.eql(-1);
+            expect(iD.utilCompareIDs('asdf', 'w1')).to.eql(1);
+            expect(iD.utilCompareIDs('w-1', 'asdf')).to.eql(-1);
+            expect(iD.utilCompareIDs('asdf', 'w-1')).to.eql(1);
+        });
+        it('returns -1 for other strings', function() {
+            expect(iD.utilCompareIDs('aaa', 'b')).to.eql(-1);
+            expect(iD.utilCompareIDs('b', 'aaa')).to.eql(-1);
+            expect(iD.utilCompareIDs('a', 'a')).to.eql(-1);
+        });
+    });
+
     describe('utilDisplayName', function() {
         it('returns the name if tagged with a name', function() {
             expect(iD.utilDisplayName({tags: {name: 'East Coast Greenway'}})).to.eql('East Coast Greenway');

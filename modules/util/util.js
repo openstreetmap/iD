@@ -582,6 +582,29 @@ export function utilUnicodeCharsTruncated(str, limit) {
     return Array.from(str).slice(0, limit).join('');
 }
 
+function toNumericID(id) {
+    var match = id.match(/^[cnwr](-?\d+)$/);
+    if (match) {
+        return parseInt(match[1], 10);
+    }
+    return NaN;
+}
+
+function compareNumericIDs(left, right) {
+    if (isNaN(left) && isNaN(right)) return -1;
+    if (isNaN(left)) return 1;
+    if (isNaN(right)) return -1;
+    if (Math.sign(left) !== Math.sign(right)) return -Math.sign(left);
+    if (Math.sign(left) < 0) return Math.sign(right - left);
+    return Math.sign(left - right);
+}
+
+// Returns -1 if the first parameter ID is older than the second,
+// 1 if the second parameter is older, 0 if they are the same.
+// If both IDs are test IDs, the function returns -1.
+export function utilCompareIDs(left, right) {
+    return compareNumericIDs(toNumericID(left), toNumericID(right));
+}
 
 // Returns the chronologically oldest ID in the list.
 // Database IDs (with positive numbers) before editor ones (with negative numbers).
@@ -592,40 +615,15 @@ export function utilOldestID(ids) {
         return undefined;
     }
 
-    var idPattern = /^[cnwr](-?)(\d+)$/;
-    var decomposeID = (id) => {
-        var res = {
-            id: id,
-            num: NaN
-        };
-
-        var match = id.match(idPattern);
-        if (match) {
-            res.num = parseInt(match[2], 10);
-            res.isNew = !!match[1];
-        }
-
-        return res;
-    };
-
-    var compareDecomposed = (left, right) => {
-        if (isNaN(left.num) && isNaN(right.num)) return -1;
-        if (isNaN(left.num)) return 1;
-        if (isNaN(right.num)) return -1;
-        if (left.isNew && !right.isNew) return 1;
-        if (!left.isNew && right.isNew) return -1;
-        return Math.sign(left.num - right.num);
-    };
-
     var oldestIDIndex = 0;
-    var oldestID = decomposeID(ids[0]);
+    var oldestID = toNumericID(ids[0]);
 
     for (var i = 1; i < ids.length; i++) {
-        var decomposed = decomposeID(ids[i]);
+        var num = toNumericID(ids[i]);
 
-        if (compareDecomposed(oldestID, decomposed) === 1) {
+        if (compareNumericIDs(oldestID, num) === 1) {
             oldestIDIndex = i;
-            oldestID = decomposed;
+            oldestID = num;
         }
     }
 
