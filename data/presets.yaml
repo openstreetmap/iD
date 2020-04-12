@@ -358,6 +358,9 @@ en:
       bridge/support:
         # 'bridge:support=*'
         label: Type
+      bridge_combo:
+        # bridge=*
+        label: Type
       building:
         # building=*
         label: Building
@@ -2631,6 +2634,9 @@ en:
         label: Type
         # tunnel field placeholder
         placeholder: Default
+      tunnel_combo:
+        # tunnel=*
+        label: Type
       usage_rail:
         # usage=*
         label: Usage Type
@@ -5861,7 +5867,18 @@ en:
       leisure/garden:
         # leisure=garden
         name: Garden
+        # 'terms: flowers,fruits,herbs,plants,vegetables'
         terms: '<translate with synonyms or related terms for ''Garden'', separated by commas>'
+      leisure/garden/botanical:
+        # 'leisure=garden, garden:type=botanical'
+        name: Botanical Garden
+        # 'terms: botanic garden,plant collection,rare plants'
+        terms: '<translate with synonyms or related terms for ''Botanical Garden'', separated by commas>'
+      leisure/garden/community:
+        # 'leisure=garden, garden:type=community'
+        name: Community Garden
+        # 'terms: co-op garden,collective garden,communal garden'
+        terms: '<translate with synonyms or related terms for ''Community Garden'', separated by commas>'
       leisure/golf_course:
         # leisure=golf_course
         name: Golf Course

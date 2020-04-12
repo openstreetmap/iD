@@ -2,7 +2,7 @@
     "icon": "maki-bridge",
     "fields": [
         "name",
-        "bridge",
+        "bridge_combo",
         "layer",
         "maxweight"
     ],

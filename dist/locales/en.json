@@ -2942,6 +2942,9 @@
                     "label": "Draft Beers",
                     "terms": "on tap"
                 },
+                "bridge_combo": {
+                    "label": "Type"
+                },
                 "bridge": {
                     "label": "Type",
                     "placeholder": "Default"
@@ -4858,6 +4861,9 @@
                 "trolley_wire": {
                     "label": "Overhead Trolley Wires",
                     "terms": ""
+                },
+                "tunnel_combo": {
+                    "label": "Type"
                 },
                 "tunnel": {
                     "label": "Type",
@@ -7653,7 +7659,15 @@
                 },
                 "leisure/garden": {
                     "name": "Garden",
-                    "terms": ""
+                    "terms": "flowers,fruits,herbs,plants,vegetables"
+                },
+                "leisure/garden/botanical": {
+                    "name": "Botanical Garden",
+                    "terms": "botanic garden,plant collection,rare plants"
+                },
+                "leisure/garden/community": {
+                    "name": "Community Garden",
+                    "terms": "co-op garden,collective garden,communal garden"
                 },
                 "leisure/golf_course": {
                     "name": "Golf Course",
