@@ -2899,6 +2899,9 @@
                     "label": "Draft Beers",
                     "terms": "on tap"
                 },
+                "bridge_combo": {
+                    "label": "Type"
+                },
                 "bridge": {
                     "label": "Type",
                     "placeholder": "Default"
@@ -4815,6 +4818,9 @@
                 "trolley_wire": {
                     "label": "Overhead Trolley Wires",
                     "terms": ""
+                },
+                "tunnel_combo": {
+                    "label": "Type"
                 },
                 "tunnel": {
                     "label": "Type",
