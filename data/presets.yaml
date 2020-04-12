@@ -358,6 +358,9 @@ en:
       bridge/support:
         # 'bridge:support=*'
         label: Type
+      bridge_combo:
+        # bridge=*
+        label: Type
       building:
         # building=*
         label: Building
@@ -2631,6 +2634,9 @@ en:
         label: Type
         # tunnel field placeholder
         placeholder: Default
+      tunnel_combo:
+        # tunnel=*
+        label: Type
       usage_rail:
         # usage=*
         label: Usage Type
