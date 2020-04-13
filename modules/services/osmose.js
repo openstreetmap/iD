@@ -175,7 +175,7 @@ export default {
       issue.elems = data.elems.map(e => e.type.substring(0,1) + e.id);
 
       // Some issues have instance specific detail in a subtitle
-      issue.detail = marked(data.subtitle.auto);
+      issue.detail = data.subtitle ? marked(data.subtitle.auto) : '';
 
       this.replaceItem(issue);
     };
