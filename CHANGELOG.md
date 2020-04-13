@@ -61,10 +61,11 @@ _Breaking changes, which may affect downstream projects or sites that embed iD, 
 
 #### :bug: Bugfixes
 * Fix issue where some labels could not be translated ([#7358])
-* Fix issue where selecting the Information Board Type field could add an erroneous tag value ([#7265])
+* Don't insert generic values when focusing the Information Board, Bridge Area, or Tunnel Area Type fields ([#7265], [#7509])
 
 [#7358]: https://github.com/openstreetmap/iD/issues/7358
 [#7265]: https://github.com/openstreetmap/iD/issues/7265
+[#7509]: https://github.com/openstreetmap/iD/issues/7509
 
 #### :rocket: Presets
 * Add Exhibition Center preset ([#7268], thanks [@hikemaniac])
