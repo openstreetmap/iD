@@ -724,7 +724,7 @@ export function uiIntroBuilding(context, reveal) {
 
             // Something changed.  Wait for transition to complete and check undo annotation.
             timeout(function() {
-                if (context.history().undoAnnotation() === t('operations.circularize.annotation.area')) {
+                if (context.history().undoAnnotation() === t('operations.circularize.annotation.single')) {
                     continueTo(play);
                 } else {
                     continueTo(retryClickCircle);
