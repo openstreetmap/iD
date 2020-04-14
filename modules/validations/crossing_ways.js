@@ -307,8 +307,9 @@ export function validationCrossingWays(context) {
                     (!member.role || member.role === 'outer' || member.role === 'inner')) {
                     var entity = graph.hasEntity(member.id);
                     // don't add duplicates
-                    if (!entity || array.indexOf(entity) !== -1) return;
-                    array.push(entity);
+                    if (entity && array.indexOf(entity) === -1) {
+                        array.push(entity);
+                    }
                 }
                 return array;
             }, []);
