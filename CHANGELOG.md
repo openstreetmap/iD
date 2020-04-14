@@ -165,10 +165,12 @@ _Breaking changes, which may affect downstream projects or sites that embed iD, 
 * Scope iD's CSS to its container under the `ideditor` class ([#7437])
 * Make embedded iD's container a local stacking context ([#7457])
 * Fix combobox suggestion list placement when embedding iD ([#7458])
+* Persist the changeset comment, hashtags, and sources from the URL through UI reloads ([#7504])
 
 [#7437]: https://github.com/openstreetmap/iD/issues/7437
 [#7457]: https://github.com/openstreetmap/iD/issues/7457
 [#7458]: https://github.com/openstreetmap/iD/issues/7458
+[#7504]: https://github.com/openstreetmap/iD/issues/7504
 
 # 2.17.2
 ##### 2020-Feb-14
