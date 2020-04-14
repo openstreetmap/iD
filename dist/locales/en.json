@@ -10673,6 +10673,10 @@
                 "name": "OpenStreetMap Galicia Twitter",
                 "description": "Follow us on Twitter at {url}"
             },
+            "Galicia-Xeoinquedos-Twitter": {
+                "name": "Geoinquetos on Twitter",
+                "description": "Follow us on Twitter at {url}"
+            },
             "GeoPhilly": {
                 "name": "GeoPhilly",
                 "description": "Meetup for map enthusiasts in the Philadelphia area",
@@ -11105,10 +11109,6 @@
                 "description": "Mappers and OpenStreetMap users in the Salt Lake City area",
                 "extendedDescription": "Activities may include things like Learn To Map workshops, mapping parties and outdoor data collection. The events will take place in the SLC area, at least initially.  We are looking for seasoned mappers as well as people new to OSM. Join and let's do some mapping!"
             },
-            "OSM-Vancouver-meetup": {
-                "name": "OpenStreetMap Vancouver",
-                "description": "Mappers and OpenStreetMap users in the Vancouver, BC area"
-            },
             "OSM-Wyoming": {
                 "name": "OpenStreetMap Wyoming",
                 "description": "Mappers and OpenStreetMap users in the state of Wyoming",
@@ -11151,6 +11151,10 @@
             "OSM-japan-mailinglist": {
                 "name": "OpenStreetMap Japan Mailinglist",
                 "description": "Talk-ja is an Official Mailinglist for Japanese Community"
+            },
+            "OSM-japan-slack": {
+                "name": "OpenStreetMap Japan Slack",
+                "description": "A Slack workspace for the OSM Japan community {signupUrl}"
             },
             "OSM-japan-twitter": {
                 "name": "OpenStreetMap Japan Twitter",
@@ -11364,6 +11368,14 @@
                 "name": "OpenStreetMap Germany Matrix",
                 "description": "Join #osm-de:matrix.org at https://riot.im/app/#/room/%23osm-de:matrix.org"
             },
+            "de-mv-mailinglist": {
+                "name": "Mecklenburg-Vorpommern Mailing List",
+                "description": "This is the mailing list for the OSM community of Mecklenburg-Vorpommern"
+            },
+            "de-mv-twitter": {
+                "name": "OpenStreetMap Mecklenburg-Vorpommern Twitter",
+                "description": "Follow us on Twitter: {url}"
+            },
             "de-ostwestfalen-lippe-mailinglist": {
                 "name": "OWL Mailing List",
                 "description": "This is the mailing list for the Ostwestfalen-Lippe OSM community"
@@ -11407,6 +11419,22 @@
             "fi-mailinglist": {
                 "name": "Talk-fi Mailing List",
                 "description": "Talk-fi is the official mailing list for the Finnish OSM community"
+            },
+            "fr-35-wiki": {
+                "name": "OpenStreetMap Rennes Wiki page",
+                "description": "Wiki page of Rennes OSM local group"
+            },
+            "fr-bzh-mailinglist": {
+                "name": "Talk-fr-bzh Mailing List",
+                "description": "Talk-fr-bzh mailing list"
+            },
+            "fr-bzh-twitter": {
+                "name": "OSM-BZH on Twitter",
+                "description": "OpenStreetMap BZH on Twitter: {url}"
+            },
+            "fr-bzh-website": {
+                "name": "OpenStreetMap BZH Website",
+                "description": "The map which speaks Breton"
             },
             "fr-chapter": {
                 "name": "OpenStreetMap France Local Chapter",
@@ -11453,6 +11481,18 @@
                 "name": "GeoGeeks Perth Meetup",
                 "description": "Perth-based meetup group for people interested in mapping, geospatial data, and open source. We'll be working on anything that involves a sense of place."
             },
+            "gr-forum": {
+                "name": "OpenStreetMap GR forum",
+                "description": "OpenStreetMap Greece web forum"
+            },
+            "gr-mailinglist": {
+                "name": "Talk-gr Mailing List",
+                "description": "Talk-gr is the official mailing list for the Greek OSM community"
+            },
+            "gr-matrix": {
+                "name": "OpenStreetMap Greece Matrix",
+                "description": "Join #osm-gr:matrix.org at https://riot.im/app/#/room/%23osm-gr:matrix.org"
+            },
             "guatemala-telegram": {
                 "name": "OSM Guatemala on Telegram",
                 "description": "OpenStreetMap Guatemala Telegram chat"
@@ -11461,6 +11501,10 @@
                 "name": "OpenStreetMap Croatia Facebook group",
                 "description": "OpenStreetMap Croatia Facebook group"
             },
+            "hr-forum": {
+                "name": "OSM Croaria Forum",
+                "description": "OpenStreetMap Croatia Forum"
+            },
             "hr-irc": {
                 "name": "OpenStreetMap Croatia on IRC",
                 "description": "Join #osm-hr on irc.freenode.org (port 6667)"
@@ -11468,6 +11512,10 @@
             "hr-mailinglist": {
                 "name": "Talk-hr Mailing List",
                 "description": "Talk-hr mailing list"
+            },
+            "hr-wiki": {
+                "name": "OpenStreetMap Wikiproject Croatia",
+                "description": "Wikiproject page for Croatia"
             },
             "hu-facebook": {
                 "name": "OpenStreetMap HU on Facebook",
@@ -11699,6 +11747,10 @@
                 "name": "OpenStreetMap Ghana on Twitter",
                 "description": "Follow us on Twitter: {url}"
             },
+            "osm-hr": {
+                "name": "OpenStreetMap Croatia",
+                "description": "The platform for information on OpenStreetMap in Croatia"
+            },
             "osm-india-forum": {
                 "name": "OpenStreetMap India forum",
                 "description": "OpenStreetMap India web forum"
@@ -11862,6 +11914,10 @@
                 "name": "OpenStreetMap Freemap Slovensko on Twitter",
                 "description": "OpenStreetMap Freemap Slovensko on Twitter: {url}"
             },
+            "talk-africa": {
+                "name": "Talk-africa Mailing List",
+                "description": "Talk-africa is the official mailing list for the African OSM community."
+            },
             "talk-au": {
                 "name": "Talk-au Mailing List",
                 "description": "Place for Aussie mappers to chat"
@@ -11891,6 +11947,10 @@
             "talk-nz": {
                 "name": "Talk-nz Mailing List",
                 "description": "New Zealand's OSM community talk"
+            },
+            "talk-tz": {
+                "name": "Talk-tz Mailing List",
+                "description": "Talk-tz is the official mailing list for the Tanzanian OSM community."
             },
             "talk-za": {
                 "name": "Talk-za Mailing List",
