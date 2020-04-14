@@ -29,6 +29,9 @@ export function coreContext() {
   context.version = '2.17.2';
   context.privacyVersion = '20200407';
 
+  // iD will alter the hash so cache the parameters intended to setup the session
+  context.initialHashParams = window.location.hash ? utilStringQs(window.location.hash) : {};
+
   context.isFirstSession = !prefs('sawSplash') && !prefs('sawPrivacyVersion');
 
 
@@ -455,10 +458,8 @@ export function coreContext() {
     // might matter if dependents make calls to each other. Be wary of async calls.
     function initializeDependents() {
 
-      const hash = utilStringQs(window.location.hash);
-
-      if (hash.presets) {
-        presetManager.addablePresetIDs(new Set(hash.presets.split(',')));
+      if (context.initialHashParams.presets) {
+        presetManager.addablePresetIDs(new Set(context.initialHashParams.presets.split(',')));
       }
 
       // kick off some async work
@@ -477,8 +478,8 @@ export function coreContext() {
       _features.init();
       _photos.init();
 
-      if (services.maprules && hash.maprules) {
-        d3_json(hash.maprules)
+      if (services.maprules && context.initialHashParams.maprules) {
+        d3_json(context.initialHashParams.maprules)
           .then(mapcss => {
             services.maprules.init();
             mapcss.forEach(mapcssSelector => services.maprules.addRule(mapcssSelector));
