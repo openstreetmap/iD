@@ -67,7 +67,7 @@ describe('iD.validations.crossing_ways', function () {
     function verifySingleCrossingIssue(issues, connectionTags) {
         // each entity must produce an identical issue
         expect(issues).to.have.lengthOf(2);
-        expect(issues[0].hash).to.eql(issues[1].hash);
+        expect(issues[0].id).to.eql(issues[1].id);
 
         for (var i in issues) {
             var issue = issues[i];
@@ -218,6 +218,11 @@ describe('iD.validations.crossing_ways', function () {
         verifySingleCrossingIssue(validate(), { highway: 'crossing', crossing: 'marked' });
     });
 
+    it('flags road=track crossing footway', function() {
+        createWaysWithOneCrossingPoint({ highway: 'track' }, { highway: 'footway' });
+        verifySingleCrossingIssue(validate(), {});
+    });
+
     it('flags cycleway crossing cycleway', function() {
         createWaysWithOneCrossingPoint({ highway: 'cycleway' }, { highway: 'cycleway' });
         verifySingleCrossingIssue(validate(), {});
@@ -280,6 +285,11 @@ describe('iD.validations.crossing_ways', function () {
 
     it('flags road bridge crossing aqueduct on the same layer', function() {
         createWaysWithOneCrossingPoint({ highway: 'residential', bridge: 'yes' }, { waterway: 'canal', bridge: 'aqueduct' });
+        verifySingleCrossingIssue(validate(), null);
+    });
+
+    it('flags road tunnel crossing waterway tunnel on the same layer', function() {
+        createWaysWithOneCrossingPoint({ highway: 'residential', tunnel: 'yes' }, { waterway: 'canal', tunnel: 'yes' });
         verifySingleCrossingIssue(validate(), null);
     });
 
@@ -369,14 +379,47 @@ describe('iD.validations.crossing_ways', function () {
         );
     }
 
+    it('ignores road line crossing relation with building=yes without a type', function() {
+        createWayAndRelationWithOneCrossingPoint({ highway: 'residential' }, { building: 'yes' });
+        var issues = validate();
+        expect(issues).to.have.lengthOf(0);
+    });
+
+    it('ignores road line crossing type=building relation', function() {
+        createWayAndRelationWithOneCrossingPoint({ highway: 'residential' }, { building: 'yes', type: 'building' });
+        var issues = validate();
+        expect(issues).to.have.lengthOf(0);
+    });
+
+    it('ignores road line crossing waterway multipolygon relation', function() {
+        createWayAndRelationWithOneCrossingPoint({ highway: 'residential' }, { waterway: 'river', type: 'multipolygon' });
+        var issues = validate();
+        expect(issues).to.have.lengthOf(0);
+    });
+
     it('flags road line crossing building multipolygon relation', function() {
         createWayAndRelationWithOneCrossingPoint({ highway: 'residential' }, { building: 'yes', type: 'multipolygon' });
         verifySingleCrossingIssue(validate(), null);
     });
 
+    it('flags footway line crossing footway multipolygon relation', function() {
+        createWayAndRelationWithOneCrossingPoint({ highway: 'footway' }, { highway: 'footway', type: 'multipolygon' });
+        verifySingleCrossingIssue(validate(), {});
+    });
+
     it('flags road line crossing footway multipolygon relation', function() {
         createWayAndRelationWithOneCrossingPoint({ highway: 'residential' }, { highway: 'footway', type: 'multipolygon' });
-        verifySingleCrossingIssue(validate(), { highway: 'crossing' });
+        verifySingleCrossingIssue(validate(), {});
+    });
+
+    it('flags railway line crossing footway multipolygon relation', function() {
+        createWayAndRelationWithOneCrossingPoint({ railway: 'tram' }, { highway: 'footway', type: 'multipolygon' });
+        verifySingleCrossingIssue(validate(), {});
+    });
+
+    it('flags waterway line crossing footway multipolygon relation', function() {
+        createWayAndRelationWithOneCrossingPoint({ waterway: 'stream' }, { highway: 'footway', type: 'multipolygon' });
+        verifySingleCrossingIssue(validate(), {});
     });
 
 });
