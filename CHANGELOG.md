@@ -49,10 +49,16 @@ _Breaking changes, which may affect downstream projects or sites that embed iD, 
 
 #### :white_check_mark: Validation
 * Upgrade `car` to `motorcar` on vehicle charging stations ([#7339], thanks [@nlehuby])
+* Warn about ways crossing highway areas ([#7455])
+* Don't suggest adding bridges or tunnels to ways crossing highway multipolygons ([#7472])
+* Don't suggest adding tunnels to highways crossing waterways ([#7447])
 * Deprecate `bicycle:oneway` key ([#7281])
 * Deprecate `building:height` and `building:min_height` keys ([#7285])
 * Deprecate tags: `bridge=1`, `building:material=Brick`, `disabled_spaces`, `man_made=telephone_exchange`, `tunnel=1`
 
+[#7455]: https://github.com/openstreetmap/iD/issues/7455
+[#7472]: https://github.com/openstreetmap/iD/issues/7472
+[#7447]: https://github.com/openstreetmap/iD/issues/7447
 [#7339]: https://github.com/openstreetmap/iD/issues/7339
 [#7281]: https://github.com/openstreetmap/iD/issues/7281
 [#7285]: https://github.com/openstreetmap/iD/issues/7285
