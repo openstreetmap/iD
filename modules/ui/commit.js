@@ -68,17 +68,16 @@ export function uiCommit(context) {
         if (!_changeset) {
 
             // load in the URL hash values, if any
-            var hash = context.ui().hash;
-            if (hash.comment) {
-                context.storage('comment', hash.comment);
+            if (context.initialHashParams.comment) {
+                context.storage('comment', context.initialHashParams.comment);
                 context.storage('commentDate', Date.now());
             }
-            if (hash.source) {
-                context.storage('source', hash.source);
+            if (context.initialHashParams.source) {
+                context.storage('source', context.initialHashParams.source);
                 context.storage('commentDate', Date.now());
             }
-            if (hash.hashtags) {
-                context.storage('hashtags', hash.hashtags);
+            if (context.initialHashParams.hashtags) {
+                context.storage('hashtags', context.initialHashParams.hashtags);
             }
 
             var detected = utilDetect();

@@ -28,6 +28,9 @@ export function coreContext() {
     context.version = '2.17.2';
     context.privacyVersion = '20200407';
 
+    // iD will alter the hash so cache the parameters intended to setup the session
+    context.initialHashParams = window.location.hash ? utilStringQs(window.location.hash) : {};
+
     // create a special translation that contains the keys in place of the strings
     var tkeys = JSON.parse(JSON.stringify(dataEn));  // clone deep
     var parents = [];
@@ -532,8 +535,8 @@ export function coreContext() {
     photos = rendererPhotos(context);
     presets = presetIndex(context);
 
-    if (services.maprules && utilStringQs(window.location.hash).maprules) {
-        var maprules = utilStringQs(window.location.hash).maprules;
+    if (services.maprules && context.initialHashParams.maprules) {
+        var maprules = context.initialHashParams.maprules;
         d3_json(maprules)
             .then(function(mapcss) {
                 services.maprules.init();
@@ -567,7 +570,7 @@ export function coreContext() {
     features.init();
     photos.init();
 
-    var presetsParameter = utilStringQs(window.location.hash).presets;
+    var presetsParameter = context.initialHashParams.presets;
     if (presetsParameter && presetsParameter.indexOf('://') !== -1) {
         // assume URL of external presets file
 
