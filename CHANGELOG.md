@@ -31,7 +31,7 @@ _Breaking changes, which may affect downstream projects or sites that embed iD, 
 -->
 
 # 2.17.3
-##### Planned: 2020-Apr-14
+##### Planned: 2020-Apr-16
 
 #### :boom: Breaking Changes
 * Rename the default branch, previously `2.x`, to `develop`,
@@ -162,6 +162,7 @@ _Breaking changes, which may affect downstream projects or sites that embed iD, 
 [@ferdinand0101]: https://github.com/ferdinand0101
 
 #### :hammer: Development
+* Define main package file as `dist/iD.min.js` ([#7449], thanks [@willemarcel])
 * Scope iD's CSS to its container under the `ideditor` class ([#7437])
 * Make embedded iD's container a local stacking context ([#7457])
 * Fix combobox suggestion list placement when embedding iD ([#7458])
@@ -171,6 +172,8 @@ _Breaking changes, which may affect downstream projects or sites that embed iD, 
 [#7457]: https://github.com/openstreetmap/iD/issues/7457
 [#7458]: https://github.com/openstreetmap/iD/issues/7458
 [#7504]: https://github.com/openstreetmap/iD/issues/7504
+
+[@willemarcel]: https://github.com/willemarcel
 
 # 2.17.2
 ##### 2020-Feb-14
