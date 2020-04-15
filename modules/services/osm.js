@@ -13,7 +13,7 @@ import { osmEntity, osmNode, osmNote, osmRelation, osmWay } from '../osm';
 import { utilArrayChunk, utilArrayGroupBy, utilArrayUniq, utilRebind, utilTiler, utilQsString } from '../util';
 
 
-var tiler = utilTiler();
+var _tiler = utilTiler();
 var dispatch = d3_dispatch('apiStatusChange', 'authLoading', 'authDone', 'change', 'loading', 'loaded', 'loadedNotes');
 var urlroot = 'https://www.openstreetmap.org';
 var oauth = osmAuth({
@@ -34,6 +34,7 @@ var _changeset = {};
 var _deferred = new Set();
 var _connectionID = 1;
 var _tileZoom = 16;
+var _maxRequestableZoom = 18;
 var _noteZoom = 12;
 var _rateLimitError;
 var _userChangesets;
@@ -572,7 +573,7 @@ export default {
             // 400 Bad Request, 401 Unauthorized, 403 Forbidden
             // Logout and retry the request..
             if (isAuthenticated && err && err.status &&
-                    (err.status === 400 || err.status === 401 || err.status === 403)) {
+                    (err.status === 401 || err.status === 403)) {
                 that.logout();
                 that.loadFromAPI(path, callback, options);
 
@@ -960,7 +961,7 @@ export default {
         if (_off) return;
 
         // determine the needed tiles to cover the view
-        var tiles = tiler.zoomExtent([_tileZoom, _tileZoom]).getTiles(projection);
+        var tiles = _tiler.zoomExtent([_tileZoom, _tileZoom]).getTiles(projection);
 
         // abort inflight requests that are no longer needed
         var hadRequests = hasInflightRequests(_tileCache);
@@ -995,6 +996,8 @@ export default {
             options
         );
 
+        var that = this;
+
         function tileCallback(err, parsed) {
             delete _tileCache.inflight[tile.id];
             if (!err) {
@@ -1003,6 +1006,20 @@ export default {
                 var bbox = tile.extent.bbox();
                 bbox.id = tile.id;
                 _tileCache.rtree.insert(bbox);
+
+            } else if (err.status === 400 && tile.xyz[2] < _maxRequestableZoom) {
+                // assume that this request exceeded the node limit,
+                // subdivide the tile
+
+                delete _tileCache.toLoad[tile.id];
+
+                var subtiles = utilTiler.subdivide(tile);
+
+                subtiles.forEach(function(tile) {
+                    that.loadTile(tile, callback);
+                });
+
+                return;
             }
             if (callback) {
                 callback(err, Object.assign({ data: parsed }, tile));
@@ -1030,7 +1047,7 @@ export default {
         var k = geoZoomToScale(_tileZoom + 1);
         var offset = geoRawMercator().scale(k)(loc);
         var projection = geoRawMercator().transform({ k: k, x: -offset[0], y: -offset[1] });
-        var tiles = tiler.zoomExtent([_tileZoom, _tileZoom]).getTiles(projection);
+        var tiles = _tiler.zoomExtent([_tileZoom, _tileZoom]).getTiles(projection);
 
         tiles.forEach(function(tile) {
             if (_tileCache.toLoad[tile.id] || _tileCache.loaded[tile.id] || _tileCache.inflight[tile.id]) return;
@@ -1056,7 +1073,7 @@ export default {
         }, 750);
 
         // determine the needed tiles to cover the view
-        var tiles = tiler.zoomExtent([_noteZoom, _noteZoom]).getTiles(projection);
+        var tiles = _tiler.zoomExtent([_noteZoom, _noteZoom]).getTiles(projection);
 
         // abort inflight requests that are no longer needed
         abortUnwantedRequests(_noteCache, tiles);

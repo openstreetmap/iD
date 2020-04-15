@@ -1,4 +1,5 @@
 import { range as d3_range } from 'd3-array';
+import { geoMercatorRaw as d3_geoMercatorRaw } from 'd3-geo';
 import { geoExtent, geoScaleToZoom } from '../geo';
 
 
@@ -187,4 +188,88 @@ export function utilTiler() {
 
 
     return tiler;
+}
+
+// Returns an array of four tiles representing the given `tile` at the next higher
+// zoom level. Note that tile rows and columns are >=0 from the top left while
+// the extent is in geographic coordinates.
+utilTiler.subdivide = function(tile) {
+
+    function geo2Proj(lon, lat) {
+        return d3_geoMercatorRaw(lon * Math.PI / 180, lat * Math.PI / 180);
+    }
+
+    function proj2Geo(x, y) {
+        var rad = d3_geoMercatorRaw.invert(x, y);
+        return [rad[0] * 180 / Math.PI, rad[1] * 180 / Math.PI];
+    }
+
+    // must use the projected bounding box
+    var pMin = geo2Proj(tile.extent[0][0], tile.extent[0][1]);
+    var pMax = geo2Proj(tile.extent[1][0], tile.extent[1][1]);
+
+    // width and height should be the same for square tiles
+    var w = pMax[0] - pMin[0];
+    var h = pMax[1] - pMin[1];
+
+    var x = tile.xyz[0];
+    var y = tile.xyz[1];
+    var z = tile.xyz[2];
+
+    var subtiles = [
+        // top left
+        {
+            xyz: [
+                x * 2,
+                y * 2,
+                z + 1
+            ],
+            extent: geoExtent(
+                proj2Geo(pMin[0], pMin[1] + h/2),
+                proj2Geo(pMin[0] + w/2, pMin[1] + h)
+            )
+        },
+        // bottom left
+        {
+            xyz: [
+                x * 2,
+                y * 2 + 1,
+                z + 1
+            ],
+            extent: geoExtent(
+                proj2Geo(pMin[0], pMin[1]),
+                proj2Geo(pMin[0] + w/2, pMin[1] + h/2)
+            )
+        },
+        // top right
+        {
+            xyz: [
+                x * 2 + 1,
+                y * 2,
+                z + 1
+            ],
+            extent: geoExtent(
+                proj2Geo(pMin[0] + w/2, pMin[1] + h/2),
+                proj2Geo(pMin[0] + w, pMin[1] + h)
+            )
+        },
+        // bottom right
+        {
+            xyz: [
+                x * 2 + 1,
+                y * 2 + 1,
+                z + 1
+            ],
+            extent: geoExtent(
+                proj2Geo(pMin[0] + w/2, pMin[1]),
+                proj2Geo(pMin[0] + w, pMin[1] + h/2)
+            )
+        }
+    ];
+
+    subtiles.forEach(function(tile) {
+        tile.id = tile.xyz.toString();
+    });
+
+    return subtiles;
 }
