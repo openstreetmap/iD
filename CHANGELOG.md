@@ -162,7 +162,7 @@ _Breaking changes, which may affect downstream projects or sites that embed iD, 
 [@ferdinand0101]: https://github.com/ferdinand0101
 
 #### :hammer: Development
-* Define main package file as `dist/iD.min.js` ([#7449], thanks [@willemarcel])
+* Define the main package file as `dist/iD.min.js` ([#7449], thanks [@willemarcel])
 * Scope iD's CSS to its container under the `ideditor` class ([#7437])
 * Make embedded iD's container a local stacking context ([#7457])
 * Fix combobox suggestion list placement when embedding iD ([#7458])
