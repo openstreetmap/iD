@@ -272,4 +272,4 @@ utilTiler.subdivide = function(tile) {
     });
 
     return subtiles;
-}
+};
