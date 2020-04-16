@@ -90,6 +90,7 @@ function buildData() {
     'dist/data/*',
     'svg/fontawesome/*.svg',
   ]);
+
   readQAIssueIcons(faIcons, tnpIcons);
   let categories = generateCategories(tstrings, faIcons, tnpIcons);
   let fields = generateFields(tstrings, faIcons, tnpIcons, searchableFieldIDs);
@@ -104,17 +105,18 @@ function buildData() {
   validatePresetFields(presets, fields);
   validateDefaults(defaults, categories, presets);
 
+  fs.writeFileSync('data/presets/categories.json', prettyStringify(categories, { maxLength: 9999 }) );
+  fs.writeFileSync('data/presets/fields.json', prettyStringify(fields, { maxLength: 9999 }) );
+  fs.writeFileSync('data/presets/presets.json', prettyStringify(presets, { maxLength: 9999 }) );
+  fs.writeFileSync('data/presets.yaml', translationsToYAML(translations) );
+  fs.writeFileSync('data/taginfo.json', prettyStringify(taginfo, { maxLength: 9999 }) );
+  fs.writeFileSync('data/territory_languages.json', prettyStringify(territoryLanguages, { maxLength: 9999 }) );
+  writeEnJson(tstrings);
+  writeFaIcons(faIcons);
+  writeTnpIcons(tnpIcons);
+
   // Save individual data files
   let tasks = [
-    writeFileProm('data/presets/categories.json', prettyStringify(categories, { maxLength: 9999 }) ),
-    writeFileProm('data/presets/fields.json', prettyStringify(fields, { maxLength: 9999 }) ),
-    writeFileProm('data/presets/presets.json', prettyStringify(presets, { maxLength: 9999 }) ),
-    writeFileProm('data/presets.yaml', translationsToYAML(translations) ),
-    writeFileProm('data/taginfo.json', prettyStringify(taginfo, { maxLength: 9999 }) ),
-    writeFileProm('data/territory_languages.json', prettyStringify(territoryLanguages, { maxLength: 9999 }) ),
-    writeEnJson(tstrings),
-    writeFaIcons(faIcons),
-    writeTnpIcons(tnpIcons),
     minifyJSON('data/presets/categories.json', 'dist/data/preset_categories.min.json'),
     minifyJSON('data/presets/defaults.json', 'dist/data/preset_defaults.min.json'),
     minifyJSON('data/presets/fields.json', 'dist/data/preset_fields.min.json'),
@@ -772,9 +774,9 @@ function translationsToYAML(translations) {
 
 
 function writeEnJson(tstrings) {
-  const readCoreYaml = readFileProm('data/core.yaml', 'utf8');
-  const readImagery = readFileProm('node_modules/editor-layer-index/i18n/en.yaml', 'utf8');
-  const readCommunity = readFileProm('node_modules/osm-community-index/i18n/en.yaml', 'utf8');
+  const readCoreYaml = fs.readFileSync('data/core.yaml', 'utf8');
+  const readImagery = fs.readFileSync('node_modules/editor-layer-index/i18n/en.yaml', 'utf8');
+  const readCommunity = fs.readFileSync('node_modules/osm-community-index/i18n/en.yaml', 'utf8');
 
   return Promise.all([readCoreYaml, readImagery, readCommunity])
     .then(data => {
@@ -787,7 +789,7 @@ function writeEnJson(tstrings) {
       enjson.en.imagery = imagery.en.imagery;
       enjson.en.community = community.en;
 
-      return writeFileProm('dist/locales/en.json', JSON.stringify(enjson, null, 4));
+      return fs.writeFileSync('dist/locales/en.json', JSON.stringify(enjson, null, 4));
     });
 }
 
@@ -798,7 +800,7 @@ function writeFaIcons(faIcons) {
     const name = key.substring(4);
     const def = fontawesome.findIconDefinition({ prefix: prefix, iconName: name });
     try {
-      writeFileProm(`svg/fontawesome/${key}.svg`, fontawesome.icon(def).html);
+      fs.writeFileSync(`svg/fontawesome/${key}.svg`, fontawesome.icon(def).html);
     } catch (error) {
       console.error(`Error: No FontAwesome icon for ${key}`);
       throw (error);
@@ -880,31 +882,11 @@ function handleTheNounProjectResponse(err, resp, body) {
       return;
     }
     try {
-      writeFileProm(`svg/the-noun-project/${icon.id}.svg`, svg);
+      fs.writeFileSync(`svg/the-noun-project/${icon.id}.svg`, svg);
     } catch (error) {
       console.error(error);
       throw (error);
     }
-  });
-}
-
-
-function writeFileProm(path, content) {
-  return new Promise((resolve, reject) => {
-    fs.writeFile(path, content, (err) => {
-      if (err) return reject(err);
-      resolve();
-    });
-  });
-}
-
-
-function readFileProm(path, options) {
-  return new Promise((resolve, reject) => {
-    fs.readFile(path, options, (err, data) => {
-      if (err) return reject(err);
-      resolve(data);
-    });
   });
 }
 
