@@ -97,7 +97,7 @@
     "name-suggestion-index": "4.0.0",
     "npm-run-all": "^4.0.0",
     "object-inspect": "0.4.0",
-    "osm-community-index": "2.0.0",
+    "osm-community-index": "2.1.1",
     "phantomjs-prebuilt": "~2.1.11",
     "postcss": "^7.0.27",
     "postcss-selector-prepend": "^0.5.0",

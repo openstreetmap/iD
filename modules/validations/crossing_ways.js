@@ -135,6 +135,11 @@ export function validationCrossingWays(context) {
     function tagsForConnectionNodeIfAllowed(entity1, entity2, graph) {
         var featureType1 = getFeatureType(entity1, graph);
         var featureType2 = getFeatureType(entity2, graph);
+
+        var geometry1 = entity1.geometry(graph);
+        var geometry2 = entity2.geometry(graph);
+        var bothLines = geometry1 === 'line' && geometry2 === 'line';
+
         if (featureType1 === featureType2) {
             if (featureType1 === 'highway') {
                 var entity1IsPath = osmPathHighwayTagValues[entity1.tags.highway];
@@ -150,10 +155,10 @@ export function validationCrossingWays(context) {
                     var pathFeature = entity1IsPath ? entity1 : entity2;
                     if (['marked', 'unmarked'].indexOf(pathFeature.tags.crossing) !== -1) {
                         // if the path is a crossing, match the crossing type
-                        return { highway: 'crossing', crossing: pathFeature.tags.crossing };
+                        return bothLines ? { highway: 'crossing', crossing: pathFeature.tags.crossing } : {};
                     }
                     // don't add a `crossing` subtag to ambiguous crossings
-                    return { highway: 'crossing' };
+                    return bothLines ? { highway: 'crossing' } : {};
                 }
                 return {};
             }
@@ -167,10 +172,10 @@ export function validationCrossingWays(context) {
                     if (osmPathHighwayTagValues[entity1.tags.highway] ||
                         osmPathHighwayTagValues[entity2.tags.highway]) {
                         // path-rail connections use this tag
-                        return { railway: 'crossing' };
+                        return bothLines ? { railway: 'crossing' } : {};
                     } else {
                         // road-rail connections use this tag
-                        return { railway: 'level_crossing' };
+                        return bothLines ? { railway: 'level_crossing' } : {};
                     }
                 }
 
@@ -184,7 +189,7 @@ export function validationCrossingWays(context) {
                         // do not allow fords on major highways
                         return null;
                     }
-                    return { ford: 'yes' };
+                    return bothLines ? { ford: 'yes' } : {};
                 }
             }
         }
@@ -302,8 +307,9 @@ export function validationCrossingWays(context) {
                     (!member.role || member.role === 'outer' || member.role === 'inner')) {
                     var entity = graph.hasEntity(member.id);
                     // don't add duplicates
-                    if (!entity || array.indexOf(entity) !== -1) return;
-                    array.push(entity);
+                    if (entity && array.indexOf(entity) === -1) {
+                        array.push(entity);
+                    }
                 }
                 return array;
             }, []);
