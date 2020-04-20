@@ -8,8 +8,7 @@
         "capacity",
         "takeaway",
         "delivery",
-        "smoking",
-        "diaper"
+        "smoking"
     ],
     "geometry": [
         "point",
