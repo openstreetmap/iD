@@ -2,11 +2,14 @@
     "icon": "maki-religious-christian",
     "fields": [
         "name",
-        "inscription"
+        "inscription",
+        "material"
     ],
     "moreFields": [
         "{historic}",
-        "material"
+        "start_date",
+        "religion",
+        "denomination"
     ],
     "geometry": [
         "point",
