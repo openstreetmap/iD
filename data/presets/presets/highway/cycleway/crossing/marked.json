@@ -1,0 +1,31 @@
+{
+    "icon": "temaki-cyclist_crosswalk",
+    "fields": [
+        "crossing",
+        "access",
+        "surface",
+        "tactile_paving",
+        "crossing/island"
+    ],
+    "geometry": [
+        "line"
+    ],
+    "tags": {
+        "highway": "cycleway",
+        "cycleway": "crossing",
+        "crossing": "marked"
+    },
+    "reference": {
+        "key": "cycleway",
+        "value": "crossing"
+    },
+    "terms": [
+        "cycle crosswalk",
+        "cycle path crossing",
+        "cycleway crossing",
+        "bicycle crossing",
+        "bike crossing"
+    ],
+    "matchScore": 0.95,
+    "name": "Marked Cycle Crossing"
+}

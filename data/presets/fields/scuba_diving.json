@@ -1,0 +1,15 @@
+{
+    "key": "scuba_diving:",
+    "type": "multiCombo",
+    "label": "Services",
+    "options": [
+        "repair",
+        "courses",
+        "rental",
+        "filling",
+        "air_filling",
+        "nitrox_filling",
+        "trimix_filling",
+        "oxygen_filling"
+    ]
+}

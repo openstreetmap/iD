@@ -1,18 +1,14 @@
 {
-    "icon": "commercial",
-    "fields": [
-        "address",
-        "building_area",
-        "opening_hours"
-    ],
+    "icon": "maki-suitcase",
     "geometry": [
         "point",
-        "vertex",
         "area"
     ],
     "tags": {
         "office": "therapist"
     },
-    "terms": [],
-    "name": "Therapist"
+    "terms": [
+        "therapy"
+    ],
+    "name": "Therapist Office"
 }

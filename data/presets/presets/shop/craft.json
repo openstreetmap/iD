@@ -1,11 +1,5 @@
 {
-    "icon": "shop",
-    "fields": [
-        "operator",
-        "address",
-        "building_area",
-        "opening_hours"
-    ],
+    "icon": "fas-cut",
     "geometry": [
         "point",
         "area"
@@ -18,5 +12,5 @@
         "paint*",
         "frame"
     ],
-    "name": "Arts and Crafts Store"
+    "name": "Arts & Crafts Store"
 }

@@ -1,18 +1,26 @@
 {
-    "icon": "park2",
+    "icon": "maki-park-alt1",
     "fields": [
+        "name",
         "leaf_type",
         "leaf_cycle"
     ],
     "geometry": [
-        "point",
-        "area"
+        "area",
+        "point"
     ],
     "tags": {
         "natural": "wood"
     },
     "terms": [
-        "tree"
+        "boreal",
+        "forest",
+        "forrest",
+        "taiga",
+        "tree",
+        "trees",
+        "woodlands",
+        "woods"
     ],
-    "name": "Wood"
+    "name": "Natural Wood"
 }

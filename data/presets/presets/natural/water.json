@@ -1,6 +1,15 @@
 {
+    "icon": "maki-water",
     "fields": [
-        "water"
+        "name",
+        "water",
+        "intermittent"
+    ],
+    "moreFields": [
+        "fishing",
+        "gnis/feature_id",
+        "salt",
+        "tidal"
     ],
     "geometry": [
         "area"
@@ -8,6 +17,5 @@
     "tags": {
         "natural": "water"
     },
-    "icon": "water",
     "name": "Water"
 }

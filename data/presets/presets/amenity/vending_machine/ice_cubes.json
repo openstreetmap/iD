@@ -1,0 +1,20 @@
+{
+    "icon": "temaki-vending_ice",
+    "geometry": [
+        "point",
+        "vertex"
+    ],
+    "terms": [
+        "cubes",
+        "ice"
+    ],
+    "tags": {
+        "amenity": "vending_machine",
+        "vending": "ice_cubes"
+    },
+    "reference": {
+        "key": "vending",
+        "value": "ice_cubes"
+    },
+    "name": "Ice Vending Machine"
+}

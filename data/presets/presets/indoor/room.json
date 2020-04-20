@@ -1,0 +1,29 @@
+{
+    "fields": [
+        "level",
+        "name",
+        "ref_room_number",
+        "room",
+        "height"
+    ],
+    "geometry": [
+        "area"
+    ],
+    "tags": {
+        "indoor": "room"
+    },
+    "terms": [
+        "antechamber",
+        "anteroom",
+        "atrium",
+        "cell",
+        "chamber",
+        "concourse",
+        "foyer",
+        "indoor room",
+        "lobby",
+        "vestibule"
+    ],
+    "matchScore": 0.8,
+    "name": "Room"
+}

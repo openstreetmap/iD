@@ -1,9 +1,25 @@
 {
-    "icon": "hospital",
+    "icon": "maki-doctor",
     "fields": [
+        "name",
+        "operator",
+        "operator/type",
+        "healthcare/speciality",
         "address",
         "building_area",
         "opening_hours"
+    ],
+    "moreFields": [
+        "air_conditioning",
+        "brand",
+        "email",
+        "fax",
+        "gnis/feature_id",
+        "level",
+        "payment_multi",
+        "phone",
+        "website",
+        "wheelchair"
     ],
     "geometry": [
         "point",
@@ -15,6 +31,14 @@
     ],
     "tags": {
         "amenity": "clinic"
+    },
+    "addTags": {
+        "amenity": "clinic",
+        "healthcare": "clinic"
+    },
+    "reference": {
+        "key": "amenity",
+        "value": "clinic"
     },
     "name": "Clinic"
 }

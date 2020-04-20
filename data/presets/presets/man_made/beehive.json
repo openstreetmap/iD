@@ -1,0 +1,28 @@
+{
+    "icon": "fas-archive",
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "fields": [
+        "ref",
+        "operator",
+        "seasonal",
+        "height",
+        "colour"
+    ],
+    "moreFields": [
+        "manufacturer"
+    ],
+    "terms": [
+        "apiary",
+        "beekeeper",
+        "farm",
+        "honey",
+        "pollination"
+    ],
+    "tags": {
+        "man_made": "beehive"
+    },
+    "name": "Beehive"
+}

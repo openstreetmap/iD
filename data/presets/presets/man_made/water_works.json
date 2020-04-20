@@ -1,8 +1,12 @@
 {
-    "icon": "water",
+    "icon": "temaki-powered_pump",
     "fields": [
+        "name",
         "operator",
         "address"
+    ],
+    "moreFields": [
+        "gnis/feature_id"
     ],
     "geometry": [
         "point",

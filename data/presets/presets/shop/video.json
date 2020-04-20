@@ -1,17 +1,17 @@
 {
-    "icon": "shop",
-    "fields": [
-        "operator",
-        "address",
-        "building_area",
-        "opening_hours"
+    "icon": "temaki-movie_rental",
+    "moreFields": [
+        "{shop}",
+        "min_age"
     ],
     "geometry": [
         "point",
         "area"
     ],
     "terms": [
-        "DVD"
+        "DVD",
+        "VHS",
+        "video casette"
     ],
     "tags": {
         "shop": "video"

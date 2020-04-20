@@ -1,0 +1,25 @@
+{
+    "icon": "maki-tennis",
+    "fields": [
+        "name",
+        "lit",
+        "access_simple"
+    ],
+    "geometry": [
+        "area",
+        "point"
+    ],
+    "tags": {
+        "leisure": "pitch",
+        "sport": "table_tennis"
+    },
+    "reference": {
+        "key": "sport",
+        "value": "table_tennis"
+    },
+    "terms": [
+        "table tennis",
+        "ping pong"
+    ],
+    "name": "Ping Pong Table"
+}

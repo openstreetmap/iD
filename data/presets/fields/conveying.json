@@ -1,0 +1,13 @@
+{
+    "key": "conveying",
+    "type": "typeCombo",
+    "label": "Movement Direction",
+    "strings": {
+        "options": {
+            "forward": "Forward",
+            "backward": "Backward",
+            "reversible": "Reversible"
+        }
+    }
+
+}

@@ -1,0 +1,16 @@
+{
+    "icon": "iD-highway-unclassified",
+    "name": "Major Roads",
+    "members": [
+        "highway/motorway",
+        "highway/trunk",
+        "highway/primary",
+        "highway/secondary",
+        "highway/tertiary",
+        "highway/motorway_link",
+        "highway/trunk_link",
+        "highway/primary_link",
+        "highway/secondary_link",
+        "highway/tertiary_link"
+    ]
+}

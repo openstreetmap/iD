@@ -1,0 +1,25 @@
+{
+    "icon": "maki-square-stroked",
+    "fields": [
+        "traffic_sign",
+        "traffic_sign/direction",
+        "name"
+    ],
+    "geometry": [
+        "vertex"
+    ],
+    "tags": {
+        "traffic_sign": "city_limit"
+    },
+    "terms": [
+        "town",
+        "village",
+        "hamlet",
+        "boundary",
+        "edge",
+        "border",
+        "road",
+        "highway"
+    ],
+    "name": "City Limit Sign"
+}

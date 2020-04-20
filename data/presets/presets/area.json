@@ -1,8 +1,16 @@
 {
-    "name": "Area",
+    "fields": [
+        "name"
+    ],
+    "geometry": [
+        "area"
+    ],
     "tags": {
         "area": "yes"
     },
-    "geometry": ["area"],
+    "terms": [
+        "polygon"
+    ],
+    "name": "Area",
     "matchScore": 0.1
 }

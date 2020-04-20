@@ -1,0 +1,18 @@
+{
+    "icon": "fas-stamp",
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "tags": {
+        "office": "notary"
+    },
+    "terms": [
+        "clerk",
+        "deeds",
+        "estate",
+        "signature",
+        "wills"
+    ],
+    "name": "Notary Office"
+}

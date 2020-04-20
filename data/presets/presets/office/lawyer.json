@@ -1,18 +1,22 @@
 {
-    "icon": "commercial",
-    "fields": [
-        "address",
-        "building_area",
-        "opening_hours"
-    ],
+    "icon": "fas-balance-scale",
     "geometry": [
         "point",
-        "vertex",
         "area"
     ],
     "tags": {
         "office": "lawyer"
     },
-    "terms": [],
+    "terms": [
+        "advocate",
+        "attorney",
+        "barrister",
+        "counsellor",
+        "counselor",
+        "defender",
+        "lawyer",
+        "legal",
+        "prosecutor"
+    ],
     "name": "Law Office"
 }

@@ -1,0 +1,24 @@
+{
+    "icon": "maki-aerialway",
+    "geometry": [
+        "line"
+    ],
+    "fields": [
+        "name",
+        "oneway_yes",
+        "aerialway/occupancy",
+        "aerialway/capacity",
+        "aerialway/duration",
+        "aerialway/bubble",
+        "aerialway/heating"
+    ],
+    "tags": {
+        "aerialway": "mixed_lift"
+    },
+    "terms": [
+        "aerial cable",
+        "skiing",
+        "snowboarding"
+    ],
+    "name": "Mixed Lift"
+}

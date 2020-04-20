@@ -1,0 +1,18 @@
+{
+    "icon": "maki-hospital",
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "terms": [],
+    "tags": {
+        "amenity": "clinic",
+        "healthcare": "clinic",
+        "healthcare:speciality": "abortion"
+    },
+    "reference": {
+        "key": "amenity",
+        "value": "clinic"
+    },
+    "name": "Abortion Clinic"
+}

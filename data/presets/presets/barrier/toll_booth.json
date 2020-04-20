@@ -1,9 +1,22 @@
 {
+    "icon": "maki-roadblock",
     "fields": [
-        "access"
+        "access",
+        "building_area",
+        "payment_multi",
+        "currency_multi"
+    ],
+    "moreFields": [
+        "address",
+        "email",
+        "fax",
+        "opening_hours",
+        "phone",
+        "website"
     ],
     "geometry": [
-        "vertex"
+        "vertex",
+        "area"
     ],
     "tags": {
         "barrier": "toll_booth"

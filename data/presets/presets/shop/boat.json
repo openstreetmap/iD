@@ -1,0 +1,20 @@
+{
+    "icon": "temaki-boat",
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "terms": [
+        "fishing boat",
+        "jetski",
+        "motorboat",
+        "rowboat",
+        "sailboat",
+        "vessel",
+        "watercraft"
+    ],
+    "tags": {
+        "shop": "boat"
+    },
+    "name": "Boat Store"
+}

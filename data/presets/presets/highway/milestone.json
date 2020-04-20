@@ -1,0 +1,23 @@
+{
+    "icon": "temaki-milestone",
+    "geometry": [
+        "point",
+        "vertex"
+    ],
+    "fields": [
+        "distance",
+        "direction_vertex"
+    ],
+    "tags": {
+        "highway": "milestone"
+    },
+    "terms": [
+        "mile marker",
+        "mile post",
+        "mile stone",
+        "mileage marker",
+        "milemarker",
+        "milepost"
+    ],
+    "name": "Highway Milestone"
+}

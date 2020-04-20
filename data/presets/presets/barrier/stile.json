@@ -1,9 +1,11 @@
 {
+    "icon": "temaki-stile_squeezer",
     "fields": [
-        "access"
+        "access",
+        "stile",
+        "material"
     ],
     "geometry": [
-        "point",
         "vertex"
     ],
     "tags": {

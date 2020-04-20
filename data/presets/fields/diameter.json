@@ -1,0 +1,7 @@
+{
+    "key": "diameter",
+    "type": "combo",
+    "label": "Diameter",
+    "snake_case": false,
+    "placeholder": "5 mm, 10 cm, 15 in…"
+}

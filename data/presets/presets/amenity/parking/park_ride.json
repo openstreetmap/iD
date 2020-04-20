@@ -1,0 +1,29 @@
+{
+    "icon": "temaki-sign_and_car",
+    "geometry": [
+        "area",
+        "point",
+        "vertex"
+    ],
+    "tags": {
+        "amenity": "parking",
+        "park_ride": "yes"
+    },
+    "reference": {
+        "key": "park_ride",
+        "value": "yes"
+    },
+    "terms": [
+        "commuter parking lot",
+        "incentive parking lot",
+        "metro parking lot",
+        "park and pool lot",
+        "park and ride lot",
+        "P+R",
+        "public transport parking lot",
+        "public transit parking lot",
+        "train parking lot"
+    ],
+    "matchScore": 0.95,
+    "name": "Park & Ride Lot"
+}

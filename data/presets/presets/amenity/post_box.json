@@ -1,9 +1,21 @@
 {
-    "icon": "post",
+    "icon": "temaki-post_box",
     "fields": [
         "operator",
         "collection_times",
-        "drive_through"
+        "drive_through",
+        "ref"
+    ],
+    "moreFields": [
+        "access_simple",
+        "brand",
+        "covered",
+        "gnis/feature_id",
+        "height",
+        "indoor",
+        "level",
+        "manufacturer",
+        "wheelchair"
     ],
     "geometry": [
         "point",
@@ -13,8 +25,20 @@
         "amenity": "post_box"
     },
     "terms": [
-        "letter",
-        "post"
+        "drop box",
+        "dropbox",
+        "letter drop",
+        "mail box",
+        "mail collection box",
+        "mail drop",
+        "mail dropoff",
+        "mailbox",
+        "package drop",
+        "pillar box",
+        "pillarbox",
+        "post box",
+        "postal box",
+        "postbox"
     ],
-    "name": "Mailbox"
+    "name": "Mail Drop Box"
 }

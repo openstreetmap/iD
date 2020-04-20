@@ -1,0 +1,17 @@
+{
+    "icon": "fas-ice-cream",
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "tags": {
+        "amenity": "fast_food",
+        "cuisine": "ice_cream"
+    },
+    "reference": {
+        "key": "cuisine",
+        "value": "ice_cream"
+    },
+    "name": "Ice Cream Fast Food",
+    "searchable": false
+}

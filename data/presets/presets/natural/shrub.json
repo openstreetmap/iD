@@ -1,0 +1,21 @@
+{
+    "icon": "temaki-shrub",
+    "fields": [
+        "height"
+    ],
+    "moreFields": [
+        "species/wikidata"
+    ],
+    "geometry": [
+        "point",
+        "vertex"
+    ],
+    "tags": {
+        "natural": "shrub"
+    },
+    "terms": [
+        "bush",
+        "scrub"
+    ],
+    "name": "Shrub"
+}

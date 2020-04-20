@@ -1,0 +1,19 @@
+{
+    "icon": "fas-tape",
+    "fields": [
+        "indoor",
+        "ref",
+        "operator"
+    ],
+    "moreFields": [
+        "level"
+    ],
+    "geometry": [
+        "point",
+        "vertex"
+    ],
+    "tags": {
+        "emergency": "fire_hose"
+    },
+    "name": "Fire Hose"
+}

@@ -1,11 +1,8 @@
 {
+    "icon": "maki-wheelchair",
     "fields": [
-        "operator",
-        "address",
-        "building_area",
-        "opening_hours",
-        "wheelchair",
-        "social_facility_for"
+        "{amenity/social_facility}",
+        "wheelchair"
     ],
     "geometry": [
         "point",
@@ -14,12 +11,18 @@
     "terms": [
         "old",
         "senior",
-        "living"
+        "living",
+        "care home",
+        "assisted living"
     ],
     "tags": {
         "amenity": "social_facility",
         "social_facility": "group_home",
         "social_facility:for": "senior"
+    },
+    "reference": {
+        "key": "social_facility",
+        "value": "group_home"
     },
     "name": "Elderly Group Home"
 }

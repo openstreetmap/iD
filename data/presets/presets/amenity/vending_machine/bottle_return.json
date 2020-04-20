@@ -1,0 +1,23 @@
+{
+    "icon": "temaki-vending_machine",
+    "fields": [
+        "vending",
+        "operator"
+    ],
+    "geometry": [
+        "point",
+        "vertex"
+    ],
+    "terms": [
+        "bottle return"
+    ],
+    "tags": {
+        "amenity": "vending_machine",
+        "vending": "bottle_return"
+    },
+    "reference": {
+        "key": "vending",
+        "value": "bottle_return"
+    },
+    "name": "Bottle Return Machine"
+}

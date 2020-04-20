@@ -1,0 +1,29 @@
+{
+    "icon": "fas-person-booth",
+    "fields": [
+        "name",
+        "operator",
+        "payment_multi",
+        "wheelchair"
+    ],
+    "moreFields": [
+        "brand",
+        "indoor",
+        "level"
+    ],
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "terms": [
+        "photobooth",
+        "photo",
+        "booth",
+        "kiosk",
+        "camera"
+    ],
+    "tags": {
+        "amenity": "photo_booth"
+    },
+    "name": "Photo Booth"
+}

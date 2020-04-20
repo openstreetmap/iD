@@ -1,0 +1,30 @@
+{
+    "icon": "maki-pitch",
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "tags": {
+        "leisure": "fitness_station",
+        "fitness_station": "sit-up"
+    },
+    "addTags": {
+        "leisure": "fitness_station",
+        "fitness_station": "sit-up",
+        "sport": "fitness"
+    },
+    "reference": {
+        "key": "leisure",
+        "value": "fitness_station"
+    },
+    "terms": [
+        "crunch",
+        "exercise",
+        "fitness",
+        "gym",
+        "situp",
+        "sit up",
+        "trim trail"
+    ],
+    "name": "Sit-Up Station"
+}

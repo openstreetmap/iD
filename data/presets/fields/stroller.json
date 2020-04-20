@@ -1,0 +1,18 @@
+{
+    "key": "stroller",
+    "type": "radio",
+    "strings": {
+        "options": {
+            "yes": "Yes",
+            "limited": "Limited",
+            "no": "No"
+        }
+    },
+    "label": "Stroller Access",
+    "terms": [
+        "baby carriage",
+        "perambulator",
+        "pram",
+        "pushchair"
+    ]
+}

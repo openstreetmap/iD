@@ -1,4 +1,21 @@
 {
+    "icon": "maki-rail",
+    "fields": [
+        "name",
+        "ref_route",
+        "operator",
+        "network",
+        "from",
+        "to"
+    ],
+    "moreFields": [
+        "colour",
+        "distance",
+        "duration",
+        "interval",
+        "opening_hours",
+        "wheelchair"
+    ],
     "geometry": [
         "relation"
     ],
@@ -6,10 +23,5 @@
         "type": "route",
         "route": "train"
     },
-    "name": "Train Route",
-    "icon": "route-train",
-    "fields": [
-        "ref",
-        "operator"
-    ]
+    "name": "Train Route"
 }

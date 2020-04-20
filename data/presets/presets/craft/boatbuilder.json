@@ -1,11 +1,5 @@
 {
-    "icon": "marker-stroked",
-    "fields": [
-        "operator",
-        "address",
-        "building_area",
-        "opening_hours"
-    ],
+    "icon": "temaki-boat_repair",
     "geometry": [
         "point",
         "area"
@@ -13,5 +7,6 @@
     "tags": {
         "craft": "boatbuilder"
     },
+    "matchScore": 0.6,
     "name": "Boat Builder"
 }

@@ -1,0 +1,33 @@
+{
+    "icon": "temaki-car_pool",
+    "fields": [
+        "name",
+        "operator",
+        "operator/type",
+        "capacity",
+        "address",
+        "opening_hours",
+        "lit"
+    ],
+    "moreFields": [
+        "email",
+        "fax",
+        "phone",
+        "website",
+        "wheelchair"
+    ],
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "tags": {
+        "amenity": "car_pooling"
+    },
+    "terms": [
+        "car sharing",
+        "carpooling",
+        "lift sharing",
+        "ride sharing"
+    ],
+    "name": "Car Pooling Station"
+}

@@ -1,0 +1,19 @@
+{
+    "icon": "temaki-vending_eggs",
+    "geometry": [
+        "point",
+        "vertex"
+    ],
+    "terms": [
+        "egg"
+    ],
+    "tags": {
+        "amenity": "vending_machine",
+        "vending": "eggs"
+    },
+    "reference": {
+        "key": "vending",
+        "value": "eggs"
+    },
+    "name": "Egg Vending Machine"
+}

@@ -1,0 +1,17 @@
+{
+    "icon": "maki-shop",
+    "fields": [
+        "name",
+        "clothes",
+        "{shop}"
+    ],
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "tags": {
+        "shop": "boutique"
+    },
+    "searchable": false,
+    "name": "Boutique"
+}

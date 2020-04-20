@@ -1,0 +1,5 @@
+{
+    "key": "public_bookcase:type",
+    "type": "combo",
+    "label": "Type"
+}

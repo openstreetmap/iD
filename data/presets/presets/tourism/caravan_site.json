@@ -1,13 +1,28 @@
 {
-    "icon": "bus",
+    "icon": "temaki-camper_trailer",
     "fields": [
-        "operator",
+        "name",
         "address",
         "capacity",
-        "fee",
         "sanitary_dump_station",
         "power_supply",
-        "internet_access"
+        "internet_access",
+        "internet_access/fee"
+    ],
+    "moreFields": [
+        "charge_fee",
+        "email",
+        "fax",
+        "fee",
+        "gnis/feature_id",
+        "internet_access/ssid",
+        "operator",
+        "payment_multi_fee",
+        "phone",
+        "reservation",
+        "smoking",
+        "website",
+        "wheelchair"
     ],
     "geometry": [
         "point",

@@ -1,0 +1,19 @@
+{
+    "icon": "temaki-binoculars",
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "tags": {
+        "shop": "hunting"
+    },
+    "terms": [
+        "arrows",
+        "bows",
+        "bullets",
+        "crossbows",
+        "rifles",
+        "traps"
+    ],
+    "name": "Hunting Shop"
+}

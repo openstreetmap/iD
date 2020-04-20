@@ -1,7 +1,17 @@
 {
-     "icon": "harbor",
-     "fields":[
+    "icon": "temaki-boat",
+    "fields": [
+        "name",
         "operator"
+    ],
+    "moreFields": [
+        "address",
+        "email",
+        "fax",
+        "gnis/feature_id",
+        "phone",
+        "website",
+        "wheelchair"
     ],
     "geometry": [
         "area",

@@ -1,12 +1,29 @@
 {
-    "icon": "bank",
+    "icon": "maki-bank",
     "fields": [
-        "atm",
+        "name",
         "operator",
         "address",
         "building_area",
         "opening_hours",
+        "atm",
         "drive_through"
+    ],
+    "moreFields": [
+        "air_conditioning",
+        "brand",
+        "currency_multi",
+        "email",
+        "fax",
+        "gnis/feature_id",
+        "internet_access",
+        "internet_access/fee",
+        "internet_access/ssid",
+        "level",
+        "phone",
+        "ref/vatin",
+        "website",
+        "wheelchair"
     ],
     "geometry": [
         "point",

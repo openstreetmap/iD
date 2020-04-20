@@ -1,0 +1,22 @@
+{
+    "icon": "maki-waterfall",
+    "fields": [
+        "name",
+        "height",
+        "width",
+        "intermittent"
+    ],
+    "moreFields": [
+        "gnis/feature_id"
+    ],
+    "geometry": [
+        "vertex"
+    ],
+    "terms": [
+        "fall"
+    ],
+    "tags": {
+        "waterway": "waterfall"
+    },
+    "name": "Waterfall"
+}

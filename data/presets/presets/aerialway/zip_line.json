@@ -1,0 +1,28 @@
+{
+    "geometry": [
+        "line"
+    ],
+    "fields": [
+        "name",
+        "oneway_yes",
+        "aerialway/duration",
+        "maxweight",
+        "access_simple"
+    ],
+    "tags": {
+        "aerialway": "zip_line"
+    },
+    "terms": [
+        "aerial runway",
+        "canopy",
+        "flying fox",
+        "foefie slide",
+        "gravity propelled aerial ropeslide",
+        "Tyrolean traverse",
+        "zip wire",
+        "zip-line",
+        "zipline",
+        "zipwire"
+    ],
+    "name": "Zip Line"
+}

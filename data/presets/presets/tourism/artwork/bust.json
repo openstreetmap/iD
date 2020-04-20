@@ -1,0 +1,23 @@
+{
+    "icon": "fas-user-alt",
+    "fields": [
+        "name",
+        "artist",
+        "material"
+    ],
+    "geometry": [
+        "point",
+        "vertex"
+    ],
+    "tags": {
+        "tourism": "artwork",
+        "artwork_type": "bust"
+    },
+    "reference": {
+        "key": "artwork_type"
+    },
+    "terms": [
+        "figure"
+    ],
+    "name": "Bust"
+}

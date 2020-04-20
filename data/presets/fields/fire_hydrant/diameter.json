@@ -1,0 +1,6 @@
+{
+    "key": "fire_hydrant:diameter",
+    "type": "combo",
+    "label": "Diameter (mm, in, or letters)",
+    "snake_case": false
+}

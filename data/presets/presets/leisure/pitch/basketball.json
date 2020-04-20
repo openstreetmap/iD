@@ -1,17 +1,23 @@
 {
-    "icon": "basketball",
+    "icon": "maki-basketball",
     "fields": [
+        "name",
         "surface",
         "hoops",
-        "lit"
+        "lit",
+        "access_simple"
     ],
     "geometry": [
-        "point",
-        "area"
+        "area",
+        "point"
     ],
     "tags": {
         "leisure": "pitch",
         "sport": "basketball"
+    },
+    "reference": {
+        "key": "sport",
+        "value": "basketball"
     },
     "terms": [],
     "name": "Basketball Court"

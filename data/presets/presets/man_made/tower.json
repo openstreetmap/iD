@@ -1,6 +1,14 @@
 {
+    "icon": "temaki-tower",
     "fields": [
-        "towertype"
+        "tower/type",
+        "tower/construction",
+        "height",
+        "building_area"
+    ],
+    "moreFields": [
+        "architect",
+        "gnis/feature_id"
     ],
     "geometry": [
         "point",

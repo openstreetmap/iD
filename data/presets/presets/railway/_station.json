@@ -1,0 +1,20 @@
+{
+    "icon": "maki-rail",
+    "fields": [
+        "{public_transport/station}"
+    ],
+    "moreFields": [
+        "{public_transport/station}"
+    ],
+    "geometry": [
+        "point",
+        "vertex",
+        "area"
+    ],
+    "tags": {
+        "railway": "station"
+    },
+    "matchScore": 0.95,
+    "name": "Train Station",
+    "searchable": false
+}

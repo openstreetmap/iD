@@ -1,11 +1,5 @@
 {
-    "icon": "shop",
-    "fields": [
-        "operator",
-        "address",
-        "building_area",
-        "opening_hours"
-    ],
+    "icon": "temaki-kitchen_sink",
     "geometry": [
         "point",
         "area"
@@ -13,5 +7,10 @@
     "tags": {
         "shop": "kitchen"
     },
+    "terms": [
+        "cabinets",
+        "countertops",
+        "sinks"
+    ],
     "name": "Kitchen Design Store"
 }

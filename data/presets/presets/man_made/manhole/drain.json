@@ -1,0 +1,28 @@
+{
+    "icon": "temaki-manhole",
+    "fields": [
+        "operator",
+        "ref"
+    ],
+    "geometry": [
+        "point",
+        "vertex"
+    ],
+    "tags": {
+        "manhole": "drain"
+    },
+    "addTags": {
+        "man_made": "manhole",
+        "manhole": "drain"
+    },
+    "terms": [
+        "cover",
+        "drain",
+        "hole",
+        "rain",
+        "sewer",
+        "sewage",
+        "storm"
+    ],
+    "name": "Storm Drain"
+}

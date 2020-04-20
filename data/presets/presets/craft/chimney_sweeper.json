@@ -1,0 +1,11 @@
+{
+    "icon": "temaki-chimney",
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "tags": {
+        "craft": "chimney_sweeper"
+    },
+    "name": "Chimney Sweeper"
+}

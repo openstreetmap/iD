@@ -1,8 +1,26 @@
 {
+    "icon": "temaki-power_transformer",
+    "fields": [
+        "ref",
+        "operator",
+        "transformer",
+        "location",
+        "rating",
+        "devices",
+        "phases"
+    ],
+    "moreFields": [
+        "frequency",
+        "manufacturer",
+        "voltage/primary",
+        "voltage/secondary",
+        "voltage/tertiary",
+        "windings",
+        "windings/configuration"
+    ],
     "geometry": [
         "point",
-        "vertex",
-        "area"
+        "vertex"
     ],
     "tags": {
         "power": "transformer"

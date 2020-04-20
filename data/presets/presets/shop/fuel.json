@@ -1,0 +1,16 @@
+{
+    "icon": "temaki-propane_tank",
+    "fields": [
+        "{shop}",
+        "fuel_multi"
+    ],
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "tags": {
+        "shop": "fuel"
+    },
+    "name": "Fuel Shop",
+    "matchScore": 0.5
+}

@@ -9,7 +9,7 @@
             "required": true
         },
         "geometry": {
-            "description": "Valid geometry types for the feature",
+            "description": "Valid geometry types for the feature, in order of preference",
             "type": "array",
             "minItems": 1,
             "uniqueItems": true,
@@ -35,14 +35,21 @@
             }
         },
         "removeTags": {
-            "description": "Tags that are removed when changing to another preset (default is the same value as 'tags')",
+            "description": "Tags that are removed when changing to another preset (default is the same value as 'addTags' which in turn defaults to 'tags')",
             "type": "object",
             "additionalProperties": {
                 "type": "string"
             }
         },
         "fields": {
-            "description": "Form fields that are displayed for the preset",
+            "description": "Default form fields that are displayed for the preset",
+            "type": "array",
+            "items": {
+                "type": "string"
+            }
+        },
+        "moreFields": {
+            "description": "Additional form fields that can be attached with the 'Add field' dropdown",
             "type": "array",
             "items": {
                 "type": "string"
@@ -50,6 +57,10 @@
         },
         "icon": {
             "description": "Name of preset icon which represents this preset",
+            "type": "string"
+        },
+        "imageURL": {
+            "description": "The URL of a remote image that is more specific than 'icon'",
             "type": "string"
         },
         "terms": {
@@ -68,6 +79,44 @@
             "description": "The quality score this preset will receive when being compared with other matches (higher is better)",
             "type": "number",
             "default": 1.0
+        },
+        "reference": {
+            "description": "Taginfo documentation parameters (to be used when a preset manages multiple tags)",
+            "type": "object",
+            "properties": {
+                "key": {
+                    "description": "For documentation of a key",
+                    "type": "string",
+                    "required": true
+                },
+                "value": {
+                    "description": "For documentation of a tag (key and value)",
+                    "type": "string"
+                }
+            },
+            "additionalProperties": false
+        },
+        "replacement": {
+            "description": "The ID of a preset that is preferable to this one",
+            "type": "string"
+        },
+        "countryCodes":  {
+            "description": "Countries where to display the preset, as lowercase ISO 3166-1 alpha-2 codes (https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2)",
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+                "type": "string",
+                "pattern": "^[a-z]{2}$"
+            }
+        },
+        "notCountryCodes":  {
+            "description": "Countries where NOT to display the preset, as lowercase ISO 3166-1 alpha-2 codes (https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2)",
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+                "type": "string",
+                "pattern": "^[a-z]{2}$"
+            }
         }
     },
     "additionalProperties": false

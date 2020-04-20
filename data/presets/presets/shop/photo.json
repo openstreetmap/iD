@@ -1,18 +1,14 @@
 {
-    "icon": "camera",
-    "fields": [
-        "operator",
-        "address",
-        "building_area",
-        "opening_hours"
-    ],
+    "icon": "fas-camera-retro",
     "geometry": [
         "point",
         "area"
     ],
     "terms": [
         "camera",
-        "film"
+        "film",
+        "lens",
+        "photo"
     ],
     "tags": {
         "shop": "photo"

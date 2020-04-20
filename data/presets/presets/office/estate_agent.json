@@ -1,18 +1,18 @@
 {
-    "icon": "commercial",
-    "fields": [
-        "address",
-        "building_area",
-        "opening_hours"
+    "icon": "temaki-real_estate_agency",
+    "moreFields": [
+        "brand",
+        "{office}"
     ],
     "geometry": [
         "point",
-        "vertex",
         "area"
     ],
     "tags": {
         "office": "estate_agent"
     },
-    "terms": [],
+    "terms": [
+        "real estate"
+    ],
     "name": "Real Estate Office"
 }

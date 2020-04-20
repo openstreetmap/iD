@@ -1,18 +1,19 @@
 {
-    "icon": "commercial",
-    "fields": [
-        "address",
-        "building_area",
-        "opening_hours"
-    ],
+    "icon": "maki-telephone",
     "geometry": [
         "point",
-        "vertex",
         "area"
     ],
     "tags": {
         "office": "telecommunication"
     },
-    "terms": [],
+    "terms": [
+        "communication",
+        "internet service provider",
+        "isp",
+        "network",
+        "telephone",
+        "voice"
+    ],
     "name": "Telecom Office"
 }

@@ -1,6 +1,19 @@
 {
+    "icon": "temaki-bench",
     "fields": [
-        "backrest"
+        "backrest",
+        "material",
+        "seats",
+        "colour"
+    ],
+    "moreFields": [
+        "access_simple",
+        "height",
+        "inscription",
+        "level",
+        "lit",
+        "manufacturer",
+        "operator"
     ],
     "geometry": [
         "point",
@@ -8,7 +21,8 @@
         "line"
     ],
     "terms": [
-        "seat"
+        "seat",
+        "chair"
     ],
     "tags": {
         "amenity": "bench"

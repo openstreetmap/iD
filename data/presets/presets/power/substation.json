@@ -1,12 +1,17 @@
 {
+    "icon": "temaki-power",
     "fields": [
         "substation",
         "operator",
-        "building"
+        "building",
+        "ref"
+    ],
+    "moreFields": [
+        "gnis/feature_id"
     ],
     "geometry": [
-        "point",
-        "area"
+        "area",
+        "point"
     ],
     "tags": {
         "power": "substation"

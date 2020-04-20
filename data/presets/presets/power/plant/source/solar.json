@@ -1,0 +1,40 @@
+{
+    "icon": "fas-solar-panel",
+    "fields": [
+        "{power/plant}"
+    ],
+    "moreFields": [
+        "{power/plant}"
+    ],
+    "geometry": [
+        "area"
+    ],
+    "tags": {
+        "power": "plant",
+        "plant:source": "solar"
+    },
+    "addTags": {
+        "power": "plant",
+        "plant:source": "solar",
+        "plant:method": "photovoltaic",
+        "plant:output:electricity": "*"
+    },
+    "removeTags": {
+        "power": "plant",
+        "plant:method": "*",
+        "plant:source": "solar",
+        "plant:output:electricity": "*",
+        "landuse": "industrial"
+    },
+    "reference": {
+        "key": "plant:method",
+        "value": "photovoltaic"
+    },
+    "terms": [
+        "photovoltaic power station",
+        "solar panels",
+        "solar park",
+        "utility-scale solar"
+    ],
+    "name": "Solar Farm"
+}

@@ -1,10 +1,39 @@
 {
-    "icon": "ferry-line",
+    "icon": "maki-ferry",
     "geometry": [
         "line"
+    ],
+    "fields": [
+        "name",
+        "operator",
+        "duration",
+        "access",
+        "toll",
+        "from",
+        "to"
+    ],
+    "moreFields": [
+        "charge_toll",
+        "distance",
+        "dog",
+        "interval",
+        "maxheight",
+        "maxweight",
+        "network",
+        "opening_hours",
+        "ref_route",
+        "wheelchair"
     ],
     "tags": {
         "route": "ferry"
     },
+    "terms": [
+        "boat",
+        "merchant vessel",
+        "ship",
+        "water bus",
+        "water shuttle",
+        "water taxi"
+    ],
     "name": "Ferry Route"
 }

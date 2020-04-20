@@ -1,0 +1,14 @@
+{
+    "icon": "temaki-junction",
+    "geometry": [
+        "vertex"
+    ],
+    "tags": {
+        "railway": "switch"
+    },
+    "terms": [
+        "switch",
+        "points"
+    ],
+    "name": "Railway Switch"
+}

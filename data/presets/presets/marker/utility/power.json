@@ -1,0 +1,28 @@
+{
+    "icon": "temaki-silo",
+    "fields": [
+        "ref",
+        "operator",
+        "marker",
+        "{marker}"
+    ],
+    "geometry": [
+        "point"
+    ],
+    "terms": [
+        "electric line",
+        "identifier",
+        "marking",
+        "plate",
+        "pole",
+        "post",
+        "power cable",
+        "power line",
+        "sign"
+    ],
+    "tags": {
+        "marker": "*",
+        "utility": "power"
+    },
+    "name": "Power Marker"
+}

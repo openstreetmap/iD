@@ -1,5 +1,9 @@
 {
-    "icon": "building",
+    "icon": "maki-residential-community",
+    "fields": [
+        "name",
+        "residential"
+    ],
     "geometry": [
         "area"
     ],
@@ -7,5 +11,6 @@
         "landuse": "residential"
     },
     "terms": [],
+    "matchScore": 0.9,
     "name": "Residential Area"
 }

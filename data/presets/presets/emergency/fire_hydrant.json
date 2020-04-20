@@ -1,10 +1,27 @@
 {
+    "icon": "temaki-fire_hydrant",
     "fields": [
-        "fire_hydrant/type"
+        "ref",
+        "fire_hydrant/type",
+        "colour",
+        "water_source",
+        "couplings"
+    ],
+    "moreFields": [
+        "fire_hydrant/diameter",
+        "fire_hydrant/pressure",
+        "level",
+        "survey/date",
+        "water_volume"
     ],
     "geometry": [
         "point",
         "vertex"
+    ],
+    "terms": [
+        "fire plug",
+        "fire water well",
+        "hydrant"
     ],
     "tags": {
         "emergency": "fire_hydrant"

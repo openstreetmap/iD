@@ -1,0 +1,24 @@
+{
+    "icon": "temaki-freight_car",
+    "fields": [
+        "name",
+        "operator"
+    ],
+    "moreFields": [
+        "gnis/feature_id"
+    ],
+    "geometry": [
+        "point"
+    ],
+    "tags": {
+        "railway": "yard"
+    },
+    "terms": [
+        "freight car stop",
+        "freight train station",
+        "rail freight station",
+        "railroad yard",
+        "railway yard"
+    ],
+    "name": "Rail Yard"
+}

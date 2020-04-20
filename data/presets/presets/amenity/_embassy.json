@@ -1,0 +1,25 @@
+{
+    "icon": "temaki-embassy",
+    "fields": [
+        "name",
+        "country",
+        "address",
+        "building_area"
+    ],
+    "moreFields": [
+        "email",
+        "fax",
+        "phone",
+        "website",
+        "wheelchair"
+    ],
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "tags": {
+        "amenity": "embassy"
+    },
+    "searchable": false,
+    "name": "Embassy"
+}

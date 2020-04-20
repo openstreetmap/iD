@@ -1,0 +1,31 @@
+{
+    "icon": "fas-biking",
+    "fields": [
+        "name",
+        "surface",
+        "sport_racing_nonmotor",
+        "lit",
+        "width",
+        "lanes"
+    ],
+    "geometry": [
+        "point",
+        "line",
+        "area"
+    ],
+    "tags": {
+        "leisure": "track",
+        "sport": "cycling"
+    },
+    "reference": {
+        "key": "sport",
+        "value": "cycling"
+    },
+    "terms": [
+        "bicycle track",
+        "bicycling track",
+        "cycle racetrack",
+        "velodrome"
+    ],
+    "name": "Cycling Track"
+}

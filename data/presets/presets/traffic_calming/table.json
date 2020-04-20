@@ -1,17 +1,20 @@
 {
+    "icon": "temaki-speed_table",
     "fields": [
-        "surface"
+        "surface",
+        "direction_vertex"
     ],
     "geometry": [
         "vertex"
     ],
     "tags": {
-        "highway":"crossing",
         "traffic_calming": "table"
     },
     "terms": [
-        "speed table",
-        "flat top hump"
+        "flat top",
+        "hump",
+        "speed",
+        "slow"
     ],
-    "name": "Raised Pedestrian Crossing"
+    "name": "Speed Table"
 }

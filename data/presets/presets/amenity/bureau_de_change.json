@@ -1,11 +1,25 @@
 {
-    "icon": "bank",
+    "icon": "temaki-money_hand",
     "fields": [
-        "operator"
+        "name",
+        "operator",
+        "payment_multi",
+        "currency_multi",
+        "address",
+        "building_area"
+    ],
+    "moreFields": [
+        "email",
+        "fax",
+        "level",
+        "opening_hours",
+        "phone",
+        "website",
+        "wheelchair"
     ],
     "geometry": [
         "point",
-        "vertex"
+        "area"
     ],
     "terms": [
         "bureau de change",

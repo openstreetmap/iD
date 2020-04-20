@@ -1,0 +1,27 @@
+{
+    "icon": "temaki-abseiling",
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "terms": [
+        "abseiling",
+        "artificial climbing wall",
+        "belaying",
+        "bouldering",
+        "rock climbing facility",
+        "indoor rock wall",
+        "rappeling",
+        "rock gym",
+        "ropes"
+    ],
+    "tags": {
+        "leisure": "sports_centre",
+        "sport": "climbing"
+    },
+    "reference": {
+        "key": "sport",
+        "value": "climbing"
+    },
+    "name": "Climbing Gym"
+}

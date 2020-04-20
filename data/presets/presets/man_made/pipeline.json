@@ -1,11 +1,21 @@
 {
-    "icon": "pipeline-line",
+    "icon": "iD-pipeline-line",
     "fields": [
+        "operator",
         "location",
-        "operator"
+        "substance",
+        "layer",
+        "diameter"
     ],
     "geometry": [
         "line"
+    ],
+    "terms": [
+        "oil",
+        "natural gas",
+        "water",
+        "sewer",
+        "sewage"
     ],
     "tags": {
         "man_made": "pipeline"

@@ -1,0 +1,21 @@
+{
+    "icon": "temaki-islet_tree",
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "terms": [
+        "archipelago",
+        "atoll",
+        "bar",
+        "cay",
+        "isle",
+        "islet",
+        "key",
+        "reef"
+    ],
+    "tags": {
+        "place": "islet"
+    },
+    "name": "Islet"
+}

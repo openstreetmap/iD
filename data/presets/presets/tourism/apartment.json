@@ -1,0 +1,41 @@
+{
+    "icon": "maki-lodging",
+    "fields": [
+        "name",
+        "operator",
+        "address",
+        "building_area",
+        "rooms",
+        "internet_access",
+        "internet_access/fee"
+    ],
+    "moreFields": [
+        "building/levels_building",
+        "email",
+        "fax",
+        "height_building",
+        "internet_access/ssid",
+        "level",
+        "payment_multi",
+        "phone",
+        "reservation",
+        "smoking",
+        "website",
+        "wheelchair"
+    ],
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "tags": {
+        "tourism": "apartment"
+    },
+    "terms": [
+        "bnb",
+        "holiday rental",
+        "lodging",
+        "overnight accommodations",
+        "vacation rental"
+    ],
+    "name": "Guest Apartment / Condo"
+}

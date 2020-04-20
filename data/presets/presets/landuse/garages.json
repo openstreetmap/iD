@@ -1,10 +1,21 @@
 {
+    "icon": "fas-warehouse",
     "geometry": [
         "area"
+    ],
+    "fields": [
+        "name"
+    ],
+    "moreFields": [
+        "address",
+        "email",
+        "fax",
+        "phone",
+        "website"
     ],
     "tags": {
         "landuse": "garages"
     },
     "terms": [],
-    "name": "Garages"
+    "name": "Garage Landuse"
 }

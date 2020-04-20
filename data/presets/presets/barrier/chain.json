@@ -1,0 +1,14 @@
+{
+    "icon": "temaki-rope_fence",
+    "fields": [
+        "access"
+    ],
+    "geometry": [
+        "vertex",
+        "line"
+    ],
+    "tags": {
+        "barrier": "chain"
+    },
+    "name": "Chain"
+}

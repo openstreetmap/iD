@@ -1,14 +1,13 @@
 {
-    "icon": "shop",
-    "fields": [
-        "operator",
-        "address",
-        "building_area",
-        "opening_hours"
-    ],
+    "icon": "fas-pills",
     "geometry": [
         "point",
         "area"
+    ],
+    "terms": [
+        "health",
+        "supplement",
+        "vitamin"
     ],
     "tags": {
         "shop": "nutrition_supplements"

@@ -1,10 +1,15 @@
 {
-    "icon": "golf",
+    "icon": "maki-golf",
+    "fields": [
+        "name"
+    ],
     "geometry": [
-        "line",
         "area"
     ],
     "tags": {
+        "golf": "lateral_water_hazard"
+    },
+    "addTags": {
         "golf": "lateral_water_hazard",
         "natural": "water"
     },

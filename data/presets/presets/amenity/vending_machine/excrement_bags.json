@@ -1,13 +1,13 @@
 {
-    "fields": [
-        "operator"
-    ],
+    "icon": "temaki-vending_pet_waste",
     "geometry": [
-        "point"
+        "point",
+        "vertex"
     ],
     "terms": [
         "excrement bags",
         "poop",
+        "waste",
         "dog",
         "animal"
     ],
@@ -15,5 +15,9 @@
         "amenity": "vending_machine",
         "vending": "excrement_bags"
     },
-    "name": "Excrement Bag Vending Machine"
+    "reference": {
+        "key": "vending",
+        "value": "excrement_bags"
+    },
+    "name": "Excrement Bag Dispenser"
 }

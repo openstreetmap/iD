@@ -1,11 +1,5 @@
 {
-    "icon": "clothing-store",
-    "fields": [
-        "operator",
-        "address",
-        "building_area",
-        "opening_hours"
-    ],
+    "icon": "temaki-dress",
     "geometry": [
         "point",
         "area"

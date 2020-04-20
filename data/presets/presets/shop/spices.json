@@ -1,0 +1,25 @@
+{
+    "icon": "temaki-spice_bottle",
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "terms": [
+        "chili",
+        "cinnamon",
+        "curry",
+        "ginger",
+        "herbs",
+        "pepper",
+        "saffron",
+        "salt",
+        "spice store",
+        "spices",
+        "turmeric",
+        "wasabi"
+    ],
+    "tags": {
+        "shop": "spices"
+    },
+    "name": "Spice Shop"
+}

@@ -1,0 +1,35 @@
+{
+    "icon": "maki-pitch",
+    "fields": [
+        "fitness_station",
+        "ref",
+        "wheelchair",
+        "blind"
+    ],
+    "moreFields": [
+        "access_simple",
+        "opening_hours"
+    ],
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "tags": {
+        "leisure": "fitness_station"
+    },
+    "addTags": {
+        "leisure": "fitness_station",
+        "sport": "fitness"
+    },
+    "reference": {
+        "key": "leisure",
+        "value": "fitness_station"
+    },
+    "terms": [
+        "exercise",
+        "fitness",
+        "gym",
+        "trim trail"
+    ],
+    "name": "Outdoor Fitness Station"
+}

@@ -1,0 +1,10 @@
+{
+    "key": "destination",
+    "type": "semiCombo",
+    "label": "Destinations",
+    "prerequisiteTag": {
+        "key": "oneway",
+        "value": "yes"
+    },
+    "snake_case": false
+}

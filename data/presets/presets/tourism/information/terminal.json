@@ -1,0 +1,19 @@
+{
+    "icon": "temaki-app_terminal",
+    "fields": [
+        "operator"
+    ],
+    "geometry": [
+        "point",
+        "vertex"
+    ],
+    "tags": {
+        "tourism": "information",
+        "information": "terminal"
+    },
+    "reference": {
+        "key": "information",
+        "value": "terminal"
+    },
+    "name": "Information Terminal"
+}

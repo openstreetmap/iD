@@ -1,8 +1,23 @@
 {
-    "icon": "park",
+    "icon": "temaki-tree_and_bench",
+    "fields": [
+        "name",
+        "operator",
+        "address",
+        "opening_hours"
+    ],
+    "moreFields": [
+        "dog",
+        "email",
+        "fax",
+        "gnis/feature_id",
+        "phone",
+        "smoking",
+        "website"
+    ],
     "geometry": [
-        "point",
-        "area"
+        "area",
+        "point"
     ],
     "terms": [
         "esplanade",

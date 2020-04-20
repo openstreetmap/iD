@@ -1,0 +1,30 @@
+{
+    "icon": "temaki-fashion_accessories",
+    "fields": [
+        "name",
+        "clothes",
+        "{shop}"
+    ],
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "tags": {
+        "shop": "fashion_accessories"
+    },
+    "terms": [
+        "bag",
+        "cologne",
+        "fragrance",
+        "hat",
+        "jewellery",
+        "purfume",
+        "purse",
+        "scarf",
+        "sunglasses",
+        "umbrella",
+        "wallet",
+        "watch"
+    ],
+    "name": "Fashion Accessories Store"
+}

@@ -1,18 +1,12 @@
 {
-    "icon": "commercial",
-    "fields": [
-        "address",
-        "building_area",
-        "opening_hours"
-    ],
+    "icon": "maki-town-hall",
     "geometry": [
         "point",
-        "vertex",
         "area"
     ],
     "tags": {
         "office": "political_party"
     },
     "terms": [],
-    "name": "Political Party"
+    "name": "Political Party Office"
 }

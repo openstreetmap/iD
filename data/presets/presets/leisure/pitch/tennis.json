@@ -1,16 +1,20 @@
 {
-    "icon": "tennis",
+    "icon": "maki-tennis",
     "fields": [
-        "surface",
-        "lit"
+        "{leisure/pitch}",
+        "access_simple"
     ],
     "geometry": [
-        "point",
-        "area"
+        "area",
+        "point"
     ],
     "tags": {
         "leisure": "pitch",
         "sport": "tennis"
+    },
+    "reference": {
+        "key": "sport",
+        "value": "tennis"
     },
     "terms": [],
     "name": "Tennis Court"

@@ -1,0 +1,10 @@
+{
+    "key": "charge",
+    "type": "text",
+    "label": "Fee Amount",
+    "placeholder": "1 EUR, 5 USD, 10 JPY…",
+    "prerequisiteTag": {
+        "key": "fee",
+        "valueNot": "no"
+    }
+}

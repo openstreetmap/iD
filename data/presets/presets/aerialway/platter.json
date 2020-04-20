@@ -1,17 +1,24 @@
 {
+    "icon": "temaki-platter_lift",
     "geometry": [
         "line"
     ],
-    "terms": [
-        "button lift",
-        "poma lift"
-    ],
     "fields": [
+        "name",
         "aerialway/capacity",
         "aerialway/duration"
     ],
     "tags": {
         "aerialway": "platter"
     },
+    "terms": [
+        "button lift",
+        "disc lift",
+        "drag lift",
+        "poma lift",
+        "skiing",
+        "snowboarding",
+        "surface cable"
+    ],
     "name": "Platter Lift"
 }

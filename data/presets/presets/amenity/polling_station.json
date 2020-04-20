@@ -1,0 +1,46 @@
+{
+    "icon": "fas-vote-yea",
+    "fields": [
+        "name",
+        "ref",
+        "operator",
+        "address",
+        "opening_hours",
+        "building_area"
+    ],
+    "moreFields": [
+        "air_conditioning",
+        "email",
+        "fax",
+        "gnis/feature_id",
+        "internet_access",
+        "internet_access/fee",
+        "internet_access/ssid",
+        "level",
+        "phone",
+        "website",
+        "wheelchair"
+    ],
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "terms": [
+        "ballot box",
+        "ballot drop",
+        "democracy",
+        "elections",
+        "polling place",
+        "vote",
+        "voting booth",
+        "voting machine"
+    ],
+    "tags": {
+        "amenity": "polling_station"
+    },
+    "addTags": {
+        "amenity": "polling_station",
+        "polling_station": "yes"
+    },
+    "name": "Permanent Polling Place"
+}

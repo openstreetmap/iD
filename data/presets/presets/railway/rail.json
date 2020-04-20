@@ -1,17 +1,25 @@
 {
-    "icon": "railway-rail",
+    "icon": "temaki-railway_track",
+    "fields": [
+        "{railway/light_rail}"
+    ],
+    "moreFields": [
+        "{railway/light_rail}",
+        "highspeed"
+    ],
     "geometry": [
         "line"
     ],
     "tags": {
         "railway": "rail"
     },
-    "fields": [
-        "structure",
-        "gauge",
-        "electrified",
-        "service_rail"
+    "terms": [
+        "permanent way",
+        "rail line",
+        "railroad track",
+        "railway track",
+        "track",
+        "train track"
     ],
-    "terms": [],
-    "name": "Rail"
+    "name": "Train Track"
 }

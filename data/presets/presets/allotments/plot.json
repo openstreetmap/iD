@@ -1,0 +1,18 @@
+{
+    "icon": "temaki-garden_bed",
+    "geometry": [
+        "area"
+    ],
+    "fields": [
+        "name",
+        "ref"
+    ],
+    "tags": {
+        "allotments": "plot"
+    },
+    "reference": {
+        "key": "allotments",
+        "value": "plot"
+    },
+    "name": "Community Garden Plot"
+}

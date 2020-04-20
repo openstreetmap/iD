@@ -1,0 +1,13 @@
+{
+    "icon": "temaki-plane_taxiing",
+    "geometry": [
+        "vertex"
+    ],
+    "fields": [
+        "ref"
+    ],
+    "tags": {
+        "aeroway": "holding_position"
+    },
+    "name": "Aircraft Holding Position"
+}

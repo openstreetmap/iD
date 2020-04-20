@@ -1,9 +1,13 @@
 {
+    "icon": "temaki-vending_cold_drink",
     "fields": [
-        "operator"
+        "vending",
+        "drink_multi",
+        "{amenity/vending_machine}"
     ],
     "geometry": [
-        "point"
+        "point",
+        "vertex"
     ],
     "terms": [
         "drink",
@@ -15,6 +19,10 @@
     "tags": {
         "amenity": "vending_machine",
         "vending": "drinks"
+    },
+    "reference": {
+        "key": "vending",
+        "value": "drinks"
     },
     "name": "Drink Vending Machine"
 }

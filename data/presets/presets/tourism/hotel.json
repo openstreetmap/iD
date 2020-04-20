@@ -1,10 +1,12 @@
 {
-    "icon": "lodging",
+    "icon": "fas-concierge-bell",
     "fields": [
-        "operator",
-        "address",
-        "building_area",
-        "smoking"
+        "{tourism/motel}"
+    ],
+    "moreFields": [
+        "{tourism/motel}",
+        "bar",
+        "stars"
     ],
     "geometry": [
         "point",
@@ -13,5 +15,11 @@
     "tags": {
         "tourism": "hotel"
     },
+    "terms": [
+        "concierge",
+        "lodge",
+        "lodging",
+        "overnight accommodations"
+    ],
     "name": "Hotel"
 }

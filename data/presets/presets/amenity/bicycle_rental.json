@@ -1,9 +1,23 @@
 {
-    "icon": "bicycle",
+    "icon": "temaki-bicycle_rental",
     "fields": [
         "capacity",
         "network",
-        "operator"
+        "operator",
+        "operator/type",
+        "fee",
+        "payment_multi_fee"
+    ],
+    "moreFields": [
+        "address",
+        "covered",
+        "email",
+        "fax",
+        "level",
+        "opening_hours",
+        "phone",
+        "website",
+        "wheelchair"
     ],
     "geometry": [
         "point",
@@ -11,7 +25,15 @@
         "area"
     ],
     "terms": [
-        "bike"
+        "bike",
+        "bicycle",
+        "bikeshare",
+        "bike share",
+        "bicycle share",
+        "cycle dock",
+        "cycle hub",
+        "cycleshare",
+        "cycling"
     ],
     "tags": {
         "amenity": "bicycle_rental"

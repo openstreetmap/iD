@@ -1,0 +1,11 @@
+{
+    "key": "stop",
+    "type": "combo",
+    "label": "Stop Type",
+    "strings": {
+        "options": {
+          "all": "All Ways",
+          "minor": "Minor Road"
+        }
+    }
+}

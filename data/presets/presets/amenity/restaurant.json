@@ -1,14 +1,39 @@
 {
-    "icon": "restaurant",
+    "icon": "maki-restaurant",
     "fields": [
+        "name",
         "cuisine",
         "address",
         "building_area",
         "opening_hours",
+        "phone",
+        "website"
+    ],
+    "moreFields": [
+        "air_conditioning",
+        "bar",
+        "brand",
+        "brewery",
         "capacity",
-        "takeaway",
         "delivery",
-        "smoking"
+        "diet_multi",
+        "email",
+        "fax",
+        "gnis/feature_id",
+        "internet_access",
+        "internet_access/fee",
+        "internet_access/ssid",
+        "level",
+        "microbrewery",
+        "min_age",
+        "not/name",
+        "outdoor_seating",
+        "ref/vatin",
+        "reservation",
+        "smoking",
+        "stars",
+        "takeaway",
+        "wheelchair"
     ],
     "geometry": [
         "point",

@@ -1,0 +1,48 @@
+{
+    "icon": "fas-users",
+    "fields": [
+        "name",
+        "operator",
+        "building_area",
+        "address",
+        "website",
+        "internet_access",
+        "internet_access/fee",
+        "internet_access/ssid"
+    ],
+    "moreFields": [
+        "air_conditioning",
+        "email",
+        "fax",
+        "gnis/feature_id",
+        "level",
+        "min_age",
+        "phone",
+        "smoking",
+        "wheelchair"
+    ],
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "tags": {
+        "amenity": "events_venue"
+    },
+    "terms": [
+        "banquet hall",
+        "baptism",
+        "Bar Mitzvah",
+        "Bat Mitzvah",
+        "birthdays",
+        "celebrations",
+        "conferences",
+        "confirmation",
+        "meetings",
+        "parties",
+        "party",
+        "quinceañera",
+        "reunions",
+        "weddings"
+    ],
+    "name": "Events Venue"
+}

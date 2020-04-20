@@ -1,10 +1,13 @@
 {
-    "icon": "shop",
+    "icon": "fas-book",
     "fields": [
-        "operator",
-        "address",
-        "building_area",
-        "opening_hours"
+        "{shop}",
+        "internet_access"
+    ],
+    "moreFields": [
+        "{shop}",
+        "internet_access/fee",
+        "internet_access/ssid"
     ],
     "geometry": [
         "point",

@@ -1,0 +1,9 @@
+{
+    "key": "payment:",
+    "type": "multiCombo",
+    "label": "Payment Types",
+    "prerequisiteTag": {
+        "key": "fee",
+        "valueNot": "no"
+    }
+}

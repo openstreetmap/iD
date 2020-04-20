@@ -1,0 +1,14 @@
+{
+    "fields": [
+        "emergency_combo"
+    ],
+    "geometry": [
+        "line"
+    ],
+    "tags": {
+        "emergency": "official"
+    },
+    "name": "Emergency Access Official",
+    "searchable": false,
+    "matchScore": 0.01
+}

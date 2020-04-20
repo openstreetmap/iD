@@ -1,15 +1,27 @@
 {
-    "icon": "highway-footway",
+    "icon": "temaki-pedestrian_walled",
     "fields": [
+        "name",
         "width",
         "level",
-        "access_simple"
+        "access_simple",
+        "wheelchair"
+    ],
+    "moreFields": [
+        "covered",
+        "indoor",
+        "maxheight",
+        "stroller"
     ],
     "geometry": [
         "line"
     ],
     "tags": {
         "highway": "corridor"
+    },
+    "addTags": {
+        "highway": "corridor",
+        "indoor": "yes"
     },
     "terms": [
         "gallery",

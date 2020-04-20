@@ -1,10 +1,18 @@
 {
-    "icon": "water",
+    "icon": "temaki-waste",
     "fields": [
+        "name",
         "operator",
         "address"
     ],
-   "geometry": [
+    "moreFields": [
+        "email",
+        "fax",
+        "gnis/feature_id",
+        "phone",
+        "website"
+    ],
+    "geometry": [
         "point",
         "area"
     ],

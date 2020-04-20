@@ -1,0 +1,6 @@
+{
+    "key": "fire_hydrant:pressure",
+    "type": "combo",
+    "label": "Pressure (bar)",
+    "snake_case": false
+}

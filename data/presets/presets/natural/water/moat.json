@@ -1,0 +1,15 @@
+{
+    "icon": "maki-water",
+    "fields": [
+        "{natural/water}",
+        "salt"
+    ],
+    "geometry": [
+        "area"
+    ],
+    "tags": {
+        "natural": "water",
+        "water": "moat"
+    },
+    "name": "Moat"
+}

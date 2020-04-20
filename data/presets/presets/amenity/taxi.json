@@ -1,8 +1,16 @@
 {
-    "icon": "car",
+    "icon": "fas-taxi",
     "fields": [
+        "name",
         "operator",
-        "capacity"
+        "capacity",
+        "address"
+    ],
+    "moreFields": [
+        "access_simple",
+        "brand",
+        "opening_hours",
+        "wheelchair"
     ],
     "geometry": [
         "point",

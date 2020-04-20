@@ -1,0 +1,15 @@
+{
+    "icon": "iD-waterway-stream",
+    "fields": [
+        "name",
+        "waterway",
+        "ref"
+    ],
+    "geometry": [
+        "relation"
+    ],
+    "tags": {
+        "type": "waterway"
+    },
+    "name": "Waterway"
+}

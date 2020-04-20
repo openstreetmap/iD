@@ -1,13 +1,28 @@
 {
-    "icon": "highway-motorway",
+    "icon": "iD-highway-motorway",
     "fields": [
+        "name",
+        "ref_road_number",
         "oneway_yes",
         "maxspeed",
-        "structure",
-        "access",
         "lanes",
         "surface",
-        "ref"
+        "structure",
+        "access"
+    ],
+    "moreFields": [
+        "charge_toll",
+        "covered",
+        "incline",
+        "junction_line",
+        "lit",
+        "maxheight",
+        "maxweight_bridge",
+        "minspeed",
+        "not/name",
+        "smoothness",
+        "toll",
+        "width"
     ],
     "geometry": [
         "line"
@@ -15,6 +30,17 @@
     "tags": {
         "highway": "motorway"
     },
-    "terms": [],
+    "terms": [
+        "autobahn",
+        "expressway",
+        "freeway",
+        "highway",
+        "interstate",
+        "parkway",
+        "road",
+        "street",
+        "thruway",
+        "turnpike"
+    ],
     "name": "Motorway"
 }

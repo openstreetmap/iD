@@ -1,12 +1,31 @@
 {
-    "icon": "highway-motorway-link",
+    "icon": "iD-highway-motorway-link",
     "fields": [
-        "oneway_yes",
+        "destination_oneway",
+        "destination/ref_oneway",
+        "junction/ref_oneway",
+        "oneway",
         "maxspeed",
-        "structure",
-        "access",
+        "lanes",
         "surface",
-        "ref"
+        "structure",
+        "access"
+    ],
+    "moreFields": [
+        "charge_toll",
+        "covered",
+        "destination/symbol_oneway",
+        "incline",
+        "junction_line",
+        "lit",
+        "maxheight",
+        "maxspeed/advisory",
+        "maxweight_bridge",
+        "name",
+        "ref_road_number",
+        "smoothness",
+        "toll",
+        "width"
     ],
     "geometry": [
         "line"
@@ -14,14 +33,13 @@
     "tags": {
         "highway": "motorway_link"
     },
-    "addTags": {
-        "highway": "motorway_link",
-        "oneway": "yes"
-    },
-    "removeTags": {
-        "highway": "motorway_link",
-        "oneway": "yes"
-    },
-    "terms": ["ramp", "on ramp", "off ramp"],
+    "terms": [
+        "exit",
+        "ramp",
+        "road",
+        "street",
+        "on ramp",
+        "off ramp"
+    ],
     "name": "Motorway Link"
 }

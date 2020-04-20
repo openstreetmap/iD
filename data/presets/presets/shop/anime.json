@@ -1,11 +1,5 @@
 {
-    "icon": "shop",
-    "fields": [
-        "operator",
-        "address",
-        "building_area",
-        "opening_hours"
-    ],
+    "icon": "fas-dragon",
     "geometry": [
         "point",
         "area"
@@ -13,5 +7,12 @@
     "tags": {
         "shop": "anime"
     },
-    "name": "Anime Shop"
+    "terms": [
+        "manga",
+        "japan",
+        "cosplay",
+        "figurine",
+        "dakimakura"
+    ],
+    "name": "Anime / Manga Shop"
 }

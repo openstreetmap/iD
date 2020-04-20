@@ -1,0 +1,23 @@
+{
+    "icon": "fas-motorcycle",
+    "geometry": [
+        "line",
+        "area"
+    ],
+    "tags": {
+        "highway": "raceway",
+        "sport": "motocross"
+    },
+    "reference": {
+        "key": "sport",
+        "value": "motocross"
+    },
+    "terms": [
+        "off-road racing",
+        "offroad moto racing",
+        "motocross circuit",
+        "motorcycle track",
+        "motorsports"
+    ],
+    "name": "Motocross Racetrack"
+}

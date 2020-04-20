@@ -1,7 +1,7 @@
 {
     "key": "internet_access",
     "type": "combo",
-    "label": "Internet Access",
+    "label": "Internet Connection",
     "strings": {
         "options": {
             "yes": "Yes",
@@ -10,5 +10,9 @@
             "wired": "Wired",
             "terminal": "Terminal"
         }
-    }
+    },
+    "terms": [
+        "wifi",
+        "wlan"
+    ]
 }

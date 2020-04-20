@@ -1,0 +1,19 @@
+{
+    "icon": "maki-suitcase",
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "tags": {
+        "office": "financial_advisor"
+    },
+    "terms": [
+        "401k",
+        "inheritance",
+        "savings",
+        "stocks",
+        "retirement",
+        "wealth management"
+    ],
+    "name": "Financial Advisor"
+}

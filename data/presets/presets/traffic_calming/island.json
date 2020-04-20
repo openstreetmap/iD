@@ -1,0 +1,20 @@
+{
+    "icon": "temaki-diamond",
+    "fields": [
+        "surface"
+    ],
+    "geometry": [
+        "vertex",
+        "line",
+        "area"
+    ],
+    "terms": [
+        "circle",
+        "roundabout",
+        "slow"
+    ],
+    "tags": {
+        "traffic_calming": "island"
+    },
+    "name": "Traffic Island"
+}

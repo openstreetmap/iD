@@ -1,0 +1,29 @@
+{
+    "icon": "temaki-silo",
+    "fields": [
+        "ref",
+        "operator",
+        "marker",
+        "utility",
+        "{marker}"
+    ],
+    "geometry": [
+        "point"
+    ],
+    "terms": [
+        "gas line marker",
+        "identifier",
+        "marking",
+        "oil marker",
+        "pipline marker",
+        "plate",
+        "pole",
+        "post",
+        "sign"
+    ],
+    "tags": {
+        "marker": "*",
+        "utility": "*"
+    },
+    "name": "Utility Marker"
+}

@@ -1,4 +1,19 @@
 {
+    "icon": "temaki-fountain",
+    "fields": [
+        "name",
+        "operator",
+        "fountain",
+        "drinking_water",
+        "height",
+        "lit"
+    ],
+    "moreFields": [
+        "covered",
+        "indoor",
+        "level",
+        "manufacturer"
+    ],
     "geometry": [
         "point",
         "area"
@@ -6,5 +21,9 @@
     "tags": {
         "amenity": "fountain"
     },
+    "terms": [
+        "basin",
+        "water"
+    ],
     "name": "Fountain"
 }

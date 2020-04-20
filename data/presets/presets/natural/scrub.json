@@ -1,10 +1,14 @@
 {
+    "icon": "temaki-shrub",
     "geometry": [
         "area"
     ],
     "tags": {
         "natural": "scrub"
     },
-    "terms": ["bush","shrubs"],
+    "terms": [
+        "bush",
+        "shrubs"
+    ],
     "name": "Scrub"
 }

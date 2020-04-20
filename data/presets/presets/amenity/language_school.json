@@ -1,0 +1,36 @@
+{
+    "icon": "temaki-school",
+    "fields": [
+        "name",
+        "operator",
+        "operator/type",
+        "address",
+        "building_area",
+        "opening_hours",
+        "language_multi"
+    ],
+    "moreFields": [
+        "email",
+        "fax",
+        "gnis/feature_id",
+        "internet_access",
+        "internet_access/fee",
+        "internet_access/ssid",
+        "level",
+        "payment_multi",
+        "phone",
+        "website",
+        "wheelchair"
+    ],
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "terms": [
+        "esl"
+    ],
+    "tags": {
+        "amenity": "language_school"
+    },
+    "name": "Language School"
+}

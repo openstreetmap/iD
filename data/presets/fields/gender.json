@@ -13,5 +13,11 @@
             "female": "Female",
             "unisex": "Unisex"
         }
-    }
+    },
+    "terms": [
+        "access",
+        "female",
+        "male",
+        "unisex"
+    ]
 }

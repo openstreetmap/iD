@@ -1,17 +1,23 @@
 {
-    "icon": "railway-light-rail",
+    "icon": "temaki-tram",
+    "fields": [
+        "{railway/light_rail}"
+    ],
+    "moreFields": [
+        "{railway/light_rail}"
+    ],
     "geometry": [
         "line"
     ],
     "tags": {
         "railway": "tram"
     },
-    "fields": [
-        "structure",
-        "gauge",
-        "electrified",
-        "service_rail"
+    "terms": [
+        "electric street railway",
+        "light rail",
+        "streetcar",
+        "tramway",
+        "trolley"
     ],
-    "terms": ["streetcar"],
-    "name": "Tram"
+    "name": "Tram Track"
 }

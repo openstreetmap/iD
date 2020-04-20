@@ -1,12 +1,24 @@
 {
-    "icon": "highway-cycleway",
+    "icon": "fas-biking",
     "fields": [
-        "surface",
-        "lit",
-        "width",
+        "name",
         "oneway",
+        "surface",
+        "width",
         "structure",
-        "access"
+        "access",
+        "incline"
+    ],
+    "moreFields": [
+        "covered",
+        "dog",
+        "lit",
+        "maxspeed",
+        "maxweight_bridge",
+        "not/name",
+        "smoothness",
+        "stroller",
+        "wheelchair"
     ],
     "geometry": [
         "line"
@@ -15,7 +27,9 @@
         "highway": "cycleway"
     },
     "terms": [
-        "bike"
+        "bicyle path",
+        "bike path",
+        "cycling path"
     ],
     "name": "Cycle Path"
 }

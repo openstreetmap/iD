@@ -1,10 +1,27 @@
 {
-    "icon": "place-of-worship",
+    "icon": "maki-place-of-worship",
     "fields": [
+        "name",
         "religion",
         "denomination",
         "address",
-        "building_area"
+        "building_area",
+        "service_times"
+    ],
+    "moreFields": [
+        "air_conditioning",
+        "baby_feeding",
+        "email",
+        "fax",
+        "gnis/feature_id",
+        "internet_access",
+        "internet_access/ssid",
+        "level",
+        "opening_hours",
+        "phone",
+        "polling_station",
+        "website",
+        "wheelchair"
     ],
     "geometry": [
         "point",

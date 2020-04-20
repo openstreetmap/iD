@@ -1,11 +1,5 @@
 {
-    "icon": "farm",
-    "fields": [
-        "operator",
-        "address",
-        "building_area",
-        "opening_hours"
-    ],
+    "icon": "temaki-anvil_and_hammer",
     "geometry": [
         "point",
         "area"

@@ -1,0 +1,28 @@
+{
+    "icon": "fas-drumstick-bite",
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "terms": [
+        "breakfast",
+        "canteen",
+        "dine",
+        "dining",
+        "dinner",
+        "drive-in",
+        "eat",
+        "grill",
+        "lunch",
+        "table"
+    ],
+    "tags": {
+        "amenity": "fast_food",
+        "cuisine": "chicken"
+    },
+    "reference": {
+        "key": "cuisine",
+        "value": "chicken"
+    },
+    "name": "Chicken Fast Food"
+}

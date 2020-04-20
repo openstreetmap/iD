@@ -1,6 +1,14 @@
 {
-    "name": "Line",
+    "fields": [
+        "name"
+    ],
+    "geometry": [
+        "line"
+    ],
     "tags": {},
-    "geometry": ["line"],
+    "terms": [
+        "polyline"
+    ],
+    "name": "Line",
     "matchScore": 0.1
 }

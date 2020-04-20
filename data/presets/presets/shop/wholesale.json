@@ -1,0 +1,19 @@
+{
+    "icon": "maki-warehouse",
+    "fields": [
+        "{shop}",
+        "wholesale"
+    ],
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "terms": [
+        "warehouse club",
+        "cash and carry"
+    ],
+    "tags": {
+        "shop": "wholesale"
+    },
+    "name": "Wholesale Store"
+}

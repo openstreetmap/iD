@@ -1,0 +1,26 @@
+{
+    "icon": "fas-door-closed",
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "fields": [
+        "ref",
+        "operator",
+        "street_cabinet",
+        "utility_semi",
+        "height",
+        "colour"
+    ],
+    "terms": [
+        "cable tv",
+        "monitoring box",
+        "technical box",
+        "telecommunications",
+        "traffic signal controls"
+    ],
+    "tags": {
+        "man_made": "street_cabinet"
+    },
+    "name": "Street Cabinet"
+}

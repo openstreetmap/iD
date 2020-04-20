@@ -1,0 +1,13 @@
+{
+    "key": "reservation",
+    "type": "combo",
+    "label": "Reservations",
+    "strings": {
+        "options": {
+            "yes": "Accepted",
+            "no": "Not Accepted",
+            "required": "Required",
+            "recommended": "Recommended"
+        }
+    }
+}

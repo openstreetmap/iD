@@ -1,0 +1,19 @@
+{
+    "icon": "fas-frog",
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "tags": {
+        "tourism": "zoo",
+        "zoo": "wildlife_park"
+    },
+    "reference": {
+        "key": "zoo",
+        "value": "wildlife_park"
+    },
+    "terms": [
+        "indigenous animals"
+    ],
+    "name": "Wildlife Park"
+}

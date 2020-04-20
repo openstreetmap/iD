@@ -1,17 +1,15 @@
 {
-    "icon": "slaughterhouse",
-    "fields": [
-        "operator",
-        "address",
-        "building_area",
-        "opening_hours"
-    ],
+    "icon": "temaki-cleaver",
     "geometry": [
         "point",
         "area"
     ],
     "terms": [
-        "meat"
+        "chicken",
+        "beef",
+        "lamb",
+        "meat",
+        "pork"
     ],
     "tags": {
         "shop": "butcher"

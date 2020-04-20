@@ -1,0 +1,19 @@
+{
+    "icon": "temaki-pedestrian",
+    "geometry": [
+        "vertex"
+    ],
+    "tags": {
+        "railway": "crossing"
+    },
+    "terms": [
+        "crossing",
+        "pedestrian crossing",
+        "railroad crossing",
+        "level crossing",
+        "grade crossing",
+        "path through railroad",
+        "train crossing"
+    ],
+    "name": "Railway Crossing (Path)"
+}

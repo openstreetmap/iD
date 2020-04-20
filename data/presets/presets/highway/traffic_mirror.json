@@ -1,0 +1,25 @@
+{
+    "icon": "maki-circle-stroked",
+    "geometry": [
+        "point",
+        "vertex"
+    ],
+    "fields": [
+        "direction"
+    ],
+    "tags": {
+        "highway": "traffic_mirror"
+    },
+    "terms": [
+        "blind spot",
+        "convex",
+        "corner",
+        "curved",
+        "roadside",
+        "round",
+        "safety",
+        "sphere",
+        "visibility"
+    ],
+    "name": "Traffic Mirror"
+}

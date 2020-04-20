@@ -1,0 +1,25 @@
+{
+    "icon": "maki-bicycle",
+    "fields": [
+        "{amenity/bicycle_parking}",
+        "building_area"
+    ],
+    "geometry": [
+        "point",
+        "vertex",
+        "area"
+    ],
+    "tags": {
+        "amenity": "bicycle_parking",
+        "bicycle_parking": "shed"
+    },
+    "reference": {
+        "key": "bicycle_parking"
+    },
+    "terms": [
+        "cycle shed",
+        "cycling",
+        "Bike Shed"
+    ],
+    "name": "Bicycle Shed"
+}

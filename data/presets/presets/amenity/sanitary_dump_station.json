@@ -1,9 +1,15 @@
 {
+    "icon": "temaki-camper_trailer_dump",
     "fields": [
         "operator",
-        "access_toilets",
+        "access_simple",
         "fee",
+        "payment_multi_fee",
+        "charge_fee",
         "water_point"
+    ],
+    "moreFields": [
+        "opening_hours"
     ],
     "geometry": [
         "point",

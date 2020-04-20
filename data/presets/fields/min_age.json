@@ -1,0 +1,9 @@
+{
+    "key": "min_age",
+    "type": "number",
+    "minValue": 0,
+    "label": "Minimum Age",
+    "terms": [
+        "lower age limit"
+    ]
+}

@@ -1,0 +1,16 @@
+{
+    "icon": "maki-marker-stroked",
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "tags": {
+        "craft": "locksmith"
+    },
+    "reference": {
+        "key": "shop",
+        "value": "locksmith"
+    },
+    "name": "Locksmith",
+    "searchable": false
+}

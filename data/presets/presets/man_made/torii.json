@@ -1,0 +1,27 @@
+{
+    "icon": "temaki-shinto",
+    "fields": [
+        "height",
+        "material",
+        "colour",
+        "lit"
+    ],
+    "moreFields": [
+        "name",
+        "operator",
+        "ref"
+    ],
+    "geometry": [
+        "point",
+        "vertex",
+        "line"
+    ],
+    "terms": [
+        "Japanese gate",
+        "Shinto shrine"
+    ],
+    "tags": {
+        "man_made": "torii"
+    },
+    "name": "Torii"
+}

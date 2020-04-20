@@ -1,0 +1,22 @@
+{
+    "icon": "maki-watermill",
+    "fields": [
+        "building_area"
+    ],
+    "moreFields": [
+        "gnis/feature_id"
+    ],
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "terms": [
+        "water",
+        "wheel",
+        "mill"
+    ],
+    "tags": {
+        "man_made": "watermill"
+    },
+    "name": "Watermill"
+}

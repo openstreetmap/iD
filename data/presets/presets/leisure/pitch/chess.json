@@ -1,0 +1,25 @@
+{
+    "icon": "fas-chess-bishop",
+    "geometry": [
+        "area",
+        "point"
+    ],
+    "tags": {
+        "leisure": "pitch",
+        "sport": "chess"
+    },
+    "reference": {
+        "key": "sport",
+        "value": "chess"
+    },
+    "terms": [
+        "chessboard",
+        "checkerboard",
+        "checkers",
+        "chequerboard",
+        "garden chess",
+        "large chess",
+        "oversize chess"
+    ],
+    "name": "Giant Chess Board"
+}

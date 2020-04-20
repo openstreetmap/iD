@@ -1,8 +1,22 @@
 {
-    "icon": "car",
+    "icon": "temaki-sign_and_car",
     "fields": [
+        "name",
         "operator",
-        "capacity"
+        "operator/type",
+        "capacity",
+        "address",
+        "payment_multi",
+        "supervised"
+    ],
+    "moreFields": [
+        "brand",
+        "email",
+        "fax",
+        "lit",
+        "phone",
+        "website",
+        "wheelchair"
     ],
     "geometry": [
         "point",
@@ -11,5 +25,5 @@
     "tags": {
         "amenity": "car_sharing"
     },
-    "name": "Car Sharing"
+    "name": "Car Sharing Station"
 }

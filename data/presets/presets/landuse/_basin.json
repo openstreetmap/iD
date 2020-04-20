@@ -1,0 +1,16 @@
+{
+    "icon": "maki-water",
+    "fields": [
+        "name",
+        "basin",
+        "intermittent_yes"
+    ],
+    "geometry": [
+        "area"
+    ],
+    "tags": {
+        "landuse": "basin"
+    },
+    "name": "Basin",
+    "searchable": false
+}

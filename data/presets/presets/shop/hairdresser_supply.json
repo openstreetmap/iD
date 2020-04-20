@@ -1,0 +1,16 @@
+{
+    "icon": "temaki-hair_care",
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "terms": [
+        "barber",
+        "shampoo",
+        "conditioner"
+    ],
+    "tags": {
+        "shop": "hairdresser_supply"
+    },
+    "name": "Hairdresser Supply Store"
+}

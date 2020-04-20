@@ -1,0 +1,19 @@
+{
+    "icon": "temaki-capitol",
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "terms": [
+        "council",
+        "courthouse",
+        "government",
+        "mayor",
+        "municipality"
+    ],
+    "tags": {
+        "amenity": "townhall",
+        "townhall:type": "city"
+    },
+    "name": "City Hall"
+}

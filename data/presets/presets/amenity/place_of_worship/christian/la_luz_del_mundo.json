@@ -1,0 +1,25 @@
+{
+    "icon": "maki-place-of-worship",
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "terms": [
+        "christian",
+        "church",
+        "house of God",
+        "house of prayer",
+        "house of worship",
+        "the light of the world church"
+    ],
+    "tags": {
+        "amenity": "place_of_worship",
+        "religion": "christian",
+        "denomination": "la_luz_del_mundo"
+    },
+    "reference": {
+        "key": "denomination",
+        "value": "la_luz_del_mundo"
+    },
+    "name": "La Luz del Mundo Temple"
+}

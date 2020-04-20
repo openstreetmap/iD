@@ -1,8 +1,7 @@
 {
-    "icon": "commercial",
+    "icon": "maki-suitcase",
     "fields": [
-        "address",
-        "levels",
+        "{building}",
         "smoking"
     ],
     "geometry": [

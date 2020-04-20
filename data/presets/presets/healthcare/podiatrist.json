@@ -1,0 +1,16 @@
+{
+    "icon": "maki-hospital",
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "terms": [
+        "foot",
+        "feet",
+        "nails"
+    ],
+    "tags": {
+        "healthcare": "podiatrist"
+    },
+    "name": "Podiatrist"
+}

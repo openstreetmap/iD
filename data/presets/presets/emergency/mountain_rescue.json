@@ -1,0 +1,31 @@
+{
+    "icon": "fas-ambulance",
+    "fields": [
+        "name",
+        "address",
+        "operator",
+        "building_area",
+        "email",
+        "website"
+        
+    ],
+    "moreFields": [        
+        "fax",
+        "gnis/feature_id",
+        "phone",        
+        "wheelchair"
+    ],
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "terms": [
+        "EMS",
+        "EMT",
+        "rescue"
+    ],
+    "tags": {
+        "emergency": "mountain_rescue"
+    },
+    "name": "Mountain Rescue"
+}

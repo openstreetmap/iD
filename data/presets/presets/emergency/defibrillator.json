@@ -1,0 +1,22 @@
+{
+    "icon": "maki-defibrillator",
+    "fields": [
+        "indoor",
+        "ref",
+        "operator"
+    ],
+    "moreFields": [
+        "level"
+    ],
+    "geometry": [
+        "point",
+        "vertex"
+    ],
+    "terms": [
+        "AED"
+    ],
+    "tags": {
+        "emergency": "defibrillator"
+    },
+    "name": "Defibrillator"
+}

@@ -1,11 +1,17 @@
 {
+    "icon": "temaki-hangar",
     "geometry": [
         "area"
     ],
     "fields": [
+        "name",
         "building_area"
     ],
     "tags": {
+        "aeroway": "hangar"
+    },
+    "addTags": {
+        "building": "hangar",
         "aeroway": "hangar"
     },
     "name": "Hangar"

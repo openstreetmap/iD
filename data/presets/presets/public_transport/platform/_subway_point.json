@@ -1,0 +1,22 @@
+{
+    "icon": "temaki-subway",
+    "fields": [
+        "{public_transport/platform_point}"
+    ],
+    "moreFields": [
+        "{public_transport/platform_point}"
+    ],
+    "geometry": [
+        "point"
+    ],
+    "tags": {
+        "public_transport": "platform",
+        "subway": "yes"
+    },
+    "reference": {
+        "key": "railway",
+        "value": "platform"
+    },
+    "searchable": false,
+    "name": "Subway Stop / Platform"
+}

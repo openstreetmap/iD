@@ -1,0 +1,17 @@
+{
+    "key": "piste:difficulty",
+    "type": "combo",
+    "label": "Difficulty",
+    "placeholder": "Easy, Intermediate, Advanced...",
+    "strings": {
+        "options": {
+            "novice": "Novice - L: <30° incline",
+            "easy": "Easy - WS: 30-35° incline",
+            "intermediate": "Intermediate - ZS: 35-40° incline",
+            "advanced": "Advanced - S: 40-45° incline",
+            "expert": "Expert - SS: 45–50° incline",
+            "freeride": "Freeride - AS: 50–55° incline",
+            "extreme": "Extreme - EX: >55° incline"
+        }
+    }
+}

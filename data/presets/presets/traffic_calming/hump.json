@@ -1,15 +1,20 @@
 {
+    "icon": "temaki-speed_hump",
     "fields": [
-        "surface"
+        "surface",
+        "direction_vertex"
     ],
     "geometry": [
-        "vertex"
+        "vertex",
+        "line"
+    ],
+    "terms": [
+        "bump",
+        "speed",
+        "slow"
     ],
     "tags": {
         "traffic_calming": "hump"
     },
-    "terms": [
-        "speed bump"
-    ],
     "name": "Speed Hump"
 }

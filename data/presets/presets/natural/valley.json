@@ -1,0 +1,33 @@
+{
+    "icon": "temaki-valley",
+    "fields": [
+        "name",
+        "ele_node",
+        "description"
+    ],
+    "geometry": [
+        "vertex",
+        "point",
+        "line"
+    ],
+    "tags": {
+        "natural": "valley"
+    },
+    "terms": [
+        "canyon",
+        "dale",
+        "dell",
+        "dene",
+        "depression",
+        "glen",
+        "gorge",
+        "gully",
+        "gulley",
+        "gultch",
+        "hollow",
+        "ravine",
+        "rift",
+        "vale"
+    ],
+    "name": "Valley"
+}

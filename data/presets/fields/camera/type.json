@@ -1,0 +1,12 @@
+{
+    "key": "camera:type",
+    "type": "combo",
+    "label": "Camera Type",
+    "strings": {
+        "options": {
+            "fixed": "Fixed",
+            "panning": "Panning",
+            "dome": "Dome"
+        }
+    }
+}

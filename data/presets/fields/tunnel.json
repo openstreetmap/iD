@@ -1,5 +1,6 @@
 {
     "key": "tunnel",
-    "type": "combo",
-    "label": "Tunnel"
+    "type": "typeCombo",
+    "label": "Type",
+    "placeholder": "Default"
 }

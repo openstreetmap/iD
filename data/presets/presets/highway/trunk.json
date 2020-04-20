@@ -1,13 +1,28 @@
 {
-    "icon": "highway-trunk",
+    "icon": "iD-highway-trunk",
     "fields": [
+        "name",
+        "ref_road_number",
         "oneway",
         "maxspeed",
-        "structure",
-        "access",
         "lanes",
         "surface",
-        "ref"
+        "structure",
+        "access"
+    ],
+    "moreFields": [
+        "charge_toll",
+        "covered",
+        "incline",
+        "junction_line",
+        "lit",
+        "maxheight",
+        "maxweight_bridge",
+        "minspeed",
+        "not/name",
+        "smoothness",
+        "toll",
+        "width"
     ],
     "geometry": [
         "line"
@@ -15,6 +30,9 @@
     "tags": {
         "highway": "trunk"
     },
-    "terms": [],
+    "terms": [
+        "road",
+        "street"
+    ],
     "name": "Trunk Road"
 }

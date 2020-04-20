@@ -1,5 +1,17 @@
 {
-    "icon": "waste-basket",
+    "icon": "maki-waste-basket",
+    "fields": [
+        "operator",
+        "waste",
+        "collection_times",
+        "material",
+        "colour"
+    ],
+    "moreFields": [
+        "covered",
+        "indoor",
+        "manufacturer"
+    ],
     "geometry": [
         "point",
         "vertex"
@@ -9,10 +21,10 @@
     },
     "terms": [
         "bin",
+        "garbage",
         "rubbish",
         "litter",
-        "trash",
-        "garbage"
+        "trash"
     ],
     "name": "Waste Basket"
 }

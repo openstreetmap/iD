@@ -1,4 +1,11 @@
 {
+    "icon": "temaki-pedestrian",
+    "fields": [
+        "{type/route/hiking}"
+    ],
+    "moreFields": [
+        "{type/route/hiking}"
+    ],
     "geometry": [
         "relation"
     ],
@@ -6,11 +13,5 @@
         "type": "route",
         "route": "foot"
     },
-    "name": "Foot Route",
-    "icon": "route-foot",
-    "fields": [
-        "ref",
-        "operator",
-        "network"
-    ]
+    "name": "Foot Route"
 }

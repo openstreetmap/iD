@@ -1,7 +1,6 @@
 {
-    "geometry": "area",
+    "icon": "maki-golf",
     "name": "Golf Features",
-    "icon": "golf",
     "members": [
         "golf/fairway",
         "golf/green",
@@ -9,6 +8,10 @@
         "golf/rough",
         "golf/bunker",
         "golf/tee",
-        "golf/water_hazard"
+        "golf/water_hazard",
+        "golf/driving_range",
+        "golf/hole",
+        "golf/cartpath",
+        "golf/path"
     ]
 }

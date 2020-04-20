@@ -1,18 +1,13 @@
 {
-    "icon": "shop",
-    "fields": [
-        "operator",
-        "address",
-        "building_area",
-        "opening_hours"
-    ],
+    "icon": "fas-blender",
     "geometry": [
         "point",
         "area"
     ],
     "terms": [
         "home",
-        "household"
+        "household",
+        "kitchenware"
     ],
     "tags": {
         "shop": "houseware"

@@ -1,0 +1,20 @@
+{
+    "icon": "maki-natural",
+    "name": "Natural Features",
+    "members": [
+        "natural/water",
+        "natural/wood",
+        "natural/scrub",
+        "natural/wetland",
+        "natural/grassland",
+        "natural/heath",
+        "natural/bare_rock",
+        "natural/beach",
+        "natural/cave_entrance",
+        "natural/glacier",
+        "natural/coastline",
+        "natural/tree_row",
+        "natural/peak",
+        "natural/cliff"
+    ]
+}

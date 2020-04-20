@@ -1,18 +1,34 @@
 {
-    "icon": "highway-road",
+    "icon": "temaki-racetrack_oval",
     "fields": [
         "surface",
-        "sport_racing",
+        "sport_racing_nonmotor",
         "lit",
         "width",
         "lanes"
     ],
+    "moreFields": [
+        "access",
+        "covered",
+        "gnis/feature_id",
+        "indoor",
+        "level"
+    ],
     "geometry": [
+        "line",
         "point",
-        "line"
+        "area"
     ],
     "tags": {
         "leisure": "track"
     },
-    "name": "Racetrack (non-Motorsport)"
+    "terms": [
+        "cycle",
+        "dog",
+        "greyhound",
+        "horse",
+        "race*",
+        "track"
+    ],
+    "name": "Racetrack (Non-Motorsport)"
 }

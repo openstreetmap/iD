@@ -1,0 +1,22 @@
+{
+    "icon": "temaki-domed_tower",
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "terms": [
+        "Islam",
+        "mosque",
+        "Muezzin",
+        "Muslim"
+    ],
+    "tags": {
+        "man_made": "tower",
+        "tower:type": "minaret"
+    },
+    "reference": {
+        "key": "tower:type",
+        "value": "minaret"
+    },
+    "name": "Minaret"
+}

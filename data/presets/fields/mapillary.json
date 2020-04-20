@@ -1,0 +1,8 @@
+{
+    "key": "mapillary",
+    "type": "identifier",
+    "label": "Mapillary Image ID",
+    "urlFormat": "https://mapillary.com/app/?focus=photo&pKey={value}",
+    "pattern": "^[a-zA-Z0-9-_]{1,}$",
+    "universal": true
+}

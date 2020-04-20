@@ -1,0 +1,11 @@
+{
+    "icon": "maki-playground",
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "tags": {
+        "playground": "climbingframe"
+    },
+    "name": "Climbing Frame"
+}

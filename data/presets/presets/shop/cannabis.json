@@ -1,0 +1,22 @@
+{
+    "icon": "fas-cannabis",
+    "moreFields": [
+        "{shop}",
+        "min_age"
+    ],
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "terms": [
+        "420",
+        "marijuana",
+        "pot",
+        "reefer",
+        "weed"
+    ],
+    "tags": {
+        "shop": "cannabis"
+    },
+    "name": "Cannabis Shop"
+}

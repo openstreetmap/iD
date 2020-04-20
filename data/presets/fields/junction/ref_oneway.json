@@ -1,0 +1,9 @@
+{
+    "key": "junction:ref",
+    "type": "text",
+    "label": "Junction Number",
+    "prerequisiteTag": {
+        "key": "oneway",
+        "value": "yes"
+    }
+}

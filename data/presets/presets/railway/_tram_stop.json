@@ -1,0 +1,17 @@
+{
+    "icon": "temaki-tram",
+    "fields": [
+        "{public_transport/stop_position}"
+    ],
+    "moreFields": [
+        "{public_transport/stop_position}"
+    ],
+    "geometry": [
+        "vertex"
+    ],
+    "tags": {
+        "railway": "tram_stop"
+    },
+    "name": "Tram Stopping Position",
+    "searchable": false
+}

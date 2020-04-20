@@ -1,9 +1,8 @@
 {
-    "fields": [
-        "operator"
-    ],
+    "icon": "temaki-vending_love",
     "geometry": [
-        "point"
+        "point",
+        "vertex"
     ],
     "terms": [
         "condom"
@@ -11,6 +10,10 @@
     "tags": {
         "amenity": "vending_machine",
         "vending": "condoms"
+    },
+    "reference": {
+        "key": "vending",
+        "value": "condoms"
     },
     "name": "Condom Vending Machine"
 }

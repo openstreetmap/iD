@@ -1,11 +1,5 @@
 {
-    "icon": "lodging",
-    "fields": [
-        "operator",
-        "address",
-        "building_area",
-        "opening_hours"
-    ],
+    "icon": "maki-lodging",
     "geometry": [
         "point",
         "area"

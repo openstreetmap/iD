@@ -1,0 +1,29 @@
+{
+    "type": "address",
+    "key": "post",
+    "keys": [
+        "post:block_number",
+        "post:city",
+        "post:block_number",
+        "post:conscriptionnumber",
+        "post:county",
+        "post:country",
+        "post:county",
+        "post:district",
+        "post:floor",
+        "post:hamlet",
+        "post:housename",
+        "post:housenumber",
+        "post:neighbourhood",
+        "post:place",
+        "post:postcode",
+        "post:province",
+        "post:quarter",
+        "post:state",
+        "post:street",
+        "post:subdistrict",
+        "post:suburb",
+        "post:unit"
+    ],
+    "label": "Delivery Address"
+}

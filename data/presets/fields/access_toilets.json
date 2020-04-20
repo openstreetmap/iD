@@ -1,6 +1,0 @@
-{
-    "key": "access",
-    "type": "combo",
-    "label": "Access",
-    "options": ["yes", "permissive", "private", "customers"]
-}

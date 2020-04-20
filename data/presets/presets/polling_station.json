@@ -1,0 +1,42 @@
+{
+    "icon": "fas-vote-yea",
+    "fields": [
+        "name",
+        "ref",
+        "operator",
+        "address",
+        "opening_hours",
+        "building_area"
+    ],
+    "moreFields": [
+        "air_conditioning",
+        "email",
+        "fax",
+        "internet_access",
+        "internet_access/fee",
+        "internet_access/ssid",
+        "level",
+        "phone",
+        "website",
+        "wheelchair"
+    ],
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "terms": [
+        "ballot box",
+        "ballot drop",
+        "democracy",
+        "elections",
+        "polling place",
+        "vote",
+        "voting booth",
+        "voting machine"
+    ],
+    "tags": {
+        "polling_station": "*"
+    },
+    "matchScore": 0.75,
+    "name": "Temporary Polling Place"
+}

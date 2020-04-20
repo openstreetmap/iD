@@ -1,4 +1,11 @@
 {
+    "icon": "iD-route-detour",
+    "fields": [
+        "name",
+        "ref_route",
+        "from",
+        "to"
+    ],
     "geometry": [
         "relation"
     ],
@@ -6,9 +13,5 @@
         "type": "route",
         "route": "detour"
     },
-    "name": "Detour Route",
-    "icon": "route-detour",
-    "fields": [
-        "ref"
-    ]
+    "name": "Detour Route"
 }

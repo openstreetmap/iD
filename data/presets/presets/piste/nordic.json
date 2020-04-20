@@ -1,0 +1,27 @@
+{
+    "icon": "fas-skiing-nordic",
+    "fields": [
+        "name",
+        "piste/type",
+        "piste/difficulty_nordic",
+        "piste/grooming_nordic",
+        "oneway",
+        "lit"
+    ],
+    "geometry": [
+        "line",
+        "area"
+    ],
+    "tags": {
+        "piste:type": "nordic"
+    },
+    "terms": [
+        "crosscountry",
+        "nordic skiing",
+        "piste",
+        "skate skiing",
+        "skiing",
+        "xc"
+    ],
+    "name": "Cross-Country Ski Trail"
+}

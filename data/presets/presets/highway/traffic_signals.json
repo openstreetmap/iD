@@ -1,4 +1,5 @@
 {
+    "icon": "temaki-traffic_signals",
     "geometry": [
         "vertex"
     ],
@@ -6,7 +7,8 @@
         "highway": "traffic_signals"
     },
     "fields": [
-        "traffic_signals"
+        "traffic_signals",
+        "traffic_signals/direction"
     ],
     "terms": [
         "light",

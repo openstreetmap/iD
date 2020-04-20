@@ -1,5 +1,12 @@
 {
-    "name": "Administrative Boundary",
+    "icon": "iD-boundary",
+    "fields": [
+        "name",
+        "admin_level"
+    ],
+    "moreFields": [
+        "gnis/feature_id"
+    ],
     "geometry": [
         "relation"
     ],
@@ -7,8 +14,9 @@
         "type": "boundary",
         "boundary": "administrative"
     },
-    "fields": [
-        "admin_level"
-    ],
-    "icon": "boundary"
+    "reference": {
+        "key": "boundary",
+        "value": "administrative"
+    },
+    "name": "Administrative Boundary"
 }

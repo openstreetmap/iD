@@ -1,0 +1,12 @@
+{
+    "icon": "maki-rail",
+    "geometry": [
+        "point",
+        "vertex"
+    ],
+    "tags": {
+        "railway": "halt"
+    },
+    "name": "Train Station (Halt / Request)",
+    "searchable": false
+}

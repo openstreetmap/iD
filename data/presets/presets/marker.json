@@ -1,0 +1,32 @@
+{
+    "icon": "temaki-silo",
+    "fields": [
+        "ref",
+        "operator",
+        "marker",
+        "utility",
+        "inscription",
+        "colour"
+    ],
+    "moreFields": [
+        "height",
+        "location",
+        "manufacturer",
+        "material"
+    ],
+    "geometry": [
+        "point"
+    ],
+    "terms": [
+        "identifier",
+        "marking",
+        "plate",
+        "pole",
+        "post",
+        "sign"
+    ],
+    "tags": {
+        "marker": "*"
+    },
+    "name": "Marker"
+}

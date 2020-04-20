@@ -1,0 +1,19 @@
+{
+    "icon": "maki-communications-tower",
+    "fields": [
+        "name",
+        "height"
+    ],
+    "moreFields": [
+        "seamark/type"
+    ],
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "tags": {
+        "man_made": "beacon"
+    },
+    "name": "Beacon",
+    "matchScore": 0.5
+}

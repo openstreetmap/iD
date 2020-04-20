@@ -1,0 +1,13 @@
+{
+    "icon": "maki-car",
+    "geometry": [
+        "vertex"
+    ],
+    "tags": {
+        "highway": "emergency_bay"
+    },
+    "terms": [
+        "Highway Emergency Bay"
+    ],
+    "name": "Emergency Stopping Place"
+}

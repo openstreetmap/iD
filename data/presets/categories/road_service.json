@@ -1,0 +1,12 @@
+{
+    "icon": "iD-highway-service",
+    "name": "Service Roads",
+    "members": [
+        "highway/service",
+        "highway/service/parking_aisle",
+        "highway/service/driveway",
+        "highway/service/alley",
+        "highway/service/emergency_access",
+        "highway/service/drive-through"
+    ]
+}

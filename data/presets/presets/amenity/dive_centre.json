@@ -1,0 +1,33 @@
+{
+    "icon": "temaki-scuba_diving",
+    "fields": [
+        "name",
+        "operator",
+        "address",
+        "building_area",
+        "opening_hours",
+        "scuba_diving"
+    ],
+    "moreFields": [
+        "email",
+        "fax",
+        "gnis/feature_id",
+        "level",
+        "payment_multi",
+        "phone",
+        "website",
+        "wheelchair"
+    ],
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "terms": [
+        "diving",
+        "scuba"
+    ],
+    "tags": {
+        "amenity": "dive_centre"
+    },
+    "name": "Dive Center"
+}

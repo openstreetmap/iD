@@ -1,0 +1,17 @@
+{
+    "icon": "temaki-security_camera",
+    "geometry": [
+        "point",
+        "vertex"
+    ],
+    "fields": [
+        "direction",
+        "ref",
+        "maxspeed"
+    ],
+    "tags": {
+        "highway": "speed_camera"
+    },
+    "terms": [],
+    "name": "Speed Camera"
+}

@@ -1,0 +1,25 @@
+{
+    "fields": [
+        "crossing",
+        "access",
+        "surface",
+        "tactile_paving",
+        "crossing/island"
+    ],
+    "geometry": [
+        "line"
+    ],
+    "tags": {
+        "footway": "crossing"
+    },
+    "addTags": {
+        "highway": "footway",
+        "footway": "crossing"
+    },
+    "reference": {
+        "key": "footway",
+        "value": "crossing"
+    },
+    "searchable": false,
+    "name": "Pedestrian Crossing"
+}

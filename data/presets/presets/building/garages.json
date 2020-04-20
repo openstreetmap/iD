@@ -1,6 +1,7 @@
 {
-    "icon": "warehouse",
+    "icon": "fas-warehouse",
     "fields": [
+        "{building}",
         "capacity"
     ],
     "geometry": [

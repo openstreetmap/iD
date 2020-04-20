@@ -1,7 +1,8 @@
 {
-    "icon": "marker",
-    "fields": [
-        "population"
+    "icon": "maki-triangle-stroked",
+    "moreFields": [
+        "{place}",
+        "website"
     ],
     "geometry": [
         "point",

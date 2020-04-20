@@ -1,5 +1,9 @@
 {
     "key": "cuisine",
-    "type": "combo",
-    "label": "Cuisine"
+    "type": "semiCombo",
+    "label": "Cuisines",
+    "terms": [
+        "fare",
+        "food types"
+    ]
 }

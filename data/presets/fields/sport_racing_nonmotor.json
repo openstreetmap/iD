@@ -1,0 +1,12 @@
+{
+    "key": "sport",
+    "type": "semiCombo",
+    "label": "Sports",
+    "options": [
+        "bmx",
+        "cycling",
+        "dog_racing",
+        "horse_racing",
+        "running"
+    ]
+}

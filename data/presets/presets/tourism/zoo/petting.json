@@ -1,0 +1,22 @@
+{
+    "icon": "fas-horse",
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "tags": {
+        "tourism": "zoo",
+        "zoo": "petting_zoo"
+    },
+    "reference": {
+        "key": "zoo",
+        "value": "petting_zoo"
+    },
+    "terms": [
+        "Children's Zoo",
+        "Children's Farm",
+        "Petting Farm",
+        "farm animals"
+    ],
+    "name": "Petting Zoo"
+}

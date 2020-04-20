@@ -1,0 +1,17 @@
+{
+    "icon": "maki-farm",
+    "fields": [
+        "name",
+        "operator",
+        "crop"
+    ],
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "tags": {
+        "landuse": "farm"
+    },
+    "name": "Farmland",
+    "searchable": false
+}

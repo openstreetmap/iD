@@ -1,0 +1,15 @@
+{
+    "icon": "maki-hospital",
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "terms": [
+        "terminal",
+        "illness"
+    ],
+    "tags": {
+        "healthcare": "hospice"
+    },
+    "name": "Hospice"
+}

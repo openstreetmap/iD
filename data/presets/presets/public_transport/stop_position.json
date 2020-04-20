@@ -1,15 +1,24 @@
 {
-    "icon": "bus",
+    "icon": "maki-bus",
     "fields": [
-        "ref",
+        "name",
+        "ref_stop_position",
         "network",
         "operator"
     ],
+    "moreFields": [],
     "geometry": [
         "vertex"
     ],
     "tags": {
         "public_transport": "stop_position"
     },
-    "name": "Stop Position"
+    "terms": [
+        "public transit",
+        "public transportation",
+        "transit",
+        "transportation"
+    ],
+    "name": "Transit Stopping Location",
+    "matchScore": 0.2
 }

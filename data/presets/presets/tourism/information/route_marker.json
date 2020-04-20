@@ -1,0 +1,33 @@
+{
+    "icon": "maki-information",
+    "fields": [
+        "ref",
+        "operator",
+        "colour",
+        "material",
+        "ele_node"
+    ],
+    "geometry": [
+        "point",
+        "vertex"
+    ],
+    "terms": [
+        "cairn",
+        "painted blaze",
+        "route flag",
+        "route marker",
+        "stone pile",
+        "trail blaze",
+        "trail post",
+        "way marker"
+    ],
+    "tags": {
+        "tourism": "information",
+        "information": "route_marker"
+    },
+    "reference": {
+        "key": "information",
+        "value": "route_marker"
+    },
+    "name": "Trail Marker"
+}

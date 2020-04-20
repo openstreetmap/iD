@@ -1,23 +1,33 @@
 {
-    "icon": "bicycle",
+    "icon": "temaki-bicycle_repair",
     "fields": [
         "operator",
         "brand",
         "opening_hours",
         "fee",
-        "service/bicycle/chain_tool",
-        "service/bicycle/pump"
+        "payment_multi_fee",
+        "charge_fee",
+        "service/bicycle"
+    ],
+    "moreFields": [
+        "colour",
+        "covered",
+        "indoor",
+        "level",
+        "manufacturer"
     ],
     "geometry": [
         "point",
-        "vertex",
-        "area"
+        "vertex"
     ],
     "terms": [
-        "bike",
-        "repair",
-        "chain",
-        "pump"
+        "bike chain",
+        "bike multitool",
+        "bike repair",
+        "bike tools",
+        "cycle pump",
+        "cycle repair",
+        "cycling"
     ],
     "tags": {
         "amenity": "bicycle_repair_station"

@@ -1,9 +1,22 @@
 {
-    "icon": "music",
+    "icon": "fas-microphone",
     "fields": [
-        "studio_type",
+        "name",
+        "studio",
         "address",
-        "building_area"
+        "building_area",
+        "website"
+    ],
+    "moreFields": [
+        "email",
+        "fax",
+        "gnis/feature_id",
+        "internet_access",
+        "internet_access/fee",
+        "internet_access/ssid",
+        "level",
+        "phone",
+        "wheelchair"
     ],
     "geometry": [
         "point",

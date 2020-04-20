@@ -1,0 +1,28 @@
+{
+    "icon": "temaki-bicycle_structure",
+    "fields": [
+        "{amenity/bicycle_parking}",
+        "opening_hours",
+        "building_area"
+    ],
+    "geometry": [
+        "point",
+        "vertex",
+        "area"
+    ],
+    "tags": {
+        "amenity": "bicycle_parking",
+        "bicycle_parking": "building"
+    },
+    "reference": {
+        "key": "bicycle_parking"
+    },
+    "terms": [
+        "Bike Parking Station",
+        "cycle parking",
+        "cycling",
+        "Multi-Storey Bicycle Park",
+        "Multi-Storey Bike Park"
+    ],
+    "name": "Bicycle Parking Garage"
+}

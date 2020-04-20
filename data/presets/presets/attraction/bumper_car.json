@@ -1,0 +1,21 @@
+{
+    "icon": "fas-car-crash",
+    "moreFields": [
+        "{attraction}",
+        "max_age",
+        "min_age"
+    ],
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "terms": [
+        "theme park",
+        "dodgem cars",
+        "autoscooter"
+    ],
+    "tags": {
+        "attraction": "bumper_car"
+    },
+    "name": "Bumper Cars"
+}

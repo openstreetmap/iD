@@ -1,0 +1,17 @@
+{
+    "icon": "temaki-cairn",
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "terms": [
+        "rock pile",
+        "stone stack",
+        "stone pile",
+        "càrn"
+    ],
+    "tags": {
+        "man_made": "cairn"
+    },
+    "name": "Cairn"
+}

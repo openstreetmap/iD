@@ -1,0 +1,6 @@
+{
+    "key": "water_volume",
+    "type": "number",
+    "label": "Water Reserve Volume (m³)",
+    "snake_case": false
+}

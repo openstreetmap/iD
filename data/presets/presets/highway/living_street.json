@@ -1,12 +1,26 @@
 {
-    "icon": "highway-living-street",
+    "icon": "iD-highway-living-street",
     "fields": [
+        "name",
         "oneway",
         "maxspeed",
-        "structure",
-        "access",
+        "lanes",
         "surface",
-        "cycleway"
+        "structure",
+        "access"
+    ],
+    "moreFields": [
+        "covered",
+        "cycleway",
+        "flood_prone",
+        "junction_line",
+        "lit",
+        "maxheight",
+        "maxweight_bridge",
+        "oneway/bicycle",
+        "smoothness",
+        "trolley_wire",
+        "width"
     ],
     "geometry": [
         "line"

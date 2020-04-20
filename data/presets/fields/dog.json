@@ -1,0 +1,16 @@
+{
+    "key": "dog",
+    "type": "combo",
+    "label": "Dogs",
+    "strings": {
+        "options": {
+            "yes": "Allowed",
+            "leashed": "Leashed Only",
+            "no": "Not Allowed"
+        }
+    },
+    "terms": [
+        "animals",
+        "pets"
+    ]
+}

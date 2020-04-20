@@ -1,0 +1,15 @@
+{
+    "icon": "maki-pitch",
+    "geometry": [
+        "point"
+    ],
+    "terms": [
+        "chin-up bar",
+        "high bar",
+        "pull-up bar"
+    ],
+    "tags": {
+        "playground": "horizontal_bar"
+    },
+    "name": "Play Horizontal Bar"
+}

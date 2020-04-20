@@ -1,11 +1,22 @@
 {
+    "icon": "maki-water",
+    "fields": [
+        "name",
+        "drinking_water",
+        "intermittent"
+    ],
     "geometry": [
         "point",
         "vertex"
     ],
-    "terms": [],
     "tags": {
         "natural": "spring"
     },
+    "terms": [
+        "aquifer",
+        "hydro",
+        "seep",
+        "water source"
+    ],
     "name": "Spring"
 }

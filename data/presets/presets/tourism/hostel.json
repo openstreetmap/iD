@@ -1,10 +1,10 @@
 {
-    "icon": "lodging",
+    "icon": "temaki-bunk_beds",
     "fields": [
-        "operator",
-        "address",
-        "building_area",
-        "smoking"
+        "{tourism/guest_house}"
+    ],
+    "moreFields": [
+        "{tourism/guest_house}"
     ],
     "geometry": [
         "point",
@@ -13,5 +13,12 @@
     "tags": {
         "tourism": "hostel"
     },
+    "terms": [
+        "bunk beds",
+        "dormitories",
+        "dorms",
+        "lodging",
+        "overnight accommodations"
+    ],
     "name": "Hostel"
 }

@@ -1,0 +1,34 @@
+{
+    "icon": "temaki-monorail",
+    "fields": [
+        "{public_transport/stop_position}"
+    ],
+    "moreFields": [
+        "{public_transport/stop_position}"
+    ],
+    "geometry": [
+        "vertex"
+    ],
+    "tags": {
+        "public_transport": "stop_position",
+        "monorail": "yes"
+    },
+    "addTags": {
+        "public_transport": "stop_position",
+        "monorail": "yes",
+        "railway": "stop"
+    },
+    "reference": {
+        "key": "railway",
+        "value": "stop"
+    },
+    "terms": [
+        "monorail",
+        "public transit",
+        "public transportation",
+        "rail",
+        "transit",
+        "transportation"
+    ],
+    "name": "Monorail Stopping Location"
+}

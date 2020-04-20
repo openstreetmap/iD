@@ -1,0 +1,15 @@
+{
+    "key": "piste:difficulty",
+    "type": "combo",
+    "label": "Difficulty",
+    "placeholder": "Easy, Intermediate, Advanced...",
+    "strings": {
+        "options": {
+            "novice": "Novice - Flat, no effort needed",
+            "easy": "Easy - Soft hills, short steep section",
+            "intermediate": "Intermediate - Steep section",
+            "advanced": "Advanced - Narrow, steep or icy section, sharp turn",
+            "expert": "Expert - Dangerous terrain around"
+        }
+    }
+}

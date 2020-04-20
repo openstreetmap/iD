@@ -1,0 +1,18 @@
+{
+    "icon": "maki-attraction",
+    "fields": [
+        "name",
+        "tourism"
+    ],
+    "geometry": [
+        "point",
+        "vertex",
+        "line",
+        "area"
+    ],
+    "tags": {
+        "tourism": "*"
+    },
+    "searchable": false,
+    "name": "Tourism Feature"
+}

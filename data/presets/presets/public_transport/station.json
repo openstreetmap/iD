@@ -1,0 +1,41 @@
+{
+    "icon": "maki-rail",
+    "fields": [
+        "name",
+        "network",
+        "operator",
+        "address",
+        "building_area",
+        "internet_access"
+    ],
+    "moreFields": [
+        "air_conditioning",
+        "baby_feeding",
+        "email",
+        "fax",
+        "gnis/feature_id",
+        "internet_access/fee",
+        "internet_access/ssid",
+        "level",
+        "phone",
+        "website",
+        "wheelchair"
+    ],
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "tags": {
+        "public_transport": "station"
+    },
+    "terms": [
+        "public transit",
+        "public transportation",
+        "station",
+        "terminal",
+        "transit",
+        "transportation"
+    ],
+    "name": "Transit Station",
+    "matchScore": 0.2
+}

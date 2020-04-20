@@ -1,0 +1,27 @@
+{
+    "icon": "maki-danger",
+    "fields": [
+        "name"
+    ],
+    "moreFields": [
+        "gnis/feature_id"
+    ],
+    "geometry": [
+        "point",
+        "vertex",
+        "area"
+    ],
+    "tags": {
+        "military": "nuclear_explosion_site"
+    },
+    "terms": [
+        "atom",
+        "blast",
+        "bomb",
+        "detonat*",
+        "nuke",
+        "site",
+        "test"
+    ],
+    "name": "Nuclear Explosion Site"
+}

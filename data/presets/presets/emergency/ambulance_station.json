@@ -1,9 +1,18 @@
 {
-    "icon": "hospital",
+    "icon": "fas-ambulance",
     "fields": [
+        "name",
         "operator",
         "building_area",
         "address"
+    ],
+    "moreFields": [
+        "email",
+        "fax",
+        "gnis/feature_id",
+        "phone",
+        "website",
+        "wheelchair"
     ],
     "geometry": [
         "point",

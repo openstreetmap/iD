@@ -1,0 +1,18 @@
+{
+    "icon": "maki-shelter",
+    "fields": [
+        "name",
+        "building_area",
+        "bench",
+        "lit"
+    ],
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "tags": {
+        "amenity": "shelter",
+        "shelter_type": "gazebo"
+    },
+    "name": "Gazebo"
+}

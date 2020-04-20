@@ -1,12 +1,16 @@
 {
     "key": "wheelchair",
     "type": "radio",
-    "options": [
-        "yes",
-        "limited",
-        "no"
-    ],
-    "icon": "wheelchair",
-    "universal": true,
-    "label": "Wheelchair Access"
+    "strings": {
+        "options": {
+            "yes": "Yes",
+            "limited": "Limited",
+            "no": "No"
+        }
+    },
+    "icon": "maki-wheelchair",
+    "label": "Wheelchair Access",
+    "terms": [
+        "handicap access"
+    ]
 }

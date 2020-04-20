@@ -1,0 +1,25 @@
+{
+    "fields": [
+        "name",
+        "rwn_ref",
+        "expected_rwn_route_relations",
+        "rcn_ref",
+        "expected_rcn_route_relations"
+    ],
+    "geometry": [
+        "vertex"
+    ],
+    "tags": {
+        "network:type": "node_network"
+    },
+    "terms": [
+        "node network",
+        "rcn",
+        "rwn"
+    ],
+    "countryCodes": [
+        "be", "de", "lu", "nl"
+    ],
+    "matchScore": 0.2,
+    "name": "Recreational Network Node"
+}

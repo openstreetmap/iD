@@ -1,4 +1,10 @@
 {
+    "icon": "temaki-chimney",
+    "fields": [
+        "operator",
+        "material",
+        "height"
+    ],
     "geometry": [
         "point",
         "area"

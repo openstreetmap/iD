@@ -1,0 +1,13 @@
+{
+    "icon": "temaki-height_restrictor",
+    "fields": [
+        "maxheight"
+    ],
+    "geometry": [
+        "vertex"
+    ],
+    "tags": {
+        "barrier": "height_restrictor"
+    },
+    "name": "Height Restrictor"
+}

@@ -1,13 +1,14 @@
 {
+    "icon": "iD-relation",
+    "fields": [
+        "name",
+        "site"
+    ],
     "geometry": [
         "relation"
     ],
     "tags": {
         "type": "site"
     },
-    "name": "Site",
-    "icon": "relation",
-    "fields": [
-        "site"
-    ]
+    "name": "Site"
 }

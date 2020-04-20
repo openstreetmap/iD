@@ -1,21 +1,15 @@
 {
-    "icon": "bakery",
-    "fields": [
-        "operator",
-        "address",
-        "building_area",
-        "opening_hours"
-    ],
+    "icon": "maki-confectionery",
     "geometry": [
         "point",
         "area"
     ],
     "terms": [
-        "sweets",
+        "sweet",
         "candy"
     ],
     "tags": {
         "craft": "confectionery"
     },
-    "name": "Confectionery"
+    "name": "Candy Maker"
 }

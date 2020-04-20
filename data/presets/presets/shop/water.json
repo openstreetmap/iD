@@ -1,0 +1,11 @@
+{
+    "icon": "tnp-2009234",
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "tags": {
+        "shop": "water"
+    },
+    "name": "Drinking Water Shop"
+}

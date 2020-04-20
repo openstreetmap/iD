@@ -1,9 +1,22 @@
 {
-    "icon": "town-hall",
+    "icon": "temaki-town_hall",
     "fields": [
+        "name",
         "operator",
+        "townhall/type",
         "address",
         "building_area"
+    ],
+    "moreFields": [
+        "baby_feeding",
+        "email",
+        "fax",
+        "gnis/feature_id",
+        "phone",
+        "polling_station",
+        "smoking",
+        "website",
+        "wheelchair"
     ],
     "geometry": [
         "point",

@@ -1,8 +1,17 @@
 {
-    "icon": "waterway-stream",
+    "icon": "iD-waterway-stream",
     "fields": [
-        "tunnel",
-        "width"
+        "name",
+        "structure_waterway",
+        "width",
+        "intermittent"
+    ],
+    "moreFields": [
+        "covered",
+        "fishing",
+        "gnis/feature_id",
+        "salt",
+        "tidal"
     ],
     "geometry": [
         "line"

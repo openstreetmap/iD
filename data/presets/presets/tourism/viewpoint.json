@@ -1,7 +1,14 @@
 {
+    "icon": "temaki-binoculars",
     "geometry": [
         "point",
         "vertex"
+    ],
+    "fields": [
+        "direction"
+    ],
+    "moreFields": [
+        "level"
     ],
     "tags": {
         "tourism": "viewpoint"

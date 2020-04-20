@@ -1,11 +1,21 @@
 {
+    "icon": "temaki-storage_tank",
     "fields": [
+        "content",
+        "operator",
+        "material",
         "building_area",
-        "content"
+        "height",
+        "capacity"
+    ],
+    "moreFields": [
+        "layer",
+        "location",
+        "manufacturer"
     ],
     "geometry": [
-        "point",
-        "area"
+        "area",
+        "point"
     ],
     "terms": [
         "water",

@@ -1,12 +1,5 @@
 {
-    "fields": [
-        "operator",
-        "address",
-        "building_area",
-        "opening_hours",
-        "wheelchair",
-        "social_facility_for"
-    ],
+    "icon": "temaki-social_facility",
     "geometry": [
         "point",
         "area"
@@ -20,6 +13,10 @@
         "amenity": "social_facility",
         "social_facility": "shelter",
         "social_facility:for": "homeless"
+    },
+    "reference": {
+        "key": "social_facility",
+        "value": "shelter"
     },
     "name": "Homeless Shelter"
 }

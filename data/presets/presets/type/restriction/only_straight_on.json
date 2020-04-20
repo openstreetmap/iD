@@ -1,5 +1,5 @@
 {
-    "name": "No Turns",
+    "icon": "iD-restriction-only-straight-on",
     "geometry": [
         "relation"
     ],
@@ -7,8 +7,5 @@
         "type": "restriction",
         "restriction": "only_straight_on"
     },
-    "fields": [
-        "except"
-    ],
-    "icon": "restriction-only-straight-on"
+    "name": "Only Straight On"
 }

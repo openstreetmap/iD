@@ -1,13 +1,22 @@
 {
-    "icon": "golf",
+    "icon": "maki-golf",
     "fields": [
+        "name",
         "operator",
         "address",
         "opening_hours"
     ],
+    "moreFields": [
+        "email",
+        "fax",
+        "gnis/feature_id",
+        "payment_multi",
+        "phone",
+        "website"
+    ],
     "geometry": [
-        "point",
-        "area"
+        "area",
+        "point"
     ],
     "terms": [
         "links"

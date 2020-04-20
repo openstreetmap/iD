@@ -1,0 +1,36 @@
+{
+    "icon": "maki-entrance-alt1",
+    "fields": [
+        "level",
+        "ref",
+        "door_type",
+        "access_simple",
+        "width",
+        "height"
+    ],
+    "moreFields": [
+        "wheelchair"
+    ],
+    "geometry": [
+        "vertex"
+    ],
+    "tags": {
+        "indoor": "door"
+    },
+    "addTags": {
+        "indoor": "door",
+        "door": "yes"
+    },
+    "removeTags": {
+        "indoor": "door",
+        "door": "*"
+    },
+    "terms": [
+        "doorframe",
+        "doorway",
+        "portal",
+        "room access",
+        "threshold"
+    ],
+    "name": "Indoor Door"
+}

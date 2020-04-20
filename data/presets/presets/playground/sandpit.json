@@ -1,0 +1,14 @@
+{
+    "icon": "maki-playground",
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "tags": {
+        "playground": "sandpit"
+    },
+    "terms": [
+        "sandbox"
+    ],
+    "name": "Sandpit"
+}

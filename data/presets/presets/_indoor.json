@@ -1,0 +1,18 @@
+{
+    "fields": [
+        "level",
+        "indoor_type"
+    ],
+    "geometry": [
+        "point",
+        "vertex",
+        "line",
+        "area"
+    ],
+    "tags": {
+        "indoor": "*"
+    },
+    "matchScore": 0.8,
+    "searchable": false,
+    "name": "Indoor Feature"
+}

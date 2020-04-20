@@ -1,11 +1,5 @@
 {
-    "icon": "chemist",
-    "fields": [
-        "operator",
-        "address",
-        "building_area",
-        "opening_hours"
-    ],
+    "icon": "fas-shopping-basket",
     "geometry": [
         "point",
         "area"
@@ -13,5 +7,17 @@
     "tags": {
         "shop": "chemist"
     },
-    "name": "Chemist"
+    "terms": [
+        "apothecary",
+        "beauty",
+        "drug store",
+        "drugstore",
+        "gift",
+        "hair",
+        "med*",
+        "pharmacy",
+        "prescription",
+        "tooth"
+    ],
+    "name": "Drugstore"
 }

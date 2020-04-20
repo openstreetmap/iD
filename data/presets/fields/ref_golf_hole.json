@@ -1,0 +1,6 @@
+{
+    "key": "ref",
+    "type": "text",
+    "label": "Hole Number",
+    "placeholder": "1-18"
+}

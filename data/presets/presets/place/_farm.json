@@ -1,0 +1,12 @@
+{
+    "icon": "maki-farm",
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "tags": {
+        "place": "farm"
+    },
+    "name": "Farm",
+    "searchable": false
+}

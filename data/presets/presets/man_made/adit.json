@@ -1,15 +1,24 @@
 {
+    "icon": "temaki-adit_profile",
     "geometry": [
         "point",
         "area"
     ],
     "fields": [
-        "operator"
+        "name",
+        "operator",
+        "resource",
+        "direction"
     ],
-    "terms": ["entrance",
-        "underground",
-        "mine",
-        "cave"],
+    "moreFields": [
+        "gnis/feature_id"
+    ],
+    "terms": [
+        "cave",
+        "horizontal mine entrance",
+        "tunnel",
+        "underground"
+    ],
     "tags": {
         "man_made": "adit"
     },

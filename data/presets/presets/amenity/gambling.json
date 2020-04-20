@@ -1,0 +1,33 @@
+{
+    "icon": "fas-coins",
+    "fields": [
+        "{amenity/casino}"
+    ],
+    "moreFields": [
+        "{amenity/casino}"
+    ],
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "terms": [
+        "betting",
+        "bingo",
+        "blackjack",
+        "casino",
+        "craps",
+        "gamble",
+        "gambling",
+        "keno",
+        "lottery",
+        "pachinko",
+        "poker",
+        "roulette",
+        "slot machines",
+        "slots"
+    ],
+    "tags": {
+        "amenity": "gambling"
+    },
+    "name": "Gambling Hall"
+}

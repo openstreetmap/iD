@@ -1,0 +1,24 @@
+{
+    "icon": "temaki-quakerism",
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "terms": [
+        "christian",
+        "church",
+        "house of God",
+        "house of prayer",
+        "house of worship"
+    ],
+    "tags": {
+        "amenity": "place_of_worship",
+        "religion": "christian",
+        "denomination": "quaker"
+    },
+    "reference": {
+        "key": "denomination",
+        "value": "quaker"
+    },
+    "name": "Quaker Friends Meeting House"
+}

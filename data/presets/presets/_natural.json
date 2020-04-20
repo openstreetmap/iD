@@ -1,0 +1,21 @@
+{
+    "icon": "maki-natural",
+    "fields": [
+        "name",
+        "natural"
+    ],
+    "moreFields": [
+        "gnis/feature_id"
+    ],
+    "geometry": [
+        "point",
+        "vertex",
+        "line",
+        "area"
+    ],
+    "tags": {
+        "natural": "*"
+    },
+    "searchable": false,
+    "name": "Natural Feature"
+}

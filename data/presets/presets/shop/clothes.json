@@ -1,10 +1,9 @@
 {
-    "icon": "clothing-store",
+    "icon": "maki-clothing-store",
     "fields": [
-        "operator",
-        "address",
-        "building_area",
-        "opening_hours"
+        "name",
+        "clothes",
+        "{shop}"
     ],
     "geometry": [
         "point",
@@ -13,5 +12,21 @@
     "tags": {
         "shop": "clothes"
     },
+    "terms": [
+        "blouses",
+        "boutique",
+        "bras",
+        "clothes",
+        "dresses",
+        "fashion",
+        "pants",
+        "shirts",
+        "shorts",
+        "skirts",
+        "slacks",
+        "socks",
+        "suits",
+        "underwear"
+    ],
     "name": "Clothing Store"
 }

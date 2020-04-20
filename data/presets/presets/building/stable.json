@@ -1,15 +1,14 @@
 {
-    "icon": "building",
-    "fields": [
-        "address",
-        "levels"
-    ],
+    "icon": "temaki-horse_shelter",
     "geometry": [
         "area"
     ],
     "tags": {
         "building": "stable"
     },
+    "terms": [
+        "horse shelter"
+    ],
     "matchScore": 0.5,
     "name": "Stable"
 }

@@ -1,0 +1,40 @@
+{
+    "icon": "temaki-tunnel",
+    "fields": [
+        "name",
+        "tunnel_combo",
+        "layer",
+        "width",
+        "length",
+        "height"
+    ],
+    "moreFields": [
+        "gnis/feature_id"
+    ],
+    "geometry": [
+        "area"
+    ],
+    "tags": {
+        "man_made": "tunnel"
+    },
+    "addTags": {
+        "man_made": "tunnel",
+        "layer": "-1"
+    },
+    "removeTags": {
+        "man_made": "tunnel",
+        "layer": "*"
+    },
+    "reference": {
+        "key": "man_made",
+        "value": "tunnel"
+    },
+    "terms": [
+        "bore",
+        "dig",
+        "shaft",
+        "underground passage",
+        "underpass"
+    ],
+    "name": "Tunnel Area"
+}

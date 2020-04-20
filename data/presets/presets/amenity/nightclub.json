@@ -1,11 +1,24 @@
 {
-    "icon": "bar",
+    "icon": "maki-bar",
     "fields": [
+        "name",
         "operator",
         "address",
         "building_area",
         "opening_hours",
+        "min_age",
         "smoking"
+    ],
+    "moreFields": [
+        "air_conditioning",
+        "email",
+        "fax",
+        "gnis/feature_id",
+        "level",
+        "payment_multi",
+        "phone",
+        "website",
+        "wheelchair"
     ],
     "geometry": [
         "point",
@@ -15,10 +28,10 @@
         "amenity": "nightclub"
     },
     "terms": [
-       "disco*",
-       "night club",
-       "dancing",
-       "dance club"
+        "disco*",
+        "night club",
+        "dancing",
+        "dance club"
     ],
     "name": "Nightclub"
 }

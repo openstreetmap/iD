@@ -1,0 +1,17 @@
+{
+    "icon": "maki-triangle-stroked",
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "tags": {
+        "place": "plot"
+    },
+    "terms": [
+        "tract",
+        "land",
+        "lot",
+        "parcel"
+    ],
+    "name": "Plot"
+}

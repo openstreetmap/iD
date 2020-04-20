@@ -1,18 +1,12 @@
 {
-    "icon": "commercial",
-    "fields": [
-        "address",
-        "building_area",
-        "opening_hours"
-    ],
+    "icon": "fas-drafting-compass",
     "geometry": [
         "point",
-        "vertex",
         "area"
     ],
     "tags": {
         "office": "architect"
     },
     "terms": [],
-    "name": "Architect"
+    "name": "Architect Office"
 }

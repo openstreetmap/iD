@@ -1,0 +1,30 @@
+{
+    "icon": "maki-pitch",
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "tags": {
+        "leisure": "fitness_station",
+        "fitness_station": "hyperextension"
+    },
+    "addTags": {
+        "leisure": "fitness_station",
+        "fitness_station": "hyperextension",
+        "sport": "fitness"
+    },
+    "reference": {
+        "key": "leisure",
+        "value": "fitness_station"
+    },
+    "terms": [
+        "back",
+        "exercise",
+        "extension",
+        "fitness",
+        "gym",
+        "roman chair",
+        "trim trail"
+    ],
+    "name": "Hyperextension Station"
+}

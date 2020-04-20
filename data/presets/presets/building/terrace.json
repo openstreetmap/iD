@@ -1,9 +1,5 @@
 {
-    "icon": "building",
-    "fields": [
-        "address",
-        "levels"
-    ],
+    "icon": "temaki-row_houses",
     "geometry": [
         "area"
     ],

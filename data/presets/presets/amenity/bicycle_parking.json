@@ -1,11 +1,21 @@
 {
-    "icon": "bicycle",
+    "icon": "maki-bicycle",
     "fields": [
         "bicycle_parking",
         "capacity",
         "operator",
+        "operator/type",
         "covered",
-        "access_simple"
+        "access_simple",
+        "fee",
+        "payment_multi_fee",
+        "charge_fee"
+    ],
+    "moreFields": [
+        "colour",
+        "indoor",
+        "level",
+        "lit"
     ],
     "geometry": [
         "point",
@@ -13,7 +23,9 @@
         "area"
     ],
     "terms": [
-        "bike"
+        "bike",
+        "cycle parking",
+        "cycling"
     ],
     "tags": {
         "amenity": "bicycle_parking"

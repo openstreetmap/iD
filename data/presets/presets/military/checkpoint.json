@@ -1,12 +1,26 @@
 {
+    "icon": "temaki-military_checkpoint",
+    "fields": [
+        "name"
+    ],
     "geometry": [
         "point",
         "vertex",
         "area"
     ],
-    "terms": [],
     "tags": {
         "military": "checkpoint"
     },
-    "name": "Checkpoint"
+    "terms": [
+        "air force",
+        "army",
+        "base",
+        "force",
+        "guard",
+        "marine",
+        "navy",
+        "troop",
+        "war"
+    ],
+    "name": "Military Checkpoint"
 }

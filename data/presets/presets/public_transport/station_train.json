@@ -1,0 +1,39 @@
+{
+    "icon": "maki-rail",
+    "fields": [
+        "{public_transport/station}"
+    ],
+    "moreFields": [
+        "{public_transport/station}"
+    ],
+    "geometry": [
+        "vertex",
+        "point",
+        "area"
+    ],
+    "tags": {
+        "public_transport": "station",
+        "train": "yes"
+    },
+    "addTags": {
+        "public_transport": "station",
+        "train": "yes",
+        "railway": "station"
+    },
+    "reference": {
+        "key": "railway",
+        "value": "station"
+    },
+    "terms": [
+        "public transit",
+        "public transportation",
+        "rail",
+        "station",
+        "terminal",
+        "track",
+        "train",
+        "transit",
+        "transportation"
+    ],
+    "name": "Train Station"
+}

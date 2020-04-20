@@ -1,5 +1,14 @@
 .DS_Store
-transifex.auth
-node_modules
+.esm-cache
+.vscode/
+/node_modules/
+/.tx/
 npm-debug.log
-data/data.js
+package-lock.json
+
+the_noun_project.auth
+transifex.auth
+.travis.yml
+
+/docs/
+/test/

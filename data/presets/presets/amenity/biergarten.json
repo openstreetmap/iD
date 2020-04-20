@@ -1,10 +1,16 @@
 {
-    "icon": "beer",
+    "icon": "fas-beer",
     "fields": [
+        "name",
         "address",
-        "building_area",
         "opening_hours",
-        "smoking"
+        "outdoor_seating",
+        "brewery"
+    ],
+    "moreFields": [
+        "{amenity/bar}",
+        "building_area",
+        "cuisine"
     ],
     "geometry": [
         "point",
@@ -18,5 +24,5 @@
         "bier",
         "booze"
     ],
-    "name": "Beer Garden"
+    "name": "Biergarten"
 }

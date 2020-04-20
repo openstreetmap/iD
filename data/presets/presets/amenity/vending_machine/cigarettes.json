@@ -1,9 +1,12 @@
 {
-    "fields": [
-        "operator"
+    "icon": "temaki-vending_cigarettes",
+    "moreFields": [
+        "{amenity/vending_machine}",
+        "min_age"
     ],
     "geometry": [
-        "point"
+        "point",
+        "vertex"
     ],
     "terms": [
         "cigarette"
@@ -11,6 +14,10 @@
     "tags": {
         "amenity": "vending_machine",
         "vending": "cigarettes"
+    },
+    "reference": {
+        "key": "vending",
+        "value": "cigarettes"
     },
     "name": "Cigarette Vending Machine"
 }

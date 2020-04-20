@@ -1,0 +1,15 @@
+{
+    "key": "usage",
+    "type": "combo",
+    "label": "Usage Type",
+    "strings": {
+        "options": {
+            "main": "Main",
+            "branch": "Branch",
+            "industrial": "Industrial",
+            "military": "Military",
+            "test": "Test",
+            "tourism": "Tourism"
+        }
+    }
+}

@@ -1,18 +1,24 @@
 {
-    "icon": "beer",
+    "icon": "temaki-storage_fermenter",
     "fields": [
-        "operator",
-        "address",
-        "building_area",
-        "opening_hours"
+        "{craft}",
+        "product"
+    ],
+    "moreFields": [
+        "{craft}",
+        "min_age"
     ],
     "geometry": [
         "point",
         "area"
     ],
     "terms": [
+        "alcohol",
         "beer",
-        "bier"
+        "beverage",
+        "bier",
+        "booze",
+        "cider"
     ],
     "tags": {
         "craft": "brewery"

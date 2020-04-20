@@ -1,0 +1,12 @@
+{
+    "key": "piste:grooming",
+    "type": "combo",
+    "label": "Grooming",
+    "strings": {
+        "options": {
+            "classic": "Classic",
+            "mogul": "Mogul",
+            "backcountry": "Backcountry - no grooming"
+        }
+    }
+}

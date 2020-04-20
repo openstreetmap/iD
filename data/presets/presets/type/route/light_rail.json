@@ -1,0 +1,17 @@
+{
+    "icon": "temaki-light_rail",
+    "fields": [
+        "{type/route/train}"
+    ],
+    "moreFields": [
+        "{type/route/train}"
+    ],
+    "geometry": [
+        "relation"
+    ],
+    "tags": {
+        "type": "route",
+        "route": "light_rail"
+    },
+    "name": "Light Rail Route"
+}

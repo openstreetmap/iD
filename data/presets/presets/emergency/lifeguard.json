@@ -1,0 +1,21 @@
+{
+    "icon": "fas-life-ring",
+    "fields": [
+        "ref",
+        "operator",
+        "building_area",
+        "opening_hours"
+    ],
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "terms": [
+        "CPR",
+        "rescue"
+    ],
+    "tags": {
+        "emergency": "lifeguard"
+    },
+    "name": "Lifeguard"
+}

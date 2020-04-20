@@ -1,0 +1,10 @@
+{
+    "key": "destination:ref",
+    "type": "semiCombo",
+    "label": "Destination Road Numbers",
+    "prerequisiteTag": {
+        "key": "oneway",
+        "value": "yes"
+    },
+    "snake_case": false
+}

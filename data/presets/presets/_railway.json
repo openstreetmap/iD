@@ -1,0 +1,17 @@
+{
+    "icon": "temaki-rail_profile",
+    "fields": [
+        "railway"
+    ],
+    "geometry": [
+        "point",
+        "vertex",
+        "line",
+        "area"
+    ],
+    "tags": {
+        "railway": "*"
+    },
+    "searchable": false,
+    "name": "Railway Feature"
+}

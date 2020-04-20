@@ -1,4 +1,11 @@
 {
+    "icon": "maki-car",
+    "fields": [
+        "{highway/rest_area}"
+    ],
+    "moreFields": [
+        "{highway/rest_area}"
+    ],
     "geometry": [
         "point",
         "vertex",

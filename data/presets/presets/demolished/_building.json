@@ -1,0 +1,15 @@
+{
+    "icon": "fas-house-damage",
+    "fields": [
+        "name",
+        "address"
+    ],
+    "geometry": [
+        "area"
+    ],
+    "tags": {
+        "demolished:building": "*"
+    },
+    "name": "Recently Demolished Building",
+    "searchable": false
+}

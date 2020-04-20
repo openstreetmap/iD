@@ -1,10 +1,8 @@
 {
-    "icon": "alcohol-shop",
-    "fields": [
-        "operator",
-        "address",
-        "building_area",
-        "opening_hours"
+    "icon": "maki-alcohol-shop",
+    "moreFields": [
+        "{shop}",
+        "min_age"
     ],
     "geometry": [
         "point",

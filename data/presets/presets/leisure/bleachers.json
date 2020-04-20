@@ -1,0 +1,19 @@
+{
+    "icon": "temaki-bleachers",
+    "geometry": [
+        "area"
+    ],
+    "tags": {
+        "leisure": "bleachers"
+    },
+    "terms": [
+        "crowd",
+        "bench",
+        "sports",
+        "stand",
+        "stands",
+        "seat",
+        "seating"
+    ],
+    "name": "Bleachers"
+}

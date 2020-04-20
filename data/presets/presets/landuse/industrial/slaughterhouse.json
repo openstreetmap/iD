@@ -1,0 +1,41 @@
+{
+    "icon": "maki-slaughterhouse",
+    "fields": [
+        "name",
+        "operator",
+        "address",
+        "building_area",
+        "opening_hours"
+    ],
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "tags": {
+        "industrial": "slaughterhouse"
+    },
+    "addTags": {
+        "landuse": "industrial",
+        "industrial": "slaughterhouse"
+    },
+    "reference": {
+        "key": "industrial",
+        "value": "slaughterhouse"
+    },
+    "terms": [
+        "abattoir",
+        "beef",
+        "butchery",
+        "calf",
+        "chicken",
+        "cow",
+        "killing house",
+        "meat",
+        "pig",
+        "pork",
+        "poultry",
+        "shambles",
+        "stockyard"
+    ],
+    "name": "Slaughterhouse"
+}

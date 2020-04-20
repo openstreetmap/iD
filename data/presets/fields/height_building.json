@@ -1,0 +1,10 @@
+{
+    "key": "height",
+    "minValue": 0,
+    "type": "number",
+    "label": "Building Height (Meters)",
+    "prerequisiteTag": {
+        "key": "building",
+        "valueNot": "no"
+    }
+}

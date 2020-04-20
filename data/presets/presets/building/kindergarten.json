@@ -1,9 +1,5 @@
 {
-    "icon": "building",
-    "fields": [
-        "address",
-        "levels"
-    ],
+    "icon": "fas-school",
     "geometry": [
         "area"
     ],
@@ -15,5 +11,5 @@
         "building": "kindergarten"
     },
     "matchScore": 0.5,
-    "name": "Preschool/Kindergarten Building"
+    "name": "Preschool / Kindergarten Building"
 }

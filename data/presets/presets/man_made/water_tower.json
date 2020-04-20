@@ -1,11 +1,15 @@
 {
-    "icon": "water",
+    "icon": "temaki-water_tower",
     "fields": [
-        "operator"
+        "operator",
+        "height"
+    ],
+    "moreFields": [
+        "gnis/feature_id"
     ],
     "geometry": [
-        "point",
-        "area"
+        "area",
+        "point"
     ],
     "tags": {
         "man_made": "water_tower"

@@ -1,8 +1,8 @@
 {
-    "icon": "building",
-    "fields": [
-        "address",
-        "levels"
+    "icon": "fas-school",
+    "moreFields": [
+        "{building}",
+        "polling_station"
     ],
     "geometry": [
         "area"

@@ -1,0 +1,23 @@
+{
+    "icon": "temaki-j_bar_lift",
+    "geometry": [
+        "line"
+    ],
+    "fields": [
+        "name",
+        "aerialway/capacity",
+        "aerialway/duration"
+    ],
+    "tags": {
+        "aerialway": "j-bar"
+    },
+    "terms": [
+        "drag lift",
+        "skiing",
+        "snowboarding",
+        "surface cable",
+        "jaybar",
+        "jbar"
+    ],
+    "name": "J-Bar Lift"
+}

@@ -1,5 +1,5 @@
 {
-    "name": "Left Turn Only",
+    "icon": "iD-restriction-only-left-turn",
     "geometry": [
         "relation"
     ],
@@ -7,8 +7,5 @@
         "type": "restriction",
         "restriction": "only_left_turn"
     },
-    "fields": [
-        "except"
-    ],
-    "icon": "restriction-only-left-turn"
+    "name": "Only Left Turn"
 }

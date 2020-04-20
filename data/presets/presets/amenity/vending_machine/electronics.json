@@ -1,0 +1,24 @@
+{
+    "icon": "temaki-vending_machine",
+    "geometry": [
+        "point",
+        "vertex"
+    ],
+    "terms": [
+        "cable",
+        "charger",
+        "earbud",
+        "headphone",
+        "phone",
+        "tablet"
+    ],
+    "tags": {
+        "amenity": "vending_machine",
+        "vending": "electronics"
+    },
+    "reference": {
+        "key": "vending",
+        "value": "electronics"
+    },
+    "name": "Electronics Vending Machine"
+}

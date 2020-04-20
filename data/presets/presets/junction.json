@@ -1,4 +1,8 @@
 {
+    "icon": "temaki-junction",
+    "fields": [
+        "name"
+    ],
     "geometry": [
         "vertex",
         "area"

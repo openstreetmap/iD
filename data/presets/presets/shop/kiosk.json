@@ -1,11 +1,5 @@
 {
-    "icon": "shop",
-    "fields": [
-        "operator",
-        "address",
-        "building_area",
-        "opening_hours"
-    ],
+    "icon": "fas-store",
     "geometry": [
         "point",
         "area"
@@ -13,5 +7,5 @@
     "tags": {
         "shop": "kiosk"
     },
-    "name": "News Kiosk"
+    "name": "Kiosk"
 }

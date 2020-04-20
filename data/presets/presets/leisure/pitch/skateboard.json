@@ -1,16 +1,16 @@
 {
-    "icon": "pitch",
-    "fields": [
-        "surface",
-        "lit"
-    ],
+    "icon": "maki-skateboard",
     "geometry": [
-        "point",
-        "area"
+        "area",
+        "point"
     ],
     "tags": {
         "leisure": "pitch",
         "sport": "skateboard"
+    },
+    "reference": {
+        "key": "sport",
+        "value": "skateboard"
     },
     "terms": [],
     "name": "Skate Park"

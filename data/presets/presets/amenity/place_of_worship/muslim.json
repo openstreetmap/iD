@@ -1,20 +1,27 @@
 {
-    "icon": "religious-muslim",
+    "icon": "maki-religious-muslim",
     "fields": [
+        "name",
+        "religion",
         "denomination",
-        "building_area",
-        "address"
+        "{amenity/place_of_worship}"
     ],
     "geometry": [
         "point",
         "area"
     ],
     "terms": [
+        "islam",
+        "islamic center",
         "muslim"
     ],
     "tags": {
         "amenity": "place_of_worship",
         "religion": "muslim"
     },
-    "name": "Mosque"
+    "reference": {
+        "key": "amenity",
+        "value": "place_of_worship"
+    },
+    "name": "Muslim Mosque"
 }

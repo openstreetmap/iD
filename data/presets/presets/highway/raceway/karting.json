@@ -1,0 +1,28 @@
+{
+    "icon": "temaki-speedway_8",
+    "geometry": [
+        "line",
+        "area"
+    ],
+    "tags": {
+        "highway": "raceway",
+        "sport": "karting"
+    },
+    "reference": {
+        "key": "sport",
+        "value": "karting"
+    },
+    "terms": [
+        "carting",
+        "go carts",
+        "go karts",
+        "go-karts",
+        "gokarts",
+        "kart racing",
+        "karting track",
+        "motorsports",
+        "shifter karts",
+        "superkarts"
+    ],
+    "name": "Karting Racetrack"
+}

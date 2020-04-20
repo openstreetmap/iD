@@ -1,0 +1,19 @@
+{
+    "icon": "temaki-power_switch",
+    "fields": [
+        "switch",
+        "operator",
+        "location",
+        "cables",
+        "voltage",
+        "ref"
+    ],
+    "geometry": [
+        "point",
+        "vertex"
+    ],
+    "tags": {
+        "power": "switch"
+    },
+    "name": "Power Switch"
+}

@@ -1,10 +1,21 @@
 {
-    "icon": "pitch",
+    "icon": "maki-pitch",
     "fields": [
+        "name",
         "sport",
+        "building",
         "address",
-        "building_area",
-        "opening_hours"
+        "fee",
+        "payment_multi_fee",
+        "charge_fee"
+    ],
+    "moreFields": [
+        "email",
+        "fax",
+        "gnis/feature_id",
+        "opening_hours",
+        "phone",
+        "website"
     ],
     "geometry": [
         "point",
@@ -13,8 +24,6 @@
     "tags": {
         "leisure": "sports_centre"
     },
-    "terms": [
-        "gym"
-    ],
-    "name": "Sports Center / Gym"
+    "terms": [],
+    "name": "Sports Center / Complex"
 }

@@ -1,10 +1,32 @@
 {
-    "icon": "beer",
+    "icon": "maki-beer",
     "fields": [
+        "name",
         "address",
         "building_area",
         "opening_hours",
-        "smoking"
+        "smoking",
+        "brewery"
+    ],
+    "moreFields": [
+        "air_conditioning",
+        "cuisine",
+        "diet_multi",
+        "email",
+        "fax",
+        "gnis/feature_id",
+        "internet_access",
+        "internet_access/fee",
+        "internet_access/ssid",
+        "level",
+        "microbrewery",
+        "min_age",
+        "outdoor_seating",
+        "payment_multi",
+        "phone",
+        "ref/vatin",
+        "website",
+        "wheelchair"
     ],
     "geometry": [
         "point",
@@ -14,6 +36,8 @@
         "amenity": "pub"
     },
     "terms": [
+        "alcohol",
+        "drink",
         "dive",
         "beer",
         "bier",

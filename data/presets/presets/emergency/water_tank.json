@@ -1,0 +1,21 @@
+{
+    "icon": "maki-water",
+    "fields": [
+        "name",
+        "ref",
+        "operator"
+    ],
+    "geometry": [
+        "point",
+        "vertex"
+    ],
+    "terms": [
+        "water tank",
+        "cistern",
+        "reservoir"
+    ],
+    "tags": {
+        "emergency": "water_tank"
+    },
+    "name": "Emergency Water Tank"
+}

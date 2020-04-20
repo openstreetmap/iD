@@ -1,16 +1,17 @@
 {
-    "icon": "baseball",
-    "fields": [
-        "lit"
-    ],
+    "icon": "maki-baseball",
     "geometry": [
-        "point",
-        "area"
+        "area",
+        "point"
     ],
     "tags": {
         "leisure": "pitch",
         "sport": "baseball"
     },
+    "reference": {
+        "key": "sport",
+        "value": "baseball"
+    },
     "terms": [],
-    "name": "Baseball Diamond"
+    "name": "Baseball Field"
 }

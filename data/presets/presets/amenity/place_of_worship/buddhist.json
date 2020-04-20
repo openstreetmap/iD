@@ -1,9 +1,10 @@
 {
-    "icon": "place-of-worship",
+    "icon": "maki-religious-buddhist",
     "fields": [
+        "name",
+        "religion",
         "denomination",
-        "building_area",
-        "address"
+        "{amenity/place_of_worship}"
     ],
     "geometry": [
         "point",
@@ -21,6 +22,10 @@
     "tags": {
         "amenity": "place_of_worship",
         "religion": "buddhist"
+    },
+    "reference": {
+        "key": "amenity",
+        "value": "place_of_worship"
     },
     "name": "Buddhist Temple"
 }

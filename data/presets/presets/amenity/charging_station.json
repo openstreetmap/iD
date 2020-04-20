@@ -1,11 +1,22 @@
 {
-    "icon": "car",
+    "icon": "fas-charging-station",
     "fields": [
-        "operator"
+        "name",
+        "operator",
+        "capacity",
+        "access_simple",
+        "fee",
+        "payment_multi_fee",
+        "charge_fee"
+    ],
+    "moreFields": [
+        "brand",
+        "covered",
+        "level",
+        "manufacturer"
     ],
     "geometry": [
-        "point",
-        "area"
+        "point"
     ],
     "tags": {
         "amenity": "charging_station"

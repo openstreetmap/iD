@@ -1,0 +1,14 @@
+{
+    "icon": "maki-suitcase",
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "tags": {
+        "office": "charity"
+    },
+    "terms": [
+        "charitable organization"
+    ],
+    "name": "Charity Office"
+}

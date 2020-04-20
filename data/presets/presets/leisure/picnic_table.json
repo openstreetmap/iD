@@ -1,4 +1,13 @@
 {
+    "icon": "maki-picnic-site",
+    "fields": [
+        "material",
+        "lit",
+        "bench"
+    ],
+    "moreFields": [
+        "level"
+    ],
     "geometry": [
         "point"
     ],

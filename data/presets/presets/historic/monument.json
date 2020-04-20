@@ -1,5 +1,14 @@
 {
-    "icon": "monument",
+    "icon": "maki-monument",
+    "fields": [
+        "name",
+        "inscription",
+        "access_simple"
+    ],
+    "moreFields": [
+        "{historic}",
+        "material"
+    ],
     "geometry": [
         "point",
         "vertex",

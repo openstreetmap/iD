@@ -1,0 +1,22 @@
+{
+    "icon": "temaki-light_rail",
+    "fields": [
+        "{public_transport/platform_point}"
+    ],
+    "moreFields": [
+        "{public_transport/platform_point}"
+    ],
+    "geometry": [
+        "point"
+    ],
+    "tags": {
+        "public_transport": "platform",
+        "light_rail": "yes"
+    },
+    "reference": {
+        "key": "railway",
+        "value": "platform"
+    },
+    "searchable": false,
+    "name": "Light Rail Stop / Platform"
+}

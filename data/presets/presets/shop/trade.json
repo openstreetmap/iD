@@ -1,0 +1,16 @@
+{
+    "icon": "temaki-tools",
+    "fields": [
+        "name",
+        "trade",
+        "{shop}"
+    ],
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "tags": {
+        "shop": "trade"
+    },
+    "name": "Trade Shop"
+}

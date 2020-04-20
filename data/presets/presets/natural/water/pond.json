@@ -1,10 +1,19 @@
 {
+    "icon": "maki-water",
+    "fields": [
+        "{natural/water}",
+        "salt"
+    ],
     "geometry": [
         "area"
     ],
     "tags": {
         "natural": "water",
         "water": "pond"
+    },
+    "reference": {
+        "key": "water",
+        "value": "pond"
     },
     "terms": [
         "lakelet",
@@ -13,6 +22,5 @@
         "pool",
         "mere"
     ],
-    "icon": "water",
     "name": "Pond"
 }

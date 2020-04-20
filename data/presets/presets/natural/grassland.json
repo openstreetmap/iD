@@ -1,11 +1,15 @@
 {
+    "icon": "temaki-grass",
     "geometry": [
-        "point",
         "area"
     ],
-    "terms": [],
     "tags": {
         "natural": "grassland"
     },
+    "terms": [
+        "field",
+        "prairie",
+        "savanna"
+    ],
     "name": "Grassland"
 }

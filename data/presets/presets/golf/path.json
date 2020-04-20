@@ -1,0 +1,22 @@
+{
+    "icon": "maki-golf",
+    "fields": [
+        "name",
+        "surface",
+        "width",
+        "structure",
+        "incline"
+    ],
+    "geometry": [
+        "line"
+    ],
+    "tags": {
+        "golf": "path"
+    },
+    "addTags": {
+        "golf": "path",
+        "highway": "path",
+        "foot": "designated"
+    },
+    "name": "Golf Walking Path"
+}

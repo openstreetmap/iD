@@ -1,0 +1,32 @@
+{
+    "icon": "temaki-golf_green",
+    "fields": [
+        "name",
+        "operator",
+        "address",
+        "opening_hours",
+        "fee",
+        "payment_multi_fee",
+        "charge_fee"
+    ],
+    "moreFields": [
+        "email",
+        "fax",
+        "gnis/feature_id",
+        "phone",
+        "website"
+    ],
+    "geometry": [
+        "area",
+        "point"
+    ],
+    "terms": [
+        "crazy golf",
+        "mini golf",
+        "putt-putt"
+    ],
+    "tags": {
+        "leisure": "miniature_golf"
+    },
+    "name": "Miniature Golf"
+}

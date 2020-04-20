@@ -1,0 +1,24 @@
+{
+    "icon": "maki-triangle-stroked",
+    "fields": [
+        "name",
+        "population"
+    ],
+    "moreFields": [
+        "{place}",
+        "website"
+    ],
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "tags": {
+        "place": "quarter"
+    },
+    "terms": [
+        "boro",
+        "borough",
+        "quarter"
+    ],
+    "name": "Sub-Borough / Quarter"
+}

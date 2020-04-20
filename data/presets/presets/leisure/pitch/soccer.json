@@ -1,17 +1,19 @@
 {
-    "icon": "soccer",
-    "fields": [
-        "surface",
-        "lit"
-    ],
+    "icon": "maki-soccer",
     "geometry": [
-        "point",
-        "area"
+        "area",
+        "point"
     ],
     "tags": {
         "leisure": "pitch",
         "sport": "soccer"
     },
-    "terms": [],
+    "reference": {
+        "key": "sport",
+        "value": "soccer"
+    },
+    "terms": [
+        "football"
+    ],
     "name": "Soccer Field"
 }

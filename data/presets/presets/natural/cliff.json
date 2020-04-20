@@ -1,13 +1,23 @@
 {
+    "icon": "temaki-cliff_falling_rocks",
+    "fields": [
+        "name",
+        "height"
+    ],
     "geometry": [
         "point",
         "vertex",
         "line",
         "area"
     ],
-    "terms": [],
     "tags": {
         "natural": "cliff"
     },
+    "terms": [
+        "crag",
+        "escarpment",
+        "rock face",
+        "scarp"
+    ],
     "name": "Cliff"
 }

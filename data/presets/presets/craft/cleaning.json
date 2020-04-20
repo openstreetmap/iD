@@ -1,0 +1,11 @@
+{
+    "icon": "temaki-vacuum",
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "tags": {
+        "craft": "cleaning"
+    },
+    "name": "Cleaning Service"
+}

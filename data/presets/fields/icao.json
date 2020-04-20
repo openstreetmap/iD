@@ -1,5 +1,5 @@
 {
     "key": "icao",
     "type": "text",
-    "label": "ICAO"
+    "label": "ICAO Airport Code"
 }

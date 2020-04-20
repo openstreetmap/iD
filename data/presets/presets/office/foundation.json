@@ -1,0 +1,12 @@
+{
+    "icon": "maki-suitcase",
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "tags": {
+        "office": "foundation"
+    },
+    "terms": [],
+    "name": "Foundation Office"
+}

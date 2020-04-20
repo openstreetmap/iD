@@ -1,0 +1,16 @@
+{
+    "icon": "temaki-tanning",
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "tags": {
+        "shop": "beauty",
+        "beauty": "tanning"
+    },
+    "reference": {
+        "key": "leisure",
+        "value": "tanning_salon"
+    },
+    "name": "Tanning Salon"
+}

@@ -1,0 +1,19 @@
+{
+    "icon": "temaki-golf_cart",
+    "fields": [
+        "{golf/path}",
+        "maxspeed"
+    ],
+    "geometry": [
+        "line"
+    ],
+    "tags": {
+        "golf": "cartpath"
+    },
+    "addTags": {
+        "golf": "cartpath",
+        "golf_cart": "designated",
+        "highway": "service"
+    },
+    "name": "Golf Cartpath"
+}

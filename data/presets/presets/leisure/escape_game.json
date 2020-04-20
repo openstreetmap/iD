@@ -1,0 +1,39 @@
+{
+    "icon": "fas-puzzle-piece",
+    "fields": [
+        "name",
+        "address",
+        "building_area",
+        "opening_hours",
+        "website",
+        "fee",
+        "payment_multi_fee",
+        "charge_fee",
+        "internet_access",
+        "internet_access/fee",
+        "internet_access/ssid"
+    ],
+    "moreFields": [
+        "air_conditioning",
+        "email",
+        "fax",
+        "level",
+        "phone",
+        "smoking",
+        "wheelchair"
+    ],
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "terms": [
+        "escape game",
+        "escape the room",
+        "puzzle room",
+        "quest room"
+    ],
+    "tags": {
+        "leisure": "escape_game"
+    },
+    "name": "Escape Room"
+}

@@ -1,0 +1,39 @@
+{
+    "icon": "fas-user-tie",
+    "fields": [
+        "name",
+        "operator",
+        "operator/type",
+        "building_area",
+        "address",
+        "website",
+        "internet_access",
+        "internet_access/fee",
+        "internet_access/ssid"
+    ],
+    "moreFields": [
+        "air_conditioning",
+        "email",
+        "fax",
+        "gnis/feature_id",
+        "not/name",
+        "phone",
+        "smoking",
+        "wheelchair"
+    ],
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "tags": {
+        "amenity": "conference_centre"
+    },
+    "terms": [
+        "auditorium",
+        "conference",
+        "exhibition",
+        "exposition",
+        "lecture"
+    ],
+    "name": "Convention Center"
+}

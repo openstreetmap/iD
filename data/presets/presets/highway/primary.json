@@ -1,14 +1,32 @@
 {
-    "icon": "highway-primary",
+    "icon": "iD-highway-primary",
     "fields": [
+        "name",
         "oneway",
         "maxspeed",
-        "structure",
-        "access",
         "lanes",
         "surface",
-        "ref",
-        "cycleway"
+        "structure",
+        "ref_road_number",
+        "access"
+    ],
+    "moreFields": [
+        "charge_toll",
+        "covered",
+        "cycleway",
+        "flood_prone",
+        "incline",
+        "junction_line",
+        "lit",
+        "maxheight",
+        "maxspeed/advisory",
+        "maxweight_bridge",
+        "not/name",
+        "oneway/bicycle",
+        "smoothness",
+        "toll",
+        "trolley_wire",
+        "width"
     ],
     "geometry": [
         "line"
@@ -16,6 +34,9 @@
     "tags": {
         "highway": "primary"
     },
-    "terms": [],
+    "terms": [
+        "road",
+        "street"
+    ],
     "name": "Primary Road"
 }

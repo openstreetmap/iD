@@ -1,0 +1,9 @@
+{
+    "key": "salt",
+    "type": "check",
+    "label": "Salt",
+    "terms": [
+        "saline",
+        "salinated"
+    ]
+}

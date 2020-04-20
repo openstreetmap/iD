@@ -2,5 +2,8 @@
     "key": "description",
     "type": "textarea",
     "label": "Description",
-    "universal": true
+    "universal": true,
+    "terms": [
+        "summary"
+    ]
 }

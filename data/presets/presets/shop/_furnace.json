@@ -1,0 +1,12 @@
+{
+    "icon": "maki-shop",
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "tags": {
+        "shop": "furnace"
+    },
+    "name": "Furnace Store",
+    "searchable": false
+}

@@ -1,17 +1,21 @@
 {
-    "icon": "railway-subway",
+    "icon": "temaki-subway",
+    "fields": [
+        "{railway/light_rail}"
+    ],
+    "moreFields": [
+        "{railway/light_rail}"
+    ],
     "geometry": [
         "line"
     ],
     "tags": {
         "railway": "subway"
     },
-    "fields": [
-        "structure",
-        "gauge",
-        "electrified",
-        "service_rail"
+    "terms": [
+        "metro",
+        "transit",
+        "underground railway"
     ],
-    "terms": [],
-    "name": "Subway"
+    "name": "Subway Track"
 }

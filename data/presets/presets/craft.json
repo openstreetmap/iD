@@ -1,11 +1,30 @@
 {
-    "icon": "marker-stroked",
+    "icon": "temaki-tools",
     "fields": [
+        "name",
         "craft",
         "operator",
         "address",
         "building_area",
         "opening_hours"
+    ],
+    "moreFields": [
+        "air_conditioning",
+        "building/levels_building",
+        "ele",
+        "email",
+        "fax",
+        "gnis/feature_id",
+        "height_building",
+        "internet_access",
+        "internet_access/fee",
+        "internet_access/ssid",
+        "level",
+        "phone",
+        "product",
+        "ref/vatin",
+        "website",
+        "wheelchair"
     ],
     "geometry": [
         "point",

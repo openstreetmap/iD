@@ -1,0 +1,5 @@
+{
+    "key": "survey:date",
+    "type": "text",
+    "label": "Last Survey Date"
+}

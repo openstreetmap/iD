@@ -1,0 +1,19 @@
+{
+    "icon": "fas-baby",
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "terms": [
+        "baby",
+        "childbirth",
+        "delivery",
+        "labour",
+        "labor",
+        "pregnancy"
+    ],
+    "tags": {
+        "healthcare": "birthing_center"
+    },
+    "name": "Birthing Center"
+}

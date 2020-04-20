@@ -1,0 +1,30 @@
+{
+    "icon": "fas-server",
+    "fields": [
+        "name",
+        "ref",
+        "operator",
+        "building_area"
+    ],
+    "moreFields": [
+        "address",
+        "gnis/feature_id",
+        "phone",
+        "website"
+    ],
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "tags": {
+        "telecom": "data_center"
+    },
+    "terms": [
+        "computer systems storage",
+        "information technology",
+        "server farm",
+        "the cloud",
+        "telecommunications"
+    ],
+    "name": "Data Center"
+}

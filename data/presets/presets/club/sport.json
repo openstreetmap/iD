@@ -1,0 +1,22 @@
+{
+    "icon": "maki-pitch",
+    "fields": [
+        "name",
+        "sport",
+        "{club}"
+    ],
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "tags": {
+        "club": "sport"
+    },
+    "terms": [
+        "athletics club",
+        "sporting club",
+        "sports association",
+        "sports society"
+    ],
+    "name": "Sports Club"
+}

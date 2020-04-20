@@ -1,0 +1,23 @@
+{
+    "icon": "maki-castle",
+    "fields": [
+        "name",
+        "building_area",
+        "access_simple",
+        "start_date"
+    ],
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "tags": {
+        "historic": "manor"
+    },
+    "terms": [
+        "Mansion",
+        "gentry",
+        "nobility",
+        "estate"
+    ],
+    "name": "Manor House"
+}

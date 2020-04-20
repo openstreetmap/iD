@@ -1,0 +1,26 @@
+{
+    "icon": "fas-smoking",
+    "fields": [
+        "name",
+        "shelter",
+        "bin",
+        "bench",
+        "opening_hours"
+    ],
+    "moreFields": [
+        "covered",
+        "level",
+        "lit",
+        "wheelchair"
+    ],
+    "geometry": [
+        "point",
+        "vertex",
+        "area"
+    ],
+    "terms": [],
+    "tags": {
+        "amenity": "smoking_area"
+    },
+    "name": "Smoking Area"
+}

@@ -1,0 +1,46 @@
+{
+    "icon": "temaki-striped_zone",
+    "fields": [
+        "access_aisle",
+        "width",
+        "surface",
+        "tactile_paving",
+        "access",
+        "wheelchair"
+    ],
+    "moreFields": [
+        "covered",
+        "dog",
+        "incline",
+        "lit",
+        "maxweight_bridge",
+        "name",
+        "ref",
+        "smoothness",
+        "stroller",
+        "structure"
+    ],
+    "geometry": [
+        "line"
+    ],
+    "terms": [
+        "accessible van loading zone",
+        "disabled parking access zone",
+        "handicap parking access zone",
+        "parking lot aisle",
+        "striped zone",
+        "tow zone",
+        "tow-away zone",
+        "towaway zone",
+        "wheelchair aisle"
+    ],
+    "tags": {
+        "highway": "footway",
+        "footway": "access_aisle"
+    },
+    "reference": {
+        "key": "footway",
+        "value": "access_aisle"
+    },
+    "name": "Access Aisle"
+}

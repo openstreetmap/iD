@@ -1,12 +1,37 @@
 {
-    "icon": "cafe",
+    "icon": "maki-cafe",
     "fields": [
+        "name",
         "cuisine",
-        "internet_access",
         "address",
         "building_area",
         "opening_hours",
-        "smoking"
+        "outdoor_seating",
+        "internet_access",
+        "internet_access/fee",
+        "internet_access/ssid"
+    ],
+    "moreFields": [
+        "air_conditioning",
+        "bar",
+        "brand",
+        "capacity",
+        "delivery",
+        "diet_multi",
+        "email",
+        "fax",
+        "gnis/feature_id",
+        "level",
+        "min_age",
+        "not/name",
+        "payment_multi",
+        "phone",
+        "ref/vatin",
+        "reservation",
+        "smoking",
+        "takeaway",
+        "website",
+        "wheelchair"
     ],
     "geometry": [
         "point",

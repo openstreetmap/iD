@@ -1,18 +1,28 @@
 {
+    "icon": "temaki-vending_lockers",
     "fields": [
-        "operator"
+        "vending",
+        "operator",
+        "payment_multi",
+        "currency_multi"
     ],
     "geometry": [
-        "point"
+        "point",
+        "vertex"
     ],
     "terms": [
-        "parcel",
         "mail",
+        "packstation",
+        "parcel",
         "pickup"
     ],
     "tags": {
         "amenity": "vending_machine",
         "vending": "parcel_pickup;parcel_mail_in"
     },
-    "name": "Parcel Pickup/Dropoff Vending Machine"
+    "reference": {
+        "key": "vending",
+        "value": "parcel_pickup;parcel_mail_in"
+    },
+    "name": "Parcel Pickup/Dropoff Locker"
 }

@@ -1,11 +1,20 @@
 {
-    "icon": "rail-metro",
+    "icon": "maki-entrance",
     "geometry": [
-        "point"
+        "point",
+        "vertex"
+    ],
+    "fields": [
+        "name",
+        "level",
+        "wheelchair"
     ],
     "tags": {
         "railway": "subway_entrance"
     },
-    "terms": [],
+    "terms": [
+        "metro",
+        "transit"
+    ],
     "name": "Subway Entrance"
 }

@@ -1,0 +1,20 @@
+{
+    "icon": "temaki-embassy",
+    "fields": [
+        "name",
+        "diplomatic",
+        "country",
+        "target",
+        "diplomatic/services",
+        "{office}"
+    ],
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "tags": {
+        "office": "diplomatic"
+    },
+    "terms": [],
+    "name": "Diplomatic Office"
+}

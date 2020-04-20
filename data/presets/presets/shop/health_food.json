@@ -1,0 +1,17 @@
+{
+    "icon": "maki-shop",
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "terms": [
+        "wholefood",
+        "vitamins",
+        "vegetarian",
+        "vegan"
+    ],
+    "tags": {
+        "shop": "health_food"
+    },
+    "name": "Health Food Shop"
+}

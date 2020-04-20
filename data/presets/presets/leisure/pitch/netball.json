@@ -1,0 +1,17 @@
+{
+    "icon": "maki-volleyball",
+    "geometry": [
+        "area",
+        "point"
+    ],
+    "tags": {
+        "leisure": "pitch",
+        "sport": "netball"
+    },
+    "reference": {
+        "key": "sport",
+        "value": "netball"
+    },
+    "terms": [],
+    "name": "Netball Court"
+}

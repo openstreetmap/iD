@@ -1,0 +1,9 @@
+{
+    "key": "drinking_water",
+    "type": "check",
+    "label": "Drinkable",
+    "terms": [
+        "drinkworthy",
+        "potable"
+    ]
+}

@@ -1,0 +1,23 @@
+{
+    "icon": "temaki-beach",
+    "fields": [
+        "name",
+        "ele_node",
+        "description"
+    ],
+    "geometry": [
+        "point",
+        "vertex"
+    ],
+    "tags": {
+        "natural": "cape"
+    },
+    "terms": [
+        "bay",
+        "coastline",
+        "erosion",
+        "headland",
+        "promontory"
+    ],
+    "name": "Cape"
+}

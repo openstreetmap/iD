@@ -1,6 +1,8 @@
 {
+    "icon": "fas-cube",
     "fields": [
-        "access"
+        "access",
+        "material"
     ],
     "geometry": [
         "point",

@@ -1,12 +1,19 @@
 {
-    "icon": "art-gallery",
+    "icon": "maki-art-gallery",
     "fields": [
+        "name",
         "artwork_type",
         "artist"
+    ],
+    "moreFields": [
+        "level",
+        "material",
+        "website"
     ],
     "geometry": [
         "point",
         "vertex",
+        "line",
         "area"
     ],
     "tags": {

@@ -1,0 +1,14 @@
+{
+    "key": "network",
+    "type": "combo",
+    "label": "Network Class",
+    "placeholder": "Local, Regional, National, International",
+    "strings": {
+        "options": {
+            "lwn": "Local",
+            "rwn": "Regional",
+            "nwn": "National",
+            "iwn": "International"
+        }
+    }
+}

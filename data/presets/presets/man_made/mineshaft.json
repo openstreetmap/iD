@@ -1,0 +1,26 @@
+{
+    "icon": "temaki-mineshaft_cage",
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "fields": [
+        "name",
+        "operator",
+        "resource"
+    ],
+    "moreFields": [
+        "gnis/feature_id"
+    ],
+    "terms": [
+        "cave",
+        "mine shaft",
+        "tunnel",
+        "underground",
+        "vertical mine entrance"
+    ],
+    "tags": {
+        "man_made": "mineshaft"
+    },
+    "name": "Mineshaft"
+}

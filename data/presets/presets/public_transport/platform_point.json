@@ -1,0 +1,35 @@
+{
+    "icon": "temaki-sign_and_bench",
+    "fields": [
+        "name",
+        "ref_stop_position",
+        "network",
+        "operator",
+        "departures_board",
+        "shelter"
+    ],
+    "moreFields": [
+        "bench",
+        "bin",
+        "gnis/feature_id",
+        "level",
+        "lit",
+        "tactile_paving",
+        "wheelchair"
+    ],
+    "geometry": [
+        "point"
+    ],
+    "tags": {
+        "public_transport": "platform"
+    },
+    "terms": [
+        "platform",
+        "public transit",
+        "public transportation",
+        "transit",
+        "transportation"
+    ],
+    "name": "Transit Stop / Platform",
+    "matchScore": 0.6
+}

@@ -1,8 +1,23 @@
 {
-    "icon": "playground",
+    "icon": "maki-playground",
+    "fields": [
+        "name",
+        "operator",
+        "playground/theme",
+        "surface",
+        "access_simple",
+        "min_age",
+        "max_age"
+    ],
+    "moreFields": [
+        "blind",
+        "dog",
+        "gnis/feature_id",
+        "wheelchair"
+    ],
     "geometry": [
-        "point",
-        "area"
+        "area",
+        "point"
     ],
     "terms": [
         "jungle gym",

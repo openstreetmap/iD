@@ -1,14 +1,16 @@
 {
-    "icon": "swimming",
+    "icon": "temaki-scuba_diving",
     "fields": [
-        "operator",
-        "address",
-        "building_area",
-        "opening_hours"
+        "{shop}",
+        "scuba_diving"
     ],
     "geometry": [
         "point",
         "area"
+    ],
+    "terms": [
+        "diving",
+        "scuba"
     ],
     "tags": {
         "shop": "scuba_diving"

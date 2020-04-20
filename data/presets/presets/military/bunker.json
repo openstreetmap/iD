@@ -1,12 +1,35 @@
 {
+    "icon": "temaki-bunker",
+    "fields": [
+        "name",
+        "bunker_type",
+        "building_area"
+    ],
+    "moreFields": [
+        "gnis/feature_id"
+    ],
     "geometry": [
         "point",
-        "vertex",
         "area"
     ],
-    "terms": [],
     "tags": {
         "military": "bunker"
     },
-    "name": "Bunker"
+    "addTags": {
+        "building": "bunker",
+        "military": "bunker"
+    },
+    "terms": [
+        "air force",
+        "army",
+        "base",
+        "fight",
+        "force",
+        "guard",
+        "marine",
+        "navy",
+        "troop",
+        "war"
+    ],
+    "name": "Military Bunker"
 }

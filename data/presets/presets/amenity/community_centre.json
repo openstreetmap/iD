@@ -1,9 +1,23 @@
 {
-    "icon": "town-hall",
+    "icon": "maki-town-hall",
     "fields": [
+        "name",
         "operator",
+        "operator/type",
         "address",
-        "building_area"
+        "building_area",
+        "opening_hours",
+        "website"
+    ],
+    "moreFields": [
+        "air_conditioning",
+        "baby_feeding",
+        "email",
+        "fax",
+        "gnis/feature_id",
+        "phone",
+        "polling_station",
+        "wheelchair"
     ],
     "geometry": [
         "point",

@@ -1,0 +1,16 @@
+{
+    "fields": [
+        "level",
+        "name"
+    ],
+    "geometry": [
+        "line"
+    ],
+    "tags": {
+        "indoor": "corridor"
+    },
+    "searchable": false,
+    "matchScore": 1.1,
+    "name": "Indoor Corridor",
+    "replacement": "highway/corridor"
+}

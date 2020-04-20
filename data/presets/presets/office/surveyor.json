@@ -1,0 +1,12 @@
+{
+    "icon": "maki-suitcase",
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "tags": {
+        "office": "surveyor"
+    },
+    "terms": [],
+    "name": "Surveyor Office"
+}

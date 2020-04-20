@@ -1,0 +1,20 @@
+{
+    "icon": "temaki-vending_bread",
+    "geometry": [
+        "point",
+        "vertex"
+    ],
+    "terms": [
+        "baguette",
+        "bread"
+    ],
+    "tags": {
+        "amenity": "vending_machine",
+        "vending": "bread"
+    },
+    "reference": {
+        "key": "vending",
+        "value": "bread"
+    },
+    "name": "Bread Vending Machine"
+}

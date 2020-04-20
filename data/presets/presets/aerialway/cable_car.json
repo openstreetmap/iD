@@ -1,12 +1,10 @@
 {
+    "icon": "fas-tram",
     "geometry": [
         "line"
     ],
-    "terms": [
-        "tramway",
-        "ropeway"
-    ],
     "fields": [
+        "name",
         "aerialway/occupancy",
         "aerialway/capacity",
         "aerialway/duration",
@@ -15,5 +13,13 @@
     "tags": {
         "aerialway": "cable_car"
     },
+    "terms": [
+        "aerial cable",
+        "lift",
+        "ropeway",
+        "skiing",
+        "snowboarding",
+        "tramway"
+    ],
     "name": "Cable Car"
 }

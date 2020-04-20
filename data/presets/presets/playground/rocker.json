@@ -1,0 +1,14 @@
+{
+    "icon": "maki-playground",
+    "geometry": [
+        "point"
+    ],
+    "tags": {
+        "playground": "springy"
+    },
+    "name": "Spring Rider",
+    "terms": [
+        "spring rocker",
+        "springy rocker"
+    ]
+}

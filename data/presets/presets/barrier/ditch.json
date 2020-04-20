@@ -1,4 +1,5 @@
 {
+    "icon": "temaki-trench",
     "geometry": [
         "line",
         "area"
@@ -6,5 +7,6 @@
     "tags": {
         "barrier": "ditch"
     },
-    "name": "Ditch"
+    "name": "Trench",
+    "matchScore": 0.25
 }

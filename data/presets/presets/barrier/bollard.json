@@ -1,11 +1,16 @@
 {
+    "icon": "temaki-bollard",
     "fields": [
-        "access"
+        "access",
+        "bollard",
+        "height",
+        "width",
+        "material",
+        "colour"
     ],
     "geometry": [
         "point",
-        "vertex",
-        "line"
+        "vertex"
     ],
     "tags": {
         "barrier": "bollard"

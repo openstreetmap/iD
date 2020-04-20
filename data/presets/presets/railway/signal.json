@@ -1,0 +1,20 @@
+{
+    "icon": "temaki-railway_signals",
+    "geometry": [
+        "point",
+        "vertex"
+    ],
+    "fields": [
+        "railway/position",
+        "railway/signal/direction",
+        "ref"
+    ],
+    "tags": {
+        "railway": "signal"
+    },
+    "terms": [
+        "signal",
+        "lights"
+    ],
+    "name": "Railway Signal"
+}

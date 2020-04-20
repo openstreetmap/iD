@@ -1,0 +1,15 @@
+{
+    "key": "seamark:beacon_lateral:category",
+    "type": "combo",
+    "label": "Category",
+    "strings": {
+        "options": {
+            "port": "Port",
+            "starboard": "Starboard",
+            "waterway_left":"Waterway Left",
+            "waterway_right":"Waterway Right",
+            "danger_left":"Danger Left",
+            "danger_right":"Danger Right"
+        }
+    }
+}

@@ -1,11 +1,5 @@
 {
-    "icon": "shop",
-    "fields": [
-        "operator",
-        "address",
-        "building_area",
-        "opening_hours"
-    ],
+    "icon": "temaki-rocket_firework",
     "geometry": [
         "point",
         "area"
@@ -13,5 +7,8 @@
     "tags": {
         "shop": "pyrotechnics"
     },
+    "terms": [
+        "fireworks"
+    ],
     "name": "Fireworks Store"
 }

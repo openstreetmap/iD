@@ -1,0 +1,24 @@
+{
+    "icon": "maki-building",
+    "fields": [
+        "building/levels",
+        "height",
+        "building/material",
+        "roof/colour"
+    ],
+    "moreFields": [
+        "layer"
+    ],
+    "geometry": [
+        "area"
+    ],
+    "tags": {
+        "building:part": "*"
+    },
+    "matchScore": 0.5,
+    "terms": [
+        "roof",
+        "simple 3D buildings"
+    ],
+    "name": "Building Part"
+}

@@ -1,0 +1,36 @@
+{
+    "icon": "maki-information",
+    "fields": [
+        "name",
+        "operator",
+        "address",
+        "building_area",
+        "internet_access",
+        "internet_access/fee"
+    ],
+    "moreFields": [
+        "building/levels_building",
+        "email",
+        "fax",
+        "gnis/feature_id",
+        "height_building",
+        "internet_access/ssid",
+        "phone",
+        "website",
+        "wheelchair"
+    ],
+    "geometry": [
+        "point",
+        "vertex",
+        "area"
+    ],
+    "tags": {
+        "tourism": "information",
+        "information": "office"
+    },
+    "reference": {
+        "key": "information",
+        "value": "office"
+    },
+    "name": "Tourist Information Office"
+}

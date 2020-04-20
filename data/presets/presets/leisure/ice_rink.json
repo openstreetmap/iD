@@ -1,16 +1,29 @@
 {
-    "icon": "pitch",
+    "icon": "fas-skating",
     "fields": [
+        "name",
         "seasonal",
         "sport_ice",
         "operator",
         "address",
-        "building",
-        "opening_hours"
+        "building"
+    ],
+    "moreFields": [
+        "email",
+        "fax",
+        "gnis/feature_id",
+        "internet_access",
+        "internet_access/fee",
+        "internet_access/ssid",
+        "level",
+        "opening_hours",
+        "payment_multi",
+        "phone",
+        "website"
     ],
     "geometry": [
-        "point",
-        "area"
+        "area",
+        "point"
     ],
     "terms": [
         "hockey",

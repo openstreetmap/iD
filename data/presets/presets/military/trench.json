@@ -1,0 +1,22 @@
+{
+    "icon": "temaki-trench",
+    "fields": [
+        "name",
+        "trench"
+    ],
+    "geometry": [
+        "point",
+        "line"
+    ],
+    "tags": {
+        "military": "trench"
+    },
+    "terms": [
+        "dugout",
+        "firestep",
+        "fox hole",
+        "infantry trench",
+        "war trench"
+    ],
+    "name": "Military Trench"
+}

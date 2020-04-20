@@ -1,0 +1,29 @@
+{
+    "icon": "maki-car",
+    "fields": [
+        "name",
+        "operator",
+        "operator/type",
+        "address",
+        "building_area",
+        "opening_hours"
+    ],
+    "moreFields": [
+        "email",
+        "fax",
+        "gnis/feature_id",
+        "level",
+        "payment_multi",
+        "phone",
+        "website",
+        "wheelchair"
+    ],
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "tags": {
+        "amenity": "driving_school"
+    },
+    "name": "Driving School"
+}

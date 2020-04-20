@@ -1,0 +1,23 @@
+{
+    "icon": "maki-pitch",
+    "geometry": [
+        "area"
+    ],
+    "fields": [
+        "name"
+    ],
+    "moreFields": [
+        "address",
+        "email",
+        "fax",
+        "phone",
+        "website"
+    ],
+    "tags": {
+        "landuse": "recreation_ground"
+    },
+    "terms": [
+        "playing fields"
+    ],
+    "name": "Recreation Ground"
+}

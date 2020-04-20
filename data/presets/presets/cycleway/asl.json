@@ -1,0 +1,24 @@
+{
+    "icon": "maki-bicycle",
+    "fields": [
+        "ref",
+        "direction_vertex",
+        "width"
+    ],
+    "geometry": [
+        "vertex"
+    ],
+    "tags": {
+        "cycleway": "asl"
+    },
+    "terms": [
+        "advanced stop box",
+        "asl",
+        "bicycle box",
+        "bike box",
+        "bikebox",
+        "cycle box",
+        "cycle stop marking"
+    ],
+    "name": "Advanced Stop Line"
+}

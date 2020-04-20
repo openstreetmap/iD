@@ -1,0 +1,26 @@
+{
+    "icon": "fas-skiing",
+    "fields": [
+        "name",
+        "piste/type",
+        "piste/difficulty_downhill",
+        "piste/grooming_downhill",
+        "oneway",
+        "lit"
+    ],
+    "geometry": [
+        "line",
+        "area"
+    ],
+    "tags": {
+        "piste:type": "downhill"
+    },
+    "terms": [
+        "alpine skiing",
+        "piste",
+        "ski hill",
+        "skiing",
+        "snowboarding"
+    ],
+    "name": "Downhill Ski Run"
+}

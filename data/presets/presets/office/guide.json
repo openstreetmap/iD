@@ -1,0 +1,16 @@
+{
+    "icon": "maki-suitcase",
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "tags": {
+        "office": "guide"
+    },
+    "terms": [
+        "dive guide",
+        "mountain guide",
+        "tour guide"
+    ],
+    "name": "Tour Guide Office"
+}

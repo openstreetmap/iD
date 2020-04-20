@@ -1,20 +1,20 @@
 {
-    "icon": "railway-rail",
+    "icon": "temaki-railway_track_narrow",
+    "fields": [
+        "{railway/light_rail}"
+    ],
+    "moreFields": [
+        "{railway/light_rail}"
+    ],
     "geometry": [
         "line"
     ],
     "tags": {
         "railway": "narrow_gauge"
     },
-    "fields": [
-        "structure",
-        "gauge",
-        "electrified",
-        "service_rail"
-    ],
     "terms": [
         "narrow gauge railway",
         "narrow gauge railroad"
     ],
-    "name": "Narrow Gauge Rail"
+    "name": "Narrow Gauge Track"
 }

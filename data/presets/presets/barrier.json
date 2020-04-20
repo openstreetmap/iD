@@ -1,4 +1,5 @@
 {
+    "icon": "maki-roadblock",
     "geometry": [
         "point",
         "vertex",
@@ -11,5 +12,9 @@
     "fields": [
         "barrier"
     ],
-    "name": "Barrier"
+    "moreFields": [
+        "level"
+    ],
+    "name": "Barrier",
+    "matchScore": 0.4
 }

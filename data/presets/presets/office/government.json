@@ -1,13 +1,12 @@
 {
-    "icon": "commercial",
+    "icon": "temaki-town_hall",
     "fields": [
-        "address",
-        "building_area",
-        "opening_hours"
+        "name",
+        "government",
+        "{office}"
     ],
     "geometry": [
         "point",
-        "vertex",
         "area"
     ],
     "tags": {

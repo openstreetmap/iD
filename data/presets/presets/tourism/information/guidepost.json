@@ -1,0 +1,28 @@
+{
+    "icon": "fas-map-signs",
+    "fields": [
+        "name",
+        "ele_node",
+        "operator",
+        "ref"
+    ],
+    "moreFields": [
+        "material"
+    ],
+    "geometry": [
+        "point",
+        "vertex"
+    ],
+    "terms": [
+        "signpost"
+    ],
+    "tags": {
+        "tourism": "information",
+        "information": "guidepost"
+    },
+    "reference": {
+        "key": "information",
+        "value": "guidepost"
+    },
+    "name": "Guidepost"
+}

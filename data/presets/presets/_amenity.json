@@ -1,0 +1,16 @@
+{
+    "fields": [
+        "amenity"
+    ],
+    "geometry": [
+        "point",
+        "vertex",
+        "line",
+        "area"
+    ],
+    "tags": {
+        "amenity": "*"
+    },
+    "searchable": false,
+    "name": "Amenity"
+}

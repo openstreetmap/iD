@@ -1,0 +1,30 @@
+{
+    "icon": "temaki-railway_track_partial",
+    "fields": [
+        "name",
+        "opening_date",
+        "check_date",
+        "note",
+        "structure",
+        "gauge",
+        "electrified"
+    ],
+    "moreFields": [
+        "covered",
+        "frequency_electrified",
+        "highspeed",
+        "incline",
+        "maxspeed",
+        "service_rail",
+        "usage_rail",
+        "voltage_electrified"
+    ],
+    "geometry": [
+        "line"
+    ],
+    "tags": {
+        "railway": "construction"
+    },
+    "matchScore": 0.95,
+    "name": "Railway Under Construction"
+}

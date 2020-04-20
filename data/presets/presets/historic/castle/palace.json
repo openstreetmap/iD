@@ -1,0 +1,28 @@
+{
+    "icon": "fas-crown",
+    "fields": [
+        "name",
+        "building_area",
+        "access_simple",
+        "start_date"
+    ],
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "reference": {
+        "key": "castle_type",
+        "value": "palace"
+    },
+    "tags": {
+        "historic": "castle",
+        "castle_type": "palace"
+    },
+    "terms": [
+        "Royal Residence",
+        "royal",
+        "king",
+        "queen"
+    ],
+    "name": "Palace"
+}

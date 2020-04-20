@@ -1,16 +1,25 @@
 {
-    "icon": "highway-track",
+    "icon": "fas-truck-monster",
     "fields": [
+        "name",
+        "tracktype",
         "surface",
         "width",
         "structure",
         "access",
         "incline",
-        "tracktype",
-        "smoothness",
+        "smoothness"
+    ],
+    "moreFields": [
+        "covered",
+        "flood_prone",
+        "horse_scale",
+        "maxweight_bridge",
         "mtb/scale",
+        "mtb/scale/imba",
         "mtb/scale/uphill",
-        "mtb/scale/imba"
+        "stroller",
+        "wheelchair"
     ],
     "geometry": [
         "line"

@@ -1,0 +1,13 @@
+{
+    "icon": "maki-playground",
+    "geometry": [
+        "point"
+    ],
+    "terms": [
+        "basket rotator"
+    ],
+    "tags": {
+        "playground": "basketrotator"
+    },
+    "name": "Basket Spinner"
+}

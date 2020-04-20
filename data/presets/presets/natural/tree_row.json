@@ -1,16 +1,16 @@
 {
+    "icon": "temaki-tree_row",
     "fields": [
         "leaf_type",
         "leaf_cycle",
         "denotation"
     ],
-    "icon": "park",
     "geometry": [
         "line"
     ],
-    "terms": [],
     "tags": {
         "natural": "tree_row"
     },
-    "name": "Tree row"
+    "terms": [],
+    "name": "Tree Row"
 }

@@ -1,0 +1,14 @@
+{
+    "icon": "iD-waterway-stream",
+    "name": "Waterways",
+    "members": [
+        "waterway/stream",
+        "waterway/drain",
+        "waterway/river",
+        "waterway/canal",
+        "waterway/ditch",
+        "natural/water/stream",
+        "natural/water/river",
+        "natural/water/canal"
+    ]
+}

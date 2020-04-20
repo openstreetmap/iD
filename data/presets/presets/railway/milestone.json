@@ -1,0 +1,19 @@
+{
+    "icon": "temaki-milestone",
+    "geometry": [
+        "point",
+        "vertex"
+    ],
+    "fields": [
+        "railway/position",
+        "direction_vertex"
+    ],
+    "tags": {
+        "railway": "milestone"
+    },
+    "terms": [
+        "milestone",
+        "marker"
+    ],
+    "name": "Railway Milestone"
+}

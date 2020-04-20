@@ -1,0 +1,11 @@
+{
+    "icon": "maki-water",
+    "name": "Water Bodies",
+    "members": [
+        "natural/water",
+        "natural/water/pond",
+        "natural/water/basin",
+        "natural/water/lake",
+        "natural/water/reservoir"
+    ]
+}

@@ -1,4 +1,11 @@
 {
+    "icon": "maki-ferry",
+    "fields": [
+        "{route/ferry}"
+    ],
+    "moreFields": [
+        "{route/ferry}"
+    ],
     "geometry": [
         "relation"
     ],
@@ -6,11 +13,5 @@
         "type": "route",
         "route": "ferry"
     },
-    "name": "Ferry Route",
-    "icon": "route-ferry",
-    "fields": [
-        "ref",
-        "operator",
-        "network"
-    ]
+    "name": "Ferry Route"
 }

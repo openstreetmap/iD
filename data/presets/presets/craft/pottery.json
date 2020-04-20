@@ -1,20 +1,17 @@
 {
-    "icon": "art-gallery",
-    "fields": [
-        "operator",
-        "address",
-        "building_area",
-        "opening_hours"
-    ],
+    "icon": "temaki-vase",
     "geometry": [
         "point",
         "area"
     ],
     "terms": [
-        "ceramic"
+        "ceramic",
+        "kiln",
+        "pot",
+        "vase"
     ],
     "tags": {
         "craft": "pottery"
     },
-    "name": "Pottery"
+    "name": "Pottery Maker"
 }

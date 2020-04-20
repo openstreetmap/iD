@@ -1,0 +1,40 @@
+{
+    "icon": "temaki-gas",
+    "fields": [
+        "name",
+        "operator",
+        "address",
+        "plant/output/electricity",
+        "start_date"
+    ],
+    "moreFields": [
+        "{power/plant}"
+    ],
+    "geometry": [
+        "area"
+    ],
+    "tags": {
+        "power": "plant",
+        "plant:source": "gas"
+    },
+    "addTags": {
+        "power": "plant",
+        "landuse": "industrial",
+        "plant:source": "gas",
+        "plant:method": "combustion",
+        "plant:output:electricity": "*"
+    },
+    "reference": {
+        "key": "plant:source",
+        "value": "gas"
+    },
+    "terms": [
+        "carbon",
+        "combustion",
+        "fossil fuel",
+        "gasfired",
+        "power station",
+        "natural gas"
+    ],
+    "name": "Gas-Fired Power Plant"
+}

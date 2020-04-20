@@ -1,13 +1,28 @@
 {
-    "icon": "waste-basket",
+    "icon": "fas-dumpster",
+    "fields": [
+        "operator",
+        "waste",
+        "collection_times",
+        "access_simple"
+    ],
+    "moreFields": [
+        "brand",
+        "colour",
+        "height",
+        "manufacturer",
+        "material"
+    ],
     "geometry": [
         "point",
-        "vertex"
+        "vertex",
+        "area"
     ],
     "tags": {
         "amenity": "waste_disposal"
     },
     "terms": [
+        "garbage",
         "rubbish",
         "litter",
         "trash"

@@ -1,0 +1,16 @@
+{
+    "icon": "temaki-gate",
+    "fields": [
+        "{barrier/gate}"
+    ],
+    "moreFields": [
+        "{barrier/gate}"
+    ],
+    "geometry": [
+        "vertex"
+    ],
+    "tags": {
+        "barrier": "swing_gate"
+    },
+    "name": "Swing Gate"
+}

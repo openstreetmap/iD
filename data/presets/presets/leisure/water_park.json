@@ -1,17 +1,20 @@
 {
-    "icon": "swimming",
+    "icon": "fas-swimmer",
     "fields": [
-      "operator",
-      "address"
+        "{tourism/theme_park}",
+        "sport"
+    ],
+    "moreFields": [
+        "{tourism/theme_park}"
     ],
     "geometry": [
-        "point",
-        "area"
+        "area",
+        "point"
     ],
     "terms": [
-      "swim",
-      "pool",
-      "dive"
+        "swim",
+        "pool",
+        "dive"
     ],
     "tags": {
         "leisure": "water_park"

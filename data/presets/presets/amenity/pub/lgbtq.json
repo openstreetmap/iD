@@ -1,0 +1,19 @@
+{
+    "icon": "maki-beer",
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "tags": {
+        "amenity": "pub",
+        "lgbtq": "primary"
+    },
+    "terms": [
+        "gay pub",
+        "lesbian pub",
+        "lgbtq pub",
+        "lgbt pub",
+        "lgb pub"
+    ],
+    "name": "LGBTQ+ Pub"
+}

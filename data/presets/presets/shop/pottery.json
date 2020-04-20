@@ -1,0 +1,16 @@
+{
+    "icon": "temaki-vase",
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "terms": [
+        "ceramic",
+        "pot",
+        "vase"
+    ],
+    "tags": {
+        "shop": "pottery"
+    },
+    "name": "Pottery Store"
+}

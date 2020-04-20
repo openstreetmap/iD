@@ -1,11 +1,12 @@
 {
-    "icon": "alcohol-shop",
+    "icon": "fas-wine-bottle",
     "fields": [
-        "operator",
-        "address",
-        "building_area",
-        "opening_hours",
+        "{shop}",
         "drive_through"
+    ],
+    "moreFields": [
+        "{shop}",
+        "min_age"
     ],
     "geometry": [
         "point",

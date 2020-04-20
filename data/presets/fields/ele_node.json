@@ -1,0 +1,12 @@
+{
+    "key": "ele",
+    "type": "number",
+    "icon": "elevation",
+    "label": "Elevation",
+    "universal": true,
+    "geometry": ["point", "vertex"],
+    "terms": [
+        "altitude",
+        "height"
+    ]
+}

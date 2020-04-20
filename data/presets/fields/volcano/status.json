@@ -1,0 +1,12 @@
+{
+    "key": "volcano:status",
+    "type": "combo",
+    "label": "Volcano Status",
+    "strings": {
+        "options": {
+            "active": "Active",
+            "dormant": "Dormant",
+            "extinct": "Extinct"
+        }
+    }
+}

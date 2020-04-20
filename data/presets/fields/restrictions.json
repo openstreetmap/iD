@@ -1,7 +1,7 @@
 {
     "type": "restrictions",
-    "geometry": "vertex",
-    "icon": "restrictions",
+    "geometry": ["vertex"],
+    "icon": "iD-restrictions",
     "reference": {
         "rtype": "restriction"
     },

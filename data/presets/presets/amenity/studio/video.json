@@ -1,0 +1,23 @@
+{
+    "icon": "fas-video",
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "terms": [
+        "movie production",
+        "movie studio",
+        "video production",
+        "video recording",
+        "video studio"
+    ],
+    "tags": {
+        "amenity": "studio",
+        "studio": "video"
+    },
+    "reference": {
+        "key": "studio",
+        "value": "video"
+    },
+    "name": "Film Studio"
+}

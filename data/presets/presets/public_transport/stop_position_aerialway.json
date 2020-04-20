@@ -1,0 +1,29 @@
+{
+    "icon": "maki-aerialway",
+    "fields": [
+        "{public_transport/stop_position}"
+    ],
+    "moreFields": [
+        "{public_transport/stop_position}"
+    ],
+    "geometry": [
+        "vertex"
+    ],
+    "tags": {
+        "public_transport": "stop_position",
+        "aerialway": "yes"
+    },
+    "reference": {
+        "key": "public_transport",
+        "value": "stop_position"
+    },
+    "terms": [
+        "aerialway",
+        "cable car",
+        "public transit",
+        "public transportation",
+        "transit",
+        "transportation"
+    ],
+    "name": "Aerialway Stopping Location"
+}

@@ -1,0 +1,9 @@
+{
+    "key": "wikimedia_commons",
+    "type": "identifier",
+    "label": "Wikimedia Commons Page",
+    "placeholder": "File:Example.jpg",
+    "urlFormat": "https://commons.wikimedia.org/wiki/{value}",
+    "pattern": "^(?:File|Category):.{1,}",
+    "universal": true
+}

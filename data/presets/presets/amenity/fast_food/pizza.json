@@ -1,0 +1,28 @@
+{
+    "icon": "maki-restaurant-pizza",
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "terms": [
+        "dine",
+        "dining",
+        "dinner",
+        "drive-in",
+        "eat",
+        "lunch",
+        "table",
+        "deep dish",
+        "thin crust",
+        "slice"
+    ],
+    "tags": {
+        "amenity": "fast_food",
+        "cuisine": "pizza"
+    },
+    "reference": {
+        "key": "cuisine",
+        "value": "pizza"
+    },
+    "name": "Pizza Fast Food"
+}

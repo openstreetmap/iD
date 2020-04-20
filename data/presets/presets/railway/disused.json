@@ -1,15 +1,18 @@
 {
-    "icon": "railway-disused",
+    "icon": "temaki-railway_track",
+    "fields": [
+        "{railway/light_rail}"
+    ],
+    "moreFields": [
+        "{railway/light_rail}",
+        "highspeed"
+    ],
     "geometry": [
         "line"
     ],
     "tags": {
         "railway": "disused"
     },
-    "fields": [
-        "structure",
-        "service_rail"
-    ],
-    "terms": [],
+    "matchScore": 0.95,
     "name": "Disused Railway"
 }

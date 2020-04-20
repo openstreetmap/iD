@@ -1,0 +1,27 @@
+{
+    "icon": "fas-medkit",
+    "fields": [
+        "indoor",
+        "ref",
+        "operator"
+    ],
+    "moreFields": [
+        "level"
+    ],
+    "geometry": [
+        "point",
+        "vertex"
+    ],
+    "terms": [
+        "bandage",
+        "first aid",
+        "med",
+        "med kit",
+        "medic*",
+        "medkit"
+    ],
+    "tags": {
+        "emergency": "first_aid_kit"
+    },
+    "name": "First Aid Kit"
+}

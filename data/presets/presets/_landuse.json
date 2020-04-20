@@ -1,0 +1,15 @@
+{
+    "fields": [
+        "name",
+        "landuse"
+    ],
+    "geometry": [
+        "area"
+    ],
+    "tags": {
+        "landuse": "*"
+    },
+    "matchScore": 0.9,
+    "searchable": false,
+    "name": "Land Use Feature"
+}

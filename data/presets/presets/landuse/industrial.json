@@ -1,5 +1,16 @@
 {
-    "icon": "industrial",
+    "icon": "maki-industry",
+    "fields": [
+        "name",
+        "industrial"
+    ],
+    "moreFields": [
+        "address",
+        "email",
+        "fax",
+        "phone",
+        "website"
+    ],
     "geometry": [
         "area"
     ],
@@ -7,5 +18,6 @@
         "landuse": "industrial"
     },
     "terms": [],
+    "matchScore": 0.9,
     "name": "Industrial Area"
 }

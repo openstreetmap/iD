@@ -1,0 +1,14 @@
+{
+    "icon": "maki-shop",
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "tags": {
+        "shop": "general"
+    },
+    "terms": [
+        "village shop"
+    ],
+    "name": "General Store"
+}

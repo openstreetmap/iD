@@ -1,0 +1,11 @@
+{
+    "icon": "fas-comments",
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "tags": {
+        "healthcare": "counselling"
+    },
+    "name": "Counselling Center"
+}

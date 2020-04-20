@@ -1,0 +1,17 @@
+{
+    "icon": "temaki-turnstile",
+    "fields": [
+        "access"
+    ],
+    "geometry": [
+        "vertex"
+    ],
+    "terms": [
+        "baffle gate",
+        "turnstyle"
+    ],
+    "tags": {
+        "barrier": "turnstile"
+    },
+    "name": "Turnstile"
+}

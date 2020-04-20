@@ -1,0 +1,55 @@
+/* Fill Styles */
+
+.low-zoom.fill-wireframe path.stroke,
+.fill-wireframe path.stroke {
+    stroke-width: 1 !important;
+    stroke-opacity: 0.5 !important;
+    stroke-dasharray: none !important;
+    fill: none !important;
+}
+.low-zoom.fill-wireframe .layer-mapdata path.stroke,
+.fill-wireframe .layer-mapdata path.stroke {
+    stroke-width: 2 !important;
+    stroke-opacity: 1 !important;
+}
+
+.low-zoom.fill-wireframe path.shadow,
+.fill-wireframe path.shadow {
+    stroke-width: 12;
+}
+
+.fill-wireframe path.shadow.related:not(.selected),
+.fill-wireframe path.shadow.hover:not(.selected) {
+    stroke-opacity: 0.4;
+}
+.fill-wireframe path.shadow.selected {
+    stroke-opacity: 0.6;
+}
+
+.fill-wireframe .point,
+.fill-wireframe .areaicon,
+.fill-wireframe .areaicon-halo,
+.fill-wireframe path.casing,
+.fill-wireframe path.fill,
+.fill-wireframe path.oneway {
+    display: none !important;
+}
+
+.fill-partial path.area.fill {
+    fill-opacity: 0;
+    stroke-width: 60px;
+    pointer-events: none;
+}
+.fill-partial path.area.fill.tag-building_part {
+    stroke-width: 40px;
+}
+.fill-partial path.area.fill.tag-indoor {
+    stroke-width: 20px;
+}
+.ideditor.mode-browse .fill-partial path.area.fill,
+.ideditor.mode-select .fill-partial path.area.fill,
+.ideditor.mode-select-data .fill-partial path.area.fill,
+.ideditor.mode-select-error .fill-partial path.area.fill,
+.ideditor.mode-select-note .fill-partial path.area.fill {
+    pointer-events: visibleStroke;
+}

@@ -1,8 +1,22 @@
 {
-    "icon": "heliport",
+    "icon": "maki-heliport",
     "geometry": [
-        "point",
-        "area"
+        "area",
+        "point"
+    ],
+    "fields": [
+        "name",
+        "ref",
+        "operator",
+        "surface",
+        "lit"
+    ],
+    "moreFields": [
+        "access_simple",
+        "address",
+        "charge_fee",
+        "fee",
+        "opening_hours"
     ],
     "terms": [
         "helicopter",

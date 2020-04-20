@@ -1,14 +1,19 @@
 {
+    "icon": "temaki-rumble_strip",
+    "fields": [
+        "direction_vertex"
+    ],
     "geometry": [
-        "vertex"
+        "vertex",
+        "line"
+    ],
+    "terms": [
+        "audible lines",
+        "sleeper lines",
+        "growlers"
     ],
     "tags": {
         "traffic_calming": "rumble_strip"
     },
-    "terms": [
-        "sleeper lines",
-        "audible lines",
-        "growlers"
-    ],
     "name": "Rumble Strip"
 }

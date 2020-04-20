@@ -1,15 +1,32 @@
 {
-    "icon": "college",
+    "icon": "maki-college",
     "fields": [
+        "name",
         "operator",
-        "address"
+        "operator/type",
+        "address",
+        "website",
+        "internet_access",
+        "internet_access/fee",
+        "internet_access/ssid"
+    ],
+    "moreFields": [
+        "denomination",
+        "email",
+        "fax",
+        "gnis/feature_id",
+        "not/name",
+        "phone",
+        "religion",
+        "wheelchair"
     ],
     "geometry": [
-        "point",
-        "area"
+        "area",
+        "point"
     ],
     "terms": [
-        "university"
+        "university",
+        "undergraduate school"
     ],
     "tags": {
         "amenity": "college"

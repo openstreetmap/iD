@@ -1,0 +1,18 @@
+{
+    "icon": "maki-home",
+    "fields": [
+        "{building}"
+    ],
+    "moreFields": [
+        "{building}"
+    ],
+    "geometry": [
+        "point"
+    ],
+    "tags": {
+        "building": "*"
+    },
+    "matchScore": 0.6,
+    "searchable": false,
+    "name": "Building"
+}

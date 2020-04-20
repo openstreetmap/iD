@@ -1,0 +1,14 @@
+{
+    "fields": [
+        "crossing"
+    ],
+    "geometry": [
+        "vertex"
+    ],
+    "tags": {
+        "highway": "crossing"
+    },
+    "searchable": false,
+    "matchScore": 0.95,
+    "name": "Crossing"
+}

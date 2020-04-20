@@ -1,0 +1,16 @@
+{
+    "env": {
+        "browser": true,
+        "mocha": true
+    },
+    "globals": {
+        "expect": true,
+        "fakeFetch": true,
+        "happen": false,
+        "iD": false,
+        "sinon": false
+    },
+    "rules": {
+        "no-unused-expressions": "off"
+    }
+}

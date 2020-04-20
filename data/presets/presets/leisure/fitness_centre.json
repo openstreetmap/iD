@@ -1,0 +1,39 @@
+{
+    "icon": "fas-dumbbell",
+    "fields": [
+        "name",
+        "sport",
+        "address",
+        "building_area",
+        "opening_hours",
+        "phone",
+        "website"
+    ],
+    "moreFields": [
+        "brand",
+        "charge_fee",
+        "email",
+        "fax",
+        "fee",
+        "gnis/feature_id",
+        "internet_access",
+        "internet_access/fee",
+        "internet_access/ssid",
+        "payment_multi"
+    ],
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "tags": {
+        "leisure": "fitness_centre"
+    },
+    "terms": [
+        "health",
+        "gym",
+        "leisure",
+        "pilates",
+        "studio"
+    ],
+    "name": "Gym / Fitness Center"
+}

@@ -1,0 +1,40 @@
+{
+    "icon": "temaki-trolleybus",
+    "fields": [
+        "{public_transport/platform_point}"
+    ],
+    "moreFields": [
+        "{public_transport/platform_point}"
+    ],
+    "geometry": [
+        "point",
+        "vertex"
+    ],
+    "tags": {
+        "public_transport": "platform",
+        "trolleybus": "yes"
+    },
+    "addTags": {
+        "public_transport": "platform",
+        "trolleybus": "yes",
+        "highway": "bus_stop"
+    },
+    "reference": {
+        "key": "public_transport",
+        "value": "platform"
+    },
+    "terms": [
+        "bus",
+        "electric",
+        "platform",
+        "public transit",
+        "public transportation",
+        "streetcar",
+        "trackless",
+        "tram",
+        "trolley",
+        "transit",
+        "transportation"
+    ],
+    "name": "Trolleybus Stop"
+}

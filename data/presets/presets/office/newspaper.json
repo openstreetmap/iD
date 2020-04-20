@@ -1,18 +1,12 @@
 {
-    "icon": "commercial",
-    "fields": [
-        "address",
-        "building_area",
-        "opening_hours"
-    ],
+    "icon": "fas-newspaper",
     "geometry": [
         "point",
-        "vertex",
         "area"
     ],
     "tags": {
         "office": "newspaper"
     },
     "terms": [],
-    "name": "Newspaper"
+    "name": "Newspaper Office"
 }

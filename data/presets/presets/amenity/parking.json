@@ -1,25 +1,47 @@
 {
-    "icon": "parking",
+    "icon": "temaki-car_parked",
     "fields": [
         "operator",
+        "operator/type",
         "parking",
-        "capacity",
-        "fee",
+        "capacity_parking",
+        "capacity/disabled_parking",
         "access_simple",
-        "supervised",
-        "park_ride",
-        "surface",
+        "fee",
+        "payment_multi_fee",
+        "charge_fee",
+        "surface"
+    ],
+    "moreFields": [
+        "address",
+        "covered",
+        "email",
+        "fax",
         "maxstay",
-        "address"
+        "name",
+        "opening_hours",
+        "park_ride",
+        "phone",
+        "ref",
+        "supervised",
+        "website",
+        "wheelchair"
     ],
     "geometry": [
+        "area",
         "point",
-        "vertex",
-        "area"
+        "vertex"
     ],
     "tags": {
         "amenity": "parking"
     },
-    "terms": [],
-    "name": "Car Parking"
+    "terms": [
+        "automobile parking",
+        "car lot",
+        "car parking",
+        "rv parking",
+        "truck parking",
+        "vehicle parking"
+    ],
+    "name": "Parking Lot"
 }

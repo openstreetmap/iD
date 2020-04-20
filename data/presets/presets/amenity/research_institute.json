@@ -1,0 +1,39 @@
+{
+    "icon": "fas-flask",
+    "fields": [
+        "name",
+        "operator",
+        "operator/type",
+        "address",
+        "website",
+        "internet_access",
+        "internet_access/fee"
+    ],
+    "moreFields": [
+        "email",
+        "fax",
+        "gnis/feature_id",
+        "internet_access/ssid",
+        "phone",
+        "wheelchair"
+    ],
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "terms": [
+        "applied research",
+        "experimentation",
+        "r&d",
+        "r & d",
+        "r and d",
+        "research and development",
+        "research institution",
+        "research laboratory",
+        "research labs"
+    ],
+    "tags": {
+        "amenity": "research_institute"
+    },
+    "name": "Research Institute Grounds"
+}

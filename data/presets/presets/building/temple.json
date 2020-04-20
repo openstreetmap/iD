@@ -1,0 +1,11 @@
+{
+    "icon": "maki-place-of-worship",
+    "geometry": [
+        "area"
+    ],
+    "tags": {
+        "building": "temple"
+    },
+    "matchScore": 0.5,
+    "name": "Temple Building"
+}

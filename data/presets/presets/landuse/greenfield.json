@@ -1,0 +1,15 @@
+{
+    "icon": "temaki-bulldozer",
+    "geometry": [
+        "area"
+    ],
+    "fields": [
+        "name"
+    ],
+    "tags": {
+        "landuse": "greenfield"
+    },
+    "terms": [],
+    "matchScore": 0.9,
+    "name": "Greenfield"
+}

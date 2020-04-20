@@ -1,11 +1,5 @@
 {
-    "icon": "shop",
-    "fields": [
-        "operator",
-        "address",
-        "building",
-        "opening_hours"
-    ],
+    "icon": "temaki-storage_rental",
     "geometry": [
         "point",
         "area"
@@ -13,5 +7,8 @@
     "tags": {
         "shop": "storage_rental"
     },
+    "terms": [
+        "garages"
+    ],
     "name": "Storage Rental"
 }

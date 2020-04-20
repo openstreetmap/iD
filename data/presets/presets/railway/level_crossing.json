@@ -1,5 +1,5 @@
 {
-    "icon": "cross",
+    "icon": "maki-cross",
     "geometry": [
         "vertex"
     ],
@@ -14,5 +14,5 @@
         "road through railroad",
         "train crossing"
     ],
-    "name": "Railway Crossing"
+    "name": "Railway Crossing (Road)"
 }

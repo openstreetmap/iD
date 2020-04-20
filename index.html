@@ -1,281 +1,70 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset='utf-8'>
-        <title>iD</title>
-        <link rel='stylesheet' href='css/reset.css'>
-        <link rel='stylesheet' href='css/map.css'>
-        <link rel='stylesheet' href='css/app.css'>
+  <head>
+    <meta charset='utf-8'>
+    <title>iD</title>
+    <link rel='stylesheet' href='dist/iD.css'>
+    <link rel='icon' type='image/png' href='data:image/png;base64,iVBORw0KGgo='>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no'/>
+    <meta name='apple-mobile-web-app-capable' content='yes'/>
+    <meta name='apple-mobile-web-app-status-bar-style' content='black-translucent'/>
+    <style type='text/css'>
+      /* apply document-level styling to standalone iD only */
+      html, body {
+        width: 100%;
+        height: 100%;
+        margin: 0;
+        padding: 0;
+      }
+    </style>
+  </head>
 
-        <!-- mobile devices -->
-        <meta name='viewport' content='initial-scale=1.0 maximum-scale=1.0'>
-        <meta name='apple-mobile-web-app-capable' content='yes' />
-        <meta name='apple-mobile-web-app-status-bar-style' content='black-translucent' />
+  <body>
+    <div id='id-container'></div>
 
-        <script src='js/lib/lodash.js'></script>
-        <script src='js/lib/d3.v3.js'></script>
-        <script src='js/lib/osmauth.js'></script>
-        <script src='js/lib/jxon.js'></script>
-        <script src='js/lib/d3.combobox.js'></script>
-        <script src='js/lib/d3.geo.tile.js'></script>
-        <script src='js/lib/d3.dimensions.js'></script>
-        <script src='js/lib/d3.trigger.js'></script>
-        <script src='js/lib/d3.jsonp.js'></script>
-        <script src='js/lib/d3.keybinding.js'></script>
-        <script src='js/lib/d3.curtain.js'></script>
-        <script src='js/lib/d3.one.js'></script>
-        <script src='js/lib/d3.value.js'></script>
-        <script src='js/lib/d3-compat.js'></script>
-        <script src='js/lib/bootstrap-tooltip.js'></script>
-        <script src='js/lib/diff3.js'></script>
-        <script src='js/lib/rbush.js'></script>
-        <script src='js/lib/sexagesimal.js'></script>
-        <script src='js/lib/togeojson.js'></script>
-        <script src='js/lib/marked.js'></script>
+    <script>
+      var container = document.getElementById('id-container');
+      var newScript = document.createElement('script');
+      newScript.type = 'text/javascript';
+      newScript.onload = checkScript;
+      newScript.onerror = checkScript;
 
-        <script src='js/id/id.js'></script>
+      var isIE11 = !!(navigator.userAgent.match(/Trident/) && !navigator.userAgent.match(/MSIE/));
+      newScript.src = isIE11 ? 'dist/iD.legacy.js' : 'dist/iD.js';
 
-        <script src='js/id/util.js'></script>
-        <script src='js/id/util/session_mutex.js'></script>
-        <script src='js/id/util/suggest_names.js'></script>
+      document.getElementsByTagName('head')[0].appendChild(newScript);
 
-        <script src='js/id/services.js'></script>
-        <script src='js/id/services/mapillary.js'></script>
-        <script src='js/id/services/nominatim.js'></script>
-        <script src='js/id/services/taginfo.js'></script>
-        <script src='js/id/services/wikipedia.js'></script>
 
-        <script src='data/data_dev.js'></script>
+      function checkScript() {
+        if (typeof iD === 'undefined' || !iD.utilDetect().support) {
+          container.innerHTML = 'Sorry, your browser is not currently supported. Please use Potlatch 2 to edit the map.';
+          container.style.padding = '20px';
 
-        <script src="js/id/geo.js"></script>
-        <script src="js/id/geo/extent.js"></script>
-        <script src="js/id/geo/intersection.js"></script>
-        <script src="js/id/geo/multipolygon.js"></script>
-        <script src="js/id/geo/raw_mercator.js"></script>
+        } else {
+          var context = iD.coreContext()
+            .assetPath('dist/')
+            .apiConnections([
+              {
+                'urlroot': 'https://www.openstreetmap.org',
+                'oauth_consumer_key': '5A043yRSEugj4DJ5TljuapfnrflWDte8jTOcWLlT',
+                'oauth_secret': 'aB3jKq1TRsCOUrfOIZ6oQMEDmv2ptV76PA54NGLL'
+              }, {
+                'urlroot': 'https://api06.dev.openstreetmap.org',
+                'oauth_consumer_key': 'zwQZFivccHkLs3a8Rq5CoS412fE5aPCXDw9DZj7R',
+                'oauth_secret': 'aMnOOCwExO2XYtRVWJ1bI9QOdqh1cay2UgpbhA6p'
+              }
+            ])
+            .containerNode(container);
+          window.context = window.id = context;  // for debugging
+          context.init();
 
-        <script src='js/id/renderer/background.js'></script>
-        <script src='js/id/renderer/background_source.js'></script>
-        <script src='js/id/renderer/features.js'></script>
-        <script src='js/id/renderer/map.js'></script>
-        <script src='js/id/renderer/tile_layer.js'></script>
-
-        <script src="js/id/svg.js"></script>
-        <script src="js/id/svg/areas.js"></script>
-        <script src="js/id/svg/defs.js"></script>
-        <script src='js/id/svg/gpx.js'></script>
-        <script src="js/id/svg/icon.js"></script>
-        <script src="js/id/svg/labels.js"></script>
-        <script src="js/id/svg/lines.js"></script>
-        <script src='js/id/svg/mapillary_images.js'></script>
-        <script src='js/id/svg/mapillary_signs.js'></script>
-        <script src="js/id/svg/midpoints.js"></script>
-        <script src="js/id/svg/osm.js"></script>
-        <script src="js/id/svg/points.js"></script>
-        <script src="js/id/svg/layers.js"></script>
-        <script src="js/id/svg/tag_classes.js"></script>
-        <script src="js/id/svg/turns.js"></script>
-        <script src="js/id/svg/vertices.js"></script>
-
-        <script src="js/id/ui.js"></script>
-        <script src='js/id/ui/intro.js'></script>
-        <script src='js/id/ui/info.js'></script>
-        <script src='js/id/ui/attribution.js'></script>
-        <script src='js/id/ui/radial_menu.js'></script>
-        <script src='js/id/ui/inspector.js'></script>
-        <script src='js/id/ui/modal.js'></script>
-        <script src='js/id/ui/cmd.js'></script>
-        <script src='js/id/ui/confirm.js'></script>
-        <script src='js/id/ui/conflicts.js'></script>
-        <script src='js/id/ui/commit.js'></script>
-        <script src='js/id/ui/success.js'></script>
-        <script src='js/id/ui/loading.js'></script>
-        <script src='js/id/ui/account.js'></script>
-        <script src='js/id/ui/background.js'></script>
-        <script src='js/id/ui/map_data.js'></script>
-        <script src='js/id/ui/map_in_map.js'></script>
-        <script src='js/id/ui/modes.js'></script>
-        <script src='js/id/ui/contributors.js'></script>
-        <script src='js/id/ui/help.js'></script>
-        <script src='js/id/ui/geolocate.js'></script>
-        <script src='js/id/ui/notice.js'></script>
-        <script src='js/id/ui/flash.js'></script>
-        <script src='js/id/ui/feature_info.js'></script>
-        <script src='js/id/ui/save.js'></script>
-        <script src='js/id/ui/full_screen.js'></script>
-        <script src='js/id/ui/scale.js'></script>
-        <script src='js/id/ui/splash.js'></script>
-        <script src='js/id/ui/spinner.js'></script>
-        <script src='js/id/ui/restore.js'></script>
-        <script src='js/id/ui/tag_reference.js'></script>
-        <script src='js/id/ui/preset.js'></script>
-        <script src='js/id/ui/preset_icon.js'></script>
-        <script src='js/id/ui/lasso.js'></script>
-        <script src='js/id/ui/source_switch.js'></script>
-        <script src='js/id/ui/status.js'></script>
-        <script src='js/id/ui/toggle.js'></script>
-        <script src='js/id/ui/undo_redo.js'></script>
-        <script src='js/id/ui/view_on_osm.js'></script>
-        <script src='js/id/ui/zoom.js'></script>
-        <script src='js/id/ui/raw_tag_editor.js'></script>
-        <script src='js/id/ui/raw_member_editor.js'></script>
-        <script src='js/id/ui/raw_membership_editor.js'></script>
-        <script src='js/id/ui/feature_list.js'></script>
-        <script src='js/id/ui/selection_list.js'></script>
-        <script src='js/id/ui/preset_list.js'></script>
-        <script src='js/id/ui/entity_editor.js'></script>
-        <script src='js/id/ui/disclosure.js'></script>
-        <script src='js/id/ui/sidebar.js'></script>
-
-        <script src='js/id/ui/preset/access.js'></script>
-        <script src='js/id/ui/preset/address.js'></script>
-        <script src='js/id/ui/preset/check.js'></script>
-        <script src='js/id/ui/preset/combo.js'></script>
-        <script src='js/id/ui/preset/cycleway.js'></script>
-        <script src='js/id/ui/preset/input.js'></script>
-        <script src='js/id/ui/preset/localized.js'></script>
-        <script src='js/id/ui/preset/maxspeed.js'></script>
-        <script src='js/id/ui/preset/radio.js'></script>
-        <script src='js/id/ui/preset/restrictions.js'></script>
-        <script src='js/id/ui/preset/textarea.js'></script>
-        <script src='js/id/ui/preset/wikipedia.js'></script>
-
-        <script src='js/id/ui/intro/navigation.js'></script>
-        <script src='js/id/ui/intro/point.js'></script>
-        <script src='js/id/ui/intro/area.js'></script>
-        <script src='js/id/ui/intro/line.js'></script>
-        <script src='js/id/ui/intro/start_editing.js'></script>
-
-        <script src='js/id/actions.js'></script>
-        <script src="js/id/actions/add_midpoint.js"></script>
-        <script src="js/id/actions/add_member.js"></script>
-        <script src='js/id/actions/add_entity.js'></script>
-        <script src='js/id/actions/add_vertex.js'></script>
-        <script src='js/id/actions/change_member.js'></script>
-        <script src='js/id/actions/change_preset.js'></script>
-        <script src='js/id/actions/change_tags.js'></script>
-        <script src='js/id/actions/circularize.js'></script>
-        <script src='js/id/actions/connect.js'></script>
-        <script src='js/id/actions/copy_entities.js'></script>
-        <script src='js/id/actions/delete_member.js'></script>
-        <script src='js/id/actions/delete_multiple.js'></script>
-        <script src='js/id/actions/delete_node.js'></script>
-        <script src="js/id/actions/delete_relation.js"></script>
-        <script src="js/id/actions/delete_way.js"></script>
-        <script src='js/id/actions/discard_tags.js'></script>
-        <script src='js/id/actions/disconnect.js'></script>
-        <script src='js/id/actions/join.js'></script>
-        <script src='js/id/actions/merge.js'></script>
-        <script src='js/id/actions/merge_polygon.js'></script>
-        <script src='js/id/actions/merge_remote_changes.js'></script>
-        <script src='js/id/actions/move_node.js'></script>
-        <script src='js/id/actions/move.js'></script>
-        <script src='js/id/actions/noop.js'></script>
-        <script src='js/id/actions/orthogonalize.js'></script>
-        <script src='js/id/actions/rotate_way.js'></script>
-        <script src='js/id/actions/restrict_turn.js'></script>
-        <script src='js/id/actions/reverse.js'></script>
-        <script src='js/id/actions/revert.js'></script>
-        <script src='js/id/actions/straighten.js'></script>
-        <script src='js/id/actions/split.js'></script>
-        <script src='js/id/actions/unrestrict_turn.js'></script>
-
-        <script src='js/id/behavior.js'></script>
-        <script src='js/id/behavior/add_way.js'></script>
-        <script src='js/id/behavior/breathe.js'></script>
-        <script src='js/id/behavior/copy.js'></script>
-        <script src='js/id/behavior/drag.js'></script>
-        <script src='js/id/behavior/draw.js'></script>
-        <script src='js/id/behavior/draw_way.js'></script>
-        <script src='js/id/behavior/edit.js'></script>
-        <script src='js/id/behavior/hash.js'></script>
-        <script src='js/id/behavior/hover.js'></script>
-        <script src='js/id/behavior/lasso.js'></script>
-        <script src='js/id/behavior/paste.js'></script>
-        <script src='js/id/behavior/select.js'></script>
-        <script src='js/id/behavior/tail.js'></script>
-
-        <script src='js/id/modes.js'></script>
-        <script src='js/id/modes/add_area.js'></script>
-        <script src='js/id/modes/add_point.js'></script>
-        <script src='js/id/modes/add_line.js'></script>
-        <script src='js/id/modes/browse.js'></script>
-        <script src='js/id/modes/drag_node.js'></script>
-        <script src='js/id/modes/draw_area.js'></script>
-        <script src='js/id/modes/draw_line.js'></script>
-        <script src='js/id/modes/move.js'></script>
-        <script src='js/id/modes/rotate_way.js'></script>
-        <script src='js/id/modes/save.js'></script>
-        <script src='js/id/modes/select.js'></script>
-
-        <script src='js/id/operations.js'></script>
-        <script src='js/id/operations/continue.js'></script>
-        <script src='js/id/operations/circularize.js'></script>
-        <script src='js/id/operations/orthogonalize.js'></script>
-        <script src='js/id/operations/straighten.js'></script>
-        <script src='js/id/operations/delete.js'></script>
-        <script src='js/id/operations/disconnect.js'></script>
-        <script src='js/id/operations/merge.js'></script>
-        <script src='js/id/operations/move.js'></script>
-        <script src='js/id/operations/rotate.js'></script>
-        <script src='js/id/operations/reverse.js'></script>
-        <script src='js/id/operations/split.js'></script>
-
-        <script src='js/id/core/connection.js'></script>
-        <script src='js/id/core/difference.js'></script>
-        <script src='js/id/core/entity.js'></script>
-        <script src='js/id/core/graph.js'></script>
-        <script src='js/id/core/history.js'></script>
-        <script src='js/id/core/node.js'></script>
-        <script src='js/id/core/relation.js'></script>
-        <script src='js/id/core/way.js'></script>
-        <script src='js/id/core/tree.js'></script>
-        <script src='js/id/core/tags.js'></script>
-
-        <script src='js/id/presets.js'></script>
-        <script src='js/id/presets/preset.js'></script>
-        <script src='js/id/presets/category.js'></script>
-        <script src='js/id/presets/collection.js'></script>
-        <script src='js/id/presets/field.js'></script>
-
-        <script src='js/id/validations.js'></script>
-        <script src='js/id/validations/deprecated_tag.js'></script>
-        <script src='js/id/validations/many_deletions.js'></script>
-        <script src='js/id/validations/missing_tag.js'></script>
-        <script src='js/id/validations/tag_suggests_area.js'></script>
-
-        <script src='js/lib/locale.js'></script>
-        <script src='data/introGraph.js'></script>
-    </head>
-    <body>
-        <div id='id-container'></div>
-        <script>
-            iD.data.load(function() {
-                id = iD()
-                    .presets(iD.data.presets)
-                    .imagery(iD.data.imagery)
-                    .taginfo(iD.services.taginfo())
-                    .assetPath('dist/');
-
-                d3.select('#id-container')
-                    .call(id.ui());
-
-                d3.select('#about-list').insert('li', '.user-list')
-                    .attr('class', 'source-switch')
-                    .call(iD.ui.SourceSwitch(id)
-                        .keys([
-                            {
-                                "url": "http://www.openstreetmap.org",
-                                "oauth_consumer_key": "5A043yRSEugj4DJ5TljuapfnrflWDte8jTOcWLlT",
-                                "oauth_secret": "aB3jKq1TRsCOUrfOIZ6oQMEDmv2ptV76PA54NGLL"
-                            },
-                            {
-                                "url": "http://api06.dev.openstreetmap.org",
-                                "oauth_consumer_key": "zwQZFivccHkLs3a8Rq5CoS412fE5aPCXDw9DZj7R",
-                                "oauth_secret": "aMnOOCwExO2XYtRVWJ1bI9QOdqh1cay2UgpbhA6p"
-                            }
-                        ]));
-
-            });
-        </script>
-    </body>
+          // disable boundaries (unless we have an explicit disable_features list)
+          var q = iD.utilStringQs(window.location.hash);
+          if (!q.hasOwnProperty('disable_features')) {
+            context.features().disable('boundaries');
+          }
+        }
+      }
+    </script>
+  </body>
 </html>

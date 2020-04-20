@@ -1,7 +1,12 @@
 {
-    "icon": "town",
+    "icon": "maki-town",
     "fields": [
+        "name",
         "population"
+    ],
+    "moreFields": [
+        "{place}",
+        "website"
     ],
     "geometry": [
         "point",

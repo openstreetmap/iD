@@ -1,9 +1,5 @@
 {
-    "icon": "place-of-worship",
-    "fields": [
-        "address",
-        "levels"
-    ],
+    "icon": "fas-church",
     "geometry": [
         "area"
     ],

@@ -1,0 +1,9 @@
+{
+    "key": "not:name",
+    "type": "semiCombo",
+    "label": "Incorrect Names",
+    "terms": [
+        "common mistake names",
+        "wrong names"
+    ]
+}

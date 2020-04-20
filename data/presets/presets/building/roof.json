@@ -1,7 +1,8 @@
 {
-    "icon": "building",
+    "icon": "maki-shelter",
     "fields": [
-        "address"
+        "{building}",
+        "layer"
     ],
     "geometry": [
         "area"

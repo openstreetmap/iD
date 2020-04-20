@@ -1,0 +1,21 @@
+{
+    "icon": "temaki-bicycle_locker",
+    "geometry": [
+        "point",
+        "vertex",
+        "area"
+    ],
+    "tags": {
+        "amenity": "bicycle_parking",
+        "bicycle_parking": "lockers"
+    },
+    "reference": {
+        "key": "bicycle_parking"
+    },
+    "terms": [
+        "cycle locker",
+        "cycling",
+        "Bike Lockers"
+    ],
+    "name": "Bicycle Lockers"
+}

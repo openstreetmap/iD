@@ -1,17 +1,23 @@
 {
+    "icon": "maki-park",
     "fields": [
         "leaf_type_singular",
         "leaf_cycle_singular",
-        "denotation"
+        "denotation",
+        "height",
+        "diameter"
     ],
-    "icon": "park",
+    "moreFields": [
+        "circumference",
+        "species/wikidata"
+    ],
     "geometry": [
         "point",
         "vertex"
     ],
-    "terms": [],
     "tags": {
         "natural": "tree"
     },
+    "terms": [],
     "name": "Tree"
 }

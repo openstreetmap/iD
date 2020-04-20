@@ -1,4 +1,5 @@
 {
+    "icon": "temaki-street_lamp_arm",
     "geometry": [
         "point",
         "vertex"
@@ -8,6 +9,7 @@
     },
     "fields": [
         "lamp_type",
+        "direction",
         "ref"
     ],
     "terms": [

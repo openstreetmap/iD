@@ -1,4 +1,8 @@
 {
+    "fields": [
+        "material",
+        "seamark/type"
+    ],
     "geometry": [
         "line",
         "area"
@@ -6,5 +10,5 @@
     "tags": {
         "man_made": "groyne"
     },
-    "name": "Groyne"
+    "name": "Groin"
 }

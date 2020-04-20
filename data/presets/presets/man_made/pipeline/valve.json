@@ -1,0 +1,29 @@
+{
+    "icon": "temaki-wheel",
+    "geometry": [
+        "vertex"
+    ],
+    "fields": [
+        "ref",
+        "operator",
+        "valve",
+        "location",
+        "diameter"
+    ],
+    "moreFields": [
+        "colour",
+        "manufacturer",
+        "material"
+    ],
+    "terms": [
+        "oil",
+        "natural gas",
+        "water",
+        "sewer",
+        "sewage"
+    ],
+    "tags": {
+        "pipeline": "valve"
+    },
+    "name": "Pipeline Valve"
+}

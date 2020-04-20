@@ -1,0 +1,42 @@
+{
+    "icon": "maki-veterinary",
+    "fields": [
+        "name",
+        "operator",
+        "address",
+        "building_area",
+        "opening_hours",
+        "animal_breeding"
+    ],
+    "moreFields": [
+        "email",
+        "fax",
+        "gnis/feature_id",
+        "level",
+        "phone",
+        "website",
+        "wheelchair"
+    ],
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "terms": [
+        "breeding",
+        "bull",
+        "cat",
+        "cow",
+        "dog",
+        "horse",
+        "husbandry",
+        "kitten",
+        "livestock",
+        "pet breeding",
+        "puppy",
+        "reptile"
+    ],
+    "tags": {
+        "amenity": "animal_breeding"
+    },
+    "name": "Animal Breeding Facility"
+}

@@ -1,11 +1,5 @@
 {
-    "icon": "circle-stroked",
-    "fields": [
-        "operator",
-        "address",
-        "building_area",
-        "opening_hours"
-    ],
+    "icon": "temaki-clock",
     "geometry": [
         "point",
         "area"

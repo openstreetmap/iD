@@ -1,0 +1,14 @@
+{
+    "key": "piste:grooming",
+    "type": "combo",
+    "label": "Grooming",
+    "strings": {
+        "options": {
+            "classic": "Classic",
+            "backcountry": "Backcountry, no grooming",
+            "classic+skating": "Classic and Skating",
+            "scooter": "Scooter/Snowmobile",
+            "skating": "Skating"
+        }
+    }
+}

@@ -1,9 +1,15 @@
 {
-    "icon": "golf",
+    "icon": "maki-golf",
+    "fields": [
+        "name"
+    ],
     "geometry": [
         "area"
     ],
     "tags": {
+        "golf": "fairway"
+    },
+    "addTags": {
         "golf": "fairway",
         "landuse": "grass"
     },

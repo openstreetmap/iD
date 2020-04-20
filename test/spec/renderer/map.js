@@ -1,12 +1,15 @@
 describe('iD.Map', function() {
-    var context, map;
+    var content, context, map;
 
     beforeEach(function() {
-        context = iD().imagery(iD.data.imagery);
-        context.container(d3.select(document.createElement('div')));
+        content = d3.select('body').append('div');
+        context = iD.coreContext().init().container(content);
         map = context.map();
-        d3.select(document.createElement('div'))
-            .call(map);
+        content.call(map);
+    });
+
+    afterEach(function() {
+        content.remove();
     });
 
     describe('#zoom', function() {
@@ -43,9 +46,10 @@ describe('iD.Map', function() {
             expect(map.zoom(4)).to.equal(map);
             map.zoomIn();
             window.setTimeout(function() {
-                expect(map.zoom()).to.equal(5);
+                d3.timerFlush();
+                expect(map.zoom()).to.be.closeTo(5, 1e-6);
                 done();
-            }, 500);
+            }, 275);
         });
     });
 
@@ -54,9 +58,10 @@ describe('iD.Map', function() {
             expect(map.zoom(4)).to.equal(map);
             map.zoomOut();
             window.setTimeout(function() {
-                expect(map.zoom()).to.equal(3);
+                d3.timerFlush();
+                expect(map.zoom()).to.be.closeTo(3, 1e-6);
                 done();
-            }, 500);
+            }, 275);
         });
     });
 
@@ -69,10 +74,11 @@ describe('iD.Map', function() {
     describe('#center', function() {
         it('gets and sets center', function() {
             expect(map.center([0, 0])).to.equal(map);
-            expect(map.center()).to.eql([0, 0]);
+            expect(map.center()[0]).to.be.closeTo(0, 1e-6);
+            expect(map.center()[1]).to.be.closeTo(0, 1e-6);
             expect(map.center([10, 15])).to.equal(map);
-            expect(map.center()[0]).to.be.closeTo(10, 0.5);
-            expect(map.center()[1]).to.be.closeTo(15, 0.5);
+            expect(map.center()[0]).to.be.closeTo(10, 1e-6);
+            expect(map.center()[1]).to.be.closeTo(15, 1e-6);
         });
 
         it('dispatches move event when center changes', function() {
@@ -95,20 +101,21 @@ describe('iD.Map', function() {
     describe('#centerEase', function() {
         it('sets center', function(done) {
             expect(map.center([10, 10])).to.equal(map);
-            expect(map.centerEase([20, 20])).to.equal(map);
+            expect(map.centerEase([20, 20], 250)).to.equal(map);
             window.setTimeout(function() {
-                expect(map.center()[0]).to.be.closeTo(20, 0.5);
-                expect(map.center()[1]).to.be.closeTo(20, 0.5);
+                d3.timerFlush();
+                expect(map.center()[0]).to.be.closeTo(20, 1e-6);
+                expect(map.center()[1]).to.be.closeTo(20, 1e-6);
                 done();
-            }, 1000);
+            }, 275);
         });
     });
 
     describe('#centerZoom', function() {
         it('gets and sets center and zoom', function() {
             expect(map.centerZoom([20, 25], 4)).to.equal(map);
-            expect(map.center()[0]).to.be.closeTo(20, 0.5);
-            expect(map.center()[1]).to.be.closeTo(25, 0.5);
+            expect(map.center()[0]).to.be.closeTo(20, 1e-6);
+            expect(map.center()[1]).to.be.closeTo(25, 1e-6);
             expect(map.zoom()).to.be.equal(4);
         });
     });
@@ -129,9 +136,9 @@ describe('iD.Map', function() {
         });
     });
 
-    describe("surface", function() {
-        it("is an SVG element", function() {
-           expect(map.surface.node().tagName).to.equal("svg");
+    describe('surface', function() {
+        it('is an SVG element', function() {
+           expect(map.surface.node().tagName).to.equal('svg');
         });
     });
 
@@ -158,42 +165,42 @@ describe('iD.Map', function() {
         }
 
         specify('points use select-point cursor in browse and select modes', function() {
-            mode.attr('class', 'mode-browse');
+            mode.attr('class', 'ideditor mode-browse');
             expect(cursor(point)).to.match(/cursor-select-point/);
-            mode.attr('class', 'mode-select');
+            mode.attr('class', 'ideditor mode-select');
             expect(cursor(point)).to.match(/cursor-select-point/);
         });
 
         specify('vertices use select-vertex cursor in browse and select modes', function() {
-            mode.attr('class', 'mode-browse');
+            mode.attr('class', 'ideditor mode-browse');
             expect(cursor(vertex)).to.match(/cursor-select-vertex/);
-            mode.attr('class', 'mode-select');
+            mode.attr('class', 'ideditor mode-select');
             expect(cursor(vertex)).to.match(/cursor-select-vertex/);
         });
 
         specify('lines use select-line cursor in browse and select modes', function() {
-            mode.attr('class', 'mode-browse');
+            mode.attr('class', 'ideditor mode-browse');
             expect(cursor(line)).to.match(/cursor-select-line/);
-            mode.attr('class', 'mode-select');
+            mode.attr('class', 'ideditor mode-select');
             expect(cursor(line)).to.match(/cursor-select-line/);
         });
 
         specify('areas use select-area cursor in browse and select modes', function() {
-            mode.attr('class', 'mode-browse');
+            mode.attr('class', 'ideditor mode-browse');
             expect(cursor(area)).to.match(/cursor-select-area/);
-            mode.attr('class', 'mode-select');
+            mode.attr('class', 'ideditor mode-select');
             expect(cursor(area)).to.match(/cursor-select-area/);
         });
 
         specify('midpoints use select-split cursor in browse and select modes', function() {
-            mode.attr('class', 'mode-browse');
+            mode.attr('class', 'ideditor mode-browse');
             expect(cursor(midpoint)).to.match(/cursor-select-split/);
-            mode.attr('class', 'mode-select');
+            mode.attr('class', 'ideditor mode-select');
             expect(cursor(midpoint)).to.match(/cursor-select-split/);
         });
 
         specify('features use select-add cursor for adding to a selection', function() {
-            mode.attr('class', 'mode-select');
+            mode.attr('class', 'ideditor mode-select');
             behavior.attr('class', 'behavior-multiselect');
             expect(cursor(point)).to.match(/cursor-select-add/);
             expect(cursor(vertex)).to.match(/cursor-select-add/);
@@ -202,7 +209,7 @@ describe('iD.Map', function() {
         });
 
         specify('features use select-remove cursor for removing from a selection', function() {
-            mode.attr('class', 'mode-select');
+            mode.attr('class', 'ideditor mode-select');
             behavior.attr('class', 'behavior-multiselect');
             point.classed('selected', true);
             vertex.classed('selected', true);
@@ -214,39 +221,39 @@ describe('iD.Map', function() {
             expect(cursor(area)).to.match(/cursor-select-remove/);
         });
 
-        specify('hovered ways use draw-connect-line cursor in draw modes', function() {
+        specify('targeted ways use draw-connect-line cursor in draw modes', function() {
             behavior.attr('class', 'behavior-hover');
-            line.classed('hover', true);
-            area.classed('hover', true);
-            mode.attr('class', 'mode-draw-line');
+            line.classed('target', true);
+            area.classed('target', true);
+            mode.attr('class', 'ideditor mode-draw-line');
             expect(cursor(line)).to.match(/cursor-draw-connect-line/);
             expect(cursor(area)).to.match(/cursor-draw-connect-line/);
-            mode.attr('class', 'mode-draw-area');
+            mode.attr('class', 'ideditor mode-draw-area');
             expect(cursor(line)).to.match(/cursor-draw-connect-line/);
             expect(cursor(area)).to.match(/cursor-draw-connect-line/);
-            mode.attr('class', 'mode-add-line');
+            mode.attr('class', 'ideditor mode-add-line');
             expect(cursor(line)).to.match(/cursor-draw-connect-line/);
             expect(cursor(area)).to.match(/cursor-draw-connect-line/);
-            mode.attr('class', 'mode-add-area');
+            mode.attr('class', 'ideditor mode-add-area');
             expect(cursor(line)).to.match(/cursor-draw-connect-line/);
             expect(cursor(area)).to.match(/cursor-draw-connect-line/);
-            mode.attr('class', 'mode-drag-node');
+            mode.attr('class', 'ideditor mode-drag-node');
             expect(cursor(line)).to.match(/cursor-draw-connect-line/);
             expect(cursor(area)).to.match(/cursor-draw-connect-line/);
         });
 
-        specify('hovered vertices use draw-connect-vertex cursor in draw modes', function() {
+        specify('targeted vertices use draw-connect-vertex cursor in draw modes', function() {
             behavior.attr('class', 'behavior-hover');
-            vertex.classed('hover', true);
-            mode.attr('class', 'mode-draw-line');
+            vertex.classed('target', true);
+            mode.attr('class', 'ideditor mode-draw-line');
             expect(cursor(vertex)).to.match(/cursor-draw-connect-vertex/);
-            mode.attr('class', 'mode-draw-area');
+            mode.attr('class', 'ideditor mode-draw-area');
             expect(cursor(vertex)).to.match(/cursor-draw-connect-vertex/);
-            mode.attr('class', 'mode-add-line');
+            mode.attr('class', 'ideditor mode-add-line');
             expect(cursor(vertex)).to.match(/cursor-draw-connect-vertex/);
-            mode.attr('class', 'mode-add-area');
+            mode.attr('class', 'ideditor mode-add-area');
             expect(cursor(vertex)).to.match(/cursor-draw-connect-vertex/);
-            mode.attr('class', 'mode-drag-node');
+            mode.attr('class', 'ideditor mode-drag-node');
             expect(cursor(vertex)).to.match(/cursor-draw-connect-vertex/);
         });
     });

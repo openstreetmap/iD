@@ -1,0 +1,26 @@
+{
+    "icon": "temaki-sikhism",
+    "fields": [
+        "name",
+        "religion",
+        "denomination",
+        "{amenity/place_of_worship}"
+    ],
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "terms": [
+        "gurudwara",
+        "temple"
+    ],
+    "tags": {
+        "amenity": "place_of_worship",
+        "religion": "sikh"
+    },
+    "reference": {
+        "key": "amenity",
+        "value": "place_of_worship"
+    },
+    "name": "Sikh Temple"
+}

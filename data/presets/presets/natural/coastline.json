@@ -1,12 +1,13 @@
 {
+    "icon": "temaki-beach",
     "geometry": [
         "line"
-    ],
-    "terms": [
-        "shore"
     ],
     "tags": {
         "natural": "coastline"
     },
+    "terms": [
+        "shore"
+    ],
     "name": "Coastline"
 }

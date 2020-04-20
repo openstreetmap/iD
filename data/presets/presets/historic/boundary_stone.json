@@ -1,4 +1,13 @@
 {
+    "icon": "temaki-milestone",
+    "fields": [
+        "name",
+        "inscription"
+    ],
+    "moreFields": [
+        "{historic}",
+        "material"
+    ],
     "geometry": [
         "point",
         "vertex"

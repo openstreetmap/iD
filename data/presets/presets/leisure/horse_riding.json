@@ -1,0 +1,31 @@
+{
+    "icon": "maki-horse-riding",
+    "fields": [
+        "name",
+        "access_simple",
+        "operator",
+        "address",
+        "building"
+    ],
+    "moreFields": [
+        "email",
+        "fax",
+        "gnis/feature_id",
+        "opening_hours",
+        "payment_multi",
+        "phone",
+        "website"
+    ],
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "terms": [
+        "equestrian",
+        "stable"
+    ],
+    "tags": {
+        "leisure": "horse_riding"
+    },
+    "name": "Horseback Riding Facility"
+}

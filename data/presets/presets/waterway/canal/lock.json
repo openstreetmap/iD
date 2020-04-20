@@ -1,0 +1,22 @@
+{
+    "icon": "iD-waterway-canal",
+    "fields": [
+        "name",
+        "width",
+        "lock"
+    ],
+    "moreFields": [
+        "gnis/feature_id",
+        "intermittent",
+        "salt",
+        "tidal"
+    ],
+    "geometry": [
+        "line"
+    ],
+    "tags": {
+        "waterway": "canal",
+        "lock": "yes"
+    },
+    "name": "Canal Lock"
+}

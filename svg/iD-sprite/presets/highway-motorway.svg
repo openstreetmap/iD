@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0" y="0" width="50" height="50" viewBox="5 0 50 50">
+  <path d="M13,14 L8,36 L16.5,36 L19.5,14 L13,14 z M21,14 L18.5,36 L27,36 L28,14 L21,14 z M32,14 L33,36 L40.5,36 L38,14 L32,14 z M39.5,14 L42.5,36 L52,36 L46.5,14 L39.5,14 z" fill="#444444"/>
+  <path d="M42.75,20 L42,16 L44.875,16 L45.625,20 z M38,33 L37.5,29 L34.5,29 L35,33 z M11.5,33 L12,29 L15,29 L14.5,33 z M23.25,20 L23.562,16 L26.438,16 L26.125,20 z" fill="currentColor" id="highway-motorway-stroke2"/>
+</svg>

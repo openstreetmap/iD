@@ -1,0 +1,16 @@
+{
+    "icon": "maki-suitcase",
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "tags": {
+        "office": "travel_agent"
+    },
+    "reference": {
+        "key": "shop",
+        "value": "travel_agency"
+    },
+    "name": "Travel Agency",
+    "searchable": false
+}

@@ -1,0 +1,18 @@
+{
+    "icon": "fas-directions",
+    "fields": [
+        "traffic_sign",
+        "direction"
+    ],
+    "geometry": [
+        "point"
+    ],
+    "tags": {
+        "traffic_sign": "*"
+    },
+    "terms": [
+        "road",
+        "highway"
+    ],
+    "name": "Traffic Sign"
+}

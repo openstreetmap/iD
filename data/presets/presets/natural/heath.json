@@ -1,10 +1,11 @@
 {
+    "icon": "temaki-shrub_low",
     "geometry": [
         "area"
     ],
-    "terms": [],
     "tags": {
         "natural": "heath"
     },
+    "terms": [],
     "name": "Heath"
 }

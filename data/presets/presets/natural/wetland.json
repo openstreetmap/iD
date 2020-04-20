@@ -1,7 +1,9 @@
 {
-    "icon": "wetland",
+    "icon": "maki-wetland",
     "fields": [
-        "wetland"
+        "wetland",
+        "salt",
+        "tidal"
     ],
     "geometry": [
         "point",
@@ -10,6 +12,20 @@
     "tags": {
         "natural": "wetland"
     },
-    "terms": [],
+    "terms": [
+        "bog",
+        "fen",
+        "marsh",
+        "mire",
+        "moor",
+        "muskeg",
+        "peatland",
+        "quagmire",
+        "reedbed",
+        "saltmarsh",
+        "swamp",
+        "tidalflat",
+        "wet meadow"
+    ],
     "name": "Wetland"
 }

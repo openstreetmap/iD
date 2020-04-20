@@ -1,0 +1,30 @@
+{
+    "icon": "fas-biking",
+    "fields": [
+        "crossing",
+        "access",
+        "surface",
+        "tactile_paving",
+        "crossing/island"
+    ],
+    "geometry": [
+        "line"
+    ],
+    "tags": {
+        "highway": "cycleway",
+        "cycleway": "crossing",
+        "crossing": "unmarked"
+    },
+    "reference": {
+        "key": "cycleway",
+        "value": "crossing"
+    },
+    "terms": [
+        "cycle path crossing",
+        "cycleway crossing",
+        "bicycle crossing",
+        "bike crossing"
+    ],
+    "matchScore": 0.95,
+    "name": "Unmarked Cycle Crossing"
+}

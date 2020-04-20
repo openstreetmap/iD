@@ -1,0 +1,18 @@
+{
+    "icon": "maki-pitch",
+    "fields": [
+        "name",
+        "leisure"
+    ],
+    "geometry": [
+        "point",
+        "vertex",
+        "line",
+        "area"
+    ],
+    "tags": {
+        "leisure": "*"
+    },
+    "searchable": false,
+    "name": "Leisure Feature"
+}

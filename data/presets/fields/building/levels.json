@@ -1,0 +1,7 @@
+{
+    "key": "building:levels",
+    "type": "number",
+    "minValue": 0,
+    "label": "Levels",
+    "placeholder": "2, 4, 6..."
+}

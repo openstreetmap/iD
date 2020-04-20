@@ -1,13 +1,14 @@
 {
-    "geometry": "line",
-    "name": "Rail Features",
-    "icon": "category-rail",
+    "icon": "temaki-railway_track",
+    "name": "Rails",
     "members": [
         "railway/rail",
-        "railway/subway",
-        "railway/tram",
-        "railway/monorail",
         "railway/disused",
-        "railway/abandoned"
+        "railway/tram",
+        "railway/subway",
+        "railway/narrow_gauge",
+        "railway/light_rail",
+        "railway/monorail",
+        "railway/funicular"
     ]
 }

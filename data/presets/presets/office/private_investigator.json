@@ -1,0 +1,16 @@
+{
+    "icon": "fas-user-secret",
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "tags": {
+        "office": "private_investigator"
+    },
+    "terms": [
+        "PI",
+        "private eye",
+        "private detective"
+    ],
+    "name": "Private Investigator Office"
+}

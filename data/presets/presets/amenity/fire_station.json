@@ -1,9 +1,20 @@
 {
-    "icon": "fire-station",
+    "icon": "maki-fire-station",
     "fields": [
+        "name",
         "operator",
         "address",
         "building_area"
+    ],
+    "moreFields": [
+        "email",
+        "fax",
+        "gnis/feature_id",
+        "phone",
+        "polling_station",
+        "smoking",
+        "website",
+        "wheelchair"
     ],
     "geometry": [
         "point",

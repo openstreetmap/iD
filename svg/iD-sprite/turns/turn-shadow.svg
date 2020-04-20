@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0" y="0" width="37" height="11" viewBox="0 0 37 11">
+    <path d="M31.5,0 C34.538,0 37,2.463 37,5.5 C37,8.538 34.538,11 31.5,11 L5.5,11 C2.462,11 0,8.538 -0,5.5 C0,2.463 2.462,0 5.5,0 L31.5,0 z" fill="currentColor" id="turn-shadow-shape"/>
+    <path d="M6,6 L32,6" fill-opacity="0" stroke="#000000" stroke-width="3" stroke-linecap="round"/>
+    <path d="M6,6 L32,6" fill-opacity="0" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round"/>
+    <path d="M7.5,5.5 C7.5,6.605 6.605,7.5 5.5,7.5 C4.395,7.5 3.5,6.605 3.5,5.5 C3.5,4.396 4.395,3.5 5.5,3.5 C6.605,3.5 7.5,4.396 7.5,5.5 z" fill="#000000"/>
+    <path d="M7,5.5 C7,6.329 6.328,7 5.5,7 C4.672,7 4,6.329 4,5.5 C4,4.672 4.672,4 5.5,4 C6.328,4 7,4.672 7,5.5 z" fill="#BBBBBB"/>
+    <path d="M33.5,5.5 C33.5,6.605 32.605,7.5 31.5,7.5 C30.395,7.5 29.5,6.605 29.5,5.5 C29.5,4.396 30.395,3.5 31.5,3.5 C32.605,3.5 33.5,4.396 33.5,5.5 z" fill="#000000"/>
+    <path d="M33,5.5 C33,6.329 32.328,7 31.5,7 C30.672,7 30,6.329 30,5.5 C30,4.672 30.672,4 31.5,4 C32.328,4 33,4.672 33,5.5 z" fill="#BBBBBB"/>
+</svg>

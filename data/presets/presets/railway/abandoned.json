@@ -1,15 +1,22 @@
 {
-    "icon": "railway-abandoned",
+    "icon": "temaki-railway_track_askew",
+    "fields": [
+        "name",
+        "structure",
+        "service_rail",
+        "usage_rail"
+    ],
+    "moreFields": [
+        "covered",
+        "incline"
+    ],
     "geometry": [
         "line"
     ],
     "tags": {
         "railway": "abandoned"
     },
-    "fields": [
-        "structure",
-        "service_rail"
-    ],
     "terms": [],
+    "matchScore": 0.85,
     "name": "Abandoned Railway"
 }

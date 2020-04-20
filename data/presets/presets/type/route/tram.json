@@ -1,4 +1,11 @@
 {
+    "icon": "temaki-tram",
+    "fields": [
+        "{type/route/train}"
+    ],
+    "moreFields": [
+        "{type/route/train}"
+    ],
     "geometry": [
         "relation"
     ],
@@ -6,10 +13,5 @@
         "type": "route",
         "route": "tram"
     },
-    "name": "Tram Route",
-    "icon": "route-tram",
-    "fields": [
-        "ref",
-        "operator"
-    ]
+    "name": "Tram Route"
 }

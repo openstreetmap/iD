@@ -1,17 +1,22 @@
 {
-    "icon": "car",
+    "icon": "maki-car-repair",
     "fields": [
-        "operator",
-        "address",
-        "building_area",
-        "opening_hours"
+        "{shop}",
+        "service/vehicle"
     ],
     "geometry": [
         "point",
         "area"
     ],
     "terms": [
-        "auto"
+        "auto mechanic",
+        "automechanic",
+        "automobile",
+        "automotive",
+        "garage",
+        "inspection",
+        "oil change",
+        "service"
     ],
     "tags": {
         "shop": "car_repair"

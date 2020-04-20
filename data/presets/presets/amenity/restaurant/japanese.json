@@ -1,0 +1,31 @@
+{
+    "icon": "maki-restaurant-noodle",
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "terms": [
+        "bar",
+        "breakfast",
+        "cafe",
+        "café",
+        "canteen",
+        "dine",
+        "dining",
+        "dinner",
+        "drive-in",
+        "eat",
+        "grill",
+        "lunch",
+        "table"
+    ],
+    "tags": {
+        "amenity": "restaurant",
+        "cuisine": "japanese"
+    },
+    "reference": {
+        "key": "cuisine",
+        "value": "japanese"
+    },
+    "name": "Japanese Restaurant"
+}

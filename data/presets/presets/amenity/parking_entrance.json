@@ -1,8 +1,10 @@
 {
-    "icon": "entrance",
+    "icon": "maki-entrance-alt1",
     "fields": [
+        "ref",
         "access_simple",
-        "ref"
+        "address",
+        "level"
     ],
     "geometry": [
         "vertex"
@@ -10,5 +12,5 @@
     "tags": {
         "amenity": "parking_entrance"
     },
-    "name": "Parking Garage Entrance/Exit"
+    "name": "Parking Garage Entrance / Exit"
 }

@@ -1,11 +1,9 @@
 {
-    "icon": "bakery",
+    "icon": "temaki-catering",
     "fields": [
+        "name",
         "cuisine",
-        "operator",
-        "address",
-        "building_area",
-        "opening_hours"
+        "{craft}"
     ],
     "geometry": [
         "point",

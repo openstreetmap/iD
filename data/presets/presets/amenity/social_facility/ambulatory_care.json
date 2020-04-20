@@ -1,0 +1,16 @@
+{
+    "icon": "maki-wheelchair",
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "tags": {
+        "amenity": "social_facility",
+        "social_facility": "ambulatory_care"
+    },
+    "reference": {
+        "key": "social_facility",
+        "value": "ambulatory_care"
+    },
+    "name": "Ambulatory Care"
+}

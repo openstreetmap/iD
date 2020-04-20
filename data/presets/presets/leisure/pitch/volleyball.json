@@ -1,16 +1,16 @@
 {
-    "icon": "pitch",
-    "fields": [
-        "surface",
-        "lit"
-    ],
+    "icon": "maki-volleyball",
     "geometry": [
-        "point",
-        "area"
+        "area",
+        "point"
     ],
     "tags": {
         "leisure": "pitch",
         "sport": "volleyball"
+    },
+    "reference": {
+        "key": "sport",
+        "value": "volleyball"
     },
     "terms": [],
     "name": "Volleyball Court"

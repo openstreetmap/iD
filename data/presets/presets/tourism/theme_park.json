@@ -1,8 +1,23 @@
 {
+    "icon": "maki-amusement-park",
     "fields": [
+        "name",
         "operator",
         "address",
-        "opening_hours"
+        "opening_hours",
+        "website"
+    ],
+    "moreFields": [
+        "brand",
+        "email",
+        "fax",
+        "gnis/feature_id",
+        "internet_access",
+        "internet_access/fee",
+        "internet_access/ssid",
+        "payment_multi",
+        "phone",
+        "wheelchair"
     ],
     "geometry": [
         "point",

@@ -1,0 +1,19 @@
+{
+    "icon": "temaki-windsock",
+    "geometry": [
+        "point",
+        "vertex"
+    ],
+    "fields": [
+        "ref",
+        "lit",
+        "height"
+    ],
+    "moreFields": [
+        "manufacturer"
+    ],
+    "tags": {
+        "aeroway": "windsock"
+    },
+    "name": "Windsock"
+}

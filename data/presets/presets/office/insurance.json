@@ -1,13 +1,11 @@
 {
-    "icon": "commercial",
-    "fields": [
-        "address",
-        "building_area",
-        "opening_hours"
+    "icon": "temaki-briefcase_shield",
+    "moreFields": [
+        "brand",
+        "{office}"
     ],
     "geometry": [
         "point",
-        "vertex",
         "area"
     ],
     "tags": {

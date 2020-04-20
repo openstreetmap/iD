@@ -1,7 +1,10 @@
 {
-    "icon": "triangle",
+    "icon": "maki-volcano",
     "fields": [
-        "elevation"
+        "name",
+        "ele_node",
+        "volcano/status",
+        "volcano/type"
     ],
     "geometry": [
         "point",

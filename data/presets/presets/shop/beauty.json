@@ -1,17 +1,14 @@
 {
-    "icon": "shop",
+    "icon": "temaki-lipstick",
     "fields": [
-        "operator",
-        "address",
-        "building_area",
-        "opening_hours"
+        "{shop}",
+        "beauty"
     ],
     "geometry": [
         "point",
         "area"
     ],
     "terms": [
-        "nail spa",
         "spa",
         "salon",
         "tanning"

@@ -1,0 +1,21 @@
+{
+    "icon": "maki-american-football",
+    "geometry": [
+        "area",
+        "point"
+    ],
+    "tags": {
+        "leisure": "pitch",
+        "sport": "australian_football"
+    },
+    "reference": {
+        "key": "sport",
+        "value": "australian_football"
+    },
+    "terms": [
+        "Aussie",
+        "AFL",
+        "football"
+    ],
+    "name": "Australian Football Field"
+}
