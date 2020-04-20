@@ -6,8 +6,7 @@
         "address",
         "building_area",
         "opening_hours",
-        "smoking",
-        "diaper"
+        "smoking"
     ],
     "geometry": [
         "point",
