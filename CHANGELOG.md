@@ -90,7 +90,7 @@ _Breaking changes, which may affect downstream projects or sites that embed iD, 
 * Add Cycle & Foot Path preset ([#7321])
 * Add Telecom Exchange preset ([#6780])
 * Add Shrub preset ([#7482])
-* Add presets: Botanical Garden, Trolleybus Route, Power Cable
+* Add presets: Botanical Garden, Hanging Monorail, Heritage Railway Track, Power Cable, Trolleybus Route
 * Rename railway track presets to be more precise, e.g. "Subway" to "Subway Track" ([#7440])
 * Add Mimics field to Mobile Phone Mast ([#7452])
 * Add Tactile Paving field to Bus Stop presets ([#7307])
@@ -109,10 +109,13 @@ _Breaking changes, which may affect downstream projects or sites that embed iD, 
 * Don't add `building` tag to the Monastery Grounds preset by default ([#7287])
 * Add search terms to Retail Building and Farm Building ([#7392], [#7394])
 * Update icons for railway track presets ([#7255])
+* Update icons for public transit presets
 * Update icon for Nail Salon ([#7476])
 * Update Kebab Fast Food icon ([#7475])
+* Update Power Pole icon ([#7516])
 * Update icons for presets: Community Garden Plot, Bicycle Lockers, Parking Space, Quaker Meeting House, Police, RV Toilet Disposal, Town Hall, City Hall, Government Office, Bollard, Bollard Row, Border Control, Cycle Barrier, Trench, Hedge, Stile, Carport, Static Mobile Home, Caterer, Floorer, Parquet Layer, Plasterer, Scaffolder, Stonemason, Tiler, Disused Railway Feature, Golf Course, Golf Hole, Miniature Golf, Access Aisle, Motorsport Racetrack, Karting Racetrack, Racetrack (Non-Motorsport), Barracks, Naval Base, Military Obstacle Course, Military Range, Plant Nursery, Quarry, Field Hockey Pitch, Adit, Bunker Silo, Mineshaft, Observatory, Pumping Station, Survey Point, Water Works, Military Checkpoint, Military Trench, Cliff, Heath, Ridge, Saddle, Scrub, Valley, Rail Yard, Curtain Store, Deli, Fireplace Store, Pet Grooming Store, Spice Shop, Tattoo Parlor, Tile Shop, Weapon Shop, Speed Bump, Chicane, Speed Cushion, Speed Dip, Speed Hump, Rumble Strip, Speed Table, Power Feature, Railway Feature, Notice Board, Poster Box, Information Board, Information Terminal, Goods Aerialway, Airport, Apron, Airport Gate, Hangar, Aircraft Holding Position, Aircraft Parking Position, Taxiway, Windsock
 
+[#7516]: https://github.com/openstreetmap/iD/issues/7516
 [#7268]: https://github.com/openstreetmap/iD/issues/7268
 [#7347]: https://github.com/openstreetmap/iD/issues/7347
 [#7354]: https://github.com/openstreetmap/iD/issues/7354
