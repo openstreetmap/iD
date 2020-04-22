@@ -1,5 +1,5 @@
 {
-    "icon": "maki-bus",
+    "icon": "temaki-bus",
     "fields": [
         "{public_transport/stop_position}"
     ],
