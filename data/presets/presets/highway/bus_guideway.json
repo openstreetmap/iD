@@ -1,5 +1,5 @@
 {
-    "icon": "maki-bus",
+    "icon": "temaki-bus_guided",
     "fields": [
         "name",
         "operator",
