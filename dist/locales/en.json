@@ -8938,6 +8938,10 @@
                     "name": "Monorail Track",
                     "terms": ""
                 },
+                "railway/monorail/hanging": {
+                    "name": "Hanging Monorail Track",
+                    "terms": "suspension railway"
+                },
                 "railway/narrow_gauge": {
                     "name": "Narrow Gauge Track",
                     "terms": "narrow gauge railway,narrow gauge railroad"

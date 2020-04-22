@@ -7454,6 +7454,11 @@ en:
         # railway=monorail
         name: Monorail Track
         terms: '<translate with synonyms or related terms for ''Monorail Track'', separated by commas>'
+      railway/monorail/hanging:
+        # 'railway=monorail, monorail=hanging'
+        name: Hanging Monorail Track
+        # 'terms: suspension railway'
+        terms: '<translate with synonyms or related terms for ''Hanging Monorail Track'', separated by commas>'
       railway/narrow_gauge:
         # railway=narrow_gauge
         name: Narrow Gauge Track
