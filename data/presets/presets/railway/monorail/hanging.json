@@ -1,0 +1,18 @@
+{
+    "icon": "temaki-hanging_rail",
+    "geometry": [
+        "line"
+    ],
+    "tags": {
+        "railway": "monorail",
+        "monorail": "hanging"
+    },
+    "reference": {
+        "key": "monorail",
+        "value": "hanging"
+    },
+    "terms": [
+        "suspension railway"
+    ],
+    "name": "Hanging Monorail Track"
+}

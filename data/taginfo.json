@@ -962,6 +962,7 @@
     {"key": "railway", "value": "milestone", "description": "🄿 Railway Milestone", "object_types": ["node"], "icon_url": "https://cdn.jsdelivr.net/gh/ideditor/temaki/icons/milestone.svg"},
     {"key": "railway", "value": "miniature", "description": "🄿 Miniature Train Track", "object_types": ["way"], "icon_url": "https://cdn.jsdelivr.net/gh/ideditor/temaki/icons/railway_track_mini.svg"},
     {"key": "railway", "value": "monorail", "description": "🄿 Monorail Track", "object_types": ["way"], "icon_url": "https://cdn.jsdelivr.net/gh/ideditor/temaki/icons/monorail.svg"},
+    {"key": "monorail", "value": "hanging", "description": "🄿 Hanging Monorail Track", "object_types": ["way"], "icon_url": "https://cdn.jsdelivr.net/gh/ideditor/temaki/icons/hanging_rail.svg"},
     {"key": "railway", "value": "narrow_gauge", "description": "🄿 Narrow Gauge Track", "object_types": ["way"], "icon_url": "https://cdn.jsdelivr.net/gh/ideditor/temaki/icons/railway_track_narrow.svg"},
     {"key": "railway", "value": "rail", "description": "🄿 Train Track", "object_types": ["way"], "icon_url": "https://cdn.jsdelivr.net/gh/ideditor/temaki/icons/railway_track.svg"},
     {"key": "highspeed", "value": "yes", "description": "🄿 High-Speed Train Track", "object_types": ["way"], "icon_url": "https://cdn.jsdelivr.net/gh/ideditor/temaki/icons/train_bullet.svg"},
