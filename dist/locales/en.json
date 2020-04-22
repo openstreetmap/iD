@@ -8946,6 +8946,10 @@
                     "name": "Narrow Gauge Track",
                     "terms": "narrow gauge railway,narrow gauge railroad"
                 },
+                "railway/preserved": {
+                    "name": "Heritage Railway Track",
+                    "terms": "historic train,preserved rail,steam train,tourist train"
+                },
                 "railway/rail": {
                     "name": "Train Track",
                     "terms": "permanent way,rail line,railroad track,railway track,track,train track"

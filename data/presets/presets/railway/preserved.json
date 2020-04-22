@@ -1,0 +1,31 @@
+{
+    "icon": "temaki-train_steam",
+    "fields": [
+        "railway",
+        "{railway/light_rail}"
+    ],
+    "moreFields": [
+        "{railway/light_rail}"
+    ],
+    "geometry": [
+        "line"
+    ],
+    "tags": {
+        "railway": "*",
+        "railway:preserved": "yes"
+    },
+    "addTags": {
+        "railway": "rail",
+        "railway:preserved": "yes"
+    },
+    "reference": {
+        "key": "railway:preserved"
+    },
+    "terms": [
+        "historic train",
+        "preserved rail",
+        "steam train",
+        "tourist train"
+    ],
+    "name": "Heritage Railway Track"
+}
