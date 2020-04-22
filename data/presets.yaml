@@ -7467,6 +7467,11 @@ en:
       railway/platform:
         # railway=platform
         name: Train Platform
+      railway/preserved:
+        # 'railway=*, railway:preserved=yes'
+        name: Heritage Railway Track
+        # 'terms: historic train,preserved rail,steam train,tourist train'
+        terms: '<translate with synonyms or related terms for ''Heritage Railway Track'', separated by commas>'
       railway/rail:
         # railway=rail
         name: Train Track

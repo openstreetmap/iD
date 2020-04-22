@@ -964,6 +964,10 @@
     "replace": {"railway": "platform", "public_transport": "platform"}
   },
   {
+    "old": {"railway": "preserved"},
+    "replace": {"railway": "rail", "railway:preserved": "yes"}
+  },
+  {
     "old": {"railway": "station"},
     "replace": {"railway": "station", "public_transport": "station"}
   },
