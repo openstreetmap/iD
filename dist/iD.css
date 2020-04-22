@@ -1296,11 +1296,6 @@ display: none;
 
 /* special service roads and bus guideways */
 /* with `service=* tag`  (e.g. parking_aisle, alley, drive-through) */
-.ideditor .preset-icon .icon.tag-highway-bus_guideway,
-.ideditor .preset-icon .icon.tag-highway-service.tag-service {
-    color: #dca;
-    fill: #666;
-}
 .ideditor path.line.stroke.tag-highway-bus_guideway,
 .ideditor path.line.stroke.tag-highway-service.tag-service,
 .ideditor path.line.stroke.tag-service.tag-service {
