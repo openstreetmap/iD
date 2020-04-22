@@ -2858,9 +2858,9 @@ en:
         terms: '<translate with synonyms or related terms for ''Drag Lift'', separated by commas>'
       aerialway/gondola:
         # aerialway=gondola
-        name: Gondola
+        name: Gondola Lift
         # 'terms: aerial cable,lift,skiing,snowboarding'
-        terms: '<translate with synonyms or related terms for ''Gondola'', separated by commas>'
+        terms: '<translate with synonyms or related terms for ''Gondola Lift'', separated by commas>'
       aerialway/goods:
         # aerialway=goods
         name: Goods Aerialway

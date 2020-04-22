@@ -35,7 +35,7 @@
     {"key": "aerialway", "value": "cable_car", "description": "🄿 Cable Car", "object_types": ["way"], "icon_url": "https://cdn.jsdelivr.net/gh/openstreetmap/iD@develop/svg/fontawesome/fas-tram.svg"},
     {"key": "aerialway", "value": "chair_lift", "description": "🄿 Chair Lift", "object_types": ["way"], "icon_url": "https://cdn.jsdelivr.net/gh/ideditor/temaki/icons/chairlift.svg"},
     {"key": "aerialway", "value": "drag_lift", "description": "🄿 Drag Lift", "object_types": ["way"], "icon_url": "https://cdn.jsdelivr.net/gh/ideditor/temaki/icons/drag_lift.svg"},
-    {"key": "aerialway", "value": "gondola", "description": "🄿 Gondola", "object_types": ["way"], "icon_url": "https://cdn.jsdelivr.net/gh/ideditor/temaki/icons/gondola_lift.svg"},
+    {"key": "aerialway", "value": "gondola", "description": "🄿 Gondola Lift", "object_types": ["way"], "icon_url": "https://cdn.jsdelivr.net/gh/ideditor/temaki/icons/gondola_lift.svg"},
     {"key": "aerialway", "value": "goods", "description": "🄿 Goods Aerialway", "object_types": ["way"], "icon_url": "https://cdn.jsdelivr.net/gh/ideditor/temaki/icons/goods_lift.svg"},
     {"key": "aerialway", "value": "j-bar", "description": "🄿 J-Bar Lift", "object_types": ["way"], "icon_url": "https://cdn.jsdelivr.net/gh/ideditor/temaki/icons/j_bar_lift.svg"},
     {"key": "aerialway", "value": "magic_carpet", "description": "🄿 Magic Carpet Lift", "object_types": ["way"]},
