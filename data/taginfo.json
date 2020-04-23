@@ -520,6 +520,7 @@
     {"key": "highway", "value": "motorway", "description": "🄿 Motorway", "object_types": ["way"], "icon_url": "https://cdn.jsdelivr.net/gh/openstreetmap/iD@develop/svg/iD-sprite/presets/highway-motorway.svg"},
     {"key": "highway", "value": "passing_place", "description": "🄿 Passing Place", "object_types": ["node"], "icon_url": "https://cdn.jsdelivr.net/gh/mapbox/maki/icons/circle-stroked-15.svg"},
     {"key": "highway", "value": "path", "description": "🄿 Path", "object_types": ["way"], "icon_url": "https://cdn.jsdelivr.net/gh/openstreetmap/iD@develop/svg/iD-sprite/presets/other-line.svg"},
+    {"key": "bridge", "value": "boardwalk", "description": "🄿 Boardwalk", "object_types": ["way"], "icon_url": "https://cdn.jsdelivr.net/gh/ideditor/temaki/icons/pedestrian.svg"},
     {"key": "informal", "value": "yes", "description": "🄿 Informal Path", "object_types": ["way"], "icon_url": "https://cdn.jsdelivr.net/gh/openstreetmap/iD@develop/svg/iD-sprite/presets/other-line.svg"},
     {"key": "highway", "value": "pedestrian", "description": "🄿 Pedestrian Area, 🄿 Pedestrian Street", "object_types": ["area"], "icon_url": "https://cdn.jsdelivr.net/gh/ideditor/temaki/icons/pedestrian.svg"},
     {"key": "highway", "value": "primary_link", "description": "🄿 Primary Link", "object_types": ["way"], "icon_url": "https://cdn.jsdelivr.net/gh/openstreetmap/iD@develop/svg/iD-sprite/presets/highway-primary-link.svg"},
