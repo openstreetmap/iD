@@ -217,6 +217,10 @@
       "replace": {"bridge": "yes"}
     },
     {
+      "old": {"bridge": "true"},
+      "replace": {"bridge": "yes"}
+    },
+    {
       "old": {"building": "entrance"},
       "replace": {"entrance": "*"}
     },
@@ -963,10 +967,6 @@
     {
       "old": {"railway": "platform"},
       "replace": {"railway": "platform", "public_transport": "platform"}
-    },
-    {
-      "old": {"railway": "preserved"},
-      "replace": {"railway": "rail", "railway:preserved": "yes"}
     },
     {
       "old": {"railway": "station"},
