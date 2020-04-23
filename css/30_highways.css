@@ -465,6 +465,9 @@ path.line.casing.tag-highway-bridleway {
 path.line.stroke.tag-highway-path {
     stroke: #988;
 }
+path.line.stroke.tag-highway-path.tag-bridge-boardwalk {
+    stroke: #dca;
+}
 
 /* footways */
 .preset-icon .icon.tag-route-foot,
