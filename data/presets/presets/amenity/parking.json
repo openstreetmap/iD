@@ -20,6 +20,7 @@
         "maxstay",
         "name",
         "opening_hours",
+        "opening_hours/covid19",
         "park_ride",
         "phone",
         "ref",

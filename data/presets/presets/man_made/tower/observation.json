@@ -2,7 +2,8 @@
     "icon": "temaki-tower",
     "moreFields": [
         "{man_made/tower}",
-        "opening_hours"
+        "opening_hours",
+        "opening_hours/covid19"
     ],
     "geometry": [
         "point",

@@ -5,6 +5,7 @@
         "attraction",
         "operator",
         "opening_hours",
+        "opening_hours/covid19",
         "fee",
         "charge_fee"
     ],
@@ -13,6 +14,7 @@
         "email",
         "fax",
         "opening_hours",
+        "opening_hours/covid19",
         "payment_multi",
         "phone",
         "website"

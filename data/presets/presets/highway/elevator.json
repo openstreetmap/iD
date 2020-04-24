@@ -9,7 +9,8 @@
     ],
     "moreFields": [
         "maxheight",
-        "opening_hours"
+        "opening_hours",
+        "opening_hours/covid19"
     ],
     "geometry": [
         "vertex"

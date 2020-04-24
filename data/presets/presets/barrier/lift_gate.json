@@ -2,7 +2,8 @@
     "icon": "temaki-lift_gate",
     "fields": [
         "access",
-        "opening_hours"
+        "opening_hours",
+        "opening_hours/covid19"
     ],
     "geometry": [
         "vertex",

@@ -20,6 +20,7 @@
         "min_age",
         "not/name",
         "opening_hours",
+        "opening_hours/covid19",
         "payment_multi",
         "website",
         "wheelchair"

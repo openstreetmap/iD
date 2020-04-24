@@ -6,7 +6,8 @@
         "website",
         "ref",
         "address",
-        "opening_hours"
+        "opening_hours",
+        "opening_hours/covid19"
     ],
     "geometry": [
         "point",

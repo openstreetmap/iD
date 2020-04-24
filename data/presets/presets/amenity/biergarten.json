@@ -4,6 +4,7 @@
         "name",
         "address",
         "opening_hours",
+        "opening_hours/covid19",
         "outdoor_seating",
         "brewery"
     ],
