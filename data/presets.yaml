@@ -6116,6 +6116,11 @@ en:
         name: Running Track
         # 'terms: athletics track,decathlon,foot race,long distance running,marathon,middle distance running,racetrack,running,sprint,track,walking'
         terms: '<translate with synonyms or related terms for ''Running Track'', separated by commas>'
+      leisure/trampoline_park:
+        # leisure=trampoline_park
+        name: Trampoline Park
+        # 'terms: bounce,jump,spring'
+        terms: '<translate with synonyms or related terms for ''Trampoline Park'', separated by commas>'
       leisure/water_park:
         # leisure=water_park
         name: Water Park
@@ -7980,6 +7985,11 @@ en:
         name: Hobby Shop
         # 'terms: manga,figurine,model'
         terms: '<translate with synonyms or related terms for ''Hobby Shop'', separated by commas>'
+      shop/household_linen:
+        # shop=household_linen
+        name: Household Linen Shop
+        # 'terms: bedspreads,blankets,domestic cloths,curtains,handkerchieves,napkins,pillow cases,robes,sheets,towels'
+        terms: '<translate with synonyms or related terms for ''Household Linen Shop'', separated by commas>'
       shop/houseware:
         # shop=houseware
         name: Houseware Store

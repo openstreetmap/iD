@@ -7805,6 +7805,10 @@
                     "name": "Running Track",
                     "terms": "athletics track,decathlon,foot race,long distance running,marathon,middle distance running,racetrack,running,sprint,track,walking"
                 },
+                "leisure/trampoline_park": {
+                    "name": "Trampoline Park",
+                    "terms": "bounce,jump,spring"
+                },
                 "leisure/water_park": {
                     "name": "Water Park",
                     "terms": "swim,pool,dive"
@@ -9369,6 +9373,10 @@
                 "shop/hobby": {
                     "name": "Hobby Shop",
                     "terms": "manga,figurine,model"
+                },
+                "shop/household_linen": {
+                    "name": "Household Linen Shop",
+                    "terms": "bedspreads,blankets,domestic cloths,curtains,handkerchieves,napkins,pillow cases,robes,sheets,towels"
                 },
                 "shop/houseware": {
                     "name": "Houseware Store",

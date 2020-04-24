@@ -1,5 +1,6 @@
 import { t } from '../util/locale';
-import { matcher, brands } from 'name-suggestion-index';
+import { matcher } from 'name-suggestion-index';
+import { brands } from 'name-suggestion-index/dist/brands.json';
 import * as countryCoder from '@ideditor/country-coder';
 
 import { actionChangePreset } from '../actions/change_preset';
@@ -15,13 +16,13 @@ export function validationOutdatedTags(context) {
 
     // initialize name-suggestion-index matcher
     var nsiMatcher = matcher();
-    nsiMatcher.buildMatchIndex(brands.brands);
+    nsiMatcher.buildMatchIndex(brands);
     var nsiKeys = ['amenity', 'shop', 'tourism', 'leisure', 'office'];
 
     var allWD = {};
     var allWP = {};
-    Object.keys(brands.brands).forEach(function(kvnd) {
-        var brand = brands.brands[kvnd];
+    Object.keys(brands).forEach(function(kvnd) {
+        var brand = brands[kvnd];
         var wd = brand.tags['brand:wikidata'];
         var wp = brand.tags['brand:wikipedia'];
         if (wd) { allWD[wd] = kvnd; }
@@ -102,7 +103,7 @@ export function validationOutdatedTags(context) {
                 // for now skip ambiguous matches (like Target~(USA) vs Target~(Australia))
                 if (match.d) continue;
 
-                var brand = brands.brands[match.kvnd];
+                var brand = brands[match.kvnd];
                 if (brand && brand.tags['brand:wikidata'] &&
                     brand.tags['brand:wikidata'] !== entity.tags['not:brand:wikidata']) {
                     subtype = 'noncanonical_brand';

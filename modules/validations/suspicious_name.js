@@ -1,4 +1,4 @@
-import { filters } from 'name-suggestion-index';
+import { discardNames } from 'name-suggestion-index/dist/filters.json';
 
 import { t, languageName } from '../util/locale';
 import { utilPreset } from '../util';
@@ -10,7 +10,7 @@ export function validationSuspiciousName() {
     var type = 'suspicious_name';
 
     // known list of generic names (e.g. "bar")
-    var discardNamesRegexes = filters.discardNames.map(function(discardName) {
+    var discardNamesRegexes = discardNames.map(function(discardName) {
         return new RegExp(discardName, 'i');
     });
 

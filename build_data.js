@@ -10,7 +10,8 @@ const YAML = require('js-yaml');
 
 const fieldSchema = require('./data/presets/schema/field.json');
 const presetSchema = require('./data/presets/schema/preset.json');
-const nsi = require('name-suggestion-index');
+const nsiBrands = require('name-suggestion-index/dist/brands.json').brands;
+const nsiWikidata = require('name-suggestion-index/dist/wikidata.json').wikidata;
 const deprecated = require('./data/deprecated.json').dataDeprecated;
 
 // fontawesome icons
@@ -215,8 +216,8 @@ function generateFields(tstrings, faIcons, tnpIcons, searchableFieldIDs) {
 
 
 function suggestionsToPresets(presets) {
-  const brands = nsi.brands.brands;
-  const wikidata = nsi.wikidata.wikidata;
+  const brands = nsiBrands;
+  const wikidata = nsiWikidata;
 
   Object.keys(brands).forEach(kvnd => {
     const suggestion = brands[kvnd];
