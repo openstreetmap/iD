@@ -34,7 +34,7 @@ _Breaking changes, which may affect downstream projects or sites that embed iD, 
 ##### 2020-Apr-24
 
 #### :mega: Release Highlights
-* :mask: You can now specify if and when places are open during coronavirus lockdowns with the COVID-19 Pandemic Hours field
+* :mask: You can now specify when places are open during coronavirus lockdowns with the COVID-19 Pandemic Hours field
 
 #### :boom: Breaking Changes
 * Rename the default branch, previously `2.x`, to `develop`,
