@@ -1,0 +1,23 @@
+{
+    "icon": "tnp-4306",
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "tags": {
+        "shop": "household_linen"
+    },
+    "terms": [
+        "bedspreads",
+        "blankets",
+        "domestic cloths",
+        "curtains",
+        "handkerchieves",
+        "napkins",
+        "pillow cases",
+        "robes",
+        "sheets",
+        "towels"
+    ],
+    "name": "Household Linen Shop"
+}
