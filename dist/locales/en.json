@@ -3961,6 +3961,10 @@
                     "terms": "",
                     "placeholder": "Unknown"
                 },
+                "opening_hours/covid19": {
+                    "label": "COVID-19 Pandemic Hours",
+                    "terms": "coronavirus,lockdown,opening hours,SARS‑CoV‑2"
+                },
                 "operator": {
                     "label": "Operator",
                     "terms": ""
@@ -5174,15 +5178,6 @@
                 },
                 "amenity/recycling": {
                     "name": "Recycling"
-                },
-                "amenity/register_office": {
-                    "name": "Register Office"
-                },
-                "amenity/scrapyard": {
-                    "name": "Scrap Yard"
-                },
-                "amenity/swimming_pool": {
-                    "name": "Swimming Pool"
                 },
                 "amenity/animal_boarding": {
                     "name": "Animal Boarding Facility",
@@ -9031,12 +9026,6 @@
                 },
                 "shop/fashion": {
                     "name": "Fashion Store"
-                },
-                "shop/fishmonger": {
-                    "name": "Fishmonger"
-                },
-                "shop/furnace": {
-                    "name": "Furnace Store"
                 },
                 "shop/vacant": {
                     "name": "Vacant Shop"
