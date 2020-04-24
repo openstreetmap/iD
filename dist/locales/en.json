@@ -7044,6 +7044,10 @@
                     "name": "Path",
                     "terms": "hike,hiking,trackway,trail,walk"
                 },
+                "highway/path/boardwalk": {
+                    "name": "Boardwalk",
+                    "terms": "pier,plank walkway,wooden raised foot path"
+                },
                 "highway/path/informal": {
                     "name": "Informal Path",
                     "terms": "bootleg trail,cow path,desire line,desire path,desireline,desirepath,elephant path,game trail,goat track,herd path,pig trail,shortcut,social trail,use trail"

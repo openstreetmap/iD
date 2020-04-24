@@ -5201,6 +5201,11 @@ en:
         name: Path
         # 'terms: hike,hiking,trackway,trail,walk'
         terms: '<translate with synonyms or related terms for ''Path'', separated by commas>'
+      highway/path/boardwalk:
+        # 'highway=path, bridge=boardwalk'
+        name: Boardwalk
+        # 'terms: pier,plank walkway,wooden raised foot path'
+        terms: '<translate with synonyms or related terms for ''Boardwalk'', separated by commas>'
       highway/path/informal:
         # 'highway=path, informal=yes'
         name: Informal Path
