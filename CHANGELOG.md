@@ -1,6 +1,6 @@
 # What's New
 
-Thanks to all our contributors, users, and the many people that make iD possible! :heart:
+Thank you to all the contributors, translators, mappers, and supporters who make iD possible! :heart:
 
 The iD map editor is an open source project. You can submit bug reports, help out,
 or learn more by visiting our project page on GitHub:  :octocat: https://github.com/openstreetmap/iD
@@ -31,7 +31,10 @@ _Breaking changes, which may affect downstream projects or sites that embed iD, 
 -->
 
 # 2.17.3
-##### Planned: 2020-Apr-16
+##### 2020-Apr-24
+
+#### :mega: Release Highlights
+* :mask: You can now specify if and when places are open during coronavirus lockdowns with the COVID-19 Pandemic Hours field
 
 #### :boom: Breaking Changes
 * Rename the default branch, previously `2.x`, to `develop`,
@@ -43,8 +46,10 @@ _Breaking changes, which may affect downstream projects or sites that embed iD, 
 
 #### :sparkles: Usability
 * Use custom line styling for non-asphalt, non-unpaved surfaces like cobblestone, sett, and metal ([#7466])
+* Style pedestrian streets as wider and distinct from corridors ([#7058])
 * Style `planned` but not `disused` features with a dashed stroke
 
+[#7058]: https://github.com/openstreetmap/iD/issues/7058
 [#7466]: https://github.com/openstreetmap/iD/issues/7466
 
 #### :white_check_mark: Validation
@@ -84,14 +89,17 @@ _Breaking changes, which may affect downstream projects or sites that embed iD, 
 * Add more fields to advertising presets ([#7289], thanks [@ToastHawaii])
 * Add Depth field to Ford ([#7400], thanks [@hikemaniac])
 * Support `internet_access:fee=customers` tag ([#7442], thanks [@Lukas458])
+* Add more fields to Wayside Cross ([#7521], thanks [@morray])
 * Add more search terms for Research Office ([#7284], thanks [@ferdinand0101])
-* Add field and preset for accessible parking spaces ([#7465])
+* Add a preset and field for accessible parking spaces ([#7465])
 * Add Disused Shop preset ([#7407])
 * Add Cycle & Foot Path preset ([#7321])
 * Add Telecom Exchange preset ([#6780])
 * Add Shrub preset ([#7482])
-* Add presets: Botanical Garden, Hanging Monorail, Heritage Railway Track, Power Cable, Trolleybus Route
+* Add Boardwalk preset and styling ([#7518])
+* Add presets: Botanical Garden, Hanging Monorail, Heritage Railway Track, Household Linen Shop, Power Cable, Trampoline Park, Trolleybus Route
 * Rename railway track presets to be more precise, e.g. "Subway" to "Subway Track" ([#7440])
+* Add COVID-19 Pandemic Hours field to points of interest ([#7529])
 * Add Mimics field to Mobile Phone Mast ([#7452])
 * Add Tactile Paving field to Bus Stop presets ([#7307])
 * Add Circumference field to Tree ([#7371])
@@ -110,11 +118,14 @@ _Breaking changes, which may affect downstream projects or sites that embed iD, 
 * Add search terms to Retail Building and Farm Building ([#7392], [#7394])
 * Update icons for railway track presets ([#7255])
 * Update icons for public transit presets
-* Update icon for Nail Salon ([#7476])
+* Update Nail Salon icon ([#7476])
 * Update Kebab Fast Food icon ([#7475])
 * Update Power Pole icon ([#7516])
 * Update icons for presets: Community Garden Plot, Bicycle Lockers, Parking Space, Quaker Meeting House, Police, RV Toilet Disposal, Town Hall, City Hall, Government Office, Bollard, Bollard Row, Border Control, Cycle Barrier, Trench, Hedge, Stile, Carport, Static Mobile Home, Caterer, Floorer, Parquet Layer, Plasterer, Scaffolder, Stonemason, Tiler, Disused Railway Feature, Golf Course, Golf Hole, Miniature Golf, Access Aisle, Motorsport Racetrack, Karting Racetrack, Racetrack (Non-Motorsport), Barracks, Naval Base, Military Obstacle Course, Military Range, Plant Nursery, Quarry, Field Hockey Pitch, Adit, Bunker Silo, Mineshaft, Observatory, Pumping Station, Survey Point, Water Works, Military Checkpoint, Military Trench, Cliff, Heath, Ridge, Saddle, Scrub, Valley, Rail Yard, Curtain Store, Deli, Fireplace Store, Pet Grooming Store, Spice Shop, Tattoo Parlor, Tile Shop, Weapon Shop, Speed Bump, Chicane, Speed Cushion, Speed Dip, Speed Hump, Rumble Strip, Speed Table, Power Feature, Railway Feature, Notice Board, Poster Box, Information Board, Information Terminal, Goods Aerialway, Airport, Apron, Airport Gate, Hangar, Aircraft Holding Position, Aircraft Parking Position, Taxiway, Windsock
 
+[#7518]: https://github.com/openstreetmap/iD/issues/7518
+[#7529]: https://github.com/openstreetmap/iD/issues/7529
+[#7521]: https://github.com/openstreetmap/iD/issues/7521
 [#7516]: https://github.com/openstreetmap/iD/issues/7516
 [#7268]: https://github.com/openstreetmap/iD/issues/7268
 [#7347]: https://github.com/openstreetmap/iD/issues/7347
@@ -157,6 +168,7 @@ _Breaking changes, which may affect downstream projects or sites that embed iD, 
 [#7476]: https://github.com/openstreetmap/iD/issues/7476
 [#7475]: https://github.com/openstreetmap/iD/issues/7475
 
+[@morray]: https://github.com/morray
 [@hikemaniac]: https://github.com/hikemaniac
 [@animesh-007]: https://github.com/animesh-007
 [@stragu]: https://github.com/stragu
